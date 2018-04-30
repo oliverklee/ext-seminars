@@ -5,14 +5,14 @@
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing
+     * @var \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing
      */
     protected $fixture = null;
     /**
-     * @var Tx_Oelib_TestingFramework
+     * @var \Tx_Oelib_TestingFramework
      */
     protected $testingFramework = null;
 
@@ -25,7 +25,7 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
-        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
         $systemFolderUid = $this->testingFramework->createSystemFolder();
         $this->testingFramework->createTemplate(
             $systemFolderUid,
@@ -47,7 +47,7 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
                 'title' => 'Test',
             ]
         );
-        $this->fixture = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing($this->fixtureUid);
+        $this->fixture = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing($this->fixtureUid);
     }
 
     protected function tearDown()
@@ -68,7 +68,7 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
 
     public function testCreateFromUidFailsForInvalidUid()
     {
-        $test = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(
+        $test = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(
             $this->fixtureUid + 99
         );
 
@@ -79,7 +79,7 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
 
     public function testCreateFromUidFailsForZeroUid()
     {
-        $test = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(0);
+        $test = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(0);
 
         self::assertFalse(
             $test->isOk()
@@ -88,13 +88,13 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
 
     public function testCreateFromDbResult()
     {
-        $dbResult = Tx_Oelib_Db::select(
+        $dbResult = \Tx_Oelib_Db::select(
             '*',
             'tx_seminars_test',
             'uid = ' . $this->fixtureUid
         );
 
-        $test = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(
+        $test = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(
             0,
             $dbResult
         );
@@ -106,7 +106,7 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
 
     public function testCreateFromDbResultFailsForNull()
     {
-        $test = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(
+        $test = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(
             0,
             null
         );
@@ -127,7 +127,7 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
             ['hidden' => 1]
         );
 
-        $test = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing($this->fixtureUid);
+        $test = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing($this->fixtureUid);
 
         self::assertFalse(
             $test->isOk()
@@ -145,7 +145,7 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
             ['hidden' => 1]
         );
 
-        $test = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(
+        $test = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(
             $this->fixtureUid,
             null,
             true
@@ -181,7 +181,7 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
 
     public function testHasUidIsFalseForObjectsWithoutUid()
     {
-        $virginFixture = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(0);
+        $virginFixture = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(0);
 
         self::assertEquals(
             0,
@@ -246,7 +246,7 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
             $this->testingFramework->countRecords('tx_seminars_test', 'title = "' . $title . '"')
         );
 
-        $virginFixture = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(0);
+        $virginFixture = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(0);
         $virginFixture->setTitle($title);
         $virginFixture->enableTestMode();
         $this->testingFramework->markTableAsDirty('tx_seminars_test');
@@ -300,7 +300,7 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
 
     public function testCommitToDbWillNotWriteIncompleteRecords()
     {
-        $virginFixture = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(0);
+        $virginFixture = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(0);
         $this->testingFramework->markTableAsDirty('tx_seminars_test');
 
         self::assertFalse(
@@ -332,7 +332,7 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
             'createMmRecords may only be called on objects that have a UID.'
         );
 
-        $virginFixture = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(0);
+        $virginFixture = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(0);
         $virginFixture->createMmRecords('tx_seminars_test_test_mm', []);
     }
 
@@ -438,7 +438,7 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
         );
 
         self::assertFalse(
-            Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing::recordExists($this->fixtureUid, 'tx_seminars_test')
+            \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing::recordExists($this->fixtureUid, 'tx_seminars_test')
         );
     }
 
@@ -454,7 +454,7 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
         );
 
         self::assertTrue(
-            Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing::recordExists($this->fixtureUid, 'tx_seminars_test', true)
+            \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing::recordExists($this->fixtureUid, 'tx_seminars_test', true)
         );
     }
 
@@ -472,7 +472,7 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
             $this->fixtureUid,
             ['pid' => 42]
         );
-        $fixture = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(
+        $fixture = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(
             $this->fixtureUid
         );
 
@@ -492,7 +492,7 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
             $this->fixtureUid,
             ['pid' => 0]
         );
-        $fixture = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(
+        $fixture = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(
             $this->fixtureUid
         );
 

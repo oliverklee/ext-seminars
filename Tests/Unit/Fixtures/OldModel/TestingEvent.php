@@ -5,7 +5,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-final class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends Tx_Seminars_OldModel_Event
+final class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars_OldModel_Event
 {
     /**
      * The constructor.
@@ -356,8 +356,8 @@ final class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends Tx_Sem
      * Sets the record type for this event record.
      *
      * @param int $recordType
-     *        the record type for this event record, must be either Tx_Seminars_Model_Event::TYPE_COMPLETE,
-     *        Tx_Seminars_Model_Event::TYPE_TOPIC or Tx_Seminars_Model_Event::TYPE_DATE
+     *        the record type for this event record, must be either \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+     *        \Tx_Seminars_Model_Event::TYPE_TOPIC or \Tx_Seminars_Model_Event::TYPE_DATE
      *
      * @return void
      */

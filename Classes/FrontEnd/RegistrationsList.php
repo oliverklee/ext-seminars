@@ -9,10 +9,10 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_FrontEnd_RegistrationsList extends Tx_Seminars_FrontEnd_AbstractView
+class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_AbstractView
 {
     /**
-     * @var Tx_Seminars_OldModel_Event the seminar of which we want to list the
+     * @var \Tx_Seminars_OldModel_Event the seminar of which we want to list the
      *                          registrations
      */
     private $seminar = null;
@@ -38,7 +38,7 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends Tx_Seminars_FrontEnd_Abstra
         if (($whatToDisplay != 'list_registrations')
             && ($whatToDisplay != 'list_vip_registrations')
         ) {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 'The value "' . $whatToDisplay . '" of the first parameter $whatToDisplay is not valid.',
                 1333293210
             );
@@ -60,7 +60,7 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends Tx_Seminars_FrontEnd_Abstra
      */
     private function createSeminar($seminarUid)
     {
-        $this->seminar = GeneralUtility::makeInstance(Tx_Seminars_OldModel_Event::class, $seminarUid);
+        $this->seminar = GeneralUtility::makeInstance(\Tx_Seminars_OldModel_Event::class, $seminarUid);
     }
 
     /**
@@ -96,13 +96,13 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends Tx_Seminars_FrontEnd_Abstra
                 $errorMessage = $this->seminar->canViewRegistrationsListMessage(
                     $this->whatToDisplay
                 );
-                Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader(
+                \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader(
                     'Status: 403 Forbidden'
                 );
             }
         } else {
             $errorMessage = $this->translate('message_wrongSeminarNumber');
-            Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader(
+            \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader(
                 'Status: 404 Not Found'
             );
             $this->setMarker('title', '');
@@ -193,12 +193,12 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends Tx_Seminars_FrontEnd_Abstra
      * (regular and on the queue) for the event in $this->seminar, ordered by
      * creation date.
      *
-     * @return Tx_Seminars_BagBuilder_Registration the bag builder
+     * @return \Tx_Seminars_BagBuilder_Registration the bag builder
      */
     private function createRegistrationBagBuilder()
     {
-        /** @var Tx_Seminars_BagBuilder_Registration $builder */
-        $builder = GeneralUtility::makeInstance(Tx_Seminars_BagBuilder_Registration::class);
+        /** @var \Tx_Seminars_BagBuilder_Registration $builder */
+        $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Registration::class);
         $builder->limitToEvent($this->seminar->getUid());
         $builder->limitToExistingUsers();
         $builder->setOrderBy('crdate');
@@ -243,16 +243,16 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends Tx_Seminars_FrontEnd_Abstra
      * Creates the table body for a list of registrations and sets the subpart
      * in the template.
      *
-     * @param Tx_Seminars_Bag_Registration $registrations
+     * @param \Tx_Seminars_Bag_Registration $registrations
      *        the registrations to list, must not be empty
      *
      * @return void
      */
-    private function createTableBody(Tx_Seminars_Bag_Registration $registrations)
+    private function createTableBody(\Tx_Seminars_Bag_Registration $registrations)
     {
         $tableBody = '';
 
-        /** @var Tx_Seminars_OldModel_Registration $registration */
+        /** @var \Tx_Seminars_OldModel_Registration $registration */
         foreach ($registrations as $registration) {
             /** @var string[] $cellContents */
             $cellContents = [];

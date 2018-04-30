@@ -6,26 +6,26 @@
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_OldModel_SpeakerTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_OldModel_SpeakerTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Oelib_TestingFramework
+     * @var \Tx_Oelib_TestingFramework
      */
     private $testingFramework;
 
     /**
-     * @var Tx_Seminars_OldModel_Speaker
+     * @var \Tx_Seminars_OldModel_Speaker
      */
     private $fixture;
 
     /**
-     * @var Tx_Seminars_OldModel_Speaker a maximal filled speaker
+     * @var \Tx_Seminars_OldModel_Speaker a maximal filled speaker
      */
     private $maximalFixture;
 
     protected function setUp()
     {
-        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
         $fixtureUid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
             [
@@ -33,7 +33,7 @@ class Tx_Seminars_Tests_Unit_OldModel_SpeakerTest extends Tx_Phpunit_TestCase
                 'email' => 'foo@test.com',
             ]
         );
-        $this->fixture = new Tx_Seminars_OldModel_Speaker($fixtureUid);
+        $this->fixture = new \Tx_Seminars_OldModel_Speaker($fixtureUid);
 
         $maximalFixtureUid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
@@ -51,7 +51,7 @@ class Tx_Seminars_Tests_Unit_OldModel_SpeakerTest extends Tx_Phpunit_TestCase
                 'email' => 'maximal-foo@test.com',
             ]
         );
-        $this->maximalFixture = new Tx_Seminars_OldModel_Speaker($maximalFixtureUid);
+        $this->maximalFixture = new \Tx_Seminars_OldModel_Speaker($maximalFixtureUid);
     }
 
     protected function tearDown()
@@ -85,7 +85,7 @@ class Tx_Seminars_Tests_Unit_OldModel_SpeakerTest extends Tx_Phpunit_TestCase
             'skills'
         );
 
-        $this->fixture = new Tx_Seminars_OldModel_Speaker($this->fixture->getUid());
+        $this->fixture = new \Tx_Seminars_OldModel_Speaker($this->fixture->getUid());
 
         return $uid;
     }
@@ -233,7 +233,7 @@ class Tx_Seminars_Tests_Unit_OldModel_SpeakerTest extends Tx_Phpunit_TestCase
      *
 
     public function testGetDescription() {
-        $plugin = new Tx_Seminars_FrontEnd_DefaultController();
+        $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
         $plugin->init(array());
 
         self::assertEquals(
@@ -430,17 +430,17 @@ class Tx_Seminars_Tests_Unit_OldModel_SpeakerTest extends Tx_Phpunit_TestCase
     public function testGetGenderForNoGenderSetReturnsUnknownGenderValue()
     {
         self::assertEquals(
-            Tx_Seminars_OldModel_Speaker::GENDER_UNKNOWN,
+            \Tx_Seminars_OldModel_Speaker::GENDER_UNKNOWN,
             $this->fixture->getGender()
         );
     }
 
     public function testGetGenderForKnownGenderReturnsGender()
     {
-        $this->fixture->setGender(Tx_Seminars_OldModel_Speaker::GENDER_MALE);
+        $this->fixture->setGender(\Tx_Seminars_OldModel_Speaker::GENDER_MALE);
 
         self::assertEquals(
-            Tx_Seminars_OldModel_Speaker::GENDER_MALE,
+            \Tx_Seminars_OldModel_Speaker::GENDER_MALE,
             $this->fixture->getGender()
         );
     }
@@ -516,8 +516,8 @@ class Tx_Seminars_Tests_Unit_OldModel_SpeakerTest extends Tx_Phpunit_TestCase
      */
     public function getOwnerWithOwnerReturnsOwner()
     {
-        $frontEndUser = Tx_Oelib_MapperRegistry::get(
-            Tx_Seminars_Mapper_FrontEndUser::class
+        $frontEndUser = \Tx_Oelib_MapperRegistry::get(
+            \Tx_Seminars_Mapper_FrontEndUser::class
         )->getNewGhost();
         $this->fixture->setOwner($frontEndUser);
 

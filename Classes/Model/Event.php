@@ -6,7 +6,7 @@
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
+class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan
 {
     /**
      * @var int represents the type for a single event
@@ -60,9 +60,9 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
 
     /**
      * Returns the record type of this event, which will be one of the following:
-     * - Tx_Seminars_Model_Event::TYPE_COMPLETE
-     * - Tx_Seminars_Model_Event::TYPE_TOPIC
-     * - Tx_Seminars_Model_Event::TYPE_DATE
+     * - \Tx_Seminars_Model_Event::TYPE_COMPLETE
+     * - \Tx_Seminars_Model_Event::TYPE_TOPIC
+     * - \Tx_Seminars_Model_Event::TYPE_DATE
      *
      * @return int the record type of this event, will be one of the values
      *                 mentioned above, will be >= 0
@@ -77,14 +77,14 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      *
      * This method may only be called for date records.
      *
-     * @return Tx_Seminars_Model_Event our topic
+     * @return \Tx_Seminars_Model_Event our topic
      *
      * @throws \BadMethodCallException if this event is no (valid) date
      */
     public function getTopic()
     {
         if (!$this->isEventDate()) {
-            throw new BadMethodCallException('This function may only be called for date records.', 1333296324);
+            throw new \BadMethodCallException('This function may only be called for date records.', 1333296324);
         }
 
         return $this->getAsModel('topic');
@@ -157,7 +157,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Returns our categories.
      *
-     * @return Tx_Oelib_List our categories
+     * @return \Tx_Oelib_List our categories
      */
     public function getCategories()
     {
@@ -249,7 +249,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Returns our event type.
      *
-     * @return Tx_Seminars_Model_EventType|null our event type, will be null if this
+     * @return \Tx_Seminars_Model_EventType|null our event type, will be null if this
      *                                     event has no event type
      */
     public function getEventType()
@@ -334,7 +334,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     public function setCreditPoints($creditPoints)
     {
         if ($creditPoints < 0) {
-            throw new InvalidArgumentException('The parameter $creditPoints must be >= 0.', 1333296336);
+            throw new \InvalidArgumentException('The parameter $creditPoints must be >= 0.', 1333296336);
         }
 
         if ($this->isEventDate()) {
@@ -359,7 +359,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Returns our time-slots.
      *
-     * @return Tx_Oelib_List our time-slots, will be empty if this event has no
+     * @return \Tx_Oelib_List our time-slots, will be empty if this event has no
      *                       time-slots
      */
     public function getTimeSlots()
@@ -390,7 +390,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     public function setRegistrationDeadlineAsUnixTimeStamp($registrationDeadline)
     {
         if ($registrationDeadline < 0) {
-            throw new InvalidArgumentException('The parameter $registrationDeadline must be >= 0.', 1333296347);
+            throw new \InvalidArgumentException('The parameter $registrationDeadline must be >= 0.', 1333296347);
         }
 
         $this->setAsInteger('deadline_registration', $registrationDeadline);
@@ -429,7 +429,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     public function setEarlyBirdDeadlineAsUnixTimeStamp($earlyBirdDeadline)
     {
         if ($earlyBirdDeadline < 0) {
-            throw new InvalidArgumentException('The parameter $earlyBirdDeadline must be >= 0.', 1333296359);
+            throw new \InvalidArgumentException('The parameter $earlyBirdDeadline must be >= 0.', 1333296359);
         }
 
         $this->setAsInteger('deadline_early_bird', $earlyBirdDeadline);
@@ -469,7 +469,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     public function setUnregistrationDeadlineAsUnixTimeStamp($unregistrationDeadline)
     {
         if ($unregistrationDeadline < 0) {
-            throw new InvalidArgumentException('The parameter $unregistrationDeadline must be >= 0.', 1333296369);
+            throw new \InvalidArgumentException('The parameter $unregistrationDeadline must be >= 0.', 1333296369);
         }
 
         $this->setAsInteger('deadline_unregistration', $unregistrationDeadline);
@@ -507,7 +507,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     public function setExpiryAsUnixTimeStamp($expiry)
     {
         if ($expiry < 0) {
-            throw new InvalidArgumentException('The parameter $expiry must be >= 0.', 1333296380);
+            throw new \InvalidArgumentException('The parameter $expiry must be >= 0.', 1333296380);
         }
 
         $this->setAsInteger('expiry', $expiry);
@@ -640,7 +640,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     {
         $result = 0;
 
-        /** @var Tx_Seminars_Model_Category $category */
+        /** @var \Tx_Seminars_Model_Category $category */
         foreach ($this->getCategories() as $category) {
             if ($category->hasSingleViewPageUid()) {
                 $result = $category->getSingleViewPageUid();
@@ -667,7 +667,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Returns our places.
      *
-     * @return Tx_Oelib_List our places, will be empty if this event has no
+     * @return \Tx_Oelib_List our places, will be empty if this event has no
      *                       places
      */
     public function getPlaces()
@@ -678,7 +678,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Returns our lodgings.
      *
-     * @return Tx_Oelib_List our lodgings, will be empty if this event has no
+     * @return \Tx_Oelib_List our lodgings, will be empty if this event has no
      *                       lodgings
      */
     public function getLodgings()
@@ -689,7 +689,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Returns our foods.
      *
-     * @return Tx_Oelib_List our foods, will be empty if this event has no
+     * @return \Tx_Oelib_List our foods, will be empty if this event has no
      *                       foods
      */
     public function getFoods()
@@ -700,7 +700,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Returns our partners.
      *
-     * @return Tx_Oelib_List our partners, will be empty if this event has no
+     * @return \Tx_Oelib_List our partners, will be empty if this event has no
      *                       partners
      */
     public function getPartners()
@@ -711,7 +711,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Returns our tutors.
      *
-     * @return Tx_Oelib_List our tutors, will be empty if this event has no
+     * @return \Tx_Oelib_List our tutors, will be empty if this event has no
      *                       tutors
      */
     public function getTutors()
@@ -722,7 +722,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Returns our leaders.
      *
-     * @return Tx_Oelib_List our leaders, will be empty if this event has no
+     * @return \Tx_Oelib_List our leaders, will be empty if this event has no
      *                       leaders
      */
     public function getLeaders()
@@ -733,7 +733,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Returns our language.
      *
-     * @return Tx_Oelib_Model_Language our language, will be NULL if this event
+     * @return \Tx_Oelib_Model_Language our language, will be NULL if this event
      *                                 has no language set
      */
     public function getLanguage()
@@ -742,19 +742,19 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
             return null;
         }
 
-        /** @var Tx_Oelib_Mapper_Language $mapper */
-        $mapper = Tx_Oelib_MapperRegistry::get(Tx_Oelib_Mapper_Language::class);
+        /** @var \Tx_Oelib_Mapper_Language $mapper */
+        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_Language::class);
         return $mapper->findByIsoAlpha2Code($this->getAsString('language'));
     }
 
     /**
      * Sets our language.
      *
-     * @param Tx_Oelib_Model_Language $language our language
+     * @param \Tx_Oelib_Model_Language $language our language
      *
      * @return void
      */
-    public function setLanguage(Tx_Oelib_Model_Language $language)
+    public function setLanguage(\Tx_Oelib_Model_Language $language)
     {
         $this->setAsString('language', $language->getIsoAlpha2Code());
     }
@@ -800,7 +800,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     public function setRegularPrice($price)
     {
         if ($price < 0.00) {
-            throw new InvalidArgumentException('The parameter $price must be >= 0.00.', 1333296391);
+            throw new \InvalidArgumentException('The parameter $price must be >= 0.00.', 1333296391);
         }
 
         if ($this->isEventDate()) {
@@ -845,7 +845,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     public function setRegularEarlyBirdPrice($price)
     {
         if ($price < 0.00) {
-            throw new InvalidArgumentException('The parameter $price must be >= 0.00.', 1333296479);
+            throw new \InvalidArgumentException('The parameter $price must be >= 0.00.', 1333296479);
         }
 
         if ($this->isEventDate()) {
@@ -891,7 +891,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     public function setRegularBoardPrice($price)
     {
         if ($price < 0.00) {
-            throw new InvalidArgumentException('The parameter $price must be >= 0.00.', 1333296604);
+            throw new \InvalidArgumentException('The parameter $price must be >= 0.00.', 1333296604);
         }
 
         if ($this->isEventDate()) {
@@ -937,7 +937,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     public function setSpecialPrice($price)
     {
         if ($price < 0.00) {
-            throw new InvalidArgumentException('The parameter $price must be >= 0.00.', 1333296667);
+            throw new \InvalidArgumentException('The parameter $price must be >= 0.00.', 1333296667);
         }
 
         if ($this->isEventDate()) {
@@ -982,7 +982,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     public function setSpecialEarlyBirdPrice($price)
     {
         if ($price < 0.00) {
-            throw new InvalidArgumentException('The parameter $price must be >= 0.00.', 1333296677);
+            throw new \InvalidArgumentException('The parameter $price must be >= 0.00.', 1333296677);
         }
 
         if ($this->isEventDate()) {
@@ -1028,7 +1028,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     public function setSpecialBoardPrice($price)
     {
         if ($price < 0.00) {
-            throw new InvalidArgumentException('The parameter $price must be >= 0.00.', 1333296688);
+            throw new \InvalidArgumentException('The parameter $price must be >= 0.00.', 1333296688);
         }
 
         if ($this->isEventDate()) {
@@ -1193,7 +1193,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Returns our payment methods.
      *
-     * @return Tx_Oelib_List our payment methods, will be empty if this event
+     * @return \Tx_Oelib_List our payment methods, will be empty if this event
      *                       has no payment methods
      */
     public function getPaymentMethods()
@@ -1209,15 +1209,15 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      * Note: This function should only be called on topic or single event
      * records, not on event dates.
      *
-     * @param Tx_Oelib_List $paymentMethods
+     * @param \Tx_Oelib_List $paymentMethods
      *        our payment methods, can be empty
      *
      * @return void
      */
-    public function setPaymentMethods(Tx_Oelib_List $paymentMethods)
+    public function setPaymentMethods(\Tx_Oelib_List $paymentMethods)
     {
         if ($this->isEventDate()) {
-            throw new BadMethodCallException(
+            throw new \BadMethodCallException(
                 'setPaymentMethods may only be called on single events and ' .
                 'event topics, but not on event dates.'
             );
@@ -1229,7 +1229,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Returns our organizers.
      *
-     * @return Tx_Oelib_List our organizers, will be empty if this event has no
+     * @return \Tx_Oelib_List our organizers, will be empty if this event has no
      *                       organizers
      */
     public function getOrganizers()
@@ -1250,7 +1250,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Returns our organinzing partners.
      *
-     * @return Tx_Oelib_List our organizing partners, will be empty if this event
+     * @return \Tx_Oelib_List our organizing partners, will be empty if this event
      *                       has no organizing partners
      */
     public function getOrganizingPartners()
@@ -1324,7 +1324,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     public function setMinimumAttendees($minimumAttendees)
     {
         if ($minimumAttendees < 0) {
-            throw new InvalidArgumentException('The parameter $minimumAttendees must be >= 0.', 1333296697);
+            throw new \InvalidArgumentException('The parameter $minimumAttendees must be >= 0.', 1333296697);
         }
 
         $this->setAsInteger('attendees_min', $minimumAttendees);
@@ -1362,7 +1362,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     public function setMaximumAttendees($maximumAttendees)
     {
         if ($maximumAttendees < 0) {
-            throw new InvalidArgumentException('The parameter $maximumAttendees must be >= 0.', 1333296708);
+            throw new \InvalidArgumentException('The parameter $maximumAttendees must be >= 0.', 1333296708);
         }
 
         $this->setAsInteger('attendees_max', $maximumAttendees);
@@ -1404,7 +1404,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Returns our target groups.
      *
-     * @return Tx_Oelib_List our target groups, will be empty if this event has
+     * @return \Tx_Oelib_List our target groups, will be empty if this event has
      *                       no target groups
      */
     public function getTargetGroups()
@@ -1514,7 +1514,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Returns our owner.
      *
-     * @return Tx_Oelib_Model_FrontEndUser our owner, will be null if this event has no owner
+     * @return \Tx_Oelib_Model_FrontEndUser our owner, will be null if this event has no owner
      */
     public function getOwner()
     {
@@ -1524,7 +1524,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Returns our event managers.
      *
-     * @return Tx_Oelib_List our event managers, will be empty if this event has
+     * @return \Tx_Oelib_List our event managers, will be empty if this event has
      *                       no event managers
      */
     public function getEventManagers()
@@ -1535,7 +1535,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Returns our checkboxes.
      *
-     * @return Tx_Oelib_List our checkboxes, will be empty if this event has no
+     * @return \Tx_Oelib_List our checkboxes, will be empty if this event has no
      *                       checkboxes
      */
     public function getCheckboxes()
@@ -1679,7 +1679,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Returns our requirements.
      *
-     * @return Tx_Oelib_List our requirements, will be empty if this event has
+     * @return \Tx_Oelib_List our requirements, will be empty if this event has
      *                       no requirements
      */
     public function getRequirements()
@@ -1692,7 +1692,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Returns our dependencies.
      *
-     * @return Tx_Oelib_List our dependencies, will be empty if this event has
+     * @return \Tx_Oelib_List our dependencies, will be empty if this event has
      *                       no dependencies
      */
     public function getDependencies()
@@ -1873,7 +1873,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Gets the registrations for this event.
      *
-     * @return Tx_Oelib_List the registrations for this event (both regular and
+     * @return \Tx_Oelib_List the registrations for this event (both regular and
      *                       on the waiting list), will be empty if this event
      *                       has no registrations
      */
@@ -1885,13 +1885,13 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Sets the registrations for this event.
      *
-     * @param Tx_Oelib_List $registrations
+     * @param \Tx_Oelib_List $registrations
      *       the registrations for this event (both regular and on the waiting
      *       list), may be empty
      *
      * @return void
      */
-    public function setRegistrations(Tx_Oelib_List $registrations)
+    public function setRegistrations(\Tx_Oelib_List $registrations)
     {
         $this->set('registrations', $registrations);
     }
@@ -1899,13 +1899,13 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Attaches a registration to this event.
      *
-     * @param Tx_Seminars_Model_Registration $registration
+     * @param \Tx_Seminars_Model_Registration $registration
      *        the registration to attach
      *
      * @return void
      */
     public function attachRegistration(
-        Tx_Seminars_Model_Registration $registration
+        \Tx_Seminars_Model_Registration $registration
     ) {
         $registration->setEvent($this);
         $this->getRegistrations()->add($registration);
@@ -1915,7 +1915,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      * Gets the regular registrations for this event, ie. the registrations
      * that are not on the waiting list.
      *
-     * @return Tx_Oelib_List the regular registrations for this event, will be
+     * @return \Tx_Oelib_List the regular registrations for this event, will be
      *                       will be empty if this event no regular
      *                       registrations
      */
@@ -1923,7 +1923,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     {
         $regularRegistrations = new \Tx_Oelib_List();
 
-        /** @var Tx_Seminars_Model_Registration $registration */
+        /** @var \Tx_Seminars_Model_Registration $registration */
         foreach ($this->getRegistrations() as $registration) {
             if (!$registration->isOnRegistrationQueue()) {
                 $regularRegistrations->add($registration);
@@ -1937,14 +1937,14 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      * Gets the queue registrations for this event, ie. the registrations
      * that are no regular registrations (yet).
      *
-     * @return Tx_Oelib_List the queue registrations for this event, will be
+     * @return \Tx_Oelib_List the queue registrations for this event, will be
      *                       will be empty if this event no queue registrations
      */
     public function getQueueRegistrations()
     {
         $queueRegistrations = new \Tx_Oelib_List();
 
-        /** @var Tx_Seminars_Model_Registration $registration */
+        /** @var \Tx_Seminars_Model_Registration $registration */
         foreach ($this->getRegistrations() as $registration) {
             if ($registration->isOnRegistrationQueue()) {
                 $queueRegistrations->add($registration);
@@ -1997,7 +1997,7 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
     {
         $registeredSeats = $this->getOfflineRegistrations();
 
-        /** @var Tx_Seminars_Model_Registration $registration */
+        /** @var \Tx_Seminars_Model_Registration $registration */
         foreach ($this->getRegularRegistrations() as $registration) {
             $registeredSeats += $registration->getSeats();
         }
@@ -2137,12 +2137,12 @@ class Tx_Seminars_Model_Event extends Tx_Seminars_Model_AbstractTimeSpan
      *
      * @return void
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function setDateOfLastRegistrationDigestEmailAsUnixTimeStamp($date)
     {
         if ($date < 0) {
-            throw new InvalidArgumentException('$date must be >= 0, but was: ' . $date, 1508946114880);
+            throw new \InvalidArgumentException('$date must be >= 0, but was: ' . $date, 1508946114880);
         }
 
         $this->setAsInteger('date_of_last_registration_digest', $date);

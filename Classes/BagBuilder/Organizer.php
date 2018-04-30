@@ -5,12 +5,12 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_BagBuilder_Organizer extends Tx_Seminars_BagBuilder_Abstract
+class Tx_Seminars_BagBuilder_Organizer extends \Tx_Seminars_BagBuilder_Abstract
 {
     /**
      * @var string class name of the bag class that will be built
      */
-    protected $bagClassName = Tx_Seminars_Bag_Organizer::class;
+    protected $bagClassName = \Tx_Seminars_Bag_Organizer::class;
 
     /**
      * @var string the table name of the bag to build
@@ -29,7 +29,7 @@ class Tx_Seminars_BagBuilder_Organizer extends Tx_Seminars_BagBuilder_Abstract
     public function limitToEvent($eventUid)
     {
         if ($eventUid <= 0) {
-            throw new InvalidArgumentException('The parameter $eventUid must be > 0.', 1333292898);
+            throw new \InvalidArgumentException('The parameter $eventUid must be > 0.', 1333292898);
         }
 
         $this->whereClauseParts['event'] = 'EXISTS (' .

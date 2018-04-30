@@ -10,7 +10,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Mario Rimann <typo3-coding@rimann.org>
  */
-class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractView
+class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_AbstractView
 {
     /**
      * needed for the list view to convert ISO codes to country names and languages
@@ -30,12 +30,12 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
     const SUBPART_PREFIX = 'SEARCH_PART_';
 
     /**
-     * @var Tx_Seminars_Bag_Event all seminars to show in the list view
+     * @var \Tx_Seminars_Bag_Event all seminars to show in the list view
      */
     private $seminarBag = null;
 
     /**
-     * @var Tx_Oelib_List all places which are assigned to at least one event
+     * @var \Tx_Oelib_List all places which are assigned to at least one event
      */
     private $places = null;
 
@@ -87,8 +87,8 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
         );
 
         $this->instantiateStaticInfo();
-        /** @var Tx_Seminars_BagBuilder_Event $builder */
-        $builder = GeneralUtility::makeInstance(Tx_Seminars_BagBuilder_Event::class);
+        /** @var \Tx_Seminars_BagBuilder_Event $builder */
+        $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Event::class);
         $builder->limitToEventTypes(
             GeneralUtility::trimExplode(',', $this->getConfValueString('limitListViewToEventTypes', 's_listView'), true)
         );
@@ -210,13 +210,13 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
     private function collectPlaces()
     {
         if ($this->seminarBag->isEmpty()) {
-            throw new BadMethodCallException('The seminar bag must not be empty when calling this function.', 1333293276);
+            throw new \BadMethodCallException('The seminar bag must not be empty when calling this function.', 1333293276);
         }
         if ($this->places) {
             return;
         }
 
-        $dataOfPlaces = Tx_Oelib_Db::selectMultiple(
+        $dataOfPlaces = \Tx_Oelib_Db::selectMultiple(
             'tx_seminars_sites.*',
             'tx_seminars_sites, tx_seminars_seminars_place_mm',
             'tx_seminars_sites.uid = tx_seminars_seminars_place_mm.uid_foreign ' .
@@ -224,8 +224,8 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
                 $this->seminarBag->getUids() . ')'
         );
 
-        /** @var Tx_Seminars_Mapper_Place $mapper */
-        $mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Place::class);
+        /** @var \Tx_Seminars_Mapper_Place $mapper */
+        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Place::class);
         $this->places = $mapper->getListOfModels($dataOfPlaces);
     }
 
@@ -341,7 +341,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
                 $optionData = $this->getCategoryData();
                 break;
             default:
-                throw new InvalidArgumentException(
+                throw new \InvalidArgumentException(
                     'The given search field . "' . $searchField . '" was not an allowed value. ' .
                         'Allowed values are: "event_type", "language", "country", "city", "place" or "organizer".',
                     1333293298
@@ -469,7 +469,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
     {
         $result = [];
 
-        /** @var Tx_Seminars_OldModel_Event $event */
+        /** @var \Tx_Seminars_OldModel_Event $event */
         foreach ($this->seminarBag as $event) {
             $eventTypeUid = $event->getEventTypeUid();
             if ($eventTypeUid != 0) {
@@ -495,7 +495,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
     {
         $result = [];
 
-        /** @var Tx_Seminars_OldModel_Event $event */
+        /** @var \Tx_Seminars_OldModel_Event $event */
         foreach ($this->seminarBag as $event) {
             if ($event->hasLanguage()) {
                 // Reads the language from the event record.
@@ -533,7 +533,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
         $result = [];
         $this->collectPlaces();
 
-        /** @var Tx_Seminars_Model_Place $place */
+        /** @var \Tx_Seminars_Model_Place $place */
         foreach ($this->places as $place) {
             $result[$place->getUid()] = $place->getTitle();
         }
@@ -557,7 +557,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
         $result = [];
         $this->collectPlaces();
 
-        /** @var Tx_Seminars_Model_Place $place */
+        /** @var \Tx_Seminars_Model_Place $place */
         foreach ($this->places as $place) {
             $city = $place->getCity();
             $result[$city] = $city;
@@ -584,7 +584,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
         $result = [];
         $this->collectPlaces();
 
-        /** @var Tx_Seminars_Model_Place $place */
+        /** @var \Tx_Seminars_Model_Place $place */
         foreach ($this->places as $place) {
             if ($place->hasCountry()) {
                 $countryIsoCode = $place->getCountry()->getIsoAlpha2Code();
@@ -646,11 +646,11 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
     {
         $result = [];
 
-        /** @var Tx_Seminars_OldModel_Event $event */
+        /** @var \Tx_Seminars_OldModel_Event $event */
         foreach ($this->seminarBag as $event) {
             if ($event->hasOrganizers()) {
                 $organizers = $event->getOrganizerBag();
-                /** @var Tx_Seminars_OldModel_Organizer $organizer */
+                /** @var \Tx_Seminars_OldModel_Organizer $organizer */
                 foreach ($organizers as $organizer) {
                     $organizerUid = $organizer->getUid();
                     if (!isset($result[$organizerUid])) {
@@ -675,7 +675,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends Tx_Seminars_FrontEnd_AbstractV
     {
         $result = [];
 
-        /** @var Tx_Seminars_OldModel_Event $event */
+        /** @var \Tx_Seminars_OldModel_Event $event */
         foreach ($this->seminarBag as $event) {
             if ($event->hasCategories()) {
                 $categories = $event->getCategories();

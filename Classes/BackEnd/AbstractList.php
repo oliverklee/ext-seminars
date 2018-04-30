@@ -27,12 +27,12 @@ abstract class Tx_Seminars_BackEnd_AbstractList
     protected $tableName = '';
 
     /**
-     * @var Tx_Seminars_BackEnd_Module the back-end module
+     * @var \Tx_Seminars_BackEnd_Module the back-end module
      */
     protected $page = null;
 
     /**
-     * @var Tx_Oelib_Template the template object
+     * @var \Tx_Oelib_Template the template object
      */
     protected $template = null;
 
@@ -59,13 +59,13 @@ abstract class Tx_Seminars_BackEnd_AbstractList
     /**
      * The constructor. Sets the table name and the back-end page object.
      *
-     * @param Tx_Seminars_BackEnd_Module $module the current back-end module
+     * @param \Tx_Seminars_BackEnd_Module $module the current back-end module
      */
-    public function __construct(Tx_Seminars_BackEnd_Module $module)
+    public function __construct(\Tx_Seminars_BackEnd_Module $module)
     {
         $this->page = $module;
 
-        $this->template = Tx_Oelib_TemplateRegistry::get($this->templateFile);
+        $this->template = \Tx_Oelib_TemplateRegistry::get($this->templateFile);
     }
 
     /**
@@ -359,12 +359,12 @@ abstract class Tx_Seminars_BackEnd_AbstractList
     /**
      * Gets the currently logged in back-end user.
      *
-     * @return Tx_Seminars_Model_BackEndUser the currently logged in back-end user
+     * @return \Tx_Seminars_Model_BackEndUser the currently logged in back-end user
      */
     protected function getLoggedInUser()
     {
-        return Tx_Oelib_BackEndLoginManager::getInstance()->getLoggedInUser(
-            Tx_Seminars_Mapper_BackEndUser::class
+        return \Tx_Oelib_BackEndLoginManager::getInstance()->getLoggedInUser(
+            \Tx_Seminars_Mapper_BackEndUser::class
         );
     }
 

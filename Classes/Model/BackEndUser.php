@@ -5,7 +5,7 @@
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class Tx_Seminars_Model_BackEndUser extends Tx_Oelib_Model_BackEndUser
+class Tx_Seminars_Model_BackEndUser extends \Tx_Oelib_Model_BackEndUser
 {
     /**
      * Returns the PID for newly created event records.
@@ -67,7 +67,7 @@ class Tx_Seminars_Model_BackEndUser extends Tx_Oelib_Model_BackEndUser
 
         $result = 0;
 
-        /** @var Tx_Seminars_Model_BackEndUserGroup $group */
+        /** @var \Tx_Seminars_Model_BackEndUserGroup $group */
         foreach ($groups as $group) {
             switch ($type) {
                 case 'event':
@@ -80,7 +80,7 @@ class Tx_Seminars_Model_BackEndUser extends Tx_Oelib_Model_BackEndUser
                     $recordFolderPid = $group->getAuxiliaryRecordFolder();
                     break;
                 default:
-                    throw new InvalidArgumentException('The given record folder type "' . $type . '" was not valid.', 1333296088);
+                    throw new \InvalidArgumentException('The given record folder type "' . $type . '" was not valid.', 1333296088);
             }
 
             if ($recordFolderPid > 0) {

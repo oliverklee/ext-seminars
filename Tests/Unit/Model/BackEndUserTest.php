@@ -5,16 +5,16 @@
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Model_BackEndUserTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Model_BackEndUserTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Seminars_Model_BackEndUser
+     * @var \Tx_Seminars_Model_BackEndUser
      */
     private $fixture;
 
     protected function setUp()
     {
-        $this->fixture = new Tx_Seminars_Model_BackEndUser();
+        $this->fixture = new \Tx_Seminars_Model_BackEndUser();
     }
 
     /////////////////////////////////////////////
@@ -26,7 +26,7 @@ class Tx_Seminars_Tests_Unit_Model_BackEndUserTest extends Tx_Phpunit_TestCase
      */
     public function getEventFolderFromGroupForNoGroupsReturnsZero()
     {
-        $this->fixture->setData(['usergroup' => new Tx_Oelib_List()]);
+        $this->fixture->setData(['usergroup' => new \Tx_Oelib_List()]);
 
         self::assertEquals(
             0,
@@ -39,9 +39,9 @@ class Tx_Seminars_Tests_Unit_Model_BackEndUserTest extends Tx_Phpunit_TestCase
      */
     public function getEventFolderFromGroupForOneGroupWithoutEventPidReturnsZero()
     {
-        $group = Tx_Oelib_MapperRegistry::
-            get(Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel([]);
-        $groups = new Tx_Oelib_List();
+        $group = \Tx_Oelib_MapperRegistry::
+            get(\Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel([]);
+        $groups = new \Tx_Oelib_List();
         $groups->add($group);
         $this->fixture->setData(['usergroup' => $groups]);
 
@@ -56,11 +56,11 @@ class Tx_Seminars_Tests_Unit_Model_BackEndUserTest extends Tx_Phpunit_TestCase
      */
     public function getEventFolderFromGroupForOneGroupWithEventPidReturnsThisPid()
     {
-        $group = Tx_Oelib_MapperRegistry::
-            get(Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
+        $group = \Tx_Oelib_MapperRegistry::
+            get(\Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
                 ['tx_seminars_events_folder' => 42]
         );
-        $groups = new Tx_Oelib_List();
+        $groups = new \Tx_Oelib_List();
         $groups->add($group);
         $this->fixture->setData(['usergroup' => $groups]);
 
@@ -75,15 +75,15 @@ class Tx_Seminars_Tests_Unit_Model_BackEndUserTest extends Tx_Phpunit_TestCase
      */
     public function getEventFolderFromGroupForTwoGroupsBothWithDifferentEventPidsReturnsOnlyOneOfThePids()
     {
-        $group1 = Tx_Oelib_MapperRegistry::
-            get(Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
+        $group1 = \Tx_Oelib_MapperRegistry::
+            get(\Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
                 ['tx_seminars_events_folder' => 23]
         );
-        $group2 = Tx_Oelib_MapperRegistry::
-            get(Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
+        $group2 = \Tx_Oelib_MapperRegistry::
+            get(\Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
                 ['tx_seminars_events_folder' => 42]
         );
-        $groups = new Tx_Oelib_List();
+        $groups = new \Tx_Oelib_List();
         $groups->add($group1);
         $groups->add($group2);
         $this->fixture->setData(['usergroup' => $groups]);
@@ -103,7 +103,7 @@ class Tx_Seminars_Tests_Unit_Model_BackEndUserTest extends Tx_Phpunit_TestCase
      */
     public function getRegistrationFolderFromGroupForNoGroupsReturnsZero()
     {
-        $this->fixture->setData(['usergroup' => new Tx_Oelib_List()]);
+        $this->fixture->setData(['usergroup' => new \Tx_Oelib_List()]);
 
         self::assertEquals(
             0,
@@ -116,9 +116,9 @@ class Tx_Seminars_Tests_Unit_Model_BackEndUserTest extends Tx_Phpunit_TestCase
      */
     public function getRegistrationFolderFromGroupForOneGroupWithoutRegistrationPidReturnsZero()
     {
-        $group = Tx_Oelib_MapperRegistry::
-            get(Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel([]);
-        $groups = new Tx_Oelib_List();
+        $group = \Tx_Oelib_MapperRegistry::
+            get(\Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel([]);
+        $groups = new \Tx_Oelib_List();
         $groups->add($group);
         $this->fixture->setData(['usergroup' => $groups]);
 
@@ -133,11 +133,11 @@ class Tx_Seminars_Tests_Unit_Model_BackEndUserTest extends Tx_Phpunit_TestCase
      */
     public function getRegistrationFolderFromGroupForOneGroupWithRegistrationPidReturnsThisPid()
     {
-        $group = Tx_Oelib_MapperRegistry::
-            get(Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
+        $group = \Tx_Oelib_MapperRegistry::
+            get(\Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
                 ['tx_seminars_registrations_folder' => 42]
         );
-        $groups = new Tx_Oelib_List();
+        $groups = new \Tx_Oelib_List();
         $groups->add($group);
         $this->fixture->setData(['usergroup' => $groups]);
 
@@ -152,15 +152,15 @@ class Tx_Seminars_Tests_Unit_Model_BackEndUserTest extends Tx_Phpunit_TestCase
      */
     public function getRegistrationFolderFromGroupForTwoGroupsBothWithDifferentRegistrationPidsReturnsOnlyOneOfThePids()
     {
-        $group1 = Tx_Oelib_MapperRegistry::
-            get(Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
+        $group1 = \Tx_Oelib_MapperRegistry::
+            get(\Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
                 ['tx_seminars_registrations_folder' => 23]
         );
-        $group2 = Tx_Oelib_MapperRegistry::
-            get(Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
+        $group2 = \Tx_Oelib_MapperRegistry::
+            get(\Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
                 ['tx_seminars_registrations_folder' => 42]
         );
-        $groups = new Tx_Oelib_List();
+        $groups = new \Tx_Oelib_List();
         $groups->add($group1);
         $groups->add($group2);
         $this->fixture->setData(['usergroup' => $groups]);
@@ -180,7 +180,7 @@ class Tx_Seminars_Tests_Unit_Model_BackEndUserTest extends Tx_Phpunit_TestCase
      */
     public function getAuxiliaryRecordsFolderForNoGroupsReturnsZero()
     {
-        $this->fixture->setData(['usergroup' => new Tx_Oelib_List()]);
+        $this->fixture->setData(['usergroup' => new \Tx_Oelib_List()]);
 
         self::assertEquals(
             0,
@@ -193,9 +193,9 @@ class Tx_Seminars_Tests_Unit_Model_BackEndUserTest extends Tx_Phpunit_TestCase
      */
     public function getAuxiliaryRecordsFolderForOneGroupWithoutAuxiliaryRecordPidReturnsZero()
     {
-        $group = Tx_Oelib_MapperRegistry::
-            get(Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel([]);
-        $groups = new Tx_Oelib_List();
+        $group = \Tx_Oelib_MapperRegistry::
+            get(\Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel([]);
+        $groups = new \Tx_Oelib_List();
         $groups->add($group);
         $this->fixture->setData(['usergroup' => $groups]);
 
@@ -210,11 +210,11 @@ class Tx_Seminars_Tests_Unit_Model_BackEndUserTest extends Tx_Phpunit_TestCase
      */
     public function getAuxiliaryRecordsFolderForOneGroupWithAuxiliaryRecordsPidReturnsThisPid()
     {
-        $group = Tx_Oelib_MapperRegistry::
-            get(Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
+        $group = \Tx_Oelib_MapperRegistry::
+            get(\Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
                 ['tx_seminars_auxiliaries_folder' => 42]
         );
-        $groups = new Tx_Oelib_List();
+        $groups = new \Tx_Oelib_List();
         $groups->add($group);
         $this->fixture->setData(['usergroup' => $groups]);
 
@@ -229,15 +229,15 @@ class Tx_Seminars_Tests_Unit_Model_BackEndUserTest extends Tx_Phpunit_TestCase
      */
     public function getAuxiliaryRecordsFolderForTwoGroupsBothWithDifferentAuxiliaryRecordPidsReturnsOnlyOneOfThePids()
     {
-        $group1 = Tx_Oelib_MapperRegistry::
-            get(Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
+        $group1 = \Tx_Oelib_MapperRegistry::
+            get(\Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
                 ['tx_seminars_auxiliaries_folder' => 23]
         );
-        $group2 = Tx_Oelib_MapperRegistry::
-            get(Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
+        $group2 = \Tx_Oelib_MapperRegistry::
+            get(\Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
                 ['tx_seminars_auxiliaries_folder' => 42]
         );
-        $groups = new Tx_Oelib_List();
+        $groups = new \Tx_Oelib_List();
         $groups->add($group1);
         $groups->add($group2);
         $this->fixture->setData(['usergroup' => $groups]);

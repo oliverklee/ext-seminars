@@ -5,7 +5,7 @@
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_FrontEnd_Editor extends Tx_Seminars_FrontEnd_AbstractView
+class Tx_Seminars_FrontEnd_Editor extends \Tx_Seminars_FrontEnd_AbstractView
 {
     /**
      * @var \tx_mkforms_forms_Base
@@ -125,7 +125,7 @@ class Tx_Seminars_FrontEnd_Editor extends Tx_Seminars_FrontEnd_AbstractView
      *
      * @return \tx_mkforms_forms_Base|null
      *
-     * @throws BadMethodCallException
+     * @throws \BadMethodCallException
      */
     protected function makeFormCreator()
     {
@@ -134,7 +134,7 @@ class Tx_Seminars_FrontEnd_Editor extends Tx_Seminars_FrontEnd_AbstractView
         }
 
         if (empty($this->formConfiguration)) {
-            throw new BadMethodCallException(
+            throw new \BadMethodCallException(
                 'Please define the form configuration to use via $this->setFormConfiguration().',
                 1333293139
             );

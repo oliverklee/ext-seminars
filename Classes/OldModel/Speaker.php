@@ -7,7 +7,7 @@ use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_OldModel_Speaker extends Tx_Seminars_OldModel_Abstract
+class Tx_Seminars_OldModel_Speaker extends \Tx_Seminars_OldModel_Abstract
 {
     /** @var int the gender type for speakers without gender */
     const GENDER_UNKNOWN = 0;
@@ -124,7 +124,7 @@ class Tx_Seminars_OldModel_Speaker extends Tx_Seminars_OldModel_Abstract
             'title',
             'tx_seminars_skills, tx_seminars_speakers_skills_mm',
             'uid_local = ' . $this->getUid() . ' AND uid = uid_foreign' .
-                Tx_Oelib_Db::enableFields('tx_seminars_skills'),
+                \Tx_Oelib_Db::enableFields('tx_seminars_skills'),
             '',
             'sorting ASC'
         );
@@ -225,13 +225,13 @@ class Tx_Seminars_OldModel_Speaker extends Tx_Seminars_OldModel_Abstract
     /**
      * Creates a link to this speaker's homepage, with the title as link text.
      *
-     * @param Tx_Oelib_TemplateHelper $plugin templatehelper object with current configuration values
+     * @param \Tx_Oelib_TemplateHelper $plugin templatehelper object with current configuration values
      *
      * @return string this speaker's title wrapped in an link tag, or if the
      *                speaker has no homepage just the speaker name, will not
      *                be empty
      */
-    public function getLinkedTitle(Tx_Oelib_TemplateHelper $plugin)
+    public function getLinkedTitle(\Tx_Oelib_TemplateHelper $plugin)
     {
         $safeTitle = htmlspecialchars($this->getTitle());
 
@@ -266,8 +266,8 @@ class Tx_Seminars_OldModel_Speaker extends Tx_Seminars_OldModel_Abstract
      * Sets the gender of this speaker.
      *
      * @param int $gender
-     *        the gender of the speaker, must be one of Tx_Seminars_OldModel_Speaker::GENDER_FEMALE, Tx_Seminars_OldModel_Speaker::GENDER_MALE
-     *        or Tx_Seminars_OldModel_Speaker::GENDER_UNKNOWN
+     *        the gender of the speaker, must be one of \Tx_Seminars_OldModel_Speaker::GENDER_FEMALE, \Tx_Seminars_OldModel_Speaker::GENDER_MALE
+     *        or \Tx_Seminars_OldModel_Speaker::GENDER_UNKNOWN
      *
      * @return void
      */
@@ -312,7 +312,7 @@ class Tx_Seminars_OldModel_Speaker extends Tx_Seminars_OldModel_Abstract
     /**
      * Returns our owner.
      *
-     * @return Tx_Seminars_Model_FrontEndUser the owner of this model, will be null
+     * @return \Tx_Seminars_Model_FrontEndUser the owner of this model, will be null
      *                                     if this model has no owner
      */
     public function getOwner()
@@ -321,19 +321,19 @@ class Tx_Seminars_OldModel_Speaker extends Tx_Seminars_OldModel_Abstract
             return null;
         }
 
-        /** @var Tx_Seminars_Mapper_FrontEndUser $mapper */
-        $mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_FrontEndUser::class);
+        /** @var \Tx_Seminars_Mapper_FrontEndUser $mapper */
+        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
         return $mapper->find($this->getRecordPropertyInteger('owner'));
     }
 
     /**
      * Sets our owner.
      *
-     * @param Tx_Seminars_Model_FrontEndUser $frontEndUser the owner of this model to set
+     * @param \Tx_Seminars_Model_FrontEndUser $frontEndUser the owner of this model to set
      *
      * @return void
      */
-    public function setOwner(Tx_Seminars_Model_FrontEndUser $frontEndUser)
+    public function setOwner(\Tx_Seminars_Model_FrontEndUser $frontEndUser)
     {
         $this->setRecordPropertyInteger('owner', $frontEndUser->getUid());
     }

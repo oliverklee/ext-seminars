@@ -11,16 +11,16 @@ use TYPO3\CMS\Core\Utility\VersionNumberUtility;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends \Tx_Phpunit_TestCase
 {
     use BackEndTestsTrait;
 
     /**
-     * @var Tx_Seminars_BackEnd_EventsList
+     * @var \Tx_Seminars_BackEnd_EventsList
      */
     protected $fixture = null;
     /**
-     * @var Tx_Oelib_TestingFramework
+     * @var \Tx_Oelib_TestingFramework
      */
     protected $testingFramework = null;
 
@@ -30,7 +30,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     protected $dummySysFolderPid = 0;
 
     /**
-     * @var Tx_Seminars_BackEnd_Module a dummy BE module
+     * @var \Tx_Seminars_BackEnd_Module a dummy BE module
      */
     protected $backEndModule = null;
 
@@ -38,7 +38,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
     {
         $this->unifyTestingEnvironment();
 
-        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
         if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8000000) {
             self::markTestSkipped('This test is for the old BE module only.');
@@ -46,29 +46,29 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
 
         $this->dummySysFolderPid = $this->testingFramework->createSystemFolder();
 
-        $this->backEndModule = new Tx_Seminars_BackEnd_Module();
+        $this->backEndModule = new \Tx_Seminars_BackEnd_Module();
         $this->backEndModule->id = $this->dummySysFolderPid;
         $this->backEndModule->setPageData([
             'uid' => $this->dummySysFolderPid,
-            'doktype' => Tx_Seminars_BackEnd_AbstractList::SYSFOLDER_TYPE,
+            'doktype' => \Tx_Seminars_BackEnd_AbstractList::SYSFOLDER_TYPE,
         ]);
 
         $document = new DocumentTemplate();
         $this->backEndModule->doc = $document;
 
-        $this->fixture = new Tx_Seminars_BackEnd_EventsList($this->backEndModule);
+        $this->fixture = new \Tx_Seminars_BackEnd_EventsList($this->backEndModule);
 
-        $backEndGroup = Tx_Oelib_MapperRegistry::get(
-            Tx_Seminars_Mapper_BackEndUserGroup::class
+        $backEndGroup = \Tx_Oelib_MapperRegistry::get(
+            \Tx_Seminars_Mapper_BackEndUserGroup::class
         )->getLoadedTestingModel(
             ['tx_seminars_events_folder' => $this->dummySysFolderPid + 1]
         );
-        $backEndUser = Tx_Oelib_MapperRegistry::get(
-            Tx_Seminars_Mapper_BackEndUser::class
+        $backEndUser = \Tx_Oelib_MapperRegistry::get(
+            \Tx_Seminars_Mapper_BackEndUser::class
         )->getLoadedTestingModel(
             ['usergroup' => $backEndGroup->getUid()]
         );
-        Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
+        \Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
     }
 
     protected function tearDown()
@@ -233,7 +233,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->dummySysFolderPid,
-                'cancelled' => Tx_Seminars_Model_Event::STATUS_CANCELED,
+                'cancelled' => \Tx_Seminars_Model_Event::STATUS_CANCELED,
             ]
         );
 
@@ -249,7 +249,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->dummySysFolderPid,
-                'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+                'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
             ]
         );
 
@@ -265,7 +265,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->dummySysFolderPid,
-                'cancelled' => Tx_Seminars_Model_Event::STATUS_PLANNED,
+                'cancelled' => \Tx_Seminars_Model_Event::STATUS_PLANNED,
             ]
         );
 
@@ -331,7 +331,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->dummySysFolderPid,
-                'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+                'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
             ]
         );
@@ -364,7 +364,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->dummySysFolderPid,
-                'cancelled' => Tx_Seminars_Model_Event::STATUS_PLANNED,
+                'cancelled' => \Tx_Seminars_Model_Event::STATUS_PLANNED,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
             ]
         );
@@ -381,7 +381,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->dummySysFolderPid,
-                'cancelled' => Tx_Seminars_Model_Event::STATUS_CANCELED,
+                'cancelled' => \Tx_Seminars_Model_Event::STATUS_CANCELED,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
             ]
         );
@@ -398,7 +398,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->dummySysFolderPid,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
             ]
         );
 
@@ -450,7 +450,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             [
                 'pid' => $this->dummySysFolderPid,
-                'cancelled' => Tx_Seminars_Model_Event::STATUS_CANCELED,
+                'cancelled' => \Tx_Seminars_Model_Event::STATUS_CANCELED,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
             ]
         );
@@ -500,7 +500,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
             [
                 'pid' => $this->dummySysFolderPid,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
-                'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+                'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
             ]
         );
 
@@ -517,7 +517,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
             [
                 'pid' => $this->dummySysFolderPid,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 42,
-                'object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
             ]
         );
 
@@ -743,7 +743,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
             [
                 'pid' => $this->dummySysFolderPid,
                 'title' => 'event_1',
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
             ]
         );
 
@@ -779,10 +779,10 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
 
     public function testNewButtonForNoEventStorageSettingInUserGroupsSetsCurrentPageIdAsNewRecordPid()
     {
-        $backEndUser = Tx_Oelib_MapperRegistry::get(
-            Tx_Seminars_Mapper_BackEndUser::class
+        $backEndUser = \Tx_Oelib_MapperRegistry::get(
+            \Tx_Seminars_Mapper_BackEndUser::class
         )->getLoadedTestingModel([]);
-        Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser(
+        \Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser(
             $backEndUser
         );
 
@@ -794,10 +794,10 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends Tx_Phpunit_TestCase
 
     public function testNewButtonForEventStoredOnCurrentPageHasCurrentFolderLabel()
     {
-        $backEndUser = Tx_Oelib_MapperRegistry::get(
-            Tx_Seminars_Mapper_BackEndUser::class
+        $backEndUser = \Tx_Oelib_MapperRegistry::get(
+            \Tx_Seminars_Mapper_BackEndUser::class
         )->getLoadedTestingModel([]);
-        Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser(
+        \Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser(
             $backEndUser
         );
 

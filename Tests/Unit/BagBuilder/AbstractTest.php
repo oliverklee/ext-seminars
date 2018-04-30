@@ -6,14 +6,14 @@
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Seminars_Tests_Unit_Fixtures_BagBuilder_Testing
+     * @var \Tx_Seminars_Tests_Unit_Fixtures_BagBuilder_Testing
      */
     private $fixture;
     /**
-     * @var Tx_Oelib_TestingFramework
+     * @var \Tx_Oelib_TestingFramework
      */
     private $testingFramework;
 
@@ -24,9 +24,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
-        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
-        $this->fixture = new Tx_Seminars_Tests_Unit_Fixtures_BagBuilder_Testing();
+        $this->fixture = new \Tx_Seminars_Tests_Unit_Fixtures_BagBuilder_Testing();
         $this->fixture->setTestMode();
 
         $this->dummySysFolderPid = $this->testingFramework->createSystemFolder();
@@ -48,7 +48,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
             'The attribute $this->tableName must not be empty.'
         );
 
-        new Tx_Seminars_Tests_Unit_Fixtures_BagBuilder_BrokenTesting();
+        new \Tx_Seminars_Tests_Unit_Fixtures_BagBuilder_BrokenTesting();
     }
 
     public function testBuilderBuildsAnObject()
@@ -65,7 +65,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
     {
         $bag = $this->fixture->build();
 
-        self::assertInstanceOf(Tx_Seminars_Bag_Abstract::class, $bag);
+        self::assertInstanceOf(\Tx_Seminars_Bag_Abstract::class, $bag);
     }
 
     public function testBuilderBuildsBagSortedAscendingByUid()

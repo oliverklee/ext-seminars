@@ -5,20 +5,20 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_ViewHelper_CommaSeparatedTitlesTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_ViewHelper_CommaSeparatedTitlesTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Seminars_ViewHelper_CommaSeparatedTitles
+     * @var \Tx_Seminars_ViewHelper_CommaSeparatedTitles
      */
     private $fixture;
 
     /**
-     * @var Tx_Oelib_TestingFramework
+     * @var \Tx_Oelib_TestingFramework
      */
     private $testingFramework;
 
     /**
-     * @var Tx_Oelib_List
+     * @var \Tx_Oelib_List
      */
     private $list;
 
@@ -29,9 +29,9 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CommaSeparatedTitlesTest extends Tx_Phpu
 
     protected function setUp()
     {
-        $this->testingFramework    = new Tx_Oelib_TestingFramework('tx_seminars');
-        $this->list = new Tx_Oelib_List();
-        $this->fixture = new Tx_Seminars_ViewHelper_CommaSeparatedTitles();
+        $this->testingFramework    = new \Tx_Oelib_TestingFramework('tx_seminars');
+        $this->list = new \Tx_Oelib_List();
+        $this->fixture = new \Tx_Seminars_ViewHelper_CommaSeparatedTitles();
     }
 
     protected function tearDown()
@@ -58,7 +58,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CommaSeparatedTitlesTest extends Tx_Phpu
      */
     public function renderWithElementsInListWithoutGetTitleMethodThrowsBadMethodCallException()
     {
-        $model = new Tx_Seminars_Tests_Unit_Fixtures_Model_UntitledTestingModel();
+        $model = new \Tx_Seminars_Tests_Unit_Fixtures_Model_UntitledTestingModel();
         $model->setData([]);
 
         $this->list->add($model);
@@ -71,7 +71,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CommaSeparatedTitlesTest extends Tx_Phpu
      */
     public function renderWithOneElementListReturnsOneElementsTitle()
     {
-        $model = new Tx_Seminars_Tests_Unit_Fixtures_Model_TitledTestingModel();
+        $model = new \Tx_Seminars_Tests_Unit_Fixtures_Model_TitledTestingModel();
         $model->setData(['title' => 'Testing model']);
 
         $this->list->add($model);
@@ -87,9 +87,9 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CommaSeparatedTitlesTest extends Tx_Phpu
      */
     public function renderWithTwoElementsListReturnsTwoElementTitlesSeparatedByComma()
     {
-        $firstModel = new Tx_Seminars_Tests_Unit_Fixtures_Model_TitledTestingModel();
+        $firstModel = new \Tx_Seminars_Tests_Unit_Fixtures_Model_TitledTestingModel();
         $firstModel->setData(['title' => 'First testing model']);
-        $secondModel = new Tx_Seminars_Tests_Unit_Fixtures_Model_TitledTestingModel();
+        $secondModel = new \Tx_Seminars_Tests_Unit_Fixtures_Model_TitledTestingModel();
         $secondModel->setData(['title' => 'Second testing model']);
 
         $this->list->add($firstModel);
@@ -106,7 +106,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CommaSeparatedTitlesTest extends Tx_Phpu
      */
     public function renderWithOneElementListReturnsOneElementsTitleHtmlspecialchared()
     {
-        $model = new Tx_Seminars_Tests_Unit_Fixtures_Model_TitledTestingModel();
+        $model = new \Tx_Seminars_Tests_Unit_Fixtures_Model_TitledTestingModel();
         $model->setData(['title' => '<test>Testing model</test>']);
 
         $this->list->add($model);

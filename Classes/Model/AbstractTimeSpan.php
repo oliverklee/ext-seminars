@@ -5,7 +5,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-abstract class Tx_Seminars_Model_AbstractTimeSpan extends Tx_Oelib_Model implements Tx_Seminars_Interface_Titled
+abstract class Tx_Seminars_Model_AbstractTimeSpan extends \Tx_Oelib_Model implements \Tx_Seminars_Interface_Titled
 {
     /**
      * Returns our title.
@@ -27,7 +27,7 @@ abstract class Tx_Seminars_Model_AbstractTimeSpan extends Tx_Oelib_Model impleme
     public function setTitle($title)
     {
         if ($title == '') {
-            throw new InvalidArgumentException('The parameter $title must not be empty.', 1333293446);
+            throw new \InvalidArgumentException('The parameter $title must not be empty.', 1333293446);
         }
 
         $this->setAsString('title', $title);
@@ -54,7 +54,7 @@ abstract class Tx_Seminars_Model_AbstractTimeSpan extends Tx_Oelib_Model impleme
     public function setBeginDateAsUnixTimeStamp($beginDate)
     {
         if ($beginDate < 0) {
-            throw new InvalidArgumentException('The parameter $beginDate must be >= 0.', 1333293455);
+            throw new \InvalidArgumentException('The parameter $beginDate must be >= 0.', 1333293455);
         }
 
         $this->setAsInteger('begin_date', $beginDate);
@@ -91,7 +91,7 @@ abstract class Tx_Seminars_Model_AbstractTimeSpan extends Tx_Oelib_Model impleme
     public function setEndDateAsUnixTimeStamp($endDate)
     {
         if ($endDate < 0) {
-            throw new InvalidArgumentException('The parameter $endDate must be >= 0.', 1333293465);
+            throw new \InvalidArgumentException('The parameter $endDate must be >= 0.', 1333293465);
         }
 
         $this->setAsInteger('end_date', $endDate);
@@ -110,7 +110,7 @@ abstract class Tx_Seminars_Model_AbstractTimeSpan extends Tx_Oelib_Model impleme
     /**
      * Returns our speakers.
      *
-     * @return Tx_Oelib_List our speakers, will be empty if this time-span has
+     * @return \Tx_Oelib_List our speakers, will be empty if this time-span has
      *                       no speakers
      */
     public function getSpeakers()

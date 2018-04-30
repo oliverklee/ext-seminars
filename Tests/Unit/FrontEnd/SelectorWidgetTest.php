@@ -8,15 +8,15 @@ use SJBR\StaticInfoTables\PiBaseApi;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Seminars_FrontEnd_SelectorWidget
+     * @var \Tx_Seminars_FrontEnd_SelectorWidget
      */
     private $fixture = null;
 
     /**
-     * @var Tx_Oelib_TestingFramework
+     * @var \Tx_Oelib_TestingFramework
      */
     private $testingFramework = null;
 
@@ -27,10 +27,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
 
     protected function setUp()
     {
-        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
 
-        $this->fixture = new Tx_Seminars_FrontEnd_SelectorWidget(
+        $this->fixture = new \Tx_Seminars_FrontEnd_SelectorWidget(
             [
                 'isStaticTemplateLoaded' => 1,
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
@@ -43,7 +43,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     {
         $this->testingFramework->cleanUp();
 
-        Tx_Seminars_Service_RegistrationManager::purgeInstance();
+        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
     }
 
     //////////////////////
@@ -81,7 +81,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
 
     public function testFixtureIsAFrontEndSelectorWidgetObject()
     {
-        self::assertInstanceOf(Tx_Seminars_FrontEnd_SelectorWidget::class, $this->fixture);
+        self::assertInstanceOf(\Tx_Seminars_FrontEnd_SelectorWidget::class, $this->fixture);
     }
 
     ///////////////////////
@@ -220,7 +220,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     {
         self::assertEquals(
             ['CH', 'DE'],
-            Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
+            \Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
                 [0, 'CH', 'DE']
             )
         );
@@ -230,7 +230,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     {
         self::assertEquals(
             ['CH', 'DE'],
-            Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
+            \Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
                 ['CH', 0, 'DE']
             )
         );
@@ -240,7 +240,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     {
         self::assertEquals(
             [],
-            Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
+            \Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
                 []
             )
         );
@@ -422,7 +422,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends Tx_Phpunit_Test
     {
         /** @var \Tx_Seminars_FrontEnd_SelectorWidget|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
-            Tx_Seminars_FrontEnd_SelectorWidget::class,
+            \Tx_Seminars_FrontEnd_SelectorWidget::class,
             [
                 'hasSearchField', 'getEventTypeData',
                 'getLanguageData', 'getPlaceData', 'getCityData',

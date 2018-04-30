@@ -5,23 +5,23 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_Mapper_OrganizerTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Mapper_OrganizerTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Oelib_TestingFramework
+     * @var \Tx_Oelib_TestingFramework
      */
     private $testingFramework;
 
     /**
-     * @var Tx_Seminars_Mapper_Organizer
+     * @var \Tx_Seminars_Mapper_Organizer
      */
     private $fixture;
 
     protected function setUp()
     {
-        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
-        $this->fixture = new Tx_Seminars_Mapper_Organizer();
+        $this->fixture = new \Tx_Seminars_Mapper_Organizer();
     }
 
     protected function tearDown()
@@ -38,7 +38,7 @@ class Tx_Seminars_Tests_Unit_Mapper_OrganizerTest extends Tx_Phpunit_TestCase
      */
     public function findWithUidReturnsOrganizerInstance()
     {
-        self::assertInstanceOf(Tx_Seminars_Model_Organizer::class, $this->fixture->find(1));
+        self::assertInstanceOf(\Tx_Seminars_Model_Organizer::class, $this->fixture->find(1));
     }
 
     /**

@@ -10,7 +10,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class Tx_Seminars_EmailSalutation
 {
     /**
-     * @var Tx_Oelib_Translator
+     * @var \Tx_Oelib_Translator
      */
     private $translator = null;
 
@@ -28,16 +28,16 @@ class Tx_Seminars_EmailSalutation
      * The salutation is localized and gender-specific and contains the name of
      * the user.
      *
-     * @param Tx_Seminars_Model_FrontEndUser $user
+     * @param \Tx_Seminars_Model_FrontEndUser $user
      *        the user to create the salutation for
      *
      * @return string the localized, gender-specific salutation with a trailing comma, will not be empty
      */
-    public function getSalutation(Tx_Seminars_Model_FrontEndUser $user)
+    public function getSalutation(\Tx_Seminars_Model_FrontEndUser $user)
     {
         $salutationParts = [];
 
-        $salutationMode = Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')->getAsString('salutation');
+        $salutationMode = \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')->getAsString('salutation');
         switch ($salutationMode) {
             case 'informal':
                 $salutationParts['dear'] = $this->translator->translate('email_hello_informal');
@@ -85,13 +85,13 @@ class Tx_Seminars_EmailSalutation
      * @param string $introductionBegin
      *        the start of the introduction, must not be empty and contain %s as
      *        place to fill the title of the event in
-     * @param Tx_Seminars_OldModel_Event $event the event the introduction is for
+     * @param \Tx_Seminars_OldModel_Event $event the event the introduction is for
      *
      * @return string the introduction with the event's title and if available date and time, will not be empty
      *
      * @throws \InvalidArgumentException
      */
-    public function createIntroduction($introductionBegin, Tx_Seminars_OldModel_Event $event)
+    public function createIntroduction($introductionBegin, \Tx_Seminars_OldModel_Event $event)
     {
         if ($introductionBegin === '') {
             throw new \InvalidArgumentException('$introductionBegin must not be empty.', 1440109640);

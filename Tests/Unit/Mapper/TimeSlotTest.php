@@ -5,23 +5,23 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_Mapper_TimeSlotTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Mapper_TimeSlotTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Oelib_TestingFramework
+     * @var \Tx_Oelib_TestingFramework
      */
     private $testingFramework;
 
     /**
-     * @var Tx_Seminars_Mapper_TimeSlot
+     * @var \Tx_Seminars_Mapper_TimeSlot
      */
     private $fixture;
 
     protected function setUp()
     {
-        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
-        $this->fixture = new Tx_Seminars_Mapper_TimeSlot();
+        $this->fixture = new \Tx_Seminars_Mapper_TimeSlot();
     }
 
     protected function tearDown()
@@ -39,7 +39,7 @@ class Tx_Seminars_Tests_Unit_Mapper_TimeSlotTest extends Tx_Phpunit_TestCase
     public function findWithUidReturnsTimeSlotInstance()
     {
         self::assertInstanceOf(
-            Tx_Seminars_Model_TimeSlot::class,
+            \Tx_Seminars_Model_TimeSlot::class,
             $this->fixture->find(1)
         );
     }
@@ -54,7 +54,7 @@ class Tx_Seminars_Tests_Unit_Mapper_TimeSlotTest extends Tx_Phpunit_TestCase
             ['title' => '01.02.03 04:05']
         );
 
-        /** @var Tx_Seminars_Model_TimeSlot $model */
+        /** @var \Tx_Seminars_Model_TimeSlot $model */
         $model = $this->fixture->find($uid);
         self::assertEquals(
             '01.02.03 04:05',
@@ -73,9 +73,9 @@ class Tx_Seminars_Tests_Unit_Mapper_TimeSlotTest extends Tx_Phpunit_TestCase
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_timeslots');
 
-        /** @var Tx_Seminars_Model_TimeSlot $model */
+        /** @var \Tx_Seminars_Model_TimeSlot $model */
         $model = $this->fixture->find($uid);
-        self::assertInstanceOf(Tx_Oelib_List::class, $model->getSpeakers());
+        self::assertInstanceOf(\Tx_Oelib_List::class, $model->getSpeakers());
     }
 
     /**
@@ -86,7 +86,7 @@ class Tx_Seminars_Tests_Unit_Mapper_TimeSlotTest extends Tx_Phpunit_TestCase
         $timeSlotUid = $this->testingFramework->createRecord(
             'tx_seminars_timeslots'
         );
-        $speaker = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Speaker::class)
+        $speaker = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_timeslots',
@@ -95,10 +95,10 @@ class Tx_Seminars_Tests_Unit_Mapper_TimeSlotTest extends Tx_Phpunit_TestCase
             'speakers'
         );
 
-        /** @var Tx_Seminars_Model_TimeSlot $model */
+        /** @var \Tx_Seminars_Model_TimeSlot $model */
         $model = $this->fixture->find($timeSlotUid);
         self::assertInstanceOf(
-            Tx_Seminars_Model_Speaker::class,
+            \Tx_Seminars_Model_Speaker::class,
             $model->getSpeakers()->first()
         );
     }
@@ -111,7 +111,7 @@ class Tx_Seminars_Tests_Unit_Mapper_TimeSlotTest extends Tx_Phpunit_TestCase
         $timeSlotUid = $this->testingFramework->createRecord(
             'tx_seminars_timeslots'
         );
-        $speaker = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Speaker::class)
+        $speaker = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_timeslots',
@@ -120,7 +120,7 @@ class Tx_Seminars_Tests_Unit_Mapper_TimeSlotTest extends Tx_Phpunit_TestCase
             'speakers'
         );
 
-        /** @var Tx_Seminars_Model_TimeSlot $model */
+        /** @var \Tx_Seminars_Model_TimeSlot $model */
         $model = $this->fixture->find($timeSlotUid);
         self::assertEquals(
             $speaker->getUid(),
@@ -139,7 +139,7 @@ class Tx_Seminars_Tests_Unit_Mapper_TimeSlotTest extends Tx_Phpunit_TestCase
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_timeslots');
 
-        /** @var Tx_Seminars_Model_TimeSlot $model */
+        /** @var \Tx_Seminars_Model_TimeSlot $model */
         $model = $this->fixture->find($uid);
         self::assertNull(
             $model->getPlace()
@@ -151,15 +151,15 @@ class Tx_Seminars_Tests_Unit_Mapper_TimeSlotTest extends Tx_Phpunit_TestCase
      */
     public function getPlaceWithPlaceReturnsPlaceInstance()
     {
-        $place = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Place::class)->getNewGhost();
+        $place = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Place::class)->getNewGhost();
         $timeSlotUid = $this->testingFramework->createRecord(
             'tx_seminars_timeslots',
             ['place' => $place->getUid()]
         );
 
-        /** @var Tx_Seminars_Model_TimeSlot $model */
+        /** @var \Tx_Seminars_Model_TimeSlot $model */
         $model = $this->fixture->find($timeSlotUid);
-        self::assertInstanceOf(Tx_Seminars_Model_Place::class, $model->getPlace());
+        self::assertInstanceOf(\Tx_Seminars_Model_Place::class, $model->getPlace());
     }
 
     /*
@@ -173,7 +173,7 @@ class Tx_Seminars_Tests_Unit_Mapper_TimeSlotTest extends Tx_Phpunit_TestCase
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_timeslots');
 
-        /** @var Tx_Seminars_Model_TimeSlot $model */
+        /** @var \Tx_Seminars_Model_TimeSlot $model */
         $model = $this->fixture->find($uid);
         self::assertNull(
             $model->getSeminar()
@@ -185,16 +185,16 @@ class Tx_Seminars_Tests_Unit_Mapper_TimeSlotTest extends Tx_Phpunit_TestCase
      */
     public function getSeminarWithSeminarReturnsEventInstance()
     {
-        $seminar = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getNewGhost();
+        $seminar = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getNewGhost();
         $timeSlotUid = $this->testingFramework->createRecord(
             'tx_seminars_timeslots',
             ['seminar' => $seminar->getUid()]
         );
 
-        /** @var Tx_Seminars_Model_TimeSlot $model */
+        /** @var \Tx_Seminars_Model_TimeSlot $model */
         $model = $this->fixture->find($timeSlotUid);
         self::assertInstanceOf(
-            Tx_Seminars_Model_Event::class,
+            \Tx_Seminars_Model_Event::class,
             $model->getSeminar()
         );
     }

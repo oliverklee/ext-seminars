@@ -6,12 +6,12 @@
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_BagBuilder_Registration extends Tx_Seminars_BagBuilder_Abstract
+class Tx_Seminars_BagBuilder_Registration extends \Tx_Seminars_BagBuilder_Abstract
 {
     /**
      * @var string class name of the bag class that will be built
      */
-    protected $bagClassName = Tx_Seminars_Bag_Registration::class;
+    protected $bagClassName = \Tx_Seminars_Bag_Registration::class;
 
     /**
      * @var string the table name of the bag to build
@@ -34,7 +34,7 @@ class Tx_Seminars_BagBuilder_Registration extends Tx_Seminars_BagBuilder_Abstrac
     public function limitToEvent($eventUid)
     {
         if ($eventUid <= 0) {
-            throw new InvalidArgumentException('The parameter $eventUid must be > 0.', 1333292912);
+            throw new \InvalidArgumentException('The parameter $eventUid must be > 0.', 1333292912);
         }
 
         $this->whereClauseParts['event'] = 'tx_seminars_attendances' .
@@ -117,7 +117,7 @@ class Tx_Seminars_BagBuilder_Registration extends Tx_Seminars_BagBuilder_Abstrac
     public function limitToSeatsAtMost($seats = 0)
     {
         if ($seats < 0) {
-            throw new InvalidArgumentException('The parameter $seats must be >= 0.', 1333292923);
+            throw new \InvalidArgumentException('The parameter $seats must be >= 0.', 1333292923);
         }
 
         if ($seats == 0) {
@@ -136,14 +136,14 @@ class Tx_Seminars_BagBuilder_Registration extends Tx_Seminars_BagBuilder_Abstrac
      * himself, or for which they have been entered as "additional registered
      * persons".
      *
-     * @param Tx_Seminars_Model_FrontEndUser|null $user
+     * @param \Tx_Seminars_Model_FrontEndUser|null $user
      *        the front-end user to limit the bag for, set to NULL to remove the
      *        limitation
      *
      * @return void
      */
     public function limitToAttendee(
-        Tx_Seminars_Model_FrontEndUser $user = null
+        \Tx_Seminars_Model_FrontEndUser $user = null
     ) {
         if ($user === null) {
             unset($this->whereClauseParts['attendee']);
@@ -186,6 +186,6 @@ class Tx_Seminars_BagBuilder_Registration extends Tx_Seminars_BagBuilder_Abstrac
         $this->whereClauseParts['existingUsers'] = 'EXISTS (
 			SELECT * FROM fe_users WHERE ' .
             ' fe_users.uid = tx_seminars_attendances.user' .
-            Tx_Oelib_Db::enableFields('fe_users') . ')';
+            \Tx_Oelib_Db::enableFields('fe_users') . ')';
     }
 }

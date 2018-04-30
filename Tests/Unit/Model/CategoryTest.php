@@ -6,16 +6,16 @@
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Model_CategoryTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Model_CategoryTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Seminars_Model_Category
+     * @var \Tx_Seminars_Model_Category
      */
     private $fixture;
 
     protected function setUp()
     {
-        $this->fixture = new Tx_Seminars_Model_Category();
+        $this->fixture = new \Tx_Seminars_Model_Category();
     }
 
     ///////////////////////////////

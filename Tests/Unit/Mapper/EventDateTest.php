@@ -5,23 +5,23 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Oelib_TestingFramework
+     * @var \Tx_Oelib_TestingFramework
      */
     private $testingFramework;
 
     /**
-     * @var Tx_Seminars_Mapper_Event
+     * @var \Tx_Seminars_Mapper_Event
      */
     private $fixture;
 
     protected function setUp()
     {
-        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
-        $this->fixture = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
+        $this->fixture = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
     }
 
     protected function tearDown()
@@ -79,7 +79,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
         /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->fixture->getLoadedTestingModel(
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -96,11 +96,11 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
-        $category = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Category::class)
+        $category = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Category::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -109,9 +109,9 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
             'categories'
         );
 
-        /** @var Tx_Seminars_Model_Event $model */
+        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->fixture->find($uid);
-        self::assertInstanceOf(Tx_Seminars_Model_Category::class, $model->getCategories()->first());
+        self::assertInstanceOf(\Tx_Seminars_Model_Category::class, $model->getCategories()->first());
     }
 
     /**
@@ -123,11 +123,11 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
-        $category = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Category::class)
+        $category = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Category::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -136,7 +136,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
             'categories'
         );
 
-        /** @var Tx_Seminars_Model_Event $model */
+        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->fixture->find($uid);
         self::assertEquals(
             $category->getUid(),
@@ -153,11 +153,11 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
      */
     public function getEventTypeForEventDateWithoutEventTypeReturnsNull()
     {
-        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $topic = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->fixture->getLoadedTestingModel(
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topic,
             ]
         );
@@ -170,13 +170,13 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
      */
     public function getEventTypeForEventDateWithEventTypeReturnsEventTypeInstance()
     {
-        $eventType = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_EventType::class)->getLoadedTestingModel([]);
-        $topic = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class)
+        $eventType = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_EventType::class)->getLoadedTestingModel([]);
+        $topic = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
             ->getLoadedTestingModel(['event_type' => $eventType->getUid()]);
         /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->fixture->getLoadedTestingModel(
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topic->getUid(),
             ]
         );
@@ -197,7 +197,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
         /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->fixture->getLoadedTestingModel(
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -210,8 +210,8 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
      */
     public function getPaymentMethodsForEventDateWithOnePaymentMethodReturnsListOfPaymentMethods()
     {
-        $paymentMethod = Tx_Oelib_MapperRegistry::
-            get(Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
+        $paymentMethod = \Tx_Oelib_MapperRegistry::
+            get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             ['payment_methods' => 1]
@@ -219,7 +219,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -229,9 +229,9 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
             $paymentMethod->getUid()
         );
 
-        /** @var Tx_Seminars_Model_Event $model */
+        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->fixture->find($uid);
-        self::assertInstanceOf(Tx_Seminars_Model_PaymentMethod::class, $model->getPaymentMethods()->first());
+        self::assertInstanceOf(\Tx_Seminars_Model_PaymentMethod::class, $model->getPaymentMethods()->first());
     }
 
     /**
@@ -239,8 +239,8 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
      */
     public function getPaymentMethodsForEventDateWithOnePaymentMethodReturnsOnePaymentMethod()
     {
-        $paymentMethod = Tx_Oelib_MapperRegistry::
-            get(Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
+        $paymentMethod = \Tx_Oelib_MapperRegistry::
+            get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             ['payment_methods' => 1]
@@ -248,7 +248,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -258,7 +258,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
             $paymentMethod->getUid()
         );
 
-        /** @var Tx_Seminars_Model_Event $model */
+        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->fixture->find($uid);
         self::assertEquals(
             $paymentMethod->getUid(),
@@ -279,7 +279,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
         /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->fixture->getLoadedTestingModel(
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -296,12 +296,12 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
-        $targetGroup = Tx_Oelib_MapperRegistry::
-            get(Tx_Seminars_Mapper_TargetGroup::class)->getNewGhost();
+        $targetGroup = \Tx_Oelib_MapperRegistry::
+            get(\Tx_Seminars_Mapper_TargetGroup::class)->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $topicUid,
@@ -309,10 +309,10 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
             'target_groups'
         );
 
-        /** @var Tx_Seminars_Model_Event $model */
+        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->fixture->find($uid);
         self::assertInstanceOf(
-            Tx_Seminars_Model_TargetGroup::class,
+            \Tx_Seminars_Model_TargetGroup::class,
             $model->getTargetGroups()->first()
         );
     }
@@ -326,12 +326,12 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
-        $targetGroup = Tx_Oelib_MapperRegistry::
-            get(Tx_Seminars_Mapper_TargetGroup::class)->getNewGhost();
+        $targetGroup = \Tx_Oelib_MapperRegistry::
+            get(\Tx_Seminars_Mapper_TargetGroup::class)->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $topicUid,
@@ -339,7 +339,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
             'target_groups'
         );
 
-        /** @var Tx_Seminars_Model_Event $model */
+        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->fixture->find($uid);
         self::assertEquals(
             $targetGroup->getUid(),
@@ -360,7 +360,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
         /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->fixture->getLoadedTestingModel(
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -377,11 +377,11 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
-        $checkbox = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Checkbox::class)
+        $checkbox = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Checkbox::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -390,9 +390,9 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
             'checkboxes'
         );
 
-        /** @var Tx_Seminars_Model_Event $model */
+        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->fixture->find($uid);
-        self::assertInstanceOf(Tx_Seminars_Model_Checkbox::class, $model->getCheckboxes()->first());
+        self::assertInstanceOf(\Tx_Seminars_Model_Checkbox::class, $model->getCheckboxes()->first());
     }
 
     /**
@@ -404,11 +404,11 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
-        $checkbox = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Checkbox::class)
+        $checkbox = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Checkbox::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -417,7 +417,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
             'checkboxes'
         );
 
-        /** @var Tx_Seminars_Model_Event $model */
+        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->fixture->find($uid);
         self::assertEquals(
             $checkbox->getUid(),
@@ -436,12 +436,12 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->fixture->getLoadedTestingModel(
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -456,12 +456,12 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -473,10 +473,10 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
             'requirements'
         );
 
-        /** @var Tx_Seminars_Model_Event $model */
+        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->fixture->find($uid);
         self::assertInstanceOf(
-            Tx_Seminars_Model_Event::class,
+            \Tx_Seminars_Model_Event::class,
             $model->getRequirements()->first()
         );
     }
@@ -488,12 +488,12 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -505,7 +505,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
             'requirements'
         );
 
-        /** @var Tx_Seminars_Model_Event $model */
+        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->fixture->find($uid);
         self::assertEquals(
             $event->getUid(),
@@ -524,12 +524,12 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->fixture->getLoadedTestingModel(
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
             ]
         );
@@ -544,16 +544,16 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $relatedUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $relatedUid,
             ]
         );
@@ -564,10 +564,10 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
             'dependencies'
         );
 
-        /** @var Tx_Seminars_Model_Event $model */
+        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->fixture->find($uid);
         self::assertInstanceOf(
-            Tx_Seminars_Model_Event::class,
+            \Tx_Seminars_Model_Event::class,
             $model->getDependencies()->first()
         );
     }
@@ -579,16 +579,16 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $relatedUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['object_type' => Tx_Seminars_Model_Event::TYPE_TOPIC]
+            ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $relatedUid,
             ]
         );
@@ -599,7 +599,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends Tx_Phpunit_TestCase
             'dependencies'
         );
 
-        /** @var Tx_Seminars_Model_Event $model */
+        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->fixture->find($uid);
         self::assertEquals(
             $topicUid,

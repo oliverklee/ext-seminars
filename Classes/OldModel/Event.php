@@ -9,14 +9,14 @@ use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
+class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 {
     /**
      * the same as the class name
      *
      * @var string
      */
-    public $prefixId = Tx_Seminars_OldModel_Event::class;
+    public $prefixId = \Tx_Seminars_OldModel_Event::class;
 
     /**
      * @var string the name of the SQL table this class corresponds to
@@ -56,7 +56,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * This will be NULL if we are not a date record.
      *
-     * @var Tx_Seminars_OldModel_Event
+     * @var \Tx_Seminars_OldModel_Event
      */
     private $topic = null;
 
@@ -374,11 +374,11 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      * links. Returns a localized string "will be announced" if the seminar has
      * no places set.
      *
-     * @param Tx_Oelib_TemplateHelper $plugin the current FE plugin
+     * @param \Tx_Oelib_TemplateHelper $plugin the current FE plugin
      *
      * @return string our places description (or '' if there is an error)
      */
-    public function getPlaceWithDetails(Tx_Oelib_TemplateHelper $plugin)
+    public function getPlaceWithDetails(\Tx_Oelib_TemplateHelper $plugin)
     {
         if (!$this->hasPlace()) {
             $plugin->setMarker(
@@ -469,7 +469,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
 
         $countries = [];
 
-        $countryData = Tx_Oelib_Db::selectMultiple(
+        $countryData = \Tx_Oelib_Db::selectMultiple(
             'country',
             'tx_seminars_sites LEFT JOIN ' .
                 'tx_seminars_seminars_place_mm ON tx_seminars_sites' .
@@ -479,7 +479,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
                 'tx_seminars_seminars.uid',
             'tx_seminars_seminars.uid = ' . $this->getUid() .
                 ' AND tx_seminars_sites.country <> ""' .
-                Tx_Oelib_Db::enableFields('tx_seminars_sites'),
+                \Tx_Oelib_Db::enableFields('tx_seminars_sites'),
             'country'
         );
 
@@ -571,7 +571,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
         $cities = [];
 
         // Fetches the city name from the corresponding place record(s).
-        $cityData = Tx_Oelib_Db::selectMultiple(
+        $cityData = \Tx_Oelib_Db::selectMultiple(
             'city',
             'tx_seminars_sites LEFT JOIN tx_seminars_seminars_place_mm' .
                 ' ON tx_seminars_sites.uid = ' .
@@ -604,13 +604,13 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
         $isoCode = $GLOBALS['TYPO3_DB']->quoteStr($isoCode, 'static_countries');
 
         try {
-            $dbResultRow = Tx_Oelib_Db::selectSingle(
+            $dbResultRow = \Tx_Oelib_Db::selectSingle(
                 'cn_short_local',
                 'static_countries',
                 'cn_iso_2 = "' . $isoCode . '"'
             );
             $countryName = $dbResultRow['cn_short_local'];
-        } catch (Tx_Oelib_Exception_EmptyQueryResult $exception) {
+        } catch (\Tx_Oelib_Exception_EmptyQueryResult $exception) {
             $countryName = '';
         }
 
@@ -682,11 +682,11 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     protected function getPlacesAsArray()
     {
-        return Tx_Oelib_Db::selectMultiple(
+        return \Tx_Oelib_Db::selectMultiple(
             'title, address, zip, city, country, homepage, directions',
             'tx_seminars_sites, tx_seminars_seminars_place_mm',
             'uid_local = ' . $this->getUid() . ' AND uid = uid_foreign' .
-                Tx_Oelib_Db::enableFields('tx_seminars_sites'),
+                \Tx_Oelib_Db::enableFields('tx_seminars_sites'),
             '',
             'sorting ASC'
         );
@@ -709,11 +709,11 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
 
         $result = [];
 
-        $places = Tx_Oelib_Db::selectMultiple(
+        $places = \Tx_Oelib_Db::selectMultiple(
             'title',
             'tx_seminars_sites, tx_seminars_seminars_place_mm',
             'uid_local = ' . $this->getUid() . ' AND uid = uid_foreign' .
-                Tx_Oelib_Db::enableFields('tx_seminars_sites')
+                \Tx_Oelib_Db::enableFields('tx_seminars_sites')
         );
         foreach ($places as $place) {
             $result[] = $place['title'];
@@ -728,7 +728,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      * @param string $speakerRelation
      *        the relation in which the speakers stand to this event: "speakers" (default), "partners", "tutors" or "leaders"
      *
-     * @return Tx_Seminars_Bag_Speaker a speakerbag object
+     * @return \Tx_Seminars_Bag_Speaker a speakerbag object
      */
     private function getSpeakerBag($speakerRelation = 'speakers')
     {
@@ -750,7 +750,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
         }
 
         return GeneralUtility::makeInstance(
-            Tx_Seminars_Bag_Speaker::class,
+            \Tx_Seminars_Bag_Speaker::class,
             $mmTable . '.uid_local = ' . $this->getUid() . ' AND ' . 'tx_seminars_speakers.uid = ' . $mmTable . '.uid_foreign',
             $mmTable,
             'sorting'
@@ -782,7 +782,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
 
         $result = '';
 
-        /** @var Tx_Seminars_OldModel_Speaker $speaker */
+        /** @var \Tx_Seminars_OldModel_Speaker $speaker */
         foreach ($this->getSpeakerBag($speakerRelation) as $speaker) {
             $name = $speaker->getLinkedTitle($plugin);
             if ($speaker->hasOrganization()) {
@@ -829,7 +829,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
 
         $result = '';
 
-        /** @var Tx_Seminars_OldModel_Speaker $speaker */
+        /** @var \Tx_Seminars_OldModel_Speaker $speaker */
         foreach ($this->getSpeakerBag($speakerRelation) as $speaker) {
             $result .= $speaker->getTitle();
             if ($speaker->hasOrganization()) {
@@ -856,7 +856,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      * As speakers can be related to this event as speakers, partners, tutors or
      * leaders, the type relation can be specified. The default is "speakers".
      *
-     * @param Tx_Oelib_TemplateHelper $plugin
+     * @param \Tx_Oelib_TemplateHelper $plugin
      * @param string $speakerRelation
      *        the relation in which the speakers stand to this event:
      *        "speakers" (default), "partners", "tutors" or "leaders"
@@ -864,7 +864,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      * @return string our speakers list, will be empty if an error occurred
      *                during processing
      */
-    public function getSpeakersShort(Tx_Oelib_TemplateHelper $plugin, $speakerRelation = 'speakers')
+    public function getSpeakersShort(\Tx_Oelib_TemplateHelper $plugin, $speakerRelation = 'speakers')
     {
         if (!$this->hasSpeakersOfType($speakerRelation)) {
             return '';
@@ -872,7 +872,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
 
         $result = [];
 
-        /** @var Tx_Seminars_OldModel_Speaker $speaker */
+        /** @var \Tx_Seminars_OldModel_Speaker $speaker */
         foreach ($this->getSpeakerBag($speakerRelation) as $speaker) {
             $result[] = $speaker->getLinkedTitle($plugin);
         }
@@ -1034,13 +1034,13 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
             $result .= '_single';
         }
 
-        /** @var Tx_Seminars_OldModel_Speaker $speaker */
+        /** @var \Tx_Seminars_OldModel_Speaker $speaker */
         foreach ($speakers as $speaker) {
             switch ($speaker->getGender()) {
-                case Tx_Seminars_OldModel_Speaker::GENDER_MALE:
+                case \Tx_Seminars_OldModel_Speaker::GENDER_MALE:
                     $hasMaleSpeakers = true;
                     break;
-                case Tx_Seminars_OldModel_Speaker::GENDER_FEMALE:
+                case \Tx_Seminars_OldModel_Speaker::GENDER_FEMALE:
                     $hasFemaleSpeakers = true;
                     break;
                 default:
@@ -1156,10 +1156,10 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function formatPrice($value)
     {
-        /** @var Tx_Oelib_ViewHelper_Price $priceViewHelper */
-        $priceViewHelper = GeneralUtility::makeInstance(Tx_Oelib_ViewHelper_Price::class);
+        /** @var \Tx_Oelib_ViewHelper_Price $priceViewHelper */
+        $priceViewHelper = GeneralUtility::makeInstance(\Tx_Oelib_ViewHelper_Price::class);
         $priceViewHelper->setCurrencyFromIsoAlpha3Code(
-            Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')->getAsString('currency')
+            \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')->getAsString('currency')
         );
         $priceViewHelper->setValue((float)$value);
 
@@ -1472,14 +1472,14 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
             return [];
         }
 
-        $rows = Tx_Oelib_Db::selectMultiple(
+        $rows = \Tx_Oelib_Db::selectMultiple(
             'title',
             'tx_seminars_payment_methods, tx_seminars_seminars_payment_methods_mm',
             'tx_seminars_payment_methods.uid = ' .
                 'tx_seminars_seminars_payment_methods_mm.uid_foreign ' .
                 'AND tx_seminars_seminars_payment_methods_mm.uid_local = ' .
                 $this->getTopicUid() .
-                Tx_Oelib_Db::enableFields('tx_seminars_payment_methods'),
+                \Tx_Oelib_Db::enableFields('tx_seminars_payment_methods'),
             '',
             'tx_seminars_seminars_payment_methods_mm.sorting'
         );
@@ -1505,14 +1505,14 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
             return '';
         }
 
-        $rows = Tx_Oelib_Db::selectMultiple(
+        $rows = \Tx_Oelib_Db::selectMultiple(
             'title, description',
             'tx_seminars_payment_methods, tx_seminars_seminars_payment_methods_mm',
             'tx_seminars_payment_methods.uid = ' .
                 'tx_seminars_seminars_payment_methods_mm.uid_foreign ' .
                 'AND tx_seminars_seminars_payment_methods_mm.uid_local = ' .
                 $this->getTopicUid() .
-                Tx_Oelib_Db::enableFields('tx_seminars_payment_methods'),
+                \Tx_Oelib_Db::enableFields('tx_seminars_payment_methods'),
             '',
             'tx_seminars_seminars_payment_methods_mm.sorting'
         );
@@ -1561,7 +1561,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
         $dbResultPaymentMethod = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
             'title, description',
             'tx_seminars_payment_methods',
-            'uid = ' . $paymentMethodUid . Tx_Oelib_Db::enableFields('tx_seminars_payment_methods')
+            'uid = ' . $paymentMethodUid . \Tx_Oelib_Db::enableFields('tx_seminars_payment_methods')
         );
         if ($dbResultPaymentMethod === false) {
             return '';
@@ -1603,7 +1603,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
         $dbResultPaymentMethod = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
             'title',
             'tx_seminars_payment_methods',
-            'uid = ' . $paymentMethodUid . Tx_Oelib_Db::enableFields('tx_seminars_payment_methods')
+            'uid = ' . $paymentMethodUid . \Tx_Oelib_Db::enableFields('tx_seminars_payment_methods')
         );
         if ($dbResultPaymentMethod === false) {
             return '';
@@ -1707,7 +1707,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string the type of this event, will be empty if this event does not have a type
      *
-     * @throws Tx_Oelib_Exception_Database
+     * @throws \Tx_Oelib_Exception_Database
      */
     public function getEventType()
     {
@@ -1719,18 +1719,18 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
             'title',
             'tx_seminars_event_types',
             'uid = ' . $this->getTopicInteger('event_type') .
-                Tx_Oelib_Db::enableFields('tx_seminars_event_types'),
+                \Tx_Oelib_Db::enableFields('tx_seminars_event_types'),
             '',
             '',
             '1'
         );
 
         if (!$dbResult) {
-            throw new Tx_Oelib_Exception_Database();
+            throw new \Tx_Oelib_Exception_Database();
         }
         $dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
         if (!$dbResultRow) {
-            throw new Tx_Oelib_Exception_Database();
+            throw new \Tx_Oelib_Exception_Database();
         }
 
         return $dbResultRow['title'];
@@ -1746,7 +1746,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
     public function setEventType($eventType)
     {
         if ($eventType < 0) {
-            throw new InvalidArgumentException('$eventType must be >= 0.', 1333291840);
+            throw new \InvalidArgumentException('$eventType must be >= 0.', 1333291840);
         }
 
         $this->setRecordPropertyInteger('event_type', $eventType);
@@ -1961,7 +1961,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
             'tx_seminars_seminars_target_groups_mm.uid_local = ' .
                 $this->getTopicUid() . ' AND tx_seminars_target_groups' .
                 '.uid = tx_seminars_seminars_target_groups_mm.uid_foreign' .
-                Tx_Oelib_Db::enableFields('tx_seminars_target_groups'),
+                \Tx_Oelib_Db::enableFields('tx_seminars_target_groups'),
             '',
             'tx_seminars_seminars_target_groups_mm.sorting'
         );
@@ -1996,7 +1996,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
                 $this->getTopicUid() . ' AND ' .
                 'tx_seminars_target_groups.uid = ' .
                 'tx_seminars_seminars_target_groups_mm.uid_foreign' .
-                Tx_Oelib_Db::enableFields('tx_seminars_target_groups'),
+                \Tx_Oelib_Db::enableFields('tx_seminars_target_groups'),
             '',
             'tx_seminars_seminars_target_groups_mm.sorting'
         );
@@ -2188,18 +2188,18 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      * Creates an organizerbag object and returns it.
      * Throws an exception if there are no organizers related to this event.
      *
-     * @return Tx_Seminars_Bag_Organizer an organizerbag object
+     * @return \Tx_Seminars_Bag_Organizer an organizerbag object
      *
-     * @throws BadMethodCallException
+     * @throws \BadMethodCallException
      */
     public function getOrganizerBag()
     {
         if (!$this->hasOrganizers()) {
-            throw new BadMethodCallException('There are no organizers related to this event.', 1333291857);
+            throw new \BadMethodCallException('There are no organizers related to this event.', 1333291857);
         }
 
-        /** @var $builder Tx_Seminars_BagBuilder_Organizer */
-        $builder = GeneralUtility::makeInstance(Tx_Seminars_BagBuilder_Organizer::class);
+        /** @var $builder \Tx_Seminars_BagBuilder_Organizer */
+        $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Organizer::class);
         $builder->limitToEvent($this->getUid());
 
         return $builder->build();
@@ -2208,7 +2208,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Returns the first organizer.
      *
-     * @return Tx_Seminars_OldModel_Organizer|null
+     * @return \Tx_Seminars_OldModel_Organizer|null
      */
     public function getFirstOrganizer()
     {
@@ -2239,7 +2239,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
         $result = [];
 
         $organizers = $this->getOrganizerBag();
-        /** @var Tx_Seminars_OldModel_Organizer $organizer */
+        /** @var \Tx_Seminars_OldModel_Organizer $organizer */
         foreach ($organizers as $organizer) {
             $result[] = $plugin->cObj->getTypoLink(
                 htmlspecialchars($organizer->getName()),
@@ -2266,7 +2266,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
         $result = [];
 
         $organizers = $this->getOrganizerBag();
-        /** @var Tx_Seminars_OldModel_Organizer $organizer */
+        /** @var \Tx_Seminars_OldModel_Organizer $organizer */
         foreach ($organizers as $organizer) {
             $result[] = $organizer->getName() . ($organizer->hasHomepage() ? ', ' . $organizer->getHomepage() : '');
         }
@@ -2290,7 +2290,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
         $result = [];
 
         $organizers = $this->getOrganizerBag();
-        /** @var Tx_Seminars_OldModel_Organizer $organizer */
+        /** @var \Tx_Seminars_OldModel_Organizer $organizer */
         foreach ($organizers as $organizer) {
             $result[] = '"' . $organizer->getName() . '"' . ' <' . $organizer->getEMailAddress() . '>';
         }
@@ -2313,7 +2313,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
         $result = [];
 
         $organizers = $this->getOrganizerBag();
-        /** @var Tx_Seminars_OldModel_Organizer $organizer */
+        /** @var \Tx_Seminars_OldModel_Organizer $organizer */
         foreach ($organizers as $organizer) {
             $result[] = $organizer->getEMailAddress();
         }
@@ -2336,7 +2336,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
         $result = [];
 
         $organizers = $this->getOrganizerBag();
-        /** @var Tx_Seminars_OldModel_Organizer $organizer */
+        /** @var \Tx_Seminars_OldModel_Organizer $organizer */
         foreach ($organizers as $organizer) {
             $emailFooter = $organizer->getEmailFooter();
             if ($emailFooter !== '') {
@@ -2386,15 +2386,15 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
         }
         $result = [];
 
-        /** @var Tx_Seminars_Bag_Organizer $organizerBag */
+        /** @var \Tx_Seminars_Bag_Organizer $organizerBag */
         $organizerBag = GeneralUtility::makeInstance(
-            Tx_Seminars_Bag_Organizer::class,
+            \Tx_Seminars_Bag_Organizer::class,
             'tx_seminars_seminars_organizing_partners_mm.uid_local = ' . $this->getUid() . ' AND ' .
                 'tx_seminars_seminars_organizing_partners_mm.uid_foreign = tx_seminars_organizers.uid',
             'tx_seminars_seminars_organizing_partners_mm'
         );
 
-        /** @var Tx_Seminars_OldModel_Organizer $organizer */
+        /** @var \Tx_Seminars_OldModel_Organizer $organizer */
         foreach ($organizerBag as $organizer) {
             $result[] = $plugin->cObj->getTypoLink(
                 $organizer->getName(),
@@ -2569,7 +2569,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
             'COUNT(*) AS num',
             'tx_seminars_attendances',
             'seminar = ' . $this->getUid() . ' AND user = ' . $feUserUid .
-                Tx_Oelib_Db::enableFields('tx_seminars_attendances')
+                \Tx_Oelib_Db::enableFields('tx_seminars_attendances')
         );
 
         if ($dbResult) {
@@ -2609,8 +2609,8 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
     {
         $result = false;
         $isDefaultVip = ($defaultEventVipsFeGroupID != 0)
-            && Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()
-            && Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser()
+            && \Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()
+            && \Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser()
                 ->hasGroupMembership($defaultEventVipsFeGroupID);
 
         if ($isDefaultVip) {
@@ -2742,9 +2742,9 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
         $hasListPid = ($registrationsListPID > 0);
         $hasVipListPid = ($registrationsVipListPID > 0);
 
-        $loginManager = Tx_Oelib_FrontEndLoginManager::getInstance();
+        $loginManager = \Tx_Oelib_FrontEndLoginManager::getInstance();
         $currentUserUid = $loginManager->isLoggedIn()
-            ? $loginManager->getLoggedInUser(Tx_Seminars_Mapper_FrontEndUser::class)->getUid() : 0;
+            ? $loginManager->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class)->getUid() : 0;
 
         switch ($whichPlugin) {
             case 'seminar_list':
@@ -2805,12 +2805,12 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
         $registrationsVipListPID = 0,
         $defaultEventVipsFeGroupID = 0
     ) {
-        $loginManager = Tx_Oelib_FrontEndLoginManager::getInstance();
+        $loginManager = \Tx_Oelib_FrontEndLoginManager::getInstance();
         if (!$loginManager->isLoggedIn()) {
             return false;
         }
 
-        $currentUserUid = $loginManager->getLoggedInUser(Tx_Seminars_Mapper_FrontEndUser::class)->getUid();
+        $currentUserUid = $loginManager->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class)->getUid();
         $hasListPid = ($registrationsListPID > 0);
         $hasVipListPid = ($registrationsVipListPID > 0);
 
@@ -2865,12 +2865,12 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
         $registrationsVipListPID = 0,
         $defaultEventVipsFeGroupID = 0
     ) {
-        $loginManager = Tx_Oelib_FrontEndLoginManager::getInstance();
+        $loginManager = \Tx_Oelib_FrontEndLoginManager::getInstance();
         $isLoggedIn = $loginManager->isLoggedIn();
 
         $hasListPid = ($registrationsListPID > 0);
         $hasVipListPid = ($registrationsVipListPID > 0);
-        $currentUserUid = $isLoggedIn ? $loginManager->getLoggedInUser(Tx_Seminars_Mapper_FrontEndUser::class)->getUid() : 0;
+        $currentUserUid = $isLoggedIn ? $loginManager->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class)->getUid() : 0;
 
         switch ($whichPlugin) {
             case 'csv_export':
@@ -2939,7 +2939,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function canSomebodyRegister()
     {
-        $registrationManager = Tx_Seminars_Service_RegistrationManager::getInstance();
+        $registrationManager = \Tx_Seminars_Service_RegistrationManager::getInstance();
         $allowsRegistrationByDate
             = $registrationManager->allowsRegistrationByDate($this);
         $allowsRegistrationBySeats
@@ -2965,7 +2965,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
     public function canSomebodyRegisterMessage()
     {
         $message = '';
-        $registrationManager = Tx_Seminars_Service_RegistrationManager::getInstance();
+        $registrationManager = \Tx_Seminars_Service_RegistrationManager::getInstance();
 
         if (!$this->needsRegistration()) {
             $message = $this->translate('message_noRegistrationNecessary');
@@ -2996,7 +2996,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function isCanceled()
     {
-        return $this->getStatus() == Tx_Seminars_Model_Event::STATUS_CANCELED;
+        return $this->getStatus() == \Tx_Seminars_Model_Event::STATUS_CANCELED;
     }
 
     /**
@@ -3109,7 +3109,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
             $queryParameters .
                 ' AND seminar = ' . $this->getUid() .
                 ' AND seats = 0' .
-                Tx_Oelib_Db::enableFields('tx_seminars_attendances')
+                \Tx_Oelib_Db::enableFields('tx_seminars_attendances')
         );
 
         if ($dbResultSingleSeats) {
@@ -3125,7 +3125,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
             $queryParameters .
                 ' AND seminar = ' . $this->getUid() .
                 ' AND seats <> 0' .
-                Tx_Oelib_Db::enableFields('tx_seminars_attendances')
+                \Tx_Oelib_Db::enableFields('tx_seminars_attendances')
         );
 
         if ($dbResultMultiSeats) {
@@ -3143,7 +3143,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * In case of an error, the return value will be NULL.
      *
-     * @return Tx_Seminars_OldModel_Event the topic object (will be NULL if an error
+     * @return \Tx_Seminars_OldModel_Event the topic object (will be NULL if an error
      *                             has occured)
      */
     private function retrieveTopic()
@@ -3177,7 +3177,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
     public function isEventTopic()
     {
         return $this->getRecordPropertyInteger('object_type')
-            == Tx_Seminars_Model_Event::TYPE_TOPIC;
+            == \Tx_Seminars_Model_Event::TYPE_TOPIC;
     }
 
     /**
@@ -3478,7 +3478,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
             // uid_local and uid_foreign are from the m:m table;
             // uid and sorting are from the foreign table.
             'uid_local=' . $uid . ' AND uid_foreign=uid' .
-                Tx_Oelib_Db::enableFields($foreignTable),
+                \Tx_Oelib_Db::enableFields($foreignTable),
             '',
             'sorting'
         );
@@ -3551,7 +3551,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Gets this event's owner (the FE user who has created this event).
      *
-     * @return Tx_Oelib_Model_FrontEndUser the owner, will be null if the event has no owner
+     * @return \Tx_Oelib_Model_FrontEndUser the owner, will be null if the event has no owner
      */
     public function getOwner()
     {
@@ -3559,8 +3559,8 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
             return null;
         }
 
-        /** @var Tx_Oelib_Mapper_FrontEndUser $mapper */
-        $mapper = Tx_Oelib_MapperRegistry::get(Tx_Oelib_Mapper_FrontEndUser::class);
+        /** @var \Tx_Oelib_Mapper_FrontEndUser $mapper */
+        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_FrontEndUser::class);
         return $mapper->find($this->getRecordPropertyInteger('owner_feuser'));
     }
 
@@ -3583,13 +3583,13 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function isOwnerFeUser()
     {
-        $loginManager = Tx_Oelib_FrontEndLoginManager::getInstance();
+        $loginManager = \Tx_Oelib_FrontEndLoginManager::getInstance();
         if (!$loginManager->isLoggedIn()) {
             return false;
         }
 
         return $this->getRecordPropertyInteger('owner_feuser')
-            === $loginManager->getLoggedInUser(Tx_Seminars_Mapper_FrontEndUser::class)->getUid();
+            === $loginManager->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class)->getUid();
     }
 
     /**
@@ -3954,8 +3954,8 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
                     'tx_seminars_attendances.seminar' .
                 ' AND tx_seminars_attendances.user = ' . $feUserUid;
 
-            /** @var Tx_Seminars_Bag_Event $seminarBag */
-            $seminarBag = GeneralUtility::makeInstance(Tx_Seminars_Bag_Event::class, $queryWhere, $additionalTables);
+            /** @var \Tx_Seminars_Bag_Event $seminarBag */
+            $seminarBag = GeneralUtility::makeInstance(\Tx_Seminars_Bag_Event::class, $queryWhere, $additionalTables);
 
             // One blocking event is enough.
             $result = !$seminarBag->isEmpty();
@@ -4036,7 +4036,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
         $result = '';
 
         if ($this->getRecordPropertyInteger('object_type')
-            != Tx_Seminars_Model_Event::TYPE_TOPIC
+            != \Tx_Seminars_Model_Event::TYPE_TOPIC
         ) {
             $result = parent::getDate($dash);
         }
@@ -4203,7 +4203,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
             'MIN(tx_seminars_timeslots.begin_date) AS begin_date',
             'tx_seminars_timeslots',
             'tx_seminars_timeslots.seminar = ' . $this->getUid() .
-                Tx_Oelib_Db::enableFields('tx_seminars_timeslots')
+                \Tx_Oelib_Db::enableFields('tx_seminars_timeslots')
         );
 
         if ($dbResult) {
@@ -4234,7 +4234,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
             'tx_seminars_timeslots.end_date AS end_date',
             'tx_seminars_timeslots',
             'tx_seminars_timeslots.seminar = ' . $this->getUid() .
-                Tx_Oelib_Db::enableFields('tx_seminars_timeslots'),
+                \Tx_Oelib_Db::enableFields('tx_seminars_timeslots'),
             '',
             'tx_seminars_timeslots.begin_date DESC',
             '0,1'
@@ -4270,7 +4270,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
         }
 
         // Removes all place relations of the current event.
-        Tx_Oelib_Db::delete(
+        \Tx_Oelib_Db::delete(
             'tx_seminars_seminars_place_mm',
             'tx_seminars_seminars_place_mm.uid_local = ' . $this->getUid()
         );
@@ -4278,7 +4278,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
         // Creates an array with all place UIDs which should be related to this
         // event.
         $placesOfTimeSlots = [];
-        /** @var Tx_Seminars_OldModel_TimeSlot $timeSlot */
+        /** @var \Tx_Seminars_OldModel_TimeSlot $timeSlot */
         foreach ($timeSlotBag as $timeSlot) {
             if ($timeSlot->hasPlace()) {
                 $placesOfTimeSlots[] = $timeSlot->getPlace();
@@ -4294,13 +4294,13 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Creates a time slot bag for the time slots associated with this event.
      *
-     * @return Tx_Seminars_Bag_TimeSlot bag with this event's time slots, may be empty
+     * @return \Tx_Seminars_Bag_TimeSlot bag with this event's time slots, may be empty
      */
     private function createTimeSlotBag()
     {
-        /** @var Tx_Seminars_Bag_TimeSlot $bag */
+        /** @var \Tx_Seminars_Bag_TimeSlot $bag */
         $bag = GeneralUtility::makeInstance(
-            Tx_Seminars_Bag_TimeSlot::class,
+            \Tx_Seminars_Bag_TimeSlot::class,
             'tx_seminars_timeslots.seminar = ' . $this->getUid() .
                 ' AND tx_seminars_timeslots.place > 0',
             '',
@@ -4327,16 +4327,16 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
     {
         $result = [];
 
-        /** @var Tx_Seminars_Bag_TimeSlot $timeSlotBag */
+        /** @var \Tx_Seminars_Bag_TimeSlot $timeSlotBag */
         $timeSlotBag = GeneralUtility::makeInstance(
-            Tx_Seminars_Bag_TimeSlot::class,
+            \Tx_Seminars_Bag_TimeSlot::class,
             'tx_seminars_timeslots.seminar = ' . $this->getUid(),
             '',
             '',
             'tx_seminars_timeslots.begin_date ASC'
         );
 
-        /** @var Tx_Seminars_OldModel_TimeSlot $timeSlot */
+        /** @var \Tx_Seminars_OldModel_TimeSlot $timeSlot */
         foreach ($timeSlotBag as $timeSlot) {
             $result[] = [
                 'uid' => $timeSlot->getUid(),
@@ -4390,8 +4390,8 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
             return [];
         }
 
-        /** @var Tx_Seminars_BagBuilder_Category $builder */
-        $builder = GeneralUtility::makeInstance(Tx_Seminars_BagBuilder_Category::class);
+        /** @var \Tx_Seminars_BagBuilder_Category $builder */
+        $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Category::class);
         $builder->limitToEvents($this->getTopicUid());
         $builder->sortByRelationOrder();
         $bag = $builder->build();
@@ -4540,7 +4540,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
 
         $imageConfiguration = [
             'altText' => '',
-            'file' => Tx_Seminars_FrontEnd_AbstractView::UPLOAD_PATH . $this->getImage(),
+            'file' => \Tx_Seminars_FrontEnd_AbstractView::UPLOAD_PATH . $this->getImage(),
             'file.' => [
                 'width' => $maxImageWidth,
                 'height' => $maxImageHeight,
@@ -4590,13 +4590,13 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      * Returns the required events for the current event topic, ie. topics that
      * are prerequisites for this event.
      *
-     * @return Tx_Seminars_Bag_Event the required events, will be empty if this
+     * @return \Tx_Seminars_Bag_Event the required events, will be empty if this
      *                               event has no required events
      */
     public function getRequirements()
     {
-        /** @var Tx_Seminars_BagBuilder_Event $builder */
-        $builder = GeneralUtility::makeInstance(Tx_Seminars_BagBuilder_Event::class);
+        /** @var \Tx_Seminars_BagBuilder_Event $builder */
+        $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Event::class);
         $builder->limitToRequiredEventTopics($this->getTopicUid());
 
         return $builder->build();
@@ -4606,13 +4606,13 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      * Returns the depending events for the current event topic, ie. topics for
      * which this event is a prerequisite.
      *
-     * @return Tx_Seminars_Bag_Event the depending events, will be empty if
+     * @return \Tx_Seminars_Bag_Event the depending events, will be empty if
      *                               this event has no depending events
      */
     public function getDependencies()
     {
-        /** @var Tx_Seminars_BagBuilder_Event $builder */
-        $builder = GeneralUtility::makeInstance(Tx_Seminars_BagBuilder_Event::class);
+        /** @var \Tx_Seminars_BagBuilder_Event $builder */
+        $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Event::class);
         $builder->limitToDependingEventTopics($this->getTopicUid());
 
         return $builder->build();
@@ -4625,7 +4625,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function isConfirmed()
     {
-        return $this->getStatus() == Tx_Seminars_Model_Event::STATUS_CONFIRMED;
+        return $this->getStatus() == \Tx_Seminars_Model_Event::STATUS_CONFIRMED;
     }
 
     /**
@@ -4635,7 +4635,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function isPlanned()
     {
-        return $this->getStatus() == Tx_Seminars_Model_Event::STATUS_PLANNED;
+        return $this->getStatus() == \Tx_Seminars_Model_Event::STATUS_PLANNED;
     }
 
     /**
@@ -4668,12 +4668,12 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return int the cancelation deadline of this event as timestamp, will be >= 0
      *
-     * @throws BadMethodCallException
+     * @throws \BadMethodCallException
      */
     public function getCancelationDeadline()
     {
         if (!$this->hasBeginDate()) {
-            throw new BadMethodCallException(
+            throw new \BadMethodCallException(
                 'The event has no begin date. Please call this function only if the event has a begin date.',
                 1333291877
             );
@@ -4686,9 +4686,9 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
         $deadline = $beginDate;
         $speakers = $this->getSpeakerBag();
 
-        /** @var Tx_Seminars_OldModel_Speaker $speaker */
+        /** @var \Tx_Seminars_OldModel_Speaker $speaker */
         foreach ($speakers as $speaker) {
-            $speakerDeadline = $beginDate - ($speaker->getCancelationPeriodInDays() * Tx_Oelib_Time::SECONDS_PER_DAY);
+            $speakerDeadline = $beginDate - ($speaker->getCancelationPeriodInDays() * \Tx_Oelib_Time::SECONDS_PER_DAY);
             $deadline = min($speakerDeadline, $deadline);
         }
 
@@ -4800,7 +4800,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Returns the places associated with this event.
      *
-     * @return Tx_Oelib_List with the models for the places of this event, will be empty if this event has no places
+     * @return \Tx_Oelib_List with the models for the places of this event, will be empty if this event has no places
      */
     public function getPlaces()
     {
@@ -4808,15 +4808,15 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
             return new \Tx_Oelib_List();
         }
 
-        $places = Tx_Oelib_Db::selectMultiple(
+        $places = \Tx_Oelib_Db::selectMultiple(
             'uid, title, address, zip, city, country, homepage, directions',
             'tx_seminars_sites, tx_seminars_seminars_place_mm',
             'uid_local = ' . $this->getUid() . ' AND uid = uid_foreign' .
-                Tx_Oelib_Db::enableFields('tx_seminars_sites')
+                \Tx_Oelib_Db::enableFields('tx_seminars_sites')
         );
 
-        /** @var Tx_Seminars_Mapper_Place $mapper */
-        $mapper = GeneralUtility::makeInstance(Tx_Seminars_Mapper_Place::class);
+        /** @var \Tx_Seminars_Mapper_Place $mapper */
+        $mapper = GeneralUtility::makeInstance(\Tx_Seminars_Mapper_Place::class);
         return $mapper->getListOfModels($places);
     }
 
@@ -4910,7 +4910,7 @@ class Tx_Seminars_OldModel_Event extends Tx_Seminars_OldModel_AbstractTimeSpan
             return 0;
         }
 
-        $secondsForUnregistration = Tx_Oelib_Time::SECONDS_PER_DAY * $this->getConfValueInteger(
+        $secondsForUnregistration = \Tx_Oelib_Time::SECONDS_PER_DAY * $this->getConfValueInteger(
             'unregistrationDeadlineDaysBeforeBeginDate'
         );
 

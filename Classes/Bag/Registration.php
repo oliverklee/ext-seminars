@@ -8,7 +8,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Bag_Registration extends Tx_Seminars_Bag_Abstract
+class Tx_Seminars_Bag_Registration extends \Tx_Seminars_Bag_Abstract
 {
     /**
      * @var ContentObjectRenderer
@@ -65,7 +65,7 @@ class Tx_Seminars_Bag_Registration extends Tx_Seminars_Bag_Abstract
     protected function createItemFromDbResult()
     {
         $this->currentItem = GeneralUtility::makeInstance(
-            Tx_Seminars_OldModel_Registration::class,
+            \Tx_Seminars_OldModel_Registration::class,
             $this->cObj,
             $this->dbResult
         );

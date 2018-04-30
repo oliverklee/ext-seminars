@@ -5,16 +5,16 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_Model_LodgingTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Model_LodgingTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Seminars_Model_Lodging
+     * @var \Tx_Seminars_Model_Lodging
      */
     private $fixture;
 
     protected function setUp()
     {
-        $this->fixture = new Tx_Seminars_Model_Lodging();
+        $this->fixture = new \Tx_Seminars_Model_Lodging();
     }
 
     /**

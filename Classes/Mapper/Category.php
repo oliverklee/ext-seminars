@@ -5,7 +5,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Mapper_Category extends Tx_Oelib_DataMapper
+class Tx_Seminars_Mapper_Category extends \Tx_Oelib_DataMapper
 {
     /**
      * @var string the name of the database table for this mapper
@@ -15,5 +15,5 @@ class Tx_Seminars_Mapper_Category extends Tx_Oelib_DataMapper
     /**
      * @var string the model class name for this mapper, must not be empty
      */
-    protected $modelClassName = Tx_Seminars_Model_Category::class;
+    protected $modelClassName = \Tx_Seminars_Model_Category::class;
 }

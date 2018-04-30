@@ -6,14 +6,14 @@
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Seminars_FrontEnd_RegistrationsList
+     * @var \Tx_Seminars_FrontEnd_RegistrationsList
      */
     private $fixture;
     /**
-     * @var Tx_Oelib_TestingFramework
+     * @var \Tx_Oelib_TestingFramework
      */
     private $testingFramework;
 
@@ -36,24 +36,24 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
-        Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', false);
+        \Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', false);
 
-        Tx_Oelib_HeaderProxyFactory::getInstance()->enableTestMode();
+        \Tx_Oelib_HeaderProxyFactory::getInstance()->enableTestMode();
 
-        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
 
         $this->seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'object_type' => Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'title' => 'Test event & more',
                 'attendees_max' => 10,
                 'needs_registration' => 1,
             ]
         );
 
-        $this->fixture = new Tx_Seminars_FrontEnd_RegistrationsList(
+        $this->fixture = new \Tx_Seminars_FrontEnd_RegistrationsList(
             [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'enableRegistration' => 1,
@@ -68,7 +68,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
     {
         $this->testingFramework->cleanUp();
 
-        Tx_Seminars_Service_RegistrationManager::purgeInstance();
+        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
     }
 
     ///////////////////////
@@ -142,7 +142,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
             'The value "foo" of the first parameter $whatToDisplay is not valid.'
         );
 
-        new Tx_Seminars_FrontEnd_RegistrationsList(
+        new \Tx_Seminars_FrontEnd_RegistrationsList(
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             'foo',
             0,
@@ -155,7 +155,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
      */
     public function createFixtureWithListRegistrationsAsWhatToDisplayDoesNotThrowException()
     {
-        new Tx_Seminars_FrontEnd_RegistrationsList(
+        new \Tx_Seminars_FrontEnd_RegistrationsList(
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             'list_registrations',
             0,
@@ -168,7 +168,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
      */
     public function createFixtureWithListVipRegistrationsAsWhatToDisplayDoesNotThrowException()
     {
-        new Tx_Seminars_FrontEnd_RegistrationsList(
+        new \Tx_Seminars_FrontEnd_RegistrationsList(
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             'list_vip_registrations',
             0,
@@ -196,7 +196,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
      */
     public function renderWithNegativeSeminarUidReturnsHeader404()
     {
-        $fixture = new Tx_Seminars_FrontEnd_RegistrationsList(
+        $fixture = new \Tx_Seminars_FrontEnd_RegistrationsList(
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             'list_registrations',
             -1,
@@ -206,7 +206,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
 
         self::assertEquals(
             'Status: 404 Not Found',
-            Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
+            \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
         );
     }
 
@@ -215,7 +215,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
      */
     public function renderWithZeroSeminarUidReturnsHeader404()
     {
-        $fixture = new Tx_Seminars_FrontEnd_RegistrationsList(
+        $fixture = new \Tx_Seminars_FrontEnd_RegistrationsList(
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             'list_registrations',
             0,
@@ -225,7 +225,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
 
         self::assertEquals(
             'Status: 404 Not Found',
-            Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
+            \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
         );
     }
 
@@ -238,7 +238,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
 
         self::assertEquals(
             'Status: 403 Forbidden',
-            Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
+            \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
         );
     }
 
@@ -252,7 +252,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
 
         self::assertEquals(
             'Status: 403 Forbidden',
-            Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
+            \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
         );
     }
 
@@ -266,7 +266,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends Tx_Phpunit_T
 
         self::assertNotContains(
             '403',
-            Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
+            \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
         );
     }
 

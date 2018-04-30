@@ -5,6 +5,6 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_Fixtures_Model_UntitledTestingModel extends Tx_Oelib_Model
+class Tx_Seminars_Tests_Unit_Fixtures_Model_UntitledTestingModel extends \Tx_Oelib_Model
 {
 }

@@ -6,16 +6,16 @@
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Model_EventTypeTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Model_EventTypeTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Seminars_Model_EventType
+     * @var \Tx_Seminars_Model_EventType
      */
     private $fixture;
 
     protected function setUp()
     {
-        $this->fixture = new Tx_Seminars_Model_EventType();
+        $this->fixture = new \Tx_Seminars_Model_EventType();
     }
 
     /**

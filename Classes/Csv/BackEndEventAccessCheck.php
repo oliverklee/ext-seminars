@@ -5,7 +5,7 @@
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Csv_BackEndEventAccessCheck extends Tx_Seminars_Csv_AbstractBackEndAccessCheck
+class Tx_Seminars_Csv_BackEndEventAccessCheck extends \Tx_Seminars_Csv_AbstractBackEndAccessCheck
 {
     /**
      * @var string

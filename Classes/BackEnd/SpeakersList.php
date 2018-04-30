@@ -8,7 +8,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class Tx_Seminars_BackEnd_SpeakersList extends Tx_Seminars_BackEnd_AbstractList
+class Tx_Seminars_BackEnd_SpeakersList extends \Tx_Seminars_BackEnd_AbstractList
 {
     /**
      * @var string the name of the table we're working on
@@ -16,7 +16,7 @@ class Tx_Seminars_BackEnd_SpeakersList extends Tx_Seminars_BackEnd_AbstractList
     protected $tableName = 'tx_seminars_speakers';
 
     /**
-     * @var Tx_Seminars_OldModel_Speaker the speaker which we want to list
+     * @var \Tx_Seminars_OldModel_Speaker the speaker which we want to list
      */
     private $speaker = null;
 
@@ -50,8 +50,8 @@ class Tx_Seminars_BackEnd_SpeakersList extends Tx_Seminars_BackEnd_AbstractList
             $GLOBALS['LANG']->getLL('speakerlist.skills')
         );
 
-        /** @var Tx_Seminars_BagBuilder_Speaker $builder */
-        $builder = GeneralUtility::makeInstance(Tx_Seminars_BagBuilder_Speaker::class);
+        /** @var \Tx_Seminars_BagBuilder_Speaker $builder */
+        $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Speaker::class);
         $builder->showHiddenRecords();
 
         $builder->setSourcePages($pageData['uid'], self::RECURSION_DEPTH);

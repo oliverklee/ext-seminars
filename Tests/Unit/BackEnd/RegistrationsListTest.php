@@ -9,16 +9,16 @@ use TYPO3\CMS\Core\Utility\VersionNumberUtility;
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends \Tx_Phpunit_TestCase
 {
     use BackEndTestsTrait;
 
     /**
-     * @var Tx_Seminars_BackEnd_RegistrationsList
+     * @var \Tx_Seminars_BackEnd_RegistrationsList
      */
     private $fixture;
     /**
-     * @var Tx_Oelib_TestingFramework
+     * @var \Tx_Oelib_TestingFramework
      */
     private $testingFramework;
 
@@ -28,7 +28,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
     private $dummySysFolderPid = 0;
 
     /**
-     * @var Tx_Seminars_BackEnd_Module a dummy back-end module
+     * @var \Tx_Seminars_BackEnd_Module a dummy back-end module
      */
     private $backEndModule;
 
@@ -36,23 +36,23 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
     {
         $this->unifyTestingEnvironment();
 
-        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
         if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8000000) {
             self::markTestSkipped('This test is for the old BE module only.');
         }
 
-        $this->backEndModule = new Tx_Seminars_BackEnd_Module();
+        $this->backEndModule = new \Tx_Seminars_BackEnd_Module();
         $this->backEndModule->id = $this->dummySysFolderPid;
         $this->backEndModule->setPageData([
             'uid' => $this->dummySysFolderPid,
-            'doktype' => Tx_Seminars_BackEnd_AbstractList::SYSFOLDER_TYPE,
+            'doktype' => \Tx_Seminars_BackEnd_AbstractList::SYSFOLDER_TYPE,
         ]);
 
         $document = new DocumentTemplate();
         $this->backEndModule->doc = $document;
 
-        $this->fixture = new Tx_Seminars_BackEnd_RegistrationsList(
+        $this->fixture = new \Tx_Seminars_BackEnd_RegistrationsList(
             $this->backEndModule
         );
     }
@@ -60,7 +60,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
     protected function tearDown()
     {
         $this->testingFramework->cleanUp();
-        Tx_Seminars_OldModel_Registration::purgeCachedSeminars();
+        \Tx_Seminars_OldModel_Registration::purgeCachedSeminars();
         $this->restoreOriginalEnvironment();
     }
 
@@ -511,17 +511,17 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends Tx_Phpunit_Te
     public function testNewButtonForRegistrationStorageSettingSetInUsersGroupSetsThisPidAsNewRecordPid()
     {
         $newRegistrationFolder = $this->dummySysFolderPid + 1;
-        $backEndGroup = Tx_Oelib_MapperRegistry::get(
-            Tx_Seminars_Mapper_BackEndUserGroup::class
+        $backEndGroup = \Tx_Oelib_MapperRegistry::get(
+            \Tx_Seminars_Mapper_BackEndUserGroup::class
         )->getLoadedTestingModel(
             ['tx_seminars_registrations_folder' => $newRegistrationFolder]
         );
-        $backEndUser = Tx_Oelib_MapperRegistry::get(
-            Tx_Seminars_Mapper_BackEndUser::class
+        $backEndUser = \Tx_Oelib_MapperRegistry::get(
+            \Tx_Seminars_Mapper_BackEndUser::class
         )->getLoadedTestingModel(
                 ['usergroup' => $backEndGroup->getUid()]
         );
-        Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser(
+        \Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser(
             $backEndUser
         );
 

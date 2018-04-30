@@ -12,7 +12,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Philipp Kitzberger <philipp@cron-it.de>
  */
-class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
+class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
 {
     /**
      * the same as the class name
@@ -58,12 +58,12 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
     private $staticInfo = null;
 
     /**
-     * @var Tx_Seminars_OldModel_Event seminar object
+     * @var \Tx_Seminars_OldModel_Event seminar object
      */
     private $seminar = null;
 
     /**
-     * @var Tx_Seminars_OldModel_Registration
+     * @var \Tx_Seminars_OldModel_Registration
      */
     protected $registration = null;
 
@@ -142,11 +142,11 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
     /**
      * Sets the seminar for which to create the form.
      *
-     * @param Tx_Seminars_OldModel_Event $event the event for which to create the form
+     * @param \Tx_Seminars_OldModel_Event $event the event for which to create the form
      *
      * @return void
      */
-    public function setSeminar(Tx_Seminars_OldModel_Event $event)
+    public function setSeminar(\Tx_Seminars_OldModel_Event $event)
     {
         $this->seminar = $event;
     }
@@ -154,14 +154,14 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
     /**
      * Returns the configured seminar object.
      *
-     * @return Tx_Seminars_OldModel_Event the seminar instance
+     * @return \Tx_Seminars_OldModel_Event the seminar instance
      *
-     * @throws BadMethodCallException if no seminar has been set yet
+     * @throws \BadMethodCallException if no seminar has been set yet
      */
     public function getSeminar()
     {
         if ($this->seminar === null) {
-            throw new BadMethodCallException('Please set a proper seminar object via $this->setSeminar().', 1333293187);
+            throw new \BadMethodCallException('Please set a proper seminar object via $this->setSeminar().', 1333293187);
         }
 
         return $this->seminar;
@@ -174,8 +174,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
      */
     public function getEvent()
     {
-        /** @var $eventMapper Tx_Seminars_Mapper_Event */
-        $eventMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
+        /** @var $eventMapper \Tx_Seminars_Mapper_Event */
+        $eventMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
         /** @var \Tx_Seminars_Model_Event $event */
         $event = $eventMapper->find($this->getSeminar()->getUid());
 
@@ -185,11 +185,11 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
     /**
      * Sets the registration for which to create the unregistration form.
      *
-     * @param Tx_Seminars_OldModel_Registration $registration the registration to use
+     * @param \Tx_Seminars_OldModel_Registration $registration the registration to use
      *
      * @return void
      */
-    public function setRegistration(Tx_Seminars_OldModel_Registration $registration)
+    public function setRegistration(\Tx_Seminars_OldModel_Registration $registration)
     {
         $this->registration = $registration;
     }
@@ -197,7 +197,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
     /**
      * Returns the current registration object.
      *
-     * @return Tx_Seminars_OldModel_Registration the registration, will be NULL if none has been set
+     * @return \Tx_Seminars_OldModel_Registration the registration, will be NULL if none has been set
      */
     private function getRegistration()
     {
@@ -349,23 +349,23 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
     /**
      * Creates additional attendees as FE users and adds them to $registration.
      *
-     * @param Tx_Seminars_Model_Registration $registration
+     * @param \Tx_Seminars_Model_Registration $registration
      *
      * @return void
      */
-    protected function createAdditionalAttendees(Tx_Seminars_Model_Registration $registration)
+    protected function createAdditionalAttendees(\Tx_Seminars_Model_Registration $registration)
     {
         $allPersonsData = $this->getAdditionalRegisteredPersonsData();
         if (empty($allPersonsData)) {
             return;
         }
 
-        /** @var $userMapper Tx_Seminars_Mapper_FrontEndUser */
-        $userMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_FrontEndUser::class);
+        /** @var $userMapper \Tx_Seminars_Mapper_FrontEndUser */
+        $userMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
         $pageUid = $this->getConfValueInteger('sysFolderForAdditionalAttendeeUsersPID', 's_registration');
 
-        /** @var $userGroupMapper Tx_Seminars_Mapper_FrontEndUserGroup */
-        $userGroupMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_FrontEndUserGroup::class);
+        /** @var $userGroupMapper \Tx_Seminars_Mapper_FrontEndUserGroup */
+        $userGroupMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class);
         $userGroups = new \Tx_Oelib_List();
         $userGroupUids = GeneralUtility::intExplode(
             ',',
@@ -373,17 +373,17 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
             true
         );
         foreach ($userGroupUids as $uid) {
-            /** @var Tx_Seminars_Model_FrontEndUserGroup $userGroup */
+            /** @var \Tx_Seminars_Model_FrontEndUserGroup $userGroup */
             $userGroup = $userGroupMapper->find($uid);
             $userGroups->add($userGroup);
         }
 
-        /** @var $additionalPersons Tx_Oelib_List */
+        /** @var $additionalPersons \Tx_Oelib_List */
         $additionalPersons = $registration->getAdditionalPersons();
         /** @var $personData array */
         foreach ($allPersonsData as $personData) {
-            /** @var Tx_Seminars_Model_FrontEndUser $user */
-            $user = GeneralUtility::makeInstance(Tx_Seminars_Model_FrontEndUser::class);
+            /** @var \Tx_Seminars_Model_FrontEndUser $user */
+            $user = GeneralUtility::makeInstance(\Tx_Seminars_Model_FrontEndUser::class);
             $user->setPageUid($pageUid);
             $user->setPassword(GeneralUtility::getRandomHexString(8));
             $eMailAddress = $personData[3];
@@ -398,7 +398,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
                 }
                 try {
                     $userMapper->findByUserName($userName);
-                } catch (Tx_Oelib_Exception_NotFound $exception) {
+                } catch (\Tx_Oelib_Exception_NotFound $exception) {
                     $isUnique = true;
                 }
 
@@ -416,8 +416,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
             $additionalPersons->add($user);
         }
 
-        /** @var Tx_Seminars_Mapper_Registration $registrationMapper */
-        $registrationMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Registration::class);
+        /** @var \Tx_Seminars_Mapper_Registration $registrationMapper */
+        $registrationMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
         $registrationMapper->save($registration);
     }
 
@@ -688,7 +688,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
         $pageId = $this->getConfValueInteger('thankYouAfterRegistrationPID', 's_registration');
 
         if ($this->getConfValueBoolean('logOutOneTimeAccountsAfterRegistration')
-                && Tx_Oelib_Session::getInstance(Tx_Oelib_Session::TYPE_USER)->getAsBoolean('onetimeaccount')
+                && \Tx_Oelib_Session::getInstance(\Tx_Oelib_Session::TYPE_USER)->getAsBoolean('onetimeaccount')
         ) {
             $GLOBALS['TSFE']->fe_user->logoff();
             $GLOBALS['TSFE']->loginUser = 0;
@@ -769,12 +769,12 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
             return [];
         }
 
-        $rows = Tx_Oelib_Db::selectMultiple(
+        $rows = \Tx_Oelib_Db::selectMultiple(
             'uid, title',
             'tx_seminars_payment_methods, tx_seminars_seminars_payment_methods_mm',
             'tx_seminars_payment_methods.uid = tx_seminars_seminars_payment_methods_mm.uid_foreign ' .
                 'AND tx_seminars_seminars_payment_methods_mm.uid_local=' . $this->getSeminar()->getTopicUid() .
-                Tx_Oelib_Db::enableFields('tx_seminars_payment_methods')
+                \Tx_Oelib_Db::enableFields('tx_seminars_payment_methods')
         );
 
         $result = [];
@@ -937,12 +937,12 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
      *
      * @return string the formatted data item, will not be htmlspecialchared yet, might be empty
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     protected function getFormDataItemForConfirmationPage($key)
     {
         if (!in_array($key, $this->getAllFieldKeysForConfirmationPage(), true)) {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 'The form data item ' . $key . ' is not valid on the confirmation page. Valid items are: ' .
                     implode(', ', $this->getAllFieldKeysForConfirmationPage()),
                 1389813109
@@ -976,8 +976,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
                 break;
             case 'attendees_names':
                 if ($this->isFormFieldEnabled('registered_themselves') && ($this->getFormValue('registered_themselves') == '1')) {
-                    /** @var Tx_Seminars_Model_FrontEndUser $user */
-                    $user = Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(Tx_Seminars_Mapper_FrontEndUser::class);
+                    /** @var \Tx_Seminars_Model_FrontEndUser $user */
+                    $user = \Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
                     $userData = [$user->getName()];
                     if ($this->getConfValueBoolean('createAdditionalAttendeesAsFrontEndUsers', 's_registration')) {
                         if ($user->hasJobTitle()) {
@@ -1271,14 +1271,14 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
      */
     private function getDefaultCountry()
     {
-        $defaultCountryCode = Tx_Oelib_ConfigurationRegistry::get('plugin.tx_staticinfotables_pi1')->getAsString('countryCode');
+        $defaultCountryCode = \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_staticinfotables_pi1')->getAsString('countryCode');
         if ($defaultCountryCode === '') {
             return '';
         }
 
         $this->initStaticInfo();
 
-        $currentLanguageCode = Tx_Oelib_ConfigurationRegistry::get('config')->getAsString('language');
+        $currentLanguageCode = \Tx_Oelib_ConfigurationRegistry::get('config')->getAsString('language');
         $identifiers = ['iso' => $defaultCountryCode];
         $result = LocalizationUtility::getLabelFieldValue($identifiers, 'static_countries', $currentLanguageCode, true);
 
@@ -1499,7 +1499,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
 
         foreach ($parametersToSave as $currentKey) {
             if (isset($parameters[$currentKey])) {
-                Tx_Oelib_Session::getInstance(Tx_Oelib_Session::TYPE_USER)
+                \Tx_Oelib_Session::getInstance(\Tx_Oelib_Session::TYPE_USER)
                     ->setAsString($this->prefixId . '_' . $currentKey, $parameters[$currentKey]);
             }
         }
@@ -1527,7 +1527,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
      */
     public function retrieveDataFromSession(array $parameters)
     {
-        return Tx_Oelib_Session::getInstance(Tx_Oelib_Session::TYPE_USER)
+        return \Tx_Oelib_Session::getInstance(\Tx_Oelib_Session::TYPE_USER)
             ->getAsString($this->prefixId . '_' . $parameters['key']);
     }
 
@@ -1679,7 +1679,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
         $cancelButtonRenderlet = $this->getFormCreator()->aORenderlets['button_cancel'];
         if ($cancelButtonRenderlet->hasThrown('click')) {
             $redirectUrl = GeneralUtility::locationHeaderUrl($this->pi_getPageLink($this->getConfValueInteger('myEventsPID')));
-            Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Location:' . $redirectUrl);
+            \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Location:' . $redirectUrl);
             exit;
         }
 
@@ -1804,10 +1804,10 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends Tx_Seminars_FrontEnd_Editor
     /**
      * Returns the Singleton registration manager instance.
      *
-     * @return Tx_Seminars_Service_RegistrationManager the singleton instance
+     * @return \Tx_Seminars_Service_RegistrationManager the singleton instance
      */
     private function getRegistrationManager()
     {
-        return Tx_Seminars_Service_RegistrationManager::getInstance();
+        return \Tx_Seminars_Service_RegistrationManager::getInstance();
     }
 }

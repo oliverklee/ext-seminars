@@ -6,7 +6,7 @@
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestCase
 {
     /**
      * @var string
@@ -14,12 +14,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
     const BLANK_GIF = 'R0lGODlhAQABAJH/AP///wAAAMDAwAAAACH5BAEAAAIALAAAAAABAAEAAAICVAEAOw==';
 
     /**
-     * @var Tx_Seminars_FrontEnd_CategoryList
+     * @var \Tx_Seminars_FrontEnd_CategoryList
      */
     private $fixture;
 
     /**
-     * @var Tx_Oelib_TestingFramework
+     * @var \Tx_Oelib_TestingFramework
      */
     private $testingFramework;
 
@@ -37,9 +37,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
-        Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', false);
+        \Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', false);
 
-        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
 
         $this->systemFolderPid = $this->testingFramework->createSystemFolder();
@@ -51,7 +51,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
             ]
         );
 
-        $this->fixture = new Tx_Seminars_FrontEnd_CategoryList(
+        $this->fixture = new \Tx_Seminars_FrontEnd_CategoryList(
             [
                 'isStaticTemplateLoaded' => 1,
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
@@ -326,7 +326,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends Tx_Phpunit_TestCa
                 'title' => 'my_title',
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
                 'categories' => 1,
-                'cancelled' => Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+                'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
             ]
         );
         $this->testingFramework->createRelation(

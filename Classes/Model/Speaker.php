@@ -5,7 +5,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Model_Speaker extends Tx_Oelib_Model implements Tx_Oelib_Interface_MailRole
+class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Interface_MailRole
 {
     /**
      * @var int the gender type for speakers without gender
@@ -42,7 +42,7 @@ class Tx_Seminars_Model_Speaker extends Tx_Oelib_Model implements Tx_Oelib_Inter
     public function setName($name)
     {
         if ($name == '') {
-            throw new InvalidArgumentException('The parameter $name must not be empty.', 1333297036);
+            throw new \InvalidArgumentException('The parameter $name must not be empty.', 1333297036);
         }
 
         $this->setAsString('title', $name);
@@ -149,7 +149,7 @@ class Tx_Seminars_Model_Speaker extends Tx_Oelib_Model implements Tx_Oelib_Inter
     /**
      * Returns our skills.
      *
-     * @return Tx_Oelib_List our skills, will be empty if there are no skills
+     * @return \Tx_Oelib_List our skills, will be empty if there are no skills
      *                       related to this speaker
      */
     public function getSkills()
@@ -160,11 +160,11 @@ class Tx_Seminars_Model_Speaker extends Tx_Oelib_Model implements Tx_Oelib_Inter
     /**
      * Sets this speaker's skills.
      *
-     * @param Tx_Oelib_List $skills this speaker's skills, may be empty
+     * @param \Tx_Oelib_List $skills this speaker's skills, may be empty
      *
      * @return void
      */
-    public function setSkills(Tx_Oelib_List $skills)
+    public function setSkills(\Tx_Oelib_List $skills)
     {
         $this->set('skills', $skills);
     }
@@ -383,8 +383,8 @@ class Tx_Seminars_Model_Speaker extends Tx_Oelib_Model implements Tx_Oelib_Inter
      * Sets our gender.
      *
      * @param int $gender
-     *        our gender to set, must be one of Tx_Seminars_Model_Speaker::GENDER_FEMALE, Tx_Seminars_Model_Speaker::GENDER_MALE
-     *        or Tx_Seminars_Model_Speaker::GENDER_UNKNOWN
+     *        our gender to set, must be one of \Tx_Seminars_Model_Speaker::GENDER_FEMALE, \Tx_Seminars_Model_Speaker::GENDER_MALE
+     *        or \Tx_Seminars_Model_Speaker::GENDER_UNKNOWN
      *
      * @return void
      */
@@ -423,7 +423,7 @@ class Tx_Seminars_Model_Speaker extends Tx_Oelib_Model implements Tx_Oelib_Inter
     public function setCancelationPeriod($cancelationPeriod)
     {
         if ($cancelationPeriod < 0) {
-            throw new InvalidArgumentException('The parameter $cancelationPeriod must be >= 0.', 1333297044);
+            throw new \InvalidArgumentException('The parameter $cancelationPeriod must be >= 0.', 1333297044);
         }
 
         $this->setAsInteger('cancelation_period', $cancelationPeriod);
@@ -443,7 +443,7 @@ class Tx_Seminars_Model_Speaker extends Tx_Oelib_Model implements Tx_Oelib_Inter
     /**
      * Returns our owner.
      *
-     * @return Tx_Seminars_Model_FrontEndUser the owner of this model, will be null
+     * @return \Tx_Seminars_Model_FrontEndUser the owner of this model, will be null
      *                                     if this model has no owner
      */
     public function getOwner()
@@ -454,11 +454,11 @@ class Tx_Seminars_Model_Speaker extends Tx_Oelib_Model implements Tx_Oelib_Inter
     /**
      * Sets our owner.
      *
-     * @param Tx_Seminars_Model_FrontEndUser $frontEndUser the owner of this model to set
+     * @param \Tx_Seminars_Model_FrontEndUser $frontEndUser the owner of this model to set
      *
      * @return void
      */
-    public function setOwner(Tx_Seminars_Model_FrontEndUser $frontEndUser)
+    public function setOwner(\Tx_Seminars_Model_FrontEndUser $frontEndUser)
     {
         $this->set('owner', $frontEndUser);
     }

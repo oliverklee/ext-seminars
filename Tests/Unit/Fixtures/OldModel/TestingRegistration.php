@@ -9,7 +9,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration extends Tx_Seminars_OldModel_Registration
+class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration extends \Tx_Seminars_OldModel_Registration
 {
     /**
      * The constructor.
@@ -19,7 +19,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration extends Tx_Se
     public function __construct($registrationUid = 0)
     {
         if ($registrationUid > 0) {
-            $dbResult = Tx_Oelib_Db::select(
+            $dbResult = \Tx_Oelib_Db::select(
                 '*',
                 $this->tableName,
                 'uid = ' . $registrationUid
@@ -59,7 +59,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration extends Tx_Se
     public function setPaymentMethod($uid)
     {
         if ($uid <= 0) {
-            throw new InvalidArgumentException('Invalid payment method UID.', 1333293343);
+            throw new \InvalidArgumentException('Invalid payment method UID.', 1333293343);
         }
 
         $this->setRecordPropertyInteger(

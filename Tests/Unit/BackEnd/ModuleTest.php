@@ -7,10 +7,10 @@ use TYPO3\CMS\Core\Utility\VersionNumberUtility;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_BackEnd_ModuleTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_BackEnd_ModuleTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Seminars_BackEnd_Module
+     * @var \Tx_Seminars_BackEnd_Module
      */
     private $fixture;
 
@@ -22,7 +22,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_ModuleTest extends Tx_Phpunit_TestCase
 
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', false);
 
-        $this->fixture = new Tx_Seminars_BackEnd_Module();
+        $this->fixture = new \Tx_Seminars_BackEnd_Module();
     }
 
     ////////////////////////////////////////////////

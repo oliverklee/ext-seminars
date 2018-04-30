@@ -7,7 +7,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder extends Tx_Seminars_Service_SingleViewLinkBuilder
+class Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder extends \Tx_Seminars_Service_SingleViewLinkBuilder
 {
     /**
      * Retrieves a content object to be used for creating typolinks.
@@ -23,13 +23,13 @@ class Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder exten
      * Gets the single view page UID/URL from $event (if any single view page is set for
      * the event) or from the configuration.
      *
-     * @param Tx_Seminars_Model_Event $event the event for which to get the single view page
+     * @param \Tx_Seminars_Model_Event $event the event for which to get the single view page
      *
      * @return string
      *         the single view page UID/URL for $event, will be empty if neither
      *         the event nor the configuration has any single view page set
      */
-    public function getSingleViewPageForEvent(Tx_Seminars_Model_Event $event)
+    public function getSingleViewPageForEvent(\Tx_Seminars_Model_Event $event)
     {
         return parent::getSingleViewPageForEvent($event);
     }

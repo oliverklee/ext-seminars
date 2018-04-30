@@ -5,21 +5,21 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_Bag_SpeakerTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Bag_SpeakerTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Seminars_Bag_Speaker
+     * @var \Tx_Seminars_Bag_Speaker
      */
     private $fixture;
 
     /**
-     * @var Tx_Oelib_TestingFramework
+     * @var \Tx_Oelib_TestingFramework
      */
     private $testingFramework;
 
     protected function setUp()
     {
-        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
     }
 
     protected function tearDown()
@@ -35,7 +35,7 @@ class Tx_Seminars_Tests_Unit_Bag_SpeakerTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord('tx_seminars_speakers');
 
-        $this->fixture = new Tx_Seminars_Bag_Speaker('is_dummy_record=1');
+        $this->fixture = new \Tx_Seminars_Bag_Speaker('is_dummy_record=1');
 
         self::assertEquals(
             1,
@@ -50,7 +50,7 @@ class Tx_Seminars_Tests_Unit_Bag_SpeakerTest extends Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord('tx_seminars_speakers');
 
-        $this->fixture = new Tx_Seminars_Bag_Speaker('is_dummy_record=1');
+        $this->fixture = new \Tx_Seminars_Bag_Speaker('is_dummy_record=1');
 
         /** @var \Tx_Seminars_OldModel_Speaker $currentModel */
         $currentModel = $this->fixture->current();
@@ -68,7 +68,7 @@ class Tx_Seminars_Tests_Unit_Bag_SpeakerTest extends Tx_Phpunit_TestCase
             ['hidden' => 1]
         );
 
-        $this->fixture = new Tx_Seminars_Bag_Speaker('is_dummy_record=1');
+        $this->fixture = new \Tx_Seminars_Bag_Speaker('is_dummy_record=1');
 
         self::assertTrue(
             $this->fixture->isEmpty()
@@ -85,7 +85,7 @@ class Tx_Seminars_Tests_Unit_Bag_SpeakerTest extends Tx_Phpunit_TestCase
             ['hidden' => 1]
         );
 
-        $this->fixture = new Tx_Seminars_Bag_Speaker(
+        $this->fixture = new \Tx_Seminars_Bag_Speaker(
             'is_dummy_record=1',
             '',
             '',
@@ -109,7 +109,7 @@ class Tx_Seminars_Tests_Unit_Bag_SpeakerTest extends Tx_Phpunit_TestCase
             ['hidden' => 1]
         );
 
-        $this->fixture = new Tx_Seminars_Bag_Speaker(
+        $this->fixture = new \Tx_Seminars_Bag_Speaker(
             'is_dummy_record=1',
             '',
             '',

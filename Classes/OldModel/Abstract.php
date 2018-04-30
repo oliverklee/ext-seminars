@@ -10,7 +10,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-abstract class Tx_Seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper implements Tx_Oelib_Interface_ConfigurationCheckable
+abstract class Tx_Seminars_OldModel_Abstract extends \Tx_Oelib_TemplateHelper implements \Tx_Oelib_Interface_ConfigurationCheckable
 {
     /**
      * @var string the extension key
@@ -315,12 +315,12 @@ abstract class Tx_Seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper imp
 
         if (!$this->isInDb || !$this->hasUid()) {
             $this->setRecordPropertyInteger('crdate', $now);
-            Tx_Oelib_Db::insert(
+            \Tx_Oelib_Db::insert(
                 $this->tableName,
                 $this->recordData
             );
         } else {
-            Tx_Oelib_Db::update(
+            \Tx_Oelib_Db::update(
                 $this->tableName,
                 'uid = ' . $this->getUid(),
                 $this->recordData
@@ -345,7 +345,7 @@ abstract class Tx_Seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper imp
             return;
         }
 
-        Tx_Oelib_Db::update(
+        \Tx_Oelib_Db::update(
             $this->tableName,
             'uid = ' . $this->getUid(),
             $updateArray
@@ -365,16 +365,16 @@ abstract class Tx_Seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper imp
      *
      * @return int the number of created m:n records
      *
-     * @throws InvalidArgumentException
-     * @throws BadMethodCallException
+     * @throws \InvalidArgumentException
+     * @throws \BadMethodCallException
      */
     protected function createMmRecords($mmTable, array $references)
     {
         if ($mmTable == '') {
-            throw new InvalidArgumentException('$mmTable must not be empty.', 1333292359);
+            throw new \InvalidArgumentException('$mmTable must not be empty.', 1333292359);
         }
         if (!$this->hasUid()) {
-            throw new BadMethodCallException('createMmRecords may only be called on objects that have a UID.', 1333292371);
+            throw new \BadMethodCallException('createMmRecords may only be called on objects that have a UID.', 1333292371);
         }
         if (empty($references)) {
             return 0;
@@ -395,7 +395,7 @@ abstract class Tx_Seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper imp
                     'sorting' => $sorting,
                     'is_dummy_record' => $isDummyRecord,
                 ];
-                Tx_Oelib_Db::insert(
+                \Tx_Oelib_Db::insert(
                     $mmTable,
                     $dataToInsert
                 );
@@ -429,7 +429,7 @@ abstract class Tx_Seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper imp
         $dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
             'COUNT(*) AS num',
             $tableName,
-            'uid = ' . (int)$uid . Tx_Oelib_Db::enableFields($tableName, (int)$allowHiddenRecords)
+            'uid = ' . (int)$uid . \Tx_Oelib_Db::enableFields($tableName, (int)$allowHiddenRecords)
         );
 
         if ($dbResult) {
@@ -463,7 +463,7 @@ abstract class Tx_Seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper imp
         return $GLOBALS['TYPO3_DB']->exec_SELECTquery(
             '*',
             $this->tableName,
-            'uid=' . (int)$uid . Tx_Oelib_Db::enableFields($this->tableName, $allowHiddenRecords),
+            'uid=' . (int)$uid . \Tx_Oelib_Db::enableFields($this->tableName, $allowHiddenRecords),
             '',
             '',
             '1'
@@ -563,7 +563,7 @@ abstract class Tx_Seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper imp
      *
      * @return void
      *
-     * @throws RuntimeException
+     * @throws \RuntimeException
      */
     protected function initializeCharsetConversion()
     {
@@ -574,7 +574,7 @@ abstract class Tx_Seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper imp
             $this->renderCharset = $GLOBALS['LANG']->charset;
             $this->charsetConversion = $GLOBALS['LANG']->csConvObj;
         } else {
-            throw new RuntimeException('There was neither a front end nor a back end detected.', 1333292389);
+            throw new \RuntimeException('There was neither a front end nor a back end detected.', 1333292389);
         }
 
         if ($this->renderCharset === null || $this->renderCharset === '') {

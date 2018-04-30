@@ -6,12 +6,12 @@
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
+class Tx_Seminars_BagBuilder_Event extends \Tx_Seminars_BagBuilder_Abstract
 {
     /**
      * @var string class name of the bag class that will be built
      */
-    protected $bagClassName = Tx_Seminars_Bag_Event::class;
+    protected $bagClassName = \Tx_Seminars_Bag_Event::class;
 
     /**
      * @var string the table name of the bag to build
@@ -85,7 +85,7 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
             return;
         }
 
-        $directMatchUids = Tx_Oelib_Db::selectColumnForMultiple(
+        $directMatchUids = \Tx_Oelib_Db::selectColumnForMultiple(
             'uid_local',
             'tx_seminars_seminars_categories_mm',
             'uid_foreign IN(' . $categoryUids . ')'
@@ -99,10 +99,10 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
 
         $this->whereClauseParts['categories'] =
             '(' .
-            '(object_type <> ' . Tx_Seminars_Model_Event::TYPE_DATE . ' AND ' .
+            '(object_type <> ' . \Tx_Seminars_Model_Event::TYPE_DATE . ' AND ' .
             'tx_seminars_seminars.uid' . $uidMatcher . ')' .
             ' OR ' .
-            '(object_type = ' . Tx_Seminars_Model_Event::TYPE_DATE . ' AND ' .
+            '(object_type = ' . \Tx_Seminars_Model_Event::TYPE_DATE . ' AND ' .
             'tx_seminars_seminars.topic' . $uidMatcher . ')' .
             ')';
     }
@@ -143,7 +143,7 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
     public function ignoreCanceledEvents()
     {
         $this->whereClauseParts['hideCanceledEvents'] = 'cancelled <> ' .
-            Tx_Seminars_Model_Event::STATUS_CANCELED;
+            \Tx_Seminars_Model_Event::STATUS_CANCELED;
     }
 
     /**
@@ -168,7 +168,7 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
     public function setTimeFrame($timeFrameKey)
     {
         if (!in_array($timeFrameKey, self::$validTimeFrames)) {
-            throw new InvalidArgumentException('The time-frame key ' . $timeFrameKey . ' is not valid.', 1333292705);
+            throw new \InvalidArgumentException('The time-frame key ' . $timeFrameKey . ' is not valid.', 1333292705);
         }
 
         $now = $GLOBALS['SIM_EXEC_TIME'];
@@ -305,10 +305,10 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
         $this->whereClauseParts['eventTypes'] = '(
             (
                 object_type IN(' .
-                    Tx_Seminars_Model_Event::TYPE_COMPLETE . ',' . Tx_Seminars_Model_Event::TYPE_TOPIC .
+                    \Tx_Seminars_Model_Event::TYPE_COMPLETE . ',' . \Tx_Seminars_Model_Event::TYPE_TOPIC .
                 ') AND event_type IN(' . $safeEventTypeUids . ')
             ) OR (
-                object_type = ' . Tx_Seminars_Model_Event::TYPE_DATE . ' AND EXISTS (
+                object_type = ' . \Tx_Seminars_Model_Event::TYPE_DATE . ' AND EXISTS (
                     SELECT * FROM tx_seminars_seminars AS topic
                     WHERE topic.uid = tx_seminars_seminars.topic AND topic.event_type IN(' . $safeEventTypeUids . ')
                 )
@@ -427,7 +427,7 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
     public function limitToTopicRecords()
     {
         $this->whereClauseParts['topic'] = 'tx_seminars_seminars' .
-            '.object_type = ' . Tx_Seminars_Model_Event::TYPE_TOPIC;
+            '.object_type = ' . \Tx_Seminars_Model_Event::TYPE_TOPIC;
     }
 
     /**
@@ -451,7 +451,7 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
     public function limitToOwner($feUserUid)
     {
         if ($feUserUid < 0) {
-            throw new InvalidArgumentException('The parameter $feUserUid must be >= 0.', 1333292720);
+            throw new \InvalidArgumentException('The parameter $feUserUid must be >= 0.', 1333292720);
         }
 
         if ($feUserUid == 0) {
@@ -471,9 +471,9 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
     public function limitToDateAndSingleRecords()
     {
         $this->whereClauseParts['date_single'] = '(tx_seminars_seminars' .
-            '.object_type = ' . Tx_Seminars_Model_Event::TYPE_DATE . ' OR ' .
+            '.object_type = ' . \Tx_Seminars_Model_Event::TYPE_DATE . ' OR ' .
             'tx_seminars_seminars.object_type = ' .
-            Tx_Seminars_Model_Event::TYPE_COMPLETE . ')';
+            \Tx_Seminars_Model_Event::TYPE_COMPLETE . ')';
     }
 
     /**
@@ -498,7 +498,7 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
     public function limitToEventManager($feUserUid)
     {
         if ($feUserUid < 0) {
-            throw new InvalidArgumentException('The parameter $feUserUid must be >= 0.', 1333292729);
+            throw new \InvalidArgumentException('The parameter $feUserUid must be >= 0.', 1333292729);
         }
 
         if ($feUserUid == 0) {
@@ -517,14 +517,14 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
      * Limits the bag to events on the day after the end date of the event given
      * event in the first parameter $event.
      *
-     * @param Tx_Seminars_OldModel_Event $event the event object with the end date to limit for, must have an end date
+     * @param \Tx_Seminars_OldModel_Event $event the event object with the end date to limit for, must have an end date
      *
      * @return void
      */
-    public function limitToEventsNextDay(Tx_Seminars_OldModel_Event $event)
+    public function limitToEventsNextDay(\Tx_Seminars_OldModel_Event $event)
     {
         if (!$event->hasEndDate()) {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 'The event object given in the first parameter $event must have an end date set.',
                 1333292744
             );
@@ -532,9 +532,9 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
 
         $endDate = $event->getEndDateAsTimestamp();
         $midnightBeforeEndDate = $endDate
-            - ($endDate % Tx_Oelib_Time::SECONDS_PER_DAY);
+            - ($endDate % \Tx_Oelib_Time::SECONDS_PER_DAY);
         $secondMidnightAfterEndDate = $midnightBeforeEndDate
-            + 2 * Tx_Oelib_Time::SECONDS_PER_DAY;
+            + 2 * \Tx_Oelib_Time::SECONDS_PER_DAY;
 
         $this->whereClauseParts['next_day'] = 'begin_date>=' . $endDate .
             ' AND begin_date<' . $secondMidnightAfterEndDate;
@@ -554,19 +554,19 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
      * Limits the bag to date event records of the same topic as the event
      * given in the first parameter $event.
      *
-     * @param Tx_Seminars_OldModel_Event $event the date or topic object to find other dates of the same topic for
+     * @param \Tx_Seminars_OldModel_Event $event the date or topic object to find other dates of the same topic for
      *
      * @return void
      */
-    public function limitToOtherDatesForTopic(Tx_Seminars_OldModel_Event $event)
+    public function limitToOtherDatesForTopic(\Tx_Seminars_OldModel_Event $event)
     {
         if (!$event->isEventDate() && !$event->isEventTopic()) {
-            throw new InvalidArgumentException('The first parameter $event must be either a date or a topic record.', 1333292764);
+            throw new \InvalidArgumentException('The first parameter $event must be either a date or a topic record.', 1333292764);
         }
 
         $this->whereClauseParts['other_dates'] = '(' .
             'tx_seminars_seminars.topic = ' . $event->getTopicUid() .
-            ' AND object_type = ' . Tx_Seminars_Model_Event::TYPE_DATE .
+            ' AND object_type = ' . \Tx_Seminars_Model_Event::TYPE_DATE .
             ' AND uid <> ' . $event->getUid() .
         ')';
     }
@@ -664,7 +664,7 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
     /**
      * Limits the bag to events in status $status.
      *
-     * @param int $status Tx_Seminars_Model_Event::STATUS_PLANNED, ::STATUS_CONFIRMED or ::STATUS_CANCELED
+     * @param int $status \Tx_Seminars_Model_Event::STATUS_PLANNED, ::STATUS_CONFIRMED or ::STATUS_CANCELED
      *
      * @return void
      */
@@ -685,7 +685,7 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
     public function limitToDaysBeforeBeginDate($days)
     {
         $nowPlusDays = ($GLOBALS['SIM_EXEC_TIME']
-            + ($days * Tx_Oelib_Time::SECONDS_PER_DAY));
+            + ($days * \Tx_Oelib_Time::SECONDS_PER_DAY));
 
         $this->whereClauseParts['days_before_begin_date'] =
             'tx_seminars_seminars.begin_date < ' . $nowPlusDays;
@@ -742,8 +742,8 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
                 'SELECT * FROM tx_seminars_event_types, tx_seminars_seminars s1, tx_seminars_seminars s2' .
                 ' WHERE (MATCH (tx_seminars_event_types.title) AGAINST (' . $quotedSearchWord . ' IN BOOLEAN MODE)' .
                 ' AND tx_seminars_event_types.uid = s1.event_type' .
-                ' AND ((s1.uid = s2.topic AND s2.object_type = ' . Tx_Seminars_Model_Event::TYPE_DATE . ') ' .
-                    'OR (s1.uid = s2.uid AND s1.object_type <> ' . Tx_Seminars_Model_Event::TYPE_DATE . '))' .
+                ' AND ((s1.uid = s2.topic AND s2.object_type = ' . \Tx_Seminars_Model_Event::TYPE_DATE . ') ' .
+                    'OR (s1.uid = s2.uid AND s1.object_type <> ' . \Tx_Seminars_Model_Event::TYPE_DATE . '))' .
                 ' AND s2.uid = tx_seminars_seminars.uid)' .
             ')',
         ];
@@ -780,10 +780,10 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
         $where = [];
         $where[] = 'MATCH (title, subtitle, description) AGAINST (' . $quotedSearchWord . ' IN BOOLEAN MODE)';
 
-        $matchingUids = Tx_Oelib_Db::selectColumnForMultiple(
+        $matchingUids = \Tx_Oelib_Db::selectColumnForMultiple(
             'uid',
             'tx_seminars_seminars',
-            '(' . implode(' OR ', $where) . ')' . Tx_Oelib_Db::enableFields('tx_seminars_seminars')
+            '(' . implode(' OR ', $where) . ')' . \Tx_Oelib_Db::enableFields('tx_seminars_seminars')
         );
         if (empty($matchingUids)) {
             return [];
@@ -791,8 +791,8 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
 
         $inUids = ' IN (' . implode(',', $matchingUids) . ')';
         return [
-            '(object_type = ' . Tx_Seminars_Model_Event::TYPE_COMPLETE . ' AND tx_seminars_seminars.uid' . $inUids . ')',
-            '(tx_seminars_seminars.object_type = ' . Tx_Seminars_Model_Event::TYPE_DATE . ' AND ' .
+            '(object_type = ' . \Tx_Seminars_Model_Event::TYPE_COMPLETE . ' AND tx_seminars_seminars.uid' . $inUids . ')',
+            '(tx_seminars_seminars.object_type = ' . \Tx_Seminars_Model_Event::TYPE_DATE . ' AND ' .
                 'tx_seminars_seminars.topic' . $inUids . ')',
         ];
     }
@@ -863,9 +863,9 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
             'EXISTS ' .
             '(SELECT * FROM ' . 'tx_seminars_seminars s1, ' . $mmTable . ', ' . $foreignTable .
             ' WHERE ((tx_seminars_seminars.object_type = ' .
-            Tx_Seminars_Model_Event::TYPE_DATE . ' AND s1.object_type <> ' . Tx_Seminars_Model_Event::TYPE_DATE .
+            \Tx_Seminars_Model_Event::TYPE_DATE . ' AND s1.object_type <> ' . \Tx_Seminars_Model_Event::TYPE_DATE .
             ' AND tx_seminars_seminars.topic = s1.uid)' .
-            ' OR (tx_seminars_seminars.object_type = ' . Tx_Seminars_Model_Event::TYPE_COMPLETE .
+            ' OR (tx_seminars_seminars.object_type = ' . \Tx_Seminars_Model_Event::TYPE_COMPLETE .
             ' AND tx_seminars_seminars.uid = s1.uid))' .
             ' AND ' . $mmTable . '.uid_local = s1.uid' .
             ' AND ' . $mmTable . '.uid_foreign = ' . $foreignTable . '.uid' .
@@ -898,16 +898,16 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
 
         $matchQueryPart = 'MATCH (' . implode(',', self::$searchFieldList[$searchFieldKey]) . ') AGAINST (' . $quotedSearchWord
             . ' IN BOOLEAN MODE)';
-        $foreignUids = Tx_Oelib_Db::selectColumnForMultiple(
+        $foreignUids = \Tx_Oelib_Db::selectColumnForMultiple(
             'uid',
             $foreignTable,
-            $matchQueryPart . Tx_Oelib_Db::enableFields($foreignTable)
+            $matchQueryPart . \Tx_Oelib_Db::enableFields($foreignTable)
         );
         if (empty($foreignUids)) {
             return [];
         }
 
-        $localUids = Tx_Oelib_Db::selectColumnForMultiple(
+        $localUids = \Tx_Oelib_Db::selectColumnForMultiple(
             'uid_local',
             $mmTable,
             'uid_foreign IN (' . implode(',', $foreignUids) . ')'
@@ -949,22 +949,22 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
     private function checkParametersForMmSearchFunctions($searchWord, $searchFieldKey, $foreignTable, $mmTable)
     {
         if (trim($searchWord, self::TRIM_CHARACTER_LIST . '\'%') === '') {
-            throw new InvalidArgumentException('The first parameter $searchWord must no be empty.', 1333292804);
+            throw new \InvalidArgumentException('The first parameter $searchWord must no be empty.', 1333292804);
         }
         if ($searchFieldKey === '') {
-            throw new InvalidArgumentException('The second parameter $searchFieldKey must not be empty.', 1333292809);
+            throw new \InvalidArgumentException('The second parameter $searchFieldKey must not be empty.', 1333292809);
         }
         if (!array_key_exists($searchFieldKey, self::$searchFieldList)) {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 'The second parameter $searchFieldKey must be a valid key of self::$searchFieldList.',
                 1333292815
             );
         }
         if ($foreignTable === '') {
-            throw new InvalidArgumentException('The third parameter $foreignTable must not be empty.', 1333292820);
+            throw new \InvalidArgumentException('The third parameter $foreignTable must not be empty.', 1333292820);
         }
         if ($mmTable === '') {
-            throw new InvalidArgumentException('The fourth parameter $mmTable must not be empty.', 1333292829);
+            throw new \InvalidArgumentException('The fourth parameter $mmTable must not be empty.', 1333292829);
         }
     }
 
@@ -1089,7 +1089,7 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
     {
         $seats = '(SELECT COALESCE(SUM(seats),0) FROM tx_seminars_attendances ' .
             'WHERE seminar = tx_seminars_seminars.uid' .
-            Tx_Oelib_Db::enableFields('tx_seminars_attendances') . ')';
+            \Tx_Oelib_Db::enableFields('tx_seminars_attendances') . ')';
         $hasVacancies = '(attendees_max > (' . $seats . ' + offline_attendees))';
 
         $this->whereClauseParts['eventsWithVacancies'] =
@@ -1114,7 +1114,7 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
         if ($organizerUids == '') {
             return;
         }
-        $eventUids = implode(',', Tx_Oelib_Db::selectColumnForMultiple(
+        $eventUids = implode(',', \Tx_Oelib_Db::selectColumnForMultiple(
             'uid_local',
             'tx_seminars_seminars_organizers_mm',
             'uid_foreign IN (' . $organizerUids . ')'
@@ -1127,10 +1127,10 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
         }
 
         $this->whereClauseParts['eventsWithOrganizers'] =
-            '((object_type = ' . Tx_Seminars_Model_Event::TYPE_COMPLETE . ') ' .
+            '((object_type = ' . \Tx_Seminars_Model_Event::TYPE_COMPLETE . ') ' .
                 'AND (tx_seminars_seminars.uid IN (' . $eventUids .
                 ')) OR (' .
-                '(object_type = ' . Tx_Seminars_Model_Event::TYPE_DATE . ') AND (' .
+                '(object_type = ' . \Tx_Seminars_Model_Event::TYPE_DATE . ') AND (' .
                 'tx_seminars_seminars.topic IN (' . $eventUids . ')))' .
             ')';
     }
@@ -1151,7 +1151,7 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
 
         $matchingTargetGroups = implode(
             ',',
-            Tx_Oelib_Db::selectColumnForMultiple(
+            \Tx_Oelib_Db::selectColumnForMultiple(
                 'uid',
                 'tx_seminars_target_groups',
                 '(minimum_age <= ' . $age . ' AND (maximum_age = 0 OR maximum_age >= ' .
@@ -1159,17 +1159,17 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
             )
         );
 
-        $eventsWithoutTargetGroup = Tx_Oelib_Db::selectColumnForMultiple(
+        $eventsWithoutTargetGroup = \Tx_Oelib_Db::selectColumnForMultiple(
             'uid',
             'tx_seminars_seminars',
-            '(object_type = ' . Tx_Seminars_Model_Event::TYPE_COMPLETE . ' OR ' .
-                'object_type = ' . Tx_Seminars_Model_Event::TYPE_TOPIC . ') AND ' .
+            '(object_type = ' . \Tx_Seminars_Model_Event::TYPE_COMPLETE . ' OR ' .
+                'object_type = ' . \Tx_Seminars_Model_Event::TYPE_TOPIC . ') AND ' .
                 '(target_groups = 0)' .
-                Tx_Oelib_Db::enableFields('tx_seminars_seminars')
+                \Tx_Oelib_Db::enableFields('tx_seminars_seminars')
         );
         if ($matchingTargetGroups != '') {
             $eventsWithMatchingTargetGroup
-                = Tx_Oelib_Db::selectColumnForMultiple(
+                = \Tx_Oelib_Db::selectColumnForMultiple(
                     'uid_local',
                     'tx_seminars_seminars_target_groups_mm',
                     'uid_foreign IN (' . $matchingTargetGroups . ')',
@@ -1189,10 +1189,10 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
         } else {
             $matchingEventsUidList = implode(',', $matchingEventsUids);
             $this->whereClauseParts['ageLimit'] =
-                '((object_type = ' . Tx_Seminars_Model_Event::TYPE_COMPLETE . ' AND ' .
+                '((object_type = ' . \Tx_Seminars_Model_Event::TYPE_COMPLETE . ' AND ' .
                     'tx_seminars_seminars.uid IN (' . $matchingEventsUidList . ')) ' .
                     'OR ' .
-                    '(object_type = ' . Tx_Seminars_Model_Event::TYPE_DATE . ' AND ' .
+                    '(object_type = ' . \Tx_Seminars_Model_Event::TYPE_DATE . ' AND ' .
                     'topic IN (' . $matchingEventsUidList . '))' .
                 ')';
         }
@@ -1217,8 +1217,8 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
         $notZeroAndInRange = '(%1$s > 0 AND %1$s <= %2$u)';
         $now = $GLOBALS['SIM_EXEC_TIME'];
 
-        $whereClause = '(object_type = ' . Tx_Seminars_Model_Event::TYPE_TOPIC . ' OR ' .
-            'object_type = ' . Tx_Seminars_Model_Event::TYPE_COMPLETE . ') AND (' .
+        $whereClause = '(object_type = ' . \Tx_Seminars_Model_Event::TYPE_TOPIC . ' OR ' .
+            'object_type = ' . \Tx_Seminars_Model_Event::TYPE_COMPLETE . ') AND (' .
             '(deadline_early_bird < ' . $now . ' AND ' .
                 '(price_regular <= ' . $maximumPrice . ' OR ' .
                     sprintf(
@@ -1255,11 +1255,11 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
                     'price_special_board',
                     $maximumPrice
                 ) .
-            ')' . Tx_Oelib_Db::enableFields('tx_seminars_seminars');
+            ')' . \Tx_Oelib_Db::enableFields('tx_seminars_seminars');
 
         $foundUids = implode(
             ',',
-            Tx_Oelib_Db::selectColumnForMultiple(
+            \Tx_Oelib_Db::selectColumnForMultiple(
                 'uid',
                 'tx_seminars_seminars',
                 $whereClause
@@ -1270,10 +1270,10 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
             $this->whereClauseParts['maximumPrice'] = '(0 = 1)';
         } else {
             $this->whereClauseParts['maximumPrice'] =
-                '((object_type = ' . Tx_Seminars_Model_Event::TYPE_COMPLETE . ' ' .
+                '((object_type = ' . \Tx_Seminars_Model_Event::TYPE_COMPLETE . ' ' .
                 'AND tx_seminars_seminars.uid IN (' . $foundUids .
                 ')) OR ' .
-                '(object_type = ' . Tx_Seminars_Model_Event::TYPE_DATE . ' AND ' .
+                '(object_type = ' . \Tx_Seminars_Model_Event::TYPE_DATE . ' AND ' .
                 'topic IN (' . $foundUids . ')))';
         }
     }
@@ -1295,8 +1295,8 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
         }
 
         $now = $GLOBALS['SIM_EXEC_TIME'];
-        $whereClause = '(object_type = ' . Tx_Seminars_Model_Event::TYPE_TOPIC . ' OR ' .
-            'object_type = ' . Tx_Seminars_Model_Event::TYPE_COMPLETE . ') AND (' .
+        $whereClause = '(object_type = ' . \Tx_Seminars_Model_Event::TYPE_TOPIC . ' OR ' .
+            'object_type = ' . \Tx_Seminars_Model_Event::TYPE_COMPLETE . ') AND (' .
             '(deadline_early_bird < ' . $now . ' ' .
                 'AND (price_regular >= ' . $minimumPrice . ' ' .
                 'OR price_special >= ' . $minimumPrice . ')' .
@@ -1311,11 +1311,11 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
                 ')) ' .
             'OR price_regular_board >= ' . $minimumPrice . ' ' .
             'OR price_special_board >= ' . $minimumPrice . ') ' .
-            Tx_Oelib_Db::enableFields('tx_seminars_seminars');
+            \Tx_Oelib_Db::enableFields('tx_seminars_seminars');
 
         $foundUids = implode(
             ',',
-            Tx_Oelib_Db::selectColumnForMultiple(
+            \Tx_Oelib_Db::selectColumnForMultiple(
                 'uid',
                 'tx_seminars_seminars',
                 $whereClause
@@ -1326,10 +1326,10 @@ class Tx_Seminars_BagBuilder_Event extends Tx_Seminars_BagBuilder_Abstract
             $this->whereClauseParts['maximumPrice'] = '(0 = 1)';
         } else {
             $this->whereClauseParts['maximumPrice'] =
-                '((object_type = ' . Tx_Seminars_Model_Event::TYPE_COMPLETE . ' ' .
+                '((object_type = ' . \Tx_Seminars_Model_Event::TYPE_COMPLETE . ' ' .
                 'AND tx_seminars_seminars.uid IN (' . $foundUids .
                 ')) OR ' .
-                '(object_type = ' . Tx_Seminars_Model_Event::TYPE_DATE . ' AND ' .
+                '(object_type = ' . \Tx_Seminars_Model_Event::TYPE_DATE . ' AND ' .
                 'topic IN (' . $foundUids . ')))';
         }
     }

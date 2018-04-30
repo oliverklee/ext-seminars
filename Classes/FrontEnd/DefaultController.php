@@ -10,7 +10,7 @@ use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper implements Tx_Oelib_Interface_ConfigurationCheckable
+class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper implements \Tx_Oelib_Interface_ConfigurationCheckable
 {
     /**
      * @var string same as class name
@@ -30,25 +30,25 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
     public $extKey = 'seminars';
 
     /**
-     * @var Tx_Seminars_Mapper_Event an event mapper used to retrieve event models
+     * @var \Tx_Seminars_Mapper_Event an event mapper used to retrieve event models
      */
     protected $eventMapper = null;
 
     /**
      * configuration in plugin.tx_seminars (not plugin.tx_seminars_pi1)
      *
-     * @var Tx_Seminars_Service_ConfigurationService
+     * @var \Tx_Seminars_Service_ConfigurationService
      */
     private $configurationService = null;
 
     /**
-     * @var Tx_Seminars_OldModel_Event the seminar which we want to list/show or
+     * @var \Tx_Seminars_OldModel_Event the seminar which we want to list/show or
      *                          for which the user wants to register
      */
     private $seminar = null;
 
     /**
-     * @var Tx_Seminars_OldModel_Registration the registration which we want to
+     * @var \Tx_Seminars_OldModel_Registration the registration which we want to
      *                               list/show in the "my events" view
      */
     private $registration = null;
@@ -157,7 +157,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
     /**
      * hook objects for the list view
      *
-     * @var Tx_Seminars_Interface_Hook_EventListView[]
+     * @var \Tx_Seminars_Interface_Hook_EventListView[]
      */
     private $listViewHooks = [];
 
@@ -171,7 +171,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
     /**
      * hook objects for the single view
      *
-     * @var Tx_Seminars_Interface_Hook_EventSingleView[]
+     * @var \Tx_Seminars_Interface_Hook_EventSingleView[]
      */
     private $singleViewHooks = [];
 
@@ -185,7 +185,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
     /**
      * a link builder instance
      *
-     * @var Tx_Seminars_Service_SingleViewLinkBuilder
+     * @var \Tx_Seminars_Service_SingleViewLinkBuilder
      */
     private $linkBuilder = null;
 
@@ -266,9 +266,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
                 // The fallthrough is intended
                 // because createRegistrationsListPage() will differentiate later.
             case 'list_registrations':
-                /** @var Tx_Seminars_FrontEnd_RegistrationsList $registrationsList */
+                /** @var \Tx_Seminars_FrontEnd_RegistrationsList $registrationsList */
                 $registrationsList = GeneralUtility::makeInstance(
-                    Tx_Seminars_FrontEnd_RegistrationsList::class,
+                    \Tx_Seminars_FrontEnd_RegistrationsList::class,
                     $this->conf,
                     $this->whatToDisplay,
                     (int)$this->piVars['seminar'],
@@ -277,9 +277,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
                 $result = $registrationsList->render();
                 break;
             case 'countdown':
-                /** @var Tx_Seminars_FrontEnd_Countdown $countdown */
+                /** @var \Tx_Seminars_FrontEnd_Countdown $countdown */
                 $countdown = GeneralUtility::makeInstance(
-                    Tx_Seminars_FrontEnd_Countdown::class,
+                    \Tx_Seminars_FrontEnd_Countdown::class,
                     $this->conf,
                     $this->cObj
                 );
@@ -287,18 +287,18 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
                 $result = $countdown->render();
                 break;
             case 'category_list':
-                /** @var Tx_Seminars_FrontEnd_CategoryList $categoryList */
+                /** @var \Tx_Seminars_FrontEnd_CategoryList $categoryList */
                 $categoryList = GeneralUtility::makeInstance(
-                    Tx_Seminars_FrontEnd_CategoryList::class,
+                    \Tx_Seminars_FrontEnd_CategoryList::class,
                     $this->conf,
                     $this->cObj
                 );
                 $result = $categoryList->render();
                 break;
             case 'event_headline':
-                /** @var Tx_Seminars_FrontEnd_EventHeadline $eventHeadline */
+                /** @var \Tx_Seminars_FrontEnd_EventHeadline $eventHeadline */
                 $eventHeadline = GeneralUtility::makeInstance(
-                    Tx_Seminars_FrontEnd_EventHeadline::class,
+                    \Tx_Seminars_FrontEnd_EventHeadline::class,
                     $this->conf,
                     $this->cObj
                 );
@@ -360,12 +360,12 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
     /**
      * Gets the hooks for the list view.
      *
-     * @return Tx_Seminars_Interface_Hook_EventListView[]
+     * @return \Tx_Seminars_Interface_Hook_EventListView[]
      *         the hook objects, will be empty if no hooks have been set
      *
      * @throws \UnexpectedValueException
      *          if there are registered hook classes that do not implement the
-     *          Tx_Seminars_Interface_Hook_EventListView interface
+     *          \Tx_Seminars_Interface_Hook_EventListView interface
      */
     protected function getListViewHooks()
     {
@@ -374,10 +374,10 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
             if (is_array($hookClasses)) {
                 foreach ($hookClasses as $hookClass) {
                     $hookInstance = GeneralUtility::getUserObj($hookClass);
-                    if (!($hookInstance instanceof Tx_Seminars_Interface_Hook_EventListView)) {
+                    if (!($hookInstance instanceof \Tx_Seminars_Interface_Hook_EventListView)) {
                         throw new \UnexpectedValueException(
                             'The class ' . get_class($hookInstance) . ' is used for the event list view hook, ' .
-                                'but does not implement the Tx_Seminars_Interface_Hook_EventListView interface.',
+                                'but does not implement the \\Tx_Seminars_Interface_Hook_EventListView interface.',
                                 1301928334
                         );
                     }
@@ -394,12 +394,12 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
     /**
      * Gets the hooks for the single view.
      *
-     * @return Tx_Seminars_Interface_Hook_EventSingleView[]
+     * @return \Tx_Seminars_Interface_Hook_EventSingleView[]
      *         the hook objects, will be empty if no hooks have been set
      *
      * @throws \UnexpectedValueException
      *          if there are registered hook classes that do not implement the
-     *          Tx_Seminars_Interface_Hook_EventSingleView interface
+     *          \Tx_Seminars_Interface_Hook_EventSingleView interface
      */
     protected function getSingleViewHooks()
     {
@@ -408,10 +408,10 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
             if (is_array($hookClasses)) {
                 foreach ($hookClasses as $hookClass) {
                     $hookInstance = GeneralUtility::getUserObj($hookClass);
-                    if (!($hookInstance instanceof Tx_Seminars_Interface_Hook_EventSingleView)) {
+                    if (!($hookInstance instanceof \Tx_Seminars_Interface_Hook_EventSingleView)) {
                         throw new \UnexpectedValueException(
                             'The class ' . get_class($hookInstance) . ' is used for the event single view hook, ' .
-                                'but does not implement the Tx_Seminars_Interface_Hook_EventSingleView interface.',
+                                'but does not implement the \\Tx_Seminars_Interface_Hook_EventSingleView interface.',
                                 1306432026
                         );
                     }
@@ -441,9 +441,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
             unset($this->seminar);
         }
 
-        if (Tx_Seminars_OldModel_Abstract::recordExists($seminarUid, 'tx_seminars_seminars', $showHiddenRecords)) {
-            /** @var Tx_Seminars_OldModel_Event $event */
-            $event = GeneralUtility::makeInstance(Tx_Seminars_OldModel_Event::class, $seminarUid, false, $showHiddenRecords);
+        if (\Tx_Seminars_OldModel_Abstract::recordExists($seminarUid, 'tx_seminars_seminars', $showHiddenRecords)) {
+            /** @var \Tx_Seminars_OldModel_Event $event */
+            $event = GeneralUtility::makeInstance(\Tx_Seminars_OldModel_Event::class, $seminarUid, false, $showHiddenRecords);
             $this->setSeminar($event);
 
             $result = $showHiddenRecords ? $this->canShowCurrentEvent() : true;
@@ -458,11 +458,11 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
     /**
      * Sets the current seminar for the list view.
      *
-     * @param Tx_Seminars_OldModel_Event|null $event the current seminar
+     * @param \Tx_Seminars_OldModel_Event|null $event the current seminar
      *
      * @return void
      */
-    protected function setSeminar(Tx_Seminars_OldModel_Event $event = null)
+    protected function setSeminar(\Tx_Seminars_OldModel_Event $event = null)
     {
         $this->seminar = $event;
     }
@@ -481,13 +481,13 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
     {
         $result = false;
 
-        if (Tx_Seminars_OldModel_Abstract::recordExists($registrationUid, 'tx_seminars_attendances')) {
+        if (\Tx_Seminars_OldModel_Abstract::recordExists($registrationUid, 'tx_seminars_attendances')) {
             $dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
                 '*',
                 'tx_seminars_attendances',
-                'tx_seminars_attendances.uid = ' . $registrationUid . Tx_Oelib_Db::enableFields('tx_seminars_attendances')
+                'tx_seminars_attendances.uid = ' . $registrationUid . \Tx_Oelib_Db::enableFields('tx_seminars_attendances')
             );
-            $this->registration = GeneralUtility::makeInstance(Tx_Seminars_OldModel_Registration::class, $this->cObj, $dbResult);
+            $this->registration = GeneralUtility::makeInstance(\Tx_Seminars_OldModel_Registration::class, $this->cObj, $dbResult);
             if ($dbResult !== false) {
                 $GLOBALS['TYPO3_DB']->sql_free_result($dbResult);
             }
@@ -510,18 +510,18 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
     public function createHelperObjects()
     {
         if ($this->configurationService === null) {
-            $this->configurationService = GeneralUtility::makeInstance(Tx_Seminars_Service_ConfigurationService::class);
+            $this->configurationService = GeneralUtility::makeInstance(\Tx_Seminars_Service_ConfigurationService::class);
         }
 
         if ($this->eventMapper === null) {
-            $this->eventMapper = GeneralUtility::makeInstance(Tx_Seminars_Mapper_Event::class);
+            $this->eventMapper = GeneralUtility::makeInstance(\Tx_Seminars_Mapper_Event::class);
         }
     }
 
     /**
      * Gets our seminar object.
      *
-     * @return Tx_Seminars_OldModel_Event our seminar object
+     * @return \Tx_Seminars_OldModel_Event our seminar object
      */
     public function getSeminar()
     {
@@ -531,7 +531,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
     /**
      * Returns the current registration.
      *
-     * @return Tx_Seminars_OldModel_Registration the current registration
+     * @return \Tx_Seminars_OldModel_Registration the current registration
      */
     public function getRegistration()
     {
@@ -541,11 +541,11 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
     /**
      * Returns the Singleton registration manager instance.
      *
-     * @return Tx_Seminars_Service_RegistrationManager the Singleton instance
+     * @return \Tx_Seminars_Service_RegistrationManager the Singleton instance
      */
     public function getRegistrationManager()
     {
-        return Tx_Seminars_Service_RegistrationManager::getInstance();
+        return \Tx_Seminars_Service_RegistrationManager::getInstance();
     }
 
     /**
@@ -554,7 +554,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
      *
      * This function is intended for testing purposes only.
      *
-     * @return Tx_Seminars_Service_ConfigurationService|null
+     * @return \Tx_Seminars_Service_ConfigurationService|null
      */
     public function getConfigurationService()
     {
@@ -686,13 +686,13 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
         if ($this->showUid <= 0) {
             $this->setMarker('error_text', $this->translate('message_missingSeminarNumber'));
             $result = $this->getSubpart('ERROR_VIEW');
-            Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
+            \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
         } elseif ($this->createSeminar($this->showUid, $this->isLoggedIn())) {
             $result = $this->createSingleViewForExistingEvent();
         } else {
             $this->setMarker('error_text', $this->translate('message_wrongSeminarNumber'));
             $result = $this->getSubpart('ERROR_VIEW');
-            Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
+            \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
         }
 
         $this->setMarker(
@@ -711,9 +711,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
      */
     protected function createSingleViewForExistingEvent()
     {
-        /** @var Tx_Seminars_Mapper_Event $mapper */
-        $mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
-        /** @var Tx_Seminars_Model_Event $event */
+        /** @var \Tx_Seminars_Mapper_Event $mapper */
+        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        /** @var \Tx_Seminars_Model_Event $event */
         $event = $mapper->find($this->showUid);
 
         // Lets warnings from the seminar bubble up to us.
@@ -970,8 +970,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 
         $this->hideSubparts('date,time', 'field_wrapper');
 
-        /** @var Tx_Seminars_Mapper_TimeSlot $timeSlotMapper */
-        $timeSlotMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_TimeSlot::class);
+        /** @var \Tx_Seminars_Mapper_TimeSlot $timeSlotMapper */
+        $timeSlotMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_TimeSlot::class);
 
         $timeSlotsOutput = '';
         $timeSlots = $this->seminar->getTimeSlotsAsArrayWithMarkers();
@@ -983,7 +983,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
             $this->setMarker('timeslot_place', htmlspecialchars($timeSlotData['place']));
             $this->setMarker('timeslot_speakers', htmlspecialchars($timeSlotData['speakers']));
 
-            /** @var Tx_Seminars_Model_TimeSlot $timeSlot */
+            /** @var \Tx_Seminars_Model_TimeSlot $timeSlot */
             $timeSlot = $timeSlotMapper->find($timeSlotData['uid']);
 
             foreach ($this->getSingleViewHooks() as $hook) {
@@ -1092,7 +1092,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
                 $speakerType,
                 ['speakers', 'partners', 'tutors', 'leaders']
         )) {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 'The speaker type given in the parameter $speakerType is not an allowed type.',
                 1333293083
             );
@@ -1366,13 +1366,13 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 
         $output = '';
 
-        /** @var Tx_Seminars_Mapper_Event $eventMapper */
-        $eventMapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
+        /** @var \Tx_Seminars_Mapper_Event $eventMapper */
+        $eventMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
 
         $dependencies = $this->seminar->getDependencies();
-        /** @var Tx_Seminars_OldModel_Event $dependency */
+        /** @var \Tx_Seminars_OldModel_Event $dependency */
         foreach ($dependencies as $dependency) {
-            /** @var Tx_Seminars_Model_Event $event */
+            /** @var \Tx_Seminars_Model_Event $event */
             $event = $eventMapper->find($dependency->getUid());
             $this->setMarker(
                 'dependency_title',
@@ -1489,7 +1489,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
      */
     public function isLoggedIn()
     {
-        return Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn();
+        return \Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn();
     }
 
     /**
@@ -1499,8 +1499,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
      */
     protected function getLoggedInFrontEndUserUid()
     {
-        $loginManager = Tx_Oelib_FrontEndLoginManager::getInstance();
-        return $loginManager->isLoggedIn() ? $loginManager->getLoggedInUser(Tx_Seminars_Mapper_FrontEndUser::class)->getUid() : 0;
+        $loginManager = \Tx_Oelib_FrontEndLoginManager::getInstance();
+        return $loginManager->isLoggedIn() ? $loginManager->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class)->getUid() : 0;
     }
 
     /**
@@ -1554,7 +1554,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
      */
     private function hideUnneededSubpartsForTopicRecords()
     {
-        if ($this->seminar->getRecordType() != Tx_Seminars_Model_Event::TYPE_TOPIC) {
+        if ($this->seminar->getRecordType() != \Tx_Seminars_Model_Event::TYPE_TOPIC) {
             return;
         }
 
@@ -1622,8 +1622,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
         if ($this->internal['res_count']) {
             // If we are on a topic record, overwrite the label with an
             // alternative text.
-            if (($this->seminar->getRecordType() == Tx_Seminars_Model_Event::TYPE_COMPLETE)
-                || ($this->seminar->getRecordType() == Tx_Seminars_Model_Event::TYPE_TOPIC)
+            if (($this->seminar->getRecordType() == \Tx_Seminars_Model_Event::TYPE_COMPLETE)
+                || ($this->seminar->getRecordType() == \Tx_Seminars_Model_Event::TYPE_TOPIC)
             ) {
                 $this->setMarker(
                     'label_list_otherdates',
@@ -1773,7 +1773,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
      *        the flavor of list view: either an empty string (for the default
      *        list view), the value from "what_to_display", or "other_dates"
      *
-     * @return Tx_Seminars_Bag_Abstract a seminar bag or a registration bag
+     * @return \Tx_Seminars_Bag_Abstract a seminar bag or a registration bag
      *                                  containing the seminars or registrations
      *                                  for the list view
      */
@@ -1829,7 +1829,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
             $this->limitToTimeFrameSetting($builder);
         }
 
-        $user = Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(Tx_Seminars_Mapper_FrontEndUser::class);
+        $user = \Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
 
         switch ($whatToDisplay) {
             case 'topic_list':
@@ -1893,7 +1893,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
      * This function should only be called when there are actually any list
      * items.
      *
-     * @param Tx_Seminars_Bag_Abstract $seminarOrRegistrationBag
+     * @param \Tx_Seminars_Bag_Abstract $seminarOrRegistrationBag
      *        initialized seminar or registration bag
      * @param string $whatToDisplay
      *        a string selecting the flavor of list view: either an empty string (for the default list view),
@@ -1902,7 +1902,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
      * @return string HTML for the table (will not be empty)
      */
     protected function createListTable(
-        Tx_Seminars_Bag_Abstract $seminarOrRegistrationBag,
+        \Tx_Seminars_Bag_Abstract $seminarOrRegistrationBag,
         $whatToDisplay
     ) {
         $result = $this->createListHeader();
@@ -1910,11 +1910,11 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 
         foreach ($seminarOrRegistrationBag as $currentItem) {
             if ($whatToDisplay == 'my_events') {
-                /** @var Tx_Seminars_OldModel_Registration $currentItem */
+                /** @var \Tx_Seminars_OldModel_Registration $currentItem */
                 $this->registration = $currentItem;
                 $this->setSeminar($this->registration->getSeminarObject());
             } else {
-                /** @var Tx_Seminars_OldModel_Event $currentItem */
+                /** @var \Tx_Seminars_OldModel_Event $currentItem */
                 $this->setSeminar($currentItem);
             }
 
@@ -2007,9 +2007,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
         $result = '';
 
         if ($this->seminar->isOk()) {
-            /** @var Tx_Seminars_Mapper_Event $mapper */
-            $mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
-            /** @var Tx_Seminars_Model_Event $event */
+            /** @var \Tx_Seminars_Mapper_Event $mapper */
+            $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+            /** @var \Tx_Seminars_Model_Event $event */
             $event = $mapper->find($this->getSeminar()->getUid());
 
             $cssClasses = [];
@@ -2047,7 +2047,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
                 $imageConfiguration = [
                     'altText' => $this->seminar->getTitle(),
                     'titleText' => $this->seminar->getTitle(),
-                    'file' => Tx_Seminars_FrontEnd_AbstractView::UPLOAD_PATH . $this->seminar->getImage(),
+                    'file' => \Tx_Seminars_FrontEnd_AbstractView::UPLOAD_PATH . $this->seminar->getImage(),
                     'file.' => [
                         'width' => $this->getConfValueInteger('seminarImageListViewWidth') . 'c',
                         'height' => $this->getConfValueInteger('seminarImageListViewHeight') . 'c',
@@ -2059,8 +2059,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
             }
             $this->setMarker('image', $image);
 
-            /** @var Tx_Seminars_FrontEnd_CategoryList $categoryList */
-            $categoryList = GeneralUtility::makeInstance(Tx_Seminars_FrontEnd_CategoryList::class, $this->conf, $this->cObj);
+            /** @var \Tx_Seminars_FrontEnd_CategoryList $categoryList */
+            $categoryList = GeneralUtility::makeInstance(\Tx_Seminars_FrontEnd_CategoryList::class, $this->conf, $this->cObj);
             $listOfCategories = $categoryList->createCategoryList(
                 $this->seminar->getCategories()
             );
@@ -2172,9 +2172,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
             }
 
             if ($whatToDisplay === 'my_events') {
-                /** @var Tx_Seminars_Mapper_Registration $mapper */
-                $mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Registration::class);
-                /** @var Tx_Seminars_Model_Registration $registration */
+                /** @var \Tx_Seminars_Mapper_Registration $mapper */
+                $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+                /** @var \Tx_Seminars_Model_Registration $registration */
                 $registration = $mapper->find($this->registration->getUid());
 
                 foreach ($this->getListViewHooks() as $hook) {
@@ -2192,13 +2192,13 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
      * Returns a seminarBagBuilder object with the source pages set for the list
      * view.
      *
-     * @return Tx_Seminars_BagBuilder_Event the seminarBagBuilder object for
+     * @return \Tx_Seminars_BagBuilder_Event the seminarBagBuilder object for
      *                                       the list view
      */
     private function createSeminarBagBuilder()
     {
-        /** @var Tx_Seminars_BagBuilder_Event $seminarBagBuilder */
-        $seminarBagBuilder = GeneralUtility::makeInstance(Tx_Seminars_BagBuilder_Event::class);
+        /** @var \Tx_Seminars_BagBuilder_Event $seminarBagBuilder */
+        $seminarBagBuilder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Event::class);
 
         $seminarBagBuilder->setSourcePages(
             $this->getConfValueString('pidList'),
@@ -2214,16 +2214,16 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
      * currently logged in front-end user as attendee for the "my events" list
      * view.
      *
-     * @return Tx_Seminars_BagBuilder_Registration the registrations for the
+     * @return \Tx_Seminars_BagBuilder_Registration the registrations for the
      *                                             "my events" list
      */
     private function createRegistrationBagBuilder()
     {
-        /** @var Tx_Seminars_BagBuilder_Registration $registrationBagBuilder */
-        $registrationBagBuilder = GeneralUtility::makeInstance(Tx_Seminars_BagBuilder_Registration::class);
+        /** @var \Tx_Seminars_BagBuilder_Registration $registrationBagBuilder */
+        $registrationBagBuilder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Registration::class);
 
-        /** @var Tx_Seminars_Model_FrontEndUser $loggedInUser */
-        $loggedInUser = Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(Tx_Seminars_Mapper_FrontEndUser::class);
+        /** @var \Tx_Seminars_Model_FrontEndUser $loggedInUser */
+        $loggedInUser = \Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
         $registrationBagBuilder->limitToAttendee($loggedInUser);
         $registrationBagBuilder->setOrderByEventColumn($this->getOrderByForListView());
 
@@ -2233,13 +2233,13 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
     /**
      * Returns a pi1_frontEndRequirementsList object.
      *
-     * @return Tx_Seminars_FrontEnd_RequirementsList
+     * @return \Tx_Seminars_FrontEnd_RequirementsList
      *         the object to build the requirements list with
      */
     private function createRequirementsList()
     {
-        /** @var Tx_Seminars_FrontEnd_RequirementsList $list */
-        $list = GeneralUtility::makeInstance(Tx_Seminars_FrontEnd_RequirementsList::class, $this->conf, $this->cObj);
+        /** @var \Tx_Seminars_FrontEnd_RequirementsList $list */
+        $list = GeneralUtility::makeInstance(\Tx_Seminars_FrontEnd_RequirementsList::class, $this->conf, $this->cObj);
         return $list;
     }
 
@@ -2319,8 +2319,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
             return '';
         }
 
-        /** @var Tx_Seminars_FrontEnd_SelectorWidget $selectorWidget */
-        $selectorWidget = GeneralUtility::makeInstance(Tx_Seminars_FrontEnd_SelectorWidget::class, $this->conf, $this->cObj);
+        /** @var \Tx_Seminars_FrontEnd_SelectorWidget $selectorWidget */
+        $selectorWidget = GeneralUtility::makeInstance(\Tx_Seminars_FrontEnd_SelectorWidget::class, $this->conf, $this->cObj);
 
         return $selectorWidget->render();
     }
@@ -2329,18 +2329,18 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
      * Limits the given seminarbagbuilder for additional parameters needed to
      * build the list view.
      *
-     * @param Tx_Seminars_BagBuilder_Event $builder
+     * @param \Tx_Seminars_BagBuilder_Event $builder
      *        the seminarbagbuilder to limit for additional parameters
      *
      * @return void
      */
-    protected function limitForAdditionalParameters(Tx_Seminars_BagBuilder_Event $builder)
+    protected function limitForAdditionalParameters(\Tx_Seminars_BagBuilder_Event $builder)
     {
         // Adds the query parameter that result from the user selection in the
         // selector widget (including the search form).
         if (is_array($this->piVars['language'])) {
             $builder->limitToLanguages(
-                Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
+                \Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
                     $this->piVars['language']
                 )
             );
@@ -2350,7 +2350,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
         // @see https://bugs.oliverklee.com/show_bug.cgi?id=3410
         if (is_array($this->piVars['place'])) {
             $builder->limitToPlaces(
-                Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
+                \Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
                     $this->piVars['place']
                 )
             );
@@ -2372,14 +2372,14 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 
         if (is_array($this->piVars['city'])) {
             $builder->limitToCities(
-                Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
+                \Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
                     $this->piVars['city']
                 )
             );
         }
         if (is_array($this->piVars['country'])) {
             $builder->limitToCountries(
-                Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
+                \Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
                     $this->piVars['country']
                 )
             );
@@ -2388,7 +2388,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
             $builder->limitToOrganizers(
                 implode(
                     ',',
-                    Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
+                    \Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
                         $this->piVars['organizer']
                     )
                 )
@@ -2417,7 +2417,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
             && is_array($this->piVars['event_type'])
         ) {
             $builder->limitToEventTypes(
-                Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
+                \Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
                     $this->piVars['event_type']
                 )
             );
@@ -2466,11 +2466,11 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
     /**
      * Gets the CSS classes (space-separated) for the Vacancies TD.
      *
-     * @param Tx_Seminars_OldModel_Event $event the current seminar object
+     * @param \Tx_Seminars_OldModel_Event $event the current seminar object
      *
      * @return string class attribute value filled with a list a space-separated CSS classes
      */
-    public function getVacanciesClasses(Tx_Seminars_OldModel_Event $event)
+    public function getVacanciesClasses(\Tx_Seminars_OldModel_Event $event)
     {
         if (!$event->needsRegistration()
             || (!$event->hasDate() && !$this->configurationService->getConfValueBoolean('allowRegistrationForEventsWithoutDate'))
@@ -2871,7 +2871,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
                 'additionalParams' => GeneralUtility::implodeArrayForUrl(
                     '',
                     [
-                        'type' => Tx_Seminars_Csv_CsvDownloader::CSV_TYPE_NUMBER,
+                        'type' => \Tx_Seminars_Csv_CsvDownloader::CSV_TYPE_NUMBER,
                         'tx_seminars_pi2' => [
                             'table' => 'tx_seminars_attendances',
                             'eventUid' => $this->seminar->getUid(),
@@ -2999,8 +2999,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
      */
     protected function createRegistrationForm()
     {
-        /** @var Tx_Seminars_FrontEnd_RegistrationForm $registrationEditor */
-        $registrationEditor = GeneralUtility::makeInstance(Tx_Seminars_FrontEnd_RegistrationForm::class, $this->conf, $this->cObj);
+        /** @var \Tx_Seminars_FrontEnd_RegistrationForm $registrationEditor */
+        $registrationEditor = GeneralUtility::makeInstance(\Tx_Seminars_FrontEnd_RegistrationForm::class, $this->conf, $this->cObj);
         $registrationEditor->setSeminar($this->seminar);
         $registrationEditor->setAction($this->piVars['action']);
         if ($this->piVars['action'] == 'unregister') {
@@ -3074,7 +3074,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
             $result = $eventEditor->render();
         } else {
             $result = $hasAccessMessage;
-            Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader(
+            \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader(
                 'Status: 403 Forbidden'
             );
         }
@@ -3085,12 +3085,12 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
     /**
      * Creates an event editor instance and returns it.
      *
-     * @return Tx_Seminars_FrontEnd_EventEditor the initialized event editor
+     * @return \Tx_Seminars_FrontEnd_EventEditor the initialized event editor
      */
     protected function createEventEditorInstance()
     {
-        /** @var Tx_Seminars_FrontEnd_EventEditor $eventEditor */
-        $eventEditor = GeneralUtility::makeInstance(Tx_Seminars_FrontEnd_EventEditor::class, $this->conf, $this->cObj);
+        /** @var \Tx_Seminars_FrontEnd_EventEditor $eventEditor */
+        $eventEditor = GeneralUtility::makeInstance(\Tx_Seminars_FrontEnd_EventEditor::class, $this->conf, $this->cObj);
         $eventEditor->setObjectUid((int)$this->piVars['seminar']);
 
         return $eventEditor;
@@ -3113,7 +3113,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
         }
 
         $imageConfiguration = [
-            'file' => Tx_Seminars_FrontEnd_AbstractView::UPLOAD_PATH . $iconData['icon'],
+            'file' => \Tx_Seminars_FrontEnd_AbstractView::UPLOAD_PATH . $iconData['icon'],
             'titleText' => $iconData['title'],
         ];
         return $this->cObj->cObjGetSingle('IMAGE', $imageConfiguration);
@@ -3134,7 +3134,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
                 $speakerType,
                 ['speakers', 'partners', 'tutors', 'leaders']
         )) {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 'The given speaker type "' . $speakerType .
                     '" is not an allowed type. Allowed types are "speakers", "partners", "tutors" or "leaders".',
                 1333293103
@@ -3164,7 +3164,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
         $result = '';
         $organizers = $this->seminar->getOrganizerBag();
 
-        /** @var Tx_Seminars_OldModel_Organizer $organizer */
+        /** @var \Tx_Seminars_OldModel_Organizer $organizer */
         foreach ($organizers as $organizer) {
             if ($organizer->hasHomepage()) {
                 $organizerTitle = $this->cObj->getTypoLink(
@@ -3231,11 +3231,11 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
     /**
      * Filters the given seminar bag builder to the date set in piVars.
      *
-     * @param Tx_Seminars_BagBuilder_Event $builder the bag builder to limit by date
+     * @param \Tx_Seminars_BagBuilder_Event $builder the bag builder to limit by date
      *
      * @return void
      */
-    private function filterByDate(Tx_Seminars_BagBuilder_Event $builder)
+    private function filterByDate(\Tx_Seminars_BagBuilder_Event $builder)
     {
         $dateFrom = $this->getTimestampFromDatePiVars('from');
         if ($dateFrom > 0) {
@@ -3463,7 +3463,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
     /**
      * Limits the bag to events within the time frame set by setup.
      *
-     * @param Tx_Seminars_BagBuilder_Event $builder
+     * @param \Tx_Seminars_BagBuilder_Event $builder
      *        the seminarbagbuilder to limit by time frame
      *
      * @return void
@@ -3477,7 +3477,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
                     's_template_special'
                 )
             );
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
             // Ignores the exception because the user will be warned of the
             // problem by the configuration check.
         }
@@ -3502,9 +3502,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
             return;
         }
 
-        /** @var Tx_Seminars_Mapper_Event $mapper */
-        $mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
-        /** @var Tx_Seminars_Model_Event $event */
+        /** @var \Tx_Seminars_Mapper_Event $mapper */
+        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        /** @var \Tx_Seminars_Model_Event $event */
         $event = $mapper->find($this->piVars['seminar']);
         if (!$event->isPublished()) {
             return;
@@ -3527,15 +3527,15 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
     /**
      * Marks $event as hidden and saves it.
      *
-     * @param Tx_Seminars_Model_Event $event the event to hide
+     * @param \Tx_Seminars_Model_Event $event the event to hide
      *
      * @return void
      */
-    protected function hideEvent(Tx_Seminars_Model_Event $event)
+    protected function hideEvent(\Tx_Seminars_Model_Event $event)
     {
         $event->markAsHidden();
-        /** @var Tx_Seminars_Mapper_Event $mapper */
-        $mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
+        /** @var \Tx_Seminars_Mapper_Event $mapper */
+        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
         $mapper->save($event);
 
         $this->redirectToCurrentUrl();
@@ -3544,15 +3544,15 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
     /**
      * Marks $event as visible and saves it.
      *
-     * @param Tx_Seminars_Model_Event $event the event to unhide
+     * @param \Tx_Seminars_Model_Event $event the event to unhide
      *
      * @return void
      */
-    protected function unhideEvent(Tx_Seminars_Model_Event $event)
+    protected function unhideEvent(\Tx_Seminars_Model_Event $event)
     {
         $event->markAsVisible();
-        /** @var Tx_Seminars_Mapper_Event $mapper */
-        $mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
+        /** @var \Tx_Seminars_Mapper_Event $mapper */
+        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
         $mapper->save($event);
 
         $this->redirectToCurrentUrl();
@@ -3561,18 +3561,18 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
     /**
      * Creates a hidden copy of $event and saves it.
      *
-     * @param Tx_Seminars_Model_Event $event the event copy
+     * @param \Tx_Seminars_Model_Event $event the event copy
      *
      * @return void
      */
-    protected function copyEvent(Tx_Seminars_Model_Event $event)
+    protected function copyEvent(\Tx_Seminars_Model_Event $event)
     {
         $copy = clone $event;
         $copy->markAsHidden();
-        $copy->setRegistrations(new Tx_Oelib_List());
+        $copy->setRegistrations(new \Tx_Oelib_List());
 
-        /** @var Tx_Seminars_Mapper_Event $mapper */
-        $mapper = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Event::class);
+        /** @var \Tx_Seminars_Mapper_Event $mapper */
+        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
         $mapper->save($copy);
 
         $this->redirectToCurrentUrl();
@@ -3586,20 +3586,20 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
     protected function redirectToCurrentUrl()
     {
         $currentUrl = GeneralUtility::locationHeaderUrl(GeneralUtility::getIndpEnv('REQUEST_URI'));
-        Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Location: ' . $currentUrl);
+        \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Location: ' . $currentUrl);
     }
 
     /**
      * Creates a hyperlink to the single view page of the event $event.
      *
-     * @param Tx_Seminars_Model_Event $event
+     * @param \Tx_Seminars_Model_Event $event
      *        the event which to link to
      * @param string $linkText the link text, must not be empty
      * @param bool $htmlspecialcharLinkText whether to htmlspecialchar the link text
      *
      * @return string HTML code for the link to the event's single view page
      */
-    public function createSingleViewLink(Tx_Seminars_Model_Event $event, $linkText, $htmlspecialcharLinkText = true)
+    public function createSingleViewLink(\Tx_Seminars_Model_Event $event, $linkText, $htmlspecialcharLinkText = true)
     {
         $processedLinkText = $htmlspecialcharLinkText ? htmlspecialchars($linkText) : $linkText;
         $linkConditionConfiguration = $this->getConfValueString('linkToSingleView', 's_listView');
@@ -3616,13 +3616,13 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
     /**
      * Returns a link builder instance.
      *
-     * @return Tx_Seminars_Service_SingleViewLinkBuilder the link builder instance
+     * @return \Tx_Seminars_Service_SingleViewLinkBuilder the link builder instance
      */
     protected function getLinkBuilder()
     {
         if ($this->linkBuilder === null) {
-            /** @var Tx_Seminars_Service_SingleViewLinkBuilder $linkBuilder */
-            $linkBuilder = GeneralUtility::makeInstance(Tx_Seminars_Service_SingleViewLinkBuilder::class);
+            /** @var \Tx_Seminars_Service_SingleViewLinkBuilder $linkBuilder */
+            $linkBuilder = GeneralUtility::makeInstance(\Tx_Seminars_Service_SingleViewLinkBuilder::class);
             $this->injectLinkBuilder($linkBuilder);
         }
         $this->linkBuilder->setPlugin($this);
@@ -3633,12 +3633,12 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
     /**
      * Injects a link builder.
      *
-     * @param Tx_Seminars_Service_SingleViewLinkBuilder $linkBuilder
+     * @param \Tx_Seminars_Service_SingleViewLinkBuilder $linkBuilder
      *        the link builder instance to use
      *
      * @return void
      */
-    public function injectLinkBuilder(Tx_Seminars_Service_SingleViewLinkBuilder $linkBuilder)
+    public function injectLinkBuilder(\Tx_Seminars_Service_SingleViewLinkBuilder $linkBuilder)
     {
         $this->linkBuilder = $linkBuilder;
     }

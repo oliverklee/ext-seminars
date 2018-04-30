@@ -7,7 +7,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_Csv_AbstractListView
+abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends \Tx_Seminars_Csv_AbstractListView
 {
     /**
      * @var string
@@ -26,12 +26,12 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
      *
      * @return void
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function setPageUid($pageUid)
     {
         if ($pageUid < 0) {
-            throw new InvalidArgumentException('$pageUid must be >= 0, but actually is: ' . $pageUid, 1390307753);
+            throw new \InvalidArgumentException('$pageUid must be >= 0, but actually is: ' . $pageUid, 1390307753);
         }
 
         $this->pageUid = $pageUid;
@@ -44,12 +44,12 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
      *
      * @return void
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     public function setEventUid($eventUid)
     {
         if ($eventUid < 0) {
-            throw new InvalidArgumentException('$eventUid must be >= 0, but actually is: ' . $eventUid, 1390320633);
+            throw new \InvalidArgumentException('$eventUid must be >= 0, but actually is: ' . $eventUid, 1390320633);
         }
 
         $this->eventUid = $eventUid;
@@ -80,18 +80,18 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
      *
      * @return string
      *
-     * @throws BadMethodCallException
+     * @throws \BadMethodCallException
      */
     public function render()
     {
         if (!$this->hasPageUid() && !$this->hasEventUid()) {
-            throw new BadMethodCallException(
+            throw new \BadMethodCallException(
                 'render() must only be called after either a page UID or an event has been set.',
                 1390320210
             );
         }
         if ($this->hasPageUid() && $this->hasEventUid()) {
-            throw new BadMethodCallException(
+            throw new \BadMethodCallException(
                 'render() must only be called after either a page UID or an event has been set, but not both.',
                 1390329291
             );
@@ -173,12 +173,12 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
     /**
      * Creates a registrationBagBuilder with some preset limitations.
      *
-     * @return Tx_Seminars_BagBuilder_Registration the bag builder with some preset limitations
+     * @return \Tx_Seminars_BagBuilder_Registration the bag builder with some preset limitations
      */
     protected function createRegistrationBagBuilder()
     {
-        /** @var Tx_Seminars_BagBuilder_Registration $registrationBagBuilder */
-        $registrationBagBuilder = GeneralUtility::makeInstance(Tx_Seminars_BagBuilder_Registration::class);
+        /** @var \Tx_Seminars_BagBuilder_Registration $registrationBagBuilder */
+        $registrationBagBuilder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Registration::class);
 
         if (!$this->shouldAlsoContainRegistrationsOnQueue()) {
             $registrationBagBuilder->limitToRegular();
@@ -201,20 +201,20 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
      *
      * The fields are separated by semicolons and the lines by CRLF.
      *
-     * @param Tx_Seminars_BagBuilder_Registration $builder
+     * @param \Tx_Seminars_BagBuilder_Registration $builder
      *        the bag builder already limited to the registrations which should be returned
      *
      * @return string[] the list of registrations, will be empty if no registrations have been given
      *
-     * @throws RuntimeException
+     * @throws \RuntimeException
      */
-    protected function getRegistrationsCsvList(Tx_Seminars_BagBuilder_Registration $builder)
+    protected function getRegistrationsCsvList(\Tx_Seminars_BagBuilder_Registration $builder)
     {
         $csvLines = [];
-        /** @var $bag Tx_Seminars_Bag_Registration */
+        /** @var $bag \Tx_Seminars_Bag_Registration */
         $bag = $builder->build();
 
-        /** @var Tx_Seminars_OldModel_Registration $registration */
+        /** @var \Tx_Seminars_OldModel_Registration $registration */
         foreach ($bag as $registration) {
             $userData = $this->createCsvColumnsForFrontEndUser($registration);
             $registrationData = $this->createCsvColumnsForRegistration($registration);
@@ -228,11 +228,11 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
      * Retrieves data from an object and returns that data as an array of values. The individual values are already wrapped in
      * double quotes, with the contents having all quotes escaped.
      *
-     * @param Tx_Seminars_OldModel_Registration $model object that will deliver the data
+     * @param \Tx_Seminars_OldModel_Registration $model object that will deliver the data
      *
      * @return string[] the data for the keys provided in $keys (may be empty)
      */
-    protected function createCsvColumnsForRegistration(Tx_Seminars_OldModel_Registration $model)
+    protected function createCsvColumnsForRegistration(\Tx_Seminars_OldModel_Registration $model)
     {
         $csvLines = [];
 
@@ -247,11 +247,11 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends Tx_Seminars_
      * Retrieves data from an object and returns that data as an array of values. The individual values are already wrapped in
      * double quotes, with the contents having all quotes escaped.
      *
-     * @param Tx_Seminars_OldModel_Registration $model object that will deliver the data
+     * @param \Tx_Seminars_OldModel_Registration $model object that will deliver the data
      *
      * @return string[] the data for the keys provided in $keys (may be empty)
      */
-    protected function createCsvColumnsForFrontEndUser(Tx_Seminars_OldModel_Registration $model)
+    protected function createCsvColumnsForFrontEndUser(\Tx_Seminars_OldModel_Registration $model)
     {
         $csvLines = [];
 

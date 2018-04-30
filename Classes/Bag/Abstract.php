@@ -9,7 +9,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-abstract class Tx_Seminars_Bag_Abstract implements Iterator, Tx_Oelib_Interface_ConfigurationCheckable
+abstract class Tx_Seminars_Bag_Abstract implements Iterator, \Tx_Oelib_Interface_ConfigurationCheckable
 {
     /**
      * @var string the name of the main DB table from which we get the records
@@ -72,7 +72,7 @@ abstract class Tx_Seminars_Bag_Abstract implements Iterator, Tx_Oelib_Interface_
     /**
      * the current object (may be NULL)
      *
-     * @var Tx_Seminars_OldModel_Abstract
+     * @var \Tx_Seminars_OldModel_Abstract
      */
     protected $currentItem = null;
 
@@ -137,7 +137,7 @@ abstract class Tx_Seminars_Bag_Abstract implements Iterator, Tx_Oelib_Interface_
 
     /**
      * For the main DB table and the additional tables, writes the corresponding
-     * concatenated output from Tx_Oelib_Db::enableFields into
+     * concatenated output from \Tx_Oelib_Db::enableFields into
      * $this->enabledFieldsQuery.
      *
      * @param int $showHiddenRecords If $showHiddenRecords is set (0/1), any hidden-fields in records are ignored.
@@ -168,7 +168,7 @@ abstract class Tx_Seminars_Bag_Abstract implements Iterator, Tx_Oelib_Interface_
             // Is there a TCA entry for that table?
             $ctrl = $GLOBALS['TCA'][$currentTableName]['ctrl'];
             if (is_array($ctrl)) {
-                $this->enabledFieldsQuery .= Tx_Oelib_Db::enableFields(
+                $this->enabledFieldsQuery .= \Tx_Oelib_Db::enableFields(
                         $currentTableName,
                     $showHiddenRecords,
                     $ignoreColumns
@@ -198,7 +198,7 @@ abstract class Tx_Seminars_Bag_Abstract implements Iterator, Tx_Oelib_Interface_
             // overwritten immediately anyway.
         }
 
-        $this->dbResult = Tx_Oelib_Db::select(
+        $this->dbResult = \Tx_Oelib_Db::select(
             $this->dbTableName . '.*',
             $this->dbTableName . $this->additionalTableNames,
             $this->queryParameters . $this->enabledFieldsQuery,
@@ -215,7 +215,7 @@ abstract class Tx_Seminars_Bag_Abstract implements Iterator, Tx_Oelib_Interface_
     /**
      * Advances to the next record and returns a reference to that object.
      *
-     * @return Tx_Seminars_OldModel_Abstract the now current object, will be
+     * @return \Tx_Seminars_OldModel_Abstract the now current object, will be
      *                                       NULL if there is no next object
      */
     public function next()
@@ -245,7 +245,7 @@ abstract class Tx_Seminars_Bag_Abstract implements Iterator, Tx_Oelib_Interface_
     /**
      * Returns the current object (which may be NULL).
      *
-     * @return Tx_Seminars_OldModel_Abstract a reference to the current object,
+     * @return \Tx_Seminars_OldModel_Abstract a reference to the current object,
      *                                       will be NULL if there is no current
      *                                       object
      */
@@ -280,7 +280,7 @@ abstract class Tx_Seminars_Bag_Abstract implements Iterator, Tx_Oelib_Interface_
     public function key()
     {
         if (!$this->valid()) {
-            throw new RuntimeException('The current item is not valid.', 1333292257);
+            throw new \RuntimeException('The current item is not valid.', 1333292257);
         }
 
         return $this->current()->getUid();
@@ -321,7 +321,7 @@ abstract class Tx_Seminars_Bag_Abstract implements Iterator, Tx_Oelib_Interface_
             return $this->countWithoutLimit;
         }
 
-        $dbResultRow = Tx_Oelib_Db::selectSingle(
+        $dbResultRow = \Tx_Oelib_Db::selectSingle(
             'COUNT(*) AS number ',
             $this->dbTableName . $this->additionalTableNames,
             $this->queryParameters . $this->enabledFieldsQuery
@@ -368,7 +368,7 @@ abstract class Tx_Seminars_Bag_Abstract implements Iterator, Tx_Oelib_Interface_
     {
         $uids = [];
 
-        /** @var Tx_Seminars_OldModel_Abstract $currentItem */
+        /** @var \Tx_Seminars_OldModel_Abstract $currentItem */
         foreach ($this as $currentItem) {
             $uids[] = $currentItem->getUid();
         }

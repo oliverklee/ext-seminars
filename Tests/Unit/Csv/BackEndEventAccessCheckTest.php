@@ -8,10 +8,10 @@ use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Csv_BackEndEventAccessCheckTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Csv_BackEndEventAccessCheckTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Seminars_Csv_BackEndEventAccessCheck
+     * @var \Tx_Seminars_Csv_BackEndEventAccessCheck
      */
     protected $subject = null;
 
@@ -31,12 +31,12 @@ class Tx_Seminars_Tests_Unit_Csv_BackEndEventAccessCheckTest extends Tx_Phpunit_
         $this->backEndUser = $this->getMock(BackendUserAuthentication::class);
         $GLOBALS['BE_USER'] = $this->backEndUser;
 
-        $this->subject = new Tx_Seminars_Csv_BackEndEventAccessCheck();
+        $this->subject = new \Tx_Seminars_Csv_BackEndEventAccessCheck();
     }
 
     protected function tearDown()
     {
-        Tx_Oelib_BackEndLoginManager::purgeInstance();
+        \Tx_Oelib_BackEndLoginManager::purgeInstance();
         $GLOBALS['BE_USER'] = $this->backEndUserBackup;
     }
 

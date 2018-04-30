@@ -5,23 +5,23 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_Mapper_PlaceTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Mapper_PlaceTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Oelib_TestingFramework
+     * @var \Tx_Oelib_TestingFramework
      */
     private $testingFramework;
 
     /**
-     * @var Tx_Seminars_Mapper_Place
+     * @var \Tx_Seminars_Mapper_Place
      */
     private $fixture;
 
     protected function setUp()
     {
-        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
-        $this->fixture = new Tx_Seminars_Mapper_Place();
+        $this->fixture = new \Tx_Seminars_Mapper_Place();
     }
 
     protected function tearDown()
@@ -38,7 +38,7 @@ class Tx_Seminars_Tests_Unit_Mapper_PlaceTest extends Tx_Phpunit_TestCase
      */
     public function findWithUidReturnsPlaceInstance()
     {
-        self::assertInstanceOf(Tx_Seminars_Model_Place::class, $this->fixture->find(1));
+        self::assertInstanceOf(\Tx_Seminars_Model_Place::class, $this->fixture->find(1));
     }
 
     /**
@@ -51,7 +51,7 @@ class Tx_Seminars_Tests_Unit_Mapper_PlaceTest extends Tx_Phpunit_TestCase
             ['title' => 'Nice place']
         );
 
-        /** @var Tx_Seminars_Model_Place $model */
+        /** @var \Tx_Seminars_Model_Place $model */
         $model = $this->fixture->find($uid);
         self::assertEquals(
             'Nice place',
@@ -79,8 +79,8 @@ class Tx_Seminars_Tests_Unit_Mapper_PlaceTest extends Tx_Phpunit_TestCase
      */
     public function getOwnerWithOwnerReturnsOwnerInstance()
     {
-        $frontEndUser = Tx_Oelib_MapperRegistry::
-            get(Tx_Seminars_Mapper_FrontEndUser::class)->getLoadedTestingModel([]);
+        $frontEndUser = \Tx_Oelib_MapperRegistry::
+            get(\Tx_Seminars_Mapper_FrontEndUser::class)->getLoadedTestingModel([]);
         /** @var \Tx_Seminars_Model_Place $testingModel */
         $testingModel = $this->fixture->getLoadedTestingModel(
             ['owner' => $frontEndUser->getUid()]

@@ -5,25 +5,25 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_FrontEnd_TestingViewTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_FrontEnd_TestingViewTest extends \Tx_Phpunit_TestCase
 {
     /**
      * the fixture to test
      *
-     * @var Tx_Seminars_Tests_Unit_Fixtures_FrontEnd_TestingView
+     * @var \Tx_Seminars_Tests_Unit_Fixtures_FrontEnd_TestingView
      */
     private $fixture;
 
     /**
-     * @var Tx_Oelib_TestingFramework
+     * @var \Tx_Oelib_TestingFramework
      */
     private $testingFramework;
 
     protected function setUp()
     {
-        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
-        $this->fixture = new Tx_Seminars_Tests_Unit_Fixtures_FrontEnd_TestingView(
+        $this->fixture = new \Tx_Seminars_Tests_Unit_Fixtures_FrontEnd_TestingView(
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             $GLOBALS['TSFE']->cObj
         );

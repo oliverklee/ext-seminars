@@ -6,7 +6,7 @@
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Model_Category extends Tx_Oelib_Model implements Tx_Seminars_Interface_Titled
+class Tx_Seminars_Model_Category extends \Tx_Oelib_Model implements \Tx_Seminars_Interface_Titled
 {
     /**
      * Returns our title.
@@ -28,7 +28,7 @@ class Tx_Seminars_Model_Category extends Tx_Oelib_Model implements Tx_Seminars_I
     public function setTitle($title)
     {
         if ($title == '') {
-            throw new InvalidArgumentException('The parameter $title must not be empty.', 1333296115);
+            throw new \InvalidArgumentException('The parameter $title must not be empty.', 1333296115);
         }
 
         $this->setAsString('title', $title);

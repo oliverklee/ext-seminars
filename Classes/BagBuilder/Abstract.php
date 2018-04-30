@@ -62,18 +62,18 @@ abstract class Tx_Seminars_BagBuilder_Abstract
     public function __construct()
     {
         if ($this->tableName == '') {
-            throw new RuntimeException('The attribute $this->tableName must not be empty.', 1333292618);
+            throw new \RuntimeException('The attribute $this->tableName must not be empty.', 1333292618);
         }
     }
 
     /**
      * Creates and returns the customized bag.
      *
-     * @return Tx_Seminars_Bag_Abstract customized, newly-created bag
+     * @return \Tx_Seminars_Bag_Abstract customized, newly-created bag
      */
     public function build()
     {
-        /** @var Tx_Seminars_Bag_Abstract $bag */
+        /** @var \Tx_Seminars_Bag_Abstract $bag */
         $bag = GeneralUtility::makeInstance(
             $this->bagClassName,
             $this->getWhereClause(),
@@ -117,7 +117,7 @@ abstract class Tx_Seminars_BagBuilder_Abstract
             return;
         }
 
-        $recursivePidList = Tx_Oelib_Db::createRecursivePageList(
+        $recursivePidList = \Tx_Oelib_Db::createRecursivePageList(
             $sourcePagePids,
             $recursionDepth
         );
@@ -180,7 +180,7 @@ abstract class Tx_Seminars_BagBuilder_Abstract
     public function addAdditionalTableName($additionalTableName)
     {
         if ($additionalTableName == '') {
-            throw new InvalidArgumentException('The parameter $additionalTableName must not be empty.', 1333292599);
+            throw new \InvalidArgumentException('The parameter $additionalTableName must not be empty.', 1333292599);
         }
 
         $this->additionalTableNames[$additionalTableName] = $additionalTableName;
@@ -197,11 +197,11 @@ abstract class Tx_Seminars_BagBuilder_Abstract
     public function removeAdditionalTableName($additionalTableName)
     {
         if ($additionalTableName == '') {
-            throw new InvalidArgumentException('The parameter $additionalTableName must not be empty.', 1333292576);
+            throw new \InvalidArgumentException('The parameter $additionalTableName must not be empty.', 1333292576);
         }
 
         if (!isset($this->additionalTableNames[$additionalTableName])) {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 'The given additional table name does not exist in the list of additional table names.',
                 1333292582
             );

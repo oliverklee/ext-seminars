@@ -7,7 +7,7 @@
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Model_FrontEndUserGroup extends Tx_Oelib_Model_FrontEndUserGroup implements Tx_Seminars_Interface_Titled
+class Tx_Seminars_Model_FrontEndUserGroup extends \Tx_Oelib_Model_FrontEndUserGroup implements \Tx_Seminars_Interface_Titled
 {
     /**
      * @var int the publish setting to immediately publish all events edited
@@ -74,7 +74,7 @@ class Tx_Seminars_Model_FrontEndUserGroup extends Tx_Oelib_Model_FrontEndUserGro
     /**
      * Returns the BE user which is stored as reviewer for this group.
      *
-     * @return Tx_Oelib_Model_BackEndUser the reviewer for this group, will be
+     * @return \Tx_Oelib_Model_BackEndUser the reviewer for this group, will be
      *                                    NULL if no reviewer has been set
      */
     public function getReviewer()
@@ -107,7 +107,7 @@ class Tx_Seminars_Model_FrontEndUserGroup extends Tx_Oelib_Model_FrontEndUserGro
     /**
      * Gets this user group's assigned default categories.
      *
-     * @return Tx_Oelib_List the list of default categories assigned to this
+     * @return \Tx_Oelib_List the list of default categories assigned to this
      *                       group, will be empty if no default categories are
      *                       assigned to this group
      */
@@ -130,7 +130,7 @@ class Tx_Seminars_Model_FrontEndUserGroup extends Tx_Oelib_Model_FrontEndUserGro
     /**
      * Returns this user group's default organizer for the FE editor.
      *
-     * @return Tx_Seminars_Model_Organizer this group's default organizer, will
+     * @return \Tx_Seminars_Model_Organizer this group's default organizer, will
      *                                     be NULL if no organizer has been set
      */
     public function getDefaultOrganizer()
@@ -147,6 +147,6 @@ class Tx_Seminars_Model_FrontEndUserGroup extends Tx_Oelib_Model_FrontEndUserGro
     public function hasDefaultOrganizer()
     {
         return $this->getDefaultOrganizer()
-            instanceof Tx_Seminars_Model_Organizer;
+            instanceof \Tx_Seminars_Model_Organizer;
     }
 }

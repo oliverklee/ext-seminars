@@ -5,30 +5,30 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_ViewHelper_CountdownTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_ViewHelper_CountdownTest extends \Tx_Phpunit_TestCase
 {
     /**
-     * @var Tx_Seminars_ViewHelper_Countdown
+     * @var \Tx_Seminars_ViewHelper_Countdown
      */
     private $fixture;
 
     /**
-     * @var Tx_Oelib_TestingFramework
+     * @var \Tx_Oelib_TestingFramework
      */
     private $testingFramework;
 
     /**
-     * @var Tx_Oelib_Translator
+     * @var \Tx_Oelib_Translator
      */
     private $translator;
 
     protected function setUp()
     {
-        $this->testingFramework    = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework    = new \Tx_Oelib_TestingFramework('tx_seminars');
 
         $this->translator = \Tx_Oelib_TranslatorRegistry::get('seminars');
 
-        $this->fixture = new Tx_Seminars_ViewHelper_Countdown();
+        $this->fixture = new \Tx_Seminars_ViewHelper_Countdown();
     }
 
     protected function tearDown()

@@ -5,7 +5,7 @@
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Csv_DownloadRegistrationListView extends Tx_Seminars_Csv_AbstractRegistrationListView
+class Tx_Seminars_Csv_DownloadRegistrationListView extends \Tx_Seminars_Csv_AbstractRegistrationListView
 {
     /**
      * Returns the keys of the front-end user fields to export.

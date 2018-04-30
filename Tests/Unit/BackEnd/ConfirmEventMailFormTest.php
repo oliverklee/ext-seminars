@@ -10,16 +10,16 @@ use TYPO3\CMS\Core\Utility\VersionNumberUtility;
  * @author Mario Rimann <mario@screenteam.com>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends \Tx_Phpunit_TestCase
 {
     use BackEndTestsTrait;
 
     /**
-     * @var Tx_Seminars_BackEnd_ConfirmEventMailForm
+     * @var \Tx_Seminars_BackEnd_ConfirmEventMailForm
      */
     private $fixture;
     /**
-     * @var Tx_Oelib_TestingFramework
+     * @var \Tx_Oelib_TestingFramework
      */
     private $testingFramework;
 
@@ -45,7 +45,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends Tx_Phpunit
     private $eventUid;
 
     /**
-     * @var Tx_Oelib_EmailCollector
+     * @var \Tx_Oelib_EmailCollector
      */
     protected $mailer = null;
 
@@ -53,20 +53,20 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends Tx_Phpunit
     {
         $this->unifyTestingEnvironment();
 
-        /** @var Tx_Oelib_MailerFactory $mailerFactory */
-        $mailerFactory = GeneralUtility::makeInstance(Tx_Oelib_MailerFactory::class);
+        /** @var \Tx_Oelib_MailerFactory $mailerFactory */
+        $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
         $mailerFactory->enableTestMode();
         $this->mailer = $mailerFactory->getMailer();
 
-        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
-        Tx_Oelib_MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
+        \Tx_Oelib_MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
 
         if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8000000) {
             self::markTestSkipped('This test is for the old BE module only.');
         }
 
         $this->dummySysFolderUid = $this->testingFramework->createSystemFolder();
-        Tx_Oelib_PageFinder::getInstance()->setPageUid($this->dummySysFolderUid);
+        \Tx_Oelib_PageFinder::getInstance()->setPageUid($this->dummySysFolderUid);
 
         $this->organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
@@ -80,7 +80,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends Tx_Phpunit
             [
                 'pid' => $this->dummySysFolderUid,
                 'title' => 'Dummy event',
-                'object_type' => Tx_Seminars_Model_Event::TYPE_DATE,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 86400,
                 'organizers' => 0,
             ]
@@ -92,7 +92,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends Tx_Phpunit
             'organizers'
         );
 
-        $this->fixture = new Tx_Seminars_BackEnd_ConfirmEventMailForm($this->eventUid);
+        $this->fixture = new \Tx_Seminars_BackEnd_ConfirmEventMailForm($this->eventUid);
     }
 
     protected function tearDown()
@@ -175,7 +175,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends Tx_Phpunit
             $this->testingFramework->existsRecord(
                 'tx_seminars_seminars',
                 'uid = ' . $this->eventUid . ' AND cancelled = ' .
-                    Tx_Seminars_Model_Event::STATUS_CONFIRMED
+                    \Tx_Seminars_Model_Event::STATUS_CONFIRMED
             )
         );
     }
@@ -255,9 +255,9 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends Tx_Phpunit
             ]
         );
 
-        /** @var Tx_Seminars_Model_Registration $registration */
-        $registration = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_Registration::class)->find($registrationUid);
-        $hook = $this->getMock(Tx_Seminars_Interface_Hook_BackEndModule::class);
+        /** @var \Tx_Seminars_Model_Registration $registration */
+        $registration = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)->find($registrationUid);
+        $hook = $this->getMock(\Tx_Seminars_Interface_Hook_BackEndModule::class);
         $hook->expects(self::once())->method('modifyConfirmEmail')
             ->with($registration, self::anything());
 
@@ -304,7 +304,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends Tx_Phpunit
             ]
         );
 
-        $hook = $this->getMock(Tx_Seminars_Interface_Hook_BackEndModule::class);
+        $hook = $this->getMock(\Tx_Seminars_Interface_Hook_BackEndModule::class);
         $hook->expects(self::exactly(2))->method('modifyConfirmEmail');
 
         $hookClass = get_class($hook);

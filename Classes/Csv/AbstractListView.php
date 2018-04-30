@@ -50,7 +50,7 @@ abstract class Tx_Seminars_Csv_AbstractListView
      */
     public function __construct()
     {
-        $this->configuration = Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars');
+        $this->configuration = \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars');
     }
 
     /**
@@ -98,7 +98,7 @@ abstract class Tx_Seminars_Csv_AbstractListView
      *
      * @return void
      *
-     * @throws InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     abstract public function setPageUid($pageUid);
 

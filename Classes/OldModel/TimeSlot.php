@@ -7,7 +7,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_OldModel_TimeSlot extends Tx_Seminars_OldModel_AbstractTimeSpan
+class Tx_Seminars_OldModel_TimeSlot extends \Tx_Seminars_OldModel_AbstractTimeSpan
 {
     /**
      * @var string the name of the SQL table this class corresponds to
@@ -17,13 +17,13 @@ class Tx_Seminars_OldModel_TimeSlot extends Tx_Seminars_OldModel_AbstractTimeSpa
     /**
      * Creates and returns a speakerbag object.
      *
-     * @return Tx_Seminars_Bag_Speaker a speakerbag object
+     * @return \Tx_Seminars_Bag_Speaker a speakerbag object
      */
     private function getSpeakerBag()
     {
-        /** @var Tx_Seminars_Bag_Speaker $bag */
+        /** @var \Tx_Seminars_Bag_Speaker $bag */
         $bag = GeneralUtility::makeInstance(
-            Tx_Seminars_Bag_Speaker::class,
+            \Tx_Seminars_Bag_Speaker::class,
             'tx_seminars_timeslots_speakers_mm.uid_local = ' . $this->getUid() . ' AND uid = uid_foreign',
             'tx_seminars_timeslots_speakers_mm',
             'sorting'
@@ -67,7 +67,7 @@ class Tx_Seminars_OldModel_TimeSlot extends Tx_Seminars_OldModel_AbstractTimeSpa
         $result = [];
         $speakerBag = $this->getSpeakerBag();
 
-        /** @var Tx_Seminars_OldModel_Speaker $speaker */
+        /** @var \Tx_Seminars_OldModel_Speaker $speaker */
         foreach ($speakerBag as $speaker) {
             $result[] = $speaker->getTitle();
         }
@@ -82,8 +82,8 @@ class Tx_Seminars_OldModel_TimeSlot extends Tx_Seminars_OldModel_AbstractTimeSpa
      *
      * @return string our places or a localized string "will be announced" if this timeslot has no place assigned
      *
-     * @throws Tx_Oelib_Exception_Database
-     * @throws Tx_Oelib_Exception_NotFound
+     * @throws \Tx_Oelib_Exception_Database
+     * @throws \Tx_Oelib_Exception_NotFound
      */
     public function getPlaceShort()
     {
@@ -95,16 +95,16 @@ class Tx_Seminars_OldModel_TimeSlot extends Tx_Seminars_OldModel_AbstractTimeSpa
             'title',
             'tx_seminars_sites',
             'uid=' . $this->getPlace() .
-                Tx_Oelib_Db::enableFields('tx_seminars_sites')
+                \Tx_Oelib_Db::enableFields('tx_seminars_sites')
         );
         if (!$dbResult) {
-            throw new Tx_Oelib_Exception_Database();
+            throw new \Tx_Oelib_Exception_Database();
         }
 
         $dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
         $GLOBALS['TYPO3_DB']->sql_free_result($dbResult);
         if (!$dbResultRow) {
-            throw new Tx_Oelib_Exception_NotFound(
+            throw new \Tx_Oelib_Exception_NotFound(
                 'The related place with the UID ' . $this->getPlace() . ' could not be found in the DB.',
                 1333291925
             );

@@ -8,12 +8,12 @@
 class Tx_Seminars_ViewHelper_DateRange
 {
     /**
-     * @var Tx_Oelib_Configuration
+     * @var \Tx_Oelib_Configuration
      */
     protected $configuration = null;
 
     /**
-     * @var Tx_Oelib_Translator
+     * @var \Tx_Oelib_Translator
      */
     protected $translator = null;
 
@@ -33,12 +33,12 @@ class Tx_Seminars_ViewHelper_DateRange
      * Returns just one day if the timespan takes place on only one day.
      * Returns a date range if the timespan takes several days.
      *
-     * @param Tx_Seminars_Model_AbstractTimeSpan $timeSpan the timespan to get the date for
+     * @param \Tx_Seminars_Model_AbstractTimeSpan $timeSpan the timespan to get the date for
      * @param string $dash the character or HTML entity used to separate start date and end date
      *
      * @return string the timespan date
      */
-    public function render(Tx_Seminars_Model_AbstractTimeSpan $timeSpan, $dash = '&#8211;')
+    public function render(\Tx_Seminars_Model_AbstractTimeSpan $timeSpan, $dash = '&#8211;')
     {
         if (!$timeSpan->hasBeginDate()) {
             return $this->translator->translate('message_willBeAnnounced');

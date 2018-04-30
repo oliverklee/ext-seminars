@@ -8,17 +8,17 @@ use OliverKlee\Seminars\Tests\Unit\Support\Traits\BackEndTestsTrait;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 {
     use BackEndTestsTrait;
 
     /**
-     * @var Tx_Seminars_Csv_CsvDownloader
+     * @var \Tx_Seminars_Csv_CsvDownloader
      */
     protected $fixture = null;
 
     /**
-     * @var Tx_Oelib_TestingFramework
+     * @var \Tx_Oelib_TestingFramework
      */
     protected $testingFramework = null;
 
@@ -40,7 +40,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
     {
         $this->unifyTestingEnvironment();
 
-        $this->testingFramework = new Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
         $this->pid = $this->testingFramework->createSystemFolder();
         $this->eventUid = $this->testingFramework->createRecord(
@@ -53,7 +53,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends Tx_Phpunit_TestCase
 
         $this->configuration->setData(['charsetForCsv' => 'utf-8']);
 
-        $this->fixture = new Tx_Seminars_Csv_CsvDownloader();
+        $this->fixture = new \Tx_Seminars_Csv_CsvDownloader();
         $this->fixture->init([]);
     }
 

@@ -5,7 +5,7 @@
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing extends Tx_Seminars_Bag_Abstract
+class Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing extends \Tx_Seminars_Bag_Abstract
 {
     /**
      * The constructor. Creates a bag that contains test records and allows to iterate over them.
@@ -58,7 +58,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing extends Tx_Seminars_Bag_Abstra
      */
     protected function createItemFromDbResult()
     {
-        $this->currentItem = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(0, $this->dbResult);
+        $this->currentItem = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(0, $this->dbResult);
         $this->valid();
     }
 }
