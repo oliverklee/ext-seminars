@@ -11,6 +11,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Changed
 - Skip the tests for the old BE module in TYPO3 >= 8.7 (#75)
 - Also allow oelib 3.x (#72)
+- Require oelib >= 2.0.0 (#69)
+- Require static_info_tables >= 6.4.0 (#68)
 - Update to PHPUnit 5.3 (#66)
 
 ### Deprecated
@@ -39,8 +41,6 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add an SVG extension icon (#34)
 
 ### Changed
-- Require oelib >= 2.0.0 (#69)
-- Require static_info_tables >= 6.4.0 (#68)
 - Use more semantic PHPUnit methods (#60)
 - Always use ::class for setExpectedException (#59)
 - Use new instead of makeInstance for Tx_Oelib_List (#57)
