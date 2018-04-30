@@ -10,9 +10,7 @@ return [
         'cruser_id' => 'cruser_id',
         'default_sortby' => 'ORDER BY title',
         'delete' => 'deleted',
-        // We cannot use the EXT:seminars syntax as this would break getIcon::getIcon (which gets called in
-        // OldModel/Abstract::getRecordIcon where the icons for the BE module are created).
-        'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('seminars') . 'Resources/Public/Icons/Organizer.gif',
+        'iconfile' => 'EXT:seminars/Resources/Public/Icons/Organizer.gif',
         'searchFields' => 'title',
     ],
     'interface' => [
