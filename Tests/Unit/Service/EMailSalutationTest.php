@@ -135,7 +135,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends Tx_Phpunit_Test
     {
         $this->skipWithoutGenderField();
 
-        $user = $this->createFrontEndUser(Tx_Oelib_Model_FrontEndUser::GENDER_MALE);
+        $user = $this->createFrontEndUser();
 
         self::assertContains(
             \Tx_Oelib_TranslatorRegistry::get('seminars')->translate('email_hello_formal_0'),
@@ -150,7 +150,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends Tx_Phpunit_Test
     {
         $this->skipWithoutGenderField();
 
-        $user = $this->createFrontEndUser(Tx_Oelib_Model_FrontEndUser::GENDER_MALE);
+        $user = $this->createFrontEndUser();
 
         self::assertContains(
             \Tx_Oelib_TranslatorRegistry::get('seminars')->translate('email_salutation_title_0') .

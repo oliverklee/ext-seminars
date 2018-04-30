@@ -448,7 +448,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
 
             $result = $showHiddenRecords ? $this->canShowCurrentEvent() : true;
         } else {
-            $this->setSeminar(null);
+            $this->setSeminar();
             $result = false;
         }
 
@@ -3116,9 +3116,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends Tx_Oelib_TemplateHelper imp
             'file' => Tx_Seminars_FrontEnd_AbstractView::UPLOAD_PATH . $iconData['icon'],
             'titleText' => $iconData['title'],
         ];
-        $result = $this->cObj->cObjGetSingle('IMAGE', $imageConfiguration);
-
-        return $result;
+        return $this->cObj->cObjGetSingle('IMAGE', $imageConfiguration);
     }
 
     /**

@@ -405,16 +405,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function testAddTargetGroupRelationReturnsUid()
     {
         self::assertTrue(
-            $this->addTargetGroupRelation([]) > 0
+            $this->addTargetGroupRelation() > 0
         );
     }
 
     public function testAddTargetGroupRelationCreatesNewUids()
     {
-        $this->addTargetGroupRelation([]);
+        $this->addTargetGroupRelation();
         self::assertNotEquals(
-            $this->addTargetGroupRelation([]),
-            $this->addTargetGroupRelation([])
+            $this->addTargetGroupRelation(),
+            $this->addTargetGroupRelation()
         );
     }
 
@@ -425,13 +425,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
             $this->numberOfTargetGroups
         );
 
-        $this->addTargetGroupRelation([]);
+        $this->addTargetGroupRelation();
         self::assertEquals(
             1,
             $this->numberOfTargetGroups
         );
 
-        $this->addTargetGroupRelation([]);
+        $this->addTargetGroupRelation();
         self::assertEquals(
             2,
             $this->numberOfTargetGroups
@@ -449,7 +449,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         );
 
-        $this->addTargetGroupRelation([]);
+        $this->addTargetGroupRelation();
         self::assertEquals(
             1,
             $this->testingFramework->countRecords(
@@ -458,7 +458,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
             )
         );
 
-        $this->addTargetGroupRelation([]);
+        $this->addTargetGroupRelation();
         self::assertEquals(
             2,
             $this->testingFramework->countRecords(
@@ -503,15 +503,15 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
     public function testAddCategoryRelationReturnsPositiveUid()
     {
         self::assertTrue(
-            $this->addCategoryRelation([]) > 0
+            $this->addCategoryRelation() > 0
         );
     }
 
     public function testAddCategoryRelationCreatesNewUids()
     {
         self::assertNotEquals(
-            $this->addCategoryRelation([]),
-            $this->addCategoryRelation([])
+            $this->addCategoryRelation(),
+            $this->addCategoryRelation()
         );
     }
 
@@ -522,13 +522,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
             $this->numberOfCategories
         );
 
-        $this->addCategoryRelation([]);
+        $this->addCategoryRelation();
         self::assertEquals(
             1,
             $this->numberOfCategories
         );
 
-        $this->addCategoryRelation([]);
+        $this->addCategoryRelation();
         self::assertEquals(
             2,
             $this->numberOfCategories
@@ -546,7 +546,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         );
 
-        $this->addCategoryRelation([]);
+        $this->addCategoryRelation();
         self::assertEquals(
             1,
             $this->testingFramework->countRecords(
@@ -555,7 +555,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
             )
         );
 
-        $this->addCategoryRelation([]);
+        $this->addCategoryRelation();
         self::assertEquals(
             2,
             $this->testingFramework->countRecords(
@@ -9091,7 +9091,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         );
         $fixture->expects(self::once())->method('limitForAdditionalParameters');
 
-        $fixture->initListView('');
+        $fixture->initListView();
     }
 
     /**
@@ -9615,7 +9615,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         self::assertContains(
             'Chaos &amp; Confusion',
-            $this->fixture->createSingleViewLink($event, 'Chaos & Confusion', true)
+            $this->fixture->createSingleViewLink($event, 'Chaos & Confusion')
         );
     }
 

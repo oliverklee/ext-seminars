@@ -202,8 +202,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends Tx_Phpunit_TestCase
     public function testBuilderSelectsRecordsFromAllPagesWithEmptySourcePagesAndZeroRecursion()
     {
         $this->fixture->setSourcePages(
-            '',
-            0
+            ''
         );
         $this->testingFramework->createRecord(
             'tx_seminars_test',

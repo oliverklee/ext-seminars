@@ -106,7 +106,7 @@ abstract class Tx_Seminars_BackEnd_AbstractList
         $icon = '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') . 'Resources/Public/Icons/Edit.gif' .
             '" alt="' . $langEdit . '" class="icon" />';
 
-        $editOnClick = BackendUtility::editOnClick($params, '', '');
+        $editOnClick = BackendUtility::editOnClick($params);
         $result = '<a class="btn btn-default" href="#" onclick="' . htmlspecialchars($editOnClick)
             . '" title="' . $langEdit . '">' . $icon . '</a>';
 
@@ -195,7 +195,7 @@ abstract class Tx_Seminars_BackEnd_AbstractList
                 );
             }
             $params .= ']=new';
-            $editOnClick = BackendUtility::editOnClick($params, '', '');
+            $editOnClick = BackendUtility::editOnClick($params);
 
             $langNew = $languageService->getLL('newRecordGeneral');
 

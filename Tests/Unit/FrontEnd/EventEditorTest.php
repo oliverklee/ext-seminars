@@ -1192,7 +1192,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
                 'value' => $speakerUid,
                 'wrapitem' => '|</td><td>&nbsp;',
             ],
-            $this->fixture->populateListSpeakers([])
+            $this->fixture->populateListSpeakers()
         );
     }
 
@@ -1213,7 +1213,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
                 'value' => $speakerUid,
                 'wrapitem' => '|</td><td>&nbsp;',
             ],
-            $this->fixture->populateListSpeakers([])
+            $this->fixture->populateListSpeakers()
         );
     }
 
@@ -1234,7 +1234,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
                 'value' => $speakerUid,
                 'wrapitem' => '|</td><td>&nbsp;',
             ],
-            $this->fixture->populateListSpeakers([])
+            $this->fixture->populateListSpeakers()
         );
     }
 
@@ -1255,7 +1255,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends Tx_Phpunit_TestCas
                 'value' => $speakerUid,
                 'wrapitem' => '|</td><td>&nbsp;',
             ],
-            $this->fixture->populateListSpeakers([])
+            $this->fixture->populateListSpeakers()
         );
     }
 

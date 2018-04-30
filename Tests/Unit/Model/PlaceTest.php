@@ -309,7 +309,7 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends Tx_Phpunit_TestCase
      */
     public function countryCanBeSetToNull()
     {
-        $this->fixture->setCountry(null);
+        $this->fixture->setCountry();
 
         self::assertNull(
             $this->fixture->getCountry()

@@ -758,9 +758,7 @@ class Tx_Seminars_Service_RegistrationManager extends Tx_Oelib_TemplateHelper
             return true;
         }
         $missingTopics = $this->getMissingRequiredTopics($event);
-        $result = $missingTopics->isEmpty();
-
-        return $result;
+        return $missingTopics->isEmpty();
     }
 
     /**

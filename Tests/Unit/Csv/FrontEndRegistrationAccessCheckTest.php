@@ -56,7 +56,7 @@ class Tx_Seminars_Tests_Unit_Csv_FrontEndRegistrationAccessCheckTest extends Tx_
      */
     public function hasAccessForNoFrontEndUserReturnsFalse()
     {
-        Tx_Oelib_FrontEndLoginManager::getInstance()->logInUser(null);
+        Tx_Oelib_FrontEndLoginManager::getInstance()->logInUser();
 
         /** @var Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(Tx_Seminars_OldModel_Event::class, [], [], '', false);

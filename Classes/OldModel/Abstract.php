@@ -452,7 +452,7 @@ abstract class Tx_Seminars_OldModel_Abstract extends Tx_Oelib_TemplateHelper imp
      * @param int $uid the UID of the record to retrieve from the DB
      * @param bool $allowHiddenRecords whether to allow hidden records
      *
-     * @return mysqli_result MySQL result (of SELECT query) object, will be FALSE if the UID is invalid
+     * @return \mysqli_result|bool MySQL result (of SELECT query) object, will be false if the UID is invalid
      */
     protected function retrieveRecord($uid, $allowHiddenRecords = false)
     {

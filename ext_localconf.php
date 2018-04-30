@@ -49,9 +49,7 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['proc
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPItoST43(
     'seminars',
     'Classes/FrontEnd/DefaultController.php',
-    '_pi1',
-    'list_type',
-    0
+    '_pi1'
 );
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScript('seminars', 'setup', '
     plugin.' . \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getCN('seminars') . '_pi1.userFunc = Tx_Seminars_FrontEnd_DefaultController->main

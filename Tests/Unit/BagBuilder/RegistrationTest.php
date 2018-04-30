@@ -412,7 +412,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
             ['seats' => 2]
         );
         $this->fixture->limitToSeatsAtMost(1);
-        $this->fixture->limitToSeatsAtMost(0);
+        $this->fixture->limitToSeatsAtMost();
         $registrationBag = $this->fixture->build();
 
         self::assertFalse(
@@ -536,7 +536,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends Tx_Phpunit_Test
         /** @var Tx_Seminars_Model_FrontEndUser $user */
         $user = Tx_Oelib_MapperRegistry::get(Tx_Seminars_Mapper_FrontEndUser::class)->find($feUserUid);
         $this->fixture->limitToAttendee($user);
-        $this->fixture->limitToAttendee(null);
+        $this->fixture->limitToAttendee();
         $bag = $this->fixture->build();
 
         self::assertEquals(

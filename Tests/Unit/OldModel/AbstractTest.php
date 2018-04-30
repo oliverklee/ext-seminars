@@ -438,7 +438,7 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends Tx_Phpunit_TestCase
         );
 
         self::assertFalse(
-            Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing::recordExists($this->fixtureUid, 'tx_seminars_test', false)
+            Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing::recordExists($this->fixtureUid, 'tx_seminars_test')
         );
     }
 

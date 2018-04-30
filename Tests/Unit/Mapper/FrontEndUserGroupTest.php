@@ -73,8 +73,7 @@ class Tx_Seminars_Tests_Unit_Mapper_FrontEndUserGroupTest extends Tx_Phpunit_Tes
     public function frontEndUserGroupReturnsListOfCategories()
     {
         $categoryUid = $this->testingFramework->createRecord(
-            'tx_seminars_categories',
-            []
+            'tx_seminars_categories'
         );
         $frontEndUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
 
