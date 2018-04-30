@@ -1318,8 +1318,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->setConfigurationValue('limitFileDownloadToAttendees', 0);
 
         $dummyFile = $this->testingFramework->createDummyFile();
-        $dummyFileName =
-            $this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
+        $dummyFileName = $this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
 
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -1329,7 +1328,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
         self::assertRegExp(
-            '#<a href="https?://[\\w\\d_\\-/\\.]+' . $dummyFileName . '" *>' . $dummyFileName . '</a>#',
+            '#<a href="[^"]+' . $dummyFileName . '" *>' . $dummyFileName . '</a>#',
             $this->fixture->main('', [])
         );
     }
@@ -1344,12 +1343,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $dummyFolder = $this->testingFramework->createDummyFolder('test_folder');
         $dummyFile = $this->testingFramework->createDummyFile(
-            $this->testingFramework->getPathRelativeToUploadDirectory($dummyFolder) .
-                '/test.txt'
+            $this->testingFramework->getPathRelativeToUploadDirectory($dummyFolder) . '/test.txt'
         );
 
-        $dummyFileName =
-            $this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
+        $dummyFileName = $this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
 
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -1360,7 +1357,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->fixture->piVars['showUid'] = $this->seminarUid;
 
         self::assertRegExp(
-            '#<a href="https?://[\\w\\d_\\-/\\.]+' . $dummyFileName . '" *>' . basename($dummyFile) . '</a>#',
+            '#<a href="[^"]+' . $dummyFileName . '" *>' . basename($dummyFile) . '</a>#',
             $this->fixture->main('', [])
         );
     }
@@ -1456,8 +1453,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
         $this->createLogInAndRegisterFeUser();
 
         $dummyFile = $this->testingFramework->createDummyFile();
-        $dummyFileName =
-            $this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
+        $dummyFileName = $this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
 
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -1467,7 +1463,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
         self::assertRegExp(
-            '#<a href="https?://[\\w\\d_\\-/\\.]+' . $dummyFileName . '" *>' . $dummyFileName . '</a>#',
+            '#<a href="[^"]+' . $dummyFileName . '" *>' . $dummyFileName . '</a>#',
             $this->fixture->main('', [])
         );
     }
@@ -1483,12 +1479,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $dummyFolder = $this->testingFramework->createDummyFolder('test_folder');
         $dummyFile = $this->testingFramework->createDummyFile(
-            $this->testingFramework->getPathRelativeToUploadDirectory($dummyFolder) .
-                '/test.txt'
+            $this->testingFramework->getPathRelativeToUploadDirectory($dummyFolder) . '/test.txt'
         );
 
-        $dummyFileName =
-            $this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
+        $dummyFileName = $this->testingFramework->getPathRelativeToUploadDirectory($dummyFile);
 
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -1498,7 +1492,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
         self::assertRegExp(
-            '#<a href="https?://[\\w\\d_\\-/\\.]+' . $dummyFileName . '" *>' . basename($dummyFile) . '</a>#',
+            '#<a href="[^"]+' . $dummyFileName . '" *>' . basename($dummyFile) . '</a>#',
             $this->fixture->main('', [])
         );
     }
@@ -1585,7 +1579,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends Tx_Phpunit_T
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
         self::assertRegExp(
-            '#class="filetype-' . $matches[1] . '"><a href="https?://[\\w\\d_\\-/\\.]+' . $dummyFileName . '" *>' .
+            '#class="filetype-' . $matches[1] . '"><a href="[^"]+' . $dummyFileName . '" *>' .
                 basename($dummyFile) . '</a>#',
             $this->fixture->main('', [])
         );
