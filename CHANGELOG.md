@@ -21,6 +21,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop support for PHP 5.5 (#64)
 
 ### Fixed
+- Fix TCA deprecations in TYPO3 8.7 (#82)
 - Fix more code inspection warnings (#78)
 - Replace usage of the deprecated issueCommand method (#77)
 - Drop usage of the deprecated extRelPath method (#76)

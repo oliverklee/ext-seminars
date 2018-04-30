@@ -300,8 +300,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 8,
-                'max' => 20,
                 'eval' => 'date',
+                'renderType' => 'inputDateTime',
                 'checkbox' => '0',
                 'default' => '0',
             ],

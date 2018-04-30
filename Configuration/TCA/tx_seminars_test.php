@@ -40,8 +40,8 @@ return [
                 'config' => [
                     'type' => 'none',
                     'size' => 8,
-                    'max' => 20,
                     'eval' => 'date',
+                    'renderType' => 'inputDateTime',
                     'default' => '0',
                     'checkbox' => '0',
                 ],
@@ -52,8 +52,8 @@ return [
                 'config' => [
                     'type' => 'none',
                     'size' => 8,
-                    'max' => 20,
                     'eval' => 'date',
+                    'renderType' => 'inputDateTime',
                     'checkbox' => '0',
                     'default' => '0',
                     'range' => [

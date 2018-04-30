@@ -3,7 +3,7 @@ defined('TYPO3_MODE') or die();
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToInsertRecords('tx_seminars_seminars');
 
-return [
+$tca = [
     'ctrl' => [
         'title' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars',
         'label' => 'title',
@@ -28,7 +28,6 @@ return [
         ],
         'dividers2tabs' => true,
         'hideAtCopy' => true,
-        'requestUpdate' => 'needs_registration,price_on_request',
         'searchFields' => 'title,accreditation_number',
     ],
     'interface' => [
@@ -148,10 +147,10 @@ return [
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.description',
             'config' => [
                 'type' => 'text',
+                'enableRichtext' => true,
                 'cols' => 30,
                 'rows' => 5,
             ],
-            'defaultExtras' => 'richtext[]',
         ],
         'event_type' => [
             'exclude' => 1,
@@ -203,8 +202,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 12,
-                'max' => 20,
                 'eval' => 'datetime',
+                'renderType' => 'inputDateTime',
                 'checkbox' => '0',
                 'default' => '0',
             ],
@@ -215,8 +214,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 12,
-                'max' => 20,
                 'eval' => 'datetime',
+                'renderType' => 'inputDateTime',
                 'checkbox' => '0',
                 'default' => '0',
             ],
@@ -252,8 +251,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 12,
-                'max' => 20,
                 'eval' => 'datetime',
+                'renderType' => 'inputDateTime',
                 'checkbox' => '0',
                 'default' => '0',
             ],
@@ -265,8 +264,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 12,
-                'max' => 20,
                 'eval' => 'datetime',
+                'renderType' => 'inputDateTime',
                 'checkbox' => '0',
                 'default' => '0',
             ],
@@ -278,8 +277,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 12,
-                'max' => 20,
                 'eval' => 'datetime',
+                'renderType' => 'inputDateTime',
                 'checkbox' => '0',
                 'default' => '0',
             ],
@@ -291,8 +290,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 12,
-                'max' => 20,
                 'eval' => 'datetime',
+                'renderType' => 'inputDateTime',
                 'checkbox' => '0',
                 'default' => '0',
             ],
@@ -303,8 +302,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 10,
-                'max' => 10,
                 'eval' => 'date',
+                'renderType' => 'inputDateTime',
                 'checkbox' => '0',
                 'default' => '0',
             ],
@@ -314,6 +313,7 @@ return [
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.details_page',
             'config' => [
                 'type' => 'input',
+                'renderType' => 'inputLink',
                 'size' => 15,
                 'max' => 255,
                 'checkbox' => '',
@@ -323,7 +323,7 @@ return [
                     'link' => [
                         'type' => 'popup',
                         'title' => 'Link',
-                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_link.gif',
+                        'icon' => 'actions-wizard-link',
                         'module' => [
                             'name' => 'wizard_link',
                             'urlParameters' => [
@@ -613,10 +613,10 @@ return [
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.additional_information',
             'config' => [
                 'type' => 'text',
+                'enableRichtext' => true,
                 'cols' => 30,
                 'rows' => 5,
             ],
-            'defaultExtras' => 'richtext[]',
         ],
         'checkboxes' => [
             'exclude' => 1,
@@ -930,8 +930,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 8,
-                'max' => 20,
                 'eval' => 'date',
+                'renderType' => 'inputDateTime',
                 'default' => '0',
                 'checkbox' => '0',
             ],
@@ -942,8 +942,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 8,
-                'max' => 20,
                 'eval' => 'date',
+                'renderType' => 'inputDateTime',
                 'checkbox' => '0',
                 'default' => '0',
                 'range' => [
@@ -986,7 +986,6 @@ return [
                 'allowed' => 'gif,png,jpeg,jpg',
                 'max_size' => 4096,
                 'uploadfolder' => 'uploads/tx_seminars',
-                'show_thumbs' => 1,
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
@@ -1018,8 +1017,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 12,
-                'max' => 20,
                 'eval' => 'datetime',
+                'renderType' => 'inputDateTime',
                 'checkbox' => '0',
                 'default' => '0',
             ],
@@ -1062,3 +1061,10 @@ return [
         '1' => ['showitem' => 'starttime, endtime'],
     ],
 ];
+
+if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) < 8006000) {
+    $tca['columns']['description']['defaultExtras'] = 'richtext[]';
+    $tca['columns']['additional_informatik']['defaultExtras'] = 'richtext[]';
+}
+
+return $tca;

@@ -38,8 +38,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 12,
-                'max' => 20,
                 'eval' => 'datetime, required',
+                'renderType' => 'inputDateTime',
                 'checkbox' => '0',
                 'default' => '0',
             ],
@@ -50,8 +50,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 12,
-                'max' => 20,
                 'eval' => 'datetime',
+                'renderType' => 'inputDateTime',
                 'checkbox' => '0',
                 'default' => '0',
             ],
@@ -62,8 +62,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 12,
-                'max' => 20,
                 'eval' => 'datetime',
+                'renderType' => 'inputDateTime',
                 'checkbox' => '0',
                 'default' => '0',
             ],

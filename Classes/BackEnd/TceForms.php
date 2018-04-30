@@ -107,13 +107,13 @@ class TceForms
                     'name' => 'wizard_edit',
                 ],
                 'popup_onlyOpenIfSelected' => 1,
-                'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_edit.gif',
+                'icon' => 'actions-open',
                 'JSopenParams' => 'height=480,width=640,status=0,menubar=0,scrollbars=1',
             ],
             'add' => [
                 'type' => 'script',
                 'title' => 'Create new entry',
-                'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_add.gif',
+                'icon' => 'actions-add',
                 'params' => [
                     'table' => '###TABLE###',
                     'pid' => '###CURRENT_PID###',
@@ -129,7 +129,7 @@ class TceForms
             $wizard['list'] = [
                 'type' => 'popup',
                 'title' => 'List entries',
-                'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_list.gif',
+                'icon' => 'actions-system-list-open',
                 'params' => [
                     'table' => '###TABLE###',
                     'pid' => '###CURRENT_PID###',
