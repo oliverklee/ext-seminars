@@ -3,7 +3,6 @@
 use OliverKlee\Seminars\BackEnd\GeneralEventMailForm;
 use OliverKlee\Seminars\Tests\Unit\Support\Traits\BackEndTestsTrait;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 /**
  * Test case.
@@ -60,10 +59,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_GeneralEventMailFormTest extends \Tx_Phpuni
         $this->mailer = $mailerFactory->getMailer();
 
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
-
-        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8000000) {
-            self::markTestIncomplete('These tests needs some more tender love and care.');
-        }
 
         $this->dummySysFolderUid = $this->testingFramework->createSystemFolder();
         \Tx_Oelib_PageFinder::getInstance()->setPageUid($this->dummySysFolderUid);
@@ -198,8 +193,8 @@ class Tx_Seminars_Tests_Unit_BackEnd_GeneralEventMailFormTest extends \Tx_Phpuni
             ->with($registration, self::anything());
 
         $hookClass = get_class($hook);
-        $GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['backEndModule'][$hookClass] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
 
         $this->fixture->setPostData(
             [
@@ -244,8 +239,8 @@ class Tx_Seminars_Tests_Unit_BackEnd_GeneralEventMailFormTest extends \Tx_Phpuni
         $hook->expects(self::exactly(2))->method('modifyGeneralEmail');
 
         $hookClass = get_class($hook);
-        $GLOBALS['T3_VAR']['getUserObj'][$hookClass] = $hook;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['backEndModule'][$hookClass] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
 
         $this->fixture->setPostData(
             [
