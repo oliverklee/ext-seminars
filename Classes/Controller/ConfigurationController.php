@@ -1,31 +1,22 @@
 <?php
 namespace OliverKlee\Seminars\Controller;
 
-/*
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
- *
- * For the full copyright and license information, please read the
- * LICENSE.txt file that was distributed with TYPO3 source code.
- *
- * The TYPO3 project - inspiring people to share!
- */
-
+use OliverKlee\Seminars\BackEnd\Controller;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Configuration controller.
+ *
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class ConfigurationController
 {
     /**
-     * Injects the request object for the current request or subrequest
-     * As this controller goes only through the main() method, it is rather simple for now
+     * Injects the request object for the current request or subrequest.
+     *
+     * As this controller goes only through the main() method, it is rather simple for now.
      *
      * @param ServerRequestInterface $request the current request
      * @param ResponseInterface $response
@@ -36,11 +27,11 @@ class ConfigurationController
     {
         $GLOBALS['MCONF']['name'] = 'web_seminars';
 
-        /** @var \OliverKlee\Seminars\BackEnd\Controller $SOBE */
-        $SOBE = GeneralUtility::makeInstance(\OliverKlee\Seminars\BackEnd\Controller::class);
-        $SOBE->init();
-        $SOBE->main();
-        $response->getBody()->write($SOBE->getContent());
+        /** @var Controller $backEndController */
+        $backEndController = GeneralUtility::makeInstance(Controller::class);
+        $backEndController->init();
+        $backEndController->main();
+        $response->getBody()->write($backEndController->getContent());
 
         return $response;
     }
