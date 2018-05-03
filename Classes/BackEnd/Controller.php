@@ -29,7 +29,6 @@ class Controller extends AbstractModule
      */
     public function mainAction(ServerRequestInterface $request, ResponseInterface $response)
     {
-        $GLOBALS['SOBE'] = $this;
         $this->init();
         if (GeneralUtility::_GET('csv') !== '1') {
             $this->init();
@@ -40,6 +39,7 @@ class Controller extends AbstractModule
             $content = $csvExporter->main();
         }
         $response->getBody()->write($content);
+
         return $response;
     }
 
@@ -52,6 +52,8 @@ class Controller extends AbstractModule
      */
     public function main()
     {
+        $languageService = $this->getLanguageService();
+        $backEndUser = $this->getBackendUser();
         $this->doc = GeneralUtility::makeInstance(DocumentTemplate::class);
 
         $pageRenderer = $this->getPageRenderer();
@@ -70,15 +72,14 @@ class Controller extends AbstractModule
             false
         );
 
-        // draw the header
-        $this->content = $this->doc->startPage($this->getLanguageService()->getLL('title'));
-        $this->content .= $this->doc->header($this->getLanguageService()->getLL('title'));
+        $this->content = $this->doc->startPage($languageService->getLL('title'));
+        $this->content .= $this->doc->header($languageService->getLL('title'));
 
         if ($this->id <= 0) {
             /** @var FlashMessage $message */
             $message = GeneralUtility::makeInstance(
                 FlashMessage::class,
-                $GLOBALS['LANG']->getLL('message_noPageTypeSelected'),
+                $languageService->getLL('message_noPageTypeSelected'),
                 '',
                 FlashMessage::INFO
             );
@@ -89,7 +90,7 @@ class Controller extends AbstractModule
         }
 
         $pageAccess = BackendUtility::readPageAccess($this->id, $this->perms_clause);
-        if (!is_array($pageAccess) && !$this->getBackendUser()->user['admin']) {
+        if (!is_array($pageAccess) && !$backEndUser->isAdmin()) {
             echo $this->content . $this->getRenderedFlashMessages() . $this->doc->endPage();
             return;
         }
@@ -98,7 +99,7 @@ class Controller extends AbstractModule
             /** @var FlashMessage $message */
             $message = GeneralUtility::makeInstance(
                 FlashMessage::class,
-                $GLOBALS['LANG']->getLL('message_noStaticTemplateFound'),
+                $languageService->getLL('message_noStaticTemplateFound'),
                 '',
                 FlashMessage::WARNING
             );
@@ -110,25 +111,19 @@ class Controller extends AbstractModule
 
         $this->setPageData($pageAccess);
 
-        // define the sub modules that should be available in the tab menu
         $this->availableSubModules = [];
 
-        // only show the tabs if the back-end user has access to the
-        // corresponding tables
-        if ($this->getBackendUser()->check('tables_select', 'tx_seminars_seminars')) {
-            $this->availableSubModules[1] = $this->getLanguageService()->getLL('subModuleTitle_events');
+        if ($backEndUser->check('tables_select', 'tx_seminars_seminars')) {
+            $this->availableSubModules[1] = $languageService->getLL('subModuleTitle_events');
         }
-
-        if ($this->getBackendUser()->check('tables_select', 'tx_seminars_attendances')) {
-            $this->availableSubModules[2] = $this->getLanguageService()->getLL('subModuleTitle_registrations');
+        if ($backEndUser->check('tables_select', 'tx_seminars_attendances')) {
+            $this->availableSubModules[2] = $languageService->getLL('subModuleTitle_registrations');
         }
-
-        if ($this->getBackendUser()->check('tables_select', 'tx_seminars_speakers')) {
-            $this->availableSubModules[3] = $this->getLanguageService()->getLL('subModuleTitle_speakers');
+        if ($backEndUser->check('tables_select', 'tx_seminars_speakers')) {
+            $this->availableSubModules[3] = $languageService->getLL('subModuleTitle_speakers');
         }
-
-        if ($this->getBackendUser()->check('tables_select', 'tx_seminars_organizers')) {
-            $this->availableSubModules[4] = $this->getLanguageService()->getLL('subModuleTitle_organizers');
+        if ($backEndUser->check('tables_select', 'tx_seminars_organizers')) {
+            $this->availableSubModules[4] = $languageService->getLL('subModuleTitle_organizers');
         }
 
         // Read the selected sub module (from the tab menu) and make it available within this class.
@@ -144,7 +139,7 @@ class Controller extends AbstractModule
 
         // Only generate the tab menu if the current back-end user has the
         // rights to show any of the tabs.
-        if ($this->subModule) {
+        if ($this->subModule > 0) {
             $moduleToken = FormProtectionFactory::get()->generateToken('moduleCall', self::MODULE_NAME);
             $this->content .= $this->doc->getTabMenu(
                 ['M' => self::MODULE_NAME, 'moduleToken' => $moduleToken, 'id' => $this->id],
@@ -154,8 +149,6 @@ class Controller extends AbstractModule
             );
         }
 
-        // Select which sub module to display.
-        // If no sub module is specified, an empty page will be displayed.
         switch ($this->subModule) {
             case 2:
                 /** @var RegistrationsList $registrationsList */
@@ -184,7 +177,7 @@ class Controller extends AbstractModule
                     $eventsList = GeneralUtility::makeInstance(EventsList::class, $this);
                     $this->content .= $eventsList->show();
                 }
-                // no break
+                break;
             default:
         }
 
