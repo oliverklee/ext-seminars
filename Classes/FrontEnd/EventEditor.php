@@ -327,6 +327,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         if ($form !== null) {
             /** @var \formidable_mainrenderlet $renderlet */
             $renderlet = $form->aORenderlets['editPlaceButton'];
+            /** @var array $editButtonConfiguration */
             $editButtonConfiguration = $form->_navConf($renderlet->sXPath);
         } else {
             $renderlet = null;
@@ -398,6 +399,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         if ($form !== null) {
             /** @var \formidable_mainrenderlet $renderlet */
             $renderlet = $form->aORenderlets['editSpeakerButton'];
+            /** @var array $editButtonConfiguration */
             $editButtonConfiguration = $form->_navConf($renderlet->sXPath);
         } else {
             $renderlet = null;
@@ -490,6 +492,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         if ($form !== null) {
             /** @var \formidable_mainrenderlet $renderlet */
             $renderlet = $form->aORenderlets['editCheckboxButton'];
+            /** @var array $editButtonConfiguration */
             $editButtonConfiguration = $form->_navConf($renderlet->sXPath);
         } else {
             $renderlet = null;
@@ -563,6 +566,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         if ($form !== null) {
             /** @var \formidable_mainrenderlet $renderlet */
             $renderlet = $form->aORenderlets['editTargetGroupButton'];
+            /** @var array $editButtonConfiguration */
             $editButtonConfiguration = $form->_navConf($renderlet->sXPath);
         } else {
             $renderlet = null;
@@ -1495,7 +1499,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @param \tx_mkforms_forms_Base $form
      *
-     * @return array calls to be executed on the client
+     * @return array[] calls to be executed on the client
      */
     public static function createNewPlace(\tx_mkforms_forms_Base $form)
     {
@@ -1533,6 +1537,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
 
         /** @var \formidable_mainrenderlet $renderlet */
         $renderlet = $form->aORenderlets['editPlaceButton'];
+        /** @var array $editButtonConfiguration */
         $editButtonConfiguration = $form->_navConf($renderlet->sXPath);
         $editButtonConfiguration['name'] = 'editPlaceButton_' . $place->getUid();
         $editButtonConfiguration['onclick']['userobj']['php'] = '
@@ -1564,7 +1569,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @param \tx_mkforms_forms_Base $form
      *
-     * @return array calls to be executed on the client
+     * @return array[] calls to be executed on the client
      */
     public static function updatePlace(\tx_mkforms_forms_Base $form)
     {
@@ -1727,7 +1732,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * @param \tx_mkforms_forms_Base $form
      * @param int $placeUid the UID of the place to edit, must be > 0
      *
-     * @return array calls to be executed on the client
+     * @return array[] calls to be executed on the client
      */
     public static function showEditPlaceModalBox(\tx_mkforms_forms_Base $form, $placeUid)
     {
@@ -1818,7 +1823,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * @param mixed[] $formData
      * @param \tx_mkforms_forms_Base $form
      *
-     * @return array calls to be executed on the client
+     * @return array[] calls to be executed on the client
      */
     public function createNewSpeaker(array $formData, \tx_mkforms_forms_Base $form)
     {
@@ -1851,6 +1856,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $mapper->save($speaker);
 
         // refresh all speaker listers
+        /** @var array $results */
         $results = $this->repaintSpeakers($form);
         // close box
         /** @var \tx_mkforms_widgets_modalbox_Main $modalBox */
@@ -1868,7 +1874,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * @param mixed[] $formData
      * @param \tx_mkforms_forms_Base $form
      *
-     * @return array calls to be executed on the client
+     * @return array[] calls to be executed on the client
      */
     public function updateSpeaker(array $formData, \tx_mkforms_forms_Base $form)
     {
@@ -2016,7 +2022,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * @param mixed $params
      * @param \tx_mkforms_forms_Base $form
      *
-     * @return array calls to be executed on the client
+     * @return array[] calls to be executed on the client
      */
     public static function openEditSpeakerModalBox(
         array $params,
@@ -2032,7 +2038,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * @param \tx_mkforms_forms_Base $form
      * @param int $speakerUid the UID of the speaker to edit, must be > 0
      *
-     * @return array calls to be executed on the client
+     * @return array[] calls to be executed on the client
      */
     public static function showEditSpeakerModalBox(
         \tx_mkforms_forms_Base $form,
@@ -2112,7 +2118,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @param \tx_mkforms_forms_Base $form
      *
-     * @return array calls to be executed on the client
+     * @return array[] calls to be executed on the client
      */
     public static function createNewCheckbox(\tx_mkforms_forms_Base $form)
     {
@@ -2142,6 +2148,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
 
         /** @var \formidable_mainrenderlet $renderlet */
         $renderlet = $form->aORenderlets['editCheckboxButton'];
+        /** @var array $editButtonConfiguration */
         $editButtonConfiguration = $form->_navConf($renderlet->sXPath);
         $editButtonConfiguration['name'] = 'editCheckboxButton_' . $checkbox->getUid();
         $editButtonConfiguration['onclick']['userobj']['php'] = '
@@ -2174,7 +2181,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @param \tx_mkforms_forms_Base $form
      *
-     * @return array calls to be executed on the client
+     * @return array[] calls to be executed on the client
      */
     public static function updateCheckbox(\tx_mkforms_forms_Base $form)
     {
@@ -2274,7 +2281,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * @param \tx_mkforms_forms_Base $form
      * @param int $checkboxUid the UID of the checkbox to edit, must be > 0
      *
-     * @return array calls to be executed on the client
+     * @return array[] calls to be executed on the client
      */
     public static function showEditCheckboxModalBox(
         \tx_mkforms_forms_Base $form,
@@ -2330,7 +2337,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @param \tx_mkforms_forms_Base $form
      *
-     * @return array calls to be executed on the client
+     * @return array[] calls to be executed on the client
      */
     public static function createNewTargetGroup(\tx_mkforms_forms_Base $form)
     {
@@ -2364,9 +2371,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
 
         /** @var \formidable_mainrenderlet $renderlet */
         $renderlet = $form->aORenderlets['editTargetGroupButton'];
+        /** @var array $editButtonConfiguration */
         $editButtonConfiguration = $form->_navConf($renderlet->sXPath);
-        $editButtonConfiguration['name'] = 'editTargetGroupButton_' .
-            $targetGroup->getUid();
+        $editButtonConfiguration['name'] = 'editTargetGroupButton_' . $targetGroup->getUid();
         $editButtonConfiguration['onclick']['userobj']['php'] = '
             return \\Tx_Seminars_FrontEnd_EventEditor::showEditTargetGroupModalBox($this, ' . $targetGroup->getUid() . ');
         ';
@@ -2397,7 +2404,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @param \tx_mkforms_forms_Base $form
      *
-     * @return array calls to be executed on the client
+     * @return array[] calls to be executed on the client
      */
     public static function updateTargetGroup(\tx_mkforms_forms_Base $form)
     {
@@ -2525,7 +2532,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * @param int $targetGroupUid
      *        the UID of the target group to edit, must be > 0
      *
-     * @return array calls to be executed on the client
+     * @return array[] calls to be executed on the client
      */
     public static function showEditTargetGroupModalBox(
         \tx_mkforms_forms_Base $form,

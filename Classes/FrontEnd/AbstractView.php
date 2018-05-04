@@ -60,7 +60,7 @@ abstract class Tx_Seminars_FrontEnd_AbstractView extends \Tx_Oelib_TemplateHelpe
      * Eliminates the renderlet path info from the given form data.
      *
      * @param mixed[] $formData submitted renderlet data
-     * @param tx_mkforms_forms_Base $form
+     * @param \tx_mkforms_forms_Base $form
      *
      * @return mixed[] renderlet data with the path info removed from the keys
      */

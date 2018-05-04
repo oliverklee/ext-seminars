@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Improve the PHPDoc (#98)
 - Fix the unit tests for the BE email form hooks (#95)
 
 ## 2.0.0
