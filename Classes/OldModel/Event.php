@@ -2469,13 +2469,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             $loweredKey = strtolower($currentKey);
             $currentLabel = $this->translate('label_' . $currentKey);
             $keysWithLabels[$loweredKey] = $currentLabel;
-            $maxLength = max(
-                $maxLength,
-                $this->charsetConversion->strlen(
-                    $this->renderCharset,
-                    $currentLabel
-                )
-            );
+            $maxLength = max($maxLength, \mb_strlen($currentLabel, 'utf-8'));
         }
         $result = '';
         foreach ($keysWithLabels as $currentKey => $currentLabel) {
