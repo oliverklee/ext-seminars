@@ -1,6 +1,5 @@
 <?php
 
-use TYPO3\CMS\Core\Charset\CharsetConverter;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -23,16 +22,6 @@ abstract class Tx_Seminars_OldModel_Abstract extends \Tx_Oelib_TemplateHelper im
      * @var string
      */
     public $scriptRelPath = 'Resources/Private/Language/locallang.xlf';
-
-    /**
-     * @var string the charset that is used for the output
-     */
-    protected $renderCharset = 'utf-8';
-
-    /**
-     * @var CharsetConverter helper for charset conversion
-     */
-    protected $charsetConversion = null;
 
     /**
      * @var string the name of the SQL table this class corresponds to
@@ -61,8 +50,6 @@ abstract class Tx_Seminars_OldModel_Abstract extends \Tx_Oelib_TemplateHelper im
      */
     public function __construct($uid, $dbResult = null, $allowHiddenRecords = false)
     {
-        $this->initializeCharsetConversion();
-
         // In the back end, include the extension's locallang.xlf.
         if ((TYPO3_MODE === 'BE') && is_object($GLOBALS['LANG'])) {
             $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
@@ -555,31 +542,6 @@ abstract class Tx_Seminars_OldModel_Abstract extends \Tx_Oelib_TemplateHelper im
     public function enableTestMode()
     {
         $this->setRecordPropertyBoolean('is_dummy_record', true);
-    }
-
-    /**
-     * Sets the current charset in $this->renderCharset and the charset
-     * conversion instance in $this->$charsetConversion.
-     *
-     * @return void
-     *
-     * @throws \RuntimeException
-     */
-    protected function initializeCharsetConversion()
-    {
-        if (isset($GLOBALS['TSFE'])) {
-            $this->renderCharset = $GLOBALS['TSFE']->renderCharset;
-            $this->charsetConversion = $GLOBALS['TSFE']->csConvObj;
-        } elseif (isset($GLOBALS['LANG'])) {
-            $this->renderCharset = $GLOBALS['LANG']->charset;
-            $this->charsetConversion = $GLOBALS['LANG']->csConvObj;
-        } else {
-            throw new \RuntimeException('There was neither a front end nor a back end detected.', 1333292389);
-        }
-
-        if ($this->renderCharset === null || $this->renderCharset === '') {
-            $this->renderCharset = 'utf-8';
-        }
     }
 
     /**

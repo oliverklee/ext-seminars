@@ -85,7 +85,6 @@ class Tx_Seminars_OldModel_Registration extends \Tx_Seminars_OldModel_Abstract
     public function __construct(ContentObjectRenderer $contentObjectRenderer, $dbResult = false)
     {
         $this->cObj = $contentObjectRenderer;
-        $this->initializeCharsetConversion();
         $this->init();
 
         if ($dbResult === false) {
@@ -805,7 +804,7 @@ class Tx_Seminars_OldModel_Registration extends \Tx_Seminars_OldModel_Abstract
             }
 
             $labels[$key] = $label;
-            $maximumLabelLength = max($maximumLabelLength, $this->charsetConversion->strlen($this->renderCharset, $label));
+            $maximumLabelLength = max($maximumLabelLength, \mb_strlen($label, 'utf-8'));
         }
 
         foreach ($keys as $key) {
@@ -847,7 +846,7 @@ class Tx_Seminars_OldModel_Registration extends \Tx_Seminars_OldModel_Abstract
                 $currentLabel = $this->translate('label_' . $key);
             }
             $labels[$key] = $currentLabel;
-            $maximumLabelLength = max($maximumLabelLength, $this->charsetConversion->strlen($this->renderCharset, $currentLabel));
+            $maximumLabelLength = max($maximumLabelLength, \mb_strlen($currentLabel, 'utf-8'));
         }
 
         $result = '';

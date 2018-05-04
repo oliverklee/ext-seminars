@@ -95,8 +95,9 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
             }
 
             $resultCharset = strtolower($this->configuration->getAsString('charsetForCsv'));
-            if ('utf-8' !== $resultCharset) {
-                $result = $this->getCharsetConversion()->conv($result, 'utf-8', $resultCharset);
+            if ($resultCharset !== 'utf-8') {
+                $charsetConverter = new CharsetConverter();
+                $result = $charsetConverter->conv($result, 'utf-8', $resultCharset);
             }
         } catch (\Exception $exception) {
             \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 500 Internal Server Error');
@@ -104,26 +105,6 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
         }
 
         return $result;
-    }
-
-    /**
-     * Retrieves an active charset conversion instance.
-     *
-     * @return CharsetConverter a charset conversion instance
-     *
-     * @throws \RuntimeException
-     */
-    protected function getCharsetConversion()
-    {
-        if (isset($GLOBALS['TSFE'])) {
-            $instance = $GLOBALS['TSFE']->csConvObj;
-        } elseif (isset($GLOBALS['LANG'])) {
-            $instance = $GLOBALS['LANG']->csConvObj;
-        } else {
-            throw new \RuntimeException('There was neither a front end nor a back end detected.', 1333292438);
-        }
-
-        return $instance;
     }
 
     /**
