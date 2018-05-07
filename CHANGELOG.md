@@ -13,6 +13,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Drop the unneeded ConfigurationController (#101)
 
 ### Fixed
 - Fix more deprecation log warnings (#99)

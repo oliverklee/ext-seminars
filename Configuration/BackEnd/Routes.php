@@ -2,7 +2,7 @@
 
 return [
     'web_seminars' => [
-        'path' => '/seminars/configuration/',
-        'target' => \OliverKlee\Seminars\Controller\ConfigurationController::class . '::mainAction',
+        'path' => '/seminars',
+        'target' => \OliverKlee\Seminars\BackEnd\Controller::class . '::mainAction',
     ],
 ];
