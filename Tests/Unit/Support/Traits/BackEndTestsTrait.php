@@ -14,6 +14,16 @@ use TYPO3\CMS\Lang\LanguageService;
 trait BackEndTestsTrait
 {
     /**
+     * @var array
+     */
+    private $getBackup = [];
+
+    /**
+     * @var array
+     */
+    private $postBackup = [];
+
+    /**
      * @var BackendUserAuthentication
      */
     private $backEndUserBackup = null;
@@ -60,6 +70,7 @@ trait BackEndTestsTrait
     private function unifyTestingEnvironment()
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
+        $this->cleanRequestVariables();
         $this->replaceBackEndUserWithMock();
         $this->unifyBackEndLanguage();
         $this->unifyExtensionSettings();
@@ -73,12 +84,23 @@ trait BackEndTestsTrait
     /**
      * @return void
      */
+    private function cleanRequestVariables()
+    {
+        $this->getBackup = $GLOBALS['_GET'];
+        $GLOBALS['_GET'] = [];
+        $this->postBackup = $GLOBALS['_POST'];
+        $GLOBALS['_POST'] = [];
+    }
+
+    /**
+     * @return void
+     */
     private function replaceBackEndUserWithMock()
     {
         $this->backEndUserBackup = $GLOBALS['BE_USER'];
         $this->mockBackEndUser = $this->getMock(
             BackendUserAuthentication::class,
-            ['check', 'doesUserHaveAccess', 'setAndSaveSessionData'],
+            ['check', 'doesUserHaveAccess', 'setAndSaveSessionData', 'writeUC'],
             [],
             '',
             false
@@ -142,6 +164,10 @@ trait BackEndTestsTrait
         }
         if ($this->t3VarBackup !== []) {
             $GLOBALS['T3_VAR']['getUserObj'] = $this->t3VarBackup;
+        }
+        if ($this->getBackup !== [] || $this->postBackup !== []) {
+            $GLOBALS['_GET'] = $this->getBackup;
+            $GLOBALS['_POST'] = $this->postBackup;
         }
     }
 

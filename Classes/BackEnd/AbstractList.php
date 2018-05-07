@@ -115,8 +115,7 @@ abstract class AbstractList
     }
 
     /**
-     * Generates a linked delete record icon whith a JavaScript confirmation
-     * window.
+     * Generates a linked "delete" record icon with a JavaScript confirmation window.
      *
      * @param int $uid the UID of the record, must be > 0
      * @param int $pageUid the PID of the record, must be >= 0
