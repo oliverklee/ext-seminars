@@ -31,7 +31,6 @@ class Controller extends AbstractModule
     {
         $this->init();
         if (GeneralUtility::_GET('csv') !== '1') {
-            $this->init();
             $this->main();
         } else {
             /** @var \Tx_Seminars_Csv_CsvDownloader $csvExporter */
