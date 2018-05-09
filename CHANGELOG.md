@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop the unneeded ConfigurationController (#101)
 
 ### Fixed
+- Remove all echo statements from the BE module (#102)
 - Fix more deprecation log warnings (#99)
 - Improve the PHPDoc (#98)
 - Fix the unit tests for the BE email form hooks (#95)
