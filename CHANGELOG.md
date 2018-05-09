@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop the unneeded ConfigurationController (#101)
 
 ### Fixed
+- Fix error messages in the TCA for date/time fields (#104)
 - Remove all echo statements from the BE module (#102)
 - Fix more deprecation log warnings (#99)
 - Improve the PHPDoc (#98)
