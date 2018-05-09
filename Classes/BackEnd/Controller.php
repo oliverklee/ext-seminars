@@ -30,30 +30,30 @@ class Controller extends AbstractModule
     public function mainAction(ServerRequestInterface $request, ResponseInterface $response)
     {
         $this->init();
-        if (GeneralUtility::_GET('csv') !== '1') {
-            $this->main();
-        } else {
+        if (GeneralUtility::_GET('csv') === '1') {
             /** @var \Tx_Seminars_Csv_CsvDownloader $csvExporter */
             $csvExporter = GeneralUtility::makeInstance(\Tx_Seminars_Csv_CsvDownloader::class);
             $content = $csvExporter->main();
+            $response->getBody()->write($content);
+        } else {
+            $response->getBody()->write($this->main());
         }
-        $response->getBody()->write($content);
 
         return $response;
     }
 
     /**
-     * Main function of the module. Writes the content to $this->content.
+     * Main function of the module.
      *
-     * No return value; output is directly written to the page.
-     *
-     * @return void
+     * @return string
      */
     public function main()
     {
         $languageService = $this->getLanguageService();
         $backEndUser = $this->getBackendUser();
-        $this->doc = GeneralUtility::makeInstance(DocumentTemplate::class);
+
+        /** @var DocumentTemplate $document */
+        $document = GeneralUtility::makeInstance(DocumentTemplate::class);
 
         $pageRenderer = $this->getPageRenderer();
         $pageRenderer->addCssFile(
@@ -71,8 +71,8 @@ class Controller extends AbstractModule
             false
         );
 
-        $this->content = $this->doc->startPage($languageService->getLL('title'));
-        $this->content .= $this->doc->header($languageService->getLL('title'));
+        $content = $document->startPage($languageService->getLL('title')) .
+            $document->header($languageService->getLL('title'));
 
         if ($this->id <= 0) {
             /** @var FlashMessage $message */
@@ -84,14 +84,12 @@ class Controller extends AbstractModule
             );
             $this->addFlashMessage($message);
 
-            echo $this->content . $this->getRenderedFlashMessages() . $this->doc->endPage();
-            return;
+            return $content . $this->getRenderedFlashMessages() . $document->endPage();
         }
 
         $pageAccess = BackendUtility::readPageAccess($this->id, $this->perms_clause);
         if (!is_array($pageAccess) && !$backEndUser->isAdmin()) {
-            echo $this->content . $this->getRenderedFlashMessages() . $this->doc->endPage();
-            return;
+            return $content . $this->getRenderedFlashMessages() . $document->endPage();
         }
 
         if (!$this->hasStaticTemplate()) {
@@ -104,8 +102,7 @@ class Controller extends AbstractModule
             );
             $this->addFlashMessage($message);
 
-            echo $this->content . $this->getRenderedFlashMessages() . $this->doc->endPage();
-            return;
+            return $content . $this->getRenderedFlashMessages() . $document->endPage();
         }
 
         $this->setPageData($pageAccess);
@@ -140,7 +137,7 @@ class Controller extends AbstractModule
         // rights to show any of the tabs.
         if ($this->subModule > 0) {
             $moduleToken = FormProtectionFactory::get()->generateToken('moduleCall', self::MODULE_NAME);
-            $this->content .= $this->doc->getTabMenu(
+            $content .= $document->getTabMenu(
                 ['M' => self::MODULE_NAME, 'moduleToken' => $moduleToken, 'id' => $this->id],
                 'subModule',
                 $this->subModule,
@@ -152,45 +149,35 @@ class Controller extends AbstractModule
             case 2:
                 /** @var RegistrationsList $registrationsList */
                 $registrationsList = GeneralUtility::makeInstance(RegistrationsList::class, $this);
-                $this->content .= $registrationsList->show();
+                $content .= $registrationsList->show();
                 break;
             case 3:
                 /** @var SpeakersList $speakersList */
                 $speakersList = GeneralUtility::makeInstance(SpeakersList::class, $this);
-                $this->content .= $speakersList->show();
+                $content .= $speakersList->show();
                 break;
             case 4:
                 /** @var OrganizersList $organizersList */
                 $organizersList = GeneralUtility::makeInstance(OrganizersList::class, $this);
-                $this->content .= $organizersList->show();
+                $content .= $organizersList->show();
                 break;
             case 1:
                 if ($this->isGeneralEmailFormRequested()) {
-                    $this->content .= $this->getGeneralMailForm();
+                    $content .= $this->getGeneralMailForm();
                 } elseif ($this->isConfirmEventFormRequested()) {
-                    $this->content .= $this->getConfirmEventMailForm();
+                    $content .= $this->getConfirmEventMailForm();
                 } elseif ($this->isCancelEventFormRequested()) {
-                    $this->content .= $this->getCancelEventMailForm();
+                    $content .= $this->getCancelEventMailForm();
                 } else {
                     /** @var EventsList $eventsList */
                     $eventsList = GeneralUtility::makeInstance(EventsList::class, $this);
-                    $this->content .= $eventsList->show();
+                    $content .= $eventsList->show();
                 }
                 break;
             default:
         }
 
-        echo $this->content . $this->doc->endPage();
-    }
-
-    /**
-     * Returns the content.
-     *
-     * @return string
-     */
-    public function getContent()
-    {
-        return $this->content;
+        return $content . $document->endPage();
     }
 
     /**
