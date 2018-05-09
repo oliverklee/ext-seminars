@@ -1,7 +1,7 @@
 <?php
 defined('TYPO3_MODE') or die();
 
-return [
+$tca = [
     'ctrl' => [
         'title' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_timeslots',
         'label' => 'title',
@@ -39,7 +39,6 @@ return [
                 'type' => 'input',
                 'size' => 12,
                 'eval' => 'datetime, required',
-                'renderType' => 'inputDateTime',
                 'checkbox' => '0',
                 'default' => '0',
             ],
@@ -51,7 +50,6 @@ return [
                 'type' => 'input',
                 'size' => 12,
                 'eval' => 'datetime',
-                'renderType' => 'inputDateTime',
                 'checkbox' => '0',
                 'default' => '0',
             ],
@@ -63,7 +61,6 @@ return [
                 'type' => 'input',
                 'size' => 12,
                 'eval' => 'datetime',
-                'renderType' => 'inputDateTime',
                 'checkbox' => '0',
                 'default' => '0',
             ],
@@ -124,3 +121,11 @@ return [
         '1' => ['showitem' => ''],
     ],
 ];
+
+if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8006000) {
+    $tca['columns']['begin_date']['config']['renderType'] = 'inputDateTime';
+    $tca['columns']['end_date']['config']['renderType'] = 'inputDateTime';
+    $tca['columns']['entry_date']['config']['renderType'] = 'inputDateTime';
+}
+
+return $tca;

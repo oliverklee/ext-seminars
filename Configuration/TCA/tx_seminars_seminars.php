@@ -203,7 +203,6 @@ $tca = [
                 'type' => 'input',
                 'size' => 12,
                 'eval' => 'datetime',
-                'renderType' => 'inputDateTime',
                 'checkbox' => '0',
                 'default' => '0',
             ],
@@ -215,7 +214,6 @@ $tca = [
                 'type' => 'input',
                 'size' => 12,
                 'eval' => 'datetime',
-                'renderType' => 'inputDateTime',
                 'checkbox' => '0',
                 'default' => '0',
             ],
@@ -252,7 +250,6 @@ $tca = [
                 'type' => 'input',
                 'size' => 12,
                 'eval' => 'datetime',
-                'renderType' => 'inputDateTime',
                 'checkbox' => '0',
                 'default' => '0',
             ],
@@ -265,7 +262,6 @@ $tca = [
                 'type' => 'input',
                 'size' => 12,
                 'eval' => 'datetime',
-                'renderType' => 'inputDateTime',
                 'checkbox' => '0',
                 'default' => '0',
             ],
@@ -278,7 +274,6 @@ $tca = [
                 'type' => 'input',
                 'size' => 12,
                 'eval' => 'datetime',
-                'renderType' => 'inputDateTime',
                 'checkbox' => '0',
                 'default' => '0',
             ],
@@ -291,7 +286,6 @@ $tca = [
                 'type' => 'input',
                 'size' => 12,
                 'eval' => 'datetime',
-                'renderType' => 'inputDateTime',
                 'checkbox' => '0',
                 'default' => '0',
             ],
@@ -303,7 +297,6 @@ $tca = [
                 'type' => 'input',
                 'size' => 10,
                 'eval' => 'date',
-                'renderType' => 'inputDateTime',
                 'checkbox' => '0',
                 'default' => '0',
             ],
@@ -931,7 +924,6 @@ $tca = [
                 'type' => 'input',
                 'size' => 8,
                 'eval' => 'date',
-                'renderType' => 'inputDateTime',
                 'default' => '0',
                 'checkbox' => '0',
             ],
@@ -943,7 +935,6 @@ $tca = [
                 'type' => 'input',
                 'size' => 8,
                 'eval' => 'date',
-                'renderType' => 'inputDateTime',
                 'checkbox' => '0',
                 'default' => '0',
                 'range' => [
@@ -1018,7 +1009,6 @@ $tca = [
                 'type' => 'input',
                 'size' => 12,
                 'eval' => 'datetime',
-                'renderType' => 'inputDateTime',
                 'checkbox' => '0',
                 'default' => '0',
             ],
@@ -1035,7 +1025,7 @@ $tca = [
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelAttendees, needs_registration, allows_multiple_registrations, attendees_min, attendees_max, queue_size, offline_attendees, organizers_notified_about_minimum_reached, mute_notification_emails, target_groups, skip_collision_check, date_of_last_registration_digest, registrations, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelLodging, lodgings, foods, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelPayment, price_on_request, price_regular, price_regular_early, price_regular_board, price_special, price_special_early, price_special_board, payment_methods, ' .
-                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelAccess, hidden, owner_feuser, vips',
+                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelAccess, hidden, starttime, endtime, owner_feuser, vips',
         ],
         // Multiple event topic
         '1' => [
@@ -1043,7 +1033,7 @@ $tca = [
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.divLabelGeneral, object_type, title, subtitle, image, categories, requirements, dependencies, teaser, description, event_type, credit_points, additional_information, checkboxes, uses_terms_2, notes, attached_files, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.divLabelAttendees, allows_multiple_registrations, target_groups, ' .
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.divLabelPayment, price_on_request, price_regular, price_regular_early, price_regular_board, price_special, price_special_early, price_special_board, payment_methods, ' .
-                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.divLabelAccess, hidden',
+                '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.divLabelAccess, hidden, starttime, endtime',
         ],
         // Multiple event date
         '2' => [
@@ -1057,14 +1047,22 @@ $tca = [
                 '--div--;LLL:EXT:seminars/Resources/Private/Language/locallang_db:tx_seminars_seminars.divLabelAccess, hidden, vips',
         ],
     ],
-    'palettes' => [
-        '1' => ['showitem' => 'starttime, endtime'],
-    ],
 ];
 
-if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) < 8006000) {
+if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8006000) {
+    $tca['columns']['begin_date']['config']['renderType'] = 'inputDateTime';
+    $tca['columns']['end_date']['config']['renderType'] = 'inputDateTime';
+    $tca['columns']['begin_date_registration']['config']['renderType'] = 'inputDateTime';
+    $tca['columns']['deadline_registration']['config']['renderType'] = 'inputDateTime';
+    $tca['columns']['deadline_early_bird']['config']['renderType'] = 'inputDateTime';
+    $tca['columns']['deadline_unregistration']['config']['renderType'] = 'inputDateTime';
+    $tca['columns']['expiry']['config']['renderType'] = 'inputDateTime';
+    $tca['columns']['starttime']['config']['renderType'] = 'inputDateTime';
+    $tca['columns']['endtime']['config']['renderType'] = 'inputDateTime';
+    $tca['columns']['date_of_last_registration_digest']['config']['renderType'] = 'inputDateTime';
+} else {
     $tca['columns']['description']['defaultExtras'] = 'richtext[]';
-    $tca['columns']['additional_informatik']['defaultExtras'] = 'richtext[]';
+    $tca['columns']['additional_information']['defaultExtras'] = 'richtext[]';
 }
 
 return $tca;
