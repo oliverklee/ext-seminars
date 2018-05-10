@@ -850,7 +850,7 @@ override the corresponding value from TS Setup.**
          integer
 
    Beschreibung
-         PID des SysOrdners, das die Veranstaltungsdatensätze enthält
+         PID des Ordners, das die Veranstaltungsdatensätze enthält
 
    Standardwert
          None

@@ -22,7 +22,7 @@ A
 
 |img-43|  *Illustration 21: Hilfsdatensätze in der Listenansicht*
 
-lle Datensätze welche zur Verwaltung der Grundinformationen dienen, werden im SysOrdner Seminar Organisation abgelegt. Alle benötigten Datensätze sind bereits angelegt., können aber von den Redakteuren angepasst oder ergänzt werden.
+lle Datensätze welche zur Verwaltung der Grundinformationen dienen, werden im Ordner Seminar Organisation abgelegt. Alle benötigten Datensätze sind bereits angelegt., können aber von den Redakteuren angepasst oder ergänzt werden.
 Veranstalter verwalten
 ^^^^^^^^^^^^^^^^^^^^^^
 
@@ -35,7 +35,7 @@ U
 |img-44|  *Illustration 22: Auswahl des Typs "Veranstalter" beim
 Anlegen eines Datensatzes*
 
-m einen neuen Organisator anzulegen, klicken wir wieder auf das Symbol des SysOrdners Seminar Organisation und wählen im Kontextmenu die Option „Neu“Dort wählen wir denn im Content Frame die Option „Veranstalter“ (Bild
+m einen neuen Organisator anzulegen, klicken wir wieder auf das Symbol des Ordners Seminar Organisation und wählen im Kontextmenu die Option „Neu“Dort wählen wir denn im Content Frame die Option „Veranstalter“ (Bild
 rechts)
 
 Der Veranstalter Datensatz enthält alle Informationen über den
@@ -54,7 +54,7 @@ Veranstalter wie:
   trotzdem mit ein paar netten Worten gefüllt werden, da dieser Inhalt
   als Endtext in die Bestätigung eingefügt wird
 
-- **SysOrdner** : (optional)
+- **Ordner** : (optional)
 
 
 .. toctree::

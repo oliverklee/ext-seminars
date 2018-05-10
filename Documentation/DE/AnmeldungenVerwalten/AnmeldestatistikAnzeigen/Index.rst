@@ -19,9 +19,9 @@ Anmeldestatistik anzeigen
 Um sich die Statistiken der Anmeldungen genauer anzusehen, gibt es
 verschiedene Möglichkeiten:
 
-#. Im Modul  *Veranstaltungen* den SysOrdner Seminare auswählen.
+#. Im Modul  *Veranstaltungen* den Ordner Seminare auswählen.
 
-#. Im Modul  *Liste* können Sie im SysOrdner Seminare die Anmeldungen und
+#. Im Modul  *Liste* können Sie im Ordner Seminare die Anmeldungen und
    deren Details sehen.Ebenfalls werden dort die Infos über die Seminare
    (Anzahl Anmeldungen, ist voll, oder hat genug Anmeldungen)
    angezeigt.Zusätzliche Informationen über die Anmeldungen erhalten Sie

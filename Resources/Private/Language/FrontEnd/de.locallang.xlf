@@ -341,7 +341,7 @@
             </trans-unit>
             <trans-unit id="seminars.pi_flexform.sysFolderForAdditionalAttendeeUsersPID" xml:space="preserve" approved="yes">
                 <source>System folder in which the created FE user records will be stored</source>
-                <target>SysOrdner für die angelegten FE-Benutzer-Datensätze</target>
+                <target>Ordner für die angelegten FE-Benutzer-Datensätze</target>
             </trans-unit>
             <trans-unit id="seminars.pi_flexform.userGroupUidsForAdditionalAttendeesFrontEndUsers" xml:space="preserve" approved="yes">
                 <source>FE user groups for the created FE users</source>

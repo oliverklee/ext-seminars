@@ -705,7 +705,7 @@
             </trans-unit>
             <trans-unit id="tx_seminars_organizers.attendances_pid" xml:space="preserve" approved="yes">
                 <source>SysFolder to store the registration records in:</source>
-                <target>SysOrdner, in dem die Anmeldungen gespeichert werden sollen:</target>
+                <target>Ordner, in dem die Anmeldungen gespeichert werden sollen:</target>
             </trans-unit>
             <trans-unit id="tx_seminars_payment_methods" xml:space="preserve" approved="yes">
                 <source>Methods of payment</source>
@@ -881,15 +881,15 @@
             </trans-unit>
             <trans-unit id="be_groups.tx_seminars_events_folder" xml:space="preserve" approved="yes">
                 <source>Sysfolder for new events</source>
-                <target>SysOrdner für neue Veranstaltungen</target>
+                <target>Ordner für neue Veranstaltungen</target>
             </trans-unit>
             <trans-unit id="be_groups.tx_seminars_registrations_folder" xml:space="preserve" approved="yes">
                 <source>Sysfolder for new registrations</source>
-                <target>SysOrdner für neue Anmeldungen</target>
+                <target>Ordner für neue Anmeldungen</target>
             </trans-unit>
             <trans-unit id="be_groups.tx_seminars_auxiliaries_folder" xml:space="preserve" approved="yes">
                 <source>Sysfolder for new auxiliary records</source>
-                <target>SysOrdner für neue Hilfsdatensätze</target>
+                <target>Ordner für neue Hilfsdatensätze</target>
             </trans-unit>
         </body>
     </file>
