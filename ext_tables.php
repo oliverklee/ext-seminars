@@ -12,23 +12,22 @@ TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
 );
 
 if (TYPO3_MODE === 'BE') {
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModule(
-        'web',
-        'seminars',
-        '',
-        '',
-        [
-            'routeTarget'           => \OliverKlee\Seminars\BackEnd\Controller::class . '::mainAction',
-            'access'                => 'user,group',
-            'name'                  => 'web_seminars',
-            'labels' => [
-                'tabs_images' => [
-                    'tab' => 'EXT:seminars/Resources/Public/Icons/BackEndModule.gif',
-                ],
-                'll_ref' => 'LLL:EXT:seminars/Resources/Private/Language/BackEnd/locallang_mod.xlf',
-            ],
-        ]
-    );
+    $moduleConfiguration = [
+        'routeTarget' => \OliverKlee\Seminars\BackEnd\Controller::class . '::mainAction',
+        'access' => 'user,group',
+        'name' => 'web_seminars',
+        'labels' => [
+            'll_ref' => 'LLL:EXT:seminars/Resources/Private/Language/BackEnd/locallang_mod.xlf',
+        ],
+        'icon' => 'EXT:seminars/Resources/Public/Icons/BackEndModule.gif',
+    ];
+    if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) < 8007000) {
+        $moduleConfiguration['labels']['tabs_images'] = [
+            'tab' => 'EXT:seminars/Resources/Public/Icons/BackEndModule.gif',
+        ];
+    }
+
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModule('web', 'seminars', '', '', $moduleConfiguration);
 }
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
