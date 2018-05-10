@@ -79,10 +79,6 @@ $tca = [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_timeslots_speakers_mm',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
-                    \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-                    'tx_seminars_speakers'
-                ),
             ],
         ],
         'place' => [
@@ -99,10 +95,6 @@ $tca = [
                 'minitems' => 0,
                 'maxitems' => 1,
                 'items' => [['', '0']],
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
-                    \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-                    'tx_seminars_sites'
-                ),
             ],
         ],
         'room' => [

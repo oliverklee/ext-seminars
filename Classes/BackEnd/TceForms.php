@@ -75,6 +75,8 @@ class TceForms
      * table name. It's mainly used to simplify the maintaining of the wizard
      * code (equals in more than 90%) and to get some flexibility.
      *
+     * @deprecated will be removed once this extension requires TYPO3 >= 8.7
+     *
      * @param mixed[][] $array wizards array with the table markers
      * @param string $table name of the real database table (e.g. "tx_seminars_seminars")
      *
@@ -92,6 +94,8 @@ class TceForms
 
     /**
      * Gets the wizard configuration.
+     *
+     * @deprecated will be removed once this extension requires TYPO3 >= 8.7
      *
      * @return mixed[]
      */
