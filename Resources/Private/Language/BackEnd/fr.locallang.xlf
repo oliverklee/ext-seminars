@@ -136,12 +136,12 @@
                 <target>Inscriptions pour l'événement &quot;%s&quot; (UID %u)</target>
             </trans-unit>
             <trans-unit id="label_create_record_in_foreign_folder" xml:space="preserve" approved="yes">
-                <source>The new record will be created in the sysfolder: %s (UID %u)</source>
-                <target>Le nouvel enregistrement sera créé dans le sysfolder &quot;%s&quot; (UID %u)</target>
+                <source>The new record will be created in the folder: %s (UID %u)</source>
+                <target>Le nouvel enregistrement sera créé dans le folder &quot;%s&quot; (UID %u)</target>
             </trans-unit>
             <trans-unit id="label_create_record_in_current_folder" xml:space="preserve" approved="yes">
-                <source>The new record will be created in the current sysfolder: %s (UID %u).</source>
-                <target>nouvel enregistrement sera créé dans le sysfolder actif &quot;%s&quot; (UID %u).</target>
+                <source>The new record will be created in the current folder: %s (UID %u).</source>
+                <target>nouvel enregistrement sera créé dans le folder actif &quot;%s&quot; (UID %u).</target>
             </trans-unit>
             <trans-unit id="eventMailForm_subject" xml:space="preserve" approved="yes">
                 <source>Subject:</source>
@@ -216,12 +216,12 @@
                 <target></target>
             </trans-unit>
             <trans-unit id="message_noPageTypeSelected" xml:space="preserve" approved="yes">
-                <source>Please select a sysfolder in the page tree.</source>
-                <target>Sélectionnez une sysfolder dans l'arborescence des pages,</target>
+                <source>Please select a folder in the page tree.</source>
+                <target>Sélectionnez une folder dans l'arborescence des pages,</target>
             </trans-unit>
             <trans-unit id="message_noStaticTemplateFound" xml:space="preserve" approved="yes">
-                <source>No static template was found. Please include the seminars static template in the TS setup of this sysfolder.</source>
-                <target>Aucun template statique n'a été trouvé. Incluez svp les template statique seminars dans le TS setup de ce sysfolder.</target>
+                <source>No static template was found. Please include the seminars static template in the TS setup of this folder.</source>
+                <target>Aucun template statique n'a été trouvé. Incluez svp les template statique seminars dans le TS setup de ce folder.</target>
             </trans-unit>
             <trans-unit id="testForm_prefillField_subject" xml:space="preserve" approved="yes">
                 <source>Event tested</source>

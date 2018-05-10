@@ -925,7 +925,7 @@ only be configured using your TypoScript setup, but not via flexforms.
          page\_id
 
    Beschreibung
-         PID des SysOrdners, in dem Anmeldungen gespeichert werden
+         PID des Ordners, in dem Anmeldungen gespeichert werden
 
    Standardwert
          None

@@ -22,13 +22,13 @@ Dieses Modul bietet den komfortablen Zugriff auf
 Veranstaltungsdatensätze, Veranstalter, ReferentInnen und Anmeldungen.
 
 **Wichtig: Es werden immer nur die Datensätze des ausgewählten
-SysOrdners dargestellt.** Das bedeutet, dass Sie zwischendurch einen
-anderen SysOrdner auswählen, wenn Ihre Datensätze (zum Beispiel die
-Veranstaltungen und die Anmeldungen) in unterschiedlichen SysOrdnern
+Ordners dargestellt.** Das bedeutet, dass Sie zwischendurch einen
+anderen Ordner auswählen, wenn Ihre Datensätze (zum Beispiel die
+Veranstaltungen und die Anmeldungen) in unterschiedlichen Ordnern
 liegen.
 
 In diesem Back-end-Modul erstellte Datensätze werden ebenfalls im
-gerade ausgewählten SysOrdner angelegt.
+gerade ausgewählten Ordner angelegt.
 
 
 Tab: Veranstaltungen
@@ -54,7 +54,7 @@ Tab: Veranstaltungen
          |img-30| Neuen Datensatz erstellen
 
    Bedeutung
-         erstellt einen neuen Veranstaltungsdatensatz im ausgewählten SysOrdner
+         erstellt einen neuen Veranstaltungsdatensatz im ausgewählten Ordner
 
 
 .. container:: table-row
@@ -294,7 +294,7 @@ Tab: Anmeldungen
 "Veranstaltungen"*
 
 In diesem Tab werden  **alle** Anmeldungsdatensätze des ausgewählten
-SysOrdners dargestellt (also von allen Veranstaltungen).
+Ordners dargestellt (also von allen Veranstaltungen).
 
 Die erste Liste **reguläre Anmeldungen** enthält die Anmeldungen, die
 nicht auf der Warteliste sind.
@@ -307,11 +307,11 @@ Tab: ReferentInnen
 "Veranstaltungen"*
 
 In diesem Tab werden  **alle** ReferentInnen-Datensätze des
-ausgewählten SysOrdners dargestellt (also von allen Veranstaltungen).
+ausgewählten Ordners dargestellt (also von allen Veranstaltungen).
 
 
 Tab: Veranstalter
 """""""""""""""""
 
 In diesem Tab werden  **alle** Veranstalter-Datensätze des
-ausgewählten SysOrdners dargestellt (also von allen Veranstaltungen).
+ausgewählten Ordners dargestellt (also von allen Veranstaltungen).

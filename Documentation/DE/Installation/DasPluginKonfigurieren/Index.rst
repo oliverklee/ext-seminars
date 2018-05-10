@@ -44,7 +44,7 @@ erforderlichen Werte für eine kleine Installation zu setzen:
 ::
 
    plugin.tx_seminars {
-     # PID des SysOrdners, in dem Anmeldungen gespeichert werden
+     # PID des Ordners, in dem Anmeldungen gespeichert werden
      attendancesPID =
    }
 
@@ -53,7 +53,7 @@ erforderlichen Werte für eine kleine Installation zu setzen:
    }
 
    plugin.tx_seminars_pi1 {
-     # PID des SysOrdners, das die Veranstaltungsdatensätze enthält
+     # PID des Ordners, das die Veranstaltungsdatensätze enthält
      pages =
 
      # PID der FE-Seite, die die Listenansicht enthält

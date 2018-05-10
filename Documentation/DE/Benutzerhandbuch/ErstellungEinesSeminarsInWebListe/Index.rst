@@ -23,8 +23,8 @@ F
 |img-40|  *Illustration 18: Auswahl des Datentyps für den neuen
 Datensatz*
 
-ür das Management der Seminare, wechseln wir in das Modul  *Liste* .Die Seminare und deren Anmeldungen werden in dem Seitenbaum unter Zusatzseiten im SysOrdner Seminare abgelegt.Um ein neues Seminar zu erstellen klicken wir auf das Symbol des
-SysOrdners Seminare und wählen im Kontextmenu die Option „Neu“
+ür das Management der Seminare, wechseln wir in das Modul  *Liste* .Die Seminare und deren Anmeldungen werden in dem Seitenbaum unter Zusatzseiten im Ordner Seminare abgelegt.Um ein neues Seminar zu erstellen klicken wir auf das Symbol des
+Ordners Seminare und wählen im Kontextmenu die Option „Neu“
 
 Wir erhalten die Ansicht Neuer Datensatz im Content Frame. Dort wählen
 wir den Datensatz „Seminare“ aus.

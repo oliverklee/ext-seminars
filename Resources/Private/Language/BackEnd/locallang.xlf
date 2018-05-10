@@ -103,10 +103,10 @@
                 <source>Registrations for event &quot;%s&quot; (UID %u)</source>
             </trans-unit>
             <trans-unit id="label_create_record_in_foreign_folder" xml:space="preserve">
-                <source>The new record will be created in the sysfolder: %s (UID %u)</source>
+                <source>The new record will be created in the folder: %s (UID %u)</source>
             </trans-unit>
             <trans-unit id="label_create_record_in_current_folder" xml:space="preserve">
-                <source>The new record will be created in the current sysfolder: %s (UID %u).</source>
+                <source>The new record will be created in the current folder: %s (UID %u).</source>
             </trans-unit>
             <trans-unit id="eventMailForm_subject" xml:space="preserve">
                 <source>Subject:</source>
@@ -163,10 +163,10 @@
                 <source>you registered for the event %s.</source>
             </trans-unit>
             <trans-unit id="message_noPageTypeSelected" xml:space="preserve">
-                <source>Please select a sysfolder in the page tree.</source>
+                <source>Please select a folder in the page tree.</source>
             </trans-unit>
             <trans-unit id="message_noStaticTemplateFound" xml:space="preserve">
-                <source>No static template was found. Please include the seminars static template in the TS setup of this sysfolder.</source>
+                <source>No static template was found. Please include the seminars static template in the TS setup of this folder.</source>
             </trans-unit>
             <trans-unit id="testForm_prefillField_subject" xml:space="preserve">
                 <source>Event tested</source>
