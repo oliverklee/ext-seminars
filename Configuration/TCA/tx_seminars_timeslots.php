@@ -98,6 +98,7 @@ $tca = [
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
+                'items' => [['', '0']],
                 'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
                     \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
                     'tx_seminars_sites'
