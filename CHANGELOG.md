@@ -13,6 +13,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Drop the palettes from the TCA (#107)
 - Drop the unneeded ConfigurationController (#101)
 
 ### Fixed

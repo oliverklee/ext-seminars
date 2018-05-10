@@ -129,9 +129,6 @@ $tca = [
     'types' => [
         '0' => ['showitem' => 'title, address, zip, city, country, homepage, directions, notes, owner'],
     ],
-    'palettes' => [
-        '1' => ['showitem' => ''],
-    ],
 ];
 
 if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8006000) {

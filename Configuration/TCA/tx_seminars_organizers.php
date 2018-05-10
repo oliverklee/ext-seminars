@@ -96,9 +96,6 @@ $tca = [
     'types' => [
         '0' => ['showitem' => 'title, description, homepage, email, email_footer, attendances_pid'],
     ],
-    'palettes' => [
-        '1' => ['showitem' => ''],
-    ],
 ];
 
 if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8006000) {

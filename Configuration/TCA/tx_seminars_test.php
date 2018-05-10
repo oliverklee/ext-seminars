@@ -69,10 +69,7 @@ $tca = [
         ],
     ],
     'types' => [
-        '0' => ['showitem' => 'title'],
-    ],
-    'palettes' => [
-        '1' => ['showitem' => 'starttime, endtime'],
+        '0' => ['showitem' => 'title, starttime, endtime'],
     ],
 ];
 

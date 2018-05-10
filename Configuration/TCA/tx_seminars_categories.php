@@ -56,7 +56,4 @@ return [
     'types' => [
         '0' => ['showitem' => 'title, icon, single_view_page'],
     ],
-    'palettes' => [
-        '1' => ['showitem' => ''],
-    ],
 ];

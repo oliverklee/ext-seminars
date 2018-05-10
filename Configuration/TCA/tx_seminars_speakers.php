@@ -214,9 +214,6 @@ $tca = [
     'types' => [
         '0' => ['showitem' => 'hidden, title, gender, organization, homepage, description, skills, notes, address, phone_work, phone_home, phone_mobile, fax, email, cancelation_period, owner'],
     ],
-    'palettes' => [
-        '1' => ['showitem' => ''],
-    ],
 ];
 
 if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8006000) {
