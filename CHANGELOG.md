@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop the unneeded ConfigurationController (#101)
 
 ### Fixed
+- Make the TCA "speakers" tab gender-neutral (#109)
 - Provide empty values for optional selects in the TCA (#106)
 - Fix link wizards in TCA in TYPO3 7.6 (#105)
 - Fix error messages in the TCA for date/time fields (#104)

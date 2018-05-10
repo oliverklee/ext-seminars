@@ -293,7 +293,7 @@
             </trans-unit>
             <trans-unit id="seminars.pi_flexform.showSpeakerDetails" xml:space="preserve" approved="yes">
                 <source>Show speaker details</source>
-                <target>Referentendetails anzeigen</target>
+                <target>Details anzeigen</target>
             </trans-unit>
             <trans-unit id="seminars.pi_flexform.showSiteDetails" xml:space="preserve" approved="yes">
                 <source>Show site details</source>
@@ -1373,7 +1373,7 @@
             </trans-unit>
             <trans-unit id="message_noSpeakersChosen" xml:space="preserve" approved="yes">
                 <source>Please select at least one speaker.</source>
-                <target>Bitte wählen Sie mindestens einen Referenten aus.</target>
+                <target>Bitte wählen Sie mindestens eineN ReferentIn aus.</target>
             </trans-unit>
             <trans-unit id="message_noPartnersChosen" xml:space="preserve" approved="yes">
                 <source>Please select at least one partner.</source>

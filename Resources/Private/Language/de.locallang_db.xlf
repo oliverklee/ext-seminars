@@ -161,7 +161,7 @@
             </trans-unit>
             <trans-unit id="tx_seminars_seminars.divLabelSpeakers" xml:space="preserve" approved="yes">
                 <source>Speakers</source>
-                <target>Referenten</target>
+                <target>ReferentInnen</target>
             </trans-unit>
             <trans-unit id="tx_seminars_seminars.speakers" xml:space="preserve" approved="yes">
                 <source>Speakers:</source>
@@ -777,7 +777,7 @@
             </trans-unit>
             <trans-unit id="tx_seminars_timeslots.speakers" xml:space="preserve" approved="yes">
                 <source>Speakers</source>
-                <target>Referenten</target>
+                <target>ReferentInnen</target>
             </trans-unit>
             <trans-unit id="tx_seminars_timeslots.place" xml:space="preserve" approved="yes">
                 <source>Place</source>
