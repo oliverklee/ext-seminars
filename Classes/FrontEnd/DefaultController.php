@@ -697,7 +697,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
 
         $this->setMarker(
             'backlink',
-            $this->pi_linkTP($this->translate('label_back', 'Back'), [], true, $this->getConfValueInteger('listPID'))
+            $this->pi_linkTP($this->translate('label_back'), [], true, $this->getConfValueInteger('listPID'))
         );
         $result .= $this->getSubpart('BACK_VIEW');
 
