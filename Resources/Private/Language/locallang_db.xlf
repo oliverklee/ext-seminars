@@ -12,12 +12,6 @@
             <trans-unit id="LGL.gender" xml:space="preserve">
                 <source>Gender:</source>
             </trans-unit>
-            <trans-unit id="tx_seminars_test" xml:space="preserve">
-                <source>Test records</source>
-            </trans-unit>
-            <trans-unit id="tx_seminars_test.title" xml:space="preserve">
-                <source>Title:</source>
-            </trans-unit>
             <trans-unit id="tx_seminars_seminars" xml:space="preserve">
                 <source>Seminars</source>
             </trans-unit>

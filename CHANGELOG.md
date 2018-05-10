@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop the unneeded ConfigurationController (#101)
 
 ### Fixed
+- Hide the test tables from BE user table permission lists (#112)
 - Remove bogus additional parameter to translate() (#111)
 - Update the term "sys folder" to "folder" (#110)
 - Make the TCA "speakers" tab gender-neutral (#109)
