@@ -4,6 +4,7 @@ namespace OliverKlee\Seminars\BackEnd;
 use TYPO3\CMS\Backend\Module\BaseScriptClass;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 /**
  * This class is the base class for a back-end module.
@@ -49,9 +50,15 @@ abstract class AbstractModule extends BaseScriptClass
     public function __construct()
     {
         $this->moduleTemplate = GeneralUtility::makeInstance(ModuleTemplate::class);
-        $this->getLanguageService()->includeLLFile('EXT:lang/locallang_common.xlf');
-        $this->getLanguageService()->includeLLFile('EXT:lang/locallang_show_rechis.xlf');
-        $this->getLanguageService()->includeLLFile('EXT:lang/locallang_mod_web_list.xlf');
+        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8007000) {
+            $this->getLanguageService()->includeLLFile('EXT:lang/Resources/Private/Language/locallang_common.xlf');
+            $this->getLanguageService()->includeLLFile('EXT:lang/Resources/Private/Language/locallang_show_rechis.xlf');
+            $this->getLanguageService()->includeLLFile('EXT:lang/Resources/Private/Language/locallang_mod_web_list.xlf');
+        } else {
+            $this->getLanguageService()->includeLLFile('EXT:lang/locallang_common.xlf');
+            $this->getLanguageService()->includeLLFile('EXT:lang/locallang_show_rechis.xlf');
+            $this->getLanguageService()->includeLLFile('EXT:lang/locallang_mod_web_list.xlf');
+        }
         $this->getLanguageService()->includeLLFile('EXT:seminars/Resources/Private/Language/BackEnd/locallang.xlf');
         $this->getLanguageService()->includeLLFile('EXT:seminars/Resources/Private/Language/Csv/locallang.xlf');
 

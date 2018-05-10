@@ -6,6 +6,15 @@
             <trans-unit id="moduleFunction.tx_seminars_modfunc1" xml:space="preserve">
                 <source>Seminars</source>
             </trans-unit>
+            <trans-unit id="LGL.hidden">
+                <source>Hide:</source>
+            </trans-unit>
+            <trans-unit id="LGL.starttime">
+                <source>Start:</source>
+            </trans-unit>
+            <trans-unit id="LGL.endtime">
+                <source>Stop:</source>
+            </trans-unit>
             <trans-unit id="LGL.telephone" xml:space="preserve">
                 <source>Phone:</source>
             </trans-unit>

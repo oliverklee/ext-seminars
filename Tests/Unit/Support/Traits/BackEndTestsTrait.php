@@ -4,6 +4,7 @@ namespace OliverKlee\Seminars\Tests\Unit\Support\Traits;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 use TYPO3\CMS\Lang\LanguageService;
 
 /**
@@ -123,7 +124,11 @@ trait BackEndTestsTrait
 
         $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/BackEnd/locallang.xlf');
         $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang_db.xlf');
-        $languageService->includeLLFile('EXT:lang/locallang_general.xlf');
+        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8007000) {
+            $languageService->includeLLFile('EXT:lang/Resources/Private/Language/locallang_general.xlf');
+        } else {
+            $languageService->includeLLFile('EXT:lang/locallang_general.xlf');
+        }
     }
 
     /**
