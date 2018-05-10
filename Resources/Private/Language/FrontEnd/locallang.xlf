@@ -144,6 +144,12 @@
             <trans-unit id="seminars.pi_flexform.limitFileDownloadToAttendees" xml:space="preserve">
                 <source>Show attached files list only to attendees:</source>
             </trans-unit>
+            <trans-unit id="seminars.pi_flexform.startingpoint">
+                <source>Data source:</source>
+            </trans-unit>
+            <trans-unit id="seminars.pi_flexform.recursive">
+                <source>Recursion:</source>
+            </trans-unit>
             <trans-unit id="seminars.pi_flexform.templateFile" xml:space="preserve">
                 <source>File name of the HTML template:</source>
             </trans-unit>

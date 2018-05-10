@@ -7,6 +7,7 @@ use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 use TYPO3\CMS\Lang\LanguageService;
 
 /**
@@ -263,7 +264,11 @@ abstract class AbstractList
     protected function getCsvIcon()
     {
         $pageData = $this->page->getPageData();
-        $langCsv = $this->getLanguageService()->sL('LLL:EXT:lang/locallang_core.xlf:labels.csv', 1);
+        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8007000) {
+            $langCsv = $this->getLanguageService()->sL('EXT:lang/Resources/Private/Language/locallang_core.xlf:labels.csv', 1);
+        } else {
+            $langCsv = $this->getLanguageService()->sL('LLL:EXT:lang/locallang_core.xlf:labels.csv', 1);
+        }
         $csvUrl = BackendUtility::getModuleUrl(
             self::MODULE_NAME,
             ['id' => $pageData['uid'], 'csv' => '1', 'tx_seminars_pi2[table]' => $this->tableName]

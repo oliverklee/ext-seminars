@@ -4,6 +4,7 @@ namespace OliverKlee\Seminars\BackEnd;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 /**
  * This class creates an events list in the back end.
@@ -285,7 +286,11 @@ class EventsList extends AbstractList
         }
 
         $pageData = $this->page->getPageData();
-        $langCsv = $this->getLanguageService()->sL('LLL:EXT:lang/locallang_core.xlf:labels.csv', 1);
+        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8007000) {
+            $langCsv = $this->getLanguageService()->sL('LLL:EXT:lang/Resources/Private/Language/locallang_core.xlf:labels.csv', 1);
+        } else {
+            $langCsv = $this->getLanguageService()->sL('LLL:EXT:lang/locallang_core.xlf:labels.csv', 1);
+        }
 
         $imageTag = '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') .
             'Resources/Public/Icons/Csv.gif" title="' . $langCsv . '" alt="' . $langCsv . '" class="icon" />';

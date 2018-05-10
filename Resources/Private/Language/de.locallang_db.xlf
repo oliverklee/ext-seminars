@@ -7,6 +7,18 @@
                 <source>Seminars</source>
                 <target>Seminare</target>
             </trans-unit>
+            <trans-unit id="LGL.hidden">
+                <source>Hide:</source>
+                <target>Verbergen:</target>
+            </trans-unit>
+            <trans-unit id="LGL.starttime">
+                <source>Start:</source>
+                <target>Start:</target>
+            </trans-unit>
+            <trans-unit id="LGL.endtime">
+                <source>Stop:</source>
+                <target>Stopp:</target>
+            </trans-unit>
             <trans-unit id="LGL.telephone" xml:space="preserve" approved="yes">
                 <source>Phone:</source>
                 <target>Telefon:</target>

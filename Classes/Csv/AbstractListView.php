@@ -1,6 +1,7 @@
 <?php
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 use TYPO3\CMS\Lang\LanguageService;
 
 /**
@@ -72,7 +73,11 @@ abstract class Tx_Seminars_Csv_AbstractListView
                 }
             }
 
-            $this->translator->includeLLFile('EXT:lang/locallang_general.xlf');
+            if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8007000) {
+                $this->translator->includeLLFile('EXT:lang/Resources/Private/Language/locallang_general.xlf');
+            } else {
+                $this->translator->includeLLFile('EXT:lang/locallang_general.xlf');
+            }
             $this->translator->includeLLFile('EXT:seminars/Resources/Private/Language/locallang_db.xlf');
             $this->includeAdditionalLanguageFiles();
         }

@@ -191,6 +191,14 @@
                 <source>Show attached files list only to attendees:</source>
                 <target>Zeige angehängte Dateien nur für Teilnehmer:</target>
             </trans-unit>
+            <trans-unit id="seminars.pi_flexform.startingpoint">
+                <source>Data source:</source>
+                <target>Datenquelle:</target>
+            </trans-unit>
+            <trans-unit id="seminars.pi_flexform.recursive">
+                <source>Recursion:</source>
+                <target>Rekursion:</target>
+            </trans-unit>
             <trans-unit id="seminars.pi_flexform.templateFile" xml:space="preserve" approved="yes">
                 <source>File name of the HTML template:</source>
                 <target>Dateiname des HTML-Templates:</target>
