@@ -145,13 +145,13 @@ abstract class AbstractList
                     $languageService->getLL('deleteWarning') . $referenceWarning
                 ) . ')) {return true;} else {return false;}'
             );
-            $langDelete = $languageService->getLL('delete', 1);
+            $langDelete = $languageService->getLL('delete');
             $result = '<a class="btn btn-default" href="' .
                 htmlspecialchars(BackendUtility::getLinkToDataHandlerAction($params)) .
                 '" onclick="' . $confirmation . '">' .
                 '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') .
-                'Resources/Public/Icons/Garbage.gif" title="' . $langDelete . '" alt="' . $langDelete .
-                '" class="deleteicon" />' .
+                'Resources/Public/Icons/Garbage.gif" title="' . htmlspecialchars($langDelete) .
+                '" alt="' . htmlspecialchars($langDelete) . '" class="deleteicon" />' .
                 '</a>';
         }
 
@@ -265,9 +265,9 @@ abstract class AbstractList
     {
         $pageData = $this->page->getPageData();
         if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8007000) {
-            $langCsv = $this->getLanguageService()->sL('EXT:lang/Resources/Private/Language/locallang_core.xlf:labels.csv', 1);
+            $langCsv = $this->getLanguageService()->sL('EXT:lang/Resources/Private/Language/locallang_core.xlf:labels.csv');
         } else {
-            $langCsv = $this->getLanguageService()->sL('LLL:EXT:lang/locallang_core.xlf:labels.csv', 1);
+            $langCsv = $this->getLanguageService()->sL('LLL:EXT:lang/locallang_core.xlf:labels.csv');
         }
         $csvUrl = BackendUtility::getModuleUrl(
             self::MODULE_NAME,

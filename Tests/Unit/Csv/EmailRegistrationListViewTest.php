@@ -1,5 +1,7 @@
 <?php
 
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
+
 /**
  * Test case.
  *
@@ -42,7 +44,11 @@ class Tx_Seminars_Tests_Unit_Csv_EmailRegistrationListViewTest extends \Tx_Phpun
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
         $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/locallang_db.xlf');
-        $GLOBALS['LANG']->includeLLFile('EXT:lang/locallang_general.xlf');
+        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8007000) {
+            $GLOBALS['LANG']->includeLLFile('EXT:lang/Resources/Private/Language/locallang_general.xlf');
+        } else {
+            $GLOBALS['LANG']->includeLLFile('EXT:lang/locallang_general.xlf');
+        }
 
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
