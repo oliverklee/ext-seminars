@@ -15,7 +15,7 @@ $tca = [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'iconfile'  => 'EXT:seminars/Resources/Public/Icons/Speaker.gif',
+        'iconfile' => 'EXT:seminars/Resources/Public/Icons/Speaker.gif',
         'searchFields' => 'title',
     ],
     'interface' => [
@@ -47,8 +47,14 @@ $tca = [
                 'renderType' => 'selectSingle',
                 'items' => [
                     ['', '0'],
-                    ['LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.gender_male', '1'],
-                    ['LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.gender_female', '2'],
+                    [
+                        'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.gender_male',
+                        '1',
+                    ],
+                    [
+                        'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.gender_female',
+                        '2',
+                    ],
                 ],
                 'size' => 1,
                 'maxitems' => 1,
@@ -72,21 +78,6 @@ $tca = [
                 'max' => 255,
                 'checkbox' => '',
                 'eval' => 'trim',
-                'wizards' => [
-                    '_PADDING' => 2,
-                    'link' => [
-                        'type' => 'popup',
-                        'title' => 'Link',
-                        'icon' => 'actions-wizard-link',
-                        'module' => [
-                            'name' => 'wizard_link',
-                            'urlParameters' => [
-                                'mode' => 'wizard',
-                            ],
-                        ],
-                        'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1',
-                    ],
-                ],
             ],
         ],
         'description' => [
@@ -113,10 +104,6 @@ $tca = [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_speakers_skills_mm',
-                'wizards' => \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
-                    \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-                    'tx_seminars_skills'
-                ),
             ],
         ],
         'notes' => [
@@ -216,9 +203,24 @@ $tca = [
 ];
 
 if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8006000) {
-    $tca['columns']['homepage']['renderType'] = 'inputLink';
+    $tca['columns']['homepage']['config']['renderType'] = 'inputLink';
 } else {
     $tca['columns']['description']['defaultExtras'] = 'richtext[]';
+    $tca['columns']['homepage']['config']['wizards'] = [
+        '_PADDING' => 2,
+        'link' => [
+            'type' => 'popup',
+            'title' => 'Link',
+            'icon' => 'actions-wizard-link',
+            'module' => [
+                'name' => 'wizard_link',
+                'urlParameters' => [
+                    'mode' => 'wizard',
+                ],
+            ],
+            'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1',
+        ],
+    ];
 }
 
 return $tca;

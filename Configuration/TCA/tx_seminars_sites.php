@@ -75,21 +75,6 @@ $tca = [
                 'max' => 255,
                 'checkbox' => '',
                 'eval' => 'trim',
-                'wizards' => [
-                    '_PADDING' => 2,
-                    'link' => [
-                        'type' => 'popup',
-                        'title' => 'Link',
-                        'icon' => 'actions-wizard-link',
-                        'module' => [
-                            'name' => 'wizard_link',
-                            'urlParameters' => [
-                                'mode' => 'wizard',
-                            ],
-                        ],
-                        'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1',
-                    ],
-                ],
             ],
         ],
         'directions' => [
@@ -130,9 +115,24 @@ $tca = [
 ];
 
 if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8006000) {
-    $tca['columns']['homepage']['renderType'] = 'inputLink';
+    $tca['columns']['homepage']['config']['renderType'] = 'inputLink';
 } else {
     $tca['columns']['directions']['defaultExtras'] = 'richtext[]';
+    $tca['columns']['homepage']['config']['wizards'] = [
+        '_PADDING' => 2,
+        'link' => [
+            'type' => 'popup',
+            'title' => 'Link',
+            'icon' => 'actions-wizard-link',
+            'module' => [
+                'name' => 'wizard_link',
+                'urlParameters' => [
+                    'mode' => 'wizard',
+                ],
+            ],
+            'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1',
+        ],
+    ];
 }
 
 return $tca;
