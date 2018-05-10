@@ -41,7 +41,6 @@ $tca = [
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_organizers.homepage',
             'config' => [
                 'type' => 'input',
-                'renderType' => 'inputLink',
                 'size' => 15,
                 'max' => 255,
                 'checkbox' => '',
@@ -102,7 +101,9 @@ $tca = [
     ],
 ];
 
-if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) < 8006000) {
+if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8006000) {
+    $tca['columns']['homepage']['renderType'] = 'inputLink';
+} else {
     $tca['columns']['description']['defaultExtras'] = 'richtext[]';
 }
 
