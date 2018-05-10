@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add some tests for the BE controller (#100)
 
 ### Changed
+- Make the speaker gender a drop down in the TCA (#108)
 
 ### Deprecated
 
