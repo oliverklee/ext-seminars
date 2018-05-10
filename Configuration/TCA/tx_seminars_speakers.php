@@ -43,15 +43,14 @@ $tca = [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.gender',
             'config' => [
-                'type' => 'radio',
-                'default' => '0',
+                'type' => 'select',
+                'renderType' => 'selectSingle',
                 'items' => [
                     ['', '0'],
                     ['LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.gender_male', '1'],
                     ['LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.gender_female', '2'],
                 ],
                 'size' => 1,
-                'minitems' => 1,
                 'maxitems' => 1,
             ],
         ],
