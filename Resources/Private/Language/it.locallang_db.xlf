@@ -15,14 +15,6 @@
                 <source>Gender:</source>
                 <target></target>
             </trans-unit>
-            <trans-unit id="tx_seminars_test" xml:space="preserve" approved="yes">
-                <source>Test records</source>
-                <target>Record di test</target>
-            </trans-unit>
-            <trans-unit id="tx_seminars_test.title" xml:space="preserve" approved="yes">
-                <source>Title:</source>
-                <target>Titolo:</target>
-            </trans-unit>
             <trans-unit id="tx_seminars_seminars" xml:space="preserve" approved="yes">
                 <source>Seminars</source>
                 <target>Seminari</target>
