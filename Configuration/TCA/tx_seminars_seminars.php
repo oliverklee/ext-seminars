@@ -306,7 +306,6 @@ $tca = [
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.details_page',
             'config' => [
                 'type' => 'input',
-                'renderType' => 'inputLink',
                 'size' => 15,
                 'max' => 255,
                 'checkbox' => '',
@@ -1060,9 +1059,10 @@ if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(
     $tca['columns']['starttime']['config']['renderType'] = 'inputDateTime';
     $tca['columns']['endtime']['config']['renderType'] = 'inputDateTime';
     $tca['columns']['date_of_last_registration_digest']['config']['renderType'] = 'inputDateTime';
+    $tca['columns']['homepage']['renderType'] = 'inputLink';
 } else {
     $tca['columns']['description']['defaultExtras'] = 'richtext[]';
-    $tca['columns']['additional_information']['defaultExtras'] = 'richtext[]';
+    $tca['columns']['details_page']['defaultExtras'] = 'richtext[]';
 }
 
 return $tca;
