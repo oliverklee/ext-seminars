@@ -6,12 +6,22 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 2.0.1
+
+### Added
 - Add some tests for the BE controller (#100)
 
 ### Changed
 - Make the speaker gender a drop down in the TCA (#108)
-
-### Deprecated
 
 ### Removed
 - Drop the palettes from the TCA (#107)
