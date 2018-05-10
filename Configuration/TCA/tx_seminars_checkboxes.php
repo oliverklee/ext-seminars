@@ -42,7 +42,4 @@ return [
     'types' => [
         '0' => ['showitem' => 'title, owner'],
     ],
-    'palettes' => [
-        '1' => ['showitem' => ''],
-    ],
 ];

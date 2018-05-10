@@ -70,7 +70,4 @@ return [
     'types' => [
         '0' => ['showitem' => 'title, minimum_age, maximum_age, owner'],
     ],
-    'palettes' => [
-        '1' => ['showitem' => ''],
-    ],
 ];

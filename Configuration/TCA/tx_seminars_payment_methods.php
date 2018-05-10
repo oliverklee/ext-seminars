@@ -39,7 +39,4 @@ return [
     'types' => [
         '0' => ['showitem' => 'title, description'],
     ],
-    'palettes' => [
-        '1' => ['showitem' => ''],
-    ],
 ];

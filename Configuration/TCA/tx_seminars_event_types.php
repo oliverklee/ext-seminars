@@ -42,7 +42,4 @@ return [
     'types' => [
         '0' => ['showitem' => 'title, single_view_page'],
     ],
-    'palettes' => [
-        '1' => ['showitem' => ''],
-    ],
 ];

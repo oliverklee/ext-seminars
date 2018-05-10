@@ -118,9 +118,6 @@ $tca = [
     'types' => [
         '0' => ['showitem' => 'begin_date, end_date, entry_date, speakers, place, room'],
     ],
-    'palettes' => [
-        '1' => ['showitem' => ''],
-    ],
 ];
 
 if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8006000) {
