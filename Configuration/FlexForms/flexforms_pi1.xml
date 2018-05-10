@@ -15,6 +15,7 @@
                             <label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:seminars.pi_flexform.what_to_display</label>
                             <config>
                                 <type>select</type>
+                                <renderType>selectSingle</renderType>
                                 <items type="array">
                                     <numIndex index="0" type="array">
                                         <numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:seminars.pi_flexform.seminar_list</numIndex>
@@ -178,6 +179,7 @@
                             <label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:seminars.pi_flexform.salutation</label>
                             <config>
                                 <type>select</type>
+                                <renderType>selectSingle</renderType>
                                 <items type="array">
                                     <numIndex index="0" type="array">
                                         <numIndex index="0"></numIndex>
@@ -224,6 +226,7 @@
                             <label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:seminars.pi_flexform.recursive</label>
                             <config>
                                 <type>select</type>
+                                <renderType>selectSingle</renderType>
                                 <items type="array">
                                     <numIndex index="0" type="array">
                                         <numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:seminars.pi_flexform.recursive.I.0</numIndex>
@@ -271,6 +274,7 @@
                             <label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:seminars.pi_flexform.displaySearchFormFields</label>
                             <config>
                                 <type>select</type>
+                                <renderType>selectCheckBox</renderType>
                                 <items type="array">
                                     <numIndex index="0" type="array">
                                         <numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:seminars.pi_flexform.searchForm.type</numIndex>
@@ -328,6 +332,7 @@
                             <label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:seminars.pi_flexform.numberOfYearsInDateFilter</label>
                             <config>
                                 <type>select</type>
+                                <renderType>selectSingle</renderType>
                                 <items type="array">
                                     <numIndex index="0" type="array">
                                         <numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:seminars.pi_flexform.fromTsSetup</numIndex>
@@ -365,6 +370,7 @@
                             <config>
                                 <type>select</type>
                                 <foreign_table>tx_seminars_event_types</foreign_table>
+                                <renderType>selectCheckBox</renderType>
                                 <maxitems>100</maxitems>
                                 <renderMode>checkbox</renderMode>
                             </config>
@@ -375,6 +381,7 @@
                             <label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:seminars.pi_flexform.limitListViewToCategories</label>
                             <config>
                                 <type>select</type>
+                                <renderType>selectCheckBox</renderType>
                                 <foreign_table>tx_seminars_categories</foreign_table>
                                 <maxitems>100</maxitems>
                                 <renderMode>checkbox</renderMode>
@@ -386,6 +393,7 @@
                             <label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:seminars.pi_flexform.limitListViewToPlaces</label>
                             <config>
                                 <type>select</type>
+                                <renderType>selectCheckBox</renderType>
                                 <foreign_table>tx_seminars_sites</foreign_table>
                                 <maxitems>100</maxitems>
                                 <renderMode>checkbox</renderMode>
@@ -397,6 +405,7 @@
                             <label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:seminars.pi_flexform.limitListViewToOrganizers</label>
                             <config>
                                 <type>select</type>
+                                <renderType>selectCheckBox</renderType>
                                 <foreign_table>tx_seminars_organizers</foreign_table>
                                 <maxitems>100</maxitems>
                                 <renderMode>checkbox</renderMode>
@@ -425,6 +434,7 @@
                             <label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:seminars.pi_flexform.categoriesInListView</label>
                             <config>
                                 <type>select</type>
+                                <renderType>selectSingle</renderType>
                                 <items type="array">
                                     <numIndex index="0" type="array">
                                         <numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:seminars.pi_flexform.fromTsSetup</numIndex>
@@ -455,6 +465,7 @@
                             <label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:seminars.pi_flexform.linkToSingleView</label>
                             <config>
                                 <type>select</type>
+                                <renderType>selectSingle</renderType>
                                 <items type="array">
                                     <numIndex index="0" type="array">
                                         <numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:seminars.pi_flexform.fromTsSetup</numIndex>
@@ -518,7 +529,6 @@
                                 <uploadfolder>uploads/tx_seminars</uploadfolder>
                                 <maxitems>1</maxitems>
                                 <size>1</size>
-                                <selectedListStyle>Width:180px</selectedListStyle>
                             </config>
                         </TCEforms>
                     </templateFile>
@@ -541,6 +551,7 @@
                             <label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:seminars.pi_flexform.timeframeInList</label>
                             <config>
                                 <type>select</type>
+                                <renderType>selectSingle</renderType>
                                 <items type="array">
                                     <numIndex index="0" type="array">
                                         <numIndex index="0"></numIndex>
@@ -679,6 +690,7 @@
                             <label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:seminars.pi_flexform.eventFieldsOnRegistrationPage</label>
                             <config>
                                 <type>select</type>
+                                <renderType>selectCheckBox</renderType>
                                 <items type="array">
                                     <numIndex index="0" type="array">
                                         <numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.uid</numIndex>
@@ -748,6 +760,7 @@
                             <label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:seminars.pi_flexform.showFeUserFieldsInRegistrationsList</label>
                             <config>
                                 <type>select</type>
+                                <renderType>selectCheckBox</renderType>
                                 <renderMode>checkbox</renderMode>
                                 <maxitems>100</maxitems>
                                 <itemsProcFunc>Tx_Seminars_FlexForms->getShowFeUserFieldsInRegistrationsList</itemsProcFunc>
@@ -758,6 +771,7 @@
                         <TCEforms>
                             <label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:seminars.pi_flexform.showRegistrationFieldsInRegistrationList</label>
                             <config>
+                                <renderType>selectCheckBox</renderType>
                                 <type>select</type>
                                 <renderMode>checkbox</renderMode>
                                 <maxitems>100</maxitems>
@@ -781,6 +795,7 @@
                             <label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:seminars.pi_flexform.numberOfClicksForRegistration</label>
                             <config>
                                 <type>select</type>
+                                <renderType>selectSingle</renderType>
                                 <items type="array">
                                     <numIndex index="0" type="array">
                                         <numIndex index="0"></numIndex>
@@ -966,6 +981,7 @@
                             <label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:seminars.pi_flexform.displayFrontEndEditorFields</label>
                             <config>
                                 <type>select</type>
+                                <renderType>selectCheckBox</renderType>
                                 <items type="array">
                                     <numIndex index="0" type="array">
                                         <numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.subtitle</numIndex>
@@ -1140,6 +1156,7 @@
                             <label>LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:seminars.pi_flexform.requiredFrontEndEditorFields</label>
                             <config>
                                 <type>select</type>
+                                <renderType>selectCheckBox</renderType>
                                 <items type="array">
                                     <numIndex index="0" type="array">
                                         <numIndex index="0">LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.subtitle</numIndex>

@@ -287,9 +287,9 @@ class EventsList extends AbstractList
 
         $pageData = $this->page->getPageData();
         if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8007000) {
-            $langCsv = $this->getLanguageService()->sL('LLL:EXT:lang/Resources/Private/Language/locallang_core.xlf:labels.csv', 1);
+            $langCsv = $this->getLanguageService()->sL('LLL:EXT:lang/Resources/Private/Language/locallang_core.xlf:labels.csv');
         } else {
-            $langCsv = $this->getLanguageService()->sL('LLL:EXT:lang/locallang_core.xlf:labels.csv', 1);
+            $langCsv = $this->getLanguageService()->sL('LLL:EXT:lang/locallang_core.xlf:labels.csv');
         }
 
         $imageTag = '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') .

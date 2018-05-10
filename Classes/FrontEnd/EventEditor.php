@@ -1652,8 +1652,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
             if ((trim($formData[$key]) == '') && self::isPlaceFieldRequired($key)
             ) {
                 $validationErrors[] = $form->getConfigXML()->getLLLabel(
-                    'LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_empty' .
-                        ucfirst($key)
+                    'LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_empty' . ucfirst($key)
                 );
             }
         }
