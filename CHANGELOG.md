@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Stop PHP-linting the removed Migrations/ folder (#118)
 
 ## 2.0.1
 

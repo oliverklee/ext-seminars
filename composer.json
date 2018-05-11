@@ -63,7 +63,7 @@
         "vendor-dir": ".Build/vendor"
     },
     "scripts": {
-        "ci:php:lint": "find *.php Classes/ Configuration/ Migrations/ Tests/ -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
+        "ci:php:lint": "find *.php Classes/ Configuration/ Tests/ -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
         "ci:tests:unit": "$RUN_TESTS_COMMAND Tests/Unit/",
         "ci:tests:functional": "$RUN_TESTS_COMMAND Tests/Functional/",
         "ci:tests": [
