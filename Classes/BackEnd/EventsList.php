@@ -65,10 +65,6 @@ class EventsList extends AbstractList
             'csv_event_export_button',
             (!$seminarBag->isEmpty() ? $this->getCsvIcon() : '')
         );
-        $this->template->setMarker(
-            'label_print_button',
-            $this->getLanguageService()->getLL('print')
-        );
 
         $content .= $this->template->getSubpart('SEMINARS_EVENT_LIST');
 

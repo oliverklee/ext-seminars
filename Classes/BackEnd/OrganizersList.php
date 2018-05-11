@@ -84,7 +84,6 @@ class OrganizersList extends AbstractList
             $tableRows .= $this->template->getSubpart('ORGANIZER_ROW');
         }
         $this->template->setSubpart('ORGANIZER_ROW', $tableRows);
-        $this->template->setMarker('label_print_button', $this->getLanguageService()->getLL('print'));
 
         $content .= $this->template->getSubpart('SEMINARS_ORGANIZER_LIST');
 
