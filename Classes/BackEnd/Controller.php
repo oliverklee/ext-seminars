@@ -63,13 +63,6 @@ class Controller extends AbstractModule
             '',
             false
         );
-        $pageRenderer->addCssFile(
-            '../typo3conf/ext/seminars/Resources/Public/CSS/BackEnd/Print.css',
-            'stylesheet',
-            'print',
-            '',
-            false
-        );
 
         $content = $document->startPage($languageService->getLL('title')) .
             $document->header($languageService->getLL('title'));

@@ -102,10 +102,6 @@ class SpeakersList extends AbstractList
         }
 
         $this->template->setSubpart('SPEAKER_ROW', $tableRows);
-        $this->template->setMarker(
-            'label_print_button',
-            $GLOBALS['LANG']->getLL('print')
-        );
         $content .= $this->template->getSubpart('SEMINARS_SPEAKER_LIST');
 
         $content .= $speakerBag->checkConfiguration();

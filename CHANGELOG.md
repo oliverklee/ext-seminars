@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Remove the print functionality from the BE module (#119)
 
 ### Fixed
 - Stop PHP-linting the removed Migrations/ folder (#118)

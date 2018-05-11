@@ -108,10 +108,6 @@ class RegistrationsList extends AbstractList
             ($areAnyRegularRegistrationsVisible ? $this->getCsvIcon() : '')
         );
         $this->template->setMarker('complete_table', $registrationTables);
-        $this->template->setMarker(
-            'label_print_button',
-            $GLOBALS['LANG']->getLL('print')
-        );
 
         $content .= $this->template->getSubpart('SEMINARS_REGISTRATION_LIST');
         $content .= $this->configCheckWarnings;
