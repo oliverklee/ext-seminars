@@ -65,7 +65,7 @@ class Controller extends AbstractModule
         );
 
         $content = $document->startPage($languageService->getLL('title')) .
-            $document->header($languageService->getLL('title'));
+            '<h1>' . $languageService->getLL('title') . '</h1></div>';
 
         if ($this->id <= 0) {
             /** @var FlashMessage $message */
