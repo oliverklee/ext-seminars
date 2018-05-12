@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Remove the print functionality from the BE module (#119)
 
 ### Fixed
+- Drop the deprecated doc->header() call (#120)
 - Stop PHP-linting the removed Migrations/ folder (#118)
 
 ## 2.0.1
