@@ -950,7 +950,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         $organizers = $event->getOrganizerBag();
         /** @var $eMailNotification \Tx_Oelib_Mail */
         $eMailNotification = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
-        $eMailNotification->setSender($event->getFirstOrganizer());
+        $eMailNotification->setSender($this->getNotificationSender($event->getFirstOrganizer()));
 
         /** @var \Tx_Seminars_OldModel_Organizer $organizer */
         foreach ($organizers as $organizer) {
@@ -1086,7 +1086,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
 
         /** @var \Tx_Oelib_Mail $eMail */
         $eMail = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
-        $eMail->setSender($event->getFirstOrganizer());
+        $eMail->setSender($this->getNotificationSender($event->getFirstOrganizer()));
         $eMail->setMessage($this->getMessageForNotification($registration, $emailReason));
         $eMail->setSubject(sprintf(
             $this->translate('email_additionalNotification' . $emailReason . 'Subject'),
@@ -1581,5 +1581,23 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
     {
         $loginManager = \Tx_Oelib_FrontEndLoginManager::getInstance();
         return $loginManager->isLoggedIn() ? $loginManager->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class)->getUid() : 0;
+    }
+
+    /**
+     * @param $fallback \Tx_Seminars_Model_Sender
+     * @return \Tx_Seminars_Model_Sender
+     */
+    protected function getNotificationSender($fallback)
+    {
+        if ($this->getConfValueBoolean('sendNotificationUseSystemDefaultSender')) {
+           return (
+                \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+                    Tx_Seminars_Model_Sender::class,
+                    \TYPO3\CMS\Core\Utility\MailUtility::getSystemFromName(),
+                    \TYPO3\CMS\Core\Utility\MailUtility::getSystemFromAddress())
+            );
+        } else {
+            return ($fallback);
+        }
     }
 }
