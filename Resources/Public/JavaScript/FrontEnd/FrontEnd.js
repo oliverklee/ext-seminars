@@ -397,6 +397,19 @@ TYPO3.seminars.disableAllActionLinks = function () {
 };
 
 /**
+ * Prevents registration form submit event to be called twice.
+ */
+TYPO3.seminars.preventMultipleFormSubmit = function () {
+    var submitForm = document.getElementById('tx_seminars_pi1_registration_editor');
+    var submitButton = document.getElementById('tx_seminars_pi1_registration_editor__button_submit');
+    submitForm.addEventListener('submit', function(event) {
+        if (submitButton.hasAttribute('disabled')) {
+            event.preventDefault();
+        }
+    });
+}
+
+/**
  * Initializes the search widget.
  */
 TYPO3.seminars.initializeSearchWidget = function () {
@@ -433,6 +446,7 @@ TYPO3.seminars.initializeRegistrationForm = function () {
     TYPO3.seminars.fixNameFieldsNumber();
     TYPO3.seminars.restoreSeparateNameFields();
     TYPO3.seminars.compileNames();
+    TYPO3.seminars.preventMultipleFormSubmit();
 };
 
 jQuery(document).ready(function () {
