@@ -397,7 +397,7 @@ TYPO3.seminars.disableAllActionLinks = function () {
 };
 
 /**
- * Prevent registration form submit event to be called twice.
+ * Prevents registration form submit event to be called twice.
  */
 TYPO3.seminars.preventMultipleFormSubmit = function () {
     var submitForm = document.getElementById('tx_seminars_pi1_registration_editor');
