@@ -26,8 +26,7 @@ like this in ext\_localconf.php:
 ::
 
    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['singleView'][]
-         = 'EXT:seminarspaypal/Classes/Hooks/EventSingleView.php:' .
-                 '&Tx_Seminarspaypal_Hooks_EventSingleView';
+         = \Tx_Seminarspaypal_Hooks_EventSingleView::class;
 
 They are used like this:
 
@@ -94,8 +93,7 @@ in ext\_localconf.php:
 ::
 
    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView'][]
-         = 'EXT:seminarspaypal/Hooks/Classes/Hooks/ListView.php:' .
-                 '&Tx_Seminarspaypal_Hooks_ListView';
+         = \Tx_Seminarspaypal_Hooks_ListView::class;
 
 It's used like this:
 
@@ -147,7 +145,7 @@ example:
 ::
 
    // register my hook objects
-   $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][] = 'EXT:invoices/class.tx_invoices_email.php:tx_invoices_email';
+   $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][] = \tx_invoices_email::class;
 
 
 Hooks for the thank-you e-mails sent after a registration
@@ -174,11 +172,8 @@ example:
 
 ::
 
-   // includes my hook class
-   require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('invoices') . 'class.tx_invoices_email.php');
-
    // register my hook objects
-   $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][] = 'EXT:invoices/class.tx_invoices_email.php:tx_invoices_email';
+   $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][] = \tx_invoices_email::class;
 
 **Hook for the e-mail text**
 
@@ -198,7 +193,7 @@ example:
 ::
 
    // register my hook objects
-   $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][] = 'EXT:invoices/class.tx_invoices_email.php:tx_invoices_email';
+   $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][] = \tx_invoices_email::class;
 
 
 Hooks for the e-mails sent from the back-end module
@@ -209,8 +204,7 @@ The hook classes need to be registered and written like this:
 ::
 
    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['backEndModule'][]
-         = 'EXT:seminarspaypal/Hooks/class.tx_seminarspaypal_Hooks_BackEndModule.php:' .
-                 '&tx_seminarspaypal_Hooks_BackEndModule';
+         = \tx_seminarspaypal_Hooks_BackEndModule::class;
 
 It's used like this:
 
