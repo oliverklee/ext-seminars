@@ -75,7 +75,7 @@ defined('TYPO3_MODE') or die('Access denied.');
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:fe_groups.tx_seminars_default_categories',
             'config' => [
-                'type' => \OliverKlee\Seminars\BackEnd\TceForms::getSelectType(),
+                'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
                 'internal_type' => 'db',
                 'allowed' => 'tx_seminars_categories',
@@ -105,7 +105,7 @@ defined('TYPO3_MODE') or die('Access denied.');
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:fe_groups.tx_seminars_default_organizer',
             'config' => [
-                'type' => \OliverKlee\Seminars\BackEnd\TceForms::getSelectType(),
+                'type' => 'select',
                 'renderType' => 'selectSingle',
                 'internal_type' => 'db',
                 'allowed' => 'tx_seminars_organizers',
