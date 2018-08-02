@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Remove the print functionality from the BE module (#119)
 
 ### Fixed
+- Update the documentation of the hooks (#134)
 - Prevent IE from sending the registration form multiple times (#129, #130)
 - Add allowed table for dependencies to the TCA (#123)
 - Drop the deprecated doc->header() call (#120)
