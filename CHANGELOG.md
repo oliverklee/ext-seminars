@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Remove the "use page browser" switch in the EM (#135, #126)
 - Remove the print functionality from the BE module (#119)
 
 ### Fixed

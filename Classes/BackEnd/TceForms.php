@@ -101,7 +101,7 @@ class TceForms
      */
     public static function getWizardConfiguration()
     {
-        $wizard = [
+        return [
             '_PADDING' => 5,
             '_VERTICAL' => 5,
             'edit' => [
@@ -127,10 +127,7 @@ class TceForms
                     'name' => 'wizard_add',
                 ],
             ],
-        ];
-
-        if (self::getSelectType() === 'select') {
-            $wizard['list'] = [
+            'list' => [
                 'type' => 'popup',
                 'title' => 'List entries',
                 'icon' => 'actions-system-list-open',
@@ -142,22 +139,7 @@ class TceForms
                     'name' => 'wizard_list',
                 ],
                 'JSopenParams' => 'height=480,width=640,status=0,menubar=0,scrollbars=1',
-            ];
-        }
-
-        return $wizard;
-    }
-
-    /**
-     * Gets the select type.
-     *
-     * @return string
-     */
-    public static function getSelectType()
-    {
-        $globalConfiguration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['seminars']);
-        $usePageBrowser = (bool)$globalConfiguration['usePageBrowser'];
-
-        return $usePageBrowser ? 'group' : 'select';
+            ],
+        ];
     }
 }
