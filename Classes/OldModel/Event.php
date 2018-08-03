@@ -3941,34 +3941,30 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @param int $feUserUid UID of the FE user to check, must be > 0
      *
-     * @return bool TRUE if user is blocked by another registration,
-     *                 FALSE otherwise
+     * @return bool true if user is blocked by another registration, false otherwise
+     *
+     * @throws \InvalidArgumentException
      */
     public function isUserBlocked($feUserUid)
     {
-        $result = false;
-
-        // If no user is logged in or this event allows multiple registrations,
-        // the user is not considered to be blocked for this event.
-        // If this event doesn't have a date yet, the time cannot be blocked
-        // either.
-        if (($feUserUid > 0) && !$this->allowsMultipleRegistrations()
-            && $this->hasDate() && !$this->skipCollisionCheck()) {
-            $additionalTables = 'tx_seminars_attendances';
-            $queryWhere = $this->getQueryForCollidingEvents();
-            // Filter to those events to which the given FE user is registered.
-            $queryWhere .= ' AND tx_seminars_seminars.uid = ' .
-                'tx_seminars_attendances.seminar' .
-                ' AND tx_seminars_attendances.user = ' . $feUserUid;
-
-            /** @var \Tx_Seminars_Bag_Event $seminarBag */
-            $seminarBag = GeneralUtility::makeInstance(\Tx_Seminars_Bag_Event::class, $queryWhere, $additionalTables);
-
-            // One blocking event is enough.
-            $result = !$seminarBag->isEmpty();
+        if ($feUserUid <= 0) {
+            throw new \InvalidArgumentException('$feUserUid must be > 0, but actually is: ' . $feUserUid, 1533310684);
+        }
+        if ($this->allowsMultipleRegistrations() || $this->skipCollisionCheck() || !$this->hasDate()) {
+            return false;
         }
 
-        return $result;
+        $additionalTables = 'tx_seminars_attendances';
+        $queryWhere = $this->getQueryForCollidingEvents();
+        // Filter to those events to which the given FE user is registered.
+        $queryWhere .= ' AND tx_seminars_seminars.uid = ' .
+            'tx_seminars_attendances.seminar' .
+            ' AND tx_seminars_attendances.user = ' . $feUserUid;
+
+        /** @var \Tx_Seminars_Bag_Event $blockingEvents */
+        $blockingEvents = GeneralUtility::makeInstance(\Tx_Seminars_Bag_Event::class, $queryWhere, $additionalTables);
+
+        return !$blockingEvents->isEmpty();
     }
 
     /**
@@ -3984,29 +3980,25 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     }
 
     /**
-     * Creates a WHERE clause that selects events that collide with this event's
-     * times.
+     * Creates a WHERE clause that selects events that collide with this event's times.
      *
-     * This query will only take events into account that do *not* allow
-     * multiple registrations.
+     * This query will only take events into account that do *not* allow multiple registrations.
      *
      * For open-ended events, only the begin date is checked.
      *
-     * @return string WHERE clause (without the "WHERE" keyword), will not
-     *                be empty
+     * @return string WHERE clause (without the "WHERE" keyword), will not be empty
      */
     private function getQueryForCollidingEvents()
     {
         $beginDate = $this->getBeginDateAsTimestamp();
         $endDate = $this->getEndDateAsTimestampEvenIfOpenEnded();
 
-        $result = 'tx_seminars_seminars.uid <> ' . $this->getUid() .
+        return 'tx_seminars_seminars.uid <> ' . $this->getUid() .
             ' AND allows_multiple_registrations = 0' .
             ' AND skip_collision_check = 0' .
             ' AND (' .
             '(' .
-            // Check for events that have a begin date in our
-            // time-frame.
+            // Check for events that have a begin date in our time-frame.
             // This will automatically rule out events without a date.
             'begin_date > ' . $beginDate . ' AND begin_date < ' . $endDate .
             ') OR (' .
@@ -4020,8 +4012,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             'begin_date <= ' . $beginDate . ' AND end_date >= ' . $endDate .
             ')' .
             ')';
-
-        return $result;
     }
 
     /**
