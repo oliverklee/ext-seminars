@@ -5308,7 +5308,6 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['begin_date' => $begin, 'end_date' => $end]
         );
-
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
             ['seminar' => $registeredEventUid, 'user' => $userUid]
@@ -5333,7 +5332,203 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['begin_date' => $begin, 'end_date' => $end, 'skip_collision_check' => 1]
         );
+        $this->testingFramework->createRecord(
+            'tx_seminars_attendances',
+            ['seminar' => $registeredEventUid, 'user' => $userUid]
+        );
 
+        static::assertFalse($this->fixture->isUserBlocked($userUid));
+    }
+
+    /**
+     * @test
+     */
+    public function notCollidesWithEventWithSurroundingTimeSlots()
+    {
+        $this->fixture->setBeginDate($this->now + 200);
+        $this->fixture->setEndDate($this->now + 300);
+
+        $registeredEventUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            ['begin_date' => $this->now, 'end_date' => $this->now + 500, 'timeslots' => 2]
+        );
+        $this->testingFramework->createRecord(
+            'tx_seminars_timeslots',
+            ['seminar' => $registeredEventUid, 'begin_date' => $this->now, 'end_date' => $this->now + 100]
+        );
+        $this->testingFramework->createRecord(
+            'tx_seminars_timeslots',
+            ['seminar' => $registeredEventUid, 'begin_date' => $this->now + 400, 'end_date' => $this->now + 500]
+        );
+        $userUid = $this->testingFramework->createFrontEndUser();
+        $this->testingFramework->createRecord(
+            'tx_seminars_attendances',
+            ['seminar' => $registeredEventUid, 'user' => $userUid]
+        );
+
+        static::assertFalse($this->fixture->isUserBlocked($userUid));
+    }
+
+    /**
+     * @return int[][]
+     */
+    public function eventsOverlappingWithTimeSlotDataProvider()
+    {
+        return [
+            'starts before 1st and ends after 1st' => [$this->now - 50, $this->now + 150],
+            'starts in 1st and ends in 1st' => [$this->now + 25, $this->now + 75],
+            'starts in 1st and ends in 2nd' => [$this->now + 50, $this->now + 450],
+            'starts in 1st and ends before 2nd' => [$this->now + 50, $this->now + 300],
+            'starts after 1st and ends in 2nd' => [$this->now + 150, $this->now + 450],
+            'starts before 1st and ends after 2nd' => [$this->now - 50, $this->now + 550],
+            'starts in 1st and ends after it' => [$this->now + 50, $this->now + 150],
+            'starts in 2nd and ends after it' => [$this->now + 450, $this->now + 550],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @param int $registrationBegin
+     * @param int $registrationEnd
+     * @dataProvider eventsOverlappingWithTimeSlotDataProvider
+     */
+    public function collidesWithEventWithTimeSlots($registrationBegin, $registrationEnd)
+    {
+        $this->fixture->setBeginDate($registrationBegin);
+        $this->fixture->setEndDate($registrationEnd);
+
+        $registeredEventUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            ['begin_date' => $this->now, 'end_date' => $this->now + 500, 'timeslots' => 2]
+        );
+        $this->testingFramework->createRecord(
+            'tx_seminars_timeslots',
+            ['seminar' => $registeredEventUid, 'begin_date' => $this->now, 'end_date' => $this->now + 100]
+        );
+        $this->testingFramework->createRecord(
+            'tx_seminars_timeslots',
+            ['seminar' => $registeredEventUid, 'begin_date' => $this->now + 400, 'end_date' => $this->now + 500]
+        );
+        $userUid = $this->testingFramework->createFrontEndUser();
+        $this->testingFramework->createRecord(
+            'tx_seminars_attendances',
+            ['seminar' => $registeredEventUid, 'user' => $userUid]
+        );
+
+        static::assertTrue($this->fixture->isUserBlocked($userUid));
+    }
+
+    /**
+     * @return int[][][]
+     */
+    public function timeSlotsCollidingWithTimeSlotsDataProvider()
+    {
+        return [
+            'one time slot starting in 1st and ending in it' => [[[$this->now + 25, $this->now + 75]]],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @param array $timeSlotDates
+     * @dataProvider timeSlotsCollidingWithTimeSlotsDataProvider
+     */
+    public function timeSlotsCollideWithCollidingTimeSlots(array $timeSlotDates)
+    {
+        $checkEventBegin = PHP_INT_MAX;
+        $checkEventEnd = 0;
+        $checkEventUid = $this->fixture->getUid();
+        foreach ($timeSlotDates as list($beginDate, $endDate)) {
+            $this->testingFramework->createRecord(
+                'tx_seminars_timeslots',
+                ['seminar' => $checkEventUid, 'begin_date' => $beginDate, 'end_date' => $endDate]
+            );
+
+            $checkEventBegin = min($checkEventBegin, $beginDate);
+            $checkEventEnd = max($checkEventEnd, $endDate);
+        }
+        $this->fixture->setNumberOfTimeSlots(count($timeSlotDates));
+        $this->fixture->setBeginDate($checkEventBegin);
+        $this->fixture->setEndDate($checkEventEnd);
+
+        $registeredEventUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            ['begin_date' => $this->now, 'end_date' => $this->now + 500, 'timeslots' => 2]
+        );
+        $this->testingFramework->createRecord(
+            'tx_seminars_timeslots',
+            ['seminar' => $registeredEventUid, 'begin_date' => $this->now, 'end_date' => $this->now + 100]
+        );
+        $this->testingFramework->createRecord(
+            'tx_seminars_timeslots',
+            ['seminar' => $registeredEventUid, 'begin_date' => $this->now + 400, 'end_date' => $this->now + 500]
+        );
+        $userUid = $this->testingFramework->createFrontEndUser();
+        $this->testingFramework->createRecord(
+            'tx_seminars_attendances',
+            ['seminar' => $registeredEventUid, 'user' => $userUid]
+        );
+
+        static::assertTrue($this->fixture->isUserBlocked($userUid));
+    }
+
+    /**
+     * @return int[][][]
+     */
+    public function timeSlotsNotCollidingWithTimeSlotsDataProvider()
+    {
+        return [
+            'one time slot before first' => [[[$this->now - 200, $this->now - 100]]],
+            'one time slot after second' => [[[$this->now + 600, $this->now + 700]]],
+            'one time slot between first and second' => [[[$this->now + 200, $this->now + 300]]],
+            'one time slot before first and one after second' => [
+                [
+                    [$this->now - 200, $this->now - 100],
+                    [$this->now + 600, $this->now + 700],
+                ],
+            ],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @param array $timeSlotDates
+     * @dataProvider timeSlotsNotCollidingWithTimeSlotsDataProvider
+     */
+    public function timeSlotsDoNotCollideWithCollisionFreeTimeSlots(array $timeSlotDates)
+    {
+        $checkEventBegin = PHP_INT_MAX;
+        $checkEventEnd = 0;
+        $checkEventUid = $this->fixture->getUid();
+        foreach ($timeSlotDates as list($beginDate, $endDate)) {
+            $this->testingFramework->createRecord(
+                'tx_seminars_timeslots',
+                ['seminar' => $checkEventUid, 'begin_date' => $beginDate, 'end_date' => $endDate]
+            );
+
+            $checkEventBegin = min($checkEventBegin, $beginDate);
+            $checkEventEnd = max($checkEventEnd, $endDate);
+        }
+        $this->fixture->setNumberOfTimeSlots(count($timeSlotDates));
+        $this->fixture->setBeginDate($checkEventBegin);
+        $this->fixture->setEndDate($checkEventEnd);
+
+        $registeredEventUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            ['begin_date' => $this->now, 'end_date' => $this->now + 500, 'timeslots' => 2]
+        );
+        $this->testingFramework->createRecord(
+            'tx_seminars_timeslots',
+            ['seminar' => $registeredEventUid, 'begin_date' => $this->now, 'end_date' => $this->now + 100]
+        );
+        $this->testingFramework->createRecord(
+            'tx_seminars_timeslots',
+            ['seminar' => $registeredEventUid, 'begin_date' => $this->now + 400, 'end_date' => $this->now + 500]
+        );
+        $userUid = $this->testingFramework->createFrontEndUser();
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
             ['seminar' => $registeredEventUid, 'user' => $userUid]
