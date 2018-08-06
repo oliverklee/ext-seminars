@@ -112,7 +112,8 @@ class Tx_Seminars_Mapper_Event extends \Tx_Oelib_DataMapper
      */
     public function findNextUpcoming()
     {
-        $whereClause = $this->getUniversalWhereClause() . ' AND cancelled <> ' . \Tx_Seminars_Model_Event::STATUS_CANCELED .
+        $whereClause = $this->getUniversalWhereClause(
+            ) . ' AND cancelled <> ' . \Tx_Seminars_Model_Event::STATUS_CANCELED .
             ' AND object_type <> ' . \Tx_Seminars_Model_Event::TYPE_TOPIC . ' AND begin_date > ' . $GLOBALS['SIM_ACCESS_TIME'];
 
         try {
@@ -156,10 +157,10 @@ class Tx_Seminars_Mapper_Event extends \Tx_Oelib_DataMapper
         $whereClause = 'registrations <> 0' .
             ' AND object_type <> ' . \Tx_Seminars_Model_Event::TYPE_TOPIC .
             ' AND EXISTS (' .
-                'SELECT * FROM tx_seminars_attendances ' .
-                'WHERE tx_seminars_attendances.deleted = 0 ' .
-                ' AND tx_seminars_attendances.seminar = tx_seminars_seminars.uid' .
-                ' AND tx_seminars_attendances.crdate > tx_seminars_seminars.date_of_last_registration_digest' .
+            'SELECT * FROM tx_seminars_attendances ' .
+            'WHERE tx_seminars_attendances.deleted = 0 ' .
+            ' AND tx_seminars_attendances.seminar = tx_seminars_seminars.uid' .
+            ' AND tx_seminars_attendances.crdate > tx_seminars_seminars.date_of_last_registration_digest' .
             ')';
 
         return $this->findByWhereClause($whereClause, 'begin_date ASC');
