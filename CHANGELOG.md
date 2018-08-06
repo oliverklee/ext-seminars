@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Calculate collisions using the time slots (#139)
 
 ### Changed
 

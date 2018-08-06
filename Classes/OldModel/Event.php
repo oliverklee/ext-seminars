@@ -3968,7 +3968,33 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     }
 
     /**
-     * Checkes whether the collision check should be skipped for this event.
+     * @return string
+     */
+    private function getQueryForCollidingEvents()
+    {
+        if ($this->hasTimeslots()) {
+            $timeSpans = [];
+            /** @var \Tx_Seminars_OldModel_TimeSlot $timeSlot */
+            foreach ($this->getTimeSlots() as $timeSlot) {
+                $timeSpans[] = [
+                    $timeSlot->getBeginDateAsTimestamp(),
+                    $timeSlot->getEndDateAsTimestampEvenIfOpenEnded(),
+                ];
+            }
+        } else {
+            $timeSpans = [[$this->getBeginDateAsTimestamp(), $this->getEndDateAsTimestampEvenIfOpenEnded()]];
+        }
+
+        $queryWhereParts = [];
+        foreach ($timeSpans as list($timeSpanBegin, $timeSpanEnd)) {
+            $queryWhereParts[] = $this->getQueryForCollidingEventsForTimeSpan($timeSpanBegin, $timeSpanEnd);
+        }
+
+        return '(' . implode(' OR ', $queryWhereParts) . ')';
+    }
+
+    /**
+     * Checks whether the collision check should be skipped for this event.
      *
      * @return bool TRUE if the collision check should be skipped for
      *                 this event, FALSE otherwise
@@ -3986,17 +4012,30 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * For open-ended events, only the begin date is checked.
      *
+     * @param int $beginDate
+     * @param int $endDate
+     *
      * @return string WHERE clause (without the "WHERE" keyword), will not be empty
      */
-    private function getQueryForCollidingEvents()
+    private function getQueryForCollidingEventsForTimeSpan($beginDate, $endDate)
     {
-        $beginDate = $this->getBeginDateAsTimestamp();
-        $endDate = $this->getEndDateAsTimestampEvenIfOpenEnded();
-
         return 'tx_seminars_seminars.uid <> ' . $this->getUid() .
             ' AND allows_multiple_registrations = 0' .
             ' AND skip_collision_check = 0' .
-            ' AND (' .
+            ' AND (' . $this->getQueryPartForCollidingEventWithoutTimeSlots($beginDate, $endDate) .
+            ' OR ' . $this->getQueryPartForCollidingEventWithTimeSlots($beginDate, $endDate) .
+            ')';
+    }
+
+    /**
+     * @param int $beginDate
+     * @param int $endDate
+     *
+     * @return string
+     */
+    private function getQueryPartForCollidingEventWithoutTimeSlots($beginDate, $endDate)
+    {
+        return '(timeslots = 0 AND (' .
             '(' .
             // Check for events that have a begin date in our time-frame.
             // This will automatically rule out events without a date.
@@ -4011,7 +4050,33 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             'begin_date > 0 AND ' .
             'begin_date <= ' . $beginDate . ' AND end_date >= ' . $endDate .
             ')' .
-            ')';
+            '))';
+    }
+
+    /**
+     * @param int $beginDate
+     * @param int $endDate
+     *
+     * @return string
+     */
+    private function getQueryPartForCollidingEventWithTimeSlots($beginDate, $endDate)
+    {
+        return '(timeslots != 0 AND EXISTS (' .
+            'SELECT * FROM tx_seminars_timeslots AS t ' .
+            'WHERE t.deleted = 0 AND t.seminar = tx_seminars_seminars.uid ' .
+            ' AND (' .
+            '(' .
+            // Check for time slots that have a begin date in our time-frame.
+            't.begin_date > ' . $beginDate . ' AND t.begin_date < ' . $endDate .
+            ') OR (' .
+            // Check for time slots that have an end date in our time-frame.
+            't.end_date > ' . $beginDate . ' AND t.end_date < ' . $endDate .
+            ') OR (' .
+            // Check for time slots that start before this event and end after it.
+            't.begin_date <= ' . $beginDate . ' AND t.end_date >= ' . $endDate .
+            ')' .
+            ')' .
+            '))';
     }
 
     /**
@@ -4324,17 +4389,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     {
         $result = [];
 
-        /** @var \Tx_Seminars_Bag_TimeSlot $timeSlotBag */
-        $timeSlotBag = GeneralUtility::makeInstance(
-            \Tx_Seminars_Bag_TimeSlot::class,
-            'tx_seminars_timeslots.seminar = ' . $this->getUid(),
-            '',
-            '',
-            'tx_seminars_timeslots.begin_date ASC'
-        );
-
         /** @var \Tx_Seminars_OldModel_TimeSlot $timeSlot */
-        foreach ($timeSlotBag as $timeSlot) {
+        foreach ($this->getTimeSlots() as $timeSlot) {
             $result[] = [
                 'uid' => $timeSlot->getUid(),
                 'date' => $timeSlot->getDate(),
@@ -4347,6 +4403,23 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         }
 
         return $result;
+    }
+
+    /**
+     * @return \Tx_Seminars_Bag_TimeSlot
+     */
+    public function getTimeSlots()
+    {
+        /** @var \Tx_Seminars_Bag_TimeSlot $timeSlotBag */
+        $timeSlotBag = GeneralUtility::makeInstance(
+            \Tx_Seminars_Bag_TimeSlot::class,
+            'tx_seminars_timeslots.seminar = ' . $this->getUid(),
+            '',
+            '',
+            'tx_seminars_timeslots.begin_date ASC'
+        );
+
+        return $timeSlotBag;
     }
 
     /**
