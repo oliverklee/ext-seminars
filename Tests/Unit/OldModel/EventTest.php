@@ -34,7 +34,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
     /**
      * @var int
      */
-    protected $now = 0;
+    protected $now = 1524751343;
 
     /**
      * @var \Tx_Seminars_FrontEnd_DefaultController
@@ -51,8 +51,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
         // Make sure that the test results do not depend on the machine's PHP time zone.
         date_default_timezone_set('UTC');
 
-        $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
-        $this->now = $GLOBALS['SIM_EXEC_TIME'];
+        $GLOBALS['SIM_EXEC_TIME'] = $this->now;
         $this->beginDate = ($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
         $this->unregistrationDeadline = ($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
 
@@ -5171,75 +5170,125 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
 
     /**
      * @test
+     * @expectedException \InvalidArgumentException
      */
-    public function eventsWithTheExactSameDateCollide()
+    public function isUserBlockForZeroUserUidThrowsException()
     {
-        $frontEndUserUid = $this->testingFramework->createFrontEndUser();
+        $this->fixture->isUserBlocked(0);
+    }
 
-        $begin = $GLOBALS['SIM_EXEC_TIME'];
-        $end = $begin + 1000;
+    /**
+     * @test
+     * @expectedException \InvalidArgumentException
+     */
+    public function isUserBlockForNegativeUserUidThrowsException()
+    {
+        $this->fixture->isUserBlocked(-1);
+    }
 
-        $this->fixture->setBeginDate($begin);
-        $this->fixture->setEndDate($end);
+    /**
+     * @return int[][]
+     */
+    public function overlappingEventsDataProvider()
+    {
+        return [
+            'exact same dates' => [$this->now, $this->now + 1000, $this->now, $this->now + 1000],
+            'registered event starts first' => [$this->now, $this->now + 1000, $this->now + 100, $this->now + 1000],
+            'check event starts first' => [$this->now + 100, $this->now + 1000, $this->now, $this->now + 1000],
+            'registered event in check event' => [$this->now + 100, $this->now + 500, $this->now, $this->now + 1000],
+            'check event in registered event' => [$this->now, $this->now + 1000, $this->now + 100, $this->now + 500],
+        ];
+    }
 
-        $eventUid = $this->testingFramework->createRecord(
+    /**
+     * @test
+     *
+     * @param int $registrationBegin
+     * @param int $registrationEnd
+     * @param int $checkBegin
+     * @param int $checkEnd
+     * @dataProvider overlappingEventsDataProvider
+     */
+    public function overlappingEventsCollide($registrationBegin, $registrationEnd, $checkBegin, $checkEnd)
+    {
+        $this->fixture->setBeginDate($checkBegin);
+        $this->fixture->setEndDate($checkEnd);
+
+        $registeredEventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            [
-                'begin_date' => $begin,
-                'end_date' => $end,
-            ]
+            ['begin_date' => $registrationBegin, 'end_date' => $registrationEnd]
         );
-
+        $userUid = $this->testingFramework->createFrontEndUser();
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            [
-                'seminar' => $eventUid,
-                'user' => $frontEndUserUid,
-            ]
+            ['seminar' => $registeredEventUid, 'user' => $userUid]
         );
 
-        self::assertTrue(
-            $this->fixture->isUserBlocked($frontEndUserUid)
+        static::assertTrue($this->fixture->isUserBlocked($userUid));
+    }
+
+    /**
+     * @return int[][]
+     */
+    public function nonOverlappingEventsDataProvider()
+    {
+        return [
+            'registered first' => [$this->now, $this->now + 100, $this->now + 500, $this->now + 1000],
+            'check event first' => [$this->now + 500, $this->now + 1000, $this->now, $this->now + 100],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @param int $registrationBegin
+     * @param int $registrationEnd
+     * @param int $checkBegin
+     * @param int $checkEnd
+     * @dataProvider nonOverlappingEventsDataProvider
+     */
+    public function nonOverlappingEventsDoNotCollide($registrationBegin, $registrationEnd, $checkBegin, $checkEnd)
+    {
+        $this->fixture->setBeginDate($checkBegin);
+        $this->fixture->setEndDate($checkEnd);
+
+        $registeredEventUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            ['begin_date' => $registrationBegin, 'end_date' => $registrationEnd]
         );
+        $userUid = $this->testingFramework->createFrontEndUser();
+        $this->testingFramework->createRecord(
+            'tx_seminars_attendances',
+            ['seminar' => $registeredEventUid, 'user' => $userUid]
+        );
+
+        static::assertFalse($this->fixture->isUserBlocked($userUid));
     }
 
     /**
      * @test
      */
-    public function collidingEventsDoNotCollideIfCollisionSkipIsEnabledForAllEvents()
+    public function collidingEventsDoNotCollideIfCollisionSkipIsEnabledInConfiguration()
     {
-        $frontEndUserUid = $this->testingFramework->createFrontEndUser();
+        $userUid = $this->testingFramework->createFrontEndUser();
 
-        $begin = $GLOBALS['SIM_EXEC_TIME'];
+        $begin = $this->now;
         $end = $begin + 1000;
-
         $this->fixture->setBeginDate($begin);
         $this->fixture->setEndDate($end);
 
-        $eventUid = $this->testingFramework->createRecord(
+        $registeredEventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            [
-                'begin_date' => $begin,
-                'end_date' => $end,
-            ]
+            ['begin_date' => $begin, 'end_date' => $end]
         );
-
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            [
-                'seminar' => $eventUid,
-                'user' => $frontEndUserUid,
-            ]
+            ['seminar' => $registeredEventUid, 'user' => $userUid]
         );
 
-        $this->fixture->setConfigurationValue(
-            'skipRegistrationCollisionCheck',
-            true
-        );
+        $this->fixture->setConfigurationValue('skipRegistrationCollisionCheck', true);
 
-        self::assertFalse(
-            $this->fixture->isUserBlocked($frontEndUserUid)
-        );
+        static::assertFalse($this->fixture->isUserBlocked($userUid));
     }
 
     /**
@@ -5247,34 +5296,25 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
      */
     public function collidingEventsDoNoCollideIfCollisionSkipIsEnabledForThisEvent()
     {
-        $frontEndUserUid = $this->testingFramework->createFrontEndUser();
+        $userUid = $this->testingFramework->createFrontEndUser();
 
-        $begin = $GLOBALS['SIM_EXEC_TIME'];
+        $begin = $this->now;
         $end = $begin + 1000;
-
         $this->fixture->setBeginDate($begin);
         $this->fixture->setEndDate($end);
         $this->fixture->setSkipCollisionCheck(true);
 
-        $eventUid = $this->testingFramework->createRecord(
+        $registeredEventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            [
-                'begin_date' => $begin,
-                'end_date' => $end,
-            ]
+            ['begin_date' => $begin, 'end_date' => $end]
         );
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            [
-                'seminar' => $eventUid,
-                'user' => $frontEndUserUid,
-            ]
+            ['seminar' => $registeredEventUid, 'user' => $userUid]
         );
 
-        self::assertFalse(
-            $this->fixture->isUserBlocked($frontEndUserUid)
-        );
+        static::assertFalse($this->fixture->isUserBlocked($userUid));
     }
 
     /**
@@ -5282,34 +5322,24 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
      */
     public function collidingEventsDoNoCollideIfCollisionSkipIsEnabledForAnotherEvent()
     {
-        $frontEndUserUid = $this->testingFramework->createFrontEndUser();
+        $userUid = $this->testingFramework->createFrontEndUser();
 
-        $begin = $GLOBALS['SIM_EXEC_TIME'];
+        $begin = $this->now;
         $end = $begin + 1000;
-
         $this->fixture->setBeginDate($begin);
         $this->fixture->setEndDate($end);
 
-        $eventUid = $this->testingFramework->createRecord(
+        $registeredEventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            [
-                'begin_date' => $begin,
-                'end_date' => $end,
-                'skip_collision_check' => 1,
-            ]
+            ['begin_date' => $begin, 'end_date' => $end, 'skip_collision_check' => 1]
         );
 
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            [
-                'seminar' => $eventUid,
-                'user' => $frontEndUserUid,
-            ]
+            ['seminar' => $registeredEventUid, 'user' => $userUid]
         );
 
-        self::assertFalse(
-            $this->fixture->isUserBlocked($frontEndUserUid)
-        );
+        static::assertFalse($this->fixture->isUserBlocked($userUid));
     }
 
     /*
