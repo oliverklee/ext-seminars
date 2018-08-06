@@ -243,7 +243,7 @@ CREATE TABLE tx_seminars_seminars (
     begin_date int(11) unsigned DEFAULT '0' NOT NULL,
     end_date int(11) unsigned DEFAULT '0' NOT NULL,
     time_zone tinytext,
-    timeslots text,
+    timeslots int(3) unsigned DEFAULT '0' NOT NULL,
     begin_date_registration int(11) unsigned DEFAULT '0' NOT NULL,
     deadline_registration int(11) unsigned DEFAULT '0' NOT NULL,
     deadline_early_bird int(11) unsigned DEFAULT '0' NOT NULL,
