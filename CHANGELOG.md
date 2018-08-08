@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Remove the print functionality from the BE module (#119)
 
 ### Fixed
+- Fix crash in the CSV download (#140, #141)
 - Make event.timeslots an integer DB field (#138)
 - Update the documentation of the hooks (#134)
 - Prevent IE from sending the registration form multiple times (#129, #130)
