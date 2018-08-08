@@ -16,8 +16,6 @@
 Live examples
 ^^^^^^^^^^^^^
 
-- `Adventjugend in NRW <http://www.adventjugend-nrw.de/>`_
-
 - `Beachvolleyball Kurse <http://www.beachkurse.de/>`_
 
 - `Deutsche Trainer Akademie <http://www.trainer-akademie.com/?id=1281>`_
