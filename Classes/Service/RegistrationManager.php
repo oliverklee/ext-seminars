@@ -186,7 +186,8 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
 
         if ($isLoggedIn && ($message === '')) {
             /** @var \Tx_Seminars_Model_FrontEndUser $user */
-            $user = \Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
+            $user = \Tx_Oelib_FrontEndLoginManager::getInstance(
+            )->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
             foreach ($this->getHooks() as $hook) {
                 if (method_exists($hook, 'canRegisterForSeminarMessage')) {
                     $message = $hook->canRegisterForSeminarMessage($event, $user);
@@ -215,7 +216,9 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
     {
         // A user can register either if the event allows multiple registrations
         // or the user isn't registered yet and isn't blocked either.
-        return $event->allowsMultipleRegistrations() || (!$this->isUserRegistered($event) && !$this->isUserBlocked($event));
+        return $event->allowsMultipleRegistrations() || (!$this->isUserRegistered(
+                    $event
+                ) && !$this->isUserBlocked($event));
     }
 
     /**
@@ -248,9 +251,15 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      *
      * @return string HTML code with the link
      */
-    public function getLinkToRegistrationOrLoginPage(\Tx_Oelib_TemplateHelper $plugin, \Tx_Seminars_OldModel_Event $event)
-    {
-        return $this->getLinkToStandardRegistrationOrLoginPage($plugin, $event, $this->getRegistrationLabel($plugin, $event));
+    public function getLinkToRegistrationOrLoginPage(
+        \Tx_Oelib_TemplateHelper $plugin,
+        \Tx_Seminars_OldModel_Event $event
+    ) {
+        return $this->getLinkToStandardRegistrationOrLoginPage(
+            $plugin,
+            $event,
+            $this->getRegistrationLabel($plugin, $event)
+        );
     }
 
     /**
@@ -323,8 +332,10 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      *
      * @return string HTML code with the link
      */
-    public function getLinkToUnregistrationPage(\Tx_Oelib_TemplateHelper $plugin, \Tx_Seminars_OldModel_Registration $registration)
-    {
+    public function getLinkToUnregistrationPage(
+        \Tx_Oelib_TemplateHelper $plugin,
+        \Tx_Seminars_OldModel_Registration $registration
+    ) {
         return $plugin->cObj->getTypoLink(
             $plugin->translate('label_onlineUnregistration'),
             $plugin->getConfValueInteger('registerPID'),
@@ -598,7 +609,11 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         $registration->setBankCode($bankCode);
         $bankName = isset($formData['bank_name']) ? strip_tags($this->unifyWhitespace($formData['bank_name'])) : '';
         $registration->setBankName($bankName);
-        $accountOwner = isset($formData['account_owner']) ? strip_tags($this->unifyWhitespace($formData['account_owner'])) : '';
+        $accountOwner = isset($formData['account_owner']) ? strip_tags(
+            $this->unifyWhitespace(
+                $formData['account_owner']
+            )
+        ) : '';
         $registration->setAccountOwner($accountOwner);
 
         $company = isset($formData['company']) ? strip_tags($formData['company']) : '';
@@ -833,7 +848,14 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
             || (($mailFormat == self::SEND_USER_MAIL) && $oldRegistration->getFrontEndUser()->wantsHtmlEmail())
         ) {
             $eMailNotification->setCssFile($this->getConfValueString('cssFileForAttendeeMail'));
-            $eMailNotification->setHTMLMessage($this->buildEmailContent($oldRegistration, $plugin, $helloSubjectPrefix, true));
+            $eMailNotification->setHTMLMessage(
+                $this->buildEmailContent(
+                    $oldRegistration,
+                    $plugin,
+                    $helloSubjectPrefix,
+                    true
+                )
+            );
         }
 
         $eMailNotification->setMessage($this->buildEmailContent($oldRegistration, $plugin, $helloSubjectPrefix));
@@ -934,8 +956,10 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      *
      * @return void
      */
-    public function notifyOrganizers(\Tx_Seminars_OldModel_Registration $registration, $helloSubjectPrefix = 'notification')
-    {
+    public function notifyOrganizers(
+        \Tx_Seminars_OldModel_Registration $registration,
+        $helloSubjectPrefix = 'notification'
+    ) {
         if (!$this->getConfValueBoolean('send' . ucfirst($helloSubjectPrefix))) {
             return;
         }
@@ -1034,8 +1058,10 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      *
      * @return void
      */
-    protected function modifyNotificationEmail(\Tx_Oelib_Mail $emailNotification, \Tx_Seminars_OldModel_Registration $registration)
-    {
+    protected function modifyNotificationEmail(
+        \Tx_Oelib_Mail $emailNotification,
+        \Tx_Seminars_OldModel_Registration $registration
+    ) {
     }
 
     /**
@@ -1046,8 +1072,10 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      *
      * @return void
      */
-    protected function callModifyAttendeeEmailTextHooks(\Tx_Seminars_OldModel_Registration $registration, \Tx_Oelib_Template $emailTemplate)
-    {
+    protected function callModifyAttendeeEmailTextHooks(
+        \Tx_Seminars_OldModel_Registration $registration,
+        \Tx_Oelib_Template $emailTemplate
+    ) {
         foreach ($this->getHooks() as $hook) {
             if ($hook instanceof \Tx_Seminars_Interface_Hook_Registration) {
                 /** @var \Tx_Seminars_Interface_Hook_Registration $hook */
@@ -1088,11 +1116,13 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         $eMail = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
         $eMail->setSender($event->getFirstOrganizer());
         $eMail->setMessage($this->getMessageForNotification($registration, $emailReason));
-        $eMail->setSubject(sprintf(
-            $this->translate('email_additionalNotification' . $emailReason . 'Subject'),
-            $event->getUid(),
-            $event->getTitleAndDate('-')
-        ));
+        $eMail->setSubject(
+            sprintf(
+                $this->translate('email_additionalNotification' . $emailReason . 'Subject'),
+                $event->getUid(),
+                $event->getTitleAndDate('-')
+            )
+        );
 
         /** @var \Tx_Seminars_OldModel_Organizer $organizer */
         foreach ($event->getOrganizerBag() as $organizer) {
@@ -1309,7 +1339,10 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         // method_of_payment can only be set (using the registration form) if
         // the event has at least one payment method.
         if ($registration->hasMethodOfPayment()) {
-            $this->setMarker('paymentmethod', $event->getSinglePaymentMethodPlain($registration->getMethodOfPaymentUid()));
+            $this->setMarker(
+                'paymentmethod',
+                $event->getSinglePaymentMethodPlain($registration->getMethodOfPaymentUid())
+            );
         } else {
             $this->hideSubparts('paymentmethod', $wrapperPrefix);
         }
@@ -1501,8 +1534,11 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      *
      * @return void
      */
-    private function fillOrHideUnregistrationNotice($helloSubjectPrefix, \Tx_Seminars_OldModel_Registration $registration, $useHtml)
-    {
+    private function fillOrHideUnregistrationNotice(
+        $helloSubjectPrefix,
+        \Tx_Seminars_OldModel_Registration $registration,
+        $useHtml
+    ) {
         $event = $registration->getSeminarObject();
         if (($helloSubjectPrefix === 'confirmationOnUnregistration') || !$event->isUnregistrationPossible()) {
             $this->hideSubparts('unregistration_notice', ($useHtml ? 'html_' : '') . 'field_wrapper');
@@ -1580,6 +1616,8 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
     protected function getLoggedInFrontEndUserUid()
     {
         $loginManager = \Tx_Oelib_FrontEndLoginManager::getInstance();
-        return $loginManager->isLoggedIn() ? $loginManager->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class)->getUid() : 0;
+        return $loginManager->isLoggedIn() ? $loginManager->getLoggedInUser(
+            \Tx_Seminars_Mapper_FrontEndUser::class
+        )->getUid() : 0;
     }
 }
