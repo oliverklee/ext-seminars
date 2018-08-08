@@ -55,10 +55,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends \Tx_Phpunit_T
             new \Tx_Oelib_Configuration()
         );
 
-        $this->seminar = new \Tx_Seminars_OldModel_Event($this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            ['payment_methods' => '1']
-        ));
+        $this->seminar = new \Tx_Seminars_OldModel_Event(
+            $this->testingFramework->createRecord(
+                'tx_seminars_seminars',
+                ['payment_methods' => '1']
+            )
+        );
         $this->seminarUid = $this->seminar->getUid();
 
         $this->fixture = new \Tx_Seminars_FrontEnd_RegistrationForm(
@@ -75,7 +77,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends \Tx_Phpunit_T
                 'maximumBookableSeats' => 10,
                 'form.' => [
                     'unregistration.' => [],
-                    'registration.'    => [
+                    'registration.' => [
                         'step1.' => [],
                         'step2.' => [],
                     ],
@@ -451,8 +453,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends \Tx_Phpunit_T
         );
     }
 
-    public function testGetStepCounterReturnsNumberOfLastRegistrationPageAsCurrentPageIfPageNumberIsAboveLastRegistrationPage()
-    {
+    public function testGetStepCounterReturnsNumberOfLastRegistrationPageAsCurrentPageIfPageNumberIsAboveLastRegistrationPage(
+    ) {
         $this->fixture->setConfigurationValue(
             'numberOfFirstRegistrationPage',
             1
@@ -514,7 +516,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends \Tx_Phpunit_T
         $this->testingFramework->createAndLoginFrontEndUser();
 
         \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_staticinfotables_pi1')->
-            setAsString('countryCode', 'DEU');
+        setAsString('countryCode', 'DEU');
 
         self::assertEquals(
             'Deutschland',
@@ -577,112 +579,148 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends \Tx_Phpunit_T
     {
         return [
             'step_counter' => [
-                'key' => 'step_counter', 'self-contained' => true,
+                'key' => 'step_counter',
+                'self-contained' => true,
             ],
             'price' => [
-                'key' => 'price', 'self-contained' => true,
+                'key' => 'price',
+                'self-contained' => true,
             ],
             'method_of_payment' => [
-                'key' => 'method_of_payment', 'self-contained' => false,
+                'key' => 'method_of_payment',
+                'self-contained' => false,
             ],
             'account_number' => [
-                'key' => 'account_number', 'self-contained' => false,
+                'key' => 'account_number',
+                'self-contained' => false,
             ],
             'bank_code' => [
-                'key' => 'bank_code', 'self-contained' => false,
+                'key' => 'bank_code',
+                'self-contained' => false,
             ],
             'bank_name' => [
-                'key' => 'bank_name', 'self-contained' => false,
+                'key' => 'bank_name',
+                'self-contained' => false,
             ],
             'account_owner' => [
-                'key' => 'account_owner', 'self-contained' => false,
+                'key' => 'account_owner',
+                'self-contained' => false,
             ],
             'billing_address' => [
-                'key' => 'billing_address', 'self-contained' => false,
+                'key' => 'billing_address',
+                'self-contained' => false,
             ],
             'company' => [
-                'key' => 'company', 'self-contained' => true,
+                'key' => 'company',
+                'self-contained' => true,
             ],
             'gender' => [
-                'key' => 'gender', 'self-contained' => true,
+                'key' => 'gender',
+                'self-contained' => true,
             ],
             'name' => [
-                'key' => 'name', 'self-contained' => true,
+                'key' => 'name',
+                'self-contained' => true,
             ],
             'address' => [
-                'key' => 'address', 'self-contained' => true,
+                'key' => 'address',
+                'self-contained' => true,
             ],
             'zip' => [
-                'key' => 'zip', 'self-contained' => true,
+                'key' => 'zip',
+                'self-contained' => true,
             ],
             'city' => [
-                'key' => 'city', 'self-contained' => true,
+                'key' => 'city',
+                'self-contained' => true,
             ],
             'country' => [
-                'key' => 'country', 'self-contained' => true,
+                'key' => 'country',
+                'self-contained' => true,
             ],
             'telephone' => [
-                'key' => 'telephone', 'self-contained' => true,
+                'key' => 'telephone',
+                'self-contained' => true,
             ],
             'email' => [
-                'key' => 'email', 'self-contained' => true,
+                'key' => 'email',
+                'self-contained' => true,
             ],
             'interests' => [
-                'key' => 'interests', 'self-contained' => true,
+                'key' => 'interests',
+                'self-contained' => true,
             ],
             'expectations' => [
-                'key' => 'expectations', 'self-contained' => true,
+                'key' => 'expectations',
+                'self-contained' => true,
             ],
             'background_knowledge' => [
-                'key' => 'background_knowledge', 'self-contained' => true,
+                'key' => 'background_knowledge',
+                'self-contained' => true,
             ],
             'accommodation' => [
-                'key' => 'accommodation', 'self-contained' => true,
+                'key' => 'accommodation',
+                'self-contained' => true,
             ],
             'food' => [
-                'key' => 'food', 'self-contained' => true,
+                'key' => 'food',
+                'self-contained' => true,
             ],
             'known_from' => [
-                'key' => 'known_from', 'self-contained' => true,
+                'key' => 'known_from',
+                'self-contained' => true,
             ],
             'seats' => [
-                'key' => 'seats', 'self-contained' => true,
+                'key' => 'seats',
+                'self-contained' => true,
             ],
             'registered_themselves' => [
-                'key' => 'registered_themselves', 'self-contained' => true,
+                'key' => 'registered_themselves',
+                'self-contained' => true,
             ],
             'attendees_names' => [
-                'key' => 'attendees_names', 'self-contained' => true,
+                'key' => 'attendees_names',
+                'self-contained' => true,
             ],
             'kids' => [
-                'key' => 'kids', 'self-contained' => true,
+                'key' => 'kids',
+                'self-contained' => true,
             ],
             'lodgings' => [
-                'key' => 'lodgings', 'self-contained' => false,
+                'key' => 'lodgings',
+                'self-contained' => false,
             ],
             'foods' => [
-                'key' => 'foods', 'self-contained' => false,
+                'key' => 'foods',
+                'self-contained' => false,
             ],
             'checkboxes' => [
-                'key' => 'checkboxes', 'self-contained' => false,
+                'key' => 'checkboxes',
+                'self-contained' => false,
             ],
             'notes' => [
-                'key' => 'notes', 'self-contained' => true,
+                'key' => 'notes',
+                'self-contained' => true,
             ],
             'total_price' => [
-                'key' => 'total_price', 'self-contained' => true,
+                'key' => 'total_price',
+                'self-contained' => true,
             ],
             'feuser_data' => [
-                'key' => 'feuser_data', 'self-contained' => true,
+                'key' => 'feuser_data',
+                'self-contained' => true,
             ],
             'registration_data' => [
-                'key' => 'registration_data', 'self-contained' => true,
+                'key' => 'registration_data',
+                'self-contained' => true,
             ],
             'terms' => [
-                'key' => 'terms', 'self-contained' => true,
+                'key' => 'terms',
+                'self-contained' => true,
             ],
             'terms_2' => [
-                'key' => 'terms_2', 'self-contained' => false,
+                'key' => 'terms_2',
+                'self-contained' => false,
             ],
         ];
     }
@@ -824,7 +862,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends \Tx_Phpunit_T
         $this->fixture->setFakedFormValue(
             'structured_attendees_names',
             '[["John", "Doe", "Key account", "john@example.com"],' .
-                '["Jane", "Doe", "Sales", "jane@example.com"]]'
+            '["Jane", "Doe", "Sales", "jane@example.com"]]'
         );
 
         self::assertEquals(
@@ -920,7 +958,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends \Tx_Phpunit_T
             [
                 'showRegistrationFields' => 'seats',
                 'form.' => [
-                    'registration.'    => [
+                    'registration.' => [
                         'step1.' => ['seats' => []],
                         'step2.' => [],
                     ],
@@ -966,7 +1004,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends \Tx_Phpunit_T
         $this->fixture->setFakedFormValue(
             'structured_attendees_names',
             '[["John", "Doe", "Key account", "john@example.com"],' .
-                '["Jane", "Doe", "Sales", "jane@example.com"]]'
+            '["Jane", "Doe", "Sales", "jane@example.com"]]'
         );
 
         self::assertSame(2, $this->fixture->getNumberOfEnteredPersons());
@@ -1156,7 +1194,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends \Tx_Phpunit_T
         $this->fixture->setFakedFormValue(
             'structured_attendees_names',
             '[["John", "Doe", "Key account", "john@example.com"],' .
-                '["Jane", "Doe", "Sales", "jane@example.com"]]'
+            '["Jane", "Doe", "Sales", "jane@example.com"]]'
         );
         $this->fixture->setFakedFormValue('seats', 1);
 
@@ -1175,7 +1213,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends \Tx_Phpunit_T
             [
                 'showRegistrationFields' => 'seats',
                 'form.' => [
-                    'registration.'    => [
+                    'registration.' => [
                         'step1.' => ['seats' => []],
                         'step2.' => [],
                     ],
@@ -1297,9 +1335,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends \Tx_Phpunit_T
         $fixture->expects(self::any())->method('isFormFieldEnabled')
             ->will(self::returnValue(true));
         $fixture->expects(self::any())->method('getAdditionalRegisteredPersonsData')
-            ->will(self::returnValue(
-                [['John', 'Doe', '', 'john@example.com']]
-            ));
+            ->will(
+                self::returnValue(
+                    [['John', 'Doe', '', 'john@example.com']]
+                )
+            );
         $fixture->setTestMode();
         $fixture->setConfigurationValue(
             'createAdditionalAttendeesAsFrontEndUsers',
@@ -1327,9 +1367,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends \Tx_Phpunit_T
         $fixture->expects(self::any())->method('isFormFieldEnabled')
             ->will(self::returnValue(true));
         $fixture->expects(self::any())->method('getAdditionalRegisteredPersonsData')
-            ->will(self::returnValue(
-                [['John', 'Doe', '', 'potato salad!']]
-            ));
+            ->will(
+                self::returnValue(
+                    [['John', 'Doe', '', 'potato salad!']]
+                )
+            );
         $fixture->setTestMode();
         $fixture->setConfigurationValue(
             'createAdditionalAttendeesAsFrontEndUsers',
@@ -1357,9 +1399,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends \Tx_Phpunit_T
         $fixture->expects(self::any())->method('isFormFieldEnabled')
             ->will(self::returnValue(true));
         $fixture->expects(self::any())->method('getAdditionalRegisteredPersonsData')
-            ->will(self::returnValue(
-                [['John', 'Doe', '', '']]
-            ));
+            ->will(
+                self::returnValue(
+                    [['John', 'Doe', '', '']]
+                )
+            );
         $fixture->setTestMode();
         $fixture->setConfigurationValue(
             'createAdditionalAttendeesAsFrontEndUsers',
@@ -1387,9 +1431,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends \Tx_Phpunit_T
         $fixture->expects(self::any())->method('isFormFieldEnabled')
             ->will(self::returnValue(true));
         $fixture->expects(self::any())->method('getAdditionalRegisteredPersonsData')
-            ->will(self::returnValue(
-                [['John', 'Doe', '']]
-            ));
+            ->will(
+                self::returnValue(
+                    [['John', 'Doe', '']]
+                )
+            );
         $fixture->setTestMode();
         $fixture->setConfigurationValue(
             'createAdditionalAttendeesAsFrontEndUsers',
@@ -1417,12 +1463,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends \Tx_Phpunit_T
         $fixture->expects(self::any())->method('isFormFieldEnabled')
             ->will(self::returnValue(true));
         $fixture->expects(self::any())->method('getAdditionalRegisteredPersonsData')
-            ->will(self::returnValue(
-                [
-                    ['John', 'Doe', '', 'john@example.com'],
-                    ['Jane', 'Doe', '', 'tomato salad!'],
-                ]
-            ));
+            ->will(
+                self::returnValue(
+                    [
+                        ['John', 'Doe', '', 'john@example.com'],
+                        ['Jane', 'Doe', '', 'tomato salad!'],
+                    ]
+                )
+            );
         $fixture->setTestMode();
         $fixture->setConfigurationValue(
             'createAdditionalAttendeesAsFrontEndUsers',

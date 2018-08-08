@@ -3897,7 +3897,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * regular, regular_early, regular_board,
      * special, special_early, special_board
      *
-     * @param string $priceCode code for the price category to check, may be empty or NULL
+     * @param string $priceCode code for the price category to check, may be empty or null
      *
      * @return bool TRUE if $priceCode matches a currently available
      *                 price, FALSE otherwise
