@@ -10643,4 +10643,68 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
 
         self::assertSame($this->fixture->translate('message_onRequest'), $result);
     }
+
+    /**
+     * @test
+     */
+    public function getAvailablePricesForAllPricesAvailableWithoutEarlyBirdDeadlineReturnsAllLatePrices()
+    {
+        $this->fixture->setRecordPropertyString('price_regular', '100.00');
+        $this->fixture->setRecordPropertyString('price_regular_early', '90.00');
+        $this->fixture->setRecordPropertyString('price_regular_board', '150.00');
+        $this->fixture->setRecordPropertyString('price_special', '50.00');
+        $this->fixture->setRecordPropertyString('price_special_early', '45.00');
+        $this->fixture->setRecordPropertyString('price_special_board', '75.00');
+
+        static::assertSame(
+            ['regular', 'regular_board', 'special', 'special_board'],
+            array_keys($this->fixture->getAvailablePrices())
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getAvailablePricesForAllPricesAvailableWithPastEarlyBirdDeadlineReturnsAllLatePrices()
+    {
+        $this->fixture->setRecordPropertyString('price_regular', '100.00');
+        $this->fixture->setRecordPropertyString('price_regular_early', '90.00');
+        $this->fixture->setRecordPropertyString('price_regular_board', '150.00');
+        $this->fixture->setRecordPropertyString('price_special', '50.00');
+        $this->fixture->setRecordPropertyString('price_special_early', '45.00');
+        $this->fixture->setRecordPropertyString('price_special_board', '75.00');
+        $this->fixture->setRecordPropertyString('deadline_early_bird', $this->now - 1000);
+
+        static::assertSame(
+            ['regular', 'regular_board', 'special', 'special_board'],
+            array_keys($this->fixture->getAvailablePrices())
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getAvailablePricesForAllPricesAvailableWithFuturEarlyBirdDeadlineReturnsAllEarlyBirdPrices()
+    {
+        $this->fixture->setRecordPropertyString('price_regular', '100.00');
+        $this->fixture->setRecordPropertyString('price_regular_early', '90.00');
+        $this->fixture->setRecordPropertyString('price_regular_board', '150.00');
+        $this->fixture->setRecordPropertyString('price_special', '50.00');
+        $this->fixture->setRecordPropertyString('price_special_early', '45.00');
+        $this->fixture->setRecordPropertyString('price_special_board', '75.00');
+        $this->fixture->setRecordPropertyString('deadline_early_bird', $this->now + 1000);
+
+        static::assertSame(
+            ['regular_early', 'regular_board', 'special_early', 'special_board'],
+            array_keys($this->fixture->getAvailablePrices())
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getAvailablePricesForNoPricesSetReturnsRegularPriceOnly()
+    {
+        static::assertSame(['regular'], array_keys($this->fixture->getAvailablePrices()));
+    }
 }

@@ -82,6 +82,16 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     protected $headerCollector = null;
 
+    /**
+     * @var \Tx_Seminars_Mapper_FrontEndUser
+     */
+    private $frontEndUserMapper = null;
+
+    /**
+     * @var \Tx_Seminars_Mapper_Registration
+     */
+    private $registrationMapper = null;
+
     protected function setUp()
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
@@ -148,6 +158,9 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
             ->method('createAbsoluteUrlForEvent')
             ->will(self::returnValue('http://singleview.example.com/'));
         $this->fixture->injectLinkBuilder($this->linkBuilder);
+
+        $this->frontEndUserMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
+        $this->registrationMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
     }
 
     protected function tearDown()
@@ -8191,5 +8204,157 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
             [],
             $this->headerCollector->getAllAddedHeaders()
         );
+    }
+
+    /*
+     * Tests concerning getPricesAvailableForUser
+     */
+
+    /**
+     * @test
+     */
+    public function getPricesAvailableForUserForNoAutomaticPricesAndNoRegistrationsReturnsAllAvailablePrices()
+    {
+        $this->fixture->setConfigurationValue('automaticSpecialPriceForSubsequentRegistrationsBySameUser', false);
+
+        $userUid = $this->testingFramework->createFrontEndUser();
+        /** @var \Tx_Seminars_Model_FrontEndUser $user */
+        $user = $this->frontEndUserMapper->find($userUid);
+
+        $eventUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            [
+                'price_regular' => '100.00',
+                'price_regular_early' => '90.00',
+                'price_regular_board' => '150.00',
+                'price_special' => '50.00',
+                'price_special_early' => '45.00',
+                'price_special_board' => '75.00',
+            ]
+        );
+        $event = new \Tx_Seminars_OldModel_Event($eventUid);
+
+        $prices = $this->fixture->getPricesAvailableForUser($event, $user);
+
+        static::assertSame(['regular', 'regular_board', 'special', 'special_board'], array_keys($prices));
+    }
+
+    /**
+     * @test
+     */
+    public function getPricesAvailableForUserForNoAutomaticPricesAndOneRegistrationReturnsAllAvailablePrices()
+    {
+        $this->fixture->setConfigurationValue('automaticSpecialPriceForSubsequentRegistrationsBySameUser', false);
+
+        $userUid = $this->testingFramework->createFrontEndUser();
+        /** @var \Tx_Seminars_Model_FrontEndUser $user */
+        $user = $this->frontEndUserMapper->find($userUid);
+
+        $this->testingFramework->createRecord('tx_seminars_attendances', ['user' => $userUid]);
+
+        $eventUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            [
+                'price_regular' => '100.00',
+                'price_regular_early' => '90.00',
+                'price_regular_board' => '150.00',
+                'price_special' => '50.00',
+                'price_special_early' => '45.00',
+                'price_special_board' => '75.00',
+            ]
+        );
+        $event = new \Tx_Seminars_OldModel_Event($eventUid);
+
+        $prices = $this->fixture->getPricesAvailableForUser($event, $user);
+
+        static::assertSame(['regular', 'regular_board', 'special', 'special_board'], array_keys($prices));
+    }
+
+    /**
+     * @test
+     */
+    public function getPricesAvailableForUserForAutomaticPricesAndNoRegistrationsRemovesSpecialPrices()
+    {
+        $this->fixture->setConfigurationValue('automaticSpecialPriceForSubsequentRegistrationsBySameUser', true);
+
+        $userUid = $this->testingFramework->createFrontEndUser();
+        /** @var \Tx_Seminars_Model_FrontEndUser $user */
+        $user = $this->frontEndUserMapper->find($userUid);
+
+        $eventUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            [
+                'price_regular' => '100.00',
+                'price_regular_early' => '90.00',
+                'price_regular_board' => '150.00',
+                'price_special' => '50.00',
+                'price_special_early' => '45.00',
+                'price_special_board' => '75.00',
+            ]
+        );
+        $event = new \Tx_Seminars_OldModel_Event($eventUid);
+
+        $prices = $this->fixture->getPricesAvailableForUser($event, $user);
+
+        static::assertSame(['regular', 'regular_board'], array_keys($prices));
+    }
+
+    /**
+     * @test
+     */
+    public function getPricesAvailableForUserForNoAutomaticPricesAndOneRegistrationRemovesRegularPrices()
+    {
+        $this->fixture->setConfigurationValue('automaticSpecialPriceForSubsequentRegistrationsBySameUser', true);
+
+        $userUid = $this->testingFramework->createFrontEndUser();
+        /** @var \Tx_Seminars_Model_FrontEndUser $user */
+        $user = $this->frontEndUserMapper->find($userUid);
+
+        $this->testingFramework->createRecord('tx_seminars_attendances', ['user' => $userUid]);
+
+        $eventUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            [
+                'price_regular' => '100.00',
+                'price_regular_early' => '90.00',
+                'price_regular_board' => '150.00',
+                'price_special' => '50.00',
+                'price_special_early' => '45.00',
+                'price_special_board' => '75.00',
+            ]
+        );
+        $event = new \Tx_Seminars_OldModel_Event($eventUid);
+
+        $prices = $this->fixture->getPricesAvailableForUser($event, $user);
+
+        static::assertSame(['special', 'special_board'], array_keys($prices));
+    }
+
+    /**
+     * @test
+     */
+    public function getPricesAvailableForUserForNoAutomaticPricesAndOneRegistrationAndNoSpecialPriceKeepsRegularPrice()
+    {
+        $this->fixture->setConfigurationValue('automaticSpecialPriceForSubsequentRegistrationsBySameUser', true);
+
+        $userUid = $this->testingFramework->createFrontEndUser();
+        /** @var \Tx_Seminars_Model_FrontEndUser $user */
+        $user = $this->frontEndUserMapper->find($userUid);
+
+        $this->testingFramework->createRecord('tx_seminars_attendances', ['user' => $userUid]);
+
+        $eventUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            [
+                'price_regular' => '100.00',
+                'price_regular_early' => '90.00',
+                'price_regular_board' => '150.00',
+            ]
+        );
+        $event = new \Tx_Seminars_OldModel_Event($eventUid);
+
+        $prices = $this->fixture->getPricesAvailableForUser($event, $user);
+
+        static::assertSame(['regular', 'regular_board'], array_keys($prices));
     }
 }
