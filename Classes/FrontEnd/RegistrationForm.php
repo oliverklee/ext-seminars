@@ -161,7 +161,10 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
     public function getSeminar()
     {
         if ($this->seminar === null) {
-            throw new \BadMethodCallException('Please set a proper seminar object via $this->setSeminar().', 1333293187);
+            throw new \BadMethodCallException(
+                'Please set a proper seminar object via $this->setSeminar().',
+                1333293187
+            );
         }
 
         return $this->seminar;
@@ -688,7 +691,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
         $pageId = $this->getConfValueInteger('thankYouAfterRegistrationPID', 's_registration');
 
         if ($this->getConfValueBoolean('logOutOneTimeAccountsAfterRegistration')
-                && \Tx_Oelib_Session::getInstance(\Tx_Oelib_Session::TYPE_USER)->getAsBoolean('onetimeaccount')
+            && \Tx_Oelib_Session::getInstance(\Tx_Oelib_Session::TYPE_USER)->getAsBoolean('onetimeaccount')
         ) {
             $GLOBALS['TSFE']->fe_user->logoff();
             $GLOBALS['TSFE']->loginUser = 0;
@@ -773,8 +776,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
             'uid, title',
             'tx_seminars_payment_methods, tx_seminars_seminars_payment_methods_mm',
             'tx_seminars_payment_methods.uid = tx_seminars_seminars_payment_methods_mm.uid_foreign ' .
-                'AND tx_seminars_seminars_payment_methods_mm.uid_local=' . $this->getSeminar()->getTopicUid() .
-                \Tx_Oelib_Db::enableFields('tx_seminars_payment_methods')
+            'AND tx_seminars_seminars_payment_methods_mm.uid_local=' . $this->getSeminar()->getTopicUid() .
+            \Tx_Oelib_Db::enableFields('tx_seminars_payment_methods')
         );
 
         $result = [];
@@ -841,7 +844,10 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
         $userData = $GLOBALS['TSFE']->fe_user->user;
 
         $fieldKeys = GeneralUtility::trimExplode(',', $this->getConfValueString('showFeUserFieldsInRegistrationForm'));
-        $fieldsWithLabels = GeneralUtility::trimExplode(',', $this->getConfValueString('showFeUserFieldsInRegistrationFormWithLabel'));
+        $fieldsWithLabels = GeneralUtility::trimExplode(
+            ',',
+            $this->getConfValueString('showFeUserFieldsInRegistrationFormWithLabel')
+        );
 
         foreach ($fieldKeys as $key) {
             $hasLabel = in_array($key, $fieldsWithLabels, true);
@@ -944,7 +950,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
         if (!in_array($key, $this->getAllFieldKeysForConfirmationPage(), true)) {
             throw new \InvalidArgumentException(
                 'The form data item ' . $key . ' is not valid on the confirmation page. Valid items are: ' .
-                    implode(', ', $this->getAllFieldKeysForConfirmationPage()),
+                implode(', ', $this->getAllFieldKeysForConfirmationPage()),
                 1389813109
             );
         }
@@ -964,20 +970,32 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
                 break;
             case 'lodgings':
                 $this->ensureArray($currentFormData);
-                $currentFormData = $this->getCaptionsForSelectedOptions($this->getSeminar()->getLodgings(), $currentFormData);
+                $currentFormData = $this->getCaptionsForSelectedOptions(
+                    $this->getSeminar()->getLodgings(),
+                    $currentFormData
+                );
                 break;
             case 'foods':
                 $this->ensureArray($currentFormData);
-                $currentFormData = $this->getCaptionsForSelectedOptions($this->getSeminar()->getFoods(), $currentFormData);
+                $currentFormData = $this->getCaptionsForSelectedOptions(
+                    $this->getSeminar()->getFoods(),
+                    $currentFormData
+                );
                 break;
             case 'checkboxes':
                 $this->ensureArray($currentFormData);
-                $currentFormData = $this->getCaptionsForSelectedOptions($this->getSeminar()->getCheckboxes(), $currentFormData);
+                $currentFormData = $this->getCaptionsForSelectedOptions(
+                    $this->getSeminar()->getCheckboxes(),
+                    $currentFormData
+                );
                 break;
             case 'attendees_names':
-                if ($this->isFormFieldEnabled('registered_themselves') && ($this->getFormValue('registered_themselves') == '1')) {
+                if ($this->isFormFieldEnabled('registered_themselves') && ($this->getFormValue(
+                            'registered_themselves'
+                        ) == '1')) {
                     /** @var \Tx_Seminars_Model_FrontEndUser $user */
-                    $user = \Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
+                    $user = \Tx_Oelib_FrontEndLoginManager::getInstance(
+                    )->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
                     $userData = [$user->getName()];
                     if ($this->getConfValueBoolean('createAdditionalAttendeesAsFrontEndUsers', 's_registration')) {
                         if ($user->hasJobTitle()) {
@@ -1271,7 +1289,9 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      */
     private function getDefaultCountry()
     {
-        $defaultCountryCode = \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_staticinfotables_pi1')->getAsString('countryCode');
+        $defaultCountryCode = \Tx_Oelib_ConfigurationRegistry::get(
+            'plugin.tx_staticinfotables_pi1'
+        )->getAsString('countryCode');
         if ($defaultCountryCode === '') {
             return '';
         }
@@ -1413,8 +1433,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *        associative array with the element "value" in which the currently selected value (a positive integer)
      *        or NULL if no radiobutton is selected is provided
      *
-     * @return bool TRUE if a valid price is selected or the price field
-     *                 is hidden, FALSE if none is selected, but could have been selected
+     * @return bool true if a valid price is selected or the price field
+     *                 is hidden, false if none is selected, but could have been selected
      */
     public function isValidPriceSelected(array $formData)
     {
@@ -1678,7 +1698,13 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
         /** @var \formidable_mainrenderlet $cancelButtonRenderlet */
         $cancelButtonRenderlet = $this->getFormCreator()->aORenderlets['button_cancel'];
         if ($cancelButtonRenderlet->hasThrown('click')) {
-            $redirectUrl = GeneralUtility::locationHeaderUrl($this->pi_getPageLink($this->getConfValueInteger('myEventsPID')));
+            $redirectUrl = GeneralUtility::locationHeaderUrl(
+                $this->pi_getPageLink(
+                    $this->getConfValueInteger(
+                        'myEventsPID'
+                    )
+                )
+            );
             \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Location:' . $redirectUrl);
             exit;
         }
