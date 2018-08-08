@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Automatic prices for subsequent registrations (#144)
 - Calculate collisions using the time slots (#139)
 
 ### Changed

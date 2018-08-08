@@ -1620,4 +1620,40 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
             \Tx_Seminars_Mapper_FrontEndUser::class
         )->getUid() : 0;
     }
+
+    /**
+     * @return \Tx_Seminars_Mapper_Registration
+     */
+    protected function getRegistrationMapper()
+    {
+        return \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+    }
+
+    /**
+     * Returns the prices that are actually available for the given user, depending on whether automatic prices are
+     * enabled using the plugin.tx_seminars.automaticSpecialPriceForSubsequentRegistrationsBySameUser setting.
+     *
+     * @param Tx_Seminars_OldModel_Event $event
+     * @param Tx_Seminars_Model_FrontEndUser $user
+     *
+     * @return string[][] the available prices as a reset array of arrays with the keys "caption" (for the title)
+     *                    and "value (for the price code), might be empty
+     */
+    public function getPricesAvailableForUser(\Tx_Seminars_OldModel_Event $event, \Tx_Seminars_Model_FrontEndUser $user)
+    {
+        $prices = $event->getAvailablePrices();
+        if (!$this->getConfValueBoolean('automaticSpecialPriceForSubsequentRegistrationsBySameUser')) {
+            return $prices;
+        }
+
+        $useSpecialPrice = $event->hasPriceSpecial() && $this->getRegistrationMapper()->countByFrontEndUser($user) > 0;
+
+        if ($useSpecialPrice) {
+            unset($prices['regular'], $prices['regular_early'], $prices['regular_board']);
+        } else {
+            unset($prices['special'], $prices['special_early'], $prices['special_board']);
+        }
+
+        return $prices;
+    }
 }

@@ -4,6 +4,7 @@
  * This class represents a mapper for registrations.
  *
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class Tx_Seminars_Mapper_Registration extends \Tx_Oelib_DataMapper
 {
@@ -30,4 +31,14 @@ class Tx_Seminars_Mapper_Registration extends \Tx_Oelib_DataMapper
         'checkboxes' => \Tx_Seminars_Mapper_Checkbox::class,
         'additional_persons' => \Tx_Seminars_Mapper_FrontEndUser::class,
     ];
+
+    /**
+     * @param Tx_Seminars_Model_FrontEndUser $user
+     *
+     * @return int
+     */
+    public function countByFrontEndUser(\Tx_Seminars_Model_FrontEndUser $user)
+    {
+        return $this->countByWhereClause('user = ' . $user->getUid());
+    }
 }

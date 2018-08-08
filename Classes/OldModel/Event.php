@@ -3894,8 +3894,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * event.
      *
      * The allowed price category codes are:
-     * regular, regular_early, regular_board,
-     * special, special_early, special_board
+     * regular, regular_early, regular_board, special, special_early, special_board
      *
      * @param string $priceCode code for the price category to check, may be empty or null
      *
@@ -3913,8 +3912,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * Checks whether this event currently has at least one non-free price
      * (taking into account whether we still are in the early-bird period).
      *
-     * @return bool TRUE if this event currently has at least one
-     *                 non-zero price, FALSE otherwise
+     * @return bool true if this event currently has at least one non-zero price, false otherwise
      */
     public function hasAnyPrice()
     {
@@ -3922,13 +3920,11 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             $result = $this->hasEarlyBirdPriceRegular()
                 || $this->hasEarlyBirdPriceSpecial();
         } else {
-            $result = $this->hasPriceRegular()
-                || $this->hasPriceSpecial();
+            $result = $this->hasPriceRegular() || $this->hasPriceSpecial();
         }
 
         // There is no early-bird version of the prices that include full board.
-        $result = $result || $this->hasPriceRegularBoard()
-            || $this->hasPriceSpecialBoard();
+        $result = $result || $this->hasPriceRegularBoard() || $this->hasPriceSpecialBoard();
 
         return $result;
     }

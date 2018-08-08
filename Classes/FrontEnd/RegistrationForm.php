@@ -1415,13 +1415,24 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
     }
 
     /**
+     * @return \Tx_Seminars_Model_FrontEndUser
+     */
+    protected function getLoggedInUser()
+    {
+        return \Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
+    }
+
+    /**
      * Provides data items for the prices for this event.
      *
-     * @return string[][] available prices as an array with the keys "caption" (for the title) and "value" (for the uid)
+     * @return string[][] available prices as an array with the keys "caption" (for the title) and "value"
      */
     public function populatePrices()
     {
-        return $this->getSeminar()->getAvailablePrices();
+        return $this->getRegistrationManager()->getPricesAvailableForUser(
+            $this->getSeminar(),
+            $this->getLoggedInUser()
+        );
     }
 
     /**
@@ -1828,9 +1839,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
     }
 
     /**
-     * Returns the Singleton registration manager instance.
-     *
-     * @return \Tx_Seminars_Service_RegistrationManager the singleton instance
+     * @return \Tx_Seminars_Service_RegistrationManager
      */
     private function getRegistrationManager()
     {
