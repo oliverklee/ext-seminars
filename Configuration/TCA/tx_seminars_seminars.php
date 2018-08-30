@@ -128,8 +128,6 @@ $tca = [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
-                'internal_type' => 'db',
-                'allowed' => 'tx_seminars_seminars',
                 'foreign_table' => 'tx_seminars_seminars',
                 'foreign_table_where' => 'AND tx_seminars_seminars.uid <> ###THIS_UID### AND object_type = 1 ORDER BY title',
                 'size' => 10,
