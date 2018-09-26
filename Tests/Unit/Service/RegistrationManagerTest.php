@@ -5069,7 +5069,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         $hook = $this->getMock(\Tx_Seminars_Interface_Hook_Registration::class);
         $hookClassName = get_class($hook);
-        $hook->expects(self::once())->method('modifyOrganizerNotificationEmail')->with($registration, self::anything());
+        $hook->expects(self::once())->method('modifyOrganizerNotificationEmail')->with(
+            $registration,
+            self::anything(),
+            self::anything()
+        );
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
         GeneralUtility::addInstance($hookClassName, $hook);

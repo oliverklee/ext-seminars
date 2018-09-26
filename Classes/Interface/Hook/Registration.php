@@ -12,10 +12,15 @@ interface Tx_Seminars_Interface_Hook_Registration
      *
      * @param \Tx_Seminars_OldModel_Registration $registration
      * @param \Tx_Oelib_Template $emailTemplate
+     * @param \Tx_Oelib_Mail $eMailNotification
      *
      * @return void
      */
-    public function modifyOrganizerNotificationEmail(\Tx_Seminars_OldModel_Registration $registration, \Tx_Oelib_Template $emailTemplate);
+    public function modifyOrganizerNotificationEmail(
+        \Tx_Seminars_OldModel_Registration $registration,
+        \Tx_Oelib_Template $emailTemplate,
+        \Tx_Oelib_Mail $eMailNotification
+    );
 
     /**
      * Modifies the registration or unregistration e-mail to an attendee.
@@ -25,5 +30,8 @@ interface Tx_Seminars_Interface_Hook_Registration
      *
      * @return void
      */
-    public function modifyAttendeeEmailText(\Tx_Seminars_OldModel_Registration $registration, \Tx_Oelib_Template $emailTemplate);
+    public function modifyAttendeeEmailText(
+        \Tx_Seminars_OldModel_Registration $registration,
+        \Tx_Oelib_Template $emailTemplate
+    );
 }
