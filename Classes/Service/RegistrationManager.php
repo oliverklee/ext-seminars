@@ -1018,7 +1018,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
             $this->hideSubparts('attendancedata', 'field_wrapper');
         }
 
-        $this->callModifyOrganizerNotificationEmailHooks($registration, $this->getTemplate(), $eMailNotification);
+        $this->callModifyOrganizerNotificationEmailHooks($registration, $this->getTemplate());
 
         $eMailNotification->setMessage($this->getSubpart('MAIL_NOTIFICATION'));
         $this->modifyNotificationEmail($eMailNotification, $registration);
@@ -1033,19 +1033,17 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      *
      * @param \Tx_Seminars_OldModel_Registration $registration
      * @param \Tx_Oelib_Template $emailTemplate
-     * @param \Tx_Oelib_Mail $eMailNotification
      *
      * @return void
      */
     protected function callModifyOrganizerNotificationEmailHooks(
         \Tx_Seminars_OldModel_Registration $registration,
-        \Tx_Oelib_Template $emailTemplate,
-        \Tx_Oelib_Mail $eMailNotification
+        \Tx_Oelib_Template $emailTemplate
     ) {
         foreach ($this->getHooks() as $hook) {
             if ($hook instanceof \Tx_Seminars_Interface_Hook_Registration) {
                 /** @var \Tx_Seminars_Interface_Hook_Registration $hook */
-                $hook->modifyOrganizerNotificationEmail($registration, $emailTemplate, $eMailNotification);
+                $hook->modifyOrganizerNotificationEmail($registration, $emailTemplate);
             }
         }
     }
