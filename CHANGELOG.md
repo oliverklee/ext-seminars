@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Display the name of the current functional test (#256)
 
 ### Changed
+- Clean up the TypoScript (#266)
 - Switch more tests to nimut/testing-framework (#264)
 - Update the testing libraries (#251, #252, #254)
 
