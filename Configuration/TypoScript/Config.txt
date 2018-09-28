@@ -1,0 +1,14 @@
+config {
+    uniqueLinkVars = 1
+
+    tx_mkforms {
+        loadJsFramework = 1
+        mayLoadScriptaculous = 1
+        jsframework {
+            jscore = jquery
+            jscore.tx_mkforms_base = EXT:mkforms/res/jsfwk/prototype/addons/base/Base.js
+            jscore.basewrapper = EXT:mkforms/res/jsfwk/wrapper.js
+            jscore.wrapper = EXT:mkforms/res/jsfwk/jquery/wrapper.js
+        }
+    }
+}
