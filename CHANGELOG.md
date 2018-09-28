@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Calculate collisions using the time slots (#139)
 
 ### Changed
+- Split the TypoScript into several files (#151)
 
 ### Deprecated
 

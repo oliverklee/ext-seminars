@@ -1,0 +1,10 @@
+page {
+    includeCSS {
+        tx_seminars_pi1 = {$plugin.tx_seminars_pi1.cssFile}
+    }
+
+    includeJSFooter {
+        tx_seminars_pi1 = EXT:seminars/Resources/Public/JavaScript/FrontEnd/FrontEnd.js
+        async = 1
+    }
+}
