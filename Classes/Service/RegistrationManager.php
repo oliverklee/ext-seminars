@@ -2,6 +2,7 @@
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
+use OliverKlee\Seminars\Hooks\RegistrationEmailHookInterface;
 
 /**
  * This utility class checks and creates registrations for seminars.
@@ -867,15 +868,31 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
 
         $this->addCalendarAttachment($eMailNotification, $registration);
 
-        foreach ($this->getHooks() as $hook) {
-            if (method_exists($hook, 'modifyThankYouEmail')) {
-                $hook->modifyThankYouEmail($eMailNotification, $registration);
-            }
-        }
+        $this->callPostProcessAttendeeEmailHooks($eMailNotification, $registration);
 
         /** @var \Tx_Oelib_MailerFactory $mailerFactory */
         $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
         $mailerFactory->getMailer()->send($eMailNotification);
+    }
+
+    /**
+     * @param \Tx_Oelib_Mail $mail
+     * @param \Tx_Seminars_Model_Registration $registration
+     *
+     * @return void
+     */
+    protected function callPostProcessAttendeeEmailHooks(\Tx_Oelib_Mail $mail, \Tx_Seminars_Model_Registration $registration)
+    {
+        foreach ($this->getHooks() as $hook) {
+            // The RegistrationEmailHookInterface should be preferred against the old
+            // modifyThankYouEmail variant.
+            if ($hook instanceof RegistrationEmailHookInterface) {
+                $hook->postProcessAttendeeEmail($mail, $registration);
+            } elseif (method_exists($hook, 'modifyThankYouEmail')) {
+                // todo: Maybe declare this hook as deprecated
+                $hook->modifyThankYouEmail($mail, $registration);
+            }
+        }
     }
 
     /**
@@ -1021,6 +1038,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         $this->callModifyOrganizerNotificationEmailHooks($registration, $this->getTemplate());
 
         $eMailNotification->setMessage($this->getSubpart('MAIL_NOTIFICATION'));
+        $this->callPostProcessOrganizerEmailHooks($eMailNotification, $registration);
         $this->modifyNotificationEmail($eMailNotification, $registration);
 
         /** @var \Tx_Oelib_MailerFactory $mailerFactory */
@@ -1049,6 +1067,24 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
     }
 
     /**
+     * @param \Tx_Oelib_Mail $mail
+     * @param \Tx_Seminars_OldModel_Registration $registration
+     *
+     * @return void
+     */
+    protected function callPostProcessOrganizerEmailHooks(
+        \Tx_Oelib_Mail $mail,
+        \Tx_Seminars_OldModel_Registration $registration
+    )
+    {
+        foreach ($this->getHooks() as $hook) {
+            if ($hook instanceof RegistrationEmailHookInterface) {
+                $hook->postProcessOrganizerEmail($mail, $registration);
+            }
+        }
+    }
+
+    /**
      * Modifies the notification e-mail.
      *
      * This method is intended to be overridden in XClasses if needed.
@@ -1057,6 +1093,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      * @param \Tx_Seminars_OldModel_Registration $registration
      *
      * @return void
+     * @todo Maybe declare this method as deprecated?
      */
     protected function modifyNotificationEmail(
         \Tx_Oelib_Mail $emailNotification,
@@ -1129,6 +1166,8 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
             $eMail->addRecipient($organizer);
         }
 
+        $this->callPostProcessAdditionalEmailHooks($eMail, $registration, $emailReason);
+
         /** @var \Tx_Oelib_MailerFactory $mailerFactory */
         $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
         $mailerFactory->getMailer()->send($eMail);
@@ -1136,6 +1175,24 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         if ($event->hasEnoughAttendances() && !$event->haveOrganizersBeenNotifiedAboutEnoughAttendees()) {
             $event->setOrganizersBeenNotifiedAboutEnoughAttendees();
             $event->commitToDb();
+        }
+    }
+
+    /**
+     * @param \Tx_Oelib_Mail $mail
+     * @param \Tx_Seminars_OldModel_Registration $registration
+     * @param string $emailReason
+     * @return void
+     */
+    protected function callPostProcessAdditionalEmailHooks(
+        \Tx_Oelib_Mail $mail,
+        \Tx_Seminars_OldModel_Registration $registration,
+        $emailReason
+    ) {
+        foreach ($this->getHooks() as $hook) {
+            if ($hook instanceof RegistrationEmailHookInterface) {
+                $hook->postProcessAdditionalEmail($mail, $registration, $emailReason);
+            }
         }
     }
 

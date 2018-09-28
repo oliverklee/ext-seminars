@@ -1,5 +1,6 @@
 <?php
 
+use OliverKlee\Seminars\Hooks\RegistrationEmailHookInterface;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -405,6 +406,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
             $this->fullyBookedSeminar->getUid() > 0
         );
     }
+
 
     /**
      * @test
@@ -4871,6 +4873,56 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
     }
 
+    /**
+     * @test
+     */
+    public function notifyAttendeeForSendConfirmationTrueCallsPostProcessAttendeeEmailHook()
+    {
+        $hookClassName = uniqid('RegistrationEmailHookInterface');
+        $hook = $this->getMock(
+            RegistrationEmailHookInterface::class,
+            ['postProcessAttendeeEmail', 'postProcessOrganizerEmail', 'postProcessAdditionalEmail'],
+            [],
+            $hookClassName
+        );
+        $hook->expects(self::once())->method('postProcessAttendeeEmail');
+
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
+        GeneralUtility::addInstance($hookClassName, $hook);
+
+        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1->init();
+
+        $registration = $this->createRegistration();
+        $this->fixture->notifyAttendee($registration, $pi1);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForSendConfirmationFalseNeverCallsPostProcessAttendeeEmailHook()
+    {
+        $hookClassName = uniqid('RegistrationEmailHookInterface');
+        $hook = $this->getMock(
+            RegistrationEmailHookInterface::class,
+            ['postProcessAttendeeEmail', 'postProcessOrganizerEmail', 'postProcessAdditionalEmail'],
+            [],
+            $hookClassName
+        );
+        $hook->expects(self::never())->method('postProcessAttendeeEmail');
+
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
+        GeneralUtility::addInstance($hookClassName, $hook);
+
+        $this->fixture->setConfigurationValue('sendConfirmation', false);
+        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1->init();
+
+        $registration = $this->createRegistration();
+        $this->fixture->notifyAttendee($registration, $pi1);
+    }
+
     /*
      * Tests regarding the notification of organizers
      */
@@ -5094,6 +5146,62 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $hookClassName = get_class($hook);
         $hook->expects(self::once())->method('modifyOrganizerNotificationEmail')
             ->with(self::anything(), self::isInstanceOf(\Tx_Oelib_Template::class));
+
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
+        GeneralUtility::addInstance($hookClassName, $hook);
+
+        $this->fixture->notifyOrganizers($registration);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyOrganizersForSendConfirmationTrueCallsPostProcessOrganizerEmailHook()
+    {
+        $this->fixture->setConfigurationValue('sendNotification', true);
+
+        $registrationUid = $this->testingFramework->createRecord(
+            'tx_seminars_attendances',
+            ['seminar' => $this->seminarUid, 'user' => $this->testingFramework->createFrontEndUser()]
+        );
+        $registration = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($registrationUid);
+
+        $hookClassName = uniqid('RegistrationEmailHookInterface');
+        $hook = $this->getMock(
+            RegistrationEmailHookInterface::class,
+            ['postProcessAttendeeEmail', 'postProcessOrganizerEmail', 'postProcessAdditionalEmail'],
+            [],
+            $hookClassName
+        );
+        $hook->expects(self::once())->method('postProcessOrganizerEmail');
+
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
+        GeneralUtility::addInstance($hookClassName, $hook);
+
+        $this->fixture->notifyOrganizers($registration);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyOrganizersForSendConfirmationFalseNeverCallsPostProcessOrganizerEmailHook()
+    {
+        $this->fixture->setConfigurationValue('sendNotification', false);
+
+        $registrationUid = $this->testingFramework->createRecord(
+            'tx_seminars_attendances',
+            ['seminar' => $this->seminarUid, 'user' => $this->testingFramework->createFrontEndUser()]
+        );
+        $registration = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($registrationUid);
+
+        $hookClassName = uniqid('RegistrationEmailHookInterface');
+        $hook = $this->getMock(
+            RegistrationEmailHookInterface::class,
+            ['postProcessAttendeeEmail', 'postProcessOrganizerEmail', 'postProcessAdditionalEmail'],
+            [],
+            $hookClassName
+        );
+        $hook->expects(self::never())->method('postProcessOrganizerEmail');
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
         GeneralUtility::addInstance($hookClassName, $hook);
@@ -5599,6 +5707,32 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
             $this->fixture->translate('label_vacancies') . ': ' . $this->fixture->translate('label_unlimited'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
+    }
+
+    /**
+     * @test
+     */
+    public function sendAdditionalNotificationCallsPostProcessOrganizerEmailHook()
+    {
+        $this->testingFramework->changeRecord(
+            'tx_seminars_seminars',
+            $this->seminarUid,
+            ['attendees_max' => 1]
+        );
+        $hookClassName = uniqid('RegistrationEmailHookInterface');
+        $hook = $this->getMock(
+            RegistrationEmailHookInterface::class,
+            ['postProcessAttendeeEmail', 'postProcessOrganizerEmail', 'postProcessAdditionalEmail'],
+            [],
+            $hookClassName
+        );
+        $hook->expects(self::once())->method('postProcessAdditionalEmail');
+
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
+        GeneralUtility::addInstance($hookClassName, $hook);
+
+        $registration = $this->createRegistration();
+        $this->fixture->sendAdditionalNotification($registration);
     }
 
     /*
