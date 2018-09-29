@@ -49,7 +49,3 @@ Known problems
 - If the maximum upload file size in PHP is set to a lower value than
   the one in TYPO3, the FE editor does not show an error message if one
   tries to upload a too large file.
-
-- The registration form and the front-end editor use PrototypeJS.
-  If you are using jQuery on your site, you will either need to disable
-  it on the pages with the plugin or use jQuery in no-conflict mode.

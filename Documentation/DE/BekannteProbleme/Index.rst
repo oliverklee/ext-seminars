@@ -68,7 +68,3 @@ Bekannte Probleme
 - Wenn die maximale Upload-Dateigröße in PHP auf einen niedrigeren Wert
   gesetzt ist, als in TYPO3 konfiguriert ist, wird bei der Bearbeitung
   von Veranstaltungen in FE keine Fehlermeldung angezeigt.
-
-- Das Anmeldeformular und der Front-end-Editor benutzen PrototypeJS.
-  Falls Sie jQuery benutzen, sollten die dies auf den Seiten mit dem Plugin
-  deaktivieren oder jQuery im No-Conflict-Modus benutzen.
