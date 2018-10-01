@@ -2345,6 +2345,64 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     /**
      * @test
      */
+    public function notifyAttendeeForSendConfirmationTrueAndPlainTextEmailCallsPostProcessAttendeeEmailTextHookOnce()
+    {
+        \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
+            ->setAsInteger('eMailFormatForAttendees', \Tx_Seminars_Service_RegistrationManager::SEND_TEXT_MAIL);
+
+        $registration = $this->createRegistration();
+
+        $hookClassName = uniqid('RegistrationEmailHookInterface');
+        $hook = $this->getMock(
+            RegistrationEmailHookInterface::class,
+            ['postProcessAttendeeEmail', 'postProcessOrganizerEmail', 'postProcessAdditionalEmail', 'postProcessAttendeeEmailText'],
+            [],
+            $hookClassName
+        );
+        $hook->expects(self::once())->method('postProcessAttendeeEmailText');
+
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
+        GeneralUtility::addInstance($hookClassName, $hook);
+
+        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1->init();
+
+        $this->fixture->notifyAttendee($registration, $pi1);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForSendConfirmationTrueAndHtmlEmailCallsPostProcessAttendeeEmailTextHookTwice()
+    {
+        \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
+            ->setAsInteger('eMailFormatForAttendees', \Tx_Seminars_Service_RegistrationManager::SEND_HTML_MAIL);
+
+        $registration = $this->createRegistration();
+
+        $hookClassName = uniqid('RegistrationEmailHookInterface');
+        $hook = $this->getMock(
+            RegistrationEmailHookInterface::class,
+            ['postProcessAttendeeEmail', 'postProcessOrganizerEmail', 'postProcessAdditionalEmail', 'postProcessAttendeeEmailText'],
+            [],
+            $hookClassName
+        );
+        $hook->expects(self::exactly(2))->method('postProcessAttendeeEmailText');
+
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
+        GeneralUtility::addInstance($hookClassName, $hook);
+
+        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1->init();
+
+        $this->fixture->notifyAttendee($registration, $pi1);
+    }
+
+    /**
+     * @test
+     */
     public function notifyAttendeeMailSubjectContainsConfirmationSubject()
     {
         $this->fixture->setConfigurationValue('sendConfirmation', true);
@@ -4881,7 +4939,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $hookClassName = uniqid('RegistrationEmailHookInterface');
         $hook = $this->getMock(
             RegistrationEmailHookInterface::class,
-            ['postProcessAttendeeEmail', 'postProcessOrganizerEmail', 'postProcessAdditionalEmail'],
+            ['postProcessAttendeeEmail', 'postProcessOrganizerEmail', 'postProcessAdditionalEmail', 'postProcessAttendeeEmailText'],
             [],
             $hookClassName
         );
@@ -4906,7 +4964,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $hookClassName = uniqid('RegistrationEmailHookInterface');
         $hook = $this->getMock(
             RegistrationEmailHookInterface::class,
-            ['postProcessAttendeeEmail', 'postProcessOrganizerEmail', 'postProcessAdditionalEmail'],
+            ['postProcessAttendeeEmail', 'postProcessOrganizerEmail', 'postProcessAdditionalEmail', 'postProcessAttendeeEmailText'],
             [],
             $hookClassName
         );
@@ -5169,7 +5227,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $hookClassName = uniqid('RegistrationEmailHookInterface');
         $hook = $this->getMock(
             RegistrationEmailHookInterface::class,
-            ['postProcessAttendeeEmail', 'postProcessOrganizerEmail', 'postProcessAdditionalEmail'],
+            ['postProcessAttendeeEmail', 'postProcessOrganizerEmail', 'postProcessAdditionalEmail', 'postProcessAttendeeEmailText'],
             [],
             $hookClassName
         );
@@ -5197,7 +5255,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $hookClassName = uniqid('RegistrationEmailHookInterface');
         $hook = $this->getMock(
             RegistrationEmailHookInterface::class,
-            ['postProcessAttendeeEmail', 'postProcessOrganizerEmail', 'postProcessAdditionalEmail'],
+            ['postProcessAttendeeEmail', 'postProcessOrganizerEmail', 'postProcessAdditionalEmail', 'postProcessAttendeeEmailText'],
             [],
             $hookClassName
         );
@@ -5722,7 +5780,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $hookClassName = uniqid('RegistrationEmailHookInterface');
         $hook = $this->getMock(
             RegistrationEmailHookInterface::class,
-            ['postProcessAttendeeEmail', 'postProcessOrganizerEmail', 'postProcessAdditionalEmail'],
+            ['postProcessAttendeeEmail', 'postProcessOrganizerEmail', 'postProcessAdditionalEmail', 'postProcessAttendeeEmailText'],
             [],
             $hookClassName
         );

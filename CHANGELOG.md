@@ -6,12 +6,21 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- New hook interface and RegistrationEmailHookInterface (#150)
+- New hook to post process attendee email in registration manager (#150)
+- New hook to post process attendee email text in registration manager (#150)
+- New hook to post process organizer email in registration manager (#150)
+- New hook to post process additional email in registration manager (#150)
 - Automatic prices for subsequent registrations (#144)
 - Calculate collisions using the time slots (#139)
 
 ### Changed
 
 ### Deprecated
+- XClass hook Tx_Seminars_Service_RegistrationManager::modifyNotificationEmail has been replaced by RegistrationEmailHookInterface::postProcessOrganizerEmail (#150)
+- Hook Tx_Seminars_Interface_Hook_Registration::modifyOrganizerNotificationEmail has been replaced by RegistrationEmailHookInterface::postProcessOrganizerEmail (#150)
+- Hook Tx_Seminars_Interface_Hook_Registration::modifyAttendeeEmailText has been replaced by RegistrationEmailHookInterface::postProcessAttendeeEmailText (#150)
+- Hook modifyThankYouEmail has been replaced by RegistrationEmailHookInterface::postProcessAttendeeEmail (#150)
 
 ### Removed
 - Remove the "use page browser" switch in the EM (#135, #126)

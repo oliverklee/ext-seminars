@@ -126,18 +126,74 @@ It's used like this:
        ) {…}
 
 
-Hooks for the organizer notification e-mails
-""""""""""""""""""""""""""""""""""""""""""""
+Hooks to post process notification emails
+""""""""""""""""""""""""""""""""""""""""""
 
 To use this hook, please create a class that implements the interface
-tx\_seminars\_Interface\_Hook\_Registration. The method in your class
-then should expect two parameters:
+\\OliverKlee\\Seminars\\Hooks\\RegistrationEmailHookInterface. Then you need to add the following methods:
+
+**Hook to post process the attendee email**
 
 ::
 
-   public function modifyOrganizerNotificationEmail(
-         Tx_Seminars_OldModel_Registration $registration, Tx_Oelib_Template $emailTemplate
-   ) {
+    /**
+     * @param \Tx_Oelib_Mail $mail
+     * @param \Tx_Seminars_Model_Registration $registration
+     *
+     * @return void
+     */
+    public function postProcessAttendeeEmail(\Tx_Oelib_Mail $mail, \Tx_Seminars_Model_Registration $registration)
+    {
+    }
+
+**Hook to post process the attendee email text**
+
+::
+
+    /**
+     * @param \Tx_Seminars_OldModel_Registration $registration
+     * @param \Tx_Oelib_Template $emailTemplate
+     *
+     * @return void
+     */
+    public function postProcessAttendeeEmailText(\Tx_Seminars_OldModel_Registration $registration, \Tx_Oelib_Template $emailTemplate)
+    {
+    }
+
+**Hook to post process the organizer email**
+
+::
+
+    /**
+     * @param \Tx_Oelib_Mail $mail
+     * @param \Tx_Seminars_OldModel_Registration $registration
+     *
+     * @return void
+     */
+    public function postProcessOrganizerEmail(\Tx_Oelib_Mail $mail, \Tx_Seminars_OldModel_Registration $registration)
+    {
+    }
+
+**Hook to post process additional emails**
+
+::
+
+    /**
+     * @param \Tx_Oelib_Mail $mail
+     * @param \Tx_Seminars_OldModel_Registration $registration
+     * @param string $emailReason see Tx_Seminars_Service_RegistrationManager::getReasonForNotification()
+     *                            for information about possible values
+     *
+     * @return void
+     */
+    public function postProcessAdditionalEmail(
+        \Tx_Oelib_Mail $mail,
+        \Tx_Seminars_OldModel_Registration $registration,
+        $emailReason = ''
+    )
+    {
+    }
+
 
 Your class then needs to be included and registered like in this
 example:
@@ -145,55 +201,7 @@ example:
 ::
 
    // register my hook objects
-   $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][] = \tx_invoices_email::class;
-
-
-Hooks for the thank-you e-mails sent after a registration
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-There are two hooks: one for modifying the e-mail (e.g., adding
-recipients or attachments), and one for modifying the e-mail texts
-before the corresponding subparts are rendered
-
-**Hook for the e-mail**
-
-To use this hook, you need to create a class with a method named
-modifyThankYouEmail. The method in your class should expect two
-parameters:
-
-::
-
-           public function modifyThankYouEmail(
-                 Tx_Oelib_Mail $email, Tx_Seminars_Model_Registration $registration
-         ) {
-
-Your class then needs to be included and registered like in this
-example:
-
-::
-
-   // register my hook objects
-   $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][] = \tx_invoices_email::class;
-
-**Hook for the e-mail text**
-
-To use this hook, please create a class that implements the interface
-tx\_seminars\_Interface\_Hook\_Registration. The method in your class
-then should expect two parameters:
-
-::
-
-    public function modifyAttendeeEmailText(
-                 Tx_Seminars_OldModel_Registration $registration, Tx_Oelib_Template $emailTemplate
-       ) {
-
-Your class then needs to be included and registered like in this
-example:
-
-::
-
-   // register my hook objects
-   $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][] = \tx_invoices_email::class;
+   $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][] = \\MyVendor\\MyExt\\Hooks\\RegistrationEmailHook::class;
 
 
 Hooks for the e-mails sent from the back-end module

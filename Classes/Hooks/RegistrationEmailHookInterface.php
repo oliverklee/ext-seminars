@@ -15,7 +15,9 @@ namespace OliverKlee\Seminars\Hooks;
  */
 
 /**
- * Interface RegistrationEmailHookInterface
+ * Hook interface to customize emails after they has been processed.
+ *
+ * @author Pascal Rinker <projects@jweiland.net>
  */
 interface RegistrationEmailHookInterface
 {
@@ -26,6 +28,14 @@ interface RegistrationEmailHookInterface
      * @return void
      */
     public function postProcessAttendeeEmail(\Tx_Oelib_Mail $mail, \Tx_Seminars_Model_Registration $registration);
+
+    /**
+     * @param \Tx_Seminars_OldModel_Registration $registration
+     * @param \Tx_Oelib_Template $emailTemplate
+     *
+     * @return void
+     */
+    public function postProcessAttendeeEmailText(\Tx_Seminars_OldModel_Registration $registration, \Tx_Oelib_Template $emailTemplate);
 
     /**
      * @param \Tx_Oelib_Mail $mail
