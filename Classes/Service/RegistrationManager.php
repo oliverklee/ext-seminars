@@ -889,7 +889,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
             if ($hook instanceof RegistrationEmailHookInterface) {
                 $hook->postProcessAttendeeEmail($mail, $registration);
             } elseif (method_exists($hook, 'modifyThankYouEmail')) {
-                // @todo deprecated - use hook above instead
+                GeneralUtility::logDeprecatedFunction();
                 $hook->modifyThankYouEmail($mail, $registration);
             }
         }
@@ -1061,6 +1061,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
     ) {
         foreach ($this->getHooks() as $hook) {
             if ($hook instanceof \Tx_Seminars_Interface_Hook_Registration) {
+                GeneralUtility::logDeprecatedFunction();
                 /** @var \Tx_Seminars_Interface_Hook_Registration $hook */
                 $hook->modifyOrganizerNotificationEmail($registration, $emailTemplate);
             }
@@ -1116,6 +1117,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
             if ($hook instanceof RegistrationEmailHookInterface) {
                 $hook->postProcessAttendeeEmailText($registration, $emailTemplate);
             } elseif ($hook instanceof \Tx_Seminars_Interface_Hook_Registration) {
+                GeneralUtility::logDeprecatedFunction();
                 /** @var \Tx_Seminars_Interface_Hook_Registration $hook */
                 $hook->modifyAttendeeEmailText($registration, $emailTemplate);
             }
