@@ -1,0 +1,27 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:layout name="Default" />
+
+<f:section name="main">
+
+    <div class="event-list">
+
+        <f:for each="{events}" as="event">
+            <div class="event-list-item">
+                <h3>{event.title}</h3>
+                <f:if condition="{event.subtitle}"><h4>{event.subtitle}</h4></f:if>
+
+                <div class="event-list-item-date">
+                    <f:format.date date="{event.beginDate}" format="d.m.Y" />
+                    <f:if condition="{event.endDate}">
+                        – <f:format.date date="{event.endDate}" format="d.m.Y" />
+                    </f:if>
+                </div>
+                <div class="event-list-item-teaser"><f:format.html>{event.teaser}</f:format.html></div>
+            </div>
+        </f:for>
+
+    </div>
+
+</f:section>

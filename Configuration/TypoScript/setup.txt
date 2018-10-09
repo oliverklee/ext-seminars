@@ -9,3 +9,26 @@
 <INCLUDE_TYPOSCRIPT: source="FILE:./CsvExport.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:./Publication.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:./RegistrationDigestEmail.txt">
+
+########## Configuration for extbase Plugin pi3 ###############
+plugin.tx_seminars_pi3 {
+
+    view {
+        templateRootPaths.0 = EXT:seminars/Resources/Private/Templates/
+        templateRootPaths.1 = {$plugin.tx_seminars_pi3.view.templateRootPath}
+        partialRootPaths.0 = EXT:seminars/Resources/Private/Partials/
+        partialRootPaths.1 = {$plugin.tx_seminars_pi3.view.partialRootPath}
+        layoutRootPaths.0 = EXT:seminars/Resources/Private/Layouts/
+        layoutRootPaths.1 = {$plugin.tx_seminars_pi3.view.layoutRootPath}
+    }
+    persistence {
+        storagePid = {$plugin.tx_seminars_pi3.persistence.storagePid}
+        #recursive = 1
+    }
+    features {
+        #skipDefaultArguments = 1
+    }
+    mvc {
+        #callDefaultActionIfActionCantBeResolved = 1
+    }
+}
