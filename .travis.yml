@@ -2,18 +2,10 @@ sudo: false
 
 language: php
 
-php:
-- 7.0
-- 7.1
-- 7.2
-
 env:
   global:
   - DATABASE_USER=travis DATABASE_HOST=localhost DATABASE_PORT=3306 DATABASE_NAME=typo3 DATABASE_PASSWORD=''
   - TYPO3_PATH_ROOT=$PWD/.Build/public
-  matrix:
-  - TYPO3_VERSION="^7.6" RUN_TESTS_COMMAND=".Build/public/typo3/cli_dispatch.phpsh phpunit"
-  - TYPO3_VERSION="^8.7" RUN_TESTS_COMMAND=".Build/vendor/bin/typo3 phpunit:run"
 
 matrix:
   exclude:
@@ -28,7 +20,7 @@ before_install:
 
 install:
 - >
-  composer require typo3/minimal=$TYPO3_VERSION;
+  composer require typo3/minimal:"$TYPO3";
   composer show;
 - >
   .Build/vendor/bin/typo3cms install:setup --non-interactive --site-setup-type="site"
@@ -56,3 +48,44 @@ script:
   echo;
   echo "Running the functional tests";
   composer ci:tests:functional;
+
+jobs:
+  include:
+  - stage: test
+    php: 7.2
+    env: TYPO3=^8.7 RUN_TESTS_COMMAND=".Build/vendor/bin/typo3 phpunit:run"
+  - stage: test
+    php: 7.1
+    env: TYPO3=^8.7 RUN_TESTS_COMMAND=".Build/vendor/bin/typo3 phpunit:run"
+  - stage: test
+    php: 7.0
+    env: TYPO3=^8.7 RUN_TESTS_COMMAND=".Build/vendor/bin/typo3 phpunit:run"
+  - stage: test
+    php: 7.2
+    env: TYPO3=^7.6 RUN_TESTS_COMMAND=".Build/public/typo3/cli_dispatch.phpsh phpunit"
+  - stage: test
+    php: 7.1
+    env: TYPO3=^7.6 RUN_TESTS_COMMAND=".Build/public/typo3/cli_dispatch.phpsh phpunit"
+  - stage: test
+    php: 7.0
+    env: TYPO3=^7.6 RUN_TESTS_COMMAND=".Build/public/typo3/cli_dispatch.phpsh phpunit"
+  - stage: release to ter
+    if: tag IS present AND env(TYPO3_ORG_USERNAME) IS present AND env(TYPO3_ORG_PASSWORD) IS present
+    php: 7.0
+    before_install: skip
+    install: skip
+    before_script: skip
+    script:
+    - >
+      echo;
+      echo "Preparing upload of release ${TRAVIS_TAG} to TER";
+      echo;
+      echo;
+      composer global require helhum/ter-client;
+    - >
+      TAG_MESSAGE=`git tag -n10 -l $TRAVIS_TAG | sed 's/^[0-9.]*[ ]*//g'`;
+      echo;
+      echo "Uploading release ${TRAVIS_TAG} to TER";
+      echo;
+      echo;
+      $HOME/.composer/vendor/bin/ter-client upload seminars . -u "$TYPO3_ORG_USERNAME" -p "$TYPO3_ORG_PASSWORD" -m "$TAG_MESSAGE";
