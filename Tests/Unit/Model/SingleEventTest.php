@@ -519,8 +519,8 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends \Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function getRegularEarlyBirdPriceForSingleEventWithPositiveRegularEarlyBirdPriceReturnsRegularEarlyBirdPrice()
-    {
+    public function getRegularEarlyBirdPriceForSingleEventWithPositiveRegularEarlyBirdPriceReturnsRegularEarlyBirdPrice(
+    ) {
         $this->fixture->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
@@ -856,8 +856,8 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends \Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function getSpecialEarlyBirdPriceForSingleEventWithPositiveSpecialEarlyBirdPriceReturnsSpecialEarlyBirdPrice()
-    {
+    public function getSpecialEarlyBirdPriceForSingleEventWithPositiveSpecialEarlyBirdPriceReturnsSpecialEarlyBirdPrice(
+    ) {
         $this->fixture->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,

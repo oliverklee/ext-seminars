@@ -361,7 +361,10 @@ abstract class Tx_Seminars_OldModel_Abstract extends \Tx_Oelib_TemplateHelper im
             throw new \InvalidArgumentException('$mmTable must not be empty.', 1333292359);
         }
         if (!$this->hasUid()) {
-            throw new \BadMethodCallException('createMmRecords may only be called on objects that have a UID.', 1333292371);
+            throw new \BadMethodCallException(
+                'createMmRecords may only be called on objects that have a UID.',
+                1333292371
+            );
         }
         if (empty($references)) {
             return 0;

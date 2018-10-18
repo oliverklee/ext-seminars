@@ -153,13 +153,14 @@ class Tx_Seminars_OldModel_Registration extends \Tx_Seminars_OldModel_Abstract
         // Auto-select the only payment method if no payment method has been
         // selected, there actually is anything to pay and only one payment
         // method is provided.
-        if (!$methodOfPayment && ($this->recordData['total_price'] > 0.00) && ($event->getNumberOfPaymentMethods() == 1)) {
+        if (!$methodOfPayment && ($this->recordData['total_price'] > 0.00) && ($event->getNumberOfPaymentMethods(
+                ) == 1)) {
             $rows = \Tx_Oelib_Db::selectMultiple(
                 'uid',
                 'tx_seminars_payment_methods, tx_seminars_seminars_payment_methods_mm',
                 'tx_seminars_payment_methods.uid = tx_seminars_seminars_payment_methods_mm.uid_foreign ' .
-                    'AND tx_seminars_seminars_payment_methods_mm.uid_local = ' . $event->getTopicUid() .
-                    \Tx_Oelib_Db::enableFields('tx_seminars_payment_methods'),
+                'AND tx_seminars_seminars_payment_methods_mm.uid_local = ' . $event->getTopicUid() .
+                \Tx_Oelib_Db::enableFields('tx_seminars_payment_methods'),
                 '',
                 'tx_seminars_seminars_payment_methods_mm.sorting'
             );
@@ -317,7 +318,10 @@ class Tx_Seminars_OldModel_Registration extends \Tx_Seminars_OldModel_Abstract
         }
         $userData = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
         if ($userData === false) {
-            throw new \Tx_Oelib_Exception_NotFound('The FE user with the UID ' . $uid . ' could not be retrieved.', 1390065114);
+            throw new \Tx_Oelib_Exception_NotFound(
+                'The FE user with the UID ' . $uid . ' could not be retrieved.',
+                1390065114
+            );
         }
 
         $this->setUserData($userData);
@@ -384,10 +388,14 @@ class Tx_Seminars_OldModel_Registration extends \Tx_Seminars_OldModel_Abstract
                     ? $this->translate('label_yes') : $this->translate('label_no');
                 break;
             case 'datepaid':
-                $result = strftime($this->getConfValueString('dateFormatYMD'), $this->getRecordPropertyInteger($trimmedKey));
+                $result = strftime(
+                    $this->getConfValueString('dateFormatYMD'),
+                    $this->getRecordPropertyInteger($trimmedKey)
+                );
                 break;
             case 'method_of_payment':
-                $result = $this->getSeminarObject()->getSinglePaymentMethodShort($this->getRecordPropertyInteger($trimmedKey));
+                $result = $this->getSeminarObject(
+                )->getSinglePaymentMethodShort($this->getRecordPropertyInteger($trimmedKey));
                 break;
             case 'gender':
                 $result = $this->getGender();
@@ -1113,10 +1121,17 @@ class Tx_Seminars_OldModel_Registration extends \Tx_Seminars_OldModel_Abstract
     protected function fillEmptyDefaultFields()
     {
         $integerDefaultFieldKeys = [
-            'kids', 'method_of_payment', 'gender',
+            'kids',
+            'method_of_payment',
+            'gender',
         ];
         $stringDefaultFieldKeys = [
-            'name', 'zip', 'city', 'country', 'telephone', 'email',
+            'name',
+            'zip',
+            'city',
+            'country',
+            'telephone',
+            'email',
         ];
 
         foreach ($integerDefaultFieldKeys as $key) {

@@ -129,8 +129,8 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
         }
 
         $options = [
-            0 => $this->translate('label_selector_pleaseChoose'),
-        ] + $options;
+                0 => $this->translate('label_selector_pleaseChoose'),
+            ] + $options;
     }
 
     /**
@@ -210,7 +210,10 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
     private function collectPlaces()
     {
         if ($this->seminarBag->isEmpty()) {
-            throw new \BadMethodCallException('The seminar bag must not be empty when calling this function.', 1333293276);
+            throw new \BadMethodCallException(
+                'The seminar bag must not be empty when calling this function.',
+                1333293276
+            );
         }
         if ($this->places) {
             return;
@@ -220,8 +223,8 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
             'tx_seminars_sites.*',
             'tx_seminars_sites, tx_seminars_seminars_place_mm',
             'tx_seminars_sites.uid = tx_seminars_seminars_place_mm.uid_foreign ' .
-                'AND tx_seminars_seminars_place_mm.uid_local IN (' .
-                $this->seminarBag->getUids() . ')'
+            'AND tx_seminars_seminars_place_mm.uid_local IN (' .
+            $this->seminarBag->getUids() . ')'
         );
 
         /** @var \Tx_Seminars_Mapper_Place $mapper */
@@ -343,7 +346,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
             default:
                 throw new \InvalidArgumentException(
                     'The given search field . "' . $searchField . '" was not an allowed value. ' .
-                        'Allowed values are: "event_type", "language", "country", "city", "place" or "organizer".',
+                    'Allowed values are: "event_type", "language", "country", "city", "place" or "organizer".',
                     1333293298
                 );
         }
@@ -623,9 +626,9 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
 
         $currentYear = (int)date('Y');
         $targetYear = $currentYear + $this->getConfValueInteger(
-            'numberOfYearsInDateFilter',
-            's_listView'
-        );
+                'numberOfYearsInDateFilter',
+                's_listView'
+            );
 
         for ($year = $currentYear; $year < $targetYear; $year++) {
             $result['year'][$year] = $year;

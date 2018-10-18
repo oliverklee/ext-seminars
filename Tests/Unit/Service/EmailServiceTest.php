@@ -98,7 +98,11 @@ class EmailServiceTest extends \Tx_Phpunit_TestCase
 
         $this->organizer = new \Tx_Seminars_Model_Organizer();
         $this->organizer->setData(
-            ['title' => 'Brain Gourmets', 'email' => 'organizer@example.com', 'email_footer' => 'Best workshops in town!']
+            [
+                'title' => 'Brain Gourmets',
+                'email' => 'organizer@example.com',
+                'email_footer' => 'Best workshops in town!',
+            ]
         );
         $organizers = new \Tx_Oelib_List();
         $organizers->add($this->organizer);

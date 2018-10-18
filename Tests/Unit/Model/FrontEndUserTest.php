@@ -41,10 +41,10 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
         $userGroup = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class)
             ->getLoadedTestingModel(
                 [
-                'tx_seminars_publish_events'
+                    'tx_seminars_publish_events'
                     => \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
-            ]
-        );
+                ]
+            );
 
         $list = new \Tx_Oelib_List();
         $list->add($userGroup);
@@ -64,10 +64,10 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
         $userGroup = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class)
             ->getLoadedTestingModel(
                 [
-                'tx_seminars_publish_events'
+                    'tx_seminars_publish_events'
                     => \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW,
-            ]
-        );
+                ]
+            );
 
         $list = new \Tx_Oelib_List();
         $list->add($userGroup);
@@ -87,10 +87,10 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
         $userGroup = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class)
             ->getLoadedTestingModel(
                 [
-                'tx_seminars_publish_events'
+                    'tx_seminars_publish_events'
                     => \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED,
-            ]
-        );
+                ]
+            );
 
         $list = new \Tx_Oelib_List();
         $list->add($userGroup);
@@ -122,15 +122,19 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
     public function getPublishSettingsForUserWithTwoGroupsAndGroupPublishSettingZeroAndOneReturnsHideNew()
     {
         $groupMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class);
-        $userGroup = $groupMapper->getLoadedTestingModel([
-            'tx_seminars_publish_events'
+        $userGroup = $groupMapper->getLoadedTestingModel(
+            [
+                'tx_seminars_publish_events'
                 => \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
-        ]);
+            ]
+        );
 
-        $userGroup2 = $groupMapper->getLoadedTestingModel([
-            'tx_seminars_publish_events'
+        $userGroup2 = $groupMapper->getLoadedTestingModel(
+            [
+                'tx_seminars_publish_events'
                 => \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW,
-        ]);
+            ]
+        );
 
         $list = new \Tx_Oelib_List();
         $list->add($userGroup);
@@ -149,15 +153,19 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
     public function getPublishSettingsForUserWithTwoGroupsAndGroupPublishSettingOneAndTwoReturnsHideEdited()
     {
         $groupMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class);
-        $userGroup = $groupMapper->getLoadedTestingModel([
-            'tx_seminars_publish_events'
+        $userGroup = $groupMapper->getLoadedTestingModel(
+            [
+                'tx_seminars_publish_events'
                 => \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW,
-        ]);
+            ]
+        );
 
-        $userGroup2 = $groupMapper->getLoadedTestingModel([
-            'tx_seminars_publish_events'
+        $userGroup2 = $groupMapper->getLoadedTestingModel(
+            [
+                'tx_seminars_publish_events'
                 => \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED,
-        ]);
+            ]
+        );
 
         $list = new \Tx_Oelib_List();
         $list->add($userGroup);
@@ -176,15 +184,19 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
     public function getPublishSettingsForUserWithTwoGroupsAndGroupPublishSettingTwoAndZeroReturnsHideEdited()
     {
         $groupMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class);
-        $userGroup = $groupMapper->getLoadedTestingModel([
-            'tx_seminars_publish_events'
+        $userGroup = $groupMapper->getLoadedTestingModel(
+            [
+                'tx_seminars_publish_events'
                 => \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED,
-        ]);
+            ]
+        );
 
-        $userGroup2 = $groupMapper->getLoadedTestingModel([
-            'tx_seminars_publish_events'
+        $userGroup2 = $groupMapper->getLoadedTestingModel(
+            [
+                'tx_seminars_publish_events'
                 => \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
-        ]);
+            ]
+        );
 
         $list = new \Tx_Oelib_List();
         $list->add($userGroup);
@@ -203,15 +215,19 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
     public function getPublishSettingsForUserWithTwoGroupsAndBothGroupPublishSettingsOneReturnsHideNew()
     {
         $groupMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class);
-        $userGroup = $groupMapper->getLoadedTestingModel([
-            'tx_seminars_publish_events'
+        $userGroup = $groupMapper->getLoadedTestingModel(
+            [
+                'tx_seminars_publish_events'
                 => \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW,
-        ]);
+            ]
+        );
 
-        $userGroup2 = $groupMapper->getLoadedTestingModel([
-            'tx_seminars_publish_events'
+        $userGroup2 = $groupMapper->getLoadedTestingModel(
+            [
+                'tx_seminars_publish_events'
                 => \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW,
-        ]);
+            ]
+        );
 
         $list = new \Tx_Oelib_List();
         $list->add($userGroup);

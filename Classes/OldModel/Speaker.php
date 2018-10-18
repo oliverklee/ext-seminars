@@ -124,7 +124,7 @@ class Tx_Seminars_OldModel_Speaker extends \Tx_Seminars_OldModel_Abstract
             'title',
             'tx_seminars_skills, tx_seminars_speakers_skills_mm',
             'uid_local = ' . $this->getUid() . ' AND uid = uid_foreign' .
-                \Tx_Oelib_Db::enableFields('tx_seminars_skills'),
+            \Tx_Oelib_Db::enableFields('tx_seminars_skills'),
             '',
             'sorting ASC'
         );

@@ -35,7 +35,10 @@ interface RegistrationEmailHookInterface
      *
      * @return void
      */
-    public function postProcessAttendeeEmailText(\Tx_Seminars_OldModel_Registration $registration, \Tx_Oelib_Template $emailTemplate);
+    public function postProcessAttendeeEmailText(
+        \Tx_Seminars_OldModel_Registration $registration,
+        \Tx_Oelib_Template $emailTemplate
+    );
 
     /**
      * @param \Tx_Oelib_Mail $mail

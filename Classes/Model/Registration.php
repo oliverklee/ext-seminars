@@ -513,7 +513,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
         if (!in_array($gender, $allowedGenders, true)) {
             throw new \InvalidArgumentException(
                 'The parameter $gender must be one of the following: \\Tx_Oelib_Model_FrontEndUser::GENDER_MALE, ' .
-                    'Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE, \\Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN',
+                'Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE, \\Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN',
                 1333296957
             );
         }

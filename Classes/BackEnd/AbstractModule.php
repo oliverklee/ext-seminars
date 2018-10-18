@@ -53,7 +53,9 @@ abstract class AbstractModule extends BaseScriptClass
         if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8007000) {
             $this->getLanguageService()->includeLLFile('EXT:lang/Resources/Private/Language/locallang_common.xlf');
             $this->getLanguageService()->includeLLFile('EXT:lang/Resources/Private/Language/locallang_show_rechis.xlf');
-            $this->getLanguageService()->includeLLFile('EXT:lang/Resources/Private/Language/locallang_mod_web_list.xlf');
+            $this->getLanguageService()->includeLLFile(
+                'EXT:lang/Resources/Private/Language/locallang_mod_web_list.xlf'
+            );
         } else {
             $this->getLanguageService()->includeLLFile('EXT:lang/locallang_common.xlf');
             $this->getLanguageService()->includeLLFile('EXT:lang/locallang_show_rechis.xlf');

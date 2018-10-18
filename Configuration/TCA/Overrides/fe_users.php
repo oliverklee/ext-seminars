@@ -29,9 +29,18 @@ defined('TYPO3_MODE') or die('Access denied.');
                 'type' => 'radio',
                 'default' => '0',
                 'items' => [
-                    ['LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:fe_groups.tx_seminars_publish_events.I.0', '0'],
-                    ['LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:fe_groups.tx_seminars_publish_events.I.1', '1'],
-                    ['LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:fe_groups.tx_seminars_publish_events.I.2', '2'],
+                    [
+                        'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:fe_groups.tx_seminars_publish_events.I.0',
+                        '0',
+                    ],
+                    [
+                        'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:fe_groups.tx_seminars_publish_events.I.1',
+                        '1',
+                    ],
+                    [
+                        'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:fe_groups.tx_seminars_publish_events.I.2',
+                        '2',
+                    ],
                 ],
             ],
         ],

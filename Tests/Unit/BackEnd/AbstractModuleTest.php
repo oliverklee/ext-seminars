@@ -1,4 +1,5 @@
 <?php
+
 use OliverKlee\Seminars\Tests\Unit\BackEnd\Fixtures\DummyModule;
 
 /**

@@ -109,8 +109,8 @@ class Tx_Seminars_EmailSalutation
             $timeToLabelWithPlaceholders = $this->translator->translate('email_timeTo');
             $time = $event->getTime(' ' . $timeToLabelWithPlaceholders . ' ');
             $label = ' ' . (!$event->isOpenEnded()
-                ? $this->translator->translate('email_timeFrom')
-                : $this->translator->translate('email_timeAt'));
+                    ? $this->translator->translate('email_timeFrom')
+                    : $this->translator->translate('email_timeAt'));
             $result .= sprintf($label, $time);
         }
 

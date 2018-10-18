@@ -65,7 +65,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends \Tx_Phpunit_Tes
         return \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)
             ->getLoadedTestingModel(
                 ['name' => 'Foo', 'gender' => $gender]
-        );
+            );
     }
 
     /**
@@ -78,7 +78,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends \Tx_Phpunit_Tes
         if (!Tx_Oelib_Model_FrontEndUser::hasGenderField()) {
             self::markTestSkipped(
                 'This test is skipped because it requires FE user to have a gender field, e.g., ' .
-                    'from the sr_feuser_register extension.'
+                'from the sr_feuser_register extension.'
             );
         }
     }
@@ -149,7 +149,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends \Tx_Phpunit_Tes
 
         self::assertContains(
             \Tx_Oelib_TranslatorRegistry::get('seminars')->translate('email_salutation_title_0') .
-                ' ' . $user->getLastOrFullName(),
+            ' ' . $user->getLastOrFullName(),
             $this->subject->getSalutation($user)
         );
     }
@@ -181,7 +181,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends \Tx_Phpunit_Tes
 
         self::assertContains(
             \Tx_Oelib_TranslatorRegistry::get('seminars')->translate('email_salutation_title_1') .
-                ' ' . $user->getLastOrFullName(),
+            ' ' . $user->getLastOrFullName(),
             $this->subject->getSalutation($user)
         );
     }
@@ -214,7 +214,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends \Tx_Phpunit_Tes
         self::assertContains(
             \Tx_Oelib_TranslatorRegistry::get('seminars')
                 ->translate('email_salutation_title_99') . ' ' .
-                $user->getLastOrFullName(),
+            $user->getLastOrFullName(),
             $this->subject->getSalutation($user)
         );
     }
@@ -230,7 +230,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends \Tx_Phpunit_Tes
 
         self::assertContains(
             \Tx_Oelib_TranslatorRegistry::get('seminars')
-                    ->translate('email_hello_informal'),
+                ->translate('email_hello_informal'),
             $this->subject->getSalutation($user)
         );
     }
@@ -418,9 +418,12 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends \Tx_Phpunit_Tes
             ['begin_date' => $GLOBALS['SIM_EXEC_TIME']]
         );
 
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($eventUid, [
-            'dateFormatYMD' => $dateFormatYMD,
-        ]);
+        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+            $eventUid,
+            [
+                'dateFormatYMD' => $dateFormatYMD,
+            ]
+        );
 
         self::assertContains(
             strftime($dateFormatYMD, $GLOBALS['SIM_EXEC_TIME']),
@@ -443,16 +446,19 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends \Tx_Phpunit_Tes
             ]
         );
 
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($eventUid, [
-            'dateFormatYMD' => $dateFormatYMD,
-            'dateFormatD' => $dateFormatD,
-            'abbreviateDateRanges' => 1,
-        ]);
+        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+            $eventUid,
+            [
+                'dateFormatYMD' => $dateFormatYMD,
+                'dateFormatD' => $dateFormatD,
+                'abbreviateDateRanges' => 1,
+            ]
+        );
 
         self::assertContains(
             strftime($dateFormatD, $GLOBALS['SIM_EXEC_TIME']) .
-                '-' .
-                strftime($dateFormatYMD, $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY),
+            '-' .
+            strftime($dateFormatYMD, $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY),
             $this->subject->createIntroduction('%s', $event)
         );
     }
@@ -470,9 +476,12 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends \Tx_Phpunit_Tes
             ]
         );
 
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($eventUid, [
-            'timeFormat' => $timeFormat,
-        ]);
+        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+            $eventUid,
+            [
+                'timeFormat' => $timeFormat,
+            ]
+        );
 
         self::assertContains(
             strftime($timeFormat, $GLOBALS['SIM_EXEC_TIME']),
@@ -522,7 +531,10 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends \Tx_Phpunit_Tes
             ]
         );
 
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($eventUid, ['dateFormatYMD' => $dateFormat]);
+        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+            $eventUid,
+            ['dateFormatYMD' => $dateFormat]
+        );
         $formattedDate = strftime($dateFormat, $GLOBALS['SIM_EXEC_TIME']);
 
         self::assertContains(

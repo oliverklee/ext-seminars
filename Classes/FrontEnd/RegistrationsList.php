@@ -260,7 +260,7 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_Abstr
                 $cellContents[] = $registration->getUserData($field);
             }
             foreach ($this->getRegistrationFields() as $field) {
-                $cellContents[] =  $registration->getRegistrationData($field);
+                $cellContents[] = $registration->getRegistrationData($field);
             }
 
             $tableCells = '';

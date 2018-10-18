@@ -880,7 +880,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
         $this->setExpectedException(
             \InvalidArgumentException::class,
             'The parameter $gender must be one of the following: \\Tx_Oelib_Model_FrontEndUser::GENDER_MALE, ' .
-                'Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE, \\Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN'
+            'Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE, \\Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN'
         );
 
         $this->fixture->setGender(-1);

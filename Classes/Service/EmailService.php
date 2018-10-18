@@ -81,8 +81,11 @@ class EmailService implements SingletonInterface
      *
      * @return string
      */
-    protected function buildMessageBody($rawBody, \Tx_Seminars_Model_Event $event, \Tx_Seminars_Model_FrontEndUser $user)
-    {
+    protected function buildMessageBody(
+        $rawBody,
+        \Tx_Seminars_Model_Event $event,
+        \Tx_Seminars_Model_FrontEndUser $user
+    ) {
         $bodyWithFooter = $this->replaceMarkers($rawBody, $event, $user);
         $organizer = $event->getFirstOrganizer();
         if ($organizer->hasEMailFooter()) {
@@ -108,8 +111,11 @@ class EmailService implements SingletonInterface
      *
      * @return string
      */
-    protected function replaceMarkers($textWithMarkers, \Tx_Seminars_Model_Event $event, \Tx_Seminars_Model_FrontEndUser $user)
-    {
+    protected function replaceMarkers(
+        $textWithMarkers,
+        \Tx_Seminars_Model_Event $event,
+        \Tx_Seminars_Model_FrontEndUser $user
+    ) {
         $markers = [
             '%salutation' => $this->salutationBuilder->getSalutation($user),
             '%userName' => $user->getName(),

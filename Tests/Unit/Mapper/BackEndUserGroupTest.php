@@ -11,6 +11,7 @@ class Tx_Seminars_Tests_Unit_Mapper_BackEndUserGroupTest extends \Tx_Phpunit_Tes
      * @var \Tx_Oelib_TestingFramework for creating dummy records
      */
     private $testingFramework;
+
     /**
      * @var \Tx_Seminars_Mapper_BackEndUserGroup the object to test
      */

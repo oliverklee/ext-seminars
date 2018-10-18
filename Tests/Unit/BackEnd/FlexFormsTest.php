@@ -11,6 +11,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_FlexFormsTest extends \Tx_Phpunit_TestCase
      * @var \Tx_Seminars_FlexForms
      */
     private $fixture;
+
     /**
      * @var \Tx_Oelib_TestingFramework
      */

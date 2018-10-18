@@ -169,7 +169,7 @@ abstract class Tx_Seminars_Bag_Abstract implements Iterator, \Tx_Oelib_Interface
             $ctrl = $GLOBALS['TCA'][$currentTableName]['ctrl'];
             if (is_array($ctrl)) {
                 $this->enabledFieldsQuery .= \Tx_Oelib_Db::enableFields(
-                        $currentTableName,
+                    $currentTableName,
                     $showHiddenRecords,
                     $ignoreColumns
                 );

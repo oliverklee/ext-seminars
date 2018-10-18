@@ -82,7 +82,10 @@ class Tx_Seminars_Tests_Unit_Csv_FrontEndRegistrationAccessCheckTest extends \Tx
 
         /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(\Tx_Seminars_OldModel_Event::class, [], [], '', false);
-        $event->expects(self::any())->method('isUserVip')->with($userUid, $this->vipsGroupUid)->will(self::returnValue(false));
+        $event->expects(self::any())->method('isUserVip')->with(
+            $userUid,
+            $this->vipsGroupUid
+        )->will(self::returnValue(false));
         $this->subject->setEvent($event);
 
         self::assertFalse(
@@ -105,7 +108,10 @@ class Tx_Seminars_Tests_Unit_Csv_FrontEndRegistrationAccessCheckTest extends \Tx
 
         /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(\Tx_Seminars_OldModel_Event::class, [], [], '', false);
-        $event->expects(self::any())->method('isUserVip')->with($userUid, $this->vipsGroupUid)->will(self::returnValue(true));
+        $event->expects(self::any())->method('isUserVip')->with(
+            $userUid,
+            $this->vipsGroupUid
+        )->will(self::returnValue(true));
         $this->subject->setEvent($event);
 
         self::assertFalse(
@@ -128,7 +134,10 @@ class Tx_Seminars_Tests_Unit_Csv_FrontEndRegistrationAccessCheckTest extends \Tx
 
         /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(\Tx_Seminars_OldModel_Event::class, [], [], '', false);
-        $event->expects(self::any())->method('isUserVip')->with($userUid, $this->vipsGroupUid)->will(self::returnValue(false));
+        $event->expects(self::any())->method('isUserVip')->with(
+            $userUid,
+            $this->vipsGroupUid
+        )->will(self::returnValue(false));
         $this->subject->setEvent($event);
 
         self::assertFalse(
@@ -151,7 +160,10 @@ class Tx_Seminars_Tests_Unit_Csv_FrontEndRegistrationAccessCheckTest extends \Tx
 
         /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(\Tx_Seminars_OldModel_Event::class, [], [], '', false);
-        $event->expects(self::any())->method('isUserVip')->with($userUid, $this->vipsGroupUid)->will(self::returnValue(true));
+        $event->expects(self::any())->method('isUserVip')->with(
+            $userUid,
+            $this->vipsGroupUid
+        )->will(self::returnValue(true));
         $this->subject->setEvent($event);
 
         self::assertTrue(

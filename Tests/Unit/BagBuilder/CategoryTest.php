@@ -11,6 +11,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_CategoryTest extends \Tx_Phpunit_TestCas
      * @var \Tx_Seminars_BagBuilder_Category
      */
     private $fixture;
+
     /**
      * @var \Tx_Oelib_TestingFramework
      */
@@ -363,7 +364,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_CategoryTest extends \Tx_Phpunit_TestCas
         $this->setExpectedException(
             \BadMethodCallException::class,
             'The event UIDs were empty. This means limitToEvents has not been called. LimitToEvents has to be called before ' .
-                'calling this function.'
+            'calling this function.'
         );
 
         $this->fixture->sortByRelationOrder();

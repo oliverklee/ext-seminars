@@ -140,7 +140,10 @@ class Tx_Seminars_Tests_Unit_ViewHelper_TimeRangeTest extends \Tx_Phpunit_TestCa
 
         self::assertSame(
             strftime(self::TIME_FORMAT, self::BEGIN_DATE + \Tx_Oelib_Time::SECONDS_PER_HOUR) . '&#8211;' .
-                strftime(self::TIME_FORMAT, self::BEGIN_DATE + 2 * \Tx_Oelib_Time::SECONDS_PER_HOUR) . $this->translatedHours,
+            strftime(
+                self::TIME_FORMAT,
+                self::BEGIN_DATE + 2 * \Tx_Oelib_Time::SECONDS_PER_HOUR
+            ) . $this->translatedHours,
             $this->subject->render($timeSpan)
         );
     }
@@ -148,8 +151,8 @@ class Tx_Seminars_Tests_Unit_ViewHelper_TimeRangeTest extends \Tx_Phpunit_TestCa
     /**
      * @test
      */
-    public function renderWithTimeSpanWithBeginAndEndDateReturnsTimePortionsOfBeginDateAndEndDateSeparatedBySpecifiedDash()
-    {
+    public function renderWithTimeSpanWithBeginAndEndDateReturnsTimePortionsOfBeginDateAndEndDateSeparatedBySpecifiedDash(
+    ) {
         $dash = '#DASH#';
         /** @var \Tx_Seminars_Model_AbstractTimeSpan $timeSpan */
         $timeSpan = $this->getMockForAbstractClass(\Tx_Seminars_Model_AbstractTimeSpan::class);
@@ -158,7 +161,10 @@ class Tx_Seminars_Tests_Unit_ViewHelper_TimeRangeTest extends \Tx_Phpunit_TestCa
 
         self::assertSame(
             strftime(self::TIME_FORMAT, self::BEGIN_DATE + \Tx_Oelib_Time::SECONDS_PER_HOUR) . $dash .
-                strftime(self::TIME_FORMAT, self::BEGIN_DATE + 2 * \Tx_Oelib_Time::SECONDS_PER_HOUR) . $this->translatedHours,
+            strftime(
+                self::TIME_FORMAT,
+                self::BEGIN_DATE + 2 * \Tx_Oelib_Time::SECONDS_PER_HOUR
+            ) . $this->translatedHours,
             $this->subject->render($timeSpan, $dash)
         );
     }

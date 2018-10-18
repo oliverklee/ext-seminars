@@ -12,6 +12,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends \Tx_Phpunit_
      * @var \Tx_Seminars_FrontEnd_RegistrationsList
      */
     private $fixture;
+
     /**
      * @var \Tx_Oelib_TestingFramework
      */
@@ -610,7 +611,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends \Tx_Phpunit_
 
         self::assertRegExp(
             '/' . $this->registrationUid . '<\\/td>.*<\\/tr>' .
-                '.*<tr>.*<td>' . $secondRegistration . '/s',
+            '.*<tr>.*<td>' . $secondRegistration . '/s',
             $this->fixture->render()
         );
     }

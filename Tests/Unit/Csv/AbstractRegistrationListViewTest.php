@@ -78,21 +78,27 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends \Tx_Ph
         );
 
         $this->subject = $this->getMockForAbstractClass(\Tx_Seminars_Csv_AbstractRegistrationListView::class);
-        $this->subject->expects(self::any())->method('shouldAlsoContainRegistrationsOnQueue')->will(self::returnValue(true));
+        $this->subject->expects(self::any())->method(
+            'shouldAlsoContainRegistrationsOnQueue'
+        )->will(self::returnValue(true));
 
         $testCase = $this;
         $this->subject->expects(self::any())->method('getFrontEndUserFieldKeys')
-            ->will(self::returnCallback(
-                function () use ($testCase) {
-                    return $testCase->frontEndUserFieldKeys;
-                }
-            ));
+            ->will(
+                self::returnCallback(
+                    function () use ($testCase) {
+                        return $testCase->frontEndUserFieldKeys;
+                    }
+                )
+            );
         $this->subject->expects(self::any())->method('getRegistrationFieldKeys')
-            ->will(self::returnCallback(
-                function () use ($testCase) {
-                    return $testCase->registrationFieldKeys;
-                }
-            ));
+            ->will(
+                self::returnCallback(
+                    function () use ($testCase) {
+                        return $testCase->registrationFieldKeys;
+                    }
+                )
+            );
 
         $this->subject->setEventUid($this->eventUid);
     }
@@ -545,7 +551,7 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends \Tx_Ph
 
         self::assertContains(
             $this->localizeAndRemoveColon('tx_seminars_attendances.address') .
-                ';' . $this->localizeAndRemoveColon('tx_seminars_attendances.title'),
+            ';' . $this->localizeAndRemoveColon('tx_seminars_attendances.title'),
             $this->subject->render()
         );
     }
@@ -585,7 +591,9 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends \Tx_Ph
         $this->frontEndUserFieldKeys = ['name'];
 
         self::assertContains(
-            $this->localizeAndRemoveColon('LGL.name') . ';' . $this->localizeAndRemoveColon('tx_seminars_attendances.address'),
+            $this->localizeAndRemoveColon(
+                'LGL.name'
+            ) . ';' . $this->localizeAndRemoveColon('tx_seminars_attendances.address'),
             $this->subject->render()
         );
     }

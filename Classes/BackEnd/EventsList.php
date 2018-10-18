@@ -189,7 +189,7 @@ class EventsList extends AbstractList
             $this->template->setMarker(
                 'show_registrations',
                 (
-                    (!$event->isHidden()
+                (!$event->isHidden()
                     && $event->needsRegistration()
                     && $event->hasAttendances())
                     ? $this->createEventRegistrationsLink($event) : ''
@@ -211,11 +211,14 @@ class EventsList extends AbstractList
             if ($event->needsRegistration()) {
                 $this->template->setMarker(
                     'has_enough_attendees',
-                    $event->hasEnoughAttendances() ? $this->getLanguageService()->getLL('yes') : $this->getLanguageService()->getLL('no')
+                    $event->hasEnoughAttendances() ? $this->getLanguageService()->getLL(
+                        'yes'
+                    ) : $this->getLanguageService()->getLL('no')
                 );
                 $this->template->setMarker(
                     'is_fully_booked',
-                    $event->isFull() ? $this->getLanguageService()->getLL('yes') : $this->getLanguageService()->getLL('no')
+                    $event->isFull() ? $this->getLanguageService()->getLL('yes') : $this->getLanguageService(
+                    )->getLL('no')
                 );
             } else {
                 $this->template->setMarker('has_enough_attendees', '');
@@ -283,7 +286,8 @@ class EventsList extends AbstractList
 
         $pageData = $this->page->getPageData();
         if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8007000) {
-            $langCsv = $this->getLanguageService()->sL('LLL:EXT:lang/Resources/Private/Language/locallang_core.xlf:labels.csv');
+            $langCsv = $this->getLanguageService(
+            )->sL('LLL:EXT:lang/Resources/Private/Language/locallang_core.xlf:labels.csv');
         } else {
             $langCsv = $this->getLanguageService()->sL('LLL:EXT:lang/locallang_core.xlf:labels.csv');
         }

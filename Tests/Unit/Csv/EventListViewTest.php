@@ -145,7 +145,7 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends \Tx_Phpunit_TestCase
 
         self::assertSame(
             $this->localizeAndRemoveColon('tx_seminars_seminars.uid') . ';' .
-                $this->localizeAndRemoveColon('tx_seminars_seminars.title') . CRLF,
+            $this->localizeAndRemoveColon('tx_seminars_seminars.title') . CRLF,
             $this->subject->render()
         );
     }
@@ -163,8 +163,8 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends \Tx_Phpunit_TestCase
 
         self::assertSame(
             'sep=;' . CRLF .
-                $this->localizeAndRemoveColon('tx_seminars_seminars.uid') . ';' .
-                $this->localizeAndRemoveColon('tx_seminars_seminars.title') . CRLF,
+            $this->localizeAndRemoveColon('tx_seminars_seminars.uid') . ';' .
+            $this->localizeAndRemoveColon('tx_seminars_seminars.title') . CRLF,
             $this->subject->render()
         );
     }
@@ -193,7 +193,10 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends \Tx_Phpunit_TestCase
         $this->subject->setPageUid($pageUid);
 
         $subFolderPid = $this->testingFramework->createSystemFolder($pageUid);
-        $this->testingFramework->createRecord('tx_seminars_seminars', ['pid' => $subFolderPid, 'title' => 'another event']);
+        $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            ['pid' => $subFolderPid, 'title' => 'another event']
+        );
 
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
 
@@ -242,7 +245,9 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends \Tx_Phpunit_TestCase
         );
 
         self::assertContains(
-            $this->localizeAndRemoveColon('tx_seminars_seminars.uid') . CRLF . $firstEventUid . CRLF . $secondEventUid . CRLF,
+            $this->localizeAndRemoveColon(
+                'tx_seminars_seminars.uid'
+            ) . CRLF . $firstEventUid . CRLF . $secondEventUid . CRLF,
             $this->subject->render()
         );
     }

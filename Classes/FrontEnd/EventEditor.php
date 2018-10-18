@@ -100,9 +100,10 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     private function declareDataHandler()
     {
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['ameos_formidable']
-            ['declaredobjects']['datahandlers']['DBMM'] = [
-                'key' => 'dh_dbmm', 'base' => true,
-            ];
+        ['declaredobjects']['datahandlers']['DBMM'] = [
+            'key' => 'dh_dbmm',
+            'base' => true,
+        ];
     }
 
     /**
@@ -154,7 +155,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     private function getHtmlWithAttachedFilesList(\Tx_Oelib_Template $template)
     {
         foreach ([
-            'label_delete', 'label_really_delete', 'label_save',
+            'label_delete',
+            'label_really_delete',
+            'label_save',
             'label_save_and_back',
         ] as $label) {
             $template->setMarker($label, $this->translate($label));
@@ -337,8 +340,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $frontEndUser = self::getLoggedInUser();
 
         $showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(
-            ['relatedRecordType' => 'Places']
-        ) && $form !== null;
+                ['relatedRecordType' => 'Places']
+            ) && $form !== null;
 
         /** @var \Tx_Seminars_Model_Place $place */
         foreach ($places as $place) {
@@ -409,8 +412,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $frontEndUser = self::getLoggedInUser();
 
         $showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(
-            ['relatedRecordType' => 'Speakers']
-        ) && $form !== null;
+                ['relatedRecordType' => 'Speakers']
+            ) && $form !== null;
 
         $type = $parameters['type'];
         if (empty($parameters['lister'])) {
@@ -444,7 +447,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
             if ($showEditButton && $frontEndUserIsOwner) {
                 $editButtonConfiguration['name'] = 'edit' . $type . 'Button_' . $speaker->getUid();
                 $editButtonConfiguration['onclick']['userobj']['php'] = '
-                    return \\Tx_Seminars_FrontEnd_EventEditor::showEditSpeakerModalBox($this, ' . $speaker->getUid() . ');';
+                    return \\Tx_Seminars_FrontEnd_EventEditor::showEditSpeakerModalBox($this, ' . $speaker->getUid(
+                    ) . ');';
                 $editButton = $form->_makeRenderlet($editButtonConfiguration, $renderlet->sXPath);
                 $editButton->includeScripts();
                 $editButtonHTML = $editButton->_render();
@@ -502,8 +506,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $frontEndUser = self::getLoggedInUser();
 
         $showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(
-            ['relatedRecordType' => 'Checkboxes']
-        ) && $form !== null;
+                ['relatedRecordType' => 'Checkboxes']
+            ) && $form !== null;
 
         /** @var \Tx_Seminars_Model_Checkbox $checkbox */
         foreach ($checkboxes as $checkbox) {
@@ -576,8 +580,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $frontEndUser = self::getLoggedInUser();
 
         $showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(
-            ['relatedRecordType' => 'TargetGroups']
-        ) && $form !== null;
+                ['relatedRecordType' => 'TargetGroups']
+            ) && $form !== null;
 
         /** @var \Tx_Seminars_Model_TargetGroup $targetGroup */
         foreach ($targetGroups as $targetGroup) {
@@ -593,7 +597,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
                 $editButtonConfiguration['name'] = 'editTargetGroupButton_' .
                     $targetGroup->getUid();
                 $editButtonConfiguration['onclick']['userobj']['php'] = '
-                    return \\Tx_Seminars_FrontEnd_EventEditor::showEditTargetGroupModalBox($this, ' . $targetGroup->getUid() . ');
+                    return \\Tx_Seminars_FrontEnd_EventEditor::showEditTargetGroupModalBox($this, ' . $targetGroup->getUid(
+                    ) . ');
                 ';
                 $editButton = $form->_makeRenderlet($editButtonConfiguration, $renderlet->sXPath);
                 $editButton->includeScripts();
@@ -643,10 +648,12 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         }
 
         return GeneralUtility::locationHeaderUrl(
-            $this->cObj->typoLink_URL([
-                'parameter' => $pageId,
-                'additionalParams' => $additionalParameters,
-            ])
+            $this->cObj->typoLink_URL(
+                [
+                    'parameter' => $pageId,
+                    'additionalParams' => $additionalParameters,
+                ]
+            )
         );
     }
 
@@ -667,14 +674,23 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         }
 
         $objectUid = $this->getObjectUid();
-        if (($objectUid > 0) && !Tx_Seminars_OldModel_Abstract::recordExists($objectUid, 'tx_seminars_seminars', true)) {
+        if (($objectUid > 0) && !Tx_Seminars_OldModel_Abstract::recordExists(
+                $objectUid,
+                'tx_seminars_seminars',
+                true
+            )) {
             return 'message_wrongSeminarNumber';
         }
 
         $user = self::getLoggedInUser();
         if ($objectUid > 0) {
             /** @var \Tx_Seminars_OldModel_Event $event */
-            $event = GeneralUtility::makeInstance(\Tx_Seminars_OldModel_Event::class, $this->getObjectUid(), false, true);
+            $event = GeneralUtility::makeInstance(
+                \Tx_Seminars_OldModel_Event::class,
+                $this->getObjectUid(),
+                false,
+                true
+            );
             $isUserVip = $event->isUserVip($user->getUid(), $this->getConfValueInteger('defaultEventVipsFeGroupID'));
             $isUserOwner = $event->isOwnerFeUser();
             $mayManagersEditTheirEvents = $this->getConfValueBoolean('mayManagersEditTheirEvents', 's_listView');
@@ -723,8 +739,12 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     private function unifyDecimalSeparators(array &$formData)
     {
         $priceFields = [
-            'price_regular', 'price_regular_early', 'price_regular_board',
-            'price_special', 'price_special_early', 'price_special_board',
+            'price_regular',
+            'price_regular_early',
+            'price_regular_board',
+            'price_special',
+            'price_special_early',
+            'price_special_board',
         ];
 
         foreach ($priceFields as $key) {
@@ -779,31 +799,72 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $fieldsToUnset = [
             '' => ['proceed_file_upload', 'delete_attached_files'],
             'newPlace_' => [
-                'title', 'address', 'zip', 'city', 'country', 'homepage',
-                'directions', 'notes',
+                'title',
+                'address',
+                'zip',
+                'city',
+                'country',
+                'homepage',
+                'directions',
+                'notes',
             ],
             'editPlace_' => [
-                'title', 'address', 'zip', 'city', 'country', 'homepage',
-                'directions', 'notes', 'uid',
+                'title',
+                'address',
+                'zip',
+                'city',
+                'country',
+                'homepage',
+                'directions',
+                'notes',
+                'uid',
             ],
             'newSpeaker_' => [
-                'title', 'gender', 'organization', 'homepage',
-                'description', 'skills', 'notes', 'address', 'phone_work',
-                'phone_home', 'phone_mobile', 'fax', 'email', 'cancelation_period',
+                'title',
+                'gender',
+                'organization',
+                'homepage',
+                'description',
+                'skills',
+                'notes',
+                'address',
+                'phone_work',
+                'phone_home',
+                'phone_mobile',
+                'fax',
+                'email',
+                'cancelation_period',
             ],
             'editSpeaker_' => [
-                'title', 'gender', 'organization', 'homepage',
-                'description', 'skills', 'notes', 'address', 'phone_work',
-                'phone_home', 'phone_mobile', 'fax', 'email', 'cancelation_period',
+                'title',
+                'gender',
+                'organization',
+                'homepage',
+                'description',
+                'skills',
+                'notes',
+                'address',
+                'phone_work',
+                'phone_home',
+                'phone_mobile',
+                'fax',
+                'email',
+                'cancelation_period',
                 'uid',
             ],
             'newCheckbox_' => ['title'],
             'editCheckbox_' => ['title', 'uid'],
             'newTargetGroup_' => [
-                'title', 'uid', 'minimum_age', 'maximum_age',
+                'title',
+                'uid',
+                'minimum_age',
+                'maximum_age',
             ],
             'editTargetGroup_' => [
-                'title', 'uid', 'minimum_age', 'maximum_age',
+                'title',
+                'uid',
+                'minimum_age',
+                'maximum_age',
             ],
         ];
 
@@ -852,7 +913,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     private function checkPublishSettings(array &$formData)
     {
         $user = self::getLoggedInUser();
-        $publishSetting    = $user->getPublishSetting();
+        $publishSetting = $user->getPublishSetting();
         $eventUid = $this->getObjectUid();
         $isNew = ($eventUid === 0);
 
@@ -1024,7 +1085,10 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     private function getHiddenSubparts()
     {
         /** @var \Tx_Oelib_Visibility_Tree $visibilityTree */
-        $visibilityTree = GeneralUtility::makeInstance(\Tx_Oelib_Visibility_Tree::class, $this->createTemplateStructure());
+        $visibilityTree = GeneralUtility::makeInstance(
+            \Tx_Oelib_Visibility_Tree::class,
+            $this->createTemplateStructure()
+        );
 
         $visibilityTree->makeNodesVisible($this->getFieldsToShow());
         return $visibilityTree->getKeysOfHiddenSubparts();
@@ -1152,7 +1216,10 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $relatedRecordType = $parameters['relatedRecordType'];
 
         $frontEndUser = self::getLoggedInUser();
-        $isFrontEndEditingAllowed = $this->getConfValueBoolean('allowFrontEndEditingOf' . $relatedRecordType, 's_fe_editing');
+        $isFrontEndEditingAllowed = $this->getConfValueBoolean(
+            'allowFrontEndEditingOf' . $relatedRecordType,
+            's_fe_editing'
+        );
 
         $auxiliaryPidFromSetup = $this->getConfValueBoolean('createAuxiliaryRecordsPID');
         $isAnAuxiliaryPidSet = ($frontEndUser->getAuxiliaryRecordsPid() > 0) || ($auxiliaryPidFromSetup > 0);
@@ -1419,17 +1486,19 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      */
     private function createReviewUrl()
     {
-        $url = $this->cObj->typoLink_URL([
-            'parameter' => $GLOBALS['TSFE']->id . ',' . \Tx_Seminars_FrontEnd_PublishEvent::PUBLICATION_TYPE_NUMBER,
-            'additionalParams' => GeneralUtility::implodeArrayForUrl(
-                'tx_seminars_publication',
-                ['hash' => $this->publicationHash],
-                '',
-                false,
-                true
-            ),
-            'type' => \Tx_Seminars_FrontEnd_PublishEvent::PUBLICATION_TYPE_NUMBER,
-        ]);
+        $url = $this->cObj->typoLink_URL(
+            [
+                'parameter' => $GLOBALS['TSFE']->id . ',' . \Tx_Seminars_FrontEnd_PublishEvent::PUBLICATION_TYPE_NUMBER,
+                'additionalParams' => GeneralUtility::implodeArrayForUrl(
+                    'tx_seminars_publication',
+                    ['hash' => $this->publicationHash],
+                    '',
+                    false,
+                    true
+                ),
+                'type' => \Tx_Seminars_FrontEnd_PublishEvent::PUBLICATION_TYPE_NUMBER,
+            ]
+        );
 
         return GeneralUtility::locationHeaderUrl(preg_replace(['/\\[/', '/\\]/'], ['%5B', '%5D'], $url));
     }
@@ -1553,7 +1622,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
             $modalBox->majixCloseBox(),
             $form->majixExecJs(
                 'TYPO3.seminars.appendPlaceInEditor(' . $place->getUid() . ', "' .
-                    addcslashes($place->getTitle(), '"\\') . '", {
+                addcslashes($place->getTitle(), '"\\') . '", {
                         "name": "' . addcslashes($editButtonHTML['name'], '"\\') . '",
                         "id": "' . addcslashes($editButtonHTML['id'], '"\\') . '",
                         "value": "' . addcslashes($editButtonHTML['value'], '"\\') . '"
@@ -1624,7 +1693,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
             $modalBox->majixCloseBox(),
             $form->majixExecJs(
                 'TYPO3.seminars.updateAuxiliaryRecordInEditor("' . $htmlId . '", "' .
-                    addcslashes($place->getTitle(), '"\\') . '")'
+                addcslashes($place->getTitle(), '"\\') . '")'
             ),
         ];
     }
@@ -1646,7 +1715,12 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $validationErrors = [];
 
         $keys = [
-            'title', 'address', 'zip', 'city', 'homepage', 'directions',
+            'title',
+            'address',
+            'zip',
+            'city',
+            'homepage',
+            'directions',
         ];
         foreach ($keys as $key) {
             if ((trim($formData[$key]) == '') && self::isPlaceFieldRequired($key)
@@ -1806,7 +1880,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $owner = self::getLoggedInUser();
         $ownerPageUid = $owner->getAuxiliaryRecordsPid();
 
-        $pageUid = ($ownerPageUid > 0) ? $ownerPageUid : self::getSeminarsConfiguration()->getAsInteger('createAuxiliaryRecordsPID');
+        $pageUid = ($ownerPageUid > 0) ? $ownerPageUid : self::getSeminarsConfiguration(
+        )->getAsInteger('createAuxiliaryRecordsPID');
 
         return [
             'owner' => $owner,
@@ -1844,10 +1919,12 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
 
         self::createBasicAuxiliaryData();
 
-        $speaker->setData(array_merge(
-            self::createBasicAuxiliaryData(),
-            ['skills' => new \Tx_Oelib_List()]
-        ));
+        $speaker->setData(
+            array_merge(
+                self::createBasicAuxiliaryData(),
+                ['skills' => new \Tx_Oelib_List()]
+            )
+        );
         self::setSpeakerData($speaker, 'newSpeaker_', $formData);
         $speaker->markAsDirty();
         /** @var \Tx_Seminars_Mapper_Speaker $mapper */
@@ -2164,7 +2241,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
             $modalBox->majixCloseBox(),
             $form->majixExecJs(
                 'TYPO3.seminars.appendCheckboxInEditor(' . $checkbox->getUid() . ', "' .
-                    addcslashes($checkbox->getTitle(), '"\\') . '", {
+                addcslashes($checkbox->getTitle(), '"\\') . '", {
                         "name": "' . addcslashes($editButtonHTML['name'], '"\\') . '",
                         "id": "' . addcslashes($editButtonHTML['id'], '"\\') . '",
                         "value": "' . addcslashes($editButtonHTML['value'], '"\\') . '"
@@ -2228,7 +2305,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
             $modalBox->majixCloseBox(),
             $form->majixExecJs(
                 'TYPO3.seminars.updateAuxiliaryRecordInEditor("' . $htmlId . '", "' .
-                    addcslashes($checkbox->getTitle(), '"\\') . '")'
+                addcslashes($checkbox->getTitle(), '"\\') . '")'
             ),
         ];
     }
@@ -2387,7 +2464,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
             $modalBox->majixCloseBox(),
             $form->majixExecJs(
                 'TYPO3.seminars.appendTargetGroupInEditor(' . $targetGroup->getUid() . ', "' .
-                    addcslashes($targetGroup->getTitle(), '"\\') . '", {
+                addcslashes($targetGroup->getTitle(), '"\\') . '", {
                         "name": "' . addcslashes($editButtonHTML['name'], '"\\') . '",
                         "id": "' . addcslashes($editButtonHTML['id'], '"\\') . '",
                         "value": "' . addcslashes($editButtonHTML['value'], '"\\') . '"
@@ -2455,7 +2532,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
             $modalBox->majixCloseBox(),
             $form->majixExecJs(
                 'TYPO3.seminars.updateAuxiliaryRecordInEditor("' . $htmlId . '", "' .
-                    addcslashes($targetGroup->getTitle(), '"\\') . '")'
+                addcslashes($targetGroup->getTitle(), '"\\') . '")'
             ),
         ];
     }
@@ -2489,7 +2566,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
             if (($minimumAge > 0) && ($maximumAge > 0) && ($minimumAge > $maximumAge)) {
                 $validationErrors[] = $form->getConfigXML()->getLLLabel(
                     'LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:' .
-                        'message_targetGroupMaximumAgeSmallerThanMinimumAge'
+                    'message_targetGroupMaximumAgeSmallerThanMinimumAge'
                 );
             }
         } else {

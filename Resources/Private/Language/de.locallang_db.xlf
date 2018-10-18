@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2016-07-18T21:20:33Z" product-name="seminars">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2016-07-18T21:20:33Z"
+          product-name="seminars">
         <header/>
         <body>
             <trans-unit id="moduleFunction.tx_seminars_modfunc1" xml:space="preserve" approved="yes">

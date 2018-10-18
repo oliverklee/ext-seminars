@@ -68,7 +68,10 @@ class Tx_Seminars_FrontEnd_RequirementsList extends \Tx_Seminars_FrontEnd_Abstra
     public function render()
     {
         if (!$this->event) {
-            throw new \BadMethodCallException('No event was set, please set an event before calling render.', 1333293250);
+            throw new \BadMethodCallException(
+                'No event was set, please set an event before calling render.',
+                1333293250
+            );
         }
 
         if ($this->linkBuilder == null) {

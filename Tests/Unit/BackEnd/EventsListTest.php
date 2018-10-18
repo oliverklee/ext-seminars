@@ -21,6 +21,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends \Tx_Phpunit_TestCase
      * @var EventsList
      */
     protected $fixture = null;
+
     /**
      * @var \Tx_Oelib_TestingFramework
      */
@@ -46,10 +47,12 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends \Tx_Phpunit_TestCase
 
         $this->backEndModule = new DummyModule();
         $this->backEndModule->id = $this->dummySysFolderPid;
-        $this->backEndModule->setPageData([
-            'uid' => $this->dummySysFolderPid,
-            'doktype' => AbstractList::SYSFOLDER_TYPE,
-        ]);
+        $this->backEndModule->setPageData(
+            [
+                'uid' => $this->dummySysFolderPid,
+                'doktype' => AbstractList::SYSFOLDER_TYPE,
+            ]
+        );
 
         $document = new DocumentTemplate();
         $this->backEndModule->doc = $document;
@@ -612,9 +615,9 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends \Tx_Phpunit_TestCase
 
         self::assertNotContains(
             '<a href="mod.php?M=web_txseminarsM2&amp;csv=1&amp;id=' .
-                $this->dummySysFolderPid .
-                '&amp;tx_seminars_pi2[table]=tx_seminars_attendances' .
-                '&amp;tx_seminars_pi2[eventUid]=' . $eventUid . '">',
+            $this->dummySysFolderPid .
+            '&amp;tx_seminars_pi2[table]=tx_seminars_attendances' .
+            '&amp;tx_seminars_pi2[eventUid]=' . $eventUid . '">',
             $this->fixture->show()
         );
     }

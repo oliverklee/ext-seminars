@@ -100,7 +100,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends \Tx_Phpunit_TestCas
     public function getFrontEndUserWithFrontEndUserReturnsSameFrontEndUser()
     {
         $frontEndUser = \Tx_Oelib_MapperRegistry::
-            get(\Tx_Seminars_Mapper_FrontEndUser::class)->getNewGhost();
+        get(\Tx_Seminars_Mapper_FrontEndUser::class)->getNewGhost();
         /** @var \Tx_Seminars_Model_Registration $testingModel */
         $testingModel = $this->fixture->getLoadedTestingModel(['user' => $frontEndUser->getUid()]);
 
@@ -128,7 +128,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends \Tx_Phpunit_TestCas
     public function getPaymentMethodWithPaymentMethodReturnsPaymentMethodInstance()
     {
         $paymentMethod = \Tx_Oelib_MapperRegistry::
-            get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
+        get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
         /** @var \Tx_Seminars_Model_Registration $testingModel */
         $testingModel = $this->fixture->getLoadedTestingModel(['method_of_payment' => $paymentMethod->getUid()]);
 

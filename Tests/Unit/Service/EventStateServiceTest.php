@@ -202,8 +202,8 @@ class EventStateServiceTest extends \Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function updateStatusAndSaveForPlannedEventWithNotEnoughRegistrationsWithoutRegistrationDeadlineReturnsFalse()
-    {
+    public function updateStatusAndSaveForPlannedEventWithNotEnoughRegistrationsWithoutRegistrationDeadlineReturnsFalse(
+    ) {
         $event = new \Tx_Seminars_Model_Event();
         $event->setData(
             [
@@ -224,8 +224,8 @@ class EventStateServiceTest extends \Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function updateStatusAndSaveForPlannedEventWithNotEnoughRegistrationsWithRegistrationDeadlineInFutureReturnsFalse()
-    {
+    public function updateStatusAndSaveForPlannedEventWithNotEnoughRegistrationsWithRegistrationDeadlineInFutureReturnsFalse(
+    ) {
         $event = new \Tx_Seminars_Model_Event();
         $event->setData(
             [
@@ -246,8 +246,8 @@ class EventStateServiceTest extends \Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function updateStatusAndSaveForPlannedEventWithNotEnoughRegistrationsWithRegistrationDeadlineInPastReturnsTrue()
-    {
+    public function updateStatusAndSaveForPlannedEventWithNotEnoughRegistrationsWithRegistrationDeadlineInPastReturnsTrue(
+    ) {
         $event = new \Tx_Seminars_Model_Event();
         $event->setData(
             [
@@ -268,8 +268,8 @@ class EventStateServiceTest extends \Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function updateStatusAndSaveForPlannedEventWithNotEnoughRegistrationsWithRegistrationDeadlineInPastCancelsEvent()
-    {
+    public function updateStatusAndSaveForPlannedEventWithNotEnoughRegistrationsWithRegistrationDeadlineInPastCancelsEvent(
+    ) {
         $event = new \Tx_Seminars_Model_Event();
         $event->setData(
             [
@@ -290,8 +290,8 @@ class EventStateServiceTest extends \Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function updateStatusAndSaveForPlannedEventWithNotEnoughRegistrationsWithRegistrationDeadlineInPastSavesEvent()
-    {
+    public function updateStatusAndSaveForPlannedEventWithNotEnoughRegistrationsWithRegistrationDeadlineInPastSavesEvent(
+    ) {
         $event = new \Tx_Seminars_Model_Event();
         $event->setData(
             [
