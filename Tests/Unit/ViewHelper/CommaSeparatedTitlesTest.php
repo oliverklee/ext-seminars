@@ -29,7 +29,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CommaSeparatedTitlesTest extends \Tx_Php
 
     protected function setUp()
     {
-        $this->testingFramework    = new \Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
         $this->list = new \Tx_Oelib_List();
         $this->fixture = new \Tx_Seminars_ViewHelper_CommaSeparatedTitles();
     }

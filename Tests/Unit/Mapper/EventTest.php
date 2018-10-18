@@ -716,7 +716,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends \Tx_Phpunit_TestCase
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $frontEndUser = \Tx_Oelib_MapperRegistry::
-            get(\Tx_Oelib_Mapper_FrontEndUser::class)->getNewGhost();
+        get(\Tx_Oelib_Mapper_FrontEndUser::class)->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $uid,
@@ -736,7 +736,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends \Tx_Phpunit_TestCase
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $frontEndUser = \Tx_Oelib_MapperRegistry::
-            get(\Tx_Oelib_Mapper_FrontEndUser::class)->getNewGhost();
+        get(\Tx_Oelib_Mapper_FrontEndUser::class)->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $uid,
@@ -1060,12 +1060,12 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends \Tx_Phpunit_TestCase
     public function findNextUpcomingWithTwoUpcomingEventsReturnsOnlyModelOfNextUpcomingEvent()
     {
         $this->testingFramework->createRecord(
-                'tx_seminars_seminars',
-                ['begin_date' => $GLOBALS['SIM_ACCESS_TIME'] + 2000]
+            'tx_seminars_seminars',
+            ['begin_date' => $GLOBALS['SIM_ACCESS_TIME'] + 2000]
         );
         $uid = $this->testingFramework->createRecord(
-                'tx_seminars_seminars',
-                ['begin_date' => $GLOBALS['SIM_ACCESS_TIME'] + 1000]
+            'tx_seminars_seminars',
+            ['begin_date' => $GLOBALS['SIM_ACCESS_TIME'] + 1000]
         );
 
         self::assertSame(

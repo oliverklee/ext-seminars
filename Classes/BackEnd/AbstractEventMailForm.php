@@ -578,7 +578,9 @@ abstract class AbstractEventMailForm
         );
         $introduction = sprintf($this->getLanguageService()->getLL($prefix . 'introduction'), $eventDetails);
 
-        return '%salutation' . LF . LF . $introduction . LF . $this->getLanguageService()->getLL($prefix . 'messageBody');
+        return '%salutation' . LF . LF . $introduction . LF . $this->getLanguageService()->getLL(
+                $prefix . 'messageBody'
+            );
     }
 
     /**
@@ -670,8 +672,8 @@ abstract class AbstractEventMailForm
                     if (!($hookInstance instanceof \Tx_Seminars_Interface_Hook_BackEndModule)) {
                         throw new \UnexpectedValueException(
                             'The class ' . get_class($hookInstance) . ' is used for the event list view hook, ' .
-                                'but does not implement the \\Tx_Seminars_Interface_Hook_BackEndModule interface.',
-                                1301928334
+                            'but does not implement the \\Tx_Seminars_Interface_Hook_BackEndModule interface.',
+                            1301928334
                         );
                     }
                     $this->hooks[] = $hookInstance;

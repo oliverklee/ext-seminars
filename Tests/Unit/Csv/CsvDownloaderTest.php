@@ -119,7 +119,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertSame(
             $this->localizeAndRemoveColon('tx_seminars_seminars.uid') . ';' .
-                $this->localizeAndRemoveColon('tx_seminars_seminars.title') . CRLF,
+            $this->localizeAndRemoveColon('tx_seminars_seminars.title') . CRLF,
             $this->fixture->createListOfEvents($pid)
         );
     }
@@ -245,7 +245,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertContains(
             $this->localizeAndRemoveColon('tx_seminars_seminars.uid') .
-                CRLF . $this->eventUid . CRLF . $secondEventUid . CRLF,
+            CRLF . $this->eventUid . CRLF . $secondEventUid . CRLF,
             $this->fixture->createAndOutputListOfEvents($this->pid)
         );
     }
@@ -416,7 +416,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertContains(
             $this->localizeAndRemoveColon('tx_seminars_seminars.description') .
-                ';' . $this->localizeAndRemoveColon('tx_seminars_seminars.title'),
+            ';' . $this->localizeAndRemoveColon('tx_seminars_seminars.title'),
             $this->fixture->createAndOutputListOfEvents($this->pid)
         );
     }
@@ -446,7 +446,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertSame(
             $this->localizeAndRemoveColon('LGL.name') . ';' .
-                $this->localizeAndRemoveColon('tx_seminars_attendances.uid') . CRLF,
+            $this->localizeAndRemoveColon('tx_seminars_attendances.uid') . CRLF,
             $this->fixture->createListOfRegistrations($this->eventUid)
         );
     }
@@ -949,7 +949,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertContains(
             CRLF . $firstRegistrationUid . CRLF .
-                 $secondRegistrationUid . CRLF,
+            $secondRegistrationUid . CRLF,
             $this->fixture->createAndOutputListOfRegistrations($this->eventUid)
         );
     }
@@ -1153,7 +1153,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertContains(
             $this->localizeAndRemoveColon('tx_seminars_attendances.address') .
-                ';' . $this->localizeAndRemoveColon('tx_seminars_attendances.title'),
+            ';' . $this->localizeAndRemoveColon('tx_seminars_attendances.title'),
             $this->fixture->createAndOutputListOfRegistrations($this->eventUid)
         );
     }
@@ -1161,8 +1161,8 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function createListOfRegistrationsForConfigurationAttendanceCsvFieldsEmptyDoesNotAddSemicolonOnEndOfHeadline()
-    {
+    public function createListOfRegistrationsForConfigurationAttendanceCsvFieldsEmptyDoesNotAddSemicolonOnEndOfHeadline(
+    ) {
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', '');
         $this->configuration->setAsString('fieldsFromFeUserForCsv', 'name');
 
@@ -1175,8 +1175,8 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function createListOfRegistrationsForConfigurationFeUserCsvFieldsEmptyDoesNotAddSemicolonAtBeginningOfHeadline()
-    {
+    public function createListOfRegistrationsForConfigurationFeUserCsvFieldsEmptyDoesNotAddSemicolonAtBeginningOfHeadline(
+    ) {
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'address');
         $this->configuration->setAsString('fieldsFromFeUserForCsv', '');
 
@@ -1195,7 +1195,9 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
         $this->configuration->setAsString('fieldsFromFeUserForCsv', 'name');
 
         self::assertContains(
-            $this->localizeAndRemoveColon('LGL.name') . ';' . $this->localizeAndRemoveColon('tx_seminars_attendances.address'),
+            $this->localizeAndRemoveColon(
+                'LGL.name'
+            ) . ';' . $this->localizeAndRemoveColon('tx_seminars_attendances.address'),
             $this->fixture->createAndOutputListOfRegistrations($this->eventUid)
         );
     }
@@ -1387,8 +1389,8 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfRegistrationsForWebModeNotUsesRegistrationsOnQueueSettingFromEmailConfiguration()
-    {
+    public function createAndOutputListOfRegistrationsForWebModeNotUsesRegistrationsOnQueueSettingFromEmailConfiguration(
+    ) {
         $this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInEmailCsv', true);
         $this->configuration->setAsString('fieldsFromAttendanceForEmailCsv', 'uid');
         $this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInCsv', false);

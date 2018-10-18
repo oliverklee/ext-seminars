@@ -29,7 +29,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends \Tx_Phpunit_T
 
     protected function setUp()
     {
-        $this->testingFramework    = new \Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
 
         $this->systemFolderPid = $this->testingFramework->createSystemFolder();

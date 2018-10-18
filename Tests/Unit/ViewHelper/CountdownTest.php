@@ -24,7 +24,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CountdownTest extends \Tx_Phpunit_TestCa
 
     protected function setUp()
     {
-        $this->testingFramework    = new \Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
         $this->translator = \Tx_Oelib_TranslatorRegistry::get('seminars');
 

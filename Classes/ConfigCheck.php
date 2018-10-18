@@ -1,4 +1,5 @@
 <?php
+
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -504,8 +505,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies whether the extension will provide online '
-                . 'registration. If this value is incorrect, the online '
-                . 'registration will not be enabled or disabled correctly.'
+            . 'registration. If this value is incorrect, the online '
+            . 'registration will not be enabled or disabled correctly.'
         );
     }
 
@@ -521,8 +522,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             'sDEF',
             'This value specifies the type of seminar manager plug-in to '
-                . 'display. If this value is not set correctly, the wrong '
-                . 'type of plug-in will be displayed.',
+            . 'display. If this value is not set correctly, the wrong '
+            . 'type of plug-in will be displayed.',
             [
                 'seminar_list',
                 'single_view',
@@ -553,9 +554,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies whether to also show the time of '
-                . 'registration deadlines. If this value is incorrect, the '
-                . 'time might get shown although this is not intended '
-                . '(or vice versa).'
+            . 'registration deadlines. If this value is incorrect, the '
+            . 'time might get shown although this is not intended '
+            . '(or vice versa).'
         );
     }
 
@@ -571,9 +572,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies whether to also show the time of '
-                . 'early bird deadlines. If this value is incorrect, the '
-                . 'time might get shown although this is not intended '
-                . '(or vice versa).'
+            . 'early bird deadlines. If this value is incorrect, the '
+            . 'time might get shown although this is not intended '
+            . '(or vice versa).'
         );
     }
 
@@ -589,9 +590,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies down from which threshold the exact number '
-                . 'of vancancies will be displayed. If this value is incorrect, '
-                . 'the number might get shown although this is not intended '
-                . '(or vice versa).'
+            . 'of vancancies will be displayed. If this value is incorrect, '
+            . 'the number might get shown although this is not intended '
+            . '(or vice versa).'
         );
     }
 
@@ -607,8 +608,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies which wording to use for the standard price '
-                . 'in e-mails. If this value is incorrect, the wrong wording '
-                . 'might get used.'
+            . 'in e-mails. If this value is incorrect, the wrong wording '
+            . 'might get used.'
         );
     }
 
@@ -624,13 +625,13 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies the page on which registrations will be '
-                . 'stored. If this value is not set correctly, registration '
-                . 'records will be dumped in the TYPO3 root page. If you '
-                . 'explicitely do not wish to use the online registration '
-                . 'feature, you can disable these checks by setting '
-                . '<strong>plugin.tx_seminars.enableRegistration</strong> and '
-                . '<strong>plugin.tx_seminars_pi1.enableRegistration</strong> '
-                . 'to 0.'
+            . 'stored. If this value is not set correctly, registration '
+            . 'records will be dumped in the TYPO3 root page. If you '
+            . 'explicitely do not wish to use the online registration '
+            . 'feature, you can disable these checks by setting '
+            . '<strong>plugin.tx_seminars.enableRegistration</strong> and '
+            . '<strong>plugin.tx_seminars_pi1.enableRegistration</strong> '
+            . 'to 0.'
         );
     }
 
@@ -646,7 +647,7 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_template_special',
             'This value specifies which section to remove from the details view. '
-                . 'Incorrect values will cause the sections to still be displayed.',
+            . 'Incorrect values will cause the sections to still be displayed.',
             [
                 'image',
                 'event_type',
@@ -704,7 +705,7 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_template_special',
             'This value specifies which columns to remove from the list view. '
-                . 'Incorrect values will cause the colums to still be displayed.',
+            . 'Incorrect values will cause the colums to still be displayed.',
             [
                 'image',
                 'category',
@@ -752,9 +753,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_template_special',
             'This value specifies the time-frame from which events should be '
-                . 'displayed in the list view. An incorrect value will events '
-                . 'from a different time-frame cause to be displayed and other '
-                . 'events to not get displayed.',
+            . 'displayed in the list view. An incorrect value will events '
+            . 'from a different time-frame cause to be displayed and other '
+            . 'events to not get displayed.',
             [
                 'all',
                 'past',
@@ -780,10 +781,10 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_template_special',
             'This value specifies whether the option boxes in the selector widget '
-                . 'will contain a dummy entry called "not selected". This is only '
-                . 'needed if you changed the HTML template to show the selectors '
-                . 'as dropdown menues. If this value is incorrect, the dummy entry '
-                . 'might get displayed when this is not intended (or vice versa).'
+            . 'will contain a dummy entry called "not selected". This is only '
+            . 'needed if you changed the HTML template to show the selectors '
+            . 'as dropdown menues. If this value is incorrect, the dummy entry '
+            . 'might get displayed when this is not intended (or vice versa).'
         );
     }
 
@@ -799,9 +800,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_template_special',
             'This value specifies whether the page browser in the list view '
-                . 'will be displayed. If this value is incorrect, the page '
-                . 'browser might get displayed when this is not intended (or '
-                . 'vice versa).'
+            . 'will be displayed. If this value is incorrect, the page '
+            . 'browser might get displayed when this is not intended (or '
+            . 'vice versa).'
         );
     }
 
@@ -817,9 +818,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_template_special',
             'This value specifies whether canceled events will be removed '
-                . 'from the list view. If this value is incorrect, canceled '
-                . 'events might get displayed when this is not intended (or '
-                . 'vice versa).'
+            . 'from the list view. If this value is incorrect, canceled '
+            . 'events might get displayed when this is not intended (or '
+            . 'vice versa).'
         );
     }
 
@@ -835,9 +836,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_template_special',
             'This value specifies whether the list view should be sorted by '
-                . 'category before applying the normal sorting. If this value '
-                . 'is incorrect, the list view might get sorted by category '
-                . 'when this is not intended (or vice versa).'
+            . 'category before applying the normal sorting. If this value '
+            . 'is incorrect, the list view might get sorted by category '
+            . 'when this is not intended (or vice versa).'
         );
     }
 
@@ -853,7 +854,7 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'These values specify the sections to hide in e-mails to  participants. A mistyped field name will cause the field ' .
-                'to be included nonetheless.',
+            'to be included nonetheless.',
             [
                 'hello',
                 'title',
@@ -899,8 +900,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'These values specify the sections to hide in e-mails to '
-                . 'organizers. A mistyped field name will cause the field to '
-                . 'be included nonetheless.',
+            . 'organizers. A mistyped field name will cause the field to '
+            . 'be included nonetheless.',
             [
                 'summary',
                 'seminardata',
@@ -922,8 +923,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'These values specify the event fields to show in e-mails to '
-                . 'organizers. A mistyped field name will cause the field to '
-                . 'not get included.',
+            . 'organizers. A mistyped field name will cause the field to '
+            . 'not get included.',
             [
                 'uid',
                 'event_type',
@@ -965,8 +966,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'These values specify the FE user fields to show in e-mails to '
-                . 'organizers. A mistyped field name will cause the field to '
-                . 'not get included.',
+            . 'organizers. A mistyped field name will cause the field to '
+            . 'not get included.',
             'fe_users'
         );
     }
@@ -983,8 +984,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'These values specify the registration fields to show in e-mails ' .
-                'to organizers. A mistyped field name will cause the field ' .
-                'to not get included.',
+            'to organizers. A mistyped field name will cause the field ' .
+            'to not get included.',
             [
                 'uid',
                 'interests',
@@ -1028,8 +1029,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies whether organizers receive additional '
-                . 'notification e-mails. If this value is incorrect, e-mails '
-                . 'might get sent when this is not intended (or vice versa).'
+            . 'notification e-mails. If this value is incorrect, e-mails '
+            . 'might get sent when this is not intended (or vice versa).'
         );
     }
 
@@ -1045,8 +1046,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies whether date ranges will be abbreviated. '
-                . 'If this value is incorrect, the values might be abbreviated '
-                . 'although this is not intended (or vice versa).'
+            . 'If this value is incorrect, the values might be abbreviated '
+            . 'although this is not intended (or vice versa).'
         );
     }
 
@@ -1062,9 +1063,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_template_special',
             'This value specifies whether the column header for the standard '
-                . 'price in the list view will be just <em>Price</em> instead '
-                . 'of <em>Standard price</em>. '
-                . 'If this value is incorrect, the wrong label might be used.'
+            . 'price in the list view will be just <em>Price</em> instead '
+            . 'of <em>Standard price</em>. '
+            . 'If this value is incorrect, the wrong label might be used.'
         );
     }
 
@@ -1080,9 +1081,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_template_special',
             'This value specifies whether the heading for the standard price '
-                . 'in the detailed view and on the registration page will be '
-                . 'just <em>Price</em> instead of <em>Standard price</em>. '
-                . 'If this value is incorrect, the wrong label might be used.'
+            . 'in the detailed view and on the registration page will be '
+            . 'just <em>Price</em> instead of <em>Standard price</em>. '
+            . 'If this value is incorrect, the wrong label might be used.'
         );
     }
 
@@ -1098,9 +1099,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_template_special',
             'This value specifies whether to omit the date in the '
-                . 'list view if it is the same as the previous item\'s. '
-                . 'If this value is incorrect, the date might be omited '
-                . 'although this is not intended (or vice versa).'
+            . 'list view if it is the same as the previous item\'s. '
+            . 'If this value is incorrect, the date might be omited '
+            . 'although this is not intended (or vice versa).'
         );
     }
 
@@ -1117,10 +1118,10 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies who is able to see the registered persons  ' .
-                'an event in the front end. ' .
-                'If this value is incorrect, persons may access the ' .
-                'registration lists although they should not be allowed to ' .
-                '(or vice versa).',
+            'an event in the front end. ' .
+            'If this value is incorrect, persons may access the ' .
+            'registration lists although they should not be allowed to ' .
+            '(or vice versa).',
             ['attendees_and_managers', 'login', 'world']
         );
     }
@@ -1138,10 +1139,10 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies whether managers are allowed to access the ' .
-                'CSV export of registrations from the "my VIP events" view. ' .
-                'If this value is incorrect, managers may be allowed to access ' .
-                'the CSV export of registrations from the "my VIP events ' .
-                'view" although they should not be allowed to (or vice versa).'
+            'CSV export of registrations from the "my VIP events" view. ' .
+            'If this value is incorrect, managers may be allowed to access ' .
+            'the CSV export of registrations from the "my VIP events ' .
+            'view" although they should not be allowed to (or vice versa).'
         );
     }
 
@@ -1157,8 +1158,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_listView',
             'This value specifies whether VIPs may edit their events. If this ' .
-                'value is incorrect, VIPs may be allowed to edit their events ' .
-                ' although they should not be allowed to (or vice versa).'
+            'value is incorrect, VIPs may be allowed to edit their events ' .
+            ' although they should not be allowed to (or vice versa).'
         );
     }
 
@@ -1174,8 +1175,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_template_special',
             'This value specifies which data fields of the selected event '
-                . 'will be displayed on the registration page. '
-                . 'Incorrect values will cause those fields to not get displayed.',
+            . 'will be displayed on the registration page. '
+            . 'Incorrect values will cause those fields to not get displayed.',
             [
                 'uid',
                 'title',
@@ -1198,8 +1199,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_template_special',
             'This value specifies which registration fields ' .
-                'will be displayed on the registration page. ' .
-                'Incorrect values will cause those fields to not get displayed.',
+            'will be displayed on the registration page. ' .
+            'Incorrect values will cause those fields to not get displayed.',
             [
                 'step_counter',
                 'price',
@@ -1255,7 +1256,7 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'These values specify the FE user fields to show in the registration form. ' .
-                'A mistyped field name will cause the field to not get included.',
+            'A mistyped field name will cause the field to not get included.',
             'fe_users'
         );
     }
@@ -1272,7 +1273,7 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'These values specify the FE user labels to show in the registration form. ' .
-                'A mistyped field name will cause the label to not get displayed.',
+            'A mistyped field name will cause the label to not get displayed.',
             'fe_users'
         );
     }
@@ -1289,9 +1290,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_template_special',
             'This value specifies whether to show detailed information of '
-                . 'the speakers in the single view. '
-                . 'If this value is incorrect, the detailed information might '
-                . 'be shown although this is not intended (or vice versa).'
+            . 'the speakers in the single view. '
+            . 'If this value is incorrect, the detailed information might '
+            . 'be shown although this is not intended (or vice versa).'
         );
     }
 
@@ -1307,9 +1308,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_template_special',
             'This value specifies whether to show detailed information of '
-                . 'the locations in the single view. '
-                . 'If this value is incorrect, the detailed information might '
-                . 'be shown although this is not intended (or vice versa).'
+            . 'the locations in the single view. '
+            . 'If this value is incorrect, the detailed information might '
+            . 'be shown although this is not intended (or vice versa).'
         );
     }
 
@@ -1325,10 +1326,10 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_singleView',
             'This value specifies whether the list of attached files is only ' .
-                'shown to logged in and registered attendees. If this value is ' .
-                'incorrect, the attached files may be shown to the public ' .
-                'although they should be visible only to the attendees ' .
-                '(or vice versa).'
+            'shown to logged in and registered attendees. If this value is ' .
+            'incorrect, the attached files may be shown to the public ' .
+            'although they should be visible only to the attendees ' .
+            '(or vice versa).'
         );
     }
 
@@ -1344,8 +1345,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_template_special',
             'These values specify the FE user fields to show in the list of '
-                . 'registrations for an event. A mistyped field name will '
-                . 'cause the contents of the field to not get displayed.',
+            . 'registrations for an event. A mistyped field name will '
+            . 'cause the contents of the field to not get displayed.',
             'fe_users'
         );
     }
@@ -1363,8 +1364,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_template_special',
             'These values specify the registration fields to show in the list ' .
-                'of registrations for an event. A mistyped field name will ' .
-                'cause the contents of the field to not get displayed.',
+            'of registrations for an event. A mistyped field name will ' .
+            'cause the contents of the field to not get displayed.',
             'tx_seminars_attendances'
         );
     }
@@ -1381,9 +1382,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             'sDEF',
             'This value specifies the page that contains the list of events. '
-                . 'If this value is not set correctly, the links in the list '
-                . 'view and the back link on the list of registrations will '
-                . 'not work.'
+            . 'If this value is not set correctly, the links in the list '
+            . 'view and the back link on the list of registrations will '
+            . 'not work.'
         );
     }
 
@@ -1399,8 +1400,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             'sDEF',
             'This value specifies the page that contains the detailed view. '
-                . 'If this value is not set correctly, the links to single '
-                . 'events will not work as expected.'
+            . 'If this value is not set correctly, the links to single '
+            . 'events will not work as expected.'
         );
     }
 
@@ -1416,9 +1417,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             'sDEF',
             'This value specifies the page that contains the <em>my events</em> '
-                . 'list. If this value is not set correctly, the redirection to '
-                . 'the my events list after canceling the unregistration process '
-                . 'will not work correctly.'
+            . 'list. If this value is not set correctly, the redirection to '
+            . 'the my events list after canceling the unregistration process '
+            . 'will not work correctly.'
         );
     }
 
@@ -1434,13 +1435,13 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             'sDEF',
             'This value specifies the page that contains the registration '
-                . 'form. If this value is not set correctly, the link to the '
-                . 'registration page will not work. If you explicitely do not '
-                . 'wish to use the online registration feature, you can '
-                . 'disable these checks by setting '
-                . '<strong>plugin.tx_seminars.enableRegistration</strong> and '
-                . '<strong>plugin.tx_seminars_pi1.enableRegistration</strong> '
-                . 'to 0.'
+            . 'form. If this value is not set correctly, the link to the '
+            . 'registration page will not work. If you explicitely do not '
+            . 'wish to use the online registration feature, you can '
+            . 'disable these checks by setting '
+            . '<strong>plugin.tx_seminars.enableRegistration</strong> and '
+            . '<strong>plugin.tx_seminars_pi1.enableRegistration</strong> '
+            . 'to 0.'
         );
     }
 
@@ -1456,13 +1457,13 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             'sDEF',
             'This value specifies the page that contains the login form. '
-                . 'If this value is not set correctly, the link to the '
-                . 'login page will not work. If you explicitely do not '
-                . 'wish to use the online registration feature, you can '
-                . 'disable these checks by setting '
-                . '<strong>plugin.tx_seminars.enableRegistration</strong> and '
-                . '<strong>plugin.tx_seminars_pi1.enableRegistration</strong> '
-                . 'to 0.'
+            . 'If this value is not set correctly, the link to the '
+            . 'login page will not work. If you explicitely do not '
+            . 'wish to use the online registration feature, you can '
+            . 'disable these checks by setting '
+            . '<strong>plugin.tx_seminars.enableRegistration</strong> and '
+            . '<strong>plugin.tx_seminars_pi1.enableRegistration</strong> '
+            . 'to 0.'
         );
     }
 
@@ -1478,8 +1479,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             'sDEF',
             'This value specifies the page that contains the list of '
-                . 'registrations for an event. If this value is not set '
-                . 'correctly, the link to that page will not work.'
+            . 'registrations for an event. If this value is not set '
+            . 'correctly, the link to that page will not work.'
         );
     }
 
@@ -1495,8 +1496,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             'sDEF',
             'This value specifies the page that contains the list of '
-                . 'registrations for an event. If this value is not set '
-                . 'correctly, the link to that page will not work.'
+            . 'registrations for an event. If this value is not set '
+            . 'correctly, the link to that page will not work.'
         );
     }
 
@@ -1513,8 +1514,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             'sDEF',
             'This value specifies the page that contains the list of '
-                . 'registrations for an event. If this value is not set '
-                . 'correctly, the link to that page will not work.'
+            . 'registrations for an event. If this value is not set '
+            . 'correctly, the link to that page will not work.'
         );
     }
 
@@ -1567,9 +1568,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             'sDEF',
             'This value specifies the how deep the recursion will be for '
-                . 'selecting the pages that contain the event records for the '
-                . 'list view. If this value is not set correctly, some events '
-                . 'might not get displayed in the list view.'
+            . 'selecting the pages that contain the event records for the '
+            . 'list view. If this value is not set correctly, some events '
+            . 'might not get displayed in the list view.'
         );
     }
 
@@ -1602,8 +1603,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_fe_editing',
             'This value specifies the front-end user group that is allowed to '
-                . 'enter and edit event records in the front end. If this value '
-                . 'is not set correctly, FE editing for events will not work.'
+            . 'enter and edit event records in the front end. If this value '
+            . 'is not set correctly, FE editing for events will not work.'
         );
     }
 
@@ -1619,10 +1620,10 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             '',
             'This value specifies the front-end user group that is allowed to '
-                . 'see the registrations for all events and get all events listed '
-                . 'on their "my VIP events" page. If this value is not set '
-                . 'correctly, the users of this group will not be treated as '
-                . 'VIPs for all events.'
+            . 'see the registrations for all events and get all events listed '
+            . 'on their "my VIP events" page. If this value is not set '
+            . 'correctly, the users of this group will not be treated as '
+            . 'VIPs for all events.'
         );
     }
 
@@ -1638,8 +1639,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_fe_editing',
             'This value specifies the page on which FE-entered events will be '
-                . 'stored. If this value is not set correctly, those event '
-                . 'records will be dumped in the TYPO3 root page.'
+            . 'stored. If this value is not set correctly, those event '
+            . 'records will be dumped in the TYPO3 root page.'
         );
     }
 
@@ -1655,8 +1656,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_fe_editing',
             'This value specifies the page to which the user will be '
-                . 'redirected after saving an event record in the front end. If '
-                . 'this value is not set correctly, the redirect will not work.'
+            . 'redirected after saving an event record in the front end. If '
+            . 'this value is not set correctly, the redirect will not work.'
         );
     }
 
@@ -1672,8 +1673,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_fe_editing',
             'This value specifies the list of allowed extensions of files to ' .
-                'upload in the FE editor. If this value is empty, files ' .
-                'cannot be uploaded.'
+            'upload in the FE editor. If this value is empty, files ' .
+            'cannot be uploaded.'
         );
     }
 
@@ -1689,9 +1690,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_fe_editing',
             'This value specifies the page that contains the plug-in for '
-                . 'editing event records in the front end. If this value is not '
-                . 'set correctly, the <em>edit</em> link in the <em>events '
-                . 'which I have entered</em> list will not work.'
+            . 'editing event records in the front end. If this value is not '
+            . 'set correctly, the <em>edit</em> link in the <em>events '
+            . 'which I have entered</em> list will not work.'
         );
     }
 
@@ -1707,8 +1708,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_registration',
             'This value specifies the page that will be displayed after a user '
-                . 'signed up for an event. If this value is not set correctly, '
-                . 'the user will see the list of events instead.'
+            . 'signed up for an event. If this value is not set correctly, '
+            . 'the user will see the list of events instead.'
         );
     }
 
@@ -1724,8 +1725,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_registration',
             'This value specifies the page that will be displayed after a user '
-                . 'has unregistered from an event. If this value is not set correctly, '
-                . 'the user will see the list of events instead.'
+            . 'has unregistered from an event. If this value is not set correctly, '
+            . 'the user will see the list of events instead.'
         );
     }
 
@@ -1741,9 +1742,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies the payment method that corresponds to '
-                . 'a bank transfer. If this value is not set correctly, '
-                . 'validation of the bank data in the event registration '
-                . 'form will not work correctly.'
+            . 'a bank transfer. If this value is not set correctly, '
+            . 'validation of the bank data in the event registration '
+            . 'form will not work correctly.'
         );
     }
 
@@ -1777,8 +1778,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies the charset to use for the CSV export. '
-                . 'If this value is not set, no charset information will be '
-                . 'provided for CSV downloads.'
+            . 'If this value is not set, no charset information will be '
+            . 'provided for CSV downloads.'
         );
     }
 
@@ -1794,9 +1795,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies the file name to suggest for the CSV export '
-                . 'of event records. '
-                . 'If this value is not set, an empty filename will be used for '
-                . 'saving the CSV file which will cause problems.'
+            . 'of event records. '
+            . 'If this value is not set, an empty filename will be used for '
+            . 'saving the CSV file which will cause problems.'
         );
     }
 
@@ -1812,9 +1813,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies the file name to suggest for the CSV export '
-                . 'of registration records. '
-                . 'If this value is not set, an empty filename will be used for '
-                . 'saving the CSV file which will cause problems.'
+            . 'of registration records. '
+            . 'If this value is not set, an empty filename will be used for '
+            . 'saving the CSV file which will cause problems.'
         );
     }
 
@@ -1830,8 +1831,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'These values specify the event fields to export via CSV. '
-                . 'A mistyped field name will cause the field to not get '
-                . 'included.',
+            . 'A mistyped field name will cause the field to not get '
+            . 'included.',
             [
                 'uid',
                 'tstamp',
@@ -1888,8 +1889,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'These values specify the FE user fields to export via CSV in web ' .
-                'mode. A mistyped field name will cause the field to not get ' .
-                'included.',
+            'mode. A mistyped field name will cause the field to not get ' .
+            'included.',
             'fe_users'
         );
     }
@@ -1906,8 +1907,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'These values specify the registration fields to export via CSV in ' .
-                'web mode. A mistyped field name will cause the field to not get ' .
-                'included.',
+            'web mode. A mistyped field name will cause the field to not get ' .
+            'included.',
             'tx_seminars_attendances'
         );
     }
@@ -1924,7 +1925,7 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'These values specify the FE user fields to export via CSV in e-mail ' .
-                'mode. A mistyped field name will cause the field to not get ' . '
+            'mode. A mistyped field name will cause the field to not get ' . '
 				included.',
             'fe_users'
         );
@@ -1942,8 +1943,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'These values specify the registration fields to export via CSV in ' .
-                'e-mail mode. A mistyped field name will cause the field to not ' .
-                'get included.',
+            'e-mail mode. A mistyped field name will cause the field to not ' .
+            'get included.',
             'tx_seminars_attendances'
         );
     }
@@ -1960,10 +1961,10 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies whether &quot;to be announced&quot; should be '
-                . 'displayed instead of &quot;free&quot; if an event has no '
-                . 'regular price set yet.'
-                . 'If this value is not set correctly, the wrong wording '
-                . 'might get displayed.'
+            . 'displayed instead of &quot;free&quot; if an event has no '
+            . 'regular price set yet.'
+            . 'If this value is not set correctly, the wrong wording '
+            . 'might get displayed.'
         );
     }
 
@@ -2023,8 +2024,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies whether one-time FE user accounts will '
-                . 'automatically be logged out after registering for an event. '
-                . 'If this value is incorrect, the automatic logout will not work.'
+            . 'automatically be logged out after registering for an event. '
+            . 'If this value is incorrect, the automatic logout will not work.'
         );
     }
 
@@ -2041,9 +2042,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies the number of the first registration page '
-                . '(for the <em>Step x of y</em> heading). '
-                . 'If this value is not set correctly, the number of the current '
-                . 'page will not be displayed correctly.'
+            . '(for the <em>Step x of y</em> heading). '
+            . 'If this value is not set correctly, the number of the current '
+            . 'page will not be displayed correctly.'
         );
     }
 
@@ -2060,9 +2061,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies the number of the last registration page '
-                . '(for the <em>Step x of y</em> heading). '
-                . 'If this value is not set correctly, the number of the last '
-                . 'page will not be displayed correctly.'
+            . '(for the <em>Step x of y</em> heading). '
+            . 'If this value is not set correctly, the number of the last '
+            . 'page will not be displayed correctly.'
         );
     }
 
@@ -2104,9 +2105,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_registration',
             'This value specifies whether the sending of parameters to the '
-                . 'thank you page after a registration should be enabled or not. '
-                . 'If this value is incorrect the sending of parameters will '
-                . 'not be enabled or disabled correctly.'
+            . 'thank you page after a registration should be enabled or not. '
+            . 'If this value is incorrect the sending of parameters will '
+            . 'not be enabled or disabled correctly.'
         );
     }
 
@@ -2123,9 +2124,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_registration',
             'This value specifies whether the sending of parameters to the page '
-                . 'which is shown after an unregistration should be enabled or '
-                . 'not. If this value is incorrect the sending of parameters '
-                . 'will not be enabled or disabled correctly.'
+            . 'which is shown after an unregistration should be enabled or '
+            . 'not. If this value is incorrect the sending of parameters '
+            . 'will not be enabled or disabled correctly.'
         );
     }
 
@@ -2142,9 +2143,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_registration',
             'This value specifies whether additional attendees will be ' .
-                'stored as FE user record . If this value is incorrect, ' .
-                'those records will no be created, and the registration ' .
-                'form will look different than intended.'
+            'stored as FE user record . If this value is incorrect, ' .
+            'those records will no be created, and the registration ' .
+            'form will look different than intended.'
         );
     }
 
@@ -2161,9 +2162,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_registration',
             'This value specifies the system folder in which the FE user ' .
-                'records for additional attendees will be stored. If this ' .
-                'value is not set correctly, those records will be dumped ' .
-                'in the TYPO3 root page.'
+            'records for additional attendees will be stored. If this ' .
+            'value is not set correctly, those records will be dumped ' .
+            'in the TYPO3 root page.'
         );
     }
 
@@ -2180,8 +2181,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_registration',
             'This value specifies the FE user groups for the FE users ' .
-                'created for additional attendees. If this value is not set ' .
-                'correctly, those FE users might not be able to log in.'
+            'created for additional attendees. If this value is not set ' .
+            'correctly, those FE users might not be able to log in.'
         );
     }
 
@@ -2198,11 +2199,11 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies the number of days before the start of an '
-                . 'event until unregistration is possible. (If you want to '
-                . 'disable this feature, just leave this value empty.) If this '
-                . 'value is incorrect, unregistration will fail to work or the '
-                . 'unregistration period will be a different number of days than '
-                . 'desired.'
+            . 'event until unregistration is possible. (If you want to '
+            . 'disable this feature, just leave this value empty.) If this '
+            . 'value is incorrect, unregistration will fail to work or the '
+            . 'unregistration period will be a different number of days than '
+            . 'desired.'
         );
     }
 
@@ -2218,9 +2219,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies whether a notification e-mail should be sent '
-                . 'to the organizer after a user has registered. If this value '
-                . 'is not set correctly, the sending of notifications probably '
-                . 'will not work as expected.'
+            . 'to the organizer after a user has registered. If this value '
+            . 'is not set correctly, the sending of notifications probably '
+            . 'will not work as expected.'
         );
     }
 
@@ -2237,9 +2238,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies whether a notification e-mail should be sent '
-                . 'to the organizer after a user has unregistered. If this value '
-                . 'is not set correctly, the sending of notifications probably '
-                . 'will not work as expected.'
+            . 'to the organizer after a user has unregistered. If this value '
+            . 'is not set correctly, the sending of notifications probably '
+            . 'will not work as expected.'
         );
     }
 
@@ -2256,9 +2257,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies whether a notification e-mail should be sent '
-                . 'to the organizer after someone registered for the queue. If '
-                . 'this value is not set correctly, the sending of notifications '
-                . 'probably will not work as expected.'
+            . 'to the organizer after someone registered for the queue. If '
+            . 'this value is not set correctly, the sending of notifications '
+            . 'probably will not work as expected.'
         );
     }
 
@@ -2275,9 +2276,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies whether a notification e-mail should be sent '
-                . 'to the organizer after the queue has been updated. If '
-                . 'this value is not set correctly, the sending of notifications '
-                . 'probably will not work as expected.'
+            . 'to the organizer after the queue has been updated. If '
+            . 'this value is not set correctly, the sending of notifications '
+            . 'probably will not work as expected.'
         );
     }
 
@@ -2293,9 +2294,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies whether a confirmation e-mail should be sent '
-                . 'to the user after the user has registered. If this value is '
-                . 'not set correctly, the sending of notifications probably will '
-                . 'not work as expected.'
+            . 'to the user after the user has registered. If this value is '
+            . 'not set correctly, the sending of notifications probably will '
+            . 'not work as expected.'
         );
     }
 
@@ -2312,9 +2313,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies whether a confirmation e-mail should be sent '
-                . 'to the user after the user has unregistered. If this value is '
-                . 'not set correctly, the sending of notifications probably will '
-                . 'not work as expected.'
+            . 'to the user after the user has unregistered. If this value is '
+            . 'not set correctly, the sending of notifications probably will '
+            . 'not work as expected.'
         );
     }
 
@@ -2331,9 +2332,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies whether a confirmation e-mail should be sent '
-                . 'to the user after the user has registered for the queue. If '
-                . 'this value is not set correctly, the sending of notifications '
-                . 'probably will not work as expected.'
+            . 'to the user after the user has registered for the queue. If '
+            . 'this value is not set correctly, the sending of notifications '
+            . 'probably will not work as expected.'
         );
     }
 
@@ -2350,9 +2351,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies whether a confirmation e-mail should be sent '
-                . 'to the user after the queue has been updated. If this value is '
-                . 'not set correctly, the sending of notifications probably will '
-                . 'not work as expected.'
+            . 'to the user after the queue has been updated. If this value is '
+            . 'not set correctly, the sending of notifications probably will '
+            . 'not work as expected.'
         );
     }
 
@@ -2369,9 +2370,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies whether registration is possible even when ' .
-                'an event already has started. ' .
-                'If this value is incorrect, registration might be possible ' .
-                'even when this is not desired (or vice versa).'
+            'an event already has started. ' .
+            'If this value is incorrect, registration might be possible ' .
+            'even when this is not desired (or vice versa).'
         );
     }
 
@@ -2388,9 +2389,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies whether registration is possible for ' .
-                'events without a fixed date. ' .
-                'If this value is incorrect, registration might be possible ' .
-                'even when this is not desired (or vice versa).'
+            'events without a fixed date. ' .
+            'If this value is incorrect, registration might be possible ' .
+            'even when this is not desired (or vice versa).'
         );
     }
 
@@ -2407,9 +2408,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies whether unregistration is possible even when '
-                . 'there are no registrations on the waiting list yet. '
-                . 'If this value is incorrect, unregistration might be possible '
-                . 'even when this is not desired (or vice versa).'
+            . 'there are no registrations on the waiting list yet. '
+            . 'If this value is incorrect, unregistration might be possible '
+            . 'even when this is not desired (or vice versa).'
         );
     }
 
@@ -2437,8 +2438,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_template_special',
             'This value specifies which fixed single event should be shown. If '
-                . 'this value is not set correctly, an error message will be '
-                . 'shown instead.'
+            . 'this value is not set correctly, an error message will be '
+            . 'shown instead.'
         );
     }
 
@@ -2455,8 +2456,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_listView',
             'This value specifies the event types by which the list view ' .
-                'should be filtered. If this value is not set correctly, ' .
-                'some events might unintentionally get hidden or shown.'
+            'should be filtered. If this value is not set correctly, ' .
+            'some events might unintentionally get hidden or shown.'
         );
     }
 
@@ -2473,8 +2474,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_listView',
             'This value specifies the categories by which the list view ' .
-                'should be filtered. If this value is not set correctly, ' .
-                'some events might unintentionally get hidden or shown.'
+            'should be filtered. If this value is not set correctly, ' .
+            'some events might unintentionally get hidden or shown.'
         );
     }
 
@@ -2491,8 +2492,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_listView',
             'This value specifies the places for which the list view ' .
-                'should be filtered. If this value is not set correctly, ' .
-                'some events might unintentionally get hidden or shown.'
+            'should be filtered. If this value is not set correctly, ' .
+            'some events might unintentionally get hidden or shown.'
         );
     }
 
@@ -2509,8 +2510,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_listView',
             'This value specifies the organizers for which the list view ' .
-                'should be filtered. If this value is not set correctly, ' .
-                'some events might unintentionally get hidden or shown.'
+            'should be filtered. If this value is not set correctly, ' .
+            'some events might unintentionally get hidden or shown.'
         );
     }
 
@@ -2526,9 +2527,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies whether the registration collision check ' .
-                'should be disabled for all events. If this value is incorrect, ' .
-                'the registration collision check might be enabled although it ' .
-                'should be disabled (or vice versa).'
+            'should be disabled for all events. If this value is incorrect, ' .
+            'the registration collision check might be enabled although it ' .
+            'should be disabled (or vice versa).'
         );
     }
 
@@ -2544,8 +2545,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_listView',
             'This setting determines whether the seminar category is shown, as ' .
-                'icon and text, as text only or as icon only. If this value is ' .
-                'not set correctly, the category will only be shown as text.',
+            'icon and text, as text only or as icon only. If this value is ' .
+            'not set correctly, the category will only be shown as text.',
             [
                 'both',
                 'text',
@@ -2577,7 +2578,7 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies the width of the image of a seminar. If this ' .
-                'value is not set, the image will be shown in full size.'
+            'value is not set, the image will be shown in full size.'
         );
     }
 
@@ -2593,7 +2594,7 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies the height of the image of a seminar. If ' .
-                'this value is not set, the image will be shown in full size.'
+            'this value is not set, the image will be shown in full size.'
         );
     }
 
@@ -2620,7 +2621,7 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies the width of the image of a seminar. If this ' .
-                'value is not set, the image will be shown in full size.'
+            'value is not set, the image will be shown in full size.'
         );
     }
 
@@ -2636,7 +2637,7 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies the height of the image of a seminar. If ' .
-                'this value is not set, the image will be shown in full size.'
+            'this value is not set, the image will be shown in full size.'
         );
     }
 
@@ -2652,9 +2653,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_singleView',
             'This value specifies whether the owner data will be displayed  ' .
-                'on the single view page. If this value is incorrect, ' .
-                'the the data might be displayed although it should not be ' .
-                '(which is a privacy issue) or vice versa.'
+            'on the single view page. If this value is incorrect, ' .
+            'the the data might be displayed although it should not be ' .
+            '(which is a privacy issue) or vice versa.'
         );
     }
 
@@ -2670,9 +2671,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies the maximum width for the owner picture ' .
-                'on the single view page. If this value is not set ' .
-                'correctly, the image might be too large or not get ' .
-                'displayed at all.'
+            'on the single view page. If this value is not set ' .
+            'correctly, the image might be too large or not get ' .
+            'displayed at all.'
         );
     }
 
@@ -2688,11 +2689,20 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_listView',
             'This value specifies which search widget fields to display in the ' .
-                'list view. The search widget will not display any fields at ' .
-                'all if this value is empty or contains only invalid keys.',
+            'list view. The search widget will not display any fields at ' .
+            'all if this value is empty or contains only invalid keys.',
             [
-                'event_type', 'language', 'country', 'city', 'place',
-                'full_text_search', 'date', 'age', 'organizer', 'categories', 'price',
+                'event_type',
+                'language',
+                'country',
+                'city',
+                'place',
+                'full_text_search',
+                'date',
+                'age',
+                'organizer',
+                'categories',
+                'price',
             ]
         );
     }
@@ -2709,9 +2719,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_listView',
             'This value specifies the number years of years the user can ' .
-                'search for events in the event list. The date search will ' .
-                'have an empty drop-down for the year if this variable is ' .
-                'misconfigured.'
+            'search for events in the event list. The date search will ' .
+            'have an empty drop-down for the year if this variable is ' .
+            'misconfigured.'
         );
     }
 
@@ -2727,8 +2737,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_fe_editing',
             'This value specifies which fields should be displayed in the ' .
-                'fe-editor. Incorrect values will cause the fields not to be ' .
-                'displayed.',
+            'fe-editor. Incorrect values will cause the fields not to be ' .
+            'displayed.',
             [
                 'subtitle',
                 'accreditation_number',
@@ -2786,9 +2796,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_fe_editing',
             'This value specifies whether front-end editing of speakers is ' .
-                'possible. If this value is incorrect, front-end editing of ' .
-                'speakers might be possible even when this is not desired ' .
-                '(or vice versa).'
+            'possible. If this value is incorrect, front-end editing of ' .
+            'speakers might be possible even when this is not desired ' .
+            '(or vice versa).'
         );
     }
 
@@ -2804,9 +2814,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_fe_editing',
             'This value specifies whether front-end editing of places is ' .
-                'possible. If this value is incorrect, front-end editing of ' .
-                'places might be possible even when this is not desired ' .
-                '(or vice versa).'
+            'possible. If this value is incorrect, front-end editing of ' .
+            'places might be possible even when this is not desired ' .
+            '(or vice versa).'
         );
     }
 
@@ -2822,9 +2832,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_fe_editing',
             'This value specifies whether front-end editing of checkboxes is ' .
-                'possible. If this value is incorrect, front-end editing of ' .
-                'checkboxes might be possible even when this is not desired ' .
-                '(or vice versa).'
+            'possible. If this value is incorrect, front-end editing of ' .
+            'checkboxes might be possible even when this is not desired ' .
+            '(or vice versa).'
         );
     }
 
@@ -2840,9 +2850,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_fe_editing',
             'This value specifies whether front-end editing of target groups ' .
-                'is possible. If this value is incorrect, front-end editing of ' .
-                'target groups might be possible even when this is not desired ' .
-                '(or vice versa).'
+            'is possible. If this value is incorrect, front-end editing of ' .
+            'target groups might be possible even when this is not desired ' .
+            '(or vice versa).'
         );
     }
 
@@ -2858,8 +2868,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_fe_editing',
             'This value specifies which fields are required to be filled when ' .
-                'editing an event. Some fields will be not be required if ' .
-                'this configuration is incorrect.',
+            'editing an event. Some fields will be not be required if ' .
+            'this configuration is incorrect.',
             [
                 'subtitle',
                 'accreditation_number',
@@ -2910,9 +2920,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_fe_editing',
             'This value specifies which fields are required to be filled when ' .
-                'editing an event. Some fields are set to required but are ' .
-                'actually not configured to be visible in the form. The form ' .
-                'cannot be submitted as long as this inconsistency remains.',
+            'editing an event. Some fields are set to required but are ' .
+            'actually not configured to be visible in the form. The form ' .
+            'cannot be submitted as long as this inconsistency remains.',
             GeneralUtility::trimExplode(
                 ',',
                 $this->objectToCheck->getConfValueString(
@@ -2936,8 +2946,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies which fields are required to be filled when ' .
-                'editing a pkace. Some fields will be not be required if ' .
-                'this configuration is incorrect.',
+            'editing a pkace. Some fields will be not be required if ' .
+            'this configuration is incorrect.',
             [
                 'address',
                 'zip',
@@ -3003,9 +3013,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_listView',
             'This value specifies whether only events with vacancies should be ' .
-                'shown in the list view. If this value is not configured ' .
-                'properly, events with no vacancies will be shown in the ' .
-                'list view.'
+            'shown in the list view. If this value is not configured ' .
+            'properly, events with no vacancies will be shown in the ' .
+            'list view.'
         );
     }
 
@@ -3054,8 +3064,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'The specified currency setting is either empty or not a valid ' .
-                'ISO 4217 alpha 3 code. Please correct the value of <strong>' .
-                $this->getTSSetupPath() . 'currency</strong>.',
+            'ISO 4217 alpha 3 code. Please correct the value of <strong>' .
+            $this->getTSSetupPath() . 'currency</strong>.',
             \Tx_Oelib_Db::selectColumnForMultiple('cu_iso_3', 'static_currencies')
         );
     }
@@ -3072,9 +3082,9 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             false,
             '',
             'This value specifies if attendances on the registration queue ' .
-                'should also be exported in the CSV file in the e-mail mode.' .
-                'If this is not set correctly, the attendances on the ' .
-                'registration queue might not get exported.'
+            'should also be exported in the CSV file in the e-mail mode.' .
+            'If this is not set correctly, the attendances on the ' .
+            'registration queue might not get exported.'
         );
     }
 
@@ -3108,8 +3118,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             true,
             's_listView',
             'This value specifies when the list view will link to the single view. '
-                . 'If this value is not set correctly, the single view might not be linked although this is intended '
-                . '(or vice versa).',
+            . 'If this value is not set correctly, the single view might not be linked although this is intended '
+            . '(or vice versa).',
             [
                 'always',
                 'never',

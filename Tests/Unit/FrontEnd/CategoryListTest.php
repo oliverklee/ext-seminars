@@ -460,7 +460,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
                     'title' => 'test',
                     'icon' => '',
                 ],
-        ];
+            ];
 
         self::assertEquals(
             'test',
@@ -477,7 +477,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
                     'title' => 'test',
                     'icon' => 'foo.gif',
                 ],
-        ];
+            ];
         $this->testingFramework->createDummyFile('foo.gif', base64_decode(self::BLANK_GIF, true));
 
         self::assertNotContains(
@@ -498,7 +498,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
                     'title' => 'test & more',
                     'icon' => '',
                 ],
-        ];
+            ];
 
         self::assertEquals(
             'test &amp; more',
@@ -562,7 +562,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
                     'title' => 'te & st',
                     'icon' => 'foo.gif',
                 ],
-        ];
+            ];
         $this->testingFramework->createDummyFile('foo.gif', base64_decode(self::BLANK_GIF, true));
 
         self::assertRegExp(
@@ -580,7 +580,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
                     'title' => 'test',
                     'icon' => 'foo.gif',
                 ],
-        ];
+            ];
 
         $this->testingFramework->createDummyFile('foo.gif', base64_decode(self::BLANK_GIF, true));
 
@@ -606,7 +606,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
                     'title' => 'new_test',
                     'icon' => 'foo2.gif',
                 ],
-        ];
+            ];
 
         $this->testingFramework->createDummyFile('foo.gif', base64_decode(self::BLANK_GIF, true));
         $this->testingFramework->createDummyFile('foo2.gif', base64_decode(self::BLANK_GIF, true));
@@ -630,7 +630,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
                     'title' => 'bar',
                     'icon' => 'foo2.gif',
                 ],
-        ];
+            ];
 
         self::assertRegExp(
             '/foo.*bar/',
@@ -653,7 +653,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
                     'title' => 'bar',
                     'icon' => 'foo2.gif',
                 ],
-        ];
+            ];
 
         self::assertNotContains(
             ',',
@@ -661,8 +661,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
         );
     }
 
-    public function testCreateCategoryForCategoryWithoutImageAndListWithConfigurationValueSetToIconUsesCommasAsSeparators()
-    {
+    public function testCreateCategoryForCategoryWithoutImageAndListWithConfigurationValueSetToIconUsesCommasAsSeparators(
+    ) {
         $this->fixture->setConfigurationValue('categoriesInListView', 'icon');
         $multipleCategories =
             [
@@ -674,7 +674,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
                     'title' => 'bar',
                     'icon' => 'foo2.gif',
                 ],
-        ];
+            ];
 
         self::assertRegExp(
             '/foo.*,.*bar/',
@@ -695,7 +695,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
                     'title' => 'bar',
                     'icon' => 'foo2.gif',
                 ],
-        ];
+            ];
 
         self::assertRegExp(
             '/foo.*,.*bar/',
@@ -718,7 +718,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
                     'title' => 'bar',
                     'icon' => 'foo2.gif',
                 ],
-        ];
+            ];
 
         self::assertRegExp(
             '/foo.*,.*bar/',

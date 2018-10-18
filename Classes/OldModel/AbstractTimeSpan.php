@@ -81,7 +81,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends \Tx_Seminars_OldMod
     public function hasStarted()
     {
         return $this->hasBeginDate()
-                && ($GLOBALS['SIM_EXEC_TIME'] >= $this->getBeginDateAsTimestamp());
+            && ($GLOBALS['SIM_EXEC_TIME'] >= $this->getBeginDateAsTimestamp());
     }
 
     /**

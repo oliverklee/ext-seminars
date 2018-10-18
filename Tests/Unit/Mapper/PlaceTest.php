@@ -80,7 +80,7 @@ class Tx_Seminars_Tests_Unit_Mapper_PlaceTest extends \Tx_Phpunit_TestCase
     public function getOwnerWithOwnerReturnsOwnerInstance()
     {
         $frontEndUser = \Tx_Oelib_MapperRegistry::
-            get(\Tx_Seminars_Mapper_FrontEndUser::class)->getLoadedTestingModel([]);
+        get(\Tx_Seminars_Mapper_FrontEndUser::class)->getLoadedTestingModel([]);
         /** @var \Tx_Seminars_Model_Place $testingModel */
         $testingModel = $this->fixture->getLoadedTestingModel(
             ['owner' => $frontEndUser->getUid()]

@@ -1745,8 +1745,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function getAvailablePricesForSpecialPriceSetAndSpecialEarlyBirdPriceSetAndEarlyBirdReturnsSpecialEarlyBirdPrice()
-    {
+    public function getAvailablePricesForSpecialPriceSetAndSpecialEarlyBirdPriceSetAndEarlyBirdReturnsSpecialEarlyBirdPrice(
+    ) {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             \Tx_Seminars_Model_Event::class,
@@ -1773,8 +1773,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function getAvailablePricesForNoSpecialPriceSetAndSpecialEarlyBirdPriceSetAndEarlyBirdNotReturnsSpecialEarlyBirdPrice()
-    {
+    public function getAvailablePricesForNoSpecialPriceSetAndSpecialEarlyBirdPriceSetAndEarlyBirdNotReturnsSpecialEarlyBirdPrice(
+    ) {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(
             \Tx_Seminars_Model_Event::class,

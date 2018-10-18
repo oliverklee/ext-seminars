@@ -243,11 +243,13 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         $this->whatToDisplay = $this->getConfValueString('what_to_display');
 
         if (!in_array(
-                $this->whatToDisplay,
-                [
-                    'list_registrations', 'list_vip_registrations',
-                    'countdown', 'category_list',
-                ]
+            $this->whatToDisplay,
+            [
+                'list_registrations',
+                'list_vip_registrations',
+                'countdown',
+                'category_list',
+            ]
         )) {
             $this->setFlavor($this->whatToDisplay);
         }
@@ -314,9 +316,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
                 // We still use the processEventEditorActions call in the next case.
             case 'my_entered_events':
                 $this->processEventEditorActions();
-                // The fallthrough is intended
-                // because createListView() will differentiate later.
-                // no break
+            // The fallthrough is intended
+            // because createListView() will differentiate later.
+            // no break
             case 'topic_list':
                 // The fallthrough is intended
                 // because createListView() will differentiate later.
@@ -377,8 +379,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
                     if (!($hookInstance instanceof \Tx_Seminars_Interface_Hook_EventListView)) {
                         throw new \UnexpectedValueException(
                             'The class ' . get_class($hookInstance) . ' is used for the event list view hook, ' .
-                                'but does not implement the \\Tx_Seminars_Interface_Hook_EventListView interface.',
-                                1301928334
+                            'but does not implement the \\Tx_Seminars_Interface_Hook_EventListView interface.',
+                            1301928334
                         );
                     }
                     $this->listViewHooks[] = $hookInstance;
@@ -411,8 +413,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
                     if (!($hookInstance instanceof \Tx_Seminars_Interface_Hook_EventSingleView)) {
                         throw new \UnexpectedValueException(
                             'The class ' . get_class($hookInstance) . ' is used for the event single view hook, ' .
-                                'but does not implement the \\Tx_Seminars_Interface_Hook_EventSingleView interface.',
-                                1306432026
+                            'but does not implement the \\Tx_Seminars_Interface_Hook_EventSingleView interface.',
+                            1306432026
                         );
                     }
                     $this->singleViewHooks[] = $hookInstance;
@@ -443,7 +445,12 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
 
         if (\Tx_Seminars_OldModel_Abstract::recordExists($seminarUid, 'tx_seminars_seminars', $showHiddenRecords)) {
             /** @var \Tx_Seminars_OldModel_Event $event */
-            $event = GeneralUtility::makeInstance(\Tx_Seminars_OldModel_Event::class, $seminarUid, false, $showHiddenRecords);
+            $event = GeneralUtility::makeInstance(
+                \Tx_Seminars_OldModel_Event::class,
+                $seminarUid,
+                false,
+                $showHiddenRecords
+            );
             $this->setSeminar($event);
 
             $result = $showHiddenRecords ? $this->canShowCurrentEvent() : true;
@@ -485,9 +492,15 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
             $dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
                 '*',
                 'tx_seminars_attendances',
-                'tx_seminars_attendances.uid = ' . $registrationUid . \Tx_Oelib_Db::enableFields('tx_seminars_attendances')
+                'tx_seminars_attendances.uid = ' . $registrationUid . \Tx_Oelib_Db::enableFields(
+                    'tx_seminars_attendances'
+                )
             );
-            $this->registration = GeneralUtility::makeInstance(\Tx_Seminars_OldModel_Registration::class, $this->cObj, $dbResult);
+            $this->registration = GeneralUtility::makeInstance(
+                \Tx_Seminars_OldModel_Registration::class,
+                $this->cObj,
+                $dbResult
+            );
             if ($dbResult !== false) {
                 $GLOBALS['TYPO3_DB']->sql_free_result($dbResult);
             }
@@ -510,7 +523,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
     public function createHelperObjects()
     {
         if ($this->configurationService === null) {
-            $this->configurationService = GeneralUtility::makeInstance(\Tx_Seminars_Service_ConfigurationService::class);
+            $this->configurationService = GeneralUtility::makeInstance(
+                \Tx_Seminars_Service_ConfigurationService::class
+            );
         }
 
         if ($this->eventMapper === null) {
@@ -627,15 +642,15 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         if ($eventId) {
             $linkConfiguration['additionalParams']
                 = GeneralUtility::implodeArrayForUrl(
-                    'tx_seminars_pi1',
-                    [
-                        'seminar' => $eventId,
-                        'action' => 'register',
-                    ],
-                    '',
-                    false,
-                    true
-                );
+                'tx_seminars_pi1',
+                [
+                    'seminar' => $eventId,
+                    'action' => 'register',
+                ],
+                '',
+                false,
+                true
+            );
         }
 
         $redirectUrl = GeneralUtility::locationHeaderUrl(
@@ -1089,8 +1104,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
     private function setSpeakersMarkerWithoutCheck($speakerType)
     {
         if (!in_array(
-                $speakerType,
-                ['speakers', 'partners', 'tutors', 'leaders']
+            $speakerType,
+            ['speakers', 'partners', 'tutors', 'leaders']
         )) {
             throw new \InvalidArgumentException(
                 'The speaker type given in the parameter $speakerType is not an allowed type.',
@@ -1500,7 +1515,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
     protected function getLoggedInFrontEndUserUid()
     {
         $loginManager = \Tx_Oelib_FrontEndLoginManager::getInstance();
-        return $loginManager->isLoggedIn() ? $loginManager->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class)->getUid() : 0;
+        return $loginManager->isLoggedIn() ? $loginManager->getLoggedInUser(
+            \Tx_Seminars_Mapper_FrontEndUser::class
+        )->getUid() : 0;
     }
 
     /**
@@ -1519,8 +1536,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         $this->setMarker(
             'registration',
             $this->getRegistrationManager()->canRegisterIfLoggedIn($this->seminar)
-            ? $this->getRegistrationManager()->getLinkToRegistrationOrLoginPage($this, $this->seminar)
-            : $this->getRegistrationManager()->canRegisterIfLoggedInMessage($this->seminar)
+                ? $this->getRegistrationManager()->getLinkToRegistrationOrLoginPage($this, $this->seminar)
+                : $this->getRegistrationManager()->canRegisterIfLoggedInMessage($this->seminar)
         );
     }
 
@@ -1560,8 +1577,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
 
         $this->hideSubparts(
             'accreditation_number,date,time,place,room,speakers,organizers,' .
-                'vacancies,deadline_registration,registration,' .
-                'list_registrations,eventsnextday',
+            'vacancies,deadline_registration,registration,' .
+            'list_registrations,eventsnextday',
             'field_wrapper'
         );
     }
@@ -1675,8 +1692,15 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         $isOkay = true;
         $this->ensureIntegerPiVars(
             [
-                'from_day', 'from_month', 'from_year', 'to_day', 'to_month',
-                'to_year', 'age', 'price_from', 'price_to',
+                'from_day',
+                'from_month',
+                'from_year',
+                'to_day',
+                'to_month',
+                'to_year',
+                'age',
+                'price_from',
+                'price_to',
             ]
         );
 
@@ -2060,7 +2084,11 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
             $this->setMarker('image', $image);
 
             /** @var \Tx_Seminars_FrontEnd_CategoryList $categoryList */
-            $categoryList = GeneralUtility::makeInstance(\Tx_Seminars_FrontEnd_CategoryList::class, $this->conf, $this->cObj);
+            $categoryList = GeneralUtility::makeInstance(
+                \Tx_Seminars_FrontEnd_CategoryList::class,
+                $this->conf,
+                $this->cObj
+            );
             $listOfCategories = $categoryList->createCategoryList(
                 $this->seminar->getCategories()
             );
@@ -2223,7 +2251,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         $registrationBagBuilder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Registration::class);
 
         /** @var \Tx_Seminars_Model_FrontEndUser $loggedInUser */
-        $loggedInUser = \Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
+        $loggedInUser = \Tx_Oelib_FrontEndLoginManager::getInstance(
+        )->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
         $registrationBagBuilder->limitToAttendee($loggedInUser);
         $registrationBagBuilder->setOrderByEventColumn($this->getOrderByForListView());
 
@@ -2262,7 +2291,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         // Overwrites the default sort order with values given by the browser.
         // This happens if the user changes the sort order manually.
         if (!empty($this->piVars['sort'])) {
-            list($this->internal['orderBy'], $this->internal['descFlag']) =
+            list($this->internal['orderBy'], $this->internal['descFlag']
+                ) =
                 explode(':', $this->piVars['sort']);
         }
 
@@ -2287,7 +2317,10 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
     public function getFieldHeader($fieldName)
     {
         $label = $this->translate('label_' . $fieldName);
-        if (($fieldName === 'price_regular') && $this->getConfValueBoolean('generalPriceInList', 's_template_special')) {
+        if (($fieldName === 'price_regular') && $this->getConfValueBoolean(
+                'generalPriceInList',
+                's_template_special'
+            )) {
             $label = $this->translate('label_price_general');
         }
 
@@ -2320,7 +2353,11 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         }
 
         /** @var \Tx_Seminars_FrontEnd_SelectorWidget $selectorWidget */
-        $selectorWidget = GeneralUtility::makeInstance(\Tx_Seminars_FrontEnd_SelectorWidget::class, $this->conf, $this->cObj);
+        $selectorWidget = GeneralUtility::makeInstance(
+            \Tx_Seminars_FrontEnd_SelectorWidget::class,
+            $this->conf,
+            $this->cObj
+        );
 
         return $selectorWidget->render();
     }
@@ -2408,7 +2445,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         }
 
         if (
-            $this->getConfValueBoolean('hideCanceledEvents', 's_template_special')
+        $this->getConfValueBoolean('hideCanceledEvents', 's_template_special')
         ) {
             $builder->ignoreCanceledEvents();
         }
@@ -2473,7 +2510,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
     public function getVacanciesClasses(\Tx_Seminars_OldModel_Event $event)
     {
         if (!$event->needsRegistration()
-            || (!$event->hasDate() && !$this->configurationService->getConfValueBoolean('allowRegistrationForEventsWithoutDate'))
+            || (!$event->hasDate(
+                ) && !$this->configurationService->getConfValueBoolean('allowRegistrationForEventsWithoutDate'))
         ) {
             return '';
         }
@@ -2725,7 +2763,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
     public function hideListRegistrationsColumnIfNecessary($whatToDisplay)
     {
         $alwaysHideInViews = [
-            'topic_list', 'other_dates', 'events_next_day',
+            'topic_list',
+            'other_dates',
+            'events_next_day',
         ];
         if (!$this->isRegistrationEnabled() || !$this->isLoggedIn()
             || in_array($whatToDisplay, $alwaysHideInViews, true)
@@ -2789,8 +2829,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
     {
         $isCsvExportOfRegistrationsInMyVipEventsViewAllowed
             = $this->getConfValueBoolean(
-                'allowCsvExportOfRegistrationsInMyVipEventsView'
-            );
+            'allowCsvExportOfRegistrationsInMyVipEventsView'
+        );
 
         if (($whatToDisplay != 'my_vip_events')
             || !$isCsvExportOfRegistrationsInMyVipEventsViewAllowed
@@ -3000,7 +3040,11 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
     protected function createRegistrationForm()
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm $registrationEditor */
-        $registrationEditor = GeneralUtility::makeInstance(\Tx_Seminars_FrontEnd_RegistrationForm::class, $this->conf, $this->cObj);
+        $registrationEditor = GeneralUtility::makeInstance(
+            \Tx_Seminars_FrontEnd_RegistrationForm::class,
+            $this->conf,
+            $this->cObj
+        );
         $registrationEditor->setSeminar($this->seminar);
         $registrationEditor->setAction($this->piVars['action']);
         if ($this->piVars['action'] == 'unregister') {
@@ -3131,12 +3175,12 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
     private function setGenderSpecificHeading($speakerType)
     {
         if (!in_array(
-                $speakerType,
-                ['speakers', 'partners', 'tutors', 'leaders']
+            $speakerType,
+            ['speakers', 'partners', 'tutors', 'leaders']
         )) {
             throw new \InvalidArgumentException(
                 'The given speaker type "' . $speakerType .
-                    '" is not an allowed type. Allowed types are "speakers", "partners", "tutors" or "leaders".',
+                '" is not an allowed type. Allowed types are "speakers", "partners", "tutors" or "leaders".',
                 1333293103
             );
         }

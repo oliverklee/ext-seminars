@@ -407,7 +407,6 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
     }
 
-
     /**
      * @test
      */
@@ -2355,7 +2354,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $hookClassName = uniqid('RegistrationEmailHookInterface');
         $hook = $this->getMock(
             RegistrationEmailHookInterface::class,
-            ['postProcessAttendeeEmail', 'postProcessOrganizerEmail', 'postProcessAdditionalEmail', 'postProcessAttendeeEmailText'],
+            [
+                'postProcessAttendeeEmail',
+                'postProcessOrganizerEmail',
+                'postProcessAdditionalEmail',
+                'postProcessAttendeeEmailText',
+            ],
             [],
             $hookClassName
         );
@@ -2384,7 +2388,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $hookClassName = uniqid('RegistrationEmailHookInterface');
         $hook = $this->getMock(
             RegistrationEmailHookInterface::class,
-            ['postProcessAttendeeEmail', 'postProcessOrganizerEmail', 'postProcessAdditionalEmail', 'postProcessAttendeeEmailText'],
+            [
+                'postProcessAttendeeEmail',
+                'postProcessOrganizerEmail',
+                'postProcessAdditionalEmail',
+                'postProcessAttendeeEmailText',
+            ],
             [],
             $hookClassName
         );
@@ -4939,7 +4948,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $hookClassName = uniqid('RegistrationEmailHookInterface');
         $hook = $this->getMock(
             RegistrationEmailHookInterface::class,
-            ['postProcessAttendeeEmail', 'postProcessOrganizerEmail', 'postProcessAdditionalEmail', 'postProcessAttendeeEmailText'],
+            [
+                'postProcessAttendeeEmail',
+                'postProcessOrganizerEmail',
+                'postProcessAdditionalEmail',
+                'postProcessAttendeeEmailText',
+            ],
             [],
             $hookClassName
         );
@@ -4964,7 +4978,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $hookClassName = uniqid('RegistrationEmailHookInterface');
         $hook = $this->getMock(
             RegistrationEmailHookInterface::class,
-            ['postProcessAttendeeEmail', 'postProcessOrganizerEmail', 'postProcessAdditionalEmail', 'postProcessAttendeeEmailText'],
+            [
+                'postProcessAttendeeEmail',
+                'postProcessOrganizerEmail',
+                'postProcessAdditionalEmail',
+                'postProcessAttendeeEmailText',
+            ],
             [],
             $hookClassName
         );
@@ -5227,7 +5246,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $hookClassName = uniqid('RegistrationEmailHookInterface');
         $hook = $this->getMock(
             RegistrationEmailHookInterface::class,
-            ['postProcessAttendeeEmail', 'postProcessOrganizerEmail', 'postProcessAdditionalEmail', 'postProcessAttendeeEmailText'],
+            [
+                'postProcessAttendeeEmail',
+                'postProcessOrganizerEmail',
+                'postProcessAdditionalEmail',
+                'postProcessAttendeeEmailText',
+            ],
             [],
             $hookClassName
         );
@@ -5255,7 +5279,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $hookClassName = uniqid('RegistrationEmailHookInterface');
         $hook = $this->getMock(
             RegistrationEmailHookInterface::class,
-            ['postProcessAttendeeEmail', 'postProcessOrganizerEmail', 'postProcessAdditionalEmail', 'postProcessAttendeeEmailText'],
+            [
+                'postProcessAttendeeEmail',
+                'postProcessOrganizerEmail',
+                'postProcessAdditionalEmail',
+                'postProcessAttendeeEmailText',
+            ],
             [],
             $hookClassName
         );
@@ -5780,7 +5809,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $hookClassName = uniqid('RegistrationEmailHookInterface');
         $hook = $this->getMock(
             RegistrationEmailHookInterface::class,
-            ['postProcessAttendeeEmail', 'postProcessOrganizerEmail', 'postProcessAdditionalEmail', 'postProcessAttendeeEmailText'],
+            [
+                'postProcessAttendeeEmail',
+                'postProcessOrganizerEmail',
+                'postProcessAdditionalEmail',
+                'postProcessAttendeeEmailText',
+            ],
             [],
             $hookClassName
         );

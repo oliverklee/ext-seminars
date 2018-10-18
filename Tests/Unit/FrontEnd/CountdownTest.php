@@ -108,12 +108,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CountdownTest extends \Tx_Phpunit_TestCase
     {
         $this->fixture->injectEventMapper($this->mapper);
         /** @var \Tx_Seminars_Model_Event $event */
-        $event = $this->mapper->getLoadedTestingModel([
-            'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
-            'pid' => 0,
-            'title' => 'Test event',
-            'begin_date' => $GLOBALS['SIM_ACCESS_TIME'] + 1000,
-        ]);
+        $event = $this->mapper->getLoadedTestingModel(
+            [
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'pid' => 0,
+                'title' => 'Test event',
+                'begin_date' => $GLOBALS['SIM_ACCESS_TIME'] + 1000,
+            ]
+        );
 
         $this->mapper->expects(self::once())
             ->method('findNextUpcoming')

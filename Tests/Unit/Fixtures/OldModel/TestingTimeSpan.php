@@ -9,6 +9,7 @@ final class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingTimeSpan extends \Tx
 {
     /** string with the name of the SQL table this class corresponds to */
     public $tableName = 'tx_seminars_unit_testing';
+
     /** associative array with the values from/for the DB */
     public $recordData = [
         'begin_date' => 0,

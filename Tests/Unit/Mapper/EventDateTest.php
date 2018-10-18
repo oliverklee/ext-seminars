@@ -211,7 +211,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends \Tx_Phpunit_TestCase
     public function getPaymentMethodsForEventDateWithOnePaymentMethodReturnsListOfPaymentMethods()
     {
         $paymentMethod = \Tx_Oelib_MapperRegistry::
-            get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
+        get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             ['payment_methods' => 1]
@@ -240,7 +240,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends \Tx_Phpunit_TestCase
     public function getPaymentMethodsForEventDateWithOnePaymentMethodReturnsOnePaymentMethod()
     {
         $paymentMethod = \Tx_Oelib_MapperRegistry::
-            get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
+        get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             ['payment_methods' => 1]
@@ -301,7 +301,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends \Tx_Phpunit_TestCase
             ]
         );
         $targetGroup = \Tx_Oelib_MapperRegistry::
-            get(\Tx_Seminars_Mapper_TargetGroup::class)->getNewGhost();
+        get(\Tx_Seminars_Mapper_TargetGroup::class)->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $topicUid,
@@ -331,7 +331,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends \Tx_Phpunit_TestCase
             ]
         );
         $targetGroup = \Tx_Oelib_MapperRegistry::
-            get(\Tx_Seminars_Mapper_TargetGroup::class)->getNewGhost();
+        get(\Tx_Seminars_Mapper_TargetGroup::class)->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $topicUid,

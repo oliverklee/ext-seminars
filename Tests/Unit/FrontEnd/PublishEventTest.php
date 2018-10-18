@@ -148,7 +148,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_PublishEventTest extends \Tx_Phpunit_TestC
             $this->testingFramework->existsRecord(
                 'tx_seminars_seminars',
                 'uid = ' . $eventUid .
-                    ' AND publication_hash = ""'
+                ' AND publication_hash = ""'
             )
         );
     }

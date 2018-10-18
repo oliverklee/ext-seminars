@@ -11,6 +11,7 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends \Tx_Phpunit_TestCase
      * @var \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing
      */
     protected $fixture = null;
+
     /**
      * @var \Tx_Oelib_TestingFramework
      */
@@ -417,7 +418,7 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends \Tx_Phpunit_TestCase
             $this->testingFramework->existsRecord(
                 'tx_seminars_test_test_mm',
                 'uid_local = ' . $this->fixtureUid . ' AND uid_foreign = 31 ' .
-                    'AND sorting = 2'
+                'AND sorting = 2'
             )
         );
     }

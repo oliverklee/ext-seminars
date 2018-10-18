@@ -111,7 +111,12 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
         $GLOBALS['TT'] = GeneralUtility::makeInstance(NullTimeTracker::class);
 
         /** @var TypoScriptFrontendController $frontEnd */
-        $frontEnd = GeneralUtility::makeInstance(TypoScriptFrontendController::class, $GLOBALS['TYPO3_CONF_VARS'], 0, 0);
+        $frontEnd = GeneralUtility::makeInstance(
+            TypoScriptFrontendController::class,
+            $GLOBALS['TYPO3_CONF_VARS'],
+            0,
+            0
+        );
 
         // simulates a normal FE without any logged-in FE or BE user
         $frontEnd->beUserLogin = false;

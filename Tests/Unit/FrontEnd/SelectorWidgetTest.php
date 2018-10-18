@@ -129,7 +129,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends \Tx_Phpunit_Tes
 
         self::assertContains(
             '<input type="submit" value="' .
-                $this->fixture->translate('label_selector_submit') . '" />',
+            $this->fixture->translate('label_selector_submit') . '" />',
             $this->fixture->render()
         );
     }
@@ -146,7 +146,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends \Tx_Phpunit_Tes
 
         self::assertContains(
             '<input type="submit" value="' .
-                $this->fixture->translate('label_selector_reset') . '"',
+            $this->fixture->translate('label_selector_reset') . '"',
             $this->fixture->render()
         );
     }
@@ -167,8 +167,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends \Tx_Phpunit_Tes
 
         self::assertContains(
             '<option value="0">' .
-                $this->fixture->translate('label_selector_pleaseChoose') .
-                '</option>',
+            $this->fixture->translate('label_selector_pleaseChoose') .
+            '</option>',
             $this->fixture->render()
         );
     }
@@ -203,7 +203,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends \Tx_Phpunit_Tes
         $this->fixture->setConfigurationValue(
             'displaySearchFormFields',
             'event_type,language,country,city,place,full_text_search,date,' .
-                'age,organizer,price'
+            'age,organizer,price'
         );
 
         self::assertNotContains(
@@ -289,7 +289,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends \Tx_Phpunit_Tes
 
         self::assertContains(
             '<option value="' . $eventTypeUid . '">' . $eventTypeTitle .
-                '</option>',
+            '</option>',
             $this->fixture->render()
         );
     }
@@ -316,8 +316,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends \Tx_Phpunit_Tes
 
         self::assertContains(
             '<option value="' . $eventTypeUid . '">' .
-                htmlspecialchars($eventTypeTitle) .
-                '</option>',
+            htmlspecialchars($eventTypeTitle) .
+            '</option>',
             $this->fixture->render()
         );
     }
@@ -346,7 +346,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends \Tx_Phpunit_Tes
 
         self::assertContains(
             $eventTypeUid . '" selected="selected">' . $eventTypeTitle .
-                '</option>',
+            '</option>',
             $this->fixture->render()
         );
     }
@@ -388,12 +388,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends \Tx_Phpunit_Tes
 
         self::assertContains(
             $eventTypeUid . '" selected="selected">' . $eventTypeTitle .
-                '</option>',
+            '</option>',
             $output
         );
         self::assertContains(
             $eventTypeUid2 . '" selected="selected">' . $eventTypeTitle2 .
-                '</option>',
+            '</option>',
             $output
         );
     }
@@ -410,7 +410,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends \Tx_Phpunit_Tes
 
         self::assertContains(
             '<select name="tx_seminars_pi1[event_type][]" ' .
-                'id="tx_seminars_pi1-event_type" size="5" multiple="multiple">',
+            'id="tx_seminars_pi1-event_type" size="5" multiple="multiple">',
             $this->fixture->render()
         );
     }
@@ -424,8 +424,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends \Tx_Phpunit_Tes
         $fixture = $this->getMock(
             \Tx_Seminars_FrontEnd_SelectorWidget::class,
             [
-                'hasSearchField', 'getEventTypeData',
-                'getLanguageData', 'getPlaceData', 'getCityData',
+                'hasSearchField',
+                'getEventTypeData',
+                'getLanguageData',
+                'getPlaceData',
+                'getCityData',
                 'getCountryData',
             ],
             [
@@ -520,7 +523,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends \Tx_Phpunit_Tes
 
         self::assertContains(
             '<option value="' . $languageIsoCode . '">' . $languageName .
-                '</option>',
+            '</option>',
             $this->fixture->render()
         );
     }
@@ -537,7 +540,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends \Tx_Phpunit_Tes
 
         self::assertContains(
             '<select name="tx_seminars_pi1[language][]" ' .
-                'id="tx_seminars_pi1-language" size="5" multiple="multiple">',
+            'id="tx_seminars_pi1-language" size="5" multiple="multiple">',
             $this->fixture->render()
         );
     }
@@ -571,7 +574,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends \Tx_Phpunit_Tes
 
         self::assertContains(
             $languageIsoCode . '" selected="selected">' . $languageName .
-                '</option>',
+            '</option>',
             $this->fixture->render()
         );
     }
@@ -620,12 +623,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends \Tx_Phpunit_Tes
 
         self::assertContains(
             $languageIsoCode . '" selected="selected">' . $languageName .
-                '</option>',
+            '</option>',
             $output
         );
         self::assertContains(
             $languageIsoCode2 . '" selected="selected">' . $languageName2 .
-                '</option>',
+            '</option>',
             $output
         );
     }
@@ -707,7 +710,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends \Tx_Phpunit_Tes
 
         self::assertContains(
             '<option value="' . $placeUid . '">' .
-                htmlspecialchars($placeTitle) . '</option>',
+            htmlspecialchars($placeTitle) . '</option>',
             $this->fixture->render()
         );
     }
@@ -724,7 +727,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends \Tx_Phpunit_Tes
 
         self::assertContains(
             '<select name="tx_seminars_pi1[place][]" ' .
-                'id="tx_seminars_pi1-place" size="5" multiple="multiple">',
+            'id="tx_seminars_pi1-place" size="5" multiple="multiple">',
             $this->fixture->render()
         );
     }
@@ -804,12 +807,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends \Tx_Phpunit_Tes
 
         self::assertContains(
             '<option value="' . $placeUid . '" selected="selected">' .
-                $placeTitle . '</option>',
+            $placeTitle . '</option>',
             $output
         );
         self::assertContains(
             '<option value="' . $placeUid2 . '" selected="selected">' .
-                $placeTitle2 . '</option>',
+            $placeTitle2 . '</option>',
             $output
         );
     }
@@ -937,7 +940,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends \Tx_Phpunit_Tes
 
         self::assertContains(
             '<option value="' . $cityTitle . '" selected="selected">' .
-                $cityTitle . '</option>',
+            $cityTitle . '</option>',
             $this->fixture->render()
         );
     }
@@ -986,12 +989,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends \Tx_Phpunit_Tes
 
         self::assertContains(
             '<option value="' . $cityTitle1 . '" selected="selected">' .
-                $cityTitle1 . '</option>',
+            $cityTitle1 . '</option>',
             $output
         );
         self::assertContains(
             '<option value="' . $cityTitle2 . '" selected="selected">' .
-                $cityTitle2 . '</option>',
+            $cityTitle2 . '</option>',
             $output
         );
     }
@@ -1066,7 +1069,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends \Tx_Phpunit_Tes
 
         self::assertContains(
             '<option value="' . $countryIsoCode . '">' . $countryName .
-                '</option>',
+            '</option>',
             $this->fixture->render()
         );
     }
@@ -1127,12 +1130,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends \Tx_Phpunit_Tes
 
         self::assertContains(
             '<option value="' . $countryIsoCode1 . '">' . $countryName1 .
-                '</option>',
+            '</option>',
             $output
         );
         self::assertContains(
             '<option value="' . $countryIsoCode2 . '">' . $countryName2 .
-                '</option>',
+            '</option>',
             $output
         );
     }
@@ -1172,7 +1175,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends \Tx_Phpunit_Tes
 
         self::assertContains(
             '<option value="' . $countryIsoCode . '" selected="selected">' .
-                $countryName . '</option>',
+            $countryName . '</option>',
             $this->fixture->render()
         );
     }
@@ -1236,12 +1239,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends \Tx_Phpunit_Tes
 
         self::assertContains(
             '<option value="' . $countryIsoCode1 . '" selected="selected">' .
-                $countryName1 . '</option>',
+            $countryName1 . '</option>',
             $output
         );
         self::assertContains(
             '<option value="' . $countryIsoCode2 . '" selected="selected">' .
-                $countryName2 . '</option>',
+            $countryName2 . '</option>',
             $output
         );
     }
@@ -1531,7 +1534,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends \Tx_Phpunit_Tes
         );
         self::assertContains(
             '<option value="' . $thisYear . '" selected="selected">' .
-                $thisYear . '</option>',
+            $thisYear . '</option>',
             $output
         );
     }
@@ -1918,7 +1921,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends \Tx_Phpunit_Tes
 
         self::assertContains(
             '<option value="' . $organizerUid . '">' . $organizerName .
-                '</option>',
+            '</option>',
             $this->fixture->render()
         );
     }
@@ -1950,8 +1953,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends \Tx_Phpunit_Tes
 
         self::assertContains(
             '<option value="' . $organizerUid . '">' .
-                htmlspecialchars($organizerName) .
-                '</option>',
+            htmlspecialchars($organizerName) .
+            '</option>',
             $this->fixture->render()
         );
     }
@@ -1985,7 +1988,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends \Tx_Phpunit_Tes
 
         self::assertContains(
             $organizerUid . '" selected="selected">' . $organizerName .
-                '</option>',
+            '</option>',
             $this->fixture->render()
         );
     }
@@ -2033,12 +2036,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends \Tx_Phpunit_Tes
 
         self::assertContains(
             $organizerUid1 . '" selected="selected">' . $organizerName1 .
-                '</option>',
+            '</option>',
             $output
         );
         self::assertContains(
             $organizerUid2 . '" selected="selected">' . $organizerName2 .
-                '</option>',
+            '</option>',
             $output
         );
     }
@@ -2088,7 +2091,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends \Tx_Phpunit_Tes
         $categoryName = 'test category';
         $categoryUid = $this->testingFramework->createRecord('tx_seminars_categories', ['title' => $categoryName]);
         $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $this->testingFramework->createRelationAndUpdateCounter('tx_seminars_seminars', $eventUid, $categoryUid, 'categories');
+        $this->testingFramework->createRelationAndUpdateCounter(
+            'tx_seminars_seminars',
+            $eventUid,
+            $categoryUid,
+            'categories'
+        );
 
         self::assertContains(
             '<option value="' . $categoryUid . '">' . $categoryName . '</option>',
@@ -2106,7 +2114,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends \Tx_Phpunit_Tes
         $categoryName = '< Category Name >';
         $categoryUid = $this->testingFramework->createRecord('tx_seminars_categories', ['title' => $categoryName]);
         $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $this->testingFramework->createRelationAndUpdateCounter('tx_seminars_seminars', $eventUid, $categoryUid, 'categories');
+        $this->testingFramework->createRelationAndUpdateCounter(
+            'tx_seminars_seminars',
+            $eventUid,
+            $categoryUid,
+            'categories'
+        );
 
         self::assertContains(
             '<option value="' . $categoryUid . '">' . htmlspecialchars($categoryName) . '</option>',
@@ -2124,7 +2137,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends \Tx_Phpunit_Tes
         $categoryName = 'Category Name';
         $categoryUid = $this->testingFramework->createRecord('tx_seminars_categories', ['title' => $categoryName]);
         $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $this->testingFramework->createRelationAndUpdateCounter('tx_seminars_seminars', $eventUid, $categoryUid, 'categories');
+        $this->testingFramework->createRelationAndUpdateCounter(
+            'tx_seminars_seminars',
+            $eventUid,
+            $categoryUid,
+            'categories'
+        );
 
         $this->fixture->piVars['categories'][] = (string)$categoryUid;
 
@@ -2148,8 +2166,18 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends \Tx_Phpunit_Tes
         $categoryName2 = 'Category 2';
         $categoryUid2 = $this->testingFramework->createRecord('tx_seminars_categories', ['title' => $categoryName2]);
 
-        $this->testingFramework->createRelationAndUpdateCounter('tx_seminars_seminars', $eventUid, $categoryUid1, 'categories');
-        $this->testingFramework->createRelationAndUpdateCounter('tx_seminars_seminars', $eventUid, $categoryUid2, 'categories');
+        $this->testingFramework->createRelationAndUpdateCounter(
+            'tx_seminars_seminars',
+            $eventUid,
+            $categoryUid1,
+            'categories'
+        );
+        $this->testingFramework->createRelationAndUpdateCounter(
+            'tx_seminars_seminars',
+            $eventUid,
+            $categoryUid2,
+            'categories'
+        );
 
         $this->fixture->piVars['categories'][] = (string)$categoryUid1;
         $this->fixture->piVars['categories'][] = (string)$categoryUid2;

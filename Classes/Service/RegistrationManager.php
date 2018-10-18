@@ -881,8 +881,10 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      *
      * @return void
      */
-    protected function callPostProcessAttendeeEmailHooks(\Tx_Oelib_Mail $mail, \Tx_Seminars_Model_Registration $registration)
-    {
+    protected function callPostProcessAttendeeEmailHooks(
+        \Tx_Oelib_Mail $mail,
+        \Tx_Seminars_Model_Registration $registration
+    ) {
         foreach ($this->getHooks() as $hook) {
             // The RegistrationEmailHookInterface should be preferred against the old
             // modifyThankYouEmail variant.
@@ -1053,6 +1055,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      * @param \Tx_Oelib_Template $emailTemplate
      *
      * @return void
+     *
      * @deprecated hook has been replaced by RegistrationEmailHookInterface::postProcessOrganizerEmail
      */
     protected function callModifyOrganizerNotificationEmailHooks(
@@ -1077,8 +1080,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
     protected function callPostProcessOrganizerEmailHooks(
         \Tx_Oelib_Mail $mail,
         \Tx_Seminars_OldModel_Registration $registration
-    )
-    {
+    ) {
         foreach ($this->getHooks() as $hook) {
             if ($hook instanceof RegistrationEmailHookInterface) {
                 $hook->postProcessOrganizerEmail($mail, $registration);
@@ -1095,6 +1097,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      * @param \Tx_Seminars_OldModel_Registration $registration
      *
      * @return void
+     *
      * @deprecated use RegistrationEmailHookInterface::postProcessOrganizerEmail instead
      */
     protected function modifyNotificationEmail(
@@ -1185,6 +1188,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      * @param \Tx_Oelib_Mail $mail
      * @param \Tx_Seminars_OldModel_Registration $registration
      * @param string $emailReason
+     *
      * @return void
      */
     protected function callPostProcessAdditionalEmailHooks(

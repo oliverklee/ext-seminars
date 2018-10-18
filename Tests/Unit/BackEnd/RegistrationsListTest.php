@@ -19,6 +19,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends \Tx_Phpunit_T
      * @var RegistrationsList
      */
     private $fixture;
+
     /**
      * @var \Tx_Oelib_TestingFramework
      */
@@ -42,10 +43,12 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends \Tx_Phpunit_T
 
         $this->backEndModule = new DummyModule();
         $this->backEndModule->id = $this->dummySysFolderPid;
-        $this->backEndModule->setPageData([
-            'uid' => $this->dummySysFolderPid,
-            'doktype' => AbstractList::SYSFOLDER_TYPE,
-        ]);
+        $this->backEndModule->setPageData(
+            [
+                'uid' => $this->dummySysFolderPid,
+                'doktype' => AbstractList::SYSFOLDER_TYPE,
+            ]
+        );
 
         $document = new DocumentTemplate();
         $this->backEndModule->doc = $document;
@@ -515,7 +518,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends \Tx_Phpunit_T
         $backEndUser = \Tx_Oelib_MapperRegistry::get(
             \Tx_Seminars_Mapper_BackEndUser::class
         )->getLoadedTestingModel(
-                ['usergroup' => $backEndGroup->getUid()]
+            ['usergroup' => $backEndGroup->getUid()]
         );
         \Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser(
             $backEndUser

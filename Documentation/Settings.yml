@@ -4,27 +4,27 @@
 
 ---
 conf.py:
-  copyright: 2018
-  project: Seminar Manager
-  version: 2.0
-  release: 2.0.1
-  latex_documents:
-  - - Index
-    - seminars.tex
-    - Seminar Manager
-    - Oliver Klee
-    - manual
-  latex_elements:
-    papersize: a4paper
-    pointsize: 10pt
-    preamble: \usepackage{typo3}
-  latex_use_parts: True
-  latex_show_pagerefs: True
-  intersphinx_mapping:
-    restdoc:
-    - https://docs.typo3.org/typo3cms/extensions/restdoc/
-    - null
-    t3tsref:
-    - https://docs.typo3.org/typo3cms/TyposcriptReference/
-    - null
+    copyright: 2018
+    project: Seminar Manager
+    version: 2.0
+    release: 2.0.1
+    latex_documents:
+    -   - Index
+        - seminars.tex
+        - Seminar Manager
+        - Oliver Klee
+        - manual
+    latex_elements:
+        papersize: a4paper
+        pointsize: 10pt
+        preamble: \usepackage{typo3}
+    latex_use_parts: True
+    latex_show_pagerefs: True
+    intersphinx_mapping:
+        restdoc:
+        - https://docs.typo3.org/typo3cms/extensions/restdoc/
+        - null
+        t3tsref:
+        - https://docs.typo3.org/typo3cms/TyposcriptReference/
+        - null
 ...

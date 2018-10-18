@@ -11,6 +11,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EditorTest extends \Tx_Phpunit_TestCase
      * @var \Tx_Seminars_FrontEnd_Editor
      */
     private $fixture;
+
     /**
      * @var \Tx_Oelib_TestingFramework
      */

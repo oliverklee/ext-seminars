@@ -52,7 +52,10 @@ class Tx_Seminars_BagBuilder_Category extends \Tx_Seminars_BagBuilder_Abstract
         if (!preg_match('/^(\\d+,)*\\d+$/', $eventUids)
             || preg_match('/(^|,)0+(,|$)/', $eventUids)
         ) {
-            throw new \InvalidArgumentException('$eventUids must be a comma-separated list of positive integers.', 1333292640);
+            throw new \InvalidArgumentException(
+                '$eventUids must be a comma-separated list of positive integers.',
+                1333292640
+            );
         }
 
         $this->whereClauseParts['event'] = 'EXISTS (' .
@@ -79,7 +82,7 @@ class Tx_Seminars_BagBuilder_Category extends \Tx_Seminars_BagBuilder_Abstract
         if ($this->eventUids == '') {
             throw new \BadMethodCallException(
                 'The event UIDs were empty. This means limitToEvents has not been called. LimitToEvents has to be called ' .
-                    'before calling this function.',
+                'before calling this function.',
                 1333292662
             );
         }

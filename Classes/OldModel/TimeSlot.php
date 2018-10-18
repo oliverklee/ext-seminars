@@ -95,7 +95,7 @@ class Tx_Seminars_OldModel_TimeSlot extends \Tx_Seminars_OldModel_AbstractTimeSp
             'title',
             'tx_seminars_sites',
             'uid=' . $this->getPlace() .
-                \Tx_Oelib_Db::enableFields('tx_seminars_sites')
+            \Tx_Oelib_Db::enableFields('tx_seminars_sites')
         );
         if (!$dbResult) {
             throw new \Tx_Oelib_Exception_Database();

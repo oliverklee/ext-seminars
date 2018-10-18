@@ -18,6 +18,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends \Tx_Phpuni
      * @var ConfirmEventMailForm
      */
     private $fixture;
+
     /**
      * @var \Tx_Oelib_TestingFramework
      */
@@ -108,8 +109,8 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends \Tx_Phpuni
     {
         self::assertContains(
             '<button class="submitButton confirmEvent"><p>' .
-                $GLOBALS['LANG']->getLL('confirmMailForm_sendButton') .
-                '</p></button>',
+            $GLOBALS['LANG']->getLL('confirmMailForm_sendButton') .
+            '</p></button>',
             $this->fixture->render()
         );
     }
@@ -171,7 +172,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends \Tx_Phpuni
             $this->testingFramework->existsRecord(
                 'tx_seminars_seminars',
                 'uid = ' . $this->eventUid . ' AND cancelled = ' .
-                    \Tx_Seminars_Model_Event::STATUS_CONFIRMED
+                \Tx_Seminars_Model_Event::STATUS_CONFIRMED
             )
         );
     }

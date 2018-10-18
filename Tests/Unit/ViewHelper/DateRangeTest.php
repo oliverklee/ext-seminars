@@ -46,7 +46,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_DateRangeTest extends \Tx_Phpunit_TestCa
         // Make sure that the test results do not depend on the machine's PHP time zone.
         date_default_timezone_set('UTC');
 
-        $this->testingFramework    = new \Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
         $this->configuration = new \Tx_Oelib_Configuration();
         $this->configuration->setAsString('dateFormatYMD', self::DATE_FORMAT_YMD);
@@ -132,8 +132,8 @@ class Tx_Seminars_Tests_Unit_ViewHelper_DateRangeTest extends \Tx_Phpunit_TestCa
     /**
      * @test
      */
-    public function renderWithTimeSpanWithBeginAndEndDateOnDifferentDaysWithAbbreviateDateRangeFalseReturnsBothFullDatesSeparatedByDash()
-    {
+    public function renderWithTimeSpanWithBeginAndEndDateOnDifferentDaysWithAbbreviateDateRangeFalseReturnsBothFullDatesSeparatedByDash(
+    ) {
         $this->configuration->setAsBoolean('abbreviateDateRanges', false);
 
         /** @var \Tx_Seminars_Model_AbstractTimeSpan $timeSpan */
@@ -151,8 +151,8 @@ class Tx_Seminars_Tests_Unit_ViewHelper_DateRangeTest extends \Tx_Phpunit_TestCa
     /**
      * @test
      */
-    public function renderWithTimeSpanWithBeginAndEndDateOnDifferentDaysButSameMonthWithAbbreviateDateRangeTrueReturnsOnlyDayOfBeginDateAndFullEndDateSeparatedByDash()
-    {
+    public function renderWithTimeSpanWithBeginAndEndDateOnDifferentDaysButSameMonthWithAbbreviateDateRangeTrueReturnsOnlyDayOfBeginDateAndFullEndDateSeparatedByDash(
+    ) {
         $this->configuration->setAsBoolean('abbreviateDateRanges', true);
 
         /** @var \Tx_Seminars_Model_AbstractTimeSpan $timeSpan */
@@ -170,8 +170,8 @@ class Tx_Seminars_Tests_Unit_ViewHelper_DateRangeTest extends \Tx_Phpunit_TestCa
     /**
      * @test
      */
-    public function renderWithTimeSpanWithBeginAndEndDateOnDifferentMonthWithAbbreviateDateRangeTrueReturnsDayAndMonthOfBeginDateAndFullEndDateSeparatedByDash()
-    {
+    public function renderWithTimeSpanWithBeginAndEndDateOnDifferentMonthWithAbbreviateDateRangeTrueReturnsDayAndMonthOfBeginDateAndFullEndDateSeparatedByDash(
+    ) {
         $this->configuration->setAsBoolean('abbreviateDateRanges', true);
 
         /** @var \Tx_Seminars_Model_AbstractTimeSpan $timeSpan */
@@ -189,8 +189,8 @@ class Tx_Seminars_Tests_Unit_ViewHelper_DateRangeTest extends \Tx_Phpunit_TestCa
     /**
      * @test
      */
-    public function renderWithTimeSpanWithBeginAndEndDateOnDifferentYearsWithAbbreviateDateRangeTrueReturnsFullBeginDateAndFullEndDateSeparatedByDash()
-    {
+    public function renderWithTimeSpanWithBeginAndEndDateOnDifferentYearsWithAbbreviateDateRangeTrueReturnsFullBeginDateAndFullEndDateSeparatedByDash(
+    ) {
         $this->configuration->setAsBoolean('abbreviateDateRanges', true);
 
         /** @var \Tx_Seminars_Model_AbstractTimeSpan $timeSpan */
@@ -208,8 +208,8 @@ class Tx_Seminars_Tests_Unit_ViewHelper_DateRangeTest extends \Tx_Phpunit_TestCa
     /**
      * @test
      */
-    public function renderWithTimeSpanWithBeginAndEndDateOnDifferentDaysWithAbbreviateDateRangeFalseReturnsBothFullDatesSeparatedBySpecifiedDash()
-    {
+    public function renderWithTimeSpanWithBeginAndEndDateOnDifferentDaysWithAbbreviateDateRangeFalseReturnsBothFullDatesSeparatedBySpecifiedDash(
+    ) {
         $this->configuration->setAsBoolean('abbreviateDateRanges', false);
         $dash = '#DASH#';
 

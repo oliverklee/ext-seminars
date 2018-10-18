@@ -64,8 +64,8 @@ class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends \Tx_Phpun
     /**
      * @test
      */
-    public function getSingleViewPageForEventForEventWithSingleViewPageAndNoConfigurationReturnsSingleViewPageFromEvent()
-    {
+    public function getSingleViewPageForEventForEventWithSingleViewPageAndNoConfigurationReturnsSingleViewPageFromEvent(
+    ) {
         $event = $this->getMock(
             \Tx_Seminars_Model_Event::class,
             ['hasCombinedSingleViewPage', 'getCombinedSingleViewPage']
@@ -166,8 +166,8 @@ class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends \Tx_Phpun
     /**
      * @test
      */
-    public function getSingleViewPageForEventForEventWithoutSingleViewPageAndConfigurationWithoutSettingReturnsEmptyString()
-    {
+    public function getSingleViewPageForEventForEventWithoutSingleViewPageAndConfigurationWithoutSettingReturnsEmptyString(
+    ) {
         $event = $this->getMock(
             \Tx_Seminars_Model_Event::class,
             ['hasCombinedSingleViewPage', 'getCombinedSingleViewPage']
@@ -322,10 +322,12 @@ class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends \Tx_Phpun
 
         $contentObject = $this->getMock(ContentObjectRenderer::class, ['typoLink_URL']);
         $contentObject->expects(self::once())->method('typoLink_URL')
-            ->with([
-                'parameter' => (string)$singleViewPageUid,
-                'additionalParams' => '&tx_seminars_pi1%5BshowUid%5D=' . $eventUid,
-            ]);
+            ->with(
+                [
+                    'parameter' => (string)$singleViewPageUid,
+                    'additionalParams' => '&tx_seminars_pi1%5BshowUid%5D=' . $eventUid,
+                ]
+            );
 
         /** @var \Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder|\PHPUnit_Framework_MockObject_MockObject $fixture */
         $fixture = $this->getMock(

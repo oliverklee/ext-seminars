@@ -12,6 +12,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_OrganizerTest extends \Tx_Phpunit_TestCa
      * @var \Tx_Seminars_BagBuilder_Organizer
      */
     private $fixture;
+
     /**
      * @var \Tx_Oelib_TestingFramework
      */

@@ -178,8 +178,8 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends \Tx_Phpunit_TestC
     /**
      * @test
      */
-    public function setRegistrationDataForNoPaymentMethodSetAndPositiveTotalPriceWithSeminarWithOnePaymentMethodSelectsThatPaymentMethod()
-    {
+    public function setRegistrationDataForNoPaymentMethodSetAndPositiveTotalPriceWithSeminarWithOnePaymentMethodSelectsThatPaymentMethod(
+    ) {
         \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')
             ->setAsString('currency', 'EUR');
         $this->testingFramework->changeRecord(
@@ -349,8 +349,8 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends \Tx_Phpunit_TestC
     /**
      * @test
      */
-    public function getRegistrationDataForNotesWithCarriageReturnAndLineFeedReturnsNotesWithLinefeedAndNoCarriageReturn()
-    {
+    public function getRegistrationDataForNotesWithCarriageReturnAndLineFeedReturnsNotesWithLinefeedAndNoCarriageReturn(
+    ) {
         $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
         $this->fixture->setRegistrationData(
             $seminar,
@@ -568,7 +568,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends \Tx_Phpunit_TestC
             $this->testingFramework->countRecords(
                 'tx_seminars_attendances_lodgings_mm',
                 'uid_local=' . $registration->getUid()
-                    . ' AND uid_foreign=' . $lodgingsUid
+                . ' AND uid_foreign=' . $lodgingsUid
             ),
             'The relation record cannot be found in the DB.'
         );
@@ -615,7 +615,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends \Tx_Phpunit_TestC
             $this->testingFramework->countRecords(
                 'tx_seminars_attendances_foods_mm',
                 'uid_local=' . $registration->getUid()
-                    . ' AND uid_foreign=' . $foodsUid
+                . ' AND uid_foreign=' . $foodsUid
             ),
             'The relation record cannot be found in the DB.'
         );
@@ -662,7 +662,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends \Tx_Phpunit_TestC
             $this->testingFramework->countRecords(
                 'tx_seminars_attendances_checkboxes_mm',
                 'uid_local=' . $registration->getUid()
-                    . ' AND uid_foreign=' . $checkboxesUid
+                . ' AND uid_foreign=' . $checkboxesUid
             ),
             'The relation record cannot be found in the DB.'
         );

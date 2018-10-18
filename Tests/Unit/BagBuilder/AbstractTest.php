@@ -12,6 +12,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
      * @var \Tx_Seminars_Tests_Unit_Fixtures_BagBuilder_Testing
      */
     private $fixture;
+
     /**
      * @var \Tx_Oelib_TestingFramework
      */
@@ -669,7 +670,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
         $this->setExpectedException(
             \InvalidArgumentException::class,
             'The given additional table name does not exist in the list ' .
-                'of additional table names.'
+            'of additional table names.'
         );
 
         $this->fixture->removeAdditionalTableName('tx_seminars_seminars');

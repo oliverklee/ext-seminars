@@ -359,7 +359,9 @@ class MailNotifier extends AbstractTask
      */
     private function shouldCsvFileBeAdded(\Tx_Seminars_OldModel_Event $event)
     {
-        return $this->getConfiguration()->getAsBoolean('addRegistrationCsvToOrganizerReminderMail') && $event->hasAttendances();
+        return $this->getConfiguration()->getAsBoolean(
+                'addRegistrationCsvToOrganizerReminderMail'
+            ) && $event->hasAttendances();
     }
 
     /**

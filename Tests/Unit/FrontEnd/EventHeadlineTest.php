@@ -45,18 +45,20 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventHeadlineTest extends \Tx_Phpunit_Test
 
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', false);
 
-        $this->testingFramework    = new \Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
 
         // just picked some random date (2001-01-01 00:00:00)
         $this->eventDate = 978303600;
 
         $this->mapper = new \Tx_Seminars_Mapper_Event();
-        $event = $this->mapper->getLoadedTestingModel([
-            'pid' => 0,
-            'title' => 'Test event',
-            'begin_date' => $this->eventDate,
-        ]);
+        $event = $this->mapper->getLoadedTestingModel(
+            [
+                'pid' => 0,
+                'title' => 'Test event',
+                'begin_date' => $this->eventDate,
+            ]
+        );
         $this->eventId = $event->getUid();
 
         $this->fixture = new \Tx_Seminars_FrontEnd_EventHeadline(

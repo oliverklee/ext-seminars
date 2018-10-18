@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-    <file source-language="en" target-language="dk" datatype="plaintext" original="messages" date="2016-07-18T21:20:55Z" product-name="seminars">
+    <file source-language="en" target-language="dk" datatype="plaintext" original="messages" date="2016-07-18T21:20:55Z"
+          product-name="seminars">
         <header/>
         <body>
             <trans-unit id="mlang_tabs_tab" xml:space="preserve" approved="yes">

@@ -100,7 +100,9 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
                 $result = $charsetConverter->conv($result, 'utf-8', $resultCharset);
             }
         } catch (\Exception $exception) {
-            \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 500 Internal Server Error');
+            \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader(
+                'Status: 500 Internal Server Error'
+            );
             $result = $exception->getMessage() . LF . LF . $exception->getTraceAsString() . LF . LF;
         }
 
