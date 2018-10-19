@@ -26,3 +26,10 @@ Support.
    :glob:
 
    BezahlteDiensteDesAutors/Index
+
+
+Ein Service-Level-Agreement (SLA) buchen
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Diese Extension wird durch die Service-Level-Agreements (SLAs) abgedeckt,
+die das `coders.care-Project <https://coders.care/>`_ anbietet.
