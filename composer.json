@@ -39,6 +39,9 @@
         "oliverklee/phpunit": "^5.3.0",
         "phpunit/phpunit": "^5.3.0"
     },
+    "conflict": {
+        "typo3-ter/static-info-tables": "6.7.1"
+    },
     "replace": {
         "seminars": "self.version",
         "typo3-ter/seminars": "self.version"
