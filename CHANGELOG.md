@@ -29,6 +29,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Remove the print functionality from the BE module (#119)
 
 ### Fixed
+- Use the current composer names of static_info_tables (#159)
 - Add a conflict with a PHP-7.0-incompatible static_info_tables version (#156)
 - Update the composer package name of static-info-tables (#149)
 - Fix crash in the CSV download (#140, #141)
