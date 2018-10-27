@@ -4,7 +4,10 @@ page {
     }
 
     includeJSFooter {
-        tx_seminars_pi1 = EXT:seminars/Resources/Public/JavaScript/FrontEnd/FrontEnd.js
-        async = 1
+        seminarsFrontEnd = EXT:seminars/Resources/Public/JavaScript/FrontEnd/FrontEnd.js
+        seminarsFrontEnd {
+            async = 1
+            defer = 1
+        }
     }
 }
