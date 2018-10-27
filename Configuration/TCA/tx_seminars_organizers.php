@@ -88,7 +88,6 @@ if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(
 } else {
     $tca['columns']['description']['defaultExtras'] = 'richtext[]';
     $tca['columns']['homepage']['config']['wizards'] = [
-        '_PADDING' => 2,
         'link' => [
             'type' => 'popup',
             'title' => 'Link',
