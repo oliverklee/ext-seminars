@@ -132,6 +132,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
         title {
             name = title
             label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.title
+            sanitize = false
             validators {
                 10 = validator:STANDARD
                 10.required.message = LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_emptyTitle
@@ -142,6 +143,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
         subtitle {
             name = subtitle
             label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.subtitle
+            sanitize = false
             validators {
                 10 = validator:STANDARD
                 10.custom.message = LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_emptySubtitle
@@ -184,6 +186,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
         teaser {
             name = teaser
             label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.teaser
+            sanitize = false
             validators {
                 10 = validator:STANDARD
                 10.custom.message = LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_emptyTeaser
@@ -202,6 +205,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
         description {
             name = description
             label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.description
+            sanitize = false
             validators {
                 10 = validator:STANDARD
                 10.custom.message = LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_emptyDescription
@@ -252,6 +256,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
         accreditation_number {
             name = accreditation_number
             label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.accreditation_number
+            sanitize = false
             validators {
                 10 = validator:STANDARD
                 10.custom.message = LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_accreditationNumberZero
@@ -270,6 +275,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
         credit_points {
             name = credit_points
             label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.credit_points
+            sanitize = false
             validators {
                 10 = validator:STANDARD
                 10.custom.message = LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_creditPointsZero
@@ -494,6 +500,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 newPlace_title {
                     name = newPlace_title
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.title
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -501,6 +508,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 newPlace_address {
                     name = newPlace_address
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.address
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -508,6 +516,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 newPlace_zip {
                     name = newPlace_zip
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.zip
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -515,6 +524,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 newPlace_city {
                     name = newPlace_city
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.city
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -539,6 +549,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 newPlace_homepage {
                     name = newPlace_homepage
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.homepage
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -546,6 +557,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 newPlace_directions {
                     name = newPlace_directions
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.directions
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -553,6 +565,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 newPlace_notes {
                     name = newPlace_notes
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.notes
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -608,6 +621,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 editPlace_title {
                     name = editPlace_title
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.title
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -615,6 +629,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 editPlace_address {
                     name = editPlace_address
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.address
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -622,6 +637,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 editPlace_zip {
                     name = editPlace_zip
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.zip
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -629,6 +645,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 editPlace_city {
                     name = editPlace_city
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.city
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -653,6 +670,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 editPlace_homepage {
                     name = editPlace_homepage
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.homepage
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -660,6 +678,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 editPlace_directions {
                     name = editPlace_directions
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.directions
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -667,6 +686,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 editPlace_notes {
                     name = editPlace_notes
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.notes
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -709,6 +729,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
         room {
             name = room
             label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.room
+            sanitize = false
             validators {
                 10 = validator:STANDARD
                 10.custom.message = LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_emptyRoom
@@ -795,6 +816,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 name {
                     name = name
                     type = renderlet:TEXT
+                    sanitize = false
                 }
 
                 edit {
@@ -853,6 +875,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 newSpeaker_title {
                     name = newSpeaker_title
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.title
+                    sanitize = false
                     wrap = <div class="modalbox-column1"><div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -877,6 +900,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 newSpeaker_organization {
                     name = newSpeaker_organization
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.organization
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -884,6 +908,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 newSpeaker_homepage {
                     name = newSpeaker_homepage
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.homepage
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -891,6 +916,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 newSpeaker_description {
                     name = newSpeaker_description
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.description
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -909,6 +935,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 newSpeaker_notes {
                     name = newSpeaker_notes
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.notes
+                    sanitize = false
                     wrap = <div class="modalbox-column2"><div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -916,6 +943,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 newSpeaker_address {
                     name = newSpeaker_address
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.address
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -923,6 +951,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 newSpeaker_phone_work {
                     name = newSpeaker_phone_work
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.phone_work
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -930,6 +959,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 newSpeaker_phone_home {
                     name = newSpeaker_phone_home
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.phone_home
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -937,6 +967,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 newSpeaker_phone_mobile {
                     name = newSpeaker_phone_mobile
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.phone_mobile
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -944,6 +975,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 newSpeaker_fax {
                     name = newSpeaker_fax
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.fax
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -951,6 +983,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 newSpeaker_email {
                     name = newSpeaker_email
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.email
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -958,6 +991,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 newSpeaker_cancelation_period {
                     name = newSpeaker_cancelation_period
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.cancelation_period
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div></div>
                 }
 
@@ -1011,6 +1045,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 editSpeaker_title {
                     name = editSpeaker_title
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.title
+                    sanitize = false
                     wrap = <div class="modalbox-column1"><div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -1035,6 +1070,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 editSpeaker_organization {
                     name = editSpeaker_organization
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.organization
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -1042,6 +1078,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 editSpeaker_homepage {
                     name = editSpeaker_homepage
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.homepage
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -1049,6 +1086,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 editSpeaker_description {
                     name = editSpeaker_description
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.description
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -1067,6 +1105,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 editSpeaker_notes {
                     name = editSpeaker_notes
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.notes
+                    sanitize = false
                     wrap = <div class="modalbox-column2"><div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -1074,6 +1113,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 editSpeaker_address {
                     name = editSpeaker_address
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.address
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -1081,6 +1121,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 editSpeaker_phone_work {
                     name = editSpeaker_phone_work
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.phone_work
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -1088,6 +1129,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 editSpeaker_phone_home {
                     name = editSpeaker_phone_home
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.phone_home
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -1095,6 +1137,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 editSpeaker_phone_mobile {
                     name = editSpeaker_phone_mobile
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.phone_mobile
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -1102,6 +1145,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 editSpeaker_fax {
                     name = editSpeaker_fax
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.fax
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -1109,6 +1153,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 editSpeaker_email {
                     name = editSpeaker_email
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.email
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -1116,6 +1161,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 editSpeaker_cancelation_period {
                     name = editSpeaker_cancelation_period
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.cancelation_period
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div></div>
                 }
 
@@ -1249,6 +1295,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
         price_regular {
             name = price_regular
             label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.price_regular
+            sanitize = false
             validators {
                 10 = validator:STANDARD
                 10.custom.message = LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_invalidPriceRegular
@@ -1267,6 +1314,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
         price_regular_early {
             name = price_regular_early
             label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.price_regular_early
+            sanitize = false
             validators {
                 10 = validator:STANDARD
                 10.custom.message = LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_invalidPriceRegularEarly
@@ -1285,6 +1333,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
         price_regular_board {
             name = price_regular_board
             label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.price_regular_board
+            sanitize = false
             validators {
                 10 = validator:STANDARD
                 10.custom.message = LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_invalidPriceRegularBoard
@@ -1303,6 +1352,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
         price_special {
             name = price_special
             label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.price_special
+            sanitize = false
             validators {
                 10 = validator:STANDARD
                 10.custom.message = LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_invalidPriceSpecial
@@ -1321,6 +1371,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
         price_special_early {
             name = price_special_early
             label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.price_special_early
+            sanitize = false
             validators {
                 10 = validator:STANDARD
                 10.custom.message = LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_invalidPriceSpecialEarly
@@ -1339,6 +1390,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
         price_special_board {
             name = price_special_board
             label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.price_special_board
+            sanitize = false
             validators {
                 10 = validator:STANDARD
                 10.custom.message = LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_invalidPriceSpecialBoard
@@ -1357,6 +1409,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
         additional_information {
             name = additional_information
             label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.additional_information
+            sanitize = false
             validators {
                 10 = validator:STANDARD
                 10.custom.message = LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_emptyAdditionalInformation
@@ -1431,6 +1484,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 newCheckbox_title {
                     name = newCheckbox_title
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_checkboxes.title
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -1486,6 +1540,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 editCheckbox_title {
                     name = editCheckbox_title
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_checkboxes.title
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -1593,6 +1648,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
         attendees_min {
             name = attendees_min
             label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.attendees_min
+            sanitize = false
             validators {
                 10 = validator:STANDARD
                 10.custom.message = LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_attendeesMinZero
@@ -1611,6 +1667,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
         attendees_max {
             name = attendees_max
             label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.attendees_max
+            sanitize = false
             validators {
                 10 = validator:STANDARD
                 10.custom.message = LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_attendeesMaxZero
@@ -1635,6 +1692,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
         offline_attendees {
             name = offline_attendees
             label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.offline_attendees
+            sanitize = false
             validators {
                 10 = validator:STANDARD
                 10.custom.message = LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_offlineAttendeesZero
@@ -1708,6 +1766,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 newTargetGroup_title {
                     name = newTargetGroup_title
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_target_groups.title
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -1715,6 +1774,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 newTargetGroup_minimum_age {
                     name = newTargetGroup_minimum_age
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_target_groups.minimum_age
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -1722,6 +1782,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 newTargetGroup_maximum_age {
                     name = newTargetGroup_maximum_age
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_target_groups.maximum_age
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -1776,6 +1837,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 editTargetGroup_title {
                     name = editTargetGroup_title
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_target_groups.title
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -1788,6 +1850,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 editTargetGroup_minimum_age {
                     name = editTargetGroup_minimum_age
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_target_groups.minimum_age
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -1795,6 +1858,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 editTargetGroup_maximum_age {
                     name = editTargetGroup_maximum_age
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_target_groups.maximum_age
+                    sanitize = false
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                 }
 
@@ -1860,6 +1924,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
         notes {
             name = notes
             label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.notes
+            sanitize = false
             validators {
                 10 = validator:STANDARD
                 10.custom.message = LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_emptyNotes
