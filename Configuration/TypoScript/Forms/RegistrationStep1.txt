@@ -93,6 +93,7 @@ plugin.tx_seminars_pi1.form.registration.step1 {
         account_number = renderlet:TEXT
         account_number {
             name = account_number
+            sanitize = false
             data {
                 defaultvalue.userobj {
                     extension = this
@@ -126,6 +127,7 @@ plugin.tx_seminars_pi1.form.registration.step1 {
         bank_code = renderlet:TEXT
         bank_code {
             name = bank_code
+            sanitize = false
             data {
                 defaultvalue.userobj {
                     extension = this
@@ -159,6 +161,7 @@ plugin.tx_seminars_pi1.form.registration.step1 {
         bank_name = renderlet:TEXT
         bank_name {
             name = bank_name
+            sanitize = false
             data {
                 defaultvalue.userobj {
                     extension = this
@@ -192,6 +195,7 @@ plugin.tx_seminars_pi1.form.registration.step1 {
         account_owner = renderlet:TEXT
         account_owner {
             name = account_owner
+            sanitize = false
             data {
                 defaultvalue.userobj {
                     extension = this
@@ -225,6 +229,7 @@ plugin.tx_seminars_pi1.form.registration.step1 {
         company = renderlet:TEXT
         company {
             name = company
+            sanitize = false
             data.defaultvalue.userobj {
                 extension = this
                 method = getFeUserData
@@ -283,6 +288,7 @@ plugin.tx_seminars_pi1.form.registration.step1 {
         name = renderlet:TEXT
         name {
             name = name
+            sanitize = false
             data.defaultvalue.userobj {
                 extension = this
                 method = getFeUserData
@@ -305,6 +311,7 @@ plugin.tx_seminars_pi1.form.registration.step1 {
         address = renderlet:TEXTAREA
         address {
             name = address
+            sanitize = false
             data.defaultvalue.userobj {
                 extension = this
                 method = getFeUserData
@@ -327,6 +334,7 @@ plugin.tx_seminars_pi1.form.registration.step1 {
         zip = renderlet:TEXT
         zip {
             name = zip
+            sanitize = false
             data.defaultvalue.userobj {
                 extension = this
                 method = getFeUserData
@@ -349,6 +357,7 @@ plugin.tx_seminars_pi1.form.registration.step1 {
         city = renderlet:TEXT
         city {
             name = city
+            sanitize = false
             data.defaultvalue.userobj {
                 extension = this
                 method = getFeUserData
@@ -400,6 +409,7 @@ plugin.tx_seminars_pi1.form.registration.step1 {
         telephone = renderlet:TEXT
         telephone {
             name = telephone
+            sanitize = false
             data.defaultvalue.userobj {
                 extension = this
                 method = getFeUserData
@@ -422,6 +432,7 @@ plugin.tx_seminars_pi1.form.registration.step1 {
         email = renderlet:TEXT
         email {
             name = email
+            sanitize = false
             data.defaultvalue.userobj {
                 extension = this
                 method = getFeUserData
@@ -608,6 +619,7 @@ plugin.tx_seminars_pi1.form.registration.step1 {
         accommodation = renderlet:TEXTAREA
         accommodation {
             name = accommodation
+            sanitize = false
             process.userobj {
                 extension = this
                 method = hasRegistrationFormField
@@ -648,6 +660,7 @@ plugin.tx_seminars_pi1.form.registration.step1 {
         food = renderlet:TEXTAREA
         food {
             name = food
+            sanitize = false
             process.userobj {
                 extension = this
                 method = hasRegistrationFormField
@@ -675,6 +688,7 @@ plugin.tx_seminars_pi1.form.registration.step1 {
         interests = renderlet:TEXTAREA
         interests {
             name = interests
+            sanitize = false
             process.userobj {
                 extension = this
                 method = hasRegistrationFormField
@@ -688,6 +702,7 @@ plugin.tx_seminars_pi1.form.registration.step1 {
         expectations = renderlet:TEXTAREA
         expectations {
             name = expectations
+            sanitize = false
             process.userobj {
                 extension = this
                 method = hasRegistrationFormField
@@ -701,6 +716,7 @@ plugin.tx_seminars_pi1.form.registration.step1 {
         background_knowledge = renderlet:TEXTAREA
         background_knowledge {
             name = background_knowledge
+            sanitize = false
             process.userobj {
                 extension = this
                 method = hasRegistrationFormField
@@ -714,6 +730,7 @@ plugin.tx_seminars_pi1.form.registration.step1 {
         known_from = renderlet:TEXTAREA
         known_from {
             name = known_from
+            sanitize = false
             process.userobj {
                 extension = this
                 method = hasRegistrationFormField
@@ -727,6 +744,7 @@ plugin.tx_seminars_pi1.form.registration.step1 {
         notes = renderlet:TEXTAREA
         notes {
             name = notes
+            sanitize = false
             process.userobj {
                 extension = this
                 method = hasRegistrationFormField
