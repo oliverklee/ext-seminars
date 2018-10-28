@@ -6,6 +6,18 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 2.1.0
+
+### Added
 - Auto-release to the TER (#153)
 - New hook interface and RegistrationEmailHookInterface (#150)
 - New hook to post process attendee email in registration manager (#150)

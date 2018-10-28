@@ -28,7 +28,7 @@
         "php": "^5.6.0 || ~7.0.0 || ~7.1.0 || ~7.2.0",
         "typo3/cms-core": "^7.6.23 || ^8.7.9",
         "typo3/cms-frontend": "^7.6.23 || ^8.7.9",
-        "sjbr/static-info-tables": "^6.4.0",
+        "sjbr/static-info-tables": "^6.5",
         "oliverklee/oelib": "^2.0 || ^3.0",
         "dmk/mkforms": "^3.0.14"
     },
