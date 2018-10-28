@@ -21,13 +21,13 @@ $EM_CONF[$_EXTKEY] = [
     'author_company' => 'oliverklee.de',
     'CGLcompliance' => '',
     'CGLcompliance_note' => '',
-    'version' => '2.0.1',
+    'version' => '2.1.0',
     '_md5_values_when_last_written' => '',
     'constraints' => [
         'depends' => [
             'php' => '5.6.0-7.2.99',
             'typo3' => '7.6.0-8.7.99',
-            'static_info_tables' => '6.4.0-',
+            'static_info_tables' => '6.5.0-',
             'oelib' => '2.0.0-3.99.99',
             'mkforms' => '3.0.14-3.99.99',
         ],
