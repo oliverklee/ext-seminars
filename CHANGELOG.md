@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Fix SQL errors in MySQL strict mode (#165)
 
 ## 2.1.0
 

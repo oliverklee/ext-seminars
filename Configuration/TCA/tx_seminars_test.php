@@ -20,7 +20,7 @@ return [
             'exclude' => 1,
             'config' => [
                 'type' => 'check',
-                'default' => '0',
+                'default' => 0,
             ],
         ],
         'starttime' => [

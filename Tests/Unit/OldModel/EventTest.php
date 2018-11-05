@@ -3884,7 +3884,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
     /**
      * @test
      */
-    public function getTimeslotsAsArrayWithMarkersReturnsArraySortedByDate()
+    public function getTimeSlotsAsArrayWithMarkersReturnsArraySortedByDate()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_timeslots',
@@ -3925,26 +3925,6 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
     {
         self::assertFalse(
             $this->fixture->hasOrganizers()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasOrganizersReturnsFalseForStringInOrganizersField()
-    {
-        $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            [
-                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
-                'organizers' => 'foo',
-            ]
-        );
-        $fixture = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($eventUid);
-        $hasOrganizers = $fixture->hasOrganizers();
-
-        self::assertFalse(
-            $hasOrganizers
         );
     }
 

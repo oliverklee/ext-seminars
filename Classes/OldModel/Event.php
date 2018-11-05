@@ -754,6 +754,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             $mmTable . '.uid_local = ' . $this->getUid(
             ) . ' AND ' . 'tx_seminars_speakers.uid = ' . $mmTable . '.uid_foreign',
             $mmTable,
+            '',
             'sorting'
         );
     }
@@ -4362,8 +4363,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             'tx_seminars_timeslots.seminar = ' . $this->getUid() .
             ' AND tx_seminars_timeslots.place > 0',
             '',
-            'tx_seminars_timeslots.place',
-            'tx_seminars_timeslots.begin_date ASC'
+            '',
+            'tx_seminars_timeslots.begin_date'
         );
         return $bag;
     }
