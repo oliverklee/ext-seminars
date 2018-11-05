@@ -12,6 +12,12 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+
+### Fixed
+
+## 2.1.1
+
+### Removed
 - Remove obsolete "checkbox" options from the TCA (#166)
 
 ### Fixed
