@@ -76,7 +76,6 @@ $tca = [
                 'type' => 'input',
                 'size' => 15,
                 'max' => 255,
-                'checkbox' => '',
                 'eval' => 'trim',
             ],
         ],
@@ -177,7 +176,6 @@ $tca = [
                 'size' => 3,
                 'max' => 3,
                 'eval' => 'num',
-                'checkbox' => '0',
                 'range' => [
                     'upper' => 999,
                     'lower' => 0,

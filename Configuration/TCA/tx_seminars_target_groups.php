@@ -33,7 +33,6 @@ return [
                 'type' => 'input',
                 'size' => 3,
                 'eval' => 'int',
-                'checkbox' => '0',
                 'range' => [
                     'lower' => 0,
                     'upper' => 199,
@@ -47,7 +46,6 @@ return [
                 'type' => 'input',
                 'size' => 3,
                 'eval' => 'int',
-                'checkbox' => '0',
                 'range' => [
                     'lower' => 0,
                     'upper' => 199,

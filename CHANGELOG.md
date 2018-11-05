@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Remove obsolete "checkbox" options from the TCA (#166)
 
 ### Fixed
 - Fix SQL errors in MySQL strict mode (#165)
