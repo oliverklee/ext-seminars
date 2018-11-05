@@ -26,6 +26,7 @@ class Tx_Seminars_OldModel_TimeSlot extends \Tx_Seminars_OldModel_AbstractTimeSp
             \Tx_Seminars_Bag_Speaker::class,
             'tx_seminars_timeslots_speakers_mm.uid_local = ' . $this->getUid() . ' AND uid = uid_foreign',
             'tx_seminars_timeslots_speakers_mm',
+            '',
             'sorting'
         );
         return $bag;

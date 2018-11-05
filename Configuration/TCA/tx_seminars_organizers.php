@@ -72,6 +72,7 @@ $tca = [
                 'type' => 'group',
                 'internal_type' => 'db',
                 'allowed' => 'pages',
+                'default' => 0,
                 'size' => 1,
                 'maxitems' => 1,
                 'minitems' => 0,

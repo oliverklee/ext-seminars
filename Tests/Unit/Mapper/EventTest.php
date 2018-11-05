@@ -92,7 +92,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends \Tx_Phpunit_TestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $uid,
-            ['timeslots' => $timeSlotUid]
+            ['timeslots' => 1]
         );
 
         /** @var \Tx_Seminars_Model_Event $model */
@@ -116,7 +116,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends \Tx_Phpunit_TestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $uid,
-            ['timeslots' => $timeSlotUid]
+            ['timeslots' => 1]
         );
 
         /** @var \Tx_Seminars_Model_Event $model */

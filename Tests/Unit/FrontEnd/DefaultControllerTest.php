@@ -1896,7 +1896,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['timeslots' => (string)$timeSlotUid]
+            ['timeslots' => 1]
         );
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
@@ -1925,7 +1925,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['timeslots' => (string)$timeSlotUid]
+            ['timeslots' => 1]
         );
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
@@ -1951,7 +1951,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['timeslots' => (string)$timeSlotUid]
+            ['timeslots' => 1]
         );
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
@@ -1975,7 +1975,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['timeslots' => $timeSlotUid1 . ',' . $timeSlotUid2]
+            ['timeslots' => 2]
         );
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
@@ -2005,7 +2005,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['timeslots' => $timeSlotUid1 . ',' . $timeSlotUid2]
+            ['timeslots' => 2]
         );
 
         $this->fixture->piVars['showUid'] = $this->seminarUid;
@@ -2054,7 +2054,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['timeslots' => $timeSlotUid]
+            ['timeslots' => 1]
         );
 
         /** @var \Tx_Seminars_Model_TimeSlot $timeSlot */
@@ -2095,7 +2095,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
-            ['timeslots' => $timeSlotUid1 . ',' . $timeSlotUid2]
+            ['timeslots' => 2]
         );
 
         $hook = $this->getMock(\Tx_Seminars_Interface_Hook_EventSingleView::class);
@@ -5971,8 +5971,6 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
             [
                 'needs_registration' => 1,
                 'attendees_max' => 1,
-                'queue_size' => 0,
-                'begin_date' => '',
             ]
         );
 
@@ -7186,8 +7184,6 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
             [
                 'needs_registration' => 1,
                 'attendees_max' => 1,
-                'queue_size' => 0,
-                'begin_date' => '',
             ]
         );
 

@@ -45,6 +45,7 @@ $tca = [
                 'type' => 'group',
                 'internal_type' => 'db',
                 'allowed' => 'tx_seminars_seminars',
+                'default' => 0,
                 'size' => 1,
                 'minitems' => 1,
                 'maxitems' => 1,
@@ -57,6 +58,7 @@ $tca = [
                 'type' => 'group',
                 'internal_type' => 'db',
                 'allowed' => 'fe_users',
+                'default' => 0,
                 'size' => 1,
                 'minitems' => 1,
                 'maxitems' => 1,
@@ -74,7 +76,7 @@ $tca = [
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:LGL.hidden',
             'config' => [
                 'type' => 'check',
-                'default' => '0',
+                'default' => 0,
             ],
         ],
         'registration_queue' => [
@@ -97,7 +99,7 @@ $tca = [
                     'upper' => 999,
                     'lower' => 0,
                 ],
-                'default' => '1',
+                'default' => 1,
             ],
         ],
         'registered_themselves' => [
@@ -105,7 +107,7 @@ $tca = [
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.registered_themselves',
             'config' => [
                 'type' => 'check',
-                'default' => '1',
+                'default' => 1,
             ],
         ],
         'price' => [
@@ -170,7 +172,7 @@ $tca = [
                     'upper' => 999,
                     'lower' => 0,
                 ],
-                'default' => '0',
+                'default' => 0,
             ],
         ],
         'foods' => [
@@ -292,7 +294,7 @@ $tca = [
                 'size' => 8,
                 'eval' => 'date',
                 'checkbox' => '0',
-                'default' => '0',
+                'default' => 0,
             ],
         ],
         'currency' => [
@@ -304,6 +306,7 @@ $tca = [
                 'internal_type' => 'db',
                 'allowed' => 'static_currencies',
                 'foreign_table' => 'static_currencies',
+                'default' => 0,
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
@@ -316,7 +319,7 @@ $tca = [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'default' => '0',
+                'default' => 0,
                 'items' => [
                     [
                         'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.including_tax.including',
@@ -342,6 +345,7 @@ $tca = [
                 'allowed' => 'tx_seminars_payment_methods',
                 'foreign_table' => 'tx_seminars_payment_methods',
                 'foreign_table_where' => 'ORDER BY title',
+                'default' => 0,
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,

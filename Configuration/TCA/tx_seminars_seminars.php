@@ -39,7 +39,7 @@ $tca = [
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.object_type',
             'config' => [
                 'type' => 'radio',
-                'default' => '0',
+                'default' => 0,
                 'items' => [
                     [
                         'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.object_type.I.0',
@@ -76,6 +76,7 @@ $tca = [
                 'foreign_table' => 'tx_seminars_seminars',
                 // only allow for topic records and complete event records, but not for date records
                 'foreign_table_where' => 'AND (tx_seminars_seminars.object_type = 0 OR tx_seminars_seminars.object_type = 1) ORDER BY title',
+                'default' => 0,
                 'size' => 1,
                 'minitems' => 1,
                 'maxitems' => 1,
@@ -168,6 +169,7 @@ $tca = [
                 'allowed' => 'tx_seminars_event_types',
                 'foreign_table' => 'tx_seminars_event_types',
                 'foreign_table_where' => ' ORDER BY title',
+                'default' => 0,
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
@@ -207,7 +209,7 @@ $tca = [
                 'size' => 12,
                 'eval' => 'datetime',
                 'checkbox' => '0',
-                'default' => '0',
+                'default' => 0,
             ],
         ],
         'end_date' => [
@@ -218,7 +220,7 @@ $tca = [
                 'size' => 12,
                 'eval' => 'datetime',
                 'checkbox' => '0',
-                'default' => '0',
+                'default' => 0,
             ],
         ],
         'time_zone' => [
@@ -254,7 +256,7 @@ $tca = [
                 'size' => 12,
                 'eval' => 'datetime',
                 'checkbox' => '0',
-                'default' => '0',
+                'default' => 0,
             ],
         ],
         'deadline_registration' => [
@@ -266,7 +268,7 @@ $tca = [
                 'size' => 12,
                 'eval' => 'datetime',
                 'checkbox' => '0',
-                'default' => '0',
+                'default' => 0,
             ],
         ],
         'deadline_early_bird' => [
@@ -278,7 +280,7 @@ $tca = [
                 'size' => 12,
                 'eval' => 'datetime',
                 'checkbox' => '0',
-                'default' => '0',
+                'default' => 0,
             ],
         ],
         'deadline_unregistration' => [
@@ -290,7 +292,7 @@ $tca = [
                 'size' => 12,
                 'eval' => 'datetime',
                 'checkbox' => '0',
-                'default' => '0',
+                'default' => 0,
             ],
         ],
         'expiry' => [
@@ -301,7 +303,7 @@ $tca = [
                 'size' => 10,
                 'eval' => 'date',
                 'checkbox' => '0',
-                'default' => '0',
+                'default' => 0,
             ],
         ],
         'details_page' => [
@@ -803,7 +805,7 @@ $tca = [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'default' => '0',
+                'default' => 0,
                 'items' => [
                     [
                         'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.cancelled_planned',
@@ -862,7 +864,7 @@ $tca = [
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:LGL.hidden',
             'config' => [
                 'type' => 'check',
-                'default' => '0',
+                'default' => 0,
             ],
         ],
         'starttime' => [
@@ -872,7 +874,7 @@ $tca = [
                 'type' => 'input',
                 'size' => 8,
                 'eval' => 'date',
-                'default' => '0',
+                'default' => 0,
                 'checkbox' => '0',
             ],
         ],
@@ -884,7 +886,7 @@ $tca = [
                 'size' => 8,
                 'eval' => 'date',
                 'checkbox' => '0',
-                'default' => '0',
+                'default' => 0,
                 'range' => [
                     'upper' => mktime(0, 0, 0, 12, 31, 2020),
                     'lower' => mktime(0, 0, 0, date('m') - 1, date('d'), date('Y')),
@@ -898,6 +900,7 @@ $tca = [
                 'type' => 'group',
                 'internal_type' => 'db',
                 'allowed' => 'fe_users',
+                'default' => 0,
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
@@ -958,7 +961,7 @@ $tca = [
                 'size' => 12,
                 'eval' => 'datetime',
                 'checkbox' => '0',
-                'default' => '0',
+                'default' => 0,
             ],
         ],
     ],
