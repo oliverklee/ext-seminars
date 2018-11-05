@@ -193,7 +193,6 @@ $tca = [
                 'size' => 3,
                 'max' => 3,
                 'eval' => 'int',
-                'checkbox' => '0',
                 'range' => [
                     'upper' => 999,
                     'lower' => 0,
@@ -208,7 +207,6 @@ $tca = [
                 'type' => 'input',
                 'size' => 12,
                 'eval' => 'datetime',
-                'checkbox' => '0',
                 'default' => 0,
             ],
         ],
@@ -219,7 +217,6 @@ $tca = [
                 'type' => 'input',
                 'size' => 12,
                 'eval' => 'datetime',
-                'checkbox' => '0',
                 'default' => 0,
             ],
         ],
@@ -255,7 +252,6 @@ $tca = [
                 'type' => 'input',
                 'size' => 12,
                 'eval' => 'datetime',
-                'checkbox' => '0',
                 'default' => 0,
             ],
         ],
@@ -267,7 +263,6 @@ $tca = [
                 'type' => 'input',
                 'size' => 12,
                 'eval' => 'datetime',
-                'checkbox' => '0',
                 'default' => 0,
             ],
         ],
@@ -279,7 +274,6 @@ $tca = [
                 'type' => 'input',
                 'size' => 12,
                 'eval' => 'datetime',
-                'checkbox' => '0',
                 'default' => 0,
             ],
         ],
@@ -291,7 +285,6 @@ $tca = [
                 'type' => 'input',
                 'size' => 12,
                 'eval' => 'datetime',
-                'checkbox' => '0',
                 'default' => 0,
             ],
         ],
@@ -302,7 +295,6 @@ $tca = [
                 'type' => 'input',
                 'size' => 10,
                 'eval' => 'date',
-                'checkbox' => '0',
                 'default' => 0,
             ],
         ],
@@ -313,7 +305,6 @@ $tca = [
                 'type' => 'input',
                 'size' => 15,
                 'max' => 255,
-                'checkbox' => '',
                 'eval' => 'trim',
             ],
         ],
@@ -459,7 +450,6 @@ $tca = [
                 'size' => 10,
                 'max' => 10,
                 'eval' => 'double2',
-                'checkbox' => '0.00',
                 'range' => [
                     'upper' => '999999.99',
                     'lower' => '0.00',
@@ -481,7 +471,6 @@ $tca = [
                 'size' => 10,
                 'max' => 10,
                 'eval' => 'double2',
-                'checkbox' => '0.00',
                 'range' => [
                     'upper' => '999999.99',
                     'lower' => '0.00',
@@ -498,7 +487,6 @@ $tca = [
                 'size' => 10,
                 'max' => 10,
                 'eval' => 'double2',
-                'checkbox' => '0.00',
                 'range' => [
                     'upper' => '999999.99',
                     'lower' => '0.00',
@@ -515,7 +503,6 @@ $tca = [
                 'size' => 10,
                 'max' => 10,
                 'eval' => 'double2',
-                'checkbox' => '0.00',
                 'range' => [
                     'upper' => '999999.99',
                     'lower' => '0.00',
@@ -537,7 +524,6 @@ $tca = [
                 'size' => 10,
                 'max' => 10,
                 'eval' => 'double2',
-                'checkbox' => '0.00',
                 'range' => [
                     'upper' => '999999.99',
                     'lower' => '0.00',
@@ -554,7 +540,6 @@ $tca = [
                 'size' => 10,
                 'max' => 10,
                 'eval' => 'double2',
-                'checkbox' => '0.00',
                 'range' => [
                     'upper' => '999999.99',
                     'lower' => '0.00',
@@ -689,7 +674,6 @@ $tca = [
                 'size' => 4,
                 'max' => 4,
                 'eval' => 'int',
-                'checkbox' => '0',
                 'range' => [
                     'upper' => 9999,
                     'lower' => 0,
@@ -706,7 +690,6 @@ $tca = [
                 'size' => 4,
                 'max' => 4,
                 'eval' => 'int',
-                'checkbox' => '0',
                 'range' => [
                     'upper' => 9999,
                     'lower' => 0,
@@ -732,7 +715,6 @@ $tca = [
                 'size' => 3,
                 'max' => 3,
                 'eval' => 'int',
-                'checkbox' => '0',
                 'range' => [
                     'upper' => 999,
                     'lower' => 0,
@@ -875,7 +857,6 @@ $tca = [
                 'size' => 8,
                 'eval' => 'date',
                 'default' => 0,
-                'checkbox' => '0',
             ],
         ],
         'endtime' => [
@@ -885,7 +866,6 @@ $tca = [
                 'type' => 'input',
                 'size' => 8,
                 'eval' => 'date',
-                'checkbox' => '0',
                 'default' => 0,
                 'range' => [
                     'upper' => mktime(0, 0, 0, 12, 31, 2020),
@@ -960,7 +940,6 @@ $tca = [
                 'type' => 'input',
                 'size' => 12,
                 'eval' => 'datetime',
-                'checkbox' => '0',
                 'default' => 0,
             ],
         ],
