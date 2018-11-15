@@ -71,86 +71,86 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         // and concrete dates (type=2).
         // After the OR we get the straight events.
         'category' => '(SELECT MIN(tx_seminars_categories.title)
-			FROM tx_seminars_seminars_categories_mm, tx_seminars_categories,
-					tx_seminars_seminars s1, tx_seminars_seminars s2
-			WHERE ( ( s1.uid=s2.topic
-						AND s1.object_type <> 2
-						AND s2.object_type=2
-						AND s2.uid=tx_seminars_seminars.uid
-				) OR ( s1.uid=s2.uid
-						AND s2.object_type=0
-						AND s1.uid=tx_seminars_seminars.uid
-						)
-				)
-				AND tx_seminars_seminars_categories_mm.uid_foreign=tx_seminars_categories.uid
-				AND tx_seminars_seminars_categories_mm.uid_local=s1.uid)',
+            FROM tx_seminars_seminars_categories_mm, tx_seminars_categories,
+                    tx_seminars_seminars s1, tx_seminars_seminars s2
+            WHERE ( ( s1.uid=s2.topic
+                        AND s1.object_type <> 2
+                        AND s2.object_type=2
+                        AND s2.uid=tx_seminars_seminars.uid
+                ) OR ( s1.uid=s2.uid
+                        AND s2.object_type=0
+                        AND s1.uid=tx_seminars_seminars.uid
+                        )
+                )
+                AND tx_seminars_seminars_categories_mm.uid_foreign=tx_seminars_categories.uid
+                AND tx_seminars_seminars_categories_mm.uid_local=s1.uid)',
         // Sort by title.
         // Complete event records get the title directly.
         // Date records get it from their topic record.
         'title' => '(SELECT s1.title
-			FROM tx_seminars_seminars s1, tx_seminars_seminars s2
-			WHERE ((s1.uid=s2.topic AND s2.object_type=2) OR (s1.uid=s2.uid AND s1.object_type <> 2))
-				AND s2.uid=tx_seminars_seminars.uid)',
+            FROM tx_seminars_seminars s1, tx_seminars_seminars s2
+            WHERE ((s1.uid=s2.topic AND s2.object_type=2) OR (s1.uid=s2.uid AND s1.object_type <> 2))
+                AND s2.uid=tx_seminars_seminars.uid)',
         'subtitle' => '(SELECT s1.subtitle
-			FROM tx_seminars_seminars s1, tx_seminars_seminars s2
-			WHERE ((s1.uid=s2.topic AND s2.object_type=2) OR (s1.uid=s2.uid AND s1.object_type <> 2))
-				AND s2.uid=tx_seminars_seminars.uid)',
+            FROM tx_seminars_seminars s1, tx_seminars_seminars s2
+            WHERE ((s1.uid=s2.topic AND s2.object_type=2) OR (s1.uid=s2.uid AND s1.object_type <> 2))
+                AND s2.uid=tx_seminars_seminars.uid)',
         'uid' => 'tx_seminars_seminars.uid',
         'event_type' => '(SELECT s1.event_type
-			FROM tx_seminars_seminars s1, tx_seminars_seminars s2
-			WHERE ((s1.uid=s2.topic AND s2.object_type=2) OR (s1.uid=s2.uid AND s1.object_type <> 2))
-				AND s2.uid=tx_seminars_seminars.uid)',
+            FROM tx_seminars_seminars s1, tx_seminars_seminars s2
+            WHERE ((s1.uid=s2.topic AND s2.object_type=2) OR (s1.uid=s2.uid AND s1.object_type <> 2))
+                AND s2.uid=tx_seminars_seminars.uid)',
         'accreditation_number' => 'tx_seminars_seminars.accreditation_number',
         'credit_points' => '(SELECT s1.credit_points
-			FROM tx_seminars_seminars s1, tx_seminars_seminars s2
-			WHERE ((s1.uid=s2.topic AND s2.object_type=2) OR (s1.uid=s2.uid AND s1.object_type <> 2))
-				AND s2.uid=tx_seminars_seminars.uid)',
+            FROM tx_seminars_seminars s1, tx_seminars_seminars s2
+            WHERE ((s1.uid=s2.topic AND s2.object_type=2) OR (s1.uid=s2.uid AND s1.object_type <> 2))
+                AND s2.uid=tx_seminars_seminars.uid)',
         // This will sort by the speaker names or the alphabetically lowest
         // speaker name (if there is more than one speaker).
         'speakers' => '(SELECT MIN(tx_seminars_speakers.title)
-			FROM tx_seminars_seminars_speakers_mm, tx_seminars_speakers
-			WHERE tx_seminars_seminars_speakers_mm.uid_local=tx_seminars_seminars.uid
-				AND tx_seminars_seminars_speakers_mm.uid_foreign=tx_seminars_speakers.uid)',
+            FROM tx_seminars_seminars_speakers_mm, tx_seminars_speakers
+            WHERE tx_seminars_seminars_speakers_mm.uid_local=tx_seminars_seminars.uid
+                AND tx_seminars_seminars_speakers_mm.uid_foreign=tx_seminars_speakers.uid)',
         'date' => 'tx_seminars_seminars.begin_date',
         // 86400 seconds are one day, so this calculates us just the time of day.
         'time' => 'tx_seminars_seminars.begin_date % 86400',
         // This will sort by the place names or the alphabetically lowest
         // place name (if there is more than one place).
         'place' => '(SELECT MIN(tx_seminars_sites.title)
-			FROM tx_seminars_seminars_place_mm, tx_seminars_sites
-			WHERE tx_seminars_seminars_place_mm.uid_local=tx_seminars_seminars.uid
-				AND tx_seminars_seminars_place_mm.uid_foreign=tx_seminars_sites.uid)',
+            FROM tx_seminars_seminars_place_mm, tx_seminars_sites
+            WHERE tx_seminars_seminars_place_mm.uid_local=tx_seminars_seminars.uid
+                AND tx_seminars_seminars_place_mm.uid_foreign=tx_seminars_sites.uid)',
         'price_regular' => '(SELECT s1.price_regular
-			FROM tx_seminars_seminars s1, tx_seminars_seminars s2
-			WHERE ((s1.uid=s2.topic AND s2.object_type=2) OR (s1.uid=s2.uid AND s1.object_type <> 2))
-				AND s2.uid=tx_seminars_seminars.uid)',
+            FROM tx_seminars_seminars s1, tx_seminars_seminars s2
+            WHERE ((s1.uid=s2.topic AND s2.object_type=2) OR (s1.uid=s2.uid AND s1.object_type <> 2))
+                AND s2.uid=tx_seminars_seminars.uid)',
         'price_special' => '(SELECT s1.price_special
-			FROM tx_seminars_seminars s1, tx_seminars_seminars s2
-			WHERE ((s1.uid=s2.topic AND s2.object_type=2) OR (s1.uid=s2.uid AND s1.object_type <> 2))
-				AND s2.uid=tx_seminars_seminars.uid)',
+            FROM tx_seminars_seminars s1, tx_seminars_seminars s2
+            WHERE ((s1.uid=s2.topic AND s2.object_type=2) OR (s1.uid=s2.uid AND s1.object_type <> 2))
+                AND s2.uid=tx_seminars_seminars.uid)',
         'organizers' => '(SELECT MIN(tx_seminars_organizers.title)
-			FROM tx_seminars_seminars_organizers_mm, tx_seminars_organizers
-			WHERE tx_seminars_seminars_organizers_mm.uid_local=tx_seminars_seminars.uid
-				AND tx_seminars_seminars_organizers_mm.uid_foreign=tx_seminars_organizers.uid)',
+            FROM tx_seminars_seminars_organizers_mm, tx_seminars_organizers
+            WHERE tx_seminars_seminars_organizers_mm.uid_local=tx_seminars_seminars.uid
+                AND tx_seminars_seminars_organizers_mm.uid_foreign=tx_seminars_organizers.uid)',
         'vacancies' => 'tx_seminars_seminars.attendees_max
-				-(
-					(SELECT COUNT(*)
-					FROM tx_seminars_attendances
-					WHERE tx_seminars_attendances.seminar=tx_seminars_seminars.uid
-						AND tx_seminars_attendances.seats=0
-						AND tx_seminars_attendances.deleted=0)
-					+(SELECT SUM(tx_seminars_attendances.seats)
-					FROM tx_seminars_attendances
-					WHERE tx_seminars_attendances.seminar=tx_seminars_seminars.uid
-						AND  tx_seminars_attendances.seats <> 0
-						AND tx_seminars_attendances.deleted=0)
-				)',
+                -(
+                    (SELECT COUNT(*)
+                    FROM tx_seminars_attendances
+                    WHERE tx_seminars_attendances.seminar=tx_seminars_seminars.uid
+                        AND tx_seminars_attendances.seats=0
+                        AND tx_seminars_attendances.deleted=0)
+                    +(SELECT SUM(tx_seminars_attendances.seats)
+                    FROM tx_seminars_attendances
+                    WHERE tx_seminars_attendances.seminar=tx_seminars_seminars.uid
+                        AND  tx_seminars_attendances.seats <> 0
+                        AND tx_seminars_attendances.deleted=0)
+                )',
         // This will sort by the target groups titles or the alphabetically lowest
         // target group title (if there is more than one speaker).
         'target_groups' => '(SELECT MIN(tx_seminars_target_groups.title)
-			FROM tx_seminars_seminars_target_groups_mm, tx_seminars_target_groups
-			WHERE tx_seminars_seminars_target_groups_mm.uid_local=tx_seminars_seminars.uid
-				AND tx_seminars_seminars_target_groups_mm.uid_foreign=tx_seminars_target_groups.uid)',
+            FROM tx_seminars_seminars_target_groups_mm, tx_seminars_target_groups
+            WHERE tx_seminars_seminars_target_groups_mm.uid_local=tx_seminars_seminars.uid
+                AND tx_seminars_seminars_target_groups_mm.uid_foreign=tx_seminars_target_groups.uid)',
         'status_registration' => 'tx_seminars_attendances.registration_queue',
     ];
 

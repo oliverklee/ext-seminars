@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Replace the last tabs with spaces (#169)
 - Streamline ext_emconf.php (#168)
 
 ### Deprecated

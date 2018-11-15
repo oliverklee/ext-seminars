@@ -1926,7 +1926,7 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             '',
             'These values specify the FE user fields to export via CSV in e-mail ' .
             'mode. A mistyped field name will cause the field to not get ' . '
-				included.',
+                included.',
             'fe_users'
         );
     }
