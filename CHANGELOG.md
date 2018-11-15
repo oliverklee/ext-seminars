@@ -8,7 +8,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
-- Replace the last tabs with spaces (#169)
+- Clean up the extension icon SVG file (#171)
+- Replace the last tabs with spaces (#170)
 - Streamline ext_emconf.php (#168)
 
 ### Deprecated
