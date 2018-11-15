@@ -184,7 +184,7 @@ class Tx_Seminars_BagBuilder_Registration extends \Tx_Seminars_BagBuilder_Abstra
     public function limitToExistingUsers()
     {
         $this->whereClauseParts['existingUsers'] = 'EXISTS (
-			SELECT * FROM fe_users WHERE ' .
+            SELECT * FROM fe_users WHERE ' .
             ' fe_users.uid = tx_seminars_attendances.user' .
             \Tx_Oelib_Db::enableFields('fe_users') . ')';
     }
