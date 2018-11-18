@@ -33,3 +33,4 @@ Konfiguration
    DieFront-endBearbeitungFrVerwalterEinrichten/Index
    SettingUpTheCountdown/Index
    VorauswahlInDerUrlDerListenansicht/Index
+   MultidomainEinrichten/Index
