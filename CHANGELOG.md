@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Also provide the extension icon in `Resources/` (#175)
 
 ## 2.1.1
 
