@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Hide the number of vacancies after the registration deadline (#177)
 - Also provide the extension icon in `Resources/` (#175)
 
 ## 2.1.1

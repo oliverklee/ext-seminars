@@ -6678,14 +6678,12 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
     public function getVacanciesStringForCanceledEventWithVacanciesReturnsEmptyString()
     {
         $this->fixture->setConfigurationValue('showVacanciesThreshold', 10);
+        $this->fixture->setBeginDate($this->now + 10000);
         $this->fixture->setAttendancesMax(5);
         $this->fixture->setNumberOfAttendances(0);
         $this->fixture->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
 
-        self::assertSame(
-            '',
-            $this->fixture->getVacanciesString()
-        );
+        self::assertSame('', $this->fixture->getVacanciesString());
     }
 
     /**
@@ -6694,12 +6692,24 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
     public function getVacanciesStringWithoutRegistrationNeededReturnsEmptyString()
     {
         $this->fixture->setConfigurationValue('showVacanciesThreshold', 10);
+        $this->fixture->setBeginDate($this->now + 10000);
         $this->fixture->setNeedsRegistration(false);
 
-        self::assertSame(
-            '',
-            $this->fixture->getVacanciesString()
-        );
+        self::assertSame('', $this->fixture->getVacanciesString());
+    }
+
+    /**
+     * @test
+     */
+    public function getVacanciesStringForNonZeroVacanciesAndPastDeadlineReturnsEmptyString()
+    {
+        $this->fixture->setConfigurationValue('showVacanciesThreshold', 10);
+        $this->fixture->setAttendancesMax(5);
+        $this->fixture->setNumberOfAttendances(0);
+        $this->fixture->setBeginDate($this->now + 10000);
+        $this->fixture->setRegistrationDeadline($this->now - 10000);
+
+        self::assertSame('', $this->fixture->getVacanciesString());
     }
 
     /**
@@ -6708,6 +6718,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
     public function getVacanciesStringForNonZeroVacanciesBelowThresholdReturnsNumberOfVacancies()
     {
         $this->fixture->setConfigurationValue('showVacanciesThreshold', 10);
+        $this->fixture->setBeginDate($this->now + 10000);
         $this->fixture->setAttendancesMax(5);
         $this->fixture->setNumberOfAttendances(0);
 
@@ -6723,6 +6734,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
     public function getVacanciesStringForNoVancanciesReturnsFullyBooked()
     {
         $this->fixture->setConfigurationValue('showVacanciesThreshold', 10);
+        $this->fixture->setBeginDate($this->now + 10000);
         $this->fixture->setAttendancesMax(5);
         $this->fixture->setNumberOfAttendances(5);
 
@@ -6738,6 +6750,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
     public function getVacanciesStringForVacanciesGreaterThanThresholdReturnsEnough()
     {
         $this->fixture->setConfigurationValue('showVacanciesThreshold', 10);
+        $this->fixture->setBeginDate($this->now + 10000);
         $this->fixture->setAttendancesMax(42);
         $this->fixture->setNumberOfAttendances(0);
 
@@ -6753,6 +6766,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
     public function getVacanciesStringForVacanciesEqualToThresholdReturnsEnough()
     {
         $this->fixture->setConfigurationValue('showVacanciesThreshold', 42);
+        $this->fixture->setBeginDate($this->now + 10000);
         $this->fixture->setAttendancesMax(42);
         $this->fixture->setNumberOfAttendances(0);
 
@@ -6767,6 +6781,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
      */
     public function getVacanciesStringForUnlimitedVacanciesAndZeroRegistrationsReturnsEnough()
     {
+        $this->fixture->setBeginDate($this->now + 10000);
         $this->fixture->setUnlimitedVacancies();
         $this->fixture->setNumberOfAttendances(0);
 
@@ -6781,6 +6796,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
      */
     public function getVacanciesStringForUnlimitedVacanciesAndOneRegistrationReturnsEnough()
     {
+        $this->fixture->setBeginDate($this->now + 10000);
         $this->fixture->setUnlimitedVacancies();
         $this->fixture->setNumberOfAttendances(1);
 
