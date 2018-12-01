@@ -39,6 +39,14 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan
     const STATUS_CONFIRMED = 2;
 
     /**
+     * @return \Tx_Oelib_Configuration
+     */
+    protected function getConfiguration()
+    {
+        return \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars');
+    }
+
+    /**
      * Returns whether this event is a single event.
      *
      * @return bool TRUE if this event is a single event, FALSE otherwise
@@ -405,6 +413,25 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan
     public function hasRegistrationDeadline()
     {
         return $this->hasInteger('deadline_registration');
+    }
+
+    /**
+     * Returns the latest date/time to register for a seminar.
+     * This is either the registration deadline (if set) or the begin date of an
+     * event.
+     *
+     * @return int the latest possible moment to register for this event
+     */
+    public function getLatestPossibleRegistrationTimeAsUnixTimeStamp()
+    {
+        if ($this->hasRegistrationDeadline()) {
+            return $this->getRegistrationDeadlineAsUnixTimeStamp();
+        }
+        if ($this->hasEndDate() && $this->getConfiguration()->getAsBoolean('allowRegistrationForStartedEvents')) {
+            return $this->getEndDateAsUnixTimeStamp();
+        }
+
+        return $this->getBeginDateAsUnixTimeStamp();
     }
 
     /**
