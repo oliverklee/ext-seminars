@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Copy some registration-related methods to the new Event model (#176)
 - Clean up the extension icon SVG file (#171)
 - Replace the last tabs with spaces (#170)
 - Streamline ext_emconf.php (#168)

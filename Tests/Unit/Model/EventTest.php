@@ -11,11 +11,31 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
     /**
      * @var \Tx_Seminars_Model_Event
      */
-    private $fixture;
+    private $fixture = null;
+
+    /**
+     * @var \Tx_Oelib_Configuration
+     */
+    private $configuration = null;
+
+    /**
+     * @var int
+     */
+    protected $now = 1424751343;
 
     protected function setUp()
     {
+        $GLOBALS['SIM_EXEC_TIME'] = $this->now;
+        $configurationRegistry = \Tx_Oelib_ConfigurationRegistry::getInstance();
+        $this->configuration = new \Tx_Oelib_Configuration();
+        $configurationRegistry->set('plugin.tx_seminars', $this->configuration);
+
         $this->fixture = new \Tx_Seminars_Model_Event();
+    }
+
+    protected function tearDown()
+    {
+        \Tx_Oelib_ConfigurationRegistry::purgeInstance();
     }
 
     /////////////////////////////////////
@@ -405,6 +425,129 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
         self::assertTrue(
             $this->fixture->hasRegistrationDeadline()
         );
+    }
+
+    /**
+     * @test
+     */
+    public function getLatestPossibleRegistrationTimeAsUnixTimeStampWithoutAnyDatesReturnsZero()
+    {
+        $this->fixture->setData(
+            [
+                'title' => 'a test event',
+                'needs_registration' => 1,
+                'deadline_registration' => 0,
+                'begin_date' => 0,
+                'end_date' => 0,
+            ]
+        );
+
+        self::assertSame(0, $this->fixture->getLatestPossibleRegistrationTimeAsUnixTimeStamp());
+    }
+
+    /**
+     * @test
+     */
+    public function getLatestPossibleRegistrationTimeAsUnixTimeStampWithBeginDateReturnsBeginDate()
+    {
+        $beginDate = 1524751343;
+        $endDate = $beginDate + 100000;
+        $this->fixture->setData(
+            [
+                'title' => 'a test event',
+                'needs_registration' => 1,
+                'deadline_registration' => 0,
+                'begin_date' => $beginDate,
+                'end_date' => $endDate,
+            ]
+        );
+
+        self::assertSame($beginDate, $this->fixture->getLatestPossibleRegistrationTimeAsUnixTimeStamp());
+    }
+
+    /**
+     * @test
+     */
+    public function getLatestPossibleRegistrationTimeAsUnixTimeStampWithRegistrationDeadlineReturnsRegistrationDeadline(
+    ) {
+        $beginDate = 1524751343;
+        $endDate = $beginDate + 100000;
+        $registrationDeadline = 1524741343;
+        $this->fixture->setData(
+            [
+                'title' => 'a test event',
+                'needs_registration' => 1,
+                'deadline_registration' => $registrationDeadline,
+                'begin_date' => $beginDate,
+                'end_date' => $endDate,
+            ]
+        );
+
+        self::assertSame($registrationDeadline, $this->fixture->getLatestPossibleRegistrationTimeAsUnixTimeStamp());
+    }
+
+    /**
+     * @test
+     */
+    public function getLatestPossibleRegistrationTimeAsUnixTimeStampWithBeginAndEndAndLateRegistrationReturnsEndDate(
+    ) {
+        $this->configuration->setAsBoolean('allowRegistrationForStartedEvents', true);
+
+        $beginDate = 1524751343;
+        $endDate = $beginDate + 100000;
+        $this->fixture->setData(
+            [
+                'title' => 'a test event',
+                'needs_registration' => 1,
+                'deadline_registration' => 0,
+                'begin_date' => $beginDate,
+                'end_date' => $endDate,
+            ]
+        );
+
+        self::assertSame($endDate, $this->fixture->getLatestPossibleRegistrationTimeAsUnixTimeStamp());
+    }
+
+    /**
+     * @test
+     */
+    public function getLatestPossibleRegistrationTimeAsUnixTimeStampWithDeadlineAndLateRegistrationReturnsDeadline(
+    ) {
+        $this->configuration->setAsBoolean('allowRegistrationForStartedEvents', true);
+        $beginDate = 1524751343;
+        $endDate = $beginDate + 100000;
+        $registrationDeadline = 1524741343;
+        $this->fixture->setData(
+            [
+                'title' => 'a test event',
+                'needs_registration' => 1,
+                'deadline_registration' => $registrationDeadline,
+                'begin_date' => $beginDate,
+                'end_date' => $endDate,
+            ]
+        );
+
+        self::assertSame($registrationDeadline, $this->fixture->getLatestPossibleRegistrationTimeAsUnixTimeStamp());
+    }
+
+    /**
+     * @test
+     */
+    public function getLatestPossibleRegistrationTimeAsUnixTimeStampWithBeginAndWithoutEndLateAllowedReturnsBeginDate(
+    ) {
+        $this->configuration->setAsBoolean('allowRegistrationForStartedEvents', true);
+        $beginDate = $this->now - 100;
+        $this->fixture->setData(
+            [
+                'title' => 'a test event',
+                'needs_registration' => 1,
+                'deadline_registration' => 0,
+                'begin_date' => $beginDate,
+                'end_date' => 0,
+            ]
+        );
+
+        self::assertSame($beginDate, $this->fixture->getLatestPossibleRegistrationTimeAsUnixTimeStamp());
     }
 
     /////////////////////////////////////////////
