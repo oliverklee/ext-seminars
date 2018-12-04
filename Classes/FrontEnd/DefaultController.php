@@ -1453,19 +1453,18 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
     }
 
     /**
-     * Fills in the matching marker for the vacancies or hides the subpart if
-     * the seminar does not need a registration or was canceled.
+     * Fills in the matching marker for the vacancies or hides the subpart no registration is possible.
      *
      * @return void
      */
     private function setVacanciesMarker()
     {
-        if (!$this->seminar->needsRegistration() || $this->seminar->isCanceled()) {
+        $vacancies = $this->seminar->getVacanciesString();
+        if ($vacancies !== '') {
+            $this->setMarker('vacancies', $vacancies);
+        } else {
             $this->hideSubparts('vacancies', 'field_wrapper');
-            return;
         }
-
-        $this->setMarker('vacancies', $this->seminar->getVacanciesString());
     }
 
     /**

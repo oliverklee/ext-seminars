@@ -1853,7 +1853,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function getVacanciesString()
     {
-        if ($this->isCanceled() || !$this->needsRegistration()) {
+        if ($this->isCanceled() || !$this->needsRegistration() || $this->isRegistrationDeadlineOver()) {
             return '';
         }
 
@@ -2028,7 +2028,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * This is either the registration deadline (if set) or the begin date of an
      * event.
      *
-     * @return int the latest possible moment to register for a seminar
+     * @return int the latest possible moment to register for this event
      */
     public function getLatestPossibleRegistrationTime()
     {
@@ -2039,9 +2039,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             return $this->getBeginDateAsTimestamp();
         }
 
-        return $this->hasEndDate()
-            ? $this->getEndDateAsTimestamp()
-            : $this->getBeginDateAsTimestamp();
+        return $this->hasEndDate() ? $this->getEndDateAsTimestamp() : $this->getBeginDateAsTimestamp();
     }
 
     /**
@@ -2997,25 +2995,23 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Checks whether this event has been canceled.
      *
-     * @return bool TRUE if the event has been canceled, FALSE otherwise
+     * @return bool
      */
     public function isCanceled()
     {
-        return $this->getStatus() == \Tx_Seminars_Model_Event::STATUS_CANCELED;
+        return $this->getStatus() === \Tx_Seminars_Model_Event::STATUS_CANCELED;
     }
 
     /**
      * Checks whether the latest possibility to register for this event is over.
      *
-     * The latest moment is either the time the event starts, or a set
-     * registration deadline.
+     * The latest moment is either the time the event starts, or a set registration deadline.
      *
-     * @return bool TRUE if the deadline has passed, FALSE otherwise
+     * @return bool
      */
     public function isRegistrationDeadlineOver()
     {
-        return $GLOBALS['SIM_EXEC_TIME']
-            >= $this->getLatestPossibleRegistrationTime();
+        return $GLOBALS['SIM_EXEC_TIME'] >= $this->getLatestPossibleRegistrationTime();
     }
 
     /**
@@ -3034,24 +3030,21 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Checks whether registration is necessary for this event.
      *
-     * @return bool TRUE if registration is necessary, FALSE otherwise
+     * @return bool
      */
     public function needsRegistration()
     {
-        return !$this->isEventTopic()
-            && $this->getRecordPropertyBoolean('needs_registration');
+        return !$this->isEventTopic() && $this->getRecordPropertyBoolean('needs_registration');
     }
 
     /**
-     * Checks whether this event has unlimited vacancies (needs_registration
-     * TRUE and max_attendances 0)
+     * Checks whether this event has unlimited vacancies (needs_registration true and max_attendances 0).
      *
-     * @return bool TRUE if this event has unlimited vacancies, FALSE
-     *                 otherwise
+     * @return bool
      */
     public function hasUnlimitedVacancies()
     {
-        return $this->needsRegistration() && ($this->getAttendancesMax() == 0);
+        return $this->needsRegistration() && $this->getAttendancesMax() === 0;
     }
 
     /**
