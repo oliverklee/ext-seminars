@@ -8,14 +8,20 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
-- Copy some registration-related methods to the new Event model (#176)
-- Clean up the extension icon SVG file (#171)
-- Replace the last tabs with spaces (#170)
-- Streamline ext_emconf.php (#168)
 
 ### Deprecated
 
 ### Removed
+
+### Fixed
+
+## 2.1.2
+
+### Changed
+- Copy some registration-related methods to the new Event model (#176)
+- Clean up the extension icon SVG file (#171)
+- Replace the last tabs with spaces (#170)
+- Streamline ext_emconf.php (#168)
 
 ### Fixed
 - Hide the number of vacancies after the registration deadline (#177)
