@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Add missing labels in notification email to organizers
 
 ## 2.1.2
 
