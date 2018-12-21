@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- an image in the singleview will be displayed in an image-tag instaed as a background image
 
 ### Deprecated
 

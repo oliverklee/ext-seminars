@@ -4615,11 +4615,13 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         $imageUrl = [];
         preg_match('/src="([^"]*)"/', $imageWithTag, $imageUrl);
 
-        return ' <img '.
+
+			return $imageWithTag;
+ /*       return ' <img '.
           'src=" '. $imageUrl[1]  .'" ' .
           'style="width:'.$imageWidth.'px;height:'.$imageHeight.'px;"'.
           '>';
-
+*/
     }
 
     /**
