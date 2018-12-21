@@ -34,4 +34,5 @@ Configuration
    SettingUpFront-endEditingForManagers/Index
    SettingUpTheCountdown/Index
    PreselectionInTheListViewUrl/Index
+   SetupMultidomain/Index
 

@@ -12,8 +12,7 @@ mod.wizards.newContentElement.wizardItems.plugins {
     }
 }
 
-
-#Marker für Configuration/TCA/tx_seminars_seminars.php
+#Marker for the configuration/TCA/tx_seminars_seminars.php
 TCEFORM.tx_seminars_seminars.categories.PAGE_TSCONFIG_STR = %
 TCEFORM.tx_seminars_seminars.event_type.PAGE_TSCONFIG_STR = %
 TCEFORM.tx_seminars_seminars.place.PAGE_TSCONFIG_STR = %
