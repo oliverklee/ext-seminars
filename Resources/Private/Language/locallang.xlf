@@ -44,7 +44,7 @@
                 <source>Seats</source>
             </trans-unit>
             <trans-unit id="label_speakers" xml:space="preserve">
-                <source>Referenten</source>
+                <source>Speakers</source>
             </trans-unit>
             <trans-unit id="label_total_price" xml:space="preserve">
                 <source>Total price</source>
