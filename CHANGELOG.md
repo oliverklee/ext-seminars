@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Add more common files to the `.gitignore` (#184)
 
 ## 2.1.2
 
