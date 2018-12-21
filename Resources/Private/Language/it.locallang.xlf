@@ -56,12 +56,20 @@
                 <source>Seats</source>
                 <target>Posti</target>
             </trans-unit>
+         <trans-unit id="label_speakers" xml:space="preserve" approved="yes">
+                <source>Speakers</source>
+                <target>Annunciatore </target>
+            </trans-unit>
             <trans-unit id="label_total_price" xml:space="preserve" approved="yes">
                 <source>Total price</source>
                 <target>Prezzo totale</target>
             </trans-unit>
             <trans-unit id="label_attendees_names" xml:space="preserve" approved="yes">
                 <source>Registered persons</source>
+                <target></target>
+            </trans-unit>
+            <trans-unit id="label_attendees_max" xml:space="preserve" approved="yes">
+                <source>Maximum number of participants</source>
                 <target></target>
             </trans-unit>
             <trans-unit id="label_lodgings" xml:space="preserve" approved="yes">

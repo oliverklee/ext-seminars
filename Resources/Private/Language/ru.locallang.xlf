@@ -52,9 +52,13 @@
                 <source>Room</source>
                 <target>Зал</target>
             </trans-unit>
-            <trans-unit id="label_seats" xml:space="preserve" approved="yes">
+             <trans-unit id="label_seats" xml:space="preserve" approved="yes">
                 <source>Seats</source>
                 <target>Места</target>
+            </trans-unit>
+         <trans-unit id="label_speakers" xml:space="preserve" approved="yes">
+                <source>Speakers</source>
+                <target> 	отве́тственный</target>
             </trans-unit>
             <trans-unit id="label_total_price" xml:space="preserve" approved="yes">
                 <source>Total price</source>
@@ -62,6 +66,10 @@
             </trans-unit>
             <trans-unit id="label_attendees_names" xml:space="preserve" approved="yes">
                 <source>Registered persons</source>
+                <target></target>
+            </trans-unit>
+            <trans-unit id="label_attendees_max" xml:space="preserve" approved="yes">
+                <source>Maximum number of participants</source>
                 <target></target>
             </trans-unit>
             <trans-unit id="label_lodgings" xml:space="preserve" approved="yes">

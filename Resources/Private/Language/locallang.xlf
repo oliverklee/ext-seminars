@@ -43,11 +43,17 @@
             <trans-unit id="label_seats" xml:space="preserve">
                 <source>Seats</source>
             </trans-unit>
+            <trans-unit id="label_speakers" xml:space="preserve">
+                <source>Referenten</source>
+            </trans-unit>
             <trans-unit id="label_total_price" xml:space="preserve">
                 <source>Total price</source>
             </trans-unit>
             <trans-unit id="label_attendees_names" xml:space="preserve">
                 <source>Registered persons</source>
+            </trans-unit>
+            <trans-unit id="label_attendees_max" xml:space="preserve">
+                <source>Maximum number of participants</source>
             </trans-unit>
             <trans-unit id="label_lodgings" xml:space="preserve">
                 <source>Selected lodging options</source>
