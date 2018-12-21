@@ -4606,22 +4606,18 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
                 'height' => $maxImageHeight,
             ],
         ];
-        $imageWithTag = $this->cObj->cObjGetSingle('IMAGE', $imageConfiguration);
+        $imageTag = $this->cObj->cObjGetSingle('IMAGE', $imageConfiguration);
 
         $imageWidth = [];
-        preg_match('/width="([^"]*)"/', $imageWithTag, $imageWidth);
+        preg_match('/width="([^"]*)"/', $imageTag, $imageWidth);
         $imageHeight = [];
-        preg_match('/height="([^"]*)"/', $imageWithTag, $imageHeight);
+        preg_match('/height="([^"]*)"/', $imageTag, $imageHeight);
         $imageUrl = [];
-        preg_match('/src="([^"]*)"/', $imageWithTag, $imageUrl);
+        preg_match('/src="([^"]*)"/', $imageTag, $imageUrl);
 
 
-			return $imageWithTag;
- /*       return ' <img '.
-          'src=" '. $imageUrl[1]  .'" ' .
-          'style="width:'.$imageWidth.'px;height:'.$imageHeight.'px;"'.
-          '>';
-*/
+			return $imageTag;
+
     }
 
     /**
