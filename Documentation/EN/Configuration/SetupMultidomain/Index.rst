@@ -15,14 +15,9 @@
 
 Setup Multidomain
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-If you use seminars for multiple domains, by default all in the typo3 project existing categories, payment methods, places, etc. are shown. With the following configuration you can restrict the displayed entries as well in editing a seminar as in the flexform.
+If you use seminars for multiple domains, all categories, payment methods, places, etc. existing in the typo3 project are shown by default. With the following configurations you can restrict the displayed entries in editing a seminar as well in using the flexforms.
 
-All you have to do is to set the following values in the page-ts on the UID of the system folder in which the entries are stored. In the following excample all records of the systemfolder with UID 384 are displayed.
-
-
-Bei der Verwendung von Seminars für mehrere Domain in einem TYPO3 Projekt erscheinen standardmäßig alle Kategorien, Zahlungsarten, Orte, Veranstalter, etc., die irgendwo im Projekt zu finden sind. Werden nun mehrere Homepages in einem Projekt betreut, können sowohl die anzuzeigenden Einträge, sowohl in der Bearbeitung eines Seminars, als auch in der Flexform beim Anlegen eines Seiteninhaltselements eingeschränkt werden.
-
-Dazu können im Seiten-TS folgende Werte auf die jeweilige UID des Systemordners gesetzt werden, in dem die Daten zu finden sind. In folgendem Beispiel befinden sich alle Datensätze im Ordner mit der UID 384. Bei den Kategorien wird mit dem Platzhalter % nach wie vor alle im Projekt vorkommenden Kategorien aufgelistet:
+All you have to do is set the following values in the page-ts on the UID of the system folder in which the entries are stored. In the following example all records of the systemfolder with UID 384 are displayed.
 
 ::
 
