@@ -884,6 +884,7 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
                 'footer',
                 'first_name',
                 'last_name',
+                'unregistration_notice',
             ]
         );
     }

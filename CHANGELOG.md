@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Allow hiding the unregistration notice in the thank-you email (#185)
 - Add more common files to the `.gitignore` (#184)
 
 ## 2.1.2
