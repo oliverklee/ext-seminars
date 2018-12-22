@@ -12,7 +12,7 @@ mod.wizards.newContentElement.wizardItems.plugins {
     }
 }
 
-#Marker for the configuration/TCA/tx_seminars_seminars.php
+#Marker for the Configuration/TCA/tx_seminars_seminars.php
 TCEFORM.tx_seminars_seminars.categories.PAGE_TSCONFIG_STR = %
 TCEFORM.tx_seminars_seminars.event_type.PAGE_TSCONFIG_STR = %
 TCEFORM.tx_seminars_seminars.place.PAGE_TSCONFIG_STR = %
@@ -28,5 +28,5 @@ TCEFORM.tx_seminars_seminars.target_groups.PAGE_TSCONFIG_STR = %
 TCEFORM.tx_seminars_seminars.checkboxes.PAGE_TSCONFIG_STR = %
 TCEFORM.tx_seminars_seminars.payment_methods.PAGE_TSCONFIG_STR = %
 
-#Marker für Configuration/FlexForms/flexforms_pi1.xml
+#Marker for the Configuration/FlexForms/flexforms_pi1.xml
 TCEFORM.tt_content.pi_flexform.PAGE_TSCONFIG_STR = %
