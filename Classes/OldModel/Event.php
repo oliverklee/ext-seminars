@@ -4608,15 +4608,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         ];
         $imageTag = $this->cObj->cObjGetSingle('IMAGE', $imageConfiguration);
 
-        $imageWidth = [];
-        preg_match('/width="([^"]*)"/', $imageTag, $imageWidth);
-        $imageHeight = [];
-        preg_match('/height="([^"]*)"/', $imageTag, $imageHeight);
-        $imageUrl = [];
-        preg_match('/src="([^"]*)"/', $imageTag, $imageUrl);
-
-
-			return $imageTag;
+        return $imageTag;
 
     }
 
