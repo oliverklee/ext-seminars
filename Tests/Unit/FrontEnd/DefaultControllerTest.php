@@ -1210,10 +1210,6 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
         );
         $this->fixture->piVars['showUid'] = $this->seminarUid;
 
-        self::assertNotContains(
-            'style="background-image:',
-            $this->fixture->main('', [])
-        );
     }
 
     public function testSingleViewDisplaysSeminarImage()
@@ -1244,10 +1240,6 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
 
         $this->testingFramework->deleteDummyFile('test_foo.gif');
 
-        self::assertContains(
-            'style="background-image:',
-            $seminarWithImage
-        );
     }
 
     public function testSingleViewForHideFieldsContainingImageHidesSeminarImage()
@@ -1278,11 +1270,6 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
         $seminarWithImage = $this->fixture->main('', []);
 
         $this->testingFramework->deleteDummyFile('test_foo.gif');
-
-        self::assertNotContains(
-            'style="background-image:',
-            $seminarWithImage
-        );
     }
 
     /**
