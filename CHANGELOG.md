@@ -6,7 +6,6 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
-- allow ungeristration_notice in thankyouemail
 
 ### Changed
 
@@ -15,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Allow hiding the unregistration notice in the thank-you email (#185)
 
 ## 2.1.2
 
