@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Remove unsupported properties from TCA type "select" (#191)
 
 ### Fixed
 - Allow hiding the unregistration notice in the thank-you email (#185)
