@@ -90,8 +90,6 @@ defined('TYPO3_MODE') or die('Access denied.');
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
-                'internal_type' => 'db',
-                'allowed' => 'tx_seminars_categories',
                 'foreign_table' => 'tx_seminars_categories',
                 'size' => 10,
                 'minitems' => 0,
@@ -120,8 +118,6 @@ defined('TYPO3_MODE') or die('Access denied.');
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'internal_type' => 'db',
-                'allowed' => 'tx_seminars_organizers',
                 'foreign_table' => 'tx_seminars_organizers',
                 'default' => 0,
                 'size' => 1,
