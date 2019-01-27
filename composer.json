@@ -71,11 +71,11 @@
     },
     "scripts": {
         "ci:php:lint": "find *.php Classes/ Configuration/ Tests/ -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
-        "ci:tests:unit": "$RUN_TESTS_COMMAND Tests/Unit/",
-        "ci:tests:functional": "$RUN_TESTS_COMMAND Tests/Functional/",
+        "ci:tests:legacy-unit": "$RUN_TESTS_COMMAND Tests/LegacyUnit/",
+        "ci:tests:legacy-functional": "$RUN_TESTS_COMMAND Tests/LegacyFunctional/",
         "ci:tests": [
-            "@ci:tests:unit",
-            "@ci:tests:functional"
+            "@ci:tests:legacy-unit",
+            "@ci:tests:legacy-functional"
         ],
         "ci:dynamic": [
             "@ci:tests"

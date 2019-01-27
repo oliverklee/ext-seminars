@@ -42,12 +42,12 @@ script:
   composer ci:php:lint;
 - >
   echo;
-  echo "Running the unit tests";
-  composer ci:tests:unit;
+  echo "Running the legacy unit tests";
+  composer ci:tests:legacy-unit;
 - >
   echo;
-  echo "Running the functional tests";
-  composer ci:tests:functional;
+  echo "Running the legacy functional tests";
+  composer ci:tests:legacy-functional;
 
 jobs:
   include:
