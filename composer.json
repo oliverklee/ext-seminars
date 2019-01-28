@@ -37,7 +37,11 @@
         "helhum/typo3-console": "^4.9",
 
         "oliverklee/phpunit": "^5.3",
-        "phpunit/phpunit": "^5.6"
+        "nimut/testing-framework": "^2.0",
+        "phpunit/phpunit": "^5.6",
+        "mikey179/vfsStream": "^1.6",
+
+        "roave/security-advisories": "dev-master"
     },
     "conflict": {
         "sjbr/static-info-tables": "6.7.1"
@@ -71,11 +75,13 @@
     },
     "scripts": {
         "ci:php:lint": "find *.php Classes/ Configuration/ Tests/ -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
-        "ci:tests:legacy-unit": "$RUN_TESTS_COMMAND Tests/LegacyUnit/",
-        "ci:tests:legacy-functional": "$RUN_TESTS_COMMAND Tests/LegacyFunctional/",
+        "ci:tests:unit": "phpunit -c .Build/vendor/nimut/testing-framework/res/Configuration/UnitTests.xml Tests/Unit/",
+        "ci:tests:unit-legacy": "$RUN_TESTS_COMMAND Tests/LegacyUnit/",
+        "ci:tests:functional-legacy": "$RUN_TESTS_COMMAND Tests/LegacyFunctional/",
         "ci:tests": [
-            "@ci:tests:legacy-unit",
-            "@ci:tests:legacy-functional"
+            "@ci:tests:unit",
+            "@ci:tests:unit-legacy",
+            "@ci:tests:functional-legacy"
         ],
         "ci:dynamic": [
             "@ci:tests"

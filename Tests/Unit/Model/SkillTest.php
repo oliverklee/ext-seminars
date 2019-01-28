@@ -1,20 +1,24 @@
 <?php
 
+namespace OliverKlee\Seminars\Tests\Unit\Visibility;
+
+use Nimut\TestingFramework\TestCase\UnitTestCase;
+
 /**
  * Test case.
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_Model_SkillTest extends \Tx_Phpunit_TestCase
+class SkillTest extends UnitTestCase
 {
     /**
      * @var \Tx_Seminars_Model_Skill
      */
-    private $fixture;
+    private $subject = null;
 
     protected function setUp()
     {
-        $this->fixture = new \Tx_Seminars_Model_Skill();
+        $this->subject = new \Tx_Seminars_Model_Skill();
     }
 
     /**
@@ -27,7 +31,7 @@ class Tx_Seminars_Tests_Unit_Model_SkillTest extends \Tx_Phpunit_TestCase
             'The parameter $title must not be empty.'
         );
 
-        $this->fixture->setTitle('');
+        $this->subject->setTitle('');
     }
 
     /**
@@ -35,11 +39,11 @@ class Tx_Seminars_Tests_Unit_Model_SkillTest extends \Tx_Phpunit_TestCase
      */
     public function setTitleSetsTitle()
     {
-        $this->fixture->setTitle('Superhero');
+        $this->subject->setTitle('Superhero');
 
-        self::assertEquals(
+        self::assertSame(
             'Superhero',
-            $this->fixture->getTitle()
+            $this->subject->getTitle()
         );
     }
 
@@ -48,11 +52,11 @@ class Tx_Seminars_Tests_Unit_Model_SkillTest extends \Tx_Phpunit_TestCase
      */
     public function getTitleWithNonEmptyTitleReturnsTitle()
     {
-        $this->fixture->setData(['title' => 'Superhero']);
+        $this->subject->setData(['title' => 'Superhero']);
 
-        self::assertEquals(
+        self::assertSame(
             'Superhero',
-            $this->fixture->getTitle()
+            $this->subject->getTitle()
         );
     }
 }
