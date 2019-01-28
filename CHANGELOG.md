@@ -8,7 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
-- Convert the first unit test to nimut/testing-framework (#194)
+- Convert the first tests to nimut/testing-framework (#194, #195)
 - Move to old tests to the "Legacy" namespace (#193)
 
 ### Deprecated

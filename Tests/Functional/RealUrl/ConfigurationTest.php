@@ -1,6 +1,7 @@
 <?php
-namespace OliverKlee\Seminars\Tests\LegacyFunctional\RealUrl;
+namespace OliverKlee\Seminars\Tests\Functional\RealUrl;
 
+use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Seminars\RealUrl\Configuration;
 
 /**
@@ -8,8 +9,13 @@ use OliverKlee\Seminars\RealUrl\Configuration;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class ConfigurationTest extends \Tx_Phpunit_TestCase
+class ConfigurationTest extends FunctionalTestCase
 {
+    /**
+     * @var string[]
+     */
+    protected $testExtensionsToLoad = ['typo3conf/ext/seminars'];
+
     /**
      * Extracts the class name from something like '...->foo'.
      *
@@ -19,9 +25,9 @@ class ConfigurationTest extends \Tx_Phpunit_TestCase
      */
     private function extractClassNameFromUserFunction($reference)
     {
-        $parts = explode('->', $reference);
+        $parts = \explode('->', $reference);
 
-        return array_shift($parts);
+        return \array_shift($parts);
     }
 
     /**
@@ -33,9 +39,9 @@ class ConfigurationTest extends \Tx_Phpunit_TestCase
      */
     private function extractMethodNameFromUserFunction($reference)
     {
-        $parts = explode('->', $reference);
+        $parts = \explode('->', $reference);
 
-        return array_pop($parts);
+        return \array_pop($parts);
     }
 
     /**
@@ -46,7 +52,7 @@ class ConfigurationTest extends \Tx_Phpunit_TestCase
         $reference = $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/realurl/class.tx_realurl_autoconfgen.php']['extensionConfiguration']['seminars'];
         $className = $this->extractClassNameFromUserFunction($reference);
 
-        self::assertTrue(class_exists($className));
+        self::assertTrue(\class_exists($className));
         self::assertSame(Configuration::class, $className);
     }
 
@@ -60,6 +66,6 @@ class ConfigurationTest extends \Tx_Phpunit_TestCase
 
         $instance = new Configuration();
 
-        self::assertTrue(method_exists($instance, $methodName));
+        self::assertTrue(\method_exists($instance, $methodName));
     }
 }

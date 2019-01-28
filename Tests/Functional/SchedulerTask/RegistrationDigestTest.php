@@ -1,8 +1,8 @@
 <?php
-namespace OliverKlee\Seminars\Tests\LegacyFunctional\SchedulerTask;
+namespace OliverKlee\Seminars\Tests\Functional\SchedulerTask;
 
+use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 
@@ -11,12 +11,17 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class RegistrationDigestTest extends \Tx_Phpunit_TestCase
+class RegistrationDigestTest extends FunctionalTestCase
 {
     /**
-     * @var \Tx_Oelib_TestingFramework
+     * @var string[]
      */
-    private $testingFramework = null;
+    protected $coreExtensionsToLoad = ['scheduler'];
+
+    /**
+     * @var string[]
+     */
+    protected $testExtensionsToLoad = ['typo3conf/ext/seminars'];
 
     /**
      * @var RegistrationDigest
@@ -25,19 +30,15 @@ class RegistrationDigestTest extends \Tx_Phpunit_TestCase
 
     protected function setUp()
     {
-        if (!ExtensionManagementUtility::isLoaded('scheduler')) {
-            self::markTestSkipped('This tests needs the scheduler extension.');
-        }
-
-        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
+        parent::setUp();
         $this->subject = new RegistrationDigest();
     }
 
     protected function tearDown()
     {
-        if ($this->testingFramework !== null) {
-            $this->testingFramework->cleanUp();
-        }
+        \Tx_Oelib_MapperRegistry::purgeInstance();
+        \Tx_Oelib_ConfigurationRegistry::purgeInstance();
+        parent::tearDown();
     }
 
     /**
@@ -94,6 +95,7 @@ class RegistrationDigestTest extends \Tx_Phpunit_TestCase
      */
     public function objectManagerInitializesObject()
     {
+        /** @var ObjectManager $objectManager */
         $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
         $subject = $objectManager->get(RegistrationDigest::class);
 

@@ -1,6 +1,7 @@
 <?php
-namespace OliverKlee\Seminars\Tests\LegacyFunctional\Hooks;
+namespace OliverKlee\Seminars\Tests\Functional\Hooks;
 
+use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -8,8 +9,13 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class TceProcessingHookTest extends \Tx_Phpunit_TestCase
+class TceProcessingHookTest extends FunctionalTestCase
 {
+    /**
+     * @var string[]
+     */
+    protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
+
     /**
      * @test
      */
