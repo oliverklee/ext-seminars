@@ -15,13 +15,13 @@ class Tx_Seminars_Tests_Unit_Mapper_BackEndUserGroupTest extends \Tx_Phpunit_Tes
     /**
      * @var \Tx_Seminars_Mapper_BackEndUserGroup the object to test
      */
-    private $fixture;
+    private $subject;
 
     protected function setUp()
     {
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_oelib');
 
-        $this->fixture = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUserGroup::class);
+        $this->subject = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUserGroup::class);
     }
 
     protected function tearDown()
@@ -38,9 +38,9 @@ class Tx_Seminars_Tests_Unit_Mapper_BackEndUserGroupTest extends \Tx_Phpunit_Tes
      */
     public function findReturnsBackEndUserGroupInstance()
     {
-        $uid = $this->fixture->getNewGhost()->getUid();
+        $uid = $this->subject->getNewGhost()->getUid();
 
-        self::assertInstanceOf(\Tx_Seminars_Model_BackEndUserGroup::class, $this->fixture->find($uid));
+        self::assertInstanceOf(\Tx_Seminars_Model_BackEndUserGroup::class, $this->subject->find($uid));
     }
 
     /**
@@ -49,13 +49,13 @@ class Tx_Seminars_Tests_Unit_Mapper_BackEndUserGroupTest extends \Tx_Phpunit_Tes
     public function loadForExistingUserGroupCanLoadUserGroupData()
     {
         /** @var \Tx_Seminars_Model_BackEndUserGroup $userGroup */
-        $userGroup = $this->fixture->find(
+        $userGroup = $this->subject->find(
             $this->testingFramework->createBackEndUserGroup(
                 ['title' => 'foo']
             )
         );
 
-        $this->fixture->load($userGroup);
+        $this->subject->load($userGroup);
 
         self::assertEquals(
             'foo',

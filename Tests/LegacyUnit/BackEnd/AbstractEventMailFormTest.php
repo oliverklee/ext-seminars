@@ -17,7 +17,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
     /**
      * @var \Tx_Seminars_Tests_Unit_Fixtures_BackEnd_TestingEventMailForm
      */
-    private $fixture;
+    private $subject;
 
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -88,8 +88,8 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
             'organizers'
         );
 
-        $this->fixture = new \Tx_Seminars_Tests_Unit_Fixtures_BackEnd_TestingEventMailForm($this->eventUid);
-        $this->fixture->setDateFormat();
+        $this->subject = new \Tx_Seminars_Tests_Unit_Fixtures_BackEnd_TestingEventMailForm($this->eventUid);
+        $this->subject->setDateFormat();
     }
 
     protected function tearDown()
@@ -130,7 +130,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
 
         self::assertContains(
             '&amp;id=42',
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 
@@ -141,7 +141,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
     {
         self::assertContains(
             'Dummy Event',
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 
@@ -152,7 +152,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
     {
         self::assertContains(
             $GLOBALS['LANG']->getLL('testForm_prefillField_messageBody'),
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 
@@ -166,7 +166,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
                 $GLOBALS['LANG']->getLL('testForm_prefillField_introduction'),
                 htmlspecialchars('"Dummy Event"')
             ),
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 
@@ -175,7 +175,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
      */
     public function renderNotPrefillsSubjectFieldIfEmptyStringWasSentViaPost()
     {
-        $this->fixture->setPostData(
+        $this->subject->setPostData(
             [
                 'action' => 'cancelEvent',
                 'isSubmitted' => '1',
@@ -185,7 +185,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
 
         self::assertNotContains(
             'Dummy event',
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 
@@ -196,7 +196,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
     {
         self::assertContains(
             strftime('%d.%m.%Y', $GLOBALS['SIM_EXEC_TIME'] + 42),
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 
@@ -205,14 +205,14 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
      */
     public function renderSanitizesPostDataWhenPreFillingAFormField()
     {
-        $this->fixture->setPostData(
+        $this->subject->setPostData(
             [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
                 'messageBody' => '<test>',
             ]
         );
-        $formOutput = $this->fixture->render();
+        $formOutput = $this->subject->render();
 
         self::assertContains(
             '&lt;test&gt;',
@@ -230,7 +230,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
             $GLOBALS['LANG']->getLL('eventMailForm_backButton') .
             '" class="backButton"' .
             ' onclick="window.location=window.location" />',
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 
@@ -239,7 +239,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
      */
     public function renderContainsErrorMessageIfFormWasSubmittedWithEmptySubjectField()
     {
-        $this->fixture->setPostData(
+        $this->subject->setPostData(
             [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
@@ -249,7 +249,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
 
         self::assertContains(
             $GLOBALS['LANG']->getLL('eventMailForm_error_subjectMustNotBeEmpty'),
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 
@@ -258,7 +258,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
      */
     public function renderContainsErrorMessageIfFormWasSubmittedWithEmptyMessageField()
     {
-        $this->fixture->setPostData(
+        $this->subject->setPostData(
             [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
@@ -268,7 +268,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
 
         self::assertContains(
             $GLOBALS['LANG']->getLL('eventMailForm_error_messageBodyMustNotBeEmpty'),
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 
@@ -277,18 +277,18 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
      */
     public function renderContainsSubjectFieldPrefilledByUserInputIfFormIsReRendered()
     {
-        $this->fixture->setPostData(
+        $this->subject->setPostData(
             [
                 'action' => 'sendForm',
                 'isSubmitted' => '1',
                 'subject' => 'foo bar',
             ]
         );
-        $this->fixture->markAsIncomplete();
+        $this->subject->markAsIncomplete();
 
         self::assertContains(
             'foo bar',
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 
@@ -297,17 +297,17 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
      */
     public function renderEncodesHtmlSpecialCharsInSubjectField()
     {
-        $this->fixture->setPostData(
+        $this->subject->setPostData(
             [
                 'action' => 'sendForm',
                 'isSubmitted' => '1',
                 'subject' => '<foo> & "bar"',
             ]
         );
-        $this->fixture->markAsIncomplete();
+        $this->subject->markAsIncomplete();
         self::assertContains(
             '&lt;foo&gt; &amp; &quot;bar&quot;',
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 
@@ -316,18 +316,18 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
      */
     public function renderContainsMessageFieldPrefilledByUserInputIfFormIsReRendered()
     {
-        $this->fixture->setPostData(
+        $this->subject->setPostData(
             [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
                 'messageBody' => 'foo bar',
             ]
         );
-        $this->fixture->markAsIncomplete();
+        $this->subject->markAsIncomplete();
 
         self::assertContains(
             'foo bar',
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 
@@ -338,7 +338,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
     {
         self::assertContains(
             '<input type="hidden" name="eventUid" value="' . $this->eventUid . '" />',
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 
@@ -378,7 +378,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
             ]
         );
 
-        $this->fixture->setPostData(
+        $this->subject->setPostData(
             [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
@@ -386,7 +386,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
                 'messageBody' => 'foo bar',
             ]
         );
-        $this->fixture->render();
+        $this->subject->render();
 
         self::assertSame(
             'foo',
@@ -408,7 +408,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
             ]
         );
 
-        $this->fixture->setPostData(
+        $this->subject->setPostData(
             [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
@@ -416,7 +416,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
                 'messageBody' => 'foo bar',
             ]
         );
-        $this->fixture->render();
+        $this->subject->render();
 
         self::assertNull(
             $this->mailer->getFirstSentEmail()
@@ -443,7 +443,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
             ]
         );
 
-        $this->fixture->setPostData(
+        $this->subject->setPostData(
             [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
@@ -451,7 +451,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
                 'messageBody' => 'foo bar %salutation',
             ]
         );
-        $this->fixture->render();
+        $this->subject->render();
 
         self::assertContains(
             'test user',
@@ -479,7 +479,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
             ]
         );
 
-        $this->fixture->setPostData(
+        $this->subject->setPostData(
             [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
@@ -488,7 +488,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
             ]
         );
 
-        $this->fixture->render();
+        $this->subject->render();
     }
 
     /**
@@ -515,7 +515,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
             ]
         );
 
-        $this->fixture->setPostData(
+        $this->subject->setPostData(
             [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
@@ -523,7 +523,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
                 'messageBody' => 'foo bar',
             ]
         );
-        $this->fixture->render();
+        $this->subject->render();
 
         self::assertArrayHasKey(
             'foo@example.org',
@@ -559,7 +559,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
             ]
         );
 
-        $this->fixture->setPostData(
+        $this->subject->setPostData(
             [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
@@ -567,7 +567,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
                 'messageBody' => 'foo bar',
             ]
         );
-        $this->fixture->render();
+        $this->subject->render();
 
         self::assertSame(
             2,
@@ -601,7 +601,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
             ]
         );
 
-        $this->fixture->setPostData(
+        $this->subject->setPostData(
             [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
@@ -609,7 +609,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
                 'messageBody' => 'foo bar',
             ]
         );
-        $this->fixture->render();
+        $this->subject->render();
 
         self::assertContains(
             LF . '-- ' . LF . $organizerFooter,
@@ -640,7 +640,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
             ]
         );
 
-        $this->fixture->setPostData(
+        $this->subject->setPostData(
             [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
@@ -648,7 +648,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
                 'messageBody' => 'foo bar',
             ]
         );
-        $this->fixture->render();
+        $this->subject->render();
 
         self::assertNotContains(
             LF . '-- ' . LF,
@@ -676,7 +676,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
             ]
         );
 
-        $this->fixture->setPostData(
+        $this->subject->setPostData(
             [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
@@ -684,7 +684,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
                 'messageBody' => 'foo bar',
             ]
         );
-        $this->fixture->render();
+        $this->subject->render();
     }
 
     /**
@@ -694,7 +694,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
     {
         $this->mockBackEndUser->expects(self::never())->method('setAndSaveSessionData');
 
-        $this->fixture->setPostData(
+        $this->subject->setPostData(
             [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
@@ -702,7 +702,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
                 'messageBody' => 'foo bar',
             ]
         );
-        $this->fixture->render();
+        $this->subject->render();
     }
 
     /////////////////////////////////
@@ -714,7 +714,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
      */
     public function redirectToListViewSendsTheRedirectHeader()
     {
-        $this->fixture->setPostData(
+        $this->subject->setPostData(
             [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
@@ -722,7 +722,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
                 'messageBody' => 'foo bar',
             ]
         );
-        $this->fixture->render();
+        $this->subject->render();
 
         self::assertSame(
             'Location: ' . BackendUtility::getModuleUrl(
@@ -750,13 +750,13 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
             ['title' => 'FooBar']
         );
 
-        $fixture = new \Tx_Seminars_Tests_Unit_Fixtures_BackEnd_TestingEventMailForm(
+        $subject = new \Tx_Seminars_Tests_Unit_Fixtures_BackEnd_TestingEventMailForm(
             $this->eventUid
         );
 
         self::assertContains(
             'FooBar',
-            $fixture->getInitialValue('subject')
+            $subject->getInitialValue('subject')
         );
     }
 
@@ -769,7 +769,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
 
         self::assertContains(
             $beginDate,
-            $this->fixture->getInitialValue('subject')
+            $this->subject->getInitialValue('subject')
         );
     }
 
@@ -783,7 +783,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
             'There is no initial value for the field "foo" defined.'
         );
 
-        $this->fixture->getInitialValue('foo');
+        $this->subject->getInitialValue('foo');
     }
 
     ////////////////////////////////////////
@@ -795,11 +795,11 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
      */
     public function getErrorMessageForIncompleteFormAndNoStoredMessageReturnsEmptyString()
     {
-        $this->fixture->markAsIncomplete();
+        $this->subject->markAsIncomplete();
 
         self::assertEquals(
             '',
-            $this->fixture->getErrorMessage('subject')
+            $this->subject->getErrorMessage('subject')
         );
     }
 
@@ -808,11 +808,11 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
      */
     public function getErrorMessageForCompleteFormAndStoredMessageReturnsStoredMessage()
     {
-        $this->fixture->setErrorMessage('subject', 'Foo');
+        $this->subject->setErrorMessage('subject', 'Foo');
 
         self::assertContains(
             'Foo',
-            $this->fixture->getErrorMessage('subject')
+            $this->subject->getErrorMessage('subject')
         );
     }
 
@@ -821,12 +821,12 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
      */
     public function getErrorMessageForInCompleteFormAndStoredMessageReturnsThisErrorMessage()
     {
-        $this->fixture->markAsIncomplete();
-        $this->fixture->setErrorMessage('subject', 'Foo');
+        $this->subject->markAsIncomplete();
+        $this->subject->setErrorMessage('subject', 'Foo');
 
         self::assertContains(
             'Foo',
-            $this->fixture->getErrorMessage('subject')
+            $this->subject->getErrorMessage('subject')
         );
     }
 
@@ -835,10 +835,10 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
      */
     public function setErrorMessageForAlreadySetErrorMessageAppendsNewMessage()
     {
-        $this->fixture->markAsIncomplete();
-        $this->fixture->setErrorMessage('subject', 'Foo');
-        $this->fixture->setErrorMessage('subject', 'Bar');
-        $errorMessage = $this->fixture->getErrorMessage('subject');
+        $this->subject->markAsIncomplete();
+        $this->subject->setErrorMessage('subject', 'Foo');
+        $this->subject->setErrorMessage('subject', 'Bar');
+        $errorMessage = $this->subject->getErrorMessage('subject');
 
         self::assertContains(
             'Foo',

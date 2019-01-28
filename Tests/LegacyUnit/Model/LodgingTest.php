@@ -10,11 +10,11 @@ class Tx_Seminars_Tests_Unit_Model_LodgingTest extends \Tx_Phpunit_TestCase
     /**
      * @var \Tx_Seminars_Model_Lodging
      */
-    private $fixture;
+    private $subject;
 
     protected function setUp()
     {
-        $this->fixture = new \Tx_Seminars_Model_Lodging();
+        $this->subject = new \Tx_Seminars_Model_Lodging();
     }
 
     /**
@@ -27,7 +27,7 @@ class Tx_Seminars_Tests_Unit_Model_LodgingTest extends \Tx_Phpunit_TestCase
             'The parameter $title must not be empty.'
         );
 
-        $this->fixture->setTitle('');
+        $this->subject->setTitle('');
     }
 
     /**
@@ -35,11 +35,11 @@ class Tx_Seminars_Tests_Unit_Model_LodgingTest extends \Tx_Phpunit_TestCase
      */
     public function setTitleSetsTitle()
     {
-        $this->fixture->setTitle('Shack');
+        $this->subject->setTitle('Shack');
 
         self::assertEquals(
             'Shack',
-            $this->fixture->getTitle()
+            $this->subject->getTitle()
         );
     }
 
@@ -48,11 +48,11 @@ class Tx_Seminars_Tests_Unit_Model_LodgingTest extends \Tx_Phpunit_TestCase
      */
     public function getTitleWithNonEmptyTitleReturnsTitle()
     {
-        $this->fixture->setData(['title' => 'Shack']);
+        $this->subject->setData(['title' => 'Shack']);
 
         self::assertEquals(
             'Shack',
-            $this->fixture->getTitle()
+            $this->subject->getTitle()
         );
     }
 }

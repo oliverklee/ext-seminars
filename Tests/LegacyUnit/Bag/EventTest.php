@@ -11,7 +11,7 @@ class Tx_Seminars_Tests_Unit_Bag_EventTest extends \Tx_Phpunit_TestCase
     /**
      * @var \Tx_Seminars_Bag_Event
      */
-    private $fixture;
+    private $subject;
 
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -27,7 +27,7 @@ class Tx_Seminars_Tests_Unit_Bag_EventTest extends \Tx_Phpunit_TestCase
             ['title' => 'test event']
         );
 
-        $this->fixture = new \Tx_Seminars_Bag_Event('is_dummy_record=1');
+        $this->subject = new \Tx_Seminars_Bag_Event('is_dummy_record=1');
     }
 
     protected function tearDown()
@@ -44,7 +44,7 @@ class Tx_Seminars_Tests_Unit_Bag_EventTest extends \Tx_Phpunit_TestCase
     public function testBagCanHaveAtLeastOneElement()
     {
         self::assertFalse(
-            $this->fixture->isEmpty()
+            $this->subject->isEmpty()
         );
     }
 }

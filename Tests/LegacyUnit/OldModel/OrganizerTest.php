@@ -10,7 +10,7 @@ class Tx_Seminars_Tests_Unit_OldModel_OrganizerTest extends \Tx_Phpunit_TestCase
     /**
      * @var \Tx_Seminars_OldModel_Organizer
      */
-    private $fixture;
+    private $subject;
 
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -27,14 +27,14 @@ class Tx_Seminars_Tests_Unit_OldModel_OrganizerTest extends \Tx_Phpunit_TestCase
     protected function setUp()
     {
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
-        $fixtureUid = $this->testingFramework->createRecord(
+        $subjectUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
             [
                 'title' => 'Test organizer',
                 'email' => 'foo@test.com',
             ]
         );
-        $this->fixture = new \Tx_Seminars_OldModel_Organizer($fixtureUid);
+        $this->subject = new \Tx_Seminars_OldModel_Organizer($subjectUid);
 
         $maximalFixtureUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
@@ -62,7 +62,7 @@ class Tx_Seminars_Tests_Unit_OldModel_OrganizerTest extends \Tx_Phpunit_TestCase
     public function testCreateFromUid()
     {
         self::assertTrue(
-            $this->fixture->isOk()
+            $this->subject->isOk()
         );
     }
 
@@ -77,14 +77,14 @@ class Tx_Seminars_Tests_Unit_OldModel_OrganizerTest extends \Tx_Phpunit_TestCase
     {
         self::assertEquals(
             'Test organizer',
-            $this->fixture->getName()
+            $this->subject->getName()
         );
     }
 
     public function testHasHomepageWithEmptyHomepageReturnsFalse()
     {
         self::assertFalse(
-            $this->fixture->hasHomepage()
+            $this->subject->hasHomepage()
         );
     }
 
@@ -99,7 +99,7 @@ class Tx_Seminars_Tests_Unit_OldModel_OrganizerTest extends \Tx_Phpunit_TestCase
     {
         self::assertEquals(
             '',
-            $this->fixture->getHomepage()
+            $this->subject->getHomepage()
         );
         self::assertEquals(
             'http://www.test.com/',
@@ -114,7 +114,7 @@ class Tx_Seminars_Tests_Unit_OldModel_OrganizerTest extends \Tx_Phpunit_TestCase
     {
         self::assertEquals(
             '',
-            $this->fixture->getEmailFooter()
+            $this->subject->getEmailFooter()
         );
     }
 
@@ -136,7 +136,7 @@ class Tx_Seminars_Tests_Unit_OldModel_OrganizerTest extends \Tx_Phpunit_TestCase
     {
         self::assertEquals(
             'foo@test.com',
-            $this->fixture->getEMailAddress()
+            $this->subject->getEMailAddress()
         );
     }
 
@@ -144,7 +144,7 @@ class Tx_Seminars_Tests_Unit_OldModel_OrganizerTest extends \Tx_Phpunit_TestCase
     {
         self::assertEquals(
             0,
-            $this->fixture->getAttendancesPid()
+            $this->subject->getAttendancesPid()
         );
     }
 
@@ -166,7 +166,7 @@ class Tx_Seminars_Tests_Unit_OldModel_OrganizerTest extends \Tx_Phpunit_TestCase
     public function hasDescriptionForOrganizerWithoutDescriptionReturnsFalse()
     {
         self::assertFalse(
-            $this->fixture->hasDescription()
+            $this->subject->hasDescription()
         );
     }
 
@@ -187,7 +187,7 @@ class Tx_Seminars_Tests_Unit_OldModel_OrganizerTest extends \Tx_Phpunit_TestCase
     {
         self::assertEquals(
             '',
-            $this->fixture->getDescription()
+            $this->subject->getDescription()
         );
     }
 

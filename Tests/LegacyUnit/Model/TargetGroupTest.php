@@ -10,11 +10,11 @@ class Tx_Seminars_Tests_Unit_Model_TargetGroupTest extends \Tx_Phpunit_TestCase
     /**
      * @var \Tx_Seminars_Model_TargetGroup
      */
-    private $fixture;
+    private $subject;
 
     protected function setUp()
     {
-        $this->fixture = new \Tx_Seminars_Model_TargetGroup();
+        $this->subject = new \Tx_Seminars_Model_TargetGroup();
     }
 
     /**
@@ -27,7 +27,7 @@ class Tx_Seminars_Tests_Unit_Model_TargetGroupTest extends \Tx_Phpunit_TestCase
             'The parameter $title must not be empty.'
         );
 
-        $this->fixture->setTitle('');
+        $this->subject->setTitle('');
     }
 
     /**
@@ -35,11 +35,11 @@ class Tx_Seminars_Tests_Unit_Model_TargetGroupTest extends \Tx_Phpunit_TestCase
      */
     public function setTitleSetsTitle()
     {
-        $this->fixture->setTitle('Housewives');
+        $this->subject->setTitle('Housewives');
 
         self::assertEquals(
             'Housewives',
-            $this->fixture->getTitle()
+            $this->subject->getTitle()
         );
     }
 
@@ -48,11 +48,11 @@ class Tx_Seminars_Tests_Unit_Model_TargetGroupTest extends \Tx_Phpunit_TestCase
      */
     public function getTitleWithNonEmptyTitleReturnsTitle()
     {
-        $this->fixture->setData(['title' => 'Housewives']);
+        $this->subject->setData(['title' => 'Housewives']);
 
         self::assertEquals(
             'Housewives',
-            $this->fixture->getTitle()
+            $this->subject->getTitle()
         );
     }
 
@@ -65,11 +65,11 @@ class Tx_Seminars_Tests_Unit_Model_TargetGroupTest extends \Tx_Phpunit_TestCase
      */
     public function getMinimumAgeWithNoMinimumAgeSetReturnsZero()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             0,
-            $this->fixture->getMinimumAge()
+            $this->subject->getMinimumAge()
         );
     }
 
@@ -78,11 +78,11 @@ class Tx_Seminars_Tests_Unit_Model_TargetGroupTest extends \Tx_Phpunit_TestCase
      */
     public function getMinimumAgeWithNonZeroMinimumAgeReturnsMinimumAge()
     {
-        $this->fixture->setData(['minimum_age' => 18]);
+        $this->subject->setData(['minimum_age' => 18]);
 
         self::assertEquals(
             18,
-            $this->fixture->getMinimumAge()
+            $this->subject->getMinimumAge()
         );
     }
 
@@ -91,11 +91,11 @@ class Tx_Seminars_Tests_Unit_Model_TargetGroupTest extends \Tx_Phpunit_TestCase
      */
     public function setMinimumAgeSetsMinimumAge()
     {
-        $this->fixture->setMinimumAge(18);
+        $this->subject->setMinimumAge(18);
 
         self::assertEquals(
             18,
-            $this->fixture->getMinimumAge()
+            $this->subject->getMinimumAge()
         );
     }
 
@@ -108,11 +108,11 @@ class Tx_Seminars_Tests_Unit_Model_TargetGroupTest extends \Tx_Phpunit_TestCase
      */
     public function getMaximumAgeWithNoMaximumAgeSetReturnsZero()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             0,
-            $this->fixture->getMaximumAge()
+            $this->subject->getMaximumAge()
         );
     }
 
@@ -121,11 +121,11 @@ class Tx_Seminars_Tests_Unit_Model_TargetGroupTest extends \Tx_Phpunit_TestCase
      */
     public function getMaximumAgeWithNonZeroMaximumAgeReturnsMaximumAge()
     {
-        $this->fixture->setData(['maximum_age' => 18]);
+        $this->subject->setData(['maximum_age' => 18]);
 
         self::assertEquals(
             18,
-            $this->fixture->getMaximumAge()
+            $this->subject->getMaximumAge()
         );
     }
 
@@ -134,11 +134,11 @@ class Tx_Seminars_Tests_Unit_Model_TargetGroupTest extends \Tx_Phpunit_TestCase
      */
     public function setMaximumAgeSetsMaximumAge()
     {
-        $this->fixture->setMaximumAge(18);
+        $this->subject->setMaximumAge(18);
 
         self::assertEquals(
             18,
-            $this->fixture->getMaximumAge()
+            $this->subject->getMaximumAge()
         );
     }
 }

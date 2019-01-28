@@ -15,13 +15,13 @@ class Tx_Seminars_Tests_Unit_Mapper_PaymentMethodTest extends \Tx_Phpunit_TestCa
     /**
      * @var \Tx_Seminars_Mapper_PaymentMethod
      */
-    private $fixture;
+    private $subject;
 
     protected function setUp()
     {
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
-        $this->fixture = new \Tx_Seminars_Mapper_PaymentMethod();
+        $this->subject = new \Tx_Seminars_Mapper_PaymentMethod();
     }
 
     protected function tearDown()
@@ -38,7 +38,7 @@ class Tx_Seminars_Tests_Unit_Mapper_PaymentMethodTest extends \Tx_Phpunit_TestCa
      */
     public function findWithUidReturnsPaymentMethodInstance()
     {
-        self::assertInstanceOf(\Tx_Seminars_Model_PaymentMethod::class, $this->fixture->find(1));
+        self::assertInstanceOf(\Tx_Seminars_Model_PaymentMethod::class, $this->subject->find(1));
     }
 
     /**
@@ -52,7 +52,7 @@ class Tx_Seminars_Tests_Unit_Mapper_PaymentMethodTest extends \Tx_Phpunit_TestCa
         );
 
         /** @var \Tx_Seminars_Model_PaymentMethod $model */
-        $model = $this->fixture->find($uid);
+        $model = $this->subject->find($uid);
         self::assertEquals(
             'Cash',
             $model->getTitle()

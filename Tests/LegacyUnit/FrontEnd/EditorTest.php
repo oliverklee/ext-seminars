@@ -10,7 +10,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EditorTest extends \Tx_Phpunit_TestCase
     /**
      * @var \Tx_Seminars_FrontEnd_Editor
      */
-    private $fixture;
+    private $subject;
 
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -22,8 +22,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EditorTest extends \Tx_Phpunit_TestCase
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
 
-        $this->fixture = new \Tx_Seminars_FrontEnd_Editor([], $GLOBALS['TSFE']->cObj);
-        $this->fixture->setTestMode();
+        $this->subject = new \Tx_Seminars_FrontEnd_Editor([], $GLOBALS['TSFE']->cObj);
+        $this->subject->setTestMode();
     }
 
     protected function tearDown()
@@ -40,16 +40,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EditorTest extends \Tx_Phpunit_TestCase
     public function testIsTestModeReturnsTrueForTestModeEnabled()
     {
         self::assertTrue(
-            $this->fixture->isTestMode()
+            $this->subject->isTestMode()
         );
     }
 
     public function testIsTestModeReturnsFalseForTestModeDisabled()
     {
-        $fixture = new \Tx_Seminars_FrontEnd_Editor([], $GLOBALS['TSFE']->cObj);
+        $subject = new \Tx_Seminars_FrontEnd_Editor([], $GLOBALS['TSFE']->cObj);
 
         self::assertFalse(
-            $fixture->isTestMode()
+            $subject->isTestMode()
         );
     }
 
@@ -59,22 +59,22 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EditorTest extends \Tx_Phpunit_TestCase
 
     public function testGetObjectUidReturnsTheSetObjectUidForZero()
     {
-        $this->fixture->setObjectUid(0);
+        $this->subject->setObjectUid(0);
 
         self::assertEquals(
             0,
-            $this->fixture->getObjectUid()
+            $this->subject->getObjectUid()
         );
     }
 
     public function testGetObjectUidReturnsTheSetObjectUidForExistingObjectUid()
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_test');
-        $this->fixture->setObjectUid($uid);
+        $this->subject->setObjectUid($uid);
 
         self::assertEquals(
             $uid,
-            $this->fixture->getObjectUid()
+            $this->subject->getObjectUid()
         );
     }
 
@@ -86,17 +86,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EditorTest extends \Tx_Phpunit_TestCase
     {
         self::assertEquals(
             '',
-            $this->fixture->getFormValue('title')
+            $this->subject->getFormValue('title')
         );
     }
 
     public function testGetFormValueReturnsValueSetViaSetFakedFormValue()
     {
-        $this->fixture->setFakedFormValue('title', 'foo');
+        $this->subject->setFakedFormValue('title', 'foo');
 
         self::assertEquals(
             'foo',
-            $this->fixture->getFormValue('title')
+            $this->subject->getFormValue('title')
         );
     }
 }

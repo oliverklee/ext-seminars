@@ -14,7 +14,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     /**
      * @var \Tx_Seminars_Service_RegistrationManager
      */
-    protected $fixture = null;
+    protected $subject = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -149,7 +149,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->headerCollector = $headerProxyFactory->getHeaderProxy();
 
         $this->seminar = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid);
-        $this->fixture = \Tx_Seminars_Service_RegistrationManager::getInstance();
+        $this->subject = \Tx_Seminars_Service_RegistrationManager::getInstance();
 
         $this->linkBuilder = $this->getMock(
             \Tx_Seminars_Service_SingleViewLinkBuilder::class,
@@ -158,7 +158,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->linkBuilder->expects(self::any())
             ->method('createAbsoluteUrlForEvent')
             ->will(self::returnValue('http://singleview.example.com/'));
-        $this->fixture->injectLinkBuilder($this->linkBuilder);
+        $this->subject->injectLinkBuilder($this->linkBuilder);
 
         $this->frontEndUserMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
         $this->registrationMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
@@ -472,7 +472,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertContains(
             '<a ',
-            $this->fixture->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
+            $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
         );
     }
 
@@ -483,7 +483,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertContains(
             '?id=' . $this->loginPageUid,
-            $this->fixture->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
+            $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
         );
     }
 
@@ -494,11 +494,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertContains(
             'redirect_url',
-            $this->fixture->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
+            $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
         );
         self::assertContains(
             '%255Bseminar%255D%3D' . $this->seminarUid,
-            $this->fixture->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
+            $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
         );
     }
 
@@ -509,7 +509,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertContains(
             '<a ',
-            $this->fixture->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
+            $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
         );
     }
 
@@ -520,14 +520,14 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertContains(
             '?id=' . $this->registrationPageUid,
-            $this->fixture->getLinkToRegistrationOrLoginPage(
+            $this->subject->getLinkToRegistrationOrLoginPage(
                 $this->pi1,
                 $this->seminar
             )
         );
         self::assertContains(
             '%5Bseminar%5D=' . $this->seminarUid,
-            $this->fixture->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
+            $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
         );
     }
 
@@ -547,7 +547,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertContains(
             '?id=' . $this->registrationPageUid,
-            $this->fixture->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
+            $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
         );
     }
 
@@ -558,7 +558,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertNotContains(
             'redirect_url',
-            $this->fixture->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
+            $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
         );
     }
 
@@ -573,7 +573,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertContains(
             $this->pi1->translate('label_onlinePrebooking'),
-            $this->fixture->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
+            $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
         );
     }
 
@@ -590,7 +590,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertContains(
             $this->pi1->translate('label_onlineRegistration'),
-            $this->fixture->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
+            $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
         );
     }
 
@@ -608,7 +608,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertContains(
             sprintf($this->pi1->translate('label_onlineRegistrationOnQueue'), 0),
-            $this->fixture->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
+            $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
         );
     }
 
@@ -625,7 +625,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertContains(
             sprintf($this->pi1->translate('label_onlineRegistrationOnQueue'), 0),
-            $this->fixture->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
+            $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
         );
     }
 
@@ -643,7 +643,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertContains(
             '?id=' . $this->registrationPageUid,
-            $this->fixture->getRegistrationLink($this->pi1, $this->seminar)
+            $this->subject->getRegistrationLink($this->pi1, $this->seminar)
         );
     }
 
@@ -657,7 +657,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertContains(
             '%5Bseminar%5D=' . $this->seminarUid,
-            $this->fixture->getRegistrationLink($this->pi1, $this->seminar)
+            $this->subject->getRegistrationLink($this->pi1, $this->seminar)
         );
     }
 
@@ -670,7 +670,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertContains(
             '?id=' . $this->loginPageUid,
-            $this->fixture->getRegistrationLink($this->pi1, $this->seminar)
+            $this->subject->getRegistrationLink($this->pi1, $this->seminar)
         );
     }
 
@@ -686,7 +686,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertSame(
             '',
-            $this->fixture->getRegistrationLink($this->pi1, $this->fullyBookedSeminar)
+            $this->subject->getRegistrationLink($this->pi1, $this->fullyBookedSeminar)
         );
     }
 
@@ -701,7 +701,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertSame(
             '',
-            $this->fixture->getRegistrationLink($this->pi1, $this->fullyBookedSeminar)
+            $this->subject->getRegistrationLink($this->pi1, $this->fullyBookedSeminar)
         );
     }
 
@@ -727,7 +727,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertSame(
             '',
-            $this->fixture->getRegistrationLink($this->pi1, $this->cachedSeminar)
+            $this->subject->getRegistrationLink($this->pi1, $this->cachedSeminar)
         );
     }
 
@@ -754,7 +754,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertSame(
             '',
-            $this->fixture->getRegistrationLink($this->pi1, $this->cachedSeminar)
+            $this->subject->getRegistrationLink($this->pi1, $this->cachedSeminar)
         );
     }
 
@@ -769,7 +769,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertContains(
             '%5Bseminar%5D=' . $this->seminarUid,
-            $this->fixture->getRegistrationLink($this->pi1, $this->seminar)
+            $this->subject->getRegistrationLink($this->pi1, $this->seminar)
         );
     }
 
@@ -783,7 +783,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertContains(
             '?id=' . $this->loginPageUid,
-            $this->fixture->getRegistrationLink($this->pi1, $this->seminar)
+            $this->subject->getRegistrationLink($this->pi1, $this->seminar)
         );
     }
 
@@ -801,7 +801,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertContains(
             '%5Bseminar%5D=' . $this->seminarUid,
-            $this->fixture->getRegistrationLink($this->pi1, $this->seminar)
+            $this->subject->getRegistrationLink($this->pi1, $this->seminar)
         );
     }
 
@@ -818,7 +818,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertContains(
             '?id=' . $this->loginPageUid,
-            $this->fixture->getRegistrationLink($this->pi1, $this->seminar)
+            $this->subject->getRegistrationLink($this->pi1, $this->seminar)
         );
     }
 
@@ -831,7 +831,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->createFrontEndPages();
         $this->createAndLogInFrontEndUser();
 
-        self::assertSame('', $this->fixture->getRegistrationLink($this->pi1, $this->seminar));
+        self::assertSame('', $this->subject->getRegistrationLink($this->pi1, $this->seminar));
     }
 
     /*
@@ -844,7 +844,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function canRegisterIfLoggedInForLoggedOutUserAndSeminarRegistrationOpenReturnsTrue()
     {
         self::assertTrue(
-            $this->fixture->canRegisterIfLoggedIn($this->seminar)
+            $this->subject->canRegisterIfLoggedIn($this->seminar)
         );
     }
 
@@ -855,7 +855,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     {
         $this->seminar->setPriceOnRequest(true);
 
-        self::assertFalse($this->fixture->canRegisterIfLoggedIn($this->seminar));
+        self::assertFalse($this->subject->canRegisterIfLoggedIn($this->seminar));
     }
 
     /**
@@ -866,7 +866,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->testingFramework->createAndLoginFrontEndUser();
 
         self::assertTrue(
-            $this->fixture->canRegisterIfLoggedIn($this->seminar)
+            $this->subject->canRegisterIfLoggedIn($this->seminar)
         );
     }
 
@@ -884,7 +884,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
 
         self::assertFalse(
-            $this->fixture->canRegisterIfLoggedIn($this->seminar)
+            $this->subject->canRegisterIfLoggedIn($this->seminar)
         );
     }
 
@@ -904,7 +904,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
 
         self::assertTrue(
-            $this->fixture->canRegisterIfLoggedIn($this->seminar)
+            $this->subject->canRegisterIfLoggedIn($this->seminar)
         );
     }
 
@@ -934,7 +934,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
 
         self::assertFalse(
-            $this->fixture->canRegisterIfLoggedIn($this->cachedSeminar)
+            $this->subject->canRegisterIfLoggedIn($this->cachedSeminar)
         );
     }
 
@@ -946,7 +946,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->createBookedOutSeminar();
 
         self::assertFalse(
-            $this->fixture->canRegisterIfLoggedIn($this->fullyBookedSeminar)
+            $this->subject->canRegisterIfLoggedIn($this->fullyBookedSeminar)
         );
     }
 
@@ -958,7 +958,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
 
         self::assertFalse(
-            $this->fixture->canRegisterIfLoggedIn($this->seminar)
+            $this->subject->canRegisterIfLoggedIn($this->seminar)
         );
     }
 
@@ -971,7 +971,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setNeedsRegistration(false);
 
         self::assertFalse(
-            $this->fixture->canRegisterIfLoggedIn($this->seminar)
+            $this->subject->canRegisterIfLoggedIn($this->seminar)
         );
     }
 
@@ -983,7 +983,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setUnlimitedVacancies();
 
         self::assertTrue(
-            $this->fixture->canRegisterIfLoggedIn($this->seminar)
+            $this->subject->canRegisterIfLoggedIn($this->seminar)
         );
     }
 
@@ -996,7 +996,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->testingFramework->createAndLoginFrontEndUser();
 
         self::assertTrue(
-            $this->fixture->canRegisterIfLoggedIn($this->seminar)
+            $this->subject->canRegisterIfLoggedIn($this->seminar)
         );
     }
 
@@ -1010,7 +1010,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setRegistrationQueue(true);
 
         self::assertTrue(
-            $this->fixture->canRegisterIfLoggedIn($this->seminar)
+            $this->subject->canRegisterIfLoggedIn($this->seminar)
         );
     }
 
@@ -1025,7 +1025,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->testingFramework->createAndLoginFrontEndUser();
 
         self::assertTrue(
-            $this->fixture->canRegisterIfLoggedIn($this->seminar)
+            $this->subject->canRegisterIfLoggedIn($this->seminar)
         );
     }
 
@@ -1044,7 +1044,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
         GeneralUtility::addInstance($hookClass, $hook);
 
-        $this->fixture->canRegisterIfLoggedIn($this->seminar);
+        $this->subject->canRegisterIfLoggedIn($this->seminar);
     }
 
     /**
@@ -1062,7 +1062,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
         GeneralUtility::addInstance($hookClass, $hook);
 
-        $this->fixture->canRegisterIfLoggedIn($this->seminar);
+        $this->subject->canRegisterIfLoggedIn($this->seminar);
     }
 
     /**
@@ -1080,7 +1080,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         GeneralUtility::addInstance($hookClass, $hook);
 
         self::assertTrue(
-            $this->fixture->canRegisterIfLoggedIn($this->seminar)
+            $this->subject->canRegisterIfLoggedIn($this->seminar)
         );
     }
 
@@ -1099,7 +1099,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         GeneralUtility::addInstance($hookClass, $hook);
 
         self::assertFalse(
-            $this->fixture->canRegisterIfLoggedIn($this->seminar)
+            $this->subject->canRegisterIfLoggedIn($this->seminar)
         );
     }
 
@@ -1114,7 +1114,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     {
         self::assertSame(
             '',
-            $this->fixture->canRegisterIfLoggedInMessage($this->seminar)
+            $this->subject->canRegisterIfLoggedInMessage($this->seminar)
         );
     }
 
@@ -1127,7 +1127,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertSame(
             '',
-            $this->fixture->canRegisterIfLoggedInMessage($this->seminar)
+            $this->subject->canRegisterIfLoggedInMessage($this->seminar)
         );
     }
 
@@ -1145,8 +1145,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
 
         self::assertSame(
-            $this->fixture->translate('message_alreadyRegistered'),
-            $this->fixture->canRegisterIfLoggedInMessage($this->seminar)
+            $this->subject->translate('message_alreadyRegistered'),
+            $this->subject->canRegisterIfLoggedInMessage($this->seminar)
         );
     }
 
@@ -1167,7 +1167,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertSame(
             '',
-            $this->fixture->canRegisterIfLoggedInMessage($this->seminar)
+            $this->subject->canRegisterIfLoggedInMessage($this->seminar)
         );
     }
 
@@ -1197,8 +1197,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
 
         self::assertSame(
-            $this->fixture->translate('message_userIsBlocked'),
-            $this->fixture->canRegisterIfLoggedInMessage($this->cachedSeminar)
+            $this->subject->translate('message_userIsBlocked'),
+            $this->subject->canRegisterIfLoggedInMessage($this->cachedSeminar)
         );
     }
 
@@ -1210,8 +1210,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->createBookedOutSeminar();
 
         self::assertSame(
-            $this->fixture->translate('message_noVacancies'),
-            $this->fixture->canRegisterIfLoggedInMessage($this->fullyBookedSeminar)
+            $this->subject->translate('message_noVacancies'),
+            $this->subject->canRegisterIfLoggedInMessage($this->fullyBookedSeminar)
         );
     }
 
@@ -1223,8 +1223,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
 
         self::assertSame(
-            $this->fixture->translate('message_seminarCancelled'),
-            $this->fixture->canRegisterIfLoggedInMessage($this->seminar)
+            $this->subject->translate('message_seminarCancelled'),
+            $this->subject->canRegisterIfLoggedInMessage($this->seminar)
         );
     }
 
@@ -1237,8 +1237,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setNeedsRegistration(false);
 
         self::assertSame(
-            $this->fixture->translate('message_noRegistrationNecessary'),
-            $this->fixture->canRegisterIfLoggedInMessage($this->seminar)
+            $this->subject->translate('message_noRegistrationNecessary'),
+            $this->subject->canRegisterIfLoggedInMessage($this->seminar)
         );
     }
 
@@ -1251,7 +1251,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertSame(
             '',
-            $this->fixture->canRegisterIfLoggedInMessage($this->seminar)
+            $this->subject->canRegisterIfLoggedInMessage($this->seminar)
         );
     }
 
@@ -1265,7 +1265,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertSame(
             '',
-            $this->fixture->canRegisterIfLoggedInMessage($this->seminar)
+            $this->subject->canRegisterIfLoggedInMessage($this->seminar)
         );
     }
 
@@ -1280,7 +1280,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertSame(
             '',
-            $this->fixture->canRegisterIfLoggedInMessage($this->seminar)
+            $this->subject->canRegisterIfLoggedInMessage($this->seminar)
         );
     }
 
@@ -1296,7 +1296,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertSame(
             '',
-            $this->fixture->canRegisterIfLoggedInMessage($this->seminar)
+            $this->subject->canRegisterIfLoggedInMessage($this->seminar)
         );
     }
 
@@ -1315,7 +1315,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
         GeneralUtility::addInstance($hookClass, $hook);
 
-        $this->fixture->canRegisterIfLoggedInMessage($this->seminar);
+        $this->subject->canRegisterIfLoggedInMessage($this->seminar);
     }
 
     /**
@@ -1333,7 +1333,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
         GeneralUtility::addInstance($hookClass, $hook);
 
-        $this->fixture->canRegisterIfLoggedInMessage($this->seminar);
+        $this->subject->canRegisterIfLoggedInMessage($this->seminar);
     }
 
     /**
@@ -1352,7 +1352,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertSame(
             'Hello world!',
-            $this->fixture->canRegisterIfLoggedInMessage($this->seminar)
+            $this->subject->canRegisterIfLoggedInMessage($this->seminar)
         );
     }
 
@@ -1377,7 +1377,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertSame(
             'message 1',
-            $this->fixture->canRegisterIfLoggedInMessage($this->seminar)
+            $this->subject->canRegisterIfLoggedInMessage($this->seminar)
         );
     }
 
@@ -1402,7 +1402,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertSame(
             'message 2',
-            $this->fixture->canRegisterIfLoggedInMessage($this->seminar)
+            $this->subject->canRegisterIfLoggedInMessage($this->seminar)
         );
     }
 
@@ -1429,7 +1429,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
 
         self::assertTrue(
-            $this->fixture->userFulfillsRequirements($this->cachedSeminar)
+            $this->subject->userFulfillsRequirements($this->cachedSeminar)
         );
     }
 
@@ -1476,7 +1476,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
 
         self::assertTrue(
-            $this->fixture->userFulfillsRequirements($this->cachedSeminar)
+            $this->subject->userFulfillsRequirements($this->cachedSeminar)
         );
     }
 
@@ -1516,7 +1516,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
 
         self::assertFalse(
-            $this->fixture->userFulfillsRequirements($this->cachedSeminar)
+            $this->subject->userFulfillsRequirements($this->cachedSeminar)
         );
     }
 
@@ -1528,7 +1528,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     {
         self::assertInstanceOf(
             \Tx_Seminars_Bag_Event::class,
-            $this->fixture->getMissingRequiredTopics($this->seminar)
+            $this->subject->getMissingRequiredTopics($this->seminar)
         );
     }
 
@@ -1566,7 +1566,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
                 ]
             )
         );
-        $missingTopics = $this->fixture->getMissingRequiredTopics(
+        $missingTopics = $this->subject->getMissingRequiredTopics(
             $this->cachedSeminar
         );
 
@@ -1610,7 +1610,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
                 ]
             )
         );
-        $missingTopics = $this->fixture->getMissingRequiredTopics(
+        $missingTopics = $this->subject->getMissingRequiredTopics(
             $this->cachedSeminar
         );
 
@@ -1673,7 +1673,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
                 ]
             )
         );
-        $missingTopics = $this->fixture->getMissingRequiredTopics(
+        $missingTopics = $this->subject->getMissingRequiredTopics(
             $this->cachedSeminar
         );
 
@@ -1733,7 +1733,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
                 ]
             )
         );
-        $missingTopics = $this->fixture->getMissingRequiredTopics(
+        $missingTopics = $this->subject->getMissingRequiredTopics(
             $this->cachedSeminar
         );
 
@@ -1793,7 +1793,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
                 ]
             )
         );
-        $missingTopics = $this->fixture->getMissingRequiredTopics(
+        $missingTopics = $this->subject->getMissingRequiredTopics(
             $this->cachedSeminar
         );
 
@@ -1825,7 +1825,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
             ]
         );
 
-        $this->fixture->removeRegistration($registrationUid, $this->pi1);
+        $this->subject->removeRegistration($registrationUid, $this->pi1);
 
         self::assertTrue(
             $this->testingFramework->existsRecord(
@@ -1862,7 +1862,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
             ]
         );
 
-        $this->fixture->removeRegistration($registrationUid, $this->pi1);
+        $this->subject->removeRegistration($registrationUid, $this->pi1);
     }
 
     /**
@@ -1891,7 +1891,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
             ]
         );
 
-        $this->fixture->removeRegistration($registrationUid, $this->pi1);
+        $this->subject->removeRegistration($registrationUid, $this->pi1);
 
         $this->testingFramework->existsRecord(
             'tx_seminars_attendances',
@@ -1934,7 +1934,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
             ]
         );
 
-        $this->fixture->removeRegistration($registrationUid, $this->pi1);
+        $this->subject->removeRegistration($registrationUid, $this->pi1);
     }
 
     /*
@@ -1950,7 +1950,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setNumberOfAttendances(1);
 
         self::assertFalse(
-            $this->fixture->canRegisterSeats($this->seminar, 0)
+            $this->subject->canRegisterSeats($this->seminar, 0)
         );
     }
 
@@ -1963,7 +1963,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setNumberOfAttendances(1);
 
         self::assertFalse(
-            $this->fixture->canRegisterSeats($this->seminar, 1)
+            $this->subject->canRegisterSeats($this->seminar, 1)
         );
     }
 
@@ -1976,7 +1976,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setNumberOfAttendances(1);
 
         self::assertFalse(
-            $this->fixture->canRegisterSeats($this->seminar, '')
+            $this->subject->canRegisterSeats($this->seminar, '')
         );
     }
 
@@ -1989,7 +1989,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setNumberOfAttendances(1);
 
         self::assertFalse(
-            $this->fixture->canRegisterSeats($this->seminar, 'foo')
+            $this->subject->canRegisterSeats($this->seminar, 'foo')
         );
     }
 
@@ -2001,7 +2001,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setAttendancesMax(1);
 
         self::assertTrue(
-            $this->fixture->canRegisterSeats($this->seminar, 0)
+            $this->subject->canRegisterSeats($this->seminar, 0)
         );
     }
 
@@ -2013,7 +2013,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setAttendancesMax(1);
 
         self::assertTrue(
-            $this->fixture->canRegisterSeats($this->seminar, 1)
+            $this->subject->canRegisterSeats($this->seminar, 1)
         );
     }
 
@@ -2025,7 +2025,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setAttendancesMax(1);
 
         self::assertFalse(
-            $this->fixture->canRegisterSeats($this->seminar, 2)
+            $this->subject->canRegisterSeats($this->seminar, 2)
         );
     }
 
@@ -2037,7 +2037,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setAttendancesMax(1);
 
         self::assertTrue(
-            $this->fixture->canRegisterSeats($this->seminar, '')
+            $this->subject->canRegisterSeats($this->seminar, '')
         );
     }
 
@@ -2049,7 +2049,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setAttendancesMax(1);
 
         self::assertFalse(
-            $this->fixture->canRegisterSeats($this->seminar, 'foo')
+            $this->subject->canRegisterSeats($this->seminar, 'foo')
         );
     }
 
@@ -2061,7 +2061,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setAttendancesMax(2);
 
         self::assertTrue(
-            $this->fixture->canRegisterSeats($this->seminar, 1)
+            $this->subject->canRegisterSeats($this->seminar, 1)
         );
     }
 
@@ -2073,7 +2073,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setAttendancesMax(2);
 
         self::assertTrue(
-            $this->fixture->canRegisterSeats($this->seminar, 2)
+            $this->subject->canRegisterSeats($this->seminar, 2)
         );
     }
 
@@ -2085,7 +2085,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setAttendancesMax(2);
 
         self::assertFalse(
-            $this->fixture->canRegisterSeats($this->seminar, 3)
+            $this->subject->canRegisterSeats($this->seminar, 3)
         );
     }
 
@@ -2097,7 +2097,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setUnlimitedVacancies();
 
         self::assertTrue(
-            $this->fixture->canRegisterSeats($this->seminar, 0)
+            $this->subject->canRegisterSeats($this->seminar, 0)
         );
     }
 
@@ -2109,7 +2109,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setUnlimitedVacancies();
 
         self::assertTrue(
-            $this->fixture->canRegisterSeats($this->seminar, 1)
+            $this->subject->canRegisterSeats($this->seminar, 1)
         );
     }
 
@@ -2121,7 +2121,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setUnlimitedVacancies();
 
         self::assertTrue(
-            $this->fixture->canRegisterSeats($this->seminar, 2)
+            $this->subject->canRegisterSeats($this->seminar, 2)
         );
     }
 
@@ -2133,7 +2133,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setUnlimitedVacancies();
 
         self::assertTrue(
-            $this->fixture->canRegisterSeats($this->seminar, 42)
+            $this->subject->canRegisterSeats($this->seminar, 42)
         );
     }
 
@@ -2147,7 +2147,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setRegistrationQueue(true);
 
         self::assertTrue(
-            $this->fixture->canRegisterSeats($this->seminar, 0)
+            $this->subject->canRegisterSeats($this->seminar, 0)
         );
     }
 
@@ -2161,7 +2161,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setRegistrationQueue(true);
 
         self::assertTrue(
-            $this->fixture->canRegisterSeats($this->seminar, 1)
+            $this->subject->canRegisterSeats($this->seminar, 1)
         );
     }
 
@@ -2175,7 +2175,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setRegistrationQueue(true);
 
         self::assertTrue(
-            $this->fixture->canRegisterSeats($this->seminar, 2)
+            $this->subject->canRegisterSeats($this->seminar, 2)
         );
     }
 
@@ -2189,7 +2189,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setRegistrationQueue(true);
 
         self::assertTrue(
-            $this->fixture->canRegisterSeats($this->seminar, '')
+            $this->subject->canRegisterSeats($this->seminar, '')
         );
     }
 
@@ -2202,7 +2202,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setRegistrationQueue(true);
 
         self::assertTrue(
-            $this->fixture->canRegisterSeats($this->seminar, 42)
+            $this->subject->canRegisterSeats($this->seminar, 42)
         );
     }
 
@@ -2215,12 +2215,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeSendsMailToAttendeesMailAddress()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertArrayHasKey(
             'foo@bar.com',
@@ -2233,7 +2233,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForAttendeeWithoutMailAddressNotSendsEmail()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -2246,7 +2246,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
         $registration = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($registrationUid);
 
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertNull(
             $this->mailer->getFirstSentEmail()
@@ -2265,12 +2265,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
         GeneralUtility::addInstance($hookClass, $hook);
 
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
     }
 
     /**
@@ -2285,12 +2285,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
         GeneralUtility::addInstance($hookClass, $hook);
 
-        $this->fixture->setConfigurationValue('sendConfirmation', false);
+        $this->subject->setConfigurationValue('sendConfirmation', false);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
     }
 
     /**
@@ -2310,11 +2310,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
         GeneralUtility::addInstance($hookClass, $hook);
 
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
     }
 
     /**
@@ -2334,11 +2334,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
         GeneralUtility::addInstance($hookClass, $hook);
 
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
     }
 
     /**
@@ -2368,11 +2368,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
         GeneralUtility::addInstance($hookClassName, $hook);
 
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
     }
 
     /**
@@ -2402,11 +2402,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
         GeneralUtility::addInstance($hookClassName, $hook);
 
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
     }
 
     /**
@@ -2414,15 +2414,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeMailSubjectContainsConfirmationSubject()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
-            $this->fixture->translate('email_confirmationSubject'),
+            $this->subject->translate('email_confirmationSubject'),
             $this->mailer->getFirstSentEmail()->getSubject()
         );
     }
@@ -2432,12 +2432,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeMailBodyContainsEventTitle()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             'test event',
@@ -2450,12 +2450,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeMailBodyNotContainsRawTemplateMarkers()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         $this->assertNotContainsRawLabelKey(
             $this->mailer->getFirstSentEmail()->getBody()
@@ -2467,12 +2467,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeMailBodyContainsRegistrationFood()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             'something nice to eat',
@@ -2485,12 +2485,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeMailBodyContainsRegistrationAccommodation()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             'a nice, dry place',
@@ -2503,12 +2503,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeMailBodyContainsRegistrationInterests()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             'learning Ruby on Rails',
@@ -2521,12 +2521,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeMailSubjectContainsEventTitle()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             'test event',
@@ -2539,12 +2539,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeSetsOrganizerAsSender()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertSame(
             ['mail@example.com' => 'test organizer'],
@@ -2557,7 +2557,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForHtmlMailSetHasHtmlBody()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
             ->setAsInteger(
                 'eMailFormatForAttendees',
@@ -2567,7 +2567,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             '<html',
@@ -2580,12 +2580,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForTextMailSetDoesNotHaveHtmlBody()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertSame(
             [],
@@ -2598,12 +2598,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForTextMailSetHasNoUnreplacedMarkers()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertNotContains(
             '###',
@@ -2616,7 +2616,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForHtmlMailHasNoUnreplacedMarkers()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
             ->setAsInteger(
                 'eMailFormatForAttendees',
@@ -2626,7 +2626,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertNotContains(
             '###',
@@ -2639,7 +2639,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForMailSetToUserModeAndUserSetToHtmlMailsHasHtmlBody()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
             ->setAsInteger(
                 'eMailFormatForAttendees',
@@ -2655,7 +2655,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             '<html',
@@ -2668,7 +2668,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForMailSetToUserModeAndUserSetToTextMailsNotHasHtmlBody()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
             ->setAsInteger(
                 'eMailFormatForAttendees',
@@ -2684,7 +2684,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertSame(
             [],
@@ -2697,7 +2697,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForHtmlMailsContainsNameOfUserInBody()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
             ->setAsInteger(
                 'eMailFormatForAttendees',
@@ -2712,7 +2712,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             'Harry Callagan',
@@ -2725,7 +2725,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForHtmlMailsHasLinkToSeminarInBody()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
             ->setAsInteger(
                 'eMailFormatForAttendees',
@@ -2738,7 +2738,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
         $seminarLink = 'http://singleview.example.com/';
 
         self::assertContains(
@@ -2752,12 +2752,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeAppendsOrganizersFooterToMailBody()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             LF . '-- ' . LF . 'organizer footer',
@@ -2770,7 +2770,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForConfirmedEventNotHasPlannedDisclaimer()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $registration = $this->createRegistration();
         $registration->getSeminarObject()->setStatus(
             \Tx_Seminars_Model_Event::STATUS_CONFIRMED
@@ -2779,10 +2779,10 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertNotContains(
-            $this->fixture->translate('label_planned_disclaimer'),
+            $this->subject->translate('label_planned_disclaimer'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -2792,7 +2792,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForCancelledEventNotHasPlannedDisclaimer()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $registration = $this->createRegistration();
         $registration->getSeminarObject()->setStatus(
             \Tx_Seminars_Model_Event::STATUS_CANCELED
@@ -2801,10 +2801,10 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertNotContains(
-            $this->fixture->translate('label_planned_disclaimer'),
+            $this->subject->translate('label_planned_disclaimer'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -2814,7 +2814,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForPlannedEventDisplaysPlannedDisclaimer()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $registration = $this->createRegistration();
         $registration->getSeminarObject()->setStatus(
             \Tx_Seminars_Model_Event::STATUS_PLANNED
@@ -2823,10 +2823,10 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
-            $this->fixture->translate('label_planned_disclaimer'),
+            $this->subject->translate('label_planned_disclaimer'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -2836,8 +2836,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeehiddenDisclaimerFieldAndPlannedEventHidesPlannedDisclaimer()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue(
             'hideFieldsInThankYouMail',
             'planned_disclaimer'
         );
@@ -2849,10 +2849,10 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertNotContains(
-            $this->fixture->translate('label_planned_disclaimer'),
+            $this->subject->translate('label_planned_disclaimer'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -2862,13 +2862,13 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForHtmlMailsHasCssStylesFromFile()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
             ->setAsInteger(
                 'eMailFormatForAttendees',
                 \Tx_Seminars_Service_RegistrationManager::SEND_HTML_MAIL
             );
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue(
             'cssFileForAttendeeMail',
             'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
         );
@@ -2877,7 +2877,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             'style=',
@@ -2890,13 +2890,13 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeMailBodyCanContainAttendeesNames()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
         $registration->setAttendeesNames('foo1 foo2');
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             'foo1 foo2',
@@ -2909,13 +2909,13 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForPlainTextMailEnumeratesAttendeesNames()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
         $registration->setAttendeesNames('foo1' . LF . 'foo2');
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             '1. foo1' . LF . '2. foo2',
@@ -2928,13 +2928,13 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForHtmlMailReturnsAttendeesNamesInOrderedList()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
             ->setAsInteger(
                 'eMailFormatForAttendees',
                 \Tx_Seminars_Service_RegistrationManager::SEND_HTML_MAIL
             );
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue(
             'cssFileForAttendeeMail',
             'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
         );
@@ -2944,7 +2944,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         $registration = $this->createRegistration();
         $registration->setAttendeesNames('foo1' . LF . 'foo2');
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertRegExp(
             '/\\<ol>.*<li>foo1<\\/li>.*<li>foo2<\\/li>.*<\\/ol>/s',
@@ -2957,7 +2957,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeCanSendPlaceTitleInMailBody()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
             ['title' => 'foo_place']
@@ -2973,7 +2973,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             'foo_place',
@@ -2986,7 +2986,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeCanSendPlaceAddressInMailBody()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
             ['address' => 'foo_street']
@@ -3002,7 +3002,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             'foo_street',
@@ -3015,15 +3015,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForEventWithNoPlaceSendsWillBeAnnouncedMessage()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
-            $this->fixture->translate('message_willBeAnnounced'),
+            $this->subject->translate('message_willBeAnnounced'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -3033,7 +3033,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForPlainTextMailSeparatesPlacesTitleAndAddressWithLinefeed()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
             ['title' => 'place_title', 'address' => 'place_address']
@@ -3049,7 +3049,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             'place_title' . LF . 'place_address',
@@ -3062,13 +3062,13 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForHtmlMailSeparatesPlacesTitleAndAddressWithBreaks()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
             ->setAsInteger(
                 'eMailFormatForAttendees',
                 \Tx_Seminars_Service_RegistrationManager::SEND_HTML_MAIL
             );
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue(
             'cssFileForAttendeeMail',
             'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
         );
@@ -3088,7 +3088,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             'place_title<br>place_address',
@@ -3101,7 +3101,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeStripsHtmlTagsFromPlaceAddress()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
             ['title' => 'place_title', 'address' => 'place<h2>_address</h2>']
@@ -3117,7 +3117,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             'place_title' . LF . 'place_address',
@@ -3130,7 +3130,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForPlaceAddressReplacesLineFeedsWithSpaces()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
             ['address' => 'address1' . LF . 'address2']
@@ -3146,7 +3146,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             'address1 address2',
@@ -3159,7 +3159,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForPlaceAddressReplacesCarriageReturnsWithSpaces()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
             ['address' => 'address1' . CR . 'address2']
@@ -3175,7 +3175,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             'address1 address2',
@@ -3188,7 +3188,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForPlaceAddressReplacesCarriageReturnAndLineFeedWithOneSpace()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
             ['address' => 'address1' . CRLF . 'address2']
@@ -3204,7 +3204,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             'address1 address2',
@@ -3217,7 +3217,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForPlaceAddressReplacesMultipleCarriageReturnsWithOneSpace()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
             ['address' => 'address1' . CR . CR . 'address2']
@@ -3233,7 +3233,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             'address1 address2',
@@ -3246,7 +3246,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForPlaceAddressAndPlainTextMailsReplacesMultipleLineFeedsWithSpaces()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
             ['address' => 'address1' . LF . LF . 'address2']
@@ -3262,7 +3262,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             'address1 address2',
@@ -3275,13 +3275,13 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForPlaceAddressAndHtmlMailsReplacesMultipleLineFeedsWithSpaces()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
             ->setAsInteger(
                 'eMailFormatForAttendees',
                 \Tx_Seminars_Service_RegistrationManager::SEND_HTML_MAIL
             );
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue(
             'cssFileForAttendeeMail',
             'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
         );
@@ -3301,7 +3301,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             'address1 address2',
@@ -3314,13 +3314,13 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForPlaceAddressReplacesMultipleLineFeedAndCarriageReturnsWithSpaces()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
             ->setAsInteger(
                 'eMailFormatForAttendees',
                 \Tx_Seminars_Service_RegistrationManager::SEND_HTML_MAIL
             );
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue(
             'cssFileForAttendeeMail',
             'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
         );
@@ -3340,7 +3340,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             'address1 address2 address3',
@@ -3353,7 +3353,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForPlaceAddressAndPlainTextMailsSendsCityOfPlace()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
             ['city' => 'footown']
@@ -3369,7 +3369,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             'footown',
@@ -3382,7 +3382,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForPlaceAddressAndPlainTextMailsSendsZipAndCityOfPlace()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
             ['zip' => '12345', 'city' => 'footown']
@@ -3398,7 +3398,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             '12345 footown',
@@ -3411,7 +3411,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForPlaceAddressAndPlainTextMailsSendsCountryOfPlace()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
 
         /** @var \Tx_Oelib_Mapper_Country $mapper */
         $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_Country::class);
@@ -3432,7 +3432,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             $country->getLocalShortName(),
@@ -3445,7 +3445,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForPlaceAddressAndPlainTextMailsSeparatesAddressAndCityWithNewline()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
             ['address' => 'address', 'city' => 'footown']
@@ -3461,7 +3461,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             'address' . LF . 'footown',
@@ -3474,13 +3474,13 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForPlaceAddressAndHtmlMailsSeparatresAddressAndCityLineWithBreaks()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
             ->setAsInteger(
                 'eMailFormatForAttendees',
                 \Tx_Seminars_Service_RegistrationManager::SEND_HTML_MAIL
             );
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue(
             'cssFileForAttendeeMail',
             'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
         );
@@ -3500,7 +3500,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             'address<br>footown',
@@ -3513,7 +3513,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForPlaceAddressWithCountryAndCitySeparatesCountryAndCityWithComma()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
 
         /** @var \Tx_Oelib_Mapper_Country $mapper */
         $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_Country::class);
@@ -3538,7 +3538,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             'footown, ' . $country->getLocalShortName(),
@@ -3551,7 +3551,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForPlaceAddressWithCityAndNoCountryNotAddsSurplusCommaAfterCity()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
             ['address' => 'address', 'city' => 'footown']
@@ -3567,7 +3567,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertNotContains(
             'footown,',
@@ -3598,12 +3598,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeHasUtf8CalendarAttachment()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
         self::assertNotEmpty($attachments);
@@ -3618,12 +3618,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeHasCalendarAttachmentWithWindowsLineEndings()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
         self::assertNotEmpty($attachments);
@@ -3638,12 +3638,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeHasCalendarAttachmentWithStartAndEndMarkers()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
         self::assertNotEmpty($attachments);
@@ -3655,12 +3655,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeHasCalendarAttachmentWithPublishMethod()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
         self::assertNotEmpty($attachments);
@@ -3674,12 +3674,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeHasCalendarAttachmentWithEvent()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
         self::assertNotEmpty($attachments);
@@ -3712,12 +3712,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeHasCalendarAttachmentWithImportantFields($value)
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
         self::assertNotEmpty($attachments);
@@ -3732,12 +3732,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeHasCalendarAttachmentWithEventTitleAsSummary()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
         self::assertNotEmpty($attachments);
@@ -3754,14 +3754,14 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     {
         $timeZone = 'America/Chicago';
         $this->testingFramework->changeRecord('tx_seminars_seminars', $this->seminarUid, ['time_zone' => $timeZone]);
-        $this->fixture->setConfigurationValue('defaultTimeZone', 'Europe/Berlin');
+        $this->subject->setConfigurationValue('defaultTimeZone', 'Europe/Berlin');
 
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
         self::assertNotEmpty($attachments);
@@ -3778,14 +3778,14 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function notifyAttendeeFoEventWithoutTimeZoneHasAttachmentWithEventStartDateWithTimeZoneDefaultTimeZone()
     {
         $timeZone = 'Europe/Berlin';
-        $this->fixture->setConfigurationValue('defaultTimeZone', $timeZone);
+        $this->subject->setConfigurationValue('defaultTimeZone', $timeZone);
 
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
         self::assertNotEmpty($attachments);
@@ -3807,12 +3807,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
             ['end_date' => 0]
         );
 
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
         self::assertNotEmpty($attachments);
@@ -3829,14 +3829,14 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     {
         $timeZone = 'America/Chicago';
         $this->testingFramework->changeRecord('tx_seminars_seminars', $this->seminarUid, ['time_zone' => $timeZone]);
-        $this->fixture->setConfigurationValue('defaultTimeZone', 'Europe/Berlin');
+        $this->subject->setConfigurationValue('defaultTimeZone', 'Europe/Berlin');
 
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
         self::assertNotEmpty($attachments);
@@ -3853,14 +3853,14 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function notifyAttendeeForEventWithoutTimeZoneHasCalendarAttachmentWithEndDateDefaultTimeZone()
     {
         $timeZone = 'Europe/Berlin';
-        $this->fixture->setConfigurationValue('defaultTimeZone', $timeZone);
+        $this->subject->setConfigurationValue('defaultTimeZone', $timeZone);
 
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
         self::assertNotEmpty($attachments);
@@ -3876,12 +3876,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeHasCalendarAttachmentWithEventSubtitleAsDescription()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
         self::assertNotEmpty($attachments);
@@ -3896,12 +3896,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForEventWithoutPlaceHasCalendarAttachmentWithoutLocation()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
         self::assertNotEmpty($attachments);
@@ -3927,12 +3927,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
             ['place' => 1]
         );
 
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
         self::assertNotEmpty($attachments);
@@ -3958,12 +3958,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
             ['place' => 1]
         );
 
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
         self::assertNotEmpty($attachments);
@@ -3978,12 +3978,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeHasCalendarAttachmentWithOrganizer()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
         self::assertNotEmpty($attachments);
@@ -3998,12 +3998,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeHasCalendarAttachmentWithUid()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
         self::assertNotEmpty($attachments);
@@ -4018,12 +4018,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeHasCalendarAttachmentWithTimestamp()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
         self::assertNotEmpty($attachments);
@@ -4043,7 +4043,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForInformalSalutationContainsInformalSalutation()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')
             ->setAsString('salutation', 'informal');
         $registration = $this->createRegistration();
@@ -4055,7 +4055,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             \Tx_Oelib_TranslatorRegistry::get('seminars')->translate('email_hello_informal'),
@@ -4072,7 +4072,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
             self::markTestSkipped('This test is only applicable if there is no FrontEndUser.gender field.');
         }
 
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')
             ->setAsString('salutation', 'formal');
         $registration = $this->createRegistration();
@@ -4084,7 +4084,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             \Tx_Oelib_TranslatorRegistry::get('seminars')->translate('email_hello_formal_2'),
@@ -4101,7 +4101,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
             self::markTestSkipped('This test is only applicable if there is a FrontEndUser.gender field.');
         }
 
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')
             ->setAsString('salutation', 'formal');
         $registration = $this->createRegistration();
@@ -4113,7 +4113,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             \Tx_Oelib_TranslatorRegistry::get('seminars')->translate('email_hello_formal_0'),
@@ -4130,7 +4130,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
             self::markTestSkipped('This test is only applicable if there is a FrontEndUser.gender field.');
         }
 
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')
             ->setAsString('salutation', 'formal');
         $registration = $this->createRegistration();
@@ -4142,7 +4142,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             \Tx_Oelib_TranslatorRegistry::get('seminars')->translate('email_hello_formal_1'),
@@ -4155,8 +4155,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForFormalSalutationAndConfirmationContainsFormalConfirmationText()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
-        $this->fixture->setConfigurationValue('salutation', 'formal');
+        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4166,11 +4166,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             sprintf(
-                $this->fixture->translate('email_confirmationHello'),
+                $this->subject->translate('email_confirmationHello'),
                 $this->seminar->getTitle()
             ),
             $this->mailer->getFirstSentEmail()->getBody()
@@ -4182,8 +4182,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForInformalSalutationAndConfirmationContainsInformalConfirmationText()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
-        $this->fixture->setConfigurationValue('salutation', 'informal');
+        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('salutation', 'informal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4193,11 +4193,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
             sprintf(
-                $this->fixture->translate('email_confirmationHello_informal'),
+                $this->subject->translate('email_confirmationHello_informal'),
                 $this->seminar->getTitle()
             ),
             $this->mailer->getFirstSentEmail()->getBody()
@@ -4209,11 +4209,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForFormalSalutationAndUnregistrationContainsFormalUnregistrationText()
     {
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue(
             'sendConfirmationOnUnregistration',
             true
         );
-        $this->fixture->setConfigurationValue('salutation', 'formal');
+        $this->subject->setConfigurationValue('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4223,7 +4223,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee(
+        $this->subject->notifyAttendee(
             $registration,
             $pi1,
             'confirmationOnUnregistration'
@@ -4231,7 +4231,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertContains(
             sprintf(
-                $this->fixture->translate(
+                $this->subject->translate(
                     'email_confirmationOnUnregistrationHello'
                 ),
                 $this->seminar->getTitle()
@@ -4245,11 +4245,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForInformalSalutationAndUnregistrationContainsInformalUnregistrationText()
     {
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue(
             'sendConfirmationOnUnregistration',
             true
         );
-        $this->fixture->setConfigurationValue('salutation', 'informal');
+        $this->subject->setConfigurationValue('salutation', 'informal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4259,7 +4259,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee(
+        $this->subject->notifyAttendee(
             $registration,
             $pi1,
             'confirmationOnUnregistration'
@@ -4267,7 +4267,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertContains(
             sprintf(
-                $this->fixture->translate(
+                $this->subject->translate(
                     'email_confirmationOnUnregistrationHello_informal'
                 ),
                 $this->seminar->getTitle()
@@ -4281,11 +4281,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForFormalSalutationAndQueueConfirmationContainsFormalQueueConfirmationText()
     {
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue(
             'sendConfirmationOnRegistrationForQueue',
             true
         );
-        $this->fixture->setConfigurationValue('salutation', 'formal');
+        $this->subject->setConfigurationValue('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4295,7 +4295,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee(
+        $this->subject->notifyAttendee(
             $registration,
             $pi1,
             'confirmationOnRegistrationForQueue'
@@ -4303,7 +4303,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertContains(
             sprintf(
-                $this->fixture->translate(
+                $this->subject->translate(
                     'email_confirmationOnRegistrationForQueueHello'
                 ),
                 $this->seminar->getTitle()
@@ -4317,11 +4317,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForInformalSalutationAndQueueConfirmationContainsInformalQueueConfirmationText()
     {
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue(
             'sendConfirmationOnRegistrationForQueue',
             true
         );
-        $this->fixture->setConfigurationValue('salutation', 'informal');
+        $this->subject->setConfigurationValue('salutation', 'informal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4331,7 +4331,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee(
+        $this->subject->notifyAttendee(
             $registration,
             $pi1,
             'confirmationOnRegistrationForQueue'
@@ -4339,7 +4339,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertContains(
             sprintf(
-                $this->fixture->translate(
+                $this->subject->translate(
                     'email_confirmationOnRegistrationForQueueHello_informal'
                 ),
                 $this->seminar->getTitle()
@@ -4353,11 +4353,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForFormalSalutationAndQueueUpdateContainsFormalQueueUpdateText()
     {
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue(
             'sendConfirmationOnQueueUpdate',
             true
         );
-        $this->fixture->setConfigurationValue('salutation', 'formal');
+        $this->subject->setConfigurationValue('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4367,7 +4367,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee(
+        $this->subject->notifyAttendee(
             $registration,
             $pi1,
             'confirmationOnQueueUpdate'
@@ -4375,7 +4375,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertContains(
             sprintf(
-                $this->fixture->translate(
+                $this->subject->translate(
                     'email_confirmationOnQueueUpdateHello'
                 ),
                 $this->seminar->getTitle()
@@ -4389,11 +4389,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForInformalSalutationAndQueueUpdateContainsInformalQueueUpdateText()
     {
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue(
             'sendConfirmationOnQueueUpdate',
             true
         );
-        $this->fixture->setConfigurationValue('salutation', 'informal');
+        $this->subject->setConfigurationValue('salutation', 'informal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4403,7 +4403,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee(
+        $this->subject->notifyAttendee(
             $registration,
             $pi1,
             'confirmationOnQueueUpdate'
@@ -4411,7 +4411,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         self::assertContains(
             sprintf(
-                $this->fixture->translate(
+                $this->subject->translate(
                     'email_confirmationOnQueueUpdateHello_informal'
                 ),
                 $this->seminar->getTitle()
@@ -4425,7 +4425,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForInformalSalutationNotContainsRawTemplateMarkers()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')
             ->setAsString('salutation', 'informal');
         $registration = $this->createRegistration();
@@ -4437,7 +4437,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         $this->assertNotContainsRawLabelKey(
             $this->mailer->getFirstSentEmail()->getBody()
@@ -4453,7 +4453,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
             self::markTestSkipped('This test is only applicable if there is no FrontEndUser.gender field.');
         }
 
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')
             ->setAsString('salutation', 'formal');
         $registration = $this->createRegistration();
@@ -4465,7 +4465,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         $this->assertNotContainsRawLabelKey(
             $this->mailer->getFirstSentEmail()->getBody()
@@ -4481,7 +4481,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
             self::markTestSkipped('This test is only applicable if there is a FrontEndUser.gender field.');
         }
 
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')
             ->setAsString('salutation', 'formal');
         $registration = $this->createRegistration();
@@ -4493,7 +4493,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         $this->assertNotContainsRawLabelKey(
             $this->mailer->getFirstSentEmail()->getBody()
@@ -4509,7 +4509,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
             self::markTestSkipped('This test is only applicable if there is a FrontEndUser.gender field.');
         }
 
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')
             ->setAsString('salutation', 'formal');
         $registration = $this->createRegistration();
@@ -4521,7 +4521,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         $this->assertNotContainsRawLabelKey(
             $this->mailer->getFirstSentEmail()->getBody()
@@ -4533,8 +4533,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForFormalSalutationAndConfirmationNotContainsRawTemplateMarkers()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
-        $this->fixture->setConfigurationValue('salutation', 'formal');
+        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4544,7 +4544,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         $this->assertNotContainsRawLabelKey(
             $this->mailer->getFirstSentEmail()->getBody()
@@ -4556,8 +4556,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForInformalSalutationAndConfirmationNotContainsRawTemplateMarkers()
     {
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
-        $this->fixture->setConfigurationValue('salutation', 'informal');
+        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('salutation', 'informal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4567,7 +4567,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
 
         $this->assertNotContainsRawLabelKey(
             $this->mailer->getFirstSentEmail()->getBody()
@@ -4579,11 +4579,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForFormalSalutationAndUnregistrationNotContainsRawTemplateMarkers()
     {
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue(
             'sendConfirmationOnUnregistration',
             true
         );
-        $this->fixture->setConfigurationValue('salutation', 'formal');
+        $this->subject->setConfigurationValue('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4593,7 +4593,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee(
+        $this->subject->notifyAttendee(
             $registration,
             $pi1,
             'confirmationOnUnregistration'
@@ -4609,11 +4609,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForInformalSalutationAndUnregistrationNotContainsRawTemplateMarkers()
     {
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue(
             'sendConfirmationOnUnregistration',
             true
         );
-        $this->fixture->setConfigurationValue('salutation', 'informal');
+        $this->subject->setConfigurationValue('salutation', 'informal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4623,7 +4623,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee(
+        $this->subject->notifyAttendee(
             $registration,
             $pi1,
             'confirmationOnUnregistration'
@@ -4639,11 +4639,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForFormalSalutationAndQueueConfirmationNotContainsRawTemplateMarkers()
     {
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue(
             'sendConfirmationOnRegistrationForQueue',
             true
         );
-        $this->fixture->setConfigurationValue('salutation', 'formal');
+        $this->subject->setConfigurationValue('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4653,7 +4653,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee(
+        $this->subject->notifyAttendee(
             $registration,
             $pi1,
             'confirmationOnRegistrationForQueue'
@@ -4669,11 +4669,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForInformalSalutationAndQueueConfirmationNotContainsRawTemplateMarkers()
     {
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue(
             'sendConfirmationOnRegistrationForQueue',
             true
         );
-        $this->fixture->setConfigurationValue('salutation', 'informal');
+        $this->subject->setConfigurationValue('salutation', 'informal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4683,7 +4683,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee(
+        $this->subject->notifyAttendee(
             $registration,
             $pi1,
             'confirmationOnRegistrationForQueue'
@@ -4699,11 +4699,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForFormalSalutationAndQueueUpdateNotContainsRawTemplateMarkers()
     {
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue(
             'sendConfirmationOnQueueUpdate',
             true
         );
-        $this->fixture->setConfigurationValue('salutation', 'formal');
+        $this->subject->setConfigurationValue('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4713,7 +4713,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee(
+        $this->subject->notifyAttendee(
             $registration,
             $pi1,
             'confirmationOnQueueUpdate'
@@ -4729,11 +4729,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForInformalSalutationAndQueueUpdateNotContainsRawTemplateMarkers()
     {
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue(
             'sendConfirmationOnQueueUpdate',
             true
         );
-        $this->fixture->setConfigurationValue('salutation', 'informal');
+        $this->subject->setConfigurationValue('salutation', 'informal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4743,7 +4743,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $this->fixture->notifyAttendee(
+        $this->subject->notifyAttendee(
             $registration,
             $pi1,
             'confirmationOnQueueUpdate'
@@ -4763,14 +4763,14 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForUnregistrationMailDoesNotAppendUnregistrationNotice()
     {
-        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(
+        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $subject */
+        $subject = $this->getMock(
             \Tx_Seminars_Service_RegistrationManager::class,
             ['getUnregistrationNotice']
         );
-        $fixture->expects(self::never())->method('getUnregistrationNotice');
+        $subject->expects(self::never())->method('getUnregistrationNotice');
 
-        $fixture->setConfigurationValue('sendConfirmationOnUnregistration', true);
+        $subject->setConfigurationValue('sendConfirmationOnUnregistration', true);
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -4782,7 +4782,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $fixture->notifyAttendee(
+        $subject->notifyAttendee(
             $registration,
             $pi1,
             'confirmationOnUnregistration'
@@ -4799,13 +4799,13 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
             false
         );
 
-        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(
+        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $subject */
+        $subject = $this->getMock(
             \Tx_Seminars_Service_RegistrationManager::class,
             ['getUnregistrationNotice']
         );
-        $fixture->expects(self::never())->method('getUnregistrationNotice');
-        $fixture->setConfigurationValue('sendConfirmation', true);
+        $subject->expects(self::never())->method('getUnregistrationNotice');
+        $subject->setConfigurationValue('sendConfirmation', true);
 
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
@@ -4819,7 +4819,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $fixture->notifyAttendee($registration, $pi1);
+        $subject->notifyAttendee($registration, $pi1);
     }
 
     /**
@@ -4832,13 +4832,13 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
             true
         );
 
-        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(
+        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $subject */
+        $subject = $this->getMock(
             \Tx_Seminars_Service_RegistrationManager::class,
             ['getUnregistrationNotice']
         );
-        $fixture->expects(self::once())->method('getUnregistrationNotice');
-        $fixture->setConfigurationValue('sendConfirmation', true);
+        $subject->expects(self::once())->method('getUnregistrationNotice');
+        $subject->setConfigurationValue('sendConfirmation', true);
 
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
@@ -4857,7 +4857,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $fixture->notifyAttendee($registration, $pi1);
+        $subject->notifyAttendee($registration, $pi1);
     }
 
     /**
@@ -4865,14 +4865,14 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForRegistrationOnQueueMailAndUnregistrationPossibleAddsUnregistrationNotice()
     {
-        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(
+        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $subject */
+        $subject = $this->getMock(
             \Tx_Seminars_Service_RegistrationManager::class,
             ['getUnregistrationNotice']
         );
-        $fixture->expects(self::once())->method('getUnregistrationNotice');
+        $subject->expects(self::once())->method('getUnregistrationNotice');
 
-        $fixture->setConfigurationValue(
+        $subject->setConfigurationValue(
             'sendConfirmationOnRegistrationForQueue',
             true
         );
@@ -4895,7 +4895,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $fixture->notifyAttendee(
+        $subject->notifyAttendee(
             $registration,
             $pi1,
             'confirmationOnRegistrationForQueue'
@@ -4907,14 +4907,14 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForQueueUpdateMailAndUnregistrationPossibleAddsUnregistrationNotice()
     {
-        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(
+        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $subject */
+        $subject = $this->getMock(
             \Tx_Seminars_Service_RegistrationManager::class,
             ['getUnregistrationNotice']
         );
-        $fixture->expects(self::once())->method('getUnregistrationNotice');
+        $subject->expects(self::once())->method('getUnregistrationNotice');
 
-        $fixture->setConfigurationValue('sendConfirmationOnQueueUpdate', true);
+        $subject->setConfigurationValue('sendConfirmationOnQueueUpdate', true);
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -4933,7 +4933,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
-        $fixture->notifyAttendee(
+        $subject->notifyAttendee(
             $registration,
             $pi1,
             'confirmationOnQueueUpdate'
@@ -4962,12 +4962,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
         GeneralUtility::addInstance($hookClassName, $hook);
 
-        $this->fixture->setConfigurationValue('sendConfirmation', true);
+        $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
     }
 
     /**
@@ -4992,12 +4992,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
         GeneralUtility::addInstance($hookClassName, $hook);
 
-        $this->fixture->setConfigurationValue('sendConfirmation', false);
+        $this->subject->setConfigurationValue('sendConfirmation', false);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyAttendee($registration, $pi1);
+        $this->subject->notifyAttendee($registration, $pi1);
     }
 
     /*
@@ -5009,7 +5009,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyOrganizersForEventWithEmailsMutedNotSendsEmail()
     {
-        $this->fixture->setConfigurationValue('sendNotification', true);
+        $this->subject->setConfigurationValue('sendNotification', true);
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
@@ -5017,7 +5017,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyOrganizers($registration);
+        $this->subject->notifyOrganizers($registration);
 
         self::assertNull($this->mailer->getFirstSentEmail());
     }
@@ -5027,10 +5027,10 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyOrganizersUsesOrganizerAsFrom()
     {
-        $this->fixture->setConfigurationValue('sendNotification', true);
+        $this->subject->setConfigurationValue('sendNotification', true);
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyOrganizers($registration);
+        $this->subject->notifyOrganizers($registration);
 
         self::assertSame(
             ['mail@example.com' => 'test organizer'],
@@ -5043,10 +5043,10 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyOrganizersUsesOrganizerAsTo()
     {
-        $this->fixture->setConfigurationValue('sendNotification', true);
+        $this->subject->setConfigurationValue('sendNotification', true);
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyOrganizers($registration);
+        $this->subject->notifyOrganizers($registration);
 
         self::assertArrayHasKey(
             'mail@example.com',
@@ -5060,13 +5060,13 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function notifyOrganizersIncludesHelloIfNotHidden()
     {
         $registration = $this->createRegistration();
-        $this->fixture->setConfigurationValue('sendNotification', true);
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue('sendNotification', true);
+        $this->subject->setConfigurationValue(
             'hideFieldsInNotificationMail',
             ''
         );
 
-        $this->fixture->notifyOrganizers($registration);
+        $this->subject->notifyOrganizers($registration);
 
         self::assertContains(
             'Hello',
@@ -5079,8 +5079,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyOrganizersForEventWithOneVacancyShowsVacanciesLabelWithVacancyNumber()
     {
-        $this->fixture->setConfigurationValue('sendNotification', true);
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue('sendNotification', true);
+        $this->subject->setConfigurationValue(
             'showSeminarFieldsInNotificationMail',
             'vacancies'
         );
@@ -5091,10 +5091,10 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyOrganizers($registration);
+        $this->subject->notifyOrganizers($registration);
 
         self::assertRegExp(
-            '/' . $this->fixture->translate('label_vacancies') . ': 1$/',
+            '/' . $this->subject->translate('label_vacancies') . ': 1$/',
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -5104,8 +5104,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyOrganizersForEventWithUnlimitedVacanciesShowsVacanciesLabelWithUnlimtedLabel()
     {
-        $this->fixture->setConfigurationValue('sendNotification', true);
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue('sendNotification', true);
+        $this->subject->setConfigurationValue(
             'showSeminarFieldsInNotificationMail',
             'vacancies'
         );
@@ -5116,11 +5116,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
 
         $registration = $this->createRegistration();
-        $this->fixture->notifyOrganizers($registration);
+        $this->subject->notifyOrganizers($registration);
 
         self::assertContains(
-            $this->fixture->translate('label_vacancies') . ': ' .
-            $this->fixture->translate('label_unlimited'),
+            $this->subject->translate('label_vacancies') . ': ' .
+            $this->subject->translate('label_unlimited'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -5130,8 +5130,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyOrganizersForRegistrationWithCompanyShowsLabelOfCompany()
     {
-        $this->fixture->setConfigurationValue('sendNotification', true);
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue('sendNotification', true);
+        $this->subject->setConfigurationValue(
             'showAttendanceFieldsInNotificationMail',
             'company'
         );
@@ -5146,10 +5146,10 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
 
         $registration = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($registrationUid);
-        $this->fixture->notifyOrganizers($registration);
+        $this->subject->notifyOrganizers($registration);
 
         self::assertContains(
-            $this->fixture->translate('label_company'),
+            $this->subject->translate('label_company'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -5159,8 +5159,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyOrganizersForRegistrationWithCompanyShowsCompanyOfRegistration()
     {
-        $this->fixture->setConfigurationValue('sendNotification', true);
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue('sendNotification', true);
+        $this->subject->setConfigurationValue(
             'showAttendanceFieldsInNotificationMail',
             'company'
         );
@@ -5175,7 +5175,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
 
         $registration = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($registrationUid);
-        $this->fixture->notifyOrganizers($registration);
+        $this->subject->notifyOrganizers($registration);
 
         self::assertContains(
             'foo inc.',
@@ -5188,7 +5188,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyOrganizersCallsModifyOrganizerNotificationEmailHookWithRegistration()
     {
-        $this->fixture->setConfigurationValue('sendNotification', true);
+        $this->subject->setConfigurationValue('sendNotification', true);
 
         $registrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -5203,7 +5203,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
         GeneralUtility::addInstance($hookClassName, $hook);
 
-        $this->fixture->notifyOrganizers($registration);
+        $this->subject->notifyOrganizers($registration);
     }
 
     /**
@@ -5211,7 +5211,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyOrganizersCallsModifyOrganizerNotificationEmailHookWithTemplate()
     {
-        $this->fixture->setConfigurationValue('sendNotification', true);
+        $this->subject->setConfigurationValue('sendNotification', true);
 
         $registrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -5227,7 +5227,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
         GeneralUtility::addInstance($hookClassName, $hook);
 
-        $this->fixture->notifyOrganizers($registration);
+        $this->subject->notifyOrganizers($registration);
     }
 
     /**
@@ -5235,7 +5235,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyOrganizersForSendConfirmationTrueCallsPostProcessOrganizerEmailHook()
     {
-        $this->fixture->setConfigurationValue('sendNotification', true);
+        $this->subject->setConfigurationValue('sendNotification', true);
 
         $registrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -5260,7 +5260,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
         GeneralUtility::addInstance($hookClassName, $hook);
 
-        $this->fixture->notifyOrganizers($registration);
+        $this->subject->notifyOrganizers($registration);
     }
 
     /**
@@ -5268,7 +5268,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyOrganizersForSendConfirmationFalseNeverCallsPostProcessOrganizerEmailHook()
     {
-        $this->fixture->setConfigurationValue('sendNotification', false);
+        $this->subject->setConfigurationValue('sendNotification', false);
 
         $registrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -5293,7 +5293,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
         GeneralUtility::addInstance($hookClassName, $hook);
 
-        $this->fixture->notifyOrganizers($registration);
+        $this->subject->notifyOrganizers($registration);
     }
 
     /*
@@ -5306,7 +5306,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function sendAdditionalNotificationCanSendEmailToOneOrganizer()
     {
         $registration = $this->createRegistration();
-        $this->fixture->sendAdditionalNotification($registration);
+        $this->subject->sendAdditionalNotification($registration);
 
         self::assertArrayHasKey(
             'mail@example.com',
@@ -5323,7 +5323,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $event = $registration->getSeminarObject();
         $event->muteNotificationEmails();
 
-        $this->fixture->sendAdditionalNotification($registration);
+        $this->subject->sendAdditionalNotification($registration);
 
         self::assertNull($this->mailer->getFirstSentEmail());
     }
@@ -5352,7 +5352,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
 
         $registration = $this->createRegistration();
-        $this->fixture->sendAdditionalNotification($registration);
+        $this->subject->sendAdditionalNotification($registration);
 
         self::assertSame(
             2,
@@ -5384,7 +5384,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
 
         $registration = $this->createRegistration();
-        $this->fixture->sendAdditionalNotification($registration);
+        $this->subject->sendAdditionalNotification($registration);
 
         $sentEmails = $this->mailer->getSentEmails();
 
@@ -5409,20 +5409,20 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
             ['attendees_min' => 1, 'attendees_max' => 42]
         );
 
-        unset($this->fixture);
+        unset($this->subject);
         \Tx_Seminars_Service_RegistrationManager::purgeInstance();
-        $this->fixture = \Tx_Seminars_Service_RegistrationManager::getInstance();
-        $this->fixture->setConfigurationValue(
+        $this->subject = \Tx_Seminars_Service_RegistrationManager::getInstance();
+        $this->subject->setConfigurationValue(
             'templateFile',
             'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
         );
 
         $registration = $this->createRegistration();
-        $this->fixture->sendAdditionalNotification($registration);
+        $this->subject->sendAdditionalNotification($registration);
 
         self::assertContains(
             sprintf(
-                $this->fixture->translate('email_additionalNotificationEnoughRegistrationsSubject'),
+                $this->subject->translate('email_additionalNotificationEnoughRegistrationsSubject'),
                 $this->seminarUid,
                 ''
             ),
@@ -5442,14 +5442,14 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
 
         \Tx_Seminars_Service_RegistrationManager::purgeInstance();
-        $this->fixture = \Tx_Seminars_Service_RegistrationManager::getInstance();
-        $this->fixture->setConfigurationValue(
+        $this->subject = \Tx_Seminars_Service_RegistrationManager::getInstance();
+        $this->subject->setConfigurationValue(
             'templateFile',
             'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
         );
 
         $registration = $this->createRegistration();
-        $this->fixture->sendAdditionalNotification($registration);
+        $this->subject->sendAdditionalNotification($registration);
 
         self::assertNull($this->mailer->getFirstSentEmail());
     }
@@ -5466,14 +5466,14 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
 
         \Tx_Seminars_Service_RegistrationManager::purgeInstance();
-        $this->fixture = \Tx_Seminars_Service_RegistrationManager::getInstance();
-        $this->fixture->setConfigurationValue(
+        $this->subject = \Tx_Seminars_Service_RegistrationManager::getInstance();
+        $this->subject->setConfigurationValue(
             'templateFile',
             'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
         );
 
         $registration = $this->createRegistration();
-        $this->fixture->sendAdditionalNotification($registration);
+        $this->subject->sendAdditionalNotification($registration);
 
         // This makes sure the event is loaded from DB again.
         $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid);
@@ -5493,21 +5493,21 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
 
         \Tx_Seminars_Service_RegistrationManager::purgeInstance();
-        $this->fixture = \Tx_Seminars_Service_RegistrationManager::getInstance();
-        $this->fixture->setConfigurationValue(
+        $this->subject = \Tx_Seminars_Service_RegistrationManager::getInstance();
+        $this->subject->setConfigurationValue(
             'templateFile',
             'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
         );
 
         $this->createRegistration();
         $registration = $this->createRegistration();
-        $this->fixture->sendAdditionalNotification($registration);
+        $this->subject->sendAdditionalNotification($registration);
 
         $firstEmail = $this->mailer->getFirstSentEmail();
         self::assertNotNull($firstEmail);
         self::assertContains(
             sprintf(
-                $this->fixture->translate('email_additionalNotificationEnoughRegistrationsSubject'),
+                $this->subject->translate('email_additionalNotificationEnoughRegistrationsSubject'),
                 $this->seminarUid,
                 ''
             ),
@@ -5527,14 +5527,14 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
 
         \Tx_Seminars_Service_RegistrationManager::purgeInstance();
-        $this->fixture = \Tx_Seminars_Service_RegistrationManager::getInstance();
-        $this->fixture->setConfigurationValue(
+        $this->subject = \Tx_Seminars_Service_RegistrationManager::getInstance();
+        $this->subject->setConfigurationValue(
             'templateFile',
             'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
         );
 
         $registration = $this->createRegistration();
-        $this->fixture->sendAdditionalNotification($registration);
+        $this->subject->sendAdditionalNotification($registration);
 
         // This makes sure the event is loaded from DB again.
         $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid);
@@ -5554,15 +5554,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
 
         \Tx_Seminars_Service_RegistrationManager::purgeInstance();
-        $this->fixture = \Tx_Seminars_Service_RegistrationManager::getInstance();
-        $this->fixture->setConfigurationValue(
+        $this->subject = \Tx_Seminars_Service_RegistrationManager::getInstance();
+        $this->subject->setConfigurationValue(
             'templateFile',
             'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
         );
 
         $this->createRegistration();
         $registration = $this->createRegistration();
-        $this->fixture->sendAdditionalNotification($registration);
+        $this->subject->sendAdditionalNotification($registration);
 
         // This makes sure the event is loaded from DB again.
         $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid);
@@ -5582,14 +5582,14 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
 
         \Tx_Seminars_Service_RegistrationManager::purgeInstance();
-        $this->fixture = \Tx_Seminars_Service_RegistrationManager::getInstance();
-        $this->fixture->setConfigurationValue(
+        $this->subject = \Tx_Seminars_Service_RegistrationManager::getInstance();
+        $this->subject->setConfigurationValue(
             'templateFile',
             'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
         );
 
         $registration = $this->createRegistration();
-        $this->fixture->sendAdditionalNotification($registration);
+        $this->subject->sendAdditionalNotification($registration);
 
         $firstEmail = $this->mailer->getFirstSentEmail();
         self::assertNull($firstEmail);
@@ -5607,15 +5607,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
 
         \Tx_Seminars_Service_RegistrationManager::purgeInstance();
-        $this->fixture = \Tx_Seminars_Service_RegistrationManager::getInstance();
-        $this->fixture->setConfigurationValue(
+        $this->subject = \Tx_Seminars_Service_RegistrationManager::getInstance();
+        $this->subject->setConfigurationValue(
             'templateFile',
             'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
         );
 
         $this->createRegistration();
         $registration = $this->createRegistration();
-        $this->fixture->sendAdditionalNotification($registration);
+        $this->subject->sendAdditionalNotification($registration);
 
         $firstEmail = $this->mailer->getFirstSentEmail();
         self::assertNull($firstEmail);
@@ -5632,16 +5632,16 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
             ['attendees_min' => 0, 'attendees_max' => 42]
         );
 
-        unset($this->fixture);
+        unset($this->subject);
         \Tx_Seminars_Service_RegistrationManager::purgeInstance();
-        $this->fixture = \Tx_Seminars_Service_RegistrationManager::getInstance();
-        $this->fixture->setConfigurationValue(
+        $this->subject = \Tx_Seminars_Service_RegistrationManager::getInstance();
+        $this->subject->setConfigurationValue(
             'templateFile',
             'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
         );
 
         $registration = $this->createRegistration();
-        $this->fixture->sendAdditionalNotification($registration);
+        $this->subject->sendAdditionalNotification($registration);
 
         self::assertNull(
             $this->mailer->getFirstSentEmail()
@@ -5660,11 +5660,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
 
         $registration = $this->createRegistration();
-        $this->fixture->sendAdditionalNotification($registration);
+        $this->subject->sendAdditionalNotification($registration);
 
         self::assertContains(
             sprintf(
-                $this->fixture->translate('email_additionalNotificationIsFullSubject'),
+                $this->subject->translate('email_additionalNotificationIsFullSubject'),
                 $this->seminarUid,
                 ''
             ),
@@ -5683,10 +5683,10 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
             ['attendees_max' => 1]
         );
         $registration = $this->createRegistration();
-        $this->fixture->sendAdditionalNotification($registration);
+        $this->subject->sendAdditionalNotification($registration);
 
         self::assertContains(
-            $this->fixture->translate('email_additionalNotificationIsFull'),
+            $this->subject->translate('email_additionalNotificationIsFull'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -5702,14 +5702,14 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
             ['attendees_min' => 5, 'attendees_max' => 5]
         );
 
-        $fixture = new \Tx_Seminars_Service_RegistrationManager();
-        $fixture->setConfigurationValue(
+        $subject = new \Tx_Seminars_Service_RegistrationManager();
+        $subject->setConfigurationValue(
             'templateFile',
             'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
         );
 
         $registration = $this->createRegistration();
-        $fixture->sendAdditionalNotification($registration);
+        $subject->sendAdditionalNotification($registration);
 
         self::assertNull(
             $this->mailer->getFirstSentEmail()
@@ -5732,7 +5732,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
 
         $registration = $this->createRegistration();
-        $this->fixture->sendAdditionalNotification($registration);
+        $this->subject->sendAdditionalNotification($registration);
 
         self::assertSame(
             1,
@@ -5754,16 +5754,16 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
                 'needs_registration' => 1,
             ]
         );
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue(
             'showSeminarFieldsInNotificationMail',
             'vacancies'
         );
 
         $registration = $this->createRegistration();
-        $this->fixture->sendAdditionalNotification($registration);
+        $this->subject->sendAdditionalNotification($registration);
 
         self::assertRegExp(
-            '/' . $this->fixture->translate('label_vacancies') . ': 1$/',
+            '/' . $this->subject->translate('label_vacancies') . ': 1$/',
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -5782,16 +5782,16 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
                 'needs_registration' => 1,
             ]
         );
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue(
             'showSeminarFieldsInNotificationMail',
             'vacancies'
         );
 
         $registration = $this->createRegistration();
-        $this->fixture->sendAdditionalNotification($registration);
+        $this->subject->sendAdditionalNotification($registration);
 
         self::assertContains(
-            $this->fixture->translate('label_vacancies') . ': ' . $this->fixture->translate('label_unlimited'),
+            $this->subject->translate('label_vacancies') . ': ' . $this->subject->translate('label_unlimited'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -5824,7 +5824,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         GeneralUtility::addInstance($hookClassName, $hook);
 
         $registration = $this->createRegistration();
-        $this->fixture->sendAdditionalNotification($registration);
+        $this->subject->sendAdditionalNotification($registration);
     }
 
     /*
@@ -5840,7 +5840,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setBeginDate(0);
 
         self::assertTrue(
-            $this->fixture->allowsRegistrationByDate($this->seminar)
+            $this->subject->allowsRegistrationByDate($this->seminar)
         );
     }
 
@@ -5853,7 +5853,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setBeginDate(0);
 
         self::assertFalse(
-            $this->fixture->allowsRegistrationByDate($this->seminar)
+            $this->subject->allowsRegistrationByDate($this->seminar)
         );
     }
 
@@ -5866,7 +5866,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setRegistrationDeadline($GLOBALS['SIM_EXEC_TIME'] - 42);
 
         self::assertFalse(
-            $this->fixture->allowsRegistrationByDate($this->seminar)
+            $this->subject->allowsRegistrationByDate($this->seminar)
         );
     }
 
@@ -5879,7 +5879,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setRegistrationDeadline($GLOBALS['SIM_EXEC_TIME'] + 42);
 
         self::assertTrue(
-            $this->fixture->allowsRegistrationByDate($this->seminar)
+            $this->subject->allowsRegistrationByDate($this->seminar)
         );
     }
 
@@ -5892,7 +5892,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setRegistrationBeginDate($GLOBALS['SIM_EXEC_TIME'] + 10);
 
         self::assertFalse(
-            $this->fixture->allowsRegistrationByDate($this->seminar)
+            $this->subject->allowsRegistrationByDate($this->seminar)
         );
     }
 
@@ -5905,7 +5905,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setRegistrationBeginDate($GLOBALS['SIM_EXEC_TIME'] - 42);
 
         self::assertTrue(
-            $this->fixture->allowsRegistrationByDate($this->seminar)
+            $this->subject->allowsRegistrationByDate($this->seminar)
         );
     }
 
@@ -5918,7 +5918,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setRegistrationBeginDate(0);
 
         self::assertTrue(
-            $this->fixture->allowsRegistrationByDate($this->seminar)
+            $this->subject->allowsRegistrationByDate($this->seminar)
         );
     }
 
@@ -5931,7 +5931,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setRegistrationBeginDate($GLOBALS['SIM_EXEC_TIME'] - 50);
 
         self::assertFalse(
-            $this->fixture->allowsRegistrationByDate($this->seminar)
+            $this->subject->allowsRegistrationByDate($this->seminar)
         );
     }
 
@@ -5949,7 +5949,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setRegistrationQueue(false);
 
         self::assertFalse(
-            $this->fixture->allowsRegistrationBySeats($this->seminar)
+            $this->subject->allowsRegistrationBySeats($this->seminar)
         );
     }
 
@@ -5961,7 +5961,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setUnlimitedVacancies();
 
         self::assertTrue(
-            $this->fixture->allowsRegistrationBySeats($this->seminar)
+            $this->subject->allowsRegistrationBySeats($this->seminar)
         );
     }
 
@@ -5975,7 +5975,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setRegistrationQueue(true);
 
         self::assertTrue(
-            $this->fixture->allowsRegistrationBySeats($this->seminar)
+            $this->subject->allowsRegistrationBySeats($this->seminar)
         );
     }
 
@@ -5989,7 +5989,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setRegistrationQueue(false);
 
         self::assertTrue(
-            $this->fixture->allowsRegistrationBySeats($this->seminar)
+            $this->subject->allowsRegistrationBySeats($this->seminar)
         );
     }
 
@@ -6005,7 +6005,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setRegistrationBeginDate(0);
 
         self::assertTrue(
-            $this->fixture->registrationHasStarted($this->seminar)
+            $this->subject->registrationHasStarted($this->seminar)
         );
     }
 
@@ -6019,7 +6019,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
 
         self::assertTrue(
-            $this->fixture->registrationHasStarted($this->seminar)
+            $this->subject->registrationHasStarted($this->seminar)
         );
     }
 
@@ -6033,7 +6033,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
 
         self::assertFalse(
-            $this->fixture->registrationHasStarted($this->seminar)
+            $this->subject->registrationHasStarted($this->seminar)
         );
     }
 
@@ -6053,8 +6053,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
         $plugin->cObj = $GLOBALS['TSFE']->cObj;
-        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(
+        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $subject */
+        $subject = $this->getMock(
             \Tx_Seminars_Service_RegistrationManager::class,
             [
                 'notifyAttendee',
@@ -6064,13 +6064,13 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
             ]
         );
 
-        $fixture->createRegistration($this->seminar, [], $plugin);
+        $subject->createRegistration($this->seminar, [], $plugin);
 
         self::assertInstanceOf(
             \Tx_Seminars_OldModel_Registration::class,
-            $fixture->getRegistration()
+            $subject->getRegistration()
         );
-        $uid = $fixture->getRegistration()->getUid();
+        $uid = $subject->getRegistration()->getUid();
         self::assertTrue(
         // We're not using the testing framework here because the record
         // is not marked as dummy record.
@@ -6092,8 +6092,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
         $plugin->cObj = $GLOBALS['TSFE']->cObj;
-        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(
+        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $subject */
+        $subject = $this->getMock(
             \Tx_Seminars_Service_RegistrationManager::class,
             [
                 'notifyAttendee',
@@ -6103,11 +6103,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
             ]
         );
 
-        $fixture->createRegistration($this->seminar, [], $plugin);
+        $subject->createRegistration($this->seminar, [], $plugin);
 
         $seminarData = \Tx_Oelib_Db::selectSingle('*', 'tx_seminars_seminars', 'uid = ' . $this->seminarUid);
 
-        $registrationUid = $fixture->getRegistration()->getUid();
+        $registrationUid = $subject->getRegistration()->getUid();
         \Tx_Oelib_Db::delete('tx_seminars_attendances', 'uid = ' . $registrationUid);
 
         self::assertSame(1, (int)$seminarData['registrations']);
@@ -6122,8 +6122,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
         $plugin->cObj = $GLOBALS['TSFE']->cObj;
-        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(
+        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $subject */
+        $subject = $this->getMock(
             \Tx_Seminars_Service_RegistrationManager::class,
             [
                 'notifyAttendee',
@@ -6133,9 +6133,9 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
             ]
         );
 
-        $registration = $fixture->createRegistration($this->seminar, [], $plugin);
+        $registration = $subject->createRegistration($this->seminar, [], $plugin);
 
-        $uid = $fixture->getRegistration()->getUid();
+        $uid = $subject->getRegistration()->getUid();
         // @TODO: This line needs to be removed once createRegistration uses
         // the data mapper to save the registration.
         \Tx_Oelib_Db::delete('tx_seminars_attendances', 'uid = ' . $uid);
@@ -6166,8 +6166,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
         $plugin->cObj = $GLOBALS['TSFE']->cObj;
-        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(
+        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $subject */
+        $subject = $this->getMock(
             \Tx_Seminars_Service_RegistrationManager::class,
             [
                 'notifyAttendee',
@@ -6177,20 +6177,20 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
             ]
         );
 
-        $registration = $fixture->createRegistration(
+        $registration = $subject->createRegistration(
             $this->seminar,
             [],
             $plugin
         );
 
-        $uid = $fixture->getRegistration()->getUid();
+        $uid = $subject->getRegistration()->getUid();
         // @TODO: This line needs to be removed once createRegistration uses
         // the data mapper to save the registration.
         \Tx_Oelib_Db::delete('tx_seminars_attendances', 'uid = ' . $uid);
 
         self::assertSame(
             $registration->getUid(),
-            $fixture->getRegistration()->getUid()
+            $subject->getRegistration()->getUid()
         );
     }
 
@@ -6212,8 +6212,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
         $plugin->cObj = $GLOBALS['TSFE']->cObj;
-        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(
+        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $subject */
+        $subject = $this->getMock(
             \Tx_Seminars_Service_RegistrationManager::class,
             [
                 'notifyAttendee',
@@ -6223,13 +6223,13 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
             ]
         );
 
-        $fixture->createRegistration(
+        $subject->createRegistration(
             $this->seminar,
             [],
             $plugin
         );
 
-        $uid = $fixture->getRegistration()->getUid();
+        $uid = $subject->getRegistration()->getUid();
 
         \Tx_Oelib_Db::delete('tx_seminars_attendances', 'uid = ' . $uid);
     }
@@ -6244,15 +6244,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForPositiveSeatsSetsSeats()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** $event \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData(
+        $subject->setRegistrationData(
             $registration,
             ['seats' => '3']
         );
@@ -6269,15 +6269,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForMissingSeatsSetsOneSeat()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData(
+        $subject->setRegistrationData(
             $registration,
             []
         );
@@ -6294,15 +6294,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForZeroSeatsSetsOneSeat()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData(
+        $subject->setRegistrationData(
             $registration,
             ['seats' => '0']
         );
@@ -6319,15 +6319,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForNegativeSeatsSetsOneSeat()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData(
+        $subject->setRegistrationData(
             $registration,
             ['seats' => '-1']
         );
@@ -6344,15 +6344,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForRegisteredThemselvesOneSetsItToTrue()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData(
+        $subject->setRegistrationData(
             $registration,
             ['registered_themselves' => '1']
         );
@@ -6368,15 +6368,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForRegisteredThemselvesZeroSetsItToFalse()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData(
+        $subject->setRegistrationData(
             $registration,
             ['registered_themselves' => '0']
         );
@@ -6392,15 +6392,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForRegisteredThemselvesMissingSetsItToFalse()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData(
+        $subject->setRegistrationData(
             $registration,
             []
         );
@@ -6416,8 +6416,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForSelectedAvailablePricePutsSelectedPriceCodeToPrice()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
@@ -6427,7 +6427,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData(
+        $subject->setRegistrationData(
             $registration,
             ['price' => 'special']
         );
@@ -6444,8 +6444,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForSelectedNotAvailablePricePutsFirstPriceCodeToPrice()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
@@ -6455,7 +6455,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData(
+        $subject->setRegistrationData(
             $registration,
             ['price' => 'early_bird_regular']
         );
@@ -6472,8 +6472,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForNoSelectedPricePutsFirstPriceCodeToPrice()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
@@ -6483,7 +6483,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData(
+        $subject->setRegistrationData(
             $registration,
             []
         );
@@ -6500,8 +6500,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForNoSelectedAndOnlyFreeRegularPriceAvailablePutsRegularPriceCodeToPrice()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
@@ -6511,7 +6511,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData(
+        $subject->setRegistrationData(
             $registration,
             []
         );
@@ -6528,8 +6528,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForOneSeatsCalculatesTotalPriceFromSelectedPriceAndSeats()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
@@ -6539,7 +6539,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData(
+        $subject->setRegistrationData(
             $registration,
             ['price' => 'regular', 'seats' => '1']
         );
@@ -6556,8 +6556,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForTwoSeatsCalculatesTotalPriceFromSelectedPriceAndSeats()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
@@ -6567,7 +6567,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData(
+        $subject->setRegistrationData(
             $registration,
             ['price' => 'regular', 'seats' => '2']
         );
@@ -6584,15 +6584,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForNonEmptyAttendeesNamesSetsAttendeesNames()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData(
+        $subject->setRegistrationData(
             $registration,
             ['attendees_names' => 'John Doe' . LF . 'Jane Doe']
         );
@@ -6609,15 +6609,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataDropsHtmlTagsFromAttendeesNames()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData(
+        $subject->setRegistrationData(
             $registration,
             ['attendees_names' => 'John <em>Doe</em>']
         );
@@ -6634,15 +6634,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForEmptyAttendeesNamesSetsEmptyAttendeesNames()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData(
+        $subject->setRegistrationData(
             $registration,
             ['attendees_names' => '']
         );
@@ -6659,15 +6659,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForMissingAttendeesNamesSetsEmptyAttendeesNames()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData(
+        $subject->setRegistrationData(
             $registration,
             []
         );
@@ -6684,15 +6684,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForPositiveKidsSetsNumberOfKids()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData(
+        $subject->setRegistrationData(
             $registration,
             ['kids' => '3']
         );
@@ -6709,15 +6709,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForMissingKidsSetsZeroKids()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData(
+        $subject->setRegistrationData(
             $registration,
             []
         );
@@ -6734,15 +6734,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForZeroKidsSetsZeroKids()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData(
+        $subject->setRegistrationData(
             $registration,
             ['kids' => '0']
         );
@@ -6759,15 +6759,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForNegativeKidsSetsZeroKids()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData(
+        $subject->setRegistrationData(
             $registration,
             ['kids' => '-1']
         );
@@ -6784,8 +6784,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForSelectedAvailablePaymentMethodFromOneSetsIt()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         $paymentMethod = \Tx_Oelib_MapperRegistry
             ::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
@@ -6801,7 +6801,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['method_of_payment' => $paymentMethod->getUid()]);
+        $subject->setRegistrationData($registration, ['method_of_payment' => $paymentMethod->getUid()]);
 
         self::assertSame(
             $paymentMethod,
@@ -6815,8 +6815,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForSelectedAvailablePaymentMethodFromTwoSetsIt()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         $paymentMethod1 = \Tx_Oelib_MapperRegistry
             ::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
@@ -6835,7 +6835,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['method_of_payment' => $paymentMethod2->getUid()]);
+        $subject->setRegistrationData($registration, ['method_of_payment' => $paymentMethod2->getUid()]);
 
         self::assertSame(
             $paymentMethod2,
@@ -6849,8 +6849,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForSelectedAvailablePaymentMethodFromOneForFreeEventsSetsNoPaymentMethod()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         $paymentMethod = \Tx_Oelib_MapperRegistry
             ::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
@@ -6866,7 +6866,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['method_of_payment' => $paymentMethod->getUid()]);
+        $subject->setRegistrationData($registration, ['method_of_payment' => $paymentMethod->getUid()]);
 
         self::assertNull(
             $registration->getPaymentMethod()
@@ -6879,8 +6879,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForMissingPaymentMethodAndNoneAvailableSetsNone()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->getMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
@@ -6891,7 +6891,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData(
+        $subject->setRegistrationData(
             $registration,
             []
         );
@@ -6907,8 +6907,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForMissingPaymentMethodAndTwoAvailableSetsNone()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         $paymentMethod1 = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
         $paymentMethod2 = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
@@ -6925,7 +6925,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, []);
+        $subject->setRegistrationData($registration, []);
 
         self::assertNull(
             $registration->getPaymentMethod()
@@ -6938,8 +6938,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForMissingPaymentMethodAndOneAvailableSetsIt()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         $paymentMethod = \Tx_Oelib_MapperRegistry
             ::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
@@ -6955,7 +6955,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, []);
+        $subject->setRegistrationData($registration, []);
 
         self::assertSame(
             $paymentMethod,
@@ -6969,8 +6969,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForUnavailablePaymentMethodAndTwoAvailableSetsNone()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         $paymentMethod1 = \Tx_Oelib_MapperRegistry
             ::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
@@ -6989,7 +6989,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData(
+        $subject->setRegistrationData(
             $registration,
             ['method_of_payment' => max($paymentMethod1->getUid(), $paymentMethod2->getUid()) + 1]
         );
@@ -7005,8 +7005,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForUnavailablePaymentMethodAndOneAvailableSetsAvailable()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         $paymentMethod = \Tx_Oelib_MapperRegistry
             ::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
@@ -7022,7 +7022,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['method_of_payment' => $paymentMethod->getUid() + 1]);
+        $subject->setRegistrationData($registration, ['method_of_payment' => $paymentMethod->getUid() + 1]);
 
         self::assertSame(
             $paymentMethod,
@@ -7036,15 +7036,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForNonEmptyAccountNumberSetsAccountNumber()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['account_number' => '123 455 ABC']);
+        $subject->setRegistrationData($registration, ['account_number' => '123 455 ABC']);
 
         self::assertSame(
             '123 455 ABC',
@@ -7058,15 +7058,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataDropsHtmlTagsFromAccountNumber()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['account_number' => '123 <em>455</em> ABC']);
+        $subject->setRegistrationData($registration, ['account_number' => '123 <em>455</em> ABC']);
 
         self::assertSame(
             '123 455 ABC',
@@ -7080,15 +7080,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataChangesWhitespaceToSpaceInAccountNumber()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData(
+        $subject->setRegistrationData(
             $registration,
             ['account_number' => '123' . CRLF . '455' . TAB . ' ABC']
         );
@@ -7105,15 +7105,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForEmptyAccountNumberSetsEmptyAccountNumber()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['account_number' => '']);
+        $subject->setRegistrationData($registration, ['account_number' => '']);
 
         self::assertSame(
             '',
@@ -7127,15 +7127,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForMissingAccountNumberSetsEmptyAccountNumber()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, []);
+        $subject->setRegistrationData($registration, []);
 
         self::assertSame(
             '',
@@ -7149,15 +7149,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForNonEmptyBankCodeSetsBankCode()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['bank_code' => '123 455 ABC']);
+        $subject->setRegistrationData($registration, ['bank_code' => '123 455 ABC']);
 
         self::assertSame(
             '123 455 ABC',
@@ -7171,15 +7171,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataDropsHtmlTagsFromBankCode()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['bank_code' => '123 <em>455</em> ABC']);
+        $subject->setRegistrationData($registration, ['bank_code' => '123 <em>455</em> ABC']);
 
         self::assertSame(
             '123 455 ABC',
@@ -7193,15 +7193,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataChangesWhitespaceToSpaceInBankCode()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData(
+        $subject->setRegistrationData(
             $registration,
             ['bank_code' => '123' . CRLF . '455' . TAB . ' ABC']
         );
@@ -7218,15 +7218,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForEmptyBankCodeSetsEmptyBankCode()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['bank_code' => '']);
+        $subject->setRegistrationData($registration, ['bank_code' => '']);
 
         self::assertSame(
             '',
@@ -7240,15 +7240,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForMissingBankCodeSetsEmptyBankCode()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, []);
+        $subject->setRegistrationData($registration, []);
 
         self::assertSame(
             '',
@@ -7262,15 +7262,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForNonEmptyBankNameSetsBankName()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['bank_name' => 'Swiss Tax Protection']);
+        $subject->setRegistrationData($registration, ['bank_name' => 'Swiss Tax Protection']);
 
         self::assertSame(
             'Swiss Tax Protection',
@@ -7284,15 +7284,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataDropsHtmlTagsFromBankName()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['bank_name' => 'Swiss <em>Tax</em> Protection']);
+        $subject->setRegistrationData($registration, ['bank_name' => 'Swiss <em>Tax</em> Protection']);
 
         self::assertSame(
             'Swiss Tax Protection',
@@ -7306,15 +7306,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataChangesWhitespaceToSpaceInBankName()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData(
+        $subject->setRegistrationData(
             $registration,
             ['bank_name' => 'Swiss' . CRLF . 'Tax' . TAB . ' Protection']
         );
@@ -7331,15 +7331,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForEmptyBankNameSetsEmptyBankName()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['bank_name' => '']);
+        $subject->setRegistrationData($registration, ['bank_name' => '']);
 
         self::assertSame(
             '',
@@ -7353,15 +7353,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForMissingBankNameSetsEmptyBankName()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, []);
+        $subject->setRegistrationData($registration, []);
 
         self::assertSame(
             '',
@@ -7375,15 +7375,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForNonEmptyAccountOwnerSetsAccountOwner()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['account_owner' => 'John Doe']);
+        $subject->setRegistrationData($registration, ['account_owner' => 'John Doe']);
 
         self::assertSame(
             'John Doe',
@@ -7397,15 +7397,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataDropsHtmlTagsFromAccountOwner()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['account_owner' => 'John <em>Doe</em>']);
+        $subject->setRegistrationData($registration, ['account_owner' => 'John <em>Doe</em>']);
 
         self::assertSame(
             'John Doe',
@@ -7419,15 +7419,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataChangesWhitespaceToSpaceInAccountOwner()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData(
+        $subject->setRegistrationData(
             $registration,
             ['account_owner' => 'John' . CRLF . TAB . ' Doe']
         );
@@ -7444,15 +7444,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForEmptyAccountOwnerSetsEmptyAccountOwner()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['account_owner' => '']);
+        $subject->setRegistrationData($registration, ['account_owner' => '']);
 
         self::assertSame(
             '',
@@ -7466,15 +7466,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForMissingAccountOwnerSetsEmptyAccountOwner()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, []);
+        $subject->setRegistrationData($registration, []);
 
         self::assertSame(
             '',
@@ -7488,15 +7488,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForNonEmptyCompanySetsCompany()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData(
+        $subject->setRegistrationData(
             $registration,
             ['company' => 'Business Ltd.' . LF . 'Tom, Dick & Harry']
         );
@@ -7513,15 +7513,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataDropsHtmlTagsFromCompany()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['company' => 'Business <em>Ltd.</em>']);
+        $subject->setRegistrationData($registration, ['company' => 'Business <em>Ltd.</em>']);
 
         self::assertSame(
             'Business Ltd.',
@@ -7535,15 +7535,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForEmptyCompanySetsEmptyCompany()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['company' => '']);
+        $subject->setRegistrationData($registration, ['company' => '']);
 
         self::assertSame(
             '',
@@ -7557,15 +7557,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForMissingCompanySetsEmptyCompany()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, []);
+        $subject->setRegistrationData($registration, []);
 
         self::assertSame(
             '',
@@ -7579,15 +7579,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForMaleGenderSetsGender()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData(
+        $subject->setRegistrationData(
             $registration,
             ['gender' => (string)Tx_Oelib_Model_FrontEndUser::GENDER_MALE]
         );
@@ -7604,15 +7604,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForFemaleGenderSetsGender()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData(
+        $subject->setRegistrationData(
             $registration,
             ['gender' => (string)Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE]
         );
@@ -7629,15 +7629,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForInvalidIntegerGenderSetsUnknownGender()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['gender' => '42']);
+        $subject->setRegistrationData($registration, ['gender' => '42']);
 
         self::assertSame(
             \Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN,
@@ -7651,15 +7651,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForInvalidStringGenderSetsUnknownGender()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['gender' => 'Mr. Fantastic']);
+        $subject->setRegistrationData($registration, ['gender' => 'Mr. Fantastic']);
 
         self::assertSame(
             \Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN,
@@ -7673,15 +7673,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForEmptyGenderSetsUnknownGender()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['gender' => '']);
+        $subject->setRegistrationData($registration, ['gender' => '']);
 
         self::assertSame(
             \Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN,
@@ -7695,15 +7695,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForMissingGenderSetsUnknownGender()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, []);
+        $subject->setRegistrationData($registration, []);
 
         self::assertSame(
             \Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN,
@@ -7717,15 +7717,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForNonEmptyNameSetsName()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['name' => 'John Doe']);
+        $subject->setRegistrationData($registration, ['name' => 'John Doe']);
 
         self::assertSame(
             'John Doe',
@@ -7739,15 +7739,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataDropsHtmlTagsFromName()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['name' => 'John <em>Doe</em>']);
+        $subject->setRegistrationData($registration, ['name' => 'John <em>Doe</em>']);
 
         self::assertSame(
             'John Doe',
@@ -7761,15 +7761,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataChangesWhitespaceToSpaceInName()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['name' => 'John' . CRLF . TAB . ' Doe']);
+        $subject->setRegistrationData($registration, ['name' => 'John' . CRLF . TAB . ' Doe']);
 
         self::assertSame(
             'John Doe',
@@ -7783,15 +7783,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForEmptyNameSetsEmptyName()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['name' => '']);
+        $subject->setRegistrationData($registration, ['name' => '']);
 
         self::assertSame(
             '',
@@ -7805,15 +7805,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForMissingNameSetsEmptyName()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, []);
+        $subject->setRegistrationData($registration, []);
 
         self::assertSame(
             '',
@@ -7827,15 +7827,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForNonEmptyAddressSetsAddress()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['address' => 'Back Road 42' . LF . '(second door)']);
+        $subject->setRegistrationData($registration, ['address' => 'Back Road 42' . LF . '(second door)']);
 
         self::assertSame(
             'Back Road 42' . LF . '(second door)',
@@ -7849,15 +7849,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataDropsHtmlTagsFromAddress()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['address' => 'Back <em>Road</em> 42']);
+        $subject->setRegistrationData($registration, ['address' => 'Back <em>Road</em> 42']);
 
         self::assertSame(
             'Back Road 42',
@@ -7871,15 +7871,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForEmptyAddressSetsEmptyAddress()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['address' => '']);
+        $subject->setRegistrationData($registration, ['address' => '']);
 
         self::assertSame(
             '',
@@ -7893,15 +7893,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForMissingAddressSetsEmptyAddress()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, []);
+        $subject->setRegistrationData($registration, []);
 
         self::assertSame(
             '',
@@ -7915,15 +7915,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForNonEmptyZipSetsZip()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['zip' => '12345 ABC']);
+        $subject->setRegistrationData($registration, ['zip' => '12345 ABC']);
 
         self::assertSame(
             '12345 ABC',
@@ -7937,15 +7937,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataDropsHtmlTagsFromZip()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['zip' => '12345 <em>ABC</em>']);
+        $subject->setRegistrationData($registration, ['zip' => '12345 <em>ABC</em>']);
 
         self::assertSame(
             '12345 ABC',
@@ -7959,15 +7959,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataChangesWhitespaceToSpaceInZip()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['zip' => '12345' . CRLF . TAB . ' ABC']);
+        $subject->setRegistrationData($registration, ['zip' => '12345' . CRLF . TAB . ' ABC']);
 
         self::assertSame(
             '12345 ABC',
@@ -7981,15 +7981,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForEmptyZipSetsEmptyZip()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['zip' => '']);
+        $subject->setRegistrationData($registration, ['zip' => '']);
 
         self::assertSame(
             '',
@@ -8003,15 +8003,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForMissingZipSetsEmptyZip()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, []);
+        $subject->setRegistrationData($registration, []);
 
         self::assertSame(
             '',
@@ -8025,15 +8025,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForNonEmptyCitySetsCity()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['city' => 'Elmshorn']);
+        $subject->setRegistrationData($registration, ['city' => 'Elmshorn']);
 
         self::assertSame(
             'Elmshorn',
@@ -8047,15 +8047,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataDropsHtmlTagsFromCity()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['city' => 'Santiago de <em>Chile</em>']);
+        $subject->setRegistrationData($registration, ['city' => 'Santiago de <em>Chile</em>']);
 
         self::assertSame(
             'Santiago de Chile',
@@ -8069,15 +8069,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataChangesWhitespaceToSpaceInCity()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['city' => 'Santiago' . CRLF . TAB . ' de Chile']);
+        $subject->setRegistrationData($registration, ['city' => 'Santiago' . CRLF . TAB . ' de Chile']);
 
         self::assertSame(
             'Santiago de Chile',
@@ -8091,15 +8091,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForEmptyCitySetsEmptyCity()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['city' => '']);
+        $subject->setRegistrationData($registration, ['city' => '']);
 
         self::assertSame(
             '',
@@ -8113,15 +8113,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForMissingCitySetsEmptyCity()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, []);
+        $subject->setRegistrationData($registration, []);
 
         self::assertSame(
             '',
@@ -8135,15 +8135,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForNonEmptyCountrySetsCountry()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['country' => 'Brazil']);
+        $subject->setRegistrationData($registration, ['country' => 'Brazil']);
 
         self::assertSame(
             'Brazil',
@@ -8157,15 +8157,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataDropsHtmlTagsFromCountry()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['country' => 'South <em>Africa</em>']);
+        $subject->setRegistrationData($registration, ['country' => 'South <em>Africa</em>']);
 
         self::assertSame(
             'South Africa',
@@ -8179,15 +8179,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataChangesWhitespaceToSpaceInCountry()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['country' => 'South' . CRLF . TAB . ' Africa']);
+        $subject->setRegistrationData($registration, ['country' => 'South' . CRLF . TAB . ' Africa']);
 
         self::assertSame(
             'South Africa',
@@ -8201,15 +8201,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForEmptyCountrySetsEmptyCountry()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, ['country' => '']);
+        $subject->setRegistrationData($registration, ['country' => '']);
 
         self::assertSame(
             '',
@@ -8223,15 +8223,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function setRegistrationDataForMissingCountrySetsEmptyCountry()
     {
         $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $fixture */
-        $fixture = new $className();
+        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
+        $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $fixture->setRegistrationData($registration, []);
+        $subject->setRegistrationData($registration, []);
 
         self::assertSame(
             '',
@@ -8249,7 +8249,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function existsSeminarForZeroUidReturnsFalse()
     {
         self::assertFalse(
-            $this->fixture->existsSeminar(0)
+            $this->subject->existsSeminar(0)
         );
     }
 
@@ -8259,7 +8259,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function existsSeminarForInvalidStringUidReturnsFalse()
     {
         self::assertFalse(
-            $this->fixture->existsSeminar('Hello world!')
+            $this->subject->existsSeminar('Hello world!')
         );
     }
 
@@ -8269,7 +8269,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function existsSeminarForInexistentUidReturnsFalse()
     {
         self::assertFalse(
-            $this->fixture->existsSeminar($this->testingFramework->getAutoIncrement('tx_seminars_seminars'))
+            $this->subject->existsSeminar($this->testingFramework->getAutoIncrement('tx_seminars_seminars'))
         );
     }
 
@@ -8285,7 +8285,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
 
         self::assertFalse(
-            $this->fixture->existsSeminar($this->seminarUid)
+            $this->subject->existsSeminar($this->seminarUid)
         );
     }
 
@@ -8301,7 +8301,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
 
         self::assertFalse(
-            $this->fixture->existsSeminar($this->seminarUid)
+            $this->subject->existsSeminar($this->seminarUid)
         );
     }
 
@@ -8311,7 +8311,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function existsSeminarForExistingUidReturnsTrue()
     {
         self::assertTrue(
-            $this->fixture->existsSeminar($this->seminarUid)
+            $this->subject->existsSeminar($this->seminarUid)
         );
     }
 
@@ -8321,8 +8321,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function existsSeminarMessageForZeroUidReturnsErrorMessage()
     {
         self::assertContains(
-            $this->fixture->translate('message_missingSeminarNumber'),
-            $this->fixture->existsSeminarMessage(0)
+            $this->subject->translate('message_missingSeminarNumber'),
+            $this->subject->existsSeminarMessage(0)
         );
     }
 
@@ -8331,7 +8331,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function existsSeminarMessageForZeroUidSendsNotFoundHeader()
     {
-        $this->fixture->existsSeminarMessage(0);
+        $this->subject->existsSeminarMessage(0);
 
         self::assertSame(
             'Status: 404 Not Found',
@@ -8345,8 +8345,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function existsSeminarMessageForInvalidStringUidReturnsErrorMessage()
     {
         self::assertContains(
-            $this->fixture->translate('message_missingSeminarNumber'),
-            $this->fixture->existsSeminarMessage('Hello world!')
+            $this->subject->translate('message_missingSeminarNumber'),
+            $this->subject->existsSeminarMessage('Hello world!')
         );
     }
 
@@ -8356,8 +8356,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function existsSeminarMessageForInexistentUidReturnsErrorMessage()
     {
         self::assertContains(
-            $this->fixture->translate('message_wrongSeminarNumber'),
-            $this->fixture->existsSeminarMessage($this->testingFramework->getAutoIncrement('tx_seminars_seminars'))
+            $this->subject->translate('message_wrongSeminarNumber'),
+            $this->subject->existsSeminarMessage($this->testingFramework->getAutoIncrement('tx_seminars_seminars'))
         );
     }
 
@@ -8366,7 +8366,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function existsSeminarMessageForInexistentUidSendsNotFoundHeader()
     {
-        $this->fixture->existsSeminarMessage($this->testingFramework->getAutoIncrement('tx_seminars_seminars'));
+        $this->subject->existsSeminarMessage($this->testingFramework->getAutoIncrement('tx_seminars_seminars'));
 
         self::assertSame(
             'Status: 404 Not Found',
@@ -8386,8 +8386,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
 
         self::assertContains(
-            $this->fixture->translate('message_wrongSeminarNumber'),
-            $this->fixture->existsSeminarMessage($this->seminarUid)
+            $this->subject->translate('message_wrongSeminarNumber'),
+            $this->subject->existsSeminarMessage($this->seminarUid)
         );
     }
 
@@ -8403,8 +8403,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
 
         self::assertContains(
-            $this->fixture->translate('message_wrongSeminarNumber'),
-            $this->fixture->existsSeminarMessage($this->seminarUid)
+            $this->subject->translate('message_wrongSeminarNumber'),
+            $this->subject->existsSeminarMessage($this->seminarUid)
         );
     }
 
@@ -8415,7 +8415,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     {
         self::assertSame(
             '',
-            $this->fixture->existsSeminarMessage($this->seminarUid)
+            $this->subject->existsSeminarMessage($this->seminarUid)
         );
     }
 
@@ -8424,7 +8424,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function existsSeminarMessageForExistingUidNotSendsHttpHeader()
     {
-        $this->fixture->existsSeminarMessage($this->seminarUid);
+        $this->subject->existsSeminarMessage($this->seminarUid);
 
         self::assertSame(
             [],
@@ -8441,7 +8441,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function getPricesAvailableForUserForNoAutomaticPricesAndNoRegistrationsReturnsAllAvailablePrices()
     {
-        $this->fixture->setConfigurationValue('automaticSpecialPriceForSubsequentRegistrationsBySameUser', false);
+        $this->subject->setConfigurationValue('automaticSpecialPriceForSubsequentRegistrationsBySameUser', false);
 
         $userUid = $this->testingFramework->createFrontEndUser();
         /** @var \Tx_Seminars_Model_FrontEndUser $user */
@@ -8460,7 +8460,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
         $event = new \Tx_Seminars_OldModel_Event($eventUid);
 
-        $prices = $this->fixture->getPricesAvailableForUser($event, $user);
+        $prices = $this->subject->getPricesAvailableForUser($event, $user);
 
         static::assertSame(['regular', 'regular_board', 'special', 'special_board'], array_keys($prices));
     }
@@ -8470,7 +8470,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function getPricesAvailableForUserForNoAutomaticPricesAndOneRegistrationReturnsAllAvailablePrices()
     {
-        $this->fixture->setConfigurationValue('automaticSpecialPriceForSubsequentRegistrationsBySameUser', false);
+        $this->subject->setConfigurationValue('automaticSpecialPriceForSubsequentRegistrationsBySameUser', false);
 
         $userUid = $this->testingFramework->createFrontEndUser();
         /** @var \Tx_Seminars_Model_FrontEndUser $user */
@@ -8491,7 +8491,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
         $event = new \Tx_Seminars_OldModel_Event($eventUid);
 
-        $prices = $this->fixture->getPricesAvailableForUser($event, $user);
+        $prices = $this->subject->getPricesAvailableForUser($event, $user);
 
         static::assertSame(['regular', 'regular_board', 'special', 'special_board'], array_keys($prices));
     }
@@ -8501,7 +8501,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function getPricesAvailableForUserForAutomaticPricesAndNoRegistrationsRemovesSpecialPrices()
     {
-        $this->fixture->setConfigurationValue('automaticSpecialPriceForSubsequentRegistrationsBySameUser', true);
+        $this->subject->setConfigurationValue('automaticSpecialPriceForSubsequentRegistrationsBySameUser', true);
 
         $userUid = $this->testingFramework->createFrontEndUser();
         /** @var \Tx_Seminars_Model_FrontEndUser $user */
@@ -8520,7 +8520,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
         $event = new \Tx_Seminars_OldModel_Event($eventUid);
 
-        $prices = $this->fixture->getPricesAvailableForUser($event, $user);
+        $prices = $this->subject->getPricesAvailableForUser($event, $user);
 
         static::assertSame(['regular', 'regular_board'], array_keys($prices));
     }
@@ -8530,7 +8530,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function getPricesAvailableForUserForNoAutomaticPricesAndOneRegistrationRemovesRegularPrices()
     {
-        $this->fixture->setConfigurationValue('automaticSpecialPriceForSubsequentRegistrationsBySameUser', true);
+        $this->subject->setConfigurationValue('automaticSpecialPriceForSubsequentRegistrationsBySameUser', true);
 
         $userUid = $this->testingFramework->createFrontEndUser();
         /** @var \Tx_Seminars_Model_FrontEndUser $user */
@@ -8551,7 +8551,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
         $event = new \Tx_Seminars_OldModel_Event($eventUid);
 
-        $prices = $this->fixture->getPricesAvailableForUser($event, $user);
+        $prices = $this->subject->getPricesAvailableForUser($event, $user);
 
         static::assertSame(['special', 'special_board'], array_keys($prices));
     }
@@ -8561,7 +8561,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function getPricesAvailableForUserForNoAutomaticPricesAndOneRegistrationAndNoSpecialPriceKeepsRegularPrice()
     {
-        $this->fixture->setConfigurationValue('automaticSpecialPriceForSubsequentRegistrationsBySameUser', true);
+        $this->subject->setConfigurationValue('automaticSpecialPriceForSubsequentRegistrationsBySameUser', true);
 
         $userUid = $this->testingFramework->createFrontEndUser();
         /** @var \Tx_Seminars_Model_FrontEndUser $user */
@@ -8579,7 +8579,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
         $event = new \Tx_Seminars_OldModel_Event($eventUid);
 
-        $prices = $this->fixture->getPricesAvailableForUser($event, $user);
+        $prices = $this->subject->getPricesAvailableForUser($event, $user);
 
         static::assertSame(['regular', 'regular_board'], array_keys($prices));
     }

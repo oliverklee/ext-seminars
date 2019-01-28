@@ -10,7 +10,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_SpeakerTest extends \Tx_Phpunit_TestCase
     /**
      * @var \Tx_Seminars_BagBuilder_Speaker
      */
-    private $fixture;
+    private $subject;
 
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -21,8 +21,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_SpeakerTest extends \Tx_Phpunit_TestCase
     {
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
-        $this->fixture = new \Tx_Seminars_BagBuilder_Speaker();
-        $this->fixture->setTestMode();
+        $this->subject = new \Tx_Seminars_BagBuilder_Speaker();
+        $this->subject->setTestMode();
     }
 
     protected function tearDown()
@@ -36,6 +36,6 @@ class Tx_Seminars_Tests_Unit_BagBuilder_SpeakerTest extends \Tx_Phpunit_TestCase
 
     public function testBuilderBuildsABag()
     {
-        self::assertInstanceOf(\Tx_Seminars_Bag_Abstract::class, $this->fixture->build());
+        self::assertInstanceOf(\Tx_Seminars_Bag_Abstract::class, $this->subject->build());
     }
 }

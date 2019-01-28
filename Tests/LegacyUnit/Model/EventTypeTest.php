@@ -11,11 +11,11 @@ class Tx_Seminars_Tests_Unit_Model_EventTypeTest extends \Tx_Phpunit_TestCase
     /**
      * @var \Tx_Seminars_Model_EventType
      */
-    private $fixture;
+    private $subject;
 
     protected function setUp()
     {
-        $this->fixture = new \Tx_Seminars_Model_EventType();
+        $this->subject = new \Tx_Seminars_Model_EventType();
     }
 
     /**
@@ -28,7 +28,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTypeTest extends \Tx_Phpunit_TestCase
             'The parameter $title must not be empty.'
         );
 
-        $this->fixture->setTitle('');
+        $this->subject->setTitle('');
     }
 
     /**
@@ -36,11 +36,11 @@ class Tx_Seminars_Tests_Unit_Model_EventTypeTest extends \Tx_Phpunit_TestCase
      */
     public function setTitleSetsTitle()
     {
-        $this->fixture->setTitle('Workshop');
+        $this->subject->setTitle('Workshop');
 
         self::assertEquals(
             'Workshop',
-            $this->fixture->getTitle()
+            $this->subject->getTitle()
         );
     }
 
@@ -49,11 +49,11 @@ class Tx_Seminars_Tests_Unit_Model_EventTypeTest extends \Tx_Phpunit_TestCase
      */
     public function getTitleWithNonEmptyTitleReturnsTitle()
     {
-        $this->fixture->setData(['title' => 'Workshop']);
+        $this->subject->setData(['title' => 'Workshop']);
 
         self::assertEquals(
             'Workshop',
-            $this->fixture->getTitle()
+            $this->subject->getTitle()
         );
     }
 
@@ -66,11 +66,11 @@ class Tx_Seminars_Tests_Unit_Model_EventTypeTest extends \Tx_Phpunit_TestCase
      */
     public function getSingleViewPageUidReturnsSingleViewPageUid()
     {
-        $this->fixture->setData(['single_view_page' => 42]);
+        $this->subject->setData(['single_view_page' => 42]);
 
         self::assertEquals(
             42,
-            $this->fixture->getSingleViewPageUid()
+            $this->subject->getSingleViewPageUid()
         );
     }
 
@@ -79,10 +79,10 @@ class Tx_Seminars_Tests_Unit_Model_EventTypeTest extends \Tx_Phpunit_TestCase
      */
     public function hasSingleViewPageUidForZeroPageUidReturnsFalse()
     {
-        $this->fixture->setData(['single_view_page' => 0]);
+        $this->subject->setData(['single_view_page' => 0]);
 
         self::assertFalse(
-            $this->fixture->hasSingleViewPageUid()
+            $this->subject->hasSingleViewPageUid()
         );
     }
 
@@ -91,10 +91,10 @@ class Tx_Seminars_Tests_Unit_Model_EventTypeTest extends \Tx_Phpunit_TestCase
      */
     public function hasSingleViewPageUidForNonZeroPageUidReturnsTrue()
     {
-        $this->fixture->setData(['single_view_page' => 42]);
+        $this->subject->setData(['single_view_page' => 42]);
 
         self::assertTrue(
-            $this->fixture->hasSingleViewPageUid()
+            $this->subject->hasSingleViewPageUid()
         );
     }
 }

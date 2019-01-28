@@ -11,7 +11,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CountdownTest extends \Tx_Phpunit_TestCase
     /**
      * @var \Tx_Seminars_FrontEnd_Countdown
      */
-    private $fixture = null;
+    private $subject = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -42,7 +42,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CountdownTest extends \Tx_Phpunit_TestCase
 
         $this->mapper = $this->getMock(\Tx_Seminars_Mapper_Event::class, ['findNextUpcoming']);
 
-        $this->fixture = new \Tx_Seminars_FrontEnd_Countdown(
+        $this->subject = new \Tx_Seminars_FrontEnd_Countdown(
             [
                 'isStaticTemplateLoaded' => 1,
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
@@ -67,7 +67,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CountdownTest extends \Tx_Phpunit_TestCase
      */
     public function fixtureIsAFrontEndCountdownObject()
     {
-        self::assertInstanceOf(\Tx_Seminars_FrontEnd_Countdown::class, $this->fixture);
+        self::assertInstanceOf(\Tx_Seminars_FrontEnd_Countdown::class, $this->subject);
     }
 
     ////////////////////////////////
@@ -82,7 +82,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CountdownTest extends \Tx_Phpunit_TestCase
      */
     public function renderWithoutCallingInjectEventMapperFirstThrowsBadMethodCallException()
     {
-        $this->fixture->render();
+        $this->subject->render();
     }
 
     /**
@@ -90,14 +90,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CountdownTest extends \Tx_Phpunit_TestCase
      */
     public function renderWithMapperFindNextUpcomingThrowingEmptyQueryResultExceptionReturnsNoEventsFoundMessage()
     {
-        $this->fixture->injectEventMapper($this->mapper);
+        $this->subject->injectEventMapper($this->mapper);
         $this->mapper->expects(self::once())
             ->method('findNextUpcoming')
             ->will(self::throwException(new \Tx_Oelib_Exception_NotFound()));
 
         self::assertContains(
             'There are no upcoming events. Please come back later.',
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 
@@ -106,7 +106,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CountdownTest extends \Tx_Phpunit_TestCase
      */
     public function renderCallsRenderMethodOfCountdownViewHelperWithNextUpcomingEventsBeginDateAsUnixTimeStamp()
     {
-        $this->fixture->injectEventMapper($this->mapper);
+        $this->subject->injectEventMapper($this->mapper);
         /** @var \Tx_Seminars_Model_Event $event */
         $event = $this->mapper->getLoadedTestingModel(
             [
@@ -126,8 +126,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CountdownTest extends \Tx_Phpunit_TestCase
             ->method('render')
             ->with(self::equalTo($event->getBeginDateAsUnixTimeStamp()));
 
-        $this->fixture->injectCountDownViewHelper($this->viewHelper);
+        $this->subject->injectCountDownViewHelper($this->viewHelper);
 
-        $this->fixture->render();
+        $this->subject->render();
     }
 }

@@ -10,11 +10,11 @@ class Tx_Seminars_Tests_Unit_Model_PaymentMethodTest extends \Tx_Phpunit_TestCas
     /**
      * @var \Tx_Seminars_Model_PaymentMethod
      */
-    private $fixture;
+    private $subject;
 
     protected function setUp()
     {
-        $this->fixture = new \Tx_Seminars_Model_PaymentMethod();
+        $this->subject = new \Tx_Seminars_Model_PaymentMethod();
     }
 
     /**
@@ -27,7 +27,7 @@ class Tx_Seminars_Tests_Unit_Model_PaymentMethodTest extends \Tx_Phpunit_TestCas
             'The parameter $title must not be empty.'
         );
 
-        $this->fixture->setTitle('');
+        $this->subject->setTitle('');
     }
 
     /**
@@ -35,11 +35,11 @@ class Tx_Seminars_Tests_Unit_Model_PaymentMethodTest extends \Tx_Phpunit_TestCas
      */
     public function setTitleSetsTitle()
     {
-        $this->fixture->setTitle('Cash');
+        $this->subject->setTitle('Cash');
 
         self::assertEquals(
             'Cash',
-            $this->fixture->getTitle()
+            $this->subject->getTitle()
         );
     }
 
@@ -48,11 +48,11 @@ class Tx_Seminars_Tests_Unit_Model_PaymentMethodTest extends \Tx_Phpunit_TestCas
      */
     public function getTitleWithNonEmptyTitleReturnsTitle()
     {
-        $this->fixture->setData(['title' => 'Cash']);
+        $this->subject->setData(['title' => 'Cash']);
 
         self::assertEquals(
             'Cash',
-            $this->fixture->getTitle()
+            $this->subject->getTitle()
         );
     }
 
@@ -65,11 +65,11 @@ class Tx_Seminars_Tests_Unit_Model_PaymentMethodTest extends \Tx_Phpunit_TestCas
      */
     public function getDescriptionWithoutDescriptionReturnsAnEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getDescription()
+            $this->subject->getDescription()
         );
     }
 
@@ -78,11 +78,11 @@ class Tx_Seminars_Tests_Unit_Model_PaymentMethodTest extends \Tx_Phpunit_TestCas
      */
     public function getDescriptionWithDescriptionReturnsDescription()
     {
-        $this->fixture->setData(['description' => 'Just plain cash, baby!']);
+        $this->subject->setData(['description' => 'Just plain cash, baby!']);
 
         self::assertEquals(
             'Just plain cash, baby!',
-            $this->fixture->getDescription()
+            $this->subject->getDescription()
         );
     }
 
@@ -91,11 +91,11 @@ class Tx_Seminars_Tests_Unit_Model_PaymentMethodTest extends \Tx_Phpunit_TestCas
      */
     public function setDescriptionSetsDescription()
     {
-        $this->fixture->setDescription('Just plain cash, baby!');
+        $this->subject->setDescription('Just plain cash, baby!');
 
         self::assertEquals(
             'Just plain cash, baby!',
-            $this->fixture->getDescription()
+            $this->subject->getDescription()
         );
     }
 
@@ -104,10 +104,10 @@ class Tx_Seminars_Tests_Unit_Model_PaymentMethodTest extends \Tx_Phpunit_TestCas
      */
     public function hasDescriptionWithoutDescriptionReturnsFalse()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertFalse(
-            $this->fixture->hasDescription()
+            $this->subject->hasDescription()
         );
     }
 
@@ -116,10 +116,10 @@ class Tx_Seminars_Tests_Unit_Model_PaymentMethodTest extends \Tx_Phpunit_TestCas
      */
     public function hasDescriptionWithDescriptionReturnsTrue()
     {
-        $this->fixture->setDescription('Just plain cash, baby!');
+        $this->subject->setDescription('Just plain cash, baby!');
 
         self::assertTrue(
-            $this->fixture->hasDescription()
+            $this->subject->hasDescription()
         );
     }
 }

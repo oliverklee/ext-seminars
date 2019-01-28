@@ -18,7 +18,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_SpeakersListTest extends \Tx_Phpunit_TestCa
     /**
      * @var SpeakersList
      */
-    private $fixture;
+    private $subject;
 
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -55,7 +55,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_SpeakersListTest extends \Tx_Phpunit_TestCa
         $document = new DocumentTemplate();
         $this->backEndModule->doc = $document;
 
-        $this->fixture = new SpeakersList($this->backEndModule);
+        $this->subject = new SpeakersList($this->backEndModule);
     }
 
     protected function tearDown()
@@ -79,7 +79,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_SpeakersListTest extends \Tx_Phpunit_TestCa
 
         self::assertContains(
             'Icons/Hide.gif',
-            $this->fixture->show()
+            $this->subject->show()
         );
     }
 
@@ -98,7 +98,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_SpeakersListTest extends \Tx_Phpunit_TestCa
 
         self::assertContains(
             'Icons/Unhide.gif',
-            $this->fixture->show()
+            $this->subject->show()
         );
     }
 
@@ -120,7 +120,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_SpeakersListTest extends \Tx_Phpunit_TestCa
 
         self::assertContains(
             'Speaker in subfolder',
-            $this->fixture->show()
+            $this->subject->show()
         );
     }
 
@@ -147,7 +147,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_SpeakersListTest extends \Tx_Phpunit_TestCa
 
         self::assertContains(
             'edit[tx_seminars_speakers][' . $newSpeakerFolder . ']=new',
-            $this->fixture->show()
+            $this->subject->show()
         );
     }
 }

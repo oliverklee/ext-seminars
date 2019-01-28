@@ -15,13 +15,13 @@ class Tx_Seminars_Tests_Unit_Mapper_FoodTest extends \Tx_Phpunit_TestCase
     /**
      * @var \Tx_Seminars_Mapper_Food
      */
-    private $fixture;
+    private $subject;
 
     protected function setUp()
     {
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
-        $this->fixture = new \Tx_Seminars_Mapper_Food();
+        $this->subject = new \Tx_Seminars_Mapper_Food();
     }
 
     protected function tearDown()
@@ -38,7 +38,7 @@ class Tx_Seminars_Tests_Unit_Mapper_FoodTest extends \Tx_Phpunit_TestCase
      */
     public function findWithUidReturnsFoodInstance()
     {
-        self::assertInstanceOf(\Tx_Seminars_Model_Food::class, $this->fixture->find(1));
+        self::assertInstanceOf(\Tx_Seminars_Model_Food::class, $this->subject->find(1));
     }
 
     /**
@@ -52,7 +52,7 @@ class Tx_Seminars_Tests_Unit_Mapper_FoodTest extends \Tx_Phpunit_TestCase
         );
 
         /** @var \Tx_Seminars_Model_Food $model */
-        $model = $this->fixture->find($uid);
+        $model = $this->subject->find($uid);
         self::assertEquals(
             'Crunchy crisps',
             $model->getTitle()

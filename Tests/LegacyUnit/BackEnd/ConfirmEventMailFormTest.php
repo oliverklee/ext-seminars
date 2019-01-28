@@ -17,7 +17,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends \Tx_Phpuni
     /**
      * @var ConfirmEventMailForm
      */
-    private $fixture;
+    private $subject;
 
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -89,7 +89,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends \Tx_Phpuni
             'organizers'
         );
 
-        $this->fixture = new ConfirmEventMailForm($this->eventUid);
+        $this->subject = new ConfirmEventMailForm($this->eventUid);
     }
 
     protected function tearDown()
@@ -111,7 +111,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends \Tx_Phpuni
             '<button class="submitButton confirmEvent"><p>' .
             $GLOBALS['LANG']->getLL('confirmMailForm_sendButton') .
             '</p></button>',
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 
@@ -120,7 +120,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends \Tx_Phpuni
      */
     public function renderContainsPrefilledBodyFieldWithLocalizedSalutation()
     {
-        self::assertContains('salutation', $this->fixture->render());
+        self::assertContains('salutation', $this->subject->render());
     }
 
     /**
@@ -130,7 +130,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends \Tx_Phpuni
     {
         self::assertContains(
             '<input type="hidden" name="action" value="confirmEvent" />',
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 
@@ -158,7 +158,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends \Tx_Phpuni
      */
     public function setEventStatusSetsStatusToConfirmed()
     {
-        $this->fixture->setPostData(
+        $this->subject->setPostData(
             [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
@@ -166,7 +166,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends \Tx_Phpuni
                 'messageBody' => 'foo bar',
             ]
         );
-        $this->fixture->render();
+        $this->subject->render();
 
         self::assertTrue(
             $this->testingFramework->existsRecord(
@@ -185,7 +185,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends \Tx_Phpuni
         $this->mockBackEndUser->expects(self::atLeastOnce())->method('setAndSaveSessionData')
             ->with(self::anything(), self::anything());
 
-        $this->fixture->setPostData(
+        $this->subject->setPostData(
             [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
@@ -193,7 +193,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends \Tx_Phpuni
                 'messageBody' => 'foo bar',
             ]
         );
-        $this->fixture->render();
+        $this->subject->render();
     }
 
     /////////////////////////////////
@@ -219,7 +219,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends \Tx_Phpuni
 
         $messageBody = '%salutation' . $GLOBALS['LANG']->getLL('cancelMailForm_prefillField_messageBody');
 
-        $this->fixture->setPostData(
+        $this->subject->setPostData(
             [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
@@ -227,7 +227,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends \Tx_Phpuni
                 'messageBody' => $messageBody,
             ]
         );
-        $this->fixture->render();
+        $this->subject->render();
 
         self::assertContains(
             'foo User',
@@ -262,7 +262,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends \Tx_Phpuni
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['backEndModule'][$hookClass] = $hookClass;
         GeneralUtility::addInstance($hookClass, $hook);
 
-        $this->fixture->setPostData(
+        $this->subject->setPostData(
             [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
@@ -270,7 +270,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends \Tx_Phpuni
                 'messageBody' => 'some message body',
             ]
         );
-        $this->fixture->render();
+        $this->subject->render();
     }
 
     /**
@@ -308,7 +308,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends \Tx_Phpuni
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['backEndModule'][$hookClass] = $hookClass;
         GeneralUtility::addInstance($hookClass, $hook);
 
-        $this->fixture->setPostData(
+        $this->subject->setPostData(
             [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
@@ -316,6 +316,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends \Tx_Phpuni
                 'messageBody' => 'some message body',
             ]
         );
-        $this->fixture->render();
+        $this->subject->render();
     }
 }

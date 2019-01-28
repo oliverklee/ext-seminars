@@ -10,11 +10,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
     /**
      * @var \Tx_Seminars_Model_Speaker
      */
-    private $fixture;
+    private $subject;
 
     protected function setUp()
     {
-        $this->fixture = new \Tx_Seminars_Model_Speaker();
+        $this->subject = new \Tx_Seminars_Model_Speaker();
     }
 
     ///////////////////////////////
@@ -31,7 +31,7 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
             'The parameter $name must not be empty.'
         );
 
-        $this->fixture->setName('');
+        $this->subject->setName('');
     }
 
     /**
@@ -39,11 +39,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function setNameSetsName()
     {
-        $this->fixture->setName('John Doe');
+        $this->subject->setName('John Doe');
 
         self::assertEquals(
             'John Doe',
-            $this->fixture->getName()
+            $this->subject->getName()
         );
     }
 
@@ -52,11 +52,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function getNameWithNonEmptyNameReturnsName()
     {
-        $this->fixture->setData(['title' => 'John Doe']);
+        $this->subject->setData(['title' => 'John Doe']);
 
         self::assertEquals(
             'John Doe',
-            $this->fixture->getName()
+            $this->subject->getName()
         );
     }
 
@@ -69,11 +69,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function getOrganizationWithoutOrganizationReturnsAnEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getOrganization()
+            $this->subject->getOrganization()
         );
     }
 
@@ -82,11 +82,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function getOrganizationWithNonEmptyOrganizationReturnsOrganization()
     {
-        $this->fixture->setData(['organization' => 'Happy organization']);
+        $this->subject->setData(['organization' => 'Happy organization']);
 
         self::assertEquals(
             'Happy organization',
-            $this->fixture->getOrganization()
+            $this->subject->getOrganization()
         );
     }
 
@@ -95,11 +95,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function setOrganizationSetsOrganization()
     {
-        $this->fixture->setOrganization('Happy organization');
+        $this->subject->setOrganization('Happy organization');
 
         self::assertEquals(
             'Happy organization',
-            $this->fixture->getOrganization()
+            $this->subject->getOrganization()
         );
     }
 
@@ -108,10 +108,10 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function hasOrganizationWithoutOrganizationReturnsFalse()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertFalse(
-            $this->fixture->hasOrganization()
+            $this->subject->hasOrganization()
         );
     }
 
@@ -120,10 +120,10 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function hasOrganizationWithNonEmptyOrganizationReturnsTrue()
     {
-        $this->fixture->setOrganization('Happy organization');
+        $this->subject->setOrganization('Happy organization');
 
         self::assertTrue(
-            $this->fixture->hasOrganization()
+            $this->subject->hasOrganization()
         );
     }
 
@@ -136,11 +136,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function getHomepageWithoutHomepageReturnsAnEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getHomepage()
+            $this->subject->getHomepage()
         );
     }
 
@@ -149,11 +149,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function getHomepageWithNonEmptyHomepageReturnsHomepage()
     {
-        $this->fixture->setData(['homepage' => 'http://example.com']);
+        $this->subject->setData(['homepage' => 'http://example.com']);
 
         self::assertEquals(
             'http://example.com',
-            $this->fixture->getHomepage()
+            $this->subject->getHomepage()
         );
     }
 
@@ -162,11 +162,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function setHomepageSetsHomepage()
     {
-        $this->fixture->setHomepage('http://example.com');
+        $this->subject->setHomepage('http://example.com');
 
         self::assertEquals(
             'http://example.com',
-            $this->fixture->getHomepage()
+            $this->subject->getHomepage()
         );
     }
 
@@ -175,10 +175,10 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function hasHomepageWithoutHomepageReturnsFalse()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertFalse(
-            $this->fixture->hasHomepage()
+            $this->subject->hasHomepage()
         );
     }
 
@@ -187,10 +187,10 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function hasHomepageWithNonEmptyHomepageReturnsTrue()
     {
-        $this->fixture->setHomepage('http://example.com');
+        $this->subject->setHomepage('http://example.com');
 
         self::assertTrue(
-            $this->fixture->hasHomepage()
+            $this->subject->hasHomepage()
         );
     }
 
@@ -203,11 +203,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function getDescriptionWithoutDescriptionReturnsAnEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getDescription()
+            $this->subject->getDescription()
         );
     }
 
@@ -216,11 +216,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function getDescriptionWithDescriptionReturnsDescription()
     {
-        $this->fixture->setData(['description' => 'This is a good speaker.']);
+        $this->subject->setData(['description' => 'This is a good speaker.']);
 
         self::assertEquals(
             'This is a good speaker.',
-            $this->fixture->getDescription()
+            $this->subject->getDescription()
         );
     }
 
@@ -229,11 +229,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function setDescriptionSetsDescription()
     {
-        $this->fixture->setDescription('This is a good speaker.');
+        $this->subject->setDescription('This is a good speaker.');
 
         self::assertEquals(
             'This is a good speaker.',
-            $this->fixture->getDescription()
+            $this->subject->getDescription()
         );
     }
 
@@ -242,10 +242,10 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function hasDescriptionWithoutDescriptionReturnsFalse()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertFalse(
-            $this->fixture->hasDescription()
+            $this->subject->hasDescription()
         );
     }
 
@@ -254,10 +254,10 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function hasDescriptionWithDescriptionReturnsTrue()
     {
-        $this->fixture->setDescription('This is a good speaker.');
+        $this->subject->setDescription('This is a good speaker.');
 
         self::assertTrue(
-            $this->fixture->hasDescription()
+            $this->subject->hasDescription()
         );
     }
 
@@ -270,11 +270,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function getAddressWithoutAddressReturnsAnEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getAddress()
+            $this->subject->getAddress()
         );
     }
 
@@ -283,11 +283,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function getAddressWithNonEmptyAddressReturnsAddress()
     {
-        $this->fixture->setData(['address' => 'Backstreet 42']);
+        $this->subject->setData(['address' => 'Backstreet 42']);
 
         self::assertEquals(
             'Backstreet 42',
-            $this->fixture->getAddress()
+            $this->subject->getAddress()
         );
     }
 
@@ -296,11 +296,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function setAddressSetsAddress()
     {
-        $this->fixture->setAddress('Backstreet 42');
+        $this->subject->setAddress('Backstreet 42');
 
         self::assertEquals(
             'Backstreet 42',
-            $this->fixture->getAddress()
+            $this->subject->getAddress()
         );
     }
 
@@ -309,10 +309,10 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function hasAddressWithoutAddressReturnsFalse()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertFalse(
-            $this->fixture->hasAddress()
+            $this->subject->hasAddress()
         );
     }
 
@@ -321,10 +321,10 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function hasAddressWithNonEmptyAddressReturnsTrue()
     {
-        $this->fixture->setAddress('Backstreet 42');
+        $this->subject->setAddress('Backstreet 42');
 
         self::assertTrue(
-            $this->fixture->hasAddress()
+            $this->subject->hasAddress()
         );
     }
 
@@ -337,11 +337,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function getPhoneWorkWithoutPhoneWorkReturnsAnEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getPhoneWork()
+            $this->subject->getPhoneWork()
         );
     }
 
@@ -350,11 +350,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function getPhoneWorkWithPhoneWorkReturnsPhoneWork()
     {
-        $this->fixture->setData(['phone_work' => '12345']);
+        $this->subject->setData(['phone_work' => '12345']);
 
         self::assertEquals(
             '12345',
-            $this->fixture->getPhoneWork()
+            $this->subject->getPhoneWork()
         );
     }
 
@@ -363,11 +363,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function setPhoneWorkSetsPhoneWork()
     {
-        $this->fixture->setPhoneWork('12345');
+        $this->subject->setPhoneWork('12345');
 
         self::assertEquals(
             '12345',
-            $this->fixture->getPhoneWork()
+            $this->subject->getPhoneWork()
         );
     }
 
@@ -376,10 +376,10 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function hasPhoneWorkWithoutPhoneWorkReturnsFalse()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertFalse(
-            $this->fixture->hasPhoneWork()
+            $this->subject->hasPhoneWork()
         );
     }
 
@@ -388,10 +388,10 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function hasPhoneWorkWithPhoneWorkReturnsTrue()
     {
-        $this->fixture->setPhoneWork('12345');
+        $this->subject->setPhoneWork('12345');
 
         self::assertTrue(
-            $this->fixture->hasPhoneWork()
+            $this->subject->hasPhoneWork()
         );
     }
 
@@ -404,11 +404,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function getPhoneHomeWithoutPhoneHomeReturnsAnEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getPhoneHome()
+            $this->subject->getPhoneHome()
         );
     }
 
@@ -417,11 +417,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function getPhoneHomeWithPhoneHomeReturnsPhoneHome()
     {
-        $this->fixture->setData(['phone_home' => '12345']);
+        $this->subject->setData(['phone_home' => '12345']);
 
         self::assertEquals(
             '12345',
-            $this->fixture->getPhoneHome()
+            $this->subject->getPhoneHome()
         );
     }
 
@@ -430,11 +430,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function setPhoneHomeSetsPhoneHome()
     {
-        $this->fixture->setPhoneHome('12345');
+        $this->subject->setPhoneHome('12345');
 
         self::assertEquals(
             '12345',
-            $this->fixture->getPhoneHome()
+            $this->subject->getPhoneHome()
         );
     }
 
@@ -443,10 +443,10 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function hasPhoneHomeWithoutPhoneHomeReturnsFalse()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertFalse(
-            $this->fixture->hasPhoneHome()
+            $this->subject->hasPhoneHome()
         );
     }
 
@@ -455,10 +455,10 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function hasPhoneHomeWithPhoneHomeReturnsTrue()
     {
-        $this->fixture->setPhoneHome('12345');
+        $this->subject->setPhoneHome('12345');
 
         self::assertTrue(
-            $this->fixture->hasPhoneHome()
+            $this->subject->hasPhoneHome()
         );
     }
 
@@ -471,11 +471,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function getPhoneMobileWithoutPhoneMobileReturnsAnEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getPhoneMobile()
+            $this->subject->getPhoneMobile()
         );
     }
 
@@ -484,11 +484,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function getPhoneMobileWithPhoneMobileReturnsPhoneMobile()
     {
-        $this->fixture->setData(['phone_mobile' => '12345']);
+        $this->subject->setData(['phone_mobile' => '12345']);
 
         self::assertEquals(
             '12345',
-            $this->fixture->getPhoneMobile()
+            $this->subject->getPhoneMobile()
         );
     }
 
@@ -497,11 +497,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function setPhoneMobileSetsPhoneMobile()
     {
-        $this->fixture->setPhoneMobile('12345');
+        $this->subject->setPhoneMobile('12345');
 
         self::assertEquals(
             '12345',
-            $this->fixture->getPhoneMobile()
+            $this->subject->getPhoneMobile()
         );
     }
 
@@ -510,10 +510,10 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function hasPhoneMobileWithoutPhoneMobileReturnsFalse()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertFalse(
-            $this->fixture->hasPhoneMobile()
+            $this->subject->hasPhoneMobile()
         );
     }
 
@@ -522,10 +522,10 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function hasPhoneMobileWithPhoneMobileReturnsTrue()
     {
-        $this->fixture->setPhoneMobile('12345');
+        $this->subject->setPhoneMobile('12345');
 
         self::assertTrue(
-            $this->fixture->hasPhoneMobile()
+            $this->subject->hasPhoneMobile()
         );
     }
 
@@ -538,11 +538,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function getFaxWithoutFaxReturnsAnEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getFax()
+            $this->subject->getFax()
         );
     }
 
@@ -551,11 +551,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function getFaxWithFaxReturnsFax()
     {
-        $this->fixture->setData(['fax' => '12345']);
+        $this->subject->setData(['fax' => '12345']);
 
         self::assertEquals(
             '12345',
-            $this->fixture->getFax()
+            $this->subject->getFax()
         );
     }
 
@@ -564,11 +564,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function setFaxSetsFax()
     {
-        $this->fixture->setFax('12345');
+        $this->subject->setFax('12345');
 
         self::assertEquals(
             '12345',
-            $this->fixture->getFax()
+            $this->subject->getFax()
         );
     }
 
@@ -577,10 +577,10 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function hasFaxWithoutFaxReturnsFalse()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertFalse(
-            $this->fixture->hasFax()
+            $this->subject->hasFax()
         );
     }
 
@@ -589,10 +589,10 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function hasFaxWithFaxReturnsTrue()
     {
-        $this->fixture->setFax('12345');
+        $this->subject->setFax('12345');
 
         self::assertTrue(
-            $this->fixture->hasFax()
+            $this->subject->hasFax()
         );
     }
 
@@ -605,11 +605,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function getEMailAddressWithoutEMailAddressReturnsAnEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getEMailAddress()
+            $this->subject->getEMailAddress()
         );
     }
 
@@ -618,11 +618,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function getEMailAddressWithNonEmptyEMailAddressReturnsEMailAddress()
     {
-        $this->fixture->setData(['email' => 'mail@example.com']);
+        $this->subject->setData(['email' => 'mail@example.com']);
 
         self::assertEquals(
             'mail@example.com',
-            $this->fixture->getEMailAddress()
+            $this->subject->getEMailAddress()
         );
     }
 
@@ -631,11 +631,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function setEMailAddressSetsEMailAddress()
     {
-        $this->fixture->setEMailAddress('mail@example.com');
+        $this->subject->setEMailAddress('mail@example.com');
 
         self::assertEquals(
             'mail@example.com',
-            $this->fixture->getEMailAddress()
+            $this->subject->getEMailAddress()
         );
     }
 
@@ -644,10 +644,10 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function hasEMailAddressWithoutEMailAddressReturnsFalse()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertFalse(
-            $this->fixture->hasEMailAddress()
+            $this->subject->hasEMailAddress()
         );
     }
 
@@ -656,10 +656,10 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function hasEMailAddressWithEMailAddressReturnsTrue()
     {
-        $this->fixture->setEMailAddress('mail@example.com');
+        $this->subject->setEMailAddress('mail@example.com');
 
         self::assertTrue(
-            $this->fixture->hasEMailAddress()
+            $this->subject->hasEMailAddress()
         );
     }
 
@@ -672,11 +672,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function getGenderWithoutGenderReturnsUnknownGender()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             \Tx_Seminars_Model_Speaker::GENDER_UNKNOWN,
-            $this->fixture->getGender()
+            $this->subject->getGender()
         );
     }
 
@@ -685,13 +685,13 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function getGenderWithGenderMaleReturnsMaleGender()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['gender' => \Tx_Seminars_Model_Speaker::GENDER_MALE]
         );
 
         self::assertEquals(
             \Tx_Seminars_Model_Speaker::GENDER_MALE,
-            $this->fixture->getGender()
+            $this->subject->getGender()
         );
     }
 
@@ -700,13 +700,13 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function getGenderWithGenderFemaleReturnsFemaleGender()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['gender' => \Tx_Seminars_Model_Speaker::GENDER_FEMALE]
         );
 
         self::assertEquals(
             \Tx_Seminars_Model_Speaker::GENDER_FEMALE,
-            $this->fixture->getGender()
+            $this->subject->getGender()
         );
     }
 
@@ -715,11 +715,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function setGenderSetsGender()
     {
-        $this->fixture->setGender(\Tx_Seminars_Model_Speaker::GENDER_MALE);
+        $this->subject->setGender(\Tx_Seminars_Model_Speaker::GENDER_MALE);
 
         self::assertEquals(
             \Tx_Seminars_Model_Speaker::GENDER_MALE,
-            $this->fixture->getGender()
+            $this->subject->getGender()
         );
     }
 
@@ -728,10 +728,10 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function hasGenderWithoutGenderReturnsFalse()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertFalse(
-            $this->fixture->hasGender()
+            $this->subject->hasGender()
         );
     }
 
@@ -740,10 +740,10 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function hasGenderWithGenderMaleReturnsTrue()
     {
-        $this->fixture->setGender(\Tx_Seminars_Model_Speaker::GENDER_MALE);
+        $this->subject->setGender(\Tx_Seminars_Model_Speaker::GENDER_MALE);
 
         self::assertTrue(
-            $this->fixture->hasGender()
+            $this->subject->hasGender()
         );
     }
 
@@ -752,10 +752,10 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function hasGenderWithGenderFemaleReturnsTrue()
     {
-        $this->fixture->setGender(\Tx_Seminars_Model_Speaker::GENDER_FEMALE);
+        $this->subject->setGender(\Tx_Seminars_Model_Speaker::GENDER_FEMALE);
 
         self::assertTrue(
-            $this->fixture->hasGender()
+            $this->subject->hasGender()
         );
     }
 
@@ -768,11 +768,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function getNotesWithoutNotesReturnsAnEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getNotes()
+            $this->subject->getNotes()
         );
     }
 
@@ -781,11 +781,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function getNotesWithNonEmptyNotesReturnsNotes()
     {
-        $this->fixture->setData(['notes' => 'Nothing of interest.']);
+        $this->subject->setData(['notes' => 'Nothing of interest.']);
 
         self::assertEquals(
             'Nothing of interest.',
-            $this->fixture->getNotes()
+            $this->subject->getNotes()
         );
     }
 
@@ -794,11 +794,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
      */
     public function setNotesSetsNotes()
     {
-        $this->fixture->setNotes('Nothing of interest.');
+        $this->subject->setNotes('Nothing of interest.');
 
         self::assertEquals(
             'Nothing of interest.',
-            $this->fixture->getNotes()
+            $this->subject->getNotes()
         );
     }
 
@@ -812,11 +812,11 @@ class Tx_Seminars_Tests_Unit_Model_SpeakerTest extends \Tx_Phpunit_TestCase
     public function setSkillsSetsSkills()
     {
         $skills = new \Tx_Oelib_List();
-        $this->fixture->setSkills($skills);
+        $this->subject->setSkills($skills);
 
         self::assertSame(
             $skills,
-            $this->fixture->getSkills()
+            $this->subject->getSkills()
         );
     }
 }

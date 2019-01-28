@@ -15,13 +15,13 @@ class Tx_Seminars_Tests_Unit_Mapper_CheckboxTest extends \Tx_Phpunit_TestCase
     /**
      * @var \Tx_Seminars_Mapper_Checkbox
      */
-    private $fixture;
+    private $subject;
 
     protected function setUp()
     {
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
-        $this->fixture = new \Tx_Seminars_Mapper_Checkbox();
+        $this->subject = new \Tx_Seminars_Mapper_Checkbox();
     }
 
     protected function tearDown()
@@ -38,7 +38,7 @@ class Tx_Seminars_Tests_Unit_Mapper_CheckboxTest extends \Tx_Phpunit_TestCase
      */
     public function findWithUidReturnsCheckboxInstance()
     {
-        self::assertInstanceOf(\Tx_Seminars_Model_Checkbox::class, $this->fixture->find(1));
+        self::assertInstanceOf(\Tx_Seminars_Model_Checkbox::class, $this->subject->find(1));
     }
 
     /**
@@ -51,7 +51,7 @@ class Tx_Seminars_Tests_Unit_Mapper_CheckboxTest extends \Tx_Phpunit_TestCase
             ['title' => 'I agree with the T&C.']
         );
         /** @var \Tx_Seminars_Model_Checkbox $model */
-        $model = $this->fixture->find($uid);
+        $model = $this->subject->find($uid);
 
         self::assertEquals(
             'I agree with the T&C.',
@@ -69,7 +69,7 @@ class Tx_Seminars_Tests_Unit_Mapper_CheckboxTest extends \Tx_Phpunit_TestCase
     public function getOwnerWithoutOwnerReturnsNull()
     {
         /** @var \Tx_Seminars_Model_Checkbox $model */
-        $model = $this->fixture->getLoadedTestingModel([]);
+        $model = $this->subject->getLoadedTestingModel([]);
 
         self::assertNull($model->getOwner());
     }
@@ -82,7 +82,7 @@ class Tx_Seminars_Tests_Unit_Mapper_CheckboxTest extends \Tx_Phpunit_TestCase
         $frontEndUser = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)
             ->getLoadedTestingModel([]);
         /** @var \Tx_Seminars_Model_Checkbox $model */
-        $model = $this->fixture->getLoadedTestingModel(['owner' => $frontEndUser->getUid()]);
+        $model = $this->subject->getLoadedTestingModel(['owner' => $frontEndUser->getUid()]);
 
         self::assertInstanceOf(\Tx_Seminars_Model_FrontEndUser::class, $model->getOwner());
     }

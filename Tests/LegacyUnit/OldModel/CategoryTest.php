@@ -10,7 +10,7 @@ class Tx_Seminars_Tests_Unit_OldModel_CategoryTest extends \Tx_Phpunit_TestCase
     /**
      * @var \Tx_Seminars_OldModel_Category
      */
-    private $fixture;
+    private $subject;
 
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -22,12 +22,12 @@ class Tx_Seminars_Tests_Unit_OldModel_CategoryTest extends \Tx_Phpunit_TestCase
      *
      * @var int
      */
-    private $fixtureUid = 0;
+    private $subjectUid = 0;
 
     protected function setUp()
     {
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
-        $this->fixtureUid = $this->testingFramework->createRecord(
+        $this->subjectUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
             ['title' => 'Test category']
         );
@@ -40,28 +40,28 @@ class Tx_Seminars_Tests_Unit_OldModel_CategoryTest extends \Tx_Phpunit_TestCase
 
     public function testCreateFromUid()
     {
-        $this->fixture = new \Tx_Seminars_OldModel_Category($this->fixtureUid);
+        $this->subject = new \Tx_Seminars_OldModel_Category($this->subjectUid);
 
         self::assertTrue(
-            $this->fixture->isOk()
+            $this->subject->isOk()
         );
     }
 
     public function testCreateFromUidFailsForInvalidUid()
     {
-        $this->fixture = new \Tx_Seminars_OldModel_Category($this->fixtureUid + 99);
+        $this->subject = new \Tx_Seminars_OldModel_Category($this->subjectUid + 99);
 
         self::assertFalse(
-            $this->fixture->isOk()
+            $this->subject->isOk()
         );
     }
 
     public function testCreateFromUidFailsForZeroUid()
     {
-        $this->fixture = new \Tx_Seminars_OldModel_Category(0);
+        $this->subject = new \Tx_Seminars_OldModel_Category(0);
 
         self::assertFalse(
-            $this->fixture->isOk()
+            $this->subject->isOk()
         );
     }
 
@@ -70,38 +70,38 @@ class Tx_Seminars_Tests_Unit_OldModel_CategoryTest extends \Tx_Phpunit_TestCase
         $dbResult = \Tx_Oelib_Db::select(
             '*',
             'tx_seminars_categories',
-            'uid = ' . $this->fixtureUid
+            'uid = ' . $this->subjectUid
         );
 
-        $this->fixture = new \Tx_Seminars_OldModel_Category(0, $dbResult);
+        $this->subject = new \Tx_Seminars_OldModel_Category(0, $dbResult);
 
         self::assertTrue(
-            $this->fixture->isOk()
+            $this->subject->isOk()
         );
     }
 
     public function testCreateFromDbResultFailsForNull()
     {
-        $this->fixture = new \Tx_Seminars_OldModel_Category(0, null);
+        $this->subject = new \Tx_Seminars_OldModel_Category(0, null);
 
         self::assertFalse(
-            $this->fixture->isOk()
+            $this->subject->isOk()
         );
     }
 
     public function testGetTitle()
     {
-        $this->fixture = new \Tx_Seminars_OldModel_Category($this->fixtureUid);
+        $this->subject = new \Tx_Seminars_OldModel_Category($this->subjectUid);
 
         self::assertEquals(
             'Test category',
-            $this->fixture->getTitle()
+            $this->subject->getTitle()
         );
     }
 
     public function testGetIconReturnsIcon()
     {
-        $this->fixture = new \Tx_Seminars_OldModel_Category(
+        $this->subject = new \Tx_Seminars_OldModel_Category(
             $this->testingFramework->createRecord(
                 'tx_seminars_categories',
                 [
@@ -113,17 +113,17 @@ class Tx_Seminars_Tests_Unit_OldModel_CategoryTest extends \Tx_Phpunit_TestCase
 
         self::assertEquals(
             'foo.gif',
-            $this->fixture->getIcon()
+            $this->subject->getIcon()
         );
     }
 
     public function testGetIconReturnsEmptyStringIfCategoryHasNoIcon()
     {
-        $this->fixture = new \Tx_Seminars_OldModel_Category($this->fixtureUid);
+        $this->subject = new \Tx_Seminars_OldModel_Category($this->subjectUid);
 
         self::assertEquals(
             '',
-            $this->fixture->getIcon()
+            $this->subject->getIcon()
         );
     }
 }

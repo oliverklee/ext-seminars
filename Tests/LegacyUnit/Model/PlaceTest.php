@@ -11,11 +11,11 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
     /**
      * @var \Tx_Seminars_Model_Place
      */
-    private $fixture;
+    private $subject;
 
     protected function setUp()
     {
-        $this->fixture = new \Tx_Seminars_Model_Place();
+        $this->subject = new \Tx_Seminars_Model_Place();
     }
 
     ///////////////////////////////
@@ -32,7 +32,7 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
             'The parameter $title must not be empty.'
         );
 
-        $this->fixture->setTitle('');
+        $this->subject->setTitle('');
     }
 
     /**
@@ -40,11 +40,11 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
      */
     public function setTitleSetsTitle()
     {
-        $this->fixture->setTitle('Nice place');
+        $this->subject->setTitle('Nice place');
 
         self::assertEquals(
             'Nice place',
-            $this->fixture->getTitle()
+            $this->subject->getTitle()
         );
     }
 
@@ -53,11 +53,11 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
      */
     public function getTitleWithNonEmptyTitleReturnsTitle()
     {
-        $this->fixture->setData(['title' => 'Nice place']);
+        $this->subject->setData(['title' => 'Nice place']);
 
         self::assertEquals(
             'Nice place',
-            $this->fixture->getTitle()
+            $this->subject->getTitle()
         );
     }
 
@@ -70,11 +70,11 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
      */
     public function getAddressWithoutAddressReturnsAnEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getAddress()
+            $this->subject->getAddress()
         );
     }
 
@@ -83,11 +83,11 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
      */
     public function getAddressWithNonEmptyAddressReturnsAddress()
     {
-        $this->fixture->setData(['address' => 'Backstreet 42']);
+        $this->subject->setData(['address' => 'Backstreet 42']);
 
         self::assertEquals(
             'Backstreet 42',
-            $this->fixture->getAddress()
+            $this->subject->getAddress()
         );
     }
 
@@ -96,11 +96,11 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
      */
     public function setAddressSetsAddress()
     {
-        $this->fixture->setAddress('Backstreet 42');
+        $this->subject->setAddress('Backstreet 42');
 
         self::assertEquals(
             'Backstreet 42',
-            $this->fixture->getAddress()
+            $this->subject->getAddress()
         );
     }
 
@@ -109,10 +109,10 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
      */
     public function hasAddressWithoutAddressReturnsFalse()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertFalse(
-            $this->fixture->hasAddress()
+            $this->subject->hasAddress()
         );
     }
 
@@ -121,10 +121,10 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
      */
     public function hasAddressWithNonEmptyAddressReturnsTrue()
     {
-        $this->fixture->setAddress('Backstreet 42');
+        $this->subject->setAddress('Backstreet 42');
 
         self::assertTrue(
-            $this->fixture->hasAddress()
+            $this->subject->hasAddress()
         );
     }
 
@@ -137,11 +137,11 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
      */
     public function getZipWithNonEmptyZipReturnsZip()
     {
-        $this->fixture->setData(['zip' => '13373']);
+        $this->subject->setData(['zip' => '13373']);
 
         self::assertEquals(
             '13373',
-            $this->fixture->getZip()
+            $this->subject->getZip()
         );
     }
 
@@ -150,11 +150,11 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
      */
     public function setZipSetsZip()
     {
-        $this->fixture->setZip('13373');
+        $this->subject->setZip('13373');
 
         self::assertEquals(
             '13373',
-            $this->fixture->getZip()
+            $this->subject->getZip()
         );
     }
 
@@ -163,10 +163,10 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
      */
     public function hasZipWithNonEmptyZipReturnsTrue()
     {
-        $this->fixture->setData(['zip' => '13373']);
+        $this->subject->setData(['zip' => '13373']);
 
         self::assertTrue(
-            $this->fixture->hasZip()
+            $this->subject->hasZip()
         );
     }
 
@@ -175,10 +175,10 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
      */
     public function hasZipWithEmptyZipReturnsFalse()
     {
-        $this->fixture->setData(['zip' => '']);
+        $this->subject->setData(['zip' => '']);
 
         self::assertFalse(
-            $this->fixture->hasZip()
+            $this->subject->hasZip()
         );
     }
 
@@ -196,7 +196,7 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
             'The parameter $city must not be empty.'
         );
 
-        $this->fixture->setCity('');
+        $this->subject->setCity('');
     }
 
     /**
@@ -204,11 +204,11 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
      */
     public function setCitySetsCity()
     {
-        $this->fixture->setCity('Hicksville');
+        $this->subject->setCity('Hicksville');
 
         self::assertEquals(
             'Hicksville',
-            $this->fixture->getCity()
+            $this->subject->getCity()
         );
     }
 
@@ -217,11 +217,11 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
      */
     public function getCityWithNonEmptyCityReturnsCity()
     {
-        $this->fixture->setData(['city' => 'Hicksville']);
+        $this->subject->setData(['city' => 'Hicksville']);
 
         self::assertEquals(
             'Hicksville',
-            $this->fixture->getCity()
+            $this->subject->getCity()
         );
     }
 
@@ -234,10 +234,10 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
      */
     public function getCountryWithoutCountryReturnsNull()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertNull(
-            $this->fixture->getCountry()
+            $this->subject->getCountry()
         );
     }
 
@@ -246,10 +246,10 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
      */
     public function getCountryWithInvalidCountryCodeReturnsNull()
     {
-        $this->fixture->setData(['country' => '0']);
+        $this->subject->setData(['country' => '0']);
 
         self::assertNull(
-            $this->fixture->getCountry()
+            $this->subject->getCountry()
         );
     }
 
@@ -262,11 +262,11 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
         $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_Country::class);
         /** @var \Tx_Oelib_Model_Country $country */
         $country = $mapper->find(54);
-        $this->fixture->setData(['country' => $country->getIsoAlpha2Code()]);
+        $this->subject->setData(['country' => $country->getIsoAlpha2Code()]);
 
         self::assertInstanceOf(
             \Tx_Oelib_Model_Country::class,
-            $this->fixture->getCountry()
+            $this->subject->getCountry()
         );
     }
 
@@ -279,11 +279,11 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
         $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_Country::class);
         /** @var \Tx_Oelib_Model_Country $country */
         $country = $mapper->find(54);
-        $this->fixture->setData(['country' => $country->getIsoAlpha2Code()]);
+        $this->subject->setData(['country' => $country->getIsoAlpha2Code()]);
 
         self::assertSame(
             $country,
-            $this->fixture->getCountry()
+            $this->subject->getCountry()
         );
     }
 
@@ -296,11 +296,11 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
         $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_Country::class);
         /** @var \Tx_Oelib_Model_Country $country */
         $country = $mapper->find(54);
-        $this->fixture->setCountry($country);
+        $this->subject->setCountry($country);
 
         self::assertSame(
             $country,
-            $this->fixture->getCountry()
+            $this->subject->getCountry()
         );
     }
 
@@ -309,10 +309,10 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
      */
     public function countryCanBeSetToNull()
     {
-        $this->fixture->setCountry();
+        $this->subject->setCountry();
 
         self::assertNull(
-            $this->fixture->getCountry()
+            $this->subject->getCountry()
         );
     }
 
@@ -321,10 +321,10 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
      */
     public function hasCountryWithoutCountryReturnsFalse()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertFalse(
-            $this->fixture->hasCountry()
+            $this->subject->hasCountry()
         );
     }
 
@@ -333,10 +333,10 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
      */
     public function hasCountryWithInvalidCountryReturnsFalse()
     {
-        $this->fixture->setData(['country' => '0']);
+        $this->subject->setData(['country' => '0']);
 
         self::assertFalse(
-            $this->fixture->hasCountry()
+            $this->subject->hasCountry()
         );
     }
 
@@ -349,10 +349,10 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
         $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_Country::class);
         /** @var \Tx_Oelib_Model_Country $country */
         $country = $mapper->find(54);
-        $this->fixture->setCountry($country);
+        $this->subject->setCountry($country);
 
         self::assertTrue(
-            $this->fixture->hasCountry()
+            $this->subject->hasCountry()
         );
     }
 
@@ -365,11 +365,11 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
      */
     public function getHomepageWithoutHomepageReturnsAnEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getHomepage()
+            $this->subject->getHomepage()
         );
     }
 
@@ -378,11 +378,11 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
      */
     public function getHomepageWithNonEmptyHomepageReturnsHomepage()
     {
-        $this->fixture->setData(['homepage' => 'http://example.com']);
+        $this->subject->setData(['homepage' => 'http://example.com']);
 
         self::assertEquals(
             'http://example.com',
-            $this->fixture->getHomepage()
+            $this->subject->getHomepage()
         );
     }
 
@@ -391,11 +391,11 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
      */
     public function setHomepageSetsHomepage()
     {
-        $this->fixture->setHomepage('http://example.com');
+        $this->subject->setHomepage('http://example.com');
 
         self::assertEquals(
             'http://example.com',
-            $this->fixture->getHomepage()
+            $this->subject->getHomepage()
         );
     }
 
@@ -404,10 +404,10 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
      */
     public function hasHomepageWithoutHomepageReturnsFalse()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertFalse(
-            $this->fixture->hasHomepage()
+            $this->subject->hasHomepage()
         );
     }
 
@@ -416,10 +416,10 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
      */
     public function hasHomepageWithNonEmptyHomepageReturnsTrue()
     {
-        $this->fixture->setHomepage('http://example.com');
+        $this->subject->setHomepage('http://example.com');
 
         self::assertTrue(
-            $this->fixture->hasHomepage()
+            $this->subject->hasHomepage()
         );
     }
 
@@ -432,11 +432,11 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
      */
     public function getDirectionsWithoutDirectionsReturnsAnEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getDirections()
+            $this->subject->getDirections()
         );
     }
 
@@ -445,11 +445,11 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
      */
     public function getDirectionsWithNonEmptyDirectionsReturnsDirections()
     {
-        $this->fixture->setData(['directions' => 'left, right, straight']);
+        $this->subject->setData(['directions' => 'left, right, straight']);
 
         self::assertEquals(
             'left, right, straight',
-            $this->fixture->getDirections()
+            $this->subject->getDirections()
         );
     }
 
@@ -458,11 +458,11 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
      */
     public function setDirectionsSetsDirections()
     {
-        $this->fixture->setDirections('left, right, straight');
+        $this->subject->setDirections('left, right, straight');
 
         self::assertEquals(
             'left, right, straight',
-            $this->fixture->getDirections()
+            $this->subject->getDirections()
         );
     }
 
@@ -471,10 +471,10 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
      */
     public function hasDirectionsWithoutDirectionsReturnsFalse()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertFalse(
-            $this->fixture->hasDirections()
+            $this->subject->hasDirections()
         );
     }
 
@@ -483,10 +483,10 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
      */
     public function hasDirectionsWithNonEmptyDirectionsReturnsTrue()
     {
-        $this->fixture->setDirections('left, right, straight');
+        $this->subject->setDirections('left, right, straight');
 
         self::assertTrue(
-            $this->fixture->hasDirections()
+            $this->subject->hasDirections()
         );
     }
 
@@ -499,11 +499,11 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
      */
     public function getNotesWithoutNotesReturnsAnEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getNotes()
+            $this->subject->getNotes()
         );
     }
 
@@ -512,11 +512,11 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
      */
     public function getNotesWithNonEmptyNotesReturnsNotes()
     {
-        $this->fixture->setData(['notes' => 'Nothing of interest.']);
+        $this->subject->setData(['notes' => 'Nothing of interest.']);
 
         self::assertEquals(
             'Nothing of interest.',
-            $this->fixture->getNotes()
+            $this->subject->getNotes()
         );
     }
 
@@ -525,11 +525,11 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
      */
     public function setNotesSetsNotes()
     {
-        $this->fixture->setNotes('Nothing of interest.');
+        $this->subject->setNotes('Nothing of interest.');
 
         self::assertEquals(
             'Nothing of interest.',
-            $this->fixture->getNotes()
+            $this->subject->getNotes()
         );
     }
 }

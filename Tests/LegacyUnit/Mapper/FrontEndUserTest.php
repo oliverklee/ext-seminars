@@ -10,7 +10,7 @@ class Tx_Seminars_Tests_Unit_Mapper_FrontEndUserTest extends \Tx_Phpunit_TestCas
     /**
      * @var \Tx_Seminars_Mapper_FrontEndUser the object to test
      */
-    private $fixture;
+    private $subject;
 
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -21,7 +21,7 @@ class Tx_Seminars_Tests_Unit_Mapper_FrontEndUserTest extends \Tx_Phpunit_TestCas
     {
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
-        $this->fixture = \Tx_Oelib_MapperRegistry::get(
+        $this->subject = \Tx_Oelib_MapperRegistry::get(
             \Tx_Seminars_Mapper_FrontEndUser::class
         );
     }
@@ -40,7 +40,7 @@ class Tx_Seminars_Tests_Unit_Mapper_FrontEndUserTest extends \Tx_Phpunit_TestCas
      */
     public function mapperForGhostReturnsSeminarsFrontEndUserInstance()
     {
-        self::assertInstanceOf(\Tx_Seminars_Model_FrontEndUser::class, $this->fixture->getNewGhost());
+        self::assertInstanceOf(\Tx_Seminars_Model_FrontEndUser::class, $this->subject->getNewGhost());
     }
 
     ///////////////////////////////////
@@ -56,7 +56,7 @@ class Tx_Seminars_Tests_Unit_Mapper_FrontEndUserTest extends \Tx_Phpunit_TestCas
             ::get(\Tx_Seminars_Mapper_Registration::class)->getNewGhost();
 
         /** @var \Tx_Seminars_Model_FrontEndUser $model */
-        $model = $this->fixture->getLoadedTestingModel(
+        $model = $this->subject->getLoadedTestingModel(
             ['tx_seminars_registration' => $registration->getUid()]
         );
 

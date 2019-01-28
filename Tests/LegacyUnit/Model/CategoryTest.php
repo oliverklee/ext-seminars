@@ -11,11 +11,11 @@ class Tx_Seminars_Tests_Unit_Model_CategoryTest extends \Tx_Phpunit_TestCase
     /**
      * @var \Tx_Seminars_Model_Category
      */
-    private $fixture;
+    private $subject;
 
     protected function setUp()
     {
-        $this->fixture = new \Tx_Seminars_Model_Category();
+        $this->subject = new \Tx_Seminars_Model_Category();
     }
 
     ///////////////////////////////
@@ -32,7 +32,7 @@ class Tx_Seminars_Tests_Unit_Model_CategoryTest extends \Tx_Phpunit_TestCase
             'The parameter $title must not be empty.'
         );
 
-        $this->fixture->setTitle('');
+        $this->subject->setTitle('');
     }
 
     /**
@@ -40,11 +40,11 @@ class Tx_Seminars_Tests_Unit_Model_CategoryTest extends \Tx_Phpunit_TestCase
      */
     public function setTitleSetsTitle()
     {
-        $this->fixture->setTitle('Lecture');
+        $this->subject->setTitle('Lecture');
 
         self::assertEquals(
             'Lecture',
-            $this->fixture->getTitle()
+            $this->subject->getTitle()
         );
     }
 
@@ -53,11 +53,11 @@ class Tx_Seminars_Tests_Unit_Model_CategoryTest extends \Tx_Phpunit_TestCase
      */
     public function getTitleWithNonEmptyTitleReturnsTitle()
     {
-        $this->fixture->setData(['title' => 'Lecture']);
+        $this->subject->setData(['title' => 'Lecture']);
 
         self::assertEquals(
             'Lecture',
-            $this->fixture->getTitle()
+            $this->subject->getTitle()
         );
     }
 
@@ -70,11 +70,11 @@ class Tx_Seminars_Tests_Unit_Model_CategoryTest extends \Tx_Phpunit_TestCase
      */
     public function getIconInitiallyReturnsAnEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getIcon()
+            $this->subject->getIcon()
         );
     }
 
@@ -83,11 +83,11 @@ class Tx_Seminars_Tests_Unit_Model_CategoryTest extends \Tx_Phpunit_TestCase
      */
     public function getIconWithNonEmptyIconReturnsIcon()
     {
-        $this->fixture->setData(['icon' => 'icon.gif']);
+        $this->subject->setData(['icon' => 'icon.gif']);
 
         self::assertEquals(
             'icon.gif',
-            $this->fixture->getIcon()
+            $this->subject->getIcon()
         );
     }
 
@@ -96,11 +96,11 @@ class Tx_Seminars_Tests_Unit_Model_CategoryTest extends \Tx_Phpunit_TestCase
      */
     public function setIconSetsIcon()
     {
-        $this->fixture->setIcon('icon.gif');
+        $this->subject->setIcon('icon.gif');
 
         self::assertEquals(
             'icon.gif',
-            $this->fixture->getIcon()
+            $this->subject->getIcon()
         );
     }
 
@@ -109,10 +109,10 @@ class Tx_Seminars_Tests_Unit_Model_CategoryTest extends \Tx_Phpunit_TestCase
      */
     public function hasIconInitiallyReturnsFalse()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertFalse(
-            $this->fixture->hasIcon()
+            $this->subject->hasIcon()
         );
     }
 
@@ -121,10 +121,10 @@ class Tx_Seminars_Tests_Unit_Model_CategoryTest extends \Tx_Phpunit_TestCase
      */
     public function hasIconWithIconReturnsTrue()
     {
-        $this->fixture->setIcon('icon.gif');
+        $this->subject->setIcon('icon.gif');
 
         self::assertTrue(
-            $this->fixture->hasIcon()
+            $this->subject->hasIcon()
         );
     }
 
@@ -137,11 +137,11 @@ class Tx_Seminars_Tests_Unit_Model_CategoryTest extends \Tx_Phpunit_TestCase
      */
     public function getSingleViewPageUidReturnsSingleViewPageUid()
     {
-        $this->fixture->setData(['single_view_page' => 42]);
+        $this->subject->setData(['single_view_page' => 42]);
 
         self::assertEquals(
             42,
-            $this->fixture->getSingleViewPageUid()
+            $this->subject->getSingleViewPageUid()
         );
     }
 
@@ -150,10 +150,10 @@ class Tx_Seminars_Tests_Unit_Model_CategoryTest extends \Tx_Phpunit_TestCase
      */
     public function hasSingleViewPageUidForZeroPageUidReturnsFalse()
     {
-        $this->fixture->setData(['single_view_page' => 0]);
+        $this->subject->setData(['single_view_page' => 0]);
 
         self::assertFalse(
-            $this->fixture->hasSingleViewPageUid()
+            $this->subject->hasSingleViewPageUid()
         );
     }
 
@@ -162,10 +162,10 @@ class Tx_Seminars_Tests_Unit_Model_CategoryTest extends \Tx_Phpunit_TestCase
      */
     public function hasSingleViewPageUidForNonZeroPageUidReturnsTrue()
     {
-        $this->fixture->setData(['single_view_page' => 42]);
+        $this->subject->setData(['single_view_page' => 42]);
 
         self::assertTrue(
-            $this->fixture->hasSingleViewPageUid()
+            $this->subject->hasSingleViewPageUid()
         );
     }
 }

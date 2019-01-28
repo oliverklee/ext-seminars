@@ -15,13 +15,13 @@ class Tx_Seminars_Tests_Unit_Mapper_CategoryTest extends \Tx_Phpunit_TestCase
     /**
      * @var \Tx_Seminars_Mapper_Category
      */
-    private $fixture;
+    private $subject;
 
     protected function setUp()
     {
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
-        $this->fixture = new \Tx_Seminars_Mapper_Category();
+        $this->subject = new \Tx_Seminars_Mapper_Category();
     }
 
     protected function tearDown()
@@ -38,7 +38,7 @@ class Tx_Seminars_Tests_Unit_Mapper_CategoryTest extends \Tx_Phpunit_TestCase
      */
     public function findWithUidReturnsCategoryInstance()
     {
-        self::assertInstanceOf(\Tx_Seminars_Model_Category::class, $this->fixture->find(1));
+        self::assertInstanceOf(\Tx_Seminars_Model_Category::class, $this->subject->find(1));
     }
 
     /**
@@ -51,7 +51,7 @@ class Tx_Seminars_Tests_Unit_Mapper_CategoryTest extends \Tx_Phpunit_TestCase
             ['title' => 'Lecture']
         );
         /** @var \Tx_Seminars_Model_Category $model */
-        $model = $this->fixture->find($uid);
+        $model = $this->subject->find($uid);
 
         self::assertEquals(
             'Lecture',

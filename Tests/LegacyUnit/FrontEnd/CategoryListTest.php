@@ -16,7 +16,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
     /**
      * @var \Tx_Seminars_FrontEnd_CategoryList
      */
-    private $fixture;
+    private $subject;
 
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -51,7 +51,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
             ]
         );
 
-        $this->fixture = new \Tx_Seminars_FrontEnd_CategoryList(
+        $this->subject = new \Tx_Seminars_FrontEnd_CategoryList(
             [
                 'isStaticTemplateLoaded' => 1,
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
@@ -75,16 +75,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
     public function testRenderCreatesEmptyCategoryList()
     {
         $otherSystemFolderUid = $this->testingFramework->createSystemFolder();
-        $this->fixture->setConfigurationValue('pages', $otherSystemFolderUid);
+        $this->subject->setConfigurationValue('pages', $otherSystemFolderUid);
 
-        $output = $this->fixture->render();
+        $output = $this->subject->render();
 
         self::assertNotContains(
             '<table',
             $output
         );
         self::assertContains(
-            $this->fixture->translate('label_no_categories'),
+            $this->subject->translate('label_no_categories'),
             $output
         );
     }
@@ -113,7 +113,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
             $categoryUid
         );
 
-        $result = $this->fixture->render();
+        $result = $this->subject->render();
         self::assertContains(
             'one &amp; category',
             $result
@@ -150,7 +150,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
             $categoryUid2
         );
 
-        $output = $this->fixture->render();
+        $output = $this->subject->render();
         self::assertContains(
             'first category',
             $output
@@ -191,7 +191,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
             $categoryUid2
         );
 
-        $output = $this->fixture->render();
+        $output = $this->subject->render();
         self::assertTrue(
             strpos($output, 'category A') < strpos($output, 'category B')
         );
@@ -223,7 +223,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
 
         self::assertContains(
             'one category',
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 
@@ -251,13 +251,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
 
         self::assertNotContains(
             'one category',
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 
     public function testRenderCanReadFromAllSystemFolders()
     {
-        $this->fixture->setConfigurationValue('pages', '');
+        $this->subject->setConfigurationValue('pages', '');
 
         $otherSystemFolderUid = $this->testingFramework->createSystemFolder();
         $categoryUid = $this->testingFramework->createRecord(
@@ -281,7 +281,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
 
         self::assertContains(
             'one category',
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 
@@ -309,7 +309,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
 
         self::assertNotContains(
             'one category',
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 
@@ -337,13 +337,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
 
         self::assertContains(
             'one category',
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 
     public function testRenderCreatesCategoryListOfEventsFromSelectedTimeFrames()
     {
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue(
             'timeframeInList',
             'currentAndUpcoming'
         );
@@ -370,13 +370,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
 
         self::assertContains(
             'one category',
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 
     public function testRenderIgnoresEventsFromDeselectedTimeFrames()
     {
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue(
             'timeframeInList',
             'currentAndUpcoming'
         );
@@ -403,13 +403,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
 
         self::assertNotContains(
             'one category',
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 
     public function testRenderCreatesCategoryListContainingLinksToListPageLimitedToCategory()
     {
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue(
             'listPID',
             $this->testingFramework->createFrontEndPage()
         );
@@ -435,7 +435,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
 
         self::assertContains(
             'tx_seminars_pi1%5Bcategory%5D=' . $categoryUid,
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 
@@ -447,13 +447,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
     {
         self::assertEquals(
             '',
-            $this->fixture->createCategoryList([])
+            $this->subject->createCategoryList([])
         );
     }
 
     public function testCreateCategoryListWithConfigurationValueSetToTextReturnsCategoryTitle()
     {
-        $this->fixture->setConfigurationValue('categoriesInListView', 'text');
+        $this->subject->setConfigurationValue('categoriesInListView', 'text');
         $singleCategory =
             [
                 99 => [
@@ -464,13 +464,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
 
         self::assertEquals(
             'test',
-            $this->fixture->createCategoryList($singleCategory)
+            $this->subject->createCategoryList($singleCategory)
         );
     }
 
     public function testCreateCategoryListWithConfigurationValueSetToTextDoesNotReturnIcon()
     {
-        $this->fixture->setConfigurationValue('categoriesInListView', 'text');
+        $this->subject->setConfigurationValue('categoriesInListView', 'text');
         $singleCategory =
             [
                 99 => [
@@ -482,7 +482,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
 
         self::assertNotContains(
             'foo.gif',
-            $this->fixture->createCategoryList($singleCategory)
+            $this->subject->createCategoryList($singleCategory)
         );
     }
 
@@ -491,7 +491,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
      */
     public function createCategoryListWithInvalidConfigurationValueReturnsHtmlspecialcharedCategoryTitle()
     {
-        $this->fixture->setConfigurationValue('categoriesInListView', 'foo');
+        $this->subject->setConfigurationValue('categoriesInListView', 'foo');
         $singleCategory =
             [
                 99 => [
@@ -502,7 +502,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
 
         self::assertEquals(
             'test &amp; more',
-            $this->fixture->createCategoryList($singleCategory)
+            $this->subject->createCategoryList($singleCategory)
         );
     }
 
@@ -511,7 +511,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
      */
     public function createCategoryListWithBothAsDisplayModeCreatesHtmlspecialcharedCategoryTitle()
     {
-        $this->fixture->setConfigurationValue('categoriesInListView', 'both');
+        $this->subject->setConfigurationValue('categoriesInListView', 'both');
         $singleCategory =
             [
                 99 => [
@@ -522,11 +522,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
 
         self::assertContains(
             'test &amp; more',
-            $this->fixture->createCategoryList($singleCategory)
+            $this->subject->createCategoryList($singleCategory)
         );
         self::assertNotContains(
             'test & more',
-            $this->fixture->createCategoryList($singleCategory)
+            $this->subject->createCategoryList($singleCategory)
         );
     }
 
@@ -535,7 +535,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
      */
     public function createCategoryListWithTextAsDisplayModeCreatesHtmlspecialcharedCategoryTitle()
     {
-        $this->fixture->setConfigurationValue('categoriesInListView', 'text');
+        $this->subject->setConfigurationValue('categoriesInListView', 'text');
         $singleCategory =
             [
                 99 => [
@@ -546,7 +546,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
 
         self::assertSame(
             'test &amp; more',
-            $this->fixture->createCategoryList($singleCategory)
+            $this->subject->createCategoryList($singleCategory)
         );
     }
 
@@ -555,7 +555,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
      */
     public function createCategoryListWithConfigurationValueSetToIconSetsHtmlSpecialcharedCategoryTitleAsImageTitle()
     {
-        $this->fixture->setConfigurationValue('categoriesInListView', 'icon');
+        $this->subject->setConfigurationValue('categoriesInListView', 'icon');
         $singleCategory =
             [
                 99 => [
@@ -567,13 +567,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
 
         self::assertRegExp(
             '/<img[^>]+title="te &amp; st"/',
-            $this->fixture->createCategoryList($singleCategory)
+            $this->subject->createCategoryList($singleCategory)
         );
     }
 
     public function testCreateCategoryListWithConfigurationValueSetToIconDoesNotReturnTitleOutsideTheImageTag()
     {
-        $this->fixture->setConfigurationValue('categoriesInListView', 'icon');
+        $this->subject->setConfigurationValue('categoriesInListView', 'icon');
         $singleCategory =
             [
                 99 => [
@@ -586,7 +586,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
 
         self::assertNotRegExp(
             '/<img[^>]*>.*test/',
-            $this->fixture->createCategoryList($singleCategory)
+            $this->subject->createCategoryList($singleCategory)
         );
     }
 
@@ -595,7 +595,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
      */
     public function createCategoryListWithConfigurationValueSetToIconCanReturnMultipleIcons()
     {
-        $this->fixture->setConfigurationValue('categoriesInListView', 'icon');
+        $this->subject->setConfigurationValue('categoriesInListView', 'icon');
         $multipleCategories =
             [
                 99 => [
@@ -613,13 +613,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
 
         self::assertRegExp(
             '/<img[^>]+title="test"[^>]*>.*<img[^>]+title="new_test"[^>]*>/',
-            $this->fixture->createCategoryList($multipleCategories)
+            $this->subject->createCategoryList($multipleCategories)
         );
     }
 
     public function testCreateCategoryListWithConfigurationValueSetToTextCanReturnMultipleCategoryTitles()
     {
-        $this->fixture->setConfigurationValue('categoriesInListView', 'text');
+        $this->subject->setConfigurationValue('categoriesInListView', 'text');
         $multipleCategories =
             [
                 99 => [
@@ -634,13 +634,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
 
         self::assertRegExp(
             '/foo.*bar/',
-            $this->fixture->createCategoryList($multipleCategories)
+            $this->subject->createCategoryList($multipleCategories)
         );
     }
 
     public function testCreateCategoryListWithConfigurationValueSetToIconDoesNotUseCommasAsSeparators()
     {
-        $this->fixture->setConfigurationValue('categoriesInListView', 'icon');
+        $this->subject->setConfigurationValue('categoriesInListView', 'icon');
         $this->testingFramework->createDummyFile('foo.gif', base64_decode(self::BLANK_GIF, true));
         $this->testingFramework->createDummyFile('foo2.gif', base64_decode(self::BLANK_GIF, true));
         $multipleCategories =
@@ -657,13 +657,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
 
         self::assertNotContains(
             ',',
-            $this->fixture->createCategoryList($multipleCategories)
+            $this->subject->createCategoryList($multipleCategories)
         );
     }
 
     public function testCreateCategoryForCategoryWithoutImageAndListWithConfigurationValueSetToIconUsesCommasAsSeparators(
     ) {
-        $this->fixture->setConfigurationValue('categoriesInListView', 'icon');
+        $this->subject->setConfigurationValue('categoriesInListView', 'icon');
         $multipleCategories =
             [
                 99 => [
@@ -678,13 +678,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
 
         self::assertRegExp(
             '/foo.*,.*bar/',
-            $this->fixture->createCategoryList($multipleCategories)
+            $this->subject->createCategoryList($multipleCategories)
         );
     }
 
     public function testCreateCategoryListWithConfigurationValueSetToTextUsesCommasAsSeparators()
     {
-        $this->fixture->setConfigurationValue('categoriesInListView', 'text');
+        $this->subject->setConfigurationValue('categoriesInListView', 'text');
         $multipleCategories =
             [
                 99 => [
@@ -699,13 +699,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
 
         self::assertRegExp(
             '/foo.*,.*bar/',
-            $this->fixture->createCategoryList($multipleCategories)
+            $this->subject->createCategoryList($multipleCategories)
         );
     }
 
     public function testCreateCategoryListWithConfigurationValueSetToBothUsesCommasAsSeparators()
     {
-        $this->fixture->setConfigurationValue('categoriesInListView', 'both');
+        $this->subject->setConfigurationValue('categoriesInListView', 'both');
         $this->testingFramework->createDummyFile('foo.gif', base64_decode(self::BLANK_GIF, true));
         $this->testingFramework->createDummyFile('foo2.gif', base64_decode(self::BLANK_GIF, true));
         $multipleCategories =
@@ -722,7 +722,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends \Tx_Phpunit_TestC
 
         self::assertRegExp(
             '/foo.*,.*bar/',
-            $this->fixture->createCategoryList($multipleCategories)
+            $this->subject->createCategoryList($multipleCategories)
         );
     }
 }

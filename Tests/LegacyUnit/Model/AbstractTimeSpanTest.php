@@ -10,11 +10,11 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends \Tx_Phpunit_Test
     /**
      * @var \Tx_Seminars_Model_AbstractTimeSpan
      */
-    private $fixture;
+    private $subject;
 
     protected function setUp()
     {
-        $this->fixture = $this->getMockForAbstractClass(\Tx_Seminars_Model_AbstractTimeSpan::class);
+        $this->subject = $this->getMockForAbstractClass(\Tx_Seminars_Model_AbstractTimeSpan::class);
     }
 
     /**
@@ -27,7 +27,7 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends \Tx_Phpunit_Test
             'The parameter $title must not be empty.'
         );
 
-        $this->fixture->setTitle('');
+        $this->subject->setTitle('');
     }
 
     /**
@@ -35,11 +35,11 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends \Tx_Phpunit_Test
      */
     public function setTitleSetsTitle()
     {
-        $this->fixture->setTitle('Superhero');
+        $this->subject->setTitle('Superhero');
 
         self::assertEquals(
             'Superhero',
-            $this->fixture->getTitle()
+            $this->subject->getTitle()
         );
     }
 
@@ -48,11 +48,11 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends \Tx_Phpunit_Test
      */
     public function getTitleWithNonEmptyTitleReturnsTitle()
     {
-        $this->fixture->setData(['title' => 'Superhero']);
+        $this->subject->setData(['title' => 'Superhero']);
 
         self::assertEquals(
             'Superhero',
-            $this->fixture->getTitle()
+            $this->subject->getTitle()
         );
     }
 
@@ -65,11 +65,11 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends \Tx_Phpunit_Test
      */
     public function getBeginDateAsUnixTimeStampWithoutBeginDateReturnsZero()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             0,
-            $this->fixture->getBeginDateAsUnixTimeStamp()
+            $this->subject->getBeginDateAsUnixTimeStamp()
         );
     }
 
@@ -78,11 +78,11 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends \Tx_Phpunit_Test
      */
     public function getBeginDateAsUnixTimeStampWithBeginDateReturnsBeginDate()
     {
-        $this->fixture->setData(['begin_date' => 42]);
+        $this->subject->setData(['begin_date' => 42]);
 
         self::assertEquals(
             42,
-            $this->fixture->getBeginDateAsUnixTimeStamp()
+            $this->subject->getBeginDateAsUnixTimeStamp()
         );
     }
 
@@ -96,7 +96,7 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends \Tx_Phpunit_Test
             'The parameter $beginDate must be >= 0.'
         );
 
-        $this->fixture->setBeginDateAsUnixTimeStamp(-1);
+        $this->subject->setBeginDateAsUnixTimeStamp(-1);
     }
 
     /**
@@ -104,11 +104,11 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends \Tx_Phpunit_Test
      */
     public function setBeginDateAsUnixTimeStampWithZeroTimeStampSetsBeginDate()
     {
-        $this->fixture->setBeginDateAsUnixTimeStamp(0);
+        $this->subject->setBeginDateAsUnixTimeStamp(0);
 
         self::assertEquals(
             0,
-            $this->fixture->getBeginDateAsUnixTimeStamp()
+            $this->subject->getBeginDateAsUnixTimeStamp()
         );
     }
 
@@ -117,11 +117,11 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends \Tx_Phpunit_Test
      */
     public function setBeginDateAsUnixTimeStampWithPositiveTimeStampSetsBeginDate()
     {
-        $this->fixture->setBeginDateAsUnixTimeStamp(42);
+        $this->subject->setBeginDateAsUnixTimeStamp(42);
 
         self::assertEquals(
             42,
-            $this->fixture->getBeginDateAsUnixTimeStamp()
+            $this->subject->getBeginDateAsUnixTimeStamp()
         );
     }
 
@@ -130,10 +130,10 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends \Tx_Phpunit_Test
      */
     public function hasBeginDateWithoutBeginDateReturnsFalse()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertFalse(
-            $this->fixture->hasBeginDate()
+            $this->subject->hasBeginDate()
         );
     }
 
@@ -142,10 +142,10 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends \Tx_Phpunit_Test
      */
     public function hasBeginDateWithBeginDateReturnsTrue()
     {
-        $this->fixture->setBeginDateAsUnixTimeStamp(42);
+        $this->subject->setBeginDateAsUnixTimeStamp(42);
 
         self::assertTrue(
-            $this->fixture->hasBeginDate()
+            $this->subject->hasBeginDate()
         );
     }
 
@@ -158,11 +158,11 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends \Tx_Phpunit_Test
      */
     public function getEndDateAsUnixTimeStampWithoutEndDateReturnsZero()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             0,
-            $this->fixture->getEndDateAsUnixTimeStamp()
+            $this->subject->getEndDateAsUnixTimeStamp()
         );
     }
 
@@ -171,11 +171,11 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends \Tx_Phpunit_Test
      */
     public function getEndDateAsUnixTimeStampWithEndDateReturnsEndDate()
     {
-        $this->fixture->setData(['end_date' => 42]);
+        $this->subject->setData(['end_date' => 42]);
 
         self::assertEquals(
             42,
-            $this->fixture->getEndDateAsUnixTimeStamp()
+            $this->subject->getEndDateAsUnixTimeStamp()
         );
     }
 
@@ -189,7 +189,7 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends \Tx_Phpunit_Test
             'The parameter $endDate must be >= 0.'
         );
 
-        $this->fixture->setEndDateAsUnixTimeStamp(-1);
+        $this->subject->setEndDateAsUnixTimeStamp(-1);
     }
 
     /**
@@ -197,11 +197,11 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends \Tx_Phpunit_Test
      */
     public function setEndDateAsUnixTimeStampWithZeroTimeStampSetsEndDate()
     {
-        $this->fixture->setEndDateAsUnixTimeStamp(0);
+        $this->subject->setEndDateAsUnixTimeStamp(0);
 
         self::assertEquals(
             0,
-            $this->fixture->getEndDateAsUnixTimeStamp()
+            $this->subject->getEndDateAsUnixTimeStamp()
         );
     }
 
@@ -210,11 +210,11 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends \Tx_Phpunit_Test
      */
     public function setEndDateAsUnixTimeStampWithPositiveTimeStampSetsEndDate()
     {
-        $this->fixture->setEndDateAsUnixTimeStamp(42);
+        $this->subject->setEndDateAsUnixTimeStamp(42);
 
         self::assertEquals(
             42,
-            $this->fixture->getEndDateAsUnixTimeStamp()
+            $this->subject->getEndDateAsUnixTimeStamp()
         );
     }
 
@@ -223,10 +223,10 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends \Tx_Phpunit_Test
      */
     public function hasEndDateWithoutEndDateReturnsFalse()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertFalse(
-            $this->fixture->hasEndDate()
+            $this->subject->hasEndDate()
         );
     }
 
@@ -235,10 +235,10 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends \Tx_Phpunit_Test
      */
     public function hasEndDateWithEndDateReturnsTrue()
     {
-        $this->fixture->setEndDateAsUnixTimeStamp(42);
+        $this->subject->setEndDateAsUnixTimeStamp(42);
 
         self::assertTrue(
-            $this->fixture->hasEndDate()
+            $this->subject->hasEndDate()
         );
     }
 
@@ -251,11 +251,11 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends \Tx_Phpunit_Test
      */
     public function getRoomWithoutRoomReturnsAnEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getRoom()
+            $this->subject->getRoom()
         );
     }
 
@@ -264,11 +264,11 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends \Tx_Phpunit_Test
      */
     public function getRoomWithRoomReturnsRoom()
     {
-        $this->fixture->setData(['room' => 'cuby']);
+        $this->subject->setData(['room' => 'cuby']);
 
         self::assertEquals(
             'cuby',
-            $this->fixture->getRoom()
+            $this->subject->getRoom()
         );
     }
 
@@ -277,11 +277,11 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends \Tx_Phpunit_Test
      */
     public function setRoomSetsRoom()
     {
-        $this->fixture->setRoom('cuby');
+        $this->subject->setRoom('cuby');
 
         self::assertEquals(
             'cuby',
-            $this->fixture->getRoom()
+            $this->subject->getRoom()
         );
     }
 
@@ -290,10 +290,10 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends \Tx_Phpunit_Test
      */
     public function hasRoomWithoutRoomReturnsFalse()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertFalse(
-            $this->fixture->hasRoom()
+            $this->subject->hasRoom()
         );
     }
 
@@ -302,10 +302,10 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends \Tx_Phpunit_Test
      */
     public function hasRoomWithRoomReturnsTrue()
     {
-        $this->fixture->setRoom('cuby');
+        $this->subject->setRoom('cuby');
 
         self::assertTrue(
-            $this->fixture->hasRoom()
+            $this->subject->hasRoom()
         );
     }
 }

@@ -12,7 +12,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_TestingViewTest extends \Tx_Phpunit_TestCa
      *
      * @var \Tx_Seminars_Tests_Unit_Fixtures_FrontEnd_TestingView
      */
-    private $fixture;
+    private $subject;
 
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -23,7 +23,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_TestingViewTest extends \Tx_Phpunit_TestCa
     {
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
-        $this->fixture = new \Tx_Seminars_Tests_Unit_Fixtures_FrontEnd_TestingView(
+        $this->subject = new \Tx_Seminars_Tests_Unit_Fixtures_FrontEnd_TestingView(
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             $GLOBALS['TSFE']->cObj
         );
@@ -38,7 +38,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_TestingViewTest extends \Tx_Phpunit_TestCa
     {
         self::assertEquals(
             'Hi, I am the testingFrontEndView!',
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 }

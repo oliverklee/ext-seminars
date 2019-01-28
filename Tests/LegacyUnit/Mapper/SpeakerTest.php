@@ -15,13 +15,13 @@ class Tx_Seminars_Tests_Unit_Mapper_SpeakerTest extends \Tx_Phpunit_TestCase
     /**
      * @var \Tx_Seminars_Mapper_Speaker
      */
-    private $fixture;
+    private $subject;
 
     protected function setUp()
     {
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
-        $this->fixture = new \Tx_Seminars_Mapper_Speaker();
+        $this->subject = new \Tx_Seminars_Mapper_Speaker();
     }
 
     protected function tearDown()
@@ -42,7 +42,7 @@ class Tx_Seminars_Tests_Unit_Mapper_SpeakerTest extends \Tx_Phpunit_TestCase
 
         self::assertInstanceOf(
             \Tx_Seminars_Model_Speaker::class,
-            $this->fixture->find($uid)
+            $this->subject->find($uid)
         );
     }
 
@@ -57,7 +57,7 @@ class Tx_Seminars_Tests_Unit_Mapper_SpeakerTest extends \Tx_Phpunit_TestCase
         );
 
         /** @var \Tx_Seminars_Model_Speaker $model */
-        $model = $this->fixture->find($uid);
+        $model = $this->subject->find($uid);
         self::assertEquals(
             'John Doe',
             $model->getName()
@@ -76,7 +76,7 @@ class Tx_Seminars_Tests_Unit_Mapper_SpeakerTest extends \Tx_Phpunit_TestCase
         $uid = $this->testingFramework->createRecord('tx_seminars_speakers');
 
         /** @var \Tx_Seminars_Model_Speaker $model */
-        $model = $this->fixture->find($uid);
+        $model = $this->subject->find($uid);
         self::assertInstanceOf(\Tx_Oelib_List::class, $model->getSkills());
     }
 
@@ -88,7 +88,7 @@ class Tx_Seminars_Tests_Unit_Mapper_SpeakerTest extends \Tx_Phpunit_TestCase
         $uid = $this->testingFramework->createRecord('tx_seminars_speakers');
 
         /** @var \Tx_Seminars_Model_Speaker $model */
-        $model = $this->fixture->find($uid);
+        $model = $this->subject->find($uid);
         self::assertTrue(
             $model->getSkills()->isEmpty()
         );
@@ -110,7 +110,7 @@ class Tx_Seminars_Tests_Unit_Mapper_SpeakerTest extends \Tx_Phpunit_TestCase
         );
 
         /** @var \Tx_Seminars_Model_Speaker $model */
-        $model = $this->fixture->find($speakerUid);
+        $model = $this->subject->find($speakerUid);
         self::assertFalse(
             $model->getSkills()->isEmpty()
         );
@@ -132,7 +132,7 @@ class Tx_Seminars_Tests_Unit_Mapper_SpeakerTest extends \Tx_Phpunit_TestCase
         );
 
         /** @var \Tx_Seminars_Model_Speaker $model */
-        $model = $this->fixture->find($speakerUid);
+        $model = $this->subject->find($speakerUid);
         self::assertEquals(
             $skill->getUid(),
             $model->getSkills()->getUids()
@@ -149,7 +149,7 @@ class Tx_Seminars_Tests_Unit_Mapper_SpeakerTest extends \Tx_Phpunit_TestCase
     public function getOwnerWithoutOwnerReturnsNull()
     {
         /** @var \Tx_Seminars_Model_Speaker $testingModel */
-        $testingModel = $this->fixture->getLoadedTestingModel([]);
+        $testingModel = $this->subject->getLoadedTestingModel([]);
 
         self::assertNull($testingModel->getOwner());
     }
@@ -162,7 +162,7 @@ class Tx_Seminars_Tests_Unit_Mapper_SpeakerTest extends \Tx_Phpunit_TestCase
         $frontEndUser = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)
             ->getLoadedTestingModel([]);
         /** @var \Tx_Seminars_Model_Speaker $testingModel */
-        $testingModel = $this->fixture->getLoadedTestingModel(
+        $testingModel = $this->subject->getLoadedTestingModel(
             ['owner' => $frontEndUser->getUid()]
         );
 

@@ -10,7 +10,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_DateRangeTest extends \Tx_Phpunit_TestCa
     /**
      * @var \Tx_Seminars_ViewHelper_DateRange
      */
-    private $fixture;
+    private $subject;
 
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -59,7 +59,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_DateRangeTest extends \Tx_Phpunit_TestCa
 
         $this->translator = \Tx_Oelib_TranslatorRegistry::get('seminars');
 
-        $this->fixture = new \Tx_Seminars_ViewHelper_DateRange();
+        $this->subject = new \Tx_Seminars_ViewHelper_DateRange();
     }
 
     protected function tearDown()
@@ -78,7 +78,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_DateRangeTest extends \Tx_Phpunit_TestCa
 
         self::assertSame(
             $this->translator->translate('message_willBeAnnounced'),
-            $this->fixture->render($timeSpan)
+            $this->subject->render($timeSpan)
         );
     }
 
@@ -93,7 +93,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_DateRangeTest extends \Tx_Phpunit_TestCa
 
         self::assertSame(
             strftime(self::DATE_FORMAT_YMD, self::BEGIN_DATE),
-            $this->fixture->render($timeSpan)
+            $this->subject->render($timeSpan)
         );
     }
 
@@ -109,7 +109,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_DateRangeTest extends \Tx_Phpunit_TestCa
 
         self::assertSame(
             strftime(self::DATE_FORMAT_YMD, self::BEGIN_DATE),
-            $this->fixture->render($timeSpan)
+            $this->subject->render($timeSpan)
         );
     }
 
@@ -125,7 +125,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_DateRangeTest extends \Tx_Phpunit_TestCa
 
         self::assertEquals(
             strftime(self::DATE_FORMAT_YMD, self::BEGIN_DATE),
-            $this->fixture->render($timeSpan)
+            $this->subject->render($timeSpan)
         );
     }
 
@@ -144,7 +144,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_DateRangeTest extends \Tx_Phpunit_TestCa
 
         self::assertEquals(
             strftime(self::DATE_FORMAT_YMD, self::BEGIN_DATE) . '&#8211;' . strftime(self::DATE_FORMAT_YMD, $endDate),
-            $this->fixture->render($timeSpan)
+            $this->subject->render($timeSpan)
         );
     }
 
@@ -163,7 +163,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_DateRangeTest extends \Tx_Phpunit_TestCa
 
         self::assertEquals(
             strftime(self::DATE_FORMAT_D, self::BEGIN_DATE) . '&#8211;' . strftime(self::DATE_FORMAT_YMD, $endDate),
-            $this->fixture->render($timeSpan)
+            $this->subject->render($timeSpan)
         );
     }
 
@@ -182,7 +182,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_DateRangeTest extends \Tx_Phpunit_TestCa
 
         self::assertEquals(
             strftime(self::DATE_FORMAT_MD, self::BEGIN_DATE) . '&#8211;' . strftime(self::DATE_FORMAT_YMD, $endDate),
-            $this->fixture->render($timeSpan)
+            $this->subject->render($timeSpan)
         );
     }
 
@@ -201,7 +201,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_DateRangeTest extends \Tx_Phpunit_TestCa
 
         self::assertEquals(
             strftime(self::DATE_FORMAT_YMD, self::BEGIN_DATE) . '&#8211;' . strftime(self::DATE_FORMAT_YMD, $endDate),
-            $this->fixture->render($timeSpan)
+            $this->subject->render($timeSpan)
         );
     }
 
@@ -221,7 +221,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_DateRangeTest extends \Tx_Phpunit_TestCa
 
         self::assertEquals(
             strftime(self::DATE_FORMAT_YMD, self::BEGIN_DATE) . $dash . strftime(self::DATE_FORMAT_YMD, $endDate),
-            $this->fixture->render($timeSpan, $dash)
+            $this->subject->render($timeSpan, $dash)
         );
     }
 }

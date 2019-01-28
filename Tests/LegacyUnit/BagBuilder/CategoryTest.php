@@ -10,7 +10,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_CategoryTest extends \Tx_Phpunit_TestCas
     /**
      * @var \Tx_Seminars_BagBuilder_Category
      */
-    private $fixture;
+    private $subject;
 
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -21,8 +21,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_CategoryTest extends \Tx_Phpunit_TestCas
     {
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
-        $this->fixture = new \Tx_Seminars_BagBuilder_Category();
-        $this->fixture->setTestMode();
+        $this->subject = new \Tx_Seminars_BagBuilder_Category();
+        $this->subject->setTestMode();
     }
 
     protected function tearDown()
@@ -36,7 +36,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_CategoryTest extends \Tx_Phpunit_TestCas
 
     public function testBuilderBuildsABag()
     {
-        self::assertInstanceOf(\Tx_Seminars_Bag_Abstract::class, $this->fixture->build());
+        self::assertInstanceOf(\Tx_Seminars_Bag_Abstract::class, $this->subject->build());
     }
 
     public function testBuiltBagIsSortedAscendingByTitle()
@@ -50,7 +50,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_CategoryTest extends \Tx_Phpunit_TestCas
             ['title' => 'Title 1']
         );
 
-        $categoryBag = $this->fixture->build();
+        $categoryBag = $this->subject->build();
         self::assertEquals(
             2,
             $categoryBag->count()
@@ -85,7 +85,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_CategoryTest extends \Tx_Phpunit_TestCas
             $eventUid,
             $categoryUid
         );
-        $bag = $this->fixture->build();
+        $bag = $this->subject->build();
 
         self::assertEquals(
             2,
@@ -109,8 +109,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_CategoryTest extends \Tx_Phpunit_TestCas
             $categoryUid
         );
 
-        $this->fixture->limitToEvents('');
-        $bag = $this->fixture->build();
+        $this->subject->limitToEvents('');
+        $bag = $this->subject->build();
 
         self::assertEquals(
             2,
@@ -124,7 +124,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_CategoryTest extends \Tx_Phpunit_TestCas
             \InvalidArgumentException::class,
             '$eventUids must be a comma-separated list of positive integers.'
         );
-        $this->fixture->limitToEvents('0');
+        $this->subject->limitToEvents('0');
     }
 
     public function testLimitToNegativeEventUidFails()
@@ -133,7 +133,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_CategoryTest extends \Tx_Phpunit_TestCas
             \InvalidArgumentException::class,
             '$eventUids must be a comma-separated list of positive integers.'
         );
-        $this->fixture->limitToEvents('-2');
+        $this->subject->limitToEvents('-2');
     }
 
     public function testLimitToInvalidEventUidAtTheStartFails()
@@ -142,7 +142,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_CategoryTest extends \Tx_Phpunit_TestCas
             \InvalidArgumentException::class,
             '$eventUids must be a comma-separated list of positive integers.'
         );
-        $this->fixture->limitToEvents('0,1');
+        $this->subject->limitToEvents('0,1');
     }
 
     public function testLimitToInvalidEventUidAtTheEndFails()
@@ -151,7 +151,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_CategoryTest extends \Tx_Phpunit_TestCas
             \InvalidArgumentException::class,
             '$eventUids must be a comma-separated list of positive integers.'
         );
-        $this->fixture->limitToEvents('1,0');
+        $this->subject->limitToEvents('1,0');
     }
 
     public function testLimitToInvalidEventUidInTheMiddleFails()
@@ -160,7 +160,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_CategoryTest extends \Tx_Phpunit_TestCas
             \InvalidArgumentException::class,
             '$eventUids must be a comma-separated list of positive integers.'
         );
-        $this->fixture->limitToEvents('1,0,2');
+        $this->subject->limitToEvents('1,0,2');
     }
 
     public function testLimitToEventsCanResultInOneCategory()
@@ -177,8 +177,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_CategoryTest extends \Tx_Phpunit_TestCas
             $categoryUid
         );
 
-        $this->fixture->limitToEvents($eventUid);
-        $bag = $this->fixture->build();
+        $this->subject->limitToEvents($eventUid);
+        $bag = $this->subject->build();
 
         self::assertEquals(
             1,
@@ -212,8 +212,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_CategoryTest extends \Tx_Phpunit_TestCas
             $categoryUid2
         );
 
-        $this->fixture->limitToEvents($eventUid);
-        $bag = $this->fixture->build();
+        $this->subject->limitToEvents($eventUid);
+        $bag = $this->subject->build();
 
         self::assertEquals(
             2,
@@ -249,8 +249,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_CategoryTest extends \Tx_Phpunit_TestCas
             $categoryUid2
         );
 
-        $this->fixture->limitToEvents($eventUid1 . ',' . $eventUid2);
-        $bag = $this->fixture->build();
+        $this->subject->limitToEvents($eventUid1 . ',' . $eventUid2);
+        $bag = $this->subject->build();
 
         self::assertEquals(
             2,
@@ -274,8 +274,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_CategoryTest extends \Tx_Phpunit_TestCas
             $categoryUid
         );
 
-        $this->fixture->limitToEvents($eventUid);
-        $bag = $this->fixture->build();
+        $this->subject->limitToEvents($eventUid);
+        $bag = $this->subject->build();
 
         self::assertFalse(
             $bag->isEmpty()
@@ -312,8 +312,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_CategoryTest extends \Tx_Phpunit_TestCas
             $categoryUid2
         );
 
-        $this->fixture->limitToEvents($eventUid1);
-        $bag = $this->fixture->build();
+        $this->subject->limitToEvents($eventUid1);
+        $bag = $this->subject->build();
 
         self::assertEquals(
             1,
@@ -347,8 +347,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_CategoryTest extends \Tx_Phpunit_TestCas
             'tx_seminars_seminars'
         );
 
-        $this->fixture->limitToEvents($eventUid2);
-        $bag = $this->fixture->build();
+        $this->subject->limitToEvents($eventUid2);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -367,6 +367,6 @@ class Tx_Seminars_Tests_Unit_BagBuilder_CategoryTest extends \Tx_Phpunit_TestCas
             'calling this function.'
         );
 
-        $this->fixture->sortByRelationOrder();
+        $this->subject->sortByRelationOrder();
     }
 }

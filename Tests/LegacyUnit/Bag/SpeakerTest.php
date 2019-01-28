@@ -10,7 +10,7 @@ class Tx_Seminars_Tests_Unit_Bag_SpeakerTest extends \Tx_Phpunit_TestCase
     /**
      * @var \Tx_Seminars_Bag_Speaker
      */
-    private $fixture;
+    private $subject;
 
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -35,11 +35,11 @@ class Tx_Seminars_Tests_Unit_Bag_SpeakerTest extends \Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord('tx_seminars_speakers');
 
-        $this->fixture = new \Tx_Seminars_Bag_Speaker('is_dummy_record=1');
+        $this->subject = new \Tx_Seminars_Bag_Speaker('is_dummy_record=1');
 
         self::assertEquals(
             1,
-            $this->fixture->count()
+            $this->subject->count()
         );
     }
 
@@ -50,10 +50,10 @@ class Tx_Seminars_Tests_Unit_Bag_SpeakerTest extends \Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord('tx_seminars_speakers');
 
-        $this->fixture = new \Tx_Seminars_Bag_Speaker('is_dummy_record=1');
+        $this->subject = new \Tx_Seminars_Bag_Speaker('is_dummy_record=1');
 
         /** @var \Tx_Seminars_OldModel_Speaker $currentModel */
-        $currentModel = $this->fixture->current();
+        $currentModel = $this->subject->current();
 
         self::assertFalse($currentModel->isHidden());
     }
@@ -68,10 +68,10 @@ class Tx_Seminars_Tests_Unit_Bag_SpeakerTest extends \Tx_Phpunit_TestCase
             ['hidden' => 1]
         );
 
-        $this->fixture = new \Tx_Seminars_Bag_Speaker('is_dummy_record=1');
+        $this->subject = new \Tx_Seminars_Bag_Speaker('is_dummy_record=1');
 
         self::assertTrue(
-            $this->fixture->isEmpty()
+            $this->subject->isEmpty()
         );
     }
 
@@ -85,7 +85,7 @@ class Tx_Seminars_Tests_Unit_Bag_SpeakerTest extends \Tx_Phpunit_TestCase
             ['hidden' => 1]
         );
 
-        $this->fixture = new \Tx_Seminars_Bag_Speaker(
+        $this->subject = new \Tx_Seminars_Bag_Speaker(
             'is_dummy_record=1',
             '',
             '',
@@ -95,7 +95,7 @@ class Tx_Seminars_Tests_Unit_Bag_SpeakerTest extends \Tx_Phpunit_TestCase
         );
 
         self::assertTrue(
-            $this->fixture->isEmpty()
+            $this->subject->isEmpty()
         );
     }
 
@@ -109,7 +109,7 @@ class Tx_Seminars_Tests_Unit_Bag_SpeakerTest extends \Tx_Phpunit_TestCase
             ['hidden' => 1]
         );
 
-        $this->fixture = new \Tx_Seminars_Bag_Speaker(
+        $this->subject = new \Tx_Seminars_Bag_Speaker(
             'is_dummy_record=1',
             '',
             '',
@@ -119,7 +119,7 @@ class Tx_Seminars_Tests_Unit_Bag_SpeakerTest extends \Tx_Phpunit_TestCase
         );
 
         /** @var \Tx_Seminars_OldModel_Speaker $currentModel */
-        $currentModel = $this->fixture->current();
+        $currentModel = $this->subject->current();
 
         self::assertTrue($currentModel->isHidden());
     }

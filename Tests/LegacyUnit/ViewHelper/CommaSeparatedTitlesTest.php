@@ -10,7 +10,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CommaSeparatedTitlesTest extends \Tx_Php
     /**
      * @var \Tx_Seminars_ViewHelper_CommaSeparatedTitles
      */
-    private $fixture;
+    private $subject;
 
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -31,7 +31,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CommaSeparatedTitlesTest extends \Tx_Php
     {
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
         $this->list = new \Tx_Oelib_List();
-        $this->fixture = new \Tx_Seminars_ViewHelper_CommaSeparatedTitles();
+        $this->subject = new \Tx_Seminars_ViewHelper_CommaSeparatedTitles();
     }
 
     protected function tearDown()
@@ -46,7 +46,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CommaSeparatedTitlesTest extends \Tx_Php
     {
         self::assertSame(
             '',
-            $this->fixture->render($this->list)
+            $this->subject->render($this->list)
         );
     }
 
@@ -63,7 +63,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CommaSeparatedTitlesTest extends \Tx_Php
 
         $this->list->add($model);
 
-        $this->fixture->render($this->list);
+        $this->subject->render($this->list);
     }
 
     /**
@@ -78,7 +78,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CommaSeparatedTitlesTest extends \Tx_Php
 
         self::assertSame(
             $model->getTitle(),
-            $this->fixture->render($this->list)
+            $this->subject->render($this->list)
         );
     }
 
@@ -97,7 +97,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CommaSeparatedTitlesTest extends \Tx_Php
 
         self::assertSame(
             $firstModel->getTitle() . ', ' . $secondModel->getTitle(),
-            $this->fixture->render($this->list)
+            $this->subject->render($this->list)
         );
     }
 
@@ -113,7 +113,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CommaSeparatedTitlesTest extends \Tx_Php
 
         self::assertSame(
             htmlspecialchars($model->getTitle()),
-            $this->fixture->render($this->list)
+            $this->subject->render($this->list)
         );
     }
 }

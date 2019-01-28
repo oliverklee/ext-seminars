@@ -11,7 +11,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
     /**
      * @var \Tx_Seminars_Model_FrontEndUser the object to test
      */
-    private $fixture;
+    private $subject;
 
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -20,7 +20,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
 
     protected function setUp()
     {
-        $this->fixture = new \Tx_Seminars_Model_FrontEndUser();
+        $this->subject = new \Tx_Seminars_Model_FrontEndUser();
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
     }
 
@@ -48,11 +48,11 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
 
         $list = new \Tx_Oelib_List();
         $list->add($userGroup);
-        $this->fixture->setData(['usergroup' => $list]);
+        $this->subject->setData(['usergroup' => $list]);
 
         self::assertEquals(
             \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
-            $this->fixture->getPublishSetting()
+            $this->subject->getPublishSetting()
         );
     }
 
@@ -71,11 +71,11 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
 
         $list = new \Tx_Oelib_List();
         $list->add($userGroup);
-        $this->fixture->setData(['usergroup' => $list]);
+        $this->subject->setData(['usergroup' => $list]);
 
         self::assertEquals(
             \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW,
-            $this->fixture->getPublishSetting()
+            $this->subject->getPublishSetting()
         );
     }
 
@@ -94,11 +94,11 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
 
         $list = new \Tx_Oelib_List();
         $list->add($userGroup);
-        $this->fixture->setData(['usergroup' => $list]);
+        $this->subject->setData(['usergroup' => $list]);
 
         self::assertEquals(
             \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED,
-            $this->fixture->getPublishSetting()
+            $this->subject->getPublishSetting()
         );
     }
 
@@ -108,11 +108,11 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
     public function getPublishSettingsForUserWithoutGroupReturnsPublishAll()
     {
         $list = new \Tx_Oelib_List();
-        $this->fixture->setData(['usergroup' => $list]);
+        $this->subject->setData(['usergroup' => $list]);
 
         self::assertEquals(
             \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
-            $this->fixture->getPublishSetting()
+            $this->subject->getPublishSetting()
         );
     }
 
@@ -139,11 +139,11 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
         $list = new \Tx_Oelib_List();
         $list->add($userGroup);
         $list->add($userGroup2);
-        $this->fixture->setData(['usergroup' => $list]);
+        $this->subject->setData(['usergroup' => $list]);
 
         self::assertEquals(
             \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW,
-            $this->fixture->getPublishSetting()
+            $this->subject->getPublishSetting()
         );
     }
 
@@ -170,11 +170,11 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
         $list = new \Tx_Oelib_List();
         $list->add($userGroup);
         $list->add($userGroup2);
-        $this->fixture->setData(['usergroup' => $list]);
+        $this->subject->setData(['usergroup' => $list]);
 
         self::assertEquals(
             \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED,
-            $this->fixture->getPublishSetting()
+            $this->subject->getPublishSetting()
         );
     }
 
@@ -201,11 +201,11 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
         $list = new \Tx_Oelib_List();
         $list->add($userGroup);
         $list->add($userGroup2);
-        $this->fixture->setData(['usergroup' => $list]);
+        $this->subject->setData(['usergroup' => $list]);
 
         self::assertEquals(
             \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED,
-            $this->fixture->getPublishSetting()
+            $this->subject->getPublishSetting()
         );
     }
 
@@ -232,11 +232,11 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
         $list = new \Tx_Oelib_List();
         $list->add($userGroup);
         $list->add($userGroup2);
-        $this->fixture->setData(['usergroup' => $list]);
+        $this->subject->setData(['usergroup' => $list]);
 
         self::assertEquals(
             \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW,
-            $this->fixture->getPublishSetting()
+            $this->subject->getPublishSetting()
         );
     }
 
@@ -250,11 +250,11 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
     public function getAuxiliaryRecordsPidWithoutUserGroupReturnsZero()
     {
         $list = new \Tx_Oelib_List();
-        $this->fixture->setData(['usergroup' => $list]);
+        $this->subject->setData(['usergroup' => $list]);
 
         self::assertEquals(
             0,
-            $this->fixture->getAuxiliaryRecordsPid()
+            $this->subject->getAuxiliaryRecordsPid()
         );
     }
 
@@ -271,11 +271,11 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
         $list = new \Tx_Oelib_List();
         $list->add($userGroup);
 
-        $this->fixture->setData(['usergroup' => $list]);
+        $this->subject->setData(['usergroup' => $list]);
 
         self::assertEquals(
             0,
-            $this->fixture->getAuxiliaryRecordsPid()
+            $this->subject->getAuxiliaryRecordsPid()
         );
     }
 
@@ -294,11 +294,11 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
         $list = new \Tx_Oelib_List();
         $list->add($userGroup);
 
-        $this->fixture->setData(['usergroup' => $list]);
+        $this->subject->setData(['usergroup' => $list]);
 
         self::assertEquals(
             42,
-            $this->fixture->getAuxiliaryRecordsPid()
+            $this->subject->getAuxiliaryRecordsPid()
         );
     }
 
@@ -320,11 +320,11 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
         $list->add($userGroup);
         $list->add($userGroup2);
 
-        $this->fixture->setData(['usergroup' => $list]);
+        $this->subject->setData(['usergroup' => $list]);
 
         self::assertEquals(
             42,
-            $this->fixture->getAuxiliaryRecordsPid()
+            $this->subject->getAuxiliaryRecordsPid()
         );
     }
 
@@ -348,11 +348,11 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
         $list->add($userGroup);
         $list->add($userGroup2);
 
-        $this->fixture->setData(['usergroup' => $list]);
+        $this->subject->setData(['usergroup' => $list]);
 
         self::assertEquals(
             24,
-            $this->fixture->getAuxiliaryRecordsPid()
+            $this->subject->getAuxiliaryRecordsPid()
         );
     }
 
@@ -366,10 +366,10 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
     public function getReviewerFromGroupForUserWithoutGroupsReturnsNull()
     {
         $list = new \Tx_Oelib_List();
-        $this->fixture->setData(['usergroup' => $list]);
+        $this->subject->setData(['usergroup' => $list]);
 
         self::assertNull(
-            $this->fixture->getReviewerFromGroup()
+            $this->subject->getReviewerFromGroup()
         );
     }
 
@@ -384,10 +384,10 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
         $list = new \Tx_Oelib_List();
         $list->add($userGroup);
 
-        $this->fixture->setData(['usergroup' => $list]);
+        $this->subject->setData(['usergroup' => $list]);
 
         self::assertNull(
-            $this->fixture->getReviewerFromGroup()
+            $this->subject->getReviewerFromGroup()
         );
     }
 
@@ -404,11 +404,11 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
         $list = new \Tx_Oelib_List();
         $list->add($userGroup);
 
-        $this->fixture->setData(['usergroup' => $list]);
+        $this->subject->setData(['usergroup' => $list]);
 
         self::assertSame(
             $backEndUser,
-            $this->fixture->getReviewerFromGroup()
+            $this->subject->getReviewerFromGroup()
         );
     }
 
@@ -429,11 +429,11 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
         $list->add($userGroup1);
         $list->add($userGroup2);
 
-        $this->fixture->setData(['usergroup' => $list]);
+        $this->subject->setData(['usergroup' => $list]);
 
         self::assertSame(
             $backEndUser,
-            $this->fixture->getReviewerFromGroup()
+            $this->subject->getReviewerFromGroup()
         );
     }
 
@@ -455,11 +455,11 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
         $list->add($userGroup1);
         $list->add($userGroup2);
 
-        $this->fixture->setData(['usergroup' => $list]);
+        $this->subject->setData(['usergroup' => $list]);
 
         self::assertSame(
             $backEndUser1,
-            $this->fixture->getReviewerFromGroup()
+            $this->subject->getReviewerFromGroup()
         );
     }
 
@@ -473,11 +473,11 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
     public function getEventRecordsPidWithoutUserGroupReturnsZero()
     {
         $list = new \Tx_Oelib_List();
-        $this->fixture->setData(['usergroup' => $list]);
+        $this->subject->setData(['usergroup' => $list]);
 
         self::assertEquals(
             0,
-            $this->fixture->getEventRecordsPid()
+            $this->subject->getEventRecordsPid()
         );
     }
 
@@ -494,11 +494,11 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
         $list = new \Tx_Oelib_List();
         $list->add($userGroup);
 
-        $this->fixture->setData(['usergroup' => $list]);
+        $this->subject->setData(['usergroup' => $list]);
 
         self::assertEquals(
             0,
-            $this->fixture->getEventRecordsPid()
+            $this->subject->getEventRecordsPid()
         );
     }
 
@@ -517,11 +517,11 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
         $list = new \Tx_Oelib_List();
         $list->add($userGroup);
 
-        $this->fixture->setData(['usergroup' => $list]);
+        $this->subject->setData(['usergroup' => $list]);
 
         self::assertEquals(
             42,
-            $this->fixture->getEventRecordsPid()
+            $this->subject->getEventRecordsPid()
         );
     }
 
@@ -543,11 +543,11 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
         $list->add($userGroup);
         $list->add($userGroup2);
 
-        $this->fixture->setData(['usergroup' => $list]);
+        $this->subject->setData(['usergroup' => $list]);
 
         self::assertEquals(
             42,
-            $this->fixture->getEventRecordsPid()
+            $this->subject->getEventRecordsPid()
         );
     }
 
@@ -571,11 +571,11 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
         $list->add($userGroup);
         $list->add($userGroup2);
 
-        $this->fixture->setData(['usergroup' => $list]);
+        $this->subject->setData(['usergroup' => $list]);
 
         self::assertEquals(
             24,
-            $this->fixture->getEventRecordsPid()
+            $this->subject->getEventRecordsPid()
         );
     }
 
@@ -597,10 +597,10 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
 
         $list = new \Tx_Oelib_List();
         $list->add($userGroup);
-        $this->fixture->setData(['usergroup' => $list]);
+        $this->subject->setData(['usergroup' => $list]);
 
         self::assertTrue(
-            $this->fixture->getDefaultCategoriesFromGroup()->isEmpty()
+            $this->subject->getDefaultCategoriesFromGroup()->isEmpty()
         );
     }
 
@@ -624,11 +624,11 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
 
         $list = new \Tx_Oelib_List();
         $list->add($userGroup);
-        $this->fixture->setData(['usergroup' => $list]);
+        $this->subject->setData(['usergroup' => $list]);
 
         self::assertEquals(
             1,
-            $this->fixture->getDefaultCategoriesFromGroup()->count()
+            $this->subject->getDefaultCategoriesFromGroup()->count()
         );
     }
 
@@ -653,11 +653,11 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
 
         $list = new \Tx_Oelib_List();
         $list->add($userGroup);
-        $this->fixture->setData(['usergroup' => $list]);
+        $this->subject->setData(['usergroup' => $list]);
 
         self::assertEquals(
             2,
-            $this->fixture->getDefaultCategoriesFromGroup()->count()
+            $this->subject->getDefaultCategoriesFromGroup()->count()
         );
     }
 
@@ -688,11 +688,11 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
         $list = new \Tx_Oelib_List();
         $list->add($userGroup1);
         $list->add($userGroup2);
-        $this->fixture->setData(['usergroup' => $list]);
+        $this->subject->setData(['usergroup' => $list]);
 
         self::assertEquals(
             1,
-            $this->fixture->getDefaultCategoriesFromGroup()->count()
+            $this->subject->getDefaultCategoriesFromGroup()->count()
         );
     }
 
@@ -723,11 +723,11 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
         $list = new \Tx_Oelib_List();
         $list->add($userGroup1);
         $list->add($userGroup2);
-        $this->fixture->setData(['usergroup' => $list]);
+        $this->subject->setData(['usergroup' => $list]);
 
         self::assertEquals(
             1,
-            $this->fixture->getDefaultCategoriesFromGroup()->count()
+            $this->subject->getDefaultCategoriesFromGroup()->count()
         );
     }
 
@@ -762,11 +762,11 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
         $list = new \Tx_Oelib_List();
         $list->add($userGroup1);
         $list->add($userGroup2);
-        $this->fixture->setData(['usergroup' => $list]);
+        $this->subject->setData(['usergroup' => $list]);
 
         self::assertEquals(
             2,
-            $this->fixture->getDefaultCategoriesFromGroup()->count()
+            $this->subject->getDefaultCategoriesFromGroup()->count()
         );
     }
 
@@ -788,10 +788,10 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
 
         $list = new \Tx_Oelib_List();
         $list->add($userGroup);
-        $this->fixture->setData(['usergroup' => $list]);
+        $this->subject->setData(['usergroup' => $list]);
 
         self::assertFalse(
-            $this->fixture->hasDefaultCategories()
+            $this->subject->hasDefaultCategories()
         );
     }
 
@@ -815,10 +815,10 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
 
         $list = new \Tx_Oelib_List();
         $list->add($userGroup);
-        $this->fixture->setData(['usergroup' => $list]);
+        $this->subject->setData(['usergroup' => $list]);
 
         self::assertTrue(
-            $this->fixture->hasDefaultCategories()
+            $this->subject->hasDefaultCategories()
         );
     }
 
@@ -832,13 +832,13 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
     public function getRegistrationReturnsRegistration()
     {
         $registration = new \Tx_Seminars_Model_Registration();
-        $this->fixture->setData(
+        $this->subject->setData(
             ['tx_seminars_registration' => $registration]
         );
 
         self::assertSame(
             $registration,
-            $this->fixture->getRegistration()
+            $this->subject->getRegistration()
         );
     }
 
@@ -848,11 +848,11 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
     public function setRegistrationSetsRegistration()
     {
         $registration = new \Tx_Seminars_Model_Registration();
-        $this->fixture->setRegistration($registration);
+        $this->subject->setRegistration($registration);
 
         self::assertSame(
             $registration,
-            $this->fixture->getRegistration()
+            $this->subject->getRegistration()
         );
     }
 
@@ -861,10 +861,10 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
      */
     public function setRegistrationWithNullIsAllowed()
     {
-        $this->fixture->setRegistration();
+        $this->subject->setRegistration();
 
         self::assertNull(
-            $this->fixture->getRegistration()
+            $this->subject->getRegistration()
         );
     }
 
@@ -882,10 +882,10 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
         $userGroup->setData(['tx_seminars_default_organizer' => null]);
         $groups = new \Tx_Oelib_List();
         $groups->add($userGroup);
-        $this->fixture->setData(['usergroup' => $groups]);
+        $this->subject->setData(['usergroup' => $groups]);
 
         self::assertTrue(
-            $this->fixture->getDefaultOrganizers()->isEmpty()
+            $this->subject->getDefaultOrganizers()->isEmpty()
         );
     }
 
@@ -901,11 +901,11 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
         $userGroup->setData(['tx_seminars_default_organizer' => $organizer]);
         $groups = new \Tx_Oelib_List();
         $groups->add($userGroup);
-        $this->fixture->setData(['usergroup' => $groups]);
+        $this->subject->setData(['usergroup' => $groups]);
 
         self::assertSame(
             $organizer,
-            $this->fixture->getDefaultOrganizers()->first()
+            $this->subject->getDefaultOrganizers()->first()
         );
     }
 
@@ -929,9 +929,9 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
         $groups = new \Tx_Oelib_List();
         $groups->add($userGroup1);
         $groups->add($userGroup2);
-        $this->fixture->setData(['usergroup' => $groups]);
+        $this->subject->setData(['usergroup' => $groups]);
 
-        $defaultOrganizers = $this->fixture->getDefaultOrganizers();
+        $defaultOrganizers = $this->subject->getDefaultOrganizers();
 
         self::assertTrue(
             $defaultOrganizers->hasUid($organizer1->getUid()),
@@ -952,16 +952,16 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
      */
     public function hasDefaultOrganizersForEmptyDefaultOrganizersReturnsFalse()
     {
-        /** @var \Tx_Seminars_Model_FrontEndUser|\PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(
+        /** @var \Tx_Seminars_Model_FrontEndUser|\PHPUnit_Framework_MockObject_MockObject $subject */
+        $subject = $this->getMock(
             \Tx_Seminars_Model_FrontEndUser::class,
             ['getDefaultOrganizers']
         );
-        $fixture->expects(self::any())->method('getDefaultOrganizers')
+        $subject->expects(self::any())->method('getDefaultOrganizers')
             ->will(self::returnValue(new \Tx_Oelib_List()));
 
         self::assertFalse(
-            $fixture->hasDefaultOrganizers()
+            $subject->hasDefaultOrganizers()
         );
     }
 
@@ -975,16 +975,16 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
         $organizers = new \Tx_Oelib_List();
         $organizers->add($organizer);
 
-        /** @var \Tx_Seminars_Model_FrontEndUser|\PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(
+        /** @var \Tx_Seminars_Model_FrontEndUser|\PHPUnit_Framework_MockObject_MockObject $subject */
+        $subject = $this->getMock(
             \Tx_Seminars_Model_FrontEndUser::class,
             ['getDefaultOrganizers']
         );
-        $fixture->expects(self::any())->method('getDefaultOrganizers')
+        $subject->expects(self::any())->method('getDefaultOrganizers')
             ->will(self::returnValue($organizers));
 
         self::assertTrue(
-            $fixture->hasDefaultOrganizers()
+            $subject->hasDefaultOrganizers()
         );
     }
 }

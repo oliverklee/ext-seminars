@@ -11,7 +11,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
     /**
      * @var \Tx_Seminars_Model_Registration
      */
-    private $fixture;
+    private $subject;
 
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -23,7 +23,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
-        $this->fixture = new \Tx_Seminars_Model_Registration();
+        $this->subject = new \Tx_Seminars_Model_Registration();
     }
 
     protected function tearDown()
@@ -45,7 +45,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
             'The parameter $title must not be empty.'
         );
 
-        $this->fixture->setTitle('');
+        $this->subject->setTitle('');
     }
 
     /**
@@ -53,11 +53,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setTitleSetsTitle()
     {
-        $this->fixture->setTitle('registration for event');
+        $this->subject->setTitle('registration for event');
 
         self::assertEquals(
             'registration for event',
-            $this->fixture->getTitle()
+            $this->subject->getTitle()
         );
     }
 
@@ -66,11 +66,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getTitleWithNonEmptyTitleReturnsTitle()
     {
-        $this->fixture->setData(['title' => 'registration for event']);
+        $this->subject->setData(['title' => 'registration for event']);
 
         self::assertEquals(
             'registration for event',
-            $this->fixture->getTitle()
+            $this->subject->getTitle()
         );
     }
 
@@ -85,11 +85,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
     {
         $frontEndUser = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_FrontEndUser::class)
             ->getNewGhost();
-        $this->fixture->setFrontEndUser($frontEndUser);
+        $this->subject->setFrontEndUser($frontEndUser);
 
         self::assertSame(
             $frontEndUser,
-            $this->fixture->getFrontEndUser()
+            $this->subject->getFrontEndUser()
         );
     }
 
@@ -104,11 +104,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
     {
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
             ->getNewGhost();
-        $this->fixture->setData(['seminar' => $event]);
+        $this->subject->setData(['seminar' => $event]);
 
         self::assertSame(
             $event,
-            $this->fixture->getEvent()
+            $this->subject->getEvent()
         );
     }
 
@@ -119,11 +119,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
     {
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
             ->getNewGhost();
-        $this->fixture->setData(['seminar' => $event]);
+        $this->subject->setData(['seminar' => $event]);
 
         self::assertSame(
             $event,
-            $this->fixture->getSeminar()
+            $this->subject->getSeminar()
         );
     }
 
@@ -134,11 +134,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
     {
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
             ->getNewGhost();
-        $this->fixture->setEvent($event);
+        $this->subject->setEvent($event);
 
         self::assertSame(
             $event,
-            $this->fixture->getEvent()
+            $this->subject->getEvent()
         );
     }
 
@@ -149,11 +149,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
     {
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
             ->getNewGhost();
-        $this->fixture->setSeminar($event);
+        $this->subject->setSeminar($event);
 
         self::assertSame(
             $event,
-            $this->fixture->getEvent()
+            $this->subject->getEvent()
         );
     }
 
@@ -166,10 +166,10 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function isOnRegistrationQueueForRegularRegistrationReturnsFalse()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertFalse(
-            $this->fixture->isOnRegistrationQueue()
+            $this->subject->isOnRegistrationQueue()
         );
     }
 
@@ -178,10 +178,10 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function isOnRegistrationQueueForQueueRegistrationReturnsTrue()
     {
-        $this->fixture->setData(['registration_queue' => true]);
+        $this->subject->setData(['registration_queue' => true]);
 
         self::assertTrue(
-            $this->fixture->isOnRegistrationQueue()
+            $this->subject->isOnRegistrationQueue()
         );
     }
 
@@ -190,11 +190,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setOnRegistrationQueueTrueSetsRegistrationQueuetoToTrue()
     {
-        $this->fixture->setData(['registration_queue' => false]);
-        $this->fixture->setOnRegistrationQueue(true);
+        $this->subject->setData(['registration_queue' => false]);
+        $this->subject->setOnRegistrationQueue(true);
 
         self::assertTrue(
-            $this->fixture->isOnRegistrationQueue()
+            $this->subject->isOnRegistrationQueue()
         );
     }
 
@@ -203,11 +203,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setOnRegistrationQueueFalseSetsRegistrationQueuetoToFalse()
     {
-        $this->fixture->setData(['registration_queue' => true]);
-        $this->fixture->setOnRegistrationQueue(false);
+        $this->subject->setData(['registration_queue' => true]);
+        $this->subject->setOnRegistrationQueue(false);
 
         self::assertFalse(
-            $this->fixture->isOnRegistrationQueue()
+            $this->subject->isOnRegistrationQueue()
         );
     }
 
@@ -221,11 +221,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
     public function setPriceSetsPrice()
     {
         $price = 'Price Regular';
-        $this->fixture->setPrice($price);
+        $this->subject->setPrice($price);
 
         self::assertEquals(
             $price,
-            $this->fixture->getPrice()
+            $this->subject->getPrice()
         );
     }
 
@@ -235,11 +235,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
     public function getPriceWithNonEmptyPriceReturnsPrice()
     {
         $price = 'Price Regular';
-        $this->fixture->setData(['price' => $price]);
+        $this->subject->setData(['price' => $price]);
 
         self::assertEquals(
             $price,
-            $this->fixture->getPrice()
+            $this->subject->getPrice()
         );
     }
 
@@ -248,11 +248,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getPriceWithoutPriceReturnsEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getPrice()
+            $this->subject->getPrice()
         );
     }
 
@@ -265,11 +265,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getSeatsWithoutSeatsReturnsZero()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             0,
-            $this->fixture->getSeats()
+            $this->subject->getSeats()
         );
     }
 
@@ -278,11 +278,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getSeatsWithNonZeroSeatsReturnsSeats()
     {
-        $this->fixture->setData(['seats' => 42]);
+        $this->subject->setData(['seats' => 42]);
 
         self::assertEquals(
             42,
-            $this->fixture->getSeats()
+            $this->subject->getSeats()
         );
     }
 
@@ -291,11 +291,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setSeatsSetsSeats()
     {
-        $this->fixture->setSeats(42);
+        $this->subject->setSeats(42);
 
         self::assertEquals(
             42,
-            $this->fixture->getSeats()
+            $this->subject->getSeats()
         );
     }
 
@@ -309,7 +309,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
             'The parameter $seats must be >= 0.'
         );
 
-        $this->fixture->setSeats(-1);
+        $this->subject->setSeats(-1);
     }
 
     ///////////////////////////////////////////////
@@ -321,10 +321,10 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function hasRegisteredThemselvesForThirdPartyRegistrationReturnsFalse()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertFalse(
-            $this->fixture->hasRegisteredThemselves()
+            $this->subject->hasRegisteredThemselves()
         );
     }
 
@@ -333,10 +333,10 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function hasRegisteredThemselvesForSelfRegistrationReturnsTrue()
     {
-        $this->fixture->setData(['registered_themselves' => true]);
+        $this->subject->setData(['registered_themselves' => true]);
 
         self::assertTrue(
-            $this->fixture->hasRegisteredThemselves()
+            $this->subject->hasRegisteredThemselves()
         );
     }
 
@@ -345,10 +345,10 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setRegisteredThemselvesSetsRegisteredThemselves()
     {
-        $this->fixture->setRegisteredThemselves(true);
+        $this->subject->setRegisteredThemselves(true);
 
         self::assertTrue(
-            $this->fixture->hasRegisteredThemselves()
+            $this->subject->hasRegisteredThemselves()
         );
     }
 
@@ -361,11 +361,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getTotalPriceWithoutTotalPriceReturnsZero()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             0.00,
-            $this->fixture->getTotalPrice()
+            $this->subject->getTotalPrice()
         );
     }
 
@@ -374,11 +374,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getTotalPriceWithTotalPriceReturnsTotalPrice()
     {
-        $this->fixture->setData(['total_price' => 42.13]);
+        $this->subject->setData(['total_price' => 42.13]);
 
         self::assertEquals(
             42.13,
-            $this->fixture->getTotalPrice()
+            $this->subject->getTotalPrice()
         );
     }
 
@@ -392,7 +392,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
             'The parameter $price must be >= 0.'
         );
 
-        $this->fixture->setTotalPrice(-1);
+        $this->subject->setTotalPrice(-1);
     }
 
     /**
@@ -400,11 +400,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setTotalPriceSetsTotalPrice()
     {
-        $this->fixture->setTotalPrice(42.13);
+        $this->subject->setTotalPrice(42.13);
 
         self::assertEquals(
             42.13,
-            $this->fixture->getTotalPrice()
+            $this->subject->getTotalPrice()
         );
     }
 
@@ -417,11 +417,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getAttendeesNamesWithoutAttendeesNamesReturnsEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getAttendeesNames()
+            $this->subject->getAttendeesNames()
         );
     }
 
@@ -430,11 +430,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getAttendeesNamesWithAttendeesNamesReturnsAttendeesNames()
     {
-        $this->fixture->setData(['attendees_names' => 'John Doe']);
+        $this->subject->setData(['attendees_names' => 'John Doe']);
 
         self::assertEquals(
             'John Doe',
-            $this->fixture->getAttendeesNames()
+            $this->subject->getAttendeesNames()
         );
     }
 
@@ -443,11 +443,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setAttendeesNamesSetsAttendeesNames()
     {
-        $this->fixture->setAttendeesNames('John Doe');
+        $this->subject->setAttendeesNames('John Doe');
 
         self::assertEquals(
             'John Doe',
-            $this->fixture->getAttendeesNames()
+            $this->subject->getAttendeesNames()
         );
     }
 
@@ -460,10 +460,10 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function isPaidForUnpaidRegistrationReturnsFalse()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertFalse(
-            $this->fixture->isPaid()
+            $this->subject->isPaid()
         );
     }
 
@@ -472,10 +472,10 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function isPaidForPaidRegistrationReturnsTrue()
     {
-        $this->fixture->setData(['datepaid' => $GLOBALS['SIM_EXEC_TIME']]);
+        $this->subject->setData(['datepaid' => $GLOBALS['SIM_EXEC_TIME']]);
 
         self::assertTrue(
-            $this->fixture->isPaid()
+            $this->subject->isPaid()
         );
     }
 
@@ -488,11 +488,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getPaymentDateAsUnixTimestampWithoutPaymentDateReturnsZero()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             0,
-            $this->fixture->getPaymentDateAsUnixTimestamp()
+            $this->subject->getPaymentDateAsUnixTimestamp()
         );
     }
 
@@ -501,11 +501,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getPaymentDateAsUnixTimestampWithPaymentDateReturnsPaymentDate()
     {
-        $this->fixture->setData(['datepaid' => 42]);
+        $this->subject->setData(['datepaid' => 42]);
 
         self::assertEquals(
             42,
-            $this->fixture->getPaymentDateAsUnixTimestamp()
+            $this->subject->getPaymentDateAsUnixTimestamp()
         );
     }
 
@@ -514,11 +514,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setPaymentDateAsUnixTimestampSetsPaymentDate()
     {
-        $this->fixture->setPaymentDateAsUnixTimestamp(42);
+        $this->subject->setPaymentDateAsUnixTimestamp(42);
 
         self::assertEquals(
             42,
-            $this->fixture->getPaymentDateAsUnixTimestamp()
+            $this->subject->getPaymentDateAsUnixTimestamp()
         );
     }
 
@@ -532,7 +532,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
             'The parameter $timestamp must be >= 0.'
         );
 
-        $this->fixture->setPaymentDateAsUnixTimestamp(-1);
+        $this->subject->setPaymentDateAsUnixTimestamp(-1);
     }
 
     ////////////////////////////////////////
@@ -547,11 +547,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
         $paymentMethod = \Tx_Oelib_MapperRegistry::get(
             \Tx_Seminars_Mapper_PaymentMethod::class
         )->getNewGhost();
-        $this->fixture->setPaymentMethod($paymentMethod);
+        $this->subject->setPaymentMethod($paymentMethod);
 
         self::assertSame(
             $paymentMethod,
-            $this->fixture->getPaymentMethod()
+            $this->subject->getPaymentMethod()
         );
     }
 
@@ -560,10 +560,10 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setPaymentMethodCanSetPaymentMethodToNull()
     {
-        $this->fixture->setPaymentMethod();
+        $this->subject->setPaymentMethod();
 
         self::assertNull(
-            $this->fixture->getPaymentMethod()
+            $this->subject->getPaymentMethod()
         );
     }
 
@@ -576,11 +576,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getAccountNumberWithoutAccountNumberReturnsEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getAccountNumber()
+            $this->subject->getAccountNumber()
         );
     }
 
@@ -589,11 +589,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getAccountNumberWithAccountNumberReturnsAccountNumber()
     {
-        $this->fixture->setData(['account_number' => '1234567']);
+        $this->subject->setData(['account_number' => '1234567']);
 
         self::assertEquals(
             '1234567',
-            $this->fixture->getAccountNumber()
+            $this->subject->getAccountNumber()
         );
     }
 
@@ -602,11 +602,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setAccountNumberSetsAccountNumber()
     {
-        $this->fixture->setAccountNumber('1234567');
+        $this->subject->setAccountNumber('1234567');
 
         self::assertEquals(
             '1234567',
-            $this->fixture->getAccountNumber()
+            $this->subject->getAccountNumber()
         );
     }
 
@@ -619,11 +619,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getBankCodeWithoutBankCodeReturnsEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getBankCode()
+            $this->subject->getBankCode()
         );
     }
 
@@ -632,11 +632,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getBankCodeWithBankCodeReturnsBankCode()
     {
-        $this->fixture->setData(['bank_code' => '1234567']);
+        $this->subject->setData(['bank_code' => '1234567']);
 
         self::assertEquals(
             '1234567',
-            $this->fixture->getBankCode()
+            $this->subject->getBankCode()
         );
     }
 
@@ -645,11 +645,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setBankCodeSetsBankCode()
     {
-        $this->fixture->setBankCode('1234567');
+        $this->subject->setBankCode('1234567');
 
         self::assertEquals(
             '1234567',
-            $this->fixture->getBankCode()
+            $this->subject->getBankCode()
         );
     }
 
@@ -662,11 +662,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getBankNameWithoutBankNameReturnsEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getBankName()
+            $this->subject->getBankName()
         );
     }
 
@@ -675,11 +675,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getBankNameWithBankNameReturnsBankName()
     {
-        $this->fixture->setData(['bank_name' => 'Cayman Island Bank']);
+        $this->subject->setData(['bank_name' => 'Cayman Island Bank']);
 
         self::assertEquals(
             'Cayman Island Bank',
-            $this->fixture->getBankName()
+            $this->subject->getBankName()
         );
     }
 
@@ -688,11 +688,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setBankNameSetsBankName()
     {
-        $this->fixture->setBankName('Cayman Island Bank');
+        $this->subject->setBankName('Cayman Island Bank');
 
         self::assertEquals(
             'Cayman Island Bank',
-            $this->fixture->getBankName()
+            $this->subject->getBankName()
         );
     }
 
@@ -705,11 +705,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getAccountOwnerWithoutAccountOwnerReturnsEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getAccountOwner()
+            $this->subject->getAccountOwner()
         );
     }
 
@@ -718,11 +718,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getAccountOwnerWithAccountOwnerReturnsAccountOwner()
     {
-        $this->fixture->setData(['account_owner' => 'John Doe']);
+        $this->subject->setData(['account_owner' => 'John Doe']);
 
         self::assertEquals(
             'John Doe',
-            $this->fixture->getAccountOwner()
+            $this->subject->getAccountOwner()
         );
     }
 
@@ -731,11 +731,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setAccountOwnerSetsAccountOwner()
     {
-        $this->fixture->setAccountOwner('John Doe');
+        $this->subject->setAccountOwner('John Doe');
 
         self::assertEquals(
             'John Doe',
-            $this->fixture->getAccountOwner()
+            $this->subject->getAccountOwner()
         );
     }
 
@@ -748,11 +748,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getCompanyWithoutCompanyReturnsEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getCompany()
+            $this->subject->getCompany()
         );
     }
 
@@ -761,11 +761,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getCompanyWithCompanyReturnsCompany()
     {
-        $this->fixture->setData(['company' => 'Example Inc.']);
+        $this->subject->setData(['company' => 'Example Inc.']);
 
         self::assertEquals(
             'Example Inc.',
-            $this->fixture->getCompany()
+            $this->subject->getCompany()
         );
     }
 
@@ -774,11 +774,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setCompanySetsCompany()
     {
-        $this->fixture->setCompany('Example Inc.');
+        $this->subject->setCompany('Example Inc.');
 
         self::assertEquals(
             'Example Inc.',
-            $this->fixture->getCompany()
+            $this->subject->getCompany()
         );
     }
 
@@ -791,11 +791,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getNameWithoutNameReturnsEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getName()
+            $this->subject->getName()
         );
     }
 
@@ -804,11 +804,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getNameWithNameReturnsName()
     {
-        $this->fixture->setData(['name' => 'John Doe']);
+        $this->subject->setData(['name' => 'John Doe']);
 
         self::assertEquals(
             'John Doe',
-            $this->fixture->getName()
+            $this->subject->getName()
         );
     }
 
@@ -817,11 +817,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setNameSetsName()
     {
-        $this->fixture->setName('John Doe');
+        $this->subject->setName('John Doe');
 
         self::assertEquals(
             'John Doe',
-            $this->fixture->getName()
+            $this->subject->getName()
         );
     }
 
@@ -834,11 +834,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getGenderWithGenderMaleReturnsGenderMale()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             \Tx_Oelib_Model_FrontEndUser::GENDER_MALE,
-            $this->fixture->getGender()
+            $this->subject->getGender()
         );
     }
 
@@ -847,13 +847,13 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getGenderWithGenderFemaleReturnsGenderFemale()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['gender' => \Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE]
         );
 
         self::assertEquals(
             \Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE,
-            $this->fixture->getGender()
+            $this->subject->getGender()
         );
     }
 
@@ -862,13 +862,13 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getGenderWithGenderUnknownReturnsGenderUnknown()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['gender' => \Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN]
         );
 
         self::assertEquals(
             \Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN,
-            $this->fixture->getGender()
+            $this->subject->getGender()
         );
     }
 
@@ -883,7 +883,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
             'Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE, \\Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN'
         );
 
-        $this->fixture->setGender(-1);
+        $this->subject->setGender(-1);
     }
 
     /**
@@ -891,11 +891,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setGenderWithGenderMaleSetsGender()
     {
-        $this->fixture->setGender(\Tx_Oelib_Model_FrontEndUser::GENDER_MALE);
+        $this->subject->setGender(\Tx_Oelib_Model_FrontEndUser::GENDER_MALE);
 
         self::assertEquals(
             \Tx_Oelib_Model_FrontEndUser::GENDER_MALE,
-            $this->fixture->getGender()
+            $this->subject->getGender()
         );
     }
 
@@ -904,11 +904,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setGenderWithGenderFemaleSetsGender()
     {
-        $this->fixture->setGender(\Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE);
+        $this->subject->setGender(\Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE);
 
         self::assertEquals(
             \Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE,
-            $this->fixture->getGender()
+            $this->subject->getGender()
         );
     }
 
@@ -917,11 +917,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setGenderWithGenderUnknownSetsGender()
     {
-        $this->fixture->setGender(\Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN);
+        $this->subject->setGender(\Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN);
 
         self::assertEquals(
             \Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN,
-            $this->fixture->getGender()
+            $this->subject->getGender()
         );
     }
 
@@ -934,11 +934,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getAddressWithoutAddressReturnsEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getAddress()
+            $this->subject->getAddress()
         );
     }
 
@@ -947,11 +947,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getAddressWithAdressReturnsAddress()
     {
-        $this->fixture->setData(['address' => 'Main Street 123']);
+        $this->subject->setData(['address' => 'Main Street 123']);
 
         self::assertEquals(
             'Main Street 123',
-            $this->fixture->getAddress()
+            $this->subject->getAddress()
         );
     }
 
@@ -960,11 +960,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setAddressSetsAddress()
     {
-        $this->fixture->setAddress('Main Street 123');
+        $this->subject->setAddress('Main Street 123');
 
         self::assertEquals(
             'Main Street 123',
-            $this->fixture->getAddress()
+            $this->subject->getAddress()
         );
     }
 
@@ -977,11 +977,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getZipWithoutZipReturnsEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getZip()
+            $this->subject->getZip()
         );
     }
 
@@ -990,11 +990,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getZipWithZipReturnsZip()
     {
-        $this->fixture->setData(['zip' => '12345']);
+        $this->subject->setData(['zip' => '12345']);
 
         self::assertEquals(
             '12345',
-            $this->fixture->getZip()
+            $this->subject->getZip()
         );
     }
 
@@ -1003,11 +1003,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setZipSetsZip()
     {
-        $this->fixture->setZip('12345');
+        $this->subject->setZip('12345');
 
         self::assertEquals(
             '12345',
-            $this->fixture->getZip()
+            $this->subject->getZip()
         );
     }
 
@@ -1020,11 +1020,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getCityWithoutCityReturnsEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getCity()
+            $this->subject->getCity()
         );
     }
 
@@ -1033,11 +1033,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getCityWithCityReturnsCity()
     {
-        $this->fixture->setData(['city' => 'Nowhere Ville']);
+        $this->subject->setData(['city' => 'Nowhere Ville']);
 
         self::assertEquals(
             'Nowhere Ville',
-            $this->fixture->getCity()
+            $this->subject->getCity()
         );
     }
 
@@ -1046,11 +1046,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setCitySetsCity()
     {
-        $this->fixture->setCity('Nowhere Ville');
+        $this->subject->setCity('Nowhere Ville');
 
         self::assertEquals(
             'Nowhere Ville',
-            $this->fixture->getCity()
+            $this->subject->getCity()
         );
     }
 
@@ -1063,11 +1063,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getCountryInitiallyReturnsEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getCountry()
+            $this->subject->getCountry()
         );
     }
 
@@ -1077,11 +1077,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
     public function setCountrySetsCountry()
     {
         $country = 'Germany';
-        $this->fixture->setCountry($country);
+        $this->subject->setCountry($country);
 
         self::assertSame(
             $country,
-            $this->fixture->getCountry()
+            $this->subject->getCountry()
         );
     }
 
@@ -1094,11 +1094,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getPhoneWithoutPhoneReturnsEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getPhone()
+            $this->subject->getPhone()
         );
     }
 
@@ -1107,11 +1107,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getPhoneWithPhoneReturnsPhone()
     {
-        $this->fixture->setData(['telephone' => '+49123456789']);
+        $this->subject->setData(['telephone' => '+49123456789']);
 
         self::assertEquals(
             '+49123456789',
-            $this->fixture->getPhone()
+            $this->subject->getPhone()
         );
     }
 
@@ -1120,11 +1120,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setPhoneSetsPhone()
     {
-        $this->fixture->setPhone('+49123456789');
+        $this->subject->setPhone('+49123456789');
 
         self::assertEquals(
             '+49123456789',
-            $this->fixture->getPhone()
+            $this->subject->getPhone()
         );
     }
 
@@ -1137,11 +1137,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getEMailAddressWithoutEMailAddressReturnsEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getEmailAddress()
+            $this->subject->getEmailAddress()
         );
     }
 
@@ -1150,11 +1150,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getEMailAddressWithEMailAddressReturnsEMailAddress()
     {
-        $this->fixture->setData(['email' => 'john@doe.com']);
+        $this->subject->setData(['email' => 'john@doe.com']);
 
         self::assertEquals(
             'john@doe.com',
-            $this->fixture->getEmailAddress()
+            $this->subject->getEmailAddress()
         );
     }
 
@@ -1163,11 +1163,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setEMailAddressSetsEMailAddress()
     {
-        $this->fixture->setEnailAddress('john@doe.com');
+        $this->subject->setEnailAddress('john@doe.com');
 
         self::assertEquals(
             'john@doe.com',
-            $this->fixture->getEmailAddress()
+            $this->subject->getEmailAddress()
         );
     }
 
@@ -1180,10 +1180,10 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function hasAttendedWithoutAttendeeHasAttendedReturnsFalse()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertFalse(
-            $this->fixture->hasAttended()
+            $this->subject->hasAttended()
         );
     }
 
@@ -1192,10 +1192,10 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function hasAttendedWithAttendeeHasAttendedReturnsTrue()
     {
-        $this->fixture->setData(['been_there' => true]);
+        $this->subject->setData(['been_there' => true]);
 
         self::assertTrue(
-            $this->fixture->hasAttended()
+            $this->subject->hasAttended()
         );
     }
 
@@ -1208,11 +1208,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getInterestsWithoutInterestsReturnsEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getInterests()
+            $this->subject->getInterests()
         );
     }
 
@@ -1221,11 +1221,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getInterestsWithInterestsReturnsInterests()
     {
-        $this->fixture->setData(['interests' => 'TYPO3']);
+        $this->subject->setData(['interests' => 'TYPO3']);
 
         self::assertEquals(
             'TYPO3',
-            $this->fixture->getInterests()
+            $this->subject->getInterests()
         );
     }
 
@@ -1234,11 +1234,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setInterestsSetsInterests()
     {
-        $this->fixture->setInterests('TYPO3');
+        $this->subject->setInterests('TYPO3');
 
         self::assertEquals(
             'TYPO3',
-            $this->fixture->getInterests()
+            $this->subject->getInterests()
         );
     }
 
@@ -1251,11 +1251,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getExpectationsWithoutExpectationsReturnsEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getExpectations()
+            $this->subject->getExpectations()
         );
     }
 
@@ -1264,13 +1264,13 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getExpectationsWithExpectationsReturnsExpectations()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['expectations' => 'It\'s going to be nice.']
         );
 
         self::assertEquals(
             'It\'s going to be nice.',
-            $this->fixture->getExpectations()
+            $this->subject->getExpectations()
         );
     }
 
@@ -1279,11 +1279,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setExpectationsSetsExpectations()
     {
-        $this->fixture->setExpectations('It\'s going to be nice.');
+        $this->subject->setExpectations('It\'s going to be nice.');
 
         self::assertEquals(
             'It\'s going to be nice.',
-            $this->fixture->getExpectations()
+            $this->subject->getExpectations()
         );
     }
 
@@ -1296,11 +1296,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getBackgroundKnowledgeWithoutBackgroundKnowledgeReturnsEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getBackgroundKnowledge()
+            $this->subject->getBackgroundKnowledge()
         );
     }
 
@@ -1309,11 +1309,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getBackgroundKnowledgeWithBackgroundKnowledgeReturnsBackgroundKnowledge()
     {
-        $this->fixture->setData(['background_knowledge' => 'Unit Testing']);
+        $this->subject->setData(['background_knowledge' => 'Unit Testing']);
 
         self::assertEquals(
             'Unit Testing',
-            $this->fixture->getBackgroundKnowledge()
+            $this->subject->getBackgroundKnowledge()
         );
     }
 
@@ -1322,11 +1322,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setBackgroundKnowledgeSetsBackgroundKnowledge()
     {
-        $this->fixture->setBackgroundKnowledge('Unit Testing');
+        $this->subject->setBackgroundKnowledge('Unit Testing');
 
         self::assertEquals(
             'Unit Testing',
-            $this->fixture->getBackgroundKnowledge()
+            $this->subject->getBackgroundKnowledge()
         );
     }
 
@@ -1339,11 +1339,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getAccommodationWithoutAccommodationReturnsEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getAccommodation()
+            $this->subject->getAccommodation()
         );
     }
 
@@ -1352,11 +1352,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getAccommodationWithAccommodationReturnsAccommodation()
     {
-        $this->fixture->setData(['accommodation' => 'tent']);
+        $this->subject->setData(['accommodation' => 'tent']);
 
         self::assertEquals(
             'tent',
-            $this->fixture->getAccommodation()
+            $this->subject->getAccommodation()
         );
     }
 
@@ -1365,11 +1365,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setAccommodationSetsAccommodation()
     {
-        $this->fixture->setAccommodation('tent');
+        $this->subject->setAccommodation('tent');
 
         self::assertEquals(
             'tent',
-            $this->fixture->getAccommodation()
+            $this->subject->getAccommodation()
         );
     }
 
@@ -1382,11 +1382,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getFoodWithoutFoodReturnsEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getFood()
+            $this->subject->getFood()
         );
     }
 
@@ -1395,11 +1395,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getFoodWithFoodReturnsFood()
     {
-        $this->fixture->setData(['food' => 'delicious food']);
+        $this->subject->setData(['food' => 'delicious food']);
 
         self::assertEquals(
             'delicious food',
-            $this->fixture->getFood()
+            $this->subject->getFood()
         );
     }
 
@@ -1408,11 +1408,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setFoodSetsFood()
     {
-        $this->fixture->setFood('delicious food');
+        $this->subject->setFood('delicious food');
 
         self::assertEquals(
             'delicious food',
-            $this->fixture->getFood()
+            $this->subject->getFood()
         );
     }
 
@@ -1425,11 +1425,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getKnownFromWithoutKnownFromReturnsEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getKnownFrom()
+            $this->subject->getKnownFrom()
         );
     }
 
@@ -1438,11 +1438,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getKnownFromWithKnownFromReturnsKnownFrom()
     {
-        $this->fixture->setData(['known_from' => 'Google']);
+        $this->subject->setData(['known_from' => 'Google']);
 
         self::assertEquals(
             'Google',
-            $this->fixture->getKnownFrom()
+            $this->subject->getKnownFrom()
         );
     }
 
@@ -1451,11 +1451,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setKnownFromSetsKnownFrom()
     {
-        $this->fixture->setKnownFrom('Google');
+        $this->subject->setKnownFrom('Google');
 
         self::assertEquals(
             'Google',
-            $this->fixture->getKnownFrom()
+            $this->subject->getKnownFrom()
         );
     }
 
@@ -1468,11 +1468,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getNotesWithoutNotesReturnsEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getNotes()
+            $this->subject->getNotes()
         );
     }
 
@@ -1481,11 +1481,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getNotesWithNotesReturnsNotes()
     {
-        $this->fixture->setData(['notes' => 'This is a nice registration.']);
+        $this->subject->setData(['notes' => 'This is a nice registration.']);
 
         self::assertEquals(
             'This is a nice registration.',
-            $this->fixture->getNotes()
+            $this->subject->getNotes()
         );
     }
 
@@ -1494,11 +1494,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setNotesSetsNotes()
     {
-        $this->fixture->setNotes('This is a nice registration.');
+        $this->subject->setNotes('This is a nice registration.');
 
         self::assertEquals(
             'This is a nice registration.',
-            $this->fixture->getNotes()
+            $this->subject->getNotes()
         );
     }
 
@@ -1511,11 +1511,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getKidsWithoutKidsReturnsZero()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             0,
-            $this->fixture->getKids()
+            $this->subject->getKids()
         );
     }
 
@@ -1524,11 +1524,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function getKidsWithKidsReturnsKids()
     {
-        $this->fixture->setData(['kids' => 3]);
+        $this->subject->setData(['kids' => 3]);
 
         self::assertEquals(
             3,
-            $this->fixture->getKids()
+            $this->subject->getKids()
         );
     }
 
@@ -1542,7 +1542,7 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
             'The parameter $kids must be >= 0.'
         );
 
-        $this->fixture->setKids(-1);
+        $this->subject->setKids(-1);
     }
 
     /**
@@ -1550,11 +1550,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setKidsWithPositiveKidsSetsKids()
     {
-        $this->fixture->setKids(3);
+        $this->subject->setKids(3);
 
         self::assertEquals(
             3,
-            $this->fixture->getKids()
+            $this->subject->getKids()
         );
     }
 
@@ -1568,13 +1568,13 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
     public function getAdditionalPersonsGetsAdditionalPersons()
     {
         $additionalPersons = new \Tx_Oelib_List();
-        $this->fixture->setData(
+        $this->subject->setData(
             ['additional_persons' => $additionalPersons]
         );
 
         self::assertSame(
             $additionalPersons,
-            $this->fixture->getAdditionalPersons()
+            $this->subject->getAdditionalPersons()
         );
     }
 
@@ -1584,11 +1584,11 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
     public function setAdditionalPersonsSetsAdditionalPersons()
     {
         $additionalPersons = new \Tx_Oelib_List();
-        $this->fixture->setAdditionalPersons($additionalPersons);
+        $this->subject->setAdditionalPersons($additionalPersons);
 
         self::assertSame(
             $additionalPersons,
-            $this->fixture->getAdditionalPersons()
+            $this->subject->getAdditionalPersons()
         );
     }
 }

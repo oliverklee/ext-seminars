@@ -11,7 +11,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
     /**
      * @var \Tx_Seminars_BagBuilder_Registration
      */
-    private $fixture;
+    private $subject;
 
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -24,8 +24,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
 
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
-        $this->fixture = new \Tx_Seminars_BagBuilder_Registration();
-        $this->fixture->setTestMode();
+        $this->subject = new \Tx_Seminars_BagBuilder_Registration();
+        $this->subject->setTestMode();
     }
 
     protected function tearDown()
@@ -41,7 +41,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
 
     public function testBagBuilderBuildsARegistrationBag()
     {
-        self::assertInstanceOf(\Tx_Seminars_Bag_Registration::class, $this->fixture->build());
+        self::assertInstanceOf(\Tx_Seminars_Bag_Registration::class, $this->subject->build());
     }
 
     public function testBuildReturnsBagWhichIsSortedAscendingByCrDate()
@@ -55,7 +55,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
             ['title' => 'Title 1', 'crdate' => $GLOBALS['SIM_EXEC_TIME']]
         );
 
-        $registrationBag = $this->fixture->build();
+        $registrationBag = $this->subject->build();
         self::assertEquals(
             2,
             $registrationBag->count()
@@ -84,7 +84,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
             'tx_seminars_attendances',
             ['title' => 'Attendance 2', 'seminar' => $eventUid1]
         );
-        $registrationBag = $this->fixture->build();
+        $registrationBag = $this->subject->build();
 
         self::assertEquals(
             2,
@@ -103,7 +103,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
             'The parameter $eventUid must be > 0.'
         );
 
-        $this->fixture->limitToEvent(-1);
+        $this->subject->limitToEvent(-1);
     }
 
     public function testLimitToEventWithZeroEventUidThrowsException()
@@ -113,7 +113,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
             'The parameter $eventUid must be > 0.'
         );
 
-        $this->fixture->limitToEvent(0);
+        $this->subject->limitToEvent(0);
     }
 
     public function testLimitToEventWithValidEventUidFindsRegistrationOfEvent()
@@ -125,8 +125,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
             'tx_seminars_attendances',
             ['title' => 'Attendance 1', 'seminar' => $eventUid1]
         );
-        $this->fixture->limitToEvent($eventUid1);
-        $registrationBag = $this->fixture->build();
+        $this->subject->limitToEvent($eventUid1);
+        $registrationBag = $this->subject->build();
 
         self::assertEquals(
             'Attendance 1',
@@ -146,8 +146,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
             'tx_seminars_attendances',
             ['title' => 'Attendance 2', 'seminar' => $eventUid2]
         );
-        $this->fixture->limitToEvent($eventUid1);
-        $registrationBag = $this->fixture->build();
+        $this->subject->limitToEvent($eventUid1);
+        $registrationBag = $this->subject->build();
 
         self::assertTrue(
             $registrationBag->isEmpty()
@@ -164,8 +164,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
             'tx_seminars_attendances',
             ['title' => 'Attendance 2', 'datepaid' => $GLOBALS['SIM_EXEC_TIME']]
         );
-        $this->fixture->limitToPaid();
-        $registrationBag = $this->fixture->build();
+        $this->subject->limitToPaid();
+        $registrationBag = $this->subject->build();
         /** @var \Tx_Seminars_OldModel_Registration $currentModel */
         $currentModel = $registrationBag->current();
 
@@ -178,8 +178,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
             'tx_seminars_attendances',
             ['title' => 'Attendance 1', 'datepaid' => 0]
         );
-        $this->fixture->limitToPaid();
-        $registrationBag = $this->fixture->build();
+        $this->subject->limitToPaid();
+        $registrationBag = $this->subject->build();
 
         self::assertTrue(
             $registrationBag->isEmpty()
@@ -196,8 +196,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
             'tx_seminars_attendances',
             ['datepaid' => 0]
         );
-        $this->fixture->limitToUnpaid();
-        $registrationBag = $this->fixture->build();
+        $this->subject->limitToUnpaid();
+        $registrationBag = $this->subject->build();
         /** @var \Tx_Seminars_OldModel_Registration $currentModel */
         $currentModel = $registrationBag->current();
 
@@ -210,8 +210,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
             'tx_seminars_attendances',
             ['datepaid' => $GLOBALS['SIM_EXEC_TIME']]
         );
-        $this->fixture->limitToUnpaid();
-        $registrationBag = $this->fixture->build();
+        $this->subject->limitToUnpaid();
+        $registrationBag = $this->subject->build();
 
         self::assertTrue(
             $registrationBag->isEmpty()
@@ -228,9 +228,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
             'tx_seminars_attendances',
             ['datepaid' => 0]
         );
-        $this->fixture->limitToPaid();
-        $this->fixture->removePaymentLimitation();
-        $registrationBag = $this->fixture->build();
+        $this->subject->limitToPaid();
+        $this->subject->removePaymentLimitation();
+        $registrationBag = $this->subject->build();
         /** @var \Tx_Seminars_OldModel_Registration $currentModel */
         $currentModel = $registrationBag->current();
 
@@ -243,9 +243,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
             'tx_seminars_attendances',
             ['datepaid' => $GLOBALS['SIM_EXEC_TIME']]
         );
-        $this->fixture->limitToUnpaid();
-        $this->fixture->removePaymentLimitation();
-        $registrationBag = $this->fixture->build();
+        $this->subject->limitToUnpaid();
+        $this->subject->removePaymentLimitation();
+        $registrationBag = $this->subject->build();
         /** @var \Tx_Seminars_OldModel_Registration $currentModel */
         $currentModel = $registrationBag->current();
 
@@ -262,8 +262,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
             'tx_seminars_attendances',
             ['registration_queue' => 1]
         );
-        $this->fixture->limitToOnQueue();
-        $registrationBag = $this->fixture->build();
+        $this->subject->limitToOnQueue();
+        $registrationBag = $this->subject->build();
         /** @var \Tx_Seminars_OldModel_Registration $currentModel */
         $currentModel = $registrationBag->current();
 
@@ -276,8 +276,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
             'tx_seminars_attendances',
             ['registration_queue' => 0]
         );
-        $this->fixture->limitToOnQueue();
-        $registrationBag = $this->fixture->build();
+        $this->subject->limitToOnQueue();
+        $registrationBag = $this->subject->build();
 
         self::assertTrue(
             $registrationBag->isEmpty()
@@ -294,8 +294,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
             'tx_seminars_attendances',
             ['registration_queue' => 0]
         );
-        $this->fixture->limitToRegular();
-        $registrationBag = $this->fixture->build();
+        $this->subject->limitToRegular();
+        $registrationBag = $this->subject->build();
         /** @var \Tx_Seminars_OldModel_Registration $currentModel */
         $currentModel = $registrationBag->current();
 
@@ -308,8 +308,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
             'tx_seminars_attendances',
             ['registration_queue' => 1]
         );
-        $this->fixture->limitToRegular();
-        $registrationBag = $this->fixture->build();
+        $this->subject->limitToRegular();
+        $registrationBag = $this->subject->build();
 
         self::assertTrue(
             $registrationBag->isEmpty()
@@ -326,9 +326,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
             'tx_seminars_attendances',
             ['registration_queue' => 0]
         );
-        $this->fixture->limitToOnQueue();
-        $this->fixture->removeQueueLimitation();
-        $registrationBag = $this->fixture->build();
+        $this->subject->limitToOnQueue();
+        $this->subject->removeQueueLimitation();
+        $registrationBag = $this->subject->build();
         /** @var \Tx_Seminars_OldModel_Registration $currentModel */
         $currentModel = $registrationBag->current();
 
@@ -341,9 +341,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
             'tx_seminars_attendances',
             ['registration_queue' => 1]
         );
-        $this->fixture->limitToRegular();
-        $this->fixture->removeQueueLimitation();
-        $registrationBag = $this->fixture->build();
+        $this->subject->limitToRegular();
+        $this->subject->removeQueueLimitation();
+        $registrationBag = $this->subject->build();
         /** @var \Tx_Seminars_OldModel_Registration $currentModel */
         $currentModel = $registrationBag->current();
 
@@ -361,7 +361,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
             'The parameter $seats must be >= 0.'
         );
 
-        $this->fixture->limitToSeatsAtMost(-1);
+        $this->subject->limitToSeatsAtMost(-1);
     }
 
     public function testLimitToSeatsAtMostFindsRegistrationWithEqualSeats()
@@ -370,8 +370,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
             'tx_seminars_attendances',
             ['seats' => 2]
         );
-        $this->fixture->limitToSeatsAtMost(2);
-        $registrationBag = $this->fixture->build();
+        $this->subject->limitToSeatsAtMost(2);
+        $registrationBag = $this->subject->build();
         /** @var \Tx_Seminars_OldModel_Registration $currentModel */
         $currentModel = $registrationBag->current();
 
@@ -384,8 +384,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
             'tx_seminars_attendances',
             ['seats' => 1]
         );
-        $this->fixture->limitToSeatsAtMost(2);
-        $registrationBag = $this->fixture->build();
+        $this->subject->limitToSeatsAtMost(2);
+        $registrationBag = $this->subject->build();
         /** @var \Tx_Seminars_OldModel_Registration $currentModel */
         $currentModel = $registrationBag->current();
 
@@ -398,8 +398,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
             'tx_seminars_attendances',
             ['seats' => 2]
         );
-        $this->fixture->limitToSeatsAtMost(1);
-        $registrationBag = $this->fixture->build();
+        $this->subject->limitToSeatsAtMost(1);
+        $registrationBag = $this->subject->build();
 
         self::assertTrue(
             $registrationBag->isEmpty()
@@ -412,9 +412,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
             'tx_seminars_attendances',
             ['seats' => 2]
         );
-        $this->fixture->limitToSeatsAtMost(1);
-        $this->fixture->limitToSeatsAtMost();
-        $registrationBag = $this->fixture->build();
+        $this->subject->limitToSeatsAtMost(1);
+        $this->subject->limitToSeatsAtMost();
+        $registrationBag = $this->subject->build();
 
         self::assertFalse(
             $registrationBag->isEmpty()
@@ -441,8 +441,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
 
         /** @var \Tx_Seminars_Model_FrontEndUser $user */
         $user = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)->find($feUserUid);
-        $this->fixture->limitToAttendee($user);
-        $bag = $this->fixture->build();
+        $this->subject->limitToAttendee($user);
+        $bag = $this->subject->build();
 
         self::assertEquals(
             $registrationUid,
@@ -469,8 +469,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
 
         /** @var \Tx_Seminars_Model_FrontEndUser $user */
         $user = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)->find($feUserUid);
-        $this->fixture->limitToAttendee($user);
-        $bag = $this->fixture->build();
+        $this->subject->limitToAttendee($user);
+        $bag = $this->subject->build();
 
         self::assertEquals(
             $registrationUid,
@@ -488,8 +488,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
 
         /** @var \Tx_Seminars_Model_FrontEndUser $user */
         $user = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)->find($feUserUid);
-        $this->fixture->limitToAttendee($user);
-        $bag = $this->fixture->build();
+        $this->subject->limitToAttendee($user);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -512,8 +512,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
 
         /** @var \Tx_Seminars_Model_FrontEndUser $user */
         $user = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)->find($feUserUid);
-        $this->fixture->limitToAttendee($user);
-        $bag = $this->fixture->build();
+        $this->subject->limitToAttendee($user);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -536,9 +536,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
 
         /** @var \Tx_Seminars_Model_FrontEndUser $user */
         $user = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)->find($feUserUid);
-        $this->fixture->limitToAttendee($user);
-        $this->fixture->limitToAttendee();
-        $bag = $this->fixture->build();
+        $this->subject->limitToAttendee($user);
+        $this->subject->limitToAttendee();
+        $bag = $this->subject->build();
 
         self::assertEquals(
             $registrationUid,
@@ -569,10 +569,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
             ['seminar' => $eventUid2]
         );
 
-        $this->fixture->setOrderByEventColumn(
+        $this->subject->setOrderByEventColumn(
             'tx_seminars_seminars.title ASC'
         );
-        $bag = $this->fixture->build();
+        $bag = $this->subject->build();
 
         self::assertEquals(
             $bag->current()->getUid(),
@@ -603,10 +603,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
             ['seminar' => $eventUid2]
         );
 
-        $this->fixture->setOrderByEventColumn(
+        $this->subject->setOrderByEventColumn(
             'tx_seminars_seminars.title DESC'
         );
-        $bag = $this->fixture->build();
+        $bag = $this->subject->build();
 
         self::assertEquals(
             $bag->current()->getUid(),
@@ -628,8 +628,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
             'tx_seminars_attendances',
             ['user' => $this->testingFramework->createFrontEndUser()]
         );
-        $this->fixture->limitToExistingUsers();
-        $bag = $this->fixture->build();
+        $this->subject->limitToExistingUsers();
+        $bag = $this->subject->build();
 
         self::assertFalse(
             $bag->isEmpty()
@@ -649,8 +649,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends \Tx_Phpunit_Tes
             'tx_seminars_attendances',
             ['user' => $feUserUid]
         );
-        $this->fixture->limitToExistingUsers();
-        $bag = $this->fixture->build();
+        $this->subject->limitToExistingUsers();
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
