@@ -10,7 +10,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_PublishEventTest extends \Tx_Phpunit_TestC
     /**
      * @var \Tx_Seminars_FrontEnd_PublishEvent
      */
-    private $fixture;
+    private $subject;
 
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -21,7 +21,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_PublishEventTest extends \Tx_Phpunit_TestC
     {
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
-        $this->fixture = new \Tx_Seminars_FrontEnd_PublishEvent();
+        $this->subject = new \Tx_Seminars_FrontEnd_PublishEvent();
     }
 
     protected function tearDown()
@@ -39,8 +39,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_PublishEventTest extends \Tx_Phpunit_TestC
     public function renderForNoPublicationHashSetInPiVarsReturnsPublishFailedMessage()
     {
         self::assertEquals(
-            $this->fixture->translate('message_publishingFailed'),
-            $this->fixture->render()
+            $this->subject->translate('message_publishingFailed'),
+            $this->subject->render()
         );
     }
 
@@ -49,11 +49,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_PublishEventTest extends \Tx_Phpunit_TestC
      */
     public function renderForEmptyPublicationHashSetInPiVarsReturnsPublishFailedMessage()
     {
-        $this->fixture->piVars['hash'] = '';
+        $this->subject->piVars['hash'] = '';
 
         self::assertEquals(
-            $this->fixture->translate('message_publishingFailed'),
-            $this->fixture->render()
+            $this->subject->translate('message_publishingFailed'),
+            $this->subject->render()
         );
     }
 
@@ -62,11 +62,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_PublishEventTest extends \Tx_Phpunit_TestC
      */
     public function renderForInvalidPublicationHashSetInPiVarsReturnsPublishFailedMessage()
     {
-        $this->fixture->piVars['hash'] = 'foo';
+        $this->subject->piVars['hash'] = 'foo';
 
         self::assertEquals(
-            $this->fixture->translate('message_publishingFailed'),
-            $this->fixture->render()
+            $this->subject->translate('message_publishingFailed'),
+            $this->subject->render()
         );
     }
 
@@ -75,17 +75,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_PublishEventTest extends \Tx_Phpunit_TestC
      */
     public function renderForValidPublicationHashAndVisibleEventReturnsPublishFailedMessage()
     {
-        $this->fixture->init([]);
+        $this->subject->init([]);
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             ['hidden' => 0, 'publication_hash' => '123456ABC']
         );
 
-        $this->fixture->piVars['hash'] = '123456ABC';
+        $this->subject->piVars['hash'] = '123456ABC';
 
         self::assertEquals(
-            $this->fixture->translate('message_publishingFailed'),
-            $this->fixture->render()
+            $this->subject->translate('message_publishingFailed'),
+            $this->subject->render()
         );
     }
 
@@ -94,17 +94,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_PublishEventTest extends \Tx_Phpunit_TestC
      */
     public function renderForValidPublicationHashAndHiddenEventReturnsPublishSuccessfulMessage()
     {
-        $this->fixture->init([]);
+        $this->subject->init([]);
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             ['hidden' => 1, 'publication_hash' => '123456ABC']
         );
 
-        $this->fixture->piVars['hash'] = '123456ABC';
+        $this->subject->piVars['hash'] = '123456ABC';
 
         self::assertEquals(
-            $this->fixture->translate('message_publishingSuccessful'),
-            $this->fixture->render()
+            $this->subject->translate('message_publishingSuccessful'),
+            $this->subject->render()
         );
     }
 
@@ -113,14 +113,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_PublishEventTest extends \Tx_Phpunit_TestC
      */
     public function renderForValidPublicationHashUnhidesEventWithPublicationHash()
     {
-        $this->fixture->init([]);
+        $this->subject->init([]);
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             ['hidden' => 1, 'publication_hash' => '123456ABC']
         );
-        $this->fixture->piVars['hash'] = '123456ABC';
+        $this->subject->piVars['hash'] = '123456ABC';
 
-        $this->fixture->render();
+        $this->subject->render();
 
         self::assertTrue(
             $this->testingFramework->existsRecord(
@@ -135,14 +135,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_PublishEventTest extends \Tx_Phpunit_TestC
      */
     public function renderForValidPublicationHashRemovesPublicationHashFromEvent()
     {
-        $this->fixture->init([]);
+        $this->subject->init([]);
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             ['hidden' => 1, 'publication_hash' => '123456ABC']
         );
-        $this->fixture->piVars['hash'] = '123456ABC';
+        $this->subject->piVars['hash'] = '123456ABC';
 
-        $this->fixture->render();
+        $this->subject->render();
 
         self::assertTrue(
             $this->testingFramework->existsRecord(

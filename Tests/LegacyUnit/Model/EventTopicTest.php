@@ -11,13 +11,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
     /**
      * @var \Tx_Seminars_Model_Event
      */
-    private $fixture;
+    private $subject;
 
     protected function setUp()
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
-        $this->fixture = new \Tx_Seminars_Model_Event();
+        $this->subject = new \Tx_Seminars_Model_Event();
     }
 
     ////////////////////////////////
@@ -29,11 +29,11 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getTitleWithNonEmptyTitleReturnsTitle()
     {
-        $this->fixture->setData(['title' => 'Superhero']);
+        $this->subject->setData(['title' => 'Superhero']);
 
         self::assertSame(
             'Superhero',
-            $this->fixture->getTitle()
+            $this->subject->getTitle()
         );
     }
 
@@ -42,11 +42,11 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getRawTitleWithNonEmptyTitleReturnsTitle()
     {
-        $this->fixture->setData(['title' => 'Superhero']);
+        $this->subject->setData(['title' => 'Superhero']);
 
         self::assertSame(
             'Superhero',
-            $this->fixture->getRawTitle()
+            $this->subject->getRawTitle()
         );
     }
 
@@ -59,13 +59,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getSubtitleForEventTopicWithoutSubtitleReturnsAnEmptyString()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
         self::assertEquals(
             '',
-            $this->fixture->getSubtitle()
+            $this->subject->getSubtitle()
         );
     }
 
@@ -74,7 +74,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getSubtitleForEventTopicWithSubtitleReturnsSubtitle()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'subtitle' => 'sub title',
@@ -83,7 +83,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
 
         self::assertEquals(
             'sub title',
-            $this->fixture->getSubtitle()
+            $this->subject->getSubtitle()
         );
     }
 
@@ -92,14 +92,14 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function setSubtitleForEventTopicSetsSubtitle()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
-        $this->fixture->setSubtitle('sub title');
+        $this->subject->setSubtitle('sub title');
 
         self::assertEquals(
             'sub title',
-            $this->fixture->getSubtitle()
+            $this->subject->getSubtitle()
         );
     }
 
@@ -108,12 +108,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function hasSubtitleForEventTopicWithoutSubtitleReturnsFalse()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
         self::assertFalse(
-            $this->fixture->hasSubtitle()
+            $this->subject->hasSubtitle()
         );
     }
 
@@ -122,13 +122,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function hasSubtitleForEventTopicWithSubtitleReturnsTrue()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
-        $this->fixture->setSubtitle('sub title');
+        $this->subject->setSubtitle('sub title');
 
         self::assertTrue(
-            $this->fixture->hasSubtitle()
+            $this->subject->hasSubtitle()
         );
     }
 
@@ -141,13 +141,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getTeaserForEventTopicWithoutTeaserReturnsAnEmptyString()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
         self::assertEquals(
             '',
-            $this->fixture->getTeaser()
+            $this->subject->getTeaser()
         );
     }
 
@@ -156,7 +156,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getTeaserForEventTopicWithTeaserReturnsTeaser()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             [
                 'teaser' => 'wow, this is teasing',
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
@@ -165,7 +165,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
 
         self::assertEquals(
             'wow, this is teasing',
-            $this->fixture->getTeaser()
+            $this->subject->getTeaser()
         );
     }
 
@@ -174,14 +174,14 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function setTeaserForEventTopicSetsTeaser()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
-        $this->fixture->setTeaser('wow, this is teasing');
+        $this->subject->setTeaser('wow, this is teasing');
 
         self::assertEquals(
             'wow, this is teasing',
-            $this->fixture->getTeaser()
+            $this->subject->getTeaser()
         );
     }
 
@@ -190,12 +190,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function hasTeaserForEventTopicWithoutTeaserReturnsFalse()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
         self::assertFalse(
-            $this->fixture->hasTeaser()
+            $this->subject->hasTeaser()
         );
     }
 
@@ -204,7 +204,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function hasTeaserForEventTopicWithTeaserReturnsTrue()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'teaser' => 'wow, this is teasing',
@@ -212,7 +212,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
         );
 
         self::assertTrue(
-            $this->fixture->hasTeaser()
+            $this->subject->hasTeaser()
         );
     }
 
@@ -225,13 +225,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getDescriptionForEventTopicWithoutDescriptionReturnsAnEmptyString()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
         self::assertEquals(
             '',
-            $this->fixture->getDescription()
+            $this->subject->getDescription()
         );
     }
 
@@ -240,7 +240,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getDescriptionForEventTopicWithDescriptionReturnsDescription()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'description' => 'this is a great event.',
@@ -249,7 +249,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
 
         self::assertEquals(
             'this is a great event.',
-            $this->fixture->getDescription()
+            $this->subject->getDescription()
         );
     }
 
@@ -258,14 +258,14 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function setDescriptionForEventTopicSetsDescription()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
-        $this->fixture->setDescription('this is a great event.');
+        $this->subject->setDescription('this is a great event.');
 
         self::assertEquals(
             'this is a great event.',
-            $this->fixture->getDescription()
+            $this->subject->getDescription()
         );
     }
 
@@ -274,12 +274,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function hasDescriptionForEventTopicWithoutDescriptionReturnsFalse()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
         self::assertFalse(
-            $this->fixture->hasDescription()
+            $this->subject->hasDescription()
         );
     }
 
@@ -288,13 +288,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function hasDescriptionForEventTopicWithDescriptionReturnsTrue()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
-        $this->fixture->setDescription('this is a great event.');
+        $this->subject->setDescription('this is a great event.');
 
         self::assertTrue(
-            $this->fixture->hasDescription()
+            $this->subject->hasDescription()
         );
     }
 
@@ -307,13 +307,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getCreditPointsForEventTopicWithoutCreditPointsReturnsZero()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
         self::assertEquals(
             0,
-            $this->fixture->getCreditPoints()
+            $this->subject->getCreditPoints()
         );
     }
 
@@ -322,7 +322,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getCreditPointsForEventTopicWithPositiveCreditPointsReturnsCreditPoints()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'credit_points' => 42,
@@ -331,7 +331,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
 
         self::assertEquals(
             42,
-            $this->fixture->getCreditPoints()
+            $this->subject->getCreditPoints()
         );
     }
 
@@ -340,14 +340,14 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function setCreditPointsForEventTopicWithZeroCreditPointsSetsCreditPoints()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
-        $this->fixture->setCreditPoints(0);
+        $this->subject->setCreditPoints(0);
 
         self::assertEquals(
             0,
-            $this->fixture->getCreditPoints()
+            $this->subject->getCreditPoints()
         );
     }
 
@@ -356,14 +356,14 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function setCreditPointsForEventTopicWithPositiveCreditPointsSetsCreditPoints()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
-        $this->fixture->setCreditPoints(42);
+        $this->subject->setCreditPoints(42);
 
         self::assertEquals(
             42,
-            $this->fixture->getCreditPoints()
+            $this->subject->getCreditPoints()
         );
     }
 
@@ -372,12 +372,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function hasCreditPointsForEventTopicWithoutCreditPointsReturnsFalse()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
         self::assertFalse(
-            $this->fixture->hasCreditPoints()
+            $this->subject->hasCreditPoints()
         );
     }
 
@@ -386,7 +386,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function hasCreditPointsForEventTopicWithCreditPointsReturnsTrue()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'credit_points' => 42,
@@ -394,7 +394,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
         );
 
         self::assertTrue(
-            $this->fixture->hasCreditPoints()
+            $this->subject->hasCreditPoints()
         );
     }
 
@@ -407,7 +407,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getRegularPriceForEventTopicWithoutRegularPriceReturnsZero()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'price_regular' => 0.00,
@@ -416,7 +416,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
 
         self::assertEquals(
             0.00,
-            $this->fixture->getRegularPrice()
+            $this->subject->getRegularPrice()
         );
     }
 
@@ -425,7 +425,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getRegularPriceForEventTopicWithPositiveRegularPriceReturnsRegularPrice()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'price_regular' => 42.42,
@@ -434,7 +434,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
 
         self::assertEquals(
             42.42,
-            $this->fixture->getRegularPrice()
+            $this->subject->getRegularPrice()
         );
     }
 
@@ -443,14 +443,14 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function setRegularPriceForEventTopicWithZeroRegularPriceSetsRegularPrice()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
-        $this->fixture->setRegularPrice(0.00);
+        $this->subject->setRegularPrice(0.00);
 
         self::assertEquals(
             0.00,
-            $this->fixture->getRegularPrice()
+            $this->subject->getRegularPrice()
         );
     }
 
@@ -459,14 +459,14 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function setRegularPriceForEventTopicWithPositiveRegularPriceSetsRegularPrice()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
-        $this->fixture->setRegularPrice(42.42);
+        $this->subject->setRegularPrice(42.42);
 
         self::assertEquals(
             42.42,
-            $this->fixture->getRegularPrice()
+            $this->subject->getRegularPrice()
         );
     }
 
@@ -475,12 +475,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function hasRegularPriceForEventTopicWithoutRegularPriceReturnsFalse()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
         self::assertFalse(
-            $this->fixture->hasRegularPrice()
+            $this->subject->hasRegularPrice()
         );
     }
 
@@ -489,7 +489,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function hasRegularPriceForEventTopicWithRegularPriceReturnsTrue()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'price_regular' => 42.42,
@@ -497,7 +497,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
         );
 
         self::assertTrue(
-            $this->fixture->hasRegularPrice()
+            $this->subject->hasRegularPrice()
         );
     }
 
@@ -510,13 +510,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getRegularEarlyBirdPriceForEventTopicWithoutRegularEarlyBirdPriceReturnsZero()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
         self::assertEquals(
             0.00,
-            $this->fixture->getRegularEarlyBirdPrice()
+            $this->subject->getRegularEarlyBirdPrice()
         );
     }
 
@@ -525,7 +525,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getRegularEarlyBirdPriceForEventTopicWithPositiveRegularEarlyBirdPriceReturnsRegularEarlyBirdPrice()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'price_regular_early' => 42.42,
@@ -534,7 +534,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
 
         self::assertEquals(
             42.42,
-            $this->fixture->getRegularEarlyBirdPrice()
+            $this->subject->getRegularEarlyBirdPrice()
         );
     }
 
@@ -548,7 +548,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
             'The parameter $price must be >= 0.00.'
         );
 
-        $this->fixture->setRegularEarlyBirdPrice(-1.00);
+        $this->subject->setRegularEarlyBirdPrice(-1.00);
     }
 
     /**
@@ -556,14 +556,14 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function setRegularEarlyBirdPriceForEventTopicWithZeroRegularEarlyBirdPriceSetsRegularEarlyBirdPrice()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
-        $this->fixture->setRegularEarlyBirdPrice(0.00);
+        $this->subject->setRegularEarlyBirdPrice(0.00);
 
         self::assertEquals(
             0.00,
-            $this->fixture->getRegularEarlyBirdPrice()
+            $this->subject->getRegularEarlyBirdPrice()
         );
     }
 
@@ -572,14 +572,14 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function setRegularEarlyBirdPriceForEventTopicWithPositiveRegularEarlyBirdPriceSetsRegularEarlyBirdPrice()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
-        $this->fixture->setRegularEarlyBirdPrice(42.42);
+        $this->subject->setRegularEarlyBirdPrice(42.42);
 
         self::assertEquals(
             42.42,
-            $this->fixture->getRegularEarlyBirdPrice()
+            $this->subject->getRegularEarlyBirdPrice()
         );
     }
 
@@ -588,12 +588,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function hasRegularEarlyBirdPriceForEventTopicWithoutRegularEarlyBirdPriceReturnsFalse()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
         self::assertFalse(
-            $this->fixture->hasRegularEarlyBirdPrice()
+            $this->subject->hasRegularEarlyBirdPrice()
         );
     }
 
@@ -602,7 +602,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function hasRegularEarlyBirdPriceForEventTopicWithRegularEarlyBirdPriceReturnsTrue()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'price_regular_early' => 42.42,
@@ -610,7 +610,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
         );
 
         self::assertTrue(
-            $this->fixture->hasRegularEarlyBirdPrice()
+            $this->subject->hasRegularEarlyBirdPrice()
         );
     }
 
@@ -623,13 +623,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getRegularBoardPriceForEventTopicWithoutRegularBoardPriceReturnsZero()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
         self::assertEquals(
             0.00,
-            $this->fixture->getRegularBoardPrice()
+            $this->subject->getRegularBoardPrice()
         );
     }
 
@@ -638,7 +638,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getRegularBoardPriceForEventTopicWithPositiveRegularBoardPriceReturnsRegularBoardPrice()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'price_regular_board' => 42.42,
@@ -647,7 +647,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
 
         self::assertEquals(
             42.42,
-            $this->fixture->getRegularBoardPrice()
+            $this->subject->getRegularBoardPrice()
         );
     }
 
@@ -656,14 +656,14 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function setRegularBoardPriceForEventTopicWithZeroRegularBoardPriceSetsRegularBoardPrice()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
-        $this->fixture->setRegularBoardPrice(0.00);
+        $this->subject->setRegularBoardPrice(0.00);
 
         self::assertEquals(
             0.00,
-            $this->fixture->getRegularBoardPrice()
+            $this->subject->getRegularBoardPrice()
         );
     }
 
@@ -672,14 +672,14 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function setRegularBoardPriceForEventTopicWithPositiveRegularBoardPriceSetsRegularBoardPrice()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
-        $this->fixture->setRegularBoardPrice(42.42);
+        $this->subject->setRegularBoardPrice(42.42);
 
         self::assertEquals(
             42.42,
-            $this->fixture->getRegularBoardPrice()
+            $this->subject->getRegularBoardPrice()
         );
     }
 
@@ -688,12 +688,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function hasRegularBoardPriceForEventTopicWithoutRegularBoardPriceReturnsFalse()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
         self::assertFalse(
-            $this->fixture->hasRegularBoardPrice()
+            $this->subject->hasRegularBoardPrice()
         );
     }
 
@@ -702,7 +702,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function hasRegularBoardPriceForEventTopicWithRegularBoardPriceReturnsTrue()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'price_regular_board' => 42.42,
@@ -710,7 +710,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
         );
 
         self::assertTrue(
-            $this->fixture->hasRegularBoardPrice()
+            $this->subject->hasRegularBoardPrice()
         );
     }
 
@@ -723,13 +723,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getSpecialPriceForEventTopicWithoutSpecialPriceReturnsZero()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
         self::assertEquals(
             0.00,
-            $this->fixture->getSpecialPrice()
+            $this->subject->getSpecialPrice()
         );
     }
 
@@ -738,7 +738,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getSpecialPriceForEventTopicWithSpecialPriceReturnsSpecialPrice()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'price_special' => 42.42,
@@ -747,7 +747,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
 
         self::assertEquals(
             42.42,
-            $this->fixture->getSpecialPrice()
+            $this->subject->getSpecialPrice()
         );
     }
 
@@ -756,14 +756,14 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function setSpecialPriceForEventTopicWithZeroSpecialPriceSetsSpecialPrice()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
-        $this->fixture->setSpecialPrice(0.00);
+        $this->subject->setSpecialPrice(0.00);
 
         self::assertEquals(
             0.00,
-            $this->fixture->getSpecialPrice()
+            $this->subject->getSpecialPrice()
         );
     }
 
@@ -772,14 +772,14 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function setSpecialPriceForEventTopicWithPositiveSpecialPriceSetsSpecialPrice()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
-        $this->fixture->setSpecialPrice(42.42);
+        $this->subject->setSpecialPrice(42.42);
 
         self::assertEquals(
             42.42,
-            $this->fixture->getSpecialPrice()
+            $this->subject->getSpecialPrice()
         );
     }
 
@@ -788,12 +788,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function hasSpecialPriceForEventTopicWithoutSpecialPriceReturnsFalse()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
         self::assertFalse(
-            $this->fixture->hasSpecialPrice()
+            $this->subject->hasSpecialPrice()
         );
     }
 
@@ -802,13 +802,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function hasSpecialPriceForEventTopicWithSpecialPriceReturnsTrue()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
-        $this->fixture->setSpecialPrice(42.42);
+        $this->subject->setSpecialPrice(42.42);
 
         self::assertTrue(
-            $this->fixture->hasSpecialPrice()
+            $this->subject->hasSpecialPrice()
         );
     }
 
@@ -821,13 +821,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getSpecialEarlyBirdPriceForEventTopicWithoutSpecialEarlyBirdPriceReturnsZero()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
         self::assertEquals(
             0.00,
-            $this->fixture->getSpecialEarlyBirdPrice()
+            $this->subject->getSpecialEarlyBirdPrice()
         );
     }
 
@@ -836,7 +836,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getSpecialEarlyBirdPriceForEventTopicWithPositiveSpecialEarlyBirdPriceReturnsSpecialEarlyBirdPrice()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'price_special_early' => 42.42,
@@ -845,7 +845,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
 
         self::assertEquals(
             42.42,
-            $this->fixture->getSpecialEarlyBirdPrice()
+            $this->subject->getSpecialEarlyBirdPrice()
         );
     }
 
@@ -854,14 +854,14 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function setSpecialEarlyBirdPriceForEventTopicWithZeroSpecialEarlyBirdPriceSetsSpecialEarlyBirdPrice()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
-        $this->fixture->setSpecialEarlyBirdPrice(0.00);
+        $this->subject->setSpecialEarlyBirdPrice(0.00);
 
         self::assertEquals(
             0.00,
-            $this->fixture->getSpecialEarlyBirdPrice()
+            $this->subject->getSpecialEarlyBirdPrice()
         );
     }
 
@@ -870,14 +870,14 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function setSpecialEarlyBirdPriceForEventTopicWithPositiveSpecialEarlyBirdPriceSetsSpecialEarlyBirdPrice()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
-        $this->fixture->setSpecialEarlyBirdPrice(42.42);
+        $this->subject->setSpecialEarlyBirdPrice(42.42);
 
         self::assertEquals(
             42.42,
-            $this->fixture->getSpecialEarlyBirdPrice()
+            $this->subject->getSpecialEarlyBirdPrice()
         );
     }
 
@@ -886,12 +886,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function hasSpecialEarlyBirdPriceForEventTopicWithoutSpecialEarlyBirdPriceReturnsFalse()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
         self::assertFalse(
-            $this->fixture->hasSpecialEarlyBirdPrice()
+            $this->subject->hasSpecialEarlyBirdPrice()
         );
     }
 
@@ -900,7 +900,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function hasSpecialEarlyBirdPriceForEventTopicWithSpecialEarlyBirdPriceReturnsTrue()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'price_special_early' => 42.42,
@@ -908,7 +908,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
         );
 
         self::assertTrue(
-            $this->fixture->hasSpecialEarlyBirdPrice()
+            $this->subject->hasSpecialEarlyBirdPrice()
         );
     }
 
@@ -921,13 +921,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getSpecialBoardPriceForEventTopicWithoutSpecialBoardPriceReturnsZero()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
         self::assertEquals(
             0.00,
-            $this->fixture->getSpecialBoardPrice()
+            $this->subject->getSpecialBoardPrice()
         );
     }
 
@@ -936,7 +936,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getSpecialBoardPriceForEventTopicWithSpecialBoardPriceReturnsSpecialBoardPrice()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'price_special_board' => 42.42,
@@ -945,7 +945,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
 
         self::assertEquals(
             42.42,
-            $this->fixture->getSpecialBoardPrice()
+            $this->subject->getSpecialBoardPrice()
         );
     }
 
@@ -954,14 +954,14 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function setSpecialBoardPriceForEventTopicWithZeroSpecialBoardPriceSetsSpecialBoardPrice()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
-        $this->fixture->setSpecialBoardPrice(0.00);
+        $this->subject->setSpecialBoardPrice(0.00);
 
         self::assertEquals(
             0.00,
-            $this->fixture->getSpecialBoardPrice()
+            $this->subject->getSpecialBoardPrice()
         );
     }
 
@@ -970,14 +970,14 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function setSpecialBoardPriceForEventTopicWithPositiveSpecialBoardPriceSetsSpecialBoardPrice()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
-        $this->fixture->setSpecialBoardPrice(42.42);
+        $this->subject->setSpecialBoardPrice(42.42);
 
         self::assertEquals(
             42.42,
-            $this->fixture->getSpecialBoardPrice()
+            $this->subject->getSpecialBoardPrice()
         );
     }
 
@@ -986,12 +986,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function hasSpecialBoardPriceForEventTopicWithoutSpecialBoardPriceReturnsFalse()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
         self::assertFalse(
-            $this->fixture->hasSpecialBoardPrice()
+            $this->subject->hasSpecialBoardPrice()
         );
     }
 
@@ -1000,13 +1000,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function hasSpecialBoardPriceForEventTopicWithSpecialBoardPriceReturnsTrue()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
-        $this->fixture->setSpecialBoardPrice(42.42);
+        $this->subject->setSpecialBoardPrice(42.42);
 
         self::assertTrue(
-            $this->fixture->hasSpecialBoardPrice()
+            $this->subject->hasSpecialBoardPrice()
         );
     }
 
@@ -1019,13 +1019,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getAdditionalInformationForEventTopicWithoutAdditionalInformationReturnsEmptyString()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
         self::assertEquals(
             '',
-            $this->fixture->getAdditionalInformation()
+            $this->subject->getAdditionalInformation()
         );
     }
 
@@ -1034,7 +1034,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getAdditionalInformationForEventTopicWithAdditionalInformationReturnsAdditionalInformation()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'additional_information' => 'this is good to know',
@@ -1043,7 +1043,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
 
         self::assertEquals(
             'this is good to know',
-            $this->fixture->getAdditionalInformation()
+            $this->subject->getAdditionalInformation()
         );
     }
 
@@ -1052,14 +1052,14 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function setAdditionalInformationForEventTopicSetsAdditionalInformation()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
-        $this->fixture->setAdditionalInformation('this is good to know');
+        $this->subject->setAdditionalInformation('this is good to know');
 
         self::assertEquals(
             'this is good to know',
-            $this->fixture->getAdditionalInformation()
+            $this->subject->getAdditionalInformation()
         );
     }
 
@@ -1068,12 +1068,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function hasAdditionalInformationForEventTopicWithoutAdditionalInformationReturnsFalse()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
         self::assertFalse(
-            $this->fixture->hasAdditionalInformation()
+            $this->subject->hasAdditionalInformation()
         );
     }
 
@@ -1082,7 +1082,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function hasAdditionalInformationForEventTopicWithAdditionalInformationReturnsTrue()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'additional_information' => 'this is good to know',
@@ -1090,7 +1090,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
         );
 
         self::assertTrue(
-            $this->fixture->hasAdditionalInformation()
+            $this->subject->hasAdditionalInformation()
         );
     }
 
@@ -1103,12 +1103,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function allowsMultipleRegistrationForEventTopicWithUnsetAllowsMultipleRegistrationReturnsFalse()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
         self::assertFalse(
-            $this->fixture->allowsMultipleRegistrations()
+            $this->subject->allowsMultipleRegistrations()
         );
     }
 
@@ -1117,7 +1117,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function allowsMultipleRegistrationForEventTopicWithSetAllowsMultipleRegistrationReturnsTrue()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'allows_multiple_registrations' => true,
@@ -1125,7 +1125,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
         );
 
         self::assertTrue(
-            $this->fixture->allowsMultipleRegistrations()
+            $this->subject->allowsMultipleRegistrations()
         );
     }
 
@@ -1138,12 +1138,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function usesTerms2ForEventTopicWithUnsetUseTerms2ReturnsFalse()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
         self::assertFalse(
-            $this->fixture->usesTerms2()
+            $this->subject->usesTerms2()
         );
     }
 
@@ -1152,7 +1152,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function usesTerms2ForEventTopicWithSetUseTerms2ReturnsTrue()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'use_terms_2' => true,
@@ -1160,7 +1160,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
         );
 
         self::assertTrue(
-            $this->fixture->usesTerms2()
+            $this->subject->usesTerms2()
         );
     }
 
@@ -1173,13 +1173,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getNotesForEventTopicWithoutNotesReturnsEmptyString()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
         self::assertEquals(
             '',
-            $this->fixture->getNotes()
+            $this->subject->getNotes()
         );
     }
 
@@ -1188,7 +1188,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getNotesForEventTopicWithNotesReturnsNotes()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'notes' => 'Don\'t forget this.',
@@ -1197,7 +1197,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
 
         self::assertEquals(
             'Don\'t forget this.',
-            $this->fixture->getNotes()
+            $this->subject->getNotes()
         );
     }
 
@@ -1206,14 +1206,14 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function setNotesForEventTopicSetsNotes()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
-        $this->fixture->setNotes('Don\'t forget this.');
+        $this->subject->setNotes('Don\'t forget this.');
 
         self::assertEquals(
             'Don\'t forget this.',
-            $this->fixture->getNotes()
+            $this->subject->getNotes()
         );
     }
 
@@ -1222,12 +1222,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function hasNotesForEventTopicWithoutNotesReturnsFalse()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
         self::assertFalse(
-            $this->fixture->hasNotes()
+            $this->subject->hasNotes()
         );
     }
 
@@ -1236,7 +1236,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function hasNotesForEventTopicWithNotesReturnsTrue()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'notes' => 'Don\'t forget this.',
@@ -1244,7 +1244,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
         );
 
         self::assertTrue(
-            $this->fixture->hasNotes()
+            $this->subject->hasNotes()
         );
     }
 
@@ -1257,13 +1257,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getImageForEventTopicWithoutImageReturnsEmptyString()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
         self::assertEquals(
             '',
-            $this->fixture->getImage()
+            $this->subject->getImage()
         );
     }
 
@@ -1272,7 +1272,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getImageForEventTopicWithImageReturnsImage()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'image' => 'file.jpg',
@@ -1281,7 +1281,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
 
         self::assertEquals(
             'file.jpg',
-            $this->fixture->getImage()
+            $this->subject->getImage()
         );
     }
 
@@ -1290,14 +1290,14 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function setImageForEventTopicSetsImage()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
-        $this->fixture->setImage('file.jpg');
+        $this->subject->setImage('file.jpg');
 
         self::assertEquals(
             'file.jpg',
-            $this->fixture->getImage()
+            $this->subject->getImage()
         );
     }
 
@@ -1306,12 +1306,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function hasImageForEventTopicWithoutImageReturnsFalse()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
         self::assertFalse(
-            $this->fixture->hasImage()
+            $this->subject->hasImage()
         );
     }
 
@@ -1320,7 +1320,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function hasImageForEventTopicWithImageReturnsTrue()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
                 'image' => 'file.jpg',
@@ -1328,7 +1328,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
         );
 
         self::assertTrue(
-            $this->fixture->hasImage()
+            $this->subject->hasImage()
         );
     }
 
@@ -1341,7 +1341,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function hasEarlyBirdPriceForNoDeadlineAndAllPricesSetReturnsFalse()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             [
                 'deadline_early_bird' => 0,
                 'price_regular' => 1.000,
@@ -1352,7 +1352,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
         );
 
         self::assertFalse(
-            $this->fixture->hasEarlyBirdPrice()
+            $this->subject->hasEarlyBirdPrice()
         );
     }
 
@@ -1361,7 +1361,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function hasEarlyBirdPriceForDeadlineAndAllPricesSetReturnsTrue()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             [
                 'deadline_early_bird' => 1234,
                 'price_regular' => 1.000,
@@ -1372,7 +1372,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
         );
 
         self::assertTrue(
-            $this->fixture->hasEarlyBirdPrice()
+            $this->subject->hasEarlyBirdPrice()
         );
     }
 
@@ -1381,7 +1381,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function hasEarlyBirdPriceForDeadlinAndAllRegularPricesSetReturnsTrue()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             [
                 'deadline_early_bird' => 1234,
                 'price_regular' => 1.000,
@@ -1390,7 +1390,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
         );
 
         self::assertTrue(
-            $this->fixture->hasEarlyBirdPrice()
+            $this->subject->hasEarlyBirdPrice()
         );
     }
 
@@ -1399,7 +1399,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function hasEarlyBirdPriceForDeadlineAndRegularPriceAndAllSpecialPricesSetReturnsFalse()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             [
                 'deadline_early_bird' => 1234,
                 'price_regular' => 1.000,
@@ -1409,7 +1409,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
         );
 
         self::assertFalse(
-            $this->fixture->hasEarlyBirdPrice()
+            $this->subject->hasEarlyBirdPrice()
         );
     }
 
@@ -1418,7 +1418,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function hasEarlyBirdPriceForDeadlineAndNoRegularPriceAndAllSpecialPricesSetReturnsFalse()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             [
                 'deadline_early_bird' => 1234,
                 'price_special' => 1.000,
@@ -1427,7 +1427,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
         );
 
         self::assertFalse(
-            $this->fixture->hasEarlyBirdPrice()
+            $this->subject->hasEarlyBirdPrice()
         );
     }
 
@@ -1436,7 +1436,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function hasEarlyBirdPriceForDeadlineAndOnlyEarlyBirdPricesSetReturnsFalse()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             [
                 'deadline_early_bird' => 1234,
                 'price_regular_early' => 1.000,
@@ -1445,7 +1445,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
         );
 
         self::assertFalse(
-            $this->fixture->hasEarlyBirdPrice()
+            $this->subject->hasEarlyBirdPrice()
         );
     }
 
@@ -1458,10 +1458,10 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function isEarlyBirdDeadlineOverForNoEarlyBirdDeadlineReturnsTrue()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertTrue(
-            $this->fixture->isEarlyBirdDeadlineOver()
+            $this->subject->isEarlyBirdDeadlineOver()
         );
     }
 
@@ -1470,12 +1470,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function isEarlyBirdDeadlineOverForEarlyBirdDeadlineInPastReturnsTrue()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['deadline_early_bird' => $GLOBALS['SIM_EXEC_TIME'] - 1]
         );
 
         self::assertTrue(
-            $this->fixture->isEarlyBirdDeadlineOver()
+            $this->subject->isEarlyBirdDeadlineOver()
         );
     }
 
@@ -1484,12 +1484,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function isEarlyBirdDeadlineOverForEarlyBirdDeadlineNowReturnsTrue()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['deadline_early_bird' => $GLOBALS['SIM_EXEC_TIME']]
         );
 
         self::assertTrue(
-            $this->fixture->isEarlyBirdDeadlineOver()
+            $this->subject->isEarlyBirdDeadlineOver()
         );
     }
 
@@ -1498,12 +1498,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function isEarlyBirdDeadlineOverForEarlyBirdDeadlineInFutureReturnsFalse()
     {
-        $this->fixture->setData(
+        $this->subject->setData(
             ['deadline_early_bird' => $GLOBALS['SIM_EXEC_TIME'] + 1]
         );
 
         self::assertFalse(
-            $this->fixture->isEarlyBirdDeadlineOver()
+            $this->subject->isEarlyBirdDeadlineOver()
         );
     }
 
@@ -1516,18 +1516,18 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function earlyBirdAppliesForNoEarlyBirdPriceAndDeadlineOverReturnsFalse()
     {
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(
+        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        $subject = $this->getMock(
             \Tx_Seminars_Model_Event::class,
             ['hasEarlyBirdPrice', 'isEarlyBirdDeadlineOver']
         );
-        $fixture->expects(self::any())->method('hasEarlyBirdPrice')
+        $subject->expects(self::any())->method('hasEarlyBirdPrice')
             ->will(self::returnValue(false));
-        $fixture->expects(self::any())->method('isEarlyBirdDeadlineOver')
+        $subject->expects(self::any())->method('isEarlyBirdDeadlineOver')
             ->will(self::returnValue(true));
 
         self::assertFalse(
-            $fixture->earlyBirdApplies()
+            $subject->earlyBirdApplies()
         );
     }
 
@@ -1536,18 +1536,18 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function earlyBirdAppliesForEarlyBirdPriceAndDeadlineOverReturnsFalse()
     {
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(
+        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        $subject = $this->getMock(
             \Tx_Seminars_Model_Event::class,
             ['hasEarlyBirdPrice', 'isEarlyBirdDeadlineOver']
         );
-        $fixture->expects(self::any())->method('hasEarlyBirdPrice')
+        $subject->expects(self::any())->method('hasEarlyBirdPrice')
             ->will(self::returnValue(true));
-        $fixture->expects(self::any())->method('isEarlyBirdDeadlineOver')
+        $subject->expects(self::any())->method('isEarlyBirdDeadlineOver')
             ->will(self::returnValue(true));
 
         self::assertFalse(
-            $fixture->earlyBirdApplies()
+            $subject->earlyBirdApplies()
         );
     }
 
@@ -1556,18 +1556,18 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function earlyBirdAppliesForEarlyBirdPriceAndDeadlineNotOverReturnsTrue()
     {
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(
+        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        $subject = $this->getMock(
             \Tx_Seminars_Model_Event::class,
             ['hasEarlyBirdPrice', 'isEarlyBirdDeadlineOver']
         );
-        $fixture->expects(self::any())->method('hasEarlyBirdPrice')
+        $subject->expects(self::any())->method('hasEarlyBirdPrice')
             ->will(self::returnValue(true));
-        $fixture->expects(self::any())->method('isEarlyBirdDeadlineOver')
+        $subject->expects(self::any())->method('isEarlyBirdDeadlineOver')
             ->will(self::returnValue(false));
 
         self::assertTrue(
-            $fixture->earlyBirdApplies()
+            $subject->earlyBirdApplies()
         );
     }
 
@@ -1580,18 +1580,18 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getAvailablePricesForNoPricesSetAndNoEarlyBirdReturnsZeroRegularPrice()
     {
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(
+        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        $subject = $this->getMock(
             \Tx_Seminars_Model_Event::class,
             ['earlyBirdApplies']
         );
-        $fixture->expects(self::any())->method('earlyBirdApplies')
+        $subject->expects(self::any())->method('earlyBirdApplies')
             ->will(self::returnValue(false));
-        $fixture->setData([]);
+        $subject->setData([]);
 
         self::assertEquals(
             ['regular' => 0.000],
-            $fixture->getAvailablePrices()
+            $subject->getAvailablePrices()
         );
     }
 
@@ -1600,18 +1600,18 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getAvailablePricesForRegularPriceSetAndNoEarlyBirdReturnsRegularPrice()
     {
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(
+        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        $subject = $this->getMock(
             \Tx_Seminars_Model_Event::class,
             ['earlyBirdApplies']
         );
-        $fixture->expects(self::any())->method('earlyBirdApplies')
+        $subject->expects(self::any())->method('earlyBirdApplies')
             ->will(self::returnValue(false));
-        $fixture->setData(['price_regular' => 12.345]);
+        $subject->setData(['price_regular' => 12.345]);
 
         self::assertEquals(
             ['regular' => 12.345],
-            $fixture->getAvailablePrices()
+            $subject->getAvailablePrices()
         );
     }
 
@@ -1620,14 +1620,14 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getAvailablePricesForRegularEarlyBirdPriceSetAndEarlyBirdReturnsEarlyBirdPrice()
     {
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(
+        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        $subject = $this->getMock(
             \Tx_Seminars_Model_Event::class,
             ['earlyBirdApplies']
         );
-        $fixture->expects(self::any())->method('earlyBirdApplies')
+        $subject->expects(self::any())->method('earlyBirdApplies')
             ->will(self::returnValue(true));
-        $fixture->setData(
+        $subject->setData(
             [
                 'price_regular' => 12.345,
                 'price_regular_early' => 23.456,
@@ -1636,7 +1636,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
 
         self::assertEquals(
             ['regular_early' => 23.456],
-            $fixture->getAvailablePrices()
+            $subject->getAvailablePrices()
         );
     }
 
@@ -1645,14 +1645,14 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getAvailablePricesForRegularEarlyBirdPriceSetAndNoEarlyBirdReturnsRegularPrice()
     {
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(
+        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        $subject = $this->getMock(
             \Tx_Seminars_Model_Event::class,
             ['earlyBirdApplies']
         );
-        $fixture->expects(self::any())->method('earlyBirdApplies')
+        $subject->expects(self::any())->method('earlyBirdApplies')
             ->will(self::returnValue(false));
-        $fixture->setData(
+        $subject->setData(
             [
                 'price_regular' => 12.345,
                 'price_regular_early' => 23.456,
@@ -1661,7 +1661,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
 
         self::assertEquals(
             ['regular' => 12.345],
-            $fixture->getAvailablePrices()
+            $subject->getAvailablePrices()
         );
     }
 
@@ -1670,14 +1670,14 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getAvailablePricesForRegularBoardPriceSetAndNoEarlyBirdReturnsRegularBoardPrice()
     {
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(
+        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        $subject = $this->getMock(
             \Tx_Seminars_Model_Event::class,
             ['earlyBirdApplies']
         );
-        $fixture->expects(self::any())->method('earlyBirdApplies')
+        $subject->expects(self::any())->method('earlyBirdApplies')
             ->will(self::returnValue(false));
-        $fixture->setData(
+        $subject->setData(
             [
                 'price_regular_board' => 23.456,
             ]
@@ -1688,7 +1688,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
                 'regular' => 0.000,
                 'regular_board' => 23.456,
             ],
-            $fixture->getAvailablePrices()
+            $subject->getAvailablePrices()
         );
     }
 
@@ -1697,14 +1697,14 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getAvailablePricesForSpecialBoardPriceSetAndNoEarlyBirdReturnsSpecialBoardPrice()
     {
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(
+        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        $subject = $this->getMock(
             \Tx_Seminars_Model_Event::class,
             ['earlyBirdApplies']
         );
-        $fixture->expects(self::any())->method('earlyBirdApplies')
+        $subject->expects(self::any())->method('earlyBirdApplies')
             ->will(self::returnValue(false));
-        $fixture->setData(
+        $subject->setData(
             [
                 'price_special_board' => 23.456,
             ]
@@ -1715,7 +1715,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
                 'regular' => 0.000,
                 'special_board' => 23.456,
             ],
-            $fixture->getAvailablePrices()
+            $subject->getAvailablePrices()
         );
     }
 
@@ -1724,21 +1724,21 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getAvailablePricesForSpecialPriceSetAndNoEarlyBirdReturnsSpecialPrice()
     {
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(
+        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        $subject = $this->getMock(
             \Tx_Seminars_Model_Event::class,
             ['earlyBirdApplies']
         );
-        $fixture->expects(self::any())->method('earlyBirdApplies')
+        $subject->expects(self::any())->method('earlyBirdApplies')
             ->will(self::returnValue(false));
-        $fixture->setData(['price_special' => 12.345]);
+        $subject->setData(['price_special' => 12.345]);
 
         self::assertEquals(
             [
                 'regular' => 0.000,
                 'special' => 12.345,
             ],
-            $fixture->getAvailablePrices()
+            $subject->getAvailablePrices()
         );
     }
 
@@ -1747,14 +1747,14 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getAvailablePricesForSpecialPriceSetAndSpecialEarlyBirdPriceSetAndEarlyBirdReturnsSpecialEarlyBirdPrice(
     ) {
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(
+        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        $subject = $this->getMock(
             \Tx_Seminars_Model_Event::class,
             ['earlyBirdApplies']
         );
-        $fixture->expects(self::any())->method('earlyBirdApplies')
+        $subject->expects(self::any())->method('earlyBirdApplies')
             ->will(self::returnValue(true));
-        $fixture->setData(
+        $subject->setData(
             [
                 'price_special' => 34.567,
                 'price_special_early' => 23.456,
@@ -1766,7 +1766,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
                 'regular' => 0.000,
                 'special_early' => 23.456,
             ],
-            $fixture->getAvailablePrices()
+            $subject->getAvailablePrices()
         );
     }
 
@@ -1775,14 +1775,14 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getAvailablePricesForNoSpecialPriceSetAndSpecialEarlyBirdPriceSetAndEarlyBirdNotReturnsSpecialEarlyBirdPrice(
     ) {
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(
+        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        $subject = $this->getMock(
             \Tx_Seminars_Model_Event::class,
             ['earlyBirdApplies']
         );
-        $fixture->expects(self::any())->method('earlyBirdApplies')
+        $subject->expects(self::any())->method('earlyBirdApplies')
             ->will(self::returnValue(true));
-        $fixture->setData(
+        $subject->setData(
             [
                 'price_regular' => 34.567,
                 'price_special_early' => 23.456,
@@ -1791,7 +1791,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
 
         self::assertEquals(
             ['regular' => 34.567],
-            $fixture->getAvailablePrices()
+            $subject->getAvailablePrices()
         );
     }
 
@@ -1800,14 +1800,14 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getAvailablePricesForSpecialPriceSetAndSpecialEarlyBirdPriceSetAndNoEarlyBirdReturnsSpecialPrice()
     {
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $fixture */
-        $fixture = $this->getMock(
+        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        $subject = $this->getMock(
             \Tx_Seminars_Model_Event::class,
             ['earlyBirdApplies']
         );
-        $fixture->expects(self::any())->method('earlyBirdApplies')
+        $subject->expects(self::any())->method('earlyBirdApplies')
             ->will(self::returnValue(false));
-        $fixture->setData(
+        $subject->setData(
             [
                 'price_special' => 34.567,
                 'price_special_early' => 23.456,
@@ -1819,7 +1819,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
                 'regular' => 0.000,
                 'special' => 34.567,
             ],
-            $fixture->getAvailablePrices()
+            $subject->getAvailablePrices()
         );
     }
 
@@ -1832,14 +1832,14 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function setPaymentMethodsSetsPaymentMethods()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         $paymentMethods = new \Tx_Oelib_List();
-        $this->fixture->setPaymentMethods($paymentMethods);
+        $this->subject->setPaymentMethods($paymentMethods);
 
         self::assertSame(
             $paymentMethods,
-            $this->fixture->getPaymentMethods()
+            $this->subject->getPaymentMethods()
         );
     }
 }

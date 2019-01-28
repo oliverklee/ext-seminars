@@ -16,7 +16,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_GeneralEventMailFormTest extends \Tx_Phpuni
     /**
      * @var GeneralEventMailForm
      */
-    private $fixture;
+    private $subject;
 
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -86,7 +86,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_GeneralEventMailFormTest extends \Tx_Phpuni
             'organizers'
         );
 
-        $this->fixture = new GeneralEventMailForm($this->eventUid);
+        $this->subject = new GeneralEventMailForm($this->eventUid);
     }
 
     protected function tearDown()
@@ -108,7 +108,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_GeneralEventMailFormTest extends \Tx_Phpuni
             '<button class="submitButton sendEmail"><p>' .
             $GLOBALS['LANG']->getLL('generalMailForm_sendButton') .
             '</p></button>',
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 
@@ -117,7 +117,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_GeneralEventMailFormTest extends \Tx_Phpuni
      */
     public function renderContainsPrefilledBodyFieldWithLocalizedSalutation()
     {
-        self::assertContains('salutation', $this->fixture->render());
+        self::assertContains('salutation', $this->subject->render());
     }
 
     /**
@@ -127,7 +127,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_GeneralEventMailFormTest extends \Tx_Phpuni
     {
         self::assertContains(
             '<input type="hidden" name="action" value="sendEmail" />',
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 
@@ -153,7 +153,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_GeneralEventMailFormTest extends \Tx_Phpuni
         );
 
         $messageBody = '%salutation' . $GLOBALS['LANG']->getLL('confirmMailForm_prefillField_messageBody');
-        $this->fixture->setPostData(
+        $this->subject->setPostData(
             [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
@@ -161,7 +161,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_GeneralEventMailFormTest extends \Tx_Phpuni
                 'messageBody' => $messageBody,
             ]
         );
-        $this->fixture->render();
+        $this->subject->render();
 
         self::assertContains(
             'foo User',
@@ -196,7 +196,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_GeneralEventMailFormTest extends \Tx_Phpuni
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['backEndModule'][$hookClass] = $hookClass;
         GeneralUtility::addInstance($hookClass, $hook);
 
-        $this->fixture->setPostData(
+        $this->subject->setPostData(
             [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
@@ -204,7 +204,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_GeneralEventMailFormTest extends \Tx_Phpuni
                 'messageBody' => 'some message body',
             ]
         );
-        $this->fixture->render();
+        $this->subject->render();
     }
 
     /**
@@ -242,7 +242,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_GeneralEventMailFormTest extends \Tx_Phpuni
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['backEndModule'][$hookClass] = $hookClass;
         GeneralUtility::addInstance($hookClass, $hook);
 
-        $this->fixture->setPostData(
+        $this->subject->setPostData(
             [
                 'action' => 'confirmEvent',
                 'isSubmitted' => '1',
@@ -250,6 +250,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_GeneralEventMailFormTest extends \Tx_Phpuni
                 'messageBody' => 'some message body',
             ]
         );
-        $this->fixture->render();
+        $this->subject->render();
     }
 }

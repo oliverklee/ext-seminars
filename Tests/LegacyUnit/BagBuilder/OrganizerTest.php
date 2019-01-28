@@ -11,7 +11,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_OrganizerTest extends \Tx_Phpunit_TestCa
     /**
      * @var \Tx_Seminars_BagBuilder_Organizer
      */
-    private $fixture;
+    private $subject;
 
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -22,8 +22,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_OrganizerTest extends \Tx_Phpunit_TestCa
     {
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
-        $this->fixture = new \Tx_Seminars_BagBuilder_Organizer();
-        $this->fixture->setTestMode();
+        $this->subject = new \Tx_Seminars_BagBuilder_Organizer();
+        $this->subject->setTestMode();
     }
 
     protected function tearDown()
@@ -37,7 +37,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_OrganizerTest extends \Tx_Phpunit_TestCa
 
     public function testBuilderBuildsABag()
     {
-        self::assertInstanceOf(\Tx_Seminars_Bag_Abstract::class, $this->fixture->build());
+        self::assertInstanceOf(\Tx_Seminars_Bag_Abstract::class, $this->subject->build());
     }
 
     /////////////////////////////
@@ -51,7 +51,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_OrganizerTest extends \Tx_Phpunit_TestCa
             'The parameter $eventUid must be > 0.'
         );
 
-        $this->fixture->limitToEvent(-1);
+        $this->subject->limitToEvent(-1);
     }
 
     public function testLimitToEventWithZeroEventUidThrowsException()
@@ -61,7 +61,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_OrganizerTest extends \Tx_Phpunit_TestCa
             'The parameter $eventUid must be > 0.'
         );
 
-        $this->fixture->limitToEvent(0);
+        $this->subject->limitToEvent(0);
     }
 
     public function testLimitToEventFindsOneOrganizerOfEvent()
@@ -79,8 +79,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_OrganizerTest extends \Tx_Phpunit_TestCa
             $organizerUid
         );
 
-        $this->fixture->limitToEvent($eventUid);
-        $bag = $this->fixture->build();
+        $this->subject->limitToEvent($eventUid);
+        $bag = $this->subject->build();
 
         self::assertEquals(
             1,
@@ -111,8 +111,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_OrganizerTest extends \Tx_Phpunit_TestCa
             $organizerUid2
         );
 
-        $this->fixture->limitToEvent($eventUid);
-        $bag = $this->fixture->build();
+        $this->subject->limitToEvent($eventUid);
+        $bag = $this->subject->build();
 
         self::assertEquals(
             2,
@@ -138,8 +138,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_OrganizerTest extends \Tx_Phpunit_TestCa
             'tx_seminars_seminars'
         );
 
-        $this->fixture->limitToEvent($eventUid2);
-        $bag = $this->fixture->build();
+        $this->subject->limitToEvent($eventUid2);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -173,8 +173,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_OrganizerTest extends \Tx_Phpunit_TestCa
             $organizerUid1
         );
 
-        $this->fixture->limitToEvent($eventUid);
-        $bag = $this->fixture->build();
+        $this->subject->limitToEvent($eventUid);
+        $bag = $this->subject->build();
         $bag->rewind();
 
         self::assertEquals(

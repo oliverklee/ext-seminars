@@ -11,7 +11,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
     /**
      * @var \Tx_Seminars_BagBuilder_Event
      */
-    private $fixture = null;
+    private $subject = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -36,8 +36,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
 
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
-        $this->fixture = new \Tx_Seminars_BagBuilder_Event();
-        $this->fixture->setTestMode();
+        $this->subject = new \Tx_Seminars_BagBuilder_Event();
+        $this->subject->setTestMode();
     }
 
     protected function tearDown()
@@ -53,7 +53,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
 
     public function testBuilderBuildsABag()
     {
-        $bag = $this->fixture->build();
+        $bag = $this->subject->build();
 
         self::assertInstanceOf(\Tx_Seminars_Bag_Abstract::class, $bag);
     }
@@ -67,7 +67,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['hidden' => 1]
         );
-        $bag = $this->fixture->build();
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -81,8 +81,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['hidden' => 1]
         );
 
-        $this->fixture->setBackEndMode();
-        $bag = $this->fixture->build();
+        $this->subject->setBackEndMode();
+        $bag = $this->subject->build();
 
         self::assertFalse(
             $bag->isEmpty()
@@ -95,7 +95,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['endtime' => $GLOBALS['SIM_EXEC_TIME'] - 1000]
         );
-        $bag = $this->fixture->build();
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -109,8 +109,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['endtime' => $GLOBALS['SIM_EXEC_TIME'] - 1000]
         );
 
-        $this->fixture->setBackEndMode();
-        $bag = $this->fixture->build();
+        $this->subject->setBackEndMode();
+        $bag = $this->subject->build();
 
         self::assertFalse(
             $bag->isEmpty()
@@ -143,7 +143,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid,
             $categoryUid
         );
-        $bag = $this->fixture->build();
+        $bag = $this->subject->build();
 
         self::assertSame(
             2,
@@ -174,8 +174,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $categoryUid
         );
 
-        $this->fixture->limitToCategories('');
-        $bag = $this->fixture->build();
+        $this->subject->limitToCategories('');
+        $bag = $this->subject->build();
 
         self::assertSame(
             2,
@@ -206,9 +206,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $categoryUid
         );
 
-        $this->fixture->limitToCategories($categoryUid);
-        $this->fixture->limitToCategories('');
-        $bag = $this->fixture->build();
+        $this->subject->limitToCategories($categoryUid);
+        $this->subject->limitToCategories('');
+        $bag = $this->subject->build();
 
         self::assertSame(
             2,
@@ -234,8 +234,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $categoryUid
         );
 
-        $this->fixture->limitToCategories($categoryUid);
-        $bag = $this->fixture->build();
+        $this->subject->limitToCategories($categoryUid);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -272,8 +272,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $categoryUid
         );
 
-        $this->fixture->limitToCategories($categoryUid);
-        $bag = $this->fixture->build();
+        $this->subject->limitToCategories($categoryUid);
+        $bag = $this->subject->build();
 
         self::assertSame(
             2,
@@ -304,8 +304,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $categoryUid
         );
 
-        $this->fixture->limitToCategories($categoryUid);
-        $bag = $this->fixture->build();
+        $this->subject->limitToCategories($categoryUid);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -348,8 +348,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $categoryUid2
         );
 
-        $this->fixture->limitToCategories($categoryUid1);
-        $bag = $this->fixture->build();
+        $this->subject->limitToCategories($categoryUid1);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -388,8 +388,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_categories'
         );
 
-        $this->fixture->limitToCategories($categoryUid2);
-        $bag = $this->fixture->build();
+        $this->subject->limitToCategories($categoryUid2);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -414,8 +414,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $categoryUid
         );
 
-        $this->fixture->limitToCategories($categoryUid);
-        $bag = $this->fixture->build();
+        $this->subject->limitToCategories($categoryUid);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -448,8 +448,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $categoryUid
         );
 
-        $this->fixture->limitToCategories($categoryUid);
-        $bag = $this->fixture->build();
+        $this->subject->limitToCategories($categoryUid);
+        $bag = $this->subject->build();
 
         self::assertSame(
             2,
@@ -492,8 +492,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $categoryUid
         );
 
-        $this->fixture->limitToCategories($categoryUid);
-        $bag = $this->fixture->build();
+        $this->subject->limitToCategories($categoryUid);
+        $bag = $this->subject->build();
 
         self::assertSame(
             2,
@@ -535,8 +535,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $categoryUid2
         );
 
-        $this->fixture->limitToCategories($categoryUid2);
-        $bag = $this->fixture->build();
+        $this->subject->limitToCategories($categoryUid2);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -574,8 +574,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $categoryUid2
         );
 
-        $this->fixture->limitToCategories($categoryUid1 . ',' . $categoryUid2);
-        $bag = $this->fixture->build();
+        $this->subject->limitToCategories($categoryUid1 . ',' . $categoryUid2);
+        $bag = $this->subject->build();
 
         self::assertSame(
             2,
@@ -599,8 +599,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid,
             $siteUid
         );
-        $this->fixture->limitToPlaces([$siteUid]);
-        $bag = $this->fixture->build();
+        $this->subject->limitToPlaces([$siteUid]);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -618,8 +618,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars'
         );
-        $this->fixture->limitToPlaces([$siteUid]);
-        $bag = $this->fixture->build();
+        $this->subject->limitToPlaces([$siteUid]);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -648,8 +648,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid2,
             $siteUid2
         );
-        $this->fixture->limitToPlaces([$siteUid1, $siteUid2]);
-        $bag = $this->fixture->build();
+        $this->subject->limitToPlaces([$siteUid1, $siteUid2]);
+        $bag = $this->subject->build();
 
         self::assertSame(
             2,
@@ -663,9 +663,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars'
         );
-        $this->fixture->limitToPlaces([$siteUid]);
-        $this->fixture->limitToPlaces();
-        $bag = $this->fixture->build();
+        $this->subject->limitToPlaces([$siteUid]);
+        $this->subject->limitToPlaces();
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -686,8 +686,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid,
             $siteUid1
         );
-        $this->fixture->limitToPlaces([$siteUid2]);
-        $bag = $this->fixture->build();
+        $this->subject->limitToPlaces([$siteUid2]);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -712,8 +712,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid,
             $siteUid2
         );
-        $this->fixture->limitToPlaces([$siteUid1]);
-        $bag = $this->fixture->build();
+        $this->subject->limitToPlaces([$siteUid1]);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -731,7 +731,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['cancelled' => 1]
         );
-        $bag = $this->fixture->build();
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -746,8 +746,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['cancelled' => 1]
         );
 
-        $this->fixture->ignoreCanceledEvents();
-        $bag = $this->fixture->build();
+        $this->subject->ignoreCanceledEvents();
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -761,8 +761,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED]
         );
 
-        $this->fixture->ignoreCanceledEvents();
-        $bag = $this->fixture->build();
+        $this->subject->ignoreCanceledEvents();
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -777,8 +777,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['cancelled' => 1]
         );
 
-        $this->fixture->allowCanceledEvents();
-        $bag = $this->fixture->build();
+        $this->subject->allowCanceledEvents();
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -793,9 +793,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['cancelled' => 1]
         );
 
-        $this->fixture->ignoreCanceledEvents();
-        $this->fixture->allowCanceledEvents();
-        $bag = $this->fixture->build();
+        $this->subject->ignoreCanceledEvents();
+        $this->subject->allowCanceledEvents();
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -810,9 +810,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['cancelled' => 1]
         );
 
-        $this->fixture->allowCanceledEvents();
-        $this->fixture->ignoreCanceledEvents();
-        $bag = $this->fixture->build();
+        $this->subject->allowCanceledEvents();
+        $this->subject->ignoreCanceledEvents();
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -831,7 +831,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             \InvalidArgumentException::class,
             'The time-frame key  is not valid.'
         );
-        $this->fixture->setTimeFrame('');
+        $this->subject->setTimeFrame('');
     }
 
     public function testSetTimeFrameFailsWithInvalidKey()
@@ -840,7 +840,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             \InvalidArgumentException::class,
             'The time-frame key foo is not valid.'
         );
-        $this->fixture->setTimeFrame('foo');
+        $this->subject->setTimeFrame('foo');
     }
 
     /////////////////////////////////////////////////////////////////
@@ -859,8 +859,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('past');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('past');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -878,8 +878,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('past');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('past');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -897,8 +897,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('past');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('past');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -915,8 +915,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('past');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('past');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -933,8 +933,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('past');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('past');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -951,8 +951,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('past');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('past');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -975,8 +975,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('pastAndCurrent');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('pastAndCurrent');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -994,8 +994,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('pastAndCurrent');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('pastAndCurrent');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -1013,8 +1013,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('pastAndCurrent');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('pastAndCurrent');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -1032,8 +1032,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('pastAndCurrent');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('pastAndCurrent');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -1050,8 +1050,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('pastAndCurrent');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('pastAndCurrent');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -1068,8 +1068,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('pastAndCurrent');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('pastAndCurrent');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -1092,8 +1092,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('current');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('current');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -1110,8 +1110,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('current');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('current');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -1128,8 +1128,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('current');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('current');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -1147,8 +1147,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('current');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('current');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -1165,8 +1165,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('current');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('current');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -1183,8 +1183,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('current');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('current');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -1207,8 +1207,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('currentAndUpcoming');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('currentAndUpcoming');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -1225,8 +1225,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('currentAndUpcoming');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('currentAndUpcoming');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -1243,8 +1243,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('currentAndUpcoming');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('currentAndUpcoming');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -1262,8 +1262,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('currentAndUpcoming');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('currentAndUpcoming');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -1281,8 +1281,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('currentAndUpcoming');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('currentAndUpcoming');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -1300,8 +1300,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('currentAndUpcoming');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('currentAndUpcoming');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -1325,8 +1325,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('upcoming');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('upcoming');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -1343,8 +1343,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('upcoming');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('upcoming');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -1361,8 +1361,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('upcoming');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('upcoming');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -1379,8 +1379,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('upcoming');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('upcoming');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -1398,8 +1398,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('upcoming');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('upcoming');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -1417,8 +1417,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('upcoming');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('upcoming');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -1442,8 +1442,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('upcomingWithBeginDate');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('upcomingWithBeginDate');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -1460,8 +1460,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('upcomingWithBeginDate');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('upcomingWithBeginDate');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -1478,8 +1478,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('upcomingWithBeginDate');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('upcomingWithBeginDate');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -1496,8 +1496,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('upcomingWithBeginDate');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('upcomingWithBeginDate');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -1515,8 +1515,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('upcomingWithBeginDate');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('upcomingWithBeginDate');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -1534,8 +1534,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('upcomingWithBeginDate');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('upcomingWithBeginDate');
+        $bag = $this->subject->build();
 
         self::assertSame(
             0,
@@ -1560,8 +1560,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('deadlineNotOver');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('deadlineNotOver');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -1579,8 +1579,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('deadlineNotOver');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('deadlineNotOver');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -1598,8 +1598,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('deadlineNotOver');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('deadlineNotOver');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -1617,8 +1617,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('deadlineNotOver');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('deadlineNotOver');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -1637,8 +1637,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('deadlineNotOver');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('deadlineNotOver');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -1657,8 +1657,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('deadlineNotOver');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('deadlineNotOver');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -1676,8 +1676,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('deadlineNotOver');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('deadlineNotOver');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -1696,8 +1696,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('deadlineNotOver');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('deadlineNotOver');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -1724,8 +1724,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('today');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('today');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -1746,8 +1746,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('today');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('today');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -1767,8 +1767,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('today');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('today');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -1789,8 +1789,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('today');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('today');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -1811,8 +1811,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('today');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('today');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -1833,8 +1833,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('today');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('today');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -1854,8 +1854,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('today');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('today');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -1875,8 +1875,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('today');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('today');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -1899,8 +1899,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('all');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('all');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -1918,8 +1918,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('all');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('all');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -1937,8 +1937,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('all');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('all');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -1956,8 +1956,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('all');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('all');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -1975,8 +1975,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('all');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('all');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -1994,8 +1994,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->setTimeFrame('all');
-        $bag = $this->fixture->build();
+        $this->subject->setTimeFrame('all');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -2024,7 +2024,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
                 'event_type' => $typeUid,
             ]
         );
-        $bag = $this->fixture->build();
+        $bag = $this->subject->build();
 
         self::assertSame(
             2,
@@ -2050,8 +2050,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToEventTypes();
-        $bag = $this->fixture->build();
+        $this->subject->limitToEventTypes();
+        $bag = $this->subject->build();
 
         self::assertSame(
             2,
@@ -2077,9 +2077,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToEventTypes([$typeUid]);
-        $this->fixture->limitToEventTypes();
-        $bag = $this->fixture->build();
+        $this->subject->limitToEventTypes([$typeUid]);
+        $this->subject->limitToEventTypes();
+        $bag = $this->subject->build();
 
         self::assertSame(
             2,
@@ -2100,8 +2100,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToEventTypes([$typeUid]);
-        $bag = $this->fixture->build();
+        $this->subject->limitToEventTypes([$typeUid]);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -2129,8 +2129,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToEventTypes([$typeUid]);
-        $bag = $this->fixture->build();
+        $this->subject->limitToEventTypes([$typeUid]);
+        $bag = $this->subject->build();
 
         self::assertSame(
             2,
@@ -2156,8 +2156,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToEventTypes([$typeUid]);
-        $bag = $this->fixture->build();
+        $this->subject->limitToEventTypes([$typeUid]);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -2193,8 +2193,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToEventTypes([$typeUid1]);
-        $bag = $this->fixture->build();
+        $this->subject->limitToEventTypes([$typeUid1]);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -2228,8 +2228,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_event_types'
         );
 
-        $this->fixture->limitToEventTypes([$typeUid2]);
-        $bag = $this->fixture->build();
+        $this->subject->limitToEventTypes([$typeUid2]);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -2257,8 +2257,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToEventTypes([$typeUid]);
-        $bag = $this->fixture->build();
+        $this->subject->limitToEventTypes([$typeUid]);
+        $bag = $this->subject->build();
 
         self::assertSame(2, $bag->count());
         self::assertSame($topicUid . ',' . $dateUid, $bag->getUids());
@@ -2284,8 +2284,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToEventTypes([$typeUid]);
-        $bag = $this->fixture->build();
+        $this->subject->limitToEventTypes([$typeUid]);
+        $bag = $this->subject->build();
 
         self::assertSame(
             2,
@@ -2318,8 +2318,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToEventTypes([$typeUid2]);
-        $bag = $this->fixture->build();
+        $this->subject->limitToEventTypes([$typeUid2]);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -2350,8 +2350,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToEventTypes([$typeUid1, $typeUid2]);
-        $bag = $this->fixture->build();
+        $this->subject->limitToEventTypes([$typeUid1, $typeUid2]);
+        $bag = $this->subject->build();
 
         self::assertSame(
             2,
@@ -2373,11 +2373,11 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToEventTypes([$typeUid]);
-        $this->fixture->limitToTopicRecords();
+        $this->subject->limitToEventTypes([$typeUid]);
+        $this->subject->limitToTopicRecords();
 
         /** @var \Tx_Seminars_Bag_Event $bag */
-        $bag = $this->fixture->build();
+        $bag = $this->subject->build();
 
         self::assertSame(1, $bag->count());
         self::assertSame((string)$topicUid, $bag->getUids());
@@ -2402,8 +2402,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid,
             $siteUid
         );
-        $this->fixture->limitToCities(['test city 1']);
-        $bag = $this->fixture->build();
+        $this->subject->limitToCities(['test city 1']);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -2430,8 +2430,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid,
             $siteUid
         );
-        $this->fixture->limitToCities(['test city 1']);
-        $bag = $this->fixture->build();
+        $this->subject->limitToCities(['test city 1']);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -2466,8 +2466,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid2,
             $siteUid2
         );
-        $this->fixture->limitToCities(['test city 1', 'test city 2']);
-        $bag = $this->fixture->build();
+        $this->subject->limitToCities(['test city 1', 'test city 2']);
+        $bag = $this->subject->build();
 
         self::assertSame(
             2,
@@ -2490,9 +2490,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid,
             $siteUid
         );
-        $this->fixture->limitToCities(['test city 2']);
-        $this->fixture->limitToCities();
-        $bag = $this->fixture->build();
+        $this->subject->limitToCities(['test city 2']);
+        $this->subject->limitToCities();
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -2515,8 +2515,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid,
             $siteUid
         );
-        $this->fixture->limitToCities(['test city 2']);
-        $bag = $this->fixture->build();
+        $this->subject->limitToCities(['test city 2']);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -2535,8 +2535,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid,
             $siteUid
         );
-        $this->fixture->limitToCities(['test city 1']);
-        $bag = $this->fixture->build();
+        $this->subject->limitToCities(['test city 1']);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -2567,8 +2567,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid1,
             $siteUid2
         );
-        $this->fixture->limitToCities(['test city 1', 'test city 2']);
-        $bag = $this->fixture->build();
+        $this->subject->limitToCities(['test city 1', 'test city 2']);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -2600,8 +2600,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid,
             $siteUid2
         );
-        $this->fixture->limitToCities(['test city 1']);
-        $bag = $this->fixture->build();
+        $this->subject->limitToCities(['test city 1']);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -2633,8 +2633,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid1,
             $siteUid2
         );
-        $this->fixture->limitToCities(['test city 2', 'test city 3']);
-        $bag = $this->fixture->build();
+        $this->subject->limitToCities(['test city 2', 'test city 3']);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -2661,8 +2661,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid,
             $siteUid
         );
-        $this->fixture->limitToCountries(['DE']);
-        $bag = $this->fixture->build();
+        $this->subject->limitToCountries(['DE']);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -2689,8 +2689,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid,
             $siteUid
         );
-        $this->fixture->limitToCountries(['US']);
-        $bag = $this->fixture->build();
+        $this->subject->limitToCountries(['US']);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -2725,8 +2725,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid2,
             $siteUid2
         );
-        $this->fixture->limitToCountries(['US', 'DE']);
-        $bag = $this->fixture->build();
+        $this->subject->limitToCountries(['US', 'DE']);
+        $bag = $this->subject->build();
 
         self::assertSame(
             2,
@@ -2749,9 +2749,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid1,
             $siteUid1
         );
-        $this->fixture->limitToCountries(['DE']);
-        $this->fixture->limitToCountries();
-        $bag = $this->fixture->build();
+        $this->subject->limitToCountries(['DE']);
+        $this->subject->limitToCountries();
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -2774,8 +2774,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid,
             $siteUid
         );
-        $this->fixture->limitToCountries(['US']);
-        $bag = $this->fixture->build();
+        $this->subject->limitToCountries(['US']);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -2794,8 +2794,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid,
             $siteUid
         );
-        $this->fixture->limitToCountries(['DE']);
-        $bag = $this->fixture->build();
+        $this->subject->limitToCountries(['DE']);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -2826,8 +2826,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid,
             $siteUid2
         );
-        $this->fixture->limitToCountries(['US']);
-        $bag = $this->fixture->build();
+        $this->subject->limitToCountries(['US']);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -2845,8 +2845,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['language' => 'DE']
         );
-        $this->fixture->limitToLanguages(['DE']);
-        $bag = $this->fixture->build();
+        $this->subject->limitToLanguages(['DE']);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -2868,8 +2868,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['language' => 'DE']
         );
-        $this->fixture->limitToLanguages(['EN', 'DE']);
-        $bag = $this->fixture->build();
+        $this->subject->limitToLanguages(['EN', 'DE']);
+        $bag = $this->subject->build();
 
         self::assertSame(
             2,
@@ -2883,9 +2883,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['language' => 'EN']
         );
-        $this->fixture->limitToLanguages(['DE']);
-        $this->fixture->limitToLanguages();
-        $bag = $this->fixture->build();
+        $this->subject->limitToLanguages(['DE']);
+        $this->subject->limitToLanguages();
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -2899,8 +2899,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['language' => 'DE']
         );
-        $this->fixture->limitToLanguages(['EN']);
-        $bag = $this->fixture->build();
+        $this->subject->limitToLanguages(['EN']);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -2912,8 +2912,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars'
         );
-        $this->fixture->limitToLanguages(['EN']);
-        $bag = $this->fixture->build();
+        $this->subject->limitToLanguages(['EN']);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -2930,8 +2930,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
-        $this->fixture->limitToTopicRecords();
-        $bag = $this->fixture->build();
+        $this->subject->limitToTopicRecords();
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -2945,8 +2945,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
-        $this->fixture->limitToTopicRecords();
-        $bag = $this->fixture->build();
+        $this->subject->limitToTopicRecords();
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -2959,8 +2959,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_DATE]
         );
-        $this->fixture->limitToTopicRecords();
-        $bag = $this->fixture->build();
+        $this->subject->limitToTopicRecords();
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -2977,9 +2977,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
-        $this->fixture->limitToTopicRecords();
-        $this->fixture->removeLimitToTopicRecords();
-        $bag = $this->fixture->build();
+        $this->subject->limitToTopicRecords();
+        $this->subject->removeLimitToTopicRecords();
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -2993,9 +2993,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_DATE]
         );
-        $this->fixture->limitToTopicRecords();
-        $this->fixture->removeLimitToTopicRecords();
-        $bag = $this->fixture->build();
+        $this->subject->limitToTopicRecords();
+        $this->subject->removeLimitToTopicRecords();
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -3014,7 +3014,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'The parameter $feUserUid must be >= 0.'
         );
 
-        $this->fixture->limitToOwner(-1);
+        $this->subject->limitToOwner(-1);
     }
 
     public function testLimitToOwnerWithPositiveFeUserUidFindsEventsWithOwner()
@@ -3024,8 +3024,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['owner_feuser' => $feUserUid]
         );
-        $this->fixture->limitToOwner($feUserUid);
-        $bag = $this->fixture->build();
+        $this->subject->limitToOwner($feUserUid);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -3039,8 +3039,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars'
         );
-        $this->fixture->limitToOwner($feUserUid);
-        $bag = $this->fixture->build();
+        $this->subject->limitToOwner($feUserUid);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -3054,8 +3054,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['owner_feuser' => $feUserUid + 1]
         );
-        $this->fixture->limitToOwner($feUserUid);
-        $bag = $this->fixture->build();
+        $this->subject->limitToOwner($feUserUid);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -3068,9 +3068,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars'
         );
-        $this->fixture->limitToOwner($feUserUid);
-        $this->fixture->limitToOwner(0);
-        $bag = $this->fixture->build();
+        $this->subject->limitToOwner($feUserUid);
+        $this->subject->limitToOwner(0);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -3085,9 +3085,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['owner_feuser' => $feUserUid]
         );
-        $this->fixture->limitToOwner($feUserUid);
-        $this->fixture->limitToOwner(0);
-        $bag = $this->fixture->build();
+        $this->subject->limitToOwner($feUserUid);
+        $this->subject->limitToOwner(0);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -3105,8 +3105,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_DATE]
         );
-        $this->fixture->limitToDateAndSingleRecords();
-        $bag = $this->fixture->build();
+        $this->subject->limitToDateAndSingleRecords();
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -3120,8 +3120,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
-        $this->fixture->limitToDateAndSingleRecords();
-        $bag = $this->fixture->build();
+        $this->subject->limitToDateAndSingleRecords();
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -3135,8 +3135,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
-        $this->fixture->limitToDateAndSingleRecords();
-        $bag = $this->fixture->build();
+        $this->subject->limitToDateAndSingleRecords();
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -3149,9 +3149,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
-        $this->fixture->limitToDateAndSingleRecords();
-        $this->fixture->removeLimitToDateAndSingleRecords();
-        $bag = $this->fixture->build();
+        $this->subject->limitToDateAndSingleRecords();
+        $this->subject->removeLimitToDateAndSingleRecords();
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -3170,7 +3170,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'The parameter $feUserUid must be >= 0.'
         );
 
-        $this->fixture->limitToEventManager(-1);
+        $this->subject->limitToEventManager(-1);
     }
 
     public function testLimitToEventManagerWithPositiveFeUserUidFindsEventsWithEventManager()
@@ -3186,8 +3186,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $feUserUid
         );
 
-        $this->fixture->limitToEventManager($feUserUid);
-        $bag = $this->fixture->build();
+        $this->subject->limitToEventManager($feUserUid);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -3202,8 +3202,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars'
         );
 
-        $this->fixture->limitToEventManager($feUserUid);
-        $bag = $this->fixture->build();
+        $this->subject->limitToEventManager($feUserUid);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -3217,9 +3217,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars'
         );
 
-        $this->fixture->limitToEventManager($feUserUid);
-        $this->fixture->limitToEventManager(0);
-        $bag = $this->fixture->build();
+        $this->subject->limitToEventManager($feUserUid);
+        $this->subject->limitToEventManager(0);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -3245,8 +3245,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
         $event = new \Tx_Seminars_OldModel_Event($eventUid1);
-        $this->fixture->limitToEventsNextDay($event);
-        $bag = $this->fixture->build();
+        $this->subject->limitToEventsNextDay($event);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -3272,8 +3272,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
         $event = new \Tx_Seminars_OldModel_Event($eventUid);
-        $this->fixture->limitToEventsNextDay($event);
-        $bag = $this->fixture->build();
+        $this->subject->limitToEventsNextDay($event);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -3294,8 +3294,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
         $event = new \Tx_Seminars_OldModel_Event($eventUid);
-        $this->fixture->limitToEventsNextDay($event);
-        $bag = $this->fixture->build();
+        $this->subject->limitToEventsNextDay($event);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -3313,7 +3313,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
         );
-        $this->fixture->limitToEventsNextDay(
+        $this->subject->limitToEventsNextDay(
             new \Tx_Seminars_OldModel_Event($eventUid)
         );
     }
@@ -3343,8 +3343,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
         $date = new \Tx_Seminars_OldModel_Event($dateUid1);
-        $this->fixture->limitToOtherDatesForTopic($date);
-        $bag = $this->fixture->build();
+        $this->subject->limitToOtherDatesForTopic($date);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -3377,8 +3377,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
         $topic = new \Tx_Seminars_OldModel_Event($topicUid);
-        $this->fixture->limitToOtherDatesForTopic($topic);
-        $bag = $this->fixture->build();
+        $this->subject->limitToOtherDatesForTopic($topic);
+        $bag = $this->subject->build();
 
         self::assertSame(
             2,
@@ -3398,7 +3398,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
         $event = new \Tx_Seminars_OldModel_Event($eventUid);
-        $this->fixture->limitToOtherDatesForTopic($event);
+        $this->subject->limitToOtherDatesForTopic($event);
     }
 
     public function testLimitToOtherDatesForTopicIgnoresDateForOtherTopic()
@@ -3426,8 +3426,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
         $date = new \Tx_Seminars_OldModel_Event($dateUid1);
-        $this->fixture->limitToOtherDatesForTopic($date);
-        $bag = $this->fixture->build();
+        $this->subject->limitToOtherDatesForTopic($date);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -3455,8 +3455,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
         $date = new \Tx_Seminars_OldModel_Event($dateUid);
-        $this->fixture->limitToOtherDatesForTopic($date);
-        $bag = $this->fixture->build();
+        $this->subject->limitToOtherDatesForTopic($date);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -3488,9 +3488,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
         $date = new \Tx_Seminars_OldModel_Event($dateUid1);
-        $this->fixture->limitToOtherDatesForTopic($date);
-        $this->fixture->removeLimitToOtherDatesForTopic();
-        $bag = $this->fixture->build();
+        $this->subject->limitToOtherDatesForTopic($date);
+        $this->subject->removeLimitToOtherDatesForTopic();
+        $bag = $this->subject->build();
 
         self::assertSame(
             4,
@@ -3519,9 +3519,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
         $date = new \Tx_Seminars_OldModel_Event($dateUid);
-        $this->fixture->limitToOtherDatesForTopic($date);
-        $this->fixture->removeLimitToOtherDatesForTopic();
-        $bag = $this->fixture->build();
+        $this->subject->limitToOtherDatesForTopic($date);
+        $this->subject->removeLimitToOtherDatesForTopic();
+        $bag = $this->subject->build();
 
         self::assertSame(
             3,
@@ -3539,8 +3539,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['title' => 'avocado paprika event']
         );
-        $this->fixture->limitToFullTextSearch(',,');
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch(',,');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -3558,8 +3558,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['title' => 'avocado paprika event']
         );
-        $this->fixture->limitToFullTextSearch('avocado  paprika');
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado  paprika');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -3577,8 +3577,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['title' => 'avocado paprika event']
         );
-        $this->fixture->limitToFullTextSearch(',  ,');
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch(',  ,');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -3596,8 +3596,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['title' => 'avocado paprika event']
         );
-        $this->fixture->limitToFullTextSearch('o');
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('o');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -3618,8 +3618,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
             ]
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -3640,8 +3640,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
             ]
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -3654,8 +3654,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['title' => 'avocado paprika event']
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -3673,8 +3673,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['title' => 'paprika event']
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -3687,8 +3687,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['subtitle' => 'avocado paprika event']
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -3706,8 +3706,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['subtitle' => 'paprika event']
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -3720,8 +3720,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['description' => 'avocado paprika event']
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -3739,8 +3739,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['description' => 'paprika event']
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -3765,8 +3765,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid,
             $speakerUid
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -3796,8 +3796,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid,
             $speakerUid
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -3822,8 +3822,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid,
             $placeUid
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -3853,8 +3853,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid,
             $placeUid
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -3879,8 +3879,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid,
             $placeUid
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -3910,8 +3910,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid,
             $placeUid
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -3931,8 +3931,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
             ]
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -3957,8 +3957,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
             ]
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -3983,8 +3983,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid,
             $categoryUid
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -4014,8 +4014,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid,
             $categoryUid
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -4028,8 +4028,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['title' => 'avocado event paprika']
         );
-        $this->fixture->limitToFullTextSearch('avocado paprika');
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado paprika');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -4047,8 +4047,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['title' => 'avocado event paprika']
         );
-        $this->fixture->limitToFullTextSearch('avocado,paprika');
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado,paprika');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -4081,8 +4081,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid,
             $targetGroupUid
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -4115,8 +4115,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid,
             $targetGroupUid
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -4143,9 +4143,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
             ]
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $this->fixture->limitToDateAndSingleRecords();
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $this->subject->limitToDateAndSingleRecords();
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -4173,9 +4173,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
             ]
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $this->fixture->limitToDateAndSingleRecords();
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $this->subject->limitToDateAndSingleRecords();
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -4198,9 +4198,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
             ]
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $this->fixture->limitToDateAndSingleRecords();
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $this->subject->limitToDateAndSingleRecords();
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -4228,9 +4228,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
             ]
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $this->fixture->limitToDateAndSingleRecords();
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $this->subject->limitToDateAndSingleRecords();
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -4253,9 +4253,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
             ]
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $this->fixture->limitToDateAndSingleRecords();
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $this->subject->limitToDateAndSingleRecords();
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -4283,9 +4283,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
             ]
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $this->fixture->limitToDateAndSingleRecords();
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $this->subject->limitToDateAndSingleRecords();
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -4317,9 +4317,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
             ]
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $this->fixture->limitToDateAndSingleRecords();
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $this->subject->limitToDateAndSingleRecords();
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -4356,9 +4356,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
             ]
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $this->fixture->limitToDateAndSingleRecords();
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $this->subject->limitToDateAndSingleRecords();
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -4385,9 +4385,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
             ]
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $this->fixture->limitToDateAndSingleRecords();
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $this->subject->limitToDateAndSingleRecords();
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -4419,9 +4419,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
             ]
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $this->fixture->limitToDateAndSingleRecords();
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $this->subject->limitToDateAndSingleRecords();
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -4441,8 +4441,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
             ]
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -4463,8 +4463,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
             ]
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -4489,8 +4489,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid,
             $speakerUid
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -4520,8 +4520,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid,
             $speakerUid
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -4546,8 +4546,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid,
             $placeUid
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -4577,8 +4577,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid,
             $placeUid
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -4603,8 +4603,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid,
             $placeUid
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -4634,8 +4634,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid,
             $placeUid
         );
-        $this->fixture->limitToFullTextSearch('avocado');
-        $bag = $this->fixture->build();
+        $this->subject->limitToFullTextSearch('avocado');
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -4661,8 +4661,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid,
             $requiredEventUid
         );
-        $this->fixture->limitToRequiredEventTopics($eventUid);
-        $bag = $this->fixture->build();
+        $this->subject->limitToRequiredEventTopics($eventUid);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -4694,8 +4694,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $requiredEventUid2
         );
 
-        $this->fixture->limitToRequiredEventTopics($eventUid);
-        $bag = $this->fixture->build();
+        $this->subject->limitToRequiredEventTopics($eventUid);
+        $bag = $this->subject->build();
 
         self::assertSame(
             2,
@@ -4727,8 +4727,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid
         );
 
-        $this->fixture->limitToRequiredEventTopics($eventUid);
-        $bag = $this->fixture->build();
+        $this->subject->limitToRequiredEventTopics($eventUid);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -4759,8 +4759,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $dependingEventUid,
             $eventUid
         );
-        $this->fixture->limitToDependingEventTopics($eventUid);
-        $bag = $this->fixture->build();
+        $this->subject->limitToDependingEventTopics($eventUid);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -4792,8 +4792,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $eventUid
         );
 
-        $this->fixture->limitToDependingEventTopics($eventUid);
-        $bag = $this->fixture->build();
+        $this->subject->limitToDependingEventTopics($eventUid);
+        $bag = $this->subject->build();
 
         self::assertSame(
             2,
@@ -4825,8 +4825,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $requiredEventUid
         );
 
-        $this->fixture->limitToDependingEventTopics($eventUid);
-        $bag = $this->fixture->build();
+        $this->subject->limitToDependingEventTopics($eventUid);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -4849,10 +4849,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
-        $this->fixture->limitToTopicsWithoutRegistrationByUser(
+        $this->subject->limitToTopicsWithoutRegistrationByUser(
             $this->testingFramework->createFrontEndUser()
         );
-        $bag = $this->fixture->build();
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -4878,10 +4878,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToTopicsWithoutRegistrationByUser(
+        $this->subject->limitToTopicsWithoutRegistrationByUser(
             $this->testingFramework->createFrontEndUser()
         );
-        $bag = $this->fixture->build();
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -4907,10 +4907,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToTopicsWithoutRegistrationByUser(
+        $this->subject->limitToTopicsWithoutRegistrationByUser(
             $this->testingFramework->createFrontEndUser()
         );
-        $bag = $this->fixture->build();
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -4939,10 +4939,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToTopicsWithoutRegistrationByUser(
+        $this->subject->limitToTopicsWithoutRegistrationByUser(
             $this->testingFramework->createFrontEndUser()
         );
-        $bag = $this->fixture->build();
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -4974,8 +4974,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['seminar' => $dateUid, 'user' => $userUid]
         );
 
-        $this->fixture->limitToTopicsWithoutRegistrationByUser($userUid);
-        $bag = $this->fixture->build();
+        $this->subject->limitToTopicsWithoutRegistrationByUser($userUid);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -5002,8 +5002,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['seminar' => $dateUid, 'user' => $userUid]
         );
 
-        $this->fixture->limitToTopicsWithoutRegistrationByUser($userUid);
-        $bag = $this->fixture->build();
+        $this->subject->limitToTopicsWithoutRegistrationByUser($userUid);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -5030,8 +5030,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['seminar' => $dateUid, 'user' => $userUid]
         );
 
-        $this->fixture->limitToTopicsWithoutRegistrationByUser($userUid);
-        $bag = $this->fixture->build();
+        $this->subject->limitToTopicsWithoutRegistrationByUser($userUid);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -5065,8 +5065,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToTopicsWithoutRegistrationByUser($userUid);
-        $bag = $this->fixture->build();
+        $this->subject->limitToTopicsWithoutRegistrationByUser($userUid);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -5100,11 +5100,11 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             $requiredTopicUid
         );
 
-        $this->fixture->limitToRequiredEventTopics($eventUid);
-        $this->fixture->limitToTopicsWithoutRegistrationByUser(
+        $this->subject->limitToRequiredEventTopics($eventUid);
+        $this->subject->limitToTopicsWithoutRegistrationByUser(
             $this->testingFramework->createFrontEndUser()
         );
-        $bag = $this->fixture->build();
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -5123,8 +5123,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['cancelation_deadline_reminder_sent' => 0]
         );
 
-        $this->fixture->limitToCancelationDeadlineReminderNotSent();
-        $bag = $this->fixture->build();
+        $this->subject->limitToCancelationDeadlineReminderNotSent();
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -5139,8 +5139,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['cancelation_deadline_reminder_sent' => 1]
         );
 
-        $this->fixture->limitToCancelationDeadlineReminderNotSent();
-        $bag = $this->fixture->build();
+        $this->subject->limitToCancelationDeadlineReminderNotSent();
+        $bag = $this->subject->build();
 
         self::assertSame(
             0,
@@ -5159,8 +5159,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['event_takes_place_reminder_sent' => 0]
         );
 
-        $this->fixture->limitToEventTakesPlaceReminderNotSent();
-        $bag = $this->fixture->build();
+        $this->subject->limitToEventTakesPlaceReminderNotSent();
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -5175,8 +5175,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['event_takes_place_reminder_sent' => 1]
         );
 
-        $this->fixture->limitToEventTakesPlaceReminderNotSent();
-        $bag = $this->fixture->build();
+        $this->subject->limitToEventTakesPlaceReminderNotSent();
+        $bag = $this->subject->build();
 
         self::assertSame(
             0,
@@ -5195,8 +5195,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['cancelled' => \Tx_Seminars_Model_Event::STATUS_CANCELED]
         );
 
-        $this->fixture->limitToStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
-        $bag = $this->fixture->build();
+        $this->subject->limitToStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -5211,8 +5211,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['cancelled' => \Tx_Seminars_Model_Event::STATUS_PLANNED]
         );
 
-        $this->fixture->limitToStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
-        $bag = $this->fixture->build();
+        $this->subject->limitToStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
+        $bag = $this->subject->build();
 
         self::assertSame(
             0,
@@ -5227,8 +5227,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED]
         );
 
-        $this->fixture->limitToStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
-        $bag = $this->fixture->build();
+        $this->subject->limitToStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
+        $bag = $this->subject->build();
 
         self::assertSame(
             0,
@@ -5243,8 +5243,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED]
         );
 
-        $this->fixture->limitToStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
-        $bag = $this->fixture->build();
+        $this->subject->limitToStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -5259,8 +5259,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['cancelled' => \Tx_Seminars_Model_Event::STATUS_PLANNED]
         );
 
-        $this->fixture->limitToStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
-        $bag = $this->fixture->build();
+        $this->subject->limitToStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
+        $bag = $this->subject->build();
 
         self::assertSame(
             0,
@@ -5275,8 +5275,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['cancelled' => \Tx_Seminars_Model_Event::STATUS_CANCELED]
         );
 
-        $this->fixture->limitToStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
-        $bag = $this->fixture->build();
+        $this->subject->limitToStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
+        $bag = $this->subject->build();
 
         self::assertSame(
             0,
@@ -5291,8 +5291,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['cancelled' => \Tx_Seminars_Model_Event::STATUS_PLANNED]
         );
 
-        $this->fixture->limitToStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
-        $bag = $this->fixture->build();
+        $this->subject->limitToStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -5307,8 +5307,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED]
         );
 
-        $this->fixture->limitToStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
-        $bag = $this->fixture->build();
+        $this->subject->limitToStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $bag = $this->subject->build();
 
         self::assertSame(
             0,
@@ -5323,8 +5323,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['cancelled' => \Tx_Seminars_Model_Event::STATUS_CANCELED]
         );
 
-        $this->fixture->limitToStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
-        $bag = $this->fixture->build();
+        $this->subject->limitToStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
+        $bag = $this->subject->build();
 
         self::assertSame(
             0,
@@ -5343,8 +5343,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY]
         );
 
-        $this->fixture->limitToDaysBeforeBeginDate(2);
-        $bag = $this->fixture->build();
+        $this->subject->limitToDaysBeforeBeginDate(2);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -5359,8 +5359,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY]
         );
 
-        $this->fixture->limitToDaysBeforeBeginDate(3);
-        $bag = $this->fixture->build();
+        $this->subject->limitToDaysBeforeBeginDate(3);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -5375,8 +5375,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['begin_date' => $GLOBALS['SIM_EXEC_TIME'] + (2 * \Tx_Oelib_Time::SECONDS_PER_DAY)]
         );
 
-        $this->fixture->limitToDaysBeforeBeginDate(1);
-        $bag = $this->fixture->build();
+        $this->subject->limitToDaysBeforeBeginDate(1);
+        $bag = $this->subject->build();
 
         self::assertSame(
             0,
@@ -5391,8 +5391,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['begin_date' => $GLOBALS['SIM_EXEC_TIME'] - (2 * \Tx_Oelib_Time::SECONDS_PER_DAY)]
         );
 
-        $this->fixture->limitToDaysBeforeBeginDate(1);
-        $bag = $this->fixture->build();
+        $this->subject->limitToDaysBeforeBeginDate(1);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -5404,8 +5404,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord('tx_seminars_seminars');
 
-        $this->fixture->limitToDaysBeforeBeginDate(1);
-        $bag = $this->fixture->build();
+        $this->subject->limitToDaysBeforeBeginDate(1);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -5423,8 +5423,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
     public function limitToEarliestBeginOrEndDateForEventWithoutBeginDateFindsThisEvent()
     {
         $this->testingFramework->createRecord('tx_seminars_seminars');
-        $this->fixture->limitToEarliestBeginOrEndDate(42);
-        $bag = $this->fixture->build();
+        $this->subject->limitToEarliestBeginOrEndDate(42);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -5441,8 +5441,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['begin_date' => 42]
         );
-        $this->fixture->limitToEarliestBeginOrEndDate(42);
-        $bag = $this->fixture->build();
+        $this->subject->limitToEarliestBeginOrEndDate(42);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -5459,8 +5459,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['begin_date' => 42]
         );
-        $this->fixture->limitToEarliestBeginOrEndDate(21);
-        $bag = $this->fixture->build();
+        $this->subject->limitToEarliestBeginOrEndDate(21);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -5477,8 +5477,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['begin_date' => 42]
         );
-        $this->fixture->limitToEarliestBeginOrEndDate(84);
-        $bag = $this->fixture->build();
+        $this->subject->limitToEarliestBeginOrEndDate(84);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -5495,10 +5495,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['begin_date' => 21]
         );
 
-        $this->fixture->limitToEarliestBeginOrEndDate(42);
+        $this->subject->limitToEarliestBeginOrEndDate(42);
 
-        $this->fixture->limitToEarliestBeginOrEndDate(0);
-        $bag = $this->fixture->build();
+        $this->subject->limitToEarliestBeginOrEndDate(0);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -5512,8 +5512,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
     public function limitToEarliestBeginOrEndDateForFindsEventStartingBeforeAndEndingAfterDeadline()
     {
         $this->testingFramework->createRecord('tx_seminars_seminars', ['begin_date' => 8, 'end_date' => 10]);
-        $this->fixture->limitToEarliestBeginOrEndDate(9);
-        $bag = $this->fixture->build();
+        $this->subject->limitToEarliestBeginOrEndDate(9);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -5531,8 +5531,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
     public function limitToLatestBeginOrEndDateForEventWithoutDateDoesNotFindThisEvent()
     {
         $this->testingFramework->createRecord('tx_seminars_seminars');
-        $this->fixture->limitToLatestBeginOrEndDate(42);
-        $bag = $this->fixture->build();
+        $this->subject->limitToLatestBeginOrEndDate(42);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -5548,8 +5548,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['begin_date' => 42]
         );
-        $this->fixture->limitToLatestBeginOrEndDate(42);
-        $bag = $this->fixture->build();
+        $this->subject->limitToLatestBeginOrEndDate(42);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -5566,8 +5566,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['begin_date' => 42]
         );
-        $this->fixture->limitToLatestBeginOrEndDate(21);
-        $bag = $this->fixture->build();
+        $this->subject->limitToLatestBeginOrEndDate(21);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -5583,8 +5583,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['begin_date' => 42]
         );
-        $this->fixture->limitToLatestBeginOrEndDate(84);
-        $bag = $this->fixture->build();
+        $this->subject->limitToLatestBeginOrEndDate(84);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -5601,8 +5601,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['end_date' => 42]
         );
-        $this->fixture->limitToLatestBeginOrEndDate(42);
-        $bag = $this->fixture->build();
+        $this->subject->limitToLatestBeginOrEndDate(42);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -5619,8 +5619,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['end_date' => 42]
         );
-        $this->fixture->limitToLatestBeginOrEndDate(21);
-        $bag = $this->fixture->build();
+        $this->subject->limitToLatestBeginOrEndDate(21);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -5636,8 +5636,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars',
             ['end_date' => 42]
         );
-        $this->fixture->limitToLatestBeginOrEndDate(84);
-        $bag = $this->fixture->build();
+        $this->subject->limitToLatestBeginOrEndDate(84);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -5652,9 +5652,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord('tx_seminars_seminars');
 
-        $this->fixture->limitToLatestBeginOrEndDate(42);
-        $this->fixture->limitToLatestBeginOrEndDate(0);
-        $bag = $this->fixture->build();
+        $this->subject->limitToLatestBeginOrEndDate(42);
+        $this->subject->limitToLatestBeginOrEndDate(0);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -5676,8 +5676,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['hidden' => 1]
         );
 
-        $this->fixture->showHiddenRecords();
-        $bag = $this->fixture->build();
+        $this->subject->showHiddenRecords();
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -5695,8 +5695,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['hidden' => 0]
         );
 
-        $this->fixture->showHiddenRecords();
-        $bag = $this->fixture->build();
+        $this->subject->showHiddenRecords();
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -5718,8 +5718,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['needs_registration' => 0]
         );
 
-        $this->fixture->limitToEventsWithVacancies();
-        $bag = $this->fixture->build();
+        $this->subject->limitToEventsWithVacancies();
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -5737,8 +5737,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['needs_registration' => 1, 'attendees_max' => 0]
         );
 
-        $this->fixture->limitToEventsWithVacancies();
-        $bag = $this->fixture->build();
+        $this->subject->limitToEventsWithVacancies();
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -5765,8 +5765,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['seminar' => $eventUid, 'seats' => 1]
         );
 
-        $this->fixture->limitToEventsWithVacancies();
-        $bag = $this->fixture->build();
+        $this->subject->limitToEventsWithVacancies();
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -5788,8 +5788,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['seminar' => $eventUid, 'seats' => 1]
         );
 
-        $this->fixture->limitToEventsWithVacancies();
-        $bag = $this->fixture->build();
+        $this->subject->limitToEventsWithVacancies();
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -5812,8 +5812,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['seminar' => $eventUid, 'seats' => 1]
         );
 
-        $this->fixture->limitToEventsWithVacancies();
-        $bag = $this->fixture->build();
+        $this->subject->limitToEventsWithVacancies();
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -5834,8 +5834,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToEventsWithVacancies();
-        $bag = $this->fixture->build();
+        $this->subject->limitToEventsWithVacancies();
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -5860,8 +5860,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['seminar' => $eventUid, 'seats' => 10]
         );
 
-        $this->fixture->limitToEventsWithVacancies();
-        $bag = $this->fixture->build();
+        $this->subject->limitToEventsWithVacancies();
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -5887,8 +5887,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['seminar' => $eventUid, 'seats' => 5]
         );
 
-        $this->fixture->limitToEventsWithVacancies();
-        $bag = $this->fixture->build();
+        $this->subject->limitToEventsWithVacancies();
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -5905,8 +5905,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['needs_registration' => 1, 'attendees_max' => 10]
         );
 
-        $this->fixture->limitToEventsWithVacancies();
-        $bag = $this->fixture->build();
+        $this->subject->limitToEventsWithVacancies();
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -5928,8 +5928,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToEventsWithVacancies();
-        $bag = $this->fixture->build();
+        $this->subject->limitToEventsWithVacancies();
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -5959,8 +5959,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'organizers'
         );
 
-        $this->fixture->limitToOrganizers($organizerUid);
-        $bag = $this->fixture->build();
+        $this->subject->limitToOrganizers($organizerUid);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -5980,8 +5980,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_organizers'
         );
 
-        $this->fixture->limitToOrganizers($organizerUid);
-        $bag = $this->fixture->build();
+        $this->subject->limitToOrganizers($organizerUid);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -6009,8 +6009,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'organizers'
         );
 
-        $this->fixture->limitToOrganizers($organizerUid2);
-        $bag = $this->fixture->build();
+        $this->subject->limitToOrganizers($organizerUid2);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -6039,8 +6039,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'organizers'
         );
 
-        $this->fixture->limitToOrganizers($organizerUid1 . ',' . $organizerUid2);
-        $bag = $this->fixture->build();
+        $this->subject->limitToOrganizers($organizerUid1 . ',' . $organizerUid2);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -6076,8 +6076,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'organizers'
         );
 
-        $this->fixture->limitToOrganizers($organizerUid);
-        $bag = $this->fixture->build();
+        $this->subject->limitToOrganizers($organizerUid);
+        $bag = $this->subject->build();
 
         self::assertSame(
             2,
@@ -6113,8 +6113,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToOrganizers($organizerUid);
-        $bag = $this->fixture->build();
+        $this->subject->limitToOrganizers($organizerUid);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -6144,8 +6144,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'organizers'
         );
 
-        $this->fixture->limitToOrganizers('');
-        $bag = $this->fixture->build();
+        $this->subject->limitToOrganizers('');
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -6176,8 +6176,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'target_groups'
         );
 
-        $this->fixture->limitToAge(6);
-        $bag = $this->fixture->build();
+        $this->subject->limitToAge(6);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -6204,8 +6204,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'target_groups'
         );
 
-        $this->fixture->limitToAge(15);
-        $bag = $this->fixture->build();
+        $this->subject->limitToAge(15);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -6232,8 +6232,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'target_groups'
         );
 
-        $this->fixture->limitToAge(15);
-        $bag = $this->fixture->build();
+        $this->subject->limitToAge(15);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -6260,8 +6260,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'target_groups'
         );
 
-        $this->fixture->limitToAge(15);
-        $bag = $this->fixture->build();
+        $this->subject->limitToAge(15);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -6288,8 +6288,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'target_groups'
         );
 
-        $this->fixture->limitToAge(51);
-        $bag = $this->fixture->build();
+        $this->subject->limitToAge(51);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -6315,8 +6315,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'target_groups'
         );
 
-        $this->fixture->limitToAge(15);
-        $bag = $this->fixture->build();
+        $this->subject->limitToAge(15);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -6343,8 +6343,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'target_groups'
         );
 
-        $this->fixture->limitToAge(4);
-        $bag = $this->fixture->build();
+        $this->subject->limitToAge(4);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -6360,8 +6360,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'tx_seminars_seminars'
         );
 
-        $this->fixture->limitToAge(15);
-        $bag = $this->fixture->build();
+        $this->subject->limitToAge(15);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -6387,8 +6387,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'target_groups'
         );
 
-        $this->fixture->limitToAge(15);
-        $bag = $this->fixture->build();
+        $this->subject->limitToAge(15);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -6425,8 +6425,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'target_groups'
         );
 
-        $this->fixture->limitToAge(21);
-        $bag = $this->fixture->build();
+        $this->subject->limitToAge(21);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -6463,8 +6463,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'target_groups'
         );
 
-        $this->fixture->limitToAge(6);
-        $bag = $this->fixture->build();
+        $this->subject->limitToAge(6);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -6491,8 +6491,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             'target_groups'
         );
 
-        $this->fixture->limitToAge(0);
-        $bag = $this->fixture->build();
+        $this->subject->limitToAge(0);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -6514,8 +6514,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['price_regular' => 42]
         );
 
-        $this->fixture->limitToMaximumPrice(43);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMaximumPrice(43);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -6533,8 +6533,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['price_regular' => 0]
         );
 
-        $this->fixture->limitToMaximumPrice(50);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMaximumPrice(50);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -6552,8 +6552,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['price_regular' => 50]
         );
 
-        $this->fixture->limitToMaximumPrice(50);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMaximumPrice(50);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -6571,8 +6571,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['price_regular' => 51]
         );
 
-        $this->fixture->limitToMaximumPrice(50);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMaximumPrice(50);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -6589,8 +6589,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['price_regular' => 51, 'price_special' => 49]
         );
 
-        $this->fixture->limitToMaximumPrice(50);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMaximumPrice(50);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -6608,8 +6608,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['price_regular' => 43, 'price_special' => 42]
         );
 
-        $this->fixture->limitToMaximumPrice(42);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMaximumPrice(42);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -6627,8 +6627,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['price_regular' => 43, 'price_special' => 43]
         );
 
-        $this->fixture->limitToMaximumPrice(42);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMaximumPrice(42);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -6645,8 +6645,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['price_regular' => 51, 'price_regular_board' => 49]
         );
 
-        $this->fixture->limitToMaximumPrice(50);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMaximumPrice(50);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -6664,8 +6664,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['price_regular' => 51, 'price_regular_board' => 50]
         );
 
-        $this->fixture->limitToMaximumPrice(50);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMaximumPrice(50);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -6683,8 +6683,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['price_regular' => 51, 'price_regular_board' => 51]
         );
 
-        $this->fixture->limitToMaximumPrice(50);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMaximumPrice(50);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -6701,8 +6701,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['price_regular' => 51, 'price_special_board' => 49]
         );
 
-        $this->fixture->limitToMaximumPrice(50);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMaximumPrice(50);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -6720,8 +6720,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['price_regular' => 51, 'price_special_board' => 50]
         );
 
-        $this->fixture->limitToMaximumPrice(50);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMaximumPrice(50);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -6739,8 +6739,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['price_regular' => 51, 'price_special_board' => 51]
         );
 
-        $this->fixture->limitToMaximumPrice(50);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMaximumPrice(50);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -6767,8 +6767,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToMaximumPrice(50);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMaximumPrice(50);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -6800,8 +6800,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToMaximumPrice(50);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMaximumPrice(50);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -6822,8 +6822,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToMaximumPrice(50);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMaximumPrice(50);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -6845,8 +6845,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToMaximumPrice(50);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMaximumPrice(50);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -6868,8 +6868,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToMaximumPrice(50);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMaximumPrice(50);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -6890,8 +6890,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToMaximumPrice(50);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMaximumPrice(50);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -6912,8 +6912,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToMaximumPrice(50);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMaximumPrice(50);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -6935,8 +6935,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToMaximumPrice(50);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMaximumPrice(50);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -6958,8 +6958,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToMaximumPrice(50);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMaximumPrice(50);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -6979,8 +6979,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToMaximumPrice(50);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMaximumPrice(50);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -7001,8 +7001,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToMaximumPrice(50);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMaximumPrice(50);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -7023,8 +7023,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToMaximumPrice(50);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMaximumPrice(50);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -7044,8 +7044,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToMaximumPrice(50);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMaximumPrice(50);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -7067,8 +7067,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToMaximumPrice(50);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMaximumPrice(50);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -7089,8 +7089,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToMaximumPrice(50);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMaximumPrice(50);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -7110,8 +7110,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToMaximumPrice(0);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMaximumPrice(0);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -7133,8 +7133,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['price_regular' => 14]
         );
 
-        $this->fixture->limitToMinimumPrice(15);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMinimumPrice(15);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -7148,8 +7148,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
     {
         $this->testingFramework->createRecord('tx_seminars_seminars');
 
-        $this->fixture->limitToMinimumPrice(16);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMinimumPrice(16);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -7166,8 +7166,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['price_regular' => 15]
         );
 
-        $this->fixture->limitToMinimumPrice(15);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMinimumPrice(15);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -7185,8 +7185,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['price_regular' => 16]
         );
 
-        $this->fixture->limitToMinimumPrice(15);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMinimumPrice(15);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -7204,8 +7204,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['price_regular_board' => 16]
         );
 
-        $this->fixture->limitToMinimumPrice(15);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMinimumPrice(15);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -7223,8 +7223,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['price_regular_board' => 15]
         );
 
-        $this->fixture->limitToMinimumPrice(15);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMinimumPrice(15);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -7242,8 +7242,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['price_regular_board' => 14]
         );
 
-        $this->fixture->limitToMinimumPrice(15);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMinimumPrice(15);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -7260,8 +7260,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['price_special_board' => 16]
         );
 
-        $this->fixture->limitToMinimumPrice(15);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMinimumPrice(15);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -7279,8 +7279,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['price_special_board' => 15]
         );
 
-        $this->fixture->limitToMinimumPrice(15);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMinimumPrice(15);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -7298,8 +7298,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['price_special_board' => 14]
         );
 
-        $this->fixture->limitToMinimumPrice(15);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMinimumPrice(15);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -7316,8 +7316,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['price_special' => 16]
         );
 
-        $this->fixture->limitToMinimumPrice(15);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMinimumPrice(15);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -7335,8 +7335,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['price_special' => 15]
         );
 
-        $this->fixture->limitToMinimumPrice(15);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMinimumPrice(15);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -7354,8 +7354,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['price_special' => 14]
         );
 
-        $this->fixture->limitToMinimumPrice(15);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMinimumPrice(15);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -7375,8 +7375,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToMinimumPrice(15);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMinimumPrice(15);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -7394,8 +7394,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['deadline_early_bird' => $this->future]
         );
 
-        $this->fixture->limitToMinimumPrice(15);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMinimumPrice(15);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -7415,8 +7415,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToMinimumPrice(15);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMinimumPrice(15);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -7436,8 +7436,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToMinimumPrice(15);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMinimumPrice(15);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -7458,8 +7458,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToMinimumPrice(15);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMinimumPrice(15);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -7480,8 +7480,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToMinimumPrice(15);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMinimumPrice(15);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -7502,8 +7502,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToMinimumPrice(15);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMinimumPrice(15);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -7523,8 +7523,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToMinimumPrice(15);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMinimumPrice(15);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -7545,8 +7545,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToMinimumPrice(15);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMinimumPrice(15);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,
@@ -7567,8 +7567,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToMinimumPrice(15);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMinimumPrice(15);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -7588,8 +7588,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->limitToMinimumPrice(15);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMinimumPrice(15);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -7606,8 +7606,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
             ['price_regular' => 16]
         );
 
-        $this->fixture->limitToMinimumPrice(0);
-        $bag = $this->fixture->build();
+        $this->subject->limitToMinimumPrice(0);
+        $bag = $this->subject->build();
 
         self::assertSame(
             1,

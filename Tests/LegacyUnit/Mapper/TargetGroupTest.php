@@ -15,13 +15,13 @@ class Tx_Seminars_Tests_Unit_Mapper_TargetGroupTest extends \Tx_Phpunit_TestCase
     /**
      * @var \Tx_Seminars_Mapper_TargetGroup
      */
-    private $fixture;
+    private $subject;
 
     protected function setUp()
     {
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
-        $this->fixture = new \Tx_Seminars_Mapper_TargetGroup();
+        $this->subject = new \Tx_Seminars_Mapper_TargetGroup();
     }
 
     protected function tearDown()
@@ -40,7 +40,7 @@ class Tx_Seminars_Tests_Unit_Mapper_TargetGroupTest extends \Tx_Phpunit_TestCase
     {
         self::assertInstanceOf(
             \Tx_Seminars_Model_TargetGroup::class,
-            $this->fixture->find(1)
+            $this->subject->find(1)
         );
     }
 
@@ -55,7 +55,7 @@ class Tx_Seminars_Tests_Unit_Mapper_TargetGroupTest extends \Tx_Phpunit_TestCase
         );
 
         /** @var \Tx_Seminars_Model_TargetGroup $model */
-        $model = $this->fixture->find($uid);
+        $model = $this->subject->find($uid);
         self::assertEquals(
             'Housewives',
             $model->getTitle()
@@ -72,7 +72,7 @@ class Tx_Seminars_Tests_Unit_Mapper_TargetGroupTest extends \Tx_Phpunit_TestCase
     public function getOwnerWithoutOwnerReturnsNull()
     {
         /** @var \Tx_Seminars_Model_TargetGroup $testingModel */
-        $testingModel = $this->fixture->getLoadedTestingModel([]);
+        $testingModel = $this->subject->getLoadedTestingModel([]);
 
         self::assertNull($testingModel->getOwner());
     }
@@ -85,7 +85,7 @@ class Tx_Seminars_Tests_Unit_Mapper_TargetGroupTest extends \Tx_Phpunit_TestCase
         $frontEndUser = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)
             ->getLoadedTestingModel([]);
         /** @var \Tx_Seminars_Model_TargetGroup $testingModel */
-        $testingModel = $this->fixture->getLoadedTestingModel(
+        $testingModel = $this->subject->getLoadedTestingModel(
             ['owner' => $frontEndUser->getUid()]
         );
 

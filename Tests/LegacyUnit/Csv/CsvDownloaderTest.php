@@ -15,7 +15,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
     /**
      * @var \Tx_Seminars_Csv_CsvDownloader
      */
-    protected $fixture = null;
+    protected $subject = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -53,8 +53,8 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         $this->configuration->setData(['charsetForCsv' => 'utf-8']);
 
-        $this->fixture = new \Tx_Seminars_Csv_CsvDownloader();
-        $this->fixture->init([]);
+        $this->subject = new \Tx_Seminars_Csv_CsvDownloader();
+        $this->subject->init([]);
     }
 
     protected function tearDown()
@@ -96,7 +96,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
      */
     public function createListOfEventsForZeroPidThrowsException()
     {
-        $this->fixture->createListOfEvents(0);
+        $this->subject->createListOfEvents(0);
     }
 
     /**
@@ -106,7 +106,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
      */
     public function createListOfEventsForNegativePidThrowsException()
     {
-        $this->fixture->createListOfEvents(-2);
+        $this->subject->createListOfEvents(-2);
     }
 
     /**
@@ -120,7 +120,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
         self::assertSame(
             $this->localizeAndRemoveColon('tx_seminars_seminars.uid') . ';' .
             $this->localizeAndRemoveColon('tx_seminars_seminars.title') . CRLF,
-            $this->fixture->createListOfEvents($pid)
+            $this->subject->createListOfEvents($pid)
         );
     }
 
@@ -133,7 +133,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertContains(
             (string)$this->eventUid,
-            $this->fixture->createListOfEvents($this->pid)
+            $this->subject->createListOfEvents($this->pid)
         );
     }
 
@@ -155,7 +155,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertContains(
             'another event',
-            $this->fixture->createListOfEvents($this->pid)
+            $this->subject->createListOfEvents($this->pid)
         );
     }
 
@@ -166,12 +166,12 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
     {
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'uid');
 
-        $this->fixture->piVars['table'] = 'tx_seminars_seminars';
-        $this->fixture->piVars['pid'] = $this->pid;
+        $this->subject->piVars['table'] = 'tx_seminars_seminars';
+        $this->subject->piVars['pid'] = $this->pid;
 
         self::assertContains(
             (string)$this->eventUid,
-            $this->fixture->main()
+            $this->subject->main()
         );
     }
 
@@ -189,7 +189,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 3600,
             ]
         );
-        $eventList = $this->fixture->createListOfEvents($this->pid);
+        $eventList = $this->subject->createListOfEvents($this->pid);
 
         self::assertContains(
             (string)$this->eventUid,
@@ -216,7 +216,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $output = $this->fixture->createAndOutputListOfEvents($this->pid);
+        $output = $this->subject->createAndOutputListOfEvents($this->pid);
 
         self::assertContains(
             (string)$this->eventUid,
@@ -246,7 +246,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
         self::assertContains(
             $this->localizeAndRemoveColon('tx_seminars_seminars.uid') .
             CRLF . $this->eventUid . CRLF . $secondEventUid . CRLF,
-            $this->fixture->createAndOutputListOfEvents($this->pid)
+            $this->subject->createAndOutputListOfEvents($this->pid)
         );
     }
 
@@ -267,7 +267,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertRegExp(
             '/\\r\\n$/',
-            $this->fixture->createAndOutputListOfEvents($this->pid)
+            $this->subject->createAndOutputListOfEvents($this->pid)
         );
     }
 
@@ -286,7 +286,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertNotContains(
             '"bar"',
-            $this->fixture->createAndOutputListOfEvents($this->pid)
+            $this->subject->createAndOutputListOfEvents($this->pid)
         );
     }
 
@@ -305,7 +305,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertContains(
             'foo "" bar',
-            $this->fixture->createAndOutputListOfEvents($this->pid)
+            $this->subject->createAndOutputListOfEvents($this->pid)
         );
     }
 
@@ -324,7 +324,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertContains(
             '"foo' . LF . 'bar"',
-            $this->fixture->createAndOutputListOfEvents($this->pid)
+            $this->subject->createAndOutputListOfEvents($this->pid)
         );
     }
 
@@ -343,7 +343,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertContains(
             '"foo "" bar"',
-            $this->fixture->createAndOutputListOfEvents($this->pid)
+            $this->subject->createAndOutputListOfEvents($this->pid)
         );
     }
 
@@ -362,7 +362,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertContains(
             '"foo ; bar"',
-            $this->fixture->createAndOutputListOfEvents($this->pid)
+            $this->subject->createAndOutputListOfEvents($this->pid)
         );
     }
 
@@ -381,7 +381,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertContains(
             'foo;bar',
-            $this->fixture->createAndOutputListOfEvents($this->pid)
+            $this->subject->createAndOutputListOfEvents($this->pid)
         );
     }
 
@@ -392,7 +392,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
     {
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'description,title');
 
-        $eventList = $this->fixture->createAndOutputListOfEvents($this->pid);
+        $eventList = $this->subject->createAndOutputListOfEvents($this->pid);
         $description = $this->localizeAndRemoveColon(
             'tx_seminars_seminars.description'
         );
@@ -417,7 +417,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
         self::assertContains(
             $this->localizeAndRemoveColon('tx_seminars_seminars.description') .
             ';' . $this->localizeAndRemoveColon('tx_seminars_seminars.title'),
-            $this->fixture->createAndOutputListOfEvents($this->pid)
+            $this->subject->createAndOutputListOfEvents($this->pid)
         );
     }
 
@@ -432,7 +432,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
     {
         self::assertSame(
             '',
-            $this->fixture->createListOfRegistrations($this->eventUid + 9999)
+            $this->subject->createListOfRegistrations($this->eventUid + 9999)
         );
     }
 
@@ -447,7 +447,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
         self::assertSame(
             $this->localizeAndRemoveColon('LGL.name') . ';' .
             $this->localizeAndRemoveColon('tx_seminars_attendances.uid') . CRLF,
-            $this->fixture->createListOfRegistrations($this->eventUid)
+            $this->subject->createListOfRegistrations($this->eventUid)
         );
     }
 
@@ -469,7 +469,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertContains(
             (string)$registrationUid,
-            $this->fixture->createListOfRegistrations($this->eventUid)
+            $this->subject->createListOfRegistrations($this->eventUid)
         );
     }
 
@@ -493,7 +493,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertContains(
             (string)$registrationUid,
-            $this->fixture->createListOfRegistrations($this->eventUid)
+            $this->subject->createListOfRegistrations($this->eventUid)
         );
     }
 
@@ -521,7 +521,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertContains(
             (string)$registrationUid,
-            $this->fixture->createListOfRegistrations($this->eventUid)
+            $this->subject->createListOfRegistrations($this->eventUid)
         );
     }
 
@@ -546,7 +546,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
             $this->localizeAndRemoveColon(
                 'tx_seminars_attendances.registered_themselves'
             ),
-            $this->fixture->createListOfRegistrations($this->eventUid)
+            $this->subject->createListOfRegistrations($this->eventUid)
         );
     }
 
@@ -569,7 +569,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertContains(
             $this->localizeAndRemoveColon('tx_seminars_attendances.company'),
-            $this->fixture->createListOfRegistrations($this->eventUid)
+            $this->subject->createListOfRegistrations($this->eventUid)
         );
     }
 
@@ -592,7 +592,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertContains(
             'foo bar inc.',
-            $this->fixture->createListOfRegistrations($this->eventUid)
+            $this->subject->createListOfRegistrations($this->eventUid)
         );
     }
 
@@ -601,7 +601,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
      */
     public function createListOfRegistrationsForFrontEndModeCanExportRegistrationsBelongingToAnEvent()
     {
-        $this->fixture->setTypo3Mode('FE');
+        $this->subject->setTypo3Mode('FE');
         $globalBackEndUser = $GLOBALS['BE_USER'];
         $GLOBALS['BE_USER'] = null;
 
@@ -617,7 +617,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $result = $this->fixture->createListOfRegistrations($this->eventUid);
+        $result = $this->subject->createListOfRegistrations($this->eventUid);
 
         $GLOBALS['BE_USER'] = $globalBackEndUser;
 
@@ -647,12 +647,12 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->piVars['table'] = 'tx_seminars_attendances';
-        $this->fixture->piVars['eventUid'] = $this->eventUid;
+        $this->subject->piVars['table'] = 'tx_seminars_attendances';
+        $this->subject->piVars['eventUid'] = $this->eventUid;
 
         self::assertContains(
             (string)$registrationUid,
-            $this->fixture->main()
+            $this->subject->main()
         );
     }
 
@@ -681,7 +681,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
             ]
         );
         $registrationsList
-            = $this->fixture->createListOfRegistrations($this->eventUid);
+            = $this->subject->createListOfRegistrations($this->eventUid);
 
         self::assertContains(
             (string)$firstRegistrationUid,
@@ -708,12 +708,12 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->piVars['table'] = 'tx_seminars_seminars';
-        $this->fixture->piVars['pid'] = $this->pid;
+        $this->subject->piVars['table'] = 'tx_seminars_seminars';
+        $this->subject->piVars['pid'] = $this->pid;
 
         self::assertContains(
             'Schöne Bären führen',
-            $this->fixture->main()
+            $this->subject->main()
         );
     }
 
@@ -732,14 +732,14 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->piVars['table'] = 'tx_seminars_seminars';
-        $this->fixture->piVars['pid'] = $this->pid;
+        $this->subject->piVars['table'] = 'tx_seminars_seminars';
+        $this->subject->piVars['pid'] = $this->pid;
 
         $this->configuration->setAsString('charsetForCsv', 'iso-8859-15');
 
         self::assertContains(
             'Sch' . chr(246) . 'ne B' . chr(228) . 'ren f' . chr(252) . 'hren',
-            $this->fixture->main()
+            $this->subject->main()
         );
     }
 
@@ -761,12 +761,12 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->piVars['table'] = 'tx_seminars_attendances';
-        $this->fixture->piVars['pid'] = $this->pid;
+        $this->subject->piVars['table'] = 'tx_seminars_attendances';
+        $this->subject->piVars['pid'] = $this->pid;
 
         self::assertContains(
             'Schöne Bären führen',
-            $this->fixture->main()
+            $this->subject->main()
         );
     }
 
@@ -788,14 +788,14 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture->piVars['table'] = 'tx_seminars_attendances';
-        $this->fixture->piVars['pid'] = $this->pid;
+        $this->subject->piVars['table'] = 'tx_seminars_attendances';
+        $this->subject->piVars['pid'] = $this->pid;
 
         $this->configuration->setAsString('charsetForCsv', 'iso-8859-15');
 
         self::assertContains(
             'Sch' . chr(246) . 'ne B' . chr(228) . 'ren f' . chr(252) . 'hren',
-            $this->fixture->main()
+            $this->subject->main()
         );
     }
 
@@ -808,7 +808,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
      */
     public function createAndOutputListOfRegistrationsForInexistentEventUidReturn404()
     {
-        $this->fixture->createAndOutputListOfRegistrations(
+        $this->subject->createAndOutputListOfRegistrations(
             $this->testingFramework->getAutoIncrement('tx_seminars_attendances')
         );
 
@@ -840,7 +840,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $registrationsList = $this->fixture->createAndOutputListOfRegistrations($this->eventUid);
+        $registrationsList = $this->subject->createAndOutputListOfRegistrations($this->eventUid);
         self::assertContains(
             (string)$firstRegistrationUid,
             $registrationsList
@@ -871,7 +871,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertContains(
             'foo_user',
-            $this->fixture->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
     }
 
@@ -895,7 +895,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertNotContains(
             (string)$registrationUid,
-            $this->fixture->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
     }
 
@@ -918,7 +918,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertNotContains(
             (string)$registrationUid,
-            $this->fixture->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
     }
 
@@ -950,7 +950,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
         self::assertContains(
             CRLF . $firstRegistrationUid . CRLF .
             $secondRegistrationUid . CRLF,
-            $this->fixture->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
     }
 
@@ -981,7 +981,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertRegExp(
             '/\\r\\n$/',
-            $this->fixture->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
     }
 
@@ -1004,7 +1004,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertContains(
             'foo "" bar',
-            $this->fixture->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
     }
 
@@ -1027,7 +1027,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertNotContains(
             '"foo bar"',
-            $this->fixture->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
     }
 
@@ -1050,7 +1050,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertContains(
             '"foo ; bar"',
-            $this->fixture->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
     }
 
@@ -1073,7 +1073,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertContains(
             '"foo' . LF . 'bar"',
-            $this->fixture->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
     }
 
@@ -1096,7 +1096,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertContains(
             '"foo "" bar"',
-            $this->fixture->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
     }
 
@@ -1120,7 +1120,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertContains(
             'foo;test',
-            $this->fixture->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
     }
 
@@ -1131,7 +1131,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
     {
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'address');
 
-        $registrationsList = $this->fixture->createAndOutputListOfRegistrations($this->eventUid);
+        $registrationsList = $this->subject->createAndOutputListOfRegistrations($this->eventUid);
         $localizedAddress = $this->localizeAndRemoveColon('tx_seminars_attendances.address');
 
         self::assertContains(
@@ -1154,7 +1154,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
         self::assertContains(
             $this->localizeAndRemoveColon('tx_seminars_attendances.address') .
             ';' . $this->localizeAndRemoveColon('tx_seminars_attendances.title'),
-            $this->fixture->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
     }
 
@@ -1168,7 +1168,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertNotContains(
             'name;',
-            $this->fixture->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
     }
 
@@ -1182,7 +1182,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertNotContains(
             ';address',
-            $this->fixture->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
     }
 
@@ -1198,7 +1198,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
             $this->localizeAndRemoveColon(
                 'LGL.name'
             ) . ';' . $this->localizeAndRemoveColon('tx_seminars_attendances.address'),
-            $this->fixture->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
     }
 
@@ -1212,7 +1212,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertSame(
             CRLF,
-            $this->fixture->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
     }
 
@@ -1221,7 +1221,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
      */
     public function createAndOuptutListOfRegistrationsForNoEventUidGivenReturnsRegistrationsOnCurrentPage()
     {
-        $this->fixture->piVars['pid'] = $this->pid;
+        $this->subject->piVars['pid'] = $this->pid;
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'address');
 
         $this->testingFramework->createRecord(
@@ -1236,7 +1236,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertContains(
             'foo',
-            $this->fixture->createAndOutputListOfRegistrations()
+            $this->subject->createAndOutputListOfRegistrations()
         );
     }
 
@@ -1245,7 +1245,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
      */
     public function createAndOuptutListOfRegistrationsForNoEventUidGivenDoesNotReturnRegistrationsOnOtherPage()
     {
-        $this->fixture->piVars['pid'] = $this->pid;
+        $this->subject->piVars['pid'] = $this->pid;
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'address');
 
         $this->testingFramework->createRecord(
@@ -1260,7 +1260,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertNotContains(
             'foo',
-            $this->fixture->createAndOutputListOfRegistrations()
+            $this->subject->createAndOutputListOfRegistrations()
         );
     }
 
@@ -1269,7 +1269,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
      */
     public function createAndOuptutListOfRegistrationsForNoEventUidGivenReturnsRegistrationsOnSubpageOfCurrentPage()
     {
-        $this->fixture->piVars['pid'] = $this->pid;
+        $this->subject->piVars['pid'] = $this->pid;
         $subpagePid = $this->testingFramework->createSystemFolder($this->pid);
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'address');
 
@@ -1285,7 +1285,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertContains(
             'foo',
-            $this->fixture->createAndOutputListOfRegistrations()
+            $this->subject->createAndOutputListOfRegistrations()
         );
     }
 
@@ -1294,7 +1294,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
      */
     public function createAndOutputListOfRegistrationsForNonExistingEventUidAddsNotFoundStatusToHeader()
     {
-        $this->fixture->createAndOutputListOfRegistrations(
+        $this->subject->createAndOutputListOfRegistrations(
             $this->testingFramework->getAutoIncrement('tx_seminars_seminars')
         );
 
@@ -1306,8 +1306,8 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
      */
     public function createAndOutputListOfRegistrationsForNoGivenEventUidAndFeModeAddsAccessForbiddenStatusToHeader()
     {
-        $this->fixture->setTypo3Mode('FE');
-        $this->fixture->createAndOutputListOfRegistrations();
+        $this->subject->setTypo3Mode('FE');
+        $this->subject->createAndOutputListOfRegistrations();
 
         self::assertContains('403', $this->headerProxy->getLastAddedHeader());
     }
@@ -1317,7 +1317,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
      */
     public function createAndOutputListOfRegistrationsForEventUidGivenSetsPageContentTypeToCsv()
     {
-        $this->fixture->createAndOutputListOfRegistrations($this->eventUid);
+        $this->subject->createAndOutputListOfRegistrations($this->eventUid);
 
         self::assertContains(
             'Content-type: text/csv; header=present; charset=utf-8',
@@ -1330,8 +1330,8 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
      */
     public function createAndOutputListOfRegistrationsForNoEventUidGivenSetsPageContentTypeToCsv()
     {
-        $this->fixture->piVars['pid'] = $this->pid;
-        $this->fixture->createAndOutputListOfRegistrations();
+        $this->subject->piVars['pid'] = $this->pid;
+        $this->subject->createAndOutputListOfRegistrations();
 
         self::assertContains(
             'Content-type: text/csv; header=present; charset=utf-8',
@@ -1359,7 +1359,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertNotContains(
             'foo@bar.com',
-            $this->fixture->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
     }
 
@@ -1382,7 +1382,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertNotContains(
             'foo bank',
-            $this->fixture->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
     }
 
@@ -1415,7 +1415,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
         self::assertNotContains(
             (string)$queueUid,
-            $this->fixture->createAndOutputListOfRegistrations($this->eventUid)
+            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
     }
 }

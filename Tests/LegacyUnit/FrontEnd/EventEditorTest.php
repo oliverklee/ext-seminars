@@ -13,7 +13,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
     /**
      * @var \Tx_Seminars_FrontEnd_EventEditor
      */
-    protected $fixture = null;
+    protected $subject = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -42,14 +42,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         $this->configuration->setAsInteger('createAuxiliaryRecordsPID', 0);
         \Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars_pi1', $this->configuration);
 
-        $this->fixture = new \Tx_Seminars_FrontEnd_EventEditor(
+        $this->subject = new \Tx_Seminars_FrontEnd_EventEditor(
             [
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'form.' => ['eventEditor.' => []],
             ],
             $GLOBALS['TSFE']->cObj
         );
-        $this->fixture->setTestMode();
+        $this->subject->setTestMode();
 
         /** @var \Tx_Oelib_MailerFactory $mailerFactory */
         $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
@@ -86,7 +86,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
             $seminarUid,
             $this->testingFramework->createAndLoginFrontEndUser()
         );
-        $this->fixture->setObjectUid($seminarUid);
+        $this->subject->setObjectUid($seminarUid);
     }
 
     /**
@@ -98,7 +98,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
     private function createLogInAndAddFeUserAsDefaultVip()
     {
         $feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue(
             'defaultEventVipsFeGroupID',
             $feUserGroupUid
         );
@@ -113,7 +113,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
      */
     private function createLogInAndAddFeUserAsOwner()
     {
-        $this->fixture->setObjectUid(
+        $this->subject->setObjectUid(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 ['owner_feuser' => $this->testingFramework->createAndLoginFrontEndUser()]
@@ -178,7 +178,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         $feUserGroupUid = $this->testingFramework->createFrontEndUserGroup(
             $frontEndUserGroupData
         );
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue(
             'eventEditorFeGroupID',
             $feUserGroupUid
         );
@@ -240,7 +240,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
             1,
             $this->testingFramework->countRecords(
                 'tx_seminars_seminars',
-                'uid=' . $this->fixture->getObjectUid() . ' AND vips=1'
+                'uid=' . $this->subject->getObjectUid() . ' AND vips=1'
             )
         );
     }
@@ -272,7 +272,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
             1,
             $this->testingFramework->countRecords(
                 'tx_seminars_seminars',
-                'uid=' . $this->fixture->getObjectUid() . ' AND owner_feuser>0'
+                'uid=' . $this->subject->getObjectUid() . ' AND owner_feuser>0'
             )
         );
     }
@@ -304,7 +304,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
             1,
             $this->testingFramework->countRecords(
                 'fe_users',
-                'uid=' . $userUid . ' AND usergroup=' . $this->fixture->getConfValueInteger('defaultEventVipsFeGroupID')
+                'uid=' . $userUid . ' AND usergroup=' . $this->subject->getConfValueInteger('defaultEventVipsFeGroupID')
             )
         );
     }
@@ -345,7 +345,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
             1,
             $this->testingFramework->countRecords(
                 'fe_users',
-                'uid=' . $userUid . ' AND usergroup=' . $this->fixture->getConfValueInteger('eventEditorFeGroupID')
+                'uid=' . $userUid . ' AND usergroup=' . $this->subject->getConfValueInteger('eventEditorFeGroupID')
             )
         );
     }
@@ -356,66 +356,66 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
 
     public function testGetEventSuccessfullySavedUrlReturnsUrlStartingWithHttp()
     {
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue(
             'eventSuccessfullySavedPID',
             $this->testingFramework->createFrontEndPage()
         );
 
         self::assertRegExp(
             '/^http:\\/\\/./',
-            $this->fixture->getEventSuccessfullySavedUrl()
+            $this->subject->getEventSuccessfullySavedUrl()
         );
     }
 
     public function testGetEventSuccessfullySavedUrlReturnsConfiguredTargetPid()
     {
         $frontEndPageUid = $this->testingFramework->createFrontEndPage();
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue(
             'eventSuccessfullySavedPID',
             $frontEndPageUid
         );
 
         self::assertContains(
             '?id=' . $frontEndPageUid,
-            $this->fixture->getEventSuccessfullySavedUrl()
+            $this->subject->getEventSuccessfullySavedUrl()
         );
     }
 
     public function testGetEventSuccessfullySavedUrlNotReturnsSeminarToEditAsLinkParameter()
     {
-        $this->fixture->setObjectUid(
+        $this->subject->setObjectUid(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars'
             )
         );
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue(
             'eventSuccessfullySavedPID',
             $this->testingFramework->createFrontEndPage()
         );
 
         self::assertNotContains(
-            'tx_seminars_pi1[seminar]=' . $this->fixture->getObjectUid(),
-            $this->fixture->getEventSuccessfullySavedUrl()
+            'tx_seminars_pi1[seminar]=' . $this->subject->getObjectUid(),
+            $this->subject->getEventSuccessfullySavedUrl()
         );
     }
 
     public function testGetEventSuccessfullySavedUrlReturnsCurrentPidAsTargetPidForProceedUpload()
     {
-        $this->fixture->setFakedFormValue('proceed_file_upload', 1);
+        $this->subject->setFakedFormValue('proceed_file_upload', 1);
 
         self::assertContains(
             '?id=' . $GLOBALS['TSFE']->id,
-            $this->fixture->getEventSuccessfullySavedUrl()
+            $this->subject->getEventSuccessfullySavedUrl()
         );
     }
 
     public function testGetEventSuccessfullySavedUrlReturnsSeminarToEditAsLinkParameterForProceedUpload()
     {
-        $this->fixture->setFakedFormValue('proceed_file_upload', 1);
+        $this->subject->setFakedFormValue('proceed_file_upload', 1);
 
         self::assertContains(
-            'tx_seminars_pi1%5Bseminar%5D=' . $this->fixture->getObjectUid(),
-            $this->fixture->getEventSuccessfullySavedUrl()
+            'tx_seminars_pi1%5Bseminar%5D=' . $this->subject->getObjectUid(),
+            $this->subject->getEventSuccessfullySavedUrl()
         );
     }
 
@@ -425,21 +425,21 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
 
     public function testHasAccessMessageWithNoLoggedInFeUserReturnsNotLoggedInMessage()
     {
-        $this->fixture->setObjectUid(
+        $this->subject->setObjectUid(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars'
             )
         );
 
         self::assertContains(
-            $this->fixture->translate('message_notLoggedIn'),
-            $this->fixture->hasAccessMessage()
+            $this->subject->translate('message_notLoggedIn'),
+            $this->subject->hasAccessMessage()
         );
     }
 
     public function testHasAccessMessageWithLoggedInFeUserWhoIsNeitherVipNorOwnerReturnsNoAccessMessage()
     {
-        $this->fixture->setObjectUid(
+        $this->subject->setObjectUid(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars'
             )
@@ -447,8 +447,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         $this->testingFramework->createAndLoginFrontEndUser();
 
         self::assertContains(
-            $this->fixture->translate('message_noAccessToEventEditor'),
-            $this->fixture->hasAccessMessage()
+            $this->subject->translate('message_noAccessToEventEditor'),
+            $this->subject->hasAccessMessage()
         );
     }
 
@@ -458,71 +458,71 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
 
         self::assertEquals(
             '',
-            $this->fixture->hasAccessMessage()
+            $this->subject->hasAccessMessage()
         );
     }
 
     public function testHasAccessMessageWithLoggedInFeUserAsVipAndVipsMayNotEditTheirEventsReturnsNonEmptyResult()
     {
-        $this->fixture->setObjectUid(
+        $this->subject->setObjectUid(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars'
             )
         );
-        $this->fixture->setConfigurationValue('mayManagersEditTheirEvents', 0);
+        $this->subject->setConfigurationValue('mayManagersEditTheirEvents', 0);
         $this->createLogInAndAddFeUserAsVip();
 
         self::assertContains(
-            $this->fixture->translate('message_noAccessToEventEditor'),
-            $this->fixture->hasAccessMessage()
+            $this->subject->translate('message_noAccessToEventEditor'),
+            $this->subject->hasAccessMessage()
         );
     }
 
     public function testHasAccessMessageWithLoggedInFeUserAsVipAndVipsMayEditTheirEventsReturnsEmptyResult()
     {
-        $this->fixture->setObjectUid(
+        $this->subject->setObjectUid(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars'
             )
         );
-        $this->fixture->setConfigurationValue('mayManagersEditTheirEvents', 1);
+        $this->subject->setConfigurationValue('mayManagersEditTheirEvents', 1);
         $this->createLogInAndAddFeUserAsVip();
 
         self::assertEquals(
             '',
-            $this->fixture->hasAccessMessage()
+            $this->subject->hasAccessMessage()
         );
     }
 
     public function testHasAccessWithLoggedInFeUserAsDefaultVipAndVipsMayNotEditTheirEventsReturnsNonEmptyResult()
     {
-        $this->fixture->setObjectUid(
+        $this->subject->setObjectUid(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars'
             )
         );
-        $this->fixture->setConfigurationValue('mayManagersEditTheirEvents', 0);
+        $this->subject->setConfigurationValue('mayManagersEditTheirEvents', 0);
         $this->createLogInAndAddFeUserAsDefaultVip();
 
         self::assertContains(
-            $this->fixture->translate('message_noAccessToEventEditor'),
-            $this->fixture->hasAccessMessage()
+            $this->subject->translate('message_noAccessToEventEditor'),
+            $this->subject->hasAccessMessage()
         );
     }
 
     public function testHasAccessWithLoggedInFeUserAsDefaultVipAndVipsMayEditTheirEventsReturnsEmptyResult()
     {
-        $this->fixture->setObjectUid(
+        $this->subject->setObjectUid(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars'
             )
         );
-        $this->fixture->setConfigurationValue('mayManagersEditTheirEvents', 1);
+        $this->subject->setConfigurationValue('mayManagersEditTheirEvents', 1);
         $this->createLogInAndAddFeUserAsDefaultVip();
 
         self::assertEquals(
             '',
-            $this->fixture->hasAccessMessage()
+            $this->subject->hasAccessMessage()
         );
     }
 
@@ -534,8 +534,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         $this->testingFramework->createAndLoginFrontEndUser();
 
         self::assertContains(
-            $this->fixture->translate('message_noAccessToEventEditor'),
-            $this->fixture->hasAccessMessage()
+            $this->subject->translate('message_noAccessToEventEditor'),
+            $this->subject->hasAccessMessage()
         );
     }
 
@@ -549,11 +549,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         );
         $this->testingFramework->createAndLoginFrontEndUser($groupUid);
 
-        $this->fixture->setConfigurationValue('eventEditorFeGroupID', $groupUid);
+        $this->subject->setConfigurationValue('eventEditorFeGroupID', $groupUid);
 
         self::assertEquals(
             '',
-            $this->fixture->hasAccessMessage()
+            $this->subject->hasAccessMessage()
         );
     }
 
@@ -567,16 +567,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         );
         $this->testingFramework->createAndLoginFrontEndUser($groupUid);
 
-        $this->fixture->setConfigurationValue('eventEditorFeGroupID', $groupUid);
-        $this->fixture->setObjectUid(
+        $this->subject->setConfigurationValue('eventEditorFeGroupID', $groupUid);
+        $this->subject->setObjectUid(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars'
             )
         );
 
         self::assertContains(
-            $this->fixture->translate('message_noAccessToEventEditor'),
-            $this->fixture->hasAccessMessage()
+            $this->subject->translate('message_noAccessToEventEditor'),
+            $this->subject->hasAccessMessage()
         );
     }
 
@@ -590,8 +590,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         );
         $userUid = $this->testingFramework->createAndLoginFrontEndUser($groupUid);
 
-        $this->fixture->setConfigurationValue('eventEditorFeGroupID', $groupUid);
-        $this->fixture->setObjectUid(
+        $this->subject->setConfigurationValue('eventEditorFeGroupID', $groupUid);
+        $this->subject->setObjectUid(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 ['owner_feuser' => $userUid]
@@ -600,7 +600,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
 
         self::assertEquals(
             '',
-            $this->fixture->hasAccessMessage()
+            $this->subject->hasAccessMessage()
         );
     }
 
@@ -610,14 +610,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
     public function hasAccessForLoggedInUserAndInvalidSeminarUidReturnsWrongSeminarMessage()
     {
         $groupUid = $this->testingFramework->createFrontEndUserGroup(['title' => 'test']);
-        $this->fixture->setConfigurationValue('eventEditorFeGroupID', $groupUid);
+        $this->subject->setConfigurationValue('eventEditorFeGroupID', $groupUid);
         $this->testingFramework->createAndLoginFrontEndUser($groupUid);
 
-        $this->fixture->setObjectUid($this->testingFramework->getAutoIncrement('tx_seminars_seminars'));
+        $this->subject->setObjectUid($this->testingFramework->getAutoIncrement('tx_seminars_seminars'));
 
         self::assertContains(
-            $this->fixture->translate('message_wrongSeminarNumber'),
-            $this->fixture->hasAccessMessage()
+            $this->subject->translate('message_wrongSeminarNumber'),
+            $this->subject->hasAccessMessage()
         );
     }
 
@@ -631,7 +631,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         );
         $this->testingFramework->createAndLoginFrontEndUser($groupUid);
 
-        $this->fixture->setObjectUid(
+        $this->subject->setObjectUid(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 ['deleted' => 1]
@@ -639,14 +639,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         );
 
         self::assertContains(
-            $this->fixture->translate('message_wrongSeminarNumber'),
-            $this->fixture->hasAccessMessage()
+            $this->subject->translate('message_wrongSeminarNumber'),
+            $this->subject->hasAccessMessage()
         );
     }
 
     public function testHasAccessMessageForHiddenSeminarUidAndUserLoggedInReturnsEmptyString()
     {
-        $this->fixture->setObjectUid(
+        $this->subject->setObjectUid(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -658,7 +658,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
 
         self::assertEquals(
             '',
-            $this->fixture->hasAccessMessage()
+            $this->subject->hasAccessMessage()
         );
     }
 
@@ -669,7 +669,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
     public function testPopulateListCategoriesDoesNotCrash()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
-        $this->fixture->populateListCategories();
+        $this->subject->populateListCategories();
     }
 
     /**
@@ -684,7 +684,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
 
         self::assertContains(
             ['caption' => '', 'value' => $categoryUid],
-            $this->fixture->populateListCategories()
+            $this->subject->populateListCategories()
         );
     }
 
@@ -701,7 +701,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
 
         self::assertContains(
             ['caption' => '', 'value' => $categoryUid],
-            $this->fixture->populateListCategories()
+            $this->subject->populateListCategories()
         );
     }
 
@@ -721,7 +721,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
 
         self::assertContains(
             ['caption' => '', 'value' => $eventTypeUid],
-            $this->fixture->populateListEventTypes()
+            $this->subject->populateListEventTypes()
         );
     }
 
@@ -738,7 +738,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
 
         self::assertContains(
             ['caption' => '', 'value' => $eventTypeUid],
-            $this->fixture->populateListEventTypes()
+            $this->subject->populateListEventTypes()
         );
     }
 
@@ -758,7 +758,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
 
         self::assertContains(
             ['caption' => '', 'value' => $lodgingUid],
-            $this->fixture->populateListLodgings()
+            $this->subject->populateListLodgings()
         );
     }
 
@@ -775,7 +775,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
 
         self::assertContains(
             ['caption' => '', 'value' => $lodgingUid],
-            $this->fixture->populateListLodgings()
+            $this->subject->populateListLodgings()
         );
     }
 
@@ -795,7 +795,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
 
         self::assertContains(
             ['caption' => '', 'value' => $foodUid],
-            $this->fixture->populateListFoods()
+            $this->subject->populateListFoods()
         );
     }
 
@@ -812,7 +812,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
 
         self::assertContains(
             ['caption' => '', 'value' => $foodUid],
-            $this->fixture->populateListFoods()
+            $this->subject->populateListFoods()
         );
     }
 
@@ -832,7 +832,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
 
         self::assertContains(
             ['caption' => '', 'value' => $paymentMethodUid],
-            $this->fixture->populateListPaymentMethods()
+            $this->subject->populateListPaymentMethods()
         );
     }
 
@@ -849,7 +849,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
 
         self::assertContains(
             ['caption' => '', 'value' => $paymentMethodUid],
-            $this->fixture->populateListPaymentMethods()
+            $this->subject->populateListPaymentMethods()
         );
     }
 
@@ -869,7 +869,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
 
         self::assertContains(
             ['caption' => '', 'value' => $organizerUid],
-            $this->fixture->populateListOrganizers()
+            $this->subject->populateListOrganizers()
         );
     }
 
@@ -886,7 +886,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
 
         self::assertContains(
             ['caption' => '', 'value' => $organizerUid],
-            $this->fixture->populateListOrganizers()
+            $this->subject->populateListOrganizers()
         );
     }
 
@@ -907,7 +907,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
 
         self::assertContains(
             ['caption' => '', 'value' => $organizerUid],
-            $this->fixture->populateListOrganizers()
+            $this->subject->populateListOrganizers()
         );
     }
 
@@ -935,7 +935,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
 
         self::assertNotContains(
             ['caption' => '', 'value' => $organizerUidFromDatabase],
-            $this->fixture->populateListOrganizers()
+            $this->subject->populateListOrganizers()
         );
     }
 
@@ -959,7 +959,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
                 'value' => $placeUid,
                 'wrapitem' => '|</td><td>&nbsp;',
             ],
-            $this->fixture->populateListPlaces([])
+            $this->subject->populateListPlaces([])
         );
     }
 
@@ -980,7 +980,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
                 'value' => $placeUid,
                 'wrapitem' => '|</td><td>&nbsp;',
             ],
-            $this->fixture->populateListPlaces([])
+            $this->subject->populateListPlaces([])
         );
     }
 
@@ -1001,7 +1001,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
                 'value' => $placeUid,
                 'wrapitem' => '|</td><td>&nbsp;',
             ],
-            $this->fixture->populateListPlaces([])
+            $this->subject->populateListPlaces([])
         );
     }
 
@@ -1022,7 +1022,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
                 'value' => $placeUid,
                 'wrapitem' => '|</td><td>&nbsp;',
             ],
-            $this->fixture->populateListPlaces([])
+            $this->subject->populateListPlaces([])
         );
     }
 
@@ -1046,7 +1046,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
                 'value' => $checkboxUid,
                 'wrapitem' => '|</td><td>&nbsp;',
             ],
-            $this->fixture->populateListCheckboxes([])
+            $this->subject->populateListCheckboxes([])
         );
     }
 
@@ -1067,7 +1067,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
                 'value' => $checkboxUid,
                 'wrapitem' => '|</td><td>&nbsp;',
             ],
-            $this->fixture->populateListCheckboxes([])
+            $this->subject->populateListCheckboxes([])
         );
     }
 
@@ -1088,7 +1088,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
                 'value' => $checkboxUid,
                 'wrapitem' => '|</td><td>&nbsp;',
             ],
-            $this->fixture->populateListCheckboxes([])
+            $this->subject->populateListCheckboxes([])
         );
     }
 
@@ -1109,7 +1109,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
                 'value' => $checkboxUid,
                 'wrapitem' => '|</td><td>&nbsp;',
             ],
-            $this->fixture->populateListCheckboxes([])
+            $this->subject->populateListCheckboxes([])
         );
     }
 
@@ -1133,7 +1133,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
                 'value' => $targetGroupUid,
                 'wrapitem' => '|</td><td>&nbsp;',
             ],
-            $this->fixture->populateListTargetGroups([])
+            $this->subject->populateListTargetGroups([])
         );
     }
 
@@ -1154,7 +1154,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
                 'value' => $targetGroupUid,
                 'wrapitem' => '|</td><td>&nbsp;',
             ],
-            $this->fixture->populateListTargetGroups([])
+            $this->subject->populateListTargetGroups([])
         );
     }
 
@@ -1175,7 +1175,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
                 'value' => $targetGroupUid,
                 'wrapitem' => '|</td><td>&nbsp;',
             ],
-            $this->fixture->populateListTargetGroups([])
+            $this->subject->populateListTargetGroups([])
         );
     }
 
@@ -1196,7 +1196,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
                 'value' => $targetGroupUid,
                 'wrapitem' => '|</td><td>&nbsp;',
             ],
-            $this->fixture->populateListTargetGroups([])
+            $this->subject->populateListTargetGroups([])
         );
     }
 
@@ -1220,7 +1220,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
                 'value' => $speakerUid,
                 'wrapitem' => '|</td><td>&nbsp;',
             ],
-            $this->fixture->populateListSpeakers()
+            $this->subject->populateListSpeakers()
         );
     }
 
@@ -1241,7 +1241,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
                 'value' => $speakerUid,
                 'wrapitem' => '|</td><td>&nbsp;',
             ],
-            $this->fixture->populateListSpeakers()
+            $this->subject->populateListSpeakers()
         );
     }
 
@@ -1262,7 +1262,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
                 'value' => $speakerUid,
                 'wrapitem' => '|</td><td>&nbsp;',
             ],
-            $this->fixture->populateListSpeakers()
+            $this->subject->populateListSpeakers()
         );
     }
 
@@ -1283,7 +1283,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
                 'value' => $speakerUid,
                 'wrapitem' => '|</td><td>&nbsp;',
             ],
-            $this->fixture->populateListSpeakers()
+            $this->subject->populateListSpeakers()
         );
     }
 
@@ -1300,7 +1300,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
             \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
         );
 
-        $modifiedFormData = $this->fixture->modifyDataToInsert([]);
+        $modifiedFormData = $this->subject->modifyDataToInsert([]);
 
         self::assertFalse(
             isset($modifiedFormData['hidden'])
@@ -1315,12 +1315,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         $event = \Tx_Oelib_MapperRegistry::get(
             \Tx_Seminars_Mapper_Event::class
         )->getLoadedTestingModel([]);
-        $this->fixture->setObjectUid($event->getUid());
+        $this->subject->setObjectUid($event->getUid());
         $this->createAndLoginUserWithPublishSetting(
             \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
         );
 
-        $modifiedFormData = $this->fixture->modifyDataToInsert([]);
+        $modifiedFormData = $this->subject->modifyDataToInsert([]);
 
         self::assertFalse(
             isset($modifiedFormData['hidden'])
@@ -1336,7 +1336,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
             \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
         );
 
-        $modifiedFormData = $this->fixture->modifyDataToInsert([]);
+        $modifiedFormData = $this->subject->modifyDataToInsert([]);
 
         self::assertEquals(
             1,
@@ -1353,7 +1353,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
             \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
         );
 
-        $modifiedFormData = $this->fixture->modifyDataToInsert([]);
+        $modifiedFormData = $this->subject->modifyDataToInsert([]);
 
         self::assertEquals(
             1,
@@ -1369,12 +1369,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         $event = \Tx_Oelib_MapperRegistry::get(
             \Tx_Seminars_Mapper_Event::class
         )->getLoadedTestingModel([]);
-        $this->fixture->setObjectUid($event->getUid());
+        $this->subject->setObjectUid($event->getUid());
         $this->createAndLoginUserWithPublishSetting(
             \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
         );
 
-        $modifiedFormData = $this->fixture->modifyDataToInsert([]);
+        $modifiedFormData = $this->subject->modifyDataToInsert([]);
 
         self::assertEquals(
             1,
@@ -1390,12 +1390,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         $event = \Tx_Oelib_MapperRegistry::get(
             \Tx_Seminars_Mapper_Event::class
         )->getLoadedTestingModel([]);
-        $this->fixture->setObjectUid($event->getUid());
+        $this->subject->setObjectUid($event->getUid());
         $this->createAndLoginUserWithPublishSetting(
             \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
         );
 
-        $modifiedFormData = $this->fixture->modifyDataToInsert([]);
+        $modifiedFormData = $this->subject->modifyDataToInsert([]);
 
         self::assertFalse(
             isset($modifiedFormData['hidden'])
@@ -1411,7 +1411,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
             \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
         );
 
-        $modifiedFormData = $this->fixture->modifyDataToInsert([]);
+        $modifiedFormData = $this->subject->modifyDataToInsert([]);
 
         self::assertTrue(
             isset($modifiedFormData['publication_hash'])
@@ -1428,7 +1428,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
             \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
         );
 
-        $modifiedFormData = $this->fixture->modifyDataToInsert([]);
+        $modifiedFormData = $this->subject->modifyDataToInsert([]);
 
         self::assertTrue(
             isset($modifiedFormData['publication_hash'])
@@ -1444,12 +1444,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         $event = \Tx_Oelib_MapperRegistry::get(
             \Tx_Seminars_Mapper_Event::class
         )->getLoadedTestingModel([]);
-        $this->fixture->setObjectUid($event->getUid());
+        $this->subject->setObjectUid($event->getUid());
         $this->createAndLoginUserWithPublishSetting(
             \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW
         );
 
-        $modifiedFormData = $this->fixture->modifyDataToInsert([]);
+        $modifiedFormData = $this->subject->modifyDataToInsert([]);
 
         self::assertFalse(
             isset($modifiedFormData['publication_hash'])
@@ -1465,7 +1465,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
             \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
         );
 
-        $modifiedFormData = $this->fixture->modifyDataToInsert([]);
+        $modifiedFormData = $this->subject->modifyDataToInsert([]);
 
         self::assertFalse(
             isset($modifiedFormData['publication_hash'])
@@ -1482,11 +1482,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         )->getLoadedTestingModel(
             ['hidden' => 1]
         );
-        $this->fixture->setObjectUid($event->getUid());
+        $this->subject->setObjectUid($event->getUid());
         $this->createAndLoginUserWithPublishSetting(
             \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
         );
-        $modifiedFormData = $this->fixture->modifyDataToInsert([]);
+        $modifiedFormData = $this->subject->modifyDataToInsert([]);
 
         self::assertFalse(
             isset($modifiedFormData['publication_hash'])
@@ -1501,7 +1501,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         $this->createAndLoginUserWithPublishSetting(
             \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
         );
-        $modifiedFormData = $this->fixture->modifyDataToInsert([]);
+        $modifiedFormData = $this->subject->modifyDataToInsert([]);
 
         self::assertTrue(
             isset($modifiedFormData['tstamp'])
@@ -1516,7 +1516,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         $this->createAndLoginUserWithPublishSetting(
             \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
         );
-        $modifiedFormData = $this->fixture->modifyDataToInsert([]);
+        $modifiedFormData = $this->subject->modifyDataToInsert([]);
 
         self::assertEquals(
             $GLOBALS['SIM_EXEC_TIME'],
@@ -1532,7 +1532,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         $this->createAndLoginUserWithPublishSetting(
             \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
         );
-        $modifiedFormData = $this->fixture->modifyDataToInsert([]);
+        $modifiedFormData = $this->subject->modifyDataToInsert([]);
 
         self::assertTrue(
             isset($modifiedFormData['crdate'])
@@ -1547,7 +1547,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         $this->createAndLoginUserWithPublishSetting(
             \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
         );
-        $modifiedFormData = $this->fixture->modifyDataToInsert([]);
+        $modifiedFormData = $this->subject->modifyDataToInsert([]);
 
         self::assertEquals(
             $GLOBALS['SIM_EXEC_TIME'],
@@ -1563,7 +1563,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         $userUid = $this->createAndLoginUserWithPublishSetting(
             \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
         );
-        $modifiedFormData = $this->fixture->modifyDataToInsert([]);
+        $modifiedFormData = $this->subject->modifyDataToInsert([]);
 
         self::assertSame(
             $userUid,
@@ -1579,9 +1579,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         $this->createAndLoginUserWithPublishSetting(
             \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
         );
-        $this->fixture->setConfigurationValue('createEventsPID', 42);
+        $this->subject->setConfigurationValue('createEventsPID', 42);
 
-        $modifiedFormData = $this->fixture->modifyDataToInsert([]);
+        $modifiedFormData = $this->subject->modifyDataToInsert([]);
 
         self::assertEquals(
             42,
@@ -1594,7 +1594,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
      */
     public function modifyDataToInsertForUserGroupSpecificEventPidSetsPidFromUserGroupAsEventPid()
     {
-        $this->fixture->setConfigurationValue('createEventsPID', 42);
+        $this->subject->setConfigurationValue('createEventsPID', 42);
 
         $userGroup = \Tx_Oelib_MapperRegistry::get(
             \Tx_Seminars_Mapper_FrontEndUserGroup::class
@@ -1609,7 +1609,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         );
         $this->testingFramework->loginFrontEndUser($user->getUid());
 
-        $modifiedFormData = $this->fixture->modifyDataToInsert([]);
+        $modifiedFormData = $this->subject->modifyDataToInsert([]);
 
         self::assertEquals(
             21,
@@ -1626,7 +1626,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
             \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY
         );
 
-        $modifiedFormData = $this->fixture->modifyDataToInsert([]);
+        $modifiedFormData = $this->subject->modifyDataToInsert([]);
 
         self::assertFalse(
             isset($modifiedFormData['categories'])
@@ -1658,7 +1658,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
             $userGroup->getUid()
         );
 
-        $modifiedFormData = $this->fixture->modifyDataToInsert([]);
+        $modifiedFormData = $this->subject->modifyDataToInsert([]);
 
         self::assertEquals(
             $category->getUid(),
@@ -1694,7 +1694,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
             $userGroup->getUid()
         );
 
-        $modifiedFormData = $this->fixture->modifyDataToInsert([]);
+        $modifiedFormData = $this->subject->modifyDataToInsert([]);
 
         self::assertEquals(
             $category1->getUid() . ',' . $category2->getUid(),
@@ -1727,14 +1727,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
             $userGroup->getUid()
         );
 
-        $this->fixture->setObjectUid(
+        $this->subject->setObjectUid(
             \Tx_Oelib_MapperRegistry::get(
                 \Tx_Seminars_Mapper_Event::class
             )->getLoadedTestingModel(
                 []
             )->getUid()
         );
-        $modifiedFormData = $this->fixture->modifyDataToInsert([]);
+        $modifiedFormData = $this->subject->modifyDataToInsert([]);
 
         self::assertFalse(
             isset($modifiedFormData['categories'])
@@ -1752,13 +1752,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
     {
         $this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup();
 
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue(
             'allowFrontEndEditingOfTest',
             false
         );
 
         self::assertFalse(
-            $this->fixture->isFrontEndEditingOfRelatedRecordsAllowed(
+            $this->subject->isFrontEndEditingOfRelatedRecordsAllowed(
                 ['relatedRecordType' => 'Test']
             )
         );
@@ -1771,13 +1771,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
     {
         $this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup();
 
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue(
             'allowFrontEndEditingOfTest',
             true
         );
 
         self::assertFalse(
-            $this->fixture->isFrontEndEditingOfRelatedRecordsAllowed(
+            $this->subject->isFrontEndEditingOfRelatedRecordsAllowed(
                 ['relatedRecordType' => 'Test']
             )
         );
@@ -1792,13 +1792,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
             ['tx_seminars_auxiliary_records_pid' => 42]
         );
 
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue(
             'allowFrontEndEditingOfTest',
             false
         );
 
         self::assertFalse(
-            $this->fixture->isFrontEndEditingOfRelatedRecordsAllowed(
+            $this->subject->isFrontEndEditingOfRelatedRecordsAllowed(
                 ['relatedRecordType' => 'Test']
             )
         );
@@ -1813,13 +1813,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
             ['tx_seminars_auxiliary_records_pid' => 42]
         );
 
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue(
             'allowFrontEndEditingOfTest',
             true
         );
 
         self::assertTrue(
-            $this->fixture->isFrontEndEditingOfRelatedRecordsAllowed(
+            $this->subject->isFrontEndEditingOfRelatedRecordsAllowed(
                 ['relatedRecordType' => 'Test']
             )
         );
@@ -1832,17 +1832,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
     ) {
         $this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup();
 
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue(
             'allowFrontEndEditingOfTest',
             true
         );
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue(
             'createAuxiliaryRecordsPID',
             42
         );
 
         self::assertTrue(
-            $this->fixture->isFrontEndEditingOfRelatedRecordsAllowed(
+            $this->subject->isFrontEndEditingOfRelatedRecordsAllowed(
                 ['relatedRecordType' => 'Test']
             )
         );
@@ -1858,7 +1858,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
     public function validateStringFieldForNonRequiredFieldAndEmptyStringReturnsTrue()
     {
         self::assertTrue(
-            $this->fixture->validateString(
+            $this->subject->validateString(
                 ['elementName' => 'teaser', 'value' => '']
             )
         );
@@ -1869,10 +1869,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
      */
     public function validateStringFieldForRequiredFieldAndEmptyStringReturnsFalse()
     {
-        $fixture = $this->getFixtureWithRequiredField('teaser');
+        $subject = $this->getFixtureWithRequiredField('teaser');
 
         self::assertFalse(
-            $fixture->validateString(
+            $subject->validateString(
                 ['elementName' => 'teaser', 'value' => '']
             )
         );
@@ -1883,10 +1883,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
      */
     public function validateStringFieldForRequiredFieldAndNonEmptyStringReturnsTrue()
     {
-        $fixture = $this->getFixtureWithRequiredField('teaser');
+        $subject = $this->getFixtureWithRequiredField('teaser');
 
         self::assertTrue(
-            $fixture->validateString(
+            $subject->validateString(
                 ['elementName' => 'teaser', 'value' => 'foo']
             )
         );
@@ -1902,7 +1902,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
     public function validateIntegerFieldForNonRequiredFieldAndValueZeroReturnsTrue()
     {
         self::assertTrue(
-            $this->fixture->validateInteger(
+            $this->subject->validateInteger(
                 ['elementName' => 'attendees_max', 'value' => 0]
             )
         );
@@ -1913,10 +1913,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
      */
     public function validateIntegerFieldForRequiredFieldAndValueZeroReturnsFalse()
     {
-        $fixture = $this->getFixtureWithRequiredField('attendees_max');
+        $subject = $this->getFixtureWithRequiredField('attendees_max');
 
         self::assertFalse(
-            $fixture->validateInteger(
+            $subject->validateInteger(
                 ['elementName' => 'attendees_max', 'value' => 0]
             )
         );
@@ -1927,10 +1927,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
      */
     public function validateIntegerFieldForRequiredFieldAndValueNonZeroReturnsTrue()
     {
-        $fixture = $this->getFixtureWithRequiredField('attendees_max');
+        $subject = $this->getFixtureWithRequiredField('attendees_max');
 
         self::assertTrue(
-            $fixture->validateInteger(
+            $subject->validateInteger(
                 ['elementName' => 'attendees_max', 'value' => 15]
             )
         );
@@ -1947,7 +1947,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         self::assertTrue(
-            $this->fixture->validateCheckboxes(
+            $this->subject->validateCheckboxes(
                 ['elementName' => 'categories', 'value' => '']
             )
         );
@@ -1959,10 +1959,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
     public function validateCheckboxesForRequiredFieldAndValueNotArrayReturnsFalse()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
-        $fixture = $this->getFixtureWithRequiredField('categories');
+        $subject = $this->getFixtureWithRequiredField('categories');
 
         self::assertFalse(
-            $fixture->validateCheckboxes(
+            $subject->validateCheckboxes(
                 ['elementName' => 'categories', 'value' => '']
             )
         );
@@ -1974,10 +1974,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
     public function validateCheckboxesForRequiredFieldAndValueEmptyArrayReturnsFalse()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
-        $fixture = $this->getFixtureWithRequiredField('categories');
+        $subject = $this->getFixtureWithRequiredField('categories');
 
         self::assertFalse(
-            $fixture->validateCheckboxes(
+            $subject->validateCheckboxes(
                 ['elementName' => 'categories', 'value' => []]
             )
         );
@@ -1989,10 +1989,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
     public function validateCheckboxesForRequiredFieldAndValueNonEmptyArrayReturnsTrue()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
-        $fixture = $this->getFixtureWithRequiredField('categories');
+        $subject = $this->getFixtureWithRequiredField('categories');
 
         self::assertTrue(
-            $fixture->validateCheckboxes(
+            $subject->validateCheckboxes(
                 ['elementName' => 'categories', 'value' => [42]]
             )
         );
@@ -2020,10 +2020,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
             $userGroup->getUid()
         );
 
-        $fixture = $this->getFixtureWithRequiredField('categories');
+        $subject = $this->getFixtureWithRequiredField('categories');
 
         self::assertTrue(
-            $fixture->validateCheckboxes(
+            $subject->validateCheckboxes(
                 ['elementName' => 'categories', 'value' => '']
             )
         );
@@ -2035,10 +2035,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
     public function validateCheckboxesForUserWithoutDefaultCategoriesAndCategoriesRequiredAndEmptyReturnsFalse()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
-        $fixture = $this->getFixtureWithRequiredField('categories');
+        $subject = $this->getFixtureWithRequiredField('categories');
 
         self::assertFalse(
-            $fixture->validateCheckboxes(
+            $subject->validateCheckboxes(
                 ['elementName' => 'categories', 'value' => '']
             )
         );
@@ -2054,7 +2054,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
     public function validateDateForNonRequiredFieldAndEmptyStringReturnsTrue()
     {
         self::assertTrue(
-            $this->fixture->validateDate(
+            $this->subject->validateDate(
                 ['elementName' => 'begin_date', 'value' => '']
             )
         );
@@ -2065,10 +2065,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
      */
     public function validateDateForRequiredFieldAndEmptyStringReturnsFalse()
     {
-        $fixture = $this->getFixtureWithRequiredField('begin_date');
+        $subject = $this->getFixtureWithRequiredField('begin_date');
 
         self::assertFalse(
-            $fixture->validateDate(
+            $subject->validateDate(
                 ['elementName' => 'begin_date', 'value' => '']
             )
         );
@@ -2079,10 +2079,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
      */
     public function validateDateForRequiredFieldAndValidDateReturnsTrue()
     {
-        $fixture = $this->getFixtureWithRequiredField('begin_date');
+        $subject = $this->getFixtureWithRequiredField('begin_date');
 
         self::assertTrue(
-            $fixture->validateDate(
+            $subject->validateDate(
                 [
                     'elementName' => 'begin_date',
                     'value' => '10:52 23-05-2008',
@@ -2096,10 +2096,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
      */
     public function validateDateForRequiredFieldAndNonValidDateReturnsFalse()
     {
-        $fixture = $this->getFixtureWithRequiredField('begin_date');
+        $subject = $this->getFixtureWithRequiredField('begin_date');
 
         self::assertFalse(
-            $fixture->validateDate(
+            $subject->validateDate(
                 [
                     'elementName' => 'begin_date',
                     'value' => 'foo',
@@ -2118,7 +2118,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
     public function validatePriceForNonRequiredFieldAndEmptyStringReturnsTrue()
     {
         self::assertTrue(
-            $this->fixture->validatePrice(
+            $this->subject->validatePrice(
                 ['elementName' => 'price_regular', 'value' => '']
             )
         );
@@ -2129,10 +2129,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
      */
     public function validatePriceForRequiredFieldAndEmptyStringReturnsFalse()
     {
-        $fixture = $this->getFixtureWithRequiredField('price_regular');
+        $subject = $this->getFixtureWithRequiredField('price_regular');
 
         self::assertFalse(
-            $fixture->validatePrice(
+            $subject->validatePrice(
                 ['elementName' => 'price_regular', 'value' => '']
             )
         );
@@ -2143,10 +2143,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
      */
     public function validatePriceForRequiredFieldAndValidPriceReturnsTrue()
     {
-        $fixture = $this->getFixtureWithRequiredField('price_regular');
+        $subject = $this->getFixtureWithRequiredField('price_regular');
 
         self::assertTrue(
-            $fixture->validatePrice(
+            $subject->validatePrice(
                 ['elementName' => 'price_regular', 'value' => '20,08']
             )
         );
@@ -2157,10 +2157,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
      */
     public function validatePriceForRequiredFieldAndInvalidPriceReturnsFalse()
     {
-        $fixture = $this->getFixtureWithRequiredField('price_regular');
+        $subject = $this->getFixtureWithRequiredField('price_regular');
 
         self::assertFalse(
-            $fixture->validatePrice(
+            $subject->validatePrice(
                 ['elementName' => 'price_regular', 'value' => 'foo']
             )
         );
@@ -2175,7 +2175,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
      */
     public function eventEditorForNonHiddenEventDoesNotSendMail()
     {
-        $this->fixture->sendEMailToReviewer();
+        $this->subject->sendEMailToReviewer();
 
         self::assertNull(
             $this->mailer->getFirstSentEmail()
@@ -2193,10 +2193,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         );
         $this->createAndLoginUserWithReviewer();
 
-        $this->fixture->setObjectUid($seminarUid);
-        $this->fixture->modifyDataToInsert([]);
+        $this->subject->setObjectUid($seminarUid);
+        $this->subject->modifyDataToInsert([]);
 
-        $this->fixture->sendEMailToReviewer();
+        $this->subject->sendEMailToReviewer();
 
         self::assertNull(
             $this->mailer->getFirstSentEmail()
@@ -2211,8 +2211,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         $seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->createAndLoginUserWithReviewer();
 
-        $this->fixture->setObjectUid($seminarUid);
-        $formData = $this->fixture->modifyDataToInsert([]);
+        $this->subject->setObjectUid($seminarUid);
+        $formData = $this->subject->modifyDataToInsert([]);
 
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -2223,7 +2223,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
             ]
         );
 
-        $this->fixture->sendEMailToReviewer();
+        $this->subject->sendEMailToReviewer();
 
         self::assertGreaterThan(
             0,
@@ -2239,8 +2239,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         $seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->createAndLoginUserWithReviewer();
 
-        $this->fixture->setObjectUid($seminarUid);
-        $formData = $this->fixture->modifyDataToInsert([]);
+        $this->subject->setObjectUid($seminarUid);
+        $formData = $this->subject->modifyDataToInsert([]);
 
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -2251,7 +2251,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
             ]
         );
 
-        $this->fixture->sendEMailToReviewer();
+        $this->subject->sendEMailToReviewer();
 
         self::assertArrayHasKey(
             'foo@bar.com',
@@ -2267,8 +2267,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         $seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->createAndLoginUserWithReviewer();
 
-        $this->fixture->setObjectUid($seminarUid);
-        $formData = $this->fixture->modifyDataToInsert([]);
+        $this->subject->setObjectUid($seminarUid);
+        $formData = $this->subject->modifyDataToInsert([]);
 
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -2279,10 +2279,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
             ]
         );
 
-        $this->fixture->sendEMailToReviewer();
+        $this->subject->sendEMailToReviewer();
 
         self::assertSame(
-            $this->fixture->translate('publish_event_subject'),
+            $this->subject->translate('publish_event_subject'),
             $this->mailer->getFirstSentEmail()->getSubject()
         );
     }
@@ -2298,8 +2298,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         );
         $this->createAndLoginUserWithReviewer();
 
-        $this->fixture->setObjectUid($seminarUid);
-        $formData = $this->fixture->modifyDataToInsert([]);
+        $this->subject->setObjectUid($seminarUid);
+        $formData = $this->subject->modifyDataToInsert([]);
 
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -2310,7 +2310,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
             ]
         );
 
-        $this->fixture->sendEMailToReviewer();
+        $this->subject->sendEMailToReviewer();
 
         self::assertContains(
             'foo Event',
@@ -2323,15 +2323,15 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
      */
     public function sendEMailToReviewerForEventWithDateSendsTheDateOfTheEvent()
     {
-        $this->fixture->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
+        $this->subject->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             ['begin_date' => $GLOBALS['SIM_EXEC_TIME']]
         );
         $this->createAndLoginUserWithReviewer();
 
-        $this->fixture->setObjectUid($seminarUid);
-        $formData = $this->fixture->modifyDataToInsert([]);
+        $this->subject->setObjectUid($seminarUid);
+        $formData = $this->subject->modifyDataToInsert([]);
 
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -2342,11 +2342,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
             ]
         );
 
-        $this->fixture->sendEMailToReviewer();
+        $this->subject->sendEMailToReviewer();
 
         self::assertContains(
             strftime(
-                $this->fixture->getConfValueString('dateFormatYMD'),
+                $this->subject->getConfValueString('dateFormatYMD'),
                 $GLOBALS['SIM_EXEC_TIME']
             ),
             $this->mailer->getFirstSentEmail()->getBody()
@@ -2358,14 +2358,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
      */
     public function sendEMailToReviewerForEventWithoutDateHidesDateMarker()
     {
-        $this->fixture->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
+        $this->subject->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
         );
         $this->createAndLoginUserWithReviewer();
 
-        $this->fixture->setObjectUid($seminarUid);
-        $formData = $this->fixture->modifyDataToInsert([]);
+        $this->subject->setObjectUid($seminarUid);
+        $formData = $this->subject->modifyDataToInsert([]);
 
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -2376,7 +2376,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
             ]
         );
 
-        $this->fixture->sendEMailToReviewer();
+        $this->subject->sendEMailToReviewer();
 
         self::assertNotContains(
             '###PUBLISH_EVENT_DATE###',
@@ -2389,14 +2389,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
      */
     public function sendEMailToReviewerForEventWithoutDateDoesNotSendDate()
     {
-        $this->fixture->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
+        $this->subject->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
         );
         $this->createAndLoginUserWithReviewer();
 
-        $this->fixture->setObjectUid($seminarUid);
-        $formData = $this->fixture->modifyDataToInsert([]);
+        $this->subject->setObjectUid($seminarUid);
+        $formData = $this->subject->modifyDataToInsert([]);
 
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -2408,7 +2408,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
             ]
         );
 
-        $this->fixture->sendEMailToReviewer();
+        $this->subject->sendEMailToReviewer();
 
         self::assertNotContains(
             'foo event,',
@@ -2426,8 +2426,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         );
         $this->createAndLoginUserWithReviewer();
 
-        $this->fixture->setObjectUid($seminarUid);
-        $formData = $this->fixture->modifyDataToInsert([]);
+        $this->subject->setObjectUid($seminarUid);
+        $formData = $this->subject->modifyDataToInsert([]);
 
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -2438,7 +2438,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
             ]
         );
 
-        $this->fixture->sendEMailToReviewer();
+        $this->subject->sendEMailToReviewer();
 
         self::assertNotContains(
             '###',
@@ -2457,8 +2457,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         );
         $this->createAndLoginUserWithReviewer();
 
-        $this->fixture->setObjectUid($seminarUid);
-        $formData = $this->fixture->modifyDataToInsert([]);
+        $this->subject->setObjectUid($seminarUid);
+        $formData = $this->subject->modifyDataToInsert([]);
 
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -2469,7 +2469,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
             ]
         );
 
-        $this->fixture->sendEMailToReviewer();
+        $this->subject->sendEMailToReviewer();
 
         self::assertContains(
             'Foo Description',
@@ -2487,8 +2487,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         );
         $this->createAndLoginUserWithReviewer();
 
-        $this->fixture->setObjectUid($seminarUid);
-        $formData = $this->fixture->modifyDataToInsert([]);
+        $this->subject->setObjectUid($seminarUid);
+        $formData = $this->subject->modifyDataToInsert([]);
 
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -2499,7 +2499,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
             ]
         );
 
-        $this->fixture->sendEMailToReviewer();
+        $this->subject->sendEMailToReviewer();
 
         self::assertContains(
             'tx_seminars_publication%5Bhash%5D=' . $formData['publication_hash'],
@@ -2515,8 +2515,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         $seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->createAndLoginUserWithReviewer();
 
-        $this->fixture->setObjectUid($seminarUid);
-        $formData = $this->fixture->modifyDataToInsert([]);
+        $this->subject->setObjectUid($seminarUid);
+        $formData = $this->subject->modifyDataToInsert([]);
 
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -2527,7 +2527,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
             ]
         );
 
-        $this->fixture->sendEMailToReviewer();
+        $this->subject->sendEMailToReviewer();
 
         self::assertContains(
             'Mr. Bar',
@@ -2543,8 +2543,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         $seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->createAndLoginUserWithReviewer();
 
-        $this->fixture->setObjectUid($seminarUid);
-        $formData = $this->fixture->modifyDataToInsert([]);
+        $this->subject->setObjectUid($seminarUid);
+        $formData = $this->subject->modifyDataToInsert([]);
 
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -2555,7 +2555,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
             ]
         );
 
-        $this->fixture->sendEMailToReviewer();
+        $this->subject->sendEMailToReviewer();
 
         self::assertArrayHasKey(
             'mail@foo.com',
@@ -2575,7 +2575,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
 
-        $this->fixture->sendAdditionalNotificationEmailToReviewer();
+        $this->subject->sendAdditionalNotificationEmailToReviewer();
 
         self::assertNotNull(
             $this->mailer->getFirstSentEmail()
@@ -2590,7 +2590,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithPublishSetting(\Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY);
 
-        $this->fixture->sendAdditionalNotificationEmailToReviewer();
+        $this->subject->sendAdditionalNotificationEmailToReviewer();
 
         self::assertNull(
             $this->mailer->getFirstSentEmail()
@@ -2605,7 +2605,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', false);
         $this->createAndLoginUserWithReviewer();
 
-        $this->fixture->sendAdditionalNotificationEmailToReviewer();
+        $this->subject->sendAdditionalNotificationEmailToReviewer();
 
         self::assertNull(
             $this->mailer->getFirstSentEmail()
@@ -2620,7 +2620,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
 
-        $this->fixture->sendAdditionalNotificationEmailToReviewer();
+        $this->subject->sendAdditionalNotificationEmailToReviewer();
 
         self::assertNotNull(
             $this->mailer->getFirstSentEmail()
@@ -2639,7 +2639,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
 
-        $this->fixture->sendAdditionalNotificationEmailToReviewer();
+        $this->subject->sendAdditionalNotificationEmailToReviewer();
 
         self::assertNotNull(
             $this->mailer->getFirstSentEmail()
@@ -2658,7 +2658,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
 
-        $this->fixture->sendAdditionalNotificationEmailToReviewer();
+        $this->subject->sendAdditionalNotificationEmailToReviewer();
 
         self::assertNotNull(
             $this->mailer->getFirstSentEmail()
@@ -2677,13 +2677,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
 
-        $this->fixture->sendAdditionalNotificationEmailToReviewer();
+        $this->subject->sendAdditionalNotificationEmailToReviewer();
 
         self::assertNotNull(
             $this->mailer->getFirstSentEmail()
         );
         self::assertSame(
-            $this->fixture->translate('save_event_subject'),
+            $this->subject->translate('save_event_subject'),
             $this->mailer->getFirstSentEmail()->getSubject()
         );
     }
@@ -2696,13 +2696,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
 
-        $this->fixture->sendAdditionalNotificationEmailToReviewer();
+        $this->subject->sendAdditionalNotificationEmailToReviewer();
 
         self::assertNotNull(
             $this->mailer->getFirstSentEmail()
         );
         self::assertContains(
-            $this->fixture->translate('label_save_event_text'),
+            $this->subject->translate('label_save_event_text'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -2715,13 +2715,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
 
-        $this->fixture->sendAdditionalNotificationEmailToReviewer();
+        $this->subject->sendAdditionalNotificationEmailToReviewer();
 
         self::assertNotNull(
             $this->mailer->getFirstSentEmail()
         );
         self::assertContains(
-            $this->fixture->translate('label_save_event_overview'),
+            $this->subject->translate('label_save_event_overview'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -2734,7 +2734,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
         $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
 
-        $this->fixture->sendAdditionalNotificationEmailToReviewer();
+        $this->subject->sendAdditionalNotificationEmailToReviewer();
 
         self::assertNotNull(
             $this->mailer->getFirstSentEmail()
@@ -2751,12 +2751,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
     public function sendAdditionalNotificationEmailToReviewerHasEventTitleInBody()
     {
         $title = 'Some nice event';
-        $this->fixture->setSavedFormValue('title', $title);
+        $this->subject->setSavedFormValue('title', $title);
 
         $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
 
-        $this->fixture->sendAdditionalNotificationEmailToReviewer();
+        $this->subject->sendAdditionalNotificationEmailToReviewer();
 
         self::assertNotNull(
             $this->mailer->getFirstSentEmail()
@@ -2773,12 +2773,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
     public function sendAdditionalNotificationEmailToReviewerHasEventDescriptionInBody()
     {
         $description = 'Everybody needs to attend!';
-        $this->fixture->setSavedFormValue('description', $description);
+        $this->subject->setSavedFormValue('description', $description);
 
         $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
 
-        $this->fixture->sendAdditionalNotificationEmailToReviewer();
+        $this->subject->sendAdditionalNotificationEmailToReviewer();
 
         self::assertNotNull(
             $this->mailer->getFirstSentEmail()
@@ -2795,13 +2795,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
     public function sendAdditionalNotificationEmailToReviewerHasEventDateInBody()
     {
         $beginDate = mktime(10, 0, 0, 4, 2, 1975);
-        $this->fixture->setSavedFormValue('begin_date', $beginDate);
+        $this->subject->setSavedFormValue('begin_date', $beginDate);
 
         $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
-        $this->fixture->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
+        $this->subject->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
         $this->createAndLoginUserWithReviewer();
 
-        $this->fixture->sendAdditionalNotificationEmailToReviewer();
+        $this->subject->sendAdditionalNotificationEmailToReviewer();
 
         self::assertNotNull(
             $this->mailer->getFirstSentEmail()
@@ -2937,7 +2937,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
 
         self::assertEquals(
             0,
-            $this->fixture->getPreselectedOrganizer()
+            $this->subject->getPreselectedOrganizer()
         );
     }
 
@@ -2951,7 +2951,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
 
         self::assertEquals(
             $organizerUid,
-            $this->fixture->getPreselectedOrganizer()
+            $this->subject->getPreselectedOrganizer()
         );
     }
 
@@ -2966,7 +2966,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCa
 
         self::assertEquals(
             0,
-            $this->fixture->getPreselectedOrganizer()
+            $this->subject->getPreselectedOrganizer()
         );
     }
 }

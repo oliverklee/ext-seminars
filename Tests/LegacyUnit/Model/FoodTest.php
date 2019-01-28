@@ -10,11 +10,11 @@ class Tx_Seminars_Tests_Unit_Model_FoodTest extends \Tx_Phpunit_TestCase
     /**
      * @var \Tx_Seminars_Model_Food
      */
-    private $fixture;
+    private $subject;
 
     protected function setUp()
     {
-        $this->fixture = new \Tx_Seminars_Model_Food();
+        $this->subject = new \Tx_Seminars_Model_Food();
     }
 
     /**
@@ -27,7 +27,7 @@ class Tx_Seminars_Tests_Unit_Model_FoodTest extends \Tx_Phpunit_TestCase
             'The parameter $title must not be empty.'
         );
 
-        $this->fixture->setTitle('');
+        $this->subject->setTitle('');
     }
 
     /**
@@ -35,11 +35,11 @@ class Tx_Seminars_Tests_Unit_Model_FoodTest extends \Tx_Phpunit_TestCase
      */
     public function setTitleSetsTitle()
     {
-        $this->fixture->setTitle('Crunchy crisps');
+        $this->subject->setTitle('Crunchy crisps');
 
         self::assertEquals(
             'Crunchy crisps',
-            $this->fixture->getTitle()
+            $this->subject->getTitle()
         );
     }
 
@@ -48,11 +48,11 @@ class Tx_Seminars_Tests_Unit_Model_FoodTest extends \Tx_Phpunit_TestCase
      */
     public function getTitleWithNonEmptyTitleReturnsTitle()
     {
-        $this->fixture->setData(['title' => 'Crunchy crisps']);
+        $this->subject->setData(['title' => 'Crunchy crisps']);
 
         self::assertEquals(
             'Crunchy crisps',
-            $this->fixture->getTitle()
+            $this->subject->getTitle()
         );
     }
 }

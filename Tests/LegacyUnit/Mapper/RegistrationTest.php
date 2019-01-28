@@ -16,13 +16,13 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends \Tx_Phpunit_TestCas
     /**
      * @var \Tx_Seminars_Mapper_Registration
      */
-    private $fixture;
+    private $subject;
 
     protected function setUp()
     {
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
-        $this->fixture = new \Tx_Seminars_Mapper_Registration();
+        $this->subject = new \Tx_Seminars_Mapper_Registration();
     }
 
     protected function tearDown()
@@ -39,7 +39,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends \Tx_Phpunit_TestCas
      */
     public function findWithUidReturnsRegistrationInstance()
     {
-        self::assertInstanceOf(\Tx_Seminars_Model_Registration::class, $this->fixture->find(1));
+        self::assertInstanceOf(\Tx_Seminars_Model_Registration::class, $this->subject->find(1));
     }
 
     /**
@@ -53,7 +53,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends \Tx_Phpunit_TestCas
         );
 
         /** @var \Tx_Seminars_Model_Registration $model */
-        $model = $this->fixture->find($uid);
+        $model = $this->subject->find($uid);
         self::assertEquals(
             'registration for event',
             $model->getTitle()
@@ -72,7 +72,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends \Tx_Phpunit_TestCas
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
             ->getNewGhost();
         /** @var \Tx_Seminars_Model_Registration $testingModel */
-        $testingModel = $this->fixture->getLoadedTestingModel(['seminar' => $event->getUid()]);
+        $testingModel = $this->subject->getLoadedTestingModel(['seminar' => $event->getUid()]);
 
         self::assertInstanceOf(\Tx_Seminars_Model_Event::class, $testingModel->getEvent());
     }
@@ -85,7 +85,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends \Tx_Phpunit_TestCas
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
             ->getNewGhost();
         /** @var \Tx_Seminars_Model_Registration $testingModel */
-        $testingModel = $this->fixture->getLoadedTestingModel(['seminar' => $event->getUid()]);
+        $testingModel = $this->subject->getLoadedTestingModel(['seminar' => $event->getUid()]);
 
         self::assertInstanceOf(\Tx_Seminars_Model_Event::class, $testingModel->getSeminar());
     }
@@ -102,7 +102,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends \Tx_Phpunit_TestCas
         $frontEndUser = \Tx_Oelib_MapperRegistry::
         get(\Tx_Seminars_Mapper_FrontEndUser::class)->getNewGhost();
         /** @var \Tx_Seminars_Model_Registration $testingModel */
-        $testingModel = $this->fixture->getLoadedTestingModel(['user' => $frontEndUser->getUid()]);
+        $testingModel = $this->subject->getLoadedTestingModel(['user' => $frontEndUser->getUid()]);
 
         self::assertSame($frontEndUser, $testingModel->getFrontEndUser());
     }
@@ -117,7 +117,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends \Tx_Phpunit_TestCas
     public function getPaymentMethodWithoutPaymentMethodReturnsNull()
     {
         /** @var \Tx_Seminars_Model_Registration $testingModel */
-        $testingModel = $this->fixture->getLoadedTestingModel([]);
+        $testingModel = $this->subject->getLoadedTestingModel([]);
 
         self::assertNull($testingModel->getPaymentMethod());
     }
@@ -130,7 +130,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends \Tx_Phpunit_TestCas
         $paymentMethod = \Tx_Oelib_MapperRegistry::
         get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
         /** @var \Tx_Seminars_Model_Registration $testingModel */
-        $testingModel = $this->fixture->getLoadedTestingModel(['method_of_payment' => $paymentMethod->getUid()]);
+        $testingModel = $this->subject->getLoadedTestingModel(['method_of_payment' => $paymentMethod->getUid()]);
 
         self::assertInstanceOf(\Tx_Seminars_Model_PaymentMethod::class, $testingModel->getPaymentMethod());
     }
@@ -145,7 +145,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends \Tx_Phpunit_TestCas
     public function getLodgingsReturnsListInstance()
     {
         /** @var \Tx_Seminars_Model_Registration $testingModel */
-        $testingModel = $this->fixture->getLoadedTestingModel([]);
+        $testingModel = $this->subject->getLoadedTestingModel([]);
 
         self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getLodgings());
     }
@@ -166,7 +166,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends \Tx_Phpunit_TestCas
         );
 
         /** @var \Tx_Seminars_Model_Registration $model */
-        $model = $this->fixture->find($uid);
+        $model = $this->subject->find($uid);
         self::assertInstanceOf(\Tx_Seminars_Model_Lodging::class, $model->getLodgings()->first());
     }
 
@@ -186,7 +186,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends \Tx_Phpunit_TestCas
         );
 
         /** @var \Tx_Seminars_Model_Registration $model */
-        $model = $this->fixture->find($uid);
+        $model = $this->subject->find($uid);
         self::assertEquals(
             $lodging->getUid(),
             $model->getLodgings()->first()->getUid()
@@ -203,7 +203,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends \Tx_Phpunit_TestCas
     public function getFoodsReturnsListInstance()
     {
         /** @var \Tx_Seminars_Model_Registration $testingModel */
-        $testingModel = $this->fixture->getLoadedTestingModel([]);
+        $testingModel = $this->subject->getLoadedTestingModel([]);
 
         self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getFoods());
     }
@@ -224,7 +224,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends \Tx_Phpunit_TestCas
         );
 
         /** @var \Tx_Seminars_Model_Registration $model */
-        $model = $this->fixture->find($uid);
+        $model = $this->subject->find($uid);
         self::assertInstanceOf(\Tx_Seminars_Model_Food::class, $model->getFoods()->first());
     }
 
@@ -244,7 +244,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends \Tx_Phpunit_TestCas
         );
 
         /** @var \Tx_Seminars_Model_Registration $model */
-        $model = $this->fixture->find($uid);
+        $model = $this->subject->find($uid);
         self::assertEquals(
             $food->getUid(),
             $model->getFoods()->first()->getUid()
@@ -261,7 +261,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends \Tx_Phpunit_TestCas
     public function getCheckboxesReturnsListInstance()
     {
         /** @var \Tx_Seminars_Model_Registration $testingModel */
-        $testingModel = $this->fixture->getLoadedTestingModel([]);
+        $testingModel = $this->subject->getLoadedTestingModel([]);
 
         self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getCheckboxes());
     }
@@ -282,7 +282,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends \Tx_Phpunit_TestCas
         );
 
         /** @var \Tx_Seminars_Model_Registration $model */
-        $model = $this->fixture->find($uid);
+        $model = $this->subject->find($uid);
         self::assertEquals(
             $checkbox->getUid(),
             $model->getCheckboxes()->first()->getUid()
@@ -305,7 +305,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends \Tx_Phpunit_TestCas
         );
 
         /** @var \Tx_Seminars_Model_Registration $model */
-        $model = $this->fixture->find($uid);
+        $model = $this->subject->find($uid);
         self::assertEquals(
             $checkbox->getUid(),
             $model->getCheckboxes()->first()->getUid()
@@ -331,7 +331,7 @@ class Tx_Seminars_Tests_Unit_Mapper_RegistrationTest extends \Tx_Phpunit_TestCas
         );
 
         /** @var \Tx_Seminars_Model_Registration $model */
-        $model = $this->fixture->find($registrationUid);
+        $model = $this->subject->find($registrationUid);
         self::assertEquals(
             (string)$personUid,
             $model->getAdditionalPersons()->getUids()

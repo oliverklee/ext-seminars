@@ -10,11 +10,11 @@ class Tx_Seminars_Tests_Unit_Model_CheckboxTest extends \Tx_Phpunit_TestCase
     /**
      * @var \Tx_Seminars_Model_Checkbox
      */
-    private $fixture;
+    private $subject;
 
     protected function setUp()
     {
-        $this->fixture = new \Tx_Seminars_Model_Checkbox();
+        $this->subject = new \Tx_Seminars_Model_Checkbox();
     }
 
     /**
@@ -27,7 +27,7 @@ class Tx_Seminars_Tests_Unit_Model_CheckboxTest extends \Tx_Phpunit_TestCase
             'The parameter $title must not be empty.'
         );
 
-        $this->fixture->setTitle('');
+        $this->subject->setTitle('');
     }
 
     /**
@@ -35,11 +35,11 @@ class Tx_Seminars_Tests_Unit_Model_CheckboxTest extends \Tx_Phpunit_TestCase
      */
     public function setTitleSetsTitle()
     {
-        $this->fixture->setTitle('I agree with the T&C.');
+        $this->subject->setTitle('I agree with the T&C.');
 
         self::assertEquals(
             'I agree with the T&C.',
-            $this->fixture->getTitle()
+            $this->subject->getTitle()
         );
     }
 
@@ -48,11 +48,11 @@ class Tx_Seminars_Tests_Unit_Model_CheckboxTest extends \Tx_Phpunit_TestCase
      */
     public function getTitleWithNonEmptyTitleReturnsTitle()
     {
-        $this->fixture->setData(['title' => 'I agree with the T&C.']);
+        $this->subject->setData(['title' => 'I agree with the T&C.']);
 
         self::assertEquals(
             'I agree with the T&C.',
-            $this->fixture->getTitle()
+            $this->subject->getTitle()
         );
     }
 
@@ -65,11 +65,11 @@ class Tx_Seminars_Tests_Unit_Model_CheckboxTest extends \Tx_Phpunit_TestCase
      */
     public function getDescriptionWithoutDescriptionReturnsAnEmptyString()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->fixture->getDescription()
+            $this->subject->getDescription()
         );
     }
 
@@ -78,11 +78,11 @@ class Tx_Seminars_Tests_Unit_Model_CheckboxTest extends \Tx_Phpunit_TestCase
      */
     public function getDescriptionWithDescriptionReturnsDescription()
     {
-        $this->fixture->setData(['description' => 'I agree with the T&C.']);
+        $this->subject->setData(['description' => 'I agree with the T&C.']);
 
         self::assertEquals(
             'I agree with the T&C.',
-            $this->fixture->getDescription()
+            $this->subject->getDescription()
         );
     }
 
@@ -91,11 +91,11 @@ class Tx_Seminars_Tests_Unit_Model_CheckboxTest extends \Tx_Phpunit_TestCase
      */
     public function setDescriptionSetsDescription()
     {
-        $this->fixture->setDescription('I agree with the T&C.');
+        $this->subject->setDescription('I agree with the T&C.');
 
         self::assertEquals(
             'I agree with the T&C.',
-            $this->fixture->getDescription()
+            $this->subject->getDescription()
         );
     }
 
@@ -104,10 +104,10 @@ class Tx_Seminars_Tests_Unit_Model_CheckboxTest extends \Tx_Phpunit_TestCase
      */
     public function hasDescriptionWithoutDescriptionReturnsFalse()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertFalse(
-            $this->fixture->hasDescription()
+            $this->subject->hasDescription()
         );
     }
 
@@ -116,10 +116,10 @@ class Tx_Seminars_Tests_Unit_Model_CheckboxTest extends \Tx_Phpunit_TestCase
      */
     public function hasDescriptionWithDescriptionReturnsTrue()
     {
-        $this->fixture->setDescription('I agree with the T&C.');
+        $this->subject->setDescription('I agree with the T&C.');
 
         self::assertTrue(
-            $this->fixture->hasDescription()
+            $this->subject->hasDescription()
         );
     }
 }

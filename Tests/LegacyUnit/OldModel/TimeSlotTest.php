@@ -10,7 +10,7 @@ class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends \Tx_Phpunit_TestCase
     /**
      * @var \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingTimeSlot
      */
-    private $fixture = null;
+    private $subject = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -24,7 +24,7 @@ class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends \Tx_Phpunit_TestCase
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
         );
-        $fixtureUid = $this->testingFramework->createRecord(
+        $subjectUid = $this->testingFramework->createRecord(
             'tx_seminars_timeslots',
             [
                 'seminar' => $seminarUid,
@@ -33,7 +33,7 @@ class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends \Tx_Phpunit_TestCase
             ]
         );
 
-        $this->fixture = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingTimeSlot($fixtureUid);
+        $this->subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingTimeSlot($subjectUid);
     }
 
     protected function tearDown()
@@ -48,7 +48,7 @@ class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends \Tx_Phpunit_TestCase
     public function testCreateFromUid()
     {
         self::assertTrue(
-            $this->fixture->isOk()
+            $this->subject->isOk()
         );
     }
 
@@ -60,14 +60,14 @@ class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends \Tx_Phpunit_TestCase
     {
         self::assertEquals(
             0,
-            $this->fixture->getPlace()
+            $this->subject->getPlace()
         );
     }
 
     public function testHasPlaceInitiallyReturnsFalse()
     {
         self::assertFalse(
-            $this->fixture->hasPlace()
+            $this->subject->hasPlace()
         );
     }
 
@@ -76,11 +76,11 @@ class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends \Tx_Phpunit_TestCase
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites'
         );
-        $this->fixture->setPlace($placeUid);
+        $this->subject->setPlace($placeUid);
 
         self::assertEquals(
             $placeUid,
-            $this->fixture->getPlace()
+            $this->subject->getPlace()
         );
     }
 
@@ -89,10 +89,10 @@ class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends \Tx_Phpunit_TestCase
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites'
         );
-        $this->fixture->setPlace($placeUid);
+        $this->subject->setPlace($placeUid);
 
         self::assertTrue(
-            $this->fixture->hasPlace()
+            $this->subject->hasPlace()
         );
     }
 
@@ -103,8 +103,8 @@ class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends \Tx_Phpunit_TestCase
     public function testGetPlaceShortReturnsWillBeAnnouncedForNoPlaces()
     {
         self::assertEquals(
-            $this->fixture->translate('message_willBeAnnounced'),
-            $this->fixture->getPlaceShort()
+            $this->subject->translate('message_willBeAnnounced'),
+            $this->subject->getPlaceShort()
         );
     }
 
@@ -114,11 +114,11 @@ class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends \Tx_Phpunit_TestCase
             'tx_seminars_sites',
             ['title' => 'a place']
         );
-        $this->fixture->setPlace($placeUid);
+        $this->subject->setPlace($placeUid);
 
         self::assertEquals(
             'a place',
-            $this->fixture->getPlaceShort()
+            $this->subject->getPlaceShort()
         );
     }
 
@@ -130,10 +130,10 @@ class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends \Tx_Phpunit_TestCase
             'The related place with the UID ' . $placeUid . ' could not be found in the DB.'
         );
 
-        $this->fixture->setPlace($placeUid);
+        $this->subject->setPlace($placeUid);
         $this->testingFramework->deleteRecord('tx_seminars_sites', $placeUid);
 
-        $this->fixture->getPlaceShort();
+        $this->subject->getPlaceShort();
     }
 
     public function testGetPlaceShortThrowsExceptionForDeletedPlace()
@@ -147,9 +147,9 @@ class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends \Tx_Phpunit_TestCase
             'The related place with the UID ' . $placeUid . ' could not be found in the DB.'
         );
 
-        $this->fixture->setPlace($placeUid);
+        $this->subject->setPlace($placeUid);
 
-        $this->fixture->getPlaceShort();
+        $this->subject->getPlaceShort();
     }
 
     //////////////////////////////////////////
@@ -159,15 +159,15 @@ class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends \Tx_Phpunit_TestCase
     public function testHasEntryDateIsInitiallyFalse()
     {
         self::assertFalse(
-            $this->fixture->hasEntryDate()
+            $this->subject->hasEntryDate()
         );
     }
 
     public function testHasEntryDate()
     {
-        $this->fixture->setEntryDate(42);
+        $this->subject->setEntryDate(42);
         self::assertTrue(
-            $this->fixture->hasEntryDate()
+            $this->subject->hasEntryDate()
         );
     }
 
@@ -175,14 +175,14 @@ class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends \Tx_Phpunit_TestCase
     {
         // chosen randomly 2001-01-01 13:01
         $time = 978354060;
-        $this->fixture->setEntryDate($time);
-        $this->fixture->setBeginDate($time);
-        $this->fixture->setConfigurationValue('dateFormatYMD', '%d - %m - %Y');
-        $this->fixture->setConfigurationValue('timeFormat', '%H:%M');
+        $this->subject->setEntryDate($time);
+        $this->subject->setBeginDate($time);
+        $this->subject->setConfigurationValue('dateFormatYMD', '%d - %m - %Y');
+        $this->subject->setConfigurationValue('timeFormat', '%H:%M');
 
         self::assertEquals(
             strftime('%H:%M', $time),
-            $this->fixture->getEntryDate()
+            $this->subject->getEntryDate()
         );
     }
 
@@ -190,14 +190,14 @@ class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends \Tx_Phpunit_TestCase
     {
         // chosen randomly 2001-01-01 13:01
         $time = 978354060;
-        $this->fixture->setEntryDate($time);
-        $this->fixture->setBeginDate($time + 86400);
-        $this->fixture->setConfigurationValue('dateFormatYMD', '%d - %m - %Y');
-        $this->fixture->setConfigurationValue('timeFormat', '%H:%M');
+        $this->subject->setEntryDate($time);
+        $this->subject->setBeginDate($time + 86400);
+        $this->subject->setConfigurationValue('dateFormatYMD', '%d - %m - %Y');
+        $this->subject->setConfigurationValue('timeFormat', '%H:%M');
 
         self::assertEquals(
             strftime('%d - %m - %Y %H:%M', $time),
-            $this->fixture->getEntryDate()
+            $this->subject->getEntryDate()
         );
     }
 }

@@ -15,13 +15,13 @@ class Tx_Seminars_Tests_Unit_Mapper_BackEndUserTest extends \Tx_Phpunit_TestCase
     /**
      * @var \Tx_Seminars_Mapper_BackEndUser the object to test
      */
-    private $fixture;
+    private $subject;
 
     protected function setUp()
     {
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
-        $this->fixture = new \Tx_Seminars_Mapper_BackEndUser();
+        $this->subject = new \Tx_Seminars_Mapper_BackEndUser();
     }
 
     protected function tearDown()
@@ -37,7 +37,7 @@ class Tx_Seminars_Tests_Unit_Mapper_BackEndUserTest extends \Tx_Phpunit_TestCase
     {
         self::assertInstanceOf(
             \Tx_Seminars_Model_BackEndUser::class,
-            $this->fixture->find($this->testingFramework->createBackEndUser())
+            $this->subject->find($this->testingFramework->createBackEndUser())
         );
     }
 }

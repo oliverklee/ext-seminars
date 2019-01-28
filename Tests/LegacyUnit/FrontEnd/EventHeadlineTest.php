@@ -11,7 +11,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventHeadlineTest extends \Tx_Phpunit_Test
     /**
      * @var \Tx_Seminars_FrontEnd_EventHeadline
      */
-    private $fixture;
+    private $subject;
 
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -61,14 +61,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventHeadlineTest extends \Tx_Phpunit_Test
         );
         $this->eventId = $event->getUid();
 
-        $this->fixture = new \Tx_Seminars_FrontEnd_EventHeadline(
+        $this->subject = new \Tx_Seminars_FrontEnd_EventHeadline(
             [
                 'isStaticTemplateLoaded' => 1,
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
             ],
             $GLOBALS['TSFE']->cObj
         );
-        $this->fixture->injectEventMapper($this->mapper);
+        $this->subject->injectEventMapper($this->mapper);
     }
 
     protected function tearDown()
@@ -90,8 +90,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventHeadlineTest extends \Tx_Phpunit_Test
      */
     public function renderWithoutCallingInjectEventMapperFirstThrowsBadMethodCallException()
     {
-        $this->fixture->injectEventMapper(null);
-        $this->fixture->render();
+        $this->subject->injectEventMapper(null);
+        $this->subject->render();
     }
 
     /**
@@ -99,11 +99,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventHeadlineTest extends \Tx_Phpunit_Test
      */
     public function renderWithUidOfExistingEventReturnsTitleOfSelectedEvent()
     {
-        $this->fixture->piVars['uid'] = $this->eventId;
+        $this->subject->piVars['uid'] = $this->eventId;
 
         self::assertContains(
             'Test event',
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 
@@ -115,11 +115,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventHeadlineTest extends \Tx_Phpunit_Test
         /** @var \Tx_Seminars_Model_Event $event */
         $event = $this->mapper->find($this->eventId);
         $event->setTitle('<test>Test event</test>');
-        $this->fixture->piVars['uid'] = $this->eventId;
+        $this->subject->piVars['uid'] = $this->eventId;
 
         self::assertContains(
             htmlspecialchars('<test>Test event</test>'),
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 
@@ -133,11 +133,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventHeadlineTest extends \Tx_Phpunit_Test
         $configuration->setAsString('dateFormatYMD', $dateFormat);
         \Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars_seminars', $configuration);
 
-        $this->fixture->piVars['uid'] = $this->eventId;
+        $this->subject->piVars['uid'] = $this->eventId;
 
         self::assertContains(
             strftime($dateFormat, $this->eventDate),
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 
@@ -146,11 +146,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventHeadlineTest extends \Tx_Phpunit_Test
      */
     public function renderReturnsEmptyStringIfNoUidIsSetInPiVar()
     {
-        unset($this->fixture->piVars['uid']);
+        unset($this->subject->piVars['uid']);
 
         self::assertEquals(
             '',
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 
@@ -159,11 +159,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventHeadlineTest extends \Tx_Phpunit_Test
      */
     public function renderReturnsEmptyStringIfUidOfInexistentEventIsSetInPiVar()
     {
-        $this->fixture->piVars['uid'] = $this->testingFramework->getAutoIncrement('tx_seminars_seminars');
+        $this->subject->piVars['uid'] = $this->testingFramework->getAutoIncrement('tx_seminars_seminars');
 
         self::assertEquals(
             '',
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 
@@ -172,11 +172,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventHeadlineTest extends \Tx_Phpunit_Test
      */
     public function renderReturnsEmptyStringIfNonNumericEventUidIsSetInPiVar()
     {
-        $this->fixture->piVars['uid'] = 'foo';
+        $this->subject->piVars['uid'] = 'foo';
 
         self::assertEquals(
             '',
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 }

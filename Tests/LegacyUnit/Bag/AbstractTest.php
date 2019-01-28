@@ -11,7 +11,7 @@ class Tx_Seminars_Tests_Unit_Bag_AbstractTest extends \Tx_Phpunit_TestCase
     /**
      * @var \Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing
      */
-    private $fixture;
+    private $subject;
 
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -41,7 +41,7 @@ class Tx_Seminars_Tests_Unit_Bag_AbstractTest extends \Tx_Phpunit_TestCase
             ['title' => 'test 2']
         );
 
-        $this->fixture = new \Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('is_dummy_record=1');
+        $this->subject = new \Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('is_dummy_record=1');
     }
 
     protected function tearDown()
@@ -77,7 +77,7 @@ class Tx_Seminars_Tests_Unit_Bag_AbstractTest extends \Tx_Phpunit_TestCase
     {
         self::assertEquals(
             $this->uidOfFirstRecord . ',' . $this->uidOfSecondRecord,
-            $this->fixture->getUids()
+            $this->subject->getUids()
         );
     }
 
@@ -85,12 +85,12 @@ class Tx_Seminars_Tests_Unit_Bag_AbstractTest extends \Tx_Phpunit_TestCase
     {
         self::assertEquals(
             $this->uidOfFirstRecord,
-            $this->fixture->current()->getUid()
+            $this->subject->current()->getUid()
         );
 
         self::assertEquals(
             $this->uidOfSecondRecord,
-            $this->fixture->next()->getUid()
+            $this->subject->next()->getUid()
         );
     }
 
@@ -122,18 +122,18 @@ class Tx_Seminars_Tests_Unit_Bag_AbstractTest extends \Tx_Phpunit_TestCase
     {
         self::assertEquals(
             2,
-            $this->fixture->count()
+            $this->subject->count()
         );
     }
 
     public function testCountAfterCallingNextForBagWithTwoElementsReturnsTwo()
     {
-        $this->fixture->rewind();
-        $this->fixture->next();
+        $this->subject->rewind();
+        $this->subject->next();
 
         self::assertEquals(
             2,
-            $this->fixture->count()
+            $this->subject->count()
         );
     }
 
@@ -175,18 +175,18 @@ class Tx_Seminars_Tests_Unit_Bag_AbstractTest extends \Tx_Phpunit_TestCase
     {
         self::assertEquals(
             2,
-            $this->fixture->countWithoutLimit()
+            $this->subject->countWithoutLimit()
         );
     }
 
     public function testCountWithoutLimitAfterCallingNextForBagWithTwoElementsReturnsTwo()
     {
-        $this->fixture->rewind();
-        $this->fixture->next();
+        $this->subject->rewind();
+        $this->subject->next();
 
         self::assertEquals(
             2,
-            $this->fixture->countWithoutLimit()
+            $this->subject->countWithoutLimit()
         );
     }
 
@@ -225,7 +225,7 @@ class Tx_Seminars_Tests_Unit_Bag_AbstractTest extends \Tx_Phpunit_TestCase
     public function testIsEmptyForBagWithTwoElementsReturnsFalse()
     {
         self::assertFalse(
-            $this->fixture->isEmpty()
+            $this->subject->isEmpty()
         );
     }
 }

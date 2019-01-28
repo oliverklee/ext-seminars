@@ -11,7 +11,7 @@ class Tx_Seminars_Tests_Unit_Mapper_FrontEndUserGroupTest extends \Tx_Phpunit_Te
     /**
      * @var \Tx_Seminars_Mapper_FrontEndUserGroup the object to test
      */
-    private $fixture;
+    private $subject;
 
     /**
      * @var \Tx_Oelib_TestingFramework the testing framework
@@ -20,7 +20,7 @@ class Tx_Seminars_Tests_Unit_Mapper_FrontEndUserGroupTest extends \Tx_Phpunit_Te
 
     protected function setUp()
     {
-        $this->fixture = new \Tx_Seminars_Mapper_FrontEndUserGroup();
+        $this->subject = new \Tx_Seminars_Mapper_FrontEndUserGroup();
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
     }
 
@@ -38,7 +38,7 @@ class Tx_Seminars_Tests_Unit_Mapper_FrontEndUserGroupTest extends \Tx_Phpunit_Te
      */
     public function mapperForGhostReturnsSeminarsFrontEndUserGroupInstance()
     {
-        self::assertInstanceOf(\Tx_Seminars_Model_FrontEndUserGroup::class, $this->fixture->getNewGhost());
+        self::assertInstanceOf(\Tx_Seminars_Model_FrontEndUserGroup::class, $this->subject->getNewGhost());
     }
 
     //////////////////////////////////
@@ -53,12 +53,12 @@ class Tx_Seminars_Tests_Unit_Mapper_FrontEndUserGroupTest extends \Tx_Phpunit_Te
         $backEndUser = \Tx_Oelib_MapperRegistry::get(
             \Tx_Oelib_Mapper_BackEndUser::class
         )->getNewGhost();
-        $frontEndUserGroup = $this->fixture->getLoadedTestingModel(
+        $frontEndUserGroup = $this->subject->getLoadedTestingModel(
             ['tx_seminars_reviewer' => $backEndUser->getUid()]
         );
 
         /** @var \Tx_Seminars_Model_FrontEndUserGroup $model */
-        $model = $this->fixture->find($frontEndUserGroup->getUid());
+        $model = $this->subject->find($frontEndUserGroup->getUid());
 
         self::assertInstanceOf(\Tx_Oelib_Model_BackEndUser::class, $model->getReviewer());
     }
@@ -85,7 +85,7 @@ class Tx_Seminars_Tests_Unit_Mapper_FrontEndUserGroupTest extends \Tx_Phpunit_Te
         );
 
         /** @var \Tx_Seminars_Model_FrontEndUserGroup $model */
-        $model = $this->fixture->find($frontEndUserGroupUid);
+        $model = $this->subject->find($frontEndUserGroupUid);
         self::assertInstanceOf(\Tx_Seminars_Model_Category::class, $model->getDefaultCategories()->first());
     }
 
@@ -106,7 +106,7 @@ class Tx_Seminars_Tests_Unit_Mapper_FrontEndUserGroupTest extends \Tx_Phpunit_Te
         );
 
         /** @var \Tx_Seminars_Model_FrontEndUserGroup $model */
-        $model = $this->fixture->find($groupUid);
+        $model = $this->subject->find($groupUid);
         self::assertInstanceOf(\Tx_Seminars_Model_Organizer::class, $model->getDefaultOrganizer());
     }
 }

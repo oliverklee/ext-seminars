@@ -11,7 +11,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
     /**
      * @var \Tx_Seminars_Tests_Unit_Fixtures_BagBuilder_Testing
      */
-    private $fixture;
+    private $subject;
 
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -27,8 +27,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
 
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
-        $this->fixture = new \Tx_Seminars_Tests_Unit_Fixtures_BagBuilder_Testing();
-        $this->fixture->setTestMode();
+        $this->subject = new \Tx_Seminars_Tests_Unit_Fixtures_BagBuilder_Testing();
+        $this->subject->setTestMode();
 
         $this->dummySysFolderPid = $this->testingFramework->createSystemFolder();
     }
@@ -54,7 +54,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
 
     public function testBuilderBuildsAnObject()
     {
-        $bag = $this->fixture->build();
+        $bag = $this->subject->build();
 
         self::assertInternalType(
             'object',
@@ -64,7 +64,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
 
     public function testBuilderBuildsABag()
     {
-        $bag = $this->fixture->build();
+        $bag = $this->subject->build();
 
         self::assertInstanceOf(\Tx_Seminars_Bag_Abstract::class, $bag);
     }
@@ -74,7 +74,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
         $eventUid1 = $this->testingFramework->createRecord('tx_seminars_test');
         $eventUid2 = $this->testingFramework->createRecord('tx_seminars_test');
 
-        $testBag = $this->fixture->build();
+        $testBag = $this->subject->build();
         self::assertEquals(
             2,
             $testBag->count()
@@ -92,9 +92,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
 
     public function testBuilderWithAdditionalTableNameDoesNotProduceSqlError()
     {
-        $this->fixture->addAdditionalTableName('tx_seminars_seminars');
+        $this->subject->addAdditionalTableName('tx_seminars_seminars');
 
-        $this->fixture->build();
+        $this->subject->build();
     }
 
     ///////////////////////////////////
@@ -104,38 +104,38 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
     public function testBuilderInitiallyHasNoSourcePages()
     {
         self::assertFalse(
-            $this->fixture->hasSourcePages()
+            $this->subject->hasSourcePages()
         );
     }
 
     public function testBuilderHasSourcePagesWithOnePage()
     {
-        $this->fixture->setSourcePages($this->dummySysFolderPid);
+        $this->subject->setSourcePages($this->dummySysFolderPid);
 
         self::assertTrue(
-            $this->fixture->hasSourcePages()
+            $this->subject->hasSourcePages()
         );
     }
 
     public function testBuilderHasSourcePagesWithTwoPages()
     {
-        $this->fixture->setSourcePages(
+        $this->subject->setSourcePages(
             $this->dummySysFolderPid . ',' . ($this->dummySysFolderPid + 1)
         );
 
         self::assertTrue(
-            $this->fixture->hasSourcePages()
+            $this->subject->hasSourcePages()
         );
     }
 
     public function testBuilderHasNoSourcePagesWithEvilSql()
     {
-        $this->fixture->setSourcePages(
+        $this->subject->setSourcePages(
             '; DROP TABLE tx_seminars_test;'
         );
 
         self::assertFalse(
-            $this->fixture->hasSourcePages()
+            $this->subject->hasSourcePages()
         );
     }
 
@@ -150,7 +150,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
             'tx_seminars_test',
             ['pid' => $this->dummySysFolderPid + 1]
         );
-        $bag = $this->fixture->build();
+        $bag = $this->subject->build();
 
         self::assertEquals(
             2,
@@ -160,7 +160,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
 
     public function testBuilderSelectsRecordsFromAllPagesWithEmptySourcePages()
     {
-        $this->fixture->setSourcePages('');
+        $this->subject->setSourcePages('');
         $this->testingFramework->createRecord(
             'tx_seminars_test',
             ['pid' => $this->dummySysFolderPid]
@@ -170,7 +170,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
             'tx_seminars_test',
             ['pid' => $this->dummySysFolderPid + 1]
         );
-        $bag = $this->fixture->build();
+        $bag = $this->subject->build();
 
         self::assertEquals(
             2,
@@ -190,9 +190,9 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
             ['pid' => $this->dummySysFolderPid + 1]
         );
 
-        $this->fixture->setSourcePages($this->dummySysFolderPid);
-        $this->fixture->setSourcePages('');
-        $bag = $this->fixture->build();
+        $this->subject->setSourcePages($this->dummySysFolderPid);
+        $this->subject->setSourcePages('');
+        $bag = $this->subject->build();
 
         self::assertEquals(
             2,
@@ -202,7 +202,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
 
     public function testBuilderSelectsRecordsFromAllPagesWithEmptySourcePagesAndZeroRecursion()
     {
-        $this->fixture->setSourcePages(
+        $this->subject->setSourcePages(
             ''
         );
         $this->testingFramework->createRecord(
@@ -214,7 +214,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
             'tx_seminars_test',
             ['pid' => $this->dummySysFolderPid + 1]
         );
-        $bag = $this->fixture->build();
+        $bag = $this->subject->build();
 
         self::assertEquals(
             2,
@@ -224,7 +224,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
 
     public function testBuilderSelectsRecordsFromAllPagesWithEmptySourcePagesAndNonZeroRecursion()
     {
-        $this->fixture->setSourcePages(
+        $this->subject->setSourcePages(
             '',
             1
         );
@@ -237,7 +237,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
             'tx_seminars_test',
             ['pid' => $this->dummySysFolderPid + 1]
         );
-        $bag = $this->fixture->build();
+        $bag = $this->subject->build();
 
         self::assertEquals(
             2,
@@ -257,8 +257,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
             ['pid' => $this->dummySysFolderPid + 1]
         );
 
-        $this->fixture->setSourcePages($this->dummySysFolderPid);
-        $bag = $this->fixture->build();
+        $this->subject->setSourcePages($this->dummySysFolderPid);
+        $bag = $this->subject->build();
 
         self::assertEquals(
             1,
@@ -278,10 +278,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
             ['pid' => $this->dummySysFolderPid + 1]
         );
 
-        $this->fixture->setSourcePages(
+        $this->subject->setSourcePages(
             $this->dummySysFolderPid . ',' . ($this->dummySysFolderPid + 1)
         );
-        $bag = $this->fixture->build();
+        $bag = $this->subject->build();
 
         self::assertEquals(
             2,
@@ -300,8 +300,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
             ['pid' => $subPagePid]
         );
 
-        $this->fixture->setSourcePages($this->dummySysFolderPid);
-        $bag = $this->fixture->build();
+        $this->subject->setSourcePages($this->dummySysFolderPid);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -319,8 +319,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
             ['pid' => $subPagePid]
         );
 
-        $this->fixture->setSourcePages($this->dummySysFolderPid, 1);
-        $bag = $this->fixture->build();
+        $this->subject->setSourcePages($this->dummySysFolderPid, 1);
+        $bag = $this->subject->build();
 
         self::assertEquals(
             1,
@@ -346,8 +346,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
             ['pid' => $subPagePid2]
         );
 
-        $this->fixture->setSourcePages($this->dummySysFolderPid, 1);
-        $bag = $this->fixture->build();
+        $this->subject->setSourcePages($this->dummySysFolderPid, 1);
+        $bag = $this->subject->build();
 
         self::assertEquals(
             2,
@@ -372,11 +372,11 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
             ['pid' => $subPagePid2]
         );
 
-        $this->fixture->setSourcePages(
+        $this->subject->setSourcePages(
             $this->dummySysFolderPid . ',' . $parentPid2,
             1
         );
-        $bag = $this->fixture->build();
+        $bag = $this->subject->build();
 
         self::assertEquals(
             2,
@@ -398,8 +398,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
             ['pid' => $subSubPagePid]
         );
 
-        $this->fixture->setSourcePages($this->dummySysFolderPid, 1);
-        $bag = $this->fixture->build();
+        $this->subject->setSourcePages($this->dummySysFolderPid, 1);
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -416,7 +416,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
             'tx_seminars_test',
             ['hidden' => 1]
         );
-        $bag = $this->fixture->build();
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -430,8 +430,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
             ['hidden' => 1]
         );
 
-        $this->fixture->setBackEndMode();
-        $bag = $this->fixture->build();
+        $this->subject->setBackEndMode();
+        $bag = $this->subject->build();
 
         self::assertEquals(
             1,
@@ -445,7 +445,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
             'tx_seminars_test',
             ['endtime' => $GLOBALS['SIM_EXEC_TIME'] - 1000]
         );
-        $bag = $this->fixture->build();
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -459,8 +459,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
             ['endtime' => $GLOBALS['SIM_EXEC_TIME'] - 1000]
         );
 
-        $this->fixture->setBackEndMode();
-        $bag = $this->fixture->build();
+        $this->subject->setBackEndMode();
+        $bag = $this->subject->build();
 
         self::assertEquals(
             1,
@@ -474,7 +474,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
             'tx_seminars_test',
             ['deleted' => 1]
         );
-        $bag = $this->fixture->build();
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -488,8 +488,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
             ['deleted' => 1]
         );
 
-        $this->fixture->setBackEndMode();
-        $bag = $this->fixture->build();
+        $this->subject->setBackEndMode();
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -500,19 +500,19 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
     {
         self::assertNotEquals(
             '',
-            $this->fixture->getWhereClause()
+            $this->subject->getWhereClause()
         );
     }
 
     public function testWhereClauseCanSelectPids()
     {
-        $this->fixture->setSourcePages($this->dummySysFolderPid);
+        $this->subject->setSourcePages($this->dummySysFolderPid);
 
         // We're using assertContains here because the PID in the WHERE clause
         // may be prefixed with the table name.
         self::assertContains(
             'pid IN (' . $this->dummySysFolderPid . ')',
-            $this->fixture->getWhereClause()
+            $this->subject->getWhereClause()
         );
     }
 
@@ -522,12 +522,12 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
 
     public function testLimitToTitleFindsRecordWithThatTitle()
     {
-        $this->fixture->limitToTitle('foo');
+        $this->subject->limitToTitle('foo');
         $this->testingFramework->createRecord(
             'tx_seminars_test',
             ['title' => 'foo']
         );
-        $bag = $this->fixture->build();
+        $bag = $this->subject->build();
 
         self::assertEquals(
             1,
@@ -537,12 +537,12 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
 
     public function testLimitToTitleIgnoresRecordWithOtherTitle()
     {
-        $this->fixture->limitToTitle('foo');
+        $this->subject->limitToTitle('foo');
         $this->testingFramework->createRecord(
             'tx_seminars_test',
             ['title' => 'bar']
         );
-        $bag = $this->fixture->build();
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -555,13 +555,13 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
 
     public function testLimitToTitleAndPagesFindsRecordThatMatchesBoth()
     {
-        $this->fixture->setSourcePages($this->dummySysFolderPid);
-        $this->fixture->limitToTitle('foo');
+        $this->subject->setSourcePages($this->dummySysFolderPid);
+        $this->subject->limitToTitle('foo');
         $this->testingFramework->createRecord(
             'tx_seminars_test',
             ['title' => 'foo', 'pid' => $this->dummySysFolderPid]
         );
-        $bag = $this->fixture->build();
+        $bag = $this->subject->build();
 
         self::assertEquals(
             1,
@@ -571,13 +571,13 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
 
     public function testLimitToTitleAndPagesExcludesRecordThatMatchesOnlyTheTitle()
     {
-        $this->fixture->setSourcePages($this->dummySysFolderPid);
-        $this->fixture->limitToTitle('foo');
+        $this->subject->setSourcePages($this->dummySysFolderPid);
+        $this->subject->limitToTitle('foo');
         $this->testingFramework->createRecord(
             'tx_seminars_test',
             ['title' => 'foo']
         );
-        $bag = $this->fixture->build();
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -586,13 +586,13 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
 
     public function testLimitToTitleAndPagesExcludesRecordThatMatchesOnlyThePage()
     {
-        $this->fixture->setSourcePages($this->dummySysFolderPid);
-        $this->fixture->limitToTitle('foo');
+        $this->subject->setSourcePages($this->dummySysFolderPid);
+        $this->subject->limitToTitle('foo');
         $this->testingFramework->createRecord(
             'tx_seminars_test',
             ['title' => 'bar', 'pid' => $this->dummySysFolderPid]
         );
-        $bag = $this->fixture->build();
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -601,12 +601,12 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
 
     public function testLimitToTitleStillExcludesHiddenRecords()
     {
-        $this->fixture->limitToTitle('foo');
+        $this->subject->limitToTitle('foo');
         $this->testingFramework->createRecord(
             'tx_seminars_test',
             ['title' => 'foo', 'hidden' => 1]
         );
-        $bag = $this->fixture->build();
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -615,12 +615,12 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
 
     public function testLimitToTitleStillExcludesDeletedRecords()
     {
-        $this->fixture->limitToTitle('foo');
+        $this->subject->limitToTitle('foo');
         $this->testingFramework->createRecord(
             'tx_seminars_test',
             ['title' => 'foo', 'deleted' => 1]
         );
-        $bag = $this->fixture->build();
+        $bag = $this->subject->build();
 
         self::assertTrue(
             $bag->isEmpty()
@@ -638,16 +638,16 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
             'The parameter $additionalTableName must not be empty.'
         );
 
-        $this->fixture->addAdditionalTableName('');
+        $this->subject->addAdditionalTableName('');
     }
 
     public function testAddAdditionalTableNameWithTableNameAddsAdditionalTableName()
     {
-        $this->fixture->addAdditionalTableName('tx_seminars_seminars');
+        $this->subject->addAdditionalTableName('tx_seminars_seminars');
 
         self::assertContains(
             'tx_seminars_seminars',
-            $this->fixture->getAdditionalTableNames()
+            $this->subject->getAdditionalTableNames()
         );
     }
 
@@ -662,7 +662,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
             'The parameter $additionalTableName must not be empty.'
         );
 
-        $this->fixture->removeAdditionalTableName('');
+        $this->subject->removeAdditionalTableName('');
     }
 
     public function testRemoveAdditionalTableNameWithNotSetTableNameThrowsException()
@@ -673,17 +673,17 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
             'of additional table names.'
         );
 
-        $this->fixture->removeAdditionalTableName('tx_seminars_seminars');
+        $this->subject->removeAdditionalTableName('tx_seminars_seminars');
     }
 
     public function testRemoveAdditionalTableNameWithSetTableNameRemovesAdditionalTableName()
     {
-        $this->fixture->addAdditionalTableName('tx_seminars_seminars');
-        $this->fixture->removeAdditionalTableName('tx_seminars_seminars');
+        $this->subject->addAdditionalTableName('tx_seminars_seminars');
+        $this->subject->removeAdditionalTableName('tx_seminars_seminars');
 
         self::assertNotContains(
             'tx_seminars_seminars',
-            $this->fixture->getAdditionalTableNames()
+            $this->subject->getAdditionalTableNames()
         );
     }
 
@@ -693,31 +693,31 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
 
     public function testSetOrderByWithOrderBySetsOrderBy()
     {
-        $this->fixture->setOrderBy('field ASC');
+        $this->subject->setOrderBy('field ASC');
 
         self::assertEquals(
             'field ASC',
-            $this->fixture->getOrderBy()
+            $this->subject->getOrderBy()
         );
     }
 
     public function testSetOrderByWithEmptyStringRemovesOrderBy()
     {
-        $this->fixture->setOrderBy('');
+        $this->subject->setOrderBy('');
 
         self::assertEquals(
             '',
-            $this->fixture->getOrderBy()
+            $this->subject->getOrderBy()
         );
     }
 
     public function testSetOrderByWithOrderByActuallySortsTheBag()
     {
-        $this->fixture->setOrderBy('uid DESC');
+        $this->subject->setOrderBy('uid DESC');
         $eventUid1 = $this->testingFramework->createRecord('tx_seminars_test');
         $eventUid2 = $this->testingFramework->createRecord('tx_seminars_test');
 
-        $testBag = $this->fixture->build();
+        $testBag = $this->subject->build();
         self::assertEquals(
             2,
             $testBag->count()
@@ -739,21 +739,21 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
 
     public function testSetLimitWithNonEmptyLimitSetsLimit()
     {
-        $this->fixture->setLimit('0, 30');
+        $this->subject->setLimit('0, 30');
 
         self::assertEquals(
             '0, 30',
-            $this->fixture->getLimit()
+            $this->subject->getLimit()
         );
     }
 
     public function testSetLimitWithEmptyStringRemovesLimit()
     {
-        $this->fixture->setLimit('');
+        $this->subject->setLimit('');
 
         self::assertEquals(
             '',
-            $this->fixture->getLimit()
+            $this->subject->getLimit()
         );
     }
 
@@ -761,8 +761,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
     {
         $this->testingFramework->createRecord('tx_seminars_test');
         $this->testingFramework->createRecord('tx_seminars_test');
-        $this->fixture->setLimit('0, 1');
-        $bag = $this->fixture->build();
+        $this->subject->setLimit('0, 1');
+        $bag = $this->subject->build();
 
         self::assertEquals(
             1,
@@ -778,7 +778,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
     {
         self::assertContains(
             'tx_seminars_test.is_dummy_record = 1',
-            $this->fixture->getWhereClause()
+            $this->subject->getWhereClause()
         );
     }
 }

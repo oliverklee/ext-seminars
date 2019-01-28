@@ -10,7 +10,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CountdownTest extends \Tx_Phpunit_TestCa
     /**
      * @var \Tx_Seminars_ViewHelper_Countdown
      */
-    private $fixture;
+    private $subject;
 
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -28,7 +28,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CountdownTest extends \Tx_Phpunit_TestCa
 
         $this->translator = \Tx_Oelib_TranslatorRegistry::get('seminars');
 
-        $this->fixture = new \Tx_Seminars_ViewHelper_Countdown();
+        $this->subject = new \Tx_Seminars_ViewHelper_Countdown();
     }
 
     protected function tearDown()
@@ -49,7 +49,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CountdownTest extends \Tx_Phpunit_TestCa
                 $offset,
                 $this->translator->translate('countdown_seconds_plural')
             ),
-            $this->fixture->render($GLOBALS['SIM_ACCESS_TIME'] + $offset)
+            $this->subject->render($GLOBALS['SIM_ACCESS_TIME'] + $offset)
         );
     }
 
@@ -66,7 +66,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CountdownTest extends \Tx_Phpunit_TestCa
                 $offset,
                 $this->translator->translate('countdown_minutes_singular')
             ),
-            $this->fixture->render($GLOBALS['SIM_ACCESS_TIME'] + $offset)
+            $this->subject->render($GLOBALS['SIM_ACCESS_TIME'] + $offset)
         );
     }
 
@@ -83,7 +83,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CountdownTest extends \Tx_Phpunit_TestCa
                 $offset,
                 $this->translator->translate('countdown_minutes_plural')
             ),
-            $this->fixture->render($GLOBALS['SIM_ACCESS_TIME'] + $offset)
+            $this->subject->render($GLOBALS['SIM_ACCESS_TIME'] + $offset)
         );
     }
 
@@ -100,7 +100,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CountdownTest extends \Tx_Phpunit_TestCa
                 $offset,
                 $this->translator->translate('countdown_hours_singular')
             ),
-            $this->fixture->render($GLOBALS['SIM_ACCESS_TIME'] + $offset)
+            $this->subject->render($GLOBALS['SIM_ACCESS_TIME'] + $offset)
         );
     }
 
@@ -117,7 +117,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CountdownTest extends \Tx_Phpunit_TestCa
                 $offset,
                 $this->translator->translate('countdown_hours_plural')
             ),
-            $this->fixture->render($GLOBALS['SIM_ACCESS_TIME'] + $offset)
+            $this->subject->render($GLOBALS['SIM_ACCESS_TIME'] + $offset)
         );
     }
 
@@ -134,7 +134,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CountdownTest extends \Tx_Phpunit_TestCa
                 $offset,
                 $this->translator->translate('countdown_days_singular')
             ),
-            $this->fixture->render($GLOBALS['SIM_ACCESS_TIME'] + $offset)
+            $this->subject->render($GLOBALS['SIM_ACCESS_TIME'] + $offset)
         );
     }
 
@@ -151,7 +151,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CountdownTest extends \Tx_Phpunit_TestCa
                 $offset,
                 $this->translator->translate('countdown_days_plural')
             ),
-            $this->fixture->render($GLOBALS['SIM_ACCESS_TIME'] + $offset)
+            $this->subject->render($GLOBALS['SIM_ACCESS_TIME'] + $offset)
         );
     }
 }

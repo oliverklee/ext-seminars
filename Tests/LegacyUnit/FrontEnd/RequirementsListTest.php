@@ -10,7 +10,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends \Tx_Phpunit_T
     /**
      * @var \Tx_Seminars_FrontEnd_RequirementsList
      */
-    protected $fixture = null;
+    protected $subject = null;
 
     /**
      * @var int the UID of a seminar to which the plugin relates
@@ -42,7 +42,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends \Tx_Phpunit_T
             ]
         );
 
-        $this->fixture = new \Tx_Seminars_FrontEnd_RequirementsList(
+        $this->subject = new \Tx_Seminars_FrontEnd_RequirementsList(
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             $GLOBALS['TSFE']->cObj
         );
@@ -69,7 +69,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends \Tx_Phpunit_T
             'No event was set, please set an event before calling render'
         );
 
-        $this->fixture->render();
+        $this->subject->render();
     }
 
     /**
@@ -95,11 +95,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends \Tx_Phpunit_T
             $requiredEvent,
             'requirements'
         );
-        $this->fixture->setEvent(new \Tx_Seminars_OldModel_Event($this->seminarUid));
+        $this->subject->setEvent(new \Tx_Seminars_OldModel_Event($this->seminarUid));
 
         self::assertContains(
             'required &amp; foo',
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 
@@ -108,7 +108,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends \Tx_Phpunit_T
      */
     public function renderLinksOneRequirementToTheSingleView()
     {
-        $this->fixture->setConfigurationValue(
+        $this->subject->setConfigurationValue(
             'detailPID',
             $this->testingFramework->createFrontEndPage()
         );
@@ -130,11 +130,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends \Tx_Phpunit_T
             $requiredEvent,
             'requirements'
         );
-        $this->fixture->setEvent(new \Tx_Seminars_OldModel_Event($this->seminarUid));
+        $this->subject->setEvent(new \Tx_Seminars_OldModel_Event($this->seminarUid));
 
         self::assertRegExp(
             '/<a href=.*' . $requiredEvent . '.*>required_foo<\\/a>/',
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 
@@ -174,11 +174,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends \Tx_Phpunit_T
             $requiredEvent2,
             'requirements'
         );
-        $this->fixture->setEvent(new \Tx_Seminars_OldModel_Event($this->seminarUid));
+        $this->subject->setEvent(new \Tx_Seminars_OldModel_Event($this->seminarUid));
 
         self::assertRegExp(
             '/required_foo.*required_bar/s',
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 
@@ -196,7 +196,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends \Tx_Phpunit_T
             'No FE user is currently logged in. Please call this function only when a FE user is logged in.'
         );
 
-        $this->fixture->limitToMissingRegistrations();
+        $this->subject->limitToMissingRegistrations();
     }
 
     /**
@@ -254,12 +254,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends \Tx_Phpunit_T
             'tx_seminars_attendances',
             ['seminar' => $requiredDate2, 'user' => $userUid]
         );
-        $this->fixture->setEvent(new \Tx_Seminars_OldModel_Event($this->seminarUid));
-        $this->fixture->limitToMissingRegistrations();
+        $this->subject->setEvent(new \Tx_Seminars_OldModel_Event($this->seminarUid));
+        $this->subject->limitToMissingRegistrations();
 
         self::assertNotContains(
             'required_bar',
-            $this->fixture->render()
+            $this->subject->render()
         );
     }
 }

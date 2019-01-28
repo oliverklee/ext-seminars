@@ -18,7 +18,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends \Tx_Phpunit_T
     /**
      * @var RegistrationsList
      */
-    private $fixture;
+    private $subject;
 
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -53,7 +53,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends \Tx_Phpunit_T
         $document = new DocumentTemplate();
         $this->backEndModule->doc = $document;
 
-        $this->fixture = new RegistrationsList($this->backEndModule);
+        $this->subject = new RegistrationsList($this->backEndModule);
     }
 
     protected function tearDown()
@@ -88,7 +88,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends \Tx_Phpunit_T
 
         self::assertContains(
             'accreditation number 123',
-            $this->fixture->show()
+            $this->subject->show()
         );
     }
 
@@ -113,7 +113,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends \Tx_Phpunit_T
 
         self::assertContains(
             '&amp;&quot;&lt;&gt;',
-            $this->fixture->show()
+            $this->subject->show()
         );
     }
 
@@ -138,7 +138,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends \Tx_Phpunit_T
 
         self::assertContains(
             'foo_user',
-            $this->fixture->show()
+            $this->subject->show()
         );
     }
 
@@ -164,7 +164,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends \Tx_Phpunit_T
 
         self::assertNotContains(
             'foo_user',
-            $this->fixture->show()
+            $this->subject->show()
         );
     }
 
@@ -187,7 +187,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends \Tx_Phpunit_T
 
         self::assertNotContains(
             'foo_user',
-            $this->fixture->show()
+            $this->subject->show()
         );
     }
 
@@ -211,7 +211,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends \Tx_Phpunit_T
 
         self::assertContains(
             'event_1',
-            $this->fixture->show()
+            $this->subject->show()
         );
     }
 
@@ -236,7 +236,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends \Tx_Phpunit_T
 
         self::assertNotContains(
             'event_1',
-            $this->fixture->show()
+            $this->subject->show()
         );
     }
 
@@ -261,7 +261,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends \Tx_Phpunit_T
 
         self::assertContains(
             'user_foo',
-            $this->fixture->show()
+            $this->subject->show()
         );
     }
 
@@ -291,7 +291,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends \Tx_Phpunit_T
 
         self::assertContains(
             'event for registration in subfolder',
-            $this->fixture->show()
+            $this->subject->show()
         );
     }
 
@@ -315,7 +315,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends \Tx_Phpunit_T
 
         self::assertContains(
             'csv=1',
-            $this->fixture->show()
+            $this->subject->show()
         );
     }
 
@@ -331,7 +331,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends \Tx_Phpunit_T
 
         self::assertNotContains(
             'mod.php?M=web_txseminarsM2&amp;csv=1',
-            $this->fixture->show()
+            $this->subject->show()
         );
     }
 
@@ -350,7 +350,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends \Tx_Phpunit_T
 
         self::assertContains(
             'event_1',
-            $this->fixture->show()
+            $this->subject->show()
         );
     }
 
@@ -370,7 +370,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends \Tx_Phpunit_T
 
         self::assertContains(
             '(UID ' . $eventUid . ')',
-            $this->fixture->show()
+            $this->subject->show()
         );
     }
 
@@ -396,7 +396,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends \Tx_Phpunit_T
 
         self::assertContains(
             'user_foo',
-            $this->fixture->show()
+            $this->subject->show()
         );
     }
 
@@ -423,7 +423,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends \Tx_Phpunit_T
 
         self::assertNotContains(
             'user_foo',
-            $this->fixture->show()
+            $this->subject->show()
         );
     }
 
@@ -449,7 +449,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends \Tx_Phpunit_T
 
         self::assertContains(
             'tx_seminars_pi2[eventUid]=' . $eventUid,
-            $this->fixture->show()
+            $this->subject->show()
         );
     }
 
@@ -475,7 +475,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends \Tx_Phpunit_T
 
         self::assertNotContains(
             'tx_seminars_pi2[pid]=',
-            $this->fixture->show()
+            $this->subject->show()
         );
     }
 
@@ -499,7 +499,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends \Tx_Phpunit_T
 
         self::assertNotContains(
             'tx_seminars_pi2[eventUid]=',
-            $this->fixture->show()
+            $this->subject->show()
         );
     }
 
@@ -526,7 +526,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends \Tx_Phpunit_T
 
         self::assertContains(
             'edit[tx_seminars_attendances][' . $newRegistrationFolder . ']=new',
-            $this->fixture->show()
+            $this->subject->show()
         );
     }
 }

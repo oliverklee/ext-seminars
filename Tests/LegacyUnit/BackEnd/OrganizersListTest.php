@@ -18,7 +18,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_OrganizersListTest extends \Tx_Phpunit_Test
     /**
      * @var OrganizersList
      */
-    private $fixture;
+    private $subject;
 
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -55,7 +55,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_OrganizersListTest extends \Tx_Phpunit_Test
         $document = new DocumentTemplate();
         $this->backEndModule->doc = $document;
 
-        $this->fixture = new OrganizersList($this->backEndModule);
+        $this->subject = new OrganizersList($this->backEndModule);
     }
 
     protected function tearDown()
@@ -82,7 +82,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_OrganizersListTest extends \Tx_Phpunit_Test
 
         self::assertContains(
             'Organizer in subfolder',
-            $this->fixture->show()
+            $this->subject->show()
         );
     }
 
@@ -109,7 +109,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_OrganizersListTest extends \Tx_Phpunit_Test
 
         self::assertContains(
             'edit[tx_seminars_organizers][' . $newOrganizerFolder . ']=new',
-            $this->fixture->show()
+            $this->subject->show()
         );
     }
 }

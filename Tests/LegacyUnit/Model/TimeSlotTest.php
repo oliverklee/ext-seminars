@@ -10,11 +10,11 @@ class Tx_Seminars_Tests_Unit_Model_TimeSlotTest extends \Tx_Phpunit_TestCase
     /**
      * @var \Tx_Seminars_Model_TimeSlot
      */
-    private $fixture;
+    private $subject;
 
     protected function setUp()
     {
-        $this->fixture = new \Tx_Seminars_Model_TimeSlot();
+        $this->subject = new \Tx_Seminars_Model_TimeSlot();
     }
 
     ////////////////////////////////////
@@ -26,11 +26,11 @@ class Tx_Seminars_Tests_Unit_Model_TimeSlotTest extends \Tx_Phpunit_TestCase
      */
     public function getEntryDateAsUnixTimeStampWithoutEntryDateReturnsZero()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertEquals(
             0,
-            $this->fixture->getEntryDateAsUnixTimeStamp()
+            $this->subject->getEntryDateAsUnixTimeStamp()
         );
     }
 
@@ -39,11 +39,11 @@ class Tx_Seminars_Tests_Unit_Model_TimeSlotTest extends \Tx_Phpunit_TestCase
      */
     public function getEntryDateAsUnixTimeStampWithEntryDateReturnsEntryDate()
     {
-        $this->fixture->setData(['entry_date' => 42]);
+        $this->subject->setData(['entry_date' => 42]);
 
         self::assertEquals(
             42,
-            $this->fixture->getEntryDateAsUnixTimeStamp()
+            $this->subject->getEntryDateAsUnixTimeStamp()
         );
     }
 
@@ -57,7 +57,7 @@ class Tx_Seminars_Tests_Unit_Model_TimeSlotTest extends \Tx_Phpunit_TestCase
             'The parameter $entryDate must be >= 0.'
         );
 
-        $this->fixture->setEntryDateAsUnixTimeStamp(-1);
+        $this->subject->setEntryDateAsUnixTimeStamp(-1);
     }
 
     /**
@@ -65,11 +65,11 @@ class Tx_Seminars_Tests_Unit_Model_TimeSlotTest extends \Tx_Phpunit_TestCase
      */
     public function setEntryDateAsUnixTimeStampWithZeroTimeStampSetsEntryDate()
     {
-        $this->fixture->setEntryDateAsUnixTimeStamp(0);
+        $this->subject->setEntryDateAsUnixTimeStamp(0);
 
         self::assertEquals(
             0,
-            $this->fixture->getEntryDateAsUnixTimeStamp()
+            $this->subject->getEntryDateAsUnixTimeStamp()
         );
     }
 
@@ -78,11 +78,11 @@ class Tx_Seminars_Tests_Unit_Model_TimeSlotTest extends \Tx_Phpunit_TestCase
      */
     public function setEntryDateAsUnixTimeStampWithPositiveTimeStampSetsEntryDate()
     {
-        $this->fixture->setEntryDateAsUnixTimeStamp(42);
+        $this->subject->setEntryDateAsUnixTimeStamp(42);
 
         self::assertEquals(
             42,
-            $this->fixture->getEntryDateAsUnixTimeStamp()
+            $this->subject->getEntryDateAsUnixTimeStamp()
         );
     }
 
@@ -91,10 +91,10 @@ class Tx_Seminars_Tests_Unit_Model_TimeSlotTest extends \Tx_Phpunit_TestCase
      */
     public function hasEntryDateWithoutEntryDateReturnsFalse()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
         self::assertFalse(
-            $this->fixture->hasEntryDate()
+            $this->subject->hasEntryDate()
         );
     }
 
@@ -103,10 +103,10 @@ class Tx_Seminars_Tests_Unit_Model_TimeSlotTest extends \Tx_Phpunit_TestCase
      */
     public function hasEntryDateWithEntryDateReturnsTrue()
     {
-        $this->fixture->setEntryDateAsUnixTimeStamp(42);
+        $this->subject->setEntryDateAsUnixTimeStamp(42);
 
         self::assertTrue(
-            $this->fixture->hasEntryDate()
+            $this->subject->hasEntryDate()
         );
     }
 
@@ -119,9 +119,9 @@ class Tx_Seminars_Tests_Unit_Model_TimeSlotTest extends \Tx_Phpunit_TestCase
      */
     public function getSeminarByDefaultReturnsNull()
     {
-        $this->fixture->setData([]);
+        $this->subject->setData([]);
 
-        self::assertNull($this->fixture->getSeminar());
+        self::assertNull($this->subject->getSeminar());
     }
 
     /**
@@ -131,8 +131,8 @@ class Tx_Seminars_Tests_Unit_Model_TimeSlotTest extends \Tx_Phpunit_TestCase
     {
         $seminar = new \Tx_Seminars_Model_Event();
 
-        $this->fixture->setSeminar($seminar);
+        $this->subject->setSeminar($seminar);
 
-        self::assertSame($seminar, $this->fixture->getSeminar());
+        self::assertSame($seminar, $this->subject->getSeminar());
     }
 }
