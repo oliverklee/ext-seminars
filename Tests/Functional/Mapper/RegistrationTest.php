@@ -1,14 +1,21 @@
 <?php
 
-namespace OliverKlee\Seminars\Tests\LegacyFunctional\Mapper;
+namespace OliverKlee\Seminars\Tests\Functional\Mapper;
+
+use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 
 /**
  * Test case.
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class RegistrationTest extends \Tx_Phpunit_TestCase
+class RegistrationTest extends FunctionalTestCase
 {
+    /**
+     * @var string[]
+     */
+    protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
+
     /**
      * @var \Tx_Oelib_TestingFramework
      */
@@ -26,6 +33,7 @@ class RegistrationTest extends \Tx_Phpunit_TestCase
 
     protected function setUp()
     {
+        parent::setUp();
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
         $this->userMapper = new \Tx_Seminars_Mapper_FrontEndUser();
@@ -36,6 +44,7 @@ class RegistrationTest extends \Tx_Phpunit_TestCase
     protected function tearDown()
     {
         $this->testingFramework->cleanUp();
+        parent::tearDown();
     }
 
     /**

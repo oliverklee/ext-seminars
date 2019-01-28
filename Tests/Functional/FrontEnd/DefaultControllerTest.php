@@ -1,13 +1,20 @@
 <?php
-namespace OliverKlee\Seminars\Tests\LegacyFunctional\FrontEnd;
+namespace OliverKlee\Seminars\Tests\Functional\FrontEnd;
+
+use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 
 /**
  * Test case.
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class DefaultControllerTest extends \Tx_Phpunit_TestCase
+class DefaultControllerTest extends FunctionalTestCase
 {
+    /**
+     * @var string[]
+     */
+    protected $testExtensionsToLoad = ['typo3conf/ext/seminars'];
+
     /**
      * Extracts the class name from something like '...->foo'.
      *
@@ -17,9 +24,9 @@ class DefaultControllerTest extends \Tx_Phpunit_TestCase
      */
     private function extractClassNameFromUserFunction($reference)
     {
-        $parts = explode('->', $reference);
+        $parts = \explode('->', $reference);
 
-        return array_shift($parts);
+        return \array_shift($parts);
     }
 
     /**
@@ -31,9 +38,9 @@ class DefaultControllerTest extends \Tx_Phpunit_TestCase
      */
     private function extractMethodNameFromUserFunction($reference)
     {
-        $parts = explode('->', $reference);
+        $parts = \explode('->', $reference);
 
-        return array_pop($parts);
+        return \array_pop($parts);
     }
 
     /**
@@ -55,16 +62,16 @@ class DefaultControllerTest extends \Tx_Phpunit_TestCase
         $configuration = $GLOBALS['TYPO3_CONF_VARS']['FE']['defaultTypoScript_setup.']['defaultContentRendering'];
 
         $matches = [];
-        preg_match('/plugin\\.tx_seminars_pi1\\.userFunc = ([^\\s]+)/', $configuration, $matches);
+        \preg_match('/plugin\\.tx_seminars_pi1\\.userFunc = ([^\\s]+)/', $configuration, $matches);
         $className = $this->extractClassNameFromUserFunction($matches[1]);
         $methodName = $this->extractMethodNameFromUserFunction($matches[1]);
 
-        self::assertTrue(class_exists($className), 'Class ' . $className . ' does not exist.');
+        self::assertTrue(\class_exists($className), 'Class ' . $className . ' does not exist.');
         self::assertSame(\Tx_Seminars_FrontEnd_DefaultController::class, $className);
 
         $instance = new \Tx_Seminars_FrontEnd_DefaultController();
         self::assertTrue(
-            method_exists($instance, $methodName),
+            \method_exists($instance, $methodName),
             'Method ' . $methodName . ' does not exist in class ' . $className
         );
     }
