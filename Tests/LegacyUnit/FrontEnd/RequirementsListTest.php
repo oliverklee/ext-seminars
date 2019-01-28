@@ -12,22 +12,22 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends TestCase
     /**
      * @var \Tx_Seminars_FrontEnd_RequirementsList
      */
-    protected $subject = null;
+    private $subject = null;
 
     /**
      * @var int the UID of a seminar to which the plugin relates
      */
-    protected $seminarUid = 0;
+    private $seminarUid = 0;
 
     /**
      * @var \Tx_Oelib_TestingFramework
      */
-    protected $testingFramework = null;
+    private $testingFramework = null;
 
     /**
      * @var int
      */
-    protected $systemFolderPid = 0;
+    private $systemFolderPid = 0;
 
     protected function setUp()
     {

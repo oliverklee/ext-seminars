@@ -13,14 +13,16 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
     /**
      * @var \Tx_Seminars_Tests_Unit_Fixtures_BagBuilder_Testing
      */
-    private $subject;
+    private $subject = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework
      */
-    private $testingFramework;
+    private $testingFramework = null;
 
-    /** @var int PID of a dummy system folder */
+    /**
+     * @var int PID of a dummy system folder
+     */
     private $dummySysFolderPid = 0;
 
     protected function setUp()

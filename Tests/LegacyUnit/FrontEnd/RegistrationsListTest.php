@@ -13,17 +13,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends TestCase
     /**
      * @var \Tx_Seminars_FrontEnd_RegistrationsList
      */
-    private $subject;
+    private $subject = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework
      */
-    private $testingFramework;
+    private $testingFramework = null;
 
     /**
      * @var int the UID of a seminar to which the fixture relates
      */
-    private $seminarUid;
+    private $seminarUid = 0;
 
     /**
      * @var int the UID of a front end user for testing purposes

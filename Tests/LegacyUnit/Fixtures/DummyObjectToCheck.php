@@ -6,7 +6,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Fixtures;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-final class DummyObjectToCheck extends \Tx_Oelib_TemplateHelper implements \Tx_Oelib_Interface_ConfigurationCheckable
+class DummyObjectToCheck extends \Tx_Oelib_TemplateHelper implements \Tx_Oelib_Interface_ConfigurationCheckable
 {
     /**
      * @param array $configuration

@@ -5,7 +5,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-final class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars_OldModel_Event
+class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars_OldModel_Event
 {
     /**
      * The constructor.

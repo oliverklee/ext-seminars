@@ -18,12 +18,12 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends TestCase
     /**
      * @var \Tx_Seminars_Tests_Unit_Fixtures_BackEnd_TestingEventMailForm
      */
-    private $subject;
+    private $subject = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework
      */
-    private $testingFramework;
+    private $testingFramework = null;
 
     /**
      * UID of a dummy system folder
@@ -49,7 +49,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends TestCase
     /**
      * @var \Tx_Oelib_EmailCollector
      */
-    protected $mailer = null;
+    private $mailer = null;
 
     protected function setUp()
     {

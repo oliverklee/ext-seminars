@@ -14,22 +14,22 @@ class Tx_Seminars_Tests_Unit_Csv_BackEndRegistrationAccessCheckTest extends Test
     /**
      * @var \Tx_Seminars_Csv_BackEndRegistrationAccessCheck
      */
-    protected $subject = null;
+    private $subject = null;
 
     /**
      * @var PHPUnit_Framework_MockObject_MockObject|BackendUserAuthentication
      */
-    protected $backEndUser = null;
+    private $backEndUser = null;
 
     /**
      * @var BackendUserAuthentication
      */
-    protected $backEndUserBackup = null;
+    private $backEndUserBackup = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework
      */
-    protected $testingFramework = null;
+    private $testingFramework = null;
 
     protected function setUp()
     {
