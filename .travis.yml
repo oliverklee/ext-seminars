@@ -42,27 +42,25 @@ script:
   composer ci:php:lint;
 - >
   echo;
+  echo "Running the unit tests";
+  composer ci:tests:unit;
+- >
+  echo;
   echo "Running the legacy unit tests";
-  composer ci:tests:legacy-unit;
+  composer ci:tests:unit-legacy;
 - >
   echo;
   echo "Running the legacy functional tests";
-  composer ci:tests:legacy-functional;
+  composer ci:tests:functional-legacy;
 
 jobs:
   include:
-  - stage: test
-    php: 7.2
-    env: TYPO3=^8.7 RUN_TESTS_COMMAND=".Build/vendor/bin/typo3 phpunit:run"
   - stage: test
     php: 7.1
     env: TYPO3=^8.7 RUN_TESTS_COMMAND=".Build/vendor/bin/typo3 phpunit:run"
   - stage: test
     php: 7.0
     env: TYPO3=^8.7 RUN_TESTS_COMMAND=".Build/vendor/bin/typo3 phpunit:run"
-  - stage: test
-    php: 7.2
-    env: TYPO3=^7.6 RUN_TESTS_COMMAND=".Build/public/typo3/cli_dispatch.phpsh phpunit"
   - stage: test
     php: 7.1
     env: TYPO3=^7.6 RUN_TESTS_COMMAND=".Build/public/typo3/cli_dispatch.phpsh phpunit"
