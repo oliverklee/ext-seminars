@@ -688,7 +688,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             'uid_local = ' . $this->getUid() . ' AND uid = uid_foreign' .
             \Tx_Oelib_Db::enableFields('tx_seminars_sites'),
             '',
-            'sorting ASC'
+            'tx_seminars_seminars_place_mm.sorting ASC'
         );
     }
 
