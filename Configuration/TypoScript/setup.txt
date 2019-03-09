@@ -9,3 +9,5 @@
 <INCLUDE_TYPOSCRIPT: source="FILE:./CsvExport.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:./Publication.txt">
 <INCLUDE_TYPOSCRIPT: source="FILE:./RegistrationDigestEmail.txt">
+
+<INCLUDE_TYPOSCRIPT: source="FILE:./Extbase.txt">

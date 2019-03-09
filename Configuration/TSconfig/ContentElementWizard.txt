@@ -8,6 +8,15 @@ mod.wizards.newContentElement.wizardItems.plugins {
                 CType = list
                 list_type = seminars_pi1
             }
+        },
+        seminars_pi3 {
+            iconIdentifier = ext-seminars-wizard-icon
+            title = LLL:EXT:seminars/Resources/Private/Language/locallang_pi3.xlf:tt_content.list_type_pi3
+            description = LLL:EXT:seminars/Resources/Private/Language/locallang_pi3.xlf:pi3_description
+            tt_content_defValues {
+                CType = list
+                list_type = seminars_pi3
+            }
         }
     }
 }

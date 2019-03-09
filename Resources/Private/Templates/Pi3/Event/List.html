@@ -1,0 +1,34 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:layout name="DefaultLayout" />
+
+<f:section name="main">
+
+    <div class="event-list">
+        <f:for each="{events}" as="event">
+            <a href="#" class="event-list__item">
+                <f:for each="{event.imageFal}" as="image">
+                    <f:image image="{image}" width="400m" height="200m"/>
+                </f:for>
+                <div class="event-list__item__date">
+                    <f:if condition="{event.beginDate}">
+                        <f:format.date date="{event.beginDateAsUnixTimeStamp}" format="d.m.Y" />
+                    </f:if>
+                    <f:if condition="{event.endDate}">
+                        – <f:format.date date="{event.endDateAsUnixTimeStamp}" format="d.m.Y" />
+                    </f:if>
+                </div>
+                <h3>{event.title}</h3>
+                <f:if condition="{event.subtitle}">
+                    <h4>{event.subtitle}</h4>
+                </f:if>
+                <div class="event-list__item__teaser">
+                    <f:format.html>{event.teaser}</f:format.html>
+                </div>
+            </a>
+            <hr />
+        </f:for>
+    </div>
+
+</f:section>

@@ -1,5 +1,7 @@
 <?php
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * This class represents a mapper for events.
  *
@@ -165,4 +167,85 @@ class Tx_Seminars_Mapper_Event extends \Tx_Oelib_DataMapper
 
         return $this->findByWhereClause($whereClause, 'begin_date ASC');
     }
+
+    /**
+     * @return \Tx_Oelib_List the \Tx_Oelib_List<Tx_Seminars_Model_Event>
+     */
+    public function findBySettings($settings) {
+        $whereClause = ' 1=1 ';
+        //Pages
+        if (strlen($settings['pages']) > 0) {
+
+            $pidArray = GeneralUtility::intExplode(',',$settings['pages'],true);
+            $recursive = (int)$settings['recursive'];
+            if ($recursive > 0) {
+                /** @var \TYPO3\CMS\Core\Database\QueryGenerator $queryGenerator */
+                $queryGenerator = GeneralUtility::makeInstance( 'TYPO3\\CMS\\Core\\Database\\QueryGenerator' );
+                $pidArrayTemp = $pidArray;
+                foreach ($pidArray as $pid) {
+                    $recursivePidList = $queryGenerator->getTreeList($pid, $recursive, 0, 1); //Will be a string
+                    $pidArrayRecursive = GeneralUtility::intExplode(',',$recursivePidList,true);
+                    $pidArrayTemp = array_merge($pidArrayTemp, $pidArrayRecursive);
+                }
+                $pidArray = $pidArrayTemp;
+            }
+            $pidListString = implode(',',$pidArray);
+            $whereClause .= ' AND pid IN (' . $pidListString . ') ';
+        }
+
+        //Categories
+        if (strlen($settings['limitListViewToCategories']) > 0) {
+            $limitCategories = GeneralUtility::intExplode(',',$settings['limitListViewToCategories'],true);
+            $whereClause .= ' AND ( ';
+            foreach ($limitCategories as $categoryUid) {
+                $whereClause .= $categoryUid . ' IN ( SELECT uid_foreign FROM tx_seminars_seminars_categories_mm
+                    WHERE tx_seminars_seminars_categories_mm.uid_local = tx_seminars_seminars.uid) OR ';
+
+            }
+            $whereClause = rtrim ($whereClause, 'OR ');
+            $whereClause .= ' ) ';
+        }
+
+        //EventType
+        if (strlen($settings['limitListViewToEventTypes']) > 0) {
+            $limitEventTypes = GeneralUtility::intExplode(',',$settings['limitListViewToEventTypes'],true);
+            $whereClause .= ' AND ( ';
+            foreach ($limitEventTypes as $eventTypeUid) {
+                $whereClause .= ' event_type = ' . $eventTypeUid . ' OR ';
+            }
+            $whereClause = rtrim ($whereClause, 'OR ');
+            $whereClause .= ' ) ';
+        }
+
+        //Place
+        if (strlen($settings['limitListViewToPlaces']) > 0) {
+            $limitPlaces = GeneralUtility::intExplode(',', $settings['limitListViewToPlaces'], true);
+            $whereClause .= ' AND ( ';
+            foreach ($limitPlaces AS $placeUid) {
+                $whereClause .= $placeUid . ' IN ( SELECT uid_foreign FROM tx_seminars_seminars_place_mm
+                    WHERE tx_seminars_seminars_place_mm.uid_local = tx_seminars_seminars.uid) OR ';
+            }
+            $whereClause = rtrim ($whereClause, 'OR ');
+            $whereClause .= ' ) ';
+        }
+
+        //Organizer
+        if (strlen($settings['limitListViewToOrganizers']) > 0) {
+            $limitOrganizers = GeneralUtility::intExplode(',', $settings['limitListViewToOrganizers'], true);
+            $whereClause .= ' AND ( ';
+            foreach ($limitOrganizers as $organizerUid) {
+                $whereClause .= $organizerUid . ' IN ( SELECT uid_foreign FROM tx_seminars_seminars_organizers_mm
+                    WHERE tx_seminars_seminars_organizers_mm.uid_local = tx_seminars_seminars.uid) OR ';
+
+            }
+            $whereClause = rtrim ($whereClause, 'OR ');
+            $whereClause .= ' ) ';
+        }
+
+        return $this->findByWhereClause($whereClause,$settings['listView']['orderByField'] ? $settings['listView']['orderByField'].' '.$settings['listView']['sortingOrder'] : '');
+
+    }
+
+
+
 }

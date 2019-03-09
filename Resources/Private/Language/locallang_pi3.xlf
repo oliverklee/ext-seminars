@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2016-07-18T21:20:33Z"
+          product-name="seminars">
+        <header/>
+        <body>
+            <trans-unit id="tt_content.list_type_pi3" xml:space="preserve">
+                <source>Events (Extbase)</source>
+            </trans-unit>
+            <trans-unit id="pi3_description" xml:space="preserve">
+                <source>Displays Events in the FE</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

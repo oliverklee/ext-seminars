@@ -44,3 +44,17 @@ if (TYPO3_MODE === 'BE') {
         'EXT:seminars/ext_icon.gif',
     ]
 );
+
+/********** New: pi3 = Extbase Version*******************/
+
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPlugin(
+    [
+        'LLL:EXT:seminars/Resources/Private/Language/locallang_pi3.xlf:tt_content.list_type_pi3',
+        'seminars_pi3',
+        'EXT:seminars/ext_icon.gif',
+    ]
+);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
+    'seminars_pi3',
+    'FILE:EXT:seminars/Configuration/FlexForms/flexforms_pi3.xml'
+);

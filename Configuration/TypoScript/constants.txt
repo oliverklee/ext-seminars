@@ -2,3 +2,19 @@ plugin.tx_seminars_pi1 {
     # cat=plugin.tx_seminars_pi1//; type=string; label=Path to CSS file: location of the CSS file (leave empty to include no CSS file)
     cssFile = EXT:seminars/Resources/Public/CSS/FrontEnd/FrontEnd.css
 }
+
+plugin.tx_seminars_pi3 {
+
+    view {
+        # cat=plugin.tx_seminars_pi3/file; type=string; label=Path to template root (FE)
+        templateRootPath = EXT:seminars/Resources/Private/Templates/Pi3/
+        # cat=plugin.tx_seminars_pi3/file; type=string; label=Path to template partials (FE)
+        partialRootPath = EXT:seminars/Resources/Private/Partials/Pi3/
+        # cat=plugin.tx_seminars_pi3/file; type=string; label=Path to template layouts (FE)
+        layoutRootPath = EXT:seminars/Resources/Private/Layouts/Pi3/
+    }
+    persistence {
+        # cat=plugin.tx_seminars_pi3//a; type=string; label=Default storage PID
+        storagePid =
+    }
+}
