@@ -9,7 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 - Rename SUT from "fixture" to "subject" (#196) 
-- Convert the first tests to nimut/testing-framework (#194, #195)
+- Convert the first tests to nimut/testing-framework (#194, #195, #201)
 - Move to old tests to the "Legacy" namespace (#193)
 
 ### Deprecated
