@@ -1,30 +1,41 @@
 <?php
 
+namespace OliverKlee\Seminars\Tests\Functional\OldModel;
+
+use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+
 /**
  * Test case.
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_OldModel_SpeakerTest extends \Tx_Phpunit_TestCase
+class SpeakerTest extends FunctionalTestCase
 {
+    /**
+     * @var string[]
+     */
+    protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
+
     /**
      * @var \Tx_Oelib_TestingFramework
      */
-    private $testingFramework;
+    private $testingFramework = null;
 
     /**
      * @var \Tx_Seminars_OldModel_Speaker
      */
-    private $subject;
+    private $subject = null;
 
     /**
      * @var \Tx_Seminars_OldModel_Speaker a maximal filled speaker
      */
-    private $maximalFixture;
+    private $maximalFixture = null;
 
     protected function setUp()
     {
+        parent::setUp();
+
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
         $subjectUid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
@@ -57,6 +68,7 @@ class Tx_Seminars_Tests_Unit_OldModel_SpeakerTest extends \Tx_Phpunit_TestCase
     protected function tearDown()
     {
         $this->testingFramework->cleanUp();
+        parent::tearDown();
     }
 
     ///////////////////////
