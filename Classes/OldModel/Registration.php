@@ -93,7 +93,7 @@ class Tx_Seminars_OldModel_Registration extends \Tx_Seminars_OldModel_Abstract
 
         $data = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
         if ($data !== false) {
-            $this->getDataFromDbResult($data);
+            $this->setData($data);
         }
     }
 
