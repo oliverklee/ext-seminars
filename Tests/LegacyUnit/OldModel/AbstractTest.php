@@ -105,16 +105,24 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends \Tx_Phpunit_TestCase
         );
     }
 
-    public function testCreateFromDbResultFailsForNull()
+    /**
+     * @test
+     */
+    public function createFromDirectDataResultsInOkay()
     {
-        $test = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(
-            0,
-            null
-        );
+        $subject = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(0, false, false, ['title' => 'Foo']);
 
-        self::assertFalse(
-            $test->isOk()
-        );
+        self::assertTrue($subject->isOk());
+    }
+
+    /**
+     * @test
+     */
+    public function createFromDbResultFailsForFalse()
+    {
+        $test = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(0, false);
+
+        self::assertFalse($test->isOk());
     }
 
     /**
@@ -148,7 +156,7 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends \Tx_Phpunit_TestCase
 
         $test = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(
             $this->subjectUid,
-            null,
+            false,
             true
         );
 
@@ -199,6 +207,16 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends \Tx_Phpunit_TestCase
             'Test',
             $this->subject->getTitle()
         );
+    }
+
+    /**
+     * @test
+     */
+    public function dataCanBeSetDirectlyInConstructor()
+    {
+        $subject = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(0, false, false, ['title' => 'Foo']);
+
+        self::assertSame('Foo', $subject->getTitle());
     }
 
     //////////////////////////////////

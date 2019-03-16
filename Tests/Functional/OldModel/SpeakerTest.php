@@ -27,47 +27,11 @@ class SpeakerTest extends FunctionalTestCase
      */
     private $subject = null;
 
-    /**
-     * @var \Tx_Seminars_OldModel_Speaker a maximal filled speaker
-     */
-    private $maximalFixture = null;
-
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
-        $subjectUid = $this->testingFramework->createRecord(
-            'tx_seminars_speakers',
-            [
-                'title' => 'Test speaker',
-                'email' => 'foo@test.com',
-            ]
-        );
-        $this->subject = new \Tx_Seminars_OldModel_Speaker($subjectUid);
-
-        $maximalFixtureUid = $this->testingFramework->createRecord(
-            'tx_seminars_speakers',
-            [
-                'title' => 'Test speaker',
-                'organization' => 'Foo inc.',
-                'homepage' => 'http://www.test.com/',
-                'description' => 'foo' . LF . 'bar',
-                'notes' => 'test notes',
-                'address' => 'test address',
-                'phone_work' => '123',
-                'phone_home' => '456',
-                'phone_mobile' => '789',
-                'fax' => '000',
-                'email' => 'maximal-foo@test.com',
-            ]
-        );
-        $this->maximalFixture = new \Tx_Seminars_OldModel_Speaker($maximalFixtureUid);
-    }
-
     protected function tearDown()
     {
-        $this->testingFramework->cleanUp();
+        if ($this->testingFramework !== null) {
+            $this->testingFramework->cleanUp();
+        }
         parent::tearDown();
     }
 
@@ -85,10 +49,7 @@ class SpeakerTest extends FunctionalTestCase
      */
     private function addSkillRelation(array $skillData)
     {
-        $uid = $this->testingFramework->createRecord(
-            'tx_seminars_skills',
-            $skillData
-        );
+        $uid = $this->testingFramework->createRecord('tx_seminars_skills', $skillData);
 
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_speakers',
@@ -106,45 +67,52 @@ class SpeakerTest extends FunctionalTestCase
     // Tests for the utility functions.
     /////////////////////////////////////
 
-    public function testAddSkillRelationReturnsUid()
+    /**
+     * @test
+     */
+    public function addSkillRelationReturnsUid()
     {
-        self::assertTrue(
-            $this->addSkillRelation([]) > 0
-        );
+        $this->createPersistedSubject();
+        self::assertGreaterThan(0, $this->addSkillRelation([]));
     }
 
-    public function testAddSkillRelationCreatesNewUids()
+    /**
+     * @test
+     */
+    public function addSkillRelationCreatesDifferentUids()
     {
-        self::assertNotEquals(
+        $this->createPersistedSubject();
+        self::assertNotSame(
             $this->addSkillRelation([]),
             $this->addSkillRelation([])
         );
     }
 
-    public function testAddSkillRelationIncreasesTheNumberOfSkills()
+    /**
+     * @test
+     */
+    public function addSkillRelationIncreasesTheNumberOfSkills()
     {
-        self::assertEquals(
+        $this->createPersistedSubject();
+
+        self::assertSame(0, $this->subject->getNumberOfSkills());
+
+        $this->addSkillRelation([]);
+        self::assertSame(1, $this->subject->getNumberOfSkills());
+
+        $this->addSkillRelation([]);
+        self::assertSame(2, $this->subject->getNumberOfSkills());
+    }
+
+    /**
+     * @test
+     */
+    public function addSkillRelationCreatesRelations()
+    {
+        $this->createPersistedSubject();
+
+        self::assertSame(
             0,
-            $this->subject->getNumberOfSkills()
-        );
-
-        $this->addSkillRelation([]);
-        self::assertEquals(
-            1,
-            $this->subject->getNumberOfSkills()
-        );
-
-        $this->addSkillRelation([]);
-        self::assertEquals(
-            2,
-            $this->subject->getNumberOfSkills()
-        );
-    }
-
-    public function testAddSkillRelationCreatesRelations()
-    {
-        self::assertEquals(
-            0,
             $this->testingFramework->countRecords(
                 'tx_seminars_speakers_skills_mm',
                 'uid_local=' . $this->subject->getUid()
@@ -152,7 +120,7 @@ class SpeakerTest extends FunctionalTestCase
         );
 
         $this->addSkillRelation([]);
-        self::assertEquals(
+        self::assertSame(
             1,
             $this->testingFramework->countRecords(
                 'tx_seminars_speakers_skills_mm',
@@ -161,7 +129,7 @@ class SpeakerTest extends FunctionalTestCase
         );
 
         $this->addSkillRelation([]);
-        self::assertEquals(
+        self::assertSame(
             2,
             $this->testingFramework->countRecords(
                 'tx_seminars_speakers_skills_mm',
@@ -170,115 +138,99 @@ class SpeakerTest extends FunctionalTestCase
         );
     }
 
-    ////////////////////////////////////////
-    // Tests for creating speaker objects.
-    ////////////////////////////////////////
-
-    public function testCreateFromUid()
+    /**
+     * @test
+     */
+    public function createFromUidMapsAllFields()
     {
-        self::assertTrue(
-            $this->subject->isOk()
-        );
+        $this->createPersistedSubject();
+
+        self::assertTrue($this->subject->isOk());
+        self::assertSame('Test speaker', $this->subject->getTitle());
+        self::assertSame('Foo inc.', $this->subject->getOrganization());
+        self::assertSame('https://www.example.com/', $this->subject->getHomepage());
+        self::assertSame("foo\nbar", $this->subject->getDescriptionRaw());
+        self::assertSame('test notes', $this->subject->getNotes());
+        self::assertSame('test address', $this->subject->getAddress());
+        self::assertSame('123', $this->subject->getPhoneWork());
+        self::assertSame('456', $this->subject->getPhoneHome());
+        self::assertSame('789', $this->subject->getPhoneMobile());
+        self::assertSame('000', $this->subject->getFax());
+        self::assertSame('maximal-foo@example.com', $this->subject->getEmail());
+        self::assertSame(4, $this->subject->getCancelationPeriodInDays());
     }
 
-    /////////////////////////////////////////////
-    // Tests for getting the speaker attributes.
-    /////////////////////////////////////////////
-
-    public function testGetOrganization()
+    /**
+     * @test
+     */
+    public function hasOrganizationWithNoOrganizationReturnsFalse()
     {
-        self::assertEquals(
-            '',
-            $this->subject->getOrganization()
-        );
-        self::assertEquals(
-            'Foo inc.',
-            $this->maximalFixture->getOrganization()
-        );
+        $subject = new \Tx_Seminars_OldModel_Speaker(0, false, false, ['organization' => '']);
+
+        self::assertFalse($subject->hasOrganization());
     }
 
-    public function testHasOrganizationWithNoOrganizationReturnsFalse()
+    /**
+     * @test
+     */
+    public function hasOrganizationWithOrganizationReturnsTrue()
     {
-        self::assertFalse(
-            $this->subject->hasOrganization()
-        );
+        $organization = 'Foo inc.';
+        $subject = new \Tx_Seminars_OldModel_Speaker(0, false, false, ['organization' => $organization]);
+
+        self::assertTrue($subject->hasOrganization());
     }
 
-    public function testHasOrganizationWithOrganizationReturnsTrue()
+    /**
+     * @test
+     */
+    public function hasHomepageWithNoHomepageReturnsFalse()
     {
-        self::assertTrue(
-            $this->maximalFixture->hasOrganization()
-        );
+        $subject = new \Tx_Seminars_OldModel_Speaker(0, false, false, ['homepage' => '']);
+
+        self::assertFalse($subject->hasHomepage());
     }
 
-    public function testGetHomepage()
+    /**
+     * @test
+     */
+    public function hasHomepageWithHomepageReturnsTrue()
     {
-        self::assertEquals(
-            '',
-            $this->subject->getHomepage()
-        );
-        self::assertEquals(
-            'http://www.test.com/',
-            $this->maximalFixture->getHomepage()
-        );
+        $homepage = 'Foo inc.';
+        $subject = new \Tx_Seminars_OldModel_Speaker(0, false, false, ['homepage' => $homepage]);
+
+        self::assertTrue($subject->hasHomepage());
     }
 
-    public function testHasHomepageWithNoHomepageReturnsFalse()
+    /**
+     * @test
+     */
+    public function hasDescriptionWithNoDescriptionReturnsFalse()
     {
-        self::assertFalse(
-            $this->subject->hasHomepage()
-        );
+        $subject = new \Tx_Seminars_OldModel_Speaker(0, false, false, ['description' => '']);
+
+        self::assertFalse($subject->hasDescription());
     }
 
-    public function testHasHomepageWithHomepageReturnsTrue()
+    /**
+     * @test
+     */
+    public function hasDescriptionWithDescriptionReturnsTrue()
     {
-        self::assertTrue(
-            $this->maximalFixture->hasHomepage()
-        );
+        $description = 'Foo inc.';
+        $subject = new \Tx_Seminars_OldModel_Speaker(0, false, false, ['description' => $description]);
+
+        self::assertTrue($subject->hasDescription());
     }
 
-    /*
-     * TODO: For this test to work properly, we need a more-or-less working
-     * front-end environment so that the RTE transformation functions work.
-     *
-     * @see https://bugs.oliverklee.com/show_bug.cgi?id=1425
-     *
-
-    public function testGetDescription() {
-        $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
-        $plugin->init(array());
-
-        self::assertEquals(
-            '',
-            $this->subject->getDescription($plugin)
-        );
-        self::assertEquals(
-            '<p>foo</p><p>bar</p>',
-            $this->maximalFixture->getDescription($plugin)
-        );
-    }
-
-    */
-
-    public function testHasDescriptionWithNoDescriptionReturnsFalse()
+    /**
+     * @test
+     */
+    public function hasSkillsInitiallyIsFalse()
     {
-        self::assertFalse(
-            $this->subject->hasDescription()
-        );
-    }
+        $subject = new \Tx_Seminars_OldModel_Speaker(0);
 
-    public function testHasDescriptionWithDescriptionReturnsTrue()
-    {
-        self::assertTrue(
-            $this->maximalFixture->hasDescription()
-        );
-    }
-
-    public function testHasSkillsInitiallyIsFalse()
-    {
-        self::assertFalse(
-            $this->subject->hasSkills()
-        );
+        self::assertFalse($subject->hasSkills());
     }
 
     /**
@@ -286,241 +238,110 @@ class SpeakerTest extends FunctionalTestCase
      */
     public function canHaveOneSkill()
     {
+        $this->createPersistedSubject();
+
         $this->addSkillRelation([]);
-        self::assertTrue(
-            $this->subject->hasSkills()
-        );
+
+        self::assertTrue($this->subject->hasSkills());
     }
 
-    public function testGetSkillsShortWithNoSkillReturnsAnEmptyString()
+    /**
+     * @test
+     */
+    public function getSkillsShortWithNoSkillReturnsEmptyString()
     {
-        self::assertEquals(
-            '',
-            $this->subject->getSkillsShort()
-        );
+        $subject = new \Tx_Seminars_OldModel_Speaker(0);
+
+        self::assertSame('', $subject->getSkillsShort());
     }
 
-    public function testGetSkillsShortWithSingleSkillReturnsASingleSkill()
+    /**
+     * @test
+     */
+    public function getSkillsShortWithSingleSkillReturnsSingleSkill()
     {
+        $this->createPersistedSubject();
+
         $title = 'Test title';
         $this->addSkillRelation(['title' => $title]);
 
-        self::assertContains(
-            $title,
-            $this->subject->getSkillsShort()
-        );
+        self::assertSame($title, $this->subject->getSkillsShort());
     }
 
-    public function testGetSkillsShortWithMultipleSkillsReturnsMultipleSkills()
+    /**
+     * @test
+     */
+    public function getSkillsShortWithMultipleSkillsReturnsMultipleSkills()
     {
+        $this->createPersistedSubject();
+
         $firstTitle = 'Skill 1';
         $secondTitle = 'Skill 2';
         $this->addSkillRelation(['title' => $firstTitle]);
         $this->addSkillRelation(['title' => $secondTitle]);
 
-        self::assertEquals(
-            $firstTitle . ', ' . $secondTitle,
-            $this->subject->getSkillsShort()
-        );
+        self::assertSame($firstTitle . ', ' . $secondTitle, $this->subject->getSkillsShort());
     }
 
-    public function testGetNumberOfSkillsWithNoSkillReturnsZero()
+    /**
+     * @test
+     */
+    public function getNumberOfSkillsReturnsNumberOfSkills()
     {
-        self::assertEquals(
-            0,
-            $this->subject->getNumberOfSkills()
-        );
+        $subject = new \Tx_Seminars_OldModel_Speaker(0, false, false, ['skills' => 2]);
+
+        self::assertSame(2, $subject->getNumberOfSkills());
     }
 
-    public function testGetNumberOfSkillsWithSingleSkillReturnsOne()
+    /**
+     * @test
+     */
+    public function getGenderForNoGenderSetReturnsUnknownGenderValue()
     {
-        $this->addSkillRelation([]);
-        self::assertEquals(
-            1,
-            $this->subject->getNumberOfSkills()
-        );
+        $subject = new \Tx_Seminars_OldModel_Speaker(0);
+
+        self::assertSame(\Tx_Seminars_OldModel_Speaker::GENDER_UNKNOWN, $subject->getGender());
     }
 
-    public function testGetNumberOfSkillsWithTwoSkillsReturnsTwo()
+    /**
+     * @test
+     */
+    public function getGenderForKnownGenderReturnsGender()
     {
-        $this->addSkillRelation([]);
-        $this->addSkillRelation([]);
-        self::assertEquals(
-            2,
-            $this->subject->getNumberOfSkills()
-        );
+        $subject = new \Tx_Seminars_OldModel_Speaker(0);
+        $subject->setGender(\Tx_Seminars_OldModel_Speaker::GENDER_MALE);
+
+        self::assertSame(\Tx_Seminars_OldModel_Speaker::GENDER_MALE, $subject->getGender());
     }
 
-    public function testGetNotes()
+    /**
+     * @test
+     */
+    public function hasCancelationPeriodWithoutCancelationPeriodReturnsFalse()
     {
-        self::assertEquals(
-            '',
-            $this->subject->getNotes()
-        );
-        self::assertEquals(
-            'test notes',
-            $this->maximalFixture->getNotes()
-        );
+        $subject = new \Tx_Seminars_OldModel_Speaker(0);
+
+        self::assertFalse($subject->hasCancelationPeriod());
     }
 
-    public function testGetAddress()
+    /**
+     * @test
+     */
+    public function hasCancelationPeriodWithCancelationPeriodReturnsTrue()
     {
-        self::assertEquals(
-            '',
-            $this->subject->getAddress()
-        );
-        self::assertEquals(
-            'test address',
-            $this->maximalFixture->getAddress()
-        );
+        $subject = new \Tx_Seminars_OldModel_Speaker(0);
+        $subject->setCancelationPeriod(42);
+
+        self::assertTrue($subject->hasCancelationPeriod());
     }
-
-    public function testGetPhoneWork()
-    {
-        self::assertEquals(
-            '',
-            $this->subject->getPhoneWork()
-        );
-        self::assertEquals(
-            '123',
-            $this->maximalFixture->getPhoneWork()
-        );
-    }
-
-    public function testGetPhoneHome()
-    {
-        self::assertEquals(
-            '',
-            $this->subject->getPhoneHome()
-        );
-        self::assertEquals(
-            '456',
-            $this->maximalFixture->getPhoneHome()
-        );
-    }
-
-    public function testGetPhoneMobile()
-    {
-        self::assertEquals(
-            '',
-            $this->subject->getPhoneMobile()
-        );
-        self::assertEquals(
-            '789',
-            $this->maximalFixture->getPhoneMobile()
-        );
-    }
-
-    public function testGetFax()
-    {
-        self::assertEquals(
-            '',
-            $this->subject->getFax()
-        );
-        self::assertEquals(
-            '000',
-            $this->maximalFixture->getFax()
-        );
-    }
-
-    public function testGetEmail()
-    {
-        self::assertEquals(
-            'foo@test.com',
-            $this->subject->getEmail()
-        );
-        self::assertEquals(
-            'maximal-foo@test.com',
-            $this->maximalFixture->getEmail()
-        );
-    }
-
-    ////////////////////////
-    // Tests for getGender
-    ////////////////////////
-
-    public function testGetGenderForNoGenderSetReturnsUnknownGenderValue()
-    {
-        self::assertEquals(
-            \Tx_Seminars_OldModel_Speaker::GENDER_UNKNOWN,
-            $this->subject->getGender()
-        );
-    }
-
-    public function testGetGenderForKnownGenderReturnsGender()
-    {
-        $this->subject->setGender(\Tx_Seminars_OldModel_Speaker::GENDER_MALE);
-
-        self::assertEquals(
-            \Tx_Seminars_OldModel_Speaker::GENDER_MALE,
-            $this->subject->getGender()
-        );
-    }
-
-    //////////////////////////////////////////
-    // Tests concerning hasCancelationPeriod
-    //////////////////////////////////////////
-
-    public function testHasCancelationPeriodForSpeakerWithoutCancelationPeriodReturnsFalse()
-    {
-        self::assertFalse(
-            $this->subject->hasCancelationPeriod()
-        );
-    }
-
-    public function testHasCancelationPeriodForSpeakerWithCancelationPeriodReturnsTrue()
-    {
-        $this->subject->setCancelationPeriod(42);
-
-        self::assertTrue(
-            $this->subject->hasCancelationPeriod()
-        );
-    }
-
-    ////////////////////////////////////////////////
-    // Tests concerning getCancelationPeriodInDays
-    ////////////////////////////////////////////////
-
-    public function testGetCancelationPeriodInDaysForSpeakerWithoutCancelationPeriodReturnsZero()
-    {
-        self::assertEquals(
-            0,
-            $this->subject->getCancelationPeriodInDays()
-        );
-    }
-
-    public function testGetCancelationPeriodInDaysForSpeakerWithCancelationPeriodOfOneDayReturnsOne()
-    {
-        $this->subject->setCancelationPeriod(1);
-
-        self::assertEquals(
-            1,
-            $this->subject->getCancelationPeriodInDays()
-        );
-    }
-
-    public function testGetCancelationPeriodInDaysForSpeakerWithCancelationPeriodOfTwoDaysReturnsTwo()
-    {
-        $this->subject->setCancelationPeriod(2);
-
-        self::assertEquals(
-            2,
-            $this->subject->getCancelationPeriodInDays()
-        );
-    }
-
-    ///////////////////////////////
-    // Tests regarding the owner.
-    ///////////////////////////////
 
     /**
      * @test
      */
     public function getOwnerWithoutOwnerReturnsNull()
     {
-        self::assertNull(
-            $this->subject->getOwner()
-        );
+        $subject = new \Tx_Seminars_OldModel_Speaker(0);
+        self::assertNull($subject->getOwner());
     }
 
     /**
@@ -528,14 +349,37 @@ class SpeakerTest extends FunctionalTestCase
      */
     public function getOwnerWithOwnerReturnsOwner()
     {
-        $frontEndUser = \Tx_Oelib_MapperRegistry::get(
-            \Tx_Seminars_Mapper_FrontEndUser::class
-        )->getNewGhost();
-        $this->subject->setOwner($frontEndUser);
+        $subject = new \Tx_Seminars_OldModel_Speaker(0);
+        /** @var \Tx_Seminars_Model_FrontEndUser $frontEndUser */
+        $frontEndUser = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)->getNewGhost();
+        $subject->setOwner($frontEndUser);
 
-        self::assertSame(
-            $frontEndUser,
-            $this->subject->getOwner()
+        self::assertSame($frontEndUser, $subject->getOwner());
+    }
+
+    /**
+     * @return void
+     */
+    private function createPersistedSubject()
+    {
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
+        $uid = $this->testingFramework->createRecord(
+            'tx_seminars_speakers',
+            [
+                'title' => 'Test speaker',
+                'organization' => 'Foo inc.',
+                'homepage' => 'https://www.example.com/',
+                'description' => 'foo' . LF . 'bar',
+                'notes' => 'test notes',
+                'address' => 'test address',
+                'phone_work' => '123',
+                'phone_home' => '456',
+                'phone_mobile' => '789',
+                'fax' => '000',
+                'email' => 'maximal-foo@example.com',
+                'cancelation_period' => 4,
+            ]
         );
+        $this->subject = new \Tx_Seminars_OldModel_Speaker($uid);
     }
 }

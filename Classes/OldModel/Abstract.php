@@ -34,28 +34,33 @@ abstract class Tx_Seminars_OldModel_Abstract extends \Tx_Oelib_TemplateHelper im
     protected $recordData = [];
 
     /**
-     * @var bool whether this record already is stored in the DB
+     * @var bool
      */
-    protected $isInDb = false;
+    protected $isPersisted = false;
 
     /**
      * The constructor. Creates a test instance from a DB record.
      *
      * @param int $uid
      *        The UID of the record to retrieve from the DB. This parameter will be ignored if $dbResult is provided.
-     * @param mysqli_result|null $dbResult
+     * @param \mysqli_result|bool $dbResult
      *        MySQL result (of SELECT query) object. If this parameter is provided, $uid will be ignored.
      * @param bool $allowHiddenRecords
      *        whether it is possible to create an object from a hidden record
+     * @param array $recordData
      */
-    public function __construct($uid, $dbResult = null, $allowHiddenRecords = false)
+    public function __construct($uid, $dbResult = false, $allowHiddenRecords = false, array $recordData = [])
     {
         // In the back end, include the extension's locallang.xlf.
         if ((TYPO3_MODE === 'BE') && is_object($GLOBALS['LANG'])) {
             $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
         }
 
-        $this->retrieveRecordAndGetData($uid, $dbResult, $allowHiddenRecords);
+        if (empty($recordData) && ($uid > 0 || $dbResult !== false)) {
+            $this->retrieveDataFromDatabase($uid, $dbResult, $allowHiddenRecords);
+        } else {
+            $this->setData($recordData);
+        }
         $this->init();
     }
 
@@ -65,32 +70,32 @@ abstract class Tx_Seminars_OldModel_Abstract extends \Tx_Oelib_TemplateHelper im
      *
      * @param int $uid
      *        The UID of the record to retrieve from the DB. This parameter will be ignored if $dbResult is provided.
-     * @param mysqli_result|bool $dbResult
+     * @param \mysqli_result|bool $dbResult
      *        MySQL result (of SELECT query) object. If this parameter is provided, $uid will be ignored.
      * @param bool $allowHiddenRecords
      *        whether it is possible to create an object from a hidden record
      *
      * @return void
      */
-    protected function retrieveRecordAndGetData(
-        $uid,
-        $dbResult = false,
-        $allowHiddenRecords = false
-    ) {
-        if (!$dbResult) {
-            $dbResult = $this->retrieveRecord($uid, $allowHiddenRecords);
+    protected function retrieveDataFromDatabase($uid, $dbResult = false, $allowHiddenRecords = false)
+    {
+        if ($dbResult === false && $uid === 0) {
+            return;
         }
 
-        if ($dbResult) {
-            $data = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-            if ($data) {
-                $this->getDataFromDbResult($data);
+        if ($uid !== 0) {
+            $dbResult = $this->retrieveRecord($uid, $allowHiddenRecords);
+        }
+        if ($dbResult !== false) {
+            $data = \Tx_Oelib_Db::getDatabaseConnection()->sql_fetch_assoc($dbResult);
+            if (\is_array($data)) {
+                $this->setData($data);
             }
         }
     }
 
     /**
-     * Reads the record data from an DB query result represented as an
+     * Sets the record data from an DB query result represented as an
      * associative array and stores it in $this->recordData.
      * The column names will be used as array keys.
      * The column names must *not* be prefixed with the table name.
@@ -103,15 +108,15 @@ abstract class Tx_Seminars_OldModel_Abstract extends \Tx_Oelib_TemplateHelper im
      * Example:
      * $dbResultRow['name'] => $this->recordData['name']
      *
-     * @param array $dbResultRow associative array of a DB query result
+     * @param array $data associative array of a DB query result
      *
      * @return void
      */
-    protected function getDataFromDbResult(array $dbResultRow)
+    protected function setData(array $data)
     {
-        if (!empty($this->tableName) && !empty($dbResultRow)) {
-            $this->recordData = $dbResultRow;
-            $this->isInDb = true;
+        $this->recordData = $data;
+        if (!empty($data['uid'])) {
+            $this->isPersisted = true;
         }
     }
 
@@ -300,7 +305,7 @@ abstract class Tx_Seminars_OldModel_Abstract extends \Tx_Oelib_TemplateHelper im
         $now = $GLOBALS['SIM_EXEC_TIME'];
         $this->setRecordPropertyInteger('tstamp', $now);
 
-        if (!$this->isInDb || !$this->hasUid()) {
+        if (!$this->isPersisted || !$this->hasUid()) {
             $this->setRecordPropertyInteger('crdate', $now);
             \Tx_Oelib_Db::insert(
                 $this->tableName,
@@ -314,7 +319,7 @@ abstract class Tx_Seminars_OldModel_Abstract extends \Tx_Oelib_TemplateHelper im
             );
         }
 
-        $this->isInDb = true;
+        $this->isPersisted = true;
         return true;
     }
 
@@ -408,29 +413,17 @@ abstract class Tx_Seminars_OldModel_Abstract extends \Tx_Oelib_TemplateHelper im
      * @param string $tableName string with the table name where the UID should be searched for
      * @param bool $allowHiddenRecords whether hidden records should be found as well
      *
-     * @return bool TRUE if a visible record with that UID exists, FALSE otherwise
+     * @return bool true if a visible record with that UID exists, false otherwise
      */
     public static function recordExists($uid, $tableName, $allowHiddenRecords = false)
     {
-        if (((int)$uid <= 0) || ($tableName === '')) {
+        if ((int)$uid <= 0 || $tableName === '') {
             return false;
         }
 
-        $dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-            'COUNT(*) AS num',
-            $tableName,
-            'uid = ' . (int)$uid . \Tx_Oelib_Db::enableFields($tableName, (int)$allowHiddenRecords)
-        );
+        $whereClause = 'uid = ' . (int)$uid . \Tx_Oelib_Db::enableFields($tableName, (int)$allowHiddenRecords);
 
-        if ($dbResult) {
-            $dbResultAssoc = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-            $GLOBALS['TYPO3_DB']->sql_free_result($dbResult);
-            $result = (int)$dbResultAssoc['num'] === 1;
-        } else {
-            $result = false;
-        }
-
-        return $result;
+        return \Tx_Oelib_Db::existsRecord($tableName, $whereClause);
     }
 
     /**
@@ -446,10 +439,6 @@ abstract class Tx_Seminars_OldModel_Abstract extends \Tx_Oelib_TemplateHelper im
      */
     protected function retrieveRecord($uid, $allowHiddenRecords = false)
     {
-        if (!self::recordExists($uid, $this->tableName, $allowHiddenRecords)) {
-            return false;
-        }
-
         return $GLOBALS['TYPO3_DB']->exec_SELECTquery(
             '*',
             $this->tableName,

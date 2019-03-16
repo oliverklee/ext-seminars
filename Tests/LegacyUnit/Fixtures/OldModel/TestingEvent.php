@@ -30,7 +30,7 @@ final class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Se
     public function setEventData(array $eventData)
     {
         $this->recordData = $eventData;
-        $this->isInDb = true;
+        $this->isPersisted = true;
     }
 
     /**
