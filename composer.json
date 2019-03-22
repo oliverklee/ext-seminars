@@ -29,7 +29,7 @@
         "typo3/cms-core": "^7.6.23 || ^8.7.9",
         "typo3/cms-frontend": "^7.6.23 || ^8.7.9",
         "sjbr/static-info-tables": "^6.5",
-        "oliverklee/oelib": "^2.0 || ^3.0",
+        "oliverklee/oelib": "^2.3 || ^3.0",
         "dmk/mkforms": "^3.0.14"
     },
     "require-dev": {
