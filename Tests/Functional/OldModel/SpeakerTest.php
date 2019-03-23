@@ -27,14 +27,6 @@ class SpeakerTest extends FunctionalTestCase
      */
     private $subject = null;
 
-    protected function tearDown()
-    {
-        if ($this->testingFramework !== null) {
-            $this->testingFramework->cleanUp();
-        }
-        parent::tearDown();
-    }
-
     ///////////////////////
     // Utility functions.
     ///////////////////////

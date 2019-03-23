@@ -41,12 +41,6 @@ class RegistrationTest extends FunctionalTestCase
         $this->subject = new \Tx_Seminars_Mapper_Registration();
     }
 
-    protected function tearDown()
-    {
-        $this->testingFramework->cleanUp();
-        parent::tearDown();
-    }
-
     /**
      * @test
      */
