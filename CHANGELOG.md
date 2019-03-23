@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Skip the DB cleanup in the new functional tests (#204)
 - Require oelib >= 2.3.0 (#203)
 - Allow testing the old models with fewer DB accesses (#202)
 - Rename SUT from "fixture" to "subject" (#196) 
