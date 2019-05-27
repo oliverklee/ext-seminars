@@ -2,6 +2,7 @@
 namespace OliverKlee\Seminars\Tests\Functional\Hooks;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\Seminars\Hooks\DataHandlerHook;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -9,7 +10,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class TceProcessingHookTest extends FunctionalTestCase
+class DataHandlerHookTest extends FunctionalTestCase
 {
     /**
      * @var string[]
@@ -24,6 +25,6 @@ class TceProcessingHookTest extends FunctionalTestCase
         $reference = $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass']['seminars'];
         $instance = GeneralUtility::getUserObj($reference);
 
-        self::assertInstanceOf(\Tx_Seminars_Hooks_TceProcessingHook::class, $instance);
+        self::assertInstanceOf(DataHandlerHook::class, $instance);
     }
 }

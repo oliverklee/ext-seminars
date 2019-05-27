@@ -1,5 +1,7 @@
 <?php
 
+namespace OliverKlee\Seminars\Hooks;
+
 use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -11,7 +13,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Mario Rimann <typo3-coding@rimann.org>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Hooks_TceProcessingHook
+class DataHandlerHook
 {
     /**
      * @var array[]
