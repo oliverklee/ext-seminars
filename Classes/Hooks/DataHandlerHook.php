@@ -12,18 +12,19 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Mario Rimann <typo3-coding@rimann.org>
  * @author Niels Pardon <mail@niels-pardon.de>
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class DataHandlerHook
 {
     /**
+     * @var string[]
+     */
+    private $registeredTables = ['tx_seminars_seminars', 'tx_seminars_timeslots'];
+
+    /**
      * @var array[]
      */
     private $tceMainFieldArrays = [];
-
-    /**
-     * @var string the extension key
-     */
-    public $extKey = 'seminars';
 
     /**
      * Handles data after everything had been written to the database.
@@ -49,29 +50,32 @@ class DataHandlerHook
      *
      * @param string $status the status of this record (new/update)
      * @param string $table the affected table name
-     * @param int $uid the UID of the affected record (may be 0)
+     * @param string|int $uid the UID of the affected record (may be 0)
      * @param string[] &$fieldArray an array of all fields that got changed (as reference)
      * @param DataHandler $pObj reference to calling object
      *
      * @return void
      */
-    public function processDatamap_afterDatabaseOperations(
-        $status,
-        $table,
-        $uid,
-        array &$fieldArray,
-        DataHandler $pObj
-    ) {
-        // Translates new UIDs.
-        if ($status == 'new') {
-            $uid = $pObj->substNEWwithIDs[$uid];
+    public function processDatamap_afterDatabaseOperations($status, $table, $uid, array &$fieldArray, DataHandler $pObj)
+    {
+        if (!\in_array($table, $this->registeredTables, true)) {
+            return;
         }
 
-        if (($table == 'tx_seminars_seminars')
-            || ($table == 'tx_seminars_timeslots')
-        ) {
-            $this->tceMainFieldArrays[$table][$uid] = $fieldArray;
-        }
+        $realUid = $this->createRealUid($status, $uid, $pObj);
+        $this->tceMainFieldArrays[$table][$realUid] = $fieldArray;
+    }
+
+    /**
+     * @param string $status
+     * @param string|int $uid
+     * @param DataHandler $pObj
+     *
+     * @return int
+     */
+    private function createRealUid($status, $uid, DataHandler $pObj)
+    {
+        return $status === 'new' ? (int)$pObj->substNEWwithIDs[$uid] : (int)$uid;
     }
 
     /**
@@ -81,16 +85,24 @@ class DataHandlerHook
      */
     private function processTimeSlots()
     {
-        $table = 'tx_seminars_timeslots';
-
-        if (
-            isset($this->tceMainFieldArrays[$table])
-            && is_array($this->tceMainFieldArrays[$table])
-        ) {
-            foreach ($this->tceMainFieldArrays[$table] as $uid => $fieldArray) {
-                $this->processSingleTimeSlot($uid);
-            }
+        $tableName = 'tx_seminars_timeslots';
+        if (!$this->hasDataForTable($tableName)) {
+            return;
         }
+
+        foreach ($this->tceMainFieldArrays[$tableName] as $uid => $_) {
+            $this->processSingleTimeSlot((int)$uid);
+        }
+    }
+
+    /**
+     * @param string $tableName
+     *
+     * @return bool
+     */
+    private function hasDataForTable($tableName)
+    {
+        return isset($this->tceMainFieldArrays[$tableName]) && \is_array($this->tceMainFieldArrays[$tableName]);
     }
 
     /**
@@ -100,47 +112,37 @@ class DataHandlerHook
      */
     private function processEvents()
     {
-        $table = 'tx_seminars_seminars';
+        $tableName = 'tx_seminars_seminars';
+        if (!$this->hasDataForTable($tableName)) {
+            return;
+        }
 
-        if (
-            isset($this->tceMainFieldArrays[$table])
-            && is_array($this->tceMainFieldArrays[$table])
-        ) {
-            foreach ($this->tceMainFieldArrays[$table] as $uid => $fieldArray) {
-                $this->processSingleEvent($uid, $fieldArray);
-            }
+        foreach ($this->tceMainFieldArrays[$tableName] as $uid => $fieldArray) {
+            $this->processSingleEvent((int)$uid, $fieldArray);
         }
     }
 
     /**
      * Processes a single time slot.
      *
-     * @param int $uid the UID of the affected record (may be 0)
+     * @param int $uid
      *
      * @return void
      */
     private function processSingleTimeSlot($uid)
     {
-        /** @var \Tx_Seminars_OldModel_TimeSlot $timeslot */
-        $timeslot = GeneralUtility::makeInstance(
-            \Tx_Seminars_OldModel_TimeSlot::class,
-            $uid,
-            false
-        );
+        /** @var \Tx_Seminars_OldModel_TimeSlot $timeSlot */
+        $timeSlot = GeneralUtility::makeInstance(\Tx_Seminars_OldModel_TimeSlot::class, $uid, false);
 
-        if ($timeslot->isOk()) {
-            // Gets an associative array of fields that need
-            // to be updated in the database and update them.
-            $timeslot->saveToDatabase(
-                $timeslot->getUpdateArray()
-            );
+        if ($timeSlot->isOk()) {
+            $timeSlot->saveToDatabase($timeSlot->getUpdateArray());
         }
     }
 
     /**
      * Processes a single event.
      *
-     * @param int $uid the UID of the affected record (may be 0)
+     * @param int $uid
      * @param string[] $fieldArray an array of all fields that got changed
      *
      * @return void
@@ -148,19 +150,10 @@ class DataHandlerHook
     private function processSingleEvent($uid, array $fieldArray)
     {
         /** @var \Tx_Seminars_OldModel_Event $event */
-        $event = GeneralUtility::makeInstance(
-            \Tx_Seminars_OldModel_Event::class,
-            $uid,
-            false,
-            true
-        );
+        $event = GeneralUtility::makeInstance(\Tx_Seminars_OldModel_Event::class, $uid, false, true);
 
         if ($event->isOk()) {
-            // Gets an associative array of fields that need to be updated in
-            // the database.
-            $event->saveToDatabase(
-                $event->getUpdateArray($fieldArray)
-            );
+            $event->saveToDatabase($event->getUpdateArray($fieldArray));
         }
     }
 }
