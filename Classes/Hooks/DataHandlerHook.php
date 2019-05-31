@@ -4,6 +4,7 @@ namespace OliverKlee\Seminars\Hooks;
 
 use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\MathUtility;
 
 /**
  * This class holds functions used to validate submitted forms in the back end.
@@ -51,31 +52,49 @@ class DataHandlerHook
      * @param string $status the status of this record (new/update)
      * @param string $table the affected table name
      * @param string|int $uid the UID of the affected record (may be 0)
-     * @param string[] &$fieldArray an array of all fields that got changed (as reference)
-     * @param DataHandler $pObj reference to calling object
+     * @param string[] &$fieldArray an array of all fields that got changed
+     * @param DataHandler $dataHandler
      *
      * @return void
      */
-    public function processDatamap_afterDatabaseOperations($status, $table, $uid, array &$fieldArray, DataHandler $pObj)
-    {
+    public function processDatamap_afterDatabaseOperations(
+        $status,
+        $table,
+        $uid,
+        array &$fieldArray,
+        DataHandler $dataHandler
+    ) {
         if (!\in_array($table, $this->registeredTables, true)) {
             return;
         }
 
-        $realUid = $this->createRealUid($status, $uid, $pObj);
+        $realUid = $this->createRealUid($uid, $dataHandler);
         $this->tceMainFieldArrays[$table][$realUid] = $fieldArray;
     }
 
     /**
-     * @param string $status
      * @param string|int $uid
-     * @param DataHandler $pObj
+     * @param DataHandler $dataHandler
      *
      * @return int
      */
-    private function createRealUid($status, $uid, DataHandler $pObj)
+    private function createRealUid($uid, DataHandler $dataHandler)
     {
-        return $status === 'new' ? (int)$pObj->substNEWwithIDs[$uid] : (int)$uid;
+        if ($this->isPersistedUid($uid)) {
+            return (int)$uid;
+        }
+
+        return (int)$dataHandler->substNEWwithIDs[$uid];
+    }
+
+    /**
+     * @param string|int $uid
+     *
+     * @return bool
+     */
+    private function isPersistedUid($uid)
+    {
+        return MathUtility::canBeInterpretedAsInteger($uid);
     }
 
     /**
@@ -85,24 +104,24 @@ class DataHandlerHook
      */
     private function processTimeSlots()
     {
-        $tableName = 'tx_seminars_timeslots';
-        if (!$this->hasDataForTable($tableName)) {
+        $table = 'tx_seminars_timeslots';
+        if (!$this->hasDataForTable($table)) {
             return;
         }
 
-        foreach ($this->tceMainFieldArrays[$tableName] as $uid => $_) {
+        foreach ($this->tceMainFieldArrays[$table] as $uid => $_) {
             $this->processSingleTimeSlot((int)$uid);
         }
     }
 
     /**
-     * @param string $tableName
+     * @param string $table
      *
      * @return bool
      */
-    private function hasDataForTable($tableName)
+    private function hasDataForTable($table)
     {
-        return isset($this->tceMainFieldArrays[$tableName]) && \is_array($this->tceMainFieldArrays[$tableName]);
+        return isset($this->tceMainFieldArrays[$table]) && \is_array($this->tceMainFieldArrays[$table]);
     }
 
     /**
@@ -112,12 +131,12 @@ class DataHandlerHook
      */
     private function processEvents()
     {
-        $tableName = 'tx_seminars_seminars';
-        if (!$this->hasDataForTable($tableName)) {
+        $table = 'tx_seminars_seminars';
+        if (!$this->hasDataForTable($table)) {
             return;
         }
 
-        foreach ($this->tceMainFieldArrays[$tableName] as $uid => $fieldArray) {
+        foreach ($this->tceMainFieldArrays[$table] as $uid => $fieldArray) {
             $this->processSingleEvent((int)$uid, $fieldArray);
         }
     }
