@@ -22,6 +22,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Remove unsupported properties from TCA type "select" (#191)
 
 ### Fixed
+- Explicitly provide the extension name in composer.json (#214)
 - Fix the casing of the vfsstream package (#197)
 - Allow hiding the unregistration notice in the thank-you email (#185)
 - Add more common files to the `.gitignore` (#184)
