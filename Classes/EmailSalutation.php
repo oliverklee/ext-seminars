@@ -52,7 +52,7 @@ class Tx_Seminars_EmailSalutation
 
         foreach ($this->getHooks() as $hook) {
             if (method_exists($hook, 'modifySalutation')) {
-                $hook->modifySalutation($salutationParts);
+                $hook->modifySalutation($salutationParts, $user);
             }
         }
 

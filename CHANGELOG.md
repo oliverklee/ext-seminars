@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Pass user object in modifySalutation hook (#215)
 - Rename and namespace the DataHandler hook class (#206)
 - Skip the DB cleanup in the new functional tests (#204)
 - Require oelib >= 2.3.0 (#203)

@@ -356,12 +356,16 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends \Tx_Phpunit_Tes
             $hookClassName,
             ['modifySalutation']
         );
-        $salutationHookMock->expects(self::atLeastOnce())->method('modifySalutation');
+        $frontendUser = $this->createFrontEndUser();
+        $salutationHookMock->expects(self::atLeastOnce())->method('modifySalutation')->with(
+            self::isType('array'),
+            self::identicalTo($frontendUser)
+        );
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['modifyEmailSalutation'][$hookClassName] = $hookClassName;
         GeneralUtility::addInstance($hookClassName, $salutationHookMock);
 
-        $this->subject->getSalutation($this->createFrontEndUser());
+        $this->subject->getSalutation($frontendUser);
     }
 
     /**
@@ -374,7 +378,11 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends \Tx_Phpunit_Tes
             $hookClassName1,
             ['modifySalutation']
         );
-        $salutationHookMock1->expects(self::atLeastOnce())->method('modifySalutation');
+        $frontendUser = $this->createFrontEndUser();
+        $salutationHookMock1->expects(self::atLeastOnce())->method('modifySalutation')->with(
+            self::isType('array'),
+            self::identicalTo($frontendUser)
+        );
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['modifyEmailSalutation'][$hookClassName1] = $hookClassName1;
         GeneralUtility::addInstance($hookClassName1, $salutationHookMock1);
 
@@ -383,11 +391,14 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends \Tx_Phpunit_Tes
             $hookClassName2,
             ['modifySalutation']
         );
-        $salutationHookMock2->expects(self::atLeastOnce())->method('modifySalutation');
+        $salutationHookMock2->expects(self::atLeastOnce())->method('modifySalutation')->with(
+            self::isType('array'),
+            self::identicalTo($frontendUser)
+        );
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['modifyEmailSalutation'][$hookClassName2] = $hookClassName2;
         GeneralUtility::addInstance($hookClassName2, $salutationHookMock2);
 
-        $this->subject->getSalutation($this->createFrontEndUser());
+        $this->subject->getSalutation($frontendUser);
     }
 
     /*
