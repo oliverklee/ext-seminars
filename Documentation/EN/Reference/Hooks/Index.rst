@@ -215,11 +215,13 @@ the following hook:
   before the salutation is returned by getSalutation
 
 To use this hook, you need to create a class with a method named
-modifySalutation. The method in your class should only expect one
-parameter which is a reference to an array with the following
+modifySalutation. The method in your class should expect two
+parameters. The first one is a reference to an array with the following
 structure:
 
 array('dear' => String, 'title' => String, 'name' => String)
+
+The second parameter is an user object \Tx_Seminars_Model_FrontEndUser.
 
 Your class then needs to be included and registered like in this
 example:
@@ -227,7 +229,7 @@ example:
 ::
 
    // register my hook objects
-   $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['modifyEmailSalutation'][] = \tx_rsysseminarsext_modemailsalutation::class;
+   $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['modifyEmailSalutation'][] = \\MyVendor\\MyExt\\Hooks\\ModifySalutationHook::class;
 
 
 Hooks for the e-mails sent from the back-end module

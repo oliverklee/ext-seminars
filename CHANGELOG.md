@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Rename SUT from "fixture" to "subject" (#196) 
 - Convert the first tests to nimut/testing-framework (#194, #195, #201)
 - Move to old tests to the "Legacy" namespace (#193)
+- Pass user object in modifySalutation hook (#215)
 
 ### Deprecated
 
