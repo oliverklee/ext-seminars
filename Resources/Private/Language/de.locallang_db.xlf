@@ -408,6 +408,10 @@
                 <source>Description:</source>
                 <target>Beschreibung:</target>
             </trans-unit>
+            <trans-unit id="tx_seminars_speakers.image" xml:space="preserve" approved="yes">
+                <source>Image:</source>
+                <target>Bild:</target>
+            </trans-unit>
             <trans-unit id="tx_seminars_speakers.skills" xml:space="preserve" approved="yes">
                 <source>Skills:</source>
                 <target>Fähigkeiten:</target>

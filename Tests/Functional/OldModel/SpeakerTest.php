@@ -3,6 +3,8 @@
 namespace OliverKlee\Seminars\Tests\Functional\OldModel;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\Seminars\Tests\Functional\Traits\FalHelper;
+use TYPO3\CMS\Core\Resource\FileReference;
 
 /**
  * Test case.
@@ -12,6 +14,8 @@ use Nimut\TestingFramework\TestCase\FunctionalTestCase;
  */
 class SpeakerTest extends FunctionalTestCase
 {
+    use FalHelper;
+
     /**
      * @var string[]
      */
@@ -26,6 +30,13 @@ class SpeakerTest extends FunctionalTestCase
      * @var \Tx_Seminars_OldModel_Speaker
      */
     private $subject = null;
+
+    protected function setUp()
+    {
+        parent::setUp();
+
+        $this->provideAdminBackEndUserForFal();
+    }
 
     ///////////////////////
     // Utility functions.
@@ -373,5 +384,60 @@ class SpeakerTest extends FunctionalTestCase
             ]
         );
         $this->subject = new \Tx_Seminars_OldModel_Speaker($uid);
+    }
+
+    /**
+     * @test
+     */
+    public function hasImageWithoutImageReturnsFalse()
+    {
+        $subject = new \Tx_Seminars_OldModel_Speaker(0);
+
+        self::assertFalse($subject->hasImage());
+    }
+
+    /**
+     * @test
+     */
+    public function hasImageWithImageReturnsTrue()
+    {
+        $subject = new \Tx_Seminars_OldModel_Speaker(0, false, false, ['image' => 1]);
+
+        self::assertTrue($subject->hasImage());
+    }
+
+    /**
+     * @test
+     */
+    public function getImageWithoutImageReturnsNull()
+    {
+        $this->importDataSet(__DIR__ . '/../Fixtures/Speakers.xml');
+        $subject = new \Tx_Seminars_OldModel_Speaker(1);
+
+        self::assertNull($subject->getImage());
+    }
+
+    /**
+     * @test
+     */
+    public function getImageWithPositiveImageCountWithoutFileReferenceReturnsNull()
+    {
+        $this->importDataSet(__DIR__ . '/../Fixtures/Speakers.xml');
+        $subject = new \Tx_Seminars_OldModel_Speaker(2);
+
+        self::assertNull($subject->getImage());
+    }
+
+    /**
+     * @test
+     */
+    public function getImageWithFileReferenceReturnsFileReference()
+    {
+        $this->importDataSet(__DIR__ . '/../Fixtures/Speakers.xml');
+        $subject = new \Tx_Seminars_OldModel_Speaker(3);
+
+        $result = $subject->getImage();
+
+        self::assertInstanceOf(FileReference::class, $result);
     }
 }

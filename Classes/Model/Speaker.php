@@ -1,5 +1,9 @@
 <?php
 
+use TYPO3\CMS\Core\Resource\FileReference;
+use TYPO3\CMS\Core\Resource\FileRepository;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * This class represents an speaker.
  *
@@ -483,5 +487,38 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
     public function setNotes($notes)
     {
         $this->setAsString('notes', $notes);
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasImage()
+    {
+        return $this->getAsInteger('image') > 0;
+    }
+
+    /**
+     * @return FileReference|null
+     */
+    public function getImage()
+    {
+        if (!$this->hasImage()) {
+            return null;
+        }
+
+        $images = $this->getFileRepository()->findByRelation('tx_seminars_speakers', 'image', $this->getUid());
+
+        return \array_shift($images);
+    }
+
+    /**
+     * @return FileRepository
+     */
+    private function getFileRepository()
+    {
+        /** @var FileRepository $fileRepository */
+        $fileRepository = GeneralUtility::makeInstance(FileRepository::class);
+
+        return $fileRepository;
     }
 }

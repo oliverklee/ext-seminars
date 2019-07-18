@@ -307,6 +307,9 @@
             <trans-unit id="tx_seminars_speakers.description" xml:space="preserve">
                 <source>Description:</source>
             </trans-unit>
+            <trans-unit id="tx_seminars_speakers.image" xml:space="preserve">
+                <source>Image:</source>
+            </trans-unit>
             <trans-unit id="tx_seminars_speakers.skills" xml:space="preserve">
                 <source>Skills:</source>
             </trans-unit>

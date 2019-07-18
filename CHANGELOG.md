@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add Speaker.image (#217)
 
 ### Changed
 - Pass user object in modifySalutation hook (#215)

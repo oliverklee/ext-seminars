@@ -1,5 +1,8 @@
 <?php
 
+use TYPO3\CMS\Core\Resource\FileReference;
+use TYPO3\CMS\Core\Resource\FileRepository;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
 /**
@@ -346,5 +349,38 @@ class Tx_Seminars_OldModel_Speaker extends \Tx_Seminars_OldModel_Abstract
     public function isHidden()
     {
         return $this->getRecordPropertyBoolean('hidden');
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasImage()
+    {
+        return $this->getRecordPropertyInteger('image') > 0;
+    }
+
+    /**
+     * @return FileReference|null
+     */
+    public function getImage()
+    {
+        if (!$this->hasImage()) {
+            return null;
+        }
+
+        $images = $this->getFileRepository()->findByRelation('tx_seminars_speakers', 'image', $this->getUid());
+
+        return \array_shift($images);
+    }
+
+    /**
+     * @return FileRepository
+     */
+    private function getFileRepository()
+    {
+        /** @var FileRepository $fileRepository */
+        $fileRepository = GeneralUtility::makeInstance(FileRepository::class);
+
+        return $fileRepository;
     }
 }

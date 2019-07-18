@@ -341,6 +341,7 @@ CREATE TABLE tx_seminars_speakers (
     organization tinytext,
     homepage tinytext,
     description text,
+    image int(11) unsigned DEFAULT '0' NOT NULL,
     skills int(11) unsigned DEFAULT '0' NOT NULL,
     notes text,
     address text,
