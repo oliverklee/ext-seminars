@@ -33,3 +33,10 @@ Deutsches Handbuch
    DevelopmentWorkflow/Index
    DieEntwicklungDerExtensionUntersttzen/Index
    BekannteProbleme/Index
+
+Kompatibilität mit TYPO3 9LTS/9.5
+----------------------------------
+Wenn Sie die Extension mit TYPO3 9LTS/9.5 benutzen möchten, wäre es schön,
+wenn Sie die `Crowdfunding-Kampagne <https://coders.care/for/crowdfunding/seminars/>`_
+unterstützen könnten, um die Arbeiten für die 9.5-Kompatibilität zu
+finanzieren.
