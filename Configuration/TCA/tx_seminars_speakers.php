@@ -19,7 +19,8 @@ $tca = [
         'searchFields' => 'title',
     ],
     'interface' => [
-        'showRecordFieldList' => 'hidden,title,organization,homepage,description,skills,notes,address,phone_work,phone_home,phone_mobile,fax,email,cancelation_period,owner',
+        'showRecordFieldList' => 'hidden, title, organization, homepage, description, image, skills, notes, ' .
+            'address, phone_work, phone_home, phone_mobile, fax, email, cancelation_period, owner',
     ],
     'columns' => [
         'hidden' => [
@@ -88,6 +89,25 @@ $tca = [
                 'rows' => 5,
                 'enableRichtext' => true,
             ],
+        ],
+        'image' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.image',
+            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
+                'image',
+                [
+                    'maxitems' => 1,
+                    'appearance' => [
+                        'collapseAll' => true,
+                        'expandSingle' => true,
+                        'useSortable' => false,
+                        'enabledControls' => [
+                            'hide' => false,
+                        ],
+                        'fileUploadAllowed' => true,
+                    ],
+                ]
+            ),
         ],
         'skills' => [
             'exclude' => 1,
@@ -195,7 +215,10 @@ $tca = [
         ],
     ],
     'types' => [
-        '0' => ['showitem' => 'hidden, title, gender, organization, homepage, description, skills, notes, address, phone_work, phone_home, phone_mobile, fax, email, cancelation_period, owner'],
+        '0' => [
+            'showitem' => 'hidden, title, gender, organization, homepage, description, image, skills, notes, ' .
+                'address, phone_work, phone_home, phone_mobile, fax, email, cancelation_period, owner',
+        ],
     ],
 ];
 
