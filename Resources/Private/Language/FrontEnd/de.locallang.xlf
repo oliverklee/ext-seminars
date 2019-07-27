@@ -1648,6 +1648,10 @@
                 <source>The entered data as an overview:</source>
                 <target>Die eingegebenen Daten in der Übersicht:</target>
             </trans-unit>
+            <trans-unit id="speakerImage.alt" approved="yes">
+                <source>portrait image</source>
+                <target>Porträt</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

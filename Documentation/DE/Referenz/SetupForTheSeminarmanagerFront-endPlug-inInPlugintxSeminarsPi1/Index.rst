@@ -708,8 +708,8 @@ override the corresponding value from TS Setup.**
          boolean
 
    Beschreibung
-         whether to show detailed information of the speakers in the single
-         viewif disabled, only the names will be shown
+         whether to show detailed information of the speakers in the single view;
+         if disabled, only the names will be shown
 
    Standardwert
          1
@@ -839,6 +839,36 @@ override the corresponding value from TS Setup.**
 
    Default
          0
+
+
+.. container:: table-row
+
+   Eigenschaft
+         speakerImageWidth
+
+   Datentyp
+         integer
+
+   Beschreibung
+         Breite des Speaker-Bildes in der Veranstaltungs-Einzelansicht
+
+   Standardwert
+         150
+
+
+.. container:: table-row
+
+   Eigenschaft
+         speakerImageHeight
+
+   Datentyp
+         integer
+
+   Beschreibung
+         Höhe des Speaker-Bildes in der Veranstaltungs-Einzelansicht
+
+   Standardwert
+         150
 
 
 .. container:: table-row
