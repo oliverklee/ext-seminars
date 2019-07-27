@@ -13,6 +13,11 @@ use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper implements \Tx_Oelib_Interface_ConfigurationCheckable
 {
     /**
+     * @var string[]
+     */
+    const VALID_SPEAKER_TYPES = ['speakers', 'partners', 'tutors', 'leaders'];
+
+    /**
      * @var string same as class name
      */
     public $prefixId = 'tx_seminars_pi1';
@@ -1103,22 +1108,14 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      */
     private function setSpeakersMarkerWithoutCheck($speakerType)
     {
-        if (!in_array(
-            $speakerType,
-            ['speakers', 'partners', 'tutors', 'leaders']
-        )) {
-            throw new \InvalidArgumentException(
-                'The speaker type given in the parameter $speakerType is not an allowed type.',
-                1333293083
-            );
+        if (!in_array($speakerType, self::VALID_SPEAKER_TYPES, true)) {
+            throw new \InvalidArgumentException('The given speaker type is not valid.', 1333293083);
         }
 
-        $this->setMarker(
-            $speakerType,
-            $this->getConfValueBoolean('showSpeakerDetails', 's_template_special')
-                ? $this->seminar->getSpeakersWithDescription($this, $speakerType)
-                : $this->seminar->getSpeakersShort($this, $speakerType)
-        );
+        $speakerContent = $this->getConfValueBoolean('showSpeakerDetails', 's_template_special')
+            ? $this->seminar->getSpeakersWithDetails($this, $speakerType)
+            : $this->seminar->getSpeakersShort($this, $speakerType);
+        $this->setMarker($speakerType, $speakerContent);
     }
 
     /**

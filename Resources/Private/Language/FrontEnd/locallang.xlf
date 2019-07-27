@@ -1237,6 +1237,9 @@
             <trans-unit id="label_save_event_overview" xml:space="preserve">
                 <source>The entered data as an overview:</source>
             </trans-unit>
+            <trans-unit id="speakerImage.alt">
+                <source>portrait image</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>

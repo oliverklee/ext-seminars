@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Display the speaker image in the event single view (#220)
 - Add Speaker.image (#217)
 
 ### Changed

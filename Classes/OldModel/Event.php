@@ -774,39 +774,51 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string our speakers (or '' if there is an error)
      */
-    public function getSpeakersWithDescription(
-        \Tx_Oelib_TemplateHelper $plugin,
-        $speakerRelation = 'speakers'
-    ) {
+    public function getSpeakersWithDetails(\Tx_Oelib_TemplateHelper $plugin, $speakerRelation = 'speakers')
+    {
         if (!$this->hasSpeakersOfType($speakerRelation)) {
             return '';
         }
 
-        $result = '';
+        $result = [];
 
         /** @var \Tx_Seminars_OldModel_Speaker $speaker */
         foreach ($this->getSpeakerBag($speakerRelation) as $speaker) {
             $name = $speaker->getLinkedTitle($plugin);
             if ($speaker->hasOrganization()) {
-                $name .= ', ' . htmlspecialchars($speaker->getOrganization());
+                $name .= ', ' . \htmlspecialchars($speaker->getOrganization(), ENT_QUOTES || ENT_HTML5);
             }
             $plugin->setMarker('speaker_item_title', $name);
-
-            $description = '';
-            if ($speaker->hasDescription()) {
-                $description = $speaker->getDescription($plugin);
-            }
             $plugin->setMarker(
                 'speaker_item_description',
-                $description
+                $speaker->hasDescription() ? $speaker->getDescription($plugin) : ''
             );
-
-            $result .= $plugin->getSubpart(
-                'SPEAKER_LIST_ITEM'
-            );
+            $plugin->setMarker('speaker_image', $speaker->hasImage() ? $this->renderSpeakerImage($speaker, $plugin) : '');
+            $result[] = $plugin->getSubpart('SPEAKER_LIST_ITEM');
         }
 
-        return $result;
+        return \implode(LF, $result);
+    }
+
+    /**
+     * @param Tx_Seminars_OldModel_Speaker $speaker
+     * @param Tx_Oelib_TemplateHelper $plugin
+     *
+     * @return string
+     */
+    private function renderSpeakerImage(\Tx_Seminars_OldModel_Speaker $speaker, \Tx_Oelib_TemplateHelper $plugin) {
+        $imageConfiguration = [
+            'altText' => $plugin->translate('speakerImage.alt'),
+            'titleText' => $plugin->translate('speakerImage.alt'),
+            'params' => 'class="speaker-image"',
+            'file' => $speaker->getImage()->getPublicUrl(),
+            'file.' => [
+                'width' => $plugin->getConfValueInteger('speakerImageWidth') . 'c',
+                'height' => $plugin->getConfValueInteger('speakerImageHeight') . 'c',
+            ],
+        ];
+
+        return $plugin->cObj->cObjGetSingle('IMAGE', $imageConfiguration);
     }
 
     /**

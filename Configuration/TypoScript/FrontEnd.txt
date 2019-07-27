@@ -161,6 +161,12 @@ plugin.tx_seminars_pi1 {
     # whether to send an additional notification e-mail from the FE editor to the reviewers when a new record has been created
     sendAdditionalNotificationEmailInFrontEndEditor = 0
 
+    # the width of the speaker image in the single view
+    speakerImageWidth = 150
+
+    # the height of the speaker image in the single view
+    speakerImageHeight = 150
+
     # The following variables don't have any default values provided.
     # You need to set them yourself for this extension to work correctly.
 
