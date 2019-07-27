@@ -224,6 +224,16 @@
                 <source>No static template was found. Please include the seminars static template in the TS setup of this folder.</source>
                 <target>Kein statisches Template gefunden. Bitte binden Sie das statische Template der seminars-Extension im TS-Setup dieses Ordners ein.</target>
             </trans-unit>
+            <trans-unit id="message.crowdfundingCampaign" approved="yes">
+                <source>
+                    This extension is not compatible with TYPO3 9LTS yet.
+                    With this crowdfunding campaign, you can help support the necessary programming work:
+                </source>
+                <target>
+                    Diese Extension ist bisher noch nicht mit TYPO3 9LTS kompatibel. Über diese Crowdfunding-Kampagne
+                    können Sie die nötigen Programmierarbeiten unterstützen:
+                </target>
+            </trans-unit>
             <trans-unit id="testForm_prefillField_subject" xml:space="preserve" approved="yes">
                 <source>Event tested</source>
                 <target>Event getestet</target>
