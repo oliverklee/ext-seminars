@@ -11,7 +11,7 @@
         "talks"
     ],
     "homepage": "https://www.oliverklee.de/typo3-services/typo3-extensions/seminarmanager.html",
-    "license": "GPL-3.0-or-later",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Oliver Klee",
@@ -103,7 +103,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.0.x-dev"
+            "dev-master": "2.2.x-dev"
         },
         "typo3/cms": {
             "extension-key": "seminars",

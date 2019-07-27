@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add Speaker.image (#217)
 
 ### Changed
+- Change from GPL V3 to GPL V2+ (#221)
 - Pass user object in modifySalutation hook (#215)
 - Rename and namespace the DataHandler hook class (#206)
 - Skip the DB cleanup in the new functional tests (#204)
