@@ -125,6 +125,8 @@ organizations and persons:
 
 - Rob De Vries
 
+- `SaaS Web Internet Solutions GmbH <https://www.saasweb.net/de>`_
+
 - `Sankt Michaelsbund Mediendienste <https://www.st-michaelsbund.de/>`_
 
 - Scheltwort IT-Services KG
@@ -147,7 +149,9 @@ organizations and persons:
 
 - Thomas Waurick
 
-- `tsitrone medien GmbH & Co. KG <http://www.tsitrone.de/>`_
+- `tsitrone medien GmbH & Co. KG <https://www.tsitrone.de/>`_
+
+- `WebShade <https://www.webshade.nl/>`_
 
 - `webspiration - webdesign, edv & internetservices
   <http://www.webspiration.ch/>`_
