@@ -23,6 +23,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Remove deprecated "replaces" entry from composer.json (#222)
 - Remove unsupported properties from TCA type "select" (#191)
 
 ### Fixed
