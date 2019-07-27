@@ -268,12 +268,7 @@ abstract class AbstractList
     protected function getCsvIcon()
     {
         $pageData = $this->page->getPageData();
-        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8007000) {
-            $langCsv = $this->getLanguageService(
-            )->sL('EXT:lang/Resources/Private/Language/locallang_core.xlf:labels.csv');
-        } else {
-            $langCsv = $this->getLanguageService()->sL('LLL:EXT:lang/locallang_core.xlf:labels.csv');
-        }
+        $csvLabel = $this->getLanguageService()->getLL('csvExport');
         $csvUrl = BackendUtility::getModuleUrl(
             self::MODULE_NAME,
             ['id' => $pageData['uid'], 'csv' => '1', 'tx_seminars_pi2[table]' => $this->tableName]
@@ -286,12 +281,11 @@ abstract class AbstractList
             $this->getAdditionalCsvParameters() . '">' . LF .
             TAB . TAB . TAB . TAB .
             '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') .
-            'Resources/Public/Icons/Csv.gif" title="' .
-            $langCsv . '" alt="" class="icon" />' .
+            'Resources/Public/Icons/Csv.gif" title="' . $csvLabel . '" alt="" class="icon" />' .
             // We use an empty alt attribute as we already have a textual
             // representation directly next to the icon.
             TAB . TAB . TAB . TAB .
-            $langCsv . LF .
+            $csvLabel . LF .
             TAB . TAB . TAB .
             '</a>' . LF .
             TAB . TAB .

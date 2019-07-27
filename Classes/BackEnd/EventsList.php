@@ -285,15 +285,10 @@ class EventsList extends AbstractList
         }
 
         $pageData = $this->page->getPageData();
-        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8007000) {
-            $langCsv = $this->getLanguageService(
-            )->sL('LLL:EXT:lang/Resources/Private/Language/locallang_core.xlf:labels.csv');
-        } else {
-            $langCsv = $this->getLanguageService()->sL('LLL:EXT:lang/locallang_core.xlf:labels.csv');
-        }
+        $csvLabel = $this->getLanguageService()->getLL('csvExport');
 
         $imageTag = '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') .
-            'Resources/Public/Icons/Csv.gif" title="' . $langCsv . '" alt="' . $langCsv . '" class="icon" />';
+            'Resources/Public/Icons/Csv.gif" title="' . $csvLabel . '" alt="' . $csvLabel . '" class="icon" />';
 
         $csvUrl = BackendUtility::getModuleUrl(
             self::MODULE_NAME,
