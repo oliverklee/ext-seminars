@@ -252,6 +252,10 @@
                 <source>The event has been confirmed.</source>
                 <target>Die Veranstaltung wurde fest zugesagt.</target>
             </trans-unit>
+            <trans-unit id="csvExport" approved="yes">
+                <source>Download CSV file</source>
+                <target>CSV-Datei herunterladen</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -190,6 +190,9 @@
             <trans-unit id="message_eventConfirmed" xml:space="preserve">
                 <source>The event has been confirmed.</source>
             </trans-unit>
+            <trans-unit id="csvExport">
+                <source>Download CSV file</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>
