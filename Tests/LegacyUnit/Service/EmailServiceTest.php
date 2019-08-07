@@ -2,6 +2,7 @@
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 
 use OliverKlee\Seminars\Service\EmailService;
+use TYPO3\CMS\Core\Core\Bootstrap;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Lang\LanguageService;
@@ -75,6 +76,7 @@ class EmailServiceTest extends \Tx_Phpunit_TestCase
 
     protected function setUp()
     {
+        Bootstrap::getInstance()->initializeBackendAuthentication();
         $this->languageBackup = isset($GLOBALS['LANG']) ? $GLOBALS['LANG'] : null;
         $languageService = new LanguageService();
         $languageService->init('default');

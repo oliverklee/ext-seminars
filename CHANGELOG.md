@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Initialize a BE user in the BE-related tests (#227)
 
 ## 2.2.0
 
