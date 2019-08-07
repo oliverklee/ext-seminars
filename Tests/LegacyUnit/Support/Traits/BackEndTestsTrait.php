@@ -2,6 +2,7 @@
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits;
 
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
+use TYPO3\CMS\Core\Core\Bootstrap;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\VersionNumberUtility;
@@ -71,6 +72,7 @@ trait BackEndTestsTrait
     private function unifyTestingEnvironment()
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
+        Bootstrap::getInstance()->initializeBackendAuthentication();
         $this->cleanRequestVariables();
         $this->replaceBackEndUserWithMock();
         $this->unifyBackEndLanguage();

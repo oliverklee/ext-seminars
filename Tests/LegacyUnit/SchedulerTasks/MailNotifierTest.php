@@ -7,6 +7,7 @@ use OliverKlee\Seminars\Service\EmailService;
 use OliverKlee\Seminars\Service\EventStatusService;
 use Prophecy\Prophecy\ObjectProphecy;
 use Prophecy\Prophecy\ProphecySubjectInterface;
+use TYPO3\CMS\Core\Core\Bootstrap;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Lang\LanguageService;
@@ -89,6 +90,7 @@ class MailNotifierTest extends \Tx_Phpunit_TestCase
         if (!ExtensionManagementUtility::isLoaded('scheduler')) {
             self::markTestSkipped('This tests needs the scheduler extension.');
         }
+        Bootstrap::getInstance()->initializeBackendAuthentication();
 
         $this->languageService = new LanguageService();
         $this->languageService->init('default');

@@ -1,5 +1,6 @@
 <?php
 
+use TYPO3\CMS\Core\Core\Bootstrap;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -28,6 +29,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends \Tx_Phpunit_Tes
     protected function setUp()
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
+        Bootstrap::getInstance()->initializeBackendAuthentication();
 
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
         $this->subject = new \Tx_Seminars_EmailSalutation();
