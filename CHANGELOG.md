@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Update the mkforms dependency (#230)
 - Pin the dev dependency versions (#229)
 - Initialize a BE user in the BE-related tests (#227)
 
