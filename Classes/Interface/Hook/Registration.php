@@ -5,7 +5,7 @@
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  *
- * @deprecated use hooks from RegistrationEmailHookInterface instead
+ * @deprecated will be removed in seminars 3; use hooks from RegistrationEmailHookInterface instead
  */
 interface Tx_Seminars_Interface_Hook_Registration
 {
@@ -17,7 +17,8 @@ interface Tx_Seminars_Interface_Hook_Registration
      *
      * @return void
      *
-     * @deprecated use RegistrationEmailHookInterface::postProcessOrganizerEmail instead
+     * @deprecated will be removed in seminars 3;
+     * use RegistrationEmailHookInterface::postProcessOrganizerEmail instead
      */
     public function modifyOrganizerNotificationEmail(
         \Tx_Seminars_OldModel_Registration $registration,
@@ -32,7 +33,8 @@ interface Tx_Seminars_Interface_Hook_Registration
      *
      * @return void
      *
-     * @deprecated use RegistrationEmailHookInterface::postProcessAttendeeEmail instead
+     * @deprecated will be removed in seminars 3;
+     * use RegistrationEmailHookInterface::postProcessAttendeeEmail instead
      */
     public function modifyAttendeeEmailText(
         \Tx_Seminars_OldModel_Registration $registration,
