@@ -50,7 +50,7 @@ class RegistrationTest extends FunctionalTestCase
         /** @var \Tx_Seminars_Model_FrontEndUser $user */
         $user = $this->userMapper->find($userUid);
 
-        static::assertSame(0, $this->subject->countByFrontEndUser($user));
+        self::assertSame(0, $this->subject->countByFrontEndUser($user));
     }
 
     /**
@@ -65,7 +65,7 @@ class RegistrationTest extends FunctionalTestCase
         /** @var \Tx_Seminars_Model_FrontEndUser $user */
         $user = $this->userMapper->find($userUid);
 
-        static::assertSame(0, $this->subject->countByFrontEndUser($user));
+        self::assertSame(0, $this->subject->countByFrontEndUser($user));
     }
 
     /**
@@ -78,6 +78,6 @@ class RegistrationTest extends FunctionalTestCase
         /** @var \Tx_Seminars_Model_FrontEndUser $user */
         $user = $this->userMapper->find($userUid);
 
-        static::assertSame(1, $this->subject->countByFrontEndUser($user));
+        self::assertSame(1, $this->subject->countByFrontEndUser($user));
     }
 }

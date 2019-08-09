@@ -1,11 +1,13 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
+
 /**
  * Test case.
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingTimeSlot
@@ -125,8 +127,10 @@ class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends \Tx_Phpunit_TestCase
     public function testGetPlaceShortThrowsExceptionForInexistentPlaceUid()
     {
         $placeUid = $this->testingFramework->createRecord('tx_seminars_sites');
-        $this->setExpectedException(
-            \Tx_Oelib_Exception_NotFound::class,
+        $this->expectException(
+            \Tx_Oelib_Exception_NotFound::class
+        );
+        $this->expectExceptionMessage(
             'The related place with the UID ' . $placeUid . ' could not be found in the DB.'
         );
 
@@ -142,8 +146,10 @@ class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends \Tx_Phpunit_TestCase
             'tx_seminars_sites',
             ['deleted' => 1]
         );
-        $this->setExpectedException(
-            \Tx_Oelib_Exception_NotFound::class,
+        $this->expectException(
+            \Tx_Oelib_Exception_NotFound::class
+        );
+        $this->expectExceptionMessage(
             'The related place with the UID ' . $placeUid . ' could not be found in the DB.'
         );
 

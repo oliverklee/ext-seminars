@@ -1,5 +1,6 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 
@@ -8,7 +9,7 @@ use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Csv_BackEndRegistrationAccessCheckTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Csv_BackEndRegistrationAccessCheckTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Csv_BackEndRegistrationAccessCheck
@@ -33,7 +34,7 @@ class Tx_Seminars_Tests_Unit_Csv_BackEndRegistrationAccessCheckTest extends \Tx_
     protected function setUp()
     {
         $this->backEndUserBackup = $GLOBALS['BE_USER'];
-        $this->backEndUser = $this->getMock(BackendUserAuthentication::class);
+        $this->backEndUser = $this->createMock(BackendUserAuthentication::class);
         $GLOBALS['BE_USER'] = $this->backEndUser;
 
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
@@ -79,7 +80,7 @@ class Tx_Seminars_Tests_Unit_Csv_BackEndRegistrationAccessCheckTest extends \Tx_
     {
         $this->backEndUser->expects(self::at(0))->method('check')
             ->with('tables_select', 'tx_seminars_seminars')
-            ->will(self::returnValue(false));
+            ->willReturn(false);
 
         self::assertFalse(
             $this->subject->hasAccess()
@@ -93,7 +94,7 @@ class Tx_Seminars_Tests_Unit_Csv_BackEndRegistrationAccessCheckTest extends \Tx_
     {
         $this->backEndUser->expects(self::at(0))->method('check')
             ->with('tables_select', 'tx_seminars_seminars')
-            ->will(self::returnValue(false));
+            ->willReturn(false);
 
         self::assertFalse(
             $this->subject->hasAccess()
@@ -107,10 +108,10 @@ class Tx_Seminars_Tests_Unit_Csv_BackEndRegistrationAccessCheckTest extends \Tx_
     {
         $this->backEndUser->expects(self::at(0))->method('check')
             ->with('tables_select', 'tx_seminars_seminars')
-            ->will(self::returnValue(true));
+            ->willReturn(true);
         $this->backEndUser->expects(self::at(1))->method('check')
             ->with('tables_select', 'tx_seminars_attendances')
-            ->will(self::returnValue(false));
+            ->willReturn(false);
 
         self::assertFalse(
             $this->subject->hasAccess()
@@ -124,10 +125,10 @@ class Tx_Seminars_Tests_Unit_Csv_BackEndRegistrationAccessCheckTest extends \Tx_
     {
         $this->backEndUser->expects(self::at(0))->method('check')
             ->with('tables_select', 'tx_seminars_seminars')
-            ->will(self::returnValue(true));
+            ->willReturn(true);
         $this->backEndUser->expects(self::at(1))->method('check')
             ->with('tables_select', 'tx_seminars_attendances')
-            ->will(self::returnValue(true));
+            ->willReturn(true);
 
         self::assertTrue(
             $this->subject->hasAccess()
@@ -139,16 +140,16 @@ class Tx_Seminars_Tests_Unit_Csv_BackEndRegistrationAccessCheckTest extends \Tx_
      */
     public function hasAccessForAccessToEventsTableAndAccessToRegistrationsTableAndAccessToSetPageReturnsTrue()
     {
-        $this->backEndUser->expects(self::any())->method('check')
+        $this->backEndUser->method('check')
             ->with('tables_select', self::anything())
-            ->will(self::returnValue(true));
+            ->willReturn(true);
 
         $pageUid = 12341;
         $this->subject->setPageUid($pageUid);
         $pageRecord = BackendUtility::getRecord('pages', $pageUid);
-        $this->backEndUser->expects(self::any())->method('doesUserHaveAccess')
+        $this->backEndUser->method('doesUserHaveAccess')
             ->with($pageRecord, 1)
-            ->will(self::returnValue(true));
+            ->willReturn(true);
 
         self::assertTrue(
             $this->subject->hasAccess()
@@ -160,16 +161,16 @@ class Tx_Seminars_Tests_Unit_Csv_BackEndRegistrationAccessCheckTest extends \Tx_
      */
     public function hasAccessForAccessToEventsTableAndAccessToRegistrationsTableAndNoAccessToSetPageReturnsFalse()
     {
-        $this->backEndUser->expects(self::any())->method('check')
+        $this->backEndUser->method('check')
             ->with('tables_select', self::anything())
-            ->will(self::returnValue(true));
+            ->willReturn(true);
 
         $pageUid = 12341;
         $this->subject->setPageUid($pageUid);
         $pageRecord = BackendUtility::getRecord('pages', $pageUid);
-        $this->backEndUser->expects(self::any())->method('doesUserHaveAccess')
+        $this->backEndUser->method('doesUserHaveAccess')
             ->with($pageRecord, 1)
-            ->will(self::returnValue(false));
+            ->willReturn(false);
 
         self::assertFalse(
             $this->subject->hasAccess()

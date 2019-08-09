@@ -1,11 +1,13 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
+
 /**
  * Test case.
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_FrontEnd_RequirementsList
@@ -64,8 +66,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends \Tx_Phpunit_T
      */
     public function renderWithoutSetSeminarThrowsException()
     {
-        $this->setExpectedException(
-            \BadMethodCallException::class,
+        $this->expectException(
+            \BadMethodCallException::class
+        );
+        $this->expectExceptionMessage(
             'No event was set, please set an event before calling render'
         );
 
@@ -191,8 +195,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends \Tx_Phpunit_T
      */
     public function limitToMissingRegistrationsWithNoLoggedInFeUserThrowsException()
     {
-        $this->setExpectedException(
-            \BadMethodCallException::class,
+        $this->expectException(
+            \BadMethodCallException::class
+        );
+        $this->expectExceptionMessage(
             'No FE user is currently logged in. Please call this function only when a FE user is logged in.'
         );
 

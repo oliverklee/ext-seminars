@@ -1,12 +1,14 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
+
 /**
  * This test case holds all tests specific to event dates.
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Model_EventDateTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Model_EventDateTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Model_Event
@@ -1674,8 +1676,10 @@ class Tx_Seminars_Tests_Unit_Model_EventDateTest extends \Tx_Phpunit_TestCase
      */
     public function setPaymentMethodsThrowsException()
     {
-        $this->setExpectedException(
-            \BadMethodCallException::class,
+        $this->expectException(
+            \BadMethodCallException::class
+        );
+        $this->expectExceptionMessage(
             'setPaymentMethods may only be called on single events and event ' .
             'topics, but not on event dates.'
         );

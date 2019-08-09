@@ -1,12 +1,14 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
+
 /**
  * Test case.
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Model_PlaceTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Model_Place
@@ -27,8 +29,10 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
      */
     public function setTitleWithEmptyTitleThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The parameter $title must not be empty.'
         );
 
@@ -191,8 +195,10 @@ class Tx_Seminars_Tests_Unit_Model_PlaceTest extends \Tx_Phpunit_TestCase
      */
     public function setCityWithEmptyCityThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The parameter $city must not be empty.'
         );
 

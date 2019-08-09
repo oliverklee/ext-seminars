@@ -1,5 +1,6 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
 
 /**
@@ -8,7 +9,7 @@ use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends TestCase
 {
     use BackEndTestsTrait;
 
@@ -91,21 +92,21 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends \Tx_Phpunit_TestCase
 
     /**
      * @test
-     *
-     * @expectedException \InvalidArgumentException
      */
     public function createListOfEventsForZeroPidThrowsException()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->subject->createListOfEvents(0);
     }
 
     /**
      * @test
-     *
-     * @expectedException \InvalidArgumentException
      */
     public function createListOfEventsForNegativePidThrowsException()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->subject->createListOfEvents(-2);
     }
 

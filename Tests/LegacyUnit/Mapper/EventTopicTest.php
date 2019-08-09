@@ -1,11 +1,13 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
+
 /**
  * This test case holds all tests specific to event topics.
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_Mapper_EventTopicTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Mapper_EventTopicTest extends TestCase
 {
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -38,8 +40,10 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function getTopicForTopicRecordThrowsException()
     {
-        $this->setExpectedException(
-            \BadMethodCallException::class,
+        $this->expectException(
+            \BadMethodCallException::class
+        );
+        $this->expectExceptionMessage(
             'This function may only be called for date records.'
         );
 

@@ -1,12 +1,14 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
+
 /**
  * Test case.
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration
@@ -774,8 +776,10 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends \Tx_Phpunit_TestC
      */
     public function setUserDataThrowsExceptionForEmptyUserData()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             '$userData must not be empty.'
         );
 
@@ -1373,8 +1377,10 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends \Tx_Phpunit_TestC
      */
     public function setSeatsWithNegativeSeatsThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The parameter $seats must be >= 0.'
         );
 
@@ -1499,8 +1505,10 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends \Tx_Phpunit_TestC
      */
     public function setNumberOfKidsWithNegativeNumberOfKidsThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The parameter $numberOfKids must be >= 0.'
         );
 
@@ -1677,8 +1685,10 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends \Tx_Phpunit_TestC
      */
     public function setMethodOfPaymentUidWithNegativeUidThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The parameter $uid must be >= 0.'
         );
 

@@ -1,6 +1,7 @@
 <?php
 namespace OliverKlee\Seminars\Tests\LegacyUnit\BackEnd;
 
+use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\BackEnd\AbstractModule;
 use OliverKlee\Seminars\BackEnd\Controller;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
@@ -14,7 +15,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class ControllerTest extends \Tx_Phpunit_TestCase
+class ControllerTest extends TestCase
 {
     use BackEndTestsTrait;
 
@@ -40,7 +41,7 @@ class ControllerTest extends \Tx_Phpunit_TestCase
      */
     public function isAbstractModule()
     {
-        static::assertInstanceOf(AbstractModule::class, $this->subject);
+        self::assertInstanceOf(AbstractModule::class, $this->subject);
     }
 
     /**
@@ -73,6 +74,6 @@ class ControllerTest extends \Tx_Phpunit_TestCase
 
         $GLOBALS['_GET']['csv'] = '1';
 
-        static::assertSame($responseMock, $this->subject->mainAction($requestMock, $responseMock));
+        self::assertSame($responseMock, $this->subject->mainAction($requestMock, $responseMock));
     }
 }

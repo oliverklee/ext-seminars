@@ -1,11 +1,13 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
+
 /**
  * This test case holds all tests specific to single events.
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Model_Event
@@ -309,8 +311,10 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends \Tx_Phpunit_TestCase
      */
     public function setCreditPointsForSingleEventWithNegativeCreditPointsThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The parameter $creditPoints must be >= 0.'
         );
         $this->subject->setData([]);
@@ -426,8 +430,10 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends \Tx_Phpunit_TestCase
      */
     public function setRegularPriceForSingleEventWithNegativeRegularPriceThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The parameter $price must be >= 0.00.'
         );
 
@@ -539,8 +545,10 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends \Tx_Phpunit_TestCase
      */
     public function setRegularEarlyBirdPriceForSingleEventWithNegativeRegularEarlyBirdPriceThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The parameter $price must be >= 0.00.'
         );
 
@@ -652,8 +660,10 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends \Tx_Phpunit_TestCase
      */
     public function setRegularBoardPriceForSingleEventWithNegativeRegularBoardPriceThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The parameter $price must be >= 0.00.'
         );
 
@@ -765,8 +775,10 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends \Tx_Phpunit_TestCase
      */
     public function setSpecialPriceForSingleEventWithNegativeSpecialPriceThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The parameter $price must be >= 0.00.'
         );
 
@@ -876,8 +888,10 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends \Tx_Phpunit_TestCase
      */
     public function setSpecialEarlyBirdPriceForSingleEventWithNegativeSpecialEarlyBirdPriceThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The parameter $price must be >= 0.00.'
         );
 
@@ -989,8 +1003,10 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends \Tx_Phpunit_TestCase
      */
     public function setSpecialBoardPriceForSingleEventWithNegativeSpecialBoardPriceThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The parameter $price must be >= 0.00.'
         );
 

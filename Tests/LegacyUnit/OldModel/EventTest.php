@@ -1,5 +1,6 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
@@ -9,7 +10,7 @@ use TYPO3\CMS\Core\Utility\VersionNumberUtility;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent
@@ -3518,8 +3519,10 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
      */
     public function setEventTypeThrowsExceptionForNegativeArgument()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             '$eventType must be >= 0.'
         );
 
@@ -4429,8 +4432,10 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
      */
     public function getOrganizerBagWithoutOrganizersThrowsException()
     {
-        $this->setExpectedException(
-            \BadMethodCallException::class,
+        $this->expectException(
+            \BadMethodCallException::class
+        );
+        $this->expectExceptionMessage(
             'There are no organizers related to this event.'
         );
 
@@ -5150,19 +5155,21 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
 
     /**
      * @test
-     * @expectedException \InvalidArgumentException
      */
     public function isUserBlockForZeroUserUidThrowsException()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->subject->isUserBlocked(0);
     }
 
     /**
      * @test
-     * @expectedException \InvalidArgumentException
      */
     public function isUserBlockForNegativeUserUidThrowsException()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->subject->isUserBlocked(-1);
     }
 
@@ -5204,7 +5211,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
             ['seminar' => $registeredEventUid, 'user' => $userUid]
         );
 
-        static::assertTrue($this->subject->isUserBlocked($userUid));
+        self::assertTrue($this->subject->isUserBlocked($userUid));
     }
 
     /**
@@ -5242,7 +5249,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
             ['seminar' => $registeredEventUid, 'user' => $userUid]
         );
 
-        static::assertFalse($this->subject->isUserBlocked($userUid));
+        self::assertFalse($this->subject->isUserBlocked($userUid));
     }
 
     /**
@@ -5268,7 +5275,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
 
         $this->subject->setConfigurationValue('skipRegistrationCollisionCheck', true);
 
-        static::assertFalse($this->subject->isUserBlocked($userUid));
+        self::assertFalse($this->subject->isUserBlocked($userUid));
     }
 
     /**
@@ -5293,7 +5300,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
             ['seminar' => $registeredEventUid, 'user' => $userUid]
         );
 
-        static::assertFalse($this->subject->isUserBlocked($userUid));
+        self::assertFalse($this->subject->isUserBlocked($userUid));
     }
 
     /**
@@ -5317,7 +5324,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
             ['seminar' => $registeredEventUid, 'user' => $userUid]
         );
 
-        static::assertFalse($this->subject->isUserBlocked($userUid));
+        self::assertFalse($this->subject->isUserBlocked($userUid));
     }
 
     /**
@@ -5346,7 +5353,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
             ['seminar' => $registeredEventUid, 'user' => $userUid]
         );
 
-        static::assertFalse($this->subject->isUserBlocked($userUid));
+        self::assertFalse($this->subject->isUserBlocked($userUid));
     }
 
     /**
@@ -5396,7 +5403,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
             ['seminar' => $registeredEventUid, 'user' => $userUid]
         );
 
-        static::assertTrue($this->subject->isUserBlocked($userUid));
+        self::assertTrue($this->subject->isUserBlocked($userUid));
     }
 
     /**
@@ -5451,7 +5458,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
             ['seminar' => $registeredEventUid, 'user' => $userUid]
         );
 
-        static::assertTrue($this->subject->isUserBlocked($userUid));
+        self::assertTrue($this->subject->isUserBlocked($userUid));
     }
 
     /**
@@ -5514,7 +5521,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
             ['seminar' => $registeredEventUid, 'user' => $userUid]
         );
 
-        static::assertFalse($this->subject->isUserBlocked($userUid));
+        self::assertFalse($this->subject->isUserBlocked($userUid));
     }
 
     /*
@@ -8042,8 +8049,10 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
     {
         $this->subject->setBeginDate(0);
 
-        $this->setExpectedException(
-            \BadMethodCallException::class,
+        $this->expectException(
+            \BadMethodCallException::class
+        );
+        $this->expectExceptionMessage(
             'The event has no begin date. Please call this function only if the event has a begin date.'
         );
 
@@ -8301,9 +8310,9 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
         ];
 
         /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(\Tx_Seminars_OldModel_Event::class, ['getPlacesAsArray', 'hasPlace'], [], '', false);
-        $subject->expects(self::any())->method('getPlacesAsArray')->will(self::returnValue([$place]));
-        $subject->expects(self::any())->method('hasPlace')->will(self::returnValue(true));
+        $subject = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getPlacesAsArray', 'hasPlace']);
+        $subject->method('getPlacesAsArray')->willReturn([$place]);
+        $subject->method('hasPlace')->willReturn(true);
 
         self::assertSame(
             'Hotel Ibis, Kaiser-Karl-Ring 91, Bonn',
@@ -8334,9 +8343,9 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
         ];
 
         /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(\Tx_Seminars_OldModel_Event::class, ['getPlacesAsArray', 'hasPlace'], [], '', false);
-        $subject->expects(self::any())->method('getPlacesAsArray')->will(self::returnValue([$place1, $place2]));
-        $subject->expects(self::any())->method('hasPlace')->will(self::returnValue(true));
+        $subject = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getPlacesAsArray', 'hasPlace']);
+        $subject->method('getPlacesAsArray')->willReturn([$place1, $place2]);
+        $subject->method('hasPlace')->willReturn(true);
 
         self::assertSame(
             'Hotel Ibis' . LF . 'Wasserwerk',
@@ -8357,9 +8366,9 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
         ];
 
         /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(\Tx_Seminars_OldModel_Event::class, ['getPlacesAsArray', 'hasPlace'], [], '', false);
-        $subject->expects(self::any())->method('getPlacesAsArray')->will(self::returnValue([$place]));
-        $subject->expects(self::any())->method('hasPlace')->will(self::returnValue(true));
+        $subject = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getPlacesAsArray', 'hasPlace']);
+        $subject->method('getPlacesAsArray')->willReturn([$place]);
+        $subject->method('hasPlace')->willReturn(true);
 
         self::assertSame(
             'Hotel Ibis, Kaiser-Karl-Ring 91, Bonn',
@@ -8380,9 +8389,9 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
         ];
 
         /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(\Tx_Seminars_OldModel_Event::class, ['getPlacesAsArray', 'hasPlace'], [], '', false);
-        $subject->expects(self::any())->method('getPlacesAsArray')->will(self::returnValue([$place]));
-        $subject->expects(self::any())->method('hasPlace')->will(self::returnValue(true));
+        $subject = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getPlacesAsArray', 'hasPlace']);
+        $subject->method('getPlacesAsArray')->willReturn([$place]);
+        $subject->method('hasPlace')->willReturn(true);
 
         self::assertSame(
             'Hotel Ibis, Kaiser-Karl-Ring 91, 53111 Bonn',
@@ -9351,19 +9360,16 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
         $registrationsVipListPID
     ) {
         /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_OldModel_Event::class,
-            ['needsRegistration', 'isUserRegistered', 'isUserVip'],
-            [],
-            '',
-            false
+            ['needsRegistration', 'isUserRegistered', 'isUserVip']
         );
-        $subject->expects(self::any())->method('needsRegistration')
-            ->will(self::returnValue(true));
-        $subject->expects(self::any())->method('isUserRegistered')
-            ->will(self::returnValue($isRegistered));
-        $subject->expects(self::any())->method('isUserVip')
-            ->will(self::returnValue($isVip));
+        $subject->method('needsRegistration')
+            ->willReturn(true);
+        $subject->method('isUserRegistered')
+            ->willReturn($isRegistered);
+        $subject->method('isUserVip')
+            ->willReturn($isVip);
 
         if ($loggedIn) {
             $this->testingFramework->createFakeFrontEnd();
@@ -9405,19 +9411,16 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
         $registrationsVipListPID
     ) {
         /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_OldModel_Event::class,
-            ['needsRegistration', 'isUserRegistered', 'isUserVip'],
-            [],
-            '',
-            false
+            ['needsRegistration', 'isUserRegistered', 'isUserVip']
         );
-        $subject->expects(self::any())->method('needsRegistration')
-            ->will(self::returnValue(true));
-        $subject->expects(self::any())->method('isUserRegistered')
-            ->will(self::returnValue($isRegistered));
-        $subject->expects(self::any())->method('isUserVip')
-            ->will(self::returnValue($isVip));
+        $subject->method('needsRegistration')
+            ->willReturn(true);
+        $subject->method('isUserRegistered')
+            ->willReturn($isRegistered);
+        $subject->method('isUserVip')
+            ->willReturn($isVip);
 
         if ($loggedIn) {
             $this->testingFramework->createFakeFrontEnd();
@@ -9489,17 +9492,11 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
         $allowCsvExportForVips
     ) {
         /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
-            \Tx_Seminars_OldModel_Event::class,
-            ['needsRegistration', 'isUserVip'],
-            [],
-            '',
-            false
-        );
-        $subject->expects(self::any())->method('needsRegistration')
-            ->will(self::returnValue(true));
-        $subject->expects(self::any())->method('isUserVip')
-            ->will(self::returnValue($isVip));
+        $subject = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['needsRegistration', 'isUserVip']);
+        $subject->method('needsRegistration')
+            ->willReturn(true);
+        $subject->method('isUserVip')
+            ->willReturn($isVip);
         $subject->init(
             ['allowCsvExportForVips' => $allowCsvExportForVips]
         );
@@ -9697,19 +9694,16 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
         $registrationsVipListPID
     ) {
         /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_OldModel_Event::class,
-            ['needsRegistration', 'isUserRegistered', 'isUserVip'],
-            [],
-            '',
-            false
+            ['needsRegistration', 'isUserRegistered', 'isUserVip']
         );
-        $subject->expects(self::any())->method('needsRegistration')
-            ->will(self::returnValue(true));
-        $subject->expects(self::any())->method('isUserRegistered')
-            ->will(self::returnValue($isRegistered));
-        $subject->expects(self::any())->method('isUserVip')
-            ->will(self::returnValue($isVip));
+        $subject->method('needsRegistration')
+            ->willReturn(true);
+        $subject->method('isUserRegistered')
+            ->willReturn($isRegistered);
+        $subject->method('isUserVip')
+            ->willReturn($isVip);
 
         if ($loggedIn) {
             $this->testingFramework->createFakeFrontEnd();
@@ -9910,19 +9904,16 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
         $registrationsVipListPID
     ) {
         /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_OldModel_Event::class,
-            ['needsRegistration', 'isUserRegistered', 'isUserVip'],
-            [],
-            '',
-            false
+            ['needsRegistration', 'isUserRegistered', 'isUserVip']
         );
-        $subject->expects(self::any())->method('needsRegistration')
-            ->will(self::returnValue(true));
-        $subject->expects(self::any())->method('isUserRegistered')
-            ->will(self::returnValue($isRegistered));
-        $subject->expects(self::any())->method('isUserVip')
-            ->will(self::returnValue($isVip));
+        $subject->method('needsRegistration')
+            ->willReturn(true);
+        $subject->method('isUserRegistered')
+            ->willReturn($isRegistered);
+        $subject->method('isUserVip')
+            ->willReturn($isVip);
 
         if ($loggedIn) {
             $this->testingFramework->createFakeFrontEnd();
@@ -9951,8 +9942,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
     public function canViewRegistrationsListMessageWithoutNeededRegistrationReturnsNoRegistrationMessage()
     {
         /** @var \Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(\Tx_Seminars_OldModel_Event::class, ['needsRegistration'], [], '', false);
-        $subject->expects(self::any())->method('needsRegistration')->will(self::returnValue(false));
+        $subject = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['needsRegistration']);
+        $subject->method('needsRegistration')->willReturn(false);
         $subject->init();
 
         self::assertSame(
@@ -9967,8 +9958,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
     public function canViewRegistrationsListMessageForListAndNoLoginAndAttendeesAccessReturnsPleaseLoginMessage()
     {
         /** @var \Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(\Tx_Seminars_OldModel_Event::class, ['needsRegistration'], [], '', false);
-        $subject->expects(self::any())->method('needsRegistration')->will(self::returnValue(true));
+        $subject = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['needsRegistration']);
+        $subject->method('needsRegistration')->willReturn(true);
         $subject->init();
 
         self::assertSame(
@@ -9983,8 +9974,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
     public function canViewRegistrationsListMessageForListAndNoLoginAndLoginAccessReturnsPleaseLoginMessage()
     {
         /** @var \Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(\Tx_Seminars_OldModel_Event::class, ['needsRegistration'], [], '', false);
-        $subject->expects(self::any())->method('needsRegistration')->will(self::returnValue(true));
+        $subject = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['needsRegistration']);
+        $subject->method('needsRegistration')->willReturn(true);
         $subject->init();
 
         self::assertSame(
@@ -9999,8 +9990,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
     public function canViewRegistrationsListMessageForListAndNoLoginAndWorldAccessReturnsEmptyString()
     {
         /** @var \Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(\Tx_Seminars_OldModel_Event::class, ['needsRegistration'], [], '', false);
-        $subject->expects(self::any())->method('needsRegistration')->will(self::returnValue(true));
+        $subject = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['needsRegistration']);
+        $subject->method('needsRegistration')->willReturn(true);
         $subject->init();
 
         self::assertSame(
@@ -10035,8 +10026,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
     public function canViewRegistrationsListMessageForVipListAndNoLoginReturnsPleaseLoginMessage($accessLevel)
     {
         /** @var \Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(\Tx_Seminars_OldModel_Event::class, ['needsRegistration'], [], '', false);
-        $subject->expects(self::any())->method('needsRegistration')->will(self::returnValue(true));
+        $subject = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['needsRegistration']);
+        $subject->method('needsRegistration')->willReturn(true);
         $subject->init();
 
         self::assertSame(
@@ -10053,8 +10044,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
     public function canViewRegistrationsListMessageForVipListAndWorldAccessAndNoLoginReturnsEmptyString()
     {
         /** @var \Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(\Tx_Seminars_OldModel_Event::class, ['needsRegistration'], [], '', false);
-        $subject->expects(self::any())->method('needsRegistration')->will(self::returnValue(true));
+        $subject = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['needsRegistration']);
+        $subject->method('needsRegistration')->willReturn(true);
         $subject->init();
 
         self::assertSame(
@@ -10094,17 +10085,14 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
     public function canViewRegistrationsListMessageWithLoginRoutesParameters($whichPlugin, $accessLevel)
     {
         /** @var \Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_OldModel_Event::class,
-            ['needsRegistration', 'canViewRegistrationsList'],
-            [],
-            '',
-            false
+            ['needsRegistration', 'canViewRegistrationsList']
         );
-        $subject->expects(self::any())->method('needsRegistration')->will(self::returnValue(true));
-        $subject->expects(self::any())->method('canViewRegistrationsList')
+        $subject->method('needsRegistration')->willReturn(true);
+        $subject->method('canViewRegistrationsList')
             ->with($whichPlugin, $accessLevel)
-            ->will(self::returnValue(true));
+            ->willReturn(true);
 
         $this->testingFramework->createFakeFrontEnd();
         $this->testingFramework->createAndLoginFrontEndUser();
@@ -10118,15 +10106,12 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
     public function canViewRegistrationsListMessageWithLoginAndAccessGrantedReturnsEmptyString()
     {
         /** @var \Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_OldModel_Event::class,
-            ['needsRegistration', 'canViewRegistrationsList'],
-            [],
-            '',
-            false
+            ['needsRegistration', 'canViewRegistrationsList']
         );
-        $subject->expects(self::any())->method('needsRegistration')->will(self::returnValue(true));
-        $subject->expects(self::any())->method('canViewRegistrationsList')->will(self::returnValue(true));
+        $subject->method('needsRegistration')->willReturn(true);
+        $subject->method('canViewRegistrationsList')->willReturn(true);
 
         $this->testingFramework->createFakeFrontEnd();
         $this->testingFramework->createAndLoginFrontEndUser();
@@ -10143,15 +10128,12 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
     public function canViewRegistrationsListMessageWithLoginAndAccessDeniedReturnsAccessDeniedMessage()
     {
         /** @var \Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_OldModel_Event::class,
-            ['needsRegistration', 'canViewRegistrationsList'],
-            [],
-            '',
-            false
+            ['needsRegistration', 'canViewRegistrationsList']
         );
-        $subject->expects(self::any())->method('needsRegistration')->will(self::returnValue(true));
-        $subject->expects(self::any())->method('canViewRegistrationsList')->will(self::returnValue(false));
+        $subject->method('needsRegistration')->willReturn(true);
+        $subject->method('canViewRegistrationsList')->willReturn(false);
 
         $this->testingFramework->createFakeFrontEnd();
         $this->testingFramework->createAndLoginFrontEndUser();
@@ -10304,7 +10286,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
         $hasPriceSpecialBoard
     ) {
         /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_OldModel_Event::class,
             [
                 'hasPriceRegular',
@@ -10314,26 +10296,23 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
                 'hasEarlyBirdPriceSpecial',
                 'hasPriceRegularBoard',
                 'hasPriceSpecialBoard',
-            ],
-            [],
-            '',
-            false
+            ]
         );
 
-        $subject->expects(self::any())->method('hasPriceRegular')
-            ->will(self::returnValue($hasPriceRegular));
-        $subject->expects(self::any())->method('hasPriceSpecial')
-            ->will(self::returnValue($hasPriceSpecial));
-        $subject->expects(self::any())->method('earlyBirdApplies')
-            ->will(self::returnValue($earlyBirdApplies));
-        $subject->expects(self::any())->method('hasEarlyBirdPriceRegular')
-            ->will(self::returnValue($hasEarlyBirdPriceRegular));
-        $subject->expects(self::any())->method('hasEarlyBirdPriceSpecial')
-            ->will(self::returnValue($hasEarlyBirdPriceSpecial));
-        $subject->expects(self::any())->method('hasPriceRegularBoard')
-            ->will(self::returnValue($hasPriceRegularBoard));
-        $subject->expects(self::any())->method('hasPriceSpecialBoard')
-            ->will(self::returnValue($hasPriceSpecialBoard));
+        $subject->method('hasPriceRegular')
+            ->willReturn($hasPriceRegular);
+        $subject->method('hasPriceSpecial')
+            ->willReturn($hasPriceSpecial);
+        $subject->method('earlyBirdApplies')
+            ->willReturn($earlyBirdApplies);
+        $subject->method('hasEarlyBirdPriceRegular')
+            ->willReturn($hasEarlyBirdPriceRegular);
+        $subject->method('hasEarlyBirdPriceSpecial')
+            ->willReturn($hasEarlyBirdPriceSpecial);
+        $subject->method('hasPriceRegularBoard')
+            ->willReturn($hasPriceRegularBoard);
+        $subject->method('hasPriceSpecialBoard')
+            ->willReturn($hasPriceSpecialBoard);
 
         self::assertSame(
             $expectedHasAnyPrice,
@@ -10652,7 +10631,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
         $this->subject->setRecordPropertyString('price_special_early', '45.00');
         $this->subject->setRecordPropertyString('price_special_board', '75.00');
 
-        static::assertSame(
+        self::assertSame(
             ['regular', 'regular_board', 'special', 'special_board'],
             array_keys($this->subject->getAvailablePrices())
         );
@@ -10671,7 +10650,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
         $this->subject->setRecordPropertyString('price_special_board', '75.00');
         $this->subject->setRecordPropertyString('deadline_early_bird', $this->now - 1000);
 
-        static::assertSame(
+        self::assertSame(
             ['regular', 'regular_board', 'special', 'special_board'],
             array_keys($this->subject->getAvailablePrices())
         );
@@ -10690,7 +10669,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
         $this->subject->setRecordPropertyString('price_special_board', '75.00');
         $this->subject->setRecordPropertyString('deadline_early_bird', $this->now + 1000);
 
-        static::assertSame(
+        self::assertSame(
             ['regular_early', 'regular_board', 'special_early', 'special_board'],
             array_keys($this->subject->getAvailablePrices())
         );
@@ -10701,6 +10680,6 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends \Tx_Phpunit_TestCase
      */
     public function getAvailablePricesForNoPricesSetReturnsRegularPriceOnly()
     {
-        static::assertSame(['regular'], array_keys($this->subject->getAvailablePrices()));
+        self::assertSame(['regular'], array_keys($this->subject->getAvailablePrices()));
     }
 }

@@ -1,11 +1,13 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
+
 /**
  * Test case.
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_Mapper_SpeakerTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Mapper_SpeakerTest extends TestCase
 {
     /**
      * @var \Tx_Oelib_TestingFramework

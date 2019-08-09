@@ -1,12 +1,14 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
+
 /**
  * Test case.
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Mapper_EventTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Mapper_EventTest extends TestCase
 {
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -761,8 +763,10 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends \Tx_Phpunit_TestCase
      */
     public function findByPublicationHashForEmptyPublicationHashGivenThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The given publication hash was empty.'
         );
 
@@ -865,11 +869,11 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends \Tx_Phpunit_TestCase
 
     /**
      * @test
-     *
-     * @expectedException \InvalidArgumentException
      */
     public function findAllByBeginDateForZeroMinimumAndZeroMaximumThrowsException()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->subject->findAllByBeginDate(0, 0);
     }
 
@@ -883,21 +887,21 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends \Tx_Phpunit_TestCase
 
     /**
      * @test
-     *
-     * @expectedException \InvalidArgumentException
      */
     public function findAllByBeginDateForNegativeMinimumSmallerThanMaximumThrowsException()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->subject->findAllByBeginDate(-1, 1);
     }
 
     /**
      * @test
-     *
-     * @expectedException \InvalidArgumentException
      */
     public function findAllByBeginDateForMinimumGreaterThanMaximumThrowsException()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->subject->findAllByBeginDate(2, 1);
     }
 
@@ -1017,19 +1021,21 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends \Tx_Phpunit_TestCase
 
     /**
      * @test
-     * @expectedException \Tx_Oelib_Exception_NotFound
      */
     public function findNextUpcomingWithNoEventsThrowsEmptyQueryResultException()
     {
+        $this->expectException(\Tx_Oelib_Exception_NotFound::class);
+
         $this->subject->findNextUpcoming();
     }
 
     /**
      * @test
-     * @expectedException \Tx_Oelib_Exception_NotFound
      */
     public function findNextUpcomingWithPastEventThrowsEmptyQueryResultException()
     {
+        $this->expectException(\Tx_Oelib_Exception_NotFound::class);
+
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             ['begin_date' => $GLOBALS['SIM_ACCESS_TIME'] - 1000]

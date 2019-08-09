@@ -1,12 +1,14 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
+
 /**
  * Test case.
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Model_Registration
@@ -40,8 +42,10 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setTitleWithEmptyTitleThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The parameter $title must not be empty.'
         );
 
@@ -304,8 +308,10 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setSeatsWithNegativeSeatsThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The parameter $seats must be >= 0.'
         );
 
@@ -387,8 +393,10 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setTotalPriceForNegativePriceThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The parameter $price must be >= 0.'
         );
 
@@ -527,8 +535,10 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setPaymentDateAsUnixTimestampWithNegativeTimestampThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The parameter $timestamp must be >= 0.'
         );
 
@@ -877,8 +887,10 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setGenderWithUnsupportedGenderThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The parameter $gender must be one of the following: \\Tx_Oelib_Model_FrontEndUser::GENDER_MALE, ' .
             'Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE, \\Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN'
         );
@@ -1537,8 +1549,10 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends \Tx_Phpunit_TestCase
      */
     public function setKidsWithNegativeKidsThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The parameter $kids must be >= 0.'
         );
 

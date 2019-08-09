@@ -1,5 +1,6 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
@@ -9,7 +10,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
 {
     /**
      * @var string
@@ -148,25 +149,21 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
             '%H:%M'
         );
 
-        $this->linkBuilder = $this->getMock(
+        $this->linkBuilder = $this->createPartialMock(
             \Tx_Seminars_Service_SingleViewLinkBuilder::class,
             ['createRelativeUrlForEvent']
         );
-        $this->linkBuilder->expects(self::any())
+        $this->linkBuilder
             ->method('createRelativeUrlForEvent')
-            ->will(
-                self::returnValue(
-                    'index.php?id=42&tx_seminars_pi1%5BshowUid%5D=1337'
-                )
+            ->willReturn(
+                'index.php?id=42&tx_seminars_pi1%5BshowUid%5D=1337'
             );
         $this->subject->injectLinkBuilder($this->linkBuilder);
 
         /** @var $content ContentObjectRenderer|PHPUnit_Framework_MockObject_MockObject */
-        $content = $this->getMock(ContentObjectRenderer::class, ['IMAGE', 'cObjGetSingle']);
-        $content->expects(self::any())->method('cObjGetSingle')->will(
-            self::returnValue(
-                '<img src="foo.jpg" alt="bar"/>'
-            )
+        $content = $this->createPartialMock(ContentObjectRenderer::class, ['IMAGE', 'cObjGetSingle']);
+        $content->method('cObjGetSingle')->willReturn(
+            '<img src="foo.jpg" alt="bar"/>'
         );
         $this->subject->cObj = $content;
     }
@@ -368,9 +365,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
      */
     private function createContentMock()
     {
-        $mock = $this->getMock(ContentObjectRenderer::class, ['getTypoLink']);
-        $mock->expects(self::any())->method('getTypoLink')
-            ->will(self::returnCallback([$this, 'getTypoLink']));
+        $mock = $this->createPartialMock(ContentObjectRenderer::class, ['getTypoLink']);
+        $mock->method('getTypoLink')
+            ->willReturnCallback([$this, 'getTypoLink']);
 
         return $mock;
     }
@@ -715,7 +712,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function singleViewFlavorWithUidCreatesSingleView()
     {
         /** @var \Tx_Seminars_FrontEnd_DefaultController|\PHPUnit_Framework_MockObject_MockObject $controller */
-        $controller = $this->getMock(
+        $controller = $this->createPartialMock(
             \Tx_Seminars_FrontEnd_DefaultController::class,
             [
                 'createListView',
@@ -742,7 +739,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function singleViewFlavorWithUidFromShowSingleEventConfigurationCreatesSingleView()
     {
         /** @var \Tx_Seminars_FrontEnd_DefaultController|\PHPUnit_Framework_MockObject_MockObject $controller */
-        $controller = $this->getMock(
+        $controller = $this->createPartialMock(
             \Tx_Seminars_FrontEnd_DefaultController::class,
             [
                 'createListView',
@@ -769,7 +766,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function singleViewFlavorWithoutUidCreatesSingleView()
     {
         /** @var \Tx_Seminars_FrontEnd_DefaultController|\PHPUnit_Framework_MockObject_MockObject $controller */
-        $controller = $this->getMock(
+        $controller = $this->createPartialMock(
             \Tx_Seminars_FrontEnd_DefaultController::class,
             [
                 'createListView',
@@ -1294,7 +1291,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->find($this->seminarUid);
-        $hook = $this->getMock(\Tx_Seminars_Interface_Hook_EventSingleView::class);
+        $hook = $this->createMock(\Tx_Seminars_Interface_Hook_EventSingleView::class);
         $hook->expects(self::once())->method('modifyEventSingleView')->with($event, self::anything());
         // We don't test for the second parameter (the template instance here)
         // because we cannot access it from the outside.
@@ -2027,7 +2024,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
 
-        $hook = $this->getMock(\Tx_Seminars_Interface_Hook_EventSingleView::class);
+        $hook = $this->createMock(\Tx_Seminars_Interface_Hook_EventSingleView::class);
         $hook->expects(self::never())->method('modifyTimeSlotListRow');
 
         $hookClass = get_class($hook);
@@ -2059,7 +2056,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
 
         /** @var \Tx_Seminars_Model_TimeSlot $timeSlot */
         $timeSlot = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_TimeSlot::class)->find($timeSlotUid);
-        $hook = $this->getMock(\Tx_Seminars_Interface_Hook_EventSingleView::class);
+        $hook = $this->createMock(\Tx_Seminars_Interface_Hook_EventSingleView::class);
         $hook->expects(self::once())->method('modifyTimeSlotListRow')->with($timeSlot, self::anything());
         // We don't test for the second parameter (the template instance here)
         // because we cannot access it from the outside.
@@ -2098,7 +2095,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
             ['timeslots' => 2]
         );
 
-        $hook = $this->getMock(\Tx_Seminars_Interface_Hook_EventSingleView::class);
+        $hook = $this->createMock(\Tx_Seminars_Interface_Hook_EventSingleView::class);
         $hook->expects(self::exactly(2))->method('modifyTimeSlotListRow');
 
         $hookClass = get_class($hook);
@@ -2996,7 +2993,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function eventListFlavorWithoutUidCreatesListView()
     {
         /** @var \Tx_Seminars_FrontEnd_DefaultController|\PHPUnit_Framework_MockObject_MockObject $controller */
-        $controller = $this->getMock(
+        $controller = $this->createPartialMock(
             \Tx_Seminars_FrontEnd_DefaultController::class,
             [
                 'createListView',
@@ -3023,7 +3020,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function eventListFlavorWithUidCreatesListView()
     {
         /** @var \Tx_Seminars_FrontEnd_DefaultController|\PHPUnit_Framework_MockObject_MockObject $controller */
-        $controller = $this->getMock(
+        $controller = $this->createPartialMock(
             \Tx_Seminars_FrontEnd_DefaultController::class,
             [
                 'createListView',
@@ -3338,8 +3335,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
         );
 
         /** @var $content ContentObjectRenderer|PHPUnit_Framework_MockObject_MockObject */
-        $content = $this->getMock(ContentObjectRenderer::class, ['IMAGE', 'cObjGetSingle']);
-        $content->expects(self::any())->method('cObjGetSingle')
+        $content = $this->createPartialMock(ContentObjectRenderer::class, ['IMAGE', 'cObjGetSingle']);
+        $content->method('cObjGetSingle')
             ->with(
                 'IMAGE',
                 [
@@ -3349,7 +3346,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
                     'titleText' => $topicTitle,
                 ]
             )
-            ->will(self::returnValue('<img src="foo.jpg" alt="' . $topicTitle . '" title="' . $topicTitle . '"/>'));
+            ->willReturn('<img src="foo.jpg" alt="' . $topicTitle . '" title="' . $topicTitle . '"/>');
         $this->subject->cObj = $content;
 
         self::assertRegExp(
@@ -7313,7 +7310,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
      */
     public function registrationFormHtmlspecialcharsEventTitle()
     {
-        $registrationFormMock = $this->getMock(\Tx_Seminars_FrontEnd_RegistrationForm::class, [], [], '', false);
+        $registrationFormMock = $this->createMock(\Tx_Seminars_FrontEnd_RegistrationForm::class);
         GeneralUtility::addInstance(\Tx_Seminars_FrontEnd_RegistrationForm::class, $registrationFormMock);
 
         $this->testingFramework->createAndLoginFrontEndUser();
@@ -8075,17 +8072,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
         $subject = new $className();
         $subject->cObj = $this->createContentMock();
         $subject->conf = [];
-        $event = $this->getMock(
-            \Tx_Seminars_OldModel_Event::class,
-            ['getUid', 'isUserVip', 'isOwnerFeUser'],
-            [],
-            '',
-            false
-        );
-        $event->expects(self::any())->method('isUserVip')
-            ->will(self::returnValue(false));
-        $event->expects(self::any())->method('isOwnerFeUser')
-            ->will(self::returnValue(true));
+        $event = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getUid', 'isUserVip', 'isOwnerFeUser']);
+        $event->method('isUserVip')
+            ->willReturn(false);
+        $event->method('isOwnerFeUser')
+            ->willReturn(true);
         $subject->setSeminar($event);
 
         self::assertTrue(
@@ -8103,17 +8094,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
         $subject = new $className();
         $subject->cObj = $this->createContentMock();
         $subject->conf = ['mayManagersEditTheirEvents' => true];
-        $event = $this->getMock(
-            \Tx_Seminars_OldModel_Event::class,
-            ['getUid', 'isUserVip', 'isOwnerFeUser'],
-            [],
-            '',
-            false
-        );
-        $event->expects(self::any())->method('isUserVip')
-            ->will(self::returnValue(true));
-        $event->expects(self::any())->method('isOwnerFeUser')
-            ->will(self::returnValue(false));
+        $event = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getUid', 'isUserVip', 'isOwnerFeUser']);
+        $event->method('isUserVip')
+            ->willReturn(true);
+        $event->method('isOwnerFeUser')
+            ->willReturn(false);
         $subject->setSeminar($event);
 
         self::assertTrue(
@@ -8131,17 +8116,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
         $subject = new $className();
         $subject->cObj = $this->createContentMock();
         $subject->conf = ['mayManagersEditTheirEvents' => false];
-        $event = $this->getMock(
-            \Tx_Seminars_OldModel_Event::class,
-            ['getUid', 'isUserVip', 'isOwnerFeUser'],
-            [],
-            '',
-            false
-        );
-        $event->expects(self::any())->method('isUserVip')
-            ->will(self::returnValue(true));
-        $event->expects(self::any())->method('isOwnerFeUser')
-            ->will(self::returnValue(false));
+        $event = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getUid', 'isUserVip', 'isOwnerFeUser']);
+        $event->method('isUserVip')
+            ->willReturn(true);
+        $event->method('isOwnerFeUser')
+            ->willReturn(false);
         $subject->setSeminar($event);
 
         self::assertFalse(
@@ -8162,19 +8141,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
             'eventEditorPID' => 42,
             'mayManagersEditTheirEvents' => true,
         ];
-        $event = $this->getMock(
-            \Tx_Seminars_OldModel_Event::class,
-            ['getUid', 'isUserVip', 'isOwnerFeUser'],
-            [],
-            '',
-            false
-        );
-        $event->expects(self::any())->method('getUid')
-            ->will(self::returnValue(91));
-        $event->expects(self::any())->method('isUserVip')
-            ->will(self::returnValue(false));
-        $event->expects(self::any())->method('isOwnerFeUser')
-            ->will(self::returnValue(false));
+        $event = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getUid', 'isUserVip', 'isOwnerFeUser']);
+        $event->method('getUid')
+            ->willReturn(91);
+        $event->method('isUserVip')
+            ->willReturn(false);
+        $event->method('isOwnerFeUser')
+            ->willReturn(false);
         $subject->setSeminar($event);
 
         self::assertFalse(
@@ -8192,23 +8165,20 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function createAllEditorLinksForEditAccessDeniedReturnsEmptyString()
     {
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             $this->createAccessibleProxyClass(),
             ['mayCurrentUserEditCurrentEvent']
         );
         $subject->cObj = $this->createContentMock();
         $subject->conf = ['eventEditorPID' => 42];
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
-            ->will(self::returnValue(false));
+            ->willReturn(false);
 
-        $event = $this->getMock(
+        $event = $this->createPartialMock(
             \Tx_Seminars_OldModel_Event::class,
-            ['getUid', 'isPublished', 'isHidden'],
-            [],
-            '',
-            false
+            ['getUid', 'isPublished', 'isHidden']
         );
-        $event->expects(self::any())->method('getUid')->will(self::returnValue(91));
+        $event->method('getUid')->willReturn(91);
         $subject->setSeminar($event);
 
         self::assertEquals(
@@ -8223,7 +8193,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function createAllEditorLinksForEditAccessGrantedCreatesLinkToEditPageWithSeminarUid()
     {
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             $this->createAccessibleProxyClass(),
             ['mayCurrentUserEditCurrentEvent']
         );
@@ -8232,16 +8202,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
             'eventEditorPID' => 42,
         ];
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
-            ->will(self::returnValue(true));
+            ->willReturn(true);
 
-        $event = $this->getMock(
+        $event = $this->createPartialMock(
             \Tx_Seminars_OldModel_Event::class,
-            ['getUid', 'isPublished', 'isHidden'],
-            [],
-            '',
-            false
+            ['getUid', 'isPublished', 'isHidden']
         );
-        $event->expects(self::any())->method('getUid')->will(self::returnValue(91));
+        $event->method('getUid')->willReturn(91);
         $subject->setSeminar($event);
 
         self::assertContains(
@@ -8257,25 +8224,22 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function createAllEditorLinksForEditAccessGrantedAndPublishedVisibleEventCreatesHideLinkToCurrentPageWithSeminarUid(
     ) {
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             $this->createAccessibleProxyClass(),
             ['mayCurrentUserEditCurrentEvent']
         );
         $subject->cObj = $this->createContentMock();
         $subject->conf = [];
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
-            ->will(self::returnValue(true));
+            ->willReturn(true);
 
-        $event = $this->getMock(
+        $event = $this->createPartialMock(
             \Tx_Seminars_OldModel_Event::class,
-            ['getUid', 'isPublished', 'isHidden'],
-            [],
-            '',
-            false
+            ['getUid', 'isPublished', 'isHidden']
         );
-        $event->expects(self::any())->method('getUid')->will(self::returnValue(91));
-        $event->expects(self::any())->method('isPublished')->will(self::returnValue(true));
-        $event->expects(self::any())->method('isHidden')->will(self::returnValue(false));
+        $event->method('getUid')->willReturn(91);
+        $event->method('isPublished')->willReturn(true);
+        $event->method('isHidden')->willReturn(false);
         $subject->setSeminar($event);
 
         $currentPageId = $GLOBALS['TSFE']->id;
@@ -8294,25 +8258,22 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function createAllEditorLinksForEditAccessGrantedAndPublishedHiddenEventCreatesUnhideLinkToCurrentPageWithSeminarUid(
     ) {
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             $this->createAccessibleProxyClass(),
             ['mayCurrentUserEditCurrentEvent']
         );
         $subject->cObj = $this->createContentMock();
         $subject->conf = [];
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
-            ->will(self::returnValue(true));
+            ->willReturn(true);
 
-        $event = $this->getMock(
+        $event = $this->createPartialMock(
             \Tx_Seminars_OldModel_Event::class,
-            ['getUid', 'isPublished', 'isHidden'],
-            [],
-            '',
-            false
+            ['getUid', 'isPublished', 'isHidden']
         );
-        $event->expects(self::any())->method('getUid')->will(self::returnValue(91));
-        $event->expects(self::any())->method('isPublished')->will(self::returnValue(true));
-        $event->expects(self::any())->method('isHidden')->will(self::returnValue(true));
+        $event->method('getUid')->willReturn(91);
+        $event->method('isPublished')->willReturn(true);
+        $event->method('isHidden')->willReturn(true);
         $subject->setSeminar($event);
 
         $currentPageId = $GLOBALS['TSFE']->id;
@@ -8331,25 +8292,22 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function createAllEditorLinksForEditAccessGrantedAndUnpublishedVisibleEventNotCreatesHideLink()
     {
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             $this->createAccessibleProxyClass(),
             ['mayCurrentUserEditCurrentEvent']
         );
         $subject->cObj = $this->createContentMock();
         $subject->conf = [];
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
-            ->will(self::returnValue(true));
+            ->willReturn(true);
 
-        $event = $this->getMock(
+        $event = $this->createPartialMock(
             \Tx_Seminars_OldModel_Event::class,
-            ['getUid', 'isPublished', 'isHidden'],
-            [],
-            '',
-            false
+            ['getUid', 'isPublished', 'isHidden']
         );
-        $event->expects(self::any())->method('getUid')->will(self::returnValue(91));
-        $event->expects(self::any())->method('isPublished')->will(self::returnValue(false));
-        $event->expects(self::any())->method('isHidden')->will(self::returnValue(false));
+        $event->method('getUid')->willReturn(91);
+        $event->method('isPublished')->willReturn(false);
+        $event->method('isHidden')->willReturn(false);
         $subject->setSeminar($event);
 
         self::assertNotContains(
@@ -8364,25 +8322,22 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function createAllEditorLinksForEditAccessGrantedAndUnpublishedHiddenEventNotCreatesUnhideLink()
     {
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             $this->createAccessibleProxyClass(),
             ['mayCurrentUserEditCurrentEvent']
         );
         $subject->cObj = $this->createContentMock();
         $subject->conf = [];
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
-            ->will(self::returnValue(true));
+            ->willReturn(true);
 
-        $event = $this->getMock(
+        $event = $this->createPartialMock(
             \Tx_Seminars_OldModel_Event::class,
-            ['getUid', 'isPublished', 'isHidden'],
-            [],
-            '',
-            false
+            ['getUid', 'isPublished', 'isHidden']
         );
-        $event->expects(self::any())->method('getUid')->will(self::returnValue(91));
-        $event->expects(self::any())->method('isPublished')->will(self::returnValue(false));
-        $event->expects(self::any())->method('isHidden')->will(self::returnValue(true));
+        $event->method('getUid')->willReturn(91);
+        $event->method('isPublished')->willReturn(false);
+        $event->method('isHidden')->willReturn(true);
         $subject->setSeminar($event);
 
         self::assertNotContains(
@@ -8397,25 +8352,22 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function createAllEditorLinksForEditAccessGrantedAndUnpublishedHiddenEventNotCreatesCopyLink()
     {
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             $this->createAccessibleProxyClass(),
             ['mayCurrentUserEditCurrentEvent']
         );
         $subject->cObj = $this->createContentMock();
         $subject->conf = [];
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
-            ->will(self::returnValue(true));
+            ->willReturn(true);
 
-        $event = $this->getMock(
+        $event = $this->createPartialMock(
             \Tx_Seminars_OldModel_Event::class,
-            ['getUid', 'isPublished', 'isHidden'],
-            [],
-            '',
-            false
+            ['getUid', 'isPublished', 'isHidden']
         );
-        $event->expects(self::any())->method('getUid')->will(self::returnValue(91));
-        $event->expects(self::any())->method('isPublished')->will(self::returnValue(false));
-        $event->expects(self::any())->method('isHidden')->will(self::returnValue(true));
+        $event->method('getUid')->willReturn(91);
+        $event->method('isPublished')->willReturn(false);
+        $event->method('isHidden')->willReturn(true);
         $subject->setSeminar($event);
 
         self::assertNotContains(
@@ -8430,25 +8382,22 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function createAllEditorLinksForEditAccessGrantedAndUnpublishedVisibleEventNotCreatesCopyLink()
     {
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             $this->createAccessibleProxyClass(),
             ['mayCurrentUserEditCurrentEvent']
         );
         $subject->cObj = $this->createContentMock();
         $subject->conf = [];
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
-            ->will(self::returnValue(true));
+            ->willReturn(true);
 
-        $event = $this->getMock(
+        $event = $this->createPartialMock(
             \Tx_Seminars_OldModel_Event::class,
-            ['getUid', 'isPublished', 'isHidden'],
-            [],
-            '',
-            false
+            ['getUid', 'isPublished', 'isHidden']
         );
-        $event->expects(self::any())->method('getUid')->will(self::returnValue(91));
-        $event->expects(self::any())->method('isPublished')->will(self::returnValue(false));
-        $event->expects(self::any())->method('isHidden')->will(self::returnValue(false));
+        $event->method('getUid')->willReturn(91);
+        $event->method('isPublished')->willReturn(false);
+        $event->method('isHidden')->willReturn(false);
         $subject->setSeminar($event);
 
         self::assertNotContains(
@@ -8463,25 +8412,22 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function createAllEditorLinksForEditAccessGrantedAndPublishedHiddenEventCreatesCopyLinkToCurrentPageWithSeminarUid(
     ) {
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             $this->createAccessibleProxyClass(),
             ['mayCurrentUserEditCurrentEvent']
         );
         $subject->cObj = $this->createContentMock();
         $subject->conf = [];
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
-            ->will(self::returnValue(true));
+            ->willReturn(true);
 
-        $event = $this->getMock(
+        $event = $this->createPartialMock(
             \Tx_Seminars_OldModel_Event::class,
-            ['getUid', 'isPublished', 'isHidden'],
-            [],
-            '',
-            false
+            ['getUid', 'isPublished', 'isHidden']
         );
-        $event->expects(self::any())->method('getUid')->will(self::returnValue(91));
-        $event->expects(self::any())->method('isPublished')->will(self::returnValue(true));
-        $event->expects(self::any())->method('isHidden')->will(self::returnValue(true));
+        $event->method('getUid')->willReturn(91);
+        $event->method('isPublished')->willReturn(true);
+        $event->method('isHidden')->willReturn(true);
         $subject->setSeminar($event);
 
         $currentPageId = $GLOBALS['TSFE']->id;
@@ -8504,7 +8450,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function eventsListNotCallsProcessEventEditorActions()
     {
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(\Tx_Seminars_FrontEnd_DefaultController::class, ['processEventEditorActions']);
+        $subject = $this->createPartialMock(\Tx_Seminars_FrontEnd_DefaultController::class, ['processEventEditorActions']);
         $subject->expects(self::never())->method('processEventEditorActions');
 
         $subject->main(
@@ -8521,7 +8467,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
         $this->testingFramework->createAndLoginFrontEndUser();
 
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(\Tx_Seminars_FrontEnd_DefaultController::class, ['processEventEditorActions']);
+        $subject = $this->createPartialMock(\Tx_Seminars_FrontEnd_DefaultController::class, ['processEventEditorActions']);
         $subject->expects(self::once())->method('processEventEditorActions');
 
         $subject->main(
@@ -8536,7 +8482,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function myManagedEventsListCallsProcessEventEditorActions()
     {
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(\Tx_Seminars_FrontEnd_DefaultController::class, ['processEventEditorActions']);
+        $subject = $this->createPartialMock(\Tx_Seminars_FrontEnd_DefaultController::class, ['processEventEditorActions']);
         $subject->expects(self::once())->method('processEventEditorActions');
 
         $subject->main(
@@ -8551,7 +8497,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function processEventEditorActionsIntvalsSeminarPivar()
     {
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             $this->createAccessibleProxyClass(),
             ['ensureIntegerPiVars', 'createEventEditorInstance', 'hideEvent', 'unhideEvent']
         );
@@ -8567,7 +8513,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function processEventEditorActionsWithZeroSeminarPivarNotCreatesEventEditor()
     {
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             $this->createAccessibleProxyClass(),
             ['createEventEditorInstance', 'hideEvent', 'unhideEvent']
         );
@@ -8583,7 +8529,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function processEventEditorActionsWithNegativeSeminarPivarNotCreatesEventEditor()
     {
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             $this->createAccessibleProxyClass(),
             ['createEventEditorInstance', 'hideEvent', 'unhideEvent']
         );
@@ -8601,14 +8547,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
         \Tx_Oelib_MapperRegistry::denyDatabaseAccess();
 
         /** @var \Tx_Seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
-        $eventEditor = $this->getMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage'], [], '', false);
+        $eventEditor = $this->createPartialMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage']);
 
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             $this->createAccessibleProxyClass(),
             ['createEventEditorInstance', 'hideEvent', 'unhideEvent']
         );
-        $subject->expects(self::once())->method('createEventEditorInstance')->will(self::returnValue($eventEditor));
+        $subject->expects(self::once())->method('createEventEditorInstance')->willReturn($eventEditor);
 
         $subject->piVars['seminar'] = 1;
         $subject->processEventEditorActions();
@@ -8622,18 +8568,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
         \Tx_Oelib_MapperRegistry::denyDatabaseAccess();
 
         /** @var \Tx_Seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
-        $eventEditor = $this->getMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage'], [], '', false);
+        $eventEditor = $this->createPartialMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage']);
         $eventEditor->expects(self::once())->method('hasAccessMessage');
 
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             $this->createAccessibleProxyClass(),
             ['createEventEditorInstance', 'hideEvent', 'unhideEvent']
         );
-        $subject->expects(self::atLeastOnce())->method('createEventEditorInstance')->will(
-            self::returnValue(
-                $eventEditor
-            )
+        $subject->expects(self::atLeastOnce())->method('createEventEditorInstance')->willReturn(
+            $eventEditor
         );
 
         $subject->piVars['seminar'] = \Tx_Oelib_MapperRegistry
@@ -8648,21 +8592,19 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function processEventEditorActionsForHideActionWithAccessGrantedCallsHideEvent()
     {
         /** @var \Tx_Seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
-        $eventEditor = $this->getMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage'], [], '', false);
-        $eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->will(self::returnValue(''));
+        $eventEditor = $this->createPartialMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage']);
+        $eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->willReturn('');
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             $this->createAccessibleProxyClass(),
             ['createEventEditorInstance', 'hideEvent', 'unhideEvent']
         );
-        $subject->expects(self::atLeastOnce())->method('createEventEditorInstance')->will(
-            self::returnValue(
-                $eventEditor
-            )
+        $subject->expects(self::atLeastOnce())->method('createEventEditorInstance')->willReturn(
+            $eventEditor
         );
         $subject->expects(self::once())->method('hideEvent')->with($event);
 
@@ -8678,8 +8620,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function processEventEditorActionsForHideActionWithUnpublishedEventAndAccessGrantedNotCallsHideEvent()
     {
         /** @var \Tx_Seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
-        $eventEditor = $this->getMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage'], [], '', false);
-        $eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->will(self::returnValue(''));
+        $eventEditor = $this->createPartialMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage']);
+        $eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->willReturn('');
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(
@@ -8687,14 +8629,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
         )->getLoadedTestingModel(['publication_hash' => 'foo']);
 
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             $this->createAccessibleProxyClass(),
             ['createEventEditorInstance', 'hideEvent', 'unhideEvent']
         );
-        $subject->expects(self::atLeastOnce())->method('createEventEditorInstance')->will(
-            self::returnValue(
-                $eventEditor
-            )
+        $subject->expects(self::atLeastOnce())->method('createEventEditorInstance')->willReturn(
+            $eventEditor
         );
         $subject->expects(self::never())->method('hideEvent');
 
@@ -8710,23 +8650,21 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function processEventEditorActionsForHideActionWithAccessDeniedNotCallsHideEvent()
     {
         /** @var \Tx_Seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
-        $eventEditor = $this->getMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage'], [], '', false);
-        $eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->will(
-            self::returnValue('access denied')
+        $eventEditor = $this->createPartialMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage']);
+        $eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->willReturn(
+            'access denied'
         );
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             $this->createAccessibleProxyClass(),
             ['createEventEditorInstance', 'hideEvent', 'unhideEvent']
         );
-        $subject->expects(self::atLeastOnce())->method('createEventEditorInstance')->will(
-            self::returnValue(
-                $eventEditor
-            )
+        $subject->expects(self::atLeastOnce())->method('createEventEditorInstance')->willReturn(
+            $eventEditor
         );
         $subject->expects(self::never())->method('hideEvent');
 
@@ -8742,18 +8680,18 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function processEventEditorActionsForUnhideActionWithAccessGrantedCallsUnhideEvent()
     {
         /** @var \Tx_Seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
-        $eventEditor = $this->getMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage'], [], '', false);
-        $eventEditor->expects(self::once())->method('hasAccessMessage')->will(self::returnValue(''));
+        $eventEditor = $this->createPartialMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage']);
+        $eventEditor->expects(self::once())->method('hasAccessMessage')->willReturn('');
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             $this->createAccessibleProxyClass(),
             ['createEventEditorInstance', 'hideEvent', 'unhideEvent']
         );
-        $subject->expects(self::once())->method('createEventEditorInstance')->will(self::returnValue($eventEditor));
+        $subject->expects(self::once())->method('createEventEditorInstance')->willReturn($eventEditor);
         $subject->expects(self::once())->method('unhideEvent')->with($event);
 
         $subject->piVars['seminar'] = $event->getUid();
@@ -8768,8 +8706,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function processEventEditorActionsForUnhideActionWithUnpublishedEventAccessGrantedNotCallsUnhideEvent()
     {
         /** @var \Tx_Seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
-        $eventEditor = $this->getMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage'], [], '', false);
-        $eventEditor->expects(self::once())->method('hasAccessMessage')->will(self::returnValue(''));
+        $eventEditor = $this->createPartialMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage']);
+        $eventEditor->expects(self::once())->method('hasAccessMessage')->willReturn('');
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(
@@ -8777,11 +8715,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
         )->getLoadedTestingModel(['publication_hash' => 'foo']);
 
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             $this->createAccessibleProxyClass(),
             ['createEventEditorInstance', 'hideEvent', 'unhideEvent']
         );
-        $subject->expects(self::once())->method('createEventEditorInstance')->will(self::returnValue($eventEditor));
+        $subject->expects(self::once())->method('createEventEditorInstance')->willReturn($eventEditor);
         $subject->expects(self::never())->method('unhideEvent');
 
         $subject->piVars['seminar'] = $event->getUid();
@@ -8796,18 +8734,18 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function processEventEditorActionsForUnhideActionWithAccessDeniedNotCallsUnhideEvent()
     {
         /** @var \Tx_Seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
-        $eventEditor = $this->getMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage'], [], '', false);
-        $eventEditor->expects(self::once())->method('hasAccessMessage')->will(self::returnValue('access denied'));
+        $eventEditor = $this->createPartialMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage']);
+        $eventEditor->expects(self::once())->method('hasAccessMessage')->willReturn('access denied');
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             $this->createAccessibleProxyClass(),
             ['createEventEditorInstance', 'hideEvent', 'unhideEvent']
         );
-        $subject->expects(self::once())->method('createEventEditorInstance')->will(self::returnValue($eventEditor));
+        $subject->expects(self::once())->method('createEventEditorInstance')->willReturn($eventEditor);
         $subject->expects(self::never())->method('unhideEvent');
 
         $subject->piVars['seminar'] = $event->getUid();
@@ -8822,21 +8760,19 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function processEventEditorActionsForCopyActionWithAccessGrantedCallsCopyEvent()
     {
         /** @var \Tx_Seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
-        $eventEditor = $this->getMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage'], [], '', false);
-        $eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->will(self::returnValue(''));
+        $eventEditor = $this->createPartialMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage']);
+        $eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->willReturn('');
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             $this->createAccessibleProxyClass(),
             ['createEventEditorInstance', 'hideEvent', 'unhideEvent', 'copyEvent']
         );
-        $subject->expects(self::atLeastOnce())->method('createEventEditorInstance')->will(
-            self::returnValue(
-                $eventEditor
-            )
+        $subject->expects(self::atLeastOnce())->method('createEventEditorInstance')->willReturn(
+            $eventEditor
         );
         $subject->expects(self::once())->method('copyEvent')->with($event);
 
@@ -8852,8 +8788,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function processEventEditorActionsForCopyActionWithUnpublishedEventAndAccessGrantedNotCallsCopyEvent()
     {
         /** @var \Tx_Seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
-        $eventEditor = $this->getMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage'], [], '', false);
-        $eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->will(self::returnValue(''));
+        $eventEditor = $this->createPartialMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage']);
+        $eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->willReturn('');
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(
@@ -8861,14 +8797,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
         )->getLoadedTestingModel(['publication_hash' => 'foo']);
 
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             $this->createAccessibleProxyClass(),
             ['createEventEditorInstance', 'hideEvent', 'unhideEvent', 'copyEvent']
         );
-        $subject->expects(self::atLeastOnce())->method('createEventEditorInstance')->will(
-            self::returnValue(
-                $eventEditor
-            )
+        $subject->expects(self::atLeastOnce())->method('createEventEditorInstance')->willReturn(
+            $eventEditor
         );
         $subject->expects(self::never())->method('copyEvent');
 
@@ -8884,23 +8818,21 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function processEventEditorActionsForCopyActionWithAccessDeniedNotCallsCopyEvent()
     {
         /** @var \Tx_Seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
-        $eventEditor = $this->getMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage'], [], '', false);
-        $eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->will(
-            self::returnValue('access denied')
+        $eventEditor = $this->createPartialMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage']);
+        $eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->willReturn(
+            'access denied'
         );
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             $this->createAccessibleProxyClass(),
             ['createEventEditorInstance', 'hideEvent', 'unhideEvent', 'copyEvent']
         );
-        $subject->expects(self::atLeastOnce())->method('createEventEditorInstance')->will(
-            self::returnValue(
-                $eventEditor
-            )
+        $subject->expects(self::atLeastOnce())->method('createEventEditorInstance')->willReturn(
+            $eventEditor
         );
         $subject->expects(self::never())->method('copyEvent');
 
@@ -8916,18 +8848,18 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function processEventEditorActionsForEmptyActionWithPublishedEventAndAccessGrantedNotCallsHideEventOrUnhideEvent(
     ) {
         /** @var \Tx_Seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
-        $eventEditor = $this->getMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage'], [], '', false);
-        $eventEditor->expects(self::once())->method('hasAccessMessage')->will(self::returnValue(''));
+        $eventEditor = $this->createPartialMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage']);
+        $eventEditor->expects(self::once())->method('hasAccessMessage')->willReturn('');
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             $this->createAccessibleProxyClass(),
             ['createEventEditorInstance', 'hideEvent', 'unhideEvent']
         );
-        $subject->expects(self::once())->method('createEventEditorInstance')->will(self::returnValue($eventEditor));
+        $subject->expects(self::once())->method('createEventEditorInstance')->willReturn($eventEditor);
         $subject->expects(self::never())->method('hideEvent');
         $subject->expects(self::never())->method('unhideEvent');
 
@@ -8943,18 +8875,18 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function processEventEditorActionsForInvalidActionWithPublishedEventAndAccessGrantedNotCallsHideEventOrUnhideEvent(
     ) {
         /** @var \Tx_Seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
-        $eventEditor = $this->getMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage'], [], '', false);
-        $eventEditor->expects(self::once())->method('hasAccessMessage')->will(self::returnValue(''));
+        $eventEditor = $this->createPartialMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage']);
+        $eventEditor->expects(self::once())->method('hasAccessMessage')->willReturn('');
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             $this->createAccessibleProxyClass(),
             ['createEventEditorInstance', 'hideEvent', 'unhideEvent']
         );
-        $subject->expects(self::once())->method('createEventEditorInstance')->will(self::returnValue($eventEditor));
+        $subject->expects(self::once())->method('createEventEditorInstance')->willReturn($eventEditor);
         $subject->expects(self::never())->method('hideEvent');
         $subject->expects(self::never())->method('unhideEvent');
 
@@ -8970,7 +8902,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function hideEventMarksVisibleEventAsHidden()
     {
         /** @var \Tx_Seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
-        $mapper = $this->getMock(\Tx_Seminars_Mapper_Event::class, ['save']);
+        $mapper = $this->getMockBuilder(\Tx_Seminars_Mapper_Event::class)->setMethods(['save'])->getMock();
         \Tx_Oelib_MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $mapper);
 
         /** @var \Tx_Seminars_Model_Event $event */
@@ -8992,7 +8924,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function hideEventKeepsHiddenEventAsHidden()
     {
         /** @var \Tx_Seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
-        $mapper = $this->getMock(\Tx_Seminars_Mapper_Event::class, ['save']);
+        $mapper = $this->getMockBuilder(\Tx_Seminars_Mapper_Event::class)->setMethods(['save'])->getMock();
         \Tx_Oelib_MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $mapper);
 
         /** @var \Tx_Seminars_Model_Event $event */
@@ -9014,7 +8946,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function hideEventSavesEvent()
     {
         /** @var \Tx_Seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
-        $mapper = $this->getMock(\Tx_Seminars_Mapper_Event::class, ['save']);
+        $mapper = $this->getMockBuilder(\Tx_Seminars_Mapper_Event::class)->setMethods(['save'])->getMock();
         \Tx_Oelib_MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $mapper);
 
         /** @var \Tx_Seminars_Model_Event $event */
@@ -9033,7 +8965,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function hideEventRedirectsToRequestUrl()
     {
         /** @var \Tx_Seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
-        $mapper = $this->getMock(\Tx_Seminars_Mapper_Event::class, ['save']);
+        $mapper = $this->getMockBuilder(\Tx_Seminars_Mapper_Event::class)->setMethods(['save'])->getMock();
         \Tx_Oelib_MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $mapper);
 
         /** @var \Tx_Seminars_Model_Event $event */
@@ -9057,7 +8989,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function unhideEventMarksHiddenEventAsVisible()
     {
         /** @var \Tx_Seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
-        $mapper = $this->getMock(\Tx_Seminars_Mapper_Event::class, ['save']);
+        $mapper = $this->getMockBuilder(\Tx_Seminars_Mapper_Event::class)->setMethods(['save'])->getMock();
         \Tx_Oelib_MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $mapper);
 
         /** @var \Tx_Seminars_Model_Event $event */
@@ -9079,7 +9011,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function unhideEventKeepsVisibleEventAsVisible()
     {
         /** @var \Tx_Seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
-        $mapper = $this->getMock(\Tx_Seminars_Mapper_Event::class, ['save']);
+        $mapper = $this->getMockBuilder(\Tx_Seminars_Mapper_Event::class)->setMethods(['save'])->getMock();
         \Tx_Oelib_MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $mapper);
 
         /** @var \Tx_Seminars_Model_Event $event */
@@ -9101,7 +9033,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function unhideEventSavesEvent()
     {
         /** @var \Tx_Seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
-        $mapper = $this->getMock(\Tx_Seminars_Mapper_Event::class, ['save']);
+        $mapper = $this->getMockBuilder(\Tx_Seminars_Mapper_Event::class)->setMethods(['save'])->getMock();
         \Tx_Oelib_MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $mapper);
 
         /** @var \Tx_Seminars_Model_Event $event */
@@ -9120,7 +9052,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function unhideEventRedirectsToRequestUrl()
     {
         /** @var \Tx_Seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
-        $mapper = $this->getMock(\Tx_Seminars_Mapper_Event::class, ['save']);
+        $mapper = $this->getMockBuilder(\Tx_Seminars_Mapper_Event::class)->setMethods(['save'])->getMock();
         \Tx_Oelib_MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $mapper);
 
         /** @var \Tx_Seminars_Model_Event $event */
@@ -9144,7 +9076,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function copySavesHiddenCloneOfEvent()
     {
         /** @var \Tx_Seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
-        $mapper = $this->getMock(\Tx_Seminars_Mapper_Event::class, ['save']);
+        $mapper = $this->getMockBuilder(\Tx_Seminars_Mapper_Event::class)->setMethods(['save'])->getMock();
         \Tx_Oelib_MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $mapper);
 
         /** @var \Tx_Seminars_Model_Event $event */
@@ -9166,7 +9098,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function copyRemovesRegistrationsFromEvent()
     {
         /** @var \Tx_Seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
-        $mapper = $this->getMock(\Tx_Seminars_Mapper_Event::class, ['save']);
+        $mapper = $this->getMockBuilder(\Tx_Seminars_Mapper_Event::class)->setMethods(['save'])->getMock();
         \Tx_Oelib_MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $mapper);
 
         /** @var \Tx_Seminars_Model_Event $event */
@@ -9192,7 +9124,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function copyEventRedirectsToRequestUrl()
     {
         /** @var \Tx_Seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject $mapper */
-        $mapper = $this->getMock(\Tx_Seminars_Mapper_Event::class, ['save']);
+        $mapper = $this->getMockBuilder(\Tx_Seminars_Mapper_Event::class)->setMethods(['save'])->getMock();
         \Tx_Oelib_MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $mapper);
 
         /** @var \Tx_Seminars_Model_Event $event */
@@ -9220,7 +9152,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function initListViewForDefaultListLimitsListByAdditionalParameters()
     {
         /** @var \Tx_Seminars_FrontEnd_DefaultController|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_FrontEnd_DefaultController::class,
             ['limitForAdditionalParameters']
         );
@@ -9235,7 +9167,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function initListViewForTopicListLimitsListByAdditionalParameters()
     {
         /** @var \Tx_Seminars_FrontEnd_DefaultController|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_FrontEnd_DefaultController::class,
             ['limitForAdditionalParameters']
         );
@@ -9250,7 +9182,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
     public function initListViewForMyEventsListNotLimitsListByAdditionalParameters()
     {
         /** @var \Tx_Seminars_FrontEnd_DefaultController|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_FrontEnd_DefaultController::class,
             ['limitForAdditionalParameters']
         );
@@ -9388,14 +9320,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
         $vipListPid
     ) {
         /** @var \Tx_Seminars_FrontEnd_DefaultController|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_FrontEnd_DefaultController::class,
             ['isRegistrationEnabled', 'isLoggedIn', 'hideColumns']
         );
-        $subject->expects(self::any())->method('isRegistrationEnabled')
-            ->will(self::returnValue(true));
-        $subject->expects(self::any())->method('isLoggedIn')
-            ->will(self::returnValue(true));
+        $subject->method('isRegistrationEnabled')
+            ->willReturn(true);
+        $subject->method('isLoggedIn')
+            ->willReturn(true);
 
         if ($getsHidden) {
             $subject->expects(self::once())->method('hideColumns')
@@ -9431,14 +9363,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
         $vipListPid
     ) {
         /** @var \Tx_Seminars_FrontEnd_DefaultController|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_FrontEnd_DefaultController::class,
             ['isRegistrationEnabled', 'isLoggedIn', 'hideColumns']
         );
-        $subject->expects(self::any())->method('isRegistrationEnabled')
-            ->will(self::returnValue(true));
-        $subject->expects(self::any())->method('isLoggedIn')
-            ->will(self::returnValue(false));
+        $subject->method('isRegistrationEnabled')
+            ->willReturn(true);
+        $subject->method('isLoggedIn')
+            ->willReturn(false);
 
         $subject->expects(self::once())->method('hideColumns')
             ->with(['list_registrations']);
@@ -9470,14 +9402,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
         $vipListPid
     ) {
         /** @var \Tx_Seminars_FrontEnd_DefaultController|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_FrontEnd_DefaultController::class,
             ['isRegistrationEnabled', 'isLoggedIn', 'hideColumns']
         );
-        $subject->expects(self::any())->method('isRegistrationEnabled')
-            ->will(self::returnValue(false));
-        $subject->expects(self::any())->method('isLoggedIn')
-            ->will(self::returnValue(true));
+        $subject->method('isRegistrationEnabled')
+            ->willReturn(false);
+        $subject->method('isLoggedIn')
+            ->willReturn(true);
 
         $subject->expects(self::once())->method('hideColumns')
             ->with(['list_registrations']);
@@ -9504,7 +9436,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->find($this->seminarUid);
 
-        $hook = $this->getMock(\Tx_Seminars_Interface_Hook_EventListView::class);
+        $hook = $this->createMock(\Tx_Seminars_Interface_Hook_EventListView::class);
         $hook->expects(self::once())->method('modifyListRow')->with($event, self::anything());
         // We don't test for the second parameter (the template instance here)
         // because we cannot access it from the outside.
@@ -9518,13 +9450,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
 
     /**
      * @test
-     *
-     * @expectedException \UnexpectedValueException
      */
     public function eventsListForModifyListRowHookWithoutInterfaceThrowsException()
     {
-        $hookClass = uniqid('myEventsListRowHook');
-        $hook = $this->getMock($hookClass);
+        $this->expectException(\UnexpectedValueException::class);
+
+        $hook = $this->createMock(\stdClass::class);
+        $hookClass = \get_class($hook);
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView'][$hookClass] = $hookClass;
         GeneralUtility::addInstance($hookClass, $hook);
@@ -9543,7 +9475,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
         /** @var \Tx_Seminars_Model_Registration $registration */
         $registration = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)->find($registrationUid);
 
-        $hook = $this->getMock(\Tx_Seminars_Interface_Hook_EventListView::class);
+        $hook = $this->createMock(\Tx_Seminars_Interface_Hook_EventListView::class);
         $hook->expects(self::once())->method('modifyMyEventsListRow')->with($registration, self::anything());
         // We don't test for the second parameter (the template instance here)
         // because we cannot access it from the outside.
@@ -9565,7 +9497,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
 
         $this->testingFramework->createAndLoginFrontEndUser();
 
-        $hook = $this->getMock(\Tx_Seminars_Interface_Hook_EventListView::class);
+        $hook = $this->createMock(\Tx_Seminars_Interface_Hook_EventListView::class);
         $hook->expects(self::once())->method('modifyListRow')->with($event, self::anything());
         // We don't test for the second parameter (the template instance here)
         // because we cannot access it from the outside.
@@ -9582,7 +9514,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
      */
     public function eventListNotCallsModifyMyEventsListRowHook()
     {
-        $hook = $this->getMock(\Tx_Seminars_Interface_Hook_EventListView::class);
+        $hook = $this->createMock(\Tx_Seminars_Interface_Hook_EventListView::class);
         $hook->expects(self::never())->method('modifyMyEventsListRow');
 
         $hookClass = get_class($hook);
@@ -9594,17 +9526,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends \Tx_Phpunit_
 
     /**
      * @test
-     *
-     * @expectedException \UnexpectedValueException
      */
     public function myEventsListForModifyMyEventsListRowHookWithoutInterfaceThrowsException()
     {
+        $this->expectException(\UnexpectedValueException::class);
+
         $this->subject->setConfigurationValue('what_to_display', 'my_events');
 
         $this->createLogInAndRegisterFeUser();
 
-        $hookClass = uniqid('myEventsListRowHook');
-        $hook = $this->getMock($hookClass);
+        $hook = $this->createMock(\stdClass::class);
+        $hookClass = \get_class($hook);
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView'][$hookClass] = $hookClass;
         GeneralUtility::addInstance($hookClass, $hook);

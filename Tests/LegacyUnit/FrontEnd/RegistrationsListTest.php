@@ -1,12 +1,14 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
+
 /**
  * Test case.
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_FrontEnd_RegistrationsList
@@ -138,8 +140,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends \Tx_Phpunit_
      */
     public function createFixtureWithInvalidWhatToDisplayThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The value "foo" of the first parameter $whatToDisplay is not valid.'
         );
 

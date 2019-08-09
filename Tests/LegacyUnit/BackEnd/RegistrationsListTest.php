@@ -1,5 +1,6 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\BackEnd\AbstractList;
 use OliverKlee\Seminars\BackEnd\RegistrationsList;
 use OliverKlee\Seminars\Tests\LegacyUnit\BackEnd\Fixtures\DummyModule;
@@ -11,7 +12,7 @@ use TYPO3\CMS\Backend\Template\DocumentTemplate;
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends TestCase
 {
     use BackEndTestsTrait;
 

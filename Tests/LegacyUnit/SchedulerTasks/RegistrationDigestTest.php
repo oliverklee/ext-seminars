@@ -1,6 +1,7 @@
 <?php
 namespace OliverKlee\Seminars\Tests\LegacyUnit\SchedulerTask;
 
+use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
 use Prophecy\Prophecy\ObjectProphecy;
 use Prophecy\Prophecy\ProphecySubjectInterface;
@@ -16,7 +17,7 @@ use TYPO3\CMS\Fluid\View\StandaloneView;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class RegistrationDigestTest extends \Tx_Phpunit_TestCase
+class RegistrationDigestTest extends TestCase
 {
     /**
      * @var RegistrationDigest

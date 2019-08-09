@@ -1,6 +1,8 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Hooks\RegistrationEmailHookInterface;
+use OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures\RegistrationHookInterface;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -9,7 +11,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Service_RegistrationManager
@@ -151,13 +153,13 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid);
         $this->subject = \Tx_Seminars_Service_RegistrationManager::getInstance();
 
-        $this->linkBuilder = $this->getMock(
+        $this->linkBuilder = $this->createPartialMock(
             \Tx_Seminars_Service_SingleViewLinkBuilder::class,
             ['createAbsoluteUrlForEvent']
         );
-        $this->linkBuilder->expects(self::any())
+        $this->linkBuilder
             ->method('createAbsoluteUrlForEvent')
-            ->will(self::returnValue('http://singleview.example.com/'));
+            ->willReturn('http://singleview.example.com/');
         $this->subject->injectLinkBuilder($this->linkBuilder);
 
         $this->frontEndUserMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
@@ -1037,8 +1039,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->testingFramework->createAndLoginFrontEndUser();
         $user = \Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
 
-        $hookClass = uniqid('tx_registrationHook');
-        $hook = $this->getMock($hookClass, ['canRegisterForSeminar']);
+        $hookClass = 'RegistrationHook' . \uniqid('', false);
+        $hook = $this->getMockBuilder(RegistrationHookInterface::class)->setMockClassName($hookClass)->getMock();
         $hook->expects(self::once())->method('canRegisterForSeminar')->with($this->seminar, $user);
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
@@ -1055,8 +1057,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->seminar->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
         $this->testingFramework->createAndLoginFrontEndUser();
 
-        $hookClass = uniqid('tx_registrationHook');
-        $hook = $this->getMock($hookClass, ['canRegisterForSeminar']);
+        $hookClass = 'RegistrationHook' . \uniqid('', false);
+        $hook = $this->getMockBuilder(RegistrationHookInterface::class)->setMockClassName($hookClass)->getMock();
         $hook->expects(self::never())->method('canRegisterForSeminar');
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
@@ -1072,9 +1074,9 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     {
         $this->testingFramework->createAndLoginFrontEndUser();
 
-        $hookClass = uniqid('tx_registrationHook');
-        $hook = $this->getMock($hookClass, ['canRegisterForSeminar']);
-        $hook->expects(self::once())->method('canRegisterForSeminar')->will(self::returnValue(true));
+        $hookClass = 'RegistrationHook' . \uniqid('', false);
+        $hook = $this->getMockBuilder(RegistrationHookInterface::class)->setMockClassName($hookClass)->getMock();
+        $hook->expects(self::once())->method('canRegisterForSeminar')->willReturn(true);
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
         GeneralUtility::addInstance($hookClass, $hook);
@@ -1091,9 +1093,9 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     {
         $this->testingFramework->createAndLoginFrontEndUser();
 
-        $hookClass = uniqid('tx_registrationHook');
-        $hook = $this->getMock($hookClass, ['canRegisterForSeminar']);
-        $hook->expects(self::once())->method('canRegisterForSeminar')->will(self::returnValue(false));
+        $hookClass = 'RegistrationHook' . \uniqid('', false);
+        $hook = $this->getMockBuilder(RegistrationHookInterface::class)->setMockClassName($hookClass)->getMock();
+        $hook->expects(self::once())->method('canRegisterForSeminar')->willReturn(false);
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
         GeneralUtility::addInstance($hookClass, $hook);
@@ -1308,8 +1310,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->testingFramework->createAndLoginFrontEndUser();
         $user = \Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
 
-        $hookClass = uniqid('tx_registrationHook');
-        $hook = $this->getMock($hookClass, ['canRegisterForSeminarMessage']);
+        $hookClass = 'RegistrationHook' . \uniqid('', false);
+        $hook = $this->getMockBuilder(RegistrationHookInterface::class)->setMockClassName($hookClass)->getMock();
         $hook->expects(self::once())->method('canRegisterForSeminarMessage')->with($this->seminar, $user);
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
@@ -1326,8 +1328,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $this->testingFramework->createAndLoginFrontEndUser();
         $this->seminar->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
 
-        $hookClass = uniqid('tx_registrationHook');
-        $hook = $this->getMock($hookClass, ['canRegisterForSeminarMessage']);
+        $hookClass = 'RegistrationHook' . \uniqid('', false);
+        $hook = $this->getMockBuilder(RegistrationHookInterface::class)->setMockClassName($hookClass)->getMock();
         $hook->expects(self::never())->method('canRegisterForSeminarMessage');
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
@@ -1343,9 +1345,9 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     {
         $this->testingFramework->createAndLoginFrontEndUser();
 
-        $hookClass = uniqid('tx_registrationHook');
-        $hook = $this->getMock($hookClass, ['canRegisterForSeminarMessage']);
-        $hook->expects(self::once())->method('canRegisterForSeminarMessage')->will(self::returnValue('Hello world!'));
+        $hookClass = 'RegistrationHook' . \uniqid('', false);
+        $hook = $this->getMockBuilder(RegistrationHookInterface::class)->setMockClassName($hookClass)->getMock();
+        $hook->expects(self::once())->method('canRegisterForSeminarMessage')->willReturn('Hello world!');
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
         GeneralUtility::addInstance($hookClass, $hook);
@@ -1363,15 +1365,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     {
         $this->testingFramework->createAndLoginFrontEndUser();
 
-        $hookClass1 = uniqid('tx_registrationHook');
-        $hook1 = $this->getMock($hookClass1, ['canRegisterForSeminarMessage']);
-        $hook1->expects(self::any())->method('canRegisterForSeminarMessage')->will(self::returnValue('message 1'));
+        $hookClass1 = 'OneRegistrationHook' . \uniqid('', false);
+        $hook1 = $this->getMockBuilder(RegistrationHookInterface::class)->setMockClassName($hookClass1)->getMock();
+        $hook1->method('canRegisterForSeminarMessage')->willReturn('message 1');
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass1] = $hookClass1;
         GeneralUtility::addInstance($hookClass1, $hook1);
 
-        $hookClass2 = uniqid('tx_registrationHook');
-        $hook2 = $this->getMock($hookClass2, ['canRegisterForSeminarMessage']);
-        $hook2->expects(self::any())->method('canRegisterForSeminarMessage')->will(self::returnValue('message 2'));
+        $hookClass2 = 'AnotherRegistrationHook' . \uniqid('', false);
+        $hook2 = $this->getMockBuilder(RegistrationHookInterface::class)->setMockClassName($hookClass2)->getMock();
+        $hook2->method('canRegisterForSeminarMessage')->willReturn('message 2');
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass2] = $hookClass2;
         GeneralUtility::addInstance($hookClass2, $hook2);
 
@@ -1388,15 +1390,15 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     {
         $this->testingFramework->createAndLoginFrontEndUser();
 
-        $hookClass1 = uniqid('tx_registrationHook');
-        $hook1 = $this->getMock($hookClass1, ['canRegisterForSeminarMessage']);
-        $hook1->expects(self::any())->method('canRegisterForSeminarMessage')->will(self::returnValue(''));
+        $hookClass1 = 'OneRegistrationHook' . \uniqid('', false);
+        $hook1 = $this->getMockBuilder(RegistrationHookInterface::class)->setMockClassName($hookClass1)->getMock();
+        $hook1->method('canRegisterForSeminarMessage')->willReturn('');
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass1] = $hookClass1;
         GeneralUtility::addInstance($hookClass1, $hook1);
 
-        $hookClass2 = uniqid('tx_registrationHook');
-        $hook2 = $this->getMock($hookClass2, ['canRegisterForSeminarMessage']);
-        $hook2->expects(self::any())->method('canRegisterForSeminarMessage')->will(self::returnValue('message 2'));
+        $hookClass2 = 'AnotherRegistrationHook' . \uniqid('', false);
+        $hook2 = $this->getMockBuilder(RegistrationHookInterface::class)->setMockClassName($hookClass2)->getMock();
+        $hook2->method('canRegisterForSeminarMessage')->willReturn('message 2');
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass2] = $hookClass2;
         GeneralUtility::addInstance($hookClass2, $hook2);
 
@@ -1841,8 +1843,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function removeRegistrationCallsSeminarRegistrationRemovedHook()
     {
-        $hookClass = uniqid('tx_registrationHook');
-        $hook = $this->getMock($hookClass, ['seminarRegistrationRemoved']);
+        $hookClass = 'RegistrationHook' . \uniqid('', false);
+        $hook = $this->getMockBuilder(RegistrationHookInterface::class)->setMockClassName($hookClass)->getMock();
         // We cannot test for the expected parameters because the registration
         // instance does not exist yet at this point.
         $hook->expects(self::once())->method('seminarRegistrationRemoved');
@@ -1904,8 +1906,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function removeRegistrationWithFittingQueueRegistrationCallsSeminarRegistrationMovedFromQueueHook()
     {
-        $hookClass = uniqid('tx_registrationHook');
-        $hook = $this->getMock($hookClass, ['seminarRegistrationMovedFromQueue']);
+        $hookClass = 'RegistrationHook' . \uniqid('', false);
+        $hook = $this->getMockBuilder(RegistrationHookInterface::class)->setMockClassName($hookClass)->getMock();
         // We cannot test for the expected parameters because the registration
         // instance does not exist yet at this point.
         $hook->expects(self::once())->method('seminarRegistrationMovedFromQueue');
@@ -2258,8 +2260,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForSendConfirmationTrueCallsModifyThankYouEmailHook()
     {
-        $hookClass = uniqid('tx_seminars_registrationHook');
-        $hook = $this->getMock($hookClass, ['modifyThankYouEmail']);
+        $hookClass = 'RegistrationHook' . \uniqid('', false);
+        $hook = $this->getMockBuilder(RegistrationHookInterface::class)->setMockClassName($hookClass)->getMock();
         $hook->expects(self::once())->method('modifyThankYouEmail');
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
@@ -2278,8 +2280,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForSendConfirmationFalseNotCallsModifyThankYouEmailHook()
     {
-        $hookClass = uniqid('tx_seminars_registrationHook');
-        $hook = $this->getMock($hookClass, ['modifyThankYouEmail']);
+        $hookClass = 'RegistrationHook' . \uniqid('', false);
+        $hook = $this->getMockBuilder(RegistrationHookInterface::class)->setMockClassName($hookClass)->getMock();
         $hook->expects(self::never())->method('modifyThankYouEmail');
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
@@ -2303,8 +2305,9 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         $registration = $this->createRegistration();
 
-        $hook = $this->getMock(\Tx_Seminars_Interface_Hook_Registration::class);
-        $hookClass = get_class($hook);
+        $hookClass = 'RegistrationHook' . \uniqid('', false);
+        $hook = $this->getMockBuilder(\Tx_Seminars_Interface_Hook_Registration::class)
+            ->setMockClassName($hookClass)->getMock();
         $hook->expects(self::once())->method('modifyAttendeeEmailText')->with($registration, self::anything());
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
@@ -2327,8 +2330,9 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         $registration = $this->createRegistration();
 
-        $hook = $this->getMock(\Tx_Seminars_Interface_Hook_Registration::class);
-        $hookClass = get_class($hook);
+        $hookClass = 'RegistrationHook' . \uniqid('', false);
+        $hook = $this->getMockBuilder(\Tx_Seminars_Interface_Hook_Registration::class)
+            ->setMockClassName($hookClass)->getMock();
         $hook->expects(self::exactly(2))->method('modifyAttendeeEmailText')->with($registration, self::anything());
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
@@ -2351,18 +2355,9 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         $registration = $this->createRegistration();
 
-        $hookClassName = uniqid('RegistrationEmailHookInterface');
-        $hook = $this->getMock(
-            RegistrationEmailHookInterface::class,
-            [
-                'postProcessAttendeeEmail',
-                'postProcessOrganizerEmail',
-                'postProcessAdditionalEmail',
-                'postProcessAttendeeEmailText',
-            ],
-            [],
-            $hookClassName
-        );
+        $hookClassName = 'RegistrationEmailHook' . \uniqid('', false);
+        $hook = $this->getMockBuilder(RegistrationEmailHookInterface::class)
+            ->setMockClassName($hookClassName)->getMock();
         $hook->expects(self::once())->method('postProcessAttendeeEmailText');
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
@@ -2385,18 +2380,9 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         $registration = $this->createRegistration();
 
-        $hookClassName = uniqid('RegistrationEmailHookInterface');
-        $hook = $this->getMock(
-            RegistrationEmailHookInterface::class,
-            [
-                'postProcessAttendeeEmail',
-                'postProcessOrganizerEmail',
-                'postProcessAdditionalEmail',
-                'postProcessAttendeeEmailText',
-            ],
-            [],
-            $hookClassName
-        );
+        $hookClassName = 'RegistrationEmailHook' . \uniqid('', false);
+        $hook = $this->getMockBuilder(RegistrationEmailHookInterface::class)
+            ->setMockClassName($hookClassName)->getMock();
         $hook->expects(self::exactly(2))->method('postProcessAttendeeEmailText');
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
@@ -4764,10 +4750,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function notifyAttendeeForUnregistrationMailDoesNotAppendUnregistrationNotice()
     {
         /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
-            \Tx_Seminars_Service_RegistrationManager::class,
-            ['getUnregistrationNotice']
-        );
+        $subject = $this->getMockBuilder(\Tx_Seminars_Service_RegistrationManager::class)
+            ->setMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::never())->method('getUnregistrationNotice');
 
         $subject->setConfigurationValue('sendConfirmationOnUnregistration', true);
@@ -4800,10 +4784,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
 
         /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
-            \Tx_Seminars_Service_RegistrationManager::class,
-            ['getUnregistrationNotice']
-        );
+        $subject = $this->getMockBuilder(\Tx_Seminars_Service_RegistrationManager::class)
+            ->setMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::never())->method('getUnregistrationNotice');
         $subject->setConfigurationValue('sendConfirmation', true);
 
@@ -4833,10 +4815,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
 
         /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
-            \Tx_Seminars_Service_RegistrationManager::class,
-            ['getUnregistrationNotice']
-        );
+        $subject = $this->getMockBuilder(\Tx_Seminars_Service_RegistrationManager::class)
+            ->setMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::once())->method('getUnregistrationNotice');
         $subject->setConfigurationValue('sendConfirmation', true);
 
@@ -4866,10 +4846,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function notifyAttendeeForRegistrationOnQueueMailAndUnregistrationPossibleAddsUnregistrationNotice()
     {
         /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
-            \Tx_Seminars_Service_RegistrationManager::class,
-            ['getUnregistrationNotice']
-        );
+        $subject = $this->getMockBuilder(\Tx_Seminars_Service_RegistrationManager::class)
+            ->setMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::once())->method('getUnregistrationNotice');
 
         $subject->setConfigurationValue(
@@ -4908,10 +4886,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     public function notifyAttendeeForQueueUpdateMailAndUnregistrationPossibleAddsUnregistrationNotice()
     {
         /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
-            \Tx_Seminars_Service_RegistrationManager::class,
-            ['getUnregistrationNotice']
-        );
+        $subject = $this->getMockBuilder(\Tx_Seminars_Service_RegistrationManager::class)
+            ->setMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::once())->method('getUnregistrationNotice');
 
         $subject->setConfigurationValue('sendConfirmationOnQueueUpdate', true);
@@ -4945,18 +4921,9 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForSendConfirmationTrueCallsPostProcessAttendeeEmailHook()
     {
-        $hookClassName = uniqid('RegistrationEmailHookInterface');
-        $hook = $this->getMock(
-            RegistrationEmailHookInterface::class,
-            [
-                'postProcessAttendeeEmail',
-                'postProcessOrganizerEmail',
-                'postProcessAdditionalEmail',
-                'postProcessAttendeeEmailText',
-            ],
-            [],
-            $hookClassName
-        );
+        $hookClassName = 'RegistrationEmailHook' . \uniqid('', false);
+        $hook = $this->getMockBuilder(RegistrationEmailHookInterface::class)
+            ->setMockClassName($hookClassName)->getMock();
         $hook->expects(self::once())->method('postProcessAttendeeEmail');
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
@@ -4975,18 +4942,9 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
      */
     public function notifyAttendeeForSendConfirmationFalseNeverCallsPostProcessAttendeeEmailHook()
     {
-        $hookClassName = uniqid('RegistrationEmailHookInterface');
-        $hook = $this->getMock(
-            RegistrationEmailHookInterface::class,
-            [
-                'postProcessAttendeeEmail',
-                'postProcessOrganizerEmail',
-                'postProcessAdditionalEmail',
-                'postProcessAttendeeEmailText',
-            ],
-            [],
-            $hookClassName
-        );
+        $hookClassName = 'RegistrationEmailHook' . \uniqid('', false);
+        $hook = $this->getMockBuilder(RegistrationEmailHookInterface::class)
+            ->setMockClassName($hookClassName)->getMock();
         $hook->expects(self::never())->method('postProcessAttendeeEmail');
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
@@ -5196,8 +5154,9 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
         $registration = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($registrationUid);
 
-        $hook = $this->getMock(\Tx_Seminars_Interface_Hook_Registration::class);
-        $hookClassName = get_class($hook);
+        $hookClassName = 'RegistrationHook' . \uniqid('', false);
+        $hook = $this->getMockBuilder(\Tx_Seminars_Interface_Hook_Registration::class)
+            ->setMockClassName($hookClassName)->getMock();
         $hook->expects(self::once())->method('modifyOrganizerNotificationEmail')->with($registration, self::anything());
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
@@ -5219,8 +5178,9 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
         $registration = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($registrationUid);
 
-        $hook = $this->getMock(\Tx_Seminars_Interface_Hook_Registration::class);
-        $hookClassName = get_class($hook);
+        $hookClassName = 'RegistrationHook' . \uniqid('', false);
+        $hook = $this->getMockBuilder(\Tx_Seminars_Interface_Hook_Registration::class)
+            ->setMockClassName($hookClassName)->getMock();
         $hook->expects(self::once())->method('modifyOrganizerNotificationEmail')
             ->with(self::anything(), self::isInstanceOf(\Tx_Oelib_Template::class));
 
@@ -5243,18 +5203,9 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
         $registration = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($registrationUid);
 
-        $hookClassName = uniqid('RegistrationEmailHookInterface');
-        $hook = $this->getMock(
-            RegistrationEmailHookInterface::class,
-            [
-                'postProcessAttendeeEmail',
-                'postProcessOrganizerEmail',
-                'postProcessAdditionalEmail',
-                'postProcessAttendeeEmailText',
-            ],
-            [],
-            $hookClassName
-        );
+        $hookClassName = 'RegistrationEmailHook' . \uniqid('', false);
+        $hook = $this->getMockBuilder(RegistrationEmailHookInterface::class)
+            ->setMockClassName($hookClassName)->getMock();
         $hook->expects(self::once())->method('postProcessOrganizerEmail');
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
@@ -5276,18 +5227,9 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         );
         $registration = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($registrationUid);
 
-        $hookClassName = uniqid('RegistrationEmailHookInterface');
-        $hook = $this->getMock(
-            RegistrationEmailHookInterface::class,
-            [
-                'postProcessAttendeeEmail',
-                'postProcessOrganizerEmail',
-                'postProcessAdditionalEmail',
-                'postProcessAttendeeEmailText',
-            ],
-            [],
-            $hookClassName
-        );
+        $hookClassName = 'RegistrationEmailHook' . \uniqid('', false);
+        $hook = $this->getMockBuilder(RegistrationEmailHookInterface::class)
+            ->setMockClassName($hookClassName)->getMock();
         $hook->expects(self::never())->method('postProcessOrganizerEmail');
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
@@ -5806,18 +5748,9 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
             $this->seminarUid,
             ['attendees_max' => 1]
         );
-        $hookClassName = uniqid('RegistrationEmailHookInterface');
-        $hook = $this->getMock(
-            RegistrationEmailHookInterface::class,
-            [
-                'postProcessAttendeeEmail',
-                'postProcessOrganizerEmail',
-                'postProcessAdditionalEmail',
-                'postProcessAttendeeEmailText',
-            ],
-            [],
-            $hookClassName
-        );
+        $hookClassName = 'RegistrationEmailHook' . \uniqid('', false);
+        $hook = $this->getMockBuilder(RegistrationEmailHookInterface::class)
+            ->setMockClassName($hookClassName)->getMock();
         $hook->expects(self::once())->method('postProcessAdditionalEmail');
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
@@ -6054,7 +5987,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
         $plugin->cObj = $GLOBALS['TSFE']->cObj;
         /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_Service_RegistrationManager::class,
             [
                 'notifyAttendee',
@@ -6093,7 +6026,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
         $plugin->cObj = $GLOBALS['TSFE']->cObj;
         /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_Service_RegistrationManager::class,
             [
                 'notifyAttendee',
@@ -6123,7 +6056,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
         $plugin->cObj = $GLOBALS['TSFE']->cObj;
         /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_Service_RegistrationManager::class,
             [
                 'notifyAttendee',
@@ -6167,7 +6100,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
         $plugin->cObj = $GLOBALS['TSFE']->cObj;
         /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_Service_RegistrationManager::class,
             [
                 'notifyAttendee',
@@ -6201,8 +6134,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
     {
         $this->createAndLogInFrontEndUser();
 
-        $hookClass = uniqid('tx_registrationHook');
-        $hook = $this->getMock($hookClass, ['seminarRegistrationCreated']);
+        $hookClass = 'RegistrationHook' . \uniqid('', false);
+        $hook = $this->getMockBuilder(RegistrationHookInterface::class)->setMockClassName($hookClass)->getMock();
         // We cannot test for the expected parameters because the registration
         // instance does not exist yet at this point.
         $hook->expects(self::once())->method('seminarRegistrationCreated');
@@ -6213,7 +6146,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
         $plugin->cObj = $GLOBALS['TSFE']->cObj;
         /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_Service_RegistrationManager::class,
             [
                 'notifyAttendee',
@@ -6420,10 +6353,10 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
+        $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
         $event->setData(['payment_methods' => new \Tx_Oelib_List()]);
-        $event->expects(self::any())->method('getAvailablePrices')
-            ->will(self::returnValue(['regular' => 12, 'special' => 3]));
+        $event->method('getAvailablePrices')
+            ->willReturn(['regular' => 12, 'special' => 3]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6448,10 +6381,10 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
+        $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
         $event->setData(['payment_methods' => new \Tx_Oelib_List()]);
-        $event->expects(self::any())->method('getAvailablePrices')
-            ->will(self::returnValue(['regular' => 12]));
+        $event->method('getAvailablePrices')
+            ->willReturn(['regular' => 12]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6476,10 +6409,10 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
+        $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
         $event->setData(['payment_methods' => new \Tx_Oelib_List()]);
-        $event->expects(self::any())->method('getAvailablePrices')
-            ->will(self::returnValue(['regular' => 12]));
+        $event->method('getAvailablePrices')
+            ->willReturn(['regular' => 12]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6504,10 +6437,10 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
+        $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
         $event->setData(['payment_methods' => new \Tx_Oelib_List()]);
-        $event->expects(self::any())->method('getAvailablePrices')
-            ->will(self::returnValue(['regular' => 0]));
+        $event->method('getAvailablePrices')
+            ->willReturn(['regular' => 0]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6532,10 +6465,10 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
+        $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
         $event->setData(['payment_methods' => new \Tx_Oelib_List()]);
-        $event->expects(self::any())->method('getAvailablePrices')
-            ->will(self::returnValue(['regular' => 12]));
+        $event->method('getAvailablePrices')
+            ->willReturn(['regular' => 12]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6560,10 +6493,10 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
+        $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
         $event->setData(['payment_methods' => new \Tx_Oelib_List()]);
-        $event->expects(self::any())->method('getAvailablePrices')
-            ->will(self::returnValue(['regular' => 12]));
+        $event->method('getAvailablePrices')
+            ->willReturn(['regular' => 12]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6793,11 +6726,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $paymentMethods->add($paymentMethod);
 
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
-        $event->expects(self::any())->method('getAvailablePrices')
-            ->will(self::returnValue(['regular' => 12]));
-        $event->expects(self::any())->method('getPaymentMethods')
-            ->will(self::returnValue($paymentMethods));
+        $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
+        $event->method('getAvailablePrices')
+            ->willReturn(['regular' => 12]);
+        $event->method('getPaymentMethods')
+            ->willReturn($paymentMethods);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6827,11 +6760,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $paymentMethods->add($paymentMethod2);
 
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
-        $event->expects(self::any())->method('getAvailablePrices')
-            ->will(self::returnValue(['regular' => 12]));
-        $event->expects(self::any())->method('getPaymentMethods')
-            ->will(self::returnValue($paymentMethods));
+        $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
+        $event->method('getAvailablePrices')
+            ->willReturn(['regular' => 12]);
+        $event->method('getPaymentMethods')
+            ->willReturn($paymentMethods);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6858,11 +6791,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $paymentMethods->add($paymentMethod);
 
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
-        $event->expects(self::any())->method('getAvailablePrices')
-            ->will(self::returnValue(['regular' => 0]));
-        $event->expects(self::any())->method('getPaymentMethods')
-            ->will(self::returnValue($paymentMethods));
+        $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
+        $event->method('getAvailablePrices')
+            ->willReturn(['regular' => 0]);
+        $event->method('getPaymentMethods')
+            ->willReturn($paymentMethods);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6883,11 +6816,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $subject = new $className();
 
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
-        $event->expects(self::any())->method('getAvailablePrices')
-            ->will(self::returnValue(['regular' => 0]));
-        $event->expects(self::any())->method('getPaymentMethods')
-            ->will(self::returnValue(new \Tx_Oelib_List()));
+        $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
+        $event->method('getAvailablePrices')
+            ->willReturn(['regular' => 0]);
+        $event->method('getPaymentMethods')
+            ->willReturn(new \Tx_Oelib_List());
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6917,11 +6850,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $paymentMethods->add($paymentMethod2);
 
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
-        $event->expects(self::any())->method('getAvailablePrices')
-            ->will(self::returnValue(['regular' => 12]));
-        $event->expects(self::any())->method('getPaymentMethods')
-            ->will(self::returnValue($paymentMethods));
+        $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
+        $event->method('getAvailablePrices')
+            ->willReturn(['regular' => 12]);
+        $event->method('getPaymentMethods')
+            ->willReturn($paymentMethods);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6947,11 +6880,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $paymentMethods->add($paymentMethod);
 
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
-        $event->expects(self::any())->method('getAvailablePrices')
-            ->will(self::returnValue(['regular' => 12]));
-        $event->expects(self::any())->method('getPaymentMethods')
-            ->will(self::returnValue($paymentMethods));
+        $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
+        $event->method('getAvailablePrices')
+            ->willReturn(['regular' => 12]);
+        $event->method('getPaymentMethods')
+            ->willReturn($paymentMethods);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -6981,11 +6914,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $paymentMethods->add($paymentMethod2);
 
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
-        $event->expects(self::any())->method('getAvailablePrices')
-            ->will(self::returnValue(['regular' => 12]));
-        $event->expects(self::any())->method('getPaymentMethods')
-            ->will(self::returnValue($paymentMethods));
+        $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
+        $event->method('getAvailablePrices')
+            ->willReturn(['regular' => 12]);
+        $event->method('getPaymentMethods')
+            ->willReturn($paymentMethods);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7014,11 +6947,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
         $paymentMethods->add($paymentMethod);
 
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
-        $event->expects(self::any())->method('getAvailablePrices')
-            ->will(self::returnValue(['regular' => 12]));
-        $event->expects(self::any())->method('getPaymentMethods')
-            ->will(self::returnValue($paymentMethods));
+        $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
+        $event->method('getAvailablePrices')
+            ->willReturn(['regular' => 12]);
+        $event->method('getPaymentMethods')
+            ->willReturn($paymentMethods);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -8462,7 +8395,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         $prices = $this->subject->getPricesAvailableForUser($event, $user);
 
-        static::assertSame(['regular', 'regular_board', 'special', 'special_board'], array_keys($prices));
+        self::assertSame(['regular', 'regular_board', 'special', 'special_board'], array_keys($prices));
     }
 
     /**
@@ -8493,7 +8426,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         $prices = $this->subject->getPricesAvailableForUser($event, $user);
 
-        static::assertSame(['regular', 'regular_board', 'special', 'special_board'], array_keys($prices));
+        self::assertSame(['regular', 'regular_board', 'special', 'special_board'], array_keys($prices));
     }
 
     /**
@@ -8522,7 +8455,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         $prices = $this->subject->getPricesAvailableForUser($event, $user);
 
-        static::assertSame(['regular', 'regular_board'], array_keys($prices));
+        self::assertSame(['regular', 'regular_board'], array_keys($prices));
     }
 
     /**
@@ -8553,7 +8486,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         $prices = $this->subject->getPricesAvailableForUser($event, $user);
 
-        static::assertSame(['special', 'special_board'], array_keys($prices));
+        self::assertSame(['special', 'special_board'], array_keys($prices));
     }
 
     /**
@@ -8581,6 +8514,6 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends \Tx_Phpunit
 
         $prices = $this->subject->getPricesAvailableForUser($event, $user);
 
-        static::assertSame(['regular', 'regular_board'], array_keys($prices));
+        self::assertSame(['regular', 'regular_board'], array_keys($prices));
     }
 }

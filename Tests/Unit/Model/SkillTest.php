@@ -26,8 +26,10 @@ class SkillTest extends UnitTestCase
      */
     public function setTitleWithEmptyTitleThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The parameter $title must not be empty.'
         );
 

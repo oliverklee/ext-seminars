@@ -1,5 +1,7 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures\EmailSalutationHookInterface;
 use TYPO3\CMS\Core\Core\Bootstrap;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -8,7 +10,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends TestCase
 {
     /**
      * @var \Tx_Oelib_TestingFramework the testing framework
@@ -353,11 +355,8 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends \Tx_Phpunit_Tes
      */
     public function getSalutationForHookSetInConfigurationCallsThisHook()
     {
-        $hookClassName = uniqid('tx_salutationHook');
-        $salutationHookMock = $this->getMock(
-            $hookClassName,
-            ['modifySalutation']
-        );
+        $salutationHookMock = $this->createPartialMock(\stdClass::class, ['modifySalutation']);
+        $hookClassName = \get_class($salutationHookMock);
         $frontendUser = $this->createFrontEndUser();
         $salutationHookMock->expects(self::atLeastOnce())->method('modifySalutation')->with(
             self::isType('array'),
@@ -375,11 +374,9 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends \Tx_Phpunit_Tes
      */
     public function getSalutationCanCallMultipleSetHooks()
     {
-        $hookClassName1 = uniqid('tx_salutationHook1');
-        $salutationHookMock1 = $this->getMock(
-            $hookClassName1,
-            ['modifySalutation']
-        );
+        $hookClassName1 = 'AnEmailSalutationHook';
+        $salutationHookMock1 = $this->getMockBuilder(EmailSalutationHookInterface::class)
+            ->setMockClassName($hookClassName1)->getMock();
         $frontendUser = $this->createFrontEndUser();
         $salutationHookMock1->expects(self::atLeastOnce())->method('modifySalutation')->with(
             self::isType('array'),
@@ -388,11 +385,9 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends \Tx_Phpunit_Tes
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['modifyEmailSalutation'][$hookClassName1] = $hookClassName1;
         GeneralUtility::addInstance($hookClassName1, $salutationHookMock1);
 
-        $hookClassName2 = uniqid('tx_salutationHook2');
-        $salutationHookMock2 = $this->getMock(
-            $hookClassName2,
-            ['modifySalutation']
-        );
+        $hookClassName2 = 'AnotherEmailSalutationHook';
+        $salutationHookMock2 = $this->getMockBuilder(EmailSalutationHookInterface::class)
+            ->setMockClassName($hookClassName2)->getMock();
         $salutationHookMock2->expects(self::atLeastOnce())->method('modifySalutation')->with(
             self::isType('array'),
             self::identicalTo($frontendUser)
@@ -409,10 +404,11 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends \Tx_Phpunit_Tes
 
     /**
      * @test
-     * @expectedException \InvalidArgumentException
      */
     public function createIntroductionWithEmptyBeginThrowsException()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
 
         $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($eventUid, []);

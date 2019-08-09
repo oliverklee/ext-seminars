@@ -1,12 +1,14 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
+
 /**
  * Testcase.
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_FrontEnd_CountdownTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_FrontEnd_CountdownTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_FrontEnd_Countdown
@@ -40,7 +42,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CountdownTest extends \Tx_Phpunit_TestCase
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
 
-        $this->mapper = $this->getMock(\Tx_Seminars_Mapper_Event::class, ['findNextUpcoming']);
+        $this->mapper = $this->getMockBuilder(\Tx_Seminars_Mapper_Event::class)
+            ->setMethods(['findNextUpcoming'])->getMock();
 
         $this->subject = new \Tx_Seminars_FrontEnd_Countdown(
             [
@@ -76,12 +79,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CountdownTest extends \Tx_Phpunit_TestCase
 
     /**
      * @test
-     * @expectedException \BadMethodCallException
-     * @expectedExceptionMessage The method injectEventMapper() needs to be called first.
-     * @expectedExceptionCode 1333617194
      */
     public function renderWithoutCallingInjectEventMapperFirstThrowsBadMethodCallException()
     {
+        $this->expectException(\BadMethodCallException::class);
+        $this->expectExceptionMessage('The method injectEventMapper() needs to be called first.');
+        $this->expectExceptionCode(1333617194);
+
         $this->subject->render();
     }
 
@@ -119,9 +123,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CountdownTest extends \Tx_Phpunit_TestCase
 
         $this->mapper->expects(self::once())
             ->method('findNextUpcoming')
-            ->will(self::returnValue($event));
+            ->willReturn($event);
 
-        $this->viewHelper = $this->getMock(\Tx_Seminars_ViewHelper_Countdown::class, ['render']);
+        $this->viewHelper = $this->createPartialMock(\Tx_Seminars_ViewHelper_Countdown::class, ['render']);
         $this->viewHelper->expects(self::once())
             ->method('render')
             ->with(self::equalTo($event->getBeginDateAsUnixTimeStamp()));

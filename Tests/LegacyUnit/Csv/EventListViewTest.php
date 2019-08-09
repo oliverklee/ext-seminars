@@ -1,5 +1,6 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
 use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 /**
@@ -8,7 +9,7 @@ use TYPO3\CMS\Core\Utility\VersionNumberUtility;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Csv_EventListView
@@ -103,21 +104,21 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends \Tx_Phpunit_TestCase
 
     /**
      * @test
-     *
-     * @expectedException \InvalidArgumentException
      */
     public function setPageUidWithZeroPageUidThrowsException()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->subject->setPageUid(0);
     }
 
     /**
      * @test
-     *
-     * @expectedException \InvalidArgumentException
      */
     public function setPageUidWithNegativePageUidThrowsException()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->subject->setPageUid(-1);
     }
 
