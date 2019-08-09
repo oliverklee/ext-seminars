@@ -1056,7 +1056,8 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      *
      * @return void
      *
-     * @deprecated hook has been replaced by RegistrationEmailHookInterface::postProcessOrganizerEmail
+     * @deprecated will be removed in seminars 3;
+     * hook has been replaced by RegistrationEmailHookInterface::postProcessOrganizerEmail
      */
     protected function callModifyOrganizerNotificationEmailHooks(
         \Tx_Seminars_OldModel_Registration $registration,
@@ -1098,7 +1099,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      *
      * @return void
      *
-     * @deprecated use RegistrationEmailHookInterface::postProcessOrganizerEmail instead
+     * @deprecated will be removed in seminars 3; use RegistrationEmailHookInterface::postProcessOrganizerEmail instead
      */
     protected function modifyNotificationEmail(
         \Tx_Oelib_Mail $emailNotification,
