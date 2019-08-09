@@ -86,13 +86,13 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends TestCa
         $testCase = $this;
         $this->subject->method('getFrontEndUserFieldKeys')
             ->willReturnCallback(
-                function () use ($testCase) {
+                static function () use ($testCase) {
                     return $testCase->frontEndUserFieldKeys;
                 }
             );
         $this->subject->method('getRegistrationFieldKeys')
             ->willReturnCallback(
-                function () use ($testCase) {
+                static function () use ($testCase) {
                     return $testCase->registrationFieldKeys;
                 }
             );

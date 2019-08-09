@@ -171,9 +171,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends TestCase
             ['title' => 'Attendance 2', 'datepaid' => $GLOBALS['SIM_EXEC_TIME']]
         );
         $this->subject->limitToPaid();
-        $registrationBag = $this->subject->build();
         /** @var \Tx_Seminars_OldModel_Registration $currentModel */
-        $currentModel = $registrationBag->current();
+        $currentModel = $this->subject->build()->current();
 
         self::assertTrue($currentModel->isPaid());
     }
@@ -203,9 +202,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends TestCase
             ['datepaid' => 0]
         );
         $this->subject->limitToUnpaid();
-        $registrationBag = $this->subject->build();
         /** @var \Tx_Seminars_OldModel_Registration $currentModel */
-        $currentModel = $registrationBag->current();
+        $currentModel = $this->subject->build()->current();
 
         self::assertFalse($currentModel->isPaid());
     }
@@ -236,9 +234,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends TestCase
         );
         $this->subject->limitToPaid();
         $this->subject->removePaymentLimitation();
-        $registrationBag = $this->subject->build();
         /** @var \Tx_Seminars_OldModel_Registration $currentModel */
-        $currentModel = $registrationBag->current();
+        $currentModel = $this->subject->build()->current();
 
         self::assertFalse($currentModel->isPaid());
     }
@@ -251,9 +248,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends TestCase
         );
         $this->subject->limitToUnpaid();
         $this->subject->removePaymentLimitation();
-        $registrationBag = $this->subject->build();
         /** @var \Tx_Seminars_OldModel_Registration $currentModel */
-        $currentModel = $registrationBag->current();
+        $currentModel = $this->subject->build()->current();
 
         self::assertTrue($currentModel->isPaid());
     }
@@ -269,9 +265,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends TestCase
             ['registration_queue' => 1]
         );
         $this->subject->limitToOnQueue();
-        $registrationBag = $this->subject->build();
         /** @var \Tx_Seminars_OldModel_Registration $currentModel */
-        $currentModel = $registrationBag->current();
+        $currentModel = $this->subject->build()->current();
 
         self::assertTrue($currentModel->isOnRegistrationQueue());
     }
@@ -301,9 +296,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends TestCase
             ['registration_queue' => 0]
         );
         $this->subject->limitToRegular();
-        $registrationBag = $this->subject->build();
         /** @var \Tx_Seminars_OldModel_Registration $currentModel */
-        $currentModel = $registrationBag->current();
+        $currentModel = $this->subject->build()->current();
 
         self::assertFalse($currentModel->isOnRegistrationQueue());
     }
@@ -334,9 +328,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends TestCase
         );
         $this->subject->limitToOnQueue();
         $this->subject->removeQueueLimitation();
-        $registrationBag = $this->subject->build();
         /** @var \Tx_Seminars_OldModel_Registration $currentModel */
-        $currentModel = $registrationBag->current();
+        $currentModel = $this->subject->build()->current();
 
         self::assertFalse($currentModel->isOnRegistrationQueue());
     }
@@ -349,9 +342,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends TestCase
         );
         $this->subject->limitToRegular();
         $this->subject->removeQueueLimitation();
-        $registrationBag = $this->subject->build();
         /** @var \Tx_Seminars_OldModel_Registration $currentModel */
-        $currentModel = $registrationBag->current();
+        $currentModel = $this->subject->build()->current();
 
         self::assertTrue($currentModel->isOnRegistrationQueue());
     }
@@ -379,9 +371,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends TestCase
             ['seats' => 2]
         );
         $this->subject->limitToSeatsAtMost(2);
-        $registrationBag = $this->subject->build();
         /** @var \Tx_Seminars_OldModel_Registration $currentModel */
-        $currentModel = $registrationBag->current();
+        $currentModel = $this->subject->build()->current();
 
         self::assertEquals(2, $currentModel->getSeats());
     }
@@ -393,9 +384,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_RegistrationTest extends TestCase
             ['seats' => 1]
         );
         $this->subject->limitToSeatsAtMost(2);
-        $registrationBag = $this->subject->build();
         /** @var \Tx_Seminars_OldModel_Registration $currentModel */
-        $currentModel = $registrationBag->current();
+        $currentModel = $this->subject->build()->current();
 
         self::assertEquals(1, $currentModel->getSeats());
     }

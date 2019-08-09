@@ -24,7 +24,7 @@ final class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingTimeSpan extends \Tx
      */
     public function __construct(array $configuration)
     {
-        parent::init($configuration);
+        $this->init($configuration);
     }
 
     /**

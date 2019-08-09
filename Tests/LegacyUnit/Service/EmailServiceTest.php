@@ -218,8 +218,7 @@ class EmailServiceTest extends TestCase
     {
         $subjectPrefix = 'Event date goes here: ';
 
-        $dateViewHelper = new \Tx_Seminars_ViewHelper_DateRange();
-        $formattedDate = $dateViewHelper->render($this->event, '-');
+        $formattedDate = (new \Tx_Seminars_ViewHelper_DateRange())->render($this->event, '-');
 
         $this->subject->sendEmailToAttendees($this->event, $subjectPrefix . '%eventDate', 'Hello!');
 
@@ -362,8 +361,7 @@ class EmailServiceTest extends TestCase
     {
         $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Date: %eventDate');
 
-        $dateViewHelper = new \Tx_Seminars_ViewHelper_DateRange();
-        $formattedDate = $dateViewHelper->render($this->event, '-');
+        $formattedDate = (new \Tx_Seminars_ViewHelper_DateRange())->render($this->event, '-');
 
         $email = $this->mailer->getFirstSentEmail();
         self::assertNotNull($email);

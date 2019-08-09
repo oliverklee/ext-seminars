@@ -31,30 +31,24 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends TestCase
      */
     private $dummySysFolderPid = 0;
 
-    /**
-     * @var DummyModule a dummy back-end module
-     */
-    private $backEndModule;
-
     protected function setUp()
     {
         $this->unifyTestingEnvironment();
 
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
-        $this->backEndModule = new DummyModule();
-        $this->backEndModule->id = $this->dummySysFolderPid;
-        $this->backEndModule->setPageData(
+        $backEndModule = new DummyModule();
+        $backEndModule->id = $this->dummySysFolderPid;
+        $backEndModule->setPageData(
             [
                 'uid' => $this->dummySysFolderPid,
                 'doktype' => AbstractList::SYSFOLDER_TYPE,
             ]
         );
 
-        $document = new DocumentTemplate();
-        $this->backEndModule->doc = $document;
+        $backEndModule->doc = new DocumentTemplate();
 
-        $this->subject = new RegistrationsList($this->backEndModule);
+        $this->subject = new RegistrationsList($backEndModule);
     }
 
     protected function tearDown()
@@ -516,14 +510,10 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends TestCase
         )->getLoadedTestingModel(
             ['tx_seminars_registrations_folder' => $newRegistrationFolder]
         );
-        $backEndUser = \Tx_Oelib_MapperRegistry::get(
-            \Tx_Seminars_Mapper_BackEndUser::class
-        )->getLoadedTestingModel(
-            ['usergroup' => $backEndGroup->getUid()]
-        );
-        \Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser(
-            $backEndUser
-        );
+        /** @var \Tx_Seminars_Model_BackEndUser $backEndUser */
+        $backEndUser = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUser::class)
+            ->getLoadedTestingModel(['usergroup' => $backEndGroup->getUid()]);
+        \Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
 
         self::assertContains(
             'edit[tx_seminars_attendances][' . $newRegistrationFolder . ']=new',

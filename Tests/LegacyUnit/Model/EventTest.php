@@ -2846,8 +2846,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends TestCase
     {
         $this->subject->setRegistrations(new \Tx_Oelib_List());
 
-        $registration = \Tx_Oelib_MapperRegistry
-            ::get(\Tx_Seminars_Mapper_Registration::class)
+        /** @var \Tx_Seminars_Model_Registration $registration */
+        $registration = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)
             ->getLoadedTestingModel([]);
         $this->subject->attachRegistration($registration);
 
@@ -2867,8 +2867,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends TestCase
         $registrations->add($oldRegistration);
         $this->subject->setRegistrations($registrations);
 
-        $newRegistration = \Tx_Oelib_MapperRegistry
-            ::get(\Tx_Seminars_Mapper_Registration::class)
+        /** @var \Tx_Seminars_Model_Registration $newRegistration */
+        $newRegistration = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)
             ->getLoadedTestingModel([]);
         $this->subject->attachRegistration($newRegistration);
 

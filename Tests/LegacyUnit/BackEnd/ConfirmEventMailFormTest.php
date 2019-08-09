@@ -33,13 +33,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends TestCase
     private $dummySysFolderUid;
 
     /**
-     * UID of a dummy organizer record
-     *
-     * @var int
-     */
-    private $organizerUid;
-
-    /**
      * UID of a dummy event record
      *
      * @var int
@@ -66,7 +59,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends TestCase
         $this->dummySysFolderUid = $this->testingFramework->createSystemFolder();
         \Tx_Oelib_PageFinder::getInstance()->setPageUid($this->dummySysFolderUid);
 
-        $this->organizerUid = $this->testingFramework->createRecord(
+        $organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
             [
                 'title' => 'Dummy Organizer',
@@ -86,7 +79,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends TestCase
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $this->eventUid,
-            $this->organizerUid,
+            $organizerUid,
             'organizers'
         );
 

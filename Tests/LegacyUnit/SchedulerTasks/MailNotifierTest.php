@@ -339,9 +339,7 @@ class MailNotifierTest extends TestCase
      */
     public function executeWithoutPageConfigurationReturnsFalse()
     {
-        $subject = new MailNotifier();
-
-        $result = $subject->execute();
+        $result = (new MailNotifier())->execute();
 
         self::assertFalse($result);
     }

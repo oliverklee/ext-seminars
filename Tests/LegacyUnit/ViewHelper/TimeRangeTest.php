@@ -32,11 +32,6 @@ class Tx_Seminars_Tests_Unit_ViewHelper_TimeRangeTest extends TestCase
     private $testingFramework = null;
 
     /**
-     * @var \Tx_Oelib_Configuration
-     */
-    private $configuration = null;
-
-    /**
      * @var \Tx_Oelib_Translator
      */
     private $translator = null;
@@ -53,10 +48,10 @@ class Tx_Seminars_Tests_Unit_ViewHelper_TimeRangeTest extends TestCase
 
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
-        $this->configuration = new \Tx_Oelib_Configuration();
-        $this->configuration->setAsString('timeFormat', self::TIME_FORMAT);
+        $configuration = new \Tx_Oelib_Configuration();
+        $configuration->setAsString('timeFormat', self::TIME_FORMAT);
 
-        \Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->configuration);
+        \Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
 
         $this->translator = \Tx_Oelib_TranslatorRegistry::get('seminars');
         $this->translatedHours = ' ' . $this->translator->translate('label_hours');

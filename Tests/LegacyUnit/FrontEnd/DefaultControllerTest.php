@@ -72,11 +72,6 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
     private $extConfBackup = [];
 
     /**
-     * @var \Tx_Seminars_Service_SingleViewLinkBuilder
-     */
-    private $linkBuilder = null;
-
-    /**
      * @var \Tx_Oelib_HeaderCollector
      */
     private $headerCollector = null;
@@ -149,18 +144,16 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
             '%H:%M'
         );
 
-        $this->linkBuilder = $this->createPartialMock(
+        /** @var \Tx_Seminars_Service_SingleViewLinkBuilder|\PHPUnit_Framework_MockObject_MockObject $linkBuilder */
+        $linkBuilder = $this->createPartialMock(
             \Tx_Seminars_Service_SingleViewLinkBuilder::class,
             ['createRelativeUrlForEvent']
         );
-        $this->linkBuilder
-            ->method('createRelativeUrlForEvent')
-            ->willReturn(
-                'index.php?id=42&tx_seminars_pi1%5BshowUid%5D=1337'
-            );
-        $this->subject->injectLinkBuilder($this->linkBuilder);
+        $linkBuilder->method('createRelativeUrlForEvent')
+            ->willReturn('index.php?id=42&tx_seminars_pi1%5BshowUid%5D=1337');
+        $this->subject->injectLinkBuilder($linkBuilder);
 
-        /** @var $content ContentObjectRenderer|PHPUnit_Framework_MockObject_MockObject */
+        /** @var ContentObjectRenderer|PHPUnit_Framework_MockObject_MockObject $content */
         $content = $this->createPartialMock(ContentObjectRenderer::class, ['IMAGE', 'cObjGetSingle']);
         $content->method('cObjGetSingle')->willReturn(
             '<img src="foo.jpg" alt="bar"/>'
@@ -613,7 +606,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
 
         self::assertContains(
             '>foo & bar</a>',
-            $contentMock->getTypoLink('foo & bar', []),
+            $contentMock->getTypoLink('foo & bar', ''),
             42
         );
     }
@@ -1886,7 +1879,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
     public function testTimeSlotsSubpartIsVisibleInSingleViewWithOneTimeSlot()
     {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
-        $timeSlotUid = $this->testingFramework->createRecord(
+        $this->testingFramework->createRecord(
             'tx_seminars_timeslots',
             ['seminar' => $this->seminarUid]
         );
@@ -1911,7 +1904,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
     public function singleViewDisplaysTimeSlotTimesWithDash()
     {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
-        $timeSlotUid = $this->testingFramework->createRecord(
+        $this->testingFramework->createRecord(
             'tx_seminars_timeslots',
             [
                 'seminar' => $this->seminarUid,
@@ -1938,7 +1931,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
     public function singleViewCanContainOneHtmlspecialcharedTimeSlotRoom()
     {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
-        $timeSlotUid = $this->testingFramework->createRecord(
+        $this->testingFramework->createRecord(
             'tx_seminars_timeslots',
             [
                 'seminar' => $this->seminarUid,
@@ -1961,11 +1954,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
     public function testTimeSlotsSubpartIsVisibleInSingleViewWithTwoTimeSlots()
     {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
-        $timeSlotUid1 = $this->testingFramework->createRecord(
+        $this->testingFramework->createRecord(
             'tx_seminars_timeslots',
             ['seminar' => $this->seminarUid]
         );
-        $timeSlotUid2 = $this->testingFramework->createRecord(
+        $this->testingFramework->createRecord(
             'tx_seminars_timeslots',
             ['seminar' => $this->seminarUid]
         );
@@ -1985,14 +1978,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
     public function testSingleViewCanContainTwoTimeSlotRooms()
     {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
-        $timeSlotUid1 = $this->testingFramework->createRecord(
+        $this->testingFramework->createRecord(
             'tx_seminars_timeslots',
             [
                 'seminar' => $this->seminarUid,
                 'room' => 'room 1',
             ]
         );
-        $timeSlotUid2 = $this->testingFramework->createRecord(
+        $this->testingFramework->createRecord(
             'tx_seminars_timeslots',
             [
                 'seminar' => $this->seminarUid,
@@ -2075,14 +2068,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
     public function timeSlotHookForEventWithTwoTimeSlotGetsCalledTwice()
     {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
-        $timeSlotUid1 = $this->testingFramework->createRecord(
+        $this->testingFramework->createRecord(
             'tx_seminars_timeslots',
             [
                 'seminar' => $this->seminarUid,
                 'room' => 'room 1',
             ]
         );
-        $timeSlotUid2 = $this->testingFramework->createRecord(
+        $this->testingFramework->createRecord(
             'tx_seminars_timeslots',
             [
                 'seminar' => $this->seminarUid,
@@ -3334,7 +3327,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
             ]
         );
 
-        /** @var $content ContentObjectRenderer|PHPUnit_Framework_MockObject_MockObject */
+        /** @var ContentObjectRenderer|PHPUnit_Framework_MockObject_MockObject $content */
         $content = $this->createPartialMock(ContentObjectRenderer::class, ['IMAGE', 'cObjGetSingle']);
         $content->method('cObjGetSingle')
             ->with(
@@ -8072,6 +8065,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $subject = new $className();
         $subject->cObj = $this->createContentMock();
         $subject->conf = [];
+        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getUid', 'isUserVip', 'isOwnerFeUser']);
         $event->method('isUserVip')
             ->willReturn(false);
@@ -8094,6 +8088,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $subject = new $className();
         $subject->cObj = $this->createContentMock();
         $subject->conf = ['mayManagersEditTheirEvents' => true];
+        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getUid', 'isUserVip', 'isOwnerFeUser']);
         $event->method('isUserVip')
             ->willReturn(true);
@@ -8116,6 +8111,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $subject = new $className();
         $subject->cObj = $this->createContentMock();
         $subject->conf = ['mayManagersEditTheirEvents' => false];
+        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getUid', 'isUserVip', 'isOwnerFeUser']);
         $event->method('isUserVip')
             ->willReturn(true);
@@ -8141,6 +8137,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
             'eventEditorPID' => 42,
             'mayManagersEditTheirEvents' => true,
         ];
+        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getUid', 'isUserVip', 'isOwnerFeUser']);
         $event->method('getUid')
             ->willReturn(91);
@@ -8174,10 +8171,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->willReturn(false);
 
-        $event = $this->createPartialMock(
-            \Tx_Seminars_OldModel_Event::class,
-            ['getUid', 'isPublished', 'isHidden']
-        );
+        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $event */
+        $event = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getUid', 'isPublished', 'isHidden']);
         $event->method('getUid')->willReturn(91);
         $subject->setSeminar($event);
 
@@ -8204,10 +8199,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->willReturn(true);
 
-        $event = $this->createPartialMock(
-            \Tx_Seminars_OldModel_Event::class,
-            ['getUid', 'isPublished', 'isHidden']
-        );
+        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $event */
+        $event = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getUid', 'isPublished', 'isHidden']);
         $event->method('getUid')->willReturn(91);
         $subject->setSeminar($event);
 
@@ -8233,10 +8226,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->willReturn(true);
 
-        $event = $this->createPartialMock(
-            \Tx_Seminars_OldModel_Event::class,
-            ['getUid', 'isPublished', 'isHidden']
-        );
+        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $event */
+        $event = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getUid', 'isPublished', 'isHidden']);
         $event->method('getUid')->willReturn(91);
         $event->method('isPublished')->willReturn(true);
         $event->method('isHidden')->willReturn(false);
@@ -8267,10 +8258,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->willReturn(true);
 
-        $event = $this->createPartialMock(
-            \Tx_Seminars_OldModel_Event::class,
-            ['getUid', 'isPublished', 'isHidden']
-        );
+        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $event */
+        $event = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getUid', 'isPublished', 'isHidden']);
         $event->method('getUid')->willReturn(91);
         $event->method('isPublished')->willReturn(true);
         $event->method('isHidden')->willReturn(true);
@@ -8301,10 +8290,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->willReturn(true);
 
-        $event = $this->createPartialMock(
-            \Tx_Seminars_OldModel_Event::class,
-            ['getUid', 'isPublished', 'isHidden']
-        );
+        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $event */
+        $event = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getUid', 'isPublished', 'isHidden']);
         $event->method('getUid')->willReturn(91);
         $event->method('isPublished')->willReturn(false);
         $event->method('isHidden')->willReturn(false);
@@ -8331,10 +8318,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->willReturn(true);
 
-        $event = $this->createPartialMock(
-            \Tx_Seminars_OldModel_Event::class,
-            ['getUid', 'isPublished', 'isHidden']
-        );
+        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $event */
+        $event = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getUid', 'isPublished', 'isHidden']);
         $event->method('getUid')->willReturn(91);
         $event->method('isPublished')->willReturn(false);
         $event->method('isHidden')->willReturn(true);
@@ -8361,10 +8346,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->willReturn(true);
 
-        $event = $this->createPartialMock(
-            \Tx_Seminars_OldModel_Event::class,
-            ['getUid', 'isPublished', 'isHidden']
-        );
+        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $event */
+        $event = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getUid', 'isPublished', 'isHidden']);
         $event->method('getUid')->willReturn(91);
         $event->method('isPublished')->willReturn(false);
         $event->method('isHidden')->willReturn(true);
@@ -8391,10 +8374,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->willReturn(true);
 
-        $event = $this->createPartialMock(
-            \Tx_Seminars_OldModel_Event::class,
-            ['getUid', 'isPublished', 'isHidden']
-        );
+        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $event */
+        $event = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getUid', 'isPublished', 'isHidden']);
         $event->method('getUid')->willReturn(91);
         $event->method('isPublished')->willReturn(false);
         $event->method('isHidden')->willReturn(false);
@@ -8421,10 +8402,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->willReturn(true);
 
-        $event = $this->createPartialMock(
-            \Tx_Seminars_OldModel_Event::class,
-            ['getUid', 'isPublished', 'isHidden']
-        );
+        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $event */
+        $event = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getUid', 'isPublished', 'isHidden']);
         $event->method('getUid')->willReturn(91);
         $event->method('isPublished')->willReturn(true);
         $event->method('isHidden')->willReturn(true);

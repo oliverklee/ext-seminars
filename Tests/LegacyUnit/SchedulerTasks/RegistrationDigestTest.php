@@ -73,7 +73,9 @@ class RegistrationDigestTest extends TestCase
         $this->subject->setConfiguration($this->configuration);
 
         $this->objectManagerProphecy = $this->prophesize(ObjectManager::class);
-        $this->subject->injectObjectManager($this->objectManagerProphecy->reveal());
+        /** @var ObjectManager|ProphecySubjectInterface $objectManager */
+        $objectManager = $this->objectManagerProphecy->reveal();
+        $this->subject->injectObjectManager($objectManager);
 
         $this->eventMapperProphecy = $this->prophesize(\Tx_Seminars_Mapper_Event::class);
         $this->eventMapper = $this->eventMapperProphecy->reveal();

@@ -91,9 +91,7 @@ class Tx_Seminars_Tests_Unit_Model_BackEndUserTest extends TestCase
         $this->subject->setData(['usergroup' => $groups]);
         $eventFolder = $this->subject->getEventFolderFromGroup();
 
-        self::assertTrue(
-            ($eventFolder == 23) || ($eventFolder == 42)
-        );
+        self::assertTrue($eventFolder === 23 || $eventFolder === 42);
     }
 
     ////////////////////////////////////////////////////
@@ -168,9 +166,7 @@ class Tx_Seminars_Tests_Unit_Model_BackEndUserTest extends TestCase
         $this->subject->setData(['usergroup' => $groups]);
         $eventFolder = $this->subject->getRegistrationFolderFromGroup();
 
-        self::assertTrue(
-            ($eventFolder == 23) || ($eventFolder == 42)
-        );
+        self::assertTrue($eventFolder === 23 || $eventFolder === 42);
     }
 
     ///////////////////////////////////////////////
@@ -245,8 +241,6 @@ class Tx_Seminars_Tests_Unit_Model_BackEndUserTest extends TestCase
         $this->subject->setData(['usergroup' => $groups]);
         $eventFolder = $this->subject->getAuxiliaryRecordsFolder();
 
-        self::assertTrue(
-            ($eventFolder == 23) || ($eventFolder == 42)
-        );
+        self::assertTrue($eventFolder === 23 || $eventFolder === 42);
     }
 }

@@ -733,14 +733,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
      *
      * @dataProvider formFieldsDataProvider
      */
-    public function isFormFieldEnabledForNoFieldsEnabledReturnsFalseForEachField(
-        $key
-    ) {
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
-            ['showRegistrationFields' => ''],
-            $GLOBALS['TSFE']->cObj
-        );
-        $subject->setSeminar($this->createMock(\Tx_Seminars_OldModel_Event::class));
+    public function isFormFieldEnabledForNoFieldsEnabledReturnsFalseForEachField($key)
+    {
+        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(['showRegistrationFields' => ''], $GLOBALS['TSFE']->cObj);
+
+        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $event */
+        $event = $this->createMock(\Tx_Seminars_OldModel_Event::class);
+        $subject->setSeminar($event);
 
         self::assertFalse(
             $subject->isFormFieldEnabled($key)
@@ -758,15 +757,15 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
      *
      * @dataProvider formFieldsDataProvider
      */
-    public function isFormFieldEnabledForNoFieldsEnabledReturnsTrueForSelfContainedFields(
-        $key,
-        $isSelfContained
-    ) {
+    public function isFormFieldEnabledForNoFieldsEnabledReturnsTrueForSelfContainedFields($key, $isSelfContained)
+    {
         $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
             ['showRegistrationFields' => $key],
             $GLOBALS['TSFE']->cObj
         );
-        $subject->setSeminar($this->createMock(\Tx_Seminars_OldModel_Event::class));
+        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $event */
+        $event = $this->createMock(\Tx_Seminars_OldModel_Event::class);
+        $subject->setSeminar($event);
 
         self::assertEquals(
             $isSelfContained,
