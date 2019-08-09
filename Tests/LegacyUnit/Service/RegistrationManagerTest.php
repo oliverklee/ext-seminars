@@ -90,11 +90,6 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     private $frontEndUserMapper = null;
 
-    /**
-     * @var \Tx_Seminars_Mapper_Registration
-     */
-    private $registrationMapper = null;
-
     protected function setUp()
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
@@ -163,7 +158,6 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->subject->injectLinkBuilder($this->linkBuilder);
 
         $this->frontEndUserMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
-        $this->registrationMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
     }
 
     protected function tearDown()
@@ -277,7 +271,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     private function createAccessibleProxyClass()
     {
-        $testingClassName = \Tx_Seminars_Service_RegistrationManager::class . uniqid();
+        $testingClassName = \Tx_Seminars_Service_RegistrationManager::class . uniqid('', false);
 
         if (!class_exists($testingClassName, false)) {
             eval(
@@ -6180,7 +6174,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         /** @var \Tx_Seminars_Service_RegistrationManager $subject */
         $subject = new $className();
 
-        /** $event \Tx_Seminars_Model_Event $event */
+        /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);

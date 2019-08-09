@@ -87,8 +87,8 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends TestCase
      */
     public function setFrontEndUserSetsFrontEndUser()
     {
-        $frontEndUser = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_FrontEndUser::class)
-            ->getNewGhost();
+        /** @var \Tx_Oelib_Model_FrontEndUser $frontEndUser */
+        $frontEndUser = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_FrontEndUser::class)->getNewGhost();
         $this->subject->setFrontEndUser($frontEndUser);
 
         self::assertSame(
@@ -136,8 +136,8 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends TestCase
      */
     public function setEventSetsEvent()
     {
-        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
-            ->getNewGhost();
+        /** @var \Tx_Seminars_Model_Event $event */
+        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getNewGhost();
         $this->subject->setEvent($event);
 
         self::assertSame(
@@ -151,8 +151,8 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends TestCase
      */
     public function setSeminarSetsEvent()
     {
-        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
-            ->getNewGhost();
+        /** @var \Tx_Seminars_Model_Event $event */
+        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getNewGhost();
         $this->subject->setSeminar($event);
 
         self::assertSame(
@@ -554,9 +554,8 @@ class Tx_Seminars_Tests_Unit_Model_RegistrationTest extends TestCase
      */
     public function setPaymentMethodSetsPaymentMethod()
     {
-        $paymentMethod = \Tx_Oelib_MapperRegistry::get(
-            \Tx_Seminars_Mapper_PaymentMethod::class
-        )->getNewGhost();
+        /** @var \Tx_Seminars_Model_PaymentMethod $paymentMethod */
+        $paymentMethod = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
         $this->subject->setPaymentMethod($paymentMethod);
 
         self::assertSame(

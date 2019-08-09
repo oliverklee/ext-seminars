@@ -434,9 +434,8 @@ class SpeakerTest extends FunctionalTestCase
     public function getImageWithFileReferenceReturnsFileReference()
     {
         $this->importDataSet(__DIR__ . '/../Fixtures/Speakers.xml');
-        $subject = new \Tx_Seminars_OldModel_Speaker(3);
 
-        $result = $subject->getImage();
+        $result = (new \Tx_Seminars_OldModel_Speaker(3))->getImage();
 
         self::assertInstanceOf(FileReference::class, $result);
     }

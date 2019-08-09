@@ -26,11 +26,6 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends TestCase
     private $testingFramework;
 
     /**
-     * @var int the UID of a seminar to which the fixture relates
-     */
-    private $seminarUid;
-
-    /**
      * @var int PID of a dummy system folder
      */
     private $systemFolderPid = 0;
@@ -45,14 +40,6 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends TestCase
         $this->testingFramework->createFakeFrontEnd();
 
         $this->systemFolderPid = $this->testingFramework->createSystemFolder();
-        $this->seminarUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            [
-                'pid' => $this->systemFolderPid,
-                'title' => 'Test event',
-            ]
-        );
-
         $this->subject = new \Tx_Seminars_FrontEnd_CategoryList(
             [
                 'isStaticTemplateLoaded' => 1,

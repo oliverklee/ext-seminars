@@ -25,11 +25,6 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CountdownTest extends TestCase
      */
     private $mapper = null;
 
-    /**
-     * @var \Tx_Seminars_ViewHelper_Countdown|PHPUnit_Framework_MockObject_MockObject
-     */
-    private $viewHelper = null;
-
     protected function setUp()
     {
         $configurationRegistry = \Tx_Oelib_ConfigurationRegistry::getInstance();
@@ -125,12 +120,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CountdownTest extends TestCase
             ->method('findNextUpcoming')
             ->willReturn($event);
 
-        $this->viewHelper = $this->createPartialMock(\Tx_Seminars_ViewHelper_Countdown::class, ['render']);
-        $this->viewHelper->expects(self::once())
+        /** @var \Tx_Seminars_ViewHelper_Countdown|\PHPUnit_Framework_MockObject_MockObject $viewHelper */
+        $viewHelper = $this->createPartialMock(\Tx_Seminars_ViewHelper_Countdown::class, ['render']);
+        $viewHelper->expects(self::once())
             ->method('render')
             ->with(self::equalTo($event->getBeginDateAsUnixTimeStamp()));
 
-        $this->subject->injectCountDownViewHelper($this->viewHelper);
+        $this->subject->injectCountDownViewHelper($viewHelper);
 
         $this->subject->render();
     }

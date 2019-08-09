@@ -55,21 +55,15 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends TestCase
             ]
         );
 
-        $document = new DocumentTemplate();
-        $this->backEndModule->doc = $document;
+        $this->backEndModule->doc = new DocumentTemplate();
 
         $this->subject = new EventsList($this->backEndModule);
 
-        $backEndGroup = \Tx_Oelib_MapperRegistry::get(
-            \Tx_Seminars_Mapper_BackEndUserGroup::class
-        )->getLoadedTestingModel(
-            ['tx_seminars_events_folder' => $this->dummySysFolderPid + 1]
-        );
-        $backEndUser = \Tx_Oelib_MapperRegistry::get(
-            \Tx_Seminars_Mapper_BackEndUser::class
-        )->getLoadedTestingModel(
-            ['usergroup' => $backEndGroup->getUid()]
-        );
+        $backEndGroup = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUserGroup::class)
+            ->getLoadedTestingModel(['tx_seminars_events_folder' => $this->dummySysFolderPid + 1]);
+        /** @var \Tx_Seminars_Model_BackEndUser $backEndUser */
+        $backEndUser = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUser::class)
+            ->getLoadedTestingModel(['usergroup' => $backEndGroup->getUid()]);
         \Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
     }
 
@@ -781,12 +775,9 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends TestCase
 
     public function testNewButtonForNoEventStorageSettingInUserGroupsSetsCurrentPageIdAsNewRecordPid()
     {
-        $backEndUser = \Tx_Oelib_MapperRegistry::get(
-            \Tx_Seminars_Mapper_BackEndUser::class
-        )->getLoadedTestingModel([]);
-        \Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser(
-            $backEndUser
-        );
+        /** @var \Tx_Seminars_Model_BackEndUser $backEndUser */
+        $backEndUser = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUser::class)->getLoadedTestingModel([]);
+        \Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
 
         self::assertContains(
             'edit[tx_seminars_seminars][' . $this->dummySysFolderPid . ']=new',
@@ -796,19 +787,12 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends TestCase
 
     public function testNewButtonForEventStoredOnCurrentPageHasCurrentFolderLabel()
     {
-        $backEndUser = \Tx_Oelib_MapperRegistry::get(
-            \Tx_Seminars_Mapper_BackEndUser::class
-        )->getLoadedTestingModel([]);
-        \Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser(
-            $backEndUser
-        );
+        /** @var \Tx_Seminars_Model_BackEndUser $backEndUser */
+        $backEndUser = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUser::class)->getLoadedTestingModel([]);
+        \Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
 
         self::assertContains(
-            sprintf(
-                $GLOBALS['LANG']->getLL('label_create_record_in_current_folder'),
-                '',
-                $this->dummySysFolderPid
-            ),
+            sprintf($GLOBALS['LANG']->getLL('label_create_record_in_current_folder'), '', $this->dummySysFolderPid),
             $this->subject->show()
         );
     }

@@ -37,11 +37,27 @@ class Tx_Seminars_Tests_Unit_ViewHelper_DateRangeTest extends TestCase
     /**
      * @var string
      */
-    const DATE_FORMAT_YMD = '%d.%m.%Y',
-        DATE_FORMAT_Y = '%Y',
-        DATE_FORMAT_M = '%m.',
-        DATE_FORMAT_MD = '%d.%m.',
-        DATE_FORMAT_D = '%d.';
+    const DATE_FORMAT_YMD = '%d.%m.%Y';
+
+    /**
+     * @var string
+     */
+    const DATE_FORMAT_Y = '%Y';
+
+    /**
+     * @var string
+     */
+    const DATE_FORMAT_M = '%m.';
+
+    /**
+     * @var string
+     */
+    const DATE_FORMAT_MD = '%d.%m.';
+
+    /**
+     * @var string
+     */
+    const DATE_FORMAT_D = '%d.';
 
     protected function setUp()
     {

@@ -31,11 +31,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_OrganizersListTest extends TestCase
      */
     private $dummySysFolderPid = 0;
 
-    /**
-     * @var DummyModule
-     */
-    private $backEndModule;
-
     protected function setUp()
     {
         $this->unifyTestingEnvironment();
@@ -44,19 +39,18 @@ class Tx_Seminars_Tests_Unit_BackEnd_OrganizersListTest extends TestCase
 
         $this->dummySysFolderPid = $this->testingFramework->createSystemFolder();
 
-        $this->backEndModule = new DummyModule();
-        $this->backEndModule->id = $this->dummySysFolderPid;
-        $this->backEndModule->setPageData(
+        $backEndModule = new DummyModule();
+        $backEndModule->id = $this->dummySysFolderPid;
+        $backEndModule->setPageData(
             [
                 'uid' => $this->dummySysFolderPid,
                 'doktype' => AbstractList::SYSFOLDER_TYPE,
             ]
         );
 
-        $document = new DocumentTemplate();
-        $this->backEndModule->doc = $document;
+        $backEndModule->doc = new DocumentTemplate();
 
-        $this->subject = new OrganizersList($this->backEndModule);
+        $this->subject = new OrganizersList($backEndModule);
     }
 
     protected function tearDown()
@@ -94,19 +88,12 @@ class Tx_Seminars_Tests_Unit_BackEnd_OrganizersListTest extends TestCase
     public function testNewButtonForOrganizerStorageSettingSetInUsersGroupSetsThisPidAsNewRecordPid()
     {
         $newOrganizerFolder = $this->dummySysFolderPid + 1;
-        $backEndGroup = \Tx_Oelib_MapperRegistry::get(
-            \Tx_Seminars_Mapper_BackEndUserGroup::class
-        )->getLoadedTestingModel(
-            ['tx_seminars_auxiliaries_folder' => $newOrganizerFolder]
-        );
-        $backEndUser = \Tx_Oelib_MapperRegistry::get(
-            \Tx_Seminars_Mapper_BackEndUser::class
-        )->getLoadedTestingModel(
-            ['usergroup' => $backEndGroup->getUid()]
-        );
-        \Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser(
-            $backEndUser
-        );
+        $backEndGroup = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUserGroup::class)
+            ->getLoadedTestingModel(['tx_seminars_auxiliaries_folder' => $newOrganizerFolder]);
+        /** @var \Tx_Seminars_Model_BackEndUser $backEndUser */
+        $backEndUser = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUser::class)
+            ->getLoadedTestingModel(['usergroup' => $backEndGroup->getUid()]);
+        \Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
 
         self::assertContains(
             'edit[tx_seminars_organizers][' . $newOrganizerFolder . ']=new',

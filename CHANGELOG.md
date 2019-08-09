@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop the TYPO3 package repository from composer.json (#232)
 
 ### Fixed
+- Fix code inspection warnings in the tests (#234)
 - Mention in which release deprecated code will be removed (#233)
 - Update the mkforms dependency (#230)
 - Pin the dev dependency versions (#229)

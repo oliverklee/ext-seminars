@@ -6341,9 +6341,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
                 'topic' => $topicRecordUid,
             ]
         );
-        $eventDate = new \Tx_Seminars_OldModel_Event($dateRecordUid);
 
-        $attachedFiles = $eventDate->getAttachedFiles($this->pi1);
+        $attachedFiles = (new \Tx_Seminars_OldModel_Event($dateRecordUid))->getAttachedFiles($this->pi1);
 
         self::assertContains(
             $dummyFileName,
@@ -6376,9 +6375,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
                 'topic' => $topicRecordUid,
             ]
         );
-        $eventDate = new \Tx_Seminars_OldModel_Event($dateRecordUid);
 
-        $attachedFiles = $eventDate->getAttachedFiles($this->pi1);
+        $attachedFiles = (new \Tx_Seminars_OldModel_Event($dateRecordUid))->getAttachedFiles($this->pi1);
 
         self::assertContains(
             $dummyFileName,
@@ -6415,9 +6413,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
                 'topic' => $topicRecordUid,
             ]
         );
-        $eventDate = new \Tx_Seminars_OldModel_Event($dateRecordUid);
 
-        $attachedFiles = $eventDate->getAttachedFiles($this->pi1);
+        $attachedFiles = (new \Tx_Seminars_OldModel_Event($dateRecordUid))->getAttachedFiles($this->pi1);
 
         self::assertContains(
             $topicDummyFileName,
@@ -7517,9 +7514,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
             $dependentTopicUid2,
             $topicUid
         );
-        $topic = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($topicUid);
 
-        $result = $topic->hasDependencies();
+        $result = (new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($topicUid))->hasDependencies();
 
         self::assertTrue(
             $result
@@ -7567,9 +7563,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
             $requiredTopicUid,
             'requirements'
         );
-        $topic = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($topicUid);
 
-        $result = $topic->getRequirements();
+        $result = (new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($topicUid))->getRequirements();
 
         self::assertSame(
             1,
@@ -7651,8 +7646,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
             $requiredTopicUid2,
             'requirements'
         );
-        $topic = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($topicUid);
-        $requirements = $topic->getRequirements();
+
+        $requirements = (new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($topicUid))->getRequirements();
 
         self::assertSame(
             2,
@@ -7706,9 +7701,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
             $dependentTopicUid,
             $topicUid
         );
-        $topic = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($topicUid);
 
-        $result = $topic->getDependencies();
+        $result = (new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($topicUid))->getDependencies();
 
         self::assertSame(
             1,
@@ -7802,8 +7796,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
             $dependentTopicUid2,
             $topicUid
         );
-        $topic = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($topicUid);
-        $dependencies = $topic->getDependencies();
+
+        $dependencies = (new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($topicUid))->getDependencies();
 
         self::assertSame(
             2,

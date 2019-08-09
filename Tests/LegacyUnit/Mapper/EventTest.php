@@ -87,7 +87,7 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends TestCase
     public function getTimeSlotsWithOneTimeSlotReturnsListOfTimeSlots()
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $timeSlotUid = $this->testingFramework->createRecord(
+        $this->testingFramework->createRecord(
             'tx_seminars_timeslots',
             ['seminar' => $uid]
         );

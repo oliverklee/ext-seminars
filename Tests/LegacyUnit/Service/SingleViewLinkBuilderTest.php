@@ -67,6 +67,7 @@ class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends TestCase
      */
     public function getSingleViewPageForEventForEventWithSingleViewPageAndNoConfigurationReturnsSingleViewPageFromEvent(
     ) {
+        /** @var \Tx_Seminars_Model_Event $event|\PHPUnit_Framework_MockObject_MockObject */
         $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['hasCombinedSingleViewPage', 'getCombinedSingleViewPage']
@@ -101,6 +102,7 @@ class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends TestCase
      */
     public function getSingleViewPageForEventForEventWithoutSingleViewPageReturnsSingleViewPageFromConfiguration()
     {
+        /** @var \Tx_Seminars_Model_Event $event|\PHPUnit_Framework_MockObject_MockObject */
         $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['hasCombinedSingleViewPage', 'getCombinedSingleViewPage']
@@ -135,6 +137,7 @@ class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends TestCase
      */
     public function getSingleViewPageForEventForEventAndConfigurationWithSingleViewPageReturnsSingleViewPageFromEvent()
     {
+        /** @var \Tx_Seminars_Model_Event $event|\PHPUnit_Framework_MockObject_MockObject */
         $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['hasCombinedSingleViewPage', 'getCombinedSingleViewPage']
@@ -169,6 +172,7 @@ class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends TestCase
      */
     public function getSingleViewPageForEventForEventWithoutSingleViewPageAndConfigurationWithoutSettingReturnsEmptyString(
     ) {
+        /** @var \Tx_Seminars_Model_Event $event|\PHPUnit_Framework_MockObject_MockObject */
         $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['hasCombinedSingleViewPage', 'getCombinedSingleViewPage']
@@ -249,14 +253,13 @@ class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends TestCase
      */
     public function getSingleViewPageFromConfigurationForPluginSetReturnsPageUidFromPluginConfiguration()
     {
+        /** @var \Tx_Oelib_TemplateHelper|\PHPUnit_Framework_MockObject_MockObject $plugin */
         $plugin = $this->createPartialMock(
             \Tx_Oelib_TemplateHelper::class,
             ['hasConfValueInteger', 'getConfValueInteger']
         );
-        $plugin->method('hasConfValueInteger')
-            ->willReturn(true);
-        $plugin->method('getConfValueInteger')
-            ->with('detailPID')->willReturn(42);
+        $plugin->method('hasConfValueInteger')->willReturn(true);
+        $plugin->method('getConfValueInteger')->with('detailPID')->willReturn(42);
 
         $subject = new \Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder();
         $subject->setPlugin($plugin);
@@ -293,6 +296,7 @@ class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends TestCase
     public function createAbsoluteUrlForEventReturnsRelativeUrlMadeAbsolute()
     {
         $relativeUrl = 'index.php?id=42&tx_seminars%5BshowUid%5D=17';
+        /** @var \Tx_Seminars_Model_Event $event|\PHPUnit_Framework_MockObject_MockObject */
         $event = $this->createMock(\Tx_Seminars_Model_Event::class);
 
         /** @var \Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder|\PHPUnit_Framework_MockObject_MockObject $subject */
@@ -317,6 +321,7 @@ class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends TestCase
         $eventUid = 19;
         $singleViewPageUid = 42;
 
+        /** @var \Tx_Seminars_Model_Event $event|\PHPUnit_Framework_MockObject_MockObject */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getUid']);
         $event->method('getUid')
             ->willReturn($eventUid);
@@ -363,6 +368,7 @@ class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends TestCase
         $subject->method('getContentObject')
             ->willReturn($contentObject);
 
+        /** @var \Tx_Seminars_Model_Event $event|\PHPUnit_Framework_MockObject_MockObject */
         $event = $this->createMock(\Tx_Seminars_Model_Event::class);
 
         self::assertEquals(
@@ -376,6 +382,7 @@ class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends TestCase
      */
     public function createAbsoluteUrlForEventWithExternalDetailsPageAddsProtocolAndNoSeminarParameter()
     {
+        /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
             ->getLoadedTestingModel(['details_page' => 'www.example.com']);
 
@@ -394,6 +401,7 @@ class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends TestCase
     {
         $pageUid = $this->testingFramework->createFrontEndPage();
 
+        /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
             ->getLoadedTestingModel(['details_page' => $pageUid]);
 
