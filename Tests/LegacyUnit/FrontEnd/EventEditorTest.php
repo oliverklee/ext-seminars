@@ -1,5 +1,6 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -8,7 +9,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_FrontEnd_EventEditor

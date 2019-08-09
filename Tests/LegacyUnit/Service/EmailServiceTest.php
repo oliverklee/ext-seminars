@@ -1,6 +1,7 @@
 <?php
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 
+use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Service\EmailService;
 use TYPO3\CMS\Core\Core\Bootstrap;
 use TYPO3\CMS\Core\SingletonInterface;
@@ -12,7 +13,7 @@ use TYPO3\CMS\Lang\LanguageService;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class EmailServiceTest extends \Tx_Phpunit_TestCase
+class EmailServiceTest extends TestCase
 {
     /**
      * @var string

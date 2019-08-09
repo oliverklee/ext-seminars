@@ -1,5 +1,6 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
 use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 /**
@@ -8,7 +9,7 @@ use TYPO3\CMS\Core\Utility\VersionNumberUtility;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Csv_AbstractRegistrationListView
@@ -78,26 +79,22 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends \Tx_Ph
         );
 
         $this->subject = $this->getMockForAbstractClass(\Tx_Seminars_Csv_AbstractRegistrationListView::class);
-        $this->subject->expects(self::any())->method(
+        $this->subject->method(
             'shouldAlsoContainRegistrationsOnQueue'
-        )->will(self::returnValue(true));
+        )->willReturn(true);
 
         $testCase = $this;
-        $this->subject->expects(self::any())->method('getFrontEndUserFieldKeys')
-            ->will(
-                self::returnCallback(
-                    function () use ($testCase) {
-                        return $testCase->frontEndUserFieldKeys;
-                    }
-                )
+        $this->subject->method('getFrontEndUserFieldKeys')
+            ->willReturnCallback(
+                function () use ($testCase) {
+                    return $testCase->frontEndUserFieldKeys;
+                }
             );
-        $this->subject->expects(self::any())->method('getRegistrationFieldKeys')
-            ->will(
-                self::returnCallback(
-                    function () use ($testCase) {
-                        return $testCase->registrationFieldKeys;
-                    }
-                )
+        $this->subject->method('getRegistrationFieldKeys')
+            ->willReturnCallback(
+                function () use ($testCase) {
+                    return $testCase->registrationFieldKeys;
+                }
             );
 
         $this->subject->setEventUid($this->eventUid);
@@ -140,11 +137,11 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends \Tx_Ph
 
     /**
      * @test
-     *
-     * @expectedException \InvalidArgumentException
      */
     public function setPageUidWithNegativePageUidThrowsException()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->subject->setPageUid(-1);
     }
 
@@ -158,21 +155,21 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends \Tx_Ph
 
     /**
      * @test
-     *
-     * @expectedException \InvalidArgumentException
      */
     public function setEventUidWithNegativeEventUidThrowsException()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->subject->setEventUid(-1);
     }
 
     /**
      * @test
-     *
-     * @expectedException \BadMethodCallException
      */
     public function renderForNoPageAndNoEventThrowsException()
     {
+        $this->expectException(\BadMethodCallException::class);
+
         /** @var \Tx_Seminars_Csv_AbstractRegistrationListView|\PHPUnit_Framework_MockObject_MockObject $subject */
         $subject = $this->getMockForAbstractClass(\Tx_Seminars_Csv_AbstractRegistrationListView::class);
 
@@ -184,11 +181,11 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends \Tx_Ph
 
     /**
      * @test
-     *
-     * @expectedException \BadMethodCallException
      */
     public function renderForPageAndEventThrowsException()
     {
+        $this->expectException(\BadMethodCallException::class);
+
         /** @var \Tx_Seminars_Csv_AbstractRegistrationListView|\PHPUnit_Framework_MockObject_MockObject $subject */
         $subject = $this->getMockForAbstractClass(\Tx_Seminars_Csv_AbstractRegistrationListView::class);
         $subject->setEventUid($this->eventUid);

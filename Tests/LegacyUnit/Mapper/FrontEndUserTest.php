@@ -1,11 +1,13 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
+
 /**
  * Test case.
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Mapper_FrontEndUserTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Mapper_FrontEndUserTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Mapper_FrontEndUser the object to test

@@ -1,5 +1,6 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Lang\LanguageService;
 
@@ -10,7 +11,7 @@ use TYPO3\CMS\Lang\LanguageService;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Philipp Kitzberger <philipp@cron-it.de>
  */
-class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_FrontEnd_RegistrationForm
@@ -739,7 +740,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends \Tx_Phpunit_T
             ['showRegistrationFields' => ''],
             $GLOBALS['TSFE']->cObj
         );
-        $subject->setSeminar($this->getMock(\Tx_Seminars_OldModel_Event::class, [], [], '', false));
+        $subject->setSeminar($this->createMock(\Tx_Seminars_OldModel_Event::class));
 
         self::assertFalse(
             $subject->isFormFieldEnabled($key)
@@ -765,7 +766,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends \Tx_Phpunit_T
             ['showRegistrationFields' => $key],
             $GLOBALS['TSFE']->cObj
         );
-        $subject->setSeminar($this->getMock(\Tx_Seminars_OldModel_Event::class, [], [], '', false));
+        $subject->setSeminar($this->createMock(\Tx_Seminars_OldModel_Event::class));
 
         self::assertEquals(
             $isSelfContained,
@@ -1054,17 +1055,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends \Tx_Phpunit_T
     public function validateNumberOfRegisteredPersonsForOnePersonAndOneSeatReturnsTrue()
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_FrontEnd_RegistrationForm::class,
-            ['getNumberOfEnteredPersons', 'isFormFieldEnabled'],
-            [],
-            '',
-            false
+            ['getNumberOfEnteredPersons', 'isFormFieldEnabled']
         );
-        $subject->expects(self::any())->method('isFormFieldEnabled')
-            ->will(self::returnValue(true));
-        $subject->expects(self::any())->method('getNumberOfEnteredPersons')
-            ->will(self::returnValue(1));
+        $subject->method('isFormFieldEnabled')
+            ->willReturn(true);
+        $subject->method('getNumberOfEnteredPersons')
+            ->willReturn(1);
         $subject->setTestMode();
 
         $subject->setFakedFormValue('seats', 1);
@@ -1080,17 +1078,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends \Tx_Phpunit_T
     public function validateNumberOfRegisteredPersonsForOnePersonAndTwoSeatsReturnsFalse()
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_FrontEnd_RegistrationForm::class,
-            ['getNumberOfEnteredPersons', 'isFormFieldEnabled'],
-            [],
-            '',
-            false
+            ['getNumberOfEnteredPersons', 'isFormFieldEnabled']
         );
-        $subject->expects(self::any())->method('isFormFieldEnabled')
-            ->will(self::returnValue(true));
-        $subject->expects(self::any())->method('getNumberOfEnteredPersons')
-            ->will(self::returnValue(1));
+        $subject->method('isFormFieldEnabled')
+            ->willReturn(true);
+        $subject->method('getNumberOfEnteredPersons')
+            ->willReturn(1);
         $subject->setTestMode();
 
         $subject->setFakedFormValue('seats', 2);
@@ -1106,17 +1101,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends \Tx_Phpunit_T
     public function validateNumberOfRegisteredPersonsForTwoPersonsAndOneSeatReturnsFalse()
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_FrontEnd_RegistrationForm::class,
-            ['getNumberOfEnteredPersons', 'isFormFieldEnabled'],
-            [],
-            '',
-            false
+            ['getNumberOfEnteredPersons', 'isFormFieldEnabled']
         );
-        $subject->expects(self::any())->method('isFormFieldEnabled')
-            ->will(self::returnValue(true));
-        $subject->expects(self::any())->method('getNumberOfEnteredPersons')
-            ->will(self::returnValue(2));
+        $subject->method('isFormFieldEnabled')
+            ->willReturn(true);
+        $subject->method('getNumberOfEnteredPersons')
+            ->willReturn(2);
         $subject->setTestMode();
 
         $subject->setFakedFormValue('seats', 1);
@@ -1132,17 +1124,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends \Tx_Phpunit_T
     public function validateNumberOfRegisteredPersonsForTwoPersonsAndTwoSeatsReturnsTrue()
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_FrontEnd_RegistrationForm::class,
-            ['getNumberOfEnteredPersons', 'isFormFieldEnabled'],
-            [],
-            '',
-            false
+            ['getNumberOfEnteredPersons', 'isFormFieldEnabled']
         );
-        $subject->expects(self::any())->method('isFormFieldEnabled')
-            ->will(self::returnValue(true));
-        $subject->expects(self::any())->method('getNumberOfEnteredPersons')
-            ->will(self::returnValue(2));
+        $subject->method('isFormFieldEnabled')
+            ->willReturn(true);
+        $subject->method('getNumberOfEnteredPersons')
+            ->willReturn(2);
         $subject->setTestMode();
 
         $subject->setFakedFormValue('seats', 2);
@@ -1241,17 +1230,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends \Tx_Phpunit_T
     public function validateAdditionalPersonsEMailAddressesForDisabledFrontEndUserCreationReturnsTrue()
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_FrontEnd_RegistrationForm::class,
-            ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
-            [],
-            '',
-            false
+            ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled']
         );
-        $subject->expects(self::any())->method('isFormFieldEnabled')
-            ->will(self::returnValue(true));
-        $subject->expects(self::any())->method('getAdditionalRegisteredPersonsData')
-            ->will(self::returnValue([]));
+        $subject->method('isFormFieldEnabled')
+            ->willReturn(true);
+        $subject->method('getAdditionalRegisteredPersonsData')
+            ->willReturn([]);
         $subject->setTestMode();
         $subject->setConfigurationValue(
             'createAdditionalAttendeesAsFrontEndUsers',
@@ -1269,17 +1255,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends \Tx_Phpunit_T
     public function validateAdditionalPersonsEMailAddressesForDisabledFormFieldReturnsTrue()
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_FrontEnd_RegistrationForm::class,
-            ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
-            [],
-            '',
-            false
+            ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled']
         );
-        $subject->expects(self::any())->method('isFormFieldEnabled')
-            ->will(self::returnValue(false));
-        $subject->expects(self::any())->method('getAdditionalRegisteredPersonsData')
-            ->will(self::returnValue([]));
+        $subject->method('isFormFieldEnabled')
+            ->willReturn(false);
+        $subject->method('getAdditionalRegisteredPersonsData')
+            ->willReturn([]);
         $subject->setTestMode();
         $subject->setConfigurationValue(
             'createAdditionalAttendeesAsFrontEndUsers',
@@ -1297,17 +1280,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends \Tx_Phpunit_T
     public function validateAdditionalPersonsEMailAddressesForNoPersonsReturnsTrue()
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_FrontEnd_RegistrationForm::class,
-            ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
-            [],
-            '',
-            false
+            ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled']
         );
-        $subject->expects(self::any())->method('isFormFieldEnabled')
-            ->will(self::returnValue(true));
-        $subject->expects(self::any())->method('getAdditionalRegisteredPersonsData')
-            ->will(self::returnValue([]));
+        $subject->method('isFormFieldEnabled')
+            ->willReturn(true);
+        $subject->method('getAdditionalRegisteredPersonsData')
+            ->willReturn([]);
         $subject->setTestMode();
         $subject->setConfigurationValue(
             'createAdditionalAttendeesAsFrontEndUsers',
@@ -1325,20 +1305,15 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends \Tx_Phpunit_T
     public function validateAdditionalPersonsEMailAddressesForOneValidEMailAddressReturnsTrue()
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_FrontEnd_RegistrationForm::class,
-            ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
-            [],
-            '',
-            false
+            ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled']
         );
-        $subject->expects(self::any())->method('isFormFieldEnabled')
-            ->will(self::returnValue(true));
-        $subject->expects(self::any())->method('getAdditionalRegisteredPersonsData')
-            ->will(
-                self::returnValue(
-                    [['John', 'Doe', '', 'john@example.com']]
-                )
+        $subject->method('isFormFieldEnabled')
+            ->willReturn(true);
+        $subject->method('getAdditionalRegisteredPersonsData')
+            ->willReturn(
+                [['John', 'Doe', '', 'john@example.com']]
             );
         $subject->setTestMode();
         $subject->setConfigurationValue(
@@ -1357,20 +1332,15 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends \Tx_Phpunit_T
     public function validateAdditionalPersonsEMailAddressesForOneInvalidEMailAddressReturnsFalse()
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_FrontEnd_RegistrationForm::class,
-            ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
-            [],
-            '',
-            false
+            ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled']
         );
-        $subject->expects(self::any())->method('isFormFieldEnabled')
-            ->will(self::returnValue(true));
-        $subject->expects(self::any())->method('getAdditionalRegisteredPersonsData')
-            ->will(
-                self::returnValue(
-                    [['John', 'Doe', '', 'potato salad!']]
-                )
+        $subject->method('isFormFieldEnabled')
+            ->willReturn(true);
+        $subject->method('getAdditionalRegisteredPersonsData')
+            ->willReturn(
+                [['John', 'Doe', '', 'potato salad!']]
             );
         $subject->setTestMode();
         $subject->setConfigurationValue(
@@ -1389,20 +1359,15 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends \Tx_Phpunit_T
     public function validateAdditionalPersonsEMailAddressesForOneEmptyAddressReturnsFalse()
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_FrontEnd_RegistrationForm::class,
-            ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
-            [],
-            '',
-            false
+            ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled']
         );
-        $subject->expects(self::any())->method('isFormFieldEnabled')
-            ->will(self::returnValue(true));
-        $subject->expects(self::any())->method('getAdditionalRegisteredPersonsData')
-            ->will(
-                self::returnValue(
-                    [['John', 'Doe', '', '']]
-                )
+        $subject->method('isFormFieldEnabled')
+            ->willReturn(true);
+        $subject->method('getAdditionalRegisteredPersonsData')
+            ->willReturn(
+                [['John', 'Doe', '', '']]
             );
         $subject->setTestMode();
         $subject->setConfigurationValue(
@@ -1421,20 +1386,15 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends \Tx_Phpunit_T
     public function validateAdditionalPersonsEMailAddressesForOneMissingAddressReturnsFalse()
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_FrontEnd_RegistrationForm::class,
-            ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
-            [],
-            '',
-            false
+            ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled']
         );
-        $subject->expects(self::any())->method('isFormFieldEnabled')
-            ->will(self::returnValue(true));
-        $subject->expects(self::any())->method('getAdditionalRegisteredPersonsData')
-            ->will(
-                self::returnValue(
-                    [['John', 'Doe', '']]
-                )
+        $subject->method('isFormFieldEnabled')
+            ->willReturn(true);
+        $subject->method('getAdditionalRegisteredPersonsData')
+            ->willReturn(
+                [['John', 'Doe', '']]
             );
         $subject->setTestMode();
         $subject->setConfigurationValue(
@@ -1453,23 +1413,15 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends \Tx_Phpunit_T
     public function validateAdditionalPersonsEMailAddressesForOneValidAndOneInvalidEMailAddressReturnsFalse()
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_FrontEnd_RegistrationForm::class,
-            ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled'],
-            [],
-            '',
-            false
+            ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled']
         );
-        $subject->expects(self::any())->method('isFormFieldEnabled')
-            ->will(self::returnValue(true));
-        $subject->expects(self::any())->method('getAdditionalRegisteredPersonsData')
-            ->will(
-                self::returnValue(
-                    [
-                        ['John', 'Doe', '', 'john@example.com'],
-                        ['Jane', 'Doe', '', 'tomato salad!'],
-                    ]
-                )
+        $subject->method('isFormFieldEnabled')
+            ->willReturn(true);
+        $subject->method('getAdditionalRegisteredPersonsData')
+            ->willReturn(
+                [['John', 'Doe', '', 'john@example.com'], ['Jane', 'Doe', '', 'tomato salad!']]
             );
         $subject->setTestMode();
         $subject->setConfigurationValue(

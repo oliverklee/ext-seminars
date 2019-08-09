@@ -1,11 +1,13 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
+
 /**
  * Test case.
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_Model_TimeSlotTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Model_TimeSlotTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Model_TimeSlot
@@ -52,8 +54,10 @@ class Tx_Seminars_Tests_Unit_Model_TimeSlotTest extends \Tx_Phpunit_TestCase
      */
     public function setEntryDateAsUnixTimeStampWithNegativeTimeStampThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The parameter $entryDate must be >= 0.'
         );
 

@@ -1,5 +1,6 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\LegacyUnit\BackEnd\Fixtures\DummyModule;
 
 /**
@@ -7,7 +8,7 @@ use OliverKlee\Seminars\Tests\LegacyUnit\BackEnd\Fixtures\DummyModule;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_BackEnd_AbstractModuleTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_BackEnd_AbstractModuleTest extends TestCase
 {
     /**
      * @var DummyModule
@@ -23,13 +24,13 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractModuleTest extends \Tx_Phpunit_Test
 
     public function testGetPageDataInitiallyReturnsEmptyArray()
     {
-        static::assertSame([], $this->subject->getPageData());
+        self::assertSame([], $this->subject->getPageData());
     }
 
     public function testGetPageDataReturnsCompleteDataSetViaSetPageData()
     {
         $this->subject->setPageData(['foo' => 'bar']);
 
-        static::assertSame(['foo' => 'bar'], $this->subject->getPageData());
+        self::assertSame(['foo' => 'bar'], $this->subject->getPageData());
     }
 }

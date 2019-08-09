@@ -1,11 +1,13 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
+
 /**
  * Test case.
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing
@@ -336,8 +338,10 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends \Tx_Phpunit_TestCase
 
     public function testCreateMmRecordsForEmptyTableNameThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             '$mmTable must not be empty.'
         );
 
@@ -346,8 +350,10 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends \Tx_Phpunit_TestCase
 
     public function testCreateMmRecordsOnObjectWithoutUidThrowsException()
     {
-        $this->setExpectedException(
-            \BadMethodCallException::class,
+        $this->expectException(
+            \BadMethodCallException::class
+        );
+        $this->expectExceptionMessage(
             'createMmRecords may only be called on objects that have a UID.'
         );
 

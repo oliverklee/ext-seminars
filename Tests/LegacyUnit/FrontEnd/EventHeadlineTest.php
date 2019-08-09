@@ -1,12 +1,14 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
+
 /**
  * Test case.
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_FrontEnd_EventHeadlineTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_FrontEnd_EventHeadlineTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_FrontEnd_EventHeadline
@@ -84,12 +86,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventHeadlineTest extends \Tx_Phpunit_Test
 
     /**
      * @test
-     * @expectedException \BadMethodCallException
-     * @expectedExceptionMessage The method injectEventMapper() needs to be called first.
-     * @expectedExceptionCode 1333614794
      */
     public function renderWithoutCallingInjectEventMapperFirstThrowsBadMethodCallException()
     {
+        $this->expectException(\BadMethodCallException::class);
+        $this->expectExceptionMessage('The method injectEventMapper() needs to be called first.');
+        $this->expectExceptionCode(1333614794);
+
         $this->subject->injectEventMapper(null);
         $this->subject->render();
     }

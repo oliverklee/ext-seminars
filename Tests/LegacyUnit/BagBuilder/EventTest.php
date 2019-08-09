@@ -1,12 +1,14 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
+
 /**
  * Test case.
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_BagBuilder_Event
@@ -827,8 +829,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
 
     public function testSetTimeFrameFailsWithEmptyKey()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The time-frame key  is not valid.'
         );
         $this->subject->setTimeFrame('');
@@ -836,8 +840,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
 
     public function testSetTimeFrameFailsWithInvalidKey()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The time-frame key foo is not valid.'
         );
         $this->subject->setTimeFrame('foo');
@@ -3009,8 +3015,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
 
     public function testLimitToOwnerWithNegativeFeUserUidThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The parameter $feUserUid must be >= 0.'
         );
 
@@ -3165,8 +3173,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
 
     public function testLimitToEventManagerWithNegativeFeUserUidThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The parameter $feUserUid must be >= 0.'
         );
 
@@ -3304,8 +3314,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
 
     public function testLimitToEventsNextDayWithEventWithEmptyEndDateThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The event object given in the first parameter $event must ' .
             'have an end date set.'
         );
@@ -3388,8 +3400,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends \Tx_Phpunit_TestCase
 
     public function testLimitToOtherDatesForTopicWithSingleEventRecordThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The first parameter $event must be either a date or a topic record.'
         );
 

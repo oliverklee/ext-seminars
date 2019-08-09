@@ -1,12 +1,14 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
+
 /**
  * Test case.
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Model_FrontEndUser the object to test
@@ -953,12 +955,12 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
     public function hasDefaultOrganizersForEmptyDefaultOrganizersReturnsFalse()
     {
         /** @var \Tx_Seminars_Model_FrontEndUser|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_Model_FrontEndUser::class,
             ['getDefaultOrganizers']
         );
-        $subject->expects(self::any())->method('getDefaultOrganizers')
-            ->will(self::returnValue(new \Tx_Oelib_List()));
+        $subject->method('getDefaultOrganizers')
+            ->willReturn(new \Tx_Oelib_List());
 
         self::assertFalse(
             $subject->hasDefaultOrganizers()
@@ -976,12 +978,12 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends \Tx_Phpunit_TestCase
         $organizers->add($organizer);
 
         /** @var \Tx_Seminars_Model_FrontEndUser|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_Model_FrontEndUser::class,
             ['getDefaultOrganizers']
         );
-        $subject->expects(self::any())->method('getDefaultOrganizers')
-            ->will(self::returnValue($organizers));
+        $subject->method('getDefaultOrganizers')
+            ->willReturn($organizers);
 
         self::assertTrue(
             $subject->hasDefaultOrganizers()

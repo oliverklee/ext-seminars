@@ -1,5 +1,6 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\BackEnd\ConfirmEventMailForm;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -10,7 +11,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Mario Rimann <mario@screenteam.com>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends TestCase
 {
     use BackEndTestsTrait;
 
@@ -254,7 +255,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends \Tx_Phpuni
 
         /** @var \Tx_Seminars_Model_Registration $registration */
         $registration = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)->find($registrationUid);
-        $hook = $this->getMock(\Tx_Seminars_Interface_Hook_BackEndModule::class);
+        $hook = $this->createMock(\Tx_Seminars_Interface_Hook_BackEndModule::class);
         $hook->expects(self::once())->method('modifyConfirmEmail')
             ->with($registration, self::anything());
 
@@ -301,7 +302,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends \Tx_Phpuni
             ]
         );
 
-        $hook = $this->getMock(\Tx_Seminars_Interface_Hook_BackEndModule::class);
+        $hook = $this->createMock(\Tx_Seminars_Interface_Hook_BackEndModule::class);
         $hook->expects(self::exactly(2))->method('modifyConfirmEmail');
 
         $hookClass = get_class($hook);

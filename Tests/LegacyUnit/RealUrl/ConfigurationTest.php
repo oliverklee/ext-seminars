@@ -1,6 +1,7 @@
 <?php
 namespace OliverKlee\Seminars\Tests\LegacyUnit\RealUrl;
 
+use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\RealUrl\Configuration as RealUrlConfiguration;
 
 /**
@@ -8,7 +9,7 @@ use OliverKlee\Seminars\RealUrl\Configuration as RealUrlConfiguration;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class ConfigurationTest extends \Tx_Phpunit_TestCase
+class ConfigurationTest extends TestCase
 {
     /**
      * @var RealUrlConfiguration

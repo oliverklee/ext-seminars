@@ -1,11 +1,13 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
+
 /**
  * Test case.
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_BagBuilder_CategoryTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_BagBuilder_CategoryTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_BagBuilder_Category
@@ -120,8 +122,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_CategoryTest extends \Tx_Phpunit_TestCas
 
     public function testLimitToZeroEventUidFails()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             '$eventUids must be a comma-separated list of positive integers.'
         );
         $this->subject->limitToEvents('0');
@@ -129,8 +133,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_CategoryTest extends \Tx_Phpunit_TestCas
 
     public function testLimitToNegativeEventUidFails()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             '$eventUids must be a comma-separated list of positive integers.'
         );
         $this->subject->limitToEvents('-2');
@@ -138,8 +144,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_CategoryTest extends \Tx_Phpunit_TestCas
 
     public function testLimitToInvalidEventUidAtTheStartFails()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             '$eventUids must be a comma-separated list of positive integers.'
         );
         $this->subject->limitToEvents('0,1');
@@ -147,8 +155,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_CategoryTest extends \Tx_Phpunit_TestCas
 
     public function testLimitToInvalidEventUidAtTheEndFails()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             '$eventUids must be a comma-separated list of positive integers.'
         );
         $this->subject->limitToEvents('1,0');
@@ -156,8 +166,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_CategoryTest extends \Tx_Phpunit_TestCas
 
     public function testLimitToInvalidEventUidInTheMiddleFails()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             '$eventUids must be a comma-separated list of positive integers.'
         );
         $this->subject->limitToEvents('1,0,2');
@@ -361,8 +373,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_CategoryTest extends \Tx_Phpunit_TestCas
 
     public function testSortByRelationOrderThrowsExceptionIfLimitToEventsHasNotBeenCalledBefore()
     {
-        $this->setExpectedException(
-            \BadMethodCallException::class,
+        $this->expectException(
+            \BadMethodCallException::class
+        );
+        $this->expectExceptionMessage(
             'The event UIDs were empty. This means limitToEvents has not been called. LimitToEvents has to be called before ' .
             'calling this function.'
         );

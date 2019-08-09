@@ -1,11 +1,13 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
+
 /**
  * Test case.
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Model_AbstractTimeSpan
@@ -22,8 +24,10 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends \Tx_Phpunit_Test
      */
     public function setTitleWithEmptyTitleThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The parameter $title must not be empty.'
         );
 
@@ -91,8 +95,10 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends \Tx_Phpunit_Test
      */
     public function setBeginDateAsUnixTimeStampWithNegativeTimeStampThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The parameter $beginDate must be >= 0.'
         );
 
@@ -184,8 +190,10 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends \Tx_Phpunit_Test
      */
     public function setEndDateAsUnixTimeStampWithNegativeTimeStampThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The parameter $endDate must be >= 0.'
         );
 

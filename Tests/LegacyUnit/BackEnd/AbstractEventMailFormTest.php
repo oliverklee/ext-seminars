@@ -1,5 +1,6 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\BackEnd\AbstractEventMailForm;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
@@ -10,7 +11,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Mario Rimann <mario@screenteam.com>
  */
-class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends TestCase
 {
     use BackEndTestsTrait;
 
@@ -107,8 +108,10 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
      */
     public function renderThrowsExceptionForInvalidEventUid()
     {
-        $this->setExpectedException(
-            \Tx_Oelib_Exception_NotFound::class,
+        $this->expectException(
+            \Tx_Oelib_Exception_NotFound::class
+        );
+        $this->expectExceptionMessage(
             'There is no event with this UID.'
         );
 
@@ -778,8 +781,10 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends \Tx_Phpun
      */
     public function getInitialValueForFooThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'There is no initial value for the field "foo" defined.'
         );
 

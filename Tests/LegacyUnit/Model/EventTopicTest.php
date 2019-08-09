@@ -1,12 +1,14 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
+
 /**
  * Test case.
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Model_Event
@@ -543,8 +545,10 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
      */
     public function setRegularEarlyBirdPriceForEventTopicWithNegativeRegularEarlyBirdPriceThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The parameter $price must be >= 0.00.'
         );
 
@@ -1517,14 +1521,14 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
     public function earlyBirdAppliesForNoEarlyBirdPriceAndDeadlineOverReturnsFalse()
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['hasEarlyBirdPrice', 'isEarlyBirdDeadlineOver']
         );
-        $subject->expects(self::any())->method('hasEarlyBirdPrice')
-            ->will(self::returnValue(false));
-        $subject->expects(self::any())->method('isEarlyBirdDeadlineOver')
-            ->will(self::returnValue(true));
+        $subject->method('hasEarlyBirdPrice')
+            ->willReturn(false);
+        $subject->method('isEarlyBirdDeadlineOver')
+            ->willReturn(true);
 
         self::assertFalse(
             $subject->earlyBirdApplies()
@@ -1537,14 +1541,14 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
     public function earlyBirdAppliesForEarlyBirdPriceAndDeadlineOverReturnsFalse()
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['hasEarlyBirdPrice', 'isEarlyBirdDeadlineOver']
         );
-        $subject->expects(self::any())->method('hasEarlyBirdPrice')
-            ->will(self::returnValue(true));
-        $subject->expects(self::any())->method('isEarlyBirdDeadlineOver')
-            ->will(self::returnValue(true));
+        $subject->method('hasEarlyBirdPrice')
+            ->willReturn(true);
+        $subject->method('isEarlyBirdDeadlineOver')
+            ->willReturn(true);
 
         self::assertFalse(
             $subject->earlyBirdApplies()
@@ -1557,14 +1561,14 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
     public function earlyBirdAppliesForEarlyBirdPriceAndDeadlineNotOverReturnsTrue()
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['hasEarlyBirdPrice', 'isEarlyBirdDeadlineOver']
         );
-        $subject->expects(self::any())->method('hasEarlyBirdPrice')
-            ->will(self::returnValue(true));
-        $subject->expects(self::any())->method('isEarlyBirdDeadlineOver')
-            ->will(self::returnValue(false));
+        $subject->method('hasEarlyBirdPrice')
+            ->willReturn(true);
+        $subject->method('isEarlyBirdDeadlineOver')
+            ->willReturn(false);
 
         self::assertTrue(
             $subject->earlyBirdApplies()
@@ -1581,12 +1585,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
     public function getAvailablePricesForNoPricesSetAndNoEarlyBirdReturnsZeroRegularPrice()
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['earlyBirdApplies']
         );
-        $subject->expects(self::any())->method('earlyBirdApplies')
-            ->will(self::returnValue(false));
+        $subject->method('earlyBirdApplies')
+            ->willReturn(false);
         $subject->setData([]);
 
         self::assertEquals(
@@ -1601,12 +1605,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
     public function getAvailablePricesForRegularPriceSetAndNoEarlyBirdReturnsRegularPrice()
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['earlyBirdApplies']
         );
-        $subject->expects(self::any())->method('earlyBirdApplies')
-            ->will(self::returnValue(false));
+        $subject->method('earlyBirdApplies')
+            ->willReturn(false);
         $subject->setData(['price_regular' => 12.345]);
 
         self::assertEquals(
@@ -1621,12 +1625,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
     public function getAvailablePricesForRegularEarlyBirdPriceSetAndEarlyBirdReturnsEarlyBirdPrice()
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['earlyBirdApplies']
         );
-        $subject->expects(self::any())->method('earlyBirdApplies')
-            ->will(self::returnValue(true));
+        $subject->method('earlyBirdApplies')
+            ->willReturn(true);
         $subject->setData(
             [
                 'price_regular' => 12.345,
@@ -1646,12 +1650,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
     public function getAvailablePricesForRegularEarlyBirdPriceSetAndNoEarlyBirdReturnsRegularPrice()
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['earlyBirdApplies']
         );
-        $subject->expects(self::any())->method('earlyBirdApplies')
-            ->will(self::returnValue(false));
+        $subject->method('earlyBirdApplies')
+            ->willReturn(false);
         $subject->setData(
             [
                 'price_regular' => 12.345,
@@ -1671,12 +1675,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
     public function getAvailablePricesForRegularBoardPriceSetAndNoEarlyBirdReturnsRegularBoardPrice()
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['earlyBirdApplies']
         );
-        $subject->expects(self::any())->method('earlyBirdApplies')
-            ->will(self::returnValue(false));
+        $subject->method('earlyBirdApplies')
+            ->willReturn(false);
         $subject->setData(
             [
                 'price_regular_board' => 23.456,
@@ -1698,12 +1702,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
     public function getAvailablePricesForSpecialBoardPriceSetAndNoEarlyBirdReturnsSpecialBoardPrice()
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['earlyBirdApplies']
         );
-        $subject->expects(self::any())->method('earlyBirdApplies')
-            ->will(self::returnValue(false));
+        $subject->method('earlyBirdApplies')
+            ->willReturn(false);
         $subject->setData(
             [
                 'price_special_board' => 23.456,
@@ -1725,12 +1729,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
     public function getAvailablePricesForSpecialPriceSetAndNoEarlyBirdReturnsSpecialPrice()
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['earlyBirdApplies']
         );
-        $subject->expects(self::any())->method('earlyBirdApplies')
-            ->will(self::returnValue(false));
+        $subject->method('earlyBirdApplies')
+            ->willReturn(false);
         $subject->setData(['price_special' => 12.345]);
 
         self::assertEquals(
@@ -1748,12 +1752,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
     public function getAvailablePricesForSpecialPriceSetAndSpecialEarlyBirdPriceSetAndEarlyBirdReturnsSpecialEarlyBirdPrice(
     ) {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['earlyBirdApplies']
         );
-        $subject->expects(self::any())->method('earlyBirdApplies')
-            ->will(self::returnValue(true));
+        $subject->method('earlyBirdApplies')
+            ->willReturn(true);
         $subject->setData(
             [
                 'price_special' => 34.567,
@@ -1776,12 +1780,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
     public function getAvailablePricesForNoSpecialPriceSetAndSpecialEarlyBirdPriceSetAndEarlyBirdNotReturnsSpecialEarlyBirdPrice(
     ) {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['earlyBirdApplies']
         );
-        $subject->expects(self::any())->method('earlyBirdApplies')
-            ->will(self::returnValue(true));
+        $subject->method('earlyBirdApplies')
+            ->willReturn(true);
         $subject->setData(
             [
                 'price_regular' => 34.567,
@@ -1801,12 +1805,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends \Tx_Phpunit_TestCase
     public function getAvailablePricesForSpecialPriceSetAndSpecialEarlyBirdPriceSetAndNoEarlyBirdReturnsSpecialPrice()
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['earlyBirdApplies']
         );
-        $subject->expects(self::any())->method('earlyBirdApplies')
-            ->will(self::returnValue(false));
+        $subject->method('earlyBirdApplies')
+            ->willReturn(false);
         $subject->setData(
             [
                 'price_special' => 34.567,

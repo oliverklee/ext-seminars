@@ -1,11 +1,13 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
+
 /**
  * Test case.
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_ViewHelper_CommaSeparatedTitlesTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_ViewHelper_CommaSeparatedTitlesTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_ViewHelper_CommaSeparatedTitles
@@ -52,12 +54,13 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CommaSeparatedTitlesTest extends \Tx_Php
 
     /**
      * @test
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage All elements in $list must implement the interface Tx_Seminars_Interface_Titled.
-     * @expectedExceptionCode 1333658899
      */
     public function renderWithElementsInListWithoutGetTitleMethodThrowsBadMethodCallException()
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('All elements in $list must implement the interface Tx_Seminars_Interface_Titled.');
+        $this->expectExceptionCode(1333658899);
+
         $model = new \Tx_Seminars_Tests_Unit_Fixtures_Model_UntitledTestingModel();
         $model->setData([]);
 

@@ -1,12 +1,14 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
+
 /**
  * Test case.
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Model_EventTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Model_Event
@@ -240,7 +242,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
     {
         $this->subject->setData([]);
 
-        static::assertSame('', $this->subject->getTimeZone());
+        self::assertSame('', $this->subject->getTimeZone());
     }
 
     /**
@@ -251,7 +253,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
         $value = 'Europe/Berlin';
         $this->subject->setData(['time_zone' => $value]);
 
-        static::assertSame($value, $this->subject->getTimeZone());
+        self::assertSame($value, $this->subject->getTimeZone());
     }
 
     /**
@@ -264,7 +266,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
         $value = 'Europe/Berlin';
         $this->subject->setTimeZone($value);
 
-        static::assertSame($value, $this->subject->getTimeZone());
+        self::assertSame($value, $this->subject->getTimeZone());
     }
 
     //////////////////////////////////////////////
@@ -369,8 +371,10 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
      */
     public function setRegistrationDeadlineAsUnixTimeStampWithNegativeRegistrationDeadlineThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The parameter $registrationDeadline must be >= 0.'
         );
 
@@ -585,8 +589,10 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
      */
     public function setEarlyBirdDeadlineAsUnixTimeStampWithNegativeEarlyBirdDeadlineThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The parameter $earlyBirdDeadline must be >= 0.'
         );
 
@@ -678,8 +684,10 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
      */
     public function setUnregistrationDeadlineAsUnixTimeStampWithNegativeUnregistrationDeadlineThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The parameter $unregistrationDeadline must be >= 0.'
         );
 
@@ -771,7 +779,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
      */
     public function setExpiryAsUnixTimeStampWithNegativeExpiryThrowsException()
     {
-        $this->setExpectedException(\InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
 
         $this->subject->setExpiryAsUnixTimeStamp(-1);
     }
@@ -1046,12 +1054,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
     public function hasCombinedSingleViewPageForEmptySingleViewPageReturnsFalse()
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getCombinedSingleViewPage']
         );
         $subject->expects(self::atLeastOnce())
-            ->method('getCombinedSingleViewPage')->will(self::returnValue(''));
+            ->method('getCombinedSingleViewPage')->willReturn('');
 
         self::assertFalse(
             $subject->hasCombinedSingleViewPage()
@@ -1064,12 +1072,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
     public function hasCombinedSingleViewPageForNonEmptySingleViewPageReturnsTrue()
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
+        $subject = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getCombinedSingleViewPage']
         );
         $subject->expects(self::atLeastOnce())
-            ->method('getCombinedSingleViewPage')->will(self::returnValue(42));
+            ->method('getCombinedSingleViewPage')->willReturn(42);
 
         self::assertTrue(
             $subject->hasCombinedSingleViewPage()
@@ -1316,8 +1324,10 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
      */
     public function setMinimumAttendeesWithNegativeMinimumAttendeesThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The parameter $minimumAttendees must be >= 0.'
         );
 
@@ -1409,8 +1419,10 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
      */
     public function setMaximumAttendeesWithNegativeMaximumAttendeesThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The parameter $maximumAttendees must be >= 0.'
         );
 
@@ -1587,10 +1599,11 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
 
     /**
      * @test
-     * @expectedException \InvalidArgumentException
      */
     public function setStatusWithInvalidStatusThrowsException()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $this->subject->setStatus(-1);
     }
 
@@ -2249,12 +2262,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
             );
         $registrations->add($registration);
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(
+        $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getQueueRegistrations']
         );
-        $event->expects(self::any())->method('getQueueRegistrations')
-            ->will(self::returnValue($registrations));
+        $event->method('getQueueRegistrations')
+            ->willReturn($registrations);
 
         self::assertTrue(
             $event->hasQueueRegistrations()
@@ -2315,12 +2328,12 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
     public function hasQueueRegistrationsForNoQueueRegistrationReturnsFalse()
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(
+        $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getQueueRegistrations']
         );
-        $event->expects(self::any())->method('getQueueRegistrations')
-            ->will(self::returnValue(new \Tx_Oelib_List()));
+        $event->method('getQueueRegistrations')
+            ->willReturn(new \Tx_Oelib_List());
 
         self::assertFalse(
             $event->hasQueueRegistrations()
@@ -2365,13 +2378,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
     public function getRegisteredSeatsForNoRegularRegistrationsReturnsZero()
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(
+        $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegularRegistrations']
         );
         $event->setData([]);
-        $event->expects(self::any())->method('getRegularRegistrations')
-            ->will(self::returnValue(new \Tx_Oelib_List()));
+        $event->method('getRegularRegistrations')
+            ->willReturn(new \Tx_Oelib_List());
 
         self::assertEquals(
             0,
@@ -2391,13 +2404,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
             );
         $registrations->add($registration);
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(
+        $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegularRegistrations']
         );
         $event->setData([]);
-        $event->expects(self::any())->method('getRegularRegistrations')
-            ->will(self::returnValue($registrations));
+        $event->method('getRegularRegistrations')
+            ->willReturn($registrations);
 
         self::assertEquals(
             1,
@@ -2417,13 +2430,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
             );
         $registrations->add($registration);
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(
+        $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegularRegistrations']
         );
         $event->setData([]);
-        $event->expects(self::any())->method('getRegularRegistrations')
-            ->will(self::returnValue($registrations));
+        $event->method('getRegularRegistrations')
+            ->willReturn($registrations);
 
         self::assertEquals(
             2,
@@ -2443,15 +2456,15 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
             );
         $queueRegistrations->add($registration);
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(
+        $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegularRegistrations', 'getQueueRegistrations']
         );
         $event->setData([]);
-        $event->expects(self::any())->method('getQueueRegistrations')
-            ->will(self::returnValue($queueRegistrations));
-        $event->expects(self::any())->method('getRegularRegistrations')
-            ->will(self::returnValue(new \Tx_Oelib_List()));
+        $event->method('getQueueRegistrations')
+            ->willReturn($queueRegistrations);
+        $event->method('getRegularRegistrations')
+            ->willReturn(new \Tx_Oelib_List());
 
         self::assertEquals(
             0,
@@ -2465,13 +2478,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
     public function getRegisteredSeatsCountsOfflineRegistrations()
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(
+        $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegularRegistrations']
         );
         $event->setData(['offline_attendees' => 2]);
-        $event->expects(self::any())->method('getRegularRegistrations')
-            ->will(self::returnValue(new \Tx_Oelib_List()));
+        $event->method('getRegularRegistrations')
+            ->willReturn(new \Tx_Oelib_List());
 
         self::assertEquals(
             2,
@@ -2489,13 +2502,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
     public function hasEnoughRegistrationsForZeroSeatsAndZeroNeededReturnsTrue()
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(
+        $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_min' => 0]);
-        $event->expects(self::any())->method('getRegisteredSeats')
-            ->will(self::returnValue(0));
+        $event->method('getRegisteredSeats')
+            ->willReturn(0);
 
         self::assertTrue(
             $event->hasEnoughRegistrations()
@@ -2508,13 +2521,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
     public function hasEnoughRegistrationsForLessSeatsThanNeededReturnsFalse()
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(
+        $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_min' => 2]);
-        $event->expects(self::any())->method('getRegisteredSeats')
-            ->will(self::returnValue(1));
+        $event->method('getRegisteredSeats')
+            ->willReturn(1);
 
         self::assertFalse(
             $event->hasEnoughRegistrations()
@@ -2527,13 +2540,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
     public function hasEnoughRegistrationsForAsManySeatsAsNeededReturnsTrue()
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(
+        $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_min' => 2]);
-        $event->expects(self::any())->method('getRegisteredSeats')
-            ->will(self::returnValue(2));
+        $event->method('getRegisteredSeats')
+            ->willReturn(2);
 
         self::assertTrue(
             $event->hasEnoughRegistrations()
@@ -2546,13 +2559,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
     public function hasEnoughRegistrationsForMoreSeatsThanNeededReturnsTrue()
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(
+        $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_min' => 1]);
-        $event->expects(self::any())->method('getRegisteredSeats')
-            ->will(self::returnValue(2));
+        $event->method('getRegisteredSeats')
+            ->willReturn(2);
 
         self::assertTrue(
             $event->hasEnoughRegistrations()
@@ -2569,13 +2582,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
     public function getVacanciesForOneRegisteredAndTwoMaximumReturnsOne()
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(
+        $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 2]);
-        $event->expects(self::any())->method('getRegisteredSeats')
-            ->will(self::returnValue(1));
+        $event->method('getRegisteredSeats')
+            ->willReturn(1);
 
         self::assertEquals(
             1,
@@ -2589,13 +2602,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
     public function getVacanciesForAsManySeatsRegisteredAsMaximumReturnsZero()
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(
+        $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 2]);
-        $event->expects(self::any())->method('getRegisteredSeats')
-            ->will(self::returnValue(2));
+        $event->method('getRegisteredSeats')
+            ->willReturn(2);
 
         self::assertEquals(
             0,
@@ -2609,13 +2622,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
     public function getVacanciesForAsMoreSeatsRegisteredThanMaximumReturnsZero()
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(
+        $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 1]);
-        $event->expects(self::any())->method('getRegisteredSeats')
-            ->will(self::returnValue(2));
+        $event->method('getRegisteredSeats')
+            ->willReturn(2);
 
         self::assertEquals(
             0,
@@ -2629,13 +2642,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
     public function getVacanciesForNonZeroSeatsRegisteredAndUnlimitedVacanciesReturnsZero()
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(
+        $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 0]);
-        $event->expects(self::any())->method('getRegisteredSeats')
-            ->will(self::returnValue(1));
+        $event->method('getRegisteredSeats')
+            ->willReturn(1);
 
         self::assertEquals(
             0,
@@ -2653,13 +2666,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
     public function hasVacanciesForOneRegisteredAndTwoMaximumReturnsTrue()
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(
+        $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 2]);
-        $event->expects(self::any())->method('getRegisteredSeats')
-            ->will(self::returnValue(1));
+        $event->method('getRegisteredSeats')
+            ->willReturn(1);
 
         self::assertTrue(
             $event->hasVacancies()
@@ -2672,13 +2685,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
     public function hasVacanciesForAsManySeatsRegisteredAsMaximumReturnsFalse()
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(
+        $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 2]);
-        $event->expects(self::any())->method('getRegisteredSeats')
-            ->will(self::returnValue(2));
+        $event->method('getRegisteredSeats')
+            ->willReturn(2);
 
         self::assertFalse(
             $event->hasVacancies()
@@ -2691,13 +2704,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
     public function hasVacanciesForAsMoreSeatsRegisteredThanMaximumReturnsFalse()
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(
+        $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 1]);
-        $event->expects(self::any())->method('getRegisteredSeats')
-            ->will(self::returnValue(2));
+        $event->method('getRegisteredSeats')
+            ->willReturn(2);
 
         self::assertFalse(
             $event->hasVacancies()
@@ -2710,13 +2723,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
     public function hasVacanciesForNonZeroSeatsRegisteredAndUnlimitedVacanciesReturnsTrue()
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(
+        $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 0]);
-        $event->expects(self::any())->method('getRegisteredSeats')
-            ->will(self::returnValue(1));
+        $event->method('getRegisteredSeats')
+            ->willReturn(1);
 
         self::assertTrue(
             $event->hasVacancies()
@@ -2733,13 +2746,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
     public function isFullForLessSeatsThanMaximumReturnsFalse()
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(
+        $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 2]);
-        $event->expects(self::any())->method('getRegisteredSeats')
-            ->will(self::returnValue(1));
+        $event->method('getRegisteredSeats')
+            ->willReturn(1);
 
         self::assertFalse(
             $event->isFull()
@@ -2752,13 +2765,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
     public function isFullForAsManySeatsAsMaximumReturnsTrue()
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(
+        $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 2]);
-        $event->expects(self::any())->method('getRegisteredSeats')
-            ->will(self::returnValue(2));
+        $event->method('getRegisteredSeats')
+            ->willReturn(2);
 
         self::assertTrue(
             $event->isFull()
@@ -2771,13 +2784,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
     public function isFullForMoreSeatsThanMaximumReturnsTrue()
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(
+        $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 1]);
-        $event->expects(self::any())->method('getRegisteredSeats')
-            ->will(self::returnValue(2));
+        $event->method('getRegisteredSeats')
+            ->willReturn(2);
 
         self::assertTrue(
             $event->isFull()
@@ -2790,13 +2803,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
     public function isFullForZeroSeatsAndUnlimitedMaximumReturnsFalse()
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(
+        $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 0]);
-        $event->expects(self::any())->method('getRegisteredSeats')
-            ->will(self::returnValue(0));
+        $event->method('getRegisteredSeats')
+            ->willReturn(0);
 
         self::assertFalse(
             $event->isFull()
@@ -2809,13 +2822,13 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
     public function isFullForPositiveSeatsAndUnlimitedMaximumReturnsFalse()
     {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->getMock(
+        $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
         );
         $event->setData(['attendees_max' => 0]);
-        $event->expects(self::any())->method('getRegisteredSeats')
-            ->will(self::returnValue(1));
+        $event->method('getRegisteredSeats')
+            ->willReturn(1);
 
         self::assertFalse(
             $event->isFull()
@@ -3459,7 +3472,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends \Tx_Phpunit_TestCase
      */
     public function setDateOfLastRegistrationDigestEmailAsUnixTimeStampWithNegativeDateThrowsException()
     {
-        $this->setExpectedException(\InvalidArgumentException::class);
+        $this->expectException(\InvalidArgumentException::class);
 
         $this->subject->setDateOfLastRegistrationDigestEmailAsUnixTimeStamp(-1);
     }

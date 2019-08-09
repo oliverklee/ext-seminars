@@ -1,11 +1,13 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
+
 /**
  * Test case.
  *
  * @author 2009 Bernd Schönbach <bernd@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_FrontEnd_PublishEventTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_FrontEnd_PublishEventTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_FrontEnd_PublishEvent

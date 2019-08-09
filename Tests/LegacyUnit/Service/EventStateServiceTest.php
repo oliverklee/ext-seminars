@@ -1,6 +1,7 @@
 <?php
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 
+use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Service\EventStatusService;
 use TYPO3\CMS\Core\SingletonInterface;
 
@@ -9,7 +10,7 @@ use TYPO3\CMS\Core\SingletonInterface;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class EventStateServiceTest extends \Tx_Phpunit_TestCase
+class EventStateServiceTest extends TestCase
 {
     /**
      * @var EventStatusService
@@ -47,7 +48,7 @@ class EventStateServiceTest extends \Tx_Phpunit_TestCase
         \Tx_Oelib_MapperRegistry::denyDatabaseAccess();
         \Tx_Oelib_MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
 
-        $this->eventMapper = $this->getMock(\Tx_Seminars_Mapper_Event::class);
+        $this->eventMapper = $this->createMock(\Tx_Seminars_Mapper_Event::class);
         \Tx_Oelib_MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $this->eventMapper);
 
         $this->subject = new EventStatusService();

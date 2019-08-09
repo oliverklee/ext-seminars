@@ -1,12 +1,14 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
+
 /**
  * Test case.
  *
  * @author Mario Rimann <typo3-coding@rimann.org>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_Bag_EventTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Bag_EventTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Bag_Event

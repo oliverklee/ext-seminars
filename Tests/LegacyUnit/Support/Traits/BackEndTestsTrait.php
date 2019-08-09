@@ -101,15 +101,12 @@ trait BackEndTestsTrait
     private function replaceBackEndUserWithMock()
     {
         $this->backEndUserBackup = $GLOBALS['BE_USER'];
-        $this->mockBackEndUser = $this->getMock(
+        $this->mockBackEndUser = $this->createPartialMock(
             BackendUserAuthentication::class,
-            ['check', 'doesUserHaveAccess', 'setAndSaveSessionData', 'writeUC'],
-            [],
-            '',
-            false
+            ['check', 'doesUserHaveAccess', 'setAndSaveSessionData', 'writeUC']
         );
-        $this->mockBackEndUser->expects(self::any())->method('check')->will(self::returnValue(true));
-        $this->mockBackEndUser->expects(self::any())->method('doesUserHaveAccess')->will(self::returnValue(true));
+        $this->mockBackEndUser->method('check')->willReturn(true);
+        $this->mockBackEndUser->method('doesUserHaveAccess')->willReturn(true);
         $this->mockBackEndUser->user['uid'] = (int)$GLOBALS['BE_USER']->user['uid'];
         $GLOBALS['BE_USER'] = $this->mockBackEndUser;
     }

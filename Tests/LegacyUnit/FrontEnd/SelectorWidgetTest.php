@@ -1,5 +1,6 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
 use SJBR\StaticInfoTables\PiBaseApi;
 
 /**
@@ -8,7 +9,7 @@ use SJBR\StaticInfoTables\PiBaseApi;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_FrontEnd_SelectorWidget
@@ -421,37 +422,38 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends \Tx_Phpunit_Tes
     public function itemsInSearchBoxAreSortedAlphabetically()
     {
         /** @var \Tx_Seminars_FrontEnd_SelectorWidget|\PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->getMock(
-            \Tx_Seminars_FrontEnd_SelectorWidget::class,
-            [
-                'hasSearchField',
-                'getEventTypeData',
-                'getLanguageData',
-                'getPlaceData',
-                'getCityData',
-                'getCountryData',
-            ],
-            [
+        $subject = $this->getMockBuilder(\Tx_Seminars_FrontEnd_SelectorWidget::class)
+            ->setMethods(
                 [
-                    'isStaticTemplateLoaded' => 1,
-                    'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
-                    'displaySearchFormFields' => 'event_type',
-                ],
-                $GLOBALS['TSFE']->cObj,
-            ]
-        );
-        $subject->expects(self::any())->method('hasSearchField')
-            ->will(self::returnValue(true));
+                    'hasSearchField',
+                    'getEventTypeData',
+                    'getLanguageData',
+                    'getPlaceData',
+                    'getCityData',
+                    'getCountryData',
+                ]
+            )->setConstructorArgs(
+                [
+                    [
+                        'isStaticTemplateLoaded' => 1,
+                        'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
+                        'displaySearchFormFields' => 'event_type',
+                    ],
+                    $GLOBALS['TSFE']->cObj,
+                ]
+            )->getMock();
+        $subject->method('hasSearchField')
+            ->willReturn(true);
         $subject->expects(self::once())->method('getEventTypeData')
-            ->will(self::returnValue([1 => 'Foo', 2 => 'Bar']));
-        $subject->expects(self::any())->method('getLanguageData')
-            ->will(self::returnValue([]));
-        $subject->expects(self::any())->method('getPlaceData')
-            ->will(self::returnValue([]));
-        $subject->expects(self::any())->method('getCityData')
-            ->will(self::returnValue([]));
-        $subject->expects(self::any())->method('getCountryData')
-            ->will(self::returnValue([]));
+            ->willReturn([1 => 'Foo', 2 => 'Bar']);
+        $subject->method('getLanguageData')
+            ->willReturn([]);
+        $subject->method('getPlaceData')
+            ->willReturn([]);
+        $subject->method('getCityData')
+            ->willReturn([]);
+        $subject->method('getCountryData')
+            ->willReturn([]);
 
         $output = $subject->render();
         self::assertTrue(

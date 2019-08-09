@@ -1,11 +1,13 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
+
 /**
  * This test case holds all tests specific to event dates.
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends TestCase
 {
     /**
      * @var \Tx_Oelib_TestingFramework
@@ -35,10 +37,11 @@ class Tx_Seminars_Tests_Unit_Mapper_EventDateTest extends \Tx_Phpunit_TestCase
 
     /**
      * @test
-     * @expectedException \BadMethodCallException
      */
     public function getTopicWithoutTopicThrowsException()
     {
+        $this->expectException(\BadMethodCallException::class);
+
         /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->getLoadedTestingModel(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_DATE]

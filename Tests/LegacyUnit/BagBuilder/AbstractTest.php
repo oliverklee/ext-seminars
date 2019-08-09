@@ -1,12 +1,14 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
+
 /**
  * Test case.
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Tests_Unit_Fixtures_BagBuilder_Testing
@@ -44,8 +46,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
 
     public function testBuilderThrowsExceptionForEmptyTableName()
     {
-        $this->setExpectedException(
-            \RuntimeException::class,
+        $this->expectException(
+            \RuntimeException::class
+        );
+        $this->expectExceptionMessage(
             'The attribute $this->tableName must not be empty.'
         );
 
@@ -633,8 +637,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
 
     public function testAddAdditionalTableNameWithEmptyTableNameThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The parameter $additionalTableName must not be empty.'
         );
 
@@ -657,8 +663,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
 
     public function testRemoveAdditionalTableNameWithEmptyTableNameThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The parameter $additionalTableName must not be empty.'
         );
 
@@ -667,8 +675,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends \Tx_Phpunit_TestCas
 
     public function testRemoveAdditionalTableNameWithNotSetTableNameThrowsException()
     {
-        $this->setExpectedException(
-            \InvalidArgumentException::class,
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
             'The given additional table name does not exist in the list ' .
             'of additional table names.'
         );

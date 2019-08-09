@@ -1,5 +1,6 @@
 <?php
 
+use OliverKlee\PhpUnit\TestCase;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 
@@ -8,7 +9,7 @@ use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Csv_BackEndEventAccessCheckTest extends \Tx_Phpunit_TestCase
+class Tx_Seminars_Tests_Unit_Csv_BackEndEventAccessCheckTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Csv_BackEndEventAccessCheck
@@ -28,7 +29,7 @@ class Tx_Seminars_Tests_Unit_Csv_BackEndEventAccessCheckTest extends \Tx_Phpunit
     protected function setUp()
     {
         $this->backEndUserBackup = $GLOBALS['BE_USER'];
-        $this->backEndUser = $this->getMock(BackendUserAuthentication::class);
+        $this->backEndUser = $this->createMock(BackendUserAuthentication::class);
         $GLOBALS['BE_USER'] = $this->backEndUser;
 
         $this->subject = new \Tx_Seminars_Csv_BackEndEventAccessCheck();
@@ -73,12 +74,12 @@ class Tx_Seminars_Tests_Unit_Csv_BackEndEventAccessCheckTest extends \Tx_Phpunit
 
         $pageRecord = BackendUtility::getRecord('pages', $pageUid);
 
-        $this->backEndUser->expects(self::any())->method('check')
+        $this->backEndUser->method('check')
             ->with('tables_select', 'tx_seminars_seminars')
-            ->will(self::returnValue(false));
-        $this->backEndUser->expects(self::any())->method('doesUserHaveAccess')
+            ->willReturn(false);
+        $this->backEndUser->method('doesUserHaveAccess')
             ->with($pageRecord, 1)
-            ->will(self::returnValue(false));
+            ->willReturn(false);
 
         self::assertFalse(
             $this->subject->hasAccess()
@@ -95,12 +96,12 @@ class Tx_Seminars_Tests_Unit_Csv_BackEndEventAccessCheckTest extends \Tx_Phpunit
 
         $pageRecord = BackendUtility::getRecord('pages', $pageUid);
 
-        $this->backEndUser->expects(self::any())->method('check')
+        $this->backEndUser->method('check')
             ->with('tables_select', 'tx_seminars_seminars')
-            ->will(self::returnValue(false));
-        $this->backEndUser->expects(self::any())->method('doesUserHaveAccess')
+            ->willReturn(false);
+        $this->backEndUser->method('doesUserHaveAccess')
             ->with($pageRecord, 1)
-            ->will(self::returnValue(true));
+            ->willReturn(true);
 
         self::assertFalse(
             $this->subject->hasAccess()
@@ -117,12 +118,12 @@ class Tx_Seminars_Tests_Unit_Csv_BackEndEventAccessCheckTest extends \Tx_Phpunit
 
         $pageRecord = BackendUtility::getRecord('pages', $pageUid);
 
-        $this->backEndUser->expects(self::any())->method('check')
+        $this->backEndUser->method('check')
             ->with('tables_select', 'tx_seminars_seminars')
-            ->will(self::returnValue(true));
-        $this->backEndUser->expects(self::any())->method('doesUserHaveAccess')
+            ->willReturn(true);
+        $this->backEndUser->method('doesUserHaveAccess')
             ->with($pageRecord, 1)
-            ->will(self::returnValue(false));
+            ->willReturn(false);
 
         self::assertFalse(
             $this->subject->hasAccess()
@@ -139,12 +140,12 @@ class Tx_Seminars_Tests_Unit_Csv_BackEndEventAccessCheckTest extends \Tx_Phpunit
 
         $pageRecord = BackendUtility::getRecord('pages', $pageUid);
 
-        $this->backEndUser->expects(self::any())->method('check')
+        $this->backEndUser->method('check')
             ->with('tables_select', 'tx_seminars_seminars')
-            ->will(self::returnValue(true));
-        $this->backEndUser->expects(self::any())->method('doesUserHaveAccess')
+            ->willReturn(true);
+        $this->backEndUser->method('doesUserHaveAccess')
             ->with($pageRecord, 1)
-            ->will(self::returnValue(true));
+            ->willReturn(true);
 
         self::assertTrue(
             $this->subject->hasAccess()
