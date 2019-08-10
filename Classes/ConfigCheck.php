@@ -386,7 +386,6 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
     {
         $this->checkCommonFrontEndSettings();
 
-        $this->checkPagesForCategoryList();
         $this->checkRecursive();
         $this->checkTimeframeInList();
 
@@ -1535,24 +1534,6 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             . 'event records for the list view. If this value is not set '
             . 'correctly, some events might not get displayed in the list '
             . 'view.'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value pages for the category list.
-     *
-     * @return void
-     */
-    private function checkPagesForCategoryList()
-    {
-        $this->checkIfSysFoldersOrEmpty(
-            'pages',
-            true,
-            'sDEF',
-            'This value specifies the system folders that contain the '
-            . 'event records for which the categories should be listed. If this '
-            . 'value is not set correctly, the wrong (or no) categories could '
-            . 'get displayed.'
         );
     }
 
