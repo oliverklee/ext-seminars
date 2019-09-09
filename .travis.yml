@@ -87,6 +87,12 @@ jobs:
       echo;
       composer global require helhum/ter-client;
     - >
+      echo;
+      echo "Removing development-only files";
+      echo;
+      echo;
+      rm -rf CODE_OF_CONDUCT.md Resources/Private/Php/update.sh Tests/;
+    - >
       TAG_MESSAGE=`git tag -n10 -l $TRAVIS_TAG | sed 's/^[0-9.]*[ ]*//g'`;
       echo;
       echo "Uploading release ${TRAVIS_TAG} to TER";
