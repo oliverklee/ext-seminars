@@ -174,6 +174,13 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
     private $listViewHooksHaveBeenRetrieved = false;
 
     /**
+     * Objects hooked to the seminar list view
+     *
+     * @var \OliverKlee\Seminars\Service\HookService
+     */
+    protected $seminarListViewHooks = null;
+
+    /**
      * hook objects for the single view
      *
      * @var \Tx_Seminars_Interface_Hook_EventSingleView[]
@@ -396,6 +403,24 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         }
 
         return $this->listViewHooks;
+    }
+
+    /**
+     * Gets the hooks for the seminar list view.
+     *
+     * @return \OliverKlee\Seminars\Interfaces\Hook\SeminarListView[]
+     *         the hook objects, will be empty if no hooks have been set
+     */
+    protected function getSeminarListViewHooks()
+    {
+        if ($this->seminarListViewHooks === null) {
+            $this->seminarListViewHooks = GeneralUtility::makeInstance(
+                \OliverKlee\Seminars\Service\HookService::class,
+                \OliverKlee\Seminars\Interfaces\Hook\SeminarListView::class
+            );
+        }
+
+        return $this->seminarListViewHooks->getHooks();
     }
 
     /**
@@ -1992,6 +2017,10 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
             $this->setMarker('header_' . $column, $this->getFieldHeader($column));
         }
 
+        foreach ($this->getSeminarListViewHooks() as $hook) {
+            $hook->modifyListHeader($this, $this->getTemplate());
+        }
+
         return $this->getSubpart('LIST_HEADER');
     }
 
@@ -2002,6 +2031,10 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      */
     protected function createListFooter()
     {
+        foreach ($this->getSeminarListViewHooks() as $hook) {
+            $hook->modifyListFooter($this, $this->getTemplate());
+        }
+
         return $this->getSubpart('LIST_FOOTER');
     }
 
@@ -2195,6 +2228,10 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
                 $hook->modifyListRow($event, $this->getTemplate());
             }
 
+            foreach ($this->getSeminarListViewHooks() as $hook) {
+                $hook->modifyListRow($this, $this->getTemplate());
+            }
+
             if ($whatToDisplay === 'my_events') {
                 /** @var \Tx_Seminars_Mapper_Registration $mapper */
                 $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
@@ -2203,6 +2240,10 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
 
                 foreach ($this->getListViewHooks() as $hook) {
                     $hook->modifyMyEventsListRow($registration, $this->getTemplate());
+                }
+
+                foreach ($this->getSeminarListViewHooks() as $hook) {
+                    $hook->modifyMySeminarsListRow($this, $this->getTemplate());
                 }
             }
 
