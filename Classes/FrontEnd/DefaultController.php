@@ -195,6 +195,13 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
     private $singleViewHooksHaveBeenRetrieved = false;
 
     /**
+     * Objects hooked to the single view
+     *
+     * @var \OliverKlee\Seminars\Service\HookService
+     */
+    protected $seminarSingleViewHooks = null;
+
+    /**
      * a link builder instance
      *
      * @var \Tx_Seminars_Service_SingleViewLinkBuilder
@@ -455,6 +462,24 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         }
 
         return $this->singleViewHooks;
+    }
+
+    /**
+     * Gets the hooks for the single view.
+     *
+     * @return \OliverKlee\Seminars\Interfaces\Hook\SeminarSingleView[]
+     *         the hook objects, will be empty if no hooks have been set
+     */
+    protected function getSeminarSingleViewHooks()
+    {
+        if ($this->seminarSingleViewHooks === null) {
+            $this->seminarSingleViewHooks = GeneralUtility::makeInstance(
+                \OliverKlee\Seminars\Service\HookService::class,
+                \OliverKlee\Seminars\Interfaces\Hook\SeminarSingleView::class
+            );
+        }
+
+        return $this->seminarSingleViewHooks->getHooks();
     }
 
     /**
@@ -835,6 +860,10 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
 
         foreach ($this->getSingleViewHooks() as $hook) {
             $hook->modifyEventSingleView($event, $this->getTemplate());
+        }
+
+        foreach ($this->getSeminarSingleViewHooks() as $hook) {
+            $hook->modifySingleView($this, $this->getTemplate());
         }
 
         $result = $this->getSubpart('SINGLE_VIEW');
