@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop the TYPO3 package repository from composer.json (#232)
 
 ### Fixed
+- Move `Tests/` to the dev autoload in `ext_emconf.php` (#239)
 - Keep development files out of the packages (#237)
 - Drop the calls to deprecated config check methods (#235)
 - Fix code inspection warnings in the tests (#234)
