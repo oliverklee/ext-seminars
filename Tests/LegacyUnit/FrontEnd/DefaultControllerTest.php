@@ -1257,6 +1257,28 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $this->subject->main('', []);
     }
 
+    /**
+     * @test
+     */
+    public function singleViewCallsSeminarSingleViewHookModifySingleView()
+    {
+        $this->subject->setConfigurationValue('what_to_display', 'single_view');
+
+        /** @var \Tx_Seminars_Model_Event $event */
+        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->find($this->seminarUid);
+        $hook = $this->createMock(\OliverKlee\Seminars\Interfaces\Hook\SeminarSingleView::class);
+        $hook->expects(self::once())->method('modifySingleView')->with($this->subject, self::anything());
+        // We don't test for the second parameter (the template instance here)
+        // because we cannot access it from the outside.
+
+        $hookClass = get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Interfaces\Hook\SeminarSingleView::class][] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
+
+        $this->subject->piVars['showUid'] = $this->seminarUid;
+        $this->subject->main('', []);
+    }
+
     ///////////////////////////////////////////////////////
     // Tests concerning attached files in the single view
     ///////////////////////////////////////////////////////
