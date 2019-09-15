@@ -7538,6 +7538,45 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         );
     }
 
+    /**
+     * @test
+     */
+    public function registrationFormCallsRegistrationViewHookModifyRegistrationHeadingFormFooter()
+    {
+        $registrationFormMock = $this->createMock(\Tx_Seminars_FrontEnd_RegistrationForm::class);
+        GeneralUtility::addInstance(\Tx_Seminars_FrontEnd_RegistrationForm::class, $registrationFormMock);
+
+        $this->testingFramework->createAndLoginFrontEndUser();
+        $this->subject->setConfigurationValue('what_to_display', 'seminar_registration');
+
+        $eventUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            [
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'title' => 'foo & bar',
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
+                'needs_registration' => 1,
+                'attendees_max' => 10,
+            ]
+        );
+
+        $this->subject->piVars['seminar'] = $eventUid;
+
+        $hook = $this->createMock(\OliverKlee\Seminars\Interfaces\Hook\RegistrationView::class);
+        $hook->expects(self::once())->method('modifyRegistrationHeading')->with($this->subject, self::anything());
+        $hook->expects(self::once())->method('modifyRegistrationForm')->with($this->subject, self::anything());
+        $hook->expects(self::once())->method('modifyRegistrationFooter')->with($this->subject, self::anything());
+        // We don't test for the second parameter (the template instance here)
+        // because we cannot access it from the outside.
+
+        $hookClass = get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Interfaces\Hook\RegistrationView::class][] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
+
+        $this->subject->main('', []);
+    }
+
     /*
      * Tests concerning getVacanciesClasses
      */
