@@ -3399,6 +3399,27 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         );
     }
 
+    /**
+     * @test
+     */
+    public function listViewCallsSeminarListViewHookModifyListHeaderRowFooter()
+    {
+        $this->subject->setConfigurationValue('what_to_display', 'seminar_list');
+
+        $hook = $this->createMock(\OliverKlee\Seminars\Interfaces\Hook\SeminarListView::class);
+        $hook->expects(self::once())->method('modifyListHeader')->with($this->subject, self::anything());
+        $hook->expects(self::once())->method('modifyListRow')->with($this->subject, self::anything());
+        $hook->expects(self::once())->method('modifyListFooter')->with($this->subject, self::anything());
+        // We don't test for the second parameter (the template instance here)
+        // because we cannot access it from the outside.
+
+        $hookClass = get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Interfaces\Hook\SeminarListView::class][] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
+
+        $this->subject->main('', []);
+    }
+
     /////////////////////////////////////////////////////////
     // Tests concerning the result counter in the list view
     /////////////////////////////////////////////////////////
@@ -6096,6 +6117,26 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
             '01.01.2008',
             $this->subject->main('', [])
         );
+    }
+
+    /**
+     * @test
+     */
+    public function testMyEventsCallsSeminarListViewHookModifyMySeminarsListRow()
+    {
+        $this->createLogInAndRegisterFeUser();
+        $this->subject->setConfigurationValue('what_to_display', 'my_events');
+
+        $hook = $this->createMock(\OliverKlee\Seminars\Interfaces\Hook\SeminarListView::class);
+        $hook->expects(self::once())->method('modifyMySeminarsListRow')->with($this->subject, self::anything());
+        // We don't test for the second parameter (the template instance here)
+        // because we cannot access it from the outside.
+
+        $hookClass = get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Interfaces\Hook\SeminarListView::class][] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
+
+        $this->subject->main('', []);
     }
 
     /////////////////////////////////////////////////////////////////////////////////
