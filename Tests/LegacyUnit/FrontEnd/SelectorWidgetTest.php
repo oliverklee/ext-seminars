@@ -2,6 +2,7 @@
 
 use OliverKlee\PhpUnit\TestCase;
 use SJBR\StaticInfoTables\PiBaseApi;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Test case.
@@ -211,6 +212,28 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends TestCase
             '###',
             $this->subject->render()
         );
+    }
+
+    /**
+     * @test
+     */
+    public function renderForEnabledSearchWidgetCallsSelectorWidgetHookModifySelectorWidget()
+    {
+        $this->subject->setConfigurationValue(
+            'displaySearchFormFields',
+            'city'
+        );
+
+        $hook = $this->createMock(\OliverKlee\Seminars\Interfaces\Hook\SelectorWidget::class);
+        $hook->expects(self::once())->method('modifySelectorWidget')->with($this->subject, self::anything());
+        // We don't test for the second parameter (the seminar bag here)
+        // because we cannot access it from the outside.
+
+        $hookClass = get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Interfaces\Hook\SelectorWidget::class][] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
+
+        $this->subject->render();
     }
 
     /////////////////////////////////////////////

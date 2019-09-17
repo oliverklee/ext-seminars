@@ -40,6 +40,13 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
     private $places = null;
 
     /**
+     * Objects hooked to the selector widget builder
+     *
+     * @var \OliverKlee\Seminars\Service\HookService
+     */
+    private $selectorWidgetHooks = null;
+
+    /**
      * Returns the selector widget if it is not hidden.
      *
      * The selector widget will automatically be hidden, if no search option is
@@ -66,6 +73,10 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
         $this->fillOrHideDateSearch();
         $this->fillOrHideAgeSearch();
         $this->fillOrHidePriceSearch();
+
+        foreach ($this->getSelectorWidgetHooks() as $hook) {
+            $hook->modifySelectorWidget($this, $this->seminarBag);
+        }
 
         return $this->getSubpart('SELECTOR_WIDGET');
     }
@@ -299,6 +310,24 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
         $this->setMarker('dropdown_options', $optionsList);
 
         return $this->getSubpart('SINGLE_DROPDOWN');
+    }
+
+    /**
+     * Gets the hooks for the selector widget.
+     *
+     * @return \OliverKlee\Seminars\Interfaces\Hook\SelectorWidget[]
+     *         the hook objects, will be empty if no hooks have been set
+     */
+    protected function getSelectorWidgetHooks()
+    {
+        if ($this->selectorWidgetHooks === null) {
+            $this->selectorWidgetHooks = GeneralUtility::makeInstance(
+                \OliverKlee\Seminars\Service\HookService::class,
+                \OliverKlee\Seminars\Interfaces\Hook\SelectorWidget::class
+            );
+        }
+
+        return $this->selectorWidgetHooks->getHooks();
     }
 
     ///////////////////////////////////////////////////////////////
