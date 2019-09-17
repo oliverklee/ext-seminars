@@ -6,6 +6,7 @@ use OliverKlee\Seminars\BackEnd\RegistrationsList;
 use OliverKlee\Seminars\Tests\LegacyUnit\BackEnd\Fixtures\DummyModule;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
 use TYPO3\CMS\Backend\Template\DocumentTemplate;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Test case.
@@ -496,6 +497,31 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends TestCase
             'tx_seminars_pi2[eventUid]=',
             $this->subject->show()
         );
+    }
+
+    public function testShowForOneEventCallsBackEndRegistrationsListViewHookModifyTableRowTableHeadingTable()
+    {
+        $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
+        $this->testingFramework->createRecord(
+            'tx_seminars_attendances',
+            [
+                'pid' => $this->dummySysFolderPid,
+                'seminar' => $eventUid,
+            ]
+        );
+
+        $hook = $this->createMock(\OliverKlee\Seminars\Interfaces\Hook\BackEndRegistrationsListView::class);
+        $hook->expects(self::once())->method('modifyTableRow')->with(self::anything(), self::anything());
+        $hook->expects(self::once())->method('modifyTableHeading')->with(self::anything(), self::anything());
+        $hook->expects(self::once())->method('modifyTable')->with(self::anything(), self::anything());
+        // We don't test for any parameter (the registration bag / registration and template instance here)
+        // because we cannot access it from the outside.
+
+        $hookClass = get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Interfaces\Hook\BackEndRegistrationsListView::class][] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
+
+        $this->subject->show();
     }
 
     //////////////////////////////////////

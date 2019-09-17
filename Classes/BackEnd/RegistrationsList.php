@@ -137,6 +137,12 @@ class RegistrationsList extends AbstractList
         $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Registration::class);
         $pageData = $this->page->getPageData();
 
+        /** @var \OliverKlee\Seminars\Service\HookService $hooks */
+        $hooks = GeneralUtility::makeInstance(
+            \OliverKlee\Seminars\Service\HookService::class,
+            \OliverKlee\Seminars\Interfaces\Hook\BackEndRegistrationsListView::class
+        );
+
         switch ($registrationsToShow) {
             case self::REGISTRATIONS_ON_QUEUE:
                 $builder->limitToOnQueue();
@@ -200,6 +206,13 @@ class RegistrationsList extends AbstractList
                 )
             );
 
+            foreach ($hooks->getHooks() as $hook) {
+                $hook->modifyTableRow(
+                    $registration,
+                    $this->template
+                );
+            }
+
             $tableRows .= $this->template->getSubpart('REGISTRATION_TABLE_ROW');
         }
 
@@ -215,11 +228,26 @@ class RegistrationsList extends AbstractList
             'number_of_registrations',
             $registrationBag->count()
         );
+
+        foreach ($hooks->getHooks() as $hook) {
+            $hook->modifyTableHeading(
+                $registrationBag,
+                $this->template
+            );
+        }
+
         $this->template->setMarker(
             'table_header',
             $this->template->getSubpart('REGISTRATION_TABLE_HEADING')
         );
         $this->template->setMarker('table_rows', $tableRows);
+
+        foreach ($hooks->getHooks() as $hook) {
+            $hook->modifyTable(
+                $registrationBag,
+                $this->template
+            );
+        }
 
         return $result;
     }
