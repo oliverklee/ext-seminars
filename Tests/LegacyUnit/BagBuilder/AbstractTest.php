@@ -514,6 +514,73 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
         );
     }
 
+    public function testWhereClausePartGetKeyMustNotBeEmpty()
+    {
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
+            'The parameter $key must not be empty.'
+        );
+
+        $this->subject->getWhereClausePart('');
+    }
+
+    public function testWhereClausePartSetKeyMustNotBeEmpty()
+    {
+        $this->expectException(
+            \InvalidArgumentException::class
+        );
+        $this->expectExceptionMessage(
+            'The parameter $key must not be empty.'
+        );
+
+        $this->subject->setWhereClausePart('', '');
+    }
+
+    public function testWhereClausePartInitiallyIsEmpty()
+    {
+        self::assertEquals(
+            '',
+            $this->subject->getWhereClausePart('testpart')
+        );
+    }
+
+    public function testWhereClausePartCanBeSetAndCanBeRetrieved()
+    {
+        $this->subject->setWhereClausePart('testpart', 'testpart IN (1,2,3)');
+
+        self::assertEquals(
+            'testpart IN (1,2,3)',
+            $this->subject->getWhereClausePart('testpart')
+        );
+    }
+
+    public function testWhereClausePartSettingToEmptyCompletelyRemovesIt()
+    {
+        $this->subject->setWhereClausePart('testpart', 'testpart IN (1,2,3)');
+        $this->subject->setWhereClausePart('testpart', '');
+
+        // We're using assertNotContains here because the WHERE clause always
+        // contains a test-specific prefix
+        self::assertNotContains(
+            ' AND ',
+            $this->subject->getWhereClause()
+        );
+    }
+
+    public function testWhereClausePartCanBeSetAndGetsAddedToWhereClause()
+    {
+        $this->subject->setWhereClausePart('testpart', 'testpart IN (1,2,3)');
+
+        // We're using assertContains here because the WHERE clause always
+        // contains a test-specific prefix
+        self::assertContains(
+            ' AND testpart IN (1,2,3)',
+            $this->subject->getWhereClause()
+        );
+    }
+
     /////////////////////////////////
     // Test concerning limitToTitle
     /////////////////////////////////

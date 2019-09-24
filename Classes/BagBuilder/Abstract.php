@@ -167,6 +167,49 @@ abstract class Tx_Seminars_BagBuilder_Abstract
     }
 
     /**
+     * Returns a WHERE clause part for the bag to create.
+     *
+     * If the bag does not have such limitation imposed upon, the return value
+     * will be empty.
+     *
+     * @param string $key the limitation key to return, must not be empty
+     *
+     * @return string WHERE clause part for the bag to create, may be empty
+     */
+    public function getWhereClausePart($key)
+    {
+        if (empty($key)) {
+            throw new \InvalidArgumentException('The parameter $key must not be empty.', 1569331331);
+        }
+
+        if (empty($this->whereClauseParts[$key])) {
+            return '';
+        }
+
+        return $this->whereClauseParts[$key];
+    }
+
+    /**
+     * Sets a WHERE clause part (limitation) for the bag to create.
+     *
+     * @param string $key the limitation key to return, must not be empty
+     * @param string $value the WHERE clause part of a limitation, empty value removes the limitation
+     */
+    public function setWhereClausePart($key, $value)
+    {
+        if (empty($key)) {
+            throw new \InvalidArgumentException('The parameter $key must not be empty.', 1569331332);
+        }
+
+        if (empty($value)) {
+            unset ($this->whereClauseParts[$key]);
+            return;
+        }
+
+        $this->whereClauseParts[$key] = $value;
+    }
+
+    /**
      * Adds the table name given in the parameter $additionalTableName to
      * $this->additionalTableNames.
      *
