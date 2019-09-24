@@ -3402,11 +3402,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
     /**
      * @test
      */
-    public function listViewCallsSeminarListViewHookModifyListHeaderRowFooter()
+    public function listViewCallsSeminarListViewHookModifyBagBuilderListHeaderRowFooter()
     {
         $this->subject->setConfigurationValue('what_to_display', 'seminar_list');
 
         $hook = $this->createMock(\OliverKlee\Seminars\Interfaces\Hook\SeminarListView::class);
+        $hook->expects(self::once())->method('modifyBagBuilder')->with($this->subject, self::anything(), 'seminar_list');
+        // We don't test for the second parameter (the bag builder instance here)
+        // because we cannot access it from the outside.
         $hook->expects(self::once())->method('modifyListHeader')->with($this->subject, self::anything());
         $hook->expects(self::once())->method('modifyListRow')->with($this->subject, self::anything());
         $hook->expects(self::once())->method('modifyListFooter')->with($this->subject, self::anything());

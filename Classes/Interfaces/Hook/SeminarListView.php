@@ -80,4 +80,26 @@ interface SeminarListView extends Hook
         \Tx_Seminars_FrontEnd_DefaultController $controller,
         \Tx_Oelib_Template $template
     );
+
+    /**
+     * Modifies the list view seminar or registration bag builder
+     * (the item collection for the seminars list).
+     *
+     * This function will be called for all types of seminar lists.
+     *
+     * @param \Tx_Seminars_FrontEnd_DefaultController $controller
+     *        the calling controller
+     * @param \Tx_Seminars_BagBuilder_Abstract $builder
+     *        the bag builder (exact type depends on $whatToDisplay)
+     * @param string $whatToDisplay
+     *        the flavor of list view: either an empty string (for the default
+     *        list view), the value from "what_to_display", or "other_dates"
+     *
+     * @return void
+     */
+    public function modifyBagBuilder(
+        \Tx_Seminars_FrontEnd_DefaultController $controller,
+        \Tx_Seminars_BagBuilder_Abstract $builder,
+        $whatToDisplay
+    );
 }
