@@ -292,7 +292,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         } else {
             /** @var \Tx_Seminars_Mapper_Organizer $mapper */
             $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Organizer::class);
-            $organizers = $mapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
+            $organizers = $mapper->findByPageUid((string)$this->getPidForAuxiliaryRecords(), 'title ASC');
         }
 
         return self::makeListToFormidableList($organizers);
@@ -340,8 +340,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $frontEndUser = self::getLoggedInUser();
 
         $showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(
-                ['relatedRecordType' => 'Places']
-            ) && $form !== null;
+            ['relatedRecordType' => 'Places']
+        ) && $form !== null;
 
         /** @var \Tx_Seminars_Model_Place $place */
         foreach ($places as $place) {
@@ -412,8 +412,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $frontEndUser = self::getLoggedInUser();
 
         $showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(
-                ['relatedRecordType' => 'Speakers']
-            ) && $form !== null;
+            ['relatedRecordType' => 'Speakers']
+        ) && $form !== null;
 
         $type = $parameters['type'];
         if (empty($parameters['lister'])) {
@@ -506,8 +506,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $frontEndUser = self::getLoggedInUser();
 
         $showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(
-                ['relatedRecordType' => 'Checkboxes']
-            ) && $form !== null;
+            ['relatedRecordType' => 'Checkboxes']
+        ) && $form !== null;
 
         /** @var \Tx_Seminars_Model_Checkbox $checkbox */
         foreach ($checkboxes as $checkbox) {
@@ -580,8 +580,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $frontEndUser = self::getLoggedInUser();
 
         $showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(
-                ['relatedRecordType' => 'TargetGroups']
-            ) && $form !== null;
+            ['relatedRecordType' => 'TargetGroups']
+        ) && $form !== null;
 
         /** @var \Tx_Seminars_Model_TargetGroup $targetGroup */
         foreach ($targetGroups as $targetGroup) {
@@ -675,10 +675,10 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
 
         $objectUid = $this->getObjectUid();
         if (($objectUid > 0) && !Tx_Seminars_OldModel_Abstract::recordExists(
-                $objectUid,
-                'tx_seminars_seminars',
-                true
-            )) {
+            $objectUid,
+            'tx_seminars_seminars',
+            true
+        )) {
             return 'message_wrongSeminarNumber';
         }
 
@@ -943,12 +943,12 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * Unifies decimal separators, processes the deletion of attachments and
      * purges non-seminars-fields.
      *
-     * @see unifyDecimalSeparators(), processAttachments(),
-     *      purgeNonSeminarsFields(), addAdministrativeData()
-     *
      * @param array[] $formData form data, must not be empty
      *
      * @return array modified form data, will not be empty
+     *
+     * @see unifyDecimalSeparators(), processAttachments(),
+     *      purgeNonSeminarsFields(), addAdministrativeData()
      */
     public function modifyDataToInsert(array $formData)
     {
@@ -2740,7 +2740,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     public function getPreselectedOrganizer()
     {
         $availableOrganizers = $this->populateListOrganizers();
-        if (count($availableOrganizers) != 1) {
+        if (count($availableOrganizers) !== 1) {
             return 0;
         }
 
@@ -2758,7 +2758,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     {
         $frontEndUser = self::getLoggedInUser();
         $auxiliaryRecordsPid = $frontEndUser->getAuxiliaryRecordsPid();
-        if ($auxiliaryRecordsPid == 0) {
+        if ($auxiliaryRecordsPid === 0) {
             $auxiliaryRecordsPid = self::getSeminarsConfiguration()->getAsInteger('createAuxiliaryRecordsPID');
         }
 
