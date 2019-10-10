@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop the TYPO3 package repository from composer.json (#232)
 
 ### Fixed
+- Ignore existing records in the EventEditorTest (#243)
 - Create a proper fake frontend for the ViewHelper tests (#242)
 - Move `Tests/` to the dev autoload in `ext_emconf.php` (#239)
 - Keep development files out of the packages (#237)

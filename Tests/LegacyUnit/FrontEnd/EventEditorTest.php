@@ -31,6 +31,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
      */
     private $configuration = null;
 
+    /**
+     * @var int
+     */
+    private $recordsPageUid = 0;
+
     protected function setUp()
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
@@ -39,8 +44,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
         $this->testingFramework->createFakeFrontEnd();
         \Tx_Oelib_MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
 
+        $this->recordsPageUid = $this->testingFramework->createSystemFolder();
         $this->configuration = new \Tx_Oelib_Configuration();
-        $this->configuration->setAsInteger('createAuxiliaryRecordsPID', 0);
+        $this->configuration->setAsInteger('createAuxiliaryRecordsPID', $this->recordsPageUid);
         \Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars_pi1', $this->configuration);
 
         $this->subject = new \Tx_Seminars_FrontEnd_EventEditor(
@@ -385,9 +391,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     public function testGetEventSuccessfullySavedUrlNotReturnsSeminarToEditAsLinkParameter()
     {
         $this->subject->setObjectUid(
-            $this->testingFramework->createRecord(
-                'tx_seminars_seminars'
-            )
+            $this->testingFramework->createRecord('tx_seminars_seminars')
         );
         $this->subject->setConfigurationValue(
             'eventSuccessfullySavedPID',
@@ -680,7 +684,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $categoryUid = $this->testingFramework->createRecord(
-            'tx_seminars_categories'
+            'tx_seminars_categories',
+            ['pid' => $this->recordsPageUid]
         );
 
         self::assertContains(
@@ -694,10 +699,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
      */
     public function populateListCategoriesForNoSetStoragePageReturnsRecordWithAnyPageId()
     {
+        $this->configuration->setAsInteger('createAuxiliaryRecordsPID', 0);
         $this->testingFramework->createAndLoginFrontEndUser();
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
-            ['pid' => 23]
+            ['pid' => $this->recordsPageUid + 1]
         );
 
         self::assertContains(
@@ -717,7 +723,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $eventTypeUid = $this->testingFramework->createRecord(
-            'tx_seminars_event_types'
+            'tx_seminars_event_types',
+            ['pid' => $this->recordsPageUid]
         );
 
         self::assertContains(
@@ -732,9 +739,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     public function populateListEventTypesReturnsRecordWithAnyPageId()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
+        $this->configuration->setAsInteger('createAuxiliaryRecordsPID', 0);
         $eventTypeUid = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
-            ['pid' => 87]
+            ['pid' => $this->recordsPageUid + 1]
         );
 
         self::assertContains(
@@ -754,7 +762,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $lodgingUid = $this->testingFramework->createRecord(
-            'tx_seminars_lodgings'
+            'tx_seminars_lodgings',
+            ['pid' => $this->recordsPageUid]
         );
 
         self::assertContains(
@@ -769,9 +778,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     public function populateListLodgingsReturnsRecordWithAnyPageId()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
+        $this->configuration->setAsInteger('createAuxiliaryRecordsPID', 0);
         $lodgingUid = $this->testingFramework->createRecord(
             'tx_seminars_lodgings',
-            ['pid' => 11]
+            ['pid' => $this->recordsPageUid + 1]
         );
 
         self::assertContains(
@@ -791,7 +801,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $foodUid = $this->testingFramework->createRecord(
-            'tx_seminars_foods'
+            'tx_seminars_foods',
+            ['pid' => $this->recordsPageUid]
         );
 
         self::assertContains(
@@ -806,9 +817,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     public function populateListFoodsReturnsRecordWithAnyPageId()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
+        $this->configuration->setAsInteger('createAuxiliaryRecordsPID', 0);
         $foodUid = $this->testingFramework->createRecord(
             'tx_seminars_foods',
-            ['pid' => 22]
+            ['pid' => $this->recordsPageUid + 1]
         );
 
         self::assertContains(
@@ -828,7 +840,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $paymentMethodUid = $this->testingFramework->createRecord(
-            'tx_seminars_payment_methods'
+            'tx_seminars_payment_methods',
+            ['pid' => $this->recordsPageUid]
         );
 
         self::assertContains(
@@ -843,9 +856,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     public function populateListPaymentMethodsReturnsRecordWithAnyPageId()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
+        $this->configuration->setAsInteger('createAuxiliaryRecordsPID', 0);
         $paymentMethodUid = $this->testingFramework->createRecord(
             'tx_seminars_payment_methods',
-            ['pid' => 52]
+            ['pid' => $this->recordsPageUid + 1]
         );
 
         self::assertContains(
@@ -865,7 +879,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $organizerUid = $this->testingFramework->createRecord(
-            'tx_seminars_organizers'
+            'tx_seminars_organizers',
+            ['pid' => $this->recordsPageUid]
         );
 
         self::assertContains(
@@ -880,9 +895,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     public function populateListOrganizersReturnsRecordWithAnyPageId()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
+        $this->configuration->setAsInteger('createAuxiliaryRecordsPID', 0);
         $organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
-            ['pid' => 12]
+            ['pid' => $this->recordsPageUid + 1]
         );
 
         self::assertContains(
@@ -921,7 +937,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
             \Tx_Seminars_Mapper_Organizer::class
         );
         $organizerUidFromDatabase = $this->testingFramework->createRecord(
-            'tx_seminars_organizers'
+            'tx_seminars_organizers',
+            ['pid' => $this->recordsPageUid]
         );
         // makes sure the mapper knows that UID
         $organizerMapper->find($organizerUidFromDatabase);
@@ -951,7 +968,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites'
+            'tx_seminars_sites',
+            ['pid' => $this->recordsPageUid]
         );
 
         self::assertContains(
@@ -972,7 +990,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
         $frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['owner' => $frontEndUserUid]
+            ['owner' => $frontEndUserUid, 'pid' => $this->recordsPageUid]
         );
 
         self::assertContains(
@@ -993,7 +1011,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
         $frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['owner' => $frontEndUserUid + 1]
+            ['owner' => $frontEndUserUid + 1, 'pid' => $this->recordsPageUid]
         );
 
         self::assertNotContains(
@@ -1012,9 +1030,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     public function populateListPlacesReturnsRecordWithAnyPageId()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
+        $this->configuration->setAsInteger('createAuxiliaryRecordsPID', 0);
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['pid' => 55]
+            ['pid' => $this->recordsPageUid + 1]
         );
 
         self::assertContains(
@@ -1038,7 +1057,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $checkboxUid = $this->testingFramework->createRecord(
-            'tx_seminars_checkboxes'
+            'tx_seminars_checkboxes',
+            ['pid' => $this->recordsPageUid]
         );
 
         self::assertContains(
@@ -1059,7 +1079,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
         $frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
         $checkboxUid = $this->testingFramework->createRecord(
             'tx_seminars_checkboxes',
-            ['owner' => $frontEndUserUid]
+            ['owner' => $frontEndUserUid, 'pid' => $this->recordsPageUid]
         );
 
         self::assertContains(
@@ -1080,7 +1100,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
         $frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
         $checkboxUid = $this->testingFramework->createRecord(
             'tx_seminars_checkboxes',
-            ['owner' => $frontEndUserUid + 1]
+            ['owner' => $frontEndUserUid + 1, 'pid' => $this->recordsPageUid]
         );
 
         self::assertNotContains(
@@ -1099,9 +1119,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     public function populateListCheckboxesReturnsRecordWithAnyPageId()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
+        $this->configuration->setAsInteger('createAuxiliaryRecordsPID', 0);
         $checkboxUid = $this->testingFramework->createRecord(
             'tx_seminars_checkboxes',
-            ['pid' => 12]
+            ['pid' => $this->recordsPageUid + 1]
         );
 
         self::assertContains(
@@ -1125,7 +1146,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $targetGroupUid = $this->testingFramework->createRecord(
-            'tx_seminars_target_groups'
+            'tx_seminars_target_groups',
+            ['pid' => $this->recordsPageUid]
         );
 
         self::assertContains(
@@ -1146,7 +1168,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
         $frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
         $targetGroupUid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
-            ['owner' => $frontEndUserUid]
+            ['owner' => $frontEndUserUid, 'pid' => $this->recordsPageUid]
         );
 
         self::assertContains(
@@ -1167,7 +1189,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
         $frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
         $targetGroupUid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
-            ['owner' => $frontEndUserUid + 1]
+            ['owner' => $frontEndUserUid + 1, 'pid' => $this->recordsPageUid]
         );
 
         self::assertNotContains(
@@ -1186,9 +1208,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     public function populateListTargetGroupsReturnsRecordWithAnyPageId()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
+        $this->configuration->setAsInteger('createAuxiliaryRecordsPID', 0);
         $targetGroupUid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
-            ['pid' => 42]
+            ['pid' => $this->recordsPageUid + 1]
         );
 
         self::assertContains(
@@ -1212,7 +1235,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $speakerUid = $this->testingFramework->createRecord(
-            'tx_seminars_speakers'
+            'tx_seminars_speakers',
+            ['pid' => $this->recordsPageUid]
         );
 
         self::assertContains(
@@ -1233,7 +1257,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
         $frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
         $speakerUid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
-            ['owner' => $frontEndUserUid]
+            ['owner' => $frontEndUserUid, 'pid' => $this->recordsPageUid]
         );
 
         self::assertContains(
@@ -1254,7 +1278,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
         $frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
         $speakerUid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
-            ['owner' => $frontEndUserUid + 1]
+            ['owner' => $frontEndUserUid + 1, 'pid' => $this->recordsPageUid]
         );
 
         self::assertNotContains(
@@ -1273,9 +1297,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     public function populateListSpeakersReturnsRecordWithAnyPageId()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
+        $this->configuration->setAsInteger('createAuxiliaryRecordsPID', 0);
         $speakerUid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
-            ['pid' => 25]
+            ['pid' => $this->recordsPageUid + 1]
         );
 
         self::assertContains(
@@ -2859,7 +2884,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_skills',
-            ['title' => 'Juggling']
+            ['title' => 'Juggling', 'pid' => $this->recordsPageUid]
         );
 
         self::assertContains(
@@ -2948,7 +2973,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     public function getPreselectedOrganizerForOneAvailableOrganizerReturnsTheOrganizersUid()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
-        $organizerUid = $this->testingFramework->createRecord('tx_seminars_organizers');
+        $organizerUid = $this->testingFramework->createRecord(
+            'tx_seminars_organizers',
+            ['pid' => $this->recordsPageUid]
+        );
 
         self::assertEquals(
             $organizerUid,
@@ -2962,8 +2990,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     public function getPreselectedOrganizerForTwoAvailableOrganizersReturnsZero()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
-        $this->testingFramework->createRecord('tx_seminars_organizers');
-        $this->testingFramework->createRecord('tx_seminars_organizers');
+        $this->testingFramework->createRecord('tx_seminars_organizers', ['pid' => $this->recordsPageUid]);
+        $this->testingFramework->createRecord('tx_seminars_organizers', ['pid' => $this->recordsPageUid]);
 
         self::assertEquals(
             0,
