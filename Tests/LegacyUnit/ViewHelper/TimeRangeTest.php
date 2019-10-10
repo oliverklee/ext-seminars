@@ -47,10 +47,10 @@ class Tx_Seminars_Tests_Unit_ViewHelper_TimeRangeTest extends TestCase
         date_default_timezone_set('UTC');
 
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework->createFakeFrontEnd($this->testingFramework->createFrontEndPage());
 
         $configuration = new \Tx_Oelib_Configuration();
         $configuration->setAsString('timeFormat', self::TIME_FORMAT);
-
         \Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
 
         $this->translator = \Tx_Oelib_TranslatorRegistry::get('seminars');

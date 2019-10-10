@@ -65,6 +65,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_DateRangeTest extends TestCase
         date_default_timezone_set('UTC');
 
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework->createFakeFrontEnd($this->testingFramework->createFrontEndPage());
 
         $this->configuration = new \Tx_Oelib_Configuration();
         $this->configuration->setAsString('dateFormatYMD', self::DATE_FORMAT_YMD);
