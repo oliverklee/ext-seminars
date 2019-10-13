@@ -8,10 +8,18 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
-- Update the oelib dependency (#245)
-- Upgrade to PHPUnit 5.7 (#231)
 
 ### Deprecated
+
+### Removed
+
+### Fixed
+
+## 2.2.1
+
+### Changed
+- Update the oelib dependency (#245)
+- Upgrade to PHPUnit 5.7 (#231)
 
 ### Removed
 - Drop the TYPO3 package repository from composer.json (#232)
