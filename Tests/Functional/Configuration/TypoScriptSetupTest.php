@@ -49,9 +49,9 @@ class TypoScriptSetupTest extends FunctionalTestCase
      */
     public function userFunctionsPointToExistingMethodInExistingClass()
     {
-        $typoScriptSetup = \file_get_contents(
-            ExtensionManagementUtility::extPath('seminars') . 'Configuration/TypoScript/setup.txt'
-        );
+        $extensionPath = ExtensionManagementUtility::extPath('seminars');
+        $typoScriptSetup = \file_get_contents($extensionPath . 'Configuration/TypoScript/CsvExport.txt') . "\n" .
+            \file_get_contents($extensionPath . 'Configuration/TypoScript/Publication.txt');
 
         /** @var string[] $matches */
         $matches = [];
