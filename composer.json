@@ -67,9 +67,9 @@
         "vendor-dir": ".Build/vendor"
     },
     "scripts": {
-        "ci:php:lint": "find *.php Classes/ Configuration/ Tests/ -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
-        "ci:tests:unit": "phpunit -c .Build/vendor/nimut/testing-framework/res/Configuration/UnitTests.xml Tests/Unit/",
-        "ci:tests:unit-legacy": "$RUN_TESTS_COMMAND Tests/LegacyUnit/",
+        "ci:php:lint": "find *.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
+        "ci:tests:unit": "phpunit -c .Build/vendor/nimut/testing-framework/res/Configuration/UnitTests.xml Tests/Unit",
+        "ci:tests:unit-legacy": ".Build/vendor/bin/typo3 phpunit:run Tests/LegacyUnit",
         "ci:tests:functional": "find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'phpunit -c .Build/vendor/nimut/testing-framework/res/Configuration/FunctionalTests.xml';",
         "ci:tests": [
             "@ci:tests:unit",
