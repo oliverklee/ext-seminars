@@ -67,12 +67,6 @@ jobs:
   - stage: test
     php: "7.0"
     env: TYPO3=^8.7 RUN_TESTS_COMMAND=".Build/vendor/bin/typo3 phpunit:run"
-  - stage: test
-    php: "7.1"
-    env: TYPO3=^7.6 RUN_TESTS_COMMAND=".Build/public/typo3/cli_dispatch.phpsh phpunit"
-  - stage: test
-    php: "7.0"
-    env: TYPO3=^7.6 RUN_TESTS_COMMAND=".Build/public/typo3/cli_dispatch.phpsh phpunit"
   - stage: release to ter
     if: tag IS present AND env(TYPO3_ORG_USERNAME) IS present AND env(TYPO3_ORG_PASSWORD) IS present
     php: "7.0"
