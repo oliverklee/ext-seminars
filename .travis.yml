@@ -38,9 +38,6 @@ install:
   echo "Restoring the composer.json";
   git checkout .;
 
-before_script:
-- mysql -u ${DATABASE_USER} ${DATABASE_NAME} -e "INSERT INTO be_users (username, password) VALUES ('_cli_phpunit', 'password')"
-
 script:
 - >
   echo;
@@ -63,10 +60,10 @@ jobs:
   include:
   - stage: test
     php: "7.1"
-    env: TYPO3=^8.7 RUN_TESTS_COMMAND=".Build/vendor/bin/typo3 phpunit:run"
+    env: TYPO3=^8.7
   - stage: test
     php: "7.0"
-    env: TYPO3=^8.7 RUN_TESTS_COMMAND=".Build/vendor/bin/typo3 phpunit:run"
+    env: TYPO3=^8.7
   - stage: release to ter
     if: tag IS present AND env(TYPO3_ORG_USERNAME) IS present AND env(TYPO3_ORG_PASSWORD) IS present
     php: "7.0"
