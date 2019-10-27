@@ -758,6 +758,8 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
 
     /**
      * @test
+     *
+     * @doesNotPerformAssertions
      */
     public function instantiationWithoutLoggedInUserDoesNotThrowException()
     {

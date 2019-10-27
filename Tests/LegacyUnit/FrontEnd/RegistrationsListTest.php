@@ -157,6 +157,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends TestCase
 
     /**
      * @test
+     *
+     * @doesNotPerformAssertions
      */
     public function createFixtureWithListRegistrationsAsWhatToDisplayDoesNotThrowException()
     {
@@ -170,6 +172,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends TestCase
 
     /**
      * @test
+     *
+     * @doesNotPerformAssertions
      */
     public function createFixtureWithListVipRegistrationsAsWhatToDisplayDoesNotThrowException()
     {
