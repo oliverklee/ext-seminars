@@ -669,7 +669,6 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
                 'tx_seminars_seminars_target_groups_mm',
                 'uid_local=' . $this->subject->getUid()
             )
-
         );
 
         $this->addTargetGroupRelation();
@@ -771,7 +770,6 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
                 'tx_seminars_seminars_organizing_partners_mm',
                 'uid_local=' . $this->subject->getUid()
             )
-
         );
 
         $this->addOrganizingPartnerRelation();
@@ -873,7 +871,6 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
                 'tx_seminars_seminars_speakers_mm',
                 'uid_local=' . $this->subject->getUid()
             )
-
         );
 
         $this->addSpeakerRelation([]);
@@ -929,7 +926,6 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
                 'tx_seminars_seminars_speakers_mm_partners',
                 'uid_local=' . $this->subject->getUid()
             )
-
         );
 
         $this->addPartnerRelation([]);
@@ -985,7 +981,6 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
                 'tx_seminars_seminars_speakers_mm_tutors',
                 'uid_local=' . $this->subject->getUid()
             )
-
         );
 
         $this->addTutorRelation([]);
@@ -1041,7 +1036,6 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
                 'tx_seminars_seminars_speakers_mm_leaders',
                 'uid_local=' . $this->subject->getUid()
             )
-
         );
 
         $this->addLeaderRelation([]);
@@ -3531,6 +3525,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
 
     /**
      * @test
+     *
+     * @doesNotPerformAssertions
      */
     public function setEventTypeIsAllowedWithZero()
     {
@@ -3539,6 +3535,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
 
     /**
      * @test
+     *
+     * @doesNotPerformAssertions
      */
     public function setEventTypeIsAllowedWithPositiveInteger()
     {
@@ -10069,12 +10067,12 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     /**
      * @test
      *
+     * @doesNotPerformAssertions
+     *
      * @dataProvider registrationListParametersDataProvider
      *
      * @param string $whichPlugin
      * @param string $accessLevel
-     *
-     * @return void
      */
     public function canViewRegistrationsListMessageWithLoginRoutesParameters($whichPlugin, $accessLevel)
     {

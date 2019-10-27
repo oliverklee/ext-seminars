@@ -671,7 +671,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     // Tests concerning populateListCategories
     ////////////////////////////////////////////
 
-    public function testPopulateListCategoriesDoesNotCrash()
+    /**
+     * @test
+     *
+     * @doesNotPerformAssertions
+     */
+    public function populateListCategoriesDoesNotCrash()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $this->subject->populateListCategories();

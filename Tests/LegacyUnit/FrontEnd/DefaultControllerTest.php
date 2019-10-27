@@ -433,7 +433,6 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
                 'tx_seminars_seminars_target_groups_mm',
                 'uid_local=' . $this->seminarUid
             )
-
         );
 
         $this->addTargetGroupRelation();
@@ -530,7 +529,6 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
                 'tx_seminars_seminars_categories_mm',
                 'uid_local=' . $this->seminarUid
             )
-
         );
 
         $this->addCategoryRelation();
@@ -4679,7 +4677,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         );
     }
 
-    public function testListViewSortedByCategoryWithoutStaticTemplateDoesNotCrash()
+    /**
+     * @test
+     *
+     * @doesNotPerformAssertions
+     */
+    public function listViewSortedByCategoryWithoutStaticTemplateDoesNotCrash()
     {
         $subject = new \Tx_Seminars_FrontEnd_DefaultController();
         $subject->init(

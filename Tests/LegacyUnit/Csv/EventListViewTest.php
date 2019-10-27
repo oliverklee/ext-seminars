@@ -96,6 +96,8 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends TestCase
 
     /**
      * @test
+     *
+     * @doesNotPerformAssertions
      */
     public function setPageUidWithPositivePageUidNotThrowsException()
     {

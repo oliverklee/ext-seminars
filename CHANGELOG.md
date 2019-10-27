@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Mark tests that do not contain any assertions (#252)
 - Explicitly add transitive dependencies (#274)
 
 ## 2.2.1

@@ -94,7 +94,12 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
         );
     }
 
-    public function testBuilderWithAdditionalTableNameDoesNotProduceSqlError()
+    /**
+     * @test
+     *
+     * @doesNotPerformAssertions
+     */
+    public function builderWithAdditionalTableNameDoesNotProduceSqlError()
     {
         $this->subject->addAdditionalTableName('tx_seminars_seminars');
 

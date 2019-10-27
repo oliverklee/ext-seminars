@@ -1762,6 +1762,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends TestCase
 
     /**
      * @test
+     *
+     * @doesNotPerformAssertions
      */
     public function cancelForCanceledEventNotThrowsException()
     {
@@ -1796,6 +1798,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends TestCase
 
     /**
      * @test
+     *
+     * @doesNotPerformAssertions
      */
     public function confirmForConfirmedEventNotThrowsException()
     {

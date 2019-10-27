@@ -1889,9 +1889,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
 
         $this->subject->removeRegistration($registrationUid, $this->pi1);
 
-        $this->testingFramework->existsRecord(
-            'tx_seminars_attendances',
-            'registration_queue = 0 AND uid = ' . $queueRegistrationUid
+        self::assertTrue(
+            $this->testingFramework->existsRecord(
+                'tx_seminars_attendances',
+                'registration_queue = 0 AND uid = ' . $queueRegistrationUid
+            )
         );
     }
 

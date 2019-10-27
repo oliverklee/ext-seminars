@@ -121,6 +121,8 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends TestCa
 
     /**
      * @test
+     *
+     * @doesNotPerformAssertions
      */
     public function setPageUidWithPositivePageUidNotThrowsException()
     {
@@ -129,6 +131,8 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends TestCa
 
     /**
      * @test
+     *
+     * @doesNotPerformAssertions
      */
     public function setPageUidWithZeroPageUidNotThrowsException()
     {
@@ -147,6 +151,8 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends TestCa
 
     /**
      * @test
+     *
+     * @doesNotPerformAssertions
      */
     public function setEventUidWithZeroEventUidNotThrowsException()
     {

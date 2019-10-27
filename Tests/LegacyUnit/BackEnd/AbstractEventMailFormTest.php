@@ -464,6 +464,8 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends TestCase
 
     /**
      * @test
+     *
+     * @doesNotPerformAssertions
      */
     public function sendEmailToAttendeesWithoutReplacementMarkerInBodyDoesNotCrash()
     {

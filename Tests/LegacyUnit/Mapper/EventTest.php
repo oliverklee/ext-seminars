@@ -853,6 +853,8 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends TestCase
 
     /**
      * @test
+     *
+     * @doesNotPerformAssertions
      */
     public function findAllByBeginDateForPositiveSameMinimumAndMaximumNotThrowsException()
     {
@@ -861,6 +863,8 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends TestCase
 
     /**
      * @test
+     *
+     * @doesNotPerformAssertions
      */
     public function findAllByBeginDateForZeroMinimumAndPositiveMaximumNotThrowsException()
     {
@@ -879,6 +883,8 @@ class Tx_Seminars_Tests_Unit_Mapper_EventTest extends TestCase
 
     /**
      * @test
+     *
+     * @doesNotPerformAssertions
      */
     public function findAllByBeginDateForMinimumSmallerThanMaximumNotThrowsException()
     {
