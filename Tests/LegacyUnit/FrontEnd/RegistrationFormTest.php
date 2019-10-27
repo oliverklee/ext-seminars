@@ -324,7 +324,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
     // Tests concerning populateListPaymentMethods
     ////////////////////////////////////////////////
 
-    public function testPopulateListPaymentMethodsDoesNotCrash()
+    /**
+     * @test
+     *
+     * @doesNotPerformAssertions
+     */
+    public function populateListPaymentMethodsDoesNotCrash()
     {
         $this->subject->populateListPaymentMethods();
     }

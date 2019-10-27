@@ -307,6 +307,8 @@ class MailNotifierTest extends TestCase
 
     /**
      * @test
+     *
+     * @doesNotPerformAssertions
      */
     public function classCanBeInstantiated()
     {
