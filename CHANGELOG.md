@@ -13,6 +13,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Drop unneeded Travis CI configuration settings (#258)
 
 ### Fixed
 - Allow longer execution time for Composer scripts (#255)
