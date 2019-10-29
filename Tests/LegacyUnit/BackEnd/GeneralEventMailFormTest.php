@@ -17,31 +17,31 @@ class Tx_Seminars_Tests_Unit_BackEnd_GeneralEventMailFormTest extends TestCase
     /**
      * @var GeneralEventMailForm
      */
-    private $subject;
+    private $subject = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework
      */
-    private $testingFramework;
+    private $testingFramework = null;
 
     /**
      * UID of a dummy system folder
      *
      * @var int
      */
-    protected $dummySysFolderUid = 0;
+    private $dummySysFolderUid = 0;
 
     /**
      * UID of a dummy event record
      *
      * @var int
      */
-    private $eventUid;
+    private $eventUid = 0;
 
     /**
      * @var \Tx_Oelib_EmailCollector
      */
-    protected $mailer = null;
+    private $mailer = null;
 
     protected function setUp()
     {

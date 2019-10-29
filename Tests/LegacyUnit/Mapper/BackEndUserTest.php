@@ -12,12 +12,12 @@ class Tx_Seminars_Tests_Unit_Mapper_BackEndUserTest extends TestCase
     /**
      * @var \Tx_Oelib_TestingFramework for creating dummy records
      */
-    private $testingFramework;
+    private $testingFramework = null;
 
     /**
      * @var \Tx_Seminars_Mapper_BackEndUser the object to test
      */
-    private $subject;
+    private $subject = null;
 
     protected function setUp()
     {

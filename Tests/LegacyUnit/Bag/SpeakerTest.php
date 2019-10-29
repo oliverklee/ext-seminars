@@ -12,12 +12,12 @@ class Tx_Seminars_Tests_Unit_Bag_SpeakerTest extends TestCase
     /**
      * @var \Tx_Seminars_Bag_Speaker
      */
-    private $subject;
+    private $subject = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework
      */
-    private $testingFramework;
+    private $testingFramework = null;
 
     protected function setUp()
     {

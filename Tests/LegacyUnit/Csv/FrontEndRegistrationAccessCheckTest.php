@@ -12,17 +12,17 @@ class Tx_Seminars_Tests_Unit_Csv_FrontEndRegistrationAccessCheckTest extends Tes
     /**
      * @var \Tx_Seminars_Csv_FrontEndRegistrationAccessCheck
      */
-    protected $subject = null;
+    private $subject = null;
 
     /**
      * @var \Tx_Oelib_Configuration
      */
-    protected $seminarsPluginConfiguration = null;
+    private $seminarsPluginConfiguration = null;
 
     /**
      * @var int
      */
-    protected $vipsGroupUid = 12431;
+    private $vipsGroupUid = 12431;
 
     protected function setUp()
     {

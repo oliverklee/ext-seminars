@@ -19,12 +19,12 @@ class Tx_Seminars_Tests_Unit_BackEnd_OrganizersListTest extends TestCase
     /**
      * @var OrganizersList
      */
-    private $subject;
+    private $subject = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework
      */
-    private $testingFramework;
+    private $testingFramework = null;
 
     /**
      * @var int PID of a dummy system folder

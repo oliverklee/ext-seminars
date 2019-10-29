@@ -12,12 +12,12 @@ class Tx_Seminars_Tests_Unit_Mapper_TargetGroupTest extends TestCase
     /**
      * @var \Tx_Oelib_TestingFramework
      */
-    private $testingFramework;
+    private $testingFramework = null;
 
     /**
      * @var \Tx_Seminars_Mapper_TargetGroup
      */
-    private $subject;
+    private $subject = null;
 
     protected function setUp()
     {

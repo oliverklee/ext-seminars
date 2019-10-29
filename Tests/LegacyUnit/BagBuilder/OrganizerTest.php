@@ -13,12 +13,12 @@ class Tx_Seminars_Tests_Unit_BagBuilder_OrganizerTest extends TestCase
     /**
      * @var \Tx_Seminars_BagBuilder_Organizer
      */
-    private $subject;
+    private $subject = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework
      */
-    private $testingFramework;
+    private $testingFramework = null;
 
     protected function setUp()
     {
