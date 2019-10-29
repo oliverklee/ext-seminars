@@ -6,9 +6,11 @@ config {
         mayLoadScriptaculous = 1
         jsframework {
             jscore = jquery
-            jscore.tx_mkforms_base = EXT:mkforms/res/jsfwk/prototype/addons/base/Base.js
-            jscore.basewrapper = EXT:mkforms/res/jsfwk/wrapper.js
-            jscore.wrapper = EXT:mkforms/res/jsfwk/jquery/wrapper.js
+            jscore {
+                tx_mkforms_base = EXT:mkforms/res/jsfwk/prototype/addons/base/Base.js
+                basewrapper = EXT:mkforms/res/jsfwk/wrapper.js
+                wrapper = EXT:mkforms/res/jsfwk/jquery/wrapper.js
+            }
         }
     }
 }
