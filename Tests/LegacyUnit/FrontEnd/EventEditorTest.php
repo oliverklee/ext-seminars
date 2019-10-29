@@ -1627,18 +1627,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     {
         $this->subject->setConfigurationValue('createEventsPID', 42);
 
-        $userGroup = \Tx_Oelib_MapperRegistry::get(
-            \Tx_Seminars_Mapper_FrontEndUserGroup::class
-        )->getLoadedTestingModel(
-            ['tx_seminars_events_pid' => 21]
-        );
+        $userGroup = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class)
+            ->getLoadedTestingModel(['tx_seminars_events_pid' => 21]);
 
-        $user = \Tx_Oelib_MapperRegistry::get(
-            \Tx_Seminars_Mapper_FrontEndUser::class
-        )->getLoadedTestingModel(
-            ['usergroup' => $userGroup->getUid()]
-        );
-        $this->testingFramework->loginFrontEndUser($user->getUid());
+        $this->testingFramework->createAndLoginFrontEndUser($userGroup->getUid());
 
         $modifiedFormData = $this->subject->modifyDataToInsert([]);
 
