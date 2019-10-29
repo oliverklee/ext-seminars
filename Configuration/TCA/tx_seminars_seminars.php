@@ -101,6 +101,11 @@ $tca = [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_categories_mm',
+                'fieldControl' => [
+                    'editPopup' => ['disabled' => false],
+                    'addRecord' => ['disabled' => false],
+                    'listModule' => ['disabled' => false],
+                ],
             ],
         ],
         'requirements' => [
@@ -164,6 +169,11 @@ $tca = [
                 'minitems' => 0,
                 'maxitems' => 1,
                 'items' => [['', '0']],
+                'fieldControl' => [
+                    'editPopup' => ['disabled' => false],
+                    'addRecord' => ['disabled' => false],
+                    'listModule' => ['disabled' => false],
+                ],
             ],
         ],
         'accreditation_number' => [
@@ -195,6 +205,7 @@ $tca = [
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.begin_date',
             'config' => [
                 'type' => 'input',
+                'renderType' => 'inputDateTime',
                 'size' => 12,
                 'eval' => 'datetime',
                 'default' => 0,
@@ -205,6 +216,7 @@ $tca = [
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.end_date',
             'config' => [
                 'type' => 'input',
+                'renderType' => 'inputDateTime',
                 'size' => 12,
                 'eval' => 'datetime',
                 'default' => 0,
@@ -240,6 +252,7 @@ $tca = [
             'displayCond' => 'FIELD:needs_registration:REQ:true',
             'config' => [
                 'type' => 'input',
+                'renderType' => 'inputDateTime',
                 'size' => 12,
                 'eval' => 'datetime',
                 'default' => 0,
@@ -251,6 +264,7 @@ $tca = [
             'displayCond' => 'FIELD:needs_registration:REQ:true',
             'config' => [
                 'type' => 'input',
+                'renderType' => 'inputDateTime',
                 'size' => 12,
                 'eval' => 'datetime',
                 'default' => 0,
@@ -262,6 +276,7 @@ $tca = [
             'displayCond' => 'FIELD:needs_registration:REQ:true',
             'config' => [
                 'type' => 'input',
+                'renderType' => 'inputDateTime',
                 'size' => 12,
                 'eval' => 'datetime',
                 'default' => 0,
@@ -273,6 +288,7 @@ $tca = [
             'displayCond' => 'FIELD:needs_registration:REQ:true',
             'config' => [
                 'type' => 'input',
+                'renderType' => 'inputDateTime',
                 'size' => 12,
                 'eval' => 'datetime',
                 'default' => 0,
@@ -283,6 +299,7 @@ $tca = [
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.expiry',
             'config' => [
                 'type' => 'input',
+                'renderType' => 'inputDateTime',
                 'size' => 10,
                 'eval' => 'date',
                 'default' => 0,
@@ -293,6 +310,7 @@ $tca = [
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.details_page',
             'config' => [
                 'type' => 'input',
+                'renderType' => 'inputLink',
                 'size' => 15,
                 'max' => 255,
                 'eval' => 'trim',
@@ -310,6 +328,11 @@ $tca = [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_place_mm',
+                'fieldControl' => [
+                    'editPopup' => ['disabled' => false],
+                    'addRecord' => ['disabled' => false],
+                    'listModule' => ['disabled' => false],
+                ],
             ],
         ],
         'room' => [
@@ -333,6 +356,11 @@ $tca = [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_lodgings_mm',
+                'fieldControl' => [
+                    'editPopup' => ['disabled' => false],
+                    'addRecord' => ['disabled' => false],
+                    'listModule' => ['disabled' => false],
+                ],
             ],
         ],
         'foods' => [
@@ -347,6 +375,11 @@ $tca = [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_foods_mm',
+                'fieldControl' => [
+                    'editPopup' => ['disabled' => false],
+                    'addRecord' => ['disabled' => false],
+                    'listModule' => ['disabled' => false],
+                ],
             ],
         ],
         'speakers' => [
@@ -361,6 +394,11 @@ $tca = [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_speakers_mm',
+                'fieldControl' => [
+                    'editPopup' => ['disabled' => false],
+                    'addRecord' => ['disabled' => false],
+                    'listModule' => ['disabled' => false],
+                ],
             ],
         ],
         'partners' => [
@@ -375,6 +413,11 @@ $tca = [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_speakers_mm_partners',
+                'fieldControl' => [
+                    'editPopup' => ['disabled' => false],
+                    'addRecord' => ['disabled' => false],
+                    'listModule' => ['disabled' => false],
+                ],
             ],
         ],
         'tutors' => [
@@ -389,6 +432,11 @@ $tca = [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_speakers_mm_tutors',
+                'fieldControl' => [
+                    'editPopup' => ['disabled' => false],
+                    'addRecord' => ['disabled' => false],
+                    'listModule' => ['disabled' => false],
+                ],
             ],
         ],
         'leaders' => [
@@ -403,6 +451,11 @@ $tca = [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_speakers_mm_leaders',
+                'fieldControl' => [
+                    'editPopup' => ['disabled' => false],
+                    'addRecord' => ['disabled' => false],
+                    'listModule' => ['disabled' => false],
+                ],
             ],
         ],
         'language' => [
@@ -546,6 +599,11 @@ $tca = [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_checkboxes_mm',
+                'fieldControl' => [
+                    'editPopup' => ['disabled' => false],
+                    'addRecord' => ['disabled' => false],
+                    'listModule' => ['disabled' => false],
+                ],
             ],
         ],
         'uses_terms_2' => [
@@ -583,6 +641,11 @@ $tca = [
                 'minitems' => 1,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_organizers_mm',
+                'fieldControl' => [
+                    'editPopup' => ['disabled' => false],
+                    'addRecord' => ['disabled' => false],
+                    'listModule' => ['disabled' => false],
+                ],
             ],
         ],
         'organizing_partners' => [
@@ -597,6 +660,11 @@ $tca = [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_organizing_partners_mm',
+                'fieldControl' => [
+                    'editPopup' => ['disabled' => false],
+                    'addRecord' => ['disabled' => false],
+                    'listModule' => ['disabled' => false],
+                ],
             ],
         ],
         'event_takes_place_reminder_sent' => [
@@ -720,6 +788,11 @@ $tca = [
                 'minitems' => 0,
                 'maxitems' => 999,
                 'MM' => 'tx_seminars_seminars_target_groups_mm',
+                'fieldControl' => [
+                    'editPopup' => ['disabled' => false],
+                    'addRecord' => ['disabled' => false],
+                    'listModule' => ['disabled' => false],
+                ],
             ],
         ],
         'skip_collision_check' => [
@@ -820,6 +893,7 @@ $tca = [
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:LGL.starttime',
             'config' => [
                 'type' => 'input',
+                'renderType' => 'inputDateTime',
                 'size' => 8,
                 'eval' => 'date',
                 'default' => 0,
@@ -830,6 +904,7 @@ $tca = [
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:LGL.endtime',
             'config' => [
                 'type' => 'input',
+                'renderType' => 'inputDateTime',
                 'size' => 8,
                 'eval' => 'date',
                 'default' => 0,
@@ -904,6 +979,7 @@ $tca = [
             'displayCond' => 'FIELD:needs_registration:REQ:true',
             'config' => [
                 'type' => 'input',
+                'renderType' => 'inputDateTime',
                 'size' => 12,
                 'eval' => 'datetime',
                 'default' => 0,
@@ -944,153 +1020,5 @@ $tca = [
         ],
     ],
 ];
-
-if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8006000) {
-    $tca['columns']['begin_date']['config']['renderType'] = 'inputDateTime';
-    $tca['columns']['end_date']['config']['renderType'] = 'inputDateTime';
-    $tca['columns']['begin_date_registration']['config']['renderType'] = 'inputDateTime';
-    $tca['columns']['deadline_registration']['config']['renderType'] = 'inputDateTime';
-    $tca['columns']['deadline_early_bird']['config']['renderType'] = 'inputDateTime';
-    $tca['columns']['deadline_unregistration']['config']['renderType'] = 'inputDateTime';
-    $tca['columns']['expiry']['config']['renderType'] = 'inputDateTime';
-    $tca['columns']['starttime']['config']['renderType'] = 'inputDateTime';
-    $tca['columns']['endtime']['config']['renderType'] = 'inputDateTime';
-    $tca['columns']['date_of_last_registration_digest']['config']['renderType'] = 'inputDateTime';
-    $tca['columns']['details_page']['config']['renderType'] = 'inputLink';
-    $tca['columns']['categories']['config']['fieldControl'] = [
-        'editPopup' => ['disabled' => false],
-        'addRecord' => ['disabled' => false],
-        'listModule' => ['disabled' => false],
-    ];
-    $tca['columns']['event_type']['config']['fieldControl'] = [
-        'editPopup' => ['disabled' => false],
-        'addRecord' => ['disabled' => false],
-        'listModule' => ['disabled' => false],
-    ];
-    $tca['columns']['place']['config']['fieldControl'] = [
-        'editPopup' => ['disabled' => false],
-        'addRecord' => ['disabled' => false],
-        'listModule' => ['disabled' => false],
-    ];
-    $tca['columns']['lodgings']['config']['fieldControl'] = [
-        'editPopup' => ['disabled' => false],
-        'addRecord' => ['disabled' => false],
-        'listModule' => ['disabled' => false],
-    ];
-    $tca['columns']['foods']['config']['fieldControl'] = [
-        'editPopup' => ['disabled' => false],
-        'addRecord' => ['disabled' => false],
-        'listModule' => ['disabled' => false],
-    ];
-    $tca['columns']['speakers']['config']['fieldControl'] = [
-        'editPopup' => ['disabled' => false],
-        'addRecord' => ['disabled' => false],
-        'listModule' => ['disabled' => false],
-    ];
-    $tca['columns']['partners']['config']['fieldControl'] = [
-        'editPopup' => ['disabled' => false],
-        'addRecord' => ['disabled' => false],
-        'listModule' => ['disabled' => false],
-    ];
-    $tca['columns']['tutors']['config']['fieldControl'] = [
-        'editPopup' => ['disabled' => false],
-        'addRecord' => ['disabled' => false],
-        'listModule' => ['disabled' => false],
-    ];
-    $tca['columns']['leaders']['config']['fieldControl'] = [
-        'editPopup' => ['disabled' => false],
-        'addRecord' => ['disabled' => false],
-        'listModule' => ['disabled' => false],
-    ];
-    $tca['columns']['checkboxes']['config']['fieldControl'] = [
-        'editPopup' => ['disabled' => false],
-        'addRecord' => ['disabled' => false],
-        'listModule' => ['disabled' => false],
-    ];
-    $tca['columns']['organizers']['config']['fieldControl'] = [
-        'editPopup' => ['disabled' => false],
-        'addRecord' => ['disabled' => false],
-        'listModule' => ['disabled' => false],
-    ];
-    $tca['columns']['organizing_partners']['config']['fieldControl'] = [
-        'editPopup' => ['disabled' => false],
-        'addRecord' => ['disabled' => false],
-        'listModule' => ['disabled' => false],
-    ];
-    $tca['columns']['target_groups']['config']['fieldControl'] = [
-        'editPopup' => ['disabled' => false],
-        'addRecord' => ['disabled' => false],
-        'listModule' => ['disabled' => false],
-    ];
-} else {
-    $tca['columns']['description']['defaultExtras'] = 'richtext[]';
-    $tca['columns']['additional_information']['defaultExtras'] = 'richtext[]';
-    $tca['columns']['details_page']['config']['wizards'] = [
-        'link' => [
-            'type' => 'popup',
-            'title' => 'Link',
-            'icon' => 'actions-wizard-link',
-            'module' => [
-                'name' => 'wizard_link',
-                'urlParameters' => [
-                    'mode' => 'wizard',
-                ],
-            ],
-            'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1',
-        ],
-    ];
-    $tca['columns']['categories']['config']['wizards'] = \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
-        \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-        'tx_seminars_categories'
-    );
-    $tca['columns']['event_type']['config']['wizards'] = \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
-        \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-        'tx_seminars_event_types'
-    );
-    $tca['columns']['place']['config']['wizards'] = \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
-        \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-        'tx_seminars_sites'
-    );
-    $tca['columns']['lodgings']['config']['wizards'] = \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
-        \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-        'tx_seminars_lodgings'
-    );
-    $tca['columns']['foods']['config']['wizards'] = \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
-        \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-        'tx_seminars_foods'
-    );
-    $tca['columns']['speakers']['config']['wizards'] = \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
-        \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-        'tx_seminars_speakers'
-    );
-    $tca['columns']['partners']['config']['wizards'] = \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
-        \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-        'tx_seminars_speakers'
-    );
-    $tca['columns']['tutors']['config']['wizards'] = \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
-        \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-        'tx_seminars_speakers'
-    );
-    $tca['columns']['leaders']['config']['wizards'] = \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
-        \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-        'tx_seminars_speakers'
-    );
-    $tca['columns']['checkboxes']['config']['wizards'] = \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
-        \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-        'tx_seminars_checkboxes'
-    );
-    $tca['columns']['organizers']['config']['wizards'] = \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
-        \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-        'tx_seminars_organizers'
-    );
-    $tca['columns']['organizing_partners']['config']['wizards'] = \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
-        \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-        'tx_seminars_organizers'
-    );
-    $tca['columns']['target_groups']['config']['wizards'] = \OliverKlee\Seminars\BackEnd\TceForms::replaceTables(
-        \OliverKlee\Seminars\BackEnd\TceForms::getWizardConfiguration(),
-        'tx_seminars_target_groups'
-    );
-}
 
 return $tca;

@@ -21,11 +21,6 @@ if (TYPO3_MODE === 'BE') {
         ],
         'icon' => 'EXT:seminars/Resources/Public/Icons/BackEndModule.gif',
     ];
-    if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) < 8007000) {
-        $moduleConfiguration['labels']['tabs_images'] = [
-            'tab' => 'EXT:seminars/Resources/Public/Icons/BackEndModule.gif',
-        ];
-    }
 
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModule('web', 'seminars', '', '', $moduleConfiguration);
 }

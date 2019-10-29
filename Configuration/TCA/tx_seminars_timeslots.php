@@ -37,6 +37,7 @@ $tca = [
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_timeslots.begin_date',
             'config' => [
                 'type' => 'input',
+                'renderType' => 'inputDateTime',
                 'size' => 12,
                 'eval' => 'datetime, required',
                 'default' => 0,
@@ -47,6 +48,7 @@ $tca = [
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_timeslots.end_date',
             'config' => [
                 'type' => 'input',
+                'renderType' => 'inputDateTime',
                 'size' => 12,
                 'eval' => 'datetime',
                 'default' => 0,
@@ -57,6 +59,7 @@ $tca = [
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_timeslots.entry_date',
             'config' => [
                 'type' => 'input',
+                'renderType' => 'inputDateTime',
                 'size' => 12,
                 'eval' => 'datetime',
                 'default' => 0,
@@ -105,11 +108,5 @@ $tca = [
         '0' => ['showitem' => 'begin_date, end_date, entry_date, speakers, place, room'],
     ],
 ];
-
-if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8006000) {
-    $tca['columns']['begin_date']['config']['renderType'] = 'inputDateTime';
-    $tca['columns']['end_date']['config']['renderType'] = 'inputDateTime';
-    $tca['columns']['entry_date']['config']['renderType'] = 'inputDateTime';
-}
 
 return $tca;

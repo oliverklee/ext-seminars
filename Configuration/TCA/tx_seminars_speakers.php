@@ -75,6 +75,7 @@ $tca = [
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.homepage',
             'config' => [
                 'type' => 'input',
+                'renderType' => 'inputLink',
                 'size' => 15,
                 'max' => 255,
                 'eval' => 'trim',
@@ -221,25 +222,5 @@ $tca = [
         ],
     ],
 ];
-
-if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8006000) {
-    $tca['columns']['homepage']['config']['renderType'] = 'inputLink';
-} else {
-    $tca['columns']['description']['defaultExtras'] = 'richtext[]';
-    $tca['columns']['homepage']['config']['wizards'] = [
-        'link' => [
-            'type' => 'popup',
-            'title' => 'Link',
-            'icon' => 'actions-wizard-link',
-            'module' => [
-                'name' => 'wizard_link',
-                'urlParameters' => [
-                    'mode' => 'wizard',
-                ],
-            ],
-            'JSopenParams' => 'height=300,width=500,status=0,menubar=0,scrollbars=1',
-        ],
-    ];
-}
 
 return $tca;

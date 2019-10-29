@@ -282,6 +282,7 @@ $tca = [
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances.datepaid',
             'config' => [
                 'type' => 'input',
+                'renderType' => 'inputDateTime',
                 'size' => 8,
                 'eval' => 'date',
                 'default' => 0,
@@ -483,9 +484,5 @@ $tca = [
         ],
     ],
 ];
-
-if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8006000) {
-    $tca['columns']['datepaid']['config']['renderType'] = 'inputDateTime';
-}
 
 return $tca;
