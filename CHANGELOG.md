@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop support for TYPO3 7.6 (#248)
 
 ### Fixed
+- Allow longer execution time for Composer scripts (#255)
 - Use the new TypoScript file paths in the userfunc tests (#253)
 
 ## 2.2.1
