@@ -21,22 +21,22 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends TestCase
     /**
      * @var EventsList
      */
-    protected $subject = null;
+    private $subject = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework
      */
-    protected $testingFramework = null;
+    private $testingFramework = null;
 
     /**
      * @var int PID of a dummy system folder
      */
-    protected $dummySysFolderPid = 0;
+    private $dummySysFolderPid = 0;
 
     /**
      * @var DummyModule
      */
-    protected $backEndModule = null;
+    private $backEndModule = null;
 
     protected function setUp()
     {

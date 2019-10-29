@@ -16,26 +16,26 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends TestCase
     /**
      * @var \Tx_Seminars_Csv_CsvDownloader
      */
-    protected $subject = null;
+    private $subject = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework
      */
-    protected $testingFramework = null;
+    private $testingFramework = null;
 
     /**
      * PID of the system folder in which we store our test data
      *
      * @var int
      */
-    protected $pid = 0;
+    private $pid = 0;
 
     /**
      * UID of a test event record
      *
      * @var int
      */
-    protected $eventUid = 0;
+    private $eventUid = 0;
 
     protected function setUp()
     {

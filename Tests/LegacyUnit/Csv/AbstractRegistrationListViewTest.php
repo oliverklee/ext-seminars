@@ -14,31 +14,31 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends TestCa
     /**
      * @var \Tx_Seminars_Csv_AbstractRegistrationListView
      */
-    protected $subject = null;
+    private $subject = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework
      */
-    protected $testingFramework = null;
+    private $testingFramework = null;
 
     /**
      * @var \Tx_Oelib_Configuration
      */
-    protected $configuration = null;
+    private $configuration = null;
 
     /**
      * PID of the system folder in which we store our test data
      *
      * @var int
      */
-    protected $pageUid = 0;
+    private $pageUid = 0;
 
     /**
      * UID of a test event record
      *
      * @var int
      */
-    protected $eventUid = 0;
+    private $eventUid = 0;
 
     /**
      * @var string[]

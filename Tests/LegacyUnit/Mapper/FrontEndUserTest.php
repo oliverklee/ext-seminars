@@ -12,7 +12,7 @@ class Tx_Seminars_Tests_Unit_Mapper_FrontEndUserTest extends TestCase
     /**
      * @var \Tx_Seminars_Mapper_FrontEndUser the object to test
      */
-    private $subject;
+    private $subject = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework

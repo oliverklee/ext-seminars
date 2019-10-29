@@ -5,7 +5,7 @@
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-final class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingTimeSlot extends \Tx_Seminars_OldModel_TimeSlot
+class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingTimeSlot extends \Tx_Seminars_OldModel_TimeSlot
 {
     /**
      * Sets the place field of the time slot.

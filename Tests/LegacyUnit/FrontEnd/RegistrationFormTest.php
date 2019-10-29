@@ -16,27 +16,27 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
     /**
      * @var \Tx_Seminars_FrontEnd_RegistrationForm
      */
-    protected $subject = null;
+    private $subject = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework
      */
-    protected $testingFramework = null;
+    private $testingFramework = null;
 
     /**
      * @var \Tx_Oelib_FakeSession a fake session
      */
-    protected $session = null;
+    private $session = null;
 
     /**
      * @var int the UID of the event the fixture relates to
      */
-    protected $seminarUid = 0;
+    private $seminarUid = 0;
 
     /**
      * @var \Tx_Seminars_OldModel_Event
      */
-    protected $seminar = null;
+    private $seminar = null;
 
     protected function setUp()
     {

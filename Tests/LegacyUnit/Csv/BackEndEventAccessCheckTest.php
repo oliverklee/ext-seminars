@@ -14,17 +14,17 @@ class Tx_Seminars_Tests_Unit_Csv_BackEndEventAccessCheckTest extends TestCase
     /**
      * @var \Tx_Seminars_Csv_BackEndEventAccessCheck
      */
-    protected $subject = null;
+    private $subject = null;
 
     /**
      * @var PHPUnit_Framework_MockObject_MockObject|BackendUserAuthentication
      */
-    protected $backEndUser = null;
+    private $backEndUser = null;
 
     /**
      * @var BackendUserAuthentication
      */
-    protected $backEndUserBackup = null;
+    private $backEndUserBackup = null;
 
     protected function setUp()
     {

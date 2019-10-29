@@ -12,12 +12,12 @@ class Tx_Seminars_Tests_Unit_Mapper_PaymentMethodTest extends TestCase
     /**
      * @var \Tx_Oelib_TestingFramework
      */
-    private $testingFramework;
+    private $testingFramework = null;
 
     /**
      * @var \Tx_Seminars_Mapper_PaymentMethod
      */
-    private $subject;
+    private $subject = null;
 
     protected function setUp()
     {
