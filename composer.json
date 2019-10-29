@@ -64,6 +64,7 @@
         "preferred-install": {
             "*": "dist"
         },
+        "process-timeout": 1000,
         "vendor-dir": ".Build/vendor"
     },
     "scripts": {
