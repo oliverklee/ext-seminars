@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Allow longer execution time for Composer scripts (#255)
 - Use the new TypoScript file paths in the userfunc tests (#253)
 - Mark tests that do not contain any assertions (#252)
 - Explicitly add transitive dependencies (#274)
