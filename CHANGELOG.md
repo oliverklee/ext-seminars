@@ -22,6 +22,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop support for TYPO3 7.6 (#248)
 
 ### Fixed
+- Fix the path to the content element icon (#269)
 - Use the correct namespace for test cases (#268)
 - Stop using removed oelib functionality (#265)
 - Allow longer execution time for Composer scripts (#255)
