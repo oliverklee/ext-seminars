@@ -4,7 +4,6 @@ namespace OliverKlee\Seminars\BackEnd;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 /**
  * This class creates an events list in the back end.
@@ -189,7 +188,7 @@ class EventsList extends AbstractList
             $this->template->setMarker(
                 'show_registrations',
                 (
-                (!$event->isHidden()
+                    (!$event->isHidden()
                     && $event->needsRegistration()
                     && $event->hasAttendances())
                     ? $this->createEventRegistrationsLink($event) : ''

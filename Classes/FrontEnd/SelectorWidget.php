@@ -626,9 +626,9 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
 
         $currentYear = (int)date('Y');
         $targetYear = $currentYear + $this->getConfValueInteger(
-                'numberOfYearsInDateFilter',
-                's_listView'
-            );
+            'numberOfYearsInDateFilter',
+            's_listView'
+        );
 
         for ($year = $currentYear; $year < $targetYear; $year++) {
             $result['year'][$year] = $year;

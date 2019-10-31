@@ -647,15 +647,15 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         if ($eventId) {
             $linkConfiguration['additionalParams']
                 = GeneralUtility::implodeArrayForUrl(
-                'tx_seminars_pi1',
-                [
+                    'tx_seminars_pi1',
+                    [
                     'seminar' => $eventId,
                     'action' => 'register',
                 ],
-                '',
-                false,
-                true
-            );
+                    '',
+                    false,
+                    true
+                );
         }
 
         $redirectUrl = GeneralUtility::locationHeaderUrl(
@@ -2314,9 +2314,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
     {
         $label = $this->translate('label_' . $fieldName);
         if (($fieldName === 'price_regular') && $this->getConfValueBoolean(
-                'generalPriceInList',
-                's_template_special'
-            )) {
+            'generalPriceInList',
+            's_template_special'
+        )) {
             $label = $this->translate('label_price_general');
         }
 
@@ -2825,8 +2825,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
     {
         $isCsvExportOfRegistrationsInMyVipEventsViewAllowed
             = $this->getConfValueBoolean(
-            'allowCsvExportOfRegistrationsInMyVipEventsView'
-        );
+                'allowCsvExportOfRegistrationsInMyVipEventsView'
+            );
 
         if (($whatToDisplay != 'my_vip_events')
             || !$isCsvExportOfRegistrationsInMyVipEventsViewAllowed

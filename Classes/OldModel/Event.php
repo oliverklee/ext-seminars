@@ -806,7 +806,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string
      */
-    private function renderSpeakerImage(\Tx_Seminars_OldModel_Speaker $speaker, \Tx_Oelib_TemplateHelper $plugin) {
+    private function renderSpeakerImage(\Tx_Seminars_OldModel_Speaker $speaker, \Tx_Oelib_TemplateHelper $plugin)
+    {
         $imageConfiguration = [
             'altText' => $plugin->translate('speakerImage.alt'),
             'titleText' => $plugin->translate('speakerImage.alt'),
@@ -2548,10 +2549,10 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             // the padding and break the line directly after the label.
             if ($value != '') {
                 $result .= str_pad(
-                        $currentLabel . ': ',
-                        $maxLength + 2,
-                        ' '
-                    ) . $value . LF;
+                    $currentLabel . ': ',
+                    $maxLength + 2,
+                    ' '
+                ) . $value . LF;
             } else {
                 $result .= $currentLabel . ':' . LF;
             }
@@ -2891,9 +2892,9 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
                 break;
             case 'my_vip_events':
                 $result = $isLoggedIn && $this->isUserVip(
-                        $currentUserUid,
-                        $defaultEventVipsFeGroupID
-                    ) && $hasVipListPid;
+                    $currentUserUid,
+                    $defaultEventVipsFeGroupID
+                ) && $hasVipListPid;
                 break;
             case 'list_vip_registrations':
                 $result = $isLoggedIn && $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupID);
@@ -3079,8 +3080,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     public function calculateStatistics()
     {
         $this->numberOfAttendances = $this->countAttendances(
-                'registration_queue=0'
-            ) + $this->getOfflineRegistrations();
+            'registration_queue=0'
+        ) + $this->getOfflineRegistrations();
         $this->numberOfAttendancesPaid = $this->countAttendances(
             'datepaid <> 0 AND registration_queue = 0'
         );
@@ -4135,8 +4136,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         }
 
         $canUnregisterByQueue = $this->getConfValueBoolean(
-                'allowUnregistrationWithEmptyWaitingList'
-            ) || (
+            'allowUnregistrationWithEmptyWaitingList'
+        ) || (
                 $this->hasRegistrationQueue()
                 && $this->hasAttendancesOnRegistrationQueue()
             );
@@ -4983,8 +4984,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         }
 
         $secondsForUnregistration = \Tx_Oelib_Time::SECONDS_PER_DAY * $this->getConfValueInteger(
-                'unregistrationDeadlineDaysBeforeBeginDate'
-            );
+            'unregistrationDeadlineDaysBeforeBeginDate'
+        );
 
         return $this->getBeginDateAsTimestamp() - $secondsForUnregistration;
     }

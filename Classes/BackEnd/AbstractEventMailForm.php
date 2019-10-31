@@ -579,8 +579,8 @@ abstract class AbstractEventMailForm
         $introduction = sprintf($this->getLanguageService()->getLL($prefix . 'introduction'), $eventDetails);
 
         return '%salutation' . LF . LF . $introduction . LF . $this->getLanguageService()->getLL(
-                $prefix . 'messageBody'
-            );
+            $prefix . 'messageBody'
+        );
     }
 
     /**
