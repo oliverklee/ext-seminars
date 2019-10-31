@@ -2,7 +2,6 @@
 
 use OliverKlee\PhpUnit\TestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 
 /**
  * Test case.
@@ -5657,11 +5656,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         $this->subject->setRecordType(\Tx_Seminars_Model_Event::TYPE_COMPLETE);
         $this->subject->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
-        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8007000) {
-            self::assertContains('overlay-endtime.svg', $this->subject->getRecordIcon());
-        } else {
-            self::assertContains('overlay-scheduled.svg', $this->subject->getRecordIcon());
-        }
+        self::assertContains('overlay-endtime.svg', $this->subject->getRecordIcon());
     }
 
     /**
@@ -5672,11 +5667,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         $this->subject->setRecordType(\Tx_Seminars_Model_Event::TYPE_TOPIC);
         $this->subject->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
-        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8007000) {
-            self::assertContains('overlay-endtime.svg', $this->subject->getRecordIcon());
-        } else {
-            self::assertContains('overlay-scheduled.svg', $this->subject->getRecordIcon());
-        }
+        self::assertContains('overlay-endtime.svg', $this->subject->getRecordIcon());
     }
 
     /**
@@ -5687,11 +5678,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         $this->subject->setRecordType(\Tx_Seminars_Model_Event::TYPE_DATE);
         $this->subject->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
-        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8007000) {
-            self::assertContains('overlay-endtime.svg', $this->subject->getRecordIcon());
-        } else {
-            self::assertContains('overlay-scheduled.svg', $this->subject->getRecordIcon());
-        }
+        self::assertContains('overlay-endtime.svg', $this->subject->getRecordIcon());
     }
 
     /*
