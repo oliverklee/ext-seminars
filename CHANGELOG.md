@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop unneeded Travis CI configuration settings (#258)
 
 ### Fixed
+- Use the correct namespace for test cases (#268)
 - Allow longer execution time for Composer scripts (#255)
 - Use the new TypoScript file paths in the userfunc tests (#253)
 - Mark tests that do not contain any assertions (#252)
