@@ -1,8 +1,6 @@
 <?php
 defined('TYPO3_MODE') or die();
 
-$dateTimeRenderType =
-
 $tca = [
     'ctrl' => [
         'title' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_attendances',
