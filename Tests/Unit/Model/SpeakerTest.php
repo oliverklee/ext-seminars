@@ -1,6 +1,6 @@
 <?php
 
-namespace OliverKlee\Seminars\Tests\Functional\Model;
+namespace OliverKlee\Seminars\Tests\Unit\Model;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 
