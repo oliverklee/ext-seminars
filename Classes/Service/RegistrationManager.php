@@ -218,8 +218,8 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         // A user can register either if the event allows multiple registrations
         // or the user isn't registered yet and isn't blocked either.
         return $event->allowsMultipleRegistrations() || (!$this->isUserRegistered(
-                    $event
-                ) && !$this->isUserBlocked($event));
+            $event
+        ) && !$this->isUserBlocked($event));
     }
 
     /**

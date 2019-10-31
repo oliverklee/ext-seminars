@@ -991,8 +991,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
                 break;
             case 'attendees_names':
                 if ($this->isFormFieldEnabled('registered_themselves') && ($this->getFormValue(
-                            'registered_themselves'
-                        ) == '1')) {
+                    'registered_themselves'
+                ) == '1')) {
                     /** @var \Tx_Seminars_Model_FrontEndUser $user */
                     $user = \Tx_Oelib_FrontEndLoginManager::getInstance(
                     )->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);

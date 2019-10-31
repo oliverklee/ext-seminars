@@ -907,9 +907,9 @@ class Tx_Seminars_BagBuilder_Event extends \Tx_Seminars_BagBuilder_Abstract
         $this->checkParametersForMmSearchFunctions($quotedSearchWord, $searchFieldKey, $foreignTable, $mmTable);
 
         $matchQueryPart = 'MATCH (' . implode(
-                ',',
-                self::$searchFieldList[$searchFieldKey]
-            ) . ') AGAINST (' . $quotedSearchWord
+            ',',
+            self::$searchFieldList[$searchFieldKey]
+        ) . ') AGAINST (' . $quotedSearchWord
             . ' IN BOOLEAN MODE)';
         $foreignUids = \Tx_Oelib_Db::selectColumnForMultiple(
             'uid',
@@ -1186,11 +1186,11 @@ class Tx_Seminars_BagBuilder_Event extends \Tx_Seminars_BagBuilder_Abstract
         if ($matchingTargetGroups != '') {
             $eventsWithMatchingTargetGroup
                 = \Tx_Oelib_Db::selectColumnForMultiple(
-                'uid_local',
-                'tx_seminars_seminars_target_groups_mm',
-                'uid_foreign IN (' . $matchingTargetGroups . ')',
-                'uid_local'
-            );
+                    'uid_local',
+                    'tx_seminars_seminars_target_groups_mm',
+                    'uid_foreign IN (' . $matchingTargetGroups . ')',
+                    'uid_local'
+                );
 
             $matchingEventsUids = array_merge(
                 $eventsWithMatchingTargetGroup,

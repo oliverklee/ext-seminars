@@ -118,9 +118,9 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends \Tx_Seminars_OldMod
                     // Are the years different? Then includes the complete begin
                     // date.
                     if (strftime(
-                            $this->getConfValueString('dateFormatY'),
-                            $beginDate
-                        ) != strftime(
+                        $this->getConfValueString('dateFormatY'),
+                        $beginDate
+                    ) != strftime(
                             $this->getConfValueString('dateFormatY'),
                             $endDate
                         )
@@ -129,9 +129,9 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends \Tx_Seminars_OldMod
                     } else {
                         // Are the months different? Then include day and month.
                         if (strftime(
-                                $this->getConfValueString('dateFormatM'),
-                                $beginDate
-                            ) != strftime(
+                            $this->getConfValueString('dateFormatM'),
+                            $beginDate
+                        ) != strftime(
                                 $this->getConfValueString('dateFormatM'),
                                 $endDate
                             )
