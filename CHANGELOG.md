@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Explicitly add transitive dependencies (#274)
 
 ## 2.2.1
 
