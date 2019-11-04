@@ -22,6 +22,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop support for TYPO3 7.6 (#248, #272)
 
 ### Fixed
+- Explicitly add transitive dependencies (#273)
 - Drop a left-over bogus assigment from the TCA (#271)
 - Fix the path to the content element icon (#269)
 - Use the correct namespace for test cases (#268)
