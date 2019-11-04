@@ -79,6 +79,8 @@ organizations and persons:
 - `Jugendbildungsstätte Windberg, 94336 Windberg (Bay. Wald), Seminarhaus, Fortbildungen, Tagungshaus, Seminare
   <http://www.jugendbildungsstaette-windberg.de/>`_
 
+- `jweiland.net <https://jweiland.net>`_
+
 - `Kienast Datenverarbeitung <http://www.kienastdv.de/>`_
 
 - `Klare Köpfe <http://klarekoepfe.de/>`_
@@ -106,6 +108,8 @@ organizations and persons:
 - `m\|r\|o\|net <https://www.mronet.at/>`_
 
 - `netboot internet solutions <http://www.netboot.ch/>`_
+
+- `MLVB - Montessori Landesverband Bayern <https://www.montessoribayern.de/>`_
 
 - `net/bureau new media services GmbH & Co. KG <https://www.netbureau.de/>`_
 
