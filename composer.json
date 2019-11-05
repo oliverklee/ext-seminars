@@ -26,27 +26,26 @@
     },
     "require": {
         "php": "~7.0 || ~7.1 || ~7.2",
-        "typo3/cms-core": "^8.7.9",
+        "digedag/rn-base": "^1.8.7",
+        "dmk/mkforms": "^3.0.21",
+        "oliverklee/oelib": "^2.3.3 || ^3.0",
+        "psr/http-message": "^1.0",
+        "sjbr/static-info-tables": "^6.5",
         "typo3/cms-backend": "^8.7",
+        "typo3/cms-core": "^8.7.9",
         "typo3/cms-extbase": "^8.7",
         "typo3/cms-fluid": "^8.7",
         "typo3/cms-frontend": "^8.7",
-        "typo3/cms-lang": "^8.7",
-        "psr/http-message": "^1.0",
-        "sjbr/static-info-tables": "^6.5",
-        "oliverklee/oelib": "^2.3.3 || ^3.0",
-        "dmk/mkforms": "^3.0.21",
-        "digedag/rn-base": "^1.8.7"
+        "typo3/cms-lang": "^8.7"
     },
     "require-dev": {
-        "typo3/cms-scheduler": "^7.6.23 || ^8.7.9",
         "helhum/typo3-console": "^4.9.6",
-
-        "oliverklee/phpunit": "^6.5.14",
+        "mikey179/vfsstream": "^1.6.7",
         "nimut/testing-framework": "^4.1.8",
-        "phpunit/phpunit": "^6.5.14",
+        "oliverklee/phpunit": "^6.5.14",
         "phpspec/prophecy": "^1.9.0",
-        "mikey179/vfsstream": "^1.6.7"
+        "phpunit/phpunit": "^6.5.14",
+        "typo3/cms-scheduler": "^8.7"
     },
     "conflict": {
         "sjbr/static-info-tables": "6.7.1"
@@ -69,6 +68,7 @@
         "preferred-install": {
             "*": "dist"
         },
+        "sort-packages": true,
         "process-timeout": 1000,
         "vendor-dir": ".Build/vendor"
     },
