@@ -39,8 +39,8 @@
         "typo3/cms-lang": "^8.7"
     },
     "require-dev": {
-        "helhum/typo3-console": "^4.9.6",
-        "mikey179/vfsstream": "^1.6.7",
+        "helhum/typo3-console": "^5.7.2",
+        "mikey179/vfsstream": "^1.6.8",
         "nimut/testing-framework": "^4.1.8",
         "oliverklee/phpunit": "^6.5.14",
         "phpspec/prophecy": "^1.9.0",
