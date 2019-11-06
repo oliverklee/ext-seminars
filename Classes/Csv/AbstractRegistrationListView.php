@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -60,7 +61,7 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends \Tx_Seminars
      *
      * @return int the event UID, will be >= 0
      */
-    protected function getEventUid()
+    protected function getEventUid(): int
     {
         return $this->eventUid;
     }
@@ -70,7 +71,7 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends \Tx_Seminars
      *
      * @return bool
      */
-    protected function hasEventUid()
+    protected function hasEventUid(): bool
     {
         return $this->getEventUid() > 0;
     }
@@ -126,7 +127,7 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends \Tx_Seminars
      *
      * @return string[] the translated field names in an array, will be empty if no field names were given
      */
-    protected function createLocalizedCsvHeadingsForOneTable(array $fieldNames, $localizationPrefix)
+    protected function createLocalizedCsvHeadingsForOneTable(array $fieldNames, $localizationPrefix): array
     {
         $translations = [];
         $translator = $this->getInitializedTranslator();
@@ -175,7 +176,7 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends \Tx_Seminars
      *
      * @return \Tx_Seminars_BagBuilder_Registration the bag builder with some preset limitations
      */
-    protected function createRegistrationBagBuilder()
+    protected function createRegistrationBagBuilder(): \Tx_Seminars_BagBuilder_Registration
     {
         /** @var \Tx_Seminars_BagBuilder_Registration $registrationBagBuilder */
         $registrationBagBuilder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Registration::class);
@@ -208,7 +209,7 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends \Tx_Seminars
      *
      * @throws \RuntimeException
      */
-    protected function getRegistrationsCsvList(\Tx_Seminars_BagBuilder_Registration $builder)
+    protected function getRegistrationsCsvList(\Tx_Seminars_BagBuilder_Registration $builder): array
     {
         $csvLines = [];
         /** @var $bag \Tx_Seminars_Bag_Registration */
@@ -232,7 +233,7 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends \Tx_Seminars
      *
      * @return string[] the data for the keys provided in $keys (may be empty)
      */
-    protected function createCsvColumnsForRegistration(\Tx_Seminars_OldModel_Registration $model)
+    protected function createCsvColumnsForRegistration(\Tx_Seminars_OldModel_Registration $model): array
     {
         $csvLines = [];
 
@@ -251,7 +252,7 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends \Tx_Seminars
      *
      * @return string[] the data for the keys provided in $keys (may be empty)
      */
-    protected function createCsvColumnsForFrontEndUser(\Tx_Seminars_OldModel_Registration $model)
+    protected function createCsvColumnsForFrontEndUser(\Tx_Seminars_OldModel_Registration $model): array
     {
         $csvLines = [];
 

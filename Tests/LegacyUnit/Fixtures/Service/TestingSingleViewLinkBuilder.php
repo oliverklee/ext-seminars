@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
@@ -29,7 +30,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder exten
      *         the single view page UID/URL for $event, will be empty if neither
      *         the event nor the configuration has any single view page set
      */
-    public function getSingleViewPageForEvent(\Tx_Seminars_Model_Event $event)
+    public function getSingleViewPageForEvent(\Tx_Seminars_Model_Event $event): string
     {
         return parent::getSingleViewPageForEvent($event);
     }
@@ -41,7 +42,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder exten
      *         TRUE if a single view page has been set in the configuration,
      *         FALSE otherwise
      */
-    public function configurationHasSingleViewPage()
+    public function configurationHasSingleViewPage(): bool
     {
         return parent::configurationHasSingleViewPage();
     }

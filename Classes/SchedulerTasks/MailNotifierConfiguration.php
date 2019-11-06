@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 namespace OliverKlee\Seminars\SchedulerTasks;
 
 use TYPO3\CMS\Core\Messaging\FlashMessage;
@@ -83,7 +84,7 @@ class MailNotifierConfiguration implements AdditionalFieldProviderInterface
      */
     protected function getLanguageService()
     {
-        return isset($GLOBALS['LANG']) ? $GLOBALS['LANG'] : null;
+        return $GLOBALS['LANG'] ?? null;
     }
 
     /**

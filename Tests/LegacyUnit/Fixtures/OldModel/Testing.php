@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /**
  * This class represents a test object from the database.
@@ -19,7 +20,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing extends \Tx_Seminars_OldM
      *
      * @return void
      */
-    public function setBooleanTest($test)
+    public function setBooleanTest(bool $test)
     {
         $this->setRecordPropertyBoolean('test', $test);
     }
@@ -30,7 +31,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing extends \Tx_Seminars_OldM
      * @return bool TRUE if the test field of this record is set, FALSE
      *                 otherwise
      */
-    public function getBooleanTest()
+    public function getBooleanTest(): bool
     {
         return $this->getRecordPropertyBoolean('test');
     }
@@ -46,7 +47,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing extends \Tx_Seminars_OldM
      *
      * @return int the number of created m:n records
      */
-    public function createMmRecords($mmTable, array $references)
+    public function createMmRecords(string $mmTable, array $references): int
     {
         return parent::createMmRecords($mmTable, $references);
     }

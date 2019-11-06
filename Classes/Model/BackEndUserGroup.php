@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /**
  * This class represents a back-end user group.
@@ -13,7 +14,7 @@ class Tx_Seminars_Model_BackEndUserGroup extends \Tx_Oelib_Model_BackEndUserGrou
      * @return int the PID for the storage of new events, will be 0 if no
      *                 PID has been set
      */
-    public function getEventFolder()
+    public function getEventFolder(): int
     {
         return $this->getAsInteger('tx_seminars_events_folder');
     }
@@ -24,7 +25,7 @@ class Tx_Seminars_Model_BackEndUserGroup extends \Tx_Oelib_Model_BackEndUserGrou
      * @return int the PID for the storage of new registrations, will be 0
      *                 if no PID has been set
      */
-    public function getRegistrationFolder()
+    public function getRegistrationFolder(): int
     {
         return $this->getAsInteger('tx_seminars_registrations_folder');
     }
@@ -38,7 +39,7 @@ class Tx_Seminars_Model_BackEndUserGroup extends \Tx_Oelib_Model_BackEndUserGrou
      * @return int the PID for the storage of new auxiliary records, will
      *                 be 0 if no PID has been set
      */
-    public function getAuxiliaryRecordFolder()
+    public function getAuxiliaryRecordFolder(): int
     {
         return $this->getAsInteger('tx_seminars_auxiliaries_folder');
     }

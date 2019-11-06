@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /**
  * This class represents an organizer.
@@ -38,7 +39,7 @@ class Tx_Seminars_Model_Organizer extends \Tx_Oelib_Model implements \Tx_Oelib_I
      *
      * @return string our homepage, may be empty
      */
-    public function getHomepage()
+    public function getHomepage(): string
     {
         return $this->getAsString('homepage');
     }
@@ -60,7 +61,7 @@ class Tx_Seminars_Model_Organizer extends \Tx_Oelib_Model implements \Tx_Oelib_I
      *
      * @return bool TRUE if this organizer has a homepage, FALSE otherwise
      */
-    public function hasHomepage()
+    public function hasHomepage(): bool
     {
         return $this->hasString('homepage');
     }
@@ -96,7 +97,7 @@ class Tx_Seminars_Model_Organizer extends \Tx_Oelib_Model implements \Tx_Oelib_I
      *
      * @return string our e-mail footer, may be empty
      */
-    public function getEMailFooter()
+    public function getEMailFooter(): string
     {
         return $this->getAsString('email_footer');
     }
@@ -118,7 +119,7 @@ class Tx_Seminars_Model_Organizer extends \Tx_Oelib_Model implements \Tx_Oelib_I
      *
      * @return bool TRUE if this organizer has an e-mail footer, FALSE otherwise
      */
-    public function hasEMailFooter()
+    public function hasEMailFooter(): bool
     {
         return $this->hasString('email_footer');
     }
@@ -128,7 +129,7 @@ class Tx_Seminars_Model_Organizer extends \Tx_Oelib_Model implements \Tx_Oelib_I
      *
      * @return int our attendances PID, will be >= 0
      */
-    public function getAttendancesPID()
+    public function getAttendancesPID(): int
     {
         return $this->getAsInteger('attendances_pid');
     }
@@ -154,7 +155,7 @@ class Tx_Seminars_Model_Organizer extends \Tx_Oelib_Model implements \Tx_Oelib_I
      *
      * @return bool TRUE if this organizer has an attendances PID, FALSE otherwise
      */
-    public function hasAttendancesPID()
+    public function hasAttendancesPID(): bool
     {
         return $this->hasInteger('attendances_pid');
     }
@@ -164,7 +165,7 @@ class Tx_Seminars_Model_Organizer extends \Tx_Oelib_Model implements \Tx_Oelib_I
      *
      * @return bool TRUE if this organizer has a description, FALSE otherwise
      */
-    public function hasDescription()
+    public function hasDescription(): bool
     {
         return $this->hasString('description');
     }
@@ -175,7 +176,7 @@ class Tx_Seminars_Model_Organizer extends \Tx_Oelib_Model implements \Tx_Oelib_I
      * @return string the description of the organizer in raw format, will be
      *                empty if organizer has no description
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->getAsString('description');
     }
@@ -185,7 +186,7 @@ class Tx_Seminars_Model_Organizer extends \Tx_Oelib_Model implements \Tx_Oelib_I
      *
      * @return string our name, will not be empty
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->getName();
     }

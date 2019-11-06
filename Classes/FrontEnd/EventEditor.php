@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -152,7 +153,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * @return string HTML for the FE editor with the formatted attachment
      *                list if there are attached files, will not be empty
      */
-    private function getHtmlWithAttachedFilesList(\Tx_Oelib_Template $template)
+    private function getHtmlWithAttachedFilesList(\Tx_Oelib_Template $template): string
     {
         foreach ([
             'label_delete',
@@ -203,7 +204,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *               table as an array with the keys "caption" (for the
      *               title) and "value" (for the UID)
      */
-    public function populateListCategories()
+    public function populateListCategories(): array
     {
         /** @var \Tx_Seminars_Mapper_Category $mapper */
         $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Category::class);
@@ -219,7 +220,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *               table as an array with the keys "caption" (for the
      *               title) and "value" (for the UID)
      */
-    public function populateListEventTypes()
+    public function populateListEventTypes(): array
     {
         /** @var \Tx_Seminars_Mapper_EventType $mapper */
         $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_EventType::class);
@@ -235,7 +236,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *               as an array with the keys "caption" (for the title)
      *               and "value" (for the UID)
      */
-    public function populateListLodgings()
+    public function populateListLodgings(): array
     {
         /** @var \Tx_Seminars_Mapper_Lodging $mapper */
         $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Lodging::class);
@@ -251,7 +252,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *               as an array with the keys "caption" (for the title)
      *               and "value" (for the UID)
      */
-    public function populateListFoods()
+    public function populateListFoods(): array
     {
         /** @var \Tx_Seminars_Mapper_Food $mapper */
         $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Food::class);
@@ -267,7 +268,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *               table as an array with the keys "caption" (for the
      *               title) and "value" (for the UID)
      */
-    public function populateListPaymentMethods()
+    public function populateListPaymentMethods(): array
     {
         /** @var \Tx_Seminars_Mapper_PaymentMethod $mapper */
         $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_PaymentMethod::class);
@@ -283,7 +284,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *               table as an array with the keys "caption" (for the
      *               title) and "value" (for the UID)
      */
-    public function populateListOrganizers()
+    public function populateListOrganizers(): array
     {
         $frontEndUser = self::getLoggedInUser();
 
@@ -303,7 +304,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return \Tx_Seminars_Model_FrontEndUser
      */
-    protected static function getLoggedInUser()
+    protected static function getLoggedInUser(): \Tx_Seminars_Model_FrontEndUser
     {
         return \Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
     }
@@ -319,7 +320,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *               as an array with the keys "caption" (for the title)
      *               and "value" (for the UID)
      */
-    public function populateListPlaces(array $items, $unused = null, \tx_mkforms_forms_Base $form = null)
+    public function populateListPlaces(array $items, $unused = null, \tx_mkforms_forms_Base $form = null): array
     {
         $result = $items;
 
@@ -392,7 +393,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     public function populateListSpeakers(
         array $parameters = [],
         \tx_mkforms_forms_Base $form = null
-    ) {
+    ): array {
         $result = [];
 
         /** @var \Tx_Seminars_Mapper_Speaker $speakerMapper */
@@ -486,7 +487,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         array $items,
         $unused = null,
         \tx_mkforms_forms_Base $form = null
-    ) {
+    ): array {
         $result = $items;
 
         /** @var \Tx_Seminars_Mapper_Checkbox $checkboxMapper */
@@ -560,7 +561,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         array $items,
         $unused = null,
         \tx_mkforms_forms_Base $form = null
-    ) {
+    ): array {
         $result = $items;
 
         /** @var \Tx_Seminars_Mapper_TargetGroup $targetGroupMapper */
@@ -630,7 +631,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * @return string complete URL of the FE page with a message or, if
      *                "submit_and_stay" was clicked, of the current page
      */
-    public function getEventSuccessfullySavedUrl()
+    public function getEventSuccessfullySavedUrl(): string
     {
         $additionalParameters = '';
 
@@ -667,7 +668,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return string locallang key of an error message, will be an empty string if access was granted
      */
-    private function checkAccess()
+    private function checkAccess(): string
     {
         if (!Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
             return 'message_notLoggedIn';
@@ -698,7 +699,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
             $hasAccess = $isUserOwner || ($mayManagersEditTheirEvents && $isUserVip);
         } else {
             $eventEditorGroupUid = $this->getConfValueInteger('eventEditorFeGroupID', 's_fe_editing');
-            $hasAccess = ($eventEditorGroupUid !== 0) && $user->hasGroupMembership($eventEditorGroupUid);
+            $hasAccess = ($eventEditorGroupUid !== 0) && $user->hasGroupMembership((string)$eventEditorGroupUid);
         }
 
         return $hasAccess ? '' : 'message_noAccessToEventEditor';
@@ -715,12 +716,12 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *                to enter and edit events, a localized error message
      *                otherwise
      */
-    public function hasAccessMessage()
+    public function hasAccessMessage(): string
     {
         $result = '';
         $errorMessage = $this->checkAccess();
 
-        if ($errorMessage != '') {
+        if ($errorMessage !== '') {
             $this->setMarker('error_text', $this->translate($errorMessage));
             $result = $this->getSubpart('ERROR_VIEW');
         }
@@ -950,7 +951,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * @see unifyDecimalSeparators(), processAttachments(),
      *      purgeNonSeminarsFields(), addAdministrativeData()
      */
-    public function modifyDataToInsert(array $formData)
+    public function modifyDataToInsert(array $formData): array
     {
         $modifiedFormData = $formData;
 
@@ -979,7 +980,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return bool TRUE if the provided file is valid, FALSE otherwise
      */
-    public function checkFile(array $valueToCheck)
+    public function checkFile(array $valueToCheck): bool
     {
         $this->validationError = '';
 
@@ -1069,7 +1070,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * @return string localized validation error message, will be empty if
      *                $this->validationError was empty
      */
-    public function getFileUploadErrorMessage()
+    public function getFileUploadErrorMessage(): string
     {
         return $this->validationError;
     }
@@ -1082,7 +1083,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *               event editor without the prefix FE_EDITOR_, will be empty
      *               if all subparts should be shown.
      */
-    private function getHiddenSubparts()
+    private function getHiddenSubparts(): array
     {
         /** @var \Tx_Oelib_Visibility_Tree $visibilityTree */
         $visibilityTree = GeneralUtility::makeInstance(
@@ -1100,7 +1101,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * @return array the template's subpart structure for use with
      *               \Tx_Oelib_Visibility_Tree
      */
-    private function createTemplateStructure()
+    private function createTemplateStructure(): array
     {
         return [
             'subtitle' => false,
@@ -1187,7 +1188,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return string[] the keys of the fields which should be shown, will be empty if all fields should be hidden
      */
-    private function getFieldsToShow()
+    private function getFieldsToShow(): array
     {
         $fieldsToShow = GeneralUtility::trimExplode(
             ',',
@@ -1211,7 +1212,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * @return bool TRUE if front-end editing of the given related record
      *                 type is allowed, FALSE otherwise
      */
-    public function isFrontEndEditingOfRelatedRecordsAllowed(array $parameters)
+    public function isFrontEndEditingOfRelatedRecordsAllowed(array $parameters): bool
     {
         $relatedRecordType = $parameters['relatedRecordType'];
 
@@ -1277,7 +1278,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return bool TRUE if the field is required, FALSE otherwise
      */
-    private function isFieldRequired(array $field)
+    private function isFieldRequired(array $field): bool
     {
         if ($field['elementName'] == '') {
             throw new \InvalidArgumentException('The given field name was empty.', 1333293167);
@@ -1298,7 +1299,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * @return bool TRUE if this field is not empty or not required, FALSE
      *                 otherwise
      */
-    public function validateString(array $formData)
+    public function validateString(array $formData): bool
     {
         if (!$this->isFieldRequired($formData)) {
             return true;
@@ -1319,7 +1320,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * @return bool TRUE if this field is not zero or not required, FALSE
      *                 otherwise
      */
-    public function validateInteger(array $formData)
+    public function validateInteger(array $formData): bool
     {
         if (!$this->isFieldRequired($formData)) {
             return true;
@@ -1340,7 +1341,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * @return bool TRUE if this field is not zero or not required, FALSE
      *                 otherwise
      */
-    public function validateCheckboxes(array $formData)
+    public function validateCheckboxes(array $formData): bool
     {
         if (!$this->isFieldRequired($formData)) {
             return true;
@@ -1361,7 +1362,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * @return bool TRUE if this field contains a valid date or if this field
      *                 is not required, FALSE otherwise
      */
-    public function validateDate(array $formData)
+    public function validateDate(array $formData): bool
     {
         if (!$this->isFieldRequired($formData)) {
             return true;
@@ -1382,7 +1383,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * @return bool TRUE if this field contains a valid price or if this
      *                 field is not required, FALSE otherwise
      */
-    public function validatePrice(array $formData)
+    public function validatePrice(array $formData): bool
     {
         if (!$this->isFieldRequired($formData)) {
             return true;
@@ -1445,7 +1446,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * @return string the e-mail body for the publishing e-mail, will not be
      *                empty
      */
-    private function createEMailContent(\Tx_Seminars_Model_Event $event)
+    private function createEMailContent(\Tx_Seminars_Model_Event $event): string
     {
         $this->getTemplateCode(true);
         $this->setLabels();
@@ -1484,7 +1485,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return string the URL for the plain text e-mail, will not be empty
      */
-    private function createReviewUrl()
+    private function createReviewUrl(): string
     {
         $url = $this->cObj->typoLink_URL(
             [
@@ -1536,16 +1537,16 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return string the e-mail body for the notification e-mail, will not be empty
      */
-    protected function createAdditionalEmailContent()
+    protected function createAdditionalEmailContent(): string
     {
         $this->getTemplateCode(true);
         $this->setLabels();
 
         $markerPrefix = 'save_event';
 
-        $title = isset($this->savedFormData['title']) ? $this->savedFormData['title'] : '';
+        $title = $this->savedFormData['title'] ?? '';
         $this->setMarker('title', $title, $markerPrefix);
-        $description = isset($this->savedFormData['description']) ? $this->savedFormData['description'] : '';
+        $description = $this->savedFormData['description'] ?? '';
         $this->setMarker('description', $description, $markerPrefix);
 
         $beginDateAsTimeStamp = isset($this->savedFormData['begin_date']) ? (int)$this->savedFormData['begin_date'] : 0;
@@ -1570,7 +1571,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return array[] calls to be executed on the client
      */
-    public static function createNewPlace(\tx_mkforms_forms_Base $form)
+    public static function createNewPlace(\tx_mkforms_forms_Base $form): array
     {
         /** @var \formidableajax $ajax */
         $ajax = $form->getMajix();
@@ -1640,7 +1641,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return array[] calls to be executed on the client
      */
-    public static function updatePlace(\tx_mkforms_forms_Base $form)
+    public static function updatePlace(\tx_mkforms_forms_Base $form): array
     {
         /** @var \formidableajax $ajax */
         $ajax = $form->getMajix();
@@ -1711,7 +1712,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     private static function validatePlace(
         \tx_mkforms_forms_Base $form,
         array $formData
-    ) {
+    ): array {
         $validationErrors = [];
 
         $keys = [
@@ -1748,7 +1749,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * @return bool TRUE if the field with the key $key is required,
      *                 FALSE otherwise
      */
-    private static function isPlaceFieldRequired($key)
+    private static function isPlaceFieldRequired($key): bool
     {
         if ($key == '') {
             throw new \InvalidArgumentException('$key must not be empty.');
@@ -1807,7 +1808,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return array[] calls to be executed on the client
      */
-    public static function showEditPlaceModalBox(\tx_mkforms_forms_Base $form, $placeUid)
+    public static function showEditPlaceModalBox(\tx_mkforms_forms_Base $form, $placeUid): array
     {
         if ($placeUid <= 0) {
             return $form->majixExecJs('alert("$placeUid must be >= 0.");');
@@ -1875,7 +1876,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return array the basic data as an associative array, will not be empty
      */
-    private static function createBasicAuxiliaryData()
+    private static function createBasicAuxiliaryData(): array
     {
         $owner = self::getLoggedInUser();
         $ownerPageUid = $owner->getAuxiliaryRecordsPid();
@@ -1899,7 +1900,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return array[] calls to be executed on the client
      */
-    public function createNewSpeaker(array $formData, \tx_mkforms_forms_Base $form)
+    public function createNewSpeaker(array $formData, \tx_mkforms_forms_Base $form): array
     {
         $formData = self::removePathFromWidgetData($formData, $form);
         $validationErrors = self::validateSpeaker(
@@ -1952,7 +1953,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return array[] calls to be executed on the client
      */
-    public function updateSpeaker(array $formData, \tx_mkforms_forms_Base $form)
+    public function updateSpeaker(array $formData, \tx_mkforms_forms_Base $form): array
     {
         $formData = self::removePathFromWidgetData($formData, $form);
         $frontEndUser = self::getLoggedInUser();
@@ -2002,7 +2003,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return array
      */
-    protected function repaintSpeakers(\tx_mkforms_forms_Base $form)
+    protected function repaintSpeakers(\tx_mkforms_forms_Base $form): array
     {
         $speakerTypes = [
             'speaker',
@@ -2037,7 +2038,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     private static function validateSpeaker(
         \tx_mkforms_forms_Base $form,
         array $formData
-    ) {
+    ): array {
         $validationErrors = [];
         if (trim($formData['title']) == '') {
             $validationErrors[] = $form->getConfigXML()->getLLLabel(
@@ -2103,7 +2104,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     public static function openEditSpeakerModalBox(
         array $params,
         \tx_mkforms_forms_Base $form
-    ) {
+    ): array {
         $speakerId = empty($params['uid']) ? 0 : (int)$params['uid'];
         return self::showEditSpeakerModalBox($form, $speakerId);
     }
@@ -2119,7 +2120,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     public static function showEditSpeakerModalBox(
         \tx_mkforms_forms_Base $form,
         $speakerUid
-    ) {
+    ): array {
         if ($speakerUid <= 0) {
             return $form->majixExecJs('alert("$speakerUid must be >= 0.");');
         }
@@ -2196,7 +2197,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return array[] calls to be executed on the client
      */
-    public static function createNewCheckbox(\tx_mkforms_forms_Base $form)
+    public static function createNewCheckbox(\tx_mkforms_forms_Base $form): array
     {
         /** @var \formidableajax $ajax */
         $ajax = $form->getMajix();
@@ -2259,7 +2260,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return array[] calls to be executed on the client
      */
-    public static function updateCheckbox(\tx_mkforms_forms_Base $form)
+    public static function updateCheckbox(\tx_mkforms_forms_Base $form): array
     {
         /** @var \formidableajax $ajax */
         $ajax = $form->getMajix();
@@ -2323,7 +2324,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     private static function validateCheckbox(
         \tx_mkforms_forms_Base $form,
         array $formData
-    ) {
+    ): array {
         $validationErrors = [];
         if (trim($formData['title']) == '') {
             $validationErrors[] = $form->getConfigXML()->getLLLabel(
@@ -2362,7 +2363,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     public static function showEditCheckboxModalBox(
         \tx_mkforms_forms_Base $form,
         $checkboxUid
-    ) {
+    ): array {
         if ($checkboxUid <= 0) {
             return $form->majixExecJs('alert("$checkboxUid must be >= 0.");');
         }
@@ -2415,7 +2416,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return array[] calls to be executed on the client
      */
-    public static function createNewTargetGroup(\tx_mkforms_forms_Base $form)
+    public static function createNewTargetGroup(\tx_mkforms_forms_Base $form): array
     {
         /** @var \formidableajax $ajax */
         $ajax = $form->getMajix();
@@ -2482,7 +2483,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return array[] calls to be executed on the client
      */
-    public static function updateTargetGroup(\tx_mkforms_forms_Base $form)
+    public static function updateTargetGroup(\tx_mkforms_forms_Base $form): array
     {
         /** @var \formidableajax $ajax */
         $ajax = $form->getMajix();
@@ -2550,7 +2551,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     private static function validateTargetGroup(
         \tx_mkforms_forms_Base $form,
         array $formData
-    ) {
+    ): array {
         $validationErrors = [];
         if (trim($formData['title']) == '') {
             $validationErrors[] = $form->getConfigXML()->getLLLabel(
@@ -2613,7 +2614,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     public static function showEditTargetGroupModalBox(
         \tx_mkforms_forms_Base $form,
         $targetGroupUid
-    ) {
+    ): array {
         if ($targetGroupUid <= 0) {
             return $form->majixExecJs('alert("$targetGroupUid must be >= 0.");');
         }
@@ -2670,7 +2671,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return array[] items as an array with the keys "caption" (for the title) and "value" (for the UID)
      */
-    public static function populateListCountries()
+    public static function populateListCountries(): array
     {
         $result = [];
 
@@ -2693,7 +2694,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return array[] items as an array with the keys "caption" (for the title) and "value" (for the UID)
      */
-    public static function populateListSkills()
+    public static function populateListSkills(): array
     {
         /** @var \Tx_Seminars_Mapper_Skill $mapper */
         $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Skill::class);
@@ -2712,7 +2713,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *         and "value" (for the UID), will be empty if an empty model list
      *         was provided
      */
-    public static function makeListToFormidableList(\Tx_Oelib_List $models)
+    public static function makeListToFormidableList(\Tx_Oelib_List $models): array
     {
         if ($models->isEmpty()) {
             return [];
@@ -2737,7 +2738,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * @return int the UID of the preselected organizer; if more than one
      *                 organizer is available, zero will be returned
      */
-    public function getPreselectedOrganizer()
+    public function getPreselectedOrganizer(): int
     {
         $availableOrganizers = $this->populateListOrganizers();
         if (count($availableOrganizers) !== 1) {
@@ -2754,7 +2755,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return int PID for the auxiliary records, may be empty
      */
-    private function getPidForAuxiliaryRecords()
+    private function getPidForAuxiliaryRecords(): int
     {
         $frontEndUser = self::getLoggedInUser();
         $auxiliaryRecordsPid = $frontEndUser->getAuxiliaryRecordsPid();
@@ -2819,7 +2820,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return \Tx_Oelib_Configuration
      */
-    protected static function getSeminarsConfiguration()
+    protected static function getSeminarsConfiguration(): \Tx_Oelib_Configuration
     {
         return \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1');
     }

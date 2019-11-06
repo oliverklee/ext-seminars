@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /**
  * This class represents a time-slot.
@@ -13,7 +14,7 @@ class Tx_Seminars_Model_TimeSlot extends \Tx_Seminars_Model_AbstractTimeSpan
      * @return int our entry date as UNIX time-stamp, will be >= 0,
      *                 0 means "no entry date"
      */
-    public function getEntryDateAsUnixTimeStamp()
+    public function getEntryDateAsUnixTimeStamp(): int
     {
         return $this->getAsInteger('entry_date');
     }
@@ -39,7 +40,7 @@ class Tx_Seminars_Model_TimeSlot extends \Tx_Seminars_Model_AbstractTimeSpan
      *
      * @return bool TRUE if this time-slot has an entry date, FALSE otherwise
      */
-    public function hasEntryDate()
+    public function hasEntryDate(): bool
     {
         return $this->hasInteger('entry_date');
     }
@@ -57,7 +58,7 @@ class Tx_Seminars_Model_TimeSlot extends \Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Returns the seminar/event this time-slot belongs to.
      *
-     * @return \Tx_Seminars_Model_Event
+     * @return \Tx_Seminars_Model_Event|null
      */
     public function getSeminar()
     {

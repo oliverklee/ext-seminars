@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /**
  * This class represents a titled model for testing purposes.
@@ -12,7 +13,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_Model_TitledTestingModel extends \Tx_Oelib
      *
      * @return string our title, will not be empty
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->getAsString('title');
     }

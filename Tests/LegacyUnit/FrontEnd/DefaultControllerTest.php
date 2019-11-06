@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 use OliverKlee\PhpUnit\TestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -321,10 +322,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
                 'public function setSeminar(\\Tx_Seminars_OldModel_Event $event = NULL) {' .
                 '  parent::setSeminar($event);' .
                 '}' .
-                'public function createAllEditorLinks() {' .
+                'public function createAllEditorLinks(): string {' .
                 '  return parent::createAllEditorLinks();' .
                 '}' .
-                'public function mayCurrentUserEditCurrentEvent() {' .
+                'public function mayCurrentUserEditCurrentEvent(): bool {' .
                 '  return parent::mayCurrentUserEditCurrentEvent();' .
                 '}' .
                 'public function processEventEditorActions() {' .
@@ -3703,12 +3704,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
                 'categories' => 1,
             ]
         );
-        $categoryUid = (string)$this->testingFramework->createRecord(
+        $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
             ['title' => 'a category']
         );
         $this->testingFramework->createRelation('tx_seminars_seminars_categories_mm', $eventUid, $categoryUid);
-        $this->subject->piVars['categories'][] = $categoryUid;
+        $this->subject->piVars['categories'][] = (string)$categoryUid;
 
         self::assertContains(
             'Event with category',
@@ -3733,11 +3734,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $categoryUid1 = $this->testingFramework->createRecord('tx_seminars_categories', ['title' => 'a category']);
         $this->testingFramework->createRelation('tx_seminars_seminars_categories_mm', $eventUid, $categoryUid1);
 
-        $categoryUid2 = (string)$this->testingFramework->createRecord(
+        $categoryUid2 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
             ['title' => 'another category']
         );
-        $this->subject->piVars['categories'][] = $categoryUid2;
+        $this->subject->piVars['categories'][] = (string)$categoryUid2;
 
         self::assertNotContains(
             'Event with category',
@@ -8432,7 +8433,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
     public function eventsListNotCallsProcessEventEditorActions()
     {
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->createPartialMock(\Tx_Seminars_FrontEnd_DefaultController::class, ['processEventEditorActions']);
+        $subject = $this->createPartialMock(
+            \Tx_Seminars_FrontEnd_DefaultController::class,
+            ['processEventEditorActions']
+        );
         $subject->expects(self::never())->method('processEventEditorActions');
 
         $subject->main(
@@ -8449,7 +8453,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $this->testingFramework->createAndLoginFrontEndUser();
 
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->createPartialMock(\Tx_Seminars_FrontEnd_DefaultController::class, ['processEventEditorActions']);
+        $subject = $this->createPartialMock(
+            \Tx_Seminars_FrontEnd_DefaultController::class,
+            ['processEventEditorActions']
+        );
         $subject->expects(self::once())->method('processEventEditorActions');
 
         $subject->main(
@@ -8464,7 +8471,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
     public function myManagedEventsListCallsProcessEventEditorActions()
     {
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->createPartialMock(\Tx_Seminars_FrontEnd_DefaultController::class, ['processEventEditorActions']);
+        $subject = $this->createPartialMock(
+            \Tx_Seminars_FrontEnd_DefaultController::class,
+            ['processEventEditorActions']
+        );
         $subject->expects(self::once())->method('processEventEditorActions');
 
         $subject->main(

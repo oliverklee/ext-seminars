@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /**
  * This class represents a front-end user group.
@@ -33,7 +34,7 @@ class Tx_Seminars_Model_FrontEndUserGroup extends \Tx_Oelib_Model_FrontEndUserGr
      * @return int the class constants PUBLISH_IMMEDIATELY, PUBLISH_HIDE_NEW
      *                 or PUBLISH_HIDE_EDITED
      */
-    public function getPublishSetting()
+    public function getPublishSetting(): int
     {
         return $this->getAsInteger('tx_seminars_publish_events');
     }
@@ -45,7 +46,7 @@ class Tx_Seminars_Model_FrontEndUserGroup extends \Tx_Oelib_Model_FrontEndUserGr
      * @return int the PID where to store the auxiliary records created by
      *                 this front-end user group, will be 0 if no PID is set
      */
-    public function getAuxiliaryRecordsPid()
+    public function getAuxiliaryRecordsPid(): int
     {
         return $this->getAsInteger('tx_seminars_auxiliary_records_pid');
     }
@@ -56,7 +57,7 @@ class Tx_Seminars_Model_FrontEndUserGroup extends \Tx_Oelib_Model_FrontEndUserGr
      * @return bool TRUE if this user group has PID for auxiliary records set,
      *                 FALSE otherwise
      */
-    public function hasAuxiliaryRecordsPid()
+    public function hasAuxiliaryRecordsPid(): bool
     {
         return $this->hasInteger('tx_seminars_auxiliary_records_pid');
     }
@@ -66,7 +67,7 @@ class Tx_Seminars_Model_FrontEndUserGroup extends \Tx_Oelib_Model_FrontEndUserGr
      *
      * @return bool TRUE if a reviewer is set, FALSE otherwise
      */
-    public function hasReviewer()
+    public function hasReviewer(): bool
     {
         return $this->getReviewer() !== null;
     }
@@ -74,8 +75,7 @@ class Tx_Seminars_Model_FrontEndUserGroup extends \Tx_Oelib_Model_FrontEndUserGr
     /**
      * Returns the BE user which is stored as reviewer for this group.
      *
-     * @return \Tx_Oelib_Model_BackEndUser the reviewer for this group, will be
-     *                                    NULL if no reviewer has been set
+     * @return \Tx_Oelib_Model_BackEndUser|null
      */
     public function getReviewer()
     {
@@ -88,7 +88,7 @@ class Tx_Seminars_Model_FrontEndUserGroup extends \Tx_Oelib_Model_FrontEndUserGr
      * @return bool TRUE if this user group has a event storage PID, FALSE
      *                  otherwise
      */
-    public function hasEventRecordPid()
+    public function hasEventRecordPid(): bool
     {
         return $this->hasInteger('tx_seminars_events_pid');
     }
@@ -99,7 +99,7 @@ class Tx_Seminars_Model_FrontEndUserGroup extends \Tx_Oelib_Model_FrontEndUserGr
      * @return int the PID for the storage of event records, will be zero
      *                 if no PID has been set
      */
-    public function getEventRecordPid()
+    public function getEventRecordPid(): int
     {
         return $this->getAsInteger('tx_seminars_events_pid');
     }
@@ -111,7 +111,7 @@ class Tx_Seminars_Model_FrontEndUserGroup extends \Tx_Oelib_Model_FrontEndUserGr
      *                       group, will be empty if no default categories are
      *                       assigned to this group
      */
-    public function getDefaultCategories()
+    public function getDefaultCategories(): \Tx_Oelib_List
     {
         return $this->getAsList('tx_seminars_default_categories');
     }
@@ -122,7 +122,7 @@ class Tx_Seminars_Model_FrontEndUserGroup extends \Tx_Oelib_Model_FrontEndUserGr
      * @return bool TRUE if this group has at least one default category,
      *                 FALSE otherwise
      */
-    public function hasDefaultCategories()
+    public function hasDefaultCategories(): bool
     {
         return !$this->getDefaultCategories()->isEmpty();
     }
@@ -130,8 +130,7 @@ class Tx_Seminars_Model_FrontEndUserGroup extends \Tx_Oelib_Model_FrontEndUserGr
     /**
      * Returns this user group's default organizer for the FE editor.
      *
-     * @return \Tx_Seminars_Model_Organizer this group's default organizer, will
-     *                                     be NULL if no organizer has been set
+     * @return \Tx_Seminars_Model_Organizer|null
      */
     public function getDefaultOrganizer()
     {
@@ -141,12 +140,10 @@ class Tx_Seminars_Model_FrontEndUserGroup extends \Tx_Oelib_Model_FrontEndUserGr
     /**
      * Checks whether this user group has a default organizer set.
      *
-     * @return bool TRUE if this group has a default organizer, FALSE
-     *                 otherwise
+     * @return bool
      */
-    public function hasDefaultOrganizer()
+    public function hasDefaultOrganizer(): bool
     {
-        return $this->getDefaultOrganizer()
-            instanceof \Tx_Seminars_Model_Organizer;
+        return $this->getDefaultOrganizer() !== null;
     }
 }

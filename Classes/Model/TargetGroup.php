@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /**
  * This class represents a target group.
@@ -12,7 +13,7 @@ class Tx_Seminars_Model_TargetGroup extends \Tx_Oelib_Model implements \Tx_Semin
      *
      * @return string our title, will not be empty
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->getAsString('title');
     }
@@ -36,8 +37,7 @@ class Tx_Seminars_Model_TargetGroup extends \Tx_Oelib_Model implements \Tx_Semin
     /**
      * Returns our owner.
      *
-     * @return \Tx_Seminars_Model_FrontEndUser the owner of this model, will be null
-     *                                     if this model has no owner
+     * @return \Tx_Seminars_Model_FrontEndUser|null
      */
     public function getOwner()
     {
@@ -62,7 +62,7 @@ class Tx_Seminars_Model_TargetGroup extends \Tx_Oelib_Model implements \Tx_Semin
      * @return int this target group's minimum age, will be >= 0; will be 0
      *                 if no minimum age has been set
      */
-    public function getMinimumAge()
+    public function getMinimumAge(): int
     {
         return $this->getAsInteger('minimum_age');
     }
@@ -86,7 +86,7 @@ class Tx_Seminars_Model_TargetGroup extends \Tx_Oelib_Model implements \Tx_Semin
      * @return int this target group's maximum age, will be >= 0; will be 0
      *                 if no maximum age has been set
      */
-    public function getMaximumAge()
+    public function getMaximumAge(): int
     {
         return $this->getAsInteger('maximum_age');
     }

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 namespace OliverKlee\Seminars\Service;
 
 use TYPO3\CMS\Core\SingletonInterface;
@@ -33,7 +34,7 @@ class EventStatusService implements SingletonInterface
      *
      * @return bool true if the status of $event has been changed, false otherwise
      */
-    public function updateStatusAndSave(\Tx_Seminars_Model_Event $event)
+    public function updateStatusAndSave(\Tx_Seminars_Model_Event $event): bool
     {
         if (!$event->shouldAutomaticallyConfirmOrCancel() || !$event->isPlanned()) {
             return false;

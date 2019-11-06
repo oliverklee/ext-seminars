@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -19,7 +20,7 @@ class Tx_Seminars_OldModel_TimeSlot extends \Tx_Seminars_OldModel_AbstractTimeSp
      *
      * @return \Tx_Seminars_Bag_Speaker a speakerbag object
      */
-    private function getSpeakerBag()
+    private function getSpeakerBag(): \Tx_Seminars_Bag_Speaker
     {
         /** @var \Tx_Seminars_Bag_Speaker $bag */
         $bag = GeneralUtility::makeInstance(
@@ -37,7 +38,7 @@ class Tx_Seminars_OldModel_TimeSlot extends \Tx_Seminars_OldModel_AbstractTimeSp
      *
      * @return int[] the speaker UIDs
      */
-    public function getSpeakersUids()
+    public function getSpeakersUids(): array
     {
         $result = [];
 
@@ -63,7 +64,7 @@ class Tx_Seminars_OldModel_TimeSlot extends \Tx_Seminars_OldModel_AbstractTimeSp
      * @return string the comma-separated plain text list of speakers (or ''
      *                if there was an error)
      */
-    public function getSpeakersShortCommaSeparated()
+    public function getSpeakersShortCommaSeparated(): string
     {
         $result = [];
         $speakerBag = $this->getSpeakerBag();
@@ -83,10 +84,10 @@ class Tx_Seminars_OldModel_TimeSlot extends \Tx_Seminars_OldModel_AbstractTimeSp
      *
      * @return string our places or a localized string "will be announced" if this timeslot has no place assigned
      *
-     * @throws \Tx_Oelib_Exception_Database
-     * @throws \Tx_Oelib_Exception_NotFound
+     * @throws Tx_Oelib_Exception_Database
+     * @throws Tx_Oelib_Exception_NotFound
      */
-    public function getPlaceShort()
+    public function getPlaceShort(): string
     {
         if (!$this->hasPlace()) {
             return $this->translate('message_willBeAnnounced');
@@ -119,7 +120,7 @@ class Tx_Seminars_OldModel_TimeSlot extends \Tx_Seminars_OldModel_AbstractTimeSp
      *
      * @return int the place UID
      */
-    public function getPlace()
+    public function getPlace(): int
     {
         return $this->getRecordPropertyInteger('place');
     }
@@ -132,7 +133,7 @@ class Tx_Seminars_OldModel_TimeSlot extends \Tx_Seminars_OldModel_AbstractTimeSp
      * @return string the entry date and time (or the localized string "will be
      *                announced" if no entry date is set)
      */
-    public function getEntryDate()
+    public function getEntryDate(): string
     {
         if (!$this->hasEntryDate()) {
             return $this->translate('message_willBeAnnounced');
@@ -157,7 +158,7 @@ class Tx_Seminars_OldModel_TimeSlot extends \Tx_Seminars_OldModel_AbstractTimeSp
      *
      * @return bool TRUE if we have a entry date, FALSE otherwise
      */
-    public function hasEntryDate()
+    public function hasEntryDate(): bool
     {
         return $this->hasRecordPropertyInteger('entry_date');
     }
@@ -168,7 +169,7 @@ class Tx_Seminars_OldModel_TimeSlot extends \Tx_Seminars_OldModel_AbstractTimeSp
      *
      * @return string[] data to update the database entry of the timeslot, might be empty
      */
-    public function getUpdateArray()
+    public function getUpdateArray(): array
     {
         return [
             'title' => html_entity_decode(

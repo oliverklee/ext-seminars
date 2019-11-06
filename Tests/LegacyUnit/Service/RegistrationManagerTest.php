@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Hooks\RegistrationEmailHookInterface;

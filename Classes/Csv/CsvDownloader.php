@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 use TYPO3\CMS\Core\Charset\CharsetConverter;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -78,7 +79,7 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
      *
      * @return string HTML for the plugin, might be empty
      */
-    public function main()
+    public function main(): string
     {
         try {
             $this->init([]);
@@ -120,7 +121,7 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
      *
      * @return string CSV list of registrations for the given seminar or an error message in case of an error
      */
-    public function createAndOutputListOfRegistrations($eventUid = 0)
+    public function createAndOutputListOfRegistrations($eventUid = 0): string
     {
         /** @var \Tx_Seminars_Csv_EmailRegistrationListView $listView */
         $listView = GeneralUtility::makeInstance(\Tx_Seminars_Csv_DownloadRegistrationListView::class);
@@ -154,7 +155,7 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
      * @return string CSV list of registrations for the given seminar or an
      *                empty string if there is not event with the provided UID
      */
-    public function createListOfRegistrations($eventUid)
+    public function createListOfRegistrations($eventUid): string
     {
         if (!Tx_Seminars_OldModel_Abstract::recordExists($eventUid, 'tx_seminars_seminars', true)) {
             return '';
@@ -178,7 +179,7 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
      *
      * @return string CSV list of events for the given page or an error message in case of an error
      */
-    public function createAndOutputListOfEvents($pageUid)
+    public function createAndOutputListOfEvents($pageUid): string
     {
         if ($pageUid <= 0) {
             return $this->addErrorHeaderAndReturnMessage(self::NOT_FOUND);
@@ -201,7 +202,7 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
      *
      * @return string CSV export of the event records on that page
      */
-    public function createListOfEvents($pageUid)
+    public function createListOfEvents($pageUid): string
     {
         /** @var \Tx_Seminars_Csv_EventListView $eventListView */
         $eventListView = GeneralUtility::makeInstance(\Tx_Seminars_Csv_EventListView::class);
@@ -221,7 +222,7 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
      *
      * @return bool true if the list of registrations may be exported as CSV
      */
-    protected function canAccessListOfRegistrations($eventUid)
+    protected function canAccessListOfRegistrations($eventUid): bool
     {
         switch ($this->getTypo3Mode()) {
             case 'BE':
@@ -253,7 +254,7 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
      *
      * @return bool TRUE if the list of events may be exported as CSV, FALSE otherwise
      */
-    protected function canAccessListOfEvents($pageUid)
+    protected function canAccessListOfEvents($pageUid): bool
     {
         /** @var \Tx_Seminars_Csv_BackEndEventAccessCheck $accessCheck */
         $accessCheck = GeneralUtility::makeInstance(\Tx_Seminars_Csv_BackEndEventAccessCheck::class);
@@ -311,7 +312,7 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
      *
      * @throws \InvalidArgumentException
      */
-    private function addErrorHeaderAndReturnMessage($errorCode)
+    private function addErrorHeaderAndReturnMessage($errorCode): string
     {
         switch ($errorCode) {
             case self::ACCESS_DENIED:
@@ -338,7 +339,7 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
      *         TRUE if the currently logged-in BE-User is allowed to access the registrations records,
      *         FALSE if the user has no access or this function is called in FE mode
      */
-    private function canAccessRegistrationsOnPage($pageUid)
+    private function canAccessRegistrationsOnPage($pageUid): bool
     {
         switch ($this->getTypo3Mode()) {
             case 'BE':
@@ -361,7 +362,7 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
      *
      * @return string either "FE" or "BE" representing the TYPO3 mode
      */
-    private function getTypo3Mode()
+    private function getTypo3Mode(): string
     {
         if ($this->typo3Mode !== '') {
             return $this->typo3Mode;
@@ -399,7 +400,7 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
      *                 access to the registrations belonging to the event,
      *                 FALSE otherwise
      */
-    private function hasAccessToEventAndItsRegistrations($eventUid)
+    private function hasAccessToEventAndItsRegistrations($eventUid): bool
     {
         $result = false;
 

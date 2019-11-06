@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -114,7 +115,7 @@ class Tx_Seminars_FrontEnd_RequirementsList extends \Tx_Seminars_FrontEnd_Abstra
      * @return \Tx_Seminars_Bag_Event the requirements still to be displayed,
      *                               might be empty
      */
-    private function getRequirements()
+    private function getRequirements(): \Tx_Seminars_Bag_Event
     {
         if ($this->limitRequirementsToMissing) {
             $result = \Tx_Seminars_Service_RegistrationManager::getInstance()

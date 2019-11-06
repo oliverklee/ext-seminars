@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -90,7 +91,7 @@ class Tx_Seminars_FrontEnd_CategoryList extends \Tx_Seminars_FrontEnd_AbstractVi
     public function createLinkToListViewLimitedByCategory(
         $categoryUid,
         $title
-    ) {
+    ): string {
         if ($categoryUid <= 0) {
             throw new \InvalidArgumentException('$categoryUid must be > 0.', 1333293037);
         }
@@ -120,7 +121,7 @@ class Tx_Seminars_FrontEnd_CategoryList extends \Tx_Seminars_FrontEnd_AbstractVi
      */
     public function createCategoryList(
         array $categoriesToDisplay
-    ) {
+    ): string {
         if (empty($categoriesToDisplay)) {
             return '';
         }
@@ -167,7 +168,7 @@ class Tx_Seminars_FrontEnd_CategoryList extends \Tx_Seminars_FrontEnd_AbstractVi
      * @return string the icon tag with the given icon, will be empty if no
      *                icon was given
      */
-    private function createCategoryIcon(array $iconData)
+    private function createCategoryIcon(array $iconData): string
     {
         if ($iconData['icon'] == '') {
             return '';

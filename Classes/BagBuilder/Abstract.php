@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -71,7 +72,7 @@ abstract class Tx_Seminars_BagBuilder_Abstract
      *
      * @return \Tx_Seminars_Bag_Abstract customized, newly-created bag
      */
-    public function build()
+    public function build(): \Tx_Seminars_Bag_Abstract
     {
         /** @var \Tx_Seminars_Bag_Abstract $bag */
         $bag = GeneralUtility::makeInstance(
@@ -102,7 +103,7 @@ abstract class Tx_Seminars_BagBuilder_Abstract
     /**
      * Sets the PIDs of the system folders that contain the records.
      *
-     * @param string $sourcePagePids
+     * @param int|string $sourcePagePids
      *        comma-separated list of PIDs of the system folders with the records;
      *        must not be empty; need not be safeguarded against SQL injection
      * @param int $recursionDepth
@@ -110,20 +111,16 @@ abstract class Tx_Seminars_BagBuilder_Abstract
      *
      * @return void
      */
-    public function setSourcePages($sourcePagePids, $recursionDepth = 0)
+    public function setSourcePages($sourcePagePids, int $recursionDepth = 0)
     {
-        if (!preg_match('/^([\\d+,] *)*\\d+$/', $sourcePagePids)) {
+        if (!preg_match('/^([\\d+,] *)*\\d+$/', (string)$sourcePagePids)) {
             unset($this->whereClauseParts['pages']);
             return;
         }
 
-        $recursivePidList = \Tx_Oelib_Db::createRecursivePageList(
-            $sourcePagePids,
-            $recursionDepth
-        );
+        $recursivePidList = \Tx_Oelib_Db::createRecursivePageList($sourcePagePids, $recursionDepth);
 
-        $this->whereClauseParts['pages'] = $this->tableName . '.pid IN (' .
-            $recursivePidList . ')';
+        $this->whereClauseParts['pages'] = $this->tableName . '.pid IN (' . $recursivePidList . ')';
     }
 
     /**
@@ -132,7 +129,7 @@ abstract class Tx_Seminars_BagBuilder_Abstract
      * @return bool TRUE if source pages have already been set, FALSE
      *                 otherwise
      */
-    public function hasSourcePages()
+    public function hasSourcePages(): bool
     {
         return isset($this->whereClauseParts['pages']);
     }
@@ -160,7 +157,7 @@ abstract class Tx_Seminars_BagBuilder_Abstract
      * @return string complete WHERE clause for the bag to create, will
      *                not be empty
      */
-    public function getWhereClause()
+    public function getWhereClause(): string
     {
         if (empty($this->whereClauseParts)) {
             return '1=1';
@@ -177,7 +174,7 @@ abstract class Tx_Seminars_BagBuilder_Abstract
      *
      * @return void
      */
-    public function addAdditionalTableName($additionalTableName)
+    public function addAdditionalTableName(string $additionalTableName)
     {
         if ($additionalTableName == '') {
             throw new \InvalidArgumentException('The parameter $additionalTableName must not be empty.', 1333292599);
@@ -194,7 +191,7 @@ abstract class Tx_Seminars_BagBuilder_Abstract
      *
      * @return void
      */
-    public function removeAdditionalTableName($additionalTableName)
+    public function removeAdditionalTableName(string $additionalTableName)
     {
         if ($additionalTableName == '') {
             throw new \InvalidArgumentException('The parameter $additionalTableName must not be empty.', 1333292576);
@@ -217,7 +214,7 @@ abstract class Tx_Seminars_BagBuilder_Abstract
      *
      * @return void
      */
-    public function setOrderBy($orderBy)
+    public function setOrderBy(string $orderBy)
     {
         $this->orderBy = $orderBy;
     }
@@ -230,7 +227,7 @@ abstract class Tx_Seminars_BagBuilder_Abstract
      * - "10, 10" to limit the bag to 10 records, starting from the 11th record
      * - "10" to limit the bag to the first 10 records
      *
-     * @param string $limit the LIMIT statement to set, may be empty
+     * @param int|string $limit the LIMIT statement to set, may be empty
      *
      * @return void
      */

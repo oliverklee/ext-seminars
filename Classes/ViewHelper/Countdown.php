@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /**
  * This class represents a view helper for rendering a countdown.
@@ -32,7 +33,7 @@ class Tx_Seminars_ViewHelper_Countdown
      *
      * @return string a localized string representing the time left until the event starts
      */
-    public function render($targettime)
+    public function render($targettime): string
     {
         $seconds = $targettime - $GLOBALS['SIM_ACCESS_TIME'];
 
@@ -56,7 +57,7 @@ class Tx_Seminars_ViewHelper_Countdown
      *
      * @return string the duration in days
      */
-    protected function getAsDays($seconds)
+    protected function getAsDays($seconds): string
     {
         $countdownValue = (int)round($seconds / \Tx_Oelib_Time::SECONDS_PER_DAY);
         if ($countdownValue > 1 || $countdownValue === 0) {
@@ -75,7 +76,7 @@ class Tx_Seminars_ViewHelper_Countdown
      *
      * @return string the duration in hours
      */
-    protected function getAsHours($seconds)
+    protected function getAsHours($seconds): string
     {
         $countdownValue = (int)round($seconds / \Tx_Oelib_Time::SECONDS_PER_HOUR);
         if ($countdownValue > 1 || $countdownValue === 0) {
@@ -94,7 +95,7 @@ class Tx_Seminars_ViewHelper_Countdown
      *
      * @return string the duration in minutes
      */
-    protected function getAsMinutes($seconds)
+    protected function getAsMinutes($seconds): string
     {
         $countdownValue = (int)round($seconds / \Tx_Oelib_Time::SECONDS_PER_MINUTE);
         if ($countdownValue > 1 || $countdownValue === 0) {
@@ -113,7 +114,7 @@ class Tx_Seminars_ViewHelper_Countdown
      *
      * @return string the duration in seconds
      */
-    protected function getAsSeconds($seconds)
+    protected function getAsSeconds($seconds): string
     {
         $countdownValue = $seconds;
         $countdownText = $this->translator->translate('countdown_seconds_plural');
@@ -129,7 +130,7 @@ class Tx_Seminars_ViewHelper_Countdown
      *
      * @return string the formatted countdown message
      */
-    protected function getFormattedMessage($countdownValue, $countdownText)
+    protected function getFormattedMessage($countdownValue, $countdownText): string
     {
         return sprintf($this->translator->translate('message_countdown'), $countdownValue, $countdownText);
     }

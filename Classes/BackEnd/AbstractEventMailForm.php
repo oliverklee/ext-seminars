@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 namespace OliverKlee\Seminars\BackEnd;
 
 use TYPO3\CMS\Backend\Utility\BackendUtility;
@@ -99,7 +100,7 @@ abstract class AbstractEventMailForm
     /**
      * @return LanguageService
      */
-    protected function getLanguageService()
+    protected function getLanguageService(): LanguageService
     {
         return $GLOBALS['LANG'];
     }
@@ -109,7 +110,7 @@ abstract class AbstractEventMailForm
      *
      * @return BackendUserAuthentication
      */
-    protected function getBackEndUser()
+    protected function getBackEndUser(): BackendUserAuthentication
     {
         return $GLOBALS['BE_USER'];
     }
@@ -121,7 +122,7 @@ abstract class AbstractEventMailForm
      * @return string HTML for the whole form, will be empty if the user has
      *                insufficient permissions
      */
-    public function render()
+    public function render(): string
     {
         if (!$this->checkAccess()) {
             return '';
@@ -154,7 +155,7 @@ abstract class AbstractEventMailForm
      *
      * @return bool TRUE if the form was submitted by the user, FALSE otherwise
      */
-    protected function isSubmitted()
+    protected function isSubmitted(): bool
     {
         return $this->getPostData('isSubmitted') === '1';
     }
@@ -169,7 +170,7 @@ abstract class AbstractEventMailForm
      *
      * @return bool TRUE if the form data is valid, FALSE otherwise
      */
-    private function validateFormData()
+    private function validateFormData(): bool
     {
         if ($this->getPostData('subject') === '') {
             $this->markAsIncomplete();
@@ -210,7 +211,7 @@ abstract class AbstractEventMailForm
      *
      * @return bool TRUE if the user is allowed to see/use the form, FALSE otherwise
      */
-    public function checkAccess()
+    public function checkAccess(): bool
     {
         return $GLOBALS['BE_USER']->check('tables_select', 'tx_seminars_seminars');
     }
@@ -223,7 +224,7 @@ abstract class AbstractEventMailForm
      * @return string HTML for the subject field, optionally with an error
      *                message, will not be empty
      */
-    protected function createSubjectFormElement()
+    protected function createSubjectFormElement(): string
     {
         $classMarker = $this->hasErrorMessage('subject') ? 'class="error" ' : '';
 
@@ -241,7 +242,7 @@ abstract class AbstractEventMailForm
      *
      * @return string HTML for the subject field, optionally with an error message
      */
-    protected function createMessageBodyFormElement()
+    protected function createMessageBodyFormElement(): string
     {
         $messageBody = $this->fillFormElement('messageBody');
         $classMarker = $this->hasErrorMessage('messageBody') ? ', error' : '';
@@ -259,7 +260,7 @@ abstract class AbstractEventMailForm
      *
      * @return string HTML for the back button, will not be empty
      */
-    protected function createBackButton()
+    protected function createBackButton(): string
     {
         return '<p><input type="button" value="' .
             $this->getLanguageService()->getLL('eventMailForm_backButton') .
@@ -272,7 +273,7 @@ abstract class AbstractEventMailForm
      *
      * @return \Tx_Seminars_OldModel_Event the event object
      */
-    protected function getOldEvent()
+    protected function getOldEvent(): \Tx_Seminars_OldModel_Event
     {
         return $this->oldEvent;
     }
@@ -282,7 +283,7 @@ abstract class AbstractEventMailForm
      *
      * @return \Tx_Seminars_Model_Event the event
      */
-    protected function getEvent()
+    protected function getEvent(): \Tx_Seminars_Model_Event
     {
         return $this->event;
     }
@@ -321,7 +322,7 @@ abstract class AbstractEventMailForm
      *
      * @return string either the data from POST array or a default value for this field
      */
-    protected function fillFormElement($fieldName)
+    protected function fillFormElement($fieldName): string
     {
         if ($this->isSubmitted()) {
             $result = $this->getPostData($fieldName);
@@ -352,7 +353,7 @@ abstract class AbstractEventMailForm
      *
      * @return string the value of the field, may be empty
      */
-    protected function getPostData($key)
+    protected function getPostData($key): string
     {
         if (!$this->hasPostData($key)) {
             return '';
@@ -370,7 +371,7 @@ abstract class AbstractEventMailForm
      *
      * @throws \InvalidArgumentException
      */
-    protected function hasPostData($key)
+    protected function hasPostData($key): bool
     {
         if ($key === '') {
             throw new \InvalidArgumentException('$key must not be empty.', 1333292184);
@@ -494,7 +495,7 @@ abstract class AbstractEventMailForm
      *
      * @return string HTML for the submit button, will not be empty
      */
-    protected function createSubmitButton()
+    protected function createSubmitButton(): string
     {
         return '<p><button class="submitButton ' . $this->action . '">' .
             '<p>' . $this->getSubmitButtonLabel() . '</p></button></p>';
@@ -549,7 +550,7 @@ abstract class AbstractEventMailForm
      *                title and date, will be empty if no locallang label
      *                could be found for the given prefix
      */
-    private function appendTitleAndDate($prefix)
+    private function appendTitleAndDate($prefix): string
     {
         return $this->getLanguageService()->getLL($prefix . 'subject') . ' ' . $this->getOldEvent()->getTitleAndDate();
     }
@@ -568,7 +569,7 @@ abstract class AbstractEventMailForm
      *                replaced placeholders, will be empty if no locallang label
      *                for the given prefix could be found
      */
-    protected function localizeSalutationPlaceholder($prefix)
+    protected function localizeSalutationPlaceholder($prefix): string
     {
         /** @var \Tx_Seminars_EmailSalutation $salutation */
         $salutation = GeneralUtility::makeInstance(\Tx_Seminars_EmailSalutation::class);
@@ -594,7 +595,7 @@ abstract class AbstractEventMailForm
      *                name, will be empty if no message has been set in the POST
      *                data
      */
-    private function createMessageBody(\Tx_Seminars_Model_FrontEndUser $user, \Tx_Seminars_Model_Organizer $organizer)
+    private function createMessageBody(\Tx_Seminars_Model_FrontEndUser $user, \Tx_Seminars_Model_Organizer $organizer): string
     {
         /** @var \Tx_Seminars_EmailSalutation $salutation */
         $salutation = GeneralUtility::makeInstance(\Tx_Seminars_EmailSalutation::class);
@@ -614,7 +615,7 @@ abstract class AbstractEventMailForm
      *
      * @return string the content for the message body, will not be empty
      */
-    protected function getMessageBodyFormContent()
+    protected function getMessageBodyFormContent(): string
     {
         return $this->localizeSalutationPlaceholder($this->formFieldPrefix);
     }
@@ -647,7 +648,7 @@ abstract class AbstractEventMailForm
      * @return bool TRUE if an error message has been stored for the given
      *                 fieldname, FALSE otherwise
      */
-    private function hasErrorMessage($fieldName)
+    private function hasErrorMessage($fieldName): bool
     {
         return isset($this->errorMessages[$fieldName]);
     }
@@ -662,7 +663,7 @@ abstract class AbstractEventMailForm
      *          if there are registered hook classes that do not implement the
      *          \Tx_Seminars_Interface_Hook_BackEndModule interface
      */
-    protected function getHooks()
+    protected function getHooks(): array
     {
         if (!$this->hooksHaveBeenRetrieved) {
             $hookClasses = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['backEndModule'];

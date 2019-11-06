@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Fixtures;
 
 /**
@@ -21,7 +22,7 @@ class DummyObjectToCheck extends \Tx_Oelib_TemplateHelper implements \Tx_Oelib_I
      *
      * @return string the namespace prefix, will end with a dot
      */
-    public function getTypoScriptNamespace()
+    public function getTypoScriptNamespace(): string
     {
         return 'plugin.tx_seminars_test.';
     }

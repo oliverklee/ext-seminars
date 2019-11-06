@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 
 use OliverKlee\PhpUnit\TestCase;
@@ -78,7 +79,7 @@ class EmailServiceTest extends TestCase
     protected function setUp()
     {
         Bootstrap::getInstance()->initializeBackendAuthentication();
-        $this->languageBackup = isset($GLOBALS['LANG']) ? $GLOBALS['LANG'] : null;
+        $this->languageBackup = $GLOBALS['LANG'] ?? null;
         $languageService = new LanguageService();
         $languageService->init('default');
         $GLOBALS['LANG'] = $languageService;

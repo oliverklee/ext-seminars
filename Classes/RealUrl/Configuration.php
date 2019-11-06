@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 namespace OliverKlee\Seminars\RealUrl;
 
 /**
@@ -15,7 +16,7 @@ class Configuration
      *
      * @return mixed[][] the modified RealURL configuration
      */
-    public function addConfiguration(array $parameters)
+    public function addConfiguration(array $parameters): array
     {
         $eventSingleViewPostVariables = [
             'GETvar' => 'tx_seminars_pi1[showUid]',

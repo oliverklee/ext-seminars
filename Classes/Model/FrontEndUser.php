@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /**
  * This class represents a front-end user.
@@ -22,7 +23,7 @@ class Tx_Seminars_Model_FrontEndUser extends \Tx_Oelib_Model_FrontEndUser
      *                 \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW or
      *                 \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
      */
-    public function getPublishSetting()
+    public function getPublishSetting(): int
     {
         $userGroups = $this->getUserGroups();
         if ($userGroups->isEmpty()) {
@@ -50,7 +51,7 @@ class Tx_Seminars_Model_FrontEndUser extends \Tx_Oelib_Model_FrontEndUser
      * @return int the PID where to store auxiliary records created by this
      *                 front-end user, will be 0 if no PID is set
      */
-    public function getAuxiliaryRecordsPid()
+    public function getAuxiliaryRecordsPid(): int
     {
         if ($this->getUserGroups()->isEmpty()) {
             return 0;
@@ -74,9 +75,7 @@ class Tx_Seminars_Model_FrontEndUser extends \Tx_Oelib_Model_FrontEndUser
      *
      * Will return the first reviewer found.
      *
-     * @return \Tx_Seminars_Model_BackEndUser the reviewer set in the user's group,
-     *                                    will be NULL if no reviewer has been
-     *                                    set or the user has no groups
+     * @return \Tx_Oelib_Model_BackEndUser|null
      */
     public function getReviewerFromGroup()
     {
@@ -102,7 +101,7 @@ class Tx_Seminars_Model_FrontEndUser extends \Tx_Oelib_Model_FrontEndUser
      *                 event record PID has been set in any of this user's
      *                 groups
      */
-    public function getEventRecordsPid()
+    public function getEventRecordsPid(): int
     {
         if ($this->getUserGroups()->isEmpty()) {
             return 0;
@@ -128,7 +127,7 @@ class Tx_Seminars_Model_FrontEndUser extends \Tx_Oelib_Model_FrontEndUser
      *                       be empty if no default categories have been assigned
      *                       to any of the user's groups
      */
-    public function getDefaultCategoriesFromGroup()
+    public function getDefaultCategoriesFromGroup(): \Tx_Oelib_List
     {
         $categories = new \Tx_Oelib_List();
 
@@ -148,7 +147,7 @@ class Tx_Seminars_Model_FrontEndUser extends \Tx_Oelib_Model_FrontEndUser
      * @return bool TRUE if at least one of the user's groups has a default
      *                 category, FALSE otherwise
      */
-    public function hasDefaultCategories()
+    public function hasDefaultCategories(): bool
     {
         return !$this->getDefaultCategoriesFromGroup()->isEmpty();
     }
@@ -160,7 +159,7 @@ class Tx_Seminars_Model_FrontEndUser extends \Tx_Oelib_Model_FrontEndUser
      *                       be empty if no default organizers have been assigned
      *                       to any of the user's groups
      */
-    public function getDefaultOrganizers()
+    public function getDefaultOrganizers(): \Tx_Oelib_List
     {
         $organizers = new \Tx_Oelib_List();
 
@@ -180,7 +179,7 @@ class Tx_Seminars_Model_FrontEndUser extends \Tx_Oelib_Model_FrontEndUser
      * @return bool TRUE if at least one of the user's groups has a default
      *                 organizer, FALSE otherwise
      */
-    public function hasDefaultOrganizers()
+    public function hasDefaultOrganizers(): bool
     {
         return !$this->getDefaultOrganizers()->isEmpty();
     }
@@ -189,8 +188,7 @@ class Tx_Seminars_Model_FrontEndUser extends \Tx_Oelib_Model_FrontEndUser
      * Gets the registration record for which this user is related to as
      * "additional registered person".
      *
-     * @return \Tx_Seminars_Model_Registration the associated registration,
-     *                                        might be NULL
+     * @return \Tx_Seminars_Model_Registration|null
      */
     public function getRegistration()
     {

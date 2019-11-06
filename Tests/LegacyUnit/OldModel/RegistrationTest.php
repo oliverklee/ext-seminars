@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 use OliverKlee\PhpUnit\TestCase;
 
@@ -221,7 +222,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
             $this->subject->isOnRegistrationQueue()
         );
 
-        $this->subject->setIsOnRegistrationQueue(1);
+        $this->subject->setIsOnRegistrationQueue(true);
         self::assertTrue(
             $this->subject->isOnRegistrationQueue()
         );
@@ -309,7 +310,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
      */
     public function getRegistrationDataForRegisteredThemselvesZeroReturnsLabelNo()
     {
-        $this->subject->setRegisteredThemselves(0);
+        $this->subject->setRegisteredThemselves(false);
 
         self::assertSame(
             $this->subject->translate('label_no'),
@@ -322,7 +323,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
      */
     public function getRegistrationDataForRegisteredThemselvesOneReturnsLabelYes()
     {
-        $this->subject->setRegisteredThemselves(1);
+        $this->subject->setRegisteredThemselves(true);
 
         self::assertSame(
             $this->subject->translate('label_yes'),
@@ -1989,7 +1990,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
             $this->feUserUid,
             ['attendees_names' => '']
         );
-        $this->subject->setRegisteredThemselves(1);
+        $this->subject->setRegisteredThemselves(true);
 
         self::assertSame(
             '1. foo_user',
@@ -2008,7 +2009,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
             $this->feUserUid,
             ['attendees_names' => 'foo']
         );
-        $this->subject->setRegisteredThemselves(1);
+        $this->subject->setRegisteredThemselves(true);
 
         self::assertSame(
             '1. foo_user' . LF . '2. foo',
@@ -2025,7 +2026,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
      */
     public function hasRegisteredMySelfForRegisteredThemselvesFalseReturnsFalse()
     {
-        $this->subject->setRegisteredThemselves(0);
+        $this->subject->setRegisteredThemselves(false);
 
         self::assertFalse(
             $this->subject->hasRegisteredMySelf()
@@ -2037,7 +2038,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
      */
     public function hasRegisteredMySelfForRegisteredThemselvesTrueReturnsTrue()
     {
-        $this->subject->setRegisteredThemselves(1);
+        $this->subject->setRegisteredThemselves(true);
 
         self::assertTrue(
             $this->subject->hasRegisteredMySelf()

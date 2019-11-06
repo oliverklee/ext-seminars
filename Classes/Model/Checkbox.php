@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /**
  * This class represents a checkbox.
@@ -12,7 +13,7 @@ class Tx_Seminars_Model_Checkbox extends \Tx_Oelib_Model implements \Tx_Seminars
      *
      * @return string our title, will not be empty
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->getAsString('title');
     }
@@ -38,7 +39,7 @@ class Tx_Seminars_Model_Checkbox extends \Tx_Oelib_Model implements \Tx_Seminars
      *
      * @return string our description, might be empty
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->getAsString('description');
     }
@@ -61,7 +62,7 @@ class Tx_Seminars_Model_Checkbox extends \Tx_Oelib_Model implements \Tx_Seminars
      * @return bool TRUE if this payment method has a description, FALSE
      *                 otherwise
      */
-    public function hasDescription()
+    public function hasDescription(): bool
     {
         return $this->hasString('description');
     }
@@ -69,8 +70,7 @@ class Tx_Seminars_Model_Checkbox extends \Tx_Oelib_Model implements \Tx_Seminars
     /**
      * Returns our owner.
      *
-     * @return \Tx_Seminars_Model_FrontEndUser the owner of this model, will be null
-     *                                     if this model has no owner
+     * @return \Tx_Seminars_Model_FrontEndUser|null
      */
     public function getOwner()
     {

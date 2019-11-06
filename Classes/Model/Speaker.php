@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Resource\FileRepository;
@@ -58,7 +59,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      * @return string our organization, will be empty if there's no organization
      *                set
      */
-    public function getOrganization()
+    public function getOrganization(): string
     {
         return $this->getAsString('organization');
     }
@@ -80,7 +81,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      *
      * @return bool TRUE if this speaker has an organization, FALSE otherwise
      */
-    public function hasOrganization()
+    public function hasOrganization(): bool
     {
         return $this->hasString('organization');
     }
@@ -90,7 +91,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      *
      * @return string our homepage, will be empty if there's no homepage set
      */
-    public function getHomepage()
+    public function getHomepage(): string
     {
         return $this->getAsString('homepage');
     }
@@ -112,7 +113,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      *
      * @return bool TRUE if this speaker has a homepage, FALSE otherwise
      */
-    public function hasHomepage()
+    public function hasHomepage(): bool
     {
         return $this->hasString('homepage');
     }
@@ -123,7 +124,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      * @return string our description, will be empty if there's no description
      *                set
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->getAsString('description');
     }
@@ -145,7 +146,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      *
      * @return bool TRUE if this speaker has a description, FALSE otherwise
      */
-    public function hasDescription()
+    public function hasDescription(): bool
     {
         return $this->hasString('description');
     }
@@ -156,7 +157,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      * @return \Tx_Oelib_List our skills, will be empty if there are no skills
      *                       related to this speaker
      */
-    public function getSkills()
+    public function getSkills(): \Tx_Oelib_List
     {
         return $this->getAsList('skills');
     }
@@ -178,7 +179,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      *
      * @return string our address, will be empty if there's no address set
      */
-    public function getAddress()
+    public function getAddress(): string
     {
         return $this->getAsString('address');
     }
@@ -200,7 +201,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      *
      * @return bool TRUE if this address has an address, FALSE otherwise
      */
-    public function hasAddress()
+    public function hasAddress(): bool
     {
         return $this->hasString('address');
     }
@@ -211,7 +212,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      * @return string our work telephone number, will be empty if there's no
      *                work telephone number set
      */
-    public function getPhoneWork()
+    public function getPhoneWork(): string
     {
         return $this->getAsString('phone_work');
     }
@@ -234,7 +235,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      * @return bool TRUE if this speaker has a work telephone number, FALSE
      *                 otherwise
      */
-    public function hasPhoneWork()
+    public function hasPhoneWork(): bool
     {
         return $this->hasString('phone_work');
     }
@@ -245,7 +246,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      * @return string our home telephone number, will be empty if there's no
      *                home telephone number set
      */
-    public function getPhoneHome()
+    public function getPhoneHome(): string
     {
         return $this->getAsString('phone_home');
     }
@@ -268,7 +269,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      * @return bool TRUE if this speaker has a home telephone number, FALSE
      *                 otherwise
      */
-    public function hasPhoneHome()
+    public function hasPhoneHome(): bool
     {
         return $this->hasString('phone_home');
     }
@@ -279,7 +280,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      * @return string our mobile telephone number, will be empty if there's no
      *                mobile telephone number set
      */
-    public function getPhoneMobile()
+    public function getPhoneMobile(): string
     {
         return $this->getAsString('phone_mobile');
     }
@@ -302,7 +303,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      * @return bool TRUE if this speaker has a mobile telephone number, FALSE
      *                 otherwise
      */
-    public function hasPhoneMobile()
+    public function hasPhoneMobile(): bool
     {
         return $this->hasString('phone_mobile');
     }
@@ -312,7 +313,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      *
      * @return string our fax number, will be empty if there's no fax number set
      */
-    public function getFax()
+    public function getFax(): string
     {
         return $this->getAsString('fax');
     }
@@ -334,7 +335,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      *
      * @return bool TRUE if this speaker has a fax number, FALSE otherwise
      */
-    public function hasFax()
+    public function hasFax(): bool
     {
         return $this->hasString('fax');
     }
@@ -367,7 +368,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      * @return bool TRUE if this speaker has an e-mail address, FALSE
      *                 otherwise
      */
-    public function hasEMailAddress()
+    public function hasEMailAddress(): bool
     {
         return $this->hasString('email');
     }
@@ -378,7 +379,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      * @return int our gender, will be either GENDER_MALE, GENDER_FEMALE or
      *                 GENDER_UNKNOWN if the speaker has no gender
      */
-    public function getGender()
+    public function getGender(): int
     {
         return $this->getAsInteger('gender');
     }
@@ -402,7 +403,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      *
      * @return bool TRUE if this speaker has a gender, FALSE otherwise
      */
-    public function hasGender()
+    public function hasGender(): bool
     {
         return $this->hasInteger('gender');
     }
@@ -412,7 +413,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      *
      * @return int our cancelation period in days, will be >= 0
      */
-    public function getCancelationPeriod()
+    public function getCancelationPeriod(): int
     {
         return $this->getAsInteger('cancelation_period');
     }
@@ -439,7 +440,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      * @return bool TRUE if this speaker has a cancelation period set, FALSE
      *                 otherwise
      */
-    public function hasCancelationPeriod()
+    public function hasCancelationPeriod(): bool
     {
         return $this->hasInteger('cancelation_period');
     }
@@ -447,8 +448,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
     /**
      * Returns our owner.
      *
-     * @return \Tx_Seminars_Model_FrontEndUser the owner of this model, will be null
-     *                                     if this model has no owner
+     * @return \Tx_Seminars_Model_FrontEndUser|null
      */
     public function getOwner()
     {
@@ -472,7 +472,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      *
      * @return string our notes, may be empty
      */
-    public function getNotes()
+    public function getNotes(): string
     {
         return $this->getAsString('notes');
     }
@@ -492,7 +492,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
     /**
      * @return bool
      */
-    public function hasImage()
+    public function hasImage(): bool
     {
         return $this->getAsInteger('image') > 0;
     }
@@ -514,7 +514,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
     /**
      * @return FileRepository
      */
-    private function getFileRepository()
+    private function getFileRepository(): FileRepository
     {
         /** @var FileRepository $fileRepository */
         $fileRepository = GeneralUtility::makeInstance(FileRepository::class);

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -195,7 +196,7 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_Abstr
      *
      * @return \Tx_Seminars_BagBuilder_Registration the bag builder
      */
-    private function createRegistrationBagBuilder()
+    private function createRegistrationBagBuilder(): \Tx_Seminars_BagBuilder_Registration
     {
         /** @var \Tx_Seminars_BagBuilder_Registration $builder */
         $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Registration::class);
@@ -211,7 +212,7 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_Abstr
      *
      * @return string the table header HTML, will not be empty
      */
-    private function createTableHeader()
+    private function createTableHeader(): string
     {
         /** @var string[] $labelKeys */
         $labelKeys = [];
@@ -288,7 +289,7 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_Abstr
      *
      * @return string[] keys of the front-end user fields to display, might be empty
      */
-    private function getFrontEndUserFields()
+    private function getFrontEndUserFields(): array
     {
         return GeneralUtility::trimExplode(
             ',',
@@ -306,7 +307,7 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_Abstr
      *
      * @return string[] keys of the registration fields to display, might be empty
      */
-    private function getRegistrationFields()
+    private function getRegistrationFields(): array
     {
         return GeneralUtility::trimExplode(
             ',',

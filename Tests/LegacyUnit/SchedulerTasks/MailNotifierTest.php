@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\SchedulerTasks;
 
 use OliverKlee\PhpUnit\Interfaces\AccessibleObject;
@@ -88,7 +89,7 @@ class MailNotifierTest extends TestCase
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
-        $this->languageBackup = isset($GLOBALS['LANG']) ? $GLOBALS['LANG'] : null;
+        $this->languageBackup = $GLOBALS['LANG'] ?? null;
         if (!ExtensionManagementUtility::isLoaded('scheduler')) {
             self::markTestSkipped('This tests needs the scheduler extension.');
         }

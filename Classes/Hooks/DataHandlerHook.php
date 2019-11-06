@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace OliverKlee\Seminars\Hooks;
 
@@ -78,7 +79,7 @@ class DataHandlerHook
      *
      * @return int
      */
-    private function createRealUid($uid, DataHandler $dataHandler)
+    private function createRealUid($uid, DataHandler $dataHandler): int
     {
         if ($this->isPersistedUid($uid)) {
             return (int)$uid;
@@ -92,7 +93,7 @@ class DataHandlerHook
      *
      * @return bool
      */
-    private function isPersistedUid($uid)
+    private function isPersistedUid($uid): bool
     {
         return MathUtility::canBeInterpretedAsInteger($uid);
     }
@@ -119,7 +120,7 @@ class DataHandlerHook
      *
      * @return bool
      */
-    private function hasDataForTable($table)
+    private function hasDataForTable($table): bool
     {
         return isset($this->tceMainFieldArrays[$table]) && \is_array($this->tceMainFieldArrays[$table]);
     }

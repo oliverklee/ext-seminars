@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /**
  * This is mere a class used for unit tests. Don't use it for any other purpose.
@@ -13,7 +14,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      * @param int $uid the UID of the event to retrieve from the DB, must be > 0
      * @param array $configuration TS setup configuration array, may be empty
      */
-    public function __construct($uid, array $configuration = [])
+    public function __construct(int $uid, array $configuration = [])
     {
         parent::__construct($uid);
 
@@ -40,7 +41,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setUnregistrationDeadline($unregistrationDeadline)
+    public function setUnregistrationDeadline(int $unregistrationDeadline)
     {
         $this->setRecordPropertyInteger(
             'deadline_unregistration',
@@ -55,7 +56,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setAllowRegistrationForEventsWithoutDate($value)
+    public function setAllowRegistrationForEventsWithoutDate(int $value)
     {
         $this->setConfigurationValue(
             'allowRegistrationForEventsWithoutDate',
@@ -70,7 +71,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setBeginDate($beginDate)
+    public function setBeginDate(int $beginDate)
     {
         $this->setRecordPropertyInteger('begin_date', $beginDate);
     }
@@ -82,7 +83,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setEndDate($endDate)
+    public function setEndDate(int $endDate)
     {
         $this->setRecordPropertyInteger('end_date', $endDate);
     }
@@ -94,7 +95,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setAttendancesMax($attendancesMax)
+    public function setAttendancesMax(int $attendancesMax)
     {
         $this->setRecordPropertyInteger('attendees_max', $attendancesMax);
     }
@@ -106,7 +107,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setShowTimeOfUnregistrationDeadline($value)
+    public function setShowTimeOfUnregistrationDeadline(int $value)
     {
         $this->setConfigurationValue(
             'showTimeOfUnregistrationDeadline',
@@ -122,7 +123,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setGlobalUnregistrationDeadline($days)
+    public function setGlobalUnregistrationDeadline(int $days)
     {
         $this->setConfigurationValue(
             'unregistrationDeadlineDaysBeforeBeginDate',
@@ -137,7 +138,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setRegistrationQueue($hasRegistrationQueue)
+    public function setRegistrationQueue(bool $hasRegistrationQueue)
     {
         $this->setRecordPropertyBoolean('queue_size', $hasRegistrationQueue);
     }
@@ -149,7 +150,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setNumberOfAttendances($number)
+    public function setNumberOfAttendances(int $number)
     {
         $this->numberOfAttendances = $number;
         $this->statisticsHaveBeenCalculated = true;
@@ -162,7 +163,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setNumberOfAttendancesOnQueue($number)
+    public function setNumberOfAttendancesOnQueue(int $number)
     {
         $this->numberOfAttendancesOnQueue = $number;
         $this->statisticsHaveBeenCalculated = true;
@@ -179,7 +180,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setNumberOfPlaces($places)
+    public function setNumberOfPlaces(int $places)
     {
         $this->setRecordPropertyInteger('place', $places);
     }
@@ -195,7 +196,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setNumberOfTargetGroups($targetGroups)
+    public function setNumberOfTargetGroups(int $targetGroups)
     {
         $this->setRecordPropertyInteger('target_groups', $targetGroups);
     }
@@ -213,7 +214,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setNumberOfPaymentMethods($paymentMethods)
+    public function setNumberOfPaymentMethods(int $paymentMethods)
     {
         $this->setRecordPropertyInteger('payment_methods', $paymentMethods);
     }
@@ -231,7 +232,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setNumberOfOrganizingPartners($numberOfOrganizingPartners)
+    public function setNumberOfOrganizingPartners(int $numberOfOrganizingPartners)
     {
         $this->setRecordPropertyInteger(
             'organizing_partners',
@@ -250,7 +251,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setNumberOfCategories($number)
+    public function setNumberOfCategories(int $number)
     {
         $this->setRecordPropertyInteger('categories', $number);
     }
@@ -267,7 +268,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setNumberOfOrganizers($number)
+    public function setNumberOfOrganizers(int $number)
     {
         $this->setRecordPropertyInteger('organizers', $number);
     }
@@ -284,7 +285,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setNumberOfSpeakers($number)
+    public function setNumberOfSpeakers(int $number)
     {
         $this->setRecordPropertyInteger('speakers', $number);
     }
@@ -301,7 +302,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setNumberOfPartners($number)
+    public function setNumberOfPartners(int $number)
     {
         $this->setRecordPropertyInteger('partners', $number);
     }
@@ -318,7 +319,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setNumberOfTutors($number)
+    public function setNumberOfTutors(int $number)
     {
         $this->setRecordPropertyInteger('tutors', $number);
     }
@@ -335,7 +336,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setNumberOfLeaders($number)
+    public function setNumberOfLeaders(int $number)
     {
         $this->setRecordPropertyInteger('leaders', $number);
     }
@@ -347,7 +348,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setSkipCollisionCheck($skipIt)
+    public function setSkipCollisionCheck(bool $skipIt)
     {
         $this->setRecordPropertyBoolean('skip_collision_check', $skipIt);
     }
@@ -361,7 +362,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setRecordType($recordType)
+    public function setRecordType(int $recordType)
     {
         $this->setRecordPropertyInteger('object_type', $recordType);
     }
@@ -374,7 +375,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setHidden($hidden)
+    public function setHidden(bool $hidden)
     {
         $this->setRecordPropertyBoolean('hidden', $hidden);
     }
@@ -386,7 +387,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setRecordStartTime($timeStamp)
+    public function setRecordStartTime(int $timeStamp)
     {
         $this->setRecordPropertyInteger('starttime', $timeStamp);
     }
@@ -398,7 +399,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setRecordEndTime($timeStamp)
+    public function setRecordEndTime(int $timeStamp)
     {
         $this->setRecordPropertyInteger('endtime', $timeStamp);
     }
@@ -411,7 +412,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setAllowUnregistrationWithEmptyWaitingList($isAllowed)
+    public function setAllowUnregistrationWithEmptyWaitingList(bool $isAllowed)
     {
         $this->setConfigurationValue('allowUnregistrationWithEmptyWaitingList', (int)$isAllowed);
     }
@@ -423,7 +424,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setOwnerUid($ownerUid)
+    public function setOwnerUid(int $ownerUid)
     {
         $this->setRecordPropertyInteger('owner_feuser', $ownerUid);
     }
@@ -435,7 +436,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setNumberOfTimeSlots($numberOfTimeSlots)
+    public function setNumberOfTimeSlots(int $numberOfTimeSlots)
     {
         $this->setRecordPropertyInteger('timeslots', $numberOfTimeSlots);
     }
@@ -447,7 +448,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setImage($fileName)
+    public function setImage(string $fileName)
     {
         $this->setRecordPropertyString('image', $fileName);
     }
@@ -459,7 +460,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setAllowsMultipleRegistrations($allowMultipleRegistrations)
+    public function setAllowsMultipleRegistrations(bool $allowMultipleRegistrations)
     {
         $this->setRecordPropertyBoolean(
             'allows_multiple_registrations',
@@ -474,7 +475,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setExpiry($expiry)
+    public function setExpiry(int $expiry)
     {
         $this->setRecordPropertyInteger('expiry', $expiry);
     }
@@ -488,7 +489,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return string our places description (or '' if there is an error)
      */
-    public function getPlaceWithDetailsRaw()
+    public function getPlaceWithDetailsRaw(): string
     {
         return parent::getPlaceWithDetailsRaw();
     }
@@ -500,7 +501,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setNumberOfLodgings($lodgings)
+    public function setNumberOfLodgings(int $lodgings)
     {
         $this->setRecordPropertyInteger('lodgings', $lodgings);
     }
@@ -518,7 +519,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return string our speakers (or '' if there is an error)
      */
-    public function getSpeakersWithDescriptionRaw($speakerRelation = 'speakers')
+    public function getSpeakersWithDescriptionRaw(string $speakerRelation = 'speakers'): string
     {
         return parent::getSpeakersWithDescriptionRaw($speakerRelation);
     }
@@ -531,7 +532,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      * @return string our payment methods as plain text (or '' if there
      *                is an error)
      */
-    public function getPaymentMethodsPlainShort()
+    public function getPaymentMethodsPlainShort(): string
     {
         return parent::getPaymentMethodsPlainShort();
     }
@@ -542,7 +543,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      * @return string names and homepages of our organizers or an
      *                empty string if there are no organizers
      */
-    public function getOrganizersRaw()
+    public function getOrganizersRaw(): string
     {
         return parent::getOrganizersRaw();
     }
@@ -554,7 +555,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setNeedsRegistration($needsRegistration)
+    public function setNeedsRegistration(bool $needsRegistration)
     {
         $this->setRecordPropertyBoolean(
             'needs_registration',
@@ -569,7 +570,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setRegistrationDeadline($registrationDeadline)
+    public function setRegistrationDeadline(int $registrationDeadline)
     {
         $this->setRecordPropertyInteger(
             'deadline_registration',
@@ -597,7 +598,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setRegistrationBeginDate($registrationBeginDate)
+    public function setRegistrationBeginDate(int $registrationBeginDate)
     {
         $this->setRecordPropertyInteger(
             'begin_date_registration',
@@ -614,7 +615,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setOfflineRegistrationNumber($offlineRegistrations)
+    public function setOfflineRegistrationNumber(int $offlineRegistrations)
     {
         $this->setRecordPropertyInteger(
             'offline_attendees',
@@ -631,7 +632,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return bool TRUE if the corresponding integer exists and is non-empty
      */
-    public function hasTopicInteger($key)
+    public function hasTopicInteger(string $key): bool
     {
         return parent::hasTopicInteger($key);
     }
@@ -646,7 +647,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return int the corresponding element from the record data array
      */
-    public function getTopicInteger($key)
+    public function getTopicInteger(string $key): int
     {
         return parent::getTopicInteger($key);
     }
@@ -659,7 +660,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setRecordPropertyInteger($key, $value)
+    public function setRecordPropertyInteger(string $key, int $value)
     {
         parent::setRecordPropertyInteger($key, $value);
     }
@@ -672,7 +673,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return void
      */
-    public function setRecordPropertyString($key, $value)
+    public function setRecordPropertyString(string $key, string $value)
     {
         parent::setRecordPropertyString($key, $value);
     }
@@ -680,12 +681,12 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
     /**
      * Sets the ID of the separate details page for this event.
      *
-     * @param string $pageId the page UID or alias, may also be empty
+     * @param string|int $pageId the page UID or alias, may also be empty
      *
      * @return void
      */
     public function setDetailsPage($pageId)
     {
-        $this->setRecordPropertyString('details_page', $pageId);
+        $this->setRecordPropertyString('details_page', (string)$pageId);
     }
 }

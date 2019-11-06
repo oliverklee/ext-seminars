@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 namespace OliverKlee\Seminars\SchedulerTask;
 
 use TYPO3\CMS\Core\Mail\MailMessage;
@@ -68,7 +69,7 @@ class RegistrationDigest
     /**
      * @return bool
      */
-    public function isInitialized()
+    public function isInitialized(): bool
     {
         return $this->initialized;
     }
@@ -78,7 +79,7 @@ class RegistrationDigest
      *
      * @return \Tx_Oelib_Configuration the initialized configuration
      */
-    public function getConfiguration()
+    public function getConfiguration(): \Tx_Oelib_Configuration
     {
         return $this->configuration;
     }
@@ -100,7 +101,7 @@ class RegistrationDigest
      *
      * @return \Tx_Seminars_Mapper_Event the initialized event mapper
      */
-    public function getEventMapper()
+    public function getEventMapper(): \Tx_Seminars_Mapper_Event
     {
         return $this->eventMapper;
     }
@@ -142,7 +143,7 @@ class RegistrationDigest
      *
      * @return MailMessage
      */
-    private function buildEmail(\Tx_Oelib_List $events)
+    private function buildEmail(\Tx_Oelib_List $events): MailMessage
     {
         $configuration = $this->configuration;
         $email = $this->objectManager->get(MailMessage::class);
@@ -168,13 +169,13 @@ class RegistrationDigest
      *
      * @return string
      */
-    private function createContent($templatePath, \Tx_Oelib_List $events)
+    private function createContent(string $templatePath, \Tx_Oelib_List $events): string
     {
         $view = $this->objectManager->get(StandaloneView::class);
         $view->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName($templatePath));
         $view->assign('events', $events);
 
-        return $view->render();
+        return (string)$view->render();
     }
 
     /**

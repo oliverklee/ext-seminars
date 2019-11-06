@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /**
  * This class represents a mapper for events.
@@ -51,9 +52,7 @@ class Tx_Seminars_Mapper_Event extends \Tx_Oelib_DataMapper
      * @param string $publicationHash
      *        the publication hash to find the event for, must not be empty
      *
-     * @return \Tx_Seminars_Model_Event the event with the publication hash
-     *                                 provided, will be NULL if no event could
-     *                                 be found
+     * @return \Tx_Seminars_Model_Event|null
      */
     public function findByPublicationHash($publicationHash)
     {
@@ -86,7 +85,7 @@ class Tx_Seminars_Mapper_Event extends \Tx_Oelib_DataMapper
      * @return \Tx_Oelib_List the found \Tx_Seminars_Model_Event models, will be
      *                       empty if there are no matches
      */
-    public function findAllByBeginDate($minimum, $maximum)
+    public function findAllByBeginDate($minimum, $maximum): \Tx_Oelib_List
     {
         if ($minimum < 0) {
             throw new \InvalidArgumentException('$minimum must be >= 0.');
@@ -110,7 +109,7 @@ class Tx_Seminars_Mapper_Event extends \Tx_Oelib_DataMapper
      *
      * @throws \Tx_Oelib_Exception_NotFound
      */
-    public function findNextUpcoming()
+    public function findNextUpcoming(): \Tx_Seminars_Model_Event
     {
         $whereClause = $this->getUniversalWhereClause(
             ) . ' AND cancelled <> ' . \Tx_Seminars_Model_Event::STATUS_CANCELED .
@@ -136,7 +135,7 @@ class Tx_Seminars_Mapper_Event extends \Tx_Oelib_DataMapper
      *
      * @return \Tx_Oelib_List the \Tx_Oelib_List<Tx_Seminars_Model_Event>
      */
-    public function findForAutomaticStatusChange()
+    public function findForAutomaticStatusChange(): \Tx_Oelib_List
     {
         $whereClause = 'cancelled = ' . \Tx_Seminars_Model_Event::STATUS_PLANNED . ' AND automatic_confirmation_cancelation = 1';
 
@@ -152,7 +151,7 @@ class Tx_Seminars_Mapper_Event extends \Tx_Oelib_DataMapper
      *
      * @return \Tx_Oelib_List the \Tx_Oelib_List<Tx_Seminars_Model_Event>
      */
-    public function findForRegistrationDigestEmail()
+    public function findForRegistrationDigestEmail(): \Tx_Oelib_List
     {
         $whereClause = 'registrations <> 0' .
             ' AND object_type <> ' . \Tx_Seminars_Model_Event::TYPE_TOPIC .

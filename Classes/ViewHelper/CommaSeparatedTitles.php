@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /**
  * This class represents a view helper for rendering the elements of a list as comma-separated titles.
@@ -16,7 +17,7 @@ class Tx_Seminars_ViewHelper_CommaSeparatedTitles
      *
      * @return string the titles of the elements in $list as a comma-separated list or an empty string if the list is empty
      */
-    public function render(\Tx_Oelib_List $list)
+    public function render(\Tx_Oelib_List $list): string
     {
         $titles = [];
 

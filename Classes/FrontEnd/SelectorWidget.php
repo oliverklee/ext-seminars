@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 use SJBR\StaticInfoTables\PiBaseApi;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -140,7 +141,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
      *
      * @return array the POST data without the dummy option
      */
-    public static function removeDummyOptionFromFormData(array $formData)
+    public static function removeDummyOptionFromFormData(array $formData): array
     {
         $cleanedFormData = [];
 
@@ -164,7 +165,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
      *
      * @return string the HTML content for the select, will not be empty
      */
-    private function createOptionBox($name, array $options)
+    private function createOptionBox($name, array $options): string
     {
         $this->setMarker('options_header', $this->translate('label_' . $name));
         $this->setMarker(
@@ -255,7 +256,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
      * @return bool TRUE if the given field should be displayed as per
      *                 configuration, FALSE otherwise
      */
-    protected function hasSearchField($fieldToCheck)
+    protected function hasSearchField($fieldToCheck): bool
     {
         return in_array($fieldToCheck, $this->displayedSearchFields);
     }
@@ -271,7 +272,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
      *
      * @return string the generated HTML, will not be empty
      */
-    private function createDropDown($options, $name)
+    private function createDropDown($options, $name): string
     {
         $this->setMarker('dropdown_name', $this->prefixId . '[' . $name . ']');
         $this->setMarker('dropdown_id', $this->prefixId . '-' . $name);
@@ -371,10 +372,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
             return;
         }
 
-        $this->setMarker(
-            'searchbox_value',
-            htmlspecialchars($this->piVars['sword'])
-        );
+        $this->setMarker('searchbox_value', \htmlspecialchars((string)$this->piVars['sword']));
     }
 
     /**
@@ -468,7 +466,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
      *               title of the event type, will be empty if no data could be
      *               found
      */
-    protected function getEventTypeData()
+    protected function getEventTypeData(): array
     {
         $result = [];
 
@@ -494,7 +492,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
      *               the localized title of the language, will be empty if no
      *               data could be found
      */
-    protected function getLanguageData()
+    protected function getLanguageData(): array
     {
         $result = [];
 
@@ -527,7 +525,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
      *               will be the UID of the place and the value will be the
      *               title of the place, will be empty if no data could be found
      */
-    protected function getPlaceData()
+    protected function getPlaceData(): array
     {
         if ($this->seminarBag->isEmpty()) {
             return [];
@@ -551,7 +549,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
      *               value will be the name of the city, will be empty if no
      *               data could be found
      */
-    protected function getCityData()
+    protected function getCityData(): array
     {
         if ($this->seminarBag->isEmpty()) {
             return [];
@@ -577,7 +575,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
      *               the name of the country, will be empty if no data could be
      *               found
      */
-    protected function getCountryData()
+    protected function getCountryData(): array
     {
         if ($this->seminarBag->isEmpty()) {
             return [];
@@ -608,7 +606,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
      *         month and year as key, the second level has the day, month or
      *         year value as value and key, will not be empty
      */
-    private function createDateArray()
+    private function createDateArray(): array
     {
         $result = [
             'day' => [],
@@ -645,7 +643,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
      *               name of the organizer, will be empty if no data could be
      *               found
      */
-    private function getOrganizerData()
+    private function getOrganizerData(): array
     {
         $result = [];
 
@@ -674,7 +672,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
      *               name of the category, will be empty if no data could be
      *               found
      */
-    private function getCategoryData()
+    private function getCategoryData(): array
     {
         $result = [];
 

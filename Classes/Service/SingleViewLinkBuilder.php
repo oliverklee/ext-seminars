@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 use TYPO3\CMS\Core\TimeTracker\NullTimeTracker;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -16,7 +17,7 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
     /**
      * a plugin instance that provides access to the flexforms plugin settings
      *
-     * @var AbstractPlugin
+     * @var \Tx_Oelib_TemplateHelper|null
      */
     private $plugin = null;
 
@@ -27,7 +28,7 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
      *
      * @return void
      */
-    public function setPlugin(AbstractPlugin $plugin)
+    public function setPlugin(\Tx_Oelib_TemplateHelper $plugin)
     {
         $this->plugin = $plugin;
     }
@@ -35,8 +36,7 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
     /**
      * Returns the plugin used for accessing the flexforms plugin settings.
      *
-     * @return \Tx_Oelib_TemplateHelper
-     *         the plugin, will be NULL if non has been set via setPlugin
+     * @return \Tx_Oelib_TemplateHelper|null
      *
      * @see setPlugin
      */
@@ -53,7 +53,7 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
      * @return string
      *         the absolute URL for the event's single view, not htmlspecialchared
      */
-    public function createAbsoluteUrlForEvent(\Tx_Seminars_Model_Event $event)
+    public function createAbsoluteUrlForEvent(\Tx_Seminars_Model_Event $event): string
     {
         return GeneralUtility::locationHeaderUrl(
             $this->createRelativeUrlForEvent($event)
@@ -68,7 +68,7 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
      * @return string
      *         the relative URL for the event's single view, not htmlspecialchared
      */
-    public function createRelativeUrlForEvent(\Tx_Seminars_Model_Event $event)
+    public function createRelativeUrlForEvent(\Tx_Seminars_Model_Event $event): string
     {
         $linkConfiguration = [
             'parameter' => $this->getSingleViewPageForEvent($event),
@@ -81,7 +81,7 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
             ),
         ];
 
-        return $this->getContentObject()->typoLink_URL($linkConfiguration);
+        return (string)$this->getContentObject()->typoLink_URL($linkConfiguration);
     }
 
     /**
@@ -153,7 +153,7 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
      *         the single view page UID/URL for $event, will be empty if neither
      *         the event nor the configuration has any single view page set
      */
-    protected function getSingleViewPageForEvent(\Tx_Seminars_Model_Event $event)
+    protected function getSingleViewPageForEvent(\Tx_Seminars_Model_Event $event): string
     {
         if ($event->hasCombinedSingleViewPage()) {
             $result = $event->getCombinedSingleViewPage();
@@ -173,7 +173,7 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
      *         TRUE if a single view page has been set in the configuration,
      *         FALSE otherwise
      */
-    protected function configurationHasSingleViewPage()
+    protected function configurationHasSingleViewPage(): bool
     {
         return $this->getSingleViewPageFromConfiguration() > 0;
     }

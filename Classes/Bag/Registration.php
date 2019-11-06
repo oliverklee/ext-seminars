@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -27,7 +28,7 @@ class Tx_Seminars_Bag_Registration extends \Tx_Seminars_Bag_Abstract
      *        GROUP BY clause (may be empty), must already be safeguarded against SQL injection
      * @param string $orderBy
      *        ORDER BY clause (may be empty), must already be safeguarded against SQL injection
-     * @param string $limit
+     * @param int|string $limit
      *        LIMIT clause (may be empty), must already be safeguarded against SQL injection
      * @param int $showHiddenRecords
      *        If $showHiddenRecords is set (0/1), any hidden fields in records are ignored.

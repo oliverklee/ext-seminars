@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 namespace OliverKlee\Seminars\BackEnd;
 
 use TYPO3\CMS\Backend\Utility\BackendUtility;
@@ -39,7 +40,7 @@ class EventsList extends AbstractList
      *
      * @return string the HTML source code of the event list
      */
-    public function show()
+    public function show(): string
     {
         $content = '';
 
@@ -247,7 +248,7 @@ class EventsList extends AbstractList
      *
      * @return string HTML image tag, may be empty
      */
-    private function getStatusIcon(\Tx_Seminars_OldModel_Event $event)
+    private function getStatusIcon(\Tx_Seminars_OldModel_Event $event): string
     {
         if (!$event->isCanceled() && !$event->isConfirmed()) {
             return '';
@@ -277,7 +278,7 @@ class EventsList extends AbstractList
      *
      * @return string the HTML for the linked image (followed by a non-breaking space) or an empty string
      */
-    public function getRegistrationsCsvIcon(\Tx_Seminars_OldModel_Event $event)
+    public function getRegistrationsCsvIcon(\Tx_Seminars_OldModel_Event $event): string
     {
         if (!$this->getAccessCheck()->hasAccess() || !$event->hasAttendances()) {
             return '';
@@ -307,7 +308,7 @@ class EventsList extends AbstractList
      *
      * @return \Tx_Seminars_Csv_BackEndRegistrationAccessCheck
      */
-    protected function getAccessCheck()
+    protected function getAccessCheck(): \Tx_Seminars_Csv_BackEndRegistrationAccessCheck
     {
         if ($this->accessCheck === null) {
             $this->accessCheck = GeneralUtility::makeInstance(\Tx_Seminars_Csv_BackEndRegistrationAccessCheck::class);
@@ -438,7 +439,7 @@ class EventsList extends AbstractList
      * @return string the URL to the registrations tab with the registration for
      *                the current event, will not be empty
      */
-    private function createEventRegistrationsLink(\Tx_Seminars_OldModel_Event $event)
+    private function createEventRegistrationsLink(\Tx_Seminars_OldModel_Event $event): string
     {
         $pageData = $this->page->getPageData();
 

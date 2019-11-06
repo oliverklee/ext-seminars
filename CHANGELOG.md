@@ -20,7 +20,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 - Drop unneeded Travis CI configuration settings (#258, #259, #260, #261)
 - Remove the empty update wizard (#250)
-- Drop support for PHP 5 (#249)
+- Drop support for PHP 5 (#249, #284)
 - Drop support for TYPO3 7.6 (#248, #272, #280)
 
 ### Fixed

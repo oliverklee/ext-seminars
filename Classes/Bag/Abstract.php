@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -103,7 +104,7 @@ abstract class Tx_Seminars_Bag_Abstract implements Iterator, \Tx_Oelib_Interface
      *        GROUP BY clause (may be empty), must already be safeguarded against SQL injection
      * @param string $orderBy
      *        ORDER BY clause (may be empty), must already be safeguarded against SQL injection
-     * @param string $limit
+     * @param int|string $limit
      *        LIMIT clause (may be empty), must already be safeguarded against SQL injection
      * @param int $showHiddenRecords
      *        If $showHiddenRecords is set (0/1), any hidden fields in records are ignored.
@@ -111,14 +112,14 @@ abstract class Tx_Seminars_Bag_Abstract implements Iterator, \Tx_Oelib_Interface
      *        If $ignoreTimingOfRecords is TRUE the timing of records is ignored.
      */
     public function __construct(
-        $dbTableName,
-        $queryParameters = '1=1',
-        $additionalTableNames = '',
-        $groupBy = '',
-        $orderBy = 'uid',
+        string $dbTableName,
+        string $queryParameters = '1=1',
+        string $additionalTableNames = '',
+        string $groupBy = '',
+        string $orderBy = 'uid',
         $limit = '',
-        $showHiddenRecords = -1,
-        $ignoreTimingOfRecords = false
+        int $showHiddenRecords = -1,
+        bool $ignoreTimingOfRecords = false
     ) {
         $this->dbTableName = $dbTableName;
         $this->queryParameters = trim($queryParameters);
@@ -146,8 +147,8 @@ abstract class Tx_Seminars_Bag_Abstract implements Iterator, \Tx_Oelib_Interface
      * @return void
      */
     private function createEnabledFieldsQuery(
-        $showHiddenRecords = -1,
-        $ignoreTimingOfRecords = false
+        int $showHiddenRecords = -1,
+        bool $ignoreTimingOfRecords = false
     ) {
         $ignoreColumns = [];
 
@@ -262,7 +263,7 @@ abstract class Tx_Seminars_Bag_Abstract implements Iterator, \Tx_Oelib_Interface
      *
      * @return bool TRUE if the current item is valid, FALSE otherwise
      */
-    public function valid()
+    public function valid(): bool
     {
         if (!$this->currentItem || !$this->currentItem->isOk()) {
             $this->currentItem = null;
@@ -277,7 +278,7 @@ abstract class Tx_Seminars_Bag_Abstract implements Iterator, \Tx_Oelib_Interface
      *
      * @return int the UID of the current item, will be > 0
      */
-    public function key()
+    public function key(): int
     {
         if (!$this->valid()) {
             throw new \RuntimeException('The current item is not valid.', 1333292257);
@@ -293,7 +294,7 @@ abstract class Tx_Seminars_Bag_Abstract implements Iterator, \Tx_Oelib_Interface
      *
      * @return int the total number of objects in this bag, may be zero
      */
-    public function count()
+    public function count(): int
     {
         if ($this->hasCount) {
             return $this->count;
@@ -315,7 +316,7 @@ abstract class Tx_Seminars_Bag_Abstract implements Iterator, \Tx_Oelib_Interface
      * @return int the total number of objects in this bag without any
      *                 limit, may be zero
      */
-    public function countWithoutLimit()
+    public function countWithoutLimit(): int
     {
         if ($this->hasCountWithoutLimit) {
             return $this->countWithoutLimit;
@@ -327,7 +328,7 @@ abstract class Tx_Seminars_Bag_Abstract implements Iterator, \Tx_Oelib_Interface
             $this->queryParameters . $this->enabledFieldsQuery
         );
 
-        $this->countWithoutLimit = $dbResultRow['number'];
+        $this->countWithoutLimit = (int)$dbResultRow['number'];
         $this->hasCountWithoutLimit = true;
 
         return $this->countWithoutLimit;
@@ -340,7 +341,7 @@ abstract class Tx_Seminars_Bag_Abstract implements Iterator, \Tx_Oelib_Interface
      *
      * @return bool TRUE if this bag is empty, FALSE otherwise
      */
-    public function isEmpty()
+    public function isEmpty(): bool
     {
         if ($this->hasCount) {
             return $this->count == 0;
@@ -364,7 +365,7 @@ abstract class Tx_Seminars_Bag_Abstract implements Iterator, \Tx_Oelib_Interface
      * @return string comma-separated, sorted list of UIDs of the records in
      *                this bag, will be an empty string if this bag is empty
      */
-    public function getUids()
+    public function getUids(): string
     {
         $uids = [];
 
@@ -384,7 +385,7 @@ abstract class Tx_Seminars_Bag_Abstract implements Iterator, \Tx_Oelib_Interface
      *
      * @return string error messages from the configuration check, may be empty
      */
-    public function checkConfiguration()
+    public function checkConfiguration(): string
     {
         if ($this->current() && $this->current()->isOk()) {
             return $this->current()->checkConfiguration(true);
@@ -398,7 +399,7 @@ abstract class Tx_Seminars_Bag_Abstract implements Iterator, \Tx_Oelib_Interface
      *
      * @return string the namespace prefix, will end with a dot
      */
-    public function getTypoScriptNamespace()
+    public function getTypoScriptNamespace(): string
     {
         return 'plugin.tx_seminars.';
     }
