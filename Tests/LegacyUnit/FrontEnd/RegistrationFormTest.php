@@ -343,8 +343,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_payment_methods_mm',
             $this->seminarUid,
-            $paymentMethodUid,
-            'payment_methods'
+            $paymentMethodUid
         );
 
         self::assertCount(
@@ -363,8 +362,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_payment_methods_mm',
             $this->seminarUid,
-            $paymentMethodUid,
-            'payment_methods'
+            $paymentMethodUid
         );
 
         $paymentMethods = $this->subject->populateListPaymentMethods();
@@ -384,8 +382,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_payment_methods_mm',
             $this->seminarUid,
-            $paymentMethodUid,
-            'payment_methods'
+            $paymentMethodUid
         );
 
         $paymentMethods = $this->subject->populateListPaymentMethods();
@@ -401,15 +398,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_payment_methods_mm',
             $this->seminarUid,
-            $this->testingFramework->createRecord('tx_seminars_payment_methods'),
-            'payment_methods'
+            $this->testingFramework->createRecord('tx_seminars_payment_methods')
         );
 
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_payment_methods_mm',
             $this->seminarUid,
-            $this->testingFramework->createRecord('tx_seminars_payment_methods'),
-            'payment_methods'
+            $this->testingFramework->createRecord('tx_seminars_payment_methods')
         );
 
         self::assertCount(
@@ -460,7 +455,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
     }
 
     public function testGetStepCounterReturnsNumberOfLastRegistrationPageAsCurrentPageIfPageNumberIsAboveLastRegistrationPage(
-    ) {
+    )
+    {
         $this->subject->setConfigurationValue(
             'numberOfFirstRegistrationPage',
             1
@@ -1473,14 +1469,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_payment_methods_mm',
             $this->seminarUid,
-            $this->testingFramework->createRecord('tx_seminars_payment_methods'),
-            'payment_methods'
+            $this->testingFramework->createRecord('tx_seminars_payment_methods')
         );
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_payment_methods_mm',
             $this->seminarUid,
-            $this->testingFramework->createRecord('tx_seminars_payment_methods'),
-            'payment_methods'
+            $this->testingFramework->createRecord('tx_seminars_payment_methods')
         );
 
         self::assertEquals(
@@ -1497,8 +1491,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_payment_methods_mm',
             $this->seminarUid,
-            $this->testingFramework->createRecord('tx_seminars_payment_methods'),
-            'payment_methods'
+            $this->testingFramework->createRecord('tx_seminars_payment_methods')
         );
         $selectedPaymentMethodUid = $this->testingFramework->createRecord(
             'tx_seminars_payment_methods'
@@ -1506,8 +1499,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_payment_methods_mm',
             $this->seminarUid,
-            $selectedPaymentMethodUid,
-            'payment_methods'
+            $selectedPaymentMethodUid
         );
 
         $this->session->setAsInteger(
@@ -1537,8 +1529,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_payment_methods_mm',
             $this->seminarUid,
-            $selectedPaymentMethodUid,
-            'payment_methods'
+            $selectedPaymentMethodUid
         );
         $this->subject->setFakedFormValue(
             'method_of_payment',
