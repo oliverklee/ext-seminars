@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /**
  * This class provides the access check for the CSV export of registrations in the front end.
@@ -29,7 +30,7 @@ class Tx_Seminars_Csv_FrontEndRegistrationAccessCheck implements \Tx_Seminars_In
      *
      * @return \Tx_Seminars_OldModel_Event
      */
-    protected function getEvent()
+    protected function getEvent(): \Tx_Seminars_OldModel_Event
     {
         return $this->event;
     }

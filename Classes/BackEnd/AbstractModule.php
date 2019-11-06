@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 namespace OliverKlee\Seminars\BackEnd;
 
 use TYPO3\CMS\Backend\Module\BaseScriptClass;
@@ -73,7 +74,7 @@ abstract class AbstractModule extends BaseScriptClass
      *
      * @return string[] the data of the current BE page, may be emtpy
      */
-    public function getPageData()
+    public function getPageData(): array
     {
         return $this->pageData;
     }

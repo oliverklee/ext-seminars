@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 namespace OliverKlee\Seminars\BackEnd;
 
 use Psr\Http\Message\ResponseInterface;
@@ -27,7 +28,7 @@ class Controller extends AbstractModule
      *
      * @return ResponseInterface
      */
-    public function mainAction(ServerRequestInterface $request, ResponseInterface $response)
+    public function mainAction(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         $this->init();
         if (GeneralUtility::_GET('csv') === '1') {
@@ -47,7 +48,7 @@ class Controller extends AbstractModule
      *
      * @return string
      */
-    public function main()
+    public function main(): string
     {
         $languageService = $this->getLanguageService();
         $backEndUser = $this->getBackendUser();
@@ -193,7 +194,7 @@ class Controller extends AbstractModule
      *
      * @return string
      */
-    protected function getRenderedFlashMessages()
+    protected function getRenderedFlashMessages(): string
     {
         /** @var FlashMessageService $flashMessageService */
         $flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);
@@ -207,7 +208,7 @@ class Controller extends AbstractModule
      *
      * @return bool TRUE if the form was requested and pre-conditions are met, FALSE otherwise
      */
-    private function isGeneralEmailFormRequested()
+    private function isGeneralEmailFormRequested(): bool
     {
         if ($this->getEventUid() <= 0) {
             return false;
@@ -219,7 +220,7 @@ class Controller extends AbstractModule
     /**
      * @return int
      */
-    private function getEventUid()
+    private function getEventUid(): int
     {
         return (int)GeneralUtility::_POST('eventUid');
     }
@@ -230,7 +231,7 @@ class Controller extends AbstractModule
      *
      * @return bool TRUE if the form was requested and pre-conditions are met, FALSE otherwise
      */
-    private function isConfirmEventFormRequested()
+    private function isConfirmEventFormRequested(): bool
     {
         if ($this->getEventUid() <= 0) {
             return false;
@@ -246,7 +247,7 @@ class Controller extends AbstractModule
      * @return bool TRUE if the form was requested and pre-conditions are
      *                 met, FALSE otherwise
      */
-    private function isCancelEventFormRequested()
+    private function isCancelEventFormRequested(): bool
     {
         if ($this->getEventUid() <= 0) {
             return false;
@@ -260,7 +261,7 @@ class Controller extends AbstractModule
      *
      * @return string the HTML source for the form
      */
-    private function getGeneralMailForm()
+    private function getGeneralMailForm(): string
     {
         /** @var GeneralEventMailForm $form */
         $form = GeneralUtility::makeInstance(GeneralEventMailForm::class, $this->getEventUid());
@@ -274,7 +275,7 @@ class Controller extends AbstractModule
      *
      * @return string the HTML source for the form
      */
-    private function getConfirmEventMailForm()
+    private function getConfirmEventMailForm(): string
     {
         /** @var ConfirmEventMailForm $form */
         $form = GeneralUtility::makeInstance(ConfirmEventMailForm::class, $this->getEventUid());
@@ -288,7 +289,7 @@ class Controller extends AbstractModule
      *
      * @return string the HTML source for the form
      */
-    private function getCancelEventMailForm()
+    private function getCancelEventMailForm(): string
     {
         /** @var CancelEventMailForm $form */
         $form = GeneralUtility::makeInstance(CancelEventMailForm::class, $this->getEventUid());
@@ -303,7 +304,7 @@ class Controller extends AbstractModule
      *
      * @return bool TRUE if the static template has been included, FALSE otherwise
      */
-    private function hasStaticTemplate()
+    private function hasStaticTemplate(): bool
     {
         return \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')->getAsBoolean('isStaticTemplateLoaded');
     }

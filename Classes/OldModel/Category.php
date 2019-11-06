@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /**
  * This class represents an event category.
@@ -19,7 +20,7 @@ class Tx_Seminars_OldModel_Category extends \Tx_Seminars_OldModel_Abstract
      *                upload path) of the category, will be empty if the
      *                category has no icon
      */
-    public function getIcon()
+    public function getIcon(): string
     {
         return $this->getRecordPropertyString('icon');
     }

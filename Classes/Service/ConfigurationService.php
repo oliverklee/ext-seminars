@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /**
  * This class provides a way to access config values from plugin.tx_seminars to classes within FrontEnd/.

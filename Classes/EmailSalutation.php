@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -33,7 +34,7 @@ class Tx_Seminars_EmailSalutation
      *
      * @return string the localized, gender-specific salutation with a trailing comma, will not be empty
      */
-    public function getSalutation(\Tx_Seminars_Model_FrontEndUser $user)
+    public function getSalutation(\Tx_Seminars_Model_FrontEndUser $user): string
     {
         $salutationParts = [];
 
@@ -64,7 +65,7 @@ class Tx_Seminars_EmailSalutation
      *
      * @return array the hook objects in an array, will be empty if no hooks have been set
      */
-    private function getHooks()
+    private function getHooks(): array
     {
         $result = [];
 
@@ -91,7 +92,7 @@ class Tx_Seminars_EmailSalutation
      *
      * @throws \InvalidArgumentException
      */
-    public function createIntroduction($introductionBegin, \Tx_Seminars_OldModel_Event $event)
+    public function createIntroduction($introductionBegin, \Tx_Seminars_OldModel_Event $event): string
     {
         if ($introductionBegin === '') {
             throw new \InvalidArgumentException('$introductionBegin must not be empty.', 1440109640);

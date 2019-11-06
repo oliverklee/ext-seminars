@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -42,7 +43,7 @@ class Tx_Seminars_Csv_EventListView extends \Tx_Seminars_Csv_AbstractListView
      *
      * @return string[]
      */
-    protected function getFieldKeys()
+    protected function getFieldKeys(): array
     {
         return $this->configuration->getAsTrimmedArray('fieldsFromEventsForCsv');
     }
@@ -109,7 +110,7 @@ class Tx_Seminars_Csv_EventListView extends \Tx_Seminars_Csv_AbstractListView
      *
      * @return string[] the data for the keys provided in $keys (may be empty)
      */
-    protected function createCsvColumnsForEvent(\Tx_Seminars_OldModel_Event $event)
+    protected function createCsvColumnsForEvent(\Tx_Seminars_OldModel_Event $event): array
     {
         $csvLines = [];
 

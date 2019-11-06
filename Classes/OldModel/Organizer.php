@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /**
  * This class represents an organizer.
@@ -27,7 +28,7 @@ class Tx_Seminars_OldModel_Organizer extends \Tx_Seminars_OldModel_Abstract impl
      *
      * @return string our homepage (or '' if there is an error)
      */
-    public function getHomepage()
+    public function getHomepage(): string
     {
         return $this->getRecordPropertyString('homepage');
     }
@@ -38,7 +39,7 @@ class Tx_Seminars_OldModel_Organizer extends \Tx_Seminars_OldModel_Abstract impl
      * @return bool TRUE if this organizer has a homepage set, FALSE
      *                 otherwise
      */
-    public function hasHomepage()
+    public function hasHomepage(): bool
     {
         return $this->hasRecordPropertyString('homepage');
     }
@@ -59,7 +60,7 @@ class Tx_Seminars_OldModel_Organizer extends \Tx_Seminars_OldModel_Abstract impl
      *
      * @return string our e-mail footer (or '' if there is an error)
      */
-    public function getEmailFooter()
+    public function getEmailFooter(): string
     {
         return $this->getRecordPropertyString('email_footer');
     }
@@ -70,7 +71,7 @@ class Tx_Seminars_OldModel_Organizer extends \Tx_Seminars_OldModel_Abstract impl
      * @return int our attendances PID or 0 if there is no attendances
      *                 PID set
      */
-    public function getAttendancesPid()
+    public function getAttendancesPid(): int
     {
         return $this->getRecordPropertyInteger('attendances_pid');
     }
@@ -80,7 +81,7 @@ class Tx_Seminars_OldModel_Organizer extends \Tx_Seminars_OldModel_Abstract impl
      *
      * @return bool TRUE if this organizer has a description, FALSE otherwise
      */
-    public function hasDescription()
+    public function hasDescription(): bool
     {
         return $this->hasRecordPropertyString('description');
     }
@@ -91,7 +92,7 @@ class Tx_Seminars_OldModel_Organizer extends \Tx_Seminars_OldModel_Abstract impl
      * @return string the description of the organizer in raw format, will be
      *                empty if organizer has no description
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->getRecordPropertyString('description');
     }

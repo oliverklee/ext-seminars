@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /**
  * This abstract class represents a time span.
@@ -12,7 +13,7 @@ abstract class Tx_Seminars_Model_AbstractTimeSpan extends \Tx_Oelib_Model implem
      *
      * @return string our title, will not be empty
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->getAsString('title');
     }
@@ -24,7 +25,7 @@ abstract class Tx_Seminars_Model_AbstractTimeSpan extends \Tx_Oelib_Model implem
      *
      * @return void
      */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         if ($title == '') {
             throw new \InvalidArgumentException('The parameter $title must not be empty.', 1333293446);
@@ -39,7 +40,7 @@ abstract class Tx_Seminars_Model_AbstractTimeSpan extends \Tx_Oelib_Model implem
      * @return int our begin date as UNIX time-stamp, will be >= 0,
      *                 0 means "no begin date"
      */
-    public function getBeginDateAsUnixTimeStamp()
+    public function getBeginDateAsUnixTimeStamp(): int
     {
         return $this->getAsInteger('begin_date');
     }
@@ -51,7 +52,7 @@ abstract class Tx_Seminars_Model_AbstractTimeSpan extends \Tx_Oelib_Model implem
      *
      * @return void
      */
-    public function setBeginDateAsUnixTimeStamp($beginDate)
+    public function setBeginDateAsUnixTimeStamp(int $beginDate)
     {
         if ($beginDate < 0) {
             throw new \InvalidArgumentException('The parameter $beginDate must be >= 0.', 1333293455);
@@ -65,7 +66,7 @@ abstract class Tx_Seminars_Model_AbstractTimeSpan extends \Tx_Oelib_Model implem
      *
      * @return bool TRUE if this time-span has a begin date, FALSE otherwise
      */
-    public function hasBeginDate()
+    public function hasBeginDate(): bool
     {
         return $this->hasInteger('begin_date');
     }
@@ -76,7 +77,7 @@ abstract class Tx_Seminars_Model_AbstractTimeSpan extends \Tx_Oelib_Model implem
      * @return int our end date as UNIX time-stamp, will be >= 0,
      *                 0 means "no end date"
      */
-    public function getEndDateAsUnixTimeStamp()
+    public function getEndDateAsUnixTimeStamp(): int
     {
         return $this->getAsInteger('end_date');
     }
@@ -88,7 +89,7 @@ abstract class Tx_Seminars_Model_AbstractTimeSpan extends \Tx_Oelib_Model implem
      *
      * @return void
      */
-    public function setEndDateAsUnixTimeStamp($endDate)
+    public function setEndDateAsUnixTimeStamp(int $endDate)
     {
         if ($endDate < 0) {
             throw new \InvalidArgumentException('The parameter $endDate must be >= 0.', 1333293465);
@@ -102,7 +103,7 @@ abstract class Tx_Seminars_Model_AbstractTimeSpan extends \Tx_Oelib_Model implem
      *
      * @return bool TRUE if this time-span has an end date, FALSE otherwise
      */
-    public function hasEndDate()
+    public function hasEndDate(): bool
     {
         return $this->hasInteger('end_date');
     }
@@ -113,7 +114,7 @@ abstract class Tx_Seminars_Model_AbstractTimeSpan extends \Tx_Oelib_Model implem
      * @return \Tx_Oelib_List our speakers, will be empty if this time-span has
      *                       no speakers
      */
-    public function getSpeakers()
+    public function getSpeakers(): \Tx_Oelib_List
     {
         return $this->getAsList('speakers');
     }
@@ -123,7 +124,7 @@ abstract class Tx_Seminars_Model_AbstractTimeSpan extends \Tx_Oelib_Model implem
      *
      * @return string our room, will be empty if this time-span has no place
      */
-    public function getRoom()
+    public function getRoom(): string
     {
         return $this->getAsString('room');
     }
@@ -135,7 +136,7 @@ abstract class Tx_Seminars_Model_AbstractTimeSpan extends \Tx_Oelib_Model implem
      *
      * @return void
      */
-    public function setRoom($room)
+    public function setRoom(string $room)
     {
         $this->setAsString('room', $room);
     }
@@ -143,9 +144,9 @@ abstract class Tx_Seminars_Model_AbstractTimeSpan extends \Tx_Oelib_Model implem
     /**
      * Returns whether this time-span has a room.
      *
-     * @return bool TRUE if this time-span has a room, FALSE otherwise
+     * @return bool
      */
-    public function hasRoom()
+    public function hasRoom(): bool
     {
         return $this->hasString('room');
     }

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
@@ -39,7 +40,7 @@ abstract class Tx_Seminars_Csv_AbstractBackEndAccessCheck implements \Tx_Seminar
      *
      * @return int the page UID, will be >= 0
      */
-    protected function getPageUid()
+    protected function getPageUid(): int
     {
         return $this->pageUid;
     }
@@ -54,7 +55,7 @@ abstract class Tx_Seminars_Csv_AbstractBackEndAccessCheck implements \Tx_Seminar
      * @return bool TRUE if the user has access to the given table and page,
      *                 FALSE otherwise, will also return FALSE if no BE user is logged in
      */
-    protected function canAccessTableAndPage($tableName, $pageUid)
+    protected function canAccessTableAndPage($tableName, $pageUid): bool
     {
         if (!Tx_Oelib_BackEndLoginManager::getInstance()->isLoggedIn()) {
             return false;
@@ -68,7 +69,7 @@ abstract class Tx_Seminars_Csv_AbstractBackEndAccessCheck implements \Tx_Seminar
      *
      * @return BackendUserAuthentication
      */
-    protected function getLoggedInBackEndUser()
+    protected function getLoggedInBackEndUser(): BackendUserAuthentication
     {
         return $GLOBALS['BE_USER'];
     }
@@ -80,7 +81,7 @@ abstract class Tx_Seminars_Csv_AbstractBackEndAccessCheck implements \Tx_Seminar
      *
      * @return bool
      */
-    protected function hasReadAccessToTable($tableName)
+    protected function hasReadAccessToTable($tableName): bool
     {
         return $this->getLoggedInBackEndUser()->check('tables_select', $tableName);
     }
@@ -92,7 +93,7 @@ abstract class Tx_Seminars_Csv_AbstractBackEndAccessCheck implements \Tx_Seminar
      *
      * @return bool
      */
-    protected function hasReadAccessToPage($pageUid)
+    protected function hasReadAccessToPage($pageUid): bool
     {
         return $this->getLoggedInBackEndUser()
             ->doesUserHaveAccess(BackendUtility::getRecord('pages', $pageUid), self::SHOW_PAGE_PERMISSION_BITS);

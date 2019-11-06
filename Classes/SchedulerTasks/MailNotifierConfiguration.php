@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 namespace OliverKlee\Seminars\SchedulerTasks;
 
 use TYPO3\CMS\Core\Messaging\FlashMessage;

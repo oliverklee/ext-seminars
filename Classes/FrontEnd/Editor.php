@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /**
  * This class is the base class for any kind of front-end editor, for example the event editor or the registration editor.
@@ -52,7 +53,7 @@ class Tx_Seminars_FrontEnd_Editor extends \Tx_Seminars_FrontEnd_AbstractView
      *
      * @return int UID of the currently edited object, zero if a new object is being created
      */
-    public function getObjectUid()
+    public function getObjectUid(): int
     {
         return $this->objectUid;
     }
@@ -99,7 +100,7 @@ class Tx_Seminars_FrontEnd_Editor extends \Tx_Seminars_FrontEnd_AbstractView
      *
      * @return bool TRUE if the test mode is set, FALSE otherwise
      */
-    public function isTestMode()
+    public function isTestMode(): bool
     {
         return $this->isTestMode;
     }

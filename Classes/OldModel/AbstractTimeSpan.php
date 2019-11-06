@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /**
  * This class offers timespan-related methods for the time slot and seminar classes.
@@ -17,7 +18,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends \Tx_Seminars_OldMod
      * @return string the begin date (or the localized string "will be
      *                announced" if no begin date is set)
      */
-    public function getBeginDate()
+    public function getBeginDate(): string
     {
         if ($this->hasBeginDate()) {
             $result = strftime(
@@ -36,7 +37,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends \Tx_Seminars_OldMod
      *
      * @return bool TRUE if we have a begin date, FALSE otherwise
      */
-    public function hasBeginDate()
+    public function hasBeginDate(): bool
     {
         return $this->getBeginDateAsTimestamp() > 0;
     }
@@ -47,7 +48,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends \Tx_Seminars_OldMod
      * @return string the end date (or the localized string "will be
      *                announced" if no end date is set)
      */
-    public function getEndDate()
+    public function getEndDate(): string
     {
         if ($this->hasEndDate()) {
             $result = strftime(
@@ -66,7 +67,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends \Tx_Seminars_OldMod
      *
      * @return bool TRUE if we have an end date, FALSE otherwise
      */
-    public function hasEndDate()
+    public function hasEndDate(): bool
     {
         return $this->getEndDateAsTimestamp() > 0;
     }
@@ -78,7 +79,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends \Tx_Seminars_OldMod
      * @return bool TRUE if the time-span has a begin date set that lies in
      *                 the future (time-span has not started yet), FALSE otherwise
      */
-    public function hasStarted()
+    public function hasStarted(): bool
     {
         return $this->hasBeginDate()
             && ($GLOBALS['SIM_EXEC_TIME'] >= $this->getBeginDateAsTimestamp());
@@ -95,7 +96,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends \Tx_Seminars_OldMod
      *
      * @return string the seminar date
      */
-    public function getDate($dash = '&#8211;')
+    public function getDate(string $dash = '&#8211;'): string
     {
         if ($this->hasDate()) {
             $beginDate = $this->getBeginDateAsTimestamp();
@@ -143,7 +144,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends \Tx_Seminars_OldMod
      *
      * @return bool
      */
-    public function hasDate()
+    public function hasDate(): bool
     {
         return $this->hasRecordPropertyInteger('begin_date');
     }
@@ -158,7 +159,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends \Tx_Seminars_OldMod
      *
      * @return string the time
      */
-    public function getTime($dash = '&#8211;')
+    public function getTime($dash = '&#8211;'): string
     {
         if (!$this->hasTime()) {
             return $this->translate('message_willBeAnnounced');
@@ -187,7 +188,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends \Tx_Seminars_OldMod
      *
      * @return bool TRUE if we have a begin time, FALSE otherwise
      */
-    public function hasTime()
+    public function hasTime(): bool
     {
         $beginTime = strftime('%H:%M', $this->getBeginDateAsTimestamp());
 
@@ -200,7 +201,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends \Tx_Seminars_OldMod
      *
      * @return bool TRUE if we have an end time, FALSE otherwise
      */
-    public function hasEndTime()
+    public function hasEndTime(): bool
     {
         $endTime = strftime('%H:%M', $this->getEndDateAsTimestamp());
 
@@ -213,7 +214,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends \Tx_Seminars_OldMod
      * @return int our begin date and time as a UNIX timestamp or 0 if
      *                 we don't have a begin date
      */
-    public function getBeginDateAsTimestamp()
+    public function getBeginDateAsTimestamp(): int
     {
         return $this->getRecordPropertyInteger('begin_date');
     }
@@ -224,7 +225,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends \Tx_Seminars_OldMod
      * @return int our end date and time as a UNIX timestamp or 0 if
      *                 we don't have an end date
      */
-    public function getEndDateAsTimestamp()
+    public function getEndDateAsTimestamp(): int
     {
         return $this->getRecordPropertyInteger('end_date');
     }
@@ -237,7 +238,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends \Tx_Seminars_OldMod
      * @return int our end date and time as a UNIX timestamp, 0 if
      *                 we don't have a begin date
      */
-    public function getEndDateAsTimestampEvenIfOpenEnded()
+    public function getEndDateAsTimestampEvenIfOpenEnded(): int
     {
         $result = 0;
 
@@ -265,7 +266,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends \Tx_Seminars_OldMod
      *
      * @return string the seminar room (may be empty)
      */
-    public function getRoom()
+    public function getRoom(): string
     {
         return $this->getRecordPropertyString('room');
     }
@@ -275,7 +276,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends \Tx_Seminars_OldMod
      *
      * @return bool TRUE if we have a non-empty room, FALSE otherwise.
      */
-    public function hasRoom()
+    public function hasRoom(): bool
     {
         return $this->hasRecordPropertyString('room');
     }
@@ -288,7 +289,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends \Tx_Seminars_OldMod
      *
      * @return bool TRUE if this time span is open-ended, FALSE otherwise
      */
-    public function isOpenEnded()
+    public function isOpenEnded(): bool
     {
         return !$this->hasEndDate();
     }
@@ -298,7 +299,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends \Tx_Seminars_OldMod
      *
      * @return bool TRUE if we have a non-empty places list, FALSE otherwise
      */
-    public function hasPlace()
+    public function hasPlace(): bool
     {
         return $this->hasRecordPropertyInteger('place');
     }
@@ -309,7 +310,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends \Tx_Seminars_OldMod
      * @return int the number of places associated with this record,
      *                 will be >= 0
      */
-    public function getNumberOfPlaces()
+    public function getNumberOfPlaces(): int
     {
         return $this->getRecordPropertyInteger('place');
     }
@@ -322,5 +323,5 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends \Tx_Seminars_OldMod
      * @return string our places or an empty string if the timespan has
      *                no places
      */
-    abstract public function getPlaceShort();
+    abstract public function getPlaceShort(): string;
 }

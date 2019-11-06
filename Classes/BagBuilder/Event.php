@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /**
  * This builder class creates customized event bags.
@@ -597,7 +598,7 @@ class Tx_Seminars_BagBuilder_Event extends \Tx_Seminars_BagBuilder_Abstract
      *
      * @return void
      */
-    public function limitToFullTextSearch($searchWords)
+    public function limitToFullTextSearch(string $searchWords)
     {
         $searchWords = trim($searchWords, self::TRIM_CHARACTER_LIST);
 
@@ -708,7 +709,7 @@ class Tx_Seminars_BagBuilder_Event extends \Tx_Seminars_BagBuilder_Abstract
      *
      * @return string[] the WHERE clause parts for the search in categories
      */
-    private function getSearchWherePartForCategories($quotedSearchWord)
+    private function getSearchWherePartForCategories($quotedSearchWord): array
     {
         return $this->getSearchWherePartInMmRelationForTopicOrSingleEventRecord(
             $quotedSearchWord,
@@ -726,7 +727,7 @@ class Tx_Seminars_BagBuilder_Event extends \Tx_Seminars_BagBuilder_Abstract
      *
      * @return string[] the WHERE clause parts for the search in categories
      */
-    private function getSearchWherePartForTargetGroups($quotedSearchWord)
+    private function getSearchWherePartForTargetGroups($quotedSearchWord): array
     {
         return $this->getSearchWherePartInMmRelationForTopicOrSingleEventRecord(
             $quotedSearchWord,
@@ -744,7 +745,7 @@ class Tx_Seminars_BagBuilder_Event extends \Tx_Seminars_BagBuilder_Abstract
      *
      * @return string[] the WHERE clause parts for the search in event types
      */
-    private function getSearchWherePartForEventTypes($quotedSearchWord)
+    private function getSearchWherePartForEventTypes($quotedSearchWord): array
     {
         return [
             'EXISTS (' .
@@ -766,7 +767,7 @@ class Tx_Seminars_BagBuilder_Event extends \Tx_Seminars_BagBuilder_Abstract
      *
      * @return string[] the WHERE clause parts for the search in places
      */
-    private function getSearchWherePartForPlaces($quotedSearchWord)
+    private function getSearchWherePartForPlaces($quotedSearchWord): array
     {
         return $this->getSearchWherePartForMmRelation(
             $quotedSearchWord,
@@ -784,7 +785,7 @@ class Tx_Seminars_BagBuilder_Event extends \Tx_Seminars_BagBuilder_Abstract
      *
      * @return string[] the WHERE clause parts for the search in event topics
      */
-    private function getSearchWherePartForEventTopics($quotedSearchWord)
+    private function getSearchWherePartForEventTopics($quotedSearchWord): array
     {
         $where = [];
         $where[] = 'MATCH (title, subtitle, description) AGAINST (' . $quotedSearchWord . ' IN BOOLEAN MODE)';
@@ -815,7 +816,7 @@ class Tx_Seminars_BagBuilder_Event extends \Tx_Seminars_BagBuilder_Abstract
      *
      * @return string[] the WHERE clause parts for the search independent from the event record type
      */
-    private function getSearchWherePartIndependentFromEventRecordType($quotedSearchWord)
+    private function getSearchWherePartIndependentFromEventRecordType($quotedSearchWord): array
     {
         return ['MATCH (tx_seminars_seminars.accreditation_number) AGAINST (' . $quotedSearchWord . ' IN BOOLEAN MODE)'];
     }
@@ -829,7 +830,7 @@ class Tx_Seminars_BagBuilder_Event extends \Tx_Seminars_BagBuilder_Abstract
      *
      * @return string[] the WHERE clause parts for the search in speakers
      */
-    private function getSearchWherePartForSpeakers($quotedSearchWord)
+    private function getSearchWherePartForSpeakers($quotedSearchWord): array
     {
         return $this->getSearchWherePartForMmRelation(
             $quotedSearchWord,
@@ -862,7 +863,7 @@ class Tx_Seminars_BagBuilder_Event extends \Tx_Seminars_BagBuilder_Abstract
         $searchFieldKey,
         $foreignTable,
         $mmTable
-    ) {
+    ): array {
         $this->checkParametersForMmSearchFunctions($quotedSearchWord, $searchFieldKey, $foreignTable, $mmTable);
 
         $matchQueryPart = 'MATCH (' .
@@ -901,7 +902,7 @@ class Tx_Seminars_BagBuilder_Event extends \Tx_Seminars_BagBuilder_Abstract
      *
      * @return string[] the WHERE clause parts for the search in categories, will not be empty
      */
-    private function getSearchWherePartForMmRelation($quotedSearchWord, $searchFieldKey, $foreignTable, $mmTable)
+    private function getSearchWherePartForMmRelation($quotedSearchWord, $searchFieldKey, $foreignTable, $mmTable): array
     {
         $this->checkParametersForMmSearchFunctions($quotedSearchWord, $searchFieldKey, $foreignTable, $mmTable);
 
@@ -938,7 +939,7 @@ class Tx_Seminars_BagBuilder_Event extends \Tx_Seminars_BagBuilder_Abstract
      *
      * @return string the trimmed and SQL-escaped $searchword
      */
-    private function prepareSearchWord($searchWord)
+    private function prepareSearchWord($searchWord): string
     {
         return $GLOBALS['TYPO3_DB']->quoteStr(trim($searchWord, self::TRIM_CHARACTER_LIST), 'tx_seminars_seminars');
     }

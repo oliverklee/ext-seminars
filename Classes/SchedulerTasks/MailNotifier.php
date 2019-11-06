@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 namespace OliverKlee\Seminars\SchedulerTasks;
 
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
@@ -115,7 +116,7 @@ class MailNotifier extends AbstractTask
     /**
      * @return int
      */
-    public function getConfigurationPageUid()
+    public function getConfigurationPageUid(): int
     {
         return $this->configurationPageUid;
     }
@@ -199,7 +200,7 @@ class MailNotifier extends AbstractTask
      * @return \Tx_Seminars_OldModel_Event[] events for which to send the event-takes-place reminder to
      *               their organizers, will be empty if there are none
      */
-    private function getEventsToSendEventTakesPlaceReminderFor()
+    private function getEventsToSendEventTakesPlaceReminderFor(): array
     {
         $days = $this->getDaysBeforeBeginDate();
         if ($days == 0) {
@@ -228,7 +229,7 @@ class MailNotifier extends AbstractTask
      * @return \Tx_Seminars_OldModel_Event[] events for which to send the cancellation reminder to their
      *               organizers, will be empty if there are none
      */
-    private function getEventsToSendCancellationDeadlineReminderFor()
+    private function getEventsToSendCancellationDeadlineReminderFor(): array
     {
         if (!$this->getConfiguration()->getAsBoolean('sendCancelationDeadlineReminder')) {
             return [];
@@ -260,7 +261,7 @@ class MailNotifier extends AbstractTask
      *                 reminder should be send, will be > 0 if this option is
      *                 enabled, zero disables sending the reminder
      */
-    private function getDaysBeforeBeginDate()
+    private function getDaysBeforeBeginDate(): int
     {
         return $this->getConfiguration()->getAsInteger('sendEventTakesPlaceReminderDaysBeforeBeginDate');
     }
@@ -273,7 +274,7 @@ class MailNotifier extends AbstractTask
      *
      * @return \Tx_Seminars_BagBuilder_Event builder for the seminar bag
      */
-    private function getSeminarBagBuilder($status)
+    private function getSeminarBagBuilder($status): \Tx_Seminars_BagBuilder_Event
     {
         /** @var \Tx_Seminars_BagBuilder_Event $builder */
         $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Event::class);
@@ -290,7 +291,7 @@ class MailNotifier extends AbstractTask
      *
      * @return \Tx_Oelib_Attachment CSV list of registrations for the given event
      */
-    private function getCsv($eventUid)
+    private function getCsv($eventUid): \Tx_Oelib_Attachment
     {
         /** @var \Tx_Seminars_Csv_EmailRegistrationListView $csvCreator */
         $csvCreator = GeneralUtility::makeInstance(\Tx_Seminars_Csv_EmailRegistrationListView::class);
@@ -319,7 +320,7 @@ class MailNotifier extends AbstractTask
      *
      * @return string the localized e-mail content, will not be empty
      */
-    private function customizeMessage($locallangKey, \Tx_Seminars_OldModel_Event $event, $organizerName = '')
+    private function customizeMessage($locallangKey, \Tx_Seminars_OldModel_Event $event, $organizerName = ''): string
     {
         $result = $this->getLanguageService()->getLL($locallangKey);
 
@@ -345,7 +346,7 @@ class MailNotifier extends AbstractTask
      * @return string formatted date according to the TS setup configuration for
      *                'dateFormatYMD', will not be empty
      */
-    private function getDate($timestamp)
+    private function getDate($timestamp): string
     {
         return strftime($this->getConfiguration()->getAsString('dateFormatYMD'), $timestamp);
     }
@@ -357,7 +358,7 @@ class MailNotifier extends AbstractTask
      *
      * @return bool TRUE if the CSV file should be added, FALSE otherwise
      */
-    private function shouldCsvFileBeAdded(\Tx_Seminars_OldModel_Event $event)
+    private function shouldCsvFileBeAdded(\Tx_Seminars_OldModel_Event $event): bool
     {
         return $this->getConfiguration()->getAsBoolean(
             'addRegistrationCsvToOrganizerReminderMail'
@@ -427,7 +428,7 @@ class MailNotifier extends AbstractTask
      *
      * @return \Tx_Oelib_Configuration
      */
-    protected function getConfiguration()
+    protected function getConfiguration(): \Tx_Oelib_Configuration
     {
         \Tx_Oelib_PageFinder::getInstance()->setPageUid($this->getConfigurationPageUid());
 

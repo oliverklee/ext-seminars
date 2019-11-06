@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 namespace OliverKlee\Seminars\BackEnd;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -31,7 +32,7 @@ class OrganizersList extends AbstractList
      *
      * @return string the HTML source code to display
      */
-    public function show()
+    public function show(): string
     {
         $content = '';
 

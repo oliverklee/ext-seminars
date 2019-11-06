@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -32,7 +33,7 @@ class Tx_Seminars_FrontEnd_PublishEvent extends \Tx_Oelib_TemplateHelper
      *
      * @return string HTML code for the event publishing, will not be empty
      */
-    public function render()
+    public function render(): string
     {
         $this->init([]);
 

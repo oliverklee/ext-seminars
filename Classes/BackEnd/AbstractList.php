@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 namespace OliverKlee\Seminars\BackEnd;
 
 use TYPO3\CMS\Backend\Utility\BackendUtility;
@@ -72,7 +73,7 @@ abstract class AbstractList
     /**
      * @return LanguageService
      */
-    protected function getLanguageService()
+    protected function getLanguageService(): LanguageService
     {
         return $GLOBALS['LANG'];
     }
@@ -82,7 +83,7 @@ abstract class AbstractList
      *
      * @return BackendUserAuthentication
      */
-    protected function getBackEndUser()
+    protected function getBackEndUser(): BackendUserAuthentication
     {
         return $GLOBALS['BE_USER'];
     }
@@ -96,7 +97,7 @@ abstract class AbstractList
      *
      * @return string the HTML source code to return
      */
-    public function getEditIcon($uid, $pageUid)
+    public function getEditIcon($uid, $pageUid): string
     {
         if (!$this->doesUserHaveAccess($pageUid) || !$GLOBALS['BE_USER']->check('tables_modify', $this->tableName)) {
             return '';
@@ -123,7 +124,7 @@ abstract class AbstractList
      *
      * @return string the HTML source code to return
      */
-    public function getDeleteIcon($uid, $pageUid)
+    public function getDeleteIcon($uid, $pageUid): string
     {
         $result = '';
 
@@ -166,7 +167,7 @@ abstract class AbstractList
      *
      * @return string the HTML source code to return
      */
-    public function getNewIcon($pid)
+    public function getNewIcon($pid): string
     {
         $result = '';
         $languageService = $this->getLanguageService();
@@ -267,7 +268,7 @@ abstract class AbstractList
      *
      * @return string the HTML source code of the linked CSV icon
      */
-    protected function getCsvIcon()
+    protected function getCsvIcon(): string
     {
         $pageData = $this->page->getPageData();
         $csvLabel = $this->getLanguageService()->getLL('csvExport');
@@ -307,7 +308,7 @@ abstract class AbstractList
      *
      * @return string the HTML source code of the linked hide or unhide icon
      */
-    protected function getHideUnhideIcon($uid, $pageUid, $hidden)
+    protected function getHideUnhideIcon($uid, $pageUid, $hidden): string
     {
         $result = '';
 
@@ -342,7 +343,7 @@ abstract class AbstractList
      *
      * @return bool TRUE if the user has access, FALSE otherwise
      */
-    protected function doesUserHaveAccess($pageUid)
+    protected function doesUserHaveAccess($pageUid): bool
     {
         if (!isset($this->accessRights[$pageUid])) {
             $this->accessRights[$pageUid] = $GLOBALS['BE_USER']
@@ -367,7 +368,7 @@ abstract class AbstractList
      *
      * @return \Tx_Seminars_Model_BackEndUser the currently logged in back-end user
      */
-    protected function getLoggedInUser()
+    protected function getLoggedInUser(): \Tx_Seminars_Model_BackEndUser
     {
         return \Tx_Oelib_BackEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
     }
@@ -389,7 +390,7 @@ abstract class AbstractList
     /**
      * @return string
      */
-    private function createCrowdfundingMessage()
+    private function createCrowdfundingMessage(): string
     {
         return '<div class="typo3-messages">
             <div class="alert alert-notice">
