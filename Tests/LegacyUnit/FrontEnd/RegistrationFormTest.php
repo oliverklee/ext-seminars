@@ -1451,8 +1451,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_payment_methods_mm',
             $this->seminarUid,
-            $paymentMethodUid,
-            'payment_methods'
+            $paymentMethodUid
         );
 
         self::assertEquals(

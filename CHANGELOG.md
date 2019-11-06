@@ -17,7 +17,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop unneeded Travis CI configuration settings (#258)
 
 ### Fixed
-- Fix bogus sorting value in some test cases (#281)
+- Fix bogus sorting value in some test cases (#281, #282)
 - Explicitly add transitive dependencies (#274)
 - Drop a left-over bogus assigment from the TCA (#271)
 - Use the correct namespace for test cases (#268)
