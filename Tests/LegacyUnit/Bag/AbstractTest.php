@@ -142,7 +142,7 @@ class Tx_Seminars_Tests_Unit_Bag_AbstractTest extends TestCase
 
     public function testCountForBagWithTwoMatchesElementsAndLimitOfOneReturnsOne()
     {
-        $bag = new \Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('is_dummy_record = 1', '', '', '', 1);
+        $bag = new \Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('is_dummy_record = 1', '', '', '', '1');
 
         self::assertEquals(
             1,
@@ -195,7 +195,7 @@ class Tx_Seminars_Tests_Unit_Bag_AbstractTest extends TestCase
 
     public function testCountWithoutLimitForBagWithTwoMatchesElementsAndLimitOfOneReturnsTwo()
     {
-        $bag = new \Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('is_dummy_record = 1', '', '', '', 1);
+        $bag = new \Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('is_dummy_record = 1', '', '', '', '1');
 
         self::assertEquals(
             2,
