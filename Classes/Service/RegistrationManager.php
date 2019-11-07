@@ -191,7 +191,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
             )->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
             foreach ($this->getHooks() as $hook) {
                 if (method_exists($hook, 'canRegisterForSeminarMessage')) {
-                    $message = $hook->canRegisterForSeminarMessage($event, $user);
+                    $message = (string)$hook->canRegisterForSeminarMessage($event, $user);
                     if ($message !== '') {
                         break;
                     }
