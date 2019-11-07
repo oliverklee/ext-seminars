@@ -51,7 +51,7 @@ class EventsList extends AbstractList
         $builder->setBackEndMode();
 
         $pageData = $this->page->getPageData();
-        $builder->setSourcePages($pageData['uid'], self::RECURSION_DEPTH);
+        $builder->setSourcePages((string)$pageData['uid'], self::RECURSION_DEPTH);
 
         $seminarBag = $builder->build();
         $this->createListBody($seminarBag);

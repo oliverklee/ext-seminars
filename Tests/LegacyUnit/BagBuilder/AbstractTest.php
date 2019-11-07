@@ -121,7 +121,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
 
     public function testBuilderHasSourcePagesWithOnePage()
     {
-        $this->subject->setSourcePages($this->dummySysFolderPid);
+        $this->subject->setSourcePages((string)$this->dummySysFolderPid);
 
         self::assertTrue(
             $this->subject->hasSourcePages()
@@ -130,9 +130,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
 
     public function testBuilderHasSourcePagesWithTwoPages()
     {
-        $this->subject->setSourcePages(
-            $this->dummySysFolderPid . ',' . ($this->dummySysFolderPid + 1)
-        );
+        $this->subject->setSourcePages($this->dummySysFolderPid . ',' . ($this->dummySysFolderPid + 1));
 
         self::assertTrue(
             $this->subject->hasSourcePages()
@@ -141,9 +139,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
 
     public function testBuilderHasNoSourcePagesWithEvilSql()
     {
-        $this->subject->setSourcePages(
-            '; DROP TABLE tx_seminars_test;'
-        );
+        $this->subject->setSourcePages('; DROP TABLE tx_seminars_test;');
 
         self::assertFalse(
             $this->subject->hasSourcePages()
@@ -201,7 +197,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
             ['pid' => $this->dummySysFolderPid + 1]
         );
 
-        $this->subject->setSourcePages($this->dummySysFolderPid);
+        $this->subject->setSourcePages((string)$this->dummySysFolderPid);
         $this->subject->setSourcePages('');
         $bag = $this->subject->build();
 
@@ -213,9 +209,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
 
     public function testBuilderSelectsRecordsFromAllPagesWithEmptySourcePagesAndZeroRecursion()
     {
-        $this->subject->setSourcePages(
-            ''
-        );
+        $this->subject->setSourcePages('');
         $this->testingFramework->createRecord(
             'tx_seminars_test',
             ['pid' => $this->dummySysFolderPid]
@@ -235,10 +229,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
 
     public function testBuilderSelectsRecordsFromAllPagesWithEmptySourcePagesAndNonZeroRecursion()
     {
-        $this->subject->setSourcePages(
-            '',
-            1
-        );
+        $this->subject->setSourcePages('', 1);
         $this->testingFramework->createRecord(
             'tx_seminars_test',
             ['pid' => $this->dummySysFolderPid]
@@ -268,7 +259,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
             ['pid' => $this->dummySysFolderPid + 1]
         );
 
-        $this->subject->setSourcePages($this->dummySysFolderPid);
+        $this->subject->setSourcePages((string)$this->dummySysFolderPid);
         $bag = $this->subject->build();
 
         self::assertEquals(
@@ -289,9 +280,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
             ['pid' => $this->dummySysFolderPid + 1]
         );
 
-        $this->subject->setSourcePages(
-            $this->dummySysFolderPid . ',' . ($this->dummySysFolderPid + 1)
-        );
+        $this->subject->setSourcePages($this->dummySysFolderPid . ',' . ($this->dummySysFolderPid + 1));
         $bag = $this->subject->build();
 
         self::assertEquals(
@@ -383,10 +372,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
             ['pid' => $subPagePid2]
         );
 
-        $this->subject->setSourcePages(
-            $this->dummySysFolderPid . ',' . $parentPid2,
-            1
-        );
+        $this->subject->setSourcePages($this->dummySysFolderPid . ',' . $parentPid2, 1);
         $bag = $this->subject->build();
 
         self::assertEquals(
@@ -409,7 +395,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
             ['pid' => $subSubPagePid]
         );
 
-        $this->subject->setSourcePages($this->dummySysFolderPid, 1);
+        $this->subject->setSourcePages((string)$this->dummySysFolderPid, 1);
         $bag = $this->subject->build();
 
         self::assertTrue(
@@ -517,7 +503,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
 
     public function testWhereClauseCanSelectPids()
     {
-        $this->subject->setSourcePages($this->dummySysFolderPid);
+        $this->subject->setSourcePages((string)$this->dummySysFolderPid);
 
         // We're using assertContains here because the PID in the WHERE clause
         // may be prefixed with the table name.
@@ -566,7 +552,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
 
     public function testLimitToTitleAndPagesFindsRecordThatMatchesBoth()
     {
-        $this->subject->setSourcePages($this->dummySysFolderPid);
+        $this->subject->setSourcePages((string)$this->dummySysFolderPid);
         $this->subject->limitToTitle('foo');
         $this->testingFramework->createRecord(
             'tx_seminars_test',
@@ -582,7 +568,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
 
     public function testLimitToTitleAndPagesExcludesRecordThatMatchesOnlyTheTitle()
     {
-        $this->subject->setSourcePages($this->dummySysFolderPid);
+        $this->subject->setSourcePages((string)$this->dummySysFolderPid);
         $this->subject->limitToTitle('foo');
         $this->testingFramework->createRecord(
             'tx_seminars_test',
@@ -597,7 +583,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
 
     public function testLimitToTitleAndPagesExcludesRecordThatMatchesOnlyThePage()
     {
-        $this->subject->setSourcePages($this->dummySysFolderPid);
+        $this->subject->setSourcePages((string)$this->dummySysFolderPid);
         $this->subject->limitToTitle('foo');
         $this->testingFramework->createRecord(
             'tx_seminars_test',

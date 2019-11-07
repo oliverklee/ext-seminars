@@ -152,7 +152,7 @@ class RegistrationsList extends AbstractList
         if ($this->eventUid > 0) {
             $builder->limitToEvent($this->eventUid);
         } else {
-            $builder->setSourcePages($pageData['uid'], self::RECURSION_DEPTH);
+            $builder->setSourcePages((string)$pageData['uid'], self::RECURSION_DEPTH);
         }
 
         $registrationBag = $builder->build();
