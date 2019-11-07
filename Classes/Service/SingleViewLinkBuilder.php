@@ -78,7 +78,7 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
             ),
         ];
 
-        return $this->getContentObject()->typoLink_URL($linkConfiguration);
+        return (string)$this->getContentObject()->typoLink_URL($linkConfiguration);
     }
 
     /**

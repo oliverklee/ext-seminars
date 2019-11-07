@@ -1858,11 +1858,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
                 $builder->limitToAttendee($user);
                 break;
             case 'my_vip_events':
-                $groupForDefaultVips = $this->getConfValueInteger(
-                    'defaultEventVipsFeGroupID',
-                    's_template_special'
-                );
-                $isDefaultVip = ($groupForDefaultVips != 0) && $user->hasGroupMembership($groupForDefaultVips);
+                $groupForDefaultVips = $this->getConfValueInteger('defaultEventVipsFeGroupID', 's_template_special');
+                $isDefaultVip = $groupForDefaultVips !== 0 && $user->hasGroupMembership((string)$groupForDefaultVips);
 
                 if (!$isDefaultVip) {
                     // The current user is not listed as a default VIP for all

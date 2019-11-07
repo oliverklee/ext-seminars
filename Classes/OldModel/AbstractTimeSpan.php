@@ -156,7 +156,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends \Tx_Seminars_OldMod
             $result = $this->translate('message_willBeAnnounced');
         }
 
-        return $result;
+        return (string)$result;
     }
 
     /**

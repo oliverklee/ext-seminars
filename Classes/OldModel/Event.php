@@ -2609,7 +2609,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         $isDefaultVip = ($defaultEventVipsFeGroupID != 0)
             && \Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()
             && \Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser()
-                ->hasGroupMembership($defaultEventVipsFeGroupID);
+                ->hasGroupMembership((string)$defaultEventVipsFeGroupID);
 
         if ($isDefaultVip) {
             $result = true;
@@ -3752,16 +3752,16 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
                 $result = $this->getOrganizersRaw();
                 break;
             case 'attendees_min':
-                $result = $this->getAttendancesMin();
+                $result = (string)$this->getAttendancesMin();
                 break;
             case 'attendees_max':
-                $result = $this->getAttendancesMax();
+                $result = (string)$this->getAttendancesMax();
                 break;
             case 'attendees':
-                $result = $this->getAttendances();
+                $result = (string)$this->getAttendances();
                 break;
             case 'vacancies':
-                $result = $this->getVacancies();
+                $result = (string)$this->getVacancies();
                 break;
             case 'enough_attendees':
                 $result = $this->hasEnoughAttendances()

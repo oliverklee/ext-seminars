@@ -1232,7 +1232,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
         if (empty($result)) {
             $key = $params['key'];
             $feUserData = $GLOBALS['TSFE']->fe_user->user;
-            $result = $feUserData[$key];
+            $result = (string)$feUserData[$key];
 
             // If the country is empty, try the static info country instead.
             if (empty($result) && ($key == 'country')) {
@@ -1241,7 +1241,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
                     $result = $this->getDefaultCountry();
                 } else {
                     $this->initStaticInfo();
-                    $result = $this->staticInfo->getStaticInfoName(
+                    $result = (string)$this->staticInfo->getStaticInfoName(
                         'COUNTRIES',
                         $staticInfoCountry,
                         '',
