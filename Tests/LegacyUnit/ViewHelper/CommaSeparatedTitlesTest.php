@@ -115,7 +115,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CommaSeparatedTitlesTest extends TestCas
         $this->list->add($model);
 
         self::assertSame(
-            htmlspecialchars($model->getTitle()),
+            \htmlspecialchars($model->getTitle(), ENT_QUOTES | ENT_HTML5),
             $this->subject->render($this->list)
         );
     }

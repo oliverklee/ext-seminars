@@ -851,7 +851,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
 
         foreach ($fieldKeys as $key) {
             $hasLabel = in_array($key, $fieldsWithLabels, true);
-            $fieldValue = isset($userData[$key]) ? htmlspecialchars((string)$userData[$key]) : '';
+            $fieldValue = isset($userData[$key]) ? \htmlspecialchars((string)$userData[$key], ENT_QUOTES | ENT_HTML5) : '';
             $wrappedFieldValue = '<span id="tx-seminars-feuser-field-' . $key . '">' . $fieldValue . '</span>';
             if ($fieldValue !== '') {
                 $marker = $hasLabel ? ($this->translate('label_' . $key) . ' ') : '';
@@ -908,7 +908,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
 
         $this->setMarker('registration_data_heading', $this->createLabelForRegistrationElementOnConfirmationPage($key));
 
-        $fieldContent = str_replace(CR, '<br />', htmlspecialchars($currentFormData));
+        $fieldContent = str_replace(CR, '<br />', \htmlspecialchars($currentFormData, ENT_QUOTES | ENT_HTML5));
         $this->setMarker('registration_data_body', $fieldContent);
 
         return $this->getSubpart('REGISTRATION_CONFIRMATION_DATA');
@@ -1171,7 +1171,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
                 if ($key === 'gender') {
                     $currentFormData = $this->translate('label_gender.I.' . (int)$currentFormData);
                 }
-                $processedFormData = str_replace(CR, '<br />', htmlspecialchars($currentFormData));
+                $processedFormData = str_replace(CR, '<br />', \htmlspecialchars($currentFormData, ENT_QUOTES | ENT_HTML5));
                 $wrappedFormData = '<span class="tx-seminars-billing-data-item tx-seminars-billing-data-item-' . $key . '">' .
                     $processedFormData . '</span>';
 

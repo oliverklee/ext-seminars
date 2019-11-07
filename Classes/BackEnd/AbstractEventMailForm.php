@@ -138,7 +138,8 @@ abstract class AbstractEventMailForm
             ['id' => \Tx_Oelib_PageFinder::getInstance()->getPageUid()]
         );
 
-        return '<fieldset id="EventMailForm"><form action="' . htmlspecialchars($formAction) . '" method="post">' .
+        return '<fieldset id="EventMailForm"><form action="' . \htmlspecialchars($formAction, ENT_QUOTES | ENT_HTML5) .
+            '" method="post">' .
             $this->createSubjectFormElement() .
             $this->createMessageBodyFormElement() .
             $this->createBackButton() .
@@ -230,7 +231,7 @@ abstract class AbstractEventMailForm
         return '<p><label for="subject">' .
             $this->getLanguageService()->getLL('eventMailForm_subject') . '</label>' .
             '<input type="text" id="subject" name="subject" value="' .
-            htmlspecialchars($this->fillFormElement('subject'), ENT_QUOTES, 'utf-8') . '" ' .
+            \htmlspecialchars($this->fillFormElement('subject'), ENT_QUOTES | ENT_HTML5, 'utf-8') . '" ' .
             $classMarker . '/>' . $this->getErrorMessage('subject') . '</p>';
     }
 
@@ -250,7 +251,7 @@ abstract class AbstractEventMailForm
             $this->getLanguageService()->getLL('eventMailForm_message') . '</label>' .
             '<textarea cols="50" rows="20" class="eventMailForm_message' .
             $classMarker . '" id="messageBody" name="messageBody">' .
-            htmlspecialchars($messageBody) . '</textarea>' .
+            \htmlspecialchars($messageBody, ENT_QUOTES | ENT_HTML5) . '</textarea>' .
             $this->getErrorMessage('messageBody') . '</p>';
     }
 
@@ -307,7 +308,7 @@ abstract class AbstractEventMailForm
             return '';
         }
 
-        return '<p>' . htmlspecialchars($this->errorMessages[$fieldName]) . '</p>';
+        return '<p>' . \htmlspecialchars($this->errorMessages[$fieldName], ENT_QUOTES | ENT_HTML5) . '</p>';
     }
 
     /**

@@ -77,7 +77,7 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_Abstr
         if ($this->seminar->isOk()) {
             // Okay, at least the seminar UID is valid so we can show the
             // seminar title and date.
-            $this->setMarker('title', htmlspecialchars($this->seminar->getTitleAndDate()));
+            $this->setMarker('title', \htmlspecialchars($this->seminar->getTitleAndDate(), ENT_QUOTES | ENT_HTML5));
 
             // Lets warnings from the seminar bubble up to us.
             $this->setErrorMessage($this->seminar->checkConfiguration(true));
@@ -267,7 +267,7 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_Abstr
             foreach ($cellContents as $cellContent) {
                 $this->setMarker(
                     'registrations_list_cell',
-                    htmlspecialchars($cellContent)
+                    \htmlspecialchars($cellContent, ENT_QUOTES | ENT_HTML5)
                 );
                 $tableCells .= $this->getSubpart(
                     'WRAPPER_REGISTRATIONS_LIST_CELL'

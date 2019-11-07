@@ -29,7 +29,7 @@ class Tx_Seminars_ViewHelper_CommaSeparatedTitles
                 );
             }
 
-            $titles[] = htmlspecialchars($element->getTitle());
+            $titles[] = \htmlspecialchars($element->getTitle(), ENT_QUOTES | ENT_HTML5);
         }
 
         return implode(', ', $titles);

@@ -1425,7 +1425,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         /** @var \Tx_Seminars_Model_Event $newEvent */
         $newEvent = $mapper->find($event->getUid());
         $singleViewUrl = $this->linkBuilder->createAbsoluteUrlForEvent($newEvent);
-        $this->setMarker('url', ($useHtml ? htmlspecialchars($singleViewUrl) : $singleViewUrl));
+        $this->setMarker('url', $useHtml ? \htmlspecialchars($singleViewUrl, ENT_QUOTES | ENT_HTML5) : $singleViewUrl);
 
         if ($event->isPlanned()) {
             $this->unhideSubparts('planned_disclaimer', $wrapperPrefix);

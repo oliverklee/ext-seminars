@@ -317,7 +317,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends TestCase
 
         self::assertContains(
             '<option value="' . $eventTypeUid . '">' .
-            htmlspecialchars($eventTypeTitle) .
+            \htmlspecialchars($eventTypeTitle, ENT_QUOTES | ENT_HTML5) .
             '</option>',
             $this->subject->render()
         );
@@ -712,7 +712,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends TestCase
 
         self::assertContains(
             '<option value="' . $placeUid . '">' .
-            htmlspecialchars($placeTitle) . '</option>',
+            \htmlspecialchars($placeTitle, ENT_QUOTES | ENT_HTML5) . '</option>',
             $this->subject->render()
         );
     }
@@ -1322,7 +1322,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends TestCase
         $this->subject->piVars['sword'] = $searchWord;
 
         self::assertContains(
-            htmlspecialchars($searchWord),
+            \htmlspecialchars($searchWord, ENT_QUOTES | ENT_HTML5),
             $this->subject->render()
         );
     }
@@ -1955,7 +1955,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends TestCase
 
         self::assertContains(
             '<option value="' . $organizerUid . '">' .
-            htmlspecialchars($organizerName) .
+            \htmlspecialchars($organizerName, ENT_QUOTES | ENT_HTML5) .
             '</option>',
             $this->subject->render()
         );
@@ -2124,7 +2124,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends TestCase
         );
 
         self::assertContains(
-            '<option value="' . $categoryUid . '">' . htmlspecialchars($categoryName) . '</option>',
+            '<option value="' . $categoryUid . '">' . \htmlspecialchars($categoryName, ENT_QUOTES | ENT_HTML5) . '</option>',
             $this->subject->render()
         );
     }

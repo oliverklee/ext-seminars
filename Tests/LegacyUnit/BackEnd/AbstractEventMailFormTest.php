@@ -167,7 +167,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends TestCase
         self::assertContains(
             sprintf(
                 $GLOBALS['LANG']->getLL('testForm_prefillField_introduction'),
-                htmlspecialchars('"Dummy Event"')
+                \htmlspecialchars('"Dummy Event"', ENT_QUOTES | ENT_HTML5)
             ),
             $this->subject->render()
         );

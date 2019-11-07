@@ -80,7 +80,7 @@ class RegistrationsList extends AbstractList
             $event = $mapper->find($eventUid);
             $registrationsHeading = sprintf(
                 $GLOBALS['LANG']->getLL('registrationlist.label_registrationsHeading'),
-                htmlspecialchars($event->getTitle()),
+                \htmlspecialchars($event->getTitle(), ENT_QUOTES | ENT_HTML5),
                 $event->getUid()
             );
             $newButton = '';
@@ -163,17 +163,15 @@ class RegistrationsList extends AbstractList
         /** @var \Tx_Seminars_OldModel_Registration $registration */
         foreach ($registrationBag as $registration) {
             try {
-                $userName = htmlspecialchars($registration->getUserName());
+                $userName = \htmlspecialchars($registration->getUserName(), ENT_QUOTES | ENT_HTML5);
             } catch (\Tx_Oelib_Exception_NotFound $exception) {
                 $userName = $GLOBALS['LANG']->getLL('registrationlist.deleted');
             }
             $event = $registration->getSeminarObject();
             if ($event->isOk()) {
-                $eventTitle = htmlspecialchars($event->getTitle());
+                $eventTitle = \htmlspecialchars($event->getTitle(), ENT_QUOTES | ENT_HTML5);
                 $eventDate = $event->getDate();
-                $accreditationNumber = htmlspecialchars(
-                    $event->getAccreditationNumber()
-                );
+                $accreditationNumber = \htmlspecialchars($event->getAccreditationNumber(), ENT_QUOTES | ENT_HTML5);
             } else {
                 $eventTitle = $GLOBALS['LANG']->getLL('registrationlist.deleted');
                 $eventDate = '';
