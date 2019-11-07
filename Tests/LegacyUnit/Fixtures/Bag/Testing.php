@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /**
  * This aggregate class holds a bunch of test objects and allows to iterate over them.
