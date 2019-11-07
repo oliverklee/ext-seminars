@@ -64,7 +64,7 @@ class OrganizersList extends AbstractList
             );
             $this->template->setMarker(
                 'full_name',
-                htmlspecialchars($this->organizer->getTitle())
+                \htmlspecialchars($this->organizer->getTitle(), ENT_QUOTES | ENT_HTML5)
             );
             $this->template->setMarker(
                 'edit_button',

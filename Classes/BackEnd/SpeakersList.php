@@ -69,7 +69,7 @@ class SpeakersList extends AbstractList
             );
             $this->template->setMarker(
                 'full_name',
-                htmlspecialchars($this->speaker->getTitle())
+                \htmlspecialchars($this->speaker->getTitle(), ENT_QUOTES | ENT_HTML5)
             );
             $this->template->setMarker(
                 'edit_button',
@@ -95,7 +95,7 @@ class SpeakersList extends AbstractList
             );
             $this->template->setMarker(
                 'skills',
-                htmlspecialchars($this->speaker->getSkillsShort())
+                \htmlspecialchars($this->speaker->getSkillsShort(), ENT_QUOTES | ENT_HTML5)
             );
 
             $tableRows .= $this->template->getSubpart('SPEAKER_ROW');

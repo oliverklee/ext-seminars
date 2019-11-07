@@ -236,7 +236,7 @@ class Tx_Seminars_OldModel_Speaker extends \Tx_Seminars_OldModel_Abstract
      */
     public function getLinkedTitle(\Tx_Oelib_TemplateHelper $plugin)
     {
-        $safeTitle = htmlspecialchars($this->getTitle());
+        $safeTitle = \htmlspecialchars($this->getTitle(), ENT_QUOTES | ENT_HTML5);
 
         if ($this->hasHomepage()) {
             $result = $plugin->cObj->getTypoLink(

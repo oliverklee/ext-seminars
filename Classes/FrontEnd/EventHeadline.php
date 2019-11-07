@@ -69,7 +69,7 @@ class Tx_Seminars_FrontEnd_EventHeadline extends \Tx_Seminars_FrontEnd_AbstractV
      */
     protected function getTitleAndDate(\Tx_Seminars_Model_Event $event)
     {
-        $result = htmlspecialchars($event->getTitle());
+        $result = \htmlspecialchars($event->getTitle(), ENT_QUOTES | ENT_HTML5);
         if (!$event->hasBeginDate()) {
             return $result;
         }

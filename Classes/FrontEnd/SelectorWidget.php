@@ -175,7 +175,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
 
         $optionsList = '';
         foreach ($options as $key => $label) {
-            $this->setMarker('option_label', htmlspecialchars($label));
+            $this->setMarker('option_label', \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5));
             $this->setMarker('option_value', $key);
 
             // Preselects the option if it was selected by the user.
@@ -371,7 +371,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
             return;
         }
 
-        $this->setMarker('searchbox_value', \htmlspecialchars((string)$this->piVars['sword']));
+        $this->setMarker('searchbox_value', \htmlspecialchars((string)$this->piVars['sword'], ENT_QUOTES | ENT_HTML5));
     }
 
     /**

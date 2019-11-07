@@ -121,7 +121,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventHeadlineTest extends TestCase
         $this->subject->piVars['uid'] = $this->eventId;
 
         self::assertContains(
-            htmlspecialchars('<test>Test event</test>'),
+            \htmlspecialchars('<test>Test event</test>', ENT_QUOTES | ENT_HTML5),
             $this->subject->render()
         );
     }

@@ -751,7 +751,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
             )
         );
 
-        $this->setMarker('title', htmlspecialchars($this->seminar->getTitle()));
+        $this->setMarker('title', \htmlspecialchars($this->seminar->getTitle(), ENT_QUOTES | ENT_HTML5));
         $this->setMarker('uid', $this->seminar->getUid());
 
         $this->setSubtitleMarker();
@@ -843,7 +843,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
             return;
         }
 
-        $this->setMarker('event_type', htmlspecialchars($this->seminar->getEventType()));
+        $this->setMarker('event_type', \htmlspecialchars($this->seminar->getEventType(), ENT_QUOTES | ENT_HTML5));
     }
 
     /**
@@ -859,7 +859,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
             return;
         }
 
-        $this->setMarker('subtitle', htmlspecialchars($this->seminar->getSubtitle()));
+        $this->setMarker('subtitle', \htmlspecialchars($this->seminar->getSubtitle(), ENT_QUOTES | ENT_HTML5));
     }
 
     /**
@@ -896,7 +896,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
 
         $this->setMarker(
             'accreditation_number',
-            htmlspecialchars($this->seminar->getAccreditationNumber())
+            \htmlspecialchars($this->seminar->getAccreditationNumber(), ENT_QUOTES | ENT_HTML5)
         );
     }
 
@@ -933,7 +933,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         $allCategories = $this->seminar->getCategories();
 
         foreach ($allCategories as $category) {
-            $this->setMarker('category_title', htmlspecialchars($category['title']));
+            $this->setMarker('category_title', \htmlspecialchars($category['title'], ENT_QUOTES | ENT_HTML5));
             $this->setMarker(
                 'category_icon',
                 $this->createCategoryIcon($category)
@@ -954,7 +954,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
             'place',
             $this->getConfValueBoolean('showSiteDetails', 's_template_special')
                 ? $this->seminar->getPlaceWithDetails($this)
-                : htmlspecialchars($this->seminar->getPlaceShort())
+                : \htmlspecialchars($this->seminar->getPlaceShort(), ENT_QUOTES | ENT_HTML5)
         );
     }
 
@@ -971,7 +971,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
             return;
         }
 
-        $this->setMarker('room', htmlspecialchars($this->seminar->getRoom()));
+        $this->setMarker('room', \htmlspecialchars($this->seminar->getRoom(), ENT_QUOTES | ENT_HTML5));
     }
 
     /**
@@ -998,9 +998,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
             $this->setMarker('timeslot_date', $timeSlotData['date']);
             $this->setMarker('timeslot_time', $timeSlotData['time']);
             $this->setMarker('timeslot_entry_date', $timeSlotData['entry_date']);
-            $this->setMarker('timeslot_room', htmlspecialchars($timeSlotData['room']));
-            $this->setMarker('timeslot_place', htmlspecialchars($timeSlotData['place']));
-            $this->setMarker('timeslot_speakers', htmlspecialchars($timeSlotData['speakers']));
+            $this->setMarker('timeslot_room', \htmlspecialchars($timeSlotData['room'], ENT_QUOTES | ENT_HTML5));
+            $this->setMarker('timeslot_place', \htmlspecialchars($timeSlotData['place'], ENT_QUOTES | ENT_HTML5));
+            $this->setMarker('timeslot_speakers', \htmlspecialchars($timeSlotData['speakers'], ENT_QUOTES | ENT_HTML5));
 
             /** @var \Tx_Seminars_Model_TimeSlot $timeSlot */
             $timeSlot = $timeSlotMapper->find($timeSlotData['uid']);
@@ -1130,7 +1130,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
             return;
         }
 
-        $this->setMarker('language', htmlspecialchars($this->seminar->getLanguageName()));
+        $this->setMarker('language', \htmlspecialchars($this->seminar->getLanguageName(), ENT_QUOTES | ENT_HTML5));
     }
 
     /**
@@ -1256,7 +1256,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
 
         $paymentMethodOutput = '';
         foreach ($paymentMethods as $paymentMethod) {
-            $this->setMarker('payment_method', htmlspecialchars($paymentMethod));
+            $this->setMarker('payment_method', \htmlspecialchars($paymentMethod, ENT_QUOTES | ENT_HTML5));
             $paymentMethodOutput .= $this->getSubpart('SINGLE_PAYMENT_METHOD');
         }
 
@@ -1333,7 +1333,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
 
         $targetGroups = $this->seminar->getTargetGroupsAsArray();
         foreach ($targetGroups as $targetGroup) {
-            $this->setMarker('target_group', htmlspecialchars($targetGroup));
+            $this->setMarker('target_group', \htmlspecialchars($targetGroup, ENT_QUOTES | ENT_HTML5));
             $targetGroupsOutput .= $this->getSubpart('SINGLE_TARGET_GROUP');
         }
 
@@ -1435,12 +1435,12 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         $owner = $this->seminar->getOwner();
         $ownerData = [];
         // getName always returns a non-empty string for valid records.
-        $ownerData[] = htmlspecialchars($owner->getName());
+        $ownerData[] = \htmlspecialchars($owner->getName(), ENT_QUOTES | ENT_HTML5);
         if ($owner->hasPhoneNumber()) {
-            $ownerData[] = htmlspecialchars($owner->getPhoneNumber());
+            $ownerData[] = \htmlspecialchars($owner->getPhoneNumber(), ENT_QUOTES | ENT_HTML5);
         }
         if ($owner->hasEmailAddress()) {
-            $ownerData[] = htmlspecialchars($owner->getEmailAddress());
+            $ownerData[] = \htmlspecialchars($owner->getEmailAddress(), ENT_QUOTES | ENT_HTML5);
         }
         $this->setSubpart(
             'OWNER_DATA',
@@ -1770,8 +1770,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
                 $result .= $this->getSubpart('ERROR_VIEW');
             }
 
-            // Shows the page browser (if not deactivated in the configuration),
-            // disabling htmlspecialchars (the last parameter).
+            // Shows the page browser (if not deactivated in the configuration).
             if (!$this->getConfValueBoolean('hidePageBrowser', 's_template_special')) {
                 $result .= $this->pi_list_browseresults();
             }
@@ -2107,10 +2106,10 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
                 'title_link',
                 $this->createSingleViewLink($event, $this->seminar->getTitle())
             );
-            $this->setMarker('subtitle', htmlspecialchars($this->seminar->getSubtitle()));
+            $this->setMarker('subtitle', \htmlspecialchars($this->seminar->getSubtitle(), ENT_QUOTES | ENT_HTML5));
             $this->setMarker('uid', $this->seminar->getUid());
-            $this->setMarker('event_type', htmlspecialchars($this->seminar->getEventType()));
-            $this->setMarker('accreditation_number', htmlspecialchars($this->seminar->getAccreditationNumber()));
+            $this->setMarker('event_type', \htmlspecialchars($this->seminar->getEventType(), ENT_QUOTES | ENT_HTML5));
+            $this->setMarker('accreditation_number', \htmlspecialchars($this->seminar->getAccreditationNumber(), ENT_QUOTES | ENT_HTML5));
             $this->setMarker(
                 'credit_points',
                 $this->seminar->getCreditPoints()
@@ -2123,7 +2122,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
                 'speakers',
                 $this->seminar->getSpeakersShort($this)
             );
-            $this->setMarker('language', htmlspecialchars($this->seminar->getLanguageName()));
+            $this->setMarker('language', \htmlspecialchars($this->seminar->getLanguageName(), ENT_QUOTES | ENT_HTML5));
 
             $currentDate = $this->seminar->getDate();
             if (($currentDate == $this->previousDate)
@@ -2146,9 +2145,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
             $this->setMarker('time', $this->seminar->getTime());
             $this->setMarker('expiry', $this->seminar->getExpiry());
 
-            $this->setMarker('place', htmlspecialchars($this->seminar->getPlaceShort()));
-            $this->setMarker('country', htmlspecialchars($this->seminar->getCountry()));
-            $this->setMarker('city', htmlspecialchars($this->seminar->getCities()));
+            $this->setMarker('place', \htmlspecialchars($this->seminar->getPlaceShort(), ENT_QUOTES | ENT_HTML5));
+            $this->setMarker('country', \htmlspecialchars($this->seminar->getCountry(), ENT_QUOTES | ENT_HTML5));
+            $this->setMarker('city', \htmlspecialchars($this->seminar->getCities(), ENT_QUOTES | ENT_HTML5));
             $this->setMarker('seats', $attendanceData['seats']);
             $this->setMarker(
                 'price_regular',
@@ -2163,7 +2162,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
                 'organizers',
                 $this->seminar->getOrganizers($this)
             );
-            $this->setMarker('target_groups', htmlspecialchars($this->seminar->getTargetGroupNames()));
+            $this->setMarker('target_groups', \htmlspecialchars($this->seminar->getTargetGroupNames(), ENT_QUOTES | ENT_HTML5));
             $this->setMarker(
                 'attached_files',
                 $this->getAttachedFilesListMarkerContent()
@@ -2326,7 +2325,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
                 ['sort' => $fieldName . ':' . ($this->internal['descFlag'] ? 0 : 1)]
             );
         } else {
-            $result = htmlspecialchars($label);
+            $result = \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5);
         }
 
         return $result;
@@ -3005,7 +3004,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
     protected function createRegistrationHeading($errorMessage)
     {
         $this->setMarker('registration', $this->translate('label_registration'));
-        $this->setMarker('title', $this->seminar ? htmlspecialchars($this->seminar->getTitle()) : '');
+        $this->setMarker('title', $this->seminar ? \htmlspecialchars($this->seminar->getTitle(), ENT_QUOTES | ENT_HTML5) : '');
 
         if ($this->seminar && $this->seminar->hasDate()) {
             $this->setMarker('date', $this->seminar->getDate());
@@ -3207,13 +3206,13 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         foreach ($organizers as $organizer) {
             if ($organizer->hasHomepage()) {
                 $organizerTitle = $this->cObj->getTypoLink(
-                    htmlspecialchars($organizer->getName()),
+                    \htmlspecialchars($organizer->getName(), ENT_QUOTES | ENT_HTML5),
                     $organizer->getHomepage(),
                     [],
                     $this->getConfValueString('externalLinkTarget')
                 );
             } else {
-                $organizerTitle = htmlspecialchars($organizer->getName());
+                $organizerTitle = \htmlspecialchars($organizer->getName(), ENT_QUOTES | ENT_HTML5);
             }
             $this->setMarker('organizer_item_title', $organizerTitle);
 
@@ -3634,7 +3633,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      */
     public function createSingleViewLink(\Tx_Seminars_Model_Event $event, $linkText, $htmlspecialcharLinkText = true)
     {
-        $processedLinkText = $htmlspecialcharLinkText ? htmlspecialchars($linkText) : $linkText;
+        $processedLinkText = $htmlspecialcharLinkText ? \htmlspecialchars($linkText, ENT_QUOTES | ENT_HTML5) : $linkText;
         $linkConditionConfiguration = $this->getConfValueString('linkToSingleView', 's_listView');
         $createLink = ($linkConditionConfiguration === 'always')
             || (($linkConditionConfiguration === 'onlyForNonEmptyDescription') && $event->hasDescription());
@@ -3643,7 +3642,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         }
 
         $url = $this->getLinkBuilder()->createRelativeUrlForEvent($event);
-        return '<a href="' . htmlspecialchars($url) . '">' . $processedLinkText . '</a>';
+        return '<a href="' . \htmlspecialchars($url, ENT_QUOTES | ENT_HTML5) . '">' . $processedLinkText . '</a>';
     }
 
     /**

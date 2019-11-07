@@ -1982,7 +1982,7 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             );
             if (!is_file($GLOBALS['TSFE']->tmpl->getFileName($rawFileName))) {
                 $message = 'The specified HTML template file <strong>' .
-                    htmlspecialchars($rawFileName) . '</strong> cannot be read. ' .
+                    \htmlspecialchars($rawFileName, ENT_QUOTES | ENT_HTML5) . '</strong> cannot be read. ' .
                     $errorMessage . ' ' .
                     'Please either create the file <strong>' . $rawFileName .
                     '</strong> or select an existing file using the TS setup ' .
@@ -2972,7 +2972,7 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             );
             if (!is_file($GLOBALS['TSFE']->tmpl->getFileName($rawFileName))) {
                 $message = 'The specified HTML template file <strong>' .
-                    htmlspecialchars($rawFileName) . '</strong> cannot be read. ' .
+                    \htmlspecialchars($rawFileName, ENT_QUOTES | ENT_HTML5) . '</strong> cannot be read. ' .
                     $errorMessage . ' ' .
                     'Please either create the file <strong>' . $rawFileName .
                     '</strong> or select an existing file using the TS setup ' .

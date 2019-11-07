@@ -146,15 +146,16 @@ class EventsList extends AbstractList
             $this->template->setMarker('icon', $event->getRecordIcon());
             $this->template->setMarker(
                 'accreditation_number',
-                htmlspecialchars($event->getAccreditationNumber())
+                \htmlspecialchars($event->getAccreditationNumber(), ENT_QUOTES | ENT_HTML5)
             );
             $this->template->setMarker(
                 'title',
-                htmlspecialchars(
+                \htmlspecialchars(
                     GeneralUtility::fixed_lgd_cs(
                         $event->getRealTitle(),
                         $this->getBackEndUser()->uc['titleLen']
-                    )
+                    ),
+                    ENT_QUOTES | ENT_HTML5
                 )
             );
             $this->template->setMarker(
@@ -300,7 +301,8 @@ class EventsList extends AbstractList
             ]
         );
 
-        return '<a class="btn btn-default" href="' . htmlspecialchars($csvUrl) . '">' . $imageTag . '</a>&nbsp;';
+        return '<a class="btn btn-default" href="' . \htmlspecialchars($csvUrl, ENT_QUOTES | ENT_HTML5) . '">' .
+            $imageTag . '</a>&nbsp;';
     }
 
     /**
@@ -339,7 +341,7 @@ class EventsList extends AbstractList
 
         $this->template->setMarker('uid', $event->getUid());
         $buttonUrl = BackendUtility::getModuleUrl(self::MODULE_NAME, ['id' => $pageData['uid']]);
-        $this->template->setMarker('email_button_url', htmlspecialchars($buttonUrl));
+        $this->template->setMarker('email_button_url', \htmlspecialchars($buttonUrl, ENT_QUOTES | ENT_HTML5));
         $this->template->setMarker(
             'label_email_button',
             $this->getLanguageService()->getLL('eventlist_button_email')
@@ -371,7 +373,7 @@ class EventsList extends AbstractList
         ) {
             $this->template->setMarker('uid', $event->getUid());
             $buttonUrl = BackendUtility::getModuleUrl(self::MODULE_NAME, ['id' => $pageData['uid']]);
-            $this->template->setMarker('cancel_button_url', htmlspecialchars($buttonUrl));
+            $this->template->setMarker('cancel_button_url', \htmlspecialchars($buttonUrl, ENT_QUOTES | ENT_HTML5));
             $this->template->setMarker(
                 'label_cancel_button',
                 $this->getLanguageService()->getLL('eventlist_button_cancel')
@@ -406,7 +408,7 @@ class EventsList extends AbstractList
         ) {
             $this->template->setMarker('uid', $event->getUid());
             $buttonUrl = BackendUtility::getModuleUrl(self::MODULE_NAME, ['id' => $pageData['uid']]);
-            $this->template->setMarker('confirm_button_url', htmlspecialchars($buttonUrl));
+            $this->template->setMarker('confirm_button_url', \htmlspecialchars($buttonUrl, ENT_QUOTES | ENT_HTML5));
             $this->template->setMarker(
                 'label_confirm_button',
                 $this->getLanguageService()->getLL('eventlist_button_confirm')
@@ -447,7 +449,7 @@ class EventsList extends AbstractList
             self::MODULE_NAME,
             ['id' => $pageData['uid'], 'subModule' => '2', 'eventUid' => $event->getUid()]
         );
-        return '<a class="btn btn-default" href="' . htmlspecialchars($url) . '">' .
+        return '<a class="btn btn-default" href="' . \htmlspecialchars($url, ENT_QUOTES | ENT_HTML5) . '">' .
             $this->getLanguageService()->getLL('label_show_event_registrations') . '</a>';
     }
 }

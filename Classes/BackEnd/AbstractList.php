@@ -104,12 +104,13 @@ abstract class AbstractList
         }
 
         $params = '&edit[' . $this->tableName . '][' . $uid . ']=edit';
-        $langEdit = htmlspecialchars($this->getLanguageService()->getLL('edit'));
+        $langEdit = \htmlspecialchars($this->getLanguageService()->getLL('edit'), ENT_QUOTES | ENT_HTML5);
         $icon = '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') .
             'Resources/Public/Icons/Edit.gif" alt="' . $langEdit . '" class="icon" />';
 
         $editOnClick = BackendUtility::editOnClick($params);
-        $result = '<a class="btn btn-default" href="#" onclick="' . htmlspecialchars($editOnClick)
+        $result = '<a class="btn btn-default" href="#" onclick="' .
+            \htmlspecialchars($editOnClick, ENT_QUOTES | ENT_HTML5)
             . '" title="' . $langEdit . '">' . $icon . '</a>';
 
         return $result;
@@ -140,18 +141,19 @@ abstract class AbstractList
                 ' ' . $languageService->getLL('referencesWarning')
             );
 
-            $confirmation = htmlspecialchars(
+            $confirmation = \htmlspecialchars(
                 'if (confirm(' . GeneralUtility::quoteJSvalue(
                     $languageService->getLL('deleteWarning') . $referenceWarning
-                ) . ')) {return true;} else {return false;}'
+                ) . ')) {return true;} else {return false;}',
+                ENT_QUOTES | ENT_HTML5
             );
             $langDelete = $languageService->getLL('delete');
             $result = '<a class="btn btn-default" href="' .
-                htmlspecialchars(BackendUtility::getLinkToDataHandlerAction($params)) .
+                \htmlspecialchars(BackendUtility::getLinkToDataHandlerAction($params), ENT_QUOTES | ENT_HTML5) .
                 '" onclick="' . $confirmation . '">' .
                 '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') .
-                'Resources/Public/Icons/Garbage.gif" title="' . htmlspecialchars($langDelete) .
-                '" alt="' . htmlspecialchars($langDelete) . '" class="deleteicon" />' .
+                'Resources/Public/Icons/Garbage.gif" title="' . \htmlspecialchars($langDelete, ENT_QUOTES | ENT_HTML5) .
+                '" alt="' . \htmlspecialchars($langDelete, ENT_QUOTES | ENT_HTML5) . '" class="deleteicon" />' .
                 '</a>';
         }
 
@@ -204,7 +206,8 @@ abstract class AbstractList
             $result = TAB . TAB .
                 '<div id="typo3-newRecordLink">' . LF .
                 TAB . TAB . TAB .
-                '<a class="btn btn-default" href="#"  onclick="' . htmlspecialchars($editOnClick) . '">' . LF .
+                '<a class="btn btn-default" href="#"  onclick="' .
+                \htmlspecialchars($editOnClick, ENT_QUOTES | ENT_HTML5) . '">' . LF .
                 TAB . TAB . TAB . TAB .
                 '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') .
                 'Resources/Public/Icons/New.gif"' .
@@ -277,7 +280,7 @@ abstract class AbstractList
         $result = TAB . TAB .
             '<div id="typo3-csvLink">' . LF .
             TAB . TAB . TAB .
-            '<a class="btn btn-default" href="' . htmlspecialchars($csvUrl) .
+            '<a class="btn btn-default" href="' . \htmlspecialchars($csvUrl, ENT_QUOTES | ENT_HTML5) .
             $this->getAdditionalCsvParameters() . '">' . LF .
             TAB . TAB . TAB . TAB .
             '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') .
@@ -323,7 +326,7 @@ abstract class AbstractList
             }
 
             $result = '<a class="btn btn-default" href="' .
-                htmlspecialchars(BackendUtility::getLinkToDataHandlerAction($params)) . '">' .
+                \htmlspecialchars(BackendUtility::getLinkToDataHandlerAction($params), ENT_QUOTES | ENT_HTML5) . '">' .
                 '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') . 'Resources/Public/Icons/' .
                 $icon . '" title="' . $langHide . '" alt="' . $langHide . '" class="hideicon" />' .
                 '</a>';
