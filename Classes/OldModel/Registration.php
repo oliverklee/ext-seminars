@@ -417,7 +417,6 @@ class Tx_Seminars_OldModel_Registration extends \Tx_Seminars_OldModel_Abstract
                 break;
             default:
                 $result = $this->getRecordPropertyString($trimmedKey);
-                break;
         }
 
         $carriageReturnRemoved = str_replace(CR, LF, (string)$result);

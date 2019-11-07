@@ -284,7 +284,6 @@ class Tx_Seminars_BagBuilder_Event extends \Tx_Seminars_BagBuilder_Abstract
             default:
                 // To show all events, we don't need any additional parameters.
                 $where = '';
-                break;
         }
 
         if ($where != '') {
