@@ -603,7 +603,7 @@ class Tx_Seminars_OldModel_Registration extends \Tx_Seminars_OldModel_Abstract
     public function getSeminarObject()
     {
         if (!$this->seminar && $this->isOk()) {
-            $seminarUid = $this->recordData['seminar'];
+            $seminarUid = $this->getRecordPropertyInteger('seminar');
             if (isset(self::$cachedSeminars[$seminarUid])) {
                 $this->seminar = self::$cachedSeminars[$seminarUid];
             } else {

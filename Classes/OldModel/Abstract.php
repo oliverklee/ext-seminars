@@ -441,7 +441,7 @@ abstract class Tx_Seminars_OldModel_Abstract extends \Tx_Oelib_TemplateHelper im
         return $GLOBALS['TYPO3_DB']->exec_SELECTquery(
             '*',
             $this->tableName,
-            'uid=' . (int)$uid . \Tx_Oelib_Db::enableFields($this->tableName, $allowHiddenRecords),
+            'uid=' . (int)$uid . \Tx_Oelib_Db::enableFields($this->tableName, (int)$allowHiddenRecords),
             '',
             '',
             '1'
