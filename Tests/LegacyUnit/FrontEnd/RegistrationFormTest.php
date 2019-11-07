@@ -734,7 +734,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
      *
      * @dataProvider formFieldsDataProvider
      */
-    public function isFormFieldEnabledForNoFieldsEnabledReturnsFalseForEachField($key)
+    public function isFormFieldEnabledForNoFieldsEnabledReturnsFalseForEachField(string $key)
     {
         $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(['showRegistrationFields' => ''], $GLOBALS['TSFE']->cObj);
 
@@ -755,11 +755,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
      *        whether the field will be visible if no other fields are enabled
      *        and the event has no special features enabled
      *
-     *
      * @dataProvider formFieldsDataProvider
      */
-    public function isFormFieldEnabledForNoFieldsEnabledReturnsTrueForSelfContainedFields($key, $isSelfContained)
-    {
+    public function isFormFieldEnabledForNoFieldsEnabledReturnsTrueForSelfContainedFields(
+        string $key,
+        bool $isSelfContained
+    ) {
         $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
             ['showRegistrationFields' => $key],
             $GLOBALS['TSFE']->cObj
@@ -954,7 +955,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
      *
      * @dataProvider registerThemselvesDataProvider
      */
-    public function getNumberOfEnteredPersonsForFieldHiddenReturnsValueFromConfiguration($configurationValue)
+    public function getNumberOfEnteredPersonsForFieldHiddenReturnsValueFromConfiguration(int $configurationValue)
     {
         $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
             [

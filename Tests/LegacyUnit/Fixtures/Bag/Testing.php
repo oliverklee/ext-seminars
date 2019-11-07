@@ -28,13 +28,13 @@ class Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing extends \Tx_Seminars_Bag_Abstr
      *        If $ignoreTimingOfRecords is TRUE the timing of records is ignored.
      */
     public function __construct(
-        $queryParameters = '1=1',
-        $additionalTableNames = '',
-        $groupBy = '',
-        $orderBy = 'uid',
-        $limit = '',
-        $showHiddenRecords = -1,
-        $ignoreTimingOfRecords = false
+        string $queryParameters = '1=1',
+        string $additionalTableNames = '',
+        string $groupBy = '',
+        string $orderBy = 'uid',
+        string $limit = '',
+        int $showHiddenRecords = -1,
+        bool $ignoreTimingOfRecords = false
     ) {
         parent::__construct(
             'tx_seminars_test',

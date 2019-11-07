@@ -37,7 +37,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_BackEnd_TestingEventMailForm extends Abstr
      * @return string the initial value of the field, will be empty if no
      *                initial value is defined
      */
-    public function getInitialValue($fieldName): string
+    public function getInitialValue(string $fieldName): string
     {
         return parent::getInitialValue($fieldName);
     }
@@ -62,7 +62,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_BackEnd_TestingEventMailForm extends Abstr
      *
      * @return void
      */
-    public function setErrorMessage($fieldName, $message)
+    public function setErrorMessage(string $fieldName, string $message)
     {
         parent::setErrorMessage($fieldName, $message);
     }
@@ -78,7 +78,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_BackEnd_TestingEventMailForm extends Abstr
      * @return string the error message for the field, will be empty if there's
      *                no error message for this field
      */
-    public function getErrorMessage($fieldName): string
+    public function getErrorMessage(string $fieldName): string
     {
         return parent::getErrorMessage($fieldName);
     }

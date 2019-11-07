@@ -140,7 +140,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
      *
      * @return int user UID
      */
-    private function createAndLoginUserWithPublishSetting($publishSetting): int
+    private function createAndLoginUserWithPublishSetting(int $publishSetting): int
     {
         $userGroupUid = $this->testingFramework->createFrontEndUserGroup(
             ['tx_seminars_publish_events' => $publishSetting]
@@ -200,9 +200,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
      *        the field which should be required, may be empty
      *
      * @return \Tx_Seminars_FrontEnd_EventEditor event editor fixture with the given
-     *         field as required field, will not be NULL.
+     *         field as required field
      */
-    private function getFixtureWithRequiredField($requiredField): \Tx_Seminars_FrontEnd_EventEditor
+    private function getFixtureWithRequiredField(string $requiredField): \Tx_Seminars_FrontEnd_EventEditor
     {
         $result = new \Tx_Seminars_FrontEnd_EventEditor(
             [

@@ -192,7 +192,7 @@ class MailNotifierTest extends TestCase
      *
      * @return void
      */
-    private function addSpeaker($eventUid)
+    private function addSpeaker(int $eventUid)
     {
         $speakerUid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',

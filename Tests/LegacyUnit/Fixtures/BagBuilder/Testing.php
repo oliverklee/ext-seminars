@@ -26,7 +26,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_BagBuilder_Testing extends \Tx_Seminars_Ba
      *
      * @return void
      */
-    public function limitToTitle($title)
+    public function limitToTitle(string $title)
     {
         $this->whereClauseParts['title'] = 'title = "' . $title . '"';
     }
@@ -68,7 +68,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_BagBuilder_Testing extends \Tx_Seminars_Ba
      *
      * @return void
      */
-    public function setTableName($tableName)
+    public function setTableName(string $tableName)
     {
         $this->tableName = $tableName;
     }

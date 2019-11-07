@@ -43,7 +43,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingTimeSpan extends \Tx_Semin
      *
      * @return void
      */
-    public function setBeginDateAndTime($beginDate)
+    public function setBeginDateAndTime(int $beginDate)
     {
         $this->setRecordPropertyInteger('begin_date', $beginDate);
     }
@@ -55,7 +55,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingTimeSpan extends \Tx_Semin
      *
      * @return void
      */
-    public function setEndDateAndTime($endDate)
+    public function setEndDateAndTime(int $endDate)
     {
         $this->setRecordPropertyInteger('end_date', $endDate);
     }
@@ -67,7 +67,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingTimeSpan extends \Tx_Semin
      *
      * @return void
      */
-    public function setRoom($room)
+    public function setRoom(string $room)
     {
         $this->setRecordPropertyString('room', $room);
     }
@@ -79,7 +79,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingTimeSpan extends \Tx_Semin
      *
      * @return void
      */
-    public function setNumberOfPlaces($places)
+    public function setNumberOfPlaces(int $places)
     {
         $this->setRecordPropertyInteger('place', $places);
     }
