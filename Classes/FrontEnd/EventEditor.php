@@ -1543,9 +1543,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
 
         $markerPrefix = 'save_event';
 
-        $title = isset($this->savedFormData['title']) ? $this->savedFormData['title'] : '';
+        $title = $this->savedFormData['title'] ?? '';
         $this->setMarker('title', $title, $markerPrefix);
-        $description = isset($this->savedFormData['description']) ? $this->savedFormData['description'] : '';
+        $description = $this->savedFormData['description'] ?? '';
         $this->setMarker('description', $description, $markerPrefix);
 
         $beginDateAsTimeStamp = isset($this->savedFormData['begin_date']) ? (int)$this->savedFormData['begin_date'] : 0;

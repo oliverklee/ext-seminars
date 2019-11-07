@@ -83,7 +83,7 @@ class MailNotifierConfiguration implements AdditionalFieldProviderInterface
      */
     protected function getLanguageService()
     {
-        return isset($GLOBALS['LANG']) ? $GLOBALS['LANG'] : null;
+        return $GLOBALS['LANG'] ?? null;
     }
 
     /**

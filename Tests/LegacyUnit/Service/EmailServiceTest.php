@@ -78,7 +78,7 @@ class EmailServiceTest extends TestCase
     protected function setUp()
     {
         Bootstrap::getInstance()->initializeBackendAuthentication();
-        $this->languageBackup = isset($GLOBALS['LANG']) ? $GLOBALS['LANG'] : null;
+        $this->languageBackup = $GLOBALS['LANG'] ?? null;
         $languageService = new LanguageService();
         $languageService->init('default');
         $GLOBALS['LANG'] = $languageService;

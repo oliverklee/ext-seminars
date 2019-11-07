@@ -4542,7 +4542,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
                     \htmlspecialchars(basename($attachedFile), ENT_QUOTES | ENT_HTML5),
                     ['parameter' => $uploadFolderUrl . $attachedFile]
                 ),
-                'type' => \htmlspecialchars((isset($matches[1]) ? $matches[1] : 'none'), ENT_QUOTES | ENT_HTML5),
+                'type' => \htmlspecialchars(($matches[1] ?? 'none'), ENT_QUOTES | ENT_HTML5),
                 'size' => GeneralUtility::formatSize(filesize($uploadFolderPath . $attachedFile)),
             ];
         }

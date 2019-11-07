@@ -180,7 +180,7 @@ class Tx_Seminars_FrontEnd_Editor extends \Tx_Seminars_FrontEnd_AbstractView
             $dataSource = $this->getFormCreator()->getDataHandler()->getFormData();
         }
 
-        return isset($dataSource[$key]) ? $dataSource[$key] : '';
+        return $dataSource[$key] ?? '';
     }
 
     /**
