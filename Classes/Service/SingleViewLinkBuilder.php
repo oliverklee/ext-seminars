@@ -16,18 +16,18 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
     /**
      * a plugin instance that provides access to the flexforms plugin settings
      *
-     * @var AbstractPlugin
+     * @var \Tx_Oelib_TemplateHelper|null
      */
     private $plugin = null;
 
     /**
      * Sets the plugin used accessing to the flexforms plugin settings.
      *
-     * @param \Tx_Oelib_TemplateHelper|null
+     * @param \Tx_Oelib_TemplateHelper
      *
      * @return void
      */
-    public function setPlugin(AbstractPlugin $plugin)
+    public function setPlugin(\Tx_Oelib_TemplateHelper $plugin)
     {
         $this->plugin = $plugin;
     }
@@ -36,8 +36,6 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
      * Returns the plugin used for accessing the flexforms plugin settings.
      *
      * @return \Tx_Oelib_TemplateHelper|null
-     *
-     * @see setPlugin
      */
     protected function getPlugin()
     {

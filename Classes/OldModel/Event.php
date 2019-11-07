@@ -68,7 +68,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * $allowHiddenRecords should be set to TRUE.
      *
      * @param int $uid UID of the seminar to retrieve from the DB. This parameter will be ignored if $dbResult is provided.
-     * @param mysqli_result|bool $dbResult MySQL result (of SELECT query). If this parameter is provided, $uid will be ignored.
+     * @param \mysqli_result|bool $dbResult MySQL result (of SELECT query). If this parameter is provided, $uid will be ignored.
      * @param bool $allowHiddenRecords whether it is possible to create a seminar object from a hidden record
      */
     public function __construct($uid, $dbResult = false, $allowHiddenRecords = false)
