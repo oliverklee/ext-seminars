@@ -36,8 +36,7 @@ class Tx_Seminars_Model_TargetGroup extends \Tx_Oelib_Model implements \Tx_Semin
     /**
      * Returns our owner.
      *
-     * @return \Tx_Seminars_Model_FrontEndUser the owner of this model, will be null
-     *                                     if this model has no owner
+     * @return \Tx_Seminars_Model_FrontEndUser|null
      */
     public function getOwner()
     {

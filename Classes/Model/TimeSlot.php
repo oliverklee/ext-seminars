@@ -47,7 +47,7 @@ class Tx_Seminars_Model_TimeSlot extends \Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Returns our place.
      *
-     * @return \Tx_Seminars_Model_Place|null our place, will be null if this time-slot has no place
+     * @return \Tx_Seminars_Model_Place|null
      */
     public function getPlace()
     {
@@ -57,7 +57,7 @@ class Tx_Seminars_Model_TimeSlot extends \Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Returns the seminar/event this time-slot belongs to.
      *
-     * @return \Tx_Seminars_Model_Event
+     * @return \Tx_Seminars_Model_Event|null
      */
     public function getSeminar()
     {

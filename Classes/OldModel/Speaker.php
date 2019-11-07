@@ -315,8 +315,7 @@ class Tx_Seminars_OldModel_Speaker extends \Tx_Seminars_OldModel_Abstract
     /**
      * Returns our owner.
      *
-     * @return \Tx_Seminars_Model_FrontEndUser the owner of this model, will be null
-     *                                     if this model has no owner
+     * @return \Tx_Seminars_Model_FrontEndUser|null
      */
     public function getOwner()
     {

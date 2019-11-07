@@ -51,9 +51,7 @@ class Tx_Seminars_Mapper_Event extends \Tx_Oelib_DataMapper
      * @param string $publicationHash
      *        the publication hash to find the event for, must not be empty
      *
-     * @return \Tx_Seminars_Model_Event the event with the publication hash
-     *                                 provided, will be NULL if no event could
-     *                                 be found
+     * @return \Tx_Seminars_Model_Event|null
      */
     public function findByPublicationHash($publicationHash)
     {

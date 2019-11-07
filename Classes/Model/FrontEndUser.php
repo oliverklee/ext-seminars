@@ -74,9 +74,7 @@ class Tx_Seminars_Model_FrontEndUser extends \Tx_Oelib_Model_FrontEndUser
      *
      * Will return the first reviewer found.
      *
-     * @return \Tx_Seminars_Model_BackEndUser the reviewer set in the user's group,
-     *                                    will be NULL if no reviewer has been
-     *                                    set or the user has no groups
+     * @return \Tx_Oelib_Model_BackEndUser|null
      */
     public function getReviewerFromGroup()
     {
@@ -189,8 +187,7 @@ class Tx_Seminars_Model_FrontEndUser extends \Tx_Oelib_Model_FrontEndUser
      * Gets the registration record for which this user is related to as
      * "additional registered person".
      *
-     * @return \Tx_Seminars_Model_Registration the associated registration,
-     *                                        might be NULL
+     * @return \Tx_Seminars_Model_Registration|null
      */
     public function getRegistration()
     {

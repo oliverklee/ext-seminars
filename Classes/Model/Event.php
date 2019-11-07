@@ -245,7 +245,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Returns whether this event has a description.
      *
-     * @return string TRUE if this event has a description, FALSE otherwise
+     * @return bool
      */
     public function hasDescription()
     {
@@ -553,8 +553,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Returns our details page.
      *
-     * @return int our separate details page, will be empty if this event
-     *                 has no separate details page
+     * @return string our separate details page, will be empty if this event has no separate details page
      */
     public function getDetailsPage()
     {
@@ -760,8 +759,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Returns our language.
      *
-     * @return \Tx_Oelib_Model_Language our language, will be NULL if this event
-     *                                 has no language set
+     * @return \Tx_Oelib_Model_Language|null
      */
     public function getLanguage()
     {
@@ -931,8 +929,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Returns whether this event has a regular board price.
      *
-     * @return float TRUE if this event has a regular board price, FALSE
-     *               otherwise
+     * @return bool
      */
     public function hasRegularBoardPrice()
     {
@@ -1541,7 +1538,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Returns our owner.
      *
-     * @return \Tx_Oelib_Model_FrontEndUser our owner, will be null if this event has no owner
+     * @return \Tx_Oelib_Model_FrontEndUser|null
      */
     public function getOwner()
     {
