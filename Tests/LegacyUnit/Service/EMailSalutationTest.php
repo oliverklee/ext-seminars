@@ -66,7 +66,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends TestCase
      */
     private function createFrontEndUser(
         $gender = \Tx_Oelib_Model_FrontEndUser::GENDER_MALE
-    ) {
+    ): \Tx_Seminars_Model_FrontEndUser {
         return \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)
             ->getLoadedTestingModel(
                 ['name' => 'Foo', 'gender' => $gender]
@@ -260,7 +260,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends TestCase
      *
      * @return int[][]
      */
-    public function genderDataProvider()
+    public function genderDataProvider(): array
     {
         return [
             'male' => [0],

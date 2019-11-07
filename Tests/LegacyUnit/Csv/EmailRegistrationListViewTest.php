@@ -82,7 +82,7 @@ class Tx_Seminars_Tests_Unit_Csv_EmailRegistrationListViewTest extends TestCase
      *
      * @return string locallang string with the removed trailing colon, will not be empty
      */
-    protected function localizeAndRemoveColon($locallangKey)
+    protected function localizeAndRemoveColon($locallangKey): string
     {
         return rtrim($GLOBALS['LANG']->getLL($locallangKey), ':');
     }

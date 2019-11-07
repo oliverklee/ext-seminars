@@ -103,7 +103,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
      *
      * @return int FE user UID
      */
-    private function createLogInAndAddFeUserAsDefaultVip()
+    private function createLogInAndAddFeUserAsDefaultVip(): int
     {
         $feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
         $this->subject->setConfigurationValue(
@@ -140,7 +140,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
      *
      * @return int user UID
      */
-    private function createAndLoginUserWithPublishSetting($publishSetting)
+    private function createAndLoginUserWithPublishSetting($publishSetting): int
     {
         $userGroupUid = $this->testingFramework->createFrontEndUserGroup(
             ['tx_seminars_publish_events' => $publishSetting]
@@ -154,7 +154,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
      *
      * @return int user UID
      */
-    private function createAndLoginUserWithReviewer()
+    private function createAndLoginUserWithReviewer(): int
     {
         $backendUserUid = $this->testingFramework->createBackEndUser(
             ['email' => 'foo@bar.com', 'realName' => 'Mr. Foo']
@@ -182,7 +182,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
      */
     private function createLoginAndAddFrontEndUserToEventEditorFrontEndGroup(
         array $frontEndUserGroupData = []
-    ) {
+    ): int {
         $feUserGroupUid = $this->testingFramework->createFrontEndUserGroup(
             $frontEndUserGroupData
         );
@@ -202,7 +202,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
      * @return \Tx_Seminars_FrontEnd_EventEditor event editor fixture with the given
      *         field as required field, will not be NULL.
      */
-    private function getFixtureWithRequiredField($requiredField)
+    private function getFixtureWithRequiredField($requiredField): \Tx_Seminars_FrontEnd_EventEditor
     {
         $result = new \Tx_Seminars_FrontEnd_EventEditor(
             [

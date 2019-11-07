@@ -22,7 +22,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_BackEnd_TestingEventMailForm extends Abstr
      *
      * @return string label for the submit button, will not be empty
      */
-    protected function getSubmitButtonLabel()
+    protected function getSubmitButtonLabel(): string
     {
         return $GLOBALS['LANG']->getLL('eventMailForm_confirmButton');
     }
@@ -37,7 +37,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_BackEnd_TestingEventMailForm extends Abstr
      * @return string the initial value of the field, will be empty if no
      *                initial value is defined
      */
-    public function getInitialValue($fieldName)
+    public function getInitialValue($fieldName): string
     {
         return parent::getInitialValue($fieldName);
     }
@@ -78,7 +78,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_BackEnd_TestingEventMailForm extends Abstr
      * @return string the error message for the field, will be empty if there's
      *                no error message for this field
      */
-    public function getErrorMessage($fieldName)
+    public function getErrorMessage($fieldName): string
     {
         return parent::getErrorMessage($fieldName);
     }

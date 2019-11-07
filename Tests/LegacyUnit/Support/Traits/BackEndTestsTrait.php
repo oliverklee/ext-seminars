@@ -187,7 +187,7 @@ trait BackEndTestsTrait
     /**
      * @return LanguageService
      */
-    private function getLanguageService()
+    private function getLanguageService(): LanguageService
     {
         return $GLOBALS['LANG'];
     }

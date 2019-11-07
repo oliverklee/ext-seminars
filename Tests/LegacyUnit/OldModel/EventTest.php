@@ -124,7 +124,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      *
      * @return int the UID of the created record, will be > 0
      */
-    private function addPlaceRelation(array $placeData = [])
+    private function addPlaceRelation(array $placeData = []): int
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
@@ -153,7 +153,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      *
      * @return int the UID of the created record, will be > 0
      */
-    private function addTargetGroupRelation(array $targetGroupData = [])
+    private function addTargetGroupRelation(array $targetGroupData = []): int
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
@@ -182,7 +182,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      */
     private function addPaymentMethodRelation(
         array $paymentMethodData = []
-    ) {
+    ): int {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_payment_methods',
             $paymentMethodData
@@ -209,7 +209,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      */
     private function addOrganizingPartnerRelation(
         array $organizerData = []
-    ) {
+    ): int {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
             $organizerData
@@ -239,7 +239,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     private function addCategoryRelation(
         array $categoryData = [],
         $sorting = 0
-    ) {
+    ): int {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
             $categoryData
@@ -266,7 +266,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      *
      * @return int the UID of the created record, will be > 0
      */
-    private function addOrganizerRelation(array $organizerData = [])
+    private function addOrganizerRelation(array $organizerData = []): int
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
@@ -293,7 +293,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      *
      * @return int the UID of the created record, will be > 0
      */
-    private function addSpeakerRelation($speakerData)
+    private function addSpeakerRelation($speakerData): int
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
@@ -320,7 +320,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      *
      * @return int the UID of the created record, will be > 0
      */
-    private function addPartnerRelation($speakerData)
+    private function addPartnerRelation($speakerData): int
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
@@ -347,7 +347,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      *
      * @return int the UID of the created record, will be > 0
      */
-    private function addTutorRelation($speakerData)
+    private function addTutorRelation($speakerData): int
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
@@ -374,7 +374,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      *
      * @return int the UID of the created record, will be > 0
      */
-    private function addLeaderRelation($speakerData)
+    private function addLeaderRelation($speakerData): int
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
@@ -401,7 +401,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      *
      * @return int the UID of the created record, will be > 0
      */
-    private function addEventTypeRelation($eventTypeData)
+    private function addEventTypeRelation($eventTypeData): int
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
@@ -5174,7 +5174,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     /**
      * @return int[][]
      */
-    public function overlappingEventsDataProvider()
+    public function overlappingEventsDataProvider(): array
     {
         return [
             'exact same dates' => [$this->now, $this->now + 1000, $this->now, $this->now + 1000],
@@ -5215,7 +5215,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     /**
      * @return int[][]
      */
-    public function nonOverlappingEventsDataProvider()
+    public function nonOverlappingEventsDataProvider(): array
     {
         return [
             'registered first' => [$this->now, $this->now + 100, $this->now + 500, $this->now + 1000],
@@ -5357,7 +5357,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     /**
      * @return int[][]
      */
-    public function eventsOverlappingWithTimeSlotDataProvider()
+    public function eventsOverlappingWithTimeSlotDataProvider(): array
     {
         return [
             'starts before 1st and ends after 1st' => [$this->now - 50, $this->now + 150],
@@ -5407,7 +5407,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     /**
      * @return int[][][]
      */
-    public function timeSlotsCollidingWithTimeSlotsDataProvider()
+    public function timeSlotsCollidingWithTimeSlotsDataProvider(): array
     {
         return [
             'one time slot starting in 1st and ending in it' => [[[$this->now + 25, $this->now + 75]]],
@@ -5462,7 +5462,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     /**
      * @return int[][][]
      */
-    public function timeSlotsNotCollidingWithTimeSlotsDataProvider()
+    public function timeSlotsNotCollidingWithTimeSlotsDataProvider(): array
     {
         return [
             'one time slot before first' => [[[$this->now - 200, $this->now - 100]]],
@@ -9183,7 +9183,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      *               [registrationsListPID] integer: value for that parameter
      *               [registrationsVipListPID] integer: value for that parameter
      */
-    public function canViewRegistrationsListDataProvider()
+    public function canViewRegistrationsListDataProvider(): array
     {
         return [
             'seminarListWithNothingElse' => [
@@ -9429,7 +9429,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      *                                that event
      *               [allowCsvExportForVips] boolean: that configuration value
      */
-    public function canViewRegistrationsForCsvExportListDataProvider()
+    public function canViewRegistrationsForCsvExportListDataProvider(): array
     {
         return [
             'notLoggedInButCsvExportAllowed' => [
@@ -9508,7 +9508,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      *               [registrationsListPID] integer: value for that parameter
      *               [registrationsVipListPID] integer: value for that parameter
      */
-    public function canViewRegistrationsListDataProviderForLoggedIn()
+    public function canViewRegistrationsListDataProviderForLoggedIn(): array
     {
         return [
             'seminarListWithNothingElse' => [
@@ -9718,7 +9718,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      *               [registrationsListPID] integer: value for that parameter
      *               [registrationsVipListPID] integer: value for that parameter
      */
-    public function canViewRegistrationsListDataProviderForWorld()
+    public function canViewRegistrationsListDataProviderForWorld(): array
     {
         return [
             'seminarListWithNothingElse' => [
@@ -9986,7 +9986,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      *
      * @return string[][] the possible access levels, will not be empty
      */
-    public function registrationListAccessLevelsDataProvider()
+    public function registrationListAccessLevelsDataProvider(): array
     {
         return [
             'attendeesAndManagers' => ['attendees_and_managers'],
@@ -10040,7 +10040,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      *
      * @return string[][] the possible parameter combinations, will not be empty
      */
-    public function registrationListParametersDataProvider()
+    public function registrationListParametersDataProvider(): array
     {
         return [
             'attendeesAndManagers' => ['list_registrations', 'attendees_and_managers'],
@@ -10141,7 +10141,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      *               [hasPriceRegularBoard] the return value of that function
      *               [hasPriceSpecialBoard] the return value of that function
      */
-    public function hasAnyPriceDataProvider()
+    public function hasAnyPriceDataProvider(): array
     {
         return [
             'noPriceAtAll' => [

@@ -51,7 +51,7 @@ class SpeakerTest extends FunctionalTestCase
      *
      * @return int the UID of the created record, will always be > 0
      */
-    private function addSkillRelation(array $skillData)
+    private function addSkillRelation(array $skillData): int
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_skills', $skillData);
 

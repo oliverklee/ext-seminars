@@ -166,7 +166,7 @@ class MailNotifierTest extends TestCase
      *
      * @return int UID of the added event, will be > 0
      */
-    private function createSeminarWithOrganizer(array $additionalSeminarData = [])
+    private function createSeminarWithOrganizer(array $additionalSeminarData = []): int
     {
         $organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
@@ -208,7 +208,7 @@ class MailNotifierTest extends TestCase
      *
      * @return \Swift_Mime_Attachment
      */
-    protected function getFirstEmailAttachment()
+    protected function getFirstEmailAttachment(): \Swift_Mime_Attachment
     {
         $children = $this->mailer->getFirstSentEmail()->getChildren();
         return $children[0];

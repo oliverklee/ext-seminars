@@ -24,7 +24,7 @@ class TypoScriptSetupTest extends FunctionalTestCase
      *
      * @return string class name
      */
-    private function extractClassNameFromUserFunction($reference)
+    private function extractClassNameFromUserFunction($reference): string
     {
         $parts = \explode('->', $reference);
 
@@ -38,7 +38,7 @@ class TypoScriptSetupTest extends FunctionalTestCase
      *
      * @return string method name
      */
-    private function extractMethodNameFromUserFunction($reference)
+    private function extractMethodNameFromUserFunction($reference): string
     {
         $parts = \explode('->', $reference);
 

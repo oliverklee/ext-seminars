@@ -36,7 +36,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_BagBuilder_Testing extends \Tx_Seminars_Ba
      *
      * @return string[] the additional table names, may be empty
      */
-    public function getAdditionalTableNames()
+    public function getAdditionalTableNames(): array
     {
         return $this->additionalTableNames;
     }
@@ -46,7 +46,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_BagBuilder_Testing extends \Tx_Seminars_Ba
      *
      * @return string the order by statement, may be empty
      */
-    public function getOrderBy()
+    public function getOrderBy(): string
     {
         return $this->orderBy;
     }
@@ -56,7 +56,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_BagBuilder_Testing extends \Tx_Seminars_Ba
      *
      * @return string the limit statement, may be empty
      */
-    public function getLimit()
+    public function getLimit(): string
     {
         return $this->limit;
     }

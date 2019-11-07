@@ -240,7 +240,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      *
      * @return \Tx_Seminars_OldModel_Registration the created registration
      */
-    private function createRegistration()
+    private function createRegistration(): \Tx_Seminars_OldModel_Registration
     {
         $frontEndUserUid = $this->testingFramework->createFrontEndUser(
             '',
@@ -270,7 +270,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      *
      * @return string the class name of the subclass, will not be empty
      */
-    private function createAccessibleProxyClass()
+    private function createAccessibleProxyClass(): string
     {
         $testingClassName = \Tx_Seminars_Service_RegistrationManager::class . uniqid('', false);
 
@@ -295,7 +295,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      *
      * @return string
      */
-    private function getEmailHtmlPart()
+    private function getEmailHtmlPart(): string
     {
         $htmlMimeParts = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/html');
 
@@ -313,7 +313,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      *
      * @return \Swift_Mime_MimeEntity[]
      */
-    private function filterEmailAttachmentsByTitle(MailMessage $email, $contentType)
+    private function filterEmailAttachmentsByTitle(MailMessage $email, $contentType): array
     {
         $matches = [];
 
@@ -3610,7 +3610,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
     /**
      * @return string[][]
      */
-    public function iCalDataProvider()
+    public function iCalDataProvider(): array
     {
         return [
             'calendar begin' => ['BEGIN:VCALENDAR'],
