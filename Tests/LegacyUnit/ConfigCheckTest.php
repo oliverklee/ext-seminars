@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit;
 
 use OliverKlee\PhpUnit\TestCase;

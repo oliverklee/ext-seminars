@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /**
  * This builder class creates customized test bag objects.

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits;
 
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
