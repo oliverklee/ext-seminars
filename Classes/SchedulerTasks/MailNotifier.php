@@ -407,7 +407,7 @@ class MailNotifier extends AbstractTask
      */
     protected function getLanguageService()
     {
-        return isset($GLOBALS['LANG']) ? $GLOBALS['LANG'] : null;
+        return $GLOBALS['LANG'] ?? null;
     }
 
     /**
