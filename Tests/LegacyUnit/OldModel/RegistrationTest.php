@@ -122,7 +122,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
      *
      * @return int the UID of the created record, will always be > 0
      */
-    private function setPaymentMethodRelation(array $paymentMethodData)
+    private function setPaymentMethodRelation(array $paymentMethodData): int
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_payment_methods', $paymentMethodData);
 

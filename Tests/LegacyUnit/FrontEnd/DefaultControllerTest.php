@@ -184,7 +184,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
      *
      * @return int the UID of the created record, will be > 0
      */
-    private function addTargetGroupRelation(array $targetGroupData = [])
+    private function addTargetGroupRelation(array $targetGroupData = []): int
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
@@ -213,7 +213,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
      *
      * @return int the UID of the created registration record, will be > 0
      */
-    private function createLogInAndRegisterFeUser()
+    private function createLogInAndRegisterFeUser(): int
     {
         $feUserUid = $this->testingFramework->createAndLoginFrontEndUser();
         return $this->testingFramework->createRecord(
@@ -254,7 +254,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
      *
      * @return int the UID of the created record, will be > 0
      */
-    private function addCategoryRelation(array $categoryData = [])
+    private function addCategoryRelation(array $categoryData = []): int
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
@@ -312,7 +312,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
      *
      * @return string the class name of the subclass, will not be empty
      */
-    private function createAccessibleProxyClass()
+    private function createAccessibleProxyClass(): string
     {
         $testingClassName = 'tx_seminars_FrontEnd_TestingDefaultController';
 
@@ -322,10 +322,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
                 'public function setSeminar(\\Tx_Seminars_OldModel_Event $event = NULL) {' .
                 '  parent::setSeminar($event);' .
                 '}' .
-                'public function createAllEditorLinks() {' .
+                'public function createAllEditorLinks(): string {' .
                 '  return parent::createAllEditorLinks();' .
                 '}' .
-                'public function mayCurrentUserEditCurrentEvent() {' .
+                'public function mayCurrentUserEditCurrentEvent(): bool {' .
                 '  return parent::mayCurrentUserEditCurrentEvent();' .
                 '}' .
                 'public function processEventEditorActions() {' .
@@ -376,7 +376,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
      *
      * @return string faked link tag, will not be empty
      */
-    public function getTypoLink($label, $pageId, array $urlParameters = [])
+    public function getTypoLink($label, $pageId, array $urlParameters = []): string
     {
         $encodedParameters = '';
         foreach ($urlParameters as $key => $value) {
@@ -9190,7 +9190,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
      *               [vipListPid] integer: the PID of the VIP registration list
      *                            page
      */
-    public function hideListRegistrationsColumnIfNecessaryDataProvider()
+    public function hideListRegistrationsColumnIfNecessaryDataProvider(): array
     {
         return [
             'notHiddenForListForBothPidsSet' => [

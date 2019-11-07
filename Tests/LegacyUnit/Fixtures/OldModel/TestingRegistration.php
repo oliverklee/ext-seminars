@@ -86,7 +86,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration extends \Tx_S
      *
      * @return int[] the content of the member variable foods, will be empty if foods is empty
      */
-    public function getFoodsData()
+    public function getFoodsData(): array
     {
         return $this->foods;
     }
@@ -96,7 +96,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration extends \Tx_S
      *
      * @return int[] the content of the member variable lodgings, will be empty if lodgings is empty
      */
-    public function getLodgingsData()
+    public function getLodgingsData(): array
     {
         return $this->lodgings;
     }
@@ -106,7 +106,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration extends \Tx_S
      *
      * @return int[] the content of the member variable checkboxes, will be empty if checkboxes is empty
      */
-    public function getCheckboxesData()
+    public function getCheckboxesData(): array
     {
         return $this->checkboxes;
     }

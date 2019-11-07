@@ -92,7 +92,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingTimeSpan extends \Tx_Semin
      *
      * @return string always an empty string
      */
-    public function getPlaceShort()
+    public function getPlaceShort(): string
     {
         return '';
     }

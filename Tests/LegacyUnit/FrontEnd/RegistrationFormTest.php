@@ -577,7 +577,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
      * @see isFormFieldEnabledForNoFieldsEnabledReturnsFalseForEachField
      * @see isFormFieldEnabledForNoFieldsEnabledReturnsTrueForSelfContainedFields
      */
-    public function formFieldsDataProvider()
+    public function formFieldsDataProvider(): array
     {
         return [
             'step_counter' => [
@@ -939,7 +939,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
     /**
      * @return int[][]
      */
-    public function registerThemselvesDataProvider()
+    public function registerThemselvesDataProvider(): array
     {
         return [
             '0' => [0],

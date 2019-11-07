@@ -489,7 +489,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return string our places description (or '' if there is an error)
      */
-    public function getPlaceWithDetailsRaw()
+    public function getPlaceWithDetailsRaw(): string
     {
         return parent::getPlaceWithDetailsRaw();
     }
@@ -519,7 +519,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return string our speakers (or '' if there is an error)
      */
-    public function getSpeakersWithDescriptionRaw($speakerRelation = 'speakers')
+    public function getSpeakersWithDescriptionRaw($speakerRelation = 'speakers'): string
     {
         return parent::getSpeakersWithDescriptionRaw($speakerRelation);
     }
@@ -532,7 +532,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      * @return string our payment methods as plain text (or '' if there
      *                is an error)
      */
-    public function getPaymentMethodsPlainShort()
+    public function getPaymentMethodsPlainShort(): string
     {
         return parent::getPaymentMethodsPlainShort();
     }
@@ -543,7 +543,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      * @return string names and homepages of our organizers or an
      *                empty string if there are no organizers
      */
-    public function getOrganizersRaw()
+    public function getOrganizersRaw(): string
     {
         return parent::getOrganizersRaw();
     }
@@ -632,7 +632,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return bool TRUE if the corresponding integer exists and is non-empty
      */
-    public function hasTopicInteger($key)
+    public function hasTopicInteger($key): bool
     {
         return parent::hasTopicInteger($key);
     }
@@ -647,7 +647,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent extends \Tx_Seminars
      *
      * @return int the corresponding element from the record data array
      */
-    public function getTopicInteger($key)
+    public function getTopicInteger($key): int
     {
         return parent::getTopicInteger($key);
     }

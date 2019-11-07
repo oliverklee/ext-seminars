@@ -16,7 +16,7 @@ interface RegistrationHookInterface
      *
      * @return bool
      */
-    public function canRegisterForSeminar(\Tx_Seminars_OldModel_Event $event, \Tx_Seminars_Model_FrontEndUser $user);
+    public function canRegisterForSeminar(\Tx_Seminars_OldModel_Event $event, \Tx_Seminars_Model_FrontEndUser $user): bool;
 
     /**
      * @param \Tx_Seminars_OldModel_Event $event
@@ -27,7 +27,7 @@ interface RegistrationHookInterface
     public function canRegisterForSeminarMessage(
         \Tx_Seminars_OldModel_Event $event,
         \Tx_Seminars_Model_FrontEndUser $user
-    );
+    ): string;
 
     /**
      * @param \Tx_Seminars_OldModel_Registration $registration

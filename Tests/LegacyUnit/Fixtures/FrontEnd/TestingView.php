@@ -13,7 +13,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_FrontEnd_TestingView extends \Tx_Seminars_
      *
      * @return string the view's content
      */
-    public function render()
+    public function render(): string
     {
         return 'Hi, I am the testingFrontEndView!';
     }

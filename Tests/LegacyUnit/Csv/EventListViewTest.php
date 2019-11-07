@@ -65,7 +65,7 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends TestCase
      *
      * @return string locallang string with the removed trailing colon, will not be empty
      */
-    protected function localizeAndRemoveColon($locallangKey)
+    protected function localizeAndRemoveColon($locallangKey): string
     {
         return rtrim($GLOBALS['LANG']->getLL($locallangKey), ':');
     }
@@ -79,7 +79,7 @@ class Tx_Seminars_Tests_Unit_Csv_EventListViewTest extends TestCase
      *
      * @return int the UID of the created event record
      */
-    protected function createEventInFolderAndSetPageUid(array $eventData = [])
+    protected function createEventInFolderAndSetPageUid(array $eventData = []): int
     {
         $this->pageUid = $this->testingFramework->createSystemFolder();
         $this->subject->setPageUid($this->pageUid);
