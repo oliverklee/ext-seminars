@@ -24,7 +24,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop support for TYPO3 7.6 (#248, #272, #280)
 
 ### Fixed
-- Fix some strict typing errors (#286)
+- Fix some strict typing errors (#286, #287)
 - Fix bogus sorting value in some test cases (#281, #282)
 - Explicitly add transitive dependencies (#273)
 - Drop a left-over bogus assigment from the TCA (#271)

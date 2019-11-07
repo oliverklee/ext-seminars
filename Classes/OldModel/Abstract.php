@@ -142,7 +142,7 @@ abstract class Tx_Seminars_OldModel_Abstract extends \Tx_Oelib_TemplateHelper im
      */
     public function getRecordPropertyString($key)
     {
-        return $this->hasKey($key) ? trim($this->recordData[$key]) : '';
+        return $this->hasKey($key) ? \trim((string)$this->recordData[$key]) : '';
     }
 
     /**
@@ -156,8 +156,7 @@ abstract class Tx_Seminars_OldModel_Abstract extends \Tx_Oelib_TemplateHelper im
      */
     public function getRecordPropertyDecimal($key)
     {
-        $result = $this->hasKey($key)
-            ? trim($this->recordData[$key]) : '0.00';
+        $result = $this->hasKey($key) ? \trim((string)$this->recordData[$key]) : '0.00';
 
         return $result;
     }

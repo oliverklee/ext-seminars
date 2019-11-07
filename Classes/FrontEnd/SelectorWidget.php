@@ -371,10 +371,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
             return;
         }
 
-        $this->setMarker(
-            'searchbox_value',
-            htmlspecialchars($this->piVars['sword'])
-        );
+        $this->setMarker('searchbox_value', \htmlspecialchars((string)$this->piVars['sword']));
     }
 
     /**
