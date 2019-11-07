@@ -50,7 +50,7 @@ class OrganizersList extends AbstractList
         /** @var \Tx_Seminars_BagBuilder_Organizer $builder */
         $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Organizer::class);
 
-        $builder->setSourcePages($pageData['uid'], self::RECURSION_DEPTH);
+        $builder->setSourcePages((string)$pageData['uid'], self::RECURSION_DEPTH);
 
         $organizerBag = $builder->build();
 
