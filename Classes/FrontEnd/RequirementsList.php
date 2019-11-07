@@ -94,12 +94,12 @@ class Tx_Seminars_FrontEnd_RequirementsList extends \Tx_Seminars_FrontEnd_Abstra
             $singleViewUrl = $this->linkBuilder->createRelativeUrlForEvent($event);
             $this->setMarker(
                 'requirement_url',
-                htmlspecialchars($singleViewUrl)
+                \htmlspecialchars($singleViewUrl, ENT_QUOTES | ENT_HTML5)
             );
 
             $this->setMarker(
                 'requirement_title',
-                htmlspecialchars($event->getTitle())
+                \htmlspecialchars($event->getTitle(), ENT_QUOTES | ENT_HTML5)
             );
             $output .= $this->getSubpart('SINGLE_REQUIREMENT');
         }

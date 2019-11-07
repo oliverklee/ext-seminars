@@ -58,7 +58,7 @@ class Tx_Seminars_FrontEnd_CategoryList extends \Tx_Seminars_FrontEnd_AbstractVi
             foreach ($categoryBag as $category) {
                 $link = $this->createLinkToListViewLimitedByCategory(
                     $category->getUid(),
-                    htmlspecialchars($category->getTitle())
+                    \htmlspecialchars($category->getTitle(), ENT_QUOTES | ENT_HTML5)
                 );
                 $this->setMarker('category_title', $link);
 
@@ -138,17 +138,17 @@ class Tx_Seminars_FrontEnd_CategoryList extends \Tx_Seminars_FrontEnd_AbstractVi
                         $linkValue = $this->createCategoryIcon($value) .
                             '&nbsp;';
                     }
-                    $linkValue .= htmlspecialchars($value['title']);
+                    $linkValue .= \htmlspecialchars($value['title'], ENT_QUOTES | ENT_HTML5);
                     break;
                 case 'icon':
                     $linkValue = $this->createCategoryIcon($value);
                     if ($linkValue == '') {
-                        $linkValue = htmlspecialchars($value['title']);
+                        $linkValue = \htmlspecialchars($value['title'], ENT_QUOTES | ENT_HTML5);
                         $categorySeparator = ', ';
                     }
                     break;
                 default:
-                    $linkValue = htmlspecialchars($value['title']);
+                    $linkValue = \htmlspecialchars($value['title'], ENT_QUOTES | ENT_HTML5);
             }
             $allCategoryLinks[]
                 = $this->createLinkToListViewLimitedByCategory($uid, $linkValue);

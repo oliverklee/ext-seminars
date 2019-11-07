@@ -2760,7 +2760,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         self::assertContains(
-            htmlspecialchars($paymentMethodTitle),
+            \htmlspecialchars($paymentMethodTitle, ENT_QUOTES | ENT_HTML5),
             $this->subject->main('', [])
         );
     }
@@ -2885,7 +2885,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         self::assertContains(
-            htmlspecialchars('foo<bar'),
+            \htmlspecialchars('foo<bar', ENT_QUOTES | ENT_HTML5),
             $this->subject->main('', [])
         );
     }

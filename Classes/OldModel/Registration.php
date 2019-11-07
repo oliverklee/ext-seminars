@@ -506,7 +506,8 @@ class Tx_Seminars_OldModel_Registration extends \Tx_Seminars_OldModel_Abstract
             }
 
             $singleValues[$key] = ($key === 'email')
-                ? $plugin->cObj->mailto_makelinks('mailto:' . $rawValue, []) : htmlspecialchars($rawValue);
+                ? $plugin->cObj->mailto_makelinks('mailto:' . $rawValue, [])
+                : \htmlspecialchars($rawValue, ENT_QUOTES | ENT_HTML5);
         }
 
         // And now: Everything separated by a comma and a space!

@@ -390,7 +390,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         $result = '';
 
         foreach ($this->getPlacesAsArray() as $place) {
-            $name = \htmlspecialchars((string)$place['title']);
+            $name = \htmlspecialchars((string)$place['title'], ENT_QUOTES | ENT_HTML5);
             if ((string)$place['homepage'] != '') {
                 $name = $plugin->cObj->getTypoLink(
                     $name,
@@ -403,15 +403,15 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
             $descriptionParts = [];
             if ((string)$place['address'] != '') {
-                $descriptionParts[] = \htmlspecialchars(\str_replace(CR, ',', (string)$place['address']));
+                $descriptionParts[] = \htmlspecialchars(\str_replace(CR, ',', (string)$place['address']), ENT_QUOTES | ENT_HTML5);
             }
             if ((string)$place['city'] != '') {
-                $descriptionParts[] = \trim(\htmlspecialchars($place['zip'] . ' ' . $place['city']));
+                $descriptionParts[] = \trim(\htmlspecialchars($place['zip'] . ' ' . $place['city'], ENT_QUOTES | ENT_HTML5));
             }
             if ((string)$place['country'] != '') {
                 $countryName = $this->getCountryNameFromIsoCode((string)$place['country']);
                 if ($countryName != '') {
-                    $descriptionParts[] = \htmlspecialchars($countryName);
+                    $descriptionParts[] = \htmlspecialchars($countryName, ENT_QUOTES | ENT_HTML5);
                 }
             }
 
@@ -2248,7 +2248,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         /** @var \Tx_Seminars_OldModel_Organizer $organizer */
         foreach ($organizers as $organizer) {
             $result[] = $plugin->cObj->getTypoLink(
-                htmlspecialchars($organizer->getName()),
+                \htmlspecialchars($organizer->getName(), ENT_QUOTES | ENT_HTML5),
                 $organizer->getHomepage(),
                 [],
                 $plugin->getConfValueString('externalLinkTarget')
@@ -4539,10 +4539,10 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
             $result[] = [
                 'name' => $plugin->cObj->typoLink(
-                    htmlspecialchars(basename($attachedFile)),
+                    \htmlspecialchars(basename($attachedFile), ENT_QUOTES | ENT_HTML5),
                     ['parameter' => $uploadFolderUrl . $attachedFile]
                 ),
-                'type' => htmlspecialchars((isset($matches[1]) ? $matches[1] : 'none')),
+                'type' => \htmlspecialchars((isset($matches[1]) ? $matches[1] : 'none'), ENT_QUOTES | ENT_HTML5),
                 'size' => GeneralUtility::formatSize(filesize($uploadFolderPath . $attachedFile)),
             ];
         }
