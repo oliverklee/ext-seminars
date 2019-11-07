@@ -10627,7 +10627,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         $this->subject->setRecordPropertyString('price_special', '50.00');
         $this->subject->setRecordPropertyString('price_special_early', '45.00');
         $this->subject->setRecordPropertyString('price_special_board', '75.00');
-        $this->subject->setRecordPropertyString('deadline_early_bird', $this->now - 1000);
+        $this->subject->setRecordPropertyInteger('deadline_early_bird', $this->now - 1000);
 
         self::assertSame(
             ['regular', 'regular_board', 'special', 'special_board'],
@@ -10646,7 +10646,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         $this->subject->setRecordPropertyString('price_special', '50.00');
         $this->subject->setRecordPropertyString('price_special_early', '45.00');
         $this->subject->setRecordPropertyString('price_special_board', '75.00');
-        $this->subject->setRecordPropertyString('deadline_early_bird', $this->now + 1000);
+        $this->subject->setRecordPropertyInteger('deadline_early_bird', $this->now + 1000);
 
         self::assertSame(
             ['regular_early', 'regular_board', 'special_early', 'special_board'],
