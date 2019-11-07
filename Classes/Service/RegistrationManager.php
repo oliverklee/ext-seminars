@@ -1282,7 +1282,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      *
      * @param \Tx_Seminars_OldModel_Registration $registration
      *        the registration for which the notification should be send
-     * @param AbstractPlugin $plugin a live plugin
+     * @param \Tx_Oelib_TemplateHelper $plugin a live plugin
      * @param string $helloSubjectPrefix
      *        prefix for the locallang key of the localized hello and subject
      *        string; allowed values are:
@@ -1297,7 +1297,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      */
     private function buildEmailContent(
         \Tx_Seminars_OldModel_Registration $registration,
-        AbstractPlugin $plugin,
+        \Tx_Oelib_TemplateHelper $plugin,
         $helloSubjectPrefix,
         $useHtml = false
     ) {

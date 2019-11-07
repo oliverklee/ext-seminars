@@ -14,7 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
-- Fix some strict typing errors (#286, #287, #288, #292)
+- Fix some strict typing errors (#286, #287, #288, #292, #293)
 
 ## 2.2.2
 
