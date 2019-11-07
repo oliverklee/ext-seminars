@@ -453,18 +453,16 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      */
     public function canRegisterSeats(\Tx_Seminars_OldModel_Event $event, $numberOfSeats)
     {
-        $numberOfSeats = trim($numberOfSeats);
+        $numberOfSeatsInt = (int)$numberOfSeats;
 
         // If no number of seats is given, ie. the user has not entered anything
         // or the field is not shown at all, assume 1.
-        if (($numberOfSeats == '') || ($numberOfSeats == '0')) {
-            $numberOfSeats = '1';
+        if ($numberOfSeatsInt === 0) {
+            $numberOfSeats = 1;
         }
 
-        $numberOfSeatsInt = (int)$numberOfSeats;
-
         // Check whether we have a valid number
-        if ($numberOfSeats == (string)$numberOfSeatsInt) {
+        if ((string)$numberOfSeats === (string)$numberOfSeatsInt) {
             if ($event->hasUnlimitedVacancies()) {
                 $result = true;
             } else {
