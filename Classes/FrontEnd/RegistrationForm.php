@@ -294,7 +294,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
         }
 
         foreach ($GLOBALS['TSFE']->additionalHeaderData as $key => $content) {
-            if (strpos($content, 'FORMIDABLE:') !== false) {
+            if (\strpos((string)$content, 'FORMIDABLE:') !== false) {
                 unset($GLOBALS['TSFE']->additionalHeaderData[$key]);
             }
         }

@@ -449,7 +449,7 @@ class Tx_Seminars_OldModel_Registration extends \Tx_Seminars_OldModel_Abstract
             return '';
         }
 
-        $rawData = trim($this->userData[$trimmedKey]);
+        $rawData = \trim((string)$this->userData[$trimmedKey]);
         switch ($trimmedKey) {
             case 'gender':
                 $result = $this->translate('label_gender.I.' . $rawData);

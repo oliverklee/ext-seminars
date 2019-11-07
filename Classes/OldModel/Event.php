@@ -391,11 +391,11 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         $result = '';
 
         foreach ($this->getPlacesAsArray() as $place) {
-            $name = htmlspecialchars($place['title']);
-            if ($place['homepage'] != '') {
+            $name = \htmlspecialchars((string)$place['title']);
+            if ((string)$place['homepage'] != '') {
                 $name = $plugin->cObj->getTypoLink(
                     $name,
-                    $place['homepage'],
+                    (string)$place['homepage'],
                     [],
                     $plugin->getConfValueString('externalLinkTarget')
                 );
@@ -403,26 +403,22 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             $plugin->setMarker('place_item_title', $name);
 
             $descriptionParts = [];
-            if ($place['address'] != '') {
-                $descriptionParts[] = htmlspecialchars(str_replace(CR, ',', $place['address']));
+            if ((string)$place['address'] != '') {
+                $descriptionParts[] = \htmlspecialchars(\str_replace(CR, ',', (string)$place['address']));
             }
-            if ($place['city'] != '') {
-                $descriptionParts[] = trim(
-                    htmlspecialchars($place['zip'] . ' ' . $place['city'])
-                );
+            if ((string)$place['city'] != '') {
+                $descriptionParts[] = \trim(\htmlspecialchars($place['zip'] . ' ' . $place['city']));
             }
-            if ($place['country'] != '') {
-                $countryName = $this->getCountryNameFromIsoCode(
-                    $place['country']
-                );
+            if ((string)$place['country'] != '') {
+                $countryName = $this->getCountryNameFromIsoCode((string)$place['country']);
                 if ($countryName != '') {
-                    $descriptionParts[] = htmlspecialchars($countryName);
+                    $descriptionParts[] = \htmlspecialchars($countryName);
                 }
             }
 
             $description = implode(', ', $descriptionParts);
-            if ($place['directions'] != '') {
-                $description .= $plugin->pi_RTEcssText($place['directions']);
+            if ((string)$place['directions'] != '') {
+                $description .= $plugin->pi_RTEcssText((string)$place['directions']);
             }
             $plugin->setMarker('place_item_description', $description);
 
@@ -786,7 +782,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         foreach ($this->getSpeakerBag($speakerRelation) as $speaker) {
             $name = $speaker->getLinkedTitle($plugin);
             if ($speaker->hasOrganization()) {
-                $name .= ', ' . \htmlspecialchars($speaker->getOrganization(), ENT_QUOTES || ENT_HTML5);
+                $name .= ', ' . \htmlspecialchars($speaker->getOrganization(), ENT_QUOTES | ENT_HTML5);
             }
             $plugin->setMarker('speaker_item_title', $name);
             $plugin->setMarker(
