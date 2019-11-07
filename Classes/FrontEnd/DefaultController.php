@@ -2968,7 +2968,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
                 case 'register':
                     // The fall-through is intended.
                 default:
-                    $errorMessage = $this->getRegistrationManager()->existsSeminarMessage($this->piVars['seminar']);
+                    $errorMessage = $this->getRegistrationManager()
+                        ->existsSeminarMessage((int)$this->piVars['seminar']);
             }
         }
 
