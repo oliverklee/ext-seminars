@@ -3318,13 +3318,10 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      */
     private function getFromDate()
     {
-        $day = ($this->piVars['from_day'] > 0) ? $this->piVars['from_day'] : 1;
-        $month = ($this->piVars['from_month'] > 0)
-            ? $this->piVars['from_month']
-            : 1;
-        $year = ($this->piVars['from_year'] > 0)
-            ? $this->piVars['from_year']
-            : (int)date('Y', $GLOBALS['SIM_EXEC_TIME']);
+        $day = (int)$this->piVars['from_day'] > 0 ? (int)$this->piVars['from_day'] : 1;
+        $month = (int)$this->piVars['from_month'] > 0 ? (int)$this->piVars['from_month'] : 1;
+        $year = (int)$this->piVars['from_year'] > 0
+            ? (int)$this->piVars['from_year'] : (int)date('Y', $GLOBALS['SIM_EXEC_TIME']);
 
         return mktime(0, 0, 0, $month, $day, $year);
     }
@@ -3342,12 +3339,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
     {
         $longMonths = [1, 3, 5, 7, 8, 10, 12];
 
-        $month = ($this->piVars['to_month'] > 0)
-            ? (int)$this->piVars['to_month']
-            : 12;
-        $year = ($this->piVars['to_year'] > 0)
-            ? (int)$this->piVars['to_year']
-            : (int)date('Y', $GLOBALS['SIM_EXEC_TIME']);
+        $month = (int)$this->piVars['to_month'] > 0 ? (int)$this->piVars['to_month'] : 12;
+        $year = (int)$this->piVars['to_year'] > 0
+            ? (int)$this->piVars['to_year'] : (int)date('Y', $GLOBALS['SIM_EXEC_TIME']);
 
         $day = (int)$this->piVars['to_day'];
 

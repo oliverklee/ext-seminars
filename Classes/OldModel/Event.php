@@ -4263,7 +4263,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         if ($dbResult) {
             $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
             if ($row !== false) {
-                $result = $row['begin_date'];
+                $result = (int)$row['begin_date'];
             }
         }
 
