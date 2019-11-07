@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Fix some strict typing errors (#286, #287, #288)
 
 ## 2.2.2
 
@@ -28,7 +29,6 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop unneeded Travis CI configuration settings (#258)
 
 ### Fixed
-- Fix some strict typing errors (#286, #287, #288)
 - Fix bogus sorting value in some test cases (#281, #282)
 - Explicitly add transitive dependencies (#274)
 - Drop a left-over bogus assigment from the TCA (#271)
