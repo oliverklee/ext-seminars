@@ -455,8 +455,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
     }
 
     public function testGetStepCounterReturnsNumberOfLastRegistrationPageAsCurrentPageIfPageNumberIsAboveLastRegistrationPage(
-    )
-    {
+    ) {
         $this->subject->setConfigurationValue(
             'numberOfFirstRegistrationPage',
             1
