@@ -1968,32 +1968,6 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterSeatsForFullyBookedEventAndEmptyStringGivenReturnsFalse()
-    {
-        $this->seminar->setAttendancesMax(1);
-        $this->seminar->setNumberOfAttendances(1);
-
-        self::assertFalse(
-            $this->subject->canRegisterSeats($this->seminar, '')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function canRegisterSeatsForFullyBookedEventAndInvalidStringGivenReturnsFalse()
-    {
-        $this->seminar->setAttendancesMax(1);
-        $this->seminar->setNumberOfAttendances(1);
-
-        self::assertFalse(
-            $this->subject->canRegisterSeats($this->seminar, 'foo')
-        );
-    }
-
-    /**
-     * @test
-     */
     public function canRegisterSeatsForEventWithOneVacancyAndZeroSeatsGivenReturnsTrue()
     {
         $this->seminar->setAttendancesMax(1);
@@ -2024,30 +1998,6 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
 
         self::assertFalse(
             $this->subject->canRegisterSeats($this->seminar, 2)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function canRegisterSeatsForEventWithOneVacancyAndEmptyStringGivenReturnsTrue()
-    {
-        $this->seminar->setAttendancesMax(1);
-
-        self::assertTrue(
-            $this->subject->canRegisterSeats($this->seminar, '')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function canRegisterSeatsForEventWithOneVacancyAndInvalidStringGivenReturnsFalse()
-    {
-        $this->seminar->setAttendancesMax(1);
-
-        self::assertFalse(
-            $this->subject->canRegisterSeats($this->seminar, 'foo')
         );
     }
 
@@ -2174,20 +2124,6 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
 
         self::assertTrue(
             $this->subject->canRegisterSeats($this->seminar, 2)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function canRegisterSeatsForFullyBookedEventWithQueueAndEmptyStringGivenReturnsTrue()
-    {
-        $this->seminar->setAttendancesMax(1);
-        $this->seminar->setNumberOfAttendances(1);
-        $this->seminar->setRegistrationQueue(true);
-
-        self::assertTrue(
-            $this->subject->canRegisterSeats($this->seminar, '')
         );
     }
 
