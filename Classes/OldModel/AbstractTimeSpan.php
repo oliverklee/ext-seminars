@@ -271,9 +271,9 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends \Tx_Seminars_OldMod
                     0,
                     0,
                     0,
-                    $splitBeginDate['mon'],
-                    $splitBeginDate['mday'] + 1,
-                    $splitBeginDate['year']
+                    (int)$splitBeginDate['mon'],
+                    (int)$splitBeginDate['mday'] + 1,
+                    (int)$splitBeginDate['year']
                 );
             } else {
                 $result = $this->getEndDateAsTimestamp();

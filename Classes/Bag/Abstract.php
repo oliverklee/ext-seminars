@@ -327,7 +327,7 @@ abstract class Tx_Seminars_Bag_Abstract implements Iterator, \Tx_Oelib_Interface
             $this->queryParameters . $this->enabledFieldsQuery
         );
 
-        $this->countWithoutLimit = $dbResultRow['number'];
+        $this->countWithoutLimit = (int)$dbResultRow['number'];
         $this->hasCountWithoutLimit = true;
 
         return $this->countWithoutLimit;

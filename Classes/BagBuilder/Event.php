@@ -262,9 +262,9 @@ class Tx_Seminars_BagBuilder_Event extends \Tx_Seminars_BagBuilder_Abstract
                     ')';
                 break;
             case 'today':
-                $day = date('j', $now);
-                $month = date('n', $now);
-                $year = date('Y', $now);
+                $day = (int)date('j', $now);
+                $month = (int)date('n', $now);
+                $year = (int)date('Y', $now);
 
                 $todayBegin = mktime(0, 0, 0, $month, $day, $year);
                 $todayEnd = mktime(23, 59, 59, $month, $day, $year);

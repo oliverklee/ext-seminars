@@ -1468,15 +1468,15 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
     {
         $availablePaymentMethods = $this->populateListPaymentMethods();
         if (count($availablePaymentMethods) === 1) {
-            return $availablePaymentMethods[0]['value'];
+            return (int)$availablePaymentMethods[0]['value'];
         }
 
         $result = 0;
         $paymentMethodFromSession = $this->retrieveSavedMethodOfPayment();
 
         foreach ($availablePaymentMethods as $paymentMethod) {
-            if ($paymentMethod['value'] == $paymentMethodFromSession) {
-                $result = $paymentMethod['value'];
+            if ((int)$paymentMethod['value'] === $paymentMethodFromSession) {
+                $result = (int)$paymentMethod['value'];
                 break;
             }
         }
