@@ -359,8 +359,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
     private function createContentMock()
     {
         $mock = $this->createPartialMock(ContentObjectRenderer::class, ['getTypoLink']);
-        $mock->method('getTypoLink')
-            ->willReturnCallback([$this, 'getTypoLink']);
+        $mock->method('getTypoLink')->willReturnCallback([$this, 'getTypoLink']);
 
         return $mock;
     }
@@ -369,7 +368,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
      * Callback function for creating mock typolinks.
      *
      * @param string $label the link text
-     * @param int $pageId the page ID to link to, must be >= 0
+     * @param string $pageId the page UID to link to as a string, must be >= 0
      * @param string[] $urlParameters
      *        URL parameters to set as key/value pairs, not URL-encoded yet
      *
