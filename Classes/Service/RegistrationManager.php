@@ -439,7 +439,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      */
     public function canCreateRegistration(\Tx_Seminars_OldModel_Event $event, array $registrationData)
     {
-        return $this->canRegisterSeats($event, $registrationData['seats']);
+        return $this->canRegisterSeats($event, (int)$registrationData['seats']);
     }
 
     /**
@@ -447,34 +447,20 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      * created, ie. an actual number is given and there are at least that many vacancies.
      *
      * @param \Tx_Seminars_OldModel_Event $event the seminar object (that's the seminar we would like to register for)
-     * @param int|string $numberOfSeats the number of seats to check
+     * @param int $numberOfSeats the number of seats to check
      *
-     * @return bool TRUE if there are at least that many vacancies, FALSE otherwise
+     * @return bool
      */
     public function canRegisterSeats(\Tx_Seminars_OldModel_Event $event, $numberOfSeats)
     {
-        $numberOfSeats = trim($numberOfSeats);
-
         // If no number of seats is given, ie. the user has not entered anything
         // or the field is not shown at all, assume 1.
-        if (($numberOfSeats == '') || ($numberOfSeats == '0')) {
-            $numberOfSeats = '1';
+        if ($numberOfSeats === 0) {
+            $numberOfSeats = 1;
         }
 
-        $numberOfSeatsInt = (int)$numberOfSeats;
-
-        // Check whether we have a valid number
-        if ($numberOfSeats == (string)$numberOfSeatsInt) {
-            if ($event->hasUnlimitedVacancies()) {
-                $result = true;
-            } else {
-                $result = ($event->hasRegistrationQueue() || ($event->getVacancies() >= $numberOfSeatsInt));
-            }
-        } else {
-            $result = false;
-        }
-
-        return $result;
+        return $event->hasUnlimitedVacancies()
+            || $event->hasRegistrationQueue() || $event->getVacancies() >= $numberOfSeats;
     }
 
     /**
