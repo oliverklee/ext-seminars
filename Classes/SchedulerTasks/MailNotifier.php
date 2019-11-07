@@ -236,10 +236,10 @@ class MailNotifier extends AbstractTask
 
         $result = [];
 
-        /** @var $builder \Tx_Seminars_BagBuilder_Event */
+        /** @var \Tx_Seminars_BagBuilder_Event $builder */
         $builder = $this->getSeminarBagBuilder(\Tx_Seminars_Model_Event::STATUS_PLANNED);
         $builder->limitToCancelationDeadlineReminderNotSent();
-        /** @var $bag \Tx_Seminars_Bag_Event */
+        /** @var \Tx_Seminars_Bag_Event $bag */
         $bag = $builder->build();
 
         /** @var \Tx_Seminars_OldModel_Event $event */

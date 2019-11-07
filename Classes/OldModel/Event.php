@@ -56,7 +56,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * This will be NULL if we are not a date record.
      *
-     * @var \Tx_Seminars_OldModel_Event
+     * @var \Tx_Seminars_OldModel_Event|null
      */
     private $topic = null;
 
@@ -2206,7 +2206,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             throw new \BadMethodCallException('There are no organizers related to this event.', 1333291857);
         }
 
-        /** @var $builder \Tx_Seminars_BagBuilder_Organizer */
+        /** @var \Tx_Seminars_BagBuilder_Organizer $builder */
         $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Organizer::class);
         $builder->limitToEvent($this->getUid());
 
@@ -3149,8 +3149,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * In case of an error, the return value will be NULL.
      *
-     * @return \Tx_Seminars_OldModel_Event the topic object (will be NULL if an error
-     *                             has occured)
+     * @return \Tx_Seminars_OldModel_Event|null
      */
     private function retrieveTopic()
     {
@@ -3560,7 +3559,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Gets this event's owner (the FE user who has created this event).
      *
-     * @return \Tx_Oelib_Model_FrontEndUser the owner, will be null if the event has no owner
+     * @return \Tx_Oelib_Model_FrontEndUser|null
      */
     public function getOwner()
     {

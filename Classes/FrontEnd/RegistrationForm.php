@@ -177,7 +177,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      */
     public function getEvent()
     {
-        /** @var $eventMapper \Tx_Seminars_Mapper_Event */
+        /** @var \Tx_Seminars_Mapper_Event $eventMapper */
         $eventMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
         /** @var \Tx_Seminars_Model_Event $event */
         $event = $eventMapper->find($this->getSeminar()->getUid());
@@ -363,11 +363,11 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
             return;
         }
 
-        /** @var $userMapper \Tx_Seminars_Mapper_FrontEndUser */
+        /** @var \Tx_Seminars_Mapper_FrontEndUser $userMapper */
         $userMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
         $pageUid = $this->getConfValueInteger('sysFolderForAdditionalAttendeeUsersPID', 's_registration');
 
-        /** @var $userGroupMapper \Tx_Seminars_Mapper_FrontEndUserGroup */
+        /** @var \Tx_Seminars_Mapper_FrontEndUserGroup $userGroupMapper */
         $userGroupMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class);
         $userGroups = new \Tx_Oelib_List();
         $userGroupUids = GeneralUtility::intExplode(
@@ -381,9 +381,9 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
             $userGroups->add($userGroup);
         }
 
-        /** @var $additionalPersons \Tx_Oelib_List */
+        /** @var \Tx_Oelib_List $additionalPersons */
         $additionalPersons = $registration->getAdditionalPersons();
-        /** @var $personData array */
+        /** @var array $personData */
         foreach ($allPersonsData as $personData) {
             /** @var \Tx_Seminars_Model_FrontEndUser $user */
             $user = GeneralUtility::makeInstance(\Tx_Seminars_Model_FrontEndUser::class);
@@ -840,7 +840,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      */
     public function getAllFeUserData()
     {
-        /** @var $userData mixed[] */
+        /** @var mixed[] $userData */
         $userData = $GLOBALS['TSFE']->fe_user->user;
 
         $fieldKeys = GeneralUtility::trimExplode(',', $this->getConfValueString('showFeUserFieldsInRegistrationForm'));

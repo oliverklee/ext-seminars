@@ -23,7 +23,7 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
     /**
      * Sets the plugin used accessing to the flexforms plugin settings.
      *
-     * @param AbstractPlugin $plugin a seminars plugin instance
+     * @param \Tx_Oelib_TemplateHelper|null
      *
      * @return void
      */
@@ -35,8 +35,7 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
     /**
      * Returns the plugin used for accessing the flexforms plugin settings.
      *
-     * @return \Tx_Oelib_TemplateHelper
-     *         the plugin, will be NULL if non has been set via setPlugin
+     * @return \Tx_Oelib_TemplateHelper|null
      *
      * @see setPlugin
      */

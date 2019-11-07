@@ -39,7 +39,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
     /**
      * Returns the front-end user of this registration.
      *
-     * @return \Tx_Seminars_Model_FrontEndUser the front-end user of this registration
+     * @return \Tx_Seminars_Model_FrontEndUser|null
      */
     public function getFrontEndUser()
     {
@@ -73,7 +73,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * This is an alias for getEvent necessary for the relation to the event.
      *
-     * @return \Tx_Seminars_Model_Event the event of this registration
+     * @return \Tx_Seminars_Model_Event|null
      *
      * @see getEvent
      */
@@ -323,7 +323,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
     /**
      * Returns the payment method of this registration.
      *
-     * @return \Tx_Seminars_Model_PaymentMethod the payment method of this registration
+     * @return \Tx_Seminars_Model_PaymentMethod|null
      */
     public function getPaymentMethod()
     {

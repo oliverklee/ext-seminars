@@ -251,7 +251,7 @@ abstract class AbstractList
      */
     protected function addFlashMessage(FlashMessage $flashMessage)
     {
-        /** @var $flashMessageService FlashMessageService */
+        /** @var FlashMessageService $flashMessageService */
         $flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);
         $defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
         $defaultFlashMessageQueue->enqueue($flashMessage);
