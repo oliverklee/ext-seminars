@@ -174,7 +174,7 @@ class RegistrationDigest
         $view->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName($templatePath));
         $view->assign('events', $events);
 
-        return $view->render();
+        return (string)$view->render();
     }
 
     /**
