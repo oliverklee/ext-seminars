@@ -144,7 +144,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
                 break;
             default:
                 // no action if no case is matched
-                break;
         }
 
         return $result;
@@ -742,7 +741,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
                 // The fallthrough is intended.
             default:
                 $mmTable = 'tx_seminars_seminars_speakers_mm';
-                break;
         }
 
         return GeneralUtility::makeInstance(
@@ -960,7 +958,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
                 // The fallthrough is intended.
             default:
                 $hasSpeakers = $this->hasSpeakers();
-                break;
         }
 
         return $hasSpeakers;
@@ -2537,7 +2534,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
                     break;
                 default:
                     $value = $this->getRecordPropertyString($currentKey);
-                    break;
             }
 
             // Check whether there is a value to display. If not, we don't use
@@ -2701,7 +2697,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
                     $registrationsVipListPID,
                     $defaultEventVipsFeGroupID
                 );
-                break;
         }
 
         return $result;
@@ -3785,7 +3780,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
                 break;
             default:
                 $result = '';
-                break;
         }
 
         $carriageReturnRemoved = (strpos($result, CR) === false)
