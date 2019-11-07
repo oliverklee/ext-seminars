@@ -408,7 +408,7 @@ abstract class Tx_Seminars_OldModel_Abstract extends \Tx_Oelib_TemplateHelper im
      *
      * This method may be called statically.
      *
-     * @param string $uid string with a UID (need not necessarily be escaped, will be cast to int)
+     * @param int $uid
      * @param string $tableName string with the table name where the UID should be searched for
      * @param bool $allowHiddenRecords whether hidden records should be found as well
      *
@@ -416,11 +416,11 @@ abstract class Tx_Seminars_OldModel_Abstract extends \Tx_Oelib_TemplateHelper im
      */
     public static function recordExists($uid, $tableName, $allowHiddenRecords = false)
     {
-        if ((int)$uid <= 0 || $tableName === '') {
+        if ($uid <= 0 || $tableName === '') {
             return false;
         }
 
-        $whereClause = 'uid = ' . (int)$uid . \Tx_Oelib_Db::enableFields($tableName, (int)$allowHiddenRecords);
+        $whereClause = 'uid = ' . $uid . \Tx_Oelib_Db::enableFields($tableName, (int)$allowHiddenRecords);
 
         return \Tx_Oelib_Db::existsRecord($tableName, $whereClause);
     }

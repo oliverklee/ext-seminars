@@ -8185,16 +8185,6 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function existsSeminarForInvalidStringUidReturnsFalse()
-    {
-        self::assertFalse(
-            $this->subject->existsSeminar('Hello world!')
-        );
-    }
-
-    /**
-     * @test
-     */
     public function existsSeminarForInexistentUidReturnsFalse()
     {
         self::assertFalse(
@@ -8265,17 +8255,6 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         self::assertSame(
             'Status: 404 Not Found',
             $this->headerCollector->getLastAddedHeader()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function existsSeminarMessageForInvalidStringUidReturnsErrorMessage()
-    {
-        self::assertContains(
-            $this->subject->translate('message_missingSeminarNumber'),
-            $this->subject->existsSeminarMessage('Hello world!')
         );
     }
 

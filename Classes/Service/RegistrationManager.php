@@ -349,13 +349,13 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      *
      * This function can be called even if no seminar object exists.
      *
-     * @param string $seminarUid a given seminar UID (needs not necessarily be an int)
+     * @param int $uid
      *
      * @return bool TRUE the UID is valid, FALSE otherwise
      */
-    public function existsSeminar($seminarUid)
+    public function existsSeminar($uid)
     {
-        return \Tx_Seminars_OldModel_Abstract::recordExists($seminarUid, 'tx_seminars_seminars');
+        return \Tx_Seminars_OldModel_Abstract::recordExists($uid, 'tx_seminars_seminars');
     }
 
     /**
@@ -365,17 +365,17 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      *
      * For invalid or inexistent UIDs, this method also send a 404 HTTP header.
      *
-     * @param string $seminarUid a given seminar UID (needs not necessarily be an int)
+     * @param int $uid a given seminar UID (needs not necessarily be an int)
      *
      * @return string an empty string if the UID is valid, otherwise a localized error message
      */
-    public function existsSeminarMessage($seminarUid)
+    public function existsSeminarMessage($uid)
     {
-        if ($seminarUid <= 0) {
+        if ($uid <= 0) {
             \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
             return $this->translate('message_missingSeminarNumber');
         }
-        if (!Tx_Seminars_OldModel_Abstract::recordExists($seminarUid, 'tx_seminars_seminars')) {
+        if (!Tx_Seminars_OldModel_Abstract::recordExists($uid, 'tx_seminars_seminars')) {
             \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
             return $this->translate('message_wrongSeminarNumber');
         }
