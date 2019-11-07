@@ -1799,7 +1799,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      */
     public function initListView($whatToDisplay = '')
     {
-        if (strpos($this->cObj->currentRecord, 'tt_content') !== false) {
+        if (\strpos((string)$this->cObj->currentRecord, 'tt_content') !== false) {
             $this->conf['pidList'] = $this->getConfValueString('pages');
             $this->conf['recursive'] = $this->getConfValueInteger('recursive');
         }

@@ -45,13 +45,12 @@ class Tx_Seminars_BagBuilder_Category extends \Tx_Seminars_BagBuilder_Abstract
      */
     public function limitToEvents($eventUids)
     {
-        if ($eventUids == '') {
+        $cleanUids = \trim((string)$eventUids);
+        if ($cleanUids === '') {
             return;
         }
 
-        if (!preg_match('/^(\\d+,)*\\d+$/', $eventUids)
-            || preg_match('/(^|,)0+(,|$)/', $eventUids)
-        ) {
+        if (!preg_match('/^(\\d+,)*\\d+$/', $cleanUids) || preg_match('/(^|,)0+(,|$)/', $cleanUids)) {
             throw new \InvalidArgumentException(
                 '$eventUids must be a comma-separated list of positive integers.',
                 1333292640
@@ -61,7 +60,7 @@ class Tx_Seminars_BagBuilder_Category extends \Tx_Seminars_BagBuilder_Abstract
         $this->whereClauseParts['event'] = 'EXISTS (' .
             'SELECT * FROM tx_seminars_seminars_categories_mm' .
             ' WHERE tx_seminars_seminars_categories_mm.uid_local IN(' .
-            $eventUids . ') AND tx_seminars_seminars_categories_mm' .
+            $cleanUids . ') AND tx_seminars_seminars_categories_mm' .
             '.uid_foreign = tx_seminars_categories.uid)';
 
         $this->eventUids = $eventUids;
