@@ -3703,12 +3703,12 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
                 'categories' => 1,
             ]
         );
-        $categoryUid = (string)$this->testingFramework->createRecord(
+        $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
             ['title' => 'a category']
         );
         $this->testingFramework->createRelation('tx_seminars_seminars_categories_mm', $eventUid, $categoryUid);
-        $this->subject->piVars['categories'][] = $categoryUid;
+        $this->subject->piVars['categories'][] = (string)$categoryUid;
 
         self::assertContains(
             'Event with category',
@@ -3733,11 +3733,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $categoryUid1 = $this->testingFramework->createRecord('tx_seminars_categories', ['title' => 'a category']);
         $this->testingFramework->createRelation('tx_seminars_seminars_categories_mm', $eventUid, $categoryUid1);
 
-        $categoryUid2 = (string)$this->testingFramework->createRecord(
+        $categoryUid2 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
             ['title' => 'another category']
         );
-        $this->subject->piVars['categories'][] = $categoryUid2;
+        $this->subject->piVars['categories'][] = (string)$categoryUid2;
 
         self::assertNotContains(
             'Event with category',
