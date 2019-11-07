@@ -949,7 +949,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
     /**
      * @test
      *
-     * @param bool $configurationValue
+     * @param int $configurationValue
+     *
      * @dataProvider registerThemselvesDataProvider
      */
     public function getNumberOfEnteredPersonsForFieldHiddenReturnsValueFromConfiguration($configurationValue)
