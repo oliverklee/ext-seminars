@@ -55,7 +55,7 @@ class SpeakersList extends AbstractList
         $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Speaker::class);
         $builder->showHiddenRecords();
 
-        $builder->setSourcePages($pageData['uid'], self::RECURSION_DEPTH);
+        $builder->setSourcePages((string)$pageData['uid'], self::RECURSION_DEPTH);
 
         $speakerBag = $builder->build();
 

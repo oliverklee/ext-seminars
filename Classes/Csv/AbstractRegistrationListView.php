@@ -164,7 +164,7 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends \Tx_Seminars
         if ($this->hasEventUid()) {
             $registrationBagBuilder->limitToEvent($this->getEventUid());
         } elseif ($this->hasPageUid()) {
-            $registrationBagBuilder->setSourcePages($this->getPageUid(), self::RECURSION_DEPTH);
+            $registrationBagBuilder->setSourcePages((string)$this->getPageUid(), self::RECURSION_DEPTH);
         }
 
         return $this->getRegistrationsCsvList($registrationBagBuilder);
