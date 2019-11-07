@@ -37,7 +37,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
     private static $instance = null;
 
     /**
-     * @var \Tx_Seminars_OldModel_Registration the current registration
+     * @var \Tx_Seminars_OldModel_Registration|null
      */
     private $registration = null;
 
@@ -447,7 +447,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      * created, ie. an actual number is given and there are at least that many vacancies.
      *
      * @param \Tx_Seminars_OldModel_Event $event the seminar object (that's the seminar we would like to register for)
-     * @param int|string $numberOfSeats the number of seats to check (should be an integer, but we can't be sure of this)
+     * @param int|string $numberOfSeats the number of seats to check
      *
      * @return bool TRUE if there are at least that many vacancies, FALSE otherwise
      */
@@ -820,7 +820,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
             return;
         }
 
-        /** @var $event \Tx_Seminars_OldModel_Event */
+        /** @var \Tx_Seminars_OldModel_Event $event */
         $event = $oldRegistration->getSeminarObject();
         if (!$event->hasOrganizers()) {
             return;
@@ -834,7 +834,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
             return;
         }
 
-        /** @var $eMailNotification \Tx_Oelib_Mail */
+        /** @var \Tx_Oelib_Mail $eMailNotification */
         $eMailNotification = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
         $eMailNotification->addRecipient($oldRegistration->getFrontEndUser());
         $eMailNotification->setSender($event->getFirstOrganizer());
@@ -863,7 +863,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
 
         /** @var \Tx_Seminars_Mapper_Registration $mapper */
         $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
-        /** @var $registration \Tx_Seminars_Model_Registration */
+        /** @var \Tx_Seminars_Model_Registration $registration */
         $registration = $mapper->find($oldRegistration->getUid());
 
         $this->addCalendarAttachment($eMailNotification, $registration);
@@ -991,7 +991,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         }
 
         $organizers = $event->getOrganizerBag();
-        /** @var $eMailNotification \Tx_Oelib_Mail */
+        /** @var \Tx_Oelib_Mail $eMailNotification */
         $eMailNotification = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
         $eMailNotification->setSender($event->getFirstOrganizer());
 
@@ -1302,7 +1302,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         $useHtml = false
     ) {
         if ($this->linkBuilder === null) {
-            /** @var $linkBuilder \Tx_Seminars_Service_SingleViewLinkBuilder */
+            /** @var \Tx_Seminars_Service_SingleViewLinkBuilder $linkBuilder */
             $linkBuilder = GeneralUtility::makeInstance(\Tx_Seminars_Service_SingleViewLinkBuilder::class);
             $this->injectLinkBuilder($linkBuilder);
         }
@@ -1422,7 +1422,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
 
         /** @var \Tx_Seminars_Mapper_Event $mapper */
         $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
-        /** @var $newEvent \Tx_Seminars_Model_Event */
+        /** @var \Tx_Seminars_Model_Event $newEvent */
         $newEvent = $mapper->find($event->getUid());
         $singleViewUrl = $this->linkBuilder->createAbsoluteUrlForEvent($newEvent);
         $this->setMarker('url', ($useHtml ? htmlspecialchars($singleViewUrl) : $singleViewUrl));
@@ -1633,7 +1633,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
     /**
      * Returns the (old) registration created via createRegistration.
      *
-     * @return \Tx_Seminars_OldModel_Registration the created registration, will be NULL if no registration has been created
+     * @return \Tx_Seminars_OldModel_Registration|null
      */
     public function getRegistration()
     {

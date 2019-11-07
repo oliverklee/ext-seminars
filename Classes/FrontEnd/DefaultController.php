@@ -47,7 +47,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
     private $configurationService = null;
 
     /**
-     * @var \Tx_Seminars_OldModel_Event the seminar which we want to list/show or
+     * @var \Tx_Seminars_OldModel_Event|null the seminar which we want to list/show or
      *                          for which the user wants to register
      */
     private $seminar = null;
@@ -541,7 +541,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
     /**
      * Gets our seminar object.
      *
-     * @return \Tx_Seminars_OldModel_Event our seminar object
+     * @return \Tx_Seminars_OldModel_Event|null
      */
     public function getSeminar()
     {
@@ -551,7 +551,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
     /**
      * Returns the current registration.
      *
-     * @return \Tx_Seminars_OldModel_Registration the current registration
+     * @return \Tx_Seminars_OldModel_Registration|null
      */
     public function getRegistration()
     {

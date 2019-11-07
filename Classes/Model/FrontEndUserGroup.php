@@ -74,8 +74,7 @@ class Tx_Seminars_Model_FrontEndUserGroup extends \Tx_Oelib_Model_FrontEndUserGr
     /**
      * Returns the BE user which is stored as reviewer for this group.
      *
-     * @return \Tx_Oelib_Model_BackEndUser the reviewer for this group, will be
-     *                                    NULL if no reviewer has been set
+     * @return \Tx_Oelib_Model_BackEndUser|null
      */
     public function getReviewer()
     {
@@ -130,8 +129,7 @@ class Tx_Seminars_Model_FrontEndUserGroup extends \Tx_Oelib_Model_FrontEndUserGr
     /**
      * Returns this user group's default organizer for the FE editor.
      *
-     * @return \Tx_Seminars_Model_Organizer this group's default organizer, will
-     *                                     be NULL if no organizer has been set
+     * @return \Tx_Seminars_Model_Organizer|null
      */
     public function getDefaultOrganizer()
     {
