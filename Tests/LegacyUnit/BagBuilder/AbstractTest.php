@@ -301,7 +301,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
             ['pid' => $subPagePid]
         );
 
-        $this->subject->setSourcePages($this->dummySysFolderPid);
+        $this->subject->setSourcePages((string)$this->dummySysFolderPid);
         $bag = $this->subject->build();
 
         self::assertTrue(
@@ -320,7 +320,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
             ['pid' => $subPagePid]
         );
 
-        $this->subject->setSourcePages($this->dummySysFolderPid, 1);
+        $this->subject->setSourcePages((string)$this->dummySysFolderPid, 1);
         $bag = $this->subject->build();
 
         self::assertEquals(
@@ -347,7 +347,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
             ['pid' => $subPagePid2]
         );
 
-        $this->subject->setSourcePages($this->dummySysFolderPid, 1);
+        $this->subject->setSourcePages((string)$this->dummySysFolderPid, 1);
         $bag = $this->subject->build();
 
         self::assertEquals(

@@ -608,10 +608,7 @@ class Tx_Seminars_OldModel_Registration extends \Tx_Seminars_OldModel_Abstract
             if (isset(self::$cachedSeminars[$seminarUid])) {
                 $this->seminar = self::$cachedSeminars[$seminarUid];
             } else {
-                $this->seminar = GeneralUtility::makeInstance(
-                    \Tx_Seminars_OldModel_Event::class,
-                    $seminarUid
-                );
+                $this->seminar = GeneralUtility::makeInstance(\Tx_Seminars_OldModel_Event::class, $seminarUid);
                 self::$cachedSeminars[$seminarUid] = $this->seminar;
             }
         }
