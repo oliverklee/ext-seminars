@@ -2984,11 +2984,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
             }
         }
 
-        $result = $this->createRegistrationHeading($errorMessage);
-        $result .= $registrationForm;
-        $result .= $this->createRegistrationFooter();
-
-        return $result;
+        return $this->createRegistrationHeading($errorMessage) . $registrationForm . $this->createRegistrationFooter();
     }
 
     /**
