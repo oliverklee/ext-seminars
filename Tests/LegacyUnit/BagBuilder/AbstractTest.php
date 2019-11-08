@@ -514,7 +514,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
         );
     }
 
-    public function testWhereClausePartGetKeyMustNotBeEmpty()
+    /**
+     * @test
+     */
+    public function whereClausePartGetKeyMustNotBeEmpty()
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -526,7 +529,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
         $this->subject->getWhereClausePart('');
     }
 
-    public function testWhereClausePartSetKeyMustNotBeEmpty()
+    /**
+     * @test
+     */
+    public function whereClausePartSetKeyMustNotBeEmpty()
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -538,7 +544,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
         $this->subject->setWhereClausePart('', '');
     }
 
-    public function testWhereClausePartInitiallyIsEmpty()
+    /**
+     * @test
+     */
+    public function whereClausePartInitiallyIsEmpty()
     {
         self::assertEquals(
             '',
@@ -546,7 +555,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
         );
     }
 
-    public function testWhereClausePartCanBeSetAndCanBeRetrieved()
+    /**
+     * @test
+     */
+    public function whereClausePartCanBeSetAndCanBeRetrieved()
     {
         $this->subject->setWhereClausePart('testpart', 'testpart IN (1,2,3)');
 
@@ -556,7 +568,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
         );
     }
 
-    public function testWhereClausePartSettingToEmptyCompletelyRemovesIt()
+    /**
+     * @test
+     */
+    public function whereClausePartSettingToEmptyCompletelyRemovesIt()
     {
         $this->subject->setWhereClausePart('testpart', 'testpart IN (1,2,3)');
         $this->subject->setWhereClausePart('testpart', '');
@@ -569,7 +584,10 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
         );
     }
 
-    public function testWhereClausePartCanBeSetAndGetsAddedToWhereClause()
+    /**
+     * @test
+     */
+    public function whereClausePartCanBeSetAndGetsAddedToWhereClause()
     {
         $this->subject->setWhereClausePart('testpart', 'testpart IN (1,2,3)');
 
