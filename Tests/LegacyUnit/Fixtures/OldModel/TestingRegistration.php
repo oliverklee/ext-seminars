@@ -17,7 +17,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration extends \Tx_S
      *
      * @param int $registrationUid UID of the registration record, must be > 0
      */
-    public function __construct($registrationUid = 0)
+    public function __construct(int $registrationUid = 0)
     {
         if ($registrationUid > 0) {
             $dbResult = \Tx_Oelib_Db::select(
@@ -42,7 +42,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration extends \Tx_S
      *
      * @return void
      */
-    public function setIsOnRegistrationQueue($isOnRegistrationQueueValue)
+    public function setIsOnRegistrationQueue(bool $isOnRegistrationQueueValue)
     {
         $this->setRecordPropertyInteger(
             'registration_queue',
@@ -57,7 +57,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration extends \Tx_S
      *
      * @return void
      */
-    public function setPaymentMethod($uid)
+    public function setPaymentMethod(int $uid)
     {
         if ($uid <= 0) {
             throw new \InvalidArgumentException('Invalid payment method UID.', 1333293343);
@@ -118,7 +118,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration extends \Tx_S
      *
      * @return void
      */
-    public function setRegisteredThemselves($registeredThemselves)
+    public function setRegisteredThemselves(bool $registeredThemselves)
     {
         $this->setRecordPropertyBoolean('registered_themselves', $registeredThemselves);
     }

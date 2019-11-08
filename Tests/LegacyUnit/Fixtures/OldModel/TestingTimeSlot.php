@@ -15,7 +15,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingTimeSlot extends \Tx_Semin
      *
      * @return void
      */
-    public function setPlace($place)
+    public function setPlace(int $place)
     {
         $this->setRecordPropertyInteger('place', $place);
     }
@@ -27,7 +27,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingTimeSlot extends \Tx_Semin
      *
      * @return void
      */
-    public function setEntryDate($entryDate)
+    public function setEntryDate(int $entryDate)
     {
         $this->setRecordPropertyInteger('entry_date', $entryDate);
     }
@@ -39,7 +39,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingTimeSlot extends \Tx_Semin
      *
      * @return void
      */
-    public function setBeginDate($beginDate)
+    public function setBeginDate(int $beginDate)
     {
         $this->setRecordPropertyInteger('begin_date', $beginDate);
     }

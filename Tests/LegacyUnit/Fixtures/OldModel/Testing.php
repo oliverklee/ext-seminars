@@ -20,7 +20,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing extends \Tx_Seminars_OldM
      *
      * @return void
      */
-    public function setBooleanTest($test)
+    public function setBooleanTest(bool $test)
     {
         $this->setRecordPropertyBoolean('test', $test);
     }
@@ -47,7 +47,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing extends \Tx_Seminars_OldM
      *
      * @return int the number of created m:n records
      */
-    public function createMmRecords($mmTable, array $references): int
+    public function createMmRecords(string $mmTable, array $references): int
     {
         return parent::createMmRecords($mmTable, $references);
     }

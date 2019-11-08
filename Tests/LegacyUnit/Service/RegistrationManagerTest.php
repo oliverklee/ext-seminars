@@ -313,7 +313,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      *
      * @return \Swift_Mime_MimeEntity[]
      */
-    private function filterEmailAttachmentsByTitle(MailMessage $email, $contentType): array
+    private function filterEmailAttachmentsByTitle(MailMessage $email, string $contentType): array
     {
         $matches = [];
 
@@ -3501,7 +3501,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      *
      * @return void
      */
-    private function assertNotContainsRawLabelKey($string)
+    private function assertNotContainsRawLabelKey(string $string)
     {
         self::assertNotContains('_', $string);
         self::assertNotContains('salutation', $string);
@@ -3627,9 +3627,10 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      * @test
      *
      * @param string $value
+     *
      * @dataProvider iCalDataProvider
      */
-    public function notifyAttendeeHasCalendarAttachmentWithImportantFields($value)
+    public function notifyAttendeeHasCalendarAttachmentWithImportantFields(string $value)
     {
         $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();

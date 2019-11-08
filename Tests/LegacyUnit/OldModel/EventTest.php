@@ -101,7 +101,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      *
      * @return void
      */
-    private function createPi1($detailPageUid = 0)
+    private function createPi1(int $detailPageUid = 0)
     {
         $this->testingFramework->createFakeFrontEnd();
 
@@ -238,7 +238,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      */
     private function addCategoryRelation(
         array $categoryData = [],
-        $sorting = 0
+        int $sorting = 0
     ): int {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
@@ -5192,10 +5192,15 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      * @param int $registrationEnd
      * @param int $checkBegin
      * @param int $checkEnd
+     *
      * @dataProvider overlappingEventsDataProvider
      */
-    public function overlappingEventsCollide($registrationBegin, $registrationEnd, $checkBegin, $checkEnd)
-    {
+    public function overlappingEventsCollide(
+        int $registrationBegin,
+        int $registrationEnd,
+        int $checkBegin,
+        int $checkEnd
+    ) {
         $this->subject->setBeginDate($checkBegin);
         $this->subject->setEndDate($checkEnd);
 
@@ -5230,10 +5235,15 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      * @param int $registrationEnd
      * @param int $checkBegin
      * @param int $checkEnd
+     *
      * @dataProvider nonOverlappingEventsDataProvider
      */
-    public function nonOverlappingEventsDoNotCollide($registrationBegin, $registrationEnd, $checkBegin, $checkEnd)
-    {
+    public function nonOverlappingEventsDoNotCollide(
+        int $registrationBegin,
+        int $registrationEnd,
+        int $checkBegin,
+        int $checkEnd
+    ) {
         $this->subject->setBeginDate($checkBegin);
         $this->subject->setEndDate($checkEnd);
 
@@ -5376,9 +5386,10 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      *
      * @param int $registrationBegin
      * @param int $registrationEnd
+     *
      * @dataProvider eventsOverlappingWithTimeSlotDataProvider
      */
-    public function collidesWithEventWithTimeSlots($registrationBegin, $registrationEnd)
+    public function collidesWithEventWithTimeSlots(int $registrationBegin, int $registrationEnd)
     {
         $this->subject->setBeginDate($registrationBegin);
         $this->subject->setEndDate($registrationEnd);
@@ -9331,13 +9342,13 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      * @return void
      */
     public function canViewRegistrationsListWithNeedsRegistrationAndDefaultAccess(
-        $expected,
-        $loggedIn,
-        $isRegistered,
-        $isVip,
-        $whichPlugin,
-        $registrationsListPID,
-        $registrationsVipListPID
+        bool $expected,
+        bool $loggedIn,
+        bool $isRegistered,
+        bool $isVip,
+        string $whichPlugin,
+        int $registrationsListPID,
+        int $registrationsVipListPID
     ) {
         /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
         $subject = $this->createPartialMock(
@@ -9382,13 +9393,13 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      * @return void
      */
     public function canViewRegistrationsListWithNeedsRegistrationAndAttendeesManagersAccess(
-        $expected,
-        $loggedIn,
-        $isRegistered,
-        $isVip,
-        $whichPlugin,
-        $registrationsListPID,
-        $registrationsVipListPID
+        bool $expected,
+        bool $loggedIn,
+        bool $isRegistered,
+        bool $isVip,
+        string $whichPlugin,
+        int $registrationsListPID,
+        int $registrationsVipListPID
     ) {
         /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
         $subject = $this->createPartialMock(
@@ -9465,12 +9476,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      *
      * @return void
      */
-    public function canViewRegistrationsListForCsvExport(
-        $expected,
-        $loggedIn,
-        $isVip,
-        $allowCsvExportForVips
-    ) {
+    public function canViewRegistrationsListForCsvExport(bool $expected, bool $loggedIn, bool $isVip, bool $allowCsvExportForVips)
+    {
         /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
         $subject = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['needsRegistration', 'isUserVip']);
         $subject->method('needsRegistration')
@@ -9665,13 +9672,13 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      * @return void
      */
     public function canViewRegistrationsListWithNeedsRegistrationAndLoginAccess(
-        $expected,
-        $loggedIn,
-        $isRegistered,
-        $isVip,
-        $whichPlugin,
-        $registrationsListPID,
-        $registrationsVipListPID
+        bool $expected,
+        bool $loggedIn,
+        bool $isRegistered,
+        bool $isVip,
+        string $whichPlugin,
+        int $registrationsListPID,
+        int $registrationsVipListPID
     ) {
         /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
         $subject = $this->createPartialMock(
@@ -9875,13 +9882,13 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      * @return void
      */
     public function canViewRegistrationsListWithNeedsRegistrationAndWorldAccess(
-        $expected,
-        $loggedIn,
-        $isRegistered,
-        $isVip,
-        $whichPlugin,
-        $registrationsListPID,
-        $registrationsVipListPID
+        bool $expected,
+        bool $loggedIn,
+        bool $isRegistered,
+        bool $isVip,
+        string $whichPlugin,
+        int $registrationsListPID,
+        int $registrationsVipListPID
     ) {
         /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
         $subject = $this->createPartialMock(
@@ -10003,7 +10010,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      *
      * @return void
      */
-    public function canViewRegistrationsListMessageForVipListAndNoLoginReturnsPleaseLoginMessage($accessLevel)
+    public function canViewRegistrationsListMessageForVipListAndNoLoginReturnsPleaseLoginMessage(string $accessLevel)
     {
         /** @var \Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $subject */
         $subject = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['needsRegistration']);
@@ -10062,9 +10069,9 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      * @param string $whichPlugin
      * @param string $accessLevel
      */
-    public function canViewRegistrationsListMessageWithLoginRoutesParameters($whichPlugin, $accessLevel)
+    public function canViewRegistrationsListMessageWithLoginRoutesParameters(string $whichPlugin, string $accessLevel)
     {
-        /** @var \Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_OldModel_Event::class,
             ['needsRegistration', 'canViewRegistrationsList']
@@ -10256,14 +10263,14 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      *        the return value of hasPriceSpecialBoard
      */
     public function hasAnyPriceWithDataProvider(
-        $expectedHasAnyPrice,
-        $hasPriceRegular,
-        $hasPriceSpecial,
-        $earlyBirdApplies,
-        $hasEarlyBirdPriceRegular,
-        $hasEarlyBirdPriceSpecial,
-        $hasPriceRegularBoard,
-        $hasPriceSpecialBoard
+        bool $expectedHasAnyPrice,
+        bool $hasPriceRegular,
+        bool $hasPriceSpecial,
+        bool $earlyBirdApplies,
+        bool $hasEarlyBirdPriceRegular,
+        bool $hasEarlyBirdPriceSpecial,
+        bool $hasPriceRegularBoard,
+        bool $hasPriceSpecialBoard
     ) {
         /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
         $subject = $this->createPartialMock(

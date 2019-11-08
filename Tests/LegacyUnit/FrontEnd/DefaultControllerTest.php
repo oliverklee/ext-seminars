@@ -375,7 +375,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
      *
      * @return string faked link tag, will not be empty
      */
-    public function getTypoLink($label, $pageId, array $urlParameters = []): string
+    public function getTypoLink(string $label, string $pageId, array $urlParameters = []): string
     {
         $encodedParameters = '';
         foreach ($urlParameters as $key => $value) {
@@ -8432,7 +8432,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
     public function eventsListNotCallsProcessEventEditorActions()
     {
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->createPartialMock(\Tx_Seminars_FrontEnd_DefaultController::class, ['processEventEditorActions']);
+        $subject = $this->createPartialMock(
+            \Tx_Seminars_FrontEnd_DefaultController::class,
+            ['processEventEditorActions']
+        );
         $subject->expects(self::never())->method('processEventEditorActions');
 
         $subject->main(
@@ -8449,7 +8452,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $this->testingFramework->createAndLoginFrontEndUser();
 
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->createPartialMock(\Tx_Seminars_FrontEnd_DefaultController::class, ['processEventEditorActions']);
+        $subject = $this->createPartialMock(
+            \Tx_Seminars_FrontEnd_DefaultController::class,
+            ['processEventEditorActions']
+        );
         $subject->expects(self::once())->method('processEventEditorActions');
 
         $subject->main(
@@ -8464,7 +8470,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
     public function myManagedEventsListCallsProcessEventEditorActions()
     {
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
-        $subject = $this->createPartialMock(\Tx_Seminars_FrontEnd_DefaultController::class, ['processEventEditorActions']);
+        $subject = $this->createPartialMock(
+            \Tx_Seminars_FrontEnd_DefaultController::class,
+            ['processEventEditorActions']
+        );
         $subject->expects(self::once())->method('processEventEditorActions');
 
         $subject->main(
@@ -9296,10 +9305,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
      * @param int $vipListPid
      */
     public function hideListRegistrationsColumnIfNecessaryWithRegistrationEnabledAndLoggedIn(
-        $getsHidden,
-        $whatToDisplay,
-        $listPid,
-        $vipListPid
+        bool $getsHidden,
+        string $whatToDisplay,
+        int $listPid,
+        int $vipListPid
     ) {
         /** @var \Tx_Seminars_FrontEnd_DefaultController|\PHPUnit_Framework_MockObject_MockObject $subject */
         $subject = $this->createPartialMock(
@@ -9339,10 +9348,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
      * @param int $vipListPid
      */
     public function hideListRegistrationsColumnIfNecessaryWithRegistrationEnabledAndNotLoggedInAlwaysHidesColumn(
-        $getsHidden,
-        $whatToDisplay,
-        $listPid,
-        $vipListPid
+        bool $getsHidden,
+        string $whatToDisplay,
+        int $listPid,
+        int $vipListPid
     ) {
         /** @var \Tx_Seminars_FrontEnd_DefaultController|\PHPUnit_Framework_MockObject_MockObject $subject */
         $subject = $this->createPartialMock(
@@ -9378,10 +9387,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
      * @param int $vipListPid
      */
     public function hideListRegistrationsColumnIfNecessaryWithRegistrationDisabledAndLoggedInAlwaysHidesColumn(
-        $getsHidden,
-        $whatToDisplay,
-        $listPid,
-        $vipListPid
+        bool $getsHidden,
+        string $whatToDisplay,
+        int $listPid,
+        int $vipListPid
     ) {
         /** @var \Tx_Seminars_FrontEnd_DefaultController|\PHPUnit_Framework_MockObject_MockObject $subject */
         $subject = $this->createPartialMock(

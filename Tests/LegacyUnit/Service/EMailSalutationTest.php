@@ -64,9 +64,8 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends TestCase
      * @return \Tx_Seminars_Model_FrontEndUser the loaded testing model of a
      *                                        FE user
      */
-    private function createFrontEndUser(
-        $gender = \Tx_Oelib_Model_FrontEndUser::GENDER_MALE
-    ): \Tx_Seminars_Model_FrontEndUser {
+    private function createFrontEndUser(int $gender = \Tx_Oelib_Model_FrontEndUser::GENDER_MALE): \Tx_Seminars_Model_FrontEndUser
+    {
         return \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)
             ->getLoadedTestingModel(
                 ['name' => 'Foo', 'gender' => $gender]
@@ -274,9 +273,10 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends TestCase
      * @test
      *
      * @param int $gender
+     *
      * @dataProvider genderDataProvider
      */
-    public function getSalutationForFormalSalutationModeContainsNoRawLabelKeys($gender)
+    public function getSalutationForFormalSalutationModeContainsNoRawLabelKeys(int $gender)
     {
         \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')->setAsString('salutation', 'formal');
 
@@ -305,9 +305,10 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends TestCase
      * @test
      *
      * @param int $gender
+     *
      * @dataProvider genderDataProvider
      */
-    public function getSalutationForInformalSalutationModeContainsNoRawLabelKeys($gender)
+    public function getSalutationForInformalSalutationModeContainsNoRawLabelKeys(int $gender)
     {
         \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')->setAsString('salutation', 'informal');
 
@@ -321,9 +322,10 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends TestCase
      * @test
      *
      * @param int $gender
+     *
      * @dataProvider genderDataProvider
      */
-    public function getSalutationForNoSalutationModeContainsNoRawLabelKeys($gender)
+    public function getSalutationForNoSalutationModeContainsNoRawLabelKeys(int $gender)
     {
         \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')->setAsString('salutation', '');
 
@@ -340,7 +342,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends TestCase
      *
      * @return void
      */
-    private function assertNotContainsRawLabelKey($string)
+    private function assertNotContainsRawLabelKey(string $string)
     {
         self::assertNotContains('_', $string);
         self::assertNotContains('salutation', $string);
