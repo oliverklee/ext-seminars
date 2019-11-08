@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Display the name of the current functional test (#256)
 
 ### Changed
+- Refactor registration form footer creation (#309)
 - Allow 9.5-compatible versions of mkforms and rn_base (#275)
 - Sort the Composer dependencies (#277)
 - Clean up the TypoScript (#266, #267)
