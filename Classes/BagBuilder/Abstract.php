@@ -198,7 +198,7 @@ abstract class Tx_Seminars_BagBuilder_Abstract
         }
 
         if (empty($value)) {
-            unset ($this->whereClauseParts[$key]);
+            unset($this->whereClauseParts[$key]);
             return;
         }
 
