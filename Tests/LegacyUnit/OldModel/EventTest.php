@@ -9320,7 +9320,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      *
      * @dataProvider canViewRegistrationsListDataProvider
      *
-     * @param string $expected
+     * @param bool $expected
      * @param bool $loggedIn
      * @param bool $isRegistered
      * @param bool $isVip
