@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Enable modifying the BagBuilder limitations in hooks (#308)
 - Build with PHP 7.2 on Travis CI (#302)
 - Display the name of the current functional test (#256)
 

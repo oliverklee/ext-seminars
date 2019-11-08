@@ -514,6 +514,71 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
         );
     }
 
+    /**
+     * @test
+     */
+    public function whereClausePartGetKeyMustNotBeEmpty()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('The parameter $key must not be empty.');
+
+        $this->subject->getWhereClausePart('');
+    }
+
+    /**
+     * @test
+     */
+    public function whereClausePartSetKeyMustNotBeEmpty()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('The parameter $key must not be empty.');
+
+        $this->subject->setWhereClausePart('', '');
+    }
+
+    /**
+     * @test
+     */
+    public function whereClausePartInitiallyIsEmpty()
+    {
+        self::assertSame('', $this->subject->getWhereClausePart('testpart'));
+    }
+
+    /**
+     * @test
+     */
+    public function whereClausePartCanBeSetAndCanBeRetrieved()
+    {
+        $this->subject->setWhereClausePart('testpart', 'testpart IN (1,2,3)');
+
+        self::assertSame('testpart IN (1,2,3)', $this->subject->getWhereClausePart('testpart'));
+    }
+
+    /**
+     * @test
+     */
+    public function whereClausePartSettingToEmptyCompletelyRemovesIt()
+    {
+        $this->subject->setWhereClausePart('testpart', 'testpart IN (1,2,3)');
+        $this->subject->setWhereClausePart('testpart', '');
+
+        // We're using assertNotContains here because the WHERE clause always
+        // contains a test-specific prefix
+        self::assertNotContains(' AND ', $this->subject->getWhereClause());
+    }
+
+    /**
+     * @test
+     */
+    public function whereClausePartCanBeSetAndGetsAddedToWhereClause()
+    {
+        $this->subject->setWhereClausePart('testpart', 'testpart IN (1,2,3)');
+
+        // We're using assertContains here because the WHERE clause always
+        // contains a test-specific prefix
+        self::assertContains(' AND testpart IN (1,2,3)', $this->subject->getWhereClause());
+    }
+
     /////////////////////////////////
     // Test concerning limitToTitle
     /////////////////////////////////
