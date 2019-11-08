@@ -176,7 +176,7 @@ abstract class Tx_Seminars_BagBuilder_Abstract
      *
      * @return string WHERE clause part for the bag to create, may be empty
      */
-    public function getWhereClausePart($key)
+    public function getWhereClausePart(string $key): string
     {
         if (empty($key)) {
             throw new \InvalidArgumentException('The parameter $key must not be empty.', 1569331331);
@@ -195,7 +195,7 @@ abstract class Tx_Seminars_BagBuilder_Abstract
      * @param string $key the limitation key to return, must not be empty
      * @param string $value the WHERE clause part of a limitation, empty value removes the limitation
      */
-    public function setWhereClausePart($key, $value)
+    public function setWhereClausePart(string $key, string $value)
     {
         if (empty($key)) {
             throw new \InvalidArgumentException('The parameter $key must not be empty.', 1569331332);
