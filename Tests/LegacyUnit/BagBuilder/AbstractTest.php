@@ -541,7 +541,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
      */
     public function whereClausePartInitiallyIsEmpty()
     {
-        self::assertEquals('', $this->subject->getWhereClausePart('testpart'));
+        self::assertSame('', $this->subject->getWhereClausePart('testpart'));
     }
 
     /**
@@ -551,7 +551,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
     {
         $this->subject->setWhereClausePart('testpart', 'testpart IN (1,2,3)');
 
-        self::assertEquals('testpart IN (1,2,3)', $this->subject->getWhereClausePart('testpart'));
+        self::assertSame('testpart IN (1,2,3)', $this->subject->getWhereClausePart('testpart'));
     }
 
     /**
