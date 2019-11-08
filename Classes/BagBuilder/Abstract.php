@@ -182,11 +182,7 @@ abstract class Tx_Seminars_BagBuilder_Abstract
             throw new \InvalidArgumentException('The parameter $key must not be empty.', 1569331331);
         }
 
-        if (empty($this->whereClauseParts[$key])) {
-            return '';
-        }
-
-        return $this->whereClauseParts[$key];
+        return $this->whereClauseParts[$key] ?? '';
     }
 
     /**
