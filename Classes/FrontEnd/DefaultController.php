@@ -3051,7 +3051,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return string HTML code including the title and error message
      */
-    protected function createRegistrationFooter()
+    protected function createRegistrationFooter(): string
     {
         return $this->getSubpart('REGISTRATION_BOTTOM');
     }
