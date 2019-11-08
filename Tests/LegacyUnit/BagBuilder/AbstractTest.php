@@ -519,12 +519,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
      */
     public function whereClausePartGetKeyMustNotBeEmpty()
     {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            'The parameter $key must not be empty.'
-        );
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('The parameter $key must not be empty.');
 
         $this->subject->getWhereClausePart('');
     }
@@ -534,12 +530,8 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
      */
     public function whereClausePartSetKeyMustNotBeEmpty()
     {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            'The parameter $key must not be empty.'
-        );
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('The parameter $key must not be empty.');
 
         $this->subject->setWhereClausePart('', '');
     }
@@ -549,10 +541,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
      */
     public function whereClausePartInitiallyIsEmpty()
     {
-        self::assertEquals(
-            '',
-            $this->subject->getWhereClausePart('testpart')
-        );
+        self::assertEquals('', $this->subject->getWhereClausePart('testpart'));
     }
 
     /**
@@ -562,10 +551,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
     {
         $this->subject->setWhereClausePart('testpart', 'testpart IN (1,2,3)');
 
-        self::assertEquals(
-            'testpart IN (1,2,3)',
-            $this->subject->getWhereClausePart('testpart')
-        );
+        self::assertEquals('testpart IN (1,2,3)', $this->subject->getWhereClausePart('testpart'));
     }
 
     /**
@@ -578,10 +564,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
 
         // We're using assertNotContains here because the WHERE clause always
         // contains a test-specific prefix
-        self::assertNotContains(
-            ' AND ',
-            $this->subject->getWhereClause()
-        );
+        self::assertNotContains(' AND ', $this->subject->getWhereClause());
     }
 
     /**
@@ -593,10 +576,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
 
         // We're using assertContains here because the WHERE clause always
         // contains a test-specific prefix
-        self::assertContains(
-            ' AND testpart IN (1,2,3)',
-            $this->subject->getWhereClause()
-        );
+        self::assertContains(' AND testpart IN (1,2,3)', $this->subject->getWhereClause());
     }
 
     /////////////////////////////////
