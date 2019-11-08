@@ -2986,7 +2986,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
 
         $result = $this->createRegistrationHeading($errorMessage);
         $result .= $registrationForm;
-        $result .= $this->getSubpart('REGISTRATION_BOTTOM');
+        $result .= $this->createRegistrationFooter();
 
         return $result;
     }
@@ -3044,6 +3044,16 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         }
 
         return $registrationEditor->render();
+    }
+
+    /**
+     * Creates the registration page footer.
+     *
+     * @return string HTML code including the title and error message
+     */
+    protected function createRegistrationFooter()
+    {
+        return $this->getSubpart('REGISTRATION_BOTTOM');
     }
 
     /**
