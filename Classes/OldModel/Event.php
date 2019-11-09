@@ -64,32 +64,24 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     private $topic = null;
 
     /**
-     * The constructor. Creates a seminar instance from a DB record.
-     *
-     * By default, the process of creating a seminar object from a hidden record
-     * fails. If we need the seminar object although it's hidden, the parameter
-     * $allowHiddenRecords should be set to TRUE.
-     *
-     * @param int $uid UID of the seminar to retrieve from the DB. This parameter will be ignored if $dbResult is provided.
-     * @param \mysqli_result|bool $dbResult MySQL result (of SELECT query). If this parameter is provided, $uid will be ignored.
-     * @param bool $allowHiddenRecords whether it is possible to create a seminar object from a hidden record
+     * @return Tx_Seminars_OldModel_Event|null
      */
-    public function __construct(int $uid = 0, $dbResult = false, bool $allowHiddenRecords = false)
+    public function getTopic()
     {
-        parent::__construct($uid, $dbResult, $allowHiddenRecords);
-
-        // For date records: Create a reference to the topic record.
-        if ($this->isEventDate()) {
-            $this->topic = $this->retrieveTopic();
-            // To avoid infinite loops, null out $this->topic if it is a date
-            // record, too. Date records that fail the check isTopicOkay()
-            // are used as a complete event record.
-            if ($this->isTopicOkay() && $this->topic->isEventDate()) {
-                $this->topic = null;
-            }
-        } else {
-            $this->topic = null;
+        if ($this->topic !== null) {
+            return $this->topic;
         }
+        if (!$this->isEventDate()) {
+            return null;
+        }
+
+        $topic = $this->loadTopic();
+        // Avoid infinite loops due to date records that have been converted to a topic or single event.
+        if ($topic !== null && !$topic->isEventDate()) {
+            $this->topic = $topic;
+        }
+
+        return $this->topic;
     }
 
     /**
@@ -405,10 +397,18 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
             $descriptionParts = [];
             if ((string)$place['address'] != '') {
-                $descriptionParts[] = \htmlspecialchars(\str_replace(CR, ',', (string)$place['address']), ENT_QUOTES | ENT_HTML5);
+                $descriptionParts[] = \htmlspecialchars(
+                    \str_replace(CR, ',', (string)$place['address']),
+                    ENT_QUOTES | ENT_HTML5
+                );
             }
             if ((string)$place['city'] != '') {
-                $descriptionParts[] = \trim(\htmlspecialchars($place['zip'] . ' ' . $place['city'], ENT_QUOTES | ENT_HTML5));
+                $descriptionParts[] = \trim(
+                    \htmlspecialchars(
+                        $place['zip'] . ' ' . $place['city'],
+                        ENT_QUOTES | ENT_HTML5
+                    )
+                );
             }
             if ((string)$place['country'] != '') {
                 $countryName = $this->getCountryNameFromIsoCode((string)$place['country']);
@@ -1492,7 +1492,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             'tx_seminars_payment_methods.uid = ' .
             'tx_seminars_seminars_payment_methods_mm.uid_foreign ' .
             'AND tx_seminars_seminars_payment_methods_mm.uid_local = ' .
-            $this->getTopicUid() .
+            $this->getTopicOrSelfUid() .
             \Tx_Oelib_Db::enableFields('tx_seminars_payment_methods'),
             '',
             'tx_seminars_seminars_payment_methods_mm.sorting'
@@ -1525,7 +1525,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             'tx_seminars_payment_methods.uid = ' .
             'tx_seminars_seminars_payment_methods_mm.uid_foreign ' .
             'AND tx_seminars_seminars_payment_methods_mm.uid_local = ' .
-            $this->getTopicUid() .
+            $this->getTopicOrSelfUid() .
             \Tx_Oelib_Db::enableFields('tx_seminars_payment_methods'),
             '',
             'tx_seminars_seminars_payment_methods_mm.sorting'
@@ -1973,7 +1973,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             'tx_seminars_target_groups.title',
             'tx_seminars_target_groups, tx_seminars_seminars_target_groups_mm',
             'tx_seminars_seminars_target_groups_mm.uid_local = ' .
-            $this->getTopicUid() . ' AND tx_seminars_target_groups' .
+            $this->getTopicOrSelfUid() . ' AND tx_seminars_target_groups' .
             '.uid = tx_seminars_seminars_target_groups_mm.uid_foreign' .
             \Tx_Oelib_Db::enableFields('tx_seminars_target_groups'),
             '',
@@ -2007,7 +2007,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             'tx_seminars_target_groups.title',
             'tx_seminars_target_groups, tx_seminars_seminars_target_groups_mm',
             'tx_seminars_seminars_target_groups_mm.uid_local = ' .
-            $this->getTopicUid() . ' AND ' .
+            $this->getTopicOrSelfUid() . ' AND ' .
             'tx_seminars_target_groups.uid = ' .
             'tx_seminars_seminars_target_groups_mm.uid_foreign' .
             \Tx_Oelib_Db::enableFields('tx_seminars_target_groups'),
@@ -3153,7 +3153,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return \Tx_Seminars_OldModel_Event|null
      */
-    private function retrieveTopic()
+    private function loadTopic()
     {
         $result = null;
 
@@ -3192,12 +3192,11 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Checks whether we are a date record and have a topic.
      *
-     * @return bool TRUE if we are a date record and have a topic,
-     *                 FALSE otherwise
+     * @return bool whether we are a date record and have a topic
      */
-    private function isTopicOkay(): bool
+    private function hasTopic(): bool
     {
-        return $this->isEventDate() && $this->topic && $this->topic->isOk();
+        return $this->getTopic() !== null;
     }
 
     /**
@@ -3207,12 +3206,11 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return int either the UID of this record or its topic record,
      *                 depending on whether we are a date record
      */
-    public function getTopicUid(): int
+    public function getTopicOrSelfUid(): int
     {
-        if ($this->isTopicOkay()) {
-            return $this->topic->getUid();
-        }
-        return $this->getUid();
+        $topic = $this->getTopic();
+
+        return $topic !== null ? $topic->getUid() : $this->getUid();
     }
 
     /**
@@ -3226,13 +3224,9 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      */
     protected function hasTopicInteger(string $key): bool
     {
-        if ($this->isTopicOkay()) {
-            $result = $this->topic->hasRecordPropertyInteger($key);
-        } else {
-            $result = $this->hasRecordPropertyInteger($key);
-        }
+        $topic = $this->getTopic();
 
-        return $result;
+        return $topic !== null ? $topic->hasRecordPropertyInteger($key) : $this->hasRecordPropertyInteger($key);
     }
 
     /**
@@ -3247,13 +3241,9 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      */
     protected function getTopicInteger(string $key): int
     {
-        if ($this->isTopicOkay()) {
-            $result = $this->topic->getRecordPropertyInteger($key);
-        } else {
-            $result = $this->getRecordPropertyInteger($key);
-        }
+        $topic = $this->getTopic();
 
-        return $result;
+        return $topic !== null ? $topic->getRecordPropertyInteger($key) : $this->getRecordPropertyInteger($key);
     }
 
     /**
@@ -3267,13 +3257,9 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      */
     private function hasTopicString($key): bool
     {
-        if ($this->isTopicOkay()) {
-            $result = $this->topic->hasRecordPropertyString($key);
-        } else {
-            $result = $this->hasRecordPropertyString($key);
-        }
+        $topic = $this->getTopic();
 
-        return $result;
+        return $topic !== null ? $topic->hasRecordPropertyString($key) : $this->hasRecordPropertyString($key);
     }
 
     /**
@@ -3288,13 +3274,9 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      */
     protected function getTopicString($key): string
     {
-        if ($this->isTopicOkay()) {
-            $result = $this->topic->getRecordPropertyString($key);
-        } else {
-            $result = $this->getRecordPropertyString($key);
-        }
+        $topic = $this->getTopic();
 
-        return $result;
+        return $topic !== null ? $topic->getRecordPropertyString($key) : $this->getRecordPropertyString($key);
     }
 
     /**
@@ -3309,13 +3291,9 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      */
     private function hasTopicDecimal($key): bool
     {
-        if ($this->isTopicOkay()) {
-            $result = $this->topic->hasRecordPropertyDecimal($key);
-        } else {
-            $result = $this->hasRecordPropertyDecimal($key);
-        }
+        $topic = $this->getTopic();
 
-        return $result;
+        return $topic !== null ? $topic->hasRecordPropertyDecimal($key) : $this->hasRecordPropertyDecimal($key);
     }
 
     /**
@@ -3330,13 +3308,9 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      */
     protected function getTopicDecimal($key): string
     {
-        if ($this->isTopicOkay()) {
-            $result = $this->topic->getRecordPropertyDecimal($key);
-        } else {
-            $result = $this->getRecordPropertyDecimal($key);
-        }
+        $topic = $this->getTopic();
 
-        return $result;
+        return $topic !== null ? $topic->getRecordPropertyDecimal($key) : $this->getRecordPropertyDecimal($key);
     }
 
     /**
@@ -3352,9 +3326,9 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      */
     protected function getTopicBoolean($key): bool
     {
-        return $this->isTopicOkay()
-            ? $this->topic->getRecordPropertyBoolean($key)
-            : $this->getRecordPropertyBoolean($key);
+        $topic = $this->getTopic();
+
+        return $topic !== null ? $topic->getRecordPropertyBoolean($key) : $this->getRecordPropertyBoolean($key);
     }
 
     /**
@@ -4129,9 +4103,9 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         $canUnregisterByQueue = $this->getConfValueBoolean(
             'allowUnregistrationWithEmptyWaitingList'
         ) || (
-            $this->hasRegistrationQueue()
+                $this->hasRegistrationQueue()
                 && $this->hasAttendancesOnRegistrationQueue()
-        );
+            );
 
         $deadline = $this->getUnregistrationDeadlineFromModelAndConfiguration();
         if ($deadline !== 0 || $this->hasBeginDate()) {
@@ -4455,7 +4429,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         /** @var \Tx_Seminars_BagBuilder_Category $builder */
         $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Category::class);
-        $builder->limitToEvents($this->getTopicUid());
+        $builder->limitToEvents($this->getTopicOrSelfUid());
         $builder->sortByRelationOrder();
         $bag = $builder->build();
 
@@ -4517,8 +4491,9 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             return [];
         }
 
-        if ($this->isTopicOkay()) {
-            $filesFromTopic = $this->topic->getAttachedFiles($plugin);
+        $topic = $this->getTopic();
+        if ($topic !== null) {
+            $filesFromTopic = $topic->getAttachedFiles($plugin);
         } else {
             $filesFromTopic = [];
         }
@@ -4660,7 +4635,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     {
         /** @var \Tx_Seminars_BagBuilder_Event $builder */
         $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Event::class);
-        $builder->limitToRequiredEventTopics($this->getTopicUid());
+        $builder->limitToRequiredEventTopics($this->getTopicOrSelfUid());
         /** @var \Tx_Seminars_Bag_Event $bag */
         $bag = $builder->build();
 
@@ -4678,7 +4653,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     {
         /** @var \Tx_Seminars_BagBuilder_Event $builder */
         $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Event::class);
-        $builder->limitToDependingEventTopics($this->getTopicUid());
+        $builder->limitToDependingEventTopics($this->getTopicOrSelfUid());
         /** @var \Tx_Seminars_Bag_Event $bag */
         $bag = $builder->build();
 
