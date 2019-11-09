@@ -30,7 +30,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Michael Kramer <m.kramer@mxp.de>
  */
-class HookService
+class HookProvider
 {
     /**
      * @var string

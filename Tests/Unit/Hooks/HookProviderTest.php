@@ -4,7 +4,7 @@ declare(strict_types = 1);
 namespace OliverKlee\Seminars\Tests\Unit\Hooks;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
-use OliverKlee\Seminars\Hooks\HookService;
+use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Interfaces\Hook;
 use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestHookInterface;
 use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestHookImplementor;
@@ -15,7 +15,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Michael Kramer <m.kramer@mxp.de>
  */
-class HookServiceTest extends UnitTestCase
+class HookProviderTest extends UnitTestCase
 {
     /**
      * @var array
@@ -49,11 +49,11 @@ class HookServiceTest extends UnitTestCase
     /**
      * Creates a TestHook accepting Hook object.
      *
-     * @return HookService
+     * @return HookProvider
      */
-    private function createHookObject(): HookService
+    private function createHookObject(): HookProvider
     {
-        return GeneralUtility::makeInstance(HookService::class, TestHookInterface::class);
+        return GeneralUtility::makeInstance(HookProvider::class, TestHookInterface::class);
     }
 
     /*
@@ -101,7 +101,7 @@ class HookServiceTest extends UnitTestCase
      */
     public function hookObjectForTestHookCanBeCreated()
     {
-        self::assertInstanceOf(HookService::class, $this->createHookObject());
+        self::assertInstanceOf(HookProvider::class, $this->createHookObject());
     }
 
     /**
