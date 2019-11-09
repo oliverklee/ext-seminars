@@ -63,7 +63,7 @@ class Tx_Seminars_BagBuilder_Category extends \Tx_Seminars_BagBuilder_Abstract
             $cleanUids . ') AND tx_seminars_seminars_categories_mm' .
             '.uid_foreign = tx_seminars_categories.uid)';
 
-        $this->eventUids = $eventUids;
+        $this->eventUids = $cleanUids;
     }
 
     /**

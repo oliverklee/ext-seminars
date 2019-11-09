@@ -698,7 +698,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
             $hasAccess = $isUserOwner || ($mayManagersEditTheirEvents && $isUserVip);
         } else {
             $eventEditorGroupUid = $this->getConfValueInteger('eventEditorFeGroupID', 's_fe_editing');
-            $hasAccess = ($eventEditorGroupUid !== 0) && $user->hasGroupMembership($eventEditorGroupUid);
+            $hasAccess = $eventEditorGroupUid !== 0 && $user->hasGroupMembership((string)$eventEditorGroupUid);
         }
 
         return $hasAccess ? '' : 'message_noAccessToEventEditor';
@@ -720,7 +720,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $result = '';
         $errorMessage = $this->checkAccess();
 
-        if ($errorMessage != '') {
+        if ($errorMessage !== '') {
             $this->setMarker('error_text', $this->translate($errorMessage));
             $result = $this->getSubpart('ERROR_VIEW');
         }

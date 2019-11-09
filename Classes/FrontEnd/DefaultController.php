@@ -3043,7 +3043,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
             $registrationEditor->setRegistration($this->registration);
         }
 
-        return $registrationEditor->render();
+        return (string)$registrationEditor->render();
     }
 
     /**
