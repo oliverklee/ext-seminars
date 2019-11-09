@@ -8535,7 +8535,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
      */
     public function processEventEditorActionsWithPositiveSeminarPivarCreatesEventEditor()
     {
-        \Tx_Oelib_MapperRegistry::denyDatabaseAccess();
+        $uid = $this->testingFramework->createRecord('tx_seminars_seminars', []);
 
         /** @var \Tx_Seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
         $eventEditor = $this->createPartialMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage']);
@@ -8547,7 +8547,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         );
         $subject->expects(self::once())->method('createEventEditorInstance')->willReturn($eventEditor);
 
-        $subject->piVars['seminar'] = 1;
+        $subject->piVars['seminar'] = (string)$uid;
         $subject->processEventEditorActions();
     }
 
@@ -8556,7 +8556,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
      */
     public function processEventEditorActionsWithUidOfExistingEventChecksPermissions()
     {
-        \Tx_Oelib_MapperRegistry::denyDatabaseAccess();
+        $uid = $this->testingFramework->createRecord('tx_seminars_seminars', []);
 
         /** @var \Tx_Seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
         $eventEditor = $this->createPartialMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage']);
@@ -8571,8 +8571,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
             $eventEditor
         );
 
-        $subject->piVars['seminar'] = \Tx_Oelib_MapperRegistry
-            ::get(\Tx_Seminars_Mapper_Event::class)->getNewGhost()->getUid();
+        $subject->piVars['seminar'] = (string)$uid;
 
         $subject->processEventEditorActions();
     }
