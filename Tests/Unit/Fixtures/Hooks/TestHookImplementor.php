@@ -15,7 +15,7 @@ class TestHookImplementor implements TestHookInterface
     /**
      * @var bool
      */
-    public $wasCalled = false;
+    private $wasCalled = false;
 
     /**
      * This function will be called during HookService tests.
@@ -25,5 +25,13 @@ class TestHookImplementor implements TestHookInterface
     public function testHookMethod()
     {
         $this->wasCalled = true;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getWasCalled()
+    {
+        return $this->wasCalled;
     }
 }

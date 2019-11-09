@@ -71,7 +71,7 @@ class HookServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function hookImplementorImplementsHookHierachie()
+    public function hookImplementorImplementsHookHierachy()
     {
         $implementor = $this->createTestHookImplementor();
 
@@ -83,25 +83,13 @@ class HookServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function hookImplementorImplementsRequiredTestApi()
-    {
-        $implementor = $this->createTestHookImplementor();
-
-        self::assertClassHasAttribute('wasCalled', TestHookImplementor::class);
-        self::assertObjectHasAttribute('wasCalled', $implementor);
-        self::assertFalse($implementor->wasCalled);
-    }
-
-    /**
-     * @test
-     */
     public function hookImplementorTestHookMethodCanBeCalledAndReportsBeingCalled()
     {
         $implementor = $this->createTestHookImplementor();
 
         $implementor->testHookMethod();
 
-        self::assertTrue($implementor->wasCalled);
+        self::assertTrue($implementor->getWasCalled());
     }
 
     /*
