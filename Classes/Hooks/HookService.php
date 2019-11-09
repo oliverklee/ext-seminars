@@ -3,10 +3,16 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Hooks;
 
+use class_implements;
+use defined;
+use get_class;
+use in_array;
+use interface_exists;
+
 use UnexpectedValueException;
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use OliverKlee\Seminars\Interfaces\Hook;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class provides functions for unified hooks.
