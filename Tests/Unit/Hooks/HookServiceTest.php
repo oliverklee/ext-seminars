@@ -42,7 +42,7 @@ class HookServiceTest extends UnitTestCase
      *
      * @return \OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestHookImplementor
      */
-    private function createTestHookImplementor()
+    private function createTestHookImplementor(): TestHookImplementor
     {
         return GeneralUtility::makeInstance(TestHookImplementor::class);
     }
@@ -52,7 +52,7 @@ class HookServiceTest extends UnitTestCase
      *
      * @return \OliverKlee\Seminars\Hooks\HookService
      */
-    private function createHookObject()
+    private function createHookObject(): HookService
     {
         return GeneralUtility::makeInstance(HookService::class, TestHookInterface::class);
     }
