@@ -60,7 +60,6 @@ class HookService
                 1565089078
             );
         }
-
         if (!\in_array(Hook::class, \class_implements($interfaceName), true)) {
             throw new \UnexpectedValueException(
                 'The interface ' . $interfaceName . ' does not extend ' . Hook::class . ' interface.',
@@ -77,31 +76,41 @@ class HookService
      *
      * @return array
      *         the hook objects, will be empty if no hooks have been set
+     */
+    public function getHooks(): array
+    {
+        $this->retrieveHooks();
+
+        return $this->hookObjects;
+    }
+
+    /**
+     * Retrieves the hook objects for the interface.
      *
      * @throws \UnexpectedValueException
      *         if there are registered hook classes that do not implement the
      *         $this->interfaceName interface
      */
-    public function getHooks(): array
+    protected function getHooks(): array
     {
-        if (!$this->hooksHaveBeenRetrieved) {
-            $hookClasses = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][$this->index] ?? [];
-            foreach ((array)$hookClasses as $hookClass) {
-                $hookInstance = GeneralUtility::makeInstance($hookClass);
-                if (!($hookInstance instanceof $this->interfaceName)) {
-                    throw new \UnexpectedValueException(
-                        'The class ' . \get_class($hookInstance) . ' is registered for the ' . $this->index .
-                            ' hook list, but does not implement the ' . $this->interfaceName . ' interface.',
-                        1448901897
-                    );
-                }
-                $this->hookObjects[] = $hookInstance;
-            }
-
-            $this->hooksHaveBeenRetrieved = true;
+        if ($this->hooksHaveBeenRetrieved) {
+            return;
         }
 
-        return $this->hookObjects;
+        $hookClasses = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][$this->index] ?? [];
+        foreach ((array)$hookClasses as $hookClass) {
+            $hookInstance = GeneralUtility::makeInstance($hookClass);
+            if (!($hookInstance instanceof $this->interfaceName)) {
+                throw new \UnexpectedValueException(
+                    'The class ' . \get_class($hookInstance) . ' is registered for the ' . $this->index .
+                        ' hook list, but does not implement the ' . $this->interfaceName . ' interface.',
+                    1448901897
+                );
+            }
+            $this->hookObjects[] = $hookInstance;
+        }
+
+        $this->hooksHaveBeenRetrieved = true;
     }
 }
 
