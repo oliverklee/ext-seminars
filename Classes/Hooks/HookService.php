@@ -16,8 +16,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class HookService
 {
     /**
-     * Interface name to this hook
-     *
      * @var string
      */
     protected $interfaceName = '';
@@ -30,8 +28,6 @@ class HookService
     protected $index = '';
 
     /**
-     * Hook objects built
-     *
      * @var array
      */
     protected $hookObjects = [];

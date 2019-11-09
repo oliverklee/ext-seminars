@@ -18,8 +18,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class HookServiceTest extends UnitTestCase
 {
     /**
-     * @var array backed-up extension configuration of the TYPO3 configuration
-     *            variables
+     * @var array
      */
     private $extConfBackup = [];
 
