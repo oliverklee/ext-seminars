@@ -12,6 +12,9 @@ use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestHookInterface;
  */
 class TestHookImplementor implements TestHookInterface
 {
+    /**
+     * @var bool
+     */
     public $wasCalled = false;
 
     public function testHookMethod()

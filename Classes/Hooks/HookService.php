@@ -37,7 +37,7 @@ class HookService
     protected $hookObjects = [];
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $hooksHaveBeenRetrieved = false;
 
