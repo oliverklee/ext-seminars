@@ -65,8 +65,7 @@ class HookService
 
         if (!\in_array(Hook::class, \class_implements($interfaceName), true)) {
             throw new UnexpectedValueException(
-                'The interface ' . $interfaceName . ' does not extend '
-                    . Hook::class . ' interface.',
+                'The interface ' . $interfaceName . ' does not extend ' . Hook::class . ' interface.',
                 1565088963
             );
         }
