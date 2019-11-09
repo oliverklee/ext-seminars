@@ -91,7 +91,7 @@ class HookService
      *         if there are registered hook classes that do not implement the
      *         $this->interfaceName interface
      */
-    protected function getHooks(): array
+    protected function retrieveHooks(): array
     {
         if ($this->hooksHaveBeenRetrieved) {
             return;
