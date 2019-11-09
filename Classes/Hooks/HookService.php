@@ -1,6 +1,6 @@
 <?php
 
-namespace OliverKlee\Seminars\Service;
+namespace OliverKlee\Seminars\Hooks;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use OliverKlee\Seminars\Interfaces\Hook;
@@ -114,7 +114,7 @@ class HookService
 }
 
 if (defined('TYPO3_MODE')
-    && $GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/Classes/Service/Hook.php']
+    && $GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/Classes/Hooks/Hook.php']
 ) {
-    include_once($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/Classes/Service/Hook.php']);
+    include_once($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/Classes/Hooks/Hook.php']);
 }
