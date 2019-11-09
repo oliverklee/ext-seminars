@@ -44,9 +44,7 @@ class HookServiceTest extends UnitTestCase
      */
     protected function createTestHookImplementor()
     {
-        return GeneralUtility::makeInstance(
-            TestHookImplementor::class
-        );
+        return GeneralUtility::makeInstance(TestHookImplementor::class);
     }
 
     /**
@@ -56,10 +54,7 @@ class HookServiceTest extends UnitTestCase
      */
     protected function createHookObject()
     {
-        return GeneralUtility::makeInstance(
-            HookService::class,
-            TestHookInterface::class
-        );
+        return GeneralUtility::makeInstance(HookService::class, TestHookInterface::class);
     }
 
     /*
@@ -71,10 +66,7 @@ class HookServiceTest extends UnitTestCase
      */
     public function hookImplementorCanBeCreated()
     {
-        self::assertInstanceOf(
-            TestHookImplementor::class,
-            $this->createTestHookImplementor()
-        );
+        self::assertInstanceOf(TestHookImplementor::class, $this->createTestHookImplementor());
     }
 
     /**
@@ -84,15 +76,9 @@ class HookServiceTest extends UnitTestCase
     {
         $implementor = $this->createTestHookImplementor();
 
-        self::assertInstanceOf(
-            Hook::class,
-            $implementor
-        );
+        self::assertInstanceOf(Hook::class, $implementor);
 
-        self::assertInstanceOf(
-            TestHookInterface::class,
-            $implementor
-        );
+        self::assertInstanceOf(TestHookInterface::class, $implementor);
     }
 
     /**
@@ -128,10 +114,7 @@ class HookServiceTest extends UnitTestCase
      */
     public function hookObjectForTestHookCanBeCreated()
     {
-        self::assertInstanceOf(
-            HookService::class,
-            $this->createHookObject()
-        );
+        self::assertInstanceOf(HookService::class, $this->createHookObject());
     }
 
     /**
