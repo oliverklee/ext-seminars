@@ -81,7 +81,7 @@ class HookProvider
         }
 
         $this->interfaceName = $interfaceName;
-        $this->index = empty($index) ? $interfaceName : $index;
+        $this->index = $index === '' ? $interfaceName : $index;
     }
 
     /**
