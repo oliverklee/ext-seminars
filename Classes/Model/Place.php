@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /**
  * This class represents a place.
@@ -13,7 +14,7 @@ class Tx_Seminars_Model_Place extends \Tx_Oelib_Model implements \Tx_Seminars_In
      *
      * @return string our title, will not be empty
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->getAsString('title');
     }
@@ -39,7 +40,7 @@ class Tx_Seminars_Model_Place extends \Tx_Oelib_Model implements \Tx_Seminars_In
      *
      * @return string our address, might be empty
      */
-    public function getAddress()
+    public function getAddress(): string
     {
         return $this->getAsString('address');
     }
@@ -61,7 +62,7 @@ class Tx_Seminars_Model_Place extends \Tx_Oelib_Model implements \Tx_Seminars_In
      *
      * @return bool TRUE if this address has an address, FALSE otherwise
      */
-    public function hasAddress()
+    public function hasAddress(): bool
     {
         return $this->hasString('address');
     }
@@ -71,7 +72,7 @@ class Tx_Seminars_Model_Place extends \Tx_Oelib_Model implements \Tx_Seminars_In
      *
      * @return string the ZIP code, might be empty
      */
-    public function getZip()
+    public function getZip(): string
     {
         return $this->getAsString('zip');
     }
@@ -93,7 +94,7 @@ class Tx_Seminars_Model_Place extends \Tx_Oelib_Model implements \Tx_Seminars_In
      *
      * @return bool TRUE if this place has a ZIP code, FALSE otherwise
      */
-    public function hasZip()
+    public function hasZip(): bool
     {
         return $this->hasString('zip');
     }
@@ -103,7 +104,7 @@ class Tx_Seminars_Model_Place extends \Tx_Oelib_Model implements \Tx_Seminars_In
      *
      * @return string the city name, will not be empty
      */
-    public function getCity()
+    public function getCity(): string
     {
         return $this->getAsString('city');
     }
@@ -167,7 +168,7 @@ class Tx_Seminars_Model_Place extends \Tx_Oelib_Model implements \Tx_Seminars_In
      *
      * @return bool TRUE if this place has a country, FALSE otherwise
      */
-    public function hasCountry()
+    public function hasCountry(): bool
     {
         return $this->getCountry() !== null;
     }
@@ -177,7 +178,7 @@ class Tx_Seminars_Model_Place extends \Tx_Oelib_Model implements \Tx_Seminars_In
      *
      * @return string our homepage, may be empty
      */
-    public function getHomepage()
+    public function getHomepage(): string
     {
         return $this->getAsString('homepage');
     }
@@ -199,7 +200,7 @@ class Tx_Seminars_Model_Place extends \Tx_Oelib_Model implements \Tx_Seminars_In
      *
      * @return bool TRUE if this place has a homepage, FALSE otherwise
      */
-    public function hasHomepage()
+    public function hasHomepage(): bool
     {
         return $this->hasString('homepage');
     }
@@ -209,7 +210,7 @@ class Tx_Seminars_Model_Place extends \Tx_Oelib_Model implements \Tx_Seminars_In
      *
      * @return string our directions, might be empty
      */
-    public function getDirections()
+    public function getDirections(): string
     {
         return $this->getAsString('directions');
     }
@@ -231,7 +232,7 @@ class Tx_Seminars_Model_Place extends \Tx_Oelib_Model implements \Tx_Seminars_In
      *
      * @return bool TRUE if this place has directions, FALSE otherwise
      */
-    public function hasDirections()
+    public function hasDirections(): bool
     {
         return $this->hasString('directions');
     }
@@ -263,7 +264,7 @@ class Tx_Seminars_Model_Place extends \Tx_Oelib_Model implements \Tx_Seminars_In
      *
      * @return string our notes, may be empty
      */
-    public function getNotes()
+    public function getNotes(): string
     {
         return $this->getAsString('notes');
     }

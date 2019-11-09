@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 use SJBR\StaticInfoTables\PiBaseApi;
 use SJBR\StaticInfoTables\Utility\LocalizationUtility;
@@ -158,7 +159,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @throws \BadMethodCallException if no seminar has been set yet
      */
-    public function getSeminar()
+    public function getSeminar(): \Tx_Seminars_OldModel_Event
     {
         if ($this->seminar === null) {
             throw new \BadMethodCallException(
@@ -175,7 +176,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return \Tx_Seminars_Model_Event
      */
-    public function getEvent()
+    public function getEvent(): \Tx_Seminars_Model_Event
     {
         /** @var \Tx_Seminars_Mapper_Event $eventMapper */
         $eventMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
@@ -319,7 +320,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return bool TRUE if we can proceed to saving the registration, FALSE otherwise
      */
-    public function isLastPage()
+    public function isLastPage(): bool
     {
         return $this->currentPageNumber == 2;
     }
@@ -431,7 +432,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return bool TRUE if there are at least $formData['value'] seats available, FALSE otherwise
      */
-    public function canRegisterSeats(array $formData)
+    public function canRegisterSeats(array $formData): bool
     {
         return $this->getRegistrationManager()->canRegisterSeats($this->getSeminar(), (int)$formData['value']);
     }
@@ -444,7 +445,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return bool TRUE if the checkbox is checked or we are not on the confirmation page, FALSE otherwise
      */
-    public function isTermsChecked(array $formData)
+    public function isTermsChecked(array $formData): bool
     {
         return (bool)$formData['value'] || ($this->currentPageNumber != 2);
     }
@@ -455,7 +456,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return bool TRUE if the "travelling terms" checkbox is enabled in the event record *and* via TS setup, FALSE otherwise
      */
-    public function isTerms2Enabled()
+    public function isTerms2Enabled(): bool
     {
         return $this->hasRegistrationFormField(['elementname' => 'terms_2']) && $this->getSeminar()->hasTerms2();
     }
@@ -472,7 +473,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      * @return bool TRUE if the checkbox is checked or disabled in the configuration or if the "finish registration" button
      *                 has not just been clicked, FALSE if it is not checked AND enabled in the configuration
      */
-    public function isTerms2CheckedAndEnabled(array $formData)
+    public function isTerms2CheckedAndEnabled(array $formData): bool
     {
         return (bool)$formData['value'] || !$this->isTerms2Enabled() || ($this->currentPageNumber != 2);
     }
@@ -491,7 +492,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      * @return bool TRUE if a method of payment is selected OR no method could have been selected at all OR this event has no
      *                 price, FALSE if none is selected, but should have been selected
      */
-    public function isMethodOfPaymentSelected(array $formData)
+    public function isMethodOfPaymentSelected(array $formData): bool
     {
         return $this->isRadioButtonSelected($formData['value']) || !$this->getSeminar()->hasPaymentMethods()
             || !$this->getSeminar()->hasAnyPrice() || !$this->showMethodsOfPayment();
@@ -504,7 +505,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return bool TRUE if a radio button is selected, FALSE if none is selected
      */
-    private function isRadioButtonSelected($radioGroupValue)
+    private function isRadioButtonSelected($radioGroupValue): bool
     {
         return (bool)$radioGroupValue;
     }
@@ -520,7 +521,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return bool TRUE if the current form field should be displayed, FALSE otherwise
      */
-    public function hasRegistrationFormField(array $parameters)
+    public function hasRegistrationFormField(array $parameters): bool
     {
         return isset($this->formFieldsToShow[$parameters['elementname']]);
     }
@@ -541,7 +542,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return bool TRUE if the current form field should be displayed, FALSE otherwise
      */
-    public function isFormFieldEnabled($key)
+    public function isFormFieldEnabled($key): bool
     {
         $isFormFieldAlwaysEnabled = in_array($key, $this->alwaysEnabledFormFields, true);
         if ($isFormFieldAlwaysEnabled) {
@@ -668,7 +669,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *                 AND the current event is not completely for free,
      *                 FALSE otherwise
      */
-    public function hasBankDataFormField(array $parameters)
+    public function hasBankDataFormField(array $parameters): bool
     {
         return $this->hasRegistrationFormField($parameters) && $this->getSeminar()->hasAnyPrice();
     }
@@ -685,7 +686,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      * @return string complete URL of the FE page with a message (or NULL
      *                if the confirmation page has not been submitted yet)
      */
-    public function getThankYouAfterRegistrationUrl()
+    public function getThankYouAfterRegistrationUrl(): string
     {
         $sendParameters = false;
         $pageId = $this->getConfValueInteger('thankYouAfterRegistrationPID', 's_registration');
@@ -711,7 +712,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      * @return string complete URL of the FE page with a message (or NULL
      *                if the confirmation page has not been submitted yet)
      */
-    public function getPageToShowAfterUnregistrationUrl()
+    public function getPageToShowAfterUnregistrationUrl(): string
     {
         $sendParameters = false;
         $pageId = $this->getConfValueInteger('pageToShowAfterUnregistrationPID', 's_registration');
@@ -732,7 +733,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return string complete URL of the FE page with a message
      */
-    private function createUrlForRedirection($pageId, $sendParameters = true)
+    private function createUrlForRedirection($pageId, $sendParameters = true): string
     {
         // On freshly updated sites, the configuration value might not be set
         // yet. To avoid breaking the site, we use the event list in this case.
@@ -766,7 +767,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      * @return array[] items from the payment methods table as an array
      *               with the keys "caption" (for the title) and "value" (for the uid)
      */
-    public function populateListPaymentMethods()
+    public function populateListPaymentMethods(): array
     {
         if (!$this->getSeminar()->hasPaymentMethods()) {
             return [];
@@ -796,7 +797,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return int[][] array with sub arrays: [caption => i, value => i]
      **/
-    public function populateSeats()
+    public function populateSeats(): array
     {
         $result = [];
 
@@ -823,7 +824,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return bool TRUE if the payment methods should be displayed, FALSE otherwise
      */
-    public function showMethodsOfPayment()
+    public function showMethodsOfPayment(): bool
     {
         return $this->getSeminar()->hasPaymentMethods()
             && $this->getSeminar()->hasAnyPrice()
@@ -838,7 +839,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return string the currently logged-in FE user's data
      */
-    public function getAllFeUserData()
+    public function getAllFeUserData(): string
     {
         /** @var mixed[] $userData */
         $userData = $GLOBALS['TSFE']->fe_user->user;
@@ -876,7 +877,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return string the entered registration data, nicely formatted as HTML
      */
-    public function getAllRegistrationDataForConfirmation()
+    public function getAllRegistrationDataForConfirmation(): string
     {
         $result = '';
 
@@ -899,7 +900,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *         the data from the corresponding form field formatted in HTML with a heading (or an empty string if the form data
      *         is empty)
      */
-    protected function getFormDataItemAndLabelForConfirmation($key)
+    protected function getFormDataItemAndLabelForConfirmation($key): string
     {
         $currentFormData = $this->getFormDataItemForConfirmationPage($key);
         if ($currentFormData === '') {
@@ -921,7 +922,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return string
      */
-    protected function createLabelForRegistrationElementOnConfirmationPage($key)
+    protected function createLabelForRegistrationElementOnConfirmationPage($key): string
     {
         return rtrim($this->translate('label_' . $key), ':');
     }
@@ -931,7 +932,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return string[]
      */
-    protected function getAllFieldKeysForConfirmationPage()
+    protected function getAllFieldKeysForConfirmationPage(): array
     {
         return $this->registrationFieldsOnConfirmationPage;
     }
@@ -945,7 +946,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @throws \InvalidArgumentException
      */
-    protected function getFormDataItemForConfirmationPage($key)
+    protected function getFormDataItemForConfirmationPage($key): string
     {
         if (!in_array($key, $this->getAllFieldKeysForConfirmationPage(), true)) {
             throw new \InvalidArgumentException(
@@ -1036,7 +1037,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return string the selected price with caption and unit
      */
-    private function getSelectedPrice()
+    private function getSelectedPrice(): string
     {
         $availablePrices = $this->getSeminar()->getAvailablePrices();
 
@@ -1050,7 +1051,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return string the key of the selected price, will always be a valid key
      */
-    private function getKeyOfSelectedPrice()
+    private function getKeyOfSelectedPrice(): string
     {
         $availablePrices = $this->getSeminar()->getAvailablePrices();
         $selectedPrice = $this->getFormValue('price');
@@ -1069,7 +1070,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return string the total price calculated from the form data including the currency unit, eg. "240.00 EUR"
      */
-    private function getTotalPriceWithUnit()
+    private function getTotalPriceWithUnit(): string
     {
         $result = '';
 
@@ -1102,7 +1103,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      * @return string the caption of the selected payment method or an empty
      *                string if no valid payment method has been selected
      */
-    private function getSelectedPaymentMethod()
+    private function getSelectedPaymentMethod(): string
     {
         $result = '';
         $availablePaymentMethods = $this->populateListPaymentMethods();
@@ -1131,7 +1132,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return string the captions of the selected options, separated by CR
      */
-    private function getCaptionsForSelectedOptions(array $availableOptions, array $selectedOptions)
+    private function getCaptionsForSelectedOptions(array $availableOptions, array $selectedOptions): string
     {
         $result = '';
 
@@ -1155,7 +1156,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return string the already entered registration data, nicely formatted as HTML
      */
-    public function getBillingAddress()
+    public function getBillingAddress(): string
     {
         $result = '';
 
@@ -1194,7 +1195,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return bool TRUE if the field is non-empty or "bank transfer" is not selected
      */
-    public function hasBankData(array $formData)
+    public function hasBankData(array $formData): bool
     {
         $result = true;
 
@@ -1225,7 +1226,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return string the contents of the element
      */
-    public function getFeUserData(array $params)
+    public function getFeUserData(array $params): string
     {
         $result = $this->retrieveDataFromSession($params);
 
@@ -1262,7 +1263,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *               array with the keys "caption" (for the title) and "value"
      *               (in this case, the same as the caption)
      */
-    public function populateListCountries()
+    public function populateListCountries(): array
     {
         $this->initStaticInfo();
         /** @var string[] $allCountries */
@@ -1287,7 +1288,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return string the default country's localized name, will be empty if there is no default country
      */
-    private function getDefaultCountry()
+    private function getDefaultCountry(): string
     {
         $defaultCountryCode = \Tx_Oelib_ConfigurationRegistry::get(
             'plugin.tx_staticinfotables_pi1'
@@ -1310,7 +1311,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return array[] items from the checkboxes table as an array with the keys "caption" (for the title) and "value" (for the uid)
      */
-    public function populateCheckboxes()
+    public function populateCheckboxes(): array
     {
         $result = [];
 
@@ -1327,7 +1328,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return bool TRUE if we have a non-empty list of checkboxes AND this list should be displayed, FALSE otherwise
      */
-    public function hasCheckboxes()
+    public function hasCheckboxes(): bool
     {
         return $this->getSeminar()->hasCheckboxes() && $this->hasRegistrationFormField(['elementname' => 'checkboxes']);
     }
@@ -1337,7 +1338,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return array[] items from the lodgings table as an array with the keys "caption" (for the title) and "value" (for the uid)
      */
-    public function populateLodgings()
+    public function populateLodgings(): array
     {
         $result = [];
 
@@ -1357,7 +1358,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return bool TRUE if at least one item is selected or no lodging options can be selected
      */
-    public function isLodgingSelected(array $formData)
+    public function isLodgingSelected(array $formData): bool
     {
         return !empty($formData['value']) || !$this->hasLodgings();
     }
@@ -1368,7 +1369,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return bool TRUE if we have a non-empty list of lodging options and this list should be displayed, FALSE otherwise
      */
-    public function hasLodgings()
+    public function hasLodgings(): bool
     {
         return $this->getSeminar()->hasLodgings() && $this->hasRegistrationFormField(['elementname' => 'lodgings']);
     }
@@ -1378,7 +1379,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return array[] items from the foods table as an array with the keys "caption" (for the title) and "value" (for the uid)
      */
-    public function populateFoods()
+    public function populateFoods(): array
     {
         $result = [];
 
@@ -1395,7 +1396,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return bool TRUE if we have a non-empty list of food options and this list should be displayed, FALSE otherwise
      */
-    public function hasFoods()
+    public function hasFoods(): bool
     {
         return $this->getSeminar()->hasFoods() && $this->hasRegistrationFormField(['elementname' => 'foods']);
     }
@@ -1409,7 +1410,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return bool TRUE if at least one item is selected or no food options can be selected
      */
-    public function isFoodSelected(array $formData)
+    public function isFoodSelected(array $formData): bool
     {
         return !empty($formData['value']) || !$this->hasFoods();
     }
@@ -1417,7 +1418,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
     /**
      * @return \Tx_Seminars_Model_FrontEndUser
      */
-    protected function getLoggedInUser()
+    protected function getLoggedInUser(): \Tx_Seminars_Model_FrontEndUser
     {
         return \Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
     }
@@ -1427,7 +1428,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return string[][] available prices as an array with the keys "caption" (for the title) and "value"
      */
-    public function populatePrices()
+    public function populatePrices(): array
     {
         return $this->getRegistrationManager()->getPricesAvailableForUser(
             $this->getSeminar(),
@@ -1447,7 +1448,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      * @return bool true if a valid price is selected or the price field
      *                 is hidden, false if none is selected, but could have been selected
      */
-    public function isValidPriceSelected(array $formData)
+    public function isValidPriceSelected(array $formData): bool
     {
         return $this->getSeminar()->isPriceAvailable($formData['value'])
             || !$this->hasRegistrationFormField(['elementname' => 'price']);
@@ -1464,7 +1465,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return int the UID of the preselected payment method or 0 if should will be preselected
      */
-    public function getPreselectedPaymentMethod()
+    public function getPreselectedPaymentMethod(): int
     {
         $availablePaymentMethods = $this->populateListPaymentMethods();
         if (count($availablePaymentMethods) === 1) {
@@ -1541,7 +1542,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return int the UID of the payment method that has been saved in the FE user session or 0 if there is none
      */
-    private function retrieveSavedMethodOfPayment()
+    private function retrieveSavedMethodOfPayment(): int
     {
         return (int)$this->retrieveDataFromSession(['key' => 'method_of_payment']);
     }
@@ -1556,7 +1557,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return string the data stored in the FE user session under the given key, might be empty
      */
-    public function retrieveDataFromSession(array $parameters)
+    public function retrieveDataFromSession(array $parameters): string
     {
         return \Tx_Oelib_Session::getInstance(\Tx_Oelib_Session::TYPE_USER)
             ->getAsString($this->prefixId . '_' . $parameters['key']);
@@ -1568,7 +1569,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return string a name to prefill the account owner
      */
-    public function prefillAccountOwner()
+    public function prefillAccountOwner(): string
     {
         $result = $this->retrieveDataFromSession(['key' => 'account_owner']);
 
@@ -1682,7 +1683,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return string a localized string displaying the number of the current and the last page
      */
-    public function getStepCounter()
+    public function getStepCounter(): string
     {
         $lastPageNumberForDisplay = $this->getConfValueInteger('numberOfLastRegistrationPage');
         $currentPageNumber = $this->getConfValueInteger('numberOfFirstRegistrationPage') + $this->currentPageNumber;
@@ -1734,7 +1735,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return array[] the entered person's data, will be empty if no additional persons have been registered
      */
-    public function getAdditionalRegisteredPersonsData()
+    public function getAdditionalRegisteredPersonsData(): array
     {
         $jsonEncodedData = $this->getFormValue('structured_attendees_names');
         if (!is_string($jsonEncodedData) || $jsonEncodedData === '') {
@@ -1755,7 +1756,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return int the number of entered persons, will be >= 0
      */
-    public function getNumberOfEnteredPersons()
+    public function getNumberOfEnteredPersons(): int
     {
         if ($this->isFormFieldEnabled('registered_themselves')) {
             $formData = (int)$this->getFormValue('registered_themselves');
@@ -1773,7 +1774,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return bool whether the number of seats matches the number of registered persons
      */
-    public function validateNumberOfRegisteredPersons()
+    public function validateNumberOfRegisteredPersons(): bool
     {
         if ((int)$this->getFormValue('seats') <= 0) {
             return false;
@@ -1794,7 +1795,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *         TRUE if either additional persons as FE users are disabled or all entered e-mail addresses are non-empty and valid,
      *         FALSE otherwise
      */
-    public function validateAdditionalPersonsEMailAddresses()
+    public function validateAdditionalPersonsEMailAddresses(): bool
     {
         if (!$this->isFormFieldEnabled('attendees_names')) {
             return true;
@@ -1822,7 +1823,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return string the localized error message, will be empty if both numbers match
      */
-    public function getMessageForSeatsNotMatchingRegisteredPersons()
+    public function getMessageForSeatsNotMatchingRegisteredPersons(): string
     {
         $seats = (int)$this->getFormValue('seats');
         $persons = $this->getNumberOfEnteredPersons();
@@ -1841,7 +1842,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
     /**
      * @return \Tx_Seminars_Service_RegistrationManager
      */
-    private function getRegistrationManager()
+    private function getRegistrationManager(): \Tx_Seminars_Service_RegistrationManager
     {
         return \Tx_Seminars_Service_RegistrationManager::getInstance();
     }

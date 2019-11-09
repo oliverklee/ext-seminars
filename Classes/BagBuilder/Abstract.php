@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -71,7 +72,7 @@ abstract class Tx_Seminars_BagBuilder_Abstract
      *
      * @return \Tx_Seminars_Bag_Abstract customized, newly-created bag
      */
-    public function build()
+    public function build(): \Tx_Seminars_Bag_Abstract
     {
         /** @var \Tx_Seminars_Bag_Abstract $bag */
         $bag = GeneralUtility::makeInstance(
@@ -110,7 +111,7 @@ abstract class Tx_Seminars_BagBuilder_Abstract
      *
      * @return void
      */
-    public function setSourcePages($sourcePagePids, $recursionDepth = 0)
+    public function setSourcePages(string $sourcePagePids, int $recursionDepth = 0)
     {
         if (!preg_match('/^([\\d+,] *)*\\d+$/', $sourcePagePids)) {
             unset($this->whereClauseParts['pages']);
@@ -128,7 +129,7 @@ abstract class Tx_Seminars_BagBuilder_Abstract
      * @return bool TRUE if source pages have already been set, FALSE
      *                 otherwise
      */
-    public function hasSourcePages()
+    public function hasSourcePages(): bool
     {
         return isset($this->whereClauseParts['pages']);
     }
@@ -156,7 +157,7 @@ abstract class Tx_Seminars_BagBuilder_Abstract
      * @return string complete WHERE clause for the bag to create, will
      *                not be empty
      */
-    public function getWhereClause()
+    public function getWhereClause(): string
     {
         if (empty($this->whereClauseParts)) {
             return '1=1';
@@ -212,7 +213,7 @@ abstract class Tx_Seminars_BagBuilder_Abstract
      *
      * @return void
      */
-    public function addAdditionalTableName($additionalTableName)
+    public function addAdditionalTableName(string $additionalTableName)
     {
         if ($additionalTableName == '') {
             throw new \InvalidArgumentException('The parameter $additionalTableName must not be empty.', 1333292599);
@@ -229,7 +230,7 @@ abstract class Tx_Seminars_BagBuilder_Abstract
      *
      * @return void
      */
-    public function removeAdditionalTableName($additionalTableName)
+    public function removeAdditionalTableName(string $additionalTableName)
     {
         if ($additionalTableName == '') {
             throw new \InvalidArgumentException('The parameter $additionalTableName must not be empty.', 1333292576);
@@ -252,7 +253,7 @@ abstract class Tx_Seminars_BagBuilder_Abstract
      *
      * @return void
      */
-    public function setOrderBy($orderBy)
+    public function setOrderBy(string $orderBy)
     {
         $this->orderBy = $orderBy;
     }

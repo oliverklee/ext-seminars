@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /**
  * This class represents a registration for an event.
@@ -13,7 +14,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return string the title of this registration, will not be empty
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->getAsString('title');
     }
@@ -63,7 +64,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return \Tx_Seminars_Model_Event the event of this registration
      */
-    public function getEvent()
+    public function getEvent(): \Tx_Seminars_Model_Event
     {
         return $this->getAsModel('seminar');
     }
@@ -77,7 +78,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @see getEvent
      */
-    public function getSeminar()
+    public function getSeminar(): \Tx_Seminars_Model_Event
     {
         return $this->getEvent();
     }
@@ -115,7 +116,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return bool TRUE if this registration is on the registration queue, FALSE otherwise
      */
-    public function isOnRegistrationQueue()
+    public function isOnRegistrationQueue(): bool
     {
         return $this->getAsBoolean('registration_queue');
     }
@@ -137,7 +138,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return string the name of the price of this registration, e.g. "Price regular", might be empty
      */
-    public function getPrice()
+    public function getPrice(): string
     {
         return $this->getAsString('price');
     }
@@ -161,7 +162,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return int the number of registered seats of this registration, will be >= 0
      */
-    public function getSeats()
+    public function getSeats(): int
     {
         return $this->getAsInteger('seats');
     }
@@ -191,7 +192,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return bool TRUE if the front-end user registered themselves, FALSE otherwise
      */
-    public function hasRegisteredThemselves()
+    public function hasRegisteredThemselves(): bool
     {
         return $this->getAsBoolean('registered_themselves');
     }
@@ -213,7 +214,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return float the total price of this registration, will be >= 0
      */
-    public function getTotalPrice()
+    public function getTotalPrice(): float
     {
         return $this->getAsFloat('total_price');
     }
@@ -241,7 +242,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return string the names of the attendees of this registration separated by CRLF, might be empty
      */
-    public function getAttendeesNames()
+    public function getAttendeesNames(): string
     {
         return $this->getAsString('attendees_names');
     }
@@ -265,7 +266,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return \Tx_Oelib_List additional persons, will be empty if there are none
      */
-    public function getAdditionalPersons()
+    public function getAdditionalPersons(): \Tx_Oelib_List
     {
         return $this->getAsList('additional_persons');
     }
@@ -287,7 +288,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return bool TRUE if this registration has a payment date, FALSE otherwise
      */
-    public function isPaid()
+    public function isPaid(): bool
     {
         return $this->getPaymentDateAsUnixTimestamp() > 0;
     }
@@ -297,7 +298,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return int the payment date of this registration as a UNIX timestamp, will be >= 0
      */
-    public function getPaymentDateAsUnixTimestamp()
+    public function getPaymentDateAsUnixTimestamp(): int
     {
         return $this->getAsInteger('datepaid');
     }
@@ -348,7 +349,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return string the account number of the bank account of this registration, might be empty
      */
-    public function getAccountNumber()
+    public function getAccountNumber(): string
     {
         return $this->getAsString('account_number');
     }
@@ -370,7 +371,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return string the bank code of the bank account of this registration, might be empty
      */
-    public function getBankCode()
+    public function getBankCode(): string
     {
         return $this->getAsString('bank_code');
     }
@@ -392,7 +393,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return string the bank name of the bank account of this registration, might be empty
      */
-    public function getBankName()
+    public function getBankName(): string
     {
         return $this->getAsString('bank_name');
     }
@@ -414,7 +415,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return string the name of the owner of the bank account of this registration, might be empty
      */
-    public function getAccountOwner()
+    public function getAccountOwner(): string
     {
         return $this->getAsString('account_owner');
     }
@@ -436,7 +437,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return string the name of the company of this registration, might be empty
      */
-    public function getCompany()
+    public function getCompany(): string
     {
         return $this->getAsString('company');
     }
@@ -458,7 +459,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return string the name of this registration, might be empty
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->getAsString('name');
     }
@@ -484,7 +485,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *                 - \Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE
      *                 - \Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN
      */
-    public function getGender()
+    public function getGender(): int
     {
         return $this->getAsInteger('gender');
     }
@@ -526,7 +527,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return string the address of this registration, will be empty
      */
-    public function getAddress()
+    public function getAddress(): string
     {
         return $this->getAsString('address');
     }
@@ -548,7 +549,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return string the ZIP code of this registration, will be empty
      */
-    public function getZip()
+    public function getZip(): string
     {
         return $this->getAsString('zip');
     }
@@ -570,7 +571,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return string the city of this registration, will be empty
      */
-    public function getCity()
+    public function getCity(): string
     {
         return $this->getAsString('city');
     }
@@ -592,7 +593,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return string the country name of this registration, will be empty
      */
-    public function getCountry()
+    public function getCountry(): string
     {
         return $this->getAsString('country');
     }
@@ -614,7 +615,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return string the phone number of this registration, will be empty
      */
-    public function getPhone()
+    public function getPhone(): string
     {
         return $this->getAsString('telephone');
     }
@@ -636,7 +637,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return string the e-mail address of this registration, will be empty
      */
-    public function getEmailAddress()
+    public function getEmailAddress(): string
     {
         return $this->getAsString('email');
     }
@@ -658,7 +659,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return bool TRUE if the attendees of this registration have attended the event, FALSE otherwise
      */
-    public function hasAttended()
+    public function hasAttended(): bool
     {
         return $this->getAsBoolean('been_there');
     }
@@ -668,7 +669,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return string the interests of this registration, will be empty
      */
-    public function getInterests()
+    public function getInterests(): string
     {
         return $this->getAsString('interests');
     }
@@ -690,7 +691,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return string the expectations of this registration, will be empty
      */
-    public function getExpectations()
+    public function getExpectations(): string
     {
         return $this->getAsString('expectations');
     }
@@ -712,7 +713,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return string the background knowledge of this registration, will be empty
      */
-    public function getBackgroundKnowledge()
+    public function getBackgroundKnowledge(): string
     {
         return $this->getAsString('background_knowledge');
     }
@@ -734,7 +735,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return string the accommodation of this registration, will be empty
      */
-    public function getAccommodation()
+    public function getAccommodation(): string
     {
         return $this->getAsString('accommodation');
     }
@@ -756,7 +757,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return \Tx_Oelib_List the lodgings of this registration
      */
-    public function getLodgings()
+    public function getLodgings(): \Tx_Oelib_List
     {
         return $this->getAsList('lodgings');
     }
@@ -766,7 +767,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return string the food of this registration, will be empty
      */
-    public function getFood()
+    public function getFood(): string
     {
         return $this->getAsString('food');
     }
@@ -788,7 +789,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return \Tx_Oelib_List the foods of this registration
      */
-    public function getFoods()
+    public function getFoods(): \Tx_Oelib_List
     {
         return $this->getAsList('foods');
     }
@@ -798,7 +799,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return string where the attendee has heard of the event of this registration, will be empty
      */
-    public function getKnownFrom()
+    public function getKnownFrom(): string
     {
         return $this->getAsString('known_from');
     }
@@ -821,7 +822,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return string the notes of this registration, will be empty
      */
-    public function getNotes()
+    public function getNotes(): string
     {
         return $this->getAsString('notes');
     }
@@ -843,7 +844,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return int the number of kids of this registration, will be >= 0
      */
-    public function getKids()
+    public function getKids(): int
     {
         return $this->getAsInteger('kids');
     }
@@ -871,7 +872,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return \Tx_Oelib_List the checkboxes of this registration
      */
-    public function getCheckboxes()
+    public function getCheckboxes(): \Tx_Oelib_List
     {
         return $this->getAsList('checkboxes');
     }

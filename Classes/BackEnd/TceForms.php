@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 namespace OliverKlee\Seminars\BackEnd;
 
 use TYPO3\CMS\Backend\Utility\BackendUtility;
@@ -82,7 +83,7 @@ class TceForms
      *
      * @return mixed[][] wizards array with replaced table markers
      */
-    public static function replaceTables(array $array, $table)
+    public static function replaceTables(array $array, $table): array
     {
         $array['add']['params']['table'] =
             str_replace('###TABLE###', $table, $array['add']['params']['table']);
@@ -99,7 +100,7 @@ class TceForms
      *
      * @return mixed[]
      */
-    public static function getWizardConfiguration()
+    public static function getWizardConfiguration(): array
     {
         return [
             '_PADDING' => 5,

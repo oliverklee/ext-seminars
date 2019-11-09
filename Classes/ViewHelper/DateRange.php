@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /**
  * This class represents a view helper for rendering date ranges.
@@ -38,7 +39,7 @@ class Tx_Seminars_ViewHelper_DateRange
      *
      * @return string the timespan date
      */
-    public function render(\Tx_Seminars_Model_AbstractTimeSpan $timeSpan, $dash = '&#8211;')
+    public function render(\Tx_Seminars_Model_AbstractTimeSpan $timeSpan, $dash = '&#8211;'): string
     {
         if (!$timeSpan->hasBeginDate()) {
             return $this->translator->translate('message_willBeAnnounced');
@@ -69,7 +70,7 @@ class Tx_Seminars_ViewHelper_DateRange
      *
      * @return string the abbreviated date range
      */
-    protected function getAsAbbreviatedDateRange($beginDate, $endDate)
+    protected function getAsAbbreviatedDateRange($beginDate, $endDate): string
     {
         // Are the years different? Then include the complete begin date.
         if (!$this->isSameYear($beginDate, $endDate)) {
@@ -92,7 +93,7 @@ class Tx_Seminars_ViewHelper_DateRange
      *
      * @return bool TRUE if $beginDate and $endDate are on the same day, otherwise FALSE
      */
-    protected function isSameDay($beginDate, $endDate)
+    protected function isSameDay($beginDate, $endDate): bool
     {
         return $this->getAsDateFormatYmd($beginDate) === $this->getAsDateFormatYmd($endDate);
     }
@@ -105,7 +106,7 @@ class Tx_Seminars_ViewHelper_DateRange
      *
      * @return bool TRUE if $beginDate and $endDate are in the same month, otherwise FALSE
      */
-    protected function isSameMonth($beginDate, $endDate)
+    protected function isSameMonth($beginDate, $endDate): bool
     {
         return $this->getAsDateFormatM($beginDate) === $this->getAsDateFormatM($endDate);
     }
@@ -118,7 +119,7 @@ class Tx_Seminars_ViewHelper_DateRange
      *
      * @return bool TRUE if $beginDate and $endDate are in the same year, otherwise FALSE
      */
-    protected function isSameYear($beginDate, $endDate)
+    protected function isSameYear($beginDate, $endDate): bool
     {
         return $this->getAsDateFormatY($beginDate) === $this->getAsDateFormatY($endDate);
     }
@@ -130,7 +131,7 @@ class Tx_Seminars_ViewHelper_DateRange
      *
      * @return string the UNIX timestamp rendered using the strftime format in plugin.tx_seminars_seminars.dateFormatYMD
      */
-    protected function getAsDateFormatYmd($timestamp)
+    protected function getAsDateFormatYmd($timestamp): string
     {
         return strftime($this->configuration->getAsString('dateFormatYMD'), $timestamp);
     }
@@ -142,7 +143,7 @@ class Tx_Seminars_ViewHelper_DateRange
      *
      * @return string the UNIX timestamp rendered using the strftime format in plugin.tx_seminars_seminars.dateFormatY
      */
-    protected function getAsDateFormatY($timestamp)
+    protected function getAsDateFormatY($timestamp): string
     {
         return strftime($this->configuration->getAsString('dateFormatY'), $timestamp);
     }
@@ -154,7 +155,7 @@ class Tx_Seminars_ViewHelper_DateRange
      *
      * @return string the UNIX timestamp rendered using the strftime format in plugin.tx_seminars_seminars.dateFormatM
      */
-    protected function getAsDateFormatM($timestamp)
+    protected function getAsDateFormatM($timestamp): string
     {
         return strftime($this->configuration->getAsString('dateFormatM'), $timestamp);
     }
@@ -166,7 +167,7 @@ class Tx_Seminars_ViewHelper_DateRange
      *
      * @return string the UNIX timestamp rendered using the strftime format in plugin.tx_seminars_seminars.dateFormatMD
      */
-    protected function getAsDateFormatMd($timestamp)
+    protected function getAsDateFormatMd($timestamp): string
     {
         return strftime($this->configuration->getAsString('dateFormatMD'), $timestamp);
     }
@@ -178,7 +179,7 @@ class Tx_Seminars_ViewHelper_DateRange
      *
      * @return string the UNIX timestamp rendered using the strftime format in plugin.tx_seminars_seminars.dateFormatD
      */
-    protected function getAsDateFormatD($timestamp)
+    protected function getAsDateFormatD($timestamp): string
     {
         return strftime($this->configuration->getAsString('dateFormatD'), $timestamp);
     }

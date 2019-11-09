@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 namespace OliverKlee\Seminars\BackEnd;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -48,7 +49,7 @@ class RegistrationsList extends AbstractList
      *
      * @return string the HTML source code to display
      */
-    public function show()
+    public function show(): string
     {
         $content = '';
 
@@ -131,7 +132,7 @@ class RegistrationsList extends AbstractList
      *
      * @return bool TRUE if the generated list is not empty, FALSE otherwise
      */
-    private function setRegistrationTableMarkers($registrationsToShow)
+    private function setRegistrationTableMarkers($registrationsToShow): bool
     {
         /** @var \Tx_Seminars_BagBuilder_Registration $builder */
         $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Registration::class);

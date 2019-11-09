@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Resource\FileRepository;
@@ -31,7 +32,7 @@ class Tx_Seminars_OldModel_Speaker extends \Tx_Seminars_OldModel_Abstract
      *
      * @return string our organization (or '' if there is an error)
      */
-    public function getOrganization()
+    public function getOrganization(): string
     {
         return $this->getRecordPropertyString('organization');
     }
@@ -41,7 +42,7 @@ class Tx_Seminars_OldModel_Speaker extends \Tx_Seminars_OldModel_Abstract
      *
      * @return bool TRUE if this speaker has an organization, FALSE otherwise
      */
-    public function hasOrganization()
+    public function hasOrganization(): bool
     {
         return $this->hasRecordPropertyString('organization');
     }
@@ -51,7 +52,7 @@ class Tx_Seminars_OldModel_Speaker extends \Tx_Seminars_OldModel_Abstract
      *
      * @return string our homepage (or '' if there is an error)
      */
-    public function getHomepage()
+    public function getHomepage(): string
     {
         return $this->getRecordPropertyString('homepage');
     }
@@ -61,7 +62,7 @@ class Tx_Seminars_OldModel_Speaker extends \Tx_Seminars_OldModel_Abstract
      *
      * @return bool TRUE if this speaker has a homepage, FALSE otherwise
      */
-    public function hasHomepage()
+    public function hasHomepage(): bool
     {
         return $this->hasRecordPropertyString('homepage');
     }
@@ -73,7 +74,7 @@ class Tx_Seminars_OldModel_Speaker extends \Tx_Seminars_OldModel_Abstract
      *
      * @return string our description (or '' if there is an error)
      */
-    public function getDescription(AbstractPlugin $plugin)
+    public function getDescription(AbstractPlugin $plugin): string
     {
         return $plugin->pi_RTEcssText(
             $this->getRecordPropertyString('description')
@@ -85,7 +86,7 @@ class Tx_Seminars_OldModel_Speaker extends \Tx_Seminars_OldModel_Abstract
      *
      * @return string our description (or '' if there is an error)
      */
-    public function getDescriptionRaw()
+    public function getDescriptionRaw(): string
     {
         return $this->getRecordPropertyString('description');
     }
@@ -95,7 +96,7 @@ class Tx_Seminars_OldModel_Speaker extends \Tx_Seminars_OldModel_Abstract
      *
      * @return bool TRUE if this speaker has a description, FALSE otherwise
      */
-    public function hasDescription()
+    public function hasDescription(): bool
     {
         return $this->hasRecordPropertyString('description');
     }
@@ -106,7 +107,7 @@ class Tx_Seminars_OldModel_Speaker extends \Tx_Seminars_OldModel_Abstract
      * @return bool TRUE if we have any skills related to this speaker,
      *                 FALSE otherwise
      */
-    public function hasSkills()
+    public function hasSkills(): bool
     {
         return $this->hasRecordPropertyInteger('skills');
     }
@@ -117,7 +118,7 @@ class Tx_Seminars_OldModel_Speaker extends \Tx_Seminars_OldModel_Abstract
      * @return string our skills list (or an empty string if there are no
      *                skills for this speaker or there is an error)
      */
-    public function getSkillsShort()
+    public function getSkillsShort(): string
     {
         if (!$this->hasSkills()) {
             return '';
@@ -150,7 +151,7 @@ class Tx_Seminars_OldModel_Speaker extends \Tx_Seminars_OldModel_Abstract
      * @return int the number of skills associated with this speaker,
      *                 will be >= 0
      */
-    public function getNumberOfSkills()
+    public function getNumberOfSkills(): int
     {
         return $this->getRecordPropertyInteger('skills');
     }
@@ -160,7 +161,7 @@ class Tx_Seminars_OldModel_Speaker extends \Tx_Seminars_OldModel_Abstract
      *
      * @return string our internal notes (or '' if there is an error)
      */
-    public function getNotes()
+    public function getNotes(): string
     {
         return $this->getRecordPropertyString('notes');
     }
@@ -170,7 +171,7 @@ class Tx_Seminars_OldModel_Speaker extends \Tx_Seminars_OldModel_Abstract
      *
      * @return string our address (or '' if there is an error)
      */
-    public function getAddress()
+    public function getAddress(): string
     {
         return $this->getRecordPropertyString('address');
     }
@@ -180,7 +181,7 @@ class Tx_Seminars_OldModel_Speaker extends \Tx_Seminars_OldModel_Abstract
      *
      * @return string our work phone number (or '' if there is an error)
      */
-    public function getPhoneWork()
+    public function getPhoneWork(): string
     {
         return $this->getRecordPropertyString('phone_work');
     }
@@ -190,7 +191,7 @@ class Tx_Seminars_OldModel_Speaker extends \Tx_Seminars_OldModel_Abstract
      *
      * @return string our home phone number (or '' if there is an error)
      */
-    public function getPhoneHome()
+    public function getPhoneHome(): string
     {
         return $this->getRecordPropertyString('phone_home');
     }
@@ -200,7 +201,7 @@ class Tx_Seminars_OldModel_Speaker extends \Tx_Seminars_OldModel_Abstract
      *
      * @return string our mobile phone number (or '' if there is an error)
      */
-    public function getPhoneMobile()
+    public function getPhoneMobile(): string
     {
         return $this->getRecordPropertyString('phone_mobile');
     }
@@ -210,7 +211,7 @@ class Tx_Seminars_OldModel_Speaker extends \Tx_Seminars_OldModel_Abstract
      *
      * @return string our fax number (or '' if there is an error)
      */
-    public function getFax()
+    public function getFax(): string
     {
         return $this->getRecordPropertyString('fax');
     }
@@ -220,7 +221,7 @@ class Tx_Seminars_OldModel_Speaker extends \Tx_Seminars_OldModel_Abstract
      *
      * @return string our e-mail address (or '' if there is an error)
      */
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->getRecordPropertyString('email');
     }
@@ -234,7 +235,7 @@ class Tx_Seminars_OldModel_Speaker extends \Tx_Seminars_OldModel_Abstract
      *                speaker has no homepage just the speaker name, will not
      *                be empty
      */
-    public function getLinkedTitle(\Tx_Oelib_TemplateHelper $plugin)
+    public function getLinkedTitle(\Tx_Oelib_TemplateHelper $plugin): string
     {
         $safeTitle = \htmlspecialchars($this->getTitle(), ENT_QUOTES | ENT_HTML5);
 
@@ -260,7 +261,7 @@ class Tx_Seminars_OldModel_Speaker extends \Tx_Seminars_OldModel_Abstract
      *                 GENDER_FEMALE or
      *                 GENDER_UNKNOWN if the speaker has no gender
      */
-    public function getGender()
+    public function getGender(): int
     {
         return $this->getRecordPropertyInteger('gender');
     }
@@ -285,7 +286,7 @@ class Tx_Seminars_OldModel_Speaker extends \Tx_Seminars_OldModel_Abstract
      * @return bool TRUE if the speaker has a cancelation period, FALSE
      *                 otherwise
      */
-    public function hasCancelationPeriod()
+    public function hasCancelationPeriod(): bool
     {
         return $this->hasRecordPropertyInteger('cancelation_period');
     }
@@ -295,7 +296,7 @@ class Tx_Seminars_OldModel_Speaker extends \Tx_Seminars_OldModel_Abstract
      *
      * @return int the cancelation period in days, will be >= 0
      */
-    public function getCancelationPeriodInDays()
+    public function getCancelationPeriodInDays(): int
     {
         return $this->getRecordPropertyInteger('cancelation_period');
     }
@@ -345,7 +346,7 @@ class Tx_Seminars_OldModel_Speaker extends \Tx_Seminars_OldModel_Abstract
      *
      * @return bool TRUE if the speaker is hidden, FALSE otherwise
      */
-    public function isHidden()
+    public function isHidden(): bool
     {
         return $this->getRecordPropertyBoolean('hidden');
     }
@@ -353,7 +354,7 @@ class Tx_Seminars_OldModel_Speaker extends \Tx_Seminars_OldModel_Abstract
     /**
      * @return bool
      */
-    public function hasImage()
+    public function hasImage(): bool
     {
         return $this->getRecordPropertyInteger('image') > 0;
     }
@@ -375,7 +376,7 @@ class Tx_Seminars_OldModel_Speaker extends \Tx_Seminars_OldModel_Abstract
     /**
      * @return FileRepository
      */
-    private function getFileRepository()
+    private function getFileRepository(): FileRepository
     {
         /** @var FileRepository $fileRepository */
         $fileRepository = GeneralUtility::makeInstance(FileRepository::class);

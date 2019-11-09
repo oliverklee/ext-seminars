@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /**
  * This class represents a category.
@@ -13,7 +14,7 @@ class Tx_Seminars_Model_Category extends \Tx_Oelib_Model implements \Tx_Seminars
      *
      * @return string our title, will not be empty
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->getAsString('title');
     }
@@ -41,7 +42,7 @@ class Tx_Seminars_Model_Category extends \Tx_Oelib_Model implements \Tx_Seminars
      *                upload path) of the category, will be empty if the
      *                category has no icon
      */
-    public function getIcon()
+    public function getIcon(): string
     {
         return $this->getAsString('icon');
     }
@@ -63,7 +64,7 @@ class Tx_Seminars_Model_Category extends \Tx_Oelib_Model implements \Tx_Seminars
      *
      * @return bool TRUE if this category has an icon, FALSE otherwise
      */
-    public function hasIcon()
+    public function hasIcon(): bool
     {
         return $this->hasString('icon');
     }
@@ -73,7 +74,7 @@ class Tx_Seminars_Model_Category extends \Tx_Oelib_Model implements \Tx_Seminars
      *
      * @return int the single view page, will be 0 if none has been set
      */
-    public function getSingleViewPageUid()
+    public function getSingleViewPageUid(): int
     {
         return $this->getAsInteger('single_view_page');
     }
@@ -84,7 +85,7 @@ class Tx_Seminars_Model_Category extends \Tx_Oelib_Model implements \Tx_Seminars
      * @return bool
      *         TRUE if this category has a single view page set, FALSE otherwise
      */
-    public function hasSingleViewPageUid()
+    public function hasSingleViewPageUid(): bool
     {
         return $this->hasInteger('single_view_page');
     }

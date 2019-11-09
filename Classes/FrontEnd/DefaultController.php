@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
@@ -217,7 +218,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return string HTML for the plugin
      */
-    public function main($unused, array $conf)
+    public function main($unused, array $conf): string
     {
         $this->init($conf);
         $this->pi_initPIflexForm();
@@ -373,7 +374,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *          if there are registered hook classes that do not implement the
      *          \Tx_Seminars_Interface_Hook_EventListView interface
      */
-    protected function getListViewHooks()
+    protected function getListViewHooks(): array
     {
         if (!$this->listViewHooksHaveBeenRetrieved) {
             $hookClasses = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView'];
@@ -407,7 +408,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *          if there are registered hook classes that do not implement the
      *          \Tx_Seminars_Interface_Hook_EventSingleView interface
      */
-    protected function getSingleViewHooks()
+    protected function getSingleViewHooks(): array
     {
         if (!$this->singleViewHooksHaveBeenRetrieved) {
             $hookClasses = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['singleView'];
@@ -441,7 +442,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return bool TRUE if the seminar UID is valid and the object has been created, FALSE otherwise
      */
-    public function createSeminar($seminarUid, $showHiddenRecords = false)
+    public function createSeminar($seminarUid, $showHiddenRecords = false): bool
     {
         if ($this->seminar !== null) {
             unset($this->seminar);
@@ -488,7 +489,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return bool TRUE if the registration UID is valid and the object has been created, FALSE otherwise
      */
-    public function createRegistration($registrationUid)
+    public function createRegistration($registrationUid): bool
     {
         $result = false;
 
@@ -542,7 +543,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return \Tx_Seminars_OldModel_Event|null
      */
-    public function getSeminar()
+    public function getSeminar(): \Tx_Seminars_OldModel_Event
     {
         return $this->seminar;
     }
@@ -552,7 +553,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return \Tx_Seminars_OldModel_Registration|null
      */
-    public function getRegistration()
+    public function getRegistration(): \Tx_Seminars_OldModel_Registration
     {
         return $this->registration;
     }
@@ -562,7 +563,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return \Tx_Seminars_Service_RegistrationManager the Singleton instance
      */
-    public function getRegistrationManager()
+    public function getRegistrationManager(): \Tx_Seminars_Service_RegistrationManager
     {
         return \Tx_Seminars_Service_RegistrationManager::getInstance();
     }
@@ -589,7 +590,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return string HTML for the link (may be an empty string)
      */
-    protected function getRegistrationsListLink()
+    protected function getRegistrationsListLink(): string
     {
         $result = '';
         $targetPageId = 0;
@@ -639,7 +640,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return string the wrapped label
      */
-    public function getLoginLink($label, $pageId, $eventId = 0)
+    public function getLoginLink($label, $pageId, $eventId = 0): string
     {
         $linkConfiguration = ['parameter' => $pageId];
 
@@ -695,7 +696,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return string HTML for the plugin
      */
-    protected function createSingleView()
+    protected function createSingleView(): string
     {
         $this->hideSubparts(
             $this->getConfValueString('hideFields', 's_template_special'),
@@ -728,7 +729,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return string the rendered single view
      */
-    protected function createSingleViewForExistingEvent()
+    protected function createSingleViewForExistingEvent(): string
     {
         /** @var \Tx_Seminars_Mapper_Event $mapper */
         $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
@@ -1487,7 +1488,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return bool TRUE if online registration is enabled, FALSE otherwise
      */
-    protected function isRegistrationEnabled()
+    protected function isRegistrationEnabled(): bool
     {
         return $this->getConfValueBoolean('enableRegistration');
     }
@@ -1497,7 +1498,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return bool TRUE if a user is logged in, FALSE otherwise
      */
-    public function isLoggedIn()
+    public function isLoggedIn(): bool
     {
         return \Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn();
     }
@@ -1507,7 +1508,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return int
      */
-    protected function getLoggedInFrontEndUserUid()
+    protected function getLoggedInFrontEndUserUid(): int
     {
         $loginManager = \Tx_Oelib_FrontEndLoginManager::getInstance();
         return $loginManager->isLoggedIn() ? $loginManager->getLoggedInUser(
@@ -1589,7 +1590,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return string HTML for the events list (may be an empty string)
      */
-    private function createEventsOnNextDayList()
+    private function createEventsOnNextDayList(): string
     {
         $result = '';
 
@@ -1625,7 +1626,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return string HTML for the events list (may be an empty string)
      */
-    private function createOtherDatesList()
+    private function createOtherDatesList(): string
     {
         $result = '';
 
@@ -1681,7 +1682,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return string HTML code with the event list
      */
-    protected function createListView($whatToDisplay)
+    protected function createListView($whatToDisplay): string
     {
         $result = '';
         $isOkay = true;
@@ -1795,7 +1796,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *                                  containing the seminars or registrations
      *                                  for the list view
      */
-    public function initListView($whatToDisplay = '')
+    public function initListView($whatToDisplay = ''): \Tx_Seminars_Bag_Abstract
     {
         if (\strpos((string)$this->cObj->currentRecord, 'tt_content') !== false) {
             $this->conf['pidList'] = $this->getConfValueString('pages');
@@ -1919,7 +1920,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
     protected function createListTable(
         \Tx_Seminars_Bag_Abstract $seminarOrRegistrationBag,
         $whatToDisplay
-    ) {
+    ): string {
         $result = $this->createListHeader();
         $rowCounter = 0;
 
@@ -1949,7 +1950,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return string HTML output, the table header
      */
-    protected function createListHeader()
+    protected function createListHeader(): string
     {
         $availableColumns = [
             'image',
@@ -1995,7 +1996,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return string HTML output, the table footer
      */
-    protected function createListFooter()
+    protected function createListFooter(): string
     {
         return $this->getSubpart('LIST_FOOTER');
     }
@@ -2017,7 +2018,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      * @return string HTML output, a table row with a class attribute set
      *                (alternative based on odd/even rows)
      */
-    protected function createListRow($rowCounter = 0, $whatToDisplay)
+    protected function createListRow($rowCounter = 0, $whatToDisplay): string
     {
         $result = '';
 
@@ -2214,7 +2215,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      * @return \Tx_Seminars_BagBuilder_Event the seminarBagBuilder object for
      *                                       the list view
      */
-    private function createSeminarBagBuilder()
+    private function createSeminarBagBuilder(): \Tx_Seminars_BagBuilder_Event
     {
         /** @var \Tx_Seminars_BagBuilder_Event $seminarBagBuilder */
         $seminarBagBuilder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Event::class);
@@ -2236,7 +2237,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      * @return \Tx_Seminars_BagBuilder_Registration the registrations for the
      *                                             "my events" list
      */
-    private function createRegistrationBagBuilder()
+    private function createRegistrationBagBuilder(): \Tx_Seminars_BagBuilder_Registration
     {
         /** @var \Tx_Seminars_BagBuilder_Registration $registrationBagBuilder */
         $registrationBagBuilder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Registration::class);
@@ -2256,7 +2257,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      * @return \Tx_Seminars_FrontEnd_RequirementsList
      *         the object to build the requirements list with
      */
-    private function createRequirementsList()
+    private function createRequirementsList(): \Tx_Seminars_FrontEnd_RequirementsList
     {
         /** @var \Tx_Seminars_FrontEnd_RequirementsList $list */
         $list = GeneralUtility::makeInstance(\Tx_Seminars_FrontEnd_RequirementsList::class, $this->conf, $this->cObj);
@@ -2268,7 +2269,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return string the ORDER BY statement for the list view, may be empty
      */
-    private function getOrderByForListView()
+    private function getOrderByForListView(): string
     {
         $orderBy = [];
 
@@ -2305,7 +2306,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return string the heading label, may be completely wrapped in a hyperlink for sorting
      */
-    public function getFieldHeader($fieldName)
+    public function getFieldHeader($fieldName): string
     {
         $label = $this->translate('label_' . $fieldName);
         if (($fieldName === 'price_regular') && $this->getConfValueBoolean(
@@ -2337,7 +2338,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return string the HTML code of the selector widget, may be empty
      */
-    private function getSelectorWidgetIfNecessary($whatToDisplay)
+    private function getSelectorWidgetIfNecessary($whatToDisplay): string
     {
         if ($whatToDisplay != 'seminar_list') {
             return '';
@@ -2498,7 +2499,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return string class attribute value filled with a list a space-separated CSS classes
      */
-    public function getVacanciesClasses(\Tx_Seminars_OldModel_Event $event)
+    public function getVacanciesClasses(\Tx_Seminars_OldModel_Event $event): string
     {
         if (!$event->needsRegistration()
             || (!$event->hasDate(
@@ -2549,7 +2550,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return string HTML with the links, will be empty if the FE user can not edit the current event
      */
-    protected function createAllEditorLinks()
+    protected function createAllEditorLinks(): string
     {
         if (!$this->mayCurrentUserEditCurrentEvent()) {
             return '';
@@ -2573,7 +2574,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return string HTML for the link, will not be empty
      */
-    protected function createEditLink()
+    protected function createEditLink(): string
     {
         return $this->cObj->getTypoLink(
             $this->translate('label_edit'),
@@ -2589,7 +2590,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return string HTML for the link, will not be empty
      */
-    protected function createHideLink()
+    protected function createHideLink(): string
     {
         return $this->createActionLink('hide');
     }
@@ -2601,7 +2602,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return string HTML for the link, will not be empty
      */
-    protected function createUnhideLink()
+    protected function createUnhideLink(): string
     {
         return $this->createActionLink('unhide');
     }
@@ -2613,7 +2614,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return string HTML for the link, will not be empty
      */
-    protected function createCopyLink()
+    protected function createCopyLink(): string
     {
         return $this->createActionLink('copy');
     }
@@ -2627,7 +2628,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return string HTML for the link, will not be empty
      */
-    protected function createActionLink($action)
+    protected function createActionLink($action): string
     {
         $seminarUid = $this->seminar->getUid();
 
@@ -2655,7 +2656,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return bool TRUE if the current user is allowed to edit the current event, FALSE otherwise
      */
-    protected function mayCurrentUserEditCurrentEvent()
+    protected function mayCurrentUserEditCurrentEvent(): bool
     {
         if ($this->seminar->isOwnerFeUser()) {
             return true;
@@ -2893,7 +2894,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return string the link to the CSV export
      */
-    private function getCsvExportLink()
+    private function getCsvExportLink(): string
     {
         return $this->cObj->typoLink(
             $this->translate('label_registrationsAsCsv'),
@@ -2922,7 +2923,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return string HTML code for the registration page
      */
-    protected function createRegistrationPage()
+    protected function createRegistrationPage(): string
     {
         $this->feuser = $GLOBALS['TSFE']->fe_user;
 
@@ -2995,7 +2996,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return string HTML code including the title and error message
      */
-    protected function createRegistrationHeading($errorMessage)
+    protected function createRegistrationHeading($errorMessage): string
     {
         $this->setMarker('registration', $this->translate('label_registration'));
         $this->setMarker('title', $this->seminar ? \htmlspecialchars($this->seminar->getTitle(), ENT_QUOTES | ENT_HTML5) : '');
@@ -3025,7 +3026,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return string HTML code for the form
      */
-    protected function createRegistrationForm()
+    protected function createRegistrationForm(): string
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm $registrationEditor */
         $registrationEditor = GeneralUtility::makeInstance(
@@ -3106,7 +3107,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      * @return string HTML code for the event editor, or an error message if the
      *                FE user doesn't have access to the editor
      */
-    protected function createEventEditorHtml()
+    protected function createEventEditorHtml(): string
     {
         $eventEditor = $this->createEventEditorInstance();
 
@@ -3129,7 +3130,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return \Tx_Seminars_FrontEnd_EventEditor the initialized event editor
      */
-    protected function createEventEditorInstance()
+    protected function createEventEditorInstance(): \Tx_Seminars_FrontEnd_EventEditor
     {
         /** @var \Tx_Seminars_FrontEnd_EventEditor $eventEditor */
         $eventEditor = GeneralUtility::makeInstance(\Tx_Seminars_FrontEnd_EventEditor::class, $this->conf, $this->cObj);
@@ -3148,7 +3149,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      * @return string the icon IMG tag with the given icon, will be empty if the
      *                category has no icon
      */
-    private function createCategoryIcon(array $iconData)
+    private function createCategoryIcon(array $iconData): string
     {
         if ($iconData['icon'] == '') {
             return '';
@@ -3197,7 +3198,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      * @return string the organizers subpart with the data of the organizers,
      *                will be empty if the event has no organizers
      */
-    private function getOrganizersMarkerContent()
+    private function getOrganizersMarkerContent(): string
     {
         if (!$this->seminar->hasOrganizers()) {
             return '';
@@ -3298,7 +3299,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      * @return int the timestamp for the date set in piVars, will be 0 if no
      *                 date was set
      */
-    private function getTimestampFromDatePiVars($fromOrTo)
+    private function getTimestampFromDatePiVars($fromOrTo): int
     {
         if (($this->piVars[$fromOrTo . '_day'] == 0)
             && ($this->piVars[$fromOrTo . '_month'] == 0)
@@ -3319,7 +3320,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return int the timestamp for the fromDate, will be > 0
      */
-    private function getFromDate()
+    private function getFromDate(): int
     {
         $day = (int)$this->piVars['from_day'] > 0 ? (int)$this->piVars['from_day'] : 1;
         $month = (int)$this->piVars['from_month'] > 0 ? (int)$this->piVars['from_month'] : 1;
@@ -3338,7 +3339,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return int the timestamp for the toDate, will be > 0
      */
-    private function getToDate()
+    private function getToDate(): int
     {
         $longMonths = [1, 3, 5, 7, 8, 10, 12];
 
@@ -3388,7 +3389,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *                download the files, or no user is logged in at the front
      *                end
      */
-    private function getAttachedFilesListMarkerContent()
+    private function getAttachedFilesListMarkerContent(): string
     {
         if (!$this->seminar->hasAttachedFiles()) {
             return '';
@@ -3418,7 +3419,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      * @return bool TRUE if the user is allowed to access the attached files,
      *                 FALSE otherwise
      */
-    private function mayUserAccessAttachedFiles()
+    private function mayUserAccessAttachedFiles(): bool
     {
         $limitToAttendees = $this->getConfValueBoolean('limitFileDownloadToAttendees');
 
@@ -3433,7 +3434,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      * @return bool TRUE if the user is allowed to access the event editor,
      *                 FALSE otherwise
      */
-    private function hasEventEditorAccess()
+    private function hasEventEditorAccess(): bool
     {
         $eventEditor = $this->createEventEditorInstance();
         return $eventEditor->hasAccessMessage() == '';
@@ -3449,7 +3450,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      * @return bool TRUE if the logged-in user can view the current seminar,
      *                 FALSE otherwise
      */
-    private function canShowCurrentEvent()
+    private function canShowCurrentEvent(): bool
     {
         if (!$this->seminar->isHidden()) {
             return true;
@@ -3635,8 +3636,11 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return string HTML code for the link to the event's single view page
      */
-    public function createSingleViewLink(\Tx_Seminars_Model_Event $event, $linkText, $htmlspecialcharLinkText = true)
-    {
+    public function createSingleViewLink(
+        \Tx_Seminars_Model_Event $event,
+        $linkText,
+        $htmlspecialcharLinkText = true
+    ): string {
         $processedLinkText = $htmlspecialcharLinkText ? \htmlspecialchars($linkText, ENT_QUOTES | ENT_HTML5) : $linkText;
         $linkConditionConfiguration = $this->getConfValueString('linkToSingleView', 's_listView');
         $createLink = ($linkConditionConfiguration === 'always')
@@ -3654,7 +3658,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return \Tx_Seminars_Service_SingleViewLinkBuilder the link builder instance
      */
-    protected function getLinkBuilder()
+    protected function getLinkBuilder(): \Tx_Seminars_Service_SingleViewLinkBuilder
     {
         if ($this->linkBuilder === null) {
             /** @var \Tx_Seminars_Service_SingleViewLinkBuilder $linkBuilder */
@@ -3684,7 +3688,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return string the namespace prefix, will end with a dot
      */
-    public function getTypoScriptNamespace()
+    public function getTypoScriptNamespace(): string
     {
         return 'plugin.tx_seminars_pi1.';
     }

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 namespace OliverKlee\Seminars\Service;
 
 use TYPO3\CMS\Core\SingletonInterface;
@@ -85,7 +86,7 @@ class EmailService implements SingletonInterface
         $rawBody,
         \Tx_Seminars_Model_Event $event,
         \Tx_Seminars_Model_FrontEndUser $user
-    ) {
+    ): string {
         $bodyWithFooter = $this->replaceMarkers($rawBody, $event, $user);
         $organizer = $event->getFirstOrganizer();
         if ($organizer->hasEMailFooter()) {
@@ -115,7 +116,7 @@ class EmailService implements SingletonInterface
         $textWithMarkers,
         \Tx_Seminars_Model_Event $event,
         \Tx_Seminars_Model_FrontEndUser $user
-    ) {
+    ): string {
         $markers = [
             '%salutation' => $this->salutationBuilder->getSalutation($user),
             '%userName' => $user->getName(),

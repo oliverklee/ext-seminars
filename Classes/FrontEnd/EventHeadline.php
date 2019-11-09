@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -67,7 +68,7 @@ class Tx_Seminars_FrontEnd_EventHeadline extends \Tx_Seminars_FrontEnd_AbstractV
      *
      * @return string the unique event title (or '' if there is an error)
      */
-    protected function getTitleAndDate(\Tx_Seminars_Model_Event $event)
+    protected function getTitleAndDate(\Tx_Seminars_Model_Event $event): string
     {
         $result = \htmlspecialchars($event->getTitle(), ENT_QUOTES | ENT_HTML5);
         if (!$event->hasBeginDate()) {

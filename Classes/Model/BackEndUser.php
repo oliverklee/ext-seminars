@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /**
  * This class represents a back-end user.
@@ -15,7 +16,7 @@ class Tx_Seminars_Model_BackEndUser extends \Tx_Oelib_Model_BackEndUser
      * @return int the PID for newly created event records, will be 0 if no
      *                 group has a PID set for new event records
      */
-    public function getEventFolderFromGroup()
+    public function getEventFolderFromGroup(): int
     {
         return $this->getRecordFolderFromGroup('event');
     }
@@ -28,7 +29,7 @@ class Tx_Seminars_Model_BackEndUser extends \Tx_Oelib_Model_BackEndUser
      * @return int the PID for newly created registration records, will be
      *                 0 if no group has a PID set for new registration records
      */
-    public function getRegistrationFolderFromGroup()
+    public function getRegistrationFolderFromGroup(): int
     {
         return $this->getRecordFolderFromGroup('registration');
     }
@@ -41,7 +42,7 @@ class Tx_Seminars_Model_BackEndUser extends \Tx_Oelib_Model_BackEndUser
      * @return int the PID for newly created auxiliary records, will be
      *                 0 if no group has a PID set for new auxiliary records
      */
-    public function getAuxiliaryRecordsFolder()
+    public function getAuxiliaryRecordsFolder(): int
     {
         return $this->getRecordFolderFromGroup('auxiliary');
     }
@@ -58,7 +59,7 @@ class Tx_Seminars_Model_BackEndUser extends \Tx_Oelib_Model_BackEndUser
      * @return int the PID for newly created records, will be 0 if no group
      *                 has a PID set for new records of the given type
      */
-    private function getRecordFolderFromGroup($type)
+    private function getRecordFolderFromGroup($type): int
     {
         $groups = $this->getAllGroups();
         if ($groups->isEmpty()) {

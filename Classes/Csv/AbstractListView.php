@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Lang\LanguageService;
@@ -58,7 +59,7 @@ abstract class Tx_Seminars_Csv_AbstractListView
      *
      * @return LanguageService
      */
-    protected function getInitializedTranslator()
+    protected function getInitializedTranslator(): LanguageService
     {
         if ($this->translator === null) {
             if (isset($GLOBALS['LANG'])) {
@@ -107,7 +108,7 @@ abstract class Tx_Seminars_Csv_AbstractListView
      *
      * @return int the page UID, will be >= 0
      */
-    protected function getPageUid()
+    protected function getPageUid(): int
     {
         return $this->pageUid;
     }
@@ -117,7 +118,7 @@ abstract class Tx_Seminars_Csv_AbstractListView
      *
      * @return bool
      */
-    protected function hasPageUid()
+    protected function hasPageUid(): bool
     {
         return $this->getPageUid() > 0;
     }
@@ -127,7 +128,7 @@ abstract class Tx_Seminars_Csv_AbstractListView
      *
      * @return string
      */
-    protected function getTableName()
+    protected function getTableName(): string
     {
         return $this->tableName;
     }
@@ -145,7 +146,7 @@ abstract class Tx_Seminars_Csv_AbstractListView
      *
      * @return string
      */
-    protected function createCsvSeparatorLine()
+    protected function createCsvSeparatorLine(): string
     {
         if (!$this->configuration->getAsBoolean('addExcelSpecificSeparatorLineToCsv')) {
             return '';
@@ -159,7 +160,7 @@ abstract class Tx_Seminars_Csv_AbstractListView
      *
      * @return string header list, will not be empty if the CSV export has been configured correctly
      */
-    protected function createCsvHeading()
+    protected function createCsvHeading(): string
     {
         return implode(self::COLUMN_SEPARATOR, $this->getLocalizedCsvHeadings());
     }
@@ -185,7 +186,7 @@ abstract class Tx_Seminars_Csv_AbstractListView
      *
      * @return string
      */
-    protected function escapeFieldForCsv($fieldContent)
+    protected function escapeFieldForCsv($fieldContent): string
     {
         if (strpos($fieldContent, '"') !== false) {
             $escapedFieldValue = '"' . str_replace('"', '""', $fieldContent) . '"';

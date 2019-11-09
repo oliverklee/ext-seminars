@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /**
  * This class represents a food.
@@ -12,7 +13,7 @@ class Tx_Seminars_Model_Food extends \Tx_Oelib_Model implements \Tx_Seminars_Int
      *
      * @return string our title, will not be empty
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->getAsString('title');
     }

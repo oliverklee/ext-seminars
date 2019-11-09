@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /**
  * This class represents an event type.
@@ -13,7 +14,7 @@ class Tx_Seminars_Model_EventType extends \Tx_Oelib_Model implements \Tx_Seminar
      *
      * @return string our title, will not be empty
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->getAsString('title');
     }
@@ -39,7 +40,7 @@ class Tx_Seminars_Model_EventType extends \Tx_Oelib_Model implements \Tx_Seminar
      *
      * @return int the single view page, will be 0 if none has been set
      */
-    public function getSingleViewPageUid()
+    public function getSingleViewPageUid(): int
     {
         return $this->getAsInteger('single_view_page');
     }
@@ -51,7 +52,7 @@ class Tx_Seminars_Model_EventType extends \Tx_Oelib_Model implements \Tx_Seminar
      *         TRUE if this event type has a single view page set, FALSE
      *         otherwise
      */
-    public function hasSingleViewPageUid()
+    public function hasSingleViewPageUid(): bool
     {
         return $this->hasInteger('single_view_page');
     }

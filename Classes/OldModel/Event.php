@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
@@ -71,7 +72,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @param \mysqli_result|bool $dbResult MySQL result (of SELECT query). If this parameter is provided, $uid will be ignored.
      * @param bool $allowHiddenRecords whether it is possible to create a seminar object from a hidden record
      */
-    public function __construct($uid, $dbResult = false, $allowHiddenRecords = false)
+    public function __construct(int $uid, $dbResult = false, bool $allowHiddenRecords = false)
     {
         parent::__construct($uid, $dbResult, $allowHiddenRecords);
 
@@ -101,7 +102,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return array associative array containing the field "status" and "newValue" (if needed)
      */
-    private function validateTceValues($fieldName, $value)
+    private function validateTceValues($fieldName, $value): array
     {
         $result = ['status' => true];
 
@@ -162,7 +163,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return array associative array containing data to update the database
      *               entry of this event, may be empty
      */
-    public function getUpdateArray(array &$fieldArray)
+    public function getUpdateArray(array &$fieldArray): array
     {
         $updateArray = [];
         $fieldNamesToCheck = [
@@ -197,7 +198,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string our topic title (or '' if there is an error)
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->getTopicString('title');
     }
@@ -209,7 +210,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string our direct title (or '' if there is an error)
      */
-    public function getRealTitle()
+    public function getRealTitle(): string
     {
         return parent::getTitle();
     }
@@ -219,7 +220,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string our seminar subtitle (or '' if there is an error)
      */
-    public function getSubtitle()
+    public function getSubtitle(): string
     {
         return $this->getTopicString('subtitle');
     }
@@ -229,7 +230,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool TRUE if we have a non-empty subtitle, FALSE otherwise.
      */
-    public function hasSubtitle()
+    public function hasSubtitle(): bool
     {
         return $this->hasTopicString('subtitle');
     }
@@ -239,7 +240,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string our seminar description (or '' if there is an error)
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->getTopicString('description');
     }
@@ -261,7 +262,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool TRUE if we have a non-empty description, FALSE otherwise.
      */
-    public function hasDescription()
+    public function hasDescription(): bool
     {
         return $this->hasTopicString('description');
     }
@@ -272,7 +273,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return string HTML code of the additional information (or '' if there is
      *                an error)
      */
-    public function getAdditionalInformation()
+    public function getAdditionalInformation(): string
     {
         return $this->getTopicString('additional_information');
     }
@@ -298,7 +299,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if we have additional information (field not empty),
      *                 FALSE otherwise.
      */
-    public function hasAdditionalInformation()
+    public function hasAdditionalInformation(): bool
     {
         return $this->hasTopicString('additional_information');
     }
@@ -315,7 +316,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string the unique seminar title (or '' if there is an error)
      */
-    public function getTitleAndDate($dash = '–')
+    public function getTitleAndDate($dash = '–'): string
     {
         $date = $this->hasDate() ? ', ' . $this->getDate($dash) : '';
 
@@ -328,7 +329,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string the accreditation number (may be empty)
      */
-    public function getAccreditationNumber()
+    public function getAccreditationNumber(): string
     {
         return $this->getRecordPropertyString('accreditation_number');
     }
@@ -338,7 +339,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool TRUE if we have a non-empty accreditation number, FALSE otherwise.
      */
-    public function hasAccreditationNumber()
+    public function hasAccreditationNumber(): bool
     {
         return $this->hasRecordPropertyString('accreditation_number');
     }
@@ -350,7 +351,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return string the number of credit points or a an empty string if it is
      *                0
      */
-    public function getCreditPoints()
+    public function getCreditPoints(): string
     {
         return $this->hasCreditPoints()
             ? $this->getTopicInteger('credit_points') : '';
@@ -363,7 +364,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if the seminar has credit points assigned,
      *                 FALSE otherwise.
      */
-    public function hasCreditPoints()
+    public function hasCreditPoints(): bool
     {
         return $this->hasTopicInteger('credit_points');
     }
@@ -377,7 +378,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string our places description (or '' if there is an error)
      */
-    public function getPlaceWithDetails(\Tx_Oelib_TemplateHelper $plugin)
+    public function getPlaceWithDetails(\Tx_Oelib_TemplateHelper $plugin): string
     {
         if (!$this->hasPlace()) {
             $plugin->setMarker(
@@ -442,7 +443,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool whether at least one place with country are set
      *                 for the current event
      */
-    public function hasCountry()
+    public function hasCountry(): bool
     {
         $placesWithCountry = $this->getPlacesWithCountry();
         return $this->hasPlace() && !empty($placesWithCountry);
@@ -456,7 +457,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string[] the list of ISO codes for the countries of this event, may be empty
      */
-    public function getPlacesWithCountry()
+    public function getPlacesWithCountry(): array
     {
         if (!$this->hasPlace()) {
             return [];
@@ -494,7 +495,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return string comma-separated list of countries for this event,
      *                may be empty
      */
-    public function getCountry()
+    public function getCountry(): string
     {
         if (!$this->hasCountry()) {
             return '';
@@ -525,7 +526,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return string comma-separated list of cities for this event, may be
      *                empty
      */
-    public function getCities()
+    public function getCities(): string
     {
         if (!$this->hasCities()) {
             return '';
@@ -548,7 +549,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool whether at least one place with city are set for the
      *                 current event
      */
-    public function hasCities()
+    public function hasCities(): bool
     {
         return $this->hasPlace() && count($this->getCitiesFromPlaces()) > 0;
     }
@@ -561,7 +562,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string[] the list of city names for this event, may be empty
      */
-    public function getCitiesFromPlaces()
+    public function getCitiesFromPlaces(): array
     {
         $cities = [];
 
@@ -592,7 +593,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return string the short local name of the country or an empty
      *                string if the country could not be found
      */
-    public function getCountryNameFromIsoCode($isoCode)
+    public function getCountryNameFromIsoCode($isoCode): string
     {
         // Sanitizes the provided parameter against SQL injection as this
         // function can be used for searching.
@@ -621,7 +622,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string our places description (or '' if there is an error)
      */
-    protected function getPlaceWithDetailsRaw()
+    protected function getPlaceWithDetailsRaw(): string
     {
         if (!$this->hasPlace()) {
             return $this->translate('message_willBeAnnounced');
@@ -675,7 +676,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return array[] all places as a two-dimensional array, will be empty if there are no places assigned
      */
-    protected function getPlacesAsArray()
+    protected function getPlacesAsArray(): array
     {
         return \Tx_Oelib_Db::selectMultiple(
             'title, address, zip, city, country, homepage, directions',
@@ -696,7 +697,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string our places list (or '' if there is an error)
      */
-    public function getPlaceShort()
+    public function getPlaceShort(): string
     {
         if (!$this->hasPlace()) {
             return $this->translate('message_willBeAnnounced');
@@ -725,7 +726,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return \Tx_Seminars_Bag_Speaker a speakerbag object
      */
-    private function getSpeakerBag($speakerRelation = 'speakers')
+    private function getSpeakerBag($speakerRelation = 'speakers'): \Tx_Seminars_Bag_Speaker
     {
         switch ($speakerRelation) {
             case 'partners':
@@ -768,7 +769,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string our speakers (or '' if there is an error)
      */
-    public function getSpeakersWithDetails(\Tx_Oelib_TemplateHelper $plugin, $speakerRelation = 'speakers')
+    public function getSpeakersWithDetails(\Tx_Oelib_TemplateHelper $plugin, $speakerRelation = 'speakers'): string
     {
         if (!$this->hasSpeakersOfType($speakerRelation)) {
             return '';
@@ -806,7 +807,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     private function renderSpeakerImage(
         \Tx_Seminars_OldModel_Speaker $speaker,
         \Tx_Oelib_TemplateHelper $plugin
-    ) {
+    ): string {
         $imageConfiguration = [
             'altText' => $plugin->translate('speakerImage.alt'),
             'titleText' => $plugin->translate('speakerImage.alt'),
@@ -835,7 +836,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string our speakers (or '' if there is an error)
      */
-    protected function getSpeakersWithDescriptionRaw($speakerRelation = 'speakers')
+    protected function getSpeakersWithDescriptionRaw(string $speakerRelation = 'speakers'): string
     {
         if (!$this->hasSpeakersOfType($speakerRelation)) {
             return '';
@@ -878,7 +879,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return string our speakers list, will be empty if an error occurred
      *                during processing
      */
-    public function getSpeakersShort(\Tx_Oelib_TemplateHelper $plugin, $speakerRelation = 'speakers')
+    public function getSpeakersShort(\Tx_Oelib_TemplateHelper $plugin, $speakerRelation = 'speakers'): string
     {
         if (!$this->hasSpeakersOfType($speakerRelation)) {
             return '';
@@ -900,7 +901,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return int the number of speakers associated with this event,
      *                 will be >= 0
      */
-    public function getNumberOfSpeakers()
+    public function getNumberOfSpeakers(): int
     {
         return $this->getRecordPropertyInteger('speakers');
     }
@@ -911,7 +912,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return int the number of partners associated with this event,
      *                 will be >= 0
      */
-    public function getNumberOfPartners()
+    public function getNumberOfPartners(): int
     {
         return $this->getRecordPropertyInteger('partners');
     }
@@ -922,7 +923,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return int the number of tutors associated with this event,
      *                 will be >= 0
      */
-    public function getNumberOfTutors()
+    public function getNumberOfTutors(): int
     {
         return $this->getRecordPropertyInteger('tutors');
     }
@@ -933,7 +934,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return int the number of leaders associated with this event,
      *                 will be >= 0
      */
-    public function getNumberOfLeaders()
+    public function getNumberOfLeaders(): int
     {
         return $this->getRecordPropertyInteger('leaders');
     }
@@ -948,7 +949,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if we have any speakers of the specified type
      *                 related to this event, FALSE otherwise.
      */
-    public function hasSpeakersOfType($speakerRelation = 'speakers')
+    public function hasSpeakersOfType($speakerRelation = 'speakers'): bool
     {
         switch ($speakerRelation) {
             case 'partners':
@@ -975,7 +976,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if we have any speakers related to this event,
      *                 FALSE otherwise
      */
-    public function hasSpeakers()
+    public function hasSpeakers(): bool
     {
         return $this->hasRecordPropertyInteger('speakers');
     }
@@ -986,7 +987,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if we have any partners related to this event,
      *                 FALSE otherwise
      */
-    public function hasPartners()
+    public function hasPartners(): bool
     {
         return $this->hasRecordPropertyInteger('partners');
     }
@@ -997,7 +998,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if we have any tutors related to this event,
      *                 FALSE otherwise
      */
-    public function hasTutors()
+    public function hasTutors(): bool
     {
         return $this->hasRecordPropertyInteger('tutors');
     }
@@ -1008,7 +1009,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if we have any leaders related to this event,
      *                 FALSE otherwise
      */
-    public function hasLeaders()
+    public function hasLeaders(): bool
     {
         return $this->hasRecordPropertyInteger('leaders');
     }
@@ -1028,7 +1029,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *                Will be empty if no speaker of the given type exists for
      *                this seminar.
      */
-    public function getLanguageKeySuffixForType($speakerType)
+    public function getLanguageKeySuffixForType($speakerType): string
     {
         if (!$this->hasSpeakersOfType($speakerType)) {
             return '';
@@ -1081,7 +1082,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if we have a language set for this event,
      *                 FALSE otherwise
      */
-    public function hasLanguage()
+    public function hasLanguage(): bool
     {
         return $this->hasRecordPropertyString('language');
     }
@@ -1093,7 +1094,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return string the localized name of the language of this event or
      *                an empty string if no language is set
      */
-    public function getLanguageName()
+    public function getLanguageName(): string
     {
         $language = '';
         if ($this->hasLanguage()) {
@@ -1111,7 +1112,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return string the ISO code of the language of this event or an
      *                empty string if no language is set
      */
-    public function getLanguage()
+    public function getLanguage(): string
     {
         return $this->getRecordPropertyString('language');
     }
@@ -1136,7 +1137,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string the regular seminar price
      */
-    public function getPriceRegular()
+    public function getPriceRegular(): string
     {
         if ($this->hasPriceRegular()) {
             $result = $this->formatPrice($this->getPriceRegularAmount());
@@ -1155,7 +1156,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string
      */
-    private function getPriceRegularAmount()
+    private function getPriceRegularAmount(): string
     {
         return $this->getTopicDecimal('price_regular');
     }
@@ -1167,7 +1168,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string the price, formatted as in configured in TS
      */
-    public function formatPrice($value)
+    public function formatPrice(string $value): string
     {
         /** @var \Tx_Oelib_ViewHelper_Price $priceViewHelper */
         $priceViewHelper = GeneralUtility::makeInstance(\Tx_Oelib_ViewHelper_Price::class);
@@ -1186,7 +1187,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string the price and the currency
      */
-    public function getCurrentPriceRegular()
+    public function getCurrentPriceRegular(): string
     {
         if ($this->getPriceOnRequest()) {
             return $this->translate('message_onRequest');
@@ -1202,7 +1203,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string the price and the currency
      */
-    public function getCurrentPriceSpecial()
+    public function getCurrentPriceSpecial(): string
     {
         if ($this->getPriceOnRequest()) {
             return $this->translate('message_onRequest');
@@ -1217,7 +1218,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string the regular early bird event price
      */
-    public function getEarlyBirdPriceRegular()
+    public function getEarlyBirdPriceRegular(): string
     {
         return $this->hasEarlyBirdPriceRegular()
             ? $this->formatPrice($this->getEarlyBirdPriceRegularAmount()) : '';
@@ -1230,7 +1231,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string the regular early bird event price
      */
-    private function getEarlyBirdPriceRegularAmount()
+    private function getEarlyBirdPriceRegularAmount(): string
     {
         return $this->getTopicDecimal('price_regular_early');
     }
@@ -1241,7 +1242,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string the regular early bird event price
      */
-    public function getEarlyBirdPriceSpecial()
+    public function getEarlyBirdPriceSpecial(): string
     {
         return $this->hasEarlyBirdPriceSpecial()
             ? $this->formatPrice($this->getEarlyBirdPriceSpecialAmount()) : '';
@@ -1255,7 +1256,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string the special event price during the early bird phase
      */
-    private function getEarlyBirdPriceSpecialAmount()
+    private function getEarlyBirdPriceSpecialAmount(): string
     {
         return $this->getTopicDecimal('price_special_early');
     }
@@ -1266,7 +1267,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if the seminar has a non-zero regular price,
      *                 FALSE if it is free.
      */
-    public function hasPriceRegular()
+    public function hasPriceRegular(): bool
     {
         return $this->hasTopicDecimal('price_regular');
     }
@@ -1277,7 +1278,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if the seminar has a non-zero regular early
      *                 bird price, FALSE otherwise
      */
-    protected function hasEarlyBirdPriceRegular()
+    protected function hasEarlyBirdPriceRegular(): bool
     {
         return $this->hasTopicDecimal('price_regular_early');
     }
@@ -1288,7 +1289,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if the seminar has a non-zero special early
      *                 bird price, FALSE otherwise
      */
-    protected function hasEarlyBirdPriceSpecial()
+    protected function hasEarlyBirdPriceSpecial(): bool
     {
         return $this->hasTopicDecimal('price_special_early');
     }
@@ -1299,7 +1300,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if the event has an early bird deadline set,
      *                 FALSE if not
      */
-    private function hasEarlyBirdDeadline()
+    private function hasEarlyBirdDeadline(): bool
     {
         return $this->hasRecordPropertyInteger('deadline_early_bird');
     }
@@ -1310,7 +1311,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if this event has an early bird dealine set and
      *                 this deadline is not over yet
      */
-    protected function earlyBirdApplies()
+    protected function earlyBirdApplies(): bool
     {
         return $this->hasEarlyBirdPrice() && !$this->isEarlyBirdDeadlineOver();
     }
@@ -1329,7 +1330,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if an early bird deadline and early bird prices
      *                 are set
      */
-    public function hasEarlyBirdPrice()
+    public function hasEarlyBirdPrice(): bool
     {
         // whether the event has regular prices set (a normal one and an early bird)
         $priceRegularIsOk = $this->hasPriceRegular()
@@ -1351,7 +1352,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string the special event price
      */
-    public function getPriceSpecial()
+    public function getPriceSpecial(): string
     {
         return $this->hasPriceSpecial()
             ? $this->formatPrice($this->getPriceSpecialAmount()) : '';
@@ -1364,7 +1365,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string the special event price
      */
-    private function getPriceSpecialAmount()
+    private function getPriceSpecialAmount(): string
     {
         return $this->getTopicDecimal('price_special');
     }
@@ -1375,7 +1376,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if the seminar has a non-zero special price,
      *                 FALSE if it is free.
      */
-    public function hasPriceSpecial()
+    public function hasPriceSpecial(): bool
     {
         return $this->hasTopicDecimal('price_special');
     }
@@ -1387,7 +1388,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string the regular event price (including full board)
      */
-    public function getPriceRegularBoard()
+    public function getPriceRegularBoard(): string
     {
         return $this->hasPriceRegularBoard()
             ? $this->formatPrice($this->getPriceRegularBoardAmount()) : '';
@@ -1401,7 +1402,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string the regular event price (including full board)
      */
-    private function getPriceRegularBoardAmount()
+    private function getPriceRegularBoardAmount(): string
     {
         return $this->getTopicDecimal('price_regular_board');
     }
@@ -1413,7 +1414,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if the event has a non-zero regular price
      *                 (including full board), FALSE otherwise
      */
-    public function hasPriceRegularBoard()
+    public function hasPriceRegularBoard(): bool
     {
         return $this->hasTopicDecimal('price_regular_board');
     }
@@ -1425,7 +1426,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string the special event price (including full board)
      */
-    public function getPriceSpecialBoard()
+    public function getPriceSpecialBoard(): string
     {
         return $this->hasPriceSpecialBoard()
             ? $this->formatPrice($this->getPriceSpecialBoardAmount()) : '';
@@ -1439,7 +1440,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string the special event price (including full board)
      */
-    private function getPriceSpecialBoardAmount()
+    private function getPriceSpecialBoardAmount(): string
     {
         return $this->getTopicDecimal('price_special_board');
     }
@@ -1451,7 +1452,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if the event has a non-zero special price
      *                 (including full board), FALSE otherwise
      */
-    public function hasPriceSpecialBoard()
+    public function hasPriceSpecialBoard(): bool
     {
         return $this->hasTopicDecimal('price_special_board');
     }
@@ -1459,7 +1460,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * @return bool
      */
-    public function getPriceOnRequest()
+    public function getPriceOnRequest(): bool
     {
         return $this->getTopicBoolean('price_on_request');
     }
@@ -1479,7 +1480,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string[] our payment method titles, will be an empty array if there are no payment methods
      */
-    public function getPaymentMethods()
+    public function getPaymentMethods(): array
     {
         if (!$this->hasPaymentMethods()) {
             return [];
@@ -1512,7 +1513,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string our payment methods as plain text (or '' if there is an error)
      */
-    public function getPaymentMethodsPlain()
+    public function getPaymentMethodsPlain(): string
     {
         if (!$this->hasPaymentMethods()) {
             return '';
@@ -1547,7 +1548,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string our payment methods as plain text (or '' if there is an error)
      */
-    protected function getPaymentMethodsPlainShort()
+    protected function getPaymentMethodsPlainShort(): string
     {
         if (!$this->hasPaymentMethods()) {
             return '';
@@ -1565,7 +1566,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string the selected payment method as plain text (or '' if there is an error)
      */
-    public function getSinglePaymentMethodPlain($paymentMethodUid)
+    public function getSinglePaymentMethodPlain($paymentMethodUid): string
     {
         if ($paymentMethodUid <= 0) {
             return '';
@@ -1607,7 +1608,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string the selected payment method as plain text (or '' if there is an error)
      */
-    public function getSinglePaymentMethodShort($paymentMethodUid)
+    public function getSinglePaymentMethodShort($paymentMethodUid): string
     {
         if ($paymentMethodUid <= 0) {
             return '';
@@ -1637,7 +1638,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if the seminar has any payment methods, FALSE
      *                 if it is free
      */
-    public function hasPaymentMethods()
+    public function hasPaymentMethods(): bool
     {
         return $this->hasTopicInteger('payment_methods');
     }
@@ -1647,7 +1648,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return int the number of available payment methods, might 0
      */
-    public function getNumberOfPaymentMethods()
+    public function getNumberOfPaymentMethods(): int
     {
         return $this->getTopicInteger('payment_methods');
     }
@@ -1661,7 +1662,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string the short local name of the language or an empty string if the language could not be found
      */
-    public function getLanguageNameFromIsoCode($isoCode)
+    public function getLanguageNameFromIsoCode($isoCode): string
     {
         $languageName = '';
         $dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
@@ -1685,7 +1686,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return int the record type
      */
-    public function getRecordType()
+    public function getRecordType(): int
     {
         return $this->getRecordPropertyInteger('object_type');
     }
@@ -1696,7 +1697,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if the seminar has an event type set, otherwise
      *                 FALSE
      */
-    public function hasEventType()
+    public function hasEventType(): bool
     {
         return $this->hasTopicInteger('event_type');
     }
@@ -1708,7 +1709,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return int UID of the event type for this event or 0 if no
      *                 event type is set
      */
-    public function getEventTypeUid()
+    public function getEventTypeUid(): int
     {
         return $this->getTopicInteger('event_type');
     }
@@ -1722,7 +1723,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @throws \Tx_Oelib_Exception_Database
      */
-    public function getEventType()
+    public function getEventType(): string
     {
         if (!$this->hasEventType()) {
             return '';
@@ -1771,7 +1772,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return int the minimum number of attendances, will be >= 0
      */
-    public function getAttendancesMin()
+    public function getAttendancesMin(): int
     {
         return $this->getRecordPropertyInteger('attendees_min');
     }
@@ -1782,7 +1783,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return int the maximum number of attendances, will be >= 0
      */
-    public function getAttendancesMax()
+    public function getAttendancesMax(): int
     {
         return $this->getRecordPropertyInteger('attendees_max');
     }
@@ -1793,7 +1794,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return int the number of attendances, will be >= 0
      */
-    public function getAttendances()
+    public function getAttendances(): int
     {
         if (!$this->statisticsHaveBeenCalculated) {
             $this->calculateStatistics();
@@ -1809,7 +1810,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if there is at least one registration for this
      *                 event, FALSE otherwise
      */
-    public function hasAttendances()
+    public function hasAttendances(): bool
     {
         return $this->getAttendances() > 0;
     }
@@ -1819,7 +1820,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return int the number of paid attendances, will be >= 0
      */
-    public function getAttendancesPaid()
+    public function getAttendancesPaid(): int
     {
         if (!$this->statisticsHaveBeenCalculated) {
             $this->calculateStatistics();
@@ -1834,7 +1835,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return int the number of attendances that are not paid yet,
      *                 will be >= 0
      */
-    public function getAttendancesNotPaid()
+    public function getAttendancesNotPaid(): int
     {
         return $this->getAttendances() - $this->getAttendancesPaid();
     }
@@ -1845,7 +1846,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return int the number of vacancies (will be 0 if the seminar
      *                 is overbooked)
      */
-    public function getVacancies()
+    public function getVacancies(): int
     {
         return max(0, $this->getAttendancesMax() - $this->getAttendances());
     }
@@ -1862,7 +1863,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string string showing the number of vacancies, may be empty
      */
-    public function getVacanciesString()
+    public function getVacanciesString(): string
     {
         if ($this->isCanceled() || !$this->needsRegistration() || $this->isRegistrationDeadlineOver()) {
             return '';
@@ -1891,7 +1892,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool TRUE if the seminar has vacancies, FALSE if it is full
      */
-    public function hasVacancies()
+    public function hasVacancies(): bool
     {
         return !$this->isFull();
     }
@@ -1902,7 +1903,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if the seminar is full, FALSE if it still has
      *                 vacancies or if there are unlimited vacancies
      */
-    public function isFull()
+    public function isFull(): bool
     {
         return !$this->hasUnlimitedVacancies()
             && ($this->getAttendances() >= $this->getAttendancesMax());
@@ -1914,7 +1915,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if the seminar has enough attendances,
      *                 FALSE otherwise
      */
-    public function hasEnoughAttendances()
+    public function hasEnoughAttendances(): bool
     {
         return $this->getAttendances() >= $this->getAttendancesMin();
     }
@@ -1924,7 +1925,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return int
      */
-    public function getNumberOfAssociatedRegistrationRecords()
+    public function getNumberOfAssociatedRegistrationRecords(): int
     {
         return $this->getRecordPropertyInteger('registrations');
     }
@@ -1948,7 +1949,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if this seminar has at least one target group,
      *                 FALSE otherwise
      */
-    public function hasTargetGroups()
+    public function hasTargetGroups(): bool
     {
         return $this->hasTopicInteger('target_groups');
     }
@@ -1960,7 +1961,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return string the target group titles of this seminar separated by
      *                a comma (or an empty string)
      */
-    public function getTargetGroupNames()
+    public function getTargetGroupNames(): string
     {
         if (!$this->hasTargetGroups()) {
             return '';
@@ -1994,7 +1995,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string[] the target groups of this event (or an empty array)
      */
-    public function getTargetGroupsAsArray()
+    public function getTargetGroupsAsArray(): array
     {
         if (!$this->hasTargetGroups()) {
             return [];
@@ -2029,7 +2030,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return int the number of target groups associated with this
      *                 event, will be >= 0
      */
-    public function getNumberOfTargetGroups()
+    public function getNumberOfTargetGroups(): int
     {
         return $this->getRecordPropertyInteger('target_groups');
     }
@@ -2041,7 +2042,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return int the latest possible moment to register for this event
      */
-    public function getLatestPossibleRegistrationTime()
+    public function getLatestPossibleRegistrationTime(): int
     {
         if ($this->hasRegistrationDeadline()) {
             return $this->getRecordPropertyInteger('deadline_registration');
@@ -2061,7 +2062,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return int the latest possible moment to register with early
      *                 bird discount for an event
      */
-    private function getLatestPossibleEarlyBirdRegistrationTime()
+    private function getLatestPossibleEarlyBirdRegistrationTime(): int
     {
         return $this->getRecordPropertyInteger('deadline_early_bird');
     }
@@ -2078,7 +2079,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return string the date + time of the deadline or an empty string
      *                if this event has no registration deadline
      */
-    public function getRegistrationDeadline()
+    public function getRegistrationDeadline(): string
     {
         $result = '';
 
@@ -2103,7 +2104,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool TRUE if the seminar has a datetime set.
      */
-    public function hasRegistrationDeadline()
+    public function hasRegistrationDeadline(): bool
     {
         return $this->hasRecordPropertyInteger('deadline_registration');
     }
@@ -2122,7 +2123,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return string the date and time of the early bird deadline or an
      *                early string if this event has no early-bird deadline
      */
-    public function getEarlyBirdDeadline()
+    public function getEarlyBirdDeadline(): string
     {
         $result = '';
 
@@ -2154,7 +2155,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return string the date + time of the deadline or an empty string
      *                if this event has no unregistration deadline
      */
-    public function getUnregistrationDeadline()
+    public function getUnregistrationDeadline(): string
     {
         $result = '';
 
@@ -2179,7 +2180,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool TRUE if the seminar has a unregistration deadline set.
      */
-    public function hasUnregistrationDeadline()
+    public function hasUnregistrationDeadline(): bool
     {
         return $this->hasRecordPropertyInteger('deadline_unregistration');
     }
@@ -2190,7 +2191,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return int the unregistration deadline as UNIX timestamp
      */
-    public function getUnregistrationDeadlineAsTimestamp()
+    public function getUnregistrationDeadlineAsTimestamp(): int
     {
         return $this->getRecordPropertyInteger('deadline_unregistration');
     }
@@ -2203,7 +2204,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @throws \BadMethodCallException
      */
-    public function getOrganizerBag()
+    public function getOrganizerBag(): \Tx_Seminars_Bag_Organizer
     {
         if (!$this->hasOrganizers()) {
             throw new \BadMethodCallException('There are no organizers related to this event.', 1333291857);
@@ -2241,7 +2242,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string the hyperlinked names of our organizers
      */
-    public function getOrganizers(\Tx_Oelib_TemplateHelper $plugin)
+    public function getOrganizers(\Tx_Oelib_TemplateHelper $plugin): string
     {
         if (!$this->hasOrganizers()) {
             return '';
@@ -2268,7 +2269,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string names and homepages of our organizers or an empty string if there are no organizers
      */
-    protected function getOrganizersRaw()
+    protected function getOrganizersRaw(): string
     {
         if (!$this->hasOrganizers()) {
             return '';
@@ -2292,7 +2293,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string[] the organizers' names and e-mail addresses
      */
-    public function getOrganizersNameAndEmail()
+    public function getOrganizersNameAndEmail(): array
     {
         if (!$this->hasOrganizers()) {
             return [];
@@ -2315,7 +2316,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string[] the organizers' e-mail addresses
      */
-    public function getOrganizersEmail()
+    public function getOrganizersEmail(): array
     {
         if (!$this->hasOrganizers()) {
             return [];
@@ -2338,7 +2339,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return string[] the organizers' e-mail footers, will be empty if no
      *               organizer was set, or all organizers have no e-mail footer
      */
-    public function getOrganizersFooter()
+    public function getOrganizersFooter(): array
     {
         if (!$this->hasOrganizers()) {
             return [];
@@ -2364,7 +2365,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool TRUE if we have any organizers related to this seminar, FALSE otherwise
      */
-    public function hasOrganizers()
+    public function hasOrganizers(): bool
     {
         return $this->hasRecordPropertyInteger('organizers');
     }
@@ -2374,7 +2375,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return int the number of organizers, might be 0
      */
-    public function getNumberOfOrganizers()
+    public function getNumberOfOrganizers(): int
     {
         return $this->getRecordPropertyInteger('organizers');
     }
@@ -2390,7 +2391,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string the hyperlinked names of our organizing partners, or an empty string
      */
-    public function getOrganizingPartners(\Tx_Oelib_TemplateHelper $plugin)
+    public function getOrganizingPartners(\Tx_Oelib_TemplateHelper $plugin): string
     {
         if (!$this->hasOrganizingPartners()) {
             return '';
@@ -2423,7 +2424,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool TRUE if we have any organizing partners related to this event, FALSE otherwise
      */
-    public function hasOrganizingPartners()
+    public function hasOrganizingPartners(): bool
     {
         return $this->hasRecordPropertyInteger('organizing_partners');
     }
@@ -2433,7 +2434,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return int the number of organizing partners associated with this event, will be >= 0
      */
-    public function getNumberOfOrganizingPartners()
+    public function getNumberOfOrganizingPartners(): int
     {
         return $this->getRecordPropertyInteger('organizing_partners');
     }
@@ -2443,7 +2444,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool TRUE if this event has a separate details page, FALSE otherwise
      */
-    public function hasSeparateDetailsPage()
+    public function hasSeparateDetailsPage(): bool
     {
         return $this->hasRecordPropertyString('details_page');
     }
@@ -2455,7 +2456,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return string the URL to this events separate details page, will be
      *                empty if this event has no separate details page set
      */
-    public function getDetailsPage()
+    public function getDetailsPage(): string
     {
         return $this->getRecordPropertyString('details_page');
     }
@@ -2470,7 +2471,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string formatted output (may be empty)
      */
-    public function dumpSeminarValues($keysList)
+    public function dumpSeminarValues($keysList): string
     {
         $keys = GeneralUtility::trimExplode(',', $keysList, true);
         $keysWithLabels = [];
@@ -2565,7 +2566,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool TRUE if the user already is registered, FALSE otherwise
      */
-    public function isUserRegistered($feUserUid)
+    public function isUserRegistered($feUserUid): bool
     {
         $result = false;
 
@@ -2592,7 +2593,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return string empty string if everything is OK, else a localized
      *                error message
      */
-    public function isUserRegisteredMessage($feUserUid)
+    public function isUserRegisteredMessage($feUserUid): string
     {
         return $this->isUserRegistered($feUserUid)
             ? $this->translate('message_alreadyRegistered') : '';
@@ -2609,10 +2610,10 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if the user is a VIP for this seminar,
      *                 FALSE otherwise
      */
-    public function isUserVip($feUserUid, $defaultEventVipsFeGroupID)
+    public function isUserVip(int $feUserUid, int $defaultEventVipsFeGroupID): bool
     {
         $result = false;
-        $isDefaultVip = ($defaultEventVipsFeGroupID != 0)
+        $isDefaultVip = ($defaultEventVipsFeGroupID !== 0)
             && \Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()
             && \Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser()
                 ->hasGroupMembership((string)$defaultEventVipsFeGroupID);
@@ -2672,7 +2673,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         $registrationsVipListPID = 0,
         $defaultEventVipsFeGroupID = 0,
         $accessLevel = 'attendees_and_managers'
-    ) {
+    ): bool {
         if (!$this->needsRegistration()) {
             return false;
         }
@@ -2737,7 +2738,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         $registrationsListPID = 0,
         $registrationsVipListPID = 0,
         $defaultEventVipsFeGroupID = 0
-    ) {
+    ): bool {
         if (!Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
             return false;
         }
@@ -2812,7 +2813,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         $registrationsListPID = 0,
         $registrationsVipListPID = 0,
         $defaultEventVipsFeGroupID = 0
-    ) {
+    ): bool {
         $loginManager = \Tx_Oelib_FrontEndLoginManager::getInstance();
         if (!$loginManager->isLoggedIn()) {
             return false;
@@ -2872,7 +2873,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         $registrationsListPID = 0,
         $registrationsVipListPID = 0,
         $defaultEventVipsFeGroupID = 0
-    ) {
+    ): bool {
         $loginManager = \Tx_Oelib_FrontEndLoginManager::getInstance();
         $isLoggedIn = $loginManager->isLoggedIn();
 
@@ -2920,7 +2921,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return string an empty string if everything is OK, a localized error
      *                error message otherwise
      */
-    public function canViewRegistrationsListMessage($whichPlugin, $accessLevel = 'attendees_and_managers')
+    public function canViewRegistrationsListMessage($whichPlugin, $accessLevel = 'attendees_and_managers'): string
     {
         if (!$this->needsRegistration()) {
             return $this->translate('message_noRegistrationNecessary');
@@ -2949,7 +2950,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool TRUE if registration is possible, FALSE otherwise
      */
-    public function canSomebodyRegister()
+    public function canSomebodyRegister(): bool
     {
         $registrationManager = \Tx_Seminars_Service_RegistrationManager::getInstance();
         $allowsRegistrationByDate
@@ -2974,7 +2975,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return string empty string if everything is OK, else a localized
      *                error message
      */
-    public function canSomebodyRegisterMessage()
+    public function canSomebodyRegisterMessage(): string
     {
         $message = '';
         $registrationManager = \Tx_Seminars_Service_RegistrationManager::getInstance();
@@ -3006,7 +3007,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool
      */
-    public function isCanceled()
+    public function isCanceled(): bool
     {
         return $this->getStatus() === \Tx_Seminars_Model_Event::STATUS_CANCELED;
     }
@@ -3018,7 +3019,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool
      */
-    public function isRegistrationDeadlineOver()
+    public function isRegistrationDeadlineOver(): bool
     {
         return $GLOBALS['SIM_EXEC_TIME'] >= $this->getLatestPossibleRegistrationTime();
     }
@@ -3030,7 +3031,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool TRUE if the deadline has passed, FALSE otherwise
      */
-    public function isEarlyBirdDeadlineOver()
+    public function isEarlyBirdDeadlineOver(): bool
     {
         return $GLOBALS['SIM_EXEC_TIME']
             >= $this->getLatestPossibleEarlyBirdRegistrationTime();
@@ -3041,7 +3042,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool
      */
-    public function needsRegistration()
+    public function needsRegistration(): bool
     {
         return !$this->isEventTopic() && $this->getRecordPropertyBoolean('needs_registration');
     }
@@ -3051,7 +3052,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool
      */
-    public function hasUnlimitedVacancies()
+    public function hasUnlimitedVacancies(): bool
     {
         return $this->needsRegistration() && $this->getAttendancesMax() === 0;
     }
@@ -3063,7 +3064,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if multiple registrations are allowed,
      *                 FALSE otherwise
      */
-    public function allowsMultipleRegistrations()
+    public function allowsMultipleRegistrations(): bool
     {
         return $this->getTopicBoolean('allows_multiple_registrations');
     }
@@ -3106,7 +3107,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return int the number of attendances, will be >= 0
      */
-    private function countAttendances($queryParameters = '1=1')
+    private function countAttendances($queryParameters = '1=1'): int
     {
         $result = 0;
 
@@ -3173,7 +3174,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool TRUE if we are a date record, FALSE otherwise.
      */
-    public function isEventDate()
+    public function isEventDate(): bool
     {
         return $this->getRecordPropertyInteger('object_type') === \Tx_Seminars_Model_Event::TYPE_DATE;
     }
@@ -3183,7 +3184,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool TRUE if we are a topic record, FALSE otherwise.
      */
-    public function isEventTopic()
+    public function isEventTopic(): bool
     {
         return $this->getRecordPropertyInteger('object_type')
             == \Tx_Seminars_Model_Event::TYPE_TOPIC;
@@ -3195,7 +3196,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if we are a date record and have a topic,
      *                 FALSE otherwise
      */
-    private function isTopicOkay()
+    private function isTopicOkay(): bool
     {
         return $this->isEventDate() && $this->topic && $this->topic->isOk();
     }
@@ -3207,7 +3208,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return int either the UID of this record or its topic record,
      *                 depending on whether we are a date record
      */
-    public function getTopicUid()
+    public function getTopicUid(): int
     {
         if ($this->isTopicOkay()) {
             return $this->topic->getUid();
@@ -3224,7 +3225,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool TRUE if the corresponding integer exists and is non-empty
      */
-    protected function hasTopicInteger($key)
+    protected function hasTopicInteger(string $key): bool
     {
         if ($this->isTopicOkay()) {
             $result = $this->topic->hasRecordPropertyInteger($key);
@@ -3245,7 +3246,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return int the corresponding element from the record data array
      */
-    protected function getTopicInteger($key)
+    protected function getTopicInteger(string $key): int
     {
         if ($this->isTopicOkay()) {
             $result = $this->topic->getRecordPropertyInteger($key);
@@ -3265,7 +3266,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool TRUE if the corresponding string exists and is non-empty
      */
-    private function hasTopicString($key)
+    private function hasTopicString($key): bool
     {
         if ($this->isTopicOkay()) {
             $result = $this->topic->hasRecordPropertyString($key);
@@ -3286,7 +3287,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string the corresponding element from the record data array
      */
-    protected function getTopicString($key)
+    protected function getTopicString($key): string
     {
         if ($this->isTopicOkay()) {
             $result = $this->topic->getRecordPropertyString($key);
@@ -3307,7 +3308,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if the corresponding decimal value exists
      *                 and is not 0.00
      */
-    private function hasTopicDecimal($key)
+    private function hasTopicDecimal($key): bool
     {
         if ($this->isTopicOkay()) {
             $result = $this->topic->hasRecordPropertyDecimal($key);
@@ -3328,7 +3329,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string the corresponding element from the record data array
      */
-    protected function getTopicDecimal($key)
+    protected function getTopicDecimal($key): string
     {
         if ($this->isTopicOkay()) {
             $result = $this->topic->getRecordPropertyDecimal($key);
@@ -3350,7 +3351,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool the corresponding element from the record data array
      */
-    protected function getTopicBoolean($key)
+    protected function getTopicBoolean($key): bool
     {
         return $this->isTopicOkay()
             ? $this->topic->getRecordPropertyBoolean($key)
@@ -3363,7 +3364,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if we have at least one lodging option,
      *                 FALSE otherwise
      */
-    public function hasLodgings()
+    public function hasLodgings(): bool
     {
         return $this->hasRecordPropertyInteger('lodgings');
     }
@@ -3375,7 +3376,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *               array with the keys "caption" (for the title) and "value"
      *               (for the UID), might be empty
      */
-    public function getLodgings()
+    public function getLodgings(): array
     {
         $result = [];
 
@@ -3395,7 +3396,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool TRUE if we have at least one food option, FALSE otherwise
      */
-    public function hasFoods()
+    public function hasFoods(): bool
     {
         return $this->hasRecordPropertyInteger('foods');
     }
@@ -3407,7 +3408,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *               with the keys "caption" (for the title) and "value" (for
      *               the UID), might be empty
      */
-    public function getFoods()
+    public function getFoods(): array
     {
         $result = [];
 
@@ -3429,7 +3430,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if we have at least one option checkbox,
      *                 FALSE otherwise
      */
-    public function hasCheckboxes()
+    public function hasCheckboxes(): bool
     {
         return $this->hasTopicInteger('checkboxes');
     }
@@ -3443,7 +3444,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *               array with the keys "caption" (for the title) and "value"
      *               (for the UID), might be empty
      */
-    public function getCheckboxes()
+    public function getCheckboxes(): array
     {
         $result = [];
 
@@ -3474,7 +3475,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *               array with the keys "caption" (for the title) and "value"
      *               (for the UID), might be empty
      */
-    private function getMmRecords($foreignTable, $mmTable, $useTopicRecord)
+    private function getMmRecords($foreignTable, $mmTable, $useTopicRecord): array
     {
         $result = [];
 
@@ -3512,7 +3513,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string the captions of the array contents separated by LF, will be empty if the array is empty
      */
-    private function mmRecordsToText($records)
+    private function mmRecordsToText($records): string
     {
         $result = '';
 
@@ -3537,7 +3538,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return int the PID of the system folder where registration records
      *                 for this event should be stored or 0 if no folder is set
      */
-    public function getAttendancesPid()
+    public function getAttendancesPid(): int
     {
         if (!$this->hasOrganizers()) {
             return 0;
@@ -3552,7 +3553,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if a the system folder for registration is specified in this event's topmost organizers record,
      *                 FALSE otherwise
      */
-    public function hasAttendancesPid()
+    public function hasAttendancesPid(): bool
     {
         return $this->getAttendancesPid() !== 0;
     }
@@ -3579,7 +3580,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool TRUE if this event has an existing owner, FALSE otherwise
      */
-    public function hasOwner()
+    public function hasOwner(): bool
     {
         return $this->hasRecordPropertyInteger('owner_feuser');
     }
@@ -3590,7 +3591,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if a FE user is logged in and the user is
      *                 the owner of this event, FALSE otherwise
      */
-    public function isOwnerFeUser()
+    public function isOwnerFeUser(): bool
     {
         $loginManager = \Tx_Oelib_FrontEndLoginManager::getInstance();
         if (!$loginManager->isLoggedIn()) {
@@ -3615,7 +3616,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if the "travelling terms" checkbox should
      *                 be displayed, FALSE otherwise
      */
-    public function hasTerms2()
+    public function hasTerms2(): bool
     {
         return $this->getTopicBoolean('uses_terms_2');
     }
@@ -3626,7 +3627,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string this event's teaser text (or '' if there is an error)
      */
-    public function getTeaser()
+    public function getTeaser(): string
     {
         return $this->getTopicString('teaser');
     }
@@ -3638,7 +3639,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if we have a non-empty teaser text,
      *                 FALSE otherwise
      */
-    public function hasTeaser()
+    public function hasTeaser(): bool
     {
         return $this->hasTopicString('teaser');
     }
@@ -3656,7 +3657,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string the data retrieved from $this->recordData, may be empty
      */
-    public function getEventData($key)
+    public function getEventData($key): string
     {
         $trimmedKey = trim($key);
 
@@ -3823,7 +3824,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return string[][] the available prices as a reset array of arrays with the keys "caption" (for the title) and "value
      *                    (for the price code), might be empty
      */
-    public function getAvailablePrices()
+    public function getAvailablePrices(): array
     {
         $result = [];
 
@@ -3895,7 +3896,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if $priceCode matches a currently available
      *                 price, FALSE otherwise
      */
-    public function isPriceAvailable($priceCode)
+    public function isPriceAvailable($priceCode): bool
     {
         $availablePrices = $this->getAvailablePrices();
 
@@ -3908,7 +3909,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool true if this event currently has at least one non-zero price, false otherwise
      */
-    public function hasAnyPrice()
+    public function hasAnyPrice(): bool
     {
         if ($this->earlyBirdApplies()) {
             $result = $this->hasEarlyBirdPriceRegular()
@@ -3935,7 +3936,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @throws \InvalidArgumentException
      */
-    public function isUserBlocked($feUserUid)
+    public function isUserBlocked($feUserUid): bool
     {
         if ($feUserUid <= 0) {
             throw new \InvalidArgumentException('$feUserUid must be > 0, but actually is: ' . $feUserUid, 1533310684);
@@ -3960,7 +3961,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * @return string
      */
-    private function getQueryForCollidingEvents()
+    private function getQueryForCollidingEvents(): string
     {
         if ($this->hasTimeslots()) {
             $timeSpans = [];
@@ -3989,7 +3990,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if the collision check should be skipped for
      *                 this event, FALSE otherwise
      */
-    private function skipCollisionCheck()
+    private function skipCollisionCheck(): bool
     {
         return $this->getConfValueBoolean('skipRegistrationCollisionCheck') ||
             $this->getRecordPropertyBoolean('skip_collision_check');
@@ -4007,7 +4008,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string WHERE clause (without the "WHERE" keyword), will not be empty
      */
-    private function getQueryForCollidingEventsForTimeSpan($beginDate, $endDate)
+    private function getQueryForCollidingEventsForTimeSpan($beginDate, $endDate): string
     {
         return 'tx_seminars_seminars.uid <> ' . $this->getUid() .
             ' AND allows_multiple_registrations = 0' .
@@ -4023,7 +4024,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string
      */
-    private function getQueryPartForCollidingEventWithoutTimeSlots($beginDate, $endDate)
+    private function getQueryPartForCollidingEventWithoutTimeSlots($beginDate, $endDate): string
     {
         return '(timeslots = 0 AND (' .
             '(' .
@@ -4049,7 +4050,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string
      */
-    private function getQueryPartForCollidingEventWithTimeSlots($beginDate, $endDate)
+    private function getQueryPartForCollidingEventWithTimeSlots($beginDate, $endDate): string
     {
         return '(timeslots != 0 AND EXISTS (' .
             'SELECT * FROM tx_seminars_timeslots AS t ' .
@@ -4083,7 +4084,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return string the seminar date (or an empty string or a
      *                localized message)
      */
-    public function getDate($dash = '&#8211;')
+    public function getDate(string $dash = '&#8211;'): string
     {
         $result = '';
 
@@ -4101,7 +4102,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool TRUE if the seminar is hidden, FALSE otherwise
      */
-    public function isHidden()
+    public function isHidden(): bool
     {
         return $this->getRecordPropertyBoolean('hidden');
     }
@@ -4116,7 +4117,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool TRUE if unregistration is possible, FALSE otherwise
      */
-    public function isUnregistrationPossible()
+    public function isUnregistrationPossible(): bool
     {
         if (!$this->needsRegistration()) {
             return false;
@@ -4146,7 +4147,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if this event has a registration queue, FALSE
      *                 otherwise
      */
-    public function hasRegistrationQueue()
+    public function hasRegistrationQueue(): bool
     {
         return $this->getRecordPropertyBoolean('queue_size');
     }
@@ -4156,7 +4157,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return int number of attendances on the registration queue
      */
-    public function getAttendancesOnRegistrationQueue()
+    public function getAttendancesOnRegistrationQueue(): int
     {
         if (!$this->statisticsHaveBeenCalculated) {
             $this->calculateStatistics();
@@ -4171,7 +4172,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if there is at least one registration on the
      *                 waiting list, FALSE otherwise
      */
-    public function hasAttendancesOnRegistrationQueue()
+    public function hasAttendancesOnRegistrationQueue(): bool
     {
         return $this->getAttendancesOnRegistrationQueue() > 0;
     }
@@ -4189,7 +4190,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return int[] foreign record's UIDs, ordered by the field uid_foreign in the m:n table, may be empty
      */
-    public function getRelatedMmRecordUids($tableName)
+    public function getRelatedMmRecordUids($tableName): array
     {
         $result = [];
 
@@ -4221,7 +4222,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool
      */
-    public function hasDate()
+    public function hasDate(): bool
     {
         return $this->hasBeginDate() || $this->hasTimeslots();
     }
@@ -4232,7 +4233,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if the seminar has at least one time slot,
      *                 otherwise FALSE
      */
-    public function hasTimeslots()
+    public function hasTimeslots(): bool
     {
         return $this->hasRecordPropertyInteger('timeslots');
     }
@@ -4243,7 +4244,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return int our begin date and time as a UNIX timestamp or 0 if
      *                 we don't have a begin date
      */
-    public function getBeginDateAsTimestamp()
+    public function getBeginDateAsTimestamp(): int
     {
         if (!$this->hasTimeslots()) {
             return parent::getBeginDateAsTimestamp();
@@ -4274,7 +4275,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return int our end date and time as a UNIX timestamp or 0 if we
      *                 don't have an end date
      */
-    public function getEndDateAsTimestamp()
+    public function getEndDateAsTimestamp(): int
     {
         if (!$this->hasTimeslots()) {
             return parent::getEndDateAsTimestamp();
@@ -4311,7 +4312,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return int the number of place relations of the event, will be >= 0
      */
-    public function updatePlaceRelationsFromTimeSlots()
+    public function updatePlaceRelationsFromTimeSlots(): int
     {
         if (!$this->hasTimeslots()) {
             return 0;
@@ -4348,7 +4349,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return \Tx_Seminars_Bag_TimeSlot bag with this event's time slots, may be empty
      */
-    private function createTimeSlotBag()
+    private function createTimeSlotBag(): \Tx_Seminars_Bag_TimeSlot
     {
         /** @var \Tx_Seminars_Bag_TimeSlot $bag */
         $bag = GeneralUtility::makeInstance(
@@ -4375,7 +4376,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *               - 'place' as key and the time slot's place as value
      *               - 'speakers' as key and the time slot's speakers as value
      */
-    public function getTimeSlotsAsArrayWithMarkers()
+    public function getTimeSlotsAsArrayWithMarkers(): array
     {
         $result = [];
 
@@ -4398,7 +4399,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * @return \Tx_Seminars_Bag_TimeSlot
      */
-    public function getTimeSlots()
+    public function getTimeSlots(): \Tx_Seminars_Bag_TimeSlot
     {
         /** @var \Tx_Seminars_Bag_TimeSlot $timeSlotBag */
         $timeSlotBag = GeneralUtility::makeInstance(
@@ -4418,7 +4419,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if the seminar has at least one category,
      *                 FALSE otherwise
      */
-    public function hasCategories()
+    public function hasCategories(): bool
     {
         return $this->hasTopicInteger('categories');
     }
@@ -4429,7 +4430,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return int the number of categories associated with this event,
      *                 will be >= 0
      */
-    public function getNumberOfCategories()
+    public function getNumberOfCategories(): int
     {
         return $this->getTopicInteger('categories');
     }
@@ -4444,7 +4445,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *               category icon. Will be an empty array in if the event has
      *               no categories.
      */
-    public function getCategories()
+    public function getCategories(): array
     {
         if (!$this->hasCategories()) {
             return [];
@@ -4478,7 +4479,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if this event has at least one attached file,
      *                 FALSE otherwise
      */
-    public function hasAttachedFiles()
+    public function hasAttachedFiles(): bool
     {
         return $this->hasRecordPropertyString('attached_files')
             || $this->hasTopicString('attached_files');
@@ -4508,7 +4509,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *               "size" of the attached file, will be empty if
      *               there are no attached files
      */
-    public function getAttachedFiles(AbstractPlugin $plugin)
+    public function getAttachedFiles(AbstractPlugin $plugin): array
     {
         if (!$this->hasAttachedFiles()) {
             return [];
@@ -4567,7 +4568,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return string the file name of our image (relative to the extension's
      *                upload path) or '' if this event has no image
      */
-    public function getImage()
+    public function getImage(): string
     {
         return $this->getTopicString('image');
     }
@@ -4577,7 +4578,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool TRUE if we have an non-empty image, FALSE otherwise.
      */
-    public function hasImage()
+    public function hasImage(): bool
     {
         return $this->hasTopicString('image');
     }
@@ -4592,7 +4593,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *                containing the seminar image starting with a space, will
      *                be empty if seminar has no image
      */
-    public function createImageForSingleView($maxImageWidth, $maxImageHeight)
+    public function createImageForSingleView($maxImageWidth, $maxImageHeight): string
     {
         if (!$this->hasImage()) {
             return '';
@@ -4629,7 +4630,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if this event has any requiring events, FALSE
      *                 otherwise
      */
-    public function hasRequirements()
+    public function hasRequirements(): bool
     {
         return $this->hasTopicInteger('requirements');
     }
@@ -4641,7 +4642,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if this event has any depending events, FALSE
      *                 otherwise
      */
-    public function hasDependencies()
+    public function hasDependencies(): bool
     {
         return $this->hasTopicInteger('dependencies');
     }
@@ -4653,7 +4654,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return \Tx_Seminars_Bag_Event the required events, will be empty if this
      *                               event has no required events
      */
-    public function getRequirements()
+    public function getRequirements(): \Tx_Seminars_Bag_Event
     {
         /** @var \Tx_Seminars_BagBuilder_Event $builder */
         $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Event::class);
@@ -4669,7 +4670,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return \Tx_Seminars_Bag_Event the depending events, will be empty if
      *                               this event has no depending events
      */
-    public function getDependencies()
+    public function getDependencies(): \Tx_Seminars_Bag_Event
     {
         /** @var \Tx_Seminars_BagBuilder_Event $builder */
         $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Event::class);
@@ -4683,7 +4684,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool TRUE if the event has been confirmed, FALSE otherwise
      */
-    public function isConfirmed()
+    public function isConfirmed(): bool
     {
         return $this->getStatus() == \Tx_Seminars_Model_Event::STATUS_CONFIRMED;
     }
@@ -4693,7 +4694,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool TRUE if the event has been planned, FALSE otherwise
      */
-    public function isPlanned()
+    public function isPlanned(): bool
     {
         return $this->getStatus() == \Tx_Seminars_Model_Event::STATUS_PLANNED;
     }
@@ -4703,7 +4704,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return int the status of this event, will be >= 0
      */
-    private function getStatus()
+    private function getStatus(): int
     {
         return $this->getRecordPropertyInteger('cancelled');
     }
@@ -4730,7 +4731,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @throws \BadMethodCallException
      */
-    public function getCancelationDeadline()
+    public function getCancelationDeadline(): int
     {
         if (!$this->hasBeginDate()) {
             throw new \BadMethodCallException(
@@ -4786,7 +4787,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool TRUE if this event has a license expiry, FALSE otherwise
      */
-    public function hasExpiry()
+    public function hasExpiry(): bool
     {
         return $this->hasRecordPropertyInteger('expiry');
     }
@@ -4797,7 +4798,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return string this event's license expiry date as a formatted date,
      *                will be empty if this event has no license expiry
      */
-    public function getExpiry()
+    public function getExpiry(): string
     {
         if (!$this->hasExpiry()) {
             return '';
@@ -4815,7 +4816,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if this event has a begin date for the registration,
      *                 FALSE otherwise
      */
-    public function hasRegistrationBegin()
+    public function hasRegistrationBegin(): bool
     {
         return $this->hasRecordPropertyInteger('begin_date_registration');
     }
@@ -4828,7 +4829,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *                 time-stamp, will be 0 if no begin date for the
      *                 registration is set
      */
-    public function getRegistrationBeginAsUnixTimestamp()
+    public function getRegistrationBeginAsUnixTimestamp(): int
     {
         return $this->getRecordPropertyInteger('begin_date_registration');
     }
@@ -4844,7 +4845,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return string the date and time of the registration begin date, will be
      *                an empty string if this event registration begin date
      */
-    public function getRegistrationBegin()
+    public function getRegistrationBegin(): string
     {
         if (!$this->hasRegistrationBegin()) {
             return '';
@@ -4862,7 +4863,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return \Tx_Oelib_List with the models for the places of this event, will be empty if this event has no places
      */
-    public function getPlaces()
+    public function getPlaces(): \Tx_Oelib_List
     {
         if (!$this->hasPlace()) {
             return new \Tx_Oelib_List();
@@ -4886,7 +4887,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if this event has at least one offline registration,
      *                 FALSE otherwise
      */
-    public function hasOfflineRegistrations()
+    public function hasOfflineRegistrations(): bool
     {
         return $this->hasRecordPropertyInteger('offline_attendees');
     }
@@ -4897,7 +4898,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return int the number of offline registrations for this event, will
      *                 be 0 if this event has no offline registrations
      */
-    public function getOfflineRegistrations()
+    public function getOfflineRegistrations(): int
     {
         return $this->getRecordPropertyInteger('offline_attendees');
     }
@@ -4907,7 +4908,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool
      */
-    public function haveOrganizersBeenNotifiedAboutEnoughAttendees()
+    public function haveOrganizersBeenNotifiedAboutEnoughAttendees(): bool
     {
         return $this->getRecordPropertyBoolean('organizers_notified_about_minimum_reached');
     }
@@ -4927,7 +4928,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool
      */
-    public function shouldMuteNotificationEmails()
+    public function shouldMuteNotificationEmails(): bool
     {
         return $this->getRecordPropertyBoolean('mute_notification_emails');
     }
@@ -4947,7 +4948,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool
      */
-    public function shouldAutomaticallyConfirmOrCancel()
+    public function shouldAutomaticallyConfirmOrCancel(): bool
     {
         return $this->getRecordPropertyBoolean('automatic_confirmation_cancelation');
     }
@@ -4962,7 +4963,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *                 by configuration and the begin date, will be 0 if the
      *                 unregistrationDeadlineDaysBeforeBeginDate is not set
      */
-    private function getUnregistrationDeadlineFromConfiguration()
+    private function getUnregistrationDeadlineFromConfiguration(): int
     {
         if (!$this->hasConfValueInteger(
             'unregistrationDeadlineDaysBeforeBeginDate'
@@ -4984,7 +4985,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return int the unregistration deadline for this event as UNIX
      *                 timestamp, will be 0 if this event has no begin date
      */
-    public function getUnregistrationDeadlineFromModelAndConfiguration()
+    public function getUnregistrationDeadlineFromModelAndConfiguration(): int
     {
         if ($this->hasUnregistrationDeadline()) {
             return $this->getUnregistrationDeadlineAsTimestamp();
@@ -5009,7 +5010,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return string this event's publication hash, will be empty for published
      *                events
      */
-    public function getPublicationHash()
+    public function getPublicationHash(): string
     {
         return $this->getRecordPropertyString('publication_hash');
     }
@@ -5037,7 +5038,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool TRUE if this event has been published, FALSE otherwise
      */
-    public function isPublished()
+    public function isPublished(): bool
     {
         return !$this->hasRecordPropertyString('publication_hash');
     }

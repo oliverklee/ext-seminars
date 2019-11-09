@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /**
  * This class represents a mapper for registrations.
@@ -37,7 +38,7 @@ class Tx_Seminars_Mapper_Registration extends \Tx_Oelib_DataMapper
      *
      * @return int
      */
-    public function countByFrontEndUser(\Tx_Seminars_Model_FrontEndUser $user)
+    public function countByFrontEndUser(\Tx_Seminars_Model_FrontEndUser $user): int
     {
         return $this->countByWhereClause('user = ' . $user->getUid());
     }

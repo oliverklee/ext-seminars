@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /**
  * This class represents a view helper for rendering time ranges.
@@ -36,7 +37,7 @@ class Tx_Seminars_ViewHelper_TimeRange
      *
      * @return string the time
      */
-    public function render(\Tx_Seminars_Model_AbstractTimeSpan $timeSpan, $dash = '&#8211;')
+    public function render(\Tx_Seminars_Model_AbstractTimeSpan $timeSpan, $dash = '&#8211;'): string
     {
         if (!$this->hasTime($timeSpan)) {
             return $this->translator->translate('message_willBeAnnounced');
@@ -66,7 +67,7 @@ class Tx_Seminars_ViewHelper_TimeRange
      *
      * @return bool
      */
-    protected function hasTime(\Tx_Seminars_Model_AbstractTimeSpan $timeSpan)
+    protected function hasTime(\Tx_Seminars_Model_AbstractTimeSpan $timeSpan): bool
     {
         if (!$timeSpan->hasBeginDate()) {
             return false;
@@ -83,7 +84,7 @@ class Tx_Seminars_ViewHelper_TimeRange
      *
      * @return bool
      */
-    protected function hasEndTime(\Tx_Seminars_Model_AbstractTimeSpan $timeSpan)
+    protected function hasEndTime(\Tx_Seminars_Model_AbstractTimeSpan $timeSpan): bool
     {
         if (!$timeSpan->hasEndDate()) {
             return false;
@@ -99,7 +100,7 @@ class Tx_Seminars_ViewHelper_TimeRange
      *
      * @return string the time portion of the UNIX timestamp formatted according to the format in plugin.tx_seminars.timeFormat
      */
-    protected function getAsTime($timestamp)
+    protected function getAsTime($timestamp): string
     {
         return strftime($this->configuration->getAsString('timeFormat'), $timestamp);
     }
@@ -111,7 +112,7 @@ class Tx_Seminars_ViewHelper_TimeRange
      *
      * @return string the time portion of the UNIX timestamp
      */
-    protected function getTimeFromTimestamp($timestamp)
+    protected function getTimeFromTimestamp($timestamp): string
     {
         return strftime('%H:%M', $timestamp);
     }

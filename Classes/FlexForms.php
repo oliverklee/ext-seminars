@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 /**
  * This class is needed to dynamically create the list of selectable database
@@ -17,7 +18,7 @@ class Tx_Seminars_FlexForms
      *
      * @return array[] the modified flex forms configuration including the selectable database columns
      */
-    public function getShowFeUserFieldsInRegistrationsList(array $configuration)
+    public function getShowFeUserFieldsInRegistrationsList(array $configuration): array
     {
         foreach ($this->getColumnsOfTable('fe_users') as $column) {
             $configuration['items'][] = [0 => $column, 1 => $column];
@@ -35,7 +36,7 @@ class Tx_Seminars_FlexForms
      *
      * @return array[] the modified flex forms configuration including the selectable database columns
      */
-    public function getShowRegistrationFieldsInRegistrationList(array $configuration)
+    public function getShowRegistrationFieldsInRegistrationList(array $configuration): array
     {
         foreach ($this->getColumnsOfTable('tx_seminars_attendances') as $column) {
             $configuration['items'][] = [0 => $column, 1 => $column];
@@ -52,7 +53,7 @@ class Tx_Seminars_FlexForms
      *
      * @return string[] the column names of the given table name, may not be empty
      */
-    private function getColumnsOfTable($tableName)
+    private function getColumnsOfTable($tableName): array
     {
         if ($tableName == '') {
             throw new \InvalidArgumentException('The first parameter $tableName must not be empty.', 1333291708);
