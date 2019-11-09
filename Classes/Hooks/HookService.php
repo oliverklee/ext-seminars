@@ -11,9 +11,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * This class provides functions for unified hooks.
  *
- * It refactors the wide-spread use of this type of hooks in seminars.
+ * It unifies the wide-spread use of this type of hooks in seminars.
  *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Michael Kramer <m.kramer@mxp.de>
  */
 class HookService
@@ -40,8 +39,6 @@ class HookService
     protected $hookObjects = [];
 
     /**
-     * Whether the hooks have been retrieved
-     *
      * @var boolean
      */
     protected $hooksHaveBeenRetrieved = false;
@@ -49,13 +46,13 @@ class HookService
     /**
      * The constructor.
      *
-     * @throws \UnexpectedValueException
-     *         if $interfaceName does not extend Hook interface
-     *
      * @param $interfaceName interface the hook needs implemented
      * @param $index optional index to $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']
      *               if not using the interface name (for backwards compatibility)
      *               (the interface name is recommended)
+     *
+     * @throws \UnexpectedValueException
+     *         if $interfaceName does not extend Hook interface
      */
     public function __construct(string $interfaceName, string $index = '')
     {
@@ -84,12 +81,12 @@ class HookService
     /**
      * Gets the hook objects for the interface.
      *
+     * @return array
+     *         the hook objects, will be empty if no hooks have been set
+     *
      * @throws \UnexpectedValueException
      *         if there are registered hook classes that do not implement the
      *         $this->interfaceName interface
-     *
-     * @return array
-     *         the hook objects, will be empty if no hooks have been set
      */
     public function getHooks(): array
     {
