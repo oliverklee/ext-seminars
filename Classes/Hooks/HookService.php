@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Hooks;
 
-use UnexpectedValueException;
-
 use OliverKlee\Seminars\Interfaces\Hook;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -57,14 +55,14 @@ class HookService
     public function __construct(string $interfaceName, string $index = '')
     {
         if (!\interface_exists($interfaceName)) {
-            throw new UnexpectedValueException(
+            throw new \UnexpectedValueException(
                 'The interface ' . $interfaceName . ' does not exist.',
                 1565089078
             );
         }
 
         if (!\in_array(Hook::class, \class_implements($interfaceName), true)) {
-            throw new UnexpectedValueException(
+            throw new \UnexpectedValueException(
                 'The interface ' . $interfaceName . ' does not extend ' . Hook::class . ' interface.',
                 1565088963
             );
@@ -91,7 +89,7 @@ class HookService
             foreach ((array)$hookClasses as $hookClass) {
                 $hookInstance = GeneralUtility::makeInstance($hookClass);
                 if (!($hookInstance instanceof $this->interfaceName)) {
-                    throw new UnexpectedValueException(
+                    throw new \UnexpectedValueException(
                         'The class ' . \get_class($hookInstance) . ' is registered for the ' . $this->index .
                             ' hook list, but does not implement the ' . $this->interfaceName . ' interface.',
                         1448901897
