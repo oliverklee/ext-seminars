@@ -1,17 +1,21 @@
 <?php
+declare(strict_types = 1);
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use OliverKlee\Seminars\Service\HookService;
+namespace OliverKlee\Seminars\Tests\Unit\Hooks;
+
+use Nimut\TestingFramework\TestCase\UnitTestCase;
+use OliverKlee\Seminars\Hooks\HookService;
 use OliverKlee\Seminars\Interfaces\Hook;
-use OliverKlee\Seminars\Interfaces\Hook\TestHook;
-use Tx_Seminars_Tests_Unit_Fixtures_Service_TestHookImplementor as TestHookImplementor;
+use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestHookInterface;
+use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestHookImplementor;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Test case.
  *
  * @author Michael Kramer <m.kramer@mxp.de>
  */
-class Tx_Seminars_Tests_Unit_Service_HookServiceTest extends \Tx_Phpunit_TestCase
+class HookServiceTest extends UnitTestCase
 {
     /**
      * @var array backed-up extension configuration of the TYPO3 configuration
@@ -36,7 +40,7 @@ class Tx_Seminars_Tests_Unit_Service_HookServiceTest extends \Tx_Phpunit_TestCas
     /**
      * Creates a TestHook implementor object.
      *
-     * @return \Tx_Seminars_Tests_Unit_Fixtures_Service_TestingHookService
+     * @return \OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestHookImplementor
      */
     protected function createTestHookImplementor()
     {
@@ -48,24 +52,24 @@ class Tx_Seminars_Tests_Unit_Service_HookServiceTest extends \Tx_Phpunit_TestCas
     /**
      * Creates a TestHook accepting Hook object.
      *
-     * @return \OliverKlee\Seminars\Service\HookService
+     * @return \OliverKlee\Seminars\Hooks\HookService
      */
     protected function createHookObject()
     {
         return GeneralUtility::makeInstance(
             HookService::class,
-            TestHook::class
+            TestHookInterface::class
         );
     }
 
     /*
-     * Tests concerning the Hook implementors
+     * Tests concerning the TestHookImplementor
      */
 
     /**
      * @test
      */
-    public function testHookImplementorCanBeCreated()
+    public function hookImplementorCanBeCreated()
     {
         self::assertInstanceOf(
             TestHookImplementor::class,
@@ -76,7 +80,7 @@ class Tx_Seminars_Tests_Unit_Service_HookServiceTest extends \Tx_Phpunit_TestCas
     /**
      * @test
      */
-    public function testHookImplementorImplementsHookHierachie()
+    public function hookImplementorImplementsHookHierachie()
     {
         $implementor = $this->createTestHookImplementor();
 
@@ -86,7 +90,7 @@ class Tx_Seminars_Tests_Unit_Service_HookServiceTest extends \Tx_Phpunit_TestCas
         );
 
         self::assertInstanceOf(
-            TestHook::class,
+            TestHookInterface::class,
             $implementor
         );
     }
@@ -94,7 +98,7 @@ class Tx_Seminars_Tests_Unit_Service_HookServiceTest extends \Tx_Phpunit_TestCas
     /**
      * @test
      */
-    public function testHookImplementorImplementsRequiredTestApi()
+    public function hookImplementorImplementsRequiredTestApi()
     {
         $implementor = $this->createTestHookImplementor();
 
@@ -106,7 +110,7 @@ class Tx_Seminars_Tests_Unit_Service_HookServiceTest extends \Tx_Phpunit_TestCas
     /**
      * @test
      */
-    public function testHookImplementorTestHookMethodCanBeCalledAndReportsBeingCalled()
+    public function hookImplementorTestHookMethodCanBeCalledAndReportsBeingCalled()
     {
         $implementor = $this->createTestHookImplementor();
 
@@ -135,7 +139,7 @@ class Tx_Seminars_Tests_Unit_Service_HookServiceTest extends \Tx_Phpunit_TestCas
      */
     public function hookObjectForTestHookWithNoHookImplemetorRegisteredResultsInEmptyHookList()
     {
-        unset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestHook::class]);
+        unset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestHookInterface::class]);
         $hookObject = $this->createHookObject();
 
         self::assertEmpty($hookObject->getHooks());
@@ -146,12 +150,13 @@ class Tx_Seminars_Tests_Unit_Service_HookServiceTest extends \Tx_Phpunit_TestCas
      */
     public function hookObjectForTestHookWithOneHookImplemetorRegisteredResultsInOneHookInHookList()
     {
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestHook::class][1565007112] =
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestHookInterface::class][1565007112] =
             TestHookImplementor::class;
         $hookObject = $this->createHookObject();
 
         self::assertCount(1, $hookObject->getHooks());
-        self::assertContainsOnlyInstancesOf(TestHook::class, $hookObject->getHooks());
+        self::assertContainsOnlyInstancesOf(TestHookInterface::class, $hookObject->getHooks());
+        self::assertContainsOnlyInstancesOf(TestHookImplementor::class, $hookObject->getHooks());
     }
 
     /**
@@ -159,12 +164,13 @@ class Tx_Seminars_Tests_Unit_Service_HookServiceTest extends \Tx_Phpunit_TestCas
      */
     public function hookObjectForTestHookWithTwoHookImplemetorsRegisteredResultsInTwoHooksInHookList()
     {
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestHook::class][1565007112] =
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestHook::class][1565007113] =
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestHookInterface::class][1565007112] =
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestHookInterface::class][1565007113] =
             TestHookImplementor::class;
         $hookObject = $this->createHookObject();
 
         self::assertCount(2, $hookObject->getHooks());
-        self::assertContainsOnlyInstancesOf(TestHook::class, $hookObject->getHooks());
+        self::assertContainsOnlyInstancesOf(TestHookInterface::class, $hookObject->getHooks());
+        self::assertContainsOnlyInstancesOf(TestHookImplementor::class, $hookObject->getHooks());
     }
 }

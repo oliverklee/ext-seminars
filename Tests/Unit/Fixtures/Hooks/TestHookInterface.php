@@ -1,6 +1,6 @@
 <?php
 
-namespace OliverKlee\Seminars\Interfaces\Hook;
+namespace OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks;
 
 use OliverKlee\Seminars\Interfaces\Hook;
 
@@ -9,7 +9,7 @@ use OliverKlee\Seminars\Interfaces\Hook;
  *
  * @author Michael Kramer <m.kramer@mxp.de>
  */
-interface TestHook extends Hook
+interface TestHookInterface extends Hook
 {
     /**
      * Test Hook Method

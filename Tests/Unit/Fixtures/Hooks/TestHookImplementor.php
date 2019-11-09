@@ -1,13 +1,16 @@
 <?php
+declare(strict_types = 1);
 
-use OliverKlee\Seminars\Interfaces\Hook\TestHook;
+namespace OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks;
+
+use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestHookInterface;
 
 /**
  * This class just makes some public stuff for testing purposes.
  *
  * @author Michael Kramer <m.kramer@mxp.de>
  */
-class Tx_Seminars_Tests_Unit_Fixtures_Service_TestHookImplementor implements TestHook
+class TestHookImplementor implements TestHookInterface
 {
     public $wasCalled = false;
 
