@@ -21,7 +21,7 @@ class HookServiceTest extends UnitTestCase
      * @var array backed-up extension configuration of the TYPO3 configuration
      *            variables
      */
-    protected $extConfBackup = [];
+    private $extConfBackup = [];
 
     protected function setUp()
     {
@@ -42,7 +42,7 @@ class HookServiceTest extends UnitTestCase
      *
      * @return \OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestHookImplementor
      */
-    protected function createTestHookImplementor()
+    private function createTestHookImplementor()
     {
         return GeneralUtility::makeInstance(TestHookImplementor::class);
     }
@@ -52,7 +52,7 @@ class HookServiceTest extends UnitTestCase
      *
      * @return \OliverKlee\Seminars\Hooks\HookService
      */
-    protected function createHookObject()
+    private function createHookObject()
     {
         return GeneralUtility::makeInstance(HookService::class, TestHookInterface::class);
     }
