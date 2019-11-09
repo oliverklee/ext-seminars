@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Hooks;
 
@@ -56,7 +57,7 @@ class HookService
      *               if not using the interface name (for backwards compatibility)
      *               (the interface name is recommended)
      */
-    public function __construct($interfaceName, $index = '')
+    public function __construct(string $interfaceName, string $index = '')
     {
         if (!interface_exists($interfaceName)) {
             throw new UnexpectedValueException(
@@ -90,7 +91,7 @@ class HookService
      * @return array
      *         the hook objects, will be empty if no hooks have been set
      */
-    public function getHooks()
+    public function getHooks(): array
     {
         if (!$this->hooksHaveBeenRetrieved) {
             $hookClasses = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][$this->index];
