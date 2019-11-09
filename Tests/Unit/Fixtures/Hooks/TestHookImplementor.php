@@ -20,6 +20,5 @@ class TestHookImplementor implements TestHookInterface
     public function testHookMethod()
     {
         $this->wasCalled = true;
-        return;
     }
 }
