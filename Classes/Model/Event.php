@@ -941,8 +941,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Returns our special price.
      *
-     * @return float our special price, will be 0.00 if this event has no special
-     *               price, will be >= 0.00
+     * @return float our special price, will be 0.00 if this event has no special price, will be >= 0.00
      */
     public function getSpecialPrice()
     {

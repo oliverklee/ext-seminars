@@ -101,50 +101,27 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends \Tx_Seminars_OldMod
             $beginDate = $this->getBeginDateAsTimestamp();
             $endDate = $this->getEndDateAsTimestamp();
 
-            $beginDateDay = strftime(
-                $this->getConfValueString('dateFormatYMD'),
-                $beginDate
-            );
-            $endDateDay = strftime(
-                $this->getConfValueString('dateFormatYMD'),
-                $endDate
-            );
+            $beginDateDay = \strftime($this->getConfValueString('dateFormatYMD'), $beginDate);
+            $endDateDay = \strftime($this->getConfValueString('dateFormatYMD'), $endDate);
 
             // Does the workshop span only one day (or is open-ended)?
-            if (($beginDateDay == $endDateDay) || !$this->hasEndDate()) {
+            if ($beginDateDay === $endDateDay || !$this->hasEndDate()) {
                 $result = $beginDateDay;
             } else {
                 if ($this->getConfValueBoolean('abbreviateDateRanges')) {
-                    // Are the years different? Then includes the complete begin
-                    // date.
-                    if (strftime(
-                        $this->getConfValueString('dateFormatY'),
-                        $beginDate
-                    ) != strftime(
-                            $this->getConfValueString('dateFormatY'),
-                            $endDate
-                        )
+                    // Are the years different? Then includes the complete begin date.
+                    if (\strftime($this->getConfValueString('dateFormatY'), $beginDate)
+                        !== \strftime($this->getConfValueString('dateFormatY'), $endDate)
                     ) {
                         $result = $beginDateDay;
                     } else {
                         // Are the months different? Then include day and month.
-                        if (strftime(
-                            $this->getConfValueString('dateFormatM'),
-                            $beginDate
-                        ) != strftime(
-                                $this->getConfValueString('dateFormatM'),
-                                $endDate
-                            )
+                        if (\strftime($this->getConfValueString('dateFormatM'), $beginDate)
+                            !== \strftime($this->getConfValueString('dateFormatM'), $endDate)
                         ) {
-                            $result = strftime(
-                                $this->getConfValueString('dateFormatMD'),
-                                $beginDate
-                            );
+                            $result = \strftime($this->getConfValueString('dateFormatMD'), $beginDate);
                         } else {
-                            $result = strftime(
-                                $this->getConfValueString('dateFormatD'),
-                                $beginDate
-                            );
+                            $result = \strftime($this->getConfValueString('dateFormatD'), $beginDate);
                         }
                     }
                 } else {
@@ -164,7 +141,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends \Tx_Seminars_OldMod
      * If there's an end date but no begin date,
      * this function still will return FALSE.
      *
-     * @return bool TRUE if we have a begin date, FALSE otherwise.
+     * @return bool
      */
     public function hasDate()
     {

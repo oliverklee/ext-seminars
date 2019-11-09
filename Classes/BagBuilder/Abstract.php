@@ -119,8 +119,7 @@ abstract class Tx_Seminars_BagBuilder_Abstract
 
         $recursivePidList = \Tx_Oelib_Db::createRecursivePageList($sourcePagePids, $recursionDepth);
 
-        $this->whereClauseParts['pages'] = $this->tableName . '.pid IN (' .
-            $recursivePidList . ')';
+        $this->whereClauseParts['pages'] = $this->tableName . '.pid IN (' . $recursivePidList . ')';
     }
 
     /**

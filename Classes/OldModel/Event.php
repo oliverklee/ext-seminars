@@ -787,7 +787,10 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
                 'speaker_item_description',
                 $speaker->hasDescription() ? $speaker->getDescription($plugin) : ''
             );
-            $plugin->setMarker('speaker_image', $speaker->hasImage() ? $this->renderSpeakerImage($speaker, $plugin) : '');
+            $plugin->setMarker(
+                'speaker_image',
+                $speaker->hasImage() ? $this->renderSpeakerImage($speaker, $plugin) : ''
+            );
             $result[] = $plugin->getSubpart('SPEAKER_LIST_ITEM');
         }
 
@@ -795,13 +798,15 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     }
 
     /**
-     * @param Tx_Seminars_OldModel_Speaker $speaker
-     * @param Tx_Oelib_TemplateHelper $plugin
+     * @param \Tx_Seminars_OldModel_Speaker $speaker
+     * @param \Tx_Oelib_TemplateHelper $plugin
      *
      * @return string
      */
-    private function renderSpeakerImage(\Tx_Seminars_OldModel_Speaker $speaker, \Tx_Oelib_TemplateHelper $plugin)
-    {
+    private function renderSpeakerImage(
+        \Tx_Seminars_OldModel_Speaker $speaker,
+        \Tx_Oelib_TemplateHelper $plugin
+    ) {
         $imageConfiguration = [
             'altText' => $plugin->translate('speakerImage.alt'),
             'titleText' => $plugin->translate('speakerImage.alt'),
@@ -1148,7 +1153,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Gets our regular price as a decimal.
      *
-     * @return string the regular event price
+     * @return string
      */
     private function getPriceRegularAmount()
     {
@@ -1223,7 +1228,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * If there is no regular early bird price, this function returns "0.00".
      *
-     * @return float the regular early bird event price
+     * @return string the regular early bird event price
      */
     private function getEarlyBirdPriceRegularAmount()
     {
@@ -1248,7 +1253,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * If there is no special price during the early bird phase, this function
      * returns "0.00".
      *
-     * @return float the special event price during the early bird phase
+     * @return string the special event price during the early bird phase
      */
     private function getEarlyBirdPriceSpecialAmount()
     {
@@ -1357,7 +1362,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * If there is no special price, this function returns "0.00".
      *
-     * @return float the special event price
+     * @return string the special event price
      */
     private function getPriceSpecialAmount()
     {
@@ -1394,7 +1399,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * If there is no regular price (including full board), this function
      * returns "0.00".
      *
-     * @return float the regular event price (including full board)
+     * @return string the regular event price (including full board)
      */
     private function getPriceRegularBoardAmount()
     {
@@ -1432,7 +1437,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * If there is no special price (including full board), this function
      * returns "0.00".
      *
-     * @return float the special event price (including full board)
+     * @return string the special event price (including full board)
      */
     private function getPriceSpecialBoardAmount()
     {
@@ -2011,7 +2016,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         if ($dbResult) {
             while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-                $result[] = $row['title'];
+                $result[] = (string)$row['title'];
             }
         }
 
@@ -2623,7 +2628,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
             if ($dbResult) {
                 $numberOfVips = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-                $result = ($numberOfVips['num'] > 0);
+                $result = $numberOfVips['num'] > 0;
             }
         }
 
@@ -3143,7 +3148,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Retrieves the topic from the DB and returns it as an object.
      *
-     * In case of an error, the return value will be NULL.
+     * In case of an error, the return value will be null.
      *
      * @return \Tx_Seminars_OldModel_Event|null
      */
@@ -3657,14 +3662,13 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         switch ($trimmedKey) {
             case 'uid':
-                $result = $this->getUid();
+                $result = (string)$this->getUid();
                 break;
             case 'tstamp':
                 // The fallthrough is intended.
             case 'crdate':
-                $result = strftime(
-                    $this->getConfValueString('dateFormatYMD') . ' '
-                    . $this->getConfValueString('timeFormat'),
+                $result = \strftime(
+                    $this->getConfValueString('dateFormatYMD') . ' ' . $this->getConfValueString('timeFormat'),
                     $this->getRecordPropertyInteger($trimmedKey)
                 );
                 break;
@@ -3765,19 +3769,13 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
                 $result = (string)$this->getVacancies();
                 break;
             case 'enough_attendees':
-                $result = $this->hasEnoughAttendances()
-                    ? $this->translate('label_yes')
-                    : $this->translate('label_no');
+                $result = $this->hasEnoughAttendances() ? $this->translate('label_yes') : $this->translate('label_no');
                 break;
             case 'is_full':
-                $result = $this->isFull()
-                    ? $this->translate('label_yes')
-                    : $this->translate('label_no');
+                $result = $this->isFull() ? $this->translate('label_yes') : $this->translate('label_no');
                 break;
             case 'cancelled':
-                $result = $this->isCanceled()
-                    ? $this->translate('label_yes')
-                    : $this->translate('label_no');
+                $result = $this->isCanceled() ? $this->translate('label_yes') : $this->translate('label_no');
                 break;
             default:
                 $result = '';
@@ -4221,7 +4219,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * If there's an end date but no begin date, this function still will return
      * FALSE.
      *
-     * @return bool TRUE if we have a begin date, FALSE otherwise.
+     * @return bool
      */
     public function hasDate()
     {
@@ -4297,7 +4295,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         if ($dbResult) {
             $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
             if ($row !== false) {
-                $result = $row['end_date'];
+                $result = (int)$row['end_date'];
             }
         }
 
@@ -4542,7 +4540,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
                     \htmlspecialchars(basename($attachedFile), ENT_QUOTES | ENT_HTML5),
                     ['parameter' => $uploadFolderUrl . $attachedFile]
                 ),
-                'type' => \htmlspecialchars(($matches[1] ?? 'none'), ENT_QUOTES | ENT_HTML5),
+                'type' => \htmlspecialchars($matches[1] ?? 'none', ENT_QUOTES | ENT_HTML5),
                 'size' => GeneralUtility::formatSize(filesize($uploadFolderPath . $attachedFile)),
             ];
         }
