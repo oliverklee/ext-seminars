@@ -71,10 +71,7 @@ class HookService
         }
 
         $this->interfaceName = $interfaceName;
-        $this->index = $interfaceName;
-        if ($index != '') {
-            $this->index = $index;
-        }
+        $this->index = empty($index) ? $interfaceName : $index;
     }
 
     /**
