@@ -9,7 +9,24 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * This class provides functions for unified hooks.
  *
- * It unifies the wide-spread use of this type of hooks in seminars.
+ * A hook allows to add functionality at certain points of the program path. These points are
+ * grouped using an interface, declaring the methods to implement to hook in.
+ *
+ * Hooking in
+ * The FQCN of the interface is the key to `$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']`
+ * where you register your hooked-in classes. Your class will be instantiated once when the first
+ * point is reached and re-used for all other points.
+ *
+ * Implementing hook points
+ * Instantiate this class with the interface you need implemented. First call to `getHooks()` will
+ * instantiate the registered classes. Every further call will return the same instances. On each
+ * member call the method required at the point in your program.
+ *
+ * There is an optional index to `$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']`, provided
+ * for easier conversion of existing hooks to this class.
+ *
+ * TODO: There should be `->executeHook(string $method, ...$params)` instead of returning the array of objects.
+ * How to handle return values in that case? Is there a need for ensured sequence of execution?
  *
  * @author Michael Kramer <m.kramer@mxp.de>
  */
@@ -21,7 +38,7 @@ class HookService
     protected $interfaceName = '';
 
     /**
-     * Index in $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'] of hooked-in classes
+     * Index in `$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']` of hooked-in classes
      *
      * @var string
      */
@@ -41,12 +58,12 @@ class HookService
      * The constructor.
      *
      * @param $interfaceName interface the hook needs implemented
-     * @param $index optional index to $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']
+     * @param $index optional index to `$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']`
      *               if not using the interface name (for backwards compatibility)
      *               (the interface name is recommended)
      *
      * @throws \UnexpectedValueException
-     *         if $interfaceName does not extend Hook interface
+     *         if $interfaceName does not extend `\OliverKlee\Seminars\Interfaces\Hook` interface
      */
     public function __construct(string $interfaceName, string $index = '')
     {
@@ -70,8 +87,7 @@ class HookService
     /**
      * Gets the hook objects for the interface.
      *
-     * @return array
-     *         the hook objects, will be empty if no hooks have been set
+     * @return array Hook[]
      */
     public function getHooks(): array
     {
@@ -84,8 +100,6 @@ class HookService
      * Retrieves the hook objects for the interface.
      *
      * @throws \UnexpectedValueException
-     *         if there are registered hook classes that do not implement the
-     *         $this->interfaceName interface
      */
     protected function retrieveHooks()
     {

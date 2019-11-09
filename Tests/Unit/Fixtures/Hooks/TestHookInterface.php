@@ -13,8 +13,6 @@ use OliverKlee\Seminars\Interfaces\Hook;
 interface TestHookInterface extends Hook
 {
     /**
-     * Test Hook Method
-     *
      * This function will be called during HookService tests.
      *
      * @return void

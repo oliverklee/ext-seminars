@@ -39,7 +39,7 @@ class HookServiceTest extends UnitTestCase
     /**
      * Creates a TestHook implementor object.
      *
-     * @return \OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestHookImplementor
+     * @return TestHookImplementor
      */
     private function createTestHookImplementor(): TestHookImplementor
     {
@@ -49,7 +49,7 @@ class HookServiceTest extends UnitTestCase
     /**
      * Creates a TestHook accepting Hook object.
      *
-     * @return \OliverKlee\Seminars\Hooks\HookService
+     * @return HookService
      */
     private function createHookObject(): HookService
     {
