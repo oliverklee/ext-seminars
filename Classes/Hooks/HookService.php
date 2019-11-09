@@ -91,19 +91,17 @@ class HookService
     public function getHooks(): array
     {
         if (!$this->hooksHaveBeenRetrieved) {
-            $hookClasses = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][$this->index];
-            if (is_array($hookClasses)) {
-                foreach ($hookClasses as $hookClass) {
-                    $hookInstance = GeneralUtility::makeInstance($hookClass);
-                    if (!($hookInstance instanceof $this->interfaceName)) {
-                        throw new UnexpectedValueException(
-                            'The class ' . \get_class($hookInstance) . ' is registered for the ' . $this->index .
-                                ' hook list, but does not implement the ' . $this->interfaceName . ' interface.',
-                            1448901897
-                        );
-                    }
-                    $this->hookObjects[] = $hookInstance;
+            $hookClasses = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][$this->index] ?? [];
+            foreach ((array)$hookClasses as $hookClass) {
+                $hookInstance = GeneralUtility::makeInstance($hookClass);
+                if (!($hookInstance instanceof $this->interfaceName)) {
+                    throw new UnexpectedValueException(
+                        'The class ' . \get_class($hookInstance) . ' is registered for the ' . $this->index .
+                            ' hook list, but does not implement the ' . $this->interfaceName . ' interface.',
+                        1448901897
+                    );
                 }
+                $this->hookObjects[] = $hookInstance;
             }
 
             $this->hooksHaveBeenRetrieved = true;
