@@ -3,12 +3,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Hooks;
 
-use class_implements;
-use defined;
-use get_class;
-use in_array;
-use interface_exists;
-
 use UnexpectedValueException;
 
 use OliverKlee\Seminars\Interfaces\Hook;
@@ -65,14 +59,14 @@ class HookService
      */
     public function __construct(string $interfaceName, string $index = '')
     {
-        if (!interface_exists($interfaceName)) {
+        if (!\interface_exists($interfaceName)) {
             throw new UnexpectedValueException(
                 'The interface ' . $interfaceName . ' does not exist.',
                 1565089078
             );
         }
 
-        if (!in_array(Hook::class, class_implements($interfaceName), true)) {
+        if (!\in_array(Hook::class, \class_implements($interfaceName), true)) {
             throw new UnexpectedValueException(
                 'The interface ' . $interfaceName . ' does not extend '
                     . Hook::class . ' interface.',
@@ -106,7 +100,7 @@ class HookService
                     $hookInstance = GeneralUtility::makeInstance($hookClass);
                     if (!($hookInstance instanceof $this->interfaceName)) {
                         throw new UnexpectedValueException(
-                            'The class ' . get_class($hookInstance) . ' is registered for the ' . $this->index .
+                            'The class ' . \get_class($hookInstance) . ' is registered for the ' . $this->index .
                                 ' hook list, but does not implement the ' . $this->interfaceName . ' interface.',
                             1448901897
                         );
@@ -122,7 +116,7 @@ class HookService
     }
 }
 
-if (defined('TYPO3_MODE')
+if (\defined('TYPO3_MODE')
     && isset($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/Classes/Hooks/Hook.php'])
 ) {
     include_once($GLOBALS['TYPO3_CONF_VARS'][TYPO3_MODE]['XCLASS']['ext/seminars/Classes/Hooks/Hook.php']);
