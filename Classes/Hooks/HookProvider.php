@@ -42,7 +42,7 @@ class HookProvider
     protected $index = '';
 
     /**
-     * @var array
+     * @var Hook[]
      */
     protected $hookObjects = [];
 
@@ -52,10 +52,8 @@ class HookProvider
     protected $hooksHaveBeenRetrieved = false;
 
     /**
-     * The constructor.
-     *
-     * @param $interfaceName interface the hook needs implemented
-     * @param $index optional index to `$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']`
+     * @param string $interfaceName interface the hook needs implemented
+     * @param string $index index to `$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']`
      *               if not using the interface name (for backwards compatibility)
      *               (the interface name is recommended)
      *
@@ -112,7 +110,7 @@ class HookProvider
     /**
      * Gets the hook objects for the interface.
      *
-     * @return array Hook[]
+     * @return Hook[]
      */
     protected function getHooks(): array
     {
@@ -124,6 +122,8 @@ class HookProvider
     /**
      * Retrieves the hook objects for the interface.
      *
+     * @return void
+     *
      * @throws \UnexpectedValueException
      */
     protected function retrieveHooks()
@@ -132,8 +132,8 @@ class HookProvider
             return;
         }
 
-        $hookClasses = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][$this->index] ?? [];
-        foreach ((array)$hookClasses as $hookClass) {
+        $hookClasses = (array)($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][$this->index] ?? []);
+        foreach ($hookClasses as $hookClass) {
             $hookInstance = GeneralUtility::makeInstance($hookClass);
             if (!($hookInstance instanceof $this->interfaceName)) {
                 throw new \UnexpectedValueException(
