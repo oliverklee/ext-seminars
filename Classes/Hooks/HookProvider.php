@@ -58,7 +58,6 @@ class HookProvider
      *               (the interface name is recommended)
      *
      * @throws \UnexpectedValueException
-     *         if $interfaceName does not extend `\OliverKlee\Seminars\Interfaces\Hook` interface
      */
     public function __construct(string $interfaceName, string $index = '')
     {
