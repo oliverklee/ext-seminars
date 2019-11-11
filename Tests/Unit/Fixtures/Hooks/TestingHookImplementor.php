@@ -3,19 +3,24 @@ declare(strict_types = 1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks;
 
-use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestHookInterface;
+use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookInterface;
 
 /**
  * Test interface implementation to use with the HookProvider
  *
  * @author Michael Kramer <m.kramer@mxp.de>
  */
-class TestHookImplementor implements TestHookInterface
+class TestingHookImplementor implements TestingHookInterface
 {
     /**
      * @var bool
      */
-    private $wasCalled = false;
+    public static $wasCalled = 0;
+
+    public function __construct()
+    {
+        self::$wasCalled = 0;
+    }
 
     /**
      * This function will be called during HookProvider tests.
@@ -24,14 +29,6 @@ class TestHookImplementor implements TestHookInterface
      */
     public function testHookMethod()
     {
-        $this->wasCalled = true;
-    }
-
-    /**
-     * @return bool
-     */
-    public function getWasCalled()
-    {
-        return $this->wasCalled;
+        self::$wasCalled++;
     }
 }

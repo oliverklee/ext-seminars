@@ -10,7 +10,7 @@ use OliverKlee\Seminars\Interfaces\Hook;
  *
  * @author Michael Kramer <m.kramer@mxp.de>
  */
-interface TestHookInterface extends Hook
+interface TestingHookInterface extends Hook
 {
     /**
      * This function will be called during HookProvider tests.

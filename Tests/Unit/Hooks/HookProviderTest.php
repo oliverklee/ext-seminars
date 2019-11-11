@@ -6,8 +6,9 @@ namespace OliverKlee\Seminars\Tests\Unit\Hooks;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Interfaces\Hook;
-use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestHookInterface;
-use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestHookImplementor;
+use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookInterface;
+use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookImplementor;
+use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookImplementor2;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -24,12 +25,16 @@ class HookProviderTest extends UnitTestCase
 
     protected function setUp()
     {
+        parent::setUp();
+
         $this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'];
     }
 
     protected function tearDown()
     {
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'] = $this->extConfBackup;
+
+        parent::tearDown();
     }
 
     /*
@@ -37,27 +42,37 @@ class HookProviderTest extends UnitTestCase
      */
 
     /**
-     * Creates a TestHook implementor object.
+     * Creates a TestingHookInterface implementor object
      *
-     * @return TestHookImplementor
+     * @return TestingHookImplementor
      */
-    private function createTestHookImplementor(): TestHookImplementor
+    private function createTestingHookImplementor(): TestingHookImplementor
     {
-        return GeneralUtility::makeInstance(TestHookImplementor::class);
+        return new TestingHookImplementor();
     }
 
     /**
-     * Creates a TestHook accepting Hook object.
+     * Creates a second TestingHookInterface implementor object
+     *
+     * @return TestingHookImplementor2
+     */
+    private function createTestingHookImplementor2(): TestingHookImplementor2
+    {
+        return new TestingHookImplementor2();
+    }
+
+    /**
+     * Creates a TestingHookInterface accepting Hook object
      *
      * @return HookProvider
      */
     private function createHookObject(): HookProvider
     {
-        return GeneralUtility::makeInstance(HookProvider::class, TestHookInterface::class);
+        return new HookProvider(TestingHookInterface::class);
     }
 
     /*
-     * Tests concerning the TestHookImplementor
+     * Tests concerning the TestingHookImplementor
      */
 
     /**
@@ -65,7 +80,19 @@ class HookProviderTest extends UnitTestCase
      */
     public function hookImplementorCanBeCreated()
     {
-        self::assertInstanceOf(TestHookImplementor::class, $this->createTestHookImplementor());
+        self::assertInstanceOf(TestingHookImplementor::class, $this->createTestingHookImplementor());
+    }
+
+    /**
+     * @test
+     */
+    public function hookImplementorResetsCallCounterOnCreation()
+    {
+        TestingHookImplementor::$wasCalled = 1;
+
+        $this->createTestingHookImplementor();
+
+        self::assertSame(0, TestingHookImplementor::$wasCalled);
     }
 
     /**
@@ -73,11 +100,10 @@ class HookProviderTest extends UnitTestCase
      */
     public function hookImplementorImplementsHookHierachy()
     {
-        $implementor = $this->createTestHookImplementor();
+        $implementor = $this->createTestingHookImplementor();
 
         self::assertInstanceOf(Hook::class, $implementor);
-
-        self::assertInstanceOf(TestHookInterface::class, $implementor);
+        self::assertInstanceOf(TestingHookInterface::class, $implementor);
     }
 
     /**
@@ -85,11 +111,58 @@ class HookProviderTest extends UnitTestCase
      */
     public function hookImplementorTestHookMethodCanBeCalledAndReportsBeingCalled()
     {
-        $implementor = $this->createTestHookImplementor();
+        $implementor = $this->createTestingHookImplementor();
 
         $implementor->testHookMethod();
 
-        self::assertTrue($implementor->getWasCalled());
+        self::assertSame(1, TestingHookImplementor::$wasCalled);
+    }
+
+    /*
+     * Tests concerning the TestingHookImplementor2
+     */
+
+    /**
+     * @test
+     */
+    public function hookImplementor2CanBeCreated()
+    {
+        self::assertInstanceOf(TestingHookImplementor2::class, $this->createTestingHookImplementor2());
+    }
+
+    /**
+     * @test
+     */
+    public function hookImplementor2ResetsCallCounterOnCreation()
+    {
+        TestingHookImplementor2::$wasCalled = 1;
+
+        $this->createTestingHookImplementor2();
+
+        self::assertSame(0, TestingHookImplementor2::$wasCalled);
+    }
+
+    /**
+     * @test
+     */
+    public function hookImplementor2ImplementsHookHierachy()
+    {
+        $implementor = $this->createTestingHookImplementor2();
+
+        self::assertInstanceOf(Hook::class, $implementor);
+        self::assertInstanceOf(TestingHookInterface::class, $implementor);
+    }
+
+    /**
+     * @test
+     */
+    public function hookImplementor2TestHookMethodCanBeCalledAndReportsBeingCalled()
+    {
+        $implementor = $this->createTestingHookImplementor2();
+
+        $implementor->testHookMethod();
+
+        self::assertSame(1, TestingHookImplementor2::$wasCalled);
     }
 
     /*
@@ -106,27 +179,54 @@ class HookProviderTest extends UnitTestCase
 
     /**
      * @test
+     * @doesNotPerformAssertions
      */
-    public function hookObjectForTestHookWithNoHookImplemetorRegisteredResultsInEmptyHookList()
+    public function hookObjectForTestHookWithNoHookImplemetorRegisteredSucceedsForValidMethod()
     {
-        unset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestHookInterface::class]);
+        unset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestingHookInterface::class]);
         $hookObject = $this->createHookObject();
 
-        self::assertEmpty($hookObject->getHooks());
+        $hookObject->executeHook('testHookMethod');
+    }
+
+    /**
+     * @test
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionCode 1573479911
+     */
+    public function hookObjectForTestHookWithNoHookImplemetorRegisteredFailsForEmptyMethod()
+    {
+        unset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestingHookInterface::class]);
+        $hookObject = $this->createHookObject();
+
+        $hookObject->executeHook('');
+    }
+
+    /**
+     * @test
+     * @expectedException UnexpectedValueException
+     * @expectedExceptionCode 1573480302
+     */
+    public function hookObjectForTestHookWithNoHookImplemetorRegisteredFailsForUnknownMethod()
+    {
+        unset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestingHookInterface::class]);
+        $hookObject = $this->createHookObject();
+
+        $hookObject->executeHook('methodNotImplemented');
     }
 
     /**
      * @test
      */
-    public function hookObjectForTestHookWithOneHookImplemetorRegisteredResultsInOneHookInHookList()
+    public function hookObjectForTestHookWithOneHookImplemetorRegisteredSucceedsWithMethodCalledOnce()
     {
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestHookInterface::class][1565007112] =
-            TestHookImplementor::class;
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestingHookInterface::class][1565007112] =
+            TestingHookImplementor::class;
         $hookObject = $this->createHookObject();
 
-        self::assertCount(1, $hookObject->getHooks());
-        self::assertContainsOnlyInstancesOf(TestHookInterface::class, $hookObject->getHooks());
-        self::assertContainsOnlyInstancesOf(TestHookImplementor::class, $hookObject->getHooks());
+        $hookObject->executeHook('testHookMethod');
+
+        self::assertSame(1, TestingHookImplementor::$wasCalled);
     }
 
     /**
@@ -134,13 +234,15 @@ class HookProviderTest extends UnitTestCase
      */
     public function hookObjectForTestHookWithTwoHookImplemetorsRegisteredResultsInTwoHooksInHookList()
     {
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestHookInterface::class][1565007112] =
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestHookInterface::class][1565007113] =
-            TestHookImplementor::class;
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestingHookInterface::class][1565007112] =
+            TestingHookImplementor::class;
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestingHookInterface::class][1565007113] =
+            TestingHookImplementor2::class;
         $hookObject = $this->createHookObject();
 
-        self::assertCount(2, $hookObject->getHooks());
-        self::assertContainsOnlyInstancesOf(TestHookInterface::class, $hookObject->getHooks());
-        self::assertContainsOnlyInstancesOf(TestHookImplementor::class, $hookObject->getHooks());
+        $hookObject->executeHook('testHookMethod');
+
+        self::assertSame(1, TestingHookImplementor::$wasCalled);
+        self::assertSame(1, TestingHookImplementor2::$wasCalled);
     }
 }

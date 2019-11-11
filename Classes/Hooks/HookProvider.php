@@ -92,7 +92,7 @@ class HookProvider
      */
     public function executeHook(string $method, ...$params)
     {
-        if ($method === '')) {
+        if ($method === '') {
             throw new \InvalidArgumentException('The parameter $method must not be empty.', 1573479911);
         }
         if (!\in_array($method, \get_class_methods($this->interfaceName), true)) {
