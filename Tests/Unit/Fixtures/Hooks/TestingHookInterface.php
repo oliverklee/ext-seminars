@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks;
 
-use OliverKlee\Seminars\Interfaces\Hook;
+use OliverKlee\Seminars\Hooks\Interfaces\Hook;
 
 /**
  * Test interface to use with the HookProvider

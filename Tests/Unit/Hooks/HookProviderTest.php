@@ -5,7 +5,7 @@ namespace OliverKlee\Seminars\Tests\Unit\Hooks;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Hooks\HookProvider;
-use OliverKlee\Seminars\Interfaces\Hook;
+use OliverKlee\Seminars\Hooks\Interfaces\Hook;
 use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookInterface;
 use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookImplementor;
 use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookImplementor2;

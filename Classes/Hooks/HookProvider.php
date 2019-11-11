@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Hooks;
 
-use OliverKlee\Seminars\Interfaces\Hook;
+use OliverKlee\Seminars\Hooks\Interfaces\Hook;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
