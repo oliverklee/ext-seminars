@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- git-ignore the tests-generated `var/log/` folder (#314)
 - Use real records in the FE editor tests (#310)
 - Always provide flags to `htmlspecialchars` (#295)
 - Fix some strict typing errors (#286, #287, #288, #292, #293, #294, #296, #297, #298, #304, #306, #312)
