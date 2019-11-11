@@ -18,15 +18,12 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * point is reached and re-used for all other points.
  *
  * Implementing hook points
- * Instantiate this class with the interface you need implemented. First call to `getHooks()` will
- * instantiate the registered classes. Every further call will return the same instances. On each
- * member call the method required at the point in your program.
+ * Instantiate this class with the interface you need implemented. First call to `executeHook()` will
+ * instantiate the registered classes. Every further call will reuse the same instances. On each
+ * call provide the method required at the point in your program.
  *
  * There is an optional index to `$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']`, provided
  * for easier conversion of existing hooks to this class.
- *
- * TODO: There should be `->executeHook(string $method, ...$params)` instead of returning the array of objects.
- * How to handle return values in that case? Is there a need for ensured sequence of execution?
  *
  * @author Michael Kramer <m.kramer@mxp.de>
  */
@@ -85,11 +82,39 @@ class HookProvider
     }
 
     /**
+     * Execute the hooked-in methods
+     *
+     * @param string $method the method to execute
+     * @param mixed $params parameters to $method()
+     *
+     * @return void
+     *
+     * @throws \InvalidArgumentException
+     * @throws \UnexpectedValueException
+     */
+    public function executeHook(string $method, ...$params)
+    {
+        if ($method === '')) {
+            throw new \InvalidArgumentException('The parameter $method must not be empty.', 1573479911);
+        }
+        if (!\in_array($method, \get_class_methods($this->interfaceName), true)) {
+            throw new \UnexpectedValueException(
+                'The interface ' . $this->interfaceName . ' does not contain method ' . $method . '.',
+                1573480302
+            );
+        }
+
+        foreach($this->getHooks() as $hook) {
+            $hook->$method(...$params);
+        }
+    }
+
+    /**
      * Gets the hook objects for the interface.
      *
      * @return array Hook[]
      */
-    public function getHooks(): array
+    protected function getHooks(): array
     {
         $this->retrieveHooks();
 
@@ -123,4 +148,3 @@ class HookProvider
         $this->hooksHaveBeenRetrieved = true;
     }
 }
-
