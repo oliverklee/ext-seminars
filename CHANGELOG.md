@@ -14,6 +14,10 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+
+## 2.2.3
+
+### Fixed
 - Stop using removed oelib functionality in the tests (#316)
 - git-ignore the tests-generated `var/log/` folder (#314)
 - Use real records in the FE editor tests (#310)
