@@ -50,7 +50,7 @@ class Tx_Seminars_ViewHelper_TimeRange
 
         // Only display the end time if the event has an end date/time set
         // and the end time is not the same as the begin time.
-        if ($this->hasEndTime($timeSpan) && ($beginTime !== $endTime)) {
+        if ($beginTime !== $endTime && $this->hasEndTime($timeSpan)) {
             $result .= $dash . $endTime;
         }
 

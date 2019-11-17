@@ -95,8 +95,10 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan
         if (!$this->isEventDate()) {
             throw new \BadMethodCallException('This function may only be called for date records.', 1333296324);
         }
+        /** @var \Tx_Seminars_Model_Event $topic */
+        $topic = $this->getAsModel('topic');
 
-        return $this->getAsModel('topic');
+        return $topic;
     }
 
     /**
@@ -258,14 +260,14 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan
     /**
      * Returns our event type.
      *
-     * @return \Tx_Seminars_Model_EventType|null our event type, will be null if this
-     *                                     event has no event type
+     * @return \Tx_Seminars_Model_EventType|null our event type, will be null if this event has no event type
      */
     public function getEventType()
     {
-        return $this->isEventDate()
-            ? $this->getTopic()->getEventType()
-            : $this->getAsModel('event_type');
+        /** @var Tx_Seminars_Model_EventType|null $type */
+        $type = $this->isEventDate() ? $this->getTopic()->getEventType() : $this->getAsModel('event_type');
+
+        return $type;
     }
 
     /**
@@ -1267,7 +1269,10 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan
      */
     public function getFirstOrganizer()
     {
-        return $this->getOrganizers()->first();
+        /** @var \Tx_Seminars_Model_Organizer|null $organizer */
+        $organizer = $this->getOrganizers()->first();
+
+        return $organizer;
     }
 
     /**
@@ -1541,7 +1546,10 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan
      */
     public function getOwner()
     {
-        return $this->getAsModel('owner_feuser');
+        /** @var \Tx_Oelib_Model_FrontEndUser|null $owner */
+        $owner = $this->getAsModel('owner_feuser');
+
+        return $owner;
     }
 
     /**
@@ -2133,8 +2141,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan
             }
 
             if (!$hasAdditionalPersons) {
-                $namesFromRegistration = explode(CRLF, $registration->getAttendeesNames());
-                foreach ($namesFromRegistration as $name) {
+                foreach (explode(CRLF, $registration->getAttendeesNames()) as $name) {
                     $trimmedName = trim($name);
                     if ($trimmedName !== '') {
                         $names[] = $trimmedName;

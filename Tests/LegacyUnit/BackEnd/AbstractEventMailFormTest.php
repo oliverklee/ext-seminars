@@ -733,9 +733,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends TestCase
         self::assertSame(
             'Location: ' . BackendUtility::getModuleUrl(
                 AbstractEventMailForm::MODULE_NAME,
-                ['id' => \Tx_Oelib_PageFinder::getInstance()->getPageUid()],
-                false,
-                true
+                ['id' => \Tx_Oelib_PageFinder::getInstance()->getPageUid()]
             ),
             $this->headerProxy->getLastAddedHeader()
         );

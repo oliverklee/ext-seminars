@@ -212,10 +212,8 @@ class MailNotifier extends AbstractTask
         $builder = $this->getSeminarBagBuilder(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
         $builder->limitToEventTakesPlaceReminderNotSent();
         $builder->limitToDaysBeforeBeginDate($days);
-        $bag = $builder->build();
-
         /** @var \Tx_Seminars_OldModel_Event $event */
-        foreach ($bag as $event) {
+        foreach ($builder->build() as $event) {
             $result[] = $event;
         }
 
@@ -376,9 +374,8 @@ class MailNotifier extends AbstractTask
     {
         $languageService = $this->getLanguageService();
 
-        $events = $this->eventMapper->findForAutomaticStatusChange();
         /** @var \Tx_Seminars_Model_Event $event */
-        foreach ($events as $event) {
+        foreach ($this->eventMapper->findForAutomaticStatusChange() as $event) {
             $statusWasChanged = $this->eventStatusService->updateStatusAndSave($event);
             if (!$statusWasChanged) {
                 continue;

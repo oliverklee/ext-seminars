@@ -313,7 +313,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * Provides data items for the list of available places.
      *
      * @param array[] $items any pre-filled data (may be empty)
-     * @param array $unused unused
+     * @param array|null $unused unused
      * @param \tx_mkforms_forms_Base $form
      *
      * @return array[] $items with additional items from the places table
@@ -346,19 +346,20 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
 
         /** @var \Tx_Seminars_Model_Place $place */
         foreach ($places as $place) {
-            $frontEndUserIsOwner = ($place->getOwner() === $frontEndUser);
+            $frontEndUserIsOwner = $place->getOwner() === $frontEndUser;
 
             // Only shows places which have no owner or where the owner is the
             // currently logged in front-end user.
-            if ($place->getOwner() && !$frontEndUserIsOwner) {
+            if (!$frontEndUserIsOwner && $place->getOwner()) {
                 continue;
             }
 
             if ($showEditButton && $frontEndUserIsOwner) {
                 $editButtonConfiguration['name'] = 'editPlaceButton_' . $place->getUid();
                 $editButtonConfiguration['onclick']['userobj']['php'] = '
-                    return \\Tx_Seminars_FrontEnd_EventEditor::showEditPlaceModalBox($this, ' . $place->getUid() . ');
+                    return ' . self::class . '::showEditPlaceModalBox($this, ' . $place->getUid() . ');
                 ';
+                /** @var \tx_mkforms_widgets_button_Main $editButton */
                 $editButton = $form->_makeRenderlet($editButtonConfiguration, $renderlet->sXPath);
                 $editButton->includeScripts();
                 $editButtonHTML = $editButton->_render();
@@ -431,7 +432,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
 
             // Only shows speakers which have no owner or where the owner is
             // the currently logged in front-end user.
-            if ($speaker->getOwner() && !$frontEndUserIsOwner) {
+            if (!$frontEndUserIsOwner && $speaker->getOwner()) {
                 continue;
             }
 
@@ -448,8 +449,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
             if ($showEditButton && $frontEndUserIsOwner) {
                 $editButtonConfiguration['name'] = 'edit' . $type . 'Button_' . $speaker->getUid();
                 $editButtonConfiguration['onclick']['userobj']['php'] = '
-                    return \\Tx_Seminars_FrontEnd_EventEditor::showEditSpeakerModalBox($this, ' . $speaker->getUid(
+                    return ' . self::class . '::showEditSpeakerModalBox($this, ' . $speaker->getUid(
                     ) . ');';
+                /** @var \tx_mkforms_widgets_button_Main $editButton */
                 $editButton = $form->_makeRenderlet($editButtonConfiguration, $renderlet->sXPath);
                 $editButton->includeScripts();
                 $editButtonHTML = $editButton->_render();
@@ -476,7 +478,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * Provides data items for the list of available checkboxes.
      *
      * @param array[] $items any pre-filled data (may be empty)
-     * @param array $unused unused
+     * @param array|null $unused unused
      * @param \tx_mkforms_forms_Base $form
      *
      * @return array[] $items with additional items from the checkboxes
@@ -516,15 +518,16 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
 
             // Only shows checkboxes which have no owner or where the owner is
             // the currently logged in front-end user.
-            if ($checkbox->getOwner() && !$frontEndUserIsOwner) {
+            if (!$frontEndUserIsOwner && $checkbox->getOwner()) {
                 continue;
             }
 
             if ($showEditButton && $frontEndUserIsOwner) {
                 $editButtonConfiguration['name'] = 'editCheckboxButton_' . $checkbox->getUid();
                 $editButtonConfiguration['onclick']['userobj']['php'] = '
-                    return \\Tx_Seminars_FrontEnd_EventEditor::showEditCheckboxModalBox($this, ' . $checkbox->getUid() . ');
+                    return ' . self::class . '::showEditCheckboxModalBox($this, ' . $checkbox->getUid() . ');
                 ';
+                /** @var \tx_mkforms_widgets_button_Main $editButton */
                 $editButton = $form->_makeRenderlet($editButtonConfiguration, $renderlet->sXPath);
                 $editButton->includeScripts();
                 $editButtonHTML = $editButton->_render();
@@ -550,7 +553,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * Provides data items for the list of available target groups.
      *
      * @param array[] $items array any pre-filled data (may be empty)
-     * @param array $unused unused
+     * @param array|null $unused unused
      * @param \tx_mkforms_forms_Base $form
      *
      * @return array[] $items with additional items from the target groups
@@ -590,7 +593,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
 
             // Only shows target groups which have no owner or where the owner
             // is the currently logged in front-end user.
-            if ($targetGroup->getOwner() && !$frontEndUserIsOwner) {
+            if (!$frontEndUserIsOwner && $targetGroup->getOwner()) {
                 continue;
             }
 
@@ -598,9 +601,10 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
                 $editButtonConfiguration['name'] = 'editTargetGroupButton_' .
                     $targetGroup->getUid();
                 $editButtonConfiguration['onclick']['userobj']['php'] = '
-                    return \\Tx_Seminars_FrontEnd_EventEditor::showEditTargetGroupModalBox($this, ' . $targetGroup->getUid(
+                    return ' . self::class . '::showEditTargetGroupModalBox($this, ' . $targetGroup->getUid(
                     ) . ');
                 ';
+                /** @var \tx_mkforms_widgets_button_Main $editButton */
                 $editButton = $form->_makeRenderlet($editButtonConfiguration, $renderlet->sXPath);
                 $editButton->includeScripts();
                 $editButtonHTML = $editButton->_render();
@@ -913,8 +917,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      */
     private function checkPublishSettings(array &$formData)
     {
-        $user = self::getLoggedInUser();
-        $publishSetting = $user->getPublishSetting();
+        $publishSetting = self::getLoggedInUser()->getPublishSetting();
         $eventUid = $this->getObjectUid();
         $isNew = ($eventUid === 0);
 
@@ -1060,6 +1063,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         @unlink(PATH_site . 'uploads/tx_seminars/' . $fileName);
         $keyToPurge = array_search($fileName, $this->attachedFiles, true);
         if ($keyToPurge !== false) {
+            /** @var string|int $keyToPurge */
             unset($this->attachedFiles[$keyToPurge]);
         }
     }
@@ -1257,9 +1261,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      */
     private function setRequiredFieldLabels(\Tx_Oelib_Template $template)
     {
-        $formFieldsToCheck = $this->getFieldsToShow();
-
-        foreach ($formFieldsToCheck as $formField) {
+        foreach ($this->getFieldsToShow() as $formField) {
             $template->setMarker(
                 $formField . '_required',
                 in_array($formField, $this->requiredFormFields, true)
@@ -1389,7 +1391,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
             return true;
         }
 
-        return preg_match('/^\\d+((,|.)\\d{1,2})?$/', $formData['value']) == 1;
+        return preg_match('/^\\d+([,.]\\d{1,2})?$/', $formData['value']) == 1;
     }
 
     /**
@@ -1611,8 +1613,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $editButtonConfiguration = $form->_navConf($renderlet->sXPath);
         $editButtonConfiguration['name'] = 'editPlaceButton_' . $place->getUid();
         $editButtonConfiguration['onclick']['userobj']['php'] = '
-            return \\Tx_Seminars_FrontEnd_EventEditor::showEditPlaceModalBox($this, ' . $place->getUid() . ');
+            return ' . self::class . '::showEditPlaceModalBox($this, ' . $place->getUid() . ');
         ';
+        /** @var \tx_mkforms_widgets_button_Main $editButton */
         $editButton = $form->_makeRenderlet($editButtonConfiguration, $renderlet->sXPath);
         $editButton->includeScripts();
         $editButtonHTML = $editButton->_render();
@@ -2016,9 +2019,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         // refresh all speaker listers
         foreach ($speakerTypes as $speakerType) {
             $widget = $form->getWidget($speakerType . 's');
-            if (
-                $widget !== null && ($widget instanceof \tx_mkforms_widgets_lister_Main)
-            ) {
+            if ($widget instanceof \tx_mkforms_widgets_lister_Main) {
                 $results[] = $widget->repaintFirst();
             }
         }
@@ -2179,9 +2180,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $checkboxRenderlet = $form->aORenderlets['editSpeakerModalBox__editSpeaker_skills'];
         $result[] = $checkboxRenderlet->majixCheckNone();
 
-        $skills = $speaker->getSkills();
         /** @var \Tx_Seminars_Model_Skill $skill */
-        foreach ($skills as $skill) {
+        foreach ($speaker->getSkills() as $skill) {
             $result[] = $checkboxRenderlet->majixCheckItem($skill->getUid());
         }
 
@@ -2229,8 +2229,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $editButtonConfiguration = $form->_navConf($renderlet->sXPath);
         $editButtonConfiguration['name'] = 'editCheckboxButton_' . $checkbox->getUid();
         $editButtonConfiguration['onclick']['userobj']['php'] = '
-            return \\Tx_Seminars_FrontEnd_EventEditor::showEditCheckboxModalBox($this, ' . $checkbox->getUid() . ');
+            return ' . self::class . '::showEditCheckboxModalBox($this, ' . $checkbox->getUid() . ');
         ';
+        /** @var \tx_mkforms_widgets_button_Main $editButton */
         $editButton = $form->_makeRenderlet($editButtonConfiguration, $renderlet->sXPath);
         $editButton->includeScripts();
         $editButtonHTML = $editButton->_render();
@@ -2452,8 +2453,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $editButtonConfiguration = $form->_navConf($renderlet->sXPath);
         $editButtonConfiguration['name'] = 'editTargetGroupButton_' . $targetGroup->getUid();
         $editButtonConfiguration['onclick']['userobj']['php'] = '
-            return \\Tx_Seminars_FrontEnd_EventEditor::showEditTargetGroupModalBox($this, ' . $targetGroup->getUid() . ');
+            return ' . self::class . '::showEditTargetGroupModalBox($this, ' . $targetGroup->getUid() . ');
         ';
+        /** @var \tx_mkforms_widgets_button_Main $editButton */
         $editButton = $form->_makeRenderlet($editButtonConfiguration, $renderlet->sXPath);
         $editButton->includeScripts();
         $editButtonHTML = $editButton->_render();
@@ -2677,9 +2679,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
 
         /** @var \Tx_Oelib_Mapper_Country $mapper */
         $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_Country::class);
-        $countries = $mapper->findAll('cn_short_local');
         /** @var \Tx_Oelib_Model_Country $country */
-        foreach ($countries as $country) {
+        foreach ($mapper->findAll('cn_short_local') as $country) {
             $result[] = [
                 'caption' => $country->getLocalShortName(),
                 'value' => $country->getUid(),
@@ -2757,8 +2758,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      */
     private function getPidForAuxiliaryRecords(): int
     {
-        $frontEndUser = self::getLoggedInUser();
-        $auxiliaryRecordsPid = $frontEndUser->getAuxiliaryRecordsPid();
+        $auxiliaryRecordsPid = self::getLoggedInUser()->getAuxiliaryRecordsPid();
         if ($auxiliaryRecordsPid === 0) {
             $auxiliaryRecordsPid = self::getSeminarsConfiguration()->getAsInteger('createAuxiliaryRecordsPID');
         }
@@ -2811,6 +2811,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $frontEndUser = self::getLoggedInUser();
         if ($frontEndUser->hasDefaultCategories()) {
             $categoryKey = array_search('categories', $formFields, true);
+            /** @var string|int $categoryKey */
             unset($formFields[$categoryKey]);
         }
     }

@@ -1445,10 +1445,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
 
         $modifiedFormData = $this->subject->modifyDataToInsert([]);
 
-        self::assertTrue(
-            isset($modifiedFormData['publication_hash'])
-            && !empty($modifiedFormData['publication_hash'])
-        );
+        self::assertNotEmpty($modifiedFormData['publication_hash']);
     }
 
     /**
@@ -1462,10 +1459,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
 
         $modifiedFormData = $this->subject->modifyDataToInsert([]);
 
-        self::assertTrue(
-            isset($modifiedFormData['publication_hash'])
-            && !empty($modifiedFormData['publication_hash'])
-        );
+        self::assertNotEmpty($modifiedFormData['publication_hash']);
     }
 
     /**
@@ -2857,13 +2851,15 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     public function populateListCountriesSortsResultsByLocalCountryName()
     {
         $countries = \Tx_Seminars_FrontEnd_EventEditor::populateListCountries();
-        $positionGermany = array_search(
+        $positionGermany = \array_search(
             ['caption' => 'Deutschland', 'value' => 54],
-            $countries
+            $countries,
+            true
         );
-        $positionGambia = array_search(
+        $positionGambia = \array_search(
             ['caption' => 'Gambia', 'value' => 81],
-            $countries
+            $countries,
+            true
         );
 
         self::assertTrue(

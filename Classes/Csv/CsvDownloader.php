@@ -97,8 +97,7 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
 
             $resultCharset = strtolower($this->configuration->getAsString('charsetForCsv'));
             if ($resultCharset !== 'utf-8') {
-                $charsetConverter = new CharsetConverter();
-                $result = $charsetConverter->conv($result, 'utf-8', $resultCharset);
+                $result = (new CharsetConverter())->conv($result, 'utf-8', $resultCharset);
             }
         } catch (\Exception $exception) {
             \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader(
@@ -294,12 +293,11 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
      */
     private function setPageTypeAndDisposition($csvFileName)
     {
-        \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader(
+        $headerProxy = \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy();
+        $headerProxy->addHeader(
             'Content-type: text/csv; header=present; charset=' . $this->configuration->getAsString('charsetForCsv')
         );
-        \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader(
-            'Content-disposition: attachment; filename=' . $csvFileName
-        );
+        $headerProxy->addHeader('Content-disposition: attachment; filename=' . $csvFileName);
     }
 
     /**

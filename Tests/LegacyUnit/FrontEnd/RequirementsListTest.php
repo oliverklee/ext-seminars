@@ -25,22 +25,17 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends TestCase
      */
     private $testingFramework = null;
 
-    /**
-     * @var int
-     */
-    private $systemFolderPid = 0;
-
     protected function setUp()
     {
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
 
-        $this->systemFolderPid = $this->testingFramework->createSystemFolder();
+        $systemFolderPid = $this->testingFramework->createSystemFolder();
 
         $this->seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'pid' => $this->systemFolderPid,
+                'pid' => $systemFolderPid,
                 'title' => 'Test event',
             ]
         );

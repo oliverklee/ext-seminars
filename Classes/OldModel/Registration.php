@@ -315,7 +315,7 @@ class Tx_Seminars_OldModel_Registration extends \Tx_Seminars_OldModel_Abstract
             'uid = ' . $uid . \Tx_Oelib_Db::enableFields('fe_users')
         );
         if ($dbResult === false) {
-            throw new \Tx_Oelib_Exception_Database();
+            throw new \Tx_Oelib_Exception_Database('Database error', 1574008202);
         }
         $userData = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
         if ($userData === false) {
@@ -555,7 +555,10 @@ class Tx_Seminars_OldModel_Registration extends \Tx_Seminars_OldModel_Abstract
     {
         /** @var \Tx_Seminars_Mapper_FrontEndUser $mapper */
         $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
-        return $mapper->find($this->getUser());
+        /** @var \Tx_Seminars_Model_FrontEndUser $user */
+        $user = $mapper->find($this->getUser());
+
+        return $user;
     }
 
     /**
@@ -1295,7 +1298,7 @@ class Tx_Seminars_OldModel_Registration extends \Tx_Seminars_OldModel_Abstract
 
         $names = GeneralUtility::trimExplode(LF, $this->getAttendeesNames(), true);
         if ($this->hasRegisteredMySelf()) {
-            $names = array_merge([$this->getFrontEndUser()->getName()], $names);
+            \array_unshift($names, $this->getFrontEndUser()->getName());
         }
 
         if ($useHtml) {

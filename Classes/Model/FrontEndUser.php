@@ -192,7 +192,10 @@ class Tx_Seminars_Model_FrontEndUser extends \Tx_Oelib_Model_FrontEndUser
      */
     public function getRegistration()
     {
-        return $this->getAsModel('tx_seminars_registration');
+        /** @var \Tx_Seminars_Model_Registration|null $registration */
+        $registration = $this->getAsModel('tx_seminars_registration');
+
+        return $registration;
     }
 
     /**

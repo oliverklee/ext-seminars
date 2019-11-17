@@ -650,9 +650,8 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
         /** @var \Tx_Seminars_OldModel_Event $event */
         foreach ($this->seminarBag as $event) {
             if ($event->hasOrganizers()) {
-                $organizers = $event->getOrganizerBag();
                 /** @var \Tx_Seminars_OldModel_Organizer $organizer */
-                foreach ($organizers as $organizer) {
+                foreach ($event->getOrganizerBag() as $organizer) {
                     $organizerUid = $organizer->getUid();
                     if (!isset($result[$organizerUid])) {
                         $result[$organizerUid] = $organizer->getName();
@@ -679,8 +678,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
         /** @var \Tx_Seminars_OldModel_Event $event */
         foreach ($this->seminarBag as $event) {
             if ($event->hasCategories()) {
-                $categories = $event->getCategories();
-                foreach ($categories as $uid => $category) {
+                foreach ($event->getCategories() as $uid => $category) {
                     if (!isset($result[$uid])) {
                         $result[$uid] = $category['title'];
                     }

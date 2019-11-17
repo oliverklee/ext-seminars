@@ -43,8 +43,7 @@ class Tx_Seminars_FrontEnd_CategoryList extends \Tx_Seminars_FrontEnd_AbstractVi
             // problem by the configuration check.
         }
 
-        $bag = $seminarBagBuilder->build();
-        $eventUids = $bag->getUids();
+        $eventUids = $seminarBagBuilder->build()->getUids();
 
         /** @var \Tx_Seminars_BagBuilder_Category $categoryBagBuilder */
         $categoryBagBuilder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Category::class);

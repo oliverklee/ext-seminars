@@ -86,9 +86,8 @@ class Tx_Seminars_FrontEnd_RequirementsList extends \Tx_Seminars_FrontEnd_Abstra
 
         /** @var \Tx_Seminars_Mapper_Event $eventMapper */
         $eventMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
-        $requirements = $this->getRequirements();
         /** @var \Tx_Seminars_OldModel_Event $requirement */
-        foreach ($requirements as $requirement) {
+        foreach ($this->getRequirements() as $requirement) {
             /** @var \Tx_Seminars_Model_Event $event */
             $event = $eventMapper->find($requirement->getUid());
 

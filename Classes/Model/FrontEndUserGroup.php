@@ -79,7 +79,10 @@ class Tx_Seminars_Model_FrontEndUserGroup extends \Tx_Oelib_Model_FrontEndUserGr
      */
     public function getReviewer()
     {
-        return $this->getAsModel('tx_seminars_reviewer');
+        /** @var \Tx_Oelib_Model_BackEndUser|null $reviewer */
+        $reviewer = $this->getAsModel('tx_seminars_reviewer');
+
+        return $reviewer;
     }
 
     /**
@@ -134,7 +137,10 @@ class Tx_Seminars_Model_FrontEndUserGroup extends \Tx_Oelib_Model_FrontEndUserGr
      */
     public function getDefaultOrganizer()
     {
-        return $this->getAsModel('tx_seminars_default_organizer');
+        /** @var \Tx_Seminars_Model_Organizer|null $organizer */
+        $organizer = $this->getAsModel('tx_seminars_default_organizer');
+
+        return $organizer;
     }
 
     /**

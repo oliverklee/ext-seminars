@@ -34,11 +34,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends TestCase
      */
     private $dummySysFolderPid = 0;
 
-    /**
-     * @var DummyModule
-     */
-    private $backEndModule = null;
-
     protected function setUp()
     {
         $this->unifyTestingEnvironment();
@@ -47,18 +42,17 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends TestCase
 
         $this->dummySysFolderPid = $this->testingFramework->createSystemFolder();
 
-        $this->backEndModule = new DummyModule();
-        $this->backEndModule->id = $this->dummySysFolderPid;
-        $this->backEndModule->setPageData(
+        $backEndModule = new DummyModule();
+        $backEndModule->id = $this->dummySysFolderPid;
+        $backEndModule->setPageData(
             [
                 'uid' => $this->dummySysFolderPid,
                 'doktype' => AbstractList::SYSFOLDER_TYPE,
             ]
         );
+        $backEndModule->doc = new DocumentTemplate();
 
-        $this->backEndModule->doc = new DocumentTemplate();
-
-        $this->subject = new EventsList($this->backEndModule);
+        $this->subject = new EventsList($backEndModule);
 
         $backEndGroup = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUserGroup::class)
             ->getLoadedTestingModel(['tx_seminars_events_folder' => $this->dummySysFolderPid + 1]);

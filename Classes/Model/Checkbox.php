@@ -74,7 +74,10 @@ class Tx_Seminars_Model_Checkbox extends \Tx_Oelib_Model implements \Tx_Seminars
      */
     public function getOwner()
     {
-        return $this->getAsModel('owner');
+        /** @var \Tx_Seminars_Model_FrontEndUser|null $owner */
+        $owner = $this->getAsModel('owner');
+
+        return $owner;
     }
 
     /**

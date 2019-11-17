@@ -27,7 +27,7 @@ class MailNotifierConfiguration implements AdditionalFieldProviderInterface
      */
     public function getAdditionalFields(array &$taskInfo, $task, SchedulerModuleController $schedulerModule)
     {
-        if ($task !== null && $task instanceof MailNotifier) {
+        if ($task instanceof MailNotifier) {
             $pageUid = $task->getConfigurationPageUid();
         } else {
             $pageUid = '';

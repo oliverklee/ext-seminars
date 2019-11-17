@@ -50,11 +50,12 @@ abstract class AbstractModule extends BaseScriptClass
     public function __construct()
     {
         $this->moduleTemplate = GeneralUtility::makeInstance(ModuleTemplate::class);
-        $this->getLanguageService()->includeLLFile('EXT:lang/Resources/Private/Language/locallang_common.xlf');
-        $this->getLanguageService()->includeLLFile('EXT:lang/Resources/Private/Language/locallang_show_rechis.xlf');
-        $this->getLanguageService()->includeLLFile('EXT:lang/Resources/Private/Language/locallang_mod_web_list.xlf');
-        $this->getLanguageService()->includeLLFile('EXT:seminars/Resources/Private/Language/BackEnd/locallang.xlf');
-        $this->getLanguageService()->includeLLFile('EXT:seminars/Resources/Private/Language/Csv/locallang.xlf');
+        $languageService = $this->getLanguageService();
+        $languageService->includeLLFile('EXT:lang/Resources/Private/Language/locallang_common.xlf');
+        $languageService->includeLLFile('EXT:lang/Resources/Private/Language/locallang_show_rechis.xlf');
+        $languageService->includeLLFile('EXT:lang/Resources/Private/Language/locallang_mod_web_list.xlf');
+        $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/BackEnd/locallang.xlf');
+        $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/Csv/locallang.xlf');
 
         $this->MCONF = ['name' => static::MODULE_NAME];
     }

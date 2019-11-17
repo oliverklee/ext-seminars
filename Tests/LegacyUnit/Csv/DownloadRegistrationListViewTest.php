@@ -27,13 +27,6 @@ class Tx_Seminars_Tests_Unit_Csv_DownloadRegistrationListViewTest extends TestCa
     private $configuration = null;
 
     /**
-     * PID of the system folder in which we store our test data
-     *
-     * @var int
-     */
-    private $pageUid = 0;
-
-    /**
      * UID of a test event record
      *
      * @var int
@@ -55,11 +48,11 @@ class Tx_Seminars_Tests_Unit_Csv_DownloadRegistrationListViewTest extends TestCa
         $this->configuration->setData(['charsetForCsv' => 'utf-8']);
         $configurationRegistry->set('plugin.tx_seminars', $this->configuration);
 
-        $this->pageUid = $this->testingFramework->createSystemFolder();
+        $pageUid = $this->testingFramework->createSystemFolder();
         $this->eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'pid' => $this->pageUid,
+                'pid' => $pageUid,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'],
             ]
         );

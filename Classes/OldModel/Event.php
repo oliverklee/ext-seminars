@@ -348,13 +348,11 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * Gets the number of credit points for this seminar
      * (or an empty string if it is not set yet).
      *
-     * @return string the number of credit points or a an empty string if it is
-     *                0
+     * @return string the number of credit points or a an empty string if it is 0
      */
     public function getCreditPoints(): string
     {
-        return $this->hasCreditPoints()
-            ? $this->getTopicInteger('credit_points') : '';
+        return $this->hasCreditPoints() ? (string)$this->getTopicInteger('credit_points') : '';
     }
 
     /**
@@ -505,9 +503,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         // Fetches the countries from the corresponding place records, may be
         // an empty array.
-        $countries = $this->getPlacesWithCountry();
         // Get the real country names from the ISO codes.
-        foreach ($countries as $currentCountry) {
+        foreach ($this->getPlacesWithCountry() as $currentCountry) {
             $countryList[] = $this->getCountryNameFromIsoCode($currentCountry);
         }
 
@@ -1740,11 +1737,11 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         );
 
         if (!$dbResult) {
-            throw new \Tx_Oelib_Exception_Database();
+            throw new \Tx_Oelib_Exception_Database('Database error', 1574008188);
         }
         $dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
         if (!$dbResultRow) {
-            throw new \Tx_Oelib_Exception_Database();
+            throw new \Tx_Oelib_Exception_Database('Database error', 1574008197);
         }
 
         return $dbResultRow['title'];
@@ -2213,8 +2210,10 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         /** @var \Tx_Seminars_BagBuilder_Organizer $builder */
         $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Organizer::class);
         $builder->limitToEvent($this->getUid());
+        /** @var \Tx_Seminars_Bag_Organizer $bag */
+        $bag = $builder->build();
 
-        return $builder->build();
+        return $bag;
     }
 
     /**
@@ -2230,8 +2229,10 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         $organizers = $this->getOrganizerBag();
         $organizers->rewind();
+        /** @var \Tx_Seminars_OldModel_Organizer|null $current */
+        $current = $organizers->current();
 
-        return $organizers->current();
+        return $current;
     }
 
     /**
@@ -2250,9 +2251,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         $result = [];
 
-        $organizers = $this->getOrganizerBag();
         /** @var \Tx_Seminars_OldModel_Organizer $organizer */
-        foreach ($organizers as $organizer) {
+        foreach ($this->getOrganizerBag() as $organizer) {
             $result[] = $plugin->cObj->getTypoLink(
                 \htmlspecialchars($organizer->getName(), ENT_QUOTES | ENT_HTML5),
                 $organizer->getHomepage(),
@@ -2277,9 +2277,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         $result = [];
 
-        $organizers = $this->getOrganizerBag();
         /** @var \Tx_Seminars_OldModel_Organizer $organizer */
-        foreach ($organizers as $organizer) {
+        foreach ($this->getOrganizerBag() as $organizer) {
             $result[] = $organizer->getName() . ($organizer->hasHomepage() ? ', ' . $organizer->getHomepage() : '');
         }
 
@@ -2301,9 +2300,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         $result = [];
 
-        $organizers = $this->getOrganizerBag();
         /** @var \Tx_Seminars_OldModel_Organizer $organizer */
-        foreach ($organizers as $organizer) {
+        foreach ($this->getOrganizerBag() as $organizer) {
             $result[] = '"' . $organizer->getName() . '"' . ' <' . $organizer->getEMailAddress() . '>';
         }
 
@@ -2324,9 +2322,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         $result = [];
 
-        $organizers = $this->getOrganizerBag();
         /** @var \Tx_Seminars_OldModel_Organizer $organizer */
-        foreach ($organizers as $organizer) {
+        foreach ($this->getOrganizerBag() as $organizer) {
             $result[] = $organizer->getEMailAddress();
         }
 
@@ -2347,9 +2344,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         $result = [];
 
-        $organizers = $this->getOrganizerBag();
         /** @var \Tx_Seminars_OldModel_Organizer $organizer */
-        foreach ($organizers as $organizer) {
+        foreach ($this->getOrganizerBag() as $organizer) {
             $emailFooter = $organizer->getEmailFooter();
             if ($emailFooter !== '') {
                 $result[] = $emailFooter;
@@ -3571,7 +3567,10 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         /** @var \Tx_Oelib_Mapper_FrontEndUser $mapper */
         $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_FrontEndUser::class);
-        return $mapper->find($this->getRecordPropertyInteger('owner_feuser'));
+        /** @var \Tx_Oelib_Model_FrontEndUser|null $owner */
+        $owner = $mapper->find($this->getRecordPropertyInteger('owner_feuser'));
+
+        return $owner;
     }
 
     /**
@@ -4126,16 +4125,15 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         $canUnregisterByQueue = $this->getConfValueBoolean(
             'allowUnregistrationWithEmptyWaitingList'
         ) || (
-                $this->hasRegistrationQueue()
+            $this->hasRegistrationQueue()
                 && $this->hasAttendancesOnRegistrationQueue()
-            );
+        );
 
         $deadline = $this->getUnregistrationDeadlineFromModelAndConfiguration();
-        if ($this->hasBeginDate() || ($deadline != 0)) {
+        if ($deadline !== 0 || $this->hasBeginDate()) {
             $canUnregisterByDate = ($GLOBALS['SIM_EXEC_TIME'] < $deadline);
         } else {
-            $canUnregisterByDate =
-                ($this->getUnregistrationDeadlineFromConfiguration() != 0);
+            $canUnregisterByDate = $this->getUnregistrationDeadlineFromConfiguration() !== 0;
         }
 
         return $canUnregisterByQueue && $canUnregisterByDate;
@@ -4659,8 +4657,10 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         /** @var \Tx_Seminars_BagBuilder_Event $builder */
         $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Event::class);
         $builder->limitToRequiredEventTopics($this->getTopicUid());
+        /** @var \Tx_Seminars_Bag_Event $bag */
+        $bag = $builder->build();
 
-        return $builder->build();
+        return $bag;
     }
 
     /**
@@ -4675,8 +4675,10 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         /** @var \Tx_Seminars_BagBuilder_Event $builder */
         $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Event::class);
         $builder->limitToDependingEventTopics($this->getTopicUid());
+        /** @var \Tx_Seminars_Bag_Event $bag */
+        $bag = $builder->build();
 
-        return $builder->build();
+        return $bag;
     }
 
     /**
@@ -4745,10 +4747,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         $beginDate = $this->getBeginDateAsTimestamp();
         $deadline = $beginDate;
-        $speakers = $this->getSpeakerBag();
-
         /** @var \Tx_Seminars_OldModel_Speaker $speaker */
-        foreach ($speakers as $speaker) {
+        foreach ($this->getSpeakerBag() as $speaker) {
             $speakerDeadline = $beginDate - ($speaker->getCancelationPeriodInDays() * \Tx_Oelib_Time::SECONDS_PER_DAY);
             $deadline = min($speakerDeadline, $deadline);
         }

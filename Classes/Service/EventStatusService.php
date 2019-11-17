@@ -44,14 +44,12 @@ class EventStatusService implements SingletonInterface
         if ($event->hasEnoughRegistrations()) {
             $this->confirmAndSave($event);
             $eventWasUpdated = true;
-        } else {
-            if (
-                $event->hasRegistrationDeadline()
-                && $event->getRegistrationDeadlineAsUnixTimeStamp() < $GLOBALS['SIM_EXEC_TIME']
-            ) {
-                $this->cancelAndSave($event);
-                $eventWasUpdated = true;
-            }
+        } elseif (
+            $event->hasRegistrationDeadline()
+            && $event->getRegistrationDeadlineAsUnixTimeStamp() < $GLOBALS['SIM_EXEC_TIME']
+        ) {
+            $this->cancelAndSave($event);
+            $eventWasUpdated = true;
         }
 
         return $eventWasUpdated;

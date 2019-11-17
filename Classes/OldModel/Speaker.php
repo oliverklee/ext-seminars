@@ -326,7 +326,10 @@ class Tx_Seminars_OldModel_Speaker extends \Tx_Seminars_OldModel_Abstract
 
         /** @var \Tx_Seminars_Mapper_FrontEndUser $mapper */
         $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
-        return $mapper->find($this->getRecordPropertyInteger('owner'));
+        /** @var \Tx_Seminars_Model_FrontEndUser|null $owner */
+        $owner = $mapper->find($this->getRecordPropertyInteger('owner'));
+
+        return $owner;
     }
 
     /**

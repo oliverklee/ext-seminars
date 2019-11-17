@@ -41,7 +41,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @var string[]
      */
-    protected $fieldsInBillingAddress = [
+    const BILLING_ADDRESS_FIELDS = [
         'gender',
         'name',
         'company',
@@ -71,7 +71,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
     /**
      * @var string[]
      */
-    protected $registrationFieldsOnConfirmationPage = [
+    const REGISTRATION_FIELDS_ON_CONFIRMATION_PAGE = [
         'price',
         'seats',
         'total_price',
@@ -826,7 +826,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      */
     public function showMethodsOfPayment(): bool
     {
-        return $this->getSeminar()->hasPaymentMethods()
+        $event = $this->getSeminar();
+        return $event->hasPaymentMethods()
             && $this->getSeminar()->hasAnyPrice()
             && $this->hasRegistrationFormField(['elementname' => 'method_of_payment']);
     }
@@ -934,7 +935,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      */
     protected function getAllFieldKeysForConfirmationPage(): array
     {
-        return $this->registrationFieldsOnConfirmationPage;
+        return self::REGISTRATION_FIELDS_ON_CONFIRMATION_PAGE;
     }
 
     /**
@@ -1088,8 +1089,9 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
             $availablePrices = $this->getSeminar()->getAvailablePrices();
             $selectedPrice = $this->getKeyOfSelectedPrice();
 
-            if ($availablePrices[$selectedPrice]['amount'] != '0.00') {
-                $result = $this->getSeminar()->formatPrice($seats * $availablePrices[$selectedPrice]['amount']);
+            if ($availablePrices[$selectedPrice]['amount'] !== '0.00') {
+                $totalAmount = $seats * (float)$availablePrices[$selectedPrice]['amount'];
+                $result = $this->getSeminar()->formatPrice((string)$totalAmount);
             }
         }
 
@@ -1106,9 +1108,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
     private function getSelectedPaymentMethod(): string
     {
         $result = '';
-        $availablePaymentMethods = $this->populateListPaymentMethods();
-
-        foreach ($availablePaymentMethods as $paymentMethod) {
+        foreach ($this->populateListPaymentMethods() as $paymentMethod) {
             if ($paymentMethod['value'] == $this->getFormValue('method_of_payment')) {
                 $result = $paymentMethod['caption'];
                 break;
@@ -1160,7 +1160,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
     {
         $result = '';
 
-        foreach ($this->fieldsInBillingAddress as $key) {
+        foreach (self::BILLING_ADDRESS_FIELDS as $key) {
             $currentFormData = $this->getFormValue($key);
             if ($currentFormData !== '') {
                 $label = $this->translate('label_' . $key);
@@ -1742,7 +1742,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
             return [];
         }
 
-        $result = json_decode($jsonEncodedData, true);
+        $result = \json_decode($jsonEncodedData, true);
         if (!is_array($result)) {
             $result = [];
         }
@@ -1805,9 +1805,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
         }
 
         $isValid = true;
-        $allPersonsData = $this->getAdditionalRegisteredPersonsData();
-
-        foreach ($allPersonsData as $onePersonData) {
+        foreach ($this->getAdditionalRegisteredPersonsData() as $onePersonData) {
             if (!isset($onePersonData[3]) || !GeneralUtility::validEmail($onePersonData[3])) {
                 $isValid = false;
                 break;
