@@ -26,6 +26,7 @@
     },
     "require": {
         "php": "~7.0 || ~7.1 || ~7.2",
+        "ext-json": "*",
         "digedag/rn-base": "^1.8.7",
         "dmk/mkforms": "^3.0.21 || ^9.5.1",
         "oliverklee/oelib": "^2.3.3 || ^3.0",

@@ -115,15 +115,12 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends \Tx_Seminars_OldMod
                         !== \strftime($this->getConfValueString('dateFormatY'), $endDate)
                     ) {
                         $result = $beginDateDay;
+                    } elseif (\strftime($this->getConfValueString('dateFormatM'), $beginDate)
+                        !== \strftime($this->getConfValueString('dateFormatM'), $endDate)
+                    ) {
+                        $result = \strftime($this->getConfValueString('dateFormatMD'), $beginDate);
                     } else {
-                        // Are the months different? Then include day and month.
-                        if (\strftime($this->getConfValueString('dateFormatM'), $beginDate)
-                            !== \strftime($this->getConfValueString('dateFormatM'), $endDate)
-                        ) {
-                            $result = \strftime($this->getConfValueString('dateFormatMD'), $beginDate);
-                        } else {
-                            $result = \strftime($this->getConfValueString('dateFormatD'), $beginDate);
-                        }
+                        $result = \strftime($this->getConfValueString('dateFormatD'), $beginDate);
                     }
                 } else {
                     $result = $beginDateDay;

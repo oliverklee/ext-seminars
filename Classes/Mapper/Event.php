@@ -124,10 +124,12 @@ class Tx_Seminars_Mapper_Event extends \Tx_Oelib_DataMapper
                 'begin_date ASC'
             );
         } catch (\Tx_Oelib_Exception_EmptyQueryResult $exception) {
-            throw new \Tx_Oelib_Exception_NotFound();
+            throw new \Tx_Oelib_Exception_NotFound('Not found.', 1574004668);
         }
+        /** @var \Tx_Seminars_Model_Event $next */
+        $next = $this->getModel($row);
 
-        return $this->getModel($row);
+        return $next;
     }
 
     /**

@@ -53,6 +53,7 @@ class EventsList extends AbstractList
         $pageData = $this->page->getPageData();
         $builder->setSourcePages((string)$pageData['uid'], self::RECURSION_DEPTH);
 
+        /** @var \Tx_Seminars_Bag_Event $seminarBag */
         $seminarBag = $builder->build();
         $this->createListBody($seminarBag);
 
@@ -281,7 +282,7 @@ class EventsList extends AbstractList
      */
     public function getRegistrationsCsvIcon(\Tx_Seminars_OldModel_Event $event): string
     {
-        if (!$this->getAccessCheck()->hasAccess() || !$event->hasAttendances()) {
+        if (!$event->hasAttendances() || !$this->getAccessCheck()->hasAccess()) {
             return '';
         }
 

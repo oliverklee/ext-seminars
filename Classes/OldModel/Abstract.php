@@ -224,7 +224,7 @@ abstract class Tx_Seminars_OldModel_Abstract extends \Tx_Oelib_TemplateHelper im
     protected function setRecordPropertyInteger(string $key, int $value)
     {
         if (!empty($key)) {
-            $this->recordData[$key] = (int)$value;
+            $this->recordData[$key] = $value;
         }
     }
 
@@ -239,7 +239,7 @@ abstract class Tx_Seminars_OldModel_Abstract extends \Tx_Oelib_TemplateHelper im
     protected function setRecordPropertyString(string $key, string $value)
     {
         if (!empty($key)) {
-            $this->recordData[$key] = trim((string)$value);
+            $this->recordData[$key] = trim($value);
         }
     }
 
@@ -440,7 +440,7 @@ abstract class Tx_Seminars_OldModel_Abstract extends \Tx_Oelib_TemplateHelper im
         return $GLOBALS['TYPO3_DB']->exec_SELECTquery(
             '*',
             $this->tableName,
-            'uid=' . (int)$uid . \Tx_Oelib_Db::enableFields($this->tableName, (int)$allowHiddenRecords),
+            'uid=' . $uid . \Tx_Oelib_Db::enableFields($this->tableName, (int)$allowHiddenRecords),
             '',
             '',
             '1'

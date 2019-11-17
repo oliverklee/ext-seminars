@@ -44,7 +44,10 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      */
     public function getFrontEndUser()
     {
-        return $this->getAsModel('user');
+        /** @var \Tx_Seminars_Model_FrontEndUser|null $user */
+        $user = $this->getAsModel('user');
+
+        return $user;
     }
 
     /**
@@ -66,7 +69,10 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      */
     public function getEvent(): \Tx_Seminars_Model_Event
     {
-        return $this->getAsModel('seminar');
+        /** @var \Tx_Seminars_Model_Event $event */
+        $event = $this->getAsModel('seminar');
+
+        return $event;
     }
 
     /**
@@ -328,7 +334,10 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      */
     public function getPaymentMethod()
     {
-        return $this->getAsModel('method_of_payment');
+        /** @var \Tx_Seminars_Model_PaymentMethod|null $paymentMethod */
+        $paymentMethod = $this->getAsModel('method_of_payment');
+
+        return $paymentMethod;
     }
 
     /**

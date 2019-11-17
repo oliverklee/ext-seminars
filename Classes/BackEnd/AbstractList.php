@@ -130,9 +130,7 @@ abstract class AbstractList
 
         $languageService = $this->getLanguageService();
 
-        if ($this->getBackEndUser()->check('tables_modify', $this->tableName)
-            && $this->doesUserHaveAccess($pageUid)
-        ) {
+        if ($this->doesUserHaveAccess($pageUid) && $this->getBackEndUser()->check('tables_modify', $this->tableName)) {
             $params = '&cmd[' . $this->tableName . '][' . $uid . '][delete]=1';
 
             $referenceWarning = BackendUtility::referenceCount(
@@ -176,9 +174,9 @@ abstract class AbstractList
         $pid = ($newRecordPid > 0) ? $newRecordPid : $pid;
         $pageData = $this->page->getPageData();
 
-        if ($this->getBackEndUser()->check('tables_modify', $this->tableName)
+        if ((int)$pageData['doktype'] === self::SYSFOLDER_TYPE
             && $this->doesUserHaveAccess($pid)
-            && ((int)$pageData['doktype'] === self::SYSFOLDER_TYPE)
+            && $this->getBackEndUser()->check('tables_modify', $this->tableName)
         ) {
             $params = '&edit[' . $this->tableName . '][';
 
@@ -190,11 +188,12 @@ abstract class AbstractList
                     $pageData['uid']
                 );
             } else {
+                /** @var array $storagePageData */
                 $storagePageData = BackendUtility::readPageAccess($pid, '');
                 $params .= $pid;
-                $storageLabel = sprintf(
+                $storageLabel = \sprintf(
                     $languageService->getLL('label_create_record_in_foreign_folder'),
-                    $storagePageData['title'],
+                    (string)$storagePageData['title'],
                     $pid
                 );
             }
@@ -232,8 +231,7 @@ abstract class AbstractList
 
             /** @var FlashMessageService $flashMessageService */
             $flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);
-            $defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
-            $renderedFlashMessages = $defaultFlashMessageQueue->renderFlashMessages();
+            $renderedFlashMessages = $flashMessageService->getMessageQueueByIdentifier()->renderFlashMessages();
 
             $result .= '<div id="eventsList-clear"></div>' . $renderedFlashMessages;
 

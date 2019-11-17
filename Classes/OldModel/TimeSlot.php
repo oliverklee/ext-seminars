@@ -67,10 +67,8 @@ class Tx_Seminars_OldModel_TimeSlot extends \Tx_Seminars_OldModel_AbstractTimeSp
     public function getSpeakersShortCommaSeparated(): string
     {
         $result = [];
-        $speakerBag = $this->getSpeakerBag();
-
         /** @var \Tx_Seminars_OldModel_Speaker $speaker */
-        foreach ($speakerBag as $speaker) {
+        foreach ($this->getSpeakerBag() as $speaker) {
             $result[] = $speaker->getTitle();
         }
 
@@ -100,7 +98,7 @@ class Tx_Seminars_OldModel_TimeSlot extends \Tx_Seminars_OldModel_AbstractTimeSp
             \Tx_Oelib_Db::enableFields('tx_seminars_sites')
         );
         if (!$dbResult) {
-            throw new \Tx_Oelib_Exception_Database();
+            throw new \Tx_Oelib_Exception_Database('Database error', 1574008220);
         }
 
         $dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);

@@ -52,7 +52,10 @@ class Tx_Seminars_Model_TimeSlot extends \Tx_Seminars_Model_AbstractTimeSpan
      */
     public function getPlace()
     {
-        return $this->getAsModel('place');
+        /** @var \Tx_Seminars_Model_Place|null $model */
+        $model = $this->getAsModel('place');
+
+        return $model;
     }
 
     /**
@@ -62,7 +65,10 @@ class Tx_Seminars_Model_TimeSlot extends \Tx_Seminars_Model_AbstractTimeSpan
      */
     public function getSeminar()
     {
-        return $this->getAsModel('seminar');
+        /** @var \Tx_Seminars_Model_Event|null $model */
+        $model = $this->getAsModel('seminar');
+
+        return $model;
     }
 
     /**

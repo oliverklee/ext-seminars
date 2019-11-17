@@ -8535,7 +8535,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
      */
     public function processEventEditorActionsWithPositiveSeminarPivarCreatesEventEditor()
     {
-        $uid = $this->testingFramework->createRecord('tx_seminars_seminars', []);
+        $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
 
         /** @var \Tx_Seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
         $eventEditor = $this->createPartialMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage']);
@@ -8556,7 +8556,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
      */
     public function processEventEditorActionsWithUidOfExistingEventChecksPermissions()
     {
-        $uid = $this->testingFramework->createRecord('tx_seminars_seminars', []);
+        $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
 
         /** @var \Tx_Seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
         $eventEditor = $this->createPartialMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage']);

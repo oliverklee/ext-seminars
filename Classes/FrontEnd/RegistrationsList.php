@@ -148,6 +148,7 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_Abstr
         $builder = $this->createRegistrationBagBuilder();
         $builder->limitToRegular();
 
+        /** @var \Tx_Seminars_Bag_Registration $regularRegistrations */
         $regularRegistrations = $builder->build();
         if ($regularRegistrations->isEmpty()) {
             $this->setMarker(
@@ -168,6 +169,7 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_Abstr
             $builder = $this->createRegistrationBagBuilder();
             $builder->limitToOnQueue();
 
+            /** @var \Tx_Seminars_Bag_Registration $waitingListRegistrations */
             $waitingListRegistrations = $builder->build();
             if (!$waitingListRegistrations->isEmpty()) {
                 $this->setMarker(

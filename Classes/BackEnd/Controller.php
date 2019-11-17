@@ -82,7 +82,7 @@ class Controller extends AbstractModule
         }
 
         $pageAccess = BackendUtility::readPageAccess($this->id, $this->perms_clause);
-        if (!is_array($pageAccess) && !$backEndUser->isAdmin()) {
+        if (!\is_array($pageAccess) && !$backEndUser->isAdmin()) {
             return $content . $this->getRenderedFlashMessages() . $document->endPage();
         }
 
@@ -122,7 +122,7 @@ class Controller extends AbstractModule
         // If $this->subModule is not a key of $this->availableSubModules,
         // set it to the key of the first element in $this->availableSubModules
         // so the first tab is activated.
-        if (!array_key_exists($this->subModule, $this->availableSubModules)) {
+        if (!\array_key_exists($this->subModule, $this->availableSubModules)) {
             reset($this->availableSubModules);
             $this->subModule = key($this->availableSubModules);
         }
@@ -198,8 +198,7 @@ class Controller extends AbstractModule
     {
         /** @var FlashMessageService $flashMessageService */
         $flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);
-        $defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();
-        return $defaultFlashMessageQueue->renderFlashMessages();
+        return $flashMessageService->getMessageQueueByIdentifier()->renderFlashMessages();
     }
 
     /**

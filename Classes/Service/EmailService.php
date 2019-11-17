@@ -124,7 +124,7 @@ class EmailService implements SingletonInterface
             '%eventDate' => $this->dateRangeViewHelper->render($event, '-'),
         ];
 
-        return str_replace(array_keys($markers), array_values($markers), $textWithMarkers);
+        return str_replace(array_keys($markers), $markers, $textWithMarkers);
     }
 
     /**

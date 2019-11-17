@@ -244,7 +244,10 @@ class Tx_Seminars_Model_Place extends \Tx_Oelib_Model implements \Tx_Seminars_In
      */
     public function getOwner()
     {
-        return $this->getAsModel('owner');
+        /** @var \Tx_Seminars_Model_FrontEndUser|null $owner */
+        $owner = $this->getAsModel('owner');
+
+        return $owner;
     }
 
     /**

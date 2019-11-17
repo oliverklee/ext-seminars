@@ -28,9 +28,9 @@ class Tx_Seminars_Csv_FrontEndRegistrationAccessCheck implements \Tx_Seminars_In
     /**
      * Returns the event for the access check.
      *
-     * @return \Tx_Seminars_OldModel_Event
+     * @return \Tx_Seminars_OldModel_Event|null
      */
-    protected function getEvent(): \Tx_Seminars_OldModel_Event
+    protected function getEvent()
     {
         return $this->event;
     }

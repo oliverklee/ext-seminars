@@ -484,9 +484,7 @@ abstract class AbstractEventMailForm
     {
         $url = BackendUtility::getModuleUrl(
             self::MODULE_NAME,
-            ['id' => \Tx_Oelib_PageFinder::getInstance()->getPageUid()],
-            false,
-            true
+            ['id' => \Tx_Oelib_PageFinder::getInstance()->getPageUid()]
         );
         \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Location: ' . $url);
     }
@@ -668,12 +666,12 @@ abstract class AbstractEventMailForm
     {
         if (!$this->hooksHaveBeenRetrieved) {
             $hookClasses = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['backEndModule'];
-            if (is_array($hookClasses)) {
+            if (\is_array($hookClasses)) {
                 foreach ($hookClasses as $hookClass) {
                     $hookInstance = GeneralUtility::getUserObj($hookClass);
                     if (!($hookInstance instanceof \Tx_Seminars_Interface_Hook_BackEndModule)) {
                         throw new \UnexpectedValueException(
-                            'The class ' . get_class($hookInstance) . ' is used for the event list view hook, ' .
+                            'The class ' . \get_class($hookInstance) . ' is used for the event list view hook, ' .
                             'but does not implement the \\Tx_Seminars_Interface_Hook_BackEndModule interface.',
                             1301928334
                         );
