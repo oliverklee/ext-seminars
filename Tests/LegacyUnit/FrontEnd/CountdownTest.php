@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * Testcase.
@@ -23,7 +24,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CountdownTest extends TestCase
     private $testingFramework = null;
 
     /**
-     * @var \Tx_Seminars_Mapper_Event|PHPUnit_Framework_MockObject_MockObject
+     * @var \Tx_Seminars_Mapper_Event|MockObject
      */
     private $mapper = null;
 
@@ -122,7 +123,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CountdownTest extends TestCase
             ->method('findNextUpcoming')
             ->willReturn($event);
 
-        /** @var \Tx_Seminars_ViewHelper_Countdown|\PHPUnit_Framework_MockObject_MockObject $viewHelper */
+        /** @var \Tx_Seminars_ViewHelper_Countdown|MockObject $viewHelper */
         $viewHelper = $this->createPartialMock(\Tx_Seminars_ViewHelper_Countdown::class, ['render']);
         $viewHelper->expects(self::once())
             ->method('render')

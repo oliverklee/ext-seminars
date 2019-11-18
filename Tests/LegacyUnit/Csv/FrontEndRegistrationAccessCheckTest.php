@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * Test case.
@@ -62,7 +63,7 @@ class Tx_Seminars_Tests_Unit_Csv_FrontEndRegistrationAccessCheckTest extends Tes
     {
         \Tx_Oelib_FrontEndLoginManager::getInstance()->logInUser();
 
-        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $event */
+        /** @var \Tx_Seminars_OldModel_Event|MockObject $event */
         $event = $this->createMock(\Tx_Seminars_OldModel_Event::class);
         $this->subject->setEvent($event);
 
@@ -78,13 +79,13 @@ class Tx_Seminars_Tests_Unit_Csv_FrontEndRegistrationAccessCheckTest extends Tes
     {
         $this->seminarsPluginConfiguration->setAsBoolean('allowCsvExportOfRegistrationsInMyVipEventsView', false);
 
-        /** @var \Tx_Seminars_Model_FrontEndUser|\PHPUnit_Framework_MockObject_MockObject $user */
+        /** @var \Tx_Seminars_Model_FrontEndUser|MockObject $user */
         $user = $this->createMock(\Tx_Seminars_Model_FrontEndUser::class);
         $userUid = 42;
         $user->method('getUid')->willReturn($userUid);
         \Tx_Oelib_FrontEndLoginManager::getInstance()->logInUser($user);
 
-        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $event */
+        /** @var \Tx_Seminars_OldModel_Event|MockObject $event */
         $event = $this->createMock(\Tx_Seminars_OldModel_Event::class);
         $event->method('isUserVip')->with(
             $userUid,
@@ -104,13 +105,13 @@ class Tx_Seminars_Tests_Unit_Csv_FrontEndRegistrationAccessCheckTest extends Tes
     {
         $this->seminarsPluginConfiguration->setAsBoolean('allowCsvExportOfRegistrationsInMyVipEventsView', false);
 
-        /** @var \Tx_Seminars_Model_FrontEndUser|\PHPUnit_Framework_MockObject_MockObject $user */
+        /** @var \Tx_Seminars_Model_FrontEndUser|MockObject $user */
         $user = $this->createMock(\Tx_Seminars_Model_FrontEndUser::class);
         $userUid = 42;
         $user->method('getUid')->willReturn($userUid);
         \Tx_Oelib_FrontEndLoginManager::getInstance()->logInUser($user);
 
-        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $event */
+        /** @var \Tx_Seminars_OldModel_Event|MockObject $event */
         $event = $this->createMock(\Tx_Seminars_OldModel_Event::class);
         $event->method('isUserVip')->with(
             $userUid,
@@ -130,13 +131,13 @@ class Tx_Seminars_Tests_Unit_Csv_FrontEndRegistrationAccessCheckTest extends Tes
     {
         $this->seminarsPluginConfiguration->setAsBoolean('allowCsvExportOfRegistrationsInMyVipEventsView', true);
 
-        /** @var \Tx_Seminars_Model_FrontEndUser|\PHPUnit_Framework_MockObject_MockObject $user */
+        /** @var \Tx_Seminars_Model_FrontEndUser|MockObject $user */
         $user = $this->createMock(\Tx_Seminars_Model_FrontEndUser::class);
         $userUid = 42;
         $user->method('getUid')->willReturn($userUid);
         \Tx_Oelib_FrontEndLoginManager::getInstance()->logInUser($user);
 
-        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $event */
+        /** @var \Tx_Seminars_OldModel_Event|MockObject $event */
         $event = $this->createMock(\Tx_Seminars_OldModel_Event::class);
         $event->method('isUserVip')->with(
             $userUid,
@@ -156,13 +157,13 @@ class Tx_Seminars_Tests_Unit_Csv_FrontEndRegistrationAccessCheckTest extends Tes
     {
         $this->seminarsPluginConfiguration->setAsBoolean('allowCsvExportOfRegistrationsInMyVipEventsView', true);
 
-        /** @var \Tx_Seminars_Model_FrontEndUser|\PHPUnit_Framework_MockObject_MockObject $user */
+        /** @var \Tx_Seminars_Model_FrontEndUser|MockObject $user */
         $user = $this->createMock(\Tx_Seminars_Model_FrontEndUser::class);
         $userUid = 42;
         $user->method('getUid')->willReturn($userUid);
         \Tx_Oelib_FrontEndLoginManager::getInstance()->logInUser($user);
 
-        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $event */
+        /** @var \Tx_Seminars_OldModel_Event|MockObject $event */
         $event = $this->createMock(\Tx_Seminars_OldModel_Event::class);
         $event->method('isUserVip')->with($userUid, $this->vipsGroupUid)
             ->willReturn(true);

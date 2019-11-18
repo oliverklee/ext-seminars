@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 
@@ -19,7 +20,7 @@ class Tx_Seminars_Tests_Unit_Csv_BackEndRegistrationAccessCheckTest extends Test
     private $subject = null;
 
     /**
-     * @var PHPUnit_Framework_MockObject_MockObject|BackendUserAuthentication
+     * @var MockObject|BackendUserAuthentication
      */
     private $backEndUser = null;
 

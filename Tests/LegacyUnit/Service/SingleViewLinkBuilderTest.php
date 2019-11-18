@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
@@ -69,7 +70,7 @@ class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends TestCase
      */
     public function getSingleViewPageForEventForEventWithSingleViewPageAndNoConfigurationReturnsSingleViewPageOfEvent()
     {
-        /** @var \Tx_Seminars_Model_Event $event|\PHPUnit_Framework_MockObject_MockObject */
+        /** @var \Tx_Seminars_Model_Event $event |MockObject */
         $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['hasCombinedSingleViewPage', 'getCombinedSingleViewPage']
@@ -79,8 +80,7 @@ class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends TestCase
         $event->method('getCombinedSingleViewPage')
             ->willReturn('42');
 
-        // phpcs:ignore Generic.Files.LineLength
-        /** @var \Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder::class,
             [
@@ -105,7 +105,7 @@ class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends TestCase
      */
     public function getSingleViewPageForEventForEventWithoutSingleViewPageReturnsSingleViewPageFromConfiguration()
     {
-        /** @var \Tx_Seminars_Model_Event $event|\PHPUnit_Framework_MockObject_MockObject */
+        /** @var \Tx_Seminars_Model_Event $event |MockObject */
         $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['hasCombinedSingleViewPage', 'getCombinedSingleViewPage']
@@ -115,8 +115,7 @@ class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends TestCase
         $event->method('getCombinedSingleViewPage')
             ->willReturn('');
 
-        // phpcs:ignore Generic.Files.LineLength
-        /** @var \Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder::class,
             [
@@ -141,7 +140,7 @@ class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends TestCase
      */
     public function getSingleViewPageForEventForEventAndConfigurationWithSingleViewPageReturnsSingleViewPageFromEvent()
     {
-        /** @var \Tx_Seminars_Model_Event $event|\PHPUnit_Framework_MockObject_MockObject */
+        /** @var \Tx_Seminars_Model_Event $event |MockObject */
         $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['hasCombinedSingleViewPage', 'getCombinedSingleViewPage']
@@ -151,8 +150,7 @@ class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends TestCase
         $event->method('getCombinedSingleViewPage')
             ->willReturn('42');
 
-        // phpcs:ignore Generic.Files.LineLength
-        /** @var \Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder::class,
             [
@@ -177,7 +175,7 @@ class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends TestCase
      */
     public function getSingleViewPageForEventForEventWithoutSingleViewPageAndConfigurationWithoutSettingIsEmpty()
     {
-        /** @var \Tx_Seminars_Model_Event $event|\PHPUnit_Framework_MockObject_MockObject */
+        /** @var \Tx_Seminars_Model_Event $event |MockObject */
         $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['hasCombinedSingleViewPage', 'getCombinedSingleViewPage']
@@ -187,8 +185,7 @@ class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends TestCase
         $event->method('getCombinedSingleViewPage')
             ->willReturn('');
 
-        // phpcs:ignore Generic.Files.LineLength
-        /** @var \Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder::class,
             [
@@ -217,7 +214,7 @@ class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends TestCase
      */
     public function configurationHasSingleViewPageForZeroPageFromConfigurationReturnsFalse()
     {
-        /** @var \Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder::class,
             ['getSingleViewPageFromConfiguration']
@@ -236,7 +233,7 @@ class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends TestCase
      */
     public function configurationHasSingleViewPageForNonZeroPageFromConfigurationReturnsTrue()
     {
-        /** @var \Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder::class,
             ['getSingleViewPageFromConfiguration']
@@ -259,7 +256,7 @@ class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends TestCase
      */
     public function getSingleViewPageFromConfigurationForPluginSetReturnsPageUidFromPluginConfiguration()
     {
-        /** @var \Tx_Oelib_TemplateHelper|\PHPUnit_Framework_MockObject_MockObject $plugin */
+        /** @var \Tx_Oelib_TemplateHelper|MockObject $plugin */
         $plugin = $this->createPartialMock(
             \Tx_Oelib_TemplateHelper::class,
             ['hasConfValueInteger', 'getConfValueInteger']
@@ -302,10 +299,10 @@ class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends TestCase
     public function createAbsoluteUrlForEventReturnsRelativeUrlMadeAbsolute()
     {
         $relativeUrl = 'index.php?id=42&tx_seminars%5BshowUid%5D=17';
-        /** @var \Tx_Seminars_Model_Event $event|\PHPUnit_Framework_MockObject_MockObject */
+        /** @var \Tx_Seminars_Model_Event $event |MockObject */
         $event = $this->createMock(\Tx_Seminars_Model_Event::class);
 
-        /** @var \Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder::class,
             ['createRelativeUrlForEvent']
@@ -327,7 +324,7 @@ class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends TestCase
         $eventUid = 19;
         $singleViewPageUid = 42;
 
-        /** @var \Tx_Seminars_Model_Event $event|\PHPUnit_Framework_MockObject_MockObject */
+        /** @var \Tx_Seminars_Model_Event $event |MockObject */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getUid']);
         $event->method('getUid')
             ->willReturn($eventUid);
@@ -341,7 +338,7 @@ class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends TestCase
                 ]
             );
 
-        /** @var \Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder::class,
             ['getContentObject', 'getSingleViewPageForEvent']
@@ -366,7 +363,7 @@ class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends TestCase
         $contentObject->expects(self::once())->method('typoLink_URL')
             ->willReturn($relativeUrl);
 
-        /** @var \Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder::class,
             ['getContentObject', 'getSingleViewPageForEvent']
@@ -374,7 +371,7 @@ class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends TestCase
         $subject->method('getContentObject')
             ->willReturn($contentObject);
 
-        /** @var \Tx_Seminars_Model_Event $event|\PHPUnit_Framework_MockObject_MockObject */
+        /** @var \Tx_Seminars_Model_Event $event |MockObject */
         $event = $this->createMock(\Tx_Seminars_Model_Event::class);
 
         self::assertEquals(

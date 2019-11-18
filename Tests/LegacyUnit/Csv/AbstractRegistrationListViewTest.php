@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * Test case.
@@ -173,7 +174,7 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends TestCa
     {
         $this->expectException(\BadMethodCallException::class);
 
-        /** @var \Tx_Seminars_Csv_AbstractRegistrationListView|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Csv_AbstractRegistrationListView|MockObject $subject */
         $subject = $this->getMockForAbstractClass(\Tx_Seminars_Csv_AbstractRegistrationListView::class);
 
         self::assertSame(
@@ -189,7 +190,7 @@ class Tx_Seminars_Tests_Unit_Csv_AbstractRegistrationListViewTest extends TestCa
     {
         $this->expectException(\BadMethodCallException::class);
 
-        /** @var \Tx_Seminars_Csv_AbstractRegistrationListView|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Csv_AbstractRegistrationListView|MockObject $subject */
         $subject = $this->getMockForAbstractClass(\Tx_Seminars_Csv_AbstractRegistrationListView::class);
         $subject->setEventUid($this->eventUid);
         $subject->setPageUid($this->pageUid);

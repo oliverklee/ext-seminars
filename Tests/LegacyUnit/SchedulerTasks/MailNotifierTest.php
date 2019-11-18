@@ -10,6 +10,7 @@ use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
 use OliverKlee\Seminars\SchedulerTasks\MailNotifier;
 use OliverKlee\Seminars\Service\EmailService;
 use OliverKlee\Seminars\Service\EventStatusService;
+use PHPUnit\Framework\MockObject\MockObject;
 use Prophecy\Prophecy\ObjectProphecy;
 use Prophecy\Prophecy\ProphecySubjectInterface;
 use TYPO3\CMS\Core\Core\Bootstrap;
@@ -28,7 +29,7 @@ use TYPO3\CMS\Scheduler\Task\AbstractTask;
 class MailNotifierTest extends TestCase
 {
     /**
-     * @var MailNotifier|\PHPUnit_Framework_MockObject_MockObject|AccessibleObject
+     * @var MailNotifier|MockObject|AccessibleObject
      */
     protected $subject = null;
 
@@ -48,22 +49,22 @@ class MailNotifierTest extends TestCase
     protected $mailer = null;
 
     /**
-     * @var EventStatusService|\PHPUnit_Framework_MockObject_MockObject
+     * @var EventStatusService|MockObject
      */
     protected $eventStatusService = null;
 
     /**
-     * @var EmailService|\PHPUnit_Framework_MockObject_MockObject
+     * @var EmailService|MockObject
      */
     protected $emailService = null;
 
     /**
-     * @var \Tx_Seminars_Mapper_Event|\PHPUnit_Framework_MockObject_MockObject
+     * @var \Tx_Seminars_Mapper_Event|MockObject
      */
     protected $eventMapper = null;
 
     /**
-     * @var \Tx_Seminars_EmailSalutation|\PHPUnit_Framework_MockObject_MockObject
+     * @var \Tx_Seminars_EmailSalutation|MockObject
      */
     protected $emailSalutation = null;
 
@@ -381,7 +382,7 @@ class MailNotifierTest extends TestCase
      */
     public function executeWithPageConfigurationCallsAllSeparateSteps()
     {
-        /** @var MailNotifier|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var MailNotifier|MockObject $subject */
         $subject = $this->createPartialMock(
             MailNotifier::class,
             ['sendEventTakesPlaceReminders', 'sendCancellationDeadlineReminders', 'automaticallyChangeEventStatuses']
@@ -401,7 +402,7 @@ class MailNotifierTest extends TestCase
      */
     public function executeWithoutPageConfigurationNotCallsAnySeparateStep()
     {
-        /** @var MailNotifier|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var MailNotifier|MockObject $subject */
         $subject = $this->createPartialMock(
             MailNotifier::class,
             ['sendEventTakesPlaceReminders', 'sendCancellationDeadlineReminders', 'automaticallyChangeEventStatuses']
@@ -421,7 +422,7 @@ class MailNotifierTest extends TestCase
     public function executeWithPageConfigurationExecutesRegistrationDigest()
     {
 
-        /** @var MailNotifier|\PHPUnit_Framework_MockObject_MockObject|AccessibleObject $subject */
+        /** @var MailNotifier|MockObject|AccessibleObject $subject */
         $subject = $this->getAccessibleMock(
             MailNotifier::class,
             ['sendEventTakesPlaceReminders', 'sendCancellationDeadlineReminders', 'automaticallyChangeEventStatuses'],

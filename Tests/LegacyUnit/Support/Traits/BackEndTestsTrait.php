@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits;
 
+use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Core\Bootstrap;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
@@ -48,7 +49,7 @@ trait BackEndTestsTrait
     private $t3VarBackup = [];
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|BackendUserAuthentication
+     * @var MockObject|BackendUserAuthentication
      */
     private $mockBackEndUser = null;
 

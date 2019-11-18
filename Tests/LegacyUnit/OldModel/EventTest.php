@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -8301,7 +8302,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
             'directions' => '',
         ];
 
-        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_OldModel_Event|MockObject $subject */
         $subject = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getPlacesAsArray', 'hasPlace']);
         $subject->method('getPlacesAsArray')->willReturn([$place]);
         $subject->method('hasPlace')->willReturn(true);
@@ -8334,7 +8335,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
             'directions' => '',
         ];
 
-        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_OldModel_Event|MockObject $subject */
         $subject = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getPlacesAsArray', 'hasPlace']);
         $subject->method('getPlacesAsArray')->willReturn([$place1, $place2]);
         $subject->method('hasPlace')->willReturn(true);
@@ -8357,7 +8358,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
             'city' => 'Bonn',
         ];
 
-        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_OldModel_Event|MockObject $subject */
         $subject = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getPlacesAsArray', 'hasPlace']);
         $subject->method('getPlacesAsArray')->willReturn([$place]);
         $subject->method('hasPlace')->willReturn(true);
@@ -8380,7 +8381,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
             'city' => 'Bonn',
         ];
 
-        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_OldModel_Event|MockObject $subject */
         $subject = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getPlacesAsArray', 'hasPlace']);
         $subject->method('getPlacesAsArray')->willReturn([$place]);
         $subject->method('hasPlace')->willReturn(true);
@@ -9351,7 +9352,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         int $registrationsListPID,
         int $registrationsVipListPID
     ) {
-        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_OldModel_Event|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_OldModel_Event::class,
             ['needsRegistration', 'isUserRegistered', 'isUserVip']
@@ -9402,7 +9403,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         int $registrationsListPID,
         int $registrationsVipListPID
     ) {
-        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_OldModel_Event|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_OldModel_Event::class,
             ['needsRegistration', 'isUserRegistered', 'isUserVip']
@@ -9477,9 +9478,13 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      *
      * @return void
      */
-    public function canViewRegistrationsListForCsvExport(bool $expected, bool $loggedIn, bool $isVip, bool $allowCsvExportForVips)
-    {
-        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+    public function canViewRegistrationsListForCsvExport(
+        bool $expected,
+        bool $loggedIn,
+        bool $isVip,
+        bool $allowCsvExportForVips
+    ) {
+        /** @var \Tx_Seminars_OldModel_Event|MockObject $subject */
         $subject = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['needsRegistration', 'isUserVip']);
         $subject->method('needsRegistration')
             ->willReturn(true);
@@ -9681,7 +9686,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         int $registrationsListPID,
         int $registrationsVipListPID
     ) {
-        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_OldModel_Event|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_OldModel_Event::class,
             ['needsRegistration', 'isUserRegistered', 'isUserVip']
@@ -9891,7 +9896,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         int $registrationsListPID,
         int $registrationsVipListPID
     ) {
-        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_OldModel_Event|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_OldModel_Event::class,
             ['needsRegistration', 'isUserRegistered', 'isUserVip']
@@ -9929,7 +9934,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      */
     public function canViewRegistrationsListMessageWithoutNeededRegistrationReturnsNoRegistrationMessage()
     {
-        /** @var \Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_OldModel_Event|MockObject $subject */
         $subject = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['needsRegistration']);
         $subject->method('needsRegistration')->willReturn(false);
         $subject->init();
@@ -9945,7 +9950,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      */
     public function canViewRegistrationsListMessageForListAndNoLoginAndAttendeesAccessReturnsPleaseLoginMessage()
     {
-        /** @var \Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_OldModel_Event|MockObject $subject */
         $subject = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['needsRegistration']);
         $subject->method('needsRegistration')->willReturn(true);
         $subject->init();
@@ -9961,7 +9966,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      */
     public function canViewRegistrationsListMessageForListAndNoLoginAndLoginAccessReturnsPleaseLoginMessage()
     {
-        /** @var \Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_OldModel_Event|MockObject $subject */
         $subject = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['needsRegistration']);
         $subject->method('needsRegistration')->willReturn(true);
         $subject->init();
@@ -9977,7 +9982,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      */
     public function canViewRegistrationsListMessageForListAndNoLoginAndWorldAccessReturnsEmptyString()
     {
-        /** @var \Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_OldModel_Event|MockObject $subject */
         $subject = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['needsRegistration']);
         $subject->method('needsRegistration')->willReturn(true);
         $subject->init();
@@ -10013,7 +10018,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      */
     public function canViewRegistrationsListMessageForVipListAndNoLoginReturnsPleaseLoginMessage(string $accessLevel)
     {
-        /** @var \Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_OldModel_Event|MockObject $subject */
         $subject = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['needsRegistration']);
         $subject->method('needsRegistration')->willReturn(true);
         $subject->init();
@@ -10031,7 +10036,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      */
     public function canViewRegistrationsListMessageForVipListAndWorldAccessAndNoLoginReturnsEmptyString()
     {
-        /** @var \Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_OldModel_Event|MockObject $subject */
         $subject = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['needsRegistration']);
         $subject->method('needsRegistration')->willReturn(true);
         $subject->init();
@@ -10072,7 +10077,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      */
     public function canViewRegistrationsListMessageWithLoginRoutesParameters(string $whichPlugin, string $accessLevel)
     {
-        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_OldModel_Event|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_OldModel_Event::class,
             ['needsRegistration', 'canViewRegistrationsList']
@@ -10093,7 +10098,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      */
     public function canViewRegistrationsListMessageWithLoginAndAccessGrantedReturnsEmptyString()
     {
-        /** @var \Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_OldModel_Event|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_OldModel_Event::class,
             ['needsRegistration', 'canViewRegistrationsList']
@@ -10115,7 +10120,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      */
     public function canViewRegistrationsListMessageWithLoginAndAccessDeniedReturnsAccessDeniedMessage()
     {
-        /** @var \Tx_Seminars_OldModel_Event|PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_OldModel_Event|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_OldModel_Event::class,
             ['needsRegistration', 'canViewRegistrationsList']
@@ -10273,7 +10278,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         bool $hasPriceRegularBoard,
         bool $hasPriceSpecialBoard
     ) {
-        /** @var \Tx_Seminars_OldModel_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_OldModel_Event|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_OldModel_Event::class,
             [

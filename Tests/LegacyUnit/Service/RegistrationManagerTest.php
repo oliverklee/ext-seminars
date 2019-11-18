@@ -5,6 +5,7 @@ declare(strict_types=1);
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Hooks\RegistrationEmailHookInterface;
 use OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures\RegistrationHookInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -4690,7 +4691,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForUnregistrationMailDoesNotAppendUnregistrationNotice()
     {
-        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Service_RegistrationManager|MockObject $subject */
         $subject = $this->getMockBuilder(\Tx_Seminars_Service_RegistrationManager::class)
             ->setMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::never())->method('getUnregistrationNotice');
@@ -4724,7 +4725,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
             false
         );
 
-        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Service_RegistrationManager|MockObject $subject */
         $subject = $this->getMockBuilder(\Tx_Seminars_Service_RegistrationManager::class)
             ->setMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::never())->method('getUnregistrationNotice');
@@ -4755,7 +4756,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
             true
         );
 
-        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Service_RegistrationManager|MockObject $subject */
         $subject = $this->getMockBuilder(\Tx_Seminars_Service_RegistrationManager::class)
             ->setMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::once())->method('getUnregistrationNotice');
@@ -4786,7 +4787,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForRegistrationOnQueueMailAndUnregistrationPossibleAddsUnregistrationNotice()
     {
-        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Service_RegistrationManager|MockObject $subject */
         $subject = $this->getMockBuilder(\Tx_Seminars_Service_RegistrationManager::class)
             ->setMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::once())->method('getUnregistrationNotice');
@@ -4826,7 +4827,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForQueueUpdateMailAndUnregistrationPossibleAddsUnregistrationNotice()
     {
-        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Service_RegistrationManager|MockObject $subject */
         $subject = $this->getMockBuilder(\Tx_Seminars_Service_RegistrationManager::class)
             ->setMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::once())->method('getUnregistrationNotice');
@@ -5927,7 +5928,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
 
         $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
         $plugin->cObj = $GLOBALS['TSFE']->cObj;
-        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Service_RegistrationManager|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Service_RegistrationManager::class,
             [
@@ -5966,7 +5967,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
 
         $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
         $plugin->cObj = $GLOBALS['TSFE']->cObj;
-        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Service_RegistrationManager|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Service_RegistrationManager::class,
             [
@@ -5996,7 +5997,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
 
         $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
         $plugin->cObj = $GLOBALS['TSFE']->cObj;
-        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Service_RegistrationManager|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Service_RegistrationManager::class,
             [
@@ -6040,7 +6041,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
 
         $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
         $plugin->cObj = $GLOBALS['TSFE']->cObj;
-        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Service_RegistrationManager|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Service_RegistrationManager::class,
             [
@@ -6086,7 +6087,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
 
         $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
         $plugin->cObj = $GLOBALS['TSFE']->cObj;
-        /** @var \Tx_Seminars_Service_RegistrationManager|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Service_RegistrationManager|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Service_RegistrationManager::class,
             [
@@ -6293,7 +6294,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         /** @var \Tx_Seminars_Service_RegistrationManager $subject */
         $subject = new $className();
 
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
+        /** @var \Tx_Seminars_Model_Event|MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
         $event->setData(['payment_methods' => new \Tx_Oelib_List()]);
         $event->method('getAvailablePrices')
@@ -6321,7 +6322,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         /** @var \Tx_Seminars_Service_RegistrationManager $subject */
         $subject = new $className();
 
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
+        /** @var \Tx_Seminars_Model_Event|MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
         $event->setData(['payment_methods' => new \Tx_Oelib_List()]);
         $event->method('getAvailablePrices')
@@ -6349,7 +6350,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         /** @var \Tx_Seminars_Service_RegistrationManager $subject */
         $subject = new $className();
 
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
+        /** @var \Tx_Seminars_Model_Event|MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
         $event->setData(['payment_methods' => new \Tx_Oelib_List()]);
         $event->method('getAvailablePrices')
@@ -6377,7 +6378,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         /** @var \Tx_Seminars_Service_RegistrationManager $subject */
         $subject = new $className();
 
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
+        /** @var \Tx_Seminars_Model_Event|MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
         $event->setData(['payment_methods' => new \Tx_Oelib_List()]);
         $event->method('getAvailablePrices')
@@ -6405,7 +6406,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         /** @var \Tx_Seminars_Service_RegistrationManager $subject */
         $subject = new $className();
 
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
+        /** @var \Tx_Seminars_Model_Event|MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
         $event->setData(['payment_methods' => new \Tx_Oelib_List()]);
         $event->method('getAvailablePrices')
@@ -6433,7 +6434,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         /** @var \Tx_Seminars_Service_RegistrationManager $subject */
         $subject = new $className();
 
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
+        /** @var \Tx_Seminars_Model_Event|MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
         $event->setData(['payment_methods' => new \Tx_Oelib_List()]);
         $event->method('getAvailablePrices')
@@ -6666,7 +6667,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $paymentMethods = new \Tx_Oelib_List();
         $paymentMethods->add($paymentMethod);
 
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
+        /** @var \Tx_Seminars_Model_Event|MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 12]);
@@ -6700,7 +6701,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $paymentMethods->add($paymentMethod1);
         $paymentMethods->add($paymentMethod2);
 
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
+        /** @var \Tx_Seminars_Model_Event|MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 12]);
@@ -6731,7 +6732,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $paymentMethods = new \Tx_Oelib_List();
         $paymentMethods->add($paymentMethod);
 
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
+        /** @var \Tx_Seminars_Model_Event|MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 0]);
@@ -6756,7 +6757,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         /** @var \Tx_Seminars_Service_RegistrationManager $subject */
         $subject = new $className();
 
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
+        /** @var \Tx_Seminars_Model_Event|MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 0]);
@@ -6790,7 +6791,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $paymentMethods->add($paymentMethod1);
         $paymentMethods->add($paymentMethod2);
 
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
+        /** @var \Tx_Seminars_Model_Event|MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 12]);
@@ -6820,7 +6821,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $paymentMethods = new \Tx_Oelib_List();
         $paymentMethods->add($paymentMethod);
 
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
+        /** @var \Tx_Seminars_Model_Event|MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 12]);
@@ -6854,7 +6855,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $paymentMethods->add($paymentMethod1);
         $paymentMethods->add($paymentMethod2);
 
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
+        /** @var \Tx_Seminars_Model_Event|MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 12]);
@@ -6887,7 +6888,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $paymentMethods = new \Tx_Oelib_List();
         $paymentMethods->add($paymentMethod);
 
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $event */
+        /** @var \Tx_Seminars_Model_Event|MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 12]);

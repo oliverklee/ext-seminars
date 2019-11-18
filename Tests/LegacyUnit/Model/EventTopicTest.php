@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * Test case.
@@ -1522,7 +1523,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends TestCase
      */
     public function earlyBirdAppliesForNoEarlyBirdPriceAndDeadlineOverReturnsFalse()
     {
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Model_Event|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['hasEarlyBirdPrice', 'isEarlyBirdDeadlineOver']
@@ -1542,7 +1543,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends TestCase
      */
     public function earlyBirdAppliesForEarlyBirdPriceAndDeadlineOverReturnsFalse()
     {
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Model_Event|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['hasEarlyBirdPrice', 'isEarlyBirdDeadlineOver']
@@ -1562,7 +1563,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends TestCase
      */
     public function earlyBirdAppliesForEarlyBirdPriceAndDeadlineNotOverReturnsTrue()
     {
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Model_Event|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['hasEarlyBirdPrice', 'isEarlyBirdDeadlineOver']
@@ -1586,7 +1587,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends TestCase
      */
     public function getAvailablePricesForNoPricesSetAndNoEarlyBirdReturnsZeroRegularPrice()
     {
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Model_Event|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['earlyBirdApplies']
@@ -1606,7 +1607,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends TestCase
      */
     public function getAvailablePricesForRegularPriceSetAndNoEarlyBirdReturnsRegularPrice()
     {
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Model_Event|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['earlyBirdApplies']
@@ -1626,7 +1627,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends TestCase
      */
     public function getAvailablePricesForRegularEarlyBirdPriceSetAndEarlyBirdReturnsEarlyBirdPrice()
     {
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Model_Event|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['earlyBirdApplies']
@@ -1651,7 +1652,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends TestCase
      */
     public function getAvailablePricesForRegularEarlyBirdPriceSetAndNoEarlyBirdReturnsRegularPrice()
     {
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Model_Event|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['earlyBirdApplies']
@@ -1676,7 +1677,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends TestCase
      */
     public function getAvailablePricesForRegularBoardPriceSetAndNoEarlyBirdReturnsRegularBoardPrice()
     {
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Model_Event|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['earlyBirdApplies']
@@ -1703,7 +1704,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends TestCase
      */
     public function getAvailablePricesForSpecialBoardPriceSetAndNoEarlyBirdReturnsSpecialBoardPrice()
     {
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Model_Event|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['earlyBirdApplies']
@@ -1730,7 +1731,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends TestCase
      */
     public function getAvailablePricesForSpecialPriceSetAndNoEarlyBirdReturnsSpecialPrice()
     {
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Model_Event|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['earlyBirdApplies']
@@ -1753,7 +1754,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends TestCase
      */
     public function getAvailablePricesForSpecialPriceSetAndSpecialEarlyBirdPriceSetAndEarlyBirdReturnsSpecialEarlyBirdPrice()
     {
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Model_Event|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['earlyBirdApplies']
@@ -1781,7 +1782,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends TestCase
      */
     public function getAvailablePricesForNoSpecialPriceSetAndSpecialEarlyBirdPriceSetAndEarlyBirdNotReturnsSpecialEarlyBirdPrice()
     {
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Model_Event|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['earlyBirdApplies']
@@ -1806,7 +1807,7 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends TestCase
      */
     public function getAvailablePricesForSpecialPriceSetAndSpecialEarlyBirdPriceSetAndNoEarlyBirdReturnsSpecialPrice()
     {
-        /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Model_Event|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['earlyBirdApplies']
