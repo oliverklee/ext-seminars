@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 /**
  * This class is the base class for any kind of front-end editor, for example the event editor or the registration editor.

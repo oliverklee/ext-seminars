@@ -1,5 +1,7 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace OliverKlee\Seminars\Service;
 
 use TYPO3\CMS\Core\SingletonInterface;

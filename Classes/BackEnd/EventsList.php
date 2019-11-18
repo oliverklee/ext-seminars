@@ -1,5 +1,7 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace OliverKlee\Seminars\BackEnd;
 
 use TYPO3\CMS\Backend\Utility\BackendUtility;
@@ -366,7 +368,8 @@ class EventsList extends AbstractList
         $this->template->unhideSubpartsArray(['CANCEL_BUTTON']);
         $pageData = $this->page->getPageData();
 
-        if (($event->getRecordType() !== \Tx_Seminars_Model_Event::TYPE_TOPIC)
+        if (
+            ($event->getRecordType() !== \Tx_Seminars_Model_Event::TYPE_TOPIC)
             && !$event->isHidden() && !$event->isCanceled()
             && !$event->hasStarted()
             && $GLOBALS['BE_USER']->check('tables_modify', $this->tableName)
@@ -401,7 +404,8 @@ class EventsList extends AbstractList
         $this->template->unhideSubpartsArray(['CONFIRM_BUTTON']);
         $pageData = $this->page->getPageData();
 
-        if (($event->getRecordType() !== \Tx_Seminars_Model_Event::TYPE_TOPIC)
+        if (
+            ($event->getRecordType() !== \Tx_Seminars_Model_Event::TYPE_TOPIC)
             && !$event->isHidden() && !$event->isConfirmed()
             && !$event->hasStarted()
             && $GLOBALS['BE_USER']->check('tables_modify', $this->tableName)

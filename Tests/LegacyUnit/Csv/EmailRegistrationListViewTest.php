@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
 
@@ -48,7 +49,7 @@ class Tx_Seminars_Tests_Unit_Csv_EmailRegistrationListViewTest extends TestCase
         $this->configuration->setData(['charsetForCsv' => 'utf-8']);
         $configurationRegistry->set('plugin.tx_seminars', $this->configuration);
 
-        $pageUid= $this->testingFramework->createSystemFolder();
+        $pageUid = $this->testingFramework->createSystemFolder();
         $this->eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [

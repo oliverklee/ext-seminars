@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -140,7 +141,8 @@ class Tx_Seminars_OldModel_TimeSlot extends \Tx_Seminars_OldModel_AbstractTimeSp
         $beginDate = $this->getBeginDateAsTimestamp();
         $entryDate = $this->getRecordPropertyInteger('entry_date');
 
-        if (strftime('%d-%m-%Y', $entryDate) != strftime('%d-%m-%Y', $beginDate)
+        if (
+            strftime('%d-%m-%Y', $entryDate) != strftime('%d-%m-%Y', $beginDate)
         ) {
             $dateFormat = $this->getConfValueString('dateFormatYMD') . ' ';
         } else {

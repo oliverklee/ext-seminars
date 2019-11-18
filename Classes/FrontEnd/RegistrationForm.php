@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 use SJBR\StaticInfoTables\PiBaseApi;
 use SJBR\StaticInfoTables\Utility\LocalizationUtility;
@@ -691,7 +692,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
         $sendParameters = false;
         $pageId = $this->getConfValueInteger('thankYouAfterRegistrationPID', 's_registration');
 
-        if ($this->getConfValueBoolean('logOutOneTimeAccountsAfterRegistration')
+        if (
+            $this->getConfValueBoolean('logOutOneTimeAccountsAfterRegistration')
             && \Tx_Oelib_Session::getInstance(\Tx_Oelib_Session::TYPE_USER)->getAsBoolean('onetimeaccount')
         ) {
             $GLOBALS['TSFE']->fe_user->logoff();
@@ -992,9 +994,11 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
                 );
                 break;
             case 'attendees_names':
-                if ($this->isFormFieldEnabled('registered_themselves') && ($this->getFormValue(
-                    'registered_themselves'
-                ) == '1')) {
+                if (
+                    $this->isFormFieldEnabled('registered_themselves') && ($this->getFormValue(
+                        'registered_themselves'
+                    ) == '1')
+                ) {
                     /** @var \Tx_Seminars_Model_FrontEndUser $user */
                     $user = \Tx_Oelib_FrontEndLoginManager::getInstance(
                     )->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);

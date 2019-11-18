@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 use OliverKlee\Seminars\Hooks\RegistrationEmailHookInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -609,7 +610,8 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
 
         $validGenderMale = (string)Tx_Oelib_Model_FrontEndUser::GENDER_MALE;
         $validGenderFemale = (string)Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE;
-        if (isset($formData['gender'])
+        if (
+            isset($formData['gender'])
             && (
                 ($formData['gender'] === $validGenderMale) || ($formData['gender'] === $validGenderFemale)
             )
@@ -832,7 +834,8 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         $this->initializeTemplate();
 
         $mailFormat = \Tx_Oelib_ConfigurationProxy::getInstance('seminars')->getAsInteger('eMailFormatForAttendees');
-        if (($mailFormat == self::SEND_HTML_MAIL)
+        if (
+            ($mailFormat == self::SEND_HTML_MAIL)
             || (($mailFormat == self::SEND_USER_MAIL) && $oldRegistration->getFrontEndUser()->wantsHtmlEmail())
         ) {
             $eMailNotification->setCssFile($this->getConfValueString('cssFileForAttendeeMail'));
@@ -1207,9 +1210,11 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         }
 
         $minimumNeededRegistrations = $event->getAttendancesMin();
-        if ($minimumNeededRegistrations > 0
+        if (
+            $minimumNeededRegistrations > 0
             && !$event->haveOrganizersBeenNotifiedAboutEnoughAttendees()
-            && $event->hasEnoughAttendances()) {
+            && $event->hasEnoughAttendances()
+        ) {
             $result = 'EnoughRegistrations';
         } else {
             $result = '';

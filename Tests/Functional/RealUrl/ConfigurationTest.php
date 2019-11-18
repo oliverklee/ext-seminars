@@ -1,5 +1,7 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace OliverKlee\Seminars\Tests\Functional\RealUrl;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
@@ -50,7 +52,8 @@ class ConfigurationTest extends FunctionalTestCase
      */
     public function autoConfigurationReferencesExistingClass()
     {
-        $reference = $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/realurl/class.tx_realurl_autoconfgen.php']['extensionConfiguration']['seminars'];
+        $reference = $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/realurl/class.tx_realurl_autoconfgen.php']
+            ['extensionConfiguration']['seminars'];
         $className = $this->extractClassNameFromUserFunction($reference);
 
         self::assertTrue(\class_exists($className));
@@ -62,7 +65,8 @@ class ConfigurationTest extends FunctionalTestCase
      */
     public function autoConfigurationReferencesExistingMethod()
     {
-        $reference = $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/realurl/class.tx_realurl_autoconfgen.php']['extensionConfiguration']['seminars'];
+        $reference = $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/realurl/class.tx_realurl_autoconfgen.php']
+            ['extensionConfiguration']['seminars'];
         $methodName = $this->extractMethodNameFromUserFunction($reference);
 
         $instance = new Configuration();

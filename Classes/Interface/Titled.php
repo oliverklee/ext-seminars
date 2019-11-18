@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 /**
  * This interface is used for models having a title and is needed for the CommaSeparatedTitles view helper.

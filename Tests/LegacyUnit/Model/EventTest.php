@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
 
@@ -473,8 +474,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends TestCase
     /**
      * @test
      */
-    public function getLatestPossibleRegistrationTimeAsUnixTimeStampWithRegistrationDeadlineReturnsRegistrationDeadline(
-    ) {
+    public function getLatestPossibleRegistrationTimeAsUnixTimeStampWithRegistrationDeadlineReturnsRegistrationDeadline()
+    {
         $beginDate = 1524751343;
         $endDate = $beginDate + 100000;
         $registrationDeadline = 1524741343;
@@ -494,8 +495,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends TestCase
     /**
      * @test
      */
-    public function getLatestPossibleRegistrationTimeAsUnixTimeStampWithBeginAndEndAndLateRegistrationReturnsEndDate(
-    ) {
+    public function getLatestPossibleRegistrationTimeAsUnixTimeStampWithBeginAndEndAndLateRegistrationReturnsEndDate()
+    {
         $this->configuration->setAsBoolean('allowRegistrationForStartedEvents', true);
 
         $beginDate = 1524751343;
@@ -516,8 +517,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends TestCase
     /**
      * @test
      */
-    public function getLatestPossibleRegistrationTimeAsUnixTimeStampWithDeadlineAndLateRegistrationReturnsDeadline(
-    ) {
+    public function getLatestPossibleRegistrationTimeAsUnixTimeStampWithDeadlineAndLateRegistrationReturnsDeadline()
+    {
         $this->configuration->setAsBoolean('allowRegistrationForStartedEvents', true);
         $beginDate = 1524751343;
         $endDate = $beginDate + 100000;
@@ -538,8 +539,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends TestCase
     /**
      * @test
      */
-    public function getLatestPossibleRegistrationTimeAsUnixTimeStampWithBeginAndWithoutEndLateAllowedReturnsBeginDate(
-    ) {
+    public function getLatestPossibleRegistrationTimeAsUnixTimeStampWithBeginAndWithoutEndLateAllowedReturnsBeginDate()
+    {
         $this->configuration->setAsBoolean('allowRegistrationForStartedEvents', true);
         $beginDate = $this->now - 100;
         $this->subject->setData(
@@ -670,8 +671,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends TestCase
     /**
      * @test
      */
-    public function getUnregistrationDeadlineAsUnixTimeStampWithPositiveUnregistrationDeadlineReturnsUnregistrationDeadline(
-    ) {
+    public function getUnregistrationDeadlineAsUnixTimeStampWithPositiveUnregistrationDeadlineReturnsUnregistrationDeadline()
+    {
         $this->subject->setData(['deadline_unregistration' => 42]);
 
         self::assertEquals(
@@ -711,8 +712,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends TestCase
     /**
      * @test
      */
-    public function setUnregistrationDeadlineAsUnixTimeStampWithPositiveUnregistrationDeadlineSetsUnregistrationDeadline(
-    ) {
+    public function setUnregistrationDeadlineAsUnixTimeStampWithPositiveUnregistrationDeadlineSetsUnregistrationDeadline()
+    {
         $this->subject->setUnregistrationDeadlineAsUnixTimeStamp(42);
 
         self::assertEquals(
@@ -1015,8 +1016,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends TestCase
     /**
      * @test
      */
-    public function getCombinedSingleViewPageForAvailableCategoryTypeWithSingleViewPageReturnsSingleViewPageFromCategory(
-    ) {
+    public function getCombinedSingleViewPageForAvailableCategoryTypeWithSingleViewPageReturnsSingleViewPageFromCategory()
+    {
         $category = new \Tx_Seminars_Model_Category();
         $category->setData(['single_view_page' => 42]);
         $categories = new \Tx_Oelib_List();
@@ -1032,8 +1033,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends TestCase
     /**
      * @test
      */
-    public function getCombinedSingleViewPageForTwoAvailableCategoriesWithSingleViewPageReturnsSingleViewPageFromFirstCategory(
-    ) {
+    public function getCombinedSingleViewPageForTwoAvailableCategoriesWithSingleViewPageReturnsSingleViewPageFromFirstCategory()
+    {
         $category1 = new \Tx_Seminars_Model_Category();
         $category1->setData(['single_view_page' => 42]);
         $category2 = new \Tx_Seminars_Model_Category();
@@ -1933,8 +1934,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationBeginAsUnixTimestampForEventWithRegistrationBeginReturnsRegistrationBeginAsUnixTimestamp(
-    ) {
+    public function getRegistrationBeginAsUnixTimestampForEventWithRegistrationBeginReturnsRegistrationBeginAsUnixTimestamp()
+    {
         $this->subject->setData(['begin_date_registration' => 42]);
 
         self::assertEquals(

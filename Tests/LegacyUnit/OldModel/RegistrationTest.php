@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
 
@@ -181,8 +182,8 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForNoPaymentMethodSetAndPositiveTotalPriceWithSeminarWithOnePaymentMethodSelectsThatPaymentMethod(
-    ) {
+    public function setRegistrationDataForNoPaymentMethodSetAndPositiveTotalPriceWithSeminarWithOnePaymentMethodSelectsThatPaymentMethod()
+    {
         \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')
             ->setAsString('currency', 'EUR');
         $this->testingFramework->changeRecord(
@@ -352,8 +353,8 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationDataForNotesWithCarriageReturnAndLineFeedReturnsNotesWithLinefeedAndNoCarriageReturn(
-    ) {
+    public function getRegistrationDataForNotesWithCarriageReturnAndLineFeedReturnsNotesWithLinefeedAndNoCarriageReturn()
+    {
         $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
         $this->subject->setRegistrationData(
             $seminar,

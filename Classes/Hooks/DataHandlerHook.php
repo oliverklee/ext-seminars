@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Hooks;
 
@@ -11,6 +12,8 @@ use TYPO3\CMS\Core\Utility\MathUtility;
  * This class holds functions used to validate submitted forms in the back end.
  *
  * These functions are called from DataHandler via hooks.
+ *
+ * phpcs:disable PSR1.Methods.CamelCapsMethodName
  *
  * @author Mario Rimann <typo3-coding@rimann.org>
  * @author Niels Pardon <mail@niels-pardon.de>

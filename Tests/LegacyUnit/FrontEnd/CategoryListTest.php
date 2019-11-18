@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
 
@@ -651,8 +652,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends TestCase
         );
     }
 
-    public function testCreateCategoryForCategoryWithoutImageAndListWithConfigurationValueSetToIconUsesCommasAsSeparators(
-    ) {
+    public function testCreateCategoryForCategoryWithoutImageAndListWithConfigurationValueSetToIconUsesCommasAsSeparators()
+    {
         $this->subject->setConfigurationValue('categoriesInListView', 'icon');
         $multipleCategories =
             [

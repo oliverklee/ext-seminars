@@ -1,5 +1,7 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace OliverKlee\Seminars\BackEnd;
 
 use TYPO3\CMS\Backend\Utility\BackendUtility;
@@ -174,7 +176,8 @@ abstract class AbstractList
         $pid = ($newRecordPid > 0) ? $newRecordPid : $pid;
         $pageData = $this->page->getPageData();
 
-        if ((int)$pageData['doktype'] === self::SYSFOLDER_TYPE
+        if (
+            (int)$pageData['doktype'] === self::SYSFOLDER_TYPE
             && $this->doesUserHaveAccess($pid)
             && $this->getBackEndUser()->check('tables_modify', $this->tableName)
         ) {
@@ -310,9 +313,7 @@ abstract class AbstractList
     {
         $result = '';
 
-        if ($GLOBALS['BE_USER']->check('tables_modify', $this->tableName)
-            && $this->doesUserHaveAccess($pageUid)
-        ) {
+        if ($GLOBALS['BE_USER']->check('tables_modify', $this->tableName) && $this->doesUserHaveAccess($pageUid)) {
             if ($hidden) {
                 $params = '&data[' . $this->tableName . '][' . $uid . '][hidden]=0';
                 $icon = 'Unhide.gif';

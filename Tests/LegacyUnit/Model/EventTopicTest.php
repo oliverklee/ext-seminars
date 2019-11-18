@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
 
@@ -1750,8 +1751,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getAvailablePricesForSpecialPriceSetAndSpecialEarlyBirdPriceSetAndEarlyBirdReturnsSpecialEarlyBirdPrice(
-    ) {
+    public function getAvailablePricesForSpecialPriceSetAndSpecialEarlyBirdPriceSetAndEarlyBirdReturnsSpecialEarlyBirdPrice()
+    {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
@@ -1778,8 +1779,8 @@ class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getAvailablePricesForNoSpecialPriceSetAndSpecialEarlyBirdPriceSetAndEarlyBirdNotReturnsSpecialEarlyBirdPrice(
-    ) {
+    public function getAvailablePricesForNoSpecialPriceSetAndSpecialEarlyBirdPriceSetAndEarlyBirdNotReturnsSpecialEarlyBirdPrice()
+    {
         /** @var \Tx_Seminars_Model_Event|\PHPUnit_Framework_MockObject_MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,

@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -36,7 +37,8 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_Abstr
         $seminarUid,
         ContentObjectRenderer $contentObjectRenderer
     ) {
-        if (($whatToDisplay != 'list_registrations')
+        if (
+            ($whatToDisplay != 'list_registrations')
             && ($whatToDisplay != 'list_vip_registrations')
         ) {
             throw new \InvalidArgumentException(
@@ -83,15 +85,17 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_Abstr
             // Lets warnings from the seminar bubble up to us.
             $this->setErrorMessage($this->seminar->checkConfiguration(true));
 
-            if ($this->seminar->canViewRegistrationsList(
-                $this->whatToDisplay,
-                0,
-                0,
-                $this->getConfValueInteger(
-                    'defaultEventVipsFeGroupID',
-                    's_template_special'
+            if (
+                $this->seminar->canViewRegistrationsList(
+                    $this->whatToDisplay,
+                    0,
+                    0,
+                    $this->getConfValueInteger(
+                        'defaultEventVipsFeGroupID',
+                        's_template_special'
+                    )
                 )
-            )) {
+            ) {
                 $isOkay = true;
             } else {
                 $errorMessage = $this->seminar->canViewRegistrationsListMessage(
