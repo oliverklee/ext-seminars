@@ -9,7 +9,7 @@ $EM_CONF[$_EXTKEY] = [
         'depends' => [
             'php' => '7.0.0-7.2.99',
             'typo3' => '8.7.0-8.7.99',
-            'static_info_tables' => '6.5.0-',
+            'static_info_tables' => '6.7.5-',
             'oelib' => '3.0.0-3.99.99',
             'mkforms' => '3.0.21-9.5.99',
         ],
@@ -17,8 +17,9 @@ $EM_CONF[$_EXTKEY] = [
             'sourceopt' => '',
         ],
         'suggests' => [
+            'femanager' => '5.1.0-',
             'onetimeaccount' => '',
-            'sr_feuser_register' => '',
+            'sr_feuser_register' => '5.1.0-',
         ],
     ],
     'state' => 'stable',

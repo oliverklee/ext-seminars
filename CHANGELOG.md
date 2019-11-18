@@ -12,6 +12,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Display the name of the current functional test (#256)
 
 ### Changed
+- Bump the `static_info_tables` dependency (#320)
 - Require oelib 3.0 (#318)
 - Refactor registration form footer creation (#309)
 - Allow 9.5-compatible versions of mkforms and rn_base (#275)
