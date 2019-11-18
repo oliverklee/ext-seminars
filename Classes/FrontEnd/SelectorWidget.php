@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 use SJBR\StaticInfoTables\PiBaseApi;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -80,10 +81,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
     {
         $this->displayedSearchFields = GeneralUtility::trimExplode(
             ',',
-            $this->getConfValueString(
-                'displaySearchFormFields',
-                's_listView'
-            ),
+            $this->getConfValueString('displaySearchFormFields', 's_listView'),
             true
         );
 
@@ -122,16 +120,11 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
      */
     private function addEmptyOptionIfNeeded(array &$options)
     {
-        if (!$this->getConfValueBoolean(
-            'showEmptyEntryInOptionLists',
-            's_template_special'
-        )) {
+        if (!$this->getConfValueBoolean('showEmptyEntryInOptionLists', 's_template_special')) {
             return;
         }
 
-        $options = [
-                0 => $this->translate('label_selector_pleaseChoose'),
-            ] + $options;
+        $options = [0 => $this->translate('label_selector_pleaseChoose')] + $options;
     }
 
     /**
@@ -168,10 +161,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
     private function createOptionBox($name, array $options): string
     {
         $this->setMarker('options_header', $this->translate('label_' . $name));
-        $this->setMarker(
-            'optionbox_name',
-            $this->prefixId . '[' . $name . '][]'
-        );
+        $this->setMarker('optionbox_name', $this->prefixId . '[' . $name . '][]');
         $this->setMarker('optionbox_id', $this->prefixId . '-' . $name);
 
         $optionsList = '';
@@ -180,9 +170,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
             $this->setMarker('option_value', $key);
 
             // Preselects the option if it was selected by the user.
-            if (isset($this->piVars[$name])
-                && in_array((string)$key, $this->piVars[$name], true)
-            ) {
+            if (isset($this->piVars[$name]) && \in_array((string)$key, $this->piVars[$name], true)) {
                 $selected = ' selected="selected"';
             } else {
                 $selected = '';
@@ -383,10 +371,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
     private function fillOrHideDateSearch()
     {
         if (!$this->hasSearchField('date')) {
-            $this->hideSubparts(
-                self::SUBPART_PREFIX . 'DATE'
-            );
-
+            $this->hideSubparts(self::SUBPART_PREFIX . 'DATE');
             return;
         }
 
@@ -412,18 +397,12 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
     private function fillOrHideAgeSearch()
     {
         if (!$this->hasSearchField('age')) {
-            $this->hideSubparts(
-                self::SUBPART_PREFIX . 'AGE'
-            );
-
+            $this->hideSubparts(self::SUBPART_PREFIX . 'AGE');
             return;
         }
         $age = (int)$this->piVars['age'];
 
-        $this->setMarker(
-            'age_value',
-            (($age > 0) ? $age : '')
-        );
+        $this->setMarker('age_value', $age > 0 ? $age : '');
     }
 
     /**
@@ -434,24 +413,15 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
     private function fillOrHidePriceSearch()
     {
         if (!$this->hasSearchField('price')) {
-            $this->hideSubparts(
-                self::SUBPART_PREFIX . 'PRICE'
-            );
-
+            $this->hideSubparts(self::SUBPART_PREFIX . 'PRICE');
             return;
         }
 
         $priceFrom = (int)$this->piVars['price_from'];
         $priceTo = (int)$this->piVars['price_to'];
 
-        $this->setMarker(
-            'price_from_value',
-            (($priceFrom > 0) ? $priceFrom : '')
-        );
-        $this->setMarker(
-            'price_to_value',
-            (($priceTo > 0) ? $priceTo : '')
-        );
+        $this->setMarker('price_from_value', $priceFrom > 0 ? $priceFrom : '');
+        $this->setMarker('price_to_value', $priceTo > 0 ? $priceTo : '');
     }
 
     ///////////////////////////////////////////////////////
@@ -501,15 +471,8 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
             if ($event->hasLanguage()) {
                 // Reads the language from the event record.
                 $languageIsoCode = $event->getLanguage();
-                if (!empty($languageIsoCode)
-                    && !isset($result[$languageIsoCode])) {
-                    $languageName = $this->staticInfo->getStaticInfoName(
-                        'LANGUAGES',
-                        $languageIsoCode,
-                        '',
-                        '',
-                        0
-                    );
+                if (!empty($languageIsoCode) && !isset($result[$languageIsoCode])) {
+                    $languageName = $this->staticInfo->getStaticInfoName('LANGUAGES', $languageIsoCode, '', '', 0);
                     $result[$languageIsoCode] = $languageName;
                 }
             }
@@ -608,11 +571,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
      */
     private function createDateArray(): array
     {
-        $result = [
-            'day' => [],
-            'month' => [],
-            'year' => [],
-        ];
+        $result = ['day' => [], 'month' => [], 'year' => []];
 
         for ($day = 1; $day <= 31; $day++) {
             $result['day'][$day] = $day;
@@ -623,10 +582,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
         }
 
         $currentYear = (int)date('Y');
-        $targetYear = $currentYear + $this->getConfValueInteger(
-            'numberOfYearsInDateFilter',
-            's_listView'
-        );
+        $targetYear = $currentYear + $this->getConfValueInteger('numberOfYearsInDateFilter', 's_listView');
 
         for ($year = $currentYear; $year < $targetYear; $year++) {
             $result['year'][$year] = $year;

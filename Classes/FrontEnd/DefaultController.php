@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
@@ -228,35 +229,29 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         $this->createHelperObjects();
 
         // Lets warnings from the registration manager bubble up to us.
-        $this->setErrorMessage(
-            $this->getRegistrationManager()->checkConfiguration(true)
-        );
+        $this->setErrorMessage($this->getRegistrationManager()->checkConfiguration(true));
 
         // Sets the UID of a single event that is requested (either by the
         // configuration in the flexform or by a parameter in the URL).
-        if ($this->hasConfValueInteger(
-            'showSingleEvent',
-            's_template_special'
-        )) {
-            $this->showUid = $this->getConfValueInteger(
-                'showSingleEvent',
-                's_template_special'
-            );
+        if ($this->hasConfValueInteger('showSingleEvent', 's_template_special')) {
+            $this->showUid = $this->getConfValueInteger('showSingleEvent', 's_template_special');
         } else {
             $this->showUid = (int)$this->piVars['showUid'];
         }
 
         $this->whatToDisplay = $this->getConfValueString('what_to_display');
 
-        if (!in_array(
-            $this->whatToDisplay,
-            [
+        if (
+            !in_array(
+                $this->whatToDisplay,
+                [
                 'list_registrations',
                 'list_vip_registrations',
                 'countdown',
                 'category_list',
-            ]
-        )) {
+                ]
+            )
+        ) {
             $this->setFlavor($this->whatToDisplay);
         }
 
@@ -596,22 +591,23 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         $result = '';
         $targetPageId = 0;
 
-        if ($this->seminar->canViewRegistrationsList(
-            $this->whatToDisplay,
-            0,
-            $this->getConfValueInteger('registrationsVipListPID'),
-            $this->getConfValueInteger(
-                'defaultEventVipsFeGroupID',
-                's_template_special'
+        if (
+            $this->seminar->canViewRegistrationsList(
+                $this->whatToDisplay,
+                0,
+                $this->getConfValueInteger('registrationsVipListPID'),
+                $this->getConfValueInteger('defaultEventVipsFeGroupID', 's_template_special')
             )
-        )) {
+        ) {
             // So a link to the VIP list is possible.
             $targetPageId = $this->getConfValueInteger('registrationsVipListPID');
         // No link to the VIP list ... so maybe to the list for the participants.
-        } elseif ($this->seminar->canViewRegistrationsList(
-            $this->whatToDisplay,
-            $this->getConfValueInteger('registrationsListPID')
-        )) {
+        } elseif (
+            $this->seminar->canViewRegistrationsList(
+                $this->whatToDisplay,
+                $this->getConfValueInteger('registrationsListPID')
+            )
+        ) {
             $targetPageId = $this->getConfValueInteger('registrationsListPID');
         }
 
@@ -652,7 +648,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
                     [
                     'seminar' => $eventId,
                     'action' => 'register',
-                ],
+                    ],
                     '',
                     false,
                     true
@@ -1289,9 +1285,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      */
     private function setAttachedFilesMarkers()
     {
-        if (!$this->seminar->hasAttachedFiles()
-            || !$this->mayUserAccessAttachedFiles()
-        ) {
+        if (!$this->seminar->hasAttachedFiles() || !$this->mayUserAccessAttachedFiles()) {
             $this->hideSubparts('attached_files', 'field_wrapper');
             return;
         }
@@ -1405,10 +1399,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
             return;
         }
 
-        $this->setMarker(
-            'organizing_partners',
-            $this->seminar->getOrganizingPartners($this)
-        );
+        $this->setMarker('organizing_partners', $this->seminar->getOrganizingPartners($this));
     }
 
     /**
@@ -1419,12 +1410,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      */
     private function setOwnerDataMarker()
     {
-        if (
-            !$this->getConfValueBoolean(
-                'showOwnerDataInSingleView',
-                's_singleView'
-            ) || !$this->seminar->hasOwner()
-        ) {
+        if (!$this->getConfValueBoolean('showOwnerDataInSingleView', 's_singleView') || !$this->seminar->hasOwner()) {
             $this->hideSubparts('owner_data', 'field_wrapper');
             return;
         }
@@ -1473,10 +1459,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
             return;
         }
 
-        $this->setMarker(
-            'deadline_registration',
-            $this->seminar->getRegistrationDeadline()
-        );
+        $this->setMarker('deadline_registration', $this->seminar->getRegistrationDeadline());
     }
 
     /**
@@ -1593,10 +1576,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         $seminarBag = $this->initListView('events_next_day');
 
         if ($this->internal['res_count']) {
-            $tableEventsNextDay = $this->createListTable(
-                $seminarBag,
-                'events_next_day'
-            );
+            $tableEventsNextDay = $this->createListTable($seminarBag, 'events_next_day');
 
             $this->setMarker('table_eventsnextday', $tableEventsNextDay);
 
@@ -1630,15 +1610,14 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
 
         if ($this->internal['res_count']) {
             // If we are on a topic record, overwrite the label with an alternative text.
-            if (\in_array(
-                $this->seminar->getRecordType(),
-                [\Tx_Seminars_Model_Event::TYPE_COMPLETE, \Tx_Seminars_Model_Event::TYPE_TOPIC],
-                true
-            )) {
-                $this->setMarker(
-                    'label_list_otherdates',
-                    $this->translate('label_list_dates')
-                );
+            if (
+                \in_array(
+                    $this->seminar->getRecordType(),
+                    [\Tx_Seminars_Model_Event::TYPE_COMPLETE, \Tx_Seminars_Model_Event::TYPE_TOPIC],
+                    true
+                )
+            ) {
+                $this->setMarker('label_list_otherdates', $this->translate('label_list_dates'));
             }
 
             // Hides unneeded columns from the list.
@@ -1697,50 +1676,32 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
             ]
         );
 
-        $this->ensureIntegerArrayValues(
-            ['event_type', 'place', 'organizer']
-        );
+        $this->ensureIntegerArrayValues(['event_type', 'place', 'organizer']);
 
         switch ($whatToDisplay) {
             case 'my_events':
                 if ($this->isLoggedIn()) {
                     $result .= $this->getSubpart('MESSAGE_MY_EVENTS');
                 } else {
-                    $this->setMarker(
-                        'error_text',
-                        $this->translate('message_notLoggedIn')
-                    );
+                    $this->setMarker('error_text', $this->translate('message_notLoggedIn'));
                     $result .= $this->getSubpart('ERROR_VIEW');
-                    $result .= $this->getLoginLink(
-                        $this->translate('message_pleaseLogIn'),
-                        $GLOBALS['TSFE']->id
-                    );
+                    $result .= $this->getLoginLink($this->translate('message_pleaseLogIn'), $GLOBALS['TSFE']->id);
                     $isOkay = false;
                 }
                 break;
             case 'my_vip_events':
                 if ($this->isLoggedIn()) {
-                    $result .= $this->getSubpart(
-                        'MESSAGE_MY_VIP_EVENTS'
-                    );
+                    $result .= $this->getSubpart('MESSAGE_MY_VIP_EVENTS');
                 } else {
-                    $this->setMarker(
-                        'error_text',
-                        $this->translate('message_notLoggedIn')
-                    );
+                    $this->setMarker('error_text', $this->translate('message_notLoggedIn'));
                     $result .= $this->getSubpart('ERROR_VIEW');
-                    $result .= $this->getLoginLink(
-                        $this->translate('message_pleaseLogIn'),
-                        $GLOBALS['TSFE']->id
-                    );
+                    $result .= $this->getLoginLink($this->translate('message_pleaseLogIn'), $GLOBALS['TSFE']->id);
                     $isOkay = false;
                 }
                 break;
             case 'my_entered_events':
                 if ($this->hasEventEditorAccess()) {
-                    $result .= $this->getSubpart(
-                        'MESSAGE_MY_ENTERED_EVENTS'
-                    );
+                    $result .= $this->getSubpart('MESSAGE_MY_ENTERED_EVENTS');
                 } else {
                     $isOkay = false;
                 }
@@ -1923,7 +1884,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         $rowCounter = 0;
 
         foreach ($seminarOrRegistrationBag as $currentItem) {
-            if ($whatToDisplay == 'my_events') {
+            if ($whatToDisplay === 'my_events') {
                 /** @var \Tx_Seminars_OldModel_Registration $currentItem */
                 $this->registration = $currentItem;
                 $this->setSeminar($this->registration->getSeminarObject());
@@ -2046,15 +2007,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
                     'seats' => $this->registration->getSeats(),
                     'total_price' => $this->registration->getTotalPrice(),
                 ];
-                $this->setMarker(
-                    'status_registration',
-                    $this->registration->getStatus()
-                );
+                $this->setMarker('status_registration', $this->registration->getStatus());
             } else {
-                $attendanceData = [
-                    'seats' => '',
-                    'total_price' => '',
-                ];
+                $attendanceData = ['seats' => '', 'total_price' => ''];
             }
 
             if ($this->seminar->hasImage()) {
@@ -2079,29 +2034,19 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
                 $this->conf,
                 $this->cObj
             );
-            $listOfCategories = $categoryList->createCategoryList(
-                $this->seminar->getCategories()
-            );
+            $listOfCategories = $categoryList->createCategoryList($this->seminar->getCategories());
 
-            if (($listOfCategories === $this->previousCategory)
-                && $this->getConfValueBoolean(
-                    'sortListViewByCategory',
-                    's_template_special'
-                )
+            if (
+                $listOfCategories === $this->previousCategory
+                && $this->getConfValueBoolean('sortListViewByCategory', 's_template_special')
             ) {
                 $listOfCategories = '';
             } else {
                 $this->previousCategory = $listOfCategories;
             }
-            $this->setMarker(
-                'category',
-                $listOfCategories
-            );
+            $this->setMarker('category', $listOfCategories);
 
-            $this->setMarker(
-                'title_link',
-                $this->createSingleViewLink($event, $this->seminar->getTitle())
-            );
+            $this->setMarker('title_link', $this->createSingleViewLink($event, $this->seminar->getTitle()));
             $this->setMarker('subtitle', \htmlspecialchars($this->seminar->getSubtitle(), ENT_QUOTES | ENT_HTML5));
             $this->setMarker('uid', $this->seminar->getUid());
             $this->setMarker('event_type', \htmlspecialchars($this->seminar->getEventType(), ENT_QUOTES | ENT_HTML5));
@@ -2109,30 +2054,19 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
                 'accreditation_number',
                 \htmlspecialchars($this->seminar->getAccreditationNumber(), ENT_QUOTES | ENT_HTML5)
             );
-            $this->setMarker(
-                'credit_points',
-                $this->seminar->getCreditPoints()
-            );
-            $this->setMarker(
-                'teaser',
-                $this->createSingleViewLink($event, $event->getTeaser())
-            );
-            $this->setMarker(
-                'speakers',
-                $this->seminar->getSpeakersShort($this)
-            );
+            $this->setMarker('credit_points', $this->seminar->getCreditPoints());
+            $this->setMarker('teaser', $this->createSingleViewLink($event, $event->getTeaser()));
+            $this->setMarker('speakers', $this->seminar->getSpeakersShort($this));
             $this->setMarker('language', \htmlspecialchars($this->seminar->getLanguageName(), ENT_QUOTES | ENT_HTML5));
 
             $currentDate = $this->seminar->getDate();
-            if (($currentDate == $this->previousDate)
-                && $this->getConfValueBoolean(
-                    'omitDateIfSameAsPrevious',
-                    's_template_special'
-                )
+            if (
+                $currentDate == $this->previousDate
+                && $this->getConfValueBoolean('omitDateIfSameAsPrevious', 's_template_special')
             ) {
                 $dateToShow = '';
             } else {
-                if ($whatToDisplay == 'other_dates') {
+                if ($whatToDisplay === 'other_dates') {
                     $dateToShow = $this->createSingleViewLink($event, $this->seminar->getDate(), false);
                 } else {
                     $dateToShow = $currentDate;
@@ -2148,42 +2082,21 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
             $this->setMarker('country', \htmlspecialchars($this->seminar->getCountry(), ENT_QUOTES | ENT_HTML5));
             $this->setMarker('city', \htmlspecialchars($this->seminar->getCities(), ENT_QUOTES | ENT_HTML5));
             $this->setMarker('seats', $attendanceData['seats']);
-            $this->setMarker(
-                'price_regular',
-                $this->seminar->getCurrentPriceRegular()
-            );
-            $this->setMarker(
-                'price_special',
-                $this->seminar->getCurrentPriceSpecial()
-            );
+            $this->setMarker('price_regular', $this->seminar->getCurrentPriceRegular());
+            $this->setMarker('price_special', $this->seminar->getCurrentPriceSpecial());
             $this->setMarker('total_price', $attendanceData['total_price']);
-            $this->setMarker(
-                'organizers',
-                $this->seminar->getOrganizers($this)
-            );
+            $this->setMarker('organizers', $this->seminar->getOrganizers($this));
             $this->setMarker(
                 'target_groups',
                 \htmlspecialchars($this->seminar->getTargetGroupNames(), ENT_QUOTES | ENT_HTML5)
             );
-            $this->setMarker(
-                'attached_files',
-                $this->getAttachedFilesListMarkerContent()
-            );
-            $this->setMarker(
-                'vacancies',
-                $this->seminar->getVacanciesString()
-            );
-            $this->setMarker(
-                'class_listvacancies',
-                $this->getVacanciesClasses($this->seminar)
-            );
+            $this->setMarker('attached_files', $this->getAttachedFilesListMarkerContent());
+            $this->setMarker('vacancies', $this->seminar->getVacanciesString());
+            $this->setMarker('class_listvacancies', $this->getVacanciesClasses($this->seminar));
 
             $this->setRegistrationLinkMarker($whatToDisplay);
 
-            $this->setMarker(
-                'list_registrations',
-                $this->getRegistrationsListLink()
-            );
+            $this->setMarker('list_registrations', $this->getRegistrationsListLink());
 
             $this->setVisibilityStatusMarker();
 
@@ -2247,7 +2160,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         $registrationBagBuilder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Registration::class);
 
         /** @var \Tx_Seminars_Model_FrontEndUser $loggedInUser */
-        $loggedInUser = \Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
+        $loggedInUser = \Tx_Oelib_FrontEndLoginManager::getInstance(
+        )->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
         $registrationBagBuilder->limitToAttendee($loggedInUser);
         $registrationBagBuilder->setOrderByEventColumn($this->getOrderByForListView());
 
@@ -2276,26 +2190,18 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
     {
         $orderBy = [];
 
-        if ($this->getConfValueBoolean(
-            'sortListViewByCategory',
-            's_template_special'
-        )) {
+        if ($this->getConfValueBoolean('sortListViewByCategory', 's_template_special')) {
             $orderBy[] = $this->orderByList['category'];
         }
 
         // Overwrites the default sort order with values given by the browser.
         // This happens if the user changes the sort order manually.
         if (!empty($this->piVars['sort'])) {
-            list($this->internal['orderBy'], $this->internal['descFlag']
-                ) =
-                explode(':', $this->piVars['sort']);
+            list($this->internal['orderBy'], $this->internal['descFlag']) = \explode(':', $this->piVars['sort']);
         }
 
-        if (isset($this->internal['orderBy'], $this->orderByList[$this->internal['orderBy']])
-
-        ) {
-            $orderBy[] = $this->orderByList[$this->internal['orderBy']] .
-                ($this->internal['descFlag'] ? ' DESC' : '');
+        if (isset($this->internal['orderBy'], $this->orderByList[$this->internal['orderBy']])) {
+            $orderBy[] = $this->orderByList[$this->internal['orderBy']] . ($this->internal['descFlag'] ? ' DESC' : '');
         }
 
         return implode(', ', $orderBy);
@@ -2312,10 +2218,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
     public function getFieldHeader($fieldName): string
     {
         $label = $this->translate('label_' . $fieldName);
-        if (($fieldName === 'price_regular') && $this->getConfValueBoolean(
-            'generalPriceInList',
-            's_template_special'
-        )) {
+        if ($fieldName === 'price_regular' && $this->getConfValueBoolean('generalPriceInList', 's_template_special')) {
             $label = $this->translate('label_price_general');
         }
 
@@ -2370,86 +2273,61 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
     {
         // Adds the query parameter that result from the user selection in the
         // selector widget (including the search form).
-        if (is_array($this->piVars['language'])) {
+        if (\is_array($this->piVars['language'])) {
             $builder->limitToLanguages(
-                \Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
-                    $this->piVars['language']
-                )
+                \Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData($this->piVars['language'])
             );
         }
 
         // TODO: This needs to be changed when bug 3410 gets fixed.
         // @see https://bugs.oliverklee.com/show_bug.cgi?id=3410
-        if (is_array($this->piVars['place'])) {
+        if (\is_array($this->piVars['place'])) {
             $builder->limitToPlaces(
-                \Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
-                    $this->piVars['place']
-                )
+                \Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData($this->piVars['place'])
             );
         } else {
             // TODO: This needs to be changed as soon as we are using the new
-            // TypoScript configuration class from tx_oelib which offers a
-            // getAsIntegerArray() method.
+            // TypoScript configuration class from tx_oelib which offers a getAsIntegerArray() method.
             $builder->limitToPlaces(
                 GeneralUtility::trimExplode(
                     ',',
-                    $this->getConfValueString(
-                        'limitListViewToPlaces',
-                        's_listView'
-                    ),
+                    $this->getConfValueString('limitListViewToPlaces', 's_listView'),
                     true
                 )
             );
         }
 
-        if (is_array($this->piVars['city'])) {
+        if (\is_array($this->piVars['city'])) {
             $builder->limitToCities(
-                \Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
-                    $this->piVars['city']
-                )
+                \Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData($this->piVars['city'])
             );
         }
-        if (is_array($this->piVars['country'])) {
+        if (\is_array($this->piVars['country'])) {
             $builder->limitToCountries(
-                \Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
-                    $this->piVars['country']
-                )
+                \Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData($this->piVars['country'])
             );
         }
-        if (is_array($this->piVars['organizer'])) {
+        if (\is_array($this->piVars['organizer'])) {
             $builder->limitToOrganizers(
                 implode(
                     ',',
-                    \Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
-                        $this->piVars['organizer']
-                    )
+                    \Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData($this->piVars['organizer'])
                 )
             );
         } else {
-            $builder->limitToOrganizers(
-                $this->getConfValueString(
-                    'limitListViewToOrganizers',
-                    's_listView'
-                )
-            );
+            $builder->limitToOrganizers($this->getConfValueString('limitListViewToOrganizers', 's_listView'));
         }
         if (!empty($this->piVars['sword'])) {
             $builder->limitToFullTextSearch($this->piVars['sword']);
         }
 
-        if (
-        $this->getConfValueBoolean('hideCanceledEvents', 's_template_special')
-        ) {
+        if ($this->getConfValueBoolean('hideCanceledEvents', 's_template_special')) {
             $builder->ignoreCanceledEvents();
         }
 
-        if (isset($this->piVars['event_type'])
-            && is_array($this->piVars['event_type'])
-        ) {
+        if (isset($this->piVars['event_type']) && \is_array($this->piVars['event_type'])) {
             $builder->limitToEventTypes(
-                \Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData(
-                    $this->piVars['event_type']
-                )
+                \Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData($this->piVars['event_type'])
             );
         } else {
             // TODO: This needs to be changed as soon as we are using the new
@@ -2458,10 +2336,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
             $builder->limitToEventTypes(
                 GeneralUtility::trimExplode(
                     ',',
-                    $this->getConfValueString(
-                        'limitListViewToEventTypes',
-                        's_listView'
-                    ),
+                    $this->getConfValueString('limitListViewToEventTypes', 's_listView'),
                     true
                 )
             );
@@ -2502,8 +2377,10 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      */
     public function getVacanciesClasses(\Tx_Seminars_OldModel_Event $event): string
     {
-        if (!$event->needsRegistration()
-            || (!$event->hasDate() && !$this->configurationService->getConfValueBoolean('allowRegistrationForEventsWithoutDate'))
+        if (
+            !$event->needsRegistration()
+            || (!$event->hasDate()
+                && !$this->configurationService->getConfValueBoolean('allowRegistrationForEventsWithoutDate'))
         ) {
             return '';
         }
@@ -2732,8 +2609,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
             's_listView'
         );
 
-        if ($whatToDisplay != 'my_entered_events'
-            && !($whatToDisplay == 'my_vip_events' && $mayManagersEditTheirEvents)
+        if (
+            $whatToDisplay !== 'my_entered_events'
+            && !($whatToDisplay === 'my_vip_events' && $mayManagersEditTheirEvents)
         ) {
             $this->hideColumns(['edit']);
         }
@@ -2754,13 +2632,10 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      */
     public function hideListRegistrationsColumnIfNecessary($whatToDisplay)
     {
-        $alwaysHideInViews = [
-            'topic_list',
-            'other_dates',
-            'events_next_day',
-        ];
-        if (!$this->isRegistrationEnabled() || !$this->isLoggedIn()
-            || in_array($whatToDisplay, $alwaysHideInViews, true)
+        $alwaysHideInViews = ['topic_list', 'other_dates', 'events_next_day'];
+        if (
+            !$this->isRegistrationEnabled() || !$this->isLoggedIn()
+            || \in_array($whatToDisplay, $alwaysHideInViews, true)
         ) {
             $this->hideColumns(['list_registrations']);
             return;
@@ -2825,7 +2700,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
                 'allowCsvExportOfRegistrationsInMyVipEventsView'
             );
 
-        if (($whatToDisplay != 'my_vip_events')
+        if (
+            ($whatToDisplay != 'my_vip_events')
             || !$isCsvExportOfRegistrationsInMyVipEventsViewAllowed
         ) {
             $this->hideColumns(['registrations']);
@@ -2973,7 +2849,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         }
 
         if ($isOkay) {
-            if (($this->piVars['action'] == 'unregister')
+            if (
+                $this->piVars['action'] === 'unregister'
                 || $this->getRegistrationManager()->userFulfillsRequirements($this->seminar)
             ) {
                 $registrationForm = $this->createRegistrationForm();
@@ -3178,10 +3055,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      */
     private function setGenderSpecificHeading($speakerType)
     {
-        if (!in_array(
-            $speakerType,
-            ['speakers', 'partners', 'tutors', 'leaders']
-        )) {
+        if (!\in_array($speakerType, ['speakers', 'partners', 'tutors', 'leaders'])) {
             throw new \InvalidArgumentException(
                 'The given speaker type "' . $speakerType .
                 '" is not an allowed type. Allowed types are "speakers", "partners", "tutors" or "leaders".',
@@ -3304,9 +3178,10 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      */
     private function getTimestampFromDatePiVars($fromOrTo): int
     {
-        if (($this->piVars[$fromOrTo . '_day'] == 0)
-            && ($this->piVars[$fromOrTo . '_month'] == 0)
-            && ($this->piVars[$fromOrTo . '_year'] == 0)
+        if (
+            $this->piVars[$fromOrTo . '_day'] == 0
+            && $this->piVars[$fromOrTo . '_month'] == 0
+            && $this->piVars[$fromOrTo . '_year'] == 0
         ) {
             return 0;
         }
@@ -3440,12 +3315,12 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
     private function hasEventEditorAccess(): bool
     {
         $eventEditor = $this->createEventEditorInstance();
+
         return $eventEditor->hasAccessMessage() == '';
     }
 
     /**
-     * Checks whether the currently logged-in user can display the current
-     * event.
+     * Checks whether the currently logged-in user can display the current event.
      *
      * When this function is called, $this->seminar must contain a seminar, and
      * a user must be logged in at the front end.
@@ -3474,9 +3349,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      */
     private function hideStatusColumnIfNotUsed($whatToDisplay)
     {
-        if (($whatToDisplay == 'my_entered_events')
-            || ($whatToDisplay == 'my_vip_events')
-        ) {
+        if ($whatToDisplay === 'my_entered_events' || $whatToDisplay === 'my_vip_events') {
             return;
         }
 

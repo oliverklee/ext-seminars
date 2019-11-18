@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -1846,8 +1847,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function isFrontEndEditingOfRelatedRecordsAllowedWithPermissionAndWithPidSetInSetupButNotUserGroupReturnsTrue(
-    ) {
+    public function isFrontEndEditingOfRelatedRecordsAllowedWithPermissionAndWithPidSetInSetupButNotUserGroupReturnsTrue()
+    {
         $this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup();
 
         $this->subject->setConfigurationValue(

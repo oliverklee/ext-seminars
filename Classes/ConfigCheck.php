@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -8,6 +9,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * The correct functioning of this class does not rely on any HTML templates or
  * language files so it works even under the worst of circumstances.
+ *
+ * phpcs:disable PSR1.Methods.CamelCapsMethodName
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
@@ -185,10 +188,7 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
         $this->checkSendParametersToPageToShowAfterUnregistrationUrl();
 
         $this->checkCreateAdditionalAttendeesAsFrontEndUsers();
-        if ($this->objectToCheck->getConfValueBoolean(
-            'createAdditionalAttendeesAsFrontEndUsers',
-            's_registration'
-        )) {
+        if ($this->objectToCheck->getConfValueBoolean('createAdditionalAttendeesAsFrontEndUsers', 's_registration')) {
             $this->checkSysFolderForAdditionalAttendeeUsersPID();
             $this->checkUserGroupUidsForAdditionalAttendeesFrontEndUsers();
         }
@@ -228,10 +228,7 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
         $this->checkExternalLinkTarget();
         $this->checkSingleViewImageSizes();
         $this->checkShowOwnerDataInSingleView();
-        if ($this->objectToCheck->getConfValueBoolean(
-            'showOwnerDataInSingleView',
-            's_singleView'
-        )) {
+        if ($this->objectToCheck->getConfValueBoolean('showOwnerDataInSingleView', 's_singleView')) {
             $this->checkOwnerPictureMaxWidth();
         }
         $this->checkLimitFileDownloadToAttendees();
@@ -314,10 +311,7 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
         $this->checkMayManagersEditTheirEvents();
         $this->checkAllowCsvExportOfRegistrationsInMyVipEventsView();
 
-        if ($this->objectToCheck->getConfValueBoolean(
-            'mayManagersEditTheirEvents',
-            's_listView'
-        )) {
+        if ($this->objectToCheck->getConfValueBoolean('mayManagersEditTheirEvents', 's_listView')) {
             $this->checkEventEditorPID();
         }
     }
@@ -482,12 +476,7 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             'dateFormatMD',
         ];
         foreach ($configVariables as $configVariableToCheck) {
-            $this->checkForNonEmptyString(
-                $configVariableToCheck,
-                false,
-                '',
-                $explanation
-            );
+            $this->checkForNonEmptyString($configVariableToCheck, false, '', $explanation);
         }
 
         $this->checkAbbreviateDateRanges();
@@ -903,12 +892,7 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             'These values specify the sections to hide in e-mails to '
             . 'organizers. A mistyped field name will cause the field to '
             . 'be included nonetheless.',
-            [
-                'summary',
-                'seminardata',
-                'feuserdata',
-                'attendancedata',
-            ]
+            ['summary', 'seminardata', 'feuserdata', 'attendancedata']
         );
     }
 
@@ -1178,13 +1162,7 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             'This value specifies which data fields of the selected event '
             . 'will be displayed on the registration page. '
             . 'Incorrect values will cause those fields to not get displayed.',
-            [
-                'uid',
-                'title',
-                'price_regular',
-                'price_special',
-                'vacancies',
-            ]
+            ['uid', 'title', 'price_regular', 'price_special', 'vacancies']
         );
     }
 
@@ -1963,24 +1941,10 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             'form. If this file is not available, the registration form cannot ' .
             'be used.';
 
-        $this->checkForNonEmptyString(
-            'registrationEditorTemplateFile',
-            false,
-            '',
-            $errorMessage
-        );
+        $this->checkForNonEmptyString('registrationEditorTemplateFile', false, '', $errorMessage);
 
-        if ($this->objectToCheck->hasConfValueString(
-            'registrationEditorTemplateFile',
-            '',
-            true
-        )) {
-            $rawFileName = $this->objectToCheck->getConfValueString(
-                'registrationEditorTemplateFile',
-                '',
-                true,
-                true
-            );
+        if ($this->objectToCheck->hasConfValueString('registrationEditorTemplateFile', '', true)) {
+            $rawFileName = $this->objectToCheck->getConfValueString('registrationEditorTemplateFile', '', true, true);
             if (!is_file($GLOBALS['TSFE']->tmpl->getFileName($rawFileName))) {
                 $message = 'The specified HTML template file <strong>' .
                     \htmlspecialchars($rawFileName, ENT_QUOTES | ENT_HTML5) . '</strong> cannot be read. ' .
@@ -2530,11 +2494,7 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             'This setting determines whether the seminar category is shown, as ' .
             'icon and text, as text only or as icon only. If this value is ' .
             'not set correctly, the category will only be shown as text.',
-            [
-                'both',
-                'text',
-                'icon',
-            ]
+            ['both', 'text', 'icon']
         );
     }
 
@@ -2953,24 +2913,10 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
         $errorMessage = 'This specifies the HTML template for the event editor. ' .
             'If this file is not available, the event editor cannot be used.';
 
-        $this->checkForNonEmptyString(
-            'eventEditorTemplateFile',
-            false,
-            '',
-            $errorMessage
-        );
+        $this->checkForNonEmptyString('eventEditorTemplateFile', false, '', $errorMessage);
 
-        if ($this->objectToCheck->hasConfValueString(
-            'eventEditorTemplateFile',
-            '',
-            true
-        )) {
-            $rawFileName = $this->objectToCheck->getConfValueString(
-                'eventEditorTemplateFile',
-                '',
-                true,
-                true
-            );
+        if ($this->objectToCheck->hasConfValueString('eventEditorTemplateFile', '', true)) {
+            $rawFileName = $this->objectToCheck->getConfValueString('eventEditorTemplateFile', '', true, true);
             if (!is_file($GLOBALS['TSFE']->tmpl->getFileName($rawFileName))) {
                 $message = 'The specified HTML template file <strong>' .
                     \htmlspecialchars($rawFileName, ENT_QUOTES | ENT_HTML5) . '</strong> cannot be read. ' .
@@ -3013,12 +2959,8 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             'numberOfClicksForRegistration',
             's_registration'
         );
-        $firstPage = $this->objectToCheck->getConfValueInteger(
-            'numberOfFirstRegistrationPage'
-        );
-        $lastPage = $this->objectToCheck->getConfValueInteger(
-            'numberOfLastRegistrationPage'
-        );
+        $firstPage = $this->objectToCheck->getConfValueInteger('numberOfFirstRegistrationPage');
+        $lastPage = $this->objectToCheck->getConfValueInteger('numberOfLastRegistrationPage');
         $calculatedSteps = $lastPage - $firstPage + 2;
 
         if ($calculatedSteps != $clicks) {

@@ -1,5 +1,7 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace OliverKlee\Seminars\BackEnd;
 
 use Psr\Http\Message\ResponseInterface;

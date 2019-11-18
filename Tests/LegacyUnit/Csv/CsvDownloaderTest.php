@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
@@ -1163,8 +1164,8 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createListOfRegistrationsForConfigurationAttendanceCsvFieldsEmptyDoesNotAddSemicolonOnEndOfHeadline(
-    ) {
+    public function createListOfRegistrationsForConfigurationAttendanceCsvFieldsEmptyDoesNotAddSemicolonOnEndOfHeadline()
+    {
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', '');
         $this->configuration->setAsString('fieldsFromFeUserForCsv', 'name');
 
@@ -1177,8 +1178,8 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createListOfRegistrationsForConfigurationFeUserCsvFieldsEmptyDoesNotAddSemicolonAtBeginningOfHeadline(
-    ) {
+    public function createListOfRegistrationsForConfigurationFeUserCsvFieldsEmptyDoesNotAddSemicolonAtBeginningOfHeadline()
+    {
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'address');
         $this->configuration->setAsString('fieldsFromFeUserForCsv', '');
 
@@ -1391,8 +1392,8 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfRegistrationsForWebModeNotUsesRegistrationsOnQueueSettingFromEmailConfiguration(
-    ) {
+    public function createAndOutputListOfRegistrationsForWebModeNotUsesRegistrationsOnQueueSettingFromEmailConfiguration()
+    {
         $this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInEmailCsv', true);
         $this->configuration->setAsString('fieldsFromAttendanceForEmailCsv', 'uid');
         $this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInCsv', false);

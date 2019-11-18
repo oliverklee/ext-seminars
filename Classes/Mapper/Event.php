@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 /**
  * This class represents a mapper for events.
@@ -112,7 +113,7 @@ class Tx_Seminars_Mapper_Event extends \Tx_Oelib_DataMapper
     public function findNextUpcoming(): \Tx_Seminars_Model_Event
     {
         $whereClause = $this->getUniversalWhereClause(
-            ) . ' AND cancelled <> ' . \Tx_Seminars_Model_Event::STATUS_CANCELED .
+        ) . ' AND cancelled <> ' . \Tx_Seminars_Model_Event::STATUS_CANCELED .
             ' AND object_type <> ' . \Tx_Seminars_Model_Event::TYPE_TOPIC . ' AND begin_date > ' . $GLOBALS['SIM_ACCESS_TIME'];
 
         try {

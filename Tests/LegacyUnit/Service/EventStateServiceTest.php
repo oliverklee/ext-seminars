@@ -1,5 +1,7 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 
 use OliverKlee\PhpUnit\TestCase;
@@ -204,8 +206,8 @@ class EventStateServiceTest extends TestCase
     /**
      * @test
      */
-    public function updateStatusAndSaveForPlannedEventWithNotEnoughRegistrationsWithoutRegistrationDeadlineReturnsFalse(
-    ) {
+    public function updateStatusAndSaveForPlannedEventWithNotEnoughRegistrationsWithoutRegistrationDeadlineIsFalse()
+    {
         $event = new \Tx_Seminars_Model_Event();
         $event->setData(
             [
@@ -226,8 +228,8 @@ class EventStateServiceTest extends TestCase
     /**
      * @test
      */
-    public function updateStatusAndSaveForPlannedEventWithNotEnoughRegistrationsWithRegistrationDeadlineInFutureReturnsFalse(
-    ) {
+    public function updateStatusAndSaveForPlannedWithNotEnoughRegistrationsWithRegistrationDeadlineInFutureIsFalse()
+    {
         $event = new \Tx_Seminars_Model_Event();
         $event->setData(
             [
@@ -248,8 +250,8 @@ class EventStateServiceTest extends TestCase
     /**
      * @test
      */
-    public function updateStatusAndSaveForPlannedEventWithNotEnoughRegistrationsWithRegistrationDeadlineInPastReturnsTrue(
-    ) {
+    public function updateStatusAndSaveForPlannedEventWithNotEnoughRegistrationsWithRegistrationDeadlineInPastIsTrue()
+    {
         $event = new \Tx_Seminars_Model_Event();
         $event->setData(
             [
@@ -270,8 +272,8 @@ class EventStateServiceTest extends TestCase
     /**
      * @test
      */
-    public function updateStatusAndSaveForPlannedEventWithNotEnoughRegistrationsWithRegistrationDeadlineInPastCancelsEvent(
-    ) {
+    public function updateStatusAndSaveForPlannedEventWithNotEnoughRegistrationsWithDeadlineInPastCancelsEvent()
+    {
         $event = new \Tx_Seminars_Model_Event();
         $event->setData(
             [
@@ -292,8 +294,8 @@ class EventStateServiceTest extends TestCase
     /**
      * @test
      */
-    public function updateStatusAndSaveForPlannedEventWithNotEnoughRegistrationsWithRegistrationDeadlineInPastSavesEvent(
-    ) {
+    public function updateStatusAndSaveForPlannedEventWithNotEnoughRegistrationsWithDeadlineInPastSavesEvent()
+    {
         $event = new \Tx_Seminars_Model_Event();
         $event->setData(
             [

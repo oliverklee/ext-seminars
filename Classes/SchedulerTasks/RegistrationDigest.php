@@ -1,5 +1,7 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace OliverKlee\Seminars\SchedulerTask;
 
 use TYPO3\CMS\Core\Mail\MailMessage;

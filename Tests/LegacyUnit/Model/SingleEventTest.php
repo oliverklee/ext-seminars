@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
 
@@ -526,8 +527,8 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends TestCase
     /**
      * @test
      */
-    public function getRegularEarlyBirdPriceForSingleEventWithPositiveRegularEarlyBirdPriceReturnsRegularEarlyBirdPrice(
-    ) {
+    public function getRegularEarlyBirdPriceForSingleEventWithPositiveRegularEarlyBirdPriceReturnsRegularEarlyBirdPrice()
+    {
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
@@ -869,8 +870,8 @@ class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends TestCase
     /**
      * @test
      */
-    public function getSpecialEarlyBirdPriceForSingleEventWithPositiveSpecialEarlyBirdPriceReturnsSpecialEarlyBirdPrice(
-    ) {
+    public function getSpecialEarlyBirdPriceForSingleEventWithPositiveSpecialEarlyBirdPriceReturnsSpecialEarlyBirdPrice()
+    {
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,

@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -1324,8 +1325,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
     /**
      * @test
      */
-    public function singleViewWithOneAttachedFileAndDisabledLimitFileDownloadToAttendeesContainsFileNameOfFileLinkedToFile(
-    ) {
+    public function singleViewWithOneAttachedFileAndDisabledLimitFileDownloadToAttendeesContainsFileNameOfFileLinkedToFile()
+    {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->setConfigurationValue('limitFileDownloadToAttendees', 0);
 
@@ -1348,8 +1349,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
     /**
      * @test
      */
-    public function singleViewWithOneAttachedFileInSubfolderOfUploadFolderAndDisabledLimitFileDownloadToAttendeesContainsFileNameOfFileLinkedToFile(
-    ) {
+    public function singleViewWithOneAttachedFileInSubfolderOfUploadFolderAndDisabledLimitFileDownloadToAttendeesContainsFileNameOfFileLinkedToFile()
+    {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->setConfigurationValue('limitFileDownloadToAttendees', 0);
 
@@ -1405,8 +1406,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         );
     }
 
-    public function testSingleViewWithTwoAttachedFilesAndDisabledLimitFileDownloadToAttendeesContainsTwoAttachedFilesWithSortingSetInBackEnd(
-    ) {
+    public function testSingleViewWithTwoAttachedFilesAndDisabledLimitFileDownloadToAttendeesContainsTwoAttachedFilesWithSortingSetInBackEnd()
+    {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->setConfigurationValue('limitFileDownloadToAttendees', 0);
 
@@ -1483,8 +1484,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
     /**
      * @test
      */
-    public function singleViewWithOneAttachedFileInSubfolderOfUploadFolderAndLoggedInFeUserAndRegisteredContainsFileNameOfFileLinkedToFile(
-    ) {
+    public function singleViewWithOneAttachedFileInSubfolderOfUploadFolderAndLoggedInFeUserAndRegisteredContainsFileNameOfFileLinkedToFile()
+    {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->setConfigurationValue('limitFileDownloadToAttendees', 1);
         $this->createLogInAndRegisterFeUser();
@@ -1541,8 +1542,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         );
     }
 
-    public function testSingleViewWithTwoAttachedFilesAndLoggedInFeUserAndRegisteredContainsTwoAttachedFilesWithSortingSetInBackEnd(
-    ) {
+    public function testSingleViewWithTwoAttachedFilesAndLoggedInFeUserAndRegisteredContainsTwoAttachedFilesWithSortingSetInBackEnd()
+    {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->setConfigurationValue('limitFileDownloadToAttendees', 1);
         $this->createLogInAndRegisterFeUser();
@@ -1677,8 +1678,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         );
     }
 
-    public function testAttachedFilesSubpartIsVisibleInSingleViewWithAttachedFilesAndDisabledLimitFileDownloadToAttendees(
-    ) {
+    public function testAttachedFilesSubpartIsVisibleInSingleViewWithAttachedFilesAndDisabledLimitFileDownloadToAttendees()
+    {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->setConfigurationValue('limitFileDownloadToAttendees', 0);
 
@@ -1699,8 +1700,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         );
     }
 
-    public function testAttachedFilesSubpartIsHiddenInSingleViewWithoutAttachedFilesAndWithDisabledLimitFileDownloadToAttendees(
-    ) {
+    public function testAttachedFilesSubpartIsHiddenInSingleViewWithoutAttachedFilesAndWithDisabledLimitFileDownloadToAttendees()
+    {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->setConfigurationValue('limitFileDownloadToAttendees', 0);
 
@@ -6163,8 +6164,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
     /**
      * @test
      */
-    public function registrationsSubpartWithAllowCsvExportOfRegistrationsInMyVipEventsViewSetToFalseIsHiddenInMyVipEventsListView(
-    ) {
+    public function registrationsSubpartWithAllowCsvExportOfRegistrationsInMyVipEventsViewSetToFalseIsHiddenInMyVipEventsListView()
+    {
         $this->createLogInAndAddFeUserAsVip();
 
         $this->subject->main(
@@ -6182,8 +6183,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
     /**
      * @test
      */
-    public function registrationsSubpartWithAllowCsvExportOfRegistrationsInMyVipEventsViewSetToTrueIsVisibleInMyVipEventsListView(
-    ) {
+    public function registrationsSubpartWithAllowCsvExportOfRegistrationsInMyVipEventsViewSetToTrueIsVisibleInMyVipEventsListView()
+    {
         $this->createLogInAndAddFeUserAsVip();
         $this->subject->setConfigurationValue(
             'allowCsvExportOfRegistrationsInMyVipEventsView',
@@ -7664,8 +7665,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
     /**
      * @test
      */
-    public function getVacanciesClassesForBeginDateInPastAndRegistrationForStartedEventsAllowedReturnsVacanciesAvailableClass(
-    ) {
+    public function getVacanciesClassesForBeginDateInPastAndRegistrationForStartedEventsAllowedReturnsVacanciesAvailableClass()
+    {
         $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid);
         $event->setNeedsRegistration(true);
         $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 45);
@@ -7701,8 +7702,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
     /**
      * @test
      */
-    public function getVacanciesClassesForEventWithNoVacanciesAndNoRegistrationQueueDoesNotReturnRegistrationQueueClass(
-    ) {
+    public function getVacanciesClassesForEventWithNoVacanciesAndNoRegistrationQueueDoesNotReturnRegistrationQueueClass()
+    {
         $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid, []);
         $event->setAttendancesMax(10);
         $event->setNumberOfAttendances(10);
@@ -8217,8 +8218,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
     /**
      * @test
      */
-    public function createAllEditorLinksForEditAccessGrantedAndPublishedVisibleEventCreatesHideLinkToCurrentPageWithSeminarUid(
-    ) {
+    public function createAllEditorLinksForEditAccessGrantedAndPublishedVisibleEventCreatesHideLinkToCurrentPageWithSeminarUid()
+    {
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
         $subject = $this->createPartialMock(
             $this->createAccessibleProxyClass(),
@@ -8249,8 +8250,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
     /**
      * @test
      */
-    public function createAllEditorLinksForEditAccessGrantedAndPublishedHiddenEventCreatesUnhideLinkToCurrentPageWithSeminarUid(
-    ) {
+    public function createAllEditorLinksForEditAccessGrantedAndPublishedHiddenEventCreatesUnhideLinkToCurrentPageWithSeminarUid()
+    {
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
         $subject = $this->createPartialMock(
             $this->createAccessibleProxyClass(),
@@ -8393,8 +8394,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
     /**
      * @test
      */
-    public function createAllEditorLinksForEditAccessGrantedAndPublishedHiddenEventCreatesCopyLinkToCurrentPageWithSeminarUid(
-    ) {
+    public function createAllEditorLinksForEditAccessGrantedAndPublishedHiddenEventCreatesCopyLinkToCurrentPageWithSeminarUid()
+    {
         /** @var \Tx_Seminars_FrontEnd_DefaultController|PHPUnit_Framework_MockObject_MockObject $subject */
         $subject = $this->createPartialMock(
             $this->createAccessibleProxyClass(),
@@ -8835,8 +8836,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
     /**
      * @test
      */
-    public function processEventEditorActionsForEmptyActionWithPublishedEventAndAccessGrantedNotCallsHideEventOrUnhideEvent(
-    ) {
+    public function processEventEditorActionsForEmptyActionWithPublishedEventAndAccessGrantedNotCallsHideEventOrUnhideEvent()
+    {
         /** @var \Tx_Seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
         $eventEditor = $this->createPartialMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage']);
         $eventEditor->expects(self::once())->method('hasAccessMessage')->willReturn('');
@@ -8862,8 +8863,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
     /**
      * @test
      */
-    public function processEventEditorActionsForInvalidActionWithPublishedEventAndAccessGrantedNotCallsHideEventOrUnhideEvent(
-    ) {
+    public function processEventEditorActionsForInvalidActionWithPublishedEventAndAccessGrantedNotCallsHideEventOrUnhideEvent()
+    {
         /** @var \Tx_Seminars_FrontEnd_EventEditor|PHPUnit_Framework_MockObject_MockObject $eventEditor */
         $eventEditor = $this->createPartialMock(\Tx_Seminars_FrontEnd_EventEditor::class, ['hasAccessMessage']);
         $eventEditor->expects(self::once())->method('hasAccessMessage')->willReturn('');

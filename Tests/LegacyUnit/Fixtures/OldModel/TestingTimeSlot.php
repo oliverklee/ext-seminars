@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 /**
  * This is mere a class used for unit tests. Don't use it for any other purpose.

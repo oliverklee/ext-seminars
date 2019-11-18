@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Hooks\RegistrationEmailHookInterface;
@@ -533,8 +534,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      *
      * @see https://bugs.oliverklee.com/show_bug.cgi?id=4504
      */
-    public function getLinkToRegistrationOrLoginPageWithLoggedInUserAndSeparateDetailsPageCreatesLinkToRegistrationPage(
-    ) {
+    public function getLinkToRegistrationOrLoginPageWithLoggedInAndSeparateDetailsPageCreatesLinkToRegistrationPage()
+    {
         $this->createFrontEndPages();
 
         $detailsPageUid = $this->testingFramework->createFrontEndPage();
@@ -577,8 +578,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getLinkToRegistrationOrLoginPageWithLoggedInUserSeminarWithoutDateAndNoVacanciesContainsRegistrationLabel(
-    ) {
+    public function getLinkToRegistrationOrLoginPageWithLoggedInSeminarWithoutDateAndNoVacanciesHasRegistrationLabel()
+    {
         $this->createFrontEndPages();
         $this->createAndLogInFrontEndUser();
         $this->seminar->setBeginDate(0);
@@ -594,8 +595,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getLinkToRegistrationOrLoginPageWithLoggedInUserAndFullyBookedSeminarWithQueueContainsQueueRegistrationLabel(
-    ) {
+    public function getLinkToRegistrationOrLoginPageWithLoggedInUserAndFullyBookedSeminarWithQueueHasQueueRegistration()
+    {
         $this->createFrontEndPages();
         $this->createAndLogInFrontEndUser();
         $this->seminar->setBeginDate($GLOBALS['EXEC_SIM_TIME'] + 45);
@@ -612,8 +613,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getLinkToRegistrationOrLoginPageWithLoggedOutUserAndFullyBookedSeminarWithQueueContainsQueueRegistrationLabel(
-    ) {
+    public function getLinkToRegistrationOrLoginPageWithLoggedOutAndFullyBookedSeminarWithQueueHasQueueRegistration()
+    {
         $this->createFrontEndPages();
         $this->seminar->setBeginDate($GLOBALS['EXEC_SIM_TIME'] + 45);
         $this->seminar->setNumberOfAttendances(5);
@@ -888,8 +889,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterIfLoggedInForLoggedInButAlreadyRegisteredUserAndSeminarWithMultipleRegistrationsAllowedReturnsTrue(
-    ) {
+    public function canRegisterIfLoggedInForLoggedInButAlreadyRegisteredAndWithMultipleRegistrationsAllowedIsTrue()
+    {
         $this->seminar->setAllowsMultipleRegistrations(true);
 
         $this->testingFramework->createRecord(
@@ -1150,8 +1151,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterIfLoggedInMessageForLoggedInButAlreadyRegisteredUserAndSeminarWithMultipleRegistrationsAllowedReturnsEmptyString(
-    ) {
+    public function canRegisterIfLoggedInMessageForLoggedInButAlreadyRegisteredAndMultipleRegistrationsAllowedIsEmpty()
+    {
         $this->seminar->setAllowsMultipleRegistrations(true);
 
         $this->testingFramework->createRecord(
@@ -1228,8 +1229,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterIfLoggedInMessageForLoggedOutUserAndSeminarWithoutRegistrationReturnsNoRegistrationNeededMessage(
-    ) {
+    public function canRegisterIfLoggedInMessageForLoggedOutAndWithoutRegistrationReturnsNoRegistrationNeededMessage()
+    {
         $this->seminar->setAttendancesMax(0);
         $this->seminar->setNeedsRegistration(false);
 
@@ -1680,8 +1681,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         );
     }
 
-    public function testGetMissingRequiredTopicsForTopicWithTwoRequirementsOneFulfilledOneUnfulfilledReturnsUnfulfilledTopic(
-    ) {
+    /**
+     * @test
+     */
+    public function getMissingRequiredTopicsForTopicWithTwoRequirementsOneFulfilledOneUnfulfilledReturnsUnfulfilled()
+    {
         $userUid = $this->testingFramework->createAndLoginFrontEndUser();
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1740,8 +1744,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         );
     }
 
-    public function testGetMissingRequiredTopicsForTopicWithTwoRequirementsOneFulfilledOneUnfulfilledDoesNotReturnFulfilledTopic(
-    ) {
+    /**
+     * @test
+     */
+    public function getMissingRequiredTopicsForTopicWithOneFulfilledOneUnfulfilledDoesNotReturnFulfilled()
+    {
         $userUid = $this->testingFramework->createAndLoginFrontEndUser();
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5474,8 +5481,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function sendAdditionalNotificationForEventWithMoreThanEnoughAttendancesAndOrganizersAlreadyNotifiedNotSendsEmail(
-    ) {
+    public function sendAdditionalNotificationForMoreThanEnoughAttendancesAndOrganizersAlreadyNotifiedNotSends()
+    {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
@@ -5619,8 +5626,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function sendAdditionalNotificationForEventWithEnoughAttendancesAndOneVacancyShowsVacanciesLabelWithVacancyNumber(
-    ) {
+    public function sendAdditionalNotificationForEventWithEnoughAttendancesAndOneVacancyHasVacancyNumber()
+    {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
@@ -5647,8 +5654,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function sendAdditionalNotificationForEventWithEnoughAttendancesAndUnlimitedVacanciesShowsVacanciesLabelWithUnlimitedLabel(
-    ) {
+    public function sendAdditionalNotificationForEnoughAttendancesAndUnlimitedVacanciesHasUnlimitedLabel()
+    {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
@@ -5714,8 +5721,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function allowsRegistrationByDateForEventWithoutDateAndRegistrationForEventsWithoutDateNotAllowedReturnsFalse(
-    ) {
+    public function allowsRegistrationByDateForEventWithoutDateAndRegistrationForEventsWithoutDateNotAllowedIsFalse()
+    {
         $this->seminar->setAllowRegistrationForEventsWithoutDate(0);
         $this->seminar->setBeginDate(0);
 
@@ -5939,8 +5946,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         );
         $uid = $subject->getRegistration()->getUid();
         self::assertTrue(
-        // We're not using the testing framework here because the record
-        // is not marked as dummy record.
+            // We're not using the testing framework here because the record
+            // is not marked as dummy record.
             \Tx_Oelib_Db::existsRecordWithUid(
                 'tx_seminars_attendances',
                 $uid

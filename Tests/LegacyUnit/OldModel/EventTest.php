@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -1431,8 +1432,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     /**
      * @test
      */
-    public function canSomebodyRegisterMessageForPastEventWithRegistrationWithoutDateActivatedReturnsRegistrationDeadlineOverMessage(
-    ) {
+    public function canSomebodyRegisterMessageForPastEventWithRegistrationWithoutDateActivatedReturnsRegistrationDeadlineOverMessage()
+    {
         // Activates the configuration switch "canRegisterForEventsWithoutDate".
         $this->subject->setAllowRegistrationForEventsWithoutDate(1);
 
@@ -1462,8 +1463,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     /**
      * @test
      */
-    public function canSomebodyRegisterMessageForCurrentlyRunningEventWithRegistrationWithoutDateActivatedReturnsSeminarRegistrationClosesMessage(
-    ) {
+    public function canSomebodyRegisterMessageForCurrentlyRunningEventWithRegistrationWithoutDateActivatedReturnsSeminarRegistrationClosesMessage()
+    {
         // Activates the configuration switch "canRegisterForEventsWithoutDate".
         $this->subject->setAllowRegistrationForEventsWithoutDate(1);
 
@@ -2463,8 +2464,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     /**
      * @test
      */
-    public function isUnregistrationPossibleForEventWithEmptyWaitingListAndAllowUnregistrationWithEmptyWaitingListReturnsTrue(
-    ) {
+    public function isUnregistrationPossibleForEventWithEmptyWaitingListAndAllowUnregistrationWithEmptyWaitingListReturnsTrue()
+    {
         $this->subject->setAllowUnregistrationWithEmptyWaitingList(true);
 
         $this->subject->setAttendancesMax(10);
@@ -2488,8 +2489,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     /**
      * @test
      */
-    public function getUnregistrationDeadlineFromModelAndConfigurationForNoBeginDateAndNoUnregistrationDeadlineReturnsZero(
-    ) {
+    public function getUnregistrationDeadlineFromModelAndConfigurationForNoBeginDateAndNoUnregistrationDeadlineReturnsZero()
+    {
         $this->subject->setBeginDate(0);
         $this->subject->setUnregistrationDeadline(0);
         $this->subject->setGlobalUnregistrationDeadline(0);
@@ -2503,8 +2504,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     /**
      * @test
      */
-    public function getUnregistrationDeadlineFromModelAndConfigurationForNoBeginDateAndUnregistrationDeadlineSetInEventReturnsUnregistrationDeadline(
-    ) {
+    public function getUnregistrationDeadlineFromModelAndConfigurationForNoBeginDateAndUnregistrationDeadlineSetInEventReturnsUnregistrationDeadline()
+    {
         $this->subject->setBeginDate(0);
         $this->subject->setUnregistrationDeadline($this->now);
         $this->subject->setGlobalUnregistrationDeadline(0);
@@ -2518,8 +2519,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     /**
      * @test
      */
-    public function getUnregistrationDeadlineFromModelAndConfigurationForNoBeginDateAndUnregistrationDeadlinInEventAndUnregistrationDeadlineSetInConfigurationReturnsZero(
-    ) {
+    public function getUnregistrationDeadlineFromModelAndConfigurationForNoBeginDateAndUnregistrationDeadlinInEventAndUnregistrationDeadlineSetInConfigurationReturnsZero()
+    {
         $this->subject->setBeginDate(0);
         $this->subject->setUnregistrationDeadline(0);
         $this->subject->setGlobalUnregistrationDeadline($this->now);
@@ -2533,8 +2534,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     /**
      * @test
      */
-    public function getUnregistrationDeadlineFromModelAndConfigurationForUnregistrationDeadlineSetInEventReturnsThisDeadline(
-    ) {
+    public function getUnregistrationDeadlineFromModelAndConfigurationForUnregistrationDeadlineSetInEventReturnsThisDeadline()
+    {
         $this->subject->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
         $this->subject->setUnregistrationDeadline($this->now);
         $this->subject->setGlobalUnregistrationDeadline(0);
@@ -2548,8 +2549,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     /**
      * @test
      */
-    public function getUnregistrationDeadlineFromModelAndConfigurationForNoUnregistrationDeadlineSetInEventAndNoDeadlineConfigurationSetReturnsZero(
-    ) {
+    public function getUnregistrationDeadlineFromModelAndConfigurationForNoUnregistrationDeadlineSetInEventAndNoDeadlineConfigurationSetReturnsZero()
+    {
         $this->subject->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
         $this->subject->setUnregistrationDeadline(0);
         $this->subject->setGlobalUnregistrationDeadline(0);
@@ -2563,8 +2564,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     /**
      * @test
      */
-    public function getUnregistrationDeadlineFromModelAndConfigurationForNoUnregistrationDeadlineSetInEventAndDeadlineConfigurationSetReturnsCalculatedDeadline(
-    ) {
+    public function getUnregistrationDeadlineFromModelAndConfigurationForNoUnregistrationDeadlineSetInEventAndDeadlineConfigurationSetReturnsCalculatedDeadline()
+    {
         $this->subject->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
         $this->subject->setUnregistrationDeadline(0);
         $this->subject->setGlobalUnregistrationDeadline(1);
@@ -2578,8 +2579,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     /**
      * @test
      */
-    public function getUnregistrationDeadlineFromModelAndConfigurationForUnregistrationDeadlinesSetInEventAndConfigurationReturnsEventsDeadline(
-    ) {
+    public function getUnregistrationDeadlineFromModelAndConfigurationForUnregistrationDeadlinesSetInEventAndConfigurationReturnsEventsDeadline()
+    {
         $this->subject->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
         $this->subject->setUnregistrationDeadline($this->now);
         $this->subject->setGlobalUnregistrationDeadline(1);
@@ -4784,8 +4785,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     /**
      * @test
      */
-    public function getSpeakersWithDescriptionRawForSpeakerWithOrganizationAndHomepageReturnsSpeakerWithOrganizationAndHomepage(
-    ) {
+    public function getSpeakersWithDescriptionRawForSpeakerWithOrganizationAndHomepageReturnsSpeakerWithOrganizationAndHomepage()
+    {
         $this->addSpeakerRelation(
             [
                 'organization' => 'test organization',
@@ -4815,8 +4816,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     /**
      * @test
      */
-    public function getSpeakersWithDescriptionRawForSpeakerWithOrganizationAndDescriptionReturnsOrganizationAndDescription(
-    ) {
+    public function getSpeakersWithDescriptionRawForSpeakerWithOrganizationAndDescriptionReturnsOrganizationAndDescription()
+    {
         $this->addSpeakerRelation(
             [
                 'organization' => 'foo',
@@ -4971,8 +4972,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     /**
      * @test
      */
-    public function getSpeakersWithDescriptionRawDoesNotSeparateSpeakersDescriptionAndTitleWithCarriageReturnsAndLineFeeds(
-    ) {
+    public function getSpeakersWithDescriptionRawDoesNotSeparateSpeakersDescriptionAndTitleWithCarriageReturnsAndLineFeeds()
+    {
         $this->addSpeakerRelation(
             [
                 'title' => 'foo',
@@ -8007,8 +8008,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     /**
      * @test
      */
-    public function getCancellationDeadlineForEventWithOneSpeakersWithCancellationPeriodReturnsBeginDateMinusCancelationPeriod(
-    ) {
+    public function getCancellationDeadlineForEventWithOneSpeakersWithCancellationPeriodReturnsBeginDateMinusCancelationPeriod()
+    {
         $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME']);
         $this->addSpeakerRelation(['cancelation_period' => 1]);
 
@@ -8021,8 +8022,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     /**
      * @test
      */
-    public function getCancellationDeadlineForEventWithTwoSpeakersWithCancellationPeriodsReturnsBeginDateMinusBiggestCancelationPeriod(
-    ) {
+    public function getCancellationDeadlineForEventWithTwoSpeakersWithCancellationPeriodsReturnsBeginDateMinusBiggestCancelationPeriod()
+    {
         $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME']);
         $this->addSpeakerRelation(['cancelation_period' => 21]);
         $this->addSpeakerRelation(['cancelation_period' => 42]);
@@ -8444,8 +8445,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     /**
      * @test
      */
-    public function dumpSeminarValuesForEventWithoutDescriptionAndDescriptionGivenReturnsDescriptionLabelWithColonsAndLineFeed(
-    ) {
+    public function dumpSeminarValuesForEventWithoutDescriptionAndDescriptionGivenReturnsDescriptionLabelWithColonsAndLineFeed()
+    {
         $this->subject->setDescription('');
 
         self::assertSame(
@@ -8542,8 +8543,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationBeginAsUnixTimestampForEventWithRegistrationBeginReturnsRegistrationBeginAsUnixTimestamp(
-    ) {
+    public function getRegistrationBeginAsUnixTimestampForEventWithRegistrationBeginReturnsRegistrationBeginAsUnixTimestamp()
+    {
         $this->subject->setRegistrationBeginDate(42);
 
         self::assertSame(
@@ -8737,8 +8738,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     /**
      * @test
      */
-    public function getLatestPossibleRegistrationTimeForEventWithBeginDateAndRegistrationDeadlineReturnsRegistrationDeadline(
-    ) {
+    public function getLatestPossibleRegistrationTimeForEventWithBeginDateAndRegistrationDeadlineReturnsRegistrationDeadline()
+    {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
@@ -8760,8 +8761,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     /**
      * @test
      */
-    public function getLatestPossibleRegistrationTimeForEventWithBeginAndEndDateAndRegistrationForStartedEventsAllowedReturnsEndDate(
-    ) {
+    public function getLatestPossibleRegistrationTimeForEventWithBeginAndEndDateAndRegistrationForStartedEventsAllowedReturnsEndDate()
+    {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
@@ -8786,8 +8787,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     /**
      * @test
      */
-    public function getLatestPossibleRegistrationTimeForEventWithBeginDateAndRegistrationDeadlineAndRegistrationForStartedEventsAllowedReturnsRegistrationDeadline(
-    ) {
+    public function getLatestPossibleRegistrationTimeForEventWithBeginDateAndRegistrationDeadlineAndRegistrationForStartedEventsAllowedReturnsRegistrationDeadline()
+    {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
@@ -8812,8 +8813,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     /**
      * @test
      */
-    public function getLatestPossibleRegistrationTimeForEventWithBeginDateAndWithoutEndDateAndRegistrationForStartedEventsAllowedReturnsBeginDate(
-    ) {
+    public function getLatestPossibleRegistrationTimeForEventWithBeginDateAndWithoutEndDateAndRegistrationForStartedEventsAllowedReturnsBeginDate()
+    {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
@@ -8896,8 +8897,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     /**
      * @test
      */
-    public function calculateStatisticsForEventWithOfflineRegistrationsAndRegularRegistrationsCalculatesCumulatedAttendeeNumber(
-    ) {
+    public function calculateStatisticsForEventWithOfflineRegistrationsAndRegularRegistrationsCalculatesCumulatedAttendeeNumber()
+    {
         $this->subject->setOfflineRegistrationNumber(1);
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',

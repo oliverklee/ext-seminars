@@ -1,5 +1,7 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace OliverKlee\Seminars\SchedulerTasks;
 
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
@@ -322,14 +324,16 @@ class MailNotifier extends AbstractTask
     {
         $result = $this->getLanguageService()->getLL($locallangKey);
 
-        foreach ([
+        foreach (
+            [
             '%begin_date' => $this->getDate($event->getBeginDateAsTimestamp()),
             '%days' => $this->getDaysBeforeBeginDate(),
             '%event' => $event->getTitle(),
             '%organizer' => $organizerName,
             '%registrations' => $event->getAttendances(),
             '%uid' => $event->getUid(),
-        ] as $search => $replace) {
+            ] as $search => $replace
+        ) {
             $result = str_replace($search, $replace, $result);
         }
 

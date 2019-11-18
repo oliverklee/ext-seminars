@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures;
 
@@ -16,7 +17,10 @@ interface RegistrationHookInterface
      *
      * @return bool
      */
-    public function canRegisterForSeminar(\Tx_Seminars_OldModel_Event $event, \Tx_Seminars_Model_FrontEndUser $user): bool;
+    public function canRegisterForSeminar(
+        \Tx_Seminars_OldModel_Event $event,
+        \Tx_Seminars_Model_FrontEndUser $user
+    ): bool;
 
     /**
      * @param \Tx_Seminars_OldModel_Event $event

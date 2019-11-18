@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 /**
  * This class offers timespan-related methods for the time slot and seminar classes.
@@ -111,11 +112,13 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends \Tx_Seminars_OldMod
             } else {
                 if ($this->getConfValueBoolean('abbreviateDateRanges')) {
                     // Are the years different? Then includes the complete begin date.
-                    if (\strftime($this->getConfValueString('dateFormatY'), $beginDate)
+                    if (
+                        \strftime($this->getConfValueString('dateFormatY'), $beginDate)
                         !== \strftime($this->getConfValueString('dateFormatY'), $endDate)
                     ) {
                         $result = $beginDateDay;
-                    } elseif (\strftime($this->getConfValueString('dateFormatM'), $beginDate)
+                    } elseif (
+                        \strftime($this->getConfValueString('dateFormatM'), $beginDate)
                         !== \strftime($this->getConfValueString('dateFormatM'), $endDate)
                     ) {
                         $result = \strftime($this->getConfValueString('dateFormatMD'), $beginDate);

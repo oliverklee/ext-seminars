@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -155,12 +156,14 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      */
     private function getHtmlWithAttachedFilesList(\Tx_Oelib_Template $template): string
     {
-        foreach ([
-            'label_delete',
-            'label_really_delete',
-            'label_save',
-            'label_save_and_back',
-        ] as $label) {
+        foreach (
+            [
+                'label_delete',
+                'label_really_delete',
+                'label_save',
+                'label_save_and_back',
+            ] as $label
+        ) {
             $template->setMarker($label, $this->translate($label));
         }
 
@@ -449,8 +452,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
             if ($showEditButton && $frontEndUserIsOwner) {
                 $editButtonConfiguration['name'] = 'edit' . $type . 'Button_' . $speaker->getUid();
                 $editButtonConfiguration['onclick']['userobj']['php'] = '
-                    return ' . self::class . '::showEditSpeakerModalBox($this, ' . $speaker->getUid(
-                    ) . ');';
+                    return ' . self::class . '::showEditSpeakerModalBox($this, ' . $speaker->getUid() . ');';
                 /** @var \tx_mkforms_widgets_button_Main $editButton */
                 $editButton = $form->_makeRenderlet($editButtonConfiguration, $renderlet->sXPath);
                 $editButton->includeScripts();
@@ -601,8 +603,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
                 $editButtonConfiguration['name'] = 'editTargetGroupButton_' .
                     $targetGroup->getUid();
                 $editButtonConfiguration['onclick']['userobj']['php'] = '
-                    return ' . self::class . '::showEditTargetGroupModalBox($this, ' . $targetGroup->getUid(
-                    ) . ');
+                    return ' . self::class . '::showEditTargetGroupModalBox($this, ' . $targetGroup->getUid() . ');
                 ';
                 /** @var \tx_mkforms_widgets_button_Main $editButton */
                 $editButton = $form->_makeRenderlet($editButtonConfiguration, $renderlet->sXPath);
@@ -679,11 +680,13 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         }
 
         $objectUid = $this->getObjectUid();
-        if ($objectUid > 0 && !Tx_Seminars_OldModel_Abstract::recordExists(
-            $objectUid,
-            'tx_seminars_seminars',
-            true
-        )) {
+        if (
+            $objectUid > 0 && !Tx_Seminars_OldModel_Abstract::recordExists(
+                $objectUid,
+                'tx_seminars_seminars',
+                true
+            )
+        ) {
             return 'message_wrongSeminarNumber';
         }
 
@@ -1001,7 +1004,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $this->checkFileType($fileToCheck);
 
         // If there is a validation error, the upload has to be done again.
-        if (($this->validationError == '')
+        if (
+            ($this->validationError == '')
             && ($this->isTestMode() || $this->getFormCreator()->getValidationTool()->isAllValid())
         ) {
             $this->attachedFiles[] = $fileToCheck;
@@ -1712,10 +1716,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return string[] the error messages, will be empty if there are no validation errors
      */
-    private static function validatePlace(
-        \tx_mkforms_forms_Base $form,
-        array $formData
-    ): array {
+    private static function validatePlace(\tx_mkforms_forms_Base $form, array $formData): array
+    {
         $validationErrors = [];
 
         $keys = [
@@ -1727,8 +1729,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
             'directions',
         ];
         foreach ($keys as $key) {
-            if ((trim($formData[$key]) == '') && self::isPlaceFieldRequired($key)
-            ) {
+            if (\trim($formData[$key]) === '' && self::isPlaceFieldRequired($key)) {
                 $validationErrors[] = $form->getConfigXML()->getLLLabel(
                     'LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_empty' . ucfirst($key)
                 );
@@ -2560,8 +2561,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
                 'LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_emptyTitle'
             );
         }
-        if (preg_match('/^(\\d*)$/', trim($formData['minimum_age']))
-            && preg_match('/^(\\d*)$/', trim($formData['maximum_age']))
+        if (
+            \preg_match('/^(\\d*)$/', \trim($formData['minimum_age']))
+            && \preg_match('/^(\\d*)$/', \trim($formData['maximum_age']))
         ) {
             $minimumAge = $formData['minimum_age'];
             $maximumAge = $formData['maximum_age'];

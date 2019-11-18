@@ -1,5 +1,7 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace OliverKlee\Seminars\Tests\LegacyUnit\SchedulerTasks;
 
 use OliverKlee\PhpUnit\Interfaces\AccessibleObject;
@@ -544,8 +546,8 @@ class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendEventTakesPlaceRemindersForConfirmedEventWithTwoOrganizersAndWithinConfiguredTimeFrameSendsTwoReminders(
-    ) {
+    public function sendEventTakesPlaceRemindersForConfirmedWithTwoOrganizersAndWithinTimeFrameSendsTwoReminders()
+    {
         $eventUid = $this->createSeminarWithOrganizer(
             [
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
@@ -592,8 +594,8 @@ class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendEventTakesPlaceRemindersForConfirmedEventWithinConfiguredTimeFrameAndReminderSentFlagTrueSendsNoReminder(
-    ) {
+    public function sendEventTakesPlaceRemindersForConfirmedWithinTimeFrameAndReminderSentFlagTrueSendsNoReminder()
+    {
         $this->createSeminarWithOrganizer(
             [
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
@@ -878,8 +880,8 @@ class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendCancellationDeadlineRemindersForPlannedEventAndOptionEnabledAndReminderSentFlagTrueSendsNoReminder(
-    ) {
+    public function sendCancellationDeadlineRemindersForPlannedAndOptionEnabledAndReminderSentFlagTrueSendsNoReminder()
+    {
         $this->addSpeaker(
             $this->createSeminarWithOrganizer(
                 [
@@ -1224,8 +1226,8 @@ class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendRemindersToOrganizersForShowAttendancesOnQueueInEmailCsvSendsEmailWithCsvWithRegistrationsOnQueue(
-    ) {
+    public function sendRemindersToOrganizersForShowAttendancesOnQueueInEmailCsvSendsEmailWithRegistrationsOnQueue()
+    {
         $this->configuration->setAsBoolean('addRegistrationCsvToOrganizerReminderMail', true);
         $eventUid = $this->createSeminarWithOrganizer(
             [
@@ -1263,8 +1265,8 @@ class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendRemindersToOrganizersForShowAttendancesOnQueueInEmailCsvFalseSendsEmailWithCsvFileWhichDoesNotContainDataOfAttendanceOnQueue(
-    ) {
+    public function sendRemindersToOrganizersForShowAttendancesOnQueueFalseSendsWithCsvFileWithoutQueueAttendances()
+    {
         $this->configuration->setAsBoolean('addRegistrationCsvToOrganizerReminderMail', true);
         $this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInEmailCsv', false);
 
@@ -1459,8 +1461,8 @@ class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendRemindersToOrganizersForEventWithNoRegistrationSendsReminderWithMessageWithNumberOfRegistrations(
-    ) {
+    public function sendRemindersToOrganizersForEventWithNoRegistrationSendsReminderWithNumberOfRegistrations()
+    {
         $this->createSeminarWithOrganizer(
             [
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
@@ -1479,8 +1481,8 @@ class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendRemindersToOrganizersForEventWithOneRegistrationsSendsReminderWithMessageWithNumberOfRegistrations(
-    ) {
+    public function sendRemindersToOrganizersForEventWithOneRegistrationsSendsReminderWithNumberOfRegistrations()
+    {
         $eventUid = $this->createSeminarWithOrganizer(
             [
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,

@@ -1,5 +1,7 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace OliverKlee\Seminars\Tests\LegacyUnit\SchedulerTasks;
 
 use OliverKlee\PhpUnit\TestCase;
@@ -99,8 +101,10 @@ class MailNotifierConfigurationTest extends TestCase
         self::assertSame(
             [
                 'task-page-uid' => [
-                    'code' => '<input type="text" name="tx_scheduler[seminars_configurationPageUid]" id="task-page-uid" value="" size="4" />',
-                    'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:schedulerTasks.fields.page-uid',
+                    'code' => '<input type="text" name="tx_scheduler[seminars_configurationPageUid]" '
+                        . 'id="task-page-uid" value="" size="4" />',
+                    'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:'
+                        . 'schedulerTasks.fields.page-uid',
                     'cshKey' => '',
                     'cshLabel' => '',
                 ],
@@ -124,8 +128,10 @@ class MailNotifierConfigurationTest extends TestCase
         self::assertSame(
             [
                 'task-page-uid' => [
-                    'code' => '<input type="text" name="tx_scheduler[seminars_configurationPageUid]" id="task-page-uid" value="' . $uid . '" size="4" />',
-                    'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:schedulerTasks.fields.page-uid',
+                    'code' => '<input type="text" name="tx_scheduler[seminars_configurationPageUid]" '
+                        . 'id="task-page-uid" value="' . $uid . '" size="4" />',
+                    'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:'
+                        . 'schedulerTasks.fields.page-uid',
                     'cshKey' => '',
                     'cshLabel' => '',
                 ],

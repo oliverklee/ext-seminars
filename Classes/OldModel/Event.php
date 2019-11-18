@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
@@ -119,7 +120,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
                 // Check that the early-bird deadline is
                 // a) not later than the begin date
                 // b) not later than the registration deadline (if set).
-                if ($value > $this->getBeginDateAsTimestamp()
+                if (
+                    $value > $this->getBeginDateAsTimestamp()
                     || ($this->getRecordPropertyInteger('deadline_registration')
                         && ($value > $this->getRecordPropertyInteger('deadline_registration')))
                 ) {
@@ -2980,7 +2982,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             $message = $this->translate('message_noRegistrationNecessary');
         } elseif ($this->isCanceled()) {
             $message = $this->translate('message_seminarCancelled');
-        } elseif (!$this->hasDate() &&
+        } elseif (
+            !$this->hasDate() &&
             !$this->getConfValueBoolean('allowRegistrationForEventsWithoutDate')
         ) {
             $message = $this->translate('message_noDate');
@@ -3154,11 +3157,13 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         $result = null;
 
         // Check whether this event has an topic set.
-        if ($this->hasRecordPropertyInteger('topic')
+        if (
+            $this->hasRecordPropertyInteger('topic')
             && \Tx_Seminars_OldModel_Abstract::recordExists(
                 $this->getRecordPropertyInteger('topic'),
                 'tx_seminars_seminars'
-            )) {
+            )
+        ) {
             /** @var \Tx_Seminars_OldModel_Event $result */
             $result = GeneralUtility::makeInstance(__CLASS__, $this->getRecordPropertyInteger('topic'));
         }
@@ -4087,7 +4092,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     {
         $result = '';
 
-        if ($this->getRecordPropertyInteger('object_type')
+        if (
+            $this->getRecordPropertyInteger('object_type')
             != \Tx_Seminars_Model_Event::TYPE_TOPIC
         ) {
             $result = parent::getDate($dash);
@@ -4965,9 +4971,11 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      */
     private function getUnregistrationDeadlineFromConfiguration(): int
     {
-        if (!$this->hasConfValueInteger(
-            'unregistrationDeadlineDaysBeforeBeginDate'
-        )) {
+        if (
+            !$this->hasConfValueInteger(
+                'unregistrationDeadlineDaysBeforeBeginDate'
+            )
+        ) {
             return 0;
         }
 

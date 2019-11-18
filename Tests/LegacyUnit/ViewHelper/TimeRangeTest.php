@@ -1,5 +1,6 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
 
@@ -149,8 +150,8 @@ class Tx_Seminars_Tests_Unit_ViewHelper_TimeRangeTest extends TestCase
     /**
      * @test
      */
-    public function renderWithTimeSpanWithBeginAndEndDateReturnsTimePortionsOfBeginDateAndEndDateSeparatedBySpecifiedDash(
-    ) {
+    public function renderWithTimeSpanWithBeginAndEndDateReturnsTimePortionsOfBeginDateAndEndDateSeparatedBySpecifiedDash()
+    {
         $dash = '#DASH#';
         /** @var \Tx_Seminars_Model_AbstractTimeSpan $timeSpan */
         $timeSpan = $this->getMockForAbstractClass(\Tx_Seminars_Model_AbstractTimeSpan::class);
