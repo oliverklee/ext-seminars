@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Service\EventStatusService;
+use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\SingletonInterface;
 
 /**
@@ -26,7 +27,7 @@ class EventStateServiceTest extends TestCase
     private $testingFramework = null;
 
     /**
-     * @var \Tx_Seminars_Mapper_Event|\PHPUnit_Framework_MockObject_MockObject
+     * @var \Tx_Seminars_Mapper_Event|MockObject
      */
     private $eventMapper = null;
 

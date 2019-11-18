@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use PHPUnit\Framework\MockObject\MockObject;
 use SJBR\StaticInfoTables\PiBaseApi;
 
 /**
@@ -423,7 +424,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends TestCase
      */
     public function itemsInSearchBoxAreSortedAlphabetically()
     {
-        /** @var \Tx_Seminars_FrontEnd_SelectorWidget|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_FrontEnd_SelectorWidget|MockObject $subject */
         $subject = $this->getMockBuilder(\Tx_Seminars_FrontEnd_SelectorWidget::class)
             ->setMethods(
                 [

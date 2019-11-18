@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * Test case.
@@ -956,7 +957,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends TestCase
      */
     public function hasDefaultOrganizersForEmptyDefaultOrganizersReturnsFalse()
     {
-        /** @var \Tx_Seminars_Model_FrontEndUser|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Model_FrontEndUser|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Model_FrontEndUser::class,
             ['getDefaultOrganizers']
@@ -979,7 +980,7 @@ class Tx_Seminars_Tests_Unit_Model_FrontEndUserTest extends TestCase
         $organizers = new \Tx_Oelib_List();
         $organizers->add($organizer);
 
-        /** @var \Tx_Seminars_Model_FrontEndUser|\PHPUnit_Framework_MockObject_MockObject $subject */
+        /** @var \Tx_Seminars_Model_FrontEndUser|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Model_FrontEndUser::class,
             ['getDefaultOrganizers']

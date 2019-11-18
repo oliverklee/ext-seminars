@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\SchedulerTasks;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\SchedulerTasks\MailNotifier;
 use OliverKlee\Seminars\SchedulerTasks\MailNotifierConfiguration;
+use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Lang\LanguageService;
@@ -46,7 +47,7 @@ class MailNotifierConfigurationTest extends TestCase
     private $languageBackup = null;
 
     /**
-     * @var SchedulerModuleController|\PHPUnit_Framework_MockObject_MockObject
+     * @var SchedulerModuleController|MockObject
      */
     private $moduleController = null;
 
@@ -236,7 +237,7 @@ class MailNotifierConfigurationTest extends TestCase
         $pageUid = $this->testingFramework->createFrontEndPage();
         $submittedData = ['seminars_configurationPageUid' => (string)$pageUid];
 
-        /** @var MailNotifier|\PHPUnit_Framework_MockObject_MockObject $task */
+        /** @var MailNotifier|MockObject $task */
         $task = $this->createMock(MailNotifier::class);
         $task->expects(self::once())->method('setConfigurationPageUid')->with($pageUid);
 

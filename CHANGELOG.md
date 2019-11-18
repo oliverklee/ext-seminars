@@ -30,6 +30,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop support for TYPO3 7.6 (#248, #272, #280)
 
 ### Fixed
+- Use the new class name for mocks (#321)
 - Fix code inspection warnings (#315)
 - git-ignore the tests-generated `var/log/` folder (#314)
 - Use real records in the FE editor tests (#310)
