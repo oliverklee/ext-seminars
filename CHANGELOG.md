@@ -31,6 +31,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop support for TYPO3 7.6 (#248, #272, #280)
 
 ### Fixed
+- Move the plugin registration to `Configuration/TCA/Overrides/` (#325)
 - Wrap accesses to global variables (#323)
 - Use the new class name for mocks (#321)
 - Fix code inspection warnings (#315)
