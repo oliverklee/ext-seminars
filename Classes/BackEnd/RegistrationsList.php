@@ -57,22 +57,14 @@ class RegistrationsList extends AbstractList
 
         $pageData = $this->page->getPageData();
 
-        $this->template->setMarker(
-            'label_attendee_full_name',
-            $GLOBALS['LANG']->getLL('registrationlist.feuser.name')
-        );
+        $languageService = $this->getLanguageService();
+        $this->template->setMarker('label_attendee_full_name', $languageService->getLL('registrationlist.feuser.name'));
         $this->template->setMarker(
             'label_event_accreditation_number',
-            $GLOBALS['LANG']->getLL('registrationlist.seminar.accreditation_number')
+            $languageService->getLL('registrationlist.seminar.accreditation_number')
         );
-        $this->template->setMarker(
-            'label_event_title',
-            $GLOBALS['LANG']->getLL('registrationlist.seminar.title')
-        );
-        $this->template->setMarker(
-            'label_event_date',
-            $GLOBALS['LANG']->getLL('registrationlist.seminar.date')
-        );
+        $this->template->setMarker('label_event_title', $languageService->getLL('registrationlist.seminar.title'));
+        $this->template->setMarker('label_event_date', $languageService->getLL('registrationlist.seminar.date'));
 
         $eventUid = (int)GeneralUtility::_GP('eventUid');
         /** @var \Tx_Seminars_Mapper_Event $mapper */
@@ -82,7 +74,7 @@ class RegistrationsList extends AbstractList
             /** @var \Tx_Seminars_Model_Event $event */
             $event = $mapper->find($eventUid);
             $registrationsHeading = sprintf(
-                $GLOBALS['LANG']->getLL('registrationlist.label_registrationsHeading'),
+                $languageService->getLL('registrationlist.label_registrationsHeading'),
                 \htmlspecialchars($event->getTitle(), ENT_QUOTES | ENT_HTML5),
                 $event->getUid()
             );
@@ -162,13 +154,14 @@ class RegistrationsList extends AbstractList
         $result = !$registrationBag->isEmpty();
 
         $tableRows = '';
+        $languageService = $this->getLanguageService();
 
         /** @var \Tx_Seminars_OldModel_Registration $registration */
         foreach ($registrationBag as $registration) {
             try {
                 $userName = \htmlspecialchars($registration->getUserName(), ENT_QUOTES | ENT_HTML5);
             } catch (\Tx_Oelib_Exception_NotFound $exception) {
-                $userName = $GLOBALS['LANG']->getLL('registrationlist.deleted');
+                $userName = $languageService->getLL('registrationlist.deleted');
             }
             $event = $registration->getSeminarObject();
             if ($event->isOk()) {
@@ -176,7 +169,7 @@ class RegistrationsList extends AbstractList
                 $eventDate = $event->getDate();
                 $accreditationNumber = \htmlspecialchars($event->getAccreditationNumber(), ENT_QUOTES | ENT_HTML5);
             } else {
-                $eventTitle = $GLOBALS['LANG']->getLL('registrationlist.deleted');
+                $eventTitle = $languageService->getLL('registrationlist.deleted');
                 $eventDate = '';
                 $accreditationNumber = '';
             }
@@ -208,18 +201,9 @@ class RegistrationsList extends AbstractList
             $this->configCheckWarnings = $registrationBag->checkConfiguration();
         }
 
-        $this->template->setMarker(
-            'label_registrations',
-            $GLOBALS['LANG']->getLL($tableLabel)
-        );
-        $this->template->setMarker(
-            'number_of_registrations',
-            $registrationBag->count()
-        );
-        $this->template->setMarker(
-            'table_header',
-            $this->template->getSubpart('REGISTRATION_TABLE_HEADING')
-        );
+        $this->template->setMarker('label_registrations', $languageService->getLL($tableLabel));
+        $this->template->setMarker('number_of_registrations', $registrationBag->count());
+        $this->template->setMarker('table_header', $this->template->getSubpart('REGISTRATION_TABLE_HEADING'));
         $this->template->setMarker('table_rows', $tableRows);
 
         return $result;

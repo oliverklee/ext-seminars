@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * Test case.
@@ -43,7 +44,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends TestCase
 
         $this->subject = new \Tx_Seminars_FrontEnd_RequirementsList(
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
-            $GLOBALS['TSFE']->cObj
+            $this->getFrontEndController()->cObj
         );
     }
 
@@ -52,6 +53,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends TestCase
         $this->testingFramework->cleanUp();
 
         \Tx_Seminars_Service_RegistrationManager::purgeInstance();
+    }
+
+    private function getFrontEndController(): TypoScriptFrontendController
+    {
+        return $GLOBALS['TSFE'];
     }
 
     /*

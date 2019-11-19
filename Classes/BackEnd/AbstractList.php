@@ -101,7 +101,10 @@ abstract class AbstractList
      */
     public function getEditIcon($uid, $pageUid): string
     {
-        if (!$this->doesUserHaveAccess($pageUid) || !$GLOBALS['BE_USER']->check('tables_modify', $this->tableName)) {
+        if (
+            !$this->doesUserHaveAccess($pageUid)
+            || !$this->getBackEndUser()->check('tables_modify', $this->tableName)
+        ) {
             return '';
         }
 
@@ -313,7 +316,7 @@ abstract class AbstractList
     {
         $result = '';
 
-        if ($GLOBALS['BE_USER']->check('tables_modify', $this->tableName) && $this->doesUserHaveAccess($pageUid)) {
+        if ($this->doesUserHaveAccess($pageUid) && $this->getBackEndUser()->check('tables_modify', $this->tableName)) {
             if ($hidden) {
                 $params = '&data[' . $this->tableName . '][' . $uid . '][hidden]=0';
                 $icon = 'Unhide.gif';
@@ -345,7 +348,7 @@ abstract class AbstractList
     protected function doesUserHaveAccess($pageUid): bool
     {
         if (!isset($this->accessRights[$pageUid])) {
-            $this->accessRights[$pageUid] = $GLOBALS['BE_USER']
+            $this->accessRights[$pageUid] = $this->getBackEndUser()
                 ->doesUserHaveAccess(BackendUtility::getRecord('pages', $pageUid), 16);
         }
 

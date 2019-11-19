@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Lang\LanguageService;
 
@@ -56,28 +57,46 @@ abstract class Tx_Seminars_Csv_AbstractListView
     }
 
     /**
+     * @return LanguageService|null
+     */
+    protected function getLanguageService()
+    {
+        return $GLOBALS['LANG'] ?? null;
+    }
+
+    /**
+     * @return BackendUserAuthentication|null
+     */
+    protected function getBackEndUser()
+    {
+        return $GLOBALS['BE_USER'] ?? null;
+    }
+
+    /**
      * Loads the language data and returns the corresponding translator instance.
      *
      * @return LanguageService
      */
     protected function getInitializedTranslator(): LanguageService
     {
-        if ($this->translator === null) {
-            if (isset($GLOBALS['LANG'])) {
-                $this->translator = $GLOBALS['LANG'];
-            } else {
-                $this->translator = GeneralUtility::makeInstance(LanguageService::class);
-                if (isset($GLOBALS['BE_USER'])) {
-                    $this->translator->init($GLOBALS['BE_USER']->uc['lang']);
-                } else {
-                    $this->translator->init('default');
-                }
-            }
-
-            $this->translator->includeLLFile('EXT:lang/Resources/Private/Language/locallang_general.xlf');
-            $this->translator->includeLLFile('EXT:seminars/Resources/Private/Language/locallang_db.xlf');
-            $this->includeAdditionalLanguageFiles();
+        if ($this->translator !== null) {
+            return $this->translator;
         }
+
+        if ($this->getLanguageService() !== null) {
+            $this->translator = $this->getLanguageService();
+        } else {
+            $this->translator = GeneralUtility::makeInstance(LanguageService::class);
+            if ($this->getBackEndUser() !== null) {
+                $this->translator->init($this->getBackEndUser()->uc['lang']);
+            } else {
+                $this->translator->init('default');
+            }
+        }
+
+        $this->translator->includeLLFile('EXT:lang/Resources/Private/Language/locallang_general.xlf');
+        $this->translator->includeLLFile('EXT:seminars/Resources/Private/Language/locallang_db.xlf');
+        $this->includeAdditionalLanguageFiles();
 
         return $this->translator;
     }

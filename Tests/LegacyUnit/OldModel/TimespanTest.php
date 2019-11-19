@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use TYPO3\CMS\Lang\LanguageService;
 
 /**
  * Test case.
@@ -25,11 +26,16 @@ class Tx_Seminars_Tests_Unit_OldModel_TimespanTest extends TestCase
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
-        $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
+        $this->getLanguageService()->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
 
         $this->subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingTimeSpan(
             ['timeFormat' => self::TIME_FORMAT]
         );
+    }
+
+    private function getLanguageService(): LanguageService
+    {
+        return $GLOBALS['LANG'];
     }
 
     /*

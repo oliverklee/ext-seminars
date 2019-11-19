@@ -87,13 +87,21 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
      *
      * @return ContentObjectRenderer a content object for creating typolinks
      */
-    protected function getContentObject()
+    protected function getContentObject(): ContentObjectRenderer
     {
-        if (!isset($GLOBALS['TSFE']) || !is_object($GLOBALS['TSFE'])) {
+        if ($this->getFrontEndController() === null) {
             $this->createFakeFrontEnd();
         }
 
-        return $GLOBALS['TSFE']->cObj;
+        return $this->getFrontEndController()->cObj;
+    }
+
+    /**
+     * @return TypoScriptFrontendController|null
+     */
+    private function getFrontEndController()
+    {
+        return $GLOBALS['TSFE'] ?? null;
     }
 
     /**

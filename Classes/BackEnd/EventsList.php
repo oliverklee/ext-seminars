@@ -372,7 +372,7 @@ class EventsList extends AbstractList
             ($event->getRecordType() !== \Tx_Seminars_Model_Event::TYPE_TOPIC)
             && !$event->isHidden() && !$event->isCanceled()
             && !$event->hasStarted()
-            && $GLOBALS['BE_USER']->check('tables_modify', $this->tableName)
+            && $this->getBackEndUser()->check('tables_modify', $this->tableName)
             && $this->doesUserHaveAccess($event->getPageUid())
         ) {
             $this->template->setMarker('uid', $event->getUid());
@@ -408,7 +408,7 @@ class EventsList extends AbstractList
             ($event->getRecordType() !== \Tx_Seminars_Model_Event::TYPE_TOPIC)
             && !$event->isHidden() && !$event->isConfirmed()
             && !$event->hasStarted()
-            && $GLOBALS['BE_USER']->check('tables_modify', $this->tableName)
+            && $this->getBackEndUser()->check('tables_modify', $this->tableName)
             && $this->doesUserHaveAccess($event->getPageUid())
         ) {
             $this->template->setMarker('uid', $event->getUid());

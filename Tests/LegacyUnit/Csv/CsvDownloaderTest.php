@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
+use TYPO3\CMS\Lang\LanguageService;
 
 /**
  * Test case.
@@ -71,6 +72,11 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends TestCase
      * Utility functions
      */
 
+    private function getLanguageService(): LanguageService
+    {
+        return $GLOBALS['LANG'];
+    }
+
     /**
      * Retrieves the localization for the given locallang key and then strips
      * the trailing colon from the localization
@@ -80,12 +86,11 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends TestCase
      *        colon from, must not be empty and the localization must have a
      *        trailing colon
      *
-     * @return string locallang string with the removed trailing colon, will not
-     *                be empty
+     * @return string locallang string with the removed trailing colon, will not be empty
      */
     private function localizeAndRemoveColon(string $locallangKey): string
     {
-        return substr($GLOBALS['LANG']->getLL($locallangKey), 0, -1);
+        return \substr($this->getLanguageService()->getLL($locallangKey), 0, -1);
     }
 
     /*

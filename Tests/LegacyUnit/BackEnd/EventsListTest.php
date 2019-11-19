@@ -648,7 +648,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends TestCase
         );
 
         self::assertContains(
-            $GLOBALS['LANG']->getLL('label_show_event_registrations'),
+            $this->getLanguageService()->getLL('label_show_event_registrations'),
             $this->subject->show()
         );
     }
@@ -661,7 +661,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends TestCase
         );
 
         self::assertNotContains(
-            $GLOBALS['LANG']->getLL('label_show_event_registrations'),
+            $this->getLanguageService()->getLL('label_show_event_registrations'),
             $this->subject->show()
         );
     }
@@ -719,7 +719,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends TestCase
         );
 
         self::assertNotContains(
-            $GLOBALS['LANG']->getLL('label_show_event_registrations'),
+            $this->getLanguageService()->getLL('label_show_event_registrations'),
             $this->subject->show()
         );
     }
@@ -751,10 +751,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends TestCase
 
     public function testLocalizationReturnsLocalizedStringForExistingKey()
     {
-        self::assertEquals(
-            'Events',
-            $GLOBALS['LANG']->getLL('title')
-        );
+        self::assertSame('Events', $this->getLanguageService()->getLL('title'));
     }
 
     ///////////////////////////////////////////
@@ -788,7 +785,11 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends TestCase
         \Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
 
         self::assertContains(
-            sprintf($GLOBALS['LANG']->getLL('label_create_record_in_current_folder'), '', $this->dummySysFolderPid),
+            \sprintf(
+                $this->getLanguageService()->getLL('label_create_record_in_current_folder'),
+                '',
+                $this->dummySysFolderPid
+            ),
             $this->subject->show()
         );
     }
@@ -814,8 +815,8 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends TestCase
         $newEventFolder = $loggedInUser->getEventFolderFromGroup();
 
         self::assertContains(
-            sprintf(
-                $GLOBALS['LANG']->getLL('label_create_record_in_foreign_folder'),
+            \sprintf(
+                $this->getLanguageService()->getLL('label_create_record_in_foreign_folder'),
                 '',
                 $newEventFolder
             ),

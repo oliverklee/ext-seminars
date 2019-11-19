@@ -105,7 +105,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends TestCase
     {
         self::assertContains(
             '<button class="submitButton confirmEvent"><p>' .
-            $GLOBALS['LANG']->getLL('confirmMailForm_sendButton') .
+            $this->getLanguageService()->getLL('confirmMailForm_sendButton') .
             '</p></button>',
             $this->subject->render()
         );
@@ -139,10 +139,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends TestCase
      */
     public function localizationReturnsLocalizedStringForExistingKey()
     {
-        self::assertEquals(
-            'Events',
-            $GLOBALS['LANG']->getLL('title')
-        );
+        self::assertSame('Events', $this->getLanguageService()->getLL('title'));
     }
 
     /*
@@ -213,7 +210,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_ConfirmEventMailFormTest extends TestCase
             ]
         );
 
-        $messageBody = '%salutation' . $GLOBALS['LANG']->getLL('cancelMailForm_prefillField_messageBody');
+        $messageBody = '%salutation' . $this->getLanguageService()->getLL('cancelMailForm_prefillField_messageBody');
 
         $this->subject->setPostData(
             [

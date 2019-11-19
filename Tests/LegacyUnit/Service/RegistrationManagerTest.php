@@ -8,6 +8,7 @@ use OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures\RegistrationHookInterf
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * Test case.
@@ -175,6 +176,11 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
     /*
      * Utility functions
      */
+
+    private function getFrontEndController(): TypoScriptFrontendController
+    {
+        return $GLOBALS['TSFE'];
+    }
 
     /**
      * Creates a dummy login page and registration page and stores their UIDs
@@ -5927,7 +5933,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->createAndLogInFrontEndUser();
 
         $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
-        $plugin->cObj = $GLOBALS['TSFE']->cObj;
+        $plugin->cObj = $this->getFrontEndController()->cObj;
         /** @var \Tx_Seminars_Service_RegistrationManager|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Service_RegistrationManager::class,
@@ -5966,7 +5972,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->createAndLogInFrontEndUser();
 
         $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
-        $plugin->cObj = $GLOBALS['TSFE']->cObj;
+        $plugin->cObj = $this->getFrontEndController()->cObj;
         /** @var \Tx_Seminars_Service_RegistrationManager|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Service_RegistrationManager::class,
@@ -5996,7 +6002,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->createAndLogInFrontEndUser();
 
         $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
-        $plugin->cObj = $GLOBALS['TSFE']->cObj;
+        $plugin->cObj = $this->getFrontEndController()->cObj;
         /** @var \Tx_Seminars_Service_RegistrationManager|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Service_RegistrationManager::class,
@@ -6040,7 +6046,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->createAndLogInFrontEndUser();
 
         $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
-        $plugin->cObj = $GLOBALS['TSFE']->cObj;
+        $plugin->cObj = $this->getFrontEndController()->cObj;
         /** @var \Tx_Seminars_Service_RegistrationManager|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Service_RegistrationManager::class,
@@ -6086,7 +6092,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         GeneralUtility::addInstance($hookClass, $hook);
 
         $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
-        $plugin->cObj = $GLOBALS['TSFE']->cObj;
+        $plugin->cObj = $this->getFrontEndController()->cObj;
         /** @var \Tx_Seminars_Service_RegistrationManager|MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Service_RegistrationManager::class,

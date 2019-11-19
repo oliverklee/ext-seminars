@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * Testcase.
@@ -48,7 +49,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CountdownTest extends TestCase
                 'isStaticTemplateLoaded' => 1,
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
             ],
-            $GLOBALS['TSFE']->cObj
+            $this->getFrontEndController()->cObj
         );
     }
 
@@ -57,6 +58,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CountdownTest extends TestCase
         $this->testingFramework->cleanUp();
 
         \Tx_Seminars_Service_RegistrationManager::purgeInstance();
+    }
+
+    private function getFrontEndController(): TypoScriptFrontendController
+    {
+        return $GLOBALS['TSFE'];
     }
 
     //////////////////////////////////////////

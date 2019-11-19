@@ -45,14 +45,9 @@ class SpeakersList extends AbstractList
             $this->getNewIcon($pageData['uid'])
         );
 
-        $this->template->setMarker(
-            'label_full_name',
-            $GLOBALS['LANG']->getLL('speakerlist.title')
-        );
-        $this->template->setMarker(
-            'label_skills',
-            $GLOBALS['LANG']->getLL('speakerlist.skills')
-        );
+        $languageService = $this->getLanguageService();
+        $this->template->setMarker('label_full_name', $languageService->getLL('speakerlist.title'));
+        $this->template->setMarker('label_skills', $languageService->getLL('speakerlist.skills'));
 
         /** @var \Tx_Seminars_BagBuilder_Speaker $builder */
         $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Speaker::class);

@@ -289,15 +289,19 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      */
     private function discardRenderedForm()
     {
+        $frontEndController = $this->getFrontEndController();
         // A mayday would be returned without unsetting the form ID.
-        unset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['ameos_formidable']['context']['forms']['tx_seminars_pi1_registration_editor']);
-        if (!is_array($GLOBALS['TSFE']->additionalHeaderData)) {
+        unset(
+            $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['ameos_formidable']['context']
+                ['forms']['tx_seminars_pi1_registration_editor']
+        );
+        if (!\is_array($frontEndController->additionalHeaderData)) {
             return;
         }
 
-        foreach ($GLOBALS['TSFE']->additionalHeaderData as $key => $content) {
+        foreach ($frontEndController->additionalHeaderData as $key => $content) {
             if (\strpos((string)$content, 'FORMIDABLE:') !== false) {
-                unset($GLOBALS['TSFE']->additionalHeaderData[$key]);
+                unset($frontEndController->additionalHeaderData[$key]);
             }
         }
     }
@@ -696,8 +700,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
             $this->getConfValueBoolean('logOutOneTimeAccountsAfterRegistration')
             && \Tx_Oelib_Session::getInstance(\Tx_Oelib_Session::TYPE_USER)->getAsBoolean('onetimeaccount')
         ) {
-            $GLOBALS['TSFE']->fe_user->logoff();
-            $GLOBALS['TSFE']->loginUser = 0;
+            $this->getFrontEndController()->fe_user->logoff();
+            $this->getFrontEndController()->loginUser = 0;
         }
 
         if ($this->getConfValueBoolean('sendParametersToThankYouAfterRegistrationPageUrl', 's_registration')) {
@@ -845,7 +849,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
     public function getAllFeUserData(): string
     {
         /** @var mixed[] $userData */
-        $userData = $GLOBALS['TSFE']->fe_user->user;
+        $userData = $this->getFrontEndController()->fe_user->user;
 
         $fieldKeys = GeneralUtility::trimExplode(',', $this->getConfValueString('showFeUserFieldsInRegistrationForm'));
         $fieldsWithLabels = GeneralUtility::trimExplode(
@@ -855,7 +859,10 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
 
         foreach ($fieldKeys as $key) {
             $hasLabel = in_array($key, $fieldsWithLabels, true);
-            $fieldValue = isset($userData[$key]) ? \htmlspecialchars((string)$userData[$key], ENT_QUOTES | ENT_HTML5) : '';
+            $fieldValue = isset($userData[$key]) ? \htmlspecialchars(
+                (string)$userData[$key],
+                ENT_QUOTES | ENT_HTML5
+            ) : '';
             $wrappedFieldValue = '<span id="tx-seminars-feuser-field-' . $key . '">' . $fieldValue . '</span>';
             if ($fieldValue !== '') {
                 $marker = $hasLabel ? ($this->translate('label_' . $key) . ' ') : '';
@@ -1176,7 +1183,11 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
                 if ($key === 'gender') {
                     $currentFormData = $this->translate('label_gender.I.' . (int)$currentFormData);
                 }
-                $processedFormData = str_replace(CR, '<br />', \htmlspecialchars($currentFormData, ENT_QUOTES | ENT_HTML5));
+                $processedFormData = str_replace(
+                    CR,
+                    '<br />',
+                    \htmlspecialchars($currentFormData, ENT_QUOTES | ENT_HTML5)
+                );
                 $wrappedFormData = '<span class="tx-seminars-billing-data-item tx-seminars-billing-data-item-' . $key . '">' .
                     $processedFormData . '</span>';
 
@@ -1233,27 +1244,22 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
     public function getFeUserData(array $params): string
     {
         $result = $this->retrieveDataFromSession($params);
+        if (!empty($result)) {
+            return $result;
+        }
 
-        if (empty($result)) {
-            $key = $params['key'];
-            $feUserData = $GLOBALS['TSFE']->fe_user->user;
-            $result = (string)$feUserData[$key];
+        $key = $params['key'];
+        $feUserData = $this->getFrontEndController()->fe_user->user;
+        $result = (string)$feUserData[$key];
 
-            // If the country is empty, try the static info country instead.
-            if (empty($result) && ($key == 'country')) {
-                $staticInfoCountry = $feUserData['static_info_country'];
-                if (empty($staticInfoCountry)) {
-                    $result = $this->getDefaultCountry();
-                } else {
-                    $this->initStaticInfo();
-                    $result = (string)$this->staticInfo->getStaticInfoName(
-                        'COUNTRIES',
-                        $staticInfoCountry,
-                        '',
-                        '',
-                        true
-                    );
-                }
+        // If the country is empty, try the static info country instead.
+        if (empty($result) && ($key === 'country')) {
+            $staticInfoCountry = $feUserData['static_info_country'];
+            if (empty($staticInfoCountry)) {
+                $result = $this->getDefaultCountry();
+            } else {
+                $this->initStaticInfo();
+                $result = (string)$this->staticInfo->getStaticInfoName('COUNTRIES', $staticInfoCountry, '', '', true);
             }
         }
 

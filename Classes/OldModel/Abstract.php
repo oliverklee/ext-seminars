@@ -54,8 +54,8 @@ abstract class Tx_Seminars_OldModel_Abstract extends \Tx_Oelib_TemplateHelper im
     public function __construct(int $uid, $dbResult = false, bool $allowHiddenRecords = false, array $recordData = [])
     {
         // In the back end, include the extension's locallang.xlf.
-        if ((TYPO3_MODE === 'BE') && is_object($GLOBALS['LANG'])) {
-            $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
+        if (TYPO3_MODE === 'BE' && $this->getLanguageService() !== null) {
+            $this->getLanguageService()->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
         }
 
         if (empty($recordData) && ($uid > 0 || $dbResult !== false)) {

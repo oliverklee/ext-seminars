@@ -5,6 +5,7 @@ declare(strict_types=1);
 use OliverKlee\PhpUnit\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\CMS\Lang\LanguageService;
 
 /**
@@ -87,7 +88,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
                     ],
                 ],
             ],
-            $GLOBALS['TSFE']->cObj
+            $this->getFrontEndController()->cObj
         );
         $this->subject->setAction('register');
         $this->subject->setSeminar($this->seminar);
@@ -99,6 +100,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
         $this->testingFramework->cleanUp();
 
         \Tx_Seminars_Service_RegistrationManager::purgeInstance();
+    }
+
+    private function getFrontEndController(): TypoScriptFrontendController
+    {
+        return $GLOBALS['TSFE'];
     }
 
     ////////////////////////////////////////////////////////////////
@@ -486,8 +492,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
     public function populateListCountriesWithLanguageSetToDefaultNotContainsEnglishCountryNameForGermany()
     {
         $backUpLanguage = $GLOBALS['LANG'];
-        $GLOBALS['LANG'] = new LanguageService();
-        $GLOBALS['LANG']->init('default');
+        $languageService = new LanguageService();
+        $languageService->init('default');
+        $GLOBALS['LANG'] = $languageService;
 
         self::assertNotContains(
             ['caption' => 'Germany', 'value' => 'Germany'],
@@ -738,7 +745,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
      */
     public function isFormFieldEnabledForNoFieldsEnabledReturnsFalseForEachField(string $key)
     {
-        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(['showRegistrationFields' => ''], $GLOBALS['TSFE']->cObj);
+        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
+            ['showRegistrationFields' => ''],
+            $this->getFrontEndController()->cObj
+        );
 
         /** @var \Tx_Seminars_OldModel_Event|MockObject $event */
         $event = $this->createMock(\Tx_Seminars_OldModel_Event::class);
@@ -765,7 +775,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
     ) {
         $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
             ['showRegistrationFields' => $key],
-            $GLOBALS['TSFE']->cObj
+            $this->getFrontEndController()->cObj
         );
         /** @var \Tx_Seminars_OldModel_Event|MockObject $event */
         $event = $this->createMock(\Tx_Seminars_OldModel_Event::class);
@@ -784,7 +794,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
     {
         $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
             ['showRegistrationFields' => 'registered_themselves'],
-            $GLOBALS['TSFE']->cObj
+            $this->getFrontEndController()->cObj
         );
 
         self::assertFalse(
@@ -799,7 +809,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
     {
         $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
             ['showRegistrationFields' => 'company, billing_address'],
-            $GLOBALS['TSFE']->cObj
+            $this->getFrontEndController()->cObj
         );
 
         self::assertTrue(
@@ -970,7 +980,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
                 ],
                 'registerThemselvesByDefaultForHiddenCheckbox' => (string)$configurationValue,
             ],
-            $GLOBALS['TSFE']->cObj
+            $this->getFrontEndController()->cObj
         );
         $subject->setAction('register');
         $subject->setTestMode();
@@ -1212,7 +1222,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
                     ],
                 ],
             ],
-            $GLOBALS['TSFE']->cObj
+            $this->getFrontEndController()->cObj
         );
         $subject->setAction('register');
         $subject->setTestMode();
@@ -1555,7 +1565,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'price',
             ],
-            $GLOBALS['TSFE']->cObj
+            $this->getFrontEndController()->cObj
         );
         $subject->setTestMode();
 
@@ -1584,7 +1594,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'interests',
             ],
-            $GLOBALS['TSFE']->cObj
+            $this->getFrontEndController()->cObj
         );
         $subject->setTestMode();
 
@@ -1608,7 +1618,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'interests',
             ],
-            $GLOBALS['TSFE']->cObj
+            $this->getFrontEndController()->cObj
         );
         $subject->setTestMode();
 
@@ -1632,7 +1642,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'attendees_names',
             ],
-            $GLOBALS['TSFE']->cObj
+            $this->getFrontEndController()->cObj
         );
         $subject->setTestMode();
 
@@ -1661,7 +1671,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'attendees_names,registered_themselves',
             ],
-            $GLOBALS['TSFE']->cObj
+            $this->getFrontEndController()->cObj
         );
         $subject->setTestMode();
 
@@ -1691,7 +1701,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'showRegistrationFields' => 'attendees_names,registered_themselves',
             ],
-            $GLOBALS['TSFE']->cObj
+            $this->getFrontEndController()->cObj
         );
         $subject->setTestMode();
 
@@ -1722,7 +1732,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
                 'showRegistrationFields' => 'attendees_names,registered_themselves',
                 'createAdditionalAttendeesAsFrontEndUsers' => false,
             ],
-            $GLOBALS['TSFE']->cObj
+            $this->getFrontEndController()->cObj
         );
         $subject->setTestMode();
 
@@ -1752,7 +1762,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
                 'showRegistrationFields' => 'attendees_names,registered_themselves',
                 'createAdditionalAttendeesAsFrontEndUsers' => true,
             ],
-            $GLOBALS['TSFE']->cObj
+            $this->getFrontEndController()->cObj
         );
         $subject->setTestMode();
 
@@ -1782,7 +1792,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
                 'showRegistrationFields' => 'attendees_names,registered_themselves',
                 'createAdditionalAttendeesAsFrontEndUsers' => false,
             ],
-            $GLOBALS['TSFE']->cObj
+            $this->getFrontEndController()->cObj
         );
         $subject->setTestMode();
 
@@ -1812,7 +1822,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
                 'showRegistrationFields' => 'attendees_names,registered_themselves',
                 'createAdditionalAttendeesAsFrontEndUsers' => true,
             ],
-            $GLOBALS['TSFE']->cObj
+            $this->getFrontEndController()->cObj
         );
         $subject->setTestMode();
 
@@ -1973,7 +1983,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
 
         $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
             ['maximumBookableSeats' => 3],
-            $GLOBALS['TSFE']->cObj
+            $this->getFrontEndController()->cObj
         );
         $subject->setAction('register');
         $subject->setSeminar($this->seminar);

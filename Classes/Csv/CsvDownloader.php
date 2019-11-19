@@ -61,15 +61,12 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
      */
     private $errorType = 0;
 
-    /**
-     * The constructor.
-     */
     public function __construct()
     {
         parent::__construct();
 
-        if (is_object($GLOBALS['LANG'])) {
-            $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
+        if ($this->getLanguageService() !== null) {
+            $this->getLanguageService()->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
         }
 
         $this->configuration = \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars');

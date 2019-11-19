@@ -645,12 +645,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
                 $this->prefixId,
                 ['seminar' => $this->getObjectUid()]
             );
-            $pageId = $GLOBALS['TSFE']->id;
+            $pageId = (int)$this->getFrontEndController()->id;
         } else {
-            $pageId = $this->getConfValueInteger(
-                'eventSuccessfullySavedPID',
-                's_fe_editing'
-            );
+            $pageId = $this->getConfValueInteger('eventSuccessfullySavedPID', 's_fe_editing');
         }
 
         return GeneralUtility::locationHeaderUrl(
@@ -1495,7 +1492,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     {
         $url = $this->cObj->typoLink_URL(
             [
-                'parameter' => $GLOBALS['TSFE']->id . ',' . \Tx_Seminars_FrontEnd_PublishEvent::PUBLICATION_TYPE_NUMBER,
+                'parameter' => $this->getFrontEndController()->id . ','
+                    . \Tx_Seminars_FrontEnd_PublishEvent::PUBLICATION_TYPE_NUMBER,
                 'additionalParams' => GeneralUtility::implodeArrayForUrl(
                     'tx_seminars_publication',
                     ['hash' => $this->publicationHash],

@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * Test case.
@@ -50,13 +51,18 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends TestCase
                 'pidList' => $this->systemFolderPid,
                 'recursive' => 1,
             ],
-            $GLOBALS['TSFE']->cObj
+            $this->getFrontEndController()->cObj
         );
     }
 
     protected function tearDown()
     {
         $this->testingFramework->cleanUp();
+    }
+
+    private function getFrontEndController(): TypoScriptFrontendController
+    {
+        return $GLOBALS['TSFE'];
     }
 
     /*

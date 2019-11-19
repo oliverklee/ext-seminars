@@ -212,11 +212,11 @@ abstract class AbstractEventMailForm
      * Checks whether the current back-end user has the needed permissions to
      * access this form.
      *
-     * @return bool TRUE if the user is allowed to see/use the form, FALSE otherwise
+     * @return bool whether the user is allowed to see/use the form
      */
     public function checkAccess(): bool
     {
-        return $GLOBALS['BE_USER']->check('tables_select', 'tx_seminars_seminars');
+        return $this->getBackEndUser()->check('tables_select', 'tx_seminars_seminars');
     }
 
     /**
