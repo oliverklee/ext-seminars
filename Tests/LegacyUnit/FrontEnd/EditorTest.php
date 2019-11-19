@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * Test case.
@@ -26,7 +27,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EditorTest extends TestCase
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
 
-        $this->subject = new \Tx_Seminars_FrontEnd_Editor([], $GLOBALS['TSFE']->cObj);
+        $this->subject = new \Tx_Seminars_FrontEnd_Editor([], $this->getFrontEndController()->cObj);
         $this->subject->setTestMode();
     }
 
@@ -35,6 +36,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EditorTest extends TestCase
         $this->testingFramework->cleanUp();
 
         \Tx_Seminars_Service_RegistrationManager::purgeInstance();
+    }
+
+    private function getFrontEndController(): TypoScriptFrontendController
+    {
+        return $GLOBALS['TSFE'];
     }
 
     //////////////////////////////
@@ -50,7 +56,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EditorTest extends TestCase
 
     public function testIsTestModeReturnsFalseForTestModeDisabled()
     {
-        $subject = new \Tx_Seminars_FrontEnd_Editor([], $GLOBALS['TSFE']->cObj);
+        $subject = new \Tx_Seminars_FrontEnd_Editor([], $this->getFrontEndController()->cObj);
 
         self::assertFalse(
             $subject->isTestMode()

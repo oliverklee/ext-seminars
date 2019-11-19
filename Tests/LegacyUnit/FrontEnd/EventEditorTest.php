@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * Test case.
@@ -56,7 +57,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                 'form.' => ['eventEditor.' => []],
             ],
-            $GLOBALS['TSFE']->cObj
+            $this->getFrontEndController()->cObj
         );
         $this->subject->setTestMode();
 
@@ -77,6 +78,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     /*
      * Utility functions.
      */
+
+    private function getFrontEndController(): TypoScriptFrontendController
+    {
+        return $GLOBALS['TSFE'];
+    }
 
     /**
      * Creates a FE user, adds him/her as a VIP to the seminar with the UID in
@@ -211,7 +217,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
                 'form.' => ['eventEditor.' => []],
                 'requiredFrontEndEditorFields' => $requiredField,
             ],
-            $GLOBALS['TSFE']->cObj
+            $this->getFrontEndController()->cObj
         );
         $result->setTestMode();
 
@@ -411,7 +417,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
         $this->subject->setFakedFormValue('proceed_file_upload', 1);
 
         self::assertContains(
-            '?id=' . $GLOBALS['TSFE']->id,
+            '?id=' . $this->getFrontEndController()->id,
             $this->subject->getEventSuccessfullySavedUrl()
         );
     }

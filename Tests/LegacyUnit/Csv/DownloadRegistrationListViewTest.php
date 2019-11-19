@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use TYPO3\CMS\Lang\LanguageService;
 
 /**
  * Test case.
@@ -38,8 +39,8 @@ class Tx_Seminars_Tests_Unit_Csv_DownloadRegistrationListViewTest extends TestCa
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
-        $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/locallang_db.xlf');
-        $GLOBALS['LANG']->includeLLFile('EXT:lang/Resources/Private/Language/locallang_general.xlf');
+        $this->getLanguageService()->includeLLFile('EXT:seminars/Resources/Private/Language/locallang_db.xlf');
+        $this->getLanguageService()->includeLLFile('EXT:lang/Resources/Private/Language/locallang_general.xlf');
 
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
@@ -67,6 +68,11 @@ class Tx_Seminars_Tests_Unit_Csv_DownloadRegistrationListViewTest extends TestCa
         $this->testingFramework->cleanUp();
     }
 
+    private function getLanguageService(): LanguageService
+    {
+        return $GLOBALS['LANG'];
+    }
+
     /**
      * Retrieves the localization for the given locallang key and then strips the trailing colon from the localization.
      *
@@ -78,7 +84,7 @@ class Tx_Seminars_Tests_Unit_Csv_DownloadRegistrationListViewTest extends TestCa
      */
     protected function localizeAndRemoveColon(string $locallangKey): string
     {
-        return rtrim($GLOBALS['LANG']->getLL($locallangKey), ':');
+        return \rtrim($this->getLanguageService()->getLL($locallangKey), ':');
     }
 
     /**

@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * Test case.
@@ -70,7 +71,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventHeadlineTest extends TestCase
                 'isStaticTemplateLoaded' => 1,
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
             ],
-            $GLOBALS['TSFE']->cObj
+            $this->getFrontEndController()->cObj
         );
         $this->subject->injectEventMapper($this->mapper);
     }
@@ -80,6 +81,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventHeadlineTest extends TestCase
         $this->testingFramework->cleanUp();
 
         \Tx_Seminars_Service_RegistrationManager::purgeInstance();
+    }
+
+    private function getFrontEndController(): TypoScriptFrontendController
+    {
+        return $GLOBALS['TSFE'];
     }
 
     //////////////////////////////////

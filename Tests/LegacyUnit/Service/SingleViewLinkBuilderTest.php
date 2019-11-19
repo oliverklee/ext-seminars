@@ -6,6 +6,7 @@ use OliverKlee\PhpUnit\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * Test case.
@@ -59,6 +60,11 @@ class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends TestCase
         $_POST = $this->postBackup;
 
         $this->testingFramework->cleanUp();
+    }
+
+    private function getFrontEndController(): TypoScriptFrontendController
+    {
+        return $GLOBALS['TSFE'];
     }
 
     ///////////////////////////////////////////////
@@ -430,7 +436,7 @@ class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends TestCase
         $subject = new \Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder();
 
         self::assertSame(
-            $GLOBALS['TSFE']->cObj,
+            $this->getFrontEndController()->cObj,
             $subject->getContentObject()
         );
     }

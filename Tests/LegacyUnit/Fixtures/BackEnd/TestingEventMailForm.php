@@ -25,7 +25,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_BackEnd_TestingEventMailForm extends Abstr
      */
     protected function getSubmitButtonLabel(): string
     {
-        return $GLOBALS['LANG']->getLL('eventMailForm_confirmButton');
+        return $this->getLanguageService()->getLL('eventMailForm_confirmButton');
     }
 
     /**

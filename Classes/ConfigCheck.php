@@ -1945,7 +1945,7 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
 
         if ($this->objectToCheck->hasConfValueString('registrationEditorTemplateFile', '', true)) {
             $rawFileName = $this->objectToCheck->getConfValueString('registrationEditorTemplateFile', '', true, true);
-            if (!is_file($GLOBALS['TSFE']->tmpl->getFileName($rawFileName))) {
+            if (!\is_file($this->getFrontEndController()->tmpl->getFileName($rawFileName))) {
                 $message = 'The specified HTML template file <strong>' .
                     \htmlspecialchars($rawFileName, ENT_QUOTES | ENT_HTML5) . '</strong> cannot be read. ' .
                     $errorMessage . ' ' .
@@ -2917,7 +2917,7 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
 
         if ($this->objectToCheck->hasConfValueString('eventEditorTemplateFile', '', true)) {
             $rawFileName = $this->objectToCheck->getConfValueString('eventEditorTemplateFile', '', true, true);
-            if (!is_file($GLOBALS['TSFE']->tmpl->getFileName($rawFileName))) {
+            if (!\is_file($this->getFrontEndController()->tmpl->getFileName($rawFileName))) {
                 $message = 'The specified HTML template file <strong>' .
                     \htmlspecialchars($rawFileName, ENT_QUOTES | ENT_HTML5) . '</strong> cannot be read. ' .
                     $errorMessage . ' ' .

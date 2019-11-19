@@ -102,7 +102,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_GeneralEventMailFormTest extends TestCase
     {
         self::assertContains(
             '<button class="submitButton sendEmail"><p>' .
-            $GLOBALS['LANG']->getLL('generalMailForm_sendButton') .
+            $this->getLanguageService()->getLL('generalMailForm_sendButton') .
             '</p></button>',
             $this->subject->render()
         );
@@ -148,7 +148,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_GeneralEventMailFormTest extends TestCase
             ]
         );
 
-        $messageBody = '%salutation' . $GLOBALS['LANG']->getLL('confirmMailForm_prefillField_messageBody');
+        $messageBody = '%salutation' . $this->getLanguageService()->getLL('confirmMailForm_prefillField_messageBody');
         $this->subject->setPostData(
             [
                 'action' => 'confirmEvent',

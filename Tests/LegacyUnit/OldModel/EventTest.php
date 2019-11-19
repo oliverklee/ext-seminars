@@ -5,6 +5,7 @@ declare(strict_types=1);
 use OliverKlee\PhpUnit\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Lang\LanguageService;
 
 /**
  * Test case.
@@ -58,7 +59,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         $this->beginDate = ($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
         $this->unregistrationDeadline = ($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
 
-        $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
+        $this->getLanguageService()->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
         $uid = $this->testingFramework->createRecord(
@@ -95,6 +96,11 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     /*
      * Utility functions
      */
+
+    private function getLanguageService(): LanguageService
+    {
+        return $GLOBALS['LANG'];
+    }
 
     /**
      * Creates a fake front end and a pi1 instance in $this->pi1.
@@ -428,9 +434,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
 
         $this->createPi1();
 
-        self::assertNotNull(
-            $GLOBALS['TSFE']
-        );
+        self::assertNotNull($GLOBALS['TSFE']);
     }
 
     /**

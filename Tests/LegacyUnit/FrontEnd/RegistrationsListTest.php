@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * Test case.
@@ -65,7 +66,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends TestCase
             ],
             'list_registrations',
             $this->seminarUid,
-            $GLOBALS['TSFE']->cObj
+            $this->getFrontEndController()->cObj
         );
     }
 
@@ -79,6 +80,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends TestCase
     ///////////////////////
     // Utility functions.
     ///////////////////////
+
+    private function getFrontEndController(): TypoScriptFrontendController
+    {
+        return $GLOBALS['TSFE'];
+    }
 
     /**
      * Creates an FE user, registers them to the seminar with the UID in
@@ -153,7 +159,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends TestCase
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             'foo',
             0,
-            $GLOBALS['TSFE']->cObj
+            $this->getFrontEndController()->cObj
         );
     }
 
@@ -168,7 +174,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends TestCase
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             'list_registrations',
             0,
-            $GLOBALS['TSFE']->cObj
+            $this->getFrontEndController()->cObj
         );
     }
 
@@ -183,7 +189,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends TestCase
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             'list_vip_registrations',
             0,
-            $GLOBALS['TSFE']->cObj
+            $this->getFrontEndController()->cObj
         );
     }
 
@@ -211,7 +217,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends TestCase
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             'list_registrations',
             -1,
-            $GLOBALS['TSFE']->cObj
+            $this->getFrontEndController()->cObj
         );
         $subject->render();
 
@@ -230,7 +236,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends TestCase
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             'list_registrations',
             0,
-            $GLOBALS['TSFE']->cObj
+            $this->getFrontEndController()->cObj
         );
         $subject->render();
 

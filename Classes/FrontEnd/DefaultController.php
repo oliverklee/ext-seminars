@@ -242,7 +242,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         $this->whatToDisplay = $this->getConfValueString('what_to_display');
 
         if (
-            !in_array(
+            !\in_array(
                 $this->whatToDisplay,
                 [
                 'list_registrations',
@@ -317,9 +317,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
                 // We still use the processEventEditorActions call in the next case.
             case 'my_entered_events':
                 $this->processEventEditorActions();
-            // The fallthrough is intended
-            // because createListView() will differentiate later.
-            // no break
+                // The fallthrough is intended
+                // because createListView() will differentiate later.
+                // no break
             case 'topic_list':
                 // The fallthrough is intended
                 // because createListView() will differentiate later.
@@ -737,7 +737,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         $this->setErrorMessage($this->seminar->checkConfiguration(true));
 
         // This sets the title of the page for use in indexed search results:
-        $GLOBALS['TSFE']->indexedDocTitle = $this->seminar->getTitle();
+        $this->getFrontEndController()->indexedDocTitle = $this->seminar->getTitle();
 
         $this->setEventTypeMarker();
 
@@ -1685,7 +1685,10 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
                 } else {
                     $this->setMarker('error_text', $this->translate('message_notLoggedIn'));
                     $result .= $this->getSubpart('ERROR_VIEW');
-                    $result .= $this->getLoginLink($this->translate('message_pleaseLogIn'), $GLOBALS['TSFE']->id);
+                    $result .= $this->getLoginLink(
+                        $this->translate('message_pleaseLogIn'),
+                        $this->getFrontEndController()->id
+                    );
                     $isOkay = false;
                 }
                 break;
@@ -1695,7 +1698,10 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
                 } else {
                     $this->setMarker('error_text', $this->translate('message_notLoggedIn'));
                     $result .= $this->getSubpart('ERROR_VIEW');
-                    $result .= $this->getLoginLink($this->translate('message_pleaseLogIn'), $GLOBALS['TSFE']->id);
+                    $result .= $this->getLoginLink(
+                        $this->translate('message_pleaseLogIn'),
+                        (int)$this->getFrontEndController()->id
+                    );
                     $isOkay = false;
                 }
                 break;
@@ -2509,7 +2515,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
     {
         $seminarUid = $this->seminar->getUid();
 
-        $aTag = $this->cObj->getTypoLink($this->translate('label_' . $action), (int)$GLOBALS['TSFE']->id);
+        $aTag = $this->cObj->getTypoLink($this->translate('label_' . $action), (int)$this->getFrontEndController()->id);
 
         /** @var string[] $dataAttributes */
         $dataAttributes = [
@@ -2776,7 +2782,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         return $this->cObj->typoLink(
             $this->translate('label_registrationsAsCsv'),
             [
-                'parameter' => $GLOBALS['TSFE']->id,
+                'parameter' => (int)$this->getFrontEndController()->id,
                 'additionalParams' => GeneralUtility::implodeArrayForUrl(
                     '',
                     [
@@ -2802,7 +2808,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      */
     protected function createRegistrationPage(): string
     {
-        $this->feuser = $GLOBALS['TSFE']->fe_user;
+        $this->feuser = $this->getFrontEndController()->fe_user;
 
         $errorMessage = '';
         $registrationForm = '';
@@ -2820,7 +2826,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
                 } else {
                     $errorMessage = $this->getLoginLink(
                         $this->translate('message_notLoggedIn'),
-                        $GLOBALS['TSFE']->id,
+                        (int)$this->getFrontEndController()->id,
                         $this->seminar->getUid()
                     );
                 }

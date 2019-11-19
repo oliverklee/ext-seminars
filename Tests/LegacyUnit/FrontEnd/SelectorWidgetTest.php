@@ -5,6 +5,7 @@ declare(strict_types=1);
 use OliverKlee\PhpUnit\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use SJBR\StaticInfoTables\PiBaseApi;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * Test case.
@@ -39,7 +40,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends TestCase
                 'isStaticTemplateLoaded' => 1,
                 'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
             ],
-            $GLOBALS['TSFE']->cObj
+            $this->getFrontEndController()->cObj
         );
     }
 
@@ -63,6 +64,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends TestCase
     {
         $this->staticInfo = new PiBaseApi();
         $this->staticInfo->init();
+    }
+
+    private function getFrontEndController(): TypoScriptFrontendController
+    {
+        return $GLOBALS['TSFE'];
     }
 
     ////////////////////////////////////
@@ -442,7 +448,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends TestCase
                         'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
                         'displaySearchFormFields' => 'event_type',
                     ],
-                    $GLOBALS['TSFE']->cObj,
+                    $this->getFrontEndController()->cObj,
                 ]
             )->getMock();
         $subject->method('hasSearchField')
@@ -2127,7 +2133,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends TestCase
         );
 
         self::assertContains(
-            '<option value="' . $categoryUid . '">' . \htmlspecialchars($categoryName, ENT_QUOTES | ENT_HTML5) . '</option>',
+            '<option value="' . $categoryUid . '">' . \htmlspecialchars(
+                $categoryName,
+                ENT_QUOTES | ENT_HTML5
+            ) . '</option>',
             $this->subject->render()
         );
     }

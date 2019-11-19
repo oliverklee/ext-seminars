@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * Test case.
@@ -27,7 +28,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_TestingViewTest extends TestCase
         $this->testingFramework->createFakeFrontEnd();
         $this->subject = new \Tx_Seminars_Tests_Unit_Fixtures_FrontEnd_TestingView(
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
-            $GLOBALS['TSFE']->cObj
+            $this->getFrontEndController()->cObj
         );
     }
 
@@ -36,11 +37,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_TestingViewTest extends TestCase
         $this->testingFramework->cleanUp();
     }
 
+    private function getFrontEndController(): TypoScriptFrontendController
+    {
+        return $GLOBALS['TSFE'];
+    }
+
     public function testRenderCanReturnAViewsContent()
     {
-        self::assertEquals(
-            'Hi, I am the testingFrontEndView!',
-            $this->subject->render()
-        );
+        self::assertSame('Hi, I am the testingFrontEndView!', $this->subject->render());
     }
 }

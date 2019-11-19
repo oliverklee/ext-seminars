@@ -156,7 +156,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends TestCase
     public function renderContainsPrefilledBodyField()
     {
         self::assertContains(
-            $GLOBALS['LANG']->getLL('testForm_prefillField_messageBody'),
+            $this->getLanguageService()->getLL('testForm_prefillField_messageBody'),
             $this->subject->render()
         );
     }
@@ -167,8 +167,8 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends TestCase
     public function renderContainsBodyFieldWithIntroduction()
     {
         self::assertContains(
-            sprintf(
-                $GLOBALS['LANG']->getLL('testForm_prefillField_introduction'),
+            \sprintf(
+                $this->getLanguageService()->getLL('testForm_prefillField_introduction'),
                 \htmlspecialchars('"Dummy Event"', ENT_QUOTES | ENT_HTML5)
             ),
             $this->subject->render()
@@ -232,7 +232,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends TestCase
     {
         self::assertContains(
             '<input type="button" value="' .
-            $GLOBALS['LANG']->getLL('eventMailForm_backButton') .
+            $this->getLanguageService()->getLL('eventMailForm_backButton') .
             '" class="backButton"' .
             ' onclick="window.location=window.location" />',
             $this->subject->render()
@@ -253,7 +253,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends TestCase
         );
 
         self::assertContains(
-            $GLOBALS['LANG']->getLL('eventMailForm_error_subjectMustNotBeEmpty'),
+            $this->getLanguageService()->getLL('eventMailForm_error_subjectMustNotBeEmpty'),
             $this->subject->render()
         );
     }
@@ -272,7 +272,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends TestCase
         );
 
         self::assertContains(
-            $GLOBALS['LANG']->getLL('eventMailForm_error_messageBodyMustNotBeEmpty'),
+            $this->getLanguageService()->getLL('eventMailForm_error_messageBodyMustNotBeEmpty'),
             $this->subject->render()
         );
     }
@@ -356,10 +356,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends TestCase
      */
     public function localizationReturnsLocalizedStringForExistingKey()
     {
-        self::assertEquals(
-            'Events',
-            $GLOBALS['LANG']->getLL('title')
-        );
+        self::assertSame('Events', $this->getLanguageService()->getLL('title'));
     }
 
     ///////////////////////////////////

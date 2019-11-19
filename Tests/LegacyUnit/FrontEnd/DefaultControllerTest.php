@@ -6,6 +6,8 @@ use OliverKlee\PhpUnit\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+use TYPO3\CMS\Lang\LanguageService;
 
 /**
  * Test case.
@@ -97,9 +99,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $configuration->setAsString('currency', 'EUR');
         \Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
 
-        $this->languageBackup = $GLOBALS['LANG']->lang;
-        $GLOBALS['LANG']->lang = 'default';
-        $GLOBALS['LANG']->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
+        $this->languageBackup = $this->getLanguageService()->lang;
+        $languageService = $this->getLanguageService();
+        $languageService->lang = 'default';
+        $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
         \Tx_Oelib_TranslatorRegistry::getInstance()->setLanguageKey('default');
         $this->translator = \Tx_Oelib_TranslatorRegistry::get('seminars');
 
@@ -171,12 +174,22 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         \Tx_Seminars_Service_RegistrationManager::purgeInstance();
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
-        $GLOBALS['LANG']->lang = $this->languageBackup;
+        $this->getLanguageService()->lang = $this->languageBackup;
     }
 
     ///////////////////////
     // Utility functions.
     ///////////////////////
+
+    private function getLanguageService(): LanguageService
+    {
+        return $GLOBALS['LANG'];
+    }
+
+    private function getFrontEndController(): TypoScriptFrontendController
+    {
+        return $GLOBALS['TSFE'];
+    }
 
     /**
      * Inserts a target group record into the database and creates a relation to
@@ -8238,7 +8251,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $event->method('isHidden')->willReturn(false);
         $subject->setSeminar($event);
 
-        $currentPageId = $GLOBALS['TSFE']->id;
+        $currentPageId = (int)$this->getFrontEndController()->id;
 
         self::assertContains(
             '<a href="index.php?id=' . $currentPageId .
@@ -8270,7 +8283,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $event->method('isHidden')->willReturn(true);
         $subject->setSeminar($event);
 
-        $currentPageId = $GLOBALS['TSFE']->id;
+        $currentPageId = (int)$this->getFrontEndController()->id;
 
         self::assertContains(
             '<a href="index.php?id=' . $currentPageId .
@@ -8414,7 +8427,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $event->method('isHidden')->willReturn(true);
         $subject->setSeminar($event);
 
-        $currentPageId = $GLOBALS['TSFE']->id;
+        $currentPageId = (int)$this->getFrontEndController()->id;
 
         self::assertContains(
             '<a href="index.php?id=' . $currentPageId .
