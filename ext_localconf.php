@@ -107,71 +107,32 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks'][\OliverKlee\Semi
 
 // RealURL auto-configuration
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/realurl/class.tx_realurl_autoconfgen.php']['extensionConfiguration']['seminars']
-    = 'OliverKlee\\Seminars\\RealUrl\\Configuration->addConfiguration';
+    = \OliverKlee\Seminars\RealUrl\Configuration::class . '->addConfiguration';
 
 /** @var \TYPO3\CMS\Core\Imaging\IconRegistry $iconRegistry */
 $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
-$iconProviderClass = \TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider::class;
-
-$iconRegistry->registerIcon(
-    'tx-seminars-canceled',
-    $iconProviderClass,
-    ['source' => 'EXT:seminars/Resources/Public/Icons/Canceled.png']
-);
-
-$iconRegistry->registerIcon(
-    'tx-seminars-category',
-    $iconProviderClass,
-    ['source' => 'EXT:seminars/Resources/Public/Icons/Category.gif']
-);
-
-$iconRegistry->registerIcon(
-    'tx-seminars-registration',
-    $iconProviderClass,
-    ['source' => 'EXT:seminars/Resources/Public/Icons/Registration.gif']
-);
-
-$iconRegistry->registerIcon(
-    'tx-seminars-event-complete',
-    $iconProviderClass,
-    ['source' => 'EXT:seminars/Resources/Public/Icons/EventComplete.gif']
-);
-
-$iconRegistry->registerIcon(
-    'tx-seminars-event-topic',
-    $iconProviderClass,
-    ['source' => 'EXT:seminars/Resources/Public/Icons/EventTopic.gif']
-);
-
-$iconRegistry->registerIcon(
-    'tx-seminars-event-date',
-    $iconProviderClass,
-    ['source' => 'EXT:seminars/Resources/Public/Icons/EventDate.gif']
-);
-
+$provider = \TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider::class;
+$prefix = 'EXT:seminars/Resources/Public/Icons/';
+$iconRegistry->registerIcon('tx-seminars-canceled', $provider, ['source' => $prefix . 'Canceled.png']);
+$iconRegistry->registerIcon('tx-seminars-category', $provider, ['source' => $prefix . 'Category.gif']);
+$iconRegistry->registerIcon('tx-seminars-registration', $provider, ['source' => $prefix . 'Registration.gif']);
+$iconRegistry->registerIcon('tx-seminars-event-complete', $provider, ['source' => $prefix . 'EventComplete.gif']);
+$iconRegistry->registerIcon('tx-seminars-event-topic', $provider, ['source' => $prefix . 'EventTopic.gif']);
+$iconRegistry->registerIcon('tx-seminars-event-date', $provider, ['source' => $prefix . 'EventDate.gif']);
 $iconRegistry->registerIcon(
     'tcarecords-tx_seminars_speakers-default',
-    $iconProviderClass,
-    ['source' => 'EXT:seminars/Resources/Public/Icons/Speaker.gif']
+    $provider,
+    ['source' => $prefix . 'Speaker.gif']
 );
-
 $iconRegistry->registerIcon(
     'tcarecords-tx_seminars_organizers-default',
-    $iconProviderClass,
-    ['source' => 'EXT:seminars/Resources/Public/Icons/Organizer.gif']
+    $provider,
+    ['source' => $prefix . 'Organizer.gif']
 );
-
-$iconRegistry->registerIcon(
-    'tcarecords-tx_seminars_registrations-default',
-    $iconProviderClass,
-    ['source' => 'EXT:seminars/Resources/Public/Icons/Registration.gif']
+$iconRegistry->registerIcon('tcarecords-tx_seminars_registrations-default', $provider,
+    ['source' => $prefix . 'Registration.gif']
 );
-
-$iconRegistry->registerIcon(
-    'ext-seminars-wizard-icon',
-    $iconProviderClass,
-    ['source' => 'EXT:seminars/ext_icon.svg']
-);
+$iconRegistry->registerIcon('ext-seminars-wizard-icon', $provider, ['source' => 'EXT:seminars/ext_icon.svg']);
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
     '
