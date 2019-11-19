@@ -132,7 +132,11 @@ $iconRegistry->registerIcon(
 $iconRegistry->registerIcon('tcarecords-tx_seminars_registrations-default', $provider,
     ['source' => $prefix . 'Registration.gif']
 );
-$iconRegistry->registerIcon('ext-seminars-wizard-icon', $provider, ['source' => 'EXT:seminars/ext_icon.svg']);
+$iconRegistry->registerIcon(
+    'ext-seminars-wizard-icon',
+    $provider,
+    ['source' => 'EXT:seminars/Resources/Public/Icons/Extension.svg']
+);
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
     '
