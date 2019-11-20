@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Seminars\BagBuilder\AbstractBagBuilder;
+
 /**
  * This builder class creates customized registration bag objects.
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_BagBuilder_Registration extends \Tx_Seminars_BagBuilder_Abstract
+class Tx_Seminars_BagBuilder_Registration extends AbstractBagBuilder
 {
     /**
      * @var string class name of the bag class that will be built

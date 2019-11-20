@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Seminars\BagBuilder\AbstractBagBuilder;
+
 /**
  * This builder class creates customized organizer bag objects.
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_BagBuilder_Organizer extends \Tx_Seminars_BagBuilder_Abstract
+class Tx_Seminars_BagBuilder_Organizer extends AbstractBagBuilder
 {
     /**
      * @var string class name of the bag class that will be built

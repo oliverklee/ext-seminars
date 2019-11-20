@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\BagBuilder;
 
+use OliverKlee\Seminars\BagBuilder\AbstractBagBuilder;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\Bag\TestingBag;
 
 /**
@@ -12,7 +13,7 @@ use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\Bag\TestingBag;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-final class TestingBagBuilder extends \Tx_Seminars_BagBuilder_Abstract
+final class TestingBagBuilder extends AbstractBagBuilder
 {
     /**
      * @var string class name of the bag class that will be built
