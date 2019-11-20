@@ -65,11 +65,17 @@ class HookProviderTest extends UnitTestCase
     /**
      * Creates a TestingHookInterface accepting Hook object
      *
+     * @param string $index
+     *
      * @return HookProvider
      */
-    private function createHookObject(): HookProvider
+    private function createHookObject(string $index = ''): HookProvider
     {
-        return new HookProvider(TestingHookInterface::class);
+        if ($index === '') {
+            return new HookProvider(TestingHookInterface::class);
+        }
+
+        return new HookProvider(TestingHookInterface::class, $index);
     }
 
     /*
@@ -173,7 +179,7 @@ class HookProviderTest extends UnitTestCase
     /**
      * @test
      */
-    public function hookObjectForTestHookCanBeCreated()
+    public function hookObjectForTestHookCanBeCreatedWithoutIndex()
     {
         self::assertInstanceOf(HookProvider::class, $this->createHookObject());
     }
@@ -256,6 +262,7 @@ class HookProviderTest extends UnitTestCase
      */
     public function hookObjectForTestHookWithOneHookImplementorRegisteredSucceedsWithMethodCalledOnce()
     {
+        TestingHookImplementor::$wasCalled = 0;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestingHookInterface::class][1565007112] =
             TestingHookImplementor::class;
         $hookObject = $this->createHookObject();
@@ -268,8 +275,10 @@ class HookProviderTest extends UnitTestCase
     /**
      * @test
      */
-    public function hookObjectForTestHookWithTwoHookImplementorsRegisteredResultsInTwoHooksInHookList()
+    public function hookObjectForTestHookWithTwoHookImplementorsRegisteredSucceedsWithEachMethodCalledOnce()
     {
+        TestingHookImplementor::$wasCalled = 0;
+        TestingHookImplementor2::$wasCalled = 0;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestingHookInterface::class][1565007112] =
             TestingHookImplementor::class;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestingHookInterface::class][1565007113] =
@@ -300,8 +309,57 @@ class HookProviderTest extends UnitTestCase
     /**
      * @test
      */
-    public function hookObjectForTestHookCanBeCreatedWithDifferentIndexName()
+    public function hookObjectForTestHookWithIndexCanBeCreated()
     {
-        self::assertInstanceOf(HookProvider::class, new HookProvider(TestingHookInterface::class, 'anyIndex'));
+        self::assertInstanceOf(HookProvider::class, $this->createHookObject('anyIndex'));
+    }
+
+    /**
+     * @test
+     */
+    public function hookObjectForTestHookWithIndexWithOneHookImplementorRegisteredSucceedsWithMethodCalledOnce()
+    {
+        TestingHookImplementor::$wasCalled = 0;
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['anyIndex'][1574270061] =
+            TestingHookImplementor::class;
+        $hookObject = $this->createHookObject('anyIndex');
+
+        $hookObject->executeHook('testHookMethod');
+
+        self::assertSame(1, TestingHookImplementor::$wasCalled);
+    }
+
+    /**
+     * @test
+     */
+    public function hookObjectForTestHookWithIndexWithHookImplementorRegisteredByClassnameSucceedsWithMethodNotCalled()
+    {
+        TestingHookImplementor::$wasCalled = 0;
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestingHookInterface::class][1574270061] =
+            TestingHookImplementor::class;
+        $hookObject = $this->createHookObject('anyIndex');
+
+        $hookObject->executeHook('testHookMethod');
+
+        self::assertSame(0, TestingHookImplementor::$wasCalled);
+    }
+
+    /**
+     * @test
+     */
+    public function hookObjectForTestHookWithIndexWithTwoHookImplementorsRegisteredSucceedsWithOneMethodCalledOnce()
+    {
+        TestingHookImplementor::$wasCalled = 0;
+        TestingHookImplementor2::$wasCalled = 0;
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestingHookInterface::class][1565007112] =
+            TestingHookImplementor::class;
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['anyIndex'][1574270061] =
+            TestingHookImplementor2::class;
+        $hookObject = $this->createHookObject('anyIndex');
+
+        $hookObject->executeHook('testHookMethod');
+
+        self::assertSame(0, TestingHookImplementor::$wasCalled);
+        self::assertSame(1, TestingHookImplementor2::$wasCalled);
     }
 }
