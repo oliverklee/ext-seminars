@@ -189,26 +189,28 @@ class HookProviderTest extends UnitTestCase
 
     /**
      * @test
-     * @expectedException InvalidArgumentException
-     * @expectedExceptionCode 1573479911
      */
     public function hookObjectForTestHookWithNoHookImplemetorRegisteredFailsForEmptyMethod()
     {
         unset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestingHookInterface::class]);
         $hookObject = $this->createHookObject();
 
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionCode(1573479911);
+
         $hookObject->executeHook('');
     }
 
     /**
      * @test
-     * @expectedException UnexpectedValueException
-     * @expectedExceptionCode 1573480302
      */
     public function hookObjectForTestHookWithNoHookImplemetorRegisteredFailsForUnknownMethod()
     {
         unset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestingHookInterface::class]);
         $hookObject = $this->createHookObject();
+
+        $this->expectException(\UnexpectedValueException::class);
+        $this->expectExceptionCode(1573480302);
 
         $hookObject->executeHook('methodNotImplemented');
     }
