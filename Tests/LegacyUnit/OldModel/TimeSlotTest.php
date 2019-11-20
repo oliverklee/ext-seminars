@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingTimeSlot;
 
 /**
  * Test case.
@@ -12,7 +13,7 @@ use OliverKlee\PhpUnit\TestCase;
 class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingTimeSlot
+     * @var TestingTimeSlot
      */
     private $subject = null;
 
@@ -37,7 +38,7 @@ class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends TestCase
             ]
         );
 
-        $this->subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingTimeSlot($subjectUid);
+        $this->subject = new TestingTimeSlot($subjectUid);
     }
 
     protected function tearDown()

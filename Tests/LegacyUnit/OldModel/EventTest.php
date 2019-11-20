@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Lang\LanguageService;
@@ -16,7 +17,7 @@ use TYPO3\CMS\Lang\LanguageService;
 class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent
+     * @var TestingEvent
      */
     protected $subject = null;
 
@@ -75,7 +76,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
             ]
         );
 
-        $this->subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $this->subject = new TestingEvent(
             $uid,
             [
                 'dateFormatYMD' => '%d.%m.%Y',
@@ -5726,7 +5727,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
                 'details_page' => $detailsPageUid,
             ]
         );
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($eventUid);
+        $event = new TestingEvent($eventUid);
 
         self::assertTrue(
             $event->hasSeparateDetailsPage()
@@ -5745,7 +5746,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
                 'details_page' => 'www.test.com',
             ]
         );
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($eventUid);
+        $event = new TestingEvent($eventUid);
 
         self::assertTrue(
             $event->hasSeparateDetailsPage()
@@ -5780,7 +5781,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
                 'details_page' => $detailsPageUid,
             ]
         );
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($eventUid);
+        $event = new TestingEvent($eventUid);
 
         self::assertSame(
             (string)$detailsPageUid,
@@ -5801,7 +5802,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
                 'details_page' => $externalUrl,
             ]
         );
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($eventUid);
+        $event = new TestingEvent($eventUid);
 
         self::assertSame(
             $externalUrl,
@@ -7222,7 +7223,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      */
     public function hasRequirementsForTopicWithoutRequirementsReturnsFalse()
     {
-        $topic = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $topic = new TestingEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -7249,7 +7250,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
                 'requirements' => 0,
             ]
         );
-        $date = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $date = new TestingEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -7283,7 +7284,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
             $requiredTopicUid,
             'requirements'
         );
-        $topic = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($topicUid);
+        $topic = new TestingEvent($topicUid);
 
         self::assertTrue(
             $topic->hasRequirements()
@@ -7309,7 +7310,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
             $requiredTopicUid,
             'requirements'
         );
-        $date = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $date = new TestingEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -7353,7 +7354,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
             $requiredTopicUid2,
             'requirements'
         );
-        $topic = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($topicUid);
+        $topic = new TestingEvent($topicUid);
 
         self::assertTrue(
             $topic->hasRequirements()
@@ -7369,7 +7370,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      */
     public function hasDependenciesForTopicWithoutDependenciesReturnsFalse()
     {
-        $topic = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $topic = new TestingEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -7396,7 +7397,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
                 'dependencies' => 0,
             ]
         );
-        $date = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $date = new TestingEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -7435,7 +7436,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
             $dependentTopicUid,
             $topicUid
         );
-        $topic = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($topicUid);
+        $topic = new TestingEvent($topicUid);
 
         self::assertTrue(
             $topic->hasDependencies()
@@ -7466,7 +7467,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
             $dependentTopicUid,
             $topicUid
         );
-        $date = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $date = new TestingEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -7518,7 +7519,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
             $topicUid
         );
 
-        $result = (new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($topicUid))->hasDependencies();
+        $result = (new TestingEvent($topicUid))->hasDependencies();
 
         self::assertTrue(
             $result
@@ -7567,7 +7568,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
             'requirements'
         );
 
-        $result = (new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($topicUid))->getRequirements();
+        $result = (new TestingEvent($topicUid))->getRequirements();
 
         self::assertSame(
             1,
@@ -7598,7 +7599,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
             $requiredTopicUid,
             'requirements'
         );
-        $date = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $date = new TestingEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -7650,7 +7651,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
             'requirements'
         );
 
-        $requirements = (new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($topicUid))->getRequirements();
+        $requirements = (new TestingEvent($topicUid))->getRequirements();
 
         self::assertSame(
             2,
@@ -7705,7 +7706,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
             $topicUid
         );
 
-        $result = (new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($topicUid))->getDependencies();
+        $result = (new TestingEvent($topicUid))->getDependencies();
 
         self::assertSame(
             1,
@@ -7741,7 +7742,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
             $dependentTopicUid,
             $topicUid
         );
-        $date = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $date = new TestingEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -7800,7 +7801,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
             $topicUid
         );
 
-        $dependencies = (new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($topicUid))->getDependencies();
+        $dependencies = (new TestingEvent($topicUid))->getDependencies();
 
         self::assertSame(
             2,
@@ -8709,7 +8710,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
                 'end_date' => 0,
             ]
         );
-        $subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($uid, []);
+        $subject = new TestingEvent($uid, []);
 
         self::assertSame(
             0,
@@ -8732,7 +8733,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
                 'end_date' => 0,
             ]
         );
-        $subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($uid, []);
+        $subject = new TestingEvent($uid, []);
 
         self::assertSame(
             $this->now,
@@ -8755,7 +8756,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
                 'end_date' => 0,
             ]
         );
-        $subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($uid, []);
+        $subject = new TestingEvent($uid, []);
 
         self::assertSame(
             $this->now,
@@ -8778,7 +8779,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
                 'end_date' => $this->now + 1000,
             ]
         );
-        $subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $subject = new TestingEvent(
             $uid,
             ['allowRegistrationForStartedEvents' => 1]
         );
@@ -8804,7 +8805,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
                 'end_date' => $this->now + 1000,
             ]
         );
-        $subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $subject = new TestingEvent(
             $uid,
             ['allowRegistrationForStartedEvents' => 1]
         );
@@ -8830,7 +8831,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
                 'end_date' => 0,
             ]
         );
-        $subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $subject = new TestingEvent(
             $uid,
             ['allowRegistrationForStartedEvents' => 1]
         );
@@ -9021,7 +9022,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
             ]
         );
 
-        $date = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($dateRecordUid);
+        $date = new TestingEvent($dateRecordUid);
 
         self::assertSame(
             42,
@@ -9089,7 +9090,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
             ]
         );
 
-        $date = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($dateRecordUid);
+        $date = new TestingEvent($dateRecordUid);
 
         self::assertFalse(
             $date->hasTopicInteger('credit_points')
@@ -9116,7 +9117,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
             ]
         );
 
-        $date = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($dateRecordUid);
+        $date = new TestingEvent($dateRecordUid);
 
         self::assertTrue(
             $date->hasTopicInteger('credit_points')
@@ -10340,7 +10341,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
             'tx_seminars_seminars',
             ['organizers_notified_about_minimum_reached' => 1]
         );
-        $subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($uid);
+        $subject = new TestingEvent($uid);
 
         self::assertTrue(
             $subject->haveOrganizersBeenNotifiedAboutEnoughAttendees()
@@ -10382,7 +10383,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
             'tx_seminars_seminars',
             ['mute_notification_emails' => 1]
         );
-        $subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($uid);
+        $subject = new TestingEvent($uid);
 
         self::assertTrue(
             $subject->shouldMuteNotificationEmails()
@@ -10424,7 +10425,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
             'tx_seminars_seminars',
             ['automatic_confirmation_cancelation' => 1]
         );
-        $subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($uid);
+        $subject = new TestingEvent($uid);
 
         self::assertTrue(
             $subject->shouldAutomaticallyConfirmOrCancel()
@@ -10453,7 +10454,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
             'tx_seminars_seminars',
             ['registrations' => $numberOfRegistrations]
         );
-        $subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($uid);
+        $subject = new TestingEvent($uid);
 
         self::assertSame($numberOfRegistrations, $subject->getNumberOfAssociatedRegistrationRecords());
     }
@@ -10477,7 +10478,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
             'tx_seminars_seminars',
             ['registrations' => 2]
         );
-        $subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($uid);
+        $subject = new TestingEvent($uid);
 
         $subject->increaseNumberOfAssociatedRegistrationRecords();
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\OldModel;
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingModel;
 
 /**
  * Test case.
@@ -14,7 +15,7 @@ use OliverKlee\PhpUnit\TestCase;
 class AbstractModelTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing
+     * @var TestingModel
      */
     protected $subject = null;
 
@@ -54,7 +55,7 @@ class AbstractModelTest extends TestCase
                 'title' => 'Test',
             ]
         );
-        $this->subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing($this->subjectUid);
+        $this->subject = new TestingModel($this->subjectUid);
     }
 
     protected function tearDown()
@@ -75,7 +76,7 @@ class AbstractModelTest extends TestCase
 
     public function testCreateFromUidFailsForInvalidUid()
     {
-        $test = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(
+        $test = new TestingModel(
             $this->subjectUid + 99
         );
 
@@ -86,7 +87,7 @@ class AbstractModelTest extends TestCase
 
     public function testCreateFromUidFailsForZeroUid()
     {
-        $test = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(0);
+        $test = new TestingModel(0);
 
         self::assertFalse(
             $test->isOk()
@@ -101,7 +102,7 @@ class AbstractModelTest extends TestCase
             'uid = ' . $this->subjectUid
         );
 
-        $test = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(
+        $test = new TestingModel(
             0,
             $dbResult
         );
@@ -116,7 +117,7 @@ class AbstractModelTest extends TestCase
      */
     public function createFromDirectDataResultsInOkay()
     {
-        $subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(0, false, false, ['title' => 'Foo']);
+        $subject = new TestingModel(0, false, false, ['title' => 'Foo']);
 
         self::assertTrue($subject->isOk());
     }
@@ -126,7 +127,7 @@ class AbstractModelTest extends TestCase
      */
     public function createFromDbResultFailsForFalse()
     {
-        $test = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(0, false);
+        $test = new TestingModel(0, false);
 
         self::assertFalse($test->isOk());
     }
@@ -142,7 +143,7 @@ class AbstractModelTest extends TestCase
             ['hidden' => 1]
         );
 
-        $test = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing($this->subjectUid);
+        $test = new TestingModel($this->subjectUid);
 
         self::assertFalse(
             $test->isOk()
@@ -160,7 +161,7 @@ class AbstractModelTest extends TestCase
             ['hidden' => 1]
         );
 
-        $test = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(
+        $test = new TestingModel(
             $this->subjectUid,
             false,
             true
@@ -196,7 +197,7 @@ class AbstractModelTest extends TestCase
 
     public function testHasUidIsFalseForObjectsWithoutUid()
     {
-        $virginFixture = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(0);
+        $virginFixture = new TestingModel(0);
 
         self::assertEquals(
             0,
@@ -220,7 +221,7 @@ class AbstractModelTest extends TestCase
      */
     public function dataCanBeSetDirectlyInConstructor()
     {
-        $subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(0, false, false, ['title' => 'Foo']);
+        $subject = new TestingModel(0, false, false, ['title' => 'Foo']);
 
         self::assertSame('Foo', $subject->getTitle());
     }
@@ -271,7 +272,7 @@ class AbstractModelTest extends TestCase
             $this->testingFramework->countRecords('tx_seminars_test', 'title = "' . $title . '"')
         );
 
-        $virginFixture = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(0);
+        $virginFixture = new TestingModel(0);
         $virginFixture->setTitle($title);
         $virginFixture->enableTestMode();
         $this->testingFramework->markTableAsDirty('tx_seminars_test');
@@ -325,7 +326,7 @@ class AbstractModelTest extends TestCase
 
     public function testCommitToDbWillNotWriteIncompleteRecords()
     {
-        $virginFixture = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(0);
+        $virginFixture = new TestingModel(0);
         $this->testingFramework->markTableAsDirty('tx_seminars_test');
 
         self::assertFalse(
@@ -361,7 +362,7 @@ class AbstractModelTest extends TestCase
             'createMmRecords may only be called on objects that have a UID.'
         );
 
-        $virginFixture = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(0);
+        $virginFixture = new TestingModel(0);
         $virginFixture->createMmRecords('tx_seminars_test_test_mm', []);
     }
 
@@ -467,7 +468,7 @@ class AbstractModelTest extends TestCase
         );
 
         self::assertFalse(
-            \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing::recordExists($this->subjectUid, 'tx_seminars_test')
+            TestingModel::recordExists($this->subjectUid, 'tx_seminars_test')
         );
     }
 
@@ -483,7 +484,7 @@ class AbstractModelTest extends TestCase
         );
 
         self::assertTrue(
-            \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing::recordExists($this->subjectUid, 'tx_seminars_test', true)
+            TestingModel::recordExists($this->subjectUid, 'tx_seminars_test', true)
         );
     }
 
@@ -501,9 +502,7 @@ class AbstractModelTest extends TestCase
             $this->subjectUid,
             ['pid' => 42]
         );
-        $subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(
-            $this->subjectUid
-        );
+        $subject = new TestingModel($this->subjectUid);
 
         self::assertEquals(
             42,
@@ -521,9 +520,7 @@ class AbstractModelTest extends TestCase
             $this->subjectUid,
             ['pid' => 0]
         );
-        $subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(
-            $this->subjectUid
-        );
+        $subject = new TestingModel($this->subjectUid);
 
         self::assertEquals(
             0,

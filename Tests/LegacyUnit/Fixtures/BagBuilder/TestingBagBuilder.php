@@ -2,18 +2,22 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\BagBuilder;
+
+use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\Bag\TestingBag;
+
 /**
  * This builder class creates customized test bag objects.
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_Fixtures_BagBuilder_Testing extends \Tx_Seminars_BagBuilder_Abstract
+final class TestingBagBuilder extends \Tx_Seminars_BagBuilder_Abstract
 {
     /**
      * @var string class name of the bag class that will be built
      */
-    protected $bagClassName = \Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing::class;
+    protected $bagClassName = TestingBag::class;
 
     /**
      * @var string the table name of the bag to build

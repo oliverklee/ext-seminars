@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
 use OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures\EmailSalutationHookInterface;
 use TYPO3\CMS\Core\Core\Bootstrap;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -417,7 +418,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends TestCase
 
         $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
 
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($eventUid, []);
+        $event = new TestingEvent($eventUid, []);
 
         $this->subject->createIntroduction('', $event);
     }
@@ -433,7 +434,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends TestCase
             ['begin_date' => $GLOBALS['SIM_EXEC_TIME']]
         );
 
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $event = new TestingEvent(
             $eventUid,
             [
                 'dateFormatYMD' => $dateFormatYMD,
@@ -461,7 +462,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends TestCase
             ]
         );
 
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $event = new TestingEvent(
             $eventUid,
             [
                 'dateFormatYMD' => $dateFormatYMD,
@@ -491,7 +492,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends TestCase
             ]
         );
 
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $event = new TestingEvent(
             $eventUid,
             [
                 'timeFormat' => $timeFormat,
@@ -519,7 +520,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends TestCase
             ]
         );
 
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($eventUid, ['timeFormat' => $timeFormat]);
+        $event = new TestingEvent($eventUid, ['timeFormat' => $timeFormat]);
         $translator = \Tx_Oelib_TranslatorRegistry::get('seminars');
         $timeInsert = strftime($timeFormat, $GLOBALS['SIM_EXEC_TIME']) . ' ' .
             $translator->translate('email_timeTo') . ' ' .
@@ -546,7 +547,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends TestCase
             ]
         );
 
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $event = new TestingEvent(
             $eventUid,
             ['dateFormatYMD' => $dateFormat]
         );
@@ -572,7 +573,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends TestCase
             ['begin_date' => $GLOBALS['SIM_EXEC_TIME']]
         );
 
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $event = new TestingEvent(
             $eventUid,
             ['dateFormatYMD' => $dateFormatYMD, 'salutation' => $salutation]
         );
@@ -596,7 +597,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends TestCase
             ['begin_date' => $GLOBALS['SIM_EXEC_TIME']]
         );
 
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $event = new TestingEvent(
             $eventUid,
             ['dateFormatYMD' => $dateFormatYMD, 'salutation' => $salutation]
         );
@@ -620,7 +621,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends TestCase
             ['begin_date' => $GLOBALS['SIM_EXEC_TIME']]
         );
 
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $event = new TestingEvent(
             $eventUid,
             ['dateFormatYMD' => $dateFormatYMD, 'salutation' => $salutation]
         );

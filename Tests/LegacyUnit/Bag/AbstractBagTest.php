@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Bag;
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\Bag\TestingBag;
 
 /**
  * Test case.
@@ -15,7 +16,7 @@ use OliverKlee\PhpUnit\TestCase;
 class AbstractBagTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing
+     * @var TestingBag
      */
     private $subject = null;
 
@@ -47,7 +48,7 @@ class AbstractBagTest extends TestCase
             ['title' => 'test 2']
         );
 
-        $this->subject = new \Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('is_dummy_record=1');
+        $this->subject = new TestingBag('is_dummy_record=1');
     }
 
     protected function tearDown()
@@ -61,7 +62,7 @@ class AbstractBagTest extends TestCase
 
     public function testEmptyBagHasNoUids()
     {
-        $bag = new \Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('1 = 2');
+        $bag = new TestingBag('1 = 2');
 
         self::assertEquals(
             '',
@@ -71,7 +72,7 @@ class AbstractBagTest extends TestCase
 
     public function testBagCanHaveOneUid()
     {
-        $bag = new \Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('uid = ' . $this->uidOfFirstRecord);
+        $bag = new TestingBag('uid = ' . $this->uidOfFirstRecord);
 
         self::assertEquals(
             (string)$this->uidOfFirstRecord,
@@ -106,7 +107,7 @@ class AbstractBagTest extends TestCase
 
     public function testCountForEmptyBagReturnsZero()
     {
-        $bag = new \Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('1 = 2');
+        $bag = new TestingBag('1 = 2');
 
         self::assertEquals(
             0,
@@ -116,7 +117,7 @@ class AbstractBagTest extends TestCase
 
     public function testCountForBagWithOneElementReturnsOne()
     {
-        $bag = new \Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('uid=' . $this->uidOfFirstRecord);
+        $bag = new TestingBag('uid=' . $this->uidOfFirstRecord);
 
         self::assertEquals(
             1,
@@ -145,7 +146,7 @@ class AbstractBagTest extends TestCase
 
     public function testCountForBagWithTwoMatchesElementsAndLimitOfOneReturnsOne()
     {
-        $bag = new \Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('is_dummy_record = 1', '', '', '', '1');
+        $bag = new TestingBag('is_dummy_record = 1', '', '', '', '1');
 
         self::assertEquals(
             1,
@@ -159,7 +160,7 @@ class AbstractBagTest extends TestCase
 
     public function testCountWithoutLimitForEmptyBagReturnsZero()
     {
-        $bag = new \Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('1 = 2');
+        $bag = new TestingBag('1 = 2');
 
         self::assertEquals(
             0,
@@ -169,7 +170,7 @@ class AbstractBagTest extends TestCase
 
     public function testCountWithoutLimitForBagWithOneElementReturnsOne()
     {
-        $bag = new \Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('uid = ' . $this->uidOfFirstRecord);
+        $bag = new TestingBag('uid = ' . $this->uidOfFirstRecord);
 
         self::assertEquals(
             1,
@@ -198,7 +199,7 @@ class AbstractBagTest extends TestCase
 
     public function testCountWithoutLimitForBagWithTwoMatchesElementsAndLimitOfOneReturnsTwo()
     {
-        $bag = new \Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('is_dummy_record = 1', '', '', '', '1');
+        $bag = new TestingBag('is_dummy_record = 1', '', '', '', '1');
 
         self::assertEquals(
             2,
@@ -212,7 +213,7 @@ class AbstractBagTest extends TestCase
 
     public function testIsEmptyForEmptyBagReturnsTrue()
     {
-        $bag = new \Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('1=2');
+        $bag = new TestingBag('1=2');
 
         self::assertTrue(
             $bag->isEmpty()
@@ -221,7 +222,7 @@ class AbstractBagTest extends TestCase
 
     public function testIsEmptyForBagWithOneElementReturnsFalse()
     {
-        $bag = new \Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing('uid = ' . $this->uidOfFirstRecord);
+        $bag = new TestingBag('uid = ' . $this->uidOfFirstRecord);
 
         self::assertFalse(
             $bag->isEmpty()

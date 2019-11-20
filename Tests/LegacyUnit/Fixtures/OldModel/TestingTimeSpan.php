@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel;
+
 /**
  * This is mere a class used for unit tests. Don't use it for any other purpose.
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingTimeSpan extends \Tx_Seminars_OldModel_AbstractTimeSpan
+final class TestingTimeSpan extends \Tx_Seminars_OldModel_AbstractTimeSpan
 {
     /**
      * @var string
