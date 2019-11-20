@@ -302,7 +302,7 @@ abstract class AbstractEventMailForm
      *
      * @throws \InvalidArgumentException
      */
-    protected function getErrorMessage($fieldName)
+    protected function getErrorMessage(string $fieldName): string
     {
         if ($fieldName === '') {
             throw new \InvalidArgumentException('$fieldName must not be empty.', 1333292174);
@@ -520,7 +520,7 @@ abstract class AbstractEventMailForm
      *
      * @throws \InvalidArgumentException
      */
-    protected function getInitialValue($fieldName)
+    protected function getInitialValue(string $fieldName): string
     {
         switch ($fieldName) {
             case 'subject':
@@ -580,9 +580,8 @@ abstract class AbstractEventMailForm
         );
         $introduction = sprintf($this->getLanguageService()->getLL($prefix . 'introduction'), $eventDetails);
 
-        return '%salutation' . LF . LF . $introduction . LF . $this->getLanguageService()->getLL(
-            $prefix . 'messageBody'
-        );
+        return '%salutation' . LF . LF . $introduction . LF
+            . $this->getLanguageService()->getLL($prefix . 'messageBody');
     }
 
     /**
@@ -596,8 +595,10 @@ abstract class AbstractEventMailForm
      *                name, will be empty if no message has been set in the POST
      *                data
      */
-    private function createMessageBody(\Tx_Seminars_Model_FrontEndUser $user, \Tx_Seminars_Model_Organizer $organizer): string
-    {
+    private function createMessageBody(
+        \Tx_Seminars_Model_FrontEndUser $user,
+        \Tx_Seminars_Model_Organizer $organizer
+    ): string {
         /** @var \Tx_Seminars_EmailSalutation $salutation */
         $salutation = GeneralUtility::makeInstance(\Tx_Seminars_EmailSalutation::class);
         $messageText = str_replace(
@@ -631,7 +632,7 @@ abstract class AbstractEventMailForm
      *
      * @return void
      */
-    protected function setErrorMessage($fieldName, $message)
+    protected function setErrorMessage(string $fieldName, string $message)
     {
         if ($this->hasErrorMessage($fieldName)) {
             $this->errorMessages[$fieldName] .= '<br />' . $message;
