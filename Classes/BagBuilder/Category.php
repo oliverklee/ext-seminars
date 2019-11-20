@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Seminars\BagBuilder\AbstractBagBuilder;
+
 /**
  * This builder class creates customized category bag objects.
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_BagBuilder_Category extends \Tx_Seminars_BagBuilder_Abstract
+class Tx_Seminars_BagBuilder_Category extends AbstractBagBuilder
 {
     /**
      * @var string class name of the bag class that will be built
