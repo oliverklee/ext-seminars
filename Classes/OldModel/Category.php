@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Seminars\OldModel\AbstractModel;
+
 /**
  * This class represents an event category.
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_OldModel_Category extends \Tx_Seminars_OldModel_Abstract
+class Tx_Seminars_OldModel_Category extends AbstractModel
 {
     /**
      * @var string the name of the SQL table this class corresponds to

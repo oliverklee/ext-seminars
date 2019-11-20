@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Seminars\OldModel\AbstractModel;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
@@ -444,7 +445,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
             unset($this->seminar);
         }
 
-        if (\Tx_Seminars_OldModel_Abstract::recordExists($seminarUid, 'tx_seminars_seminars', $showHiddenRecords)) {
+        if (AbstractModel::recordExists($seminarUid, 'tx_seminars_seminars', $showHiddenRecords)) {
             /** @var \Tx_Seminars_OldModel_Event $event */
             $event = GeneralUtility::makeInstance(
                 \Tx_Seminars_OldModel_Event::class,
@@ -489,7 +490,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
     {
         $result = false;
 
-        if (\Tx_Seminars_OldModel_Abstract::recordExists($registrationUid, 'tx_seminars_attendances')) {
+        if (AbstractModel::recordExists($registrationUid, 'tx_seminars_attendances')) {
             $dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
                 '*',
                 'tx_seminars_attendances',

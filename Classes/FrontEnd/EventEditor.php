@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Seminars\OldModel\AbstractModel;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
@@ -677,13 +678,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         }
 
         $objectUid = $this->getObjectUid();
-        if (
-            $objectUid > 0 && !Tx_Seminars_OldModel_Abstract::recordExists(
-                $objectUid,
-                'tx_seminars_seminars',
-                true
-            )
-        ) {
+        if ($objectUid > 0 && !AbstractModel::recordExists($objectUid, 'tx_seminars_seminars', true)) {
             return 'message_wrongSeminarNumber';
         }
 
