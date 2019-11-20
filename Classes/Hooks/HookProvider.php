@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Hooks;
@@ -101,7 +102,7 @@ class HookProvider
             );
         }
 
-        foreach($this->getHooks() as $hook) {
+        foreach ($this->getHooks() as $hook) {
             $hook->$method(...$params);
         }
     }
