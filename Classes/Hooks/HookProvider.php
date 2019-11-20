@@ -9,7 +9,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * This class provides functions for unified hooks.
  *
- * A hook allows to add functionality at certain points of the program path. These points are
+ * A hook allows adding functionality at certain points of the program path. These points are
  * grouped using an interface, declaring the methods to implement to hook in.
  *
  * Hooking in
