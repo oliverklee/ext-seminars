@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\BagBuilder;
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Bag\AbstractBag;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\BagBuilder\BrokenBagBuilder;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\BagBuilder\TestingBagBuilder;
 
@@ -74,7 +75,7 @@ class AbstractBagBuilderTest extends TestCase
     {
         $bag = $this->subject->build();
 
-        self::assertInstanceOf(\Tx_Seminars_Bag_Abstract::class, $bag);
+        self::assertInstanceOf(AbstractBag::class, $bag);
     }
 
     public function testBuilderBuildsBagSortedAscendingByUid()

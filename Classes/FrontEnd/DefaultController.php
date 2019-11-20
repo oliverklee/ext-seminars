@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Seminars\Bag\AbstractBag;
 use OliverKlee\Seminars\OldModel\AbstractModel;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
@@ -1757,11 +1758,11 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *        the flavor of list view: either an empty string (for the default
      *        list view), the value from "what_to_display", or "other_dates"
      *
-     * @return \Tx_Seminars_Bag_Abstract a seminar bag or a registration bag
+     * @return AbstractBag a seminar bag or a registration bag
      *                                  containing the seminars or registrations
      *                                  for the list view
      */
-    public function initListView($whatToDisplay = ''): \Tx_Seminars_Bag_Abstract
+    public function initListView($whatToDisplay = ''): AbstractBag
     {
         if (\strpos((string)$this->cObj->currentRecord, 'tt_content') !== false) {
             $this->conf['pidList'] = $this->getConfValueString('pages');
@@ -1875,7 +1876,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      * This function should only be called when there are actually any list
      * items.
      *
-     * @param \Tx_Seminars_Bag_Abstract $seminarOrRegistrationBag
+     * @param AbstractBag $seminarOrRegistrationBag
      *        initialized seminar or registration bag
      * @param string $whatToDisplay
      *        a string selecting the flavor of list view: either an empty string (for the default list view),
@@ -1884,7 +1885,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      * @return string HTML for the table (will not be empty)
      */
     protected function createListTable(
-        \Tx_Seminars_Bag_Abstract $seminarOrRegistrationBag,
+        AbstractBag $seminarOrRegistrationBag,
         $whatToDisplay
     ): string {
         $result = $this->createListHeader();

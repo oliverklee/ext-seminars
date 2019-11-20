@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Seminars\Bag\AbstractBag;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -9,7 +10,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Bag_Speaker extends \Tx_Seminars_Bag_Abstract
+class Tx_Seminars_Bag_Speaker extends AbstractBag
 {
     /**
      * The constructor. Creates a bag that contains test records and allows to iterate over them.

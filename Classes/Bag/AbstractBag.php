@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Bag;
+
 use OliverKlee\Seminars\OldModel\AbstractModel;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -12,7 +14,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-abstract class Tx_Seminars_Bag_Abstract implements Iterator, \Tx_Oelib_Interface_ConfigurationCheckable
+abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_ConfigurationCheckable
 {
     /**
      * @var string the name of the main DB table from which we get the records

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\Bag;
 
+use OliverKlee\Seminars\Bag\AbstractBag;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingModel;
 
 /**
@@ -11,7 +12,7 @@ use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingModel;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-final class TestingBag extends \Tx_Seminars_Bag_Abstract
+final class TestingBag extends AbstractBag
 {
     /**
      * The constructor. Creates a bag that contains test records and allows to iterate over them.

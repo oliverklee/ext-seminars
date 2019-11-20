@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Seminars\Bag\AbstractBag;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
@@ -10,7 +11,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Bag_Registration extends \Tx_Seminars_Bag_Abstract
+class Tx_Seminars_Bag_Registration extends AbstractBag
 {
     /**
      * @var ContentObjectRenderer
