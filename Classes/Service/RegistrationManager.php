@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\Seminars\Hooks\RegistrationEmailHookInterface;
+use OliverKlee\Seminars\OldModel\AbstractModel;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
@@ -355,7 +356,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      */
     public function existsSeminar($uid): bool
     {
-        return \Tx_Seminars_OldModel_Abstract::recordExists($uid, 'tx_seminars_seminars');
+        return AbstractModel::recordExists($uid, 'tx_seminars_seminars');
     }
 
     /**
@@ -375,7 +376,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
             \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
             return $this->translate('message_missingSeminarNumber');
         }
-        if (!Tx_Seminars_OldModel_Abstract::recordExists($uid, 'tx_seminars_seminars')) {
+        if (!AbstractModel::recordExists($uid, 'tx_seminars_seminars')) {
             \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
             return $this->translate('message_wrongSeminarNumber');
         }
@@ -657,7 +658,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      */
     public function removeRegistration($uid, \Tx_Oelib_TemplateHelper $plugin)
     {
-        if (!Tx_Seminars_OldModel_Abstract::recordExists($uid, 'tx_seminars_attendances')) {
+        if (!AbstractModel::recordExists($uid, 'tx_seminars_attendances')) {
             return;
         }
         $this->registration = GeneralUtility::makeInstance(

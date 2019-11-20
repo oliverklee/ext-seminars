@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Seminars\OldModel\AbstractModel;
 use TYPO3\CMS\Core\Charset\CharsetConverter;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -154,7 +155,7 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
      */
     public function createListOfRegistrations($eventUid): string
     {
-        if (!Tx_Seminars_OldModel_Abstract::recordExists($eventUid, 'tx_seminars_seminars', true)) {
+        if (!AbstractModel::recordExists($eventUid, 'tx_seminars_seminars', true)) {
             return '';
         }
 
@@ -400,7 +401,7 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
     {
         $result = false;
 
-        if (!Tx_Seminars_OldModel_Abstract::recordExists($eventUid, 'tx_seminars_seminars', true)) {
+        if (!AbstractModel::recordExists($eventUid, 'tx_seminars_seminars', true)) {
             $this->errorType = self::NOT_FOUND;
         } elseif ($this->canAccessListOfRegistrations($eventUid)) {
             $result = true;

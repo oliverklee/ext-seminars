@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel;
 
+use OliverKlee\Seminars\OldModel\AbstractModel;
+
 /**
  * This class represents a test object from the database.
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-final class TestingModel extends \Tx_Seminars_OldModel_Abstract
+final class TestingModel extends AbstractModel
 {
     /**
      * @var string the name of the SQL table this class corresponds to

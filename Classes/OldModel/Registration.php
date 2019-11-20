@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Seminars\OldModel\AbstractModel;
 use TYPO3\CMS\Core\Database\ReferenceIndex;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -10,12 +11,10 @@ use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 /**
  * This class represents a registration/attendance.
  *
- * It will hold the corresponding data and can commit that data to the DB.
- *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_OldModel_Registration extends \Tx_Seminars_OldModel_Abstract
+class Tx_Seminars_OldModel_Registration extends AbstractModel
 {
     /**
      * @var string the name of the SQL table this class corresponds to
@@ -297,7 +296,7 @@ class Tx_Seminars_OldModel_Registration extends \Tx_Seminars_OldModel_Abstract
      *
      * The attendee's user data (from fe_users) will be written to $this->userData.
      *
-     * $this->userData will be NULL if retrieving the user data fails.
+     * $this->userData will be null if retrieving the user data fails.
      *
      * @return void
      *

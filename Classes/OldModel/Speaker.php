@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Seminars\OldModel\AbstractModel;
 use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Resource\FileRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -12,7 +13,7 @@ use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_OldModel_Speaker extends \Tx_Seminars_OldModel_Abstract
+class Tx_Seminars_OldModel_Speaker extends AbstractModel
 {
     /** @var int the gender type for speakers without gender */
     const GENDER_UNKNOWN = 0;

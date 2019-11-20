@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Seminars\OldModel\AbstractModel;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -72,9 +73,7 @@ abstract class Tx_Seminars_Bag_Abstract implements Iterator, \Tx_Oelib_Interface
     protected $dbResult = false;
 
     /**
-     * the current object (may be NULL)
-     *
-     * @var \Tx_Seminars_OldModel_Abstract
+     * @var AbstractModel|null
      */
     protected $currentItem = null;
 
@@ -217,8 +216,7 @@ abstract class Tx_Seminars_Bag_Abstract implements Iterator, \Tx_Oelib_Interface
     /**
      * Advances to the next record and returns a reference to that object.
      *
-     * @return \Tx_Seminars_OldModel_Abstract the now current object, will be
-     *                                       NULL if there is no next object
+     * @return AbstractModel|null
      */
     public function next()
     {
@@ -247,9 +245,7 @@ abstract class Tx_Seminars_Bag_Abstract implements Iterator, \Tx_Oelib_Interface
     /**
      * Returns the current object (which may be NULL).
      *
-     * @return \Tx_Seminars_OldModel_Abstract a reference to the current object,
-     *                                       will be NULL if there is no current
-     *                                       object
+     * @return AbstractModel|null
      */
     public function current()
     {
@@ -262,7 +258,7 @@ abstract class Tx_Seminars_Bag_Abstract implements Iterator, \Tx_Oelib_Interface
      *
      * If the function isOk() returns TRUE, nothing is changed.
      *
-     * @return bool TRUE if the current item is valid, FALSE otherwise
+     * @return bool whether the current item is valid
      */
     public function valid(): bool
     {
@@ -370,7 +366,7 @@ abstract class Tx_Seminars_Bag_Abstract implements Iterator, \Tx_Oelib_Interface
     {
         $uids = [];
 
-        /** @var \Tx_Seminars_OldModel_Abstract $currentItem */
+        /** @var AbstractModel $currentItem */
         foreach ($this as $currentItem) {
             $uids[] = $currentItem->getUid();
         }
