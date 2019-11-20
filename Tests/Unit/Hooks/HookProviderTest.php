@@ -11,6 +11,7 @@ use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookInterface;
 use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookInterfaceNotExtendsHook;
 use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookImplementor;
 use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookImplementor2;
+use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookImplementorNotImplementsInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -279,6 +280,21 @@ class HookProviderTest extends UnitTestCase
 
         self::assertSame(1, TestingHookImplementor::$wasCalled);
         self::assertSame(1, TestingHookImplementor2::$wasCalled);
+    }
+
+    /**
+     * @test
+     */
+    public function hookObjectForTestHookWithInvalidHookImplementorRegisteredFailsForValidMethod()
+    {
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestingHookInterface::class][1565007112] =
+            TestingHookImplementorNotImplementsInterface::class;
+        $hookObject = $this->createHookObject();
+
+        $this->expectException(\UnexpectedValueException::class);
+        $this->expectExceptionCode(1573480302);
+
+        $hookObject->executeHook('testHookMethod');
     }
 
     /**

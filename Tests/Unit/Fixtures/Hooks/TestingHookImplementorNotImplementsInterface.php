@@ -14,7 +14,7 @@ use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookInterfaceNotExtends
  *
  * @author Michael Kramer <m.kramer@mxp.de>
  */
-class TestingHookImplementor implements TestingHookInterfaceNotExtendsHook
+class TestingHookImplementorNotImplementsInterface implements TestingHookInterfaceNotExtendsHook
 {
     /**
      * @return void
