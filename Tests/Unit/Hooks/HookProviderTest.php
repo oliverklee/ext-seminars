@@ -8,6 +8,7 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\Hook;
 use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookInterface;
+use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookInterfaceNotExtendsHook;
 use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookImplementor;
 use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookImplementor2;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -178,9 +179,42 @@ class HookProviderTest extends UnitTestCase
 
     /**
      * @test
+     */
+    public function hookObjectForNoInterfaceCannotBeCreated()
+    {
+        $this->expectException(\UnexpectedValueException::class);
+        $this->expectExceptionCode(1565089078);
+
+        $subject = new HookProvider('');
+    }
+
+    /**
+     * @test
+     */
+    public function hookObjectForNonexistantInterfaceCannotBeCreated()
+    {
+        $this->expectException(\UnexpectedValueException::class);
+        $this->expectExceptionCode(1565089078);
+
+        $subject = new HookProvider('\OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookInterfaceDoesNotExist');
+    }
+
+    /**
+     * @test
+     */
+    public function hookObjectForInvalidInterfaceCannotBeCreated()
+    {
+        $this->expectException(\UnexpectedValueException::class);
+        $this->expectExceptionCode(1565088963);
+
+        $subject = new HookProvider(TestingHookInterfaceNotExtendsHook::class);
+    }
+
+    /**
+     * @test
      * @doesNotPerformAssertions
      */
-    public function hookObjectForTestHookWithNoHookImplemetorRegisteredSucceedsForValidMethod()
+    public function hookObjectForTestHookWithNoHookImplementorRegisteredSucceedsForValidMethod()
     {
         unset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestingHookInterface::class]);
         $hookObject = $this->createHookObject();
@@ -191,7 +225,7 @@ class HookProviderTest extends UnitTestCase
     /**
      * @test
      */
-    public function hookObjectForTestHookWithNoHookImplemetorRegisteredFailsForEmptyMethod()
+    public function hookObjectForTestHookWithNoHookImplementorRegisteredFailsForEmptyMethod()
     {
         unset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestingHookInterface::class]);
         $hookObject = $this->createHookObject();
@@ -205,7 +239,7 @@ class HookProviderTest extends UnitTestCase
     /**
      * @test
      */
-    public function hookObjectForTestHookWithNoHookImplemetorRegisteredFailsForUnknownMethod()
+    public function hookObjectForTestHookWithNoHookImplementorRegisteredFailsForUnknownMethod()
     {
         unset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestingHookInterface::class]);
         $hookObject = $this->createHookObject();
@@ -219,7 +253,7 @@ class HookProviderTest extends UnitTestCase
     /**
      * @test
      */
-    public function hookObjectForTestHookWithOneHookImplemetorRegisteredSucceedsWithMethodCalledOnce()
+    public function hookObjectForTestHookWithOneHookImplementorRegisteredSucceedsWithMethodCalledOnce()
     {
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestingHookInterface::class][1565007112] =
             TestingHookImplementor::class;
@@ -233,7 +267,7 @@ class HookProviderTest extends UnitTestCase
     /**
      * @test
      */
-    public function hookObjectForTestHookWithTwoHookImplemetorsRegisteredResultsInTwoHooksInHookList()
+    public function hookObjectForTestHookWithTwoHookImplementorsRegisteredResultsInTwoHooksInHookList()
     {
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestingHookInterface::class][1565007112] =
             TestingHookImplementor::class;
@@ -245,5 +279,13 @@ class HookProviderTest extends UnitTestCase
 
         self::assertSame(1, TestingHookImplementor::$wasCalled);
         self::assertSame(1, TestingHookImplementor2::$wasCalled);
+    }
+
+    /**
+     * @test
+     */
+    public function hookObjectForTestHookCanBeCreatedWithDifferentIndexName()
+    {
+        self::assertInstanceOf(HookProvider::class, new HookProvider(TestingHookInterface::class, 'anyIndex'));
     }
 }
