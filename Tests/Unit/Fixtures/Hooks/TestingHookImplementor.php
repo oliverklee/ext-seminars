@@ -16,7 +16,7 @@ use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookInterface;
 class TestingHookImplementor implements TestingHookInterface
 {
     /**
-     * @var bool
+     * @var int
      */
     public static $wasCalled = 0;
 

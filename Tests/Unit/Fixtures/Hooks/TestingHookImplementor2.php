@@ -15,4 +15,8 @@ use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookImplementor;
  */
 class TestingHookImplementor2 extends TestingHookImplementor
 {
+    /**
+     * @var int
+     */
+    public static $wasCalled = 0;
 }

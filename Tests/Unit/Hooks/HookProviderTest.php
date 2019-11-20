@@ -292,7 +292,7 @@ class HookProviderTest extends UnitTestCase
         $hookObject = $this->createHookObject();
 
         $this->expectException(\UnexpectedValueException::class);
-        $this->expectExceptionCode(1573480302);
+        $this->expectExceptionCode(1448901897);
 
         $hookObject->executeHook('testHookMethod');
     }
