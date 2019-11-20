@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Tests\LegacyUnit\BagBuilder;
+
 use OliverKlee\PhpUnit\TestCase;
 
 /**
@@ -10,7 +12,7 @@ use OliverKlee\PhpUnit\TestCase;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_BagBuilder_AbstractTest extends TestCase
+class AbstractBagBuilderTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Tests_Unit_Fixtures_BagBuilder_Testing
