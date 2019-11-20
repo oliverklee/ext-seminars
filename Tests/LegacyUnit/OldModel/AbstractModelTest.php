@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\OldModel;
 
 use OliverKlee\PhpUnit\TestCase;
-use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingModel;
+use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingModel;
+use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingModelWithConfiguration;
 
 /**
  * Test case.
@@ -253,11 +254,14 @@ class AbstractModelTest extends TestCase
         );
     }
 
-    public function testTypoScriptConfigurationIsLoaded()
+    /**
+     * @test
+     */
+    public function typoScriptConfigurationIsLoaded()
     {
-        self::assertTrue(
-            $this->subject->getConfValueBoolean('isStaticTemplateLoaded')
-        );
+        $subject = new TestingModelWithConfiguration($this->subjectUid);
+
+        self::assertTrue($subject->getConfValueBoolean('isStaticTemplateLoaded'));
     }
 
     ///////////////////////////////////

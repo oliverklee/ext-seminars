@@ -33,6 +33,16 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper implements \Tx_Oel
     protected $tableName = '';
 
     /**
+     * @var bool whether to call `TemplateHelper::init()` during construction
+     */
+    protected $needsTemplateHelperInitialization = true;
+
+    /**
+     * @var bool whether to call `TemplateHelper::init()` during construction in BE mode
+     */
+    protected $includeLanguageFile = true;
+
+    /**
      * @var array the values from/for the DB
      */
     protected $recordData = [];
@@ -53,19 +63,27 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper implements \Tx_Oel
      *        whether it is possible to create an object from a hidden record
      * @param array $recordData
      */
-    public function __construct(int $uid, $dbResult = false, bool $allowHiddenRecords = false, array $recordData = [])
-    {
-        // In the back end, include the extension's locallang.xlf.
-        if (TYPO3_MODE === 'BE' && $this->getLanguageService() !== null) {
+    public function __construct(
+        int $uid = 0,
+        $dbResult = false,
+        bool $allowHiddenRecords = false,
+        array $recordData = []
+    ) {
+        if ($this->includeLanguageFile && TYPO3_MODE === 'BE' && $this->getLanguageService() !== null) {
             $this->getLanguageService()->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
         }
 
-        if (empty($recordData) && ($uid > 0 || $dbResult !== false)) {
-            $this->retrieveDataFromDatabase($uid, $dbResult, $allowHiddenRecords);
+        if ($dbResult !== false) {
+            $this->retrieveDataFromDatabase(0, $dbResult);
+        } elseif ($uid > 0) {
+            $this->retrieveDataFromDatabase($uid, false, $allowHiddenRecords);
         } else {
             $this->setData($recordData);
         }
-        $this->init();
+
+        if ($this->needsTemplateHelperInitialization) {
+            $this->init();
+        }
     }
 
     /**
