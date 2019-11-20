@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Seminars\Bag\AbstractBag;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -71,11 +72,11 @@ abstract class Tx_Seminars_BagBuilder_Abstract
     /**
      * Creates and returns the customized bag.
      *
-     * @return \Tx_Seminars_Bag_Abstract customized, newly-created bag
+     * @return AbstractBag customized, newly-created bag
      */
-    public function build(): \Tx_Seminars_Bag_Abstract
+    public function build(): AbstractBag
     {
-        /** @var \Tx_Seminars_Bag_Abstract $bag */
+        /** @var AbstractBag $bag */
         $bag = GeneralUtility::makeInstance(
             $this->bagClassName,
             $this->getWhereClause(),

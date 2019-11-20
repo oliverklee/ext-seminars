@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Bag\AbstractBag;
 
 /**
  * Test case.
@@ -59,7 +60,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends TestCase
     {
         $bag = $this->subject->build();
 
-        self::assertInstanceOf(\Tx_Seminars_Bag_Abstract::class, $bag);
+        self::assertInstanceOf(AbstractBag::class, $bag);
     }
 
     /**
