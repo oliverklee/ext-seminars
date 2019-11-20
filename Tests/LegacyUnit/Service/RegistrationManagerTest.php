@@ -7,6 +7,7 @@ use OliverKlee\Seminars\Hooks\RegistrationEmailHookInterface;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingRegistration;
 use OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures\RegistrationHookInterface;
+use OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures\TestingRegistrationManager;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -20,7 +21,7 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_Service_RegistrationManager
+     * @var TestingRegistrationManager
      */
     protected $subject = null;
 
@@ -112,7 +113,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
 
         TestingRegistration::purgeCachedSeminars();
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
-            ->setAsInteger('eMailFormatForAttendees', \Tx_Seminars_Service_RegistrationManager::SEND_TEXT_MAIL);
+            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_TEXT_MAIL);
         $configurationRegistry = \Tx_Oelib_ConfigurationRegistry::getInstance();
         $configurationRegistry->set('plugin.tx_seminars', new \Tx_Oelib_Configuration());
         $configurationRegistry->set('plugin.tx_seminars._LOCAL_LANG.default', new \Tx_Oelib_Configuration());
@@ -152,7 +153,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->headerCollector = $headerProxyFactory->getHeaderProxy();
 
         $this->seminar = new TestingEvent($this->seminarUid);
-        $this->subject = \Tx_Seminars_Service_RegistrationManager::getInstance();
+        $this->subject = TestingRegistrationManager::getInstance();
 
         $this->linkBuilder = $this->createPartialMock(
             \Tx_Seminars_Service_SingleViewLinkBuilder::class,
@@ -170,7 +171,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
     {
         $this->testingFramework->cleanUp();
 
-        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
+        TestingRegistrationManager::purgeInstance();
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
     }
@@ -272,32 +273,6 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         );
 
         return new TestingRegistration($registrationUid);
-    }
-
-    /**
-     * Creates a subclass of the fixture class that makes protected methods
-     * public where necessary.
-     *
-     * @return string the class name of the subclass, will not be empty
-     */
-    private function createAccessibleProxyClass(): string
-    {
-        $testingClassName = \Tx_Seminars_Service_RegistrationManager::class . uniqid('', false);
-
-        if (!class_exists($testingClassName, false)) {
-            eval(
-                'class ' . $testingClassName .
-                ' extends \\Tx_Seminars_Service_RegistrationManager {' .
-                'public function setRegistrationData(' .
-                '  \\Tx_Seminars_Model_Registration $registration, array $formData' .
-                ') {' .
-                '  parent::setRegistrationData($registration, $formData);' .
-                '}' .
-                '}'
-            );
-        }
-
-        return $testingClassName;
     }
 
     /**
@@ -414,20 +389,6 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function createAccessibleProxyClassCreatesFixtureSubclass()
-    {
-        $className = $this->createAccessibleProxyClass();
-        $instance = new $className();
-
-        self::assertInstanceOf(
-            \Tx_Seminars_Service_RegistrationManager::class,
-            $instance
-        );
-    }
-
     /*
      * Tests regarding the Singleton property.
      */
@@ -439,7 +400,18 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
     {
         self::assertInstanceOf(
             \Tx_Seminars_Service_RegistrationManager::class,
-            \Tx_Seminars_Service_RegistrationManager::getInstance()
+            TestingRegistrationManager::getInstance()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getInstanceReturnsTestingRegistrationManagerInstance()
+    {
+        self::assertInstanceOf(
+            TestingRegistrationManager::class,
+            TestingRegistrationManager::getInstance()
         );
     }
 
@@ -449,8 +421,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
     public function getInstanceTwoTimesReturnsSameInstance()
     {
         self::assertSame(
-            \Tx_Seminars_Service_RegistrationManager::getInstance(),
-            \Tx_Seminars_Service_RegistrationManager::getInstance()
+            TestingRegistrationManager::getInstance(),
+            TestingRegistrationManager::getInstance()
         );
     }
 
@@ -459,12 +431,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function getInstanceAfterPurgeInstanceReturnsNewInstance()
     {
-        $firstInstance = \Tx_Seminars_Service_RegistrationManager::getInstance();
-        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
+        $firstInstance = TestingRegistrationManager::getInstance();
+        TestingRegistrationManager::purgeInstance();
 
         self::assertNotSame(
             $firstInstance,
-            \Tx_Seminars_Service_RegistrationManager::getInstance()
+            TestingRegistrationManager::getInstance()
         );
     }
 
@@ -2250,7 +2222,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
     public function notifyAttendeeForSendConfirmationTrueAndPlainTextEmailCallsModifyAttendeeEmailTextHookOnce()
     {
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
-            ->setAsInteger('eMailFormatForAttendees', \Tx_Seminars_Service_RegistrationManager::SEND_TEXT_MAIL);
+            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_TEXT_MAIL);
 
         $registration = $this->createRegistration();
 
@@ -2275,7 +2247,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
     public function notifyAttendeeForSendConfirmationTrueAndHtmlEmailCallsModifyAttendeeEmailTextHookTwice()
     {
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
-            ->setAsInteger('eMailFormatForAttendees', \Tx_Seminars_Service_RegistrationManager::SEND_HTML_MAIL);
+            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
 
         $registration = $this->createRegistration();
 
@@ -2300,7 +2272,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
     public function notifyAttendeeForSendConfirmationTrueAndPlainTextEmailCallsPostProcessAttendeeEmailTextHookOnce()
     {
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
-            ->setAsInteger('eMailFormatForAttendees', \Tx_Seminars_Service_RegistrationManager::SEND_TEXT_MAIL);
+            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_TEXT_MAIL);
 
         $registration = $this->createRegistration();
 
@@ -2325,7 +2297,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
     public function notifyAttendeeForSendConfirmationTrueAndHtmlEmailCallsPostProcessAttendeeEmailTextHookTwice()
     {
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
-            ->setAsInteger('eMailFormatForAttendees', \Tx_Seminars_Service_RegistrationManager::SEND_HTML_MAIL);
+            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
 
         $registration = $this->createRegistration();
 
@@ -2496,7 +2468,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
             ->setAsInteger(
                 'eMailFormatForAttendees',
-                \Tx_Seminars_Service_RegistrationManager::SEND_HTML_MAIL
+                TestingRegistrationManager::SEND_HTML_MAIL
             );
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
@@ -2555,7 +2527,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
             ->setAsInteger(
                 'eMailFormatForAttendees',
-                \Tx_Seminars_Service_RegistrationManager::SEND_HTML_MAIL
+                TestingRegistrationManager::SEND_HTML_MAIL
             );
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
@@ -2578,7 +2550,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
             ->setAsInteger(
                 'eMailFormatForAttendees',
-                \Tx_Seminars_Service_RegistrationManager::SEND_USER_MAIL
+                TestingRegistrationManager::SEND_USER_MAIL
             );
         $registration = $this->createRegistration();
         $registration->getFrontEndUser()->setData(
@@ -2607,7 +2579,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
             ->setAsInteger(
                 'eMailFormatForAttendees',
-                \Tx_Seminars_Service_RegistrationManager::SEND_USER_MAIL
+                TestingRegistrationManager::SEND_USER_MAIL
             );
         $registration = $this->createRegistration();
         $registration->getFrontEndUser()->setData(
@@ -2636,7 +2608,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
             ->setAsInteger(
                 'eMailFormatForAttendees',
-                \Tx_Seminars_Service_RegistrationManager::SEND_HTML_MAIL
+                TestingRegistrationManager::SEND_HTML_MAIL
             );
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
@@ -2664,7 +2636,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
             ->setAsInteger(
                 'eMailFormatForAttendees',
-                \Tx_Seminars_Service_RegistrationManager::SEND_HTML_MAIL
+                TestingRegistrationManager::SEND_HTML_MAIL
             );
         $registration = $this->createRegistration();
         $registration->getFrontEndUser()->setData(
@@ -2801,7 +2773,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
             ->setAsInteger(
                 'eMailFormatForAttendees',
-                \Tx_Seminars_Service_RegistrationManager::SEND_HTML_MAIL
+                TestingRegistrationManager::SEND_HTML_MAIL
             );
         $this->subject->setConfigurationValue(
             'cssFileForAttendeeMail',
@@ -2867,7 +2839,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
             ->setAsInteger(
                 'eMailFormatForAttendees',
-                \Tx_Seminars_Service_RegistrationManager::SEND_HTML_MAIL
+                TestingRegistrationManager::SEND_HTML_MAIL
             );
         $this->subject->setConfigurationValue(
             'cssFileForAttendeeMail',
@@ -3001,7 +2973,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
             ->setAsInteger(
                 'eMailFormatForAttendees',
-                \Tx_Seminars_Service_RegistrationManager::SEND_HTML_MAIL
+                TestingRegistrationManager::SEND_HTML_MAIL
             );
         $this->subject->setConfigurationValue(
             'cssFileForAttendeeMail',
@@ -3214,7 +3186,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
             ->setAsInteger(
                 'eMailFormatForAttendees',
-                \Tx_Seminars_Service_RegistrationManager::SEND_HTML_MAIL
+                TestingRegistrationManager::SEND_HTML_MAIL
             );
         $this->subject->setConfigurationValue(
             'cssFileForAttendeeMail',
@@ -3253,7 +3225,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
             ->setAsInteger(
                 'eMailFormatForAttendees',
-                \Tx_Seminars_Service_RegistrationManager::SEND_HTML_MAIL
+                TestingRegistrationManager::SEND_HTML_MAIL
             );
         $this->subject->setConfigurationValue(
             'cssFileForAttendeeMail',
@@ -3413,7 +3385,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
             ->setAsInteger(
                 'eMailFormatForAttendees',
-                \Tx_Seminars_Service_RegistrationManager::SEND_HTML_MAIL
+                TestingRegistrationManager::SEND_HTML_MAIL
             );
         $this->subject->setConfigurationValue(
             'cssFileForAttendeeMail',
@@ -4699,8 +4671,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForUnregistrationMailDoesNotAppendUnregistrationNotice()
     {
-        /** @var \Tx_Seminars_Service_RegistrationManager|MockObject $subject */
-        $subject = $this->getMockBuilder(\Tx_Seminars_Service_RegistrationManager::class)
+        /** @var TestingRegistrationManager|MockObject $subject */
+        $subject = $this->getMockBuilder(TestingRegistrationManager::class)
             ->setMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::never())->method('getUnregistrationNotice');
 
@@ -4733,8 +4705,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
             false
         );
 
-        /** @var \Tx_Seminars_Service_RegistrationManager|MockObject $subject */
-        $subject = $this->getMockBuilder(\Tx_Seminars_Service_RegistrationManager::class)
+        /** @var TestingRegistrationManager|MockObject $subject */
+        $subject = $this->getMockBuilder(TestingRegistrationManager::class)
             ->setMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::never())->method('getUnregistrationNotice');
         $subject->setConfigurationValue('sendConfirmation', true);
@@ -4764,8 +4736,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
             true
         );
 
-        /** @var \Tx_Seminars_Service_RegistrationManager|MockObject $subject */
-        $subject = $this->getMockBuilder(\Tx_Seminars_Service_RegistrationManager::class)
+        /** @var TestingRegistrationManager|MockObject $subject */
+        $subject = $this->getMockBuilder(TestingRegistrationManager::class)
             ->setMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::once())->method('getUnregistrationNotice');
         $subject->setConfigurationValue('sendConfirmation', true);
@@ -4795,8 +4767,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForRegistrationOnQueueMailAndUnregistrationPossibleAddsUnregistrationNotice()
     {
-        /** @var \Tx_Seminars_Service_RegistrationManager|MockObject $subject */
-        $subject = $this->getMockBuilder(\Tx_Seminars_Service_RegistrationManager::class)
+        /** @var TestingRegistrationManager|MockObject $subject */
+        $subject = $this->getMockBuilder(TestingRegistrationManager::class)
             ->setMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::once())->method('getUnregistrationNotice');
 
@@ -4835,8 +4807,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForQueueUpdateMailAndUnregistrationPossibleAddsUnregistrationNotice()
     {
-        /** @var \Tx_Seminars_Service_RegistrationManager|MockObject $subject */
-        $subject = $this->getMockBuilder(\Tx_Seminars_Service_RegistrationManager::class)
+        /** @var TestingRegistrationManager|MockObject $subject */
+        $subject = $this->getMockBuilder(TestingRegistrationManager::class)
             ->setMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::once())->method('getUnregistrationNotice');
 
@@ -5302,8 +5274,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         );
 
         unset($this->subject);
-        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
-        $this->subject = \Tx_Seminars_Service_RegistrationManager::getInstance();
+        TestingRegistrationManager::purgeInstance();
+        $this->subject = TestingRegistrationManager::getInstance();
         $this->subject->setConfigurationValue(
             'templateFile',
             'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
@@ -5333,8 +5305,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
             ['attendees_min' => 2, 'attendees_max' => 42]
         );
 
-        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
-        $this->subject = \Tx_Seminars_Service_RegistrationManager::getInstance();
+        TestingRegistrationManager::purgeInstance();
+        $this->subject = TestingRegistrationManager::getInstance();
         $this->subject->setConfigurationValue(
             'templateFile',
             'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
@@ -5357,8 +5329,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
             ['attendees_min' => 2, 'attendees_max' => 42]
         );
 
-        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
-        $this->subject = \Tx_Seminars_Service_RegistrationManager::getInstance();
+        TestingRegistrationManager::purgeInstance();
+        $this->subject = TestingRegistrationManager::getInstance();
         $this->subject->setConfigurationValue(
             'templateFile',
             'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
@@ -5384,8 +5356,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
             ['attendees_min' => 1, 'attendees_max' => 42]
         );
 
-        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
-        $this->subject = \Tx_Seminars_Service_RegistrationManager::getInstance();
+        TestingRegistrationManager::purgeInstance();
+        $this->subject = TestingRegistrationManager::getInstance();
         $this->subject->setConfigurationValue(
             'templateFile',
             'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
@@ -5418,8 +5390,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
             ['attendees_min' => 1, 'attendees_max' => 42]
         );
 
-        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
-        $this->subject = \Tx_Seminars_Service_RegistrationManager::getInstance();
+        TestingRegistrationManager::purgeInstance();
+        $this->subject = TestingRegistrationManager::getInstance();
         $this->subject->setConfigurationValue(
             'templateFile',
             'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
@@ -5445,8 +5417,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
             ['attendees_min' => 1, 'attendees_max' => 42]
         );
 
-        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
-        $this->subject = \Tx_Seminars_Service_RegistrationManager::getInstance();
+        TestingRegistrationManager::purgeInstance();
+        $this->subject = TestingRegistrationManager::getInstance();
         $this->subject->setConfigurationValue(
             'templateFile',
             'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
@@ -5473,8 +5445,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
             ['attendees_min' => 1, 'attendees_max' => 42, 'organizers_notified_about_minimum_reached' => 1]
         );
 
-        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
-        $this->subject = \Tx_Seminars_Service_RegistrationManager::getInstance();
+        TestingRegistrationManager::purgeInstance();
+        $this->subject = TestingRegistrationManager::getInstance();
         $this->subject->setConfigurationValue(
             'templateFile',
             'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
@@ -5498,8 +5470,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
             ['attendees_min' => 1, 'attendees_max' => 42, 'organizers_notified_about_minimum_reached' => 1]
         );
 
-        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
-        $this->subject = \Tx_Seminars_Service_RegistrationManager::getInstance();
+        TestingRegistrationManager::purgeInstance();
+        $this->subject = TestingRegistrationManager::getInstance();
         $this->subject->setConfigurationValue(
             'templateFile',
             'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
@@ -5525,8 +5497,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         );
 
         unset($this->subject);
-        \Tx_Seminars_Service_RegistrationManager::purgeInstance();
-        $this->subject = \Tx_Seminars_Service_RegistrationManager::getInstance();
+        TestingRegistrationManager::purgeInstance();
+        $this->subject = TestingRegistrationManager::getInstance();
         $this->subject->setConfigurationValue(
             'templateFile',
             'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
@@ -5594,7 +5566,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
             ['attendees_min' => 5, 'attendees_max' => 5]
         );
 
-        $subject = new \Tx_Seminars_Service_RegistrationManager();
+        $subject = new TestingRegistrationManager();
         $subject->setConfigurationValue(
             'templateFile',
             'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
@@ -5936,9 +5908,9 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
 
         $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
         $plugin->cObj = $this->getFrontEndController()->cObj;
-        /** @var \Tx_Seminars_Service_RegistrationManager|MockObject $subject */
+        /** @var TestingRegistrationManager|MockObject $subject */
         $subject = $this->createPartialMock(
-            \Tx_Seminars_Service_RegistrationManager::class,
+            TestingRegistrationManager::class,
             [
                 'notifyAttendee',
                 'notifyOrganizers',
@@ -5975,9 +5947,9 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
 
         $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
         $plugin->cObj = $this->getFrontEndController()->cObj;
-        /** @var \Tx_Seminars_Service_RegistrationManager|MockObject $subject */
+        /** @var TestingRegistrationManager|MockObject $subject */
         $subject = $this->createPartialMock(
-            \Tx_Seminars_Service_RegistrationManager::class,
+            TestingRegistrationManager::class,
             [
                 'notifyAttendee',
                 'notifyOrganizers',
@@ -6005,9 +5977,9 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
 
         $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
         $plugin->cObj = $this->getFrontEndController()->cObj;
-        /** @var \Tx_Seminars_Service_RegistrationManager|MockObject $subject */
+        /** @var TestingRegistrationManager|MockObject $subject */
         $subject = $this->createPartialMock(
-            \Tx_Seminars_Service_RegistrationManager::class,
+            TestingRegistrationManager::class,
             [
                 'notifyAttendee',
                 'notifyOrganizers',
@@ -6049,9 +6021,9 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
 
         $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
         $plugin->cObj = $this->getFrontEndController()->cObj;
-        /** @var \Tx_Seminars_Service_RegistrationManager|MockObject $subject */
+        /** @var TestingRegistrationManager|MockObject $subject */
         $subject = $this->createPartialMock(
-            \Tx_Seminars_Service_RegistrationManager::class,
+            TestingRegistrationManager::class,
             [
                 'notifyAttendee',
                 'notifyOrganizers',
@@ -6095,9 +6067,9 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
 
         $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
         $plugin->cObj = $this->getFrontEndController()->cObj;
-        /** @var \Tx_Seminars_Service_RegistrationManager|MockObject $subject */
+        /** @var TestingRegistrationManager|MockObject $subject */
         $subject = $this->createPartialMock(
-            \Tx_Seminars_Service_RegistrationManager::class,
+            TestingRegistrationManager::class,
             [
                 'notifyAttendee',
                 'notifyOrganizers',
@@ -6126,9 +6098,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForPositiveSeatsSetsSeats()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -6151,9 +6121,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForMissingSeatsSetsOneSeat()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -6176,9 +6144,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForZeroSeatsSetsOneSeat()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -6201,9 +6167,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForNegativeSeatsSetsOneSeat()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -6226,9 +6190,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForRegisteredThemselvesOneSetsItToTrue()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -6250,9 +6212,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForRegisteredThemselvesZeroSetsItToFalse()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -6274,9 +6234,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForRegisteredThemselvesMissingSetsItToFalse()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -6298,9 +6256,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForSelectedAvailablePricePutsSelectedPriceCodeToPrice()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event|MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
@@ -6326,9 +6282,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForSelectedNotAvailablePricePutsFirstPriceCodeToPrice()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event|MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
@@ -6354,9 +6308,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForNoSelectedPricePutsFirstPriceCodeToPrice()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event|MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
@@ -6382,9 +6334,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForNoSelectedAndOnlyFreeRegularPriceAvailablePutsRegularPriceCodeToPrice()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event|MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
@@ -6410,9 +6360,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForOneSeatsCalculatesTotalPriceFromSelectedPriceAndSeats()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event|MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
@@ -6438,9 +6386,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForTwoSeatsCalculatesTotalPriceFromSelectedPriceAndSeats()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event|MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
@@ -6466,9 +6412,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForNonEmptyAttendeesNamesSetsAttendeesNames()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -6491,9 +6435,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataDropsHtmlTagsFromAttendeesNames()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -6516,9 +6458,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForEmptyAttendeesNamesSetsEmptyAttendeesNames()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -6541,9 +6481,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForMissingAttendeesNamesSetsEmptyAttendeesNames()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -6566,9 +6504,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForPositiveKidsSetsNumberOfKids()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -6591,9 +6527,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForMissingKidsSetsZeroKids()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -6616,9 +6550,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForZeroKidsSetsZeroKids()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -6641,9 +6573,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForNegativeKidsSetsZeroKids()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -6666,9 +6596,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForSelectedAvailablePaymentMethodFromOneSetsIt()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         $paymentMethod = \Tx_Oelib_MapperRegistry
             ::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
@@ -6697,9 +6625,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForSelectedAvailablePaymentMethodFromTwoSetsIt()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         $paymentMethod1 = \Tx_Oelib_MapperRegistry
             ::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
@@ -6731,9 +6657,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForSelectedAvailablePaymentMethodFromOneForFreeEventsSetsNoPaymentMethod()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         $paymentMethod = \Tx_Oelib_MapperRegistry
             ::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
@@ -6761,9 +6685,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForMissingPaymentMethodAndNoneAvailableSetsNone()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event|MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
@@ -6789,9 +6711,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForMissingPaymentMethodAndTwoAvailableSetsNone()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         $paymentMethod1 = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
         $paymentMethod2 = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
@@ -6820,9 +6740,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForMissingPaymentMethodAndOneAvailableSetsIt()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         $paymentMethod = \Tx_Oelib_MapperRegistry
             ::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
@@ -6851,9 +6769,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForUnavailablePaymentMethodAndTwoAvailableSetsNone()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         $paymentMethod1 = \Tx_Oelib_MapperRegistry
             ::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
@@ -6887,9 +6803,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForUnavailablePaymentMethodAndOneAvailableSetsAvailable()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         $paymentMethod = \Tx_Oelib_MapperRegistry
             ::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
@@ -6918,9 +6832,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForNonEmptyAccountNumberSetsAccountNumber()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -6940,9 +6852,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataDropsHtmlTagsFromAccountNumber()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -6962,9 +6872,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataChangesWhitespaceToSpaceInAccountNumber()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -6987,9 +6895,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForEmptyAccountNumberSetsEmptyAccountNumber()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7009,9 +6915,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForMissingAccountNumberSetsEmptyAccountNumber()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7031,9 +6935,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForNonEmptyBankCodeSetsBankCode()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7053,9 +6955,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataDropsHtmlTagsFromBankCode()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7075,9 +6975,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataChangesWhitespaceToSpaceInBankCode()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7100,9 +6998,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForEmptyBankCodeSetsEmptyBankCode()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7122,9 +7018,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForMissingBankCodeSetsEmptyBankCode()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7144,9 +7038,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForNonEmptyBankNameSetsBankName()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7166,9 +7058,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataDropsHtmlTagsFromBankName()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7188,9 +7078,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataChangesWhitespaceToSpaceInBankName()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7213,9 +7101,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForEmptyBankNameSetsEmptyBankName()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7235,9 +7121,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForMissingBankNameSetsEmptyBankName()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7257,9 +7141,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForNonEmptyAccountOwnerSetsAccountOwner()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7279,9 +7161,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataDropsHtmlTagsFromAccountOwner()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7301,9 +7181,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataChangesWhitespaceToSpaceInAccountOwner()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7326,9 +7204,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForEmptyAccountOwnerSetsEmptyAccountOwner()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7348,9 +7224,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForMissingAccountOwnerSetsEmptyAccountOwner()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7370,9 +7244,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForNonEmptyCompanySetsCompany()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7395,9 +7267,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataDropsHtmlTagsFromCompany()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7417,9 +7287,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForEmptyCompanySetsEmptyCompany()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7439,9 +7307,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForMissingCompanySetsEmptyCompany()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7461,9 +7327,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForMaleGenderSetsGender()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7486,9 +7350,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForFemaleGenderSetsGender()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7511,9 +7373,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForInvalidIntegerGenderSetsUnknownGender()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7533,9 +7393,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForInvalidStringGenderSetsUnknownGender()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7555,9 +7413,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForEmptyGenderSetsUnknownGender()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7577,9 +7433,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForMissingGenderSetsUnknownGender()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7599,9 +7453,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForNonEmptyNameSetsName()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7621,9 +7473,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataDropsHtmlTagsFromName()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7643,9 +7493,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataChangesWhitespaceToSpaceInName()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7665,9 +7513,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForEmptyNameSetsEmptyName()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7687,9 +7533,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForMissingNameSetsEmptyName()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7709,9 +7553,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForNonEmptyAddressSetsAddress()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7731,9 +7573,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataDropsHtmlTagsFromAddress()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7753,9 +7593,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForEmptyAddressSetsEmptyAddress()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7775,9 +7613,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForMissingAddressSetsEmptyAddress()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7797,9 +7633,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForNonEmptyZipSetsZip()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7819,9 +7653,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataDropsHtmlTagsFromZip()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7841,9 +7673,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataChangesWhitespaceToSpaceInZip()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7863,9 +7693,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForEmptyZipSetsEmptyZip()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7885,9 +7713,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForMissingZipSetsEmptyZip()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7907,9 +7733,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForNonEmptyCitySetsCity()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7929,9 +7753,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataDropsHtmlTagsFromCity()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7951,9 +7773,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataChangesWhitespaceToSpaceInCity()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7973,9 +7793,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForEmptyCitySetsEmptyCity()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -7995,9 +7813,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForMissingCitySetsEmptyCity()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -8017,9 +7833,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForNonEmptyCountrySetsCountry()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -8039,9 +7853,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataDropsHtmlTagsFromCountry()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -8061,9 +7873,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataChangesWhitespaceToSpaceInCountry()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -8083,9 +7893,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForEmptyCountrySetsEmptyCountry()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
@@ -8105,9 +7913,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     public function setRegistrationDataForMissingCountrySetsEmptyCountry()
     {
-        $className = $this->createAccessibleProxyClass();
-        /** @var \Tx_Seminars_Service_RegistrationManager $subject */
-        $subject = new $className();
+        $subject = new TestingRegistrationManager();
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
