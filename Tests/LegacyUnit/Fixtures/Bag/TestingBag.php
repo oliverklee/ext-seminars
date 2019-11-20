@@ -2,12 +2,16 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\Bag;
+
+use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingModel;
+
 /**
  * This aggregate class holds a bunch of test objects and allows to iterate over them.
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing extends \Tx_Seminars_Bag_Abstract
+final class TestingBag extends \Tx_Seminars_Bag_Abstract
 {
     /**
      * The constructor. Creates a bag that contains test records and allows to iterate over them.
@@ -60,7 +64,7 @@ class Tx_Seminars_Tests_Unit_Fixtures_Bag_Testing extends \Tx_Seminars_Bag_Abstr
      */
     protected function createItemFromDbResult()
     {
-        $this->currentItem = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(0, $this->dbResult);
+        $this->currentItem = new TestingModel(0, $this->dbResult);
         $this->valid();
     }
 }

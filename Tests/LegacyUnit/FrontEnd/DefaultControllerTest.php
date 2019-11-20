@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -7537,7 +7538,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForEventWithEnoughVacanciesReturnsAvailableClass()
     {
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid, []);
+        $event = new TestingEvent($this->seminarUid, []);
         $event->setAttendancesMax(10);
         $event->setNumberOfAttendances(0);
         $event->setNeedsRegistration(true);
@@ -7554,7 +7555,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForEventWithOneVacancyReturnsVacancyOneClass()
     {
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid, []);
+        $event = new TestingEvent($this->seminarUid, []);
         $event->setAttendancesMax(10);
         $event->setNumberOfAttendances(9);
         $event->setNeedsRegistration(true);
@@ -7571,7 +7572,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForEventWithTwoVacanciesReturnsVacancyTwoClass()
     {
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid, []);
+        $event = new TestingEvent($this->seminarUid, []);
         $event->setAttendancesMax(10);
         $event->setNumberOfAttendances(8);
         $event->setNeedsRegistration(true);
@@ -7588,7 +7589,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForEventWithNoVacanciesReturnsVacancyZeroClass()
     {
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid, []);
+        $event = new TestingEvent($this->seminarUid, []);
         $event->setAttendancesMax(10);
         $event->setNumberOfAttendances(10);
         $event->setNeedsRegistration(true);
@@ -7605,7 +7606,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForEventWithUnlimitedVacanciesReturnsVacanciesAvailableClass()
     {
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid, []);
+        $event = new TestingEvent($this->seminarUid, []);
         $event->setUnlimitedVacancies();
         $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
@@ -7620,7 +7621,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForEventWithUnlimitedVacanciesDoesNotReturnZeroVacancyClass()
     {
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid, []);
+        $event = new TestingEvent($this->seminarUid, []);
         $event->setUnlimitedVacancies();
         $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
@@ -7635,7 +7636,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForEventWithUnlimitedVacanciesReturnsVacanciesUnlimitedClass()
     {
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid, []);
+        $event = new TestingEvent($this->seminarUid, []);
         $event->setUnlimitedVacancies();
         $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
@@ -7650,7 +7651,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForRegistrationDeadlineInPastReturnsDeadlineOverClass()
     {
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid);
+        $event = new TestingEvent($this->seminarUid);
         $event->setNeedsRegistration(true);
         $event->setRegistrationDeadline($GLOBALS['SIM_EXEC_TIME'] - 45);
         $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
@@ -7666,7 +7667,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForBeginDateInPastReturnsBeginDateOverClass()
     {
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid);
+        $event = new TestingEvent($this->seminarUid);
         $event->setNeedsRegistration(true);
         $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 45);
 
@@ -7681,7 +7682,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForBeginDateInPastAndRegistrationForStartedEventsAllowedReturnsVacanciesAvailableClass()
     {
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid);
+        $event = new TestingEvent($this->seminarUid);
         $event->setNeedsRegistration(true);
         $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 45);
         $this->subject->getConfigurationService()->setConfigurationValue(
@@ -7700,7 +7701,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForEventWithNoVacanciesAndRegistrationQueueReturnsRegistrationQueueClass()
     {
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid, []);
+        $event = new TestingEvent($this->seminarUid, []);
         $event->setAttendancesMax(10);
         $event->setNumberOfAttendances(10);
         $event->setNeedsRegistration(true);
@@ -7718,7 +7719,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForEventWithNoVacanciesAndNoRegistrationQueueDoesNotReturnRegistrationQueueClass()
     {
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid, []);
+        $event = new TestingEvent($this->seminarUid, []);
         $event->setAttendancesMax(10);
         $event->setNumberOfAttendances(10);
         $event->setNeedsRegistration(true);
@@ -7741,7 +7742,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForEventWithoutDateAndWithEnoughVacanciesReturnsAvailableClass()
     {
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid);
+        $event = new TestingEvent($this->seminarUid);
         $event->setAttendancesMax(10);
         $event->setNeedsRegistration(true);
         $event->setNumberOfAttendances(0);
@@ -7763,7 +7764,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForEventWithoutDateAndWithOneVacancyReturnsVacancyOneClass()
     {
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid);
+        $event = new TestingEvent($this->seminarUid);
         $event->setAttendancesMax(10);
         $event->setNeedsRegistration(true);
         $event->setNumberOfAttendances(9);
@@ -7785,7 +7786,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForEventWithoutDateAndWithTwoVacanciesReturnsVacancyTwoClass()
     {
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid);
+        $event = new TestingEvent($this->seminarUid);
         $event->setAttendancesMax(10);
         $event->setNeedsRegistration(true);
         $event->setNumberOfAttendances(8);
@@ -7807,7 +7808,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForEventWithoutDateAndWithNoVacanciesReturnsVacancyZeroClass()
     {
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid);
+        $event = new TestingEvent($this->seminarUid);
         $event->setAttendancesMax(10);
         $event->setNeedsRegistration(true);
         $event->setNumberOfAttendances(10);
@@ -7829,7 +7830,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForEventWithoutDateAndWithUnlimitedVacanciesReturnsAvailableClass()
     {
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid);
+        $event = new TestingEvent($this->seminarUid);
         $event->setUnlimitedVacancies();
         $event->setNumberOfAttendances(0);
         $this->subject->getConfigurationService()->setConfigurationValue(
@@ -7850,7 +7851,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForEventWithoutDateAndWithUnlimitedVacanciesDoesNotReturnDeadlineOverClass()
     {
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid);
+        $event = new TestingEvent($this->seminarUid);
         $event->setUnlimitedVacancies();
         $event->setNumberOfAttendances(0);
         $this->subject->getConfigurationService()->setConfigurationValue(

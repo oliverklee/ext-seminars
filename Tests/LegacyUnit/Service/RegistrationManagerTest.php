@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Hooks\RegistrationEmailHookInterface;
+use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
+use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingRegistration;
 use OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures\RegistrationHookInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Mail\MailMessage;
@@ -33,7 +35,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
     protected $seminarUid = 0;
 
     /**
-     * @var \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent
+     * @var TestingEvent
      */
     protected $seminar = null;
 
@@ -58,12 +60,12 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
     protected $pi1 = null;
 
     /**
-     * @var \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent a fully booked seminar
+     * @var TestingEvent
      */
     protected $fullyBookedSeminar = null;
 
     /**
-     * @var \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent a seminar
+     * @var TestingEvent
      */
     protected $cachedSeminar = null;
 
@@ -108,7 +110,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $mailerFactory->enableTestMode();
         $this->mailer = $mailerFactory->getMailer();
 
-        \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration::purgeCachedSeminars();
+        TestingRegistration::purgeCachedSeminars();
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
             ->setAsInteger('eMailFormatForAttendees', \Tx_Seminars_Service_RegistrationManager::SEND_TEXT_MAIL);
         $configurationRegistry = \Tx_Oelib_ConfigurationRegistry::getInstance();
@@ -149,7 +151,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $headerProxyFactory->enableTestMode();
         $this->headerCollector = $headerProxyFactory->getHeaderProxy();
 
-        $this->seminar = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid);
+        $this->seminar = new TestingEvent($this->seminarUid);
         $this->subject = \Tx_Seminars_Service_RegistrationManager::getInstance();
 
         $this->linkBuilder = $this->createPartialMock(
@@ -224,7 +226,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
      */
     private function createBookedOutSeminar()
     {
-        $this->fullyBookedSeminar = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $this->fullyBookedSeminar = new TestingEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -269,7 +271,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
             ]
         );
 
-        return new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($registrationUid);
+        return new TestingRegistration($registrationUid);
     }
 
     /**
@@ -718,7 +720,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->createFrontEndPages();
         $this->createAndLogInFrontEndUser();
 
-        $this->cachedSeminar = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $this->cachedSeminar = new TestingEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -744,7 +746,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->createFrontEndPages();
         $this->createAndLogInFrontEndUser();
 
-        $this->cachedSeminar = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $this->cachedSeminar = new TestingEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -926,7 +928,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
             ]
         );
 
-        $this->cachedSeminar = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $this->cachedSeminar = new TestingEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -1189,7 +1191,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
             ]
         );
 
-        $this->cachedSeminar = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $this->cachedSeminar = new TestingEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -1423,7 +1425,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
             'tx_seminars_seminars',
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
-        $this->cachedSeminar = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $this->cachedSeminar = new TestingEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -1470,7 +1472,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
             'requirements'
         );
 
-        $this->cachedSeminar = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $this->cachedSeminar = new TestingEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -1510,7 +1512,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
             'requirements'
         );
 
-        $this->cachedSeminar = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $this->cachedSeminar = new TestingEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -1562,7 +1564,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
             'requirements'
         );
 
-        $this->cachedSeminar = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $this->cachedSeminar = new TestingEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -1606,7 +1608,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
             'requirements'
         );
 
-        $this->cachedSeminar = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $this->cachedSeminar = new TestingEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -1669,7 +1671,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
             'requirements'
         );
 
-        $this->cachedSeminar = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $this->cachedSeminar = new TestingEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -1732,7 +1734,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
             'requirements'
         );
 
-        $this->cachedSeminar = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $this->cachedSeminar = new TestingEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -1795,7 +1797,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
             'requirements'
         );
 
-        $this->cachedSeminar = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent(
+        $this->cachedSeminar = new TestingEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -2193,7 +2195,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
                 'user' => $this->testingFramework->createFrontEndUser(),
             ]
         );
-        $registration = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($registrationUid);
+        $registration = new TestingRegistration($registrationUid);
 
         $this->subject->notifyAttendee($registration, $pi1);
 
@@ -5051,7 +5053,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
             ]
         );
 
-        $registration = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($registrationUid);
+        $registration = new TestingRegistration($registrationUid);
         $this->subject->notifyOrganizers($registration);
 
         self::assertContains(
@@ -5080,7 +5082,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
             ]
         );
 
-        $registration = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($registrationUid);
+        $registration = new TestingRegistration($registrationUid);
         $this->subject->notifyOrganizers($registration);
 
         self::assertContains(
@@ -5100,7 +5102,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
             'tx_seminars_attendances',
             ['seminar' => $this->seminarUid, 'user' => $this->testingFramework->createFrontEndUser()]
         );
-        $registration = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($registrationUid);
+        $registration = new TestingRegistration($registrationUid);
 
         $hookClassName = 'RegistrationHook' . \uniqid('', false);
         $hook = $this->getMockBuilder(\Tx_Seminars_Interface_Hook_Registration::class)
@@ -5124,7 +5126,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
             'tx_seminars_attendances',
             ['seminar' => $this->seminarUid, 'user' => $this->testingFramework->createFrontEndUser()]
         );
-        $registration = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($registrationUid);
+        $registration = new TestingRegistration($registrationUid);
 
         $hookClassName = 'RegistrationHook' . \uniqid('', false);
         $hook = $this->getMockBuilder(\Tx_Seminars_Interface_Hook_Registration::class)
@@ -5149,7 +5151,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
             'tx_seminars_attendances',
             ['seminar' => $this->seminarUid, 'user' => $this->testingFramework->createFrontEndUser()]
         );
-        $registration = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($registrationUid);
+        $registration = new TestingRegistration($registrationUid);
 
         $hookClassName = 'RegistrationEmailHook' . \uniqid('', false);
         $hook = $this->getMockBuilder(RegistrationEmailHookInterface::class)
@@ -5173,7 +5175,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
             'tx_seminars_attendances',
             ['seminar' => $this->seminarUid, 'user' => $this->testingFramework->createFrontEndUser()]
         );
-        $registration = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($registrationUid);
+        $registration = new TestingRegistration($registrationUid);
 
         $hookClassName = 'RegistrationEmailHook' . \uniqid('', false);
         $hook = $this->getMockBuilder(RegistrationEmailHookInterface::class)
@@ -5366,7 +5368,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->subject->sendAdditionalNotification($registration);
 
         // This makes sure the event is loaded from DB again.
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid);
+        $event = new TestingEvent($this->seminarUid);
 
         self::assertFalse($event->haveOrganizersBeenNotifiedAboutEnoughAttendees());
     }
@@ -5427,7 +5429,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->subject->sendAdditionalNotification($registration);
 
         // This makes sure the event is loaded from DB again.
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid);
+        $event = new TestingEvent($this->seminarUid);
 
         self::assertTrue($event->haveOrganizersBeenNotifiedAboutEnoughAttendees());
     }
@@ -5455,7 +5457,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->subject->sendAdditionalNotification($registration);
 
         // This makes sure the event is loaded from DB again.
-        $event = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingEvent($this->seminarUid);
+        $event = new TestingEvent($this->seminarUid);
 
         self::assertTrue($event->haveOrganizersBeenNotifiedAboutEnoughAttendees());
     }

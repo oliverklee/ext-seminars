@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingRegistration;
 
 /**
  * Test case.
@@ -13,7 +14,7 @@ use OliverKlee\PhpUnit\TestCase;
 class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration
+     * @var TestingRegistration
      */
     protected $subject = null;
 
@@ -41,7 +42,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
-        \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration::purgeCachedSeminars();
+        TestingRegistration::purgeCachedSeminars();
 
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
@@ -87,7 +88,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
             ]
         );
 
-        $this->subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($this->registrationUid);
+        $this->subject = new TestingRegistration($this->registrationUid);
         $this->subject->setConfigurationValue(
             'templateFile',
             'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
@@ -510,7 +511,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
     public function commitToDbCanCreateNewRecord()
     {
         $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
-        $registration = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration(0);
+        $registration = new TestingRegistration(0);
         $registration->setRegistrationData($seminar, 0, []);
         $registration->enableTestMode();
         $this->testingFramework->markTableAsDirty('tx_seminars_attendances');
@@ -541,7 +542,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
             'tx_seminars_lodgings'
         );
 
-        $registration = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration(0);
+        $registration = new TestingRegistration(0);
         $registration->setRegistrationData(
             $seminar,
             0,
@@ -588,7 +589,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
             'tx_seminars_foods'
         );
 
-        $registration = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration(0);
+        $registration = new TestingRegistration(0);
         $registration->setRegistrationData(
             $seminar,
             0,
@@ -635,7 +636,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
             'tx_seminars_checkboxes'
         );
 
-        $registration = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration(0);
+        $registration = new TestingRegistration(0);
         $registration->setRegistrationData(
             $seminar,
             0,
@@ -701,7 +702,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
             ]
         );
 
-        $subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($this->registrationUid);
+        $subject = new TestingRegistration($this->registrationUid);
 
         self::assertInstanceOf(
             \Tx_Seminars_OldModel_Event::class,
@@ -745,8 +746,8 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
             ['title' => 'test title 2']
         );
 
-        \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration::purgeCachedSeminars();
-        $subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($registrationUid);
+        TestingRegistration::purgeCachedSeminars();
+        $subject = new TestingRegistration($registrationUid);
 
         self::assertSame(
             'test title 2',
@@ -767,7 +768,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
     {
         $this->testingFramework->logoutFrontEndUser();
 
-        new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration(
+        new TestingRegistration(
             $this->testingFramework->createRecord(
                 'tx_seminars_attendances',
                 ['seminar' => $this->seminarUid]
@@ -1760,7 +1761,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
             'tx_seminars_attendances',
             ['gender' => '0']
         );
-        $subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($registrationUid);
+        $subject = new TestingRegistration($registrationUid);
 
         self::assertContains(
             $subject->translate('label_gender.I.0'),
@@ -1777,7 +1778,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
             'tx_seminars_attendances',
             ['gender' => '1']
         );
-        $subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($registrationUid);
+        $subject = new TestingRegistration($registrationUid);
 
         self::assertContains(
             $subject->translate('label_gender.I.1'),
@@ -1794,7 +1795,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
             'tx_seminars_attendances',
             ['name' => 'John Doe']
         );
-        $subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($registrationUid);
+        $subject = new TestingRegistration($registrationUid);
 
         self::assertContains(
             'John Doe',
@@ -1811,7 +1812,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
             'tx_seminars_attendances',
             ['address' => 'Main Street 123']
         );
-        $subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($registrationUid);
+        $subject = new TestingRegistration($registrationUid);
 
         self::assertContains(
             'Main Street 123',
@@ -1828,7 +1829,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
             'tx_seminars_attendances',
             ['zip' => '12345']
         );
-        $subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($registrationUid);
+        $subject = new TestingRegistration($registrationUid);
 
         self::assertContains(
             '12345',
@@ -1845,7 +1846,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
             'tx_seminars_attendances',
             ['city' => 'Big City']
         );
-        $subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($registrationUid);
+        $subject = new TestingRegistration($registrationUid);
 
         self::assertContains(
             'Big City',
@@ -1862,7 +1863,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
             'tx_seminars_attendances',
             ['country' => 'Takka-Tukka-Land']
         );
-        $subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($registrationUid);
+        $subject = new TestingRegistration($registrationUid);
 
         self::assertContains(
             'Takka-Tukka-Land',
@@ -1879,7 +1880,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
             'tx_seminars_attendances',
             ['telephone' => '01234-56789']
         );
-        $subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($registrationUid);
+        $subject = new TestingRegistration($registrationUid);
 
         self::assertContains(
             '01234-56789',
@@ -1896,7 +1897,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
             'tx_seminars_attendances',
             ['email' => 'john@doe.com']
         );
-        $subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingRegistration($registrationUid);
+        $subject = new TestingRegistration($registrationUid);
 
         self::assertContains(
             'john@doe.com',

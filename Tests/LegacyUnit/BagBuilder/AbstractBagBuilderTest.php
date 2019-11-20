@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\BagBuilder;
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\BagBuilder\BrokenBagBuilder;
+use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\BagBuilder\TestingBagBuilder;
 
 /**
  * Test case.
@@ -15,7 +17,7 @@ use OliverKlee\PhpUnit\TestCase;
 class AbstractBagBuilderTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_Tests_Unit_Fixtures_BagBuilder_Testing
+     * @var TestingBagBuilder
      */
     private $subject = null;
 
@@ -35,7 +37,7 @@ class AbstractBagBuilderTest extends TestCase
 
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
-        $this->subject = new \Tx_Seminars_Tests_Unit_Fixtures_BagBuilder_Testing();
+        $this->subject = new TestingBagBuilder();
         $this->subject->setTestMode();
 
         $this->dummySysFolderPid = $this->testingFramework->createSystemFolder();
@@ -52,14 +54,10 @@ class AbstractBagBuilderTest extends TestCase
 
     public function testBuilderThrowsExceptionForEmptyTableName()
     {
-        $this->expectException(
-            \RuntimeException::class
-        );
-        $this->expectExceptionMessage(
-            'The attribute $this->tableName must not be empty.'
-        );
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('The attribute $this->tableName must not be empty.');
 
-        new \Tx_Seminars_Tests_Unit_Fixtures_BagBuilder_BrokenTesting();
+        new BrokenBagBuilder();
     }
 
     public function testBuilderBuildsAnObject()

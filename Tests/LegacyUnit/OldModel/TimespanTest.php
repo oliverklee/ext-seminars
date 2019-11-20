@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingTimeSpan;
 use TYPO3\CMS\Lang\LanguageService;
 
 /**
@@ -18,7 +19,7 @@ class Tx_Seminars_Tests_Unit_OldModel_TimespanTest extends TestCase
     const TIME_FORMAT = '%H:%M';
 
     /**
-     * @var \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingTimeSpan
+     * @var TestingTimeSpan
      */
     private $subject = null;
 
@@ -28,9 +29,7 @@ class Tx_Seminars_Tests_Unit_OldModel_TimespanTest extends TestCase
 
         $this->getLanguageService()->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
 
-        $this->subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_TestingTimeSpan(
-            ['timeFormat' => self::TIME_FORMAT]
-        );
+        $this->subject = new TestingTimeSpan(['timeFormat' => self::TIME_FORMAT]);
     }
 
     private function getLanguageService(): LanguageService
