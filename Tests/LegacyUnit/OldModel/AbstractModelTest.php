@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Tests\LegacyUnit\OldModel;
+
 use OliverKlee\PhpUnit\TestCase;
 
 /**
@@ -9,7 +11,7 @@ use OliverKlee\PhpUnit\TestCase;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends TestCase
+class AbstractModelTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing
@@ -114,7 +116,7 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends TestCase
      */
     public function createFromDirectDataResultsInOkay()
     {
-        $subject = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(0, false, false, ['title' => 'Foo']);
+        $subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(0, false, false, ['title' => 'Foo']);
 
         self::assertTrue($subject->isOk());
     }
@@ -218,7 +220,7 @@ class Tx_Seminars_Tests_Unit_OldModel_AbstractTest extends TestCase
      */
     public function dataCanBeSetDirectlyInConstructor()
     {
-        $subject = new Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(0, false, false, ['title' => 'Foo']);
+        $subject = new \Tx_Seminars_Tests_Unit_Fixtures_OldModel_Testing(0, false, false, ['title' => 'Foo']);
 
         self::assertSame('Foo', $subject->getTitle());
     }
