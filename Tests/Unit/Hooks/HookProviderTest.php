@@ -25,8 +25,6 @@ class HookProviderTest extends UnitTestCase
 
     protected function setUp()
     {
-        parent::setUp();
-
         $this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'];
     }
 
