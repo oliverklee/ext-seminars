@@ -6,7 +6,9 @@ namespace OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks;
 use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookInterface;
 
 /**
- * Test interface implementation to use with the HookProvider
+ * Valid test interface implementation to use with the HookProviderTest
+ *
+ * Will be accepted, because it implements TestingHookInterface
  *
  * @author Michael Kramer <m.kramer@mxp.de>
  */
@@ -19,16 +21,16 @@ class TestingHookImplementor implements TestingHookInterface
 
     public function __construct()
     {
-        self::$wasCalled = 0;
+        static::$wasCalled = 0;
     }
 
     /**
-     * This function will be called during HookProvider tests.
+     * Gets called during HookProvider tests
      *
      * @return void
      */
     public function testHookMethod()
     {
-        self::$wasCalled++;
+        static::$wasCalled++;
     }
 }

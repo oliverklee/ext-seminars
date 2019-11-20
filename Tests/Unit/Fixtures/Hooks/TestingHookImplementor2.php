@@ -3,32 +3,15 @@ declare(strict_types = 1);
 
 namespace OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks;
 
-use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookInterface;
+use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookImplementor;
 
 /**
- * Second test interface implementation to use with the HookProvider
+ * Second valid test interface implementation to use with the HookProviderTest
+ *
+ * Will be accepted as a second hooked-in class
  *
  * @author Michael Kramer <m.kramer@mxp.de>
  */
-class TestingHookImplementor2 implements TestingHookInterface
+class TestingHookImplementor2 extends TestingHookImplementor
 {
-    /**
-     * @var bool
-     */
-    public static $wasCalled = 0;
-
-    public function __construct()
-    {
-        self::$wasCalled = 0;
-    }
-
-    /**
-     * This function will be called during HookProvider tests.
-     *
-     * @return void
-     */
-    public function testHookMethod()
-    {
-        self::$wasCalled++;
-    }
 }
