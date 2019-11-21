@@ -203,7 +203,7 @@ class HookProviderTest extends UnitTestCase
         $this->expectException(\UnexpectedValueException::class);
         $this->expectExceptionCode(1565089078);
 
-        $subject = new HookProvider('\OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookInterfaceDoesNotExist');
+        $subject = new HookProvider(__NAMESPACE__ . '\\TestingHookInterfaceDoesNotExist');
     }
 
     /**
