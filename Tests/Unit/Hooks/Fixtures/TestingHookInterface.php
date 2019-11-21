@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks;
+namespace OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures;
 
 use OliverKlee\Seminars\Hooks\Interfaces\Hook;
 
