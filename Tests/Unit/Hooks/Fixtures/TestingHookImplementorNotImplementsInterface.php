@@ -2,10 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks;
-
-use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookInterface;
-use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookInterfaceNotExtendsHook;
+namespace OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures;
 
 /**
  * Invalid test interface implementation to use with the HookProviderTest.
@@ -14,7 +11,7 @@ use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookInterfaceNotExtends
  *
  * @author Michael Kramer <m.kramer@mxp.de>
  */
-class TestingHookImplementorNotImplementsInterface implements TestingHookInterfaceNotExtendsHook
+final class TestingHookImplementorNotImplementsInterface implements TestingHookInterfaceNotExtendsHook
 {
     /**
      * @return void

@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks;
-
-use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookInterface;
+namespace OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures;
 
 /**
  * Valid test interface implementation to use with the HookProviderTest.

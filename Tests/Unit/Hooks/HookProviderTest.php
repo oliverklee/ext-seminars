@@ -7,18 +7,18 @@ namespace OliverKlee\Seminars\Tests\Unit\Hooks;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\Hook;
-use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookImplementor;
-use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookImplementor2;
-use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookImplementorNotImplementsInterface;
-use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookInterface;
-use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookInterfaceNotExtendsHook;
+use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookImplementor;
+use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookImplementor2;
+use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookImplementorNotImplementsInterface;
+use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookInterface;
+use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookInterfaceNotExtendsHook;
 
 /**
  * Test case.
  *
  * @author Michael Kramer <m.kramer@mxp.de>
  */
-class HookProviderTest extends UnitTestCase
+final class HookProviderTest extends UnitTestCase
 {
     /**
      * @var array

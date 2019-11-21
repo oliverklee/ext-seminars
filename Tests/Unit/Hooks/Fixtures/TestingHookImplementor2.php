@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks;
-
-use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookImplementor;
+namespace OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures;
 
 /**
  * Second valid test interface implementation to use with the HookProviderTest.
@@ -13,7 +11,7 @@ use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookImplementor;
  *
  * @author Michael Kramer <m.kramer@mxp.de>
  */
-class TestingHookImplementor2 extends TestingHookImplementor
+final class TestingHookImplementor2 extends TestingHookImplementor
 {
     /**
      * @var int
