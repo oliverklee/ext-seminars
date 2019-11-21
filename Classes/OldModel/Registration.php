@@ -78,12 +78,12 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel
     /**
      * The constructor.
      *
-     * @param ContentObjectRenderer $contentObjectRenderer content object
+     * @param ContentObjectRenderer|null $contentObjectRenderer content object
      * @param \mysqli_result|bool $dbResult
      *        MySQL result (of SELECT query) object. If this parameter is not provided or FALSE,
      *        setRegistrationData() needs to be called directly after construction or this object will not be usable.
      */
-    public function __construct(ContentObjectRenderer $contentObjectRenderer, $dbResult = false)
+    public function __construct(ContentObjectRenderer $contentObjectRenderer = null, $dbResult = false)
     {
         $this->cObj = $contentObjectRenderer;
         $this->init();
