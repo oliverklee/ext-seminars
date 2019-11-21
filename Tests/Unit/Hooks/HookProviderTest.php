@@ -7,12 +7,11 @@ namespace OliverKlee\Seminars\Tests\Unit\Hooks;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\Hook;
-use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookInterface;
-use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookInterfaceNotExtendsHook;
 use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookImplementor;
 use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookImplementor2;
 use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookImplementorNotImplementsInterface;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookInterface;
+use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookInterfaceNotExtendsHook;
 
 /**
  * Test case.
