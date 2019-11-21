@@ -194,6 +194,8 @@ abstract class AbstractBagBuilder
      *
      * @param string $key the limitation key to return, must not be empty
      * @param string $value the WHERE clause part of a limitation, empty value removes the limitation
+     *
+     * @return void
      */
     public function setWhereClausePart(string $key, string $value)
     {
