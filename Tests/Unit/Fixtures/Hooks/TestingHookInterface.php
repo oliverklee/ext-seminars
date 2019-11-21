@@ -7,16 +7,16 @@ namespace OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks;
 use OliverKlee\Seminars\Hooks\Interfaces\Hook;
 
 /**
- * Valid test interface to use with the HookProviderTest
+ * Valid test interface to use with the HookProviderTest.
  *
- * Will be accepted, because it extends Hook
+ * Will be accepted, because it extends Hook.
  *
  * @author Michael Kramer <m.kramer@mxp.de>
  */
 interface TestingHookInterface extends Hook
 {
     /**
-     * Gets called during HookProvider tests
+     * Gets called during HookProvider tests.
      *
      * @return void
      */

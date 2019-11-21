@@ -42,11 +42,11 @@ class HookProviderTest extends UnitTestCase
     }
 
     /*
-     * Utility functions
+     * Utility functions.
      */
 
     /**
-     * Creates a TestingHookInterface implementor object
+     * Creates a TestingHookInterface implementor object.
      *
      * @return TestingHookImplementor
      */
@@ -56,7 +56,7 @@ class HookProviderTest extends UnitTestCase
     }
 
     /**
-     * Creates a second TestingHookInterface implementor object
+     * Creates a second TestingHookInterface implementor object.
      *
      * @return TestingHookImplementor2
      */
@@ -66,7 +66,7 @@ class HookProviderTest extends UnitTestCase
     }
 
     /**
-     * Creates a TestingHookInterface accepting Hook object
+     * Creates a TestingHookInterface accepting Hook object.
      *
      * @param string $index
      *
@@ -82,7 +82,7 @@ class HookProviderTest extends UnitTestCase
     }
 
     /*
-     * Tests concerning the TestingHookImplementor
+     * Tests concerning the TestingHookImplementor.
      */
 
     /**
@@ -129,7 +129,7 @@ class HookProviderTest extends UnitTestCase
     }
 
     /*
-     * Tests concerning the TestingHookImplementor2
+     * Tests concerning the TestingHookImplementor2.
      */
 
     /**
@@ -176,7 +176,7 @@ class HookProviderTest extends UnitTestCase
     }
 
     /*
-     * Tests concerning the Hook object
+     * Tests concerning the Hook object.
      */
 
     /**

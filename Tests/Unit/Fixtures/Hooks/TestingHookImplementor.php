@@ -7,9 +7,9 @@ namespace OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks;
 use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookInterface;
 
 /**
- * Valid test interface implementation to use with the HookProviderTest
+ * Valid test interface implementation to use with the HookProviderTest.
  *
- * Will be accepted, because it implements TestingHookInterface
+ * Will be accepted, because it implements TestingHookInterface.
  *
  * @author Michael Kramer <m.kramer@mxp.de>
  */
@@ -26,7 +26,7 @@ class TestingHookImplementor implements TestingHookInterface
     }
 
     /**
-     * Gets called during HookProvider tests
+     * Gets called during HookProvider tests.
      *
      * @return void
      */

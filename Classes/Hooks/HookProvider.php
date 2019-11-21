@@ -8,7 +8,7 @@ use OliverKlee\Seminars\Hooks\Interfaces\Hook;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * Provides functions for unified hooks
+ * Provides functions for unified hooks.
  *
  * A hook allows adding functionality at certain points of the program path. These points are
  * grouped using an interface, declaring the methods to implement to hook in.
@@ -80,7 +80,7 @@ class HookProvider
     }
 
     /**
-     * Executes the hooked-in methods
+     * Executes the hooked-in methods.
      *
      * @param string $method the method to execute
      * @param mixed $params parameters to $method()
@@ -108,7 +108,7 @@ class HookProvider
     }
 
     /**
-     * Gets the hook objects for the interface
+     * Gets the hook objects for the interface.
      *
      * @return Hook[]
      */
@@ -120,7 +120,7 @@ class HookProvider
     }
 
     /**
-     * Retrieves the hook objects for the interface
+     * Retrieves the hook objects for the interface.
      *
      * @return void
      *

@@ -8,9 +8,9 @@ use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookInterface;
 use OliverKlee\Seminars\Tests\Unit\Fixtures\Hooks\TestingHookInterfaceNotExtendsHook;
 
 /**
- * Invalid test interface implementation to use with the HookProviderTest
+ * Invalid test interface implementation to use with the HookProviderTest.
  *
- * Will not be accepted, because it does not implement TestingHookInterface
+ * Will not be accepted, because it does not implement TestingHookInterface.
  *
  * @author Michael Kramer <m.kramer@mxp.de>
  */
