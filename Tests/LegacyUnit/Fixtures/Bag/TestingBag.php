@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\Bag;
 
 use OliverKlee\Seminars\Bag\AbstractBag;
-use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingModel;
+use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingModel;
 
 /**
  * This aggregate class holds a bunch of test objects and allows to iterate over them.

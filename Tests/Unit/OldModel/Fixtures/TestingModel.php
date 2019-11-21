@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel;
+namespace OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures;
 
 use OliverKlee\Seminars\OldModel\AbstractModel;
 
@@ -17,6 +17,16 @@ final class TestingModel extends AbstractModel
      * @var string the name of the SQL table this class corresponds to
      */
     protected $tableName = 'tx_seminars_test';
+
+    /**
+     * @var bool whether to call `TemplateHelper::init()` during construction in BE mode
+     */
+    protected $needsTemplateHelperInitialization = false;
+
+    /**
+     * @var bool whether to include `locallang.xlf` during construction
+     */
+    protected $includeLanguageFile = false;
 
     /**
      * Sets the test field of this record to a boolean value.
