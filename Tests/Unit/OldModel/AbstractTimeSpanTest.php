@@ -6,29 +6,29 @@ namespace OliverKlee\Seminars\Tests\Unit\OldModel;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\OldModel\AbstractModel;
-use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingModel;
+use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingTimeSpan;
 
 /**
  * Test case.
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-final class AbstractModelTest extends UnitTestCase
+final class AbstractTimeSpanTest extends UnitTestCase
 {
     /**
-     * @var TestingModel
+     * @var TestingTimeSpan
      */
     private $subject = null;
 
     protected function setUp()
     {
-        $this->subject = new TestingModel();
+        $this->subject = new TestingTimeSpan();
     }
 
     /**
      * @test
      */
-    public function testingModelIsAbstractModel()
+    public function isAbstractModel()
     {
         self::assertInstanceOf(AbstractModel::class, $this->subject);
     }

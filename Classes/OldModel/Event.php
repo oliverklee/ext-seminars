@@ -74,7 +74,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @param \mysqli_result|bool $dbResult MySQL result (of SELECT query). If this parameter is provided, $uid will be ignored.
      * @param bool $allowHiddenRecords whether it is possible to create a seminar object from a hidden record
      */
-    public function __construct(int $uid, $dbResult = false, bool $allowHiddenRecords = false)
+    public function __construct(int $uid = 0, $dbResult = false, bool $allowHiddenRecords = false)
     {
         parent::__construct($uid, $dbResult, $allowHiddenRecords);
 
