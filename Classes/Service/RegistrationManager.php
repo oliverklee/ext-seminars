@@ -105,7 +105,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
     public static function getInstance(): \Tx_Seminars_Service_RegistrationManager
     {
         if (self::$instance === null) {
-            self::$instance = GeneralUtility::makeInstance(__CLASS__);
+            self::$instance = GeneralUtility::makeInstance(static::class);
         }
 
         return self::$instance;
