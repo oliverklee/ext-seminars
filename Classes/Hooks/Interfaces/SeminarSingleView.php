@@ -9,7 +9,7 @@ use OliverKlee\Seminars\Hooks\Interfaces\Hook;
 /**
  * Use this interface for hooks concerning the seminar single view.
  *
- * It superseeds the deprecated EventSingleView interface.
+ * It supersedes the deprecated EventSingleView interface.
  *
  * @author Michael Kramer <m.kramer@mxp.de>
  */
