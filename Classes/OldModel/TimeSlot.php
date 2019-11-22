@@ -154,7 +154,7 @@ class Tx_Seminars_OldModel_TimeSlot extends \Tx_Seminars_OldModel_AbstractTimeSp
     }
 
     /**
-     * Checks whether the timeslot has a entry date set.
+     * Checks whether the time slot has a entry date set.
      *
      * @return bool TRUE if we have a entry date, FALSE otherwise
      */
@@ -164,7 +164,7 @@ class Tx_Seminars_OldModel_TimeSlot extends \Tx_Seminars_OldModel_AbstractTimeSp
     }
 
     /**
-     * Returns an associative array, containing fieldname/value pairs that need
+     * Returns an associative array, containing field name/value pairs that need
      * to be updated in the database. Update means "set the title" so far.
      *
      * @return string[] data to update the database entry of the timeslot, might be empty

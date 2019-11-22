@@ -10,9 +10,12 @@ use OliverKlee\Seminars\OldModel\AbstractModel;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel
+abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel implements
+    \Tx_Oelib_Interface_ConfigurationCheckable
 {
-    /** @var string same as class name */
+    /**
+     * @var string same as class name
+     */
     public $prefixId = \Tx_Seminars_OldModel_AbstractTimeSpan::class;
 
     /**

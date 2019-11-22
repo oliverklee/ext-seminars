@@ -13,7 +13,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-abstract class AbstractModel extends \Tx_Oelib_TemplateHelper implements \Tx_Oelib_Interface_ConfigurationCheckable
+abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
 {
     /**
      * @var string the extension key

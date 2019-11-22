@@ -22,6 +22,11 @@ class Tx_Seminars_OldModel_Category extends AbstractModel
     protected $includeLanguageFile = false;
 
     /**
+     * @var bool whether to call `TemplateHelper::init()` during construction
+     */
+    protected $needsTemplateHelperInitialization = false;
+
+    /**
      * Returns the icon of this category.
      *
      * @return string the file name of the icon (relative to the extension
