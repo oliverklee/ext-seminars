@@ -15,19 +15,30 @@ use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
  */
 class Tx_Seminars_OldModel_Speaker extends AbstractModel
 {
-    /** @var int the gender type for speakers without gender */
+    /**
+     * @var int the gender type for speakers without gender
+     */
     const GENDER_UNKNOWN = 0;
 
-    /** @var int the gender type male for a speaker */
+    /**
+     * @var int the gender type male for a speaker
+     */
     const GENDER_MALE = 1;
 
-    /** @var int the gender type female for a speaker */
+    /**
+     * @var int the gender type female for a speaker
+     */
     const GENDER_FEMALE = 2;
 
     /**
      * @var string the name of the SQL table this class corresponds to
      */
     protected $tableName = 'tx_seminars_speakers';
+
+    /**
+     * @var bool whether to call `TemplateHelper::init()` during construction in BE mode
+     */
+    protected $includeLanguageFile = false;
 
     /**
      * Gets our organization.

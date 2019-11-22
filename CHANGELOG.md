@@ -14,7 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Display the name of the current functional test (#256)
 
 ### Changed
-- Rework the old model and bag (builder) architecture (#328, #329, #330, #331, #332, #333, #337)
+- Rework the old model and bag (builder) architecture (#328, #329, #330, #331, #332, #333, #337, #339)
 - Bump the `static_info_tables` dependency (#320)
 - Require oelib 3.0 (#318)
 - Refactor registration form footer creation (#309)
