@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
 use OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd\Fixtures\TestingDefaultController;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -1255,6 +1256,26 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $hookClass = get_class($hook);
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['singleView'][$hookClass] = $hookClass;
         GeneralUtility::addInstance($hookClass, $hook);
+
+        $this->subject->piVars['showUid'] = $this->seminarUid;
+        $this->subject->main('', []);
+    }
+
+    /**
+     * @test
+     */
+    public function singleViewCallsHookSeminarSingleViewModifySingleView()
+    {
+        $this->subject->setConfigurationValue('what_to_display', 'single_view');
+
+        /** @var \Tx_Seminars_Model_Event $event */
+        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->find($this->seminarUid);
+        $hookedInObject = $this->createMock(SeminarSingleView::class);
+        $hookedInObject->expects(self::once())->method('modifySingleView')->with($this->subject);
+
+        $hookedInClass = get_class($hookedInObject);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][SeminarSingleView::class][] = $hookedInClass;
+        GeneralUtility::addInstance($hookedInClass, $hookedInObject);
 
         $this->subject->piVars['showUid'] = $this->seminarUid;
         $this->subject->main('', []);

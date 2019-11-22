@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use OliverKlee\Seminars\Bag\AbstractBag;
+use OliverKlee\Seminars\Hooks\HookProvider;
+use OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
 use OliverKlee\Seminars\OldModel\AbstractModel;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
@@ -190,6 +192,11 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      * @var bool
      */
     private $singleViewHooksHaveBeenRetrieved = false;
+
+    /**
+     * @var HookProvider|null
+     */
+    protected $singleViewHookProvider = null;
 
     /**
      * a link builder instance
@@ -428,6 +435,20 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         }
 
         return $this->singleViewHooks;
+    }
+
+    /**
+     * Gets the hook provider for the single view.
+     *
+     * @return HookProvider
+     */
+    protected function getSingleViewHookProvider(): HookProvider
+    {
+        if (!$this->singleViewHookProvider instanceof HookProvider) {
+            $this->singleViewHookProvider = GeneralUtility::makeInstance(HookProvider::class, SeminarSingleView::class);
+        }
+
+        return $this->singleViewHookProvider;
     }
 
     /**
@@ -810,6 +831,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         foreach ($this->getSingleViewHooks() as $hook) {
             $hook->modifyEventSingleView($event, $this->getTemplate());
         }
+
+        $this->getSingleViewHookProvider()->executeHook('modifySingleView', $this);
 
         $result = $this->getSubpart('SINGLE_VIEW');
 
