@@ -14,7 +14,7 @@ use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_OldModel_Registration extends AbstractModel
+class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oelib_Interface_ConfigurationCheckable
 {
     /**
      * @var string the name of the SQL table this class corresponds to
