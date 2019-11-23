@@ -5,7 +5,7 @@ declare(strict_types=1);
 /**
  * This interface needs to be used for hooks concerning the event single view.
  *
- * @deprecated will be removed in seminars 4; use hooks from `Hooks\Interfaces\Hook\SeminarSingleView` instead
+ * @deprecated will be removed in seminars 4; use `Hooks\Interfaces\Hook\SeminarSingleView` instead
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
@@ -21,7 +21,7 @@ interface Tx_Seminars_Interface_Hook_EventSingleView
      *
      * @return void
      *
-     * @deprecated will be removed in seminars 4; use SeminarSingleView::modifySingleView instead
+     * @deprecated will be removed in seminars 4; use `SeminarSingleView::modifySingleView` instead
      */
     public function modifyEventSingleView(\Tx_Seminars_Model_Event $event, \Tx_Oelib_Template $template);
 

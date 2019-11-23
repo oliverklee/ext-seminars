@@ -417,7 +417,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *          if there are registered hook classes that do not implement the
      *          \Tx_Seminars_Interface_Hook_EventSingleView interface
      *
-     * @deprecated will be removed in seminars 4; use ->getSingleViewHookProvider() instead
+     * @deprecated will be removed in seminars 4; use `->getSingleViewHookProvider()` instead
      */
     protected function getSingleViewHooks(): array
     {
