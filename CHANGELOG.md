@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
-- Add new seminar single view hook (#338)
+- Add new seminar single view hook (#338, #345)
 - Add hook base (#313, #336)
 - Support TYPO3 9LTS (#322)
 - Add code sniffing and fixing (#319)

@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Hooks\Interfaces;
 
-use OliverKlee\Seminars\Hooks\Interfaces\Hook;
-
 /**
  * Use this interface for hooks concerning the seminar single view.
  *
