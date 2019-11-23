@@ -10552,7 +10552,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
      */
     public function getCurrentPriceRegularForZeroPriceReturnsForFree()
     {
-        $this->subject->setRecordPropertyString('price_regular', '0');
+        $this->subject->setRecordPropertyString('price_regular', '0.00');
 
         $result = $this->subject->getCurrentPriceRegular();
 

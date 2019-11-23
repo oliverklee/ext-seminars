@@ -39,6 +39,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop support for TYPO3 7.6 (#248, #272, #280)
 
 ### Fixed
+- Allow access to non-persisted model data (#353)
 - Avoid using `eval` in the tests (#335)
 - Fix type errors in the tests (#334)
 - Streamline `ext_localconf.php` and `ext_tables.php` (#327)

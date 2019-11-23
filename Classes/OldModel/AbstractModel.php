@@ -158,7 +158,7 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
      */
     public function isOk(): bool
     {
-        return !empty($this->recordData) && ($this->tableName !== '');
+        return !empty($this->recordData) && $this->tableName !== '';
     }
 
     /**
@@ -226,7 +226,9 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
      */
     public function hasRecordPropertyDecimal(string $key): bool
     {
-        return $this->getRecordPropertyDecimal($key) != '0.00';
+        $emptyValues = ['', '0.00', '0.0', '0'];
+
+        return !\in_array($this->getRecordPropertyDecimal($key), $emptyValues, true);
     }
 
     /**
@@ -243,18 +245,34 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
     }
 
     /**
+     * @param string $key
+     *
+     * @return void
+     *
+     * @throws \InvalidArgumentException
+     */
+    private function assertNonEmptyKey(string $key)
+    {
+        if ($key === '') {
+            throw new \InvalidArgumentException('$key must not be empty.', 1574548978);
+        }
+    }
+
+    /**
      * Sets an int element of the record data array.
      *
      * @param string $key key of the element to set (must be non-empty)
      * @param int $value the value that will be written into the element
      *
      * @return void
+     *
+     * @throws \InvalidArgumentException
      */
     protected function setRecordPropertyInteger(string $key, int $value)
     {
-        if (!empty($key)) {
-            $this->recordData[$key] = $value;
-        }
+        $this->assertNonEmptyKey($key);
+
+        $this->recordData[$key] = $value;
     }
 
     /**
@@ -267,9 +285,9 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
      */
     protected function setRecordPropertyString(string $key, string $value)
     {
-        if (!empty($key)) {
-            $this->recordData[$key] = trim($value);
-        }
+        $this->assertNonEmptyKey($key);
+
+        $this->recordData[$key] = \trim($value);
     }
 
     /**
@@ -282,9 +300,9 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
      */
     protected function setRecordPropertyBoolean(string $key, $value)
     {
-        if (!empty($key)) {
-            $this->recordData[$key] = (bool)$value;
-        }
+        $this->assertNonEmptyKey($key);
+
+        $this->recordData[$key] = (bool)$value;
     }
 
     /**
@@ -297,21 +315,23 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
      */
     public function getRecordPropertyBoolean(string $key): bool
     {
-        return $this->hasKey($key) ? ((bool)$this->recordData[$key]) : false;
+        return $this->hasKey($key) ? (bool)$this->recordData[$key] : false;
     }
 
     /**
-     * Checks whether $this->recordData is initialized at all and
-     * whether a given key exists.
+     * Checks whether $this->recordData is initialized at all and whether a given key exists.
      *
      * @param string $key the array key to search for
      *
-     * @return bool TRUE if $this->recordData has been initialized
-     *                 and the array key exists, FALSE otherwise
+     * @return bool TRUE if $this->recordData has been initialized and the array key exists, FALSE otherwise
+     *
+     * @throws \InvalidArgumentException
      */
     private function hasKey(string $key): bool
     {
-        return $this->isOk() && !empty($key) && isset($this->recordData[$key]);
+        $this->assertNonEmptyKey($key);
+
+        return isset($this->recordData[$key]);
     }
 
     /**
