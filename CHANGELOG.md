@@ -46,7 +46,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Move the plugin registration to `Configuration/TCA/Overrides/` (#325)
 - Wrap accesses to global variables (#323)
 - Use the new class name for mocks (#321)
-- Fix code inspection warnings (#315, #348)
+- Fix code inspection warnings (#315, #348, #352)
 - git-ignore the tests-generated `var/log/` folder (#314)
 - Use real records in the FE editor tests (#310)
 - Always provide flags to `htmlspecialchars` (#295)
