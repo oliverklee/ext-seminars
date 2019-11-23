@@ -29,7 +29,8 @@ class Tx_Seminars_Tests_Unit_OldModel_TimespanTest extends TestCase
 
         $this->getLanguageService()->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
 
-        $this->subject = new TestingTimeSpan(['timeFormat' => self::TIME_FORMAT]);
+        $this->subject = new TestingTimeSpan();
+        $this->subject->overrideConfiguration(['timeFormat' => self::TIME_FORMAT]);
     }
 
     private function getLanguageService(): LanguageService

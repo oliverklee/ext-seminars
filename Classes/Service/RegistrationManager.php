@@ -479,7 +479,8 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      */
     public function createRegistration(\Tx_Seminars_OldModel_Event $event, array $formData, AbstractPlugin $plugin): \Tx_Seminars_Model_Registration
     {
-        $this->registration = GeneralUtility::makeInstance(\Tx_Seminars_OldModel_Registration::class, $plugin->cObj);
+        $this->registration = GeneralUtility::makeInstance(\Tx_Seminars_OldModel_Registration::class);
+        $this->registration->setContentObject($plugin->cObj);
         $this->registration->setRegistrationData($event, $this->getLoggedInFrontEndUserUid(), $formData);
         $this->registration->commitToDb();
         $event->calculateStatistics();
@@ -663,13 +664,14 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         }
         $this->registration = GeneralUtility::makeInstance(
             \Tx_Seminars_OldModel_Registration::class,
-            $plugin->cObj,
+            0,
             \Tx_Oelib_Db::select(
                 '*',
                 'tx_seminars_attendances',
                 'uid = ' . $uid . \Tx_Oelib_Db::enableFields('tx_seminars_attendances')
             )
         );
+        $this->registration->setContentObject($plugin->cObj);
         if ($this->registration->getUser() !== $this->getLoggedInFrontEndUserUid()) {
             return;
         }

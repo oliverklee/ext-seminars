@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel;
 
-use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
-
 /**
  * This is mere a class used for unit tests. Don't use it for any other purpose.
  *
@@ -13,29 +11,6 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  */
 final class TestingRegistration extends \Tx_Seminars_OldModel_Registration
 {
-    /**
-     * The constructor.
-     *
-     * @param int $registrationUid UID of the registration record, must be > 0
-     */
-    public function __construct(int $registrationUid = 0)
-    {
-        if ($registrationUid > 0) {
-            $dbResult = \Tx_Oelib_Db::select(
-                '*',
-                $this->tableName,
-                'uid = ' . $registrationUid
-            );
-        } else {
-            $dbResult = false;
-        }
-
-        $contentObject = new ContentObjectRenderer();
-        $contentObject->start([]);
-
-        parent::__construct($contentObject, $dbResult);
-    }
-
     /**
      * Sets the "registration_queue" field of the registration record.
      *

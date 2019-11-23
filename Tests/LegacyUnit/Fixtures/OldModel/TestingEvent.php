@@ -12,15 +12,12 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel;
 final class TestingEvent extends \Tx_Seminars_OldModel_Event
 {
     /**
-     * The constructor.
+     * @param array $configuration
      *
-     * @param int $uid the UID of the event to retrieve from the DB, must be > 0
-     * @param array $configuration TS setup configuration array, may be empty
+     * @return void
      */
-    public function __construct(int $uid, array $configuration = [])
+    public function overrideConfiguration(array $configuration)
     {
-        parent::__construct($uid);
-
         $this->conf = $configuration;
     }
 

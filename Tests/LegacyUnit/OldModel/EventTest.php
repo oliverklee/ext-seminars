@@ -76,8 +76,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
             ]
         );
 
-        $this->subject = new TestingEvent(
-            $uid,
+        $this->subject = new TestingEvent($uid);
+        $this->subject->overrideConfiguration(
             [
                 'dateFormatYMD' => '%d.%m.%Y',
                 'timeFormat' => '%H:%M',
@@ -8710,7 +8710,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
                 'end_date' => 0,
             ]
         );
-        $subject = new TestingEvent($uid, []);
+        $subject = new TestingEvent($uid);
 
         self::assertSame(
             0,
@@ -8733,7 +8733,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
                 'end_date' => 0,
             ]
         );
-        $subject = new TestingEvent($uid, []);
+        $subject = new TestingEvent($uid);
 
         self::assertSame(
             $this->now,
@@ -8756,7 +8756,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
                 'end_date' => 0,
             ]
         );
-        $subject = new TestingEvent($uid, []);
+        $subject = new TestingEvent($uid);
 
         self::assertSame(
             $this->now,
@@ -8779,10 +8779,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
                 'end_date' => $this->now + 1000,
             ]
         );
-        $subject = new TestingEvent(
-            $uid,
-            ['allowRegistrationForStartedEvents' => 1]
-        );
+        $subject = new TestingEvent($uid);
+        $subject->overrideConfiguration(['allowRegistrationForStartedEvents' => 1]);
 
         self::assertSame(
             $this->now + 1000,
@@ -8805,10 +8803,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
                 'end_date' => $this->now + 1000,
             ]
         );
-        $subject = new TestingEvent(
-            $uid,
-            ['allowRegistrationForStartedEvents' => 1]
-        );
+        $subject = new TestingEvent($uid);
+        $subject->overrideConfiguration(['allowRegistrationForStartedEvents' => 1]);
 
         self::assertSame(
             $this->now - 1000,
@@ -8831,10 +8827,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
                 'end_date' => 0,
             ]
         );
-        $subject = new TestingEvent(
-            $uid,
-            ['allowRegistrationForStartedEvents' => 1]
-        );
+        $subject = new TestingEvent($uid);
+        $subject->overrideConfiguration(['allowRegistrationForStartedEvents' => 1]);
 
         self::assertSame(
             $this->now,
