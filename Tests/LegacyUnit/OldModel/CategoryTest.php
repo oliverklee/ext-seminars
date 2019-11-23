@@ -29,28 +29,6 @@ class Tx_Seminars_Tests_Unit_OldModel_CategoryTest extends TestCase
     /**
      * @test
      */
-    public function getTitleReturnsTitle()
-    {
-        $title = 'Test category';
-        $subject = new \Tx_Seminars_OldModel_Category(0, false, false, ['title' => $title]);
-
-        self::assertSame($title, $subject->getTitle());
-    }
-
-    /**
-     * @test
-     */
-    public function getIconReturnsIcon()
-    {
-        $icon = 'foo.gif';
-        $subject = new \Tx_Seminars_OldModel_Category(0, false, false, ['icon' => $icon]);
-
-        self::assertSame($icon, $subject->getIcon());
-    }
-
-    /**
-     * @test
-     */
     public function createFromUidMapsAllFields()
     {
         $title = 'Test category';

@@ -88,7 +88,7 @@ class AbstractModelTest extends TestCase
 
     public function testCreateFromUidFailsForZeroUid()
     {
-        $test = new TestingModel(0);
+        $test = new TestingModel();
 
         self::assertFalse(
             $test->isOk()
@@ -111,16 +111,6 @@ class AbstractModelTest extends TestCase
         self::assertTrue(
             $test->isOk()
         );
-    }
-
-    /**
-     * @test
-     */
-    public function createFromDirectDataResultsInOkay()
-    {
-        $subject = new TestingModel(0, false, false, ['title' => 'Foo']);
-
-        self::assertTrue($subject->isOk());
     }
 
     /**
@@ -198,7 +188,7 @@ class AbstractModelTest extends TestCase
 
     public function testHasUidIsFalseForObjectsWithoutUid()
     {
-        $virginFixture = new TestingModel(0);
+        $virginFixture = new TestingModel();
 
         self::assertEquals(
             0,
@@ -215,16 +205,6 @@ class AbstractModelTest extends TestCase
             'Test',
             $this->subject->getTitle()
         );
-    }
-
-    /**
-     * @test
-     */
-    public function dataCanBeSetDirectlyInConstructor()
-    {
-        $subject = new TestingModel(0, false, false, ['title' => 'Foo']);
-
-        self::assertSame('Foo', $subject->getTitle());
     }
 
     //////////////////////////////////
@@ -276,7 +256,7 @@ class AbstractModelTest extends TestCase
             $this->testingFramework->countRecords('tx_seminars_test', 'title = "' . $title . '"')
         );
 
-        $virginFixture = new TestingModel(0);
+        $virginFixture = new TestingModel();
         $virginFixture->setTitle($title);
         $virginFixture->enableTestMode();
         $this->testingFramework->markTableAsDirty('tx_seminars_test');
@@ -330,7 +310,7 @@ class AbstractModelTest extends TestCase
 
     public function testCommitToDbWillNotWriteIncompleteRecords()
     {
-        $virginFixture = new TestingModel(0);
+        $virginFixture = new TestingModel();
         $this->testingFramework->markTableAsDirty('tx_seminars_test');
 
         self::assertFalse(
@@ -366,7 +346,7 @@ class AbstractModelTest extends TestCase
             'createMmRecords may only be called on objects that have a UID.'
         );
 
-        $virginFixture = new TestingModel(0);
+        $virginFixture = new TestingModel();
         $virginFixture->createMmRecords('tx_seminars_test_test_mm', []);
     }
 

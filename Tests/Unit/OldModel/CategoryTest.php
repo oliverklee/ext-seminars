@@ -41,4 +41,26 @@ final class CategoryTest extends UnitTestCase
 
         self::assertInstanceOf(\Tx_Seminars_OldModel_Category::class, $result);
     }
+
+    /**
+     * @test
+     */
+    public function getTitleReturnsTitle()
+    {
+        $title = 'Test category';
+        $subject = \Tx_Seminars_OldModel_Category::fromData(['title' => $title]);
+
+        self::assertSame($title, $subject->getTitle());
+    }
+
+    /**
+     * @test
+     */
+    public function getIconReturnsIcon()
+    {
+        $icon = 'foo.gif';
+        $subject = \Tx_Seminars_OldModel_Category::fromData(['icon' => $icon]);
+
+        self::assertSame($icon, $subject->getIcon());
+    }
 }

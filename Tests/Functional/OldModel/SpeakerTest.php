@@ -168,79 +168,6 @@ class SpeakerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function hasOrganizationWithNoOrganizationReturnsFalse()
-    {
-        $subject = new \Tx_Seminars_OldModel_Speaker(0, false, false, ['organization' => '']);
-
-        self::assertFalse($subject->hasOrganization());
-    }
-
-    /**
-     * @test
-     */
-    public function hasOrganizationWithOrganizationReturnsTrue()
-    {
-        $organization = 'Foo inc.';
-        $subject = new \Tx_Seminars_OldModel_Speaker(0, false, false, ['organization' => $organization]);
-
-        self::assertTrue($subject->hasOrganization());
-    }
-
-    /**
-     * @test
-     */
-    public function hasHomepageWithNoHomepageReturnsFalse()
-    {
-        $subject = new \Tx_Seminars_OldModel_Speaker(0, false, false, ['homepage' => '']);
-
-        self::assertFalse($subject->hasHomepage());
-    }
-
-    /**
-     * @test
-     */
-    public function hasHomepageWithHomepageReturnsTrue()
-    {
-        $homepage = 'Foo inc.';
-        $subject = new \Tx_Seminars_OldModel_Speaker(0, false, false, ['homepage' => $homepage]);
-
-        self::assertTrue($subject->hasHomepage());
-    }
-
-    /**
-     * @test
-     */
-    public function hasDescriptionWithNoDescriptionReturnsFalse()
-    {
-        $subject = new \Tx_Seminars_OldModel_Speaker(0, false, false, ['description' => '']);
-
-        self::assertFalse($subject->hasDescription());
-    }
-
-    /**
-     * @test
-     */
-    public function hasDescriptionWithDescriptionReturnsTrue()
-    {
-        $description = 'Foo inc.';
-        $subject = new \Tx_Seminars_OldModel_Speaker(0, false, false, ['description' => $description]);
-
-        self::assertTrue($subject->hasDescription());
-    }
-
-    /**
-     * @test
-     */
-    public function hasSkillsInitiallyIsFalse()
-    {
-        $subject = new \Tx_Seminars_OldModel_Speaker(0);
-
-        self::assertFalse($subject->hasSkills());
-    }
-
-    /**
-     * @test
-     */
     public function canHaveOneSkill()
     {
         $this->createPersistedSubject();
@@ -248,16 +175,6 @@ class SpeakerTest extends FunctionalTestCase
         $this->addSkillRelation([]);
 
         self::assertTrue($this->subject->hasSkills());
-    }
-
-    /**
-     * @test
-     */
-    public function getSkillsShortWithNoSkillReturnsEmptyString()
-    {
-        $subject = new \Tx_Seminars_OldModel_Speaker(0);
-
-        self::assertSame('', $subject->getSkillsShort());
     }
 
     /**
@@ -289,80 +206,6 @@ class SpeakerTest extends FunctionalTestCase
     }
 
     /**
-     * @test
-     */
-    public function getNumberOfSkillsReturnsNumberOfSkills()
-    {
-        $subject = new \Tx_Seminars_OldModel_Speaker(0, false, false, ['skills' => 2]);
-
-        self::assertSame(2, $subject->getNumberOfSkills());
-    }
-
-    /**
-     * @test
-     */
-    public function getGenderForNoGenderSetReturnsUnknownGenderValue()
-    {
-        $subject = new \Tx_Seminars_OldModel_Speaker(0);
-
-        self::assertSame(\Tx_Seminars_OldModel_Speaker::GENDER_UNKNOWN, $subject->getGender());
-    }
-
-    /**
-     * @test
-     */
-    public function getGenderForKnownGenderReturnsGender()
-    {
-        $subject = new \Tx_Seminars_OldModel_Speaker(0);
-        $subject->setGender(\Tx_Seminars_OldModel_Speaker::GENDER_MALE);
-
-        self::assertSame(\Tx_Seminars_OldModel_Speaker::GENDER_MALE, $subject->getGender());
-    }
-
-    /**
-     * @test
-     */
-    public function hasCancelationPeriodWithoutCancelationPeriodReturnsFalse()
-    {
-        $subject = new \Tx_Seminars_OldModel_Speaker(0);
-
-        self::assertFalse($subject->hasCancelationPeriod());
-    }
-
-    /**
-     * @test
-     */
-    public function hasCancelationPeriodWithCancelationPeriodReturnsTrue()
-    {
-        $subject = new \Tx_Seminars_OldModel_Speaker(0);
-        $subject->setCancelationPeriod(42);
-
-        self::assertTrue($subject->hasCancelationPeriod());
-    }
-
-    /**
-     * @test
-     */
-    public function getOwnerWithoutOwnerReturnsNull()
-    {
-        $subject = new \Tx_Seminars_OldModel_Speaker(0);
-        self::assertNull($subject->getOwner());
-    }
-
-    /**
-     * @test
-     */
-    public function getOwnerWithOwnerReturnsOwner()
-    {
-        $subject = new \Tx_Seminars_OldModel_Speaker(0);
-        /** @var \Tx_Seminars_Model_FrontEndUser $frontEndUser */
-        $frontEndUser = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)->getNewGhost();
-        $subject->setOwner($frontEndUser);
-
-        self::assertSame($frontEndUser, $subject->getOwner());
-    }
-
-    /**
      * @return void
      */
     private function createPersistedSubject()
@@ -386,26 +229,6 @@ class SpeakerTest extends FunctionalTestCase
             ]
         );
         $this->subject = new \Tx_Seminars_OldModel_Speaker($uid);
-    }
-
-    /**
-     * @test
-     */
-    public function hasImageWithoutImageReturnsFalse()
-    {
-        $subject = new \Tx_Seminars_OldModel_Speaker(0);
-
-        self::assertFalse($subject->hasImage());
-    }
-
-    /**
-     * @test
-     */
-    public function hasImageWithImageReturnsTrue()
-    {
-        $subject = new \Tx_Seminars_OldModel_Speaker(0, false, false, ['image' => 1]);
-
-        self::assertTrue($subject->hasImage());
     }
 
     /**
