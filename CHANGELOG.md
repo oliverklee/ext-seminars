@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add new seminar single view hook (#338)
 - Add hook base (#313, #336)
 - Support TYPO3 9LTS (#322)
 - Add code sniffing and fixing (#319)
@@ -25,6 +26,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Update the testing libraries (#251, #252, #254)
 
 ### Deprecated
+- `EventSingleView` interface and 'singleView' hook index (#338)
 
 ### Removed
 - Drop unneeded Travis CI configuration settings (#258, #259, #260, #261)
