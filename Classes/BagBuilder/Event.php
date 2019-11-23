@@ -578,7 +578,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
         }
 
         $this->whereClauseParts['other_dates'] = '(' .
-            'tx_seminars_seminars.topic = ' . $event->getTopicUid() .
+            'tx_seminars_seminars.topic = ' . $event->getTopicOrSelfUid() .
             ' AND object_type = ' . \Tx_Seminars_Model_Event::TYPE_DATE .
             ' AND uid <> ' . $event->getUid() .
             ')';

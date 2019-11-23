@@ -783,7 +783,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
             'uid, title',
             'tx_seminars_payment_methods, tx_seminars_seminars_payment_methods_mm',
             'tx_seminars_payment_methods.uid = tx_seminars_seminars_payment_methods_mm.uid_foreign ' .
-            'AND tx_seminars_seminars_payment_methods_mm.uid_local=' . $this->getSeminar()->getTopicUid() .
+            'AND tx_seminars_seminars_payment_methods_mm.uid_local=' . $this->getSeminar()->getTopicOrSelfUid() .
             \Tx_Oelib_Db::enableFields('tx_seminars_payment_methods')
         );
 

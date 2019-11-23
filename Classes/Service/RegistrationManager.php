@@ -776,7 +776,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
     {
         /** @var \Tx_Seminars_BagBuilder_Event $builder */
         $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Event::class);
-        $builder->limitToRequiredEventTopics($event->getTopicUid());
+        $builder->limitToRequiredEventTopics($event->getTopicOrSelfUid());
         $builder->limitToTopicsWithoutRegistrationByUser($this->getLoggedInFrontEndUserUid());
         /** @var \Tx_Seminars_Bag_Event $bag */
         $bag = $builder->build();

@@ -159,7 +159,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
                 'uid',
                 'tx_seminars_payment_methods, tx_seminars_seminars_payment_methods_mm',
                 'tx_seminars_payment_methods.uid = tx_seminars_seminars_payment_methods_mm.uid_foreign ' .
-                'AND tx_seminars_seminars_payment_methods_mm.uid_local = ' . $event->getTopicUid() .
+                'AND tx_seminars_seminars_payment_methods_mm.uid_local = ' . $event->getTopicOrSelfUid() .
                 \Tx_Oelib_Db::enableFields('tx_seminars_payment_methods'),
                 '',
                 'tx_seminars_seminars_payment_methods_mm.sorting'
