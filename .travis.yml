@@ -48,6 +48,10 @@ script:
   composer ci:php:sniff;
 - >
   echo;
+  echo "Running PHP-CS-Fixer";
+  composer ci:php:fixer;
+- >
+  echo;
   echo "Running the unit tests";
   composer ci:tests:unit;
 - >
