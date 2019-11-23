@@ -418,7 +418,6 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *          \Tx_Seminars_Interface_Hook_EventSingleView interface
      *
      * @deprecated will be removed in seminars 4; use ->getSingleViewHookProvider() instead
-
      */
     protected function getSingleViewHooks(): array
     {
@@ -426,7 +425,10 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
             $hookClasses = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['singleView'];
             if (is_array($hookClasses)) {
                 foreach ($hookClasses as $hookClass) {
-                    GeneralUtility::deprecationLog($hookClass . ' - since seminars 3.0, interface \\Tx_Seminars_Interface_Hook_EventSingleView will be removed in seminars 4.0');
+                    GeneralUtility::deprecationLog(
+                        $hookClass . ' - since seminars 3.0, interface \\Tx_Seminars_Interface_Hook_EventSingleView'
+                            . ' will be removed in seminars 4.0'
+                    );
                     $hookInstance = GeneralUtility::getUserObj($hookClass);
                     if (!($hookInstance instanceof \Tx_Seminars_Interface_Hook_EventSingleView)) {
                         throw new \UnexpectedValueException(
@@ -452,7 +454,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      */
     protected function getSingleViewHookProvider(): HookProvider
     {
-        if (!$this->singleViewHookProvider instanceof HookProvider) {
+        if ($this->singleViewHookProvider === null) {
             $this->singleViewHookProvider = GeneralUtility::makeInstance(HookProvider::class, SeminarSingleView::class);
         }
 

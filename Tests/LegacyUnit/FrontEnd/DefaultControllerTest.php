@@ -1268,16 +1268,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
     {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
 
-        /** @var \Tx_Seminars_Model_Event $event */
-        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->find($this->seminarUid);
         $hookedInObject = $this->createMock(SeminarSingleView::class);
         $hookedInObject->expects(self::once())->method('modifySingleView')->with($this->subject);
 
-        $hookedInClass = get_class($hookedInObject);
+        $hookedInClass = \get_class($hookedInObject);
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][SeminarSingleView::class][] = $hookedInClass;
         GeneralUtility::addInstance($hookedInClass, $hookedInObject);
 
-        $this->subject->piVars['showUid'] = $this->seminarUid;
+        $this->subject->piVars['showUid'] = (string)$this->seminarUid;
         $this->subject->main('', []);
     }
 
