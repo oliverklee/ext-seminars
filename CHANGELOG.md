@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Use PHP 7.2 for the TER release script (#343)
 
 ### Deprecated
 
