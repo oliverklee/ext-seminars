@@ -17,10 +17,9 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_ConfigurationCheckable
 {
     /**
-     * @var string the name of the main DB table from which we get the records
-     *             for this bag
+     * @var string the name of the main DB table from which we get the records for this bag
      */
-    protected $dbTableName = '';
+    protected $tableName = '';
 
     /**
      * @var string the comma-separated names of other DB tables which we need
@@ -93,10 +92,8 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
     private $enabledFieldsQuery = '';
 
     /**
-     * The constructor. Creates a bag that contains test records and allows to iterate over them.
+     * Creates a bag that contains test records and allows to iterate over them.
      *
-     * @param string $dbTableName
-     *        the name of the DB table, must not be empty
      * @param string $queryParameters
      *        string that will be prepended to the WHERE clause using AND, e.g. 'pid=42'
      *        (the AND and the enclosing spaces are not necessary for this parameter)
@@ -112,7 +109,6 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
      *        If $showHiddenRecords is set (0/1), any hidden fields in records are ignored.
      */
     public function __construct(
-        string $dbTableName,
         string $queryParameters = '1=1',
         string $additionalTableNames = '',
         string $groupBy = '',
@@ -120,12 +116,9 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
         $limit = '',
         int $showHiddenRecords = -1
     ) {
-        $this->dbTableName = $dbTableName;
-        $this->queryParameters = trim($queryParameters);
+        $this->queryParameters = \trim($queryParameters);
         $this->additionalTableNames = !empty($additionalTableNames) ? ', ' . $additionalTableNames : '';
-        $this->createEnabledFieldsQuery(
-            $showHiddenRecords
-        );
+        $this->createEnabledFieldsQuery($showHiddenRecords);
 
         $this->orderBy = $orderBy;
         $this->groupBy = $groupBy;
@@ -147,7 +140,7 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
     {
         $allTableNames = GeneralUtility::trimExplode(
             ',',
-            $this->dbTableName . $this->additionalTableNames
+            $this->tableName . $this->additionalTableNames
         );
         $this->enabledFieldsQuery = '';
 
@@ -182,8 +175,8 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
         }
 
         $this->dbResult = \Tx_Oelib_Db::select(
-            $this->dbTableName . '.*',
-            $this->dbTableName . $this->additionalTableNames,
+            $this->tableName . '.*',
+            $this->tableName . $this->additionalTableNames,
             $this->queryParameters . $this->enabledFieldsQuery,
             $this->groupBy,
             $this->orderBy,
@@ -303,7 +296,7 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
 
         $dbResultRow = \Tx_Oelib_Db::selectSingle(
             'COUNT(*) AS number ',
-            $this->dbTableName . $this->additionalTableNames,
+            $this->tableName . $this->additionalTableNames,
             $this->queryParameters . $this->enabledFieldsQuery
         );
 
