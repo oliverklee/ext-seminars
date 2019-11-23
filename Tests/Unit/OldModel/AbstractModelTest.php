@@ -28,7 +28,7 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
-    public function testingModelIsAbstractModel()
+    public function isAbstractModel()
     {
         self::assertInstanceOf(AbstractModel::class, $this->subject);
     }

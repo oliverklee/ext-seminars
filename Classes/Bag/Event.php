@@ -47,8 +47,7 @@ class Tx_Seminars_Bag_Event extends AbstractBag
             $groupBy,
             $orderBy,
             $limit,
-            $showHiddenRecords,
-            $ignoreTimingOfRecords
+            $showHiddenRecords
         );
     }
 

@@ -154,10 +154,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
         // Auto-select the only payment method if no payment method has been
         // selected, there actually is anything to pay and only one payment
         // method is provided.
-        if (
-            !$methodOfPayment && ($this->recordData['total_price'] > 0.00) && ($event->getNumberOfPaymentMethods(
-            ) == 1)
-        ) {
+        if (!$methodOfPayment && $this->recordData['total_price'] > 0.00 && $event->getNumberOfPaymentMethods() === 1) {
             $rows = \Tx_Oelib_Db::selectMultiple(
                 'uid',
                 'tx_seminars_payment_methods, tx_seminars_seminars_payment_methods_mm',

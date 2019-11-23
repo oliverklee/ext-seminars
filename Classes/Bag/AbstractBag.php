@@ -110,8 +110,6 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
      *        LIMIT clause (may be empty), must already be safeguarded against SQL injection
      * @param int $showHiddenRecords
      *        If $showHiddenRecords is set (0/1), any hidden fields in records are ignored.
-     * @param bool $ignoreTimingOfRecords
-     *        If $ignoreTimingOfRecords is TRUE the timing of records is ignored.
      */
     public function __construct(
         string $dbTableName,
@@ -120,15 +118,13 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
         string $groupBy = '',
         string $orderBy = 'uid',
         $limit = '',
-        int $showHiddenRecords = -1,
-        bool $ignoreTimingOfRecords = false
+        int $showHiddenRecords = -1
     ) {
         $this->dbTableName = $dbTableName;
         $this->queryParameters = trim($queryParameters);
         $this->additionalTableNames = !empty($additionalTableNames) ? ', ' . $additionalTableNames : '';
         $this->createEnabledFieldsQuery(
-            $showHiddenRecords,
-            $ignoreTimingOfRecords
+            $showHiddenRecords
         );
 
         $this->orderBy = $orderBy;
@@ -144,23 +140,11 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
      * $this->enabledFieldsQuery.
      *
      * @param int $showHiddenRecords If $showHiddenRecords is set (0/1), any hidden-fields in records are ignored.
-     * @param bool $ignoreTimingOfRecords If $ignoreTimingOfRecords is TRUE the timing of records is ignored.
      *
      * @return void
      */
-    private function createEnabledFieldsQuery(
-        int $showHiddenRecords = -1,
-        bool $ignoreTimingOfRecords = false
-    ) {
-        $ignoreColumns = [];
-
-        if ($ignoreTimingOfRecords) {
-            $ignoreColumns = [
-                'starttime' => true,
-                'endtime' => true,
-            ];
-        }
-
+    private function createEnabledFieldsQuery(int $showHiddenRecords = -1)
+    {
         $allTableNames = GeneralUtility::trimExplode(
             ',',
             $this->dbTableName . $this->additionalTableNames
@@ -170,12 +154,8 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
         foreach ($allTableNames as $currentTableName) {
             // Is there a TCA entry for that table?
             $ctrl = $GLOBALS['TCA'][$currentTableName]['ctrl'];
-            if (is_array($ctrl)) {
-                $this->enabledFieldsQuery .= \Tx_Oelib_Db::enableFields(
-                    $currentTableName,
-                    $showHiddenRecords,
-                    $ignoreColumns
-                );
+            if (\is_array($ctrl)) {
+                $this->enabledFieldsQuery .= \Tx_Oelib_Db::enableFields($currentTableName, $showHiddenRecords);
             }
         }
     }
@@ -347,7 +327,7 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
         }
 
         $this->rewind();
-        $isEmpty = !is_object($this->current());
+        $isEmpty = !\is_object($this->current());
         if ($isEmpty) {
             $this->count = 0;
             $this->hasCount = true;

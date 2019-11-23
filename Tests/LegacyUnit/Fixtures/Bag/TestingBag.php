@@ -30,8 +30,6 @@ final class TestingBag extends AbstractBag
      *        LIMIT clause (may be empty), must already be safeguarded against SQL injection
      * @param int $showHiddenRecords
      *        If $showHiddenRecords is set (0/1), any hidden fields in records are ignored.
-     * @param bool $ignoreTimingOfRecords
-     *        If $ignoreTimingOfRecords is TRUE the timing of records is ignored.
      */
     public function __construct(
         string $queryParameters = '1=1',
@@ -39,8 +37,7 @@ final class TestingBag extends AbstractBag
         string $groupBy = '',
         string $orderBy = 'uid',
         string $limit = '',
-        int $showHiddenRecords = -1,
-        bool $ignoreTimingOfRecords = false
+        int $showHiddenRecords = -1
     ) {
         parent::__construct(
             'tx_seminars_test',
@@ -49,8 +46,7 @@ final class TestingBag extends AbstractBag
             $groupBy,
             $orderBy,
             $limit,
-            $showHiddenRecords,
-            $ignoreTimingOfRecords
+            $showHiddenRecords
         );
     }
 
