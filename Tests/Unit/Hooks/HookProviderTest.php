@@ -194,7 +194,7 @@ final class HookProviderTest extends UnitTestCase
         $this->expectException(\UnexpectedValueException::class);
         $this->expectExceptionCode(1565089078);
 
-        $subject = new HookProvider('');
+        new HookProvider('');
     }
 
     /**
@@ -205,7 +205,7 @@ final class HookProviderTest extends UnitTestCase
         $this->expectException(\UnexpectedValueException::class);
         $this->expectExceptionCode(1565089078);
 
-        $subject = new HookProvider(__NAMESPACE__ . '\\TestingHookInterfaceDoesNotExist');
+        new HookProvider(__NAMESPACE__ . '\\TestingHookInterfaceDoesNotExist');
     }
 
     /**
@@ -216,7 +216,7 @@ final class HookProviderTest extends UnitTestCase
         $this->expectException(\UnexpectedValueException::class);
         $this->expectExceptionCode(1565088963);
 
-        $subject = new HookProvider(TestingHookInterfaceNotExtendsHook::class);
+        new HookProvider(TestingHookInterfaceNotExtendsHook::class);
     }
 
     /**
