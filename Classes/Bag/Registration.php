@@ -14,47 +14,14 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 class Tx_Seminars_Bag_Registration extends AbstractBag
 {
     /**
-     * @var ContentObjectRenderer
+     * @var string the name of the main DB table from which we get the records for this bag
      */
-    protected $cObj = null;
+    protected $tableName = 'tx_seminars_attendances';
 
     /**
-     * The constructor. Creates a bag that contains test records and allows to iterate over them.
-     *
-     * @param string $queryParameters
-     *        string that will be prepended to the WHERE clause using AND, e.g. 'pid=42'
-     *        (the AND and the enclosing spaces are not necessary for this parameter)
-     * @param string $additionalTableNames
-     *        comma-separated names of additional DB tables used for JOINs, may be empty
-     * @param string $groupBy
-     *        GROUP BY clause (may be empty), must already be safeguarded against SQL injection
-     * @param string $orderBy
-     *        ORDER BY clause (may be empty), must already be safeguarded against SQL injection
-     * @param string $limit
-     *        LIMIT clause (may be empty), must already be safeguarded against SQL injection
-     * @param int $showHiddenRecords
-     *        If $showHiddenRecords is set (0/1), any hidden fields in records are ignored.
+     * @var ContentObjectRenderer
      */
-    public function __construct(
-        $queryParameters = '1=1',
-        $additionalTableNames = '',
-        $groupBy = '',
-        $orderBy = 'uid',
-        $limit = '',
-        $showHiddenRecords = -1
-    ) {
-        $this->cObj = GeneralUtility::makeInstance(ContentObjectRenderer::class);
-
-        parent::__construct(
-            'tx_seminars_attendances',
-            $queryParameters,
-            $additionalTableNames,
-            $groupBy,
-            $orderBy,
-            $limit,
-            $showHiddenRecords
-        );
-    }
+    private $contentObject = null;
 
     /**
      * Creates the current item in $this->currentItem, using $this->dbResult
@@ -72,7 +39,16 @@ class Tx_Seminars_Bag_Registration extends AbstractBag
             0,
             $this->dbResult
         );
-        $this->currentItem->setContentObject($this->cObj);
+        $this->currentItem->setContentObject($this->getContentObject());
         $this->valid();
+    }
+
+    protected function getContentObject(): ContentObjectRenderer
+    {
+        if ($this->contentObject === null) {
+            $this->contentObject = GeneralUtility::makeInstance(ContentObjectRenderer::class);
+        }
+
+        return $this->contentObject;
     }
 }

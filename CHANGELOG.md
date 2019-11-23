@@ -19,7 +19,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Load the topic lazily in the old event model (#349)
 - Use PHP 7.2 for the TER release script (#343)
 - Require oelib >= 3.0.1 (#342)
-- Rework the old model and bag (builder) architecture (#328, #329, #330, #331, #332, #333, #337, #339, #340, #341, #344, #346, #350)
+- Rework the old model and bag (builder) architecture (#328, #329, #330, #331, #332, #333, #337, #339, #340, #341, #344, #346, #350, #354)
 - Bump the `static_info_tables` dependency (#320)
 - Require oelib 3.0 (#318)
 - Refactor registration form footer creation (#309)
