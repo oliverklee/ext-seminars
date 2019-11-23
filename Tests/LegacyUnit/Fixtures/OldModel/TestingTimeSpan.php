@@ -30,13 +30,13 @@ final class TestingTimeSpan extends \Tx_Seminars_OldModel_AbstractTimeSpan
     ];
 
     /**
-     * The constructor.
+     * @param array $configuration
      *
-     * @param array $configuration TS setup configuration array, may be empty
+     * @return void
      */
-    public function __construct(array $configuration)
+    public function overrideConfiguration(array $configuration)
     {
-        $this->init($configuration);
+        $this->conf = $configuration;
     }
 
     /**

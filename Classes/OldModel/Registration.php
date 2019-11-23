@@ -76,26 +76,13 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
     private static $cachedSeminars = [];
 
     /**
-     * The constructor.
+     * @param ContentObjectRenderer|null $contentObjectRenderer
      *
-     * @param ContentObjectRenderer|null $contentObjectRenderer content object
-     * @param \mysqli_result|bool $dbResult
-     *        MySQL result (of SELECT query) object. If this parameter is not provided or FALSE,
-     *        setRegistrationData() needs to be called directly after construction or this object will not be usable.
+     * @return void
      */
-    public function __construct(ContentObjectRenderer $contentObjectRenderer = null, $dbResult = false)
+    public function setContentObject(ContentObjectRenderer $contentObjectRenderer = null)
     {
         $this->cObj = $contentObjectRenderer;
-        $this->init();
-
-        if ($dbResult === false) {
-            return;
-        }
-
-        $data = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-        if ($data !== false) {
-            $this->setData($data);
-        }
     }
 
     /**

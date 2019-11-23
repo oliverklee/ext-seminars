@@ -532,9 +532,10 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
             );
             $this->registration = GeneralUtility::makeInstance(
                 \Tx_Seminars_OldModel_Registration::class,
-                $this->cObj,
+                0,
                 $dbResult
             );
+            $this->registration->setContentObject($this->cObj);
             if ($dbResult !== false) {
                 $GLOBALS['TYPO3_DB']->sql_free_result($dbResult);
             }

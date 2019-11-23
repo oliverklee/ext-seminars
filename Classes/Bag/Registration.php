@@ -69,9 +69,10 @@ class Tx_Seminars_Bag_Registration extends AbstractBag
     {
         $this->currentItem = GeneralUtility::makeInstance(
             \Tx_Seminars_OldModel_Registration::class,
-            $this->cObj,
+            0,
             $this->dbResult
         );
+        $this->currentItem->setContentObject($this->cObj);
         $this->valid();
     }
 }

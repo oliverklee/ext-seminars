@@ -418,7 +418,7 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends TestCase
 
         $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
 
-        $event = new TestingEvent($eventUid, []);
+        $event = new TestingEvent($eventUid);
 
         $this->subject->createIntroduction('', $event);
     }
@@ -434,12 +434,8 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends TestCase
             ['begin_date' => $GLOBALS['SIM_EXEC_TIME']]
         );
 
-        $event = new TestingEvent(
-            $eventUid,
-            [
-                'dateFormatYMD' => $dateFormatYMD,
-            ]
-        );
+        $event = new TestingEvent($eventUid);
+        $event->overrideConfiguration(['dateFormatYMD' => $dateFormatYMD]);
 
         self::assertContains(
             strftime($dateFormatYMD, $GLOBALS['SIM_EXEC_TIME']),
@@ -462,8 +458,8 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends TestCase
             ]
         );
 
-        $event = new TestingEvent(
-            $eventUid,
+        $event = new TestingEvent($eventUid);
+        $event->overrideConfiguration(
             [
                 'dateFormatYMD' => $dateFormatYMD,
                 'dateFormatD' => $dateFormatD,
@@ -492,12 +488,8 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends TestCase
             ]
         );
 
-        $event = new TestingEvent(
-            $eventUid,
-            [
-                'timeFormat' => $timeFormat,
-            ]
-        );
+        $event = new TestingEvent($eventUid);
+        $event->overrideConfiguration(['timeFormat' => $timeFormat]);
 
         self::assertContains(
             strftime($timeFormat, $GLOBALS['SIM_EXEC_TIME']),
@@ -520,7 +512,8 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends TestCase
             ]
         );
 
-        $event = new TestingEvent($eventUid, ['timeFormat' => $timeFormat]);
+        $event = new TestingEvent($eventUid);
+        $event->overrideConfiguration(['timeFormat' => $timeFormat]);
         $translator = \Tx_Oelib_TranslatorRegistry::get('seminars');
         $timeInsert = strftime($timeFormat, $GLOBALS['SIM_EXEC_TIME']) . ' ' .
             $translator->translate('email_timeTo') . ' ' .
@@ -547,11 +540,9 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends TestCase
             ]
         );
 
-        $event = new TestingEvent(
-            $eventUid,
-            ['dateFormatYMD' => $dateFormat]
-        );
-        $formattedDate = strftime($dateFormat, $GLOBALS['SIM_EXEC_TIME']);
+        $event = new TestingEvent($eventUid);
+        $event->overrideConfiguration(['dateFormatYMD' => $dateFormat]);
+        $formattedDate = \strftime($dateFormat, $GLOBALS['SIM_EXEC_TIME']);
 
         self::assertContains(
             $formattedDate,
@@ -573,10 +564,8 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends TestCase
             ['begin_date' => $GLOBALS['SIM_EXEC_TIME']]
         );
 
-        $event = new TestingEvent(
-            $eventUid,
-            ['dateFormatYMD' => $dateFormatYMD, 'salutation' => $salutation]
-        );
+        $event = new TestingEvent($eventUid);
+        $event->overrideConfiguration(['dateFormatYMD' => $dateFormatYMD, 'salutation' => $salutation]);
 
         $introduction = $this->subject->createIntroduction('%s', $event);
 
@@ -597,10 +586,8 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends TestCase
             ['begin_date' => $GLOBALS['SIM_EXEC_TIME']]
         );
 
-        $event = new TestingEvent(
-            $eventUid,
-            ['dateFormatYMD' => $dateFormatYMD, 'salutation' => $salutation]
-        );
+        $event = new TestingEvent($eventUid);
+        $event->overrideConfiguration(['dateFormatYMD' => $dateFormatYMD, 'salutation' => $salutation]);
 
         $introduction = $this->subject->createIntroduction('%s', $event);
 
@@ -621,10 +608,8 @@ class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends TestCase
             ['begin_date' => $GLOBALS['SIM_EXEC_TIME']]
         );
 
-        $event = new TestingEvent(
-            $eventUid,
-            ['dateFormatYMD' => $dateFormatYMD, 'salutation' => $salutation]
-        );
+        $event = new TestingEvent($eventUid);
+        $event->overrideConfiguration(['dateFormatYMD' => $dateFormatYMD, 'salutation' => $salutation]);
 
         $introduction = $this->subject->createIntroduction('%s', $event);
 
