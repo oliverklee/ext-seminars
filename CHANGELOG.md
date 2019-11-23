@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Display the name of the current functional test (#256)
 
 ### Changed
+- Use PHP 7.2 for the TER release script (#343)
 - Require oelib >= 3.0.1 (#342)
 - Rework the old model and bag (builder) architecture (#328, #329, #330, #331, #332, #333, #337, #339, #340, #341)
 - Bump the `static_info_tables` dependency (#320)
