@@ -274,12 +274,11 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationDataIsEmptyForEmptyKey()
+    public function getRegistrationDataForEmptyKeyThrowsException()
     {
-        self::assertSame(
-            '',
-            $this->subject->getRegistrationData('')
-        );
+        $this->expectException(\InvalidArgumentException::class);
+
+        $this->subject->getRegistrationData('');
     }
 
     /**
