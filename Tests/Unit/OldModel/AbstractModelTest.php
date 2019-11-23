@@ -32,4 +32,25 @@ final class AbstractModelTest extends UnitTestCase
     {
         self::assertInstanceOf(AbstractModel::class, $this->subject);
     }
+
+    /**
+     * @test
+     */
+    public function fromDataCreatesInstanceOfSubclass()
+    {
+        $result = TestingModel::fromData([]);
+
+        self::assertInstanceOf(TestingModel::class, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function fromDataProvidesModelWithGivenData()
+    {
+        $data = ['test' => true];
+        $result = TestingModel::fromData($data);
+
+        self::assertSame($data['test'], $result->getBooleanTest());
+    }
 }

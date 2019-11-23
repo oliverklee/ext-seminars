@@ -53,6 +53,21 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
     protected $isPersisted = false;
 
     /**
+     * Creates a new instance that has the given data.
+     *
+     * @param array $data
+     *
+     * @return AbstractModel
+     */
+    public static function fromData(array $data): AbstractModel
+    {
+        $model = new static();
+        $model->setData($data);
+
+        return $model;
+    }
+
+    /**
      * The constructor. Creates a test instance from a DB record.
      *
      * @param int $uid
