@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add php-cs-fixer to the CI (#351)
 - Add new seminar single view hook (#338, #345)
 - Add hook base (#313, #336)
 - Support TYPO3 9LTS (#322)
