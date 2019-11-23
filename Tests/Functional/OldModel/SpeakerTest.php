@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\OldModel;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
-use OliverKlee\Seminars\OldModel\AbstractModel;
 use OliverKlee\Seminars\Tests\Functional\Traits\FalHelper;
 use TYPO3\CMS\Core\Resource\FileReference;
 
@@ -142,16 +141,6 @@ class SpeakerTest extends FunctionalTestCase
                 'uid_local=' . $this->subject->getUid()
             )
         );
-    }
-
-    /**
-     * @test
-     */
-    public function isAbstractModel()
-    {
-        $subject = new \Tx_Seminars_OldModel_Speaker();
-
-        self::assertInstanceOf(AbstractModel::class, $subject);
     }
 
     /**
