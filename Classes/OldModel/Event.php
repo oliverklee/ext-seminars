@@ -3185,18 +3185,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function isEventTopic(): bool
     {
-        return $this->getRecordPropertyInteger('object_type')
-            == \Tx_Seminars_Model_Event::TYPE_TOPIC;
-    }
-
-    /**
-     * Checks whether we are a date record and have a topic.
-     *
-     * @return bool whether we are a date record and have a topic
-     */
-    private function hasTopic(): bool
-    {
-        return $this->getTopic() !== null;
+        return $this->getRecordPropertyInteger('object_type') === \Tx_Seminars_Model_Event::TYPE_TOPIC;
     }
 
     /**
