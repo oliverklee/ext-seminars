@@ -32,4 +32,14 @@ final class AbstractTimeSpanTest extends UnitTestCase
     {
         self::assertInstanceOf(AbstractModel::class, $this->subject);
     }
+
+    /**
+     * @test
+     */
+    public function fromDataCreatesInstanceOfSubclass()
+    {
+        $result = TestingTimeSpan::fromData([]);
+
+        self::assertInstanceOf(TestingTimeSpan::class, $result);
+    }
 }

@@ -31,4 +31,14 @@ final class RegistrationTest extends UnitTestCase
     {
         self::assertInstanceOf(AbstractModel::class, $this->subject);
     }
+
+    /**
+     * @test
+     */
+    public function fromDataCreatesInstanceOfSubclass()
+    {
+        $result = \Tx_Seminars_OldModel_Registration::fromData([]);
+
+        self::assertInstanceOf(\Tx_Seminars_OldModel_Registration::class, $result);
+    }
 }

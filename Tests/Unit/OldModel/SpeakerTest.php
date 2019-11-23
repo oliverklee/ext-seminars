@@ -32,4 +32,14 @@ class SpeakerTest extends UnitTestCase
     {
         self::assertInstanceOf(AbstractModel::class, $this->subject);
     }
+
+    /**
+     * @test
+     */
+    public function fromDataCreatesInstanceOfSubclass()
+    {
+        $result = \Tx_Seminars_OldModel_Speaker::fromData([]);
+
+        self::assertInstanceOf(\Tx_Seminars_OldModel_Speaker::class, $result);
+    }
 }

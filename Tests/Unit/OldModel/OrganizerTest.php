@@ -31,4 +31,14 @@ final class OrganizerTest extends UnitTestCase
     {
         self::assertInstanceOf(AbstractModel::class, $this->subject);
     }
+
+    /**
+     * @test
+     */
+    public function fromDataCreatesInstanceOfSubclass()
+    {
+        $result = \Tx_Seminars_OldModel_Organizer::fromData([]);
+
+        self::assertInstanceOf(\Tx_Seminars_OldModel_Organizer::class, $result);
+    }
 }
