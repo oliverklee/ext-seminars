@@ -76,14 +76,9 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
      *        MySQL result (of SELECT query) object. If this parameter is provided, $uid will be ignored.
      * @param bool $allowHiddenRecords
      *        whether it is possible to create an object from a hidden record
-     * @param array $recordData
      */
-    public function __construct(
-        int $uid = 0,
-        $dbResult = false,
-        bool $allowHiddenRecords = false,
-        array $recordData = []
-    ) {
+    public function __construct(int $uid = 0, $dbResult = false, bool $allowHiddenRecords = false)
+    {
         if ($this->includeLanguageFile && TYPO3_MODE === 'BE' && $this->getLanguageService() !== null) {
             $this->getLanguageService()->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
         }
@@ -92,8 +87,6 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
             $this->retrieveDataFromDatabase(0, $dbResult);
         } elseif ($uid > 0) {
             $this->retrieveDataFromDatabase($uid, false, $allowHiddenRecords);
-        } else {
-            $this->setData($recordData);
         }
 
         if ($this->needsTemplateHelperInitialization) {

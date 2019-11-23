@@ -511,7 +511,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
     public function commitToDbCanCreateNewRecord()
     {
         $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
-        $registration = new TestingRegistration(0);
+        $registration = new TestingRegistration();
         $registration->setRegistrationData($seminar, 0, []);
         $registration->enableTestMode();
         $this->testingFramework->markTableAsDirty('tx_seminars_attendances');
@@ -542,7 +542,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
             'tx_seminars_lodgings'
         );
 
-        $registration = new TestingRegistration(0);
+        $registration = new TestingRegistration();
         $registration->setRegistrationData(
             $seminar,
             0,
@@ -589,7 +589,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
             'tx_seminars_foods'
         );
 
-        $registration = new TestingRegistration(0);
+        $registration = new TestingRegistration();
         $registration->setRegistrationData(
             $seminar,
             0,
@@ -636,7 +636,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
             'tx_seminars_checkboxes'
         );
 
-        $registration = new TestingRegistration(0);
+        $registration = new TestingRegistration();
         $registration->setRegistrationData(
             $seminar,
             0,
