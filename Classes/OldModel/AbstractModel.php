@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\OldModel;
 
+use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -30,7 +31,7 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
     /**
      * @var string the name of the SQL table this class corresponds to
      */
-    protected $tableName = '';
+    protected static $tableName = '';
 
     /**
      * @var bool whether to call `TemplateHelper::init()` during construction
@@ -130,9 +131,6 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
      * The column names will be used as array keys.
      * The column names must *not* be prefixed with the table name.
      *
-     * Before this function may be called, $this->tableName must be set
-     * to the corresponding DB table name.
-     *
      * If at least one element is taken, this function sets $this->isInDb to TRUE.
      *
      * Example:
@@ -158,7 +156,7 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
      */
     public function isOk(): bool
     {
-        return !empty($this->recordData) && $this->tableName !== '';
+        return !empty($this->recordData) && static::$tableName !== '';
     }
 
     /**
@@ -354,16 +352,9 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
 
         if (!$this->isPersisted || !$this->hasUid()) {
             $this->setRecordPropertyInteger('crdate', $now);
-            \Tx_Oelib_Db::insert(
-                $this->tableName,
-                $this->recordData
-            );
+            \Tx_Oelib_Db::insert(static::$tableName, $this->recordData);
         } else {
-            \Tx_Oelib_Db::update(
-                $this->tableName,
-                'uid = ' . $this->getUid(),
-                $this->recordData
-            );
+            \Tx_Oelib_Db::update(static::$tableName, 'uid = ' . $this->getUid(), $this->recordData);
         }
 
         $this->isPersisted = true;
@@ -384,11 +375,7 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
             return;
         }
 
-        \Tx_Oelib_Db::update(
-            $this->tableName,
-            'uid = ' . $this->getUid(),
-            $updateArray
-        );
+        \Tx_Oelib_Db::update(static::$tableName, 'uid = ' . $this->getUid(), $updateArray);
     }
 
     /**
@@ -476,7 +463,7 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
     /**
      * Retrieves a record from the database.
      *
-     * The record is retrieved from $this->tableName. Therefore $this->tableName
+     * The record is retrieved from static::$tableName. Therefore static::$tableName
      * has to be set before calling this method.
      *
      * @param int $uid the UID of the record to retrieve from the DB
@@ -488,8 +475,8 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
     {
         return $GLOBALS['TYPO3_DB']->exec_SELECTquery(
             '*',
-            $this->tableName,
-            'uid=' . $uid . \Tx_Oelib_Db::enableFields($this->tableName, (int)$allowHiddenRecords),
+            static::$tableName,
+            'uid=' . $uid . \Tx_Oelib_Db::enableFields(static::$tableName, (int)$allowHiddenRecords),
             '',
             '',
             '1'
@@ -566,11 +553,7 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
     {
         /** @var \TYPO3\CMS\Core\Imaging\IconFactory $iconFactory */
         $iconFactory = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconFactory::class);
-        return $iconFactory->getIconForRecord(
-            $this->tableName,
-            $this->recordData,
-            \TYPO3\CMS\Core\Imaging\Icon::SIZE_SMALL
-        )->render();
+        return $iconFactory->getIconForRecord(static::$tableName, $this->recordData, Icon::SIZE_SMALL)->render();
     }
 
     /**

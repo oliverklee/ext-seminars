@@ -33,7 +33,7 @@ class Tx_Seminars_OldModel_Speaker extends AbstractModel
     /**
      * @var string the name of the SQL table this class corresponds to
      */
-    protected $tableName = 'tx_seminars_speakers';
+    protected static $tableName = 'tx_seminars_speakers';
 
     /**
      * @var bool whether to call `TemplateHelper::init()` during construction in BE mode

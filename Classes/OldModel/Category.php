@@ -14,7 +14,7 @@ class Tx_Seminars_OldModel_Category extends AbstractModel
     /**
      * @var string the name of the SQL table this class corresponds to
      */
-    protected $tableName = 'tx_seminars_categories';
+    protected static $tableName = 'tx_seminars_categories';
 
     /**
      * @var bool whether to call `TemplateHelper::init()` during construction in BE mode

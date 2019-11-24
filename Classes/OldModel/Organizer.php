@@ -14,7 +14,7 @@ class Tx_Seminars_OldModel_Organizer extends AbstractModel implements \Tx_Oelib_
     /**
      * @var string the name of the SQL table this class corresponds to
      */
-    protected $tableName = 'tx_seminars_organizers';
+    protected static $tableName = 'tx_seminars_organizers';
 
     /**
      * @var bool whether to call `TemplateHelper::init()` during construction in BE mode
