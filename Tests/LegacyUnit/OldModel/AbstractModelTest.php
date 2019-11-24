@@ -68,27 +68,6 @@ class AbstractModelTest extends TestCase
     // Tests for creating objects.
     ////////////////////////////////
 
-    public function testCreateFromUid()
-    {
-        self::assertTrue($this->subject->comesFromDatabase());
-    }
-
-    public function testCreateFromUidFailsForInvalidUid()
-    {
-        $test = new TestingModel(
-            $this->subjectUid + 99
-        );
-
-        self::assertFalse($test->comesFromDatabase());
-    }
-
-    public function testCreateFromUidFailsForMissingUid()
-    {
-        $test = new TestingModel();
-
-        self::assertFalse($test->comesFromDatabase());
-    }
-
     public function testCreateFromDbResult()
     {
         $dbResult = \Tx_Oelib_Db::select(
@@ -113,42 +92,6 @@ class AbstractModelTest extends TestCase
         $test = new TestingModel(0, false);
 
         self::assertFalse($test->isOk());
-    }
-
-    /**
-     * @test
-     */
-    public function createFromDbResultFailsForHiddenRecord()
-    {
-        $this->testingFramework->changeRecord(
-            'tx_seminars_test',
-            $this->subjectUid,
-            ['hidden' => 1]
-        );
-
-        $test = new TestingModel($this->subjectUid);
-
-        self::assertFalse($test->comesFromDatabase());
-    }
-
-    /**
-     * @test
-     */
-    public function createFromDbResultWithAllowedHiddenRecordsGetsHiddenRecordFromDb()
-    {
-        $this->testingFramework->changeRecord(
-            'tx_seminars_test',
-            $this->subjectUid,
-            ['hidden' => 1]
-        );
-
-        $test = new TestingModel(
-            $this->subjectUid,
-            false,
-            true
-        );
-
-        self::assertTrue($test->comesFromDatabase());
     }
 
     //////////////////////////////////
@@ -233,7 +176,7 @@ class AbstractModelTest extends TestCase
     }
 
     ///////////////////////////////////
-    // Tests for commiting to the DB.
+    // Tests for committing to the DB.
     ///////////////////////////////////
 
     public function testCommitToDbCanInsertNewRecord()
