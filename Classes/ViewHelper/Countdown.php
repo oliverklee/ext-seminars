@@ -28,13 +28,13 @@ class Tx_Seminars_ViewHelper_Countdown
      * 50000 seconds -> "13 hours"
      * The function uses localized strings and also looks for proper usage of singular/plural.
      *
-     * @param int $targettime the target UNIX timestamp to count up to, must be >= 0
+     * @param int $targetTime the target UNIX timestamp to count up to, must be >= 0
      *
      * @return string a localized string representing the time left until the event starts
      */
-    public function render($targettime)
+    public function render($targetTime)
     {
-        $seconds = $targettime - $GLOBALS['SIM_ACCESS_TIME'];
+        $seconds = $targetTime - (int)$GLOBALS['SIM_ACCESS_TIME'];
 
         if ($seconds >= \Tx_Oelib_Time::SECONDS_PER_DAY) {
             $result = $this->getAsDays($seconds);
@@ -58,7 +58,7 @@ class Tx_Seminars_ViewHelper_Countdown
      */
     protected function getAsDays($seconds)
     {
-        $countdownValue = (int)round($seconds / \Tx_Oelib_Time::SECONDS_PER_DAY);
+        $countdownValue = (int)\round($seconds / \Tx_Oelib_Time::SECONDS_PER_DAY);
         if ($countdownValue > 1 || $countdownValue === 0) {
             $countdownText = $this->translator->translate('countdown_days_plural');
         } else {
@@ -77,7 +77,7 @@ class Tx_Seminars_ViewHelper_Countdown
      */
     protected function getAsHours($seconds)
     {
-        $countdownValue = (int)round($seconds / \Tx_Oelib_Time::SECONDS_PER_HOUR);
+        $countdownValue = (int)\round($seconds / \Tx_Oelib_Time::SECONDS_PER_HOUR);
         if ($countdownValue > 1 || $countdownValue === 0) {
             $countdownText = $this->translator->translate('countdown_hours_plural');
         } else {
@@ -96,7 +96,7 @@ class Tx_Seminars_ViewHelper_Countdown
      */
     protected function getAsMinutes($seconds)
     {
-        $countdownValue = (int)round($seconds / \Tx_Oelib_Time::SECONDS_PER_MINUTE);
+        $countdownValue = (int)\round($seconds / \Tx_Oelib_Time::SECONDS_PER_MINUTE);
         if ($countdownValue > 1 || $countdownValue === 0) {
             $countdownText = $this->translator->translate('countdown_minutes_plural');
         } else {
@@ -131,6 +131,6 @@ class Tx_Seminars_ViewHelper_Countdown
      */
     protected function getFormattedMessage($countdownValue, $countdownText)
     {
-        return sprintf($this->translator->translate('message_countdown'), $countdownValue, $countdownText);
+        return \sprintf($this->translator->translate('message_countdown'), $countdownValue, $countdownText);
     }
 }
