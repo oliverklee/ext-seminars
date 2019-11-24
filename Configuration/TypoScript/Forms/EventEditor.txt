@@ -88,10 +88,14 @@ plugin.tx_seminars_pi1.form.eventEditor {
                 bindsto {
                     exec = eventeditor.populateListSpeakers
                     params {
-                        10.name = type
-                        10.value = Speaker
-                        20.name = lister
-                        20.value = 1
+                        10 {
+                            name = type
+                            value = Speaker
+                        }
+                        20 {
+                            name = lister
+                            value = 1
+                        }
                     }
                 }
             }
@@ -146,13 +150,15 @@ plugin.tx_seminars_pi1.form.eventEditor {
             sanitize = false
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_emptySubtitle
-                10.custom.userobj {
-                    extension = this
-                    method = validateString
-                    params {
-                        10.name = elementName
-                        10.value = subtitle
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_emptySubtitle
+                    userobj {
+                        extension = this
+                        method = validateString
+                        params.10 {
+                            name = elementName
+                            value = subtitle
+                        }
                     }
                 }
             }
@@ -170,13 +176,15 @@ plugin.tx_seminars_pi1.form.eventEditor {
 
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noCategoryChosen
-                10.custom.userobj {
-                    extension = this
-                    method = validateCheckboxes
-                    params {
-                        10.name = elementName
-                        10.value = categories
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noCategoryChosen
+                    userobj {
+                        extension = this
+                        method = validateCheckboxes
+                        params.10 {
+                            name = elementName
+                            value = categories
+                        }
                     }
                 }
             }
@@ -189,13 +197,15 @@ plugin.tx_seminars_pi1.form.eventEditor {
             sanitize = false
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_emptyTeaser
-                10.custom.userobj {
-                    extension = this
-                    method = validateString
-                    params {
-                        10.name = elementName
-                        10.value = teaser
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_emptyTeaser
+                    userobj {
+                        extension = this
+                        method = validateString
+                        params.10 {
+                            name = elementName
+                            value = teaser
+                        }
                     }
                 }
             }
@@ -208,13 +218,15 @@ plugin.tx_seminars_pi1.form.eventEditor {
             sanitize = false
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_emptyDescription
-                10.custom.userobj {
-                    extension = this
-                    method = validateString
-                    params {
-                        10.name = elementName
-                        10.value = description
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_emptyDescription
+                    userobj {
+                        extension = this
+                        method = validateString
+                        params.10 {
+                            name = elementName
+                            value = description
+                        }
                     }
                 }
             }
@@ -240,13 +252,15 @@ plugin.tx_seminars_pi1.form.eventEditor {
 
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noEventTypeChosen
-                10.custom.userobj {
-                    extension = this
-                    method = validateInteger
-                    params {
-                        10.name = elementName
-                        10.value = event_type
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noEventTypeChosen
+                    userobj {
+                        extension = this
+                        method = validateInteger
+                        params.10 {
+                            name = elementName
+                            value = event_type
+                        }
                     }
                 }
             }
@@ -259,13 +273,15 @@ plugin.tx_seminars_pi1.form.eventEditor {
             sanitize = false
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_accreditationNumberZero
-                10.custom.userobj {
-                    extension = this
-                    method = validateString
-                    params {
-                        10.name = elementName
-                        10.value = accreditation_number
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_accreditationNumberZero
+                    userobj {
+                        extension = this
+                        method = validateString
+                        params.10 {
+                            name = elementName
+                            value = accreditation_number
+                        }
                     }
                 }
             }
@@ -278,13 +294,15 @@ plugin.tx_seminars_pi1.form.eventEditor {
             sanitize = false
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_creditPointsZero
-                10.custom.userobj {
-                    extension = this
-                    method = validateInteger
-                    params {
-                        10.name = elementName
-                        10.value = credit_points
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_creditPointsZero
+                    userobj {
+                        extension = this
+                        method = validateInteger
+                        params.10 {
+                            name = elementName
+                            value = credit_points
+                        }
                     }
                 }
             }
@@ -303,13 +321,15 @@ plugin.tx_seminars_pi1.form.eventEditor {
 
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidBeginDate
-                10.custom.userobj {
-                    extension = this
-                    method = validateDate
-                    params {
-                        10.name = elementName
-                        10.value = begin_date
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidBeginDate
+                    userobj {
+                        extension = this
+                        method = validateDate
+                        params.10 {
+                            name = elementName
+                            value = begin_date
+                        }
                     }
                 }
             }
@@ -328,13 +348,15 @@ plugin.tx_seminars_pi1.form.eventEditor {
 
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidEndDate
-                10.custom.userobj {
-                    extension = this
-                    method = validateDate
-                    params {
-                        10.name = elementName
-                        10.value = end_date
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidEndDate
+                    userobj {
+                        extension = this
+                        method = validateDate
+                        params.10 {
+                            name = elementName
+                            value = end_date
+                        }
                     }
                 }
             }
@@ -353,13 +375,15 @@ plugin.tx_seminars_pi1.form.eventEditor {
 
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidBeginDateRegistration
-                10.custom.userobj {
-                    extension = this
-                    method = validateDate
-                    params {
-                        10.name = elementName
-                        10.value = begin_date_registration
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidBeginDateRegistration
+                    userobj {
+                        extension = this
+                        method = validateDate
+                        params.10 {
+                            name = elementName
+                            value = begin_date_registration
+                        }
                     }
                 }
             }
@@ -378,13 +402,15 @@ plugin.tx_seminars_pi1.form.eventEditor {
 
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidDeadlineRegistration
-                10.custom.userobj {
-                    extension = this
-                    method = validateDate
-                    params {
-                        10.name = elementName
-                        10.value = deadline_registration
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidDeadlineRegistration
+                    userobj {
+                        extension = this
+                        method = validateDate
+                        params.10 {
+                            name = elementName
+                            value = deadline_registration
+                        }
                     }
                 }
             }
@@ -403,13 +429,15 @@ plugin.tx_seminars_pi1.form.eventEditor {
 
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidDeadlineEarlyBird
-                10.custom.userobj {
-                    extension = this
-                    method = validateDate
-                    params {
-                        10.name = elementName
-                        10.value = deadline_early_bird
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidDeadlineEarlyBird
+                    userobj {
+                        extension = this
+                        method = validateDate
+                        params.10 {
+                            name = elementName
+                            value = deadline_early_bird
+                        }
                     }
                 }
             }
@@ -428,13 +456,15 @@ plugin.tx_seminars_pi1.form.eventEditor {
 
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidDeadlineUnregistration
-                10.custom.userobj {
-                    extension = this
-                    method = validateDate
-                    params {
-                        10.name = elementName
-                        10.value = deadline_unregistration
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidDeadlineUnregistration
+                    userobj {
+                        extension = this
+                        method = validateDate
+                        params.10 {
+                            name = elementName
+                            value = deadline_unregistration
+                        }
                     }
                 }
             }
@@ -455,13 +485,15 @@ plugin.tx_seminars_pi1.form.eventEditor {
 
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noPlaceChosen
-                10.custom.userobj {
-                    extension = this
-                    method = validateCheckboxes
-                    params {
-                        10.name = elementName
-                        10.value = place
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noPlaceChosen
+                    userobj {
+                        extension = this
+                        method = validateCheckboxes
+                        params.10 {
+                            name = elementName
+                            value = place
+                        }
                     }
                 }
             }
@@ -474,9 +506,9 @@ plugin.tx_seminars_pi1.form.eventEditor {
             process.userobj {
                 extension = this
                 method = isFrontEndEditingOfRelatedRecordsAllowed
-                params {
-                    10.name = relatedRecordType
-                    10.value = Places
+                params.10 {
+                    name = relatedRecordType
+                    value = Places
                 }
             }
 
@@ -534,9 +566,9 @@ plugin.tx_seminars_pi1.form.eventEditor {
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.country
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                     data {
-                        items {
-                            10.caption =
-                            10.value = 0
+                        items.10 {
+                            value = 0
+                            caption =
                         }
 
                         userobj.php (
@@ -655,9 +687,9 @@ plugin.tx_seminars_pi1.form.eventEditor {
                     label = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_sites.country
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                     data {
-                        items {
-                            10.caption =
-                            10.value = 0
+                        items.10 {
+                            value = 0
+                            caption =
                         }
 
                         userobj.php (
@@ -732,13 +764,15 @@ plugin.tx_seminars_pi1.form.eventEditor {
             sanitize = false
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_emptyRoom
-                10.custom.userobj {
-                    extension = this
-                    method = validateString
-                    params {
-                        10.name = elementName
-                        10.value = room
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_emptyRoom
+                    userobj {
+                        extension = this
+                        method = validateString
+                        params.10 {
+                            name = elementName
+                            value = room
+                        }
                     }
                 }
             }
@@ -756,13 +790,15 @@ plugin.tx_seminars_pi1.form.eventEditor {
 
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noLodgingsChosen
-                10.custom.userobj {
-                    extension = this
-                    method = validateCheckboxes
-                    params {
-                        10.name = elementName
-                        10.value = lodgings
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noLodgingsChosen
+                    userobj {
+                        extension = this
+                        method = validateCheckboxes
+                        params.10 {
+                            name = elementName
+                            value = lodgings
+                        }
                     }
                 }
             }
@@ -780,13 +816,15 @@ plugin.tx_seminars_pi1.form.eventEditor {
 
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noFoodsChosen
-                10.custom.userobj {
-                    extension = this
-                    method = validateCheckboxes
-                    params {
-                        10.name = elementName
-                        10.value = foods
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noFoodsChosen
+                    userobj {
+                        extension = this
+                        method = validateCheckboxes
+                        params.10 {
+                            name = elementName
+                            value = foods
+                        }
                     }
                 }
             }
@@ -841,9 +879,9 @@ plugin.tx_seminars_pi1.form.eventEditor {
             process.userobj {
                 extension = this
                 method = isFrontEndEditingOfRelatedRecordsAllowed
-                params {
-                    10.name = relatedRecordType
-                    10.value = Speakers
+                params.10 {
+                    name = relatedRecordType
+                    value = Speakers
                 }
             }
 
@@ -886,12 +924,18 @@ plugin.tx_seminars_pi1.form.eventEditor {
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                     data {
                         items {
-                            10.caption =
-                            10.value = 0
-                            20.caption = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.gender_male
-                            20.value = 1
-                            30.caption = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.gender_female
-                            30.value = 2
+                            10 {
+                                caption =
+                                value = 0
+                            }
+                            20 {
+                                caption = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.gender_male
+                                value = 1
+                            }
+                            30 {
+                                caption = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.gender_female
+                                value = 2
+                            }
                         }
                     }
                 }
@@ -1056,12 +1100,18 @@ plugin.tx_seminars_pi1.form.eventEditor {
                     wrap = <div class="formidable-rdrstd-rdtwrap">|</div>
                     data {
                         items {
-                            10.caption =
-                            10.value = 0
-                            20.caption = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.gender_male
-                            20.value = 1
-                            30.caption = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.gender_female
-                            30.value = 2
+                            10 {
+                                caption =
+                                value = 0
+                            }
+                            20 {
+                                caption = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.gender_male
+                                value = 1
+                            }
+                            30 {
+                                caption = LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.gender_female
+                                value = 2
+                            }
                         }
                     }
                 }
@@ -1209,21 +1259,23 @@ plugin.tx_seminars_pi1.form.eventEditor {
             data.userobj {
                 extension = this
                 method = populateListSpeakers
-                params {
-                    10.name = type
-                    10.value = Partner
+                params.10 {
+                    name = type
+                    value = Partner
                 }
             }
 
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noPartnersChosen
-                10.custom.userobj {
-                    extension = this
-                    method = validateCheckboxes
-                    params {
-                        10.name = elementName
-                        10.value = partners
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noPartnersChosen
+                    userobj {
+                        extension = this
+                        method = validateCheckboxes
+                        params.10 {
+                            name = elementName
+                            value = partners
+                        }
                     }
                 }
             }
@@ -1240,21 +1292,23 @@ plugin.tx_seminars_pi1.form.eventEditor {
             data.userobj {
                 extension = this
                 method = populateListSpeakers
-                params {
-                    10.name = type
-                    10.value = Tutor
+                params.10 {
+                    name = type
+                    value = Tutor
                 }
             }
 
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noTutorsChosen
-                10.custom.userobj {
-                    extension = this
-                    method = validateCheckboxes
-                    params {
-                        10.name = elementName
-                        10.value = tutors
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noTutorsChosen
+                    userobj {
+                        extension = this
+                        method = validateCheckboxes
+                        params.10 {
+                            name = elementName
+                            value = tutors
+                        }
                     }
                 }
             }
@@ -1271,21 +1325,23 @@ plugin.tx_seminars_pi1.form.eventEditor {
             data.userobj {
                 extension = this
                 method = populateListSpeakers
-                params {
-                    10.name = type
-                    10.value = Leader
+                params.10 {
+                    name = type
+                    value = Leader
                 }
             }
 
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noLeadersChosen
-                10.custom.userobj {
-                    extension = this
-                    method = validateCheckboxes
-                    params {
-                        10.name = elementName
-                        10.value = leaders
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noLeadersChosen
+                    userobj {
+                        extension = this
+                        method = validateCheckboxes
+                        params.10 {
+                            name = elementName
+                            value = leaders
+                        }
                     }
                 }
             }
@@ -1298,13 +1354,15 @@ plugin.tx_seminars_pi1.form.eventEditor {
             sanitize = false
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidPriceRegular
-                10.custom.userobj {
-                    extension = this
-                    method = validatePrice
-                    params {
-                        10.name = elementName
-                        10.value = price_regular
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidPriceRegular
+                    userobj {
+                        extension = this
+                        method = validatePrice
+                        params.10 {
+                            name = elementName
+                            value = price_regular
+                        }
                     }
                 }
             }
@@ -1317,13 +1375,15 @@ plugin.tx_seminars_pi1.form.eventEditor {
             sanitize = false
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidPriceRegularEarly
-                10.custom.userobj {
-                    extension = this
-                    method = validatePrice
-                    params {
-                        10.name = elementName
-                        10.value = price_regular_early
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidPriceRegularEarly
+                    userobj {
+                        extension = this
+                        method = validatePrice
+                        params.10 {
+                            name = elementName
+                            value = price_regular_early
+                        }
                     }
                 }
             }
@@ -1336,13 +1396,15 @@ plugin.tx_seminars_pi1.form.eventEditor {
             sanitize = false
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidPriceRegularBoard
-                10.custom.userobj {
-                    extension = this
-                    method = validatePrice
-                    params {
-                        10.name = elementName
-                        10.value = price_regular_board
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidPriceRegularBoard
+                    userobj {
+                        extension = this
+                        method = validatePrice
+                        params.10 {
+                            name = elementName
+                            value = price_regular_board
+                        }
                     }
                 }
             }
@@ -1355,13 +1417,15 @@ plugin.tx_seminars_pi1.form.eventEditor {
             sanitize = false
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidPriceSpecial
-                10.custom.userobj {
-                    extension = this
-                    method = validatePrice
-                    params {
-                        10.name = elementName
-                        10.value = price_special
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidPriceSpecial
+                    userobj {
+                        extension = this
+                        method = validatePrice
+                        params.10 {
+                            name = elementName
+                            value = price_special
+                        }
                     }
                 }
             }
@@ -1374,13 +1438,15 @@ plugin.tx_seminars_pi1.form.eventEditor {
             sanitize = false
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidPriceSpecialEarly
-                10.custom.userobj {
-                    extension = this
-                    method = validatePrice
-                    params {
-                        10.name = elementName
-                        10.value = price_special_early
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidPriceSpecialEarly
+                    userobj {
+                        extension = this
+                        method = validatePrice
+                        params.10 {
+                            name = elementName
+                            value = price_special_early
+                        }
                     }
                 }
             }
@@ -1393,13 +1459,15 @@ plugin.tx_seminars_pi1.form.eventEditor {
             sanitize = false
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidPriceSpecialBoard
-                10.custom.userobj {
-                    extension = this
-                    method = validatePrice
-                    params {
-                        10.name = elementName
-                        10.value = price_special_board
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidPriceSpecialBoard
+                    userobj {
+                        extension = this
+                        method = validatePrice
+                        params.10 {
+                            name = elementName
+                            value = price_special_board
+                        }
                     }
                 }
             }
@@ -1412,13 +1480,15 @@ plugin.tx_seminars_pi1.form.eventEditor {
             sanitize = false
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_emptyAdditionalInformation
-                10.custom.userobj {
-                    extension = this
-                    method = validateString
-                    params {
-                        10.name = elementName
-                        10.value = additional_information
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_emptyAdditionalInformation
+                    userobj {
+                        extension = this
+                        method = validateString
+                        params.10 {
+                            name = elementName
+                            value = additional_information
+                        }
                     }
                 }
             }
@@ -1439,13 +1509,15 @@ plugin.tx_seminars_pi1.form.eventEditor {
 
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noCheckboxesChosen
-                10.custom.userobj {
-                    extension = this
-                    method = validateCheckboxes
-                    params {
-                        10.name = elementName
-                        10.value = checkboxes
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noCheckboxesChosen
+                    userobj {
+                        extension = this
+                        method = validateCheckboxes
+                        params.10 {
+                            name = elementName
+                            value = checkboxes
+                        }
                     }
                 }
             }
@@ -1458,9 +1530,9 @@ plugin.tx_seminars_pi1.form.eventEditor {
             process.userobj {
                 extension = this
                 method = isFrontEndEditingOfRelatedRecordsAllowed
-                params {
-                    10.name = relatedRecordType
-                    10.value = Checkboxes
+                params.10 {
+                    name = relatedRecordType
+                    value = Checkboxes
                 }
             }
 
@@ -1591,13 +1663,15 @@ plugin.tx_seminars_pi1.form.eventEditor {
 
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noPaymentMethodsChosen
-                10.custom.userobj {
-                    extension = this
-                    method = validateCheckboxes
-                    params {
-                        10.name = elementName
-                        10.value = payment_methods
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noPaymentMethodsChosen
+                    userobj {
+                        extension = this
+                        method = validateCheckboxes
+                        params.10 {
+                            name = elementName
+                            value = payment_methods
+                        }
                     }
                 }
             }
@@ -1622,12 +1696,14 @@ plugin.tx_seminars_pi1.form.eventEditor {
 
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_emptyOrganizer
-                10.custom.userobj {
-                    php (
-                        $value = array_pop(func_get_args());
-                        return (!empty($value));
-                    )
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_emptyOrganizer
+                    userobj {
+                        php (
+                            $value = array_pop(func_get_args());
+                            return (!empty($value));
+                        )
+                    }
                 }
             }
         }
@@ -1651,13 +1727,15 @@ plugin.tx_seminars_pi1.form.eventEditor {
             sanitize = false
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_attendeesMinZero
-                10.custom.userobj {
-                    extension = this
-                    method = validateInteger
-                    params {
-                        10.name = elementName
-                        10.value = attendees_min
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_attendeesMinZero
+                    userobj {
+                        extension = this
+                        method = validateInteger
+                        params.10 {
+                            name = elementName
+                            value = attendees_min
+                        }
                     }
                 }
             }
@@ -1670,13 +1748,15 @@ plugin.tx_seminars_pi1.form.eventEditor {
             sanitize = false
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_attendeesMaxZero
-                10.custom.userobj {
-                    extension = this
-                    method = validateInteger
-                    params {
-                        10.name = elementName
-                        10.value = attendees_max
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_attendeesMaxZero
+                    userobj {
+                        extension = this
+                        method = validateInteger
+                        params.10 {
+                            name = elementName
+                            value = attendees_max
+                        }
                     }
                 }
             }
@@ -1695,13 +1775,15 @@ plugin.tx_seminars_pi1.form.eventEditor {
             sanitize = false
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_offlineAttendeesZero
-                10.custom.userobj {
-                    extension = this
-                    method = validateInteger
-                    params {
-                        10.name = elementName
-                        10.value = offline_attendees
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_offlineAttendeesZero
+                    userobj {
+                        extension = this
+                        method = validateInteger
+                        params.10 {
+                            name = elementName
+                            value = offline_attendees
+                        }
                     }
                 }
             }
@@ -1722,13 +1804,15 @@ plugin.tx_seminars_pi1.form.eventEditor {
 
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noTargetGroupsChosen
-                10.custom.userobj {
-                    extension = this
-                    method = validateCheckboxes
-                    params {
-                        10.name = elementName
-                        10.value = target_groups
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noTargetGroupsChosen
+                    userobj {
+                        extension = this
+                        method = validateCheckboxes
+                        params.10 {
+                            name = elementName
+                            value = target_groups
+                        }
                     }
                 }
             }
@@ -1741,9 +1825,9 @@ plugin.tx_seminars_pi1.form.eventEditor {
             process.userobj {
                 extension = this
                 method = isFrontEndEditingOfRelatedRecordsAllowed
-                params {
-                    10.name = relatedRecordType
-                    10.value = TargetGroups
+                params.10 {
+                    name = relatedRecordType
+                    value = TargetGroups
                 }
             }
 
@@ -1927,13 +2011,15 @@ plugin.tx_seminars_pi1.form.eventEditor {
             sanitize = false
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_emptyNotes
-                10.custom.userobj {
-                    extension = this
-                    method = validateString
-                    params {
-                        10.name = elementName
-                        10.value = notes
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_emptyNotes
+                    userobj {
+                        extension = this
+                        method = validateString
+                        params.10 {
+                            name = elementName
+                            value = notes
+                        }
                     }
                 }
             }
@@ -1950,14 +2036,15 @@ plugin.tx_seminars_pi1.form.eventEditor {
 
             validators {
                 10 = validator:STANDARD
-                10.custom.message.userobj {
-                    extension = this
-                    method = getFileUploadErrorMessage
-                }
-
-                10.custom.userobj {
-                    extension = this
-                    method = checkFile
+                10.custom {
+                    message.userobj {
+                        extension = this
+                        method = getFileUploadErrorMessage
+                    }
+                    userobj {
+                        extension = this
+                        method = checkFile
+                    }
                 }
             }
         }
