@@ -124,7 +124,7 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
      */
     protected static function fetchDataByUid(int $uid, bool $allowHidden)
     {
-        $query = self::getQueryBuilderForTable(static::$tableName);
+        $query = self::getQueryBuilderForOwnTable();
         if ($allowHidden) {
             $query->getRestrictions()->removeByType(HiddenRestriction::class);
         }
@@ -623,6 +623,14 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
     public function getTypoScriptNamespace(): string
     {
         return 'plugin.tx_seminars.';
+    }
+
+    /**
+     * @return QueryBuilder
+     */
+    protected static function getQueryBuilderForOwnTable(): QueryBuilder
+    {
+        return self::getConnectionPool()->getQueryBuilderForTable(static::$tableName);
     }
 
     /**
