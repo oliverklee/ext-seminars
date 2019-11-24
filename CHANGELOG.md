@@ -43,6 +43,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop support for TYPO3 7.6 (#248, #272, #280)
 
 ### Fixed
+- Fix the numbers in the countdown tests (#365)
 - Use the correct prefixes for request parameters (#360)
 - Allow access to non-persisted model data (#353)
 - Avoid using `eval` in the tests (#335)

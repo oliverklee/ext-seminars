@@ -14,17 +14,17 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CountdownTest extends TestCase
     /**
      * @var \Tx_Seminars_ViewHelper_Countdown
      */
-    private $subject;
+    private $subject = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework
      */
-    private $testingFramework;
+    private $testingFramework = null;
 
     /**
      * @var \Tx_Oelib_Translator
      */
-    private $translator;
+    private $translator = null;
 
     protected function setUp()
     {
@@ -38,7 +38,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CountdownTest extends TestCase
 
     protected function tearDown()
     {
-        $this->testingFramework->cleanUp();
+        $this->testingFramework->cleanUpWithoutDatabase();
     }
 
     /**
@@ -49,7 +49,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CountdownTest extends TestCase
         $offset = 30;
 
         self::assertSame(
-            sprintf(
+            \sprintf(
                 $this->translator->translate('message_countdown'),
                 $offset,
                 $this->translator->translate('countdown_seconds_plural')
@@ -66,9 +66,9 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CountdownTest extends TestCase
         $offset = 60;
 
         self::assertSame(
-            sprintf(
+            \sprintf(
                 $this->translator->translate('message_countdown'),
-                $offset,
+                $offset / \Tx_Oelib_Time::SECONDS_PER_MINUTE,
                 $this->translator->translate('countdown_minutes_singular')
             ),
             $this->subject->render($GLOBALS['SIM_ACCESS_TIME'] + $offset)
@@ -83,9 +83,9 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CountdownTest extends TestCase
         $offset = 120;
 
         self::assertSame(
-            sprintf(
+            \sprintf(
                 $this->translator->translate('message_countdown'),
-                $offset,
+                $offset / \Tx_Oelib_Time::SECONDS_PER_MINUTE,
                 $this->translator->translate('countdown_minutes_plural')
             ),
             $this->subject->render($GLOBALS['SIM_ACCESS_TIME'] + $offset)
@@ -100,9 +100,9 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CountdownTest extends TestCase
         $offset = 3600;
 
         self::assertSame(
-            sprintf(
+            \sprintf(
                 $this->translator->translate('message_countdown'),
-                $offset,
+                $offset / \Tx_Oelib_Time::SECONDS_PER_HOUR,
                 $this->translator->translate('countdown_hours_singular')
             ),
             $this->subject->render($GLOBALS['SIM_ACCESS_TIME'] + $offset)
@@ -117,9 +117,9 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CountdownTest extends TestCase
         $offset = 7200;
 
         self::assertSame(
-            sprintf(
+            \sprintf(
                 $this->translator->translate('message_countdown'),
-                $offset,
+                $offset / \Tx_Oelib_Time::SECONDS_PER_HOUR,
                 $this->translator->translate('countdown_hours_plural')
             ),
             $this->subject->render($GLOBALS['SIM_ACCESS_TIME'] + $offset)
@@ -134,9 +134,9 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CountdownTest extends TestCase
         $offset = 86400;
 
         self::assertSame(
-            sprintf(
+            \sprintf(
                 $this->translator->translate('message_countdown'),
-                $offset,
+                $offset / \Tx_Oelib_Time::SECONDS_PER_DAY,
                 $this->translator->translate('countdown_days_singular')
             ),
             $this->subject->render($GLOBALS['SIM_ACCESS_TIME'] + $offset)
@@ -151,9 +151,9 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CountdownTest extends TestCase
         $offset = 2 * 86400;
 
         self::assertSame(
-            sprintf(
+            \sprintf(
                 $this->translator->translate('message_countdown'),
-                $offset,
+                $offset / \Tx_Oelib_Time::SECONDS_PER_DAY,
                 $this->translator->translate('countdown_days_plural')
             ),
             $this->subject->render($GLOBALS['SIM_ACCESS_TIME'] + $offset)
