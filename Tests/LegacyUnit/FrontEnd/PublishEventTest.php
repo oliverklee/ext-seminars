@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 
 /**
  * Test case.
@@ -11,6 +12,8 @@ use OliverKlee\PhpUnit\TestCase;
  */
 class Tx_Seminars_Tests_Unit_FrontEnd_PublishEventTest extends TestCase
 {
+    use LanguageHelper;
+
     /**
      * @var \Tx_Seminars_FrontEnd_PublishEvent
      */
@@ -43,7 +46,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_PublishEventTest extends TestCase
     public function renderForNoPublicationHashSetInPiVarsReturnsPublishFailedMessage()
     {
         self::assertEquals(
-            $this->subject->translate('message_publishingFailed'),
+            $this->getLanguageService()->getLL('message_publishingFailed'),
             $this->subject->render()
         );
     }
@@ -56,7 +59,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_PublishEventTest extends TestCase
         $this->subject->piVars['hash'] = '';
 
         self::assertEquals(
-            $this->subject->translate('message_publishingFailed'),
+            $this->getLanguageService()->getLL('message_publishingFailed'),
             $this->subject->render()
         );
     }
@@ -69,7 +72,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_PublishEventTest extends TestCase
         $this->subject->piVars['hash'] = 'foo';
 
         self::assertEquals(
-            $this->subject->translate('message_publishingFailed'),
+            $this->getLanguageService()->getLL('message_publishingFailed'),
             $this->subject->render()
         );
     }
@@ -88,7 +91,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_PublishEventTest extends TestCase
         $this->subject->piVars['hash'] = '123456ABC';
 
         self::assertEquals(
-            $this->subject->translate('message_publishingFailed'),
+            $this->getLanguageService()->getLL('message_publishingFailed'),
             $this->subject->render()
         );
     }
@@ -107,7 +110,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_PublishEventTest extends TestCase
         $this->subject->piVars['hash'] = '123456ABC';
 
         self::assertEquals(
-            $this->subject->translate('message_publishingSuccessful'),
+            $this->getLanguageService()->getLL('message_publishingSuccessful'),
             $this->subject->render()
         );
     }

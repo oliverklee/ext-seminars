@@ -8,6 +8,7 @@ use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingRegistration;
 use OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures\RegistrationHookInterface;
 use OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures\TestingRegistrationManager;
+use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -20,6 +21,8 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  */
 class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
 {
+    use LanguageHelper;
+
     /**
      * @var TestingRegistrationManager
      */
@@ -551,7 +554,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->seminar->setBeginDate(0);
 
         self::assertContains(
-            $this->pi1->translate('label_onlinePrebooking'),
+            $this->getLanguageService()->getLL('label_onlinePrebooking'),
             $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
         );
     }
@@ -568,7 +571,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->seminar->setAttendancesMax(5);
 
         self::assertContains(
-            $this->pi1->translate('label_onlineRegistration'),
+            $this->getLanguageService()->getLL('label_onlineRegistration'),
             $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
         );
     }
@@ -586,7 +589,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->seminar->setRegistrationQueue(true);
 
         self::assertContains(
-            sprintf($this->pi1->translate('label_onlineRegistrationOnQueue'), 0),
+            \sprintf($this->getLanguageService()->getLL('label_onlineRegistrationOnQueue'), 0),
             $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
         );
     }
@@ -603,7 +606,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->seminar->setRegistrationQueue(true);
 
         self::assertContains(
-            sprintf($this->pi1->translate('label_onlineRegistrationOnQueue'), 0),
+            \sprintf($this->getLanguageService()->getLL('label_onlineRegistrationOnQueue'), 0),
             $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
         );
     }
@@ -1124,7 +1127,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         );
 
         self::assertSame(
-            $this->subject->translate('message_alreadyRegistered'),
+            $this->getLanguageService()->getLL('message_alreadyRegistered'),
             $this->subject->canRegisterIfLoggedInMessage($this->seminar)
         );
     }
@@ -1176,7 +1179,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         );
 
         self::assertSame(
-            $this->subject->translate('message_userIsBlocked'),
+            $this->getLanguageService()->getLL('message_userIsBlocked'),
             $this->subject->canRegisterIfLoggedInMessage($this->cachedSeminar)
         );
     }
@@ -1189,7 +1192,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->createBookedOutSeminar();
 
         self::assertSame(
-            $this->subject->translate('message_noVacancies'),
+            $this->getLanguageService()->getLL('message_noVacancies'),
             $this->subject->canRegisterIfLoggedInMessage($this->fullyBookedSeminar)
         );
     }
@@ -1202,7 +1205,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->seminar->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
 
         self::assertSame(
-            $this->subject->translate('message_seminarCancelled'),
+            $this->getLanguageService()->getLL('message_seminarCancelled'),
             $this->subject->canRegisterIfLoggedInMessage($this->seminar)
         );
     }
@@ -1216,7 +1219,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->seminar->setNeedsRegistration(false);
 
         self::assertSame(
-            $this->subject->translate('message_noRegistrationNecessary'),
+            $this->getLanguageService()->getLL('message_noRegistrationNecessary'),
             $this->subject->canRegisterIfLoggedInMessage($this->seminar)
         );
     }
@@ -2329,7 +2332,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
-            $this->subject->translate('email_confirmationSubject'),
+            $this->getLanguageService()->getLL('email_confirmationSubject'),
             $this->mailer->getFirstSentEmail()->getSubject()
         );
     }
@@ -2689,7 +2692,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertNotContains(
-            $this->subject->translate('label_planned_disclaimer'),
+            $this->getLanguageService()->getLL('label_planned_disclaimer'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -2711,7 +2714,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertNotContains(
-            $this->subject->translate('label_planned_disclaimer'),
+            $this->getLanguageService()->getLL('label_planned_disclaimer'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -2733,7 +2736,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
-            $this->subject->translate('label_planned_disclaimer'),
+            $this->getLanguageService()->getLL('label_planned_disclaimer'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -2759,7 +2762,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertNotContains(
-            $this->subject->translate('label_planned_disclaimer'),
+            $this->getLanguageService()->getLL('label_planned_disclaimer'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -2930,7 +2933,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
-            $this->subject->translate('message_willBeAnnounced'),
+            $this->getLanguageService()->getLL('message_willBeAnnounced'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -3966,7 +3969,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
-            \Tx_Oelib_TranslatorRegistry::get('seminars')->translate('email_hello_informal'),
+            $this->getLanguageService()->getLL('email_hello_informal'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -3995,7 +3998,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
-            \Tx_Oelib_TranslatorRegistry::get('seminars')->translate('email_hello_formal_2'),
+            $this->getLanguageService()->getLL('email_hello_formal_2'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -4024,7 +4027,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
-            \Tx_Oelib_TranslatorRegistry::get('seminars')->translate('email_hello_formal_0'),
+            $this->getLanguageService()->getLL('email_hello_formal_0'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -4053,7 +4056,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
-            \Tx_Oelib_TranslatorRegistry::get('seminars')->translate('email_hello_formal_1'),
+            $this->getLanguageService()->getLL('email_hello_formal_1'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -4078,7 +4081,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
 
         self::assertContains(
             sprintf(
-                $this->subject->translate('email_confirmationHello'),
+                $this->getLanguageService()->getLL('email_confirmationHello'),
                 $this->seminar->getTitle()
             ),
             $this->mailer->getFirstSentEmail()->getBody()
@@ -4105,7 +4108,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
 
         self::assertContains(
             sprintf(
-                $this->subject->translate('email_confirmationHello_informal'),
+                $this->getLanguageService()->getLL('email_confirmationHello_informal'),
                 $this->seminar->getTitle()
             ),
             $this->mailer->getFirstSentEmail()->getBody()
@@ -4139,7 +4142,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
 
         self::assertContains(
             sprintf(
-                $this->subject->translate(
+                $this->getLanguageService()->getLL(
                     'email_confirmationOnUnregistrationHello'
                 ),
                 $this->seminar->getTitle()
@@ -4175,7 +4178,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
 
         self::assertContains(
             sprintf(
-                $this->subject->translate(
+                $this->getLanguageService()->getLL(
                     'email_confirmationOnUnregistrationHello_informal'
                 ),
                 $this->seminar->getTitle()
@@ -4211,7 +4214,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
 
         self::assertContains(
             sprintf(
-                $this->subject->translate(
+                $this->getLanguageService()->getLL(
                     'email_confirmationOnRegistrationForQueueHello'
                 ),
                 $this->seminar->getTitle()
@@ -4247,7 +4250,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
 
         self::assertContains(
             sprintf(
-                $this->subject->translate(
+                $this->getLanguageService()->getLL(
                     'email_confirmationOnRegistrationForQueueHello_informal'
                 ),
                 $this->seminar->getTitle()
@@ -4283,7 +4286,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
 
         self::assertContains(
             sprintf(
-                $this->subject->translate(
+                $this->getLanguageService()->getLL(
                     'email_confirmationOnQueueUpdateHello'
                 ),
                 $this->seminar->getTitle()
@@ -4319,7 +4322,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
 
         self::assertContains(
             sprintf(
-                $this->subject->translate(
+                $this->getLanguageService()->getLL(
                     'email_confirmationOnQueueUpdateHello_informal'
                 ),
                 $this->seminar->getTitle()
@@ -4974,7 +4977,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->subject->notifyOrganizers($registration);
 
         self::assertRegExp(
-            '/' . $this->subject->translate('label_vacancies') . ': 1$/',
+            '/' . $this->getLanguageService()->getLL('label_vacancies') . ': 1$/',
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -4999,8 +5002,8 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->subject->notifyOrganizers($registration);
 
         self::assertContains(
-            $this->subject->translate('label_vacancies') . ': ' .
-            $this->subject->translate('label_unlimited'),
+            $this->getLanguageService()->getLL('label_vacancies') . ': ' .
+            $this->getLanguageService()->getLL('label_unlimited'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -5029,7 +5032,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->subject->notifyOrganizers($registration);
 
         self::assertContains(
-            $this->subject->translate('label_company'),
+            $this->getLanguageService()->getLL('label_company'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -5286,7 +5289,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
 
         self::assertContains(
             sprintf(
-                $this->subject->translate('email_additionalNotificationEnoughRegistrationsSubject'),
+                $this->getLanguageService()->getLL('email_additionalNotificationEnoughRegistrationsSubject'),
                 $this->seminarUid,
                 ''
             ),
@@ -5371,7 +5374,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         self::assertNotNull($firstEmail);
         self::assertContains(
             sprintf(
-                $this->subject->translate('email_additionalNotificationEnoughRegistrationsSubject'),
+                $this->getLanguageService()->getLL('email_additionalNotificationEnoughRegistrationsSubject'),
                 $this->seminarUid,
                 ''
             ),
@@ -5528,7 +5531,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
 
         self::assertContains(
             sprintf(
-                $this->subject->translate('email_additionalNotificationIsFullSubject'),
+                $this->getLanguageService()->getLL('email_additionalNotificationIsFullSubject'),
                 $this->seminarUid,
                 ''
             ),
@@ -5550,7 +5553,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->subject->sendAdditionalNotification($registration);
 
         self::assertContains(
-            $this->subject->translate('email_additionalNotificationIsFull'),
+            $this->getLanguageService()->getLL('email_additionalNotificationIsFull'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -5627,7 +5630,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->subject->sendAdditionalNotification($registration);
 
         self::assertRegExp(
-            '/' . $this->subject->translate('label_vacancies') . ': 1$/',
+            '/' . $this->getLanguageService()->getLL('label_vacancies') . ': 1$/',
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -5655,7 +5658,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->subject->sendAdditionalNotification($registration);
 
         self::assertContains(
-            $this->subject->translate('label_vacancies') . ': ' . $this->subject->translate('label_unlimited'),
+            $this->getLanguageService()->getLL('label_vacancies') . ': ' . $this->getLanguageService()->getLL('label_unlimited'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -8000,7 +8003,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
     public function existsSeminarMessageForZeroUidReturnsErrorMessage()
     {
         self::assertContains(
-            $this->subject->translate('message_missingSeminarNumber'),
+            $this->getLanguageService()->getLL('message_missingSeminarNumber'),
             $this->subject->existsSeminarMessage(0)
         );
     }
@@ -8024,7 +8027,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
     public function existsSeminarMessageForInexistentUidReturnsErrorMessage()
     {
         self::assertContains(
-            $this->subject->translate('message_wrongSeminarNumber'),
+            $this->getLanguageService()->getLL('message_wrongSeminarNumber'),
             $this->subject->existsSeminarMessage($this->testingFramework->getAutoIncrement('tx_seminars_seminars'))
         );
     }
@@ -8054,7 +8057,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         );
 
         self::assertContains(
-            $this->subject->translate('message_wrongSeminarNumber'),
+            $this->getLanguageService()->getLL('message_wrongSeminarNumber'),
             $this->subject->existsSeminarMessage($this->seminarUid)
         );
     }
@@ -8071,7 +8074,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         );
 
         self::assertContains(
-            $this->subject->translate('message_wrongSeminarNumber'),
+            $this->getLanguageService()->getLL('message_wrongSeminarNumber'),
             $this->subject->existsSeminarMessage($this->seminarUid)
         );
     }

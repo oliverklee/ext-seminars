@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
@@ -14,6 +15,8 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  */
 class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
 {
+    use LanguageHelper;
+
     /**
      * @var \Tx_Seminars_FrontEnd_EventEditor
      */
@@ -445,7 +448,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
         );
 
         self::assertContains(
-            $this->subject->translate('message_notLoggedIn'),
+            $this->getLanguageService()->getLL('message_notLoggedIn'),
             $this->subject->hasAccessMessage()
         );
     }
@@ -460,7 +463,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
         $this->testingFramework->createAndLoginFrontEndUser();
 
         self::assertContains(
-            $this->subject->translate('message_noAccessToEventEditor'),
+            $this->getLanguageService()->getLL('message_noAccessToEventEditor'),
             $this->subject->hasAccessMessage()
         );
     }
@@ -486,7 +489,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
         $this->createLogInAndAddFeUserAsVip();
 
         self::assertContains(
-            $this->subject->translate('message_noAccessToEventEditor'),
+            $this->getLanguageService()->getLL('message_noAccessToEventEditor'),
             $this->subject->hasAccessMessage()
         );
     }
@@ -518,7 +521,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
         $this->createLogInAndAddFeUserAsDefaultVip();
 
         self::assertContains(
-            $this->subject->translate('message_noAccessToEventEditor'),
+            $this->getLanguageService()->getLL('message_noAccessToEventEditor'),
             $this->subject->hasAccessMessage()
         );
     }
@@ -547,7 +550,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
         $this->testingFramework->createAndLoginFrontEndUser();
 
         self::assertContains(
-            $this->subject->translate('message_noAccessToEventEditor'),
+            $this->getLanguageService()->getLL('message_noAccessToEventEditor'),
             $this->subject->hasAccessMessage()
         );
     }
@@ -588,7 +591,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
         );
 
         self::assertContains(
-            $this->subject->translate('message_noAccessToEventEditor'),
+            $this->getLanguageService()->getLL('message_noAccessToEventEditor'),
             $this->subject->hasAccessMessage()
         );
     }
@@ -629,7 +632,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
         $this->subject->setObjectUid($this->testingFramework->getAutoIncrement('tx_seminars_seminars'));
 
         self::assertContains(
-            $this->subject->translate('message_wrongSeminarNumber'),
+            $this->getLanguageService()->getLL('message_wrongSeminarNumber'),
             $this->subject->hasAccessMessage()
         );
     }
@@ -652,7 +655,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
         );
 
         self::assertContains(
-            $this->subject->translate('message_wrongSeminarNumber'),
+            $this->getLanguageService()->getLL('message_wrongSeminarNumber'),
             $this->subject->hasAccessMessage()
         );
     }
@@ -2307,7 +2310,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
         $this->subject->sendEMailToReviewer();
 
         self::assertSame(
-            $this->subject->translate('publish_event_subject'),
+            $this->getLanguageService()->getLL('publish_event_subject'),
             $this->mailer->getFirstSentEmail()->getSubject()
         );
     }
@@ -2708,7 +2711,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
             $this->mailer->getFirstSentEmail()
         );
         self::assertSame(
-            $this->subject->translate('save_event_subject'),
+            $this->getLanguageService()->getLL('save_event_subject'),
             $this->mailer->getFirstSentEmail()->getSubject()
         );
     }
@@ -2727,7 +2730,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
             $this->mailer->getFirstSentEmail()
         );
         self::assertContains(
-            $this->subject->translate('label_save_event_text'),
+            $this->getLanguageService()->getLL('label_save_event_text'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -2746,7 +2749,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
             $this->mailer->getFirstSentEmail()
         );
         self::assertContains(
-            $this->subject->translate('label_save_event_overview'),
+            $this->getLanguageService()->getLL('label_save_event_overview'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }

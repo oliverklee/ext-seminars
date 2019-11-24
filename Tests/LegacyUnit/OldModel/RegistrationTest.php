@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingRegistration;
+use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 
 /**
  * Test case.
@@ -13,6 +14,8 @@ use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingRegistration;
  */
 class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
 {
+    use LanguageHelper;
+
     /**
      * @var TestingRegistration
      */
@@ -102,16 +105,6 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
         \Tx_Seminars_Service_RegistrationManager::purgeInstance();
     }
 
-    /**
-     * @test
-     */
-    public function isOk()
-    {
-        self::assertTrue(
-            $this->subject->isOk()
-        );
-    }
-
     /*
      * Utility functions.
      */
@@ -156,6 +149,14 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
             $this->setPaymentMethodRelation([]),
             $this->setPaymentMethodRelation([])
         );
+    }
+
+    /**
+     * @test
+     */
+    public function isOk()
+    {
+        self::assertTrue($this->subject->isOk());
     }
 
     /*
@@ -314,7 +315,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
         $this->subject->setRegisteredThemselves(false);
 
         self::assertSame(
-            $this->subject->translate('label_no'),
+            $this->getLanguageService()->getLL('label_no'),
             $this->subject->getRegistrationData('registered_themselves')
         );
     }
@@ -327,7 +328,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
         $this->subject->setRegisteredThemselves(true);
 
         self::assertSame(
-            $this->subject->translate('label_yes'),
+            $this->getLanguageService()->getLL('label_yes'),
             $this->subject->getRegistrationData('registered_themselves')
         );
     }
@@ -440,7 +441,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
     public function dumpAttendanceValuesContainsLabelForInterestsIfRequested()
     {
         self::assertContains(
-            $this->subject->translate('label_interests'),
+            $this->getLanguageService()->getLL('label_interests'),
             $this->subject->dumpAttendanceValues('interests')
         );
     }
@@ -451,7 +452,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
     public function dumpAttendanceValuesContainsLabelEvenForSpaceAfterCommaInKeyList()
     {
         self::assertContains(
-            $this->subject->translate('label_interests'),
+            $this->getLanguageService()->getLL('label_interests'),
             $this->subject->dumpAttendanceValues('interests, expectations')
         );
     }
@@ -462,7 +463,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
     public function dumpAttendanceValuesContainsLabelEvenForSpaceBeforeCommaInKeyList()
     {
         self::assertContains(
-            $this->subject->translate('label_interests'),
+            $this->getLanguageService()->getLL('label_interests'),
             $this->subject->dumpAttendanceValues('interests ,expectations')
         );
     }
@@ -956,7 +957,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
     public function dumpUserValuesContainsLabelForUserNameIfRequested()
     {
         self::assertContains(
-            $this->subject->translate('label_name'),
+            $this->getLanguageService()->getLL('label_name'),
             $this->subject->dumpUserValues('name')
         );
     }
@@ -967,7 +968,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
     public function dumpUserValuesContainsLabelEvenForSpaceAfterCommaInKeyList()
     {
         self::assertContains(
-            $this->subject->translate('label_name'),
+            $this->getLanguageService()->getLL('label_name'),
             $this->subject->dumpUserValues('email, name')
         );
     }
@@ -978,7 +979,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
     public function dumpUserValuesContainsLabelEvenForSpaceBeforeCommaInKeyList()
     {
         self::assertContains(
-            $this->subject->translate('label_name'),
+            $this->getLanguageService()->getLL('label_name'),
             $this->subject->dumpUserValues('name ,email')
         );
     }
@@ -1326,7 +1327,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
         );
 
         self::assertSame(
-            $this->subject->translate('label_yes'),
+            $this->getLanguageService()->getLL('label_yes'),
             $this->subject->getRegistrationData('registered_themselves')
         );
     }
@@ -1751,7 +1752,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
         $subject = new TestingRegistration($registrationUid);
 
         self::assertContains(
-            $subject->translate('label_gender.I.0'),
+            $this->getLanguageService()->getLL('label_gender.I.0'),
             $subject->getBillingAddress()
         );
     }
@@ -1768,7 +1769,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
         $subject = new TestingRegistration($registrationUid);
 
         self::assertContains(
-            $subject->translate('label_gender.I.1'),
+            $this->getLanguageService()->getLL('label_gender.I.1'),
             $subject->getBillingAddress()
         );
     }

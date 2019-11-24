@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingTimeSlot;
+use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 
 /**
  * Test case.
@@ -12,6 +13,8 @@ use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingTimeSlot;
  */
 class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends TestCase
 {
+    use LanguageHelper;
+
     /**
      * @var TestingTimeSlot
      */
@@ -107,8 +110,8 @@ class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends TestCase
 
     public function testGetPlaceShortReturnsWillBeAnnouncedForNoPlaces()
     {
-        self::assertEquals(
-            $this->subject->translate('message_willBeAnnounced'),
+        self::assertSame(
+            $this->getLanguageService()->getLL('message_willBeAnnounced'),
             $this->subject->getPlaceShort()
         );
     }
