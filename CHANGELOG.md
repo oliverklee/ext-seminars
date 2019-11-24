@@ -15,7 +15,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
-- Fix the locallang path in the event publication (#367, #368)
+- Fix the locallang path in the event publication (#367, #368, #370)
 - Fix the numbers in the countdown tests (#366)
 
 ## 2.2.3

@@ -24,7 +24,7 @@ class Tx_Seminars_FrontEnd_PublishEvent extends \Tx_Oelib_TemplateHelper
      *
      * @var string
      */
-    public $scriptRelPath = 'Resources/Private/Language/locallang.xlf';
+    public $scriptRelPath = 'Resources/Private/Language/FrontEnd/locallang.xlf';
 
     /**
      * @var string the extension key
