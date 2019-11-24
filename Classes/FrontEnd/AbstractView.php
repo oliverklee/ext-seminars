@@ -28,7 +28,7 @@ abstract class Tx_Seminars_FrontEnd_AbstractView extends \Tx_Oelib_TemplateHelpe
      *
      * @var string
      */
-    public $scriptRelPath = 'Resources/Private/Language/FrontEnd/locallang.xlf';
+    public $scriptRelPath = 'Resources/Private/Language/locallang.xlf';
 
     /**
      * @var string the extension key
