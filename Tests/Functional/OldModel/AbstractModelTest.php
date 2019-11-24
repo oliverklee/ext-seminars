@@ -111,6 +111,84 @@ final class AbstractModelTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function constructionFromUidForNonExistentRecordReturnsModelWithoutUid()
+    {
+        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $result = new TestingModel(99);
+
+        self::assertFalse($result->hasUid());
+    }
+
+    /**
+     * @test
+     */
+    public function constructionFromUidByDefaultIgnoresHiddenRecords()
+    {
+        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $result = new TestingModel(2);
+
+        self::assertFalse($result->hasUid());
+    }
+
+    /**
+     * @test
+     */
+    public function constructionFromUidByDefaultIgnoresDeletedRecords()
+    {
+        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $result = new TestingModel(3);
+
+        self::assertFalse($result->hasUid());
+    }
+
+    /**
+     * @test
+     */
+    public function constructionFromUidByDefaultForHiddenAllowedFindsHiddenRecords()
+    {
+        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $result = new TestingModel(2, false, true);
+
+        self::assertTrue($result->hasUid());
+    }
+
+    /**
+     * @test
+     */
+    public function constructionFromUidByDefaultForHiddenAllowedFindsVisibleRecords()
+    {
+        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $result = new TestingModel(1, false, true);
+
+        self::assertTrue($result->hasUid());
+    }
+
+    /**
+     * @test
+     */
+    public function constructionFromUidByDefaultForHiddenAllowedIgnoresDeletedRecords()
+    {
+        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $result = new TestingModel(3, false, true);
+
+        self::assertFalse($result->hasUid());
+    }
+
+    /**
+     * @test
+     */
+    public function constructionFromUidSetsDataFromDatabase()
+    {
+        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        /** @var TestingModel $result */
+        $result = new TestingModel(1);
+
+        self::assertSame('the first one', $result->getTitle());
+    }
+
+    /**
+     * @test
+     */
     public function comesFromDatabaseWithModelReadFromDatabaseIsTrue()
     {
         $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
@@ -136,7 +214,7 @@ final class AbstractModelTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function comesFromDatabaseWithInexistendModelViaUidInConstructorIsFalse()
+    public function comesFromDatabaseWithInexistentModelViaUidInConstructorIsFalse()
     {
         $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
 

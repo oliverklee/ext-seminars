@@ -63,19 +63,22 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
      *        The UID of the record to retrieve from the DB. This parameter will be ignored if $dbResult is provided.
      * @param \mysqli_result|bool $dbResult
      *        MySQL result (of SELECT query) object. If this parameter is provided, $uid will be ignored.
-     * @param bool $allowHiddenRecords
+     * @param bool $allowHidden
      *        whether it is possible to create an object from a hidden record
      */
-    public function __construct(int $uid = 0, $dbResult = false, bool $allowHiddenRecords = false)
+    public function __construct(int $uid = 0, $dbResult = false, bool $allowHidden = false)
     {
         if ($this->includeLanguageFile && TYPO3_MODE === 'BE' && $this->getLanguageService() !== null) {
             $this->getLanguageService()->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
         }
 
-        if ($dbResult !== false) {
-            $this->retrieveDataFromDatabase(0, $dbResult);
-        } elseif ($uid > 0) {
-            $this->retrieveDataFromDatabase($uid, false, $allowHiddenRecords);
+        if ($uid > 0) {
+            $data = self::fetchDataByUid($uid, $allowHidden);
+            if (\is_array($data)) {
+                $this->setData($data);
+            }
+        } elseif ($dbResult !== false) {
+            $this->retrieveDataFromDatabase($dbResult);
         }
 
         if ($this->needsTemplateHelperInitialization) {
@@ -132,33 +135,22 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
     }
 
     /**
-     * >>>>>>> [FEATURE] Add AbstractModel::fromUid()
-     * Retrieves this record's data from the DB (if it has not been retrieved
-     * yet) and gets the record data from the DB result.
+     * Retrieves this record's data the DB result.
      *
-     * @param int $uid
-     *        The UID of the record to retrieve from the DB. This parameter will be ignored if $dbResult is provided.
      * @param \mysqli_result|bool $dbResult
      *        MySQL result (of SELECT query) object. If this parameter is provided, $uid will be ignored.
-     * @param bool $allowHiddenRecords
-     *        whether it is possible to create an object from a hidden record
      *
      * @return void
      */
-    protected function retrieveDataFromDatabase(int $uid, $dbResult = false, bool $allowHiddenRecords = false)
+    protected function retrieveDataFromDatabase($dbResult)
     {
-        if ($dbResult === false && $uid === 0) {
+        if ($dbResult === false) {
             return;
         }
 
-        if ($uid !== 0) {
-            $dbResult = $this->retrieveRecord($uid, $allowHiddenRecords);
-        }
-        if ($dbResult !== false) {
-            $data = \Tx_Oelib_Db::getDatabaseConnection()->sql_fetch_assoc($dbResult);
-            if (\is_array($data)) {
-                $this->setData($data);
-            }
+        $data = \Tx_Oelib_Db::getDatabaseConnection()->sql_fetch_assoc($dbResult);
+        if (\is_array($data)) {
+            $this->setData($data);
         }
     }
 
