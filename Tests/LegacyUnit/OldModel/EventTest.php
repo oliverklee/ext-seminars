@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
+use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Lang\LanguageService;
 
 /**
  * Test case.
@@ -16,6 +16,8 @@ use TYPO3\CMS\Lang\LanguageService;
  */
 class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
 {
+    use LanguageHelper;
+
     /**
      * @var TestingEvent
      */
@@ -60,7 +62,6 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         $this->beginDate = ($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
         $this->unregistrationDeadline = ($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
 
-        $this->getLanguageService()->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
         $uid = $this->testingFramework->createRecord(
@@ -97,11 +98,6 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     /*
      * Utility functions
      */
-
-    private function getLanguageService(): LanguageService
-    {
-        return $GLOBALS['LANG'];
-    }
 
     /**
      * Creates a fake front end and a pi1 instance in $this->pi1.
@@ -1430,7 +1426,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         $this->subject->setEndDate($GLOBALS['SIM_EXEC_TIME'] - 3600);
 
         self::assertSame(
-            $this->subject->translate('message_seminarRegistrationIsClosed'),
+            $this->getLanguageService()->getLL('message_seminarRegistrationIsClosed'),
             $this->subject->canSomebodyRegisterMessage()
         );
     }
@@ -1447,7 +1443,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         $this->subject->setEndDate($GLOBALS['SIM_EXEC_TIME'] - 3600);
 
         self::assertSame(
-            $this->subject->translate('message_seminarRegistrationIsClosed'),
+            $this->getLanguageService()->getLL('message_seminarRegistrationIsClosed'),
             $this->subject->canSomebodyRegisterMessage()
         );
     }
@@ -1461,7 +1457,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         $this->subject->setEndDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
 
         self::assertSame(
-            $this->subject->translate('message_seminarRegistrationIsClosed'),
+            $this->getLanguageService()->getLL('message_seminarRegistrationIsClosed'),
             $this->subject->canSomebodyRegisterMessage()
         );
     }
@@ -1478,7 +1474,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         $this->subject->setEndDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
 
         self::assertSame(
-            $this->subject->translate('message_seminarRegistrationIsClosed'),
+            $this->getLanguageService()->getLL('message_seminarRegistrationIsClosed'),
             $this->subject->canSomebodyRegisterMessage()
         );
     }
@@ -1489,7 +1485,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     public function canSomebodyRegisterMessageForEventWithoutDateReturnsNoDateMessage()
     {
         self::assertSame(
-            $this->subject->translate('message_noDate'),
+            $this->getLanguageService()->getLL('message_noDate'),
             $this->subject->canSomebodyRegisterMessage()
         );
     }
@@ -1532,7 +1528,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
 
         self::assertSame(
-            $this->subject->translate('message_seminarCancelled'),
+            $this->getLanguageService()->getLL('message_seminarCancelled'),
             $this->subject->canSomebodyRegisterMessage()
         );
     }
@@ -1545,7 +1541,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         $this->subject->setNeedsRegistration(false);
 
         self::assertSame(
-            $this->subject->translate('message_noRegistrationNecessary'),
+            $this->getLanguageService()->getLL('message_noRegistrationNecessary'),
             $this->subject->canSomebodyRegisterMessage()
         );
     }
@@ -1561,7 +1557,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         $this->subject->setNumberOfAttendances(10);
 
         self::assertSame(
-            $this->subject->translate('message_noVacancies'),
+            $this->getLanguageService()->getLL('message_noVacancies'),
             $this->subject->canSomebodyRegisterMessage()
         );
     }
@@ -1596,7 +1592,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
 
         self::assertSame(
             sprintf(
-                $this->subject->translate('message_registrationOpensOn'),
+                $this->getLanguageService()->getLL('message_registrationOpensOn'),
                 $this->subject->getRegistrationBegin()
             ),
             $this->subject->canSomebodyRegisterMessage()
@@ -5821,7 +5817,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     {
         $this->createPi1();
         self::assertContains(
-            $this->subject->translate('message_willBeAnnounced'),
+            $this->getLanguageService()->getLL('message_willBeAnnounced'),
             $this->subject->getPlaceWithDetails($this->pi1)
         );
     }
@@ -5975,7 +5971,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         $this->testingFramework->createFakeFrontEnd();
 
         self::assertContains(
-            $this->subject->translate('message_willBeAnnounced'),
+            $this->getLanguageService()->getLL('message_willBeAnnounced'),
             $this->subject->getPlaceWithDetailsRaw()
         );
     }
@@ -6116,7 +6112,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     public function getPlaceShortReturnsWillBeAnnouncedForNoPlaces()
     {
         self::assertSame(
-            $this->subject->translate('message_willBeAnnounced'),
+            $this->getLanguageService()->getLL('message_willBeAnnounced'),
             $this->subject->getPlaceShort()
         );
     }
@@ -6747,7 +6743,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         $this->subject->setNumberOfAttendances(5);
 
         self::assertSame(
-            $this->subject->translate('message_fullyBooked'),
+            $this->getLanguageService()->getLL('message_fullyBooked'),
             $this->subject->getVacanciesString()
         );
     }
@@ -6763,7 +6759,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         $this->subject->setNumberOfAttendances(0);
 
         self::assertSame(
-            $this->subject->translate('message_enough'),
+            $this->getLanguageService()->getLL('message_enough'),
             $this->subject->getVacanciesString()
         );
     }
@@ -6779,7 +6775,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         $this->subject->setNumberOfAttendances(0);
 
         self::assertSame(
-            $this->subject->translate('message_enough'),
+            $this->getLanguageService()->getLL('message_enough'),
             $this->subject->getVacanciesString()
         );
     }
@@ -6794,7 +6790,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         $this->subject->setNumberOfAttendances(0);
 
         self::assertSame(
-            $this->subject->translate('message_enough'),
+            $this->getLanguageService()->getLL('message_enough'),
             $this->subject->getVacanciesString()
         );
     }
@@ -6809,7 +6805,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         $this->subject->setNumberOfAttendances(1);
 
         self::assertSame(
-            $this->subject->translate('message_enough'),
+            $this->getLanguageService()->getLL('message_enough'),
             $this->subject->getVacanciesString()
         );
     }
@@ -8418,7 +8414,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     public function dumpSeminarValuesForTitleGivenReturnsLabelForTitle()
     {
         self::assertContains(
-            $this->subject->translate('label_title'),
+            $this->getLanguageService()->getLL('label_title'),
             $this->subject->dumpSeminarValues('title')
         );
     }
@@ -8456,7 +8452,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         $this->subject->setDescription('');
 
         self::assertSame(
-            $this->subject->translate('label_description') . ':' . LF,
+            $this->getLanguageService()->getLL('label_description') . ':' . LF,
             $this->subject->dumpSeminarValues('description')
         );
     }
@@ -8471,7 +8467,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         $this->subject->setNeedsRegistration(true);
 
         self::assertSame(
-            $this->subject->translate('label_vacancies') . ': 0' . LF,
+            $this->getLanguageService()->getLL('label_vacancies') . ': 0' . LF,
             $this->subject->dumpSeminarValues('vacancies')
         );
     }
@@ -8486,7 +8482,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         $this->subject->setNeedsRegistration(true);
 
         self::assertSame(
-            $this->subject->translate('label_vacancies') . ': 1' . LF,
+            $this->getLanguageService()->getLL('label_vacancies') . ': 1' . LF,
             $this->subject->dumpSeminarValues('vacancies')
         );
     }
@@ -8499,8 +8495,8 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         $this->subject->setUnlimitedVacancies();
 
         self::assertSame(
-            $this->subject->translate('label_vacancies') . ': ' .
-            $this->subject->translate('label_unlimited') . LF,
+            $this->getLanguageService()->getLL('label_vacancies') . ': ' .
+            $this->getLanguageService()->getLL('label_unlimited') . LF,
             $this->subject->dumpSeminarValues('vacancies')
         );
     }
@@ -9939,7 +9935,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         $subject->init();
 
         self::assertSame(
-            $subject->translate('message_noRegistrationNecessary'),
+            $this->getLanguageService()->getLL('message_noRegistrationNecessary'),
             $subject->canViewRegistrationsListMessage('list_registrations')
         );
     }
@@ -9955,7 +9951,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         $subject->init();
 
         self::assertSame(
-            $subject->translate('message_notLoggedIn'),
+            $this->getLanguageService()->getLL('message_notLoggedIn'),
             $subject->canViewRegistrationsListMessage('list_registrations')
         );
     }
@@ -9971,7 +9967,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         $subject->init();
 
         self::assertSame(
-            $subject->translate('message_notLoggedIn'),
+            $this->getLanguageService()->getLL('message_notLoggedIn'),
             $subject->canViewRegistrationsListMessage('list_registrations', 'login')
         );
     }
@@ -10023,7 +10019,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         $subject->init();
 
         self::assertSame(
-            $subject->translate('message_notLoggedIn'),
+            $this->getLanguageService()->getLL('message_notLoggedIn'),
             $subject->canViewRegistrationsListMessage('list_vip_registrations', $accessLevel)
         );
     }
@@ -10131,7 +10127,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         $this->testingFramework->createAndLoginFrontEndUser();
 
         self::assertSame(
-            $subject->translate('message_accessDenied'),
+            $this->getLanguageService()->getLL('message_accessDenied'),
             $subject->canViewRegistrationsListMessage('list_registrations')
         );
     }
@@ -10556,7 +10552,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
 
         $result = $this->subject->getCurrentPriceRegular();
 
-        self::assertSame($this->subject->translate('message_forFree'), $result);
+        self::assertSame($this->getLanguageService()->getLL('message_forFree'), $result);
     }
 
     /**
@@ -10581,7 +10577,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
 
         $result = $this->subject->getCurrentPriceRegular();
 
-        self::assertSame($this->subject->translate('message_onRequest'), $result);
+        self::assertSame($this->getLanguageService()->getLL('message_onRequest'), $result);
     }
 
     /**
@@ -10608,7 +10604,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
 
         $result = $this->subject->getCurrentPriceSpecial();
 
-        self::assertSame($this->subject->translate('message_onRequest'), $result);
+        self::assertSame($this->getLanguageService()->getLL('message_onRequest'), $result);
     }
 
     /**

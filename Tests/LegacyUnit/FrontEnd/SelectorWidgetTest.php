@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
 use SJBR\StaticInfoTables\PiBaseApi;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -15,6 +16,8 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  */
 class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends TestCase
 {
+    use LanguageHelper;
+
     /**
      * @var \Tx_Seminars_FrontEnd_SelectorWidget
      */
@@ -122,7 +125,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends TestCase
         );
 
         self::assertContains(
-            $this->subject->translate('label_searching_hints'),
+            $this->getLanguageService()->getLL('label_searching_hints'),
             $this->subject->render()
         );
     }
@@ -139,7 +142,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends TestCase
 
         self::assertContains(
             '<input type="submit" value="' .
-            $this->subject->translate('label_selector_submit') . '" />',
+            $this->getLanguageService()->getLL('label_selector_submit') . '" />',
             $this->subject->render()
         );
     }
@@ -156,7 +159,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends TestCase
 
         self::assertContains(
             '<input type="submit" value="' .
-            $this->subject->translate('label_selector_reset') . '"',
+            $this->getLanguageService()->getLL('label_selector_reset') . '"',
             $this->subject->render()
         );
     }
@@ -177,7 +180,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends TestCase
 
         self::assertContains(
             '<option value="0">' .
-            $this->subject->translate('label_selector_pleaseChoose') .
+            $this->getLanguageService()->getLL('label_selector_pleaseChoose') .
             '</option>',
             $this->subject->render()
         );
@@ -196,11 +199,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends TestCase
         $output = $this->subject->render();
 
         self::assertContains(
-            $this->subject->translate('label_event_type'),
+            $this->getLanguageService()->getLL('label_event_type'),
             $output
         );
         self::assertContains(
-            $this->subject->translate('label_language'),
+            $this->getLanguageService()->getLL('label_language'),
             $output
         );
     }

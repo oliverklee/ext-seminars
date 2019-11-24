@@ -6,11 +6,11 @@ use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
 use OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd\Fixtures\TestingDefaultController;
+use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
-use TYPO3\CMS\Lang\LanguageService;
 
 /**
  * Test case.
@@ -20,6 +20,8 @@ use TYPO3\CMS\Lang\LanguageService;
  */
 class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
 {
+    use LanguageHelper;
+
     /**
      * @var string
      */
@@ -34,18 +36,6 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
      * @var \Tx_Oelib_TestingFramework
      */
     private $testingFramework = null;
-
-    /**
-     * @var \Tx_Oelib_Translator
-     */
-    private $translator = null;
-
-    /**
-     * backup of the BE user's language
-     *
-     * @var string
-     */
-    private $languageBackup = '';
 
     /**
      * @var int the UID of a seminar to which the fixture relates
@@ -101,13 +91,6 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $configuration = new \Tx_Oelib_Configuration();
         $configuration->setAsString('currency', 'EUR');
         \Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
-
-        $this->languageBackup = $this->getLanguageService()->lang;
-        $languageService = $this->getLanguageService();
-        $languageService->lang = 'default';
-        $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
-        \Tx_Oelib_TranslatorRegistry::getInstance()->setLanguageKey('default');
-        $this->translator = \Tx_Oelib_TranslatorRegistry::get('seminars');
 
         $this->systemFolderPid = $this->testingFramework->createSystemFolder();
         $this->seminarUid = $this->testingFramework->createRecord(
@@ -177,17 +160,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         \Tx_Seminars_Service_RegistrationManager::purgeInstance();
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
-        $this->getLanguageService()->lang = $this->languageBackup;
     }
 
     ///////////////////////
     // Utility functions.
     ///////////////////////
-
-    private function getLanguageService(): LanguageService
-    {
-        return $GLOBALS['LANG'];
-    }
 
     private function getFrontEndController(): TypoScriptFrontendController
     {
@@ -2593,7 +2570,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = $uid;
 
         self::assertNotContains(
-            $this->subject->translate('label_expiry'),
+            $this->getLanguageService()->getLL('label_expiry'),
             $this->subject->main('', [])
         );
     }
@@ -2611,7 +2588,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         self::assertNotContains(
-            $this->subject->translate('label_paymentmethods'),
+            $this->getLanguageService()->getLL('label_paymentmethods'),
             $this->subject->main('', [])
         );
     }
@@ -2640,7 +2617,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         self::assertContains(
-            $this->subject->translate('label_paymentmethods'),
+            $this->getLanguageService()->getLL('label_paymentmethods'),
             $this->subject->main('', [])
         );
     }
@@ -2887,7 +2864,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = 0;
 
         self::assertContains(
-            $this->subject->translate('message_missingSeminarNumber'),
+            $this->getLanguageService()->getLL('message_missingSeminarNumber'),
             $this->subject->main('', [])
         );
     }
@@ -2907,7 +2884,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         self::assertContains(
-            $this->subject->translate('message_wrongSeminarNumber'),
+            $this->getLanguageService()->getLL('message_wrongSeminarNumber'),
             $this->subject->main('', [])
         );
     }
@@ -2928,7 +2905,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         self::assertContains(
-            $this->subject->translate('message_wrongSeminarNumber'),
+            $this->getLanguageService()->getLL('message_wrongSeminarNumber'),
             $this->subject->main('', [])
         );
     }
@@ -3333,7 +3310,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
     public function testListViewNotContainsExpiryLabel()
     {
         self::assertNotContains(
-            $this->subject->translate('label_expiry'),
+            $this->getLanguageService()->getLL('label_expiry'),
             $this->subject->main('', [])
         );
     }
@@ -5865,7 +5842,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         );
 
         self::assertContains(
-            $this->subject->translate('label_onlineRegistration'),
+            $this->getLanguageService()->getLL('label_onlineRegistration'),
             $this->subject->main('', [])
         );
     }
@@ -5896,7 +5873,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
 
         self::assertContains(
             sprintf(
-                $this->subject->translate('label_onlineRegistrationOnQueue'),
+                $this->getLanguageService()->getLL('label_onlineRegistrationOnQueue'),
                 0
             ),
             $this->subject->main('', [])
@@ -5929,7 +5906,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
 
         self::assertNotContains(
             sprintf(
-                $this->subject->translate('label_onlineRegistrationOnQueue'),
+                $this->getLanguageService()->getLL('label_onlineRegistrationOnQueue'),
                 0
             ),
             $this->subject->main('', [])
@@ -5952,7 +5929,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         );
 
         self::assertNotContains(
-            $this->subject->translate('label_onlinePrebooking'),
+            $this->getLanguageService()->getLL('label_onlinePrebooking'),
             $this->subject->main('', [])
         );
     }
@@ -5976,7 +5953,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         );
 
         self::assertNotContains(
-            $this->subject->translate('label_onlineRegistration'),
+            $this->getLanguageService()->getLL('label_onlineRegistration'),
             $this->subject->main('', [])
         );
     }
@@ -6002,7 +5979,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
 
         self::assertContains(
             sprintf(
-                $this->subject->translate('message_registrationOpensOn'),
+                $this->getLanguageService()->getLL('message_registrationOpensOn'),
                 strftime('%d.%m.%Y %H:%M', $registrationBegin)
             ),
             $this->subject->main('', [])
@@ -6028,7 +6005,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         );
 
         self::assertContains(
-            $this->subject->translate('label_onlineRegistration'),
+            $this->getLanguageService()->getLL('label_onlineRegistration'),
             $this->subject->main('', [])
         );
     }
@@ -6051,7 +6028,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         );
 
         self::assertContains(
-            $this->subject->translate('label_onlineRegistration'),
+            $this->getLanguageService()->getLL('label_onlineRegistration'),
             $this->subject->main('', [])
         );
     }
@@ -6335,7 +6312,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'my_vip_events');
 
         self::assertContains(
-            $this->subject->translate('visibility_status_published'),
+            $this->getLanguageService()->getLL('visibility_status_published'),
             $this->subject->main('', [])
         );
     }
@@ -6365,7 +6342,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
     public function getFieldHeaderContainsLabelOfKey()
     {
         self::assertContains(
-            $this->subject->translate('label_date'),
+            $this->getLanguageService()->getLL('label_date'),
             $this->subject->getFieldHeader('date')
         );
     }
@@ -6850,7 +6827,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         self::assertContains(
-            $this->subject->translate('label_owner'),
+            $this->getLanguageService()->getLL('label_owner'),
             $this->subject->main('', [])
         );
     }
@@ -6889,7 +6866,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         self::assertNotContains(
-            $this->subject->translate('label_owner'),
+            $this->getLanguageService()->getLL('label_owner'),
             $this->subject->main('', [])
         );
     }
@@ -6912,7 +6889,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         self::assertNotContains(
-            $this->subject->translate('label_owner'),
+            $this->getLanguageService()->getLL('label_owner'),
             $this->subject->main('', [])
         );
     }
@@ -7072,7 +7049,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         self::assertContains(
-            $this->subject->translate('label_onlineRegistration'),
+            $this->getLanguageService()->getLL('label_onlineRegistration'),
             $this->subject->main('', [])
         );
     }
@@ -7106,7 +7083,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
 
         self::assertContains(
             sprintf(
-                $this->subject->translate('label_onlineRegistrationOnQueue'),
+                $this->getLanguageService()->getLL('label_onlineRegistrationOnQueue'),
                 0
             ),
             $this->subject->main('', [])
@@ -7142,7 +7119,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
 
         self::assertNotContains(
             sprintf(
-                $this->subject->translate('label_onlineRegistrationOnQueue'),
+                $this->getLanguageService()->getLL('label_onlineRegistrationOnQueue'),
                 0
             ),
             $this->subject->main('', [])
@@ -7168,7 +7145,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         self::assertNotContains(
-            $this->subject->translate('label_onlinePrebooking'),
+            $this->getLanguageService()->getLL('label_onlinePrebooking'),
             $this->subject->main('', [])
         );
     }
@@ -7194,7 +7171,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         self::assertNotContains(
-            $this->subject->translate('label_onlineRegistration'),
+            $this->getLanguageService()->getLL('label_onlineRegistration'),
             $this->subject->main('', [])
         );
     }
@@ -7222,7 +7199,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
 
         self::assertContains(
             sprintf(
-                $this->subject->translate('message_registrationOpensOn'),
+                $this->getLanguageService()->getLL('message_registrationOpensOn'),
                 strftime('%d.%m.%Y %H:%M', $registrationBegin)
             ),
             $this->subject->main('', [])
@@ -7250,7 +7227,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         self::assertContains(
-            $this->subject->translate('label_onlineRegistration'),
+            $this->getLanguageService()->getLL('label_onlineRegistration'),
             $this->subject->main('', [])
         );
     }
@@ -7276,7 +7253,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         self::assertContains(
-            $this->subject->translate('label_onlineRegistration'),
+            $this->getLanguageService()->getLL('label_onlineRegistration'),
             $this->subject->main('', [])
         );
     }
@@ -7349,7 +7326,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $this->subject->piVars['seminar'] = $date;
 
         self::assertNotContains(
-            $this->subject->translate('label_your_user_data'),
+            $this->getLanguageService()->getLL('label_your_user_data'),
             $this->subject->main('', [])
         );
     }
@@ -7938,7 +7915,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         );
 
         self::assertContains(
-            $this->subject->translate('visibility_status_pending'),
+            $this->getLanguageService()->getLL('visibility_status_pending'),
             $this->subject->main('', [])
         );
     }
@@ -7970,7 +7947,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         );
 
         self::assertContains(
-            $this->subject->translate('visibility_status_published'),
+            $this->getLanguageService()->getLL('visibility_status_published'),
             $this->subject->main('', [])
         );
     }
@@ -8182,7 +8159,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
 
         self::assertContains(
             '<a href="index.php?id=42&amp;tx_seminars_pi1[seminar]=91">' .
-            $subject->translate('label_edit') . '</a>',
+            $this->getLanguageService()->getLL('label_edit') . '</a>',
             $subject->createAllEditorLinks()
         );
     }
@@ -8211,7 +8188,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         self::assertContains(
             '<a href="index.php?id=' . $currentPageId .
             '" data-method="post" data-post-tx_seminars_pi1-action="hide" data-post-tx_seminars_pi1-seminar="91">' .
-            $subject->translate('label_hide') . '</a>',
+            $this->getLanguageService()->getLL('label_hide') . '</a>',
             $subject->createAllEditorLinks()
         );
     }
@@ -8240,7 +8217,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         self::assertContains(
             '<a href="index.php?id=' . $currentPageId .
             '" data-method="post" data-post-tx_seminars_pi1-action="unhide" data-post-tx_seminars_pi1-seminar="91">' .
-            $subject->translate('label_unhide') . '</a>',
+            $this->getLanguageService()->getLL('label_unhide') . '</a>',
             $subject->createAllEditorLinks()
         );
     }
@@ -8369,7 +8346,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         self::assertContains(
             '<a href="index.php?id=' . $currentPageId .
             '" data-method="post" data-post-tx_seminars_pi1-action="copy" data-post-tx_seminars_pi1-seminar="91">' .
-            $subject->translate('label_copy') . '</a>',
+            $this->getLanguageService()->getLL('label_copy') . '</a>',
             $subject->createAllEditorLinks()
         );
     }
@@ -9651,7 +9628,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
 
         $result = $this->subject->main('', []);
 
-        self::assertContains($this->translator->translate('message_forFree'), $result);
+        self::assertContains($this->getLanguageService()->getLL('message_forFree'), $result);
     }
 
     /**
@@ -9666,6 +9643,6 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
 
         $result = $this->subject->main('', []);
 
-        self::assertContains($this->translator->translate('message_onRequest'), $result);
+        self::assertContains($this->getLanguageService()->getLL('message_onRequest'), $result);
     }
 }

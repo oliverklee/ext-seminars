@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 
 /**
  * Test case.
@@ -11,6 +12,8 @@ use OliverKlee\PhpUnit\TestCase;
  */
 class Tx_Seminars_Tests_Unit_ViewHelper_DateRangeTest extends TestCase
 {
+    use LanguageHelper;
+
     /**
      * @var \Tx_Seminars_ViewHelper_DateRange
      */
@@ -25,11 +28,6 @@ class Tx_Seminars_Tests_Unit_ViewHelper_DateRangeTest extends TestCase
      * @var \Tx_Oelib_Configuration
      */
     private $configuration;
-
-    /**
-     * @var \Tx_Oelib_Translator
-     */
-    private $translator;
 
     /**
      * @var int some random date (2001-01-01 00:00:00 UTC)
@@ -78,8 +76,6 @@ class Tx_Seminars_Tests_Unit_ViewHelper_DateRangeTest extends TestCase
 
         \Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->configuration);
 
-        $this->translator = \Tx_Oelib_TranslatorRegistry::get('seminars');
-
         $this->subject = new \Tx_Seminars_ViewHelper_DateRange();
     }
 
@@ -98,7 +94,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_DateRangeTest extends TestCase
         $timeSpan->setData([]);
 
         self::assertSame(
-            $this->translator->translate('message_willBeAnnounced'),
+            $this->getLanguageService()->getLL('message_willBeAnnounced'),
             $this->subject->render($timeSpan)
         );
     }

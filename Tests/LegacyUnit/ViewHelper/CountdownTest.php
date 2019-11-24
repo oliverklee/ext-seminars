@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 
 /**
  * Test case.
@@ -11,6 +12,8 @@ use OliverKlee\PhpUnit\TestCase;
  */
 class Tx_Seminars_Tests_Unit_ViewHelper_CountdownTest extends TestCase
 {
+    use LanguageHelper;
+
     /**
      * @var \Tx_Seminars_ViewHelper_Countdown
      */
@@ -21,17 +24,10 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CountdownTest extends TestCase
      */
     private $testingFramework = null;
 
-    /**
-     * @var \Tx_Oelib_Translator
-     */
-    private $translator = null;
-
     protected function setUp()
     {
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd($this->testingFramework->createFrontEndPage());
-
-        $this->translator = \Tx_Oelib_TranslatorRegistry::get('seminars');
 
         $this->subject = new \Tx_Seminars_ViewHelper_Countdown();
     }
@@ -50,9 +46,9 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CountdownTest extends TestCase
 
         self::assertSame(
             \sprintf(
-                $this->translator->translate('message_countdown'),
+                $this->getLanguageService()->getLL('message_countdown'),
                 $offset,
-                $this->translator->translate('countdown_seconds_plural')
+                $this->getLanguageService()->getLL('countdown_seconds_plural')
             ),
             $this->subject->render($GLOBALS['SIM_ACCESS_TIME'] + $offset)
         );
@@ -67,9 +63,9 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CountdownTest extends TestCase
 
         self::assertSame(
             \sprintf(
-                $this->translator->translate('message_countdown'),
+                $this->getLanguageService()->getLL('message_countdown'),
                 $offset / \Tx_Oelib_Time::SECONDS_PER_MINUTE,
-                $this->translator->translate('countdown_minutes_singular')
+                $this->getLanguageService()->getLL('countdown_minutes_singular')
             ),
             $this->subject->render($GLOBALS['SIM_ACCESS_TIME'] + $offset)
         );
@@ -84,9 +80,9 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CountdownTest extends TestCase
 
         self::assertSame(
             \sprintf(
-                $this->translator->translate('message_countdown'),
+                $this->getLanguageService()->getLL('message_countdown'),
                 $offset / \Tx_Oelib_Time::SECONDS_PER_MINUTE,
-                $this->translator->translate('countdown_minutes_plural')
+                $this->getLanguageService()->getLL('countdown_minutes_plural')
             ),
             $this->subject->render($GLOBALS['SIM_ACCESS_TIME'] + $offset)
         );
@@ -101,9 +97,9 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CountdownTest extends TestCase
 
         self::assertSame(
             \sprintf(
-                $this->translator->translate('message_countdown'),
+                $this->getLanguageService()->getLL('message_countdown'),
                 $offset / \Tx_Oelib_Time::SECONDS_PER_HOUR,
-                $this->translator->translate('countdown_hours_singular')
+                $this->getLanguageService()->getLL('countdown_hours_singular')
             ),
             $this->subject->render($GLOBALS['SIM_ACCESS_TIME'] + $offset)
         );
@@ -118,9 +114,9 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CountdownTest extends TestCase
 
         self::assertSame(
             \sprintf(
-                $this->translator->translate('message_countdown'),
+                $this->getLanguageService()->getLL('message_countdown'),
                 $offset / \Tx_Oelib_Time::SECONDS_PER_HOUR,
-                $this->translator->translate('countdown_hours_plural')
+                $this->getLanguageService()->getLL('countdown_hours_plural')
             ),
             $this->subject->render($GLOBALS['SIM_ACCESS_TIME'] + $offset)
         );
@@ -135,9 +131,9 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CountdownTest extends TestCase
 
         self::assertSame(
             \sprintf(
-                $this->translator->translate('message_countdown'),
+                $this->getLanguageService()->getLL('message_countdown'),
                 $offset / \Tx_Oelib_Time::SECONDS_PER_DAY,
-                $this->translator->translate('countdown_days_singular')
+                $this->getLanguageService()->getLL('countdown_days_singular')
             ),
             $this->subject->render($GLOBALS['SIM_ACCESS_TIME'] + $offset)
         );
@@ -152,9 +148,9 @@ class Tx_Seminars_Tests_Unit_ViewHelper_CountdownTest extends TestCase
 
         self::assertSame(
             \sprintf(
-                $this->translator->translate('message_countdown'),
+                $this->getLanguageService()->getLL('message_countdown'),
                 $offset / \Tx_Oelib_Time::SECONDS_PER_DAY,
-                $this->translator->translate('countdown_days_plural')
+                $this->getLanguageService()->getLL('countdown_days_plural')
             ),
             $this->subject->render($GLOBALS['SIM_ACCESS_TIME'] + $offset)
         );

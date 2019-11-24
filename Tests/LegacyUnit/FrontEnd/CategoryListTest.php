@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
@@ -13,6 +14,8 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  */
 class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends TestCase
 {
+    use LanguageHelper;
+
     /**
      * @var string
      */
@@ -81,7 +84,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends TestCase
             $output
         );
         self::assertContains(
-            $this->subject->translate('label_no_categories'),
+            $this->getLanguageService()->getLL('label_no_categories'),
             $output
         );
     }

@@ -3,10 +3,10 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
-use TYPO3\CMS\Lang\LanguageService;
 
 /**
  * Test case.
@@ -17,6 +17,8 @@ use TYPO3\CMS\Lang\LanguageService;
  */
 class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
 {
+    use LanguageHelper;
+
     /**
      * @var \Tx_Seminars_FrontEnd_RegistrationForm
      */
@@ -477,7 +479,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
         $this->subject->setPage(['next_page' => 5]);
 
         self::assertEquals(
-            sprintf($this->subject->translate('label_step_counter'), 2, 2),
+            \sprintf($this->getLanguageService()->getLL('label_step_counter'), 2, 2),
             $this->subject->getStepCounter()
         );
     }
@@ -491,17 +493,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
      */
     public function populateListCountriesWithLanguageSetToDefaultNotContainsEnglishCountryNameForGermany()
     {
-        $backUpLanguage = $GLOBALS['LANG'];
-        $languageService = new LanguageService();
-        $languageService->init('default');
-        $GLOBALS['LANG'] = $languageService;
-
         self::assertNotContains(
             ['caption' => 'Germany', 'value' => 'Germany'],
             $this->subject->populateListCountries()
         );
-
-        $GLOBALS['LANG'] = $backUpLanguage;
     }
 
     /**
@@ -1184,7 +1179,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
         $this->subject->setFakedFormValue('seats', 2);
 
         self::assertEquals(
-            $this->subject->translate('message_lessAttendeesThanSeats'),
+            $this->getLanguageService()->getLL('message_lessAttendeesThanSeats'),
             $this->subject->getMessageForSeatsNotMatchingRegisteredPersons()
         );
     }
@@ -1202,7 +1197,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
         $this->subject->setFakedFormValue('seats', 1);
 
         self::assertEquals(
-            $this->subject->translate('message_moreAttendeesThanSeats'),
+            $this->getLanguageService()->getLL('message_moreAttendeesThanSeats'),
             $this->subject->getMessageForSeatsNotMatchingRegisteredPersons()
         );
     }

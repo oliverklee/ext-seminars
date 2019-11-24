@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
@@ -13,6 +14,8 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  */
 class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends TestCase
 {
+    use LanguageHelper;
+
     /**
      * @var \Tx_Seminars_FrontEnd_RegistrationsList
      */
@@ -642,7 +645,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends TestCase
     public function renderForNoWaitingListRegistrationsNotContainsWaitingListLabel()
     {
         self::assertNotContains(
-            $this->subject->translate('label_waiting_list'),
+            $this->getLanguageService()->getLL('label_waiting_list'),
             $this->subject->render()
         );
     }
@@ -669,7 +672,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationsListTest extends TestCase
         );
 
         self::assertContains(
-            $this->subject->translate('label_waiting_list'),
+            $this->getLanguageService()->getLL('label_waiting_list'),
             $this->subject->render()
         );
     }

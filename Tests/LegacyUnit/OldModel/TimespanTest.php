@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingTimeSpan;
-use TYPO3\CMS\Lang\LanguageService;
+use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 
 /**
  * Test case.
@@ -13,6 +13,8 @@ use TYPO3\CMS\Lang\LanguageService;
  */
 class Tx_Seminars_Tests_Unit_OldModel_TimespanTest extends TestCase
 {
+    use LanguageHelper;
+
     /**
      * @var string
      */
@@ -27,15 +29,8 @@ class Tx_Seminars_Tests_Unit_OldModel_TimespanTest extends TestCase
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
-        $this->getLanguageService()->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
-
         $this->subject = new TestingTimeSpan();
         $this->subject->overrideConfiguration(['timeFormat' => self::TIME_FORMAT]);
-    }
-
-    private function getLanguageService(): LanguageService
-    {
-        return $GLOBALS['LANG'];
     }
 
     /*
@@ -218,7 +213,7 @@ class Tx_Seminars_Tests_Unit_OldModel_TimespanTest extends TestCase
     public function getTimeForNoTimeReturnsWillBeAnnouncesMessage()
     {
         self::assertSame(
-            $this->subject->translate('message_willBeAnnounced'),
+            $this->getLanguageService()->getLL('message_willBeAnnounced'),
             $this->subject->getTime()
         );
     }
@@ -231,7 +226,7 @@ class Tx_Seminars_Tests_Unit_OldModel_TimespanTest extends TestCase
         $this->subject->setBeginDateAndTime(mktime(9, 50, 0, 1, 1, 2010));
 
         self::assertSame(
-            '09:50' . ' ' . $this->subject->translate('label_hours'),
+            '09:50' . ' ' . $this->getLanguageService()->getLL('label_hours'),
             $this->subject->getTime()
         );
     }
@@ -245,7 +240,7 @@ class Tx_Seminars_Tests_Unit_OldModel_TimespanTest extends TestCase
         $this->subject->setEndDateAndTime(mktime(18, 30, 0, 1, 1, 2010));
 
         self::assertSame(
-            '09:50&#8211;18:30' . ' ' . $this->subject->translate('label_hours'),
+            '09:50&#8211;18:30' . ' ' . $this->getLanguageService()->getLL('label_hours'),
             $this->subject->getTime()
         );
     }
@@ -259,7 +254,7 @@ class Tx_Seminars_Tests_Unit_OldModel_TimespanTest extends TestCase
         $this->subject->setEndDateAndTime(mktime(18, 30, 0, 1, 1, 2010));
 
         self::assertSame(
-            '09:50-18:30' . ' ' . $this->subject->translate('label_hours'),
+            '09:50-18:30' . ' ' . $this->getLanguageService()->getLL('label_hours'),
             $this->subject->getTime('-')
         );
     }
@@ -273,7 +268,7 @@ class Tx_Seminars_Tests_Unit_OldModel_TimespanTest extends TestCase
         $this->subject->setEndDateAndTime(mktime(18, 30, 0, 1, 2, 2010));
 
         self::assertSame(
-            '09:50&#8211;18:30' . ' ' . $this->subject->translate('label_hours'),
+            '09:50&#8211;18:30' . ' ' . $this->getLanguageService()->getLL('label_hours'),
             $this->subject->getTime()
         );
     }

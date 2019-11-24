@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 
 /**
  * Test case.
@@ -11,6 +12,8 @@ use OliverKlee\PhpUnit\TestCase;
  */
 class Tx_Seminars_Tests_Unit_ViewHelper_TimeRangeTest extends TestCase
 {
+    use LanguageHelper;
+
     /**
      * some random date (2001-01-01 00:00:00 UTC)
      *
@@ -34,11 +37,6 @@ class Tx_Seminars_Tests_Unit_ViewHelper_TimeRangeTest extends TestCase
     private $testingFramework = null;
 
     /**
-     * @var \Tx_Oelib_Translator
-     */
-    private $translator = null;
-
-    /**
      * @var string
      */
     private $translatedHours = '';
@@ -55,8 +53,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_TimeRangeTest extends TestCase
         $configuration->setAsString('timeFormat', self::TIME_FORMAT);
         \Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
 
-        $this->translator = \Tx_Oelib_TranslatorRegistry::get('seminars');
-        $this->translatedHours = ' ' . $this->translator->translate('label_hours');
+        $this->translatedHours = ' ' . $this->getLanguageService()->getLL('label_hours');
 
         $this->subject = new \Tx_Seminars_ViewHelper_TimeRange();
     }
@@ -76,7 +73,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_TimeRangeTest extends TestCase
         $timeSpan->setData([]);
 
         self::assertSame(
-            $this->translator->translate('message_willBeAnnounced'),
+            $this->getLanguageService()->getLL('message_willBeAnnounced'),
             $this->subject->render($timeSpan)
         );
     }
@@ -91,7 +88,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_TimeRangeTest extends TestCase
         $timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE);
 
         self::assertSame(
-            $this->translator->translate('message_willBeAnnounced'),
+            $this->getLanguageService()->getLL('message_willBeAnnounced'),
             $this->subject->render($timeSpan)
         );
     }
@@ -106,7 +103,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_TimeRangeTest extends TestCase
         $timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE + \Tx_Oelib_Time::SECONDS_PER_HOUR);
 
         self::assertSame(
-            strftime(self::TIME_FORMAT, self::BEGIN_DATE + \Tx_Oelib_Time::SECONDS_PER_HOUR) . $this->translatedHours,
+            \strftime(self::TIME_FORMAT, self::BEGIN_DATE + \Tx_Oelib_Time::SECONDS_PER_HOUR) . $this->translatedHours,
             $this->subject->render($timeSpan)
         );
     }
@@ -122,7 +119,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_TimeRangeTest extends TestCase
         $timeSpan->setEndDateAsUnixTimeStamp(self::BEGIN_DATE + \Tx_Oelib_Time::SECONDS_PER_HOUR);
 
         self::assertSame(
-            strftime(self::TIME_FORMAT, self::BEGIN_DATE + \Tx_Oelib_Time::SECONDS_PER_HOUR) . $this->translatedHours,
+            \strftime(self::TIME_FORMAT, self::BEGIN_DATE + \Tx_Oelib_Time::SECONDS_PER_HOUR) . $this->translatedHours,
             $this->subject->render($timeSpan)
         );
     }
