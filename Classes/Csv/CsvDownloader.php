@@ -31,7 +31,7 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
     const ACCESS_DENIED = 403;
 
     /**
-     * @var string same as class name
+     * @var string prefix for request parameters
      */
     public $prefixId = 'tx_seminars_pi2';
 

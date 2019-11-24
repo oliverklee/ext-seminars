@@ -18,11 +18,6 @@ use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
 {
     /**
-     * @var string same as class name
-     */
-    public $prefixId = \Tx_Seminars_Service_RegistrationManager::class;
-
-    /**
      * faking $this->scriptRelPath so the locallang.xlf file is found
      *
      * @var string

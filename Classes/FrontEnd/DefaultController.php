@@ -24,7 +24,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
     const VALID_SPEAKER_TYPES = ['speakers', 'partners', 'tutors', 'leaders'];
 
     /**
-     * @var string same as class name
+     * @var string prefix for request parameters
      */
     public $prefixId = 'tx_seminars_pi1';
 

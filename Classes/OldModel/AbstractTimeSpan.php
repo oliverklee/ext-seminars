@@ -14,11 +14,6 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel imple
     \Tx_Oelib_Interface_ConfigurationCheckable
 {
     /**
-     * @var string same as class name
-     */
-    public $prefixId = \Tx_Seminars_OldModel_AbstractTimeSpan::class;
-
-    /**
      * Gets the begin date.
      *
      * @return string the begin date (or the localized string "will be
