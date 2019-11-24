@@ -164,7 +164,7 @@ class RegistrationsList extends AbstractList
                 $userName = $languageService->getLL('registrationlist.deleted');
             }
             $event = $registration->getSeminarObject();
-            if ($event->isOk()) {
+            if ($event->comesFromDatabase()) {
                 $eventTitle = \htmlspecialchars($event->getTitle(), ENT_QUOTES | ENT_HTML5);
                 $eventDate = $event->getDate();
                 $accreditationNumber = \htmlspecialchars($event->getAccreditationNumber(), ENT_QUOTES | ENT_HTML5);

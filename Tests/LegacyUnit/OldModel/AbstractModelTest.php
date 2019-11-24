@@ -70,9 +70,7 @@ class AbstractModelTest extends TestCase
 
     public function testCreateFromUid()
     {
-        self::assertTrue(
-            $this->subject->isOk()
-        );
+        self::assertTrue($this->subject->comesFromDatabase());
     }
 
     public function testCreateFromUidFailsForInvalidUid()
@@ -81,18 +79,14 @@ class AbstractModelTest extends TestCase
             $this->subjectUid + 99
         );
 
-        self::assertFalse(
-            $test->isOk()
-        );
+        self::assertFalse($test->comesFromDatabase());
     }
 
-    public function testCreateFromUidFailsForZeroUid()
+    public function testCreateFromUidFailsForMissingUid()
     {
         $test = new TestingModel();
 
-        self::assertFalse(
-            $test->isOk()
-        );
+        self::assertFalse($test->comesFromDatabase());
     }
 
     public function testCreateFromDbResult()
@@ -108,9 +102,7 @@ class AbstractModelTest extends TestCase
             $dbResult
         );
 
-        self::assertTrue(
-            $test->isOk()
-        );
+        self::assertTrue($test->comesFromDatabase());
     }
 
     /**
@@ -136,9 +128,7 @@ class AbstractModelTest extends TestCase
 
         $test = new TestingModel($this->subjectUid);
 
-        self::assertFalse(
-            $test->isOk()
-        );
+        self::assertFalse($test->comesFromDatabase());
     }
 
     /**
@@ -158,9 +148,7 @@ class AbstractModelTest extends TestCase
             true
         );
 
-        self::assertTrue(
-            $test->isOk()
-        );
+        self::assertTrue($test->comesFromDatabase());
     }
 
     //////////////////////////////////
@@ -262,11 +250,6 @@ class AbstractModelTest extends TestCase
         $this->testingFramework->markTableAsDirty('tx_seminars_test');
 
         self::assertTrue(
-            $virginFixture->isOk(),
-            'The virgin fixture has not been completely initialized yet.'
-        );
-
-        self::assertTrue(
             $virginFixture->commitToDb()
         );
         self::assertEquals(
@@ -313,12 +296,7 @@ class AbstractModelTest extends TestCase
         $virginFixture = new TestingModel();
         $this->testingFramework->markTableAsDirty('tx_seminars_test');
 
-        self::assertFalse(
-            $virginFixture->isOk()
-        );
-        self::assertFalse(
-            $virginFixture->commitToDb()
-        );
+        self::assertFalse($virginFixture->commitToDb());
     }
 
     /////////////////////////////////////

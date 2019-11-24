@@ -90,7 +90,7 @@ abstract class AbstractEventMailForm
 
         $this->oldEvent = GeneralUtility::makeInstance(\Tx_Seminars_OldModel_Event::class, $eventUid);
 
-        if (!$this->oldEvent->isOk()) {
+        if (!$this->oldEvent->comesFromDatabase()) {
             throw new \Tx_Oelib_Exception_NotFound('There is no event with this UID.', 1333292164);
         }
 

@@ -36,6 +36,14 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
+    public function comesFromDatabaseInitiallyIsFalse()
+    {
+        self::assertFalse($this->subject->comesFromDatabase());
+    }
+
+    /**
+     * @test
+     */
     public function fromDataCreatesInstanceOfSubclass()
     {
         $result = TestingModel::fromData([]);
@@ -62,6 +70,26 @@ final class AbstractModelTest extends UnitTestCase
         $subject = TestingModel::fromData(['title' => 'Foo']);
 
         self::assertTrue($subject->isOk());
+    }
+
+    /**
+     * @test
+     */
+    public function comesFromDatabaseAfterFromDataWithEmptyDataIsFalse()
+    {
+        $subject = TestingModel::fromData(['title' => 'Foo']);
+
+        self::assertFalse($subject->comesFromDatabase());
+    }
+
+    /**
+     * @test
+     */
+    public function comesFromDatabaseAfterFromDataWithNonEmptyDataIsFalse()
+    {
+        $subject = TestingModel::fromData(['title' => 'Foo']);
+
+        self::assertFalse($subject->comesFromDatabase());
     }
 
     /**

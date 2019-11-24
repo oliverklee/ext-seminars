@@ -39,7 +39,6 @@ class Tx_Seminars_Tests_Unit_OldModel_CategoryTest extends TestCase
         );
         $subject = new \Tx_Seminars_OldModel_Category($subjectUid);
 
-        self::assertTrue($subject->isOk());
         self::assertSame($title, $subject->getTitle());
         self::assertSame($icon, $subject->getIcon());
     }

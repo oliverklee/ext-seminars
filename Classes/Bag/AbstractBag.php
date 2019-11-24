@@ -237,7 +237,7 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
      */
     public function valid(): bool
     {
-        if (!$this->currentItem || !$this->currentItem->isOk()) {
+        if (empty($this->currentItem) || !$this->currentItem->comesFromDatabase()) {
             $this->currentItem = null;
             return false;
         }
@@ -359,7 +359,7 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
      */
     public function checkConfiguration(): string
     {
-        if ($this->current() && $this->current()->isOk()) {
+        if ($this->current() !== null && $this->current()->comesFromDatabase()) {
             return $this->current()->checkConfiguration(true);
         }
 

@@ -107,4 +107,42 @@ final class AbstractModelTest extends FunctionalTestCase
 
         self::assertSame('the first one', $result->getTitle());
     }
+
+    /**
+     * @test
+     */
+    public function comesFromDatabaseWithModelReadFromDatabaseIsTrue()
+    {
+        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        /** @var TestingModel $result */
+        $result = TestingModel::fromUid(1);
+
+        self::assertTrue($result->comesFromDatabase());
+    }
+
+    /**
+     * @test
+     */
+    public function comesFromDatabaseWithModelReadFromDatabaseViaUidInConstructorIsTrue()
+    {
+        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+
+        /** @var TestingModel $result */
+        $result = new TestingModel(1);
+
+        self::assertTrue($result->comesFromDatabase());
+    }
+
+    /**
+     * @test
+     */
+    public function comesFromDatabaseWithInexistendModelViaUidInConstructorIsFalse()
+    {
+        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+
+        /** @var TestingModel $result */
+        $result = new TestingModel(99);
+
+        self::assertFalse($result->comesFromDatabase());
+    }
 }
