@@ -42,6 +42,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop support for TYPO3 7.6 (#248, #272, #280)
 
 ### Fixed
+- Use the correct prefixes for request parameters (#360)
 - Allow access to non-persisted model data (#353)
 - Avoid using `eval` in the tests (#335)
 - Fix type errors in the tests (#334)
