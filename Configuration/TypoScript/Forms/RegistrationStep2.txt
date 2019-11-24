@@ -45,19 +45,21 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             label = ###LABEL_TERMS###
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_acceptTerms
-                10.custom.userobj {
-                    extension = this
-                    method = isTermsChecked
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_acceptTerms
+                    userobj {
+                        extension = this
+                        method = isTermsChecked
+                    }
                 }
             }
 
             process.userobj {
                 extension = this
                 method = hasRegistrationFormField
-                params {
-                    10.name = elementname
-                    10.value = terms
+                params.10 {
+                    name = elementname
+                    value = terms
                 }
             }
         }
@@ -68,19 +70,21 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             label = ###LABEL_TERMS_2###
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_acceptTerms2
-                10.custom.userobj {
-                    extension = this
-                    method = isTerms2CheckedAndEnabled
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_acceptTerms2
+                    userobj {
+                        extension = this
+                        method = isTerms2CheckedAndEnabled
+                    }
                 }
             }
 
             process.userobj {
                 extension = this
                 method = isTerms2Enabled
-                params {
-                    10.name = elementname
-                    10.value = terms_2
+                params.10 {
+                    name = elementname
+                    value = terms_2
                 }
             }
         }
@@ -103,19 +107,21 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             name = price
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_choosePrice
-                10.custom.userobj {
-                    extension = this
-                    method = isValidPriceSelected
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_choosePrice
+                    userobj {
+                        extension = this
+                        method = isValidPriceSelected
+                    }
                 }
             }
 
             process.userobj {
                 extension = this
                 method = hasRegistrationFormField
-                params {
-                    10.name = elementname
-                    10.value = price
+                params.10 {
+                    name = elementname
+                    value = price
                 }
             }
         }
@@ -125,10 +131,12 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             name = method_of_payment
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_chooseMethodOfPayment
-                10.custom.userobj {
-                    extension = this
-                    method = isMethodOfPaymentSelected
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_chooseMethodOfPayment
+                    userobj {
+                        extension = this
+                        method = isMethodOfPaymentSelected
+                    }
                 }
             }
 
@@ -143,19 +151,21 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             name = account_number
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_provideBankData
-                10.custom.userobj {
-                    extension = this
-                    method = hasBankData
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_provideBankData
+                    userobj {
+                        extension = this
+                        method = hasBankData
+                    }
                 }
             }
 
             process.userobj {
                 extension = this
                 method = hasBankDataFormField
-                params {
-                    10.name = elementname
-                    10.value = account_number
+                params.10 {
+                    name = elementname
+                    value = account_number
                 }
             }
         }
@@ -165,19 +175,21 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             name = bank_code
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_provideBankData
-                10.custom.userobj {
-                    extension = this
-                    method = hasBankData
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_provideBankData
+                    userobj {
+                        extension = this
+                        method = hasBankData
+                    }
                 }
             }
 
             process.userobj {
                 extension = this
                 method = hasBankDataFormField
-                params {
-                    10.name = elementname
-                    10.value = bank_code
+                params.10 {
+                    name = elementname
+                    value = bank_code
                 }
             }
         }
@@ -187,19 +199,21 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             name = bank_name
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_provideBankData
-                10.custom.userobj {
-                    extension = this
-                    method = hasBankData
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_provideBankData
+                    userobj {
+                        extension = this
+                        method = hasBankData
+                    }
                 }
             }
 
             process.userobj {
                 extension = this
                 method = hasBankDataFormField
-                params {
-                    10.name = elementname
-                    10.value = bank_name
+                params.10 {
+                    name = elementname
+                    value = bank_name
                 }
             }
         }
@@ -209,19 +223,21 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             name = account_owner
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_provideBankData
-                10.custom.userobj {
-                    extension = this
-                    method = hasBankData
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_provideBankData
+                    userobj {
+                        extension = this
+                        method = hasBankData
+                    }
                 }
             }
 
             process.userobj {
                 extension = this
                 method = hasBankDataFormField
-                params {
-                    10.name = elementname
-                    10.value = account_owner
+                params.10 {
+                    name = elementname
+                    value = account_owner
                 }
             }
         }
@@ -232,9 +248,9 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             process.userobj {
                 extension = this
                 method = hasRegistrationFormField
-                params {
-                    10.name = elementname
-                    10.value = company
+                params.10 {
+                    name = elementname
+                    value = company
                 }
             }
         }
@@ -245,9 +261,9 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             process.userobj {
                 extension = this
                 method = hasRegistrationFormField
-                params {
-                    10.name = elementname
-                    10.value = gender
+                params.10 {
+                    name = elementname
+                    value = gender
                 }
             }
         }
@@ -258,9 +274,9 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             process.userobj {
                 extension = this
                 method = hasRegistrationFormField
-                params {
-                    10.name = elementname
-                    10.value = name
+                params.10 {
+                    name = elementname
+                    value = name
                 }
             }
         }
@@ -271,9 +287,9 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             process.userobj {
                 extension = this
                 method = hasRegistrationFormField
-                params {
-                    10.name = elementname
-                    10.value = address
+                params.10 {
+                    name = elementname
+                    value = address
                 }
             }
         }
@@ -284,9 +300,9 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             process.userobj {
                 extension = this
                 method = hasRegistrationFormField
-                params {
-                    10.name = elementname
-                    10.value = zip
+                params.10 {
+                    name = elementname
+                    value = zip
                 }
             }
         }
@@ -297,9 +313,9 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             process.userobj {
                 extension = this
                 method = hasRegistrationFormField
-                params {
-                    10.name = elementname
-                    10.value = city
+                params.10 {
+                    name = elementname
+                    value = city
                 }
             }
         }
@@ -310,9 +326,9 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             process.userobj {
                 extension = this
                 method = hasRegistrationFormField
-                params {
-                    10.name = elementname
-                    10.value = country
+                params.10 {
+                    name = elementname
+                    value = country
                 }
             }
         }
@@ -323,9 +339,9 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             process.userobj {
                 extension = this
                 method = hasRegistrationFormField
-                params {
-                    10.name = elementname
-                    10.value = telephone
+                params.10 {
+                    name = elementname
+                    value = telephone
                 }
             }
         }
@@ -336,9 +352,9 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             process.userobj {
                 extension = this
                 method = hasRegistrationFormField
-                params {
-                    10.name = elementname
-                    10.value = email
+                params.10 {
+                    name = elementname
+                    value = email
                 }
             }
         }
@@ -348,10 +364,12 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             name = seats
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidNumberOfSeats
-                10.custom.userobj {
-                    extension = this
-                    method = canRegisterSeats
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidNumberOfSeats
+                    userobj {
+                        extension = this
+                        method = canRegisterSeats
+                    }
                 }
 
                 20 = validator:PREG
@@ -361,23 +379,24 @@ plugin.tx_seminars_pi1.form.registration.step2 {
                 }
 
                 30 = validator:STANDARD
-                30.custom.message.userobj {
-                    extension = this
-                    method = getMessageForSeatsNotMatchingRegisteredPersons
-                }
-
-                30.custom.userobj {
-                    extension = this
-                    method = validateNumberOfRegisteredPersons
+                30.custom {
+                    message.userobj {
+                        extension = this
+                        method = getMessageForSeatsNotMatchingRegisteredPersons
+                    }
+                    userobj {
+                        extension = this
+                        method = validateNumberOfRegisteredPersons
+                    }
                 }
             }
 
             process.userobj {
                 extension = this
                 method = hasRegistrationFormField
-                params {
-                    10.name = elementname
-                    10.value = seats
+                params.10 {
+                    name = elementname
+                    value = seats
                 }
             }
         }
@@ -388,9 +407,9 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             process.userobj {
                 extension = this
                 method = hasRegistrationFormField
-                params {
-                    10.name = elementname
-                    10.value = registered_themselves
+                params.10 {
+                    name = elementname
+                    value = registered_themselves
                 }
             }
         }
@@ -401,9 +420,9 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             process.userobj {
                 extension = this
                 method = hasRegistrationFormField
-                params {
-                    10.name = elementname
-                    10.value = attendees_names
+                params.10 {
+                    name = elementname
+                    value = attendees_names
                 }
             }
         }
@@ -413,10 +432,12 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             name = structured_attendees_names
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidEMailAddress
-                10.custom.userobj {
-                    extension = this
-                    method = validateAdditionalPersonsEMailAddresses
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidEMailAddress
+                    userobj {
+                        extension = this
+                        method = validateAdditionalPersonsEMailAddresses
+                    }
                 }
             }
         }
@@ -435,9 +456,9 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             process.userobj {
                 extension = this
                 method = hasRegistrationFormField
-                params {
-                    10.name = elementname
-                    10.value = kids
+                params.10 {
+                    name = elementname
+                    value = kids
                 }
             }
         }
@@ -452,10 +473,12 @@ plugin.tx_seminars_pi1.form.registration.step2 {
 
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_selectLodging
-                10.custom.userobj {
-                    extension = this
-                    method = isLodgingSelected
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_selectLodging
+                    userobj {
+                        extension = this
+                        method = isLodgingSelected
+                    }
                 }
             }
 
@@ -471,9 +494,9 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             process.userobj {
                 extension = this
                 method = hasRegistrationFormField
-                params {
-                    10.name = elementname
-                    10.value = accommodation
+                params.10 {
+                    name = elementname
+                    value = accommodation
                 }
             }
         }
@@ -488,10 +511,12 @@ plugin.tx_seminars_pi1.form.registration.step2 {
 
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_selectFood
-                10.custom.userobj {
-                    extension = this
-                    method = isFoodSelected
+                10.custom {
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_selectFood
+                    userobj {
+                        extension = this
+                        method = isFoodSelected
+                    }
                 }
             }
 
@@ -507,9 +532,9 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             process.userobj {
                 extension = this
                 method = hasRegistrationFormField
-                params {
-                    10.name = elementname
-                    10.value = food
+                params.10 {
+                    name = elementname
+                    value = food
                 }
             }
         }
@@ -534,9 +559,9 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             process.userobj {
                 extension = this
                 method = hasRegistrationFormField
-                params {
-                    10.name = elementname
-                    10.value = interests
+                params.10 {
+                    name = elementname
+                    value = interests
                 }
             }
         }
@@ -547,9 +572,9 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             process.userobj {
                 extension = this
                 method = hasRegistrationFormField
-                params {
-                    10.name = elementname
-                    10.value = expectations
+                params.10 {
+                    name = elementname
+                    value = expectations
                 }
             }
         }
@@ -560,9 +585,9 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             process.userobj {
                 extension = this
                 method = hasRegistrationFormField
-                params {
-                    10.name = elementname
-                    10.value = background_knowledge
+                params.10 {
+                    name = elementname
+                    value = background_knowledge
                 }
             }
         }
@@ -573,9 +598,9 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             process.userobj {
                 extension = this
                 method = hasRegistrationFormField
-                params {
-                    10.name = elementname
-                    10.value = known_from
+                params.10 {
+                    name = elementname
+                    value = known_from
                 }
             }
         }
@@ -586,9 +611,9 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             process.userobj {
                 extension = this
                 method = hasRegistrationFormField
-                params {
-                    10.name = elementname
-                    10.value = notes
+                params.10 {
+                    name = elementname
+                    value = notes
                 }
             }
         }
