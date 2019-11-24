@@ -25,7 +25,7 @@ class MailNotifierConfiguration implements AdditionalFieldProviderInterface
      * @param SchedulerModuleController $schedulerModule Reference to the scheduler backend module
      *
      * @return string[][] a two-dimensional array
-     *          array('Identifier' => array('fieldId' => array('code' => '', 'label' => '', 'cshKey' => '', 'cshLabel' => ''))
+     *          array('Identifier' => array('fieldId' => array('code' => '', 'label' => ''))
      */
     public function getAdditionalFields(array &$taskInfo, $task, SchedulerModuleController $schedulerModule)
     {
@@ -44,8 +44,6 @@ class MailNotifierConfiguration implements AdditionalFieldProviderInterface
             $fieldId => [
                 'code' => $fieldCode,
                 'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:schedulerTasks.fields.page-uid',
-                'cshKey' => '',
-                'cshLabel' => '',
             ],
         ];
 
