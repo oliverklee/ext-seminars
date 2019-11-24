@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Fix the numbers in the countdown tests (#366)
 
 ## 2.2.3
 
