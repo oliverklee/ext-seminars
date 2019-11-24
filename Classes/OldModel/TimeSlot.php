@@ -14,7 +14,7 @@ class Tx_Seminars_OldModel_TimeSlot extends \Tx_Seminars_OldModel_AbstractTimeSp
     /**
      * @var string the name of the SQL table this class corresponds to
      */
-    protected $tableName = 'tx_seminars_timeslots';
+    protected static $tableName = 'tx_seminars_timeslots';
 
     /**
      * Creates and returns a speakerbag object.

@@ -24,7 +24,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * @var string the name of the SQL table this class corresponds to
      */
-    protected $tableName = 'tx_seminars_seminars';
+    protected static $tableName = 'tx_seminars_seminars';
 
     /**
      * the number of all attendances

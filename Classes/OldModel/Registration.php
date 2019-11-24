@@ -19,7 +19,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
     /**
      * @var string the name of the SQL table this class corresponds to
      */
-    protected $tableName = 'tx_seminars_attendances';
+    protected static $tableName = 'tx_seminars_attendances';
 
     /**
      * the same as the class name

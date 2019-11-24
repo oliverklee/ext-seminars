@@ -16,7 +16,7 @@ final class TestingModelWithConfiguration extends AbstractModel
     /**
      * @var string the name of the SQL table this class corresponds to
      */
-    protected $tableName = 'tx_seminars_test';
+    protected static $tableName = 'tx_seminars_test';
 
     /**
      * @var bool whether to call `TemplateHelper::init()` during construction in BE mode

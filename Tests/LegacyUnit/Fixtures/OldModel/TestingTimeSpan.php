@@ -16,7 +16,7 @@ final class TestingTimeSpan extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * string with the name of the SQL table this class corresponds to
      */
-    public $tableName = 'tx_seminars_unit_testing';
+    protected static $tableName = 'tx_seminars_unit_testing';
 
     /**
      * @var array
