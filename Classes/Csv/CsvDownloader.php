@@ -40,7 +40,7 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
      *
      * @var string
      */
-    public $scriptRelPath = 'Resources/Private/Language/Csv/locallang.xlf';
+    public $scriptRelPath = 'Resources/Private/Language/locallang.xlf';
 
     /**
      * @var string the extension key
