@@ -17,13 +17,17 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_ConfigurationCheckable
 {
     /**
-     * @var string the name of the main DB table from which we get the records for this bag
+     * @var string
      */
-    protected $tableName = '';
+    protected static $modelClassName = '';
 
     /**
-     * @var string the comma-separated names of other DB tables which we need
-     *             for JOINs
+     * @var string the name of the main DB table from which we get the records for this bag
+     */
+    protected static $tableName = '';
+
+    /**
+     * @var string the comma-separated names of other DB tables which we need for JOINs
      */
     protected $additionalTableNames = '';
 
@@ -68,8 +72,7 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
     private $isRewound = false;
 
     /**
-     * @var bool an SQL query result (not converted to an associative array
-     *              yet)
+     * @var \mysqli_result|bool an SQL query result (not converted to an associative array yet)
      */
     protected $dbResult = false;
 
@@ -140,7 +143,7 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
     {
         $allTableNames = GeneralUtility::trimExplode(
             ',',
-            $this->tableName . $this->additionalTableNames
+            static::$tableName . $this->additionalTableNames
         );
         $this->enabledFieldsQuery = '';
 
@@ -170,13 +173,12 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
         // frees old results if there are any
         if ($this->dbResult) {
             $GLOBALS['TYPO3_DB']->sql_free_result($this->dbResult);
-            // We don't need to null out $this->dbResult as it will be
-            // overwritten immediately anyway.
+            // We don't need to null out $this->dbResult as it will be overwritten immediately anyway.
         }
 
         $this->dbResult = \Tx_Oelib_Db::select(
-            $this->tableName . '.*',
-            $this->tableName . $this->additionalTableNames,
+            static::$tableName . '.*',
+            static::$tableName . $this->additionalTableNames,
             $this->queryParameters . $this->enabledFieldsQuery,
             $this->groupBy,
             $this->orderBy,
@@ -207,15 +209,20 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
     }
 
     /**
-     * Creates the current item in $this->currentItem, using $this->dbResult as
-     * a source. If the current item cannot be created, $this->currentItem will
-     * be nulled out.
+     * Creates the current item in $this->currentItem, using $this->dbResult
+     * as a source. If the current item cannot be created, $this->currentItem
+     * will be nulled out.
      *
-     * $this->dbResult is ensured to be not FALSE when this function is called.
+     * $this->dbResult must be ensured to be not false when this function is
+     * called.
      *
      * @return void
      */
-    abstract protected function createItemFromDbResult();
+    protected function createItemFromDbResult()
+    {
+        $this->currentItem = GeneralUtility::makeInstance(static::$modelClassName, 0, $this->dbResult);
+        $this->valid();
+    }
 
     /**
      * Returns the current object (which may be NULL).
@@ -296,7 +303,7 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
 
         $dbResultRow = \Tx_Oelib_Db::selectSingle(
             'COUNT(*) AS number ',
-            $this->tableName . $this->additionalTableNames,
+            static::$tableName . $this->additionalTableNames,
             $this->queryParameters . $this->enabledFieldsQuery
         );
 
@@ -316,7 +323,7 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
     public function isEmpty(): bool
     {
         if ($this->hasCount) {
-            return $this->count == 0;
+            return $this->count === 0;
         }
 
         $this->rewind();
