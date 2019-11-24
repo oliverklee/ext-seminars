@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\OldModel;
 
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Database\Query\QueryBuilder;
+use TYPO3\CMS\Core\Database\Query\Restriction\HiddenRestriction;
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -96,6 +99,40 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
     }
 
     /**
+     * Instantiates a model from the database. If there is no record with the given UID, this method will return null.
+     *
+     * @param int $uid
+     * @param bool $allowHidden
+     *
+     * @return AbstractModel|null
+     */
+    public static function fromUid(int $uid, bool $allowHidden = false)
+    {
+        $data = self::fetchDataByUid($uid, $allowHidden);
+
+        return \is_array($data) ? self::fromData($data) : null;
+    }
+
+    /**
+     * @param int $uid
+     * @param bool $allowHidden
+     *
+     * @return array|false
+     */
+    protected static function fetchDataByUid(int $uid, bool $allowHidden)
+    {
+        $query = self::getQueryBuilderForTable(static::$tableName);
+        if ($allowHidden) {
+            $query->getRestrictions()->removeByType(HiddenRestriction::class);
+        }
+        $query->select('*')->from(static::$tableName);
+        $query->andWhere($query->expr()->eq('uid', $query->createNamedParameter($uid)));
+
+        return $query->execute()->fetch();
+    }
+
+    /**
+     * >>>>>>> [FEATURE] Add AbstractModel::fromUid()
      * Retrieves this record's data from the DB (if it has not been retrieved
      * yet) and gets the record data from the DB result.
      *
@@ -584,5 +621,23 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
     public function getTypoScriptNamespace(): string
     {
         return 'plugin.tx_seminars.';
+    }
+
+    /**
+     * @param string $tableName
+     *
+     * @return QueryBuilder
+     */
+    protected static function getQueryBuilderForTable(string $tableName): QueryBuilder
+    {
+        return self::getConnectionPool()->getQueryBuilderForTable($tableName);
+    }
+
+    /**
+     * @return ConnectionPool
+     */
+    private static function getConnectionPool(): ConnectionPool
+    {
+        return GeneralUtility::makeInstance(ConnectionPool::class);
     }
 }

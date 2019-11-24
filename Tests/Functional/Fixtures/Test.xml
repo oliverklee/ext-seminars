@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+    <tx_seminars_test>
+        <uid>1</uid>
+        <title>the first one</title>
+    </tx_seminars_test>
+    <tx_seminars_test>
+        <uid>2</uid>
+        <title>the hidden one</title>
+        <hidden>1</hidden>
+    </tx_seminars_test>
+    <tx_seminars_test>
+        <uid>3</uid>
+        <title>the deleted one</title>
+        <deleted>1</deleted>
+    </tx_seminars_test>
+</dataset>
