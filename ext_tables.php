@@ -2,16 +2,6 @@
 defined('TYPO3_MODE') or die('Access denied.');
 
 $boot = static function () {
-    TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
-        'tx_seminars_seminars',
-        'EXT:seminars/Resources/Private/Language/locallang_csh_seminars.xlf'
-    );
-
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
-        'fe_groups',
-        'EXT:seminars/Resources/Private/Language/locallang_csh_fe_groups.xlf'
-    );
-
     $moduleConfiguration = [
         'routeTarget' => \OliverKlee\Seminars\BackEnd\Controller::class . '::mainAction',
         'access' => 'user,group',

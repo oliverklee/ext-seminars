@@ -106,8 +106,6 @@ class MailNotifierConfigurationTest extends TestCase
                         . 'id="task-page-uid" value="" size="4" />',
                     'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:'
                         . 'schedulerTasks.fields.page-uid',
-                    'cshKey' => '',
-                    'cshLabel' => '',
                 ],
             ],
             $result
@@ -133,8 +131,6 @@ class MailNotifierConfigurationTest extends TestCase
                         . 'id="task-page-uid" value="' . $uid . '" size="4" />',
                     'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:'
                         . 'schedulerTasks.fields.page-uid',
-                    'cshKey' => '',
-                    'cshLabel' => '',
                 ],
             ],
             $result

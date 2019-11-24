@@ -34,6 +34,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - `EventSingleView` interface and `singleView` hook index (#338)
 
 ### Removed
+- Drop the context-sensitive help (#358)
 - Drop unneeded Travis CI configuration settings (#258, #259, #260, #261)
 - Remove the empty update wizard (#250)
 - Drop support for PHP 5 (#249, #299, #300, #301, #303)
