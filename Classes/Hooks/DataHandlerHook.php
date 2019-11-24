@@ -157,7 +157,7 @@ class DataHandlerHook
         /** @var \Tx_Seminars_OldModel_TimeSlot $timeSlot */
         $timeSlot = GeneralUtility::makeInstance(\Tx_Seminars_OldModel_TimeSlot::class, $uid, false);
 
-        if ($timeSlot->isOk()) {
+        if ($timeSlot->comesFromDatabase()) {
             $timeSlot->saveToDatabase($timeSlot->getUpdateArray());
         }
     }
@@ -175,7 +175,7 @@ class DataHandlerHook
         /** @var \Tx_Seminars_OldModel_Event $event */
         $event = GeneralUtility::makeInstance(\Tx_Seminars_OldModel_Event::class, $uid, false, true);
 
-        if ($event->isOk()) {
+        if ($event->comesFromDatabase()) {
             $event->saveToDatabase($event->getUpdateArray($fieldArray));
         }
     }

@@ -150,7 +150,6 @@ class SpeakerTest extends FunctionalTestCase
     {
         $this->createPersistedSubject();
 
-        self::assertTrue($this->subject->isOk());
         self::assertSame('Test speaker', $this->subject->getTitle());
         self::assertSame('Foo inc.', $this->subject->getOrganization());
         self::assertSame('https://www.example.com/', $this->subject->getHomepage());

@@ -77,7 +77,7 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_Abstr
         $errorMessage = '';
         $isOkay = false;
 
-        if ($this->seminar->isOk()) {
+        if ($this->seminar->comesFromDatabase()) {
             // Okay, at least the seminar UID is valid so we can show the
             // seminar title and date.
             $this->setMarker('title', \htmlspecialchars($this->seminar->getTitleAndDate(), ENT_QUOTES | ENT_HTML5));

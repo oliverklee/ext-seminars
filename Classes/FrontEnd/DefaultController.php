@@ -539,7 +539,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
             if ($dbResult !== false) {
                 $GLOBALS['TYPO3_DB']->sql_free_result($dbResult);
             }
-            $result = $this->registration->isOk();
+            $result = $this->registration->comesFromDatabase();
             if (!$result) {
                 $this->registration = null;
             }
@@ -2023,7 +2023,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
     {
         $result = '';
 
-        if ($this->seminar->isOk()) {
+        if ($this->seminar->comesFromDatabase()) {
             /** @var \Tx_Seminars_Mapper_Event $mapper */
             $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
             /** @var \Tx_Seminars_Model_Event $event */
