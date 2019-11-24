@@ -45,7 +45,7 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             label = ###LABEL_TERMS###
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_acceptTerms
+                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_acceptTerms
                 10.custom.userobj {
                     extension = this
                     method = isTermsChecked
@@ -68,7 +68,7 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             label = ###LABEL_TERMS_2###
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_acceptTerms2
+                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_acceptTerms2
                 10.custom.userobj {
                     extension = this
                     method = isTerms2CheckedAndEnabled
@@ -103,7 +103,7 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             name = price
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_choosePrice
+                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_choosePrice
                 10.custom.userobj {
                     extension = this
                     method = isValidPriceSelected
@@ -125,7 +125,7 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             name = method_of_payment
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_chooseMethodOfPayment
+                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_chooseMethodOfPayment
                 10.custom.userobj {
                     extension = this
                     method = isMethodOfPaymentSelected
@@ -143,7 +143,7 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             name = account_number
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_provideBankData
+                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_provideBankData
                 10.custom.userobj {
                     extension = this
                     method = hasBankData
@@ -165,7 +165,7 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             name = bank_code
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_provideBankData
+                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_provideBankData
                 10.custom.userobj {
                     extension = this
                     method = hasBankData
@@ -187,7 +187,7 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             name = bank_name
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_provideBankData
+                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_provideBankData
                 10.custom.userobj {
                     extension = this
                     method = hasBankData
@@ -209,7 +209,7 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             name = account_owner
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_provideBankData
+                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_provideBankData
                 10.custom.userobj {
                     extension = this
                     method = hasBankData
@@ -348,7 +348,7 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             name = seats
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_invalidNumberOfSeats
+                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidNumberOfSeats
                 10.custom.userobj {
                     extension = this
                     method = canRegisterSeats
@@ -357,7 +357,7 @@ plugin.tx_seminars_pi1.form.registration.step2 {
                 20 = validator:PREG
                 20.pattern {
                     value = /^[\d]*$/
-                    message = LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_noSeatsNumber
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noSeatsNumber
                 }
 
                 30 = validator:STANDARD
@@ -413,7 +413,7 @@ plugin.tx_seminars_pi1.form.registration.step2 {
             name = structured_attendees_names
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_invalidEMailAddress
+                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_invalidEMailAddress
                 10.custom.userobj {
                     extension = this
                     method = validateAdditionalPersonsEMailAddresses
@@ -428,7 +428,7 @@ plugin.tx_seminars_pi1.form.registration.step2 {
                 10 = validator:PREG
                 10.pattern {
                     value = /^[\d]*$/
-                    message = LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_noKidsNumber
+                    message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noKidsNumber
                 }
             }
 
@@ -452,7 +452,7 @@ plugin.tx_seminars_pi1.form.registration.step2 {
 
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_selectLodging
+                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_selectLodging
                 10.custom.userobj {
                     extension = this
                     method = isLodgingSelected
@@ -488,7 +488,7 @@ plugin.tx_seminars_pi1.form.registration.step2 {
 
             validators {
                 10 = validator:STANDARD
-                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_selectFood
+                10.custom.message = LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_selectFood
                 10.custom.userobj {
                     extension = this
                     method = isFoodSelected

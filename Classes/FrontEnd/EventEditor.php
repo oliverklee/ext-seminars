@@ -1724,14 +1724,14 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         foreach ($keys as $key) {
             if (\trim($formData[$key]) === '' && self::isPlaceFieldRequired($key)) {
                 $validationErrors[] = $form->getConfigXML()->getLLLabel(
-                    'LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_empty' . ucfirst($key)
+                    'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_empty' . ucfirst($key)
                 );
             }
         }
         $key = 'country';
         if (((int)$formData[$key] === 0) && self::isPlaceFieldRequired($key)) {
             $validationErrors[] = $form->getConfigXML()->getLLLabel(
-                'LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_empty' . ucfirst($key)
+                'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_empty' . ucfirst($key)
             );
         }
 
@@ -2037,7 +2037,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $validationErrors = [];
         if (trim($formData['title']) == '') {
             $validationErrors[] = $form->getConfigXML()->getLLLabel(
-                'LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_emptyName'
+                'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_emptyName'
             );
         }
 
@@ -2323,7 +2323,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $validationErrors = [];
         if (trim($formData['title']) == '') {
             $validationErrors[] = $form->getConfigXML()->getLLLabel(
-                'LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_emptyTitle'
+                'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_emptyTitle'
             );
         }
 
@@ -2551,7 +2551,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $validationErrors = [];
         if (trim($formData['title']) == '') {
             $validationErrors[] = $form->getConfigXML()->getLLLabel(
-                'LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_emptyTitle'
+                'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_emptyTitle'
             );
         }
         if (
@@ -2563,13 +2563,13 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
 
             if (($minimumAge > 0) && ($maximumAge > 0) && ($minimumAge > $maximumAge)) {
                 $validationErrors[] = $form->getConfigXML()->getLLLabel(
-                    'LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:' .
+                    'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:' .
                     'message_targetGroupMaximumAgeSmallerThanMinimumAge'
                 );
             }
         } else {
             $validationErrors[] = $form->getConfigXML()->getLLLabel(
-                'LLL:EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf:message_noTargetGroupAgeNumber'
+                'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:message_noTargetGroupAgeNumber'
             );
         }
 

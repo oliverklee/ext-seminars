@@ -648,7 +648,7 @@ Cleanup:
 - [#3979] Move the icons from icons/ to Resources/Public/Icons
 - [#3967] Drop SEMINARS_UPLOAD_PATH and tx_seminars_constants.php
 - [#3974] Remove getter and setter for the owner in the old organizer and category models
-- [#3970] Move pi1/locallang.xml to Resources/Private/Language/FrontEnd/locallang.xml
+- [#3970] Move pi1/locallang.xml to Resources/Private/Language/locallang.xml
 - [#3969] Move front-end JavaScript and CSS to the Resources folder
 - [#3915] Drop the SEMINARS_TABLE_SEMINARS_* and SEMINARS_RECORD_TYPE_* constants
 - [#3928] Drop all require_once that are covered by an autoloader

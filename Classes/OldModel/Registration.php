@@ -1151,7 +1151,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
      */
     public function getStatus(): string
     {
-        $languageKey = 'label_' . ($this->isOnRegistrationQueue() ? 'waiting_list' : 'regular');
+        $languageKey = $this->isOnRegistrationQueue() ? 'status_waiting_list' : 'status_regular';
 
         return $this->translate($languageKey);
     }

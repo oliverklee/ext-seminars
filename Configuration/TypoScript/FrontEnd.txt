@@ -276,7 +276,7 @@ plugin.tx_seminars_pi1 {
     allowFrontEndEditingOfTargetGroups = 0
 
     # location of language file for substitution of LABEL markers
-    locallangFilename = EXT:seminars/Resources/Private/Language/FrontEnd/locallang.xlf
+    locallangFilename = EXT:seminars/Resources/Private/Language/locallang.xlf
 
     form =< config.tx_mkforms
 }

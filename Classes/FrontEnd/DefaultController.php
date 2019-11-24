@@ -33,7 +33,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @var string
      */
-    public $scriptRelPath = 'Resources/Private/Language/FrontEnd/locallang.xlf';
+    public $scriptRelPath = 'Resources/Private/Language/locallang.xlf';
 
     /**
      * @var string the extension key
