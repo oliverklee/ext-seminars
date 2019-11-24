@@ -477,6 +477,210 @@ This event now has been confirmed.</source>
             <trans-unit id="message_404_registrations" xml:space="preserve">
                 <source>Error 404. There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
             </trans-unit>
+            <trans-unit id="title" xml:space="preserve">
+                <source>Events</source>
+            </trans-unit>
+            <trans-unit id="subModuleTitle_registrations" xml:space="preserve">
+                <source>Registrations</source>
+            </trans-unit>
+            <trans-unit id="subModuleTitle_events" xml:space="preserve">
+                <source>Events</source>
+            </trans-unit>
+            <trans-unit id="subModuleTitle_speakers" xml:space="preserve">
+                <source>Speakers</source>
+            </trans-unit>
+            <trans-unit id="subModuleTitle_organizers" xml:space="preserve">
+                <source>Organizers</source>
+            </trans-unit>
+            <trans-unit id="eventlist.accreditation_number" xml:space="preserve">
+                <source>Accreditation number</source>
+            </trans-unit>
+            <trans-unit id="eventlist.date" xml:space="preserve">
+                <source>Date</source>
+            </trans-unit>
+            <trans-unit id="eventlist.begin_date" xml:space="preserve">
+                <source>Begin date and time</source>
+            </trans-unit>
+            <trans-unit id="eventlist.end_date" xml:space="preserve">
+                <source>End date and time</source>
+            </trans-unit>
+            <trans-unit id="eventlist.title" xml:space="preserve">
+                <source>Title</source>
+            </trans-unit>
+            <trans-unit id="eventlist.attendees" xml:space="preserve">
+                <source>Cur.</source>
+            </trans-unit>
+            <trans-unit id="eventlist.attendeesOnRegistrationQueue" xml:space="preserve">
+                <source>Waiting</source>
+            </trans-unit>
+            <trans-unit id="eventlist.attendees_min" xml:space="preserve">
+                <source>Min.</source>
+            </trans-unit>
+            <trans-unit id="eventlist.attendees_max" xml:space="preserve">
+                <source>Max.</source>
+            </trans-unit>
+            <trans-unit id="eventlist.enough_attendees" xml:space="preserve">
+                <source>Enough</source>
+            </trans-unit>
+            <trans-unit id="eventlist.is_full" xml:space="preserve">
+                <source>Full</source>
+            </trans-unit>
+            <trans-unit id="eventlist_status" xml:space="preserve">
+                <source>Status</source>
+            </trans-unit>
+            <trans-unit id="eventlist_status_canceled" xml:space="preserve">
+                <source>canceled</source>
+            </trans-unit>
+            <trans-unit id="eventlist_status_confirmed" xml:space="preserve">
+                <source>confirmed</source>
+            </trans-unit>
+            <trans-unit id="eventlist_button_email" xml:space="preserve">
+                <source>E-mail</source>
+            </trans-unit>
+            <trans-unit id="eventlist_button_confirm" xml:space="preserve">
+                <source>Confirm</source>
+            </trans-unit>
+            <trans-unit id="eventlist_button_cancel" xml:space="preserve">
+                <source>Cancel</source>
+            </trans-unit>
+            <trans-unit id="speakerlist.title" xml:space="preserve">
+                <source>Name</source>
+            </trans-unit>
+            <trans-unit id="speakerlist.skills" xml:space="preserve">
+                <source>Skills</source>
+            </trans-unit>
+            <trans-unit id="organizerlist.title" xml:space="preserve">
+                <source>Name</source>
+            </trans-unit>
+            <trans-unit id="registrationlist.feuser.name" xml:space="preserve">
+                <source>Name</source>
+            </trans-unit>
+            <trans-unit id="registrationlist.deleted" xml:space="preserve">
+                <source>(deleted)</source>
+            </trans-unit>
+            <trans-unit id="registrationlist.seminar.accreditation_number" xml:space="preserve">
+                <source>Accreditation number</source>
+            </trans-unit>
+            <trans-unit id="registrationlist.seminar.title" xml:space="preserve">
+                <source>Event</source>
+            </trans-unit>
+            <trans-unit id="registrationlist.seminar.date" xml:space="preserve">
+                <source>Event date</source>
+            </trans-unit>
+            <trans-unit id="registrationlist.label_regularRegistrations" xml:space="preserve">
+                <source>Regular attendances</source>
+            </trans-unit>
+            <trans-unit id="registrationlist.label_queueRegistrations" xml:space="preserve">
+                <source>Attendances on the registration queue</source>
+            </trans-unit>
+            <trans-unit id="registrationlist.label_registrationsHeading" xml:space="preserve">
+                <source>Registrations for event &quot;%s&quot; (UID %u)</source>
+            </trans-unit>
+            <trans-unit id="label_create_record_in_foreign_folder" xml:space="preserve">
+                <source>The new record will be created in the folder: %s (UID %u)</source>
+            </trans-unit>
+            <trans-unit id="label_create_record_in_current_folder" xml:space="preserve">
+                <source>The new record will be created in the current folder: %s (UID %u).</source>
+            </trans-unit>
+            <trans-unit id="eventMailForm_subject" xml:space="preserve">
+                <source>Subject:</source>
+            </trans-unit>
+            <trans-unit id="eventMailForm_message" xml:space="preserve">
+                <source>Message:</source>
+            </trans-unit>
+            <trans-unit id="eventMailForm_backButton" xml:space="preserve">
+                <source>Back</source>
+            </trans-unit>
+            <trans-unit id="eventMailForm_error_subjectMustNotBeEmpty" xml:space="preserve">
+                <source>Please enter a subject.</source>
+            </trans-unit>
+            <trans-unit id="eventMailForm_error_messageBodyMustNotBeEmpty" xml:space="preserve">
+                <source>Please enter a message body.</source>
+            </trans-unit>
+            <trans-unit id="eventMailForm_error_noDetailsPageFound" xml:space="preserve">
+                <source>The single view page is not set. If this is not set, the link to the single view page cannot be sent in the cancelation emails. To fix this problem, please set plugin.tx_seminars_pi1.detailPID in the TS Setup of the current page.</source>
+            </trans-unit>
+            <trans-unit id="referencesWarning" xml:space="preserve">
+                <source>(There are %s reference(s) to this record!)</source>
+            </trans-unit>
+            <trans-unit id="confirmMailForm_sendButton" xml:space="preserve">
+                <source>Confirm and send</source>
+            </trans-unit>
+            <trans-unit id="confirmMailForm_prefillField_subject" xml:space="preserve">
+                <source>Event confirmed:</source>
+            </trans-unit>
+            <trans-unit id="confirmMailForm_prefillField_messageBody" xml:space="preserve">
+                <source>This event now is confirmed.</source>
+            </trans-unit>
+            <trans-unit id="confirmMailForm_prefillField_introduction" xml:space="preserve">
+                <source>you registered for the event %s.</source>
+            </trans-unit>
+            <trans-unit id="cancelMailForm_sendButton" xml:space="preserve">
+                <source>Send cancelation</source>
+            </trans-unit>
+            <trans-unit id="cancelMailForm_prefillField_subject" xml:space="preserve">
+                <source>Event canceled</source>
+            </trans-unit>
+            <trans-unit id="cancelMailForm_prefillField_messageBody" xml:space="preserve">
+                <source>Unfortunately, we had to cancel this event.</source>
+            </trans-unit>
+            <trans-unit id="cancelMailForm_prefillField_introduction" xml:space="preserve">
+                <source>you registered for the event %s.</source>
+            </trans-unit>
+            <trans-unit id="generalMailForm_sendButton" xml:space="preserve">
+                <source>Send e-mail</source>
+            </trans-unit>
+            <trans-unit id="generalMailForm_prefillField_subject" xml:space="preserve">
+                <source>Event</source>
+            </trans-unit>
+            <trans-unit id="generalMailForm_prefillField_introduction" xml:space="preserve">
+                <source>you registered for the event %s.</source>
+            </trans-unit>
+            <trans-unit id="message_noPageTypeSelected" xml:space="preserve">
+                <source>Please select a folder in the page tree.</source>
+            </trans-unit>
+            <trans-unit id="message_noStaticTemplateFound" xml:space="preserve">
+                <source>No static template was found. Please include the seminars static template in the TS setup of this folder.</source>
+            </trans-unit>
+            <trans-unit id="message.crowdfundingCampaign">
+                <source>
+                    This extension is not compatible with TYPO3 9LTS yet.
+                    With this crowdfunding campaign, you can help support the necessary programming work:
+                </source>
+            </trans-unit>
+            <trans-unit id="testForm_prefillField_subject" xml:space="preserve">
+                <source>Event tested</source>
+            </trans-unit>
+            <trans-unit id="testForm_prefillField_messageBody" xml:space="preserve">
+                <source>This is the message body.</source>
+            </trans-unit>
+            <trans-unit id="testForm_prefillField_introduction" xml:space="preserve">
+                <source>This is the introduction: %s</source>
+            </trans-unit>
+            <trans-unit id="label_show_event_registrations" xml:space="preserve">
+                <source>show</source>
+            </trans-unit>
+            <trans-unit id="message_emailToAttendeesSent" xml:space="preserve">
+                <source>The e-mail to the attendees has been sent.</source>
+            </trans-unit>
+            <trans-unit id="message_eventCanceled" xml:space="preserve">
+                <source>The event has been canceled.</source>
+            </trans-unit>
+            <trans-unit id="message_eventConfirmed" xml:space="preserve">
+                <source>The event has been confirmed.</source>
+            </trans-unit>
+            <trans-unit id="csvExport">
+                <source>Download CSV file</source>
+            </trans-unit>
+            <trans-unit id="mlang_tabs_tab" xml:space="preserve">
+                <source>Events</source>
+            </trans-unit>
+            <trans-unit id="mlang_labels_tabdescr" xml:space="preserve">
+                <source>This module allows you to manage events, registrations, event sites and speakers.</source>
+            </trans-unit>
+            <trans-unit id="mlang_labels_tablabel" xml:space="preserve">
+                <source>Events</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>

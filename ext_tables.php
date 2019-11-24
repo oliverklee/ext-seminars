@@ -7,7 +7,7 @@ $boot = static function () {
         'access' => 'user,group',
         'name' => 'web_seminars',
         'labels' => [
-            'll_ref' => 'LLL:EXT:seminars/Resources/Private/Language/BackEnd/locallang.xlf',
+            'll_ref' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf',
         ],
         'icon' => 'EXT:seminars/Resources/Public/Icons/BackEndModule.gif',
     ];
