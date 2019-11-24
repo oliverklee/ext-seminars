@@ -56,7 +56,6 @@ abstract class AbstractModule extends BaseScriptClass
         $languageService->includeLLFile('EXT:lang/Resources/Private/Language/locallang_common.xlf');
         $languageService->includeLLFile('EXT:lang/Resources/Private/Language/locallang_show_rechis.xlf');
         $languageService->includeLLFile('EXT:lang/Resources/Private/Language/locallang_mod_web_list.xlf');
-        $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/BackEnd/locallang.xlf');
         $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
 
         $this->MCONF = ['name' => static::MODULE_NAME];

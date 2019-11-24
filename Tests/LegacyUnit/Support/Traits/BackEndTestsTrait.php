@@ -126,7 +126,7 @@ trait BackEndTestsTrait
         $languageService = $this->getLanguageService();
         $languageService->lang = 'default';
 
-        $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/BackEnd/locallang.xlf');
+        $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
         $languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang_db.xlf');
         $languageService->includeLLFile('EXT:lang/Resources/Private/Language/locallang_general.xlf');
     }
