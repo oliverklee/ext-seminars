@@ -137,25 +137,27 @@ class Tx_Seminars_OldModel_Speaker extends AbstractModel
             return '';
         }
 
-        $dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-            'title',
-            'tx_seminars_skills, tx_seminars_speakers_skills_mm',
-            'uid_local = ' . $this->getUid() . ' AND uid = uid_foreign' .
-            \Tx_Oelib_Db::enableFields('tx_seminars_skills'),
-            '',
-            'sorting ASC'
-        );
-
-        if (!$dbResult) {
-            return '';
-        }
-
+        $query = self::getQueryBuilderForTable('tx_seminars_skills');
+        $queryResult = $query
+            ->select('tx_seminars_skills.title')
+            ->from('tx_seminars_skills')
+            ->join(
+                'tx_seminars_skills',
+                'tx_seminars_speakers_skills_mm',
+                'mm',
+                $query->expr()->eq('mm.uid_foreign', $query->quoteIdentifier('tx_seminars_skills.uid'))
+            )
+            ->where(
+                $query->expr()->eq('mm.uid_local', $query->createNamedParameter($this->getUid()))
+            )
+            ->orderBy('mm.sorting')
+            ->execute()->fetchAll();
         $result = [];
-        while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
+        foreach ($queryResult as $row) {
             $result[] = $row['title'];
         }
 
-        return implode(', ', $result);
+        return \implode(', ', $result);
     }
 
     /**
