@@ -137,7 +137,7 @@ class MailNotifier extends AbstractTask
                 'email_eventTakesPlaceReminder'
             );
             $event->setEventTakesPlaceReminderSentFlag();
-            $event->commitToDb();
+            $event->commitToDatabase();
         }
     }
 
@@ -155,7 +155,7 @@ class MailNotifier extends AbstractTask
                 'email_cancelationDeadlineReminder'
             );
             $event->setCancelationDeadlineReminderSentFlag();
-            $event->commitToDb();
+            $event->commitToDatabase();
         }
     }
 
