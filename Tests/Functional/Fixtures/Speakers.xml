@@ -2,6 +2,18 @@
 <dataset>
     <tx_seminars_speakers>
         <uid>1</uid>
+        <title>Max Delagio</title>
+        <organization>Aperture Laboratories</organization>
+        <homepage>https://www.example.com/</homepage>
+        <description>Lots of experience.</description>
+        <notes>speaker with details, but without associations</notes>
+        <address>down the road</address>
+        <phone_work>123</phone_work>
+        <phone_home>456</phone_home>
+        <phone_mobile>789</phone_mobile>
+        <fax>000</fax>
+        <email>max@example.com</email>
+        <cancelation_period>4</cancelation_period>
     </tx_seminars_speakers>
     <tx_seminars_speakers>
         <uid>2</uid>
@@ -10,6 +22,16 @@
     <tx_seminars_speakers>
         <uid>3</uid>
         <image>1</image>
+    </tx_seminars_speakers>
+    <tx_seminars_speakers>
+        <uid>4</uid>
+        <notes>speaker with one skill</notes>
+        <skills>1</skills>
+    </tx_seminars_speakers>
+    <tx_seminars_speakers>
+        <uid>5</uid>
+        <notes>speaker with two skills</notes>
+        <skills>2</skills>
     </tx_seminars_speakers>
 
     <sys_file>
@@ -35,4 +57,26 @@
         <fieldname>image</fieldname>
         <l10n_diffsource/>
     </sys_file_reference>
+
+    <tx_seminars_speakers_skills_mm>
+        <uid_local>4</uid_local>
+        <uid_foreign>1</uid_foreign>
+    </tx_seminars_speakers_skills_mm>
+    <tx_seminars_speakers_skills_mm>
+        <uid_local>5</uid_local>
+        <uid_foreign>1</uid_foreign>
+    </tx_seminars_speakers_skills_mm>
+    <tx_seminars_speakers_skills_mm>
+        <uid_local>5</uid_local>
+        <uid_foreign>2</uid_foreign>
+    </tx_seminars_speakers_skills_mm>
+
+    <tx_seminars_skills>
+        <uid>1</uid>
+        <title>Speaking</title>
+    </tx_seminars_skills>
+    <tx_seminars_skills>
+        <uid>2</uid>
+        <title>TYPO3 extension development</title>
+    </tx_seminars_skills>
 </dataset>

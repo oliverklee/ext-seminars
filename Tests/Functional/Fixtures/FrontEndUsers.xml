@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+    <fe_users>
+        <uid>1</uid>
+        <username>max</username>
+        <usergroup>1</usergroup>
+    </fe_users>
+    <fe_users>
+        <uid>2</uid>
+        <username>joe</username>
+        <usergroup>1</usergroup>
+    </fe_users>
+
+    <fe_groups>
+        <uid>1</uid>
+        <title>visitors</title>
+    </fe_groups>
+</dataset>

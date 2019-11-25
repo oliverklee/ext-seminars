@@ -12,7 +12,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class TypoScriptSetupTest extends FunctionalTestCase
+final class TypoScriptSetupTest extends FunctionalTestCase
 {
     /**
      * @var string[]
@@ -65,12 +65,12 @@ class TypoScriptSetupTest extends FunctionalTestCase
             $className = $this->extractClassNameFromUserFunction($match);
             $methodName = $this->extractMethodNameFromUserFunction($match);
 
-            self::assertTrue(\class_exists($className), 'Class ' . $className . ' does not exist.');
+            self::assertTrue(\class_exists($className), 'Class "' . $className . '"" does not exist.');
 
             $instance = new $className();
             self::assertTrue(
                 \method_exists($instance, $methodName),
-                'Method ' . $methodName . ' does not exist in class ' . $className
+                'Method "' . $className . ':' . $methodName . ' "does not exist.'
             );
         }
     }

@@ -13,7 +13,7 @@ use TYPO3\CMS\Core\Resource\FileReference;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class SpeakerTest extends FunctionalTestCase
+final class SpeakerTest extends FunctionalTestCase
 {
     use FalHelper;
 
@@ -42,6 +42,7 @@ class SpeakerTest extends FunctionalTestCase
     public function getImageWithoutImageReturnsNull()
     {
         $this->importDataSet(__DIR__ . '/../Fixtures/Speakers.xml');
+
         /** @var \Tx_Seminars_Model_Speaker $subject */
         $subject = $this->speakerMapper->find(1);
 
@@ -54,6 +55,7 @@ class SpeakerTest extends FunctionalTestCase
     public function getImageWithPositiveImageCountWithoutFileReferenceReturnsNull()
     {
         $this->importDataSet(__DIR__ . '/../Fixtures/Speakers.xml');
+
         /** @var \Tx_Seminars_Model_Speaker $subject */
         $subject = $this->speakerMapper->find(2);
 
@@ -66,6 +68,7 @@ class SpeakerTest extends FunctionalTestCase
     public function getImageWithFileReferenceReturnsFileReference()
     {
         $this->importDataSet(__DIR__ . '/../Fixtures/Speakers.xml');
+
         /** @var \Tx_Seminars_Model_Speaker $subject */
         $subject = $this->speakerMapper->find(3);
 

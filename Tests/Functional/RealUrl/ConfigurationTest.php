@@ -12,12 +12,19 @@ use OliverKlee\Seminars\RealUrl\Configuration;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class ConfigurationTest extends FunctionalTestCase
+final class ConfigurationTest extends FunctionalTestCase
 {
     /**
      * @var string[]
      */
     protected $testExtensionsToLoad = ['typo3conf/ext/seminars'];
+
+    private function getRealUrlConfigurationForSeminars(): string
+    {
+        $options = (array)$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS'];
+
+        return (string)$options['ext/realurl/class.tx_realurl_autoconfgen.php']['extensionConfiguration']['seminars'];
+    }
 
     /**
      * Extracts the class name from something like '...->foo'.
@@ -52,8 +59,7 @@ class ConfigurationTest extends FunctionalTestCase
      */
     public function autoConfigurationReferencesExistingClass()
     {
-        $reference = $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/realurl/class.tx_realurl_autoconfgen.php']
-            ['extensionConfiguration']['seminars'];
+        $reference = $this->getRealUrlConfigurationForSeminars();
         $className = $this->extractClassNameFromUserFunction($reference);
 
         self::assertTrue(\class_exists($className));
@@ -65,12 +71,9 @@ class ConfigurationTest extends FunctionalTestCase
      */
     public function autoConfigurationReferencesExistingMethod()
     {
-        $reference = $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/realurl/class.tx_realurl_autoconfgen.php']
-            ['extensionConfiguration']['seminars'];
+        $reference = $this->getRealUrlConfigurationForSeminars();
         $methodName = $this->extractMethodNameFromUserFunction($reference);
 
-        $instance = new Configuration();
-
-        self::assertTrue(\method_exists($instance, $methodName));
+        self::assertTrue(\method_exists(new Configuration(), $methodName));
     }
 }

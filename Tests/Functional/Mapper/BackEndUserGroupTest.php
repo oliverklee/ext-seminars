@@ -12,7 +12,7 @@ use Nimut\TestingFramework\TestCase\FunctionalTestCase;
  * @author Bernd Schönbach <bernd@oliverklee.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class BackEndUserGroupTest extends FunctionalTestCase
+final class BackEndUserGroupTest extends FunctionalTestCase
 {
     /**
      * @var string[]
