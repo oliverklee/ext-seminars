@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use OliverKlee\Seminars\Hooks\RegistrationEmailHookInterface;
-use OliverKlee\Seminars\OldModel\AbstractModel;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
@@ -215,9 +214,8 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
     {
         // A user can register either if the event allows multiple registrations
         // or the user isn't registered yet and isn't blocked either.
-        return $event->allowsMultipleRegistrations() || (!$this->isUserRegistered(
-            $event
-        ) && !$this->isUserBlocked($event));
+        return $event->allowsMultipleRegistrations()
+            || (!$this->isUserRegistered($event) && !$this->isUserBlocked($event));
     }
 
     /**
@@ -230,8 +228,10 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      *                currently logged in user is already registered to this event and the event does not allow multiple
      *                registrations by one user
      */
-    public function getRegistrationLink(\Tx_Seminars_FrontEnd_DefaultController $plugin, \Tx_Seminars_OldModel_Event $event): string
-    {
+    public function getRegistrationLink(
+        \Tx_Seminars_FrontEnd_DefaultController $plugin,
+        \Tx_Seminars_OldModel_Event $event
+    ): string {
         if (!$event->needsRegistration() || !$this->canRegisterIfLoggedIn($event)) {
             return '';
         }
@@ -349,9 +349,9 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      *
      * @return bool TRUE the UID is valid, FALSE otherwise
      */
-    public function existsSeminar($uid): bool
+    public function existsSeminar(int $uid): bool
     {
-        return AbstractModel::recordExists($uid, 'tx_seminars_seminars');
+        return \Tx_Seminars_OldModel_Event::fromUid($uid) instanceof \Tx_Seminars_OldModel_Event;
     }
 
     /**
@@ -361,17 +361,17 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      *
      * For invalid or inexistent UIDs, this method also send a 404 HTTP header.
      *
-     * @param int $uid a given seminar UID (needs not necessarily be an int)
+     * @param int $uid a given seminar UID
      *
      * @return string an empty string if the UID is valid, otherwise a localized error message
      */
-    public function existsSeminarMessage($uid): string
+    public function existsSeminarMessage(int $uid): string
     {
         if ($uid <= 0) {
             \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
             return $this->translate('message_missingSeminarNumber');
         }
-        if (!AbstractModel::recordExists($uid, 'tx_seminars_seminars')) {
+        if (!$this->existsSeminar($uid)) {
             \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
             return $this->translate('message_wrongSeminarNumber');
         }
@@ -472,8 +472,11 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      *
      * @return \Tx_Seminars_Model_Registration the created, saved registration
      */
-    public function createRegistration(\Tx_Seminars_OldModel_Event $event, array $formData, AbstractPlugin $plugin): \Tx_Seminars_Model_Registration
-    {
+    public function createRegistration(
+        \Tx_Seminars_OldModel_Event $event,
+        array $formData,
+        AbstractPlugin $plugin
+    ): \Tx_Seminars_Model_Registration {
         $this->registration = GeneralUtility::makeInstance(\Tx_Seminars_OldModel_Registration::class);
         $this->registration->setContentObject($plugin->cObj);
         $this->registration->setRegistrationData($event, $this->getLoggedInFrontEndUserUid(), $formData);
@@ -654,18 +657,11 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      */
     public function removeRegistration($uid, \Tx_Oelib_TemplateHelper $plugin)
     {
-        if (!AbstractModel::recordExists($uid, 'tx_seminars_attendances')) {
+        $this->registration = \Tx_Seminars_OldModel_Registration::fromUid($uid);
+        if (!($this->registration instanceof \Tx_Seminars_OldModel_Registration)) {
             return;
         }
-        $this->registration = GeneralUtility::makeInstance(
-            \Tx_Seminars_OldModel_Registration::class,
-            0,
-            \Tx_Oelib_Db::select(
-                '*',
-                'tx_seminars_attendances',
-                'uid = ' . $uid . \Tx_Oelib_Db::enableFields('tx_seminars_attendances')
-            )
-        );
+
         $this->registration->setContentObject($plugin->cObj);
         if ($this->registration->getUser() !== $this->getLoggedInFrontEndUserUid()) {
             return;
@@ -1232,8 +1228,10 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      *
      * @return string the message, will not be empty
      */
-    private function getMessageForNotification(\Tx_Seminars_OldModel_Registration $registration, $reasonForNotification): string
-    {
+    private function getMessageForNotification(
+        \Tx_Seminars_OldModel_Registration $registration,
+        $reasonForNotification
+    ): string {
         $localLanguageKey = 'email_additionalNotification' . $reasonForNotification;
         $this->initializeTemplate();
 
@@ -1694,8 +1692,10 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      * @return string[][] the available prices as a reset array of arrays with the keys "caption" (for the title)
      *                    and "value (for the price code), might be empty
      */
-    public function getPricesAvailableForUser(\Tx_Seminars_OldModel_Event $event, \Tx_Seminars_Model_FrontEndUser $user): array
-    {
+    public function getPricesAvailableForUser(
+        \Tx_Seminars_OldModel_Event $event,
+        \Tx_Seminars_Model_FrontEndUser $user
+    ): array {
         $prices = $event->getAvailablePrices();
         if (!$this->getConfValueBoolean('automaticSpecialPriceForSubsequentRegistrationsBySameUser')) {
             return $prices;

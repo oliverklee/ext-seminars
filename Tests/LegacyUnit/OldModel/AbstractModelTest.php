@@ -344,42 +344,6 @@ class AbstractModelTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning recordExists
-     */
-
-    /**
-     * @test
-     */
-    public function recordExistsForHiddenRecordAndNoHiddenRecordsAllowedReturnsFalse()
-    {
-        $this->testingFramework->changeRecord(
-            'tx_seminars_test',
-            $this->subjectUid,
-            ['hidden' => 1]
-        );
-
-        self::assertFalse(
-            TestingModel::recordExists($this->subjectUid, 'tx_seminars_test')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function recordExistsForHiddenRecordAndHiddenRecordsAllowedReturnsTrue()
-    {
-        $this->testingFramework->changeRecord(
-            'tx_seminars_test',
-            $this->subjectUid,
-            ['hidden' => 1]
-        );
-
-        self::assertTrue(
-            TestingModel::recordExists($this->subjectUid, 'tx_seminars_test', true)
-        );
-    }
-
     ////////////////////////////////
     // Tests concerning getPageUid
     ////////////////////////////////

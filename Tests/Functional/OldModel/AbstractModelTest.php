@@ -19,6 +19,22 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
+    protected function setUp()
+    {
+        parent::setUp();
+        $GLOBALS['SIM_EXEC_TIME'] = 1574712537;
+    }
+
+    /**
+     * @test
+     */
+    public function fromUidWithZeroReturnsNull()
+    {
+        $result = TestingModel::fromUid(0);
+
+        self::assertNull($result);
+    }
+
     /**
      * @test
      */
@@ -46,6 +62,30 @@ final class AbstractModelTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function fromUidByDefaultIgnoresNotStartedRecords()
+    {
+        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+
+        $result = TestingModel::fromUid(4);
+
+        self::assertNull($result);
+    }
+
+    /**
+     * @test
+     */
+    public function fromUidByDefaultIgnoresExpiredRecords()
+    {
+        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+
+        $result = TestingModel::fromUid(5);
+
+        self::assertNull($result);
+    }
+
+    /**
+     * @test
+     */
     public function fromUidByDefaultIgnoresDeletedRecords()
     {
         $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
@@ -63,6 +103,30 @@ final class AbstractModelTest extends FunctionalTestCase
         $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
 
         $result = TestingModel::fromUid(2, true);
+
+        self::assertInstanceOf(TestingModel::class, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function fromUidByDefaultForHiddenAllowedFindsNotStartedRecords()
+    {
+        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+
+        $result = TestingModel::fromUid(4, true);
+
+        self::assertInstanceOf(TestingModel::class, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function fromUidByDefaultForHiddenAllowedFindsExpiredRecords()
+    {
+        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+
+        $result = TestingModel::fromUid(5, true);
 
         self::assertInstanceOf(TestingModel::class, $result);
     }
