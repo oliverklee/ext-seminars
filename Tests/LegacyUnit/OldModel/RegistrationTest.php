@@ -517,7 +517,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
         $this->testingFramework->markTableAsDirty('tx_seminars_attendances');
 
         self::assertTrue(
-            $registration->commitToDb()
+            $registration->commitToDatabase()
         );
         self::assertSame(
             1,
@@ -552,7 +552,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
         );
 
         self::assertTrue(
-            $registration->commitToDb()
+            $registration->commitToDatabase()
         );
         self::assertSame(
             1,
@@ -596,7 +596,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
         );
 
         self::assertTrue(
-            $registration->commitToDb()
+            $registration->commitToDatabase()
         );
         self::assertSame(
             1,
@@ -640,7 +640,7 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
         );
 
         self::assertTrue(
-            $registration->commitToDb()
+            $registration->commitToDatabase()
         );
         self::assertSame(
             1,

@@ -480,10 +480,10 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         $this->registration = GeneralUtility::makeInstance(\Tx_Seminars_OldModel_Registration::class);
         $this->registration->setContentObject($plugin->cObj);
         $this->registration->setRegistrationData($event, $this->getLoggedInFrontEndUserUid(), $formData);
-        $this->registration->commitToDb();
+        $this->registration->commitToDatabase();
         $event->calculateStatistics();
         $event->increaseNumberOfAssociatedRegistrationRecords();
-        $event->commitToDb();
+        $event->commitToDatabase();
 
         $event->getAttendances();
 
@@ -1165,7 +1165,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
 
         if ($event->hasEnoughAttendances() && !$event->haveOrganizersBeenNotifiedAboutEnoughAttendees()) {
             $event->setOrganizersBeenNotifiedAboutEnoughAttendees();
-            $event->commitToDb();
+            $event->commitToDatabase();
         }
     }
 

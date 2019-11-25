@@ -1076,17 +1076,15 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
      * The UID of the parent page must be set in $this->recordData['pid'].
      * (otherwise the record will be created in the root page).
      *
-     * @return bool TRUE if everything went OK, FALSE otherwise
+     * @return bool true if everything went OK, false otherwise
      */
-    public function commitToDb(): bool
+    public function commitToDatabase(): bool
     {
         $this->fillEmptyDefaultFields();
-
-        if (!parent::commitToDb()) {
+        if (!parent::commitToDatabase()) {
             return false;
         }
 
-        $this->recordData['uid'] = $GLOBALS['TYPO3_DB']->sql_insert_id();
         if ($this->hasUid()) {
             $this->createMmRecords('tx_seminars_attendances_lodgings_mm', $this->lodgings);
             $this->createMmRecords('tx_seminars_attendances_foods_mm', $this->foods);

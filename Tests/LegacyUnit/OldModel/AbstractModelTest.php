@@ -175,60 +175,6 @@ class AbstractModelTest extends TestCase
         self::assertTrue($subject->getConfValueBoolean('isStaticTemplateLoaded'));
     }
 
-    ///////////////////////////////////
-    // Tests for committing to the DB.
-    ///////////////////////////////////
-
-    public function testCommitToDbCanInsertNewRecord()
-    {
-        $title = 'Test record (with a unique title)';
-        self::assertEquals(
-            0,
-            $this->testingFramework->countRecords('tx_seminars_test', 'title = "' . $title . '"')
-        );
-
-        $virginFixture = new TestingModel();
-        $virginFixture->setTitle($title);
-        $virginFixture->enableTestMode();
-        $this->testingFramework->markTableAsDirty('tx_seminars_test');
-
-        self::assertTrue(
-            $virginFixture->commitToDb()
-        );
-        self::assertEquals(
-            1,
-            $this->testingFramework->countRecords(
-                'tx_seminars_test',
-                'title = "' . $title . '"'
-            )
-        );
-    }
-
-    public function testCommitToDbCanUpdateExistingRecord()
-    {
-        $title = 'Test record (with a unique title)';
-        $this->subject->setTitle($title);
-
-        self::assertTrue(
-            $this->subject->commitToDb()
-        );
-        self::assertEquals(
-            1,
-            $this->testingFramework->countRecords(
-                'tx_seminars_test',
-                'title = "' . $title . '"'
-            )
-        );
-    }
-
-    public function testCommitToDbWillNotWriteIncompleteRecords()
-    {
-        $virginFixture = new TestingModel();
-        $this->testingFramework->markTableAsDirty('tx_seminars_test');
-
-        self::assertFalse($virginFixture->commitToDb());
-    }
-
     /////////////////////////////////////
     // Tests concerning createMmRecords
     /////////////////////////////////////

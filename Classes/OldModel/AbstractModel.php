@@ -378,31 +378,37 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
      * The UID of the parent page must be set in $this->recordData['pid'].
      * (otherwise the record will be created in the root page).
      *
+     * This method is to be preferred over `saveToDatabase`.
+     *
      * @return bool true if everything went OK, false otherwise
      */
-    public function commitToDb(): bool
+    public function commitToDatabase(): bool
     {
         if (!$this->isOk()) {
             return false;
         }
 
-        // Saves the current time so that tstamp and crdate will be the same.
-        $now = $GLOBALS['SIM_EXEC_TIME'];
+        $now = (int)$GLOBALS['SIM_EXEC_TIME'];
         $this->setRecordPropertyInteger('tstamp', $now);
 
+        $connection = self::getConnectionForOwnTable();
         if (!$this->isPersisted || !$this->hasUid()) {
             $this->setRecordPropertyInteger('crdate', $now);
-            \Tx_Oelib_Db::insert(static::$tableName, $this->recordData);
+            $connection->insert(static::$tableName, $this->recordData);
+            $this->setUid((int)$connection->lastInsertId(static::$tableName));
         } else {
-            \Tx_Oelib_Db::update(static::$tableName, 'uid = ' . $this->getUid(), $this->recordData);
+            $connection->update(static::$tableName, $this->recordData, ['uid' => $this->getUid()]);
         }
 
         $this->isPersisted = true;
+
         return true;
     }
 
     /**
      * Commits the changes of an existing record to the database.
+     *
+     * Prefer `commitToDatabase` over this method.
      *
      * @param array $data associative array
      *
@@ -506,6 +512,16 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
     public function getUid(): int
     {
         return $this->getRecordPropertyInteger('uid');
+    }
+
+    /**
+     * @param int $uid
+     *
+     * @return void
+     */
+    protected function setUid(int $uid)
+    {
+        $this->setRecordPropertyInteger('uid', $uid);
     }
 
     /**
