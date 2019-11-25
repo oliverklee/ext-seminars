@@ -46,7 +46,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop support for TYPO3 7.6 (#248, #272, #280)
 
 ### Fixed
-- Convert the old model DB accesses to the ConnectionPool (#372, #373, #379)
+- Convert the old model DB accesses to the ConnectionPool (#372, #373, #379, #382, #383)
 - Fix TypoScript lint warnings (#371)
 - Fix the locallang path in the event publication (#367)
 - Fix the numbers in the countdown tests (#365)

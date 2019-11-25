@@ -482,29 +482,6 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
     }
 
     /**
-     * Retrieves a record from the database.
-     *
-     * The record is retrieved from static::$tableName. Therefore static::$tableName
-     * has to be set before calling this method.
-     *
-     * @param int $uid the UID of the record to retrieve from the DB
-     * @param bool $allowHiddenRecords whether to allow hidden records
-     *
-     * @return \mysqli_result|bool MySQL result (of SELECT query) object, will be false if the UID is invalid
-     */
-    protected function retrieveRecord(int $uid, bool $allowHiddenRecords = false)
-    {
-        return $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-            '*',
-            static::$tableName,
-            'uid=' . $uid . \Tx_Oelib_Db::enableFields(static::$tableName, (int)$allowHiddenRecords),
-            '',
-            '',
-            '1'
-        );
-    }
-
-    /**
      * Gets our UID.
      *
      * @return int our UID (or 0 if there is an error)
