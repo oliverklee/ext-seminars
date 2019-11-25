@@ -29,4 +29,14 @@ trait LanguageHelper
 
         return $this->languageService;
     }
+
+    /**
+     * Sets $GLOBALS['LANG'].
+     *
+     * @return void
+     */
+    private function initializeBackEndLanguage()
+    {
+        $GLOBALS['LANG'] = $this->getLanguageService();
+    }
 }
