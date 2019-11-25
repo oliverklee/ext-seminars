@@ -239,4 +239,49 @@ final class AbstractModelTest extends FunctionalTestCase
 
         self::assertFalse($result->comesFromDatabase());
     }
+
+    /**
+     * @test
+     */
+    public function saveToDatabaseForModelWithoutUidWithEmptyDataNotCreatesRecordInDatabase()
+    {
+        $model = new TestingModel();
+
+        $model->saveToDatabase([]);
+
+        self::assertSame(0, $this->getDatabaseConnection()->selectCount('*', 'tx_seminars_test'));
+    }
+
+    /**
+     * @test
+     */
+    public function saveToDatabaseForModelWithUidWithNonEmptyDataUpdatesRecordInDatabase()
+    {
+        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+
+        $model = TestingModel::fromUid(1);
+
+        $newTitle = 'new title';
+        $model->saveToDatabase(['title' => $newTitle]);
+
+        self::assertSame(
+            1,
+            $this->getDatabaseConnection()->selectCount('*', 'tx_seminars_test', 'title = "' . $newTitle . '"')
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function saveToDatabaseForModelWithUidWithNonEmptyDataNotChanesRecordData()
+    {
+        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+
+        $model = TestingModel::fromUid(1);
+        $oldTitle = $model->getTitle();
+
+        $model->saveToDatabase(['title' => 'new title']);
+
+        self::assertSame($oldTitle, $model->getTitle());
+    }
 }

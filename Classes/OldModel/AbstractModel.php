@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\OldModel;
 
+use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Database\Query\Restriction\HiddenRestriction;
@@ -392,20 +393,19 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
     }
 
     /**
-     * Commits the changes of an record to the database.
+     * Commits the changes of an existing record to the database.
      *
-     * @param array $updateArray
-     *        an associative array with the keys being the field names and the value being the field values, may be empty
+     * @param array $data associative array
      *
      * @return void
      */
-    public function saveToDatabase(array $updateArray)
+    public function saveToDatabase(array $data)
     {
-        if (empty($updateArray)) {
+        if (empty($data)) {
             return;
         }
 
-        \Tx_Oelib_Db::update(static::$tableName, 'uid = ' . $this->getUid(), $updateArray);
+        self::getConnectionForOwnTable()->update(static::$tableName, $data, ['uid' => $this->getUid()]);
     }
 
     /**
@@ -616,27 +616,26 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
         return 'plugin.tx_seminars.';
     }
 
-    /**
-     * @return QueryBuilder
-     */
     protected static function getQueryBuilderForOwnTable(): QueryBuilder
     {
         return self::getConnectionPool()->getQueryBuilderForTable(static::$tableName);
     }
 
-    /**
-     * @param string $tableName
-     *
-     * @return QueryBuilder
-     */
-    protected static function getQueryBuilderForTable(string $tableName): QueryBuilder
+    protected static function getQueryBuilderForTable(string $table): QueryBuilder
     {
-        return self::getConnectionPool()->getQueryBuilderForTable($tableName);
+        return self::getConnectionPool()->getQueryBuilderForTable($table);
     }
 
-    /**
-     * @return ConnectionPool
-     */
+    protected static function getConnectionForOwnTable(): Connection
+    {
+        return self::getConnectionForTable(static::$tableName);
+    }
+
+    private static function getConnectionForTable(string $table): Connection
+    {
+        return self::getConnectionPool()->getConnectionForTable($table);
+    }
+
     private static function getConnectionPool(): ConnectionPool
     {
         return GeneralUtility::makeInstance(ConnectionPool::class);
