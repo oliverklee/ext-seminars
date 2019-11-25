@@ -25,6 +25,7 @@ final class AbstractModelTest extends FunctionalTestCase
     public function fromUidForNonExistentRecordReturnsNull()
     {
         $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+
         $result = TestingModel::fromUid(99);
 
         self::assertNull($result);
@@ -36,6 +37,7 @@ final class AbstractModelTest extends FunctionalTestCase
     public function fromUidByDefaultIgnoresHiddenRecords()
     {
         $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+
         $result = TestingModel::fromUid(2);
 
         self::assertNull($result);
@@ -47,6 +49,7 @@ final class AbstractModelTest extends FunctionalTestCase
     public function fromUidByDefaultIgnoresDeletedRecords()
     {
         $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+
         $result = TestingModel::fromUid(3);
 
         self::assertNull($result);
@@ -58,6 +61,7 @@ final class AbstractModelTest extends FunctionalTestCase
     public function fromUidByDefaultForHiddenAllowedFindsHiddenRecords()
     {
         $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+
         $result = TestingModel::fromUid(2, true);
 
         self::assertInstanceOf(TestingModel::class, $result);
@@ -69,6 +73,7 @@ final class AbstractModelTest extends FunctionalTestCase
     public function fromUidByDefaultForHiddenAllowedFindsVisibleRecords()
     {
         $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+
         $result = TestingModel::fromUid(1, true);
 
         self::assertInstanceOf(TestingModel::class, $result);
@@ -80,6 +85,7 @@ final class AbstractModelTest extends FunctionalTestCase
     public function fromUidByDefaultForHiddenAllowedIgnoresDeletedRecords()
     {
         $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+
         $result = TestingModel::fromUid(3, true);
 
         self::assertNull($result);
@@ -91,6 +97,7 @@ final class AbstractModelTest extends FunctionalTestCase
     public function fromUidForExistingRecordCreatesInstanceOfSubclass()
     {
         $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+
         $result = TestingModel::fromUid(1);
 
         self::assertInstanceOf(TestingModel::class, $result);
@@ -99,9 +106,10 @@ final class AbstractModelTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function fromUidSetsDataFromDatabase()
+    public function fromUidMapsDataFromDatabase()
     {
         $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+
         /** @var TestingModel $result */
         $result = TestingModel::fromUid(1);
 
@@ -111,9 +119,10 @@ final class AbstractModelTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function constructionFromUidForNonExistentRecordReturnsModelWithoutUid()
+    public function constructionByUidForNonExistentRecordReturnsModelWithoutUid()
     {
         $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+
         $result = new TestingModel(99);
 
         self::assertFalse($result->hasUid());
@@ -122,9 +131,10 @@ final class AbstractModelTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function constructionFromUidByDefaultIgnoresHiddenRecords()
+    public function constructionByUidByDefaultIgnoresHiddenRecords()
     {
         $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+
         $result = new TestingModel(2);
 
         self::assertFalse($result->hasUid());
@@ -133,9 +143,10 @@ final class AbstractModelTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function constructionFromUidByDefaultIgnoresDeletedRecords()
+    public function constructionByUidByDefaultIgnoresDeletedRecords()
     {
         $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+
         $result = new TestingModel(3);
 
         self::assertFalse($result->hasUid());
@@ -144,9 +155,10 @@ final class AbstractModelTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function constructionFromUidByDefaultForHiddenAllowedFindsHiddenRecords()
+    public function constructionByUidByDefaultForHiddenAllowedFindsHiddenRecords()
     {
         $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+
         $result = new TestingModel(2, false, true);
 
         self::assertTrue($result->hasUid());
@@ -155,9 +167,10 @@ final class AbstractModelTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function constructionFromUidByDefaultForHiddenAllowedFindsVisibleRecords()
+    public function constructionByUidByDefaultForHiddenAllowedFindsVisibleRecords()
     {
         $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+
         $result = new TestingModel(1, false, true);
 
         self::assertTrue($result->hasUid());
@@ -166,9 +179,10 @@ final class AbstractModelTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function constructionFromUidByDefaultForHiddenAllowedIgnoresDeletedRecords()
+    public function constructionByUidByDefaultForHiddenAllowedIgnoresDeletedRecords()
     {
         $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+
         $result = new TestingModel(3, false, true);
 
         self::assertFalse($result->hasUid());
@@ -177,9 +191,10 @@ final class AbstractModelTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function constructionFromUidSetsDataFromDatabase()
+    public function constructionByUidSetsDataFromDatabase()
     {
         $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+
         /** @var TestingModel $result */
         $result = new TestingModel(1);
 
@@ -192,6 +207,7 @@ final class AbstractModelTest extends FunctionalTestCase
     public function comesFromDatabaseWithModelReadFromDatabaseIsTrue()
     {
         $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+
         /** @var TestingModel $result */
         $result = TestingModel::fromUid(1);
 

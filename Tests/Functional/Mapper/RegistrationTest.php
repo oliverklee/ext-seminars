@@ -11,17 +11,12 @@ use Nimut\TestingFramework\TestCase\FunctionalTestCase;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class RegistrationTest extends FunctionalTestCase
+final class RegistrationTest extends FunctionalTestCase
 {
     /**
      * @var string[]
      */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
-
-    /**
-     * @var \Tx_Oelib_TestingFramework
-     */
-    private $testingFramework = null;
 
     /**
      * @var \Tx_Seminars_Mapper_Registration
@@ -36,23 +31,9 @@ class RegistrationTest extends FunctionalTestCase
     protected function setUp()
     {
         parent::setUp();
-        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
         $this->userMapper = new \Tx_Seminars_Mapper_FrontEndUser();
-
         $this->subject = new \Tx_Seminars_Mapper_Registration();
-    }
-
-    /**
-     * @test
-     */
-    public function countByFrontEndUserForNoMatchingRegistrationsReturnsZero()
-    {
-        $userUid = $this->testingFramework->createFrontEndUser();
-        /** @var \Tx_Seminars_Model_FrontEndUser $user */
-        $user = $this->userMapper->find($userUid);
-
-        self::assertSame(0, $this->subject->countByFrontEndUser($user));
     }
 
     /**
@@ -60,12 +41,11 @@ class RegistrationTest extends FunctionalTestCase
      */
     public function countByFrontEndUserIgnoresRegistrationFromOtherUsers()
     {
-        $otherUserUid = $this->testingFramework->createFrontEndUser();
-        $this->testingFramework->createRecord('tx_seminars_attendances', ['user' => $otherUserUid]);
+        $this->importDataSet(__DIR__ . '/../Fixtures/FrontEndUsers.xml');
+        $this->importDataSet(__DIR__ . '/../Fixtures/Registrations.xml');
 
-        $userUid = $this->testingFramework->createFrontEndUser();
         /** @var \Tx_Seminars_Model_FrontEndUser $user */
-        $user = $this->userMapper->find($userUid);
+        $user = $this->userMapper->find(1);
 
         self::assertSame(0, $this->subject->countByFrontEndUser($user));
     }
@@ -75,10 +55,11 @@ class RegistrationTest extends FunctionalTestCase
      */
     public function countByFrontEndUserCountsRegistrationFromGivenUser()
     {
-        $userUid = $this->testingFramework->createFrontEndUser();
-        $this->testingFramework->createRecord('tx_seminars_attendances', ['user' => $userUid]);
+        $this->importDataSet(__DIR__ . '/../Fixtures/FrontEndUsers.xml');
+        $this->importDataSet(__DIR__ . '/../Fixtures/Registrations.xml');
+
         /** @var \Tx_Seminars_Model_FrontEndUser $user */
-        $user = $this->userMapper->find($userUid);
+        $user = $this->userMapper->find(2);
 
         self::assertSame(1, $this->subject->countByFrontEndUser($user));
     }

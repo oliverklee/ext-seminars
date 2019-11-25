@@ -6,29 +6,33 @@ namespace OliverKlee\Seminars\Tests\Functional\Hooks;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Seminars\Hooks\DataHandlerHook;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Test case.
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class DataHandlerHookTest extends FunctionalTestCase
+final class DataHandlerHookTest extends FunctionalTestCase
 {
     /**
      * @var string[]
      */
-    protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
+    protected $testExtensionsToLoad = ['typo3conf/ext/seminars'];
+
+    private function getDataMapperConfigurationForSeminars(): string
+    {
+        $dataMapperConfiguration = (array)$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php'];
+
+        return (string)$dataMapperConfiguration['processDatamapClass']['seminars'];
+    }
 
     /**
      * @test
      */
     public function tceMainHookReferencesExistingClass()
     {
-        $reference = $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']
-            ['processDatamapClass']['seminars'];
-        $instance = GeneralUtility::getUserObj($reference);
+        $reference = $this->getDataMapperConfigurationForSeminars();
 
-        self::assertInstanceOf(DataHandlerHook::class, $instance);
+        self::assertSame(DataHandlerHook::class, $reference);
     }
 }

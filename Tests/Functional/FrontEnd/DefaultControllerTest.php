@@ -11,12 +11,17 @@ use Nimut\TestingFramework\TestCase\FunctionalTestCase;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class DefaultControllerTest extends FunctionalTestCase
+final class DefaultControllerTest extends FunctionalTestCase
 {
     /**
      * @var string[]
      */
     protected $testExtensionsToLoad = ['typo3conf/ext/seminars'];
+
+    private function getContentRenderingConfiguration(): string
+    {
+        return (string)$GLOBALS['TYPO3_CONF_VARS']['FE']['defaultTypoScript_setup.']['defaultContentRendering'];
+    }
 
     /**
      * Extracts the class name from something like '...->foo'.
@@ -51,7 +56,7 @@ class DefaultControllerTest extends FunctionalTestCase
      */
     public function defaultContentRenderingIsGenerated()
     {
-        $configuration = $GLOBALS['TYPO3_CONF_VARS']['FE']['defaultTypoScript_setup.']['defaultContentRendering'];
+        $configuration = $this->getContentRenderingConfiguration();
 
         self::assertContains('TypoScript added by extension "seminars"', $configuration);
         self::assertContains('tt_content.list.20.seminars_pi1 = < plugin.tx_seminars_pi1', $configuration);
@@ -62,19 +67,17 @@ class DefaultControllerTest extends FunctionalTestCase
      */
     public function pluginUserFuncPointsToExistingMethodInExistingDefaultControllerClass()
     {
-        $configuration = $GLOBALS['TYPO3_CONF_VARS']['FE']['defaultTypoScript_setup.']['defaultContentRendering'];
+        $configuration = $this->getContentRenderingConfiguration();
 
         $matches = [];
         \preg_match('/plugin\\.tx_seminars_pi1\\.userFunc = ([^\\s]+)/', $configuration, $matches);
         $className = $this->extractClassNameFromUserFunction($matches[1]);
         $methodName = $this->extractMethodNameFromUserFunction($matches[1]);
 
-        self::assertTrue(\class_exists($className), 'Class ' . $className . ' does not exist.');
         self::assertSame(\Tx_Seminars_FrontEnd_DefaultController::class, $className);
 
-        $instance = new \Tx_Seminars_FrontEnd_DefaultController();
         self::assertTrue(
-            \method_exists($instance, $methodName),
+            \method_exists(new \Tx_Seminars_FrontEnd_DefaultController(), $methodName),
             'Method ' . $methodName . ' does not exist in class ' . $className
         );
     }
