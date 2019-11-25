@@ -221,19 +221,6 @@ class AbstractModelTest extends TestCase
         );
     }
 
-    public function testSaveToDatabaseCanUpdateExistingRecord()
-    {
-        $this->subject->saveToDatabase(['title' => 'new title']);
-
-        self::assertEquals(
-            1,
-            $this->testingFramework->countRecords(
-                'tx_seminars_test',
-                'title = "new title"'
-            )
-        );
-    }
-
     public function testCommitToDbWillNotWriteIncompleteRecords()
     {
         $virginFixture = new TestingModel();
