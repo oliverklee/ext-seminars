@@ -17,14 +17,73 @@ final class TestingTimeSpan extends \Tx_Seminars_OldModel_AbstractTimeSpan
     protected $needsTemplateHelperInitialization = false;
 
     /**
-     * Gets our place(s) as plain text (just the places name).
-     * Returns a localized string "will be announced" if the time slot has no
-     * place set.
+     * @param array $configuration
      *
-     * @return string our places or an empty string if the timespan has no places
+     * @return void
+     */
+    public function overrideConfiguration(array $configuration)
+    {
+        $this->conf = $configuration;
+    }
+
+    /**
+     * Sets this time span's begin date and time.
+     *
+     * @param int $beginDate begin date and time as a UNIX timestamp, may be zero
+     *
+     * @return void
+     */
+    public function setBeginDateAndTime(int $beginDate)
+    {
+        $this->setRecordPropertyInteger('begin_date', $beginDate);
+    }
+
+    /**
+     * Sets this time span's end date and time.
+     *
+     * @param int $endDate end date and time as a UNIX timestamp, may be zero
+     *
+     * @return void
+     */
+    public function setEndDateAndTime(int $endDate)
+    {
+        $this->setRecordPropertyInteger('end_date', $endDate);
+    }
+
+    /**
+     * Sets this time span's room.
+     *
+     * @param string $room room name
+     *
+     * @return void
+     */
+    public function setRoom(string $room)
+    {
+        $this->setRecordPropertyString('room', $room);
+    }
+
+    /**
+     * Sets the number of places for this time span.
+     *
+     * @param int $places the number of places that are associated with this time span
+     *
+     * @return void
+     */
+    public function setNumberOfPlaces(int $places)
+    {
+        $this->setRecordPropertyInteger('place', $places);
+    }
+
+    /**
+     * Returns always an empty string.
+     *
+     * This function is just a dummy because the implementations of this
+     * abstract function can differ widely.
+     *
+     * @return string always an empty string
      */
     public function getPlaceShort(): string
     {
-        return 'the places';
+        return '';
     }
 }

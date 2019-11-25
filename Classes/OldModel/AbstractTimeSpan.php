@@ -21,22 +21,15 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel imple
      */
     public function getBeginDate(): string
     {
-        if ($this->hasBeginDate()) {
-            $result = strftime(
-                $this->getConfValueString('dateFormatYMD'),
-                $this->getBeginDateAsTimestamp()
-            );
-        } else {
-            $result = $this->translate('message_willBeAnnounced');
-        }
-
-        return $result;
+        return $this->hasBeginDate()
+            ? \strftime($this->getConfValueString('dateFormatYMD'), $this->getBeginDateAsTimestamp())
+            : $this->translate('message_willBeAnnounced');
     }
 
     /**
      * Checks whether there's a begin date set.
      *
-     * @return bool TRUE if we have a begin date, FALSE otherwise
+     * @return bool true if we have a begin date, false otherwise
      */
     public function hasBeginDate(): bool
     {
@@ -51,22 +44,15 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel imple
      */
     public function getEndDate(): string
     {
-        if ($this->hasEndDate()) {
-            $result = strftime(
-                $this->getConfValueString('dateFormatYMD'),
-                $this->getEndDateAsTimestamp()
-            );
-        } else {
-            $result = $this->translate('message_willBeAnnounced');
-        }
-
-        return $result;
+        return $this->hasEndDate()
+            ? \strftime($this->getConfValueString('dateFormatYMD'), $this->getEndDateAsTimestamp())
+            : $this->translate('message_willBeAnnounced');
     }
 
     /**
      * Checks whether there's an end date set.
      *
-     * @return bool TRUE if we have an end date, FALSE otherwise
+     * @return bool true if we have an end date, false otherwise
      */
     public function hasEndDate(): bool
     {
@@ -77,13 +63,12 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel imple
      * Checks whether there's a begin date set, and whether this has already
      * passed.
      *
-     * @return bool TRUE if the time-span has a begin date set that lies in
-     *                 the future (time-span has not started yet), FALSE otherwise
+     * @return bool true if the time-span has a begin date set that lies in
+     *                 the future (time-span has not started yet), false otherwise
      */
     public function hasStarted(): bool
     {
-        return $this->hasBeginDate()
-            && ($GLOBALS['SIM_EXEC_TIME'] >= $this->getBeginDateAsTimestamp());
+        return $this->hasBeginDate() && (int)$GLOBALS['SIM_EXEC_TIME'] >= $this->getBeginDateAsTimestamp();
     }
 
     /**
@@ -140,7 +125,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel imple
     /**
      * Checks whether there's a (begin) date set.
      * If there's an end date but no begin date,
-     * this function still will return FALSE.
+     * this function still will return false.
      *
      * @return bool
      */
@@ -166,8 +151,8 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel imple
         }
 
         $timeFormat = $this->getConfValueString('timeFormat');
-        $beginTime = strftime($timeFormat, $this->getBeginDateAsTimestamp());
-        $endTime = strftime($timeFormat, $this->getEndDateAsTimestamp());
+        $beginTime = \strftime($timeFormat, $this->getBeginDateAsTimestamp());
+        $endTime = \strftime($timeFormat, $this->getEndDateAsTimestamp());
 
         $result = $beginTime;
 
@@ -184,28 +169,28 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel imple
 
     /**
      * Checks whether there's a time set (begin time != 00:00)
-     * If there's no date/time set, the result will be FALSE.
+     * If there's no date/time set, the result will be false.
      *
-     * @return bool TRUE if we have a begin time, FALSE otherwise
+     * @return bool true if we have a begin time, false otherwise
      */
     public function hasTime(): bool
     {
-        $beginTime = strftime('%H:%M', $this->getBeginDateAsTimestamp());
+        $beginTime = \strftime('%H:%M', $this->getBeginDateAsTimestamp());
 
-        return $this->hasDate() && ($beginTime != '00:00');
+        return $this->hasDate() && $beginTime !== '00:00';
     }
 
     /**
      * Checks whether there's an end time set (end time != 00:00)
-     * If there's no end date/time set, the result will be FALSE.
+     * If there's no end date/time set, the result will be false.
      *
-     * @return bool TRUE if we have an end time, FALSE otherwise
+     * @return bool true if we have an end time, false otherwise
      */
     public function hasEndTime(): bool
     {
         $endTime = strftime('%H:%M', $this->getEndDateAsTimestamp());
 
-        return $this->hasEndDate() && ($endTime != '00:00');
+        return $this->hasEndDate() && $endTime !== '00:00';
     }
 
     /**
@@ -274,7 +259,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel imple
     /**
      * Checks whether we have a room set.
      *
-     * @return bool TRUE if we have a non-empty room, FALSE otherwise.
+     * @return bool true if we have a non-empty room, false otherwise.
      */
     public function hasRoom(): bool
     {
@@ -287,7 +272,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel imple
      * A time span is considered to be open-ended if it does not have an end
      * date.
      *
-     * @return bool TRUE if this time span is open-ended, FALSE otherwise
+     * @return bool true if this time span is open-ended, false otherwise
      */
     public function isOpenEnded(): bool
     {
@@ -297,7 +282,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel imple
     /**
      * Checks whether we have a place (or places) set.
      *
-     * @return bool TRUE if we have a non-empty places list, FALSE otherwise
+     * @return bool true if we have a non-empty places list, false otherwise
      */
     public function hasPlace(): bool
     {
@@ -307,8 +292,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel imple
     /**
      * Gets the number of places associated with this record.
      *
-     * @return int the number of places associated with this record,
-     *                 will be >= 0
+     * @return int the number of places associated with this record, will be >= 0
      */
     public function getNumberOfPlaces(): int
     {
@@ -320,8 +304,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel imple
      * Returns a localized string "will be announced" if the time slot has no
      * place set.
      *
-     * @return string our places or an empty string if the timespan has
-     *                no places
+     * @return string our places or an empty string if the timespan has no places
      */
     abstract public function getPlaceShort(): string;
 }
