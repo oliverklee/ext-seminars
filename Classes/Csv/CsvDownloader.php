@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use OliverKlee\Seminars\OldModel\AbstractModel;
 use TYPO3\CMS\Core\Charset\CharsetConverter;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -119,7 +118,7 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
      *
      * @return string CSV list of registrations for the given seminar or an error message in case of an error
      */
-    public function createAndOutputListOfRegistrations($eventUid = 0): string
+    public function createAndOutputListOfRegistrations(int $eventUid = 0): string
     {
         /** @var \Tx_Seminars_Csv_EmailRegistrationListView $listView */
         $listView = GeneralUtility::makeInstance(\Tx_Seminars_Csv_DownloadRegistrationListView::class);
@@ -153,9 +152,9 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
      * @return string CSV list of registrations for the given seminar or an
      *                empty string if there is not event with the provided UID
      */
-    public function createListOfRegistrations($eventUid): string
+    public function createListOfRegistrations(int $eventUid): string
     {
-        if (!AbstractModel::recordExists($eventUid, 'tx_seminars_seminars', true)) {
+        if (\Tx_Seminars_OldModel_Event::fromUid($eventUid, true) === null) {
             return '';
         }
 
@@ -393,15 +392,15 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
      * @param int $eventUid
      *        the event to check the access for, must be >= 0 but not necessarily point to an existing event
      *
-     * @return bool TRUE if the event record exists and the BE-User has
+     * @return bool true if the event record exists and the BE User has
      *                 access to the registrations belonging to the event,
-     *                 FALSE otherwise
+     *                 false otherwise
      */
-    private function hasAccessToEventAndItsRegistrations($eventUid): bool
+    private function hasAccessToEventAndItsRegistrations(int $eventUid): bool
     {
         $result = false;
 
-        if (!AbstractModel::recordExists($eventUid, 'tx_seminars_seminars', true)) {
+        if (\Tx_Seminars_OldModel_Event::fromUid($eventUid, true) === null) {
             $this->errorType = self::NOT_FOUND;
         } elseif ($this->canAccessListOfRegistrations($eventUid)) {
             $result = true;

@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use OliverKlee\Seminars\OldModel\AbstractModel;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
@@ -3155,16 +3154,9 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      */
     private function loadTopic()
     {
-        $result = null;
+        /** @var \Tx_Seminars_OldModel_Event|null $topic */
+        $result = self::fromUid($this->getRecordPropertyInteger('topic'));
 
-        // Check whether this event has an topic set.
-        if (
-            $this->hasRecordPropertyInteger('topic')
-            && AbstractModel::recordExists($this->getRecordPropertyInteger('topic'), 'tx_seminars_seminars')
-        ) {
-            /** @var \Tx_Seminars_OldModel_Event $result */
-            $result = GeneralUtility::makeInstance(__CLASS__, $this->getRecordPropertyInteger('topic'));
-        }
         return $result;
     }
 

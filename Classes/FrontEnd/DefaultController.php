@@ -5,7 +5,6 @@ declare(strict_types=1);
 use OliverKlee\Seminars\Bag\AbstractBag;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
-use OliverKlee\Seminars\OldModel\AbstractModel;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
@@ -59,7 +58,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
     private $seminar = null;
 
     /**
-     * @var \Tx_Seminars_OldModel_Registration the registration which we want to
+     * @var \Tx_Seminars_OldModel_Registration|null the registration which we want to
      *                               list/show in the "my events" view
      */
     private $registration = null;
@@ -467,27 +466,21 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      * this function will return FALSE.
      *
      * @param int $seminarUid an event UID
-     * @param bool $showHiddenRecords whether hidden records should be retrieved as well
+     * @param bool $showHidden whether hidden records should be retrieved as well
      *
      * @return bool TRUE if the seminar UID is valid and the object has been created, FALSE otherwise
      */
-    public function createSeminar($seminarUid, $showHiddenRecords = false): bool
+    public function createSeminar($seminarUid, $showHidden = false): bool
     {
         if ($this->seminar !== null) {
             unset($this->seminar);
         }
 
-        if (AbstractModel::recordExists($seminarUid, 'tx_seminars_seminars', $showHiddenRecords)) {
-            /** @var \Tx_Seminars_OldModel_Event $event */
-            $event = GeneralUtility::makeInstance(
-                \Tx_Seminars_OldModel_Event::class,
-                $seminarUid,
-                false,
-                $showHiddenRecords
-            );
+        /** @var \Tx_Seminars_OldModel_Event|null $event */
+        $event = \Tx_Seminars_OldModel_Event::fromUid($seminarUid, $showHidden);
+        if ($event instanceof \Tx_Seminars_OldModel_Event) {
             $this->setSeminar($event);
-
-            $result = $showHiddenRecords ? $this->canShowCurrentEvent() : true;
+            $result = $showHidden ? $this->canShowCurrentEvent() : true;
         } else {
             $this->setSeminar();
             $result = false;
@@ -514,40 +507,20 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      * If the registration cannot be created, $this->registration will be NULL,
      * and this function will return FALSE.
      *
-     * @param int $registrationUid a registration UID
+     * @param int $uid a registration UID
      *
      * @return bool TRUE if the registration UID is valid and the object has been created, FALSE otherwise
      */
-    public function createRegistration($registrationUid): bool
+    public function createRegistration(int $uid): bool
     {
-        $result = false;
+        $this->registration = \Tx_Seminars_OldModel_Registration::fromUid($uid);
+        $exists = $this->registration instanceof \Tx_Seminars_OldModel_Registration;
 
-        if (AbstractModel::recordExists($registrationUid, 'tx_seminars_attendances')) {
-            $dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-                '*',
-                'tx_seminars_attendances',
-                'tx_seminars_attendances.uid = ' . $registrationUid . \Tx_Oelib_Db::enableFields(
-                    'tx_seminars_attendances'
-                )
-            );
-            $this->registration = GeneralUtility::makeInstance(
-                \Tx_Seminars_OldModel_Registration::class,
-                0,
-                $dbResult
-            );
+        if ($exists) {
             $this->registration->setContentObject($this->cObj);
-            if ($dbResult !== false) {
-                $GLOBALS['TYPO3_DB']->sql_free_result($dbResult);
-            }
-            $result = $this->registration->comesFromDatabase();
-            if (!$result) {
-                $this->registration = null;
-            }
-        } else {
-            $this->registration = null;
         }
 
-        return $result;
+        return $exists;
     }
 
     /**
@@ -2852,7 +2825,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
 
         $this->toggleEventFieldsOnRegistrationPage();
 
-        if ($this->createSeminar($this->piVars['seminar'])) {
+        $eventUid = (int)$this->piVars['seminar'];
+        if ($this->createSeminar($eventUid)) {
             // Lets warnings from the seminar bubble up to us.
             $this->setErrorMessage($this->seminar->checkConfiguration(true));
 
@@ -2885,8 +2859,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
                 case 'register':
                     // The fall-through is intended.
                 default:
-                    $errorMessage = $this->getRegistrationManager()
-                        ->existsSeminarMessage((int)$this->piVars['seminar']);
+                    $errorMessage = $this->getRegistrationManager()->existsSeminarMessage($eventUid);
             }
         }
 

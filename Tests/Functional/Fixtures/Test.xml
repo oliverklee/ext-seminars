@@ -14,4 +14,14 @@
         <title>the deleted one</title>
         <deleted>1</deleted>
     </tx_seminars_test>
+    <tx_seminars_test>
+        <uid>4</uid>
+        <title>not started yet</title>
+        <starttime>3574712685</starttime>
+    </tx_seminars_test>
+    <tx_seminars_test>
+        <uid>5</uid>
+        <title>expired</title>
+        <endtime>42</endtime>
+    </tx_seminars_test>
 </dataset>

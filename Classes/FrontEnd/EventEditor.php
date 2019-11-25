@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use OliverKlee\Seminars\OldModel\AbstractModel;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
@@ -673,24 +672,20 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      */
     private function checkAccess(): string
     {
-        if (!Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
+        if (!\Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
             return 'message_notLoggedIn';
         }
 
-        $objectUid = $this->getObjectUid();
-        if ($objectUid > 0 && !AbstractModel::recordExists($objectUid, 'tx_seminars_seminars', true)) {
+        $uid = $this->getObjectUid();
+        /** @var \Tx_Seminars_OldModel_Event|null $event */
+        $event = \Tx_Seminars_OldModel_Event::fromUid($uid, true);
+
+        if ($uid > 0 && !($event instanceof \Tx_Seminars_OldModel_Event)) {
             return 'message_wrongSeminarNumber';
         }
 
         $user = self::getLoggedInUser();
-        if ($objectUid > 0) {
-            /** @var \Tx_Seminars_OldModel_Event $event */
-            $event = GeneralUtility::makeInstance(
-                \Tx_Seminars_OldModel_Event::class,
-                $this->getObjectUid(),
-                false,
-                true
-            );
+        if ($uid > 0 && $event instanceof \Tx_Seminars_OldModel_Event) {
             $isUserVip = $event->isUserVip($user->getUid(), $this->getConfValueInteger('defaultEventVipsFeGroupID'));
             $isUserOwner = $event->isOwnerFeUser();
             $mayManagersEditTheirEvents = $this->getConfValueBoolean('mayManagersEditTheirEvents', 's_listView');

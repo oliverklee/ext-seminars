@@ -7,8 +7,11 @@ namespace OliverKlee\Seminars\OldModel;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
+use TYPO3\CMS\Core\Database\Query\Restriction\EndTimeRestriction;
 use TYPO3\CMS\Core\Database\Query\Restriction\HiddenRestriction;
+use TYPO3\CMS\Core\Database\Query\Restriction\StartTimeRestriction;
 use TYPO3\CMS\Core\Imaging\Icon;
+use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -83,11 +86,11 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
      *
      * @param array $data
      *
-     * @return AbstractModel
+     * @return static
      */
     public static function fromData(array $data): AbstractModel
     {
-        $model = new static();
+        $model = GeneralUtility::makeInstance(static::class);
         $model->setData($data);
 
         return $model;
@@ -99,10 +102,14 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
      * @param int $uid
      * @param bool $allowHidden
      *
-     * @return AbstractModel|null
+     * @return static|null
      */
     public static function fromUid(int $uid, bool $allowHidden = false)
     {
+        if ($uid <= 0) {
+            return null;
+        }
+
         $data = self::fetchDataByUid($uid, $allowHidden);
 
         return \is_array($data) ? self::fromData($data) : null;
@@ -118,7 +125,10 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
     {
         $query = self::getQueryBuilderForOwnTable();
         if ($allowHidden) {
-            $query->getRestrictions()->removeByType(HiddenRestriction::class);
+            $restrictions = $query->getRestrictions();
+            $restrictions->removeByType(HiddenRestriction::class);
+            $restrictions->removeByType(StartTimeRestriction::class);
+            $restrictions->removeByType(EndTimeRestriction::class);
         }
         $query->select('*')->from(static::$tableName);
         $query->andWhere($query->expr()->eq('uid', $query->createNamedParameter($uid)));
@@ -152,7 +162,7 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
      * The column names will be used as array keys.
      * The column names must *not* be prefixed with the table name.
      *
-     * If at least one element is taken, this function sets $this->isInDb to TRUE.
+     * If at least one element is taken, this function sets $this->isInDb to true.
      *
      * Example:
      * $dbResultRow['name'] => $this->recordData['name']
@@ -173,7 +183,7 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
      * Checks whether this object has been properly initialized,
      * has a non-empty table name set and thus is basically usable.
      *
-     * @return bool TRUE if the object has been initialized, FALSE otherwise
+     * @return bool true if the object has been initialized, false otherwise
      */
     public function isOk(): bool
     {
@@ -224,7 +234,7 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
      *
      * @param string $key key of the element to check
      *
-     * @return bool TRUE if the corresponding string exists and is non-empty
+     * @return bool true if the corresponding string exists and is non-empty
      */
     public function hasRecordPropertyString(string $key): bool
     {
@@ -237,7 +247,7 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
      *
      * @param string $key key of the element to check
      *
-     * @return bool TRUE if the corresponding value exists and is non-zero
+     * @return bool true if the corresponding value exists and is non-zero
      */
     public function hasRecordPropertyInteger(string $key): bool
     {
@@ -250,8 +260,7 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
      *
      * @param string $key key of the element to check
      *
-     * @return bool TRUE if the corresponding field exists and its value
-     *                 is not "0.00".
+     * @return bool true if the corresponding field exists and its value is not zero (with decimals)
      */
     public function hasRecordPropertyDecimal(string $key): bool
     {
@@ -336,7 +345,7 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
 
     /**
      * Gets an element of the record data array, converted to a boolean.
-     * If the array has not been initialized properly, FALSE is returned.
+     * If the array has not been initialized properly, false is returned.
      *
      * @param string $key key of the element to return
      *
@@ -352,7 +361,7 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
      *
      * @param string $key the array key to search for
      *
-     * @return bool TRUE if $this->recordData has been initialized and the array key exists, FALSE otherwise
+     * @return bool true if $this->recordData has been initialized and the array key exists, false otherwise
      *
      * @throws \InvalidArgumentException
      */
@@ -369,7 +378,7 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
      * The UID of the parent page must be set in $this->recordData['pid'].
      * (otherwise the record will be created in the root page).
      *
-     * @return bool TRUE if everything went OK, FALSE otherwise
+     * @return bool true if everything went OK, false otherwise
      */
     public function commitToDb(): bool
     {
@@ -467,30 +476,6 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
     }
 
     /**
-     * Checks whether a non-deleted record with a given UID exists in the DB.
-     *
-     * If the parameter $allowHiddenRecords is set to TRUE, hidden records will be selected, too.
-     *
-     * This method may be called statically.
-     *
-     * @param int $uid
-     * @param string $tableName string with the table name where the UID should be searched for
-     * @param bool $allowHiddenRecords whether hidden records should be found as well
-     *
-     * @return bool true if a visible record with that UID exists, false otherwise
-     */
-    public static function recordExists($uid, string $tableName, bool $allowHiddenRecords = false): bool
-    {
-        if ($uid <= 0 || $tableName === '') {
-            return false;
-        }
-
-        $whereClause = 'uid = ' . $uid . \Tx_Oelib_Db::enableFields($tableName, (int)$allowHiddenRecords);
-
-        return \Tx_Oelib_Db::existsRecord($tableName, $whereClause);
-    }
-
-    /**
      * Retrieves a record from the database.
      *
      * The record is retrieved from static::$tableName. Therefore static::$tableName
@@ -526,7 +511,7 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
     /**
      * Checks whether this object has a UID.
      *
-     * @return bool TRUE if this object has a UID, FALSE otherwise
+     * @return bool true if this object has a UID, false otherwise
      */
     public function hasUid(): bool
     {
@@ -581,8 +566,8 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
      */
     public function getRecordIcon(): string
     {
-        /** @var \TYPO3\CMS\Core\Imaging\IconFactory $iconFactory */
-        $iconFactory = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconFactory::class);
+        /** @var IconFactory $iconFactory */
+        $iconFactory = GeneralUtility::makeInstance(IconFactory::class);
         return $iconFactory->getIconForRecord(static::$tableName, $this->recordData, Icon::SIZE_SMALL)->render();
     }
 
