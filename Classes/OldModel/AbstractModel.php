@@ -42,11 +42,6 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
     protected $needsTemplateHelperInitialization = true;
 
     /**
-     * @var bool whether to call `TemplateHelper::init()` during construction in BE mode
-     */
-    protected $includeLanguageFile = true;
-
-    /**
      * @var array the values from/for the DB
      */
     protected $recordData = [];
@@ -68,10 +63,6 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
      */
     public function __construct(int $uid = 0, $dbResult = false, bool $allowHidden = false)
     {
-        if ($this->includeLanguageFile && TYPO3_MODE === 'BE' && $this->getLanguageService() !== null) {
-            $this->getLanguageService()->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
-        }
-
         if ($uid > 0) {
             $data = self::fetchDataByUid($uid, $allowHidden);
             if (\is_array($data)) {

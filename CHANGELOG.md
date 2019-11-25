@@ -18,7 +18,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Display the name of the current functional test (#256)
 
 ### Changed
-- Clean up the translation handling in the tests (#369)
+- Clean up the translation handling in the tests (#369, #376)
 - !!! Merge the language files (#359, #361, #362, #363)
 - Load the topic lazily in the old event model (#349)
 - Use PHP 7.2 for the TER release script (#343)

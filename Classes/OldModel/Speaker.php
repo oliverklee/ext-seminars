@@ -36,11 +36,6 @@ class Tx_Seminars_OldModel_Speaker extends AbstractModel
     protected static $tableName = 'tx_seminars_speakers';
 
     /**
-     * @var bool whether to call `TemplateHelper::init()` during construction in BE mode
-     */
-    protected $includeLanguageFile = false;
-
-    /**
      * Gets our organization.
      *
      * @return string our organization (or '' if there is an error)

@@ -17,11 +17,6 @@ final class TestingTimeSpan extends \Tx_Seminars_OldModel_AbstractTimeSpan
     protected $needsTemplateHelperInitialization = false;
 
     /**
-     * @var bool whether to include `locallang.xlf` during construction
-     */
-    protected $includeLanguageFile = false;
-
-    /**
      * Gets our place(s) as plain text (just the places name).
      * Returns a localized string "will be announced" if the time slot has no
      * place set.

@@ -17,11 +17,6 @@ class Tx_Seminars_OldModel_Organizer extends AbstractModel implements \Tx_Oelib_
     protected static $tableName = 'tx_seminars_organizers';
 
     /**
-     * @var bool whether to call `TemplateHelper::init()` during construction in BE mode
-     */
-    protected $includeLanguageFile = false;
-
-    /**
      * @var bool whether to call `TemplateHelper::init()` during construction
      */
     protected $needsTemplateHelperInitialization = false;
