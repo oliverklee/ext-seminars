@@ -31,7 +31,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Allow 9.5-compatible versions of mkforms and rn_base (#275)
 - Sort the Composer dependencies (#277)
 - Clean up the TypoScript (#266, #267)
-- Switch more tests to nimut/testing-framework (#264, #375, #377, #378)
+- Switch more tests to nimut/testing-framework (#264, #375, #377, #378, #380)
 - Update the testing libraries (#251, #252, #254)
 
 ### Deprecated
