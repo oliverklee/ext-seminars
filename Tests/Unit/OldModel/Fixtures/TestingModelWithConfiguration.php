@@ -22,9 +22,4 @@ final class TestingModelWithConfiguration extends AbstractModel
      * @var bool whether to call `TemplateHelper::init()` during construction in BE mode
      */
     protected $needsTemplateHelperInitialization = true;
-
-    /**
-     * @var bool whether to include `locallang.xlf` during construction
-     */
-    protected $includeLanguageFile = false;
 }

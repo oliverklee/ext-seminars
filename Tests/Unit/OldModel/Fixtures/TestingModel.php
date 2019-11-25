@@ -24,11 +24,6 @@ final class TestingModel extends AbstractModel
     protected $needsTemplateHelperInitialization = false;
 
     /**
-     * @var bool whether to include `locallang.xlf` during construction
-     */
-    protected $includeLanguageFile = false;
-
-    /**
      * Sets the test field of this record to a boolean value.
      *
      * @param bool $test the boolean value to set
