@@ -56,24 +56,16 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
     protected $isPersisted = false;
 
     /**
-     * The constructor. Creates a test instance from a DB record.
-     *
-     * @param int $uid
-     *        The UID of the record to retrieve from the DB. This parameter will be ignored if $dbResult is provided.
-     * @param \mysqli_result|bool $dbResult
-     *        MySQL result (of SELECT query) object. If this parameter is provided, $uid will be ignored.
-     * @param bool $allowHidden
-     *        whether it is possible to create an object from a hidden record
+     * @param int $uid the UID of the record to retrieve from the DB
+     * @param bool $allowHidden whether it is possible to create an object from a hidden record
      */
-    public function __construct(int $uid = 0, $dbResult = false, bool $allowHidden = false)
+    public function __construct(int $uid = 0, bool $allowHidden = false)
     {
         if ($uid > 0) {
             $data = self::fetchDataByUid($uid, $allowHidden);
             if (\is_array($data)) {
                 $this->setData($data);
             }
-        } elseif ($dbResult !== false) {
-            $this->retrieveDataFromDatabase($dbResult);
         }
 
         if ($this->needsTemplateHelperInitialization) {
@@ -134,26 +126,6 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
         $query->andWhere($query->expr()->eq('uid', $query->createNamedParameter($uid)));
 
         return $query->execute()->fetch();
-    }
-
-    /**
-     * Retrieves this record's data the DB result.
-     *
-     * @param \mysqli_result|bool $dbResult
-     *        MySQL result (of SELECT query) object. If this parameter is provided, $uid will be ignored.
-     *
-     * @return void
-     */
-    protected function retrieveDataFromDatabase($dbResult)
-    {
-        if ($dbResult === false) {
-            return;
-        }
-
-        $data = \Tx_Oelib_Db::getDatabaseConnection()->sql_fetch_assoc($dbResult);
-        if (\is_array($data)) {
-            $this->setData($data);
-        }
     }
 
     /**

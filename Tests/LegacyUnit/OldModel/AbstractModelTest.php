@@ -64,36 +64,6 @@ class AbstractModelTest extends TestCase
         $this->testingFramework->cleanUp();
     }
 
-    ////////////////////////////////
-    // Tests for creating objects.
-    ////////////////////////////////
-
-    public function testCreateFromDbResult()
-    {
-        $dbResult = \Tx_Oelib_Db::select(
-            '*',
-            'tx_seminars_test',
-            'uid = ' . $this->subjectUid
-        );
-
-        $test = new TestingModel(
-            0,
-            $dbResult
-        );
-
-        self::assertTrue($test->comesFromDatabase());
-    }
-
-    /**
-     * @test
-     */
-    public function createFromDbResultFailsForFalse()
-    {
-        $test = new TestingModel(0, false);
-
-        self::assertFalse($test->isOk());
-    }
-
     //////////////////////////////////
     // Tests for getting attributes.
     //////////////////////////////////

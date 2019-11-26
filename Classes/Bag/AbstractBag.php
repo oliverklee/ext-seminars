@@ -220,8 +220,12 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
      */
     protected function createItemFromDbResult()
     {
-        $this->currentItem = GeneralUtility::makeInstance(static::$modelClassName, 0, $this->dbResult);
-        $this->valid();
+        $data = $this->dbResult->fetch_assoc();
+        if (\is_array($data)) {
+            $this->currentItem = static::$modelClassName::fromData($data);
+        } else {
+            $this->currentItem = null;
+        }
     }
 
     /**
