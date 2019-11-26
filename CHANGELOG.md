@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Internally store boolean properties as integers (#386)
 - Fix the locallang path in the event publication (#367, #368, #370)
 - Fix the numbers in the countdown tests (#366)
 

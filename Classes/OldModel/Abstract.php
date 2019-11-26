@@ -253,7 +253,7 @@ abstract class Tx_Seminars_OldModel_Abstract extends \Tx_Oelib_TemplateHelper im
     protected function setRecordPropertyBoolean($key, $value)
     {
         if (!empty($key)) {
-            $this->recordData[$key] = (bool)$value;
+            $this->recordData[$key] = (int)(bool)$value;
         }
     }
 
