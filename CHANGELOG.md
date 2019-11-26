@@ -39,6 +39,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - `EventSingleView` interface and `singleView` hook index (#338)
 
 ### Removed
+- Drop the creation of model instances from legacy DB result (#388)
 - Drop AbstractModel::recordExists (#381)
 - Drop the context-sensitive help (#358)
 - Drop unneeded Travis CI configuration settings (#258, #259, #260, #261)

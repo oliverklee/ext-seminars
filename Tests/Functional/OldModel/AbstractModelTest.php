@@ -230,7 +230,7 @@ final class AbstractModelTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
 
-        $result = new TestingModel(2, false, true);
+        $result = new TestingModel(2, true);
 
         self::assertTrue($result->hasUid());
     }
@@ -242,7 +242,7 @@ final class AbstractModelTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
 
-        $result = new TestingModel(1, false, true);
+        $result = new TestingModel(1, true);
 
         self::assertTrue($result->hasUid());
     }
@@ -254,7 +254,7 @@ final class AbstractModelTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
 
-        $result = new TestingModel(3, false, true);
+        $result = new TestingModel(3, true);
 
         self::assertFalse($result->hasUid());
     }
