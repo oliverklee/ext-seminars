@@ -3,9 +3,8 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
-use OliverKlee\Seminars\BackEnd\AbstractEventMailForm;
+use OliverKlee\Seminars\Tests\Functional\BackEnd\Fixtures\TestingEventMailForm;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
-use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -18,7 +17,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends TestCase
     use BackEndTestsTrait;
 
     /**
-     * @var \Tx_Seminars_Tests_Unit_Fixtures_BackEnd_TestingEventMailForm
+     * @var TestingEventMailForm
      */
     private $subject = null;
 
@@ -28,50 +27,29 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends TestCase
     private $testingFramework = null;
 
     /**
-     * UID of a dummy system folder
-     *
-     * @var int
-     */
-    private $dummySysFolderUid;
-
-    /**
-     * UID of a dummy organizer record
-     *
-     * @var int
-     */
-    private $organizerUid;
-
-    /**
      * UID of a dummy event record
      *
      * @var int
      */
     private $eventUid;
 
-    /**
-     * @var \Tx_Oelib_EmailCollector
-     */
-    private $mailer = null;
-
     protected function setUp()
     {
         $this->unifyTestingEnvironment();
 
+        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
+
         /** @var \Tx_Oelib_MailerFactory $mailerFactory */
         $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
         $mailerFactory->enableTestMode();
-        $this->mailer = $mailerFactory->getMailer();
 
-        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
+        \Tx_Oelib_PageFinder::getInstance()->setPageUid($this->testingFramework->createSystemFolder());
 
-        $this->dummySysFolderUid = $this->testingFramework->createSystemFolder();
-        \Tx_Oelib_PageFinder::getInstance()->setPageUid($this->dummySysFolderUid);
-
-        $this->organizerUid = $this->testingFramework->createRecord(
+        $organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
             [
                 'title' => 'Dummy Organizer',
-                'email' => 'foo@example.org',
+                'email' => 'foo@example.com',
                 'email_footer' => 'organizer footer',
             ]
         );
@@ -87,11 +65,11 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends TestCase
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $this->eventUid,
-            $this->organizerUid,
+            $organizerUid,
             'organizers'
         );
 
-        $this->subject = new \Tx_Seminars_Tests_Unit_Fixtures_BackEnd_TestingEventMailForm($this->eventUid);
+        $this->subject = new TestingEventMailForm($this->eventUid);
         $this->subject->setDateFormat();
     }
 
@@ -117,7 +95,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends TestCase
             'There is no event with this UID.'
         );
 
-        new \Tx_Seminars_Tests_Unit_Fixtures_BackEnd_TestingEventMailForm(
+        new TestingEventMailForm(
             $this->testingFramework->getAutoIncrement('tx_seminars_seminars')
         );
     }
@@ -347,396 +325,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends TestCase
         );
     }
 
-    ////////////////////////////////
-    // Tests for the localization.
-    ////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function localizationReturnsLocalizedStringForExistingKey()
-    {
-        self::assertSame('Events', $this->getLanguageService()->getLL('title'));
-    }
-
-    ///////////////////////////////////
-    // Tests for sendEmailToAttendees
-    ///////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function sendEmailToAttendeesSendsEmailWithSubjectOnSubmitOfValidForm()
-    {
-        $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            [
-                'pid' => $this->dummySysFolderUid,
-                'seminar' => $this->eventUid,
-                'user' => $this->testingFramework->createFrontEndUser(
-                    '',
-                    ['email' => 'foo@example.com']
-                ),
-            ]
-        );
-
-        $this->subject->setPostData(
-            [
-                'action' => 'confirmEvent',
-                'isSubmitted' => '1',
-                'subject' => 'foo',
-                'messageBody' => 'foo bar',
-            ]
-        );
-        $this->subject->render();
-
-        self::assertSame(
-            'foo',
-            $this->mailer->getFirstSentEmail()->getSubject()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function sendEmailToAttendeesForAttendeeWithoutEMailAddressDoesNotSendMail()
-    {
-        $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            [
-                'pid' => $this->dummySysFolderUid,
-                'seminar' => $this->eventUid,
-                'user' => $this->testingFramework->createFrontEndUser(),
-            ]
-        );
-
-        $this->subject->setPostData(
-            [
-                'action' => 'confirmEvent',
-                'isSubmitted' => '1',
-                'subject' => 'foo',
-                'messageBody' => 'foo bar',
-            ]
-        );
-        $this->subject->render();
-
-        self::assertNull(
-            $this->mailer->getFirstSentEmail()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function sendEmailToAttendeesInsertsUserNameIntoMailText()
-    {
-        $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            [
-                'pid' => $this->dummySysFolderUid,
-                'seminar' => $this->eventUid,
-                'user' => $this->testingFramework->createFrontEndUser(
-                    '',
-                    [
-                        'email' => 'foo@example.com',
-                        'name' => 'test user',
-                    ]
-                ),
-            ]
-        );
-
-        $this->subject->setPostData(
-            [
-                'action' => 'confirmEvent',
-                'isSubmitted' => '1',
-                'subject' => 'foo',
-                'messageBody' => 'foo bar %salutation',
-            ]
-        );
-        $this->subject->render();
-
-        self::assertContains(
-            'test user',
-            $this->mailer->getFirstSentEmail()->getBody()
-        );
-    }
-
-    /**
-     * @test
-     *
-     * @doesNotPerformAssertions
-     */
-    public function sendEmailToAttendeesWithoutReplacementMarkerInBodyDoesNotCrash()
-    {
-        $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            [
-                'pid' => $this->dummySysFolderUid,
-                'seminar' => $this->eventUid,
-                'user' => $this->testingFramework->createFrontEndUser(
-                    '',
-                    [
-                        'email' => 'foo@example.com',
-                        'name' => 'test user',
-                    ]
-                ),
-            ]
-        );
-
-        $this->subject->setPostData(
-            [
-                'action' => 'confirmEvent',
-                'isSubmitted' => '1',
-                'subject' => 'foo',
-                'messageBody' => 'foo bar foo',
-            ]
-        );
-
-        $this->subject->render();
-    }
-
-    /**
-     * @test
-     */
-    public function sendEmailToAttendeesUsesFirstOrganizerAsSender()
-    {
-        \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Organizer::class)->getLoadedTestingModel(
-            [
-                'title' => 'Second Organizer',
-                'email' => 'bar@example.org',
-            ]
-        );
-
-        $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            [
-                'pid' => $this->dummySysFolderUid,
-                'seminar' => $this->eventUid,
-                'user' => $this->testingFramework->createFrontEndUser(
-                    '',
-                    ['email' => 'foo@example.com']
-                ),
-            ]
-        );
-
-        $this->subject->setPostData(
-            [
-                'action' => 'confirmEvent',
-                'isSubmitted' => '1',
-                'subject' => 'foo',
-                'messageBody' => 'foo bar',
-            ]
-        );
-        $this->subject->render();
-
-        self::assertArrayHasKey(
-            'foo@example.org',
-            $this->mailer->getFirstSentEmail()->getFrom()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function sendEmailToAttendeesForEventWithTwoRegistrationsSendsTwoEmails()
-    {
-        $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            [
-                'pid' => $this->dummySysFolderUid,
-                'seminar' => $this->eventUid,
-                'user' => $this->testingFramework->createFrontEndUser(
-                    '',
-                    ['email' => 'foo@example.com']
-                ),
-            ]
-        );
-        $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            [
-                'pid' => $this->dummySysFolderUid,
-                'seminar' => $this->eventUid,
-                'user' => $this->testingFramework->createFrontEndUser(
-                    '',
-                    ['email' => 'foo@example.com']
-                ),
-            ]
-        );
-
-        $this->subject->setPostData(
-            [
-                'action' => 'confirmEvent',
-                'isSubmitted' => '1',
-                'subject' => 'foo',
-                'messageBody' => 'foo bar',
-            ]
-        );
-        $this->subject->render();
-
-        self::assertSame(
-            2,
-            $this->mailer->getNumberOfSentEmails()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function sendEmailToAttendeesAppendsFirstOrganizersFooterToMessageBodyIfSet()
-    {
-        $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            [
-                'pid' => $this->dummySysFolderUid,
-                'seminar' => $this->eventUid,
-                'user' => $this->testingFramework->createFrontEndUser(
-                    '',
-                    ['email' => 'foo@example.com']
-                ),
-            ]
-        );
-
-        $organizerFooter = 'organizer footer';
-        \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Organizer::class)->getLoadedTestingModel(
-            [
-                'title' => 'Second Organizer',
-                'email' => 'bar@example.org',
-                'email_footer' => 'oasdfasrganizer footer',
-            ]
-        );
-
-        $this->subject->setPostData(
-            [
-                'action' => 'confirmEvent',
-                'isSubmitted' => '1',
-                'subject' => 'foo',
-                'messageBody' => 'foo bar',
-            ]
-        );
-        $this->subject->render();
-
-        self::assertContains(
-            LF . '-- ' . LF . $organizerFooter,
-            $this->mailer->getFirstSentEmail()->getBody()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function sendEmailToAttendeesForOrganizerWithoutFooterDoesNotAppendFooterMarkersToMessageBody()
-    {
-        $this->testingFramework->changeRecord(
-            'tx_seminars_organizers',
-            $this->organizerUid,
-            ['email_footer' => '']
-        );
-
-        $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            [
-                'pid' => $this->dummySysFolderUid,
-                'seminar' => $this->eventUid,
-                'user' => $this->testingFramework->createFrontEndUser(
-                    '',
-                    ['email' => 'foo@example.com']
-                ),
-            ]
-        );
-
-        $this->subject->setPostData(
-            [
-                'action' => 'confirmEvent',
-                'isSubmitted' => '1',
-                'subject' => 'foo',
-                'messageBody' => 'foo bar',
-            ]
-        );
-        $this->subject->render();
-
-        self::assertNotContains(
-            LF . '-- ' . LF,
-            $this->mailer->getFirstSentEmail()->getBody()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function sendEmailToAttendeesForExistingRegistrationAddsEmailSentFlashMessage()
-    {
-        $this->mockBackEndUser->expects(self::atLeastOnce())->method('setAndSaveSessionData')
-            ->with(self::anything(), self::anything());
-
-        $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            [
-                'pid' => $this->dummySysFolderUid,
-                'seminar' => $this->eventUid,
-                'user' => $this->testingFramework->createFrontEndUser(
-                    '',
-                    ['email' => 'foo@example.com']
-                ),
-            ]
-        );
-
-        $this->subject->setPostData(
-            [
-                'action' => 'confirmEvent',
-                'isSubmitted' => '1',
-                'subject' => 'foo',
-                'messageBody' => 'foo bar',
-            ]
-        );
-        $this->subject->render();
-    }
-
-    /**
-     * @test
-     */
-    public function sendEmailToAttendeesForNoRegistrationsNotAddsEmailSentFlashMessage()
-    {
-        $this->mockBackEndUser->expects(self::never())->method('setAndSaveSessionData');
-
-        $this->subject->setPostData(
-            [
-                'action' => 'confirmEvent',
-                'isSubmitted' => '1',
-                'subject' => 'foo',
-                'messageBody' => 'foo bar',
-            ]
-        );
-        $this->subject->render();
-    }
-
-    /////////////////////////////////
-    // Tests for redirectToListView
-    /////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function redirectToListViewSendsTheRedirectHeader()
-    {
-        $this->subject->setPostData(
-            [
-                'action' => 'confirmEvent',
-                'isSubmitted' => '1',
-                'subject' => 'foo',
-                'messageBody' => 'foo bar',
-            ]
-        );
-        $this->subject->render();
-
-        self::assertSame(
-            'Location: ' . BackendUtility::getModuleUrl(
-                AbstractEventMailForm::MODULE_NAME,
-                ['id' => \Tx_Oelib_PageFinder::getInstance()->getPageUid()]
-            ),
-            $this->headerProxy->getLastAddedHeader()
-        );
-    }
-
     /////////////////////////////////////
     // Tests concerning getInitialValue
     /////////////////////////////////////
@@ -752,7 +340,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_AbstractEventMailFormTest extends TestCase
             ['title' => 'FooBar']
         );
 
-        $subject = new \Tx_Seminars_Tests_Unit_Fixtures_BackEnd_TestingEventMailForm(
+        $subject = new TestingEventMailForm(
             $this->eventUid
         );
 
