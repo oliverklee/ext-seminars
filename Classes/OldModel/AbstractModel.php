@@ -340,7 +340,7 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
     {
         $this->assertNonEmptyKey($key);
 
-        $this->recordData[$key] = (bool)$value;
+        $this->recordData[$key] = (int)(bool)$value;
     }
 
     /**
