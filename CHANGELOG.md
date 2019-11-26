@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Display the name of the current functional test (#256)
 
 ### Changed
+- Require oelib >= 3.0.2 (#387)
 - Clean up the translation handling in the tests (#369, #376)
 - !!! Merge the language files (#359, #361, #362, #363)
 - Load the topic lazily in the old event model (#349)
