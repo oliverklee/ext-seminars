@@ -362,4 +362,26 @@ final class AbstractModelTest extends UnitTestCase
 
         self::assertSame($value, $subject->getRecordPropertyBoolean('something'));
     }
+
+    /**
+     * @test
+     */
+    public function createMmRecordsForEmptyTableNameThrowsException()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionCode(1333292359);
+
+        $this->subject->createMmRecords('', []);
+    }
+
+    /**
+     * @test
+     */
+    public function createMmRecordsOnObjectWithoutUidThrowsException()
+    {
+        $this->expectException(\BadMethodCallException::class);
+        $this->expectExceptionCode(1333292371);
+
+        $this->subject->createMmRecords('tx_seminars_test_test_mm', []);
+    }
 }

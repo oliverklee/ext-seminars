@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Functional\OldModel;
 
+use Doctrine\DBAL\Driver\Statement;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingModel;
 
@@ -530,5 +531,101 @@ final class AbstractModelTest extends FunctionalTestCase
 
         $recordInDatabase = $this->getDatabaseConnection()->selectSingleRow('*', 'tx_seminars_test', 'uid = 1');
         self::assertSame(self::NOW, (int)$recordInDatabase['tstamp']);
+    }
+
+    /**
+     * @test
+     */
+    public function createMmRecordsWithEmptyReferencesReturnsZero()
+    {
+        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $subject = TestingModel::fromUid(1);
+
+        $result = $subject->createMmRecords('tx_seminars_test_test_mm', []);
+
+        self::assertSame(0, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function createMmRecordsWithOneReferenceReturnsOne()
+    {
+        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $subject = TestingModel::fromUid(1);
+
+        $result = $subject->createMmRecords('tx_seminars_test_test_mm', [42]);
+
+        self::assertSame(1, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function createMmRecordsWithTwoReferencesReturnsTwo()
+    {
+        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $subject = TestingModel::fromUid(1);
+
+        $result = $subject->createMmRecords('tx_seminars_test_test_mm', [42, 31]);
+
+        self::assertSame(2, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function createMmRecordsNotCountsZeroReferences()
+    {
+        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $subject = TestingModel::fromUid(1);
+
+        $result = $subject->createMmRecords('tx_seminars_test_test_mm', [0]);
+
+        self::assertSame(0, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function createMmRecordsCreatesRecordWithLocalAndForeignUid()
+    {
+        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $subject = TestingModel::fromUid(1);
+
+        $subject->createMmRecords('tx_seminars_test_test_mm', [42]);
+
+        $recordCount = $this->getDatabaseConnection()
+            ->selectCount('*', 'tx_seminars_test_test_mm', 'uid_local = 1 AND uid_foreign = 42');
+        self::assertSame(1, $recordCount);
+    }
+
+    /**
+     * @test
+     */
+    public function createMmRecordsNotCreatesRecordForZeroReference()
+    {
+        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $subject = TestingModel::fromUid(1);
+
+        $subject->createMmRecords('tx_seminars_test_test_mm', [0]);
+
+        $recordCount = $this->getDatabaseConnection()->selectCount('*', 'tx_seminars_test_test_mm', 'uid_local = 1');
+        self::assertSame(0, $recordCount);
+    }
+
+    /**
+     * @test
+     */
+    public function createMmRecordsCreatesIncreasingSortingInReferenceOrder()
+    {
+        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $subject = TestingModel::fromUid(1);
+
+        $subject->createMmRecords('tx_seminars_test_test_mm', [42, 31]);
+
+        /** @var Statement $statement */
+        $statement = $this->getDatabaseConnection()->select('sorting', 'tx_seminars_test_test_mm', 'uid_local = 1');
+        self::assertSame([['sorting' => 1], ['sorting' => 2]], $statement->fetchAll());
     }
 }

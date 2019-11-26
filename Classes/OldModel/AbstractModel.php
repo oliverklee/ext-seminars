@@ -426,8 +426,7 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
     /**
      * Adds m:n records that are referenced by this record.
      *
-     * Before this function may be called, $this->recordData['uid'] must be set
-     * correctly.
+     * Before this function may be called, $this->recordData['uid'] must be set correctly.
      *
      * @param string $mmTable
      *        the name of the m:n table, having the fields uid_local, uid_foreign and sorting, must not be empty
@@ -441,44 +440,30 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
      */
     protected function createMmRecords(string $mmTable, array $references): int
     {
-        if ($mmTable == '') {
+        if ($mmTable === '') {
             throw new \InvalidArgumentException('$mmTable must not be empty.', 1333292359);
         }
         if (!$this->hasUid()) {
-            throw new \BadMethodCallException(
-                'createMmRecords may only be called on objects that have a UID.',
-                1333292371
-            );
-        }
-        if (empty($references)) {
-            return 0;
+            throw new \BadMethodCallException('createMmRecords may only be called on objects with a UID.', 1333292371);
         }
 
-        $numberOfCreatedMmRecords = 0;
-        $isDummyRecord = $this->getRecordPropertyBoolean('is_dummy_record');
+        $dataTemplate = ['uid_local' => $this->getUid()];
+        if ($this->getRecordPropertyBoolean('is_dummy_record')) {
+            $dataTemplate['is_dummy_record'] = 1;
+        }
 
-        $sorting = 1;
-
-        foreach ($references as $currentRelationUid) {
-            // We might get unsafe data here, so better be safe.
-            $foreignUid = (int)$currentRelationUid;
-            if ($foreignUid > 0) {
-                $dataToInsert = [
-                    'uid_local' => $this->getUid(),
-                    'uid_foreign' => $foreignUid,
-                    'sorting' => $sorting,
-                    'is_dummy_record' => $isDummyRecord,
-                ];
-                \Tx_Oelib_Db::insert(
-                    $mmTable,
-                    $dataToInsert
-                );
-                $sorting++;
-                $numberOfCreatedMmRecords++;
+        $connection = self::getConnectionForTable($mmTable);
+        $recordCount = 0;
+        foreach ($references as $foreignUid) {
+            if ((int)$foreignUid <= 0) {
+                continue;
             }
+
+            $data = \array_replace($dataTemplate, ['uid_foreign' => (int)$foreignUid, 'sorting' => $recordCount + 1]);
+            $recordCount += $connection->insert($mmTable, $data);
         }
 
-        return $numberOfCreatedMmRecords;
+        return $recordCount;
     }
 
     /**
