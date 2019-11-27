@@ -28,7 +28,7 @@ final class SpeakerTest extends FunctionalTestCase
      */
     public function fromUidMapsDataFromDatabase()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Speakers.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 
         $subject = \Tx_Seminars_OldModel_Speaker::fromUid(1);
 
@@ -51,7 +51,7 @@ final class SpeakerTest extends FunctionalTestCase
      */
     public function canHaveOneSkill()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Speakers.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 
         $subject = \Tx_Seminars_OldModel_Speaker::fromUid(4);
 
@@ -63,7 +63,7 @@ final class SpeakerTest extends FunctionalTestCase
      */
     public function getSkillsShortWithSingleSkillReturnsSingleSkill()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Speakers.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 
         $subject = \Tx_Seminars_OldModel_Speaker::fromUid(4);
 
@@ -76,7 +76,7 @@ final class SpeakerTest extends FunctionalTestCase
      */
     public function getSkillsShortWithMultipleSkillsReturnsMultipleSkills()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Speakers.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 
         $subject = \Tx_Seminars_OldModel_Speaker::fromUid(5);
 
@@ -88,7 +88,7 @@ final class SpeakerTest extends FunctionalTestCase
      */
     public function getImageWithoutImageReturnsNull()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Speakers.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 
         $subject = new \Tx_Seminars_OldModel_Speaker(1);
 
@@ -100,7 +100,7 @@ final class SpeakerTest extends FunctionalTestCase
      */
     public function getImageWithPositiveImageCountWithoutFileReferenceReturnsNull()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Speakers.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 
         $subject = new \Tx_Seminars_OldModel_Speaker(2);
 
@@ -112,7 +112,7 @@ final class SpeakerTest extends FunctionalTestCase
      */
     public function getImageWithFileReferenceReturnsFileReference()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Speakers.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
         $this->provideAdminBackEndUserForFal();
 
         $subject = new \Tx_Seminars_OldModel_Speaker(3);

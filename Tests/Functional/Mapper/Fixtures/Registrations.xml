@@ -15,4 +15,8 @@
         <uid>1</uid>
         <title>visitors</title>
     </fe_groups>
+    <tx_seminars_attendances>
+        <uid>1</uid>
+        <user>2</user>
+    </tx_seminars_attendances>
 </dataset>

@@ -36,7 +36,7 @@ final class BackEndUserGroupTest extends FunctionalTestCase
      */
     public function findReturnsBackEndUserGroup()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/BackEndUsers.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/BackEndUsers.xml');
 
         /** @var \Tx_Seminars_Model_BackEndUserGroup $userGroup */
         $userGroup = $this->subject->find(1);
@@ -49,7 +49,7 @@ final class BackEndUserGroupTest extends FunctionalTestCase
      */
     public function loadForExistingUserGroupLoadsUserGroupData()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/BackEndUsers.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/BackEndUsers.xml');
 
         /** @var \Tx_Seminars_Model_BackEndUserGroup $userGroup */
         $userGroup = $this->subject->find(1);

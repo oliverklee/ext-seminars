@@ -41,8 +41,7 @@ final class RegistrationTest extends FunctionalTestCase
      */
     public function countByFrontEndUserIgnoresRegistrationFromOtherUsers()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/FrontEndUsers.xml');
-        $this->importDataSet(__DIR__ . '/../Fixtures/Registrations.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Registrations.xml');
 
         /** @var \Tx_Seminars_Model_FrontEndUser $user */
         $user = $this->userMapper->find(1);
@@ -55,8 +54,7 @@ final class RegistrationTest extends FunctionalTestCase
      */
     public function countByFrontEndUserCountsRegistrationFromGivenUser()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/FrontEndUsers.xml');
-        $this->importDataSet(__DIR__ . '/../Fixtures/Registrations.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Registrations.xml');
 
         /** @var \Tx_Seminars_Model_FrontEndUser $user */
         $user = $this->userMapper->find(2);
