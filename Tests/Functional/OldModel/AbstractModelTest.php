@@ -47,7 +47,7 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     public function fromUidForNonExistentRecordReturnsNull()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
 
         $result = TestingModel::fromUid(99);
 
@@ -59,7 +59,7 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     public function fromUidByDefaultIgnoresHiddenRecords()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
 
         $result = TestingModel::fromUid(2);
 
@@ -71,7 +71,7 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     public function fromUidByDefaultIgnoresNotStartedRecords()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
 
         $result = TestingModel::fromUid(4);
 
@@ -83,7 +83,7 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     public function fromUidByDefaultIgnoresExpiredRecords()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
 
         $result = TestingModel::fromUid(5);
 
@@ -95,7 +95,7 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     public function fromUidByDefaultIgnoresDeletedRecords()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
 
         $result = TestingModel::fromUid(3);
 
@@ -107,7 +107,7 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     public function fromUidByDefaultForHiddenAllowedFindsHiddenRecords()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
 
         $result = TestingModel::fromUid(2, true);
 
@@ -119,7 +119,7 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     public function fromUidByDefaultForHiddenAllowedFindsNotStartedRecords()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
 
         $result = TestingModel::fromUid(4, true);
 
@@ -131,7 +131,7 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     public function fromUidByDefaultForHiddenAllowedFindsExpiredRecords()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
 
         $result = TestingModel::fromUid(5, true);
 
@@ -143,7 +143,7 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     public function fromUidByDefaultForHiddenAllowedFindsVisibleRecords()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
 
         $result = TestingModel::fromUid(1, true);
 
@@ -155,7 +155,7 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     public function fromUidByDefaultForHiddenAllowedIgnoresDeletedRecords()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
 
         $result = TestingModel::fromUid(3, true);
 
@@ -167,7 +167,7 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     public function fromUidForExistingRecordCreatesInstanceOfSubclass()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
 
         $result = TestingModel::fromUid(1);
 
@@ -179,7 +179,7 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     public function fromUidMapsDataFromDatabase()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
 
         /** @var TestingModel $result */
         $result = TestingModel::fromUid(1);
@@ -192,7 +192,7 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     public function constructionByUidForNonExistentRecordReturnsModelWithoutUid()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
 
         $result = new TestingModel(99);
 
@@ -204,7 +204,7 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     public function constructionByUidByDefaultIgnoresHiddenRecords()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
 
         $result = new TestingModel(2);
 
@@ -216,7 +216,7 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     public function constructionByUidByDefaultIgnoresDeletedRecords()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
 
         $result = new TestingModel(3);
 
@@ -228,7 +228,7 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     public function constructionByUidByDefaultForHiddenAllowedFindsHiddenRecords()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
 
         $result = new TestingModel(2, true);
 
@@ -240,7 +240,7 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     public function constructionByUidByDefaultForHiddenAllowedFindsVisibleRecords()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
 
         $result = new TestingModel(1, true);
 
@@ -252,7 +252,7 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     public function constructionByUidByDefaultForHiddenAllowedIgnoresDeletedRecords()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
 
         $result = new TestingModel(3, true);
 
@@ -264,7 +264,7 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     public function constructionByUidSetsDataFromDatabase()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
 
         /** @var TestingModel $result */
         $result = new TestingModel(1);
@@ -277,7 +277,7 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     public function comesFromDatabaseWithModelReadFromDatabaseIsTrue()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
 
         /** @var TestingModel $result */
         $result = TestingModel::fromUid(1);
@@ -290,7 +290,7 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     public function comesFromDatabaseWithModelReadFromDatabaseViaUidInConstructorIsTrue()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
 
         /** @var TestingModel $result */
         $result = new TestingModel(1);
@@ -303,7 +303,7 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     public function comesFromDatabaseWithInexistentModelViaUidInConstructorIsFalse()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
 
         /** @var TestingModel $result */
         $result = new TestingModel(99);
@@ -328,7 +328,7 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     public function saveToDatabaseForModelWithUidWithNonEmptyDataUpdatesRecordInDatabase()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
 
         $model = TestingModel::fromUid(1);
 
@@ -346,7 +346,7 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     public function saveToDatabaseForModelWithUidWithNonEmptyDataNotChanesRecordData()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
 
         $model = TestingModel::fromUid(1);
         $oldTitle = $model->getTitle();
@@ -472,7 +472,7 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     public function commitToDatabaseCanUpdateExistingRecord()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
 
         $model = TestingModel::fromUid(1);
         $newTitle = 'new title';
@@ -491,7 +491,7 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     public function commitToDatabaseForExistingRecordReturnsTrue()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
 
         $model = TestingModel::fromUid(1);
         $newTitle = 'new title';
@@ -507,7 +507,7 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     public function commitToDatabaseKeepsCreationDateOfExistingRecordUnchanged()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
 
         $model = TestingModel::fromUid(1);
         $newTitle = 'new title';
@@ -538,7 +538,7 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     public function createMmRecordsWithEmptyReferencesReturnsZero()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
         $subject = TestingModel::fromUid(1);
 
         $result = $subject->createMmRecords('tx_seminars_test_test_mm', []);
@@ -551,7 +551,7 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     public function createMmRecordsWithOneReferenceReturnsOne()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
         $subject = TestingModel::fromUid(1);
 
         $result = $subject->createMmRecords('tx_seminars_test_test_mm', [42]);
@@ -564,7 +564,7 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     public function createMmRecordsWithTwoReferencesReturnsTwo()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
         $subject = TestingModel::fromUid(1);
 
         $result = $subject->createMmRecords('tx_seminars_test_test_mm', [42, 31]);
@@ -577,7 +577,7 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     public function createMmRecordsNotCountsZeroReferences()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
         $subject = TestingModel::fromUid(1);
 
         $result = $subject->createMmRecords('tx_seminars_test_test_mm', [0]);
@@ -590,7 +590,7 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     public function createMmRecordsCreatesRecordWithLocalAndForeignUid()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
         $subject = TestingModel::fromUid(1);
 
         $subject->createMmRecords('tx_seminars_test_test_mm', [42]);
@@ -605,7 +605,7 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     public function createMmRecordsNotCreatesRecordForZeroReference()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
         $subject = TestingModel::fromUid(1);
 
         $subject->createMmRecords('tx_seminars_test_test_mm', [0]);
@@ -619,7 +619,7 @@ final class AbstractModelTest extends FunctionalTestCase
      */
     public function createMmRecordsCreatesIncreasingSortingInReferenceOrder()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Test.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Test.xml');
         $subject = TestingModel::fromUid(1);
 
         $subject->createMmRecords('tx_seminars_test_test_mm', [42, 31]);

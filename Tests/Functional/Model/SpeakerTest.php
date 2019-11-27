@@ -41,7 +41,7 @@ final class SpeakerTest extends FunctionalTestCase
      */
     public function getImageWithoutImageReturnsNull()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Speakers.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 
         /** @var \Tx_Seminars_Model_Speaker $subject */
         $subject = $this->speakerMapper->find(1);
@@ -54,7 +54,7 @@ final class SpeakerTest extends FunctionalTestCase
      */
     public function getImageWithPositiveImageCountWithoutFileReferenceReturnsNull()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Speakers.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 
         /** @var \Tx_Seminars_Model_Speaker $subject */
         $subject = $this->speakerMapper->find(2);
@@ -67,7 +67,7 @@ final class SpeakerTest extends FunctionalTestCase
      */
     public function getImageWithFileReferenceReturnsFileReference()
     {
-        $this->importDataSet(__DIR__ . '/../Fixtures/Speakers.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 
         /** @var \Tx_Seminars_Model_Speaker $subject */
         $subject = $this->speakerMapper->find(3);
