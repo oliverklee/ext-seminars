@@ -814,18 +814,6 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfRegistrationsForInexistentEventUidReturn404()
-    {
-        $this->subject->createAndOutputListOfRegistrations(
-            $this->testingFramework->getAutoIncrement('tx_seminars_attendances')
-        );
-
-        self::assertContains('404', $this->headerProxy->getLastAddedHeader());
-    }
-
-    /**
-     * @test
-     */
     public function createAndOutputListOfRegistrationsCanContainTwoRegistrationUids()
     {
         $this->configuration->setAsString('fieldsFromFeUserForCsv', '');
