@@ -298,25 +298,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function showForEventWithoutRegistrationsNotContainsEmailButton()
-    {
-        $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            [
-                'pid' => $this->dummySysFolderPid,
-                'registrations' => 0,
-            ]
-        );
-
-        self::assertNotContains(
-            '<button><p>E-mail</p></button>',
-            $this->subject->show()
-        );
-    }
-
     public function testShowDoesNotContainConfirmButtonForEventThatIsAlreadyConfirmed()
     {
         $this->testingFramework->createRecord(
@@ -648,19 +629,6 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends TestCase
         );
 
         self::assertContains(
-            $this->getLanguageService()->getLL('label_show_event_registrations'),
-            $this->subject->show()
-        );
-    }
-
-    public function testShowForEventWithoutRegistrationDoesNotHaveShowLink()
-    {
-        $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            ['pid' => $this->dummySysFolderPid, 'needs_registration' => 1]
-        );
-
-        self::assertNotContains(
             $this->getLanguageService()->getLL('label_show_event_registrations'),
             $this->subject->show()
         );

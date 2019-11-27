@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Tests\Functional\BackEnd\Fixtures;
+
 use OliverKlee\Seminars\BackEnd\AbstractEventMailForm;
 
 /**
@@ -9,7 +11,7 @@ use OliverKlee\Seminars\BackEnd\AbstractEventMailForm;
  *
  * @author Mario Rimann <mario@screenteam.com>
  */
-class Tx_Seminars_Tests_Unit_Fixtures_BackEnd_TestingEventMailForm extends AbstractEventMailForm
+final class TestingEventMailForm extends AbstractEventMailForm
 {
     /**
      * the prefix for all locallang keys for prefilling the form, must not be empty
