@@ -50,7 +50,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Fixed
 - Move fragile tests to the new testing framework (#384, #389, #390, #391, #392)
 - Internally store boolean properties as integers (#386)
-- Convert the old model DB accesses to the ConnectionPool (#372, #373, #379, #382, #383, #385)
+- Convert the old model DB accesses to the ConnectionPool (#372, #373, #379, #382, #383, #385, #393)
 - Fix TypoScript lint warnings (#371)
 - Fix the locallang path in the event publication (#367)
 - Fix the numbers in the countdown tests (#365)
