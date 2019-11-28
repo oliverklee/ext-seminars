@@ -35,7 +35,7 @@ class Tx_Seminars_BagBuilder_Registration extends AbstractBagBuilder
      *
      * @return void
      */
-    public function limitToEvent($eventUid)
+    public function limitToEvent(int $eventUid)
     {
         if ($eventUid <= 0) {
             throw new \InvalidArgumentException('The parameter $eventUid must be > 0.', 1333292912);
@@ -52,8 +52,7 @@ class Tx_Seminars_BagBuilder_Registration extends AbstractBagBuilder
      */
     public function limitToPaid()
     {
-        $this->whereClauseParts['paid'] = 'tx_seminars_attendances' .
-            '.datepaid <> 0';
+        $this->whereClauseParts['paid'] = 'tx_seminars_attendances.datepaid <> 0';
     }
 
     /**
@@ -63,8 +62,7 @@ class Tx_Seminars_BagBuilder_Registration extends AbstractBagBuilder
      */
     public function limitToUnpaid()
     {
-        $this->whereClauseParts['paid'] = 'tx_seminars_attendances' .
-            '.datepaid = 0';
+        $this->whereClauseParts['paid'] = 'tx_seminars_attendances.datepaid = 0';
     }
 
     /**
@@ -84,8 +82,7 @@ class Tx_Seminars_BagBuilder_Registration extends AbstractBagBuilder
      */
     public function limitToOnQueue()
     {
-        $this->whereClauseParts['queue'] = 'tx_seminars_attendances' .
-            '.registration_queue=1';
+        $this->whereClauseParts['queue'] = 'tx_seminars_attendances.registration_queue=1';
     }
 
     /**
@@ -96,8 +93,7 @@ class Tx_Seminars_BagBuilder_Registration extends AbstractBagBuilder
      */
     public function limitToRegular()
     {
-        $this->whereClauseParts['queue'] = 'tx_seminars_attendances' .
-            '.registration_queue=0';
+        $this->whereClauseParts['queue'] = 'tx_seminars_attendances.registration_queue=0';
     }
 
     /**
@@ -118,19 +114,18 @@ class Tx_Seminars_BagBuilder_Registration extends AbstractBagBuilder
      *
      * @return void
      */
-    public function limitToSeatsAtMost($seats = 0)
+    public function limitToSeatsAtMost(int $seats = 0)
     {
         if ($seats < 0) {
             throw new \InvalidArgumentException('The parameter $seats must be >= 0.', 1333292923);
         }
 
-        if ($seats == 0) {
+        if ($seats === 0) {
             unset($this->whereClauseParts['seats']);
             return;
         }
 
-        $this->whereClauseParts['seats'] = 'tx_seminars_attendances' .
-            '.seats<=' . $seats;
+        $this->whereClauseParts['seats'] = 'tx_seminars_attendances.seats<=' . $seats;
     }
 
     /**
@@ -146,9 +141,8 @@ class Tx_Seminars_BagBuilder_Registration extends AbstractBagBuilder
      *
      * @return void
      */
-    public function limitToAttendee(
-        \Tx_Seminars_Model_FrontEndUser $user = null
-    ) {
+    public function limitToAttendee(\Tx_Seminars_Model_FrontEndUser $user = null)
+    {
         if ($user === null) {
             unset($this->whereClauseParts['attendee']);
             return;
@@ -171,11 +165,10 @@ class Tx_Seminars_BagBuilder_Registration extends AbstractBagBuilder
      *
      * @return void
      */
-    public function setOrderByEventColumn($orderBy)
+    public function setOrderByEventColumn(string $orderBy)
     {
         $this->addAdditionalTableName('tx_seminars_seminars');
-        $this->whereClauseParts['orderByEvent'] = 'tx_seminars_attendances' .
-            '.seminar = tx_seminars_seminars.uid';
+        $this->whereClauseParts['orderByEvent'] = 'tx_seminars_attendances.seminar = tx_seminars_seminars.uid';
         $this->setOrderBy($orderBy);
     }
 

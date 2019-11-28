@@ -5929,7 +5929,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends TestCase
             'organizers'
         );
 
-        $this->subject->limitToOrganizers($organizerUid);
+        $this->subject->limitToOrganizers((string)$organizerUid);
         $bag = $this->subject->build();
 
         self::assertSame(
@@ -5950,7 +5950,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends TestCase
             'tx_seminars_organizers'
         );
 
-        $this->subject->limitToOrganizers($organizerUid);
+        $this->subject->limitToOrganizers((string)$organizerUid);
         $bag = $this->subject->build();
 
         self::assertTrue(
@@ -5979,7 +5979,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends TestCase
             'organizers'
         );
 
-        $this->subject->limitToOrganizers($organizerUid2);
+        $this->subject->limitToOrganizers((string)$organizerUid2);
         $bag = $this->subject->build();
 
         self::assertTrue(
@@ -6046,7 +6046,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends TestCase
             'organizers'
         );
 
-        $this->subject->limitToOrganizers($organizerUid);
+        $this->subject->limitToOrganizers((string)$organizerUid);
         $bag = $this->subject->build();
 
         self::assertSame(
@@ -6083,7 +6083,7 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends TestCase
             ]
         );
 
-        $this->subject->limitToOrganizers($organizerUid);
+        $this->subject->limitToOrganizers((string)$organizerUid);
         $bag = $this->subject->build();
 
         self::assertSame(

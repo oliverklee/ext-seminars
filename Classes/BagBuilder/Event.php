@@ -106,7 +106,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
             return;
         }
 
-        $uidMatcher = ' IN(' . implode(',', $directMatchUids) . ')';
+        $uidMatcher = ' IN(' . \implode(',', $directMatchUids) . ')';
 
         $this->whereClauseParts['categories'] =
             '(' .
@@ -133,10 +133,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
             return;
         }
 
-        $safePlaceUids = implode(
-            ',',
-            $GLOBALS['TYPO3_DB']->cleanIntArray($placeUids)
-        );
+        $safePlaceUids = \implode(',', $GLOBALS['TYPO3_DB']->cleanIntArray($placeUids));
 
         $this->whereClauseParts['places'] = 'EXISTS (SELECT * FROM ' .
             'tx_seminars_seminars_place_mm WHERE ' .
@@ -153,8 +150,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      */
     public function ignoreCanceledEvents()
     {
-        $this->whereClauseParts['hideCanceledEvents'] = 'cancelled <> ' .
-            \Tx_Seminars_Model_Event::STATUS_CANCELED;
+        $this->whereClauseParts['hideCanceledEvents'] = 'cancelled <> ' . \Tx_Seminars_Model_Event::STATUS_CANCELED;
     }
 
     /**
@@ -176,9 +172,9 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      *
      * @return void
      */
-    public function setTimeFrame($timeFrameKey)
+    public function setTimeFrame(string $timeFrameKey)
     {
-        if (!in_array($timeFrameKey, self::$validTimeFrames)) {
+        if (!\in_array($timeFrameKey, self::$validTimeFrames, true)) {
             throw new \InvalidArgumentException('The time-frame key ' . $timeFrameKey . ' is not valid.', 1333292705);
         }
 
@@ -266,12 +262,12 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
                     ')';
                 break;
             case 'today':
-                $day = (int)date('j', $now);
-                $month = (int)date('n', $now);
-                $year = (int)date('Y', $now);
+                $day = (int)\date('j', $now);
+                $month = (int)\date('n', $now);
+                $year = (int)\date('Y', $now);
 
-                $todayBegin = mktime(0, 0, 0, $month, $day, $year);
-                $todayEnd = mktime(23, 59, 59, $month, $day, $year);
+                $todayBegin = \mktime(0, 0, 0, $month, $day, $year);
+                $todayEnd = \mktime(23, 59, 59, $month, $day, $year);
 
                 $where = '(' .
                     'tx_seminars_seminars.begin_date BETWEEN ' .
@@ -290,7 +286,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
                 $where = '';
         }
 
-        if ($where != '') {
+        if ($where !== '') {
             $this->whereClauseParts['timeFrame'] = '(' . $where . ')';
         }
     }
@@ -310,7 +306,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
             return;
         }
 
-        $safeEventTypeUids = implode(',', $GLOBALS['TYPO3_DB']->cleanIntArray($eventTypeUids));
+        $safeEventTypeUids = \implode(',', $GLOBALS['TYPO3_DB']->cleanIntArray($eventTypeUids));
 
         $this->whereClauseParts['eventTypes'] = '(
             (
@@ -341,12 +337,9 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
             return;
         }
 
-        $cityNames = implode(
+        $cityNames = \implode(
             ',',
-            $GLOBALS['TYPO3_DB']->fullQuoteArray(
-                $cities,
-                'tx_seminars_sites'
-            )
+            $GLOBALS['TYPO3_DB']->fullQuoteArray($cities, 'tx_seminars_sites')
         );
 
         $this->whereClauseParts['cities'] = 'tx_seminars_seminars.uid IN(' .
@@ -379,12 +372,9 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
             return;
         }
 
-        $countryCodes = implode(
+        $countryCodes = \implode(
             ',',
-            $GLOBALS['TYPO3_DB']->fullQuoteArray(
-                $countries,
-                'tx_seminars_sites'
-            )
+            $GLOBALS['TYPO3_DB']->fullQuoteArray($countries, 'tx_seminars_sites')
         );
 
         $this->whereClauseParts['countries'] = 'tx_seminars_seminars.uid IN(' .
@@ -417,12 +407,9 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
             return;
         }
 
-        $languageCodes = implode(
+        $languageCodes = \implode(
             ',',
-            $GLOBALS['TYPO3_DB']->fullQuoteArray(
-                $languages,
-                'tx_seminars_sites'
-            )
+            $GLOBALS['TYPO3_DB']->fullQuoteArray($languages, 'tx_seminars_sites')
         );
 
         $this->whereClauseParts['languages'] = 'tx_seminars_seminars' .
@@ -458,19 +445,18 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      *
      * @return void
      */
-    public function limitToOwner($feUserUid)
+    public function limitToOwner(int $feUserUid)
     {
         if ($feUserUid < 0) {
             throw new \InvalidArgumentException('The parameter $feUserUid must be >= 0.', 1333292720);
         }
 
-        if ($feUserUid == 0) {
+        if ($feUserUid === 0) {
             unset($this->whereClauseParts['owner']);
             return;
         }
 
-        $this->whereClauseParts['owner'] = 'tx_seminars_seminars' .
-            '.owner_feuser = ' . $feUserUid;
+        $this->whereClauseParts['owner'] = 'tx_seminars_seminars.owner_feuser = ' . $feUserUid;
     }
 
     /**
@@ -505,13 +491,13 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      *
      * @return void
      */
-    public function limitToEventManager($feUserUid)
+    public function limitToEventManager(int $feUserUid)
     {
         if ($feUserUid < 0) {
             throw new \InvalidArgumentException('The parameter $feUserUid must be >= 0.', 1333292729);
         }
 
-        if ($feUserUid == 0) {
+        if ($feUserUid === 0) {
             $this->removeAdditionalTableName('tx_seminars_seminars_feusers_mm');
             unset($this->whereClauseParts['vip']);
             return;
@@ -541,10 +527,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
         }
 
         $endDate = $event->getEndDateAsTimestamp();
-        $midnightBeforeEndDate = $endDate
-            - ($endDate % \Tx_Oelib_Time::SECONDS_PER_DAY);
-        $secondMidnightAfterEndDate = $midnightBeforeEndDate
-            + 2 * \Tx_Oelib_Time::SECONDS_PER_DAY;
+        $midnightBeforeEndDate = $endDate - ($endDate % \Tx_Oelib_Time::SECONDS_PER_DAY);
+        $secondMidnightAfterEndDate = $midnightBeforeEndDate + 2 * \Tx_Oelib_Time::SECONDS_PER_DAY;
 
         $this->whereClauseParts['next_day'] = 'begin_date>=' . $endDate .
             ' AND begin_date<' . $secondMidnightAfterEndDate;
@@ -603,14 +587,14 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      */
     public function limitToFullTextSearch(string $searchWords)
     {
-        $searchWords = trim($searchWords, self::TRIM_CHARACTER_LIST);
+        $searchWords = \trim($searchWords, self::TRIM_CHARACTER_LIST);
 
         if ($searchWords === '') {
             unset($this->whereClauseParts['search']);
             return;
         }
 
-        $keywords = preg_split('/[ ,]/', $searchWords);
+        $keywords = \preg_split('/[ ,]/', $searchWords);
 
         $allWhereParts = [];
 
@@ -622,13 +606,13 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
             // We use strlen instead of mb_strlen because having a search word
             // consisting of just an umlaut is okay, and this avoids problems
             // on installations without mb_string enabled.
-            if (strlen($safeKeyword) < self::MINIMUM_SEARCH_WORD_LENGTH) {
+            if (\strlen($safeKeyword) < self::MINIMUM_SEARCH_WORD_LENGTH) {
                 continue;
             }
 
             $safeKeyword = '"' . $safeKeyword . '"';
 
-            $wherePartsForCurrentSearchWord = array_merge(
+            $wherePartsForCurrentSearchWord = \array_merge(
                 $this->getSearchWherePartIndependentFromEventRecordType($safeKeyword),
                 $this->getSearchWherePartForEventTopics($safeKeyword),
                 $this->getSearchWherePartForSpeakers($safeKeyword),
@@ -639,14 +623,14 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
             );
 
             if (!empty($wherePartsForCurrentSearchWord)) {
-                $allWhereParts[] = '(' . implode(' OR ', $wherePartsForCurrentSearchWord) . ')';
+                $allWhereParts[] = '(' . \implode(' OR ', $wherePartsForCurrentSearchWord) . ')';
             }
         }
 
         if (empty($allWhereParts)) {
             unset($this->whereClauseParts['search']);
         } else {
-            $this->whereClauseParts['search'] = implode(' AND ', $allWhereParts);
+            $this->whereClauseParts['search'] = \implode(' AND ', $allWhereParts);
         }
     }
 
@@ -681,7 +665,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      *
      * @return void
      */
-    public function limitToStatus($status)
+    public function limitToStatus(int $status)
     {
         $this->whereClauseParts['event_status']
             = 'tx_seminars_seminars.cancelled = ' . $status;
@@ -695,10 +679,9 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      *
      * @return void
      */
-    public function limitToDaysBeforeBeginDate($days)
+    public function limitToDaysBeforeBeginDate(int $days)
     {
-        $nowPlusDays = ($GLOBALS['SIM_EXEC_TIME']
-            + ($days * \Tx_Oelib_Time::SECONDS_PER_DAY));
+        $nowPlusDays = $GLOBALS['SIM_EXEC_TIME'] + $days * \Tx_Oelib_Time::SECONDS_PER_DAY;
 
         $this->whereClauseParts['days_before_begin_date'] =
             'tx_seminars_seminars.begin_date < ' . $nowPlusDays;
@@ -712,7 +695,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      *
      * @return string[] the WHERE clause parts for the search in categories
      */
-    private function getSearchWherePartForCategories($quotedSearchWord): array
+    private function getSearchWherePartForCategories(string $quotedSearchWord): array
     {
         return $this->getSearchWherePartInMmRelationForTopicOrSingleEventRecord(
             $quotedSearchWord,
@@ -730,7 +713,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      *
      * @return string[] the WHERE clause parts for the search in categories
      */
-    private function getSearchWherePartForTargetGroups($quotedSearchWord): array
+    private function getSearchWherePartForTargetGroups(string $quotedSearchWord): array
     {
         return $this->getSearchWherePartInMmRelationForTopicOrSingleEventRecord(
             $quotedSearchWord,
@@ -748,7 +731,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      *
      * @return string[] the WHERE clause parts for the search in event types
      */
-    private function getSearchWherePartForEventTypes($quotedSearchWord): array
+    private function getSearchWherePartForEventTypes(string $quotedSearchWord): array
     {
         return [
             'EXISTS (' .
@@ -770,7 +753,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      *
      * @return string[] the WHERE clause parts for the search in places
      */
-    private function getSearchWherePartForPlaces($quotedSearchWord): array
+    private function getSearchWherePartForPlaces(string $quotedSearchWord): array
     {
         return $this->getSearchWherePartForMmRelation(
             $quotedSearchWord,
@@ -788,7 +771,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      *
      * @return string[] the WHERE clause parts for the search in event topics
      */
-    private function getSearchWherePartForEventTopics($quotedSearchWord): array
+    private function getSearchWherePartForEventTopics(string $quotedSearchWord): array
     {
         $where = [];
         $where[] = 'MATCH (title, subtitle, description) AGAINST (' . $quotedSearchWord . ' IN BOOLEAN MODE)';
@@ -796,13 +779,13 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
         $matchingUids = \Tx_Oelib_Db::selectColumnForMultiple(
             'uid',
             'tx_seminars_seminars',
-            '(' . implode(' OR ', $where) . ')' . \Tx_Oelib_Db::enableFields('tx_seminars_seminars')
+            '(' . \implode(' OR ', $where) . ')' . \Tx_Oelib_Db::enableFields('tx_seminars_seminars')
         );
         if (empty($matchingUids)) {
             return [];
         }
 
-        $inUids = ' IN (' . implode(',', $matchingUids) . ')';
+        $inUids = ' IN (' . \implode(',', $matchingUids) . ')';
         return [
             '(object_type = ' . \Tx_Seminars_Model_Event::TYPE_COMPLETE . ' AND tx_seminars_seminars.uid' . $inUids . ')',
             '(tx_seminars_seminars.object_type = ' . \Tx_Seminars_Model_Event::TYPE_DATE . ' AND ' .
@@ -819,9 +802,11 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      *
      * @return string[] the WHERE clause parts for the search independent from the event record type
      */
-    private function getSearchWherePartIndependentFromEventRecordType($quotedSearchWord): array
+    private function getSearchWherePartIndependentFromEventRecordType(string $quotedSearchWord): array
     {
-        return ['MATCH (tx_seminars_seminars.accreditation_number) AGAINST (' . $quotedSearchWord . ' IN BOOLEAN MODE)'];
+        return [
+            'MATCH (tx_seminars_seminars.accreditation_number) AGAINST (' . $quotedSearchWord . ' IN BOOLEAN MODE)',
+        ];
     }
 
     /**
@@ -833,7 +818,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      *
      * @return string[] the WHERE clause parts for the search in speakers
      */
-    private function getSearchWherePartForSpeakers($quotedSearchWord): array
+    private function getSearchWherePartForSpeakers(string $quotedSearchWord): array
     {
         return $this->getSearchWherePartForMmRelation(
             $quotedSearchWord,
@@ -847,8 +832,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * Generates and returns the WHERE clause part for the search in an m:n
      * relation between a date or single event record.
      *
-     * Searches for $searchWord in $field in $foreignTable using the m:n table
-     * $mmTable.
+     * Searches for $searchWord in $field in $foreignTable using the m:n table $mmTable.
      *
      * @param string $quotedSearchWord
      *        the current search word, must not be empty, must be SQL-safe
@@ -862,15 +846,15 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * @return string[] the WHERE clause parts for the search in categories
      */
     private function getSearchWherePartInMmRelationForTopicOrSingleEventRecord(
-        $quotedSearchWord,
-        $searchFieldKey,
-        $foreignTable,
-        $mmTable
+        string $quotedSearchWord,
+        string $searchFieldKey,
+        string $foreignTable,
+        string $mmTable
     ): array {
         $this->checkParametersForMmSearchFunctions($quotedSearchWord, $searchFieldKey, $foreignTable, $mmTable);
 
         $matchQueryPart = 'MATCH (' .
-            $foreignTable . '.' . implode(',' . $foreignTable . '.', self::$searchFieldList[$searchFieldKey]) .
+            $foreignTable . '.' . \implode(',' . $foreignTable . '.', self::$searchFieldList[$searchFieldKey]) .
             ') AGAINST (' . $quotedSearchWord . ' IN BOOLEAN MODE)';
         return [
             'EXISTS ' .
@@ -909,7 +893,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
     {
         $this->checkParametersForMmSearchFunctions($quotedSearchWord, $searchFieldKey, $foreignTable, $mmTable);
 
-        $matchQueryPart = 'MATCH (' . implode(
+        $matchQueryPart = 'MATCH (' . \implode(
             ',',
             self::$searchFieldList[$searchFieldKey]
         ) . ') AGAINST (' . $quotedSearchWord
@@ -926,13 +910,13 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
         $localUids = \Tx_Oelib_Db::selectColumnForMultiple(
             'uid_local',
             $mmTable,
-            'uid_foreign IN (' . implode(',', $foreignUids) . ')'
+            'uid_foreign IN (' . \implode(',', $foreignUids) . ')'
         );
         if (empty($localUids)) {
             return [];
         }
 
-        return ['tx_seminars_seminars.uid IN (' . implode(',', $localUids) . ')'];
+        return ['tx_seminars_seminars.uid IN (' . \implode(',', $localUids) . ')'];
     }
 
     /**
@@ -940,11 +924,11 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      *
      * @param string $searchWord single search word (may be prefixed or postfixed with spaces), may be empty
      *
-     * @return string the trimmed and SQL-escaped $searchword
+     * @return string the trimmed and SQL-escaped $searchWord
      */
-    private function prepareSearchWord($searchWord): string
+    private function prepareSearchWord(string $searchWord): string
     {
-        return $GLOBALS['TYPO3_DB']->quoteStr(trim($searchWord, self::TRIM_CHARACTER_LIST), 'tx_seminars_seminars');
+        return $GLOBALS['TYPO3_DB']->quoteStr(\trim($searchWord, self::TRIM_CHARACTER_LIST), 'tx_seminars_seminars');
     }
 
     /**
@@ -962,15 +946,19 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      *
      * @return void
      */
-    private function checkParametersForMmSearchFunctions($searchWord, $searchFieldKey, $foreignTable, $mmTable)
-    {
-        if (trim($searchWord, self::TRIM_CHARACTER_LIST . '\'%') === '') {
+    private function checkParametersForMmSearchFunctions(
+        string $searchWord,
+        string $searchFieldKey,
+        string $foreignTable,
+        string $mmTable
+    ) {
+        if (\trim($searchWord, self::TRIM_CHARACTER_LIST . '\'%') === '') {
             throw new \InvalidArgumentException('The first parameter $searchWord must no be empty.', 1333292804);
         }
         if ($searchFieldKey === '') {
             throw new \InvalidArgumentException('The second parameter $searchFieldKey must not be empty.', 1333292809);
         }
-        if (!array_key_exists($searchFieldKey, self::$searchFieldList)) {
+        if (!\array_key_exists($searchFieldKey, self::$searchFieldList)) {
             throw new \InvalidArgumentException(
                 'The second parameter $searchFieldKey must be a valid key of self::$searchFieldList.',
                 1333292815
@@ -992,7 +980,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      *
      * @return void
      */
-    public function limitToRequiredEventTopics($eventUid)
+    public function limitToRequiredEventTopics(int $eventUid)
     {
         $this->whereClauseParts['requiredEventTopics'] =
             'tx_seminars_seminars_requirements_mm.uid_local = ' . $eventUid .
@@ -1009,7 +997,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      *
      * @return void
      */
-    public function limitToDependingEventTopics($eventUid)
+    public function limitToDependingEventTopics(int $eventUid)
     {
         $this->whereClauseParts['dependingEventTopics'] =
             'tx_seminars_seminars_requirements_mm.uid_foreign = ' . $eventUid .
@@ -1032,7 +1020,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      *
      * @return void
      */
-    public function limitToTopicsWithoutRegistrationByUser($uid)
+    public function limitToTopicsWithoutRegistrationByUser(int $uid)
     {
         $this->limitToTopicRecords();
         $this->whereClauseParts['topicsWithoutUserRegistration'] =
@@ -1056,9 +1044,9 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      *
      * @return void
      */
-    public function limitToEarliestBeginOrEndDate($earliestBeginDate)
+    public function limitToEarliestBeginOrEndDate(int $earliestBeginDate)
     {
-        if ($earliestBeginDate == 0) {
+        if ($earliestBeginDate === 0) {
             unset($this->whereClauseParts['earliestBeginDate']);
 
             return;
@@ -1082,7 +1070,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      *
      * @return void
      */
-    public function limitToLatestBeginOrEndDate($latestBeginDate)
+    public function limitToLatestBeginOrEndDate(int $latestBeginDate)
     {
         if ($latestBeginDate === 0) {
             unset($this->whereClauseParts['latestBeginDate']);
@@ -1125,12 +1113,12 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      *
      * @return void
      */
-    public function limitToOrganizers($organizerUids)
+    public function limitToOrganizers(string $organizerUids)
     {
-        if ($organizerUids == '') {
+        if ($organizerUids === '') {
             return;
         }
-        $eventUids = implode(
+        $eventUids = \implode(
             ',',
             \Tx_Oelib_Db::selectColumnForMultiple(
                 'uid_local',
@@ -1139,7 +1127,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
             )
         );
 
-        if ($eventUids == '') {
+        if ($eventUids === '') {
             $this->whereClauseParts['eventsWithOrganizers'] = '(0 = 1)';
 
             return;
@@ -1162,13 +1150,13 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      *
      * @return void
      */
-    public function limitToAge($age)
+    public function limitToAge(int $age)
     {
-        if ($age == 0) {
+        if ($age === 0) {
             return;
         }
 
-        $matchingTargetGroups = implode(
+        $matchingTargetGroups = \implode(
             ',',
             \Tx_Oelib_Db::selectColumnForMultiple(
                 'uid',
@@ -1186,7 +1174,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
             '(target_groups = 0)' .
             \Tx_Oelib_Db::enableFields('tx_seminars_seminars')
         );
-        if ($matchingTargetGroups != '') {
+        if ($matchingTargetGroups !== '') {
             $eventsWithMatchingTargetGroup
                 = \Tx_Oelib_Db::selectColumnForMultiple(
                     'uid_local',
@@ -1195,10 +1183,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
                     'uid_local'
                 );
 
-            $matchingEventsUids = array_merge(
-                $eventsWithMatchingTargetGroup,
-                $eventsWithoutTargetGroup
-            );
+            $matchingEventsUids = \array_merge($eventsWithMatchingTargetGroup, $eventsWithoutTargetGroup);
         } else {
             $matchingEventsUids = $eventsWithoutTargetGroup;
         }
@@ -1206,7 +1191,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
         if (empty($matchingEventsUids)) {
             $this->whereClauseParts['ageLimit'] = '(0 = 1)';
         } else {
-            $matchingEventsUidList = implode(',', $matchingEventsUids);
+            $matchingEventsUidList = \implode(',', $matchingEventsUids);
             $this->whereClauseParts['ageLimit'] =
                 '((object_type = ' . \Tx_Seminars_Model_Event::TYPE_COMPLETE . ' AND ' .
                 'tx_seminars_seminars.uid IN (' . $matchingEventsUidList . ')) ' .
@@ -1221,15 +1206,13 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * Limits the bag to events which have a price lower or equal to the given
      * maximum price.
      *
-     * @param int $maximumPrice
-     *                the maximum price an event is allowed to cost, must
-     *                be >= 0
+     * @param int $maximumPrice the maximum price an event is allowed to cost, must be >= 0
      *
      * @return void
      */
-    public function limitToMaximumPrice($maximumPrice)
+    public function limitToMaximumPrice(int $maximumPrice)
     {
-        if ($maximumPrice == 0) {
+        if ($maximumPrice === 0) {
             return;
         }
 
@@ -1240,11 +1223,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
             'object_type = ' . \Tx_Seminars_Model_Event::TYPE_COMPLETE . ') AND (' .
             '(deadline_early_bird < ' . $now . ' AND ' .
             '(price_regular <= ' . $maximumPrice . ' OR ' .
-            sprintf(
-                $notZeroAndInRange,
-                'price_special',
-                $maximumPrice
-            ) . ')) ' .
+            \sprintf($notZeroAndInRange, 'price_special', $maximumPrice) . ')) ' .
             'OR (deadline_early_bird > ' . $now . ' AND ((' .
             '(price_regular_early = 0 AND price_regular <= ' .
             $maximumPrice . ') ' .
@@ -1252,31 +1231,16 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
             'AND price_special <= ' . $maximumPrice .
             ')' .
             ') OR (' .
-            sprintf(
-                $notZeroAndInRange,
-                'price_regular_early',
-                $maximumPrice
-            ) . ' OR ' .
-            sprintf(
-                $notZeroAndInRange,
-                'price_special_early',
-                $maximumPrice
-            ) .
+            \sprintf($notZeroAndInRange, 'price_regular_early', $maximumPrice) .
+            ' OR ' .
+            \sprintf($notZeroAndInRange, 'price_special_early', $maximumPrice) .
             '))) ' .
             'OR ' .
-            sprintf(
-                $notZeroAndInRange,
-                'price_regular_board',
-                $maximumPrice
-            ) . ' OR ' .
-            sprintf(
-                $notZeroAndInRange,
-                'price_special_board',
-                $maximumPrice
-            ) .
+            \sprintf($notZeroAndInRange, 'price_regular_board', $maximumPrice) . ' OR ' .
+            \sprintf($notZeroAndInRange, 'price_special_board', $maximumPrice) .
             ')' . \Tx_Oelib_Db::enableFields('tx_seminars_seminars');
 
-        $foundUids = implode(
+        $foundUids = \implode(
             ',',
             \Tx_Oelib_Db::selectColumnForMultiple(
                 'uid',
@@ -1285,7 +1249,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
             )
         );
 
-        if ($foundUids == '') {
+        if ($foundUids === '') {
             $this->whereClauseParts['maximumPrice'] = '(0 = 1)';
         } else {
             $this->whereClauseParts['maximumPrice'] =
@@ -1301,15 +1265,13 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * Limits the bag to events which have a price higher or equal to the given
      * minimum price.
      *
-     * @param int $minimumPrice
-     *                the minimum price an event is allowed to cost, must
-     *                be >= 0
+     * @param int $minimumPrice the minimum price an event is allowed to cost, must be >= 0
      *
      * @return void
      */
-    public function limitToMinimumPrice($minimumPrice)
+    public function limitToMinimumPrice(int $minimumPrice)
     {
-        if ($minimumPrice == 0) {
+        if ($minimumPrice === 0) {
             return;
         }
 
@@ -1332,7 +1294,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
             'OR price_special_board >= ' . $minimumPrice . ') ' .
             \Tx_Oelib_Db::enableFields('tx_seminars_seminars');
 
-        $foundUids = implode(
+        $foundUids = \implode(
             ',',
             \Tx_Oelib_Db::selectColumnForMultiple(
                 'uid',
@@ -1341,7 +1303,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
             )
         );
 
-        if ($foundUids == '') {
+        if ($foundUids === '') {
             $this->whereClauseParts['maximumPrice'] = '(0 = 1)';
         } else {
             $this->whereClauseParts['maximumPrice'] =
