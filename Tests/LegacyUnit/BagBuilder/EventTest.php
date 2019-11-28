@@ -5793,30 +5793,6 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventsWithVacanciesForEventWithOneVacancyFindsThisEvent()
-    {
-        $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            ['needs_registration' => 1, 'attendees_max' => 2]
-        );
-
-        $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            ['seminar' => $eventUid, 'seats' => 1]
-        );
-
-        $this->subject->limitToEventsWithVacancies();
-        $bag = $this->subject->build();
-
-        self::assertSame(
-            1,
-            $bag->count()
-        );
-    }
-
-    /**
-     * @test
-     */
     public function limitToEventsWithVacanciesForEventWithNoVacanciesDoesNotFindThisEvent()
     {
         $eventUid = $this->testingFramework->createRecord(
@@ -5920,29 +5896,6 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             ['needs_registration' => 1, 'attendees_max' => 10]
-        );
-
-        $this->subject->limitToEventsWithVacancies();
-        $bag = $this->subject->build();
-
-        self::assertSame(
-            1,
-            $bag->count()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function limitToEventsWithVacanciesForEventWithVacanciesAndOnlyOfflineAttendeesFindsThisEvent()
-    {
-        $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            [
-                'needs_registration' => 1,
-                'attendees_max' => 10,
-                'offline_attendees' => 9,
-            ]
         );
 
         $this->subject->limitToEventsWithVacancies();
