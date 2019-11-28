@@ -27,9 +27,11 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
     protected static $tableName = '';
 
     /**
-     * @var string the comma-separated names of other DB tables which we need for JOINs
+     * comma-separated list of table names
+     *
+     * @var string
      */
-    protected $additionalTableNames = '';
+    private $allTableNames = '';
 
     /**
      * @var string the ORDER BY clause (without the actual string "ORDER BY")
@@ -47,41 +49,6 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
     private $limit = '';
 
     /**
-     * @var bool whether $this->count has been calculated
-     */
-    private $hasCount = false;
-
-    /**
-     * @var int how many objects this bag contains
-     */
-    private $count = 0;
-
-    /**
-     * @var bool whether $this->$countWithoutLimit has been calculated
-     */
-    private $hasCountWithoutLimit = false;
-
-    /**
-     * @var int how many objects this bag would hold without the LIMIT
-     */
-    private $countWithoutLimit = 0;
-
-    /**
-     * @var bool whether this bag is at the first element
-     */
-    private $isRewound = false;
-
-    /**
-     * @var \mysqli_result|bool an SQL query result (not converted to an associative array yet)
-     */
-    protected $dbResult = false;
-
-    /**
-     * @var AbstractModel|null
-     */
-    protected $currentItem = null;
-
-    /**
      * @var string will be prepended to the WHERE clause using AND, e.g. 'pid=42'
      *             (the AND and the enclosing spaces are not necessary for this
      *             parameter)
@@ -93,6 +60,31 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
      *             enabled and non-deleted records will be processed
      */
     private $enabledFieldsQuery = '';
+
+    /**
+     * @var bool
+     */
+    private $queryHasBeenExecuted = false;
+
+    /**
+     * @var array[]
+     */
+    private $queryResult = [];
+
+    /**
+     * @var int
+     */
+    private $key = 0;
+
+    /**
+     * @var int how many objects this bag would hold without the LIMIT
+     */
+    private $countWithoutLimit = 0;
+
+    /**
+     * @var bool whether $this->$countWithoutLimit has been calculated
+     */
+    private $hasCountWithoutLimit = false;
 
     /**
      * Creates a bag that contains test records and allows to iterate over them.
@@ -119,15 +111,14 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
         $limit = '',
         int $showHiddenRecords = -1
     ) {
+        $this->allTableNames = static::$tableName
+            . (!empty($additionalTableNames) ? ', ' . $additionalTableNames : '');
         $this->queryParameters = \trim($queryParameters);
-        $this->additionalTableNames = !empty($additionalTableNames) ? ', ' . $additionalTableNames : '';
         $this->createEnabledFieldsQuery($showHiddenRecords);
 
         $this->orderBy = $orderBy;
         $this->groupBy = $groupBy;
         $this->limit = $limit;
-
-        $this->rewind();
     }
 
     /**
@@ -141,19 +132,14 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
      */
     private function createEnabledFieldsQuery(int $showHiddenRecords = -1)
     {
-        $allTableNames = GeneralUtility::trimExplode(
-            ',',
-            static::$tableName . $this->additionalTableNames
-        );
-        $this->enabledFieldsQuery = '';
-
-        foreach ($allTableNames as $currentTableName) {
-            // Is there a TCA entry for that table?
-            $ctrl = $GLOBALS['TCA'][$currentTableName]['ctrl'];
-            if (\is_array($ctrl)) {
-                $this->enabledFieldsQuery .= \Tx_Oelib_Db::enableFields($currentTableName, $showHiddenRecords);
+        $query = '';
+        foreach (GeneralUtility::trimExplode(',', $this->allTableNames, true) as $table) {
+            if (isset($GLOBALS['TCA'][$table])) {
+                $query .= \Tx_Oelib_Db::enableFields($table, $showHiddenRecords);
             }
         }
+
+        $this->enabledFieldsQuery = $query;
     }
 
     /**
@@ -166,28 +152,27 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
      */
     public function rewind()
     {
-        if ($this->isRewound) {
+        $this->key = 0;
+    }
+
+    /**
+     * @return void
+     */
+    private function executeQueryIfNotDoneYet()
+    {
+        if ($this->queryHasBeenExecuted) {
             return;
         }
 
-        // frees old results if there are any
-        if ($this->dbResult) {
-            $GLOBALS['TYPO3_DB']->sql_free_result($this->dbResult);
-            // We don't need to null out $this->dbResult as it will be overwritten immediately anyway.
-        }
-
-        $this->dbResult = \Tx_Oelib_Db::select(
+        $this->queryResult = \Tx_Oelib_Db::selectMultiple(
             static::$tableName . '.*',
-            static::$tableName . $this->additionalTableNames,
+            $this->allTableNames,
             $this->queryParameters . $this->enabledFieldsQuery,
             $this->groupBy,
             $this->orderBy,
             $this->limit
         );
-
-        $this->createItemFromDbResult();
-
-        $this->isRewound = true;
+        $this->queryHasBeenExecuted = true;
     }
 
     /**
@@ -197,35 +182,9 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
      */
     public function next()
     {
-        if (!$this->dbResult) {
-            $this->currentItem = null;
-            return null;
-        }
-
-        $this->createItemFromDbResult();
-        $this->isRewound = false;
+        $this->key++;
 
         return $this->current();
-    }
-
-    /**
-     * Creates the current item in $this->currentItem, using $this->dbResult
-     * as a source. If the current item cannot be created, $this->currentItem
-     * will be nulled out.
-     *
-     * $this->dbResult must be ensured to be not false when this function is
-     * called.
-     *
-     * @return void
-     */
-    protected function createItemFromDbResult()
-    {
-        $data = $this->dbResult->fetch_assoc();
-        if (\is_array($data)) {
-            $this->currentItem = static::$modelClassName::fromData($data);
-        } else {
-            $this->currentItem = null;
-        }
     }
 
     /**
@@ -235,61 +194,45 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
      */
     public function current()
     {
-        return $this->currentItem;
+        if (!$this->valid()) {
+            return null;
+        }
+
+        $data = $this->queryResult[$this->key()];
+
+        return static::$modelClassName::fromData($data);
     }
 
     /**
-     * Checks isOk() and, in case of failure (e.g., there is no more data
-     * from the DB), nulls out $this->currentItem.
-     *
-     * If the function isOk() returns TRUE, nothing is changed.
-     *
      * @return bool whether the current item is valid
      */
     public function valid(): bool
     {
-        if (empty($this->currentItem) || !$this->currentItem->comesFromDatabase()) {
-            $this->currentItem = null;
-            return false;
-        }
+        $this->executeQueryIfNotDoneYet();
 
-        return true;
+        return isset($this->queryResult[$this->key()]);
     }
 
     /**
-     * Returns the UID of the current item.
+     * Returns the key of the current item (not the UID).
      *
-     * @return int the UID of the current item, will be > 0
+     * @return int|null
      */
-    public function key(): int
+    public function key()
     {
-        if (!$this->valid()) {
-            throw new \RuntimeException('The current item is not valid.', 1333292257);
-        }
-
-        return $this->current()->getUid();
+        return $this->key;
     }
 
     /**
      * Retrieves the number of objects this bag contains.
      *
-     * Note: This function might rewind().
-     *
      * @return int the total number of objects in this bag, may be zero
      */
     public function count(): int
     {
-        if ($this->hasCount) {
-            return $this->count;
-        }
-        if ($this->isEmpty()) {
-            return 0;
-        }
+        $this->executeQueryIfNotDoneYet();
 
-        $this->count = $GLOBALS['TYPO3_DB']->sql_num_rows($this->dbResult);
-        $this->hasCount = true;
-
-        return $this->count;
+        return \count($this->queryResult);
     }
 
     /**
@@ -305,13 +248,8 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
             return $this->countWithoutLimit;
         }
 
-        $dbResultRow = \Tx_Oelib_Db::selectSingle(
-            'COUNT(*) AS number ',
-            static::$tableName . $this->additionalTableNames,
-            $this->queryParameters . $this->enabledFieldsQuery
-        );
-
-        $this->countWithoutLimit = (int)$dbResultRow['number'];
+        $count = \Tx_Oelib_Db::count($this->allTableNames, $this->queryParameters . $this->enabledFieldsQuery);
+        $this->countWithoutLimit = $count;
         $this->hasCountWithoutLimit = true;
 
         return $this->countWithoutLimit;
@@ -320,24 +258,11 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
     /**
      * Checks whether this bag is empty.
      *
-     * Note: This function might rewind().
-     *
-     * @return bool TRUE if this bag is empty, FALSE otherwise
+     * @return bool
      */
     public function isEmpty(): bool
     {
-        if ($this->hasCount) {
-            return $this->count === 0;
-        }
-
-        $this->rewind();
-        $isEmpty = !\is_object($this->current());
-        if ($isEmpty) {
-            $this->count = 0;
-            $this->hasCount = true;
-        }
-
-        return $isEmpty;
+        return $this->count() === 0;
     }
 
     /**
@@ -345,21 +270,20 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
      *
      * This function will leave the iterator pointing to after the last element.
      *
-     * @return string comma-separated, sorted list of UIDs of the records in
-     *                this bag, will be an empty string if this bag is empty
+     * @return string comma-separated, sorted list of UIDs of the records in this bag
      */
     public function getUids(): string
     {
-        $uids = [];
+        $this->executeQueryIfNotDoneYet();
 
+        $uids = [];
         /** @var AbstractModel $currentItem */
         foreach ($this as $currentItem) {
             $uids[] = $currentItem->getUid();
         }
+        \sort($uids, SORT_NUMERIC);
 
-        sort($uids, SORT_NUMERIC);
-
-        return implode(',', $uids);
+        return \implode(',', $uids);
     }
 
     /**

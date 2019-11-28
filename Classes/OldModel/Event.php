@@ -4408,16 +4408,11 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Category::class);
         $builder->limitToEvents($this->getTopicOrSelfUid());
         $builder->sortByRelationOrder();
-        $bag = $builder->build();
 
         $result = [];
         /** @var \Tx_Seminars_OldModel_Category $category */
-        foreach ($bag as $key => $category) {
-            $result[$key] =
-                [
-                    'title' => $category->getTitle(),
-                    'icon' => $category->getIcon(),
-                ];
+        foreach ($builder->build() as $category) {
+            $result[$category->getUid()] = ['title' => $category->getTitle(), 'icon' => $category->getIcon()];
         }
 
         return $result;
