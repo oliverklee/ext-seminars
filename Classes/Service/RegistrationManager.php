@@ -481,8 +481,8 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         $this->registration->setContentObject($plugin->cObj);
         $this->registration->setRegistrationData($event, $this->getLoggedInFrontEndUserUid(), $formData);
         $this->registration->commitToDatabase();
-        $event->calculateStatistics();
         $event->increaseNumberOfAssociatedRegistrationRecords();
+        $event->calculateStatistics();
         $event->commitToDatabase();
 
         $event->getAttendances();
@@ -697,7 +697,6 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
     private function fillVacancies(\Tx_Oelib_TemplateHelper $plugin)
     {
         $seminar = $this->registration->getSeminarObject();
-        $seminar->calculateStatistics();
         if (!$seminar->hasVacancies()) {
             return;
         }

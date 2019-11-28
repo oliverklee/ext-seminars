@@ -266,13 +266,14 @@ final class EventTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
-        $subject = TestingEvent::fromUid(2);
-        self::assertSame(0, $subject->getAttendances());
+        $eventUid = 4;
+        $subject = TestingEvent::fromUid($eventUid);
+        self::assertSame(3, $subject->getAttendances());
 
-        $this->getDatabaseConnection()->insertArray('tx_seminars_attendances', ['seminar' => 2, 'seats' => 3]);
+        $this->getDatabaseConnection()->insertArray('tx_seminars_attendances', ['seminar' => $eventUid, 'seats' => 2]);
         $subject->calculateStatistics();
 
-        self::assertSame(3, $subject->getAttendances());
+        self::assertSame(5, $subject->getAttendances());
     }
 
     /**
