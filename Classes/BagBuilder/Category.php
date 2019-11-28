@@ -82,10 +82,10 @@ class Tx_Seminars_BagBuilder_Category extends AbstractBagBuilder
      */
     public function sortByRelationOrder()
     {
-        if ($this->eventUids == '') {
+        if ($this->eventUids === '') {
             throw new \BadMethodCallException(
-                'The event UIDs were empty. This means limitToEvents has not been called. LimitToEvents has to be called ' .
-                'before calling this function.',
+                'The event UIDs were empty. This means limitToEvents has not been called. ' .
+                'LimitToEvents has to be called before calling this function.',
                 1333292662
             );
         }

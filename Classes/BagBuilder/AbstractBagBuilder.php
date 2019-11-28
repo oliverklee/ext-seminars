@@ -66,7 +66,7 @@ abstract class AbstractBagBuilder
      */
     public function __construct()
     {
-        if ($this->tableName == '') {
+        if ($this->tableName === '') {
             throw new \RuntimeException('The attribute $this->tableName must not be empty.', 1333292618);
         }
     }
@@ -82,7 +82,7 @@ abstract class AbstractBagBuilder
         $bag = GeneralUtility::makeInstance(
             $this->bagClassName,
             $this->getWhereClause(),
-            implode(',', $this->additionalTableNames),
+            \implode(',', $this->additionalTableNames),
             $this->groupBy,
             $this->orderBy,
             $this->limit,
@@ -117,7 +117,7 @@ abstract class AbstractBagBuilder
      */
     public function setSourcePages(string $sourcePagePids, int $recursionDepth = 0)
     {
-        if (!preg_match('/^([\\d+,] *)*\\d+$/', $sourcePagePids)) {
+        if (!\preg_match('/^([\\d+,] *)*\\d+$/', $sourcePagePids)) {
             unset($this->whereClauseParts['pages']);
             return;
         }
@@ -146,8 +146,7 @@ abstract class AbstractBagBuilder
      */
     public function setTestMode()
     {
-        $this->whereClauseParts['tests'] = $this->tableName .
-            '.is_dummy_record = 1';
+        $this->whereClauseParts['tests'] = $this->tableName . '.is_dummy_record = 1';
     }
 
     /**
@@ -155,11 +154,9 @@ abstract class AbstractBagBuilder
      *
      * The WHERE clause will be complete except for the enableFields additions.
      *
-     * If the bag does not have any limitations imposed upon, the return value
-     * will be a tautology.
+     * If the bag does not have any limitations imposed upon, the return value will be a tautology.
      *
-     * @return string complete WHERE clause for the bag to create, will
-     *                not be empty
+     * @return string complete WHERE clause for the bag to create, will not be empty
      */
     public function getWhereClause(): string
     {
@@ -167,14 +164,13 @@ abstract class AbstractBagBuilder
             return '1=1';
         }
 
-        return implode(' AND ', $this->whereClauseParts);
+        return \implode(' AND ', $this->whereClauseParts);
     }
 
     /**
      * Returns a WHERE clause part for the bag to create.
      *
-     * If the bag does not have such limitation imposed upon, the return value
-     * will be empty.
+     * If the bag does not have such limitation imposed upon, the return value will be empty.
      *
      * @param string $key the limitation key to return, must not be empty
      *
@@ -221,7 +217,7 @@ abstract class AbstractBagBuilder
      */
     public function addAdditionalTableName(string $additionalTableName)
     {
-        if ($additionalTableName == '') {
+        if ($additionalTableName === '') {
             throw new \InvalidArgumentException('The parameter $additionalTableName must not be empty.', 1333292599);
         }
 
@@ -238,7 +234,7 @@ abstract class AbstractBagBuilder
      */
     public function removeAdditionalTableName(string $additionalTableName)
     {
-        if ($additionalTableName == '') {
+        if ($additionalTableName === '') {
             throw new \InvalidArgumentException('The parameter $additionalTableName must not be empty.', 1333292576);
         }
 
@@ -276,7 +272,7 @@ abstract class AbstractBagBuilder
      *
      * @return void
      */
-    public function setLimit($limit)
+    public function setLimit(string $limit)
     {
         $this->limit = $limit;
     }

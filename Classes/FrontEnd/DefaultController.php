@@ -2324,7 +2324,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         }
         if (\is_array($this->piVars['organizer'])) {
             $builder->limitToOrganizers(
-                implode(
+                \implode(
                     ',',
                     \Tx_Seminars_FrontEnd_SelectorWidget::removeDummyOptionFromFormData($this->piVars['organizer'])
                 )
