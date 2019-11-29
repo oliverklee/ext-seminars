@@ -602,24 +602,13 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return string the short local name of the country or an empty
      *                string if the country could not be found
      */
-    public function getCountryNameFromIsoCode($isoCode): string
+    public function getCountryNameFromIsoCode(string $isoCode): string
     {
-        // Sanitizes the provided parameter against SQL injection as this
-        // function can be used for searching.
-        $isoCode = $GLOBALS['TYPO3_DB']->quoteStr($isoCode, 'static_countries');
+        $table = 'static_countries';
+        $title = self::getConnectionForTable($table)
+            ->select(['cn_short_local'], $table, ['cn_iso_2' => $isoCode])->fetchColumn();
 
-        try {
-            $dbResultRow = \Tx_Oelib_Db::selectSingle(
-                'cn_short_local',
-                'static_countries',
-                'cn_iso_2 = "' . $isoCode . '"'
-            );
-            $countryName = $dbResultRow['cn_short_local'];
-        } catch (\Tx_Oelib_Exception_EmptyQueryResult $exception) {
-            $countryName = '';
-        }
-
-        return $countryName;
+        return \is_string($title) ? $title : '';
     }
 
     /**
