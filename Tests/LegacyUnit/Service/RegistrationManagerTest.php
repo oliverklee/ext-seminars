@@ -19,81 +19,76 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
+final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
 {
     use LanguageHelper;
 
     /**
      * @var TestingRegistrationManager
      */
-    protected $subject = null;
+    private $subject = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework
      */
-    protected $testingFramework = null;
+    private $testingFramework = null;
 
     /**
      * @var int
      */
-    protected $seminarUid = 0;
+    private $seminarUid = 0;
 
     /**
      * @var TestingEvent
      */
-    protected $seminar = null;
+    private $seminar = null;
 
     /**
      * @var int the UID of a fake front-end user
      */
-    protected $frontEndUserUid = 0;
+    private $frontEndUserUid = 0;
 
     /**
      * @var int UID of a fake login page
      */
-    protected $loginPageUid = 0;
+    private $loginPageUid = 0;
 
     /**
      * @var int UID of a fake registration page
      */
-    protected $registrationPageUid = 0;
+    private $registrationPageUid = 0;
 
     /**
      * @var \Tx_Seminars_FrontEnd_DefaultController a front-end plugin
      */
-    protected $pi1 = null;
+    private $pi1 = null;
 
     /**
      * @var TestingEvent
      */
-    protected $fullyBookedSeminar = null;
+    private $fullyBookedSeminar = null;
 
     /**
      * @var TestingEvent
      */
-    protected $cachedSeminar = null;
+    private $cachedSeminar = null;
 
     /**
      * backed-up extension configuration of the TYPO3 configuration variables
      *
      * @var array
      */
-    protected $extConfBackup = [];
-
-    /**
-     * @var \Tx_Seminars_Service_SingleViewLinkBuilder
-     */
-    protected $linkBuilder = null;
+    private $extConfBackup = [];
 
     /**
      * @var \Tx_Oelib_EmailCollector
      */
-    protected $mailer = null;
+    private $mailer = null;
 
     /**
      * @var \Tx_Oelib_HeaderCollector
      */
-    protected $headerCollector = null;
+    private $headerCollector = null;
 
     /**
      * @var \Tx_Seminars_Mapper_FrontEndUser
@@ -158,14 +153,13 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->seminar = new TestingEvent($this->seminarUid);
         $this->subject = TestingRegistrationManager::getInstance();
 
-        $this->linkBuilder = $this->createPartialMock(
+        /** @var \Tx_Seminars_Service_SingleViewLinkBuilder|MockObject $linkBuilder */
+        $linkBuilder = $this->createPartialMock(
             \Tx_Seminars_Service_SingleViewLinkBuilder::class,
             ['createAbsoluteUrlForEvent']
         );
-        $this->linkBuilder
-            ->method('createAbsoluteUrlForEvent')
-            ->willReturn('http://singleview.example.com/');
-        $this->subject->injectLinkBuilder($this->linkBuilder);
+        $linkBuilder->method('createAbsoluteUrlForEvent')->willReturn('http://singleview.example.com/');
+        $this->subject->injectLinkBuilder($linkBuilder);
 
         $this->frontEndUserMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
     }
@@ -175,7 +169,6 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
         $this->testingFramework->cleanUp();
 
         TestingRegistrationManager::purgeInstance();
-
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
     }
 
@@ -4985,7 +4978,7 @@ class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyOrganizersForEventWithUnlimitedVacanciesShowsVacanciesLabelWithUnlimtedLabel()
+    public function notifyOrganizersForEventWithUnlimitedVacanciesShowsVacanciesLabelWithUnlimitedLabel()
     {
         $this->subject->setConfigurationValue('sendNotification', true);
         $this->subject->setConfigurationValue(

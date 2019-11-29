@@ -13,17 +13,17 @@ use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingModelWithConfigurati
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class AbstractModelTest extends TestCase
+final class AbstractModelTest extends TestCase
 {
     /**
      * @var TestingModel
      */
-    protected $subject = null;
+    private $subject = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework
      */
-    protected $testingFramework = null;
+    private $testingFramework = null;
 
     /**
      * @var int UID of the minimal fixture's data in the DB

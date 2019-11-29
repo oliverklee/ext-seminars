@@ -13,7 +13,7 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends TestCase
+final class Tx_Seminars_Tests_Unit_Service_SingleViewLinkBuilderTest extends TestCase
 {
     /**
      * @var \Tx_Oelib_TestingFramework

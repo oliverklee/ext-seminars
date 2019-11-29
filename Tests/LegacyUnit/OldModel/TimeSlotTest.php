@@ -11,7 +11,7 @@ use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends TestCase
+final class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends TestCase
 {
     use LanguageHelper;
 

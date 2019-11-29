@@ -9,7 +9,7 @@ use OliverKlee\PhpUnit\TestCase;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_OldModel_OrganizerTest extends TestCase
+final class Tx_Seminars_Tests_Unit_OldModel_OrganizerTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_OldModel_Organizer

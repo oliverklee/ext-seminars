@@ -14,7 +14,7 @@ use TYPO3\CMS\Core\SingletonInterface;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class EventStateServiceTest extends TestCase
+final class EventStateServiceTest extends TestCase
 {
     /**
      * @var EventStatusService
