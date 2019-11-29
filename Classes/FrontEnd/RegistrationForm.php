@@ -1154,7 +1154,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
                 if (isset($availableOptions[$currentSelection])) {
                     $captions[] = $availableOptions[$currentSelection]['caption'];
                 }
-                $result = implode(CR, $captions);
+                $result = \implode("\r", $captions);
             }
         }
 
@@ -1319,7 +1319,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Provides data items for the list of option checkboxes for this event.
      *
-     * @return array[] items from the checkboxes table as an array with the keys "caption" (for the title) and "value" (for the uid)
+     * @return array[] items from the checkboxes table as an array
+     *                 with the keys "caption" (for the title) and "value" (for the uid)
      */
     public function populateCheckboxes(): array
     {

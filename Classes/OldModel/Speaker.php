@@ -131,7 +131,7 @@ class Tx_Seminars_OldModel_Speaker extends AbstractModel
             return '';
         }
 
-        return \implode(', ', $this->getMmRecords('tx_seminars_skills', 'tx_seminars_speakers_skills_mm'));
+        return \implode(', ', $this->getMmRecordTitles('tx_seminars_skills', 'tx_seminars_speakers_skills_mm'));
     }
 
     /**
