@@ -196,8 +196,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel imple
     /**
      * Returns our begin date and time as a UNIX timestamp.
      *
-     * @return int our begin date and time as a UNIX timestamp or 0 if
-     *                 we don't have a begin date
+     * @return int our begin date and time as a UNIX timestamp or 0 if we don't have a begin date
      */
     public function getBeginDateAsTimestamp(): int
     {
@@ -220,8 +219,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel imple
      * open-ended, midnight after the begin date and time is returned.
      * If we don't even have a begin date, 0 is returned.
      *
-     * @return int our end date and time as a UNIX timestamp, 0 if
-     *                 we don't have a begin date
+     * @return int our end date and time as a UNIX timestamp, 0 if we don't have a begin date
      */
     public function getEndDateAsTimestampEvenIfOpenEnded(): int
     {
