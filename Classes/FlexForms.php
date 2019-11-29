@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * This class is needed to dynamically create the list of selectable database
  * columns for the pi1 flex forms.
@@ -12,8 +15,7 @@ class Tx_Seminars_FlexForms
 {
     /**
      * Returns the configuration for the flex forms field
-     * "showFeUserFieldsInRegistrationsList" with the selectable database
-     * columns.
+     * "showFeUserFieldsInRegistrationsList" with the selectable database columns.
      *
      * @param array[] $configuration the flex forms configuration
      *
@@ -30,8 +32,7 @@ class Tx_Seminars_FlexForms
 
     /**
      * Returns the configuration for the flex forms field
-     * "showRegistrationFieldsInRegistrationList" with the selectable database
-     * columns.
+     * "showRegistrationFieldsInRegistrationList" with the selectable database columns.
      *
      * @param array[] $configuration the flex forms configuration
      *
@@ -47,21 +48,27 @@ class Tx_Seminars_FlexForms
     }
 
     /**
-     * Returns the column names of the table given in the first parameter
-     * $tableName.
+     * Returns the column names of the given table.
      *
-     * @param string $tableName the table name to get the columns for, must not be empty
+     * @param string $table the table name to get the columns for, must not be empty
      *
-     * @return string[] the column names of the given table name, may not be empty
+     * @return string[] the column names of the given table name, will not be empty
+     *
+     * @throws \InvalidArgumentException
      */
-    private function getColumnsOfTable($tableName): array
+    private function getColumnsOfTable(string $table): array
     {
-        if ($tableName == '') {
-            throw new \InvalidArgumentException('The first parameter $tableName must not be empty.', 1333291708);
+        if ($table === '') {
+            throw new \InvalidArgumentException('$table must not be empty.', 1333291708);
         }
 
-        $columns = $GLOBALS['TYPO3_DB']->admin_get_fields($tableName);
+        $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable($table);
+        $statement = $connection->query('SHOW FULL COLUMNS FROM `' . $table . '`');
+        $columns = [];
+        foreach ($statement->fetchAll() as $row) {
+            $columns[] = $row['Field'];
+        }
 
-        return array_keys($columns);
+        return $columns;
     }
 }
