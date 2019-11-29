@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\BagBuilder;
 
 use OliverKlee\Seminars\Bag\AbstractBag;
+use TYPO3\CMS\Core\Database\Connection;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -285,5 +287,15 @@ abstract class AbstractBagBuilder
     public function showHiddenRecords()
     {
         $this->showHiddenRecords = true;
+    }
+
+    protected function getConnectionForTable(string $table): Connection
+    {
+        return $this->getConnectionPool()->getConnectionForTable($table);
+    }
+
+    private function getConnectionPool(): ConnectionPool
+    {
+        return GeneralUtility::makeInstance(ConnectionPool::class);
     }
 }

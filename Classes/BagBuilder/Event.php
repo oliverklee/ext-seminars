@@ -339,11 +339,6 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
             return;
         }
 
-        $cityNames = \implode(
-            ',',
-            $GLOBALS['TYPO3_DB']->fullQuoteArray($cities, 'tx_seminars_sites')
-        );
-
         $this->whereClauseParts['cities'] = 'tx_seminars_seminars.uid IN(' .
             'SELECT tx_seminars_seminars.uid' .
             ' FROM tx_seminars_seminars' .
@@ -353,7 +348,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
             ' LEFT JOIN tx_seminars_sites ON ' .
             'tx_seminars_seminars_place_mm.uid_foreign = ' .
             'tx_seminars_sites.uid' .
-            ' WHERE tx_seminars_sites.city IN(' . $cityNames . ')' .
+            ' WHERE tx_seminars_sites.city IN(' . $this->quoteAndImplodeForSites($cities) . ')' .
             ')';
     }
 
@@ -374,11 +369,6 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
             return;
         }
 
-        $countryCodes = \implode(
-            ',',
-            $GLOBALS['TYPO3_DB']->fullQuoteArray($countries, 'tx_seminars_sites')
-        );
-
         $this->whereClauseParts['countries'] = 'tx_seminars_seminars.uid IN(' .
             'SELECT tx_seminars_seminars.uid' .
             ' FROM tx_seminars_seminars' .
@@ -388,7 +378,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
             ' LEFT JOIN tx_seminars_sites ON ' .
             'tx_seminars_seminars_place_mm.uid_foreign = ' .
             'tx_seminars_sites.uid' .
-            ' WHERE tx_seminars_sites.country IN(' . $countryCodes . ')' .
+            ' WHERE tx_seminars_sites.country IN(' . $this->quoteAndImplodeForSites($countries) . ')' .
             ')';
     }
 
@@ -409,13 +399,25 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
             return;
         }
 
-        $languageCodes = \implode(
-            ',',
-            $GLOBALS['TYPO3_DB']->fullQuoteArray($languages, 'tx_seminars_sites')
-        );
-
         $this->whereClauseParts['languages'] = 'tx_seminars_seminars' .
-            '.language IN (' . $languageCodes . ')';
+            '.language IN (' . $this->quoteAndImplodeForSites($languages) . ')';
+    }
+
+    /**
+     * @param string[] $array
+     *
+     * @return string
+     */
+    private function quoteAndImplodeForSites(array $array): string
+    {
+        $connection = $this->getConnectionForTable('tx_seminars_sites');
+        $quoted = [];
+
+        foreach ($array as $value) {
+            $quoted[] = $connection->quote((string)$value);
+        }
+
+        return \implode(',', $quoted);
     }
 
     /**
@@ -924,13 +926,13 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
     /**
      * SQL-escapes and trims a potential search word.
      *
-     * @param string $searchWord single search word (may be prefixed or postfixed with spaces), may be empty
+     * @param string $searchWord single search word (may be prefixed or suffixed with spaces), may be empty
      *
      * @return string the trimmed and SQL-escaped $searchWord
      */
     private function prepareSearchWord(string $searchWord): string
     {
-        return $GLOBALS['TYPO3_DB']->quoteStr(\trim($searchWord, self::TRIM_CHARACTER_LIST), 'tx_seminars_seminars');
+        return $this->getConnectionForTable($this->tableName)->quote(\trim($searchWord, self::TRIM_CHARACTER_LIST));
     }
 
     /**
