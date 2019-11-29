@@ -3337,11 +3337,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         $result = [];
 
         if ($this->hasLodgings()) {
-            $result = $this->getMmRecords(
-                'tx_seminars_lodgings',
-                'tx_seminars_seminars_lodgings_mm',
-                false
-            );
+            $result = $this->getTopicMmRecords('tx_seminars_lodgings', 'tx_seminars_seminars_lodgings_mm', false);
         }
 
         return $result;
@@ -3369,7 +3365,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         $result = [];
 
         if ($this->hasFoods()) {
-            $result = $this->getMmRecords(
+            $result = $this->getTopicMmRecords(
                 'tx_seminars_foods',
                 'tx_seminars_seminars_foods_mm',
                 false
@@ -3405,7 +3401,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         $result = [];
 
         if ($this->hasCheckboxes()) {
-            $result = $this->getMmRecords(
+            $result = $this->getTopicMmRecords(
                 'tx_seminars_checkboxes',
                 'tx_seminars_seminars_checkboxes_mm',
                 true
@@ -3416,7 +3412,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     }
 
     /**
-     * Gets the uids and titles of records referenced by this record. If we are
+     * Gets the UIDs and titles of records referenced by this record. If we are
      * a date record and $useTopicRecord is TRUE, the referenced records of the
      * corresponding topic record will be retrieved.
      *
@@ -3431,7 +3427,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *               array with the keys "caption" (for the title) and "value"
      *               (for the UID), might be empty
      */
-    private function getMmRecords($foreignTable, $mmTable, $useTopicRecord): array
+    private function getTopicMmRecords($foreignTable, $mmTable, $useTopicRecord): array
     {
         $result = [];
 

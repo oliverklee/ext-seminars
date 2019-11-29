@@ -940,7 +940,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
             return '';
         }
 
-        return $this->getMmRecords('tx_seminars_lodgings', 'tx_seminars_attendances_lodgings_mm');
+        return \implode("\n", $this->getMmRecords('tx_seminars_lodgings', 'tx_seminars_attendances_lodgings_mm'));
     }
 
     /**
@@ -1005,7 +1005,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
             return '';
         }
 
-        return $this->getMmRecords('tx_seminars_foods', 'tx_seminars_attendances_foods_mm');
+        return \implode("\n", $this->getMmRecords('tx_seminars_foods', 'tx_seminars_attendances_foods_mm'));
     }
 
     /**
@@ -1031,40 +1031,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
             return '';
         }
 
-        return $this->getMmRecords('tx_seminars_checkboxes', 'tx_seminars_attendances_checkboxes_mm');
-    }
-
-    /**
-     * Gets a LF-separated list of the titles of records referenced by this record.
-     *
-     * @param string $foreignTable the name of the foreign table (must not be empty), must have the fields uid and title
-     * @param string $mmTable the name of the m:m table, having the fields uid_local, uid_foreign and sorting, must not be empty
-     *
-     * @return string the titles of the referenced records separated by LF,
-     *                might be empty if no records are referenced
-     */
-    private function getMmRecords($foreignTable, $mmTable): string
-    {
-        $result = '';
-
-        $dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-            'title, sorting',
-            $foreignTable . ', ' . $mmTable,
-            'uid_local = ' . $this->getUid() . ' AND uid_foreign = uid' . \Tx_Oelib_Db::enableFields($foreignTable),
-            '',
-            'sorting'
-        );
-
-        if ($dbResult) {
-            while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-                if ($result !== '') {
-                    $result .= LF;
-                }
-                $result .= $row['title'];
-            }
-        }
-
-        return $result;
+        return \implode("\n", $this->getMmRecords('tx_seminars_checkboxes', 'tx_seminars_attendances_checkboxes_mm'));
     }
 
     /**
