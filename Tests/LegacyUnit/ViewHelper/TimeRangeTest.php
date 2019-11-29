@@ -44,7 +44,7 @@ class Tx_Seminars_Tests_Unit_ViewHelper_TimeRangeTest extends TestCase
     protected function setUp()
     {
         // Make sure that the test results do not depend on the machine's PHP time zone.
-        date_default_timezone_set('UTC');
+        \date_default_timezone_set('UTC');
 
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd($this->testingFramework->createFrontEndPage());

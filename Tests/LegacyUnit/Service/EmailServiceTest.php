@@ -16,7 +16,7 @@ use TYPO3\CMS\Lang\LanguageService;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class EmailServiceTest extends TestCase
+final class EmailServiceTest extends TestCase
 {
     /**
      * @var string

@@ -12,34 +12,34 @@ use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
+final class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
 {
     use LanguageHelper;
 
     /**
      * @var TestingRegistration
      */
-    protected $subject = null;
+    private $subject = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework
      */
-    protected $testingFramework = null;
+    private $testingFramework = null;
 
     /**
      * @var int the UID of a seminar to which the fixture relates
      */
-    protected $seminarUid = 0;
+    private $seminarUid = 0;
 
     /**
      * @var int the UID of the registration the fixture relates to
      */
-    protected $registrationUid = 0;
+    private $registrationUid = 0;
 
     /**
      * @var int the UID of the user the registration relates to
      */
-    protected $feUserUid = 0;
+    private $feUserUid = 0;
 
     protected function setUp()
     {

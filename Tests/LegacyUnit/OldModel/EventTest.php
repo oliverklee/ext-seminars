@@ -14,39 +14,39 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
+final class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
 {
     use LanguageHelper;
 
     /**
      * @var TestingEvent
      */
-    protected $subject = null;
+    private $subject = null;
 
     /**
      * @var \Tx_Oelib_TestingFramework
      */
-    protected $testingFramework = null;
+    private $testingFramework = null;
 
     /**
      * @var int
      */
-    protected $beginDate = 0;
+    private $beginDate = 0;
 
     /**
      * @var int
      */
-    protected $unregistrationDeadline = 0;
+    private $unregistrationDeadline = 0;
 
     /**
      * @var int
      */
-    protected $now = 1524751343;
+    private $now = 1524751343;
 
     /**
      * @var \Tx_Seminars_FrontEnd_DefaultController
      */
-    protected $pi1 = null;
+    private $pi1 = null;
 
     /**
      * @var int
@@ -56,7 +56,7 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     protected function setUp()
     {
         // Make sure that the test results do not depend on the machine's PHP time zone.
-        date_default_timezone_set('UTC');
+        \date_default_timezone_set('UTC');
 
         $GLOBALS['SIM_EXEC_TIME'] = $this->now;
         $this->beginDate = ($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);

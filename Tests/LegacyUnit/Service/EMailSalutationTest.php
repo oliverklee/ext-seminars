@@ -14,7 +14,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends TestCase
+final class Tx_Seminars_Tests_Unit_Service_EMailSalutationTest extends TestCase
 {
     use LanguageHelper;
 
