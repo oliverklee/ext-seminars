@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\BackEnd;
 
-use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Database\Connection;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * This class is provides some helper functions to create parts of the TCA/TCE dynamically.
+ * This provides some helper functions to create parts of the TCA/TCE dynamically.
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
@@ -24,24 +26,14 @@ class TceForms
      */
     public function createLanguageSelector(array &$parameters)
     {
-        $parameters['items'] = [['', '']];
+        $items = [['', '']];
 
-        $table = 'static_languages';
-        $titleField = 'lg_name_local';
-        $keyField = 'lg_iso_2';
-        $allFields = $keyField . ', ' . $titleField;
-
-        $rows = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows(
-            $allFields,
-            $table,
-            '1 = 1' . BackendUtility::deleteClause($table),
-            '',
-            $titleField
-        );
-        /** @var string[] $row */
-        foreach ($rows as $row) {
-            $parameters['items'][] = [$row[$titleField], $row[$keyField]];
+        /** @var string[] $language */
+        foreach (self::findAllLanguages() as $language) {
+            $items[] = [$language['lg_name_local'], $language['lg_iso_2']];
         }
+
+        $parameters['items'] = $items;
     }
 
     /**
@@ -53,96 +45,37 @@ class TceForms
      */
     public function createCountrySelector(array &$parameters)
     {
-        $parameters['items'] = [['', '']];
+        $items = [['', '']];
 
-        $table = 'static_countries';
-        $titleField = 'cn_short_local';
-        $keyField = 'cn_iso_2';
-        $allFields = $keyField . ', ' . $titleField;
-
-        $rows = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows(
-            $allFields,
-            $table,
-            '1 = 1' . BackendUtility::deleteClause($table),
-            '',
-            $titleField
-        );
-        /** @var string[] $row */
-        foreach ($rows as $row) {
-            $parameters['items'][] = [$row[$titleField], $row[$keyField]];
+        /** @var string[] $country */
+        foreach (self::findAllCountries() as $country) {
+            $items[] = [$country['cn_short_local'], $country['cn_iso_2']];
         }
+
+        $parameters['items'] = $items;
     }
 
-    /**
-     * Replaces the tables markers for the add and list wizard with the given
-     * table name. It's mainly used to simplify the maintaining of the wizard
-     * code (equals in more than 90%) and to get some flexibility.
-     *
-     * @deprecated will be removed once this extension requires TYPO3 >= 8.7
-     *
-     * @param mixed[][] $array wizards array with the table markers
-     * @param string $table name of the real database table (e.g. "tx_seminars_seminars")
-     *
-     * @return mixed[][] wizards array with replaced table markers
-     */
-    public static function replaceTables(array $array, $table): array
+    private static function findAllLanguages(): array
     {
-        $array['add']['params']['table'] =
-            str_replace('###TABLE###', $table, $array['add']['params']['table']);
-        $array['list']['params']['table'] =
-            str_replace('###TABLE###', $table, $array['list']['params']['table']);
+        $table = 'static_languages';
 
-        return $array;
+        return self::getConnectionForTable($table)
+            ->select(['*'], $table, [], [], ['lg_name_local' => 'ASC'])->fetchAll();
     }
 
-    /**
-     * Gets the wizard configuration.
-     *
-     * @deprecated will be removed once this extension requires TYPO3 >= 8.7
-     *
-     * @return mixed[]
-     */
-    public static function getWizardConfiguration(): array
+    private static function findAllCountries(): array
     {
-        return [
-            '_PADDING' => 5,
-            '_VERTICAL' => 5,
-            'edit' => [
-                'type' => 'popup',
-                'title' => 'Edit entry',
-                'module' => [
-                    'name' => 'wizard_edit',
-                ],
-                'popup_onlyOpenIfSelected' => 1,
-                'icon' => 'actions-open',
-                'JSopenParams' => 'height=480,width=640,status=0,menubar=0,scrollbars=1',
-            ],
-            'add' => [
-                'type' => 'script',
-                'title' => 'Create new entry',
-                'icon' => 'actions-add',
-                'params' => [
-                    'table' => '###TABLE###',
-                    'pid' => '###CURRENT_PID###',
-                    'setValue' => 'prepend',
-                ],
-                'module' => [
-                    'name' => 'wizard_add',
-                ],
-            ],
-            'list' => [
-                'type' => 'popup',
-                'title' => 'List entries',
-                'icon' => 'actions-system-list-open',
-                'params' => [
-                    'table' => '###TABLE###',
-                    'pid' => '###CURRENT_PID###',
-                ],
-                'module' => [
-                    'name' => 'wizard_list',
-                ],
-                'JSopenParams' => 'height=480,width=640,status=0,menubar=0,scrollbars=1',
-            ],
-        ];
+        $table = 'static_countries';
+
+        return self::getConnectionForTable($table)
+            ->select(['*'], $table, [], [], ['cn_short_local' => 'ASC'])->fetchAll();
+    }
+
+    private static function getConnectionForTable(string $table): Connection
+    {
+        /** @var ConnectionPool $pool */
+        $pool = GeneralUtility::makeInstance(ConnectionPool::class);
+
+        return $pool->getConnectionForTable($table);
     }
 }
