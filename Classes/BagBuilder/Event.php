@@ -122,25 +122,28 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * Limits the bag to events at any of the places with the UIDs provided as
      * the parameter $placeUids.
      *
-     * @param string[] $placeUids place UIDs, set to an empty array for no limitation, need not be SQL-safe
+     * @param string[] $uids place UIDs, set to an empty array for no limitation, need not be SQL-safe
      *
      * @return void
      */
-    public function limitToPlaces(array $placeUids = [])
+    public function limitToPlaces(array $uids = [])
     {
-        if (empty($placeUids)) {
+        if (empty($uids)) {
             unset($this->whereClauseParts['places']);
             return;
         }
-
-        $safePlaceUids = \implode(',', $GLOBALS['TYPO3_DB']->cleanIntArray($placeUids));
 
         $this->whereClauseParts['places'] = 'EXISTS (SELECT * FROM ' .
             'tx_seminars_seminars_place_mm WHERE ' .
             'tx_seminars_seminars_place_mm.uid_local = ' .
             'tx_seminars_seminars.uid AND ' .
-            'tx_seminars_seminars_place_mm.uid_foreign IN(' . $safePlaceUids . ')' .
+            'tx_seminars_seminars_place_mm.uid_foreign IN(' . \implode(',', $this->cleanIntegers($uids)) . ')' .
             ')';
+    }
+
+    private function cleanIntegers(array $array): array
+    {
+        return \array_map('\\intval', $array);
     }
 
     /**
@@ -295,19 +298,18 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * Limits the bag to events from any of the event types with the UIDs
      * provided as the parameter $eventTypeUids.
      *
-     * @param string[] $eventTypeUids event type UIDs, set to an empty array for no limitation, need not be SQL-safe
+     * @param string[] $uids event type UIDs, set to an empty array for no limitation, need not be SQL-safe
      *
      * @return void
      */
-    public function limitToEventTypes(array $eventTypeUids = [])
+    public function limitToEventTypes(array $uids = [])
     {
-        if (empty($eventTypeUids)) {
+        if (empty($uids)) {
             unset($this->whereClauseParts['eventTypes']);
             return;
         }
 
-        $safeEventTypeUids = \implode(',', $GLOBALS['TYPO3_DB']->cleanIntArray($eventTypeUids));
-
+        $safeEventTypeUids = \implode(',', $this->cleanIntegers($uids));
         $this->whereClauseParts['eventTypes'] = '(
             (
                 object_type IN(' .
