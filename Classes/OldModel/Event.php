@@ -1560,20 +1560,20 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * Returns an empty string if the corresponding payment method could not be retrieved.
      *
-     * @param int $paymentMethodUid the UID of a single payment method, must not be zero
+     * @param int $uid the UID of a single payment method, must not be zero
      *
      * @return string the selected payment method as plain text (or '' if there is an error)
      */
-    public function getSinglePaymentMethodPlain($paymentMethodUid): string
+    public function getSinglePaymentMethodPlain(int $uid): string
     {
-        if ($paymentMethodUid <= 0) {
+        if ($uid <= 0) {
             return '';
         }
 
         $dbResultPaymentMethod = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
             'title, description',
             'tx_seminars_payment_methods',
-            'uid = ' . $paymentMethodUid . \Tx_Oelib_Db::enableFields('tx_seminars_payment_methods')
+            'uid = ' . $uid . \Tx_Oelib_Db::enableFields('tx_seminars_payment_methods')
         );
         if ($dbResultPaymentMethod === false) {
             return '';
@@ -1602,20 +1602,20 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * Returns an empty string if the corresponding payment method could not be retrieved.
      *
-     * @param int $paymentMethodUid the UID of a single payment method, must not be zero
+     * @param int $uid the UID of a single payment method, must not be zero
      *
      * @return string the selected payment method as plain text (or '' if there is an error)
      */
-    public function getSinglePaymentMethodShort($paymentMethodUid): string
+    public function getSinglePaymentMethodShort(int $uid): string
     {
-        if ($paymentMethodUid <= 0) {
+        if ($uid <= 0) {
             return '';
         }
 
         $dbResultPaymentMethod = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
             'title',
             'tx_seminars_payment_methods',
-            'uid = ' . $paymentMethodUid . \Tx_Oelib_Db::enableFields('tx_seminars_payment_methods')
+            'uid = ' . $uid . \Tx_Oelib_Db::enableFields('tx_seminars_payment_methods')
         );
         if ($dbResultPaymentMethod === false) {
             return '';
@@ -1660,7 +1660,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string the short local name of the language or an empty string if the language could not be found
      */
-    public function getLanguageNameFromIsoCode($isoCode): string
+    public function getLanguageNameFromIsoCode(string $isoCode): string
     {
         $languageName = '';
         $dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
@@ -2545,18 +2545,18 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Checks whether a certain user already is registered for this seminar.
      *
-     * @param int $feUserUid UID of the FE user to check, must be > 0
+     * @param int $userUid UID of the FE user to check, must be > 0
      *
      * @return bool TRUE if the user already is registered, FALSE otherwise
      */
-    public function isUserRegistered($feUserUid): bool
+    public function isUserRegistered(int $userUid): bool
     {
         $result = false;
 
         $dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
             'COUNT(*) AS num',
             'tx_seminars_attendances',
-            'seminar = ' . $this->getUid() . ' AND user = ' . $feUserUid .
+            'seminar = ' . $this->getUid() . ' AND user = ' . $userUid .
             \Tx_Oelib_Db::enableFields('tx_seminars_attendances')
         );
 
@@ -2587,19 +2587,19 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * but also checks whether this user is entered as a VIP for this event,
      * ie. he/she is allowed to view the list of registrations for this event.
      *
-     * @param int $feUserUid UID of the FE user to check, must be > 0
-     * @param int $defaultEventVipsFeGroupID UID of the default event VIP front-end user group
+     * @param int $userUid UID of the FE user to check, must be > 0
+     * @param int $defaultEventVipsFeGroupUid UID of the default event VIP front-end user group
      *
      * @return bool TRUE if the user is a VIP for this seminar,
      *                 FALSE otherwise
      */
-    public function isUserVip(int $feUserUid, int $defaultEventVipsFeGroupID): bool
+    public function isUserVip(int $userUid, int $defaultEventVipsFeGroupUid): bool
     {
         $result = false;
-        $isDefaultVip = ($defaultEventVipsFeGroupID !== 0)
+        $isDefaultVip = $defaultEventVipsFeGroupUid !== 0
             && \Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()
             && \Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser()
-                ->hasGroupMembership((string)$defaultEventVipsFeGroupID);
+                ->hasGroupMembership((string)$defaultEventVipsFeGroupUid);
 
         if ($isDefaultVip) {
             $result = true;
@@ -2607,7 +2607,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             $dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
                 'COUNT(*) AS num',
                 'tx_seminars_seminars_feusers_mm',
-                'uid_local=' . $this->getUid() . ' AND uid_foreign=' . $feUserUid
+                'uid_local=' . $this->getUid() . ' AND uid_foreign=' . $userUid
             );
 
             if ($dbResult) {
@@ -3334,13 +3334,20 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function getLodgings(): array
     {
-        $result = [];
+        return $this->hasLodgings()
+            ? $this->getMmRecordsForSelection('tx_seminars_lodgings', 'tx_seminars_seminars_lodgings_mm') : [];
+    }
 
-        if ($this->hasLodgings()) {
-            $result = $this->getTopicMmRecords('tx_seminars_lodgings', 'tx_seminars_seminars_lodgings_mm', false);
-        }
-
-        return $result;
+    /**
+     * Gets the lodging options associated with this event.
+     *
+     * @return string
+     */
+    protected function getLodgingTitles(): string
+    {
+        return $this->hasLodgings()
+            ? \implode("\n", $this->getMmRecordTitles('tx_seminars_lodgings', 'tx_seminars_seminars_lodgings_mm'))
+            : '';
     }
 
     /**
@@ -3362,17 +3369,20 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function getFoods(): array
     {
-        $result = [];
+        return $this->hasFoods()
+            ? $this->getMmRecordsForSelection('tx_seminars_foods', 'tx_seminars_seminars_foods_mm') : [];
+    }
 
-        if ($this->hasFoods()) {
-            $result = $this->getTopicMmRecords(
-                'tx_seminars_foods',
-                'tx_seminars_seminars_foods_mm',
-                false
-            );
-        }
-
-        return $result;
+    /**
+     * Gets the food options associated with this event.
+     *
+     * @return string
+     */
+    protected function getFoodTitles(): string
+    {
+        return $this->hasFoods()
+            ? \implode("\n", $this->getMmRecordTitles('tx_seminars_foods', 'tx_seminars_seminars_foods_mm'))
+            : '';
     }
 
     /**
@@ -3398,17 +3408,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function getCheckboxes(): array
     {
-        $result = [];
-
-        if ($this->hasCheckboxes()) {
-            $result = $this->getTopicMmRecords(
-                'tx_seminars_checkboxes',
-                'tx_seminars_seminars_checkboxes_mm',
-                true
-            );
-        }
-
-        return $result;
+        return $this->hasCheckboxes()
+            ? $this->getTopicMmRecords('tx_seminars_checkboxes', 'tx_seminars_seminars_checkboxes_mm') : [];
     }
 
     /**
@@ -3420,65 +3421,31 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *        the name of the foreign table (must not be empty), must have the fields uid and title
      * @param string $mmTable
      *        the name of the m:m table, having the fields uid_local, uid_foreign and sorting, must not be empty
-     * @param bool $useTopicRecord
-     *        TRUE if the referenced records of the corresponding topic record should be retrieved, FALSE otherwise
      *
      * @return array[] referenced records, consisting each of a nested
      *               array with the keys "caption" (for the title) and "value"
      *               (for the UID), might be empty
      */
-    private function getTopicMmRecords($foreignTable, $mmTable, $useTopicRecord): array
+    private function getTopicMmRecords(string $foreignTable, string $mmTable): array
     {
-        $result = [];
-
-        $uid = $useTopicRecord ?
-            $this->getTopicInteger('uid') : $this->getUid();
-
-        $dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-            'uid, title, sorting',
-            $foreignTable . ', ' . $mmTable,
-            // uid_local and uid_foreign are from the m:m table;
-            // uid and sorting are from the foreign table.
-            'uid_local=' . $uid . ' AND uid_foreign=uid' .
-            \Tx_Oelib_Db::enableFields($foreignTable),
-            '',
-            'sorting'
-        );
-
-        if ($dbResult) {
-            while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-                $result[$row['uid']] = [
-                    'caption' => $row['title'],
-                    'value' => $row['uid'],
-                ];
-            }
-        }
-
-        return $result;
+        return $this->getMmRecordsByUid($foreignTable, $mmTable, $this->getTopicInteger('uid'));
     }
 
     /**
-     * Converts an array m:m records (each having a "value" and a "caption"
-     * element) to a LF-separated string.
+     * @param string $foreignTable
+     * @param string $mmTable
      *
-     * @param array[] $records m:n elements, each having a "value" and "caption" element, may be empty
-     *
-     * @return string the captions of the array contents separated by LF, will be empty if the array is empty
+     * @return array[] options, consisting each of a nested array with the keys "caption" (for the title) and "value"
+     *                 (for the UID), might be empty
      */
-    private function mmRecordsToText($records): string
+    protected function getMmRecordsForSelection(string $foreignTable, string $mmTable): array
     {
-        $result = '';
-
-        if (!empty($records)) {
-            foreach ($records as $currentRecord) {
-                if (!empty($result)) {
-                    $result .= LF;
-                }
-                $result .= $currentRecord['caption'];
-            }
+        $options = [];
+        foreach ($this->getMmRecords($foreignTable, $mmTable) as $record) {
+            $options[] = ['caption' => $record['title'], 'value' => (int)$record['uid']];
         }
 
-        return $result;
+        return $options;
     }
 
     /**
@@ -3671,10 +3638,10 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
                 $result = $this->getRoom();
                 break;
             case 'lodgings':
-                $result = $this->mmRecordsToText($this->getLodgings());
+                $result = $this->getLodgingTitles();
                 break;
             case 'foods':
-                $result = $this->mmRecordsToText($this->getFoods());
+                $result = $this->getFoodTitles();
                 break;
             case 'speakers':
                 // The fallthrough is intended.
@@ -4129,11 +4096,11 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * is an array that contains the UIDs of all the places that are related to
      * this event.
      *
-     * @param string $tableName the name of the m:n table to query, must not be empty
+     * @param string $table the name of the m:n table to query, must not be empty
      *
      * @return int[] foreign record's UIDs, ordered by the field uid_foreign in the m:n table, may be empty
      */
-    public function getRelatedMmRecordUids($tableName): array
+    public function getRelatedMmRecordUids(string $table): array
     {
         $result = [];
 
@@ -4141,7 +4108,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         // selected m:n table.
         $dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
             'uid_foreign',
-            $tableName,
+            $table,
             'uid_local=' . $this->getUid(),
             '',
             'sorting'
@@ -4215,8 +4182,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Returns our end date and time as a UNIX timestamp.
      *
-     * @return int our end date and time as a UNIX timestamp or 0 if we
-     *                 don't have an end date
+     * @return int our end date and time as a UNIX timestamp or 0 if we don't have an end date
      */
     public function getEndDateAsTimestamp(): int
     {

@@ -940,7 +940,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
             return '';
         }
 
-        return \implode("\n", $this->getMmRecords('tx_seminars_lodgings', 'tx_seminars_attendances_lodgings_mm'));
+        return \implode("\n", $this->getMmRecordTitles('tx_seminars_lodgings', 'tx_seminars_attendances_lodgings_mm'));
     }
 
     /**
@@ -1005,7 +1005,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
             return '';
         }
 
-        return \implode("\n", $this->getMmRecords('tx_seminars_foods', 'tx_seminars_attendances_foods_mm'));
+        return \implode("\n", $this->getMmRecordTitles('tx_seminars_foods', 'tx_seminars_attendances_foods_mm'));
     }
 
     /**
@@ -1031,7 +1031,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
             return '';
         }
 
-        return \implode("\n", $this->getMmRecords('tx_seminars_checkboxes', 'tx_seminars_attendances_checkboxes_mm'));
+        return \implode("\n", $this->getMmRecordTitles('tx_seminars_checkboxes', 'tx_seminars_attendances_checkboxes_mm'));
     }
 
     /**

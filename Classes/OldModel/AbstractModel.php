@@ -552,19 +552,64 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
     }
 
     /**
-     * Gets a LF-separated list of the titles of records referenced by this record.
+     * Gets a list of the titles of records referenced by the this record.
      *
-     * @param string $foreignTable the name of the foreign table (must not be empty), must have the fields uid and title
-     * @param string $mmTable the name of the m:m table, having the fields uid_local, uid_foreign and sorting,
-     *        must not be empty
+     * @param string $foreignTable the name of the foreign table (must not be empty), having the uid and title fields
+     * @param string $mmTable the name of the m:m table, having the uid_local, uid_foreign and sorting fields
      *
      * @return string[] the titles of the referenced records
      */
+    protected function getMmRecordTitles(string $foreignTable, string $mmTable): array
+    {
+        return $this->getMmRecordTitlesByUid($foreignTable, $mmTable, $this->getUid());
+    }
+
+    /**
+     * Gets a list of the titles of records referenced by the this record.
+     *
+     * @param string $foreignTable the name of the foreign table (must not be empty), having the uid and title fields
+     * @param string $mmTable the name of the m:m table, having the uid_local, uid_foreign and sorting fields
+     * @param int $uid
+     *
+     * @return string[] the titles of the referenced records
+     */
+    protected function getMmRecordTitlesByUid(string $foreignTable, string $mmTable, int $uid): array
+    {
+        $titles = [];
+        foreach ($this->getMmRecordsByUid($foreignTable, $mmTable, $uid) as $row) {
+            $titles[] = $row['title'];
+        }
+
+        return $titles;
+    }
+
+    /**
+     * Gets records referenced by the this record.
+     *
+     * @param string $foreignTable the name of the foreign table (must not be empty), having the uid and title fields
+     * @param string $mmTable the name of the m:m table, having the uid_local, uid_foreign and sorting fields
+     *
+     * @return array[]
+     */
     protected function getMmRecords(string $foreignTable, string $mmTable): array
     {
+        return $this->getMmRecordsByUid($foreignTable, $mmTable, $this->getUid());
+    }
+
+    /**
+     * Gets records referenced by the the record with the given UID.
+     *
+     * @param string $foreignTable the name of the foreign table (must not be empty), having the uid and title fields
+     * @param string $mmTable the name of the m:m table, having the uid_local, uid_foreign and sorting fields
+     * @param int $uid
+     *
+     * @return array[]
+     */
+    protected function getMmRecordsByUid(string $foreignTable, string $mmTable, int $uid): array
+    {
         $query = self::getQueryBuilderForTable($foreignTable);
-        $queryResult = $query
-            ->select($foreignTable . '.title')
+        return $query
+            ->select($foreignTable . '.*')
             ->from($foreignTable)
             ->join(
                 $foreignTable,
@@ -572,16 +617,9 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
                 'mm',
                 $query->expr()->eq('mm.uid_foreign', $query->quoteIdentifier($foreignTable . '.uid'))
             )
-            ->where($query->expr()->eq('mm.uid_local', $query->createNamedParameter($this->getUid())))
+            ->where($query->expr()->eq('mm.uid_local', $query->createNamedParameter($uid)))
             ->orderBy('mm.sorting')
             ->execute()->fetchAll();
-
-        $titles = [];
-        foreach ($queryResult as $row) {
-            $titles[] = $row['title'];
-        }
-
-        return $titles;
     }
 
     protected static function getQueryBuilderForOwnTable(): QueryBuilder
