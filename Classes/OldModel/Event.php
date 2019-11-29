@@ -1806,8 +1806,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * Checks whether there is at least one registration for this event
      * (counting the paid attendances as well as the unpaid ones).
      *
-     * @return bool TRUE if there is at least one registration for this
-     *                 event, FALSE otherwise
+     * @return bool true if there is at least one registration for this event, false otherwise
      */
     public function hasAttendances(): bool
     {
@@ -1831,8 +1830,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Gets the number of attendances that are not paid yet
      *
-     * @return int the number of attendances that are not paid yet,
-     *                 will be >= 0
+     * @return int the number of attendances that are not paid yet, will be >= 0
      */
     public function getAttendancesNotPaid(): int
     {
@@ -1842,12 +1840,11 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Gets the number of vacancies for this seminar.
      *
-     * @return int the number of vacancies (will be 0 if the seminar
-     *                 is overbooked)
+     * @return int the number of vacancies (will be 0 if the seminar is overbooked)
      */
     public function getVacancies(): int
     {
-        return max(0, $this->getAttendancesMax() - $this->getAttendances());
+        return \max(0, $this->getAttendancesMax() - $this->getAttendances());
     }
 
     /**
@@ -1857,8 +1854,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * returned instead. If there are no vacancies, a localized string
      * "fully booked" is returned.
      *
-     * If this seminar does not require a registration or has been canceled, an
-     * empty string is returned.
+     * If this seminar does not require a registration or has been canceled, an empty string is returned.
      *
      * @return string string showing the number of vacancies, may be empty
      */
@@ -1889,7 +1885,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Checks whether this seminar still has vacancies (is not full yet).
      *
-     * @return bool TRUE if the seminar has vacancies, FALSE if it is full
+     * @return bool true if the seminar has vacancies, false if it is full
      */
     public function hasVacancies(): bool
     {
@@ -1899,20 +1895,18 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Checks whether this seminar already is full.
      *
-     * @return bool TRUE if the seminar is full, FALSE if it still has
+     * @return bool true if the seminar is full, false if it still has
      *                 vacancies or if there are unlimited vacancies
      */
     public function isFull(): bool
     {
-        return !$this->hasUnlimitedVacancies()
-            && ($this->getAttendances() >= $this->getAttendancesMax());
+        return !$this->hasUnlimitedVacancies() && $this->getAttendances() >= $this->getAttendancesMax();
     }
 
     /**
      * Checks whether this seminar has enough attendances to take place.
      *
-     * @return bool TRUE if the seminar has enough attendances,
-     *                 FALSE otherwise
+     * @return bool true if the seminar has enough attendances, false otherwise
      */
     public function hasEnoughAttendances(): bool
     {
@@ -2083,12 +2077,12 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         $result = '';
 
         if ($this->hasRegistrationDeadline()) {
-            $result = strftime(
+            $result = \strftime(
                 $this->getConfValueString('dateFormatYMD'),
                 $this->getRecordPropertyInteger('deadline_registration')
             );
             if ($this->getConfValueBoolean('showTimeOfRegistrationDeadline')) {
-                $result .= strftime(
+                $result .= \strftime(
                     ' ' . $this->getConfValueString('timeFormat'),
                     $this->getRecordPropertyInteger('deadline_registration')
                 );
