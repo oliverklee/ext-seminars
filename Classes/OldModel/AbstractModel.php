@@ -551,6 +551,39 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
         return 'plugin.tx_seminars.';
     }
 
+    /**
+     * Gets a LF-separated list of the titles of records referenced by this record.
+     *
+     * @param string $foreignTable the name of the foreign table (must not be empty), must have the fields uid and title
+     * @param string $mmTable the name of the m:m table, having the fields uid_local, uid_foreign and sorting,
+     *        must not be empty
+     *
+     * @return string[] the titles of the referenced records
+     */
+    protected function getMmRecords(string $foreignTable, string $mmTable): array
+    {
+        $query = self::getQueryBuilderForTable($foreignTable);
+        $queryResult = $query
+            ->select($foreignTable . '.title')
+            ->from($foreignTable)
+            ->join(
+                $foreignTable,
+                $mmTable,
+                'mm',
+                $query->expr()->eq('mm.uid_foreign', $query->quoteIdentifier($foreignTable . '.uid'))
+            )
+            ->where($query->expr()->eq('mm.uid_local', $query->createNamedParameter($this->getUid())))
+            ->orderBy('mm.sorting')
+            ->execute()->fetchAll();
+
+        $titles = [];
+        foreach ($queryResult as $row) {
+            $titles[] = $row['title'];
+        }
+
+        return $titles;
+    }
+
     protected static function getQueryBuilderForOwnTable(): QueryBuilder
     {
         return self::getConnectionPool()->getQueryBuilderForTable(static::$tableName);

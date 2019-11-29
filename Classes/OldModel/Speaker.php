@@ -123,8 +123,7 @@ class Tx_Seminars_OldModel_Speaker extends AbstractModel
     /**
      * Gets our skills as a plain text list (just the skill names).
      *
-     * @return string our skills list (or an empty string if there are no
-     *                skills for this speaker or there is an error)
+     * @return string our skills list (or an empty string if there are no skills for this speaker)
      */
     public function getSkillsShort(): string
     {
@@ -132,27 +131,7 @@ class Tx_Seminars_OldModel_Speaker extends AbstractModel
             return '';
         }
 
-        $query = self::getQueryBuilderForTable('tx_seminars_skills');
-        $queryResult = $query
-            ->select('tx_seminars_skills.title')
-            ->from('tx_seminars_skills')
-            ->join(
-                'tx_seminars_skills',
-                'tx_seminars_speakers_skills_mm',
-                'mm',
-                $query->expr()->eq('mm.uid_foreign', $query->quoteIdentifier('tx_seminars_skills.uid'))
-            )
-            ->where(
-                $query->expr()->eq('mm.uid_local', $query->createNamedParameter($this->getUid()))
-            )
-            ->orderBy('mm.sorting')
-            ->execute()->fetchAll();
-        $result = [];
-        foreach ($queryResult as $row) {
-            $result[] = $row['title'];
-        }
-
-        return \implode(', ', $result);
+        return \implode(', ', $this->getMmRecords('tx_seminars_skills', 'tx_seminars_speakers_skills_mm'));
     }
 
     /**
