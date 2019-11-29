@@ -566,7 +566,7 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
         return self::getConnectionForTable(static::$tableName);
     }
 
-    private static function getConnectionForTable(string $table): Connection
+    protected static function getConnectionForTable(string $table): Connection
     {
         return self::getConnectionPool()->getConnectionForTable($table);
     }

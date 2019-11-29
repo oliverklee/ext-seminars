@@ -26,6 +26,16 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     protected static $tableName = 'tx_seminars_seminars';
 
     /**
+     * @var bool
+     */
+    private $registrationsHaveBeenRetrieved = false;
+
+    /**
+     * @var array[]
+     */
+    private $registrations = [];
+
+    /**
      * the number of all attendances
      *
      * @var int
@@ -1795,9 +1805,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function getAttendances(): int
     {
-        if (!$this->statisticsHaveBeenCalculated) {
-            $this->calculateStatistics();
-        }
+        $this->calculateStatisticsIfNeeded();
 
         return $this->numberOfAttendances;
     }
@@ -1820,9 +1828,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function getAttendancesPaid(): int
     {
-        if (!$this->statisticsHaveBeenCalculated) {
-            $this->calculateStatistics();
-        }
+        $this->calculateStatisticsIfNeeded();
 
         return $this->numberOfAttendancesPaid;
     }
@@ -2537,12 +2543,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
             // Check whether there is a value to display. If not, we don't use
             // the padding and break the line directly after the label.
-            if ($value != '') {
-                $result .= str_pad(
-                    $currentLabel . ': ',
-                    $maxLength + 2,
-                    ' '
-                ) . $value . LF;
+            if ($value !== '') {
+                $result .= \str_pad($currentLabel . ': ', $maxLength + 2, ' ') . $value . LF;
             } else {
                 $result .= $currentLabel . ':' . LF;
             }
@@ -2880,10 +2882,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
                     && $this->getConfValueBoolean('allowCsvExportForVips');
                 break;
             case 'my_vip_events':
-                $result = $isLoggedIn && $this->isUserVip(
-                    $currentUserUid,
-                    $defaultEventVipsFeGroupID
-                ) && $hasVipListPid;
+                $result = $isLoggedIn && $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupID)
+                    && $hasVipListPid;
                 break;
             case 'list_vip_registrations':
                 $result = $isLoggedIn && $this->isUserVip($currentUserUid, $defaultEventVipsFeGroupID);
@@ -3026,8 +3026,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function isEarlyBirdDeadlineOver(): bool
     {
-        return $GLOBALS['SIM_EXEC_TIME']
-            >= $this->getLatestPossibleEarlyBirdRegistrationTime();
+        return $GLOBALS['SIM_EXEC_TIME'] >= $this->getLatestPossibleEarlyBirdRegistrationTime();
     }
 
     /**
@@ -3063,80 +3062,100 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     }
 
     /**
+     * Calculates the attendee statistics. If these numbers already are available, this method is a no-op.
+     *
+     * @return void
+     */
+    protected function calculateStatisticsIfNeeded()
+    {
+        if (!$this->statisticsHaveBeenCalculated) {
+            $this->calculateStatistics();
+        }
+    }
+
+    /**
      * (Re-)calculates the number of participants for this seminar.
      *
      * @return void
      */
     public function calculateStatistics()
     {
-        $this->numberOfAttendances = $this->countAttendances(
-            'registration_queue=0'
-        ) + $this->getOfflineRegistrations();
-        $this->numberOfAttendancesPaid = $this->countAttendances(
-            'datepaid <> 0 AND registration_queue = 0'
-        );
-        $this->numberOfAttendancesOnQueue = $this->countAttendances(
-            'registration_queue=1'
-        );
+        $this->registrationsHaveBeenRetrieved = false;
+
+        $this->numberOfAttendances = $this->getOfflineRegistrations()
+            + $this->sumSeatsOfRegistrations($this->getNonQueueRegistrations());
+        $this->numberOfAttendancesPaid = $this->sumSeatsOfRegistrations($this->getPaidRegistrations());
+        $this->numberOfAttendancesOnQueue = $this->sumSeatsOfRegistrations($this->getQueueRegistrations());
+
         $this->statisticsHaveBeenCalculated = true;
     }
 
-    /**
-     * Queries the DB for the number of visible attendances for this event
-     * and returns the result of the DB query with the number stored in 'num'
-     * (the result will be zero if the query fails).
-     *
-     * This function takes multi-seat registrations into account as well.
-     *
-     * An additional string can be added to the WHERE clause to look only for
-     * certain attendances, e.g. only the paid ones.
-     *
-     * Note that this does not write the values back to the seminar record yet.
-     * This needs to be done in an additional step after this.
-     *
-     * @param string $queryParameters
-     *        string that will be prepended to the WHERE clause using AND, e.g. 'pid=42'
-     *        (the AND and the enclosing spaces are not necessary for this parameter)
-     *
-     * @return int the number of attendances, will be >= 0
-     */
-    private function countAttendances($queryParameters = '1=1'): int
+    private function getNonQueueRegistrations(): array
     {
-        $result = 0;
+        $this->retrieveRegistrations();
 
-        $dbResultSingleSeats = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-            'COUNT(*) AS number',
-            'tx_seminars_attendances',
-            $queryParameters .
-            ' AND seminar = ' . $this->getUid() .
-            ' AND seats = 0' .
-            \Tx_Oelib_Db::enableFields('tx_seminars_attendances')
+        return \array_filter(
+            $this->registrations,
+            static function (array $registration): bool {
+                return !(bool)$registration['registration_queue'];
+            }
         );
+    }
 
-        if ($dbResultSingleSeats) {
-            $fieldsSingleSeats = $GLOBALS['TYPO3_DB']->sql_fetch_assoc(
-                $dbResultSingleSeats
-            );
-            $result += $fieldsSingleSeats['number'];
+    private function getQueueRegistrations(): array
+    {
+        $this->retrieveRegistrations();
+
+        return \array_filter(
+            $this->registrations,
+            static function (array $registration): bool {
+                return (bool)$registration['registration_queue'];
+            }
+        );
+    }
+
+    private function getPaidRegistrations(): array
+    {
+        $this->retrieveRegistrations();
+
+        return \array_filter(
+            $this->getNonQueueRegistrations(),
+            static function (array $registration): bool {
+                return (int)$registration['datepaid'] > 0;
+            }
+        );
+    }
+
+    /**
+     * @param array[] $registrations
+     *
+     * @return int
+     */
+    private function sumSeatsOfRegistrations(array $registrations): int
+    {
+        $total = 0;
+        foreach ($registrations as $registration) {
+            $total += \max(1, (int)$registration['seats']);
         }
 
-        $dbResultMultiSeats = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-            'SUM(seats) AS number',
-            'tx_seminars_attendances',
-            $queryParameters .
-            ' AND seminar = ' . $this->getUid() .
-            ' AND seats <> 0' .
-            \Tx_Oelib_Db::enableFields('tx_seminars_attendances')
-        );
+        return $total;
+    }
 
-        if ($dbResultMultiSeats) {
-            $fieldsMultiSeats = $GLOBALS['TYPO3_DB']->sql_fetch_assoc(
-                $dbResultMultiSeats
-            );
-            $result += $fieldsMultiSeats['number'];
+    /**
+     * @return void
+     */
+    private function retrieveRegistrations()
+    {
+        if ($this->registrationsHaveBeenRetrieved) {
+            return;
         }
 
-        return $result;
+        $table = 'tx_seminars_attendances';
+        $this->registrations = self::getConnectionForTable($table)
+            ->select(['*'], $table, ['seminar' => $this->getUid()])
+            ->fetchAll();
+
+        $this->registrationsHaveBeenRetrieved = true;
     }
 
     /**
@@ -4032,17 +4051,13 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @param string $dash the character or HTML entity used to separate start date and end date
      *
-     * @return string the seminar date (or an empty string or a
-     *                localized message)
+     * @return string the seminar date (or an empty string or a localized message)
      */
     public function getDate(string $dash = '&#8211;'): string
     {
         $result = '';
 
-        if (
-            $this->getRecordPropertyInteger('object_type')
-            != \Tx_Seminars_Model_Event::TYPE_TOPIC
-        ) {
+        if ($this->getRecordPropertyInteger('object_type') !== \Tx_Seminars_Model_Event::TYPE_TOPIC) {
             $result = parent::getDate($dash);
         }
 
@@ -4080,7 +4095,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         $deadline = $this->getUnregistrationDeadlineFromModelAndConfiguration();
         if ($deadline !== 0 || $this->hasBeginDate()) {
-            $canUnregisterByDate = ($GLOBALS['SIM_EXEC_TIME'] < $deadline);
+            $canUnregisterByDate = (int)$GLOBALS['SIM_EXEC_TIME'] < $deadline;
         } else {
             $canUnregisterByDate = $this->getUnregistrationDeadlineFromConfiguration() !== 0;
         }
@@ -4091,8 +4106,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Checks if this event has a registration queue.
      *
-     * @return bool TRUE if this event has a registration queue, FALSE
-     *                 otherwise
+     * @return bool true if this event has a registration queue, false otherwise
      */
     public function hasRegistrationQueue(): bool
     {
@@ -4106,9 +4120,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function getAttendancesOnRegistrationQueue(): int
     {
-        if (!$this->statisticsHaveBeenCalculated) {
-            $this->calculateStatistics();
-        }
+        $this->calculateStatisticsIfNeeded();
 
         return $this->numberOfAttendancesOnQueue;
     }
@@ -4116,8 +4128,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Checks whether there is at least one registration on the waiting list.
      *
-     * @return bool TRUE if there is at least one registration on the
-     *                 waiting list, FALSE otherwise
+     * @return bool true if there is at least one registration on the waiting list, false otherwise
      */
     public function hasAttendancesOnRegistrationQueue(): bool
     {
@@ -4910,17 +4921,12 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      */
     private function getUnregistrationDeadlineFromConfiguration(): int
     {
-        if (
-            !$this->hasConfValueInteger(
-                'unregistrationDeadlineDaysBeforeBeginDate'
-            )
-        ) {
+        if (!$this->hasConfValueInteger('unregistrationDeadlineDaysBeforeBeginDate')) {
             return 0;
         }
 
-        $secondsForUnregistration = \Tx_Oelib_Time::SECONDS_PER_DAY * $this->getConfValueInteger(
-            'unregistrationDeadlineDaysBeforeBeginDate'
-        );
+        $secondsForUnregistration = \Tx_Oelib_Time::SECONDS_PER_DAY
+            * $this->getConfValueInteger('unregistrationDeadlineDaysBeforeBeginDate');
 
         return $this->getBeginDateAsTimestamp() - $secondsForUnregistration;
     }
