@@ -130,36 +130,28 @@ final class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends TestCase
         );
     }
 
-    public function testGetPlaceShortThrowsExceptionForInexistentPlaceUid()
+    /**
+     * @test
+     */
+    public function getPlaceShortForInexistentPlaceUidReturnsEmptyString()
     {
         $placeUid = $this->testingFramework->createRecord('tx_seminars_sites');
-        $this->expectException(\Tx_Oelib_Exception_NotFound::class);
-        $this->expectExceptionMessage(
-            'The related place with the UID ' . $placeUid . ' could not be found in the DB.'
-        );
-
         $this->subject->setPlace($placeUid);
         \Tx_Oelib_Db::delete('tx_seminars_sites', 'uid = ' . $placeUid);
 
-        $this->subject->getPlaceShort();
+        self::assertSame('', $this->subject->getPlaceShort());
     }
 
-    public function testGetPlaceShortThrowsExceptionForDeletedPlace()
+    /**
+     * @test
+     */
+    public function getPlaceShortForDeletedPlaceReturnsEmptyString()
     {
-        $placeUid = $this->testingFramework->createRecord(
-            'tx_seminars_sites',
-            ['deleted' => 1]
-        );
-        $this->expectException(
-            \Tx_Oelib_Exception_NotFound::class
-        );
-        $this->expectExceptionMessage(
-            'The related place with the UID ' . $placeUid . ' could not be found in the DB.'
-        );
+        $placeUid = $this->testingFramework->createRecord('tx_seminars_sites', ['deleted' => 1]);
 
         $this->subject->setPlace($placeUid);
 
-        $this->subject->getPlaceShort();
+        self::assertSame('', $this->subject->getPlaceShort());
     }
 
     //////////////////////////////////////////

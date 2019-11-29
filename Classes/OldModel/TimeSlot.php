@@ -31,39 +31,31 @@ class Tx_Seminars_OldModel_TimeSlot extends \Tx_Seminars_OldModel_AbstractTimeSp
             '',
             'sorting'
         );
+
         return $bag;
     }
 
     /**
-     * Gets the speaker UIDs.
-     *
-     * @return int[] the speaker UIDs
+     * @return int[]
      */
     public function getSpeakersUids(): array
     {
+        $table = 'tx_seminars_timeslots_speakers_mm';
+        $rows = self::getConnectionForTable($table)
+            ->select(['uid_foreign'], $table, ['uid_local' => $this->getUid()])->fetchAll();
+
         $result = [];
-
-        $dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-            'uid_foreign',
-            'tx_seminars_timeslots_speakers_mm',
-            'uid_local=' . $this->getUid()
-        );
-
-        if ($dbResult) {
-            while ($speaker = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-                $result[] = (int)$speaker['uid_foreign'];
-            }
-            $GLOBALS['TYPO3_DB']->sql_free_result($dbResult);
+        foreach ($rows as $row) {
+            $result[] = (int)$row['uid_foreign'];
         }
 
         return $result;
     }
 
     /**
-     * Gets the speakers of the time slot as a plain text comma-separated list.
+     * Gets the speakers of the time slot as a plain-text comma-separated list.
      *
-     * @return string the comma-separated plain text list of speakers (or ''
-     *                if there was an error)
+     * @return string the comma-separated plain text list of speakers (or '' if there was an error)
      */
     public function getSpeakersShortCommaSeparated(): string
     {
@@ -73,18 +65,14 @@ class Tx_Seminars_OldModel_TimeSlot extends \Tx_Seminars_OldModel_AbstractTimeSp
             $result[] = $speaker->getTitle();
         }
 
-        return implode(', ', $result);
+        return \implode(', ', $result);
     }
 
     /**
      * Gets our place as plain text (just the name).
-     * Returns a localized string "will be announced" if the time slot has no
-     * place set.
+     * Returns a localized string "will be announced" if the time slot has no place set.
      *
-     * @return string our places or a localized string "will be announced" if this timeslot has no place assigned
-     *
-     * @throws \Tx_Oelib_Exception_Database
-     * @throws \Tx_Oelib_Exception_NotFound
+     * @return string our places or a localized string "will be announced" if this times lot has no place assigned
      */
     public function getPlaceShort(): string
     {
@@ -92,32 +80,17 @@ class Tx_Seminars_OldModel_TimeSlot extends \Tx_Seminars_OldModel_AbstractTimeSp
             return $this->translate('message_willBeAnnounced');
         }
 
-        $dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-            'title',
-            'tx_seminars_sites',
-            'uid=' . $this->getPlace() .
-            \Tx_Oelib_Db::enableFields('tx_seminars_sites')
-        );
-        if (!$dbResult) {
-            throw new \Tx_Oelib_Exception_Database('Database error', 1574008220);
-        }
+        $table = 'tx_seminars_sites';
+        $row = self::getConnectionForTable($table)
+            ->select(['title'], $table, ['uid' => $this->getPlace()])->fetch();
 
-        $dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-        $GLOBALS['TYPO3_DB']->sql_free_result($dbResult);
-        if (!$dbResultRow) {
-            throw new \Tx_Oelib_Exception_NotFound(
-                'The related place with the UID ' . $this->getPlace() . ' could not be found in the DB.',
-                1333291925
-            );
-        }
-
-        return $dbResultRow['title'];
+        return \is_array($row) ? $row['title'] : '';
     }
 
     /**
-     * Gets the place.
+     * Gets the place UID.
      *
-     * @return int the place UID
+     * @return int
      */
     public function getPlace(): int
     {
@@ -126,11 +99,9 @@ class Tx_Seminars_OldModel_TimeSlot extends \Tx_Seminars_OldModel_AbstractTimeSp
 
     /**
      * Gets the entry date and time as a formatted date. If the begin date of
-     * this timeslot is on the same day as the entry date, only the time will be
-     * returned.
+     * this time slot is on the same day as the entry date, only the time will be returned.
      *
-     * @return string the entry date and time (or the localized string "will be
-     *                announced" if no entry date is set)
+     * @return string the entry date and time (or the localized string "will be announced" if no entry date is set)
      */
     public function getEntryDate(): string
     {
@@ -141,22 +112,20 @@ class Tx_Seminars_OldModel_TimeSlot extends \Tx_Seminars_OldModel_AbstractTimeSp
         $beginDate = $this->getBeginDateAsTimestamp();
         $entryDate = $this->getRecordPropertyInteger('entry_date');
 
-        if (
-            strftime('%d-%m-%Y', $entryDate) != strftime('%d-%m-%Y', $beginDate)
-        ) {
+        if (\strftime('%d-%m-%Y', $entryDate) !== \strftime('%d-%m-%Y', $beginDate)) {
             $dateFormat = $this->getConfValueString('dateFormatYMD') . ' ';
         } else {
             $dateFormat = '';
         }
         $dateFormat .= $this->getConfValueString('timeFormat');
 
-        return strftime($dateFormat, $entryDate);
+        return \strftime($dateFormat, $entryDate);
     }
 
     /**
      * Checks whether the time slot has a entry date set.
      *
-     * @return bool TRUE if we have a entry date, FALSE otherwise
+     * @return bool
      */
     public function hasEntryDate(): bool
     {
@@ -167,16 +136,10 @@ class Tx_Seminars_OldModel_TimeSlot extends \Tx_Seminars_OldModel_AbstractTimeSp
      * Returns an associative array, containing field name/value pairs that need
      * to be updated in the database. Update means "set the title" so far.
      *
-     * @return string[] data to update the database entry of the timeslot, might be empty
+     * @return string[] data to update the database entry of the time slot, might be empty
      */
     public function getUpdateArray(): array
     {
-        return [
-            'title' => html_entity_decode(
-                $this->getDate(),
-                ENT_COMPAT,
-                'utf-8'
-            ),
-        ];
+        return ['title' => \html_entity_decode($this->getDate(), ENT_QUOTES | ENT_HTML5, 'utf-8')];
     }
 }
