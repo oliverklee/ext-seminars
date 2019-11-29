@@ -41,4 +41,79 @@ final class EventTest extends UnitTestCase
 
         self::assertInstanceOf(\Tx_Seminars_OldModel_Event::class, $result);
     }
+
+    /**
+     * @test
+     */
+    public function getAttendancesMinByDefaultReturnsZero()
+    {
+        self::assertSame(0, $this->subject->getAttendancesMin());
+    }
+
+    /**
+     * @test
+     */
+    public function getAttendancesMinReturnsAttendancesMin()
+    {
+        $number = 4;
+        $subject = \Tx_Seminars_OldModel_Event::fromData(['attendees_min' => $number]);
+
+        self::assertSame($number, $subject->getAttendancesMin());
+    }
+
+    /**
+     * @test
+     */
+    public function getAttendancesMaxByDefaultReturnsZero()
+    {
+        self::assertSame(0, $this->subject->getAttendancesMax());
+    }
+
+    /**
+     * @test
+     */
+    public function getAttendancesMaxReturnsAttendancesMax()
+    {
+        $number = 4;
+        $subject = \Tx_Seminars_OldModel_Event::fromData(['attendees_max' => $number]);
+
+        self::assertSame($number, $subject->getAttendancesMax());
+    }
+
+    /**
+     * @test
+     */
+    public function getOfflineRegistrationsByDefaultReturnsZero()
+    {
+        self::assertSame(0, $this->subject->getOfflineRegistrations());
+    }
+
+    /**
+     * @test
+     */
+    public function getOfflineRegistrationsReturnsOfflineRegistrations()
+    {
+        $number = 4;
+        $subject = \Tx_Seminars_OldModel_Event::fromData(['offline_attendees' => $number]);
+
+        self::assertSame($number, $subject->getOfflineRegistrations());
+    }
+
+    /**
+     * @test
+     */
+    public function hasOfflineRegistrationsInitiallyReturnsFalse()
+    {
+        self::assertFalse($this->subject->hasOfflineRegistrations());
+    }
+
+    /**
+     * @test
+     */
+    public function hasOfflineRegistrationsForOfflineRegistrationsReturnsTrue()
+    {
+        $subject = \Tx_Seminars_OldModel_Event::fromData(['offline_attendees' => 4]);
+
+        self::assertTrue($subject->hasOfflineRegistrations());
+    }
 }
