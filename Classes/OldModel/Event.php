@@ -4088,44 +4088,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     }
 
     /**
-     * Returns an array of UIDs for records of a given m:n table that contains
-     * relations to this event record.
-     *
-     * Example: To find out which places are related to this event, just call
-     * this method with the name of the seminars -> places m:n table. The result
-     * is an array that contains the UIDs of all the places that are related to
-     * this event.
-     *
-     * @param string $table the name of the m:n table to query, must not be empty
-     *
-     * @return int[] foreign record's UIDs, ordered by the field uid_foreign in the m:n table, may be empty
-     */
-    public function getRelatedMmRecordUids(string $table): array
-    {
-        $result = [];
-
-        // Fetches all the corresponding records for this event from the
-        // selected m:n table.
-        $dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-            'uid_foreign',
-            $table,
-            'uid_local=' . $this->getUid(),
-            '',
-            'sorting'
-        );
-
-        // Adds the uid to the result array when the DB result contains at least
-        // one entry.
-        if ($dbResult) {
-            while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-                $result[] = (int)$row['uid_foreign'];
-            }
-        }
-
-        return $result;
-    }
-
-    /**
      * Checks whether there's a (begin) date set or any time slots exist.
      * If there's an end date but no begin date, this function still will return
      * FALSE.

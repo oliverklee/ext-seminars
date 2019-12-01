@@ -39,6 +39,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - `EventSingleView` interface and `singleView` hook index (#338)
 
 ### Removed
+- Drop the unused `Event::getRelatedMmRecordUids` (#405)
 - Drop the creation of model instances from legacy DB result (#388)
 - Drop AbstractModel::recordExists (#381)
 - Drop the context-sensitive help (#358)
