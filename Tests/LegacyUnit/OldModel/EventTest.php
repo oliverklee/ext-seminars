@@ -3050,60 +3050,6 @@ final class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function getRelatedMmRecordUidsWithNoPlace()
-    {
-        self::assertSame(
-            [],
-            $this->subject->getRelatedMmRecordUids('tx_seminars_seminars_place_mm')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getRelatedMmRecordUidsWithOnePlace()
-    {
-        $uid = $this->addPlaceRelation(
-            [
-                'country' => 'ch',
-            ]
-        );
-
-        self::assertSame(
-            [$uid],
-            $this->subject->getRelatedMmRecordUids('tx_seminars_seminars_place_mm')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getRelatedMmRecordUidsWithTwoPlaces()
-    {
-        $uid1 = $this->addPlaceRelation(
-            [
-                'country' => 'ch',
-            ]
-        );
-        $uid2 = $this->addPlaceRelation(
-            [
-                'country' => 'de',
-            ]
-        );
-
-        $result = $this->subject->getRelatedMmRecordUids(
-            'tx_seminars_seminars_place_mm'
-        );
-        sort($result);
-        self::assertSame(
-            [$uid1, $uid2],
-            $result
-        );
-    }
-
     /*
      * Tests regarding the target groups
      */
