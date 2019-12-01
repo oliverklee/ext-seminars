@@ -1570,31 +1570,19 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             return '';
         }
 
-        $dbResultPaymentMethod = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-            'title, description',
-            'tx_seminars_payment_methods',
-            'uid = ' . $uid . \Tx_Oelib_Db::enableFields('tx_seminars_payment_methods')
-        );
-        if ($dbResultPaymentMethod === false) {
+        $table = 'tx_seminars_payment_methods';
+        $data = self::getConnectionForTable($table)->select(['*'], $table, ['uid' => $uid])->fetch();
+        if (!\is_array($data)) {
             return '';
         }
 
-        // We expect just one result.
-        $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultPaymentMethod);
-        if ($row === false) {
-            return '';
-        }
-
-        $title = (string)$row['title'];
-        $description = (string)$row['description'];
-
-        $result = $title;
+        $result = (string)$data['title'];
+        $description = (string)$data['description'];
         if ($description !== '') {
             $result .= ': ' . $description;
         }
-        $result .= LF . LF;
 
-        return $result;
+        return $result . "\n\n";
     }
 
     /**
@@ -1602,7 +1590,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * Returns an empty string if the corresponding payment method could not be retrieved.
      *
-     * @param int $uid the UID of a single payment method, must not be zero
+     * @param int $uid the UID of a single payment method, must be >= 0
      *
      * @return string the selected payment method as plain text (or '' if there is an error)
      */
@@ -1612,22 +1600,10 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             return '';
         }
 
-        $dbResultPaymentMethod = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-            'title',
-            'tx_seminars_payment_methods',
-            'uid = ' . $uid . \Tx_Oelib_Db::enableFields('tx_seminars_payment_methods')
-        );
-        if ($dbResultPaymentMethod === false) {
-            return '';
-        }
+        $table = 'tx_seminars_payment_methods';
+        $data = self::getConnectionForTable($table)->select(['*'], $table, ['uid' => $uid])->fetch();
 
-        // We expect just one result.
-        $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResultPaymentMethod);
-        if ($row === false) {
-            return '';
-        }
-
-        return $row['title'];
+        return \is_array($data) ? (string)$data['title'] : '';
     }
 
     /**
@@ -1662,18 +1638,11 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function getLanguageNameFromIsoCode(string $isoCode): string
     {
-        $languageName = '';
-        $dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-            'lg_name_local',
-            'static_languages',
-            'lg_iso_2="' . $isoCode . '"'
-        );
-        if ($dbResult !== false) {
-            $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-            $languageName = (string)$row['lg_name_local'];
-        }
+        $table = 'static_languages';
+        $data = self::getConnectionForTable($table)
+            ->select(['lg_name_local'], $table, ['lg_iso_2' => $isoCode])->fetch();
 
-        return $languageName;
+        return \is_array($data) ? (string)$data['lg_name_local'] : '';
     }
 
     /**
@@ -1718,8 +1687,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * Otherwise, an empty string will be returned.
      *
      * @return string the type of this event, will be empty if this event does not have a type
-     *
-     * @throws \Tx_Oelib_Exception_Database
      */
     public function getEventType(): string
     {
@@ -1727,25 +1694,11 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             return '';
         }
 
-        $dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-            'title',
-            'tx_seminars_event_types',
-            'uid = ' . $this->getTopicInteger('event_type') .
-            \Tx_Oelib_Db::enableFields('tx_seminars_event_types'),
-            '',
-            '',
-            '1'
-        );
+        $table = 'tx_seminars_event_types';
+        $data = self::getConnectionForTable($table)
+            ->select(['title'], $table, ['uid' => $this->getTopicInteger('event_type')])->fetch();
 
-        if (!$dbResult) {
-            throw new \Tx_Oelib_Exception_Database('Database error', 1574008188);
-        }
-        $dbResultRow = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-        if (!$dbResultRow) {
-            throw new \Tx_Oelib_Exception_Database('Database error', 1574008197);
-        }
-
-        return $dbResultRow['title'];
+        return \is_array($data) ? (string)$data['title'] : '';
     }
 
     /**
@@ -1946,8 +1899,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * Returns a string of our event's target group titles separated by a comma
      * (or an empty string if there aren't any).
      *
-     * @return string the target group titles of this seminar separated by
-     *                a comma (or an empty string)
+     * @return string the target group titles of this seminar separated by a comma (or an empty string)
      */
     public function getTargetGroupNames(): string
     {
@@ -1955,31 +1907,11 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             return '';
         }
 
-        $result = [];
-
-        $dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-            'tx_seminars_target_groups.title',
-            'tx_seminars_target_groups, tx_seminars_seminars_target_groups_mm',
-            'tx_seminars_seminars_target_groups_mm.uid_local = ' .
-            $this->getTopicOrSelfUid() . ' AND tx_seminars_target_groups' .
-            '.uid = tx_seminars_seminars_target_groups_mm.uid_foreign' .
-            \Tx_Oelib_Db::enableFields('tx_seminars_target_groups'),
-            '',
-            'tx_seminars_seminars_target_groups_mm.sorting'
-        );
-
-        if ($dbResult) {
-            while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-                $result[] = $row['title'];
-            }
-        }
-
-        return implode(', ', $result);
+        return \implode(', ', $this->getTargetGroupsAsArray());
     }
 
     /**
-     * Returns an array of our events's target group titles (or an empty array
-     * if there are none).
+     * Returns an array of our events's target group titles (or an empty array if there are none).
      *
      * @return string[] the target groups of this event (or an empty array)
      */
@@ -1989,27 +1921,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             return [];
         }
 
-        $result = [];
-
-        $dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-            'tx_seminars_target_groups.title',
-            'tx_seminars_target_groups, tx_seminars_seminars_target_groups_mm',
-            'tx_seminars_seminars_target_groups_mm.uid_local = ' .
-            $this->getTopicOrSelfUid() . ' AND ' .
-            'tx_seminars_target_groups.uid = ' .
-            'tx_seminars_seminars_target_groups_mm.uid_foreign' .
-            \Tx_Oelib_Db::enableFields('tx_seminars_target_groups'),
-            '',
-            'tx_seminars_seminars_target_groups_mm.sorting'
-        );
-
-        if ($dbResult) {
-            while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult)) {
-                $result[] = (string)$row['title'];
-            }
-        }
-
-        return $result;
+        return $this->getMmRecordTitles('tx_seminars_target_groups', 'tx_seminars_seminars_target_groups_mm');
     }
 
     /**
@@ -2545,27 +2457,17 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Checks whether a certain user already is registered for this seminar.
      *
-     * @param int $userUid UID of the FE user to check, must be > 0
+     * @param int $uid UID of the FE user to check, must be > 0
      *
-     * @return bool TRUE if the user already is registered, FALSE otherwise
+     * @return bool whether if the user already is registered
      */
-    public function isUserRegistered(int $userUid): bool
+    public function isUserRegistered(int $uid): bool
     {
-        $result = false;
+        $table = 'tx_seminars_attendances';
+        $count = self::getConnectionForTable($table)
+            ->count('*', $table, ['seminar' => $this->getUid(), 'user' => $uid]);
 
-        $dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-            'COUNT(*) AS num',
-            'tx_seminars_attendances',
-            'seminar = ' . $this->getUid() . ' AND user = ' . $userUid .
-            \Tx_Oelib_Db::enableFields('tx_seminars_attendances')
-        );
-
-        if ($dbResult) {
-            $numberOfRegistrations = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-            $result = ($numberOfRegistrations['num'] > 0);
-        }
-
-        return $result;
+        return $count > 0;
     }
 
     /**
@@ -2573,13 +2475,11 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @param int $feUserUid UID of the FE user to check, must be > 0
      *
-     * @return string empty string if everything is OK, else a localized
-     *                error message
+     * @return string empty string if everything is OK, else a localized error message
      */
     public function isUserRegisteredMessage($feUserUid): string
     {
-        return $this->isUserRegistered($feUserUid)
-            ? $this->translate('message_alreadyRegistered') : '';
+        return $this->isUserRegistered($feUserUid) ? $this->translate('message_alreadyRegistered') : '';
     }
 
     /**
@@ -2590,33 +2490,25 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @param int $userUid UID of the FE user to check, must be > 0
      * @param int $defaultEventVipsFeGroupUid UID of the default event VIP front-end user group
      *
-     * @return bool TRUE if the user is a VIP for this seminar,
-     *                 FALSE otherwise
+     * @return bool whether the user is a VIP for this event
      */
     public function isUserVip(int $userUid, int $defaultEventVipsFeGroupUid): bool
     {
-        $result = false;
         $isDefaultVip = $defaultEventVipsFeGroupUid !== 0
             && \Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()
             && \Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser()
                 ->hasGroupMembership((string)$defaultEventVipsFeGroupUid);
 
         if ($isDefaultVip) {
-            $result = true;
+            $isVip = true;
         } else {
-            $dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-                'COUNT(*) AS num',
-                'tx_seminars_seminars_feusers_mm',
-                'uid_local=' . $this->getUid() . ' AND uid_foreign=' . $userUid
-            );
-
-            if ($dbResult) {
-                $numberOfVips = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-                $result = $numberOfVips['num'] > 0;
-            }
+            $table = 'tx_seminars_seminars_feusers_mm';
+            $count = self::getConnectionForTable($table)
+                ->count('*', $table, ['uid_local' => $this->getUid(), 'uid_foreign' => $userUid]);
+            $isVip = $count > 0;
         }
 
-        return $result;
+        return $isVip;
     }
 
     /**
@@ -2722,7 +2614,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         $registrationsVipListPID = 0,
         $defaultEventVipsFeGroupID = 0
     ): bool {
-        if (!Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
+        if (!\Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
             return false;
         }
 
@@ -2910,7 +2802,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         if ($accessLevel === 'world') {
             return '';
         }
-        if (!Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
+        if (!\Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
             return $this->translate('message_notLoggedIn');
         }
         if (!$this->canViewRegistrationsList($whichPlugin, $accessLevel)) {
@@ -3156,10 +3048,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      */
     private function loadTopic()
     {
-        /** @var \Tx_Seminars_OldModel_Event|null $topic */
-        $result = self::fromUid($this->getRecordPropertyInteger('topic'));
-
-        return $result;
+        return self::fromUid($this->getRecordPropertyInteger('topic'));
     }
 
     /**
@@ -3852,16 +3741,16 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * For this, only events that forbid multiple registrations are checked.
      *
-     * @param int $feUserUid UID of the FE user to check, must be > 0
+     * @param int $uid UID of the FE user to check, must be > 0
      *
      * @return bool true if user is blocked by another registration, false otherwise
      *
      * @throws \InvalidArgumentException
      */
-    public function isUserBlocked($feUserUid): bool
+    public function isUserBlocked($uid): bool
     {
-        if ($feUserUid <= 0) {
-            throw new \InvalidArgumentException('$feUserUid must be > 0, but actually is: ' . $feUserUid, 1533310684);
+        if ($uid <= 0) {
+            throw new \InvalidArgumentException('$uid must be > 0, but actually is: ' . $uid, 1533310684);
         }
         if ($this->allowsMultipleRegistrations() || $this->skipCollisionCheck() || !$this->hasDate()) {
             return false;
@@ -3872,7 +3761,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         // Filter to those events to which the given FE user is registered.
         $queryWhere .= ' AND tx_seminars_seminars.uid = ' .
             'tx_seminars_attendances.seminar' .
-            ' AND tx_seminars_attendances.user = ' . $feUserUid;
+            ' AND tx_seminars_attendances.user = ' . $uid;
 
         /** @var \Tx_Seminars_Bag_Event $blockingEvents */
         $blockingEvents = GeneralUtility::makeInstance(\Tx_Seminars_Bag_Event::class, $queryWhere, $additionalTables);
@@ -3903,14 +3792,13 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             $queryWhereParts[] = $this->getQueryForCollidingEventsForTimeSpan($timeSpanBegin, $timeSpanEnd);
         }
 
-        return '(' . implode(' OR ', $queryWhereParts) . ')';
+        return '(' . \implode(' OR ', $queryWhereParts) . ')';
     }
 
     /**
      * Checks whether the collision check should be skipped for this event.
      *
-     * @return bool TRUE if the collision check should be skipped for
-     *                 this event, FALSE otherwise
+     * @return bool whether the collision check should be skipped for this event
      */
     private function skipCollisionCheck(): bool
     {
@@ -3930,7 +3818,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string WHERE clause (without the "WHERE" keyword), will not be empty
      */
-    private function getQueryForCollidingEventsForTimeSpan($beginDate, $endDate): string
+    private function getQueryForCollidingEventsForTimeSpan(int $beginDate, int $endDate): string
     {
         return 'tx_seminars_seminars.uid <> ' . $this->getUid() .
             ' AND allows_multiple_registrations = 0' .
@@ -3972,7 +3860,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string
      */
-    private function getQueryPartForCollidingEventWithTimeSlots($beginDate, $endDate): string
+    private function getQueryPartForCollidingEventWithTimeSlots(int $beginDate, int $endDate): string
     {
         return '(timeslots != 0 AND EXISTS (' .
             'SELECT * FROM tx_seminars_timeslots AS t ' .
@@ -4113,8 +4001,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Returns our begin date and time as a UNIX timestamp.
      *
-     * @return int our begin date and time as a UNIX timestamp or 0 if
-     *                 we don't have a begin date
+     * @return int our begin date and time as a UNIX timestamp or 0 if we don't have a begin date
      */
     public function getBeginDateAsTimestamp(): int
     {
@@ -4122,23 +4009,12 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             return parent::getBeginDateAsTimestamp();
         }
 
-        $result = 0;
+        $table = 'tx_seminars_timeslots';
+        $query = self::getQueryBuilderForTable($table);
+        $result = $query->addSelectLiteral($query->expr()->min('begin_date'))
+            ->from($table)->execute()->fetch();
 
-        $dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-            'MIN(tx_seminars_timeslots.begin_date) AS begin_date',
-            'tx_seminars_timeslots',
-            'tx_seminars_timeslots.seminar = ' . $this->getUid() .
-            \Tx_Oelib_Db::enableFields('tx_seminars_timeslots')
-        );
-
-        if ($dbResult) {
-            $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-            if ($row !== false) {
-                $result = (int)$row['begin_date'];
-            }
-        }
-
-        return $result;
+        return \is_array($result) ? (int)$result['begin_date'] : 0;
     }
 
     /**
@@ -4152,26 +4028,12 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             return parent::getEndDateAsTimestamp();
         }
 
-        $result = 0;
+        $table = 'tx_seminars_timeslots';
+        $query = self::getQueryBuilderForTable($table);
+        $result = $query->addSelectLiteral($query->expr()->max('end_date'))
+            ->from($table)->execute()->fetch();
 
-        $dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-            'tx_seminars_timeslots.end_date AS end_date',
-            'tx_seminars_timeslots',
-            'tx_seminars_timeslots.seminar = ' . $this->getUid() .
-            \Tx_Oelib_Db::enableFields('tx_seminars_timeslots'),
-            '',
-            'tx_seminars_timeslots.begin_date DESC',
-            '0,1'
-        );
-
-        if ($dbResult) {
-            $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-            if ($row !== false) {
-                $result = (int)$row['end_date'];
-            }
-        }
-
-        return $result;
+        return \is_array($result) ? (int)$result['end_date'] : 0;
     }
 
     /**
@@ -4193,14 +4055,10 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             return $this->getNumberOfPlaces();
         }
 
-        // Removes all place relations of the current event.
-        \Tx_Oelib_Db::delete(
-            'tx_seminars_seminars_place_mm',
-            'tx_seminars_seminars_place_mm.uid_local = ' . $this->getUid()
-        );
+        $table = 'tx_seminars_seminars_place_mm';
+        self::getConnectionForTable($table)->delete($table, ['uid_local' => $this->getUid()]);
 
-        // Creates an array with all place UIDs which should be related to this
-        // event.
+        // Creates an array with all place UIDs which should be related to this event.
         $placesOfTimeSlots = [];
         /** @var \Tx_Seminars_OldModel_TimeSlot $timeSlot */
         foreach ($timeSlotBag as $timeSlot) {
@@ -4209,10 +4067,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             }
         }
 
-        return $this->createMmRecords(
-            'tx_seminars_seminars_place_mm',
-            $placesOfTimeSlots
-        );
+        return $this->createMmRecords('tx_seminars_seminars_place_mm', $placesOfTimeSlots);
     }
 
     /**

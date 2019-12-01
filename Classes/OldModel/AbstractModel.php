@@ -82,6 +82,7 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
      */
     public static function fromData(array $data): AbstractModel
     {
+        /** @var AbstractModel $model */
         $model = GeneralUtility::makeInstance(static::class);
         $model->setData($data);
 
@@ -431,8 +432,12 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
                 continue;
             }
 
-            $data = \array_replace($dataTemplate, ['uid_foreign' => (int)$foreignUid, 'sorting' => $recordCount + 1]);
-            $recordCount += $connection->insert($mmTable, $data);
+            $data = \array_merge(
+                $dataTemplate,
+                ['uid_foreign' => (int)$foreignUid, 'sorting' => $recordCount + 1]
+            );
+            $connection->insert($mmTable, $data);
+            $recordCount++;
         }
 
         return $recordCount;
@@ -577,7 +582,7 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
     {
         $titles = [];
         foreach ($this->getMmRecordsByUid($foreignTable, $mmTable, $uid) as $row) {
-            $titles[] = $row['title'];
+            $titles[] = (string)$row['title'];
         }
 
         return $titles;
