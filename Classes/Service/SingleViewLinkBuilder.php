@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use TYPO3\CMS\Core\TimeTracker\NullTimeTracker;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -48,14 +47,11 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
      *
      * @param \Tx_Seminars_Model_Event $event the event to create the link for
      *
-     * @return string
-     *         the absolute URL for the event's single view, not htmlspecialchared
+     * @return string the absolute URL for the event's single view, not htmlspecialchared
      */
     public function createAbsoluteUrlForEvent(\Tx_Seminars_Model_Event $event): string
     {
-        return GeneralUtility::locationHeaderUrl(
-            $this->createRelativeUrlForEvent($event)
-        );
+        return GeneralUtility::locationHeaderUrl($this->createRelativeUrlForEvent($event));
     }
 
     /**
@@ -114,8 +110,6 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
     {
         $this->suppressFrontEndCookies();
 
-        $GLOBALS['TT'] = GeneralUtility::makeInstance(NullTimeTracker::class);
-
         /** @var TypoScriptFrontendController $frontEnd */
         $frontEnd = GeneralUtility::makeInstance(
             TypoScriptFrontendController::class,
@@ -125,8 +119,6 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
         );
 
         // simulates a normal FE without any logged-in FE or BE user
-        $frontEnd->beUserLogin = false;
-        $frontEnd->workspacePreview = '';
         $frontEnd->initFEuser();
         $frontEnd->determineId();
         $frontEnd->initTemplate();
@@ -175,9 +167,7 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
     /**
      * Checks whether there is a single view page set in the configuration.
      *
-     * @return bool
-     *         TRUE if a single view page has been set in the configuration,
-     *         FALSE otherwise
+     * @return bool whether a single view page has been set in the configuration
      */
     protected function configurationHasSingleViewPage(): bool
     {
@@ -192,13 +182,12 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
      *         the single view page UID from the configuration, will be 0 if no
      *         page UID has been set
      */
-    protected function getSingleViewPageFromConfiguration()
+    protected function getSingleViewPageFromConfiguration(): int
     {
-        if ($this->plugin !== null) {
+        if ($this->getPlugin() instanceof \Tx_Oelib_TemplateHelper) {
             $result = $this->getPlugin()->getConfValueInteger('detailPID');
         } else {
-            $result = \Tx_Oelib_ConfigurationRegistry
-                ::get('plugin.tx_seminars_pi1')->getAsInteger('detailPID');
+            $result = \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')->getAsInteger('detailPID');
         }
 
         return $result;
