@@ -49,6 +49,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop support for TYPO3 7.6 (#248, #272, #280)
 
 ### Fixed
+- Stop using the deprecated `NullTimeTracker` (#410)
 - Move fragile tests to the new testing framework (#384, #389, #390, #391, #392, #396)
 - Internally store boolean properties as integers (#386)
 - Convert the old model DB accesses to the ConnectionPool
