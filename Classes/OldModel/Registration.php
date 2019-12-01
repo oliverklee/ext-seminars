@@ -278,13 +278,12 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
     /**
      * Gets the complete FE user data as an array.
      *
-     * The attendee's user data (from fe_users) will be written to $this->userData.
+     * The attendee's user data (from fe_users) will be written to `$this->userData`.
      *
-     * $this->userData will be null if retrieving the user data fails.
+     * `$this->userData` will be null if retrieving the user data fails.
      *
      * @return void
      *
-     * @throws \Tx_Oelib_Exception_Database
      * @throws \Tx_Oelib_Exception_NotFound
      */
     private function retrieveUserData()
@@ -295,23 +294,16 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
             return;
         }
 
-        $dbResult = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-            '*',
-            'fe_users',
-            'uid = ' . $uid . \Tx_Oelib_Db::enableFields('fe_users')
-        );
-        if ($dbResult === false) {
-            throw new \Tx_Oelib_Exception_Database('Database error', 1574008202);
-        }
-        $userData = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($dbResult);
-        if ($userData === false) {
+        $table = 'fe_users';
+        $data = self::getConnectionForTable($table)->select(['*'], $table, ['uid' => $uid])->fetch();
+        if (!\is_array($data)) {
             throw new \Tx_Oelib_Exception_NotFound(
                 'The FE user with the UID ' . $uid . ' could not be retrieved.',
                 1390065114
             );
         }
 
-        $this->setUserData($userData);
+        $this->setUserData($data);
     }
 
     /**
@@ -504,7 +496,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
     /**
      * Gets the attendee's UID.
      *
-     * @return int the attendee's feuser uid
+     * @return int the attendee's FE user uid
      */
     public function getUser(): int
     {
@@ -1031,7 +1023,10 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
             return '';
         }
 
-        return \implode("\n", $this->getMmRecordTitles('tx_seminars_checkboxes', 'tx_seminars_attendances_checkboxes_mm'));
+        return \implode(
+            "\n",
+            $this->getMmRecordTitles('tx_seminars_checkboxes', 'tx_seminars_attendances_checkboxes_mm')
+        );
     }
 
     /**
