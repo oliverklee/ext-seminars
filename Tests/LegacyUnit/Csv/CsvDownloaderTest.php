@@ -78,19 +78,15 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends TestCase
     }
 
     /**
-     * Retrieves the localization for the given locallang key and then strips
-     * the trailing colon from the localization
+     * Retrieves the localization for the given locallang key and then strips the trailing colon from it.
      *
-     * @param string $locallangKey
-     *        the locallang key with the localization to remove the trailing
-     *        colon from, must not be empty and the localization must have a
-     *        trailing colon
+     * @param string $key the locallang key with the localization to remove the trailing colon from
      *
      * @return string locallang string with the removed trailing colon, will not be empty
      */
-    private function localizeAndRemoveColon(string $locallangKey): string
+    private function localizeAndRemoveColon(string $key): string
     {
-        return \substr($this->getLanguageService()->getLL($locallangKey), 0, -1);
+        return \rtrim($this->getLanguageService()->getLL($key), ':');
     }
 
     /*
@@ -396,7 +392,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfEventsDoesNotWrapHeadlineFieldsInDoubleQuotes()
+    public function createAndOutputListOfEventsDoesNotWrapHeaderFieldsInDoubleQuotes()
     {
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'description,title');
 
@@ -418,7 +414,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfEventsSeparatesHeadlineFieldsWithSemicolons()
+    public function createAndOutputListOfEventsSeparatesHeaderFieldsWithSemicolons()
     {
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'description,title');
 
@@ -432,32 +428,6 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends TestCase
     /*
      * Tests for the CSV export of registrations.
      */
-
-    /**
-     * @test
-     */
-    public function createListOfRegistrationsIsEmptyForNonExistentEvent()
-    {
-        self::assertSame(
-            '',
-            $this->subject->createListOfRegistrations($this->eventUid + 9999)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function createListOfRegistrationsForZeroRecordsHasOnlyHeaderLine()
-    {
-        $this->configuration->setAsString('fieldsFromFeUserForCsv', 'name');
-        $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'uid');
-
-        self::assertSame(
-            $this->localizeAndRemoveColon('LGL.name') . ';' .
-            $this->localizeAndRemoveColon('tx_seminars_attendances.uid') . CRLF,
-            $this->subject->createListOfRegistrations($this->eventUid)
-        );
-    }
 
     /**
      * @test
@@ -1123,7 +1093,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfRegistrationsDoesNotWrapHeadlineFieldsInDoubleQuotes()
+    public function createAndOutputListOfRegistrationsDoesNotWrapHeaderFieldsInDoubleQuotes()
     {
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'address');
 
@@ -1143,7 +1113,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfRegistrationsSeparatesHeadlineFieldsWithSemicolons()
+    public function createAndOutputListOfRegistrationsSeparatesHeaderFieldsWithSemicolons()
     {
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'address,title');
 
@@ -1157,7 +1127,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createListOfRegistrationsForConfigurationAttendanceCsvFieldsEmptyDoesNotAddSemicolonOnEndOfHeadline()
+    public function createListOfRegistrationsForConfigurationAttendanceCsvFieldsEmptyDoesNotAddSemicolonOnEndOfHeader()
     {
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', '');
         $this->configuration->setAsString('fieldsFromFeUserForCsv', 'name');
@@ -1171,29 +1141,13 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createListOfRegistrationsForConfigurationFeUserCsvFieldsEmptyDoesNotAddSemicolonAtBeginningOfHeadline()
+    public function createListOfRegistrationsForConfigurationFeUserCsvFieldsEmptyDoesNotAddSemicolonAtBeginningOfHeader()
     {
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'address');
         $this->configuration->setAsString('fieldsFromFeUserForCsv', '');
 
         self::assertNotContains(
             ';address',
-            $this->subject->createAndOutputListOfRegistrations($this->eventUid)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function createListOfRegistrationsForBothConfigurationFieldsNotEmptyAddsSemicolonBetweenConfigurationFields()
-    {
-        $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'address');
-        $this->configuration->setAsString('fieldsFromFeUserForCsv', 'name');
-
-        self::assertContains(
-            $this->localizeAndRemoveColon(
-                'LGL.name'
-            ) . ';' . $this->localizeAndRemoveColon('tx_seminars_attendances.address'),
             $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
     }
@@ -1342,7 +1296,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfRegistrationsForWebModeNotUsesFeUserFieldsFromEmailConfiguration()
+    public function createAndOutputListOfRegistrationsForWebModeNotUsesUserFieldsFromEmailConfiguration()
     {
         $this->configuration->setAsString('fieldsFromFeUserForEmailCsv', 'email');
         $this->configuration->setAsString('fieldsFromFeUserForCsv', 'name');
@@ -1385,7 +1339,7 @@ class Tx_Seminars_Tests_Unit_Csv_CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfRegistrationsForWebModeNotUsesRegistrationsOnQueueSettingFromEmailConfiguration()
+    public function createAndOutputListOfRegistrationsForWebModeNotUsesRegistrationsOnQueueSettingFromConfiguration()
     {
         $this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInEmailCsv', true);
         $this->configuration->setAsString('fieldsFromAttendanceForEmailCsv', 'uid');
