@@ -34,7 +34,7 @@ final class EventMapperTest extends FunctionalTestCase
     /**
      * @return void
      */
-    private function assertContainsModelWithUid(\Tx_Oelib_List $models, int $uid)
+    private static function assertContainsModelWithUid(\Tx_Oelib_List $models, int $uid)
     {
         self::assertTrue($models->hasUid($uid));
     }
@@ -42,7 +42,7 @@ final class EventMapperTest extends FunctionalTestCase
     /**
      * @return void
      */
-    private function assertNotContainsModelWithUid(\Tx_Oelib_List $models, int $uid)
+    private static function assertNotContainsModelWithUid(\Tx_Oelib_List $models, int $uid)
     {
         self::assertFalse($models->hasUid($uid));
     }
@@ -81,7 +81,7 @@ final class EventMapperTest extends FunctionalTestCase
 
         $result = $this->subject->findForRegistrationDigestEmail();
 
-        $this->assertNotContainsModelWithUid($result, 1);
+        self::assertNotContainsModelWithUid($result, 1);
     }
 
     /**
@@ -93,7 +93,7 @@ final class EventMapperTest extends FunctionalTestCase
 
         $result = $this->subject->findForRegistrationDigestEmail();
 
-        $this->assertNotContainsModelWithUid($result, 2);
+        self::assertNotContainsModelWithUid($result, 2);
     }
 
     /**
@@ -105,7 +105,7 @@ final class EventMapperTest extends FunctionalTestCase
 
         $result = $this->subject->findForRegistrationDigestEmail();
 
-        $this->assertContainsModelWithUid($result, 3);
+        self::assertContainsModelWithUid($result, 3);
     }
 
     /**
@@ -116,8 +116,8 @@ final class EventMapperTest extends FunctionalTestCase
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
         $result = $this->subject->findForRegistrationDigestEmail();
-        $this->assertContainsModelWithUid($result, 3);
-        $this->assertContainsModelWithUid($result, 4);
+        self::assertContainsModelWithUid($result, 3);
+        self::assertContainsModelWithUid($result, 4);
 
         $uids = GeneralUtility::intExplode(',', $result->getUids(), true);
         $indexOfLaterEvent = \array_search(3, $uids, true);
@@ -135,7 +135,7 @@ final class EventMapperTest extends FunctionalTestCase
 
         $result = $this->subject->findForRegistrationDigestEmail();
 
-        $this->assertContainsModelWithUid($result, 4);
+        self::assertContainsModelWithUid($result, 4);
     }
 
     /**
@@ -147,7 +147,7 @@ final class EventMapperTest extends FunctionalTestCase
 
         $result = $this->subject->findForRegistrationDigestEmail();
 
-        $this->assertNotContainsModelWithUid($result, 5);
+        self::assertNotContainsModelWithUid($result, 5);
     }
 
     /**
@@ -159,7 +159,7 @@ final class EventMapperTest extends FunctionalTestCase
 
         $result = $this->subject->findForRegistrationDigestEmail();
 
-        $this->assertContainsModelWithUid($result, 8);
+        self::assertContainsModelWithUid($result, 8);
     }
 
     /**
@@ -171,7 +171,7 @@ final class EventMapperTest extends FunctionalTestCase
 
         $result = $this->subject->findForRegistrationDigestEmail();
 
-        $this->assertContainsModelWithUid($result, 9);
+        self::assertContainsModelWithUid($result, 9);
     }
 
     /**
@@ -183,7 +183,7 @@ final class EventMapperTest extends FunctionalTestCase
 
         $result = $this->subject->findForRegistrationDigestEmail();
 
-        $this->assertNotContainsModelWithUid($result, 10);
+        self::assertNotContainsModelWithUid($result, 10);
     }
 
     /**
@@ -195,7 +195,7 @@ final class EventMapperTest extends FunctionalTestCase
 
         $result = $this->subject->findForRegistrationDigestEmail();
 
-        $this->assertNotContainsModelWithUid($result, 11);
+        self::assertNotContainsModelWithUid($result, 11);
     }
 
     /**
@@ -207,7 +207,7 @@ final class EventMapperTest extends FunctionalTestCase
 
         $result = $this->subject->findForRegistrationDigestEmail();
 
-        $this->assertNotContainsModelWithUid($result, 7);
+        self::assertNotContainsModelWithUid($result, 7);
     }
 
     /**
@@ -219,6 +219,6 @@ final class EventMapperTest extends FunctionalTestCase
 
         $result = $this->subject->findForRegistrationDigestEmail();
 
-        $this->assertNotContainsModelWithUid($result, 6);
+        self::assertNotContainsModelWithUid($result, 6);
     }
 }

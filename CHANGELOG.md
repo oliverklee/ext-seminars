@@ -49,6 +49,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop support for TYPO3 7.6 (#248, #272, #280)
 
 ### Fixed
+- Fix failing speaker bag tests in 9.5 (#413)
 - Fix a failing EventMapper test in 9.5 (#412)
 - Stop using the deprecated `NullTimeTracker` (#410)
 - Move fragile tests to the new testing framework (#384, #389, #390, #391, #392, #396)
