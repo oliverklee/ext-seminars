@@ -50,7 +50,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
      */
     public function limitToEventsWithVacanciesForEventWithVacanciesAndOnlyOfflineAttendeesFindsThisEvent()
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
         $this->subject->limitToEventsWithVacancies();
         $bag = $this->subject->build();
@@ -63,7 +63,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
      */
     public function limitToEventsWithVacanciesForEventWithOneVacancyFindsThisEvent()
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
         $this->subject->limitToEventsWithVacancies();
         $bag = $this->subject->build();

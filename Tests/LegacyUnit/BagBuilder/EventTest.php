@@ -63,22 +63,6 @@ class Tx_Seminars_Tests_Unit_BagBuilder_EventTest extends TestCase
         self::assertInstanceOf(AbstractBag::class, $bag);
     }
 
-    /**
-     * @test
-     */
-    public function builderIgnoresHiddenEventsByDefault()
-    {
-        $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            ['hidden' => 1]
-        );
-        $bag = $this->subject->build();
-
-        self::assertTrue(
-            $bag->isEmpty()
-        );
-    }
-
     public function testBuilderFindsHiddenEventsInBackEndMode()
     {
         $this->testingFramework->createRecord(

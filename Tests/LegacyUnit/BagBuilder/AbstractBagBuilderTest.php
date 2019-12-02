@@ -410,92 +410,6 @@ class AbstractBagBuilderTest extends TestCase
     // Tests concerning hidden/deleted/timed etc. records.
     ////////////////////////////////////////////////////////
 
-    public function testBuilderIgnoresHiddenRecordsByDefault()
-    {
-        $this->testingFramework->createRecord(
-            'tx_seminars_test',
-            ['hidden' => 1]
-        );
-        $bag = $this->subject->build();
-
-        self::assertTrue(
-            $bag->isEmpty()
-        );
-    }
-
-    public function testBuilderFindsHiddenRecordsInBackEndMode()
-    {
-        $this->testingFramework->createRecord(
-            'tx_seminars_test',
-            ['hidden' => 1]
-        );
-
-        $this->subject->setBackEndMode();
-        $bag = $this->subject->build();
-
-        self::assertEquals(
-            1,
-            $bag->count()
-        );
-    }
-
-    public function testBuilderIgnoresTimedRecordsByDefault()
-    {
-        $this->testingFramework->createRecord(
-            'tx_seminars_test',
-            ['endtime' => $GLOBALS['SIM_EXEC_TIME'] - 1000]
-        );
-        $bag = $this->subject->build();
-
-        self::assertTrue(
-            $bag->isEmpty()
-        );
-    }
-
-    public function testBuilderFindsTimedRecordsInBackEndMode()
-    {
-        $this->testingFramework->createRecord(
-            'tx_seminars_test',
-            ['endtime' => $GLOBALS['SIM_EXEC_TIME'] - 1000]
-        );
-
-        $this->subject->setBackEndMode();
-        $bag = $this->subject->build();
-
-        self::assertEquals(
-            1,
-            $bag->count()
-        );
-    }
-
-    public function testBuilderIgnoresDeletedRecordsByDefault()
-    {
-        $this->testingFramework->createRecord(
-            'tx_seminars_test',
-            ['deleted' => 1]
-        );
-        $bag = $this->subject->build();
-
-        self::assertTrue(
-            $bag->isEmpty()
-        );
-    }
-
-    public function testBuilderIgnoresDeletedRecordsInBackEndMode()
-    {
-        $this->testingFramework->createRecord(
-            'tx_seminars_test',
-            ['deleted' => 1]
-        );
-
-        $this->subject->setBackEndMode();
-        $bag = $this->subject->build();
-
-        self::assertTrue(
-            $bag->isEmpty()
-        );
-    }
-
     public function testWhereClauseInitiallyIsNotEmpty()
     {
         self::assertNotEquals(
@@ -656,34 +570,6 @@ class AbstractBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_test',
             ['title' => 'bar', 'pid' => $this->dummySysFolderPid]
-        );
-        $bag = $this->subject->build();
-
-        self::assertTrue(
-            $bag->isEmpty()
-        );
-    }
-
-    public function testLimitToTitleStillExcludesHiddenRecords()
-    {
-        $this->subject->limitToTitle('foo');
-        $this->testingFramework->createRecord(
-            'tx_seminars_test',
-            ['title' => 'foo', 'hidden' => 1]
-        );
-        $bag = $this->subject->build();
-
-        self::assertTrue(
-            $bag->isEmpty()
-        );
-    }
-
-    public function testLimitToTitleStillExcludesDeletedRecords()
-    {
-        $this->subject->limitToTitle('foo');
-        $this->testingFramework->createRecord(
-            'tx_seminars_test',
-            ['title' => 'foo', 'deleted' => 1]
         );
         $bag = $this->subject->build();
 
