@@ -11,7 +11,7 @@ use Nimut\TestingFramework\TestCase\FunctionalTestCase;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-final class RegistrationTest extends FunctionalTestCase
+final class RegistrationMapperTest extends FunctionalTestCase
 {
     /**
      * @var string[]
