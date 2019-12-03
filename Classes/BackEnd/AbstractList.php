@@ -108,14 +108,14 @@ abstract class AbstractList
             return '';
         }
 
-        $params = '&edit[' . $this->tableName . '][' . $uid . ']=edit';
+        $urlParameters = '&edit[' . $this->tableName . '][' . $uid . ']=edit';
         $langEdit = \htmlspecialchars($this->getLanguageService()->getLL('edit'), ENT_QUOTES | ENT_HTML5);
         $icon = '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') .
             'Resources/Public/Icons/Edit.gif" alt="' . $langEdit . '" class="icon" />';
 
-        $editOnClick = BackendUtility::editOnClick($params);
+        $actionUrl = BackendUtility::editOnClick($urlParameters);
         $result = '<a class="btn btn-default" href="#" onclick="' .
-            \htmlspecialchars($editOnClick, ENT_QUOTES | ENT_HTML5)
+            \htmlspecialchars($actionUrl, ENT_QUOTES | ENT_HTML5)
             . '" title="' . $langEdit . '">' . $icon . '</a>';
 
         return $result;
@@ -136,7 +136,7 @@ abstract class AbstractList
         $languageService = $this->getLanguageService();
 
         if ($this->doesUserHaveAccess($pageUid) && $this->getBackEndUser()->check('tables_modify', $this->tableName)) {
-            $params = '&cmd[' . $this->tableName . '][' . $uid . '][delete]=1';
+            $urlParameters = '&cmd[' . $this->tableName . '][' . $uid . '][delete]=1';
 
             $referenceWarning = BackendUtility::referenceCount(
                 $this->tableName,
@@ -152,7 +152,7 @@ abstract class AbstractList
             );
             $langDelete = $languageService->getLL('delete');
             $result = '<a class="btn btn-default" href="' .
-                \htmlspecialchars(BackendUtility::getLinkToDataHandlerAction($params), ENT_QUOTES | ENT_HTML5) .
+                \htmlspecialchars(BackendUtility::getLinkToDataHandlerAction($urlParameters), ENT_QUOTES | ENT_HTML5) .
                 '" onclick="' . $confirmation . '">' .
                 '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') .
                 'Resources/Public/Icons/Garbage.gif" title="' . \htmlspecialchars($langDelete, ENT_QUOTES | ENT_HTML5) .
@@ -184,10 +184,10 @@ abstract class AbstractList
             && $this->doesUserHaveAccess($pid)
             && $this->getBackEndUser()->check('tables_modify', $this->tableName)
         ) {
-            $params = '&edit[' . $this->tableName . '][';
+            $urlParameters = '&edit[' . $this->tableName . '][';
 
             if ((int)$pageData['uid'] === $pid) {
-                $params .= $pageData['uid'];
+                $urlParameters .= $pageData['uid'];
                 $storageLabel = sprintf(
                     $languageService->getLL('label_create_record_in_current_folder'),
                     $pageData['title'],
@@ -196,15 +196,15 @@ abstract class AbstractList
             } else {
                 /** @var array $storagePageData */
                 $storagePageData = BackendUtility::readPageAccess($pid, '');
-                $params .= $pid;
+                $urlParameters .= $pid;
                 $storageLabel = \sprintf(
                     $languageService->getLL('label_create_record_in_foreign_folder'),
                     (string)$storagePageData['title'],
                     $pid
                 );
             }
-            $params .= ']=new';
-            $editOnClick = BackendUtility::editOnClick($params);
+            $urlParameters .= ']=new';
+            $actionUrl = BackendUtility::editOnClick($urlParameters);
 
             $langNew = $languageService->getLL('newRecordGeneral');
 
@@ -212,7 +212,7 @@ abstract class AbstractList
                 '<div id="typo3-newRecordLink">' . LF .
                 TAB . TAB . TAB .
                 '<a class="btn btn-default" href="#"  onclick="' .
-                \htmlspecialchars($editOnClick, ENT_QUOTES | ENT_HTML5) . '">' . LF .
+                \htmlspecialchars($actionUrl, ENT_QUOTES | ENT_HTML5) . '">' . LF .
                 TAB . TAB . TAB . TAB .
                 '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') .
                 'Resources/Public/Icons/New.gif"' .
@@ -318,17 +318,17 @@ abstract class AbstractList
 
         if ($this->doesUserHaveAccess($pageUid) && $this->getBackEndUser()->check('tables_modify', $this->tableName)) {
             if ($hidden) {
-                $params = '&data[' . $this->tableName . '][' . $uid . '][hidden]=0';
+                $urlParameters = '&data[' . $this->tableName . '][' . $uid . '][hidden]=0';
                 $icon = 'Unhide.gif';
                 $langHide = $this->getLanguageService()->getLL('unHide');
             } else {
-                $params = '&data[' . $this->tableName . '][' . $uid . '][hidden]=1';
+                $urlParameters = '&data[' . $this->tableName . '][' . $uid . '][hidden]=1';
                 $icon = 'Hide.gif';
                 $langHide = $this->getLanguageService()->getLL('hide');
             }
 
             $result = '<a class="btn btn-default" href="' .
-                \htmlspecialchars(BackendUtility::getLinkToDataHandlerAction($params), ENT_QUOTES | ENT_HTML5) . '">' .
+                \htmlspecialchars(BackendUtility::getLinkToDataHandlerAction($urlParameters), ENT_QUOTES | ENT_HTML5) . '">' .
                 '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') . 'Resources/Public/Icons/' .
                 $icon . '" title="' . $langHide . '" alt="' . $langHide . '" class="hideicon" />' .
                 '</a>';
