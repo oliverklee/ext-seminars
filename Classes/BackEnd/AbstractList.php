@@ -113,12 +113,12 @@ abstract class AbstractList
         $icon = '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') .
             'Resources/Public/Icons/Edit.gif" alt="' . $langEdit . '" class="icon" />';
 
-        $actionUrl = BackendUtility::editOnClick($urlParameters);
-        $result = '<a class="btn btn-default" href="#" onclick="' .
-            \htmlspecialchars($actionUrl, ENT_QUOTES | ENT_HTML5)
-            . '" title="' . $langEdit . '">' . $icon . '</a>';
+        $returnUrl = GeneralUtility::getIndpEnv('REQUEST_URI');
+        $actionUrl = BackendUtility::getModuleUrl('record_edit') . $urlParameters .
+            '&returnUrl=' . \rawurlencode($returnUrl);
 
-        return $result;
+        return '<a class="btn btn-default" href="' . \htmlspecialchars($actionUrl, ENT_QUOTES | ENT_HTML5) . '">' .
+            $icon . '</a>';
     }
 
     /**
@@ -204,16 +204,17 @@ abstract class AbstractList
                 );
             }
             $urlParameters .= ']=new';
-            $actionUrl = BackendUtility::editOnClick($urlParameters);
+            $returnUrl = GeneralUtility::getIndpEnv('REQUEST_URI');
+            $actionUrl = BackendUtility::getModuleUrl('record_edit') . $urlParameters .
+                '&returnUrl=' . \rawurlencode($returnUrl);
 
             $langNew = $languageService->getLL('newRecordGeneral');
 
             $result = TAB . TAB .
                 '<div id="typo3-newRecordLink">' . LF .
                 TAB . TAB . TAB .
-                '<a class="btn btn-default" href="#"  onclick="' .
-                \htmlspecialchars($actionUrl, ENT_QUOTES | ENT_HTML5) . '">' . LF .
-                TAB . TAB . TAB . TAB .
+                '<a class="btn btn-default" href="' . \htmlspecialchars($actionUrl, ENT_QUOTES | ENT_HTML5) . '">' .
+                LF . TAB . TAB . TAB . TAB .
                 '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') .
                 'Resources/Public/Icons/New.gif"' .
                 // We use an empty alt attribute as we already have a textual
@@ -328,7 +329,10 @@ abstract class AbstractList
             }
 
             $result = '<a class="btn btn-default" href="' .
-                \htmlspecialchars(BackendUtility::getLinkToDataHandlerAction($urlParameters), ENT_QUOTES | ENT_HTML5) . '">' .
+                \htmlspecialchars(
+                    BackendUtility::getLinkToDataHandlerAction($urlParameters),
+                    ENT_QUOTES | ENT_HTML5
+                ) . '">' .
                 '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') . 'Resources/Public/Icons/' .
                 $icon . '" title="' . $langHide . '" alt="' . $langHide . '" class="hideicon" />' .
                 '</a>';
