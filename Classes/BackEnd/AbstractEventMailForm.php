@@ -136,10 +136,8 @@ abstract class AbstractEventMailForm
             $this->redirectToListView();
         }
 
-        $formAction = BackendUtility::getModuleUrl(
-            self::MODULE_NAME,
-            ['id' => \Tx_Oelib_PageFinder::getInstance()->getPageUid()]
-        );
+        $urlParameters = ['id' => \Tx_Oelib_PageFinder::getInstance()->getPageUid()];
+        $formAction = BackendUtility::getModuleUrl(self::MODULE_NAME, $urlParameters);
 
         return '<fieldset id="EventMailForm"><form action="' . \htmlspecialchars($formAction, ENT_QUOTES | ENT_HTML5) .
             '" method="post">' .
@@ -484,10 +482,9 @@ abstract class AbstractEventMailForm
      */
     private function redirectToListView()
     {
-        $url = BackendUtility::getModuleUrl(
-            self::MODULE_NAME,
-            ['id' => \Tx_Oelib_PageFinder::getInstance()->getPageUid()]
-        );
+        $urlParameters = ['id' => \Tx_Oelib_PageFinder::getInstance()->getPageUid()];
+        $url = BackendUtility::getModuleUrl(self::MODULE_NAME, $urlParameters);
+
         \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Location: ' . $url);
     }
 

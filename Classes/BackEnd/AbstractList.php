@@ -108,14 +108,15 @@ abstract class AbstractList
             return '';
         }
 
-        $urlParameters = '&edit[' . $this->tableName . '][' . $uid . ']=edit';
         $langEdit = \htmlspecialchars($this->getLanguageService()->getLL('edit'), ENT_QUOTES | ENT_HTML5);
         $icon = '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') .
             'Resources/Public/Icons/Edit.gif" alt="' . $langEdit . '" class="icon" />';
 
-        $returnUrl = GeneralUtility::getIndpEnv('REQUEST_URI');
-        $actionUrl = BackendUtility::getModuleUrl('record_edit') . $urlParameters .
-            '&returnUrl=' . \rawurlencode($returnUrl);
+        $urlParameters = [
+            'edit' => [$this->tableName => [$uid => 'edit']],
+            'returnUrl' => GeneralUtility::getIndpEnv('REQUEST_URI'),
+        ];
+        $actionUrl = BackendUtility::getModuleUrl('record_edit', $urlParameters);
 
         return '<a class="btn btn-default" href="' . \htmlspecialchars($actionUrl, ENT_QUOTES | ENT_HTML5) . '">' .
             $icon . '</a>';
@@ -184,10 +185,7 @@ abstract class AbstractList
             && $this->doesUserHaveAccess($pid)
             && $this->getBackEndUser()->check('tables_modify', $this->tableName)
         ) {
-            $urlParameters = '&edit[' . $this->tableName . '][';
-
             if ((int)$pageData['uid'] === $pid) {
-                $urlParameters .= $pageData['uid'];
                 $storageLabel = sprintf(
                     $languageService->getLL('label_create_record_in_current_folder'),
                     $pageData['title'],
@@ -196,17 +194,17 @@ abstract class AbstractList
             } else {
                 /** @var array $storagePageData */
                 $storagePageData = BackendUtility::readPageAccess($pid, '');
-                $urlParameters .= $pid;
                 $storageLabel = \sprintf(
                     $languageService->getLL('label_create_record_in_foreign_folder'),
                     (string)$storagePageData['title'],
                     $pid
                 );
             }
-            $urlParameters .= ']=new';
-            $returnUrl = GeneralUtility::getIndpEnv('REQUEST_URI');
-            $actionUrl = BackendUtility::getModuleUrl('record_edit') . $urlParameters .
-                '&returnUrl=' . \rawurlencode($returnUrl);
+            $urlParameters = [
+                'edit' => [$this->tableName => [$pid => 'new']],
+                'returnUrl' => GeneralUtility::getIndpEnv('REQUEST_URI'),
+            ];
+            $actionUrl = BackendUtility::getModuleUrl('record_edit', $urlParameters);
 
             $langNew = $languageService->getLL('newRecordGeneral');
 
@@ -277,12 +275,10 @@ abstract class AbstractList
     {
         $pageData = $this->page->getPageData();
         $csvLabel = $this->getLanguageService()->getLL('csvExport');
-        $csvUrl = BackendUtility::getModuleUrl(
-            self::MODULE_NAME,
-            ['id' => $pageData['uid'], 'csv' => '1', 'tx_seminars_pi2[table]' => $this->tableName]
-        );
+        $urlParameters = ['id' => (int)$pageData['uid'], 'csv' => '1', 'tx_seminars_pi2[table]' => $this->tableName];
+        $csvUrl = BackendUtility::getModuleUrl(self::MODULE_NAME, $urlParameters);
 
-        $result = TAB . TAB .
+        return TAB . TAB .
             '<div id="typo3-csvLink">' . LF .
             TAB . TAB . TAB .
             '<a class="btn btn-default" href="' . \htmlspecialchars($csvUrl, ENT_QUOTES | ENT_HTML5) .
@@ -298,8 +294,6 @@ abstract class AbstractList
             '</a>' . LF .
             TAB . TAB .
             '</div>' . LF;
-
-        return $result;
     }
 
     /**
