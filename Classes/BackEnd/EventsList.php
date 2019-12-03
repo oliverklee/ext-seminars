@@ -294,15 +294,13 @@ class EventsList extends AbstractList
         $imageTag = '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') .
             'Resources/Public/Icons/Csv.gif" title="' . $csvLabel . '" alt="' . $csvLabel . '" class="icon" />';
 
-        $csvUrl = BackendUtility::getModuleUrl(
-            self::MODULE_NAME,
-            [
-                'id' => $pageData['uid'],
-                'csv' => '1',
-                'tx_seminars_pi2[table]' => 'tx_seminars_attendances',
-                'tx_seminars_pi2[eventUid]' => $event->getUid(),
-            ]
-        );
+        $urlParameters = [
+            'id' => (int)$pageData['uid'],
+            'csv' => '1',
+            'tx_seminars_pi2[table]' => 'tx_seminars_attendances',
+            'tx_seminars_pi2[eventUid]' => $event->getUid(),
+        ];
+        $csvUrl = BackendUtility::getModuleUrl(self::MODULE_NAME, $urlParameters);
 
         return '<a class="btn btn-default" href="' . \htmlspecialchars($csvUrl, ENT_QUOTES | ENT_HTML5) . '">' .
             $imageTag . '</a>&nbsp;';
@@ -343,7 +341,8 @@ class EventsList extends AbstractList
         $pageData = $this->page->getPageData();
 
         $this->template->setMarker('uid', $event->getUid());
-        $buttonUrl = BackendUtility::getModuleUrl(self::MODULE_NAME, ['id' => $pageData['uid']]);
+        $urlParameters = ['id' => (int)$pageData['uid']];
+        $buttonUrl = BackendUtility::getModuleUrl(self::MODULE_NAME, $urlParameters);
         $this->template->setMarker('email_button_url', \htmlspecialchars($buttonUrl, ENT_QUOTES | ENT_HTML5));
         $this->template->setMarker(
             'label_email_button',
@@ -376,7 +375,8 @@ class EventsList extends AbstractList
             && $this->doesUserHaveAccess($event->getPageUid())
         ) {
             $this->template->setMarker('uid', $event->getUid());
-            $buttonUrl = BackendUtility::getModuleUrl(self::MODULE_NAME, ['id' => $pageData['uid']]);
+            $urlParameters = ['id' => (int)$pageData['uid']];
+            $buttonUrl = BackendUtility::getModuleUrl(self::MODULE_NAME, $urlParameters);
             $this->template->setMarker('cancel_button_url', \htmlspecialchars($buttonUrl, ENT_QUOTES | ENT_HTML5));
             $this->template->setMarker(
                 'label_cancel_button',
@@ -412,7 +412,8 @@ class EventsList extends AbstractList
             && $this->doesUserHaveAccess($event->getPageUid())
         ) {
             $this->template->setMarker('uid', $event->getUid());
-            $buttonUrl = BackendUtility::getModuleUrl(self::MODULE_NAME, ['id' => $pageData['uid']]);
+            $urlParameters = ['id' => (int)$pageData['uid']];
+            $buttonUrl = BackendUtility::getModuleUrl(self::MODULE_NAME, $urlParameters);
             $this->template->setMarker('confirm_button_url', \htmlspecialchars($buttonUrl, ENT_QUOTES | ENT_HTML5));
             $this->template->setMarker(
                 'label_confirm_button',
@@ -450,10 +451,9 @@ class EventsList extends AbstractList
     {
         $pageData = $this->page->getPageData();
 
-        $url = BackendUtility::getModuleUrl(
-            self::MODULE_NAME,
-            ['id' => $pageData['uid'], 'subModule' => '2', 'eventUid' => $event->getUid()]
-        );
+        $urlParameters = ['id' => (int)$pageData['uid'], 'subModule' => '2', 'eventUid' => $event->getUid()];
+        $url = BackendUtility::getModuleUrl(self::MODULE_NAME, $urlParameters);
+
         return '<a class="btn btn-default" href="' . \htmlspecialchars($url, ENT_QUOTES | ENT_HTML5) . '">' .
             $this->getLanguageService()->getLL('label_show_event_registrations') . '</a>';
     }

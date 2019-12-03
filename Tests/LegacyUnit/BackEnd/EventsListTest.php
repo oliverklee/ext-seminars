@@ -740,10 +740,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends TestCase
         $backEndUser = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUser::class)->getLoadedTestingModel([]);
         \Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
 
-        self::assertContains(
-            'edit[tx_seminars_seminars][' . $this->dummySysFolderPid . ']=new',
-            $this->subject->show()
-        );
+        self::assertContains((string)$this->dummySysFolderPid, $this->subject->show());
     }
 
     public function testNewButtonForEventStoredOnCurrentPageHasCurrentFolderLabel()
@@ -769,10 +766,7 @@ class Tx_Seminars_Tests_Unit_BackEnd_EventsListTest extends TestCase
             ->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
         $newEventFolder = $loggedInUser->getEventFolderFromGroup();
 
-        self::assertContains(
-            'edit[tx_seminars_seminars][' . $newEventFolder . ']=new',
-            $this->subject->show()
-        );
+        self::assertContains((string)$newEventFolder, $this->subject->show());
     }
 
     public function testNewButtonForEventStoredInPageDeterminedByGroupHasForeignFolderLabel()
