@@ -425,7 +425,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      */
     protected function getListViewHookProvider(): HookProvider
     {
-        if ($this->listViewHookProvider === null) {
+        if (!$this->listViewHookProvider instanceof HookProvider) {
             $this->listViewHookProvider = GeneralUtility::makeInstance(HookProvider::class, SeminarListView::class);
         }
 
@@ -1895,9 +1895,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
 
         if ($builder instanceof \Tx_Seminars_BagBuilder_Event) {
             $this->getListViewHookProvider()->executeHook('modifyEventBagBuilder', $this, $builder, $whatToDisplay);
-        }
-
-        if ($builder instanceof \Tx_Seminars_BagBuilder_Registration) {
+        } elseif ($builder instanceof \Tx_Seminars_BagBuilder_Registration) {
             $this->getListViewHookProvider()
                 ->executeHook('modifyRegistrationBagBuilder', $this, $builder, $whatToDisplay);
         }

@@ -35,7 +35,7 @@ interface SeminarListView extends Hook
     public function modifyEventBagBuilder(
         \Tx_Seminars_FrontEnd_DefaultController $controller,
         \Tx_Seminars_BagBuilder_Event $builder,
-        $whatToDisplay
+        string $whatToDisplay
     );
 
     /**
@@ -58,7 +58,7 @@ interface SeminarListView extends Hook
     public function modifyRegistrationBagBuilder(
         \Tx_Seminars_FrontEnd_DefaultController $controller,
         \Tx_Seminars_BagBuilder_Registration $builder,
-        $whatToDisplay
+        string $whatToDisplay
     );
 
     /**

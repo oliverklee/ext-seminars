@@ -9483,8 +9483,6 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $hook->expects(self::never())->method('modifyMyEventsListRow');
         $hook->expects(self::once())->method('modifyListFooter')->with($this->subject);
         $hook->expects(self::once())->method('modifyEventBagBuilder')->with($this->subject, self::anything(), 'topic_list');
-        // We don't test for the second parameter (the bag builder instance here)
-        // because we cannot access it from the outside.
         $hook->expects(self::never())->method('modifyRegistrationBagBuilder');
 
         $hookClass = \get_class($hook);
@@ -9507,8 +9505,6 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $hook->expects(self::never())->method('modifyMyEventsListRow');
         $hook->expects(self::once())->method('modifyListFooter')->with($this->subject);
         $hook->expects(self::once())->method('modifyEventBagBuilder')->with($this->subject, self::anything(), 'seminar_list');
-        // We don't test for the second parameter (the bag builder instance here)
-        // because we cannot access it from the outside.
         $hook->expects(self::never())->method('modifyRegistrationBagBuilder');
 
         $hookClass = \get_class($hook);
@@ -9519,8 +9515,57 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
     }
 
     /**
-     * @ test "events next day", "other dates" ?
+     * @test
      */
+    public function listViewCallsSeminarListViewHookMethodsForOtherDates()
+    {
+        $topic = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            [
+                'pid' => $this->systemFolderPid,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
+            ]
+        );
+        $date = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            [
+                'pid' => $this->systemFolderPid,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'topic' => $topic,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
+            ]
+        );
+        $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            [
+                'pid' => $this->systemFolderPid,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'topic' => $topic,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 11000, // > 1 day after first date
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 12000,
+            ]
+        );
+        $this->subject->setConfigurationValue('what_to_display', 'single_view');
+        $this->subject->piVars['showUid'] = (string)$date;
+
+        $hook = $this->createMock(SeminarListView::class);
+        $hook->expects(self::exactly(2))->method('modifyListHeader')->with($this->subject);
+        $hook->expects(self::exactly(2))->method('modifyListRow')->with($this->subject);
+        $hook->expects(self::never())->method('modifyMyEventsListRow');
+        $hook->expects(self::exactly(2))->method('modifyListFooter')->with($this->subject);
+        $hook->expects(self::exactly(2))->method('modifyEventBagBuilder')->withConsecutive(
+            [$this->subject, self::anything(), 'events_next_day'],
+            [$this->subject, self::anything(), 'other_dates']
+        );
+        $hook->expects(self::never())->method('modifyRegistrationBagBuilder');
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][SeminarListView::class][] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
+
+        $this->subject->main('', []);
+    }
 
     /**
      * @test
@@ -9563,8 +9608,6 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $hook->expects(self::never())->method('modifyMyEventsListRow');
         $hook->expects(self::once())->method('modifyListFooter')->with($this->subject);
         $hook->expects(self::once())->method('modifyEventBagBuilder')->with($this->subject, self::anything(), 'my_vip_events');
-        // We don't test for the second parameter (the bag builder instance here)
-        // because we cannot access it from the outside.
         $hook->expects(self::never())->method('modifyRegistrationBagBuilder');
 
         $hookClass = \get_class($hook);
@@ -9597,8 +9640,6 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $hook->expects(self::never())->method('modifyMyEventsListRow');
         $hook->expects(self::once())->method('modifyListFooter')->with($this->subject);
         $hook->expects(self::once())->method('modifyEventBagBuilder')->with($this->subject, self::anything(), 'my_entered_events');
-        // We don't test for the second parameter (the bag builder instance here)
-        // because we cannot access it from the outside.
         $hook->expects(self::never())->method('modifyRegistrationBagBuilder');
 
         $hookClass = \get_class($hook);
