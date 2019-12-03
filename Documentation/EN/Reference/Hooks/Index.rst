@@ -16,116 +16,245 @@
 Hooks
 ^^^^^
 
+.. warning::
+    Using hooks requires in-depth knowledge of PHP classes, implementation of
+    interfaces and seminars object internals.
 
-New hooks for the single view
-"""""""""""""""""""""""""""""
+Hooks allow extending the functionality of seminars without using XCLASSes. There
+are hooks for these parts of seminars:
 
-There now are two new hooks for the single view. They are registered
-like this in ext\_localconf.php:
+* :ref:`singleview`
+* :ref:`listview`
+* :ref:`notificationemail`
+* :ref:`emailsalutation`
+* :ref:`backendemail`
 
-::
+Please contact us if you need additional hooks.
 
-   $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['singleView'][]
-         = \Tx_Seminarspaypal_Hooks_EventSingleView::class;
+.. important::
+    seminars is undergoing a major rewriting to keep up with modern TYPO3 programming
+    techniques. We try to keep changes as small as possible. Inform Yourself about changes
+    by reading CHANGELOG.md, the DocBlocks of interfaces You implement and this
+    chapter of the documentation before updating to a new seminars major version.
 
-They are used like this:
+.. _singleview:
 
-::
+Hooks for the single view
+"""""""""""""""""""""""""
 
-   class Tx_Seminarspaypal_Hooks_SingleView implements Tx_Seminars_Interface_Hook_EventSingleView {
+.. important::
+    Using :php:`\Tx_Seminars_Interface_Hook_EventSingleView` is deprecated since
+    seminars 3. It will be removed in seminars 4. Please update to
+    :php:`\OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView`.
 
-/\*\*
+There is a hook into the single view. It is executed just before the template
+gets rendered to HTML. You may set custom markers or change exisitng values for
+markers. See also :file:`Classes/Frontend/DefaultController.php` for available
+properties and methods.
 
-\* Modifies the event single view.
+Register Your class that implements :php:`\OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView`
+like this in :file:`ext_localconf.php` of Your extension:: php
 
-\*
+    use \OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][SeminarSingleView:class][]
+        = \Tx_Seminarspaypal_Hooks_EventSingleView::class;
 
-\*  **@param** tx\_seminars\_Model\_Event $event
+Implement the methods required by the interface:: php
 
-\* the event to display in the single view
+    use \OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
 
-\*  **@param** Tx\_Oelib\_Template $template
-
-\* the template that will be used to create the single view output
-
-\*
-
-\*  **@return** void
-
-\*/
-
-public functionmodifyEventSingleView(tx\_seminars\_Model\_Event$event,
-Tx\_Oelib\_Template$template) {…}
-
-/\*\*
-
-\* Modifies a list row in the time slots list (which is part of the
-event
-
-\* single view).
-
-\*
-
-\*  **@param** tx\_seminars\_Model\_TimeSlot $timeSlot
-
-\* the time slot to display in the current row
-
-\*  **@param** Tx\_Oelib\_Template $template
-
-\* the template that will be used to create the list row output
-
-\*
-
-\*  **@return** void
-
-\*/
-
-public
-functionmodifyTimeSlotListRow(tx\_seminars\_Model\_TimeSlot$timeSlot,
-Tx\_Oelib\_Template$template) {…}
-
-
-New hooks for the list view
-"""""""""""""""""""""""""""
-
-There now is a new hook for the list view. It's registered like this
-in ext\_localconf.php:
-
-::
-
-   $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView'][]
-         = \Tx_Seminarspaypal_Hooks_ListView::class;
-
-It's used like this:
-
-::
-
-   class Tx_Seminarspaypal_Hooks_ListView implements Tx_Seminars_Interface_Hook_EventListView {
+    class Tx_Seminarspaypal_Hooks_SingleView implements SeminarSingleView
+    {
         /**
-         * Adds a countdown column.
-       *
-       * @param Tx_Seminars_Model_Event $event
-       *        the affected registration
-        * @param Tx_Oelib_Template $template
-        *        the template from which the list row is built
-        */
-         public function modifyListRow(
-                 Tx_Seminars_Model_Event $event, Tx_Oelib_Template $template
-         ) {…}
+         * Modifies the seminar details view.
+         *
+         * This function will be called for all types of seminars (single events, topics, and dates).
+         *
+         * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
+         *
+         * @return void
+         */
+        public function modifySingleView(\Tx_Seminars_FrontEnd_DefaultController $controller)
+        {
+            // Your code here
+        }
+    }
+
+.. _listview:
+
+Hooks for the list view
+"""""""""""""""""""""""
+
+.. important::
+    Using :php:`\Tx_Seminars_Interface_Hook_EventListView` is deprecated since
+    seminars 3. It will be removed in seminars 4. Please update to
+    :php:`\OliverKlee\Seminars\Hooks\Interfaces\SeminarListView`.
+
+There are 5 hooks into the list view(s). First hook is called just before the
+seminar bag (the seminars to show in the list) or the registration bag (the
+seminars a user is registered for) is build. It is always called, even when
+there will be an empty list.
+
+The other hooks are during seminar list table creation:
+
+* just before the table header is rendered to HTML
+* just before a table row for a certain seminar / registration is rendered to HTML
+* in case of a my_event list: right after the row hook before
+* just before the table footer is rendered to HTML
+
+In the hooks just before HTML is rendered You may set custom markers or change
+exisitng values for markers. See also :file:`Classes/Frontend/DefaultController.php`
+for available properties and methods.
+
+The hook to the seminar or registration bag building process always for changing
+the seminars / registrations shown in the list. You may add more filters or remove
+existing ones. See also :file:`Classes/BagBuilder/AbstractBagBuilder.php`,
+:file:`Classes/BagBuilder/Event.php` and :file:`Classes/BagBuilder/Registration.php`
+for available properties and methods.
+
+There are 7 types of lists Your implementation must handle:
+
+* topic list (`topic_list`)
+* seminar list (`seminar_list`)
+* my seminars (`my_events`)
+* my vip seminars (`my_vip_events`)
+* my entered events (`my_entered_events`)
+* events next day (`events_next_day`)
+* other dates (`other_dates`)
+
+The last two list types (events next day and other dates) are part of the single
+view, but handled as fully rendered seminar lists (including bag building).
+
+Register Your class that implements :php:`\OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView`
+like this in :file:`ext_localconf.php` of Your extension:: php
+
+    use \OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][SeminarSingleView:class][]
+        = \Tx_Seminarspaypal_Hooks_ListView::class;
+
+Implement the methods required by the interface:: php
+
+    use \OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
+
+    class Tx_Seminarspaypal_Hooks_ListView implements SeminarSingleView
+    {
+        /**
+         * Modifies the list view seminar bag builder (the item collection for a seminar list).
+         *
+         * Add or alter limitations for the selection of seminars to be shown in the
+         * list.
+         *
+         * @see \OliverKlee\Seminars\BagBuilder\AbstractBagBuilder::getWhereClausePart()
+         * @see \OliverKlee\Seminars\BagBuilder\AbstractBagBuilder::setWhereClausePart()
+         *
+         * This function will be called for these types of seminar lists: "topics", "seminars",
+         * "my vip seminars", "my entered events", "events next day", "other dates".
+         *
+         * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
+         * @param \Tx_Seminars_BagBuilder_Event $builder the bag builder
+         * @param string $whatToDisplay the flavor of list view: 'seminar_list', 'topic_list',
+         *        'my_vip_events', 'my_entered_events', 'events_next_day' or 'other_dates'
+         *
+         * @return void
+         */
+        public function modifyEventBagBuilder(
+            \Tx_Seminars_FrontEnd_DefaultController $controller,
+            \Tx_Seminars_BagBuilder_Event $builder,
+            string $whatToDisplay
+        ) {
+            // Your code here
+        }
 
         /**
-         * Adds an "add to cart" PayPal button for non-free registrations that have
-       * not been paid for.
-       *
-       * @param Tx_Seminars_Model_Registration $registration
-       *        the affected registration
-        * @param Tx_Oelib_Template $template
-        *        the template from which the list row is built
-        */
-         public function modifyMyEventsListRow(
-                 Tx_Seminars_Model_Registration $registration, Tx_Oelib_Template $template
-       ) {…}
+         * Modifies the list view registration bag builder (the item collection for a "my events" list).
+         *
+         * Add or alter limitations for the selection of seminars to be shown in the
+         * list.
+         *
+         * @see \OliverKlee\Seminars\BagBuilder\AbstractBagBuilder::getWhereClausePart()
+         * @see \OliverKlee\Seminars\BagBuilder\AbstractBagBuilder::setWhereClausePart()
+         *
+         * This function will be called for "my events" lists only.
+         *
+         * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
+         * @param \Tx_Seminars_BagBuilder_Registration $builder the bag builder
+         * @param string $whatToDisplay the flavor of list view ('my_events' only?)
+         *
+         * @return void
+         */
+        public function modifyRegistrationBagBuilder(
+            \Tx_Seminars_FrontEnd_DefaultController $controller,
+            \Tx_Seminars_BagBuilder_Registration $builder,
+            string $whatToDisplay
+        ) {
+            // Your code here
+        }
 
+        /**
+         * Modifies the list view header row in a seminar list.
+         *
+         * This function will be called for all types of seminar lists ("topics",
+         * "seminars", "my seminars", "my vip seminars", "my entered events",
+         * "events next day", "other dates").
+         *
+         * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
+         *
+         * @return void
+         */
+        public function modifyListHeader(\Tx_Seminars_FrontEnd_DefaultController $controller)
+        {
+            // Your code here
+        }
+
+        /**
+         * Modifies a list row in a seminar list.
+         *
+         * This function will be called for all types of seminar lists ("topics",
+         * "seminars", "my seminars", "my vip seminars", "my entered events",
+         * "events next day", "other dates").
+         *
+         * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
+         *
+         * @return void
+         */
+        public function modifyListRow(\Tx_Seminars_FrontEnd_DefaultController $controller)
+        {
+            // Your code here
+        }
+
+        /**
+         * Modifies a list view row in a "my seminars" list.
+         *
+         * This function will be called for "my seminars" , "my vip seminars",
+         * "my entered events" lists only.
+         *
+         * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
+         *
+         * @return void
+         */
+        public function modifyMyEventsListRow(\Tx_Seminars_FrontEnd_DefaultController $controller)
+        {
+            // Your code here
+        }
+
+        /**
+         * Modifies the list view footer in a seminars list.
+         *
+         * This function will be called for all types of seminar lists ("topics",
+         * "seminars", "my seminars", "my vip seminars", "my entered events",
+         * "events next day", "other dates").
+         *
+         * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
+         *
+         * @return void
+         */
+        public function modifyListFooter(\Tx_Seminars_FrontEnd_DefaultController $controller)
+        {
+            // Your code here
+        }
+    }
+
+.. _notificationemail:
 
 Hooks to post process notification emails
 """"""""""""""""""""""""""""""""""""""""""
@@ -205,6 +334,8 @@ example:
    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][] = \\MyVendor\\MyExt\\Hooks\\RegistrationEmailHook::class;
 
 
+.. _emailsalutation:
+
 Hooks for the salutation in all e-mails to the attendees
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -231,6 +362,8 @@ example:
    // register my hook objects
    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['modifyEmailSalutation'][] = \\MyVendor\\MyExt\\Hooks\\ModifySalutationHook::class;
 
+
+.. _backendemail:
 
 Hooks for the e-mails sent from the back-end module
 """""""""""""""""""""""""""""""""""""""""""""""""""
@@ -288,5 +421,3 @@ It's used like this:
         * @return void
         */
           public function modifyCancelEmail(Tx_Seminars_Model_Registration $registration, Tx_Oelib_Mail $eMail) {…}
-
-Please contact us if you need additional hooks.
