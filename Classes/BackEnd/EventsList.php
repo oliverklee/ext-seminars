@@ -60,7 +60,7 @@ class EventsList extends AbstractList
 
         $this->template->setMarker(
             'new_record_button',
-            $this->getNewIcon($pageData['uid'])
+            $this->getNewIcon((int)$pageData['uid'])
         );
 
         $this->template->setMarker(

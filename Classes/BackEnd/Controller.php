@@ -207,7 +207,7 @@ class Controller extends AbstractModule
      * Checks whether the user requested the form for sending an e-mail and
      * whether all pre-conditions for showing the form are met.
      *
-     * @return bool TRUE if the form was requested and pre-conditions are met, FALSE otherwise
+     * @return bool whether the form was requested and pre-conditions are met
      */
     private function isGeneralEmailFormRequested(): bool
     {

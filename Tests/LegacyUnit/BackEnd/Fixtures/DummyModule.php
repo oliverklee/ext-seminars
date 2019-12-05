@@ -11,6 +11,6 @@ use OliverKlee\Seminars\BackEnd\AbstractModule;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class DummyModule extends AbstractModule
+final class DummyModule extends AbstractModule
 {
 }

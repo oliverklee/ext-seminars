@@ -81,7 +81,7 @@ class RegistrationsList extends AbstractList
             $newButton = '';
         } else {
             $registrationsHeading = '';
-            $newButton = $this->getNewIcon($pageData['uid']);
+            $newButton = $this->getNewIcon((int)$pageData['uid']);
         }
 
         $areAnyRegularRegistrationsVisible = $this->setRegistrationTableMarkers(
@@ -124,9 +124,9 @@ class RegistrationsList extends AbstractList
      *        RegistrationsList::REGISTRATIONS_ON_QUEUE or
      *        RegistrationsList::REGULAR_REGISTRATIONS
      *
-     * @return bool TRUE if the generated list is not empty, FALSE otherwise
+     * @return bool whether the generated list is non-empty
      */
-    private function setRegistrationTableMarkers($registrationsToShow): bool
+    private function setRegistrationTableMarkers(int $registrationsToShow): bool
     {
         /** @var \Tx_Seminars_BagBuilder_Registration $builder */
         $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Registration::class);
@@ -217,7 +217,7 @@ class RegistrationsList extends AbstractList
      *
      * @return int the PID for new registration records, will be >= 0
      */
-    protected function getNewRecordPid()
+    protected function getNewRecordPid(): int
     {
         return $this->getLoggedInUser()->getRegistrationFolderFromGroup();
     }
@@ -229,7 +229,7 @@ class RegistrationsList extends AbstractList
      *                always start with an &amp and be htmlspecialchared, may
      *                be empty
      */
-    protected function getAdditionalCsvParameters()
+    protected function getAdditionalCsvParameters(): string
     {
         if ($this->eventUid > 0) {
             $result = '&amp;tx_seminars_pi2[eventUid]=' . $this->eventUid;

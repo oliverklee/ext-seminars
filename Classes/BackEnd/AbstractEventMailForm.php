@@ -82,7 +82,7 @@ abstract class AbstractEventMailForm
      * @throws \InvalidArgumentException
      * @throws \Tx_Oelib_Exception_NotFound if event could not be instantiated
      */
-    public function __construct($eventUid)
+    public function __construct(int $eventUid)
     {
         if ($eventUid <= 0) {
             throw new \InvalidArgumentException('$eventUid must be > 0.');
@@ -323,7 +323,7 @@ abstract class AbstractEventMailForm
      *
      * @return string either the data from POST array or a default value for this field
      */
-    protected function fillFormElement($fieldName): string
+    protected function fillFormElement(string $fieldName): string
     {
         if ($this->isSubmitted()) {
             $result = $this->getPostData($fieldName);
@@ -354,7 +354,7 @@ abstract class AbstractEventMailForm
      *
      * @return string the value of the field, may be empty
      */
-    protected function getPostData($key): string
+    protected function getPostData(string $key): string
     {
         if (!$this->hasPostData($key)) {
             return '';
@@ -372,7 +372,7 @@ abstract class AbstractEventMailForm
      *
      * @throws \InvalidArgumentException
      */
-    protected function hasPostData($key): bool
+    protected function hasPostData(string $key): bool
     {
         if ($key === '') {
             throw new \InvalidArgumentException('$key must not be empty.', 1333292184);
@@ -459,10 +459,8 @@ abstract class AbstractEventMailForm
      *
      * @return void
      */
-    protected function modifyEmailWithHook(
-        \Tx_Seminars_Model_Registration $registration,
-        \Tx_Oelib_Mail $eMail
-    ) {
+    protected function modifyEmailWithHook(\Tx_Seminars_Model_Registration $registration, \Tx_Oelib_Mail $eMail)
+    {
     }
 
     /**
@@ -504,7 +502,7 @@ abstract class AbstractEventMailForm
      *
      * @return string label for the submit button, will not be empty
      */
-    abstract protected function getSubmitButtonLabel();
+    abstract protected function getSubmitButtonLabel(): string;
 
     /**
      * Returns the initial value for a certain field.
@@ -548,7 +546,7 @@ abstract class AbstractEventMailForm
      *                title and date, will be empty if no locallang label
      *                could be found for the given prefix
      */
-    private function appendTitleAndDate($prefix): string
+    private function appendTitleAndDate(string $prefix): string
     {
         return $this->getLanguageService()->getLL($prefix . 'subject') . ' ' . $this->getOldEvent()->getTitleAndDate();
     }
@@ -567,7 +565,7 @@ abstract class AbstractEventMailForm
      *                replaced placeholders, will be empty if no locallang label
      *                for the given prefix could be found
      */
-    protected function localizeSalutationPlaceholder($prefix): string
+    protected function localizeSalutationPlaceholder(string $prefix): string
     {
         /** @var \Tx_Seminars_EmailSalutation $salutation */
         $salutation = GeneralUtility::makeInstance(\Tx_Seminars_EmailSalutation::class);
@@ -639,15 +637,13 @@ abstract class AbstractEventMailForm
     }
 
     /**
-     * Checks whether an error message has been set for the given fieldname.
+     * Checks whether an error message has been set for the given field name.
      *
-     * @param string $fieldName
-     *        the field to check the error message for, must not be empty
+     * @param string $fieldName the field to check the error message for, must not be empty
      *
-     * @return bool TRUE if an error message has been stored for the given
-     *                 fieldname, FALSE otherwise
+     * @return bool whether an error message has been stored for the given field name
      */
-    private function hasErrorMessage($fieldName): bool
+    private function hasErrorMessage(string $fieldName): bool
     {
         return isset($this->errorMessages[$fieldName]);
     }

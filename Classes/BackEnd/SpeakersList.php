@@ -42,7 +42,7 @@ class SpeakersList extends AbstractList
 
         $this->template->setMarker(
             'new_record_button',
-            $this->getNewIcon($pageData['uid'])
+            $this->getNewIcon((int)$pageData['uid'])
         );
 
         $languageService = $this->getLanguageService();
@@ -115,7 +115,7 @@ class SpeakersList extends AbstractList
      *
      * @return int the PID for new speaker records, will be >= 0
      */
-    protected function getNewRecordPid()
+    protected function getNewRecordPid(): int
     {
         return $this->getLoggedInUser()->getAuxiliaryRecordsFolder();
     }
