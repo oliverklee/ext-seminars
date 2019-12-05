@@ -133,10 +133,10 @@ class Controller extends AbstractModule
         // rights to show any of the tabs.
         if ($this->subModule > 0) {
             $moduleToken = FormProtectionFactory::get()->generateToken('moduleCall', self::MODULE_NAME);
-            $content .= $document->getTabMenu(
+            $content .= $this->getTabMenu(
                 ['M' => self::MODULE_NAME, 'moduleToken' => $moduleToken, 'id' => $this->id],
                 'subModule',
-                $this->subModule,
+                (string)$this->subModule,
                 $this->availableSubModules
             );
         }
@@ -308,5 +308,59 @@ class Controller extends AbstractModule
     private function hasStaticTemplate(): bool
     {
         return \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')->getAsBoolean('isStaticTemplateLoaded');
+    }
+
+    /**
+     * Creates a tab menu from an array definition.
+     *
+     * @param array $mainParams a parameter array which will be passed instead of the &id=.
+     * @param string $elementName it the form elements name, probably something like "SET[...]
+     * @param string $currentValue is the value to be selected currently.
+     * @param array $menuItems is an array with the menu items for the selector box
+     *
+     * @return string HTML code for tab menu
+     */
+    protected function getTabMenu(
+        array $mainParams,
+        string $elementName,
+        string $currentValue,
+        array $menuItems
+    ): string {
+        $mainParams = GeneralUtility::implodeArrayForUrl('', $mainParams);
+        $script = \basename(PATH_thisScript);
+        $menuDefinition = [];
+        foreach ($menuItems as $value => $label) {
+            $menuDefinition[$value]['isActive'] = $currentValue === (string)$value;
+            $menuDefinition[$value]['label'] = \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5);
+            $menuDefinition[$value]['url'] = $script . '?' . $mainParams . '&' . $elementName . '=' . $value;
+        }
+
+        return $this->getTabMenuRaw($menuDefinition);
+    }
+
+    /**
+     * Creates the HTML content for the tab menu.
+     *
+     * @param array $menuItems menu items for tabs
+     *
+     * @return string table HTML
+     */
+    private function getTabMenuRaw(array $menuItems): string
+    {
+        $options = '';
+        foreach ($menuItems as $id => $definition) {
+            $class = $definition['isActive'] ? 'active' : '';
+            $label = $definition['label'];
+            $url = \htmlspecialchars($definition['url'], ENT_QUOTES | ENT_HTML5);
+            $params = $definition['addParams'];
+
+            $options .= '<li class="' . $class . '">' .
+                '<a href="' . $url . '" ' . $params . '>' . $label . '</a>' .
+                '</li>';
+        }
+
+        return '<ul class="nav nav-tabs" role="tablist">' .
+            $options .
+            '</ul>';
     }
 }
