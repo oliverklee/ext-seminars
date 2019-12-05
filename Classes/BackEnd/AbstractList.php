@@ -208,22 +208,16 @@ abstract class AbstractList
 
             $langNew = $languageService->getLL('newRecordGeneral');
 
-            $result = TAB . TAB .
-                '<div id="typo3-newRecordLink">' . LF .
-                TAB . TAB . TAB .
+            $result = '<div id="typo3-newRecordLink">' .
                 '<a class="btn btn-default" href="' . \htmlspecialchars($actionUrl, ENT_QUOTES | ENT_HTML5) . '">' .
-                LF . TAB . TAB . TAB . TAB .
                 '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') .
                 'Resources/Public/Icons/New.gif"' .
                 // We use an empty alt attribute as we already have a textual
                 // representation directly next to the icon.
-                ' title="' . $langNew . '" alt="" />' . LF .
-                TAB . TAB . TAB . TAB .
-                $langNew . LF .
-                TAB . TAB . TAB .
-                '</a>' . LF .
-                TAB . TAB .
-                '</div>' . LF;
+                ' title="' . $langNew . '" alt="" />' .
+                $langNew .
+                '</a>' .
+                '</div>';
 
             /** @var FlashMessage $message */
             $message = GeneralUtility::makeInstance(
@@ -278,22 +272,16 @@ abstract class AbstractList
         $urlParameters = ['id' => (int)$pageData['uid'], 'csv' => '1', 'tx_seminars_pi2[table]' => $this->tableName];
         $csvUrl = BackendUtility::getModuleUrl(self::MODULE_NAME, $urlParameters);
 
-        return TAB . TAB .
-            '<div id="typo3-csvLink">' . LF .
-            TAB . TAB . TAB .
+        return '<div id="typo3-csvLink">' .
             '<a class="btn btn-default" href="' . \htmlspecialchars($csvUrl, ENT_QUOTES | ENT_HTML5) .
-            $this->getAdditionalCsvParameters() . '">' . LF .
-            TAB . TAB . TAB . TAB .
+            $this->getAdditionalCsvParameters() . '">' .
             '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') .
             'Resources/Public/Icons/Csv.gif" title="' . $csvLabel . '" alt="" class="icon" />' .
             // We use an empty alt attribute as we already have a textual
             // representation directly next to the icon.
-            TAB . TAB . TAB . TAB .
-            $csvLabel . LF .
-            TAB . TAB . TAB .
-            '</a>' . LF .
-            TAB . TAB .
-            '</div>' . LF;
+            $csvLabel .
+            '</a>' .
+            '</div>';
     }
 
     /**
