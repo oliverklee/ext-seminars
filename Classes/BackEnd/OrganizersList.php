@@ -42,7 +42,7 @@ class OrganizersList extends AbstractList
 
         $this->template->setMarker(
             'new_record_button',
-            $this->getNewIcon($pageData['uid'])
+            $this->getNewIcon((int)$pageData['uid'])
         );
 
         $this->template->setMarker(
@@ -103,7 +103,7 @@ class OrganizersList extends AbstractList
      *
      * @return int the PID for new organizer records, will be >= 0
      */
-    protected function getNewRecordPid()
+    protected function getNewRecordPid(): int
     {
         return $this->getLoggedInUser()->getAuxiliaryRecordsFolder();
     }

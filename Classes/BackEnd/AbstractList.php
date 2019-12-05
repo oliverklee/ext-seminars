@@ -95,12 +95,12 @@ abstract class AbstractList
      * Generates an edit record icon which is linked to the edit view of
      * a record.
      *
-     * @param int $uid the UID of the record, must be > 0
+     * @param int $recordUid the UID of the record, must be > 0
      * @param int $pageUid the PID of the record, must be >= 0
      *
      * @return string the HTML source code to return
      */
-    public function getEditIcon($uid, $pageUid): string
+    public function getEditIcon(int $recordUid, int $pageUid): string
     {
         if (
             !$this->doesUserHaveAccess($pageUid)
@@ -114,7 +114,7 @@ abstract class AbstractList
             'Resources/Public/Icons/Edit.gif" alt="' . $langEdit . '" class="icon" />';
 
         $urlParameters = [
-            'edit' => [$this->tableName => [$uid => 'edit']],
+            'edit' => [$this->tableName => [$recordUid => 'edit']],
             'returnUrl' => GeneralUtility::getIndpEnv('REQUEST_URI'),
         ];
         $actionUrl = $this->getRouteUrl('record_edit', $urlParameters);
@@ -126,23 +126,23 @@ abstract class AbstractList
     /**
      * Generates a linked "delete" record icon with a JavaScript confirmation window.
      *
-     * @param int $uid the UID of the record, must be > 0
+     * @param int $recordUid the UID of the record, must be > 0
      * @param int $pageUid the PID of the record, must be >= 0
      *
      * @return string the HTML source code to return
      */
-    public function getDeleteIcon($uid, $pageUid): string
+    public function getDeleteIcon(int $recordUid, int $pageUid): string
     {
         $result = '';
 
         $languageService = $this->getLanguageService();
 
         if ($this->doesUserHaveAccess($pageUid) && $this->getBackEndUser()->check('tables_modify', $this->tableName)) {
-            $urlParameters = '&cmd[' . $this->tableName . '][' . $uid . '][delete]=1';
+            $urlParameters = '&cmd[' . $this->tableName . '][' . $recordUid . '][delete]=1';
 
             $referenceWarning = BackendUtility::referenceCount(
                 $this->tableName,
-                $uid,
+                $recordUid,
                 ' ' . $languageService->getLL('referencesWarning')
             );
 
@@ -172,7 +172,7 @@ abstract class AbstractList
      *
      * @return string the HTML source code to return
      */
-    public function getNewIcon($pid): string
+    public function getNewIcon(int $pid): string
     {
         $result = '';
         $languageService = $this->getLanguageService();
@@ -289,24 +289,23 @@ abstract class AbstractList
      * Generates a linked hide or unhide icon depending on the record's hidden
      * status.
      *
-     * @param int $uid the UID of the record, must be > 0
+     * @param int $recordUid the UID of the record, must be > 0
      * @param int $pageUid the PID of the record, must be >= 0
-     * @param bool $hidden
-     *        indicates whether the record is hidden (TRUE) or is visible (FALSE)
+     * @param bool $hidden whether the record is hidden (true) or is visible (false)
      *
      * @return string the HTML source code of the linked hide or unhide icon
      */
-    protected function getHideUnhideIcon($uid, $pageUid, $hidden): string
+    protected function getHideUnhideIcon(int $recordUid, int $pageUid, bool $hidden): string
     {
         $result = '';
 
         if ($this->doesUserHaveAccess($pageUid) && $this->getBackEndUser()->check('tables_modify', $this->tableName)) {
             if ($hidden) {
-                $urlParameters = '&data[' . $this->tableName . '][' . $uid . '][hidden]=0';
+                $urlParameters = '&data[' . $this->tableName . '][' . $recordUid . '][hidden]=0';
                 $icon = 'Unhide.gif';
                 $langHide = $this->getLanguageService()->getLL('unHide');
             } else {
-                $urlParameters = '&data[' . $this->tableName . '][' . $uid . '][hidden]=1';
+                $urlParameters = '&data[' . $this->tableName . '][' . $recordUid . '][hidden]=1';
                 $icon = 'Hide.gif';
                 $langHide = $this->getLanguageService()->getLL('hide');
             }
@@ -332,7 +331,7 @@ abstract class AbstractList
      *
      * @return bool TRUE if the user has access, FALSE otherwise
      */
-    protected function doesUserHaveAccess($pageUid): bool
+    protected function doesUserHaveAccess(int $pageUid): bool
     {
         if (!isset($this->accessRights[$pageUid])) {
             $this->accessRights[$pageUid] = $this->getBackEndUser()
@@ -350,7 +349,7 @@ abstract class AbstractList
      *
      * @return int the PID for the storage of new records, will be >= 0
      */
-    abstract protected function getNewRecordPid();
+    abstract protected function getNewRecordPid(): int;
 
     /**
      * Gets the currently logged in back-end user.
@@ -359,7 +358,10 @@ abstract class AbstractList
      */
     protected function getLoggedInUser(): \Tx_Seminars_Model_BackEndUser
     {
-        return \Tx_Oelib_BackEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
+        /** @var \Tx_Seminars_Model_BackEndUser $user */
+        $user = \Tx_Oelib_BackEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
+
+        return $user;
     }
 
     /**
@@ -369,7 +371,7 @@ abstract class AbstractList
      *                always start with an &amp and be htmlspecialchared, may
      *                be empty
      */
-    protected function getAdditionalCsvParameters()
+    protected function getAdditionalCsvParameters(): string
     {
         $pageData = $this->page->getPageData();
 

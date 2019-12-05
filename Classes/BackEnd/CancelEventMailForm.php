@@ -33,7 +33,7 @@ class CancelEventMailForm extends AbstractEventMailForm
      *
      * @return string label for the submit button, will not be empty
      */
-    protected function getSubmitButtonLabel()
+    protected function getSubmitButtonLabel(): string
     {
         return $this->getLanguageService()->getLL('cancelMailForm_sendButton');
     }
@@ -71,10 +71,8 @@ class CancelEventMailForm extends AbstractEventMailForm
      *
      * @return void
      */
-    protected function modifyEmailWithHook(
-        \Tx_Seminars_Model_Registration $registration,
-        \Tx_Oelib_Mail $eMail
-    ) {
+    protected function modifyEmailWithHook(\Tx_Seminars_Model_Registration $registration, \Tx_Oelib_Mail $eMail)
+    {
         foreach ($this->getHooks() as $hook) {
             $hook->modifyCancelEmail($registration, $eMail);
         }
