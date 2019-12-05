@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\BackEnd;
 
+use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
@@ -116,7 +117,7 @@ abstract class AbstractList
             'edit' => [$this->tableName => [$uid => 'edit']],
             'returnUrl' => GeneralUtility::getIndpEnv('REQUEST_URI'),
         ];
-        $actionUrl = BackendUtility::getModuleUrl('record_edit', $urlParameters);
+        $actionUrl = $this->getRouteUrl('record_edit', $urlParameters);
 
         return '<a class="btn btn-default" href="' . \htmlspecialchars($actionUrl, ENT_QUOTES | ENT_HTML5) . '">' .
             $icon . '</a>';
@@ -204,7 +205,7 @@ abstract class AbstractList
                 'edit' => [$this->tableName => [$pid => 'new']],
                 'returnUrl' => GeneralUtility::getIndpEnv('REQUEST_URI'),
             ];
-            $actionUrl = BackendUtility::getModuleUrl('record_edit', $urlParameters);
+            $actionUrl = $this->getRouteUrl('record_edit', $urlParameters);
 
             $langNew = $languageService->getLL('newRecordGeneral');
 
@@ -412,5 +413,31 @@ abstract class AbstractList
                     </div>
                 </div>
             </div>';
+    }
+
+    /**
+     * Returns the URL to a given module.
+     *
+     * @param string $moduleName name of the module
+     * @param array $urlParameters URL parameters that should be added as key-value pairs
+     *
+     * @return string calculated URL
+     */
+    protected function getRouteUrl(string $moduleName, array $urlParameters = []): string
+    {
+        $uriBuilder = $this->getUriBuilder();
+        try {
+            $uri = $uriBuilder->buildUriFromRoute($moduleName, $urlParameters);
+        } catch (\TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException $e) {
+            // no route registered, use the fallback logic to check for a module
+            $uri = $uriBuilder->buildUriFromModule($moduleName, $urlParameters);
+        }
+
+        return (string)$uri;
+    }
+
+    protected function getUriBuilder(): UriBuilder
+    {
+        return GeneralUtility::makeInstance(UriBuilder::class);
     }
 }

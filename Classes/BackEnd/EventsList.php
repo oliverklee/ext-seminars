@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\BackEnd;
 
-use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -192,12 +191,8 @@ class EventsList extends AbstractList
             );
             $this->template->setMarker(
                 'show_registrations',
-                (
-                    (!$event->isHidden()
-                    && $event->needsRegistration()
-                    && $event->hasAttendances())
+                !$event->isHidden() && $event->needsRegistration() && $event->hasAttendances()
                     ? $this->createEventRegistrationsLink($event) : ''
-                )
             );
             $this->template->setMarker(
                 'number_of_attendees_on_queue',
@@ -300,7 +295,7 @@ class EventsList extends AbstractList
             'tx_seminars_pi2[table]' => 'tx_seminars_attendances',
             'tx_seminars_pi2[eventUid]' => $event->getUid(),
         ];
-        $csvUrl = BackendUtility::getModuleUrl(self::MODULE_NAME, $urlParameters);
+        $csvUrl = $this->getRouteUrl(self::MODULE_NAME, $urlParameters);
 
         return '<a class="btn btn-default" href="' . \htmlspecialchars($csvUrl, ENT_QUOTES | ENT_HTML5) . '">' .
             $imageTag . '</a>&nbsp;';
@@ -342,7 +337,7 @@ class EventsList extends AbstractList
 
         $this->template->setMarker('uid', $event->getUid());
         $urlParameters = ['id' => (int)$pageData['uid']];
-        $buttonUrl = BackendUtility::getModuleUrl(self::MODULE_NAME, $urlParameters);
+        $buttonUrl = $this->getRouteUrl(self::MODULE_NAME, $urlParameters);
         $this->template->setMarker('email_button_url', \htmlspecialchars($buttonUrl, ENT_QUOTES | ENT_HTML5));
         $this->template->setMarker(
             'label_email_button',
@@ -376,7 +371,7 @@ class EventsList extends AbstractList
         ) {
             $this->template->setMarker('uid', $event->getUid());
             $urlParameters = ['id' => (int)$pageData['uid']];
-            $buttonUrl = BackendUtility::getModuleUrl(self::MODULE_NAME, $urlParameters);
+            $buttonUrl = $this->getRouteUrl(self::MODULE_NAME, $urlParameters);
             $this->template->setMarker('cancel_button_url', \htmlspecialchars($buttonUrl, ENT_QUOTES | ENT_HTML5));
             $this->template->setMarker(
                 'label_cancel_button',
@@ -413,7 +408,7 @@ class EventsList extends AbstractList
         ) {
             $this->template->setMarker('uid', $event->getUid());
             $urlParameters = ['id' => (int)$pageData['uid']];
-            $buttonUrl = BackendUtility::getModuleUrl(self::MODULE_NAME, $urlParameters);
+            $buttonUrl = $this->getRouteUrl(self::MODULE_NAME, $urlParameters);
             $this->template->setMarker('confirm_button_url', \htmlspecialchars($buttonUrl, ENT_QUOTES | ENT_HTML5));
             $this->template->setMarker(
                 'label_confirm_button',
@@ -432,7 +427,7 @@ class EventsList extends AbstractList
      *
      * @return int the PID for new event records, will be >= 0
      */
-    protected function getNewRecordPid()
+    protected function getNewRecordPid(): int
     {
         return $this->getLoggedInUser()->getEventFolderFromGroup();
     }
@@ -452,7 +447,7 @@ class EventsList extends AbstractList
         $pageData = $this->page->getPageData();
 
         $urlParameters = ['id' => (int)$pageData['uid'], 'subModule' => '2', 'eventUid' => $event->getUid()];
-        $url = BackendUtility::getModuleUrl(self::MODULE_NAME, $urlParameters);
+        $url = $this->getRouteUrl(self::MODULE_NAME, $urlParameters);
 
         return '<a class="btn btn-default" href="' . \htmlspecialchars($url, ENT_QUOTES | ENT_HTML5) . '">' .
             $this->getLanguageService()->getLL('label_show_event_registrations') . '</a>';
