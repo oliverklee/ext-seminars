@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\BackEnd;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Template\DocumentTemplate;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\FormProtection\FormProtectionFactory;
@@ -326,13 +327,13 @@ class Controller extends AbstractModule
         string $currentValue,
         array $menuItems
     ): string {
-        $mainParams = GeneralUtility::implodeArrayForUrl('', $mainParams);
-        $script = \basename(PATH_thisScript);
         $menuDefinition = [];
         foreach ($menuItems as $value => $label) {
+            $allParameters = \array_merge($mainParams, [$elementName => (string)$value]);
+
             $menuDefinition[$value]['isActive'] = $currentValue === (string)$value;
             $menuDefinition[$value]['label'] = \htmlspecialchars($label, ENT_QUOTES | ENT_HTML5);
-            $menuDefinition[$value]['url'] = $script . '?' . $mainParams . '&' . $elementName . '=' . $value;
+            $menuDefinition[$value]['url'] = $this->getRouteUrl(self::MODULE_NAME, $allParameters);
         }
 
         return $this->getTabMenuRaw($menuDefinition);
@@ -362,5 +363,31 @@ class Controller extends AbstractModule
         return '<ul class="nav nav-tabs" role="tablist">' .
             $options .
             '</ul>';
+    }
+
+    /**
+     * Returns the URL to a given module.
+     *
+     * @param string $moduleName name of the module
+     * @param array $urlParameters URL parameters that should be added as key-value pairs
+     *
+     * @return string calculated URL
+     */
+    protected function getRouteUrl(string $moduleName, array $urlParameters = []): string
+    {
+        $uriBuilder = $this->getUriBuilder();
+        try {
+            $uri = $uriBuilder->buildUriFromRoute($moduleName, $urlParameters);
+        } catch (\TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException $e) {
+            // no route registered, use the fallback logic to check for a module
+            $uri = $uriBuilder->buildUriFromModule($moduleName, $urlParameters);
+        }
+
+        return (string)$uri;
+    }
+
+    protected function getUriBuilder(): UriBuilder
+    {
+        return GeneralUtility::makeInstance(UriBuilder::class);
     }
 }
