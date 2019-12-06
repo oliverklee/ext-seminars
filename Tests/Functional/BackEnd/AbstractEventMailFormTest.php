@@ -8,7 +8,7 @@ use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Seminars\BackEnd\AbstractEventMailForm;
 use OliverKlee\Seminars\Tests\Functional\BackEnd\Fixtures\TestingEventMailForm;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
-use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -57,6 +57,32 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
         GeneralUtility::purgeInstances();
 
         parent::tearDown();
+    }
+
+    /**
+     * Returns the URL to a given module.
+     *
+     * @param string $moduleName name of the module
+     * @param array $urlParameters URL parameters that should be added as key-value pairs
+     *
+     * @return string calculated URL
+     */
+    private function getRouteUrl(string $moduleName, array $urlParameters = []): string
+    {
+        $uriBuilder = $this->getUriBuilder();
+        try {
+            $uri = $uriBuilder->buildUriFromRoute($moduleName, $urlParameters);
+        } catch (\TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException $e) {
+            // no route registered, use the fallback logic to check for a module
+            $uri = $uriBuilder->buildUriFromModule($moduleName, $urlParameters);
+        }
+
+        return (string)$uri;
+    }
+
+    private function getUriBuilder(): UriBuilder
+    {
+        return GeneralUtility::makeInstance(UriBuilder::class);
     }
 
     /**
@@ -212,7 +238,7 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
         );
         $subject->render();
 
-        $url = BackendUtility::getModuleUrl(AbstractEventMailForm::MODULE_NAME, ['id' => $pageUid]);
+        $url = $this->getRouteUrl(AbstractEventMailForm::MODULE_NAME, ['id' => $pageUid]);
         self::assertSame('Location: ' . $url, $this->headerProxy->getLastAddedHeader());
     }
 }

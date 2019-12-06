@@ -50,7 +50,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 - Replace the removed `getTabMenu` (#423)
-- Replace deprecated BE route methods (#418, #419, #420, #424, #425)
+- Replace deprecated BE route methods (#418, #419, #420, #424, #425, #426)
 - Fix failing bag builder tests in 9.5 (#414)
 - Fix failing speaker bag tests in 9.5 (#413)
 - Fix a failing EventMapper test in 9.5 (#412)
