@@ -271,7 +271,7 @@ abstract class AbstractList
         $pageData = $this->page->getPageData();
         $csvLabel = $this->getLanguageService()->getLL('csvExport');
         $urlParameters = ['id' => (int)$pageData['uid'], 'csv' => '1', 'tx_seminars_pi2[table]' => $this->tableName];
-        $csvUrl = BackendUtility::getModuleUrl(self::MODULE_NAME, $urlParameters);
+        $csvUrl = $this->getRouteUrl(self::MODULE_NAME, $urlParameters);
 
         return '<div id="typo3-csvLink">' .
             '<a class="btn btn-default" href="' . \htmlspecialchars($csvUrl, ENT_QUOTES | ENT_HTML5) .
