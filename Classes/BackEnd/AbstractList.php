@@ -152,9 +152,14 @@ abstract class AbstractList
                 ) . ')) {return true;} else {return false;}',
                 ENT_QUOTES | ENT_HTML5
             );
+            $urlParameters = [
+                'cmd' => [$this->tableName => [$recordUid => ['delete' => 1]]],
+                'redirect' => GeneralUtility::getIndpEnv('REQUEST_URI'),
+            ];
+            $url = $this->getRouteUrl('tce_db', $urlParameters);
             $langDelete = $languageService->getLL('delete');
             $result = '<a class="btn btn-default" href="' .
-                \htmlspecialchars(BackendUtility::getLinkToDataHandlerAction($urlParameters), ENT_QUOTES | ENT_HTML5) .
+                \htmlspecialchars($url, ENT_QUOTES | ENT_HTML5) .
                 '" onclick="' . $confirmation . '">' .
                 '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') .
                 'Resources/Public/Icons/Garbage.gif" title="' . \htmlspecialchars($langDelete, ENT_QUOTES | ENT_HTML5) .
@@ -301,20 +306,22 @@ abstract class AbstractList
 
         if ($this->doesUserHaveAccess($pageUid) && $this->getBackEndUser()->check('tables_modify', $this->tableName)) {
             if ($hidden) {
-                $urlParameters = '&data[' . $this->tableName . '][' . $recordUid . '][hidden]=0';
+                $hidden = '0';
                 $icon = 'Unhide.gif';
                 $langHide = $this->getLanguageService()->getLL('unHide');
             } else {
-                $urlParameters = '&data[' . $this->tableName . '][' . $recordUid . '][hidden]=1';
+                $hidden = '1';
                 $icon = 'Hide.gif';
                 $langHide = $this->getLanguageService()->getLL('hide');
             }
 
+            $urlParameters = [
+                'data' => [$this->tableName => [$recordUid => ['hidden' => $hidden]]],
+                'redirect' => GeneralUtility::getIndpEnv('REQUEST_URI'),
+            ];
+            $url = $this->getRouteUrl('tce_db', $urlParameters);
             $result = '<a class="btn btn-default" href="' .
-                \htmlspecialchars(
-                    BackendUtility::getLinkToDataHandlerAction($urlParameters),
-                    ENT_QUOTES | ENT_HTML5
-                ) . '">' .
+                \htmlspecialchars($url, ENT_QUOTES | ENT_HTML5) . '">' .
                 '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') . 'Resources/Public/Icons/' .
                 $icon . '" title="' . $langHide . '" alt="' . $langHide . '" class="hideicon" />' .
                 '</a>';
