@@ -9517,21 +9517,21 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
     /**
      * @test
      */
-    public function listViewCallsSeminarListViewHookMethodsForOtherDates()
+    public function singleViewCallsSeminarListViewHookMethodsForOtherDates()
     {
-        $topic = $this->testingFramework->createRecord(
+        $topicUId = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'pid' => $this->systemFolderPid,
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
             ]
         );
-        $date = $this->testingFramework->createRecord(
+        $dateUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
                 'pid' => $this->systemFolderPid,
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
-                'topic' => $topic,
+                'topic' => $topicUId,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
                 'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
             ]
@@ -9541,13 +9541,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
             [
                 'pid' => $this->systemFolderPid,
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
-                'topic' => $topic,
+                'topic' => $topicUId,
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 11000, // > 1 day after first date
                 'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 12000,
             ]
         );
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
-        $this->subject->piVars['showUid'] = (string)$date;
+        $this->subject->piVars['showUid'] = (string)$dateUid;
 
         $hook = $this->createMock(SeminarListView::class);
         $hook->expects(self::exactly(2))->method('modifyListHeader')->with($this->subject);
