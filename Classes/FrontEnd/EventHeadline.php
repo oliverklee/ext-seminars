@@ -24,7 +24,7 @@ class Tx_Seminars_FrontEnd_EventHeadline extends \Tx_Seminars_FrontEnd_AbstractV
      *
      * @return void
      */
-    public function injectEventMapper($mapper)
+    public function injectEventMapper(\Tx_Seminars_Mapper_Event $mapper)
     {
         $this->mapper = $mapper;
     }
