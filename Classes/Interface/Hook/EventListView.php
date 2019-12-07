@@ -5,6 +5,8 @@ declare(strict_types=1);
 /**
  * This interface needs to be used for hooks concerning the event list view.
  *
+ * @deprecated will be removed in seminars 4; use `Hooks\Interfaces\Hook\SeminarListView` instead
+ *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 interface Tx_Seminars_Interface_Hook_EventListView
@@ -20,6 +22,8 @@ interface Tx_Seminars_Interface_Hook_EventListView
      *        the template that will be used to create the list row output
      *
      * @return void
+     *
+     * @deprecated will be removed in seminars 4; use `SeminarListView::modifyListRow` instead
      */
     public function modifyListRow(\Tx_Seminars_Model_Event $event, \Tx_Oelib_Template $template);
 
@@ -32,6 +36,8 @@ interface Tx_Seminars_Interface_Hook_EventListView
      *        the template that will be used to create the list row output
      *
      * @return void
+     *
+     * @deprecated will be removed in seminars 4; use `SeminarListView::modifyMyEventsListRow` instead
      */
     public function modifyMyEventsListRow(
         \Tx_Seminars_Model_Registration $registration,

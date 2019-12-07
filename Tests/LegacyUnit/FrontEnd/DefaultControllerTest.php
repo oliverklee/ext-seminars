@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Hooks\Interfaces\SeminarListView;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
 use OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd\Fixtures\TestingDefaultController;
@@ -9447,6 +9448,202 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $hookClass = \get_class($hook);
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView'][$hookClass] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
+
+        $this->subject->main('', []);
+    }
+
+    /**
+     * @test
+     */
+    public function listViewCallsSeminarListViewHookMethodsForTopicList()
+    {
+        $topic = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            [
+                'pid' => $this->systemFolderPid,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
+            ]
+        );
+        $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            [
+                'pid' => $this->systemFolderPid,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'topic' => $topic,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
+            ]
+        );
+        $this->subject->setConfigurationValue('what_to_display', 'topic_list');
+
+        $hook = $this->createMock(SeminarListView::class);
+        $hook->expects(self::once())->method('modifyListHeader')->with($this->subject);
+        $hook->expects(self::once())->method('modifyListRow')->with($this->subject);
+        $hook->expects(self::never())->method('modifyMyEventsListRow');
+        $hook->expects(self::once())->method('modifyListFooter')->with($this->subject);
+        $hook->expects(self::once())->method('modifyEventBagBuilder')->with($this->subject, self::anything(), 'topic_list');
+        $hook->expects(self::never())->method('modifyRegistrationBagBuilder');
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][SeminarListView::class][] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
+
+        $this->subject->main('', []);
+    }
+
+    /**
+     * @test
+     */
+    public function listViewCallsSeminarListViewHookMethodsForSeminarList()
+    {
+        $this->subject->setConfigurationValue('what_to_display', 'seminar_list');
+
+        $hook = $this->createMock(SeminarListView::class);
+        $hook->expects(self::once())->method('modifyListHeader')->with($this->subject);
+        $hook->expects(self::once())->method('modifyListRow')->with($this->subject);
+        $hook->expects(self::never())->method('modifyMyEventsListRow');
+        $hook->expects(self::once())->method('modifyListFooter')->with($this->subject);
+        $hook->expects(self::once())->method('modifyEventBagBuilder')->with($this->subject, self::anything(), 'seminar_list');
+        $hook->expects(self::never())->method('modifyRegistrationBagBuilder');
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][SeminarListView::class][] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
+
+        $this->subject->main('', []);
+    }
+
+    /**
+     * @test
+     */
+    public function singleViewCallsSeminarListViewHookMethodsForOtherDates()
+    {
+        $topicUId = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            [
+                'pid' => $this->systemFolderPid,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
+            ]
+        );
+        $dateUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            [
+                'pid' => $this->systemFolderPid,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'topic' => $topicUId,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
+            ]
+        );
+        $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            [
+                'pid' => $this->systemFolderPid,
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'topic' => $topicUId,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 11000, // > 1 day after first date
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 12000,
+            ]
+        );
+        $this->subject->setConfigurationValue('what_to_display', 'single_view');
+        $this->subject->piVars['showUid'] = (string)$dateUid;
+
+        $hook = $this->createMock(SeminarListView::class);
+        $hook->expects(self::exactly(2))->method('modifyListHeader')->with($this->subject);
+        $hook->expects(self::exactly(2))->method('modifyListRow')->with($this->subject);
+        $hook->expects(self::never())->method('modifyMyEventsListRow');
+        $hook->expects(self::exactly(2))->method('modifyListFooter')->with($this->subject);
+        $hook->expects(self::exactly(2))->method('modifyEventBagBuilder')->withConsecutive(
+            [$this->subject, self::anything(), 'events_next_day'],
+            [$this->subject, self::anything(), 'other_dates']
+        );
+        $hook->expects(self::never())->method('modifyRegistrationBagBuilder');
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][SeminarListView::class][] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
+
+        $this->subject->main('', []);
+    }
+
+    /**
+     * @test
+     */
+    public function listViewCallsSeminarListViewHookMethodsForMyEventsList()
+    {
+        $this->subject->setConfigurationValue('what_to_display', 'my_events');
+
+        $this->createLogInAndRegisterFeUser();
+
+        $hook = $this->createMock(SeminarListView::class);
+        $hook->expects(self::once())->method('modifyListHeader')->with($this->subject);
+        $hook->expects(self::once())->method('modifyListRow')->with($this->subject);
+        $hook->expects(self::once())->method('modifyMyEventsListRow')->with($this->subject);
+        $hook->expects(self::once())->method('modifyListFooter')->with($this->subject);
+        $hook->expects(self::never())->method('modifyEventBagBuilder');
+        $hook->expects(self::once())->method('modifyRegistrationBagBuilder')->with($this->subject, self::anything(), 'my_events');
+        // We don't test for the second parameter (the bag builder instance here)
+        // because we cannot access it from the outside.
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][SeminarListView::class][] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
+
+        $this->subject->main('', []);
+    }
+
+    /**
+     * @test
+     */
+    public function listViewCallsSeminarListViewHookMethodsForMyVipEventsList()
+    {
+        $this->subject->setConfigurationValue('what_to_display', 'my_vip_events');
+
+        $this->createLogInAndAddFeUserAsVip();
+
+        $hook = $this->createMock(SeminarListView::class);
+        $hook->expects(self::once())->method('modifyListHeader')->with($this->subject);
+        $hook->expects(self::once())->method('modifyListRow')->with($this->subject);
+        $hook->expects(self::never())->method('modifyMyEventsListRow');
+        $hook->expects(self::once())->method('modifyListFooter')->with($this->subject);
+        $hook->expects(self::once())->method('modifyEventBagBuilder')->with($this->subject, self::anything(), 'my_vip_events');
+        $hook->expects(self::never())->method('modifyRegistrationBagBuilder');
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][SeminarListView::class][] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
+
+        $this->subject->main('', []);
+    }
+
+    /**
+     * @test
+     */
+    public function listViewCallsSeminarListViewHookMethodsForMyEnteredEventsList()
+    {
+        $editorGroupUid = $this->testingFramework->createFrontEndUserGroup();
+        $this->subject->setConfigurationValue('what_to_display', 'my_entered_events');
+        $this->subject->setConfigurationValue('eventEditorFeGroupID', $editorGroupUid);
+        $feUserUid = $this->testingFramework->createAndLoginFrontEndUser($editorGroupUid);
+        $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            [
+                'pid' => $this->systemFolderPid,
+                'owner_feuser' => $feUserUid,
+            ]
+        );
+
+        $hook = $this->createMock(SeminarListView::class);
+        $hook->expects(self::once())->method('modifyListHeader')->with($this->subject);
+        $hook->expects(self::once())->method('modifyListRow')->with($this->subject);
+        $hook->expects(self::never())->method('modifyMyEventsListRow');
+        $hook->expects(self::once())->method('modifyListFooter')->with($this->subject);
+        $hook->expects(self::once())->method('modifyEventBagBuilder')->with($this->subject, self::anything(), 'my_entered_events');
+        $hook->expects(self::never())->method('modifyRegistrationBagBuilder');
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][SeminarListView::class][] = $hookClass;
         GeneralUtility::addInstance($hookClass, $hook);
 
         $this->subject->main('', []);

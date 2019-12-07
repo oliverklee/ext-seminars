@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use OliverKlee\Seminars\Bag\AbstractBag;
 use OliverKlee\Seminars\Hooks\HookProvider;
+use OliverKlee\Seminars\Hooks\Interfaces\SeminarListView;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
@@ -168,6 +169,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      * hook objects for the list view
      *
      * @var \Tx_Seminars_Interface_Hook_EventListView[]
+     *
+     * @deprecated will be removed in seminars 4; use `->getListViewHookProvider()` instead
      */
     private $listViewHooks = [];
 
@@ -175,8 +178,15 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      * whether the hooks in $this->listViewHooks have been retrieved
      *
      * @var bool
+     *
+     * @deprecated will be removed in seminars 4; use `->getListViewHookProvider()` instead
      */
     private $listViewHooksHaveBeenRetrieved = false;
+
+    /**
+     * @var HookProvider|null
+     */
+    protected $listViewHookProvider = null;
 
     /**
      * hook objects for the single view
@@ -381,6 +391,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      * @throws \UnexpectedValueException
      *          if there are registered hook classes that do not implement the
      *          \Tx_Seminars_Interface_Hook_EventListView interface
+     *
+     * @deprecated will be removed in seminars 4; use `->getListViewHookProvider()` instead
      */
     protected function getListViewHooks(): array
     {
@@ -404,6 +416,20 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         }
 
         return $this->listViewHooks;
+    }
+
+    /**
+     * Gets the hook provider for the list view.
+     *
+     * @return HookProvider
+     */
+    protected function getListViewHookProvider(): HookProvider
+    {
+        if (!$this->listViewHookProvider instanceof HookProvider) {
+            $this->listViewHookProvider = GeneralUtility::makeInstance(HookProvider::class, SeminarListView::class);
+        }
+
+        return $this->listViewHookProvider;
     }
 
     /**
@@ -1867,6 +1893,13 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         $resultsAtATime = MathUtility::forceIntegerInRange($this->internal['results_at_a_time'], 1, 1000);
         $builder->setLimit(($pointer * $resultsAtATime) . ',' . $resultsAtATime);
 
+        if ($builder instanceof \Tx_Seminars_BagBuilder_Event) {
+            $this->getListViewHookProvider()->executeHook('modifyEventBagBuilder', $this, $builder, $whatToDisplay);
+        } elseif ($builder instanceof \Tx_Seminars_BagBuilder_Registration) {
+            $this->getListViewHookProvider()
+                ->executeHook('modifyRegistrationBagBuilder', $this, $builder, $whatToDisplay);
+        }
+
         $seminarOrRegistrationBag = $builder->build();
 
         $this->internal['res_count'] = $seminarOrRegistrationBag->countWithoutLimit();
@@ -1962,6 +1995,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
             $this->setMarker('header_' . $column, $this->getFieldHeader($column));
         }
 
+        $this->getListViewHookProvider()->executeHook('modifyListHeader', $this);
+
         return $this->getSubpart('LIST_HEADER');
     }
 
@@ -1972,6 +2007,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      */
     protected function createListFooter(): string
     {
+        $this->getListViewHookProvider()->executeHook('modifyListFooter', $this);
+
         return $this->getSubpart('LIST_FOOTER');
     }
 
@@ -2123,6 +2160,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
                 $hook->modifyListRow($event, $this->getTemplate());
             }
 
+            $this->getListViewHookProvider()->executeHook('modifyListRow', $this);
+
             if ($whatToDisplay === 'my_events') {
                 /** @var \Tx_Seminars_Mapper_Registration $mapper */
                 $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
@@ -2132,6 +2171,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
                 foreach ($this->getListViewHooks() as $hook) {
                     $hook->modifyMyEventsListRow($registration, $this->getTemplate());
                 }
+
+                $this->getListViewHookProvider()->executeHook('modifyMyEventsListRow', $this);
             }
 
             $result = $this->getSubpart('LIST_ITEM');

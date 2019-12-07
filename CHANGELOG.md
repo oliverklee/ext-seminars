@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add new seminar list view hooks (#408)
 - Add TypoScript linting (#10)
 - Add `AbstractModel::comesFromDatabase` (#364)
 - Add php-cs-fixer to the CI (#351)
