@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarListView;
+use OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
 use OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd\Fixtures\TestingDefaultController;
@@ -7473,6 +7474,43 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
             '/required_foo.*required_bar/s',
             $this->subject->main('', [])
         );
+    }
+
+    /**
+     * @test
+     */
+    public function registrationFormCallsRegistrationFormHooks()
+    {
+        $registrationFormMock = $this->createMock(\Tx_Seminars_FrontEnd_RegistrationForm::class);
+        GeneralUtility::addInstance(\Tx_Seminars_FrontEnd_RegistrationForm::class, $registrationFormMock);
+
+        $this->testingFramework->createAndLoginFrontEndUser();
+        $this->subject->setConfigurationValue('what_to_display', 'seminar_registration');
+
+        $eventUid = $this->testingFramework->createRecord(
+            'tx_seminars_seminars',
+            [
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
+                'title' => 'Registration form test',
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + 2000,
+                'needs_registration' => 1,
+                'attendees_max' => 10,
+            ]
+        );
+
+        $this->subject->piVars['seminar'] = $eventUid;
+
+        $hook = $this->createMock(SeminarRegistrationForm::class);
+        $hook->expects(self::once())->method('modifyRegistrationHeader')->with($this->subject);
+        $hook->expects(self::once())->method('modifyRegistrationForm')->with($this->subject, $registrationFormMock);
+        $hook->expects(self::once())->method('modifyRegistrationFooter')->with($this->subject);
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][SeminarRegistrationForm::class][] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
+
+        $this->subject->main('', []);
     }
 
     /*
