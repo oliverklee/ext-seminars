@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\Mapper;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\Seminars\Tests\Functional\Traits\ListHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -14,6 +15,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 final class EventMapperTest extends FunctionalTestCase
 {
+    use ListHelper;
+
     /**
      * @var string[]
      */
@@ -29,22 +32,6 @@ final class EventMapperTest extends FunctionalTestCase
         parent::setUp();
 
         $this->subject = new \Tx_Seminars_Mapper_Event();
-    }
-
-    /**
-     * @return void
-     */
-    private static function assertContainsModelWithUid(\Tx_Oelib_List $models, int $uid)
-    {
-        self::assertTrue($models->hasUid($uid));
-    }
-
-    /**
-     * @return void
-     */
-    private static function assertNotContainsModelWithUid(\Tx_Oelib_List $models, int $uid)
-    {
-        self::assertFalse($models->hasUid($uid));
     }
 
     /**
@@ -220,5 +207,35 @@ final class EventMapperTest extends FunctionalTestCase
         $result = $this->subject->findForRegistrationDigestEmail();
 
         self::assertNotContainsModelWithUid($result, 6);
+    }
+
+    /**
+     * @test
+     */
+    public function getDependenciesReturnsEmptyList()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
+
+        /** @var \Tx_Seminars_Model_Event $model */
+        $model = $this->subject->find(1);
+        $result = $model->getDependencies();
+
+        self::assertInstanceOf(\Tx_Oelib_List::class, $result);
+        self::assertTrue($result->isEmpty());
+    }
+
+    /**
+     * @test
+     */
+    public function getRequirementsReturnsEmptyList()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
+
+        /** @var \Tx_Seminars_Model_Event $model */
+        $model = $this->subject->find(1);
+        $result = $model->getRequirements();
+
+        self::assertInstanceOf(\Tx_Oelib_List::class, $result);
+        self::assertTrue($result->isEmpty());
     }
 }

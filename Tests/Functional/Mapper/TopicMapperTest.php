@@ -1,0 +1,95 @@
+<?php
+
+declare(strict_types=1);
+
+namespace OliverKlee\Seminars\Tests\Functional\Mapper;
+
+use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\Seminars\Tests\Functional\Traits\ListHelper;
+
+/**
+ * Test case.
+ *
+ * @author Oliver Klee <typo3-coding@oliverklee.de>
+ */
+final class TopicMapperTest extends FunctionalTestCase
+{
+    use ListHelper;
+
+    /**
+     * @var string[]
+     */
+    protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
+
+    /**
+     * @var \Tx_Seminars_Mapper_Event
+     */
+    private $subject = null;
+
+    protected function setUp()
+    {
+        parent::setUp();
+
+        $this->subject = new \Tx_Seminars_Mapper_Event();
+    }
+
+    /**
+     * @test
+     */
+    public function getRequirementsForNoRequirementsReturnsEmptyList()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Topics.xml');
+
+        /** @var \Tx_Seminars_Model_Event $model */
+        $model = $this->subject->find(1);
+        $result = $model->getRequirements();
+
+        self::assertInstanceOf(\Tx_Oelib_List::class, $result);
+        self::assertTrue($result->isEmpty());
+    }
+
+    /**
+     * @test
+     */
+    public function getRequirementsReturnsRequirements()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Topics.xml');
+
+        /** @var \Tx_Seminars_Model_Event $model */
+        $model = $this->subject->find(2);
+        $result = $model->getRequirements();
+
+        self::assertSame(1, $result->count());
+        self::assertContainsModelWithUid($result, 3);
+    }
+
+    /**
+     * @test
+     */
+    public function getDependenciesForNoDependenciesReturnsEmptyList()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Topics.xml');
+
+        /** @var \Tx_Seminars_Model_Event $model */
+        $model = $this->subject->find(1);
+        $result = $model->getDependencies();
+
+        self::assertInstanceOf(\Tx_Oelib_List::class, $result);
+        self::assertTrue($result->isEmpty());
+    }
+
+    /**
+     * @test
+     */
+    public function getDependenciesReturnsDependencies()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Topics.xml');
+
+        /** @var \Tx_Seminars_Model_Event $model */
+        $model = $this->subject->find(3);
+        $result = $model->getDependencies();
+
+        self::assertSame(1, $result->count());
+        self::assertContainsModelWithUid($result, 2);
+    }
+}
