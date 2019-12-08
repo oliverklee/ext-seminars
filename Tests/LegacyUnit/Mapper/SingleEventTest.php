@@ -427,38 +427,4 @@ class Tx_Seminars_Tests_Unit_Mapper_SingleEventTest extends TestCase
             $model->getCheckboxes()->getUids()
         );
     }
-
-    ///////////////////////////////////////
-    // Tests regarding getRequirements().
-    ///////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function getRequirementsForSingleReturnsEmptyList()
-    {
-        /** @var \Tx_Seminars_Model_Event $testingModel */
-        $testingModel = $this->subject->getLoadedTestingModel(
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
-        );
-
-        self::assertTrue($testingModel->getRequirements()->isEmpty());
-    }
-
-    ///////////////////////////////////////
-    // Tests regarding getDependencies().
-    ///////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function getDependenciesForSingleEventReturnsEmptyList()
-    {
-        /** @var \Tx_Seminars_Model_Event $testingModel */
-        $testingModel = $this->subject->getLoadedTestingModel(
-            ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
-        );
-
-        self::assertTrue($testingModel->getDependencies()->isEmpty());
-    }
 }

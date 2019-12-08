@@ -56,7 +56,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Fix failing speaker bag tests in 9.5 (#413)
 - Fix a failing EventMapper test in 9.5 (#412)
 - Stop using the deprecated `NullTimeTracker` (#410)
-- Move fragile tests to the new testing framework (#384, #389, #390, #391, #392, #396, #428)
+- Move fragile tests to the new testing framework (#384, #389, #390, #391, #392, #396, #428, #429)
 - Internally store boolean properties as integers (#386)
 - Convert the old model DB accesses to the ConnectionPool
   (#372, #373, #379, #382, #383, #385, #393, #397, #398, #399, #400, #401, #402, #403, #404, #406, #407)
