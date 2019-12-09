@@ -18,9 +18,9 @@ Hooks
 
 .. warning::
     Um Hooks nutzen zu können, benötigen Sie tiefgehende Kenntnisse über PHP-Klassen,
-    die Implementation von Interfaces und der seminars Objekt Interna.
+    die Implementation von Interfaces und der seminars-Objekt-Interna.
 
-Mit Hilfe von Hooks erweitern Sie die Funktionalität von seminars ohne XCLASSen zu nutzen.
+Mit Hilfe von Hooks erweitern Sie die Funktionalität von seminars, ohne XCLASSen zu nutzen.
 Es gibt Hooks in diese Teile von seminars:
 
 * :ref:`singleview`
@@ -33,11 +33,11 @@ Es gibt Hooks in diese Teile von seminars:
 Bitte nehmen Sie Kontakt zu uns auf, wenn Sie weitere Hooks benötigen.
 
 .. important::
-    seminars wird derzeit grundlegend überarbeitet, um es an die Weiterentwicklung von TYPO3
-    Programmiertechniken anzupassen. Wir bemühen uns, die Änderungen so gering wie möglich zu
-    halten. Informieren Sie sich über Änderungen in CHANGELOG.md, den DocBlocks der Interfaces
-    die Sie implementieren und in diesem Kapitel der Dokumentation, bevor Sie auf eine neue
-    Haput-Version updaten.
+    seminars wird derzeit grundlegend überarbeitet, um es an die Weiterentwicklung von
+    TYPO3-Programmiertechniken anzupassen. Wir bemühen uns, die Änderungen so gering wie möglich zu
+    halten. Informieren Sie sich über Änderungen in CHANGELOG.md, den DocBlocks der Interfaces,
+    die Sie implementieren, und in diesem Kapitel der Dokumentation, bevor Sie auf eine neue
+    Haupt-Version updaten.
 
 .. _singleview:
 
@@ -54,13 +54,17 @@ umgewandelt wird. Sie können damit eigene Marker ausfüllen oder bestehende Mar
 verändern. Für Details zu Eigenschaften und Methoden siehe :file:`Classes/Frontend/DefaultController.php`.
 
 Ihre Klasse, die :php:`\OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView` implementiert,
-machen Sie seminars in :file:`ext_localconf.php` Ihrer Extension bekannt:: php
+machen Sie seminars in :file:`ext_localconf.php` Ihrer Extension bekannt:
+
+.. code-block:: php
 
     use \OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
     $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][SeminarSingleView:class][]
         = \Tx_Seminarspaypal_Hooks_EventSingleView::class;
 
-Implementieren Sie die benötigten Methoden gemäß dem Interface:: php
+Implementieren Sie die benötigten Methoden gemäß dem Interface:
+
+.. code-block:: php
 
     use \OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
 
@@ -93,7 +97,7 @@ Hooks zur Listenansicht
 
 Es gibt 5 Hooks in die Listenansicht(en). Der erste Hook wird vor der Erstellung der
 Seminar-Bag (die in der Liste auszugebenden Seminare) oder der Registrierungen-Bag (die
-Seminare, für die ein Benutzer sich angemeldet hat) aufgerufen. Der Hook wird immer aufgerufen,
+Seminare, für die sich ein Benutzer angemeldet hat) aufgerufen. Der Hook wird immer aufgerufen,
 auch wenn die Liste leer sein wird.
 
 Die übrigen Hooks werden während der Erstellung der Seminar-Listen-Tabelle aufgerufen:
@@ -107,7 +111,7 @@ In diesen Hooks können Sie eigene Marker ausfüllen oder vorhandene Marker-Wert
 verfügbaren Eigenschaften und Methoden siehe :file:`Classes/Frontend/DefaultController.php`.
 
 Der Hook in die Erstellung der Seminar- oder Registrierungen-Bag erlaubt es, die für die Liste
-ausgewählten Seminare / Reqistrierungen zu beeinflussen. Sie können neue Filter hinzufügen oder
+ausgewählten Seminare bzw. Reqistrierungen zu beeinflussen. Sie können neue Filter hinzufügen oder
 bestehende Filter entfernen. Details dazu finden Sie in :file:`Classes/BagBuilder/AbstractBagBuilder.php`,
 :file:`Classes/BagBuilder/Event.php` und :file:`Classes/BagBuilder/Registration.php`.
 
@@ -125,13 +129,17 @@ Die letzten beiden Listenarten (Termine am nächsten Tag und Andere Termine) geh
 werden aber als komplette Listenansicht behandelt (inklusive Erstellung der Seminar-Bag).
 
 Ihre Klasse, die :php:`\OliverKlee\Seminars\Hooks\Interfaces\SeminarListView` implementiert,
-machen Sie seminars in :file:`ext_localconf.php` Ihrer Extension bekannt:: php
+machen Sie seminars in :file:`ext_localconf.php` Ihrer Extension bekannt:
+
+.. code-block:: php
 
     use \OliverKlee\Seminars\Hooks\Interfaces\SeminarListView;
     $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][SeminarListView:class][]
         = \Tx_Seminarspaypal_Hooks_ListView::class;
 
-Implementieren Sie die benötigten Methoden gemäß dem Interface:: php
+Implementieren Sie die benötigten Methoden gemäß dem Interface:
+
+.. code-block:: php
 
     use \OliverKlee\Seminars\Hooks\Interfaces\SeminarListView;
 
@@ -275,13 +283,17 @@ Ausfüllen passend zu Seite und Status innerhalb des Registrierungs- bzw. Abmeld
 erfolgt bei Bedarf durch `mkforms` (nicht über diese Hooks).
 
 Ihre Klasse, die :php:`\OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm` implementiert,
-machen Sie seminars in :file:`ext_localconf.php` Ihrer Extension bekannt:: php
+machen Sie seminars in :file:`ext_localconf.php` Ihrer Extension bekannt:
+
+.. code-block:: php
 
     use \OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm;
     $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][SeminarRegistrationForm:class][]
         = \Tx_Seminarspaypal_Hooks_SeminarRegistrationForm::class;
 
-Implementieren Sie die benötigten Methoden gemäß dem Interface:: php
+Implementieren Sie die benötigten Methoden gemäß dem Interface:
+
+.. code-block:: php
 
     use \OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm;
 
@@ -494,4 +506,3 @@ It's used like this:
         * @return void
         */
           public function modifyCancelEmail(Tx_Seminars_Model_Registration $registration, Tx_Oelib_Mail $eMail) {…}
-
