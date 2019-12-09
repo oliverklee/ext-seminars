@@ -7499,7 +7499,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
             ]
         );
 
-        $this->subject->piVars['seminar'] = $eventUid;
+        $this->subject->piVars['seminar'] = (string)$eventUid;
 
         $hook = $this->createMock(SeminarRegistrationForm::class);
         $hook->expects(self::once())->method('modifyRegistrationHeader')->with($this->subject);
