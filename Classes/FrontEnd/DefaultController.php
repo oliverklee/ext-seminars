@@ -5,6 +5,7 @@ declare(strict_types=1);
 use OliverKlee\Seminars\Bag\AbstractBag;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarListView;
+use OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
@@ -210,6 +211,11 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      * @var HookProvider|null
      */
     protected $singleViewHookProvider = null;
+
+    /**
+     * @var HookProvider|null
+     */
+    protected $registrationFormHookProvider = null;
 
     /**
      * a link builder instance
@@ -484,6 +490,20 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         }
 
         return $this->singleViewHookProvider;
+    }
+
+    /**
+     * Gets the hook provider for the registration form.
+     *
+     * @return HookProvider
+     */
+    protected function getRegistrationFormHookProvider(): HookProvider
+    {
+        if ($this->registrationFormHookProvider === null) {
+            $this->registrationFormHookProvider = GeneralUtility::makeInstance(HookProvider::class, SeminarRegistrationForm::class);
+        }
+
+        return $this->registrationFormHookProvider;
     }
 
     /**
@@ -2952,6 +2972,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
             $this->setMarker('error_text', $errorMessage);
         }
 
+        $this->getRegistrationFormHookProvider()->executeHook('modifyRegistrationHeader', $this);
+
         return $this->getSubpart('REGISTRATION_HEAD');
     }
 
@@ -2977,6 +2999,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
             $registrationEditor->setRegistration($this->registration);
         }
 
+        $this->getRegistrationFormHookProvider()->executeHook('modifyRegistrationForm', $this, $registrationEditor);
+
         return (string)$registrationEditor->render();
     }
 
@@ -2987,6 +3011,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      */
     protected function createRegistrationFooter(): string
     {
+        $this->getRegistrationFormHookProvider()->executeHook('modifyRegistrationFooter', $this);
+
         return $this->getSubpart('REGISTRATION_BOTTOM');
     }
 
