@@ -25,6 +25,7 @@ are hooks for these parts of seminars:
 
 * :ref:`singleview`
 * :ref:`listview`
+* :ref:`registrationform`
 * :ref:`notificationemail`
 * :ref:`emailsalutation`
 * :ref:`backendemail`
@@ -95,18 +96,17 @@ seminar bag (the seminars to show in the list) or the registration bag (the
 seminars a user is registered for) is build. It is always called, even when
 there will be an empty list.
 
-The other hooks are during seminar list table creation:
+The other hooks are called during seminar list table creation:
 
 * just before the table header is rendered to HTML
-* just before a table row for a certain seminar / registration is rendered to HTML
-* in case of a my_event list: right after the row hook before
+* just before a table row for a certain seminar or registration is rendered to HTML
+* in case of a `my_event` list: right after the row hook mentioned above
 * just before the table footer is rendered to HTML
 
-In the hooks just before HTML is rendered You may set custom markers or change
-exisitng values for markers. See also :file:`Classes/Frontend/DefaultController.php`
-for available properties and methods.
+In these hooks You may set custom markers or change exisitng values for markers. See also
+:file:`Classes/Frontend/DefaultController.php` for available properties and methods.
 
-The hook to the seminar or registration bag building process always for changing
+The hook to the seminar or registration bag building process allows for changing
 the seminars / registrations shown in the list. You may add more filters or remove
 existing ones. See also :file:`Classes/BagBuilder/AbstractBagBuilder.php`,
 :file:`Classes/BagBuilder/Event.php` and :file:`Classes/BagBuilder/Registration.php`
@@ -125,18 +125,18 @@ There are 7 types of lists Your implementation must handle:
 The last two list types (events next day and other dates) are part of the single
 view, but handled as fully rendered seminar lists (including bag building).
 
-Register Your class that implements :php:`\OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView`
+Register Your class that implements :php:`\OliverKlee\Seminars\Hooks\Interfaces\SeminarListView`
 like this in :file:`ext_localconf.php` of Your extension:: php
 
-    use \OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
-    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][SeminarSingleView:class][]
+    use \OliverKlee\Seminars\Hooks\Interfaces\SeminarListView;
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][SeminarListView:class][]
         = \Tx_Seminarspaypal_Hooks_ListView::class;
 
 Implement the methods required by the interface:: php
 
-    use \OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
+    use \OliverKlee\Seminars\Hooks\Interfaces\SeminarListView;
 
-    class Tx_Seminarspaypal_Hooks_ListView implements SeminarSingleView
+    class Tx_Seminarspaypal_Hooks_ListView implements SeminarListView
     {
         /**
          * Modifies the list view seminar bag builder (the item collection for a seminar list).
@@ -249,6 +249,80 @@ Implement the methods required by the interface:: php
          * @return void
          */
         public function modifyListFooter(\Tx_Seminars_FrontEnd_DefaultController $controller)
+        {
+            // Your code here
+        }
+    }
+
+.. _registrationform:
+
+Hooks for the registration form
+"""""""""""""""""""""""""""""""
+
+There are 3 hooks into the registration form rendering:
+
+* just before the registration form header is rendered to HTML
+* just before the registration form is rendered to HTML
+* just before the registration form footer is rendered to HTML
+
+You may set custom markers or change exisitng values for markers in the header and footer hooks.
+See also :file:`Classes/Frontend/DefaultController.php` for available properties and methods.
+
+The registration form is rendered by the builder class in :file:`Classes/Frontend/RegistrationForm.php`.
+It handles the registration or unregistration in 1 or 2 pages according to configuraton. Depending on
+the page shown, the previously entered values and if it is an unregistration or not the values in the
+form may be set or not. If You add custom fields to the form You also need to handle storage and
+retrieval in DB for them according to the page / state of the (un)registration process as well as
+validation via `mkforms`.
+
+Register Your class that implements :php:`\OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm`
+like this in :file:`ext_localconf.php` of Your extension:: php
+
+    use \OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm;
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][SeminarRegistrationForm:class][]
+        = \Tx_Seminarspaypal_Hooks_SeminarRegistrationForm::class;
+
+Implement the methods required by the interface:: php
+
+    use \OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm;
+
+    class Tx_Seminarspaypal_Hooks_SeminarRegistrationForm implements SeminarRegistrationForm
+    {
+        /**
+         * Modifies the header of the seminar registration form.
+         *
+         * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
+         *
+         * @return void
+         */
+        public function modifyRegistrationHeader(\Tx_Seminars_FrontEnd_DefaultController $controller)
+        {
+            // Your code here
+        }
+
+        /**
+         * Modifies the seminar registration form.
+         *
+         * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
+         * @param \Tx_Seminars_FrontEnd_RegistrationForm $registrationEditor the registration form
+         *
+         * @return void
+         */
+        public function modifyRegistrationForm(
+            \Tx_Seminars_FrontEnd_DefaultController $controller,
+            \Tx_Seminars_FrontEnd_RegistrationForm $registrationEditor
+        ) {
+            // Your code here
+        }
+
+        /**
+         * Modifies the footer of the seminar registration form.
+         *
+         * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
+         *
+         * @return void
+         */
+        public function modifyRegistrationFooter(\Tx_Seminars_FrontEnd_DefaultController $controller)
         {
             // Your code here
         }
