@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+    <pages>
+        <uid>1</uid>
+    </pages>
+    <pages>
+        <uid>2</uid>
+    </pages>
+
+    <fe_users>
+        <uid>1</uid>
+        <description>user without any special settings, but with immediate publishing</description>
+        <usergroup>1</usergroup>
+    </fe_users>
+    <fe_groups>
+        <uid>1</uid>
+        <title>editors</title>
+        <tx_seminars_publish_events>0</tx_seminars_publish_events>
+    </fe_groups>
+
+    <fe_users>
+        <uid>2</uid>
+        <description>user with FE editor settings: hide new, default organizer, PID</description>
+        <usergroup>2</usergroup>
+    </fe_users>
+    <fe_groups>
+        <uid>2</uid>
+        <title>FE editor settings: hide new</title>
+        <tx_seminars_publish_events>1</tx_seminars_publish_events>
+        <tx_seminars_default_organizer>2</tx_seminars_default_organizer>
+        <tx_seminars_events_pid>21</tx_seminars_events_pid>
+    </fe_groups>
+
+    <fe_users>
+        <uid>3</uid>
+        <description>user with FE editor settings: hide edited</description>
+        <usergroup>3</usergroup>
+    </fe_users>
+    <fe_groups>
+        <uid>3</uid>
+        <title>FE editor settings: hide edited</title>
+        <tx_seminars_publish_events>2</tx_seminars_publish_events>
+    </fe_groups>
+
+    <fe_users>
+        <uid>4</uid>
+        <description>user with FE editor settings: one default category</description>
+        <usergroup>4</usergroup>
+    </fe_users>
+    <fe_groups>
+        <uid>4</uid>
+        <title>FE editor settings: 1 default category</title>
+        <tx_seminars_default_categories>1</tx_seminars_default_categories>
+    </fe_groups>
+    <tx_seminars_categories>
+        <uid>1</uid>
+    </tx_seminars_categories>
+    <tx_seminars_usergroups_categories_mm>
+        <uid_local>4</uid_local>
+        <uid_foreign>1</uid_foreign>
+    </tx_seminars_usergroups_categories_mm>
+
+    <tx_seminars_seminars>
+        <uid>1</uid>
+        <title>visible event</title>
+    </tx_seminars_seminars>
+    <tx_seminars_seminars>
+        <uid>2</uid>
+        <title>hidden event</title>
+        <hidden>1</hidden>
+    </tx_seminars_seminars>
+
+    <tx_seminars_organizers>
+        <uid>1</uid>
+        <title>some organizer</title>
+    </tx_seminars_organizers>
+    <tx_seminars_organizers>
+        <uid>2</uid>
+        <title>default organizer for FE user group</title>
+    </tx_seminars_organizers>
+</dataset>
