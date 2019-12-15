@@ -349,7 +349,7 @@ To use this hook, please create a class that implements the interface
 
 **Hook to post process the attendee email**
 
-::
+.. code-block:: php
 
     /**
      * @param \Tx_Oelib_Mail $mail
@@ -363,7 +363,7 @@ To use this hook, please create a class that implements the interface
 
 **Hook to post process the attendee email text**
 
-::
+.. code-block:: php
 
     /**
      * @param \Tx_Seminars_OldModel_Registration $registration
@@ -377,7 +377,7 @@ To use this hook, please create a class that implements the interface
 
 **Hook to post process the organizer email**
 
-::
+.. code-block:: php
 
     /**
      * @param \Tx_Oelib_Mail $mail
@@ -391,7 +391,7 @@ To use this hook, please create a class that implements the interface
 
 **Hook to post process additional emails**
 
-::
+.. code-block:: php
 
     /**
      * @param \Tx_Oelib_Mail $mail
@@ -413,7 +413,7 @@ To use this hook, please create a class that implements the interface
 Your class then needs to be included and registered like in this
 example:
 
-::
+.. code-block:: php
 
    // register my hook objects
    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][] = \\MyVendor\\MyExt\\Hooks\\RegistrationEmailHook::class;
@@ -442,7 +442,7 @@ The second parameter is an user object \Tx_Seminars_Model_FrontEndUser.
 Your class then needs to be included and registered like in this
 example:
 
-::
+.. code-block:: php
 
    // register my hook objects
    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['modifyEmailSalutation'][] = \\MyVendor\\MyExt\\Hooks\\ModifySalutationHook::class;
@@ -455,14 +455,14 @@ Hooks for the e-mails sent from the back-end module
 
 The hook classes need to be registered and written like this:
 
-::
+.. code-block:: php
 
    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['backEndModule'][]
          = \tx_seminarspaypal_Hooks_BackEndModule::class;
 
 It's used like this:
 
-::
+.. code-block:: php
 
    class tx_seminarspaypal_Hooks_BackEndModule implements Tx_Seminars_Interface_Hook_BackEndModule {
          /**
