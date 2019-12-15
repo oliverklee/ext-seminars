@@ -23,12 +23,12 @@ Hooks
 Mit Hilfe von Hooks erweitern Sie die Funktionalität von seminars, ohne XCLASSen zu nutzen.
 Es gibt Hooks in diese Teile von seminars:
 
-* :ref:`singleview`
-* :ref:`listview`
-* :ref:`registrationform`
-* :ref:`notificationemail`
-* :ref:`emailsalutation`
-* :ref:`backendemail`
+* :ref:`singleview_de`
+* :ref:`listview_de`
+* :ref:`registrationform_de`
+* :ref:`notificationemail_de`
+* :ref:`emailsalutation_de`
+* :ref:`backendemail_de`
 
 Bitte nehmen Sie Kontakt zu uns auf, wenn Sie weitere Hooks benötigen.
 
@@ -39,7 +39,7 @@ Bitte nehmen Sie Kontakt zu uns auf, wenn Sie weitere Hooks benötigen.
     die Sie implementieren, und in diesem Kapitel der Dokumentation, bevor Sie auf eine neue
     Haupt-Version updaten.
 
-.. _singleview:
+.. _singleview_de:
 
 Hooks zur Einzelansicht
 """""""""""""""""""""""
@@ -85,7 +85,7 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
         }
     }
 
-.. _listview:
+.. _listview_de:
 
 Hooks zur Listenansicht
 """""""""""""""""""""""
@@ -261,7 +261,7 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
         }
     }
 
-.. _registrationform:
+.. _registrationform_de:
 
 Hooks zum Registrierungsformular
 """"""""""""""""""""""""""""""""
@@ -339,7 +339,7 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
         }
     }
 
-.. _notificationemail:
+.. _notificationemail_de:
 
 Hooks to post process notification emails
 """"""""""""""""""""""""""""""""""""""""""
@@ -419,7 +419,7 @@ example:
    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][] = \\MyVendor\\MyExt\\Hooks\\RegistrationEmailHook::class;
 
 
-.. _emailsalutation:
+.. _emailsalutation_de:
 
 Hooks for the salutation in all e-mails to the attendees
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -448,7 +448,7 @@ example:
    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['modifyEmailSalutation'][] = \\MyVendor\\MyExt\\Hooks\\ModifySalutationHook::class;
 
 
-.. _backendemail:
+.. _backendemail_de:
 
 Hooks for the e-mails sent from the back-end module
 """""""""""""""""""""""""""""""""""""""""""""""""""

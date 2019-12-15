@@ -23,12 +23,12 @@ Hooks
 Hooks allow extending the functionality of seminars without using XCLASSes. There
 are hooks for these parts of seminars:
 
-* :ref:`singleview`
-* :ref:`listview`
-* :ref:`registrationform`
-* :ref:`notificationemail`
-* :ref:`emailsalutation`
-* :ref:`backendemail`
+* :ref:`singleview_en`
+* :ref:`listview_en`
+* :ref:`registrationform_en`
+* :ref:`notificationemail_en`
+* :ref:`emailsalutation_en`
+* :ref:`backendemail_en`
 
 Please contact us if you need additional hooks.
 
@@ -38,7 +38,7 @@ Please contact us if you need additional hooks.
     by reading CHANGELOG.md, the DocBlocks of interfaces you implement and this
     chapter of the documentation before updating to a new seminars major version.
 
-.. _singleview:
+.. _singleview_en:
 
 Hooks for the single view
 """""""""""""""""""""""""
@@ -85,7 +85,7 @@ Implement the methods required by the interface:
         }
     }
 
-.. _listview:
+.. _listview_en:
 
 Hooks for the list view
 """""""""""""""""""""""
@@ -262,7 +262,7 @@ Implement the methods required by the interface:
         }
     }
 
-.. _registrationform:
+.. _registrationform_en:
 
 Hooks for the registration form
 """""""""""""""""""""""""""""""
@@ -340,7 +340,7 @@ Implement the methods required by the interface:
         }
     }
 
-.. _notificationemail:
+.. _notificationemail_en:
 
 Hooks to post process notification emails
 """"""""""""""""""""""""""""""""""""""""""
@@ -420,7 +420,7 @@ example:
    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][] = \\MyVendor\\MyExt\\Hooks\\RegistrationEmailHook::class;
 
 
-.. _emailsalutation:
+.. _emailsalutation_en:
 
 Hooks for the salutation in all e-mails to the attendees
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -449,7 +449,7 @@ example:
    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['modifyEmailSalutation'][] = \\MyVendor\\MyExt\\Hooks\\ModifySalutationHook::class;
 
 
-.. _backendemail:
+.. _backendemail_en:
 
 Hooks for the e-mails sent from the back-end module
 """""""""""""""""""""""""""""""""""""""""""""""""""
