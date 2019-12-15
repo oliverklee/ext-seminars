@@ -111,6 +111,9 @@
         ],
         "post-autoload-dump": [
             "@link-extension"
+        ],
+        "render-docs": [
+            "docker-compose run --rm t3docmake"
         ]
     },
     "extra": {
