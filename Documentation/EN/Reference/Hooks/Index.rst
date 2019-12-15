@@ -34,8 +34,8 @@ Please contact us if you need additional hooks.
 
 .. important::
     seminars is undergoing a major rewriting to keep up with modern TYPO3 programming
-    techniques. We try to keep changes as small as possible. Inform Yourself about changes
-    by reading CHANGELOG.md, the DocBlocks of interfaces You implement and this
+    techniques. We try to keep changes as small as possible. Please inform yourself about changes
+    by reading CHANGELOG.md, the DocBlocks of interfaces you implement and this
     chapter of the documentation before updating to a new seminars major version.
 
 .. _singleview:
@@ -53,14 +53,18 @@ gets rendered to HTML. You may set custom markers or change exisitng values for
 markers. See also :file:`Classes/Frontend/DefaultController.php` for available
 properties and methods.
 
-Register Your class that implements :php:`\OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView`
-like this in :file:`ext_localconf.php` of Your extension:: php
+Register your class that implements :php:`\OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView`
+like this in :file:`ext_localconf.php` of your extension:
+
+.. code-block:: php
 
     use \OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
     $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][SeminarSingleView:class][]
         = \Tx_Seminarspaypal_Hooks_EventSingleView::class;
 
-Implement the methods required by the interface:: php
+Implement the methods required by the interface:
+
+.. code-block:: php
 
     use \OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
 
@@ -103,7 +107,7 @@ The other hooks are called during seminar list table creation:
 * in case of a `my_event` list: right after the row hook mentioned above
 * just before the table footer is rendered to HTML
 
-In these hooks You may set custom markers or change exisitng values for markers. See also
+In these hooks you may set custom markers or change exisitng values for markers. See also
 :file:`Classes/Frontend/DefaultController.php` for available properties and methods.
 
 The hook to the seminar or registration bag building process allows for changing
@@ -112,7 +116,7 @@ existing ones. See also :file:`Classes/BagBuilder/AbstractBagBuilder.php`,
 :file:`Classes/BagBuilder/Event.php` and :file:`Classes/BagBuilder/Registration.php`
 for available properties and methods.
 
-There are 7 types of lists Your implementation must handle:
+There are 7 types of lists your implementation must handle:
 
 * topic list (`topic_list`)
 * seminar list (`seminar_list`)
@@ -125,14 +129,18 @@ There are 7 types of lists Your implementation must handle:
 The last two list types (events next day and other dates) are part of the single
 view, but handled as fully rendered seminar lists (including bag building).
 
-Register Your class that implements :php:`\OliverKlee\Seminars\Hooks\Interfaces\SeminarListView`
-like this in :file:`ext_localconf.php` of Your extension:: php
+Register your class that implements :php:`\OliverKlee\Seminars\Hooks\Interfaces\SeminarListView`
+like this in :file:`ext_localconf.php` of your extension:
+
+.. code-block:: php
 
     use \OliverKlee\Seminars\Hooks\Interfaces\SeminarListView;
     $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][SeminarListView:class][]
         = \Tx_Seminarspaypal_Hooks_ListView::class;
 
-Implement the methods required by the interface:: php
+Implement the methods required by the interface:
+
+.. code-block:: php
 
     use \OliverKlee\Seminars\Hooks\Interfaces\SeminarListView;
 
@@ -271,18 +279,22 @@ See also :file:`Classes/Frontend/DefaultController.php` for available properties
 The registration form is rendered by the builder class in :file:`Classes/Frontend/RegistrationForm.php`.
 It handles the registration or unregistration in 1 or 2 pages according to configuraton. Depending on
 the page shown, the previously entered values and if it is an unregistration or not the values in the
-form may be set or not. If You add custom fields to the form You also need to handle storage and
+form may be set or not. If you add custom fields to the form you also need to handle storage and
 retrieval in DB for them according to the page / state of the (un)registration process as well as
 validation via `mkforms`.
 
-Register Your class that implements :php:`\OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm`
-like this in :file:`ext_localconf.php` of Your extension:: php
+Register your class that implements :php:`\OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm`
+like this in :file:`ext_localconf.php` of your extension:
+
+.. code-block:: php
 
     use \OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm;
     $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][SeminarRegistrationForm:class][]
         = \Tx_Seminarspaypal_Hooks_SeminarRegistrationForm::class;
 
-Implement the methods required by the interface:: php
+Implement the methods required by the interface:
+
+.. code-block:: php
 
     use \OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm;
 
