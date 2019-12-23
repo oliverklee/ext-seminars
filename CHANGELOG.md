@@ -19,6 +19,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Display the name of the current functional test (#256)
 
 ### Changed
+- Sort the entries in the `.gitignore` and `.gitattributes` (#434)
 - Require oelib >= 3.0.3 (#387, #430)
 - Clean up the translation handling in the tests (#369, #376)
 - !!! Merge the language files (#359, #361, #362, #363)
