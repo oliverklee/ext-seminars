@@ -58,8 +58,7 @@ machen Sie seminars in :file:`ext_localconf.php` Ihrer Extension bekannt:
 
 .. code-block:: php
 
-    use \OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
-    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][SeminarSingleView:class][]
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView:class][]
         = \Tx_Seminarspaypal_Hooks_EventSingleView::class;
 
 Implementieren Sie die benötigten Methoden gemäß dem Interface:
@@ -120,7 +119,7 @@ Sie müssen 7 Listenarten bei Ihrer Implementation beachten:
 * Themen Liste (`topic_list`)
 * Termin Liste (`seminar_list`)
 * Meine Seminare (`my_events`)
-* Meine VIP Seminare (`my_vip_events`)
+* Meine VIP-Seminare (`my_vip_events`)
 * Von mir angelegte Seminare (`my_entered_events`)
 * Termine am nächsten Tag (`events_next_day`)
 * Andere Termine (`other_dates`)
@@ -133,8 +132,7 @@ machen Sie seminars in :file:`ext_localconf.php` Ihrer Extension bekannt:
 
 .. code-block:: php
 
-    use \OliverKlee\Seminars\Hooks\Interfaces\SeminarListView;
-    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][SeminarListView:class][]
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\SeminarListView:class][]
         = \Tx_Seminarspaypal_Hooks_ListView::class;
 
 Implementieren Sie die benötigten Methoden gemäß dem Interface:
@@ -287,8 +285,7 @@ machen Sie seminars in :file:`ext_localconf.php` Ihrer Extension bekannt:
 
 .. code-block:: php
 
-    use \OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm;
-    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][SeminarRegistrationForm:class][]
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm:class][]
         = \Tx_Seminarspaypal_Hooks_SeminarRegistrationForm::class;
 
 Implementieren Sie die benötigten Methoden gemäß dem Interface:
