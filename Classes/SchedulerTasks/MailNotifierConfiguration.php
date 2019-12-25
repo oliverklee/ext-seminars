@@ -27,27 +27,21 @@ class MailNotifierConfiguration implements AdditionalFieldProviderInterface
      * @return string[][] a two-dimensional array
      *          array('Identifier' => array('fieldId' => array('code' => '', 'label' => ''))
      */
-    public function getAdditionalFields(array &$taskInfo, $task, SchedulerModuleController $schedulerModule)
+    public function getAdditionalFields(array &$taskInfo, $task, SchedulerModuleController $schedulerModule): array
     {
-        if ($task instanceof MailNotifier) {
-            $pageUid = $task->getConfigurationPageUid();
-        } else {
-            $pageUid = '';
-        }
+        $pageUid = $task instanceof MailNotifier ? (string)$task->getConfigurationPageUid() : '';
         $taskInfo['seminars_configurationPageUid'] = $pageUid;
 
         $fieldId = 'task-page-uid';
         $fieldCode = '<input type="text" name="tx_scheduler[seminars_configurationPageUid]" id="'
             . $fieldId . '" value="' . $pageUid . '" size="4" />';
 
-        $additionalFields = [
+        return [
             $fieldId => [
                 'code' => $fieldCode,
                 'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:schedulerTasks.fields.page-uid',
             ],
         ];
-
-        return $additionalFields;
     }
 
     /**
@@ -58,7 +52,7 @@ class MailNotifierConfiguration implements AdditionalFieldProviderInterface
      *
      * @return bool true if validation was OK (or selected class is not relevant), false otherwise
      */
-    public function validateAdditionalFields(array &$submittedData, SchedulerModuleController $schedulerModule)
+    public function validateAdditionalFields(array &$submittedData, SchedulerModuleController $schedulerModule): bool
     {
         $submittedData['seminars_configurationPageUid'] = (int)$submittedData['seminars_configurationPageUid'];
         $pageUid = $submittedData['seminars_configurationPageUid'];
@@ -78,8 +72,6 @@ class MailNotifierConfiguration implements AdditionalFieldProviderInterface
     }
 
     /**
-     * Returns $GLOBALS['LANG'].
-     *
      * @return LanguageService|null
      */
     protected function getLanguageService()
@@ -97,8 +89,7 @@ class MailNotifierConfiguration implements AdditionalFieldProviderInterface
      */
     public function saveAdditionalFields(array $submittedData, AbstractTask $task)
     {
-        $pageUid = !empty($submittedData['seminars_configurationPageUid'])
-            ? (int)$submittedData['seminars_configurationPageUid'] : 0;
+        $pageUid = (int)($submittedData['seminars_configurationPageUid'] ?? 0);
 
         /** @var MailNotifier $task */
         $task->setConfigurationPageUid($pageUid);

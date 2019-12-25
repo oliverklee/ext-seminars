@@ -2,16 +2,14 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\LegacyUnit\SchedulerTasks;
+namespace OliverKlee\Seminars\Tests\Functional\SchedulerTasks;
 
-use OliverKlee\PhpUnit\TestCase;
+use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Seminars\SchedulerTasks\MailNotifier;
 use OliverKlee\Seminars\SchedulerTasks\MailNotifierConfiguration;
+use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
-use TYPO3\CMS\Lang\LanguageService;
-use TYPO3\CMS\Scheduler\AdditionalFieldProviderInterface;
 use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
 
 /**
@@ -19,76 +17,43 @@ use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class MailNotifierConfigurationTest extends TestCase
+class MailNotifierConfigurationTest extends FunctionalTestCase
 {
+    use LanguageHelper;
+
+    /**
+     * @var string
+     */
+    const LABEL_PREFIX = 'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:';
+
+    /**
+     * @var string[]
+     */
+    protected $coreExtensionsToLoad = ['scheduler'];
+
+    /**
+     * @var string[]
+     */
+    protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
+
     /**
      * @var MailNotifierConfiguration
      */
-    protected $subject = null;
-
-    /**
-     * @var \Tx_Oelib_TestingFramework
-     */
-    protected $testingFramework = null;
-
-    /**
-     * @var \Tx_Oelib_Configuration
-     */
-    protected $configuration = null;
-
-    /**
-     * @var \Tx_Oelib_EmailCollector
-     */
-    protected $mailer = null;
-
-    /**
-     * @var LanguageService
-     */
-    private $languageBackup = null;
+    private $subject = null;
 
     /**
      * @var SchedulerModuleController|MockObject
      */
     private $moduleController = null;
 
-    /**
-     * @var LanguageService
-     */
-    private $languageService = null;
-
     protected function setUp()
     {
-        $this->languageBackup = $GLOBALS['LANG'] ?? null;
-        if (!ExtensionManagementUtility::isLoaded('scheduler')) {
-            self::markTestSkipped('This tests needs the scheduler extension.');
-        }
+        parent::setUp();
 
-        $this->languageService = new LanguageService();
-        $this->languageService->init('default');
-        $GLOBALS['LANG'] = $this->languageService;
+        $this->initializeBackEndLanguage();
 
-        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
         $this->moduleController = $this->createMock(SchedulerModuleController::class);
-
         $this->subject = new MailNotifierConfiguration();
-    }
-
-    protected function tearDown()
-    {
-        if ($this->testingFramework !== null) {
-            $this->testingFramework->cleanUp();
-        }
-
-        $GLOBALS['LANG'] = $this->languageBackup;
-        $this->languageBackup = null;
-    }
-
-    /**
-     * @test
-     */
-    public function classImplementsAdditionalFieldProvider()
-    {
-        self::assertInstanceOf(AdditionalFieldProviderInterface::class, $this->subject);
     }
 
     /**
@@ -104,8 +69,7 @@ class MailNotifierConfigurationTest extends TestCase
                 'task-page-uid' => [
                     'code' => '<input type="text" name="tx_scheduler[seminars_configurationPageUid]" '
                         . 'id="task-page-uid" value="" size="4" />',
-                    'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:'
-                        . 'schedulerTasks.fields.page-uid',
+                    'label' => self::LABEL_PREFIX . 'schedulerTasks.fields.page-uid',
                 ],
             ],
             $result
@@ -129,8 +93,7 @@ class MailNotifierConfigurationTest extends TestCase
                 'task-page-uid' => [
                     'code' => '<input type="text" name="tx_scheduler[seminars_configurationPageUid]" '
                         . 'id="task-page-uid" value="' . $uid . '" size="4" />',
-                    'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:'
-                        . 'schedulerTasks.fields.page-uid',
+                    'label' => self::LABEL_PREFIX . 'schedulerTasks.fields.page-uid',
                 ],
             ],
             $result
@@ -142,8 +105,8 @@ class MailNotifierConfigurationTest extends TestCase
      */
     public function validateAdditionalFieldsForUidOfExistingPageReturnsTrue()
     {
-        $pageUid = $this->testingFramework->createFrontEndPage();
-        $submittedData = ['seminars_configurationPageUid' => $pageUid];
+        $this->importDataSet(__DIR__ . '/Fixtures/MailNotifierConfiguration.xml');
+        $submittedData = ['seminars_configurationPageUid' => '1'];
 
         $result = $this->subject->validateAdditionalFields($submittedData, $this->moduleController);
 
@@ -155,8 +118,8 @@ class MailNotifierConfigurationTest extends TestCase
      */
     public function validateAdditionalFieldsForUidOfExistingPageNotAddsErrorMessage()
     {
-        $pageUid = $this->testingFramework->createFrontEndPage();
-        $submittedData = ['seminars_configurationPageUid' => $pageUid];
+        $this->importDataSet(__DIR__ . '/Fixtures/MailNotifierConfiguration.xml');
+        $submittedData = ['seminars_configurationPageUid' => '1'];
 
         $this->moduleController->expects(self::never())->method('addMessage');
 
@@ -168,8 +131,7 @@ class MailNotifierConfigurationTest extends TestCase
      */
     public function validateAdditionalFieldsForUidOfInexistentPageReturnsFalse()
     {
-        $pageUid = $this->testingFramework->getAutoIncrement('pages');
-        $submittedData = ['seminars_configurationPageUid' => $pageUid];
+        $submittedData = ['seminars_configurationPageUid' => '2'];
 
         $result = $this->subject->validateAdditionalFields($submittedData, $this->moduleController);
 
@@ -181,13 +143,10 @@ class MailNotifierConfigurationTest extends TestCase
      */
     public function validateAdditionalFieldsForUidOfInexistentPageAddsErrorMessage()
     {
-        $pageUid = $this->testingFramework->getAutoIncrement('pages');
-        $submittedData = ['seminars_configurationPageUid' => $pageUid];
+        $submittedData = ['seminars_configurationPageUid' => '2'];
 
         $this->moduleController->expects(self::once())->method('addMessage')->with(
-            $this->languageService->sL(
-                'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:schedulerTasks.errors.page-uid'
-            ),
+            $this->languageService->sL(self::LABEL_PREFIX . 'schedulerTasks.errors.page-uid'),
             FlashMessage::ERROR
         );
 
@@ -199,8 +158,7 @@ class MailNotifierConfigurationTest extends TestCase
      */
     public function validateAdditionalFieldsForZeroUidReturnsFalse()
     {
-        $pageUid = 0;
-        $submittedData = ['seminars_configurationPageUid' => $pageUid];
+        $submittedData = ['seminars_configurationPageUid' => '0'];
 
         $result = $this->subject->validateAdditionalFields($submittedData, $this->moduleController);
 
@@ -212,13 +170,10 @@ class MailNotifierConfigurationTest extends TestCase
      */
     public function validateAdditionalFieldsForZeroUidAddsErrorMessage()
     {
-        $pageUid = 0;
-        $submittedData = ['seminars_configurationPageUid' => $pageUid];
+        $submittedData = ['seminars_configurationPageUid' => '0'];
 
         $this->moduleController->expects(self::once())->method('addMessage')->with(
-            $this->languageService->sL(
-                'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:schedulerTasks.errors.page-uid'
-            ),
+            $this->languageService->sL(self::LABEL_PREFIX . 'schedulerTasks.errors.page-uid'),
             FlashMessage::ERROR
         );
 
@@ -230,7 +185,8 @@ class MailNotifierConfigurationTest extends TestCase
      */
     public function saveAdditionalFieldsSavesIntegerPageUidToTask()
     {
-        $pageUid = $this->testingFramework->createFrontEndPage();
+        $this->importDataSet(__DIR__ . '/Fixtures/MailNotifierConfiguration.xml');
+        $pageUid = 1;
         $submittedData = ['seminars_configurationPageUid' => (string)$pageUid];
 
         /** @var MailNotifier|MockObject $task */
