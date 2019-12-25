@@ -5,9 +5,11 @@ declare(strict_types=1);
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\BackEnd\AbstractList;
 use OliverKlee\Seminars\BackEnd\RegistrationsList;
+use OliverKlee\Seminars\Hooks\Interfaces\BackendRegistrationListView;
 use OliverKlee\Seminars\Tests\LegacyUnit\BackEnd\Fixtures\DummyModule;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
 use TYPO3\CMS\Backend\Template\DocumentTemplate;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Test case.
@@ -498,6 +500,40 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends TestCase
             'tx_seminars_pi2[eventUid]=',
             $this->subject->show()
         );
+    }
+
+    /**
+     * @test
+     */
+    public function showForOneEventCallsBackEndRegistrationListViewHooks()
+    {
+        $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
+        $this->testingFramework->createRecord(
+            'tx_seminars_attendances',
+            [
+                'pid' => $this->dummySysFolderPid,
+                'seminar' => $eventUid,
+            ]
+        );
+
+        $hook = $this->createMock(BackEndRegistrationListView::class);
+        $hook->expects(self::once())
+            ->method('modifyListRow')
+            ->with(self::anything(), self::anything(), RegistrationsList::REGULAR_REGISTRATIONS);
+        $hook->expects(self::exactly(2))->method('modifyListHeader')->withConsecutive(
+            [self::anything(), self::anything(), RegistrationsList::REGULAR_REGISTRATIONS],
+            [self::anything(), self::anything(), RegistrationsList::REGISTRATIONS_ON_QUEUE]
+        );
+        $hook->expects(self::exactly(2))->method('modifyList')->withConsecutive(
+            [self::anything(), self::anything(), RegistrationsList::REGULAR_REGISTRATIONS],
+            [self::anything(), self::anything(), RegistrationsList::REGISTRATIONS_ON_QUEUE]
+        );
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][BackendRegistrationListView::class][] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
+
+        $this->subject->show();
     }
 
     //////////////////////////////////////

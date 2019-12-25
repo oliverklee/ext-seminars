@@ -30,6 +30,7 @@ Es gibt Hooks in diese Teile von seminars:
 * :ref:`notificationemail_de`
 * :ref:`emailsalutation_de`
 * :ref:`backendemail_de`
+* :ref:`backendregistrationlistview_de`
 
 Bitte nehmen Sie Kontakt zu uns auf, wenn Sie weitere Hooks benötigen.
 
@@ -168,7 +169,7 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
             \Tx_Seminars_BagBuilder_Event $builder,
             string $whatToDisplay
         ) {
-            // Your code here
+            // Hier Ihr Code
         }
 
         /**
@@ -193,7 +194,7 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
             \Tx_Seminars_BagBuilder_Registration $builder,
             string $whatToDisplay
         ) {
-            // Your code here
+            // Hier Ihr Code
         }
 
         /**
@@ -209,7 +210,7 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          */
         public function modifyListHeader(\Tx_Seminars_FrontEnd_DefaultController $controller)
         {
-            // Your code here
+            // Hier Ihr Code
         }
 
         /**
@@ -225,7 +226,7 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          */
         public function modifyListRow(\Tx_Seminars_FrontEnd_DefaultController $controller)
         {
-            // Your code here
+            // Hier Ihr Code
         }
 
         /**
@@ -240,7 +241,7 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          */
         public function modifyMyEventsListRow(\Tx_Seminars_FrontEnd_DefaultController $controller)
         {
-            // Your code here
+            // Hier Ihr Code
         }
 
         /**
@@ -256,7 +257,7 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          */
         public function modifyListFooter(\Tx_Seminars_FrontEnd_DefaultController $controller)
         {
-            // Your code here
+            // Hier Ihr Code
         }
     }
 
@@ -351,7 +352,7 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          */
         public function modifyRegistrationHeader(\Tx_Seminars_FrontEnd_DefaultController $controller)
         {
-            // Your code here
+            // Hier Ihr Code
         }
 
         /**
@@ -366,7 +367,7 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
             \Tx_Seminars_FrontEnd_DefaultController $controller,
             \Tx_Seminars_FrontEnd_RegistrationForm $registrationEditor
         ) {
-            // Your code here
+            // Hier Ihr Code
         }
 
         /**
@@ -378,7 +379,7 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          */
         public function modifyRegistrationFooter(\Tx_Seminars_FrontEnd_DefaultController $controller)
         {
-            // Your code here
+            // Hier Ihr Code
         }
     }
 
@@ -549,3 +550,116 @@ It's used like this:
         * @return void
         */
           public function modifyCancelEmail(Tx_Seminars_Model_Registration $registration, Tx_Oelib_Mail $eMail) {…}
+
+.. _backendregistrationlistview_de:
+
+Hooks zur Backend-Registrierungsliste
+"""""""""""""""""""""""""""""""""""""
+
+Es gibt 3 Hooks in die Backend-Registrierungsliste. Die Hooks werden während der Erstellung der
+Backend-Registrierungsliste aufgerufen:
+
+* Bevor der Tabellenkopf in HTML umgewandelt wird
+* Bevor eine Tabellenzeile zu einer Registrierung in HTML umgewandelt wird
+* Bevor der Tabellenfuß in HTML umgewandelt wird
+
+In diesen Hooks können Sie eigene Marker befüllen oder vorhandene Marker-Werte ändern. Zu
+verfügbaren Eigenschaften und Methoden siehe :file:`Classes/OldModel/Registration.php` aus
+`seminars` und :file:`Classes/Template.php` aus der Extension `oelib`.
+
+Sie müssen 2 Listenarten bei Ihrer Implementation beachten:
+
+* Liste regulärer Registrierungen (`REGULAR_REGISTRATIONS`)
+* Liste der Registrierungen in der Warteschlange (`REGISTRATIONS_ON_QUEUE`)
+
+Ihre Klasse, die :php:`\OliverKlee\Seminars\Hooks\Interfaces\BackendRegistrationListView` implementiert,
+machen Sie seminars in :file:`ext_localconf.php` Ihrer Extension bekannt:
+
+.. code-block:: php
+
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\BackendRegistrationListView:class][]
+        = \Tx_Seminarspaypal_Hooks_BackendRegistrationListView::class;
+
+Implementieren Sie die benötigten Methoden gemäß dem Interface:
+
+.. code-block:: php
+
+    use \OliverKlee\Seminars\Hooks\Interfaces\BackendRegistrationListView;
+
+    class Tx_Seminarspaypal_Hooks_BackendRegistrationListView implements BackendRegistrationListView
+    {
+        /**
+         * Modifies the list row template content just before it is rendered to HTML.
+         *
+         * This method is called once per list row, but the row may appear in the list of regular registrations or the
+         * list of registrations on queue. Check $registrationsToShow (can be one of
+         * `\OliverKlee\Seminars\BackEnd\RegistrationsList::REGISTRATIONS_ON_QUEUE`
+         * and `\OliverKlee\Seminars\BackEnd\RegistrationsList::REGULAR_REGISTRATIONS`) to distinguish.
+         *
+         * @param \Tx_Seminars_OldModel_Registration $registration
+         *        the registration the row is made from
+         * @param \Tx_Oelib_Template $template
+         *        the template that will be used to create the registration list
+         * @param int $registrationsToShow
+         *        the type of registration shown in the list
+         *
+         * @return void
+         */
+        public function modifyListRow(
+            \Tx_Seminars_OldModel_Registration $registration,
+            \Tx_Oelib_Template $template,
+            int $registrationsToShow
+        ) {
+            // Hier Ihr Code
+        }
+
+        /**
+         * Modifies the list heading template content just before it is rendered to HTML.
+         *
+         * This method is called twice per list: First for the list of regular registrations, then for the list of
+         * registrations on queue. Check $registrationsToShow (can be one of
+         * `\OliverKlee\Seminars\BackEnd\RegistrationsList::REGISTRATIONS_ON_QUEUE`
+         * and `\OliverKlee\Seminars\BackEnd\RegistrationsList::REGULAR_REGISTRATIONS`) to distinguish.
+         *
+         * @param \Tx_Seminars_Bag_Registration $registrationBag
+         *        the registrationBag the heading is made for
+         * @param \Tx_Oelib_Template $template
+         *        the template that will be used to create the registration list
+         * @param int $registrationsToShow
+         *        the type of registration shown in the list
+         *
+         * @return void
+         */
+        public function modifyListHeader(
+            \Tx_Seminars_Bag_Registration $registrationBag,
+            \Tx_Oelib_Template $template,
+            int $registrationsToShow
+        ) {
+            // Hier Ihr Code
+        }
+
+        /**
+         * Modifies the complete list template content just before it is rendered to HTML.
+         *
+         * This method is called twice per list: First for the list of regular registrations, then for the list of
+         * registrations on queue. Check $registrationsToShow (can be one of
+         * `\OliverKlee\Seminars\BackEnd\RegistrationsList::REGISTRATIONS_ON_QUEUE`
+         * and `\OliverKlee\Seminars\BackEnd\RegistrationsList::REGULAR_REGISTRATIONS`) to distinguish.
+         *
+         * @param \Tx_Seminars_Bag_Registration $registrationBag
+         *        the registrationBag the table is made for
+         * @param \Tx_Oelib_Template $template
+         *        the template that will be used to create the registration list
+         * @param int $registrationsToShow
+         *        the type of registration shown in the list
+         *
+         * @return void
+         */
+        public function modifyList(
+            \Tx_Seminars_Bag_Registration $registrationBag,
+            \Tx_Oelib_Template $template,
+            int $registrationsToShow
+        ) {
+            // Hier Ihr Code
+        }
+    }

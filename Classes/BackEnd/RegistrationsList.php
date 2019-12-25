@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\BackEnd;
 
+use OliverKlee\Seminars\Hooks\HookProvider;
+use OliverKlee\Seminars\Hooks\Interfaces\BackendRegistrationListView;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -45,6 +47,11 @@ class RegistrationsList extends AbstractList
      * @var int the UID of the event to show the registrations for
      */
     private $eventUid = 0;
+
+    /**
+     * @var HookProvider|null
+     */
+    protected $listViewHookProvider = null;
 
     /**
      * Generates and prints out a registrations list.
@@ -194,6 +201,13 @@ class RegistrationsList extends AbstractList
                 )
             );
 
+            $this->getListViewHookProvider()->executeHook(
+                'modifyListRow',
+                $registration,
+                $this->template,
+                $registrationsToShow
+            );
+
             $tableRows .= $this->template->getSubpart('REGISTRATION_TABLE_ROW');
         }
 
@@ -203,8 +217,20 @@ class RegistrationsList extends AbstractList
 
         $this->template->setMarker('label_registrations', $languageService->getLL($tableLabel));
         $this->template->setMarker('number_of_registrations', $registrationBag->count());
+        $this->getListViewHookProvider()->executeHook(
+            'modifyListHeader',
+            $registrationBag,
+            $this->template,
+            $registrationsToShow
+        );
         $this->template->setMarker('table_header', $this->template->getSubpart('REGISTRATION_TABLE_HEADING'));
         $this->template->setMarker('table_rows', $tableRows);
+        $this->getListViewHookProvider()->executeHook(
+            'modifyList',
+            $registrationBag,
+            $this->template,
+            $registrationsToShow
+        );
 
         return $result;
     }
@@ -238,5 +264,22 @@ class RegistrationsList extends AbstractList
         }
 
         return $result;
+    }
+
+    /**
+     * Gets the hook provider for the list view.
+     *
+     * @return HookProvider
+     */
+    protected function getListViewHookProvider(): HookProvider
+    {
+        if (!$this->listViewHookProvider instanceof HookProvider) {
+            $this->listViewHookProvider = GeneralUtility::makeInstance(
+                HookProvider::class,
+                BackendRegistrationListView::class
+            );
+        }
+
+        return $this->listViewHookProvider;
     }
 }
