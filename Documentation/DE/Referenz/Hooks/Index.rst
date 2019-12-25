@@ -25,6 +25,7 @@ Es gibt Hooks in diese Teile von seminars:
 
 * :ref:`singleview_de`
 * :ref:`listview_de`
+* :ref:`selectorwidget_de`
 * :ref:`registrationform_de`
 * :ref:`notificationemail_de`
 * :ref:`emailsalutation_de`
@@ -256,6 +257,51 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
         public function modifyListFooter(\Tx_Seminars_FrontEnd_DefaultController $controller)
         {
             // Your code here
+        }
+    }
+
+.. _selectorwidget_de:
+
+Hooks zum Selector-Widget
+"""""""""""""""""""""""""
+
+Es gibt einen Hook in das Selector-Widget der Listenansicht. Er wird aufgerufen,
+bevor das Template zu HTML umgewandelt wird, wenn in der Listenansicht das
+Selector-Widget aktiviert ist. Sie können damit eigene Marker befüllen oder
+bestehende Marker-Werte verändern. Für Details zu Eigenschaften und Methoden
+siehe :file:`Classes/Frontend/SelectorWidget.php`.
+
+Ihre Klasse, die :php:`\OliverKlee\Seminars\Hooks\Interfaces\SeminarSelectorWidget` implementiert,
+machen Sie seminars in :file:`ext_localconf.php` Ihrer Extension bekannt:
+
+.. code-block:: php
+
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\SeminarSelectorWidget:class][]
+        = \Tx_Seminarspaypal_Hooks_EventSelectorWidget::class;
+
+Implementieren Sie die benötigten Methoden gemäß dem Interface:
+
+.. code-block:: php
+
+    use \OliverKlee\Seminars\Hooks\Interfaces\SeminarSelectorWidget;
+
+    class Tx_Seminarspaypal_Hooks_EventSelectorWidget implements SeminarSelectorWidget
+    {
+        /**
+         * Modifies the seminar widget, just before the subpart is fetched.
+         *
+         * This function will be called for all types of seminar lists, if `displaySearchFormFields` is configured for it.
+         *
+         * @param \Tx_Seminars_FrontEnd_SelectorWidget $selectorWidget
+         * @param \Tx_Seminars_Bag_Event $seminarBag the seminars used to create the selector widget
+         *
+         * @return void
+         */
+        public function modifySelectorWidget(
+            \Tx_Seminars_FrontEnd_SelectorWidget $selectorWidget,
+            \Tx_Seminars_Bag_Event $seminarBag
+        ) {
+            // Hier Ihr Code
         }
     }
 

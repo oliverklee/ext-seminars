@@ -3,9 +3,11 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Hooks\Interfaces\SeminarSelectorWidget;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
 use SJBR\StaticInfoTables\PiBaseApi;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
@@ -223,6 +225,23 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends TestCase
             '###',
             $this->subject->render()
         );
+    }
+
+    /**
+     * @test
+     */
+    public function renderForEnabledSearchWidgetCallsSeminarSelectorWidgetHook()
+    {
+        $this->subject->setConfigurationValue('displaySearchFormFields', 'city');
+
+        $hook = $this->createMock(SeminarSelectorWidget::class);
+        $hook->expects(self::once())->method('modifySelectorWidget')->with($this->subject, self::anything());
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][SeminarSelectorWidget::class][] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
+
+        $this->subject->render();
     }
 
     /////////////////////////////////////////////

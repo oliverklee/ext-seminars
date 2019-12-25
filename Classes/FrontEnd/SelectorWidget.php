@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Seminars\Hooks\HookProvider;
+use OliverKlee\Seminars\Hooks\Interfaces\SeminarSelectorWidget;
 use SJBR\StaticInfoTables\PiBaseApi;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -42,6 +44,11 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
     private $places = null;
 
     /**
+     * @var HookProvider|null
+     */
+    protected $selectorWidgetHookProvider = null;
+
+    /**
      * Returns the selector widget if it is not hidden.
      *
      * The selector widget will automatically be hidden, if no search option is
@@ -68,6 +75,8 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
         $this->fillOrHideDateSearch();
         $this->fillOrHideAgeSearch();
         $this->fillOrHidePriceSearch();
+
+        $this->getSelectorWidgetHookProvider()->executeHook('modifySelectorWidget', $this, $this->seminarBag);
 
         return $this->getSubpart('SELECTOR_WIDGET');
     }
@@ -288,6 +297,20 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
         $this->setMarker('dropdown_options', $optionsList);
 
         return $this->getSubpart('SINGLE_DROPDOWN');
+    }
+
+    /**
+     * Gets the hook provider for the selector widget.
+     *
+     * @return HookProvider
+     */
+    protected function getSelectorWidgetHookProvider(): HookProvider
+    {
+        if (!$this->selectorWidgetHookProvider instanceof SeminarSelectorWidget) {
+            $this->selectorWidgetHookProvider = GeneralUtility::makeInstance(HookProvider::class, SeminarSelectorWidget::class);
+        }
+
+        return $this->selectorWidgetHookProvider;
     }
 
     ///////////////////////////////////////////////////////////////
