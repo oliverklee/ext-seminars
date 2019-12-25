@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add new backend registration list hook (#437)
 - Add new selector widget hook (#436)
 - Add documentation rendering using docker-compose (#432)
 - Add new seminar list view hooks (#408)
