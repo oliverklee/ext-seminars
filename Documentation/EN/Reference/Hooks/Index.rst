@@ -563,8 +563,8 @@ backend registration list creation:
 * just before a table row for a certain registration is rendered to HTML
 * just before the table footer is rendered to HTML
 
-In these hooks you may set custom markers or change existing values for markers. For
-available properties and methods see :file:`Classes/OldModel/Registration.php` of `seminars`
+In these hooks, you may set custom markers or change existing values for markers. For
+available properties and methods, see :file:`Classes/OldModel/Registration.php` of `seminars`
 and :file:`Classes/Template.php` of extension `oelib`.
 
 There are 2 types of lists your implementation must handle:

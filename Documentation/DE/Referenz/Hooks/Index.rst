@@ -559,9 +559,9 @@ Hooks zur Backend-Registrierungsliste
 Es gibt 3 Hooks in die Backend-Registrierungsliste. Die Hooks werden während der Erstellung der
 Backend-Registrierungsliste aufgerufen:
 
-* Bevor der Tabellenkopf in HTML umgewandelt wird
-* Bevor eine Tabellenzeile zu einer Registrierung in HTML umgewandelt wird
-* Bevor der Tabellenfuß in HTML umgewandelt wird
+* bevor der Tabellenkopf in HTML umgewandelt wird
+* bevor eine Tabellenzeile zu einer Registrierung in HTML umgewandelt wird
+* bevor der Tabellenfuß in HTML umgewandelt wird
 
 In diesen Hooks können Sie eigene Marker befüllen oder vorhandene Marker-Werte ändern. Zu
 verfügbaren Eigenschaften und Methoden siehe :file:`Classes/OldModel/Registration.php` aus
