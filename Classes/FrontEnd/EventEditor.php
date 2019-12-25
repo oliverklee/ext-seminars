@@ -290,6 +290,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     public function populateListOrganizers(): array
     {
         $frontEndUser = self::getLoggedInUser();
+        if (!$frontEndUser instanceof \Tx_Seminars_Model_FrontEndUser) {
+            return [];
+        }
 
         if ($frontEndUser->hasDefaultOrganizers()) {
             $organizers = $frontEndUser->getDefaultOrganizers();
@@ -305,9 +308,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Returns the logged-in user.
      *
-     * @return \Tx_Seminars_Model_FrontEndUser
+     * @return \Tx_Seminars_Model_FrontEndUser|null
      */
-    protected static function getLoggedInUser(): \Tx_Seminars_Model_FrontEndUser
+    protected static function getLoggedInUser()
     {
         return \Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
     }
@@ -891,9 +894,15 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $user = self::getLoggedInUser();
 
         $formData['crdate'] = $GLOBALS['SIM_EXEC_TIME'];
-        $formData['owner_feuser'] = $user->getUid();
-        $eventPid = $user->getEventRecordsPid();
-        $formData['pid'] = ($eventPid > 0) ? $eventPid : $this->getConfValueInteger('createEventsPID', 's_fe_editing');
+        if ($user instanceof \Tx_Seminars_Model_FrontEndUser) {
+            $formData['owner_feuser'] = $user->getUid();
+            $eventPid = $user->getEventRecordsPid();
+        } else {
+            $formData['owner_feuser'] = 0;
+            $eventPid = 0;
+        }
+
+        $formData['pid'] = $eventPid > 0 ? $eventPid : $this->getConfValueInteger('createEventsPID', 's_fe_editing');
     }
 
     /**
@@ -907,12 +916,14 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      */
     private function checkPublishSettings(array &$formData)
     {
-        $publishSetting = self::getLoggedInUser()->getPublishSetting();
+        $user = self::getLoggedInUser();
+        $publishSetting = $user instanceof \Tx_Seminars_Model_FrontEndUser
+            ? $user->getPublishSetting() : \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY;
         $eventUid = $this->getObjectUid();
-        $isNew = ($eventUid === 0);
+        $isNew = $eventUid === 0;
 
-        $hideEditedObject = !$isNew && ($publishSetting === \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED);
-        $hideNewObject = $isNew && ($publishSetting > \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY);
+        $hideEditedObject = !$isNew && $publishSetting === \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED;
+        $hideNewObject = $isNew && $publishSetting > \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY;
 
         if ($isNew) {
             $eventIsHidden = false;
@@ -2776,12 +2787,11 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
             return;
         }
         $frontEndUser = self::getLoggedInUser();
-        if (!$frontEndUser->hasDefaultCategories()) {
+        if (!$frontEndUser instanceof \Tx_Seminars_Model_FrontEndUser || !$frontEndUser->hasDefaultCategories()) {
             return;
         }
 
-        $formData['categories'] =
-            $frontEndUser->getDefaultCategoriesFromGroup()->getUids();
+        $formData['categories'] = $frontEndUser->getDefaultCategoriesFromGroup()->getUids();
     }
 
     /**
@@ -2799,9 +2809,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         }
 
         $frontEndUser = self::getLoggedInUser();
-        if ($frontEndUser->hasDefaultCategories()) {
-            $categoryKey = array_search('categories', $formFields, true);
-            /** @var string|int $categoryKey */
+        if ($frontEndUser instanceof \Tx_Seminars_Model_FrontEndUser && $frontEndUser->hasDefaultCategories()) {
+            $categoryKey = (string)\array_search('categories', $formFields, true);
             unset($formFields[$categoryKey]);
         }
     }

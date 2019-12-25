@@ -56,6 +56,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop support for TYPO3 7.6 (#248, #272, #280)
 
 ### Fixed
+- Fix failing EventEditor tests in 9.5 (#438)
 - Replace the removed `getTabMenu` (#423)
 - Replace deprecated BE route methods (#418, #419, #420, #424, #425, #426)
 - Fix failing bag builder tests in 9.5 (#414)
