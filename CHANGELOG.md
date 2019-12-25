@@ -56,6 +56,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop support for TYPO3 7.6 (#248, #272, #280)
 
 ### Fixed
+- Fix the scheduler task flash messages in 9.5 (#440)
 - Fix failing EventEditor tests in 9.5 (#438)
 - Replace the removed `getTabMenu` (#423)
 - Replace deprecated BE route methods (#418, #419, #420, #424, #425, #426)

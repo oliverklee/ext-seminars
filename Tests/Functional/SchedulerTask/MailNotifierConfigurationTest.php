@@ -10,6 +10,9 @@ use OliverKlee\Seminars\SchedulerTasks\MailNotifierConfiguration;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Messaging\FlashMessageQueue;
+use TYPO3\CMS\Core\Messaging\FlashMessageService;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
 
 /**
@@ -50,10 +53,26 @@ class MailNotifierConfigurationTest extends FunctionalTestCase
     {
         parent::setUp();
 
+        $this->setUpBackendUserFromFixture(1);
         $this->initializeBackEndLanguage();
 
         $this->moduleController = $this->createMock(SchedulerModuleController::class);
         $this->subject = new MailNotifierConfiguration();
+    }
+
+    protected function tearDown()
+    {
+        $this->getFlashMessageQueue()->clear();
+
+        parent::tearDown();
+    }
+
+    private function getFlashMessageQueue(): FlashMessageQueue
+    {
+        /** @var FlashMessageService $service */
+        $service = GeneralUtility::makeInstance(FlashMessageService::class);
+
+        return $service->getMessageQueueByIdentifier();
     }
 
     /**
@@ -121,9 +140,9 @@ class MailNotifierConfigurationTest extends FunctionalTestCase
         $this->importDataSet(__DIR__ . '/Fixtures/MailNotifierConfiguration.xml');
         $submittedData = ['seminars_configurationPageUid' => '1'];
 
-        $this->moduleController->expects(self::never())->method('addMessage');
-
         $this->subject->validateAdditionalFields($submittedData, $this->moduleController);
+
+        self::assertSame(0, $this->getFlashMessageQueue()->count());
     }
 
     /**
@@ -145,12 +164,9 @@ class MailNotifierConfigurationTest extends FunctionalTestCase
     {
         $submittedData = ['seminars_configurationPageUid' => '2'];
 
-        $this->moduleController->expects(self::once())->method('addMessage')->with(
-            $this->languageService->sL(self::LABEL_PREFIX . 'schedulerTasks.errors.page-uid'),
-            FlashMessage::ERROR
-        );
-
         $this->subject->validateAdditionalFields($submittedData, $this->moduleController);
+
+        self::assertCount(1, $this->getFlashMessageQueue()->getAllMessages(FlashMessage::ERROR));
     }
 
     /**
@@ -172,12 +188,9 @@ class MailNotifierConfigurationTest extends FunctionalTestCase
     {
         $submittedData = ['seminars_configurationPageUid' => '0'];
 
-        $this->moduleController->expects(self::once())->method('addMessage')->with(
-            $this->languageService->sL(self::LABEL_PREFIX . 'schedulerTasks.errors.page-uid'),
-            FlashMessage::ERROR
-        );
-
         $this->subject->validateAdditionalFields($submittedData, $this->moduleController);
+
+        self::assertCount(1, $this->getFlashMessageQueue()->getAllMessages(FlashMessage::ERROR));
     }
 
     /**
