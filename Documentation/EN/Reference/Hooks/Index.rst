@@ -266,8 +266,8 @@ Implement the methods required by the interface:
 Hooks for the selector widget
 """""""""""""""""""""""""""""
 
-There is a hook into the selector widget of the list view. It is executed just
-before the template gets rendered to HTML, if the selector widget is activated.
+There is a hook into the selector widget of the list view. If the selector widget
+is activated, the hook is executed just before the template gets rendered to HTML.
 You may set custom markers or change existing values for markers. See also
 :file:`Classes/Frontend/SelectorWidget.php` for available properties and methods.
 

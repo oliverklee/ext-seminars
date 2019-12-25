@@ -237,7 +237,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends TestCase
         $hook = $this->createMock(SeminarSelectorWidget::class);
         $hook->expects(self::once())->method('modifySelectorWidget')->with($this->subject, self::anything());
 
-        $hookClass = get_class($hook);
+        $hookClass = \get_class($hook);
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][SeminarSelectorWidget::class][] = $hookClass;
         GeneralUtility::addInstance($hookClass, $hook);
 

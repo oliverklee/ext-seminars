@@ -262,12 +262,12 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
 
 .. _selectorwidget_de:
 
-Hooks zum Selector Widget
+Hooks zum Selector-Widget
 """""""""""""""""""""""""
 
-Es gibt einen Hook in das Selector Widget der Listenansicht. Er wird aufgerufen,
+Es gibt einen Hook in das Selector-Widget der Listenansicht. Er wird aufgerufen,
 bevor das Template zu HTML umgewandelt wird, wenn in der Listenansicht das
-Selector Widget aktiviert ist. Sie können damit eigene Marker ausfüllen oder
+Selector-Widget aktiviert ist. Sie können damit eigene Marker befüllen oder
 bestehende Marker-Werte verändern. Für Details zu Eigenschaften und Methoden
 siehe :file:`Classes/Frontend/SelectorWidget.php`.
 
