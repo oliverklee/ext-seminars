@@ -25,6 +25,7 @@ are hooks for these parts of seminars:
 
 * :ref:`singleview_en`
 * :ref:`listview_en`
+* :ref:`selectorwidget_en`
 * :ref:`registrationform_en`
 * :ref:`notificationemail_en`
 * :ref:`emailsalutation_en`
@@ -256,6 +257,50 @@ Implement the methods required by the interface:
          */
         public function modifyListFooter(\Tx_Seminars_FrontEnd_DefaultController $controller)
         {
+            // Your code here
+        }
+    }
+
+.. _selectorwidget_en:
+
+Hooks for the selector widget
+"""""""""""""""""""""""""""""
+
+There is a hook into the selector widget of the list view. It is executed just
+before the template gets rendered to HTML, if the selector widget is activated.
+You may set custom markers or change existing values for markers. See also
+:file:`Classes/Frontend/SelectorWidget.php` for available properties and methods.
+
+Register your class that implements :php:`\OliverKlee\Seminars\Hooks\Interfaces\SeminarSelectorWidget`
+like this in :file:`ext_localconf.php` of your extension:
+
+.. code-block:: php
+
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\SeminarSelectorWidget:class][]
+        = \Tx_Seminarspaypal_Hooks_EventSelectorWidget::class;
+
+Implement the methods required by the interface:
+
+.. code-block:: php
+
+    use \OliverKlee\Seminars\Hooks\Interfaces\SeminarSelectorWidget;
+
+    class Tx_Seminarspaypal_Hooks_EventSelectorWidget implements SeminarSelectorWidget
+    {
+        /**
+         * Modifies the seminar widget, just before the subpart is fetched.
+         *
+         * This function will be called for all types of seminar lists, if `displaySearchFormFields` is configured for it.
+         *
+         * @param \Tx_Seminars_FrontEnd_SelectorWidget $selectorWidget
+         * @param \Tx_Seminars_Bag_Event $seminarBag the seminars used to create the selector widget
+         *
+         * @return void
+         */
+        public function modifySelectorWidget(
+            \Tx_Seminars_FrontEnd_SelectorWidget $selectorWidget,
+            \Tx_Seminars_Bag_Event $seminarBag
+        ) {
             // Your code here
         }
     }
