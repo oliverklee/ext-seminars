@@ -86,21 +86,10 @@ class HookProvider
      * @param mixed $params parameters to $method()
      *
      * @return void
-     *
-     * @throws \InvalidArgumentException
-     * @throws \UnexpectedValueException
      */
     public function executeHook(string $method, ...$params)
     {
-        if ($method === '') {
-            throw new \InvalidArgumentException('The parameter $method must not be empty.', 1573479911);
-        }
-        if (!\in_array($method, \get_class_methods($this->interfaceName), true)) {
-            throw new \UnexpectedValueException(
-                'The interface ' . $this->interfaceName . ' does not contain method ' . $method . '.',
-                1573480302
-            );
-        }
+        $this->validateHookMethod($method);
 
         foreach ($this->getHooks() as $hook) {
             $hook->$method(...$params);
@@ -146,5 +135,28 @@ class HookProvider
         }
 
         $this->hooksHaveBeenRetrieved = true;
+    }
+
+    /**
+     * Validates the requested hooked-in methods.
+     *
+     * @param string $method the method to execute
+     *
+     * @return void
+     *
+     * @throws \InvalidArgumentException
+     * @throws \UnexpectedValueException
+     */
+    protected function validateHookMethod(string $method)
+    {
+        if ($method === '') {
+            throw new \InvalidArgumentException('The parameter $method must not be empty.', 1573479911);
+        }
+        if (!\in_array($method, \get_class_methods($this->interfaceName), true)) {
+            throw new \UnexpectedValueException(
+                'The interface ' . $this->interfaceName . ' does not contain method ' . $method . '.',
+                1573480302
+            );
+        }
     }
 }
