@@ -9520,7 +9520,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $hook->expects(self::once())->method('modifyListRow')->with($this->subject);
         $hook->expects(self::never())->method('modifyMyEventsListRow');
         $hook->expects(self::once())->method('modifyListFooter')->with($this->subject);
-        $hook->expects(self::once())->method('modifyEventBagBuilder')->with($this->subject, self::anything(), 'topic_list');
+        $hook->expects(self::once())->method('modifyEventBagBuilder')
+            ->with($this->subject, self::anything(), 'topic_list');
         $hook->expects(self::never())->method('modifyRegistrationBagBuilder');
 
         $hookClass = \get_class($hook);
@@ -9542,7 +9543,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $hook->expects(self::once())->method('modifyListRow')->with($this->subject);
         $hook->expects(self::never())->method('modifyMyEventsListRow');
         $hook->expects(self::once())->method('modifyListFooter')->with($this->subject);
-        $hook->expects(self::once())->method('modifyEventBagBuilder')->with($this->subject, self::anything(), 'seminar_list');
+        $hook->expects(self::once())->method('modifyEventBagBuilder')
+            ->with($this->subject, self::anything(), 'seminar_list');
         $hook->expects(self::never())->method('modifyRegistrationBagBuilder');
 
         $hookClass = \get_class($hook);
@@ -9620,7 +9622,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $hook->expects(self::once())->method('modifyMyEventsListRow')->with($this->subject);
         $hook->expects(self::once())->method('modifyListFooter')->with($this->subject);
         $hook->expects(self::never())->method('modifyEventBagBuilder');
-        $hook->expects(self::once())->method('modifyRegistrationBagBuilder')->with($this->subject, self::anything(), 'my_events');
+        $hook->expects(self::once())->method('modifyRegistrationBagBuilder')
+            ->with($this->subject, self::anything(), 'my_events');
         // We don't test for the second parameter (the bag builder instance here)
         // because we cannot access it from the outside.
 
@@ -9645,7 +9648,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $hook->expects(self::once())->method('modifyListRow')->with($this->subject);
         $hook->expects(self::never())->method('modifyMyEventsListRow');
         $hook->expects(self::once())->method('modifyListFooter')->with($this->subject);
-        $hook->expects(self::once())->method('modifyEventBagBuilder')->with($this->subject, self::anything(), 'my_vip_events');
+        $hook->expects(self::once())->method('modifyEventBagBuilder')
+            ->with($this->subject, self::anything(), 'my_vip_events');
         $hook->expects(self::never())->method('modifyRegistrationBagBuilder');
 
         $hookClass = \get_class($hook);
@@ -9677,7 +9681,8 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         $hook->expects(self::once())->method('modifyListRow')->with($this->subject);
         $hook->expects(self::never())->method('modifyMyEventsListRow');
         $hook->expects(self::once())->method('modifyListFooter')->with($this->subject);
-        $hook->expects(self::once())->method('modifyEventBagBuilder')->with($this->subject, self::anything(), 'my_entered_events');
+        $hook->expects(self::once())->method('modifyEventBagBuilder')
+            ->with($this->subject, self::anything(), 'my_entered_events');
         $hook->expects(self::never())->method('modifyRegistrationBagBuilder');
 
         $hookClass = \get_class($hook);
