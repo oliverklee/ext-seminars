@@ -19,9 +19,16 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * point is reached and re-used for all other points.
  *
  * Implementing hook points
- * Instantiate this class with the interface you need implemented. First call to `executeHook()` will
+ * Instantiate this class with the interface you need implemented. First call to `executeHook[...]()` will
  * instantiate the registered classes. Every further call will reuse the same instances. On each
  * call provide the method required at the point in your program.
+ *
+ * The most recommended way to design a hook method is passing objects to manipulate. Use `executeHook()`
+ * for these methods. By passing an object to the hooked-in methods the object content can be manipulated
+ * and by this change the behaviour of `seminars`.
+ *
+ * In some cases, when a return value is required, You may use `executeHookReturningMergedArray()` for returning complex
+ * results while all hooked-in methods process the same parameters.
  *
  * There is an optional index to `$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']`, provided
  * for easier conversion of existing hooks to this class.
@@ -94,6 +101,26 @@ class HookProvider
         foreach ($this->getHooks() as $hook) {
             $hook->$method(...$params);
         }
+    }
+
+    /**
+     * Executes the hooked-in methods, that return result arrays.
+     *
+     * @param string $method the method to execute
+     * @param mixed $params parameters to $method()
+     *
+     * @return array the merged result arrays
+     */
+    public function executeHookReturningMergedArray(string $method, ...$params): array
+    {
+        $this->validateHookMethod($method);
+
+        $result = [];
+        foreach ($this->getHooks() as $hook) {
+            $result = array_merge($result, $hook->$method(...$params));
+        }
+
+        return $result;
     }
 
     /**
