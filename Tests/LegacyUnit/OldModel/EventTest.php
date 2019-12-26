@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Hooks\Interfaces\EventModel;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -10472,5 +10473,26 @@ final class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     public function getAvailablePricesForNoPricesSetReturnsRegularPriceOnly()
     {
         self::assertSame(['regular'], array_keys($this->subject->getAvailablePrices()));
+    }
+
+    /*
+     * Tests concerning the TCE validation
+     */
+
+    /**
+     * @test
+     */
+    public function tceValidationCallsEventModelHook()
+    {
+        $formData = ['anyField' => 'anyValue'];
+
+        $hook = $this->createMock(EventModel::class);
+        $hook->expects(self::once())->method('validateTceValues')->with($this->subject, $formData);
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][EventModel::class][] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
+
+        $this->subject->getUpdateArray($formData);
     }
 }

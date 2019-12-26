@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Seminars\Hooks\HookProvider;
+use OliverKlee\Seminars\Hooks\Interfaces\EventModel;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
@@ -71,6 +73,11 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @var \Tx_Seminars_OldModel_Event|null
      */
     private $topic = null;
+
+    /**
+     * @var HookProvider|null
+     */
+    protected $eventModelHookProvider = null;
 
     /**
      * @return Tx_Seminars_OldModel_Event|null
@@ -191,6 +198,15 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             $updateArray['begin_date'] = $this->getBeginDateAsTimestamp();
             $updateArray['end_date'] = $this->getEndDateAsTimestamp();
             $updateArray['place'] = $this->updatePlaceRelationsFromTimeSlots();
+        }
+
+        $hookResults = $this->getEventModelHookProvider()
+            ->executeHookReturningMergedArray('validateTceValues', $this, $fieldArray);
+
+        foreach ($hookResults as $currentFieldName => $result) {
+            if (!$result['status']) {
+                $updateArray[$currentFieldName] = $result['newValue'];
+            }
         }
 
         return $updateArray;
@@ -4762,5 +4778,19 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     public function isPublished(): bool
     {
         return !$this->hasRecordPropertyString('publication_hash');
+    }
+
+    /**
+     * Gets the hook provider for the selector widget.
+     *
+     * @return HookProvider
+     */
+    protected function getEventModelHookProvider(): HookProvider
+    {
+        if (!$this->eventModelHookProvider instanceof EventModel) {
+            $this->eventModelHookProvider = GeneralUtility::makeInstance(HookProvider::class, EventModel::class);
+        }
+
+        return $this->eventModelHookProvider;
     }
 }
