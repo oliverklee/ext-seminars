@@ -31,6 +31,7 @@ are hooks for these parts of seminars:
 * :ref:`emailsalutation_en`
 * :ref:`backendemail_en`
 * :ref:`backendregistrationlistview_en`
+* :ref:`eventmodeltcevalidation_en`
 
 Please contact us if you need additional hooks.
 
@@ -660,6 +661,58 @@ Implement the methods required by the interface:
             \Tx_Oelib_Template $template,
             int $registrationsToShow
         ) {
+            // Your code here
+        }
+    }
+
+.. _eventmodeltcevalidation_en:
+
+Hooks for the event model TCE validation
+""""""""""""""""""""""""""""""""""""""""
+
+There is a hook into the event model to additionaly manipulate `seminars` FlexForm data during
+TCE validation (just before storing the data). You may apply additional constraints and dynamically
+adjust values (e.g. registration deadline = begin date - 14 days).
+
+TCE validation is a Typo3 defined process. `seminars` gets the form values from the content element's
+FlexForm and returns required changes of the values back to Typo3.
+
+Register your class that implements :php:`\OliverKlee\Seminars\Hooks\Interfaces\EventModel`
+like this in :file:`ext_localconf.php` of your extension:
+
+.. code-block:: php
+
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\EventModel:class][]
+        = \Tx_Seminarspaypal_Hooks_EventModel::class;
+
+Implement the methods required by the interface:
+
+.. code-block:: php
+
+    use \OliverKlee\Seminars\Hooks\Interfaces\EventModel;
+
+    class Tx_Seminarspaypal_Hooks_EventModel implements EventModel
+    {
+        /**
+         * Validate TCE values.
+         *
+         * The TCE form values need to be validated before storing them into the DB.
+         * Check the values with additional constraints and provide the validation
+         * result as seen in `\Tx_Seminars_OldModel_Event::validateTceValues()` and
+         * `\Tx_Seminars_OldModel_Event::getUpdateArray()`.
+         *
+         * The return value is an associative array using the fieldname as the key
+         * string and an array for the validation result:
+         * `['price_regular_early' => ['status' => false, 'newValue' => '0.00']]`
+         *
+         * @param \Tx_Seminars_OldModel_Event $event the event model
+         * @param string[] &$fieldArray
+         *        associative array containing the values entered in the TCE form
+         *
+         * @return array[] associative array of associative arrays containing the validation results
+         */
+        public function validateTceValues(\Tx_Seminars_OldModel_Event $event, array &$fieldArray): array
+        {
             // Your code here
         }
     }
