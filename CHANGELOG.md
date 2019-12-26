@@ -15,7 +15,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add php-cs-fixer to the CI (#351)
 - Add new seminar single view hook (#338, #345)
 - Add hook base (#313, #336)
-- Support TYPO3 9LTS (#322)
+- Support TYPO3 9LTS (#322, #324)
 - Add code sniffing and fixing (#319)
 - Enable modifying the BagBuilder limitations in hooks (#308)
 - Build with PHP 7.2 on Travis CI (#302)
