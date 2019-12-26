@@ -20,7 +20,7 @@ final class TestingHookImplementorReturnsArray2 implements TestingHookInterfaceR
      */
     public function testHookMethodReturnsArray(): array
     {
-        return ['me2' => 'ok','overwritten' => 'replaced',];
+        return ['me2' => 'ok', 'overwritten' => 'replaced'];
     }
 
     /**
@@ -31,8 +31,8 @@ final class TestingHookImplementorReturnsArray2 implements TestingHookInterfaceR
     public function testHookMethodReturnsNestedArray(): array
     {
         return [
-            'me1' => ['status' => true ],
-            'me2' => ['status' => false, 'newValue' => 'new2', ]
+            'me1' => ['status' => true],
+            'me2' => ['status' => false, 'newValue' => 'new2'],
         ];
     }
 }

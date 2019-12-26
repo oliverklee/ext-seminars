@@ -421,7 +421,7 @@ final class HookProviderTest extends UnitTestCase
         $hookObject = new HookProvider(TestingHookInterfaceReturnsArray::class);
 
         self::assertSame(
-            ['me' => 'ok','overwritten' => 'initial',],
+            ['me' => 'ok', 'overwritten' => 'initial'],
             $hookObject->executeHookReturningMergedArray('testHookMethodReturnsArray')
         );
     }
@@ -438,7 +438,7 @@ final class HookProviderTest extends UnitTestCase
         $hookObject = new HookProvider(TestingHookInterfaceReturnsArray::class);
 
         self::assertSame(
-            ['me' => 'ok','overwritten' => 'replaced','me2' => 'ok',],
+            ['me' => 'ok', 'overwritten' => 'replaced', 'me2' => 'ok'],
             $hookObject->executeHookReturningMergedArray('testHookMethodReturnsArray')
         );
     }
