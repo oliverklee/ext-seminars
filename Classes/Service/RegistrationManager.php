@@ -1020,8 +1020,6 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
             $this->hideSubparts('attendancedata', 'field_wrapper');
         }
 
-        $this->callModifyOrganizerNotificationEmailHooks($registration, $this->getTemplate());
-
         $eMailNotification->setMessage($this->getSubpart('MAIL_NOTIFICATION'));
         $this->callPostProcessOrganizerEmailHooks($eMailNotification, $registration);
         $this->modifyNotificationEmail($eMailNotification, $registration);
@@ -1029,30 +1027,6 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         /** @var \Tx_Oelib_MailerFactory $mailerFactory */
         $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
         $mailerFactory->getMailer()->send($eMailNotification);
-    }
-
-    /**
-     * Calls the modifyOrganizerNotificationEmail hooks.
-     *
-     * @param \Tx_Seminars_OldModel_Registration $registration
-     * @param \Tx_Oelib_Template $emailTemplate
-     *
-     * @return void
-     *
-     * @deprecated will be removed in seminars 3;
-     * hook has been replaced by RegistrationEmailHookInterface::postProcessOrganizerEmail
-     */
-    protected function callModifyOrganizerNotificationEmailHooks(
-        \Tx_Seminars_OldModel_Registration $registration,
-        \Tx_Oelib_Template $emailTemplate
-    ) {
-        foreach ($this->getHooks() as $hook) {
-            if ($hook instanceof \Tx_Seminars_Interface_Hook_Registration) {
-                GeneralUtility::logDeprecatedFunction();
-                /** @var \Tx_Seminars_Interface_Hook_Registration $hook */
-                $hook->modifyOrganizerNotificationEmail($registration, $emailTemplate);
-            }
-        }
     }
 
     /**
@@ -1103,10 +1077,6 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         foreach ($this->getHooks() as $hook) {
             if ($hook instanceof RegistrationEmailHookInterface) {
                 $hook->postProcessAttendeeEmailText($registration, $emailTemplate);
-            } elseif ($hook instanceof \Tx_Seminars_Interface_Hook_Registration) {
-                GeneralUtility::logDeprecatedFunction();
-                /** @var \Tx_Seminars_Interface_Hook_Registration $hook */
-                $hook->modifyAttendeeEmailText($registration, $emailTemplate);
             }
         }
     }
