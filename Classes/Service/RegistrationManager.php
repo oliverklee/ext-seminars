@@ -1022,7 +1022,6 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
 
         $eMailNotification->setMessage($this->getSubpart('MAIL_NOTIFICATION'));
         $this->callPostProcessOrganizerEmailHooks($eMailNotification, $registration);
-        $this->modifyNotificationEmail($eMailNotification, $registration);
 
         /** @var \Tx_Oelib_MailerFactory $mailerFactory */
         $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
@@ -1044,24 +1043,6 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
                 $hook->postProcessOrganizerEmail($mail, $registration);
             }
         }
-    }
-
-    /**
-     * Modifies the notification e-mail.
-     *
-     * This method is intended to be overridden in XClasses if needed.
-     *
-     * @param \Tx_Oelib_Mail $emailNotification
-     * @param \Tx_Seminars_OldModel_Registration $registration
-     *
-     * @return void
-     *
-     * @deprecated will be removed in seminars 3; use RegistrationEmailHookInterface::postProcessOrganizerEmail instead
-     */
-    protected function modifyNotificationEmail(
-        \Tx_Oelib_Mail $emailNotification,
-        \Tx_Seminars_OldModel_Registration $registration
-    ) {
     }
 
     /**
