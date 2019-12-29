@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 use OliverKlee\Seminars\Hooks\RegistrationEmailHookInterface;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingRegistration;
@@ -2215,6 +2216,37 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
     /**
      * @test
      */
+    public function notifyAttendeeForSendConfirmationTrueCallsRegistrationEmailHookMethodsForPlainTextEmail()
+    {
+        \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
+            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_TEXT_MAIL);
+
+        $registration = $this->createRegistration();
+
+        $hook = $this->createMock(RegistrationEmail::class);
+        $hook->expects(self::once())->method('modifyAttendeeEmail')
+            ->with(self::anything(), self::anything(), 'confirmation');
+        $hook->expects(self::once())->method('modifyAttendeeEmailBody')
+            ->with(self::anything(), $registration, 'confirmation', false);
+        $hook->expects(self::never())->method('modifyOrganizerEmail');
+        $hook->expects(self::never())->method('modifyAdditionalEmail');
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][RegistrationEmail::class][] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
+
+        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1->init();
+
+        $this->subject->notifyAttendee($registration, $pi1);
+
+        GeneralUtility::makeInstance($hookClass);  // purge added instance in case of failing test
+    }
+
+    /**
+     * @test
+     */
     public function notifyAttendeeForSendConfirmationTrueAndPlainTextEmailCallsPostProcessAttendeeEmailTextHookOnce()
     {
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
@@ -2235,6 +2267,39 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
         $pi1->init();
 
         $this->subject->notifyAttendee($registration, $pi1);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForSendConfirmationTrueCallsRegistrationEmailHookMethodsForHtmlEmail()
+    {
+        \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
+            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+
+        $registration = $this->createRegistration();
+
+        $hook = $this->createMock(RegistrationEmail::class);
+        $hook->expects(self::once())->method('modifyAttendeeEmail')
+            ->with(self::anything(), self::anything(), 'confirmation');
+        $hook->expects(self::exactly(2))->method('modifyAttendeeEmailBody')->withConsecutive(
+            [self::anything(), $registration, 'confirmation', true],
+            [self::anything(), $registration, 'confirmation', false]
+        );
+        $hook->expects(self::never())->method('modifyOrganizerEmail');
+        $hook->expects(self::never())->method('modifyAdditionalEmail');
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][RegistrationEmail::class][] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
+
+        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1->init();
+
+        $this->subject->notifyAttendee($registration, $pi1);
+
+        GeneralUtility::makeInstance($hookClass);  // purge added instance in case of failing test
     }
 
     /**
@@ -4826,6 +4891,32 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
         $this->subject->notifyAttendee($registration, $pi1);
     }
 
+    /**
+     * @test
+     */
+    public function notifyAttendeeForSendConfirmationFalseNeverCallsRegistrationEmailHookMethods()
+    {
+        $registration = $this->createRegistration();
+
+        $hook = $this->createMock(RegistrationEmail::class);
+        $hook->expects(self::never())->method('modifyAttendeeEmail');
+        $hook->expects(self::never())->method('modifyAttendeeEmailBody');
+        $hook->expects(self::never())->method('modifyOrganizerEmail');
+        $hook->expects(self::never())->method('modifyAdditionalEmail');
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][RegistrationEmail::class][] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
+
+        $this->subject->setConfigurationValue('sendConfirmation', false);
+        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1->init();
+
+        $this->subject->notifyAttendee($registration, $pi1);
+
+        GeneralUtility::makeInstance($hookClass);  // purge added instance always
+    }
+
     /*
      * Tests regarding the notification of organizers
      */
@@ -5012,6 +5103,31 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
     /**
      * @test
      */
+    public function notifyOrganizersForSendNotificationTrueCallsRegistrationEmailHookMethods()
+    {
+        $this->subject->setConfigurationValue('sendNotification', true);
+
+        $registration = $this->createRegistration();
+
+        $hook = $this->createMock(RegistrationEmail::class);
+        $hook->expects(self::never())->method('modifyAttendeeEmail');
+        $hook->expects(self::never())->method('modifyAttendeeEmailBody');
+        $hook->expects(self::once())->method('modifyOrganizerEmail')
+            ->with(self::anything(), $registration, 'notification');
+        $hook->expects(self::never())->method('modifyAdditionalEmail');
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][RegistrationEmail::class][] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
+
+        $this->subject->notifyOrganizers($registration);
+
+        GeneralUtility::makeInstance($hookClass);  // purge added instance in case of failing test
+    }
+
+    /**
+     * @test
+     */
     public function notifyOrganizersForSendConfirmationTrueCallsPostProcessOrganizerEmailHook()
     {
         $this->subject->setConfigurationValue('sendNotification', true);
@@ -5031,6 +5147,30 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
         GeneralUtility::addInstance($hookClassName, $hook);
 
         $this->subject->notifyOrganizers($registration);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyOrganizersForSendNotificationFalseNeverCallsRegistrationEmailHookMethods()
+    {
+        $this->subject->setConfigurationValue('sendNotification', false);
+
+        $registration = $this->createRegistration();
+
+        $hook = $this->createMock(RegistrationEmail::class);
+        $hook->expects(self::never())->method('modifyAttendeeEmail');
+        $hook->expects(self::never())->method('modifyAttendeeEmailBody');
+        $hook->expects(self::never())->method('modifyOrganizerEmail');
+        $hook->expects(self::never())->method('modifyAdditionalEmail');
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][RegistrationEmail::class][] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
+
+        $this->subject->notifyOrganizers($registration);
+
+        GeneralUtility::makeInstance($hookClass);  // purge added instance always
     }
 
     /**
@@ -5555,6 +5695,35 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
             $this->getLanguageService()->getLL('label_vacancies') . ': ' . $this->getLanguageService()->getLL('label_unlimited'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
+    }
+
+    /**
+     * @test
+     */
+    public function sendAdditionalNotificationCallsRegistrationEmailHookMethods()
+    {
+        $this->testingFramework->changeRecord(
+            'tx_seminars_seminars',
+            $this->seminarUid,
+            ['attendees_max' => 1]
+        );
+
+        $registration = $this->createRegistration();
+
+        $hook = $this->createMock(RegistrationEmail::class);
+        $hook->expects(self::never())->method('modifyAttendeeEmail');
+        $hook->expects(self::never())->method('modifyAttendeeEmailBody');
+        $hook->expects(self::never())->method('modifyOrganizerEmail');
+        $hook->expects(self::once())->method('modifyAdditionalEmail')
+            ->with(self::anything(), $registration, 'IsFull');
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][RegistrationEmail::class][] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
+
+        $this->subject->sendAdditionalNotification($registration);
+
+        GeneralUtility::makeInstance($hookClass);  // purge added instance in case of failing test
     }
 
     /**
