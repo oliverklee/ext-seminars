@@ -4,14 +4,14 @@ defined('TYPO3_MODE') or die();
 $tca = [
     'ctrl' => [
         'title' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_timeslots',
-        'label' => 'title',
+        'label' => 'begin_date',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
         'delete' => 'deleted',
         'hideTable' => true,
         'iconfile' => 'EXT:seminars/Resources/Public/Icons/TimeSlot.gif',
-        'searchFields' => 'title',
+        'searchFields' => '',
     ],
     'interface' => [
         'showRecordFieldList' => 'begin_date, end_date, entry_date, speakers, place, room',
@@ -21,15 +21,6 @@ $tca = [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-            ],
-        ],
-        'title' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_timeslots.title',
-            'config' => [
-                'type' => 'input',
-                'size' => 30,
-                'eval' => 'trim',
             ],
         ],
         'begin_date' => [

@@ -24,7 +24,7 @@ class DataHandlerHook
     /**
      * @var string[]
      */
-    private $registeredTables = ['tx_seminars_seminars', 'tx_seminars_timeslots'];
+    private $registeredTables = ['tx_seminars_seminars'];
 
     /**
      * @var array[]
@@ -38,7 +38,6 @@ class DataHandlerHook
      */
     public function processDatamap_afterAllOperations()
     {
-        $this->processTimeSlots();
         $this->processEvents();
     }
 
@@ -102,23 +101,6 @@ class DataHandlerHook
     }
 
     /**
-     * Processes all time slots.
-     *
-     * @return void
-     */
-    private function processTimeSlots()
-    {
-        $table = 'tx_seminars_timeslots';
-        if (!$this->hasDataForTable($table)) {
-            return;
-        }
-
-        foreach ($this->tceMainFieldArrays[$table] as $uid => $_) {
-            $this->processSingleTimeSlot((int)$uid);
-        }
-    }
-
-    /**
      * @param string $table
      *
      * @return bool
@@ -142,23 +124,6 @@ class DataHandlerHook
 
         foreach ($this->tceMainFieldArrays[$table] as $uid => $fieldArray) {
             $this->processSingleEvent((int)$uid, $fieldArray);
-        }
-    }
-
-    /**
-     * Processes a single time slot.
-     *
-     * @param int $uid
-     *
-     * @return void
-     */
-    private function processSingleTimeSlot($uid)
-    {
-        /** @var \Tx_Seminars_OldModel_TimeSlot $timeSlot */
-        $timeSlot = GeneralUtility::makeInstance(\Tx_Seminars_OldModel_TimeSlot::class, $uid, false);
-
-        if ($timeSlot->comesFromDatabase()) {
-            $timeSlot->saveToDatabase($timeSlot->getUpdateArray());
         }
     }
 

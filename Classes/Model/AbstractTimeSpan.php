@@ -7,34 +7,8 @@ declare(strict_types=1);
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-abstract class Tx_Seminars_Model_AbstractTimeSpan extends \Tx_Oelib_Model implements \Tx_Seminars_Interface_Titled
+abstract class Tx_Seminars_Model_AbstractTimeSpan extends \Tx_Oelib_Model
 {
-    /**
-     * Returns our title.
-     *
-     * @return string our title, will not be empty
-     */
-    public function getTitle(): string
-    {
-        return $this->getAsString('title');
-    }
-
-    /**
-     * Sets our title.
-     *
-     * @param string $title our title to set, must not be empty
-     *
-     * @return void
-     */
-    public function setTitle(string $title)
-    {
-        if ($title == '') {
-            throw new \InvalidArgumentException('The parameter $title must not be empty.', 1333293446);
-        }
-
-        $this->setAsString('title', $title);
-    }
-
     /**
      * Returns our begin date as UNIX time-stamp.
      *

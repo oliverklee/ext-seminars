@@ -8,7 +8,7 @@ declare(strict_types=1);
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan
+class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implements \Tx_Seminars_Interface_Titled
 {
     /**
      * @var int represents the type for a single event
@@ -124,6 +124,24 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan
     public function getRawTitle(): string
     {
         return $this->getAsString('title');
+    }
+
+    /**
+     * Sets our title.
+     *
+     * @param string $title our title to set, must not be empty
+     *
+     * @return void
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function setTitle(string $title)
+    {
+        if ($title === '') {
+            throw new \InvalidArgumentException('$title must not be empty.', 1333293446);
+        }
+
+        $this->setAsString('title', $title);
     }
 
     /**

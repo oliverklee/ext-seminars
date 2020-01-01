@@ -768,10 +768,6 @@
                 <source>Time slots</source>
                 <target>Zeitblöcke</target>
             </trans-unit>
-            <trans-unit id="tx_seminars_timeslots.title" xml:space="preserve" approved="yes">
-                <source>Title</source>
-                <target>Titel</target>
-            </trans-unit>
             <trans-unit id="tx_seminars_timeslots.begin_date" xml:space="preserve" approved="yes">
                 <source>Begin date</source>
                 <target>Anfangszeit und -datum</target>

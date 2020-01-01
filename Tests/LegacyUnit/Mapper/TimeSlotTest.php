@@ -53,17 +53,12 @@ class Tx_Seminars_Tests_Unit_Mapper_TimeSlotTest extends TestCase
      */
     public function findWithUidOfExistingRecordReturnsRecordAsModel()
     {
-        $uid = $this->testingFramework->createRecord(
-            'tx_seminars_timeslots',
-            ['title' => '01.02.03 04:05']
-        );
+        $uid = $this->testingFramework->createRecord('tx_seminars_timeslots');
 
         /** @var \Tx_Seminars_Model_TimeSlot $model */
         $model = $this->subject->find($uid);
-        self::assertEquals(
-            '01.02.03 04:05',
-            $model->getTitle()
-        );
+
+        self::assertSame($uid, $model->getUid());
     }
 
     //////////////////////////////////
