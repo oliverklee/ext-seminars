@@ -109,7 +109,7 @@ class HookProvider
      * @param string $method the method to execute
      * @param mixed $params parameters to `$method()`
      *
-     * @return array the merged result arrays
+     * @return array the merged result arrays with numeric or string keys, may contain duplicate values
      */
     public function executeHookReturningMergedArray(string $method, ...$params): array
     {
