@@ -120,9 +120,7 @@ class HookProvider
             $result[] = $hook->$method(...$params);
         }
 
-        \array_merge(...$result);
-
-        return $result;
+        return \array_merge([], ...$result);
     }
 
     /**
