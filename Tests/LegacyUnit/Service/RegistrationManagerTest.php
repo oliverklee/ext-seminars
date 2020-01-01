@@ -2215,56 +2215,6 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
     /**
      * @test
      */
-    public function notifyAttendeeForSendConfirmationTrueAndPlainTextEmailCallsModifyAttendeeEmailTextHookOnce()
-    {
-        \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
-            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_TEXT_MAIL);
-
-        $registration = $this->createRegistration();
-
-        $hookClass = 'RegistrationHook' . \uniqid('', false);
-        $hook = $this->getMockBuilder(\Tx_Seminars_Interface_Hook_Registration::class)
-            ->setMockClassName($hookClass)->getMock();
-        $hook->expects(self::once())->method('modifyAttendeeEmailText')->with($registration, self::anything());
-
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
-        GeneralUtility::addInstance($hookClass, $hook);
-
-        $this->subject->setConfigurationValue('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
-        $pi1->init();
-
-        $this->subject->notifyAttendee($registration, $pi1);
-    }
-
-    /**
-     * @test
-     */
-    public function notifyAttendeeForSendConfirmationTrueAndHtmlEmailCallsModifyAttendeeEmailTextHookTwice()
-    {
-        \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
-            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
-
-        $registration = $this->createRegistration();
-
-        $hookClass = 'RegistrationHook' . \uniqid('', false);
-        $hook = $this->getMockBuilder(\Tx_Seminars_Interface_Hook_Registration::class)
-            ->setMockClassName($hookClass)->getMock();
-        $hook->expects(self::exactly(2))->method('modifyAttendeeEmailText')->with($registration, self::anything());
-
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
-        GeneralUtility::addInstance($hookClass, $hook);
-
-        $this->subject->setConfigurationValue('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
-        $pi1->init();
-
-        $this->subject->notifyAttendee($registration, $pi1);
-    }
-
-    /**
-     * @test
-     */
     public function notifyAttendeeForSendConfirmationTrueAndPlainTextEmailCallsPostProcessAttendeeEmailTextHookOnce()
     {
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
@@ -5057,55 +5007,6 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
             'foo inc.',
             $this->mailer->getFirstSentEmail()->getBody()
         );
-    }
-
-    /**
-     * @test
-     */
-    public function notifyOrganizersCallsModifyOrganizerNotificationEmailHookWithRegistration()
-    {
-        $this->subject->setConfigurationValue('sendNotification', true);
-
-        $registrationUid = $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            ['seminar' => $this->seminarUid, 'user' => $this->testingFramework->createFrontEndUser()]
-        );
-        $registration = new TestingRegistration($registrationUid);
-
-        $hookClassName = 'RegistrationHook' . \uniqid('', false);
-        $hook = $this->getMockBuilder(\Tx_Seminars_Interface_Hook_Registration::class)
-            ->setMockClassName($hookClassName)->getMock();
-        $hook->expects(self::once())->method('modifyOrganizerNotificationEmail')->with($registration, self::anything());
-
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
-        GeneralUtility::addInstance($hookClassName, $hook);
-
-        $this->subject->notifyOrganizers($registration);
-    }
-
-    /**
-     * @test
-     */
-    public function notifyOrganizersCallsModifyOrganizerNotificationEmailHookWithTemplate()
-    {
-        $this->subject->setConfigurationValue('sendNotification', true);
-
-        $registrationUid = $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            ['seminar' => $this->seminarUid, 'user' => $this->testingFramework->createFrontEndUser()]
-        );
-        $registration = new TestingRegistration($registrationUid);
-
-        $hookClassName = 'RegistrationHook' . \uniqid('', false);
-        $hook = $this->getMockBuilder(\Tx_Seminars_Interface_Hook_Registration::class)
-            ->setMockClassName($hookClassName)->getMock();
-        $hook->expects(self::once())->method('modifyOrganizerNotificationEmail')
-            ->with(self::anything(), self::isInstanceOf(\Tx_Oelib_Template::class));
-
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
-        GeneralUtility::addInstance($hookClassName, $hook);
-
-        $this->subject->notifyOrganizers($registration);
     }
 
     /**
