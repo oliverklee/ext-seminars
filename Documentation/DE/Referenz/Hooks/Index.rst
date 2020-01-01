@@ -52,7 +52,7 @@ Hooks zur Einzelansicht
     :php:`\OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView`.
 
 Es gibt einen Hook in die Einzelansicht. Er wird aufgerufen, bevor das Template zu HTML
-umgewandelt wird. Sie können damit eigene Marker ausfüllen oder bestehende Marker-Werte 
+umgewandelt wird. Sie können damit eigene Marker ausfüllen oder bestehende Marker-Werte
 verändern. Für Details zu Eigenschaften und Methoden siehe :file:`Classes/Frontend/DefaultController.php`.
 
 Ihre Klasse, die :php:`\OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView` implementiert,
@@ -60,7 +60,7 @@ machen Sie seminars in :file:`ext_localconf.php` Ihrer Extension bekannt:
 
 .. code-block:: php
 
-    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView:class][]
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView::class][]
         = \Tx_Seminarspaypal_Hooks_EventSingleView::class;
 
 Implementieren Sie die benötigten Methoden gemäß dem Interface:
@@ -134,7 +134,7 @@ machen Sie seminars in :file:`ext_localconf.php` Ihrer Extension bekannt:
 
 .. code-block:: php
 
-    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\SeminarListView:class][]
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\SeminarListView::class][]
         = \Tx_Seminarspaypal_Hooks_ListView::class;
 
 Implementieren Sie die benötigten Methoden gemäß dem Interface:
@@ -277,7 +277,7 @@ machen Sie seminars in :file:`ext_localconf.php` Ihrer Extension bekannt:
 
 .. code-block:: php
 
-    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\SeminarSelectorWidget:class][]
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\SeminarSelectorWidget::class][]
         = \Tx_Seminarspaypal_Hooks_EventSelectorWidget::class;
 
 Implementieren Sie die benötigten Methoden gemäß dem Interface:
@@ -332,7 +332,7 @@ machen Sie seminars in :file:`ext_localconf.php` Ihrer Extension bekannt:
 
 .. code-block:: php
 
-    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm:class][]
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm::class][]
         = \Tx_Seminarspaypal_Hooks_SeminarRegistrationForm::class;
 
 Implementieren Sie die benötigten Methoden gemäß dem Interface:
@@ -460,7 +460,7 @@ example:
 .. code-block:: php
 
    // register my hook objects
-   $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][] = \\MyVendor\\MyExt\\Hooks\\RegistrationEmailHook::class;
+   $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][] = \MyVendor\MyExt\Hooks\RegistrationEmailHook::class;
 
 
 .. _emailsalutation_de:
@@ -489,7 +489,7 @@ example:
 .. code-block:: php
 
    // register my hook objects
-   $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['modifyEmailSalutation'][] = \\MyVendor\\MyExt\\Hooks\\ModifySalutationHook::class;
+   $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['modifyEmailSalutation'][] = \MyVendor\MyExt\Hooks\ModifySalutationHook::class;
 
 
 .. _backendemail_de:
@@ -577,7 +577,7 @@ machen Sie seminars in :file:`ext_localconf.php` Ihrer Extension bekannt:
 
 .. code-block:: php
 
-    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\BackendRegistrationListView:class][]
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\BackendRegistrationListView::class][]
         = \Tx_Seminarspaypal_Hooks_BackendRegistrationListView::class;
 
 Implementieren Sie die benötigten Methoden gemäß dem Interface:

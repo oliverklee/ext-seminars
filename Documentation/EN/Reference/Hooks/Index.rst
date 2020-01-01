@@ -60,7 +60,7 @@ like this in :file:`ext_localconf.php` of your extension:
 
 .. code-block:: php
 
-    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView:class][]
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView::class][]
         = \Tx_Seminarspaypal_Hooks_EventSingleView::class;
 
 Implement the methods required by the interface:
@@ -135,7 +135,7 @@ like this in :file:`ext_localconf.php` of your extension:
 
 .. code-block:: php
 
-    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\SeminarListView:class][]
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\SeminarListView::class][]
         = \Tx_Seminarspaypal_Hooks_ListView::class;
 
 Implement the methods required by the interface:
@@ -277,7 +277,7 @@ like this in :file:`ext_localconf.php` of your extension:
 
 .. code-block:: php
 
-    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\SeminarSelectorWidget:class][]
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\SeminarSelectorWidget::class][]
         = \Tx_Seminarspaypal_Hooks_EventSelectorWidget::class;
 
 Implement the methods required by the interface:
@@ -332,7 +332,7 @@ like this in :file:`ext_localconf.php` of your extension:
 
 .. code-block:: php
 
-    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm:class][]
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm::class][]
         = \Tx_Seminarspaypal_Hooks_SeminarRegistrationForm::class;
 
 Implement the methods required by the interface:
@@ -460,7 +460,7 @@ example:
 .. code-block:: php
 
    // register my hook objects
-   $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][] = \\MyVendor\\MyExt\\Hooks\\RegistrationEmailHook::class;
+   $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][] = \MyVendor\MyExt\Hooks\RegistrationEmailHook::class;
 
 
 .. _emailsalutation_en:
@@ -489,7 +489,7 @@ example:
 .. code-block:: php
 
    // register my hook objects
-   $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['modifyEmailSalutation'][] = \\MyVendor\\MyExt\\Hooks\\ModifySalutationHook::class;
+   $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['modifyEmailSalutation'][] = \MyVendor\MyExt\Hooks\ModifySalutationHook::class;
 
 
 .. _backendemail_en:
@@ -577,7 +577,7 @@ like this in :file:`ext_localconf.php` of your extension:
 
 .. code-block:: php
 
-    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\BackendRegistrationListView:class][]
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\BackendRegistrationListView::class][]
         = \Tx_Seminarspaypal_Hooks_BackendRegistrationListView::class;
 
 Implement the methods required by the interface:
