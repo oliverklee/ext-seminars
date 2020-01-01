@@ -46,6 +46,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - `EventSingleView` interface and `singleView` hook index (#338)
 
 ### Removed
+- Drop deprecated `Tx_Seminars_Interface_Hook_Registration` hooks (#446)
+- Drop deprecated `Tx_Seminars_Service_RegistrationManager::modifyNotificationEmail()` hook (#446)
 - Drop the unused `Event::getRelatedMmRecordUids` (#405)
 - Drop the creation of model instances from legacy DB result (#388)
 - Drop AbstractModel::recordExists (#381)
