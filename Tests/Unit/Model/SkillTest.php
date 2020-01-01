@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace OliverKlee\Seminars\Tests\Unit\Visibility;
+namespace OliverKlee\Seminars\Tests\Unit\Model;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 
