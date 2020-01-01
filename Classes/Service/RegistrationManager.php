@@ -1073,7 +1073,8 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      * @return void
      *
      * @deprecated will be removed in seminars 4;
-     *      use `->getRegistrationEmailHookProvider()->executeHook('modifyAttendeeEmailBody')` instead
+     *      use `->getRegistrationEmailHookProvider()->executeHook('modifyAttendeeEmailBodyPlainText')`
+     *      or `->getRegistrationEmailHookProvider()->executeHook('modifyAttendeeEmailBodyHtml')` instead
      */
     protected function callPostProcessAttendeeEmailTextHooks(
         \Tx_Seminars_OldModel_Registration $registration,
@@ -1403,8 +1404,12 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         $footers = $event->getOrganizersFooter();
         $this->setMarker('footer', !empty($footers) ? LF . '-- ' . LF . $footers[0] : '');
 
-        $this->getRegistrationEmailHookProvider()
-            ->executeHook('modifyAttendeeEmailBody', $this->getTemplate(), $registration, $helloSubjectPrefix, $useHtml);
+        $this->getRegistrationEmailHookProvider()->executeHook(
+            $useHtml ? 'modifyAttendeeEmailBodyHtml' : 'modifyAttendeeEmailBodyPlainText',
+            $this->getTemplate(),
+            $registration,
+            $helloSubjectPrefix
+        );
         $this->callPostProcessAttendeeEmailTextHooks($registration, $this->getTemplate());
 
         return $this->getSubpart($useHtml ? 'MAIL_THANKYOU_HTML' : 'MAIL_THANKYOU');

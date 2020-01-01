@@ -388,17 +388,17 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
 Hooks zu den Emails der Registrierungsbenachrichtigungen
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-Es gibt 4 Hooks in die Emails der Registrierungsbenachrichtigungen:
+Es gibt 5 Hooks in die Emails der Registrierungsbenachrichtigungen:
 
-* Bevor das Template für die Teilnehmer-Benachrichtigung in HTML oder Plain-Text umgewandelt wird
-* Bevor die Teilnehmer-Benachrichtigung abgeschickt wird
-* Bevor die Benachrichtigung an die Organisatoren abgeschickt wird
-* Bevor zusätzliche Statusinformationen an die Organisatoren abgeschickt werden
+* bevor das Template für die Teilnehmer-Benachrichtigung in Plain-Text umgewandelt wird
+* bevor das Template für die Teilnehmer-Benachrichtigung in HTML umgewandelt wird
+* bevor die Teilnehmer-Benachrichtigung abgeschickt wird
+* bevor die Benachrichtigung an die Organisatoren abgeschickt wird
+* bevor zusätzliche Statusinformationen an die Organisatoren abgeschickt werden
 
-Im Template-Hook können Sie eigene Marker ausfüllen oder vorhandene Marker-Werte ändern. Zu
+In den Template-Hooks können Sie eigene Marker ausfüllen oder vorhandene Marker-Werte ändern. Zu
 verfügbaren Eigenschaften und Methoden dafür siehe :file:`Classes/OldModel/Registration.php`.
-Dieser Hook wird doppelt aufgerufen, wenn HTML-Emails versandt werden. Der erster Aufruf ist für
-die HTML-Version, der Zweite für die Plain-Text-Variante.
+Der Plain-Text-Hook wird immer aufgerufen. Der HTML-Hook nur, wenn HTML-Emails versandt werden.
 
 Die übrigen Hooks erlauben das Verändern des gesamten Mail-Objektes (z.B. Absender- oder
 Empfänger-Adressen, Betreffzeile oder den gesamten Body).  Zu verfügbaren Eigenschaften und Methoden
@@ -421,9 +421,9 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
     class Tx_Seminarspaypal_Hooks_RegistrationEmail implements RegistrationEmail
     {
         /**
-         * Modifies the attendee "Thank You" email, just before it is sent.
+         * Modifies the attendee "Thank you" email just before it is sent.
          *
-         * You may modify receiver or sender as well as subject and body of the eMail.
+         * You may modify receiver or sender as well as subject and body of the email.
          *
          * @param \Tx_Oelib_Mail $mail
          * @param \Tx_Seminars_Model_Registration $registration
@@ -444,7 +444,10 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
         }
 
         /**
-         * Modifies the attendee "Thank You" email body, just before the subpart is rendered.
+         * Modifies the attendee "Thank you" email body just before the subpart is rendered to PlainText.
+         *
+         * This method is called for every confirmation mail, even if HTML emails are configured.
+         * The body of a HTML mail alwyas contains a PlainText version, too.
          *
          * You may modify or set marker values in the template.
          *
@@ -455,23 +458,46 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          *          - confirmationOnUnregistration
          *          - confirmationOnRegistrationForQueue
          *          - confirmationOnQueueUpdate
-         * @param bool $useHtml whether to create HTML instead of plain text
          *
          * @return void
          */
-        public function modifyAttendeeEmailBody(
+        public function modifyAttendeeEmailBodyPlainText(
             \Tx_Oelib_Template $emailTemplate,
             \Tx_Seminars_OldModel_Registration $registration,
-            string $emailReason,
-            bool $useHtml
+            string $emailReason
         ) {
             // Hier Ihr Code
         }
 
         /**
-         * Modifies the organizer notification email, just before it is sent.
+         * Modifies the attendee "Thank you" email body just before the subpart is rendered to HTML.
          *
-         * You may modify receiver or sender as well as subject and body of the eMail.
+         * This method is called only, if HTML emails are configured for confirmation emails.
+         *
+         * You may modify or set marker values in the template.
+         *
+         * @param \Tx_Oelib_Template $emailTemplate
+         * @param \Tx_Seminars_OldModel_Registration $registration
+         * @param string $emailReason Possible values:
+         *          - confirmation
+         *          - confirmationOnUnregistration
+         *          - confirmationOnRegistrationForQueue
+         *          - confirmationOnQueueUpdate
+         *
+         * @return void
+         */
+        public function modifyAttendeeEmailBodyHtml(
+            \Tx_Oelib_Template $emailTemplate,
+            \Tx_Seminars_OldModel_Registration $registration,
+            string $emailReason
+        ) {
+            // Hier Ihr Code
+        }
+
+        /**
+         * Modifies the organizer notification email just before it is sent.
+         *
+         * You may modify receiver or sender as well as subject and body of the email.
          *
          * @param \Tx_Oelib_Mail $mail
          * @param \Tx_Seminars_OldModel_Registration $registration
@@ -492,9 +518,9 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
         }
 
         /**
-         * Modifies the organizer additional notification email, just before it is sent.
+         * Modifies the organizer additional notification email just before it is sent.
          *
-         * You may modify receiver or sender as well as subject and body of the eMail.
+         * You may modify receiver or sender as well as subject and body of the email.
          *
          * @param \Tx_Oelib_Mail $mail
          * @param \Tx_Seminars_OldModel_Registration $registration

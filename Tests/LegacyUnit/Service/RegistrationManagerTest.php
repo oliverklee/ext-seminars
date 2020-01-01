@@ -96,6 +96,11 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
      */
     private $frontEndUserMapper = null;
 
+    /**
+     * @var string
+     */
+    private $mockedClassName = '';
+
     protected function setUp()
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
@@ -163,11 +168,18 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
         $this->subject->injectLinkBuilder($linkBuilder);
 
         $this->frontEndUserMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
+
+        $this->mockedClassName = '';
     }
 
     protected function tearDown()
     {
         $this->testingFramework->cleanUp();
+
+        if ($this->mockedClassName !== '') {
+            GeneralUtility::makeInstance($this->mockedClassName);
+            $this->mockedClassName = '';
+        }
 
         TestingRegistrationManager::purgeInstance();
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
@@ -2226,8 +2238,9 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
         $hook = $this->createMock(RegistrationEmail::class);
         $hook->expects(self::once())->method('modifyAttendeeEmail')
             ->with(self::anything(), self::anything(), 'confirmation');
-        $hook->expects(self::once())->method('modifyAttendeeEmailBody')
-            ->with(self::anything(), $registration, 'confirmation', false);
+        $hook->expects(self::once())->method('modifyAttendeeEmailBodyPlainText')
+            ->with(self::anything(), $registration, 'confirmation');
+        $hook->expects(self::never())->method('modifyAttendeeEmailBodyHtml');
         $hook->expects(self::never())->method('modifyOrganizerEmail');
         $hook->expects(self::never())->method('modifyAdditionalEmail');
 
@@ -2241,7 +2254,8 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
 
         $this->subject->notifyAttendee($registration, $pi1);
 
-        GeneralUtility::makeInstance($hookClass);  // purge added instance in case of failing test
+        // purge added instance in case of failing test
+        $this->mockedClassName = $hookClass;
     }
 
     /**
@@ -2282,10 +2296,10 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
         $hook = $this->createMock(RegistrationEmail::class);
         $hook->expects(self::once())->method('modifyAttendeeEmail')
             ->with(self::anything(), self::anything(), 'confirmation');
-        $hook->expects(self::exactly(2))->method('modifyAttendeeEmailBody')->withConsecutive(
-            [self::anything(), $registration, 'confirmation', true],
-            [self::anything(), $registration, 'confirmation', false]
-        );
+        $hook->expects(self::once())->method('modifyAttendeeEmailBodyPlainText')
+            ->with(self::anything(), $registration, 'confirmation');
+        $hook->expects(self::once())->method('modifyAttendeeEmailBodyHtml')
+            ->with(self::anything(), $registration, 'confirmation');
         $hook->expects(self::never())->method('modifyOrganizerEmail');
         $hook->expects(self::never())->method('modifyAdditionalEmail');
 
@@ -2299,7 +2313,8 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
 
         $this->subject->notifyAttendee($registration, $pi1);
 
-        GeneralUtility::makeInstance($hookClass);  // purge added instance in case of failing test
+        // purge added instance in case of failing test
+        $this->mockedClassName = $hookClass;
     }
 
     /**
@@ -4900,7 +4915,8 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
 
         $hook = $this->createMock(RegistrationEmail::class);
         $hook->expects(self::never())->method('modifyAttendeeEmail');
-        $hook->expects(self::never())->method('modifyAttendeeEmailBody');
+        $hook->expects(self::never())->method('modifyAttendeeEmailBodyPlainText');
+        $hook->expects(self::never())->method('modifyAttendeeEmailBodyHtml');
         $hook->expects(self::never())->method('modifyOrganizerEmail');
         $hook->expects(self::never())->method('modifyAdditionalEmail');
 
@@ -4914,7 +4930,8 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
 
         $this->subject->notifyAttendee($registration, $pi1);
 
-        GeneralUtility::makeInstance($hookClass);  // purge added instance always
+        // purge added instance always
+        $this->mockedClassName = $hookClass;
     }
 
     /*
@@ -5111,7 +5128,8 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
 
         $hook = $this->createMock(RegistrationEmail::class);
         $hook->expects(self::never())->method('modifyAttendeeEmail');
-        $hook->expects(self::never())->method('modifyAttendeeEmailBody');
+        $hook->expects(self::never())->method('modifyAttendeeEmailBodyPlainText');
+        $hook->expects(self::never())->method('modifyAttendeeEmailBodyHtml');
         $hook->expects(self::once())->method('modifyOrganizerEmail')
             ->with(self::anything(), $registration, 'notification');
         $hook->expects(self::never())->method('modifyAdditionalEmail');
@@ -5122,7 +5140,8 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
 
         $this->subject->notifyOrganizers($registration);
 
-        GeneralUtility::makeInstance($hookClass);  // purge added instance in case of failing test
+        // purge added instance in case of failing test
+        $this->mockedClassName = $hookClass;
     }
 
     /**
@@ -5160,7 +5179,8 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
 
         $hook = $this->createMock(RegistrationEmail::class);
         $hook->expects(self::never())->method('modifyAttendeeEmail');
-        $hook->expects(self::never())->method('modifyAttendeeEmailBody');
+        $hook->expects(self::never())->method('modifyAttendeeEmailBodyPlainText');
+        $hook->expects(self::never())->method('modifyAttendeeEmailBodyHtml');
         $hook->expects(self::never())->method('modifyOrganizerEmail');
         $hook->expects(self::never())->method('modifyAdditionalEmail');
 
@@ -5170,7 +5190,8 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
 
         $this->subject->notifyOrganizers($registration);
 
-        GeneralUtility::makeInstance($hookClass);  // purge added instance always
+        // purge added instance always
+        $this->mockedClassName = $hookClass;
     }
 
     /**
@@ -5712,7 +5733,8 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
 
         $hook = $this->createMock(RegistrationEmail::class);
         $hook->expects(self::never())->method('modifyAttendeeEmail');
-        $hook->expects(self::never())->method('modifyAttendeeEmailBody');
+        $hook->expects(self::never())->method('modifyAttendeeEmailBodyPlainText');
+        $hook->expects(self::never())->method('modifyAttendeeEmailBodyHtml');
         $hook->expects(self::never())->method('modifyOrganizerEmail');
         $hook->expects(self::once())->method('modifyAdditionalEmail')
             ->with(self::anything(), $registration, 'IsFull');
@@ -5723,7 +5745,8 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
 
         $this->subject->sendAdditionalNotification($registration);
 
-        GeneralUtility::makeInstance($hookClass);  // purge added instance in case of failing test
+        // purge added instance in case of failing test
+        $this->mockedClassName = $hookClass;
     }
 
     /**
