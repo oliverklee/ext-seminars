@@ -46,6 +46,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - `EventSingleView` interface and `singleView` hook index (#338)
 
 ### Removed
+- Drop the title field for time slots (#451)
 - Drop deprecated `Tx_Seminars_Interface_Hook_Registration` hooks (#446)
 - Drop deprecated `Tx_Seminars_Service_RegistrationManager::modifyNotificationEmail()` hook (#446)
 - Drop the unused `Event::getRelatedMmRecordUids` (#405)

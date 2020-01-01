@@ -740,10 +740,6 @@
                 <source>Time slots</source>
                 <target>Fascia oraria</target>
             </trans-unit>
-            <trans-unit id="tx_seminars_timeslots.title" xml:space="preserve" approved="yes">
-                <source>Title</source>
-                <target>Titolo</target>
-            </trans-unit>
             <trans-unit id="tx_seminars_timeslots.begin_date" xml:space="preserve" approved="yes">
                 <source>Begin date</source>
                 <target>Data inizio</target>

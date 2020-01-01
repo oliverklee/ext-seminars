@@ -234,6 +234,26 @@ class Tx_Seminars_Tests_Unit_Model_EventTest extends TestCase
         );
     }
 
+    /**
+     * @test
+     */
+    public function setTitleWithEmptyTitleThrowsException()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        $this->subject->setTitle('');
+    }
+
+    /**
+     * @test
+     */
+    public function setTitleSetsTitle()
+    {
+        $this->subject->setTitle('Superhero');
+
+        self::assertSame('Superhero', $this->subject->getTitle());
+    }
+
     /*
      * Tests regarding the time zone.
      */

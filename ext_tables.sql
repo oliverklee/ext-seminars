@@ -689,7 +689,6 @@ CREATE TABLE tx_seminars_timeslots (
     deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
     is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     seminar int(11) unsigned DEFAULT '0' NOT NULL,
-    title tinytext,
     begin_date int(11) unsigned DEFAULT '0' NOT NULL,
     end_date int(11) unsigned DEFAULT '0' NOT NULL,
     entry_date int(11) unsigned DEFAULT '0' NOT NULL,

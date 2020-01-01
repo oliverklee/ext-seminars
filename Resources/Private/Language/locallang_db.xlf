@@ -577,9 +577,6 @@
             <trans-unit id="tx_seminars_timeslots" xml:space="preserve">
                 <source>Time slots</source>
             </trans-unit>
-            <trans-unit id="tx_seminars_timeslots.title" xml:space="preserve">
-                <source>Title</source>
-            </trans-unit>
             <trans-unit id="tx_seminars_timeslots.begin_date" xml:space="preserve">
                 <source>Begin date</source>
             </trans-unit>

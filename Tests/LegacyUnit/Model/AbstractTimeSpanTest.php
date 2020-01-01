@@ -21,47 +21,6 @@ class Tx_Seminars_Tests_Unit_Model_AbstractTimeSpanTest extends TestCase
         $this->subject = $this->getMockForAbstractClass(\Tx_Seminars_Model_AbstractTimeSpan::class);
     }
 
-    /**
-     * @test
-     */
-    public function setTitleWithEmptyTitleThrowsException()
-    {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            'The parameter $title must not be empty.'
-        );
-
-        $this->subject->setTitle('');
-    }
-
-    /**
-     * @test
-     */
-    public function setTitleSetsTitle()
-    {
-        $this->subject->setTitle('Superhero');
-
-        self::assertEquals(
-            'Superhero',
-            $this->subject->getTitle()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getTitleWithNonEmptyTitleReturnsTitle()
-    {
-        $this->subject->setData(['title' => 'Superhero']);
-
-        self::assertEquals(
-            'Superhero',
-            $this->subject->getTitle()
-        );
-    }
-
     ////////////////////////////////////
     // Tests regarding the begin date.
     ////////////////////////////////////
