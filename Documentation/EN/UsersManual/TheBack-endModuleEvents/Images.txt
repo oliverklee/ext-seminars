@@ -60,7 +60,7 @@
 .. :border: 0
 .. :name: Grafik47
 
-.. |img-35|     image:: ../../../Images/../../typo3_src/typo3/sysext/t3skin/icons/gfx/csv.gif
+.. |img-35|     image:: ../../../Images/csv.gif
    :height: 15
    :width: 25
 .. :align: left
