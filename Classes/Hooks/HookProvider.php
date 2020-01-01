@@ -19,9 +19,16 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * point is reached and re-used for all other points.
  *
  * Implementing hook points
- * Instantiate this class with the interface you need implemented. First call to `executeHook()` will
+ * Instantiate this class with the interface you need implemented. First call to `executeHook[...]()` will
  * instantiate the registered classes. Every further call will reuse the same instances. On each
  * call provide the method required at the point in your program.
+ *
+ * The most recommended way to design a hook method is passing objects to manipulate. Use `executeHook()`
+ * for these methods. By passing an object to the hooked-in methods, the object content can be manipulated,
+ * and by this change the behaviour of `seminars`.
+ *
+ * In some cases, when a return value is required, you may use `executeHookReturningMergedArray()` for returning complex
+ * results while all hooked-in methods process the same parameters.
  *
  * There is an optional index to `$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']`, provided
  * for easier conversion of existing hooks to this class.
@@ -83,28 +90,37 @@ class HookProvider
      * Executes the hooked-in methods.
      *
      * @param string $method the method to execute
-     * @param mixed $params parameters to $method()
+     * @param mixed $params parameters to `$method()`
      *
      * @return void
-     *
-     * @throws \InvalidArgumentException
-     * @throws \UnexpectedValueException
      */
     public function executeHook(string $method, ...$params)
     {
-        if ($method === '') {
-            throw new \InvalidArgumentException('The parameter $method must not be empty.', 1573479911);
-        }
-        if (!\in_array($method, \get_class_methods($this->interfaceName), true)) {
-            throw new \UnexpectedValueException(
-                'The interface ' . $this->interfaceName . ' does not contain method ' . $method . '.',
-                1573480302
-            );
-        }
+        $this->validateHookMethod($method);
 
         foreach ($this->getHooks() as $hook) {
             $hook->$method(...$params);
         }
+    }
+
+    /**
+     * Executes the hooked-in methods that return result arrays.
+     *
+     * @param string $method the method to execute
+     * @param mixed $params parameters to `$method()`
+     *
+     * @return array the merged result arrays with numeric or string keys, may contain duplicate values
+     */
+    public function executeHookReturningMergedArray(string $method, ...$params): array
+    {
+        $this->validateHookMethod($method);
+
+        $result = [];
+        foreach ($this->getHooks() as $hook) {
+            $result[] = $hook->$method(...$params);
+        }
+
+        return \array_merge([], ...$result);
     }
 
     /**
@@ -146,5 +162,28 @@ class HookProvider
         }
 
         $this->hooksHaveBeenRetrieved = true;
+    }
+
+    /**
+     * Validates the requested hooked-in methods.
+     *
+     * @param string $method the method to execute
+     *
+     * @return void
+     *
+     * @throws \InvalidArgumentException
+     * @throws \UnexpectedValueException
+     */
+    protected function validateHookMethod(string $method)
+    {
+        if ($method === '') {
+            throw new \InvalidArgumentException('The parameter $method must not be empty.', 1573479911);
+        }
+        if (!\in_array($method, \get_class_methods($this->interfaceName), true)) {
+            throw new \UnexpectedValueException(
+                'The interface ' . $this->interfaceName . ' does not contain method ' . $method . '.',
+                1573480302
+            );
+        }
     }
 }

@@ -10,8 +10,11 @@ use OliverKlee\Seminars\Hooks\Interfaces\Hook;
 use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookImplementor;
 use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookImplementor2;
 use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookImplementorNotImplementsInterface;
+use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookImplementorReturnsArray;
+use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookImplementorReturnsArray2;
 use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookInterface;
 use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookInterfaceNotExtendsHook;
+use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookInterfaceReturnsArray;
 
 /**
  * Test case.
@@ -221,6 +224,18 @@ final class HookProviderTest extends UnitTestCase
 
     /**
      * @test
+     */
+    public function hookObjectForTestHookWithIndexCanBeCreated()
+    {
+        self::assertInstanceOf(HookProvider::class, $this->createHookObject('anyIndex'));
+    }
+
+    /*
+     * Tests concerning Hook::executeHook().
+     */
+
+    /**
+     * @test
      * @doesNotPerformAssertions
      */
     public function hookObjectForTestHookWithNoHookImplementorRegisteredSucceedsForValidMethod()
@@ -305,14 +320,6 @@ final class HookProviderTest extends UnitTestCase
     /**
      * @test
      */
-    public function hookObjectForTestHookWithIndexCanBeCreated()
-    {
-        self::assertInstanceOf(HookProvider::class, $this->createHookObject('anyIndex'));
-    }
-
-    /**
-     * @test
-     */
     public function hookObjectForTestHookWithIndexWithOneHookImplementorRegisteredSucceedsWithMethodCalledOnce()
     {
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['anyIndex'][1574270061] =
@@ -353,5 +360,103 @@ final class HookProviderTest extends UnitTestCase
 
         self::assertSame(0, TestingHookImplementor::$wasCalled);
         self::assertSame(1, TestingHookImplementor2::$wasCalled);
+    }
+
+    /*
+     * Tests concerning Hook::executeHookReturningMergedArray().
+     */
+
+    /**
+     * @test
+     */
+    public function hookObjectForTestingHookReturningArrayCanBeCreated()
+    {
+        self::assertInstanceOf(HookProvider::class, new HookProvider(TestingHookInterfaceReturnsArray::class));
+    }
+
+    /**
+     * @test
+     */
+    public function hookObjectForTestingHookReturningArrayWithNoHookImplementorRegisteredReturnsEmptyArray()
+    {
+        $hookObject = new HookProvider(TestingHookInterfaceReturnsArray::class);
+
+        self::assertSame([], $hookObject->executeHookReturningMergedArray('testHookMethodReturnsArray'));
+        self::assertSame([], $hookObject->executeHookReturningMergedArray('testHookMethodReturnsNestedArray'));
+    }
+
+    /**
+     * @test
+     */
+    public function hookObjectForTestingHookReturningArrayWithNoHookImplementorRegisteredFailsForEmptyMethod()
+    {
+        $hookObject = new HookProvider(TestingHookInterfaceReturnsArray::class);
+
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionCode(1573479911);
+
+        $hookObject->executeHookReturningMergedArray('');
+    }
+
+    /**
+     * @test
+     */
+    public function hookObjectForTestingHookReturningArrayWithNoHookImplementorRegisteredFailsForUnknownMethod()
+    {
+        $hookObject = new HookProvider(TestingHookInterfaceReturnsArray::class);
+
+        $this->expectException(\UnexpectedValueException::class);
+        $this->expectExceptionCode(1573480302);
+
+        $hookObject->executeHookReturningMergedArray('methodNotImplemented');
+    }
+
+    /**
+     * @test
+     */
+    public function hookObjectForTestingHookReturningArrayWithOneHookImplementorRegisteredReturnsFilledArray()
+    {
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestingHookInterfaceReturnsArray::class][1577363366] =
+            TestingHookImplementorReturnsArray::class;
+        $hookObject = new HookProvider(TestingHookInterfaceReturnsArray::class);
+
+        self::assertSame(
+            ['me' => 'ok', 'overwritten' => 'initial'],
+            $hookObject->executeHookReturningMergedArray('testHookMethodReturnsArray')
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function hookObjectForTestingHookReturningArrayWithTwoHookImplementorsRegisteredReturnsMergedArray()
+    {
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestingHookInterfaceReturnsArray::class][1577363366] =
+            TestingHookImplementorReturnsArray::class;
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestingHookInterfaceReturnsArray::class][1577363367] =
+            TestingHookImplementorReturnsArray2::class;
+        $hookObject = new HookProvider(TestingHookInterfaceReturnsArray::class);
+
+        self::assertSame(
+            ['me' => 'ok', 'overwritten' => 'replaced', 'me2' => 'ok'],
+            $hookObject->executeHookReturningMergedArray('testHookMethodReturnsArray')
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function hookObjectForTestingHookReturningArrayWithTwoHookImplementorsRegisteredReturnsNestedMergedArray()
+    {
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestingHookInterfaceReturnsArray::class][1577363366] =
+            TestingHookImplementorReturnsArray::class;
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestingHookInterfaceReturnsArray::class][1577363367] =
+            TestingHookImplementorReturnsArray2::class;
+        $hookObject = new HookProvider(TestingHookInterfaceReturnsArray::class);
+
+        self::assertSame(
+            ['me' => ['status' => true], 'me1' => ['status' => true], 'me2' => ['status' => false, 'newValue' => 'new2']],
+            $hookObject->executeHookReturningMergedArray('testHookMethodReturnsNestedArray')
+        );
     }
 }
