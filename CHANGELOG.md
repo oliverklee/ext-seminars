@@ -58,6 +58,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop support for TYPO3 7.6 (#248, #272, #280)
 
 ### Fixed
+- Fix a test case namespace (#452)
 - Fix image references in the documentation (#448)
 - Fix PHP syntax errors in the documentation (#447)
 - Fix failing DefaultController tests in 9.5 (#442)
