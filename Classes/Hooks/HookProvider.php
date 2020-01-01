@@ -24,10 +24,10 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * call provide the method required at the point in your program.
  *
  * The most recommended way to design a hook method is passing objects to manipulate. Use `executeHook()`
- * for these methods. By passing an object to the hooked-in methods the object content can be manipulated
+ * for these methods. By passing an object to the hooked-in methods, the object content can be manipulated,
  * and by this change the behaviour of `seminars`.
  *
- * In some cases, when a return value is required, You may use `executeHookReturningMergedArray()` for returning complex
+ * In some cases, when a return value is required, you may use `executeHookReturningMergedArray()` for returning complex
  * results while all hooked-in methods process the same parameters.
  *
  * There is an optional index to `$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']`, provided
@@ -90,7 +90,7 @@ class HookProvider
      * Executes the hooked-in methods.
      *
      * @param string $method the method to execute
-     * @param mixed $params parameters to $method()
+     * @param mixed $params parameters to `$method()`
      *
      * @return void
      */
@@ -104,10 +104,10 @@ class HookProvider
     }
 
     /**
-     * Executes the hooked-in methods, that return result arrays.
+     * Executes the hooked-in methods that return result arrays.
      *
      * @param string $method the method to execute
-     * @param mixed $params parameters to $method()
+     * @param mixed $params parameters to `$method()`
      *
      * @return array the merged result arrays
      */
@@ -117,8 +117,10 @@ class HookProvider
 
         $result = [];
         foreach ($this->getHooks() as $hook) {
-            $result = array_merge($result, $hook->$method(...$params));
+            $result[] = $hook->$method(...$params);
         }
+
+        \array_merge(...$result);
 
         return $result;
     }

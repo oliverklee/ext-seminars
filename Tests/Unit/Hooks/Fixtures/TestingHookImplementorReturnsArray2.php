@@ -16,7 +16,7 @@ final class TestingHookImplementorReturnsArray2 implements TestingHookInterfaceR
     /**
      * Gets called during HookProvider tests.
      *
-     * @return array
+     * @return string[]
      */
     public function testHookMethodReturnsArray(): array
     {
