@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+    <tx_seminars_seminars>
+        <uid>1</uid>
+        <title>event with no begin date and no registration deadline</title>
+    </tx_seminars_seminars>
+    <tx_seminars_seminars>
+        <uid>2</uid>
+        <title>event with a begin date and no registration deadline</title>
+        <begin_date>1000</begin_date>
+    </tx_seminars_seminars>
+    <tx_seminars_seminars>
+        <uid>3</uid>
+        <title>event with a begin date and a equal registration deadline</title>
+        <begin_date>1000</begin_date>
+        <deadline_registration>1000</deadline_registration>
+    </tx_seminars_seminars>
+    <tx_seminars_seminars>
+        <uid>4</uid>
+        <title>event with a begin date and an earlier registration deadline</title>
+        <begin_date>1000</begin_date>
+        <deadline_registration>999</deadline_registration>
+    </tx_seminars_seminars>
+    <tx_seminars_seminars>
+        <uid>5</uid>
+        <title>event with a begin date and a later registration deadline</title>
+        <begin_date>1000</begin_date>
+        <deadline_registration>1001</deadline_registration>
+    </tx_seminars_seminars>
+    <tx_seminars_seminars>
+        <uid>6</uid>
+        <title>event with no begin date and a registration deadline</title>
+        <deadline_registration>1000</deadline_registration>
+    </tx_seminars_seminars>
+</dataset>
