@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
-- Add tests for the DataMapper sanitization (#454)
+- Add tests for the DataMapper sanitization (#454, #456)
 - Add new backend registration list hook (#437)
 - Add new selector widget hook (#436)
 - Add documentation rendering using docker-compose (#432)

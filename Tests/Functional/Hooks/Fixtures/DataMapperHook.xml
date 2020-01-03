@@ -2,24 +2,26 @@
 <dataset>
     <tx_seminars_seminars>
         <uid>1</uid>
-        <title>event with no begin date and no registration deadline</title>
+        <title>event with no begin date, no registration deadline and no early-bird deadline</title>
     </tx_seminars_seminars>
     <tx_seminars_seminars>
         <uid>2</uid>
-        <title>event with a begin date and no registration deadline</title>
+        <title>event with a begin date, no registration deadline and no early-bird deadline</title>
         <begin_date>1000</begin_date>
     </tx_seminars_seminars>
     <tx_seminars_seminars>
         <uid>3</uid>
-        <title>event with a begin date and a equal registration deadline</title>
+        <title>event with a begin date and equal registration and early-bird deadlines</title>
         <begin_date>1000</begin_date>
         <deadline_registration>1000</deadline_registration>
+        <deadline_early_bird>1000</deadline_early_bird>
     </tx_seminars_seminars>
     <tx_seminars_seminars>
         <uid>4</uid>
-        <title>event with a begin date and an earlier registration deadline</title>
+        <title>event with a begin date, an earlier registration deadline and an even earlier early-bird deadline</title>
         <begin_date>1000</begin_date>
         <deadline_registration>999</deadline_registration>
+        <deadline_early_bird>998</deadline_early_bird>
     </tx_seminars_seminars>
     <tx_seminars_seminars>
         <uid>5</uid>
@@ -31,5 +33,23 @@
         <uid>6</uid>
         <title>event with no begin date and a registration deadline</title>
         <deadline_registration>1000</deadline_registration>
+    </tx_seminars_seminars>
+    <tx_seminars_seminars>
+        <uid>7</uid>
+        <title>event with a begin date and a later early-bird deadline</title>
+        <begin_date>1000</begin_date>
+        <deadline_early_bird>1001</deadline_early_bird>
+    </tx_seminars_seminars>
+    <tx_seminars_seminars>
+        <uid>8</uid>
+        <title>event with no begin date and an early-bird deadline</title>
+        <deadline_early_bird>1000</deadline_early_bird>
+    </tx_seminars_seminars>
+    <tx_seminars_seminars>
+        <uid>9</uid>
+        <title>event with a begin date and an early-bird deadline between registration deadline and begin</title>
+        <begin_date>1000</begin_date>
+        <deadline_early_bird>999</deadline_early_bird>
+        <deadline_registration>998</deadline_registration>
     </tx_seminars_seminars>
 </dataset>
