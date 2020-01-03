@@ -67,10 +67,10 @@ final class DataHandlerHookTest extends FunctionalTestCase
     public function validRegistrationDeadlineDataProvider(): array
     {
         return [
-            'no begin date and no deadline' => [1, 0],
-            'begin date and no deadline' => [2, 0],
-            'begin date and same deadline' => [3, 1000],
-            'begin date and earlier deadline' => [4, 999],
+            'no begin date and no deadline' => [1],
+            'begin date and no deadline' => [2],
+            'begin date and same deadline' => [3],
+            'begin date and earlier deadline' => [4],
         ];
     }
 
@@ -78,14 +78,14 @@ final class DataHandlerHookTest extends FunctionalTestCase
      * @test
      *
      * @param int $uid
-     * @param int $expectedDeadline
      *
      * @dataProvider validRegistrationDeadlineDataProvider
      */
-    public function afterDatabaseOperationsOnUpdateKeepsValidRegistrationDeadline(int $uid, int $expectedDeadline)
+    public function afterDatabaseOperationsOnUpdateKeepsValidRegistrationDeadline(int $uid)
     {
         $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook.xml');
         $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+        $expectedDeadline = $data['deadline_registration'];
 
         $this->subject
             ->processDatamap_afterDatabaseOperations('update', self::TABLE_SEMINARS, $uid, $data, $this->dataHandler);
@@ -101,8 +101,8 @@ final class DataHandlerHookTest extends FunctionalTestCase
     public function invalidRegistrationDeadlineDataProvider(): array
     {
         return [
-            'begin date before registration deadline' => [5],
-            'no begin date, but registration deadline' => [6],
+            'begin date before deadline' => [5],
+            'no begin date, but deadline' => [6],
         ];
     }
 
@@ -151,5 +151,98 @@ final class DataHandlerHookTest extends FunctionalTestCase
 
         $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
         self::assertSame(0, $row['deadline_registration']);
+    }
+
+    /**
+     * @return int[][]
+     */
+    public function validEarlyBirdDeadlineDataProvider(): array
+    {
+        return [
+            'no begin date and no deadline' => [1],
+            'begin date and no deadline' => [2],
+            'begin date and same deadline' => [3],
+            'begin date and earlier deadline' => [4],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @param int $uid
+     *
+     * @dataProvider validEarlyBirdDeadlineDataProvider
+     */
+    public function afterDatabaseOperationsOnUpdateKeepsValidEarlyBirdDeadline(int $uid)
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook.xml');
+        $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+        $expectedDeadline = $data['deadline_early_bird'];
+
+        $this->subject
+            ->processDatamap_afterDatabaseOperations('update', self::TABLE_SEMINARS, $uid, $data, $this->dataHandler);
+        $this->subject->processDatamap_afterAllOperations();
+
+        $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+        self::assertSame($expectedDeadline, $row['deadline_early_bird']);
+    }
+
+    /**
+     * @return int[][]
+     */
+    public function invalidEarlyBirdDeadlineDataProvider(): array
+    {
+        return [
+            'begin date before deadline' => [7],
+            'no begin date, but deadline' => [8],
+            'early-bird deadline after registration deadline' => [9],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @param int $uid
+     *
+     * @dataProvider invalidEarlyBirdDeadlineDataProvider
+     */
+    public function afterDatabaseOperationsOnUpdateResetsInvalidEarlyBirdDeadline(int $uid)
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook.xml');
+        $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+
+        $this->subject
+            ->processDatamap_afterDatabaseOperations('update', self::TABLE_SEMINARS, $uid, $data, $this->dataHandler);
+        $this->subject->processDatamap_afterAllOperations();
+
+        $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+        self::assertSame(0, $row['deadline_early_bird']);
+    }
+
+    /**
+     * @test
+     *
+     * @param int $uid
+     *
+     * @dataProvider invalidEarlyBirdDeadlineDataProvider
+     */
+    public function afterDatabaseOperationsOnNewResetsInvalidEarlyBirdDeadline(int $uid)
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook.xml');
+        $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+        $temporaryUid = 'NEW5e0f43477dcd4869591288';
+        $this->dataHandler->substNEWwithIDs[$temporaryUid] = $uid;
+
+        $this->subject->processDatamap_afterDatabaseOperations(
+            'new',
+            self::TABLE_SEMINARS,
+            $temporaryUid,
+            $data,
+            $this->dataHandler
+        );
+        $this->subject->processDatamap_afterAllOperations();
+
+        $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+        self::assertSame(0, $row['deadline_early_bird']);
     }
 }
