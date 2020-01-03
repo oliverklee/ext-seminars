@@ -131,22 +131,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
                     $result['newValue'] = 0;
                 }
                 break;
-            case 'price_regular_early':
-                // Check that the regular early bird price is not higher than
-                // the regular price for this event.
-                if ($value > $this->getRecordPropertyDecimal('price_regular')) {
-                    $result['status'] = false;
-                    $result['newValue'] = '0.00';
-                }
-                break;
-            case 'price_special_early':
-                // Check that the special early bird price is not higher than
-                // the special price for this event.
-                if ($value > $this->getRecordPropertyDecimal('price_special')) {
-                    $result['status'] = false;
-                    $result['newValue'] = '0.00';
-                }
-                break;
             default:
                 // no action if no case is matched
         }
@@ -170,12 +154,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     public function getUpdateArray(array &$fieldArray): array
     {
         $updateArray = [];
-        $fieldNamesToCheck = [
-            'deadline_registration',
-            'deadline_early_bird',
-            'price_regular_early',
-            'price_special_early',
-        ];
+        $fieldNamesToCheck = ['deadline_registration', 'deadline_early_bird'];
 
         foreach ($fieldNamesToCheck as $currentFieldName) {
             $result = $this->validateTceValues(
