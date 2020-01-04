@@ -168,8 +168,6 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
         $this->subject->injectLinkBuilder($linkBuilder);
 
         $this->frontEndUserMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
-
-        $this->mockedClassNames = [];
     }
 
     protected function tearDown()
@@ -346,10 +344,6 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
      */
     private function purgeMockedInstances()
     {
-        if (empty($this->mockedClassNames)) {
-            return;
-        }
-
         foreach ($this->mockedClassNames as $className) {
             GeneralUtility::makeInstance($className);
         }
@@ -2346,13 +2340,13 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
         $hook = $this->createMock(RegistrationEmail::class);
         $hook->expects(self::once())->method('modifyAttendeeEmail')->with(
             self::isInstanceOf(\Tx_Oelib_Mail::class),
-            self::identicalTo($registration),
-            self::identicalTo('confirmation')
+            $registration,
+            'confirmation'
         );
         $hook->expects(self::once())->method('modifyAttendeeEmailBodyPlainText')->with(
             self::isInstanceOf(\Tx_Oelib_Template::class),
-            self::identicalTo($registration),
-            self::identicalTo('confirmation')
+            $registration,
+            'confirmation'
         );
         $hook->expects(self::never())->method('modifyAttendeeEmailBodyHtml');
         $hook->expects(self::never())->method('modifyOrganizerEmail');
@@ -2412,18 +2406,18 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
         $hook = $this->createMock(RegistrationEmail::class);
         $hook->expects(self::once())->method('modifyAttendeeEmail')->with(
             self::isInstanceOf(\Tx_Oelib_Mail::class),
-            self::identicalTo($registration),
-            self::identicalTo('confirmation')
+            $registration,
+            'confirmation'
         );
         $hook->expects(self::once())->method('modifyAttendeeEmailBodyPlainText')->with(
             self::isInstanceOf(\Tx_Oelib_Template::class),
-            self::identicalTo($registration),
-            self::identicalTo('confirmation')
+            $registration,
+            'confirmation'
         );
         $hook->expects(self::once())->method('modifyAttendeeEmailBodyHtml')->with(
             self::isInstanceOf(\Tx_Oelib_Template::class),
-            self::identicalTo($registration),
-            self::identicalTo('confirmation')
+            $registration,
+            'confirmation'
         );
         $hook->expects(self::never())->method('modifyOrganizerEmail');
         $hook->expects(self::never())->method('modifyAdditionalEmail');
@@ -5261,8 +5255,8 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
         $hook->expects(self::never())->method('modifyAttendeeEmailBodyHtml');
         $hook->expects(self::once())->method('modifyOrganizerEmail')->with(
             self::isInstanceOf(\Tx_Oelib_Mail::class),
-            self::identicalTo($registration),
-            self::identicalTo('notification')
+            $registration,
+            'notification'
         );
         $hook->expects(self::never())->method('modifyAdditionalEmail');
 
@@ -5874,8 +5868,8 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
         $hook->expects(self::never())->method('modifyOrganizerEmail');
         $hook->expects(self::once())->method('modifyAdditionalEmail')->with(
             self::isInstanceOf(\Tx_Oelib_Mail::class),
-            self::identicalTo($registration),
-            self::identicalTo('IsFull')
+            $registration,
+            'IsFull'
         );
 
         $hookClass = \get_class($hook);
