@@ -1037,8 +1037,13 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
 
         $eMailNotification->setMessage($this->getSubpart('MAIL_NOTIFICATION'));
 
+        /** @var \Tx_Seminars_Mapper_Registration $registrationMapper */
+        $registrationMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        /** @var \Tx_Seminars_Model_Registration $registrationNew */
+        $registrationNew = $registrationMapper->find($registration->getUid());
+
         $this->getRegistrationEmailHookProvider()
-            ->executeHook('modifyOrganizerEmail', $eMailNotification, $registration, $helloSubjectPrefix);
+            ->executeHook('modifyOrganizerEmail', $eMailNotification, $registrationNew, $helloSubjectPrefix);
         $this->callPostProcessOrganizerEmailHooks($eMailNotification, $registration);
 
         /** @var \Tx_Oelib_MailerFactory $mailerFactory */
@@ -1132,8 +1137,13 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
             $eMail->addRecipient($organizer);
         }
 
+        /** @var \Tx_Seminars_Mapper_Registration $registrationMapper */
+        $registrationMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        /** @var \Tx_Seminars_Model_Registration $registrationNew */
+        $registrationNew = $registrationMapper->find($registration->getUid());
+
         $this->getRegistrationEmailHookProvider()
-            ->executeHook('modifyAdditionalEmail', $eMail, $registration, $emailReason);
+            ->executeHook('modifyAdditionalEmail', $eMail, $registrationNew, $emailReason);
         $this->callPostProcessAdditionalEmailHooks($eMail, $registration, $emailReason);
 
         /** @var \Tx_Oelib_MailerFactory $mailerFactory */
@@ -1404,10 +1414,15 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         $footers = $event->getOrganizersFooter();
         $this->setMarker('footer', !empty($footers) ? LF . '-- ' . LF . $footers[0] : '');
 
+        /** @var \Tx_Seminars_Mapper_Registration $registrationMapper */
+        $registrationMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        /** @var \Tx_Seminars_Model_Registration $registrationNew */
+        $registrationNew = $registrationMapper->find($registration->getUid());
+
         $this->getRegistrationEmailHookProvider()->executeHook(
             $useHtml ? 'modifyAttendeeEmailBodyHtml' : 'modifyAttendeeEmailBodyPlainText',
             $this->getTemplate(),
-            $registration,
+            $registrationNew,
             $helloSubjectPrefix
         );
         $this->callPostProcessAttendeeEmailTextHooks($registration, $this->getTemplate());
