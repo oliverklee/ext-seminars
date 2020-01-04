@@ -385,83 +385,161 @@ Implement the methods required by the interface:
 
 .. _notificationemail_en:
 
-Hooks to post process notification emails
-""""""""""""""""""""""""""""""""""""""""""
+Hooks for the registration notification emails
+""""""""""""""""""""""""""""""""""""""""""""""
 
-To use this hook, please create a class that implements the interface
-\\OliverKlee\\Seminars\\Hooks\\RegistrationEmailHookInterface. Then you need to add the following methods:
+There are the following hooks into the registration notification emails:
 
-**Hook to post process the attendee email**
+* just before the attendee notification template is rendered to plain text
+* just before the attendee notification template is rendered to HTML
+* just before the attendee notification is sent
+* just before the organizer notification is sent
+* just before the additional organizer notifications are sent
+
+You may set custom markers or change existing values for markers in the template hooks.
+See also :file:`Classes/Model/Registration.php` for available properties and methods.
+The plain text hook is always called, because a HTML email always contains a plain text version, too.
+The HTML hook is called only if emails are sent as HTML.
+
+With the other hooks you may modify the complete `Mail` object (e.g. sender or receiver addresses,
+subject line or the complete body). See also :file:`Classes/Mail.php` of extension `oelib` for
+available properties and methods.
+
+Register your class that implements :php:`\OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail`
+like this in :file:`ext_localconf.php` of your extension:
 
 .. code-block:: php
 
-    /**
-     * @param \Tx_Oelib_Mail $mail
-     * @param \Tx_Seminars_Model_Registration $registration
-     *
-     * @return void
-     */
-    public function postProcessAttendeeEmail(\Tx_Oelib_Mail $mail, \Tx_Seminars_Model_Registration $registration)
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail::class][]
+        = \Tx_Seminarspaypal_Hooks_RegistrationEmail::class;
+
+Implement the methods required by the interface:
+
+.. code-block:: php
+
+    use \OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
+
+    class Tx_Seminarspaypal_Hooks_RegistrationEmail implements RegistrationEmail
     {
+        /**
+         * Modifies the attendee "Thank you" email just before it is sent.
+         *
+         * You may modify the recipient or the sender as well as the subject and the body of the email.
+         *
+         * @param \Tx_Oelib_Mail $email
+         * @param \Tx_Seminars_Model_Registration $registration
+         * @param string $emailReason Possible values:
+         *          - confirmation
+         *          - confirmationOnUnregistration
+         *          - confirmationOnRegistrationForQueue
+         *          - confirmationOnQueueUpdate
+         *
+         * @return void
+         */
+        public function modifyAttendeeEmail(
+            \Tx_Oelib_Mail $email,
+            \Tx_Seminars_Model_Registration $registration,
+            string $emailReason
+        ) {
+            // Your code here
+        }
+
+        /**
+         * Modifies the attendee "Thank you" email body just before the subpart is rendered to plain text.
+         *
+         * This method is called for every confirmation email, even if HTML emails are configured.
+         * The body of a HTML email always contains a plain text version, too.
+         *
+         * You may modify or set marker values in the template.
+         *
+         * @param \Tx_Oelib_Template $emailTemplate
+         * @param \Tx_Seminars_Model_Registration $registration
+         * @param string $emailReason Possible values:
+         *          - confirmation
+         *          - confirmationOnUnregistration
+         *          - confirmationOnRegistrationForQueue
+         *          - confirmationOnQueueUpdate
+         *
+         * @return void
+         */
+        public function modifyAttendeeEmailBodyPlainText(
+            \Tx_Oelib_Template $emailTemplate,
+            \Tx_Seminars_Model_Registration $registration,
+            string $emailReason
+        ) {
+            // Your code here
+        }
+
+        /**
+         * Modifies the attendee "Thank you" email body just before the subpart is rendered to HTML.
+         *
+         * This method is called only, if HTML emails are configured for confirmation emails.
+         *
+         * You may modify or set marker values in the template.
+         *
+         * @param \Tx_Oelib_Template $emailTemplate
+         * @param \Tx_Seminars_Model_Registration $registration
+         * @param string $emailReason Possible values:
+         *          - confirmation
+         *          - confirmationOnUnregistration
+         *          - confirmationOnRegistrationForQueue
+         *          - confirmationOnQueueUpdate
+         *
+         * @return void
+         */
+        public function modifyAttendeeEmailBodyHtml(
+            \Tx_Oelib_Template $emailTemplate,
+            \Tx_Seminars_Model_Registration $registration,
+            string $emailReason
+        ) {
+            // Your code here
+        }
+
+        /**
+         * Modifies the organizer notification email just before it is sent.
+         *
+         * You may modify the recipient or the sender as well as the subject and the body of the email.
+         *
+         * @param \Tx_Oelib_Mail $email
+         * @param \Tx_Seminars_Model_Registration $registration
+         * @param string $emailReason Possible values:
+         *        - notification
+         *        - notificationOnUnregistration
+         *        - notificationOnRegistrationForQueue
+         *        - notificationOnQueueUpdate
+         *
+         * @return void
+         */
+        public function modifyOrganizerEmail(
+            \Tx_Oelib_Mail $email,
+            \Tx_Seminars_Model_Registration $registration,
+            string $emailReason
+        ) {
+            // Your code here
+        }
+
+        /**
+         * Modifies the organizer additional notification email just before it is sent.
+         *
+         * You may modify the recipient or the sender as well as the subject and the body of the email.
+         *
+         * @param \Tx_Oelib_Mail $email
+         * @param \Tx_Seminars_Model_Registration $registration
+         * @param string $emailReason Possible values:
+         *          - 'EnoughRegistrations' if the event has enough attendances
+         *          - 'IsFull' if the event is fully booked
+         *          see Tx_Seminars_Service_RegistrationManager::getReasonForNotification()
+         *
+         * @return void
+         */
+        public function modifyAdditionalEmail(
+            \Tx_Oelib_Mail $email,
+            \Tx_Seminars_Model_Registration $registration,
+            string $emailReason
+        ) {
+            // Your code here
+        }
     }
-
-**Hook to post process the attendee email text**
-
-.. code-block:: php
-
-    /**
-     * @param \Tx_Seminars_OldModel_Registration $registration
-     * @param \Tx_Oelib_Template $emailTemplate
-     *
-     * @return void
-     */
-    public function postProcessAttendeeEmailText(\Tx_Seminars_OldModel_Registration $registration, \Tx_Oelib_Template $emailTemplate)
-    {
-    }
-
-**Hook to post process the organizer email**
-
-.. code-block:: php
-
-    /**
-     * @param \Tx_Oelib_Mail $mail
-     * @param \Tx_Seminars_OldModel_Registration $registration
-     *
-     * @return void
-     */
-    public function postProcessOrganizerEmail(\Tx_Oelib_Mail $mail, \Tx_Seminars_OldModel_Registration $registration)
-    {
-    }
-
-**Hook to post process additional emails**
-
-.. code-block:: php
-
-    /**
-     * @param \Tx_Oelib_Mail $mail
-     * @param \Tx_Seminars_OldModel_Registration $registration
-     * @param string $emailReason see Tx_Seminars_Service_RegistrationManager::getReasonForNotification()
-     *                            for information about possible values
-     *
-     * @return void
-     */
-    public function postProcessAdditionalEmail(
-        \Tx_Oelib_Mail $mail,
-        \Tx_Seminars_OldModel_Registration $registration,
-        $emailReason = ''
-    )
-    {
-    }
-
-
-Your class then needs to be included and registered like in this
-example:
-
-.. code-block:: php
-
-   // register my hook objects
-   $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][] = \MyVendor\MyExt\Hooks\RegistrationEmailHook::class;
-
 
 .. _emailsalutation_en:
 

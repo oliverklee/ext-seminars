@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 use OliverKlee\Seminars\Hooks\RegistrationEmailHookInterface;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingRegistration;
@@ -95,6 +96,11 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
      */
     private $frontEndUserMapper = null;
 
+    /**
+     * @var string[]
+     */
+    private $mockedClassNames = [];
+
     protected function setUp()
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
@@ -167,6 +173,8 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
     protected function tearDown()
     {
         $this->testingFramework->cleanUp();
+
+        $this->purgeMockedInstances();
 
         TestingRegistrationManager::purgeInstance();
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
@@ -308,6 +316,41 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
         return $matches;
     }
 
+    /**
+     * Adds an instance to the Typo3 instance FIFO buffer used by `GeneralUtility::makeInstance()`
+     * and registers it for purging in `tearDown()`.
+     *
+     * In case of a failing test or an exception in the test before the instance is taken
+     * from the FIFO buffer, the instance would stay in the buffer and make following tests
+     * fail. This function adds it to the list of instances to purge in `tearDown()` in addition
+     * to `GeneralUtility::addInstance()`.
+     *
+     * @param string $className
+     * @param mixed $instance
+     *
+     * @return void
+     */
+    private function addMockedInstance(string $className, $instance)
+    {
+        GeneralUtility::addInstance($className, $instance);
+        $this->mockedClassNames[] = $className;
+    }
+
+    /**
+     * Purges possibly leftover instances from the Typo3 instance FIFO buffer used by
+     * `GeneralUtility::makeInstance()`.
+     *
+     * @return void
+     */
+    private function purgeMockedInstances()
+    {
+        foreach ($this->mockedClassNames as $className) {
+            GeneralUtility::makeInstance($className);
+        }
+
+        $this->mockedClassNames = [];
+    }
+
     /*
      * Tests for the utility functions
      */
@@ -383,6 +426,73 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
         self::assertTrue(
             $this->fullyBookedSeminar->getUid() > 0
         );
+    }
+
+    /**
+     * @test
+     */
+    public function mockedInstancesListIsEmptyInitially()
+    {
+        self::assertEmpty($this->mockedClassNames);
+    }
+
+    /**
+     * @test
+     */
+    public function addMockedInstanceAddsClassnameToList()
+    {
+        $mockedInstance = $this->createMock(\stdClass::class);
+        $mockedClassName = \get_class($mockedInstance);
+
+        $this->addMockedInstance($mockedClassName, $mockedInstance);
+        // manually purge the Typo3 FIFO here, as purgeMockedInstances() is not tested yet
+        GeneralUtility::makeInstance($mockedClassName);
+
+        self::assertCount(1, $this->mockedClassNames);
+        self::assertSame($mockedClassName, $this->mockedClassNames[0]);
+    }
+
+    /**
+     * @test
+     */
+    public function addMockedInstanceAddsInstanceToTypo3InstanceBuffer()
+    {
+        $mockedInstance = $this->createMock(\stdClass::class);
+        $mockedClassName = \get_class($mockedInstance);
+
+        $this->addMockedInstance($mockedClassName, $mockedInstance);
+
+        self::assertSame($mockedInstance, GeneralUtility::makeInstance($mockedClassName));
+    }
+
+    /**
+     * @test
+     */
+    public function purgeMockedInstancesRemovesClassnameFromList()
+    {
+        $mockedInstance = $this->createMock(\stdClass::class);
+        $mockedClassName = \get_class($mockedInstance);
+        $this->addMockedInstance($mockedClassName, $mockedInstance);
+
+        $this->purgeMockedInstances();
+        // manually purge the Typo3 FIFO here, as purgeMockedInstances() is not tested for that yet
+        GeneralUtility::makeInstance($mockedClassName);
+
+        self::assertEmpty($this->mockedClassNames);
+    }
+
+    /**
+     * @test
+     */
+    public function purgeMockedInstancesRemovesInstanceFromTypo3InstanceBuffer()
+    {
+        $mockedInstance = $this->createMock(\stdClass::class);
+        $mockedClassName = \get_class($mockedInstance);
+        $this->addMockedInstance($mockedClassName, $mockedInstance);
+
+        $this->purgeMockedInstances();
+
+        self::assertNotSame($mockedInstance, GeneralUtility::makeInstance($mockedClassName));
     }
 
     /*
@@ -2215,6 +2325,47 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
     /**
      * @test
      */
+    public function notifyAttendeeForSendConfirmationTrueCallsRegistrationEmailHookMethodsForPlainTextEmail()
+    {
+        \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
+            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_TEXT_MAIL);
+
+        /** @var \Tx_Seminars_OldModel_Registration $registrationOld */
+        $registrationOld = $this->createRegistration();
+        /** @var \Tx_Seminars_Mapper_Registration $mapper */
+        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        /** @var \Tx_Seminars_Model_Registration $registration */
+        $registration = $mapper->find($registrationOld->getUid());
+
+        $hook = $this->createMock(RegistrationEmail::class);
+        $hook->expects(self::once())->method('modifyAttendeeEmail')->with(
+            self::isInstanceOf(\Tx_Oelib_Mail::class),
+            $registration,
+            'confirmation'
+        );
+        $hook->expects(self::once())->method('modifyAttendeeEmailBodyPlainText')->with(
+            self::isInstanceOf(\Tx_Oelib_Template::class),
+            $registration,
+            'confirmation'
+        );
+        $hook->expects(self::never())->method('modifyAttendeeEmailBodyHtml');
+        $hook->expects(self::never())->method('modifyOrganizerEmail');
+        $hook->expects(self::never())->method('modifyAdditionalEmail');
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][RegistrationEmail::class][] = $hookClass;
+        $this->addMockedInstance($hookClass, $hook);
+
+        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $controller = new \Tx_Seminars_FrontEnd_DefaultController();
+        $controller->init();
+
+        $this->subject->notifyAttendee($registrationOld, $controller);
+    }
+
+    /**
+     * @test
+     */
     public function notifyAttendeeForSendConfirmationTrueAndPlainTextEmailCallsPostProcessAttendeeEmailTextHookOnce()
     {
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
@@ -2235,6 +2386,51 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
         $pi1->init();
 
         $this->subject->notifyAttendee($registration, $pi1);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForSendConfirmationTrueCallsRegistrationEmailHookMethodsForHtmlEmail()
+    {
+        \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
+            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+
+        /** @var \Tx_Seminars_OldModel_Registration $registrationOld */
+        $registrationOld = $this->createRegistration();
+        /** @var \Tx_Seminars_Mapper_Registration $mapper */
+        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        /** @var \Tx_Seminars_Model_Registration $registration */
+        $registration = $mapper->find($registrationOld->getUid());
+
+        $hook = $this->createMock(RegistrationEmail::class);
+        $hook->expects(self::once())->method('modifyAttendeeEmail')->with(
+            self::isInstanceOf(\Tx_Oelib_Mail::class),
+            $registration,
+            'confirmation'
+        );
+        $hook->expects(self::once())->method('modifyAttendeeEmailBodyPlainText')->with(
+            self::isInstanceOf(\Tx_Oelib_Template::class),
+            $registration,
+            'confirmation'
+        );
+        $hook->expects(self::once())->method('modifyAttendeeEmailBodyHtml')->with(
+            self::isInstanceOf(\Tx_Oelib_Template::class),
+            $registration,
+            'confirmation'
+        );
+        $hook->expects(self::never())->method('modifyOrganizerEmail');
+        $hook->expects(self::never())->method('modifyAdditionalEmail');
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][RegistrationEmail::class][] = $hookClass;
+        $this->addMockedInstance($hookClass, $hook);
+
+        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $controller = new \Tx_Seminars_FrontEnd_DefaultController();
+        $controller->init();
+
+        $this->subject->notifyAttendee($registrationOld, $controller);
     }
 
     /**
@@ -4826,6 +5022,36 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
         $this->subject->notifyAttendee($registration, $pi1);
     }
 
+    /**
+     * @test
+     */
+    public function notifyAttendeeForSendConfirmationFalseNeverCallsRegistrationEmailHookMethods()
+    {
+        /** @var \Tx_Seminars_OldModel_Registration $registrationOld */
+        $registrationOld = $this->createRegistration();
+        /** @var \Tx_Seminars_Mapper_Registration $mapper */
+        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        /** @var \Tx_Seminars_Model_Registration $registration */
+        $registration = $mapper->find($registrationOld->getUid());
+
+        $hook = $this->createMock(RegistrationEmail::class);
+        $hook->expects(self::never())->method('modifyAttendeeEmail');
+        $hook->expects(self::never())->method('modifyAttendeeEmailBodyPlainText');
+        $hook->expects(self::never())->method('modifyAttendeeEmailBodyHtml');
+        $hook->expects(self::never())->method('modifyOrganizerEmail');
+        $hook->expects(self::never())->method('modifyAdditionalEmail');
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][RegistrationEmail::class][] = $hookClass;
+        $this->addMockedInstance($hookClass, $hook);
+
+        $this->subject->setConfigurationValue('sendConfirmation', false);
+        $controller = new \Tx_Seminars_FrontEnd_DefaultController();
+        $controller->init();
+
+        $this->subject->notifyAttendee($registrationOld, $controller);
+    }
+
     /*
      * Tests regarding the notification of organizers
      */
@@ -5012,6 +5238,38 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
     /**
      * @test
      */
+    public function notifyOrganizersForSendNotificationTrueCallsRegistrationEmailHookMethods()
+    {
+        $this->subject->setConfigurationValue('sendNotification', true);
+
+        /** @var \Tx_Seminars_OldModel_Registration $registrationOld */
+        $registrationOld = $this->createRegistration();
+        /** @var \Tx_Seminars_Mapper_Registration $mapper */
+        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        /** @var \Tx_Seminars_Model_Registration $registration */
+        $registration = $mapper->find($registrationOld->getUid());
+
+        $hook = $this->createMock(RegistrationEmail::class);
+        $hook->expects(self::never())->method('modifyAttendeeEmail');
+        $hook->expects(self::never())->method('modifyAttendeeEmailBodyPlainText');
+        $hook->expects(self::never())->method('modifyAttendeeEmailBodyHtml');
+        $hook->expects(self::once())->method('modifyOrganizerEmail')->with(
+            self::isInstanceOf(\Tx_Oelib_Mail::class),
+            $registration,
+            'notification'
+        );
+        $hook->expects(self::never())->method('modifyAdditionalEmail');
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][RegistrationEmail::class][] = $hookClass;
+        $this->addMockedInstance($hookClass, $hook);
+
+        $this->subject->notifyOrganizers($registrationOld);
+    }
+
+    /**
+     * @test
+     */
     public function notifyOrganizersForSendConfirmationTrueCallsPostProcessOrganizerEmailHook()
     {
         $this->subject->setConfigurationValue('sendNotification', true);
@@ -5031,6 +5289,34 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
         GeneralUtility::addInstance($hookClassName, $hook);
 
         $this->subject->notifyOrganizers($registration);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyOrganizersForSendNotificationFalseNeverCallsRegistrationEmailHookMethods()
+    {
+        $this->subject->setConfigurationValue('sendNotification', false);
+
+        /** @var \Tx_Seminars_OldModel_Registration $registrationOld */
+        $registrationOld = $this->createRegistration();
+        /** @var \Tx_Seminars_Mapper_Registration $mapper */
+        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        /** @var \Tx_Seminars_Model_Registration $registration */
+        $registration = $mapper->find($registrationOld->getUid());
+
+        $hook = $this->createMock(RegistrationEmail::class);
+        $hook->expects(self::never())->method('modifyAttendeeEmail');
+        $hook->expects(self::never())->method('modifyAttendeeEmailBodyPlainText');
+        $hook->expects(self::never())->method('modifyAttendeeEmailBodyHtml');
+        $hook->expects(self::never())->method('modifyOrganizerEmail');
+        $hook->expects(self::never())->method('modifyAdditionalEmail');
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][RegistrationEmail::class][] = $hookClass;
+        $this->addMockedInstance($hookClass, $hook);
+
+        $this->subject->notifyOrganizers($registrationOld);
     }
 
     /**
@@ -5555,6 +5841,42 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
             $this->getLanguageService()->getLL('label_vacancies') . ': ' . $this->getLanguageService()->getLL('label_unlimited'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
+    }
+
+    /**
+     * @test
+     */
+    public function sendAdditionalNotificationCallsRegistrationEmailHookMethods()
+    {
+        $this->testingFramework->changeRecord(
+            'tx_seminars_seminars',
+            $this->seminarUid,
+            ['attendees_max' => 1]
+        );
+
+        /** @var \Tx_Seminars_OldModel_Registration $registrationOld */
+        $registrationOld = $this->createRegistration();
+        /** @var \Tx_Seminars_Mapper_Registration $mapper */
+        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        /** @var \Tx_Seminars_Model_Registration $registration */
+        $registration = $mapper->find($registrationOld->getUid());
+
+        $hook = $this->createMock(RegistrationEmail::class);
+        $hook->expects(self::never())->method('modifyAttendeeEmail');
+        $hook->expects(self::never())->method('modifyAttendeeEmailBodyPlainText');
+        $hook->expects(self::never())->method('modifyAttendeeEmailBodyHtml');
+        $hook->expects(self::never())->method('modifyOrganizerEmail');
+        $hook->expects(self::once())->method('modifyAdditionalEmail')->with(
+            self::isInstanceOf(\Tx_Oelib_Mail::class),
+            $registration,
+            'IsFull'
+        );
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][RegistrationEmail::class][] = $hookClass;
+        $this->addMockedInstance($hookClass, $hook);
+
+        $this->subject->sendAdditionalNotification($registrationOld);
     }
 
     /**

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Seminars\Hooks\HookProvider;
+use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 use OliverKlee\Seminars\Hooks\RegistrationEmailHookInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
@@ -57,6 +59,11 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      * @var bool
      */
     private $hooksHaveBeenRetrieved = false;
+
+    /**
+     * @var HookProvider|null
+     */
+    protected $registrationEmailHookProvider = null;
 
     /**
      * @var int use text format for e-mails to attendees
@@ -851,6 +858,8 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
 
         $this->addCalendarAttachment($eMailNotification, $registration);
 
+        $this->getRegistrationEmailHookProvider()
+            ->executeHook('modifyAttendeeEmail', $eMailNotification, $registration, $helloSubjectPrefix);
         $this->callPostProcessAttendeeEmailHooks($eMailNotification, $registration);
 
         /** @var \Tx_Oelib_MailerFactory $mailerFactory */
@@ -863,6 +872,9 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      * @param \Tx_Seminars_Model_Registration $registration
      *
      * @return void
+     *
+     * @deprecated will be removed in seminars 4;
+     *      use `->getRegistrationEmailHookProvider()->executeHook('modifyAttendeeEmail')` instead
      */
     protected function callPostProcessAttendeeEmailHooks(
         \Tx_Oelib_Mail $mail,
@@ -874,7 +886,10 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
             if ($hook instanceof RegistrationEmailHookInterface) {
                 $hook->postProcessAttendeeEmail($mail, $registration);
             } elseif (method_exists($hook, 'modifyThankYouEmail')) {
-                GeneralUtility::logDeprecatedFunction();
+                GeneralUtility::deprecationLog(
+                    \get_class($hook) . '::modifyThankYouEmail() - since seminars 3.0,'
+                        . ' will be removed in seminars 4.0'
+                );
                 $hook->modifyThankYouEmail($mail, $registration);
             }
         }
@@ -1021,6 +1036,14 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         }
 
         $eMailNotification->setMessage($this->getSubpart('MAIL_NOTIFICATION'));
+
+        /** @var \Tx_Seminars_Mapper_Registration $registrationMapper */
+        $registrationMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        /** @var \Tx_Seminars_Model_Registration $registrationNew */
+        $registrationNew = $registrationMapper->find($registration->getUid());
+
+        $this->getRegistrationEmailHookProvider()
+            ->executeHook('modifyOrganizerEmail', $eMailNotification, $registrationNew, $helloSubjectPrefix);
         $this->callPostProcessOrganizerEmailHooks($eMailNotification, $registration);
 
         /** @var \Tx_Oelib_MailerFactory $mailerFactory */
@@ -1033,6 +1056,9 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      * @param \Tx_Seminars_OldModel_Registration $registration
      *
      * @return void
+     *
+     * @deprecated will be removed in seminars 4;
+     *      use `->getRegistrationEmailHookProvider()->executeHook('modifyOrganizerEmail')` instead
      */
     protected function callPostProcessOrganizerEmailHooks(
         \Tx_Oelib_Mail $mail,
@@ -1050,6 +1076,10 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      * @param \Tx_Oelib_Template $emailTemplate
      *
      * @return void
+     *
+     * @deprecated will be removed in seminars 4;
+     *      use `->getRegistrationEmailHookProvider()->executeHook('modifyAttendeeEmailBodyPlainText')`
+     *      or `->getRegistrationEmailHookProvider()->executeHook('modifyAttendeeEmailBodyHtml')` instead
      */
     protected function callPostProcessAttendeeEmailTextHooks(
         \Tx_Seminars_OldModel_Registration $registration,
@@ -1107,6 +1137,13 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
             $eMail->addRecipient($organizer);
         }
 
+        /** @var \Tx_Seminars_Mapper_Registration $registrationMapper */
+        $registrationMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        /** @var \Tx_Seminars_Model_Registration $registrationNew */
+        $registrationNew = $registrationMapper->find($registration->getUid());
+
+        $this->getRegistrationEmailHookProvider()
+            ->executeHook('modifyAdditionalEmail', $eMail, $registrationNew, $emailReason);
         $this->callPostProcessAdditionalEmailHooks($eMail, $registration, $emailReason);
 
         /** @var \Tx_Oelib_MailerFactory $mailerFactory */
@@ -1125,6 +1162,9 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      * @param string $emailReason
      *
      * @return void
+     *
+     * @deprecated will be removed in seminars 4;
+     *      use `->getRegistrationEmailHookProvider()->executeHook('modifyAdditionalEmail')` instead
      */
     protected function callPostProcessAdditionalEmailHooks(
         \Tx_Oelib_Mail $mail,
@@ -1374,6 +1414,17 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         $footers = $event->getOrganizersFooter();
         $this->setMarker('footer', !empty($footers) ? LF . '-- ' . LF . $footers[0] : '');
 
+        /** @var \Tx_Seminars_Mapper_Registration $registrationMapper */
+        $registrationMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        /** @var \Tx_Seminars_Model_Registration $registrationNew */
+        $registrationNew = $registrationMapper->find($registration->getUid());
+
+        $this->getRegistrationEmailHookProvider()->executeHook(
+            $useHtml ? 'modifyAttendeeEmailBodyHtml' : 'modifyAttendeeEmailBodyPlainText',
+            $this->getTemplate(),
+            $registrationNew,
+            $helloSubjectPrefix
+        );
         $this->callPostProcessAttendeeEmailTextHooks($registration, $this->getTemplate());
 
         return $this->getSubpart($useHtml ? 'MAIL_THANKYOU_HTML' : 'MAIL_THANKYOU');
@@ -1582,6 +1633,9 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      * Gets all hooks for this class.
      *
      * @return array the hook objects, will be empty if no hooks have been set
+     *
+     * @deprecated Using index 'registration' for email related hooks will be removed in seminars 4;
+     *      use `->getRegistrationEmailHookProvider()` instead
      */
     private function getHooks(): array
     {
@@ -1589,7 +1643,15 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
             $hookClasses = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'];
             if (is_array($hookClasses)) {
                 foreach ($hookClasses as $hookClass) {
-                    $this->hooks[] = GeneralUtility::getUserObj($hookClass);
+                    $hookObject = GeneralUtility::getUserObj($hookClass);
+                    $this->hooks[] = $hookObject;
+                    if ($hookObject instanceof RegistrationEmailHookInterface) {
+                        GeneralUtility::deprecationLog(
+                            $hookClass . ' - since seminars 3.0,'
+                                . ' interface \\OliverKlee\\Seminars\\Hooks\\RegistrationEmailHookInterface'
+                                . ' will be removed in seminars 4.0'
+                        );
+                    }
                 }
             }
 
@@ -1597,6 +1659,21 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         }
 
         return $this->hooks;
+    }
+
+    /**
+     * Gets the hook provider for the registration emails.
+     *
+     * @return HookProvider
+     */
+    protected function getRegistrationEmailHookProvider(): HookProvider
+    {
+        if (!$this->registrationEmailHookProvider instanceof HookProvider) {
+            $this->registrationEmailHookProvider =
+                GeneralUtility::makeInstance(HookProvider::class, RegistrationEmail::class);
+        }
+
+        return $this->registrationEmailHookProvider;
     }
 
     /**
