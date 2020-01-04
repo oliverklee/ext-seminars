@@ -23,6 +23,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Display the name of the current functional test (#256)
 
 ### Changed
+- Update registration email hooks (#445)
 - Update documentation on hooks (#416)
 - Sort the entries in the `.gitignore` and `.gitattributes` (#434)
 - Require oelib >= 3.0.3 (#387, #430)
@@ -43,6 +44,9 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Update the testing libraries (#251, #252, #254)
 
 ### Deprecated
+- Using `registration` hook index for registration email hooks in general (#445)
+- `modifyThankYouEmail()` registration email hook (#445)
+- `RegistrationEmailHookInterface` interface (#445)
 - `EventListView` interface and `listView` hook index (#408)
 - `EventSingleView` interface and `singleView` hook index (#338)
 
