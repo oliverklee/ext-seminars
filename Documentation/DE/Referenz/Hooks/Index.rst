@@ -642,7 +642,7 @@ Backend-Registrierungsliste aufgerufen:
 * bevor der Tabellenfuß in HTML umgewandelt wird
 
 In diesen Hooks können Sie eigene Marker befüllen oder vorhandene Marker-Werte ändern. Zu
-verfügbaren Eigenschaften und Methoden siehe :file:`Classes/OldModel/Registration.php` aus
+verfügbaren Eigenschaften und Methoden siehe :file:`Classes/Model/Registration.php` aus
 `seminars` und :file:`Classes/Template.php` aus der Extension `oelib`.
 
 Sie müssen 2 Listenarten bei Ihrer Implementation beachten:
@@ -674,7 +674,7 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          * `\OliverKlee\Seminars\BackEnd\RegistrationsList::REGISTRATIONS_ON_QUEUE`
          * and `\OliverKlee\Seminars\BackEnd\RegistrationsList::REGULAR_REGISTRATIONS`) to distinguish.
          *
-         * @param \Tx_Seminars_OldModel_Registration $registration
+         * @param \Tx_Seminars_Model_Registration $registration
          *        the registration the row is made from
          * @param \Tx_Oelib_Template $template
          *        the template that will be used to create the registration list
@@ -684,7 +684,7 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          * @return void
          */
         public function modifyListRow(
-            \Tx_Seminars_OldModel_Registration $registration,
+            \Tx_Seminars_Model_Registration $registration,
             \Tx_Oelib_Template $template,
             int $registrationsToShow
         ) {
