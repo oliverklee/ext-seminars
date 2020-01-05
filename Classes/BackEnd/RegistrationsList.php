@@ -163,8 +163,14 @@ class RegistrationsList extends AbstractList
         $tableRows = '';
         $languageService = $this->getLanguageService();
 
+        /** @var \Tx_Seminars_Mapper_Registration $mapper */
+        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+
         /** @var \Tx_Seminars_OldModel_Registration $registration */
         foreach ($registrationBag as $registration) {
+            /** @var \Tx_Seminars_Model_Registration $registrationNew */
+            $registrationNew = $mapper->find($registration->getUid());
+
             try {
                 $userName = \htmlspecialchars($registration->getUserName(), ENT_QUOTES | ENT_HTML5);
             } catch (\Tx_Oelib_Exception_NotFound $exception) {
@@ -203,7 +209,7 @@ class RegistrationsList extends AbstractList
 
             $this->getListViewHookProvider()->executeHook(
                 'modifyListRow',
-                $registration,
+                $registrationNew,
                 $this->template,
                 $registrationsToShow
             );

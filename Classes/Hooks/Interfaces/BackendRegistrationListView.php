@@ -19,7 +19,7 @@ interface BackendRegistrationListView extends Hook
      * `\OliverKlee\Seminars\BackEnd\RegistrationsList::REGISTRATIONS_ON_QUEUE`
      * and `\OliverKlee\Seminars\BackEnd\RegistrationsList::REGULAR_REGISTRATIONS`) to distinguish.
      *
-     * @param \Tx_Seminars_OldModel_Registration $registration
+     * @param \Tx_Seminars_Model_Registration $registration
      *        the registration the row is made from
      * @param \Tx_Oelib_Template $template
      *        the template that will be used to create the registration list
@@ -29,7 +29,7 @@ interface BackendRegistrationListView extends Hook
      * @return void
      */
     public function modifyListRow(
-        \Tx_Seminars_OldModel_Registration $registration,
+        \Tx_Seminars_Model_Registration $registration,
         \Tx_Oelib_Template $template,
         int $registrationsToShow
     );
