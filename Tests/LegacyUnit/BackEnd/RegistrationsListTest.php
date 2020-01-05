@@ -35,6 +35,11 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends TestCase
      */
     private $dummySysFolderPid = 0;
 
+    /**
+     * @var string[]
+     */
+    private $mockedClassNames = [];
+
     protected function setUp()
     {
         $this->unifyTestingEnvironment();
@@ -57,9 +62,121 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends TestCase
 
     protected function tearDown()
     {
+        $this->purgeMockedInstances();
+
         $this->testingFramework->cleanUp();
         \Tx_Seminars_OldModel_Registration::purgeCachedSeminars();
         $this->restoreOriginalEnvironment();
+    }
+
+    /*
+     * Utility functions
+     */
+
+    /**
+     * Adds an instance to the Typo3 instance FIFO buffer used by `GeneralUtility::makeInstance()`
+     * and registers it for purging in `tearDown()`.
+     *
+     * In case of a failing test or an exception in the test before the instance is taken
+     * from the FIFO buffer, the instance would stay in the buffer and make following tests
+     * fail. This function adds it to the list of instances to purge in `tearDown()` in addition
+     * to `GeneralUtility::addInstance()`.
+     *
+     * @param string $className
+     * @param mixed $instance
+     *
+     * @return void
+     */
+    private function addMockedInstance(string $className, $instance)
+    {
+        GeneralUtility::addInstance($className, $instance);
+        $this->mockedClassNames[] = $className;
+    }
+
+    /**
+     * Purges possibly leftover instances from the Typo3 instance FIFO buffer used by
+     * `GeneralUtility::makeInstance()`.
+     *
+     * @return void
+     */
+    private function purgeMockedInstances()
+    {
+        foreach ($this->mockedClassNames as $className) {
+            GeneralUtility::makeInstance($className);
+        }
+
+        $this->mockedClassNames = [];
+    }
+
+    /*
+     * Tests for the utility functions
+     */
+
+    /**
+     * @test
+     */
+    public function mockedInstancesListIsEmptyInitially()
+    {
+        self::assertEmpty($this->mockedClassNames);
+    }
+
+    /**
+     * @test
+     */
+    public function addMockedInstanceAddsClassnameToList()
+    {
+        $mockedInstance = $this->createMock(\stdClass::class);
+        $mockedClassName = \get_class($mockedInstance);
+
+        $this->addMockedInstance($mockedClassName, $mockedInstance);
+        // manually purge the Typo3 FIFO here, as purgeMockedInstances() is not tested yet
+        GeneralUtility::makeInstance($mockedClassName);
+
+        self::assertCount(1, $this->mockedClassNames);
+        self::assertSame($mockedClassName, $this->mockedClassNames[0]);
+    }
+
+    /**
+     * @test
+     */
+    public function addMockedInstanceAddsInstanceToTypo3InstanceBuffer()
+    {
+        $mockedInstance = $this->createMock(\stdClass::class);
+        $mockedClassName = \get_class($mockedInstance);
+
+        $this->addMockedInstance($mockedClassName, $mockedInstance);
+
+        self::assertSame($mockedInstance, GeneralUtility::makeInstance($mockedClassName));
+    }
+
+    /**
+     * @test
+     */
+    public function purgeMockedInstancesRemovesClassnameFromList()
+    {
+        $mockedInstance = $this->createMock(\stdClass::class);
+        $mockedClassName = \get_class($mockedInstance);
+        $this->addMockedInstance($mockedClassName, $mockedInstance);
+
+        $this->purgeMockedInstances();
+        // manually purge the Typo3 FIFO here, as purgeMockedInstances() is not tested for that yet
+        GeneralUtility::makeInstance($mockedClassName);
+
+        self::assertEmpty($this->mockedClassNames);
+    }
+
+    /**
+     * @test
+     */
+    public function purgeMockedInstancesRemovesInstanceFromTypo3InstanceBuffer()
+    {
+        $mockedInstance = $this->createMock(\stdClass::class);
+        $mockedClassName = \get_class($mockedInstance);
+        $this->addMockedInstance($mockedClassName, $mockedInstance);
+
+        $this->purgeMockedInstances();
+
+        self::assertNotSame($mockedInstance, GeneralUtility::makeInstance($mockedClassName));
     }
 
     ////////////////////////////////////////////////
@@ -517,21 +634,39 @@ class Tx_Seminars_Tests_Unit_BackEnd_RegistrationsListTest extends TestCase
         );
 
         $hook = $this->createMock(BackEndRegistrationListView::class);
-        $hook->expects(self::once())
-            ->method('modifyListRow')
-            ->with(self::anything(), self::anything(), RegistrationsList::REGULAR_REGISTRATIONS);
+        $hook->expects(self::once())->method('modifyListRow')->with(
+            self::isInstanceOf(\Tx_Seminars_Model_Registration::class),
+            self::isInstanceOf(\Tx_Oelib_Template::class),
+            RegistrationsList::REGULAR_REGISTRATIONS
+        );
         $hook->expects(self::exactly(2))->method('modifyListHeader')->withConsecutive(
-            [self::anything(), self::anything(), RegistrationsList::REGULAR_REGISTRATIONS],
-            [self::anything(), self::anything(), RegistrationsList::REGISTRATIONS_ON_QUEUE]
+            [
+                self::isInstanceOf(\Tx_Seminars_Bag_Registration::class),
+                self::isInstanceOf(\Tx_Oelib_Template::class),
+                RegistrationsList::REGULAR_REGISTRATIONS,
+            ],
+            [
+                self::isInstanceOf(\Tx_Seminars_Bag_Registration::class),
+                self::isInstanceOf(\Tx_Oelib_Template::class),
+                RegistrationsList::REGISTRATIONS_ON_QUEUE,
+            ]
         );
         $hook->expects(self::exactly(2))->method('modifyList')->withConsecutive(
-            [self::anything(), self::anything(), RegistrationsList::REGULAR_REGISTRATIONS],
-            [self::anything(), self::anything(), RegistrationsList::REGISTRATIONS_ON_QUEUE]
+            [
+                self::isInstanceOf(\Tx_Seminars_Bag_Registration::class),
+                self::isInstanceOf(\Tx_Oelib_Template::class),
+                RegistrationsList::REGULAR_REGISTRATIONS,
+            ],
+            [
+                self::isInstanceOf(\Tx_Seminars_Bag_Registration::class),
+                self::isInstanceOf(\Tx_Oelib_Template::class),
+                RegistrationsList::REGISTRATIONS_ON_QUEUE,
+            ]
         );
 
         $hookClass = \get_class($hook);
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][BackendRegistrationListView::class][] = $hookClass;
-        GeneralUtility::addInstance($hookClass, $hook);
+        $this->addMockedInstance($hookClass, $hook);
 
         $this->subject->show();
     }
