@@ -7,7 +7,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Added
 - Add tests for the DataMapper sanitization (#454, #456)
-- Add new backend registration list hook (#437)
+- Add new backend registration list hook (#437, #458)
 - Add new selector widget hook (#436)
 - Add documentation rendering using docker-compose (#432)
 - Add new seminar list view hooks (#408)
@@ -15,7 +15,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add `AbstractModel::comesFromDatabase` (#364)
 - Add php-cs-fixer to the CI (#351)
 - Add new seminar single view hook (#338, #345)
-- Add hook base (#313, #336, #444)
+- Add hook base (#313, #336, #444, #459)
 - Support TYPO3 9LTS (#322, #324)
 - Add code sniffing and fixing (#319)
 - Enable modifying the BagBuilder limitations in hooks (#308)

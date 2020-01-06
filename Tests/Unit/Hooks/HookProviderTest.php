@@ -12,9 +12,12 @@ use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookImplementor2;
 use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookImplementorNotImplementsInterface;
 use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookImplementorReturnsArray;
 use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookImplementorReturnsArray2;
+use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookImplementorReturnsModifiedValue;
+use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookImplementorReturnsModifiedValue2;
 use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookInterface;
 use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookInterfaceNotExtendsHook;
 use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookInterfaceReturnsArray;
+use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookInterfaceReturnsModifiedValue;
 
 /**
  * Test case.
@@ -455,8 +458,128 @@ final class HookProviderTest extends UnitTestCase
         $hookObject = new HookProvider(TestingHookInterfaceReturnsArray::class);
 
         self::assertSame(
-            ['me' => ['status' => true], 'me1' => ['status' => true], 'me2' => ['status' => false, 'newValue' => 'new2']],
+            [
+                'me' => ['status' => true],
+                'me1' => ['status' => true],
+                'me2' => ['status' => false, 'newValue' => 'new2'],
+            ],
             $hookObject->executeHookReturningMergedArray('testHookMethodReturnsNestedArray')
+        );
+    }
+
+    /*
+     * Tests concerning Hook::executeHookReturningModifiedValue().
+     */
+
+    /**
+     * @test
+     */
+    public function hookObjectForTestingHookReturningModifiedValueCanBeCreated()
+    {
+        self::assertInstanceOf(HookProvider::class, new HookProvider(TestingHookInterfaceReturnsModifiedValue::class));
+    }
+
+    /**
+     * @test
+     */
+    public function hookObjectForTestingHookReturningModifiedValueWithNoHookImplementorRegisteredReturnsValue()
+    {
+        $hookObject = new HookProvider(TestingHookInterfaceReturnsModifiedValue::class);
+
+        self::assertTrue($hookObject->executeHookReturningModifiedValue('testHookMethodReturnsModifiedBool', true));
+        self::assertSame(
+            1234,
+            $hookObject->executeHookReturningModifiedValue('testHookMethodReturnsModifiedInt', 1234)
+        );
+        self::assertSame(
+            'test',
+            $hookObject->executeHookReturningModifiedValue('testHookMethodReturnsModifiedString', 'test')
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function hookObjectForTestingHookReturningModifiedValueWithNoHookImplementorRegisteredFailsForEmptyMethod()
+    {
+        $hookObject = new HookProvider(TestingHookInterfaceReturnsModifiedValue::class);
+
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionCode(1573479911);
+
+        $hookObject->executeHookReturningModifiedValue('', 0);
+    }
+
+    /**
+     * @test
+     */
+    public function hookObjectForTestingHookReturningModifiedValueWithNoHookImplementorRegisteredFailsForUnknownMethod()
+    {
+        $hookObject = new HookProvider(TestingHookInterfaceReturnsModifiedValue::class);
+
+        $this->expectException(\UnexpectedValueException::class);
+        $this->expectExceptionCode(1573480302);
+
+        $hookObject->executeHookReturningModifiedValue('methodNotImplemented', 0);
+    }
+
+    /**
+     * @test
+     */
+    public function hookObjectForTestingHookReturningModifiedValueWithOneHookImplementorRegisteredReturnsModifiedValue()
+    {
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestingHookInterfaceReturnsModifiedValue::class][1577363366]
+            = TestingHookImplementorReturnsModifiedValue::class;
+        $hookObject = new HookProvider(TestingHookInterfaceReturnsModifiedValue::class);
+
+        self::assertFalse($hookObject->executeHookReturningModifiedValue('testHookMethodReturnsModifiedBool', true));
+    }
+
+    /**
+     * @test
+     */
+    public function hookObjectForTestingHookReturningModifiedValueWithTwoHookImplementorsRegisteredReturnsModifiedBool()
+    {
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestingHookInterfaceReturnsModifiedValue::class][1577363366]
+            = TestingHookImplementorReturnsModifiedValue::class;
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestingHookInterfaceReturnsModifiedValue::class][1577363367]
+            = TestingHookImplementorReturnsModifiedValue2::class;
+        $hookObject = new HookProvider(TestingHookInterfaceReturnsModifiedValue::class);
+
+        self::assertTrue($hookObject->executeHookReturningModifiedValue('testHookMethodReturnsModifiedBool', true));
+    }
+
+    /**
+     * @test
+     */
+    public function hookObjectForTestingHookReturningModedValueWithTwoHookImplementorsRegisteredReturnsNestedMergedInt()
+    {
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestingHookInterfaceReturnsModifiedValue::class][1577363366]
+            = TestingHookImplementorReturnsModifiedValue::class;
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestingHookInterfaceReturnsModifiedValue::class][1577363367]
+            = TestingHookImplementorReturnsModifiedValue2::class;
+        $hookObject = new HookProvider(TestingHookInterfaceReturnsModifiedValue::class);
+
+        self::assertSame(
+            0,
+            $hookObject->executeHookReturningModifiedValue('testHookMethodReturnsModifiedInt', 0)
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function hookObjectForTestingHookReturningModValWithTwoHookImplementorsRegisteredReturnsNestedMergedString()
+    {
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestingHookInterfaceReturnsModifiedValue::class][1577363366]
+            = TestingHookImplementorReturnsModifiedValue::class;
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestingHookInterfaceReturnsModifiedValue::class][1577363367]
+            = TestingHookImplementorReturnsModifiedValue2::class;
+        $hookObject = new HookProvider(TestingHookInterfaceReturnsModifiedValue::class);
+
+        self::assertSame(
+            'test test 1 2',
+            $hookObject->executeHookReturningModifiedValue('testHookMethodReturnsModifiedString', 'test test')
         );
     }
 }
