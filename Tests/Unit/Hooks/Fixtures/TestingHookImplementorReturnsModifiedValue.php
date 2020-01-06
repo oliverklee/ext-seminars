@@ -19,15 +19,19 @@ final class TestingHookImplementorReturnsModifiedValue implements TestingHookInt
     /**
      * Gets called during HookProvider tests.
      *
+     * @param bool $value the value to be returned modified
+     *
      * @return bool
      */
     public function testHookMethodReturnsModifiedBool(bool $value): bool
     {
-        return $value === false ? $value : !$value;
+        return false;
     }
 
     /**
      * Gets called during HookProvider tests.
+     *
+     * @param int $value the value to be returned modified
      *
      * @return int
      */
@@ -38,6 +42,8 @@ final class TestingHookImplementorReturnsModifiedValue implements TestingHookInt
 
     /**
      * Gets called during HookProvider tests.
+     *
+     * @param string $value the value to be returned modified
      *
      * @return string
      */

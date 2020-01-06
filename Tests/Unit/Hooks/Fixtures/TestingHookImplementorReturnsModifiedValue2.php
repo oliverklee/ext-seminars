@@ -19,6 +19,8 @@ final class TestingHookImplementorReturnsModifiedValue2 implements TestingHookIn
     /**
      * Gets called during HookProvider tests.
      *
+     * @param bool $value the value to be returned modified
+     *
      * @return bool
      */
     public function testHookMethodReturnsModifiedBool(bool $value): bool
@@ -29,6 +31,8 @@ final class TestingHookImplementorReturnsModifiedValue2 implements TestingHookIn
     /**
      * Gets called during HookProvider tests.
      *
+     * @param int $value the value to be returned modified
+     *
      * @return int
      */
     public function testHookMethodReturnsModifiedInt(int $value): int
@@ -38,6 +42,8 @@ final class TestingHookImplementorReturnsModifiedValue2 implements TestingHookIn
 
     /**
      * Gets called during HookProvider tests.
+     *
+     * @param string $value the value to be returned modified
      *
      * @return string
      */

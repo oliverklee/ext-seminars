@@ -137,11 +137,12 @@ class HookProvider
     {
         $this->validateHookMethod($method);
 
+        $result = $value;
         foreach ($this->getHooks() as $hook) {
-            $value = $hook->$method($value, ...$params);
+            $result = $hook->$method($result, ...$params);
         }
 
-        return $value;
+        return $result;
     }
 
     /**
