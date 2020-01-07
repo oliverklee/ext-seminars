@@ -543,25 +543,26 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     }
 
     /**
-     * Returns an array of city names for this event.
+     * Returns the city names for this event.
+     *
      * These are fetched from the referenced place records of this event. If no
      * place is set, or the set place(s) don't have any city set, an empty
      * array will be returned.
      *
-     * @return string[] the list of city names for this event, may be empty
+     * @return string[]
      */
     public function getCitiesFromPlaces(): array
     {
         $cities = [];
 
-        // Fetches the city name from the corresponding place record(s).
+        // fetch the city name from the corresponding place records
         $cityData = \Tx_Oelib_Db::selectMultiple(
             'city',
             'tx_seminars_sites LEFT JOIN tx_seminars_seminars_place_mm' .
             ' ON tx_seminars_sites.uid = ' .
             'tx_seminars_seminars_place_mm.uid_foreign',
             'uid_local = ' . $this->getUid(),
-            'uid_foreign'
+            'uid_foreign, city'
         );
 
         foreach ($cityData as $city) {
