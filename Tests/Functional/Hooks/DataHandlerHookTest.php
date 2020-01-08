@@ -245,4 +245,192 @@ final class DataHandlerHookTest extends FunctionalTestCase
         $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
         self::assertSame(0, $row['deadline_early_bird']);
     }
+
+    /**
+     * @test
+     */
+    public function afterDatabaseOperationsOnUpdateWithoutTimeSlotsKeepsBeginDate()
+    {
+        $uid = 1;
+        $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook/TimeSlots.xml');
+        $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+        $expectedDate = $data['begin_date'];
+
+        $this->subject
+            ->processDatamap_afterDatabaseOperations('update', self::TABLE_SEMINARS, $uid, $data, $this->dataHandler);
+        $this->subject->processDatamap_afterAllOperations();
+
+        $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+        self::assertSame($expectedDate, $row['begin_date']);
+    }
+
+    /**
+     * @return int[][]
+     */
+    public function beginDateWithTimeSlotsDataProvider(): array
+    {
+        return [
+            '1 time slot' => [2, 3000],
+            '2 time slots' => [3, 500],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @param int $uid
+     * @param int $expectedDate
+     *
+     * @dataProvider beginDateWithTimeSlotsDataProvider
+     */
+    public function afterDatabaseOperationsOnUpdateWithTimeSlotsOverwritesBeginDate(int $uid, int $expectedDate)
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook/TimeSlots.xml');
+        $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+
+        $this->subject
+            ->processDatamap_afterDatabaseOperations('update', self::TABLE_SEMINARS, $uid, $data, $this->dataHandler);
+        $this->subject->processDatamap_afterAllOperations();
+
+        $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+        self::assertSame($expectedDate, $row['begin_date']);
+    }
+
+    /**
+     * @test
+     */
+    public function afterDatabaseOperationsOnNewWithoutTimeSlotsKeepsBeginDate()
+    {
+        $uid = 1;
+        $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook/TimeSlots.xml');
+        $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+        $expectedDate = $data['begin_date'];
+        $temporaryUid = 'NEW5e0f43477dcd4869591288';
+        $this->dataHandler->substNEWwithIDs[$temporaryUid] = $uid;
+
+        $this->subject->processDatamap_afterDatabaseOperations(
+            'new',
+            self::TABLE_SEMINARS,
+            $temporaryUid,
+            $data,
+            $this->dataHandler
+        );
+        $this->subject->processDatamap_afterAllOperations();
+
+        $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+        self::assertSame($expectedDate, $row['begin_date']);
+    }
+
+    /**
+     * @test
+     *
+     * @param int $uid
+     * @param int $expectedDate
+     *
+     * @dataProvider beginDateWithTimeSlotsDataProvider
+     */
+    public function afterDatabaseOperationsOnNewWithTimeSlotsOverwritesBeginDate(int $uid, int $expectedDate)
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook/TimeSlots.xml');
+        $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+        $temporaryUid = 'NEW5e0f43477dcd4869591288';
+        $this->dataHandler->substNEWwithIDs[$temporaryUid] = $uid;
+
+        $this->subject->processDatamap_afterDatabaseOperations(
+            'new',
+            self::TABLE_SEMINARS,
+            $temporaryUid,
+            $data,
+            $this->dataHandler
+        );
+        $this->subject->processDatamap_afterAllOperations();
+
+        $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+        self::assertSame($expectedDate, $row['begin_date']);
+    }
+
+    /**
+     * @return int[][]
+     */
+    public function endDateWithTimeSlotsDataProvider(): array
+    {
+        return [
+            '1 time slot' => [2, 3500],
+            '2 time slots' => [3, 3500],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @param int $uid
+     * @param int $expectedDate
+     *
+     * @dataProvider endDateWithTimeSlotsDataProvider
+     */
+    public function afterDatabaseOperationsOnUpdateWithTimeSlotsOverwritesEndDate(int $uid, int $expectedDate)
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook/TimeSlots.xml');
+        $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+
+        $this->subject
+            ->processDatamap_afterDatabaseOperations('update', self::TABLE_SEMINARS, $uid, $data, $this->dataHandler);
+        $this->subject->processDatamap_afterAllOperations();
+
+        $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+        self::assertSame($expectedDate, $row['end_date']);
+    }
+
+    /**
+     * @test
+     */
+    public function afterDatabaseOperationsOnNewWithoutTimeSlotsKeepsEndDate()
+    {
+        $uid = 1;
+        $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook/TimeSlots.xml');
+        $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+        $expectedDate = $data['end_date'];
+        $temporaryUid = 'NEW5e0f43477dcd4869591288';
+        $this->dataHandler->substNEWwithIDs[$temporaryUid] = $uid;
+
+        $this->subject->processDatamap_afterDatabaseOperations(
+            'new',
+            self::TABLE_SEMINARS,
+            $temporaryUid,
+            $data,
+            $this->dataHandler
+        );
+        $this->subject->processDatamap_afterAllOperations();
+
+        $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+        self::assertSame($expectedDate, $row['end_date']);
+    }
+
+    /**
+     * @test
+     *
+     * @param int $uid
+     * @param int $expectedDate
+     *
+     * @dataProvider endDateWithTimeSlotsDataProvider
+     */
+    public function afterDatabaseOperationsOnNewWithTimeSlotsOverwritesEndDate(int $uid, int $expectedDate)
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook/TimeSlots.xml');
+        $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+        $temporaryUid = 'NEW5e0f43477dcd4869591288';
+        $this->dataHandler->substNEWwithIDs[$temporaryUid] = $uid;
+
+        $this->subject->processDatamap_afterDatabaseOperations(
+            'new',
+            self::TABLE_SEMINARS,
+            $temporaryUid,
+            $data,
+            $this->dataHandler
+        );
+        $this->subject->processDatamap_afterAllOperations();
+
+        $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+        self::assertSame($expectedDate, $row['end_date']);
+    }
 }

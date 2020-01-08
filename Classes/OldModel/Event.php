@@ -3991,8 +3991,10 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         $table = 'tx_seminars_timeslots';
         $query = self::getQueryBuilderForTable($table);
-        $result = $query->addSelectLiteral($query->expr()->min('begin_date'))
-            ->from($table)->execute()->fetch();
+        $result = $query->addSelectLiteral($query->expr()->min('begin_date', 'begin_date'))
+            ->from($table)
+            ->where($query->expr()->eq('seminar', $this->getUid()))
+            ->execute()->fetch();
 
         return \is_array($result) ? (int)$result['begin_date'] : 0;
     }
@@ -4010,8 +4012,10 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         $table = 'tx_seminars_timeslots';
         $query = self::getQueryBuilderForTable($table);
-        $result = $query->addSelectLiteral($query->expr()->max('end_date'))
-            ->from($table)->execute()->fetch();
+        $result = $query->addSelectLiteral($query->expr()->max('end_date', 'end_date'))
+            ->from($table)
+            ->where($query->expr()->eq('seminar', $this->getUid()))
+            ->execute()->fetch();
 
         return \is_array($result) ? (int)$result['end_date'] : 0;
     }
