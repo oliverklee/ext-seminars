@@ -65,6 +65,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop support for TYPO3 7.6 (#248, #272, #280)
 
 ### Fixed
+- Stop using code that was deprecated in TYPO3 8.7 (#463)
 - Fix the event begin/end date calculation by timeslots (#462)
 - Fix an error when getting the cities in MySQL strict mode (#461)
 - Fix a test case namespace (#452)
