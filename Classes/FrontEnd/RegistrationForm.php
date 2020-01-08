@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use SJBR\StaticInfoTables\PiBaseApi;
 use SJBR\StaticInfoTables\Utility\LocalizationUtility;
+use TYPO3\CMS\Core\Crypto\Random;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
@@ -387,6 +388,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
             $userGroups->add($userGroup);
         }
 
+        /** @var Random $random */
+        $random = GeneralUtility::makeInstance(Random::class);
         /** @var \Tx_Oelib_List $additionalPersons */
         $additionalPersons = $registration->getAdditionalPersons();
         /** @var array $personData */
@@ -394,7 +397,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
             /** @var \Tx_Seminars_Model_FrontEndUser $user */
             $user = GeneralUtility::makeInstance(\Tx_Seminars_Model_FrontEndUser::class);
             $user->setPageUid($pageUid);
-            $user->setPassword(GeneralUtility::getRandomHexString(8));
+            $user->setPassword($random->generateRandomHexString(8));
             $eMailAddress = $personData[3];
             $user->setEmailAddress($eMailAddress);
 
