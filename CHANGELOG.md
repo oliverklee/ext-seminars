@@ -8,11 +8,17 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
-- Use PHP 7.2 for the TER release script (#343)
 
 ### Deprecated
 
 ### Removed
+
+### Fixed
+
+## 2.2.4
+
+### Changed
+- Use PHP 7.2 for the TER release script (#343)
 
 ### Fixed
 - Update the locations of the mkforms JavaScript includes (#468)

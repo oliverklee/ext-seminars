@@ -4,10 +4,10 @@
 
 ---
 conf.py:
-    copyright: 2019
+    copyright: 2020
     project: Seminar Manager
     version: 2.2
-    release: 2.2.3
+    release: 2.2.4
     latex_documents:
     -   - Index
         - seminars.tex
