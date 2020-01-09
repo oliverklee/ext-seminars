@@ -7,9 +7,9 @@ config {
         jsframework {
             jscore = jquery
             jscore {
-                tx_mkforms_base = EXT:mkforms/res/jsfwk/prototype/addons/base/Base.js
-                basewrapper = EXT:mkforms/res/jsfwk/wrapper.js
-                wrapper = EXT:mkforms/res/jsfwk/jquery/wrapper.js
+                tx_mkforms_base = EXT:mkforms/Resources/Public/JavaScript/prototype/addons/base/Base.js
+                basewrapper = EXT:mkforms/Resources/Public/JavaScript/wrapper.js
+                wrapper = EXT:mkforms/Resources/Public/JavaScript/jquery/wrapper.js
             }
         }
     }

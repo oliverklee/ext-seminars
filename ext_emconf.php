@@ -10,8 +10,8 @@ $EM_CONF[$_EXTKEY] = [
             'php' => '5.6.0-7.2.99',
             'typo3' => '7.6.0-8.7.99',
             'static_info_tables' => '6.5.0-',
-            'oelib' => '2.3.3-3.99.99',
-            'mkforms' => '3.0.21-9.5.99',
+            'oelib' => '2.3.5-3.99.99',
+            'mkforms' => '9.5.2-9.5.99',
         ],
         'conflicts' => [
             'sourceopt' => '',
