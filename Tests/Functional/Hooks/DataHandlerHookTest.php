@@ -433,4 +433,71 @@ final class DataHandlerHookTest extends FunctionalTestCase
         $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
         self::assertSame($expectedDate, $row['end_date']);
     }
+
+    /**
+     * @return int[][]
+     */
+    public function noPlacesToAddFromTimeSlotsDataProvider(): array
+    {
+        return [
+            'no time slots' => [1],
+            'time slots without place' => [2],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @param int $uid
+     *
+     * @dataProvider noPlacesToAddFromTimeSlotsDataProvider
+     */
+    public function afterDatabaseOperationsOnUpdateForNoPlacesFromTimeSlotsNotAddsPlaces(int $uid)
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook/NoPlacesFromTimeSlots.xml');
+        $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+
+        $this->subject
+            ->processDatamap_afterDatabaseOperations('update', self::TABLE_SEMINARS, $uid, $data, $this->dataHandler);
+        $this->subject->processDatamap_afterAllOperations();
+
+        $associationCount = $this->getDatabaseConnection()
+            ->selectCount('*', 'tx_seminars_seminars_place_mm', 'uid_local = ' . $uid);
+        self::assertSame(0, $associationCount);
+    }
+
+    /**
+     * @return int[][]
+     */
+    public function placesToAddFromTimeSlotsDataProvider(): array
+    {
+        return [
+            '1 time slot with place' => [1, 1],
+            // This currently is broken: #212
+            // '2 time slots with the same place' => [2, 1],
+            '2 time slots with different places' => [3, 2],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @param int $uid
+     * @param int $expected
+     *
+     * @dataProvider placesToAddFromTimeSlotsDataProvider
+     */
+    public function afterDatabaseOperationsOnUpdateForFromTimeSlotsAddsPlacesToEvent(int $uid, int $expected)
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook/PlacesFromTimeSlots.xml');
+        $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+
+        $this->subject
+            ->processDatamap_afterDatabaseOperations('update', self::TABLE_SEMINARS, $uid, $data, $this->dataHandler);
+        $this->subject->processDatamap_afterAllOperations();
+
+        $associationCount = $this->getDatabaseConnection()
+            ->selectCount('*', 'tx_seminars_seminars_place_mm', 'uid_local = ' . $uid);
+        self::assertSame($expected, $associationCount);
+    }
 }
