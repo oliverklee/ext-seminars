@@ -101,18 +101,17 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * in the TYPO3 back end.
      *
      * @param string $fieldName the name of the field to check
-     * @param string $value the value that was entered in the TCE form that needs to be validated
+     * @param int $value the value that was entered in the TCE form that needs to be validated
      *
      * @return array associative array containing the field "status" and "newValue" (if needed)
      */
-    private function validateTceValues($fieldName, $value): array
+    private function validateTceValues(string $fieldName, int $value): array
     {
         $result = ['status' => true];
 
         switch ($fieldName) {
             case 'deadline_registration':
-                // Check that the registration deadline is not later than the
-                // begin date.
+                // Check that the registration deadline is not later than the begin date.
                 if ($value > $this->getBeginDateAsTimestamp()) {
                     $result['status'] = false;
                     $result['newValue'] = 0;
@@ -125,14 +124,13 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
                 if (
                     $value > $this->getBeginDateAsTimestamp()
                     || ($this->getRecordPropertyInteger('deadline_registration')
-                        && ($value > $this->getRecordPropertyInteger('deadline_registration')))
+                        && $value > $this->getRecordPropertyInteger('deadline_registration'))
                 ) {
                     $result['status'] = false;
                     $result['newValue'] = 0;
                 }
                 break;
             default:
-                // no action if no case is matched
         }
 
         return $result;
@@ -145,34 +143,31 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * This function is used in order to check values entered in the TCE forms
      * in the TYPO3 back end. It is called through a hook in the TCE class.
      *
-     * @param string[] &$fieldArray
-     *        associative array containing the values entered in the TCE form (as a reference)
+     * @param string[] $changedFields the values entered in the TCE form
      *
-     * @return array associative array containing data to update the database
-     *               entry of this event, may be empty
+     * @return array associative array containing data to update the database entry of this event, may be empty
      */
-    public function getUpdateArray(array &$fieldArray): array
+    public function getUpdateArray(array $changedFields): array
     {
-        $updateArray = [];
-        $fieldNamesToCheck = ['deadline_registration', 'deadline_early_bird'];
+        $changedData = [];
+        foreach (['deadline_registration', 'deadline_early_bird'] as $currentFieldName) {
+            if (!isset($changedFields[$currentFieldName])) {
+                continue;
+            }
 
-        foreach ($fieldNamesToCheck as $currentFieldName) {
-            $result = $this->validateTceValues(
-                $currentFieldName,
-                $fieldArray[$currentFieldName]
-            );
+            $result = $this->validateTceValues($currentFieldName, (int)$changedFields[$currentFieldName]);
             if (!$result['status']) {
-                $updateArray[$currentFieldName] = $result['newValue'];
+                $changedData[$currentFieldName] = $result['newValue'];
             }
         }
 
         if ($this->hasTimeslots()) {
-            $updateArray['begin_date'] = $this->getBeginDateAsTimestamp();
-            $updateArray['end_date'] = $this->getEndDateAsTimestamp();
-            $updateArray['place'] = $this->updatePlaceRelationsFromTimeSlots();
+            $changedData['begin_date'] = $this->getBeginDateAsTimestamp();
+            $changedData['end_date'] = $this->getEndDateAsTimestamp();
+            $changedData['place'] = $this->updatePlaceRelationsFromTimeSlots();
         }
 
-        return $updateArray;
+        return $changedData;
     }
 
     /**

@@ -32,47 +32,31 @@ class DataHandlerHook
     private $tceMainFieldArrays = [];
 
     /**
-     * Handles data after everything had been written to the database.
-     *
-     * @return void
-     */
-    public function processDatamap_afterAllOperations()
-    {
-        $this->processEvents();
-    }
-
-    /**
      * Builds $this->tceMainFieldArrays if the right tables were modified.
      *
-     * Some of the parameters of this function are not used in this function.
-     * But they are given by the hook in DataHandler.
+     * This method is called once per record.
      *
-     * Note: When using the hook after INSERT operations, you will only get the
-     * temporary NEW... id passed to your hook as $id, but you can easily
-     * translate it to the real uid of the inserted record using the
-     * $pObj->substNEWwithIDs array.
-     *
-     * @param string $status the status of this record (new/update)
-     * @param string $table the affected table name
-     * @param string|int $uid the UID of the affected record (may be 0)
-     * @param string[] &$fieldArray an array of all fields that got changed
+     * @param string $status the status of this record ("new" or "update"), unused
+     * @param string $tableName
+     * @param string|int $uid UID of the record (either an int UID or a string like "NEW5e0f43477dcd4869591288")
+     * @param string[] $changedFields
      * @param DataHandler $dataHandler
      *
      * @return void
      */
     public function processDatamap_afterDatabaseOperations(
-        $status,
-        $table,
+        string $status,
+        string $tableName,
         $uid,
-        array &$fieldArray,
+        array &$changedFields,
         DataHandler $dataHandler
     ) {
-        if (!\in_array($table, $this->registeredTables, true)) {
+        if (!\in_array($tableName, $this->registeredTables, true)) {
             return;
         }
 
         $realUid = $this->createRealUid($uid, $dataHandler);
-        $this->tceMainFieldArrays[$table][$realUid] = $fieldArray;
+        $this->tceMainFieldArrays[$tableName][$realUid] = $changedFields;
     }
 
     /**
@@ -83,7 +67,7 @@ class DataHandlerHook
      */
     private function createRealUid($uid, DataHandler $dataHandler): int
     {
-        if ($this->isPersistedUid($uid)) {
+        if ($this->isRealUid($uid)) {
             return (int)$uid;
         }
 
@@ -95,19 +79,21 @@ class DataHandlerHook
      *
      * @return bool
      */
-    private function isPersistedUid($uid): bool
+    private function isRealUid($uid): bool
     {
         return MathUtility::canBeInterpretedAsInteger($uid);
     }
 
     /**
-     * @param string $table
+     * Handles data after everything had been written to the database.
      *
-     * @return bool
+     * This method is called once for all records together.
+     *
+     * @return void
      */
-    private function hasDataForTable($table): bool
+    public function processDatamap_afterAllOperations()
     {
-        return isset($this->tceMainFieldArrays[$table]) && \is_array($this->tceMainFieldArrays[$table]);
+        $this->processEvents();
     }
 
     /**
@@ -128,20 +114,30 @@ class DataHandlerHook
     }
 
     /**
+     * @param string $table
+     *
+     * @return bool
+     */
+    private function hasDataForTable($table): bool
+    {
+        return isset($this->tceMainFieldArrays[$table]) && \is_array($this->tceMainFieldArrays[$table]);
+    }
+
+    /**
      * Processes a single event.
      *
      * @param int $uid
-     * @param string[] $fieldArray an array of all fields that got changed
+     * @param string[] $changedFields
      *
      * @return void
      */
-    private function processSingleEvent($uid, array $fieldArray)
+    private function processSingleEvent(int $uid, array $changedFields)
     {
         /** @var \Tx_Seminars_OldModel_Event $event */
         $event = GeneralUtility::makeInstance(\Tx_Seminars_OldModel_Event::class, $uid, false, true);
 
         if ($event->comesFromDatabase()) {
-            $event->saveToDatabase($event->getUpdateArray($fieldArray));
+            $event->saveToDatabase($event->getUpdateArray($changedFields));
         }
     }
 }
