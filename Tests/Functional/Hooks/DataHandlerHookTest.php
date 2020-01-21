@@ -61,6 +61,33 @@ final class DataHandlerHookTest extends FunctionalTestCase
         self::assertSame(DataHandlerHook::class, $reference);
     }
 
+    private function processUpdateActionForSeminarsTable(int $uid)
+    {
+        $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+        $this->dataHandler->datamap[self::TABLE_SEMINARS][$uid] = $data;
+
+        $this->subject
+            ->processDatamap_afterDatabaseOperations('update', self::TABLE_SEMINARS, $uid, $data, $this->dataHandler);
+        $this->subject->processDatamap_afterAllOperations($this->dataHandler);
+    }
+
+    private function processNewActionForSeminarsTable(int $uid)
+    {
+        $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+        $temporaryUid = 'NEW5e0f43477dcd4869591288';
+        $this->dataHandler->datamap[self::TABLE_SEMINARS][$temporaryUid] = $data;
+        $this->dataHandler->substNEWwithIDs[$temporaryUid] = $uid;
+
+        $this->subject->processDatamap_afterDatabaseOperations(
+            'new',
+            self::TABLE_SEMINARS,
+            $temporaryUid,
+            $data,
+            $this->dataHandler
+        );
+        $this->subject->processDatamap_afterAllOperations($this->dataHandler);
+    }
+
     /**
      * @return int[][]
      */
@@ -87,9 +114,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
         $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
         $expectedDeadline = $data['deadline_registration'];
 
-        $this->subject
-            ->processDatamap_afterDatabaseOperations('update', self::TABLE_SEMINARS, $uid, $data, $this->dataHandler);
-        $this->subject->processDatamap_afterAllOperations();
+        $this->processUpdateActionForSeminarsTable($uid);
 
         $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
         self::assertSame($expectedDeadline, $row['deadline_registration']);
@@ -116,11 +141,8 @@ final class DataHandlerHookTest extends FunctionalTestCase
     public function afterDatabaseOperationsOnUpdateResetsInvalidRegistrationDeadline(int $uid)
     {
         $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook.xml');
-        $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
 
-        $this->subject
-            ->processDatamap_afterDatabaseOperations('update', self::TABLE_SEMINARS, $uid, $data, $this->dataHandler);
-        $this->subject->processDatamap_afterAllOperations();
+        $this->processUpdateActionForSeminarsTable($uid);
 
         $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
         self::assertSame(0, $row['deadline_registration']);
@@ -136,18 +158,8 @@ final class DataHandlerHookTest extends FunctionalTestCase
     public function afterDatabaseOperationsOnNewResetsInvalidRegistrationDeadline(int $uid)
     {
         $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook.xml');
-        $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
-        $temporaryUid = 'NEW5e0f43477dcd4869591288';
-        $this->dataHandler->substNEWwithIDs[$temporaryUid] = $uid;
 
-        $this->subject->processDatamap_afterDatabaseOperations(
-            'new',
-            self::TABLE_SEMINARS,
-            $temporaryUid,
-            $data,
-            $this->dataHandler
-        );
-        $this->subject->processDatamap_afterAllOperations();
+        $this->processNewActionForSeminarsTable($uid);
 
         $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
         self::assertSame(0, $row['deadline_registration']);
@@ -179,9 +191,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
         $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
         $expectedDeadline = $data['deadline_early_bird'];
 
-        $this->subject
-            ->processDatamap_afterDatabaseOperations('update', self::TABLE_SEMINARS, $uid, $data, $this->dataHandler);
-        $this->subject->processDatamap_afterAllOperations();
+        $this->processUpdateActionForSeminarsTable($uid);
 
         $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
         self::assertSame($expectedDeadline, $row['deadline_early_bird']);
@@ -209,11 +219,8 @@ final class DataHandlerHookTest extends FunctionalTestCase
     public function afterDatabaseOperationsOnUpdateResetsInvalidEarlyBirdDeadline(int $uid)
     {
         $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook.xml');
-        $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
 
-        $this->subject
-            ->processDatamap_afterDatabaseOperations('update', self::TABLE_SEMINARS, $uid, $data, $this->dataHandler);
-        $this->subject->processDatamap_afterAllOperations();
+        $this->processUpdateActionForSeminarsTable($uid);
 
         $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
         self::assertSame(0, $row['deadline_early_bird']);
@@ -229,18 +236,8 @@ final class DataHandlerHookTest extends FunctionalTestCase
     public function afterDatabaseOperationsOnNewResetsInvalidEarlyBirdDeadline(int $uid)
     {
         $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook.xml');
-        $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
-        $temporaryUid = 'NEW5e0f43477dcd4869591288';
-        $this->dataHandler->substNEWwithIDs[$temporaryUid] = $uid;
 
-        $this->subject->processDatamap_afterDatabaseOperations(
-            'new',
-            self::TABLE_SEMINARS,
-            $temporaryUid,
-            $data,
-            $this->dataHandler
-        );
-        $this->subject->processDatamap_afterAllOperations();
+        $this->processNewActionForSeminarsTable($uid);
 
         $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
         self::assertSame(0, $row['deadline_early_bird']);
@@ -256,9 +253,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
         $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
         $expectedDate = $data['begin_date'];
 
-        $this->subject
-            ->processDatamap_afterDatabaseOperations('update', self::TABLE_SEMINARS, $uid, $data, $this->dataHandler);
-        $this->subject->processDatamap_afterAllOperations();
+        $this->processUpdateActionForSeminarsTable($uid);
 
         $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
         self::assertSame($expectedDate, $row['begin_date']);
@@ -286,11 +281,8 @@ final class DataHandlerHookTest extends FunctionalTestCase
     public function afterDatabaseOperationsOnUpdateWithTimeSlotsOverwritesBeginDate(int $uid, int $expectedDate)
     {
         $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook/TimeSlots.xml');
-        $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
 
-        $this->subject
-            ->processDatamap_afterDatabaseOperations('update', self::TABLE_SEMINARS, $uid, $data, $this->dataHandler);
-        $this->subject->processDatamap_afterAllOperations();
+        $this->processUpdateActionForSeminarsTable($uid);
 
         $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
         self::assertSame($expectedDate, $row['begin_date']);
@@ -305,17 +297,8 @@ final class DataHandlerHookTest extends FunctionalTestCase
         $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook/TimeSlots.xml');
         $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
         $expectedDate = $data['begin_date'];
-        $temporaryUid = 'NEW5e0f43477dcd4869591288';
-        $this->dataHandler->substNEWwithIDs[$temporaryUid] = $uid;
 
-        $this->subject->processDatamap_afterDatabaseOperations(
-            'new',
-            self::TABLE_SEMINARS,
-            $temporaryUid,
-            $data,
-            $this->dataHandler
-        );
-        $this->subject->processDatamap_afterAllOperations();
+        $this->processNewActionForSeminarsTable($uid);
 
         $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
         self::assertSame($expectedDate, $row['begin_date']);
@@ -332,18 +315,8 @@ final class DataHandlerHookTest extends FunctionalTestCase
     public function afterDatabaseOperationsOnNewWithTimeSlotsOverwritesBeginDate(int $uid, int $expectedDate)
     {
         $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook/TimeSlots.xml');
-        $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
-        $temporaryUid = 'NEW5e0f43477dcd4869591288';
-        $this->dataHandler->substNEWwithIDs[$temporaryUid] = $uid;
 
-        $this->subject->processDatamap_afterDatabaseOperations(
-            'new',
-            self::TABLE_SEMINARS,
-            $temporaryUid,
-            $data,
-            $this->dataHandler
-        );
-        $this->subject->processDatamap_afterAllOperations();
+        $this->processNewActionForSeminarsTable($uid);
 
         $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
         self::assertSame($expectedDate, $row['begin_date']);
@@ -371,11 +344,8 @@ final class DataHandlerHookTest extends FunctionalTestCase
     public function afterDatabaseOperationsOnUpdateWithTimeSlotsOverwritesEndDate(int $uid, int $expectedDate)
     {
         $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook/TimeSlots.xml');
-        $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
 
-        $this->subject
-            ->processDatamap_afterDatabaseOperations('update', self::TABLE_SEMINARS, $uid, $data, $this->dataHandler);
-        $this->subject->processDatamap_afterAllOperations();
+        $this->processUpdateActionForSeminarsTable($uid);
 
         $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
         self::assertSame($expectedDate, $row['end_date']);
@@ -390,17 +360,8 @@ final class DataHandlerHookTest extends FunctionalTestCase
         $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook/TimeSlots.xml');
         $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
         $expectedDate = $data['end_date'];
-        $temporaryUid = 'NEW5e0f43477dcd4869591288';
-        $this->dataHandler->substNEWwithIDs[$temporaryUid] = $uid;
 
-        $this->subject->processDatamap_afterDatabaseOperations(
-            'new',
-            self::TABLE_SEMINARS,
-            $temporaryUid,
-            $data,
-            $this->dataHandler
-        );
-        $this->subject->processDatamap_afterAllOperations();
+        $this->processNewActionForSeminarsTable($uid);
 
         $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
         self::assertSame($expectedDate, $row['end_date']);
@@ -417,18 +378,8 @@ final class DataHandlerHookTest extends FunctionalTestCase
     public function afterDatabaseOperationsOnNewWithTimeSlotsOverwritesEndDate(int $uid, int $expectedDate)
     {
         $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook/TimeSlots.xml');
-        $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
-        $temporaryUid = 'NEW5e0f43477dcd4869591288';
-        $this->dataHandler->substNEWwithIDs[$temporaryUid] = $uid;
 
-        $this->subject->processDatamap_afterDatabaseOperations(
-            'new',
-            self::TABLE_SEMINARS,
-            $temporaryUid,
-            $data,
-            $this->dataHandler
-        );
-        $this->subject->processDatamap_afterAllOperations();
+        $this->processNewActionForSeminarsTable($uid);
 
         $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
         self::assertSame($expectedDate, $row['end_date']);
@@ -455,11 +406,8 @@ final class DataHandlerHookTest extends FunctionalTestCase
     public function afterDatabaseOperationsOnUpdateForNoPlacesFromTimeSlotsNotAddsPlaces(int $uid)
     {
         $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook/NoPlacesFromTimeSlots.xml');
-        $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
 
-        $this->subject
-            ->processDatamap_afterDatabaseOperations('update', self::TABLE_SEMINARS, $uid, $data, $this->dataHandler);
-        $this->subject->processDatamap_afterAllOperations();
+        $this->processUpdateActionForSeminarsTable($uid);
 
         $associationCount = $this->getDatabaseConnection()
             ->selectCount('*', 'tx_seminars_seminars_place_mm', 'uid_local = ' . $uid);
@@ -490,11 +438,8 @@ final class DataHandlerHookTest extends FunctionalTestCase
     public function afterDatabaseOperationsOnUpdateForFromTimeSlotsAddsPlacesToEvent(int $uid, int $expected)
     {
         $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook/PlacesFromTimeSlots.xml');
-        $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
 
-        $this->subject
-            ->processDatamap_afterDatabaseOperations('update', self::TABLE_SEMINARS, $uid, $data, $this->dataHandler);
-        $this->subject->processDatamap_afterAllOperations();
+        $this->processUpdateActionForSeminarsTable($uid);
 
         $associationCount = $this->getDatabaseConnection()
             ->selectCount('*', 'tx_seminars_seminars_place_mm', 'uid_local = ' . $uid);

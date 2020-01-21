@@ -38,7 +38,7 @@ class DataHandlerHook
      *
      * @param string $status the status of this record ("new" or "update"), unused
      * @param string $tableName
-     * @param string|int $uid UID of the record (either an int UID or a string like "NEW5e0f43477dcd4869591288")
+     * @param int|string $uid UID of the record (either an int UID or a string like "NEW5e0f43477dcd4869591288")
      * @param string[] $changedFields
      * @param DataHandler $dataHandler
      *
@@ -75,13 +75,13 @@ class DataHandlerHook
     }
 
     /**
-     * @param string|int $uid
+     * @param int|string $uid
      *
      * @return bool
      */
     private function isRealUid($uid): bool
     {
-        return MathUtility::canBeInterpretedAsInteger($uid);
+        return \is_int($uid) || MathUtility::canBeInterpretedAsInteger($uid);
     }
 
     /**
@@ -89,9 +89,11 @@ class DataHandlerHook
      *
      * This method is called once for all records together.
      *
+     * @param DataHandler $dataHandler
+     *
      * @return void
      */
-    public function processDatamap_afterAllOperations()
+    public function processDatamap_afterAllOperations(DataHandler $dataHandler)
     {
         $this->processEvents();
     }
