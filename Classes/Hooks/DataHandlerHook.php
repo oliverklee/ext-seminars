@@ -22,67 +22,14 @@ use TYPO3\CMS\Core\Utility\MathUtility;
 class DataHandlerHook
 {
     /**
-     * @var string[]
+     * @var string
      */
-    private $registeredTables = ['tx_seminars_seminars'];
+    const TABLE_EVENTS = 'tx_seminars_seminars';
 
     /**
-     * @var array[]
+     * @var DataHandler
      */
-    private $tceMainFieldArrays = [];
-
-    /**
-     * Builds $this->tceMainFieldArrays if the right tables were modified.
-     *
-     * This method is called once per record.
-     *
-     * @param string $status the status of this record ("new" or "update"), unused
-     * @param string $tableName
-     * @param int|string $uid UID of the record (either an int UID or a string like "NEW5e0f43477dcd4869591288")
-     * @param string[] $changedFields
-     * @param DataHandler $dataHandler
-     *
-     * @return void
-     */
-    public function processDatamap_afterDatabaseOperations(
-        string $status,
-        string $tableName,
-        $uid,
-        array &$changedFields,
-        DataHandler $dataHandler
-    ) {
-        if (!\in_array($tableName, $this->registeredTables, true)) {
-            return;
-        }
-
-        $realUid = $this->createRealUid($uid, $dataHandler);
-        $this->tceMainFieldArrays[$tableName][$realUid] = $changedFields;
-    }
-
-    /**
-     * @param string|int $uid
-     * @param DataHandler $dataHandler
-     *
-     * @return int
-     */
-    private function createRealUid($uid, DataHandler $dataHandler): int
-    {
-        if ($this->isRealUid($uid)) {
-            return (int)$uid;
-        }
-
-        return (int)$dataHandler->substNEWwithIDs[$uid];
-    }
-
-    /**
-     * @param int|string $uid
-     *
-     * @return bool
-     */
-    private function isRealUid($uid): bool
-    {
-        return \is_int($uid) || MathUtility::canBeInterpretedAsInteger($uid);
-    }
+    private $dataHandler = null;
 
     /**
      * Handles data after everything had been written to the database.
@@ -95,6 +42,7 @@ class DataHandlerHook
      */
     public function processDatamap_afterAllOperations(DataHandler $dataHandler)
     {
+        $this->dataHandler = $dataHandler;
         $this->processEvents();
     }
 
@@ -105,24 +53,36 @@ class DataHandlerHook
      */
     private function processEvents()
     {
-        $table = 'tx_seminars_seminars';
-        if (!$this->hasDataForTable($table)) {
-            return;
-        }
+        /** @var array[] $map */
+        $map = (array)($this->dataHandler->datamap[self::TABLE_EVENTS] ?? []);
 
-        foreach ($this->tceMainFieldArrays[$table] as $uid => $fieldArray) {
-            $this->processSingleEvent((int)$uid, $fieldArray);
+        /** @var int|string $possibleUid */
+        foreach ($map as $possibleUid => $data) {
+            $uid = $this->createRealUid($possibleUid);
+            $this->processSingleEvent($uid, $data);
         }
     }
 
     /**
-     * @param string $table
+     * @param int|int $possibleUid
+     *
+     * @return int
+     */
+    private function createRealUid($possibleUid): int
+    {
+        return $this->isRealUid($possibleUid)
+            ? (int)$possibleUid
+            : (int)$this->dataHandler->substNEWwithIDs[$possibleUid];
+    }
+
+    /**
+     * @param int|string $uid
      *
      * @return bool
      */
-    private function hasDataForTable($table): bool
+    private function isRealUid($uid): bool
     {
-        return isset($this->tceMainFieldArrays[$table]) && \is_array($this->tceMainFieldArrays[$table]);
+        return \is_int($uid) || MathUtility::canBeInterpretedAsInteger($uid);
     }
 
     /**
@@ -137,9 +97,6 @@ class DataHandlerHook
     {
         /** @var \Tx_Seminars_OldModel_Event $event */
         $event = GeneralUtility::makeInstance(\Tx_Seminars_OldModel_Event::class, $uid, false, true);
-
-        if ($event->comesFromDatabase()) {
-            $event->saveToDatabase($event->getUpdateArray($changedFields));
-        }
+        $event->saveToDatabase($event->getUpdateArray($changedFields));
     }
 }
