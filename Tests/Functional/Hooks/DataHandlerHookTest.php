@@ -61,16 +61,24 @@ final class DataHandlerHookTest extends FunctionalTestCase
         self::assertSame(DataHandlerHook::class, $reference);
     }
 
+    /**
+     * @param int $uid
+     *
+     * @return void
+     */
     private function processUpdateActionForSeminarsTable(int $uid)
     {
         $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
         $this->dataHandler->datamap[self::TABLE_SEMINARS][$uid] = $data;
 
-        $this->subject
-            ->processDatamap_afterDatabaseOperations('update', self::TABLE_SEMINARS, $uid, $data, $this->dataHandler);
         $this->subject->processDatamap_afterAllOperations($this->dataHandler);
     }
 
+    /**
+     * @param int $uid
+     *
+     * @return void
+     */
     private function processNewActionForSeminarsTable(int $uid)
     {
         $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
@@ -78,13 +86,6 @@ final class DataHandlerHookTest extends FunctionalTestCase
         $this->dataHandler->datamap[self::TABLE_SEMINARS][$temporaryUid] = $data;
         $this->dataHandler->substNEWwithIDs[$temporaryUid] = $uid;
 
-        $this->subject->processDatamap_afterDatabaseOperations(
-            'new',
-            self::TABLE_SEMINARS,
-            $temporaryUid,
-            $data,
-            $this->dataHandler
-        );
         $this->subject->processDatamap_afterAllOperations($this->dataHandler);
     }
 
