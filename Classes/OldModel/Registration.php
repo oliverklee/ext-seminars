@@ -367,10 +367,8 @@ class Tx_Seminars_OldModel_Registration extends \Tx_Seminars_OldModel_Abstract
             case 'crdate':
                 // The fallthrough is intended.
             case 'tstamp':
-                $result = strftime(
-                    $this->getConfValueString('dateFormatYMD') . ' ' . $this->getConfValueString('timeFormat'),
-                    $this->getRecordPropertyInteger($trimmedKey)
-                );
+                $format = $this->getConfValueString('dateFormatYMD') . ' ' . $this->getConfValueString('timeFormat');
+                $result = \strftime($format, $this->getRecordPropertyInteger($trimmedKey));
                 break;
             case 'uid':
                 $result = $this->getUid();
@@ -388,14 +386,14 @@ class Tx_Seminars_OldModel_Registration extends \Tx_Seminars_OldModel_Abstract
                     ? $this->translate('label_yes') : $this->translate('label_no');
                 break;
             case 'datepaid':
-                $result = strftime(
+                $result = \strftime(
                     $this->getConfValueString('dateFormatYMD'),
                     $this->getRecordPropertyInteger($trimmedKey)
                 );
                 break;
             case 'method_of_payment':
-                $result = $this->getSeminarObject(
-                )->getSinglePaymentMethodShort($this->getRecordPropertyInteger($trimmedKey));
+                $result = $this->getSeminarObject()
+                    ->getSinglePaymentMethodShort($this->getRecordPropertyInteger($trimmedKey));
                 break;
             case 'gender':
                 $result = $this->getGender();
@@ -419,9 +417,9 @@ class Tx_Seminars_OldModel_Registration extends \Tx_Seminars_OldModel_Abstract
                 $result = $this->getRecordPropertyString($trimmedKey);
         }
 
-        $carriageReturnRemoved = str_replace(CR, LF, (string)$result);
+        $carriageReturnRemoved = \str_replace(CR, LF, (string)$result);
 
-        return trim(preg_replace('/\\x0a{2,}/', LF, $carriageReturnRemoved));
+        return \trim(\preg_replace('/\\x0a{2,}/', LF, $carriageReturnRemoved));
     }
 
     /**
@@ -441,10 +439,9 @@ class Tx_Seminars_OldModel_Registration extends \Tx_Seminars_OldModel_Abstract
             $this->retrieveUserData();
         }
 
-        $result = '';
-        $trimmedKey = trim($key);
+        $trimmedKey = \trim($key);
 
-        if (!is_array($this->userData) || ($trimmedKey === '') || !array_key_exists($trimmedKey, $this->userData)) {
+        if (!\is_array($this->userData) || $trimmedKey === '' || !\array_key_exists($trimmedKey, $this->userData)) {
             return '';
         }
 
@@ -454,9 +451,7 @@ class Tx_Seminars_OldModel_Registration extends \Tx_Seminars_OldModel_Abstract
                 $result = $this->translate('label_gender.I.' . $rawData);
                 break;
             case 'status':
-                if ((int)$rawData !== 0) {
-                    $result = $this->translate('label_status.I.' . $rawData);
-                }
+                $result = (int)$rawData !== 0 ? $this->translate('label_status.I.' . $rawData) : '';
                 break;
             case 'wheelchair':
                 $result = (bool)$rawData ? $this->translate('label_yes') : $this->translate('label_no');
@@ -464,13 +459,11 @@ class Tx_Seminars_OldModel_Registration extends \Tx_Seminars_OldModel_Abstract
             case 'crdate':
                 // The fallthrough is intended.
             case 'tstamp':
-                $result = strftime(
-                    $this->getConfValueString('dateFormatYMD') . ' ' . $this->getConfValueString('timeFormat'),
-                    $rawData
-                );
+                $format = $this->getConfValueString('dateFormatYMD') . ' ' . $this->getConfValueString('timeFormat');
+                $result = \strftime($format, $rawData);
                 break;
             case 'date_of_birth':
-                $result = strftime($this->getConfValueString('dateFormatYMD'), $rawData);
+                $result = \strftime($this->getConfValueString('dateFormatYMD'), $rawData);
                 break;
             case 'name':
                 $result = $this->getFrontEndUser()->getName();
@@ -479,7 +472,7 @@ class Tx_Seminars_OldModel_Registration extends \Tx_Seminars_OldModel_Abstract
                 $result = $rawData;
         }
 
-        return trim($result);
+        return \trim($result);
     }
 
     /**
@@ -505,13 +498,12 @@ class Tx_Seminars_OldModel_Registration extends \Tx_Seminars_OldModel_Abstract
                 continue;
             }
 
-            $singleValues[$key] = ($key === 'email')
+            $singleValues[$key] = $key === 'email'
                 ? $plugin->cObj->mailto_makelinks('mailto:' . $rawValue, [])
                 : \htmlspecialchars($rawValue, ENT_QUOTES | ENT_HTML5);
         }
 
-        // And now: Everything separated by a comma and a space!
-        return implode(', ', $singleValues);
+        return \implode(', ', $singleValues);
     }
 
     /**
@@ -800,25 +792,25 @@ class Tx_Seminars_OldModel_Registration extends \Tx_Seminars_OldModel_Abstract
             $defaultLabelKey = 'label_' . $key;
             $defaultLabel = $this->translate($defaultLabelKey);
 
-            if (($frontEndUserLabel !== '') && ($frontEndUserLabel !== $frontEndUserLabelKey)) {
+            if ($frontEndUserLabel !== '' && $frontEndUserLabel !== $frontEndUserLabelKey) {
                 $label = $frontEndUserLabel;
-            } elseif (($defaultLabel !== '') && ($defaultLabel !== $defaultLabelKey)) {
+            } elseif ($defaultLabel !== '' && $defaultLabel !== $defaultLabelKey) {
                 $label = $defaultLabel;
             } else {
-                $label = ucfirst($key);
+                $label = \ucfirst($key);
             }
 
             $labels[$key] = $label;
-            $maximumLabelLength = max($maximumLabelLength, \mb_strlen($label, 'utf-8'));
+            $maximumLabelLength = \max($maximumLabelLength, \mb_strlen($label, 'utf-8'));
         }
 
         foreach ($keys as $key) {
             $label = $labels[$key];
             $value = $this->getUserData($key);
-            // Checks whether there is a value to display. If not, we don't use
-            // the padding and break the line directly after the label.
+            // Checks whether there is a value to display.
+            // If not, we don't use  the padding and break the line directly after the label.
             if ($value !== '') {
-                $result .= str_pad($label . ': ', $maximumLabelLength + 2, ' ') . $value . LF;
+                $result .= \str_pad($label . ': ', $maximumLabelLength + 2, ' ') . $value . LF;
             } else {
                 $result .= $label . ':' . LF;
             }
@@ -851,7 +843,7 @@ class Tx_Seminars_OldModel_Registration extends \Tx_Seminars_OldModel_Abstract
                 $currentLabel = $this->translate('label_' . $key);
             }
             $labels[$key] = $currentLabel;
-            $maximumLabelLength = max($maximumLabelLength, \mb_strlen($currentLabel, 'utf-8'));
+            $maximumLabelLength = \max($maximumLabelLength, \mb_strlen($currentLabel, 'utf-8'));
         }
 
         $result = '';
@@ -862,10 +854,10 @@ class Tx_Seminars_OldModel_Registration extends \Tx_Seminars_OldModel_Abstract
                 continue;
             }
 
-            if (strpos($value, LF) !== false) {
+            if (\strpos($value, LF) !== false) {
                 $result .= $currentLabel . ': ' . LF;
             } else {
-                $result .= str_pad($currentLabel . ': ', $maximumLabelLength + 2, ' ');
+                $result .= \str_pad($currentLabel . ': ', $maximumLabelLength + 2, ' ');
             }
             $result .= $value . LF;
         }
