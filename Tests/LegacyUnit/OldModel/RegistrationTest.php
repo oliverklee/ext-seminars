@@ -17,6 +17,16 @@ final class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
     use LanguageHelper;
 
     /**
+     * @var string
+     */
+    const DATE_FORMAT = '%d.%m.%Y';
+
+    /**
+     * @var string
+     */
+    const TIME_FORMAT = '%H:%M';
+
+    /**
      * @var TestingRegistration
      */
     private $subject = null;
@@ -96,6 +106,8 @@ final class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
             'templateFile',
             'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
         );
+        $this->subject->setConfigurationValue('dateFormatYMD', self::DATE_FORMAT);
+        $this->subject->setConfigurationValue('timeFormat', self::TIME_FORMAT);
     }
 
     protected function tearDown()
@@ -1042,6 +1054,50 @@ final class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
             'Is_dummy_record: 1',
             $this->subject->dumpUserValues('is_dummy_record')
         );
+    }
+
+    /**
+     * @return string[][]
+     */
+    public function userDateAndTimeFieldsDataProvider(): array
+    {
+        return [
+            'crdate' => ['crdate'],
+            'tstamp' => ['tstamp'],
+        ];
+    }
+
+    /**
+     * @test
+     *
+     * @param string $fieldName
+     *
+     * @dataProvider userDateAndTimeFieldsDataProvider
+     */
+    public function dumpUserValuesCanDumpDateAndTimeField(string $fieldName)
+    {
+        $value = 1579816569;
+        $this->subject->setUserData([$fieldName => $value]);
+
+        $result = $this->subject->dumpUserValues($fieldName);
+
+        $expected = \strftime(self::DATE_FORMAT, $value) . ' ' . \strftime(self::TIME_FORMAT, $value);
+        self::assertContains($expected, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function dumpUserValuesCanDumpDate()
+    {
+        $fieldName = 'date_of_birth';
+        $value = 1579816569;
+        $this->subject->setUserData([$fieldName => $value]);
+
+        $result = $this->subject->dumpUserValues($fieldName);
+
+        $expected = \strftime(self::DATE_FORMAT, $value);
+        self::assertContains($expected, $result);
     }
 
     /*
