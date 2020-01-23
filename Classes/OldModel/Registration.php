@@ -439,10 +439,10 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
                 // The fallthrough is intended.
             case 'tstamp':
                 $format = $this->getConfValueString('dateFormatYMD') . ' ' . $this->getConfValueString('timeFormat');
-                $result = \strftime($format, $rawData);
+                $result = \strftime($format, (int)$rawData);
                 break;
             case 'date_of_birth':
-                $result = \strftime($this->getConfValueString('dateFormatYMD'), $rawData);
+                $result = \strftime($this->getConfValueString('dateFormatYMD'), (int)$rawData);
                 break;
             case 'name':
                 $result = $this->getFrontEndUser()->getName();
