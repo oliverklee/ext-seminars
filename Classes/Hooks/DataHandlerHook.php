@@ -35,6 +35,11 @@ class DataHandlerHook
     const TABLE_TIME_SLOTS = 'tx_seminars_timeslots';
 
     /**
+     * @var string
+     */
+    const TABLE_PLACES_ASSOCIATION = 'tx_seminars_seminars_place_mm';
+
+    /**
      * @var DataHandler
      */
     private $dataHandler = null;
@@ -102,10 +107,6 @@ class DataHandlerHook
      */
     private function processSingleEvent(int $uid)
     {
-        /** @var \Tx_Seminars_OldModel_Event $event */
-        $event = GeneralUtility::makeInstance(\Tx_Seminars_OldModel_Event::class, $uid, false, true);
-        $event->saveToDatabase($event->getUpdateArray());
-
         /** @var array|bool $originalData */
         $originalData = $this->getConnectionForTable(self::TABLE_EVENTS)
             ->select(['*'], self::TABLE_EVENTS, ['uid' => $uid])->fetch();
@@ -114,12 +115,46 @@ class DataHandlerHook
         }
 
         $updatedData = $originalData;
+        $this->copyPlacesFromTimeSlots($uid, $updatedData);
         $this->copyDatesFromTimeSlots($uid, $updatedData);
         $this->sanitizeEventDates($updatedData);
 
         if ($updatedData !== $originalData) {
             $this->getConnectionForTable(self::TABLE_EVENTS)->update(self::TABLE_EVENTS, $updatedData, ['uid' => $uid]);
         }
+    }
+
+    /**
+     * @param int $uid
+     * @param array $data
+     *
+     * @return void
+     */
+    private function copyPlacesFromTimeSlots(int $uid, array &$data)
+    {
+        if ((int)$data['timeslots'] === 0) {
+            return;
+        }
+
+        $this->getConnectionForTable(self::TABLE_PLACES_ASSOCIATION)
+            ->delete(self::TABLE_PLACES_ASSOCIATION, ['uid_local' => $uid]);
+
+        $timeSlots = $this->getConnectionForTable(self::TABLE_TIME_SLOTS)
+            ->select(['*'], self::TABLE_TIME_SLOTS, ['seminar' => $uid])->fetchAll();
+
+        $placesCount = 0;
+        foreach ($timeSlots as $timeSlot) {
+            $place = (int)$timeSlot['place'];
+            if ($place === 0) {
+                continue;
+            }
+
+            $this->getConnectionForTable(self::TABLE_PLACES_ASSOCIATION)
+                ->insert(self::TABLE_PLACES_ASSOCIATION, ['uid_local' => $uid, 'uid_foreign' => $place]);
+            $placesCount++;
+        }
+
+        $data['place'] = $placesCount;
     }
 
     /**

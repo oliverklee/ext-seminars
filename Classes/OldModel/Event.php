@@ -94,23 +94,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     }
 
     /**
-     * Returns an associative array, containing fieldname/value pairs that need to be updated in the database.
-     *
-     * This function is called through a hook in the data handler.
-     *
-     * @return array associative array containing data to update the database entry of this event, may be empty
-     */
-    public function getUpdateArray(): array
-    {
-        $changedData = [];
-        if ($this->hasTimeslots()) {
-            $changedData['place'] = $this->updatePlaceRelationsFromTimeSlots();
-        }
-
-        return $changedData;
-    }
-
-    /**
      * Gets our topic's title. For date records, this will return the
      * corresponding topic record's title.
      *
@@ -3953,59 +3936,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             ->execute()->fetch();
 
         return \is_array($result) ? (int)$result['end_date'] : 0;
-    }
-
-    /**
-     * Updates the place relations of the event in replacing them with the place
-     * relations of the time slots.
-     * This function will remove existing place relations and adds relations to
-     * all places of the event's time slots in the database.
-     * This function is a no-op for events without time slots.
-     *
-     * @return int the number of place relations of the event, will be >= 0
-     */
-    public function updatePlaceRelationsFromTimeSlots(): int
-    {
-        if (!$this->hasTimeslots()) {
-            return 0;
-        }
-        $timeSlotBag = $this->createTimeSlotBag();
-        if ($timeSlotBag->isEmpty()) {
-            return $this->getNumberOfPlaces();
-        }
-
-        $table = 'tx_seminars_seminars_place_mm';
-        self::getConnectionForTable($table)->delete($table, ['uid_local' => $this->getUid()]);
-
-        // Creates an array with all place UIDs which should be related to this event.
-        $placesOfTimeSlots = [];
-        /** @var \Tx_Seminars_OldModel_TimeSlot $timeSlot */
-        foreach ($timeSlotBag as $timeSlot) {
-            if ($timeSlot->hasPlace()) {
-                $placesOfTimeSlots[] = $timeSlot->getPlace();
-            }
-        }
-
-        return $this->createMmRecords('tx_seminars_seminars_place_mm', $placesOfTimeSlots);
-    }
-
-    /**
-     * Creates a time slot bag for the time slots associated with this event.
-     *
-     * @return \Tx_Seminars_Bag_TimeSlot bag with this event's time slots, may be empty
-     */
-    private function createTimeSlotBag(): \Tx_Seminars_Bag_TimeSlot
-    {
-        /** @var \Tx_Seminars_Bag_TimeSlot $bag */
-        $bag = GeneralUtility::makeInstance(
-            \Tx_Seminars_Bag_TimeSlot::class,
-            'tx_seminars_timeslots.seminar = ' . $this->getUid() .
-            ' AND tx_seminars_timeslots.place > 0',
-            '',
-            '',
-            'tx_seminars_timeslots.begin_date'
-        );
-        return $bag;
     }
 
     /**

@@ -23,7 +23,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Display the name of the current functional test (#256)
 
 ### Changed
-- Move the data handling from the old model to the hook (#483, #484)
+- Move the data handling from the old model to the hook (#483, #484, #485)
 - Update registration email hooks (#445)
 - Update documentation on hooks (#416)
 - Sort the entries in the `.gitignore` and `.gitattributes` (#434)

@@ -379,24 +379,6 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
     }
 
     /**
-     * Commits the changes of an existing record to the database.
-     *
-     * Prefer `commitToDatabase` over this method.
-     *
-     * @param array $data associative array
-     *
-     * @return void
-     */
-    public function saveToDatabase(array $data)
-    {
-        if (empty($data)) {
-            return;
-        }
-
-        self::getConnectionForOwnTable()->update(static::$tableName, $data, ['uid' => $this->getUid()]);
-    }
-
-    /**
      * Adds m:n records that are referenced by this record.
      *
      * Before this function may be called, $this->recordData['uid'] must be set correctly.
