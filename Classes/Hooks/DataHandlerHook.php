@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Hooks;
 
+use TYPO3\CMS\Core\Database\Connection;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
@@ -59,7 +61,7 @@ class DataHandlerHook
         /** @var int|string $possibleUid */
         foreach ($map as $possibleUid => $data) {
             $uid = $this->createRealUid($possibleUid);
-            $this->processSingleEvent($uid, $data);
+            $this->processSingleEvent($uid);
         }
     }
 
@@ -89,14 +91,57 @@ class DataHandlerHook
      * Processes a single event.
      *
      * @param int $uid
-     * @param string[] $changedFields
      *
      * @return void
      */
-    private function processSingleEvent(int $uid, array $changedFields)
+    private function processSingleEvent(int $uid)
     {
         /** @var \Tx_Seminars_OldModel_Event $event */
         $event = GeneralUtility::makeInstance(\Tx_Seminars_OldModel_Event::class, $uid, false, true);
-        $event->saveToDatabase($event->getUpdateArray($changedFields));
+        $event->saveToDatabase($event->getUpdateArray());
+
+        /** @var array|bool $originalData */
+        $originalData = $this->getConnectionForTable(self::TABLE_EVENTS)
+            ->select(['*'], self::TABLE_EVENTS, ['uid' => $uid])->fetch();
+        if (!\is_array($originalData)) {
+            return;
+        }
+
+        $updatedData = $originalData;
+        $this->sanitizeEventDates($updatedData);
+
+        if ($updatedData !== $originalData) {
+            $this->getConnectionForTable(self::TABLE_EVENTS)->update(self::TABLE_EVENTS, $updatedData, ['uid' => $uid]);
+        }
+    }
+
+    /**
+     * @param array $data data, might get changed
+     *
+     * @return void
+     */
+    private function sanitizeEventDates(array &$data)
+    {
+        $beginDate = (int)$data['begin_date'];
+        $registrationDeadline = (int)$data['deadline_registration'];
+        $earlyBirdDeadline = (int)$data['deadline_early_bird'];
+
+        if ($registrationDeadline > $beginDate) {
+            $registrationDeadline = 0;
+            $data['deadline_registration'] = 0;
+        }
+        if ($earlyBirdDeadline > $beginDate || $earlyBirdDeadline > $registrationDeadline) {
+            $data['deadline_early_bird'] = 0;
+        }
+    }
+
+    protected function getConnectionForTable(string $table): Connection
+    {
+        return $this->getConnectionPool()->getConnectionForTable($table);
+    }
+
+    private function getConnectionPool(): ConnectionPool
+    {
+        return GeneralUtility::makeInstance(ConnectionPool::class);
     }
 }
