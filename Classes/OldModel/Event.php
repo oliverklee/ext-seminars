@@ -104,8 +104,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     {
         $changedData = [];
         if ($this->hasTimeslots()) {
-            $changedData['begin_date'] = $this->getBeginDateAsTimestamp();
-            $changedData['end_date'] = $this->getEndDateAsTimestamp();
             $changedData['place'] = $this->updatePlaceRelationsFromTimeSlots();
         }
 
