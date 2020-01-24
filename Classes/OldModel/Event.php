@@ -2477,10 +2477,10 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         $maxLength = 0;
         foreach ($keys as $currentKey) {
-            $loweredKey = strtolower($currentKey);
-            $currentLabel = $this->translate('label_' . $currentKey);
+            $loweredKey = \strtolower($currentKey);
+            $currentLabel = \rtrim($this->translate('label_' . $currentKey), ':');
             $keysWithLabels[$loweredKey] = $currentLabel;
-            $maxLength = max($maxLength, \mb_strlen($currentLabel, 'utf-8'));
+            $maxLength = \max($maxLength, \mb_strlen($currentLabel, 'utf-8'));
         }
         $result = '';
         foreach ($keysWithLabels as $currentKey => $currentLabel) {
@@ -2542,14 +2542,10 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
                     $value = $this->getRecordPropertyString($currentKey);
             }
 
-            // Check whether there is a value to display. If not, we don't use
-            // the padding and break the line directly after the label.
-            if ($value != '') {
-                $result .= str_pad(
-                        $currentLabel . ': ',
-                        $maxLength + 2,
-                        ' '
-                    ) . $value . LF;
+            // Check whether there is a value to display.
+            // If not, we don't use the padding and break the line directly after the label.
+            if ($value !== '') {
+                $result .= \str_pad($currentLabel . ': ', $maxLength + 2, ' ') . $value . LF;
             } else {
                 $result .= $currentLabel . ':' . LF;
             }
