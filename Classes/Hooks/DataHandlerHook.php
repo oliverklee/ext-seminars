@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Hooks;
 
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
@@ -27,6 +28,11 @@ class DataHandlerHook
      * @var string
      */
     const TABLE_EVENTS = 'tx_seminars_seminars';
+
+    /**
+     * @var string
+     */
+    const TABLE_TIME_SLOTS = 'tx_seminars_timeslots';
 
     /**
      * @var DataHandler
@@ -108,10 +114,65 @@ class DataHandlerHook
         }
 
         $updatedData = $originalData;
+        $this->copyDatesFromTimeSlots($uid, $updatedData);
         $this->sanitizeEventDates($updatedData);
 
         if ($updatedData !== $originalData) {
             $this->getConnectionForTable(self::TABLE_EVENTS)->update(self::TABLE_EVENTS, $updatedData, ['uid' => $uid]);
+        }
+    }
+
+    /**
+     * @param int $uid
+     * @param array $data
+     *
+     * @return void
+     */
+    private function copyDatesFromTimeSlots(int $uid, array &$data)
+    {
+        if ((int)$data['timeslots'] === 0) {
+            return;
+        }
+
+        $this->copyBeginDateFromTimeSlots($uid, $data);
+        $this->copyEndDateFromTimeSlots($uid, $data);
+    }
+
+    /**
+     * @param int $uid
+     * @param array $data
+     *
+     * @return void
+     */
+    private function copyBeginDateFromTimeSlots(int $uid, array &$data)
+    {
+        $query = $this->getQueryBuilderForTable(self::TABLE_TIME_SLOTS);
+        $result = $query->addSelectLiteral($query->expr()->min('begin_date', 'begin_date'))
+            ->from(self::TABLE_TIME_SLOTS)
+            ->where($query->expr()->eq('seminar', $uid))
+            ->execute()->fetch();
+
+        if (\is_array($result)) {
+            $data['begin_date'] = (int)$result['begin_date'];
+        }
+    }
+
+    /**
+     * @param int $uid
+     * @param array $data
+     *
+     * @return void
+     */
+    private function copyEndDateFromTimeSlots(int $uid, array &$data)
+    {
+        $query = $this->getQueryBuilderForTable(self::TABLE_TIME_SLOTS);
+        $result = $query->addSelectLiteral($query->expr()->max('end_date', 'end_date'))
+            ->from(self::TABLE_TIME_SLOTS)
+            ->where($query->expr()->eq('seminar', $uid))
+            ->execute()->fetch();
+
+        if (\is_array($result)) {
+            $data['end_date'] = (int)$result['end_date'];
         }
     }
 
@@ -133,6 +194,11 @@ class DataHandlerHook
         if ($earlyBirdDeadline > $beginDate || $earlyBirdDeadline > $registrationDeadline) {
             $data['deadline_early_bird'] = 0;
         }
+    }
+
+    protected function getQueryBuilderForTable(string $table): QueryBuilder
+    {
+        return $this->getConnectionPool()->getQueryBuilderForTable($table);
     }
 
     protected function getConnectionForTable(string $table): Connection
