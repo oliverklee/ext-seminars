@@ -781,6 +781,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
             } else {
                 $label = \ucfirst($key);
             }
+            $label = \rtrim($label, ':');
 
             $labels[$key] = $label;
             $maximumLabelLength = \max($maximumLabelLength, \mb_strlen($label, 'utf-8'));
@@ -811,7 +812,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
      *
      * @return string formatted output (may be empty)
      */
-    public function dumpAttendanceValues($keysList): string
+    public function dumpAttendanceValues(string $keysList): string
     {
         $keys = GeneralUtility::trimExplode(',', $keysList, true);
         $labels = [];
@@ -824,6 +825,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
             } else {
                 $currentLabel = $this->translate('label_' . $key);
             }
+            $currentLabel = \rtrim($currentLabel, ':');
             $labels[$key] = $currentLabel;
             $maximumLabelLength = \max($maximumLabelLength, \mb_strlen($currentLabel, 'utf-8'));
         }
