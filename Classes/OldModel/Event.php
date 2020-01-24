@@ -94,73 +94,15 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     }
 
     /**
-     * Checks certain fields to contain plausible values. Example: The registration
-     * deadline must not be later than the event's starting time.
+     * Returns an associative array, containing fieldname/value pairs that need to be updated in the database.
      *
-     * This function is used in order to check values entered in the TCE forms
-     * in the TYPO3 back end.
-     *
-     * @param string $fieldName the name of the field to check
-     * @param int $value the value that was entered in the TCE form that needs to be validated
-     *
-     * @return array associative array containing the field "status" and "newValue" (if needed)
-     */
-    private function validateTceValues(string $fieldName, int $value): array
-    {
-        $result = ['status' => true];
-
-        switch ($fieldName) {
-            case 'deadline_registration':
-                // Check that the registration deadline is not later than the begin date.
-                if ($value > $this->getBeginDateAsTimestamp()) {
-                    $result['status'] = false;
-                    $result['newValue'] = 0;
-                }
-                break;
-            case 'deadline_early_bird':
-                // Check that the early-bird deadline is
-                // a) not later than the begin date
-                // b) not later than the registration deadline (if set).
-                if (
-                    $value > $this->getBeginDateAsTimestamp()
-                    || ($this->getRecordPropertyInteger('deadline_registration')
-                        && $value > $this->getRecordPropertyInteger('deadline_registration'))
-                ) {
-                    $result['status'] = false;
-                    $result['newValue'] = 0;
-                }
-                break;
-            default:
-        }
-
-        return $result;
-    }
-
-    /**
-     * Returns an associative array, containing fieldname/value pairs that need
-     * to be updated in the database. Update means "reset to zero/empty" so far.
-     *
-     * This function is used in order to check values entered in the TCE forms
-     * in the TYPO3 back end. It is called through a hook in the TCE class.
-     *
-     * @param string[] $changedFields the values entered in the TCE form
+     * This function is called through a hook in the data handler.
      *
      * @return array associative array containing data to update the database entry of this event, may be empty
      */
-    public function getUpdateArray(array $changedFields): array
+    public function getUpdateArray(): array
     {
         $changedData = [];
-        foreach (['deadline_registration', 'deadline_early_bird'] as $currentFieldName) {
-            if (!isset($changedFields[$currentFieldName])) {
-                continue;
-            }
-
-            $result = $this->validateTceValues($currentFieldName, (int)$changedFields[$currentFieldName]);
-            if (!$result['status']) {
-                $changedData[$currentFieldName] = $result['newValue'];
-            }
-        }
-
         if ($this->hasTimeslots()) {
             $changedData['begin_date'] = $this->getBeginDateAsTimestamp();
             $changedData['end_date'] = $this->getEndDateAsTimestamp();
