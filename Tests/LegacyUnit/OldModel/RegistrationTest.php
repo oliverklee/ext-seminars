@@ -513,6 +513,64 @@ final class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
         );
     }
 
+    /**
+     * @return string[][]
+     */
+    public function dumpableRegistrationFieldsDataProvider(): array
+    {
+        $fields = [
+            'uid',
+            'interests',
+            'expectations',
+            'background_knowledge',
+            'lodgings',
+            'accommodation',
+            'foods',
+            'food',
+            'known_from',
+            'notes',
+            'checkboxes',
+            'price',
+            'seats',
+            'total_price',
+            'attendees_names',
+            'kids',
+            'method_of_payment',
+            'company',
+            'gender',
+            'name',
+            'address',
+            'zip',
+            'city',
+            'country',
+            'telephone',
+            'email',
+        ];
+
+        $result = [];
+        foreach ($fields as $field) {
+            $result[$field] = [$field];
+        }
+
+        return $result;
+    }
+
+    /**
+     * @test
+     *
+     * @param string $fieldName
+     *
+     * @dataProvider dumpableRegistrationFieldsDataProvider
+     */
+    public function dumpAttendanceValuesCreatesNoDoubleColonsAfterLabel(string $fieldName)
+    {
+        $subject = \Tx_Seminars_OldModel_Registration::fromData([$fieldName => '1234 some value']);
+
+        $result = $subject->dumpAttendanceValues($fieldName);
+
+        self::assertNotContains('::', $result);
+    }
+
     /*
      * Tests regarding committing registrations to the database.
      */
@@ -1098,6 +1156,61 @@ final class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
 
         $expected = \strftime(self::DATE_FORMAT, $value);
         self::assertContains($expected, $result);
+    }
+
+    /**
+     * @return string[][]
+     */
+    public function dumpableUserFieldsDataProvider(): array
+    {
+        $fields = [
+            'uid',
+            'username',
+            'name',
+            'first_name',
+            'middle_name',
+            'last_name',
+            'address',
+            'telephone',
+            'fax',
+            'email',
+            'crdate',
+            'title',
+            'zip',
+            'city',
+            'country',
+            'www',
+            'company',
+            'pseudonym',
+            'pseudonym',
+            'gender',
+            'date_of_birth',
+            'mobilephone',
+            'comments',
+        ];
+
+        $result = [];
+        foreach ($fields as $field) {
+            $result[$field] = [$field];
+        }
+
+        return $result;
+    }
+
+    /**
+     * @test
+     *
+     * @param string $fieldName
+     *
+     * @dataProvider dumpableUserFieldsDataProvider
+     */
+    public function dumpUserValuesCreatesNoDoubleColonsAfterLabel(string $fieldName)
+    {
+        $this->subject->setUserData([$fieldName => '1234 some value']);
+
+        $result = $this->subject->dumpUserValues($fieldName);
+
+        self::assertNotContains('::', $result);
     }
 
     /*

@@ -2345,17 +2345,17 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string formatted output (may be empty)
      */
-    public function dumpSeminarValues($keysList): string
+    public function dumpSeminarValues(string $keysList): string
     {
         $keys = GeneralUtility::trimExplode(',', $keysList, true);
         $keysWithLabels = [];
 
         $maxLength = 0;
         foreach ($keys as $currentKey) {
-            $loweredKey = strtolower($currentKey);
-            $currentLabel = $this->translate('label_' . $currentKey);
+            $loweredKey = \strtolower($currentKey);
+            $currentLabel = \rtrim($this->translate('label_' . $currentKey), ':');
             $keysWithLabels[$loweredKey] = $currentLabel;
-            $maxLength = max($maxLength, \mb_strlen($currentLabel, 'utf-8'));
+            $maxLength = \max($maxLength, \mb_strlen($currentLabel, 'utf-8'));
         }
         $result = '';
         foreach ($keysWithLabels as $currentKey => $currentLabel) {
@@ -2417,8 +2417,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
                     $value = $this->getRecordPropertyString($currentKey);
             }
 
-            // Check whether there is a value to display. If not, we don't use
-            // the padding and break the line directly after the label.
+            // Check whether there is a value to display.
+            // If not, we don't use the padding and break the line directly after the label.
             if ($value !== '') {
                 $result .= \str_pad($currentLabel . ': ', $maxLength + 2, ' ') . $value . LF;
             } else {
