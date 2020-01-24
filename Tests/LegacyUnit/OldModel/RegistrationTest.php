@@ -1109,6 +1109,61 @@ class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
         self::assertContains($expected, $result);
     }
 
+    /**
+     * @return string[][]
+     */
+    public function dumpableUserFieldsDataProvider()
+    {
+        $fields = [
+            'uid',
+            'username',
+            'name',
+            'first_name',
+            'middle_name',
+            'last_name',
+            'address',
+            'telephone',
+            'fax',
+            'email',
+            'crdate',
+            'title',
+            'zip',
+            'city',
+            'country',
+            'www',
+            'company',
+            'pseudonym',
+            'pseudonym',
+            'gender',
+            'date_of_birth',
+            'mobilephone',
+            'comments',
+        ];
+
+        $result = [];
+        foreach ($fields as $field) {
+            $result[$field] = [$field];
+        }
+
+        return $result;
+    }
+
+    /**
+     * @test
+     *
+     * @param string $fieldName
+     *
+     * @dataProvider dumpableUserFieldsDataProvider
+     */
+    public function dumpUserValuesCreatesNoDoubleColonsAfterLabel($fieldName)
+    {
+        $this->subject->setUserData([$fieldName => '1234 some value']);
+
+        $result = $this->subject->dumpUserValues($fieldName);
+
+        self::assertNotContains('::', $result);
+    }
+
     /*
      * Tests for isPaid()
      */

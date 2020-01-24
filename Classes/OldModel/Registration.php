@@ -799,6 +799,7 @@ class Tx_Seminars_OldModel_Registration extends \Tx_Seminars_OldModel_Abstract
             } else {
                 $label = \ucfirst($key);
             }
+            $label = \rtrim($label, ':');
 
             $labels[$key] = $label;
             $maximumLabelLength = \max($maximumLabelLength, \mb_strlen($label, 'utf-8'));
@@ -842,6 +843,7 @@ class Tx_Seminars_OldModel_Registration extends \Tx_Seminars_OldModel_Abstract
             } else {
                 $currentLabel = $this->translate('label_' . $key);
             }
+            $currentLabel = \rtrim($currentLabel, ':');
             $labels[$key] = $currentLabel;
             $maximumLabelLength = \max($maximumLabelLength, \mb_strlen($currentLabel, 'utf-8'));
         }

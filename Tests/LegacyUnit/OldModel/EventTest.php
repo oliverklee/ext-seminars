@@ -8499,6 +8499,61 @@ class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         );
     }
 
+    /**
+     * @return string[][]
+     */
+    public function dumpableEventFieldsDataProvider()
+    {
+        $fields = [
+            'uid',
+            'title',
+            'subtitle',
+            'titleanddate',
+            'date',
+            'time',
+            'accreditation_number',
+            'credit_points',
+            'room',
+            'place',
+            'speakers',
+            'price_regular',
+            'price_regular_early',
+            'price_special',
+            'price_special_early',
+            'allows_multiple_registrations',
+            'attendees',
+            'attendees_min',
+            'attendees_max',
+            'vacancies',
+            'enough_attendees',
+            'is_full',
+            'notes',
+        ];
+
+        $result = [];
+        foreach ($fields as $field) {
+            $result[$field] = [$field];
+        }
+
+        return $result;
+    }
+
+    /**
+     * @test
+     *
+     * @param string $fieldName
+     *
+     * @dataProvider dumpableEventFieldsDataProvider
+     */
+    public function dumpSeminarValuesCreatesNoDoubleColonsAfterLabel($fieldName)
+    {
+        $this->subject->setRecordPropertyString($fieldName, '1234 some value');
+
+        $result = $this->subject->dumpSeminarValues($fieldName);
+
+        self::assertNotContains('::', $result);
+    }
+
     /*
      * Tests regarding the registration begin date
      */
