@@ -636,6 +636,10 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
                 <source>Y-m-d</source>
                 <target>d.m.Y</target>
             </trans-unit>
+            <trans-unit id="label_date_of_birth" approved="yes">
+                <source>Date of birth</source>
+                <target>Geburtsdatum</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

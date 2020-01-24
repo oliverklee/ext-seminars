@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Add the missing label for the date of birth for emails (#479, #480)
 - Fix type error with dates in the old registration model (#477, #478)
 
 ## 2.2.4
