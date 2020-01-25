@@ -380,18 +380,14 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     public function getPlaceWithDetails(\Tx_Oelib_TemplateHelper $plugin)
     {
         if (!$this->hasPlace()) {
-            $plugin->setMarker(
-                'message_will_be_announced',
-                $this->translate('message_willBeAnnounced')
-            );
+            $plugin->setMarker('message_will_be_announced', $this->translate('message_willBeAnnounced'));
             return $plugin->getSubpart('PLACE_LIST_EMPTY');
         }
 
         $result = '';
-
         foreach ($this->getPlacesAsArray() as $place) {
             $name = \htmlspecialchars((string)$place['title'], ENT_QUOTES | ENT_HTML5);
-            if ((string)$place['homepage'] != '') {
+            if ((string)$place['homepage'] !== '') {
                 $name = $plugin->cObj->getTypoLink(
                     $name,
                     (string)$place['homepage'],
@@ -402,22 +398,27 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             $plugin->setMarker('place_item_title', $name);
 
             $descriptionParts = [];
-            if ((string)$place['address'] != '') {
-                $descriptionParts[] = \htmlspecialchars(\str_replace(CR, ',', (string)$place['address']), ENT_QUOTES | ENT_HTML5);
+            if ((string)$place['address'] !== '') {
+                $addressParts = GeneralUtility::trimExplode("\r", (string)$place['address'], true);
+                $address = \implode(', ', $addressParts);
+                $descriptionParts[] = \htmlspecialchars($address, ENT_QUOTES | ENT_HTML5);
             }
-            if ((string)$place['city'] != '') {
-                $descriptionParts[] = \trim(\htmlspecialchars($place['zip'] . ' ' . $place['city'], ENT_QUOTES | ENT_HTML5));
+            if ((string)$place['city'] !== '') {
+                $descriptionParts[] = \htmlspecialchars(
+                    \trim($place['zip'] . ' ' . $place['city']),
+                    ENT_QUOTES | ENT_HTML5
+                );
             }
-            if ((string)$place['country'] != '') {
+            if ((string)$place['country'] !== '') {
                 $countryName = $this->getCountryNameFromIsoCode((string)$place['country']);
-                if ($countryName != '') {
+                if ($countryName !== '') {
                     $descriptionParts[] = \htmlspecialchars($countryName, ENT_QUOTES | ENT_HTML5);
                 }
             }
 
-            $description = implode(', ', $descriptionParts);
-            if ((string)$place['directions'] != '') {
-                $description .= $plugin->pi_RTEcssText((string)$place['directions']);
+            $description = \implode(', ', $descriptionParts);
+            if ((string)$place['directions'] !== '') {
+                $description .= $plugin->pi_RTEcssText(\trim((string)$place['directions']));
             }
             $plugin->setMarker('place_item_description', $description);
 
