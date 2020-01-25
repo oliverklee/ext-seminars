@@ -77,7 +77,7 @@ class DataHandlerHook
     }
 
     /**
-     * @param int|int $possibleUid
+     * @param int|string $possibleUid
      *
      * @return int
      */
