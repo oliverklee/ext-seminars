@@ -33,6 +33,7 @@ $tca = [
                 'type' => 'text',
                 'cols' => 30,
                 'rows' => 5,
+                'eval' => 'trim',
             ],
         ],
         'zip' => [
@@ -84,6 +85,7 @@ $tca = [
                 'enableRichtext' => true,
                 'cols' => 30,
                 'rows' => 5,
+                'eval' => 'trim',
             ],
         ],
         'notes' => [
@@ -93,6 +95,7 @@ $tca = [
                 'type' => 'text',
                 'cols' => 30,
                 'rows' => 5,
+                'eval' => 'trim',
             ],
         ],
         'owner' => [
