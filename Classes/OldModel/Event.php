@@ -3897,48 +3897,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     }
 
     /**
-     * Returns our begin date and time as a UNIX timestamp.
-     *
-     * @return int our begin date and time as a UNIX timestamp or 0 if we don't have a begin date
-     */
-    public function getBeginDateAsTimestamp(): int
-    {
-        if (!$this->hasTimeslots()) {
-            return parent::getBeginDateAsTimestamp();
-        }
-
-        $table = 'tx_seminars_timeslots';
-        $query = self::getQueryBuilderForTable($table);
-        $result = $query->addSelectLiteral($query->expr()->min('begin_date', 'begin_date'))
-            ->from($table)
-            ->where($query->expr()->eq('seminar', $this->getUid()))
-            ->execute()->fetch();
-
-        return \is_array($result) ? (int)$result['begin_date'] : 0;
-    }
-
-    /**
-     * Returns our end date and time as a UNIX timestamp.
-     *
-     * @return int our end date and time as a UNIX timestamp or 0 if we don't have an end date
-     */
-    public function getEndDateAsTimestamp(): int
-    {
-        if (!$this->hasTimeslots()) {
-            return parent::getEndDateAsTimestamp();
-        }
-
-        $table = 'tx_seminars_timeslots';
-        $query = self::getQueryBuilderForTable($table);
-        $result = $query->addSelectLiteral($query->expr()->max('end_date', 'end_date'))
-            ->from($table)
-            ->where($query->expr()->eq('seminar', $this->getUid()))
-            ->execute()->fetch();
-
-        return \is_array($result) ? (int)$result['end_date'] : 0;
-    }
-
-    /**
      * Returns our time slots in an array.
      *
      * @return array[] time slots or an empty array if there are no time slots

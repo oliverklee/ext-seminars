@@ -16,8 +16,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel imple
     /**
      * Gets the begin date.
      *
-     * @return string the begin date (or the localized string "will be
-     *                announced" if no begin date is set)
+     * @return string the begin date (or the localized string "will be announced" if no begin date is set)
      */
     public function getBeginDate(): string
     {
