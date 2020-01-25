@@ -67,6 +67,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop support for TYPO3 7.6 (#248, #272, #280)
 
 ### Fixed
+- Fix the rendering markup for locations (#490)
 - Avoid double colons after labels in organizer notification emails (#481)
 - Add the missing label for the date of birth for emails (#479)
 - Fix type error with dates in the old registration model (#477)
