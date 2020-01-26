@@ -1126,44 +1126,32 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
         );
     }
 
-    public function testSingleViewForSeminarWithoutImageDoesNotDisplayImage()
+    /**
+     * @test
+     */
+    public function singleViewForEventWithoutImageNotDisplaysImage()
     {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
-        $this->subject->setConfigurationValue(
-            'detailPID',
-            $this->testingFramework->createFrontEndPage()
-        );
-        $this->subject->setConfigurationValue(
-            'seminarImageSingleViewWidth',
-            260
-        );
-        $this->subject->setConfigurationValue(
-            'seminarImageSingleViewHeight',
-            160
-        );
-        $this->subject->piVars['showUid'] = $this->seminarUid;
+        $this->subject->setConfigurationValue('detailPID', $this->testingFramework->createFrontEndPage());
+        $this->subject->setConfigurationValue('seminarImageSingleViewWidth', 260);
+        $this->subject->setConfigurationValue('seminarImageSingleViewHeight', 160);
 
-        self::assertNotContains(
-            'style="background-image:',
-            $this->subject->main('', [])
-        );
+        $this->subject->piVars['showUid'] = (string)$this->seminarUid;
+        $result = $this->subject->main('', []);
+
+        self::assertNotContains('<p class="tx-seminars-pi1-image">', $result);
+        self::assertNotContains('<img', $result);
     }
 
-    public function testSingleViewDisplaysSeminarImage()
+    /**
+     * @test
+     */
+    public function singleViewForEventWithImageDisplaysEventImage()
     {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
-        $this->subject->setConfigurationValue(
-            'detailPID',
-            $this->testingFramework->createFrontEndPage()
-        );
-        $this->subject->setConfigurationValue(
-            'seminarImageSingleViewWidth',
-            260
-        );
-        $this->subject->setConfigurationValue(
-            'seminarImageSingleViewHeight',
-            160
-        );
+        $this->subject->setConfigurationValue('detailPID', $this->testingFramework->createFrontEndPage());
+        $this->subject->setConfigurationValue('seminarImageSingleViewWidth', 260);
+        $this->subject->setConfigurationValue('seminarImageSingleViewHeight', 160);
 
         $this->testingFramework->createDummyFile('test_foo.gif', base64_decode(self::BLANK_GIF, true));
         $this->testingFramework->changeRecord(
@@ -1171,34 +1159,26 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
             $this->seminarUid,
             ['image' => 'test_foo.gif']
         );
-        $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        $seminarWithImage = $this->subject->main('', []);
+        $this->subject->piVars['showUid'] = (string)$this->seminarUid;
+        $result = $this->subject->main('', []);
 
         $this->testingFramework->deleteDummyFile('test_foo.gif');
 
-        self::assertContains(
-            'style="background-image:',
-            $seminarWithImage
-        );
+        self::assertContains('<p class="tx-seminars-pi1-image">', $result);
+        self::assertContains('<img', $result);
     }
 
-    public function testSingleViewForHideFieldsContainingImageHidesSeminarImage()
+    /**
+     * @test
+     */
+    public function singleViewForHideFieldsContainingImageHidesEventImage()
     {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
-        $this->subject->setConfigurationValue(
-            'detailPID',
-            $this->testingFramework->createFrontEndPage()
-        );
+        $this->subject->setConfigurationValue('detailPID', $this->testingFramework->createFrontEndPage());
         $this->subject->setConfigurationValue('hideFields', 'image');
-        $this->subject->setConfigurationValue(
-            'seminarImageSingleViewWidth',
-            260
-        );
-        $this->subject->setConfigurationValue(
-            'seminarImageSingleViewHeight',
-            160
-        );
+        $this->subject->setConfigurationValue('seminarImageSingleViewWidth', 260);
+        $this->subject->setConfigurationValue('seminarImageSingleViewHeight', 160);
 
         $this->testingFramework->createDummyFile('test_foo.gif', base64_decode(self::BLANK_GIF, true));
         $this->testingFramework->changeRecord(
@@ -1206,16 +1186,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
             $this->seminarUid,
             ['image' => 'test_foo.gif']
         );
-        $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        $seminarWithImage = $this->subject->main('', []);
+        $this->subject->piVars['showUid'] = (string)$this->seminarUid;
+        $result = $this->subject->main('', []);
 
         $this->testingFramework->deleteDummyFile('test_foo.gif');
 
-        self::assertNotContains(
-            'style="background-image:',
-            $seminarWithImage
-        );
+        self::assertNotContains('<p class="tx-seminars-pi1-image">', $result);
+        self::assertNotContains('<img', $result);
     }
 
     /**

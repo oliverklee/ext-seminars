@@ -739,9 +739,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         );
     }
 
-    ///////////////////////////
-    // Single view functions.
-    ///////////////////////////
+    /*
+     * Single view functions.
+     */
 
     /**
      * Displays detailed data for an event.
@@ -795,13 +795,14 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
 
         $this->setEventTypeMarker();
 
-        $this->setMarker(
-            'STYLE_SINGLEVIEWTITLE',
-            $this->seminar->createImageForSingleView(
-                $this->getConfValueInteger('seminarImageSingleViewWidth'),
-                $this->getConfValueInteger('seminarImageSingleViewHeight')
-            )
-        );
+        // This is for old templates that still have the removed marker.
+        $this->setMarker('STYLE_SINGLEVIEWTITLE', '');
+
+        if ($this->seminar->hasImage()) {
+            $this->setMarker('SINGLE_VIEW_IMAGE', $this->createImageForSingleView());
+        } else {
+            $this->hideSubparts('image', 'FIELD_WRAPPER');
+        }
 
         $this->setMarker('title', \htmlspecialchars($this->seminar->getTitle(), ENT_QUOTES | ENT_HTML5));
         $this->setMarker('uid', $this->seminar->getUid());
@@ -882,6 +883,23 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         }
 
         return $result;
+    }
+
+    /**
+     * @return string image tag
+     */
+    private function createImageForSingleView(): string
+    {
+        $imageConfiguration = [
+            'altText' => '',
+            'file' => \Tx_Seminars_FrontEnd_AbstractView::UPLOAD_PATH . $this->seminar->getImage(),
+            'file.' => [
+                'width' => $this->getConfValueInteger('seminarImageSingleViewWidth'),
+                'height' => $this->getConfValueInteger('seminarImageSingleViewHeight'),
+            ],
+        ];
+
+        return $this->cObj->cObjGetSingle('IMAGE', $imageConfiguration);
     }
 
     /**
