@@ -27,7 +27,7 @@ If you like this extension, please submit a rating for it in the TER.
    WhatDoesItDo/Index
    KeyFeatures/Index
    Screenshots/Index
-   LiveExamples/Index
+   LiveExamples
    Credits/Index
    Sponsorship/Index
    DutchManual/Index

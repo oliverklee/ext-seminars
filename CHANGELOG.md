@@ -23,6 +23,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Display the name of the current functional test (#256)
 
 ### Changed
+- Update the list of live examples (#498)
 - !!! Use an image tag instead of background image in the detail view (#494)
 - Move the data handling from the old model to the hook (#483, #484, #485, #493)
 - Update registration email hooks (#445)
