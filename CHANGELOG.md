@@ -6,6 +6,18 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 3.0.0
+
+### Added
 - Add tests for the DataMapper sanitization (#454, #456)
 - Add new backend registration list hook (#437, #458)
 - Add new selector widget hook (#436)
@@ -119,6 +131,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Stop using removed oelib functionality (#265)
 - Allow longer execution time for Composer scripts (#255)
 - Use the new TypoScript file paths in the userfunc tests (#253)
+
+Special thanks go to @mk-mxp for his work on the hooks.
 
 ## 2.2.1
 
