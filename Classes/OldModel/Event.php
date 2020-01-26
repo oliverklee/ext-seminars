@@ -4098,7 +4098,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Checks whether we have an image.
      *
-     * @return bool TRUE if we have an non-empty image, FALSE otherwise.
+     * @return bool
      */
     public function hasImage(): bool
     {

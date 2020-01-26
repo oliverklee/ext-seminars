@@ -345,9 +345,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
                 // We still use the processEventEditorActions call in the next case.
             case 'my_entered_events':
                 $this->processEventEditorActions();
-                // The fallthrough is intended
-                // because createListView() will differentiate later.
-                // no break
+            // The fallthrough is intended
+            // because createListView() will differentiate later.
+            // no break
             case 'topic_list':
                 // The fallthrough is intended
                 // because createListView() will differentiate later.
@@ -458,7 +458,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
                 foreach ($hookClasses as $hookClass) {
                     GeneralUtility::deprecationLog(
                         $hookClass . ' - since seminars 3.0, interface \\Tx_Seminars_Interface_Hook_EventSingleView'
-                            . ' will be removed in seminars 4.0'
+                        . ' will be removed in seminars 4.0'
                     );
                     $hookInstance = GeneralUtility::getUserObj($hookClass);
                     if (!($hookInstance instanceof \Tx_Seminars_Interface_Hook_EventSingleView)) {
@@ -500,7 +500,10 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
     protected function getRegistrationFormHookProvider(): HookProvider
     {
         if ($this->registrationFormHookProvider === null) {
-            $this->registrationFormHookProvider = GeneralUtility::makeInstance(HookProvider::class, SeminarRegistrationForm::class);
+            $this->registrationFormHookProvider = GeneralUtility::makeInstance(
+                HookProvider::class,
+                SeminarRegistrationForm::class
+            );
         }
 
         return $this->registrationFormHookProvider;
@@ -741,17 +744,15 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
     ///////////////////////////
 
     /**
-     * Displays detailed data for a seminar.
-     * Fields listed in $this->subpartsToHide are hidden (ie. not displayed).
+     * Displays detailed data for an event.
      *
-     * @return string HTML for the plugin
+     * Fields listed in $this->subpartsToHide get hidden (i.e., not displayed).
+     *
+     * @return string
      */
     protected function createSingleView(): string
     {
-        $this->hideSubparts(
-            $this->getConfValueString('hideFields', 's_template_special'),
-            'FIELD_WRAPPER'
-        );
+        $this->hideSubparts($this->getConfValueString('hideFields', 's_template_special'), 'FIELD_WRAPPER');
 
         if ($this->showUid <= 0) {
             $this->setMarker('error_text', $this->translate('message_missingSeminarNumber'));
