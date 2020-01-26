@@ -16,6 +16,7 @@ Most of the documentation is in ReST format
 
 ## Compatibility with TYPO3 9LTS/9.5
 
-If you need this extension to work with TYPO3 9LTS/9.5, please consider
-supporting the [crowdfunding campaign](https://coders.care/for/crowdfunding/seminars/)
+This extension works with TYPO3 9LTS/9.5, but is does not work smoothly yet.
+Please consider supporting the
+[crowdfunding campaign](https://coders.care/for/crowdfunding/seminars/)
 to make this happen.
