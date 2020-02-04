@@ -16,7 +16,7 @@
 Bekannte Probleme
 -----------------
 
-- Viele Idee für diese Extension sind noch nicht umgesetzt. Sie können
+- Viele Ideen für diese Extension sind noch nicht umgesetzt. Sie können
   gerne helfen oder die weitere Entwicklung sponsern.
 
 - Die Veranstaltungszeiten werden ohne Einheit dargestellt, zum Beispiel
