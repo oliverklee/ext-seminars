@@ -47,10 +47,6 @@ TYPO3- Erweiterungen auf Ihrem Server:
 
 Anschließend können Sie die Erweiterung installieren.
 
-Wenn Sie alle drei Extensions  *seminars* , *onetimeaccount* und
-*cal\_ts\_service* benutzen, ist die Extension **seminarscalredirect**
-möglicherweise nützlich für Sie.
-
 **Ende des überarbeiteten/übersetzen Teils**
 
 Im Extension-Manager gibt einige Konfigurationseinstellungen.  **Bitte
