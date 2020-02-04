@@ -44,10 +44,6 @@ extensions to be installed beforehand:
 
 Then you can install this extension.
 
-If you're using all three extensions  *seminars* , *onetimeaccount*
-and *cal\_ts\_service* , the extension **seminarscalredirect** might
-be useful for you.
-
 In the Extension Manager, there will be some options.  **Make sure to
 save these options at least once (even if you don’t change them).**
 The default values are good for starters.
