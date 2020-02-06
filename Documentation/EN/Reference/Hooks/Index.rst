@@ -580,21 +580,21 @@ There are hooks into the date and time span creation of the seminars. If at any 
 is required, these hooks are called to allow modification of the date or time span assembling. See also
 :file:`Classes/OldModel/AbstractTimeSpan.php` for details about the default methods.
 
-Register your class that implements :php:`\OliverKlee\Seminars\Hooks\Interfaces\TimeSpan`
+Register your class that implements :php:`\OliverKlee\Seminars\Hooks\Interfaces\DateTimeSpan`
 like this in :file:`ext_localconf.php` of your extension:
 
 .. code-block:: php
 
-    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\TimeSpan::class][]
-        = \Tx_Seminarspaypal_Hooks_TimeSpan::class;
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\DateTimeSpan::class][]
+        = \Tx_Seminarspaypal_Hooks_DateTimeSpan::class;
 
 Implement the methods required by the interface:
 
 .. code-block:: php
 
-    use \OliverKlee\Seminars\Hooks\Interfaces\TimeSpan;
+    use \OliverKlee\Seminars\Hooks\Interfaces\DateTimeSpan;
 
-    class Tx_Seminarspaypal_Hooks_TimeSpan implements TimeSpan
+    class Tx_Seminarspaypal_Hooks_DateTimeSpan implements DateTimeSpan
     {
         /**
          * Modifies the date span string.

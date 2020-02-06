@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\OldModel;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
-use OliverKlee\Seminars\Hooks\Interfaces\TimeSpan;
+use OliverKlee\Seminars\Hooks\Interfaces\DateTimeSpan;
 use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingTimeSpan;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -152,12 +152,12 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
      */
     public function getTimeForNoTimeNotCallsHook()
     {
-        $hook = $this->createMock(TimeSpan::class);
+        $hook = $this->createMock(DateTimeSpan::class);
         $hook->expects(self::never())->method('modifyDateSpan');
         $hook->expects(self::never())->method('modifyTimeSpan');
 
         $hookClass = \get_class($hook);
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TimeSpan::class][] = $hookClass;
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][DateTimeSpan::class][] = $hookClass;
         GeneralUtility::addInstance($hookClass, $hook);
 
         $this->subject->getTime();
@@ -170,12 +170,12 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     {
         $this->subject->setBeginDateAndTime(\mktime(9, 50, 0, 1, 1, 2010));
 
-        $hook = $this->createMock(TimeSpan::class);
+        $hook = $this->createMock(DateTimeSpan::class);
         $hook->expects(self::never())->method('modifyDateSpan');
         $hook->expects(self::never())->method('modifyTimeSpan');
 
         $hookClass = \get_class($hook);
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TimeSpan::class][] = $hookClass;
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][DateTimeSpan::class][] = $hookClass;
         GeneralUtility::addInstance($hookClass, $hook);
 
         $this->subject->getTime();
@@ -188,12 +188,12 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     {
         $this->subject->setEndDateAndTime(\mktime(18, 30, 0, 1, 1, 2010));
 
-        $hook = $this->createMock(TimeSpan::class);
+        $hook = $this->createMock(DateTimeSpan::class);
         $hook->expects(self::never())->method('modifyDateSpan');
         $hook->expects(self::never())->method('modifyTimeSpan');
 
         $hookClass = \get_class($hook);
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TimeSpan::class][] = $hookClass;
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][DateTimeSpan::class][] = $hookClass;
         GeneralUtility::addInstance($hookClass, $hook);
 
         $this->subject->getTime();
@@ -207,12 +207,12 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
         $this->subject->setBeginDateAndTime(\mktime(9, 50, 0, 1, 1, 2010));
         $this->subject->setEndDateAndTime(\mktime(9, 50, 0, 1, 3, 2010));
 
-        $hook = $this->createMock(TimeSpan::class);
+        $hook = $this->createMock(DateTimeSpan::class);
         $hook->expects(self::never())->method('modifyDateSpan');
         $hook->expects(self::never())->method('modifyTimeSpan');
 
         $hookClass = \get_class($hook);
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TimeSpan::class][] = $hookClass;
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][DateTimeSpan::class][] = $hookClass;
         GeneralUtility::addInstance($hookClass, $hook);
 
         $this->subject->getTime();
@@ -221,23 +221,25 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getTimeForBeginTimeAndEndTimeOnDifferentTimesCallsHookAndReturnsModifiedValue()
+    public function getTimeForBeginTimeAndEndTimeOnDifferentTimesCallsHookAndUsesModifiedValue()
     {
+        $modifiedValue = 'modified';
+
         $this->subject->setBeginDateAndTime(\mktime(9, 50, 0, 1, 1, 2010));
         $this->subject->setEndDateAndTime(\mktime(18, 30, 0, 1, 1, 2010));
 
-        $hook = $this->createMock(TimeSpan::class);
+        $hook = $this->createMock(DateTimeSpan::class);
         $hook->expects(self::never())->method('modifyDateSpan');
         $hook->expects(self::once())->method('modifyTimeSpan')
             ->with('09:50&#8211;18:30', '09:50', '&#8211;', '18:30')
-            ->willReturn('modified');
+            ->willReturn($modifiedValue);
 
         $hookClass = \get_class($hook);
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TimeSpan::class][] = $hookClass;
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][DateTimeSpan::class][] = $hookClass;
         GeneralUtility::addInstance($hookClass, $hook);
 
         self::assertSame(
-            'modified' . ' ' . $this->getLanguageService()->getLL('label_hours'),
+            $modifiedValue . ' ' . $this->getLanguageService()->getLL('label_hours'),
             $this->subject->getTime()
         );
     }
@@ -316,12 +318,12 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
      */
     public function getDateForNoDateNotCallsHook()
     {
-        $hook = $this->createMock(TimeSpan::class);
+        $hook = $this->createMock(DateTimeSpan::class);
         $hook->expects(self::never())->method('modifyDateSpan');
         $hook->expects(self::never())->method('modifyTimeSpan');
 
         $hookClass = \get_class($hook);
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TimeSpan::class][] = $hookClass;
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][DateTimeSpan::class][] = $hookClass;
         GeneralUtility::addInstance($hookClass, $hook);
 
         $this->subject->getDate();
@@ -334,12 +336,12 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     {
         $this->subject->setBeginDateAndTime(\mktime(0, 0, 0, 1, 1, 2010));
 
-        $hook = $this->createMock(TimeSpan::class);
+        $hook = $this->createMock(DateTimeSpan::class);
         $hook->expects(self::never())->method('modifyDateSpan');
         $hook->expects(self::never())->method('modifyTimeSpan');
 
         $hookClass = \get_class($hook);
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TimeSpan::class][] = $hookClass;
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][DateTimeSpan::class][] = $hookClass;
         GeneralUtility::addInstance($hookClass, $hook);
 
         $this->subject->getDate();
@@ -352,12 +354,12 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     {
         $this->subject->setEndDateAndTime(\mktime(0, 0, 0, 1, 1, 2010));
 
-        $hook = $this->createMock(TimeSpan::class);
+        $hook = $this->createMock(DateTimeSpan::class);
         $hook->expects(self::never())->method('modifyDateSpan');
         $hook->expects(self::never())->method('modifyTimeSpan');
 
         $hookClass = \get_class($hook);
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TimeSpan::class][] = $hookClass;
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][DateTimeSpan::class][] = $hookClass;
         GeneralUtility::addInstance($hookClass, $hook);
 
         $this->subject->getDate();
@@ -371,12 +373,12 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
         $this->subject->setBeginDateAndTime(\mktime(0, 0, 0, 1, 1, 2010));
         $this->subject->setEndDateAndTime(\mktime(0, 0, 0, 1, 1, 2010));
 
-        $hook = $this->createMock(TimeSpan::class);
+        $hook = $this->createMock(DateTimeSpan::class);
         $hook->expects(self::never())->method('modifyDateSpan');
         $hook->expects(self::never())->method('modifyTimeSpan');
 
         $hookClass = \get_class($hook);
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TimeSpan::class][] = $hookClass;
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][DateTimeSpan::class][] = $hookClass;
         GeneralUtility::addInstance($hookClass, $hook);
 
         $this->subject->getDate();
@@ -385,21 +387,23 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getDateForBeginDateAndEndDateOnDifferentDaysCallsHookAndReturnsModifiedValue()
+    public function getDateForBeginDateAndEndDateOnDifferentDaysCallsHookAndUsesModifiedValue()
     {
+        $modifiedValue = 'modified';
+
         $this->subject->setBeginDateAndTime(\mktime(0, 0, 0, 1, 1, 2010));
         $this->subject->setEndDateAndTime(\mktime(0, 0, 0, 1, 3, 2010));
 
-        $hook = $this->createMock(TimeSpan::class);
+        $hook = $this->createMock(DateTimeSpan::class);
         $hook->expects(self::once())->method('modifyDateSpan')
             ->with('01.&#8211;03.01.2010', '01.01.2010', '&#8211;', '03.01.2010')
-            ->willReturn('modified');
+            ->willReturn($modifiedValue);
         $hook->expects(self::never())->method('modifyTimeSpan');
 
         $hookClass = \get_class($hook);
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TimeSpan::class][] = $hookClass;
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][DateTimeSpan::class][] = $hookClass;
         GeneralUtility::addInstance($hookClass, $hook);
 
-        self::assertSame('modified', $this->subject->getDate());
+        self::assertSame($modifiedValue, $this->subject->getDate());
     }
 }

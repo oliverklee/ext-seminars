@@ -5,18 +5,18 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Hooks\Interfaces;
 
 /**
- * Use this interface for hooks concerning the date span.
+ * Use this interface for hooks concerning the date or the time span.
  *
  * @author Michael Kramer <m.kramer@mxp.de>
  */
-interface TimeSpan extends Hook
+interface DateTimeSpan extends Hook
 {
     /**
      * Modifies the date span string.
      *
-     * The date format for the date parts are configured in TypoScript (`dateFormatYMD` etc).
+     * The date format for the date parts are configured in TypoScript (`dateFormatYMD` etc.).
      * This allows modifying the assembly of start and end date to the date span.
-     * E.g. for Hungarian: '01.-03.01.2019' -> '2019.01.01.-03.'.
+     * E.g., for Hungarian: '01.-03.01.2019' -> '2019.01.01.-03.'.
      *
      * @param string $dateSpan the date span produced by `AbstractTimeSpan::getDate()`
      * @param string $beginDate the formatted begin date part (`dateFormatYMD`)
@@ -32,7 +32,7 @@ interface TimeSpan extends Hook
      *
      * The time format for the time parts is configured in TypoScript (`timeFormat`).
      * This allows modifying the assembly of start and end time to the time span.
-     * E.g. for Hungarian: '9:00-10:30' -> '9:00tol 10:30ban'.
+     * E.g., for Hungarian: '9:00-10:30' -> '9:00tol 10:30ban'.
      *
      * @param string $timeSpan the time span produced by `AbstractTimeSpan::getTime()`
      * @param string $beginTime the formatted begin time part (`timeFormat`)

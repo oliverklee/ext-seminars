@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\Seminars\Hooks\HookProvider;
-use OliverKlee\Seminars\Hooks\Interfaces\TimeSpan;
+use OliverKlee\Seminars\Hooks\Interfaces\DateTimeSpan;
 use OliverKlee\Seminars\OldModel\AbstractModel;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -19,7 +19,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel imple
     /**
      * @var HookProvider|null
      */
-    protected $timeSpanHookProvider = null;
+    protected $dateTimeSpanHookProvider = null;
 
     /**
      * Gets the begin date.
@@ -121,7 +121,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel imple
                     $result = $beginDateDay;
                 }
                 $result .= $dash . $endDateDay;
-                $result = $this->getTimeSpanHookProvider()->executeHookReturningModifiedValue(
+                $result = $this->getDateTimeSpanHookProvider()->executeHookReturningModifiedValue(
                     'modifyDateSpan',
                     $result,
                     $beginDateDay,
@@ -174,7 +174,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel imple
         // and the end time is not the same as the begin time.
         if (($beginTime !== $endTime) && $this->hasEndTime()) {
             $result .= $dash . $endTime;
-            $result = $this->getTimeSpanHookProvider()->executeHookReturningModifiedValue(
+            $result = $this->getDateTimeSpanHookProvider()->executeHookReturningModifiedValue(
                 'modifyTimeSpan',
                 $result,
                 $beginTime,
@@ -328,19 +328,19 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel imple
     abstract public function getPlaceShort(): string;
 
     /**
-     * Gets the hook provider for the list view.
+     * Gets the hook provider for the date and time span.
      *
      * @return HookProvider
      */
-    protected function getTimeSpanHookProvider(): HookProvider
+    protected function getDateTimeSpanHookProvider(): HookProvider
     {
-        if (!$this->timeSpanHookProvider instanceof HookProvider) {
-            $this->timeSpanHookProvider = GeneralUtility::makeInstance(
+        if (!$this->dateTimeSpanHookProvider instanceof HookProvider) {
+            $this->dateTimeSpanHookProvider = GeneralUtility::makeInstance(
                 HookProvider::class,
-                TimeSpan::class
+                DateTimeSpan::class
             );
         }
 
-        return $this->timeSpanHookProvider;
+        return $this->dateTimeSpanHookProvider;
     }
 }

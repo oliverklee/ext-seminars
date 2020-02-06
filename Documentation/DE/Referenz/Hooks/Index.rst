@@ -581,21 +581,21 @@ eine Datums- oder Zeitspanne ausgegeben werden soll, werden diese Hooks aufgeruf
 Anpassen der Zusammensetzung. Für die Standard-Zusammensetzung siehe
 :file:`Classes/OldModel/AbstractTimeSpan.php`.
 
-Ihre Klasse, die :php:`\OliverKlee\Seminars\Hooks\Interfaces\TimeSpan` implementiert,
+Ihre Klasse, die :php:`\OliverKlee\Seminars\Hooks\Interfaces\DateTimeSpan` implementiert,
 machen Sie seminars in :file:`ext_localconf.php` Ihrer Extension bekannt:
 
 .. code-block:: php
 
-    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\TimeSpan::class][]
-        = \Tx_Seminarspaypal_Hooks_TimeSpan::class;
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\DateTimeSpan::class][]
+        = \Tx_Seminarspaypal_Hooks_DateTimeSpan::class;
 
 Implementieren Sie die benötigten Methoden gemäß dem Interface:
 
 .. code-block:: php
 
-    use \OliverKlee\Seminars\Hooks\Interfaces\TimeSpan;
+    use \OliverKlee\Seminars\Hooks\Interfaces\DateTimeSpan;
 
-    class Tx_Seminarspaypal_Hooks_TimeSpan implements TimeSpan
+    class Tx_Seminarspaypal_Hooks_DateTimeSpan implements DateTimeSpan
     {
         /**
          * Modifies the date span string.
