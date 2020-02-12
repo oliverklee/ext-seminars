@@ -8,12 +8,14 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Improve the code autoformatting (#502)
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
+- Improve the manual (#500, #501)
 
 ## 3.0.0
 
