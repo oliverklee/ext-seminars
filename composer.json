@@ -40,20 +40,20 @@
         "typo3/cms-lang": "^8.7 || ^9.5"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.16.0",
-        "helhum/typo3-console": "^5.7.2",
-        "helmich/typo3-typoscript-lint": "^1.5.0 || ^2.0.1",
+        "friendsofphp/php-cs-fixer": "^2.16.1",
+        "helhum/typo3-console": "^5.8.2",
+        "helmich/typo3-typoscript-lint": "^1.5.0 || ^2.1.1",
         "mikey179/vfsstream": "^1.6.8",
-        "nimut/testing-framework": "^4.1.8",
+        "nimut/testing-framework": "^4.1.11",
         "oliverklee/phpunit": "^6.5.14",
-        "phpspec/prophecy": "^1.9.0",
+        "phpspec/prophecy": "^1.10.2",
         "phpunit/phpunit": "^6.5.14",
-        "squizlabs/php_codesniffer": "^3.5.2",
+        "squizlabs/php_codesniffer": "^3.5.4",
         "typo3/cms-scheduler": "^8.7 || ^9.5"
     },
     "suggest": {
         "in2code/femanager": "^5.1",
-        "oliverklee/onetimeaccount": "^3.0 || ^4.0",
+        "oliverklee/onetimeaccount": "^4.0",
         "sjbr/sr-feuser-register": "^5.1 || ^6.0"
     },
     "replace": {
