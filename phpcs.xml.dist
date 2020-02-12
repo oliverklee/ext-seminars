@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ruleset name="phpList Coding Standard">
     <description>
-        This standard requires PHP_CodeSniffer >= 3.5.2.
+        This standard requires PHP_CodeSniffer >= 3.5.4.
     </description>
 
     <arg name="colors"/>
