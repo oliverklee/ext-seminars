@@ -15,7 +15,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
-- Improve the manual (#500, #501)
+- Improve the manual (#500, #501, #504)
 
 ## 3.0.0
 
