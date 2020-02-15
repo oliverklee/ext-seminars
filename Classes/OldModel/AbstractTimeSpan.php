@@ -124,9 +124,8 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel imple
                 $result = $this->getDateTimeSpanHookProvider()->executeHookReturningModifiedValue(
                     'modifyDateSpan',
                     $result,
-                    $beginDateDay,
-                    $dash,
-                    $endDateDay
+                    $this,
+                    $dash
                 );
             }
         } else {
@@ -177,9 +176,8 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel imple
             $result = $this->getDateTimeSpanHookProvider()->executeHookReturningModifiedValue(
                 'modifyTimeSpan',
                 $result,
-                $beginTime,
-                $dash,
-                $endTime
+                $this,
+                $dash
             );
         }
         $hours = $this->translate('label_hours');

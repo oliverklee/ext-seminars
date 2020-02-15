@@ -231,7 +231,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
         $hook = $this->createMock(DateTimeSpan::class);
         $hook->expects(self::never())->method('modifyDateSpan');
         $hook->expects(self::once())->method('modifyTimeSpan')
-            ->with('09:50&#8211;18:30', '09:50', '&#8211;', '18:30')
+            ->with('09:50&#8211;18:30', $this->subject, '&#8211;')
             ->willReturn($modifiedValue);
 
         $hookClass = \get_class($hook);
@@ -396,7 +396,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
 
         $hook = $this->createMock(DateTimeSpan::class);
         $hook->expects(self::once())->method('modifyDateSpan')
-            ->with('01.&#8211;03.01.2010', '01.01.2010', '&#8211;', '03.01.2010')
+            ->with('01.&#8211;03.01.2010', $this->subject, '&#8211;')
             ->willReturn($modifiedValue);
         $hook->expects(self::never())->method('modifyTimeSpan');
 

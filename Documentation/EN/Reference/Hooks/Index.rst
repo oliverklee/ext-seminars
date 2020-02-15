@@ -599,18 +599,26 @@ Implement the methods required by the interface:
         /**
          * Modifies the date span string.
          *
-         * The date format for the date parts are configured in TypoScript (`dateFormatYMD` etc).
          * This allows modifying the assembly of start and end date to the date span.
-         * E.g. for Hungarian: '01.-03.01.2019' -> '2019.01.01.-03.'.
+         * E.g., for Hungarian: '01.-03.01.2019' -> '2019.01.01.-03.'.
+         *
+         * The date format for the date parts are configured in TypoScript (`dateFormatYMD` etc.).
+         * Get them from `$dateTimeSpan->getConfValueString('dateFormatYMD')` etc. The event
+         * dates are also retrievable:
+         * `$beginDateTime = $dateTimeSpan->getBeginDateAsTimestamp();`
+         * `$endDateTime = $dateTimeSpan->getEndDateAsTimestamp();`
          *
          * @param string $dateSpan the date span produced by `AbstractTimeSpan::getDate()`
-         * @param string $beginDate the formatted begin date part (`dateFormatYMD`)
+         * @param \Tx_Seminars_OldModel_AbstractTimeSpan $dateTimeSpan the date provider
          * @param string $dash the glue used by `AbstractTimeSpan::getDate()` (may be HTML encoded)
-         * @param string $endDate the formatted end date part (`dateFormatYMD`)
          *
          * @return string the modified date span to use
          */
-        public function modifyDateSpan(string $dateSpan, string $beginDate, string $dash, string $endDate): string
+        public function modifyDateSpan(
+            string $dateSpan,
+            \Tx_Seminars_OldModel_AbstractTimeSpan $dateTimeSpan,
+            string $dash
+        ): string
         {
             // Your code here
         }
@@ -618,18 +626,26 @@ Implement the methods required by the interface:
         /**
          * Modifies the time span string.
          *
-         * The time format for the time parts is configured in TypoScript (`timeFormat`).
          * This allows modifying the assembly of start and end time to the time span.
-         * E.g. for Hungarian: '9:00-10:30' -> '9:00tol 10:30ban'.
+         * E.g., for Hungarian: '9:00-10:30' -> '9:00tol 10:30ban'.
+         *
+         * The time format for the time parts is configured in TypoScript (`timeFormat`).
+         * Get it from `$dateTimeSpan->getConfValueString('timeFormat')`. The event
+         * times are also retrievable:
+         * `$beginDateTime = $dateTimeSpan->getBeginDateAsTimestamp();`
+         * `$endDateTime = $dateTimeSpan->getEndDateAsTimestamp();`
          *
          * @param string $timeSpan the time span produced by `AbstractTimeSpan::getTime()`
-         * @param string $beginTime the formatted begin time part (`timeFormat`)
+         * @param \Tx_Seminars_OldModel_AbstractTimeSpan $dateTimeSpan the date provider
          * @param string $dash the glue used by `AbstractTimeSpan::getTime()` (may be HTML encoded)
-         * @param string $endTime the formatted end time part (`timeFormat`)
          *
          * @return string the modified time span to use
          */
-        public function modifyTimeSpan(string $timeSpan, string $beginTime, string $dash, string $endTime): string
+        public function modifyTimeSpan(
+            string $timeSpan,
+            \Tx_Seminars_OldModel_AbstractTimeSpan $dateTimeSpan,
+            string $dash
+        ): string
         {
             // Your code here
         }
