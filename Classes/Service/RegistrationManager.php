@@ -731,9 +731,11 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
                 $vacancies -= $registration->getSeats();
 
                 $user = $registration->getFrontEndUser();
-                foreach ($this->getHooks() as $hook) {
-                    if (method_exists($hook, 'seminarRegistrationMovedFromQueue')) {
-                        $hook->seminarRegistrationMovedFromQueue($registration, $user);
+                if ($user instanceof \Tx_Seminars_Model_FrontEndUser) {
+                    foreach ($this->getHooks() as $hook) {
+                        if (method_exists($hook, 'seminarRegistrationMovedFromQueue')) {
+                            $hook->seminarRegistrationMovedFromQueue($registration, $user);
+                        }
                     }
                 }
 
@@ -819,13 +821,14 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
             return;
         }
 
-        if (!$oldRegistration->getFrontEndUser()->hasEmailAddress()) {
+        $user = $oldRegistration->getFrontEndUser();
+        if (!$user instanceof \Tx_Seminars_Model_FrontEndUser || !$user->hasEmailAddress()) {
             return;
         }
 
         /** @var \Tx_Oelib_Mail $eMailNotification */
         $eMailNotification = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
-        $eMailNotification->addRecipient($oldRegistration->getFrontEndUser());
+        $eMailNotification->addRecipient($user);
         $eMailNotification->setSender($event->getFirstOrganizer());
         $eMailNotification->setSubject(
             $this->translate('email_' . $helloSubjectPrefix . 'Subject') . ': ' . $event->getTitleAndDate('-')
@@ -833,10 +836,9 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
 
         $this->initializeTemplate();
 
-        $mailFormat = \Tx_Oelib_ConfigurationProxy::getInstance('seminars')->getAsInteger('eMailFormatForAttendees');
+        $emailFormat = \Tx_Oelib_ConfigurationProxy::getInstance('seminars')->getAsInteger('eMailFormatForAttendees');
         if (
-            ($mailFormat == self::SEND_HTML_MAIL)
-            || (($mailFormat == self::SEND_USER_MAIL) && $oldRegistration->getFrontEndUser()->wantsHtmlEmail())
+            $emailFormat === self::SEND_HTML_MAIL || ($emailFormat === self::SEND_USER_MAIL && $user->wantsHtmlEmail())
         ) {
             $eMailNotification->setCssFile($this->getConfValueString('cssFileForAttendeeMail'));
             $eMailNotification->setHTMLMessage(
@@ -888,7 +890,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
             } elseif (method_exists($hook, 'modifyThankYouEmail')) {
                 GeneralUtility::deprecationLog(
                     \get_class($hook) . '::modifyThankYouEmail() - since seminars 3.0,'
-                        . ' will be removed in seminars 4.0'
+                    . ' will be removed in seminars 4.0'
                 );
                 $hook->modifyThankYouEmail($mail, $registration);
             }
@@ -1558,7 +1560,12 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
     {
         /** @var \Tx_Seminars_EmailSalutation $salutation */
         $salutation = GeneralUtility::makeInstance(\Tx_Seminars_EmailSalutation::class);
-        $salutationText = $salutation->getSalutation($registration->getFrontEndUser());
+        $user = $registration->getFrontEndUser();
+        if ($user instanceof \Tx_Seminars_Model_FrontEndUser) {
+            $salutationText = $salutation->getSalutation($user);
+        } else {
+            $salutationText = '';
+        }
         $this->setMarker('salutation', $salutationText);
 
         $event = $registration->getSeminarObject();
@@ -1648,8 +1655,8 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
                     if ($hookObject instanceof RegistrationEmailHookInterface) {
                         GeneralUtility::deprecationLog(
                             $hookClass . ' - since seminars 3.0,'
-                                . ' interface \\OliverKlee\\Seminars\\Hooks\\RegistrationEmailHookInterface'
-                                . ' will be removed in seminars 4.0'
+                            . ' interface \\OliverKlee\\Seminars\\Hooks\\RegistrationEmailHookInterface'
+                            . ' will be removed in seminars 4.0'
                         );
                     }
                 }

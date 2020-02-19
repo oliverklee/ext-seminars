@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add `Registration::setFrontEndUser()` and cache it (#508)
 
 ### Changed
 - Move more tests to the new testing framework (#507)
