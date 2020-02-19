@@ -17,16 +17,6 @@ final class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
     use LanguageHelper;
 
     /**
-     * @var string
-     */
-    const DATE_FORMAT = '%d.%m.%Y';
-
-    /**
-     * @var string
-     */
-    const TIME_FORMAT = '%H:%M';
-
-    /**
      * @var TestingRegistration
      */
     private $subject = null;
@@ -40,11 +30,6 @@ final class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
      * @var int the UID of a seminar to which the fixture relates
      */
     private $seminarUid = 0;
-
-    /**
-     * @var int the UID of the registration the fixture relates to
-     */
-    private $registrationUid = 0;
 
     /**
      * @var int the UID of the user the registration relates to
@@ -88,7 +73,7 @@ final class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
                 'email' => 'foo@bar.com',
             ]
         );
-        $this->registrationUid = $this->testingFramework->createRecord(
+        $registrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
             [
                 'title' => 'test title',
@@ -101,13 +86,11 @@ final class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
             ]
         );
 
-        $this->subject = new TestingRegistration($this->registrationUid);
+        $this->subject = new TestingRegistration($registrationUid);
         $this->subject->setConfigurationValue(
             'templateFile',
             'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
         );
-        $this->subject->setConfigurationValue('dateFormatYMD', self::DATE_FORMAT);
-        $this->subject->setConfigurationValue('timeFormat', self::TIME_FORMAT);
     }
 
     protected function tearDown()
@@ -322,7 +305,7 @@ final class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationDataForRegisteredThemselvesZeroReturnsLabelNo()
+    public function getRegistrationDataForRegisteredThemselvesFalseReturnsLabelNo()
     {
         $this->subject->setRegisteredThemselves(false);
 
@@ -335,7 +318,7 @@ final class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationDataForRegisteredThemselvesOneReturnsLabelYes()
+    public function getRegistrationDataForRegisteredThemselvesTrueReturnsLabelYes()
     {
         $this->subject->setRegisteredThemselves(true);
 
@@ -901,253 +884,6 @@ final class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
             'first last',
             $this->subject->getUserData('name')
         );
-    }
-
-    /*
-     * Tests concerning dumpUserValues
-     */
-
-    /**
-     * @test
-     */
-    public function dumpUserValuesContainsUserNameIfRequested()
-    {
-        $this->testingFramework->changeRecord(
-            'fe_users',
-            $this->feUserUid,
-            ['name' => 'John Doe']
-        );
-
-        self::assertContains(
-            'John Doe',
-            $this->subject->dumpUserValues('name')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function dumpUserValuesContainsUserNameIfRequestedEvenForSpaceAfterCommaInKeyList()
-    {
-        $this->testingFramework->changeRecord(
-            'fe_users',
-            $this->feUserUid,
-            ['name' => 'John Doe']
-        );
-
-        self::assertContains(
-            'John Doe',
-            $this->subject->dumpUserValues('email, name')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function dumpUserValuesContainsUserNameIfRequestedEvenForSpaceBeforeCommaInKeyList()
-    {
-        $this->testingFramework->changeRecord(
-            'fe_users',
-            $this->feUserUid,
-            ['name' => 'John Doe']
-        );
-
-        self::assertContains(
-            'John Doe',
-            $this->subject->dumpUserValues('name ,email')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function dumpUserValuesContainsLabelForUserNameIfRequested()
-    {
-        self::assertContains(
-            $this->getLanguageService()->getLL('label_name'),
-            $this->subject->dumpUserValues('name')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function dumpUserValuesContainsLabelEvenForSpaceAfterCommaInKeyList()
-    {
-        self::assertContains(
-            $this->getLanguageService()->getLL('label_name'),
-            $this->subject->dumpUserValues('email, name')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function dumpUserValuesContainsLabelEvenForSpaceBeforeCommaInKeyList()
-    {
-        self::assertContains(
-            $this->getLanguageService()->getLL('label_name'),
-            $this->subject->dumpUserValues('name ,email')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function dumpUserValuesContainsPidIfRequested()
-    {
-        $pid = $this->testingFramework->createSystemFolder();
-        $this->subject->setUserData(['pid' => $pid]);
-
-        self::assertInternalType(
-            'string',
-            $this->subject->getUserData('pid')
-        );
-
-        self::assertContains(
-            (string)$pid,
-            $this->subject->dumpUserValues('pid')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function dumpUserValuesContainsFieldNameAsLabelForPid()
-    {
-        $pid = $this->testingFramework->createSystemFolder();
-        $this->subject->setUserData(['pid' => $pid]);
-
-        self::assertContains(
-            'Pid',
-            $this->subject->dumpUserValues('pid')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function dumpUserValuesDoesNotContainRawLabelNameAsLabelForPid()
-    {
-        $pid = $this->testingFramework->createSystemFolder();
-        $this->subject->setUserData(['pid' => $pid]);
-
-        self::assertNotContains(
-            'label_pid',
-            $this->subject->dumpUserValues('pid')
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function dumpUserValuesCanContainNonRegisteredField()
-    {
-        $this->subject->setUserData(['is_dummy_record' => true]);
-
-        self::assertContains(
-            'Is_dummy_record: 1',
-            $this->subject->dumpUserValues('is_dummy_record')
-        );
-    }
-
-    /**
-     * @return string[][]
-     */
-    public function userDateAndTimeFieldsDataProvider(): array
-    {
-        return [
-            'crdate' => ['crdate'],
-            'tstamp' => ['tstamp'],
-        ];
-    }
-
-    /**
-     * @test
-     *
-     * @param string $fieldName
-     *
-     * @dataProvider userDateAndTimeFieldsDataProvider
-     */
-    public function dumpUserValuesCanDumpDateAndTimeField(string $fieldName)
-    {
-        $value = 1579816569;
-        $this->subject->setUserData([$fieldName => $value]);
-
-        $result = $this->subject->dumpUserValues($fieldName);
-
-        $expected = \strftime(self::DATE_FORMAT, $value) . ' ' . \strftime(self::TIME_FORMAT, $value);
-        self::assertContains($expected, $result);
-    }
-
-    /**
-     * @test
-     */
-    public function dumpUserValuesCanDumpDate()
-    {
-        $fieldName = 'date_of_birth';
-        $value = 1579816569;
-        $this->subject->setUserData([$fieldName => $value]);
-
-        $result = $this->subject->dumpUserValues($fieldName);
-
-        $expected = \strftime(self::DATE_FORMAT, $value);
-        self::assertContains($expected, $result);
-    }
-
-    /**
-     * @return string[][]
-     */
-    public function dumpableUserFieldsDataProvider(): array
-    {
-        $fields = [
-            'uid',
-            'username',
-            'name',
-            'first_name',
-            'middle_name',
-            'last_name',
-            'address',
-            'telephone',
-            'fax',
-            'email',
-            'crdate',
-            'title',
-            'zip',
-            'city',
-            'country',
-            'www',
-            'company',
-            'pseudonym',
-            'pseudonym',
-            'gender',
-            'date_of_birth',
-            'mobilephone',
-            'comments',
-        ];
-
-        $result = [];
-        foreach ($fields as $field) {
-            $result[$field] = [$field];
-        }
-
-        return $result;
-    }
-
-    /**
-     * @test
-     *
-     * @param string $fieldName
-     *
-     * @dataProvider dumpableUserFieldsDataProvider
-     */
-    public function dumpUserValuesCreatesNoDoubleColonsAfterLabel(string $fieldName)
-    {
-        $this->subject->setUserData([$fieldName => '1234 some value']);
-
-        $result = $this->subject->dumpUserValues($fieldName);
-
-        self::assertNotContains('::', $result);
     }
 
     /*

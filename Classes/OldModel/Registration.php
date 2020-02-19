@@ -443,7 +443,8 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
                 $result = \strftime($this->getConfValueString('dateFormatYMD'), (int)$rawData);
                 break;
             case 'name':
-                $result = $this->getFrontEndUser()->getName();
+                $user = $this->getFrontEndUser();
+                $result = $user instanceof \Tx_Seminars_Model_FrontEndUser ? $user->getName() : '';
                 break;
             default:
                 $result = $rawData;
