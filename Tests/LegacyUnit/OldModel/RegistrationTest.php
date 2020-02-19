@@ -837,21 +837,6 @@ final class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setUserDataThrowsExceptionForEmptyUserData()
-    {
-        $this->expectException(
-            \InvalidArgumentException::class
-        );
-        $this->expectExceptionMessage(
-            '$userData must not be empty.'
-        );
-
-        $this->subject->setUserData([]);
-    }
-
-    /**
-     * @test
-     */
     public function getUserDataIsEmptyForEmptyKey()
     {
         self::assertSame(

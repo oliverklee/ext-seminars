@@ -34,14 +34,13 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
     private $seminar = null;
 
     /**
-     * @var bool whether the user data has already been retrieved
+     * @var bool
      */
     private $userDataHasBeenRetrieved = false;
 
     /**
      * This variable stores the data of the user as an array and makes it
-     * available without further database queries. It will get filled with data
-     * in the constructor.
+     * available without further database queries.
      *
      * @var string[]|null
      */
@@ -309,18 +308,12 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
     /**
      * Sets the data of the FE user of this registration.
      *
-     * @param string[] $userData data of the front-end user, must not be empty
+     * @param string[] $userData data of the front-end user
      *
      * @return void
-     *
-     * @throws \InvalidArgumentException
      */
     protected function setUserData(array $userData)
     {
-        if (empty($userData)) {
-            throw new \InvalidArgumentException('$userData must not be empty.', 1333291766);
-        }
-
         $this->userData = $userData;
         $this->userDataHasBeenRetrieved = true;
     }
