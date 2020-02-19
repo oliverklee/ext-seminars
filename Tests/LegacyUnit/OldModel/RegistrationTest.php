@@ -1271,7 +1271,7 @@ final class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
      */
     public function hasExistingFrontEndUserWithZeroFrontEndUserUIDReturnsFalse()
     {
-        $this->subject->setFrontEndUserUID(0);
+        $this->subject->setFrontEndUserUid(0);
 
         self::assertFalse(
             $this->subject->hasExistingFrontEndUser()

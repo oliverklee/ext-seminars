@@ -544,13 +544,13 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
     /**
      * Sets the front-end user UID of the registration.
      *
-     * @param int $frontEndUserUID the front-end user UID of the attendee, must be > 0
+     * @param int $uid the front-end user UID of the attendee, must be > 0
      *
      * @return void
      */
-    public function setFrontEndUserUID($frontEndUserUID)
+    public function setFrontEndUserUid($uid)
     {
-        $this->setRecordPropertyInteger('user', $frontEndUserUID);
+        $this->setRecordPropertyInteger('user', $uid);
     }
 
     /**
