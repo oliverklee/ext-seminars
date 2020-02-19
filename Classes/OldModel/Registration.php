@@ -75,6 +75,11 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
     private static $cachedSeminars = [];
 
     /**
+     * @var \Tx_Seminars_Model_FrontEndUser|null
+     */
+    protected $user = null;
+
+    /**
      * @param ContentObjectRenderer|null $contentObjectRenderer
      *
      * @return void
@@ -512,16 +517,33 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
     /**
      * Returns the front-end user of the registration.
      *
-     * @return \Tx_Seminars_Model_FrontEndUser the front-end user of the registration
+     * @return \Tx_Seminars_Model_FrontEndUser|null the front-end user of the registration
      */
-    public function getFrontEndUser(): \Tx_Seminars_Model_FrontEndUser
+    public function getFrontEndUser()
     {
+        if ($this->user instanceof \Tx_Seminars_Model_FrontEndUser) {
+            return $this->user;
+        }
+        $uid = $this->getUser();
+        if ($uid === 0) {
+            return null;
+        }
+
         /** @var \Tx_Seminars_Mapper_FrontEndUser $mapper */
         $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
-        /** @var \Tx_Seminars_Model_FrontEndUser $user */
-        $user = $mapper->find($this->getUser());
+        $this->user = $mapper->find($uid);
 
-        return $user;
+        return $this->user;
+    }
+
+    /**
+     * @param Tx_Seminars_Model_FrontEndUser $user
+     *
+     * @return void
+     */
+    public function setFrontEndUser(\Tx_Seminars_Model_FrontEndUser $user)
+    {
+        $this->user = $user;
     }
 
     /**

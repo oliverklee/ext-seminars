@@ -21,7 +21,7 @@ final class RegistrationTest extends UnitTestCase
 
     protected function setUp()
     {
-        $this->subject = new \Tx_Seminars_OldModel_Registration();
+        $this->subject = \Tx_Seminars_OldModel_Registration::fromData([]);
     }
 
     /**
@@ -40,5 +40,27 @@ final class RegistrationTest extends UnitTestCase
         $result = \Tx_Seminars_OldModel_Registration::fromData([]);
 
         self::assertInstanceOf(\Tx_Seminars_OldModel_Registration::class, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getFrontEndUserWithoutUserUidReturnsNull()
+    {
+        $result = $this->subject->getFrontEndUser();
+
+        self::assertNull($result);
+    }
+
+    /**
+     * @test
+     */
+    public function setFrontEndUserSetsFrontEndUser()
+    {
+        $user = new \Tx_Seminars_Model_FrontEndUser();
+
+        $this->subject->setFrontEndUser($user);
+
+        self::assertSame($user, $this->subject->getFrontEndUser());
     }
 }
