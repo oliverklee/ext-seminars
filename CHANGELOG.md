@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Move more tests to the new testing framework (#507)
 - Change the casing of `Registration::setFrontEndUserUID` (#506)
 - Allow empty user data for registrations (#505)
 - Improve the code autoformatting (#502)

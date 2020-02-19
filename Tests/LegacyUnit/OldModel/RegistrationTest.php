@@ -732,54 +732,6 @@ final class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
     }
 
     /*
-     * Tests concerning getSeminarObject
-     */
-
-    /**
-     * @test
-     */
-    public function getSeminarObjectReturnsSeminarInstance()
-    {
-        self::assertInstanceOf(
-            \Tx_Seminars_OldModel_Event::class,
-            $this->subject->getSeminarObject()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getSeminarObjectForRegistrationWithoutSeminarReturnsSeminarInstance()
-    {
-        $this->testingFramework->changeRecord(
-            'tx_seminars_attendances',
-            $this->registrationUid,
-            [
-                'seminar' => 0,
-                'user' => 0,
-            ]
-        );
-
-        $subject = new TestingRegistration($this->registrationUid);
-
-        self::assertInstanceOf(
-            \Tx_Seminars_OldModel_Event::class,
-            $subject->getSeminarObject()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getSeminarObjectReturnsSeminarWithUidFromRelation()
-    {
-        self::assertSame(
-            $this->seminarUid,
-            $this->subject->getSeminarObject()->getUid()
-        );
-    }
-
-    /*
      * Tests regarding the cached seminars.
      */
 
@@ -1276,18 +1228,6 @@ final class Tx_Seminars_Tests_Unit_OldModel_RegistrationTest extends TestCase
         self::assertFalse(
             $this->subject->hasExistingFrontEndUser()
         );
-    }
-
-    /*
-     * Tests regarding getFrontEndUser().
-     */
-
-    /**
-     * @test
-     */
-    public function getFrontEndUserWithExistingFrontEndUserReturnsFrontEndUser()
-    {
-        self::assertInstanceOf(\Tx_Oelib_Model_FrontEndUser::class, $this->subject->getFrontEndUser());
     }
 
     /*
