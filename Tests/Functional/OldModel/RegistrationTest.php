@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\OldModel;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
-use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingRegistration;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 
 /**
@@ -33,7 +32,7 @@ final class RegistrationTest extends FunctionalTestCase
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**
-     * @var TestingRegistration
+     * @var \Tx_Seminars_OldModel_Registration
      */
     private $subject = null;
 
@@ -43,7 +42,7 @@ final class RegistrationTest extends FunctionalTestCase
 
         $this->initializeBackEndLanguage();
 
-        $this->subject = new TestingRegistration();
+        $this->subject = new \Tx_Seminars_OldModel_Registration();
         $this->subject->setConfigurationValue('dateFormatYMD', self::DATE_FORMAT);
         $this->subject->setConfigurationValue('timeFormat', self::TIME_FORMAT);
     }
@@ -71,7 +70,7 @@ final class RegistrationTest extends FunctionalTestCase
         self::assertSame('at home', $subject->getAccommodation());
         self::assertSame('Max Moe', $subject->getAttendeesNames());
         self::assertSame(2, $subject->getNumberOfKids());
-        self::assertTrue($subject->hasRegisteredMySelf());
+        self::assertTrue($subject->hasRegisteredThemselves());
     }
 
     /**
