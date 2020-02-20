@@ -6,7 +6,6 @@ use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 use OliverKlee\Seminars\Hooks\RegistrationEmailHookInterface;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
-use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingRegistration;
 use OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures\RegistrationHookInterface;
 use OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures\TestingRegistrationManager;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
@@ -115,7 +114,7 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
         $mailerFactory->enableTestMode();
         $this->mailer = $mailerFactory->getMailer();
 
-        TestingRegistration::purgeCachedSeminars();
+        \Tx_Seminars_OldModel_Registration::purgeCachedSeminars();
         \Tx_Oelib_ConfigurationProxy::getInstance('seminars')
             ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_TEXT_MAIL);
         $configurationRegistry = \Tx_Oelib_ConfigurationRegistry::getInstance();
@@ -276,7 +275,7 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
             ]
         );
 
-        return new TestingRegistration($registrationUid);
+        return new \Tx_Seminars_OldModel_Registration($registrationUid);
     }
 
     /**
@@ -2273,7 +2272,7 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
                 'user' => $this->testingFramework->createFrontEndUser(),
             ]
         );
-        $registration = new TestingRegistration($registrationUid);
+        $registration = new \Tx_Seminars_OldModel_Registration($registrationUid);
 
         $this->subject->notifyAttendee($registration, $pi1);
 
@@ -5197,7 +5196,7 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
             ]
         );
 
-        $registration = new TestingRegistration($registrationUid);
+        $registration = new \Tx_Seminars_OldModel_Registration($registrationUid);
         $this->subject->notifyOrganizers($registration);
 
         self::assertContains(
@@ -5226,7 +5225,7 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
             ]
         );
 
-        $registration = new TestingRegistration($registrationUid);
+        $registration = new \Tx_Seminars_OldModel_Registration($registrationUid);
         $this->subject->notifyOrganizers($registration);
 
         self::assertContains(
@@ -5278,7 +5277,7 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
             'tx_seminars_attendances',
             ['seminar' => $this->seminarUid, 'user' => $this->testingFramework->createFrontEndUser()]
         );
-        $registration = new TestingRegistration($registrationUid);
+        $registration = new \Tx_Seminars_OldModel_Registration($registrationUid);
 
         $hookClassName = 'RegistrationEmailHook' . \uniqid('', false);
         $hook = $this->getMockBuilder(RegistrationEmailHookInterface::class)
@@ -5330,7 +5329,7 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
             'tx_seminars_attendances',
             ['seminar' => $this->seminarUid, 'user' => $this->testingFramework->createFrontEndUser()]
         );
-        $registration = new TestingRegistration($registrationUid);
+        $registration = new \Tx_Seminars_OldModel_Registration($registrationUid);
 
         $hookClassName = 'RegistrationEmailHook' . \uniqid('', false);
         $hook = $this->getMockBuilder(RegistrationEmailHookInterface::class)
@@ -5838,7 +5837,8 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
         $this->subject->sendAdditionalNotification($registration);
 
         self::assertContains(
-            $this->getLanguageService()->getLL('label_vacancies') . ': ' . $this->getLanguageService()->getLL('label_unlimited'),
+            $this->getLanguageService()->getLL('label_vacancies') . ': '
+            . $this->getLanguageService()->getLL('label_unlimited'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -6146,8 +6146,8 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
         );
         $uid = $subject->getRegistration()->getUid();
         self::assertTrue(
-            // We're not using the testing framework here because the record
-            // is not marked as dummy record.
+        // We're not using the testing framework here because the record
+        // is not marked as dummy record.
             \Tx_Oelib_Db::existsRecordWithUid(
                 'tx_seminars_attendances',
                 $uid

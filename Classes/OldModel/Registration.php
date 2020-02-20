@@ -127,7 +127,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
             $seats = 1;
         }
         $this->recordData['seats'] = $seats;
-        $this->recordData['registered_themselves'] = $registrationData['registered_themselves'] ? 1 : 0;
+        $this->recordData['registered_themselves'] = (int)$registrationData['registered_themselves'] ? 1 : 0;
 
         $availablePrices = $event->getAvailablePrices();
         // If no (available) price is selected, use the first price by default.
@@ -141,7 +141,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
 
         $this->recordData['kids'] = $registrationData['kids'];
 
-        $methodOfPayment = $registrationData['method_of_payment'];
+        $methodOfPayment = (int)$registrationData['method_of_payment'];
         // Auto-select the only payment method if no payment method has been
         // selected, there actually is anything to pay and only one payment
         // method is provided.
@@ -155,9 +155,9 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
                 '',
                 'tx_seminars_seminars_payment_methods_mm.sorting'
             );
-            $methodOfPayment = $rows[0]['uid'];
+            $methodOfPayment = (int)$rows[0]['uid'];
         }
-        $this->recordData['method_of_payment'] = $methodOfPayment;
+        $this->setMethodOfPaymentUid($methodOfPayment);
 
         $this->recordData['account_number'] = $registrationData['account_number'];
         $this->recordData['bank_code'] = $registrationData['bank_code'];
@@ -174,17 +174,20 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
         $this->recordData['telephone'] = $registrationData['telephone'];
         $this->recordData['email'] = $registrationData['email'];
 
-        $this->lodgings = (isset($registrationData['lodgings']) && is_array($registrationData['lodgings']))
+        $this->lodgings = (isset($registrationData['lodgings']) && \is_array($registrationData['lodgings']))
             ? $registrationData['lodgings'] : [];
-        $this->recordData['lodgings'] = count($this->lodgings);
+        \array_walk($this->lodgings, '\\intval');
+        $this->recordData['lodgings'] = \count($this->lodgings);
 
-        $this->foods = (isset($registrationData['foods']) && is_array($registrationData['foods']))
+        $this->foods = (isset($registrationData['foods']) && \is_array($registrationData['foods']))
             ? $registrationData['foods'] : [];
-        $this->recordData['foods'] = count($this->foods);
+        \array_walk($this->foods, '\\intval');
+        $this->recordData['foods'] = \count($this->foods);
 
-        $this->checkboxes = (isset($registrationData['checkboxes']) && is_array($registrationData['checkboxes']))
+        $this->checkboxes = (isset($registrationData['checkboxes']) && \is_array($registrationData['checkboxes']))
             ? $registrationData['checkboxes'] : [];
-        $this->recordData['checkboxes'] = count($this->checkboxes);
+        \array_walk($this->checkboxes, '\\intval');
+        $this->recordData['checkboxes'] = \count($this->checkboxes);
 
         $this->recordData['interests'] = $registrationData['interests'];
         $this->recordData['expectations'] = $registrationData['expectations'];
@@ -313,13 +316,13 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
     /**
      * Sets the data of the FE user of this registration.
      *
-     * @param string[] $userData data of the front-end user
+     * @param array $data
      *
      * @return void
      */
-    protected function setUserData(array $userData)
+    public function setUserData(array $data)
     {
-        $this->userData = $userData;
+        $this->userData = $data;
         $this->userDataHasBeenRetrieved = true;
     }
 
@@ -406,7 +409,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
      * If the data needs to be decoded to be readable (eg. the gender, the date
      * of birth or the status), this function will already return the clear text version.
      *
-     * @param string $key key of the data to retrieve, may contain leading or trailing spaces, must not be empty
+     * @param string $key key of the data to retrieve, may contain leading or trailing spaces
      *
      * @return string the trimmed value retrieved from $this->userData, may be empty
      */
@@ -946,6 +949,14 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
     }
 
     /**
+     * @return int[]
+     */
+    public function getLodgingsUids(): array
+    {
+        return $this->lodgings;
+    }
+
+    /**
      * Returns the food free-text content.
      *
      * @return string
@@ -1011,6 +1022,14 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
     }
 
     /**
+     * @return int[]
+     */
+    public function getFoodsUids(): array
+    {
+        return $this->foods;
+    }
+
+    /**
      * Checks whether any option checkboxes are referenced by this record.
      *
      * @return bool TRUE if at least one option checkbox is referenced by this record, FALSE otherwise
@@ -1037,6 +1056,14 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
             "\n",
             $this->getMmRecordTitles('tx_seminars_checkboxes', 'tx_seminars_attendances_checkboxes_mm')
         );
+    }
+
+    /**
+     * @return int[]
+     */
+    public function getCheckboxesUids(): array
+    {
+        return $this->checkboxes;
     }
 
     /**
@@ -1112,6 +1139,16 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
     public function isOnRegistrationQueue(): bool
     {
         return $this->getRecordPropertyBoolean('registration_queue');
+    }
+
+    /**
+     * @param bool $isOnRegistrationQueue
+     *
+     * @return void
+     */
+    public function setIsOnRegistrationQueue(bool $isOnRegistrationQueue)
+    {
+        $this->setRecordPropertyInteger('registration_queue', (int)$isOnRegistrationQueue);
     }
 
     /**
@@ -1199,7 +1236,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
     /**
      * Returns our method of payment UID.
      *
-     * @return int our method of payment UID, will be >= 0, will be 0 if this registration has no method of payment
+     * @return int will be 0 if this registration has no method of payment
      */
     public function getMethodOfPaymentUid(): int
     {
@@ -1248,12 +1285,12 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
      */
     public function getEnumeratedAttendeeNames($useHtml = false): string
     {
-        if (!$this->hasAttendeesNames() && !$this->hasRegisteredMySelf()) {
+        if (!$this->hasAttendeesNames() && !$this->hasRegisteredThemselves()) {
             return '';
         }
 
         $names = GeneralUtility::trimExplode(LF, $this->getAttendeesNames(), true);
-        if ($this->hasRegisteredMySelf()) {
+        if ($this->hasRegisteredThemselves()) {
             \array_unshift($names, $this->getFrontEndUser()->getName());
         }
 
@@ -1273,12 +1310,20 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
     }
 
     /**
-     * Checks whether the user has registered themselves.
-     *
-     * @return bool TRUE if the user registered themselves, FALSE otherwise
+     * @return bool
      */
-    public function hasRegisteredMySelf(): bool
+    public function hasRegisteredThemselves(): bool
     {
         return $this->getRecordPropertyBoolean('registered_themselves');
+    }
+
+    /**
+     * @param bool $registeredThemselves
+     *
+     * @return void
+     */
+    public function setRegisteredThemselves(bool $registeredThemselves)
+    {
+        $this->setRecordPropertyBoolean('registered_themselves', $registeredThemselves);
     }
 }
