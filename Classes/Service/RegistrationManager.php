@@ -1136,11 +1136,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
 
         /** @var \Tx_Oelib_Mail $eMail */
         $eMail = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
-        $eMail->setSender(GeneralUtility::makeInstance(
-            GeneralEmailRole::class,
-            MailUtility::getSystemFromAddress(),
-            MailUtility::getSystemFromName()
-        ));
+        $eMail->setSender(GeneralUtility::makeInstance(SystemEmailFromBuilder::class)->build());
         $eMail->setReplyTo($event->getFirstOrganizer());
         $eMail->setMessage($this->getMessageForNotification($registration, $emailReason));
         $eMail->setSubject(

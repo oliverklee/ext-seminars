@@ -1422,11 +1422,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
             /** @var \Tx_Oelib_Mail $eMail */
             $eMail = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
             $eMail->addRecipient($reviewer);
-            $eMail->setSender(GeneralUtility::makeInstance(
-                GeneralEmailRole::class,
-                MailUtility::getSystemFromAddress(),
-                MailUtility::getSystemFromName()
-            ));
+            $eMail->setSender(GeneralUtility::makeInstance(SystemEmailFromBuilder::class)->build());
             $eMail->setReplyTo(self::getLoggedInUser());
             $eMail->setSubject($this->translate('publish_event_subject'));
             $eMail->setMessage($this->createEMailContent($event));
@@ -1535,11 +1531,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         /** @var \Tx_Oelib_Mail $eMail */
         $eMail = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
         $eMail->addRecipient($reviewer);
-        $eMail->setSender(GeneralUtility::makeInstance(
-            GeneralEmailRole::class,
-            MailUtility::getSystemFromAddress(),
-            MailUtility::getSystemFromName()
-        ));
+        $eMail->setSender(GeneralUtility::makeInstance(SystemEmailFromBuilder::class)->build());
         $eMail->setReplyTo(self::getLoggedInUser());
         $eMail->setSubject($this->translate('save_event_subject'));
         $eMail->setMessage($this->createAdditionalEmailContent());
