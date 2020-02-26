@@ -2,10 +2,12 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Email\GeneralEmailRole;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 use OliverKlee\Seminars\Hooks\RegistrationEmailHookInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\MailUtility;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
 /**
@@ -829,7 +831,12 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         /** @var \Tx_Oelib_Mail $eMailNotification */
         $eMailNotification = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
         $eMailNotification->addRecipient($user);
-        $eMailNotification->setSender($event->getFirstOrganizer());
+        $eMailNotification->setSender(GeneralUtility::makeInstance(
+            GeneralEmailRole::class,
+            MailUtility::getSystemFromAddress(),
+            MailUtility::getSystemFromName()
+        ));
+        $eMailNotification->setReplyTo($event->getFirstOrganizer());
         $eMailNotification->setSubject(
             $this->translate('email_' . $helloSubjectPrefix . 'Subject') . ': ' . $event->getTitleAndDate('-')
         );
@@ -993,7 +1000,12 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         $organizers = $event->getOrganizerBag();
         /** @var \Tx_Oelib_Mail $eMailNotification */
         $eMailNotification = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
-        $eMailNotification->setSender($event->getFirstOrganizer());
+        $eMailNotification->setSender(GeneralUtility::makeInstance(
+            GeneralEmailRole::class,
+            MailUtility::getSystemFromAddress(),
+            MailUtility::getSystemFromName()
+        ));
+        $eMailNotification->setReplyTo($event->getFirstOrganizer());
 
         /** @var \Tx_Seminars_OldModel_Organizer $organizer */
         foreach ($organizers as $organizer) {
@@ -1124,7 +1136,12 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
 
         /** @var \Tx_Oelib_Mail $eMail */
         $eMail = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
-        $eMail->setSender($event->getFirstOrganizer());
+        $eMail->setSender(GeneralUtility::makeInstance(
+            GeneralEmailRole::class,
+            MailUtility::getSystemFromAddress(),
+            MailUtility::getSystemFromName()
+        ));
+        $eMail->setReplyTo($event->getFirstOrganizer());
         $eMail->setMessage($this->getMessageForNotification($registration, $emailReason));
         $eMail->setSubject(
             sprintf(

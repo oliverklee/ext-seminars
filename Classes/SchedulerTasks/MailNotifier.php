@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\SchedulerTasks;
 
+use OliverKlee\Oelib\Email\GeneralEmailRole;
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
 use OliverKlee\Seminars\Service\EmailService;
 use OliverKlee\Seminars\Service\EventStatusService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\MailUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Lang\LanguageService;
 use TYPO3\CMS\Scheduler\Task\AbstractTask;
@@ -171,9 +173,14 @@ class MailNotifier extends AbstractTask
     {
         $attachment = null;
 
-        // The first organizer is taken as sender.
-        /** @var \Tx_Seminars_OldModel_Organizer $sender */
-        $sender = $event->getFirstOrganizer();
+        $sender = GeneralUtility::makeInstance(
+            GeneralEmailRole::class,
+            MailUtility::getSystemFromAddress(),
+            MailUtility::getSystemFromName()
+        );
+        // The first organizer is taken as replyTo address.
+        /** @var \Tx_Seminars_OldModel_Organizer $replyTo */
+        $replyTo = $event->getFirstOrganizer();
         $subject = $this->customizeMessage($messageKey . 'Subject', $event);
         if ($this->shouldCsvFileBeAdded($event)) {
             $attachment = $this->getCsv($event->getUid());
@@ -184,6 +191,7 @@ class MailNotifier extends AbstractTask
             /** @var \Tx_Oelib_Mail $eMail */
             $eMail = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
             $eMail->setSender($sender);
+            $eMail->setReplyTo($replyTo);
             $eMail->setSubject($subject);
             $eMail->addRecipient($organizer);
             $eMail->setMessage($this->customizeMessage($messageKey, $event, $organizer->getName()));

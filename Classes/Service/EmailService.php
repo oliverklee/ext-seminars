@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Service;
 
+use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Lang\LanguageService;
@@ -52,10 +53,6 @@ class EmailService implements SingletonInterface
      */
     public function sendEmailToAttendees(\Tx_Seminars_Model_Event $event, $subject, $body)
     {
-        /** @var \Tx_Oelib_MailerFactory $mailerFactory */
-        $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
-        $mailer = $mailerFactory->getMailer();
-
         /** @var \Tx_Seminars_Model_Registration $registration */
         foreach ($event->getRegistrations() as $registration) {
             $user = $registration->getFrontEndUser();
@@ -63,15 +60,15 @@ class EmailService implements SingletonInterface
                 continue;
             }
 
-            /** @var \Tx_Oelib_Mail $eMail */
-            $eMail = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
-            $eMail->setSender($event->getFirstOrganizer());
-            $eMail->addRecipient($user);
-            $eMail->setSubject($this->replaceMarkers($subject, $event, $user));
-
-            $eMail->setMessage($this->buildMessageBody($body, $event, $user));
-
-            $mailer->send($eMail);
+            // Send MailMessage using TYPO3 SwiftMailer implementation.
+            // ->setFrom() will automatically be called inside MailMessage::send()
+            $mailMessage = GeneralUtility::makeInstance(MailMessage::class);
+            $mailMessage
+                ->setReplyTo([$event->getFirstOrganizer()->getEMailAddress() => $event->getFirstOrganizer()->getName()])
+                ->setTo([$user->getEmailAddress() => $user->getName()])
+                ->setSubject($this->replaceMarkers($subject, $event, $user))
+                ->setBody($this->buildMessageBody($body, $event, $user))
+                ->send();
         }
     }
 

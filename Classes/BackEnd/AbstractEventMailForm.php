@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\BackEnd;
 
+use OliverKlee\Oelib\Email\GeneralEmailRole;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\MailUtility;
 use TYPO3\CMS\Lang\LanguageService;
 
 /**
@@ -412,7 +414,12 @@ abstract class AbstractEventMailForm
                 }
                 /** @var \Tx_Oelib_Mail $eMail */
                 $eMail = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
-                $eMail->setSender($organizer);
+                $eMail->setSender(GeneralUtility::makeInstance(
+                    GeneralEmailRole::class,
+                    MailUtility::getSystemFromAddress(),
+                    MailUtility::getSystemFromName()
+                ));
+                $eMail->setReplyTo($organizer);
                 $eMail->setSubject($this->getPostData('subject'));
                 $eMail->addRecipient($registration->getFrontEndUser());
                 $eMail->setMessage($this->createMessageBody($user, $organizer));
