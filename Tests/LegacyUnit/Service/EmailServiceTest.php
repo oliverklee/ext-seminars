@@ -168,8 +168,47 @@ final class EmailServiceTest extends TestCase
     /**
      * @test
      */
-    public function sendEmailToAttendeesUsesFirstOrganizerAsSender()
+    public function sendEmailToAttendeesUsesTypo3DefaultFromAddressAsSender()
     {
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = 'system-foo@example.com';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = 'Mr. Default';
+
+        $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
+
+        $email = $this->mailer->getFirstSentEmail();
+        self::assertNotNull($email);
+        self::assertArrayHasKey(
+            'system-foo@example.com',
+            $email->getFrom()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function sendEmailToAttendeesWithTypo3DefaultFromAdressUsesFirstOrganizerAsReplyTo()
+    {
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = 'system-foo@example.com';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = 'Mr. Default';
+
+        $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
+
+        $email = $this->mailer->getFirstSentEmail();
+        self::assertNotNull($email);
+        self::assertSame(
+            $this->organizer->getEMailAddress(),
+            key($email->getReplyTo())
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function sendEmailToAttendeesWithoutTypo3DefaultFromAddressUsesFirstOrganizerAsSender()
+    {
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = '';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = '';
+
         $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
 
         $email = $this->mailer->getFirstSentEmail();

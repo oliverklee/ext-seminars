@@ -1833,7 +1833,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function sendEMailToReviewerUsesFrontEndUserNameAsFromNameForMail()
+    public function sendEMailToReviewerUsesTypo3DefaultFromNameAsFromNameForMail()
     {
         $seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->createAndLoginUserWithReviewer();
@@ -1849,6 +1849,101 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
                 'publication_hash' => $formData['publication_hash'],
             ]
         );
+
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = 'system-foo@example.com';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = 'Mr. Default';
+
+        $this->subject->sendEMailToReviewer();
+
+        self::assertContains(
+            'Mr. Default',
+            $this->mailer->getFirstSentEmail()->getFrom()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function sendEMailToReviewerUsesTypo3DefaultFromAddressAsFromAddressForMail()
+    {
+        $seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
+        $this->createAndLoginUserWithReviewer();
+
+        $this->subject->setObjectUid($seminarUid);
+        $formData = $this->subject->modifyDataToInsert([]);
+
+        $this->testingFramework->changeRecord(
+            'tx_seminars_seminars',
+            $seminarUid,
+            [
+                'hidden' => 1,
+                'publication_hash' => $formData['publication_hash'],
+            ]
+        );
+
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = 'system-foo@example.com';
+
+        $this->subject->sendEMailToReviewer();
+
+        self::assertArrayHasKey(
+            'system-foo@example.com',
+            $this->mailer->getFirstSentEmail()->getFrom()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function sendEMailToReviewerWithTypo3DefaultFromAdressUsesFrontEndUserAsReplyToForMail()
+    {
+        $seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
+        $this->createAndLoginUserWithReviewer();
+
+        $this->subject->setObjectUid($seminarUid);
+        $formData = $this->subject->modifyDataToInsert([]);
+
+        $this->testingFramework->changeRecord(
+            'tx_seminars_seminars',
+            $seminarUid,
+            [
+                'hidden' => 1,
+                'publication_hash' => $formData['publication_hash'],
+            ]
+        );
+
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = 'system-foo@example.com';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = 'Mr. Default';
+
+        $this->subject->sendEMailToReviewer();
+
+        self::assertSame(
+            ['mail@foo.com' => 'Mr. Bar'],
+            $this->mailer->getFirstSentEmail()->getReplyTo()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function sendEMailToReviewerWithoutTypo3DefaultFromAdressAndNameUsesFrontEndUserNameAsFromNameForMail()
+    {
+        $seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
+        $this->createAndLoginUserWithReviewer();
+
+        $this->subject->setObjectUid($seminarUid);
+        $formData = $this->subject->modifyDataToInsert([]);
+
+        $this->testingFramework->changeRecord(
+            'tx_seminars_seminars',
+            $seminarUid,
+            [
+                'hidden' => 1,
+                'publication_hash' => $formData['publication_hash'],
+            ]
+        );
+
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = '';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = '';
 
         $this->subject->sendEMailToReviewer();
 
@@ -1861,7 +1956,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function sendEMailToReviewerUsesFrontEndUserMailAddressAsFromAddressForMail()
+    public function sendEMailToReviewerWithoutTypo3DefaultFromAddressUsesFrontEndUserMailAddressAsFromAddressForMail()
     {
         $seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->createAndLoginUserWithReviewer();
@@ -1877,6 +1972,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
                 'publication_hash' => $formData['publication_hash'],
             ]
         );
+
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = '';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = '';
 
         $this->subject->sendEMailToReviewer();
 
@@ -1957,10 +2055,79 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function sendAdditionalNotificationEmailToReviewerUsesFrontEndUserAsFromName()
+    public function sendAdditionalNotificationEmailToReviewerUsesTypo3DefaultFromNameAsFromName()
     {
         $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
+
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = 'system-foo@example.com';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = 'Mr. Default';
+
+        $this->subject->sendAdditionalNotificationEmailToReviewer();
+
+        self::assertNotNull(
+            $this->mailer->getFirstSentEmail()
+        );
+        self::assertContains(
+            'Mr. Default',
+            $this->mailer->getFirstSentEmail()->getFrom()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function sendAdditionalNotificationEmailToReviewerUsesTypo3DefaultFromAddressAsFromAddress()
+    {
+        $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
+        $this->createAndLoginUserWithReviewer();
+
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = 'system-foo@example.com';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = 'Mr. Default';
+
+        $this->subject->sendAdditionalNotificationEmailToReviewer();
+
+        self::assertNotNull(
+            $this->mailer->getFirstSentEmail()
+        );
+        self::assertArrayHasKey(
+            'system-foo@example.com',
+            $this->mailer->getFirstSentEmail()->getFrom()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function sendAdditionalNotificationEmailToReviewerWithTypo3DefaultFromAddressUsesFrontEndUserMailAsReplyTo()
+    {
+        $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
+        $this->createAndLoginUserWithReviewer();
+
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = 'system-foo@example.com';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = 'Mr. Default';
+
+        $this->subject->sendAdditionalNotificationEmailToReviewer();
+
+        self::assertNotNull(
+            $this->mailer->getFirstSentEmail()
+        );
+        self::assertSame(
+            ['mail@foo.com' => 'Mr. Bar'],
+            $this->mailer->getFirstSentEmail()->getReplyTo()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function sendAdditionalNotificationEmailToReviewerWithoutTypo3DefaultFromAddressUsesFrontEndUserAsFromName()
+    {
+        $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
+        $this->createAndLoginUserWithReviewer();
+
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = '';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = '';
 
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
@@ -1976,10 +2143,13 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function sendAdditionalNotificationEmailToReviewerUsesFrontEndUserAsFromAddress()
+    public function sendAdditionalNotificationEmailToReviewerWithoutTypo3DefaultFromAddressUsesFrontEndUserAsFromAddress()
     {
         $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
+
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = '';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = '';
 
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 

@@ -1035,7 +1035,7 @@ class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendRemindersToOrganizersSendsEmailWithOrganizerAsSender()
+    public function sendRemindersToOrganizersSendsEmailWithTypo3DefaultFromAddressAsSender()
     {
         $this->createSeminarWithOrganizer(
             [
@@ -1044,10 +1044,13 @@ class MailNotifierTest extends TestCase
             ]
         );
 
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = 'system-foo@example.com';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = 'Mr. Default';
+
         $this->subject->sendEventTakesPlaceReminders();
 
         self::assertArrayHasKey(
-            'MrTest@example.com',
+            'system-foo@example.com',
             $this->mailer->getFirstSentEmail()->getFrom()
         );
     }
@@ -1055,7 +1058,7 @@ class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendRemindersToOrganizersForEventWithTwoOrganizersSendsEmailWithFirstOrganizerAsSender()
+    public function sendRemindersToOrganizersForEventWithTwoOrganizersSendsEmailWithTypo3DefaultFromAddressAsSender()
     {
         $eventUid = $this->createSeminarWithOrganizer(
             [
@@ -1069,6 +1072,90 @@ class MailNotifierTest extends TestCase
         );
         $this->testingFramework->createRelation('tx_seminars_seminars_organizers_mm', $eventUid, $organizerUid);
         $this->testingFramework->changeRecord('tx_seminars_seminars', $eventUid, ['organizers' => 2]);
+
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = 'system-foo@example.com';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = 'Mr. Default';
+
+        $this->subject->sendEventTakesPlaceReminders();
+
+        self::assertArrayHasKey(
+            'system-foo@example.com',
+            $this->mailer->getFirstSentEmail()->getFrom()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function sendRemindersToOrganizersForEventWithTwoOrganizersWithTypo3DefaultFromAddressSendsEmailWithFirstOrganizerAsReplyTo()
+    {
+        $eventUid = $this->createSeminarWithOrganizer(
+            [
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+            ]
+        );
+        $organizerUid = $this->testingFramework->createRecord(
+            'tx_seminars_organizers',
+            ['title' => 'foo', 'email' => 'foo@example.com']
+        );
+        $this->testingFramework->createRelation('tx_seminars_seminars_organizers_mm', $eventUid, $organizerUid);
+        $this->testingFramework->changeRecord('tx_seminars_seminars', $eventUid, ['organizers' => 2]);
+
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = 'system-foo@example.com';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = 'Mr. Default';
+
+        $this->subject->sendEventTakesPlaceReminders();
+
+        self::assertSame(
+            ['MrTest@example.com' => 'Mr. Test'],
+            $this->mailer->getFirstSentEmail()->getReplyTo()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function sendRemindersToOrganizersWithoutTypo3DefaultFromAddressSendsEmailWithOrganizerAsSender()
+    {
+        $this->createSeminarWithOrganizer(
+            [
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+            ]
+        );
+
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = '';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = '';
+
+        $this->subject->sendEventTakesPlaceReminders();
+
+        self::assertArrayHasKey(
+            'MrTest@example.com',
+            $this->mailer->getFirstSentEmail()->getFrom()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function sendRemindersToOrganizersForEventWithTwoOrganizersWithoutTypo3DefaultFromAddressSendsEmailWithFirstOrganizerAsSender()
+    {
+        $eventUid = $this->createSeminarWithOrganizer(
+            [
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+            ]
+        );
+        $organizerUid = $this->testingFramework->createRecord(
+            'tx_seminars_organizers',
+            ['title' => 'foo', 'email' => 'foo@example.com']
+        );
+        $this->testingFramework->createRelation('tx_seminars_seminars_organizers_mm', $eventUid, $organizerUid);
+        $this->testingFramework->changeRecord('tx_seminars_seminars', $eventUid, ['organizers' => 2]);
+
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = '';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = '';
 
         $this->subject->sendEventTakesPlaceReminders();
 
