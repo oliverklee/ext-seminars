@@ -41,8 +41,8 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
     protected $configurationToUseInTestInstance = [
         'MAIL' => [
             'defaultMailFromAddress' => 'system-foo@example.com',
-            'defaultMailFromName' => 'Mr. Default'
-        ]
+            'defaultMailFromName' => 'Mr. Default',
+        ],
     ];
 
     protected function setUp()

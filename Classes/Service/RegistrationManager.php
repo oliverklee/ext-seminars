@@ -2,13 +2,11 @@
 
 declare(strict_types=1);
 
-use OliverKlee\Oelib\Email\GeneralEmailRole;
 use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 use OliverKlee\Seminars\Hooks\RegistrationEmailHookInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\MailUtility;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
 /**
