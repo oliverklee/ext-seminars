@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-use OliverKlee\Oelib\Email\GeneralEmailRole;
+use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\MailUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
@@ -1422,7 +1421,13 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
             /** @var \Tx_Oelib_Mail $eMail */
             $eMail = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
             $eMail->addRecipient($reviewer);
-            $eMail->setSender(GeneralUtility::makeInstance(SystemEmailFromBuilder::class)->build());
+            $systemEmailFromBuilder = GeneralUtility::makeInstance(SystemEmailFromBuilder::class);
+            if ($systemEmailFromBuilder->canBuild()) {
+                $eMail->setSender($systemEmailFromBuilder->build());
+                $eMail->setReplyTo(self::getLoggedInUser());
+            } else {
+                $eMail->setSender(self::getLoggedInUser());
+            }
             $eMail->setReplyTo(self::getLoggedInUser());
             $eMail->setSubject($this->translate('publish_event_subject'));
             $eMail->setMessage($this->createEMailContent($event));
@@ -1531,7 +1536,13 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         /** @var \Tx_Oelib_Mail $eMail */
         $eMail = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
         $eMail->addRecipient($reviewer);
-        $eMail->setSender(GeneralUtility::makeInstance(SystemEmailFromBuilder::class)->build());
+        $systemEmailFromBuilder = GeneralUtility::makeInstance(SystemEmailFromBuilder::class);
+        if ($systemEmailFromBuilder->canBuild()) {
+            $eMail->setSender($systemEmailFromBuilder->build());
+            $eMail->setReplyTo(self::getLoggedInUser());
+        } else {
+            $eMail->setSender(self::getLoggedInUser());
+        }
         $eMail->setReplyTo(self::getLoggedInUser());
         $eMail->setSubject($this->translate('save_event_subject'));
         $eMail->setMessage($this->createAdditionalEmailContent());
