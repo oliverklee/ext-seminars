@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
-use \OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
+use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
 
 /**
  * This class represents a seminar (or similar event).

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use \OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
+use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
 
 /**
  * This class represents an event.
