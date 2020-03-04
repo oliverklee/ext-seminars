@@ -1087,7 +1087,7 @@ class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendRemindersToOrganizersForEventWithTwoOrganizersWithTypo3DefaultFromAddressSendsEmailWithFirstOrganizerAsReplyTo()
+    public function sendRemindersToOrganizersForEventWithTwoOrganizersSendsEmailWithFirstOrganizerAsReplyTo()
     {
         $eventUid = $this->createSeminarWithOrganizer(
             [

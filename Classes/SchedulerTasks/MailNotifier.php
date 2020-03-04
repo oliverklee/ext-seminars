@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\SchedulerTasks;
 
-use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
 use OliverKlee\Seminars\Service\EmailService;
 use OliverKlee\Seminars\Service\EventStatusService;
@@ -172,11 +171,6 @@ class MailNotifier extends AbstractTask
     {
         $attachment = null;
 
-        $sender = null;
-        $systemEmailFromBuilder = GeneralUtility::makeInstance(SystemEmailFromBuilder::class);
-        if ($systemEmailFromBuilder->canBuild()) {
-            $sender = $systemEmailFromBuilder->build();
-        }
         // The first organizer is taken as replyTo address.
         /** @var \Tx_Seminars_OldModel_Organizer $replyTo */
         $replyTo = $event->getFirstOrganizer();
@@ -189,12 +183,7 @@ class MailNotifier extends AbstractTask
         foreach ($event->getOrganizerBag() as $organizer) {
             /** @var \Tx_Oelib_Mail $eMail */
             $eMail = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
-            if ($sender !== null) {
-                $eMail->setSender($sender);
-                $eMail->setReplyTo($organizer);
-            } else {
-                $eMail->setSender($organizer);
-            }
+            $eMail->setSender($event->getEmailSender());
             $eMail->setReplyTo($replyTo);
             $eMail->setSubject($subject);
             $eMail->addRecipient($organizer);

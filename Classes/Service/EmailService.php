@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Service;
 
-use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Lang\LanguageService;
@@ -66,13 +65,8 @@ class EmailService implements SingletonInterface
 
             /** @var \Tx_Oelib_Mail $eMail */
             $eMail = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
-            $systemEmailFromBuilder = GeneralUtility::makeInstance(SystemEmailFromBuilder::class);
-            if ($systemEmailFromBuilder->canBuild()) {
-                $eMail->setSender($systemEmailFromBuilder->build());
-                $eMail->setReplyTo($event->getFirstOrganizer());
-            } else {
-                $eMail->setSender($event->getFirstOrganizer());
-            }
+            $eMail->setSender($event->getEmailSender());
+            $eMail->setReplyTo($event->getFirstOrganizer());
             $eMail->addRecipient($user);
             $eMail->setSubject($this->replaceMarkers($subject, $event, $user));
 

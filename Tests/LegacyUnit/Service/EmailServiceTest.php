@@ -186,7 +186,7 @@ final class EmailServiceTest extends TestCase
     /**
      * @test
      */
-    public function sendEmailToAttendeesWithTypo3DefaultFromAdressUsesFirstOrganizerAsReplyTo()
+    public function sendEmailToAttendeesUsesFirstOrganizerAsReplyTo()
     {
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = 'system-foo@example.com';
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = 'Mr. Default';

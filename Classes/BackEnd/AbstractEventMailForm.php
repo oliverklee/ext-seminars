@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\BackEnd;
 
-use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
@@ -390,6 +389,7 @@ abstract class AbstractEventMailForm
     private function sendEmailToAttendees()
     {
         $organizer = $this->getEvent()->getFirstOrganizer();
+        $sender = $this->getEvent()->getEmailSender();
 
         /** @var \Tx_Seminars_BagBuilder_Registration $registrationBagBuilder */
         $registrationBagBuilder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Registration::class);
@@ -413,13 +413,8 @@ abstract class AbstractEventMailForm
                 }
                 /** @var \Tx_Oelib_Mail $eMail */
                 $eMail = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
-                $systemEmailFromBuilder = GeneralUtility::makeInstance(SystemEmailFromBuilder::class);
-                if ($systemEmailFromBuilder->canBuild()) {
-                    $eMail->setSender($systemEmailFromBuilder->build());
-                    $eMail->setReplyTo($organizer);
-                } else {
-                    $eMail->setSender($organizer);
-                }
+                $eMail->setSender($sender);
+                $eMail->setReplyTo($organizer);
                 $eMail->setSubject($this->getPostData('subject'));
                 $eMail->addRecipient($registration->getFrontEndUser());
                 $eMail->setMessage($this->createMessageBody($user, $organizer));

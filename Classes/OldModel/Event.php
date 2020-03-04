@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
+use \OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
 
 /**
  * This class represents a seminar (or similar event).
@@ -13,6 +14,8 @@ use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
  */
 class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 {
+    use EventEmailSenderTrait;
+
     /**
      * the same as the class name
      *

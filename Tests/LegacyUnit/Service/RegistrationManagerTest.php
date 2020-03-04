@@ -2607,7 +2607,7 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
     /**
      * @test
      */
-    public function notifyAttendeeWithTypo3DefaultFromAddressSetsOrganizerAsReplyTo()
+    public function notifyAttendeeSetsOrganizerAsReplyTo()
     {
         $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
@@ -5144,7 +5144,7 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
     /**
      * @test
      */
-    public function notifyOrganizersWithTypo3DefaultFromAddressUsesOrganizerAsReplyTo()
+    public function notifyOrganizersUsesOrganizerAsReplyTo()
     {
         $this->subject->setConfigurationValue('sendNotification', true);
 
@@ -5543,7 +5543,7 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
     /**
      * @test
      */
-    public function sendAdditionalNotificationWithTypo3DefaultFromAdressUsesUsesTheFirstOrganizerAsReplyToIfEmailIsSentToTwoOrganizers()
+    public function sendAdditionalNotificationUsesTheFirstOrganizerAsReplyToIfEmailIsSentToTwoOrganizers()
     {
         $organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',

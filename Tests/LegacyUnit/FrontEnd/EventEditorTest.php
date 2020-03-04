@@ -1894,7 +1894,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function sendEMailToReviewerWithTypo3DefaultFromAdressUsesFrontEndUserAsReplyToForMail()
+    public function sendEMailToReviewerUsesFrontEndUserAsReplyToForMail()
     {
         $seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->createAndLoginUserWithReviewer();
@@ -2099,7 +2099,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function sendAdditionalNotificationEmailToReviewerWithTypo3DefaultFromAddressUsesFrontEndUserMailAsReplyTo()
+    public function sendAdditionalNotificationEmailToReviewerUsesFrontEndUserMailAsReplyTo()
     {
         $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();

@@ -1421,13 +1421,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
             /** @var \Tx_Oelib_Mail $eMail */
             $eMail = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
             $eMail->addRecipient($reviewer);
-            $systemEmailFromBuilder = GeneralUtility::makeInstance(SystemEmailFromBuilder::class);
-            if ($systemEmailFromBuilder->canBuild()) {
-                $eMail->setSender($systemEmailFromBuilder->build());
-                $eMail->setReplyTo(self::getLoggedInUser());
-            } else {
-                $eMail->setSender(self::getLoggedInUser());
-            }
+            $eMail->setSender($this->getEmailSender());
             $eMail->setReplyTo(self::getLoggedInUser());
             $eMail->setSubject($this->translate('publish_event_subject'));
             $eMail->setMessage($this->createEMailContent($event));
@@ -1536,13 +1530,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         /** @var \Tx_Oelib_Mail $eMail */
         $eMail = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
         $eMail->addRecipient($reviewer);
-        $systemEmailFromBuilder = GeneralUtility::makeInstance(SystemEmailFromBuilder::class);
-        if ($systemEmailFromBuilder->canBuild()) {
-            $eMail->setSender($systemEmailFromBuilder->build());
-            $eMail->setReplyTo(self::getLoggedInUser());
-        } else {
-            $eMail->setSender(self::getLoggedInUser());
-        }
+        $eMail->setSender($this->getEmailSender());
         $eMail->setReplyTo(self::getLoggedInUser());
         $eMail->setSubject($this->translate('save_event_subject'));
         $eMail->setMessage($this->createAdditionalEmailContent());
@@ -2853,5 +2841,21 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     public function setSavedFormValue($key, $value)
     {
         $this->savedFormData[$key] = $value;
+    }
+
+    /**
+     * Returns a MailRole that should be used as E-Mail sender
+     *
+     * @return Tx_Oelib_Interface_MailRole
+     */
+    protected function getEmailSender(): Tx_Oelib_Interface_MailRole
+    {
+        $systemEmailFromBuilder = GeneralUtility::makeInstance(SystemEmailFromBuilder::class);
+        if ($systemEmailFromBuilder->canBuild()) {
+            $sender = $systemEmailFromBuilder->build();
+        } else {
+            $sender = self::getLoggedInUser();
+        }
+        return $sender;
     }
 }
