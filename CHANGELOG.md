@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add `Registration::setFrontEndUser()` and cache it (#508)
 
 ### Changed
+- Upgrade PHPUnit and nimut/testing-framework (#513)
 - Merge the testing registration model into the regular model (#510)
 - Move more tests to the new testing framework (#507, #509, #510)
 - Change the casing of `Registration::setFrontEndUserUID` (#506)

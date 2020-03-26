@@ -543,15 +543,14 @@ class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
     /**
      * @test
      */
-    public function createTypoLinkInContentMockNotHtmlspecialcharsLinkTitle()
+    public function createTypoLinkInContentMockNotHtmlspecialcharedLinkTitle()
     {
         $contentMock = $this->createContentMock();
 
-        self::assertContains(
-            '>foo & bar</a>',
-            $contentMock->getTypoLink('foo & bar', ''),
-            42
-        );
+        $linkTitle = 'foo & bar';
+        $result = $contentMock->getTypoLink($linkTitle, '');
+
+        self::assertContains($linkTitle . '</a>', $result);
     }
 
     /**
