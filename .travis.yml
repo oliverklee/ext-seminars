@@ -1,4 +1,7 @@
-sudo: false
+os: linux
+
+# We can switch to "bionic" once we have dropped support for PHP 7.0.
+dist: xenial
 
 language: php
 
