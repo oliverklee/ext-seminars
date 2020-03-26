@@ -21,6 +21,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Fix warnings in the `travis.yml` (#514)
 - Do not cache `vendor/` on Travis CI (#512)
 - Improve the manual (#500, #501, #504)
 
