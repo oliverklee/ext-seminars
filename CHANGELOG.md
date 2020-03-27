@@ -6,6 +6,18 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 3.0.1
+
+### Added
 - Add `Registration::setFrontEndUser()` and cache it (#508)
 
 ### Changed
@@ -15,10 +27,6 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Change the casing of `Registration::setFrontEndUserUID` (#506)
 - Allow empty user data for registrations (#505)
 - Improve the code autoformatting (#502)
-
-### Deprecated
-
-### Removed
 
 ### Fixed
 - Display target groups for dates in the single view (#518)
