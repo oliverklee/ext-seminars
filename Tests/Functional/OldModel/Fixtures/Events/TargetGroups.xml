@@ -39,4 +39,21 @@
         <uid_foreign>2</uid_foreign>
         <sorting>1</sorting>
     </tx_seminars_seminars_target_groups_mm>
+
+    <tx_seminars_seminars>
+        <uid>4</uid>
+        <title>topic with one target group</title>
+        <object_type>1</object_type>
+        <target_groups>1</target_groups>
+    </tx_seminars_seminars>
+    <tx_seminars_seminars_target_groups_mm>
+        <uid_local>4</uid_local>
+        <uid_foreign>1</uid_foreign>
+    </tx_seminars_seminars_target_groups_mm>
+    <tx_seminars_seminars>
+        <uid>5</uid>
+        <title>date with one target group</title>
+        <object_type>2</object_type>
+        <topic>4</topic>
+    </tx_seminars_seminars>
 </dataset>

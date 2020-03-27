@@ -429,4 +429,18 @@ final class EventTest extends FunctionalTestCase
         $expected = ['Target group two', 'Target group one'];
         self::assertSame($expected, $result);
     }
+
+    /**
+     * @test
+     */
+    public function getTargetGroupsAsArrayForDateReturnsTitlesOfTopicTargetGroups()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/TargetGroups.xml');
+
+        $subject = TestingEvent::fromUid(5);
+        $result = $subject->getTargetGroupsAsArray();
+
+        $expected = ['Target group one'];
+        self::assertSame($expected, $result);
+    }
 }
