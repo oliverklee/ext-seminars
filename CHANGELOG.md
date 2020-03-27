@@ -11,7 +11,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Changed
 - Upgrade PHPUnit and nimut/testing-framework (#513)
 - Merge the testing registration model into the regular model (#510)
-- Move more tests to the new testing framework (#507, #509, #510)
+- Move more tests to the new testing framework (#507, #509, #510, #516)
 - Change the casing of `Registration::setFrontEndUserUID` (#506)
 - Allow empty user data for registrations (#505)
 - Improve the code autoformatting (#502)
