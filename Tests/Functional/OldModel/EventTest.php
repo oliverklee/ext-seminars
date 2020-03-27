@@ -347,4 +347,45 @@ final class EventTest extends FunctionalTestCase
 
         self::assertSame(2, $subject->getVacancies());
     }
+
+    /**
+     * @test
+     */
+    public function getCheckboxesForNoCheckboxesReturnsEmptyArray()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
+
+        $subject = TestingEvent::fromUid(2);
+        $result = $subject->getCheckboxes();
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getCheckboxesReturnsCaptionAndUidOfAssociatedCheckboxes()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
+
+        $subject = TestingEvent::fromUid(10);
+        $result = $subject->getCheckboxes();
+
+        $expected = [['caption' => 'Checkbox one', 'value' => 1]];
+        self::assertSame($expected, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getCheckboxesReturnsAssociatedCheckboxesOrderedBySorting()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
+
+        $subject = TestingEvent::fromUid(11);
+        $result = $subject->getCheckboxes();
+
+        $expected = [['caption' => 'Checkbox two', 'value' => 2], ['caption' => 'Checkbox one', 'value' => 1]];
+        self::assertSame($expected, $result);
+    }
 }

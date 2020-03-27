@@ -294,7 +294,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
         // A mayday would be returned without unsetting the form ID.
         unset(
             $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['ameos_formidable']['context']
-                ['forms']['tx_seminars_pi1_registration_editor']
+            ['forms']['tx_seminars_pi1_registration_editor']
         );
         if (!\is_array($frontEndController->additionalHeaderData)) {
             return;
@@ -1327,13 +1327,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      */
     public function populateCheckboxes(): array
     {
-        $result = [];
-
-        if ($this->getSeminar()->hasCheckboxes()) {
-            $result = $this->getSeminar()->getCheckboxes();
-        }
-
-        return $result;
+        return $this->getSeminar()->hasCheckboxes() ? $this->getSeminar()->getCheckboxes() : [];
     }
 
     /**

@@ -3189,7 +3189,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     public function getCheckboxes(): array
     {
         return $this->hasCheckboxes()
-            ? $this->getTopicMmRecords('tx_seminars_checkboxes', 'tx_seminars_seminars_checkboxes_mm') : [];
+            ? $this->getMmRecordsForSelection('tx_seminars_checkboxes', 'tx_seminars_seminars_checkboxes_mm') : [];
     }
 
     /**
@@ -3220,8 +3220,25 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      */
     protected function getMmRecordsForSelection(string $foreignTable, string $mmTable): array
     {
+        return $this->mmRecordsToSelection($this->getMmRecords($foreignTable, $mmTable));
+    }
+
+    /**
+     * @param string $foreignTable
+     * @param string $mmTable
+     *
+     * @return array[] options, consisting each of a nested array with the keys "caption" (for the title) and "value"
+     *                 (for the UID), might be empty
+     */
+    protected function getTopicMmRecordsForSelection(string $foreignTable, string $mmTable): array
+    {
+        return $this->mmRecordsToSelection($this->getTopicMmRecords($foreignTable, $mmTable));
+    }
+
+    private function mmRecordsToSelection(array $records): array
+    {
         $options = [];
-        foreach ($this->getMmRecords($foreignTable, $mmTable) as $record) {
+        foreach ($records as $record) {
             $options[] = ['caption' => $record['title'], 'value' => (int)$record['uid']];
         }
 
