@@ -126,4 +126,37 @@
         <title>event without any registrations, but with open seats</title>
         <attendees_max>12</attendees_max>
     </tx_seminars_seminars>
+
+    <tx_seminars_seminars>
+        <uid>10</uid>
+        <title>event with one checkbox</title>
+        <checkboxes>1</checkboxes>
+    </tx_seminars_seminars>
+    <tx_seminars_checkboxes>
+        <uid>1</uid>
+        <title>Checkbox one</title>
+    </tx_seminars_checkboxes>
+    <tx_seminars_seminars_checkboxes_mm>
+        <uid_local>10</uid_local>
+        <uid_foreign>1</uid_foreign>
+    </tx_seminars_seminars_checkboxes_mm>
+    <tx_seminars_seminars>
+        <uid>11</uid>
+        <title>event with two checkboxes</title>
+        <checkboxes>2</checkboxes>
+    </tx_seminars_seminars>
+    <tx_seminars_checkboxes>
+        <uid>2</uid>
+        <title>Checkbox two</title>
+    </tx_seminars_checkboxes>
+    <tx_seminars_seminars_checkboxes_mm>
+        <uid_local>11</uid_local>
+        <uid_foreign>1</uid_foreign>
+        <sorting>2</sorting>
+    </tx_seminars_seminars_checkboxes_mm>
+    <tx_seminars_seminars_checkboxes_mm>
+        <uid_local>11</uid_local>
+        <uid_foreign>2</uid_foreign>
+        <sorting>1</sorting>
+    </tx_seminars_seminars_checkboxes_mm>
 </dataset>
