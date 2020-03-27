@@ -21,6 +21,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Display target groups for dates in the single view (#518)
 - Display the caption of registration option checkboxes (#515)
 - Fix warnings in the `travis.yml` (#514)
 - Do not cache `vendor/` on Travis CI (#512)

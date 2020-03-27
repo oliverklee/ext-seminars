@@ -94,6 +94,21 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     }
 
     /**
+     * Gets a list of the titles of (topic) records referenced by the this record.
+     *
+     * @param string $foreignTable the name of the foreign table (must not be empty), having the uid and title fields
+     * @param string $mmTable the name of the m:m table, having the uid_local, uid_foreign and sorting fields
+     *
+     * @return string[] the titles of the referenced records
+     */
+    protected function getTopicMmRecordTitles(string $foreignTable, string $mmTable): array
+    {
+        $uid = $this->isEventDate() ? $this->getRecordPropertyInteger('topic') : $this->getUid();
+
+        return $this->getMmRecordTitlesByUid($foreignTable, $mmTable, $uid);
+    }
+
+    /**
      * Gets our topic's title. For date records, this will return the
      * corresponding topic record's title.
      *
@@ -1812,7 +1827,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             return [];
         }
 
-        return $this->getMmRecordTitles('tx_seminars_target_groups', 'tx_seminars_seminars_target_groups_mm');
+        return $this->getTopicMmRecordTitles('tx_seminars_target_groups', 'tx_seminars_seminars_target_groups_mm');
     }
 
     /**
