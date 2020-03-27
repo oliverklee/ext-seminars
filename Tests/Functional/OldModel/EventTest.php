@@ -388,4 +388,45 @@ final class EventTest extends FunctionalTestCase
         $expected = [['caption' => 'Checkbox two', 'value' => 2], ['caption' => 'Checkbox one', 'value' => 1]];
         self::assertSame($expected, $result);
     }
+
+    /**
+     * @test
+     */
+    public function getTargetGroupsAsArrayForNoTargetGroupsReturnsEmptyArray()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/TargetGroups.xml');
+
+        $subject = TestingEvent::fromUid(1);
+        $result = $subject->getTargetGroupsAsArray();
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getTargetGroupsAsArrayReturnsTitlesOfAssociatedTargetGroups()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/TargetGroups.xml');
+
+        $subject = TestingEvent::fromUid(2);
+        $result = $subject->getTargetGroupsAsArray();
+
+        $expected = ['Target group one'];
+        self::assertSame($expected, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getTargetGroupsAsArrayReturnsAssociatedTargetGroupsOrderedBySorting()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/TargetGroups.xml');
+
+        $subject = TestingEvent::fromUid(3);
+        $result = $subject->getTargetGroupsAsArray();
+
+        $expected = ['Target group two', 'Target group one'];
+        self::assertSame($expected, $result);
+    }
 }

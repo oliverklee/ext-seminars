@@ -3026,48 +3026,6 @@ final class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function getTargetGroupsAsArrayWithNoTargetGroups()
-    {
-        self::assertSame(
-            [],
-            $this->subject->getTargetGroupsAsArray()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getTargetGroupsAsArrayWithSingleTargetGroup()
-    {
-        $title = 'TEST target group 1';
-        $this->addTargetGroupRelation(['title' => $title]);
-
-        self::assertSame(
-            [$title],
-            $this->subject->getTargetGroupsAsArray()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getTargetGroupsAsArrayWithMultipleTargetGroups()
-    {
-        $titleTargetGroup1 = 'TEST target group 1';
-        $this->addTargetGroupRelation(['title' => $titleTargetGroup1]);
-
-        $titleTargetGroup2 = 'TEST target group 2';
-        $this->addTargetGroupRelation(['title' => $titleTargetGroup2]);
-
-        self::assertSame(
-            [$titleTargetGroup1, $titleTargetGroup2],
-            $this->subject->getTargetGroupsAsArray()
-        );
-    }
-
     /*
      * Tests regarding the payment methods
      */
