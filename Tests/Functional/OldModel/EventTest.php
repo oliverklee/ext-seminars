@@ -353,9 +353,9 @@ final class EventTest extends FunctionalTestCase
      */
     public function getCheckboxesForNoCheckboxesReturnsEmptyArray()
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/Checkboxes.xml');
 
-        $subject = TestingEvent::fromUid(2);
+        $subject = TestingEvent::fromUid(1);
         $result = $subject->getCheckboxes();
 
         self::assertSame([], $result);
@@ -366,9 +366,9 @@ final class EventTest extends FunctionalTestCase
      */
     public function getCheckboxesReturnsCaptionAndUidOfAssociatedCheckboxes()
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/Checkboxes.xml');
 
-        $subject = TestingEvent::fromUid(10);
+        $subject = TestingEvent::fromUid(2);
         $result = $subject->getCheckboxes();
 
         $expected = [['caption' => 'Checkbox one', 'value' => 1]];
@@ -380,9 +380,9 @@ final class EventTest extends FunctionalTestCase
      */
     public function getCheckboxesReturnsAssociatedCheckboxesOrderedBySorting()
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/Checkboxes.xml');
 
-        $subject = TestingEvent::fromUid(11);
+        $subject = TestingEvent::fromUid(3);
         $result = $subject->getCheckboxes();
 
         $expected = [['caption' => 'Checkbox two', 'value' => 2], ['caption' => 'Checkbox one', 'value' => 1]];
