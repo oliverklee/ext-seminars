@@ -1,4 +1,7 @@
-sudo: false
+os: linux
+
+# We can switch to "bionic" once we have dropped support for PHP 7.0.
+dist: xenial
 
 language: php
 
@@ -17,7 +20,6 @@ env:
 
 cache:
   directories:
-  - .Build/vendor
   - $HOME/.composer/cache
 
 before_install:

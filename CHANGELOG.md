@@ -6,21 +6,34 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
-- Add `Registration::setFrontEndUser()` and cache it (#508)
 
 ### Changed
-- Use TYPO3 system mail as sender and current sender as reply to address in Mails (#511)
-- Merge the testing registration model into the regular model (#510)
-- Move more tests to the new testing framework (#507, #509, #510)
-- Change the casing of `Registration::setFrontEndUserUID` (#506)
-- Allow empty user data for registrations (#505)
-- Improve the code autoformatting (#502)
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
+
+## 3.0.1
+
+### Added
+- Add `Registration::setFrontEndUser()` and cache it (#508)
+
+### Changed
+- Use TYPO3 system mail as sender and current sender as reply to address in Mails (#511)
+- Upgrade PHPUnit and nimut/testing-framework (#513)
+- Merge the testing registration model into the regular model (#510)
+- Move more tests to the new testing framework (#507, #509, #510, #516, #517)
+- Change the casing of `Registration::setFrontEndUserUID` (#506)
+- Allow empty user data for registrations (#505)
+- Improve the code autoformatting (#502)
+
+### Fixed
+- Display target groups for dates in the single view (#518)
+- Display the caption of registration option checkboxes (#515)
+- Fix warnings in the `travis.yml` (#514)
+- Do not cache `vendor/` on Travis CI (#512)
 - Improve the manual (#500, #501, #504)
 
 ## 3.0.0
