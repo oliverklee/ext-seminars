@@ -171,7 +171,6 @@ class MailNotifier extends AbstractTask
     {
         $attachment = null;
 
-        // The first organizer is taken as replyTo address.
         /** @var \Tx_Seminars_OldModel_Organizer $replyTo */
         $replyTo = $event->getFirstOrganizer();
         $subject = $this->customizeMessage($messageKey . 'Subject', $event);

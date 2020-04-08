@@ -8,15 +8,15 @@ use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * Trait that adds the method getEmailSender() to get the sender MailRole for current Event.
+ * Trait that adds the method getEmailSender() to get the sender MailRole for the current Event.
  *
  * @author Pascal Rinker <projects@jweiland.net>
  */
 trait EventEmailSenderTrait
 {
     /**
-     * Returns a MailRole with the default mail from TYPO3 if set
-     * otherwise returns a MailRole with the mail of the first organizer
+     * Returns a MailRole with the default mail from TYPO3 if set.
+     * It otherwise returns a MailRole with the mail of the first organizer.
      *
      * @return \Tx_Oelib_Interface_MailRole
      */

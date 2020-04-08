@@ -36,7 +36,7 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
     private $headerProxy = null;
 
     /**
-     * @var array
+     * @var string[][]
      */
     protected $configurationToUseInTestInstance = [
         'MAIL' => [

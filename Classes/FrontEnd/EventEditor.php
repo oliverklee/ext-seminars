@@ -2843,12 +2843,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $this->savedFormData[$key] = $value;
     }
 
-    /**
-     * Returns a MailRole that should be used as E-Mail sender
-     *
-     * @return Tx_Oelib_Interface_MailRole
-     */
-    protected function getEmailSender(): Tx_Oelib_Interface_MailRole
+    protected function getEmailSender(): \Tx_Oelib_Interface_MailRole
     {
         $systemEmailFromBuilder = GeneralUtility::makeInstance(SystemEmailFromBuilder::class);
         if ($systemEmailFromBuilder->canBuild()) {
