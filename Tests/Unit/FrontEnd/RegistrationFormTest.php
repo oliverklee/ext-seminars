@@ -226,8 +226,6 @@ final class RegistrationFormTest extends UnitTestCase
      */
     public function getThankYouAfterRegistrationUrlWithOneTimeAccountAndLogOutEnabledLogsUserOff()
     {
-        self::markTestIncomplete('This needs a bug fix first.');
-
         $this->session->setAsBoolean('onetimeaccount', true);
 
         $configuration = self::CONFIGURATION;

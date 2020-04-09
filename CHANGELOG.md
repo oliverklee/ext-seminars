@@ -15,6 +15,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Stop accessing `FrontEndController::loginUser` in TYPO3 9 (#526, #522)
 - Downgrade to PHPUnit 6.5 (#525)
 - Remove whitespace around the email salutation (#523, #205)
 
