@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Downgrade to PHPUnit 6.5 (#525)
 - Remove whitespace around the email salutation (#523, #205)
 
 ## 3.0.1
