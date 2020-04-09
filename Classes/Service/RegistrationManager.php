@@ -1576,7 +1576,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
             $introduction .= ' ' . sprintf($this->translate('email_price'), $registration->getTotalPrice());
         }
 
-        $this->setMarker('introduction', $introduction . '.');
+        $this->setMarker('introduction', \trim($introduction . '.'));
     }
 
     /**

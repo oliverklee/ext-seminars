@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Remove whitespace around the email salutation (#523, #205)
 
 ## 3.0.1
 
