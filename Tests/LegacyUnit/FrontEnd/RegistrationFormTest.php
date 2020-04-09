@@ -30,7 +30,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
     private $testingFramework = null;
 
     /**
-     * @var \Tx_Oelib_FakeSession a fake session
+     * @var \Tx_Oelib_FakeSession
      */
     private $session = null;
 
@@ -131,54 +131,6 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
         self::assertNotContains(
             '[showUid]',
             $this->subject->getPageToShowAfterUnregistrationUrl()
-        );
-    }
-
-    ///////////////////////////////////////////////////////////
-    // Tests for getting the thank-you-after-registration URL
-    ///////////////////////////////////////////////////////////
-
-    public function testGetThankYouAfterRegistrationUrlReturnsUrlStartingWithHttp()
-    {
-        self::assertRegExp(
-            '/^http:\\/\\/./',
-            $this->subject->getThankYouAfterRegistrationUrl()
-        );
-    }
-
-    public function testGetThankYouAfterRegistrationUrlReturnsUrlWithEncodedBrackets()
-    {
-        self::assertContains(
-            '%5BshowUid%5D',
-            $this->subject->getThankYouAfterRegistrationUrl()
-        );
-
-        self::assertNotContains(
-            '[showUid]',
-            $this->subject->getThankYouAfterRegistrationUrl()
-        );
-    }
-
-    public function testGetThankYouAfterRegistrationUrlLeavesUserLoggedInByDefault()
-    {
-        $this->testingFramework->createAndLoginFrontEndUser();
-
-        $this->subject->getThankYouAfterRegistrationUrl();
-
-        self::assertTrue(
-            $this->testingFramework->isLoggedIn()
-        );
-    }
-
-    public function testGetThankYouAfterRegistrationUrlWithOneTimeAccountMarkerInUserSessionLogsOutUser()
-    {
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $this->session->setAsBoolean('onetimeaccount', true);
-
-        $this->subject->getThankYouAfterRegistrationUrl();
-
-        self::assertFalse(
-            $this->testingFramework->isLoggedIn()
         );
     }
 
