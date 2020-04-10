@@ -79,7 +79,7 @@
         "vendor-dir": ".Build/vendor"
     },
     "scripts": {
-        "php:fix": ".Build/vendor/bin/php-cs-fixer --config=Configuration/php-cs-fixer.php fix Classes Tests && phpcbf Classes Configuration Tests",
+        "php:fix": ".Build/vendor/bin/php-cs-fixer --config=Configuration/php-cs-fixer.php fix Classes Tests && .Build/vendor/bin/phpcbf Classes Configuration Tests",
         "ci:php:lint": "find *.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
         "ci:php:sniff": ".Build/vendor/bin/phpcs Classes Configuration Tests",
         "ci:php:fixer": ".Build/vendor/bin/php-cs-fixer --config=Configuration/php-cs-fixer.php fix --dry-run -v --show-progress=dots --diff-format=udiff Classes Tests",
