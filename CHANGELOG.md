@@ -6,14 +6,22 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
-- Add tests for the checkboxes in the registration form (#530)
 
 ### Changed
-- Move more tests to the new testing framework (#524, #529)
 
 ### Deprecated
 
 ### Removed
+
+### Fixed
+
+## 3.0.2
+
+### Added
+- Add tests for the checkboxes in the registration form (#530)
+
+### Changed
+- Move more tests to the new testing framework (#524, #529)
 
 ### Fixed
 - Attach the registration checkboxes to dates, not topics (#531)
