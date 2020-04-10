@@ -120,14 +120,13 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
     {
         parent::__construct($configuration, $contentObjectRenderer);
 
-        $formFieldsToShow = GeneralUtility::trimExplode(
+        $fieldKeys = GeneralUtility::trimExplode(
             ',',
             $this->getConfValueString('showRegistrationFields', 's_template_special'),
             true
         );
-
-        foreach ($formFieldsToShow as $currentFormField) {
-            $this->formFieldsToShow[$currentFormField] = $currentFormField;
+        foreach ($fieldKeys as $fieldKey) {
+            $this->formFieldsToShow[$fieldKey] = $fieldKey;
         }
     }
 
