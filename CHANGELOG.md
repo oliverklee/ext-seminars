@@ -16,6 +16,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Attach the registration checkboxes to dates, not topics (#531)
 - Clean up the registration form class a bit (#529)
 - Always use Composer-installed versions of the dev tools (#528)
 - Stop accessing `FrontEndController::loginUser` in TYPO3 9 (#526, #522)
