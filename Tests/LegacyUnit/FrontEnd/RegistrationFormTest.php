@@ -109,31 +109,6 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
         return $GLOBALS['TSFE'];
     }
 
-    ////////////////////////////////////////////////////////////////
-    // Tests for getting the page-to-show-after-unregistration URL
-    ////////////////////////////////////////////////////////////////
-
-    public function testGetPageToShowAfterUnregistrationUrlReturnsUrlStartingWithHttp()
-    {
-        self::assertRegExp(
-            '/^http:\\/\\/./',
-            $this->subject->getPageToShowAfterUnregistrationUrl()
-        );
-    }
-
-    public function testGetPageToShowAfterUnregistrationUrlReturnsUrlWithEncodedBrackets()
-    {
-        self::assertContains(
-            '%5BshowUid%5D',
-            $this->subject->getPageToShowAfterUnregistrationUrl()
-        );
-
-        self::assertNotContains(
-            '[showUid]',
-            $this->subject->getPageToShowAfterUnregistrationUrl()
-        );
-    }
-
     /*
      * Test concerning getAllFeUserData
      */
@@ -380,7 +355,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
     // Tests concerning getStepCounter
     ////////////////////////////////////
 
-    public function testGetStepCounterReturnsNumberOfCurrentPageIfCurrentPageNumberIsLowerThanNumberOfLastPage()
+    /**
+     * @test
+     */
+    public function getStepCounterReturnsNumberOfCurrentPageIfCurrentPageNumberIsLowerThanNumberOfLastPage()
     {
         $this->subject->setConfigurationValue(
             'numberOfFirstRegistrationPage',
@@ -399,7 +377,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
         );
     }
 
-    public function testGetStepCounterReturnsNumberOfLastRegistrationPage()
+    /**
+     * @test
+     */
+    public function getStepCounterReturnsNumberOfLastRegistrationPage()
     {
         $this->subject->setConfigurationValue(
             'numberOfFirstRegistrationPage',
@@ -417,7 +398,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
         );
     }
 
-    public function testGetStepCounterReturnsNumberOfLastRegistrationPageAsCurrentPageIfPageNumberIsAboveLastRegistrationPage()
+    /**
+     * @test
+     */
+    public function getStepCounterForNumberAboveLastRegistrationPageReturnsNumberOfLastRegistrationPageAsCurrentPage()
     {
         $this->subject->setConfigurationValue(
             'numberOfFirstRegistrationPage',

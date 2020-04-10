@@ -24,10 +24,16 @@ final class RegistrationFormTest extends UnitTestCase
     const PAGE_AFTER_REGISTRATION = 2;
 
     /**
+     * @var int
+     */
+    const PAGE_AFTER_UNREGISTRATION = 3;
+
+    /**
      * @var array
      */
     const CONFIGURATION = [
         'thankYouAfterRegistrationPID' => self::PAGE_AFTER_REGISTRATION,
+        'pageToShowAfterUnregistrationPID' => self::PAGE_AFTER_UNREGISTRATION,
     ];
 
     /**
@@ -148,6 +154,7 @@ final class RegistrationFormTest extends UnitTestCase
         $result = $subject->getThankYouAfterRegistrationUrl();
 
         self::assertContains('showUid', $result);
+        self::assertContains('=' . $eventUid, $result);
     }
 
     /**
@@ -235,5 +242,93 @@ final class RegistrationFormTest extends UnitTestCase
         $this->userProphecy->logoff()->shouldBeCalled();
 
         $subject->getThankYouAfterRegistrationUrl();
+    }
+
+    /**
+     * @test
+     */
+    public function getPageToShowAfterUnregistrationUrlReturnsUrlStartingWithHttp()
+    {
+        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(self::CONFIGURATION, $this->contentObject);
+
+        $linkConfiguration = ['parameter' => self::PAGE_AFTER_UNREGISTRATION];
+        $this->contentObjectProphecy->typoLink_URL($linkConfiguration)
+            ->willReturn('/?id=' . self::PAGE_AFTER_UNREGISTRATION);
+
+        $result = $subject->getPageToShowAfterUnregistrationUrl();
+
+        self::assertRegExp('/^http:\\/\\/./', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getPageToShowAfterUnregistrationUrlWithoutSendParametersNotContainsShowSeminarUid()
+    {
+        $configuration = self::CONFIGURATION;
+        $configuration['sendParametersToPageToShowAfterUnregistrationUrl'] = false;
+        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm($configuration, $this->contentObject);
+
+        $linkConfiguration = ['parameter' => self::PAGE_AFTER_UNREGISTRATION];
+        $this->contentObjectProphecy->typoLink_URL($linkConfiguration)
+            ->willReturn('/?id=' . self::PAGE_AFTER_UNREGISTRATION);
+
+        $result = $subject->getPageToShowAfterUnregistrationUrl();
+
+        self::assertNotContains('showUid', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getPageToShowAfterUnregistrationUrlWithSendParametersContainsShowSeminarUid()
+    {
+        $configuration = self::CONFIGURATION;
+        $configuration['sendParametersToPageToShowAfterUnregistrationUrl'] = true;
+        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm($configuration, $this->contentObject);
+
+        $eventUid = 42;
+        $this->eventProphecy->getUid()->willReturn($eventUid);
+        $subject->setSeminar($this->event);
+
+        $additionalParameters = '&tx_seminars_pi1%5BshowUid%5D=' . $eventUid;
+        $linkConfiguration = [
+            'parameter' => self::PAGE_AFTER_UNREGISTRATION,
+            'additionalParams' => $additionalParameters,
+        ];
+        $this->contentObjectProphecy->typoLink_URL($linkConfiguration)
+            ->willReturn('/?id=' . self::PAGE_AFTER_UNREGISTRATION . $additionalParameters);
+
+        $result = $subject->getPageToShowAfterUnregistrationUrl();
+
+        self::assertContains('showUid', $result);
+        self::assertContains('=' . $eventUid, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getPageToShowAfterUnregistrationUrlWithSendParametersEncodesBracketsInUrl()
+    {
+        $configuration = self::CONFIGURATION;
+        $configuration['sendParametersToPageToShowAfterUnregistrationUrl'] = true;
+        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm($configuration, $this->contentObject);
+
+        $eventUid = 42;
+        $this->eventProphecy->getUid()->willReturn($eventUid);
+        $subject->setSeminar($this->event);
+
+        $additionalParameters = '&tx_seminars_pi1%5BshowUid%5D=' . $eventUid;
+        $linkConfiguration = [
+            'parameter' => self::PAGE_AFTER_UNREGISTRATION,
+            'additionalParams' => $additionalParameters,
+        ];
+        $this->contentObjectProphecy->typoLink_URL($linkConfiguration)
+            ->willReturn('/?id=' . self::PAGE_AFTER_UNREGISTRATION . $additionalParameters);
+
+        $result = $subject->getPageToShowAfterUnregistrationUrl();
+
+        self::assertContains('%5BshowUid%5D', $result);
+        self::assertNotContains('[showUid]', $result);
     }
 }

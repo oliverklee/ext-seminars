@@ -8,13 +8,14 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
-- Move more tests to the new testing framework (#524)
+- Move more tests to the new testing framework (#524, #529)
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
+- Clean up the registration form class a bit (#529)
 - Always use Composer-installed versions of the dev tools (#528)
 - Stop accessing `FrontEndController::loginUser` in TYPO3 9 (#526, #522)
 - Downgrade to PHPUnit 6.5 (#525)
