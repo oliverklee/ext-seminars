@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Check the dates for checkboxes, not the topics (#533)
 
 ## 3.0.2
 
