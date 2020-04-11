@@ -64,9 +64,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     protected $statisticsHaveBeenCalculated = false;
 
     /**
-     * the related topic record as a reference to the object
-     *
-     * This will be null if we are not a date record.
+     * will be null if this is not a date record
      *
      * @var \Tx_Seminars_OldModel_Event|null
      */
@@ -87,10 +85,20 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         $topic = $this->loadTopic();
         // Avoid infinite loops due to date records that have been converted to a topic or single event.
         if ($topic !== null && !$topic->isEventDate()) {
-            $this->topic = $topic;
+            $this->setTopic($topic);
         }
 
         return $this->topic;
+    }
+
+    /**
+     * @param Tx_Seminars_OldModel_Event $topic
+     *
+     * @return void
+     */
+    public function setTopic(\Tx_Seminars_OldModel_Event $topic)
+    {
+        $this->topic = $topic;
     }
 
     /**
@@ -3181,25 +3189,21 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     }
 
     /**
-     * Checks whether we have any option checkboxes. If we are a date record,
-     * the corresponding topic record will be checked.
+     * Checks whether this event has any option checkboxes.
      *
-     * @return bool TRUE if we have at least one option checkbox,
-     *                 FALSE otherwise
+     * @return bool whether this event has at least one option checkbox
      */
     public function hasCheckboxes(): bool
     {
-        return $this->hasTopicInteger('checkboxes');
+        return $this->hasRecordPropertyInteger('checkboxes');
     }
 
     /**
      * Gets the option checkboxes associated with this event. If we are a date
-     * record, the option checkboxes of the corresponding topic record will be
-     * retrieved.
+     * record, the option checkboxes of the corresponding topic record will be retrieved.
      *
-     * @return array[] option checkboxes, consisting each of a nested
-     *               array with the keys "caption" (for the title) and "value"
-     *               (for the UID), might be empty
+     * @return array[] option checkboxes, consisting each of a nested array
+     *                 with the keys "caption" (for the title) and "value" (for the UID), might be empty
      */
     public function getCheckboxes(): array
     {
