@@ -810,9 +810,10 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
             $label = $labels[$key];
             $value = $this->getUserData($key);
             // Checks whether there is a value to display.
-            // If not, we don't use  the padding and break the line directly after the label.
+            // If not, we will not use the padding and break the line directly after the label.
             if ($value !== '') {
-                $result .= \str_pad($label . ': ', $maximumLabelLength + 2, ' ') . $value . LF;
+                $padding = \str_pad('', $maximumLabelLength - \mb_strlen($label, 'utf-8'));
+                $result .= $label . ': ' . $padding . $value . "\n";
             } else {
                 $result .= $label . ':' . LF;
             }
@@ -860,7 +861,8 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
             if (\strpos($value, LF) !== false) {
                 $result .= $currentLabel . ': ' . LF;
             } else {
-                $result .= \str_pad($currentLabel . ': ', $maximumLabelLength + 2, ' ');
+                $padding = \str_pad('', $maximumLabelLength - \mb_strlen($currentLabel, 'utf-8'));
+                $result .= $currentLabel . ': ' . $padding;
             }
             $result .= $value . LF;
         }
