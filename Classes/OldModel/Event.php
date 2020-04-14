@@ -2357,9 +2357,10 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             }
 
             // Check whether there is a value to display.
-            // If not, we don't use the padding and break the line directly after the label.
+            // If not, we will not use the padding and break the line directly after the label.
             if ($value !== '') {
-                $result .= \str_pad($currentLabel . ': ', $maxLength + 2, ' ') . $value . LF;
+                $padding = \str_pad('', $maxLength - \mb_strlen($currentLabel, 'utf-8'));
+                $result .= $currentLabel . ': ' . $padding . $value . "\n";
             } else {
                 $result .= $currentLabel . ':' . LF;
             }

@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Fix the alignment of labels with umlauts in the emails (#536)
 - Use proper label tags for the terms checkboxes (#535)
 - Check the dates for checkboxes, not the topics (#533)
 
