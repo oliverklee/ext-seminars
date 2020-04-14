@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Use proper label tags for the terms checkboxes (#535)
 - Check the dates for checkboxes, not the topics (#533)
 
 ## 3.0.2
