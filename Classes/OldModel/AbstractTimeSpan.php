@@ -2,7 +2,10 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Seminars\Hooks\HookProvider;
+use OliverKlee\Seminars\Hooks\Interfaces\DateTimeSpan;
 use OliverKlee\Seminars\OldModel\AbstractModel;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class offers timespan-related methods for the time slot and seminar classes.
@@ -13,6 +16,11 @@ use OliverKlee\Seminars\OldModel\AbstractModel;
 abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel implements
     \Tx_Oelib_Interface_ConfigurationCheckable
 {
+    /**
+     * @var HookProvider|null
+     */
+    protected $dateTimeSpanHookProvider = null;
+
     /**
      * Gets the begin date.
      *
@@ -113,6 +121,12 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel imple
                     $result = $beginDateDay;
                 }
                 $result .= $dash . $endDateDay;
+                $result = $this->getDateTimeSpanHookProvider()->executeHookReturningModifiedValue(
+                    'modifyDateSpan',
+                    $result,
+                    $this,
+                    $dash
+                );
             }
         } else {
             $result = $this->translate('message_willBeAnnounced');
@@ -159,6 +173,12 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel imple
         // and the end time is not the same as the begin time.
         if (($beginTime !== $endTime) && $this->hasEndTime()) {
             $result .= $dash . $endTime;
+            $result = $this->getDateTimeSpanHookProvider()->executeHookReturningModifiedValue(
+                'modifyTimeSpan',
+                $result,
+                $this,
+                $dash
+            );
         }
         $hours = $this->translate('label_hours');
         $result .= ' ' . $hours;
@@ -304,4 +324,21 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel imple
      * @return string our places or an empty string if the timespan has no places
      */
     abstract public function getPlaceShort(): string;
+
+    /**
+     * Gets the hook provider for the date and time span.
+     *
+     * @return HookProvider
+     */
+    protected function getDateTimeSpanHookProvider(): HookProvider
+    {
+        if (!$this->dateTimeSpanHookProvider instanceof HookProvider) {
+            $this->dateTimeSpanHookProvider = GeneralUtility::makeInstance(
+                HookProvider::class,
+                DateTimeSpan::class
+            );
+        }
+
+        return $this->dateTimeSpanHookProvider;
+    }
 }
