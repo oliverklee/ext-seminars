@@ -65,7 +65,8 @@ class EmailService implements SingletonInterface
 
             /** @var \Tx_Oelib_Mail $eMail */
             $eMail = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
-            $eMail->setSender($event->getFirstOrganizer());
+            $eMail->setSender($event->getEmailSender());
+            $eMail->setReplyTo($event->getFirstOrganizer());
             $eMail->addRecipient($user);
             $eMail->setSubject($this->replaceMarkers($subject, $event, $user));
 

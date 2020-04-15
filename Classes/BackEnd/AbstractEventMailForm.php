@@ -388,11 +388,13 @@ abstract class AbstractEventMailForm
      */
     private function sendEmailToAttendees()
     {
-        $organizer = $this->getEvent()->getFirstOrganizer();
+        $event = $this->getEvent();
+        $organizer = $event->getFirstOrganizer();
+        $sender = $event->getEmailSender();
 
         /** @var \Tx_Seminars_BagBuilder_Registration $registrationBagBuilder */
         $registrationBagBuilder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Registration::class);
-        $registrationBagBuilder->limitToEvent($this->getEvent()->getUid());
+        $registrationBagBuilder->limitToEvent($event->getUid());
         $registrations = $registrationBagBuilder->build();
 
         if (!$registrations->isEmpty()) {
@@ -412,7 +414,8 @@ abstract class AbstractEventMailForm
                 }
                 /** @var \Tx_Oelib_Mail $eMail */
                 $eMail = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
-                $eMail->setSender($organizer);
+                $eMail->setSender($sender);
+                $eMail->setReplyTo($organizer);
                 $eMail->setSubject($this->getPostData('subject'));
                 $eMail->addRecipient($registration->getFrontEndUser());
                 $eMail->setMessage($this->createMessageBody($user, $organizer));

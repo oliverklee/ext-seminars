@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Unit\OldModel;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
 use OliverKlee\Seminars\OldModel\AbstractModel;
+use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Test case.
@@ -21,7 +24,11 @@ final class EventTest extends UnitTestCase
 
     protected function setUp()
     {
-        $this->subject = new \Tx_Seminars_OldModel_Event();
+        $this->subject = TestingEvent::fromData([
+            'title' => 'A nice event',
+            'begin_date' => mktime(10, 0, 0, 4, 8, 2020),
+            'end_date' => mktime(18, 30, 0, 4, 20, 2020),
+        ]);
     }
 
     /**
@@ -171,5 +178,46 @@ final class EventTest extends UnitTestCase
         $subject->setTopic($topic);
 
         self::assertTrue($subject->hasCheckboxes());
+    }
+
+    /**
+     * @test
+     */
+    public function getEmailSenderReturnsSystemEmailMailRole()
+    {
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = 'system-foo@example.com';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = 'Mr. Default';
+        $systemEmailFromBuilder = GeneralUtility::makeInstance(SystemEmailFromBuilder::class);
+
+        self::assertEquals(
+            $systemEmailFromBuilder->build(),
+            $this->subject->getEmailSender()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getEmailSenderReturnsFirstOrganizerMailRole()
+    {
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = '';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = '';
+
+        $organizer = \Tx_Seminars_OldModel_Organizer::fromData([
+            'title' => 'Brain Gourmets',
+            'email' => 'organizer@example.com',
+            'email_footer' => 'Best workshops in town!',
+        ]);
+
+        $organizerBagMock = $this->createMock(\Tx_Seminars_Bag_Organizer::class);
+        $organizerBagMock->method('current')->willReturn($organizer);
+
+        GeneralUtility::addInstance(\Tx_Seminars_Bag_Organizer::class, $organizerBagMock);
+        $this->subject->setEventData(['uid' => 1, 'organizers' => 1]);
+
+        self::assertSame(
+            $organizer,
+            $this->subject->getEmailSender()
+        );
     }
 }

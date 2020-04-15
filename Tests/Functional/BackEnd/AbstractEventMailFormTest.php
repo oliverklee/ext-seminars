@@ -35,6 +35,16 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
      */
     private $headerProxy = null;
 
+    /**
+     * @var string[][]
+     */
+    protected $configurationToUseInTestInstance = [
+        'MAIL' => [
+            'defaultMailFromAddress' => 'system-foo@example.com',
+            'defaultMailFromName' => 'Mr. Default',
+        ],
+    ];
+
     protected function setUp()
     {
         parent::setUp();
@@ -133,7 +143,7 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function sendEmailUsesFirstOrganizerAsSender()
+    public function sendEmailUsesTypo3DefaultFromAddressAsSender()
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 
@@ -149,7 +159,53 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
         );
         $subject->render();
 
+        self::assertArrayHasKey('system-foo@example.com', $this->mailer->getFirstSentEmail()->getFrom());
+    }
+
+    /**
+     * @test
+     */
+    public function sendEmailUsesFirstOrganizerAsSender()
+    {
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL'] = [];
+
+        $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
+
+        $subject = new TestingEventMailForm(2);
+
+        $subject->setPostData(
+            [
+                'action' => 'sendEmail',
+                'isSubmitted' => '1',
+                'subject' => 'foo',
+                'messageBody' => 'Hello!',
+            ]
+        );
+        $subject->render();
+
         self::assertArrayHasKey('oliver@example.com', $this->mailer->getFirstSentEmail()->getFrom());
+    }
+
+    /**
+     * @test
+     */
+    public function sendEmailUsesFirstOrganizerAsReplyTo()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
+
+        $subject = new TestingEventMailForm(2);
+
+        $subject->setPostData(
+            [
+                'action' => 'sendEmail',
+                'isSubmitted' => '1',
+                'subject' => 'foo',
+                'messageBody' => 'Hello!',
+            ]
+        );
+        $subject->render();
+
+        self::assertArrayHasKey('oliver@example.com', $this->mailer->getFirstSentEmail()->getReplyTo());
     }
 
     /**

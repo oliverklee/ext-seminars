@@ -829,7 +829,8 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         /** @var \Tx_Oelib_Mail $eMailNotification */
         $eMailNotification = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
         $eMailNotification->addRecipient($user);
-        $eMailNotification->setSender($event->getFirstOrganizer());
+        $eMailNotification->setSender($event->getEmailSender());
+        $eMailNotification->setReplyTo($event->getFirstOrganizer());
         $eMailNotification->setSubject(
             $this->translate('email_' . $helloSubjectPrefix . 'Subject') . ': ' . $event->getTitleAndDate('-')
         );
@@ -993,7 +994,8 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         $organizers = $event->getOrganizerBag();
         /** @var \Tx_Oelib_Mail $eMailNotification */
         $eMailNotification = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
-        $eMailNotification->setSender($event->getFirstOrganizer());
+        $eMailNotification->setSender($event->getEmailSender());
+        $eMailNotification->setReplyTo($event->getFirstOrganizer());
 
         /** @var \Tx_Seminars_OldModel_Organizer $organizer */
         foreach ($organizers as $organizer) {
@@ -1124,7 +1126,8 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
 
         /** @var \Tx_Oelib_Mail $eMail */
         $eMail = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
-        $eMail->setSender($event->getFirstOrganizer());
+        $eMail->setSender($event->getEmailSender());
+        $eMail->setReplyTo($event->getFirstOrganizer());
         $eMail->setMessage($this->getMessageForNotification($registration, $emailReason));
         $eMail->setSubject(
             sprintf(

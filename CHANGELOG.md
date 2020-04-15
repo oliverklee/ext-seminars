@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add new date and time span formatting hooks (#460)
 
 ### Changed
+- Use TYPO3 system mail as sender and current sender as reply to address in Mails (#511)
 
 ### Deprecated
 

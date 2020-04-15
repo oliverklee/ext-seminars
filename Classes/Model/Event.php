@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
+
 /**
  * This class represents an event.
  *
@@ -10,6 +12,8 @@ declare(strict_types=1);
  */
 class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implements \Tx_Seminars_Interface_Titled
 {
+    use EventEmailSenderTrait;
+
     /**
      * @var int represents the type for a single event
      */

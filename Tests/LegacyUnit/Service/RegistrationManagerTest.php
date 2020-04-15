@@ -2602,13 +2602,63 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
     /**
      * @test
      */
-    public function notifyAttendeeSetsOrganizerAsSender()
+    public function notifyAttendeeSetsTypo3DefaultFromAddressAsSender()
     {
         $this->subject->setConfigurationValue('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
+
+        $defaultMailFromAddress = 'system-foo@example.com';
+        $defaultMailFromName = 'Mr. Default';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = $defaultMailFromAddress;
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = $defaultMailFromName;
+
+        $this->subject->notifyAttendee($registration, $pi1);
+
+        self::assertSame(
+            [$defaultMailFromAddress => $defaultMailFromName],
+            $this->mailer->getFirstSentEmail()->getFrom()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeSetsOrganizerAsReplyTo()
+    {
+        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1->init();
+
+        $registration = $this->createRegistration();
+
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = 'system-foo@example.com';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = 'Mr. Default';
+
+        $this->subject->notifyAttendee($registration, $pi1);
+
+        self::assertSame(
+            ['mail@example.com' => 'test organizer'],
+            $this->mailer->getFirstSentEmail()->getReplyTo()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeWithoutTypo3DefaultFromAddressSetsOrganizerAsSender()
+    {
+        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1->init();
+
+        $registration = $this->createRegistration();
+
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = '';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = '';
+
         $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertSame(
@@ -5093,15 +5143,63 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
     /**
      * @test
      */
-    public function notifyOrganizersUsesOrganizerAsFrom()
+    public function notifyOrganizersUsesTypo3DefaultFromAddressAsFrom()
     {
         $this->subject->setConfigurationValue('sendNotification', true);
 
         $registration = $this->createRegistration();
+
+        $defaultMailFromAddress = 'system-foo@example.com';
+        $defaultMailFromName = 'Mr. Default';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = $defaultMailFromAddress;
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = $defaultMailFromName;
+
+        $this->subject->notifyOrganizers($registration);
+
+        self::assertSame(
+            [$defaultMailFromAddress => $defaultMailFromName],
+            $this->mailer->getFirstSentEmail()->getFrom()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function notifyOrganizersUsesOrganizerAsReplyTo()
+    {
+        $this->subject->setConfigurationValue('sendNotification', true);
+
+        $registration = $this->createRegistration();
+
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = 'system-foo@example.com';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = 'Mr. Default';
+
         $this->subject->notifyOrganizers($registration);
 
         self::assertSame(
             ['mail@example.com' => 'test organizer'],
+            $this->mailer->getFirstSentEmail()->getReplyTo()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function notifyOrganizersWithoutTypo3DefaultFromAddressUsesOrganizerAsFrom()
+    {
+        $this->subject->setConfigurationValue('sendNotification', true);
+
+        $registration = $this->createRegistration();
+
+        $defaultMailFromAddress = 'system-foo@example.com';
+        $defaultMailFromName = 'Mr. Default';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = $defaultMailFromAddress;
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = $defaultMailFromName;
+
+        $this->subject->notifyOrganizers($registration);
+
+        self::assertSame(
+            [$defaultMailFromAddress => $defaultMailFromName],
             $this->mailer->getFirstSentEmail()->getFrom()
         );
     }
@@ -5426,6 +5524,92 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
     /**
      * @test
      */
+    public function sendAdditionalNotificationUsesTypo3DefaultFromAddressAsSenderIfEmailIsSentToTwoOrganizers()
+    {
+        $organizerUid = $this->testingFramework->createRecord(
+            'tx_seminars_organizers',
+            [
+                'title' => 'test organizer 2',
+                'email' => 'mail2@example.com',
+            ]
+        );
+        $this->testingFramework->createRelation(
+            'tx_seminars_seminars_organizers_mm',
+            $this->seminarUid,
+            $organizerUid
+        );
+        $this->testingFramework->changeRecord(
+            'tx_seminars_seminars',
+            $this->seminarUid,
+            ['organizers' => 2]
+        );
+
+        $registration = $this->createRegistration();
+
+        $defaultMailFromAddress = 'system-foo@example.com';
+        $defaultMailFromName = 'Mr. Default';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = $defaultMailFromAddress;
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = $defaultMailFromName;
+
+        $this->subject->sendAdditionalNotification($registration);
+
+        $sentEmails = $this->mailer->getSentEmails();
+
+        self::assertArrayHasKey(
+            $defaultMailFromAddress,
+            $sentEmails[0]->getFrom()
+        );
+        self::assertArrayHasKey(
+            $defaultMailFromAddress,
+            $sentEmails[1]->getFrom()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function sendAdditionalNotificationUsesTheFirstOrganizerAsReplyToIfEmailIsSentToTwoOrganizers()
+    {
+        $organizerUid = $this->testingFramework->createRecord(
+            'tx_seminars_organizers',
+            [
+                'title' => 'test organizer 2',
+                'email' => 'mail2@example.com',
+            ]
+        );
+        $this->testingFramework->createRelation(
+            'tx_seminars_seminars_organizers_mm',
+            $this->seminarUid,
+            $organizerUid
+        );
+        $this->testingFramework->changeRecord(
+            'tx_seminars_seminars',
+            $this->seminarUid,
+            ['organizers' => 2]
+        );
+
+        $registration = $this->createRegistration();
+
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = 'system-foo@example.com';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = 'Mr. Default';
+
+        $this->subject->sendAdditionalNotification($registration);
+
+        $sentEmails = $this->mailer->getSentEmails();
+
+        self::assertArrayHasKey(
+            'mail@example.com',
+            $sentEmails[0]->getReplyTo()
+        );
+        self::assertArrayHasKey(
+            'mail@example.com',
+            $sentEmails[1]->getReplyTo()
+        );
+    }
+
+    /**
+     * @test
+     */
     public function sendAdditionalNotificationUsesTheFirstOrganizerAsSenderIfEmailIsSentToTwoOrganizers()
     {
         $organizerUid = $this->testingFramework->createRecord(
@@ -5447,6 +5631,10 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
         );
 
         $registration = $this->createRegistration();
+
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = '';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = '';
+
         $this->subject->sendAdditionalNotification($registration);
 
         $sentEmails = $this->mailer->getSentEmails();
