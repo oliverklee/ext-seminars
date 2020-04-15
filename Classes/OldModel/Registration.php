@@ -5,6 +5,10 @@ declare(strict_types=1);
 use OliverKlee\Seminars\OldModel\AbstractModel;
 use TYPO3\CMS\Core\Database\ReferenceIndex;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup;
+use TYPO3\CMS\Extbase\Domain\Repository\FrontendUserGroupRepository;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
@@ -80,6 +84,11 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
     protected $user = null;
 
     /**
+     * @var FrontendUserGroupRepository|null
+     */
+    private $frontEndUserGroupRepository = null;
+
+    /**
      * @param ContentObjectRenderer|null $contentObjectRenderer
      *
      * @return void
@@ -99,6 +108,25 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
     public static function purgeCachedSeminars()
     {
         self::$cachedSeminars = [];
+    }
+
+    protected function getObjectManager(): ObjectManagerInterface
+    {
+        /** @var ObjectManager $objectManager */
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+
+        return $objectManager;
+    }
+
+    protected function getFrontEndUserGroupRepository(): FrontendUserGroupRepository
+    {
+        if (!$this->frontEndUserGroupRepository instanceof FrontendUserGroupRepository) {
+            /** @var FrontendUserGroupRepository $repository */
+            $repository = $this->getObjectManager()->get(FrontendUserGroupRepository::class);
+            $this->frontEndUserGroupRepository = $repository;
+        }
+
+        return $this->frontEndUserGroupRepository;
     }
 
     /**
@@ -406,8 +434,8 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
      * Retrieves a value out of the userData array. The return value will be an
      * empty string if the key is not defined in the $this->userData array.
      *
-     * If the data needs to be decoded to be readable (eg. the gender, the date
-     * of birth or the status), this function will already return the clear text version.
+     * If the data needs to be decoded to be readable (e.g., the gender, the date
+     * of birth or the status), this function will already return the clear-text version.
      *
      * @param string $key key of the data to retrieve, may contain leading or trailing spaces
      *
@@ -448,6 +476,20 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
             case 'name':
                 $user = $this->getFrontEndUser();
                 $result = $user instanceof \Tx_Seminars_Model_FrontEndUser ? $user->getName() : '';
+                break;
+            case 'usergroup':
+                $repository = $this->getFrontEndUserGroupRepository();
+                $titles = [];
+                /** @var int[] $uids */
+                $uids = GeneralUtility::intExplode(',', $rawData, true);
+                foreach ($uids as $uid) {
+                    /** @var FrontendUserGroup|null $group */
+                    $group = $repository->findByUid($uid);
+                    if ($group instanceof FrontendUserGroup) {
+                        $titles[] = $group->getTitle();
+                    }
+                }
+                $result = \implode(', ', $titles);
                 break;
             default:
                 $result = $rawData;
