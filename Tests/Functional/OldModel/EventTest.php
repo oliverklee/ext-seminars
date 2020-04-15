@@ -364,11 +364,25 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getCheckboxesReturnsCaptionAndUidOfAssociatedCheckboxes()
+    public function getCheckboxesReturnsCaptionAndUidOfAssociatedCheckboxesForSingleEvent()
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/Checkboxes.xml');
 
         $subject = TestingEvent::fromUid(2);
+        $result = $subject->getCheckboxes();
+
+        $expected = [['caption' => 'Checkbox one', 'value' => 1]];
+        self::assertSame($expected, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getCheckboxesReturnsCaptionAndUidOfAssociatedCheckboxesForEventDate()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/Checkboxes.xml');
+
+        $subject = TestingEvent::fromUid(4);
         $result = $subject->getCheckboxes();
 
         $expected = [['caption' => 'Checkbox one', 'value' => 1]];

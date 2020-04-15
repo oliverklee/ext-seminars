@@ -52,6 +52,26 @@ final class EventTest extends UnitTestCase
     /**
      * @test
      */
+    public function getTopicByDefaultReturnsNull()
+    {
+        self::assertNull($this->subject->getTopic());
+    }
+
+    /**
+     * @test
+     */
+    public function setTopicSetsTopic()
+    {
+        $topic = new \Tx_Seminars_OldModel_Event();
+
+        $this->subject->setTopic($topic);
+
+        self::assertSame($topic, $this->subject->getTopic());
+    }
+
+    /**
+     * @test
+     */
     public function getAttendancesMinByDefaultReturnsZero()
     {
         self::assertSame(0, $this->subject->getAttendancesMin());
@@ -122,6 +142,42 @@ final class EventTest extends UnitTestCase
         $subject = \Tx_Seminars_OldModel_Event::fromData(['offline_attendees' => 4]);
 
         self::assertTrue($subject->hasOfflineRegistrations());
+    }
+
+    /**
+     * @test
+     */
+    public function hasCheckboxesForSingleEventWithNoCheckboxesReturnsFalse()
+    {
+        $subject = \Tx_Seminars_OldModel_Event::fromData(['checkboxes' => 0]);
+
+        self::assertFalse($subject->hasCheckboxes());
+    }
+
+    /**
+     * @test
+     */
+    public function hasCheckboxesForSingleEventWithOneCheckboxReturnsTrue()
+    {
+        $subject = \Tx_Seminars_OldModel_Event::fromData(['checkboxes' => 1]);
+
+        self::assertTrue($subject->hasCheckboxes());
+    }
+
+    /**
+     * @test
+     */
+    public function hasCheckboxesForDateWithOneCheckboxReturnsTrue()
+    {
+        $data = [
+            'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+            'checkboxes' => 1,
+        ];
+        $subject = \Tx_Seminars_OldModel_Event::fromData($data);
+        $topic = \Tx_Seminars_OldModel_Event::fromData(['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]);
+        $subject->setTopic($topic);
+
+        self::assertTrue($subject->hasCheckboxes());
     }
 
     /**

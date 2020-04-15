@@ -2513,6 +2513,23 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
     /**
      * @test
      */
+    public function notifyAttendeeMailBodyNotContainsSpaceBeforeComma()
+    {
+        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1->init();
+
+        $registration = $this->createRegistration();
+        $this->subject->notifyAttendee($registration, $pi1);
+
+        $result = $this->mailer->getFirstSentEmail()->getBody();
+
+        self::assertNotContains(' ,', $result);
+    }
+
+    /**
+     * @test
+     */
     public function notifyAttendeeMailBodyContainsRegistrationFood()
     {
         $this->subject->setConfigurationValue('sendConfirmation', true);

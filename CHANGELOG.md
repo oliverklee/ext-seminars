@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add new date and time span formatting hooks (#460)
 
 ### Changed
 - Use TYPO3 system mail as sender and current sender as reply to address in Mails (#511)
@@ -15,6 +16,25 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Fix the alignment of labels with umlauts in the emails (#536)
+- Use proper label tags for the terms checkboxes (#535)
+- Check the dates for checkboxes, not the topics (#533)
+
+## 3.0.2
+
+### Added
+- Add tests for the checkboxes in the registration form (#530)
+
+### Changed
+- Move more tests to the new testing framework (#524, #529)
+
+### Fixed
+- Attach the registration checkboxes to dates, not topics (#531)
+- Clean up the registration form class a bit (#529)
+- Always use Composer-installed versions of the dev tools (#528)
+- Stop accessing `FrontEndController::loginUser` in TYPO3 9 (#526, #522)
+- Downgrade to PHPUnit 6.5 (#525)
+- Remove whitespace around the email salutation (#523, #205)
 
 ## 3.0.1
 

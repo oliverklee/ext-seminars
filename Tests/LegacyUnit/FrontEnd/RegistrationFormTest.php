@@ -30,7 +30,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
     private $testingFramework = null;
 
     /**
-     * @var \Tx_Oelib_FakeSession a fake session
+     * @var \Tx_Oelib_FakeSession
      */
     private $session = null;
 
@@ -107,79 +107,6 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
     private function getFrontEndController(): TypoScriptFrontendController
     {
         return $GLOBALS['TSFE'];
-    }
-
-    ////////////////////////////////////////////////////////////////
-    // Tests for getting the page-to-show-after-unregistration URL
-    ////////////////////////////////////////////////////////////////
-
-    public function testGetPageToShowAfterUnregistrationUrlReturnsUrlStartingWithHttp()
-    {
-        self::assertRegExp(
-            '/^http:\\/\\/./',
-            $this->subject->getPageToShowAfterUnregistrationUrl()
-        );
-    }
-
-    public function testGetPageToShowAfterUnregistrationUrlReturnsUrlWithEncodedBrackets()
-    {
-        self::assertContains(
-            '%5BshowUid%5D',
-            $this->subject->getPageToShowAfterUnregistrationUrl()
-        );
-
-        self::assertNotContains(
-            '[showUid]',
-            $this->subject->getPageToShowAfterUnregistrationUrl()
-        );
-    }
-
-    ///////////////////////////////////////////////////////////
-    // Tests for getting the thank-you-after-registration URL
-    ///////////////////////////////////////////////////////////
-
-    public function testGetThankYouAfterRegistrationUrlReturnsUrlStartingWithHttp()
-    {
-        self::assertRegExp(
-            '/^http:\\/\\/./',
-            $this->subject->getThankYouAfterRegistrationUrl()
-        );
-    }
-
-    public function testGetThankYouAfterRegistrationUrlReturnsUrlWithEncodedBrackets()
-    {
-        self::assertContains(
-            '%5BshowUid%5D',
-            $this->subject->getThankYouAfterRegistrationUrl()
-        );
-
-        self::assertNotContains(
-            '[showUid]',
-            $this->subject->getThankYouAfterRegistrationUrl()
-        );
-    }
-
-    public function testGetThankYouAfterRegistrationUrlLeavesUserLoggedInByDefault()
-    {
-        $this->testingFramework->createAndLoginFrontEndUser();
-
-        $this->subject->getThankYouAfterRegistrationUrl();
-
-        self::assertTrue(
-            $this->testingFramework->isLoggedIn()
-        );
-    }
-
-    public function testGetThankYouAfterRegistrationUrlWithOneTimeAccountMarkerInUserSessionLogsOutUser()
-    {
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $this->session->setAsBoolean('onetimeaccount', true);
-
-        $this->subject->getThankYouAfterRegistrationUrl();
-
-        self::assertFalse(
-            $this->testingFramework->isLoggedIn()
-        );
     }
 
     /*
@@ -428,7 +355,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
     // Tests concerning getStepCounter
     ////////////////////////////////////
 
-    public function testGetStepCounterReturnsNumberOfCurrentPageIfCurrentPageNumberIsLowerThanNumberOfLastPage()
+    /**
+     * @test
+     */
+    public function getStepCounterReturnsNumberOfCurrentPageIfCurrentPageNumberIsLowerThanNumberOfLastPage()
     {
         $this->subject->setConfigurationValue(
             'numberOfFirstRegistrationPage',
@@ -447,7 +377,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
         );
     }
 
-    public function testGetStepCounterReturnsNumberOfLastRegistrationPage()
+    /**
+     * @test
+     */
+    public function getStepCounterReturnsNumberOfLastRegistrationPage()
     {
         $this->subject->setConfigurationValue(
             'numberOfFirstRegistrationPage',
@@ -465,7 +398,10 @@ class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
         );
     }
 
-    public function testGetStepCounterReturnsNumberOfLastRegistrationPageAsCurrentPageIfPageNumberIsAboveLastRegistrationPage()
+    /**
+     * @test
+     */
+    public function getStepCounterForNumberAboveLastRegistrationPageReturnsNumberOfLastRegistrationPageAsCurrentPage()
     {
         $this->subject->setConfigurationValue(
             'numberOfFirstRegistrationPage',

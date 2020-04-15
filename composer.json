@@ -45,9 +45,9 @@
         "helmich/typo3-typoscript-lint": "^1.5.0 || ^2.1.1",
         "mikey179/vfsstream": "^1.6.8",
         "nimut/testing-framework": "^5.0.2",
-        "oliverklee/phpunit": "^6.5.14 || ^7.5.21",
+        "oliverklee/phpunit": "^6.5.15",
         "phpspec/prophecy": "^1.10.3",
-        "phpunit/phpunit": "^6.5.14 || ^7.5.20",
+        "phpunit/phpunit": "^6.5.14",
         "squizlabs/php_codesniffer": "^3.5.4",
         "typo3/cms-scheduler": "^8.7 || ^9.5"
     },
@@ -79,14 +79,14 @@
         "vendor-dir": ".Build/vendor"
     },
     "scripts": {
-        "php:fix": "php-cs-fixer --config=Configuration/php-cs-fixer.php fix Classes Tests && phpcbf Classes Configuration Tests",
+        "php:fix": ".Build/vendor/bin/php-cs-fixer --config=Configuration/php-cs-fixer.php fix Classes Tests && .Build/vendor/bin/phpcbf Classes Configuration Tests",
         "ci:php:lint": "find *.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
-        "ci:php:sniff": "phpcs Classes Configuration Tests",
-        "ci:php:fixer": "php-cs-fixer --config=Configuration/php-cs-fixer.php fix --dry-run -v --show-progress=dots --diff-format=udiff Classes Tests",
-        "ci:ts:lint": "typoscript-lint -c Configuration/TsLint.yml --ansi -n --fail-on-warnings -vvv Configuration/TypoScript",
-        "ci:tests:unit": "phpunit -c .Build/vendor/nimut/testing-framework/res/Configuration/UnitTests.xml Tests/Unit",
+        "ci:php:sniff": ".Build/vendor/bin/phpcs Classes Configuration Tests",
+        "ci:php:fixer": ".Build/vendor/bin/php-cs-fixer --config=Configuration/php-cs-fixer.php fix --dry-run -v --show-progress=dots --diff-format=udiff Classes Tests",
+        "ci:ts:lint": ".Build/vendor/bin/typoscript-lint -c Configuration/TsLint.yml --ansi -n --fail-on-warnings -vvv Configuration/TypoScript",
+        "ci:tests:unit": ".Build/vendor/bin/phpunit -c .Build/vendor/nimut/testing-framework/res/Configuration/UnitTests.xml Tests/Unit",
         "ci:tests:unit-legacy": ".Build/vendor/bin/typo3 phpunit:run Tests/LegacyUnit",
-        "ci:tests:functional": "find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running functional test suite {}\"; phpunit -c .Build/vendor/nimut/testing-framework/res/Configuration/FunctionalTests.xml {}';",
+        "ci:tests:functional": "find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running functional test suite {}\"; .Build/vendor/bin/phpunit -c .Build/vendor/nimut/testing-framework/res/Configuration/FunctionalTests.xml {}';",
         "ci:tests": [
             "@ci:tests:unit",
             "@ci:tests:unit-legacy",

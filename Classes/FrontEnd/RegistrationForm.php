@@ -6,6 +6,7 @@ use SJBR\StaticInfoTables\PiBaseApi;
 use SJBR\StaticInfoTables\Utility\LocalizationUtility;
 use TYPO3\CMS\Core\Crypto\Random;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
@@ -119,14 +120,13 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
     {
         parent::__construct($configuration, $contentObjectRenderer);
 
-        $formFieldsToShow = GeneralUtility::trimExplode(
+        $fieldKeys = GeneralUtility::trimExplode(
             ',',
             $this->getConfValueString('showRegistrationFields', 's_template_special'),
             true
         );
-
-        foreach ($formFieldsToShow as $currentFormField) {
-            $this->formFieldsToShow[$currentFormField] = $currentFormField;
+        foreach ($fieldKeys as $fieldKey) {
+            $this->formFieldsToShow[$fieldKey] = $fieldKey;
         }
     }
 
@@ -683,75 +683,69 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
     }
 
     /**
-     * Gets the URL of the page that should be displayed after a user has
-     * signed up for an event, but only if the form has been submitted from
-     * stage 2 (the confirmation page).
+     * Gets the URL of the page that should be displayed after a user has signed up for an event,
+     * but only if the form has been submitted from stage 2 (the confirmation page).
      *
      * If the current FE user account is a one-time account and
      * checkLogOutOneTimeAccountsAfterRegistration is enabled in the TS setup,
      * the FE user will be automatically logged out.
      *
-     * @return string complete URL of the FE page with a message (or NULL
-     *                if the confirmation page has not been submitted yet)
+     * @return string complete URL of the FE page with a message
      */
     public function getThankYouAfterRegistrationUrl(): string
     {
-        $sendParameters = false;
-        $pageId = $this->getConfValueInteger('thankYouAfterRegistrationPID', 's_registration');
-
         if (
             $this->getConfValueBoolean('logOutOneTimeAccountsAfterRegistration')
             && \Tx_Oelib_Session::getInstance(\Tx_Oelib_Session::TYPE_USER)->getAsBoolean('onetimeaccount')
         ) {
             $this->getFrontEndController()->fe_user->logoff();
-            $this->getFrontEndController()->loginUser = 0;
+            if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) < 9004000) {
+                $this->getFrontEndController()->loginUser = 0;
+            }
         }
 
-        if ($this->getConfValueBoolean('sendParametersToThankYouAfterRegistrationPageUrl', 's_registration')) {
-            $sendParameters = true;
-        }
+        $pageUid = $this->getConfValueInteger('thankYouAfterRegistrationPID', 's_registration');
+        $sendParameters = $this->getConfValueBoolean(
+            'sendParametersToThankYouAfterRegistrationPageUrl',
+            's_registration'
+        );
 
-        return $this->createUrlForRedirection($pageId, $sendParameters);
+        return $this->createUrlForRedirection($pageUid, $sendParameters);
     }
 
     /**
-     * Gets the URL of the page that should be displayed after a user has
-     * unregistered from an event.
-     *
-     * @return string complete URL of the FE page with a message (or NULL
-     *                if the confirmation page has not been submitted yet)
-     */
-    public function getPageToShowAfterUnregistrationUrl(): string
-    {
-        $sendParameters = false;
-        $pageId = $this->getConfValueInteger('pageToShowAfterUnregistrationPID', 's_registration');
-
-        if ($this->getConfValueBoolean('sendParametersToPageToShowAfterUnregistrationUrl', 's_registration')) {
-            $sendParameters = true;
-        }
-
-        return $this->createUrlForRedirection($pageId, $sendParameters);
-    }
-
-    /**
-     * Creates a URL for redirection. This is a utility function for
-     * getThankYouAfterRegistrationUrl() and getPageToShowAfterUnregistration().
-     *
-     * @param int $pageId the page UID
-     * @param bool $sendParameters TRUE if GET parameters should be added to the URL, otherwise FALSE
+     * Gets the URL of the page that should be displayed after a user has unregistered from an event.
      *
      * @return string complete URL of the FE page with a message
      */
-    private function createUrlForRedirection($pageId, $sendParameters = true): string
+    public function getPageToShowAfterUnregistrationUrl(): string
     {
-        // On freshly updated sites, the configuration value might not be set
-        // yet. To avoid breaking the site, we use the event list in this case.
-        if (!$pageId) {
-            $pageId = $this->getConfValueInteger('listPID');
+        $pageUid = $this->getConfValueInteger('pageToShowAfterUnregistrationPID', 's_registration');
+        $sendParameters = $this->getConfValueBoolean(
+            'sendParametersToPageToShowAfterUnregistrationUrl',
+            's_registration'
+        );
+
+        return $this->createUrlForRedirection($pageUid, $sendParameters);
+    }
+
+    /**
+     * Creates a URL for redirection.
+     *
+     * @param int $pageUid the page UID
+     * @param bool $sendParameters whether GET parameters should be added to the URL
+     *
+     * @return string complete URL of the FE page with a message
+     */
+    private function createUrlForRedirection(int $pageUid, bool $sendParameters = true): string
+    {
+        // On freshly updated sites, the configuration value might not be set yet.
+        // To avoid breaking the site, we use the event list in this case.
+        if ($pageUid === 0) {
+            $pageUid = $this->getConfValueInteger('listPID');
         }
 
-        $linkConfiguration = ['parameter' => $pageId];
-
+        $linkConfiguration = ['parameter' => $pageUid];
         if ($sendParameters) {
             $linkConfiguration['additionalParams'] = GeneralUtility::implodeArrayForUrl(
                 'tx_seminars_pi1',
@@ -762,12 +756,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
             );
         }
 
-        // XXX We need to do this workaround of manually encoding brackets in
-        // the URL due to a bug in the TYPO3 core:
-        // http://bugs.typo3.org/view.php?id=3808
-        $result = preg_replace(['/\\[/', '/\\]/'], ['%5B', '%5D'], $this->cObj->typoLink_URL($linkConfiguration));
-
-        return GeneralUtility::locationHeaderUrl($result);
+        return GeneralUtility::locationHeaderUrl($this->cObj->typoLink_URL($linkConfiguration));
     }
 
     /**

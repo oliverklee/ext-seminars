@@ -29,6 +29,7 @@ are hooks for these parts of seminars:
 * :ref:`registrationform_en`
 * :ref:`notificationemail_en`
 * :ref:`emailsalutation_en`
+* :ref:`datatimespan_en`
 * :ref:`backendemail_en`
 * :ref:`backendregistrationlistview_en`
 
@@ -569,6 +570,86 @@ example:
    // register my hook objects
    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['modifyEmailSalutation'][] = \MyVendor\MyExt\Hooks\ModifySalutationHook::class;
 
+
+.. _datatimespan_en:
+
+Hooks for the date and time span creation
+"""""""""""""""""""""""""""""""""""""""""
+
+There are hooks into the date and time span creation of the seminars. If at any place a date or time span
+is required, these hooks are called to allow modification of the date or time span assembling. See also
+:file:`Classes/OldModel/AbstractTimeSpan.php` for details about the default methods.
+
+Register your class that implements :php:`\OliverKlee\Seminars\Hooks\Interfaces\DateTimeSpan`
+like this in :file:`ext_localconf.php` of your extension:
+
+.. code-block:: php
+
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\DateTimeSpan::class][]
+        = \Tx_Seminarspaypal_Hooks_DateTimeSpan::class;
+
+Implement the methods required by the interface:
+
+.. code-block:: php
+
+    use \OliverKlee\Seminars\Hooks\Interfaces\DateTimeSpan;
+
+    class Tx_Seminarspaypal_Hooks_DateTimeSpan implements DateTimeSpan
+    {
+        /**
+         * Modifies the date span string.
+         *
+         * This allows modifying the assembly of start and end date to the date span.
+         * E.g., for Hungarian: '01.-03.01.2019' -> '2019.01.01.-03.'.
+         *
+         * The date format for the date parts are configured in TypoScript (`dateFormatYMD` etc.).
+         * Get them from `$dateTimeSpan->getConfValueString('dateFormatYMD')` etc. The event
+         * dates are also retrievable:
+         * `$beginDateTime = $dateTimeSpan->getBeginDateAsTimestamp();`
+         * `$endDateTime = $dateTimeSpan->getEndDateAsTimestamp();`
+         *
+         * @param string $dateSpan the date span produced by `AbstractTimeSpan::getDate()`
+         * @param \Tx_Seminars_OldModel_AbstractTimeSpan $dateTimeSpan the date provider
+         * @param string $dash the glue used by `AbstractTimeSpan::getDate()` (may be HTML encoded)
+         *
+         * @return string the modified date span to use
+         */
+        public function modifyDateSpan(
+            string $dateSpan,
+            \Tx_Seminars_OldModel_AbstractTimeSpan $dateTimeSpan,
+            string $dash
+        ): string
+        {
+            // Your code here
+        }
+
+        /**
+         * Modifies the time span string.
+         *
+         * This allows modifying the assembly of start and end time to the time span.
+         * E.g., for Hungarian: '9:00-10:30' -> '9:00tol 10:30ban'.
+         *
+         * The time format for the time parts is configured in TypoScript (`timeFormat`).
+         * Get it from `$dateTimeSpan->getConfValueString('timeFormat')`. The event
+         * times are also retrievable:
+         * `$beginDateTime = $dateTimeSpan->getBeginDateAsTimestamp();`
+         * `$endDateTime = $dateTimeSpan->getEndDateAsTimestamp();`
+         *
+         * @param string $timeSpan the time span produced by `AbstractTimeSpan::getTime()`
+         * @param \Tx_Seminars_OldModel_AbstractTimeSpan $dateTimeSpan the date provider
+         * @param string $dash the glue used by `AbstractTimeSpan::getTime()` (may be HTML encoded)
+         *
+         * @return string the modified time span to use
+         */
+        public function modifyTimeSpan(
+            string $timeSpan,
+            \Tx_Seminars_OldModel_AbstractTimeSpan $dateTimeSpan,
+            string $dash
+        ): string
+        {
+            // Your code here
+        }
+    }
 
 .. _backendemail_en:
 
