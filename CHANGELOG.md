@@ -17,6 +17,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Include the company in the billing address in the emails (#540)
 - List the names of user groups in emails, not the UIDs (#537)
 - Fix the alignment of labels with umlauts in the emails (#536)
 - Use proper label tags for the terms checkboxes (#535)

@@ -293,6 +293,19 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
+    public function getBillingAddressWithCompanyContainsCompany()
+    {
+        $value = 'Psijic Order';
+        $subject = \Tx_Seminars_OldModel_Registration::fromData(['company' => $value]);
+
+        $result = $subject->getBillingAddress();
+
+        self::assertContains($value, $result);
+    }
+
+    /**
+     * @test
+     */
     public function getBillingAddressWithNameContainsName()
     {
         $value = 'Max Doe';

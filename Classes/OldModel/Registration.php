@@ -21,6 +21,21 @@ use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oelib_Interface_ConfigurationCheckable
 {
     /**
+     * @var string[][]
+     */
+    const BILLING_ADDRESS_FIELDS = [
+        'company' => ['separator' => "\n"],
+        'gender' => ['separator' => ' '],
+        'name' => ['separator' => "\n"],
+        'address' => ['separator' => "\n"],
+        'zip' => ['separator' => ' '],
+        'city' => ['separator' => "\n"],
+        'country' => ['separator' => "\n"],
+        'telephone' => ['separator' => "\n", 'labelKey' => 'label_telephone'],
+        'email' => ['separator' => "\n", 'labelKey' => 'label_email'],
+    ];
+
+    /**
      * @var string the name of the SQL table this class corresponds to
      */
     protected static $tableName = 'tx_seminars_attendances';
@@ -915,42 +930,20 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
     /**
      * Gets the billing address, formatted as plain text.
      *
-     * @return string the billing address
+     * @return string
      */
     public function getBillingAddress(): string
     {
-        /**
-         * the keys of the corresponding fields and whether to add a LF after
-         * the entry (instead of just a space)
-         *
-         * @var bool[]
-         */
-        $billingAddressFields = [
-            'gender' => false,
-            'name' => true,
-            'address' => true,
-            'zip' => false,
-            'city' => true,
-            'country' => true,
-            'telephone' => true,
-            'email' => true,
-        ];
-
         $result = '';
-
-        foreach ($billingAddressFields as $key => $useLf) {
-            if ($this->hasRecordPropertyString($key)) {
-                // Add labels before the phone number and the e-mail address.
-                if (($key === 'telephone') || ($key === 'email')) {
-                    $result .= $this->translate('label_' . $key) . ': ';
-                }
-                $result .= $this->getRegistrationData($key);
-                if ($useLf) {
-                    $result .= LF;
-                } else {
-                    $result .= ' ';
-                }
+        foreach (self::BILLING_ADDRESS_FIELDS as $key => $options) {
+            if (!$this->hasRecordPropertyString($key)) {
+                continue;
             }
+
+            if (isset($options['labelKey'])) {
+                $result .= $this->translate($options['labelKey']) . ': ';
+            }
+            $result .= $this->getRegistrationData($key) . $options['separator'];
         }
 
         return $result;
