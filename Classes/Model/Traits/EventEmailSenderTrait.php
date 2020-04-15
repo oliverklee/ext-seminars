@@ -15,7 +15,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 trait EventEmailSenderTrait
 {
     /**
-     * Returns a MailRole with the default mail from TYPO3 if set.
+     * Returns a MailRole with the default email data from TYPO3 if set.
      * It otherwise returns a MailRole with the mail of the first organizer.
      *
      * @return \Tx_Oelib_Interface_MailRole

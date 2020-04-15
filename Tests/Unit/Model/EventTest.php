@@ -20,7 +20,9 @@ class EventTest extends UnitTestCase
      */
     private $subject = null;
 
-    /** @var \Tx_Seminars_Model_Organizer */
+    /**
+     * @var \Tx_Seminars_Model_Organizer
+     */
     private $organizer = null;
 
     protected function setUp()

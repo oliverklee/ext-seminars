@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Use TYPO3 system mail as sender and current sender as reply to address in Mails (#511)
 
 ### Deprecated
 
@@ -21,7 +22,6 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add `Registration::setFrontEndUser()` and cache it (#508)
 
 ### Changed
-- Use TYPO3 system mail as sender and current sender as reply to address in Mails (#511)
 - Upgrade PHPUnit and nimut/testing-framework (#513)
 - Merge the testing registration model into the regular model (#510)
 - Move more tests to the new testing framework (#507, #509, #510, #516, #517)

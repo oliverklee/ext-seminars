@@ -173,6 +173,7 @@ class MailNotifier extends AbstractTask
 
         /** @var \Tx_Seminars_OldModel_Organizer $replyTo */
         $replyTo = $event->getFirstOrganizer();
+        $sender = $event->getEmailSender();
         $subject = $this->customizeMessage($messageKey . 'Subject', $event);
         if ($this->shouldCsvFileBeAdded($event)) {
             $attachment = $this->getCsv($event->getUid());
@@ -182,7 +183,7 @@ class MailNotifier extends AbstractTask
         foreach ($event->getOrganizerBag() as $organizer) {
             /** @var \Tx_Oelib_Mail $eMail */
             $eMail = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
-            $eMail->setSender($event->getEmailSender());
+            $eMail->setSender($sender);
             $eMail->setReplyTo($replyTo);
             $eMail->setSubject($subject);
             $eMail->addRecipient($organizer);

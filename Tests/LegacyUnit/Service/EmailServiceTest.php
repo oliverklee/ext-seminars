@@ -170,15 +170,17 @@ final class EmailServiceTest extends TestCase
      */
     public function sendEmailToAttendeesUsesTypo3DefaultFromAddressAsSender()
     {
-        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = 'system-foo@example.com';
-        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = 'Mr. Default';
+        $defaultMailFromAddress = 'system-foo@example.com';
+        $defaultMailFromName = 'Mr. Default';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = $defaultMailFromAddress;
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = $defaultMailFromName;
 
         $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
 
         $email = $this->mailer->getFirstSentEmail();
         self::assertNotNull($email);
         self::assertArrayHasKey(
-            'system-foo@example.com',
+            $defaultMailFromAddress,
             $email->getFrom()
         );
     }
@@ -197,7 +199,7 @@ final class EmailServiceTest extends TestCase
         self::assertNotNull($email);
         self::assertSame(
             $this->organizer->getEMailAddress(),
-            key($email->getReplyTo())
+            \key($email->getReplyTo())
         );
     }
 

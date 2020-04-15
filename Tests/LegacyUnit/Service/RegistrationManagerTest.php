@@ -2593,13 +2593,15 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
 
         $registration = $this->createRegistration();
 
-        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = 'system-foo@example.com';
-        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = 'Mr. Default';
+        $defaultMailFromAddress = 'system-foo@example.com';
+        $defaultMailFromName = 'Mr. Default';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = $defaultMailFromAddress;
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = $defaultMailFromName;
 
         $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertSame(
-            ['system-foo@example.com' => 'Mr. Default'],
+            [$defaultMailFromAddress => $defaultMailFromName],
             $this->mailer->getFirstSentEmail()->getFrom()
         );
     }
@@ -5130,13 +5132,15 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
 
         $registration = $this->createRegistration();
 
-        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = 'system-foo@example.com';
-        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = 'Mr. Default';
+        $defaultMailFromAddress = 'system-foo@example.com';
+        $defaultMailFromName = 'Mr. Default';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = $defaultMailFromAddress;
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = $defaultMailFromName;
 
         $this->subject->notifyOrganizers($registration);
 
         self::assertSame(
-            ['system-foo@example.com' => 'Mr. Default'],
+            [$defaultMailFromAddress => $defaultMailFromName],
             $this->mailer->getFirstSentEmail()->getFrom()
         );
     }
@@ -5170,13 +5174,15 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
 
         $registration = $this->createRegistration();
 
-        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = '';
-        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = '';
+        $defaultMailFromAddress = 'system-foo@example.com';
+        $defaultMailFromName = 'Mr. Default';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = $defaultMailFromAddress;
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = $defaultMailFromName;
 
         $this->subject->notifyOrganizers($registration);
 
         self::assertSame(
-            ['mail@example.com' => 'test organizer'],
+            [$defaultMailFromAddress => $defaultMailFromName],
             $this->mailer->getFirstSentEmail()->getFrom()
         );
     }
@@ -5523,19 +5529,21 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
 
         $registration = $this->createRegistration();
 
-        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = 'system-foo@example.com';
-        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = 'Mr. Default';
+        $defaultMailFromAddress = 'system-foo@example.com';
+        $defaultMailFromName = 'Mr. Default';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = $defaultMailFromAddress;
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = $defaultMailFromName;
 
         $this->subject->sendAdditionalNotification($registration);
 
         $sentEmails = $this->mailer->getSentEmails();
 
         self::assertArrayHasKey(
-            'system-foo@example.com',
+            $defaultMailFromAddress,
             $sentEmails[0]->getFrom()
         );
         self::assertArrayHasKey(
-            'system-foo@example.com',
+            $defaultMailFromAddress,
             $sentEmails[1]->getFrom()
         );
     }

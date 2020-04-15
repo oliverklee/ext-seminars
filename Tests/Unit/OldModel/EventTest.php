@@ -159,7 +159,7 @@ final class EventTest extends UnitTestCase
         GeneralUtility::addInstance(\Tx_Seminars_Bag_Organizer::class, $organizerBagMock);
         $this->subject->setEventData(['uid' => 1, 'organizers' => 1]);
 
-        self::assertEquals(
+        self::assertSame(
             $organizer,
             $this->subject->getEmailSender()
         );

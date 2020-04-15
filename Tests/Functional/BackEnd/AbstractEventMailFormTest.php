@@ -167,6 +167,30 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
      */
     public function sendEmailUsesFirstOrganizerAsSender()
     {
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL'] = [];
+
+        $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
+
+        $subject = new TestingEventMailForm(2);
+
+        $subject->setPostData(
+            [
+                'action' => 'sendEmail',
+                'isSubmitted' => '1',
+                'subject' => 'foo',
+                'messageBody' => 'Hello!',
+            ]
+        );
+        $subject->render();
+
+        self::assertArrayHasKey('oliver@example.com', $this->mailer->getFirstSentEmail()->getFrom());
+    }
+
+    /**
+     * @test
+     */
+    public function sendEmailUsesFirstOrganizerAsReplyTo()
+    {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 
         $subject = new TestingEventMailForm(2);

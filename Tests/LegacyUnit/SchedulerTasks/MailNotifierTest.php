@@ -1044,13 +1044,15 @@ class MailNotifierTest extends TestCase
             ]
         );
 
-        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = 'system-foo@example.com';
-        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = 'Mr. Default';
+        $defaultMailFromAddress = 'system-foo@example.com';
+        $defaultMailFromName = 'Mr. Default';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = $defaultMailFromAddress;
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = $defaultMailFromName;
 
         $this->subject->sendEventTakesPlaceReminders();
 
         self::assertArrayHasKey(
-            'system-foo@example.com',
+            $defaultMailFromAddress,
             $this->mailer->getFirstSentEmail()->getFrom()
         );
     }
@@ -1073,13 +1075,15 @@ class MailNotifierTest extends TestCase
         $this->testingFramework->createRelation('tx_seminars_seminars_organizers_mm', $eventUid, $organizerUid);
         $this->testingFramework->changeRecord('tx_seminars_seminars', $eventUid, ['organizers' => 2]);
 
-        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = 'system-foo@example.com';
-        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = 'Mr. Default';
+        $defaultMailFromAddress = 'system-foo@example.com';
+        $defaultMailFromName = 'Mr. Default';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = $defaultMailFromAddress;
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = $defaultMailFromName;
 
         $this->subject->sendEventTakesPlaceReminders();
 
         self::assertArrayHasKey(
-            'system-foo@example.com',
+            $defaultMailFromAddress,
             $this->mailer->getFirstSentEmail()->getFrom()
         );
     }
