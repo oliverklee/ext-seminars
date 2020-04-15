@@ -285,4 +285,73 @@ final class RegistrationTest extends UnitTestCase
 
         self::assertSame($value, $result);
     }
+
+    /*
+     * Tests regarding the billing address
+     */
+
+    /**
+     * @test
+     */
+    public function getBillingAddressWithNameContainsName()
+    {
+        $value = 'Max Doe';
+        $subject = \Tx_Seminars_OldModel_Registration::fromData(['name' => $value]);
+
+        $result = $subject->getBillingAddress();
+
+        self::assertContains($value, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getBillingAddressWithAddressContainsAddress()
+    {
+        $value = 'Main Street 123';
+        $subject = \Tx_Seminars_OldModel_Registration::fromData(['address' => $value]);
+
+        $result = $subject->getBillingAddress();
+
+        self::assertContains($value, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getBillingAddressWithZipCodeContainsZipCode()
+    {
+        $value = '12345';
+        $subject = \Tx_Seminars_OldModel_Registration::fromData(['zip' => $value]);
+
+        $result = $subject->getBillingAddress();
+
+        self::assertContains($value, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getBillingAddressWithCityContainsCity()
+    {
+        $value = 'Big City';
+        $subject = \Tx_Seminars_OldModel_Registration::fromData(['city' => $value]);
+
+        $result = $subject->getBillingAddress();
+
+        self::assertContains($value, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getBillingAddressWithCountryContainsCountry()
+    {
+        $value = 'Takka-Tukka-Land';
+        $subject = \Tx_Seminars_OldModel_Registration::fromData(['country' => $value]);
+
+        $result = $subject->getBillingAddress();
+
+        self::assertContains($value, $result);
+    }
 }

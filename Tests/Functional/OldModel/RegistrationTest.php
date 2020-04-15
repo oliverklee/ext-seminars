@@ -526,4 +526,58 @@ final class RegistrationTest extends FunctionalTestCase
 
         self::assertContains('Group 2, Group 1', $result);
     }
+
+    /*
+     * Tests regarding the billing address
+     */
+
+    /**
+     * @test
+     */
+    public function getBillingAddressWithGenderMaleContainsLabelForGenderMale()
+    {
+        $subject = \Tx_Seminars_OldModel_Registration::fromData(['gender' => 0]);
+
+        $result = $subject->getBillingAddress();
+
+        self::assertContains($this->getLanguageService()->getLL('label_gender.I.0'), $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getBillingAddressWithGenderFemaleContainsLabelForGenderFemale()
+    {
+        $subject = \Tx_Seminars_OldModel_Registration::fromData(['gender' => 1]);
+
+        $result = $subject->getBillingAddress();
+
+        self::assertContains($this->getLanguageService()->getLL('label_gender.I.1'), $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getBillingAddressWithTelephoneNumberContainsTelephoneNumber()
+    {
+        $value = '01234-56789';
+        $subject = \Tx_Seminars_OldModel_Registration::fromData(['telephone' => $value]);
+
+        $result = $subject->getBillingAddress();
+
+        self::assertContains($value, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getBillingAddressWithEMailAddressContainsEMailAddress()
+    {
+        $value = 'max@example.com';
+        $subject = \Tx_Seminars_OldModel_Registration::fromData(['email' => $value]);
+
+        $result = $subject->getBillingAddress();
+
+        self::assertContains($value, $result);
+    }
 }
