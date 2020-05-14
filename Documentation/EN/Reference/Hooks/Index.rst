@@ -32,6 +32,7 @@ are hooks for these parts of seminars:
 * :ref:`datatimespan_en`
 * :ref:`backendemail_en`
 * :ref:`backendregistrationlistview_en`
+* :ref:`datasanitization_en`
 
 Please contact us if you need additional hooks.
 
@@ -819,6 +820,52 @@ Implement the methods required by the interface:
             \Tx_Oelib_Template $template,
             int $registrationsToShow
         ) {
+            // Your code here
+        }
+    }
+
+.. _datasanitization_en:
+
+Hooks for the data sanitization on TCE validation
+"""""""""""""""""""""""""""""""""""""""""""""""""
+
+There is a hook into the data handler to additionaly manipulate `seminars` FlexForm data during
+TCE validation (just before storing the data). You may apply additional constraints and dynamically
+adjust values (e.g. registration deadline = begin date - 14 days).
+
+TCE validation is a Typo3 defined process. `seminars` gets the form values from the content element's
+FlexForm and stores required changes of the values into the DB.
+
+Register your class that implements :php:`\OliverKlee\Seminars\Hooks\Interfaces\DataSanitization`
+like this in :file:`ext_localconf.php` of your extension:
+
+.. code-block:: php
+
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\DataSanitization:class][]
+        = \Tx_Seminarspaypal_Hooks_DataSanitization::class;
+
+Implement the methods required by the interface:
+
+.. code-block:: php
+
+    use \OliverKlee\Seminars\Hooks\Interfaces\DataSanitization;
+
+    class Tx_Seminarspaypal_Hooks_DataSanitization implements DataSanitization
+    {
+        /**
+         * Sanitize event data values.
+         *
+         * The TCE form event values need to be sanitized when storing them into the
+         * DB. Check the values with additional constraints and provide the modified
+         * values to use back in `$data`.
+         *
+         * @param int $uid
+         * @param array $data data, might get changed
+         *
+         * @return void
+         */
+        public function sanitizeEventData(int $uid, array &$data)
+        {
             // Your code here
         }
     }

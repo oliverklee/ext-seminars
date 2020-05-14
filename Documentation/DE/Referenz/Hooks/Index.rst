@@ -32,6 +32,7 @@ Es gibt Hooks in diese Teile von seminars:
 * :ref:`datatimespan_de`
 * :ref:`backendemail_de`
 * :ref:`backendregistrationlistview_de`
+* :ref:`datasanitization_de`
 
 Bitte nehmen Sie Kontakt zu uns auf, wenn Sie weitere Hooks benötigen.
 
@@ -820,6 +821,53 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
             \Tx_Oelib_Template $template,
             int $registrationsToShow
         ) {
+            // Hier Ihr Code
+        }
+    }
+
+.. _datasanitization_de:
+
+Hooks zur Datenbereinigung bei der TCE-Validierung
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Es gibt einen Hook in den Data Handler, um bei der TCE-Validierung (vor dem Speichern eines
+Seminars) zusätzliche Bedingungen abzuprüfen und eigene dynamische Anpassungen der Daten
+vorzunehmen (z.B. Registrierung-Deadline = Beginn-Datum - 14 Tage).
+
+Das Verfahren der TCE-Validierung ist von Typo3 vorgegeben. `seminars` erhält dabei die Formular-Daten
+aus dem FlexForm des Content-Elements und speichert nötige Änderungen der eingetragenen Werte in die
+Datenbank.
+
+Ihre Klasse, die :php:`\OliverKlee\Seminars\Hooks\Interfaces\DataSanitization` implementiert,
+machen Sie seminars in :file:`ext_localconf.php` Ihrer Extension bekannt:
+
+.. code-block:: php
+
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\DataSanitization:class][]
+        = \Tx_Seminarspaypal_Hooks_DataSanitization::class;
+
+Implementieren Sie die benötigten Methoden gemäß dem Interface:
+
+.. code-block:: php
+
+    use \OliverKlee\Seminars\Hooks\Interfaces\DataSanitization;
+
+    class Tx_Seminarspaypal_Hooks_DataSanitization implements DataSanitization
+    {
+        /**
+         * Sanitize event data values.
+         *
+         * The TCE form event values need to be sanitized when storing them into the
+         * DB. Check the values with additional constraints and provide the modified
+         * values to use back in `$data`.
+         *
+         * @param int $uid
+         * @param array $data data, might get changed
+         *
+         * @return void
+         */
+        public function sanitizeEventData(int $uid, array &$data)
+        {
             // Hier Ihr Code
         }
     }
