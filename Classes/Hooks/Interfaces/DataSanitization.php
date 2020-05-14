@@ -16,12 +16,12 @@ interface DataSanitization extends Hook
      *
      * The TCE form event values need to be sanitized when storing them into the
      * DB. Check the values with additional constraints and provide the modified
-     * values to use back in `$data`.
+     * values to use back in a returned array.
      *
      * @param int $uid
-     * @param array $data data, might get changed
+     * @param array $data
      *
-     * @return void
+     * @return mixed[] the data to change, [] for no changes
      */
-    public function sanitizeEventData(int $uid, array &$data);
+    public function sanitizeEventData(int $uid, array $data): array;
 }

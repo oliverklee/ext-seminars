@@ -121,8 +121,11 @@ class DataHandlerHook
         $this->copyDatesFromTimeSlots($uid, $updatedData);
         $this->sanitizeEventDates($updatedData);
 
-        GeneralUtility::makeInstance(HookProvider::class, DataSanitization::class)
-            ->executeHook('sanitizeEventData', $uid, $updatedData);
+        $updatedData = array_merge(
+            $updatedData,
+            GeneralUtility::makeInstance(HookProvider::class, DataSanitization::class)
+                ->executeHookReturningMergedArray('sanitizeEventData', $uid, $updatedData)
+        );
 
         if ($updatedData !== $originalData) {
             $this->getConnectionForTable(self::TABLE_EVENTS)->update(self::TABLE_EVENTS, $updatedData, ['uid' => $uid]);

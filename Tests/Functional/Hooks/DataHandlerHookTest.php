@@ -102,13 +102,39 @@ final class DataHandlerHookTest extends FunctionalTestCase
 
         $hook = $this->createMock(DataSanitization::class);
         $hook->expects(self::once())->method('sanitizeEventData')
-            ->with($uid, $data);
+            ->with($uid, $data)
+            ->willReturn([]);
 
         $hookClass = \get_class($hook);
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][DataSanitization::class][] = $hookClass;
         GeneralUtility::addInstance($hookClass, $hook);
 
         $this->processUpdateActionForSeminarsTable($uid);
+    }
+
+    /**
+     * @test
+     */
+    public function afterDatabaseOperationsOnUpdateSanitizeHookWillModifyData()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook.xml');
+        $uid = 1;
+        $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+        $expectedTitle = 'ModifiedUpdateTitle';
+
+        $hook = $this->createMock(DataSanitization::class);
+        $hook->expects(self::once())->method('sanitizeEventData')
+            ->with($uid, $data)
+            ->willReturn(['title' => $expectedTitle]);
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][DataSanitization::class][] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
+
+        $this->processUpdateActionForSeminarsTable($uid);
+
+        $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+        self::assertSame($expectedTitle, $row['title']);
     }
 
     /**
@@ -122,13 +148,39 @@ final class DataHandlerHookTest extends FunctionalTestCase
 
         $hook = $this->createMock(DataSanitization::class);
         $hook->expects(self::once())->method('sanitizeEventData')
-            ->with($uid, $data);
+            ->with($uid, $data)
+            ->willReturn([]);
 
         $hookClass = \get_class($hook);
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][DataSanitization::class][] = $hookClass;
         GeneralUtility::addInstance($hookClass, $hook);
 
         $this->processNewActionForSeminarsTable($uid);
+    }
+
+    /**
+     * @test
+     */
+    public function afterDatabaseOperationsOnNewSanitizeHookWillModifyData()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook.xml');
+        $uid = 1;
+        $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+        $expectedTitle = 'ModifiedNewTitle';
+
+        $hook = $this->createMock(DataSanitization::class);
+        $hook->expects(self::once())->method('sanitizeEventData')
+            ->with($uid, $data)
+            ->willReturn(['title' => $expectedTitle]);
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][DataSanitization::class][] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
+
+        $this->processNewActionForSeminarsTable($uid);
+
+        $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+        self::assertSame($expectedTitle, $row['title']);
     }
 
     /**
