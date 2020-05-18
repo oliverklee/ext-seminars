@@ -5,21 +5,21 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Hooks\Interfaces;
 
 /**
- * Use this interface for hooks concerning the data sanitization.
+ * Use this interface for hooks concerning data sanitization.
  *
  * @author Michael Kramer <m.kramer@mxp.de>
  */
 interface DataSanitization extends Hook
 {
     /**
-     * Sanitize event data values.
+     * Sanitizes event data values.
      *
      * The TCE form event values need to be sanitized when storing them into the
-     * DB. Check the values with additional constraints and provide the modified
+     * database. Check the values with additional constraints and provide the modified
      * values to use back in a returned array.
      *
      * @param int $uid
-     * @param array $data
+     * @param mixed[] $data the events data as stored in database
      *
      * @return mixed[] the data to change, [] for no changes
      */

@@ -833,15 +833,15 @@ There is a hook into the data handler to additionaly manipulate `seminars` FlexF
 TCE validation (just before storing the data). You may apply additional constraints and dynamically
 adjust values (e.g. registration deadline = begin date - 14 days).
 
-TCE validation is a Typo3 defined process. `seminars` gets the form values from the content element's
-FlexForm and stores required changes of the values into the DB.
+TCE validation is a TYPO3-defined process. `seminars` gets the form values from the content element's
+FlexForm and stores required changes of the values into the database.
 
 Register your class that implements :php:`\OliverKlee\Seminars\Hooks\Interfaces\DataSanitization`
 like this in :file:`ext_localconf.php` of your extension:
 
 .. code-block:: php
 
-    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\DataSanitization:class][]
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\DataSanitization::class][]
         = \Tx_Seminarspaypal_Hooks_DataSanitization::class;
 
 Implement the methods required by the interface:
@@ -853,14 +853,14 @@ Implement the methods required by the interface:
     class Tx_Seminarspaypal_Hooks_DataSanitization implements DataSanitization
     {
         /**
-         * Sanitize event data values.
+         * Sanitizes event data values.
          *
          * The TCE form event values need to be sanitized when storing them into the
-         * DB. Check the values with additional constraints and provide the modified
+         * database. Check the values with additional constraints and provide the modified
          * values to use back in a returned array.
          *
          * @param int $uid
-         * @param array $data
+         * @param mixed[] $data the events data as stored in database
          *
          * @return mixed[] the data to change, [] for no changes
          */

@@ -830,20 +830,20 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
 Hooks zur Datenbereinigung bei der TCE-Validierung
 """"""""""""""""""""""""""""""""""""""""""""""""""
 
-Es gibt einen Hook in den Data Handler, um bei der TCE-Validierung (vor dem Speichern eines
-Seminars) zusätzliche Bedingungen abzuprüfen und eigene dynamische Anpassungen der Daten
-vorzunehmen (z.B. Registrierung-Deadline = Beginn-Datum - 14 Tage).
+Es gibt einen Hook in den Data-Handler, um bei der TCE-Validierung (vor dem Speichern einer
+Veranstaltung) zusätzliche Bedingungen zu prüfen und eigene dynamische Anpassungen der Daten
+vorzunehmen (z.B. Registrierung-Deadline = Beginn-Datum minus 14 Tage).
 
-Das Verfahren der TCE-Validierung ist von Typo3 vorgegeben. `seminars` erhält dabei die Formular-Daten
+Das Verfahren der TCE-Validierung ist von TYPO3 vorgegeben. `seminars` erhält dabei die Formular-Daten
 aus dem FlexForm des Content-Elements und speichert nötige Änderungen der eingetragenen Werte in die
 Datenbank.
 
-Ihre Klasse, die :php:`\OliverKlee\Seminars\Hooks\Interfaces\DataSanitization` implementiert,
-machen Sie seminars in :file:`ext_localconf.php` Ihrer Extension bekannt:
+Machen Sie seminars Ihre Klasse, die :php:`\OliverKlee\Seminars\Hooks\Interfaces\DataSanitization`
+implementiert, in :file:`ext_localconf.php` Ihrer Extension bekannt:
 
 .. code-block:: php
 
-    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\DataSanitization:class][]
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\DataSanitization::class][]
         = \Tx_Seminarspaypal_Hooks_DataSanitization::class;
 
 Implementieren Sie die benötigten Methoden gemäß dem Interface:
@@ -855,14 +855,14 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
     class Tx_Seminarspaypal_Hooks_DataSanitization implements DataSanitization
     {
         /**
-         * Sanitize event data values.
+         * Sanitizes event data values.
          *
          * The TCE form event values need to be sanitized when storing them into the
-         * DB. Check the values with additional constraints and provide the modified
+         * database. Check the values with additional constraints and provide the modified
          * values to use back in a returned array.
          *
          * @param int $uid
-         * @param array $data
+         * @param mixed[] $data the events data as stored in database
          *
          * @return mixed[] the data to change, [] for no changes
          */
