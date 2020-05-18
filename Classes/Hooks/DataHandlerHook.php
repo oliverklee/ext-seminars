@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Hooks;
 
+use OliverKlee\Seminars\Hooks\Interfaces\DataSanitization;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
@@ -21,6 +22,7 @@ use TYPO3\CMS\Core\Utility\MathUtility;
  * @author Mario Rimann <typo3-coding@rimann.org>
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
+ * @author Michael Kramer <m.kramer@mxp.de>
  */
 class DataHandlerHook
 {
@@ -118,6 +120,13 @@ class DataHandlerHook
         $this->copyPlacesFromTimeSlots($uid, $updatedData);
         $this->copyDatesFromTimeSlots($uid, $updatedData);
         $this->sanitizeEventDates($updatedData);
+
+        /** @var HookProvider $dataSanitizationHookProvider*/
+        $dataSanitizationHookProvider = GeneralUtility::makeInstance(HookProvider::class, DataSanitization::class);
+        $updatedData = array_merge(
+            $updatedData,
+            $dataSanitizationHookProvider->executeHookReturningMergedArray('sanitizeEventData', $uid, $updatedData)
+        );
 
         if ($updatedData !== $originalData) {
             $this->getConnectionForTable(self::TABLE_EVENTS)->update(self::TABLE_EVENTS, $updatedData, ['uid' => $uid]);

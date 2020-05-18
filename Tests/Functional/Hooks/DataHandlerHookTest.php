@@ -6,7 +6,9 @@ namespace OliverKlee\Seminars\Tests\Functional\Hooks;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Seminars\Hooks\DataHandlerHook;
+use OliverKlee\Seminars\Hooks\Interfaces\DataSanitization;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Test case.
@@ -87,6 +89,98 @@ final class DataHandlerHookTest extends FunctionalTestCase
         $this->dataHandler->substNEWwithIDs[$temporaryUid] = $uid;
 
         $this->subject->processDatamap_afterAllOperations($this->dataHandler);
+    }
+
+    /**
+     * @test
+     */
+    public function afterDatabaseOperationsOnUpdateCallsSanitizeEventDataHook()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook.xml');
+        $uid = 1;
+        $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+
+        $hook = $this->createMock(DataSanitization::class);
+        $hook->expects(self::once())->method('sanitizeEventData')
+            ->with($uid, $data)
+            ->willReturn([]);
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][DataSanitization::class][] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
+
+        $this->processUpdateActionForSeminarsTable($uid);
+    }
+
+    /**
+     * @test
+     */
+    public function afterDatabaseOperationsOnUpdateSanitizeHookWillModifyData()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook.xml');
+        $uid = 1;
+        $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+        $expectedTitle = 'ModifiedUpdateTitle';
+
+        $hook = $this->createMock(DataSanitization::class);
+        $hook->expects(self::once())->method('sanitizeEventData')
+            ->with($uid, $data)
+            ->willReturn(['title' => $expectedTitle]);
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][DataSanitization::class][] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
+
+        $this->processUpdateActionForSeminarsTable($uid);
+
+        $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+        self::assertSame($expectedTitle, $row['title']);
+    }
+
+    /**
+     * @test
+     */
+    public function afterDatabaseOperationsOnNewCallsSanitizeEventDataHook()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook.xml');
+        $uid = 1;
+        $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+
+        $hook = $this->createMock(DataSanitization::class);
+        $hook->expects(self::once())->method('sanitizeEventData')
+            ->with($uid, $data)
+            ->willReturn([]);
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][DataSanitization::class][] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
+
+        $this->processNewActionForSeminarsTable($uid);
+    }
+
+    /**
+     * @test
+     */
+    public function afterDatabaseOperationsOnNewSanitizeHookWillModifyData()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook.xml');
+        $uid = 1;
+        $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+        $expectedTitle = 'ModifiedNewTitle';
+
+        $hook = $this->createMock(DataSanitization::class);
+        $hook->expects(self::once())->method('sanitizeEventData')
+            ->with($uid, $data)
+            ->willReturn(['title' => $expectedTitle]);
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][DataSanitization::class][] = $hookClass;
+        GeneralUtility::addInstance($hookClass, $hook);
+
+        $this->processNewActionForSeminarsTable($uid);
+
+        $row = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
+        self::assertSame($expectedTitle, $row['title']);
     }
 
     /**
