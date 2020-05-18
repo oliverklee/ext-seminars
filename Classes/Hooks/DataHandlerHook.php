@@ -121,7 +121,7 @@ class DataHandlerHook
         $this->copyDatesFromTimeSlots($uid, $updatedData);
         $this->sanitizeEventDates($updatedData);
 
-        /** @var HookProvider */
+        /** @var HookProvider $dataSanitizationHookProvider*/
         $dataSanitizationHookProvider = GeneralUtility::makeInstance(HookProvider::class, DataSanitization::class);
         $updatedData = array_merge(
             $updatedData,
