@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add new registration list CSV hook (#)
 - Add new data sanitization hook (#544)
 
 ### Changed
