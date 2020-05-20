@@ -32,6 +32,7 @@ are hooks for these parts of seminars:
 * :ref:`datatimespan_en`
 * :ref:`backendemail_en`
 * :ref:`backendregistrationlistview_en`
+* :ref:`registrationlistcsv_en`
 * :ref:`datasanitization_en`
 
 Please contact us if you need additional hooks.
@@ -820,6 +821,45 @@ Implement the methods required by the interface:
             \Tx_Oelib_Template $template,
             int $registrationsToShow
         ) {
+            // Your code here
+        }
+    }
+
+.. _registrationlistcsv_en:
+
+Hooks for the CSV generation of registration lists
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+There is a hook into the CSV generation of registration lists to modify the generated CSV text.
+
+Register your class that implements :php:`\OliverKlee\Seminars\Hooks\Interfaces\RegistrationListCsv`
+like this in :file:`ext_localconf.php` of your extension:
+
+.. code-block:: php
+
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\RegistrationListCsv::class][]
+        = \Tx_Seminarspaypal_Hooks_RegistrationListCsv::class;
+
+Implement the methods required by the interface:
+
+.. code-block:: php
+
+    use \OliverKlee\Seminars\Hooks\Interfaces\RegistrationListCsv;
+
+    class Tx_Seminarspaypal_Hooks_RegistrationListCsv implements RegistrationListCsv
+    {
+        /**
+         * Modifies the rendered CSV string.
+         *
+         * This allows modifying the complete CSV text right before it is delivered.
+         *
+         * @param string $csv the CSV text produced by `AbstractRegistrationListView::render()`
+         * @param \Tx_Seminars_Csv_AbstractRegistrationListView $registrationList the CSV data provider
+         *
+         * @return string the modified CSV text to use
+         */
+        public function modifyCsv(string $csv, \Tx_Seminars_Csv_AbstractRegistrationListView $registrationList): string
+        {
             // Your code here
         }
     }
