@@ -109,9 +109,7 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends \Tx_Seminars
 
         /** @var HookProvider $csvHookProvider */
         $csvHookProvider = GeneralUtility::makeInstance(HookProvider::class, RegistrationListCsv::class);
-        $allLines = $csvHookProvider->executeHookReturningModifiedValue('modifyCsv', $allLines, $this);
-
-        return $allLines;
+        return $csvHookProvider->executeHookReturningModifiedValue('modifyCsv', $allLines, $this);
     }
 
     /**
