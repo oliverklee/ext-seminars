@@ -29,7 +29,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'renderType' => 'inputDateTime',
-                'eval' => 'date',
+                'eval' => 'date, int',
             ],
         ],
         'endtime' => [
@@ -37,7 +37,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'renderType' => 'inputDateTime',
-                'eval' => 'date',
+                'eval' => 'date, int',
             ],
         ],
         'title' => [
