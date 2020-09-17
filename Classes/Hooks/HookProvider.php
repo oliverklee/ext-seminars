@@ -93,9 +93,26 @@ class HookProvider
      * @param string $method the method to execute
      * @param mixed $params parameters to `$method()`
      *
-     * @return bool true if at least one hook was executed
+     * @return void
      */
     public function executeHook(string $method, ...$params)
+    {
+        $this->validateHookMethod($method);
+
+        foreach ($this->getHooks() as $hook) {
+            $hook->$method(...$params);
+        }
+    }
+
+    /**
+     * Executes the hooked-in methods and returns true, if there were any.
+     *
+     * @param string $method the method to execute
+     * @param mixed $params parameters to `$method()`
+     *
+     * @return bool true if at least one hook was executed
+     */
+    public function executeHookReturningTrueIfExecuted(string $method, ...$params)
     {
         $this->validateHookMethod($method);
 

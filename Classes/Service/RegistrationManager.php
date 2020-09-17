@@ -872,7 +872,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         $this->callPostProcessAttendeeEmailHooks($eMailNotification, $registration);
 
         $alternativeEmailProcessorUsed = $this->getAlternativeEmailProcessorHookProvider()
-            ->executeHook('processAttendeeEmail', $eMailNotification, $registration);
+            ->executeHookReturningTrueIfExecuted('processAttendeeEmail', $eMailNotification, $registration);
         if (!$alternativeEmailProcessorUsed) {
             /** @var \Tx_Oelib_MailerFactory $mailerFactory */
             $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
@@ -1061,7 +1061,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         $this->callPostProcessOrganizerEmailHooks($eMailNotification, $registration);
 
         $alternativeEmailProcessorUsed = $this->getAlternativeEmailProcessorHookProvider()
-            ->executeHook('processOrganizerEmail', $eMailNotification, $registrationNew);
+            ->executeHookReturningTrueIfExecuted('processOrganizerEmail', $eMailNotification, $registrationNew);
         if (!$alternativeEmailProcessorUsed) {
             /** @var \Tx_Oelib_MailerFactory $mailerFactory */
             $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
@@ -1166,7 +1166,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         $this->callPostProcessAdditionalEmailHooks($eMail, $registration, $emailReason);
 
         $alternativeEmailProcessorUsed = $this->getAlternativeEmailProcessorHookProvider()
-            ->executeHook('processAdditionalEmail', $eMail, $registrationNew);
+            ->executeHookReturningTrueIfExecuted('processAdditionalEmail', $eMail, $registrationNew);
         if (!$alternativeEmailProcessorUsed) {
             /** @var \Tx_Oelib_MailerFactory $mailerFactory */
             $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);

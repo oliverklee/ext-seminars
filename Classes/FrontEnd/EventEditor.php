@@ -1434,7 +1434,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
             $eMail->setMessage($this->createEMailContent($event));
 
             $alternativeEmailProcessorUsed = $this->getAlternativeEmailProcessorHookProvider()
-                ->executeHook('processReviewerEmail', $eMail, $event);
+                ->executeHookReturningTrueIfExecuted('processReviewerEmail', $eMail, $event);
             if (!$alternativeEmailProcessorUsed) {
                 /** @var \Tx_Oelib_MailerFactory $mailerFactory */
                 $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
@@ -1547,7 +1547,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $eMail->setMessage($this->createAdditionalEmailContent());
 
         $alternativeEmailProcessorUsed = $this->getAlternativeEmailProcessorHookProvider()
-            ->executeHook('processAdditionalReviewerEmail', $eMail);
+            ->executeHookReturningTrueIfExecuted('processAdditionalReviewerEmail', $eMail);
         if (!$alternativeEmailProcessorUsed) {
             /** @var \Tx_Oelib_MailerFactory $mailerFactory */
             $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
