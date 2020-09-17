@@ -582,4 +582,70 @@ final class HookProviderTest extends UnitTestCase
             $hookObject->executeHookReturningModifiedValue('testHookMethodReturnsModifiedString', 'test test')
         );
     }
+
+    /*
+     * Tests concerning Hook::executeHookReturningMergedArray().
+     */
+
+    /**
+     * @test
+     */
+    public function hookObjectForTestingHookReturningTrueIfExecutedWithNoHookImplementorRegisteredReturnsTrue()
+    {
+        $hookObject = new HookProvider(TestingHookInterface::class);
+
+        self::assertFalse($hookObject->executeHookReturningTrueIfExecuted('testHookMethod'));
+    }
+
+    /**
+     * @test
+     */
+    public function hookObjectForTestingHookReturningTrueIfExecutedWithNoHookImplementorRegisteredFailsForEmptyMethod()
+    {
+        $hookObject = new HookProvider(TestingHookInterface::class);
+
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionCode(1573479911);
+
+        $hookObject->executeHookReturningMergedArray('');
+    }
+
+    /**
+     * @test
+     */
+    public function hookObjectForTestingHookReturningTrueIfExecutedWithNoHookImplementorRegisteredFailsForUnknownMethod()
+    {
+        $hookObject = new HookProvider(TestingHookInterface::class);
+
+        $this->expectException(\UnexpectedValueException::class);
+        $this->expectExceptionCode(1573480302);
+
+        $hookObject->executeHookReturningTrueIfExecuted('methodNotImplemented');
+    }
+
+    /**
+     * @test
+     */
+    public function hookObjectForTestingHookReturningTrueIfExecutedWithOneHookImplementorRegisteredReturnsTrue()
+    {
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestingHookInterface::class][1577363366] =
+            TestingHookImplementor::class;
+        $hookObject = new HookProvider(TestingHookInterface::class);
+
+        self::assertTrue($hookObject->executeHookReturningTrueIfExecuted('testHookMethod'));
+    }
+
+    /**
+     * @test
+     */
+    public function hookObjectForTestingHookReturningTrueIfExecutedWithTwoHookImplementorsRegisteredReturnsTrue()
+    {
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestingHookInterface::class][1577363366] =
+            TestingHookImplementor::class;
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][TestingHookInterface::class][1577363367] =
+            TestingHookImplementor2::class;
+        $hookObject = new HookProvider(TestingHookInterface::class);
+
+        self::assertTrue($hookObject->executeHookReturningTrueIfExecuted('testHookMethod'));
+    }
 }
