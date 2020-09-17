@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Hooks\Interfaces\AlternativeEmailProcessor;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 use OliverKlee\Seminars\Hooks\RegistrationEmailHookInterface;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
@@ -5070,6 +5071,40 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
     /**
      * @test
      */
+    public function notifyAttendeeForSendConfirmationTrueCallsAlternativeEmailProcessorHookMethods()
+    {
+        /** @var \Tx_Seminars_OldModel_Registration $registrationOld */
+        $registrationOld = $this->createRegistration();
+        /** @var \Tx_Seminars_Mapper_Registration $mapper */
+        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        /** @var \Tx_Seminars_Model_Registration $registration */
+        $registration = $mapper->find($registrationOld->getUid());
+
+        $hook = $this->createMock(AlternativeEmailProcessor::class);
+        $hook->expects(self::once())->method('processAttendeeEmail')->with(
+            self::isInstanceOf(\Tx_Oelib_Mail::class),
+            $registration
+        );
+        $hook->expects(self::never())->method('processOrganizerEmail');
+        $hook->expects(self::never())->method('processReminderEmail');
+        $hook->expects(self::never())->method('processReviewerEmail');
+        $hook->expects(self::never())->method('processAdditionalReviewerEmail');
+        $hook->expects(self::never())->method('processAdditionalEmail');
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][AlternativeEmailProcessor::class][] = $hookClass;
+        $this->addMockedInstance($hookClass, $hook);
+
+        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $controller = new \Tx_Seminars_FrontEnd_DefaultController();
+        $controller->init();
+
+        $this->subject->notifyAttendee($registrationOld, $controller);
+    }
+
+    /**
+     * @test
+     */
     public function notifyAttendeeForSendConfirmationFalseNeverCallsPostProcessAttendeeEmailHook()
     {
         $hookClassName = 'RegistrationEmailHook' . \uniqid('', false);
@@ -5109,6 +5144,37 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
 
         $hookClass = \get_class($hook);
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][RegistrationEmail::class][] = $hookClass;
+        $this->addMockedInstance($hookClass, $hook);
+
+        $this->subject->setConfigurationValue('sendConfirmation', false);
+        $controller = new \Tx_Seminars_FrontEnd_DefaultController();
+        $controller->init();
+
+        $this->subject->notifyAttendee($registrationOld, $controller);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForSendConfirmationFalseNeverCallsAlternativeEmailProcessorHookMethods()
+    {
+        /** @var \Tx_Seminars_OldModel_Registration $registrationOld */
+        $registrationOld = $this->createRegistration();
+        /** @var \Tx_Seminars_Mapper_Registration $mapper */
+        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        /** @var \Tx_Seminars_Model_Registration $registration */
+        $registration = $mapper->find($registrationOld->getUid());
+
+        $hook = $this->createMock(AlternativeEmailProcessor::class);
+        $hook->expects(self::never())->method('processAttendeeEmail');
+        $hook->expects(self::never())->method('processOrganizerEmail');
+        $hook->expects(self::never())->method('processReminderEmail');
+        $hook->expects(self::never())->method('processReviewerEmail');
+        $hook->expects(self::never())->method('processAdditionalReviewerEmail');
+        $hook->expects(self::never())->method('processAdditionalEmail');
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][AlternativeEmailProcessor::class][] = $hookClass;
         $this->addMockedInstance($hookClass, $hook);
 
         $this->subject->setConfigurationValue('sendConfirmation', false);
@@ -5408,6 +5474,38 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
     /**
      * @test
      */
+    public function notifyOrganizersForSendNotificationTrueCallsAlternativeEmailProcessorHookMethods()
+    {
+        $this->subject->setConfigurationValue('sendNotification', true);
+
+        /** @var \Tx_Seminars_OldModel_Registration $registrationOld */
+        $registrationOld = $this->createRegistration();
+        /** @var \Tx_Seminars_Mapper_Registration $mapper */
+        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        /** @var \Tx_Seminars_Model_Registration $registration */
+        $registration = $mapper->find($registrationOld->getUid());
+
+        $hook = $this->createMock(AlternativeEmailProcessor::class);
+        $hook->expects(self::never())->method('processAttendeeEmail');
+        $hook->expects(self::once())->method('processOrganizerEmail')->with(
+            self::isInstanceOf(\Tx_Oelib_Mail::class),
+            $registration
+        );
+        $hook->expects(self::never())->method('processAdditionalEmail');
+        $hook->expects(self::never())->method('processReminderEmail');
+        $hook->expects(self::never())->method('processReviewerEmail');
+        $hook->expects(self::never())->method('processAdditionalReviewerEmail');
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][AlternativeEmailProcessor::class][] = $hookClass;
+        $this->addMockedInstance($hookClass, $hook);
+
+        $this->subject->notifyOrganizers($registrationOld);
+    }
+
+    /**
+     * @test
+     */
     public function notifyOrganizersForSendNotificationFalseNeverCallsRegistrationEmailHookMethods()
     {
         $this->subject->setConfigurationValue('sendNotification', false);
@@ -5455,6 +5553,35 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
         GeneralUtility::addInstance($hookClassName, $hook);
 
         $this->subject->notifyOrganizers($registration);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyOrganizersForSendNotificationFalseNeverCallsAlternativeEmailProcessorHookMethods()
+    {
+        $this->subject->setConfigurationValue('sendNotification', false);
+
+        /** @var \Tx_Seminars_OldModel_Registration $registrationOld */
+        $registrationOld = $this->createRegistration();
+        /** @var \Tx_Seminars_Mapper_Registration $mapper */
+        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        /** @var \Tx_Seminars_Model_Registration $registration */
+        $registration = $mapper->find($registrationOld->getUid());
+
+        $hook = $this->createMock(AlternativeEmailProcessor::class);
+        $hook->expects(self::never())->method('processAttendeeEmail');
+        $hook->expects(self::never())->method('processOrganizerEmail');
+        $hook->expects(self::never())->method('processAdditionalEmail');
+        $hook->expects(self::never())->method('processReminderEmail');
+        $hook->expects(self::never())->method('processReviewerEmail');
+        $hook->expects(self::never())->method('processAdditionalReviewerEmail');
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][AlternativeEmailProcessor::class][] = $hookClass;
+        $this->addMockedInstance($hookClass, $hook);
+
+        $this->subject->notifyOrganizers($registrationOld);
     }
 
     /*
@@ -6104,6 +6231,42 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
 
         $registration = $this->createRegistration();
         $this->subject->sendAdditionalNotification($registration);
+    }
+
+    /**
+     * @test
+     */
+    public function sendAdditionalNotificationCallsAlternativeEmailProcessorHookMethods()
+    {
+        $this->testingFramework->changeRecord(
+            'tx_seminars_seminars',
+            $this->seminarUid,
+            ['attendees_max' => 1]
+        );
+
+        /** @var \Tx_Seminars_OldModel_Registration $registrationOld */
+        $registrationOld = $this->createRegistration();
+        /** @var \Tx_Seminars_Mapper_Registration $mapper */
+        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        /** @var \Tx_Seminars_Model_Registration $registration */
+        $registration = $mapper->find($registrationOld->getUid());
+
+        $hook = $this->createMock(AlternativeEmailProcessor::class);
+        $hook->expects(self::never())->method('processAttendeeEmail');
+        $hook->expects(self::never())->method('processOrganizerEmail');
+        $hook->expects(self::never())->method('processReminderEmail');
+        $hook->expects(self::never())->method('processReviewerEmail');
+        $hook->expects(self::never())->method('processAdditionalReviewerEmail');
+        $hook->expects(self::once())->method('processAdditionalEmail')->with(
+            self::isInstanceOf(\Tx_Oelib_Mail::class),
+            $registration
+        );
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][AlternativeEmailProcessor::class][] = $hookClass;
+        $this->addMockedInstance($hookClass, $hook);
+
+        $this->subject->sendAdditionalNotification($registrationOld);
     }
 
     /*
