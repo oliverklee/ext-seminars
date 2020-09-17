@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Service;
 
+use OliverKlee\Seminars\Hooks\HookProvider;
+use OliverKlee\Seminars\Hooks\Interfaces\AlternativeEmailProcessor;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Lang\LanguageService;
@@ -31,6 +33,11 @@ class EmailService implements SingletonInterface
      * @var \Tx_Seminars_ViewHelper_DateRange
      */
     protected $dateRangeViewHelper = null;
+
+    /**
+     * @var HookProvider|null
+     */
+    protected $alternativeEmailProcessorHookProvider;
 
     /**
      * Constructor.
@@ -72,7 +79,11 @@ class EmailService implements SingletonInterface
 
             $eMail->setMessage($this->buildMessageBody($body, $event, $user));
 
-            $mailer->send($eMail);
+            $alternativeEmailProcessorUsed = $this->getAlternativeEmailProcessorHookProvider()
+                ->executeHook('processAttendeeEmail', $eMail, $registration);
+            if (!$alternativeEmailProcessorUsed) {
+                $mailer->send($eMail);
+            }
         }
     }
 
@@ -128,6 +139,21 @@ class EmailService implements SingletonInterface
         ];
 
         return str_replace(array_keys($markers), $markers, $textWithMarkers);
+    }
+
+    /**
+     * Gets the hook provider for alternative mail processing.
+     *
+     * @return HookProvider
+     */
+    protected function getAlternativeEmailProcessorHookProvider(): HookProvider
+    {
+        if (!$this->alternativeEmailProcessorHookProvider instanceof HookProvider) {
+            $this->alternativeEmailProcessorHookProvider =
+                GeneralUtility::makeInstance(HookProvider::class, AlternativeEmailProcessor::class);
+        }
+
+        return $this->alternativeEmailProcessorHookProvider;
     }
 
     /**

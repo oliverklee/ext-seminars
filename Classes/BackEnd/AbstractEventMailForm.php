@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\BackEnd;
 
+use OliverKlee\Seminars\Hooks\HookProvider;
+use OliverKlee\Seminars\Hooks\Interfaces\AlternativeEmailProcessor;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
@@ -73,6 +75,11 @@ abstract class AbstractEventMailForm
      * @var bool
      */
     private $hooksHaveBeenRetrieved = false;
+
+    /**
+     * @var HookProvider|null
+     */
+    private $alternativeEmailProcessorHookProvider;
 
     /**
      * The constructor of this class. Instantiates an event object.
@@ -422,7 +429,11 @@ abstract class AbstractEventMailForm
 
                 $this->modifyEmailWithHook($registration, $eMail);
 
-                $mailer->send($eMail);
+                $alternativeEmailProcessorUsed = $this->getAlternativeEmailProcessorHookProvider()
+                    ->executeHook('processAttendeeEmail', $eMail, $registration);
+                if (!$alternativeEmailProcessorUsed) {
+                    $mailer->send($eMail);
+                }
             }
 
             /** @var FlashMessage $message */
@@ -710,4 +721,20 @@ abstract class AbstractEventMailForm
     {
         return GeneralUtility::makeInstance(UriBuilder::class);
     }
+
+    /**
+     * Gets the hook provider for alternative mail processing.
+     *
+     * @return HookProvider
+     */
+    protected function getAlternativeEmailProcessorHookProvider(): HookProvider
+    {
+        if (!$this->alternativeEmailProcessorHookProvider instanceof HookProvider) {
+            $this->alternativeEmailProcessorHookProvider =
+                GeneralUtility::makeInstance(HookProvider::class, AlternativeEmailProcessor::class);
+        }
+
+        return $this->alternativeEmailProcessorHookProvider;
+    }
+
 }

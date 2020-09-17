@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\SchedulerTasks;
 
+use OliverKlee\Seminars\Hooks\HookProvider;
+use OliverKlee\Seminars\Hooks\Interfaces\AlternativeEmailProcessor;
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
 use OliverKlee\Seminars\Service\EmailService;
 use OliverKlee\Seminars\Service\EventStatusService;
@@ -49,6 +51,11 @@ class MailNotifier extends AbstractTask
      * @var RegistrationDigest
      */
     protected $registrationDigest = null;
+
+    /**
+     * @var HookProvider|null
+     */
+    protected $alternativeEmailProcessorHookProvider;
 
     /**
      * Sets up the dependencies (as we cannot use dependency injection on scheduler tasks).
@@ -192,7 +199,11 @@ class MailNotifier extends AbstractTask
                 $eMail->addAttachment($attachment);
             }
 
-            $this->mailer->send($eMail);
+            $alternativeEmailProcessorUsed = $this->getAlternativeEmailProcessorHookProvider()
+                ->executeHook('processReminderEmail', $eMail, $event);
+            if (!$alternativeEmailProcessorUsed) {
+                $this->mailer->send($eMail);
+            }
         }
     }
 
@@ -402,6 +413,22 @@ class MailNotifier extends AbstractTask
             $this->emailService->sendEmailToAttendees($event, $subject, $body);
         }
     }
+
+    /**
+     * Gets the hook provider for alternative mail processing.
+     *
+     * @return HookProvider
+     */
+    protected function getAlternativeEmailProcessorHookProvider(): HookProvider
+    {
+        if (!$this->alternativeEmailProcessorHookProvider instanceof HookProvider) {
+            $this->alternativeEmailProcessorHookProvider =
+                GeneralUtility::makeInstance(HookProvider::class, AlternativeEmailProcessor::class);
+        }
+
+        return $this->alternativeEmailProcessorHookProvider;
+    }
+
 
     /**
      * Returns $GLOBALS['LANG'].

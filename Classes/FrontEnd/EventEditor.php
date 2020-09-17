@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
+use OliverKlee\Seminars\Hooks\HookProvider;
+use OliverKlee\Seminars\Hooks\Interfaces\AlternativeEmailProcessor;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
@@ -43,6 +45,11 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * @var mixed[]
      */
     protected $savedFormData = [];
+
+    /**
+     * @var HookProvider|null
+     */
+    protected $alternativeEmailProcessorHookProvider;
 
     /**
      * The constructor.
@@ -1426,9 +1433,13 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
             $eMail->setSubject($this->translate('publish_event_subject'));
             $eMail->setMessage($this->createEMailContent($event));
 
-            /** @var \Tx_Oelib_MailerFactory $mailerFactory */
-            $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
-            $mailerFactory->getMailer()->send($eMail);
+            $alternativeEmailProcessorUsed = $this->getAlternativeEmailProcessorHookProvider()
+                ->executeHook('processReviewerEmail', $eMail, $event);
+            if (!$alternativeEmailProcessorUsed) {
+                /** @var \Tx_Oelib_MailerFactory $mailerFactory */
+                $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
+                $mailerFactory->getMailer()->send($eMail);
+            }
         }
     }
 
@@ -1535,9 +1546,13 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $eMail->setSubject($this->translate('save_event_subject'));
         $eMail->setMessage($this->createAdditionalEmailContent());
 
-        /** @var \Tx_Oelib_MailerFactory $mailerFactory */
-        $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
-        $mailerFactory->getMailer()->send($eMail);
+        $alternativeEmailProcessorUsed = $this->getAlternativeEmailProcessorHookProvider()
+            ->executeHook('processAdditionalReviewerEmail', $eMail);
+        if (!$alternativeEmailProcessorUsed) {
+            /** @var \Tx_Oelib_MailerFactory $mailerFactory */
+            $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
+            $mailerFactory->getMailer()->send($eMail);
+        }
     }
 
     /**
@@ -2852,5 +2867,15 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
             $sender = self::getLoggedInUser();
         }
         return $sender;
+    }
+
+    protected function getAlternativeEmailProcessorHookProvider(): HookProvider
+    {
+        if (!$this->alternativeEmailProcessorHookProvider instanceof HookProvider) {
+            $this->alternativeEmailProcessorHookProvider =
+                GeneralUtility::makeInstance(HookProvider::class, AlternativeEmailProcessor::class);
+        }
+
+        return $this->alternativeEmailProcessorHookProvider;
     }
 }
