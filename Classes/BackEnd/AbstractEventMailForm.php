@@ -736,5 +736,4 @@ abstract class AbstractEventMailForm
 
         return $this->alternativeEmailProcessorHookProvider;
     }
-
 }

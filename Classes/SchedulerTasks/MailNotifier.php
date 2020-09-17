@@ -429,7 +429,6 @@ class MailNotifier extends AbstractTask
         return $this->alternativeEmailProcessorHookProvider;
     }
 
-
     /**
      * Returns $GLOBALS['LANG'].
      *

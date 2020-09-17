@@ -91,5 +91,4 @@ interface AlternativeEmailProcessor extends Hook
         \Tx_Oelib_Mail $email,
         \Tx_Seminars_OldModel_Event $event
     );
-
 }
