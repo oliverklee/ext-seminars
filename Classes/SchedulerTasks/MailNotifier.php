@@ -199,8 +199,13 @@ class MailNotifier extends AbstractTask
                 $eMail->addAttachment($attachment);
             }
 
+            /** @var \Tx_Seminars_Mapper_Event $eventMapper */
+            $eventMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+            /** @var \Tx_Seminars_Model_Event $eventNew */
+            $eventNew = $eventMapper->find($event->getUid());
+
             $alternativeEmailProcessorUsed = $this->getAlternativeEmailProcessorHookProvider()
-                ->executeHookReturningTrueIfExecuted('processReminderEmail', $eMail, $event);
+                ->executeHookReturningTrueIfExecuted('processReminderEmail', $eMail, $eventNew);
             if (!$alternativeEmailProcessorUsed) {
                 $this->mailer->send($eMail);
             }
