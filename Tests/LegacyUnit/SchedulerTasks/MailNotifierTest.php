@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\SchedulerTasks;
 
 use OliverKlee\PhpUnit\Interfaces\AccessibleObject;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Hooks\Interfaces\AlternativeEmailProcessor;
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
 use OliverKlee\Seminars\SchedulerTasks\MailNotifier;
 use OliverKlee\Seminars\Service\EmailService;
@@ -88,6 +89,11 @@ class MailNotifierTest extends TestCase
      */
     private $registrationDigest = null;
 
+    /**
+     * @var string[]
+     */
+    private $mockedClassNames = [];
+
     protected function setUp()
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
@@ -153,6 +159,9 @@ class MailNotifierTest extends TestCase
             $this->testingFramework->cleanUp();
         }
 
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][AlternativeEmailProcessor::class] = [];
+        $this->purgeMockedInstances();
+
         $GLOBALS['LANG'] = $this->languageBackup;
         $this->languageBackup = null;
     }
@@ -216,6 +225,42 @@ class MailNotifierTest extends TestCase
         $children = $this->mailer->getFirstSentEmail()->getChildren();
         return $children[0];
     }
+
+    /**
+     * Adds an instance to the Typo3 instance FIFO buffer used by `GeneralUtility::makeInstance()`
+     * and registers it for purging in `tearDown()`.
+     *
+     * In case of a failing test or an exception in the test before the instance is taken
+     * from the FIFO buffer, the instance would stay in the buffer and make following tests
+     * fail. This function adds it to the list of instances to purge in `tearDown()` in addition
+     * to `GeneralUtility::addInstance()`.
+     *
+     * @param string $className
+     * @param mixed $instance
+     *
+     * @return void
+     */
+    private function addMockedInstance(string $className, $instance)
+    {
+        GeneralUtility::addInstance($className, $instance);
+        $this->mockedClassNames[] = $className;
+    }
+
+    /**
+     * Purges possibly leftover instances from the Typo3 instance FIFO buffer used by
+     * `GeneralUtility::makeInstance()`.
+     *
+     * @return void
+     */
+    private function purgeMockedInstances()
+    {
+        foreach ($this->mockedClassNames as $className) {
+            GeneralUtility::makeInstance($className);
+        }
+
+        $this->mockedClassNames = [];
+    }
+
 
     /*
      * Tests for the utility functions
@@ -1167,6 +1212,84 @@ class MailNotifierTest extends TestCase
             'MrTest@example.com',
             $this->mailer->getFirstSentEmail()->getFrom()
         );
+    }
+
+    /**
+     * @test
+     */
+    public function sendRemindersToOrganizersCallsAlternativeEmailProcessorHookWhenRegistered()
+    {
+        $this->createSeminarWithOrganizer(
+            [
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+            ]
+        );
+
+        $hook = $this->createMock(AlternativeEmailProcessor::class);
+        $hook->expects(self::never())->method('processAttendeeEmail');
+        $hook->expects(self::never())->method('processOrganizerEmail');
+        $hook->expects(self::once())->method('processReminderEmail')->with(
+            self::isInstanceOf(\Tx_Oelib_Mail::class),
+            self::isInstanceOf(\Tx_Seminars_Model_Event::class)
+        );
+        $hook->expects(self::never())->method('processReviewerEmail');
+        $hook->expects(self::never())->method('processAdditionalReviewerEmail');
+        $hook->expects(self::never())->method('processAdditionalEmail');
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][AlternativeEmailProcessor::class][] = $hookClass;
+        $this->addMockedInstance($hookClass, $hook);
+
+        $this->subject->sendEventTakesPlaceReminders();
+    }
+
+    /**
+     * @test
+     */
+    public function sendRemindersToOrganizersDoesntCallAlternativeEmailProcessorHookWhenNotRegistered()
+    {
+        $this->createSeminarWithOrganizer(
+            [
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+            ]
+        );
+
+        $hook = $this->createMock(AlternativeEmailProcessor::class);
+        $hook->expects(self::never())->method('processAttendeeEmail');
+        $hook->expects(self::never())->method('processOrganizerEmail');
+        $hook->expects(self::never())->method('processReminderEmail');
+        $hook->expects(self::never())->method('processReviewerEmail');
+        $hook->expects(self::never())->method('processAdditionalReviewerEmail');
+        $hook->expects(self::never())->method('processAdditionalEmail');
+
+        $hookClass = \get_class($hook);
+        $this->addMockedInstance($hookClass, $hook);
+
+        $this->subject->sendEventTakesPlaceReminders();
+    }
+
+    /**
+     * @test
+     */
+    public function sendRemindersToOrganizersDoesntSendsEmailViaDefaultMailerWhenAlternativeEmailProcessorHookIsRegistered()
+    {
+        $this->createSeminarWithOrganizer(
+            [
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED,
+            ]
+        );
+
+        $hook = $this->createMock(AlternativeEmailProcessor::class);
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][AlternativeEmailProcessor::class][] = $hookClass;
+        $this->addMockedInstance($hookClass, $hook);
+
+        $this->subject->sendEventTakesPlaceReminders();
+
+        self::assertEquals(0, $this->mailer->getNumberOfSentEmails());
     }
 
     /*
