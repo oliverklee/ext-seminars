@@ -1725,7 +1725,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
 
         $this->subject->sendEMailToReviewer();
 
-        self::assertEquals(0, $this->mailer->getNumberOfSentEmails());
+        self::assertSame(0, $this->mailer->getNumberOfSentEmails());
     }
 
     /**
@@ -2264,7 +2264,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
 
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
-        self::assertEquals(0, $this->mailer->getNumberOfSentEmails());
+        self::assertSame(0, $this->mailer->getNumberOfSentEmails());
     }
 
     /**

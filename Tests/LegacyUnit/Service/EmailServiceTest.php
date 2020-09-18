@@ -574,6 +574,6 @@ final class EmailServiceTest extends TestCase
 
         $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
 
-        self::assertEquals(0, $this->mailer->getNumberOfSentEmails());
+        self::assertSame(0, $this->mailer->getNumberOfSentEmails());
     }
 }

@@ -1,12 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Functional\BackEnd\Fixtures;
 
 use OliverKlee\Seminars\Hooks\Interfaces\AlternativeEmailProcessor;
-use Tx_Oelib_Mail;
-use Tx_Seminars_Model_Registration;
-use Tx_Seminars_OldModel_Event;
 use TYPO3\CMS\Core\SingletonInterface;
 
 /**
@@ -46,32 +44,32 @@ final class AlternativeEmailProcessorHookImplementor implements AlternativeEmail
      */
     private $countCallForProcessReviewerEmail = 0;
 
-    public function processAttendeeEmail(Tx_Oelib_Mail $email, Tx_Seminars_Model_Registration $registration)
+    public function processAttendeeEmail(\Tx_Oelib_Mail $email, \Tx_Seminars_Model_Registration $registration)
     {
         $this->countCallForProcessAttendeeEmail++;
     }
 
-    public function processAdditionalEmail(Tx_Oelib_Mail $email, Tx_Seminars_Model_Registration $registration)
+    public function processAdditionalEmail(\Tx_Oelib_Mail $email, \Tx_Seminars_Model_Registration $registration)
     {
         $this->countCallForProcessAdditionalEmail++;
     }
 
-    public function processAdditionalReviewerEmail(Tx_Oelib_Mail $email, Tx_Seminars_OldModel_Event $event)
+    public function processAdditionalReviewerEmail(\Tx_Oelib_Mail $email)
     {
         $this->countCallForProcessAdditionalReviewerEmail++;
     }
 
-    public function processOrganizerEmail(Tx_Oelib_Mail $email, Tx_Seminars_Model_Registration $registration)
+    public function processOrganizerEmail(\Tx_Oelib_Mail $email, \Tx_Seminars_Model_Registration $registration)
     {
         $this->countCallForProcessOrganizerEmail++;
     }
 
-    public function processReminderEmail(Tx_Oelib_Mail $email, Tx_Seminars_OldModel_Event $event)
+    public function processReminderEmail(\Tx_Oelib_Mail $email, \Tx_Seminars_Model_Event $event)
     {
         $this->countCallForProcessReminderEmail++;
     }
 
-    public function processReviewerEmail(Tx_Oelib_Mail $email, Tx_Seminars_OldModel_Event $event)
+    public function processReviewerEmail(\Tx_Oelib_Mail $email, \Tx_Seminars_Model_Event $event)
     {
         $this->countCallForProcessReviewerEmail++;
     }

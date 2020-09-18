@@ -1288,7 +1288,7 @@ class MailNotifierTest extends TestCase
 
         $this->subject->sendEventTakesPlaceReminders();
 
-        self::assertEquals(0, $this->mailer->getNumberOfSentEmails());
+        self::assertSame(0, $this->mailer->getNumberOfSentEmails());
     }
 
     /*

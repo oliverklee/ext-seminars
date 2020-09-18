@@ -5146,7 +5146,7 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
 
         $this->subject->notifyAttendee($registrationOld, $controller);
 
-        $this->assertEquals(0, $this->mailer->getNumberOfSentEmails());
+        self::assertSame(0, $this->mailer->getNumberOfSentEmails());
     }
 
     /**
@@ -5167,7 +5167,7 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
 
         $this->subject->notifyAttendee($registrationOld, $controller);
 
-        $this->assertEquals(1, $this->mailer->getNumberOfSentEmails());
+        self::assertSame(1, $this->mailer->getNumberOfSentEmails());
     }
     /**
      * @test
@@ -5570,7 +5570,7 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
 
         $this->subject->notifyOrganizers($registrationOld);
 
-        $this->assertSame(0, $this->mailer->getNumberOfSentEmails());
+        self::assertSame(0, $this->mailer->getNumberOfSentEmails());
     }
 
     /**
@@ -5589,7 +5589,7 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
 
         $this->subject->notifyOrganizers($registrationOld);
 
-        $this->assertSame(1, $this->mailer->getNumberOfSentEmails());
+        self::assertSame(1, $this->mailer->getNumberOfSentEmails());
     }
 
     /**
@@ -6383,7 +6383,7 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
 
         $this->subject->sendAdditionalNotification($registrationOld);
 
-        $this->assertSame(0, $this->mailer->getNumberOfSentEMails());
+        self::assertSame(0, $this->mailer->getNumberOfSentEMails());
     }
 
     /**
@@ -6399,14 +6399,9 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
 
         /** @var \Tx_Seminars_OldModel_Registration $registrationOld */
         $registrationOld = $this->createRegistration();
-        /** @var \Tx_Seminars_Mapper_Registration $mapper */
-        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
-        /** @var \Tx_Seminars_Model_Registration $registration */
-        $registration = $mapper->find($registrationOld->getUid());
-
         $this->subject->sendAdditionalNotification($registrationOld);
 
-        $this->assertSame(1, $this->mailer->getNumberOfSentEMails());
+        self::assertSame(1, $this->mailer->getNumberOfSentEMails());
     }
 
     /*

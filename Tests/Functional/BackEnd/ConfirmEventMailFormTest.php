@@ -189,7 +189,6 @@ final class ConfirmEventMailFormTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 
-        $hook = GeneralUtility::makeInstance(AlternativeEmailProcessorHookImplementor::class);
         $hookClassName = AlternativeEmailProcessorHookImplementor::class;
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][AlternativeEmailProcessor::class] = $hookClassName;
 
@@ -205,7 +204,7 @@ final class ConfirmEventMailFormTest extends FunctionalTestCase
         );
         $subject->render();
 
-        self::assertEquals(0, $this->mailer->getNumberOfSentEmails());
+        self::assertSame(0, $this->mailer->getNumberOfSentEmails());
     }
 
     /**
