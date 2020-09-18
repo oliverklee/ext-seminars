@@ -7,6 +7,8 @@ namespace OliverKlee\Seminars\Tests\Functional\BackEnd;
 use Doctrine\DBAL\Driver\Statement;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Seminars\BackEnd\ConfirmEventMailForm;
+use OliverKlee\Seminars\Hooks\Interfaces\AlternativeEmailProcessor;
+use OliverKlee\Seminars\Tests\Functional\BackEnd\Fixtures\AlternativeEmailProcessorHookImplementor;
 use OliverKlee\Seminars\Tests\Functional\BackEnd\Fixtures\TestingHookImplementor;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -126,6 +128,84 @@ final class ConfirmEventMailFormTest extends FunctionalTestCase
         $subject->render();
 
         self::assertSame(2, $hook->getCountCallForConfirmEmail());
+    }
+
+    /**
+     * @test
+     */
+    public function sendEmailCallsAlternativeEmailProcessorHookWithRegistration()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
+
+        $hook = GeneralUtility::makeInstance(AlternativeEmailProcessorHookImplementor::class);
+        $hookClassName = AlternativeEmailProcessorHookImplementor::class;
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][AlternativeEmailProcessor::class] = $hookClassName;
+
+        $subject = new ConfirmEventMailForm(1);
+
+        $subject->setPostData(
+            [
+                'action' => 'confirmEvent',
+                'isSubmitted' => '1',
+                'subject' => 'foo',
+                'messageBody' => 'some message body',
+            ]
+        );
+        $subject->render();
+
+        self::assertSame(1, $hook->getCountCallForProcessAttendeeEmail());
+    }
+
+    /**
+     * @test
+     */
+    public function sendEmailCallsAlternativeEmailProcessorHookTwiceWithTwoRegistrations()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
+
+        $hook = GeneralUtility::makeInstance(AlternativeEmailProcessorHookImplementor::class);
+        $hookClassName = AlternativeEmailProcessorHookImplementor::class;
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][AlternativeEmailProcessor::class] = $hookClassName;
+
+        $subject = new ConfirmEventMailForm(2);
+
+        $subject->setPostData(
+            [
+                'action' => 'confirmEvent',
+                'isSubmitted' => '1',
+                'subject' => 'foo',
+                'messageBody' => 'some message body',
+            ]
+        );
+        $subject->render();
+
+        self::assertSame(2, $hook->getCountCallForProcessAttendeeEmail());
+    }
+
+    /**
+     * @test
+     */
+    public function sendEmailNeverSendsMailViaDefaultMailerWithAlternativeEmailProcessorHookWithRegistration()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
+
+        $hook = GeneralUtility::makeInstance(AlternativeEmailProcessorHookImplementor::class);
+        $hookClassName = AlternativeEmailProcessorHookImplementor::class;
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][AlternativeEmailProcessor::class] = $hookClassName;
+
+        $subject = new ConfirmEventMailForm(1);
+
+        $subject->setPostData(
+            [
+                'action' => 'confirmEvent',
+                'isSubmitted' => '1',
+                'subject' => 'foo',
+                'messageBody' => 'some message body',
+            ]
+        );
+        $subject->render();
+
+        self::assertEquals(0, $this->mailer->getNumberOfSentEmails());
     }
 
     /**
