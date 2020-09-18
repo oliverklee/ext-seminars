@@ -5126,6 +5126,52 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
     /**
      * @test
      */
+    public function notifyAttendeeForSendConfirmationTrueAndExistingAlternativeEmailProcessorHookNeverSendsAnEmailViaDefaultMailer()
+    {
+        /** @var \Tx_Seminars_OldModel_Registration $registrationOld */
+        $registrationOld = $this->createRegistration();
+        /** @var \Tx_Seminars_Mapper_Registration $mapper */
+        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        /** @var \Tx_Seminars_Model_Registration $registration */
+        $registration = $mapper->find($registrationOld->getUid());
+
+        $hook = $this->createMock(AlternativeEmailProcessor::class);
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][AlternativeEmailProcessor::class][] = $hookClass;
+        $this->addMockedInstance($hookClass, $hook);
+
+        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $controller = new \Tx_Seminars_FrontEnd_DefaultController();
+        $controller->init();
+
+        $this->subject->notifyAttendee($registrationOld, $controller);
+
+        $this->assertEquals(0, $this->mailer->getNumberOfSentEmails());
+    }
+
+    /**
+     * @test
+     */
+    public function notifyAttendeeForSendConfirmationTrueAndWithoutExistingAlternativeEmailProcessorHookSendsAnEmailViaDefaultMailer()
+    {
+        /** @var \Tx_Seminars_OldModel_Registration $registrationOld */
+        $registrationOld = $this->createRegistration();
+        /** @var \Tx_Seminars_Mapper_Registration $mapper */
+        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        /** @var \Tx_Seminars_Model_Registration $registration */
+        $registration = $mapper->find($registrationOld->getUid());
+
+        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $controller = new \Tx_Seminars_FrontEnd_DefaultController();
+        $controller->init();
+
+        $this->subject->notifyAttendee($registrationOld, $controller);
+
+        $this->assertEquals(1, $this->mailer->getNumberOfSentEmails());
+    }
+    /**
+     * @test
+     */
     public function notifyAttendeeForSendConfirmationFalseNeverCallsRegistrationEmailHookMethods()
     {
         /** @var \Tx_Seminars_OldModel_Registration $registrationOld */
@@ -5501,6 +5547,49 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
         $this->addMockedInstance($hookClass, $hook);
 
         $this->subject->notifyOrganizers($registrationOld);
+    }
+
+    /**
+     * @test
+     */
+    public function notifyOrganizersForSendNotificationTrueAndExistingAlternativeEmailProcessorHookMethodsDoesNotSendMailsViaDefaultMailer()
+    {
+        $this->subject->setConfigurationValue('sendNotification', true);
+
+        /** @var \Tx_Seminars_OldModel_Registration $registrationOld */
+        $registrationOld = $this->createRegistration();
+        /** @var \Tx_Seminars_Mapper_Registration $mapper */
+        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        /** @var \Tx_Seminars_Model_Registration $registration */
+        $registration = $mapper->find($registrationOld->getUid());
+
+        $hook = $this->createMock(AlternativeEmailProcessor::class);
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][AlternativeEmailProcessor::class][] = $hookClass;
+        $this->addMockedInstance($hookClass, $hook);
+
+        $this->subject->notifyOrganizers($registrationOld);
+
+        $this->assertSame(0, $this->mailer->getNumberOfSentEmails());
+    }
+
+    /**
+     * @test
+     */
+    public function notifyOrganizersForSendNotificationTrueWithoutExistingAlternativeEmailProcessorHookMethodsSendsMailsViaDefaultMailer()
+    {
+        $this->subject->setConfigurationValue('sendNotification', true);
+
+        /** @var \Tx_Seminars_OldModel_Registration $registrationOld */
+        $registrationOld = $this->createRegistration();
+        /** @var \Tx_Seminars_Mapper_Registration $mapper */
+        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        /** @var \Tx_Seminars_Model_Registration $registration */
+        $registration = $mapper->find($registrationOld->getUid());
+
+        $this->subject->notifyOrganizers($registrationOld);
+
+        $this->assertSame(1, $this->mailer->getNumberOfSentEmails());
     }
 
     /**
@@ -6267,6 +6356,57 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
         $this->addMockedInstance($hookClass, $hook);
 
         $this->subject->sendAdditionalNotification($registrationOld);
+    }
+
+    /**
+     * @test
+     */
+    public function sendAdditionalNotificationWithExistingAlternativeEmailProcessorHookMethodsDoesntSendMailsViaDefaultMailer()
+    {
+        $this->testingFramework->changeRecord(
+            'tx_seminars_seminars',
+            $this->seminarUid,
+            ['attendees_max' => 1]
+        );
+
+        /** @var \Tx_Seminars_OldModel_Registration $registrationOld */
+        $registrationOld = $this->createRegistration();
+        /** @var \Tx_Seminars_Mapper_Registration $mapper */
+        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        /** @var \Tx_Seminars_Model_Registration $registration */
+        $registration = $mapper->find($registrationOld->getUid());
+
+        $hook = $this->createMock(AlternativeEmailProcessor::class);
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][AlternativeEmailProcessor::class][] = $hookClass;
+        $this->addMockedInstance($hookClass, $hook);
+
+        $this->subject->sendAdditionalNotification($registrationOld);
+
+        $this->assertSame(0, $this->mailer->getNumberOfSentEMails());
+    }
+
+    /**
+     * @test
+     */
+    public function sendAdditionalNotificationWithoutExistingAlternativeEmailProcessorHookMethodsSendsMailsViaDefaultMailer()
+    {
+        $this->testingFramework->changeRecord(
+            'tx_seminars_seminars',
+            $this->seminarUid,
+            ['attendees_max' => 1]
+        );
+
+        /** @var \Tx_Seminars_OldModel_Registration $registrationOld */
+        $registrationOld = $this->createRegistration();
+        /** @var \Tx_Seminars_Mapper_Registration $mapper */
+        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        /** @var \Tx_Seminars_Model_Registration $registration */
+        $registration = $mapper->find($registrationOld->getUid());
+
+        $this->subject->sendAdditionalNotification($registrationOld);
+
+        $this->assertSame(1, $this->mailer->getNumberOfSentEMails());
     }
 
     /*
