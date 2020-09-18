@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Hooks\Interfaces\AlternativeEmailProcessor;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -42,6 +43,11 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
      */
     private $recordsPageUid = 0;
 
+    /**
+     * @var string[]
+     */
+    private $mockedClassNames = [];
+
     protected function setUp()
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
@@ -73,6 +79,9 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     protected function tearDown()
     {
         $this->testingFramework->cleanUp();
+
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][AlternativeEmailProcessor::class] = [];
+        $this->purgeMockedInstances();
 
         \Tx_Seminars_Service_RegistrationManager::purgeInstance();
         \Tx_Oelib_ConfigurationProxy::purgeInstances();
@@ -224,6 +233,41 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
         $result->setTestMode();
 
         return $result;
+    }
+
+    /**
+     * Adds an instance to the Typo3 instance FIFO buffer used by `GeneralUtility::makeInstance()`
+     * and registers it for purging in `tearDown()`.
+     *
+     * In case of a failing test or an exception in the test before the instance is taken
+     * from the FIFO buffer, the instance would stay in the buffer and make following tests
+     * fail. This function adds it to the list of instances to purge in `tearDown()` in addition
+     * to `GeneralUtility::addInstance()`.
+     *
+     * @param string $className
+     * @param mixed $instance
+     *
+     * @return void
+     */
+    private function addMockedInstance(string $className, $instance)
+    {
+        GeneralUtility::addInstance($className, $instance);
+        $this->mockedClassNames[] = $className;
+    }
+
+    /**
+     * Purges possibly leftover instances from the Typo3 instance FIFO buffer used by
+     * `GeneralUtility::makeInstance()`.
+     *
+     * @return void
+     */
+    private function purgeMockedInstances()
+    {
+        foreach ($this->mockedClassNames as $className) {
+            GeneralUtility::makeInstance($className);
+        }
+
+        $this->mockedClassNames = [];
     }
 
     /*
@@ -1585,6 +1629,108 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
     /**
      * @test
      */
+    public function sendEMailToReviewerCallsAlternativeEmailProcessorHookWhenRegistered()
+    {
+        $seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
+        $this->createAndLoginUserWithReviewer();
+
+        $this->subject->setObjectUid($seminarUid);
+        $formData = $this->subject->modifyDataToInsert([]);
+
+        $this->testingFramework->changeRecord(
+            'tx_seminars_seminars',
+            $seminarUid,
+            [
+                'hidden' => 1,
+                'publication_hash' => $formData['publication_hash'],
+            ]
+        );
+
+        $hook = $this->createMock(AlternativeEmailProcessor::class);
+        $hook->expects(self::never())->method('processAttendeeEmail');
+        $hook->expects(self::never())->method('processOrganizerEmail');
+        $hook->expects(self::never())->method('processReminderEmail');
+        $hook->expects(self::once())->method('processReviewerEmail')->with(
+            self::isInstanceOf(\Tx_Oelib_Mail::class),
+            self::isInstanceOf(\Tx_Seminars_Model_Event::class)
+        );
+        $hook->expects(self::never())->method('processAdditionalReviewerEmail');
+        $hook->expects(self::never())->method('processAdditionalEmail');
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][AlternativeEmailProcessor::class][] = $hookClass;
+        $this->addMockedInstance($hookClass, $hook);
+
+        $this->subject->sendEMailToReviewer();
+    }
+
+    /**
+     * @test
+     */
+    public function sendEMailToReviewerDoesntCallAlternativeEmailProcessorHookWhenNotRegistered()
+    {
+        $seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
+        $this->createAndLoginUserWithReviewer();
+
+        $this->subject->setObjectUid($seminarUid);
+        $formData = $this->subject->modifyDataToInsert([]);
+
+        $this->testingFramework->changeRecord(
+            'tx_seminars_seminars',
+            $seminarUid,
+            [
+                'hidden' => 1,
+                'publication_hash' => $formData['publication_hash'],
+            ]
+        );
+
+        $hook = $this->createMock(AlternativeEmailProcessor::class);
+        $hook->expects(self::never())->method('processAttendeeEmail');
+        $hook->expects(self::never())->method('processOrganizerEmail');
+        $hook->expects(self::never())->method('processReminderEmail');
+        $hook->expects(self::never())->method('processReviewerEmail');
+        $hook->expects(self::never())->method('processAdditionalReviewerEmail');
+        $hook->expects(self::never())->method('processAdditionalEmail');
+
+        $hookClass = \get_class($hook);
+        $this->addMockedInstance($hookClass, $hook);
+
+        $this->subject->sendEMailToReviewer();
+    }
+
+    /**
+     * @test
+     */
+    public function sendEMailToReviewerDoesntSendMailViaDefaultMailerWithAlternativeEmailProcessorHookRegistered()
+    {
+        $seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
+        $this->createAndLoginUserWithReviewer();
+
+        $this->subject->setObjectUid($seminarUid);
+        $formData = $this->subject->modifyDataToInsert([]);
+
+        $this->testingFramework->changeRecord(
+            'tx_seminars_seminars',
+            $seminarUid,
+            [
+                'hidden' => 1,
+                'publication_hash' => $formData['publication_hash'],
+            ]
+        );
+
+        $hook = $this->createMock(AlternativeEmailProcessor::class);
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][AlternativeEmailProcessor::class][] = $hookClass;
+        $this->addMockedInstance($hookClass, $hook);
+
+        $this->subject->sendEMailToReviewer();
+
+        self::assertEquals(0, $this->mailer->getNumberOfSentEmails());
+    }
+
+    /**
+     * @test
+     */
     public function sendEMailToReviewerSetsPublishEventSubjectInMail()
     {
         $seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
@@ -2053,6 +2199,72 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
             'foo@bar.com',
             $this->mailer->getFirstSentEmail()->getTo()
         );
+    }
+
+    /**
+     * @test
+     */
+    public function sendAdditionalNotificationEmailToReviewerCallsAlternativeEmailProcessorHookWhenRegistered()
+    {
+        $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
+        $this->createAndLoginUserWithReviewer();
+
+        $hook = $this->createMock(AlternativeEmailProcessor::class);
+        $hook->expects(self::never())->method('processAttendeeEmail');
+        $hook->expects(self::never())->method('processOrganizerEmail');
+        $hook->expects(self::never())->method('processReminderEmail');
+        $hook->expects(self::never())->method('processReviewerEmail');
+        $hook->expects(self::once())->method('processAdditionalReviewerEmail')->with(
+            self::isInstanceOf(\Tx_Oelib_Mail::class)
+        );
+        $hook->expects(self::never())->method('processAdditionalEmail');
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][AlternativeEmailProcessor::class][] = $hookClass;
+        $this->addMockedInstance($hookClass, $hook);
+
+        $this->subject->sendAdditionalNotificationEmailToReviewer();
+    }
+
+    /**
+     * @test
+     */
+    public function sendAdditionalNotificationEmailToReviewerDoesntCallAlternativeEmailProcessorHookWhenNotRegistered()
+    {
+        $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
+        $this->createAndLoginUserWithReviewer();
+
+        $hook = $this->createMock(AlternativeEmailProcessor::class);
+        $hook->expects(self::never())->method('processAttendeeEmail');
+        $hook->expects(self::never())->method('processOrganizerEmail');
+        $hook->expects(self::never())->method('processReminderEmail');
+        $hook->expects(self::never())->method('processReviewerEmail');
+        $hook->expects(self::never())->method('processAdditionalReviewerEmail');
+        $hook->expects(self::never())->method('processAdditionalEmail');
+
+        $hookClass = \get_class($hook);
+        $this->addMockedInstance($hookClass, $hook);
+
+        $this->subject->sendAdditionalNotificationEmailToReviewer();
+    }
+
+    /**
+     * @test
+     */
+    public function sendAdditionalNotificationEmailToReviewerDoesntSendMailViaDefaultMailerWhenAlternativeEmailProcessorHookIsRegistered()
+    {
+        $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
+        $this->createAndLoginUserWithReviewer();
+
+        $hook = $this->createMock(AlternativeEmailProcessor::class);
+
+        $hookClass = \get_class($hook);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][AlternativeEmailProcessor::class][] = $hookClass;
+        $this->addMockedInstance($hookClass, $hook);
+
+        $this->subject->sendAdditionalNotificationEmailToReviewer();
+
+        self::assertEquals(0, $this->mailer->getNumberOfSentEmails());
     }
 
     /**
