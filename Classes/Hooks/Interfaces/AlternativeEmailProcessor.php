@@ -88,7 +88,6 @@ interface AlternativeEmailProcessor extends Hook
      * @return mixed
      */
     public function processAdditionalReviewerEmail(
-        \Tx_Oelib_Mail $email,
-        \Tx_Seminars_Model_Event $event
+        \Tx_Oelib_Mail $email
     );
 }
