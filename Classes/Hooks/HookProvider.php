@@ -121,6 +121,7 @@ class HookProvider
             $hook->$method(...$params);
             $executed = true;
         }
+
         return $executed;
     }
 
