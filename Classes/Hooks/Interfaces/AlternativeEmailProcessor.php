@@ -57,38 +57,38 @@ interface AlternativeEmailProcessor extends Hook
      * Is called to send the organizer reminder notification through a different system than seminars built-in mailer.
      *
      * @param \Tx_Oelib_Mail              $email
-     * @param \Tx_Seminars_OldModel_Event $event
+     * @param \Tx_Seminars_Model_Event $event
      *
      * @return mixed
      */
     public function processReminderEmail(
         \Tx_Oelib_Mail $email,
-        \Tx_Seminars_OldModel_Event $event
+        \Tx_Seminars_Model_Event $event
     );
 
     /**
      * Is called to send the reviewer notification through a different system than seminars built-in mailer.
      *
      * @param \Tx_Oelib_Mail              $email
-     * @param \Tx_Seminars_OldModel_Event $event
+     * @param \Tx_Seminars_Model_Event $event
      *
      * @return mixed
      */
     public function processReviewerEmail(
         \Tx_Oelib_Mail $email,
-        \Tx_Seminars_OldModel_Event $event
+        \Tx_Seminars_Model_Event $event
     );
 
     /**
      * Is called to send the reviewer notification through a different system than seminars built-in mailer.
      *
      * @param \Tx_Oelib_Mail              $email
-     * @param \Tx_Seminars_OldModel_Event $event
+     * @param \Tx_Seminars_Model_Event $event
      *
      * @return mixed
      */
     public function processAdditionalReviewerEmail(
         \Tx_Oelib_Mail $email,
-        \Tx_Seminars_OldModel_Event $event
+        \Tx_Seminars_Model_Event $event
     );
 }
