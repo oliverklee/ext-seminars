@@ -261,7 +261,6 @@ class MailNotifierTest extends TestCase
         $this->mockedClassNames = [];
     }
 
-
     /*
      * Tests for the utility functions
      */
