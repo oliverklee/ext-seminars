@@ -5169,7 +5169,7 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
 
         self::assertSame(1, $this->mailer->getNumberOfSentEmails());
     }
-    
+
     /**
      * @test
      */
