@@ -1,5 +1,5 @@
 {
-    "name": "oliverklee/seminars",
+    "name": "bmheins/seminars",
     "description": "TYPO3 extension that allows you to create and manage a list of seminars, workshops, lectures, theater performances and other events, allowing front-end users to sign up. FE users also can create and edit events.",
     "type": "typo3-cms-extension",
     "keywords": [
