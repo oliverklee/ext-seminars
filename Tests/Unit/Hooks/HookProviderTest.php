@@ -590,7 +590,7 @@ final class HookProviderTest extends UnitTestCase
     /**
      * @test
      */
-    public function hookObjectForTestingHookReturningTrueIfExecutedWithNoHookImplementorRegisteredReturnsTrue()
+    public function hookObjectForTestingHookReturningTrueIfExecutedWithNoHookImplementorRegisteredReturnsFalse()
     {
         $hookObject = new HookProvider(TestingHookInterface::class);
 
