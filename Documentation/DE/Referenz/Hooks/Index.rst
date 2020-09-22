@@ -34,6 +34,7 @@ Es gibt Hooks in diese Teile von seminars:
 * :ref:`backendregistrationlistview_de`
 * :ref:`registrationlistcsv_de`
 * :ref:`datasanitization_de`
+* :ref:`alternativeemailprocessor_de`
 
 Bitte nehmen Sie Kontakt zu uns auf, wenn Sie weitere Hooks benötigen.
 
@@ -911,4 +912,109 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
         {
             // Hier Ihr Code
         }
+    }
+
+.. _alternativeemailprocessor_de:
+
+Um einen anderen als den von dieser Extension bereitgestellten Email-Prozessor zu verwenden,
+implementieren Sie das Interface :php:`\OliverKlee\Seminars\Hooks\Interfaces\AlternativeEmailProcessor`.
+Dazu müssen Sie folgende Methoden implementieren:
+
+.. code-block:: php
+
+    /**
+     * Is called to send the attendee "Thank you" through a different system than seminars built-in mailer.
+     *
+     * @param \Tx_Oelib_Mail                  $email
+     * @param \Tx_Seminars_Model_Registration $registration
+     *
+     * @return mixed
+     */
+    public function processAttendeeEmail(\Tx_Oelib_Mail $email, \Tx_Seminars_Model_Registration $registration)
+    {
+         // Hier Ihr Code
+    }
+
+    /**
+     * Is called to send the organizer notification through a different system than seminars built-in mailer.
+     *
+     * @param \Tx_Oelib_Mail                  $email
+     * @param \Tx_Seminars_Model_Registration $registration
+     *
+     * @return mixed
+     */
+    public function processOrganizerEmail(\Tx_Oelib_Mail $email, \Tx_Seminars_Model_Registration $registration)
+    {
+         // Hier Ihr Code
+    }
+
+    /**
+     * Is called to send the organizer additional notification through a different system than seminars built-in mailer.
+     *
+     * @param \Tx_Oelib_Mail                  $email
+     * @param \Tx_Seminars_Model_Registration $registration
+     *
+     * @return mixed
+     */
+    public function processAdditionalEmail(\Tx_Oelib_Mail $email, \Tx_Seminars_Model_Registration $registration)
+    {
+         // Hier Ihr Code
+    }
+
+    /**
+     * Is called to send the organizer reminder notification through a different system than seminars built-in mailer.
+     *
+     * @param \Tx_Oelib_Mail           $email
+     * @param \Tx_Seminars_Model_Event $event
+     *
+     * @return mixed
+     */
+    public function processReminderEmail(\Tx_Oelib_Mail $email, \Tx_Seminars_Model_Event $event)
+    {
+         // Hier Ihr Code
+    }
+
+    /**
+     * Is called to send the reviewer notification through a different system than seminars built-in mailer.
+     *
+     * @param \Tx_Oelib_Mail           $email
+     * @param \Tx_Seminars_Model_Event $event
+     *
+     * @return mixed
+     */
+    public function processReviewerEmail(\Tx_Oelib_Mail $email, \Tx_Seminars_Model_Event $event)
+    {
+         // Hier Ihr Code
+    }
+
+    /**
+     * Is called to send the reviewer notification through a different system than seminars built-in mailer.
+     *
+     * @param \Tx_Oelib_Mail           $email
+     * @param \Tx_Seminars_Model_Event $event
+     *
+     * @return mixed
+     */
+    public function processAdditionalReviewerEmail(\Tx_Oelib_Mail $email)
+    {
+         // Hier Ihr Code
+    }
+
+Machen Sie seminars Ihre Klasse, die :php:`\OliverKlee\Seminars\Hooks\Interfaces\AlternativeEmailProcessor`
+implementiert, in der Datei :file:`ext_localconf.php` Ihrer Extension bekannt:
+
+.. code-block:: php
+
+    $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][\OliverKlee\Seminars\Hooks\Interfaces\AlternativeEmailProcessor::class][]
+        = \Acme\MyExtension\Hooks\ExampleMailProcessor::class;
+
+Wenn Sie nur bestimmte Mails von einem alternativen Mailprozessor behandeln lassen wollen, können Sie
+den Seminars-Mailer einfach verwenden:
+
+.. code-block:: php
+
+    public function processAdditionalReviewerEmail(\Tx_Oelib_Mail $email)
+    {
+        $mailerFactory = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
+        $mailerFactory->getMailer()->send($eMail);
     }
