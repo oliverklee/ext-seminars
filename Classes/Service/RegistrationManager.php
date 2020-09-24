@@ -872,7 +872,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         $this->callPostProcessAttendeeEmailHooks($eMailNotification, $registration);
 
         $alternativeEmailProcessorUsed = $this->getAlternativeEmailProcessorHookProvider()
-            ->executeHookReturningTrueIfExecuted('processAttendeeEmail', $eMailNotification, $registration);
+            ->executeHookReturningTrueIfExecuted('processAttendeeEmail', $eMailNotification);
         if (!$alternativeEmailProcessorUsed) {
             /** @var \Tx_Oelib_MailerFactory $mailerFactory */
             $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
@@ -1061,7 +1061,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         $this->callPostProcessOrganizerEmailHooks($eMailNotification, $registration);
 
         $alternativeEmailProcessorUsed = $this->getAlternativeEmailProcessorHookProvider()
-            ->executeHookReturningTrueIfExecuted('processOrganizerEmail', $eMailNotification, $registrationNew);
+            ->executeHookReturningTrueIfExecuted('processOrganizerEmail', $eMailNotification);
         if (!$alternativeEmailProcessorUsed) {
             /** @var \Tx_Oelib_MailerFactory $mailerFactory */
             $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
@@ -1166,7 +1166,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         $this->callPostProcessAdditionalEmailHooks($eMail, $registration, $emailReason);
 
         $alternativeEmailProcessorUsed = $this->getAlternativeEmailProcessorHookProvider()
-            ->executeHookReturningTrueIfExecuted('processAdditionalEmail', $eMail, $registrationNew);
+            ->executeHookReturningTrueIfExecuted('processAdditionalEmail', $eMail);
         if (!$alternativeEmailProcessorUsed) {
             /** @var \Tx_Oelib_MailerFactory $mailerFactory */
             $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);

@@ -17,77 +17,54 @@ interface AlternativeEmailProcessor extends Hook
     /**
      * Is called to send the attendee "Thank you" through a different system than seminars built-in mailer.
      *
-     * @param \Tx_Oelib_Mail                  $email
-     * @param \Tx_Seminars_Model_Registration $registration
+     * @param \Tx_Oelib_Mail $email
      *
      * @return mixed
      */
-    public function processAttendeeEmail(
-        \Tx_Oelib_Mail $email,
-        \Tx_Seminars_Model_Registration $registration
-    );
+    public function processAttendeeEmail(\Tx_Oelib_Mail $email);
 
     /**
      * Is called to send the organizer notification through a different system than seminars built-in mailer.
      *
-     * @param \Tx_Oelib_Mail                  $email
-     * @param \Tx_Seminars_Model_Registration $registration
+     * @param \Tx_Oelib_Mail $email
      *
      * @return mixed
      */
-    public function processOrganizerEmail(
-        \Tx_Oelib_Mail $email,
-        \Tx_Seminars_Model_Registration $registration
-    );
+    public function processOrganizerEmail(\Tx_Oelib_Mail $email);
 
     /**
      * Is called to send the organizer additional notification through a different system than seminars built-in mailer.
      *
-     * @param \Tx_Oelib_Mail                  $email
-     * @param \Tx_Seminars_Model_Registration $registration
+     * @param \Tx_Oelib_Mail $email
      *
      * @return mixed
      */
-    public function processAdditionalEmail(
-        \Tx_Oelib_Mail $email,
-        \Tx_Seminars_Model_Registration $registration
-    );
+    public function processAdditionalEmail(\Tx_Oelib_Mail $email);
 
     /**
      * Is called to send the organizer reminder notification through a different system than seminars built-in mailer.
      *
-     * @param \Tx_Oelib_Mail              $email
-     * @param \Tx_Seminars_Model_Event $event
+     * @param \Tx_Oelib_Mail $email
      *
      * @return mixed
      */
-    public function processReminderEmail(
-        \Tx_Oelib_Mail $email,
-        \Tx_Seminars_Model_Event $event
-    );
+    public function processReminderEmail(\Tx_Oelib_Mail $email);
 
     /**
      * Is called to send the reviewer notification through a different system than seminars built-in mailer.
      *
-     * @param \Tx_Oelib_Mail              $email
-     * @param \Tx_Seminars_Model_Event $event
+     * @param \Tx_Oelib_Mail $email
      *
      * @return mixed
      */
-    public function processReviewerEmail(
-        \Tx_Oelib_Mail $email,
-        \Tx_Seminars_Model_Event $event
-    );
+    public function processReviewerEmail(\Tx_Oelib_Mail $email);
 
     /**
      * Is called to send the reviewer notification through a different system than seminars built-in mailer.
      *
-     * @param \Tx_Oelib_Mail              $email
-     * @param \Tx_Seminars_Model_Event $event
+     * @param \Tx_Oelib_Mail $email
      *
      * @return mixed
      */
-    public function processAdditionalReviewerEmail(
-        \Tx_Oelib_Mail $email
-    );
+    public function processAdditionalReviewerEmail(\Tx_Oelib_Mail $email);
 }

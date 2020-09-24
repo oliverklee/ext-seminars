@@ -497,8 +497,7 @@ final class EmailServiceTest extends TestCase
     {
         $hook = $this->createMock(AlternativeEmailProcessor::class);
         $hook->expects(self::once())->method('processAttendeeEmail')->with(
-            self::isInstanceOf(\Tx_Oelib_Mail::class),
-            self::isInstanceOf(\Tx_Seminars_Model_Registration::class)
+            self::isInstanceOf(\Tx_Oelib_Mail::class)
         );
         $hook->expects(self::never())->method('processOrganizerEmail');
         $hook->expects(self::never())->method('processReminderEmail');
@@ -520,8 +519,7 @@ final class EmailServiceTest extends TestCase
     {
         $hook = $this->createMock(AlternativeEmailProcessor::class);
         $hook->expects(self::exactly(2))->method('processAttendeeEmail')->with(
-            self::isInstanceOf(\Tx_Oelib_Mail::class),
-            self::isInstanceOf(\Tx_Seminars_Model_Registration::class)
+            self::isInstanceOf(\Tx_Oelib_Mail::class)
         );
         $hook->expects(self::never())->method('processOrganizerEmail');
         $hook->expects(self::never())->method('processReminderEmail');

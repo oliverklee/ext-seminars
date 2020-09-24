@@ -1651,8 +1651,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_EventEditorTest extends TestCase
         $hook->expects(self::never())->method('processOrganizerEmail');
         $hook->expects(self::never())->method('processReminderEmail');
         $hook->expects(self::once())->method('processReviewerEmail')->with(
-            self::isInstanceOf(\Tx_Oelib_Mail::class),
-            self::isInstanceOf(\Tx_Seminars_Model_Event::class)
+            self::isInstanceOf(\Tx_Oelib_Mail::class)
         );
         $hook->expects(self::never())->method('processAdditionalReviewerEmail');
         $hook->expects(self::never())->method('processAdditionalEmail');

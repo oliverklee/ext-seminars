@@ -430,7 +430,7 @@ abstract class AbstractEventMailForm
                 $this->modifyEmailWithHook($registration, $eMail);
 
                 $alternativeEmailProcessorUsed = $this->getAlternativeEmailProcessorHookProvider()
-                    ->executeHookReturningTrueIfExecuted('processAttendeeEmail', $eMail, $registration);
+                    ->executeHookReturningTrueIfExecuted('processAttendeeEmail', $eMail);
                 if (!$alternativeEmailProcessorUsed) {
                     $mailer->send($eMail);
                 }

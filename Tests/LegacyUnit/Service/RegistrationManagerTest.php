@@ -5075,15 +5075,10 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
     {
         /** @var \Tx_Seminars_OldModel_Registration $registrationOld */
         $registrationOld = $this->createRegistration();
-        /** @var \Tx_Seminars_Mapper_Registration $mapper */
-        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
-        /** @var \Tx_Seminars_Model_Registration $registration */
-        $registration = $mapper->find($registrationOld->getUid());
 
         $hook = $this->createMock(AlternativeEmailProcessor::class);
         $hook->expects(self::once())->method('processAttendeeEmail')->with(
-            self::isInstanceOf(\Tx_Oelib_Mail::class),
-            $registration
+            self::isInstanceOf(\Tx_Oelib_Mail::class)
         );
         $hook->expects(self::never())->method('processOrganizerEmail');
         $hook->expects(self::never())->method('processReminderEmail');
@@ -5130,10 +5125,6 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
     {
         /** @var \Tx_Seminars_OldModel_Registration $registrationOld */
         $registrationOld = $this->createRegistration();
-        /** @var \Tx_Seminars_Mapper_Registration $mapper */
-        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
-        /** @var \Tx_Seminars_Model_Registration $registration */
-        $registration = $mapper->find($registrationOld->getUid());
 
         $hook = $this->createMock(AlternativeEmailProcessor::class);
         $hookClass = \get_class($hook);
@@ -5156,10 +5147,6 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
     {
         /** @var \Tx_Seminars_OldModel_Registration $registrationOld */
         $registrationOld = $this->createRegistration();
-        /** @var \Tx_Seminars_Mapper_Registration $mapper */
-        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
-        /** @var \Tx_Seminars_Model_Registration $registration */
-        $registration = $mapper->find($registrationOld->getUid());
 
         $this->subject->setConfigurationValue('sendConfirmation', true);
         $controller = new \Tx_Seminars_FrontEnd_DefaultController();
@@ -5207,10 +5194,6 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
     {
         /** @var \Tx_Seminars_OldModel_Registration $registrationOld */
         $registrationOld = $this->createRegistration();
-        /** @var \Tx_Seminars_Mapper_Registration $mapper */
-        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
-        /** @var \Tx_Seminars_Model_Registration $registration */
-        $registration = $mapper->find($registrationOld->getUid());
 
         $hook = $this->createMock(AlternativeEmailProcessor::class);
         $hook->expects(self::never())->method('processAttendeeEmail');
@@ -5527,16 +5510,11 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
 
         /** @var \Tx_Seminars_OldModel_Registration $registrationOld */
         $registrationOld = $this->createRegistration();
-        /** @var \Tx_Seminars_Mapper_Registration $mapper */
-        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
-        /** @var \Tx_Seminars_Model_Registration $registration */
-        $registration = $mapper->find($registrationOld->getUid());
 
         $hook = $this->createMock(AlternativeEmailProcessor::class);
         $hook->expects(self::never())->method('processAttendeeEmail');
         $hook->expects(self::once())->method('processOrganizerEmail')->with(
-            self::isInstanceOf(\Tx_Oelib_Mail::class),
-            $registration
+            self::isInstanceOf(\Tx_Oelib_Mail::class)
         );
         $hook->expects(self::never())->method('processAdditionalEmail');
         $hook->expects(self::never())->method('processReminderEmail');
@@ -5559,10 +5537,6 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
 
         /** @var \Tx_Seminars_OldModel_Registration $registrationOld */
         $registrationOld = $this->createRegistration();
-        /** @var \Tx_Seminars_Mapper_Registration $mapper */
-        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
-        /** @var \Tx_Seminars_Model_Registration $registration */
-        $registration = $mapper->find($registrationOld->getUid());
 
         $hook = $this->createMock(AlternativeEmailProcessor::class);
         $hookClass = \get_class($hook);
@@ -5583,10 +5557,6 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
 
         /** @var \Tx_Seminars_OldModel_Registration $registrationOld */
         $registrationOld = $this->createRegistration();
-        /** @var \Tx_Seminars_Mapper_Registration $mapper */
-        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
-        /** @var \Tx_Seminars_Model_Registration $registration */
-        $registration = $mapper->find($registrationOld->getUid());
 
         $this->subject->notifyOrganizers($registrationOld);
 
@@ -5654,10 +5624,6 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
 
         /** @var \Tx_Seminars_OldModel_Registration $registrationOld */
         $registrationOld = $this->createRegistration();
-        /** @var \Tx_Seminars_Mapper_Registration $mapper */
-        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
-        /** @var \Tx_Seminars_Model_Registration $registration */
-        $registration = $mapper->find($registrationOld->getUid());
 
         $hook = $this->createMock(AlternativeEmailProcessor::class);
         $hook->expects(self::never())->method('processAttendeeEmail');
@@ -6336,10 +6302,6 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
 
         /** @var \Tx_Seminars_OldModel_Registration $registrationOld */
         $registrationOld = $this->createRegistration();
-        /** @var \Tx_Seminars_Mapper_Registration $mapper */
-        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
-        /** @var \Tx_Seminars_Model_Registration $registration */
-        $registration = $mapper->find($registrationOld->getUid());
 
         $hook = $this->createMock(AlternativeEmailProcessor::class);
         $hook->expects(self::never())->method('processAttendeeEmail');
@@ -6348,8 +6310,7 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
         $hook->expects(self::never())->method('processReviewerEmail');
         $hook->expects(self::never())->method('processAdditionalReviewerEmail');
         $hook->expects(self::once())->method('processAdditionalEmail')->with(
-            self::isInstanceOf(\Tx_Oelib_Mail::class),
-            $registration
+            self::isInstanceOf(\Tx_Oelib_Mail::class)
         );
 
         $hookClass = \get_class($hook);
@@ -6372,10 +6333,6 @@ final class Tx_Seminars_Tests_Unit_Service_RegistrationManagerTest extends TestC
 
         /** @var \Tx_Seminars_OldModel_Registration $registrationOld */
         $registrationOld = $this->createRegistration();
-        /** @var \Tx_Seminars_Mapper_Registration $mapper */
-        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
-        /** @var \Tx_Seminars_Model_Registration $registration */
-        $registration = $mapper->find($registrationOld->getUid());
 
         $hook = $this->createMock(AlternativeEmailProcessor::class);
         $hookClass = \get_class($hook);

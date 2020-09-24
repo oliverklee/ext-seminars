@@ -205,7 +205,7 @@ class MailNotifier extends AbstractTask
             $eventNew = $eventMapper->find($event->getUid());
 
             $alternativeEmailProcessorUsed = $this->getAlternativeEmailProcessorHookProvider()
-                ->executeHookReturningTrueIfExecuted('processReminderEmail', $eMail, $eventNew);
+                ->executeHookReturningTrueIfExecuted('processReminderEmail', $eMail);
             if (!$alternativeEmailProcessorUsed) {
                 $this->mailer->send($eMail);
             }

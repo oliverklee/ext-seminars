@@ -1229,8 +1229,7 @@ class MailNotifierTest extends TestCase
         $hook->expects(self::never())->method('processAttendeeEmail');
         $hook->expects(self::never())->method('processOrganizerEmail');
         $hook->expects(self::once())->method('processReminderEmail')->with(
-            self::isInstanceOf(\Tx_Oelib_Mail::class),
-            self::isInstanceOf(\Tx_Seminars_Model_Event::class)
+            self::isInstanceOf(\Tx_Oelib_Mail::class)
         );
         $hook->expects(self::never())->method('processReviewerEmail');
         $hook->expects(self::never())->method('processAdditionalReviewerEmail');

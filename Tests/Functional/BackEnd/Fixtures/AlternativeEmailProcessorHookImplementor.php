@@ -44,12 +44,12 @@ final class AlternativeEmailProcessorHookImplementor implements AlternativeEmail
      */
     private $countCallForProcessReviewerEmail = 0;
 
-    public function processAttendeeEmail(\Tx_Oelib_Mail $email, \Tx_Seminars_Model_Registration $registration)
+    public function processAttendeeEmail(\Tx_Oelib_Mail $email)
     {
         $this->countCallForProcessAttendeeEmail++;
     }
 
-    public function processAdditionalEmail(\Tx_Oelib_Mail $email, \Tx_Seminars_Model_Registration $registration)
+    public function processAdditionalEmail(\Tx_Oelib_Mail $email)
     {
         $this->countCallForProcessAdditionalEmail++;
     }
@@ -59,17 +59,17 @@ final class AlternativeEmailProcessorHookImplementor implements AlternativeEmail
         $this->countCallForProcessAdditionalReviewerEmail++;
     }
 
-    public function processOrganizerEmail(\Tx_Oelib_Mail $email, \Tx_Seminars_Model_Registration $registration)
+    public function processOrganizerEmail(\Tx_Oelib_Mail $email)
     {
         $this->countCallForProcessOrganizerEmail++;
     }
 
-    public function processReminderEmail(\Tx_Oelib_Mail $email, \Tx_Seminars_Model_Event $event)
+    public function processReminderEmail(\Tx_Oelib_Mail $email)
     {
         $this->countCallForProcessReminderEmail++;
     }
 
-    public function processReviewerEmail(\Tx_Oelib_Mail $email, \Tx_Seminars_Model_Event $event)
+    public function processReviewerEmail(\Tx_Oelib_Mail $email)
     {
         $this->countCallForProcessReviewerEmail++;
     }

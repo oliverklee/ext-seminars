@@ -80,7 +80,7 @@ class EmailService implements SingletonInterface
             $eMail->setMessage($this->buildMessageBody($body, $event, $user));
 
             $alternativeEmailProcessorUsed = $this->getAlternativeEmailProcessorHookProvider()
-                ->executeHookReturningTrueIfExecuted('processAttendeeEmail', $eMail, $registration);
+                ->executeHookReturningTrueIfExecuted('processAttendeeEmail', $eMail);
             if (!$alternativeEmailProcessorUsed) {
                 $mailer->send($eMail);
             }
