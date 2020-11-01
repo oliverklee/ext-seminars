@@ -403,8 +403,8 @@ abstract class AbstractList
                         <p class="alert-message">
                             ' . $this->getLanguageService()->getLL('message.crowdfundingCampaign') . '
                             <br/>
-                            <a href="https://coders.care/for/crowdfunding/seminars/" target="_blank">
-                                https://coders.care/for/crowdfunding/seminars/
+                            <a href="https://github.com/oliverklee/ext-seminars/wiki/10LTS-Crowdfunding-Campaign" target="_blank">
+                                https://github.com/oliverklee/ext-seminars/wiki/10LTS-Crowdfunding-Campaign
                             </a>
                         </p>
                     </div>

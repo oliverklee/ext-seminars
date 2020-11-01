@@ -32,8 +32,9 @@ English Manual
    HelpingOut/Index
    KnownProblems/Index
 
-Compatibility with TYPO3 9LTS/9.5
-----------------------------------
-If you would like to use this extension with TYPO3 9LTS/9.5, please consider
-supporting the `crowdfunding campaign <https://coders.care/for/crowdfunding/seminars/>`_
+Compatibility with TYPO3 10LTS/10.4
+-----------------------------------
+
+If you would like to use this extension with TYPO3 10LTS/10.4, please consider
+supporting the `crowdfunding campaign <https://github.com/oliverklee/ext-seminars/wiki/10LTS-Crowdfunding-Campaign>`_
 to help make this happen.
