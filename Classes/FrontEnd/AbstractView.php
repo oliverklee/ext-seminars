@@ -77,7 +77,7 @@ abstract class Tx_Seminars_FrontEnd_AbstractView extends \Tx_Oelib_TemplateHelpe
      *
      * @return string the view's content
      */
-    abstract public function render();
+    abstract public function render(): string;
 
     /**
      * Returns the prefix for the configuration to check, e.g. "plugin.tx_seminars_pi1.".

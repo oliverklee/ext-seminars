@@ -176,7 +176,7 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
      *
      * @return string CSV list of events for the given page or an error message in case of an error
      */
-    public function createAndOutputListOfEvents($pageUid): string
+    public function createAndOutputListOfEvents(int $pageUid): string
     {
         if ($pageUid <= 0) {
             return $this->addErrorHeaderAndReturnMessage(self::NOT_FOUND);
@@ -199,7 +199,7 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
      *
      * @return string CSV export of the event records on that page
      */
-    public function createListOfEvents($pageUid): string
+    public function createListOfEvents(int $pageUid): string
     {
         /** @var \Tx_Seminars_Csv_EventListView $eventListView */
         $eventListView = GeneralUtility::makeInstance(\Tx_Seminars_Csv_EventListView::class);
@@ -219,7 +219,7 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
      *
      * @return bool true if the list of registrations may be exported as CSV
      */
-    protected function canAccessListOfRegistrations($eventUid): bool
+    protected function canAccessListOfRegistrations(int $eventUid): bool
     {
         switch ($this->getTypo3Mode()) {
             case 'BE':
@@ -251,7 +251,7 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
      *
      * @return bool TRUE if the list of events may be exported as CSV, FALSE otherwise
      */
-    protected function canAccessListOfEvents($pageUid): bool
+    protected function canAccessListOfEvents(int $pageUid): bool
     {
         /** @var \Tx_Seminars_Csv_BackEndEventAccessCheck $accessCheck */
         $accessCheck = GeneralUtility::makeInstance(\Tx_Seminars_Csv_BackEndEventAccessCheck::class);
@@ -289,7 +289,7 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
      *
      * @return void
      */
-    private function setPageTypeAndDisposition($csvFileName)
+    private function setPageTypeAndDisposition(string $csvFileName)
     {
         $headerProxy = \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy();
         $headerProxy->addHeader(
@@ -308,7 +308,7 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
      *
      * @throws \InvalidArgumentException
      */
-    private function addErrorHeaderAndReturnMessage($errorCode): string
+    private function addErrorHeaderAndReturnMessage(int $errorCode): string
     {
         switch ($errorCode) {
             case self::ACCESS_DENIED:
@@ -335,7 +335,7 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
      *         TRUE if the currently logged-in BE-User is allowed to access the registrations records,
      *         FALSE if the user has no access or this function is called in FE mode
      */
-    private function canAccessRegistrationsOnPage($pageUid): bool
+    private function canAccessRegistrationsOnPage(int $pageUid): bool
     {
         switch ($this->getTypo3Mode()) {
             case 'BE':
@@ -378,7 +378,7 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
      *
      * @return void
      */
-    public function setTypo3Mode($typo3Mode)
+    public function setTypo3Mode(string $typo3Mode)
     {
         $this->typo3Mode = $typo3Mode;
     }

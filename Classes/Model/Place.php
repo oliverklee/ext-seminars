@@ -27,7 +27,7 @@ class Tx_Seminars_Model_Place extends \Tx_Oelib_Model implements \Tx_Seminars_In
      *
      * @return void
      */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         if ($title == '') {
             throw new \InvalidArgumentException('The parameter $title must not be empty.', 1333296894);
@@ -53,7 +53,7 @@ class Tx_Seminars_Model_Place extends \Tx_Oelib_Model implements \Tx_Seminars_In
      *
      * @return void
      */
-    public function setAddress($address)
+    public function setAddress(string $address)
     {
         $this->setAsString('address', $address);
     }
@@ -85,7 +85,7 @@ class Tx_Seminars_Model_Place extends \Tx_Oelib_Model implements \Tx_Seminars_In
      *
      * @return void
      */
-    public function setZip($zip)
+    public function setZip(string $zip)
     {
         $this->setAsString('zip', $zip);
     }
@@ -117,7 +117,7 @@ class Tx_Seminars_Model_Place extends \Tx_Oelib_Model implements \Tx_Seminars_In
      *
      * @return void
      */
-    public function setCity($city)
+    public function setCity(string $city)
     {
         if ($city == '') {
             throw new \InvalidArgumentException('The parameter $city must not be empty.', 1333296904);
@@ -191,7 +191,7 @@ class Tx_Seminars_Model_Place extends \Tx_Oelib_Model implements \Tx_Seminars_In
      *
      * @return void
      */
-    public function setHomepage($homepage)
+    public function setHomepage(string $homepage)
     {
         $this->setAsString('homepage', $homepage);
     }
@@ -223,7 +223,7 @@ class Tx_Seminars_Model_Place extends \Tx_Oelib_Model implements \Tx_Seminars_In
      *
      * @return void
      */
-    public function setDirections($directions)
+    public function setDirections(string $directions)
     {
         $this->setAsString('directions', $directions);
     }
@@ -280,7 +280,7 @@ class Tx_Seminars_Model_Place extends \Tx_Oelib_Model implements \Tx_Seminars_In
      *
      * @return void
      */
-    public function setNotes($notes)
+    public function setNotes(string $notes)
     {
         $this->setAsString('notes', $notes);
     }

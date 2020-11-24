@@ -55,7 +55,7 @@ class Tx_Seminars_Mapper_Event extends \Tx_Oelib_DataMapper
      *
      * @return \Tx_Seminars_Model_Event|null
      */
-    public function findByPublicationHash($publicationHash)
+    public function findByPublicationHash(string $publicationHash)
     {
         if ($publicationHash === '') {
             throw new \InvalidArgumentException('The given publication hash was empty.', 1333292411);
@@ -86,7 +86,7 @@ class Tx_Seminars_Mapper_Event extends \Tx_Oelib_DataMapper
      * @return \Tx_Oelib_List the found \Tx_Seminars_Model_Event models, will be
      *                       empty if there are no matches
      */
-    public function findAllByBeginDate($minimum, $maximum): \Tx_Oelib_List
+    public function findAllByBeginDate(int $minimum, int $maximum): \Tx_Oelib_List
     {
         if ($minimum < 0) {
             throw new \InvalidArgumentException('$minimum must be >= 0.');

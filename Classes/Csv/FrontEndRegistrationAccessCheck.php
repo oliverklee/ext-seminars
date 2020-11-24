@@ -43,7 +43,7 @@ class Tx_Seminars_Csv_FrontEndRegistrationAccessCheck implements \Tx_Seminars_In
      *
      * @throws \BadMethodCallException
      */
-    public function hasAccess()
+    public function hasAccess(): bool
     {
         if ($this->getEvent() === null) {
             throw new \BadMethodCallException('Please set an event first.', 1389096647);

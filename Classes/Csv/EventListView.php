@@ -30,7 +30,7 @@ class Tx_Seminars_Csv_EventListView extends \Tx_Seminars_Csv_AbstractListView
      *
      * @throws \InvalidArgumentException
      */
-    public function setPageUid($pageUid)
+    public function setPageUid(int $pageUid)
     {
         if ($pageUid <= 0) {
             throw new \InvalidArgumentException('$pageUid must be > 0, but actually is: ' . $pageUid, 1390329634);
@@ -54,7 +54,7 @@ class Tx_Seminars_Csv_EventListView extends \Tx_Seminars_Csv_AbstractListView
      *
      * @return string
      */
-    public function render()
+    public function render(): string
     {
         if (!$this->hasPageUid()) {
             return '';
@@ -70,7 +70,7 @@ class Tx_Seminars_Csv_EventListView extends \Tx_Seminars_Csv_AbstractListView
      *
      * @return string[] the translated field names in an array, will be empty if no fields should be exported
      */
-    protected function getLocalizedCsvHeadings()
+    protected function getLocalizedCsvHeadings(): array
     {
         $translations = [];
         $translator = $this->getInitializedTranslator();
@@ -87,7 +87,7 @@ class Tx_Seminars_Csv_EventListView extends \Tx_Seminars_Csv_AbstractListView
      *
      * @return string[]
      */
-    protected function createCsvBodyLines()
+    protected function createCsvBodyLines(): array
     {
         /** @var \Tx_Seminars_BagBuilder_Event $builder */
         $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Event::class);

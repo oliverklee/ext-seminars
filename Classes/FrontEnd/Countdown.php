@@ -51,7 +51,7 @@ class Tx_Seminars_FrontEnd_Countdown extends \Tx_Seminars_FrontEnd_AbstractView
      *
      * @return string HTML code of the countdown or a message if no upcoming event has been found
      */
-    public function render()
+    public function render(): string
     {
         if ($this->mapper === null) {
             throw new \BadMethodCallException('The method injectEventMapper() needs to be called first.', 1333617194);

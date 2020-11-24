@@ -71,7 +71,7 @@ class Tx_Seminars_ViewHelper_DateRange
      *
      * @return string the abbreviated date range
      */
-    protected function getAsAbbreviatedDateRange($beginDate, $endDate): string
+    protected function getAsAbbreviatedDateRange(int $beginDate, int $endDate): string
     {
         // Are the years different? Then include the complete begin date.
         if (!$this->isSameYear($beginDate, $endDate)) {
@@ -107,7 +107,7 @@ class Tx_Seminars_ViewHelper_DateRange
      *
      * @return bool TRUE if $beginDate and $endDate are in the same month, otherwise FALSE
      */
-    protected function isSameMonth($beginDate, $endDate): bool
+    protected function isSameMonth(int $beginDate, int $endDate): bool
     {
         return $this->getAsDateFormatM($beginDate) === $this->getAsDateFormatM($endDate);
     }
@@ -120,7 +120,7 @@ class Tx_Seminars_ViewHelper_DateRange
      *
      * @return bool TRUE if $beginDate and $endDate are in the same year, otherwise FALSE
      */
-    protected function isSameYear($beginDate, $endDate): bool
+    protected function isSameYear(int $beginDate, int $endDate): bool
     {
         return $this->getAsDateFormatY($beginDate) === $this->getAsDateFormatY($endDate);
     }
@@ -144,7 +144,7 @@ class Tx_Seminars_ViewHelper_DateRange
      *
      * @return string the UNIX timestamp rendered using the strftime format in plugin.tx_seminars_seminars.dateFormatY
      */
-    protected function getAsDateFormatY($timestamp): string
+    protected function getAsDateFormatY(int $timestamp): string
     {
         return strftime($this->configuration->getAsString('dateFormatY'), $timestamp);
     }
@@ -156,7 +156,7 @@ class Tx_Seminars_ViewHelper_DateRange
      *
      * @return string the UNIX timestamp rendered using the strftime format in plugin.tx_seminars_seminars.dateFormatM
      */
-    protected function getAsDateFormatM($timestamp): string
+    protected function getAsDateFormatM(int $timestamp): string
     {
         return strftime($this->configuration->getAsString('dateFormatM'), $timestamp);
     }
@@ -168,7 +168,7 @@ class Tx_Seminars_ViewHelper_DateRange
      *
      * @return string the UNIX timestamp rendered using the strftime format in plugin.tx_seminars_seminars.dateFormatMD
      */
-    protected function getAsDateFormatMd($timestamp): string
+    protected function getAsDateFormatMd(int $timestamp): string
     {
         return strftime($this->configuration->getAsString('dateFormatMD'), $timestamp);
     }
@@ -180,7 +180,7 @@ class Tx_Seminars_ViewHelper_DateRange
      *
      * @return string the UNIX timestamp rendered using the strftime format in plugin.tx_seminars_seminars.dateFormatD
      */
-    protected function getAsDateFormatD($timestamp): string
+    protected function getAsDateFormatD(int $timestamp): string
     {
         return strftime($this->configuration->getAsString('dateFormatD'), $timestamp);
     }

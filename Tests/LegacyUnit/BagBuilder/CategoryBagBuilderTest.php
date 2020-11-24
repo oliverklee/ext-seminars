@@ -194,7 +194,7 @@ class CategoryBagBuilderTest extends TestCase
             $categoryUid
         );
 
-        $this->subject->limitToEvents($eventUid);
+        $this->subject->limitToEvents((string)$eventUid);
         $bag = $this->subject->build();
 
         self::assertEquals(
@@ -229,7 +229,7 @@ class CategoryBagBuilderTest extends TestCase
             $categoryUid2
         );
 
-        $this->subject->limitToEvents($eventUid);
+        $this->subject->limitToEvents((string)$eventUid);
         $bag = $this->subject->build();
 
         self::assertEquals(
@@ -291,7 +291,7 @@ class CategoryBagBuilderTest extends TestCase
             $categoryUid
         );
 
-        $this->subject->limitToEvents($eventUid);
+        $this->subject->limitToEvents((string)$eventUid);
         $bag = $this->subject->build();
 
         self::assertFalse(
@@ -329,7 +329,7 @@ class CategoryBagBuilderTest extends TestCase
             $categoryUid2
         );
 
-        $this->subject->limitToEvents($eventUid1);
+        $this->subject->limitToEvents((string)$eventUid1);
         $bag = $this->subject->build();
 
         self::assertEquals(
@@ -364,7 +364,7 @@ class CategoryBagBuilderTest extends TestCase
             'tx_seminars_seminars'
         );
 
-        $this->subject->limitToEvents($eventUid2);
+        $this->subject->limitToEvents((string)$eventUid2);
         $bag = $this->subject->build();
 
         self::assertTrue(

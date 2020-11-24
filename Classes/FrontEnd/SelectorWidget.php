@@ -56,7 +56,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
      *
      * @return string the HTML code of the selector widget, may be empty
      */
-    public function render()
+    public function render(): string
     {
         if (!$this->hasConfValueString('displaySearchFormFields', 's_listView')) {
             return '';
@@ -167,7 +167,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
      *
      * @return string the HTML content for the select, will not be empty
      */
-    private function createOptionBox($name, array $options): string
+    private function createOptionBox(string $name, array $options): string
     {
         $this->setMarker('options_header', $this->translate('label_' . $name));
         $this->setMarker('optionbox_name', $this->prefixId . '[' . $name . '][]');
@@ -253,7 +253,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
      * @return bool TRUE if the given field should be displayed as per
      *                 configuration, FALSE otherwise
      */
-    protected function hasSearchField($fieldToCheck): bool
+    protected function hasSearchField(string $fieldToCheck): bool
     {
         return in_array($fieldToCheck, $this->displayedSearchFields);
     }
@@ -269,7 +269,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
      *
      * @return string the generated HTML, will not be empty
      */
-    private function createDropDown($options, $name): string
+    private function createDropDown(array $options, string $name): string
     {
         $this->setMarker('dropdown_name', $this->prefixId . '[' . $name . ']');
         $this->setMarker('dropdown_id', $this->prefixId . '-' . $name);
@@ -326,7 +326,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
      *
      * @return void
      */
-    private function fillOrHideSearchSubpart($searchField)
+    private function fillOrHideSearchSubpart(string $searchField)
     {
         if (!$this->hasSearchField($searchField)) {
             $this->hideSubparts(self::SUBPART_PREFIX . strtoupper($searchField));

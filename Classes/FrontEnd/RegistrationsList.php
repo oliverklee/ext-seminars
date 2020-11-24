@@ -33,8 +33,8 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_Abstr
      */
     public function __construct(
         array $configuration,
-        $whatToDisplay,
-        $seminarUid,
+        string $whatToDisplay,
+        int $seminarUid,
         ContentObjectRenderer $contentObjectRenderer
     ) {
         if (
@@ -61,7 +61,7 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_Abstr
      *
      * @return void
      */
-    private function createSeminar($seminarUid)
+    private function createSeminar(int $seminarUid)
     {
         $this->seminar = GeneralUtility::makeInstance(\Tx_Seminars_OldModel_Event::class, $seminarUid);
     }
@@ -72,7 +72,7 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_Abstr
      *
      * @return string HTML code for the list, will not be empty
      */
-    public function render()
+    public function render(): string
     {
         $errorMessage = '';
         $isOkay = false;

@@ -1509,7 +1509,7 @@ class RegistrationFormTest extends TestCase
         );
         $event = new \Tx_Seminars_OldModel_Event($this->seminarUid);
         $subject->setSeminar($event);
-        $subject->setFakedFormValue('price', 42);
+        $subject->setFakedFormValue('price', 'price_regular');
 
         self::assertContains(
             '42',

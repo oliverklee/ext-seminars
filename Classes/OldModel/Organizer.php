@@ -26,7 +26,7 @@ class Tx_Seminars_OldModel_Organizer extends AbstractModel implements \Tx_Oelib_
      *
      * @return string the organizer's real name, will not be empty for valid records
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->getTitle();
     }
@@ -58,7 +58,7 @@ class Tx_Seminars_OldModel_Organizer extends AbstractModel implements \Tx_Oelib_
      * @return string the organizer's e-mail address, will only be empty if
      *                there is an error
      */
-    public function getEMailAddress()
+    public function getEMailAddress(): string
     {
         return $this->getRecordPropertyString('email');
     }

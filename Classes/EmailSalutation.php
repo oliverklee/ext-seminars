@@ -93,7 +93,7 @@ class Tx_Seminars_EmailSalutation
      *
      * @throws \InvalidArgumentException
      */
-    public function createIntroduction($introductionBegin, \Tx_Seminars_OldModel_Event $event): string
+    public function createIntroduction(string $introductionBegin, \Tx_Seminars_OldModel_Event $event): string
     {
         if ($introductionBegin === '') {
             throw new \InvalidArgumentException('$introductionBegin must not be empty.', 1440109640);

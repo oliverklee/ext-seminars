@@ -121,7 +121,7 @@ abstract class Tx_Seminars_Csv_AbstractListView
      *
      * @throws \InvalidArgumentException
      */
-    abstract public function setPageUid($pageUid);
+    abstract public function setPageUid(int $pageUid);
 
     /**
      * Returns the page UID of the records to check.
@@ -158,7 +158,7 @@ abstract class Tx_Seminars_Csv_AbstractListView
      *
      * @return string
      */
-    abstract public function render();
+    abstract public function render(): string;
 
     /**
      * Depending on the configuration, either returns the first line containing the specification of the separator character
@@ -190,14 +190,14 @@ abstract class Tx_Seminars_Csv_AbstractListView
      *
      * @return string[] the translated field names in an array, will be empty if no fields should be exported
      */
-    abstract protected function getLocalizedCsvHeadings();
+    abstract protected function getLocalizedCsvHeadings(): array;
 
     /**
      * Creates the body lines of the CSV export.
      *
      * @return string[]
      */
-    abstract protected function createCsvBodyLines();
+    abstract protected function createCsvBodyLines(): array;
 
     /**
      * Escapes a single field for CSV.
@@ -206,7 +206,7 @@ abstract class Tx_Seminars_Csv_AbstractListView
      *
      * @return string
      */
-    protected function escapeFieldForCsv($fieldContent): string
+    protected function escapeFieldForCsv(string $fieldContent): string
     {
         if (strpos($fieldContent, '"') !== false) {
             $escapedFieldValue = '"' . str_replace('"', '""', $fieldContent) . '"';

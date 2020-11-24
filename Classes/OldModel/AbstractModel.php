@@ -305,7 +305,7 @@ abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
      * Sets a boolean element of the record data array.
      *
      * @param string $key key of the element to set (must be non-empty)
-     * @param bool $value the value that will be written into the element
+     * @param mixed $value the value that will be written into the element
      *
      * @return void
      */

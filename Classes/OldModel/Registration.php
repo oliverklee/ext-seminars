@@ -155,7 +155,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
      *
      * @return void
      */
-    public function setRegistrationData(\Tx_Seminars_OldModel_Event $event, $userUid, array $registrationData)
+    public function setRegistrationData(\Tx_Seminars_OldModel_Event $event, int $userUid, array $registrationData)
     {
         $this->seminar = $event;
 
@@ -292,7 +292,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
      *
      * @throws \InvalidArgumentException
      */
-    public function setSeats($seats)
+    public function setSeats(int $seats)
     {
         if ($seats < 0) {
             throw new \InvalidArgumentException('The parameter $seats must be >= 0.', 1333291732);
@@ -382,7 +382,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
      *
      * @return string the trimmed value retrieved from $this->recordData with CR replaced by LF, may be empty empty
      */
-    public function getRegistrationData($key): string
+    public function getRegistrationData(string $key): string
     {
         $trimmedKey = trim($key);
 
@@ -631,7 +631,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
      *
      * @return void
      */
-    public function setFrontEndUserUid($uid)
+    public function setFrontEndUserUid(int $uid)
     {
         $this->setRecordPropertyInteger('user', $uid);
     }
@@ -684,7 +684,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
      *
      * @return void
      */
-    public function setPaymentDateAsUnixTimestamp($paymentDate)
+    public function setPaymentDateAsUnixTimestamp(int $paymentDate)
     {
         $this->setRecordPropertyInteger('datepaid', $paymentDate);
     }
@@ -771,7 +771,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
      *
      * @return void
      */
-    public function setPrice($price)
+    public function setPrice(string $price)
     {
         $this->setRecordPropertyString('price', $price);
     }
@@ -811,7 +811,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
      *
      * @return void
      */
-    public function setTotalPrice($price)
+    public function setTotalPrice(string $price)
     {
         $this->setRecordPropertyString('total_price', $price);
     }
@@ -1217,7 +1217,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
      *
      * @return void
      */
-    public function setAttendeesNames($attendeesNames)
+    public function setAttendeesNames(string $attendeesNames)
     {
         $this->setRecordPropertyString('attendees_names', $attendeesNames);
     }
@@ -1251,7 +1251,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
      *
      * @throws \InvalidArgumentException
      */
-    public function setNumberOfKids($numberOfKids)
+    public function setNumberOfKids(int $numberOfKids)
     {
         if ($numberOfKids < 0) {
             throw new \InvalidArgumentException('The parameter $numberOfKids must be >= 0.', 1333291776);
@@ -1289,7 +1289,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
      *
      * @throws \InvalidArgumentException
      */
-    public function setMethodOfPaymentUid($uid)
+    public function setMethodOfPaymentUid(int $uid)
     {
         if ($uid < 0) {
             throw new \InvalidArgumentException('The parameter $uid must be >= 0.', 1333291786);

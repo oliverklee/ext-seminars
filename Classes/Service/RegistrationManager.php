@@ -311,7 +311,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
     private function getLinkToStandardRegistrationOrLoginPage(
         \Tx_Seminars_FrontEnd_DefaultController $plugin,
         \Tx_Seminars_OldModel_Event $event,
-        $label
+        string $label
     ): string {
         if (\Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
             // provides the registration link
@@ -454,7 +454,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      *
      * @return bool
      */
-    public function canRegisterSeats(\Tx_Seminars_OldModel_Event $event, $numberOfSeats): bool
+    public function canRegisterSeats(\Tx_Seminars_OldModel_Event $event, int $numberOfSeats): bool
     {
         // If no number of seats is given, ie. the user has not entered anything
         // or the field is not shown at all, assume 1.
@@ -648,7 +648,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      *
      * @return string $rawString with all whitespace changed to regular spaces
      */
-    private function unifyWhitespace($rawString): string
+    private function unifyWhitespace(string $rawString): string
     {
         return preg_replace('/[\\r\\n\\t ]+/', ' ', $rawString);
     }
@@ -662,7 +662,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      *
      * @return void
      */
-    public function removeRegistration($uid, \Tx_Oelib_TemplateHelper $plugin)
+    public function removeRegistration(int $uid, \Tx_Oelib_TemplateHelper $plugin)
     {
         $this->registration = \Tx_Seminars_OldModel_Registration::fromUid($uid);
         if (!($this->registration instanceof \Tx_Seminars_OldModel_Registration)) {
@@ -805,7 +805,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
     public function notifyAttendee(
         \Tx_Seminars_OldModel_Registration $oldRegistration,
         \Tx_Oelib_TemplateHelper $plugin,
-        $helloSubjectPrefix = 'confirmation'
+        string $helloSubjectPrefix = 'confirmation'
     ) {
         if (!$this->getConfValueBoolean('send' . ucfirst($helloSubjectPrefix))) {
             return;
@@ -956,7 +956,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      *
      * @return string
      */
-    private function formatDateForWithZone($dateAsUnixTimeStamp, $timeZone): string
+    private function formatDateForWithZone(int $dateAsUnixTimeStamp, string $timeZone): string
     {
         return ';TZID=/' . $timeZone . ':' . strftime('%Y%m%dT%H%M%S', $dateAsUnixTimeStamp);
     }
@@ -978,7 +978,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      */
     public function notifyOrganizers(
         \Tx_Seminars_OldModel_Registration $registration,
-        $helloSubjectPrefix = 'notification'
+        string $helloSubjectPrefix = 'notification'
     ) {
         if (!$this->getConfValueBoolean('send' . ucfirst($helloSubjectPrefix))) {
             return;
@@ -1174,7 +1174,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
     protected function callPostProcessAdditionalEmailHooks(
         \Tx_Oelib_Mail $mail,
         \Tx_Seminars_OldModel_Registration $registration,
-        $emailReason
+        string $emailReason
     ) {
         foreach ($this->getHooks() as $hook) {
             if ($hook instanceof RegistrationEmailHookInterface) {
@@ -1225,7 +1225,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      */
     private function getMessageForNotification(
         \Tx_Seminars_OldModel_Registration $registration,
-        $reasonForNotification
+        string $reasonForNotification
     ): string {
         $localLanguageKey = 'email_additionalNotification' . $reasonForNotification;
         $this->initializeTemplate();
@@ -1281,7 +1281,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
     private function buildEmailContent(
         \Tx_Seminars_OldModel_Registration $registration,
         \Tx_Oelib_TemplateHelper $plugin,
-        $helloSubjectPrefix,
+        string $helloSubjectPrefix,
         $useHtml = false
     ): string {
         if ($this->linkBuilder === null) {
@@ -1489,7 +1489,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      *
      * @return void
      */
-    private function fillOrHideAttendeeMarker(\Tx_Seminars_OldModel_Registration $registration, $useHtml)
+    private function fillOrHideAttendeeMarker(\Tx_Seminars_OldModel_Registration $registration, bool $useHtml)
     {
         if (!$registration->hasAttendeesNames()) {
             $this->hideSubparts('attendees_names', ($useHtml ? 'html_' : '') . 'field_wrapper');
@@ -1507,7 +1507,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      *
      * @return void
      */
-    private function fillPlacesMarker(\Tx_Seminars_OldModel_Event $event, $useHtml)
+    private function fillPlacesMarker(\Tx_Seminars_OldModel_Event $event, bool $useHtml)
     {
         if (!$event->hasPlace()) {
             $this->setMarker('place', $this->translate('message_willBeAnnounced'));
@@ -1533,7 +1533,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      *
      * @return string the formatted place, will not be empty
      */
-    private function formatPlace(\Tx_Seminars_Model_Place $place, $newline): string
+    private function formatPlace(\Tx_Seminars_Model_Place $place, string $newline): string
     {
         $address = preg_replace('/[\\n|\\r]+/', ' ', str_replace('<br />', ' ', strip_tags($place->getAddress())));
 
@@ -1559,7 +1559,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      *
      * @return void
      */
-    private function setEMailIntroduction($helloSubjectPrefix, \Tx_Seminars_OldModel_Registration $registration)
+    private function setEMailIntroduction(string $helloSubjectPrefix, \Tx_Seminars_OldModel_Registration $registration)
     {
         /** @var \Tx_Seminars_EmailSalutation $salutation */
         $salutation = GeneralUtility::makeInstance(\Tx_Seminars_EmailSalutation::class);
@@ -1599,9 +1599,9 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      * @return void
      */
     private function fillOrHideUnregistrationNotice(
-        $helloSubjectPrefix,
+        string $helloSubjectPrefix,
         \Tx_Seminars_OldModel_Registration $registration,
-        $useHtml
+        bool $useHtml
     ) {
         $event = $registration->getSeminarObject();
         if (($helloSubjectPrefix === 'confirmationOnUnregistration') || !$event->isUnregistrationPossible()) {

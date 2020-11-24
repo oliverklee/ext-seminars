@@ -47,9 +47,9 @@ class Tx_Seminars_BagBuilder_Category extends AbstractBagBuilder
      *
      * @return void
      */
-    public function limitToEvents($eventUids)
+    public function limitToEvents(string $eventUids)
     {
-        $cleanUids = \trim((string)$eventUids);
+        $cleanUids = \trim($eventUids);
         if ($cleanUids === '') {
             return;
         }

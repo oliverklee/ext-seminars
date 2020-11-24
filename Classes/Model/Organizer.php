@@ -14,7 +14,7 @@ class Tx_Seminars_Model_Organizer extends \Tx_Oelib_Model implements \Tx_Oelib_I
      *
      * @return string our name, will not be empty
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->getAsString('title');
     }
@@ -26,7 +26,7 @@ class Tx_Seminars_Model_Organizer extends \Tx_Oelib_Model implements \Tx_Oelib_I
      *
      * @return void
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         if ($name == '') {
             throw new \InvalidArgumentException('The parameter $name must not be empty.', 1333296852);
@@ -52,7 +52,7 @@ class Tx_Seminars_Model_Organizer extends \Tx_Oelib_Model implements \Tx_Oelib_I
      *
      * @return void
      */
-    public function setHomepage($homepage)
+    public function setHomepage(string $homepage)
     {
         $this->setAsString('homepage', $homepage);
     }
@@ -72,7 +72,7 @@ class Tx_Seminars_Model_Organizer extends \Tx_Oelib_Model implements \Tx_Oelib_I
      *
      * @return string our e-mail address, will not be empty
      */
-    public function getEMailAddress()
+    public function getEMailAddress(): string
     {
         return $this->getAsString('email');
     }
@@ -84,7 +84,7 @@ class Tx_Seminars_Model_Organizer extends \Tx_Oelib_Model implements \Tx_Oelib_I
      *
      * @return void
      */
-    public function setEMailAddress($eMailAddress)
+    public function setEMailAddress(string $eMailAddress)
     {
         if ($eMailAddress == '') {
             throw new \InvalidArgumentException('The parameter $eMailAddress must not be empty.', 1333296861);
@@ -110,7 +110,7 @@ class Tx_Seminars_Model_Organizer extends \Tx_Oelib_Model implements \Tx_Oelib_I
      *
      * @return void
      */
-    public function setEMailFooter($eMailFooter)
+    public function setEMailFooter(string $eMailFooter)
     {
         $this->setAsString('email_footer', $eMailFooter);
     }
@@ -142,7 +142,7 @@ class Tx_Seminars_Model_Organizer extends \Tx_Oelib_Model implements \Tx_Oelib_I
      *
      * @return void
      */
-    public function setAttendancesPID($attendancesPID)
+    public function setAttendancesPID(int $attendancesPID)
     {
         if ($attendancesPID < 0) {
             throw new \InvalidArgumentException('The parameter $attendancesPID must not be < 0.', 1333296869);

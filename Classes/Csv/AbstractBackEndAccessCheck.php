@@ -31,7 +31,7 @@ abstract class Tx_Seminars_Csv_AbstractBackEndAccessCheck implements \Tx_Seminar
      *
      * @return void
      */
-    public function setPageUid($pageUid)
+    public function setPageUid(int $pageUid)
     {
         $this->pageUid = $pageUid;
     }
@@ -56,7 +56,7 @@ abstract class Tx_Seminars_Csv_AbstractBackEndAccessCheck implements \Tx_Seminar
      * @return bool TRUE if the user has access to the given table and page,
      *                 FALSE otherwise, will also return FALSE if no BE user is logged in
      */
-    protected function canAccessTableAndPage($tableName, $pageUid): bool
+    protected function canAccessTableAndPage(string $tableName, int $pageUid): bool
     {
         if (!Tx_Oelib_BackEndLoginManager::getInstance()->isLoggedIn()) {
             return false;
@@ -82,7 +82,7 @@ abstract class Tx_Seminars_Csv_AbstractBackEndAccessCheck implements \Tx_Seminar
      *
      * @return bool
      */
-    protected function hasReadAccessToTable($tableName): bool
+    protected function hasReadAccessToTable(string $tableName): bool
     {
         return $this->getLoggedInBackEndUser()->check('tables_select', $tableName);
     }
@@ -94,7 +94,7 @@ abstract class Tx_Seminars_Csv_AbstractBackEndAccessCheck implements \Tx_Seminar
      *
      * @return bool
      */
-    protected function hasReadAccessToPage($pageUid): bool
+    protected function hasReadAccessToPage(int $pageUid): bool
     {
         return $this->getLoggedInBackEndUser()
             ->doesUserHaveAccess(BackendUtility::getRecord('pages', $pageUid), self::SHOW_PAGE_PERMISSION_BITS);

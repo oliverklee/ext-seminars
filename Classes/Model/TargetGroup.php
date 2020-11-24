@@ -26,7 +26,7 @@ class Tx_Seminars_Model_TargetGroup extends \Tx_Oelib_Model implements \Tx_Semin
      *
      * @return void
      */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         if ($title == '') {
             throw new \InvalidArgumentException('The parameter $title must not be empty.', 1333297060);
@@ -79,7 +79,7 @@ class Tx_Seminars_Model_TargetGroup extends \Tx_Oelib_Model implements \Tx_Semin
      *
      * @return void
      */
-    public function setMinimumAge($minimumAge)
+    public function setMinimumAge(int $minimumAge)
     {
         $this->setAsInteger('minimum_age', $minimumAge);
     }
@@ -103,7 +103,7 @@ class Tx_Seminars_Model_TargetGroup extends \Tx_Oelib_Model implements \Tx_Semin
      *
      * @return void
      */
-    public function setMaximumAge($maximumAge)
+    public function setMaximumAge(int $maximumAge)
     {
         $this->setAsInteger('maximum_age', $maximumAge);
     }

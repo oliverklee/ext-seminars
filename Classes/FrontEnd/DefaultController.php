@@ -247,7 +247,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return string HTML for the plugin
      */
-    public function main($unused, array $conf): string
+    public function main(string $unused, array $conf): string
     {
         $this->init($conf);
         $this->pi_initPIflexForm();
@@ -383,7 +383,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return bool TRUE if we are properly initialized, FALSE otherwise
      */
-    public function isInitialized()
+    public function isInitialized(): bool
     {
         return $this->isInitialized && is_object($this->configurationService);
     }
@@ -519,7 +519,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return bool TRUE if the seminar UID is valid and the object has been created, FALSE otherwise
      */
-    public function createSeminar($seminarUid, $showHidden = false): bool
+    public function createSeminar(int $seminarUid, $showHidden = false): bool
     {
         if ($this->seminar !== null) {
             unset($this->seminar);
@@ -693,7 +693,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return string the wrapped label
      */
-    public function getLoginLink($label, $pageId, $eventId = 0): string
+    public function getLoginLink(string $label, int $pageId, $eventId = 0): string
     {
         $linkConfiguration = ['parameter' => $pageId];
 
@@ -1174,7 +1174,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return void
      */
-    private function setSpeakersMarkerWithoutCheck($speakerType)
+    private function setSpeakersMarkerWithoutCheck(string $speakerType)
     {
         if (!in_array($speakerType, self::VALID_SPEAKER_TYPES, true)) {
             throw new \InvalidArgumentException('The given speaker type is not valid.', 1333293083);
@@ -1732,7 +1732,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return string HTML code with the event list
      */
-    protected function createListView($whatToDisplay): string
+    protected function createListView(string $whatToDisplay): string
     {
         $result = '';
         $isOkay = true;
@@ -1965,7 +1965,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      */
     protected function createListTable(
         AbstractBag $seminarOrRegistrationBag,
-        $whatToDisplay
+        string $whatToDisplay
     ): string {
         $result = $this->createListHeader();
         $rowCounter = 0;
@@ -2310,7 +2310,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return string the heading label, may be completely wrapped in a hyperlink for sorting
      */
-    public function getFieldHeader($fieldName): string
+    public function getFieldHeader(string $fieldName): string
     {
         $label = $this->translate('label_' . $fieldName);
         if ($fieldName === 'price_regular' && $this->getConfValueBoolean('generalPriceInList', 's_template_special')) {
@@ -2339,7 +2339,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return string the HTML code of the selector widget, may be empty
      */
-    private function getSelectorWidgetIfNecessary($whatToDisplay): string
+    private function getSelectorWidgetIfNecessary(string $whatToDisplay): string
     {
         if ($whatToDisplay != 'seminar_list') {
             return '';
@@ -2600,7 +2600,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return string HTML for the link, will not be empty
      */
-    protected function createActionLink($action): string
+    protected function createActionLink(string $action): string
     {
         $seminarUid = $this->seminar->getUid();
 
@@ -2697,7 +2697,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return void
      */
-    private function hideEditColumnIfNecessary($whatToDisplay)
+    private function hideEditColumnIfNecessary(string $whatToDisplay)
     {
         $mayManagersEditTheirEvents = $this->getConfValueBoolean(
             'mayManagersEditTheirEvents',
@@ -2725,7 +2725,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return void
      */
-    public function hideListRegistrationsColumnIfNecessary($whatToDisplay)
+    public function hideListRegistrationsColumnIfNecessary(string $whatToDisplay)
     {
         $alwaysHideInViews = ['topic_list', 'other_dates', 'events_next_day'];
         if (
@@ -2766,7 +2766,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return void
      */
-    private function hideRegisterColumnIfNecessary($whatToDisplay)
+    private function hideRegisterColumnIfNecessary(string $whatToDisplay)
     {
         if (
             $whatToDisplay === 'my_vip_events'
@@ -2788,7 +2788,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return void
      */
-    private function hideCsvExportOfRegistrationsColumnIfNecessary($whatToDisplay)
+    private function hideCsvExportOfRegistrationsColumnIfNecessary(string $whatToDisplay)
     {
         $isCsvExportOfRegistrationsInMyVipEventsViewAllowed
             = $this->getConfValueBoolean(
@@ -2835,7 +2835,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return void
      */
-    private function hideColumnsForAllViewsExceptMyEvents($whatToDisplay)
+    private function hideColumnsForAllViewsExceptMyEvents(string $whatToDisplay)
     {
         if ($whatToDisplay != 'my_events') {
             $this->hideColumns(
@@ -2969,7 +2969,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return string HTML code including the title and error message
      */
-    protected function createRegistrationHeading($errorMessage): string
+    protected function createRegistrationHeading(string $errorMessage): string
     {
         $this->setMarker('registration', $this->translate('label_registration'));
         $this->setMarker(
@@ -3013,14 +3013,15 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
             $this->cObj
         );
         $registrationEditor->setSeminar($this->seminar);
-        $registrationEditor->setAction($this->piVars['action']);
+        $action = $this->piVars['action'] ?? 'register';
+        $registrationEditor->setAction((string)$action);
         if ($this->piVars['action'] == 'unregister') {
             $registrationEditor->setRegistration($this->registration);
         }
 
         $this->getRegistrationFormHookProvider()->executeHook('modifyRegistrationForm', $this, $registrationEditor);
 
-        return (string)$registrationEditor->render();
+        return $registrationEditor->render();
     }
 
     /**
@@ -3154,7 +3155,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return void
      */
-    private function setGenderSpecificHeading($speakerType)
+    private function setGenderSpecificHeading(string $speakerType)
     {
         if (!\in_array($speakerType, ['speakers', 'partners', 'tutors', 'leaders'])) {
             throw new \InvalidArgumentException(
@@ -3225,7 +3226,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return void
      */
-    private function setRegistrationLinkMarker($whatToDisplay)
+    private function setRegistrationLinkMarker(string $whatToDisplay)
     {
         if ($whatToDisplay === 'my_events') {
             $this->setMarker(
@@ -3277,7 +3278,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      * @return int the timestamp for the date set in piVars, will be 0 if no
      *                 date was set
      */
-    private function getTimestampFromDatePiVars($fromOrTo): int
+    private function getTimestampFromDatePiVars(string $fromOrTo): int
     {
         if (
             $this->piVars[$fromOrTo . '_day'] == 0
@@ -3448,7 +3449,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return void
      */
-    private function hideStatusColumnIfNotUsed($whatToDisplay)
+    private function hideStatusColumnIfNotUsed(string $whatToDisplay)
     {
         if ($whatToDisplay === 'my_entered_events' || $whatToDisplay === 'my_vip_events') {
             return;
@@ -3482,7 +3483,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return void
      */
-    private function limitToTimeFrameSetting($builder)
+    private function limitToTimeFrameSetting(\Tx_Seminars_BagBuilder_Event $builder)
     {
         try {
             $builder->setTimeFrame(
@@ -3615,8 +3616,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      */
     public function createSingleViewLink(
         \Tx_Seminars_Model_Event $event,
-        $linkText,
-        $htmlspecialcharLinkText = true
+        string $linkText,
+        bool $htmlspecialcharLinkText = true
     ): string {
         $processedLinkText = $htmlspecialcharLinkText ? \htmlspecialchars(
             $linkText,

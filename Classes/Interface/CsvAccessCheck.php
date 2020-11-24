@@ -14,5 +14,5 @@ interface Tx_Seminars_Interface_CsvAccessCheck
      *
      * @return bool whether the logged-in user (if any) in the current environment has access to a CSV export.
      */
-    public function hasAccess();
+    public function hasAccess(): bool;
 }

@@ -89,7 +89,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      *
      * @return void
      */
-    public function limitToCategories($categoryUids)
+    public function limitToCategories(string $categoryUids)
     {
         if ($categoryUids === '') {
             unset($this->whereClauseParts['categories']);
@@ -893,8 +893,12 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      *
      * @return string[] the WHERE clause parts for the search in categories, will not be empty
      */
-    private function getSearchWherePartForMmRelation($quotedSearchWord, $searchFieldKey, $foreignTable, $mmTable): array
-    {
+    private function getSearchWherePartForMmRelation(
+        string $quotedSearchWord,
+        string $searchFieldKey,
+        string $foreignTable,
+        string $mmTable
+    ): array {
         $this->checkParametersForMmSearchFunctions($quotedSearchWord, $searchFieldKey, $foreignTable, $mmTable);
 
         $matchQueryPart = 'MATCH (' . \implode(
