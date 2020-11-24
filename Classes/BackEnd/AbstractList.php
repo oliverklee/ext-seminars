@@ -138,8 +138,6 @@ abstract class AbstractList
         $languageService = $this->getLanguageService();
 
         if ($this->doesUserHaveAccess($pageUid) && $this->getBackEndUser()->check('tables_modify', $this->tableName)) {
-            $urlParameters = '&cmd[' . $this->tableName . '][' . $recordUid . '][delete]=1';
-
             $referenceWarning = BackendUtility::referenceCount(
                 $this->tableName,
                 $recordUid,
