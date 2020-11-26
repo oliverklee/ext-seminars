@@ -1,6 +1,6 @@
 # Seminars TYPO3 extension
 
-[![Build Status](https://travis-ci.org/oliverklee/ext-seminars.svg?branch=main)](https://travis-ci.org/oliverklee/ext-seminars)
+[![GitHub CI Status](https://github.com/oliverklee/ext-seminars/workflows/CI/badge.svg?branch=main)](https://github.com/oliverklee/ext-seminars/actions)
 [![Latest Stable Version](https://poser.pugx.org/oliverklee/seminars/v/stable.svg)](https://packagist.org/packages/oliverklee/seminars)
 [![Total Downloads](https://poser.pugx.org/oliverklee/seminars/downloads.svg)](https://packagist.org/packages/oliverklee/seminars)
 [![Latest Unstable Version](https://poser.pugx.org/oliverklee/seminars/v/unstable.svg)](https://packagist.org/packages/oliverklee/seminars)
