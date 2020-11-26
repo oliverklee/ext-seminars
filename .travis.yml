@@ -83,29 +83,3 @@ jobs:
   - stage: test
     php: "7.0"
     env: TYPO3=^8.7
-  - stage: release to ter
-    if: tag IS present AND env(TYPO3_ORG_USERNAME) IS present AND env(TYPO3_ORG_PASSWORD) IS present
-    php: "7.2"
-    before_install: skip
-    install: skip
-    before_script: skip
-    script:
-    - >
-      echo;
-      echo "Preparing upload of release ${TRAVIS_TAG} to TER";
-      echo;
-      echo;
-      composer global require helhum/ter-client;
-    - >
-      echo;
-      echo "Removing development-only files";
-      echo;
-      echo;
-      rm -rf CODE_OF_CONDUCT.md Resources/Private/Php/update.sh Tests/;
-    - >
-      TAG_MESSAGE=`git tag -n10 -l $TRAVIS_TAG | sed 's/^[0-9.]*[ ]*//g'`;
-      echo;
-      echo "Uploading release ${TRAVIS_TAG} to TER";
-      echo;
-      echo;
-      $HOME/.composer/vendor/bin/ter-client upload seminars . -u "$TYPO3_ORG_USERNAME" -p "$TYPO3_ORG_PASSWORD" -m "$TAG_MESSAGE";
