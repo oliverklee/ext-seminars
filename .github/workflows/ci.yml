@@ -1,0 +1,218 @@
+---
+name: CI
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron: '15 3 * * 1'
+jobs:
+  php-lint:
+    name: "PHP linter"
+    runs-on: ubuntu-20.04
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v2
+      - name: "Install PHP"
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "${{ matrix.php-version }}"
+          tools: composer:v2
+      - name: "Run PHP lint"
+        run: "composer ci:php:lint"
+    strategy:
+      matrix:
+        php-version:
+          - 7.0
+          - 7.1
+          - 7.2
+  code-quality:
+    name: "Code quality checks"
+    runs-on: ubuntu-20.04
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v2
+      - name: "Install PHP"
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "${{ matrix.php-version }}"
+          tools: composer:v2
+          extensions: zip
+      - name: "Show Composer version"
+        run: composer --version
+      - name: "Cache dependencies installed with composer"
+        uses: actions/cache@v1
+        with:
+          key: "php${{ matrix.php-version }}-composer-${{ hashFiles('**/composer.json') }}"
+          path: ~/.composer/cache
+          restore-keys: "php${{ matrix.php-version }}-composer-\n"
+      - name: "Install Composer dependencies"
+        run: "composer install --no-progress"
+      - name: "Run command"
+        run: "composer ci:${{ matrix.command }}"
+    strategy:
+      matrix:
+        command:
+          - "php:sniff"
+          - "php:fixer"
+          - "ts:lint"
+        php-version:
+          - 7.2
+  unit-tests:
+    name: "Unit tests"
+    runs-on: ubuntu-20.04
+    needs: php-lint
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v2
+      - name: "Install PHP"
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "${{ matrix.php-version }}"
+          tools: composer:v2
+          extensions: dom, json, libxml, zip
+      - name: "Show Composer version"
+        run: composer --version
+      - name: "Cache dependencies installed with composer"
+        uses: actions/cache@v1
+        with:
+          key: "php${{ matrix.php-version }}-composer-${{ hashFiles('**/composer.json') }}"
+          path: ~/.composer/cache
+          restore-keys: "php${{ matrix.php-version }}-composer-\n"
+      - env:
+          TYPO3: "${{ matrix.typo3-version }}"
+        name: "Install TYPO3 Core"
+        run: |
+          composer require --no-progress typo3/minimal:"$TYPO3"
+          composer show
+      - name: "Install dependencies with composer"
+        run: |
+          composer update --no-ansi --no-interaction --no-progress --with-dependencies
+          composer show
+      - name: "Run unit tests"
+        run: "composer ci:tests:unit"
+    strategy:
+      matrix:
+        include:
+          - typo3-version: ^8.7
+            php-version: 7.0
+          - typo3-version: ^8.7
+            php-version: 7.1
+          - typo3-version: ^8.7
+            php-version: 7.2
+          - typo3-version: ^9.5
+            php-version: 7.2
+  functional-tests:
+    name: "Functional tests"
+    runs-on: ubuntu-18.04
+    needs: php-lint
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v2
+      - name: "Install PHP"
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "${{ matrix.php-version }}"
+          tools: composer:v2
+          extensions: dom, json, libxml, mysqli, zip
+      - name: "Show Composer version"
+        run: composer --version
+      - name: "Cache dependencies installed with composer"
+        uses: actions/cache@v1
+        with:
+          key: "php${{ matrix.php-version }}-composer-${{ hashFiles('**/composer.json') }}"
+          path: ~/.composer/cache
+          restore-keys: "php${{ matrix.php-version }}-composer-\n"
+      - env:
+          TYPO3: "${{ matrix.typo3-version }}"
+        name: "Install TYPO3 Core"
+        run: |
+          composer require --no-progress typo3/minimal:"$TYPO3"
+          composer show
+      - name: "Install dependencies with composer"
+        run: |
+          composer update --no-ansi --no-interaction --no-progress --with-dependencies
+          composer show
+      - name: "Start MySQL"
+        run: "sudo /etc/init.d/mysql start"
+      - name: "Run functional tests"
+        run: |
+          export typo3DatabaseName="typo3";
+          export typo3DatabaseHost="127.0.0.1";
+          export typo3DatabaseUsername="root";
+          export typo3DatabasePassword="root";
+          composer ci:tests:functional
+    strategy:
+      matrix:
+        include:
+          - typo3-version: ^8.7
+            php-version: 7.0
+          - typo3-version: ^8.7
+            php-version: 7.1
+          - typo3-version: ^8.7
+            php-version: 7.2
+          - typo3-version: ^9.5
+            php-version: 7.2
+  legacy-tests:
+    name: "Legacy tests"
+    runs-on: ubuntu-20.04
+    needs: php-lint
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: laravel_tags
+        ports:
+          - 3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    env:
+      DATABASE_HOST: 127.0.0.1
+      DATABASE_USER: root
+      DATABASE_PASSWORD: root
+      DATABASE_NAME: typo3
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v2
+      - name: "Install PHP"
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "${{ matrix.php-version }}"
+          tools: composer:v2
+          extensions: dom, json, libxml, mysqli, zip
+      - name: "Show Composer version"
+        run: composer --version
+      - name: "Cache dependencies installed with composer"
+        uses: actions/cache@v1
+        with:
+          key: "php${{ matrix.php-version }}-composer-${{ hashFiles('**/composer.json') }}"
+          path: ~/.composer/cache
+          restore-keys: "php${{ matrix.php-version }}-composer-\n"
+      - env:
+          TYPO3: "${{ matrix.typo3-version }}"
+        name: "Install TYPO3 Core"
+        run: |
+          composer require --no-progress typo3/minimal:"$TYPO3"
+          composer show
+      - name: "Set up TYPO3"
+        run: >
+          .Build/vendor/bin/typo3cms install:setup --no-interaction --site-setup-type="site"
+          --database-user-name="${DATABASE_USER}" --database-host-name="${DATABASE_HOST}"
+          --database-port="${{ job.services.mysql.ports[3306] }}" --database-name="${DATABASE_NAME}"
+          --admin-user-name="admin" --admin-password="password" --site-name="Test installation";
+      - name: "Run legacy tests"
+        run: "composer ci:tests:unit-legacy"
+    strategy:
+      matrix:
+        include:
+          - typo3-version: ^8.7
+            php-version: 7.0
+          - typo3-version: ^8.7
+            php-version: 7.1
+          - typo3-version: ^8.7
+            php-version: 7.2
+          - typo3-version: ^9.5
+            php-version: 7.2

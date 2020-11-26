@@ -9,7 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Add an `.editorconfig` file (#568)
 
 ### Changed
-- Move the CI from Travis CI to GitHub Actions (#566)
+- Move the CI from Travis CI to GitHub Actions (#566, #567)
 - Change the default git branch from `master` to `main` (#565)
 
 ### Deprecated
