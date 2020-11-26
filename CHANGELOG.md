@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add an `.editorconfig` file (#568)
 
 ### Changed
 - Move the CI from Travis CI to GitHub Actions (#566)
@@ -231,7 +232,7 @@ Special thanks go to @mk-mxp for his work on the hooks.
 - Skip the DB cleanup in the new functional tests (#204)
 - Require oelib >= 2.3.0 (#203)
 - Allow testing the old models with fewer DB accesses (#202)
-- Rename SUT from "fixture" to "subject" (#196) 
+- Rename SUT from "fixture" to "subject" (#196)
 - Convert the first tests to nimut/testing-framework (#194, #195, #201)
 - Move to old tests to the "Legacy" namespace (#193)
 
