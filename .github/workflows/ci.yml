@@ -153,7 +153,6 @@ jobs:
           export typo3DatabasePassword="root";
           composer ci:tests:functional
     strategy:
-      fail-fast: false
       matrix:
         include:
           - typo3-version: ^8.7
