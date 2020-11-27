@@ -19,6 +19,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Fix a test failure with mocks with PHP 7.4 (#578)
 - Make date fields in the TCA clearable with MySQL strict mode (#548, #549)
 - Add `.0` version suffixes to PHP version requirements (#547)
 

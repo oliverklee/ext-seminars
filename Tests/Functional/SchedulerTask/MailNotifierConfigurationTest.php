@@ -57,6 +57,10 @@ class MailNotifierConfigurationTest extends FunctionalTestCase
         $this->initializeBackEndLanguage();
 
         $this->moduleController = $this->createMock(SchedulerModuleController::class);
+        // We can remove this line once we have moved to PHPUnit 7.5.
+        // The reason is that PHPUnit 6.5 creates some deprecation notices in the mock builder with PHP 7.4.
+        $this->getFlashMessageQueue()->clear();
+
         $this->subject = new MailNotifierConfiguration();
     }
 
@@ -137,10 +141,6 @@ class MailNotifierConfigurationTest extends FunctionalTestCase
      */
     public function validateAdditionalFieldsForUidOfExistingPageNotAddsErrorMessage()
     {
-        if (PHP_VERSION_ID >= 70400) {
-            self::markTestSkipped('This breaks in PHP 7.4 and needs to be fixed.');
-        }
-
         $this->importDataSet(__DIR__ . '/Fixtures/MailNotifierConfiguration.xml');
         $submittedData = ['seminars_configurationPageUid' => '1'];
 
