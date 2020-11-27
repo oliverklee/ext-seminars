@@ -6,6 +6,18 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 3.3.0
+
+### Added
 - Add support for PHP 7.3 and 7.4 (#571)
 - Add an `.editorconfig` file (#568)
 
@@ -13,10 +25,6 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Update the dependencies (#569, #570)
 - Move the CI from Travis CI to GitHub Actions (#566, #567)MailNotifierConfigurationTest.php
 - Change the default git branch from `master` to `main` (#565)
-
-### Deprecated
-
-### Removed
 
 ### Fixed
 - Fix a test failure with mocks with PHP 7.4 (#578)
