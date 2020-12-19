@@ -300,7 +300,7 @@ final class EventTest extends TestCase
      *
      * @return int the UID of the created record, will be > 0
      */
-    private function addSpeakerRelation($speakerData): int
+    private function addSpeakerRelation(array $speakerData): int
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
@@ -327,7 +327,7 @@ final class EventTest extends TestCase
      *
      * @return int the UID of the created record, will be > 0
      */
-    private function addPartnerRelation($speakerData): int
+    private function addPartnerRelation(array $speakerData): int
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
@@ -354,7 +354,7 @@ final class EventTest extends TestCase
      *
      * @return int the UID of the created record, will be > 0
      */
-    private function addTutorRelation($speakerData): int
+    private function addTutorRelation(array $speakerData): int
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
@@ -381,7 +381,7 @@ final class EventTest extends TestCase
      *
      * @return int the UID of the created record, will be > 0
      */
-    private function addLeaderRelation($speakerData): int
+    private function addLeaderRelation(array $speakerData): int
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
@@ -408,7 +408,7 @@ final class EventTest extends TestCase
      *
      * @return int the UID of the created record, will be > 0
      */
-    private function addEventTypeRelation($eventTypeData): int
+    private function addEventTypeRelation(array $eventTypeData): int
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
