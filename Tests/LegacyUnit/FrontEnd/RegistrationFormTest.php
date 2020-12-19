@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
+
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -15,7 +17,7 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Philipp Kitzberger <philipp@cron-it.de>
  */
-class Tx_Seminars_Tests_Unit_FrontEnd_RegistrationFormTest extends TestCase
+class RegistrationFormTest extends TestCase
 {
     use LanguageHelper;
 

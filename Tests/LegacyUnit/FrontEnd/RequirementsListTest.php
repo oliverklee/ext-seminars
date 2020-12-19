@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
+
 use OliverKlee\PhpUnit\TestCase;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
@@ -10,7 +12,7 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_FrontEnd_RequirementsListTest extends TestCase
+class RequirementsListTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_FrontEnd_RequirementsList

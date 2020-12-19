@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Tests\LegacyUnit\OldModel;
+
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingTimeSlot;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
@@ -11,7 +13,7 @@ use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-final class Tx_Seminars_Tests_Unit_OldModel_TimeSlotTest extends TestCase
+final class TimeSlotTest extends TestCase
 {
     use LanguageHelper;
 

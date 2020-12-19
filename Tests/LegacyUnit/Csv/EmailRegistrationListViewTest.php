@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Tests\LegacyUnit\Csv;
+
 use OliverKlee\PhpUnit\TestCase;
 use TYPO3\CMS\Lang\LanguageService;
 
@@ -11,7 +13,7 @@ use TYPO3\CMS\Lang\LanguageService;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_Csv_EmailRegistrationListViewTest extends TestCase
+class EmailRegistrationListViewTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Csv_EmailRegistrationListView

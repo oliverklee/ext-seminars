@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Tests\LegacyUnit\Csv;
+
 use OliverKlee\PhpUnit\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
@@ -12,7 +14,7 @@ use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Csv_BackEndRegistrationAccessCheckTest extends TestCase
+class BackEndRegistrationAccessCheckTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Csv_BackEndRegistrationAccessCheck

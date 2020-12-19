@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
+
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 
@@ -10,7 +12,7 @@ use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
  *
  * @author 2009 Bernd Schönbach <bernd@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_FrontEnd_PublishEventTest extends TestCase
+class PublishEventTest extends TestCase
 {
     use LanguageHelper;
 

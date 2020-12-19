@@ -65,9 +65,9 @@
         ]
     },
     "autoload-dev": {
-        "classmap": [
-            "Tests"
-        ]
+        "psr-4": {
+            "OliverKlee\\Seminars\\Tests\\": "Tests/"
+        }
     },
     "prefer-stable": true,
     "config": {

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Tests\LegacyUnit\BackEnd;
+
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\LegacyUnit\BackEnd\Fixtures\DummyModule;
 
@@ -10,7 +12,7 @@ use OliverKlee\Seminars\Tests\LegacyUnit\BackEnd\Fixtures\DummyModule;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_BackEnd_AbstractModuleTest extends TestCase
+class AbstractModuleTest extends TestCase
 {
     /**
      * @var DummyModule

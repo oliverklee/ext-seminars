@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
+
 use OliverKlee\PhpUnit\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
@@ -11,7 +13,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Model_EventTopicTest extends TestCase
+class EventTopicTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Model_Event

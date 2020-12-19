@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
+
 use OliverKlee\PhpUnit\TestCase;
 
 /**
@@ -9,7 +11,7 @@ use OliverKlee\PhpUnit\TestCase;
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Model_BackEndUserGroupTest extends TestCase
+class BackEndUserGroupTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Model_BackEndUserGroup

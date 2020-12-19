@@ -35,8 +35,8 @@ $EM_CONF[$_EXTKEY] = [
         ],
     ],
     'autoload-dev' => [
-        'classmap' => [
-            'Tests',
+        'psr-4' => [
+            'OliverKlee\\Semianrs\\Tests\\' => 'Tests/',
         ],
     ],
 ];

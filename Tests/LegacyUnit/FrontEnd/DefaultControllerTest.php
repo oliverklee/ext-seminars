@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
+
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarListView;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm;
@@ -20,7 +22,7 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_FrontEnd_DefaultControllerTest extends TestCase
+class DefaultControllerTest extends TestCase
 {
     use LanguageHelper;
 
