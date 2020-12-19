@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
+
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSelectorWidget;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
@@ -16,7 +18,7 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_FrontEnd_SelectorWidgetTest extends TestCase
+class SelectorWidgetTest extends TestCase
 {
     use LanguageHelper;
 

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Tests\LegacyUnit\Csv;
+
 use OliverKlee\PhpUnit\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
@@ -10,7 +12,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Csv_FrontEndRegistrationAccessCheckTest extends TestCase
+class FrontEndRegistrationAccessCheckTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Csv_FrontEndRegistrationAccessCheck

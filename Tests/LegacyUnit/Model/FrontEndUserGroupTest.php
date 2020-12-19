@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
+
 use OliverKlee\PhpUnit\TestCase;
 
 /**
@@ -11,7 +13,7 @@ use OliverKlee\PhpUnit\TestCase;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Model_FrontEndUserGroupTest extends TestCase
+class FrontEndUserGroupTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Model_FrontEndUserGroup the object to test

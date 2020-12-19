@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\Service;
+
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
@@ -9,7 +11,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Fixtures_Service_TestingSingleViewLinkBuilder extends \Tx_Seminars_Service_SingleViewLinkBuilder
+class TestingSingleViewLinkBuilder extends \Tx_Seminars_Service_SingleViewLinkBuilder
 {
     /**
      * Retrieves a content object to be used for creating typolinks.

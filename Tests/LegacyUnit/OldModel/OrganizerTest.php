@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Tests\LegacyUnit\OldModel;
+
 use OliverKlee\PhpUnit\TestCase;
 
 /**
@@ -9,7 +11,7 @@ use OliverKlee\PhpUnit\TestCase;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-final class Tx_Seminars_Tests_Unit_OldModel_OrganizerTest extends TestCase
+final class OrganizerTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_OldModel_Organizer

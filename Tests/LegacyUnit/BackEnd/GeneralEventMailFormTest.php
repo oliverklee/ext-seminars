@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Tests\LegacyUnit\BackEnd;
+
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\BackEnd\GeneralEventMailForm;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
@@ -11,7 +13,7 @@ use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_BackEnd_GeneralEventMailFormTest extends TestCase
+class GeneralEventMailFormTest extends TestCase
 {
     use BackEndTestsTrait;
 

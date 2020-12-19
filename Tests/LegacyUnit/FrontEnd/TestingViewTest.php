@@ -2,7 +2,10 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
+
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\FrontEnd\TestingView;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
@@ -10,10 +13,10 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_FrontEnd_TestingViewTest extends TestCase
+class TestingViewTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_Tests_Unit_Fixtures_FrontEnd_TestingView
+     * @var TestingView
      */
     private $subject = null;
 
@@ -26,7 +29,7 @@ class Tx_Seminars_Tests_Unit_FrontEnd_TestingViewTest extends TestCase
     {
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
-        $this->subject = new \Tx_Seminars_Tests_Unit_Fixtures_FrontEnd_TestingView(
+        $this->subject = new TestingView(
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
             $this->getFrontEndController()->cObj
         );

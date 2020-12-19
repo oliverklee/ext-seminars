@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
+
 use OliverKlee\PhpUnit\TestCase;
 
 /**
@@ -10,7 +12,7 @@ use OliverKlee\PhpUnit\TestCase;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Tests_Unit_Model_CategoryTest extends TestCase
+class CategoryTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Model_Category

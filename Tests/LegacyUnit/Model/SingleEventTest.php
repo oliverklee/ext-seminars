@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
+
 use OliverKlee\PhpUnit\TestCase;
 
 /**
@@ -9,7 +11,7 @@ use OliverKlee\PhpUnit\TestCase;
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_Model_SingleEventTest extends TestCase
+class SingleEventTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Model_Event

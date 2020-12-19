@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Tests\LegacyUnit\BackEnd;
+
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\BackEnd\AbstractList;
 use OliverKlee\Seminars\BackEnd\SpeakersList;
@@ -14,7 +16,7 @@ use TYPO3\CMS\Backend\Template\DocumentTemplate;
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Tests_Unit_BackEnd_SpeakersListTest extends TestCase
+class SpeakersListTest extends TestCase
 {
     use BackEndTestsTrait;
 
