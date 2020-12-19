@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Stop converting class names to PSR-4 (#597)
 
 ## 3.3.0
 

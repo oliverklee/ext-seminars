@@ -101,7 +101,8 @@ return \PhpCsFixer\Config::create()
             'phpdoc_trim' => true,
             'phpdoc_types' => true,
             'phpdoc_types_order' => ['null_adjustment' => 'always_last', 'sort_algorithm' => 'none'],
-            'psr4' => true,
+            // We can enable this once all class use PSR-4.
+            // 'psr4' => true,
             'return_type_declaration' => ['space_before' => 'none'],
             'semicolon_after_instruction' => true,
             'short_scalar_cast' => true,
