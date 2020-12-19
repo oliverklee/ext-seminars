@@ -36,7 +36,7 @@ $EM_CONF[$_EXTKEY] = [
     ],
     'autoload-dev' => [
         'psr-4' => [
-            'OliverKlee\\Semianrs\\Tests\\' => 'Tests/',
+            'OliverKlee\\Seminars\\Tests\\' => 'Tests/',
         ],
     ],
 ];
