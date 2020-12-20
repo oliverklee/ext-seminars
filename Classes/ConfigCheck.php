@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\System\Typo3Version;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\Resource\FilePathSanitizer;
 
 /**
  * This class checks the Seminar Manager configuration for basic sanity.
@@ -1945,7 +1947,17 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
 
         if ($this->objectToCheck->hasConfValueString('registrationEditorTemplateFile', '', true)) {
             $rawFileName = $this->objectToCheck->getConfValueString('registrationEditorTemplateFile', '', true, true);
-            if (!\is_file($this->getFrontEndController()->tmpl->getFileName($rawFileName))) {
+
+            if (Typo3Version::isNotHigherThan(8)) {
+                // @extensionScannerIgnoreLine
+                $rawFileName = $this->getFrontEndController()->tmpl->getFileName($rawFileName);
+            } else {
+                /** @var FilePathSanitizer $fileSanitizer */
+                $fileSanitizer = GeneralUtility::makeInstance(FilePathSanitizer::class);
+                $rawFileName = $fileSanitizer->sanitize($rawFileName);
+            }
+
+            if (!\is_file($rawFileName)) {
                 $message = 'The specified HTML template file <strong>' .
                     \htmlspecialchars($rawFileName, ENT_QUOTES | ENT_HTML5) . '</strong> cannot be read. ' .
                     $errorMessage . ' ' .
@@ -2917,7 +2929,16 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
 
         if ($this->objectToCheck->hasConfValueString('eventEditorTemplateFile', '', true)) {
             $rawFileName = $this->objectToCheck->getConfValueString('eventEditorTemplateFile', '', true, true);
-            if (!\is_file($this->getFrontEndController()->tmpl->getFileName($rawFileName))) {
+            if (Typo3Version::isNotHigherThan(8)) {
+                // @extensionScannerIgnoreLine
+                $rawFileName = $this->getFrontEndController()->tmpl->getFileName($rawFileName);
+            } else {
+                /** @var FilePathSanitizer $fileSanitizer */
+                $fileSanitizer = GeneralUtility::makeInstance(FilePathSanitizer::class);
+                $rawFileName = $fileSanitizer->sanitize($rawFileName);
+            }
+
+            if (!\is_file($rawFileName)) {
                 $message = 'The specified HTML template file <strong>' .
                     \htmlspecialchars($rawFileName, ENT_QUOTES | ENT_HTML5) . '</strong> cannot be read. ' .
                     $errorMessage . ' ' .
