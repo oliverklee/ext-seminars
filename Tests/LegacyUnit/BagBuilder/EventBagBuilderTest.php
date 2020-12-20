@@ -197,7 +197,7 @@ class EventBagBuilderTest extends TestCase
             $categoryUid
         );
 
-        $this->subject->limitToCategories($categoryUid);
+        $this->subject->limitToCategories((string)$categoryUid);
         $this->subject->limitToCategories('');
         $bag = $this->subject->build();
 
@@ -225,7 +225,7 @@ class EventBagBuilderTest extends TestCase
             $categoryUid
         );
 
-        $this->subject->limitToCategories($categoryUid);
+        $this->subject->limitToCategories((string)$categoryUid);
         $bag = $this->subject->build();
 
         self::assertSame(
@@ -263,7 +263,7 @@ class EventBagBuilderTest extends TestCase
             $categoryUid
         );
 
-        $this->subject->limitToCategories($categoryUid);
+        $this->subject->limitToCategories((string)$categoryUid);
         $bag = $this->subject->build();
 
         self::assertSame(
@@ -295,7 +295,7 @@ class EventBagBuilderTest extends TestCase
             $categoryUid
         );
 
-        $this->subject->limitToCategories($categoryUid);
+        $this->subject->limitToCategories((string)$categoryUid);
         $bag = $this->subject->build();
 
         self::assertSame(
@@ -339,7 +339,7 @@ class EventBagBuilderTest extends TestCase
             $categoryUid2
         );
 
-        $this->subject->limitToCategories($categoryUid1);
+        $this->subject->limitToCategories((string)$categoryUid1);
         $bag = $this->subject->build();
 
         self::assertSame(
@@ -379,7 +379,7 @@ class EventBagBuilderTest extends TestCase
             'tx_seminars_categories'
         );
 
-        $this->subject->limitToCategories($categoryUid2);
+        $this->subject->limitToCategories((string)$categoryUid2);
         $bag = $this->subject->build();
 
         self::assertTrue(
@@ -405,7 +405,7 @@ class EventBagBuilderTest extends TestCase
             $categoryUid
         );
 
-        $this->subject->limitToCategories($categoryUid);
+        $this->subject->limitToCategories((string)$categoryUid);
         $bag = $this->subject->build();
 
         self::assertSame(
@@ -439,7 +439,7 @@ class EventBagBuilderTest extends TestCase
             $categoryUid
         );
 
-        $this->subject->limitToCategories($categoryUid);
+        $this->subject->limitToCategories((string)$categoryUid);
         $bag = $this->subject->build();
 
         self::assertSame(
@@ -483,7 +483,7 @@ class EventBagBuilderTest extends TestCase
             $categoryUid
         );
 
-        $this->subject->limitToCategories($categoryUid);
+        $this->subject->limitToCategories((string)$categoryUid);
         $bag = $this->subject->build();
 
         self::assertSame(
@@ -526,7 +526,7 @@ class EventBagBuilderTest extends TestCase
             $categoryUid2
         );
 
-        $this->subject->limitToCategories($categoryUid2);
+        $this->subject->limitToCategories((string)$categoryUid2);
         $bag = $this->subject->build();
 
         self::assertTrue(

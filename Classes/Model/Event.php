@@ -167,7 +167,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      *
      * @return void
      */
-    public function setSubtitle($subtitle)
+    public function setSubtitle(string $subtitle)
     {
         if ($this->isEventDate()) {
             $this->getTopic()->setSubtitle($subtitle);
@@ -219,7 +219,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      *
      * @return void
      */
-    public function setTeaser($teaser)
+    public function setTeaser(string $teaser)
     {
         if ($this->isEventDate()) {
             $this->getTopic()->setTeaser($teaser);
@@ -259,7 +259,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      *
      * @return void
      */
-    public function setDescription($description)
+    public function setDescription(string $description)
     {
         if ($this->isEventDate()) {
             $this->getTopic()->setDescription($description);
@@ -306,7 +306,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      *
      * @return void
      */
-    public function setTimeZone($timeZone)
+    public function setTimeZone(string $timeZone)
     {
         $this->setAsString('time_zone', $timeZone);
     }
@@ -329,7 +329,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      *
      * @return void
      */
-    public function setAccreditationNumber($accreditationNumber)
+    public function setAccreditationNumber(string $accreditationNumber)
     {
         $this->setAsString('accreditation_number', $accreditationNumber);
     }
@@ -365,7 +365,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      *
      * @return void
      */
-    public function setCreditPoints($creditPoints)
+    public function setCreditPoints(int $creditPoints)
     {
         if ($creditPoints < 0) {
             throw new \InvalidArgumentException('The parameter $creditPoints must be >= 0.', 1333296336);
@@ -421,7 +421,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      *
      * @return void
      */
-    public function setRegistrationDeadlineAsUnixTimeStamp($registrationDeadline)
+    public function setRegistrationDeadlineAsUnixTimeStamp(int $registrationDeadline)
     {
         if ($registrationDeadline < 0) {
             throw new \InvalidArgumentException('The parameter $registrationDeadline must be >= 0.', 1333296347);
@@ -479,7 +479,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      *
      * @return void
      */
-    public function setEarlyBirdDeadlineAsUnixTimeStamp($earlyBirdDeadline)
+    public function setEarlyBirdDeadlineAsUnixTimeStamp(int $earlyBirdDeadline)
     {
         if ($earlyBirdDeadline < 0) {
             throw new \InvalidArgumentException('The parameter $earlyBirdDeadline must be >= 0.', 1333296359);
@@ -519,7 +519,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      *
      * @return void
      */
-    public function setUnregistrationDeadlineAsUnixTimeStamp($unregistrationDeadline)
+    public function setUnregistrationDeadlineAsUnixTimeStamp(int $unregistrationDeadline)
     {
         if ($unregistrationDeadline < 0) {
             throw new \InvalidArgumentException('The parameter $unregistrationDeadline must be >= 0.', 1333296369);
@@ -556,7 +556,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      *
      * @return void
      */
-    public function setExpiryAsUnixTimeStamp($expiry)
+    public function setExpiryAsUnixTimeStamp(int $expiry)
     {
         if ($expiry < 0) {
             throw new \InvalidArgumentException('The parameter $expiry must be >= 0.', 1333296380);
@@ -592,7 +592,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      *
      * @return void
      */
-    public function setDetailsPage($detailsPage)
+    public function setDetailsPage(string $detailsPage)
     {
         $this->setAsString('details_page', $detailsPage);
     }
@@ -847,7 +847,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      *
      * @return void
      */
-    public function setRegularPrice($price)
+    public function setRegularPrice(float $price)
     {
         if ($price < 0.00) {
             throw new \InvalidArgumentException('The parameter $price must be >= 0.00.', 1333296391);
@@ -892,7 +892,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      *
      * @return void
      */
-    public function setRegularEarlyBirdPrice($price)
+    public function setRegularEarlyBirdPrice(float $price)
     {
         if ($price < 0.00) {
             throw new \InvalidArgumentException('The parameter $price must be >= 0.00.', 1333296479);
@@ -938,7 +938,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      *
      * @return void
      */
-    public function setRegularBoardPrice($price)
+    public function setRegularBoardPrice(float $price)
     {
         if ($price < 0.00) {
             throw new \InvalidArgumentException('The parameter $price must be >= 0.00.', 1333296604);
@@ -982,7 +982,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      *
      * @return void
      */
-    public function setSpecialPrice($price)
+    public function setSpecialPrice(float $price)
     {
         if ($price < 0.00) {
             throw new \InvalidArgumentException('The parameter $price must be >= 0.00.', 1333296667);
@@ -1027,7 +1027,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      *
      * @return void
      */
-    public function setSpecialEarlyBirdPrice($price)
+    public function setSpecialEarlyBirdPrice(float $price)
     {
         if ($price < 0.00) {
             throw new \InvalidArgumentException('The parameter $price must be >= 0.00.', 1333296677);
@@ -1073,7 +1073,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      *
      * @return void
      */
-    public function setSpecialBoardPrice($price)
+    public function setSpecialBoardPrice(float $price)
     {
         if ($price < 0.00) {
             throw new \InvalidArgumentException('The parameter $price must be >= 0.00.', 1333296688);
@@ -1216,7 +1216,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      *
      * @return void
      */
-    public function setAdditionalInformation($additionalInformation)
+    public function setAdditionalInformation(string $additionalInformation)
     {
         if ($this->isEventDate()) {
             $this->getTopic()->setAdditionalInformation($additionalInformation);
@@ -1372,7 +1372,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      *
      * @return void
      */
-    public function setMinimumAttendees($minimumAttendees)
+    public function setMinimumAttendees(int $minimumAttendees)
     {
         if ($minimumAttendees < 0) {
             throw new \InvalidArgumentException('The parameter $minimumAttendees must be >= 0.', 1333296697);
@@ -1410,7 +1410,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      *
      * @return void
      */
-    public function setMaximumAttendees($maximumAttendees)
+    public function setMaximumAttendees(int $maximumAttendees)
     {
         if ($maximumAttendees < 0) {
             throw new \InvalidArgumentException('The parameter $maximumAttendees must be >= 0.', 1333296708);
@@ -1496,7 +1496,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      *
      * @throws \InvalidArgumentException
      */
-    public function setStatus($status)
+    public function setStatus(int $status)
     {
         if (!in_array($status, [self::STATUS_PLANNED, self::STATUS_CANCELED, self::STATUS_CONFIRMED], true)) {
             throw new \InvalidArgumentException(
@@ -1631,7 +1631,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      *
      * @return void
      */
-    public function setNotes($notes)
+    public function setNotes(string $notes)
     {
         if ($this->isEventDate()) {
             $this->getTopic()->setNotes($notes);
@@ -1709,7 +1709,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      *
      * @return void
      */
-    public function setImage($image)
+    public function setImage(string $image)
     {
         if ($this->isEventDate()) {
             $this->getTopic()->setImage($image);
@@ -1812,7 +1812,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      *
      * @return void
      */
-    public function setPublicationHash($hash)
+    public function setPublicationHash(string $hash)
     {
         $this->setAsString('publication_hash', $hash);
     }
@@ -1869,7 +1869,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      *
      * @return void
      */
-    public function setOfflineRegistrations($numberOfRegistrations)
+    public function setOfflineRegistrations(int $numberOfRegistrations)
     {
         $this->setAsInteger('offline_attendees', $numberOfRegistrations);
     }
@@ -2192,7 +2192,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      *
      * @throws \InvalidArgumentException
      */
-    public function setDateOfLastRegistrationDigestEmailAsUnixTimeStamp($date)
+    public function setDateOfLastRegistrationDigestEmailAsUnixTimeStamp(int $date)
     {
         if ($date < 0) {
             throw new \InvalidArgumentException('$date must be >= 0, but was: ' . $date, 1508946114880);

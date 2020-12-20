@@ -50,7 +50,7 @@ class EmailService implements SingletonInterface
      *
      * @return void
      */
-    public function sendEmailToAttendees(\Tx_Seminars_Model_Event $event, $subject, $body)
+    public function sendEmailToAttendees(\Tx_Seminars_Model_Event $event, string $subject, string $body)
     {
         /** @var \Tx_Oelib_MailerFactory $mailerFactory */
         $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
@@ -86,7 +86,7 @@ class EmailService implements SingletonInterface
      * @return string
      */
     protected function buildMessageBody(
-        $rawBody,
+        string $rawBody,
         \Tx_Seminars_Model_Event $event,
         \Tx_Seminars_Model_FrontEndUser $user
     ): string {
@@ -116,7 +116,7 @@ class EmailService implements SingletonInterface
      * @return string
      */
     protected function replaceMarkers(
-        $textWithMarkers,
+        string $textWithMarkers,
         \Tx_Seminars_Model_Event $event,
         \Tx_Seminars_Model_FrontEndUser $user
     ): string {

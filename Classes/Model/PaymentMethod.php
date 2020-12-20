@@ -26,7 +26,7 @@ class Tx_Seminars_Model_PaymentMethod extends \Tx_Oelib_Model implements \Tx_Sem
      *
      * @return void
      */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         if ($title == '') {
             throw new \InvalidArgumentException('The parameter $title must not be empty.', 1333296882);
@@ -52,7 +52,7 @@ class Tx_Seminars_Model_PaymentMethod extends \Tx_Oelib_Model implements \Tx_Sem
      *
      * @return void
      */
-    public function setDescription($description)
+    public function setDescription(string $description)
     {
         $this->setAsString('description', $description);
     }

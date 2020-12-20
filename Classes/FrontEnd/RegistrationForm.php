@@ -137,7 +137,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return void
      */
-    public function setAction($action)
+    public function setAction(string $action)
     {
         $this->initializeAction($action);
     }
@@ -250,7 +250,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return string HTML of the create/edit form
      */
-    public function render()
+    public function render(): string
     {
         $rawForm = parent::render();
         // For the confirmation page, we need to reload the whole thing. Yet,
@@ -550,7 +550,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return bool TRUE if the current form field should be displayed, FALSE otherwise
      */
-    public function isFormFieldEnabled($key): bool
+    public function isFormFieldEnabled(string $key): bool
     {
         $isFormFieldAlwaysEnabled = in_array($key, $this->alwaysEnabledFormFields, true);
         if ($isFormFieldAlwaysEnabled) {
@@ -902,7 +902,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *         the data from the corresponding form field formatted in HTML with a heading (or an empty string if the form data
      *         is empty)
      */
-    protected function getFormDataItemAndLabelForConfirmation($key): string
+    protected function getFormDataItemAndLabelForConfirmation(string $key): string
     {
         $currentFormData = $this->getFormDataItemForConfirmationPage($key);
         if ($currentFormData === '') {
@@ -924,7 +924,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return string
      */
-    protected function createLabelForRegistrationElementOnConfirmationPage($key): string
+    protected function createLabelForRegistrationElementOnConfirmationPage(string $key): string
     {
         return rtrim($this->translate('label_' . $key), ':');
     }
@@ -948,7 +948,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @throws \InvalidArgumentException
      */
-    protected function getFormDataItemForConfirmationPage($key): string
+    protected function getFormDataItemForConfirmationPage(string $key): string
     {
         if (!in_array($key, $this->getAllFieldKeysForConfirmationPage(), true)) {
             throw new \InvalidArgumentException(

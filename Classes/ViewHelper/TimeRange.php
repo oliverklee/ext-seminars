@@ -101,7 +101,7 @@ class Tx_Seminars_ViewHelper_TimeRange
      *
      * @return string the time portion of the UNIX timestamp formatted according to the format in plugin.tx_seminars.timeFormat
      */
-    protected function getAsTime($timestamp): string
+    protected function getAsTime(int $timestamp): string
     {
         return strftime($this->configuration->getAsString('timeFormat'), $timestamp);
     }
@@ -113,7 +113,7 @@ class Tx_Seminars_ViewHelper_TimeRange
      *
      * @return string the time portion of the UNIX timestamp
      */
-    protected function getTimeFromTimestamp($timestamp): string
+    protected function getTimeFromTimestamp(int $timestamp): string
     {
         return strftime('%H:%M', $timestamp);
     }

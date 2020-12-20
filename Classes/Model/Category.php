@@ -27,7 +27,7 @@ class Tx_Seminars_Model_Category extends \Tx_Oelib_Model implements \Tx_Seminars
      *
      * @return void
      */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         if ($title == '') {
             throw new \InvalidArgumentException('The parameter $title must not be empty.', 1333296115);
@@ -55,7 +55,7 @@ class Tx_Seminars_Model_Category extends \Tx_Oelib_Model implements \Tx_Seminars
      *
      * @return void
      */
-    public function setIcon($icon)
+    public function setIcon(string $icon)
     {
         $this->setAsString('icon', $icon);
     }

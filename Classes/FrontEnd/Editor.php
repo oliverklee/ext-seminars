@@ -44,7 +44,7 @@ class Tx_Seminars_FrontEnd_Editor extends \Tx_Seminars_FrontEnd_AbstractView
      *
      * @return void
      */
-    public function setObjectUid($uid)
+    public function setObjectUid(int $uid)
     {
         $this->objectUid = $uid;
     }
@@ -114,7 +114,7 @@ class Tx_Seminars_FrontEnd_Editor extends \Tx_Seminars_FrontEnd_AbstractView
      *
      * @return string HTML for the FE editor or an error view if the requested object is not editable for the current user
      */
-    public function render()
+    public function render(): string
     {
         return $this->getFormCreator()->render();
     }
@@ -174,7 +174,7 @@ class Tx_Seminars_FrontEnd_Editor extends \Tx_Seminars_FrontEnd_AbstractView
      *
      * @return string|array form value or an empty string if the value does not exist
      */
-    public function getFormValue($key)
+    public function getFormValue(string $key)
     {
         if ($this->isTestMode) {
             $dataSource = $this->fakedFormValues;
@@ -195,7 +195,7 @@ class Tx_Seminars_FrontEnd_Editor extends \Tx_Seminars_FrontEnd_AbstractView
      *
      * @return void
      */
-    public function setFakedFormValue($key, $value)
+    public function setFakedFormValue(string $key, $value)
     {
         $this->fakedFormValues[$key] = $value;
     }

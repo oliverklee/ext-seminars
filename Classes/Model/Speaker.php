@@ -33,7 +33,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      *
      * @return string our name, will not be empty
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->getAsString('title');
     }
@@ -45,7 +45,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      *
      * @return void
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         if ($name == '') {
             throw new \InvalidArgumentException('The parameter $name must not be empty.', 1333297036);
@@ -72,7 +72,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      *
      * @return void
      */
-    public function setOrganization($organization)
+    public function setOrganization(string $organization)
     {
         $this->setAsString('organization', $organization);
     }
@@ -104,7 +104,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      *
      * @return void
      */
-    public function setHomepage($homepage)
+    public function setHomepage(string $homepage)
     {
         $this->setAsString('homepage', $homepage);
     }
@@ -137,7 +137,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      *
      * @return void
      */
-    public function setDescription($description)
+    public function setDescription(string $description)
     {
         $this->setAsString('description', $description);
     }
@@ -192,7 +192,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      *
      * @return void
      */
-    public function setAddress($address)
+    public function setAddress(string $address)
     {
         $this->setAsString('address', $address);
     }
@@ -225,7 +225,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      *
      * @return void
      */
-    public function setPhoneWork($phoneWork)
+    public function setPhoneWork(string $phoneWork)
     {
         $this->setAsString('phone_work', $phoneWork);
     }
@@ -259,7 +259,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      *
      * @return void
      */
-    public function setPhoneHome($phoneHome)
+    public function setPhoneHome(string $phoneHome)
     {
         $this->setAsString('phone_home', $phoneHome);
     }
@@ -293,7 +293,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      *
      * @return void
      */
-    public function setPhoneMobile($phoneMobile)
+    public function setPhoneMobile(string $phoneMobile)
     {
         $this->setAsString('phone_mobile', $phoneMobile);
     }
@@ -326,7 +326,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      *
      * @return void
      */
-    public function setFax($fax)
+    public function setFax(string $fax)
     {
         $this->setAsString('fax', $fax);
     }
@@ -346,7 +346,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      *
      * @return string our e-mail address, will not be empty
      */
-    public function getEMailAddress()
+    public function getEMailAddress(): string
     {
         return $this->getAsString('email');
     }
@@ -358,7 +358,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      *
      * @return void
      */
-    public function setEMailAddress($eMailAddress)
+    public function setEMailAddress(string $eMailAddress)
     {
         $this->setAsString('email', $eMailAddress);
     }
@@ -394,7 +394,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      *
      * @return void
      */
-    public function setGender($gender)
+    public function setGender(int $gender)
     {
         $this->setAsInteger('gender', $gender);
     }
@@ -426,7 +426,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      *
      * @return void
      */
-    public function setCancelationPeriod($cancelationPeriod)
+    public function setCancelationPeriod(int $cancelationPeriod)
     {
         if ($cancelationPeriod < 0) {
             throw new \InvalidArgumentException('The parameter $cancelationPeriod must be >= 0.', 1333297044);
@@ -488,7 +488,7 @@ class Tx_Seminars_Model_Speaker extends \Tx_Oelib_Model implements \Tx_Oelib_Int
      *
      * @return void
      */
-    public function setNotes($notes)
+    public function setNotes(string $notes)
     {
         $this->setAsString('notes', $notes);
     }

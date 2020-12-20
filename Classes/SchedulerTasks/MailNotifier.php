@@ -78,7 +78,7 @@ class MailNotifier extends AbstractTask
      *
      * @return bool true on successful execution, false on error
      */
-    public function execute()
+    public function execute(): bool
     {
         if ($this->getConfigurationPageUid() <= 0) {
             return false;
@@ -110,7 +110,7 @@ class MailNotifier extends AbstractTask
      *
      * @return void
      */
-    public function setConfigurationPageUid($pageUid)
+    public function setConfigurationPageUid(int $pageUid)
     {
         $this->configurationPageUid = $pageUid;
     }
@@ -167,7 +167,7 @@ class MailNotifier extends AbstractTask
      *
      * @return void
      */
-    private function sendRemindersToOrganizers(\Tx_Seminars_OldModel_Event $event, $messageKey)
+    private function sendRemindersToOrganizers(\Tx_Seminars_OldModel_Event $event, string $messageKey)
     {
         $attachment = null;
 
@@ -275,7 +275,7 @@ class MailNotifier extends AbstractTask
      *
      * @return \Tx_Seminars_BagBuilder_Event builder for the seminar bag
      */
-    private function getSeminarBagBuilder($status): \Tx_Seminars_BagBuilder_Event
+    private function getSeminarBagBuilder(int $status): \Tx_Seminars_BagBuilder_Event
     {
         /** @var \Tx_Seminars_BagBuilder_Event $builder */
         $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Event::class);
@@ -292,7 +292,7 @@ class MailNotifier extends AbstractTask
      *
      * @return \Tx_Oelib_Attachment CSV list of registrations for the given event
      */
-    private function getCsv($eventUid): \Tx_Oelib_Attachment
+    private function getCsv(int $eventUid): \Tx_Oelib_Attachment
     {
         /** @var \Tx_Seminars_Csv_EmailRegistrationListView $csvCreator */
         $csvCreator = GeneralUtility::makeInstance(\Tx_Seminars_Csv_EmailRegistrationListView::class);
@@ -321,7 +321,7 @@ class MailNotifier extends AbstractTask
      *
      * @return string the localized e-mail content, will not be empty
      */
-    private function customizeMessage($locallangKey, \Tx_Seminars_OldModel_Event $event, $organizerName = ''): string
+    private function customizeMessage(string $locallangKey, \Tx_Seminars_OldModel_Event $event, string $organizerName = ''): string
     {
         $result = $this->getLanguageService()->getLL($locallangKey);
 
@@ -349,7 +349,7 @@ class MailNotifier extends AbstractTask
      * @return string formatted date according to the TS setup configuration for
      *                'dateFormatYMD', will not be empty
      */
-    private function getDate($timestamp): string
+    private function getDate(int $timestamp): string
     {
         return strftime($this->getConfiguration()->getAsString('dateFormatYMD'), $timestamp);
     }

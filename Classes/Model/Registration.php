@@ -29,7 +29,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @throws \InvalidArgumentException
      */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         if ($title === '') {
             throw new \InvalidArgumentException('The parameter $title must not be empty.', 1333296917);
@@ -135,7 +135,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return void
      */
-    public function setOnRegistrationQueue($isOnQueue)
+    public function setOnRegistrationQueue(bool $isOnQueue)
     {
         $this->setAsBoolean('registration_queue', $isOnQueue);
     }
@@ -157,7 +157,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return void
      */
-    public function setPrice($price)
+    public function setPrice(string $price)
     {
         $this->setAsString('price', $price);
     }
@@ -185,7 +185,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @throws \InvalidArgumentException
      */
-    public function setSeats($seats)
+    public function setSeats(int $seats)
     {
         if ($seats < 0) {
             throw new \InvalidArgumentException('The parameter $seats must be >= 0.', 1333296926);
@@ -211,7 +211,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return void
      */
-    public function setRegisteredThemselves($registeredThemselves)
+    public function setRegisteredThemselves(bool $registeredThemselves)
     {
         $this->setAsBoolean('registered_themselves', $registeredThemselves);
     }
@@ -235,7 +235,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @throws \InvalidArgumentException
      */
-    public function setTotalPrice($price)
+    public function setTotalPrice(float $price)
     {
         if ($price < 0) {
             throw new \InvalidArgumentException('The parameter $price must be >= 0.', 1333296931);
@@ -263,7 +263,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return void
      */
-    public function setAttendeesNames($attendeesNames)
+    public function setAttendeesNames(string $attendeesNames)
     {
         $this->setAsString('attendees_names', $attendeesNames);
     }
@@ -319,7 +319,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @throws \InvalidArgumentException
      */
-    public function setPaymentDateAsUnixTimestamp($timestamp)
+    public function setPaymentDateAsUnixTimestamp(int $timestamp)
     {
         if ($timestamp < 0) {
             throw new \InvalidArgumentException('The parameter $timestamp must be >= 0.', 1333296945);
@@ -371,7 +371,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return void
      */
-    public function setAccountNumber($accountNumber)
+    public function setAccountNumber(string $accountNumber)
     {
         $this->setAsString('account_number', $accountNumber);
     }
@@ -393,7 +393,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return void
      */
-    public function setBankCode($bankCode)
+    public function setBankCode(string $bankCode)
     {
         $this->setAsString('bank_code', $bankCode);
     }
@@ -415,7 +415,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return void
      */
-    public function setBankName($bankName)
+    public function setBankName(string $bankName)
     {
         $this->setAsString('bank_name', $bankName);
     }
@@ -437,7 +437,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return void
      */
-    public function setAccountOwner($accountOwner)
+    public function setAccountOwner(string $accountOwner)
     {
         $this->setAsString('account_owner', $accountOwner);
     }
@@ -459,7 +459,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return void
      */
-    public function setCompany($company)
+    public function setCompany(string $company)
     {
         $this->setAsString('company', $company);
     }
@@ -481,7 +481,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return void
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->setAsString('name', $name);
     }
@@ -513,7 +513,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @throws \InvalidArgumentException
      */
-    public function setGender($gender)
+    public function setGender(int $gender)
     {
         $allowedGenders = [
             \Tx_Oelib_Model_FrontEndUser::GENDER_MALE,
@@ -549,7 +549,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return void
      */
-    public function setAddress($address)
+    public function setAddress(string $address)
     {
         $this->setAsString('address', $address);
     }
@@ -571,7 +571,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return void
      */
-    public function setZip($zip)
+    public function setZip(string $zip)
     {
         $this->setAsString('zip', $zip);
     }
@@ -593,7 +593,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return void
      */
-    public function setCity($city)
+    public function setCity(string $city)
     {
         $this->setAsString('city', $city);
     }
@@ -615,7 +615,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return void
      */
-    public function setCountry($country)
+    public function setCountry(string $country)
     {
         $this->setAsString('country', $country);
     }
@@ -637,7 +637,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return void
      */
-    public function setPhone($phone)
+    public function setPhone(string $phone)
     {
         $this->setAsString('telephone', $phone);
     }
@@ -659,7 +659,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return void
      */
-    public function setEnailAddress($email)
+    public function setEnailAddress(string $email)
     {
         $this->setAsString('email', $email);
     }
@@ -691,7 +691,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return void
      */
-    public function setInterests($interests)
+    public function setInterests(string $interests)
     {
         $this->setAsString('interests', $interests);
     }
@@ -713,7 +713,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return void
      */
-    public function setExpectations($expectations)
+    public function setExpectations(string $expectations)
     {
         $this->setAsString('expectations', $expectations);
     }
@@ -735,7 +735,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return void
      */
-    public function setBackgroundKnowledge($backgroundKnowledge)
+    public function setBackgroundKnowledge(string $backgroundKnowledge)
     {
         $this->setAsString('background_knowledge', $backgroundKnowledge);
     }
@@ -757,7 +757,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return void
      */
-    public function setAccommodation($accommodation)
+    public function setAccommodation(string $accommodation)
     {
         $this->setAsString('accommodation', $accommodation);
     }
@@ -789,7 +789,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return void
      */
-    public function setFood($food)
+    public function setFood(string $food)
     {
         $this->setAsString('food', $food);
     }
@@ -822,7 +822,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return void
      */
-    public function setKnownFrom($knownFrom)
+    public function setKnownFrom(string $knownFrom)
     {
         $this->setAsString('known_from', $knownFrom);
     }
@@ -844,7 +844,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @return void
      */
-    public function setNotes($notes)
+    public function setNotes(string $notes)
     {
         $this->setAsString('notes', $notes);
     }
@@ -868,7 +868,7 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Semi
      *
      * @throws \InvalidArgumentException
      */
-    public function setKids($kids)
+    public function setKids(int $kids)
     {
         if ($kids < 0) {
             throw new \InvalidArgumentException('The parameter $kids must be >= 0.', 1333296998);

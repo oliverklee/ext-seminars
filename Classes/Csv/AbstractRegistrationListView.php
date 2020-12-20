@@ -32,7 +32,7 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends \Tx_Seminars
      *
      * @throws \InvalidArgumentException
      */
-    public function setPageUid($pageUid)
+    public function setPageUid(int $pageUid)
     {
         if ($pageUid < 0) {
             throw new \InvalidArgumentException('$pageUid must be >= 0, but actually is: ' . $pageUid, 1390307753);
@@ -50,7 +50,7 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends \Tx_Seminars
      *
      * @throws \InvalidArgumentException
      */
-    public function setEventUid($eventUid)
+    public function setEventUid(int $eventUid)
     {
         if ($eventUid < 0) {
             throw new \InvalidArgumentException('$eventUid must be >= 0, but actually is: ' . $eventUid, 1390320633);
@@ -86,7 +86,7 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends \Tx_Seminars
      *
      * @throws \BadMethodCallException
      */
-    public function render()
+    public function render(): string
     {
         if (!$this->hasPageUid() && !$this->hasEventUid()) {
             throw new \BadMethodCallException(
@@ -117,7 +117,7 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends \Tx_Seminars
      *
      * @return string[] the translated field names in an array, will be empty if no fields should be exported
      */
-    protected function getLocalizedCsvHeadings()
+    protected function getLocalizedCsvHeadings(): array
     {
         $fieldsFromFeUser = $this->createLocalizedCsvHeadingsForOneTable($this->getFrontEndUserFieldKeys(), 'LGL');
         $fieldsFromAttendances = $this->createLocalizedCsvHeadingsForOneTable(
@@ -136,7 +136,7 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends \Tx_Seminars
      *
      * @return string[] the translated field names in an array, will be empty if no field names were given
      */
-    protected function createLocalizedCsvHeadingsForOneTable(array $fieldNames, $localizationPrefix): array
+    protected function createLocalizedCsvHeadingsForOneTable(array $fieldNames, string $localizationPrefix): array
     {
         $translations = [];
         $translator = $this->getInitializedTranslator();
@@ -153,21 +153,21 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends \Tx_Seminars
      *
      * @return string[]
      */
-    abstract protected function getFrontEndUserFieldKeys();
+    abstract protected function getFrontEndUserFieldKeys(): array;
 
     /**
      * Returns the keys of the registration fields to export.
      *
      * @return string[]
      */
-    abstract protected function getRegistrationFieldKeys();
+    abstract protected function getRegistrationFieldKeys(): array;
 
     /**
      * Creates the body lines of the CSV export.
      *
      * @return string[]
      */
-    protected function createCsvBodyLines()
+    protected function createCsvBodyLines(): array
     {
         $registrationBagBuilder = $this->createRegistrationBagBuilder();
 
@@ -204,7 +204,7 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends \Tx_Seminars
      *
      * @return bool
      */
-    abstract protected function shouldAlsoContainRegistrationsOnQueue();
+    abstract protected function shouldAlsoContainRegistrationsOnQueue(): bool;
 
     /**
      * Returns the list of registrations as CSV separated values.

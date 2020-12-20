@@ -60,7 +60,7 @@ class Tx_Seminars_Model_BackEndUser extends \Tx_Oelib_Model_BackEndUser
      * @return int the PID for newly created records, will be 0 if no group
      *                 has a PID set for new records of the given type
      */
-    private function getRecordFolderFromGroup($type): int
+    private function getRecordFolderFromGroup(string $type): int
     {
         $groups = $this->getAllGroups();
         if ($groups->isEmpty()) {

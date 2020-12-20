@@ -9636,7 +9636,7 @@ final class EventTest extends TestCase
         );
         $subject->method('needsRegistration')->willReturn(true);
         $subject->method('canViewRegistrationsList')
-            ->with($whichPlugin, $accessLevel)
+            ->with($whichPlugin, 0, 0, 0, $accessLevel)
             ->willReturn(true);
 
         $this->testingFramework->createFakeFrontEnd();

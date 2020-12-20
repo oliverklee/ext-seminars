@@ -27,7 +27,7 @@ class Tx_Seminars_Model_TimeSlot extends \Tx_Seminars_Model_AbstractTimeSpan
      *
      * @return void
      */
-    public function setEntryDateAsUnixTimeStamp($entryDate)
+    public function setEntryDateAsUnixTimeStamp(int $entryDate)
     {
         if ($entryDate < 0) {
             throw new \InvalidArgumentException('The parameter $entryDate must be >= 0.', 1333297074);

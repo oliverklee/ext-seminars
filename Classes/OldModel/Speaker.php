@@ -264,7 +264,7 @@ class Tx_Seminars_OldModel_Speaker extends AbstractModel
      *
      * @return void
      */
-    public function setGender($gender)
+    public function setGender(int $gender)
     {
         $this->setRecordPropertyInteger('gender', $gender);
     }
@@ -297,7 +297,7 @@ class Tx_Seminars_OldModel_Speaker extends AbstractModel
      *
      * @return void
      */
-    public function setCancelationPeriod($cancelationPeriod)
+    public function setCancelationPeriod(int $cancelationPeriod)
     {
         $this->setRecordPropertyInteger('cancelation_period', $cancelationPeriod);
     }

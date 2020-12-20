@@ -27,7 +27,7 @@ class Tx_Seminars_Model_EventType extends \Tx_Oelib_Model implements \Tx_Seminar
      *
      * @return void
      */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         if ($title == '') {
             throw new \InvalidArgumentException('The parameter $title must not be empty.', 1333296812);

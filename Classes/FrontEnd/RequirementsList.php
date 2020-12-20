@@ -67,7 +67,7 @@ class Tx_Seminars_FrontEnd_RequirementsList extends \Tx_Seminars_FrontEnd_Abstra
      *
      * @return string HTML code of the list, will not be empty
      */
-    public function render()
+    public function render(): string
     {
         if (!$this->event) {
             throw new \BadMethodCallException(

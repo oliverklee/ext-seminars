@@ -14,5 +14,5 @@ interface Tx_Seminars_Interface_Titled
      *
      * @return string our title, will not be empty
      */
-    public function getTitle();
+    public function getTitle(): string;
 }

@@ -14,7 +14,7 @@ class Tx_Seminars_Csv_DownloadRegistrationListView extends \Tx_Seminars_Csv_Abst
      *
      * @return string[]
      */
-    protected function getFrontEndUserFieldKeys()
+    protected function getFrontEndUserFieldKeys(): array
     {
         return $this->configuration->getAsTrimmedArray('fieldsFromFeUserForCsv');
     }
@@ -24,7 +24,7 @@ class Tx_Seminars_Csv_DownloadRegistrationListView extends \Tx_Seminars_Csv_Abst
      *
      * @return string[]
      */
-    protected function getRegistrationFieldKeys()
+    protected function getRegistrationFieldKeys(): array
     {
         return $this->configuration->getAsTrimmedArray('fieldsFromAttendanceForCsv');
     }
@@ -34,7 +34,7 @@ class Tx_Seminars_Csv_DownloadRegistrationListView extends \Tx_Seminars_Csv_Abst
      *
      * @return bool
      */
-    protected function shouldAlsoContainRegistrationsOnQueue()
+    protected function shouldAlsoContainRegistrationsOnQueue(): bool
     {
         return $this->configuration->getAsBoolean('showAttendancesOnRegistrationQueueInCSV');
     }

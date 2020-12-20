@@ -26,7 +26,7 @@ class Tx_Seminars_Model_Food extends \Tx_Oelib_Model implements \Tx_Seminars_Int
      *
      * @return void
      */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         if ($title == '') {
             throw new \InvalidArgumentException('The parameter $title must not be empty.', 1333296826);

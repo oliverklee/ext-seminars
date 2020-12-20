@@ -34,7 +34,7 @@ class Tx_Seminars_FrontEnd_EventHeadline extends \Tx_Seminars_FrontEnd_AbstractV
      *
      * @return string HTML code of the event headline, will be empty if an invalid or no event ID was set in piVar 'uid'
      */
-    public function render()
+    public function render(): string
     {
         if ($this->mapper === null) {
             throw new \BadMethodCallException('The method injectEventMapper() needs to be called first.', 1333614794);

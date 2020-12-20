@@ -22,7 +22,7 @@ class Tx_Seminars_FrontEnd_CategoryList extends \Tx_Seminars_FrontEnd_AbstractVi
      * @return string HTML code of the category list or a formatted message if
      *                there are no categories to display
      */
-    public function render()
+    public function render(): string
     {
         /** @var \Tx_Seminars_BagBuilder_Event $seminarBagBuilder */
         $seminarBagBuilder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Event::class);
@@ -88,10 +88,8 @@ class Tx_Seminars_FrontEnd_CategoryList extends \Tx_Seminars_FrontEnd_AbstractVi
      * @return string link to the list view limited to the given category or an
      *                empty string if there is an error
      */
-    public function createLinkToListViewLimitedByCategory(
-        $categoryUid,
-        $title
-    ): string {
+    public function createLinkToListViewLimitedByCategory(int $categoryUid, string $title): string
+    {
         if ($categoryUid <= 0) {
             throw new \InvalidArgumentException('$categoryUid must be > 0.', 1333293037);
         }

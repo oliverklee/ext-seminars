@@ -179,7 +179,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return void
      */
-    public function setDescription($description)
+    public function setDescription(string $description)
     {
         $this->setRecordPropertyString('description', $description);
     }
@@ -212,7 +212,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return void
      */
-    public function setAdditionalInformation($additionalInformation)
+    public function setAdditionalInformation(string $additionalInformation)
     {
         $this->setRecordPropertyString(
             'additional_information',
@@ -944,7 +944,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *                Will be empty if no speaker of the given type exists for
      *                this seminar.
      */
-    public function getLanguageKeySuffixForType($speakerType): string
+    public function getLanguageKeySuffixForType(string $speakerType): string
     {
         if (!$this->hasSpeakersOfType($speakerType)) {
             return '';
@@ -1040,7 +1040,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return void
      */
-    public function setLanguage($language)
+    public function setLanguage(string $language)
     {
         $this->setRecordPropertyString('language', $language);
     }
@@ -1385,7 +1385,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return void
      */
-    public function setPriceOnRequest($priceOnRequest)
+    public function setPriceOnRequest(bool $priceOnRequest)
     {
         $this->setRecordPropertyBoolean('price_on_request', $priceOnRequest);
     }
@@ -1625,7 +1625,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return void
      */
-    public function setEventType($eventType)
+    public function setEventType(int $eventType)
     {
         if ($eventType < 0) {
             throw new \InvalidArgumentException('$eventType must be >= 0.', 1333291840);
@@ -2395,7 +2395,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string empty string if everything is OK, else a localized error message
      */
-    public function isUserRegisteredMessage($feUserUid): string
+    public function isUserRegisteredMessage(int $feUserUid): string
     {
         return $this->isUserRegistered($feUserUid) ? $this->translate('message_alreadyRegistered') : '';
     }
@@ -2461,11 +2461,11 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *                 page, FALSE otherwise
      */
     public function canViewRegistrationsList(
-        $whichPlugin,
-        $registrationsListPID = 0,
-        $registrationsVipListPID = 0,
-        $defaultEventVipsFeGroupID = 0,
-        $accessLevel = 'attendees_and_managers'
+        string $whichPlugin,
+        int $registrationsListPID = 0,
+        int $registrationsVipListPID = 0,
+        int $defaultEventVipsFeGroupID = 0,
+        string $accessLevel = 'attendees_and_managers'
     ): bool {
         if (!$this->needsRegistration()) {
             return false;
@@ -2527,10 +2527,10 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *                 page, FALSE otherwise
      */
     protected function canViewRegistrationsListForAttendeesAndManagersAccess(
-        $whichPlugin,
-        $registrationsListPID = 0,
-        $registrationsVipListPID = 0,
-        $defaultEventVipsFeGroupID = 0
+        string $whichPlugin,
+        int $registrationsListPID = 0,
+        int $registrationsVipListPID = 0,
+        int $defaultEventVipsFeGroupID = 0
     ): bool {
         if (!\Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
             return false;
@@ -2602,10 +2602,10 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *                 page, FALSE otherwise
      */
     protected function canViewRegistrationsListForLoginAccess(
-        $whichPlugin,
-        $registrationsListPID = 0,
-        $registrationsVipListPID = 0,
-        $defaultEventVipsFeGroupID = 0
+        string $whichPlugin,
+        int $registrationsListPID = 0,
+        int $registrationsVipListPID = 0,
+        int $defaultEventVipsFeGroupID = 0
     ): bool {
         $loginManager = \Tx_Oelib_FrontEndLoginManager::getInstance();
         if (!$loginManager->isLoggedIn()) {
@@ -2662,10 +2662,10 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *                 page, FALSE otherwise
      */
     protected function canViewRegistrationsListForWorldAccess(
-        $whichPlugin,
-        $registrationsListPID = 0,
-        $registrationsVipListPID = 0,
-        $defaultEventVipsFeGroupID = 0
+        string $whichPlugin,
+        int $registrationsListPID = 0,
+        int $registrationsVipListPID = 0,
+        int $defaultEventVipsFeGroupID = 0
     ): bool {
         $loginManager = \Tx_Oelib_FrontEndLoginManager::getInstance();
         $isLoggedIn = $loginManager->isLoggedIn();
@@ -2710,9 +2710,9 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *        "attendees_and_managers", "login" or "world"
      *
      * @return string an empty string if everything is OK, a localized error
-     *                error message otherwise
+     *                message otherwise
      */
-    public function canViewRegistrationsListMessage($whichPlugin, $accessLevel = 'attendees_and_managers'): string
+    public function canViewRegistrationsListMessage(string $whichPlugin, string $accessLevel = 'attendees_and_managers'): string
     {
         if (!$this->needsRegistration()) {
             return $this->translate('message_noRegistrationNecessary');
@@ -2723,7 +2723,15 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         if (!\Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
             return $this->translate('message_notLoggedIn');
         }
-        if (!$this->canViewRegistrationsList($whichPlugin, $accessLevel)) {
+        if (
+            !$this->canViewRegistrationsList(
+                $whichPlugin,
+                0,
+                0,
+                0,
+                $accessLevel
+            )
+        ) {
             return $this->translate('message_accessDenied');
         }
 
@@ -3045,7 +3053,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool TRUE if the corresponding string exists and is non-empty
      */
-    private function hasTopicString($key): bool
+    private function hasTopicString(string $key): bool
     {
         $topic = $this->getTopic();
 
@@ -3062,7 +3070,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string the corresponding element from the record data array
      */
-    protected function getTopicString($key): string
+    protected function getTopicString(string $key): string
     {
         $topic = $this->getTopic();
 
@@ -3079,7 +3087,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if the corresponding decimal value exists
      *                 and is not 0.00
      */
-    private function hasTopicDecimal($key): bool
+    private function hasTopicDecimal(string $key): bool
     {
         $topic = $this->getTopic();
 
@@ -3096,7 +3104,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string the corresponding element from the record data array
      */
-    protected function getTopicDecimal($key): string
+    protected function getTopicDecimal(string $key): string
     {
         $topic = $this->getTopic();
 
@@ -3114,7 +3122,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return bool the corresponding element from the record data array
      */
-    protected function getTopicBoolean($key): bool
+    protected function getTopicBoolean(string $key): bool
     {
         $topic = $this->getTopic();
 
@@ -3399,7 +3407,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string the data retrieved from $this->recordData, may be empty
      */
-    public function getEventData($key): string
+    public function getEventData(string $key): string
     {
         $trimmedKey = trim($key);
 
@@ -3638,7 +3646,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return bool TRUE if $priceCode matches a currently available
      *                 price, FALSE otherwise
      */
-    public function isPriceAvailable($priceCode): bool
+    public function isPriceAvailable(string $priceCode): bool
     {
         $availablePrices = $this->getAvailablePrices();
 
@@ -3678,7 +3686,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @throws \InvalidArgumentException
      */
-    public function isUserBlocked($uid): bool
+    public function isUserBlocked(int $uid): bool
     {
         if ($uid <= 0) {
             throw new \InvalidArgumentException('$uid must be > 0, but actually is: ' . $uid, 1533310684);
@@ -3765,7 +3773,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string
      */
-    private function getQueryPartForCollidingEventWithoutTimeSlots($beginDate, $endDate): string
+    private function getQueryPartForCollidingEventWithoutTimeSlots(int $beginDate, int $endDate): string
     {
         return '(timeslots = 0 AND (' .
             '(' .
@@ -4019,7 +4027,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         /** @var \Tx_Seminars_BagBuilder_Category $builder */
         $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Category::class);
-        $builder->limitToEvents($this->getTopicOrSelfUid());
+        $builder->limitToEvents((string)$this->getTopicOrSelfUid());
         $builder->sortByRelationOrder();
 
         $result = [];
@@ -4119,7 +4127,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return void
      */
-    public function setAttachedFiles($attachedFiles)
+    public function setAttachedFiles(string $attachedFiles)
     {
         $this->setRecordPropertyString('attached_files', $attachedFiles);
     }
@@ -4242,7 +4250,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return void
      */
-    public function setStatus($status)
+    public function setStatus(int $status)
     {
         $this->setRecordPropertyInteger('cancelled', $status);
     }
@@ -4546,7 +4554,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return void
      */
-    public function setPublicationHash($hash)
+    public function setPublicationHash(string $hash)
     {
         $this->setRecordPropertyString('publication_hash', $hash);
     }

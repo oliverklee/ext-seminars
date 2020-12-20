@@ -114,7 +114,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return string HTML of the create/edit form
      */
-    public function render()
+    public function render(): string
     {
         $this->setFormConfiguration((array)$this->conf['form.']['eventEditor.']);
         $this->declareDataHandler();
@@ -1022,7 +1022,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return void
      */
-    private function checkFileType($fileName)
+    private function checkFileType(string $fileName)
     {
         $allowedExtensions = $this->getConfValueString(
             'allowedExtensionsForUpload',
@@ -1042,7 +1042,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return void
      */
-    private function checkFileSize($fileName)
+    private function checkFileSize(string $fileName)
     {
         $maximumFileSize = $GLOBALS['TYPO3_CONF_VARS']['BE']['maxFileSize'];
 
@@ -1061,7 +1061,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return void
      */
-    private function purgeUploadedFile($fileName)
+    private function purgeUploadedFile(string $fileName)
     {
         @unlink(PATH_site . 'uploads/tx_seminars/' . $fileName);
         $keyToPurge = array_search($fileName, $this->attachedFiles, true);
@@ -1755,7 +1755,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * @return bool TRUE if the field with the key $key is required,
      *                 FALSE otherwise
      */
-    private static function isPlaceFieldRequired($key): bool
+    private static function isPlaceFieldRequired(string $key): bool
     {
         if ($key == '') {
             throw new \InvalidArgumentException('$key must not be empty.');
@@ -1779,7 +1779,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      */
     private static function setPlaceData(
         \Tx_Seminars_Model_Place $place,
-        $prefix,
+        string $prefix,
         array $formData
     ) {
         $countryUid = (int)$formData[$prefix . 'country'];
@@ -1814,7 +1814,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return array[] calls to be executed on the client
      */
-    public static function showEditPlaceModalBox(\tx_mkforms_forms_Base $form, $placeUid): array
+    public static function showEditPlaceModalBox(\tx_mkforms_forms_Base $form, int $placeUid): array
     {
         if ($placeUid <= 0) {
             return $form->majixExecJs('alert("$placeUid must be >= 0.");');
@@ -2063,7 +2063,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return void
      */
-    private static function setSpeakerData(\Tx_Seminars_Model_Speaker $speaker, $prefix, array $formData)
+    private static function setSpeakerData(\Tx_Seminars_Model_Speaker $speaker, string $prefix, array $formData)
     {
         /** @var \Tx_Seminars_Mapper_Skill $skillMapper */
         $skillMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Skill::class);
@@ -2123,7 +2123,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      */
     public static function showEditSpeakerModalBox(
         \tx_mkforms_forms_Base $form,
-        $speakerUid
+        int $speakerUid
     ): array {
         if ($speakerUid <= 0) {
             return $form->majixExecJs('alert("$speakerUid must be >= 0.");');
@@ -2350,7 +2350,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      */
     private static function setCheckboxData(
         \Tx_Seminars_Model_Checkbox $checkbox,
-        $prefix,
+        string $prefix,
         array $formData
     ) {
         $checkbox->setTitle($formData[$prefix . 'title']);
@@ -2366,7 +2366,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      */
     public static function showEditCheckboxModalBox(
         \tx_mkforms_forms_Base $form,
-        $checkboxUid
+        int $checkboxUid
     ): array {
         if ($checkboxUid <= 0) {
             return $form->majixExecJs('alert("$checkboxUid must be >= 0.");');
@@ -2599,7 +2599,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      */
     private static function setTargetGroupData(
         \Tx_Seminars_Model_TargetGroup $targetGroup,
-        $prefix,
+        string $prefix,
         array $formData
     ) {
         $targetGroup->setTitle($formData[$prefix . 'title']);
@@ -2619,7 +2619,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      */
     public static function showEditTargetGroupModalBox(
         \tx_mkforms_forms_Base $form,
-        $targetGroupUid
+        int $targetGroupUid
     ): array {
         if ($targetGroupUid <= 0) {
             return $form->majixExecJs('alert("$targetGroupUid must be >= 0.");');
@@ -2838,7 +2838,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return void
      */
-    public function setSavedFormValue($key, $value)
+    public function setSavedFormValue(string $key, $value)
     {
         $this->savedFormData[$key] = $value;
     }
