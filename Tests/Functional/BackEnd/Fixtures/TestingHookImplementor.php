@@ -12,7 +12,7 @@ use TYPO3\CMS\Core\SingletonInterface;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-final class TestingHookImplementor implements \Tx_Seminars_Interface_Hook_BackEndModule, SingletonInterface
+final class TestingHookImplementor implements \Tx_Seminars_Interfaces_Hook_BackEndModule, SingletonInterface
 {
     /**
      * @var int

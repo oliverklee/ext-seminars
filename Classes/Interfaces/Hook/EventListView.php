@@ -11,7 +11,7 @@ use OliverKlee\Oelib\Templating\Template;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-interface Tx_Seminars_Interface_Hook_EventListView
+interface Tx_Seminars_Interfaces_Hook_EventListView
 {
     /**
      * Modifies a list row in the events list.

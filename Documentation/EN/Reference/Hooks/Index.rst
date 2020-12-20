@@ -49,7 +49,7 @@ Hooks for the single view
 """""""""""""""""""""""""
 
 .. important::
-    Using :php:`\Tx_Seminars_Interface_Hook_EventSingleView` is deprecated since
+    Using :php:`\Tx_Seminars_Interfaces_Hook_EventSingleView` is deprecated since
     seminars 3. It will be removed in seminars 4. Please update to
     :php:`\OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView`.
 
@@ -95,7 +95,7 @@ Hooks for the list view
 """""""""""""""""""""""
 
 .. important::
-    Using :php:`\Tx_Seminars_Interface_Hook_EventListView` is deprecated since
+    Using :php:`\Tx_Seminars_Interfaces_Hook_EventListView` is deprecated since
     seminars 3. It will be removed in seminars 4. Please update to
     :php:`\OliverKlee\Seminars\Hooks\Interfaces\SeminarListView`.
 
@@ -661,7 +661,7 @@ It's used like this:
 
 .. code-block:: php
 
-   class tx_seminarspaypal_Hooks_BackEndModule implements Tx_Seminars_Interface_Hook_BackEndModule {
+   class tx_seminarspaypal_Hooks_BackEndModule implements Tx_Seminars_Interfaces_Hook_BackEndModule {
          /**
         * Modifies the general e-mail sent via the back-end module.
         *

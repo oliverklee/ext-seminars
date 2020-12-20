@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Rename sub-namespace `Interface` to `Interfaces` (#623)
 
 ### Deprecated
 
