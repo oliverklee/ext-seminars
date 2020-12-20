@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\System\Typo3Version;
 use SJBR\StaticInfoTables\PiBaseApi;
 use SJBR\StaticInfoTables\Utility\LocalizationUtility;
 use TYPO3\CMS\Core\Crypto\Random;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
@@ -699,7 +699,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
             && \Tx_Oelib_Session::getInstance(\Tx_Oelib_Session::TYPE_USER)->getAsBoolean('onetimeaccount')
         ) {
             $this->getFrontEndController()->fe_user->logoff();
-            if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) < 9004000) {
+            if (Typo3Version::isNotHigherThan(8)) {
                 $this->getFrontEndController()->loginUser = 0;
             }
         }
