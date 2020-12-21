@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Csv;
+
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -9,7 +11,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Csv_EventListView extends \Tx_Seminars_Csv_AbstractListView
+class EventListView extends AbstractListView
 {
     /**
      * @var string

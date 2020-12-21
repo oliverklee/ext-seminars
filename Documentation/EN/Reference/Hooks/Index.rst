@@ -853,7 +853,7 @@ Implement the methods required by the interface:
          *
          * This allows modifying the complete CSV text right before it is delivered.
          *
-         * @param string $csv the CSV text produced by `AbstractRegistrationListView::render()`
+         * @param string $csv the CSV text produced by `\Tx_Seminars_Csv_AbstractRegistrationListView::render()`
          * @param \Tx_Seminars_Csv_AbstractRegistrationListView $registrationList the CSV data provider
          *
          * @return string the modified CSV text to use

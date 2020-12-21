@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\Csv;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 
 /**
@@ -22,7 +23,7 @@ final class CsvDownloaderTest extends FunctionalTestCase
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**
-     * @var \Tx_Seminars_Csv_CsvDownloader
+     * @var CsvDownloader
      */
     private $subject = null;
 
@@ -48,7 +49,7 @@ final class CsvDownloaderTest extends FunctionalTestCase
         $this->setUpExtensionConfiguration();
         $this->initializeBackEndLanguage();
 
-        $this->subject = new \Tx_Seminars_Csv_CsvDownloader();
+        $this->subject = new CsvDownloader();
         $this->subject->init([]);
     }
 

@@ -4216,7 +4216,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForFormalSalutationAndGenderMaleContainsFormalMaleSalutation()
     {
-        if (!Tx_Oelib_Model_FrontEndUser::hasGenderField()) {
+        if (!\Tx_Oelib_Model_FrontEndUser::hasGenderField()) {
             self::markTestSkipped('This test is only applicable if there is a FrontEndUser.gender field.');
         }
 
@@ -4245,7 +4245,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForFormalSalutationAndGenderFemaleContainsFormalFemaleSalutation()
     {
-        if (!Tx_Oelib_Model_FrontEndUser::hasGenderField()) {
+        if (!\Tx_Oelib_Model_FrontEndUser::hasGenderField()) {
             self::markTestSkipped('This test is only applicable if there is a FrontEndUser.gender field.');
         }
 
@@ -4596,7 +4596,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForFormalSalutationAndGenderMaleNotContainsRawTemplateMarkers()
     {
-        if (!Tx_Oelib_Model_FrontEndUser::hasGenderField()) {
+        if (!\Tx_Oelib_Model_FrontEndUser::hasGenderField()) {
             self::markTestSkipped('This test is only applicable if there is a FrontEndUser.gender field.');
         }
 
@@ -4624,7 +4624,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForFormalSalutationAndGenderFemaleNotContainsRawTemplateMarkers()
     {
-        if (!Tx_Oelib_Model_FrontEndUser::hasGenderField()) {
+        if (!\Tx_Oelib_Model_FrontEndUser::hasGenderField()) {
             self::markTestSkipped('This test is only applicable if there is a FrontEndUser.gender field.');
         }
 

@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Csv;
+
 /**
  * This class provides the access check for the CSV export of registrations in the back end.
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Csv_BackEndRegistrationAccessCheck extends \Tx_Seminars_Csv_AbstractBackEndAccessCheck
+class BackEndRegistrationAccessCheck extends AbstractBackEndAccessCheck
 {
     /**
      * @var string
@@ -28,7 +30,7 @@ class Tx_Seminars_Csv_BackEndRegistrationAccessCheck extends \Tx_Seminars_Csv_Ab
      */
     public function hasAccess(): bool
     {
-        if (!Tx_Oelib_BackEndLoginManager::getInstance()->isLoggedIn()) {
+        if (!\Tx_Oelib_BackEndLoginManager::getInstance()->isLoggedIn()) {
             return false;
         }
 

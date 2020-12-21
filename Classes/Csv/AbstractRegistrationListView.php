@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Seminars\Csv\AbstractListView;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationListCsv;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -11,7 +12,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends \Tx_Seminars_Csv_AbstractListView
+abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends AbstractListView
 {
     /**
      * @var string

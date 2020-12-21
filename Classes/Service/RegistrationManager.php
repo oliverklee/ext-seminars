@@ -143,7 +143,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         if ($event->getPriceOnRequest() || !$event->canSomebodyRegister()) {
             return false;
         }
-        if (!Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
+        if (!\Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
             return true;
         }
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Csv;
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Csv\BackEndEventAccessCheck;
 use OliverKlee\Seminars\Csv\Interfaces\CsvAccessCheck;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
@@ -18,7 +19,7 @@ use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 class BackEndEventAccessCheckTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_Csv_BackEndEventAccessCheck
+     * @var BackEndEventAccessCheck
      */
     private $subject = null;
 
@@ -38,7 +39,7 @@ class BackEndEventAccessCheckTest extends TestCase
         $this->backEndUser = $this->createMock(BackendUserAuthentication::class);
         $GLOBALS['BE_USER'] = $this->backEndUser;
 
-        $this->subject = new \Tx_Seminars_Csv_BackEndEventAccessCheck();
+        $this->subject = new BackEndEventAccessCheck();
     }
 
     protected function tearDown()

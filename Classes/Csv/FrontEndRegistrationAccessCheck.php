@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Csv;
+
 use OliverKlee\Seminars\Csv\Interfaces\CsvAccessCheck;
 
 /**
@@ -9,7 +11,7 @@ use OliverKlee\Seminars\Csv\Interfaces\CsvAccessCheck;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Csv_FrontEndRegistrationAccessCheck implements CsvAccessCheck
+class FrontEndRegistrationAccessCheck implements CsvAccessCheck
 {
     /**
      * @var \Tx_Seminars_OldModel_Event
@@ -50,7 +52,7 @@ class Tx_Seminars_Csv_FrontEndRegistrationAccessCheck implements CsvAccessCheck
         if ($this->getEvent() === null) {
             throw new \BadMethodCallException('Please set an event first.', 1389096647);
         }
-        if (!Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
+        if (!\Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
             return false;
         }
 

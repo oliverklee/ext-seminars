@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Csv;
+
 use TYPO3\CMS\Core\Charset\CharsetConverter;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -12,7 +14,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
+class CsvDownloader extends \Tx_Oelib_TemplateHelper
 {
     /**
      * @var int
@@ -120,8 +122,8 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
      */
     public function createAndOutputListOfRegistrations(int $eventUid = 0): string
     {
-        /** @var \Tx_Seminars_Csv_EmailRegistrationListView $listView */
-        $listView = GeneralUtility::makeInstance(\Tx_Seminars_Csv_DownloadRegistrationListView::class);
+        /** @var DownloadRegistrationListView $listView */
+        $listView = GeneralUtility::makeInstance(DownloadRegistrationListView::class);
 
         $pageUid = (int)$this->piVars['pid'];
         if ($eventUid > 0) {
@@ -158,8 +160,8 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
             return '';
         }
 
-        /** @var \Tx_Seminars_Csv_EmailRegistrationListView $listView */
-        $listView = GeneralUtility::makeInstance(\Tx_Seminars_Csv_DownloadRegistrationListView::class);
+        /** @var DownloadRegistrationListView $listView */
+        $listView = GeneralUtility::makeInstance(DownloadRegistrationListView::class);
         $listView->setEventUid($eventUid);
 
         return $listView->render();
@@ -201,8 +203,8 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
      */
     public function createListOfEvents(int $pageUid): string
     {
-        /** @var \Tx_Seminars_Csv_EventListView $eventListView */
-        $eventListView = GeneralUtility::makeInstance(\Tx_Seminars_Csv_EventListView::class);
+        /** @var EventListView $eventListView */
+        $eventListView = GeneralUtility::makeInstance(EventListView::class);
         $eventListView->setPageUid($pageUid);
 
         return $eventListView->render();
@@ -223,13 +225,13 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
     {
         switch ($this->getTypo3Mode()) {
             case 'BE':
-                /** @var \Tx_Seminars_Csv_BackEndRegistrationAccessCheck $accessCheck */
-                $accessCheck = GeneralUtility::makeInstance(\Tx_Seminars_Csv_BackEndRegistrationAccessCheck::class);
+                /** @var BackEndRegistrationAccessCheck $accessCheck */
+                $accessCheck = GeneralUtility::makeInstance(BackEndRegistrationAccessCheck::class);
                 $result = $accessCheck->hasAccess();
                 break;
             case 'FE':
-                /** @var \Tx_Seminars_Csv_FrontEndRegistrationAccessCheck $accessCheck */
-                $accessCheck = GeneralUtility::makeInstance(\Tx_Seminars_Csv_FrontEndRegistrationAccessCheck::class);
+                /** @var FrontEndRegistrationAccessCheck $accessCheck */
+                $accessCheck = GeneralUtility::makeInstance(FrontEndRegistrationAccessCheck::class);
 
                 /** @var \Tx_Seminars_OldModel_Event $event */
                 $event = GeneralUtility::makeInstance(\Tx_Seminars_OldModel_Event::class, $eventUid, false, true);
@@ -253,8 +255,8 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
      */
     protected function canAccessListOfEvents(int $pageUid): bool
     {
-        /** @var \Tx_Seminars_Csv_BackEndEventAccessCheck $accessCheck */
-        $accessCheck = GeneralUtility::makeInstance(\Tx_Seminars_Csv_BackEndEventAccessCheck::class);
+        /** @var BackEndEventAccessCheck $accessCheck */
+        $accessCheck = GeneralUtility::makeInstance(BackEndEventAccessCheck::class);
         $accessCheck->setPageUid($pageUid);
 
         return $accessCheck->hasAccess();
@@ -339,8 +341,8 @@ class Tx_Seminars_Csv_CsvDownloader extends \Tx_Oelib_TemplateHelper
     {
         switch ($this->getTypo3Mode()) {
             case 'BE':
-                /** @var \Tx_Seminars_Csv_BackEndRegistrationAccessCheck $accessCheck */
-                $accessCheck = GeneralUtility::makeInstance(\Tx_Seminars_Csv_BackEndRegistrationAccessCheck::class);
+                /** @var BackEndRegistrationAccessCheck $accessCheck */
+                $accessCheck = GeneralUtility::makeInstance(BackEndRegistrationAccessCheck::class);
                 $accessCheck->setPageUid($pageUid);
                 $result = $accessCheck->hasAccess();
                 break;

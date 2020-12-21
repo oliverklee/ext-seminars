@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Csv;
+
 use OliverKlee\Seminars\Csv\Interfaces\CsvAccessCheck;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
@@ -11,7 +13,7 @@ use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-abstract class Tx_Seminars_Csv_AbstractBackEndAccessCheck implements CsvAccessCheck
+abstract class AbstractBackEndAccessCheck implements CsvAccessCheck
 {
     /**
      * @var int
@@ -59,7 +61,7 @@ abstract class Tx_Seminars_Csv_AbstractBackEndAccessCheck implements CsvAccessCh
      */
     protected function canAccessTableAndPage(string $tableName, int $pageUid): bool
     {
-        if (!Tx_Oelib_BackEndLoginManager::getInstance()->isLoggedIn()) {
+        if (!\Tx_Oelib_BackEndLoginManager::getInstance()->isLoggedIn()) {
             return false;
         }
 
