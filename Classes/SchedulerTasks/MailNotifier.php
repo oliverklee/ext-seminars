@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\SchedulerTasks;
 
+use OliverKlee\Seminars\Csv\EmailRegistrationListView;
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
 use OliverKlee\Seminars\Service\EmailService;
 use OliverKlee\Seminars\Service\EventStatusService;
@@ -294,8 +295,8 @@ class MailNotifier extends AbstractTask
      */
     private function getCsv(int $eventUid): \Tx_Oelib_Attachment
     {
-        /** @var \Tx_Seminars_Csv_EmailRegistrationListView $csvCreator */
-        $csvCreator = GeneralUtility::makeInstance(\Tx_Seminars_Csv_EmailRegistrationListView::class);
+        /** @var EmailRegistrationListView $csvCreator */
+        $csvCreator = GeneralUtility::makeInstance(EmailRegistrationListView::class);
         $csvCreator->setEventUid($eventUid);
         $csvString = $csvCreator->render();
 

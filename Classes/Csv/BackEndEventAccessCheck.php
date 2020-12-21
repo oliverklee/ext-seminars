@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Csv;
+
 /**
  * This class provides the access check for the CSV export of events in the back end.
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Csv_BackEndEventAccessCheck extends \Tx_Seminars_Csv_AbstractBackEndAccessCheck
+class BackEndEventAccessCheck extends AbstractBackEndAccessCheck
 {
     /**
      * @var string

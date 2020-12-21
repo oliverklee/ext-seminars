@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\Seminars\Bag\AbstractBag;
+use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarListView;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm;
@@ -2875,7 +2876,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
                 'additionalParams' => GeneralUtility::implodeArrayForUrl(
                     '',
                     [
-                        'type' => \Tx_Seminars_Csv_CsvDownloader::CSV_TYPE_NUMBER,
+                        'type' => CsvDownloader::CSV_TYPE_NUMBER,
                         'tx_seminars_pi2' => [
                             'table' => 'tx_seminars_attendances',
                             'eventUid' => $this->seminar->getUid(),

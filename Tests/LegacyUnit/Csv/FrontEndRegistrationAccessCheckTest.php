@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Csv;
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Csv\FrontEndRegistrationAccessCheck;
 use OliverKlee\Seminars\Csv\Interfaces\CsvAccessCheck;
 use PHPUnit\Framework\MockObject\MockObject;
 
@@ -16,7 +17,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 class FrontEndRegistrationAccessCheckTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_Csv_FrontEndRegistrationAccessCheck
+     * @var FrontEndRegistrationAccessCheck
      */
     private $subject = null;
 
@@ -39,7 +40,7 @@ class FrontEndRegistrationAccessCheckTest extends TestCase
         $this->seminarsPluginConfiguration->setAsInteger('defaultEventVipsFeGroupID', $this->vipsGroupUid);
         $configurationRegistry->set('plugin.tx_seminars_pi1', $this->seminarsPluginConfiguration);
 
-        $this->subject = new \Tx_Seminars_Csv_FrontEndRegistrationAccessCheck();
+        $this->subject = new FrontEndRegistrationAccessCheck();
     }
 
     protected function tearDown()

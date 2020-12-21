@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\BackEnd;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\BackEnd\AbstractModule;
 use OliverKlee\Seminars\BackEnd\Controller;
+use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Prophecy\Prophecy\ProphecySubjectInterface;
@@ -53,12 +54,12 @@ class ControllerTest extends TestCase
     public function mainActionWithCsvFlagReturnsCsvDownload()
     {
         $csvBody = 'foo;bar';
-        /** @var \Tx_Seminars_Csv_CsvDownloader|ObjectProphecy $exporterProphecy */
-        $exporterProphecy = $this->prophesize(\Tx_Seminars_Csv_CsvDownloader::class);
+        /** @var CsvDownloader|ObjectProphecy $exporterProphecy */
+        $exporterProphecy = $this->prophesize(CsvDownloader::class);
         $exporterProphecy->main()->shouldBeCalled()->willReturn($csvBody);
-        /** @var \Tx_Seminars_Csv_CsvDownloader|ProphecySubjectInterface $exporterMock */
+        /** @var CsvDownloader|ProphecySubjectInterface $exporterMock */
         $exporterMock = $exporterProphecy->reveal();
-        GeneralUtility::addInstance(\Tx_Seminars_Csv_CsvDownloader::class, $exporterMock);
+        GeneralUtility::addInstance(CsvDownloader::class, $exporterMock);
 
         /** @var ServerRequestInterface|ProphecySubjectInterface $requestMock */
         $requestMock = $this->prophesize(ServerRequestInterface::class)->reveal();

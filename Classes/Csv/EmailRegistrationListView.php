@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Csv;
+
 /**
  * This class creates a CSV export of registrations for download.
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Csv_EmailRegistrationListView extends \Tx_Seminars_Csv_AbstractRegistrationListView
+class EmailRegistrationListView extends \Tx_Seminars_Csv_AbstractRegistrationListView
 {
     /**
      * Returns the keys of the front-end user fields to export.

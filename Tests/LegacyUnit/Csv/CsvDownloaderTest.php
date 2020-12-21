@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Csv;
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
 use TYPO3\CMS\Lang\LanguageService;
 
@@ -19,7 +20,7 @@ class CsvDownloaderTest extends TestCase
     use BackEndTestsTrait;
 
     /**
-     * @var \Tx_Seminars_Csv_CsvDownloader
+     * @var CsvDownloader
      */
     private $subject = null;
 
@@ -59,7 +60,7 @@ class CsvDownloaderTest extends TestCase
 
         $this->configuration->setData(['charsetForCsv' => 'utf-8']);
 
-        $this->subject = new \Tx_Seminars_Csv_CsvDownloader();
+        $this->subject = new CsvDownloader();
         $this->subject->init([]);
     }
 

@@ -49,7 +49,7 @@ class Tx_Seminars_FrontEnd_RequirementsList extends \Tx_Seminars_FrontEnd_Abstra
      */
     public function limitToMissingRegistrations()
     {
-        if (!Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
+        if (!\Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
             throw new \BadMethodCallException(
                 'No FE user is currently logged in. Please call this function only when a FE user is logged in.',
                 1333293236

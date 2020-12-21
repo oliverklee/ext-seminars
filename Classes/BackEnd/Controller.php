@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\BackEnd;
 
+use OliverKlee\Seminars\Csv\CsvDownloader;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
@@ -35,8 +36,8 @@ class Controller extends AbstractModule
     {
         $this->init();
         if (GeneralUtility::_GET('csv') === '1') {
-            /** @var \Tx_Seminars_Csv_CsvDownloader $csvExporter */
-            $csvExporter = GeneralUtility::makeInstance(\Tx_Seminars_Csv_CsvDownloader::class);
+            /** @var CsvDownloader $csvExporter */
+            $csvExporter = GeneralUtility::makeInstance(CsvDownloader::class);
             $content = $csvExporter->main();
             $response->getBody()->write($content);
         } else {

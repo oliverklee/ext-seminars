@@ -88,7 +88,7 @@ final class SalutationTest extends TestCase
      */
     protected function skipWithoutGenderField()
     {
-        if (!Tx_Oelib_Model_FrontEndUser::hasGenderField()) {
+        if (!\Tx_Oelib_Model_FrontEndUser::hasGenderField()) {
             self::markTestSkipped(
                 'This test is skipped because it requires FE user to have a gender field, e.g., ' .
                 'from the sr_feuser_register extension.'

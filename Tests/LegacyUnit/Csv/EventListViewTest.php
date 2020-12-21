@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Csv;
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Csv\EventListView;
 use TYPO3\CMS\Lang\LanguageService;
 
 /**
@@ -16,7 +17,7 @@ use TYPO3\CMS\Lang\LanguageService;
 class EventListViewTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_Csv_EventListView
+     * @var EventListView
      */
     private $subject = null;
 
@@ -52,7 +53,7 @@ class EventListViewTest extends TestCase
         $this->configuration->setData(['charsetForCsv' => 'utf-8']);
         $configurationRegistry->set('plugin.tx_seminars', $this->configuration);
 
-        $this->subject = new \Tx_Seminars_Csv_EventListView();
+        $this->subject = new EventListView();
     }
 
     protected function tearDown()

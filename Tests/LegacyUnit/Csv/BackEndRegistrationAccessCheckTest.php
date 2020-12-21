@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Csv;
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Csv\BackEndRegistrationAccessCheck;
 use OliverKlee\Seminars\Csv\Interfaces\CsvAccessCheck;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
@@ -18,7 +19,7 @@ use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 class BackEndRegistrationAccessCheckTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_Csv_BackEndRegistrationAccessCheck
+     * @var BackEndRegistrationAccessCheck
      */
     private $subject = null;
 
@@ -45,7 +46,7 @@ class BackEndRegistrationAccessCheckTest extends TestCase
 
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
 
-        $this->subject = new \Tx_Seminars_Csv_BackEndRegistrationAccessCheck();
+        $this->subject = new BackEndRegistrationAccessCheck();
     }
 
     protected function tearDown()

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\BackEnd;
 
+use OliverKlee\Seminars\Csv\BackEndRegistrationAccessCheck;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -32,7 +33,7 @@ class EventsList extends AbstractList
     protected $templateFile = 'EXT:seminars/Resources/Private/Templates/BackEnd/EventsList.html';
 
     /**
-     * @var \Tx_Seminars_Csv_BackEndRegistrationAccessCheck
+     * @var BackEndRegistrationAccessCheck
      */
     protected $accessCheck = null;
 
@@ -304,12 +305,12 @@ class EventsList extends AbstractList
     /**
      * Gets the access check instance (and creates it if needed).
      *
-     * @return \Tx_Seminars_Csv_BackEndRegistrationAccessCheck
+     * @return BackEndRegistrationAccessCheck
      */
-    protected function getAccessCheck(): \Tx_Seminars_Csv_BackEndRegistrationAccessCheck
+    protected function getAccessCheck(): BackEndRegistrationAccessCheck
     {
         if ($this->accessCheck === null) {
-            $this->accessCheck = GeneralUtility::makeInstance(\Tx_Seminars_Csv_BackEndRegistrationAccessCheck::class);
+            $this->accessCheck = GeneralUtility::makeInstance(BackEndRegistrationAccessCheck::class);
         }
 
         return $this->accessCheck;

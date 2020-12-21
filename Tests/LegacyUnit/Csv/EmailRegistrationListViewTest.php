@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Csv;
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Csv\EmailRegistrationListView;
 use TYPO3\CMS\Lang\LanguageService;
 
 /**
@@ -16,7 +17,7 @@ use TYPO3\CMS\Lang\LanguageService;
 class EmailRegistrationListViewTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_Csv_EmailRegistrationListView
+     * @var EmailRegistrationListView
      */
     private $subject = null;
 
@@ -61,7 +62,7 @@ class EmailRegistrationListViewTest extends TestCase
             ]
         );
 
-        $this->subject = new \Tx_Seminars_Csv_EmailRegistrationListView();
+        $this->subject = new EmailRegistrationListView();
         $this->subject->setEventUid($this->eventUid);
     }
 

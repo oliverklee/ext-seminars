@@ -17,7 +17,7 @@ tx_seminars_pi2 {
 
     10 = USER
     10 {
-        userFunc = Tx_Seminars_Csv_CsvDownloader->main
+        userFunc = OliverKlee\Seminars\Csv\CsvDownloader->main
 
         # pro forma salutation mode for the FE; has no effect whatsoever
         salutation = formal
