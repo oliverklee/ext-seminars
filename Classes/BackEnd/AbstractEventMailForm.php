@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\BackEnd;
 
+use OliverKlee\Seminar\Email\Salutation;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
@@ -570,8 +571,8 @@ abstract class AbstractEventMailForm
      */
     protected function localizeSalutationPlaceholder(string $prefix): string
     {
-        /** @var \Tx_Seminars_EmailSalutation $salutation */
-        $salutation = GeneralUtility::makeInstance(\Tx_Seminars_EmailSalutation::class);
+        /** @var Salutation $salutation */
+        $salutation = GeneralUtility::makeInstance(Salutation::class);
         $eventDetails = $salutation->createIntroduction(
             '"%s"',
             $this->getOldEvent()
@@ -597,8 +598,8 @@ abstract class AbstractEventMailForm
         \Tx_Seminars_Model_FrontEndUser $user,
         \Tx_Seminars_Model_Organizer $organizer
     ): string {
-        /** @var \Tx_Seminars_EmailSalutation $salutation */
-        $salutation = GeneralUtility::makeInstance(\Tx_Seminars_EmailSalutation::class);
+        /** @var Salutation $salutation */
+        $salutation = GeneralUtility::makeInstance(Salutation::class);
         $messageText = str_replace(
             '%salutation',
             $salutation->getSalutation($user),

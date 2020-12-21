@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Seminar\Email\Salutation;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 use OliverKlee\Seminars\Hooks\RegistrationEmailHookInterface;
@@ -1561,8 +1562,8 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      */
     private function setEMailIntroduction(string $helloSubjectPrefix, \Tx_Seminars_OldModel_Registration $registration)
     {
-        /** @var \Tx_Seminars_EmailSalutation $salutation */
-        $salutation = GeneralUtility::makeInstance(\Tx_Seminars_EmailSalutation::class);
+        /** @var Salutation $salutation */
+        $salutation = GeneralUtility::makeInstance(Salutation::class);
         $user = $registration->getFrontEndUser();
         if ($user instanceof \Tx_Seminars_Model_FrontEndUser) {
             $salutationText = $salutation->getSalutation($user);

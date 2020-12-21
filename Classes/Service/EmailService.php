@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Service;
 
+use OliverKlee\Seminar\Email\Salutation;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Lang\LanguageService;
@@ -23,7 +24,7 @@ use TYPO3\CMS\Lang\LanguageService;
 class EmailService implements SingletonInterface
 {
     /**
-     * @var \Tx_Seminars_EmailSalutation
+     * @var Salutation
      */
     protected $salutationBuilder = null;
 
@@ -37,7 +38,7 @@ class EmailService implements SingletonInterface
      */
     public function __construct()
     {
-        $this->salutationBuilder = GeneralUtility::makeInstance(\Tx_Seminars_EmailSalutation::class);
+        $this->salutationBuilder = GeneralUtility::makeInstance(Salutation::class);
         $this->dateRangeViewHelper = GeneralUtility::makeInstance(\Tx_Seminars_ViewHelper_DateRange::class);
     }
 

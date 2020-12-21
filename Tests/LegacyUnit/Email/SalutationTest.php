@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminar\Email\Salutation;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
 use OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures\EmailSalutationHookInterface;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
@@ -17,7 +18,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-final class EmailSalutationTest extends TestCase
+final class SalutationTest extends TestCase
 {
     use LanguageHelper;
 
@@ -27,7 +28,7 @@ final class EmailSalutationTest extends TestCase
     private $testingFramework = null;
 
     /**
-     * @var \Tx_Seminars_EmailSalutation
+     * @var Salutation
      */
     private $subject = null;
 
@@ -43,7 +44,7 @@ final class EmailSalutationTest extends TestCase
         Bootstrap::getInstance()->initializeBackendAuthentication();
 
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
-        $this->subject = new \Tx_Seminars_EmailSalutation();
+        $this->subject = new Salutation();
         $configuration = new \Tx_Oelib_Configuration();
         $configuration->setAsString('salutation', 'formal');
         \Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
