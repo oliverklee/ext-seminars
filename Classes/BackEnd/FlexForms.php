@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\BackEnd;
+
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -11,7 +13,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_FlexForms
+class FlexForms
 {
     /**
      * Returns the configuration for the flex forms field
