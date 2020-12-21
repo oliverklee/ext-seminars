@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\BackEnd;
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\BackEnd\FlexForms;
 
 /**
  * Test case.
@@ -14,7 +15,7 @@ use OliverKlee\PhpUnit\TestCase;
 class FlexFormsTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_FlexForms
+     * @var FlexForms
      */
     private $subject = null;
 
@@ -26,7 +27,7 @@ class FlexFormsTest extends TestCase
     protected function setUp()
     {
         $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
-        $this->subject = new \Tx_Seminars_FlexForms();
+        $this->subject = new FlexForms();
     }
 
     protected function tearDown()
@@ -39,6 +40,6 @@ class FlexFormsTest extends TestCase
      */
     public function classCanBeInstantiated()
     {
-        self::assertInstanceOf(\Tx_Seminars_FlexForms::class, $this->subject);
+        self::assertInstanceOf(FlexForms::class, $this->subject);
     }
 }
