@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
+use OliverKlee\Seminars\Model\Interfaces\Titled;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
@@ -2726,7 +2727,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
 
         $result = [];
 
-        /** @var \Tx_Oelib_Model|\Tx_Seminars_Interface_Titled $model */
+        /** @var \Tx_Oelib_Model|Titled $model */
         foreach ($models as $model) {
             $result[] = [
                 'caption' => $model->getTitle(),

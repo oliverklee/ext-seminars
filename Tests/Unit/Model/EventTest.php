@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Tests\Unit\Model;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
+use OliverKlee\Seminars\Model\Interfaces\Titled;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -55,7 +56,7 @@ class EventTest extends UnitTestCase
      */
     public function isTitled()
     {
-        self::assertInstanceOf(\Tx_Seminars_Interface_Titled::class, $this->subject);
+        self::assertInstanceOf(Titled::class, $this->subject);
     }
 
     /**

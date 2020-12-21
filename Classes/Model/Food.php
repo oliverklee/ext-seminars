@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Seminars\Model\Interfaces\Titled;
+
 /**
  * This class represents a food.
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Model_Food extends \Tx_Oelib_Model implements \Tx_Seminars_Interface_Titled
+class Tx_Seminars_Model_Food extends \Tx_Oelib_Model implements Titled
 {
     /**
      * Returns our title.

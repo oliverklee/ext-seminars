@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Seminars\Model\Interfaces\Titled;
+
 /**
  * This class represents an event type.
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Model_EventType extends \Tx_Oelib_Model implements \Tx_Seminars_Interface_Titled
+class Tx_Seminars_Model_EventType extends \Tx_Oelib_Model implements Titled
 {
     /**
      * Returns our title.

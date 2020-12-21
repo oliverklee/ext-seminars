@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Seminars\Model\Interfaces\Titled;
+
 /**
  * This class represents a back-end user group.
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class Tx_Seminars_Model_BackEndUserGroup extends \Tx_Oelib_Model_BackEndUserGroup implements \Tx_Seminars_Interface_Titled
+class Tx_Seminars_Model_BackEndUserGroup extends \Tx_Oelib_Model_BackEndUserGroup implements Titled
 {
     /**
      * Returns the PID for the storage of new events.

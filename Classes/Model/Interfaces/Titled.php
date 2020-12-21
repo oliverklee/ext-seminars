@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Model\Interfaces;
+
 /**
  * This interface is used for models having a title and is needed for the CommaSeparatedTitles view helper.
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-interface Tx_Seminars_Interface_Titled
+interface Titled
 {
     /**
      * Returns our title.
