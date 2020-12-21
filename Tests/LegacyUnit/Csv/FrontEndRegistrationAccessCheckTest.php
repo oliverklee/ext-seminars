@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Csv;
 
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Csv\Interfaces\CsvAccessCheck;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
@@ -53,7 +54,7 @@ class FrontEndRegistrationAccessCheckTest extends TestCase
     public function subjectImplementsAccessCheck()
     {
         self::assertInstanceOf(
-            \Tx_Seminars_Interface_CsvAccessCheck::class,
+            CsvAccessCheck::class,
             $this->subject
         );
     }
