@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminar\Email;
+
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -9,7 +11,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class Tx_Seminars_EmailSalutation
+class Salutation
 {
     /**
      * @var \Tx_Oelib_Translator

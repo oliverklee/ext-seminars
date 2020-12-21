@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\SchedulerTasks;
 
 use OliverKlee\PhpUnit\Interfaces\AccessibleObject;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminar\Email\Salutation;
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
 use OliverKlee\Seminars\SchedulerTasks\MailNotifier;
 use OliverKlee\Seminars\Service\EmailService;
@@ -64,7 +65,7 @@ class MailNotifierTest extends TestCase
     protected $eventMapper = null;
 
     /**
-     * @var \Tx_Seminars_EmailSalutation|MockObject
+     * @var Salutation|MockObject
      */
     protected $emailSalutation = null;
 
@@ -139,7 +140,7 @@ class MailNotifierTest extends TestCase
         $this->mailer = $mailerFactory->getMailer();
         $this->subject->_set('mailer', $this->mailer);
 
-        $this->emailSalutation = $this->createMock(\Tx_Seminars_EmailSalutation::class);
+        $this->emailSalutation = $this->createMock(Salutation::class);
         $this->subject->_set('emailSalutation', $this->emailSalutation);
 
         $this->registrationDigestProphecy = $this->prophesize(RegistrationDigest::class);
