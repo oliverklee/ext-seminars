@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Seminars\Model\Interfaces\Titled;
+
 /**
  * This class represents a view helper for rendering the elements of a list as comma-separated titles.
  *
@@ -22,9 +24,9 @@ class Tx_Seminars_ViewHelper_CommaSeparatedTitles
     {
         $titles = [];
 
-        /** @var \Tx_Seminars_Interface_Titled $element */
+        /** @var Titled $element */
         foreach ($list as $element) {
-            if (!$element instanceof \Tx_Seminars_Interface_Titled) {
+            if (!$element instanceof Titled) {
                 throw new \InvalidArgumentException(
                     'All elements in $list must implement the interface Tx_Seminars_Interface_Titled.',
                     1333658899

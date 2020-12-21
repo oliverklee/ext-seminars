@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Seminars\Model\Interfaces\Titled;
+
 /**
  * This class represents a registration for an event.
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements \Tx_Seminars_Interface_Titled
+class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements Titled
 {
     /**
      * Returns the title of this registration.

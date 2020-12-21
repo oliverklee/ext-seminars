@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Seminars\Model\Interfaces\Titled;
 use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
 
 /**
@@ -10,7 +11,7 @@ use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implements \Tx_Seminars_Interface_Titled
+class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implements Titled
 {
     use EventEmailSenderTrait;
 
