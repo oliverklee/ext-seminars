@@ -6,6 +6,7 @@ use OliverKlee\Oelib\System\Typo3Version;
 use SJBR\StaticInfoTables\PiBaseApi;
 use SJBR\StaticInfoTables\Utility\LocalizationUtility;
 use TYPO3\CMS\Core\Crypto\Random;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
@@ -771,13 +772,29 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
             return [];
         }
 
-        $rows = \Tx_Oelib_Db::selectMultiple(
-            'uid, title',
-            'tx_seminars_payment_methods, tx_seminars_seminars_payment_methods_mm',
-            'tx_seminars_payment_methods.uid = tx_seminars_seminars_payment_methods_mm.uid_foreign ' .
-            'AND tx_seminars_seminars_payment_methods_mm.uid_local=' . $this->getSeminar()->getTopicOrSelfUid() .
-            \Tx_Oelib_Db::enableFields('tx_seminars_payment_methods')
-        );
+        /** @var ConnectionPool $connectionPool */
+        $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
+        $queryBuilder = $connectionPool->getQueryBuilderForTable('tx_seminars_payment_methods');
+        $rows = $queryBuilder
+            ->select('uid', 'title')
+            ->from('tx_seminars_payment_methods')
+            ->join(
+                'tx_seminars_payment_methods',
+                'tx_seminars_seminars_payment_methods_mm',
+                'mm',
+                $queryBuilder->expr()->eq(
+                    'mm.uid_foreign',
+                    $queryBuilder->quoteIdentifier('tx_seminars_payment_methods.uid')
+                )
+            )
+            ->where(
+                $queryBuilder->expr()->eq(
+                    'mm.uid_local',
+                    $queryBuilder->createNamedParameter($this->getSeminar()->getTopicOrSelfUid(), \PDO::PARAM_INT)
+                )
+            )
+            ->execute()
+            ->fetchAll();
 
         $result = [];
         foreach ($rows as $row) {
