@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\Seminars\OldModel\AbstractModel;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\ReferenceIndex;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup;
@@ -189,15 +190,31 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oel
         // selected, there actually is anything to pay and only one payment
         // method is provided.
         if (!$methodOfPayment && $this->recordData['total_price'] > 0.00 && $event->getNumberOfPaymentMethods() === 1) {
-            $rows = \Tx_Oelib_Db::selectMultiple(
-                'uid',
-                'tx_seminars_payment_methods, tx_seminars_seminars_payment_methods_mm',
-                'tx_seminars_payment_methods.uid = tx_seminars_seminars_payment_methods_mm.uid_foreign ' .
-                'AND tx_seminars_seminars_payment_methods_mm.uid_local = ' . $event->getTopicOrSelfUid() .
-                \Tx_Oelib_Db::enableFields('tx_seminars_payment_methods'),
-                '',
-                'tx_seminars_seminars_payment_methods_mm.sorting'
-            );
+            /** @var ConnectionPool $connectionPool */
+            $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
+            $queryBuilder = $connectionPool->getQueryBuilderForTable('tx_seminars_payment_methods');
+            $rows = $queryBuilder
+                ->select('uid')
+                ->from('tx_seminars_payment_methods')
+                ->join(
+                    'tx_seminars_payment_methods',
+                    'tx_seminars_seminars_payment_methods_mm',
+                    'mm',
+                    $queryBuilder->expr()->eq(
+                        'mm.uid_foreign',
+                        $queryBuilder->quoteIdentifier('tx_seminars_payment_methods.uid')
+                    )
+                )
+                ->where(
+                    $queryBuilder->expr()->eq(
+                        'mm.uid_local',
+                        $queryBuilder->createNamedParameter($event->getTopicOrSelfUid(), \PDO::PARAM_INT)
+                    )
+                )
+                ->orderBy('mm.sorting')
+                ->execute()
+                ->fetchAll();
+
             $methodOfPayment = (int)$rows[0]['uid'];
         }
         $this->setMethodOfPaymentUid($methodOfPayment);
