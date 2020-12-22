@@ -5,6 +5,7 @@ declare(strict_types=1);
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSelectorWidget;
 use SJBR\StaticInfoTables\PiBaseApi;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -217,13 +218,30 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
             return;
         }
 
-        $dataOfPlaces = \Tx_Oelib_Db::selectMultiple(
-            'tx_seminars_sites.*',
-            'tx_seminars_sites, tx_seminars_seminars_place_mm',
-            'tx_seminars_sites.uid = tx_seminars_seminars_place_mm.uid_foreign ' .
-            'AND tx_seminars_seminars_place_mm.uid_local IN (' .
-            $this->seminarBag->getUids() . ')'
-        );
+        /** @var ConnectionPool $connectionPool */
+        $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
+        $queryBuilder = $connectionPool->getQueryBuilderForTable('tx_seminars_sites');
+        $dataOfPlaces = $queryBuilder
+            ->select('tx_seminars_sites.*')
+            ->from('tx_seminars_sites')
+            ->join(
+                'tx_seminars_sites',
+                'tx_seminars_seminars_place_mm',
+                'mm',
+                $queryBuilder->expr()->eq(
+                    'mm.uid_foreign',
+                    $queryBuilder->quoteIdentifier('tx_seminars_sites.uid')
+                )
+            )
+            ->where(
+                $queryBuilder->expr()->in(
+                    'mm.uid_local',
+                    $this->seminarBag->getUids()
+                )
+            )
+            ->orderBy('mm.sorting')
+            ->execute()
+            ->fetchAll();
 
         /** @var \Tx_Seminars_Mapper_Place $mapper */
         $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Place::class);
