@@ -13,6 +13,8 @@ use OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures\TestingRegistrationMan
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
 use Tx_Oelib_Model_FrontEndUser;
+use TYPO3\CMS\Core\Database\Connection;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -6353,16 +6355,13 @@ final class RegistrationManagerTest extends TestCase
             $subject->getRegistration()
         );
         $uid = $subject->getRegistration()->getUid();
-        self::assertTrue(
+        $connection = $this->getConnectionForTable('tx_seminars_attendances');
         // We're not using the testing framework here because the record
         // is not marked as dummy record.
-            \Tx_Oelib_Db::existsRecordWithUid(
-                'tx_seminars_attendances',
-                $uid
-            )
-        );
+        $result = $connection->count('*', 'tx_seminars_attendances', ['uid' => $uid]);
+        self::assertSame(1, $result);
 
-        \Tx_Oelib_Db::delete('tx_seminars_attendances', 'uid = ' . $uid);
+        $connection->delete('tx_seminars_attendances', ['uid' => $uid]);
     }
 
     /**
@@ -6386,11 +6385,13 @@ final class RegistrationManagerTest extends TestCase
         );
 
         $subject->createRegistration($this->seminar, [], $plugin);
-
-        $seminarData = \Tx_Oelib_Db::selectSingle('*', 'tx_seminars_seminars', 'uid = ' . $this->seminarUid);
+        $seminarsConnection = $this->getConnectionForTable('tx_seminars_seminars');
+        $seminarData = $seminarsConnection->select(['*'], 'tx_seminars_seminars', ['uid' => $this->seminarUid])->fetch();
 
         $registrationUid = $subject->getRegistration()->getUid();
-        \Tx_Oelib_Db::delete('tx_seminars_attendances', 'uid = ' . $registrationUid);
+
+        $attendancesConnection = $this->getConnectionForTable('tx_seminars_attendances');
+        $attendancesConnection->delete('tx_seminars_attendances', ['uid' => $registrationUid]);
 
         self::assertSame(1, (int)$seminarData['registrations']);
     }
@@ -6420,7 +6421,8 @@ final class RegistrationManagerTest extends TestCase
         $uid = $subject->getRegistration()->getUid();
         // @TODO: This line needs to be removed once createRegistration uses
         // the data mapper to save the registration.
-        \Tx_Oelib_Db::delete('tx_seminars_attendances', 'uid = ' . $uid);
+        $connection = $this->getConnectionForTable('tx_seminars_attendances');
+        $connection->delete('tx_seminars_attendances', ['uid' => $uid]);
 
         self::assertInstanceOf(
             \Tx_Seminars_Model_Registration::class,
@@ -6468,7 +6470,8 @@ final class RegistrationManagerTest extends TestCase
         $uid = $subject->getRegistration()->getUid();
         // @TODO: This line needs to be removed once createRegistration uses
         // the data mapper to save the registration.
-        \Tx_Oelib_Db::delete('tx_seminars_attendances', 'uid = ' . $uid);
+        $connection = $this->getConnectionForTable('tx_seminars_attendances');
+        $connection->delete('tx_seminars_attendances', ['uid' => $uid]);
 
         self::assertSame(
             $registration->getUid(),
@@ -6512,8 +6515,8 @@ final class RegistrationManagerTest extends TestCase
         );
 
         $uid = $subject->getRegistration()->getUid();
-
-        \Tx_Oelib_Db::delete('tx_seminars_attendances', 'uid = ' . $uid);
+        $connection = $this->getConnectionForTable('tx_seminars_attendances');
+        $connection->delete('tx_seminars_attendances', ['uid' => $uid]);
     }
 
     /*
@@ -8677,5 +8680,13 @@ final class RegistrationManagerTest extends TestCase
         $prices = $this->subject->getPricesAvailableForUser($event, $user);
 
         self::assertSame(['regular', 'regular_board'], array_keys($prices));
+    }
+
+    private function getConnectionForTable(string $table): Connection
+    {
+        /** @var ConnectionPool $connectionPool */
+        $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
+
+        return $connectionPool->getConnectionForTable($table);
     }
 }

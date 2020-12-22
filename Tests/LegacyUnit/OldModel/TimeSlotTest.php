@@ -7,6 +7,8 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\OldModel;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingTimeSlot;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Test case.
@@ -139,7 +141,10 @@ final class TimeSlotTest extends TestCase
     {
         $placeUid = $this->testingFramework->createRecord('tx_seminars_sites');
         $this->subject->setPlace($placeUid);
-        \Tx_Oelib_Db::delete('tx_seminars_sites', 'uid = ' . $placeUid);
+        /** @var ConnectionPool $connectionPool */
+        $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
+        $connection = $connectionPool->getConnectionForTable('tx_seminars_attendances');
+        $connection->delete('tx_seminars_sites', ['uid' => $placeUid]);
 
         self::assertSame('', $this->subject->getPlaceShort());
     }
