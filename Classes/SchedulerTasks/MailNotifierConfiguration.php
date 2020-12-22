@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\SchedulerTasks;
 
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -63,7 +64,11 @@ class MailNotifierConfiguration implements AdditionalFieldProviderInterface
     {
         $pageUid = (int)$submittedData['seminars_configurationPageUid'];
         $submittedData['seminars_configurationPageUid'] = $pageUid;
-        $hasPageUid = $pageUid > 0 && \Tx_Oelib_Db::existsRecordWithUid('pages', $pageUid);
+
+        /** @var \TYPO3\CMS\Core\Database\Connection $connection */
+        $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('pages');
+        $pageWithUidExist = $connection->count('*', 'pages', ['uid' => $pageUid]) > 0;
+        $hasPageUid = $pageUid > 0 && $pageWithUidExist;
         if ($hasPageUid) {
             return true;
         }
