@@ -6,6 +6,8 @@ use OliverKlee\Seminar\Email\Salutation;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 use OliverKlee\Seminars\Hooks\RegistrationEmailHookInterface;
+use TYPO3\CMS\Core\Database\Connection;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
@@ -683,10 +685,10 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
             }
         }
 
-        \Tx_Oelib_Db::update(
+        $this->getConnectionForTable('tx_seminars_attendances')->update(
             'tx_seminars_attendances',
-            'uid = ' . $uid,
-            ['hidden' => 1, 'tstamp' => $GLOBALS['SIM_EXEC_TIME']]
+            ['hidden' => 1, 'tstamp' => $GLOBALS['SIM_EXEC_TIME']],
+            ['uid' => $uid]
         );
 
         $this->notifyAttendee($this->registration, $plugin, 'confirmationOnUnregistration');
@@ -724,10 +726,10 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
             }
 
             if ($registration->getSeats() <= $vacancies) {
-                \Tx_Oelib_Db::update(
+                $this->getConnectionForTable('tx_seminars_attendances')->update(
                     'tx_seminars_attendances',
-                    'uid = ' . $registration->getUid(),
-                    ['registration_queue' => 0]
+                    ['registration_queue' => 0],
+                    ['uid' => $registration->getUid()]
                 );
                 $vacancies -= $registration->getSeats();
 
@@ -1748,5 +1750,13 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         }
 
         return $prices;
+    }
+
+    private function getConnectionForTable(string $table): Connection
+    {
+        /** @var ConnectionPool $connectionPool */
+        $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
+
+        return $connectionPool->getConnectionForTable($table);
     }
 }
