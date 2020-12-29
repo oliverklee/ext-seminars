@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\System\Typo3Version;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Resource\FilePathSanitizer;
 
@@ -3005,6 +3006,12 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
      */
     public function checkCurrency()
     {
+        /** @var ConnectionPool $pool */
+        $pool = GeneralUtility::makeInstance(ConnectionPool::class);
+        $connection = $pool->getConnectionForTable('static_currencies');
+        $result = $connection->select(['cu_iso_3'], 'static_currencies')->fetchAll();
+        $allowedValues = array_column($result, 'cu_iso_3');
+
         $this->checkIfSingleInSetNotEmpty(
             'currency',
             false,
@@ -3012,7 +3019,7 @@ class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
             'The specified currency setting is either empty or not a valid ' .
             'ISO 4217 alpha 3 code. Please correct the value of <strong>' .
             $this->getTSSetupPath() . 'currency</strong>.',
-            \Tx_Oelib_Db::selectColumnForMultiple('cu_iso_3', 'static_currencies')
+            $allowedValues
         );
     }
 
