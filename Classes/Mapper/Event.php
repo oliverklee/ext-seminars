@@ -112,21 +112,35 @@ class Tx_Seminars_Mapper_Event extends \Tx_Oelib_DataMapper
      */
     public function findNextUpcoming(): \Tx_Seminars_Model_Event
     {
-        $whereClause = $this->getUniversalWhereClause(
-        ) . ' AND cancelled <> ' . \Tx_Seminars_Model_Event::STATUS_CANCELED .
-            ' AND object_type <> ' . \Tx_Seminars_Model_Event::TYPE_TOPIC . ' AND begin_date > ' . $GLOBALS['SIM_ACCESS_TIME'];
+        $columns = explode(',', $this->columns);
+        $queryBuilder = $this->getQueryBuilderForTable($this->tableName);
+        foreach ($columns as $column) {
+            $queryBuilder->addSelect($column);
+        }
+        $row = $queryBuilder
+            ->from($this->tableName)
+            ->where(
+                $queryBuilder->expr()->neq(
+                    'cancelled',
+                    $queryBuilder->createNamedParameter(\Tx_Seminars_Model_Event::STATUS_CANCELED, \PDO::PARAM_INT)
+                ),
+                $queryBuilder->expr()->neq(
+                    'object_type',
+                    $queryBuilder->createNamedParameter(\Tx_Seminars_Model_Event::TYPE_TOPIC, \PDO::PARAM_INT)
+                ),
+                $queryBuilder->expr()->gt(
+                    'begin_date',
+                    $queryBuilder->createNamedParameter($GLOBALS['SIM_ACCESS_TIME'], \PDO::PARAM_INT)
+                )
+            )
+            ->orderBy('begin_date')
+            ->execute()
+            ->fetch();
 
-        try {
-            $row = \Tx_Oelib_Db::selectSingle(
-                $this->columns,
-                $this->tableName,
-                $whereClause,
-                '',
-                'begin_date ASC'
-            );
-        } catch (\Tx_Oelib_Exception_EmptyQueryResult $exception) {
+        if ($row === false) {
             throw new \Tx_Oelib_Exception_NotFound('Not found.', 1574004668);
         }
+
         /** @var \Tx_Seminars_Model_Event $next */
         $next = $this->getModel($row);
 
