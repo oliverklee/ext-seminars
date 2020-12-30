@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\BagBuilder;
 use OliverKlee\Seminars\Bag\AbstractBag;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Page\PageRepository;
 
@@ -295,6 +296,11 @@ abstract class AbstractBagBuilder
     public function showHiddenRecords()
     {
         $this->showHiddenRecords = true;
+    }
+
+    protected function getQueryBuilderForTable(string $table): QueryBuilder
+    {
+        return $this->getConnectionPool()->getQueryBuilderForTable($table);
     }
 
     protected function getConnectionForTable(string $table): Connection
