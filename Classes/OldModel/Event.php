@@ -389,27 +389,10 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             return [];
         }
 
-        $countries = [];
-
-        $countryData = \Tx_Oelib_Db::selectMultiple(
-            'country',
-            'tx_seminars_sites LEFT JOIN ' .
-            'tx_seminars_seminars_place_mm ON tx_seminars_sites' .
-            '.uid = tx_seminars_seminars_place_mm.uid_foreign' .
-            ' LEFT JOIN tx_seminars_seminars ON ' .
-            'tx_seminars_seminars_place_mm.uid_local = ' .
-            'tx_seminars_seminars.uid',
-            'tx_seminars_seminars.uid = ' . $this->getUid() .
-            ' AND tx_seminars_sites.country <> ""' .
-            \Tx_Oelib_Db::enableFields('tx_seminars_sites'),
-            'country'
-        );
-
-        foreach ($countryData as $country) {
-            $countries[] = $country['country'];
-        }
-
-        return $countries;
+        $countries = array_column($this->getPlacesAsArray(), 'country');
+        return array_filter($countries, static function (string $country): bool {
+            return $country !== '';
+        });
     }
 
     /**
@@ -490,23 +473,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function getCitiesFromPlaces(): array
     {
-        $cities = [];
-
-        // fetch the city name from the corresponding place records
-        $cityData = \Tx_Oelib_Db::selectMultiple(
-            'city',
-            'tx_seminars_sites LEFT JOIN tx_seminars_seminars_place_mm' .
-            ' ON tx_seminars_sites.uid = ' .
-            'tx_seminars_seminars_place_mm.uid_foreign',
-            'uid_local = ' . $this->getUid(),
-            'uid_foreign, city'
-        );
-
-        foreach ($cityData as $city) {
-            $cities[] = $city['city'];
-        }
-
-        return $cities;
+        return array_column($this->getPlacesAsArray(), 'city');
     }
 
     /**
@@ -593,14 +560,29 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      */
     protected function getPlacesAsArray(): array
     {
-        return \Tx_Oelib_Db::selectMultiple(
-            'title, address, zip, city, country, homepage, directions',
-            'tx_seminars_sites, tx_seminars_seminars_place_mm',
-            'uid_local = ' . $this->getUid() . ' AND uid = uid_foreign' .
-            \Tx_Oelib_Db::enableFields('tx_seminars_sites'),
-            '',
-            'sorting ASC'
-        );
+        $queryBuilder = self::getQueryBuilderForTable('tx_seminars_sites');
+
+        return $queryBuilder
+            ->select('uid', 'title', 'address', 'zip', 'city', 'country', 'homepage', 'directions')
+            ->from('tx_seminars_sites')
+            ->leftJoin(
+                'tx_seminars_sites',
+                'tx_seminars_seminars_place_mm',
+                'mm',
+                $queryBuilder->expr()->eq(
+                    'tx_seminars_sites.uid',
+                    $queryBuilder->quoteIdentifier('mm.uid_foreign')
+                )
+            )
+            ->where(
+                $queryBuilder->expr()->eq(
+                    'mm.uid_local',
+                    $queryBuilder->createNamedParameter($this->getUid(), \PDO::PARAM_INT)
+                )
+            )
+            ->orderBy('mm.sorting')
+            ->execute()
+            ->fetchAll();
     }
 
     /**
@@ -618,19 +600,9 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             return $this->translate('message_willBeAnnounced');
         }
 
-        $result = [];
+        $places = $this->getPlacesAsArray();
 
-        $places = \Tx_Oelib_Db::selectMultiple(
-            'title',
-            'tx_seminars_sites, tx_seminars_seminars_place_mm',
-            'uid_local = ' . $this->getUid() . ' AND uid = uid_foreign' .
-            \Tx_Oelib_Db::enableFields('tx_seminars_sites')
-        );
-        foreach ($places as $place) {
-            $result[] = $place['title'];
-        }
-
-        return implode(', ', $result);
+        return implode(', ', array_column($places, 'title'));
     }
 
     /**
@@ -1401,25 +1373,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             return [];
         }
 
-        $rows = \Tx_Oelib_Db::selectMultiple(
-            'title',
-            'tx_seminars_payment_methods, tx_seminars_seminars_payment_methods_mm',
-            'tx_seminars_payment_methods.uid = ' .
-            'tx_seminars_seminars_payment_methods_mm.uid_foreign ' .
-            'AND tx_seminars_seminars_payment_methods_mm.uid_local = ' .
-            $this->getTopicOrSelfUid() .
-            \Tx_Oelib_Db::enableFields('tx_seminars_payment_methods'),
-            '',
-            'tx_seminars_seminars_payment_methods_mm.sorting'
-        );
-
-        $result = [];
-
-        foreach ($rows as $row) {
-            $result[] = $row['title'];
-        }
-
-        return $result;
+        return array_column($this->getPaymentMethodsAsArray(), 'title');
     }
 
     /**
@@ -1434,23 +1388,11 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             return '';
         }
 
-        $rows = \Tx_Oelib_Db::selectMultiple(
-            'title, description',
-            'tx_seminars_payment_methods, tx_seminars_seminars_payment_methods_mm',
-            'tx_seminars_payment_methods.uid = ' .
-            'tx_seminars_seminars_payment_methods_mm.uid_foreign ' .
-            'AND tx_seminars_seminars_payment_methods_mm.uid_local = ' .
-            $this->getTopicOrSelfUid() .
-            \Tx_Oelib_Db::enableFields('tx_seminars_payment_methods'),
-            '',
-            'tx_seminars_seminars_payment_methods_mm.sorting'
-        );
-
         $result = '';
 
-        foreach ($rows as $row) {
-            $result .= $row['title'] . ': ';
-            $result .= $row['description'] . LF . LF;
+        foreach ($this->getPaymentMethodsAsArray() as $paymentMethod) {
+            $result .= $paymentMethod['title'] . ': ';
+            $result .= $paymentMethod['description'] . LF . LF;
         }
 
         return $result;
@@ -4401,12 +4343,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             return new \Tx_Oelib_List();
         }
 
-        $places = \Tx_Oelib_Db::selectMultiple(
-            'uid, title, address, zip, city, country, homepage, directions',
-            'tx_seminars_sites, tx_seminars_seminars_place_mm',
-            'uid_local = ' . $this->getUid() . ' AND uid = uid_foreign' .
-            \Tx_Oelib_Db::enableFields('tx_seminars_sites')
-        );
+        $places = $this->getPlacesAsArray();
 
         /** @var \Tx_Seminars_Mapper_Place $mapper */
         $mapper = GeneralUtility::makeInstance(\Tx_Seminars_Mapper_Place::class);
@@ -4570,5 +4507,51 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     public function isPublished(): bool
     {
         return !$this->hasRecordPropertyString('publication_hash');
+    }
+
+    private function getPaymentMethodsAsArray(): array
+    {
+        return $this->getAssociationAsArray(
+            'tx_seminars_payment_methods',
+            'tx_seminars_seminars_payment_methods_mm',
+            ['title', 'description']
+        );
+    }
+
+    /**
+     * @param string $foreignTableName
+     * @param string $mmTableName
+     * @param string[] $foreignFields
+     *
+     * @return array
+     */
+    private function getAssociationAsArray(string $foreignTableName, string $mmTableName, array $foreignFields): array
+    {
+        $queryBuilder = self::getQueryBuilderForTable($foreignTableName);
+
+        foreach ($foreignFields as $foreignField) {
+            $queryBuilder->addSelect($foreignField);
+        }
+
+        return $queryBuilder
+            ->from($foreignTableName)
+            ->join(
+                $foreignTableName,
+                $mmTableName,
+                'mm',
+                $queryBuilder->expr()->eq(
+                    $foreignTableName . '.uid',
+                    $queryBuilder->quoteIdentifier('mm.uid_foreign')
+                )
+            )
+            ->where(
+                $queryBuilder->expr()->eq(
+                    'mm.uid_local',
+                    $queryBuilder->createNamedParameter($this->getTopicOrSelfUid(), \PDO::PARAM_INT)
+                )
+            )
+            ->orderBy('mm.sorting')
+            ->execute()
+            ->fetchAll();
     }
 }
