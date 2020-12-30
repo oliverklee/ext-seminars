@@ -8,6 +8,7 @@ use OliverKlee\Seminars\Bag\AbstractBag;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\Page\PageRepository;
 
 /**
  * This builder class creates customized bag objects.
@@ -64,6 +65,11 @@ abstract class AbstractBagBuilder
     protected $showHiddenRecords = false;
 
     /**
+     * @var PageRepository
+     */
+    protected $pageRepository = null;
+
+    /**
      * The constructor. Checks that $this->tableName is not empty.
      */
     public function __construct()
@@ -71,6 +77,8 @@ abstract class AbstractBagBuilder
         if ($this->tableName === '') {
             throw new \RuntimeException('The attribute $this->tableName must not be empty.', 1333292618);
         }
+
+        $this->pageRepository = GeneralUtility::makeInstance(PageRepository::class);
     }
 
     /**

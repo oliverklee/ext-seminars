@@ -183,6 +183,6 @@ class Tx_Seminars_BagBuilder_Registration extends AbstractBagBuilder
         $this->whereClauseParts['existingUsers'] = 'EXISTS (
             SELECT * FROM fe_users WHERE ' .
             ' fe_users.uid = tx_seminars_attendances.user' .
-            \Tx_Oelib_Db::enableFields('fe_users') . ')';
+            $this->pageRepository->enableFields('fe_users') . ')';
     }
 }
