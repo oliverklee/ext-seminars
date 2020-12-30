@@ -96,11 +96,17 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
             return;
         }
 
-        $directMatchUids = \Tx_Oelib_Db::selectColumnForMultiple(
-            'uid_local',
-            'tx_seminars_seminars_categories_mm',
-            'uid_foreign IN(' . $categoryUids . ')'
-        );
+        $queryBuilder = $this->getQueryBuilderForTable('tx_seminars_seminars_categories_mm');
+        $result = $queryBuilder
+           ->select('uid_local')
+           ->from('tx_seminars_seminars_categories_mm')
+           ->where(
+               $queryBuilder->expr()->in('uid_foreign', $categoryUids)
+           )
+           ->execute()
+           ->fetchAll();
+        $directMatchUids = array_column($result, 'uid_local');
+
         if (empty($directMatchUids)) {
             $this->whereClauseParts['categories'] = '(1 = 0)';
             return;
@@ -777,14 +783,18 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      */
     private function getSearchWherePartForEventTopics(string $quotedSearchWord): array
     {
-        $where = [];
-        $where[] = 'MATCH (title, subtitle, description) AGAINST (' . $quotedSearchWord . ' IN BOOLEAN MODE)';
+        $queryBuilder = $this->getQueryBuilderForTable('tx_seminars_seminars');
+        $result = $queryBuilder
+           ->select('uid')
+           ->from('tx_seminars_seminars')
+           ->where(
+               'MATCH (title, subtitle, description) AGAINST (' . $quotedSearchWord . ' IN BOOLEAN MODE)'
+           )
+           ->execute()
+           ->fetchAll();
 
-        $matchingUids = \Tx_Oelib_Db::selectColumnForMultiple(
-            'uid',
-            'tx_seminars_seminars',
-            '(' . \implode(' OR ', $where) . ')' . \Tx_Oelib_Db::enableFields('tx_seminars_seminars')
-        );
+        $matchingUids = array_column($result, 'uid');
+
         if (empty($matchingUids)) {
             return [];
         }
@@ -901,25 +911,37 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
     ): array {
         $this->checkParametersForMmSearchFunctions($quotedSearchWord, $searchFieldKey, $foreignTable, $mmTable);
 
-        $matchQueryPart = 'MATCH (' . \implode(
-            ',',
-            self::$searchFieldList[$searchFieldKey]
-        ) . ') AGAINST (' . $quotedSearchWord
-            . ' IN BOOLEAN MODE)';
-        $foreignUids = \Tx_Oelib_Db::selectColumnForMultiple(
-            'uid',
-            $foreignTable,
-            $matchQueryPart . \Tx_Oelib_Db::enableFields($foreignTable)
+        $matchQueryPart = sprintf(
+            'MATCH (%s) AGAINST (%s IN BOOLEAN MODE)',
+            \implode(',', self::$searchFieldList[$searchFieldKey]),
+            $quotedSearchWord
         );
+
+        $queryBuilder = $this->getQueryBuilderForTable($foreignTable);
+        $result = $queryBuilder
+           ->select('uid')
+           ->from($foreignTable)
+           ->where($matchQueryPart)
+           ->execute()
+           ->fetchAll();
+
+        $foreignUids = array_column($result, 'uid');
+
         if (empty($foreignUids)) {
             return [];
         }
 
-        $localUids = \Tx_Oelib_Db::selectColumnForMultiple(
-            'uid_local',
-            $mmTable,
-            'uid_foreign IN (' . \implode(',', $foreignUids) . ')'
-        );
+        $queryBuilder = $this->getQueryBuilderForTable($mmTable);
+        $result = $queryBuilder
+           ->select('uid_local')
+           ->from($mmTable)
+           ->where(
+               $queryBuilder->expr()->in('uid_foreign', $foreignUids)
+           )
+           ->execute()
+           ->fetchAll();
+        $localUids = array_column($result, 'uid_local');
+
         if (empty($localUids)) {
             return [];
         }
@@ -1101,7 +1123,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
     {
         $seats = '(SELECT COALESCE(SUM(seats),0) FROM tx_seminars_attendances ' .
             'WHERE seminar = tx_seminars_seminars.uid' .
-            \Tx_Oelib_Db::enableFields('tx_seminars_attendances') . ')';
+            $this->pageRepository->enableFields('tx_seminars_attendances') . ')';
         $hasVacancies = '(attendees_max > (' . $seats . ' + offline_attendees))';
 
         $this->whereClauseParts['eventsWithVacancies'] =
@@ -1126,14 +1148,18 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
         if ($organizerUids === '') {
             return;
         }
-        $eventUids = \implode(
-            ',',
-            \Tx_Oelib_Db::selectColumnForMultiple(
-                'uid_local',
-                'tx_seminars_seminars_organizers_mm',
-                'uid_foreign IN (' . $organizerUids . ')'
-            )
-        );
+        $table = 'tx_seminars_seminars_organizers_mm';
+        $queryBuilder = $this->getQueryBuilderForTable($table);
+        $result = $queryBuilder
+           ->select('uid_local')
+           ->from($table)
+           ->where(
+               $queryBuilder->expr()->in('uid_foreign', $organizerUids)
+           )
+           ->execute()
+           ->fetchAll();
+
+        $eventUids = implode(',', array_column($result, 'uid_local'));
 
         if ($eventUids === '') {
             $this->whereClauseParts['eventsWithOrganizers'] = '(0 = 1)';
@@ -1164,33 +1190,72 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
             return;
         }
 
-        $matchingTargetGroups = \implode(
-            ',',
-            \Tx_Oelib_Db::selectColumnForMultiple(
-                'uid',
-                'tx_seminars_target_groups',
-                '(minimum_age <= ' . $age . ' AND (maximum_age = 0 OR maximum_age >= ' .
-                $age . '))'
-            )
-        );
+        $table = 'tx_seminars_target_groups';
+        $queryBuilder = $this->getQueryBuilderForTable($table);
+        $result = $queryBuilder
+           ->select('uid')
+           ->from($table)
+           ->where(
+               $queryBuilder->expr()->lte(
+                   'minimum_age',
+                   $queryBuilder->createNamedParameter($age, \PDO::PARAM_INT)
+               ),
+               $queryBuilder->expr()->orX(
+                   $queryBuilder->expr()->eq(
+                       'maximum_age',
+                       $queryBuilder->createNamedParameter(0, \PDO::PARAM_INT)
+                   ),
+                   $queryBuilder->expr()->gte(
+                       'maximum_age',
+                       $queryBuilder->createNamedParameter($age, \PDO::PARAM_INT)
+                   )
+               )
+           )
+           ->execute()
+           ->fetchAll();
 
-        $eventsWithoutTargetGroup = \Tx_Oelib_Db::selectColumnForMultiple(
-            'uid',
-            'tx_seminars_seminars',
-            '(object_type = ' . \Tx_Seminars_Model_Event::TYPE_COMPLETE . ' OR ' .
-            'object_type = ' . \Tx_Seminars_Model_Event::TYPE_TOPIC . ') AND ' .
-            '(target_groups = 0)' .
-            \Tx_Oelib_Db::enableFields('tx_seminars_seminars')
-        );
+        $matchingTargetGroups = implode(',', array_column($result, 'uid'));
+
+        $table = 'tx_seminars_seminars';
+        $queryBuilder = $this->getQueryBuilderForTable($table);
+        $result = $queryBuilder
+           ->select('uid')
+           ->from($table)
+           ->where(
+               $queryBuilder->expr()->orX(
+                   $queryBuilder->expr()->eq(
+                       'object_type',
+                       $queryBuilder->createNamedParameter(\Tx_Seminars_Model_Event::TYPE_COMPLETE, \PDO::PARAM_INT)
+                   ),
+                   $queryBuilder->expr()->eq(
+                       'object_type',
+                       $queryBuilder->createNamedParameter(\Tx_Seminars_Model_Event::TYPE_TOPIC, \PDO::PARAM_INT)
+                   )
+               ),
+               $queryBuilder->expr()->eq(
+                   'target_groups',
+                   $queryBuilder->createNamedParameter(0, \PDO::PARAM_INT)
+               )
+           )
+           ->execute()
+           ->fetchAll();
+
+        $eventsWithoutTargetGroup = array_column($result, 'uid');
+
         if ($matchingTargetGroups !== '') {
-            $eventsWithMatchingTargetGroup
-                = \Tx_Oelib_Db::selectColumnForMultiple(
-                    'uid_local',
-                    'tx_seminars_seminars_target_groups_mm',
-                    'uid_foreign IN (' . $matchingTargetGroups . ')',
-                    'uid_local'
-                );
+            $table = 'tx_seminars_seminars_target_groups_mm';
+            $queryBuilder = $this->getQueryBuilderForTable($table);
+            $result = $queryBuilder
+                ->select('uid_local')
+                ->from($table)
+                ->where(
+                    $queryBuilder->expr()->in('uid_foreign', $matchingTargetGroups)
+                )
+                ->groupBy('uid_local')
+                ->execute()
+                ->fetchAll();
 
+            $eventsWithMatchingTargetGroup = array_column($result, 'uid_local');
             $matchingEventsUids = \array_merge($eventsWithMatchingTargetGroup, $eventsWithoutTargetGroup);
         } else {
             $matchingEventsUids = $eventsWithoutTargetGroup;
@@ -1246,16 +1311,17 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
             'OR ' .
             \sprintf($notZeroAndInRange, 'price_regular_board', $maximumPrice) . ' OR ' .
             \sprintf($notZeroAndInRange, 'price_special_board', $maximumPrice) .
-            ')' . \Tx_Oelib_Db::enableFields('tx_seminars_seminars');
+            ')';
 
-        $foundUids = \implode(
-            ',',
-            \Tx_Oelib_Db::selectColumnForMultiple(
-                'uid',
-                'tx_seminars_seminars',
-                $whereClause
-            )
-        );
+        $table = 'tx_seminars_seminars';
+        $queryBuilder = $this->getQueryBuilderForTable($table);
+        $result = $queryBuilder
+           ->select('uid')
+           ->from($table)
+           ->where($whereClause)
+           ->execute()
+           ->fetchAll();
+        $foundUids = implode(',', array_column($result, 'uid'));
 
         if ($foundUids === '') {
             $this->whereClauseParts['maximumPrice'] = '(0 = 1)';
@@ -1299,17 +1365,18 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
             'OR price_special_early >= ' . $minimumPrice . ') ' .
             ')) ' .
             'OR price_regular_board >= ' . $minimumPrice . ' ' .
-            'OR price_special_board >= ' . $minimumPrice . ') ' .
-            \Tx_Oelib_Db::enableFields('tx_seminars_seminars');
+            'OR price_special_board >= ' . $minimumPrice . ') ';
 
-        $foundUids = \implode(
-            ',',
-            \Tx_Oelib_Db::selectColumnForMultiple(
-                'uid',
-                'tx_seminars_seminars',
-                $whereClause
-            )
-        );
+        $table = 'tx_seminars_seminars';
+        $queryBuilder = $this->getQueryBuilderForTable($table);
+        $result = $queryBuilder
+           ->select('uid')
+           ->from($table)
+           ->where($whereClause)
+           ->execute()
+           ->fetchAll();
+
+        $foundUids = implode(',', array_column($result, 'uid'));
 
         if ($foundUids === '') {
             $this->whereClauseParts['maximumPrice'] = '(0 = 1)';
