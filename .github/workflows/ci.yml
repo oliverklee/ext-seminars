@@ -21,6 +21,7 @@ jobs:
         with:
           php-version: "${{ matrix.php-version }}"
           tools: composer:v2
+          coverage: none
       - name: "Run PHP lint"
         run: "composer ci:php:lint"
     strategy:
@@ -44,6 +45,7 @@ jobs:
           php-version: "${{ matrix.php-version }}"
           tools: composer:v2
           extensions: zip
+          coverage: none
       - name: "Show Composer version"
         run: composer --version
       - name: "Cache dependencies installed with composer"
@@ -77,6 +79,7 @@ jobs:
           php-version: "${{ matrix.php-version }}"
           tools: composer:v2
           extensions: dom, json, libxml, zip
+          coverage: none
       - name: "Show Composer version"
         run: composer --version
       - name: "Cache dependencies installed with composer"
@@ -125,6 +128,7 @@ jobs:
           php-version: "${{ matrix.php-version }}"
           tools: composer:v2
           extensions: dom, json, libxml, mysqli, zip
+          coverage: none
       - name: "Show Composer version"
         run: composer --version
       - name: "Cache dependencies installed with composer"
@@ -194,6 +198,7 @@ jobs:
           php-version: "${{ matrix.php-version }}"
           tools: composer:v2
           extensions: dom, json, libxml, mysqli, zip
+          coverage: none
       - name: "Show Composer version"
         run: composer --version
       - name: "Cache dependencies installed with composer"

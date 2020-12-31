@@ -32,6 +32,7 @@ jobs:
         with:
           php-version: ${{ matrix.php-versions }}
           extensions: intl, mbstring, xml, soap, zip, curl
+          coverage: none
 
       - name: Install TYPO3 TER client
         run: composer global require helhum/ter-client "^0.1.1" --prefer-dist --no-progress
