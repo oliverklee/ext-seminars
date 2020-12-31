@@ -53,7 +53,6 @@ jobs:
         with:
           key: "php${{ matrix.php-version }}-composer-${{ hashFiles('**/composer.json') }}"
           path: ~/.composer/cache
-          restore-keys: "php${{ matrix.php-version }}-composer-\n"
       - name: "Install Composer dependencies"
         run: "composer install --no-progress"
       - name: "Run command"
@@ -87,7 +86,6 @@ jobs:
         with:
           key: "php${{ matrix.php-version }}-composer-${{ hashFiles('**/composer.json') }}"
           path: ~/.composer/cache
-          restore-keys: "php${{ matrix.php-version }}-composer-\n"
       - env:
           TYPO3: "${{ matrix.typo3-version }}"
         name: "Install TYPO3 Core"
@@ -136,7 +134,6 @@ jobs:
         with:
           key: "php${{ matrix.php-version }}-composer-${{ hashFiles('**/composer.json') }}"
           path: ~/.composer/cache
-          restore-keys: "php${{ matrix.php-version }}-composer-\n"
       - env:
           TYPO3: "${{ matrix.typo3-version }}"
         name: "Install TYPO3 Core"
@@ -206,7 +203,6 @@ jobs:
         with:
           key: "php${{ matrix.php-version }}-composer-${{ hashFiles('**/composer.json') }}"
           path: ~/.composer/cache
-          restore-keys: "php${{ matrix.php-version }}-composer-\n"
       - env:
           TYPO3: "${{ matrix.typo3-version }}"
         name: "Install TYPO3 Core"
