@@ -121,8 +121,7 @@ class RegistrationDigestTest extends TestCase
         $this->configuration->setAsBoolean('enable', false);
 
         $events = new \Tx_Oelib_List();
-        /** @var \Tx_Seminars_Model_Event|ProphecySubjectInterface $event */
-        $event = $this->prophesize(\Tx_Seminars_Model_Event::class)->reveal();
+        $event = new \Tx_Seminars_Model_Event();
         $events->add($event);
         $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
 
@@ -291,17 +290,14 @@ class RegistrationDigestTest extends TestCase
         $this->configuration->setAsBoolean('enable', true);
 
         $events = new \Tx_Oelib_List();
-        /** @var \Tx_Seminars_Model_Event|ObjectProphecy $eventProphecy */
-        $eventProphecy = $this->prophesize(\Tx_Seminars_Model_Event::class);
-        /** @var \Tx_Seminars_Model_Event|ProphecySubjectInterface $event */
-        $event = $eventProphecy->reveal();
+        $event = new \Tx_Seminars_Model_Event();
         $events->add($event);
         $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
         $this->eventMapperProphecy->save($event)->shouldBeCalled();
 
         $this->subject->execute();
 
-        $eventProphecy->setDateOfLastRegistrationDigestEmailAsUnixTimeStamp($this->now)->shouldHaveBeenCalled();
+        self::assertSame($this->now, $event->getDateOfLastRegistrationDigestEmailAsUnixTimeStamp());
     }
 
     /**
