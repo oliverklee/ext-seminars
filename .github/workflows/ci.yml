@@ -198,11 +198,11 @@ jobs:
           coverage: none
       - name: "Show Composer version"
         run: composer --version
-      - name: "Cache dependencies installed with composer"
-        uses: actions/cache@v1
-        with:
-          key: "php${{ matrix.php-version }}-composer-${{ hashFiles('**/composer.json') }}"
-          path: ~/.composer/cache
+#      - name: "Cache dependencies installed with composer"
+#        uses: actions/cache@v1
+#        with:
+#          key: "php${{ matrix.php-version }}-composer-${{ hashFiles('**/composer.json') }}"
+#          path: ~/.composer/cache
       - env:
           TYPO3: "${{ matrix.typo3-version }}"
         name: "Install TYPO3 Core"
