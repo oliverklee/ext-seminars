@@ -4,8 +4,15 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Bag;
 
+use Doctrine\DBAL\FetchMode;
+use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Seminars\OldModel\AbstractModel;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Database\Query\Restriction\EndTimeRestriction;
+use TYPO3\CMS\Core\Database\Query\Restriction\HiddenRestriction;
+use TYPO3\CMS\Core\Database\Query\Restriction\StartTimeRestriction;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\Page\PageRepository;
 
 /**
  * This aggregate class holds a bunch of objects that are created from
@@ -64,6 +71,11 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
     /**
      * @var bool
      */
+    private $showHiddenRecords = false;
+
+    /**
+     * @var bool
+     */
     private $queryHasBeenExecuted = false;
 
     /**
@@ -85,6 +97,11 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
      * @var bool whether $this->$countWithoutLimit has been calculated
      */
     private $hasCountWithoutLimit = false;
+
+    /**
+     * @var PageRepository
+     */
+    protected $pageRepository = null;
 
     /**
      * Creates a bag that contains test records and allows to iterate over them.
@@ -111,19 +128,20 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
         $limit = '',
         int $showHiddenRecords = -1
     ) {
-        $this->allTableNames = static::$tableName
-            . (!empty($additionalTableNames) ? ', ' . $additionalTableNames : '');
+        $this->pageRepository = GeneralUtility::makeInstance(PageRepository::class);
+        $this->allTableNames = static::$tableName . (!empty($additionalTableNames) ? ', ' . $additionalTableNames : '');
         $this->queryParameters = \trim($queryParameters);
         $this->createEnabledFieldsQuery($showHiddenRecords);
 
         $this->orderBy = $orderBy;
         $this->groupBy = $groupBy;
         $this->limit = $limit;
+        $this->showHiddenRecords = $showHiddenRecords > 0;
     }
 
     /**
      * For the main DB table and the additional tables, writes the corresponding
-     * concatenated output from \Tx_Oelib_Db::enableFields into
+     * concatenated output from $this->enableFields into
      * $this->enabledFieldsQuery.
      *
      * @param int $showHiddenRecords If $showHiddenRecords is set (0/1), any hidden-fields in records are ignored.
@@ -135,11 +153,49 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
         $query = '';
         foreach (GeneralUtility::trimExplode(',', $this->allTableNames, true) as $table) {
             if (isset($GLOBALS['TCA'][$table])) {
-                $query .= \Tx_Oelib_Db::enableFields($table, $showHiddenRecords);
+                $query .= $this->enableFields($table, $showHiddenRecords);
             }
         }
 
         $this->enabledFieldsQuery = $query;
+    }
+
+    /**
+     * Wrapper function for PageRepository::enableFields()
+     *
+     * Returns a part of a WHERE clause which will filter out records with
+     * start/end times or deleted/hidden/fe_groups fields set to values that
+     * should de-select them according to the current time, preview settings or
+     * user login.
+     * Is using the $TCA arrays "ctrl" part where the key "enablefields"
+     * determines for each table which of these features applies to that table.
+     *
+     * @param string $table
+     *        table name found in the $TCA array
+     * @param int $showHidden
+     *        If $showHidden is set (0/1), any hidden-fields in records are ignored.
+     *        NOTICE: If you call this function, consider what to do with the show_hidden parameter.
+     *        Maybe it should be set? See ContentObjectRenderer->enableFields
+     *        where it's implemented correctly.
+     *
+     * @return string the WHERE clause starting like " AND ...=... AND ...=..."
+     */
+    public function enableFields(string $table, int $showHidden = -1): string
+    {
+        if (!in_array($showHidden, [-1, 0, 1], true)) {
+            throw new \InvalidArgumentException(
+                '$showHidden may only be -1, 0 or 1, but actually is ' . $showHidden,
+                1331319963
+            );
+        }
+
+        if ($showHidden > 0) {
+            $enrichedIgnores = ['starttime' => true, 'endtime' => true, 'fe_group' => true];
+        } else {
+            $enrichedIgnores = [];
+        }
+
+        return $this->pageRepository->enableFields($table, $showHidden, $enrichedIgnores);
     }
 
     /**
@@ -164,14 +220,16 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
             return;
         }
 
-        $this->queryResult = \Tx_Oelib_Db::selectMultiple(
-            static::$tableName . '.*',
-            $this->allTableNames,
-            $this->queryParameters . $this->enabledFieldsQuery,
-            $this->groupBy,
-            $this->orderBy,
-            $this->limit
-        );
+        $where = $this->queryParameters . $this->enabledFieldsQuery;
+
+        $sql = 'SELECT ' . static::$tableName . '.* FROM ' . $this->allTableNames;
+        $sql .= $where !== '' ? ' WHERE ' . $where : '';
+        $sql .= $this->groupBy !== '' ? ' GROUP BY ' . $this->groupBy : '';
+        $sql .= $this->orderBy !== '' ? ' ORDER BY ' . $this->orderBy : '';
+        $sql .= $this->limit !== '' ? ' LIMIT ' . $this->limit : '';
+
+        $this->queryResult = $this->getConnectionPool()->getConnectionForTable($this->allTableNames)->query($sql)->fetchAll();
+
         $this->queryHasBeenExecuted = true;
     }
 
@@ -248,7 +306,29 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
             return $this->countWithoutLimit;
         }
 
-        $count = \Tx_Oelib_Db::count($this->allTableNames, $this->queryParameters . $this->enabledFieldsQuery);
+        $queryBuilder = $this->getConnectionPool()->getQueryBuilderForTable($this->allTableNames);
+        if ($this->showHiddenRecords) {
+            $queryBuilder
+                ->getRestrictions()
+                ->removeByType(HiddenRestriction::class)
+                ->removeByType(StartTimeRestriction::class)
+                ->removeByType(EndTimeRestriction::class);
+        }
+
+        foreach (preg_split('/,\\s*/', $this->allTableNames) as $tableName) {
+            $queryBuilder->from($tableName);
+        }
+
+        if (Typo3Version::isNotHigherThan(8)) {
+            $count = \Tx_Oelib_Db::count($this->allTableNames, $this->queryParameters . $this->enabledFieldsQuery);
+        } else {
+            $count = $queryBuilder
+               ->count('*')
+               ->where($this->queryParameters)
+               ->execute()
+               ->fetch(FetchMode::COLUMN);
+        }
+
         $this->countWithoutLimit = $count;
         $this->hasCountWithoutLimit = true;
 
@@ -309,5 +389,10 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
     public function getTypoScriptNamespace(): string
     {
         return 'plugin.tx_seminars.';
+    }
+
+    private function getConnectionPool(): ConnectionPool
+    {
+        return GeneralUtility::makeInstance(ConnectionPool::class);
     }
 }
