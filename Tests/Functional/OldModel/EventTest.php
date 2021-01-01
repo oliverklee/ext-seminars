@@ -6,6 +6,9 @@ namespace OliverKlee\Seminars\Tests\Functional\OldModel;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
+use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
 /**
  * Test case.
@@ -27,6 +30,35 @@ final class EventTest extends FunctionalTestCase
      * @var string[]
      */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
+
+    /**
+     * @var string[]
+     */
+    protected $additionalFoldersToCreate = ['uploads/tx_seminars'];
+
+    /**
+     * @var string[]
+     */
+    private $filesToDelete = [];
+
+    /**
+     * @var AbstractPlugin|null
+     */
+    private $plugin = null;
+
+    protected function tearDown()
+    {
+        foreach ($this->filesToDelete as $file) {
+            \unlink($this->getInstancePath() . '/' . $file);
+        }
+    }
+
+    private function buildPlugin()
+    {
+        $plugin = new AbstractPlugin();
+        $plugin->cObj = new ContentObjectRenderer();
+        $this->plugin = $plugin;
+    }
 
     /**
      * @test
@@ -456,5 +488,200 @@ final class EventTest extends FunctionalTestCase
 
         $expected = ['Target group one'];
         self::assertSame($expected, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getAttachedFilesForOneFileReturnsOneElement()
+    {
+        $this->buildPlugin();
+
+        $fileName = 'test.txt';
+        $subject = \Tx_Seminars_OldModel_Event::fromData(['attached_files' => $fileName]);
+
+        $result = $subject->getAttachedFiles($this->plugin);
+
+        self::assertCount(1, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getAttachedFilesForTwoFilesReturnsTwoElements()
+    {
+        $this->buildPlugin();
+
+        $fileName = 'test.txt,test2.txt';
+        $subject = \Tx_Seminars_OldModel_Event::fromData(['attached_files' => $fileName]);
+
+        $result = $subject->getAttachedFiles($this->plugin);
+
+        self::assertCount(2, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getAttachedFilesReturnsFileName()
+    {
+        $this->buildPlugin();
+
+        $fileName = 'test.txt';
+        $subject = \Tx_Seminars_OldModel_Event::fromData(['attached_files' => $fileName]);
+
+        $result = $subject->getAttachedFiles($this->plugin);
+
+        self::assertContains('uploads/tx_seminars/' . $fileName, $result[0]['name']);
+    }
+
+    /**
+     * @test
+     */
+    public function getAttachedFilesReturnsSize()
+    {
+        $this->buildPlugin();
+
+        $fileName = 'test.txt';
+        $this->filesToDelete[] = $fileName;
+        \file_put_contents($this->getInstancePath() . '/uploads/tx_seminars/' . $fileName, 'Hello!');
+        $subject = \Tx_Seminars_OldModel_Event::fromData(['attached_files' => $fileName]);
+
+        $result = $subject->getAttachedFiles($this->plugin);
+
+        self::assertSame(GeneralUtility::formatSize(6), $result[0]['size']);
+    }
+
+    /**
+     * @test
+     */
+    public function getAttachedFilesReturnsTypeBySuffix()
+    {
+        $this->buildPlugin();
+
+        $fileName = 'test.txt';
+        $subject = \Tx_Seminars_OldModel_Event::fromData(['attached_files' => $fileName]);
+
+        $result = $subject->getAttachedFiles($this->plugin);
+
+        self::assertSame('txt', $result[0]['type']);
+    }
+
+    /**
+     * @test
+     */
+    public function getAttachedFilesForDotAndSuffixOnlyReturnsTypeBySuffix()
+    {
+        $this->buildPlugin();
+
+        $fileName = '.txt';
+        $subject = \Tx_Seminars_OldModel_Event::fromData(['attached_files' => $fileName]);
+
+        $result = $subject->getAttachedFiles($this->plugin);
+
+        self::assertSame('txt', $result[0]['type']);
+    }
+
+    /**
+     * @test
+     */
+    public function getAttachedFilesForDotOnlyReturnsTypeNone()
+    {
+        $this->buildPlugin();
+
+        $fileName = '.';
+        $subject = \Tx_Seminars_OldModel_Event::fromData(['attached_files' => $fileName]);
+
+        $result = $subject->getAttachedFiles($this->plugin);
+
+        self::assertSame('none', $result[0]['type']);
+    }
+
+    /**
+     * @test
+     */
+    public function getAttachedFilesForFileWithoutSuffixReturnsTypeNone()
+    {
+        $this->buildPlugin();
+
+        $fileName = 'test';
+        $subject = \Tx_Seminars_OldModel_Event::fromData(['attached_files' => $fileName]);
+
+        $result = $subject->getAttachedFiles($this->plugin);
+
+        self::assertSame('none', $result[0]['type']);
+    }
+
+    /**
+     * @test
+     */
+    public function getAttachedFilesForDateWithFilesReturnsFilesFromDate()
+    {
+        $this->buildPlugin();
+
+        $fileName = 'test.txt';
+        $topic = \Tx_Seminars_OldModel_Event::fromData(['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]);
+        $date = \Tx_Seminars_OldModel_Event::fromData(
+            [
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'attached_files' => $fileName,
+            ]
+        );
+        $date->setTopic($topic);
+
+        $result = $date->getAttachedFiles($this->plugin);
+
+        self::assertContains('uploads/tx_seminars/' . $fileName, $result[0]['name']);
+    }
+
+    /**
+     * @test
+     */
+    public function getAttachedFilesForDateWithoutFilesAndTopicWithFilesReturnsFilesFromTopic()
+    {
+        $this->buildPlugin();
+
+        $fileName = 'test.txt';
+        $topic = \Tx_Seminars_OldModel_Event::fromData(
+            [
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'attached_files' => $fileName,
+            ]
+        );
+        $date = \Tx_Seminars_OldModel_Event::fromData(['object_type' => \Tx_Seminars_Model_Event::TYPE_DATE]);
+        $date->setTopic($topic);
+
+        $result = $date->getAttachedFiles($this->plugin);
+
+        self::assertContains('uploads/tx_seminars/' . $fileName, $result[0]['name']);
+    }
+
+    /**
+     * @test
+     */
+    public function getAttachedFilesForDateAndTopicWithFilesReturnsFilesFromDTopicAndDate()
+    {
+        $this->buildPlugin();
+
+        $topicFileName = 'test-topic.txt';
+        $topic = \Tx_Seminars_OldModel_Event::fromData(
+            [
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'attached_files' => $topicFileName,
+            ]
+        );
+        $dateFileName = 'test-date.txt';
+        $date = \Tx_Seminars_OldModel_Event::fromData(
+            [
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
+                'attached_files' => $dateFileName,
+            ]
+        );
+        $date->setTopic($topic);
+
+        $result = $date->getAttachedFiles($this->plugin);
+
+        self::assertContains($topicFileName, $result[0]['name']);
+        self::assertContains($dateFileName, $result[1]['name']);
     }
 }
