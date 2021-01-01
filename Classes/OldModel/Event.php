@@ -74,11 +74,11 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     private $topic = null;
 
     /**
-     * @return Tx_Seminars_OldModel_Event|null
+     * @return \Tx_Seminars_OldModel_Event|null
      */
     public function getTopic()
     {
-        if ($this->topic !== null) {
+        if ($this->topic instanceof \Tx_Seminars_OldModel_Event) {
             return $this->topic;
         }
         if (!$this->isEventDate()) {
@@ -87,7 +87,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         $topic = $this->loadTopic();
         // Avoid infinite loops due to date records that have been converted to a topic or single event.
-        if ($topic !== null && !$topic->isEventDate()) {
+        if ($topic instanceof \Tx_Seminars_OldModel_Event && !$topic->isEventDate()) {
             $this->setTopic($topic);
         }
 
@@ -390,9 +390,12 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         }
 
         $countries = array_column($this->getPlacesAsArray(), 'country');
-        return array_filter($countries, static function (string $country): bool {
-            return $country !== '';
-        });
+        return array_filter(
+            $countries,
+            static function (string $country): bool {
+                return $country !== '';
+            }
+        );
     }
 
     /**
@@ -2654,8 +2657,10 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return string an empty string if everything is OK, a localized error
      *                message otherwise
      */
-    public function canViewRegistrationsListMessage(string $whichPlugin, string $accessLevel = 'attendees_and_managers'): string
-    {
+    public function canViewRegistrationsListMessage(
+        string $whichPlugin,
+        string $accessLevel = 'attendees_and_managers'
+    ): string {
         if (!$this->needsRegistration()) {
             return $this->translate('message_noRegistrationNecessary');
         }
@@ -3984,16 +3989,12 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Returns whether this event has at least one attached file.
      *
-     * If this is an event date, this function will return TRUE if the date
+     * If this is an event date, this function will return true if the date
      * record or the topic record has at least one file.
-     *
-     * @return bool TRUE if this event has at least one attached file,
-     *                 FALSE otherwise
      */
     public function hasAttachedFiles(): bool
     {
-        return $this->hasRecordPropertyString('attached_files')
-            || $this->hasTopicString('attached_files');
+        return $this->hasRecordPropertyString('attached_files') || $this->hasTopicString('attached_files');
     }
 
     /**
@@ -4016,7 +4017,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @param AbstractPlugin $plugin an object for a live page
      *
-     * @return array[] an array of arrays with the elements "name" and
+     * @return array<array<string, string>> an array of arrays with the elements "name" and
      *               "size" of the attached file, will be empty if
      *               there are no attached files
      */
@@ -4027,38 +4028,26 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         }
 
         $topic = $this->getTopic();
-        if ($topic !== null) {
-            $filesFromTopic = $topic->getAttachedFiles($plugin);
-        } else {
-            $filesFromTopic = [];
-        }
+        $allFiles = $topic instanceof \Tx_Seminars_OldModel_Event ? $topic->getAttachedFiles($plugin) : [];
 
-        $result = $filesFromTopic;
         $uploadFolderPath = PATH_site . 'uploads/tx_seminars/';
-        $uploadFolderUrl = GeneralUtility::getIndpEnv('TYPO3_SITE_URL') .
-            'uploads/tx_seminars/';
-
-        $attachedFiles = GeneralUtility::trimExplode(
-            ',',
-            $this->getRecordPropertyString('attached_files'),
-            true
-        );
-
-        foreach ($attachedFiles as $attachedFile) {
+        $uploadFolderUrl = GeneralUtility::getIndpEnv('TYPO3_SITE_URL') . 'uploads/tx_seminars/';
+        $fileNamesFromSelf = GeneralUtility::trimExplode(',', $this->getRecordPropertyString('attached_files'), true);
+        foreach ($fileNamesFromSelf as $fileName) {
             $matches = [];
-            preg_match('/\\.(\\w+)$/', basename($attachedFile), $matches);
+            \preg_match('/\\.(\\w+)$/', \basename($fileName), $matches);
 
-            $result[] = [
+            $allFiles[] = [
                 'name' => $plugin->cObj->typoLink(
-                    \htmlspecialchars(basename($attachedFile), ENT_QUOTES | ENT_HTML5),
-                    ['parameter' => $uploadFolderUrl . $attachedFile]
+                    \htmlspecialchars(\basename($fileName), ENT_QUOTES | ENT_HTML5),
+                    ['parameter' => $uploadFolderUrl . $fileName]
                 ),
                 'type' => \htmlspecialchars($matches[1] ?? 'none', ENT_QUOTES | ENT_HTML5),
-                'size' => GeneralUtility::formatSize(filesize($uploadFolderPath . $attachedFile)),
+                'size' => GeneralUtility::formatSize(\filesize($uploadFolderPath . $fileName)),
             ];
         }
 
-        return $result;
+        return $allFiles;
     }
 
     /**
