@@ -9,6 +9,7 @@ use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
 use OliverKlee\Seminars\OldModel\AbstractModel;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
 /**
  * Test case.
@@ -223,5 +224,72 @@ final class EventTest extends UnitTestCase
             $organizer,
             $this->subject->getEmailSender()
         );
+    }
+
+    /**
+     * @test
+     */
+    public function hasAttachedFilesInitiallyReturnsFalse()
+    {
+        self::assertFalse($this->subject->hasAttachedFiles());
+    }
+
+    /**
+     * @test
+     */
+    public function hasAttachedFilesWithOneAttachedFileReturnsTrue()
+    {
+        $this->subject->setAttachedFiles('test.file');
+
+        self::assertTrue($this->subject->hasAttachedFiles());
+    }
+
+    /**
+     * @test
+     */
+    public function hasAttachedFilesWithTwoAttachedFilesReturnsTrue()
+    {
+        $this->subject->setAttachedFiles('test.file,test_02.file');
+
+        self::assertTrue($this->subject->hasAttachedFiles());
+    }
+
+    /**
+     * @test
+     */
+    public function hasAttachedFilesForDateWithoutFilesAndTopicWithOneFileReturnsTrue()
+    {
+        $topic = \Tx_Seminars_OldModel_Event::fromData(
+            [
+                'object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC,
+                'attached_files' => 'test.file',
+            ]
+        );
+        $date = \Tx_Seminars_OldModel_Event::fromData(['object_type' => \Tx_Seminars_Model_Event::TYPE_DATE]);
+        $date->setTopic($topic);
+
+        self::assertTrue($date->hasAttachedFiles());
+    }
+
+    /**
+     * @test
+     */
+    public function hasAttachedFilesForDateAndTopicWithoutFilesReturnsFalse()
+    {
+        $topic = \Tx_Seminars_OldModel_Event::fromData(['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]);
+        $date = \Tx_Seminars_OldModel_Event::fromData(['object_type' => \Tx_Seminars_Model_Event::TYPE_DATE]);
+        $date->setTopic($topic);
+
+        self::assertFalse($date->hasAttachedFiles());
+    }
+
+    /**
+     * @test
+     */
+    public function getAttachedFilesForNoAttachedFilesReturnsAnEmptyArray()
+    {
+        $plugin = new AbstractPlugin();
+
+        self::assertSame([], $this->subject->getAttachedFiles($plugin));
     }
 }
