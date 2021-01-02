@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\BagBuilder;
 
+use OliverKlee\Oelib\Database\DatabaseService;
 use OliverKlee\Seminars\Bag\AbstractBag;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -133,7 +134,7 @@ abstract class AbstractBagBuilder
             return;
         }
 
-        $recursivePidList = \Tx_Oelib_Db::createRecursivePageList($sourcePagePids, $recursionDepth);
+        $recursivePidList = DatabaseService::createRecursivePageList($sourcePagePids, $recursionDepth);
 
         $this->whereClauseParts['pages'] = $this->tableName . '.pid IN (' . $recursivePidList . ')';
     }
