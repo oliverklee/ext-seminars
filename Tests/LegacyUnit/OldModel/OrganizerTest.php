@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\OldModel;
 
+use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
 /**
@@ -19,7 +20,7 @@ final class OrganizerTest extends TestCase
     private $subject;
 
     /**
-     * @var \Tx_Oelib_TestingFramework
+     * @var TestingFramework
      */
     private $testingFramework;
 
@@ -32,7 +33,7 @@ final class OrganizerTest extends TestCase
 
     protected function setUp()
     {
-        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new TestingFramework('tx_seminars');
         $subjectUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
             [

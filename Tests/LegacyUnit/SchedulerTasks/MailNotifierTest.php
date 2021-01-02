@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\SchedulerTasks;
 
+use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\Interfaces\AccessibleObject;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminar\Email\Salutation;
@@ -35,7 +36,7 @@ class MailNotifierTest extends TestCase
     protected $subject = null;
 
     /**
-     * @var \Tx_Oelib_TestingFramework
+     * @var TestingFramework
      */
     protected $testingFramework = null;
 
@@ -104,7 +105,7 @@ class MailNotifierTest extends TestCase
         $this->languageService->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
         $GLOBALS['LANG'] = $this->languageService;
 
-        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new TestingFramework('tx_seminars');
 
         \Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin', new \Tx_Oelib_Configuration());
         $this->configuration = new \Tx_Oelib_Configuration();

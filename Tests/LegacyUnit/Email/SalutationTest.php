@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 
+use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminar\Email\Salutation;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
@@ -23,7 +24,7 @@ final class SalutationTest extends TestCase
     use LanguageHelper;
 
     /**
-     * @var \Tx_Oelib_TestingFramework the testing framework
+     * @var TestingFramework the testing framework
      */
     private $testingFramework = null;
 
@@ -43,7 +44,7 @@ final class SalutationTest extends TestCase
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
         Bootstrap::getInstance()->initializeBackendAuthentication();
 
-        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new TestingFramework('tx_seminars');
         $this->subject = new Salutation();
         $configuration = new \Tx_Oelib_Configuration();
         $configuration->setAsString('salutation', 'formal');

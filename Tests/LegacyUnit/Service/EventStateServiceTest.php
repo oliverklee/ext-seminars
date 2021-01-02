@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 
+use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Service\EventStatusService;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -22,7 +23,7 @@ final class EventStateServiceTest extends TestCase
     private $subject = null;
 
     /**
-     * @var \Tx_Oelib_TestingFramework
+     * @var TestingFramework
      */
     private $testingFramework = null;
 
@@ -47,7 +48,7 @@ final class EventStateServiceTest extends TestCase
         $this->past = $GLOBALS['SIM_EXEC_TIME'] - 1;
         $this->future = $GLOBALS['SIM_EXEC_TIME'] + 1;
 
-        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new TestingFramework('tx_seminars');
 
         \Tx_Oelib_MapperRegistry::denyDatabaseAccess();
         \Tx_Oelib_MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 
+use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\Service\TestingSingleViewLinkBuilder;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -19,7 +20,7 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 final class SingleViewLinkBuilderTest extends TestCase
 {
     /**
-     * @var \Tx_Oelib_TestingFramework
+     * @var TestingFramework
      */
     private $testingFramework;
 
@@ -46,7 +47,7 @@ final class SingleViewLinkBuilderTest extends TestCase
 
     protected function setUp()
     {
-        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new TestingFramework('tx_seminars');
 
         $this->postBackup = $_POST;
         $this->getBackup = $_GET;

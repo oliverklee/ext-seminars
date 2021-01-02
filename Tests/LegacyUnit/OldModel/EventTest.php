@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\OldModel;
 
+use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
@@ -25,7 +26,7 @@ final class EventTest extends TestCase
     private $subject = null;
 
     /**
-     * @var \Tx_Oelib_TestingFramework
+     * @var TestingFramework
      */
     private $testingFramework = null;
 
@@ -63,7 +64,7 @@ final class EventTest extends TestCase
         $this->beginDate = ($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
         $this->unregistrationDeadline = ($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
 
-        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new TestingFramework('tx_seminars');
 
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',

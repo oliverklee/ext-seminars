@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 
+use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
 /**
@@ -20,14 +21,14 @@ class FrontEndUserGroupMapperTest extends TestCase
     private $subject = null;
 
     /**
-     * @var \Tx_Oelib_TestingFramework the testing framework
+     * @var TestingFramework the testing framework
      */
     private $testingFramework = null;
 
     protected function setUp()
     {
         $this->subject = new \Tx_Seminars_Mapper_FrontEndUserGroup();
-        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new TestingFramework('tx_seminars');
     }
 
     protected function tearDown()

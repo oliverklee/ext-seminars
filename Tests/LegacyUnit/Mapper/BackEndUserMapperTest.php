@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 
+use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
 /**
@@ -14,7 +15,7 @@ use OliverKlee\PhpUnit\TestCase;
 class BackEndUserMapperTest extends TestCase
 {
     /**
-     * @var \Tx_Oelib_TestingFramework for creating dummy records
+     * @var TestingFramework for creating dummy records
      */
     private $testingFramework = null;
 
@@ -25,7 +26,7 @@ class BackEndUserMapperTest extends TestCase
 
     protected function setUp()
     {
-        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new TestingFramework('tx_seminars');
 
         $this->subject = new \Tx_Seminars_Mapper_BackEndUser();
     }

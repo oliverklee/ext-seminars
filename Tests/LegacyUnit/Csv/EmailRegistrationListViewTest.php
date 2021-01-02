@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Csv;
 
+use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Csv\EmailRegistrationListView;
 use TYPO3\CMS\Lang\LanguageService;
@@ -22,7 +23,7 @@ class EmailRegistrationListViewTest extends TestCase
     private $subject = null;
 
     /**
-     * @var \Tx_Oelib_TestingFramework
+     * @var TestingFramework
      */
     private $testingFramework = null;
 
@@ -45,7 +46,7 @@ class EmailRegistrationListViewTest extends TestCase
         $this->getLanguageService()->includeLLFile('EXT:seminars/Resources/Private/Language/locallang_db.xlf');
         $this->getLanguageService()->includeLLFile('EXT:lang/Resources/Private/Language/locallang_general.xlf');
 
-        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new TestingFramework('tx_seminars');
 
         $configurationRegistry = \Tx_Oelib_ConfigurationRegistry::getInstance();
         $configurationRegistry->set('plugin', new \Tx_Oelib_Configuration());
