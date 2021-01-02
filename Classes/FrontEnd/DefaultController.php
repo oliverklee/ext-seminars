@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Seminars\Bag\AbstractBag;
 use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Hooks\HookProvider;
@@ -1554,7 +1555,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      */
     public function isLoggedIn(): bool
     {
-        return \Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn();
+        return FrontEndLoginManager::getInstance()->isLoggedIn();
     }
 
     /**
@@ -1564,7 +1565,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      */
     protected function getLoggedInFrontEndUserUid(): int
     {
-        $loginManager = \Tx_Oelib_FrontEndLoginManager::getInstance();
+        $loginManager = FrontEndLoginManager::getInstance();
         return $loginManager->isLoggedIn() ? $loginManager->getLoggedInUser(
             \Tx_Seminars_Mapper_FrontEndUser::class
         )->getUid() : 0;
@@ -1888,7 +1889,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         }
 
         /** @var \Tx_Seminars_Model_FrontEndUser|null $user */
-        $user = \Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
+        $user = FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
 
         switch ($whatToDisplay) {
             case 'topic_list':
@@ -2256,8 +2257,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
         $registrationBagBuilder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Registration::class);
 
         /** @var \Tx_Seminars_Model_FrontEndUser $loggedInUser */
-        $loggedInUser = \Tx_Oelib_FrontEndLoginManager::getInstance(
-        )->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
+        $loggedInUser = FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
         $registrationBagBuilder->limitToAttendee($loggedInUser);
         $registrationBagBuilder->setOrderByEventColumn($this->getOrderByForListView());
 

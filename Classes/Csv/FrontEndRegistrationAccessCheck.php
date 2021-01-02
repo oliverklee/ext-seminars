@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Csv;
 
+use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Seminars\Csv\Interfaces\CsvAccessCheck;
 
 /**
@@ -52,7 +53,7 @@ class FrontEndRegistrationAccessCheck implements CsvAccessCheck
         if ($this->getEvent() === null) {
             throw new \BadMethodCallException('Please set an event first.', 1389096647);
         }
-        if (!\Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
+        if (!FrontEndLoginManager::getInstance()->isLoggedIn()) {
             return false;
         }
 
@@ -61,7 +62,7 @@ class FrontEndRegistrationAccessCheck implements CsvAccessCheck
             return false;
         }
 
-        $user = \Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
+        $user = FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
         $vipsGroupUid = $configuration->getAsInteger('defaultEventVipsFeGroupID');
 
         return $this->getEvent()->isUserVip($user->getUid(), $vipsGroupUid);

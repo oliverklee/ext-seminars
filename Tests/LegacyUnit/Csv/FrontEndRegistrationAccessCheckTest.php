@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Csv;
 
+use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Csv\FrontEndRegistrationAccessCheck;
 use OliverKlee\Seminars\Csv\Interfaces\CsvAccessCheck;
@@ -46,7 +47,7 @@ class FrontEndRegistrationAccessCheckTest extends TestCase
     protected function tearDown()
     {
         \Tx_Oelib_ConfigurationRegistry::purgeInstance();
-        \Tx_Oelib_FrontEndLoginManager::purgeInstance();
+        FrontEndLoginManager::purgeInstance();
     }
 
     /**
@@ -65,7 +66,7 @@ class FrontEndRegistrationAccessCheckTest extends TestCase
      */
     public function hasAccessForNoFrontEndUserReturnsFalse()
     {
-        \Tx_Oelib_FrontEndLoginManager::getInstance()->logInUser();
+        FrontEndLoginManager::getInstance()->logInUser();
 
         /** @var \Tx_Seminars_OldModel_Event|MockObject $event */
         $event = $this->createMock(\Tx_Seminars_OldModel_Event::class);
@@ -87,7 +88,7 @@ class FrontEndRegistrationAccessCheckTest extends TestCase
         $user = $this->createMock(\Tx_Seminars_Model_FrontEndUser::class);
         $userUid = 42;
         $user->method('getUid')->willReturn($userUid);
-        \Tx_Oelib_FrontEndLoginManager::getInstance()->logInUser($user);
+        FrontEndLoginManager::getInstance()->logInUser($user);
 
         /** @var \Tx_Seminars_OldModel_Event|MockObject $event */
         $event = $this->createMock(\Tx_Seminars_OldModel_Event::class);
@@ -113,7 +114,7 @@ class FrontEndRegistrationAccessCheckTest extends TestCase
         $user = $this->createMock(\Tx_Seminars_Model_FrontEndUser::class);
         $userUid = 42;
         $user->method('getUid')->willReturn($userUid);
-        \Tx_Oelib_FrontEndLoginManager::getInstance()->logInUser($user);
+        FrontEndLoginManager::getInstance()->logInUser($user);
 
         /** @var \Tx_Seminars_OldModel_Event|MockObject $event */
         $event = $this->createMock(\Tx_Seminars_OldModel_Event::class);
@@ -139,7 +140,7 @@ class FrontEndRegistrationAccessCheckTest extends TestCase
         $user = $this->createMock(\Tx_Seminars_Model_FrontEndUser::class);
         $userUid = 42;
         $user->method('getUid')->willReturn($userUid);
-        \Tx_Oelib_FrontEndLoginManager::getInstance()->logInUser($user);
+        FrontEndLoginManager::getInstance()->logInUser($user);
 
         /** @var \Tx_Seminars_OldModel_Event|MockObject $event */
         $event = $this->createMock(\Tx_Seminars_OldModel_Event::class);
@@ -165,7 +166,7 @@ class FrontEndRegistrationAccessCheckTest extends TestCase
         $user = $this->createMock(\Tx_Seminars_Model_FrontEndUser::class);
         $userUid = 42;
         $user->method('getUid')->willReturn($userUid);
-        \Tx_Oelib_FrontEndLoginManager::getInstance()->logInUser($user);
+        FrontEndLoginManager::getInstance()->logInUser($user);
 
         /** @var \Tx_Seminars_OldModel_Event|MockObject $event */
         $event = $this->createMock(\Tx_Seminars_OldModel_Event::class);

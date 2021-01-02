@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Seminar\Email\Salutation;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
@@ -145,14 +146,14 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         if ($event->getPriceOnRequest() || !$event->canSomebodyRegister()) {
             return false;
         }
-        if (!\Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
+        if (!FrontEndLoginManager::getInstance()->isLoggedIn()) {
             return true;
         }
 
         $canRegister = $this->couldThisUserRegister($event);
 
         /** @var \Tx_Seminars_Model_FrontEndUser $user */
-        $user = \Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
+        $user = FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
         foreach ($this->getHooks() as $hook) {
             if (method_exists($hook, 'canRegisterForSeminar')) {
                 $canRegister = $canRegister && $hook->canRegisterForSeminar($event, $user);
@@ -182,7 +183,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
     {
         $message = '';
 
-        $isLoggedIn = \Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn();
+        $isLoggedIn = FrontEndLoginManager::getInstance()->isLoggedIn();
 
         if ($isLoggedIn && $this->isUserBlocked($event)) {
             $message = $this->translate('message_userIsBlocked');
@@ -194,7 +195,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
 
         if ($isLoggedIn && $message === '') {
             /** @var \Tx_Seminars_Model_FrontEndUser $user */
-            $user = \Tx_Oelib_FrontEndLoginManager::getInstance()
+            $user = FrontEndLoginManager::getInstance()
                 ->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
             foreach ($this->getHooks() as $hook) {
                 if (method_exists($hook, 'canRegisterForSeminarMessage')) {
@@ -316,7 +317,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         \Tx_Seminars_OldModel_Event $event,
         string $label
     ): string {
-        if (\Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
+        if (FrontEndLoginManager::getInstance()->isLoggedIn()) {
             // provides the registration link
             $result = $plugin->cObj->getTypoLink(
                 $label,
@@ -497,7 +498,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
 
         $event->getAttendances();
 
-        $user = \Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
+        $user = FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
         foreach ($this->getHooks() as $hook) {
             if (method_exists($hook, 'seminarRegistrationCreated')) {
                 $hook->seminarRegistrationCreated($this->registration, $user);
@@ -678,7 +679,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         }
 
         /** @var \Tx_Seminars_Model_FrontEndUser $user */
-        $user = \Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
+        $user = FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
         foreach ($this->getHooks() as $hook) {
             if (method_exists($hook, 'seminarRegistrationRemoved')) {
                 $hook->seminarRegistrationRemoved($this->registration, $user);
@@ -1708,7 +1709,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
      */
     protected function getLoggedInFrontEndUserUid(): int
     {
-        $loginManager = \Tx_Oelib_FrontEndLoginManager::getInstance();
+        $loginManager = FrontEndLoginManager::getInstance();
         return $loginManager->isLoggedIn() ? $loginManager->getLoggedInUser(
             \Tx_Seminars_Mapper_FrontEndUser::class
         )->getUid() : 0;

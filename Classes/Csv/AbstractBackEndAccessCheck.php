@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Csv;
 
+use OliverKlee\Oelib\Authentication\BackEndLoginManager;
 use OliverKlee\Seminars\Csv\Interfaces\CsvAccessCheck;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
@@ -61,7 +62,7 @@ abstract class AbstractBackEndAccessCheck implements CsvAccessCheck
      */
     protected function canAccessTableAndPage(string $tableName, int $pageUid): bool
     {
-        if (!\Tx_Oelib_BackEndLoginManager::getInstance()->isLoggedIn()) {
+        if (!BackEndLoginManager::getInstance()->isLoggedIn()) {
             return false;
         }
 

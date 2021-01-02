@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Csv;
 
+use OliverKlee\Oelib\Authentication\BackEndLoginManager;
+
 /**
  * This class provides the access check for the CSV export of registrations in the back end.
  *
@@ -30,7 +32,7 @@ class BackEndRegistrationAccessCheck extends AbstractBackEndAccessCheck
      */
     public function hasAccess(): bool
     {
-        if (!\Tx_Oelib_BackEndLoginManager::getInstance()->isLoggedIn()) {
+        if (!BackEndLoginManager::getInstance()->isLoggedIn()) {
             return false;
         }
 

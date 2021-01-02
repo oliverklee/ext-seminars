@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\System\Typo3Version;
 use SJBR\StaticInfoTables\PiBaseApi;
 use SJBR\StaticInfoTables\Utility\LocalizationUtility;
@@ -1016,8 +1017,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
                     ) == '1')
                 ) {
                     /** @var \Tx_Seminars_Model_FrontEndUser $user */
-                    $user = \Tx_Oelib_FrontEndLoginManager::getInstance(
-                    )->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
+                    $user = FrontEndLoginManager::getInstance()
+                        ->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
                     $userData = [$user->getName()];
                     if ($this->getConfValueBoolean('createAdditionalAttendeesAsFrontEndUsers', 's_registration')) {
                         if ($user->hasJobTitle()) {
@@ -1434,7 +1435,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      */
     protected function getLoggedInUser(): \Tx_Seminars_Model_FrontEndUser
     {
-        return \Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
+        return FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
     }
 
     /**
