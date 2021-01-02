@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\SchedulerTasks;
 
+use OliverKlee\Oelib\Authentication\BackEndLoginManager;
 use OliverKlee\Seminars\Csv\EmailRegistrationListView;
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
 use OliverKlee\Seminars\Service\EmailService;
@@ -422,7 +423,7 @@ class MailNotifier extends AbstractTask
     private function useUserConfiguredLanguage()
     {
         /** @var \Tx_Seminars_Model_BackEndUser $user */
-        $user = \Tx_Oelib_BackEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
+        $user = BackEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
         $this->getLanguageService()->init($user->getLanguage());
     }
 

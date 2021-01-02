@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -314,7 +315,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      */
     protected static function getLoggedInUser()
     {
-        return \Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
+        return FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
     }
 
     /**
@@ -677,7 +678,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      */
     private function checkAccess(): string
     {
-        if (!\Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
+        if (!FrontEndLoginManager::getInstance()->isLoggedIn()) {
             return 'message_notLoggedIn';
         }
 

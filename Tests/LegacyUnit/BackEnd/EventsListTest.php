@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\BackEnd;
 
+use OliverKlee\Oelib\Authentication\BackEndLoginManager;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\BackEnd\AbstractList;
@@ -63,7 +64,7 @@ class EventsListTest extends TestCase
         /** @var \Tx_Seminars_Model_BackEndUser $backEndUser */
         $backEndUser = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUser::class)
             ->getLoadedTestingModel(['usergroup' => $backEndGroup->getUid()]);
-        \Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
+        BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
     }
 
     protected function tearDown()
@@ -741,7 +742,7 @@ class EventsListTest extends TestCase
     {
         /** @var \Tx_Seminars_Model_BackEndUser $backEndUser */
         $backEndUser = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUser::class)->getLoadedTestingModel([]);
-        \Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
+        BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
 
         self::assertContains((string)$this->dummySysFolderPid, $this->subject->show());
     }
@@ -750,7 +751,7 @@ class EventsListTest extends TestCase
     {
         /** @var \Tx_Seminars_Model_BackEndUser $backEndUser */
         $backEndUser = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUser::class)->getLoadedTestingModel([]);
-        \Tx_Oelib_BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
+        BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
 
         self::assertContains(
             \sprintf(
@@ -765,7 +766,7 @@ class EventsListTest extends TestCase
     public function testNewButtonForEventStorageSettingSetInUsersGroupSetsThisPidAsNewRecordPid()
     {
         /** @var \Tx_Seminars_Model_BackEndUser $loggedInUser */
-        $loggedInUser = \Tx_Oelib_BackEndLoginManager::getInstance()
+        $loggedInUser = BackEndLoginManager::getInstance()
             ->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
         $newEventFolder = $loggedInUser->getEventFolderFromGroup();
 
@@ -775,7 +776,7 @@ class EventsListTest extends TestCase
     public function testNewButtonForEventStoredInPageDeterminedByGroupHasForeignFolderLabel()
     {
         /** @var \Tx_Seminars_Model_BackEndUser $loggedInUser */
-        $loggedInUser = \Tx_Oelib_BackEndLoginManager::getInstance()
+        $loggedInUser = BackEndLoginManager::getInstance()
             ->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
         $newEventFolder = $loggedInUser->getEventFolderFromGroup();
 

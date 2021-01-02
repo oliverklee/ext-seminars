@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Csv;
 
+use OliverKlee\Oelib\Authentication\BackEndLoginManager;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Csv\BackEndEventAccessCheck;
 use OliverKlee\Seminars\Csv\Interfaces\CsvAccessCheck;
@@ -44,7 +45,7 @@ class BackEndEventAccessCheckTest extends TestCase
 
     protected function tearDown()
     {
-        \Tx_Oelib_BackEndLoginManager::purgeInstance();
+        BackEndLoginManager::purgeInstance();
         $GLOBALS['BE_USER'] = $this->backEndUserBackup;
     }
 

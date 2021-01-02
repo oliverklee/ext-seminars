@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
@@ -2358,8 +2359,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     public function isUserVip(int $userUid, int $defaultEventVipsFeGroupUid): bool
     {
         $isDefaultVip = $defaultEventVipsFeGroupUid !== 0
-            && \Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()
-            && \Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser()
+            && FrontEndLoginManager::getInstance()->isLoggedIn()
+            && FrontEndLoginManager::getInstance()->getLoggedInUser()
                 ->hasGroupMembership((string)$defaultEventVipsFeGroupUid);
 
         if ($isDefaultVip) {
@@ -2477,14 +2478,14 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         int $registrationsVipListPID = 0,
         int $defaultEventVipsFeGroupID = 0
     ): bool {
-        if (!\Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
+        if (!FrontEndLoginManager::getInstance()->isLoggedIn()) {
             return false;
         }
 
         $hasListPid = ($registrationsListPID > 0);
         $hasVipListPid = ($registrationsVipListPID > 0);
 
-        $loginManager = \Tx_Oelib_FrontEndLoginManager::getInstance();
+        $loginManager = FrontEndLoginManager::getInstance();
         $currentUserUid = $loginManager->isLoggedIn()
             ? $loginManager->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class)->getUid() : 0;
 
@@ -2552,7 +2553,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         int $registrationsVipListPID = 0,
         int $defaultEventVipsFeGroupID = 0
     ): bool {
-        $loginManager = \Tx_Oelib_FrontEndLoginManager::getInstance();
+        $loginManager = FrontEndLoginManager::getInstance();
         if (!$loginManager->isLoggedIn()) {
             return false;
         }
@@ -2612,7 +2613,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         int $registrationsVipListPID = 0,
         int $defaultEventVipsFeGroupID = 0
     ): bool {
-        $loginManager = \Tx_Oelib_FrontEndLoginManager::getInstance();
+        $loginManager = FrontEndLoginManager::getInstance();
         $isLoggedIn = $loginManager->isLoggedIn();
 
         $hasListPid = ($registrationsListPID > 0);
@@ -2667,7 +2668,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         if ($accessLevel === 'world') {
             return '';
         }
-        if (!\Tx_Oelib_FrontEndLoginManager::getInstance()->isLoggedIn()) {
+        if (!FrontEndLoginManager::getInstance()->isLoggedIn()) {
             return $this->translate('message_notLoggedIn');
         }
         if (
@@ -3290,7 +3291,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function isOwnerFeUser(): bool
     {
-        $loginManager = \Tx_Oelib_FrontEndLoginManager::getInstance();
+        $loginManager = FrontEndLoginManager::getInstance();
         if (!$loginManager->isLoggedIn()) {
             return false;
         }

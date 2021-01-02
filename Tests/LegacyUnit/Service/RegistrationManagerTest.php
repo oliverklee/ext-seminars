@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 
+use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
@@ -1125,7 +1126,7 @@ final class RegistrationManagerTest extends TestCase
     public function canRegisterIfLoggedInForRegistrationPossibleCallsCanRegisterForSeminarHook()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
-        $user = \Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
+        $user = FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
 
         $hookClass = 'RegistrationHook' . \uniqid('', false);
         $hook = $this->getMockBuilder(RegistrationHookInterface::class)->setMockClassName($hookClass)->getMock();
@@ -1396,7 +1397,7 @@ final class RegistrationManagerTest extends TestCase
     public function canRegisterIfLoggedInMessageForRegistrationPossibleCallsCanUserRegisterForSeminarMessageHook()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
-        $user = \Tx_Oelib_FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
+        $user = FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
 
         $hookClass = 'RegistrationHook' . \uniqid('', false);
         $hook = $this->getMockBuilder(RegistrationHookInterface::class)->setMockClassName($hookClass)->getMock();
