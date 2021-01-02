@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Model\AbstractModel;
+use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 
 /**
@@ -10,7 +12,7 @@ use OliverKlee\Seminars\Model\Interfaces\Titled;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements Titled
+class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
 {
     /**
      * Returns the title of this registration.
@@ -54,13 +56,9 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements Titled
     }
 
     /**
-     * Sets the front-end user of this registration.
-     *
-     * @param \Tx_Oelib_Model_FrontEndUser $user the front-end user to set for this registration
-     *
      * @return void
      */
-    public function setFrontEndUser(\Tx_Oelib_Model_FrontEndUser $user)
+    public function setFrontEndUser(OelibFrontEndUser $user)
     {
         $this->set('user', $user);
     }
@@ -493,9 +491,9 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements Titled
      *
      * @return int the gender of this registration, will be one of the
      *                 following:
-     *                 - \Tx_Oelib_Model_FrontEndUser::GENDER_MALE
-     *                 - \Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE
-     *                 - \Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN
+     *                 - FrontEndUser::GENDER_MALE
+     *                 - FrontEndUser::GENDER_FEMALE
+     *                 - FrontEndUser::GENDER_UNKNOWN
      */
     public function getGender(): int
     {
@@ -507,9 +505,9 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements Titled
      *
      * @param int $gender
      *        the gender of this registration, must be one of the following:
-     *        - \Tx_Oelib_Model_FrontEndUser::GENDER_MALE
-     *        - \Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE
-     *        - \Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN
+     *        - FrontEndUser::GENDER_MALE
+     *        - FrontEndUser::GENDER_FEMALE
+     *        - FrontEndUser::GENDER_UNKNOWN
      *
      * @return void
      *
@@ -518,15 +516,15 @@ class Tx_Seminars_Model_Registration extends \Tx_Oelib_Model implements Titled
     public function setGender(int $gender)
     {
         $allowedGenders = [
-            \Tx_Oelib_Model_FrontEndUser::GENDER_MALE,
-            \Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE,
-            \Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN,
+            OelibFrontEndUser::GENDER_MALE,
+            OelibFrontEndUser::GENDER_FEMALE,
+            OelibFrontEndUser::GENDER_UNKNOWN,
         ];
 
         if (!in_array($gender, $allowedGenders, true)) {
             throw new \InvalidArgumentException(
-                'The parameter $gender must be one of the following: \\Tx_Oelib_Model_FrontEndUser::GENDER_MALE, ' .
-                'Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE, \\Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN',
+                'The parameter $gender must be one of the following: FrontEndUser::GENDER_MALE, ' .
+                'FrontEndUser::GENDER_FEMALE, FrontEndUser::GENDER_UNKNOWN',
                 1333296957
             );
         }

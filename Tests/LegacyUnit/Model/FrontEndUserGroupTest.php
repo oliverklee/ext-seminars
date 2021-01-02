@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
+use OliverKlee\Oelib\Model\BackEndUser;
 use OliverKlee\PhpUnit\TestCase;
 
 /**
@@ -160,7 +161,7 @@ class FrontEndUserGroupTest extends TestCase
      */
     public function hasReviewerForGroupWithReviewerReturnsTrue()
     {
-        $backEndUser = new \Tx_Oelib_Model_BackEndUser();
+        $backEndUser = new BackEndUser();
 
         $this->subject->setData(['tx_seminars_reviewer' => $backEndUser]);
 
@@ -186,7 +187,7 @@ class FrontEndUserGroupTest extends TestCase
      */
     public function getReviewerForGroupWithReviewerReturnsReviewer()
     {
-        $backEndUser = new \Tx_Oelib_Model_BackEndUser();
+        $backEndUser = new BackEndUser();
 
         $this->subject->setData(['tx_seminars_reviewer' => $backEndUser]);
 

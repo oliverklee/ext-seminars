@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Model\AbstractModel;
+use OliverKlee\Oelib\Model\Country;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 
 /**
@@ -10,7 +12,7 @@ use OliverKlee\Seminars\Model\Interfaces\Titled;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Model_Place extends \Tx_Oelib_Model implements Titled
+class Tx_Seminars_Model_Place extends AbstractModel implements Titled
 {
     /**
      * Returns our title.
@@ -129,9 +131,7 @@ class Tx_Seminars_Model_Place extends \Tx_Oelib_Model implements Titled
     }
 
     /**
-     * Returns the country of this place as \Tx_Oelib_Model_Country.
-     *
-     * @return \Tx_Oelib_Model_Country|null
+     * @return Country|null
      */
     public function getCountry()
     {
@@ -152,14 +152,9 @@ class Tx_Seminars_Model_Place extends \Tx_Oelib_Model implements Titled
     }
 
     /**
-     * Sets the country of this place.
-     *
-     * @param \Tx_Oelib_Model_Country $country
-     *        the country to set for this place, can be NULL for "no country"
-     *
      * @return void
      */
-    public function setCountry(\Tx_Oelib_Model_Country $country = null)
+    public function setCountry(Country $country = null)
     {
         $countryCode = ($country !== null) ? $country->getIsoAlpha2Code() : '';
 

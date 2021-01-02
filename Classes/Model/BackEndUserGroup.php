@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Model\BackEndUserGroup as OelibBackEndUserGroup;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 
 /**
@@ -9,7 +10,7 @@ use OliverKlee\Seminars\Model\Interfaces\Titled;
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class Tx_Seminars_Model_BackEndUserGroup extends \Tx_Oelib_Model_BackEndUserGroup implements Titled
+class Tx_Seminars_Model_BackEndUserGroup extends OelibBackEndUserGroup implements Titled
 {
     /**
      * Returns the PID for the storage of new events.

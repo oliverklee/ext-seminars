@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
+use OliverKlee\Oelib\Model\FrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
@@ -92,7 +93,7 @@ class RegistrationTest extends TestCase
      */
     public function setFrontEndUserSetsFrontEndUser()
     {
-        /** @var \Tx_Oelib_Model_FrontEndUser $frontEndUser */
+        /** @var FrontEndUser $frontEndUser */
         $frontEndUser = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_FrontEndUser::class)->getNewGhost();
         $this->subject->setFrontEndUser($frontEndUser);
 
@@ -851,7 +852,7 @@ class RegistrationTest extends TestCase
         $this->subject->setData([]);
 
         self::assertEquals(
-            \Tx_Oelib_Model_FrontEndUser::GENDER_MALE,
+            FrontEndUser::GENDER_MALE,
             $this->subject->getGender()
         );
     }
@@ -862,11 +863,11 @@ class RegistrationTest extends TestCase
     public function getGenderWithGenderFemaleReturnsGenderFemale()
     {
         $this->subject->setData(
-            ['gender' => \Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE]
+            ['gender' => FrontEndUser::GENDER_FEMALE]
         );
 
         self::assertEquals(
-            \Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE,
+            FrontEndUser::GENDER_FEMALE,
             $this->subject->getGender()
         );
     }
@@ -877,11 +878,11 @@ class RegistrationTest extends TestCase
     public function getGenderWithGenderUnknownReturnsGenderUnknown()
     {
         $this->subject->setData(
-            ['gender' => \Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN]
+            ['gender' => FrontEndUser::GENDER_UNKNOWN]
         );
 
         self::assertEquals(
-            \Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN,
+            FrontEndUser::GENDER_UNKNOWN,
             $this->subject->getGender()
         );
     }
@@ -895,8 +896,8 @@ class RegistrationTest extends TestCase
             \InvalidArgumentException::class
         );
         $this->expectExceptionMessage(
-            'The parameter $gender must be one of the following: \\Tx_Oelib_Model_FrontEndUser::GENDER_MALE, ' .
-            'Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE, \\Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN'
+            'The parameter $gender must be one of the following: FrontEndUser::GENDER_MALE, ' .
+            'FrontEndUser::GENDER_FEMALE, FrontEndUser::GENDER_UNKNOWN'
         );
 
         $this->subject->setGender(-1);
@@ -907,10 +908,10 @@ class RegistrationTest extends TestCase
      */
     public function setGenderWithGenderMaleSetsGender()
     {
-        $this->subject->setGender(\Tx_Oelib_Model_FrontEndUser::GENDER_MALE);
+        $this->subject->setGender(FrontEndUser::GENDER_MALE);
 
         self::assertEquals(
-            \Tx_Oelib_Model_FrontEndUser::GENDER_MALE,
+            FrontEndUser::GENDER_MALE,
             $this->subject->getGender()
         );
     }
@@ -920,10 +921,10 @@ class RegistrationTest extends TestCase
      */
     public function setGenderWithGenderFemaleSetsGender()
     {
-        $this->subject->setGender(\Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE);
+        $this->subject->setGender(FrontEndUser::GENDER_FEMALE);
 
         self::assertEquals(
-            \Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE,
+            FrontEndUser::GENDER_FEMALE,
             $this->subject->getGender()
         );
     }
@@ -933,10 +934,10 @@ class RegistrationTest extends TestCase
      */
     public function setGenderWithGenderUnknownSetsGender()
     {
-        $this->subject->setGender(\Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN);
+        $this->subject->setGender(FrontEndUser::GENDER_UNKNOWN);
 
         self::assertEquals(
-            \Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN,
+            FrontEndUser::GENDER_UNKNOWN,
             $this->subject->getGender()
         );
     }

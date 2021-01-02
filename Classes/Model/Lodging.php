@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Model\AbstractModel;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 
 /**
@@ -9,7 +10,7 @@ use OliverKlee\Seminars\Model\Interfaces\Titled;
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Model_Lodging extends \Tx_Oelib_Model implements Titled
+class Tx_Seminars_Model_Lodging extends AbstractModel implements Titled
 {
     /**
      * Returns our title.

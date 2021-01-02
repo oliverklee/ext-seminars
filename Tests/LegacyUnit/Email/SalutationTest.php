@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 
+use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminar\Email\Salutation;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
 use OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures\EmailSalutationHookInterface;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
-use Tx_Oelib_Model_FrontEndUser;
 use TYPO3\CMS\Core\Core\Bootstrap;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -67,16 +67,14 @@ final class SalutationTest extends TestCase
      *
      * @param int $gender
      *        the gender for the FE user, must be one of
-     *        "Tx_Oelib_Model_FrontEndUser::GENDER_MALE",
-     *        "Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE" or
-     *        "Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN", may be empty
+     *        FrontEndUser::GENDER_MALE,
+     *        FrontEndUser::GENDER_FEMALE or
+     *        FrontEndUser::GENDER_UNKNOWN, may be empty
      *
-     * @return \Tx_Seminars_Model_FrontEndUser the loaded testing model of a
-     *                                        FE user
+     * @return \Tx_Seminars_Model_FrontEndUser the loaded testing model of a FE user
      */
-    private function createFrontEndUser(
-        int $gender = \Tx_Oelib_Model_FrontEndUser::GENDER_MALE
-    ): \Tx_Seminars_Model_FrontEndUser {
+    private function createFrontEndUser(int $gender = OelibFrontEndUser::GENDER_MALE): \Tx_Seminars_Model_FrontEndUser
+    {
         return \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)
             ->getLoadedTestingModel(['name' => 'Foo', 'gender' => $gender]);
     }
@@ -89,7 +87,7 @@ final class SalutationTest extends TestCase
      */
     protected function skipWithoutGenderField()
     {
-        if (!\Tx_Oelib_Model_FrontEndUser::hasGenderField()) {
+        if (!OelibFrontEndUser::hasGenderField()) {
             self::markTestSkipped(
                 'This test is skipped because it requires FE user to have a gender field, e.g., ' .
                 'from the sr_feuser_register extension.'
@@ -117,8 +115,8 @@ final class SalutationTest extends TestCase
         $this->skipWithoutGenderField();
 
         self::assertSame(
-            \Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE,
-            $this->createFrontEndUser(\Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE)->getGender()
+            OelibFrontEndUser::GENDER_FEMALE,
+            $this->createFrontEndUser(OelibFrontEndUser::GENDER_FEMALE)->getGender()
         );
     }
 
@@ -175,7 +173,7 @@ final class SalutationTest extends TestCase
     {
         $this->skipWithoutGenderField();
 
-        $user = $this->createFrontEndUser(\Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE);
+        $user = $this->createFrontEndUser(OelibFrontEndUser::GENDER_FEMALE);
 
         self::assertContains(
             $this->getLanguageService()->getLL('email_hello_formal_1'),
@@ -190,7 +188,7 @@ final class SalutationTest extends TestCase
     {
         $this->skipWithoutGenderField();
 
-        $user = $this->createFrontEndUser(\Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE);
+        $user = $this->createFrontEndUser(OelibFrontEndUser::GENDER_FEMALE);
 
         self::assertContains(
             $this->getLanguageService()->getLL('email_salutation_title_1') .
@@ -204,9 +202,7 @@ final class SalutationTest extends TestCase
      */
     public function getSalutationForUnknownUserReturnsUnknownSalutation()
     {
-        $user = $this->createFrontEndUser(
-            \Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN
-        );
+        $user = $this->createFrontEndUser(OelibFrontEndUser::GENDER_UNKNOWN);
 
         self::assertContains(
             $this->getLanguageService()->getLL('email_hello_formal_99'),
@@ -219,9 +215,7 @@ final class SalutationTest extends TestCase
      */
     public function getSalutationForUnknownUserReturnsUsersNameWithGenderSpecificTitle()
     {
-        $user = $this->createFrontEndUser(
-            \Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN
-        );
+        $user = $this->createFrontEndUser(OelibFrontEndUser::GENDER_UNKNOWN);
 
         self::assertContains(
             $this->getLanguageService()->getLL('email_salutation_title_99') . ' ' . $user->getLastOrFullName(),

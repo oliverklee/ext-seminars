@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Model\AbstractModel;
+
 /**
  * This abstract class represents a time span.
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-abstract class Tx_Seminars_Model_AbstractTimeSpan extends \Tx_Oelib_Model
+abstract class Tx_Seminars_Model_AbstractTimeSpan extends AbstractModel
 {
     /**
      * Returns our begin date as UNIX time-stamp.

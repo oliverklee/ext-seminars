@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Model\BackEndUser;
+use OliverKlee\Oelib\Model\FrontEndUserGroup as OelibFrontEndUserGroup;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 
 /**
@@ -11,7 +13,7 @@ use OliverKlee\Seminars\Model\Interfaces\Titled;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Model_FrontEndUserGroup extends \Tx_Oelib_Model_FrontEndUserGroup implements Titled
+class Tx_Seminars_Model_FrontEndUserGroup extends OelibFrontEndUserGroup implements Titled
 {
     /**
      * @var int the publish setting to immediately publish all events edited
@@ -78,11 +80,11 @@ class Tx_Seminars_Model_FrontEndUserGroup extends \Tx_Oelib_Model_FrontEndUserGr
     /**
      * Returns the BE user which is stored as reviewer for this group.
      *
-     * @return \Tx_Oelib_Model_BackEndUser|null
+     * @return BackEndUser|null
      */
     public function getReviewer()
     {
-        /** @var \Tx_Oelib_Model_BackEndUser|null $reviewer */
+        /** @var BackEndUser|null $reviewer */
         $reviewer = $this->getAsModel('tx_seminars_reviewer');
 
         return $reviewer;

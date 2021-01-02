@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Model\AbstractModel;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 
 /**
@@ -9,7 +10,7 @@ use OliverKlee\Seminars\Model\Interfaces\Titled;
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Model_Organizer extends \Tx_Oelib_Model implements \Tx_Oelib_Interface_MailRole, Titled
+class Tx_Seminars_Model_Organizer extends AbstractModel implements \Tx_Oelib_Interface_MailRole, Titled
 {
     /**
      * Returns our name.

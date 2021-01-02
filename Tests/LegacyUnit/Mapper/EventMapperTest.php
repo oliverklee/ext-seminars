@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 
+use OliverKlee\Oelib\Model\FrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
@@ -659,13 +660,13 @@ class EventMapperTest extends TestCase
      */
     public function getOwnerWithOwnerReturnsOwnerInstance()
     {
-        /** @var \Tx_Oelib_Model_FrontEndUser $frontEndUser */
+        /** @var FrontEndUser $frontEndUser */
         $frontEndUser = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_FrontEndUser::class)
             ->getLoadedTestingModel([]);
         /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel(['owner_feuser' => $frontEndUser->getUid()]);
 
-        self::assertInstanceOf(\Tx_Oelib_Model_FrontEndUser::class, $testingModel->getOwner());
+        self::assertInstanceOf(FrontEndUser::class, $testingModel->getOwner());
     }
 
     ////////////////////////////////////////
@@ -700,7 +701,7 @@ class EventMapperTest extends TestCase
 
         /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find($uid);
-        self::assertInstanceOf(\Tx_Oelib_Model_FrontEndUser::class, $model->getEventManagers()->first());
+        self::assertInstanceOf(FrontEndUser::class, $model->getEventManagers()->first());
     }
 
     /**

@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Model\BackEndUser as OelibBackEndUser;
+
 /**
  * This class represents a back-end user.
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class Tx_Seminars_Model_BackEndUser extends \Tx_Oelib_Model_BackEndUser
+class Tx_Seminars_Model_BackEndUser extends OelibBackEndUser
 {
     /**
      * Returns the PID for newly created event records.

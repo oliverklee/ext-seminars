@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\OldModel;
 
+use OliverKlee\Oelib\Model\FrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
@@ -6057,7 +6058,7 @@ final class EventTest extends TestCase
         $ownerUid = $this->testingFramework->createAndLoginFrontEndUser();
         $this->subject->setOwnerUid($ownerUid);
 
-        self::assertInstanceOf(\Tx_Oelib_Model_FrontEndUser::class, $this->subject->getOwner());
+        self::assertInstanceOf(FrontEndUser::class, $this->subject->getOwner());
     }
 
     /**

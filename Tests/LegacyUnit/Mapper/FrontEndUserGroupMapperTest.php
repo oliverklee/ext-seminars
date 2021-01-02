@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 
+use OliverKlee\Oelib\Model\BackEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
@@ -67,7 +68,7 @@ class FrontEndUserGroupMapperTest extends TestCase
         /** @var \Tx_Seminars_Model_FrontEndUserGroup $model */
         $model = $this->subject->find($frontEndUserGroup->getUid());
 
-        self::assertInstanceOf(\Tx_Oelib_Model_BackEndUser::class, $model->getReviewer());
+        self::assertInstanceOf(BackEndUser::class, $model->getReviewer());
     }
 
     ////////////////////////////////////////////

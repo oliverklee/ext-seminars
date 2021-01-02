@@ -2,13 +2,16 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Model\BackEndUser;
+use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
+
 /**
  * This class represents a front-end user.
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Model_FrontEndUser extends \Tx_Oelib_Model_FrontEndUser
+class Tx_Seminars_Model_FrontEndUser extends OelibFrontEndUser
 {
     /**
      * Returns the publish setting for the user groups the user is assigned to.
@@ -76,7 +79,7 @@ class Tx_Seminars_Model_FrontEndUser extends \Tx_Oelib_Model_FrontEndUser
      *
      * Will return the first reviewer found.
      *
-     * @return \Tx_Oelib_Model_BackEndUser|null
+     * @return BackEndUser|null
      */
     public function getReviewerFromGroup()
     {
