@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
+use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
@@ -21,14 +22,14 @@ class FrontEndUserTest extends TestCase
     private $subject;
 
     /**
-     * @var \Tx_Oelib_TestingFramework
+     * @var TestingFramework
      */
     private $testingFramework = null;
 
     protected function setUp()
     {
         $this->subject = new \Tx_Seminars_Model_FrontEndUser();
-        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new TestingFramework('tx_seminars');
     }
 
     protected function tearDown()

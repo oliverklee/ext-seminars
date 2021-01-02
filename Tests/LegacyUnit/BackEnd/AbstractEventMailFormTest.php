@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\BackEnd;
 
+use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\Functional\BackEnd\Fixtures\TestingEventMailForm;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
@@ -24,7 +25,7 @@ class AbstractEventMailFormTest extends TestCase
     private $subject = null;
 
     /**
-     * @var \Tx_Oelib_TestingFramework
+     * @var TestingFramework
      */
     private $testingFramework = null;
 
@@ -39,7 +40,7 @@ class AbstractEventMailFormTest extends TestCase
     {
         $this->unifyTestingEnvironment();
 
-        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new TestingFramework('tx_seminars');
 
         /** @var \Tx_Oelib_MailerFactory $mailerFactory */
         $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);

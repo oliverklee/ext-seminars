@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\BagBuilder;
 
+use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
 /**
@@ -20,7 +21,7 @@ class RegistrationBagBuilderTest extends TestCase
     private $subject = null;
 
     /**
-     * @var \Tx_Oelib_TestingFramework
+     * @var TestingFramework
      */
     private $testingFramework = null;
 
@@ -28,7 +29,7 @@ class RegistrationBagBuilderTest extends TestCase
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
-        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new TestingFramework('tx_seminars');
 
         $this->subject = new \Tx_Seminars_BagBuilder_Registration();
         $this->subject->setTestMode();

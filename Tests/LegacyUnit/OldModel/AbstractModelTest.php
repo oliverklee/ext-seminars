@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\OldModel;
 
+use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingModel;
 use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingModelWithConfiguration;
@@ -21,7 +22,7 @@ final class AbstractModelTest extends TestCase
     private $subject = null;
 
     /**
-     * @var \Tx_Oelib_TestingFramework
+     * @var TestingFramework
      */
     private $testingFramework = null;
 
@@ -34,7 +35,7 @@ final class AbstractModelTest extends TestCase
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
-        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new TestingFramework('tx_seminars');
         $systemFolderUid = $this->testingFramework->createSystemFolder();
         $this->testingFramework->createTemplate(
             $systemFolderUid,

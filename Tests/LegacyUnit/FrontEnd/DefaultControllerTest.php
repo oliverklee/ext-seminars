@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 
+use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarListView;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm;
@@ -37,7 +38,7 @@ class DefaultControllerTest extends TestCase
     private $subject = null;
 
     /**
-     * @var \Tx_Oelib_TestingFramework
+     * @var TestingFramework
      */
     private $testingFramework = null;
 
@@ -87,7 +88,7 @@ class DefaultControllerTest extends TestCase
         $this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'] = [];
 
-        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
         \Tx_Oelib_HeaderProxyFactory::getInstance()->enableTestMode();
         $this->headerCollector = \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy();

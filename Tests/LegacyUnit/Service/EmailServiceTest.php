@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 
+use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Service\EmailService;
 use TYPO3\CMS\Core\Core\Bootstrap;
@@ -49,7 +50,7 @@ final class EmailServiceTest extends TestCase
     private $subject = null;
 
     /**
-     * @var \Tx_Oelib_TestingFramework
+     * @var TestingFramework
      */
     private $testingFramework;
 
@@ -86,7 +87,7 @@ final class EmailServiceTest extends TestCase
         $languageService->init('default');
         $GLOBALS['LANG'] = $languageService;
 
-        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new TestingFramework('tx_seminars');
 
         $configuration = new \Tx_Oelib_Configuration();
         $configuration->setAsString('dateFormatYMD', self::DATE_FORMAT_YMD);

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 
+use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -27,7 +28,7 @@ class RegistrationFormTest extends TestCase
     private $subject = null;
 
     /**
-     * @var \Tx_Oelib_TestingFramework
+     * @var TestingFramework
      */
     private $testingFramework = null;
 
@@ -48,7 +49,7 @@ class RegistrationFormTest extends TestCase
 
     protected function setUp()
     {
-        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new TestingFramework('tx_seminars');
         $frontEndPageUid = $this->testingFramework->createFrontEndPage();
         $this->testingFramework->createFakeFrontEnd($frontEndPageUid);
 

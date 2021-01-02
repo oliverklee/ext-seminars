@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 
+use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -24,7 +25,7 @@ class RegistrationsListTest extends TestCase
     private $subject = null;
 
     /**
-     * @var \Tx_Oelib_TestingFramework
+     * @var TestingFramework
      */
     private $testingFramework = null;
 
@@ -51,7 +52,7 @@ class RegistrationsListTest extends TestCase
 
         \Tx_Oelib_HeaderProxyFactory::getInstance()->enableTestMode();
 
-        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
 
         $this->seminarUid = $this->testingFramework->createRecord(

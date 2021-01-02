@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\ViewHelpers;
 
+use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 
@@ -34,7 +35,7 @@ class TimeRangeViewHelperTest extends TestCase
     private $subject = null;
 
     /**
-     * @var \Tx_Oelib_TestingFramework
+     * @var TestingFramework
      */
     private $testingFramework = null;
 
@@ -48,7 +49,7 @@ class TimeRangeViewHelperTest extends TestCase
         // Make sure that the test results do not depend on the machine's PHP time zone.
         \date_default_timezone_set('UTC');
 
-        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd($this->testingFramework->createFrontEndPage());
 
         $configuration = new \Tx_Oelib_Configuration();

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 
+use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 use OliverKlee\Seminars\Hooks\RegistrationEmailHookInterface;
@@ -34,7 +35,7 @@ final class RegistrationManagerTest extends TestCase
     private $subject = null;
 
     /**
-     * @var \Tx_Oelib_TestingFramework
+     * @var TestingFramework
      */
     private $testingFramework = null;
 
@@ -111,7 +112,7 @@ final class RegistrationManagerTest extends TestCase
 
         $this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
 
-        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
 
         /** @var \Tx_Oelib_MailerFactory $mailerFactory */

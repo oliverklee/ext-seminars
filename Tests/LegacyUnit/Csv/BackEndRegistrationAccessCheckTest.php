@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Csv;
 
+use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Csv\BackEndRegistrationAccessCheck;
 use OliverKlee\Seminars\Csv\Interfaces\CsvAccessCheck;
@@ -34,7 +35,7 @@ class BackEndRegistrationAccessCheckTest extends TestCase
     private $backEndUserBackup = null;
 
     /**
-     * @var \Tx_Oelib_TestingFramework
+     * @var TestingFramework
      */
     private $testingFramework = null;
 
@@ -44,7 +45,7 @@ class BackEndRegistrationAccessCheckTest extends TestCase
         $this->backEndUser = $this->createMock(BackendUserAuthentication::class);
         $GLOBALS['BE_USER'] = $this->backEndUser;
 
-        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new TestingFramework('tx_seminars');
 
         $this->subject = new BackEndRegistrationAccessCheck();
     }

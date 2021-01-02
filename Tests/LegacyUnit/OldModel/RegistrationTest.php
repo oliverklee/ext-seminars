@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\OldModel;
 
+use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 
@@ -23,7 +24,7 @@ final class RegistrationTest extends TestCase
     private $subject = null;
 
     /**
-     * @var \Tx_Oelib_TestingFramework
+     * @var TestingFramework
      */
     private $testingFramework = null;
 
@@ -43,7 +44,7 @@ final class RegistrationTest extends TestCase
 
         \Tx_Seminars_OldModel_Registration::purgeCachedSeminars();
 
-        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
 
         \Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', new \Tx_Oelib_Configuration());

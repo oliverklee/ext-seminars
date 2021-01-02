@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\ViewHelpers;
 
+use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\Model\TitledTestingModel;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\Model\UntitledTestingModel;
@@ -21,7 +22,7 @@ class CommaSeparatedTitlesViewHelperTest extends TestCase
     private $subject;
 
     /**
-     * @var \Tx_Oelib_TestingFramework
+     * @var TestingFramework
      */
     private $testingFramework;
 
@@ -37,7 +38,7 @@ class CommaSeparatedTitlesViewHelperTest extends TestCase
 
     protected function setUp()
     {
-        $this->testingFramework = new \Tx_Oelib_TestingFramework('tx_seminars');
+        $this->testingFramework = new TestingFramework('tx_seminars');
         $this->list = new \Tx_Oelib_List();
         $this->subject = new \Tx_Seminars_ViewHelper_CommaSeparatedTitles();
     }
