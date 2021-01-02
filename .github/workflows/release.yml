@@ -32,6 +32,7 @@ jobs:
         with:
           php-version: ${{ matrix.php-versions }}
           extensions: intl, mbstring, xml, soap, zip, curl
+          tools: composer:v2
           coverage: none
 
       - name: Install TYPO3 TER client
