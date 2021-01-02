@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
+use OliverKlee\Oelib\Model\Country;
 use OliverKlee\PhpUnit\TestCase;
 
 /**
@@ -270,12 +271,12 @@ class PlaceTest extends TestCase
     {
         /** @var \Tx_Oelib_Mapper_Country $mapper */
         $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_Country::class);
-        /** @var \Tx_Oelib_Model_Country $country */
+        /** @var Country $country */
         $country = $mapper->find(54);
         $this->subject->setData(['country' => $country->getIsoAlpha2Code()]);
 
         self::assertInstanceOf(
-            \Tx_Oelib_Model_Country::class,
+            Country::class,
             $this->subject->getCountry()
         );
     }
@@ -287,7 +288,7 @@ class PlaceTest extends TestCase
     {
         /** @var \Tx_Oelib_Mapper_Country $mapper */
         $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_Country::class);
-        /** @var \Tx_Oelib_Model_Country $country */
+        /** @var Country $country */
         $country = $mapper->find(54);
         $this->subject->setData(['country' => $country->getIsoAlpha2Code()]);
 
@@ -304,7 +305,7 @@ class PlaceTest extends TestCase
     {
         /** @var \Tx_Oelib_Mapper_Country $mapper */
         $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_Country::class);
-        /** @var \Tx_Oelib_Model_Country $country */
+        /** @var Country $country */
         $country = $mapper->find(54);
         $this->subject->setCountry($country);
 
@@ -357,7 +358,7 @@ class PlaceTest extends TestCase
     {
         /** @var \Tx_Oelib_Mapper_Country $mapper */
         $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_Country::class);
-        /** @var \Tx_Oelib_Model_Country $country */
+        /** @var Country $country */
         $country = $mapper->find(54);
         $this->subject->setCountry($country);
 

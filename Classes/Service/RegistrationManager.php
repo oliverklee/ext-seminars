@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
+use OliverKlee\Oelib\Model\FrontEndUser;
 use OliverKlee\Seminar\Email\Salutation;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
@@ -619,8 +620,8 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         $company = isset($formData['company']) ? strip_tags($formData['company']) : '';
         $registration->setCompany($company);
 
-        $validGenderMale = (string)Tx_Oelib_Model_FrontEndUser::GENDER_MALE;
-        $validGenderFemale = (string)Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE;
+        $validGenderMale = (string)FrontEndUser::GENDER_MALE;
+        $validGenderFemale = (string)FrontEndUser::GENDER_FEMALE;
         if (
             isset($formData['gender'])
             && (
@@ -629,7 +630,7 @@ class Tx_Seminars_Service_RegistrationManager extends \Tx_Oelib_TemplateHelper
         ) {
             $gender = (int)$formData['gender'];
         } else {
-            $gender = \Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN;
+            $gender = FrontEndUser::GENDER_UNKNOWN;
         }
         $registration->setGender($gender);
 

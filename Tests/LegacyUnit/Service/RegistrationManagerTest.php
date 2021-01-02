@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
+use OliverKlee\Oelib\Model\Country;
+use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
@@ -14,7 +16,6 @@ use OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures\RegistrationHookInterf
 use OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures\TestingRegistrationManager;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
-use Tx_Oelib_Model_FrontEndUser;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Mail\MailMessage;
@@ -3537,7 +3538,7 @@ final class RegistrationManagerTest extends TestCase
 
         /** @var \Tx_Oelib_Mapper_Country $mapper */
         $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_Country::class);
-        /** @var \Tx_Oelib_Model_Country $country */
+        /** @var Country $country */
         $country = $mapper->find(54);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
@@ -3639,7 +3640,7 @@ final class RegistrationManagerTest extends TestCase
 
         /** @var \Tx_Oelib_Mapper_Country $mapper */
         $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_Country::class);
-        /** @var \Tx_Oelib_Model_Country $country */
+        /** @var Country $country */
         $country = $mapper->find(54);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
@@ -4191,7 +4192,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForFormalSalutationAndGenderUnknownContainsFormalUnknownSalutation()
     {
-        if (\Tx_Oelib_Model_FrontEndUser::hasGenderField()) {
+        if (OelibFrontEndUser::hasGenderField()) {
             self::markTestSkipped('This test is only applicable if there is no FrontEndUser.gender field.');
         }
 
@@ -4220,7 +4221,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForFormalSalutationAndGenderMaleContainsFormalMaleSalutation()
     {
-        if (!\Tx_Oelib_Model_FrontEndUser::hasGenderField()) {
+        if (!OelibFrontEndUser::hasGenderField()) {
             self::markTestSkipped('This test is only applicable if there is a FrontEndUser.gender field.');
         }
 
@@ -4249,7 +4250,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForFormalSalutationAndGenderFemaleContainsFormalFemaleSalutation()
     {
-        if (!\Tx_Oelib_Model_FrontEndUser::hasGenderField()) {
+        if (!OelibFrontEndUser::hasGenderField()) {
             self::markTestSkipped('This test is only applicable if there is a FrontEndUser.gender field.');
         }
 
@@ -4572,7 +4573,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForFormalSalutationAndGenderUnknownNotContainsRawTemplateMarkers()
     {
-        if (\Tx_Oelib_Model_FrontEndUser::hasGenderField()) {
+        if (OelibFrontEndUser::hasGenderField()) {
             self::markTestSkipped('This test is only applicable if there is no FrontEndUser.gender field.');
         }
 
@@ -4600,7 +4601,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForFormalSalutationAndGenderMaleNotContainsRawTemplateMarkers()
     {
-        if (!\Tx_Oelib_Model_FrontEndUser::hasGenderField()) {
+        if (!OelibFrontEndUser::hasGenderField()) {
             self::markTestSkipped('This test is only applicable if there is a FrontEndUser.gender field.');
         }
 
@@ -4628,7 +4629,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForFormalSalutationAndGenderFemaleNotContainsRawTemplateMarkers()
     {
-        if (!\Tx_Oelib_Model_FrontEndUser::hasGenderField()) {
+        if (!OelibFrontEndUser::hasGenderField()) {
             self::markTestSkipped('This test is only applicable if there is a FrontEndUser.gender field.');
         }
 
@@ -7768,11 +7769,11 @@ final class RegistrationManagerTest extends TestCase
 
         $subject->setRegistrationData(
             $registration,
-            ['gender' => (string)Tx_Oelib_Model_FrontEndUser::GENDER_MALE]
+            ['gender' => (string)OelibFrontEndUser::GENDER_MALE]
         );
 
         self::assertSame(
-            \Tx_Oelib_Model_FrontEndUser::GENDER_MALE,
+            OelibFrontEndUser::GENDER_MALE,
             $registration->getGender()
         );
     }
@@ -7791,11 +7792,11 @@ final class RegistrationManagerTest extends TestCase
 
         $subject->setRegistrationData(
             $registration,
-            ['gender' => (string)Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE]
+            ['gender' => (string)OelibFrontEndUser::GENDER_FEMALE]
         );
 
         self::assertSame(
-            \Tx_Oelib_Model_FrontEndUser::GENDER_FEMALE,
+            OelibFrontEndUser::GENDER_FEMALE,
             $registration->getGender()
         );
     }
@@ -7815,7 +7816,7 @@ final class RegistrationManagerTest extends TestCase
         $subject->setRegistrationData($registration, ['gender' => '42']);
 
         self::assertSame(
-            \Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN,
+            OelibFrontEndUser::GENDER_UNKNOWN,
             $registration->getGender()
         );
     }
@@ -7835,7 +7836,7 @@ final class RegistrationManagerTest extends TestCase
         $subject->setRegistrationData($registration, ['gender' => 'Mr. Fantastic']);
 
         self::assertSame(
-            \Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN,
+            OelibFrontEndUser::GENDER_UNKNOWN,
             $registration->getGender()
         );
     }
@@ -7855,7 +7856,7 @@ final class RegistrationManagerTest extends TestCase
         $subject->setRegistrationData($registration, ['gender' => '']);
 
         self::assertSame(
-            \Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN,
+            OelibFrontEndUser::GENDER_UNKNOWN,
             $registration->getGender()
         );
     }
@@ -7875,7 +7876,7 @@ final class RegistrationManagerTest extends TestCase
         $subject->setRegistrationData($registration, []);
 
         self::assertSame(
-            \Tx_Oelib_Model_FrontEndUser::GENDER_UNKNOWN,
+            OelibFrontEndUser::GENDER_UNKNOWN,
             $registration->getGender()
         );
     }

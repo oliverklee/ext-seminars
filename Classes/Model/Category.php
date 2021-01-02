@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Model\AbstractModel;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 
 /**
@@ -10,7 +11,7 @@ use OliverKlee\Seminars\Model\Interfaces\Titled;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Model_Category extends \Tx_Oelib_Model implements Titled
+class Tx_Seminars_Model_Category extends AbstractModel implements Titled
 {
     /**
      * Returns our title.

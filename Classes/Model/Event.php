@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
+use OliverKlee\Oelib\Model\Language;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
 
@@ -785,7 +787,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     /**
      * Returns our language.
      *
-     * @return \Tx_Oelib_Model_Language|null
+     * @return Language|null
      */
     public function getLanguage()
     {
@@ -799,13 +801,9 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Sets our language.
-     *
-     * @param \Tx_Oelib_Model_Language $language our language
-     *
      * @return void
      */
-    public function setLanguage(\Tx_Oelib_Model_Language $language)
+    public function setLanguage(Language $language)
     {
         $this->setAsString('language', $language->getIsoAlpha2Code());
     }
@@ -1566,11 +1564,11 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     /**
      * Returns our owner.
      *
-     * @return \Tx_Oelib_Model_FrontEndUser|null
+     * @return OelibFrontEndUser|null
      */
     public function getOwner()
     {
-        /** @var \Tx_Oelib_Model_FrontEndUser|null $owner */
+        /** @var OelibFrontEndUser|null $owner */
         $owner = $this->getAsModel('owner_feuser');
 
         return $owner;

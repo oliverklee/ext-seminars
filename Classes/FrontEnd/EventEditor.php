@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
+use OliverKlee\Oelib\Model\AbstractModel;
+use OliverKlee\Oelib\Model\BackEndUser;
+use OliverKlee\Oelib\Model\Country;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -1437,7 +1440,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Gets the reviewer for new/edited records.
      *
-     * @return \Tx_Oelib_Model_BackEndUser|null
+     * @return BackEndUser|null
      */
     protected function getReviewer()
     {
@@ -1789,7 +1792,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
             try {
                 /** @var \Tx_Oelib_Mapper_Country $mapper */
                 $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_Country::class);
-                /** @var \Tx_Oelib_Model_Country $country */
+                /** @var Country $country */
                 $country = $mapper->find($countryUid);
             } catch (\Exception $exception) {
                 $country = null;
@@ -2685,7 +2688,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
 
         /** @var \Tx_Oelib_Mapper_Country $mapper */
         $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_Country::class);
-        /** @var \Tx_Oelib_Model_Country $country */
+        /** @var Country $country */
         foreach ($mapper->findAll('cn_short_local') as $country) {
             $result[] = [
                 'caption' => $country->getLocalShortName(),
@@ -2728,7 +2731,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
 
         $result = [];
 
-        /** @var \Tx_Oelib_Model|Titled $model */
+        /** @var AbstractModel|Titled $model */
         foreach ($models as $model) {
             $result[] = [
                 'caption' => $model->getTitle(),

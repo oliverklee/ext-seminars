@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\Model;
 
+use OliverKlee\Oelib\Model\AbstractModel;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 
 /**
@@ -11,7 +12,7 @@ use OliverKlee\Seminars\Model\Interfaces\Titled;
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class TitledTestingModel extends \Tx_Oelib_Model implements Titled
+class TitledTestingModel extends AbstractModel implements Titled
 {
     /**
      * Returns our title.

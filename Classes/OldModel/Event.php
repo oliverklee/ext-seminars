@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
+use OliverKlee\Oelib\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
@@ -3256,7 +3257,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Gets this event's owner (the FE user who has created this event).
      *
-     * @return \Tx_Oelib_Model_FrontEndUser|null
+     * @return FrontEndUser|null
      */
     public function getOwner()
     {
@@ -3266,7 +3267,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         /** @var \Tx_Oelib_Mapper_FrontEndUser $mapper */
         $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_FrontEndUser::class);
-        /** @var \Tx_Oelib_Model_FrontEndUser|null $owner */
+        /** @var FrontEndUser|null $owner */
         $owner = $mapper->find($this->getRecordPropertyInteger('owner_feuser'));
 
         return $owner;
