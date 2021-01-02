@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\BackEnd;
 
 use OliverKlee\Oelib\Authentication\BackEndLoginManager;
+use OliverKlee\Oelib\Templating\Template;
+use OliverKlee\Oelib\Templating\TemplateRegistry;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
@@ -38,7 +40,7 @@ abstract class AbstractList
     protected $page = null;
 
     /**
-     * @var \Tx_Oelib_Template the template object
+     * @var Template
      */
     protected $template = null;
 
@@ -71,7 +73,7 @@ abstract class AbstractList
     {
         $this->page = $module;
 
-        $this->template = \Tx_Oelib_TemplateRegistry::get($this->templateFile);
+        $this->template = TemplateRegistry::get($this->templateFile);
     }
 
     /**

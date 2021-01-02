@@ -7,6 +7,8 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Model\Country;
 use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
+use OliverKlee\Oelib\Templating\Template;
+use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
@@ -154,7 +156,7 @@ final class RegistrationManagerTest extends TestCase
         );
         $this->testingFramework->createRelation('tx_seminars_seminars_organizers_mm', $this->seminarUid, $organizerUid);
 
-        \Tx_Oelib_TemplateHelper::setCachedConfigurationValue(
+        TemplateHelper::setCachedConfigurationValue(
             'templateFile',
             'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
         );
@@ -2351,7 +2353,7 @@ final class RegistrationManagerTest extends TestCase
             'confirmation'
         );
         $hook->expects(self::once())->method('modifyAttendeeEmailBodyPlainText')->with(
-            self::isInstanceOf(\Tx_Oelib_Template::class),
+            self::isInstanceOf(Template::class),
             $registration,
             'confirmation'
         );
@@ -2417,12 +2419,12 @@ final class RegistrationManagerTest extends TestCase
             'confirmation'
         );
         $hook->expects(self::once())->method('modifyAttendeeEmailBodyPlainText')->with(
-            self::isInstanceOf(\Tx_Oelib_Template::class),
+            self::isInstanceOf(Template::class),
             $registration,
             'confirmation'
         );
         $hook->expects(self::once())->method('modifyAttendeeEmailBodyHtml')->with(
-            self::isInstanceOf(\Tx_Oelib_Template::class),
+            self::isInstanceOf(Template::class),
             $registration,
             'confirmation'
         );
@@ -4916,10 +4918,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForRegistrationMailAndNoUnregistrationPossibleNotAddsUnregistrationNotice()
     {
-        \Tx_Oelib_TemplateHelper::setCachedConfigurationValue(
-            'allowUnregistrationWithEmptyWaitingList',
-            false
-        );
+        TemplateHelper::setCachedConfigurationValue('allowUnregistrationWithEmptyWaitingList', false);
 
         /** @var TestingRegistrationManager|MockObject $subject */
         $subject = $this->getMockBuilder(TestingRegistrationManager::class)
@@ -4947,10 +4946,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForRegistrationMailAndUnregistrationPossibleAddsUnregistrationNotice()
     {
-        \Tx_Oelib_TemplateHelper::setCachedConfigurationValue(
-            'allowUnregistrationWithEmptyWaitingList',
-            true
-        );
+        TemplateHelper::setCachedConfigurationValue('allowUnregistrationWithEmptyWaitingList', true);
 
         /** @var TestingRegistrationManager|MockObject $subject */
         $subject = $this->getMockBuilder(TestingRegistrationManager::class)

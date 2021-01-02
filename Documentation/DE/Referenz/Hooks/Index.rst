@@ -455,7 +455,6 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          *
          * You may modify or set marker values in the template.
          *
-         * @param \Tx_Oelib_Template $emailTemplate
          * @param \Tx_Seminars_Model_Registration $registration
          * @param string $emailReason Possible values:
          *          - confirmation
@@ -466,7 +465,7 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          * @return void
          */
         public function modifyAttendeeEmailBodyPlainText(
-            \Tx_Oelib_Template $emailTemplate,
+            Template $emailTemplate,
             \Tx_Seminars_Model_Registration $registration,
             string $emailReason
         ) {
@@ -480,7 +479,6 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          *
          * You may modify or set marker values in the template.
          *
-         * @param \Tx_Oelib_Template $emailTemplate
          * @param \Tx_Seminars_Model_Registration $registration
          * @param string $emailReason Possible values:
          *          - confirmation
@@ -491,7 +489,7 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          * @return void
          */
         public function modifyAttendeeEmailBodyHtml(
-            \Tx_Oelib_Template $emailTemplate,
+            Template $emailTemplate,
             \Tx_Seminars_Model_Registration $registration,
             string $emailReason
         ) {
@@ -760,8 +758,7 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          *
          * @param \Tx_Seminars_Model_Registration $registration
          *        the registration the row is made from
-         * @param \Tx_Oelib_Template $template
-         *        the template that will be used to create the registration list
+         * @param Template $template the template that will be used to create the registration list
          * @param int $registrationsToShow
          *        the type of registration shown in the list
          *
@@ -769,7 +766,7 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          */
         public function modifyListRow(
             \Tx_Seminars_Model_Registration $registration,
-            \Tx_Oelib_Template $template,
+            Template $template,
             int $registrationsToShow
         ) {
             // Hier Ihr Code
@@ -785,8 +782,7 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          *
          * @param \Tx_Seminars_Bag_Registration $registrationBag
          *        the registrationBag the heading is made for
-         * @param \Tx_Oelib_Template $template
-         *        the template that will be used to create the registration list
+         * @param Template $template the template that will be used to create the registration list
          * @param int $registrationsToShow
          *        the type of registration shown in the list
          *
@@ -794,7 +790,7 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          */
         public function modifyListHeader(
             \Tx_Seminars_Bag_Registration $registrationBag,
-            \Tx_Oelib_Template $template,
+            Template $template,
             int $registrationsToShow
         ) {
             // Hier Ihr Code
@@ -810,8 +806,7 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          *
          * @param \Tx_Seminars_Bag_Registration $registrationBag
          *        the registrationBag the table is made for
-         * @param \Tx_Oelib_Template $template
-         *        the template that will be used to create the registration list
+         * @param Template $template the template that will be used to create the registration list
          * @param int $registrationsToShow
          *        the type of registration shown in the list
          *
@@ -819,7 +814,7 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          */
         public function modifyList(
             \Tx_Seminars_Bag_Registration $registrationBag,
-            \Tx_Oelib_Template $template,
+            Template $template,
             int $registrationsToShow
         ) {
             // Hier Ihr Code

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\BackEnd;
 
 use OliverKlee\Oelib\Authentication\BackEndLoginManager;
+use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\BackEnd\AbstractList;
@@ -640,30 +641,30 @@ class RegistrationsListTest extends TestCase
         $hook = $this->createMock(BackEndRegistrationListView::class);
         $hook->expects(self::once())->method('modifyListRow')->with(
             self::isInstanceOf(\Tx_Seminars_Model_Registration::class),
-            self::isInstanceOf(\Tx_Oelib_Template::class),
+            self::isInstanceOf(Template::class),
             RegistrationsList::REGULAR_REGISTRATIONS
         );
         $hook->expects(self::exactly(2))->method('modifyListHeader')->withConsecutive(
             [
                 self::isInstanceOf(\Tx_Seminars_Bag_Registration::class),
-                self::isInstanceOf(\Tx_Oelib_Template::class),
+                self::isInstanceOf(Template::class),
                 RegistrationsList::REGULAR_REGISTRATIONS,
             ],
             [
                 self::isInstanceOf(\Tx_Seminars_Bag_Registration::class),
-                self::isInstanceOf(\Tx_Oelib_Template::class),
+                self::isInstanceOf(Template::class),
                 RegistrationsList::REGISTRATIONS_ON_QUEUE,
             ]
         );
         $hook->expects(self::exactly(2))->method('modifyList')->withConsecutive(
             [
                 self::isInstanceOf(\Tx_Seminars_Bag_Registration::class),
-                self::isInstanceOf(\Tx_Oelib_Template::class),
+                self::isInstanceOf(Template::class),
                 RegistrationsList::REGULAR_REGISTRATIONS,
             ],
             [
                 self::isInstanceOf(\Tx_Seminars_Bag_Registration::class),
-                self::isInstanceOf(\Tx_Oelib_Template::class),
+                self::isInstanceOf(Template::class),
                 RegistrationsList::REGISTRATIONS_ON_QUEUE,
             ]
         );

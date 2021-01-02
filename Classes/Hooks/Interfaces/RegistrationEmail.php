@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Hooks\Interfaces;
 
+use OliverKlee\Oelib\Templating\Template;
+
 /**
  * Use this interface for hooks concerning the registration emails.
  *
@@ -45,7 +47,7 @@ interface RegistrationEmail extends Hook
      *
      * You may modify or set marker values in the template.
      *
-     * @param \Tx_Oelib_Template $emailTemplate
+     * @param Template $emailTemplate
      * @param \Tx_Seminars_Model_Registration $registration
      * @param string $emailReason Possible values:
      *          - confirmation
@@ -56,7 +58,7 @@ interface RegistrationEmail extends Hook
      * @return void
      */
     public function modifyAttendeeEmailBodyPlainText(
-        \Tx_Oelib_Template $emailTemplate,
+        Template $emailTemplate,
         \Tx_Seminars_Model_Registration $registration,
         string $emailReason
     );
@@ -68,7 +70,7 @@ interface RegistrationEmail extends Hook
      *
      * You may modify or set marker values in the template.
      *
-     * @param \Tx_Oelib_Template $emailTemplate
+     * @param Template $emailTemplate
      * @param \Tx_Seminars_Model_Registration $registration
      * @param string $emailReason Possible values:
      *          - confirmation
@@ -79,7 +81,7 @@ interface RegistrationEmail extends Hook
      * @return void
      */
     public function modifyAttendeeEmailBodyHtml(
-        \Tx_Oelib_Template $emailTemplate,
+        Template $emailTemplate,
         \Tx_Seminars_Model_Registration $registration,
         string $emailReason
     );

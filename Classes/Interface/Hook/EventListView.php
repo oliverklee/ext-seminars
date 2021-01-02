@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Templating\Template;
+
 /**
  * This interface needs to be used for hooks concerning the event list view.
  *
@@ -18,22 +20,20 @@ interface Tx_Seminars_Interface_Hook_EventListView
      *
      * @param \Tx_Seminars_Model_Event $event
      *        the event to display in the current row
-     * @param \Tx_Oelib_Template $template
-     *        the template that will be used to create the list row output
+     * @param Template $template the template that will be used to create the list row output
      *
      * @return void
      *
      * @deprecated will be removed in seminars 4; use `SeminarListView::modifyListRow` instead
      */
-    public function modifyListRow(\Tx_Seminars_Model_Event $event, \Tx_Oelib_Template $template);
+    public function modifyListRow(\Tx_Seminars_Model_Event $event, Template $template);
 
     /**
      * Modifies a list view row in the "my events" list.
      *
      * @param \Tx_Seminars_Model_Registration $registration
      *        the registration to display in the current row
-     * @param \Tx_Oelib_Template $template
-     *        the template that will be used to create the list row output
+     * @param Template $template the template that will be used to create the list row output
      *
      * @return void
      *
@@ -41,6 +41,6 @@ interface Tx_Seminars_Interface_Hook_EventListView
      */
     public function modifyMyEventsListRow(
         \Tx_Seminars_Model_Registration $registration,
-        \Tx_Oelib_Template $template
+        Template $template
     );
 }

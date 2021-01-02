@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\OldModel;
 
+use OliverKlee\Oelib\Templating\TemplateHelper;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
@@ -21,7 +22,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-abstract class AbstractModel extends \Tx_Oelib_TemplateHelper
+abstract class AbstractModel extends TemplateHelper
 {
     /**
      * @var string the extension key

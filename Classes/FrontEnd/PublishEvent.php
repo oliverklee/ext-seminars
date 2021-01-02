@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Templating\TemplateHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -9,7 +10,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class Tx_Seminars_FrontEnd_PublishEvent extends \Tx_Oelib_TemplateHelper
+class Tx_Seminars_FrontEnd_PublishEvent extends TemplateHelper
 {
     /**
      * @var int

@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Templating\TemplateHelper;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
@@ -9,7 +10,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-abstract class Tx_Seminars_FrontEnd_AbstractView extends \Tx_Oelib_TemplateHelper implements \Tx_Oelib_Interface_ConfigurationCheckable
+abstract class Tx_Seminars_FrontEnd_AbstractView extends TemplateHelper implements \Tx_Oelib_Interface_ConfigurationCheckable
 {
     /**
      * the relative path to the uploaded files

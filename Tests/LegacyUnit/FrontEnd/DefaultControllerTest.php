@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 
+use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarListView;
@@ -132,11 +133,11 @@ class DefaultControllerTest extends TestCase
         $this->subject->getTemplateCode();
         $this->subject->setLabels();
         $this->subject->createHelperObjects();
-        \Tx_Oelib_TemplateHelper::setCachedConfigurationValue(
+        TemplateHelper::setCachedConfigurationValue(
             'dateFormatYMD',
             '%d.%m.%Y'
         );
-        \Tx_Oelib_TemplateHelper::setCachedConfigurationValue(
+        TemplateHelper::setCachedConfigurationValue(
             'timeFormat',
             '%H:%M'
         );
