@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Require oelib >= 3.2.0 (#657)
 - Move more tests to the new testing framework (#653, #655)
 - Namespace the legacy tests (#599)
 
