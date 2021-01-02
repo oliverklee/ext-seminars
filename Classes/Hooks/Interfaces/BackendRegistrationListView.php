@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Hooks\Interfaces;
 
+use OliverKlee\Oelib\Templating\Template;
+
 /**
  * Use this interface for hooks concerning the backend registration list view.
  *
@@ -21,8 +23,7 @@ interface BackendRegistrationListView extends Hook
      *
      * @param \Tx_Seminars_Model_Registration $registration
      *        the registration the row is made from
-     * @param \Tx_Oelib_Template $template
-     *        the template that will be used to create the registration list
+     * @param Template $template the template that will be used to create the registration list
      * @param int $registrationsToShow
      *        the type of registration shown in the list
      *
@@ -30,7 +31,7 @@ interface BackendRegistrationListView extends Hook
      */
     public function modifyListRow(
         \Tx_Seminars_Model_Registration $registration,
-        \Tx_Oelib_Template $template,
+        Template $template,
         int $registrationsToShow
     );
 
@@ -44,8 +45,7 @@ interface BackendRegistrationListView extends Hook
      *
      * @param \Tx_Seminars_Bag_Registration $registrationBag
      *        the registrationBag the heading is made for
-     * @param \Tx_Oelib_Template $template
-     *        the template that will be used to create the registration list
+     * @param Template $template the template that will be used to create the registration list
      * @param int $registrationsToShow
      *        the type of registration shown in the list
      *
@@ -53,7 +53,7 @@ interface BackendRegistrationListView extends Hook
      */
     public function modifyListHeader(
         \Tx_Seminars_Bag_Registration $registrationBag,
-        \Tx_Oelib_Template $template,
+        Template $template,
         int $registrationsToShow
     );
 
@@ -67,8 +67,7 @@ interface BackendRegistrationListView extends Hook
      *
      * @param \Tx_Seminars_Bag_Registration $registrationBag
      *        the registrationBag the table is made for
-     * @param \Tx_Oelib_Template $template
-     *        the template that will be used to create the registration list
+     * @param Template $template the template that will be used to create the registration list
      * @param int $registrationsToShow
      *        the type of registration shown in the list
      *
@@ -76,7 +75,7 @@ interface BackendRegistrationListView extends Hook
      */
     public function modifyList(
         \Tx_Seminars_Bag_Registration $registrationBag,
-        \Tx_Oelib_Template $template,
+        Template $template,
         int $registrationsToShow
     );
 }

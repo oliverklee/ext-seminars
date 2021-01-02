@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Fixtures;
 
+use OliverKlee\Oelib\Templating\TemplateHelper;
+
 /**
  * This a class to test the configuration check class.
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class DummyObjectToCheck extends \Tx_Oelib_TemplateHelper implements \Tx_Oelib_Interface_ConfigurationCheckable
+class DummyObjectToCheck extends TemplateHelper implements \Tx_Oelib_Interface_ConfigurationCheckable
 {
     /**
      * @param array $configuration

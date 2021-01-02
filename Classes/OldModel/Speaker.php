@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Seminars\OldModel\AbstractModel;
 use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Resource\FileRepository;
@@ -218,13 +219,13 @@ class Tx_Seminars_OldModel_Speaker extends AbstractModel
     /**
      * Creates a link to this speaker's homepage, with the title as link text.
      *
-     * @param \Tx_Oelib_TemplateHelper $plugin templatehelper object with current configuration values
+     * @param TemplateHelper $plugin object with current configuration values
      *
      * @return string this speaker's title wrapped in an link tag, or if the
      *                speaker has no homepage just the speaker name, will not
      *                be empty
      */
-    public function getLinkedTitle(\Tx_Oelib_TemplateHelper $plugin): string
+    public function getLinkedTitle(TemplateHelper $plugin): string
     {
         $safeTitle = \htmlspecialchars($this->getTitle(), ENT_QUOTES | ENT_HTML5);
 

@@ -7,6 +7,7 @@ use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
 use OliverKlee\Oelib\Model\AbstractModel;
 use OliverKlee\Oelib\Model\BackEndUser;
 use OliverKlee\Oelib\Model\Country;
+use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -126,8 +127,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
 
         $this->storeAttachedFiles();
 
-        /** @var \Tx_Oelib_Template $template */
-        $template = GeneralUtility::makeInstance(\Tx_Oelib_Template::class);
+        /** @var Template $template */
+        $template = GeneralUtility::makeInstance(Template::class);
         $template->processTemplate(parent::render());
 
         $template->hideSubpartsArray(
@@ -155,12 +156,12 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * our own formatted list to ensure correctly displayed attachments, even if
      * there was a validation error.
      *
-     * @param \Tx_Oelib_Template $template holds the raw HTML output, must be already processed by FORMidable
+     * @param Template $template holds the raw HTML output, must be already processed by FORMidable
      *
      * @return string HTML for the FE editor with the formatted attachment
      *                list if there are attached files, will not be empty
      */
-    private function getHtmlWithAttachedFilesList(\Tx_Oelib_Template $template): string
+    private function getHtmlWithAttachedFilesList(Template $template): string
     {
         foreach (
             [
@@ -1262,12 +1263,11 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Adds a class 'required' to the label of a field if it is required.
      *
-     * @param \Tx_Oelib_Template $template the template in which the required
-     *        markers should be set.
+     * @param Template $template the template in which the required markers should be set
      *
      * @return void
      */
-    private function setRequiredFieldLabels(\Tx_Oelib_Template $template)
+    private function setRequiredFieldLabels(Template $template)
     {
         foreach ($this->getFieldsToShow() as $formField) {
             $template->setMarker(

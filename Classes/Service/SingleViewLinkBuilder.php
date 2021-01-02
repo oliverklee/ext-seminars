@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Templating\TemplateHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -16,18 +17,16 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
     /**
      * a plugin instance that provides access to the flexforms plugin settings
      *
-     * @var \Tx_Oelib_TemplateHelper|null
+     * @var TemplateHelper|null
      */
     private $plugin = null;
 
     /**
      * Sets the plugin used accessing to the flexforms plugin settings.
      *
-     * @param \Tx_Oelib_TemplateHelper
-     *
      * @return void
      */
-    public function setPlugin(\Tx_Oelib_TemplateHelper $plugin)
+    public function setPlugin(TemplateHelper $plugin)
     {
         $this->plugin = $plugin;
     }
@@ -35,7 +34,7 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
     /**
      * Returns the plugin used for accessing the flexforms plugin settings.
      *
-     * @return \Tx_Oelib_TemplateHelper|null
+     * @return TemplateHelper|null
      */
     protected function getPlugin()
     {
@@ -184,7 +183,7 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
      */
     protected function getSingleViewPageFromConfiguration(): int
     {
-        if ($this->getPlugin() instanceof \Tx_Oelib_TemplateHelper) {
+        if ($this->getPlugin() instanceof TemplateHelper) {
             $result = $this->getPlugin()->getConfValueInteger('detailPID');
         } else {
             $result = \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')->getAsInteger('detailPID');

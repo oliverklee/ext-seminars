@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 
+use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\Service\TestingSingleViewLinkBuilder;
@@ -266,11 +267,8 @@ final class SingleViewLinkBuilderTest extends TestCase
      */
     public function getSingleViewPageFromConfigurationForPluginSetReturnsPageUidFromPluginConfiguration()
     {
-        /** @var \Tx_Oelib_TemplateHelper|MockObject $plugin */
-        $plugin = $this->createPartialMock(
-            \Tx_Oelib_TemplateHelper::class,
-            ['hasConfValueInteger', 'getConfValueInteger']
-        );
+        /** @var TemplateHelper|MockObject $plugin */
+        $plugin = $this->createPartialMock(TemplateHelper::class, ['hasConfValueInteger', 'getConfValueInteger']);
         $plugin->method('hasConfValueInteger')->willReturn(true);
         $plugin->method('getConfValueInteger')->with('detailPID')->willReturn(42);
 

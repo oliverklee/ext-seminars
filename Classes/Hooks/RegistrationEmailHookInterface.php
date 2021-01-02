@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Hooks;
 
+use OliverKlee\Oelib\Templating\Template;
+
 /**
  * Hook interface to customize emails after they has been processed.
  *
@@ -24,16 +26,13 @@ interface RegistrationEmailHookInterface
     public function postProcessAttendeeEmail(\Tx_Oelib_Mail $mail, \Tx_Seminars_Model_Registration $registration);
 
     /**
-     * @param \Tx_Seminars_OldModel_Registration $registration
-     * @param \Tx_Oelib_Template $emailTemplate
-     *
      * @return void
      *
      * @deprecated will be removed in seminars 4; use `RegistrationEmail::modifyAttendeeEmailBody` instead
      */
     public function postProcessAttendeeEmailText(
         \Tx_Seminars_OldModel_Registration $registration,
-        \Tx_Oelib_Template $emailTemplate
+        Template $emailTemplate
     );
 
     /**

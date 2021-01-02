@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Templating\TemplateHelper;
+
 /**
  * This class provides a way to access config values from plugin.tx_seminars to classes within FrontEnd/.
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Service_ConfigurationService extends \Tx_Oelib_TemplateHelper
+class Tx_Seminars_Service_ConfigurationService extends TemplateHelper
 {
     /** Same as class name */
     public $prefixId = \Tx_Seminars_Service_ConfigurationService::class;

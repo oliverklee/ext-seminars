@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Model\FrontEndUser;
+use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
@@ -301,11 +302,11 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * links. Returns a localized string "will be announced" if the seminar has
      * no places set.
      *
-     * @param \Tx_Oelib_TemplateHelper $plugin the current FE plugin
+     * @param TemplateHelper $plugin the current FE plugin
      *
      * @return string our places description (or '' if there is an error)
      */
-    public function getPlaceWithDetails(\Tx_Oelib_TemplateHelper $plugin): string
+    public function getPlaceWithDetails(TemplateHelper $plugin): string
     {
         if (!$this->hasPlace()) {
             $plugin->setMarker('message_will_be_announced', $this->translate('message_willBeAnnounced'));
@@ -654,14 +655,14 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * As speakers can be related to this event as speakers, partners, tutors or
      * leaders, the type relation can be specified. The default is "speakers".
      *
-     * @param \Tx_Oelib_TemplateHelper $plugin the live pibase object
+     * @param TemplateHelper $plugin the live pibase object
      * @param string $speakerRelation
      *        the relation in which the speakers stand to this event:
      *        "speakers" (default), "partners", "tutors" or "leaders"
      *
      * @return string our speakers (or '' if there is an error)
      */
-    public function getSpeakersWithDetails(\Tx_Oelib_TemplateHelper $plugin, $speakerRelation = 'speakers'): string
+    public function getSpeakersWithDetails(TemplateHelper $plugin, $speakerRelation = 'speakers'): string
     {
         if (!$this->hasSpeakersOfType($speakerRelation)) {
             return '';
@@ -690,16 +691,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         return \implode(LF, $result);
     }
 
-    /**
-     * @param \Tx_Seminars_OldModel_Speaker $speaker
-     * @param \Tx_Oelib_TemplateHelper $plugin
-     *
-     * @return string
-     */
-    private function renderSpeakerImage(
-        \Tx_Seminars_OldModel_Speaker $speaker,
-        \Tx_Oelib_TemplateHelper $plugin
-    ): string {
+    private function renderSpeakerImage(\Tx_Seminars_OldModel_Speaker $speaker, TemplateHelper $plugin): string
+    {
         $imageConfiguration = [
             'altText' => $plugin->translate('speakerImage.alt'),
             'titleText' => $plugin->translate('speakerImage.alt'),
@@ -763,7 +756,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * As speakers can be related to this event as speakers, partners, tutors or
      * leaders, the type relation can be specified. The default is "speakers".
      *
-     * @param \Tx_Oelib_TemplateHelper $plugin
+     * @param TemplateHelper $plugin
      * @param string $speakerRelation
      *        the relation in which the speakers stand to this event:
      *        "speakers" (default), "partners", "tutors" or "leaders"
@@ -771,7 +764,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * @return string our speakers list, will be empty if an error occurred
      *                during processing
      */
-    public function getSpeakersShort(\Tx_Oelib_TemplateHelper $plugin, $speakerRelation = 'speakers'): string
+    public function getSpeakersShort(TemplateHelper $plugin, $speakerRelation = 'speakers'): string
     {
         if (!$this->hasSpeakersOfType($speakerRelation)) {
             return '';
@@ -2003,14 +1996,11 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     }
 
     /**
-     * Gets our organizers (as HTML code with hyperlinks to their homepage, if
-     * they have any).
-     *
-     * @param \Tx_Oelib_TemplateHelper $plugin
+     * Gets our organizers (as HTML code with hyperlinks to their homepage, if they have any).
      *
      * @return string the hyperlinked names of our organizers
      */
-    public function getOrganizers(\Tx_Oelib_TemplateHelper $plugin): string
+    public function getOrganizers(TemplateHelper $plugin): string
     {
         if (!$this->hasOrganizers()) {
             return '';
@@ -2150,11 +2140,9 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * Returns an empty string if this event has no organizing partners or
      * something went wrong with the database query.
      *
-     * @param \Tx_Oelib_TemplateHelper $plugin
-     *
      * @return string the hyperlinked names of our organizing partners, or an empty string
      */
-    public function getOrganizingPartners(\Tx_Oelib_TemplateHelper $plugin): string
+    public function getOrganizingPartners(TemplateHelper $plugin): string
     {
         if (!$this->hasOrganizingPartners()) {
             return '';
