@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Bag;
 
 use Doctrine\DBAL\FetchMode;
+use OliverKlee\Oelib\Database\DatabaseService;
 use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Seminars\OldModel\AbstractModel;
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -320,7 +321,7 @@ abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_Configurati
         }
 
         if (Typo3Version::isNotHigherThan(8)) {
-            $count = \Tx_Oelib_Db::count($this->allTableNames, $this->queryParameters . $this->enabledFieldsQuery);
+            $count = DatabaseService::count($this->allTableNames, $this->queryParameters . $this->enabledFieldsQuery);
         } else {
             $count = $queryBuilder
                ->count('*')
