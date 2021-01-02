@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 
 use OliverKlee\PhpUnit\TestCase;
-use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
@@ -16,8 +15,6 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  */
 class CategoryListTest extends TestCase
 {
-    use LanguageHelper;
-
     /**
      * @var string
      */
@@ -73,54 +70,6 @@ class CategoryListTest extends TestCase
     /*
      * Tests for render
      */
-
-    public function testRenderCreatesEmptyCategoryList()
-    {
-        $otherSystemFolderUid = $this->testingFramework->createSystemFolder();
-        $this->subject->setConfigurationValue('pages', $otherSystemFolderUid);
-
-        $output = $this->subject->render();
-
-        self::assertNotContains(
-            '<table',
-            $output
-        );
-        self::assertContains(
-            $this->getLanguageService()->getLL('label_no_categories'),
-            $output
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function renderCreatesCategoryListContainingOneHtmlspecialcharedCategoryTitle()
-    {
-        $categoryUid = $this->testingFramework->createRecord(
-            'tx_seminars_categories',
-            ['title' => 'one & category']
-        );
-        $eventUid = $this->testingFramework->createRecord(
-            'tx_seminars_seminars',
-            [
-                'pid' => $this->systemFolderPid,
-                'title' => 'my title',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 1000,
-                'categories' => 1,
-            ]
-        );
-        $this->testingFramework->createRelation(
-            'tx_seminars_seminars_categories_mm',
-            $eventUid,
-            $categoryUid
-        );
-
-        $result = $this->subject->render();
-        self::assertContains(
-            'one &amp; category',
-            $result
-        );
-    }
 
     public function testRenderCreatesCategoryListContainingTwoCategoryTitles()
     {
@@ -552,73 +501,6 @@ class CategoryListTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function createCategoryListWithConfigurationValueSetToIconSetsHtmlSpecialcharedCategoryTitleAsImageTitle()
-    {
-        $this->subject->setConfigurationValue('categoriesInListView', 'icon');
-        $singleCategory =
-            [
-                99 => [
-                    'title' => 'te & st',
-                    'icon' => 'foo.gif',
-                ],
-            ];
-        $this->testingFramework->createDummyFile('foo.gif', base64_decode(self::BLANK_GIF, true));
-
-        self::assertRegExp(
-            '/<img[^>]+title="te &amp; st"/',
-            $this->subject->createCategoryList($singleCategory)
-        );
-    }
-
-    public function testCreateCategoryListWithConfigurationValueSetToIconDoesNotReturnTitleOutsideTheImageTag()
-    {
-        $this->subject->setConfigurationValue('categoriesInListView', 'icon');
-        $singleCategory =
-            [
-                99 => [
-                    'title' => 'test',
-                    'icon' => 'foo.gif',
-                ],
-            ];
-
-        $this->testingFramework->createDummyFile('foo.gif', base64_decode(self::BLANK_GIF, true));
-
-        self::assertNotRegExp(
-            '/<img[^>]*>.*test/',
-            $this->subject->createCategoryList($singleCategory)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function createCategoryListWithConfigurationValueSetToIconCanReturnMultipleIcons()
-    {
-        $this->subject->setConfigurationValue('categoriesInListView', 'icon');
-        $multipleCategories =
-            [
-                99 => [
-                    'title' => 'test',
-                    'icon' => 'foo.gif',
-                ],
-                100 => [
-                    'title' => 'new_test',
-                    'icon' => 'foo2.gif',
-                ],
-            ];
-
-        $this->testingFramework->createDummyFile('foo.gif', base64_decode(self::BLANK_GIF, true));
-        $this->testingFramework->createDummyFile('foo2.gif', base64_decode(self::BLANK_GIF, true));
-
-        self::assertRegExp(
-            '/<img[^>]+title="test"[^>]*>.*<img[^>]+title="new_test"[^>]*>/',
-            $this->subject->createCategoryList($multipleCategories)
-        );
-    }
-
     public function testCreateCategoryListWithConfigurationValueSetToTextCanReturnMultipleCategoryTitles()
     {
         $this->subject->setConfigurationValue('categoriesInListView', 'text');
@@ -636,29 +518,6 @@ class CategoryListTest extends TestCase
 
         self::assertRegExp(
             '/foo.*bar/',
-            $this->subject->createCategoryList($multipleCategories)
-        );
-    }
-
-    public function testCreateCategoryListWithConfigurationValueSetToIconDoesNotUseCommasAsSeparators()
-    {
-        $this->subject->setConfigurationValue('categoriesInListView', 'icon');
-        $this->testingFramework->createDummyFile('foo.gif', base64_decode(self::BLANK_GIF, true));
-        $this->testingFramework->createDummyFile('foo2.gif', base64_decode(self::BLANK_GIF, true));
-        $multipleCategories =
-            [
-                99 => [
-                    'title' => 'foo',
-                    'icon' => 'foo.gif',
-                ],
-                100 => [
-                    'title' => 'bar',
-                    'icon' => 'foo2.gif',
-                ],
-            ];
-
-        self::assertNotContains(
-            ',',
             $this->subject->createCategoryList($multipleCategories)
         );
     }
