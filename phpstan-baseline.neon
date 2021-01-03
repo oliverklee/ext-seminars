@@ -16,6 +16,16 @@ parameters:
 			path: Classes/Service/RegistrationManager.php
 
 		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) with 'oliver@example\\.com' and string will always evaluate to false\\.$#"
+			count: 1
+			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
+
+		-
+			message: "#^Parameter \\#2 \\$array of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) expects array\\|ArrayAccess, string given\\.$#"
+			count: 1
+			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
+
+		-
 			message: "#^Parameter \\#1 \\$formData of method Tx_Seminars_FrontEnd_EventEditor\\:\\:validateCheckboxes\\(\\) expects array\\<array\\>, array\\<string, array\\<int, int\\>\\|string\\> given\\.$#"
 			count: 1
 			path: Tests/Functional/FrontEnd/EventEditorTest.php

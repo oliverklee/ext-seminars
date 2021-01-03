@@ -2101,7 +2101,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         /** @var \Tx_Seminars_OldModel_Organizer $organizer */
         foreach ($this->getOrganizerBag() as $organizer) {
-            $result[] = $organizer->getEMailAddress();
+            $result[] = $organizer->getEmailAddress();
         }
 
         return $result;

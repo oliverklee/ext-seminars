@@ -5,14 +5,13 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\BackEnd;
 
 use OliverKlee\Oelib\Configuration\PageFinder;
-use OliverKlee\Oelib\Email\Mail;
-use OliverKlee\Oelib\Email\MailerFactory;
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminar\Email\Salutation;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
+use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -404,10 +403,6 @@ abstract class AbstractEventMailForm
         $registrations = $registrationBagBuilder->build();
 
         if (!$registrations->isEmpty()) {
-            /** @var MailerFactory $mailerFactory */
-            $mailerFactory = GeneralUtility::makeInstance(MailerFactory::class);
-            $mailer = $mailerFactory->getMailer();
-
             $registrationMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
             /** @var \Tx_Seminars_OldModel_Registration $oldRegistration */
             foreach ($registrations as $oldRegistration) {
@@ -416,17 +411,17 @@ abstract class AbstractEventMailForm
                 if (($user === null) || !$user->hasEmailAddress()) {
                     continue;
                 }
-                /** @var Mail $eMail */
-                $eMail = GeneralUtility::makeInstance(Mail::class);
-                $eMail->setSender($sender);
-                $eMail->setReplyTo($organizer);
+                /** @var MailMessage $eMail */
+                $eMail = GeneralUtility::makeInstance(MailMessage::class);
+                $eMail->setFrom($sender->getEmailAddress(), $sender->getName());
+                $eMail->setReplyTo($organizer->getEmailAddress(), $organizer->getName());
                 $eMail->setSubject($this->getPostData('subject'));
-                $eMail->addRecipient($registration->getFrontEndUser());
-                $eMail->setMessage($this->createMessageBody($user, $organizer));
+                $eMail->setTo($user->getEmailAddress(), $user->getName());
+                $eMail->setBody($this->createMessageBody($user, $organizer));
 
                 $this->modifyEmailWithHook($registration, $eMail);
 
-                $mailer->send($eMail);
+                $eMail->send();
             }
 
             /** @var FlashMessage $message */
@@ -461,12 +456,10 @@ abstract class AbstractEventMailForm
      *
      * @param \Tx_Seminars_Model_Registration $registration
      *        the registration to which the e-mail refers
-     * @param Mail $eMail
-     *        the e-mail to be sent
      *
      * @return void
      */
-    protected function modifyEmailWithHook(\Tx_Seminars_Model_Registration $registration, Mail $eMail)
+    protected function modifyEmailWithHook(\Tx_Seminars_Model_Registration $registration, MailMessage $eMail)
     {
     }
 

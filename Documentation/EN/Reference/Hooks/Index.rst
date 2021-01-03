@@ -394,8 +394,8 @@ See also :file:`Classes/Model/Registration.php` for available properties and met
 The plain text hook is always called, because a HTML email always contains a plain text version, too.
 The HTML hook is called only if emails are sent as HTML.
 
-With the other hooks you may modify the complete `Mail` object (e.g. sender or receiver addresses,
-subject line or the complete body). See also :file:`Classes/Mail.php` of extension `oelib` for
+With the other hooks you may modify the complete `MailMessage` object (e.g. sender or receiver addresses,
+subject line or the complete body). See also :file:`sysext/core/Classes/Mail/MailMessage.php` for
 available properties and methods.
 
 Register your class that implements :php:`\OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail`
@@ -428,7 +428,7 @@ Implement the methods required by the interface:
          * @return void
          */
         public function modifyAttendeeEmail(
-            Mail $email,
+            MailMessage $email,
             \Tx_Seminars_Model_Registration $registration,
             string $emailReason
         ) {
@@ -498,7 +498,7 @@ Implement the methods required by the interface:
          * @return void
          */
         public function modifyOrganizerEmail(
-            Mail $email,
+            MailMessage $email,
             \Tx_Seminars_Model_Registration $registration,
             string $emailReason
         ) {
@@ -518,7 +518,7 @@ Implement the methods required by the interface:
          * @return void
          */
         public function modifyAdditionalEmail(
-            Mail $email,
+            MailMessage $email,
             \Tx_Seminars_Model_Registration $registration,
             string $emailReason
         ) {
@@ -660,22 +660,20 @@ It's used like this:
         *
         * @param \Tx_Seminars_Model_Registration $registration
         *        the registration to which the e-mail refers
-        * @param Mail $eMail the e-mail that will be sent
         *
         * @return void
         */
-         public function modifyGeneralEmail(\Tx_Seminars_Model_Registration $registration, Mail $eMail) {…}
+         public function modifyGeneralEmail(\Tx_Seminars_Model_Registration $registration, MailMessage $eMail) {…}
 
          /**
         * Modifies the confirmation e-mail sent via the back-end module.
         *
         * @param Tx_Seminars_Model_Registration $registration
         *        the registration to which the e-mail refers
-        * @param Mail $eMail the e-mail that will be sent
         *
         * @return void
         */
-         public function modifyConfirmEmail(\Tx_Seminars_Model_Registration $registration, Mail $eMail) {…}
+         public function modifyConfirmEmail(\Tx_Seminars_Model_Registration $registration, MailMessage $eMail) {…}
 
          /**
         * Modifies the cancelation e-mail sent via the back-end module.
@@ -685,11 +683,10 @@ It's used like this:
         *
         * @param \Tx_Seminars_Model_Registration $registration
         *        the registration to which the e-mail refers
-        * @param Mail $eMail the e-mail that will be sent
         *
         * @return void
         */
-          public function modifyCancelEmail(\Tx_Seminars_Model_Registration $registration, Mail $eMail) {…}
+          public function modifyCancelEmail(\Tx_Seminars_Model_Registration $registration, MailMessage $eMail) {…}
 
 .. _backendregistrationlistview_en:
 
