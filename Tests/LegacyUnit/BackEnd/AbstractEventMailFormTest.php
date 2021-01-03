@@ -5,13 +5,11 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\BackEnd;
 
 use OliverKlee\Oelib\Configuration\PageFinder;
-use OliverKlee\Oelib\Email\MailerFactory;
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\Functional\BackEnd\Fixtures\TestingEventMailForm;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Test case.
@@ -44,10 +42,6 @@ class AbstractEventMailFormTest extends TestCase
         $this->unifyTestingEnvironment();
 
         $this->testingFramework = new TestingFramework('tx_seminars');
-
-        /** @var MailerFactory $mailerFactory */
-        $mailerFactory = GeneralUtility::makeInstance(MailerFactory::class);
-        $mailerFactory->enableTestMode();
 
         PageFinder::getInstance()->setPageUid($this->testingFramework->createSystemFolder());
 

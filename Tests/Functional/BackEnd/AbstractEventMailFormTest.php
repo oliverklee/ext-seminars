@@ -6,14 +6,16 @@ namespace OliverKlee\Seminars\Tests\Functional\BackEnd;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\Configuration\PageFinder;
-use OliverKlee\Oelib\Email\EmailCollector;
-use OliverKlee\Oelib\Email\MailerFactory;
 use OliverKlee\Oelib\Http\HeaderCollector;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Seminars\BackEnd\AbstractEventMailForm;
 use OliverKlee\Seminars\Tests\Functional\BackEnd\Fixtures\TestingEventMailForm;
+use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
+use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
+use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
+use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -24,6 +26,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 final class AbstractEventMailFormTest extends FunctionalTestCase
 {
     use LanguageHelper;
+    use EmailTrait;
+    use MakeInstanceTrait;
 
     /**
      * @var string[]
@@ -31,9 +35,9 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**
-     * @var EmailCollector
+     * @var MockObject|MailMessage|null
      */
-    private $mailer = null;
+    private $email = null;
 
     /**
      * @var HeaderCollector
@@ -57,10 +61,7 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
         $this->setUpBackendUserFromFixture(1);
         $this->initializeBackEndLanguage();
 
-        /** @var MailerFactory $mailerFactory */
-        $mailerFactory = GeneralUtility::makeInstance(MailerFactory::class);
-        $mailerFactory->enableTestMode();
-        $this->mailer = $mailerFactory->getMailer();
+        $this->email = $this->createEmailMock();
 
         $headerProxyFactory = HeaderProxyFactory::getInstance();
         $headerProxyFactory->enableTestMode();
@@ -69,8 +70,6 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
 
     protected function tearDown()
     {
-        GeneralUtility::purgeInstances();
-
         parent::tearDown();
     }
 
@@ -107,6 +106,10 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 
+        $this->email->expects(self::exactly(2))->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $subject = new TestingEventMailForm(2);
 
         $subject->setPostData(
@@ -118,8 +121,6 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
             ]
         );
         $subject->render();
-
-        self::assertSame(2, $this->mailer->getNumberOfSentEmails());
     }
 
     /**
@@ -128,6 +129,9 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
     public function sendEmailSendsEmailWithNameOfRegisteredUserInSalutationMarker()
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
+
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
         $subject = new TestingEventMailForm(1);
 
@@ -142,7 +146,7 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
         );
         $subject->render();
 
-        self::assertContains('Joe Johnson', $this->mailer->getFirstSentEmail()->getBody());
+        self::assertContains('Joe Johnson', $this->email->getBody());
     }
 
     /**
@@ -162,9 +166,13 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
                 'messageBody' => 'Hello!',
             ]
         );
+
+        $this->email->expects(self::exactly(2))->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+        $this->addMockedInstance(MailMessage::class, $this->email);
         $subject->render();
 
-        self::assertArrayHasKey('system-foo@example.com', $this->mailer->getFirstSentEmail()->getFrom());
+        self::assertArrayHasKey('system-foo@example.com', $this->email->getFrom());
     }
 
     /**
@@ -186,9 +194,12 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
                 'messageBody' => 'Hello!',
             ]
         );
+        $this->email->expects(self::exactly(2))->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+        $this->addMockedInstance(MailMessage::class, $this->email);
         $subject->render();
 
-        self::assertArrayHasKey('oliver@example.com', $this->mailer->getFirstSentEmail()->getFrom());
+        self::assertArrayHasKey('oliver@example.com', $this->email->getFrom());
     }
 
     /**
@@ -208,9 +219,12 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
                 'messageBody' => 'Hello!',
             ]
         );
+        $this->email->expects(self::exactly(2))->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+        $this->addMockedInstance(MailMessage::class, $this->email);
         $subject->render();
 
-        self::assertArrayHasKey('oliver@example.com', $this->mailer->getFirstSentEmail()->getReplyTo());
+        self::assertArrayHasKey('oliver@example.com', $this->email->getReplyTo());
     }
 
     /**
@@ -219,6 +233,10 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
     public function sendEmailAppendsFirstOrganizerFooterToMessageBody()
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
+
+        $this->email->expects(self::exactly(2))->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
         $subject = new TestingEventMailForm(2);
 
@@ -232,7 +250,7 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
         );
         $subject->render();
 
-        self::assertContains("\n-- \nThe one and only", $this->mailer->getFirstSentEmail()->getBody());
+        self::assertContains("\n-- \nThe one and only", $this->email->getBody());
     }
 
     /**
@@ -241,6 +259,9 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
     public function sendEmailUsesProvidedEmailSubject()
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
+
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
         $emailSubject = 'Thank you for your registration.';
         $subject = new TestingEventMailForm(1);
@@ -254,7 +275,7 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
         );
         $subject->render();
 
-        self::assertSame($emailSubject, $this->mailer->getFirstSentEmail()->getSubject());
+        self::assertSame($emailSubject, $this->email->getSubject());
     }
 
     /**
@@ -263,6 +284,9 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
     public function sendEmailNotSendsEmailToUserWithoutEmailAddress()
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
+
+        $this->email->expects(self::never())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
         $subject = new TestingEventMailForm(4);
         $subject->setPostData(
@@ -274,8 +298,6 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
             ]
         );
         $subject->render();
-
-        self::assertNull($this->mailer->getFirstSentEmail());
     }
 
     /**
