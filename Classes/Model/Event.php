@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Mapper\LanguageMapper;
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Model\Language;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
@@ -796,8 +798,8 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
             return null;
         }
 
-        /** @var \Tx_Oelib_Mapper_Language $mapper */
-        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_Language::class);
+        /** @var LanguageMapper $mapper */
+        $mapper = MapperRegistry::get(LanguageMapper::class);
         return $mapper->findByIsoAlpha2Code($this->getAsString('language'));
     }
 

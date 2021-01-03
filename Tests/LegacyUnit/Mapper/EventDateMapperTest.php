@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
@@ -29,7 +30,7 @@ class EventDateMapperTest extends TestCase
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
 
-        $this->subject = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        $this->subject = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
     }
 
     protected function tearDown()
@@ -109,7 +110,7 @@ class EventDateMapperTest extends TestCase
                 'topic' => $topicUid,
             ]
         );
-        $category = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Category::class)
+        $category = MapperRegistry::get(\Tx_Seminars_Mapper_Category::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -136,7 +137,7 @@ class EventDateMapperTest extends TestCase
                 'topic' => $topicUid,
             ]
         );
-        $category = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Category::class)
+        $category = MapperRegistry::get(\Tx_Seminars_Mapper_Category::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -162,7 +163,7 @@ class EventDateMapperTest extends TestCase
      */
     public function getEventTypeForEventDateWithoutEventTypeReturnsNull()
     {
-        $topic = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel(
             [
@@ -179,8 +180,8 @@ class EventDateMapperTest extends TestCase
      */
     public function getEventTypeForEventDateWithEventTypeReturnsEventTypeInstance()
     {
-        $eventType = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_EventType::class)->getLoadedTestingModel([]);
-        $topic = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $eventType = MapperRegistry::get(\Tx_Seminars_Mapper_EventType::class)->getLoadedTestingModel([]);
+        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
             ->getLoadedTestingModel(['event_type' => $eventType->getUid()]);
         /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel(
@@ -219,7 +220,7 @@ class EventDateMapperTest extends TestCase
      */
     public function getPaymentMethodsForEventDateWithOnePaymentMethodReturnsListOfPaymentMethods()
     {
-        $paymentMethod = \Tx_Oelib_MapperRegistry::
+        $paymentMethod = MapperRegistry::
         get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -248,7 +249,7 @@ class EventDateMapperTest extends TestCase
      */
     public function getPaymentMethodsForEventDateWithOnePaymentMethodReturnsOnePaymentMethod()
     {
-        $paymentMethod = \Tx_Oelib_MapperRegistry::
+        $paymentMethod = MapperRegistry::
         get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -309,7 +310,7 @@ class EventDateMapperTest extends TestCase
                 'topic' => $topicUid,
             ]
         );
-        $targetGroup = \Tx_Oelib_MapperRegistry::
+        $targetGroup = MapperRegistry::
         get(\Tx_Seminars_Mapper_TargetGroup::class)->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -339,7 +340,7 @@ class EventDateMapperTest extends TestCase
                 'topic' => $topicUid,
             ]
         );
-        $targetGroup = \Tx_Oelib_MapperRegistry::
+        $targetGroup = MapperRegistry::
         get(\Tx_Seminars_Mapper_TargetGroup::class)->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -390,7 +391,7 @@ class EventDateMapperTest extends TestCase
                 'topic' => $topicUid,
             ]
         );
-        $checkbox = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Checkbox::class)
+        $checkbox = MapperRegistry::get(\Tx_Seminars_Mapper_Checkbox::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -417,7 +418,7 @@ class EventDateMapperTest extends TestCase
                 'topic' => $topicUid,
             ]
         );
-        $checkbox = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Checkbox::class)
+        $checkbox = MapperRegistry::get(\Tx_Seminars_Mapper_Checkbox::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',

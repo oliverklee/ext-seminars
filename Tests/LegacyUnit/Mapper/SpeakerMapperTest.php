@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
@@ -108,8 +109,7 @@ class SpeakerMapperTest extends TestCase
     public function getSkillsWithOneSkillReturnsNonEmptyList()
     {
         $speakerUid = $this->testingFramework->createRecord('tx_seminars_speakers');
-        $skill = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Skill::class)
-            ->getNewGhost();
+        $skill = MapperRegistry::get(\Tx_Seminars_Mapper_Skill::class)->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_speakers',
             $speakerUid,
@@ -130,7 +130,7 @@ class SpeakerMapperTest extends TestCase
     public function getSkillsWithOneSkillReturnsOneSkill()
     {
         $speakerUid = $this->testingFramework->createRecord('tx_seminars_speakers');
-        $skill = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Skill::class)
+        $skill = MapperRegistry::get(\Tx_Seminars_Mapper_Skill::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_speakers',
@@ -167,7 +167,7 @@ class SpeakerMapperTest extends TestCase
      */
     public function getOwnerWithOwnerReturnsOwnerInstance()
     {
-        $frontEndUser = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)
+        $frontEndUser = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)
             ->getLoadedTestingModel([]);
         /** @var \Tx_Seminars_Model_Speaker $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel(

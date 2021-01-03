@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\SchedulerTask;
 
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
@@ -64,7 +65,7 @@ class RegistrationDigest
         }
 
         $this->configuration = \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars.registrationDigestEmail');
-        $this->eventMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        $this->eventMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
 
         $this->initialized = true;
     }

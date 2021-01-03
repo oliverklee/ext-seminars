@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Mapper\FrontEndUserMapper as OelibFrontEndUserMapper;
+
 /**
  * This class represents a mapper for front-end users.
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class Tx_Seminars_Mapper_FrontEndUser extends \Tx_Oelib_Mapper_FrontEndUser
+class Tx_Seminars_Mapper_FrontEndUser extends OelibFrontEndUserMapper
 {
     /**
      * @var string the model class name for this mapper, must not be empty

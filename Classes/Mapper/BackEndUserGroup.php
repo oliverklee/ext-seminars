@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Mapper\BackEndUserGroupMapper as OelibBackEndUserGroupMapper;
+
 /**
  * This class represents a mapper for back-end user groups.
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class Tx_Seminars_Mapper_BackEndUserGroup extends \Tx_Oelib_Mapper_BackEndUserGroup
+class Tx_Seminars_Mapper_BackEndUserGroup extends OelibBackEndUserGroupMapper
 {
     /**
      * @var string the model class name for this mapper, must not be empty

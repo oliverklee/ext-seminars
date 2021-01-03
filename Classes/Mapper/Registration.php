@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Mapper\CurrencyMapper;
+
 /**
  * This class represents a mapper for registrations.
  *
@@ -26,7 +28,7 @@ class Tx_Seminars_Mapper_Registration extends \Tx_Oelib_DataMapper
     protected $relations = [
         'seminar' => \Tx_Seminars_Mapper_Event::class,
         'user' => \Tx_Seminars_Mapper_FrontEndUser::class,
-        'currency' => \Tx_Oelib_Mapper_Currency::class,
+        'currency' => CurrencyMapper::class,
         'method_of_payment' => \Tx_Seminars_Mapper_PaymentMethod::class,
         'lodgings' => \Tx_Seminars_Mapper_Lodging::class,
         'foods' => \Tx_Seminars_Mapper_Food::class,

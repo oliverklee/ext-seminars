@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Mapper\FrontEndUserMapper;
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\FrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
@@ -30,9 +32,9 @@ class EventMapperTest extends TestCase
     protected function setUp()
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
-        \Tx_Oelib_MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
+        MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
 
-        $this->subject = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        $this->subject = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
     }
 
     protected function tearDown()
@@ -124,7 +126,7 @@ class EventMapperTest extends TestCase
     public function getPlacesWithOnePlaceReturnsListOfPlaces()
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $place = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Place::class)
+        $place = MapperRegistry::get(\Tx_Seminars_Mapper_Place::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -144,7 +146,7 @@ class EventMapperTest extends TestCase
     public function getPlacesWithOnePlaceReturnsOnePlace()
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $place = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Place::class)
+        $place = MapperRegistry::get(\Tx_Seminars_Mapper_Place::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -182,7 +184,7 @@ class EventMapperTest extends TestCase
     public function getLodgingsWithOneLodgingReturnsListOfLodgings()
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $lodging = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Lodging::class)
+        $lodging = MapperRegistry::get(\Tx_Seminars_Mapper_Lodging::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -202,7 +204,7 @@ class EventMapperTest extends TestCase
     public function getLodgingsWithOneLodgingReturnsOneLodging()
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $lodging = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Lodging::class)
+        $lodging = MapperRegistry::get(\Tx_Seminars_Mapper_Lodging::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -240,7 +242,7 @@ class EventMapperTest extends TestCase
     public function getFoodsWithOneFoodReturnsListOfFoods()
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $food = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Food::class)
+        $food = MapperRegistry::get(\Tx_Seminars_Mapper_Food::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -260,7 +262,7 @@ class EventMapperTest extends TestCase
     public function getFoodsWithOneFoodReturnsOneFood()
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $food = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Food::class)
+        $food = MapperRegistry::get(\Tx_Seminars_Mapper_Food::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -298,7 +300,7 @@ class EventMapperTest extends TestCase
     public function getSpeakersWithOneSpeakerReturnsListOfSpeakers()
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $speaker = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class)
+        $speaker = MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -321,7 +323,7 @@ class EventMapperTest extends TestCase
     public function getSpeakersWithOneSpeakerReturnsOneSpeaker()
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $speaker = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class)
+        $speaker = MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -359,7 +361,7 @@ class EventMapperTest extends TestCase
     public function getPartnersWithOnePartnerReturnsListOfSpeakers()
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $speaker = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class)
+        $speaker = MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -382,7 +384,7 @@ class EventMapperTest extends TestCase
     public function getPartnersWithOnePartnerReturnsOnePartner()
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $speaker = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class)
+        $speaker = MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -420,7 +422,7 @@ class EventMapperTest extends TestCase
     public function getTutorsWithOneTutorReturnsListOfSpeakers()
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $speaker = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class)
+        $speaker = MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -443,7 +445,7 @@ class EventMapperTest extends TestCase
     public function getTutorsWithOneTutorReturnsOneTutor()
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $speaker = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class)
+        $speaker = MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -481,7 +483,7 @@ class EventMapperTest extends TestCase
     public function getLeadersWithOneLeaderReturnsListOfSpeakers()
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $speaker = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class)
+        $speaker = MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -504,7 +506,7 @@ class EventMapperTest extends TestCase
     public function getLeadersWithOneLeaderReturnsOneLeader()
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $speaker = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class)
+        $speaker = MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -545,7 +547,7 @@ class EventMapperTest extends TestCase
             'tx_seminars_seminars',
             ['organizers' => 1]
         );
-        $organizer = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Organizer::class)
+        $organizer = MapperRegistry::get(\Tx_Seminars_Mapper_Organizer::class)
             ->getNewGhost();
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_organizers_mm',
@@ -567,7 +569,7 @@ class EventMapperTest extends TestCase
             'tx_seminars_seminars',
             ['organizers' => 1]
         );
-        $organizer = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Organizer::class)
+        $organizer = MapperRegistry::get(\Tx_Seminars_Mapper_Organizer::class)
             ->getNewGhost();
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_organizers_mm',
@@ -604,7 +606,7 @@ class EventMapperTest extends TestCase
     public function getOrganizingPartnersWithOneOrganizingReturnsListOfOrganizers()
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $organizer = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Organizer::class)
+        $organizer = MapperRegistry::get(\Tx_Seminars_Mapper_Organizer::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -624,7 +626,7 @@ class EventMapperTest extends TestCase
     public function getOrganizingPartnersWithOneOrganizingPartnersReturnsOneOrganizingPartner()
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $organizer = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Organizer::class)
+        $organizer = MapperRegistry::get(\Tx_Seminars_Mapper_Organizer::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -662,7 +664,7 @@ class EventMapperTest extends TestCase
     public function getOwnerWithOwnerReturnsOwnerInstance()
     {
         /** @var FrontEndUser $frontEndUser */
-        $frontEndUser = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_FrontEndUser::class)
+        $frontEndUser = MapperRegistry::get(FrontEndUserMapper::class)
             ->getLoadedTestingModel([]);
         /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel(['owner_feuser' => $frontEndUser->getUid()]);
@@ -691,8 +693,7 @@ class EventMapperTest extends TestCase
     public function getEventManagersWithOneEventManagerReturnsListOfFrontEndUsers()
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $frontEndUser = \Tx_Oelib_MapperRegistry::
-        get(\Tx_Oelib_Mapper_FrontEndUser::class)->getNewGhost();
+        $frontEndUser = MapperRegistry::get(FrontEndUserMapper::class)->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $uid,
@@ -711,8 +712,7 @@ class EventMapperTest extends TestCase
     public function getEventManagersWithOneEventManagerReturnsOneEventManager()
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $frontEndUser = \Tx_Oelib_MapperRegistry::
-        get(\Tx_Oelib_Mapper_FrontEndUser::class)->getNewGhost();
+        $frontEndUser = MapperRegistry::get(FrontEndUserMapper::class)->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
             $uid,

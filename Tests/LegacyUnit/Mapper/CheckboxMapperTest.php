@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
@@ -86,7 +87,7 @@ class CheckboxMapperTest extends TestCase
      */
     public function getOwnerWithOwnerReturnsOwnerInstance()
     {
-        $frontEndUser = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)
+        $frontEndUser = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)
             ->getLoadedTestingModel([]);
         /** @var \Tx_Seminars_Model_Checkbox $model */
         $model = $this->subject->getLoadedTestingModel(['owner' => $frontEndUser->getUid()]);

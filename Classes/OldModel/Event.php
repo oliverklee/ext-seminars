@@ -5,6 +5,8 @@ declare(strict_types=1);
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Interfaces\Time;
+use OliverKlee\Oelib\Mapper\FrontEndUserMapper;
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\FrontEndUser;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
@@ -3255,8 +3257,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             return null;
         }
 
-        /** @var \Tx_Oelib_Mapper_FrontEndUser $mapper */
-        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_FrontEndUser::class);
+        /** @var FrontEndUserMapper $mapper */
+        $mapper = MapperRegistry::get(FrontEndUserMapper::class);
         /** @var FrontEndUser|null $owner */
         $owner = $mapper->find($this->getRecordPropertyInteger('owner_feuser'));
 

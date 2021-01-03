@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
@@ -89,8 +90,7 @@ class TimeSlotMapperTest extends TestCase
         $timeSlotUid = $this->testingFramework->createRecord(
             'tx_seminars_timeslots'
         );
-        $speaker = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class)
-            ->getNewGhost();
+        $speaker = MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class)->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_timeslots',
             $timeSlotUid,
@@ -114,7 +114,7 @@ class TimeSlotMapperTest extends TestCase
         $timeSlotUid = $this->testingFramework->createRecord(
             'tx_seminars_timeslots'
         );
-        $speaker = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class)
+        $speaker = MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_timeslots',
@@ -154,7 +154,7 @@ class TimeSlotMapperTest extends TestCase
      */
     public function getPlaceWithPlaceReturnsPlaceInstance()
     {
-        $place = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Place::class)->getNewGhost();
+        $place = MapperRegistry::get(\Tx_Seminars_Mapper_Place::class)->getNewGhost();
         $timeSlotUid = $this->testingFramework->createRecord(
             'tx_seminars_timeslots',
             ['place' => $place->getUid()]
@@ -188,7 +188,7 @@ class TimeSlotMapperTest extends TestCase
      */
     public function getSeminarWithSeminarReturnsEventInstance()
     {
-        $seminar = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getNewGhost();
+        $seminar = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getNewGhost();
         $timeSlotUid = $this->testingFramework->createRecord(
             'tx_seminars_timeslots',
             ['seminar' => $seminar->getUid()]

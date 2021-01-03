@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\System\Typo3Version;
 use SJBR\StaticInfoTables\PiBaseApi;
 use SJBR\StaticInfoTables\Utility\LocalizationUtility;
@@ -184,7 +185,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
     public function getEvent(): \Tx_Seminars_Model_Event
     {
         /** @var \Tx_Seminars_Mapper_Event $eventMapper */
-        $eventMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        $eventMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
         /** @var \Tx_Seminars_Model_Event $event */
         $event = $eventMapper->find($this->getSeminar()->getUid());
 
@@ -374,11 +375,11 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
         }
 
         /** @var \Tx_Seminars_Mapper_FrontEndUser $userMapper */
-        $userMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
+        $userMapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
         $pageUid = $this->getConfValueInteger('sysFolderForAdditionalAttendeeUsersPID', 's_registration');
 
         /** @var \Tx_Seminars_Mapper_FrontEndUserGroup $userGroupMapper */
-        $userGroupMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class);
+        $userGroupMapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class);
         $userGroups = new Collection();
         $userGroupUids = GeneralUtility::intExplode(
             ',',
@@ -432,7 +433,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
         }
 
         /** @var \Tx_Seminars_Mapper_Registration $registrationMapper */
-        $registrationMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        $registrationMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
         $registrationMapper->save($registration);
     }
 

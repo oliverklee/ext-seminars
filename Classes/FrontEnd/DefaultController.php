@@ -5,6 +5,7 @@ declare(strict_types=1);
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Interfaces\ConfigurationCheckable;
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Seminars\Bag\AbstractBag;
 use OliverKlee\Seminars\Csv\CsvDownloader;
@@ -788,7 +789,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
     protected function createSingleViewForExistingEvent(): string
     {
         /** @var \Tx_Seminars_Mapper_Event $mapper */
-        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
         /** @var \Tx_Seminars_Model_Event $event */
         $event = $mapper->find($this->showUid);
 
@@ -1065,7 +1066,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
         $this->hideSubparts('date,time', 'field_wrapper');
 
         /** @var \Tx_Seminars_Mapper_TimeSlot $timeSlotMapper */
-        $timeSlotMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_TimeSlot::class);
+        $timeSlotMapper = MapperRegistry::get(\Tx_Seminars_Mapper_TimeSlot::class);
 
         $timeSlotsOutput = '';
         foreach ($this->seminar->getTimeSlotsAsArrayWithMarkers() as $timeSlotData) {
@@ -1449,7 +1450,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
         $output = '';
 
         /** @var \Tx_Seminars_Mapper_Event $eventMapper */
-        $eventMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        $eventMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
 
         /** @var \Tx_Seminars_OldModel_Event $dependency */
         foreach ($this->seminar->getDependencies() as $dependency) {
@@ -2079,7 +2080,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
 
         if ($this->seminar->comesFromDatabase()) {
             /** @var \Tx_Seminars_Mapper_Event $mapper */
-            $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+            $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
             /** @var \Tx_Seminars_Model_Event $event */
             $event = $mapper->find($this->getSeminar()->getUid());
 
@@ -2208,7 +2209,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
 
             if ($whatToDisplay === 'my_events') {
                 /** @var \Tx_Seminars_Mapper_Registration $mapper */
-                $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+                $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
                 /** @var \Tx_Seminars_Model_Registration $registration */
                 $registration = $mapper->find($this->registration->getUid());
 
@@ -3522,7 +3523,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
         }
 
         /** @var \Tx_Seminars_Mapper_Event $mapper */
-        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
         /** @var \Tx_Seminars_Model_Event $event */
         $event = $mapper->find($this->piVars['seminar']);
         if (!$event->isPublished()) {
@@ -3554,7 +3555,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
     {
         $event->markAsHidden();
         /** @var \Tx_Seminars_Mapper_Event $mapper */
-        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
         $mapper->save($event);
 
         $this->redirectToCurrentUrl();
@@ -3571,7 +3572,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
     {
         $event->markAsVisible();
         /** @var \Tx_Seminars_Mapper_Event $mapper */
-        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
         $mapper->save($event);
 
         $this->redirectToCurrentUrl();
@@ -3591,7 +3592,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
         $copy->setRegistrations(new Collection());
 
         /** @var \Tx_Seminars_Mapper_Event $mapper */
-        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
         $mapper->save($copy);
 
         $this->redirectToCurrentUrl();

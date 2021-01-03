@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\SchedulerTasks;
 
 use OliverKlee\Oelib\Authentication\BackEndLoginManager;
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\Csv\EmailRegistrationListView;
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
 use OliverKlee\Seminars\Service\EmailService;
@@ -63,7 +64,7 @@ class MailNotifier extends AbstractTask
         $this->getConfiguration();
         $this->eventStatusService = GeneralUtility::makeInstance(EventStatusService::class);
         $this->emailService = GeneralUtility::makeInstance(EmailService::class);
-        $this->eventMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        $this->eventMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
         /** @var \Tx_Oelib_MailerFactory $mailerFactory */
         $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
         $this->mailer = $mailerFactory->getMailer();

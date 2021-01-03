@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Mapper\FrontEndUserMapper;
 
 /**
  * This class represents a mapper for events.
@@ -41,8 +42,8 @@ class Tx_Seminars_Mapper_Event extends \Tx_Oelib_DataMapper
         'organizers' => \Tx_Seminars_Mapper_Organizer::class,
         'organizing_partners' => \Tx_Seminars_Mapper_Organizer::class,
         'target_groups' => \Tx_Seminars_Mapper_TargetGroup::class,
-        'owner_feuser' => \Tx_Oelib_Mapper_FrontEndUser::class,
-        'vips' => \Tx_Oelib_Mapper_FrontEndUser::class,
+        'owner_feuser' => FrontEndUserMapper::class,
+        'vips' => FrontEndUserMapper::class,
         'checkboxes' => \Tx_Seminars_Mapper_Checkbox::class,
         'requirements' => \Tx_Seminars_Mapper_Event::class,
         'dependencies' => \Tx_Seminars_Mapper_Event::class,

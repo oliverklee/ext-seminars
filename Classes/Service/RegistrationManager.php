@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\FrontEndUser;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Seminar\Email\Salutation;
@@ -506,7 +507,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         }
 
         /** @var \Tx_Seminars_Mapper_Registration $mapper */
-        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
         /** @var \Tx_Seminars_Model_Registration $registration */
         $registration = $mapper->find($this->registration->getUid());
 
@@ -591,7 +592,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
                         ? max(0, (int)$formData['method_of_payment']) : 0;
                     if (($paymentMethodUid > 0) && $availablePaymentMethods->hasUid($paymentMethodUid)) {
                         /** @var \Tx_Seminars_Mapper_PaymentMethod $mapper */
-                        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_PaymentMethod::class);
+                        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_PaymentMethod::class);
                         /** @var \Tx_Seminars_Model_PaymentMethod $paymentMethod */
                         $paymentMethod = $mapper->find($paymentMethodUid);
                     }
@@ -853,7 +854,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         $eMailNotification->setMessage($this->buildEmailContent($oldRegistration, $plugin, $helloSubjectPrefix));
 
         /** @var \Tx_Seminars_Mapper_Registration $mapper */
-        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
         /** @var \Tx_Seminars_Model_Registration $registration */
         $registration = $mapper->find($oldRegistration->getUid());
 
@@ -1040,7 +1041,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         $eMailNotification->setMessage($this->getSubpart('MAIL_NOTIFICATION'));
 
         /** @var \Tx_Seminars_Mapper_Registration $registrationMapper */
-        $registrationMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        $registrationMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
         /** @var \Tx_Seminars_Model_Registration $registrationNew */
         $registrationNew = $registrationMapper->find($registration->getUid());
 
@@ -1141,7 +1142,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         }
 
         /** @var \Tx_Seminars_Mapper_Registration $registrationMapper */
-        $registrationMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        $registrationMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
         /** @var \Tx_Seminars_Model_Registration $registrationNew */
         $registrationNew = $registrationMapper->find($registration->getUid());
 
@@ -1401,7 +1402,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         }
 
         /** @var \Tx_Seminars_Mapper_Event $mapper */
-        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
         /** @var \Tx_Seminars_Model_Event $newEvent */
         $newEvent = $mapper->find($event->getUid());
         $singleViewUrl = $this->linkBuilder->createAbsoluteUrlForEvent($newEvent);
@@ -1417,7 +1418,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         $this->setMarker('footer', !empty($footers) ? LF . '-- ' . LF . $footers[0] : '');
 
         /** @var \Tx_Seminars_Mapper_Registration $registrationMapper */
-        $registrationMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        $registrationMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
         /** @var \Tx_Seminars_Model_Registration $registrationNew */
         $registrationNew = $registrationMapper->find($registration->getUid());
 
@@ -1713,7 +1714,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      */
     protected function getRegistrationMapper(): \Tx_Seminars_Mapper_Registration
     {
-        return \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        return MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
     }
 
     /**

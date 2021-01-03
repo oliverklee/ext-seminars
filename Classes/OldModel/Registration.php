@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\Interfaces\ConfigurationCheckable;
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\OldModel\AbstractModel;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\ReferenceIndex;
@@ -609,7 +610,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements Configu
         }
 
         /** @var \Tx_Seminars_Mapper_FrontEndUser $mapper */
-        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
+        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
         $this->user = $mapper->find($uid);
 
         return $this->user;
@@ -637,7 +638,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements Configu
         }
 
         /** @var \Tx_Seminars_Mapper_FrontEndUser $mapper */
-        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
+        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
 
         return $mapper->existsModel($this->getUser());
     }
