@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Interfaces\MailRole;
 use OliverKlee\Seminars\OldModel\AbstractModel;
 
 /**
@@ -9,7 +10,7 @@ use OliverKlee\Seminars\OldModel\AbstractModel;
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_OldModel_Organizer extends AbstractModel implements \Tx_Oelib_Interface_MailRole
+class Tx_Seminars_OldModel_Organizer extends AbstractModel implements MailRole
 {
     /**
      * @var string the name of the SQL table this class corresponds to

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\BagBuilder;
 
+use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Bag\AbstractBag;
@@ -850,8 +851,8 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_WEEK,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_WEEK,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -869,7 +870,7 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_WEEK,
                 'end_date' => 0,
             ]
         );
@@ -888,8 +889,8 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -906,8 +907,8 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK,
             ]
         );
 
@@ -924,7 +925,7 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
                 'end_date' => 0,
             ]
         );
@@ -966,8 +967,8 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_WEEK,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_WEEK,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -985,7 +986,7 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_WEEK,
                 'end_date' => 0,
             ]
         );
@@ -1004,8 +1005,8 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -1023,8 +1024,8 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK,
             ]
         );
 
@@ -1041,7 +1042,7 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
                 'end_date' => 0,
             ]
         );
@@ -1083,8 +1084,8 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_WEEK,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_WEEK,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -1101,7 +1102,7 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_WEEK,
                 'end_date' => 0,
             ]
         );
@@ -1119,8 +1120,8 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -1138,8 +1139,8 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK,
             ]
         );
 
@@ -1156,7 +1157,7 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
                 'end_date' => 0,
             ]
         );
@@ -1198,8 +1199,8 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_WEEK,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_WEEK,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -1216,7 +1217,7 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_WEEK,
                 'end_date' => 0,
             ]
         );
@@ -1234,8 +1235,8 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -1253,8 +1254,8 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK,
             ]
         );
 
@@ -1272,7 +1273,7 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
                 'end_date' => 0,
             ]
         );
@@ -1316,8 +1317,8 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_WEEK,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_WEEK,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -1334,7 +1335,7 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_WEEK,
                 'end_date' => 0,
             ]
         );
@@ -1352,8 +1353,8 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -1370,8 +1371,8 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK,
             ]
         );
 
@@ -1389,7 +1390,7 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
                 'end_date' => 0,
             ]
         );
@@ -1433,8 +1434,8 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_WEEK,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_WEEK,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -1451,7 +1452,7 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_WEEK,
                 'end_date' => 0,
             ]
         );
@@ -1469,8 +1470,8 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -1487,8 +1488,8 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK,
             ]
         );
 
@@ -1506,7 +1507,7 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
                 'end_date' => 0,
             ]
         );
@@ -1550,8 +1551,8 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_WEEK,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_WEEK,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_DAY,
                 'deadline_registration' => 0,
             ]
         );
@@ -1569,7 +1570,7 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_WEEK,
                 'end_date' => 0,
                 'deadline_registration' => 0,
             ]
@@ -1588,8 +1589,8 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
                 'deadline_registration' => 0,
             ]
         );
@@ -1607,8 +1608,8 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK,
                 'deadline_registration' => 0,
             ]
         );
@@ -1627,9 +1628,9 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 2 * \Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK,
-                'deadline_registration' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + 2 * Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK,
+                'deadline_registration' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -1647,9 +1648,9 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK,
-                'deadline_registration' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK,
+                'deadline_registration' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -1666,7 +1667,7 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
                 'end_date' => 0,
                 'deadline_registration' => 0,
             ]
@@ -1737,7 +1738,7 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
                 'end_date' => 0,
             ]
         );
@@ -1759,7 +1760,7 @@ class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             [
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'],
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -1780,7 +1781,7 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_DAY,
                 'end_date' => $GLOBALS['SIM_EXEC_TIME'],
             ]
         );
@@ -1802,8 +1803,8 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -1824,8 +1825,8 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_WEEK,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_WEEK,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -1845,8 +1846,8 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK,
             ]
         );
 
@@ -1890,8 +1891,8 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_WEEK,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_WEEK,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -1909,7 +1910,7 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_WEEK,
                 'end_date' => 0,
             ]
         );
@@ -1928,8 +1929,8 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -1947,8 +1948,8 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK,
             ]
         );
 
@@ -1966,7 +1967,7 @@ class EventBagBuilderTest extends TestCase
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
                 'end_date' => 0,
             ]
         );
@@ -3235,13 +3236,13 @@ class EventBagBuilderTest extends TestCase
     {
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['begin_date' => \Tx_Oelib_Time::SECONDS_PER_DAY, 'end_date' => \Tx_Oelib_Time::SECONDS_PER_DAY + 60 * 60]
+            ['begin_date' => Time::SECONDS_PER_DAY, 'end_date' => Time::SECONDS_PER_DAY + 60 * 60]
         );
         $eventUid2 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => 2 * \Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => 60 * 60 + 2 * \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => 2 * Time::SECONDS_PER_DAY,
+                'end_date' => 60 * 60 + 2 * Time::SECONDS_PER_DAY,
             ]
         );
         $event = new \Tx_Seminars_OldModel_Event($eventUid1);
@@ -3262,7 +3263,7 @@ class EventBagBuilderTest extends TestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['begin_date' => \Tx_Oelib_Time::SECONDS_PER_DAY, 'end_date' => \Tx_Oelib_Time::SECONDS_PER_DAY + 60 * 60]
+            ['begin_date' => Time::SECONDS_PER_DAY, 'end_date' => Time::SECONDS_PER_DAY + 60 * 60]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3284,13 +3285,13 @@ class EventBagBuilderTest extends TestCase
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['begin_date' => \Tx_Oelib_Time::SECONDS_PER_DAY, 'end_date' => \Tx_Oelib_Time::SECONDS_PER_DAY + 60 * 60]
+            ['begin_date' => Time::SECONDS_PER_DAY, 'end_date' => Time::SECONDS_PER_DAY + 60 * 60]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
-                'begin_date' => 3 * \Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => 60 * 60 + 3 * \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => 3 * Time::SECONDS_PER_DAY,
+                'end_date' => 60 * 60 + 3 * Time::SECONDS_PER_DAY,
             ]
         );
         $event = new \Tx_Seminars_OldModel_Event($eventUid);
@@ -5344,7 +5345,7 @@ class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY]
+            ['begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY]
         );
 
         $this->subject->limitToDaysBeforeBeginDate(2);
@@ -5360,7 +5361,7 @@ class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['begin_date' => $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY]
+            ['begin_date' => $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_DAY]
         );
 
         $this->subject->limitToDaysBeforeBeginDate(3);
@@ -5376,7 +5377,7 @@ class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['begin_date' => $GLOBALS['SIM_EXEC_TIME'] + (2 * \Tx_Oelib_Time::SECONDS_PER_DAY)]
+            ['begin_date' => $GLOBALS['SIM_EXEC_TIME'] + (2 * Time::SECONDS_PER_DAY)]
         );
 
         $this->subject->limitToDaysBeforeBeginDate(1);
@@ -5392,7 +5393,7 @@ class EventBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
-            ['begin_date' => $GLOBALS['SIM_EXEC_TIME'] - (2 * \Tx_Oelib_Time::SECONDS_PER_DAY)]
+            ['begin_date' => $GLOBALS['SIM_EXEC_TIME'] - (2 * Time::SECONDS_PER_DAY)]
         );
 
         $this->subject->limitToDaysBeforeBeginDate(1);

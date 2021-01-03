@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\BagBuilder;
 
+use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
@@ -55,7 +56,7 @@ class RegistrationBagBuilderTest extends TestCase
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
-            ['title' => 'Title 2', 'crdate' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY]
+            ['title' => 'Title 2', 'crdate' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY]
         );
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',

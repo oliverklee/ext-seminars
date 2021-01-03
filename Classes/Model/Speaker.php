@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Interfaces\MailRole;
 use OliverKlee\Oelib\Model\AbstractModel;
 use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Resource\FileRepository;
@@ -13,7 +14,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Model_Speaker extends AbstractModel implements \Tx_Oelib_Interface_MailRole
+class Tx_Seminars_Model_Speaker extends AbstractModel implements MailRole
 {
     /**
      * @var int the gender type for speakers without gender

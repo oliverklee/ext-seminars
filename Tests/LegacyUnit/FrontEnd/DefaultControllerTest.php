@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
@@ -803,8 +804,8 @@ class DefaultControllerTest extends TestCase
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
                 'title' => 'Test date',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK + Time::SECONDS_PER_DAY,
             ]
         );
         $this->testingFramework->createRecord(
@@ -814,8 +815,8 @@ class DefaultControllerTest extends TestCase
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
                 'title' => 'Test date 2',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK + 2 * \Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK + 3 * \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK + 2 * Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK + 3 * Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -853,8 +854,8 @@ class DefaultControllerTest extends TestCase
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
                 'title' => 'Test date',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK + Time::SECONDS_PER_DAY,
             ]
         );
         $singleEventUid = $this->testingFramework->createRecord(
@@ -864,8 +865,8 @@ class DefaultControllerTest extends TestCase
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
                 'topic' => $topicUid,
                 'title' => 'Test single 2',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK + 2 * \Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK + 3 * \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK + 2 * Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK + 3 * Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -900,8 +901,8 @@ class DefaultControllerTest extends TestCase
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
                 'title' => 'Test date',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK + Time::SECONDS_PER_DAY,
             ]
         );
         $this->testingFramework->createRecord(
@@ -911,8 +912,8 @@ class DefaultControllerTest extends TestCase
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
                 'title' => 'Test date 2',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK + 2 * \Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK + 3 * \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK + 2 * Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK + 3 * Time::SECONDS_PER_DAY,
                 'needs_registration' => 1,
                 'attendees_max' => 5,
                 'offline_attendees' => 5,
@@ -953,8 +954,8 @@ class DefaultControllerTest extends TestCase
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
                 'title' => 'Test date',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK + Time::SECONDS_PER_DAY,
             ]
         );
         $dateUid2 = $this->testingFramework->createRecord(
@@ -964,8 +965,8 @@ class DefaultControllerTest extends TestCase
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
                 'topic' => $topicUid,
                 'title' => 'Test date 2',
-                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK + 2 * \Tx_Oelib_Time::SECONDS_PER_DAY,
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_WEEK + 3 * \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'begin_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK + 2 * Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_WEEK + 3 * Time::SECONDS_PER_DAY,
                 'needs_registration' => 1,
                 'attendees_max' => 5,
                 'offline_attendees' => 5,
@@ -4463,7 +4464,7 @@ class DefaultControllerTest extends TestCase
             [
                 'pid' => $this->systemFolderPid,
                 'title' => 'Event with category',
-                'end_date' => \Tx_Oelib_Time::SECONDS_PER_WEEK,
+                'end_date' => Time::SECONDS_PER_WEEK,
                 // the number of categories
                 'categories' => 1,
             ]
