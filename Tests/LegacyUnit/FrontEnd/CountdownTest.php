@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 
+use OliverKlee\Oelib\Configuration\Configuration;
+use OliverKlee\Oelib\Configuration\ConfigurationProxy;
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -34,12 +37,12 @@ class CountdownTest extends TestCase
 
     protected function setUp()
     {
-        $configurationRegistry = \Tx_Oelib_ConfigurationRegistry::getInstance();
-        $configurationRegistry->set('config', new \Tx_Oelib_Configuration());
-        $configurationRegistry->set('page.config', new \Tx_Oelib_Configuration());
-        $configurationRegistry->set('plugin.tx_seminars._LOCAL_LANG.default', new \Tx_Oelib_Configuration());
+        $configurationRegistry = ConfigurationRegistry::getInstance();
+        $configurationRegistry->set('config', new Configuration());
+        $configurationRegistry->set('page.config', new Configuration());
+        $configurationRegistry->set('plugin.tx_seminars._LOCAL_LANG.default', new Configuration());
 
-        \Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', false);
+        ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', false);
 
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();

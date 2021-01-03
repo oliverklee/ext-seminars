@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Csv;
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Seminars\Csv\Interfaces\CsvAccessCheck;
 
 /**
@@ -57,7 +58,7 @@ class FrontEndRegistrationAccessCheck implements CsvAccessCheck
             return false;
         }
 
-        $configuration = \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1');
+        $configuration = ConfigurationRegistry::get('plugin.tx_seminars_pi1');
         if (!$configuration->getAsBoolean('allowCsvExportOfRegistrationsInMyVipEventsView')) {
             return false;
         }

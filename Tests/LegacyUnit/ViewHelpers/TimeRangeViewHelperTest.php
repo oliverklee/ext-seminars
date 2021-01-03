@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\ViewHelpers;
 
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
@@ -55,7 +56,7 @@ class TimeRangeViewHelperTest extends TestCase
 
         $configuration = new \Tx_Oelib_Configuration();
         $configuration->setAsString('timeFormat', self::TIME_FORMAT);
-        \Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
+        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
 
         $this->translatedHours = ' ' . $this->getLanguageService()->getLL('label_hours');
 

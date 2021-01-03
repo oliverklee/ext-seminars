@@ -2,6 +2,9 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Configuration\Configuration;
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+
 /**
  * This class represents a view helper for rendering time ranges.
  *
@@ -10,7 +13,7 @@ declare(strict_types=1);
 class Tx_Seminars_ViewHelper_TimeRange
 {
     /**
-     * @var \Tx_Oelib_Configuration
+     * @var Configuration
      */
     protected $configuration = null;
 
@@ -24,7 +27,7 @@ class Tx_Seminars_ViewHelper_TimeRange
      */
     public function __construct()
     {
-        $this->configuration = \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars');
+        $this->configuration = ConfigurationRegistry::get('plugin.tx_seminars');
         $this->translator = \Tx_Oelib_TranslatorRegistry::get('seminars');
     }
 

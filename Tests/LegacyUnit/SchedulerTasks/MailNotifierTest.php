@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\SchedulerTasks;
 
 use OliverKlee\Oelib\Authentication\BackEndLoginManager;
+use OliverKlee\Oelib\Configuration\Configuration;
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Testing\TestingFramework;
@@ -44,7 +46,7 @@ class MailNotifierTest extends TestCase
     protected $testingFramework = null;
 
     /**
-     * @var \Tx_Oelib_Configuration
+     * @var Configuration
      */
     protected $configuration = null;
 
@@ -110,8 +112,8 @@ class MailNotifierTest extends TestCase
 
         $this->testingFramework = new TestingFramework('tx_seminars');
 
-        \Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin', new \Tx_Oelib_Configuration());
-        $this->configuration = new \Tx_Oelib_Configuration();
+        ConfigurationRegistry::getInstance()->set('plugin', new Configuration());
+        $this->configuration = new Configuration();
         $this->configuration->setData(
             [
                 'sendEventTakesPlaceReminderDaysBeforeBeginDate' => 2,
@@ -122,7 +124,7 @@ class MailNotifierTest extends TestCase
                 'showAttendancesOnRegistrationQueueInEmailCsv' => true,
             ]
         );
-        \Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->configuration);
+        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->configuration);
 
         $this->subject = $this->getAccessibleMock(MailNotifier::class, ['dummy']);
 

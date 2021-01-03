@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Csv;
 
+use OliverKlee\Oelib\Configuration\Configuration;
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use TYPO3\CMS\Core\Charset\CharsetConverter;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -50,7 +52,7 @@ class CsvDownloader extends TemplateHelper
     public $extKey = 'seminars';
 
     /**
-     * @var \Tx_Oelib_Configuration
+     * @var Configuration
      */
     protected $configuration = null;
 
@@ -72,7 +74,7 @@ class CsvDownloader extends TemplateHelper
             $this->getLanguageService()->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
         }
 
-        $this->configuration = \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars');
+        $this->configuration = ConfigurationRegistry::get('plugin.tx_seminars');
     }
 
     /**

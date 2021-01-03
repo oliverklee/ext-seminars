@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -186,7 +187,7 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
         if ($this->getPlugin() instanceof TemplateHelper) {
             $result = $this->getPlugin()->getConfValueInteger('detailPID');
         } else {
-            $result = \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')->getAsInteger('detailPID');
+            $result = ConfigurationRegistry::get('plugin.tx_seminars_pi1')->getAsInteger('detailPID');
         }
 
         return $result;

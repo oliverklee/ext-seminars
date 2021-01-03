@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 
+use OliverKlee\Oelib\Configuration\Configuration;
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
@@ -90,14 +92,14 @@ final class EmailServiceTest extends TestCase
 
         $this->testingFramework = new TestingFramework('tx_seminars');
 
-        $configuration = new \Tx_Oelib_Configuration();
+        $configuration = new Configuration();
         $configuration->setAsString('dateFormatYMD', self::DATE_FORMAT_YMD);
         $configuration->setAsString('dateFormatY', self::DATE_FORMAT_Y);
         $configuration->setAsString('dateFormatM', self::DATE_FORMAT_M);
         $configuration->setAsString('dateFormatMD', self::DATE_FORMAT_MD);
         $configuration->setAsString('dateFormatD', self::DATE_FORMAT_D);
 
-        \Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
+        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
 
         /** @var \Tx_Oelib_MailerFactory $mailerFactory */
         $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);

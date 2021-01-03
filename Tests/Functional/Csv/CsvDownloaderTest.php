@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\Csv;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\Oelib\Configuration\Configuration;
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 
@@ -33,7 +35,7 @@ final class CsvDownloaderTest extends FunctionalTestCase
     private $headerProxy = null;
 
     /**
-     * @var \Tx_Oelib_Configuration
+     * @var Configuration
      */
     private $configuration = null;
 
@@ -58,9 +60,9 @@ final class CsvDownloaderTest extends FunctionalTestCase
      */
     private function setUpExtensionConfiguration()
     {
-        $configurationRegistry = \Tx_Oelib_ConfigurationRegistry::getInstance();
-        $configurationRegistry->set('plugin', new \Tx_Oelib_Configuration());
-        $this->configuration = new \Tx_Oelib_Configuration();
+        $configurationRegistry = ConfigurationRegistry::getInstance();
+        $configurationRegistry->set('plugin', new Configuration());
+        $this->configuration = new Configuration();
         $configurationRegistry->set('plugin.tx_seminars', $this->configuration);
     }
 

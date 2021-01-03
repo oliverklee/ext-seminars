@@ -15,7 +15,7 @@ plugin.tx_seminars_pi1.form.registration.step1 {
         renderer = renderer:TEMPLATE
         renderer.template {
             path.userobj.php (
-                return \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')->getAsString('registrationEditorTemplateFile');
+                return \OliverKlee\Oelib\Configuration\ConfigurationRegistry::get('plugin.tx_seminars_pi1')->getAsString('registrationEditorTemplateFile');
             )
             subpart = ###REGISTRATION_EDITOR_STEP_1###
             errortag = errors

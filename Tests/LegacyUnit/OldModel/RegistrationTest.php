@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\OldModel;
 
+use OliverKlee\Oelib\Configuration\Configuration;
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
@@ -47,7 +49,7 @@ final class RegistrationTest extends TestCase
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
 
-        \Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', new \Tx_Oelib_Configuration());
+        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', new Configuration());
 
         $organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
@@ -183,8 +185,7 @@ final class RegistrationTest extends TestCase
      */
     public function setRegistrationDataForNoPaymentMethodSetAndPositiveTotalPriceWithSeminarWithOnePaymentMethodSelectsThatPaymentMethod()
     {
-        \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')
-            ->setAsString('currency', 'EUR');
+        ConfigurationRegistry::get('plugin.tx_seminars')->setAsString('currency', 'EUR');
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
@@ -1326,8 +1327,7 @@ final class RegistrationTest extends TestCase
      */
     public function setTotalPriceWithTotalPriceSetsTotalPrice()
     {
-        \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')
-            ->setAsString('currency', 'EUR');
+        ConfigurationRegistry::get('plugin.tx_seminars')->setAsString('currency', 'EUR');
         $this->subject->setTotalPrice('42.42');
 
         self::assertSame(

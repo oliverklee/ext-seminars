@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\SchedulerTask;
 
+use OliverKlee\Oelib\Configuration\Configuration;
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use TYPO3\CMS\Core\Mail\MailMessage;
@@ -30,7 +32,7 @@ class RegistrationDigest
     private $objectManager = null;
 
     /**
-     * @var \Tx_Oelib_Configuration
+     * @var Configuration
      */
     private $configuration = null;
 
@@ -64,7 +66,7 @@ class RegistrationDigest
             return;
         }
 
-        $this->configuration = \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars.registrationDigestEmail');
+        $this->configuration = ConfigurationRegistry::get('plugin.tx_seminars.registrationDigestEmail');
         $this->eventMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
 
         $this->initialized = true;
@@ -80,10 +82,8 @@ class RegistrationDigest
 
     /**
      * This method is intended to be used for automated tests only.
-     *
-     * @return \Tx_Oelib_Configuration the initialized configuration
      */
-    public function getConfiguration(): \Tx_Oelib_Configuration
+    public function getConfiguration(): Configuration
     {
         return $this->configuration;
     }
@@ -91,11 +91,9 @@ class RegistrationDigest
     /**
      * This method is intended to be used for automated tests only.
      *
-     * @param \Tx_Oelib_Configuration $configuration
-     *
      * @return void
      */
-    public function setConfiguration(\Tx_Oelib_Configuration $configuration)
+    public function setConfiguration(Configuration $configuration)
     {
         $this->configuration = $configuration;
     }
