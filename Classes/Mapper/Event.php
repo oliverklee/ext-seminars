@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Mapper\AbstractDataMapper;
 use OliverKlee\Oelib\Mapper\FrontEndUserMapper;
 
 /**
@@ -11,7 +12,7 @@ use OliverKlee\Oelib\Mapper\FrontEndUserMapper;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Mapper_Event extends \Tx_Oelib_DataMapper
+class Tx_Seminars_Mapper_Event extends AbstractDataMapper
 {
     /**
      * @var string the name of the database table for this mapper
