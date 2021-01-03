@@ -429,8 +429,6 @@ Implement the methods required by the interface:
          *
          * You may modify the recipient or the sender as well as the subject and the body of the email.
          *
-         * @param \Tx_Oelib_Mail $email
-         * @param \Tx_Seminars_Model_Registration $registration
          * @param string $emailReason Possible values:
          *          - confirmation
          *          - confirmationOnUnregistration
@@ -440,7 +438,7 @@ Implement the methods required by the interface:
          * @return void
          */
         public function modifyAttendeeEmail(
-            \Tx_Oelib_Mail $email,
+            Mail $email,
             \Tx_Seminars_Model_Registration $registration,
             string $emailReason
         ) {
@@ -501,8 +499,6 @@ Implement the methods required by the interface:
          *
          * You may modify the recipient or the sender as well as the subject and the body of the email.
          *
-         * @param \Tx_Oelib_Mail $email
-         * @param \Tx_Seminars_Model_Registration $registration
          * @param string $emailReason Possible values:
          *        - notification
          *        - notificationOnUnregistration
@@ -512,7 +508,7 @@ Implement the methods required by the interface:
          * @return void
          */
         public function modifyOrganizerEmail(
-            \Tx_Oelib_Mail $email,
+            Mail $email,
             \Tx_Seminars_Model_Registration $registration,
             string $emailReason
         ) {
@@ -524,8 +520,6 @@ Implement the methods required by the interface:
          *
          * You may modify the recipient or the sender as well as the subject and the body of the email.
          *
-         * @param \Tx_Oelib_Mail $email
-         * @param \Tx_Seminars_Model_Registration $registration
          * @param string $emailReason Possible values:
          *          - 'EnoughRegistrations' if the event has enough attendances
          *          - 'IsFull' if the event is fully booked
@@ -534,7 +528,7 @@ Implement the methods required by the interface:
          * @return void
          */
         public function modifyAdditionalEmail(
-            \Tx_Oelib_Mail $email,
+            Mail $email,
             \Tx_Seminars_Model_Registration $registration,
             string $emailReason
         ) {
@@ -674,26 +668,24 @@ It's used like this:
         * Note: This hook does not get called yet. It is just here so the interface
         * is finalized.
         *
-        * @param Tx_Seminars_Model_Registration $registration
+        * @param \Tx_Seminars_Model_Registration $registration
         *        the registration to which the e-mail refers
-        * @param Tx_Oelib_Mail $eMail
-        *        the e-mail that will be sent
+        * @param Mail $eMail the e-mail that will be sent
         *
         * @return void
         */
-         public function modifyGeneralEmail(Tx_Seminars_Model_Registration $registration, Tx_Oelib_Mail $eMail) {…}
+         public function modifyGeneralEmail(\Tx_Seminars_Model_Registration $registration, Mail $eMail) {…}
 
          /**
         * Modifies the confirmation e-mail sent via the back-end module.
         *
         * @param Tx_Seminars_Model_Registration $registration
         *        the registration to which the e-mail refers
-        * @param Tx_Oelib_Mail $eMail
-        *        the e-mail that will be sent
+        * @param Mail $eMail the e-mail that will be sent
         *
         * @return void
         */
-         public function modifyConfirmEmail(Tx_Seminars_Model_Registration $registration, Tx_Oelib_Mail $eMail) {…}
+         public function modifyConfirmEmail(\Tx_Seminars_Model_Registration $registration, Mail $eMail) {…}
 
          /**
         * Modifies the cancelation e-mail sent via the back-end module.
@@ -701,14 +693,13 @@ It's used like this:
         * Note: This hook does not get called yet. It is just here so the interface
         * is finalized.
         *
-        * @param Tx_Seminars_Model_Registration $registration
+        * @param \Tx_Seminars_Model_Registration $registration
         *        the registration to which the e-mail refers
-        * @param Tx_Oelib_Mail $eMail
-        *        the e-mail that will be sent
+        * @param Mail $eMail the e-mail that will be sent
         *
         * @return void
         */
-          public function modifyCancelEmail(Tx_Seminars_Model_Registration $registration, Tx_Oelib_Mail $eMail) {…}
+          public function modifyCancelEmail(\Tx_Seminars_Model_Registration $registration, Mail $eMail) {…}
 
 .. _backendregistrationlistview_en:
 

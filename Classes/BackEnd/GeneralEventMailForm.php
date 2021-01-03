@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\BackEnd;
 
+use OliverKlee\Oelib\Email\Mail;
+
 /**
  * This class represents an e-mail form that does not change the event's status.
  *
@@ -40,12 +42,12 @@ class GeneralEventMailForm extends AbstractEventMailForm
      *
      * @param \Tx_Seminars_Model_Registration $registration
      *        the registration to which the e-mail refers
-     * @param \Tx_Oelib_Mail $eMail
+     * @param Mail $eMail
      *        the e-mail to be sent
      *
      * @return void
      */
-    protected function modifyEmailWithHook(\Tx_Seminars_Model_Registration $registration, \Tx_Oelib_Mail $eMail)
+    protected function modifyEmailWithHook(\Tx_Seminars_Model_Registration $registration, Mail $eMail)
     {
         foreach ($this->getHooks() as $hook) {
             $hook->modifyGeneralEmail($registration, $eMail);

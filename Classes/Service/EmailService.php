@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Service;
 
+use OliverKlee\Oelib\Email\Mail;
+use OliverKlee\Oelib\Email\MailerFactory;
 use OliverKlee\Seminar\Email\Salutation;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -53,8 +55,8 @@ class EmailService implements SingletonInterface
      */
     public function sendEmailToAttendees(\Tx_Seminars_Model_Event $event, string $subject, string $body)
     {
-        /** @var \Tx_Oelib_MailerFactory $mailerFactory */
-        $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
+        /** @var MailerFactory $mailerFactory */
+        $mailerFactory = GeneralUtility::makeInstance(MailerFactory::class);
         $mailer = $mailerFactory->getMailer();
 
         /** @var \Tx_Seminars_Model_Registration $registration */
@@ -64,8 +66,8 @@ class EmailService implements SingletonInterface
                 continue;
             }
 
-            /** @var \Tx_Oelib_Mail $eMail */
-            $eMail = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
+            /** @var Mail $eMail */
+            $eMail = GeneralUtility::makeInstance(Mail::class);
             $eMail->setSender($event->getEmailSender());
             $eMail->setReplyTo($event->getFirstOrganizer());
             $eMail->addRecipient($user);

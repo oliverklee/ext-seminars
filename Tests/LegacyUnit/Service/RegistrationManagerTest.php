@@ -9,6 +9,9 @@ use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Email\EmailCollector;
+use OliverKlee\Oelib\Email\Mail;
+use OliverKlee\Oelib\Email\MailerFactory;
 use OliverKlee\Oelib\Http\HeaderCollector;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Interfaces\Time;
@@ -100,7 +103,7 @@ final class RegistrationManagerTest extends TestCase
     private $extConfBackup = [];
 
     /**
-     * @var \Tx_Oelib_EmailCollector
+     * @var EmailCollector
      */
     private $mailer = null;
 
@@ -128,8 +131,8 @@ final class RegistrationManagerTest extends TestCase
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
 
-        /** @var \Tx_Oelib_MailerFactory $mailerFactory */
-        $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
+        /** @var MailerFactory $mailerFactory */
+        $mailerFactory = GeneralUtility::makeInstance(MailerFactory::class);
         $mailerFactory->enableTestMode();
         $this->mailer = $mailerFactory->getMailer();
 
@@ -2357,7 +2360,7 @@ final class RegistrationManagerTest extends TestCase
 
         $hook = $this->createMock(RegistrationEmail::class);
         $hook->expects(self::once())->method('modifyAttendeeEmail')->with(
-            self::isInstanceOf(\Tx_Oelib_Mail::class),
+            self::isInstanceOf(Mail::class),
             $registration,
             'confirmation'
         );
@@ -2423,7 +2426,7 @@ final class RegistrationManagerTest extends TestCase
 
         $hook = $this->createMock(RegistrationEmail::class);
         $hook->expects(self::once())->method('modifyAttendeeEmail')->with(
-            self::isInstanceOf(\Tx_Oelib_Mail::class),
+            self::isInstanceOf(Mail::class),
             $registration,
             'confirmation'
         );
@@ -5337,7 +5340,7 @@ final class RegistrationManagerTest extends TestCase
         $hook->expects(self::never())->method('modifyAttendeeEmailBodyPlainText');
         $hook->expects(self::never())->method('modifyAttendeeEmailBodyHtml');
         $hook->expects(self::once())->method('modifyOrganizerEmail')->with(
-            self::isInstanceOf(\Tx_Oelib_Mail::class),
+            self::isInstanceOf(Mail::class),
             $registration,
             'notification'
         );
@@ -6041,7 +6044,7 @@ final class RegistrationManagerTest extends TestCase
         $hook->expects(self::never())->method('modifyAttendeeEmailBodyHtml');
         $hook->expects(self::never())->method('modifyOrganizerEmail');
         $hook->expects(self::once())->method('modifyAdditionalEmail')->with(
-            self::isInstanceOf(\Tx_Oelib_Mail::class),
+            self::isInstanceOf(Mail::class),
             $registration,
             'IsFull'
         );

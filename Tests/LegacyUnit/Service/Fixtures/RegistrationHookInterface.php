@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures;
 
+use OliverKlee\Oelib\Email\Mail;
 use OliverKlee\Oelib\Templating\Template;
 
 /**
@@ -14,9 +15,6 @@ use OliverKlee\Oelib\Templating\Template;
 interface RegistrationHookInterface
 {
     /**
-     * @param \Tx_Seminars_OldModel_Event $event
-     * @param \Tx_Seminars_Model_FrontEndUser $user
-     *
      * @return bool
      */
     public function canRegisterForSeminar(
@@ -25,9 +23,6 @@ interface RegistrationHookInterface
     ): bool;
 
     /**
-     * @param \Tx_Seminars_OldModel_Event $event
-     * @param \Tx_Seminars_Model_FrontEndUser $user
-     *
      * @return string
      */
     public function canRegisterForSeminarMessage(
@@ -36,9 +31,6 @@ interface RegistrationHookInterface
     ): string;
 
     /**
-     * @param \Tx_Seminars_OldModel_Registration $registration
-     * @param \Tx_Seminars_Model_FrontEndUser $user
-     *
      * @return void
      */
     public function seminarRegistrationCreated(
@@ -47,9 +39,6 @@ interface RegistrationHookInterface
     );
 
     /**
-     * @param \Tx_Seminars_OldModel_Registration $registration
-     * @param \Tx_Seminars_Model_FrontEndUser $user
-     *
      * @return void
      */
     public function seminarRegistrationRemoved(
@@ -58,9 +47,6 @@ interface RegistrationHookInterface
     );
 
     /**
-     * @param \Tx_Seminars_OldModel_Registration $registration
-     * @param \Tx_Seminars_Model_FrontEndUser $user
-     *
      * @return void
      */
     public function seminarRegistrationMovedFromQueue(
@@ -69,17 +55,11 @@ interface RegistrationHookInterface
     );
 
     /**
-     * @param \Tx_Oelib_Mail $email
-     * @param \Tx_Seminars_Model_Registration $registration
-     *
      * @return void
      *
      * @deprecated
      */
-    public function modifyThankYouEmail(
-        \Tx_Oelib_Mail $email,
-        \Tx_Seminars_Model_Registration $registration
-    );
+    public function modifyThankYouEmail(Mail $email, \Tx_Seminars_Model_Registration $registration);
 
     /**
      * @return void
@@ -96,8 +76,5 @@ interface RegistrationHookInterface
      *
      * @deprecated
      */
-    public function modifyAttendeeEmailText(
-        \Tx_Seminars_OldModel_Registration $registration,
-        Template $emailTemplate
-    );
+    public function modifyAttendeeEmailText(\Tx_Seminars_OldModel_Registration $registration, Template $emailTemplate);
 }
