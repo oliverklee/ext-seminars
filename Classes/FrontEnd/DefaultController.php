@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Interfaces\ConfigurationCheckable;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Templating\TemplateHelper;
@@ -763,13 +764,13 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
         if ($this->showUid <= 0) {
             $this->setMarker('error_text', $this->translate('message_missingSeminarNumber'));
             $result = $this->getSubpart('ERROR_VIEW');
-            \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
+            HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
         } elseif ($this->createSeminar($this->showUid, $this->isLoggedIn())) {
             $result = $this->createSingleViewForExistingEvent();
         } else {
             $this->setMarker('error_text', $this->translate('message_wrongSeminarNumber'));
             $result = $this->getSubpart('ERROR_VIEW');
-            \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
+            HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
         }
 
         $this->setMarker(
@@ -3106,9 +3107,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
             $result = $eventEditor->render();
         } else {
             $result = $hasAccessMessage;
-            \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader(
-                'Status: 403 Forbidden'
-            );
+            HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 403 Forbidden');
         }
 
         return $result;
@@ -3606,7 +3605,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
     protected function redirectToCurrentUrl()
     {
         $currentUrl = GeneralUtility::locationHeaderUrl(GeneralUtility::getIndpEnv('REQUEST_URI'));
-        \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Location: ' . $currentUrl);
+        HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Location: ' . $currentUrl);
     }
 
     /**

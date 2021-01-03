@@ -7,6 +7,8 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits;
 use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Http\HeaderCollector;
+use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Core\Bootstrap;
@@ -62,7 +64,7 @@ trait BackEndTestsTrait
     private $configuration = null;
 
     /**
-     * @var \Tx_Oelib_HeaderCollector
+     * @var HeaderCollector
      */
     private $headerProxy = null;
 
@@ -85,7 +87,7 @@ trait BackEndTestsTrait
         $this->unifyExtensionSettings();
         ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', false);
         $this->setUpExtensionConfiguration();
-        $headerProxyFactory = \Tx_Oelib_HeaderProxyFactory::getInstance();
+        $headerProxyFactory = HeaderProxyFactory::getInstance();
         $headerProxyFactory->enableTestMode();
         $this->headerProxy = $headerProxyFactory->getHeaderProxy();
     }

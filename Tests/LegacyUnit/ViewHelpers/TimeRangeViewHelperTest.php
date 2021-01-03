@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\ViewHelpers;
 
+use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Testing\TestingFramework;
@@ -54,7 +55,7 @@ class TimeRangeViewHelperTest extends TestCase
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd($this->testingFramework->createFrontEndPage());
 
-        $configuration = new \Tx_Oelib_Configuration();
+        $configuration = new Configuration();
         $configuration->setAsString('timeFormat', self::TIME_FORMAT);
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
 

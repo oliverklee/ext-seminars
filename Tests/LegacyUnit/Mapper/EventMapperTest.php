@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Mapper\FrontEndUserMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\FrontEndUser;
@@ -1004,7 +1005,7 @@ class EventMapperTest extends TestCase
      */
     public function findNextUpcomingWithNoEventsThrowsEmptyQueryResultException()
     {
-        $this->expectException(\Tx_Oelib_Exception_NotFound::class);
+        $this->expectException(NotFoundException::class);
 
         $this->subject->findNextUpcoming();
     }
@@ -1014,7 +1015,7 @@ class EventMapperTest extends TestCase
      */
     public function findNextUpcomingWithPastEventThrowsEmptyQueryResultException()
     {
-        $this->expectException(\Tx_Oelib_Exception_NotFound::class);
+        $this->expectException(NotFoundException::class);
 
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',

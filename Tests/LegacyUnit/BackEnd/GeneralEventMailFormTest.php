@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\BackEnd;
 
+use OliverKlee\Oelib\Configuration\PageFinder;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\BackEnd\GeneralEventMailForm;
@@ -35,7 +36,7 @@ class GeneralEventMailFormTest extends TestCase
         $this->testingFramework = new TestingFramework('tx_seminars');
 
         $dummySysFolderUid = $this->testingFramework->createSystemFolder();
-        \Tx_Oelib_PageFinder::getInstance()->setPageUid($dummySysFolderUid);
+        PageFinder::getInstance()->setPageUid($dummySysFolderUid);
 
         $organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',

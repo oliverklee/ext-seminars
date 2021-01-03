@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Interfaces\ConfigurationCheckable;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\DateTimeSpan;
 use OliverKlee\Seminars\OldModel\AbstractModel;
@@ -13,8 +14,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel implements
-    \Tx_Oelib_Interface_ConfigurationCheckable
+abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel implements ConfigurationCheckable
 {
     /**
      * @var HookProvider|null

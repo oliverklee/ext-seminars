@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminar\Email;
 
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Language\Translator;
+use OliverKlee\Oelib\Language\TranslatorRegistry;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -15,7 +17,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class Salutation
 {
     /**
-     * @var \Tx_Oelib_Translator
+     * @var Translator
      */
     private $translator = null;
 
@@ -24,7 +26,7 @@ class Salutation
      */
     public function __construct()
     {
-        $this->translator = \Tx_Oelib_TranslatorRegistry::get('seminars');
+        $this->translator = TranslatorRegistry::get('seminars');
     }
 
     /**

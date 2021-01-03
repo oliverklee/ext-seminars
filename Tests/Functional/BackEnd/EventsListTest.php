@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\BackEnd;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\Oelib\Configuration\PageFinder;
 use OliverKlee\Seminars\BackEnd\AbstractList;
 use OliverKlee\Seminars\BackEnd\EventsList;
 use OliverKlee\Seminars\Tests\LegacyUnit\BackEnd\Fixtures\DummyModule;
@@ -56,7 +57,7 @@ final class EventsListTest extends FunctionalTestCase
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 
         $pageUid = 2;
-        \Tx_Oelib_PageFinder::getInstance()->setPageUid($pageUid);
+        PageFinder::getInstance()->setPageUid($pageUid);
         $this->backEndModule->id = $pageUid;
         $this->backEndModule->setPageData(['uid' => $pageUid, 'doktype' => AbstractList::SYSFOLDER_TYPE]);
 
@@ -74,7 +75,7 @@ final class EventsListTest extends FunctionalTestCase
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 
         $pageUid = 2;
-        \Tx_Oelib_PageFinder::getInstance()->setPageUid($pageUid);
+        PageFinder::getInstance()->setPageUid($pageUid);
         $this->backEndModule->id = $pageUid;
         $this->backEndModule->setPageData(['uid' => $pageUid, 'doktype' => AbstractList::SYSFOLDER_TYPE]);
 

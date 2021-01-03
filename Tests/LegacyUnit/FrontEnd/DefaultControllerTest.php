@@ -8,6 +8,8 @@ use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Http\HeaderCollector;
+use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Templating\TemplateHelper;
@@ -82,7 +84,7 @@ class DefaultControllerTest extends TestCase
     private $extConfBackup = [];
 
     /**
-     * @var \Tx_Oelib_HeaderCollector
+     * @var HeaderCollector
      */
     private $headerCollector = null;
 
@@ -97,8 +99,8 @@ class DefaultControllerTest extends TestCase
 
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
-        \Tx_Oelib_HeaderProxyFactory::getInstance()->enableTestMode();
-        $this->headerCollector = \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy();
+        HeaderProxyFactory::getInstance()->enableTestMode();
+        $this->headerCollector = HeaderProxyFactory::getInstance()->getHeaderProxy();
 
         $configuration = new Configuration();
         $configuration->setAsString('currency', 'EUR');

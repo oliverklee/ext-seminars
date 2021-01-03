@@ -9,6 +9,8 @@ use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Http\HeaderCollector;
+use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Mapper\CountryMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
@@ -103,7 +105,7 @@ final class RegistrationManagerTest extends TestCase
     private $mailer = null;
 
     /**
-     * @var \Tx_Oelib_HeaderCollector
+     * @var HeaderCollector
      */
     private $headerCollector = null;
 
@@ -168,7 +170,7 @@ final class RegistrationManagerTest extends TestCase
             'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
         );
 
-        $headerProxyFactory = \Tx_Oelib_HeaderProxyFactory::getInstance();
+        $headerProxyFactory = HeaderProxyFactory::getInstance();
         $headerProxyFactory->enableTestMode();
         $this->headerCollector = $headerProxyFactory->getHeaderProxy();
 

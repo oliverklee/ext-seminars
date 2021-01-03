@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Interfaces\ConfigurationCheckable;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\OldModel\AbstractModel;
@@ -353,7 +354,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements Configu
      *
      * @return void
      *
-     * @throws \Tx_Oelib_Exception_NotFound
+     * @throws NotFoundException
      */
     private function retrieveUserData()
     {
@@ -366,7 +367,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements Configu
         $table = 'fe_users';
         $data = self::getConnectionForTable($table)->select(['*'], $table, ['uid' => $uid])->fetch();
         if (!\is_array($data)) {
-            throw new \Tx_Oelib_Exception_NotFound(
+            throw new NotFoundException(
                 'The FE user with the UID ' . $uid . ' could not be retrieved.',
                 1390065114
             );

@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Configuration\ConfigurationCheck;
 use OliverKlee\Oelib\System\Typo3Version;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -18,7 +19,7 @@ use TYPO3\CMS\Frontend\Resource\FilePathSanitizer;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_ConfigCheck extends \Tx_Oelib_ConfigCheck
+class Tx_Seminars_ConfigCheck extends ConfigurationCheck
 {
     /**
      * Checks the configuration for: \Tx_Seminars_Service_RegistrationManager/.

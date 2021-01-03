@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Mapper\CountryMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\AbstractModel;
@@ -146,7 +147,7 @@ class Tx_Seminars_Model_Place extends AbstractModel implements Titled
             /** @var CountryMapper $mapper */
             $mapper = MapperRegistry::get(CountryMapper::class);
             $country = $mapper->findByIsoAlpha2Code($countryCode);
-        } catch (\Tx_Oelib_Exception_NotFound $exception) {
+        } catch (NotFoundException $exception) {
             $country = null;
         }
 

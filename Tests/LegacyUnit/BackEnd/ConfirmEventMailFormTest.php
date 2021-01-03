@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\BackEnd;
 
+use OliverKlee\Oelib\Configuration\PageFinder;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
@@ -38,7 +39,7 @@ class ConfirmEventMailFormTest extends TestCase
         MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
 
         $dummySysFolderUid = $this->testingFramework->createSystemFolder();
-        \Tx_Oelib_PageFinder::getInstance()->setPageUid($dummySysFolderUid);
+        PageFinder::getInstance()->setPageUid($dummySysFolderUid);
 
         $organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',

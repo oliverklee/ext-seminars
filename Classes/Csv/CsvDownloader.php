@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Csv;
 
 use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use TYPO3\CMS\Core\Charset\CharsetConverter;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -103,9 +104,7 @@ class CsvDownloader extends TemplateHelper
                 $result = (new CharsetConverter())->conv($result, 'utf-8', $resultCharset);
             }
         } catch (\Exception $exception) {
-            \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader(
-                'Status: 500 Internal Server Error'
-            );
+            HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 500 Internal Server Error');
             $result = $exception->getMessage() . LF . LF . $exception->getTraceAsString() . LF . LF;
         }
 
@@ -296,7 +295,7 @@ class CsvDownloader extends TemplateHelper
      */
     private function setPageTypeAndDisposition(string $csvFileName)
     {
-        $headerProxy = \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy();
+        $headerProxy = HeaderProxyFactory::getInstance()->getHeaderProxy();
         $headerProxy->addHeader(
             'Content-type: text/csv; header=present; charset=' . $this->configuration->getAsString('charsetForCsv')
         );
@@ -317,11 +316,11 @@ class CsvDownloader extends TemplateHelper
     {
         switch ($errorCode) {
             case self::ACCESS_DENIED:
-                \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 403 Forbidden');
+                HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 403 Forbidden');
                 $result = $this->translate('message_403');
                 break;
             case self::NOT_FOUND:
-                \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
+                HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
                 $result = $this->translate('message_404');
                 break;
             default:

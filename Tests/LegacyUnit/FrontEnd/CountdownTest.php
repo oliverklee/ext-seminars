@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -107,7 +108,7 @@ class CountdownTest extends TestCase
         $this->subject->injectEventMapper($this->mapper);
         $this->mapper->expects(self::once())
             ->method('findNextUpcoming')
-            ->will(self::throwException(new \Tx_Oelib_Exception_NotFound()));
+            ->will(self::throwException(new NotFoundException()));
 
         self::assertContains(
             'There are no upcoming events. Please come back later.',
