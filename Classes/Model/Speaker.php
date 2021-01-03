@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Model\AbstractModel;
 use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Resource\FileRepository;
@@ -156,10 +157,9 @@ class Tx_Seminars_Model_Speaker extends AbstractModel implements \Tx_Oelib_Inter
     /**
      * Returns our skills.
      *
-     * @return \Tx_Oelib_List our skills, will be empty if there are no skills
-     *                       related to this speaker
+     * @return Collection our skills, will be empty if there are no skills related to this speaker
      */
-    public function getSkills(): \Tx_Oelib_List
+    public function getSkills(): Collection
     {
         return $this->getAsList('skills');
     }
@@ -167,11 +167,11 @@ class Tx_Seminars_Model_Speaker extends AbstractModel implements \Tx_Oelib_Inter
     /**
      * Sets this speaker's skills.
      *
-     * @param \Tx_Oelib_List $skills this speaker's skills, may be empty
+     * @param Collection $skills this speaker's skills, may be empty
      *
      * @return void
      */
-    public function setSkills(\Tx_Oelib_List $skills)
+    public function setSkills(Collection $skills)
     {
         $this->set('skills', $skills);
     }

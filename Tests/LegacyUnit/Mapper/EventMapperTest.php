@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 
+use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Model\FrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
@@ -51,7 +52,7 @@ class EventMapperTest extends TestCase
         /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
-        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getTimeSlots());
+        self::assertInstanceOf(Collection::class, $testingModel->getTimeSlots());
     }
 
     /**
@@ -114,7 +115,7 @@ class EventMapperTest extends TestCase
         /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
-        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getPlaces());
+        self::assertInstanceOf(Collection::class, $testingModel->getPlaces());
     }
 
     /**
@@ -172,7 +173,7 @@ class EventMapperTest extends TestCase
         /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
-        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getLodgings());
+        self::assertInstanceOf(Collection::class, $testingModel->getLodgings());
     }
 
     /**
@@ -230,7 +231,7 @@ class EventMapperTest extends TestCase
         /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
-        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getFoods());
+        self::assertInstanceOf(Collection::class, $testingModel->getFoods());
     }
 
     /**
@@ -288,7 +289,7 @@ class EventMapperTest extends TestCase
         /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
-        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getSpeakers());
+        self::assertInstanceOf(Collection::class, $testingModel->getSpeakers());
     }
 
     /**
@@ -349,7 +350,7 @@ class EventMapperTest extends TestCase
         /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
-        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getPartners());
+        self::assertInstanceOf(Collection::class, $testingModel->getPartners());
     }
 
     /**
@@ -410,7 +411,7 @@ class EventMapperTest extends TestCase
         /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
-        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getTutors());
+        self::assertInstanceOf(Collection::class, $testingModel->getTutors());
     }
 
     /**
@@ -471,7 +472,7 @@ class EventMapperTest extends TestCase
         /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
-        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getLeaders());
+        self::assertInstanceOf(Collection::class, $testingModel->getLeaders());
     }
 
     /**
@@ -532,7 +533,7 @@ class EventMapperTest extends TestCase
         /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
-        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getOrganizers());
+        self::assertInstanceOf(Collection::class, $testingModel->getOrganizers());
     }
 
     /**
@@ -594,7 +595,7 @@ class EventMapperTest extends TestCase
         /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
-        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getOrganizingPartners());
+        self::assertInstanceOf(Collection::class, $testingModel->getOrganizingPartners());
     }
 
     /**
@@ -681,7 +682,7 @@ class EventMapperTest extends TestCase
         /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
-        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getEventManagers());
+        self::assertInstanceOf(Collection::class, $testingModel->getEventManagers());
     }
 
     /**
@@ -1070,7 +1071,7 @@ class EventMapperTest extends TestCase
     {
         $result = $this->subject->findForAutomaticStatusChange();
 
-        self::assertInstanceOf(\Tx_Oelib_List::class, $result);
+        self::assertInstanceOf(Collection::class, $result);
         self::assertTrue($result->isEmpty());
     }
 

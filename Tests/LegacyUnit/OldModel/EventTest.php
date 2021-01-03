@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\OldModel;
 
+use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Model\FrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
@@ -5976,7 +5977,7 @@ final class EventTest extends TestCase
      */
     public function getPlacesForEventWithNoPlacesReturnsEmptyList()
     {
-        self::assertInstanceOf(\Tx_Oelib_List::class, $this->subject->getPlaces());
+        self::assertInstanceOf(Collection::class, $this->subject->getPlaces());
     }
 
     /**

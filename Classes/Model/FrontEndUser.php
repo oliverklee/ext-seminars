@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Model\BackEndUser;
 use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 
@@ -127,13 +128,13 @@ class Tx_Seminars_Model_FrontEndUser extends OelibFrontEndUser
     /**
      * Returns all default categories assigned to this user's groups.
      *
-     * @return \Tx_Oelib_List the categories assigned to this user's groups, will
+     * @return Collection the categories assigned to this user's groups, will
      *                       be empty if no default categories have been assigned
      *                       to any of the user's groups
      */
-    public function getDefaultCategoriesFromGroup(): \Tx_Oelib_List
+    public function getDefaultCategoriesFromGroup(): Collection
     {
-        $categories = new \Tx_Oelib_List();
+        $categories = new Collection();
 
         /** @var \Tx_Seminars_Model_FrontEndUserGroup $group */
         foreach ($this->getUserGroups() as $group) {
@@ -159,13 +160,13 @@ class Tx_Seminars_Model_FrontEndUser extends OelibFrontEndUser
     /**
      * Returns all default organizers assigned to this user's groups.
      *
-     * @return \Tx_Oelib_List the organizers assigned to this user's groups, will
+     * @return Collection the organizers assigned to this user's groups, will
      *                       be empty if no default organizers have been assigned
      *                       to any of the user's groups
      */
-    public function getDefaultOrganizers(): \Tx_Oelib_List
+    public function getDefaultOrganizers(): Collection
     {
-        $organizers = new \Tx_Oelib_List();
+        $organizers = new Collection();
 
         /** @var \Tx_Seminars_Model_FrontEndUserGroup $group */
         foreach ($this->getUserGroups() as $group) {

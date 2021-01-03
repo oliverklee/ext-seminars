@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
+use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Model\BackEndUser;
 use OliverKlee\PhpUnit\TestCase;
 
@@ -260,9 +261,9 @@ class FrontEndUserGroupTest extends TestCase
      */
     public function getDefaultCategoriesForNoCategoriesReturnsAList()
     {
-        $this->subject->setData(['tx_seminars_default_categories' => new \Tx_Oelib_List()]);
+        $this->subject->setData(['tx_seminars_default_categories' => new Collection()]);
 
-        self::assertInstanceOf(\Tx_Oelib_List::class, $this->subject->getDefaultCategories());
+        self::assertInstanceOf(Collection::class, $this->subject->getDefaultCategories());
     }
 
     /**
@@ -270,7 +271,7 @@ class FrontEndUserGroupTest extends TestCase
      */
     public function getDefaultCategoriesForOneAssignedCategoryReturnsThisCategoryInList()
     {
-        $list = new \Tx_Oelib_List();
+        $list = new Collection();
         $category = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Category::class)
             ->getNewGhost();
 
@@ -292,7 +293,7 @@ class FrontEndUserGroupTest extends TestCase
      */
     public function hasDefaultCategoriesForNoAssignedCategoriesReturnsFalse()
     {
-        $this->subject->setData(['tx_seminars_default_categories' => new \Tx_Oelib_List()]);
+        $this->subject->setData(['tx_seminars_default_categories' => new Collection()]);
 
         self::assertFalse(
             $this->subject->hasDefaultCategories()
@@ -304,7 +305,7 @@ class FrontEndUserGroupTest extends TestCase
      */
     public function hasDefaultCategoriesForOneAssignedCategoryReturnsTrue()
     {
-        $list = new \Tx_Oelib_List();
+        $list = new Collection();
         $list->add(
             \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Category::class)
                 ->getNewGhost()

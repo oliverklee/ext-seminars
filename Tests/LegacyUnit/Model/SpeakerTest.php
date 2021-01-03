@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
+use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\PhpUnit\TestCase;
 
 /**
@@ -819,7 +820,7 @@ class SpeakerTest extends TestCase
      */
     public function setSkillsSetsSkills()
     {
-        $skills = new \Tx_Oelib_List();
+        $skills = new Collection();
         $this->subject->setSkills($skills);
 
         self::assertSame(

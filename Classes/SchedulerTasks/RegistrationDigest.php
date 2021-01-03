@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\SchedulerTask;
 
+use OliverKlee\Oelib\DataStructures\Collection;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
@@ -141,11 +142,11 @@ class RegistrationDigest
     }
 
     /**
-     * @param \Tx_Oelib_List $events the \Tx_Oelib_List<\Tx_Seminars_Model_Event> that have new registrations
+     * @param Collection $events the Collection<\Tx_Seminars_Model_Event> that have new registrations
      *
      * @return MailMessage
      */
-    private function buildEmail(\Tx_Oelib_List $events): MailMessage
+    private function buildEmail(Collection $events): MailMessage
     {
         $configuration = $this->configuration;
         $email = $this->objectManager->get(MailMessage::class);
@@ -167,11 +168,11 @@ class RegistrationDigest
 
     /**
      * @param string $templatePath in the EXT:... syntax
-     * @param \Tx_Oelib_List $events \Tx_Oelib_List<\Tx_Seminars_Model_Event>
+     * @param Collection $events Collection<\Tx_Seminars_Model_Event>
      *
      * @return string
      */
-    private function createContent(string $templatePath, \Tx_Oelib_List $events): string
+    private function createContent(string $templatePath, Collection $events): string
     {
         $view = $this->objectManager->get(StandaloneView::class);
         $view->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName($templatePath));
@@ -181,11 +182,11 @@ class RegistrationDigest
     }
 
     /**
-     * @param \Tx_Oelib_List $events the \Tx_Oelib_List<\Tx_Seminars_Model_Event> that have new registrations
+     * @param Collection $events the Collection<\Tx_Seminars_Model_Event> that have new registrations
      *
      * @return void
      */
-    private function updateDateOfLastDigest(\Tx_Oelib_List $events)
+    private function updateDateOfLastDigest(Collection $events)
     {
         $now = $GLOBALS['SIM_EXEC_TIME'];
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 
+use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
@@ -8370,13 +8371,13 @@ class DefaultControllerTest extends TestCase
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = $mapper->getLoadedTestingModel(['title' => 'TDD for starters']);
-        $registrations = new \Tx_Oelib_List();
+        $registrations = new Collection();
         $registrations->add(new \Tx_Seminars_Model_Registration());
         $event->setRegistrations($registrations);
 
         $hiddenClone = clone $event;
         $hiddenClone->markAsHidden();
-        $hiddenClone->setRegistrations(new \Tx_Oelib_List());
+        $hiddenClone->setRegistrations(new Collection());
         $mapper->expects(self::once())->method('save')->with($hiddenClone);
 
         $subject = new TestingDefaultController();

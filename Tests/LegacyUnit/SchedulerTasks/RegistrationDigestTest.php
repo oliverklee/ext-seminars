@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\SchedulerTask;
 
+use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
 use Prophecy\Prophecy\ObjectProphecy;
@@ -120,7 +121,7 @@ class RegistrationDigestTest extends TestCase
     {
         $this->configuration->setAsBoolean('enable', false);
 
-        $events = new \Tx_Oelib_List();
+        $events = new Collection();
         $event = new \Tx_Seminars_Model_Event();
         $events->add($event);
         $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
@@ -144,7 +145,7 @@ class RegistrationDigestTest extends TestCase
         $this->setObjectManagerReturnValues();
         $this->configuration->setAsBoolean('enable', true);
 
-        $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn(new \Tx_Oelib_List());
+        $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn(new Collection());
 
         $this->subject->execute();
 
@@ -159,7 +160,7 @@ class RegistrationDigestTest extends TestCase
         $this->setObjectManagerReturnValues();
         $this->configuration->setAsBoolean('enable', true);
 
-        $events = new \Tx_Oelib_List();
+        $events = new Collection();
         $event = new \Tx_Seminars_Model_Event();
         $events->add($event);
         $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
@@ -183,7 +184,7 @@ class RegistrationDigestTest extends TestCase
         $this->configuration->setAsString('fromEmail', $fromEmail);
         $this->configuration->setAsString('fromName', $fromName);
 
-        $events = new \Tx_Oelib_List();
+        $events = new Collection();
         $event = new \Tx_Seminars_Model_Event();
         $events->add($event);
         $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
@@ -207,7 +208,7 @@ class RegistrationDigestTest extends TestCase
         $this->configuration->setAsString('toEmail', $toEmail);
         $this->configuration->setAsString('toName', $toName);
 
-        $events = new \Tx_Oelib_List();
+        $events = new Collection();
         $event = new \Tx_Seminars_Model_Event();
         $events->add($event);
         $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
@@ -231,7 +232,7 @@ class RegistrationDigestTest extends TestCase
         $this->configuration->setAsString('toEmail', $toEmail);
         $this->configuration->setAsString('toName', $toName);
 
-        $events = new \Tx_Oelib_List();
+        $events = new Collection();
         $event = new \Tx_Seminars_Model_Event();
         $events->add($event);
         $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
@@ -261,7 +262,7 @@ class RegistrationDigestTest extends TestCase
         $this->configuration->setAsString('toEmail', $toEmail);
         $this->configuration->setAsString('toName', $toName);
 
-        $events = new \Tx_Oelib_List();
+        $events = new Collection();
         $event = new \Tx_Seminars_Model_Event();
         $events->add($event);
         $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
@@ -289,7 +290,7 @@ class RegistrationDigestTest extends TestCase
         $this->setObjectManagerReturnValues();
         $this->configuration->setAsBoolean('enable', true);
 
-        $events = new \Tx_Oelib_List();
+        $events = new Collection();
         $event = new \Tx_Seminars_Model_Event();
         $events->add($event);
         $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
@@ -308,7 +309,7 @@ class RegistrationDigestTest extends TestCase
         $this->setObjectManagerReturnValues();
         $this->configuration->setAsBoolean('enable', true);
 
-        $events = new \Tx_Oelib_List();
+        $events = new Collection();
         $event = new \Tx_Seminars_Model_Event();
         $events->add($event);
         $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);

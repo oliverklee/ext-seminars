@@ -17,7 +17,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
-- Use the namespaced oelib classes (#658, #569, #661, #662, #663)
+- Use the namespaced oelib classes (#658, #569, #661, #662, #663, #664)
 - Stop using event model prophecies in the scheduler task tests (#651)
 - Stop converting class names to PSR-4 (#597)
 

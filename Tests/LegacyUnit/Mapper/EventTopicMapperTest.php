@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 
+use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
@@ -74,7 +75,7 @@ class EventTopicMapperTest extends TestCase
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
-        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getCategories());
+        self::assertInstanceOf(Collection::class, $testingModel->getCategories());
     }
 
     /**
@@ -175,7 +176,7 @@ class EventTopicMapperTest extends TestCase
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
-        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getPaymentMethods());
+        self::assertInstanceOf(Collection::class, $testingModel->getPaymentMethods());
     }
 
     /**
@@ -245,7 +246,7 @@ class EventTopicMapperTest extends TestCase
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
-        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getTargetGroups());
+        self::assertInstanceOf(Collection::class, $testingModel->getTargetGroups());
     }
 
     /**
@@ -314,7 +315,7 @@ class EventTopicMapperTest extends TestCase
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
 
-        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getCheckboxes());
+        self::assertInstanceOf(Collection::class, $testingModel->getCheckboxes());
     }
 
     /**

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 
+use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
@@ -2383,7 +2384,7 @@ class EventEditorTest extends TestCase
     {
         self::assertEquals(
             [],
-            \Tx_Seminars_FrontEnd_EventEditor::makeListToFormidableList(new \Tx_Oelib_List())
+            \Tx_Seminars_FrontEnd_EventEditor::makeListToFormidableList(new Collection())
         );
     }
 
@@ -2398,7 +2399,7 @@ class EventEditorTest extends TestCase
             ['title' => 'foo']
         );
 
-        $list = new \Tx_Oelib_List();
+        $list = new Collection();
         $list->add($targetGroup);
 
         self::assertContains(
@@ -2419,7 +2420,7 @@ class EventEditorTest extends TestCase
             \Tx_Seminars_Mapper_TargetGroup::class
         )->getLoadedTestingModel([]);
 
-        $list = new \Tx_Oelib_List();
+        $list = new Collection();
         $list->add($targetGroup1);
         $list->add($targetGroup2);
 

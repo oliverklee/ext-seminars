@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 
+use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
@@ -154,7 +155,7 @@ class RegistrationMapperTest extends TestCase
         /** @var \Tx_Seminars_Model_Registration $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
-        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getLodgings());
+        self::assertInstanceOf(Collection::class, $testingModel->getLodgings());
     }
 
     /**
@@ -212,7 +213,7 @@ class RegistrationMapperTest extends TestCase
         /** @var \Tx_Seminars_Model_Registration $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
-        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getFoods());
+        self::assertInstanceOf(Collection::class, $testingModel->getFoods());
     }
 
     /**
@@ -270,7 +271,7 @@ class RegistrationMapperTest extends TestCase
         /** @var \Tx_Seminars_Model_Registration $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
-        self::assertInstanceOf(\Tx_Oelib_List::class, $testingModel->getCheckboxes());
+        self::assertInstanceOf(Collection::class, $testingModel->getCheckboxes());
     }
 
     /**

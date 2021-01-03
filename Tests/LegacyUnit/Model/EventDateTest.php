@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
+use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\PhpUnit\TestCase;
 
 /**
@@ -1659,7 +1660,7 @@ class EventDateTest extends TestCase
      */
     public function getPaymentMethodsReturnsPaymentMethodsFromTopic()
     {
-        $paymentMethods = new \Tx_Oelib_List();
+        $paymentMethods = new Collection();
         $topic = new \Tx_Seminars_Model_Event();
         $topic->setData(['payment_methods' => $paymentMethods]);
         $this->subject->setData(
@@ -1696,7 +1697,7 @@ class EventDateTest extends TestCase
             ]
         );
 
-        $this->subject->setPaymentMethods(new \Tx_Oelib_List());
+        $this->subject->setPaymentMethods(new Collection());
     }
 
     /*

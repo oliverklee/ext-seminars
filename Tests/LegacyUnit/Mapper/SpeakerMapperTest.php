@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 
+use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
@@ -84,7 +85,7 @@ class SpeakerMapperTest extends TestCase
 
         /** @var \Tx_Seminars_Model_Speaker $model */
         $model = $this->subject->find($uid);
-        self::assertInstanceOf(\Tx_Oelib_List::class, $model->getSkills());
+        self::assertInstanceOf(Collection::class, $model->getSkills());
     }
 
     /**

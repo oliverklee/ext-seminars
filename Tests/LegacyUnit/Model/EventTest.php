@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
+use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\PhpUnit\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
@@ -935,7 +936,7 @@ class EventTest extends TestCase
      */
     public function getCombinedSingleViewPageInitiallyReturnsEmptyString()
     {
-        $this->subject->setData(['categories' => new \Tx_Oelib_List()]);
+        $this->subject->setData(['categories' => new Collection()]);
 
         self::assertEquals(
             '',
@@ -951,7 +952,7 @@ class EventTest extends TestCase
         $this->subject->setData(
             [
                 'details_page' => '5',
-                'categories' => new \Tx_Oelib_List(),
+                'categories' => new Collection(),
             ]
         );
 
@@ -969,7 +970,7 @@ class EventTest extends TestCase
         $this->subject->setData(
             [
                 'details_page' => 'www.example.com',
-                'categories' => new \Tx_Oelib_List(),
+                'categories' => new Collection(),
             ]
         );
 
@@ -989,7 +990,7 @@ class EventTest extends TestCase
         $this->subject->setData(
             [
                 'event_type' => $eventType,
-                'categories' => new \Tx_Oelib_List(),
+                'categories' => new Collection(),
             ]
         );
 
@@ -1009,7 +1010,7 @@ class EventTest extends TestCase
         $this->subject->setData(
             [
                 'event_type' => $eventType,
-                'categories' => new \Tx_Oelib_List(),
+                'categories' => new Collection(),
             ]
         );
 
@@ -1026,7 +1027,7 @@ class EventTest extends TestCase
     {
         $category = new \Tx_Seminars_Model_Category();
         $category->setData([]);
-        $categories = new \Tx_Oelib_List();
+        $categories = new Collection();
         $categories->add($category);
         $this->subject->setData(['categories' => $categories]);
 
@@ -1043,7 +1044,7 @@ class EventTest extends TestCase
     {
         $category = new \Tx_Seminars_Model_Category();
         $category->setData(['single_view_page' => 42]);
-        $categories = new \Tx_Oelib_List();
+        $categories = new Collection();
         $categories->add($category);
         $this->subject->setData(['categories' => $categories]);
 
@@ -1062,7 +1063,7 @@ class EventTest extends TestCase
         $category1->setData(['single_view_page' => 42]);
         $category2 = new \Tx_Seminars_Model_Category();
         $category2->setData(['single_view_page' => 12]);
-        $categories = new \Tx_Oelib_List();
+        $categories = new Collection();
         $categories->add($category1);
         $categories->add($category2);
         $this->subject->setData(['categories' => $categories]);
@@ -1121,7 +1122,7 @@ class EventTest extends TestCase
             [
                 'details_page' => '5',
                 'event_type' => $eventType,
-                'categories' => new \Tx_Oelib_List(),
+                'categories' => new Collection(),
             ]
         );
 
@@ -1140,7 +1141,7 @@ class EventTest extends TestCase
         $eventType->setData(['single_view_page' => 42]);
         $category = new \Tx_Seminars_Model_Category();
         $category->setData(['single_view_page' => 91]);
-        $categories = new \Tx_Oelib_List();
+        $categories = new Collection();
         $categories->add($category);
 
         $this->subject->setData(
@@ -2180,7 +2181,7 @@ class EventTest extends TestCase
      */
     public function getRegistrationsReturnsRegistrations()
     {
-        $registrations = new \Tx_Oelib_List();
+        $registrations = new Collection();
 
         $this->subject->setData(['registrations' => $registrations]);
 
@@ -2195,7 +2196,7 @@ class EventTest extends TestCase
      */
     public function setRegistrationsSetsRegistrations()
     {
-        $registrations = new \Tx_Oelib_List();
+        $registrations = new Collection();
 
         $this->subject->setRegistrations($registrations);
 
@@ -2210,7 +2211,7 @@ class EventTest extends TestCase
      */
     public function getRegularRegistrationsReturnsRegularRegistrations()
     {
-        $registrations = new \Tx_Oelib_List();
+        $registrations = new Collection();
         $registration = \Tx_Oelib_MapperRegistry
             ::get(\Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
                 ['registration_queue' => 0]
@@ -2229,7 +2230,7 @@ class EventTest extends TestCase
      */
     public function getRegularRegistrationsNotReturnsQueueRegistrations()
     {
-        $registrations = new \Tx_Oelib_List();
+        $registrations = new Collection();
         $registration = \Tx_Oelib_MapperRegistry
             ::get(\Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
                 ['registration_queue' => 1]
@@ -2247,7 +2248,7 @@ class EventTest extends TestCase
      */
     public function getQueueRegistrationsReturnsQueueRegistrations()
     {
-        $registrations = new \Tx_Oelib_List();
+        $registrations = new Collection();
         $registration = \Tx_Oelib_MapperRegistry
             ::get(\Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
                 ['registration_queue' => 1]
@@ -2266,7 +2267,7 @@ class EventTest extends TestCase
      */
     public function getQueueRegistrationsNotReturnsRegularRegistrations()
     {
-        $registrations = new \Tx_Oelib_List();
+        $registrations = new Collection();
         $registration = \Tx_Oelib_MapperRegistry
             ::get(\Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
                 ['registration_queue' => 0]
@@ -2284,7 +2285,7 @@ class EventTest extends TestCase
      */
     public function hasQueueRegistrationsForOneQueueRegistrationReturnsTrue()
     {
-        $registrations = new \Tx_Oelib_List();
+        $registrations = new Collection();
         $registration = \Tx_Oelib_MapperRegistry
             ::get(\Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
                 ['registration_queue' => 1]
@@ -2310,7 +2311,7 @@ class EventTest extends TestCase
     {
         $this->subject->setDateOfLastRegistrationDigestEmailAsUnixTimeStamp(1);
 
-        $registrations = new \Tx_Oelib_List();
+        $registrations = new Collection();
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setData(['crdate' => 2]);
         $registrations->add($registration);
@@ -2326,7 +2327,7 @@ class EventTest extends TestCase
     {
         $this->subject->setDateOfLastRegistrationDigestEmailAsUnixTimeStamp(2);
 
-        $registrations = new \Tx_Oelib_List();
+        $registrations = new Collection();
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setData(['crdate' => 1]);
         $registrations->add($registration);
@@ -2342,7 +2343,7 @@ class EventTest extends TestCase
     {
         $this->subject->setDateOfLastRegistrationDigestEmailAsUnixTimeStamp(1);
 
-        $registrations = new \Tx_Oelib_List();
+        $registrations = new Collection();
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setData(['crdate' => 1]);
         $registrations->add($registration);
@@ -2362,7 +2363,7 @@ class EventTest extends TestCase
             ['getQueueRegistrations']
         );
         $event->method('getQueueRegistrations')
-            ->willReturn(new \Tx_Oelib_List());
+            ->willReturn(new Collection());
 
         self::assertFalse(
             $event->hasQueueRegistrations()
@@ -2413,7 +2414,7 @@ class EventTest extends TestCase
         );
         $event->setData([]);
         $event->method('getRegularRegistrations')
-            ->willReturn(new \Tx_Oelib_List());
+            ->willReturn(new Collection());
 
         self::assertEquals(
             0,
@@ -2426,7 +2427,7 @@ class EventTest extends TestCase
      */
     public function getRegisteredSeatsCountsSingleSeatRegularRegistrations()
     {
-        $registrations = new \Tx_Oelib_List();
+        $registrations = new Collection();
         $registration = \Tx_Oelib_MapperRegistry
             ::get(\Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
                 ['seats' => 1]
@@ -2452,7 +2453,7 @@ class EventTest extends TestCase
      */
     public function getRegisteredSeatsCountsMultiSeatRegularRegistrations()
     {
-        $registrations = new \Tx_Oelib_List();
+        $registrations = new Collection();
         $registration = \Tx_Oelib_MapperRegistry
             ::get(\Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
                 ['seats' => 2]
@@ -2478,7 +2479,7 @@ class EventTest extends TestCase
      */
     public function getRegisteredSeatsNotCountsQueueRegistrations()
     {
-        $queueRegistrations = new \Tx_Oelib_List();
+        $queueRegistrations = new Collection();
         $registration = \Tx_Oelib_MapperRegistry
             ::get(\Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
                 ['seats' => 1]
@@ -2493,7 +2494,7 @@ class EventTest extends TestCase
         $event->method('getQueueRegistrations')
             ->willReturn($queueRegistrations);
         $event->method('getRegularRegistrations')
-            ->willReturn(new \Tx_Oelib_List());
+            ->willReturn(new Collection());
 
         self::assertEquals(
             0,
@@ -2513,7 +2514,7 @@ class EventTest extends TestCase
         );
         $event->setData(['offline_attendees' => 2]);
         $event->method('getRegularRegistrations')
-            ->willReturn(new \Tx_Oelib_List());
+            ->willReturn(new Collection());
 
         self::assertEquals(
             2,
@@ -2873,7 +2874,7 @@ class EventTest extends TestCase
      */
     public function attachRegistrationAddsRegistration()
     {
-        $this->subject->setRegistrations(new \Tx_Oelib_List());
+        $this->subject->setRegistrations(new Collection());
 
         /** @var \Tx_Seminars_Model_Registration $registration */
         $registration = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)
@@ -2890,7 +2891,7 @@ class EventTest extends TestCase
      */
     public function attachRegistrationNotRemovesExistingRegistration()
     {
-        $registrations = new \Tx_Oelib_List();
+        $registrations = new Collection();
         $oldRegistration = \Tx_Oelib_MapperRegistry
             ::get(\Tx_Seminars_Mapper_Registration::class)->getNewGhost();
         $registrations->add($oldRegistration);
@@ -2911,7 +2912,7 @@ class EventTest extends TestCase
      */
     public function attachRegistrationSetsEventForRegistration()
     {
-        $this->subject->setRegistrations(new \Tx_Oelib_List());
+        $this->subject->setRegistrations(new Collection());
 
         /** @var \Tx_Seminars_Model_Registration $registration */
         $registration = \Tx_Oelib_MapperRegistry
@@ -2934,7 +2935,7 @@ class EventTest extends TestCase
      */
     public function getPaymentMethodsReturnsPaymentMethods()
     {
-        $paymentMethods = new \Tx_Oelib_List();
+        $paymentMethods = new Collection();
         $this->subject->setData(
             ['payment_methods' => $paymentMethods]
         );
@@ -2952,7 +2953,7 @@ class EventTest extends TestCase
     {
         $this->subject->setData([]);
 
-        $paymentMethods = new \Tx_Oelib_List();
+        $paymentMethods = new Collection();
         $this->subject->setPaymentMethods($paymentMethods);
 
         self::assertSame(
@@ -3084,7 +3085,7 @@ class EventTest extends TestCase
      */
     public function getOrganizersGetsOrganizers()
     {
-        $organizers = new \Tx_Oelib_List();
+        $organizers = new Collection();
         $this->subject->setData(['organizers' => $organizers]);
 
         $result = $this->subject->getOrganizers();
@@ -3097,7 +3098,7 @@ class EventTest extends TestCase
      */
     public function getFirstOrganizerForNoOrganizersReturnsNull()
     {
-        $organizers = new \Tx_Oelib_List();
+        $organizers = new Collection();
         $this->subject->setData(['organizers' => $organizers]);
 
         $result = $this->subject->getFirstOrganizer();
@@ -3111,7 +3112,7 @@ class EventTest extends TestCase
     public function getFirstOrganizerForOneOrganizerReturnsThatOrganizer()
     {
         $organizer = new \Tx_Seminars_Model_Organizer();
-        $organizers = new \Tx_Oelib_List();
+        $organizers = new Collection();
         $organizers->add($organizer);
         $this->subject->setData(['organizers' => $organizers]);
 
@@ -3126,7 +3127,7 @@ class EventTest extends TestCase
     public function getFirstOrganizerForTwoOrganizersReturnsFirstOrganizer()
     {
         $firstOrganizer = new \Tx_Seminars_Model_Organizer();
-        $organizers = new \Tx_Oelib_List();
+        $organizers = new Collection();
         $organizers->add($firstOrganizer);
         $organizers->add(new \Tx_Seminars_Model_Organizer());
         $this->subject->setData(['organizers' => $organizers]);
@@ -3145,7 +3146,7 @@ class EventTest extends TestCase
      */
     public function getAttendeeNamesForNoRegistrationsReturnsEmptyArray()
     {
-        $this->subject->setData(['registrations' => new \Tx_Oelib_List()]);
+        $this->subject->setData(['registrations' => new Collection()]);
 
         self::assertSame([], $this->subject->getAttendeeNames());
     }
@@ -3166,10 +3167,10 @@ class EventTest extends TestCase
             [
                 'user' => $user,
                 'registered_themselves' => true,
-                'additional_persons' => new \Tx_Oelib_List(),
+                'additional_persons' => new Collection(),
             ]
         );
-        $registrations = new \Tx_Oelib_List();
+        $registrations = new Collection();
         $registrations->add($registration);
 
         $this->subject->setData(['registrations' => $registrations]);
@@ -3187,9 +3188,9 @@ class EventTest extends TestCase
 
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setData(
-            ['user' => $user, 'registered_themselves' => false, 'additional_persons' => new \Tx_Oelib_List()]
+            ['user' => $user, 'registered_themselves' => false, 'additional_persons' => new Collection()]
         );
-        $registrations = new \Tx_Oelib_List();
+        $registrations = new Collection();
         $registrations->add($registration);
 
         $this->subject->setData(['registrations' => $registrations]);
@@ -3210,14 +3211,14 @@ class EventTest extends TestCase
 
         $additionalPerson = new \Tx_Seminars_Model_FrontEndUser();
         $additionalPerson->setData(['first_name' => $firstName, 'last_name' => $lastName]);
-        $additionalPersons = new \Tx_Oelib_List();
+        $additionalPersons = new Collection();
         $additionalPersons->add($additionalPerson);
 
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setData(
             ['user' => $user, 'registered_themselves' => false, 'additional_persons' => $additionalPersons]
         );
-        $registrations = new \Tx_Oelib_List();
+        $registrations = new Collection();
         $registrations->add($registration);
 
         $this->subject->setData(['registrations' => $registrations]);
@@ -3238,7 +3239,7 @@ class EventTest extends TestCase
 
         $additionalPerson = new \Tx_Seminars_Model_FrontEndUser();
         $additionalPerson->setData(['first_name' => $firstName, 'last_name' => $lastName]);
-        $additionalPersons = new \Tx_Oelib_List();
+        $additionalPersons = new Collection();
         $additionalPersons->add($additionalPerson);
 
         $registration = new \Tx_Seminars_Model_Registration();
@@ -3250,7 +3251,7 @@ class EventTest extends TestCase
                 'attendees_names' => 'Jane Doe',
             ]
         );
-        $registrations = new \Tx_Oelib_List();
+        $registrations = new Collection();
         $registrations->add($registration);
 
         $this->subject->setData(['registrations' => $registrations]);
@@ -3271,11 +3272,11 @@ class EventTest extends TestCase
             [
                 'user' => $user,
                 'registered_themselves' => false,
-                'additional_persons' => new \Tx_Oelib_List(),
+                'additional_persons' => new Collection(),
                 'attendees_names' => 'Jane Doe' . CRLF . 'John Doe',
             ]
         );
-        $registrations = new \Tx_Oelib_List();
+        $registrations = new Collection();
         $registrations->add($registration);
 
         $this->subject->setData(['registrations' => $registrations]);
@@ -3288,7 +3289,7 @@ class EventTest extends TestCase
      */
     public function getAttendeeNamesSortsNamesFromRegisteredThemselvesByFullName()
     {
-        $registrations = new \Tx_Oelib_List();
+        $registrations = new Collection();
 
         $firstName1 = 'Oliver';
         $lastName1 = 'Klee';
@@ -3299,7 +3300,7 @@ class EventTest extends TestCase
             [
                 'user' => $user1,
                 'registered_themselves' => true,
-                'additional_persons' => new \Tx_Oelib_List(),
+                'additional_persons' => new Collection(),
             ]
         );
         $registrations->add($registration1);
@@ -3310,7 +3311,7 @@ class EventTest extends TestCase
         $user2->setData(['first_name' => $firstName2, 'last_name' => $lastName2]);
         $registration2 = new \Tx_Seminars_Model_Registration();
         $registration2->setData(
-            ['user' => $user2, 'registered_themselves' => true, 'additional_persons' => new \Tx_Oelib_List()]
+            ['user' => $user2, 'registered_themselves' => true, 'additional_persons' => new Collection()]
         );
         $registrations->add($registration2);
 
@@ -3332,7 +3333,7 @@ class EventTest extends TestCase
     {
         $user = new \Tx_Seminars_Model_FrontEndUser();
         $user->setData([]);
-        $additionalPersons = new \Tx_Oelib_List();
+        $additionalPersons = new Collection();
 
         $firstName1 = 'Oliver';
         $lastName1 = 'Klee';
@@ -3350,7 +3351,7 @@ class EventTest extends TestCase
         $registration->setData(
             ['user' => $user, 'registered_themselves' => false, 'additional_persons' => $additionalPersons]
         );
-        $registrations = new \Tx_Oelib_List();
+        $registrations = new Collection();
         $registrations->add($registration);
 
         $this->subject->setData(['registrations' => $registrations]);
@@ -3377,11 +3378,11 @@ class EventTest extends TestCase
             [
                 'user' => $user,
                 'registered_themselves' => false,
-                'additional_persons' => new \Tx_Oelib_List(),
+                'additional_persons' => new Collection(),
                 'attendees_names' => 'John Doe' . CRLF . 'Jane Doe',
             ]
         );
-        $registrations = new \Tx_Oelib_List();
+        $registrations = new Collection();
         $registrations->add($registration);
 
         $this->subject->setData(['registrations' => $registrations]);
@@ -3405,11 +3406,11 @@ class EventTest extends TestCase
             [
                 'user' => $user,
                 'registered_themselves' => true,
-                'additional_persons' => new \Tx_Oelib_List(),
+                'additional_persons' => new Collection(),
                 'crdate' => 2,
             ]
         );
-        $registrations = new \Tx_Oelib_List();
+        $registrations = new Collection();
         $registrations->add($registration);
 
         $this->subject->setData(['registrations' => $registrations, 'date_of_last_registration_digest' => 1]);
@@ -3436,11 +3437,11 @@ class EventTest extends TestCase
             [
                 'user' => $user,
                 'registered_themselves' => true,
-                'additional_persons' => new \Tx_Oelib_List(),
+                'additional_persons' => new Collection(),
                 'crdate' => 1,
             ]
         );
-        $registrations = new \Tx_Oelib_List();
+        $registrations = new Collection();
         $registrations->add($registration);
 
         $this->subject->setData(['registrations' => $registrations, 'date_of_last_registration_digest' => 2]);

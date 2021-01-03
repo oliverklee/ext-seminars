@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 
+use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Service\EmailService;
@@ -111,7 +112,7 @@ final class EmailServiceTest extends TestCase
                 'email_footer' => 'Best workshops in town!',
             ]
         );
-        $organizers = new \Tx_Oelib_List();
+        $organizers = new Collection();
         $organizers->add($this->organizer);
 
         $this->event = new \Tx_Seminars_Model_Event();
@@ -120,7 +121,7 @@ final class EmailServiceTest extends TestCase
                 'title' => 'A nice event',
                 'begin_date' => mktime(10, 0, 0, 4, 2, 2016),
                 'end_date' => mktime(18, 30, 0, 4, 3, 2016),
-                'registrations' => new \Tx_Oelib_List(),
+                'registrations' => new Collection(),
                 'organizers' => $organizers,
             ]
         );
@@ -158,7 +159,7 @@ final class EmailServiceTest extends TestCase
      */
     public function sendEmailToAttendeesForEventWithoutRegistrationsNotSendsMail()
     {
-        $this->event->setRegistrations(new \Tx_Oelib_List());
+        $this->event->setRegistrations(new Collection());
 
         $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
 
@@ -331,7 +332,7 @@ final class EmailServiceTest extends TestCase
     {
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setData([]);
-        $registrations = new \Tx_Oelib_List();
+        $registrations = new Collection();
         $registrations->add($registration);
         $this->event->setRegistrations($registrations);
 

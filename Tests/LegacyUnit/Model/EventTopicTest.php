@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
+use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\PhpUnit\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
@@ -1843,7 +1844,7 @@ class EventTopicTest extends TestCase
     {
         $this->subject->setData([]);
 
-        $paymentMethods = new \Tx_Oelib_List();
+        $paymentMethods = new Collection();
         $this->subject->setPaymentMethods($paymentMethods);
 
         self::assertSame(

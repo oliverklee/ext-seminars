@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 
+use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Service\EventStatusService;
@@ -78,7 +79,7 @@ final class EventStateServiceTest extends TestCase
     public function updateStatusAndSaveForAlreadyConfirmedEventAndFlagSetReturnsFalse()
     {
         $event = new \Tx_Seminars_Model_Event();
-        $event->setData(['registrations' => new \Tx_Oelib_List(), 'automatic_confirmation_cancelation' => 1]);
+        $event->setData(['registrations' => new Collection(), 'automatic_confirmation_cancelation' => 1]);
         $event->setStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
 
         $result = $this->subject->updateStatusAndSave($event);
@@ -94,7 +95,7 @@ final class EventStateServiceTest extends TestCase
         $event = new \Tx_Seminars_Model_Event();
         $event->setData(
             [
-                'registrations' => new \Tx_Oelib_List(),
+                'registrations' => new Collection(),
                 'automatic_confirmation_cancelation' => 1,
                 'attendees_min' => 1,
                 'offline_attendees' => 1,
@@ -115,7 +116,7 @@ final class EventStateServiceTest extends TestCase
         $event = new \Tx_Seminars_Model_Event();
         $event->setData(
             [
-                'registrations' => new \Tx_Oelib_List(),
+                'registrations' => new Collection(),
                 'automatic_confirmation_cancelation' => 1,
                 'attendees_min' => 1,
                 'offline_attendees' => 1,
@@ -136,7 +137,7 @@ final class EventStateServiceTest extends TestCase
         $event = new \Tx_Seminars_Model_Event();
         $event->setData(
             [
-                'registrations' => new \Tx_Oelib_List(),
+                'registrations' => new Collection(),
                 'automatic_confirmation_cancelation' => 1,
                 'attendees_min' => 1,
                 'offline_attendees' => 1,
@@ -157,7 +158,7 @@ final class EventStateServiceTest extends TestCase
         $event = new \Tx_Seminars_Model_Event();
         $event->setData(
             [
-                'registrations' => new \Tx_Oelib_List(),
+                'registrations' => new Collection(),
                 'automatic_confirmation_cancelation' => 0,
                 'attendees_min' => 1,
                 'offline_attendees' => 1,
@@ -178,7 +179,7 @@ final class EventStateServiceTest extends TestCase
         $event = new \Tx_Seminars_Model_Event();
         $event->setData(
             [
-                'registrations' => new \Tx_Oelib_List(),
+                'registrations' => new Collection(),
                 'automatic_confirmation_cancelation' => 0,
                 'attendees_min' => 1,
                 'offline_attendees' => 1,
@@ -197,7 +198,7 @@ final class EventStateServiceTest extends TestCase
     public function updateStatusAndSaveForAlreadyCanceledEventAndFlagSetReturnsFalse()
     {
         $event = new \Tx_Seminars_Model_Event();
-        $event->setData(['registrations' => new \Tx_Oelib_List(), 'automatic_confirmation_cancelation' => 1]);
+        $event->setData(['registrations' => new Collection(), 'automatic_confirmation_cancelation' => 1]);
         $event->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
 
         $result = $this->subject->updateStatusAndSave($event);
@@ -213,7 +214,7 @@ final class EventStateServiceTest extends TestCase
         $event = new \Tx_Seminars_Model_Event();
         $event->setData(
             [
-                'registrations' => new \Tx_Oelib_List(),
+                'registrations' => new Collection(),
                 'automatic_confirmation_cancelation' => 1,
                 'attendees_min' => 1,
                 'offline_attendees' => 0,
@@ -235,7 +236,7 @@ final class EventStateServiceTest extends TestCase
         $event = new \Tx_Seminars_Model_Event();
         $event->setData(
             [
-                'registrations' => new \Tx_Oelib_List(),
+                'registrations' => new Collection(),
                 'automatic_confirmation_cancelation' => 1,
                 'attendees_min' => 1,
                 'offline_attendees' => 0,
@@ -257,7 +258,7 @@ final class EventStateServiceTest extends TestCase
         $event = new \Tx_Seminars_Model_Event();
         $event->setData(
             [
-                'registrations' => new \Tx_Oelib_List(),
+                'registrations' => new Collection(),
                 'automatic_confirmation_cancelation' => 1,
                 'attendees_min' => 1,
                 'offline_attendees' => 0,
@@ -279,7 +280,7 @@ final class EventStateServiceTest extends TestCase
         $event = new \Tx_Seminars_Model_Event();
         $event->setData(
             [
-                'registrations' => new \Tx_Oelib_List(),
+                'registrations' => new Collection(),
                 'automatic_confirmation_cancelation' => 1,
                 'attendees_min' => 1,
                 'offline_attendees' => 0,
@@ -301,7 +302,7 @@ final class EventStateServiceTest extends TestCase
         $event = new \Tx_Seminars_Model_Event();
         $event->setData(
             [
-                'registrations' => new \Tx_Oelib_List(),
+                'registrations' => new Collection(),
                 'automatic_confirmation_cancelation' => 1,
                 'attendees_min' => 1,
                 'offline_attendees' => 0,

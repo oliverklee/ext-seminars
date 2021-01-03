@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Model\AbstractModel;
 use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
@@ -271,9 +272,9 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
     /**
      * Gets the additional persons (FE users) attached to this registration.
      *
-     * @return \Tx_Oelib_List additional persons, will be empty if there are none
+     * @return Collection additional persons, will be empty if there are none
      */
-    public function getAdditionalPersons(): \Tx_Oelib_List
+    public function getAdditionalPersons(): Collection
     {
         return $this->getAsList('additional_persons');
     }
@@ -281,11 +282,11 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
     /**
      * Sets the additional persons attached to this registration.
      *
-     * @param \Tx_Oelib_List $persons the additional persons (FE users), may be empty
+     * @param Collection $persons the additional persons (FE users), may be empty
      *
      * @return void
      */
-    public function setAdditionalPersons(\Tx_Oelib_List $persons)
+    public function setAdditionalPersons(Collection $persons)
     {
         $this->set('additional_persons', $persons);
     }
@@ -765,9 +766,9 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
     /**
      * Returns the lodgings of this registration.
      *
-     * @return \Tx_Oelib_List the lodgings of this registration
+     * @return Collection the lodgings of this registration
      */
-    public function getLodgings(): \Tx_Oelib_List
+    public function getLodgings(): Collection
     {
         return $this->getAsList('lodgings');
     }
@@ -797,9 +798,9 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
     /**
      * Returns the foods of this registration.
      *
-     * @return \Tx_Oelib_List the foods of this registration
+     * @return Collection the foods of this registration
      */
-    public function getFoods(): \Tx_Oelib_List
+    public function getFoods(): Collection
     {
         return $this->getAsList('foods');
     }
@@ -880,9 +881,9 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
     /**
      * Returns the checkboxes of this registration.
      *
-     * @return \Tx_Oelib_List the checkboxes of this registration
+     * @return Collection the checkboxes of this registration
      */
-    public function getCheckboxes(): \Tx_Oelib_List
+    public function getCheckboxes(): Collection
     {
         return $this->getAsList('checkboxes');
     }
