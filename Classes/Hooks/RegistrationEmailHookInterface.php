@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Hooks;
 
+use OliverKlee\Oelib\Email\Mail;
 use OliverKlee\Oelib\Templating\Template;
 
 /**
@@ -16,14 +17,14 @@ use OliverKlee\Oelib\Templating\Template;
 interface RegistrationEmailHookInterface
 {
     /**
-     * @param \Tx_Oelib_Mail $mail
+     * @param Mail $mail
      * @param \Tx_Seminars_Model_Registration $registration
      *
      * @return void
      *
      * @deprecated will be removed in seminars 4; use `RegistrationEmail::modifyAttendeeEmail` instead
      */
-    public function postProcessAttendeeEmail(\Tx_Oelib_Mail $mail, \Tx_Seminars_Model_Registration $registration);
+    public function postProcessAttendeeEmail(Mail $mail, \Tx_Seminars_Model_Registration $registration);
 
     /**
      * @return void
@@ -36,17 +37,17 @@ interface RegistrationEmailHookInterface
     );
 
     /**
-     * @param \Tx_Oelib_Mail $mail
+     * @param Mail $mail
      * @param \Tx_Seminars_OldModel_Registration $registration
      *
      * @return void
      *
      * @deprecated will be removed in seminars 4; use `RegistrationEmail::modifyOrganizerEmail` instead
      */
-    public function postProcessOrganizerEmail(\Tx_Oelib_Mail $mail, \Tx_Seminars_OldModel_Registration $registration);
+    public function postProcessOrganizerEmail(Mail $mail, \Tx_Seminars_OldModel_Registration $registration);
 
     /**
-     * @param \Tx_Oelib_Mail $mail
+     * @param Mail $mail
      * @param \Tx_Seminars_OldModel_Registration $registration
      * @param string $emailReason see Tx_Seminars_Service_RegistrationManager::getReasonForNotification()
      *                            for information about possible values
@@ -56,7 +57,7 @@ interface RegistrationEmailHookInterface
      * @deprecated will be removed in seminars 4; use `RegistrationEmail::modifyAdditionalEmail` instead
      */
     public function postProcessAdditionalEmail(
-        \Tx_Oelib_Mail $mail,
+        Mail $mail,
         \Tx_Seminars_OldModel_Registration $registration,
         $emailReason = ''
     );

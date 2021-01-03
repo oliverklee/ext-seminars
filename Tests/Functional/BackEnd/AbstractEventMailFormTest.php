@@ -6,6 +6,8 @@ namespace OliverKlee\Seminars\Tests\Functional\BackEnd;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\Configuration\PageFinder;
+use OliverKlee\Oelib\Email\EmailCollector;
+use OliverKlee\Oelib\Email\MailerFactory;
 use OliverKlee\Oelib\Http\HeaderCollector;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Seminars\BackEnd\AbstractEventMailForm;
@@ -29,7 +31,7 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**
-     * @var \Tx_Oelib_EmailCollector
+     * @var EmailCollector
      */
     private $mailer = null;
 
@@ -55,8 +57,8 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
         $this->setUpBackendUserFromFixture(1);
         $this->initializeBackEndLanguage();
 
-        /** @var \Tx_Oelib_MailerFactory $mailerFactory */
-        $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
+        /** @var MailerFactory $mailerFactory */
+        $mailerFactory = GeneralUtility::makeInstance(MailerFactory::class);
         $mailerFactory->enableTestMode();
         $this->mailer = $mailerFactory->getMailer();
 

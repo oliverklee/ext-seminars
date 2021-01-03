@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Configuration\ConfigurationProxy;
+use OliverKlee\Oelib\Email\Attachment;
+use OliverKlee\Oelib\Email\Mail;
+use OliverKlee\Oelib\Email\MailerFactory;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\FrontEndUser;
@@ -827,8 +830,8 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
             return;
         }
 
-        /** @var \Tx_Oelib_Mail $eMailNotification */
-        $eMailNotification = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
+        /** @var Mail $eMailNotification */
+        $eMailNotification = GeneralUtility::makeInstance(Mail::class);
         $eMailNotification->addRecipient($user);
         $eMailNotification->setSender($event->getEmailSender());
         $eMailNotification->setReplyTo($event->getFirstOrganizer());
@@ -866,13 +869,13 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
             ->executeHook('modifyAttendeeEmail', $eMailNotification, $registration, $helloSubjectPrefix);
         $this->callPostProcessAttendeeEmailHooks($eMailNotification, $registration);
 
-        /** @var \Tx_Oelib_MailerFactory $mailerFactory */
-        $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
+        /** @var MailerFactory $mailerFactory */
+        $mailerFactory = GeneralUtility::makeInstance(MailerFactory::class);
         $mailerFactory->getMailer()->send($eMailNotification);
     }
 
     /**
-     * @param \Tx_Oelib_Mail $mail
+     * @param Mail $mail
      * @param \Tx_Seminars_Model_Registration $registration
      *
      * @return void
@@ -881,7 +884,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      *      use `->getRegistrationEmailHookProvider()->executeHook('modifyAttendeeEmail')` instead
      */
     protected function callPostProcessAttendeeEmailHooks(
-        \Tx_Oelib_Mail $mail,
+        Mail $mail,
         \Tx_Seminars_Model_Registration $registration
     ) {
         foreach ($this->getHooks() as $hook) {
@@ -902,18 +905,18 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
     /**
      * Adds an iCalendar attachment with the event's most important data to $email.
      *
-     * @param \Tx_Oelib_Mail $email
+     * @param Mail $email
      * @param \Tx_Seminars_Model_Registration $registration
      *
      * @return void
      */
-    private function addCalendarAttachment(\Tx_Oelib_Mail $email, \Tx_Seminars_Model_Registration $registration)
+    private function addCalendarAttachment(Mail $email, \Tx_Seminars_Model_Registration $registration)
     {
         $event = $registration->getEvent();
         $timeZone = $event->getTimeZone() ?: $this->getConfValueString('defaultTimeZone');
 
-        /** @var \Tx_Oelib_Attachment $calendarEntry */
-        $calendarEntry = GeneralUtility::makeInstance(\Tx_Oelib_Attachment::class);
+        /** @var Attachment $calendarEntry */
+        $calendarEntry = GeneralUtility::makeInstance(Attachment::class);
         $calendarEntry->setContentType('text/calendar; charset="utf-8"; component="vevent"; method="publish"');
         $calendarEntry->setFileName('event.ics');
         $content = 'BEGIN:VCALENDAR' . CRLF .
@@ -993,8 +996,8 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         }
 
         $organizers = $event->getOrganizerBag();
-        /** @var \Tx_Oelib_Mail $eMailNotification */
-        $eMailNotification = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
+        /** @var Mail $eMailNotification */
+        $eMailNotification = GeneralUtility::makeInstance(Mail::class);
         $eMailNotification->setSender($event->getEmailSender());
         $eMailNotification->setReplyTo($event->getFirstOrganizer());
 
@@ -1051,13 +1054,13 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
             ->executeHook('modifyOrganizerEmail', $eMailNotification, $registrationNew, $helloSubjectPrefix);
         $this->callPostProcessOrganizerEmailHooks($eMailNotification, $registration);
 
-        /** @var \Tx_Oelib_MailerFactory $mailerFactory */
-        $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
+        /** @var MailerFactory $mailerFactory */
+        $mailerFactory = GeneralUtility::makeInstance(MailerFactory::class);
         $mailerFactory->getMailer()->send($eMailNotification);
     }
 
     /**
-     * @param \Tx_Oelib_Mail $mail
+     * @param Mail $mail
      * @param \Tx_Seminars_OldModel_Registration $registration
      *
      * @return void
@@ -1066,7 +1069,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      *      use `->getRegistrationEmailHookProvider()->executeHook('modifyOrganizerEmail')` instead
      */
     protected function callPostProcessOrganizerEmailHooks(
-        \Tx_Oelib_Mail $mail,
+        Mail $mail,
         \Tx_Seminars_OldModel_Registration $registration
     ) {
         foreach ($this->getHooks() as $hook) {
@@ -1125,8 +1128,8 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
             return;
         }
 
-        /** @var \Tx_Oelib_Mail $eMail */
-        $eMail = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
+        /** @var Mail $eMail */
+        $eMail = GeneralUtility::makeInstance(Mail::class);
         $eMail->setSender($event->getEmailSender());
         $eMail->setReplyTo($event->getFirstOrganizer());
         $eMail->setMessage($this->getMessageForNotification($registration, $emailReason));
@@ -1152,8 +1155,8 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
             ->executeHook('modifyAdditionalEmail', $eMail, $registrationNew, $emailReason);
         $this->callPostProcessAdditionalEmailHooks($eMail, $registration, $emailReason);
 
-        /** @var \Tx_Oelib_MailerFactory $mailerFactory */
-        $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
+        /** @var MailerFactory $mailerFactory */
+        $mailerFactory = GeneralUtility::makeInstance(MailerFactory::class);
         $mailerFactory->getMailer()->send($eMail);
 
         if ($event->hasEnoughAttendances() && !$event->haveOrganizersBeenNotifiedAboutEnoughAttendees()) {
@@ -1163,7 +1166,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
     }
 
     /**
-     * @param \Tx_Oelib_Mail $mail
+     * @param Mail $mail
      * @param \Tx_Seminars_OldModel_Registration $registration
      * @param string $emailReason
      *
@@ -1173,7 +1176,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      *      use `->getRegistrationEmailHookProvider()->executeHook('modifyAdditionalEmail')` instead
      */
     protected function callPostProcessAdditionalEmailHooks(
-        \Tx_Oelib_Mail $mail,
+        Mail $mail,
         \Tx_Seminars_OldModel_Registration $registration,
         string $emailReason
     ) {

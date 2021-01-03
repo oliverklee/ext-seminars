@@ -8,6 +8,8 @@ use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Email\EmailCollector;
+use OliverKlee\Oelib\Email\MailerFactory;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
@@ -36,7 +38,7 @@ class EventEditorTest extends TestCase
     private $testingFramework = null;
 
     /**
-     * @var \Tx_Oelib_EmailCollector
+     * @var EmailCollector
      */
     private $mailer = null;
 
@@ -72,8 +74,8 @@ class EventEditorTest extends TestCase
         );
         $this->subject->setTestMode();
 
-        /** @var \Tx_Oelib_MailerFactory $mailerFactory */
-        $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
+        /** @var MailerFactory $mailerFactory */
+        $mailerFactory = GeneralUtility::makeInstance(MailerFactory::class);
         $mailerFactory->enableTestMode();
         $this->mailer = $mailerFactory->getMailer();
     }

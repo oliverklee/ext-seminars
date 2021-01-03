@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Hooks\Interfaces;
 
+use OliverKlee\Oelib\Email\Mail;
 use OliverKlee\Oelib\Templating\Template;
 
 /**
@@ -23,8 +24,6 @@ interface RegistrationEmail extends Hook
      *
      * You may modify the recipient or the sender as well as the subject and the body of the email.
      *
-     * @param \Tx_Oelib_Mail $email
-     * @param \Tx_Seminars_Model_Registration $registration
      * @param string $emailReason Possible values:
      *          - confirmation
      *          - confirmationOnUnregistration
@@ -34,7 +33,7 @@ interface RegistrationEmail extends Hook
      * @return void
      */
     public function modifyAttendeeEmail(
-        \Tx_Oelib_Mail $email,
+        Mail $email,
         \Tx_Seminars_Model_Registration $registration,
         string $emailReason
     );
@@ -47,8 +46,6 @@ interface RegistrationEmail extends Hook
      *
      * You may modify or set marker values in the template.
      *
-     * @param Template $emailTemplate
-     * @param \Tx_Seminars_Model_Registration $registration
      * @param string $emailReason Possible values:
      *          - confirmation
      *          - confirmationOnUnregistration
@@ -70,8 +67,6 @@ interface RegistrationEmail extends Hook
      *
      * You may modify or set marker values in the template.
      *
-     * @param Template $emailTemplate
-     * @param \Tx_Seminars_Model_Registration $registration
      * @param string $emailReason Possible values:
      *          - confirmation
      *          - confirmationOnUnregistration
@@ -91,8 +86,6 @@ interface RegistrationEmail extends Hook
      *
      * You may modify the recipient or the sender as well as the subject and the body of the email.
      *
-     * @param \Tx_Oelib_Mail $email
-     * @param \Tx_Seminars_Model_Registration $registration
      * @param string $emailReason Possible values:
      *        - notification
      *        - notificationOnUnregistration
@@ -102,7 +95,7 @@ interface RegistrationEmail extends Hook
      * @return void
      */
     public function modifyOrganizerEmail(
-        \Tx_Oelib_Mail $email,
+        Mail $email,
         \Tx_Seminars_Model_Registration $registration,
         string $emailReason
     );
@@ -112,8 +105,6 @@ interface RegistrationEmail extends Hook
      *
      * You may modify the recipient or the sender as well as the subject and the body of the email.
      *
-     * @param \Tx_Oelib_Mail $email
-     * @param \Tx_Seminars_Model_Registration $registration
      * @param string $emailReason Possible values:
      *          - 'EnoughRegistrations' if the event has enough attendances
      *          - 'IsFull' if the event is fully booked
@@ -122,7 +113,7 @@ interface RegistrationEmail extends Hook
      * @return void
      */
     public function modifyAdditionalEmail(
-        \Tx_Oelib_Mail $email,
+        Mail $email,
         \Tx_Seminars_Model_Registration $registration,
         string $emailReason
     );

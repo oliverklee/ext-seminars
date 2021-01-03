@@ -8,6 +8,8 @@ use OliverKlee\Oelib\Authentication\BackEndLoginManager;
 use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Email\EmailCollector;
+use OliverKlee\Oelib\Email\MailerFactory;
 use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\Interfaces\AccessibleObject;
@@ -51,7 +53,7 @@ class MailNotifierTest extends TestCase
     protected $configuration = null;
 
     /**
-     * @var \Tx_Oelib_EmailCollector
+     * @var EmailCollector
      */
     protected $mailer = null;
 
@@ -140,8 +142,8 @@ class MailNotifierTest extends TestCase
         $this->eventMapper = $this->createMock(\Tx_Seminars_Mapper_Event::class);
         $this->subject->_set('eventMapper', $this->eventMapper);
 
-        /** @var \Tx_Oelib_MailerFactory $mailerFactory */
-        $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
+        /** @var MailerFactory $mailerFactory */
+        $mailerFactory = GeneralUtility::makeInstance(MailerFactory::class);
         $mailerFactory->enableTestMode();
         $this->mailer = $mailerFactory->getMailer();
         $this->subject->_set('mailer', $this->mailer);

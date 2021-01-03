@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\BackEnd;
 
 use OliverKlee\Oelib\Configuration\PageFinder;
+use OliverKlee\Oelib\Email\MailerFactory;
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
@@ -44,8 +45,8 @@ class AbstractEventMailFormTest extends TestCase
 
         $this->testingFramework = new TestingFramework('tx_seminars');
 
-        /** @var \Tx_Oelib_MailerFactory $mailerFactory */
-        $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
+        /** @var MailerFactory $mailerFactory */
+        $mailerFactory = GeneralUtility::makeInstance(MailerFactory::class);
         $mailerFactory->enableTestMode();
 
         PageFinder::getInstance()->setPageUid($this->testingFramework->createSystemFolder());

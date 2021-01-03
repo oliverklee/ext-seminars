@@ -7,6 +7,8 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Email\EmailCollector;
+use OliverKlee\Oelib\Email\MailerFactory;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Service\EmailService;
@@ -58,7 +60,7 @@ final class EmailServiceTest extends TestCase
     private $testingFramework;
 
     /**
-     * @var \Tx_Oelib_EmailCollector
+     * @var EmailCollector
      */
     private $mailer = null;
 
@@ -101,8 +103,8 @@ final class EmailServiceTest extends TestCase
 
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
 
-        /** @var \Tx_Oelib_MailerFactory $mailerFactory */
-        $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
+        /** @var MailerFactory $mailerFactory */
+        $mailerFactory = GeneralUtility::makeInstance(MailerFactory::class);
         $mailerFactory->enableTestMode();
         $this->mailer = $mailerFactory->getMailer();
 

@@ -8,6 +8,10 @@ use OliverKlee\Oelib\Authentication\BackEndLoginManager;
 use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\PageFinder;
+use OliverKlee\Oelib\Email\AbstractMailer;
+use OliverKlee\Oelib\Email\Attachment;
+use OliverKlee\Oelib\Email\Mail;
+use OliverKlee\Oelib\Email\MailerFactory;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\Csv\EmailRegistrationListView;
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
@@ -47,7 +51,7 @@ class MailNotifier extends AbstractTask
     protected $eventMapper = null;
 
     /**
-     * @var \Tx_Oelib_AbstractMailer
+     * @var AbstractMailer
      */
     protected $mailer = null;
 
@@ -68,8 +72,8 @@ class MailNotifier extends AbstractTask
         $this->eventStatusService = GeneralUtility::makeInstance(EventStatusService::class);
         $this->emailService = GeneralUtility::makeInstance(EmailService::class);
         $this->eventMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
-        /** @var \Tx_Oelib_MailerFactory $mailerFactory */
-        $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
+        /** @var MailerFactory $mailerFactory */
+        $mailerFactory = GeneralUtility::makeInstance(MailerFactory::class);
         $this->mailer = $mailerFactory->getMailer();
         /** @var ObjectManager $objectManager */
         $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
@@ -187,8 +191,8 @@ class MailNotifier extends AbstractTask
 
         /** @var \Tx_Seminars_OldModel_Organizer $organizer */
         foreach ($event->getOrganizerBag() as $organizer) {
-            /** @var \Tx_Oelib_Mail $eMail */
-            $eMail = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
+            /** @var Mail $eMail */
+            $eMail = GeneralUtility::makeInstance(Mail::class);
             $eMail->setSender($sender);
             $eMail->setReplyTo($replyTo);
             $eMail->setSubject($subject);
@@ -296,17 +300,17 @@ class MailNotifier extends AbstractTask
      *
      * @param int $eventUid UID of the event to create the output for, must be > 0
      *
-     * @return \Tx_Oelib_Attachment CSV list of registrations for the given event
+     * @return Attachment CSV list of registrations for the given event
      */
-    private function getCsv(int $eventUid): \Tx_Oelib_Attachment
+    private function getCsv(int $eventUid): Attachment
     {
         /** @var EmailRegistrationListView $csvCreator */
         $csvCreator = GeneralUtility::makeInstance(EmailRegistrationListView::class);
         $csvCreator->setEventUid($eventUid);
         $csvString = $csvCreator->render();
 
-        /** @var \Tx_Oelib_Attachment $attachment */
-        $attachment = GeneralUtility::makeInstance(\Tx_Oelib_Attachment::class);
+        /** @var Attachment $attachment */
+        $attachment = GeneralUtility::makeInstance(Attachment::class);
         $attachment->setContent($csvString);
         $attachment->setContentType('text/csv');
         $attachment->setFileName($this->getConfiguration()->getAsString('filenameForRegistrationsCsv'));

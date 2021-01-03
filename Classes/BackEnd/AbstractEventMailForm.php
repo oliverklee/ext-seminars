@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\BackEnd;
 
 use OliverKlee\Oelib\Configuration\PageFinder;
+use OliverKlee\Oelib\Email\Mail;
+use OliverKlee\Oelib\Email\MailerFactory;
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
@@ -403,8 +405,8 @@ abstract class AbstractEventMailForm
         $registrations = $registrationBagBuilder->build();
 
         if (!$registrations->isEmpty()) {
-            /** @var \Tx_Oelib_MailerFactory $mailerFactory */
-            $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
+            /** @var MailerFactory $mailerFactory */
+            $mailerFactory = GeneralUtility::makeInstance(MailerFactory::class);
             $mailer = $mailerFactory->getMailer();
 
             /** @var \Tx_Seminars_Mapper_Registration $registrationMapper */
@@ -417,8 +419,8 @@ abstract class AbstractEventMailForm
                 if (($user === null) || !$user->hasEmailAddress()) {
                     continue;
                 }
-                /** @var \Tx_Oelib_Mail $eMail */
-                $eMail = GeneralUtility::makeInstance(\Tx_Oelib_Mail::class);
+                /** @var Mail $eMail */
+                $eMail = GeneralUtility::makeInstance(Mail::class);
                 $eMail->setSender($sender);
                 $eMail->setReplyTo($organizer);
                 $eMail->setSubject($this->getPostData('subject'));
@@ -462,12 +464,12 @@ abstract class AbstractEventMailForm
      *
      * @param \Tx_Seminars_Model_Registration $registration
      *        the registration to which the e-mail refers
-     * @param \Tx_Oelib_Mail $eMail
+     * @param Mail $eMail
      *        the e-mail to be sent
      *
      * @return void
      */
-    protected function modifyEmailWithHook(\Tx_Seminars_Model_Registration $registration, \Tx_Oelib_Mail $eMail)
+    protected function modifyEmailWithHook(\Tx_Seminars_Model_Registration $registration, Mail $eMail)
     {
     }
 
