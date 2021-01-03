@@ -10,6 +10,7 @@ use OliverKlee\Oelib\Mapper\FrontEndUserMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\FrontEndUser;
 use OliverKlee\Oelib\Templating\TemplateHelper;
+use OliverKlee\Oelib\ViewHelpers\PriceViewHelper;
 use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
@@ -1060,8 +1061,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function formatPrice(string $value): string
     {
-        /** @var \Tx_Oelib_ViewHelper_Price $priceViewHelper */
-        $priceViewHelper = GeneralUtility::makeInstance(\Tx_Oelib_ViewHelper_Price::class);
+        /** @var PriceViewHelper $priceViewHelper */
+        $priceViewHelper = GeneralUtility::makeInstance(PriceViewHelper::class);
         $priceViewHelper
             ->setCurrencyFromIsoAlpha3Code(ConfigurationRegistry::get('plugin.tx_seminars')->getAsString('currency'));
         $priceViewHelper->setValue((float)$value);

@@ -10,6 +10,7 @@ use OliverKlee\Oelib\Email\MailerFactory;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\FrontEndUser;
+use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Seminar\Email\Salutation;
 use OliverKlee\Seminars\Hooks\HookProvider;
@@ -1080,9 +1081,6 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
     }
 
     /**
-     * @param \Tx_Seminars_OldModel_Registration $registration
-     * @param \Tx_Oelib_Template $emailTemplate
-     *
      * @return void
      *
      * @deprecated will be removed in seminars 4;
@@ -1091,7 +1089,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      */
     protected function callPostProcessAttendeeEmailTextHooks(
         \Tx_Seminars_OldModel_Registration $registration,
-        \Tx_Oelib_Template $emailTemplate
+        Template $emailTemplate
     ) {
         foreach ($this->getHooks() as $hook) {
             if ($hook instanceof RegistrationEmailHookInterface) {
@@ -1110,7 +1108,8 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      * If both things happen at the same time (minimum and maximum count of
      * attendees are the same), only the "event is full" message will be sent.
      *
-     * @param \Tx_Seminars_OldModel_Registration $registration the registration for which the notification should be send
+     * @param \Tx_Seminars_OldModel_Registration $registration
+     *        the registration for which the notification should be send
      *
      * @return void
      */
