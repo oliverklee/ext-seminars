@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\SchedulerTasks;
 
 use OliverKlee\Oelib\Authentication\BackEndLoginManager;
+use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\Interfaces\AccessibleObject;
 use OliverKlee\PhpUnit\TestCase;
@@ -1610,7 +1611,7 @@ class MailNotifierTest extends TestCase
      */
     public function automaticallyChangeEventStatusesForNoEventsForStatusChangeNotRequestsStatusChange()
     {
-        $events = new \Tx_Oelib_List();
+        $events = new Collection();
         $this->eventMapper->expects(self::once())->method(
             'findForAutomaticStatusChange'
         )->willReturn($events);
@@ -1625,7 +1626,7 @@ class MailNotifierTest extends TestCase
      */
     public function automaticallyChangeEventStatusesForNoEventsForStatusChangeSendsNoEmail()
     {
-        $events = new \Tx_Oelib_List();
+        $events = new Collection();
         $this->eventMapper->expects(self::once())->method(
             'findForAutomaticStatusChange'
         )->willReturn($events);
@@ -1640,7 +1641,7 @@ class MailNotifierTest extends TestCase
      */
     public function automaticallyChangeEventStatusesForOneEventForStatusChangeRequestsStatusChangeWithThatEvent()
     {
-        $events = new \Tx_Oelib_List();
+        $events = new Collection();
         $event = new \Tx_Seminars_Model_Event();
         $events->add($event);
         $this->eventMapper->expects(self::once())->method(
@@ -1659,7 +1660,7 @@ class MailNotifierTest extends TestCase
      */
     public function automaticallyChangeEventStatusesForOneEventWithNoStatusChangeNeededNotSendsEmail()
     {
-        $events = new \Tx_Oelib_List();
+        $events = new Collection();
         $event = new \Tx_Seminars_Model_Event();
         $events->add($event);
         $this->eventMapper->expects(self::once())->method(
@@ -1678,7 +1679,7 @@ class MailNotifierTest extends TestCase
      */
     public function automaticallyChangeEventStatusesForOneEventWithConfirmedStatusChangeSendsEmail()
     {
-        $events = new \Tx_Oelib_List();
+        $events = new Collection();
         $event = new \Tx_Seminars_Model_Event();
         $event->confirm();
         $events->add($event);
@@ -1699,7 +1700,7 @@ class MailNotifierTest extends TestCase
      */
     public function automaticallyChangeEventStatusesForOneEventWithConfirmedStatusChangeSendsEmailWithConfirmSubject()
     {
-        $events = new \Tx_Oelib_List();
+        $events = new Collection();
         $event = new \Tx_Seminars_Model_Event();
         $event->confirm();
         $events->add($event);
@@ -1721,7 +1722,7 @@ class MailNotifierTest extends TestCase
      */
     public function automaticallyChangeEventStatusesForOneEventWithConfirmedStatusChangeSendsEmailWithConfirmBody()
     {
-        $events = new \Tx_Oelib_List();
+        $events = new Collection();
         $event = new \Tx_Seminars_Model_Event();
         $event->confirm();
         $events->add($event);
@@ -1743,7 +1744,7 @@ class MailNotifierTest extends TestCase
      */
     public function automaticallyChangeEventStatusesForTwoEventsWithConfirmedStatusChangeSendsTwoEmails()
     {
-        $events = new \Tx_Oelib_List();
+        $events = new Collection();
         $event1 = new \Tx_Seminars_Model_Event();
         $event1->confirm();
         $events->add($event1);
@@ -1766,7 +1767,7 @@ class MailNotifierTest extends TestCase
      */
     public function automaticallyChangeEventStatusesForOneEventWithCanceledStatusChangeSendsEmail()
     {
-        $events = new \Tx_Oelib_List();
+        $events = new Collection();
         $event = new \Tx_Seminars_Model_Event();
         $event->cancel();
         $events->add($event);
@@ -1787,7 +1788,7 @@ class MailNotifierTest extends TestCase
      */
     public function automaticallyChangeEventStatusesForOneEventWithCanceledStatusChangeSendsEmailWithCancelSubject()
     {
-        $events = new \Tx_Oelib_List();
+        $events = new Collection();
         $event = new \Tx_Seminars_Model_Event();
         $event->cancel();
         $events->add($event);
@@ -1809,7 +1810,7 @@ class MailNotifierTest extends TestCase
      */
     public function automaticallyChangeEventStatusesForOneEventWithCanceledStatusChangeSendsEmailWithCancelBody()
     {
-        $events = new \Tx_Oelib_List();
+        $events = new Collection();
         $event = new \Tx_Seminars_Model_Event();
         $event->cancel();
         $events->add($event);
@@ -1831,7 +1832,7 @@ class MailNotifierTest extends TestCase
      */
     public function automaticallyChangeEventStatusesForTwoEventsWithCanceledStatusChangeSendsTwoEmails()
     {
-        $events = new \Tx_Oelib_List();
+        $events = new Collection();
         $event1 = new \Tx_Seminars_Model_Event();
         $event1->cancel();
         $events->add($event1);
@@ -1856,7 +1857,7 @@ class MailNotifierTest extends TestCase
     {
         $this->expectException(\UnexpectedValueException::class);
 
-        $events = new \Tx_Oelib_List();
+        $events = new Collection();
         $event = new \Tx_Seminars_Model_Event();
         $event->setStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
         $events->add($event);

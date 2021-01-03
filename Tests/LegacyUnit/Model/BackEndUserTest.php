@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
+use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\PhpUnit\TestCase;
 
 /**
@@ -32,7 +33,7 @@ class BackEndUserTest extends TestCase
      */
     public function getEventFolderFromGroupForNoGroupsReturnsZero()
     {
-        $this->subject->setData(['usergroup' => new \Tx_Oelib_List()]);
+        $this->subject->setData(['usergroup' => new Collection()]);
 
         self::assertEquals(
             0,
@@ -47,7 +48,7 @@ class BackEndUserTest extends TestCase
     {
         $group = \Tx_Oelib_MapperRegistry::
         get(\Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel([]);
-        $groups = new \Tx_Oelib_List();
+        $groups = new Collection();
         $groups->add($group);
         $this->subject->setData(['usergroup' => $groups]);
 
@@ -66,7 +67,7 @@ class BackEndUserTest extends TestCase
         get(\Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
             ['tx_seminars_events_folder' => 42]
         );
-        $groups = new \Tx_Oelib_List();
+        $groups = new Collection();
         $groups->add($group);
         $this->subject->setData(['usergroup' => $groups]);
 
@@ -89,7 +90,7 @@ class BackEndUserTest extends TestCase
         get(\Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
             ['tx_seminars_events_folder' => 42]
         );
-        $groups = new \Tx_Oelib_List();
+        $groups = new Collection();
         $groups->add($group1);
         $groups->add($group2);
         $this->subject->setData(['usergroup' => $groups]);
@@ -107,7 +108,7 @@ class BackEndUserTest extends TestCase
      */
     public function getRegistrationFolderFromGroupForNoGroupsReturnsZero()
     {
-        $this->subject->setData(['usergroup' => new \Tx_Oelib_List()]);
+        $this->subject->setData(['usergroup' => new Collection()]);
 
         self::assertEquals(
             0,
@@ -122,7 +123,7 @@ class BackEndUserTest extends TestCase
     {
         $group = \Tx_Oelib_MapperRegistry::
         get(\Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel([]);
-        $groups = new \Tx_Oelib_List();
+        $groups = new Collection();
         $groups->add($group);
         $this->subject->setData(['usergroup' => $groups]);
 
@@ -141,7 +142,7 @@ class BackEndUserTest extends TestCase
         get(\Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
             ['tx_seminars_registrations_folder' => 42]
         );
-        $groups = new \Tx_Oelib_List();
+        $groups = new Collection();
         $groups->add($group);
         $this->subject->setData(['usergroup' => $groups]);
 
@@ -164,7 +165,7 @@ class BackEndUserTest extends TestCase
         get(\Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
             ['tx_seminars_registrations_folder' => 42]
         );
-        $groups = new \Tx_Oelib_List();
+        $groups = new Collection();
         $groups->add($group1);
         $groups->add($group2);
         $this->subject->setData(['usergroup' => $groups]);
@@ -182,7 +183,7 @@ class BackEndUserTest extends TestCase
      */
     public function getAuxiliaryRecordsFolderForNoGroupsReturnsZero()
     {
-        $this->subject->setData(['usergroup' => new \Tx_Oelib_List()]);
+        $this->subject->setData(['usergroup' => new Collection()]);
 
         self::assertEquals(
             0,
@@ -197,7 +198,7 @@ class BackEndUserTest extends TestCase
     {
         $group = \Tx_Oelib_MapperRegistry::
         get(\Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel([]);
-        $groups = new \Tx_Oelib_List();
+        $groups = new Collection();
         $groups->add($group);
         $this->subject->setData(['usergroup' => $groups]);
 
@@ -216,7 +217,7 @@ class BackEndUserTest extends TestCase
         get(\Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
             ['tx_seminars_auxiliaries_folder' => 42]
         );
-        $groups = new \Tx_Oelib_List();
+        $groups = new Collection();
         $groups->add($group);
         $this->subject->setData(['usergroup' => $groups]);
 
@@ -239,7 +240,7 @@ class BackEndUserTest extends TestCase
         get(\Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
             ['tx_seminars_auxiliaries_folder' => 42]
         );
-        $groups = new \Tx_Oelib_List();
+        $groups = new Collection();
         $groups->add($group1);
         $groups->add($group2);
         $this->subject->setData(['usergroup' => $groups]);

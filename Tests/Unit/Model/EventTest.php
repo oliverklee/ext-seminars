@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Unit\Model;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -36,7 +37,7 @@ class EventTest extends UnitTestCase
                 'email_footer' => 'Best workshops in town!',
             ]
         );
-        $organizers = new \Tx_Oelib_List();
+        $organizers = new Collection();
         $organizers->add($this->organizer);
 
         $this->subject = new \Tx_Seminars_Model_Event();
@@ -45,7 +46,7 @@ class EventTest extends UnitTestCase
                 'title' => 'A nice event',
                 'begin_date' => mktime(10, 0, 0, 4, 8, 2020),
                 'end_date' => mktime(18, 30, 0, 4, 20, 2020),
-                'registrations' => new \Tx_Oelib_List(),
+                'registrations' => new Collection(),
                 'organizers' => $organizers,
             ]
         );

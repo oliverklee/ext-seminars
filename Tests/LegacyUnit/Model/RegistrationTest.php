@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
+use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Model\FrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
@@ -1586,7 +1587,7 @@ class RegistrationTest extends TestCase
      */
     public function getAdditionalPersonsGetsAdditionalPersons()
     {
-        $additionalPersons = new \Tx_Oelib_List();
+        $additionalPersons = new Collection();
         $this->subject->setData(
             ['additional_persons' => $additionalPersons]
         );
@@ -1602,7 +1603,7 @@ class RegistrationTest extends TestCase
      */
     public function setAdditionalPersonsSetsAdditionalPersons()
     {
-        $additionalPersons = new \Tx_Oelib_List();
+        $additionalPersons = new Collection();
         $this->subject->setAdditionalPersons($additionalPersons);
 
         self::assertSame(

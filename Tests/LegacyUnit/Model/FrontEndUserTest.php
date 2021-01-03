@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
+use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Model\BackEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
@@ -55,7 +56,7 @@ class FrontEndUserTest extends TestCase
                 ]
             );
 
-        $list = new \Tx_Oelib_List();
+        $list = new Collection();
         $list->add($userGroup);
         $this->subject->setData(['usergroup' => $list]);
 
@@ -78,7 +79,7 @@ class FrontEndUserTest extends TestCase
                 ]
             );
 
-        $list = new \Tx_Oelib_List();
+        $list = new Collection();
         $list->add($userGroup);
         $this->subject->setData(['usergroup' => $list]);
 
@@ -101,7 +102,7 @@ class FrontEndUserTest extends TestCase
                 ]
             );
 
-        $list = new \Tx_Oelib_List();
+        $list = new Collection();
         $list->add($userGroup);
         $this->subject->setData(['usergroup' => $list]);
 
@@ -116,7 +117,7 @@ class FrontEndUserTest extends TestCase
      */
     public function getPublishSettingsForUserWithoutGroupReturnsPublishAll()
     {
-        $list = new \Tx_Oelib_List();
+        $list = new Collection();
         $this->subject->setData(['usergroup' => $list]);
 
         self::assertEquals(
@@ -145,7 +146,7 @@ class FrontEndUserTest extends TestCase
             ]
         );
 
-        $list = new \Tx_Oelib_List();
+        $list = new Collection();
         $list->add($userGroup);
         $list->add($userGroup2);
         $this->subject->setData(['usergroup' => $list]);
@@ -176,7 +177,7 @@ class FrontEndUserTest extends TestCase
             ]
         );
 
-        $list = new \Tx_Oelib_List();
+        $list = new Collection();
         $list->add($userGroup);
         $list->add($userGroup2);
         $this->subject->setData(['usergroup' => $list]);
@@ -207,7 +208,7 @@ class FrontEndUserTest extends TestCase
             ]
         );
 
-        $list = new \Tx_Oelib_List();
+        $list = new Collection();
         $list->add($userGroup);
         $list->add($userGroup2);
         $this->subject->setData(['usergroup' => $list]);
@@ -238,7 +239,7 @@ class FrontEndUserTest extends TestCase
             ]
         );
 
-        $list = new \Tx_Oelib_List();
+        $list = new Collection();
         $list->add($userGroup);
         $list->add($userGroup2);
         $this->subject->setData(['usergroup' => $list]);
@@ -258,7 +259,7 @@ class FrontEndUserTest extends TestCase
      */
     public function getAuxiliaryRecordsPidWithoutUserGroupReturnsZero()
     {
-        $list = new \Tx_Oelib_List();
+        $list = new Collection();
         $this->subject->setData(['usergroup' => $list]);
 
         self::assertEquals(
@@ -277,7 +278,7 @@ class FrontEndUserTest extends TestCase
         );
         $userGroup = $groupMapper->getLoadedTestingModel([]);
 
-        $list = new \Tx_Oelib_List();
+        $list = new Collection();
         $list->add($userGroup);
 
         $this->subject->setData(['usergroup' => $list]);
@@ -300,7 +301,7 @@ class FrontEndUserTest extends TestCase
             ['tx_seminars_auxiliary_records_pid' => 42]
         );
 
-        $list = new \Tx_Oelib_List();
+        $list = new Collection();
         $list->add($userGroup);
 
         $this->subject->setData(['usergroup' => $list]);
@@ -325,7 +326,7 @@ class FrontEndUserTest extends TestCase
             ['tx_seminars_auxiliary_records_pid' => 42]
         );
 
-        $list = new \Tx_Oelib_List();
+        $list = new Collection();
         $list->add($userGroup);
         $list->add($userGroup2);
 
@@ -353,7 +354,7 @@ class FrontEndUserTest extends TestCase
             ['tx_seminars_auxiliary_records_pid' => 42]
         );
 
-        $list = new \Tx_Oelib_List();
+        $list = new Collection();
         $list->add($userGroup);
         $list->add($userGroup2);
 
@@ -374,7 +375,7 @@ class FrontEndUserTest extends TestCase
      */
     public function getReviewerFromGroupForUserWithoutGroupsReturnsNull()
     {
-        $list = new \Tx_Oelib_List();
+        $list = new Collection();
         $this->subject->setData(['usergroup' => $list]);
 
         self::assertNull(
@@ -390,7 +391,7 @@ class FrontEndUserTest extends TestCase
         $userGroup = new \Tx_Seminars_Model_FrontEndUserGroup();
         $userGroup->setData(['tx_seminars_reviewer' => null]);
 
-        $list = new \Tx_Oelib_List();
+        $list = new Collection();
         $list->add($userGroup);
 
         $this->subject->setData(['usergroup' => $list]);
@@ -410,7 +411,7 @@ class FrontEndUserTest extends TestCase
         $userGroup = new \Tx_Seminars_Model_FrontEndUserGroup();
         $userGroup->setData(['tx_seminars_reviewer' => $backEndUser]);
 
-        $list = new \Tx_Oelib_List();
+        $list = new Collection();
         $list->add($userGroup);
 
         $this->subject->setData(['usergroup' => $list]);
@@ -434,7 +435,7 @@ class FrontEndUserTest extends TestCase
         $userGroup1->setData(['tx_seminars_reviewer' => null]);
         $userGroup2->setData(['tx_seminars_reviewer' => $backEndUser]);
 
-        $list = new \Tx_Oelib_List();
+        $list = new Collection();
         $list->add($userGroup1);
         $list->add($userGroup2);
 
@@ -460,7 +461,7 @@ class FrontEndUserTest extends TestCase
         $userGroup1->setData(['tx_seminars_reviewer' => $backEndUser1]);
         $userGroup2->setData(['tx_seminars_reviewer' => $backEndUser2]);
 
-        $list = new \Tx_Oelib_List();
+        $list = new Collection();
         $list->add($userGroup1);
         $list->add($userGroup2);
 
@@ -481,7 +482,7 @@ class FrontEndUserTest extends TestCase
      */
     public function getEventRecordsPidWithoutUserGroupReturnsZero()
     {
-        $list = new \Tx_Oelib_List();
+        $list = new Collection();
         $this->subject->setData(['usergroup' => $list]);
 
         self::assertEquals(
@@ -500,7 +501,7 @@ class FrontEndUserTest extends TestCase
         );
         $userGroup = $groupMapper->getLoadedTestingModel([]);
 
-        $list = new \Tx_Oelib_List();
+        $list = new Collection();
         $list->add($userGroup);
 
         $this->subject->setData(['usergroup' => $list]);
@@ -523,7 +524,7 @@ class FrontEndUserTest extends TestCase
             ['tx_seminars_events_pid' => 42]
         );
 
-        $list = new \Tx_Oelib_List();
+        $list = new Collection();
         $list->add($userGroup);
 
         $this->subject->setData(['usergroup' => $list]);
@@ -548,7 +549,7 @@ class FrontEndUserTest extends TestCase
             ['tx_seminars_events_pid' => 42]
         );
 
-        $list = new \Tx_Oelib_List();
+        $list = new Collection();
         $list->add($userGroup);
         $list->add($userGroup2);
 
@@ -576,7 +577,7 @@ class FrontEndUserTest extends TestCase
             ['tx_seminars_events_pid' => 42]
         );
 
-        $list = new \Tx_Oelib_List();
+        $list = new Collection();
         $list->add($userGroup);
         $list->add($userGroup2);
 
@@ -601,10 +602,10 @@ class FrontEndUserTest extends TestCase
             \Tx_Seminars_Mapper_FrontEndUserGroup::class
         )->getNewGhost();
         $userGroup->setData(
-            ['tx_seminars_default_categories' => new \Tx_Oelib_List()]
+            ['tx_seminars_default_categories' => new Collection()]
         );
 
-        $list = new \Tx_Oelib_List();
+        $list = new Collection();
         $list->add($userGroup);
         $this->subject->setData(['usergroup' => $list]);
 
@@ -618,7 +619,7 @@ class FrontEndUserTest extends TestCase
      */
     public function getDefaultCategoriesFromGroupForUserWithOneGroupWithCategoryReturnsThisCategory()
     {
-        $categories = new \Tx_Oelib_List();
+        $categories = new Collection();
         $categories->add(
             \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Category::class)
                 ->getNewGhost()
@@ -631,7 +632,7 @@ class FrontEndUserTest extends TestCase
             ['tx_seminars_default_categories' => $categories]
         );
 
-        $list = new \Tx_Oelib_List();
+        $list = new Collection();
         $list->add($userGroup);
         $this->subject->setData(['usergroup' => $list]);
 
@@ -649,7 +650,7 @@ class FrontEndUserTest extends TestCase
         $categoryMapper = \Tx_Oelib_MapperRegistry::get(
             \Tx_Seminars_Mapper_Category::class
         );
-        $categories = new \Tx_Oelib_List();
+        $categories = new Collection();
         $categories->add($categoryMapper->getNewGhost());
         $categories->add($categoryMapper->getNewGhost());
 
@@ -660,7 +661,7 @@ class FrontEndUserTest extends TestCase
             ['tx_seminars_default_categories' => $categories]
         );
 
-        $list = new \Tx_Oelib_List();
+        $list = new Collection();
         $list->add($userGroup);
         $this->subject->setData(['usergroup' => $list]);
 
@@ -680,10 +681,10 @@ class FrontEndUserTest extends TestCase
         );
         $userGroup1 = $frontEndGroupMapper->getNewGhost();
         $userGroup1->setData(
-            ['tx_seminars_default_categories' => new \Tx_Oelib_List()]
+            ['tx_seminars_default_categories' => new Collection()]
         );
 
-        $categories = new \Tx_Oelib_List();
+        $categories = new Collection();
         $categories->add(
             \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Category::class)
                 ->getNewGhost()
@@ -694,7 +695,7 @@ class FrontEndUserTest extends TestCase
             ['tx_seminars_default_categories' => $categories]
         );
 
-        $list = new \Tx_Oelib_List();
+        $list = new Collection();
         $list->add($userGroup1);
         $list->add($userGroup2);
         $this->subject->setData(['usergroup' => $list]);
@@ -713,7 +714,7 @@ class FrontEndUserTest extends TestCase
         $categoryGhost = \Tx_Oelib_MapperRegistry::get(
             \Tx_Seminars_Mapper_Category::class
         )->getNewGhost();
-        $categories = new \Tx_Oelib_List();
+        $categories = new Collection();
         $categories->add($categoryGhost);
 
         $frontEndGroupMapper = \Tx_Oelib_MapperRegistry::get(
@@ -729,7 +730,7 @@ class FrontEndUserTest extends TestCase
             ['tx_seminars_default_categories' => $categories]
         );
 
-        $list = new \Tx_Oelib_List();
+        $list = new Collection();
         $list->add($userGroup1);
         $list->add($userGroup2);
         $this->subject->setData(['usergroup' => $list]);
@@ -753,7 +754,7 @@ class FrontEndUserTest extends TestCase
         );
 
         $categoryGhost1 = $categoryMapper->getNewGhost();
-        $categories1 = new \Tx_Oelib_List();
+        $categories1 = new Collection();
         $categories1->add($categoryGhost1);
         $userGroup1 = $frontEndGroupMapper->getNewGhost();
         $userGroup1->setData(
@@ -761,14 +762,14 @@ class FrontEndUserTest extends TestCase
         );
 
         $categoryGhost2 = $categoryMapper->getNewGhost();
-        $categories2 = new \Tx_Oelib_List();
+        $categories2 = new Collection();
         $categories2->add($categoryGhost2);
         $userGroup2 = $frontEndGroupMapper->getNewGhost();
         $userGroup2->setData(
             ['tx_seminars_default_categories' => $categories2]
         );
 
-        $list = new \Tx_Oelib_List();
+        $list = new Collection();
         $list->add($userGroup1);
         $list->add($userGroup2);
         $this->subject->setData(['usergroup' => $list]);
@@ -792,10 +793,10 @@ class FrontEndUserTest extends TestCase
             \Tx_Seminars_Mapper_FrontEndUserGroup::class
         )->getNewGhost();
         $userGroup->setData(
-            ['tx_seminars_default_categories' => new \Tx_Oelib_List()]
+            ['tx_seminars_default_categories' => new Collection()]
         );
 
-        $list = new \Tx_Oelib_List();
+        $list = new Collection();
         $list->add($userGroup);
         $this->subject->setData(['usergroup' => $list]);
 
@@ -809,7 +810,7 @@ class FrontEndUserTest extends TestCase
      */
     public function hasDefaultCategoriesForUserWithOneGroupWithCategoryReturnsTrue()
     {
-        $categories = new \Tx_Oelib_List();
+        $categories = new Collection();
         $categories->add(
             \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Category::class)
                 ->getNewGhost()
@@ -822,7 +823,7 @@ class FrontEndUserTest extends TestCase
             ['tx_seminars_default_categories' => $categories]
         );
 
-        $list = new \Tx_Oelib_List();
+        $list = new Collection();
         $list->add($userGroup);
         $this->subject->setData(['usergroup' => $list]);
 
@@ -889,7 +890,7 @@ class FrontEndUserTest extends TestCase
         $userGroup = \Tx_Oelib_MapperRegistry
             ::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class)->getNewGhost();
         $userGroup->setData(['tx_seminars_default_organizer' => null]);
-        $groups = new \Tx_Oelib_List();
+        $groups = new Collection();
         $groups->add($userGroup);
         $this->subject->setData(['usergroup' => $groups]);
 
@@ -908,7 +909,7 @@ class FrontEndUserTest extends TestCase
         $userGroup = \Tx_Oelib_MapperRegistry
             ::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class)->getNewGhost();
         $userGroup->setData(['tx_seminars_default_organizer' => $organizer]);
-        $groups = new \Tx_Oelib_List();
+        $groups = new Collection();
         $groups->add($userGroup);
         $this->subject->setData(['usergroup' => $groups]);
 
@@ -935,7 +936,7 @@ class FrontEndUserTest extends TestCase
             ::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class)->getNewGhost();
         $userGroup2->setData(['tx_seminars_default_organizer' => $organizer2]);
 
-        $groups = new \Tx_Oelib_List();
+        $groups = new Collection();
         $groups->add($userGroup1);
         $groups->add($userGroup2);
         $this->subject->setData(['usergroup' => $groups]);
@@ -967,7 +968,7 @@ class FrontEndUserTest extends TestCase
             ['getDefaultOrganizers']
         );
         $subject->method('getDefaultOrganizers')
-            ->willReturn(new \Tx_Oelib_List());
+            ->willReturn(new Collection());
 
         self::assertFalse(
             $subject->hasDefaultOrganizers()
@@ -981,7 +982,7 @@ class FrontEndUserTest extends TestCase
     {
         $organizer = \Tx_Oelib_MapperRegistry
             ::get(\Tx_Seminars_Mapper_Organizer::class)->getNewGhost();
-        $organizers = new \Tx_Oelib_List();
+        $organizers = new Collection();
         $organizers->add($organizer);
 
         /** @var \Tx_Seminars_Model_FrontEndUser|MockObject $subject */

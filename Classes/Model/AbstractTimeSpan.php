@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Model\AbstractModel;
 
 /**
@@ -88,10 +89,9 @@ abstract class Tx_Seminars_Model_AbstractTimeSpan extends AbstractModel
     /**
      * Returns our speakers.
      *
-     * @return \Tx_Oelib_List our speakers, will be empty if this time-span has
-     *                       no speakers
+     * @return Collection our speakers, will be empty if this time-span has no speakers
      */
-    public function getSpeakers(): \Tx_Oelib_List
+    public function getSpeakers(): Collection
     {
         return $this->getAsList('speakers');
     }

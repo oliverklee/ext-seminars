@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 
 /**
@@ -16,11 +17,11 @@ class Tx_Seminars_ViewHelper_CommaSeparatedTitles
      *
      * The titles will be htmlspecialchared before being returned.
      *
-     * @param \Tx_Oelib_List<Tx_Seminars_Interface_Titled> $list
+     * @param Collection<\Tx_Seminars_Interface_Titled> $list
      *
      * @return string the titles of the elements in $list as a comma-separated list or an empty string if the list is empty
      */
-    public function render(\Tx_Oelib_List $list): string
+    public function render(Collection $list): string
     {
         $titles = [];
 

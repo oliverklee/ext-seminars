@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
+use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\System\Typo3Version;
 use SJBR\StaticInfoTables\PiBaseApi;
 use SJBR\StaticInfoTables\Utility\LocalizationUtility;
@@ -378,7 +379,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
 
         /** @var \Tx_Seminars_Mapper_FrontEndUserGroup $userGroupMapper */
         $userGroupMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class);
-        $userGroups = new \Tx_Oelib_List();
+        $userGroups = new Collection();
         $userGroupUids = GeneralUtility::intExplode(
             ',',
             $this->getConfValueString('userGroupUidsForAdditionalAttendeesFrontEndUsers', 's_registration'),
@@ -392,7 +393,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
 
         /** @var Random $random */
         $random = GeneralUtility::makeInstance(Random::class);
-        /** @var \Tx_Oelib_List $additionalPersons */
+        /** @var Collection $additionalPersons */
         $additionalPersons = $registration->getAdditionalPersons();
         /** @var array $personData */
         foreach ($allPersonsData as $personData) {

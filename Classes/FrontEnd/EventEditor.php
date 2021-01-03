@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
+use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
 use OliverKlee\Oelib\Model\AbstractModel;
 use OliverKlee\Oelib\Model\BackEndUser;
@@ -1931,12 +1932,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
 
         self::createBasicAuxiliaryData();
 
-        $speaker->setData(
-            array_merge(
-                self::createBasicAuxiliaryData(),
-                ['skills' => new \Tx_Oelib_List()]
-            )
-        );
+        $speaker->setData(array_merge(self::createBasicAuxiliaryData(), ['skills' => new Collection()]));
         self::setSpeakerData($speaker, 'newSpeaker_', $formData);
         $speaker->markAsDirty();
         /** @var \Tx_Seminars_Mapper_Speaker $mapper */
@@ -2072,7 +2068,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     {
         /** @var \Tx_Seminars_Mapper_Skill $skillMapper */
         $skillMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Skill::class);
-        $skills = new \Tx_Oelib_List();
+        $skills = new Collection();
 
         if (is_array($formData[$prefix . 'skills'])) {
             foreach ($formData[$prefix . 'skills'] as $rawUid) {
@@ -2716,14 +2712,14 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Returns an array of caption value pairs for formidable checkboxes.
      *
-     * @param \Tx_Oelib_List $models
+     * @param Collection $models
      *        List of models to show in the checkboxes, may be empty
      *
      * @return array[] items as an array with the keys "caption" (for the title)
      *         and "value" (for the UID), will be empty if an empty model list
      *         was provided
      */
-    public static function makeListToFormidableList(\Tx_Oelib_List $models): array
+    public static function makeListToFormidableList(Collection $models): array
     {
         if ($models->isEmpty()) {
             return [];

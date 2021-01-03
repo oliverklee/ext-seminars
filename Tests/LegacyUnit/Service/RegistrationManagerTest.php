@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
+use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Model\Country;
 use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Templating\Template;
@@ -6689,7 +6690,7 @@ final class RegistrationManagerTest extends TestCase
 
         /** @var \Tx_Seminars_Model_Event|MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
-        $event->setData(['payment_methods' => new \Tx_Oelib_List()]);
+        $event->setData(['payment_methods' => new Collection()]);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 12, 'special' => 3]);
         $registration = new \Tx_Seminars_Model_Registration();
@@ -6715,7 +6716,7 @@ final class RegistrationManagerTest extends TestCase
 
         /** @var \Tx_Seminars_Model_Event|MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
-        $event->setData(['payment_methods' => new \Tx_Oelib_List()]);
+        $event->setData(['payment_methods' => new Collection()]);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 12]);
         $registration = new \Tx_Seminars_Model_Registration();
@@ -6741,7 +6742,7 @@ final class RegistrationManagerTest extends TestCase
 
         /** @var \Tx_Seminars_Model_Event|MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
-        $event->setData(['payment_methods' => new \Tx_Oelib_List()]);
+        $event->setData(['payment_methods' => new Collection()]);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 12]);
         $registration = new \Tx_Seminars_Model_Registration();
@@ -6767,7 +6768,7 @@ final class RegistrationManagerTest extends TestCase
 
         /** @var \Tx_Seminars_Model_Event|MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
-        $event->setData(['payment_methods' => new \Tx_Oelib_List()]);
+        $event->setData(['payment_methods' => new Collection()]);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 0]);
         $registration = new \Tx_Seminars_Model_Registration();
@@ -6793,7 +6794,7 @@ final class RegistrationManagerTest extends TestCase
 
         /** @var \Tx_Seminars_Model_Event|MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
-        $event->setData(['payment_methods' => new \Tx_Oelib_List()]);
+        $event->setData(['payment_methods' => new Collection()]);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 12]);
         $registration = new \Tx_Seminars_Model_Registration();
@@ -6819,7 +6820,7 @@ final class RegistrationManagerTest extends TestCase
 
         /** @var \Tx_Seminars_Model_Event|MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
-        $event->setData(['payment_methods' => new \Tx_Oelib_List()]);
+        $event->setData(['payment_methods' => new Collection()]);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 12]);
         $registration = new \Tx_Seminars_Model_Registration();
@@ -7029,7 +7030,7 @@ final class RegistrationManagerTest extends TestCase
 
         $paymentMethod = \Tx_Oelib_MapperRegistry
             ::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
-        $paymentMethods = new \Tx_Oelib_List();
+        $paymentMethods = new Collection();
         $paymentMethods->add($paymentMethod);
 
         /** @var \Tx_Seminars_Model_Event|MockObject $event */
@@ -7060,7 +7061,7 @@ final class RegistrationManagerTest extends TestCase
             ::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
         $paymentMethod2 = \Tx_Oelib_MapperRegistry
             ::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
-        $paymentMethods = new \Tx_Oelib_List();
+        $paymentMethods = new Collection();
         $paymentMethods->add($paymentMethod1);
         $paymentMethods->add($paymentMethod2);
 
@@ -7090,7 +7091,7 @@ final class RegistrationManagerTest extends TestCase
 
         $paymentMethod = \Tx_Oelib_MapperRegistry
             ::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
-        $paymentMethods = new \Tx_Oelib_List();
+        $paymentMethods = new Collection();
         $paymentMethods->add($paymentMethod);
 
         /** @var \Tx_Seminars_Model_Event|MockObject $event */
@@ -7121,7 +7122,7 @@ final class RegistrationManagerTest extends TestCase
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 0]);
         $event->method('getPaymentMethods')
-            ->willReturn(new \Tx_Oelib_List());
+            ->willReturn(new Collection());
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
@@ -7144,7 +7145,7 @@ final class RegistrationManagerTest extends TestCase
 
         $paymentMethod1 = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
         $paymentMethod2 = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
-        $paymentMethods = new \Tx_Oelib_List();
+        $paymentMethods = new Collection();
         $paymentMethods->add($paymentMethod1);
         $paymentMethods->add($paymentMethod2);
 
@@ -7173,7 +7174,7 @@ final class RegistrationManagerTest extends TestCase
 
         $paymentMethod = \Tx_Oelib_MapperRegistry
             ::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
-        $paymentMethods = new \Tx_Oelib_List();
+        $paymentMethods = new Collection();
         $paymentMethods->add($paymentMethod);
 
         /** @var \Tx_Seminars_Model_Event|MockObject $event */
@@ -7204,7 +7205,7 @@ final class RegistrationManagerTest extends TestCase
             ::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
         $paymentMethod2 = \Tx_Oelib_MapperRegistry
             ::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
-        $paymentMethods = new \Tx_Oelib_List();
+        $paymentMethods = new Collection();
         $paymentMethods->add($paymentMethod1);
         $paymentMethods->add($paymentMethod2);
 
@@ -7236,7 +7237,7 @@ final class RegistrationManagerTest extends TestCase
 
         $paymentMethod = \Tx_Oelib_MapperRegistry
             ::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
-        $paymentMethods = new \Tx_Oelib_List();
+        $paymentMethods = new Collection();
         $paymentMethods->add($paymentMethod);
 
         /** @var \Tx_Seminars_Model_Event|MockObject $event */

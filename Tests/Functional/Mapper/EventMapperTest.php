@@ -5,7 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\Mapper;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
-use OliverKlee\Seminars\Tests\Functional\Traits\ListHelper;
+use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Seminars\Tests\Functional\Traits\CollectionHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -15,7 +16,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 final class EventMapperTest extends FunctionalTestCase
 {
-    use ListHelper;
+    use CollectionHelper;
 
     /**
      * @var string[]
@@ -220,7 +221,7 @@ final class EventMapperTest extends FunctionalTestCase
         $model = $this->subject->find(1);
         $result = $model->getDependencies();
 
-        self::assertInstanceOf(\Tx_Oelib_List::class, $result);
+        self::assertInstanceOf(Collection::class, $result);
         self::assertTrue($result->isEmpty());
     }
 
@@ -235,7 +236,7 @@ final class EventMapperTest extends FunctionalTestCase
         $model = $this->subject->find(1);
         $result = $model->getRequirements();
 
-        self::assertInstanceOf(\Tx_Oelib_List::class, $result);
+        self::assertInstanceOf(Collection::class, $result);
         self::assertTrue($result->isEmpty());
     }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 
+use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
@@ -77,7 +78,7 @@ class TimeSlotMapperTest extends TestCase
 
         /** @var \Tx_Seminars_Model_TimeSlot $model */
         $model = $this->subject->find($uid);
-        self::assertInstanceOf(\Tx_Oelib_List::class, $model->getSpeakers());
+        self::assertInstanceOf(Collection::class, $model->getSpeakers());
     }
 
     /**

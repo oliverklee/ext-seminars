@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\DataStructures\Collection;
+
 /**
  * This class represents a mapper for events.
  *
@@ -83,10 +85,9 @@ class Tx_Seminars_Mapper_Event extends \Tx_Oelib_DataMapper
      * @param int $maximum
      *        maximum begin date as a UNIX timestamp, must be >= $minimum
      *
-     * @return \Tx_Oelib_List the found \Tx_Seminars_Model_Event models, will be
-     *                       empty if there are no matches
+     * @return Collection the found \Tx_Seminars_Model_Event models, will be empty if there are no matches
      */
-    public function findAllByBeginDate(int $minimum, int $maximum): \Tx_Oelib_List
+    public function findAllByBeginDate(int $minimum, int $maximum): Collection
     {
         if ($minimum < 0) {
             throw new \InvalidArgumentException('$minimum must be >= 0.');
@@ -150,9 +151,9 @@ class Tx_Seminars_Mapper_Event extends \Tx_Oelib_DataMapper
     /**
      * Finds events that have the status "planned" and that have the automatic status change enabled.
      *
-     * @return \Tx_Oelib_List the \Tx_Oelib_List<Tx_Seminars_Model_Event>
+     * @return Collection the Collection<Tx_Seminars_Model_Event>
      */
-    public function findForAutomaticStatusChange(): \Tx_Oelib_List
+    public function findForAutomaticStatusChange(): Collection
     {
         $whereClause = 'cancelled = ' . \Tx_Seminars_Model_Event::STATUS_PLANNED . ' AND automatic_confirmation_cancelation = 1';
 
@@ -166,9 +167,9 @@ class Tx_Seminars_Mapper_Event extends \Tx_Oelib_DataMapper
      *
      * This method will only find complete events and dates, but no topics.
      *
-     * @return \Tx_Oelib_List the \Tx_Oelib_List<Tx_Seminars_Model_Event>
+     * @return Collection the Collection<Tx_Seminars_Model_Event>
      */
-    public function findForRegistrationDigestEmail(): \Tx_Oelib_List
+    public function findForRegistrationDigestEmail(): Collection
     {
         $whereClause = 'registrations <> 0' .
             ' AND object_type <> ' . \Tx_Seminars_Model_Event::TYPE_TOPIC .

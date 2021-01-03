@@ -4,17 +4,19 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Functional\Traits;
 
+use OliverKlee\Oelib\DataStructures\Collection;
+
 /**
- * This trait provides methods useful for testing lists (usually in functional tests).
+ * This trait provides methods useful for testing collections (usually in functional tests).
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-trait ListHelper
+trait CollectionHelper
 {
     /**
      * @return void
      */
-    private static function assertContainsModelWithUid(\Tx_Oelib_List $models, int $uid)
+    private static function assertContainsModelWithUid(Collection $models, int $uid)
     {
         self::assertTrue($models->hasUid($uid));
     }
@@ -22,7 +24,7 @@ trait ListHelper
     /**
      * @return void
      */
-    private static function assertNotContainsModelWithUid(\Tx_Oelib_List $models, int $uid)
+    private static function assertNotContainsModelWithUid(Collection $models, int $uid)
     {
         self::assertFalse($models->hasUid($uid));
     }

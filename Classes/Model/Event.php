@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Model\Language;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
@@ -194,9 +195,9 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     /**
      * Returns our categories.
      *
-     * @return \Tx_Oelib_List our categories
+     * @return Collection our categories
      */
-    public function getCategories(): \Tx_Oelib_List
+    public function getCategories(): Collection
     {
         return $this->isEventDate()
             ? $this->getTopic()->getCategories()
@@ -396,10 +397,10 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     /**
      * Returns our time-slots.
      *
-     * @return \Tx_Oelib_List our time-slots, will be empty if this event has no
+     * @return Collection our time-slots, will be empty if this event has no
      *                       time-slots
      */
-    public function getTimeSlots(): \Tx_Oelib_List
+    public function getTimeSlots(): Collection
     {
         return $this->getAsList('timeslots');
     }
@@ -721,10 +722,10 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     /**
      * Returns our places.
      *
-     * @return \Tx_Oelib_List our places, will be empty if this event has no
+     * @return Collection our places, will be empty if this event has no
      *                       places
      */
-    public function getPlaces(): \Tx_Oelib_List
+    public function getPlaces(): Collection
     {
         return $this->getAsList('place');
     }
@@ -732,10 +733,10 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     /**
      * Returns our lodgings.
      *
-     * @return \Tx_Oelib_List our lodgings, will be empty if this event has no
+     * @return Collection our lodgings, will be empty if this event has no
      *                       lodgings
      */
-    public function getLodgings(): \Tx_Oelib_List
+    public function getLodgings(): Collection
     {
         return $this->getAsList('lodgings');
     }
@@ -743,10 +744,10 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     /**
      * Returns our foods.
      *
-     * @return \Tx_Oelib_List our foods, will be empty if this event has no
+     * @return Collection our foods, will be empty if this event has no
      *                       foods
      */
-    public function getFoods(): \Tx_Oelib_List
+    public function getFoods(): Collection
     {
         return $this->getAsList('foods');
     }
@@ -754,10 +755,10 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     /**
      * Returns our partners.
      *
-     * @return \Tx_Oelib_List our partners, will be empty if this event has no
+     * @return Collection our partners, will be empty if this event has no
      *                       partners
      */
-    public function getPartners(): \Tx_Oelib_List
+    public function getPartners(): Collection
     {
         return $this->getAsList('partners');
     }
@@ -765,10 +766,10 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     /**
      * Returns our tutors.
      *
-     * @return \Tx_Oelib_List our tutors, will be empty if this event has no
+     * @return Collection our tutors, will be empty if this event has no
      *                       tutors
      */
-    public function getTutors(): \Tx_Oelib_List
+    public function getTutors(): Collection
     {
         return $this->getAsList('tutors');
     }
@@ -776,10 +777,10 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     /**
      * Returns our leaders.
      *
-     * @return \Tx_Oelib_List our leaders, will be empty if this event has no
+     * @return Collection our leaders, will be empty if this event has no
      *                       leaders
      */
-    public function getLeaders(): \Tx_Oelib_List
+    public function getLeaders(): Collection
     {
         return $this->getAsList('leaders');
     }
@@ -1240,10 +1241,10 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     /**
      * Returns our payment methods.
      *
-     * @return \Tx_Oelib_List our payment methods, will be empty if this event
+     * @return Collection our payment methods, will be empty if this event
      *                       has no payment methods
      */
-    public function getPaymentMethods(): \Tx_Oelib_List
+    public function getPaymentMethods(): Collection
     {
         return $this->isEventDate()
             ? $this->getTopic()->getPaymentMethods()
@@ -1256,12 +1257,12 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      * Note: This function should only be called on topic or single event
      * records, not on event dates.
      *
-     * @param \Tx_Oelib_List $paymentMethods
+     * @param Collection $paymentMethods
      *        our payment methods, can be empty
      *
      * @return void
      */
-    public function setPaymentMethods(\Tx_Oelib_List $paymentMethods)
+    public function setPaymentMethods(Collection $paymentMethods)
     {
         if ($this->isEventDate()) {
             throw new \BadMethodCallException(
@@ -1276,10 +1277,10 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     /**
      * Returns our organizers.
      *
-     * @return \Tx_Oelib_List our organizers, will be empty if this event has no
+     * @return Collection our organizers, will be empty if this event has no
      *                       organizers
      */
-    public function getOrganizers(): \Tx_Oelib_List
+    public function getOrganizers(): Collection
     {
         return $this->getAsList('organizers');
     }
@@ -1300,10 +1301,10 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     /**
      * Returns our organinzing partners.
      *
-     * @return \Tx_Oelib_List our organizing partners, will be empty if this event
+     * @return Collection our organizing partners, will be empty if this event
      *                       has no organizing partners
      */
-    public function getOrganizingPartners(): \Tx_Oelib_List
+    public function getOrganizingPartners(): Collection
     {
         return $this->getAsList('organizing_partners');
     }
@@ -1454,10 +1455,10 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     /**
      * Returns our target groups.
      *
-     * @return \Tx_Oelib_List our target groups, will be empty if this event has
+     * @return Collection our target groups, will be empty if this event has
      *                       no target groups
      */
-    public function getTargetGroups(): \Tx_Oelib_List
+    public function getTargetGroups(): Collection
     {
         return $this->isEventDate()
             ? $this->getTopic()->getTargetGroups()
@@ -1577,10 +1578,10 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     /**
      * Returns our event managers.
      *
-     * @return \Tx_Oelib_List our event managers, will be empty if this event has
+     * @return Collection our event managers, will be empty if this event has
      *                       no event managers
      */
-    public function getEventManagers(): \Tx_Oelib_List
+    public function getEventManagers(): Collection
     {
         return $this->getAsList('vips');
     }
@@ -1588,10 +1589,10 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     /**
      * Returns our checkboxes.
      *
-     * @return \Tx_Oelib_List our checkboxes, will be empty if this event has no
+     * @return Collection our checkboxes, will be empty if this event has no
      *                       checkboxes
      */
-    public function getCheckboxes(): \Tx_Oelib_List
+    public function getCheckboxes(): Collection
     {
         return $this->isEventDate()
             ? $this->getTopic()->getCheckboxes()
@@ -1732,10 +1733,10 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     /**
      * Returns our requirements.
      *
-     * @return \Tx_Oelib_List our requirements, will be empty if this event has
+     * @return Collection our requirements, will be empty if this event has
      *                       no requirements
      */
-    public function getRequirements(): \Tx_Oelib_List
+    public function getRequirements(): Collection
     {
         return $this->isEventDate()
             ? $this->getTopic()->getRequirements()
@@ -1745,10 +1746,10 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     /**
      * Returns our dependencies.
      *
-     * @return \Tx_Oelib_List our dependencies, will be empty if this event has
+     * @return Collection our dependencies, will be empty if this event has
      *                       no dependencies
      */
-    public function getDependencies(): \Tx_Oelib_List
+    public function getDependencies(): Collection
     {
         return $this->isEventDate()
             ? $this->getTopic()->getDependencies()
@@ -1926,11 +1927,11 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     /**
      * Gets the registrations for this event.
      *
-     * @return \Tx_Oelib_List the registrations for this event (both regular and
+     * @return Collection the registrations for this event (both regular and
      *                       on the waiting list), will be empty if this event
      *                       has no registrations
      */
-    public function getRegistrations(): \Tx_Oelib_List
+    public function getRegistrations(): Collection
     {
         return $this->getAsList('registrations');
     }
@@ -1938,13 +1939,13 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     /**
      * Sets the registrations for this event.
      *
-     * @param \Tx_Oelib_List $registrations
+     * @param Collection $registrations
      *       the registrations for this event (both regular and on the waiting
      *       list), may be empty
      *
      * @return void
      */
-    public function setRegistrations(\Tx_Oelib_List $registrations)
+    public function setRegistrations(Collection $registrations)
     {
         $this->set('registrations', $registrations);
     }
@@ -1968,13 +1969,13 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      * Gets the regular registrations for this event, ie. the registrations
      * that are not on the waiting list.
      *
-     * @return \Tx_Oelib_List the regular registrations for this event, will be
+     * @return Collection the regular registrations for this event, will be
      *                       will be empty if this event no regular
      *                       registrations
      */
-    public function getRegularRegistrations(): \Tx_Oelib_List
+    public function getRegularRegistrations(): Collection
     {
-        $regularRegistrations = new \Tx_Oelib_List();
+        $regularRegistrations = new Collection();
 
         /** @var \Tx_Seminars_Model_Registration $registration */
         foreach ($this->getRegistrations() as $registration) {
@@ -1990,12 +1991,12 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      * Gets the queue registrations for this event, ie. the registrations
      * that are no regular registrations (yet).
      *
-     * @return \Tx_Oelib_List the queue registrations for this event, will be
+     * @return Collection the queue registrations for this event, will be
      *                       will be empty if this event no queue registrations
      */
-    public function getQueueRegistrations(): \Tx_Oelib_List
+    public function getQueueRegistrations(): Collection
     {
-        $queueRegistrations = new \Tx_Oelib_List();
+        $queueRegistrations = new Collection();
 
         /** @var \Tx_Seminars_Model_Registration $registration */
         foreach ($this->getRegistrations() as $registration) {
@@ -2020,11 +2021,11 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * @return \Tx_Oelib_List \Tx_Oelib_List<\Tx_Seminars_Model_Registration>
+     * @return Collection Collection<\Tx_Seminars_Model_Registration>
      */
-    public function getRegistrationsAfterLastDigest(): \Tx_Oelib_List
+    public function getRegistrationsAfterLastDigest(): Collection
     {
-        $newerRegistrations = new \Tx_Oelib_List();
+        $newerRegistrations = new Collection();
         $dateOfLastDigest = $this->getDateOfLastRegistrationDigestEmailAsUnixTimeStamp();
 
         /** @var \Tx_Seminars_Model_Registration $registration */
@@ -2141,11 +2142,11 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * @param \Tx_Oelib_List $registrations \Tx_Oelib_List<\Tx_Seminars_Model_Registration>
+     * @param Collection $registrations Collection<\Tx_Seminars_Model_Registration>
      *
      * @return string[] attendee names: ['Jane Doe', 'John Doe']
      */
-    private function extractNamesFromRegistrations(\Tx_Oelib_List $registrations): array
+    private function extractNamesFromRegistrations(Collection $registrations): array
     {
         $names = [];
 

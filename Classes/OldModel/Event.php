@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
+use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Model\FrontEndUser;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
@@ -4314,12 +4315,12 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Returns the places associated with this event.
      *
-     * @return \Tx_Oelib_List with the models for the places of this event, will be empty if this event has no places
+     * @return Collection with the models for the places of this event, will be empty if this event has no places
      */
-    public function getPlaces(): \Tx_Oelib_List
+    public function getPlaces(): Collection
     {
         if (!$this->hasPlace()) {
-            return new \Tx_Oelib_List();
+            return new Collection();
         }
 
         $places = $this->getPlacesAsArray();

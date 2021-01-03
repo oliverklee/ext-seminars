@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Model\BackEndUser;
 use OliverKlee\Oelib\Model\FrontEndUserGroup as OelibFrontEndUserGroup;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
@@ -115,11 +116,11 @@ class Tx_Seminars_Model_FrontEndUserGroup extends OelibFrontEndUserGroup impleme
     /**
      * Gets this user group's assigned default categories.
      *
-     * @return \Tx_Oelib_List the list of default categories assigned to this
+     * @return Collection the list of default categories assigned to this
      *                       group, will be empty if no default categories are
      *                       assigned to this group
      */
-    public function getDefaultCategories(): \Tx_Oelib_List
+    public function getDefaultCategories(): Collection
     {
         return $this->getAsList('tx_seminars_default_categories');
     }

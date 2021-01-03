@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSelectorWidget;
 use SJBR\StaticInfoTables\PiBaseApi;
@@ -40,7 +41,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
     private $seminarBag = null;
 
     /**
-     * @var \Tx_Oelib_List all places which are assigned to at least one event
+     * @var Collection all places which are assigned to at least one event
      */
     private $places = null;
 

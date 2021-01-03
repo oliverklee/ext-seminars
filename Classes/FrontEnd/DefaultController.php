@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
+use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Seminars\Bag\AbstractBag;
 use OliverKlee\Seminars\Csv\CsvDownloader;
@@ -3586,7 +3587,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements \
     {
         $copy = clone $event;
         $copy->markAsHidden();
-        $copy->setRegistrations(new \Tx_Oelib_List());
+        $copy->setRegistrations(new Collection());
 
         /** @var \Tx_Seminars_Mapper_Event $mapper */
         $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
