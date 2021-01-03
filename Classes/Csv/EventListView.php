@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Csv;
 
+use OliverKlee\Oelib\Configuration\Configuration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -19,7 +20,7 @@ class EventListView extends AbstractListView
     protected $tableName = 'tx_seminars_seminars';
 
     /**
-     * @var \Tx_Oelib_Configuration
+     * @var Configuration
      */
     protected $configuration = null;
 

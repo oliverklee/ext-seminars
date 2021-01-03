@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Unit\SchedulerTask;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use OliverKlee\Oelib\Configuration\Configuration;
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
 
@@ -28,7 +30,7 @@ class RegistrationDigestTest extends UnitTestCase
     protected function tearDown()
     {
         MapperRegistry::purgeInstance();
-        \Tx_Oelib_ConfigurationRegistry::purgeInstance();
+        ConfigurationRegistry::purgeInstance();
 
         parent::tearDown();
     }
@@ -69,7 +71,7 @@ class RegistrationDigestTest extends UnitTestCase
     {
         $this->subject->initializeObject();
 
-        self::assertInstanceOf(\Tx_Oelib_Configuration::class, $this->subject->getConfiguration());
+        self::assertInstanceOf(Configuration::class, $this->subject->getConfiguration());
     }
 
     /**

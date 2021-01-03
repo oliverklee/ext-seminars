@@ -104,7 +104,7 @@ plugin.tx_seminars_pi1.form.eventEditor {
         renderer = renderer:TEMPLATE
         renderer.template {
             path.userobj.php (
-                return \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1')->getAsString('eventEditorTemplateFile');
+                return \OliverKlee\Oelib\Configuration\ConfigurationRegistry::get('plugin.tx_seminars_pi1')->getAsString('eventEditorTemplateFile');
             )
             subpart = ###seminars_FORM###
             errortag = errors

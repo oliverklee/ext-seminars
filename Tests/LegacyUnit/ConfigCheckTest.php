@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit;
 
+use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\DummyObjectToCheck;
 
@@ -26,7 +27,7 @@ class ConfigCheckTest extends TestCase
 
     protected function setUp()
     {
-        \Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', true);
+        ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', true);
 
         $this->objectToCheck = new DummyObjectToCheck([]);
         $this->subject = new \Tx_Seminars_ConfigCheck($this->objectToCheck);

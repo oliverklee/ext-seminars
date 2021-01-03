@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Mapper\FrontEndUserMapper;
@@ -1061,9 +1062,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     {
         /** @var \Tx_Oelib_ViewHelper_Price $priceViewHelper */
         $priceViewHelper = GeneralUtility::makeInstance(\Tx_Oelib_ViewHelper_Price::class);
-        $priceViewHelper->setCurrencyFromIsoAlpha3Code(
-            \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')->getAsString('currency')
-        );
+        $priceViewHelper
+            ->setCurrencyFromIsoAlpha3Code(ConfigurationRegistry::get('plugin.tx_seminars')->getAsString('currency'));
         $priceViewHelper->setValue((float)$value);
 
         return $priceViewHelper->render();

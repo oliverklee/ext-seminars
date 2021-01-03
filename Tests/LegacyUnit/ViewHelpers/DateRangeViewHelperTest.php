@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\ViewHelpers;
 
+use OliverKlee\Oelib\Configuration\Configuration;
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
@@ -28,7 +30,7 @@ class DateRangeViewHelperTest extends TestCase
     private $testingFramework;
 
     /**
-     * @var \Tx_Oelib_Configuration
+     * @var Configuration
      */
     private $configuration;
 
@@ -70,14 +72,14 @@ class DateRangeViewHelperTest extends TestCase
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd($this->testingFramework->createFrontEndPage());
 
-        $this->configuration = new \Tx_Oelib_Configuration();
+        $this->configuration = new Configuration();
         $this->configuration->setAsString('dateFormatYMD', self::DATE_FORMAT_YMD);
         $this->configuration->setAsString('dateFormatY', self::DATE_FORMAT_Y);
         $this->configuration->setAsString('dateFormatM', self::DATE_FORMAT_M);
         $this->configuration->setAsString('dateFormatMD', self::DATE_FORMAT_MD);
         $this->configuration->setAsString('dateFormatD', self::DATE_FORMAT_D);
 
-        \Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->configuration);
+        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->configuration);
 
         $this->subject = new \Tx_Seminars_ViewHelper_DateRange();
     }

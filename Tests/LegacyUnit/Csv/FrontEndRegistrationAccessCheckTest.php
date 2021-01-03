@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Csv;
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
+use OliverKlee\Oelib\Configuration\Configuration;
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Csv\FrontEndRegistrationAccessCheck;
 use OliverKlee\Seminars\Csv\Interfaces\CsvAccessCheck;
@@ -23,7 +25,7 @@ class FrontEndRegistrationAccessCheckTest extends TestCase
     private $subject = null;
 
     /**
-     * @var \Tx_Oelib_Configuration
+     * @var Configuration
      */
     private $seminarsPluginConfiguration = null;
 
@@ -34,10 +36,10 @@ class FrontEndRegistrationAccessCheckTest extends TestCase
 
     protected function setUp()
     {
-        $configurationRegistry = \Tx_Oelib_ConfigurationRegistry::getInstance();
-        $configurationRegistry->set('plugin', new \Tx_Oelib_Configuration());
+        $configurationRegistry = ConfigurationRegistry::getInstance();
+        $configurationRegistry->set('plugin', new Configuration());
 
-        $this->seminarsPluginConfiguration = new \Tx_Oelib_Configuration();
+        $this->seminarsPluginConfiguration = new Configuration();
         $this->seminarsPluginConfiguration->setAsInteger('defaultEventVipsFeGroupID', $this->vipsGroupUid);
         $configurationRegistry->set('plugin.tx_seminars_pi1', $this->seminarsPluginConfiguration);
 
@@ -46,7 +48,7 @@ class FrontEndRegistrationAccessCheckTest extends TestCase
 
     protected function tearDown()
     {
-        \Tx_Oelib_ConfigurationRegistry::purgeInstance();
+        ConfigurationRegistry::purgeInstance();
         FrontEndLoginManager::purgeInstance();
     }
 

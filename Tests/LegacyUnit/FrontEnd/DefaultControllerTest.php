@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 
+use OliverKlee\Oelib\Configuration\Configuration;
+use OliverKlee\Oelib\Configuration\ConfigurationProxy;
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
@@ -87,7 +90,7 @@ class DefaultControllerTest extends TestCase
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
-        \Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', false);
+        ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', false);
 
         $this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'] = [];
@@ -97,9 +100,9 @@ class DefaultControllerTest extends TestCase
         \Tx_Oelib_HeaderProxyFactory::getInstance()->enableTestMode();
         $this->headerCollector = \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy();
 
-        $configuration = new \Tx_Oelib_Configuration();
+        $configuration = new Configuration();
         $configuration->setAsString('currency', 'EUR');
-        \Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
+        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
 
         $this->systemFolderPid = $this->testingFramework->createSystemFolder();
         $this->seminarUid = $this->testingFramework->createRecord(

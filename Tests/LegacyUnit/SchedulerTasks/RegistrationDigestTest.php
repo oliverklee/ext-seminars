@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\SchedulerTask;
 
+use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
@@ -29,7 +30,7 @@ class RegistrationDigestTest extends TestCase
     private $subject = null;
 
     /**
-     * @var \Tx_Oelib_Configuration
+     * @var Configuration
      */
     private $configuration = null;
 
@@ -73,7 +74,7 @@ class RegistrationDigestTest extends TestCase
 
         $this->subject = new RegistrationDigest();
 
-        $this->configuration = new \Tx_Oelib_Configuration();
+        $this->configuration = new Configuration();
         $this->subject->setConfiguration($this->configuration);
 
         $this->objectManagerProphecy = $this->prophesize(ObjectManager::class);

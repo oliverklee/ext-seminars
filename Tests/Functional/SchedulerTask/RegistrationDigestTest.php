@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\SchedulerTask;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -25,7 +26,7 @@ class RegistrationDigestTest extends FunctionalTestCase
     protected function tearDown()
     {
         MapperRegistry::purgeInstance();
-        \Tx_Oelib_ConfigurationRegistry::purgeInstance();
+        ConfigurationRegistry::purgeInstance();
 
         parent::tearDown();
     }

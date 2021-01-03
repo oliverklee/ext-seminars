@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
+use OliverKlee\Oelib\Configuration\Configuration;
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
 use OliverKlee\Oelib\Mapper\CountryMapper;
@@ -2823,12 +2825,10 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
 
     /**
      * Gets the Configuration for plugin.tx_seminars_pi1.
-     *
-     * @return \Tx_Oelib_Configuration
      */
-    protected static function getSeminarsConfiguration(): \Tx_Oelib_Configuration
+    protected static function getSeminarsConfiguration(): Configuration
     {
-        return \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars_pi1');
+        return ConfigurationRegistry::get('plugin.tx_seminars_pi1');
     }
 
     /**

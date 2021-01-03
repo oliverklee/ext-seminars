@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminar\Email;
 
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -41,7 +42,7 @@ class Salutation
     {
         $salutationParts = [];
 
-        $salutationMode = \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars')->getAsString('salutation');
+        $salutationMode = ConfigurationRegistry::get('plugin.tx_seminars')->getAsString('salutation');
         switch ($salutationMode) {
             case 'informal':
                 $salutationParts['dear'] = $this->translator->translate('email_hello_informal');

@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\System\Typo3Version;
@@ -1312,16 +1313,14 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      */
     private function getDefaultCountry(): string
     {
-        $defaultCountryCode = \Tx_Oelib_ConfigurationRegistry::get(
-            'plugin.tx_staticinfotables_pi1'
-        )->getAsString('countryCode');
+        $defaultCountryCode = ConfigurationRegistry::get('plugin.tx_staticinfotables_pi1')->getAsString('countryCode');
         if ($defaultCountryCode === '') {
             return '';
         }
 
         $this->initStaticInfo();
 
-        $currentLanguageCode = \Tx_Oelib_ConfigurationRegistry::get('config')->getAsString('language');
+        $currentLanguageCode = ConfigurationRegistry::get('config')->getAsString('language');
         $identifiers = ['iso' => $defaultCountryCode];
         $result = LocalizationUtility::getLabelFieldValue($identifiers, 'static_countries', $currentLanguageCode, true);
 

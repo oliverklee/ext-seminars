@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Configuration\Configuration;
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\LanguageMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
@@ -50,12 +52,9 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      */
     const STATUS_CONFIRMED = 2;
 
-    /**
-     * @return \Tx_Oelib_Configuration
-     */
-    protected function getConfiguration(): \Tx_Oelib_Configuration
+    protected function getConfiguration(): Configuration
     {
-        return \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars');
+        return ConfigurationRegistry::get('plugin.tx_seminars');
     }
 
     /**

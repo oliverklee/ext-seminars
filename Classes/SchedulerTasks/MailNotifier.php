@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\SchedulerTasks;
 
 use OliverKlee\Oelib\Authentication\BackEndLoginManager;
+use OliverKlee\Oelib\Configuration\Configuration;
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\Csv\EmailRegistrationListView;
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
@@ -349,8 +351,7 @@ class MailNotifier extends AbstractTask
      *
      * @param int $timestamp timestamp, must be >= 0
      *
-     * @return string formatted date according to the TS setup configuration for
-     *                'dateFormatYMD', will not be empty
+     * @return string formatted date according to the TS setup configuration for 'dateFormatYMD', will not be empty
      */
     private function getDate(int $timestamp): string
     {
@@ -366,9 +367,8 @@ class MailNotifier extends AbstractTask
      */
     private function shouldCsvFileBeAdded(\Tx_Seminars_OldModel_Event $event): bool
     {
-        return $this->getConfiguration()->getAsBoolean(
-            'addRegistrationCsvToOrganizerReminderMail'
-        ) && $event->hasAttendances();
+        return $this->getConfiguration()->getAsBoolean('addRegistrationCsvToOrganizerReminderMail')
+            && $event->hasAttendances();
     }
 
     /**
@@ -428,15 +428,10 @@ class MailNotifier extends AbstractTask
         $this->getLanguageService()->init($user->getLanguage());
     }
 
-    /**
-     * Returns the plugin.tx_seminars configuration.
-     *
-     * @return \Tx_Oelib_Configuration
-     */
-    protected function getConfiguration(): \Tx_Oelib_Configuration
+    protected function getConfiguration(): Configuration
     {
         \Tx_Oelib_PageFinder::getInstance()->setPageUid($this->getConfigurationPageUid());
 
-        return \Tx_Oelib_ConfigurationRegistry::get('plugin.tx_seminars');
+        return ConfigurationRegistry::get('plugin.tx_seminars');
     }
 }

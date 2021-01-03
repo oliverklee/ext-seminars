@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
+use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\FrontEndUser;
 use OliverKlee\Oelib\Templating\TemplateHelper;
@@ -836,7 +837,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
 
         $this->initializeTemplate();
 
-        $emailFormat = \Tx_Oelib_ConfigurationProxy::getInstance('seminars')->getAsInteger('eMailFormatForAttendees');
+        $emailFormat = ConfigurationProxy::getInstance('seminars')->getAsInteger('eMailFormatForAttendees');
         if (
             $emailFormat === self::SEND_HTML_MAIL || ($emailFormat === self::SEND_USER_MAIL && $user->wantsHtmlEmail())
         ) {

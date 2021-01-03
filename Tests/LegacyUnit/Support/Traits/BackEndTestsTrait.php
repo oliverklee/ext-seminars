@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits;
 
+use OliverKlee\Oelib\Configuration\Configuration;
+use OliverKlee\Oelib\Configuration\ConfigurationProxy;
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Core\Bootstrap;
@@ -54,7 +57,7 @@ trait BackEndTestsTrait
     private $mockBackEndUser = null;
 
     /**
-     * @var \Tx_Oelib_Configuration
+     * @var Configuration
      */
     private $configuration = null;
 
@@ -80,7 +83,7 @@ trait BackEndTestsTrait
         $this->replaceBackEndUserWithMock();
         $this->unifyBackEndLanguage();
         $this->unifyExtensionSettings();
-        \Tx_Oelib_ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', false);
+        ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', false);
         $this->setUpExtensionConfiguration();
         $headerProxyFactory = \Tx_Oelib_HeaderProxyFactory::getInstance();
         $headerProxyFactory->enableTestMode();
@@ -146,9 +149,9 @@ trait BackEndTestsTrait
      */
     private function setUpExtensionConfiguration()
     {
-        $configurationRegistry = \Tx_Oelib_ConfigurationRegistry::getInstance();
-        $configurationRegistry->set('plugin', new \Tx_Oelib_Configuration());
-        $this->configuration = new \Tx_Oelib_Configuration();
+        $configurationRegistry = ConfigurationRegistry::getInstance();
+        $configurationRegistry->set('plugin', new Configuration());
+        $this->configuration = new Configuration();
         $configurationRegistry->set('plugin.tx_seminars', $this->configuration);
     }
 

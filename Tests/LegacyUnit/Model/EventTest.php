@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
+use OliverKlee\Oelib\Configuration\Configuration;
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\LanguageMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
@@ -24,7 +26,7 @@ class EventTest extends TestCase
     private $subject = null;
 
     /**
-     * @var \Tx_Oelib_Configuration
+     * @var Configuration
      */
     private $configuration = null;
 
@@ -36,8 +38,8 @@ class EventTest extends TestCase
     protected function setUp()
     {
         $GLOBALS['SIM_EXEC_TIME'] = $this->now;
-        $configurationRegistry = \Tx_Oelib_ConfigurationRegistry::getInstance();
-        $this->configuration = new \Tx_Oelib_Configuration();
+        $configurationRegistry = ConfigurationRegistry::getInstance();
+        $this->configuration = new Configuration();
         $configurationRegistry->set('plugin.tx_seminars', $this->configuration);
 
         $this->subject = new \Tx_Seminars_Model_Event();
@@ -45,7 +47,7 @@ class EventTest extends TestCase
 
     protected function tearDown()
     {
-        \Tx_Oelib_ConfigurationRegistry::purgeInstance();
+        ConfigurationRegistry::purgeInstance();
     }
 
     /////////////////////////////////////

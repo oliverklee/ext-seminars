@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 
+use OliverKlee\Oelib\Configuration\Configuration;
+use OliverKlee\Oelib\Configuration\ConfigurationProxy;
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
@@ -38,7 +41,7 @@ class EventEditorTest extends TestCase
     private $mailer = null;
 
     /**
-     * @var \Tx_Oelib_Configuration
+     * @var Configuration
      */
     private $configuration = null;
 
@@ -56,9 +59,9 @@ class EventEditorTest extends TestCase
         MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
 
         $this->recordsPageUid = $this->testingFramework->createSystemFolder();
-        $this->configuration = new \Tx_Oelib_Configuration();
+        $this->configuration = new Configuration();
         $this->configuration->setAsInteger('createAuxiliaryRecordsPID', $this->recordsPageUid);
-        \Tx_Oelib_ConfigurationRegistry::getInstance()->set('plugin.tx_seminars_pi1', $this->configuration);
+        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars_pi1', $this->configuration);
 
         $this->subject = new \Tx_Seminars_FrontEnd_EventEditor(
             [
@@ -80,7 +83,7 @@ class EventEditorTest extends TestCase
         $this->testingFramework->cleanUp();
 
         \Tx_Seminars_Service_RegistrationManager::purgeInstance();
-        \Tx_Oelib_ConfigurationProxy::purgeInstances();
+        ConfigurationProxy::purgeInstances();
     }
 
     /*
