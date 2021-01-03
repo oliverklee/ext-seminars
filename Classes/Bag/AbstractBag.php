@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Bag;
 
 use Doctrine\DBAL\FetchMode;
 use OliverKlee\Oelib\Database\DatabaseService;
+use OliverKlee\Oelib\Interfaces\ConfigurationCheckable;
 use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Seminars\OldModel\AbstractModel;
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -22,7 +23,7 @@ use TYPO3\CMS\Frontend\Page\PageRepository;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-abstract class AbstractBag implements \Iterator, \Tx_Oelib_Interface_ConfigurationCheckable
+abstract class AbstractBag implements \Iterator, ConfigurationCheckable
 {
     /**
      * @var string

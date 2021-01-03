@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Model\Country;
 use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Templating\Template;
@@ -4901,7 +4902,7 @@ final class RegistrationManagerTest extends TestCase
             'tx_seminars_seminars',
             $this->seminarUid,
             [
-                'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
             ]
         );
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
@@ -4932,7 +4933,7 @@ final class RegistrationManagerTest extends TestCase
             'tx_seminars_seminars',
             $this->seminarUid,
             [
-                'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -4965,7 +4966,7 @@ final class RegistrationManagerTest extends TestCase
             'tx_seminars_seminars',
             $this->seminarUid,
             [
-                'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -4995,7 +4996,7 @@ final class RegistrationManagerTest extends TestCase
             'tx_seminars_seminars',
             $this->seminarUid,
             [
-                'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
                 'queue_size' => 1,
             ]
         );
@@ -5031,7 +5032,7 @@ final class RegistrationManagerTest extends TestCase
             'tx_seminars_seminars',
             $this->seminarUid,
             [
-                'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
                 'queue_size' => 1,
             ]
         );

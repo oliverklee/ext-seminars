@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Seminars\BagBuilder\AbstractBagBuilder;
 
 /**
@@ -537,8 +538,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
         }
 
         $endDate = $event->getEndDateAsTimestamp();
-        $midnightBeforeEndDate = $endDate - ($endDate % \Tx_Oelib_Time::SECONDS_PER_DAY);
-        $secondMidnightAfterEndDate = $midnightBeforeEndDate + 2 * \Tx_Oelib_Time::SECONDS_PER_DAY;
+        $midnightBeforeEndDate = $endDate - ($endDate % Time::SECONDS_PER_DAY);
+        $secondMidnightAfterEndDate = $midnightBeforeEndDate + 2 * Time::SECONDS_PER_DAY;
 
         $this->whereClauseParts['next_day'] = 'begin_date>=' . $endDate .
             ' AND begin_date<' . $secondMidnightAfterEndDate;
@@ -691,7 +692,7 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      */
     public function limitToDaysBeforeBeginDate(int $days)
     {
-        $nowPlusDays = $GLOBALS['SIM_EXEC_TIME'] + $days * \Tx_Oelib_Time::SECONDS_PER_DAY;
+        $nowPlusDays = $GLOBALS['SIM_EXEC_TIME'] + $days * Time::SECONDS_PER_DAY;
 
         $this->whereClauseParts['days_before_begin_date'] =
             'tx_seminars_seminars.begin_date < ' . $nowPlusDays;

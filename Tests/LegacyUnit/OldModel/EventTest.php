@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\OldModel;
 
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Model\FrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
@@ -63,8 +64,8 @@ final class EventTest extends TestCase
         \date_default_timezone_set('UTC');
 
         $GLOBALS['SIM_EXEC_TIME'] = $this->now;
-        $this->beginDate = ($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
-        $this->unregistrationDeadline = ($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
+        $this->beginDate = ($this->now + Time::SECONDS_PER_WEEK);
+        $this->unregistrationDeadline = ($this->now + Time::SECONDS_PER_WEEK);
 
         $this->testingFramework = new TestingFramework('tx_seminars');
 
@@ -2090,7 +2091,7 @@ final class EventTest extends TestCase
 
         $this->subject->setGlobalUnregistrationDeadline(0);
         $this->subject->setUnregistrationDeadline(0);
-        $this->subject->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
+        $this->subject->setBeginDate($this->now + Time::SECONDS_PER_WEEK);
         $this->subject->setAttendancesMax(10);
 
         self::assertFalse(
@@ -2124,7 +2125,7 @@ final class EventTest extends TestCase
 
         $this->subject->setGlobalUnregistrationDeadline(1);
         $this->subject->setUnregistrationDeadline(0);
-        $this->subject->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
+        $this->subject->setBeginDate($this->now + Time::SECONDS_PER_WEEK);
         $this->subject->setAttendancesMax(10);
 
         self::assertTrue(
@@ -2141,7 +2142,7 @@ final class EventTest extends TestCase
 
         $this->subject->setGlobalUnregistrationDeadline(5);
         $this->subject->setUnregistrationDeadline(0);
-        $this->subject->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_DAY);
+        $this->subject->setBeginDate($this->now + Time::SECONDS_PER_DAY);
         $this->subject->setAttendancesMax(10);
 
         self::assertFalse(
@@ -2175,9 +2176,9 @@ final class EventTest extends TestCase
 
         $this->subject->setGlobalUnregistrationDeadline(0);
         $this->subject->setUnregistrationDeadline(
-            $this->now + \Tx_Oelib_Time::SECONDS_PER_DAY
+            $this->now + Time::SECONDS_PER_DAY
         );
-        $this->subject->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
+        $this->subject->setBeginDate($this->now + Time::SECONDS_PER_WEEK);
         $this->subject->setAttendancesMax(10);
 
         self::assertTrue(
@@ -2194,9 +2195,9 @@ final class EventTest extends TestCase
 
         $this->subject->setGlobalUnregistrationDeadline(0);
         $this->subject->setUnregistrationDeadline(
-            $this->now - \Tx_Oelib_Time::SECONDS_PER_DAY
+            $this->now - Time::SECONDS_PER_DAY
         );
-        $this->subject->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
+        $this->subject->setBeginDate($this->now + Time::SECONDS_PER_WEEK);
         $this->subject->setAttendancesMax(10);
 
         self::assertFalse(
@@ -2213,7 +2214,7 @@ final class EventTest extends TestCase
 
         $this->subject->setGlobalUnregistrationDeadline(0);
         $this->subject->setUnregistrationDeadline(
-            $this->now + \Tx_Oelib_Time::SECONDS_PER_DAY
+            $this->now + Time::SECONDS_PER_DAY
         );
         $this->subject->setBeginDate(0);
         $this->subject->setAttendancesMax(10);
@@ -2232,7 +2233,7 @@ final class EventTest extends TestCase
 
         $this->subject->setGlobalUnregistrationDeadline(0);
         $this->subject->setUnregistrationDeadline(
-            $this->now - \Tx_Oelib_Time::SECONDS_PER_DAY
+            $this->now - Time::SECONDS_PER_DAY
         );
         $this->subject->setBeginDate(0);
         $this->subject->setAttendancesMax(10);
@@ -2251,9 +2252,9 @@ final class EventTest extends TestCase
 
         $this->subject->setGlobalUnregistrationDeadline(1);
         $this->subject->setUnregistrationDeadline(
-            $this->now + \Tx_Oelib_Time::SECONDS_PER_DAY
+            $this->now + Time::SECONDS_PER_DAY
         );
-        $this->subject->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
+        $this->subject->setBeginDate($this->now + Time::SECONDS_PER_WEEK);
         $this->subject->setAttendancesMax(10);
 
         self::assertTrue(
@@ -2271,9 +2272,9 @@ final class EventTest extends TestCase
         $this->subject->setGlobalUnregistrationDeadline(2);
         $this->subject->setAttendancesMax(10);
         $this->subject->setUnregistrationDeadline(
-            $this->now - \Tx_Oelib_Time::SECONDS_PER_DAY
+            $this->now - Time::SECONDS_PER_DAY
         );
-        $this->subject->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_DAY);
+        $this->subject->setBeginDate($this->now + Time::SECONDS_PER_DAY);
 
         self::assertFalse(
             $this->subject->isUnregistrationPossible()
@@ -2289,7 +2290,7 @@ final class EventTest extends TestCase
 
         $this->subject->setGlobalUnregistrationDeadline(1);
         $this->subject->setUnregistrationDeadline(
-            $this->now + \Tx_Oelib_Time::SECONDS_PER_DAY
+            $this->now + Time::SECONDS_PER_DAY
         );
         $this->subject->setBeginDate(0);
         $this->subject->setAttendancesMax(10);
@@ -2310,7 +2311,7 @@ final class EventTest extends TestCase
         $this->subject->setBeginDate(0);
         $this->subject->setAttendancesMax(10);
         $this->subject->setUnregistrationDeadline(
-            $this->now - \Tx_Oelib_Time::SECONDS_PER_DAY
+            $this->now - Time::SECONDS_PER_DAY
         );
 
         self::assertFalse(
@@ -2326,9 +2327,9 @@ final class EventTest extends TestCase
         $this->subject->setAllowUnregistrationWithEmptyWaitingList(true);
 
         $this->subject->setGlobalUnregistrationDeadline(1);
-        $this->subject->setBeginDate($this->now + 2 * \Tx_Oelib_Time::SECONDS_PER_DAY);
+        $this->subject->setBeginDate($this->now + 2 * Time::SECONDS_PER_DAY);
         $this->subject->setUnregistrationDeadline(
-            $this->now - \Tx_Oelib_Time::SECONDS_PER_DAY
+            $this->now - Time::SECONDS_PER_DAY
         );
         $this->subject->setAttendancesMax(10);
 
@@ -2347,9 +2348,9 @@ final class EventTest extends TestCase
         $this->subject->setAttendancesMax(10);
         $this->subject->setGlobalUnregistrationDeadline(1);
         $this->subject->setUnregistrationDeadline(
-            $this->now + \Tx_Oelib_Time::SECONDS_PER_DAY
+            $this->now + Time::SECONDS_PER_DAY
         );
-        $this->subject->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
+        $this->subject->setBeginDate($this->now + Time::SECONDS_PER_WEEK);
 
         self::assertTrue(
             $this->subject->isUnregistrationPossible()
@@ -2366,9 +2367,9 @@ final class EventTest extends TestCase
         $this->subject->setNeedsRegistration(false);
         $this->subject->setGlobalUnregistrationDeadline(1);
         $this->subject->setUnregistrationDeadline(
-            $this->now + \Tx_Oelib_Time::SECONDS_PER_DAY
+            $this->now + Time::SECONDS_PER_DAY
         );
-        $this->subject->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
+        $this->subject->setBeginDate($this->now + Time::SECONDS_PER_WEEK);
 
         self::assertFalse(
             $this->subject->isUnregistrationPossible()
@@ -2385,9 +2386,9 @@ final class EventTest extends TestCase
         $this->subject->setAttendancesMax(10);
         $this->subject->setGlobalUnregistrationDeadline(1);
         $this->subject->setUnregistrationDeadline(
-            $this->now + \Tx_Oelib_Time::SECONDS_PER_DAY
+            $this->now + Time::SECONDS_PER_DAY
         );
-        $this->subject->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
+        $this->subject->setBeginDate($this->now + Time::SECONDS_PER_WEEK);
         $this->subject->setRegistrationQueue(true);
         $this->subject->setNumberOfAttendancesOnQueue(0);
 
@@ -2450,7 +2451,7 @@ final class EventTest extends TestCase
      */
     public function getUnregistrationDeadlineFromModelAndConfigurationForUnregistrationDeadlineSetInEventReturnsThisDeadline()
     {
-        $this->subject->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
+        $this->subject->setBeginDate($this->now + Time::SECONDS_PER_WEEK);
         $this->subject->setUnregistrationDeadline($this->now);
         $this->subject->setGlobalUnregistrationDeadline(0);
 
@@ -2465,7 +2466,7 @@ final class EventTest extends TestCase
      */
     public function getUnregistrationDeadlineFromModelAndConfigurationForNoUnregistrationDeadlineSetInEventAndNoDeadlineConfigurationSetReturnsZero()
     {
-        $this->subject->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
+        $this->subject->setBeginDate($this->now + Time::SECONDS_PER_WEEK);
         $this->subject->setUnregistrationDeadline(0);
         $this->subject->setGlobalUnregistrationDeadline(0);
 
@@ -2480,12 +2481,12 @@ final class EventTest extends TestCase
      */
     public function getUnregistrationDeadlineFromModelAndConfigurationForNoUnregistrationDeadlineSetInEventAndDeadlineConfigurationSetReturnsCalculatedDeadline()
     {
-        $this->subject->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
+        $this->subject->setBeginDate($this->now + Time::SECONDS_PER_WEEK);
         $this->subject->setUnregistrationDeadline(0);
         $this->subject->setGlobalUnregistrationDeadline(1);
 
         self::assertSame(
-            $this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK - \Tx_Oelib_Time::SECONDS_PER_DAY,
+            $this->now + Time::SECONDS_PER_WEEK - Time::SECONDS_PER_DAY,
             $this->subject->getUnregistrationDeadlineFromModelAndConfiguration()
         );
     }
@@ -2495,7 +2496,7 @@ final class EventTest extends TestCase
      */
     public function getUnregistrationDeadlineFromModelAndConfigurationForUnregistrationDeadlinesSetInEventAndConfigurationReturnsEventsDeadline()
     {
-        $this->subject->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
+        $this->subject->setBeginDate($this->now + Time::SECONDS_PER_WEEK);
         $this->subject->setUnregistrationDeadline($this->now);
         $this->subject->setGlobalUnregistrationDeadline(1);
 
@@ -2617,9 +2618,9 @@ final class EventTest extends TestCase
 
         $this->subject->setGlobalUnregistrationDeadline(1);
         $this->subject->setUnregistrationDeadline(
-            $this->now + (6 * \Tx_Oelib_Time::SECONDS_PER_DAY)
+            $this->now + (6 * Time::SECONDS_PER_DAY)
         );
-        $this->subject->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
+        $this->subject->setBeginDate($this->now + Time::SECONDS_PER_WEEK);
 
         self::assertTrue(
             $this->subject->isUnregistrationPossible()
@@ -2638,9 +2639,9 @@ final class EventTest extends TestCase
 
         $this->subject->setGlobalUnregistrationDeadline(1);
         $this->subject->setUnregistrationDeadline(
-            $this->now + (6 * \Tx_Oelib_Time::SECONDS_PER_DAY)
+            $this->now + (6 * Time::SECONDS_PER_DAY)
         );
-        $this->subject->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
+        $this->subject->setBeginDate($this->now + Time::SECONDS_PER_WEEK);
 
         self::assertFalse(
             $this->subject->isUnregistrationPossible()
@@ -2661,9 +2662,9 @@ final class EventTest extends TestCase
 
         $this->subject->setGlobalUnregistrationDeadline(1);
         $this->subject->setUnregistrationDeadline(
-            $this->now + (6 * \Tx_Oelib_Time::SECONDS_PER_DAY)
+            $this->now + (6 * Time::SECONDS_PER_DAY)
         );
-        $this->subject->setBeginDate($this->now + \Tx_Oelib_Time::SECONDS_PER_WEEK);
+        $this->subject->setBeginDate($this->now + Time::SECONDS_PER_WEEK);
 
         self::assertTrue(
             $this->subject->isUnregistrationPossible()
@@ -7289,7 +7290,7 @@ final class EventTest extends TestCase
         $this->addSpeakerRelation(['cancelation_period' => 1]);
 
         self::assertSame(
-            $GLOBALS['SIM_EXEC_TIME'] - \Tx_Oelib_Time::SECONDS_PER_DAY,
+            $GLOBALS['SIM_EXEC_TIME'] - Time::SECONDS_PER_DAY,
             $this->subject->getCancelationDeadline()
         );
     }
@@ -7304,7 +7305,7 @@ final class EventTest extends TestCase
         $this->addSpeakerRelation(['cancelation_period' => 42]);
 
         self::assertSame(
-            $GLOBALS['SIM_EXEC_TIME'] - (42 * \Tx_Oelib_Time::SECONDS_PER_DAY),
+            $GLOBALS['SIM_EXEC_TIME'] - (42 * Time::SECONDS_PER_DAY),
             $this->subject->getCancelationDeadline()
         );
     }
@@ -7540,7 +7541,7 @@ final class EventTest extends TestCase
     public function getEventDataForEventWithDateUsesHyphenAsDateSeparator()
     {
         $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME']);
-        $this->subject->setEndDate($GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY);
+        $this->subject->setEndDate($GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY);
 
         self::assertContains(
             '-',

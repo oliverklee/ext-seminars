@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\ViewHelpers;
 
+use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
@@ -103,10 +104,10 @@ class TimeRangeViewHelperTest extends TestCase
     {
         /** @var \Tx_Seminars_Model_AbstractTimeSpan $timeSpan */
         $timeSpan = $this->getMockForAbstractClass(\Tx_Seminars_Model_AbstractTimeSpan::class);
-        $timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE + \Tx_Oelib_Time::SECONDS_PER_HOUR);
+        $timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE + Time::SECONDS_PER_HOUR);
 
         self::assertSame(
-            \strftime(self::TIME_FORMAT, self::BEGIN_DATE + \Tx_Oelib_Time::SECONDS_PER_HOUR) . $this->translatedHours,
+            \strftime(self::TIME_FORMAT, self::BEGIN_DATE + Time::SECONDS_PER_HOUR) . $this->translatedHours,
             $this->subject->render($timeSpan)
         );
     }
@@ -118,11 +119,11 @@ class TimeRangeViewHelperTest extends TestCase
     {
         /** @var \Tx_Seminars_Model_AbstractTimeSpan $timeSpan */
         $timeSpan = $this->getMockForAbstractClass(\Tx_Seminars_Model_AbstractTimeSpan::class);
-        $timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE + \Tx_Oelib_Time::SECONDS_PER_HOUR);
-        $timeSpan->setEndDateAsUnixTimeStamp(self::BEGIN_DATE + \Tx_Oelib_Time::SECONDS_PER_HOUR);
+        $timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE + Time::SECONDS_PER_HOUR);
+        $timeSpan->setEndDateAsUnixTimeStamp(self::BEGIN_DATE + Time::SECONDS_PER_HOUR);
 
         self::assertSame(
-            \strftime(self::TIME_FORMAT, self::BEGIN_DATE + \Tx_Oelib_Time::SECONDS_PER_HOUR) . $this->translatedHours,
+            \strftime(self::TIME_FORMAT, self::BEGIN_DATE + Time::SECONDS_PER_HOUR) . $this->translatedHours,
             $this->subject->render($timeSpan)
         );
     }
@@ -134,14 +135,14 @@ class TimeRangeViewHelperTest extends TestCase
     {
         /** @var \Tx_Seminars_Model_AbstractTimeSpan $timeSpan */
         $timeSpan = $this->getMockForAbstractClass(\Tx_Seminars_Model_AbstractTimeSpan::class);
-        $timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE + \Tx_Oelib_Time::SECONDS_PER_HOUR);
-        $timeSpan->setEndDateAsUnixTimeStamp(self::BEGIN_DATE + 2 * \Tx_Oelib_Time::SECONDS_PER_HOUR);
+        $timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE + Time::SECONDS_PER_HOUR);
+        $timeSpan->setEndDateAsUnixTimeStamp(self::BEGIN_DATE + 2 * Time::SECONDS_PER_HOUR);
 
         self::assertSame(
-            strftime(self::TIME_FORMAT, self::BEGIN_DATE + \Tx_Oelib_Time::SECONDS_PER_HOUR) . '&#8211;' .
+            strftime(self::TIME_FORMAT, self::BEGIN_DATE + Time::SECONDS_PER_HOUR) . '&#8211;' .
             strftime(
                 self::TIME_FORMAT,
-                self::BEGIN_DATE + 2 * \Tx_Oelib_Time::SECONDS_PER_HOUR
+                self::BEGIN_DATE + 2 * Time::SECONDS_PER_HOUR
             ) . $this->translatedHours,
             $this->subject->render($timeSpan)
         );
@@ -155,14 +156,14 @@ class TimeRangeViewHelperTest extends TestCase
         $dash = '#DASH#';
         /** @var \Tx_Seminars_Model_AbstractTimeSpan $timeSpan */
         $timeSpan = $this->getMockForAbstractClass(\Tx_Seminars_Model_AbstractTimeSpan::class);
-        $timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE + \Tx_Oelib_Time::SECONDS_PER_HOUR);
-        $timeSpan->setEndDateAsUnixTimeStamp(self::BEGIN_DATE + 2 * \Tx_Oelib_Time::SECONDS_PER_HOUR);
+        $timeSpan->setBeginDateAsUnixTimeStamp(self::BEGIN_DATE + Time::SECONDS_PER_HOUR);
+        $timeSpan->setEndDateAsUnixTimeStamp(self::BEGIN_DATE + 2 * Time::SECONDS_PER_HOUR);
 
         self::assertSame(
-            strftime(self::TIME_FORMAT, self::BEGIN_DATE + \Tx_Oelib_Time::SECONDS_PER_HOUR) . $dash .
+            strftime(self::TIME_FORMAT, self::BEGIN_DATE + Time::SECONDS_PER_HOUR) . $dash .
             strftime(
                 self::TIME_FORMAT,
-                self::BEGIN_DATE + 2 * \Tx_Oelib_Time::SECONDS_PER_HOUR
+                self::BEGIN_DATE + 2 * Time::SECONDS_PER_HOUR
             ) . $this->translatedHours,
             $this->subject->render($timeSpan, $dash)
         );

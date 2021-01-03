@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Interfaces\ConfigurationCheckable;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Seminars\Bag\AbstractBag;
 use OliverKlee\Seminars\Csv\CsvDownloader;
@@ -21,7 +22,7 @@ use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements \Tx_Oelib_Interface_ConfigurationCheckable
+class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements ConfigurationCheckable
 {
     /**
      * @var string[]

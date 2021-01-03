@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Interfaces\ConfigurationCheckable;
 use OliverKlee\Seminars\OldModel\AbstractModel;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\ReferenceIndex;
@@ -19,7 +20,7 @@ use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_OldModel_Registration extends AbstractModel implements \Tx_Oelib_Interface_ConfigurationCheckable
+class Tx_Seminars_OldModel_Registration extends AbstractModel implements ConfigurationCheckable
 {
     /**
      * @var string[][]

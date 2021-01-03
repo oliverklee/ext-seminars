@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Model\FrontEndUser;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
@@ -4203,7 +4204,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         $deadline = $beginDate;
         /** @var \Tx_Seminars_OldModel_Speaker $speaker */
         foreach ($this->getSpeakerBag() as $speaker) {
-            $speakerDeadline = $beginDate - ($speaker->getCancelationPeriodInDays() * \Tx_Oelib_Time::SECONDS_PER_DAY);
+            $speakerDeadline = $beginDate - ($speaker->getCancelationPeriodInDays() * Time::SECONDS_PER_DAY);
             $deadline = min($speakerDeadline, $deadline);
         }
 
@@ -4418,7 +4419,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             return 0;
         }
 
-        $secondsForUnregistration = \Tx_Oelib_Time::SECONDS_PER_DAY
+        $secondsForUnregistration = Time::SECONDS_PER_DAY
             * $this->getConfValueInteger('unregistrationDeadlineDaysBeforeBeginDate');
 
         return $this->getBeginDateAsTimestamp() - $secondsForUnregistration;

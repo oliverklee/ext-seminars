@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Interfaces\Time;
+
 /**
  * This class represents a view helper for rendering a countdown.
  *
@@ -38,11 +40,11 @@ class Tx_Seminars_ViewHelper_Countdown
     {
         $seconds = $targetTime - (int)$GLOBALS['SIM_ACCESS_TIME'];
 
-        if ($seconds >= \Tx_Oelib_Time::SECONDS_PER_DAY) {
+        if ($seconds >= Time::SECONDS_PER_DAY) {
             $result = $this->getAsDays($seconds);
-        } elseif ($seconds >= \Tx_Oelib_Time::SECONDS_PER_HOUR) {
+        } elseif ($seconds >= Time::SECONDS_PER_HOUR) {
             $result = $this->getAsHours($seconds);
-        } elseif ($seconds >= \Tx_Oelib_Time::SECONDS_PER_MINUTE) {
+        } elseif ($seconds >= Time::SECONDS_PER_MINUTE) {
             $result = $this->getAsMinutes($seconds);
         } else {
             $result = $this->getAsSeconds($seconds);
@@ -60,7 +62,7 @@ class Tx_Seminars_ViewHelper_Countdown
      */
     protected function getAsDays(int $seconds): string
     {
-        $countdownValue = (int)\round($seconds / \Tx_Oelib_Time::SECONDS_PER_DAY);
+        $countdownValue = (int)\round($seconds / Time::SECONDS_PER_DAY);
         if ($countdownValue > 1 || $countdownValue === 0) {
             $countdownText = $this->translator->translate('countdown_days_plural');
         } else {
@@ -79,7 +81,7 @@ class Tx_Seminars_ViewHelper_Countdown
      */
     protected function getAsHours(int $seconds): string
     {
-        $countdownValue = (int)\round($seconds / \Tx_Oelib_Time::SECONDS_PER_HOUR);
+        $countdownValue = (int)\round($seconds / Time::SECONDS_PER_HOUR);
         if ($countdownValue > 1 || $countdownValue === 0) {
             $countdownText = $this->translator->translate('countdown_hours_plural');
         } else {
@@ -98,7 +100,7 @@ class Tx_Seminars_ViewHelper_Countdown
      */
     protected function getAsMinutes(int $seconds): string
     {
-        $countdownValue = (int)\round($seconds / \Tx_Oelib_Time::SECONDS_PER_MINUTE);
+        $countdownValue = (int)\round($seconds / Time::SECONDS_PER_MINUTE);
         if ($countdownValue > 1 || $countdownValue === 0) {
             $countdownText = $this->translator->translate('countdown_minutes_plural');
         } else {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 
+use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
@@ -449,7 +450,7 @@ final class SalutationTest extends TestCase
             'tx_seminars_seminars',
             [
                 'begin_date' => $GLOBALS['SIM_EXEC_TIME'],
-                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY,
+                'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
             ]
         );
 
@@ -465,7 +466,7 @@ final class SalutationTest extends TestCase
         self::assertContains(
             strftime($dateFormatD, $GLOBALS['SIM_EXEC_TIME']) .
             '-' .
-            strftime($dateFormatYMD, $GLOBALS['SIM_EXEC_TIME'] + \Tx_Oelib_Time::SECONDS_PER_DAY),
+            strftime($dateFormatYMD, $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY),
             $this->subject->createIntroduction('%s', $event)
         );
     }

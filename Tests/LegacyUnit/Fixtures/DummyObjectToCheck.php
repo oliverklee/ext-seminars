@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Fixtures;
 
+use OliverKlee\Oelib\Interfaces\ConfigurationCheckable;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 
 /**
@@ -11,7 +12,7 @@ use OliverKlee\Oelib\Templating\TemplateHelper;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class DummyObjectToCheck extends TemplateHelper implements \Tx_Oelib_Interface_ConfigurationCheckable
+class DummyObjectToCheck extends TemplateHelper implements ConfigurationCheckable
 {
     /**
      * @param array $configuration
