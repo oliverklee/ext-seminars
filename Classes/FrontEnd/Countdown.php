@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Exception\NotFoundException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -69,7 +70,7 @@ class Tx_Seminars_FrontEnd_Countdown extends \Tx_Seminars_FrontEnd_AbstractView
             $event = $this->mapper->findNextUpcoming();
 
             $message = $this->viewHelper->render($event->getBeginDateAsUnixTimeStamp());
-        } catch (\Tx_Oelib_Exception_NotFound $exception) {
+        } catch (NotFoundException $exception) {
             $message = $this->translate('message_countdown_noEventFound');
         }
 

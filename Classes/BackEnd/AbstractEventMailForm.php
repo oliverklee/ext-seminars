@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\BackEnd;
 
+use OliverKlee\Oelib\Configuration\PageFinder;
+use OliverKlee\Oelib\Exception\NotFoundException;
+use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminar\Email\Salutation;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
@@ -82,7 +85,7 @@ abstract class AbstractEventMailForm
      * @param int $eventUid UID of an event, must be > 0
      *
      * @throws \InvalidArgumentException
-     * @throws \Tx_Oelib_Exception_NotFound if event could not be instantiated
+     * @throws NotFoundException if event could not be instantiated
      */
     public function __construct(int $eventUid)
     {
@@ -93,7 +96,7 @@ abstract class AbstractEventMailForm
         $this->oldEvent = GeneralUtility::makeInstance(\Tx_Seminars_OldModel_Event::class, $eventUid);
 
         if (!$this->oldEvent->comesFromDatabase()) {
-            throw new \Tx_Oelib_Exception_NotFound('There is no event with this UID.', 1333292164);
+            throw new NotFoundException('There is no event with this UID.', 1333292164);
         }
 
         /** @var \Tx_Seminars_Mapper_Event $mapper */
@@ -138,7 +141,7 @@ abstract class AbstractEventMailForm
             $this->redirectToListView();
         }
 
-        $urlParameters = ['id' => \Tx_Oelib_PageFinder::getInstance()->getPageUid()];
+        $urlParameters = ['id' => PageFinder::getInstance()->getPageUid()];
         $formAction = $this->getRouteUrl(self::MODULE_NAME, $urlParameters);
 
         return '<fieldset id="EventMailForm"><form action="' . \htmlspecialchars($formAction, ENT_QUOTES | ENT_HTML5) .
@@ -485,10 +488,10 @@ abstract class AbstractEventMailForm
      */
     private function redirectToListView()
     {
-        $urlParameters = ['id' => \Tx_Oelib_PageFinder::getInstance()->getPageUid()];
+        $urlParameters = ['id' => PageFinder::getInstance()->getPageUid()];
         $url = $this->getRouteUrl(self::MODULE_NAME, $urlParameters);
 
-        \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Location: ' . $url);
+        HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Location: ' . $url);
     }
 
     /**

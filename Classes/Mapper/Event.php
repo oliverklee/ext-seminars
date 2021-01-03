@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
 use OliverKlee\Oelib\Mapper\FrontEndUserMapper;
 
@@ -68,7 +69,7 @@ class Tx_Seminars_Mapper_Event extends AbstractDataMapper
         try {
             /** @var \Tx_Seminars_Model_Event $result */
             $result = $this->findSingleByWhereClause(['publication_hash' => $publicationHash]);
-        } catch (\Tx_Oelib_Exception_NotFound $exception) {
+        } catch (NotFoundException $exception) {
             $result = null;
         }
 
@@ -111,7 +112,7 @@ class Tx_Seminars_Mapper_Event extends AbstractDataMapper
      *
      * @return \Tx_Seminars_Model_Event the next upcoming event
      *
-     * @throws \Tx_Oelib_Exception_NotFound
+     * @throws NotFoundException
      */
     public function findNextUpcoming(): \Tx_Seminars_Model_Event
     {
@@ -141,7 +142,7 @@ class Tx_Seminars_Mapper_Event extends AbstractDataMapper
             ->fetch();
 
         if ($row === false) {
-            throw new \Tx_Oelib_Exception_NotFound('Not found.', 1574004668);
+            throw new NotFoundException('Not found.', 1574004668);
         }
 
         /** @var \Tx_Seminars_Model_Event $next */

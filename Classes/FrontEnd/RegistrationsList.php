@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
@@ -101,15 +102,11 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_Abstr
                 $errorMessage = $this->seminar->canViewRegistrationsListMessage(
                     $this->whatToDisplay
                 );
-                \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader(
-                    'Status: 403 Forbidden'
-                );
+                HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 403 Forbidden');
             }
         } else {
             $errorMessage = $this->translate('message_wrongSeminarNumber');
-            \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader(
-                'Status: 404 Not Found'
-            );
+            HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 404 Not Found');
             $this->setMarker('title', '');
         }
 

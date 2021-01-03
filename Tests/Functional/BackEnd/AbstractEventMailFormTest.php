@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\BackEnd;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\Oelib\Configuration\PageFinder;
+use OliverKlee\Oelib\Http\HeaderCollector;
+use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Seminars\BackEnd\AbstractEventMailForm;
 use OliverKlee\Seminars\Tests\Functional\BackEnd\Fixtures\TestingEventMailForm;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
@@ -31,7 +34,7 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
     private $mailer = null;
 
     /**
-     * @var \Tx_Oelib_HeaderCollector
+     * @var HeaderCollector
      */
     private $headerProxy = null;
 
@@ -57,7 +60,7 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
         $mailerFactory->enableTestMode();
         $this->mailer = $mailerFactory->getMailer();
 
-        $headerProxyFactory = \Tx_Oelib_HeaderProxyFactory::getInstance();
+        $headerProxyFactory = HeaderProxyFactory::getInstance();
         $headerProxyFactory->enableTestMode();
         $this->headerProxy = $headerProxyFactory->getHeaderProxy();
     }
@@ -281,7 +284,7 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 
         $pageUid = 3;
-        \Tx_Oelib_PageFinder::getInstance()->setPageUid($pageUid);
+        PageFinder::getInstance()->setPageUid($pageUid);
 
         $subject = new TestingEventMailForm(4);
         $subject->setPostData(

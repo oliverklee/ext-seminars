@@ -5,7 +5,10 @@ declare(strict_types=1);
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Exception\NotFoundException;
+use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
+use OliverKlee\Oelib\Session\Session;
 use OliverKlee\Oelib\System\Typo3Version;
 use SJBR\StaticInfoTables\PiBaseApi;
 use SJBR\StaticInfoTables\Utility\LocalizationUtility;
@@ -415,7 +418,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
                 }
                 try {
                     $userMapper->findByUserName($userName);
-                } catch (\Tx_Oelib_Exception_NotFound $exception) {
+                } catch (NotFoundException $exception) {
                     $isUnique = true;
                 }
 
@@ -701,7 +704,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
     {
         if (
             $this->getConfValueBoolean('logOutOneTimeAccountsAfterRegistration')
-            && \Tx_Oelib_Session::getInstance(\Tx_Oelib_Session::TYPE_USER)->getAsBoolean('onetimeaccount')
+            && Session::getInstance(Session::TYPE_USER)->getAsBoolean('onetimeaccount')
         ) {
             $this->getFrontEndController()->fe_user->logoff();
             if (Typo3Version::isNotHigherThan(8)) {
@@ -1547,7 +1550,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
 
         foreach ($parametersToSave as $currentKey) {
             if (isset($parameters[$currentKey])) {
-                \Tx_Oelib_Session::getInstance(\Tx_Oelib_Session::TYPE_USER)
+                Session::getInstance(Session::TYPE_USER)
                     ->setAsString($this->prefixId . '_' . $currentKey, $parameters[$currentKey]);
             }
         }
@@ -1575,8 +1578,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      */
     public function retrieveDataFromSession(array $parameters): string
     {
-        return \Tx_Oelib_Session::getInstance(\Tx_Oelib_Session::TYPE_USER)
-            ->getAsString($this->prefixId . '_' . $parameters['key']);
+        return Session::getInstance(Session::TYPE_USER)->getAsString($this->prefixId . '_' . $parameters['key']);
     }
 
     /**
@@ -1733,7 +1735,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
                     )
                 )
             );
-            \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Location:' . $redirectUrl);
+            HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Location:' . $redirectUrl);
             exit;
         }
 

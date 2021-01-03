@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\BackEnd;
 
+use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\BackendRegistrationListView;
@@ -174,7 +175,7 @@ class RegistrationsList extends AbstractList
 
             try {
                 $userName = \htmlspecialchars($registration->getUserName(), ENT_QUOTES | ENT_HTML5);
-            } catch (\Tx_Oelib_Exception_NotFound $exception) {
+            } catch (NotFoundException $exception) {
                 $userName = $languageService->getLL('registrationlist.deleted');
             }
             $event = $registration->getSeminarObject();

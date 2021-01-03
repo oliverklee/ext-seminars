@@ -7,6 +7,8 @@ namespace OliverKlee\Seminars\Tests\Functional\Csv;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Http\HeaderCollector;
+use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 
@@ -30,7 +32,7 @@ final class CsvDownloaderTest extends FunctionalTestCase
     private $subject = null;
 
     /**
-     * @var \Tx_Oelib_HeaderCollector
+     * @var HeaderCollector
      */
     private $headerProxy = null;
 
@@ -43,7 +45,7 @@ final class CsvDownloaderTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        $headerProxyFactory = \Tx_Oelib_HeaderProxyFactory::getInstance();
+        $headerProxyFactory = HeaderProxyFactory::getInstance();
         $headerProxyFactory->enableTestMode();
         $this->headerProxy = $headerProxyFactory->getHeaderProxy();
 

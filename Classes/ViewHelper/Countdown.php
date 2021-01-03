@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\Interfaces\Time;
+use OliverKlee\Oelib\Language\Translator;
+use OliverKlee\Oelib\Language\TranslatorRegistry;
 
 /**
  * This class represents a view helper for rendering a countdown.
@@ -12,7 +14,7 @@ use OliverKlee\Oelib\Interfaces\Time;
 class Tx_Seminars_ViewHelper_Countdown
 {
     /**
-     * @var \Tx_Oelib_Translator
+     * @var Translator
      */
     protected $translator = null;
 
@@ -21,7 +23,7 @@ class Tx_Seminars_ViewHelper_Countdown
      */
     public function __construct()
     {
-        $this->translator = \Tx_Oelib_TranslatorRegistry::get('seminars');
+        $this->translator = TranslatorRegistry::get('seminars');
     }
 
     /**

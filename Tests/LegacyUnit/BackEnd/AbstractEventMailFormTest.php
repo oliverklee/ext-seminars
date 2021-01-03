@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\BackEnd;
 
+use OliverKlee\Oelib\Configuration\PageFinder;
+use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\Functional\BackEnd\Fixtures\TestingEventMailForm;
@@ -46,7 +48,7 @@ class AbstractEventMailFormTest extends TestCase
         $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
         $mailerFactory->enableTestMode();
 
-        \Tx_Oelib_PageFinder::getInstance()->setPageUid($this->testingFramework->createSystemFolder());
+        PageFinder::getInstance()->setPageUid($this->testingFramework->createSystemFolder());
 
         $organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
@@ -91,12 +93,8 @@ class AbstractEventMailFormTest extends TestCase
      */
     public function renderThrowsExceptionForInvalidEventUid()
     {
-        $this->expectException(
-            \Tx_Oelib_Exception_NotFound::class
-        );
-        $this->expectExceptionMessage(
-            'There is no event with this UID.'
-        );
+        $this->expectException(NotFoundException::class);
+        $this->expectExceptionMessage('There is no event with this UID.');
 
         new TestingEventMailForm(
             $this->testingFramework->getAutoIncrement('tx_seminars_seminars')
@@ -112,7 +110,7 @@ class AbstractEventMailFormTest extends TestCase
      */
     public function formActionContainsCurrentPage()
     {
-        \Tx_Oelib_PageFinder::getInstance()->setPageUid(42);
+        PageFinder::getInstance()->setPageUid(42);
 
         self::assertContains(
             '&amp;id=42',

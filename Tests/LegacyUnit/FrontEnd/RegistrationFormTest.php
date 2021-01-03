@@ -6,6 +6,8 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 
 use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Session\FakeSession;
+use OliverKlee\Oelib\Session\Session;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
@@ -35,7 +37,7 @@ class RegistrationFormTest extends TestCase
     private $testingFramework = null;
 
     /**
-     * @var \Tx_Oelib_FakeSession
+     * @var FakeSession
      */
     private $session = null;
 
@@ -55,8 +57,8 @@ class RegistrationFormTest extends TestCase
         $frontEndPageUid = $this->testingFramework->createFrontEndPage();
         $this->testingFramework->createFakeFrontEnd($frontEndPageUid);
 
-        $this->session = new \Tx_Oelib_FakeSession();
-        \Tx_Oelib_Session::setInstance(\Tx_Oelib_Session::TYPE_USER, $this->session);
+        $this->session = new FakeSession();
+        Session::setInstance(Session::TYPE_USER, $this->session);
 
         $configurationRegistry = ConfigurationRegistry::getInstance();
         $configuration = new Configuration();

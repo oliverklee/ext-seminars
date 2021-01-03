@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\SchedulerTasks;
 use OliverKlee\Oelib\Authentication\BackEndLoginManager;
 use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Configuration\PageFinder;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\Csv\EmailRegistrationListView;
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
@@ -430,7 +431,7 @@ class MailNotifier extends AbstractTask
 
     protected function getConfiguration(): Configuration
     {
-        \Tx_Oelib_PageFinder::getInstance()->setPageUid($this->getConfigurationPageUid());
+        PageFinder::getInstance()->setPageUid($this->getConfigurationPageUid());
 
         return ConfigurationRegistry::get('plugin.tx_seminars');
     }

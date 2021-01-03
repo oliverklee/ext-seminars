@@ -7,12 +7,14 @@ use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
+use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Mapper\CountryMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\AbstractModel;
 use OliverKlee\Oelib\Model\BackEndUser;
 use OliverKlee\Oelib\Model\Country;
 use OliverKlee\Oelib\Templating\Template;
+use OliverKlee\Oelib\Visibility\Tree;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -1103,11 +1105,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      */
     private function getHiddenSubparts(): array
     {
-        /** @var \Tx_Oelib_Visibility_Tree $visibilityTree */
-        $visibilityTree = GeneralUtility::makeInstance(
-            \Tx_Oelib_Visibility_Tree::class,
-            $this->createTemplateStructure()
-        );
+        /** @var Tree $visibilityTree */
+        $visibilityTree = GeneralUtility::makeInstance(Tree::class, $this->createTemplateStructure());
 
         $visibilityTree->makeNodesVisible($this->getFieldsToShow());
         return $visibilityTree->getKeysOfHiddenSubparts();
@@ -1116,8 +1115,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Creates the template subpart structure.
      *
-     * @return array the template's subpart structure for use with
-     *               \Tx_Oelib_Visibility_Tree
+     * @return array the template's subpart structure for use with Tree
      */
     private function createTemplateStructure(): array
     {
@@ -1836,7 +1834,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         try {
             /** @var \Tx_Seminars_Model_Place $place */
             $place = $placeMapper->find((int)$placeUid);
-        } catch (\Tx_Oelib_Exception_NotFound $exception) {
+        } catch (NotFoundException $exception) {
             return $form->majixExecJs(
                 'alert("A place with the given UID does not exist.");'
             );
@@ -1856,7 +1854,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
             } else {
                 $countryUid = 0;
             }
-        } catch (\Tx_Oelib_Exception_NotFound $exception) {
+        } catch (NotFoundException $exception) {
             $countryUid = 0;
         }
 
@@ -2140,7 +2138,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         try {
             /** @var \Tx_Seminars_Model_Speaker $speaker */
             $speaker = $speakerMapper->find((int)$speakerUid);
-        } catch (\Tx_Oelib_Exception_NotFound $exception) {
+        } catch (NotFoundException $exception) {
             return $form->majixExecJs(
                 'alert("A speaker with the given UID does not exist.");'
             );
@@ -2383,7 +2381,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         try {
             /** @var \Tx_Seminars_Model_Checkbox $checkbox */
             $checkbox = $checkboxMapper->find((int)$checkboxUid);
-        } catch (\Tx_Oelib_Exception_NotFound $exception) {
+        } catch (NotFoundException $exception) {
             return $form->majixExecJs(
                 'alert("A checkbox with the given UID does not exist.");'
             );
@@ -2636,7 +2634,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         try {
             /** @var \Tx_Seminars_Model_TargetGroup $targetGroup */
             $targetGroup = $targetGroupMapper->find((int)$targetGroupUid);
-        } catch (\Tx_Oelib_Exception_NotFound $exception) {
+        } catch (NotFoundException $exception) {
             return $form->majixExecJs(
                 'alert("A target group with the given UID does not exist.");'
             );

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 
 use OliverKlee\Oelib\Configuration\ConfigurationProxy;
+use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
@@ -50,7 +51,7 @@ class RegistrationsListTest extends TestCase
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
         ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', false);
-        \Tx_Oelib_HeaderProxyFactory::getInstance()->enableTestMode();
+        HeaderProxyFactory::getInstance()->enableTestMode();
 
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
@@ -229,7 +230,7 @@ class RegistrationsListTest extends TestCase
 
         self::assertEquals(
             'Status: 404 Not Found',
-            \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
+            HeaderProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
         );
     }
 
@@ -248,7 +249,7 @@ class RegistrationsListTest extends TestCase
 
         self::assertEquals(
             'Status: 404 Not Found',
-            \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
+            HeaderProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
         );
     }
 
@@ -261,7 +262,7 @@ class RegistrationsListTest extends TestCase
 
         self::assertEquals(
             'Status: 403 Forbidden',
-            \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
+            HeaderProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
         );
     }
 
@@ -275,7 +276,7 @@ class RegistrationsListTest extends TestCase
 
         self::assertEquals(
             'Status: 403 Forbidden',
-            \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
+            HeaderProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
         );
     }
 
@@ -289,7 +290,7 @@ class RegistrationsListTest extends TestCase
 
         self::assertNotContains(
             '403',
-            \Tx_Oelib_HeaderProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
+            HeaderProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
         );
     }
 

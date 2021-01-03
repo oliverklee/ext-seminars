@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Unit\FrontEnd;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use OliverKlee\Oelib\Session\FakeSession;
+use OliverKlee\Oelib\Session\Session;
 use Prophecy\Prophecy\ObjectProphecy;
 use Prophecy\Prophecy\ProphecySubjectInterface;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
@@ -37,7 +39,7 @@ final class RegistrationFormTest extends UnitTestCase
     ];
 
     /**
-     * @var \Tx_Oelib_FakeSession
+     * @var FakeSession
      */
     private $session = null;
 
@@ -83,8 +85,8 @@ final class RegistrationFormTest extends UnitTestCase
         $user = $this->userProphecy->reveal();
         $frontEnd->fe_user = $user;
 
-        $this->session = new \Tx_Oelib_FakeSession();
-        \Tx_Oelib_Session::setInstance(\Tx_Oelib_Session::TYPE_USER, $this->session);
+        $this->session = new FakeSession();
+        Session::setInstance(Session::TYPE_USER, $this->session);
 
         $this->eventProphecy = $this->prophesize(\Tx_Seminars_OldModel_Event::class);
         $this->event = $this->eventProphecy->reveal();
@@ -92,7 +94,7 @@ final class RegistrationFormTest extends UnitTestCase
 
     protected function tearDown()
     {
-        \Tx_Oelib_Session::purgeInstances();
+        Session::purgeInstances();
         parent::tearDown();
     }
 
