@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Mapper\AbstractDataMapper;
+
 /**
  * This class represents a mapper for event types.
  *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
-class Tx_Seminars_Mapper_EventType extends \Tx_Oelib_DataMapper
+class Tx_Seminars_Mapper_EventType extends AbstractDataMapper
 {
     /**
      * @var string the name of the database table for this mapper

@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Mapper\AbstractDataMapper;
 use OliverKlee\Oelib\Mapper\CurrencyMapper;
 
 /**
@@ -10,7 +11,7 @@ use OliverKlee\Oelib\Mapper\CurrencyMapper;
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-class Tx_Seminars_Mapper_Registration extends \Tx_Oelib_DataMapper
+class Tx_Seminars_Mapper_Registration extends AbstractDataMapper
 {
     /**
      * @var string the name of the database table for this mapper
