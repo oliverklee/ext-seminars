@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Oelib\Mapper\CountryMapper;
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\AbstractModel;
 use OliverKlee\Oelib\Model\Country;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
@@ -141,8 +143,8 @@ class Tx_Seminars_Model_Place extends AbstractModel implements Titled
         }
 
         try {
-            /** @var \Tx_Oelib_Mapper_Country $mapper */
-            $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_Country::class);
+            /** @var CountryMapper $mapper */
+            $mapper = MapperRegistry::get(CountryMapper::class);
             $country = $mapper->findByIsoAlpha2Code($countryCode);
         } catch (\Tx_Oelib_Exception_NotFound $exception) {
             $country = null;

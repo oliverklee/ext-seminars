@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Mapper\LanguageMapper;
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\PhpUnit\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
@@ -1180,8 +1182,8 @@ class EventTest extends TestCase
     {
         $this->subject->setData(['language' => 'DE']);
 
-        /** @var \Tx_Oelib_Mapper_Language $mapper */
-        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_Language::class);
+        /** @var LanguageMapper $mapper */
+        $mapper = MapperRegistry::get(LanguageMapper::class);
         self::assertSame(
             $mapper->findByIsoAlpha2Code('DE'),
             $this->subject->getLanguage()
@@ -1193,8 +1195,8 @@ class EventTest extends TestCase
      */
     public function setLanguageSetsLanguage()
     {
-        /** @var \Tx_Oelib_Mapper_Language $mapper */
-        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_Language::class);
+        /** @var LanguageMapper $mapper */
+        $mapper = MapperRegistry::get(LanguageMapper::class);
         $language = $mapper->findByIsoAlpha2Code('DE');
         $this->subject->setLanguage($language);
 
@@ -1221,8 +1223,8 @@ class EventTest extends TestCase
      */
     public function hasLanguageWithLanguageReturnsTrue()
     {
-        /** @var \Tx_Oelib_Mapper_Language $mapper */
-        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_Language::class);
+        /** @var LanguageMapper $mapper */
+        $mapper = MapperRegistry::get(LanguageMapper::class);
         $language = $mapper->findByIsoAlpha2Code('DE');
         $this->subject->setLanguage($language);
 
@@ -2212,10 +2214,8 @@ class EventTest extends TestCase
     public function getRegularRegistrationsReturnsRegularRegistrations()
     {
         $registrations = new Collection();
-        $registration = \Tx_Oelib_MapperRegistry
-            ::get(\Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
-                ['registration_queue' => 0]
-            );
+        $registration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)
+            ->getLoadedTestingModel(['registration_queue' => 0]);
         $registrations->add($registration);
         $this->subject->setRegistrations($registrations);
 
@@ -2231,10 +2231,8 @@ class EventTest extends TestCase
     public function getRegularRegistrationsNotReturnsQueueRegistrations()
     {
         $registrations = new Collection();
-        $registration = \Tx_Oelib_MapperRegistry
-            ::get(\Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
-                ['registration_queue' => 1]
-            );
+        $registration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)
+            ->getLoadedTestingModel(['registration_queue' => 1]);
         $registrations->add($registration);
         $this->subject->setRegistrations($registrations);
 
@@ -2249,10 +2247,8 @@ class EventTest extends TestCase
     public function getQueueRegistrationsReturnsQueueRegistrations()
     {
         $registrations = new Collection();
-        $registration = \Tx_Oelib_MapperRegistry
-            ::get(\Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
-                ['registration_queue' => 1]
-            );
+        $registration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)
+            ->getLoadedTestingModel(['registration_queue' => 1]);
         $registrations->add($registration);
         $this->subject->setRegistrations($registrations);
 
@@ -2268,10 +2264,8 @@ class EventTest extends TestCase
     public function getQueueRegistrationsNotReturnsRegularRegistrations()
     {
         $registrations = new Collection();
-        $registration = \Tx_Oelib_MapperRegistry
-            ::get(\Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
-                ['registration_queue' => 0]
-            );
+        $registration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)
+            ->getLoadedTestingModel(['registration_queue' => 0]);
         $registrations->add($registration);
         $this->subject->setRegistrations($registrations);
 
@@ -2286,10 +2280,8 @@ class EventTest extends TestCase
     public function hasQueueRegistrationsForOneQueueRegistrationReturnsTrue()
     {
         $registrations = new Collection();
-        $registration = \Tx_Oelib_MapperRegistry
-            ::get(\Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
-                ['registration_queue' => 1]
-            );
+        $registration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)
+            ->getLoadedTestingModel(['registration_queue' => 1]);
         $registrations->add($registration);
         /** @var \Tx_Seminars_Model_Event|MockObject $event */
         $event = $this->createPartialMock(
@@ -2428,10 +2420,8 @@ class EventTest extends TestCase
     public function getRegisteredSeatsCountsSingleSeatRegularRegistrations()
     {
         $registrations = new Collection();
-        $registration = \Tx_Oelib_MapperRegistry
-            ::get(\Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
-                ['seats' => 1]
-            );
+        $registration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)
+            ->getLoadedTestingModel(['seats' => 1]);
         $registrations->add($registration);
         /** @var \Tx_Seminars_Model_Event|MockObject $event */
         $event = $this->createPartialMock(
@@ -2454,10 +2444,8 @@ class EventTest extends TestCase
     public function getRegisteredSeatsCountsMultiSeatRegularRegistrations()
     {
         $registrations = new Collection();
-        $registration = \Tx_Oelib_MapperRegistry
-            ::get(\Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
-                ['seats' => 2]
-            );
+        $registration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)
+            ->getLoadedTestingModel(['seats' => 2]);
         $registrations->add($registration);
         /** @var \Tx_Seminars_Model_Event|MockObject $event */
         $event = $this->createPartialMock(
@@ -2480,10 +2468,8 @@ class EventTest extends TestCase
     public function getRegisteredSeatsNotCountsQueueRegistrations()
     {
         $queueRegistrations = new Collection();
-        $registration = \Tx_Oelib_MapperRegistry
-            ::get(\Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel(
-                ['seats' => 1]
-            );
+        $registration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)
+            ->getLoadedTestingModel(['seats' => 1]);
         $queueRegistrations->add($registration);
         /** @var \Tx_Seminars_Model_Event|MockObject $event */
         $event = $this->createPartialMock(
@@ -2877,8 +2863,7 @@ class EventTest extends TestCase
         $this->subject->setRegistrations(new Collection());
 
         /** @var \Tx_Seminars_Model_Registration $registration */
-        $registration = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)
-            ->getLoadedTestingModel([]);
+        $registration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel([]);
         $this->subject->attachRegistration($registration);
 
         self::assertTrue(
@@ -2892,14 +2877,12 @@ class EventTest extends TestCase
     public function attachRegistrationNotRemovesExistingRegistration()
     {
         $registrations = new Collection();
-        $oldRegistration = \Tx_Oelib_MapperRegistry
-            ::get(\Tx_Seminars_Mapper_Registration::class)->getNewGhost();
+        $oldRegistration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)->getNewGhost();
         $registrations->add($oldRegistration);
         $this->subject->setRegistrations($registrations);
 
         /** @var \Tx_Seminars_Model_Registration $newRegistration */
-        $newRegistration = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)
-            ->getLoadedTestingModel([]);
+        $newRegistration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel([]);
         $this->subject->attachRegistration($newRegistration);
 
         self::assertTrue(
@@ -2915,9 +2898,7 @@ class EventTest extends TestCase
         $this->subject->setRegistrations(new Collection());
 
         /** @var \Tx_Seminars_Model_Registration $registration */
-        $registration = \Tx_Oelib_MapperRegistry
-            ::get(\Tx_Seminars_Mapper_Registration::class)
-            ->getLoadedTestingModel([]);
+        $registration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel([]);
         $this->subject->attachRegistration($registration);
 
         self::assertSame(

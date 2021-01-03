@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Interfaces\Time;
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
@@ -1209,7 +1210,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
 
         /** @var \Tx_Seminars_Model_Event $event */
-        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->find($this->seminarUid);
+        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->find($this->seminarUid);
         $hook = $this->createMock(\Tx_Seminars_Interface_Hook_EventSingleView::class);
         $hook->expects(self::once())->method('modifyEventSingleView')->with($event, self::anything());
         // We don't test for the second parameter (the template instance here)
@@ -1992,7 +1993,7 @@ class DefaultControllerTest extends TestCase
         );
 
         /** @var \Tx_Seminars_Model_TimeSlot $timeSlot */
-        $timeSlot = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_TimeSlot::class)->find($timeSlotUid);
+        $timeSlot = MapperRegistry::get(\Tx_Seminars_Mapper_TimeSlot::class)->find($timeSlotUid);
         $hook = $this->createMock(\Tx_Seminars_Interface_Hook_EventSingleView::class);
         $hook->expects(self::once())->method('modifyTimeSlotListRow')->with($timeSlot, self::anything());
         // We don't test for the second parameter (the template instance here)
@@ -7874,7 +7875,7 @@ class DefaultControllerTest extends TestCase
         $eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->willReturn('');
 
         /** @var \Tx_Seminars_Model_Event $event */
-        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
         /** @var TestingDefaultController|MockObject $subject */
         $subject = $this->createPartialMock(
@@ -7902,9 +7903,8 @@ class DefaultControllerTest extends TestCase
         $eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->willReturn('');
 
         /** @var \Tx_Seminars_Model_Event $event */
-        $event = \Tx_Oelib_MapperRegistry::get(
-            \Tx_Seminars_Mapper_Event::class
-        )->getLoadedTestingModel(['publication_hash' => 'foo']);
+        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+            ->getLoadedTestingModel(['publication_hash' => 'foo']);
 
         /** @var TestingDefaultController|MockObject $subject */
         $subject = $this->createPartialMock(
@@ -7934,7 +7934,7 @@ class DefaultControllerTest extends TestCase
         );
 
         /** @var \Tx_Seminars_Model_Event $event */
-        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
         /** @var TestingDefaultController|MockObject $subject */
         $subject = $this->createPartialMock(
@@ -7962,7 +7962,7 @@ class DefaultControllerTest extends TestCase
         $eventEditor->expects(self::once())->method('hasAccessMessage')->willReturn('');
 
         /** @var \Tx_Seminars_Model_Event $event */
-        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
         /** @var TestingDefaultController|MockObject $subject */
         $subject = $this->createPartialMock(
@@ -7988,9 +7988,8 @@ class DefaultControllerTest extends TestCase
         $eventEditor->expects(self::once())->method('hasAccessMessage')->willReturn('');
 
         /** @var \Tx_Seminars_Model_Event $event */
-        $event = \Tx_Oelib_MapperRegistry::get(
-            \Tx_Seminars_Mapper_Event::class
-        )->getLoadedTestingModel(['publication_hash' => 'foo']);
+        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+            ->getLoadedTestingModel(['publication_hash' => 'foo']);
 
         /** @var TestingDefaultController|MockObject $subject */
         $subject = $this->createPartialMock(
@@ -8016,7 +8015,7 @@ class DefaultControllerTest extends TestCase
         $eventEditor->expects(self::once())->method('hasAccessMessage')->willReturn('access denied');
 
         /** @var \Tx_Seminars_Model_Event $event */
-        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
         /** @var TestingDefaultController|MockObject $subject */
         $subject = $this->createPartialMock(
@@ -8042,7 +8041,7 @@ class DefaultControllerTest extends TestCase
         $eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->willReturn('');
 
         /** @var \Tx_Seminars_Model_Event $event */
-        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
         /** @var TestingDefaultController|MockObject $subject */
         $subject = $this->createPartialMock(
@@ -8070,9 +8069,8 @@ class DefaultControllerTest extends TestCase
         $eventEditor->expects(self::atLeastOnce())->method('hasAccessMessage')->willReturn('');
 
         /** @var \Tx_Seminars_Model_Event $event */
-        $event = \Tx_Oelib_MapperRegistry::get(
-            \Tx_Seminars_Mapper_Event::class
-        )->getLoadedTestingModel(['publication_hash' => 'foo']);
+        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+            ->getLoadedTestingModel(['publication_hash' => 'foo']);
 
         /** @var TestingDefaultController|MockObject $subject */
         $subject = $this->createPartialMock(
@@ -8102,7 +8100,7 @@ class DefaultControllerTest extends TestCase
         );
 
         /** @var \Tx_Seminars_Model_Event $event */
-        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
         /** @var TestingDefaultController|MockObject $subject */
         $subject = $this->createPartialMock(
@@ -8130,7 +8128,7 @@ class DefaultControllerTest extends TestCase
         $eventEditor->expects(self::once())->method('hasAccessMessage')->willReturn('');
 
         /** @var \Tx_Seminars_Model_Event $event */
-        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
         /** @var TestingDefaultController|MockObject $subject */
         $subject = $this->createPartialMock(
@@ -8157,7 +8155,7 @@ class DefaultControllerTest extends TestCase
         $eventEditor->expects(self::once())->method('hasAccessMessage')->willReturn('');
 
         /** @var \Tx_Seminars_Model_Event $event */
-        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
         /** @var TestingDefaultController|MockObject $subject */
         $subject = $this->createPartialMock(
@@ -8181,7 +8179,7 @@ class DefaultControllerTest extends TestCase
     {
         /** @var \Tx_Seminars_Mapper_Event|MockObject $mapper */
         $mapper = $this->getMockBuilder(\Tx_Seminars_Mapper_Event::class)->setMethods(['save'])->getMock();
-        \Tx_Oelib_MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $mapper);
+        MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $mapper);
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = $mapper->getLoadedTestingModel([]);
@@ -8202,7 +8200,7 @@ class DefaultControllerTest extends TestCase
     {
         /** @var \Tx_Seminars_Mapper_Event|MockObject $mapper */
         $mapper = $this->getMockBuilder(\Tx_Seminars_Mapper_Event::class)->setMethods(['save'])->getMock();
-        \Tx_Oelib_MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $mapper);
+        MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $mapper);
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = $mapper->getLoadedTestingModel(['hidden' => 1]);
@@ -8223,7 +8221,7 @@ class DefaultControllerTest extends TestCase
     {
         /** @var \Tx_Seminars_Mapper_Event|MockObject $mapper */
         $mapper = $this->getMockBuilder(\Tx_Seminars_Mapper_Event::class)->setMethods(['save'])->getMock();
-        \Tx_Oelib_MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $mapper);
+        MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $mapper);
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = $mapper->getLoadedTestingModel([]);
@@ -8241,7 +8239,7 @@ class DefaultControllerTest extends TestCase
     {
         /** @var \Tx_Seminars_Mapper_Event|MockObject $mapper */
         $mapper = $this->getMockBuilder(\Tx_Seminars_Mapper_Event::class)->setMethods(['save'])->getMock();
-        \Tx_Oelib_MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $mapper);
+        MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $mapper);
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = $mapper->getLoadedTestingModel([]);
@@ -8264,7 +8262,7 @@ class DefaultControllerTest extends TestCase
     {
         /** @var \Tx_Seminars_Mapper_Event|MockObject $mapper */
         $mapper = $this->getMockBuilder(\Tx_Seminars_Mapper_Event::class)->setMethods(['save'])->getMock();
-        \Tx_Oelib_MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $mapper);
+        MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $mapper);
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = $mapper->getLoadedTestingModel(['hidden' => 1]);
@@ -8285,7 +8283,7 @@ class DefaultControllerTest extends TestCase
     {
         /** @var \Tx_Seminars_Mapper_Event|MockObject $mapper */
         $mapper = $this->getMockBuilder(\Tx_Seminars_Mapper_Event::class)->setMethods(['save'])->getMock();
-        \Tx_Oelib_MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $mapper);
+        MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $mapper);
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = $mapper->getLoadedTestingModel([]);
@@ -8306,7 +8304,7 @@ class DefaultControllerTest extends TestCase
     {
         /** @var \Tx_Seminars_Mapper_Event|MockObject $mapper */
         $mapper = $this->getMockBuilder(\Tx_Seminars_Mapper_Event::class)->setMethods(['save'])->getMock();
-        \Tx_Oelib_MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $mapper);
+        MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $mapper);
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = $mapper->getLoadedTestingModel([]);
@@ -8324,7 +8322,7 @@ class DefaultControllerTest extends TestCase
     {
         /** @var \Tx_Seminars_Mapper_Event|MockObject $mapper */
         $mapper = $this->getMockBuilder(\Tx_Seminars_Mapper_Event::class)->setMethods(['save'])->getMock();
-        \Tx_Oelib_MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $mapper);
+        MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $mapper);
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = $mapper->getLoadedTestingModel([]);
@@ -8347,7 +8345,7 @@ class DefaultControllerTest extends TestCase
     {
         /** @var \Tx_Seminars_Mapper_Event|MockObject $mapper */
         $mapper = $this->getMockBuilder(\Tx_Seminars_Mapper_Event::class)->setMethods(['save'])->getMock();
-        \Tx_Oelib_MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $mapper);
+        MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $mapper);
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = $mapper->getLoadedTestingModel(['title' => 'TDD for starters']);
@@ -8368,7 +8366,7 @@ class DefaultControllerTest extends TestCase
     {
         /** @var \Tx_Seminars_Mapper_Event|MockObject $mapper */
         $mapper = $this->getMockBuilder(\Tx_Seminars_Mapper_Event::class)->setMethods(['save'])->getMock();
-        \Tx_Oelib_MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $mapper);
+        MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $mapper);
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = $mapper->getLoadedTestingModel(['title' => 'TDD for starters']);
@@ -8393,7 +8391,7 @@ class DefaultControllerTest extends TestCase
     {
         /** @var \Tx_Seminars_Mapper_Event|MockObject $mapper */
         $mapper = $this->getMockBuilder(\Tx_Seminars_Mapper_Event::class)->setMethods(['save'])->getMock();
-        \Tx_Oelib_MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $mapper);
+        MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $mapper);
 
         /** @var \Tx_Seminars_Model_Event $event */
         $event = $mapper->getLoadedTestingModel([]);
@@ -8701,7 +8699,7 @@ class DefaultControllerTest extends TestCase
     public function eventsListCallsModifyListRowHook()
     {
         /** @var \Tx_Seminars_Model_Event $event */
-        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->find($this->seminarUid);
+        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->find($this->seminarUid);
 
         $hook = $this->createMock(\Tx_Seminars_Interface_Hook_EventListView::class);
         $hook->expects(self::once())->method('modifyListRow')->with($event, self::anything());
@@ -8740,7 +8738,7 @@ class DefaultControllerTest extends TestCase
 
         $registrationUid = $this->createLogInAndRegisterFeUser();
         /** @var \Tx_Seminars_Model_Registration $registration */
-        $registration = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)->find($registrationUid);
+        $registration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)->find($registrationUid);
 
         $hook = $this->createMock(\Tx_Seminars_Interface_Hook_EventListView::class);
         $hook->expects(self::once())->method('modifyMyEventsListRow')->with($registration, self::anything());
@@ -8760,7 +8758,7 @@ class DefaultControllerTest extends TestCase
     public function myEventsListCallsModifyListRowHook()
     {
         /** @var \Tx_Seminars_Model_Event $event */
-        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->find($this->seminarUid);
+        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->find($this->seminarUid);
 
         $this->testingFramework->createAndLoginFrontEndUser();
 
@@ -9022,7 +9020,7 @@ class DefaultControllerTest extends TestCase
     public function createSingleViewLinkCreatesLinkToSingleViewPage()
     {
         /** @var \Tx_Seminars_Model_Event $event */
-        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
         self::assertContains(
             'href="index.php?id=42&amp;tx_seminars_pi1%5BshowUid%5D=1337"',
@@ -9037,9 +9035,7 @@ class DefaultControllerTest extends TestCase
     {
         $this->subject->setConfigurationValue('linkToSingleView', 'always');
         /** @var \Tx_Seminars_Model_Event $event */
-        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(
-            ['description' => '']
-        );
+        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(['description' => '']);
 
         self::assertContains(
             '>foo</a>',
@@ -9054,9 +9050,8 @@ class DefaultControllerTest extends TestCase
     {
         $this->subject->setConfigurationValue('linkToSingleView', 'always');
         /** @var \Tx_Seminars_Model_Event $event */
-        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(
-            ['description' => 'Hello world!']
-        );
+        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+            ->getLoadedTestingModel(['description' => 'Hello world!']);
 
         self::assertContains(
             '>foo</a>',
@@ -9071,9 +9066,7 @@ class DefaultControllerTest extends TestCase
     {
         $this->subject->setConfigurationValue('linkToSingleView', 'never');
         /** @var \Tx_Seminars_Model_Event $event */
-        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(
-            ['description' => '']
-        );
+        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(['description' => '']);
 
         self::assertSame(
             'foo &amp; bar',
@@ -9088,9 +9081,8 @@ class DefaultControllerTest extends TestCase
     {
         $this->subject->setConfigurationValue('linkToSingleView', 'onlyForNonEmptyDescription');
         /** @var \Tx_Seminars_Model_Event $event */
-        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(
-            ['description' => 'Hello world!']
-        );
+        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+            ->getLoadedTestingModel(['description' => 'Hello world!']);
 
         self::assertContains(
             '>foo &amp; bar</a>',
@@ -9105,9 +9097,7 @@ class DefaultControllerTest extends TestCase
     {
         $this->subject->setConfigurationValue('linkToSingleView', 'onlyForNonEmptyDescription');
         /** @var \Tx_Seminars_Model_Event $event */
-        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(
-            ['description' => '']
-        );
+        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(['description' => '']);
 
         self::assertSame(
             'foo &amp; bar',
@@ -9122,9 +9112,8 @@ class DefaultControllerTest extends TestCase
     {
         $this->subject->setConfigurationValue('linkToSingleView', 'never');
         /** @var \Tx_Seminars_Model_Event $event */
-        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(
-            ['description' => 'Hello world!']
-        );
+        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+            ->getLoadedTestingModel(['description' => 'Hello world!']);
 
         self::assertSame(
             'foo &amp; bar',
@@ -9138,7 +9127,7 @@ class DefaultControllerTest extends TestCase
     public function createSingleViewLinkByDefaultHtmlSpecialCharsLinkText()
     {
         /** @var \Tx_Seminars_Model_Event $event */
-        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
         self::assertContains(
             'Chaos &amp; Confusion',
@@ -9152,7 +9141,7 @@ class DefaultControllerTest extends TestCase
     public function createSingleViewLinkByWithHtmlSpecialCharsTrueHtmlSpecialCharsLinkText()
     {
         /** @var \Tx_Seminars_Model_Event $event */
-        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
         self::assertContains(
             'Chaos &amp; Confusion',
@@ -9166,7 +9155,7 @@ class DefaultControllerTest extends TestCase
     public function createSingleViewLinkByWithHtmlSpecialCharsFalseNotHtmlSpecialCharsLinkText()
     {
         /** @var \Tx_Seminars_Model_Event $event */
-        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
         self::assertContains(
             'Chaos & Confusion',

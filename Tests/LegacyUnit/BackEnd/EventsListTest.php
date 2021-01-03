@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\BackEnd;
 
 use OliverKlee\Oelib\Authentication\BackEndLoginManager;
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\BackEnd\AbstractList;
@@ -59,10 +60,10 @@ class EventsListTest extends TestCase
 
         $this->subject = new EventsList($backEndModule);
 
-        $backEndGroup = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUserGroup::class)
+        $backEndGroup = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUserGroup::class)
             ->getLoadedTestingModel(['tx_seminars_events_folder' => $this->dummySysFolderPid + 1]);
         /** @var \Tx_Seminars_Model_BackEndUser $backEndUser */
-        $backEndUser = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUser::class)
+        $backEndUser = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUser::class)
             ->getLoadedTestingModel(['usergroup' => $backEndGroup->getUid()]);
         BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
     }
@@ -741,7 +742,7 @@ class EventsListTest extends TestCase
     public function testNewButtonForNoEventStorageSettingInUserGroupsSetsCurrentPageIdAsNewRecordPid()
     {
         /** @var \Tx_Seminars_Model_BackEndUser $backEndUser */
-        $backEndUser = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUser::class)->getLoadedTestingModel([]);
+        $backEndUser = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUser::class)->getLoadedTestingModel([]);
         BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
 
         self::assertContains((string)$this->dummySysFolderPid, $this->subject->show());
@@ -750,7 +751,7 @@ class EventsListTest extends TestCase
     public function testNewButtonForEventStoredOnCurrentPageHasCurrentFolderLabel()
     {
         /** @var \Tx_Seminars_Model_BackEndUser $backEndUser */
-        $backEndUser = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUser::class)->getLoadedTestingModel([]);
+        $backEndUser = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUser::class)->getLoadedTestingModel([]);
         BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
 
         self::assertContains(

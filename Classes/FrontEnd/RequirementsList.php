@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -87,7 +88,7 @@ class Tx_Seminars_FrontEnd_RequirementsList extends \Tx_Seminars_FrontEnd_Abstra
         $output = '';
 
         /** @var \Tx_Seminars_Mapper_Event $eventMapper */
-        $eventMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        $eventMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
         /** @var \Tx_Seminars_OldModel_Event $requirement */
         foreach ($this->getRequirements() as $requirement) {
             /** @var \Tx_Seminars_Model_Event $event */

@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Mapper\FrontEndUserMapper;
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\FrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
@@ -95,7 +97,7 @@ class RegistrationTest extends TestCase
     public function setFrontEndUserSetsFrontEndUser()
     {
         /** @var FrontEndUser $frontEndUser */
-        $frontEndUser = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_FrontEndUser::class)->getNewGhost();
+        $frontEndUser = MapperRegistry::get(FrontEndUserMapper::class)->getNewGhost();
         $this->subject->setFrontEndUser($frontEndUser);
 
         self::assertSame(
@@ -113,7 +115,7 @@ class RegistrationTest extends TestCase
      */
     public function getEventReturnsEvent()
     {
-        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
             ->getNewGhost();
         $this->subject->setData(['seminar' => $event]);
 
@@ -128,7 +130,7 @@ class RegistrationTest extends TestCase
      */
     public function getSeminarReturnsEvent()
     {
-        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
             ->getNewGhost();
         $this->subject->setData(['seminar' => $event]);
 
@@ -144,7 +146,7 @@ class RegistrationTest extends TestCase
     public function setEventSetsEvent()
     {
         /** @var \Tx_Seminars_Model_Event $event */
-        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getNewGhost();
+        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getNewGhost();
         $this->subject->setEvent($event);
 
         self::assertSame(
@@ -159,7 +161,7 @@ class RegistrationTest extends TestCase
     public function setSeminarSetsEvent()
     {
         /** @var \Tx_Seminars_Model_Event $event */
-        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getNewGhost();
+        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getNewGhost();
         $this->subject->setSeminar($event);
 
         self::assertSame(
@@ -562,7 +564,7 @@ class RegistrationTest extends TestCase
     public function setPaymentMethodSetsPaymentMethod()
     {
         /** @var \Tx_Seminars_Model_PaymentMethod $paymentMethod */
-        $paymentMethod = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
+        $paymentMethod = MapperRegistry::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
         $this->subject->setPaymentMethod($paymentMethod);
 
         self::assertSame(

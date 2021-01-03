@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\BackEnd;
 
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\BackendRegistrationListView;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -75,7 +76,7 @@ class RegistrationsList extends AbstractList
 
         $eventUid = (int)GeneralUtility::_GP('eventUid');
         /** @var \Tx_Seminars_Mapper_Event $mapper */
-        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
         if (($eventUid > 0) && $mapper->existsModel($eventUid)) {
             $this->eventUid = $eventUid;
             /** @var \Tx_Seminars_Model_Event $event */
@@ -164,7 +165,7 @@ class RegistrationsList extends AbstractList
         $languageService = $this->getLanguageService();
 
         /** @var \Tx_Seminars_Mapper_Registration $mapper */
-        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
 
         /** @var \Tx_Seminars_OldModel_Registration $registration */
         foreach ($registrationBag as $registration) {

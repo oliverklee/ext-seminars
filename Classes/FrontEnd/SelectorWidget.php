@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSelectorWidget;
 use SJBR\StaticInfoTables\PiBaseApi;
@@ -245,7 +246,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
             ->fetchAll();
 
         /** @var \Tx_Seminars_Mapper_Place $mapper */
-        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Place::class);
+        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Place::class);
         $this->places = $mapper->getListOfModels($dataOfPlaces);
     }
 

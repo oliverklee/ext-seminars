@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
+use OliverKlee\Oelib\Mapper\CountryMapper;
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\Country;
 use OliverKlee\PhpUnit\TestCase;
 
@@ -269,8 +271,8 @@ class PlaceTest extends TestCase
      */
     public function getCountryWithCountryReturnsCountryInstance()
     {
-        /** @var \Tx_Oelib_Mapper_Country $mapper */
-        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_Country::class);
+        /** @var CountryMapper $mapper */
+        $mapper = MapperRegistry::get(CountryMapper::class);
         /** @var Country $country */
         $country = $mapper->find(54);
         $this->subject->setData(['country' => $country->getIsoAlpha2Code()]);
@@ -286,8 +288,8 @@ class PlaceTest extends TestCase
      */
     public function getCountryWithCountryReturnsCountryAsModel()
     {
-        /** @var \Tx_Oelib_Mapper_Country $mapper */
-        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_Country::class);
+        /** @var CountryMapper $mapper */
+        $mapper = MapperRegistry::get(CountryMapper::class);
         /** @var Country $country */
         $country = $mapper->find(54);
         $this->subject->setData(['country' => $country->getIsoAlpha2Code()]);
@@ -303,8 +305,8 @@ class PlaceTest extends TestCase
      */
     public function setCountrySetsCountry()
     {
-        /** @var \Tx_Oelib_Mapper_Country $mapper */
-        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_Country::class);
+        /** @var CountryMapper $mapper */
+        $mapper = MapperRegistry::get(CountryMapper::class);
         /** @var Country $country */
         $country = $mapper->find(54);
         $this->subject->setCountry($country);
@@ -356,8 +358,8 @@ class PlaceTest extends TestCase
      */
     public function hasCountryWithCountryReturnsTrue()
     {
-        /** @var \Tx_Oelib_Mapper_Country $mapper */
-        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Oelib_Mapper_Country::class);
+        /** @var CountryMapper $mapper */
+        $mapper = MapperRegistry::get(CountryMapper::class);
         /** @var Country $country */
         $country = $mapper->find(54);
         $this->subject->setCountry($country);

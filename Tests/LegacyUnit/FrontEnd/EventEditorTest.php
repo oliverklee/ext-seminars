@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
@@ -52,7 +53,7 @@ class EventEditorTest extends TestCase
 
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
-        \Tx_Oelib_MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
+        MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
 
         $this->recordsPageUid = $this->testingFramework->createSystemFolder();
         $this->configuration = new \Tx_Oelib_Configuration();
@@ -2393,11 +2394,8 @@ class EventEditorTest extends TestCase
      */
     public function makeListToFormidableListForListWithOneElementReturnsModelDataInArray()
     {
-        $targetGroup = \Tx_Oelib_MapperRegistry::get(
-            \Tx_Seminars_Mapper_TargetGroup::class
-        )->getLoadedTestingModel(
-            ['title' => 'foo']
-        );
+        $targetGroup = MapperRegistry::get(\Tx_Seminars_Mapper_TargetGroup::class)
+            ->getLoadedTestingModel(['title' => 'foo']);
 
         $list = new Collection();
         $list->add($targetGroup);
@@ -2413,12 +2411,8 @@ class EventEditorTest extends TestCase
      */
     public function makeListToFormidableListForListWithTwoElementsReturnsArrayWithTwoModels()
     {
-        $targetGroup1 = \Tx_Oelib_MapperRegistry::get(
-            \Tx_Seminars_Mapper_TargetGroup::class
-        )->getLoadedTestingModel([]);
-        $targetGroup2 = \Tx_Oelib_MapperRegistry::get(
-            \Tx_Seminars_Mapper_TargetGroup::class
-        )->getLoadedTestingModel([]);
+        $targetGroup1 = MapperRegistry::get(\Tx_Seminars_Mapper_TargetGroup::class)->getLoadedTestingModel([]);
+        $targetGroup2 = MapperRegistry::get(\Tx_Seminars_Mapper_TargetGroup::class)->getLoadedTestingModel([]);
 
         $list = new Collection();
         $list->add($targetGroup1);

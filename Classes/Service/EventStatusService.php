@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Service;
 
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use TYPO3\CMS\Core\SingletonInterface;
 
 /**
@@ -23,7 +24,7 @@ class EventStatusService implements SingletonInterface
      */
     public function __construct()
     {
-        $this->eventMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        $this->eventMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
     }
 
     /**

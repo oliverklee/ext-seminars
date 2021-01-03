@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Service\EventStatusService;
@@ -51,11 +52,11 @@ final class EventStateServiceTest extends TestCase
 
         $this->testingFramework = new TestingFramework('tx_seminars');
 
-        \Tx_Oelib_MapperRegistry::denyDatabaseAccess();
-        \Tx_Oelib_MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
+        MapperRegistry::denyDatabaseAccess();
+        MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
 
         $this->eventMapper = $this->createMock(\Tx_Seminars_Mapper_Event::class);
-        \Tx_Oelib_MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $this->eventMapper);
+        MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $this->eventMapper);
 
         $this->subject = new EventStatusService();
     }

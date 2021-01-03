@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 
 use OliverKlee\Oelib\Interfaces\Time;
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
@@ -76,7 +77,7 @@ final class SalutationTest extends TestCase
      */
     private function createFrontEndUser(int $gender = OelibFrontEndUser::GENDER_MALE): \Tx_Seminars_Model_FrontEndUser
     {
-        return \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)
+        return MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)
             ->getLoadedTestingModel(['name' => 'Foo', 'gender' => $gender]);
     }
 

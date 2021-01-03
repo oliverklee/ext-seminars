@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\BackEnd;
 
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminar\Email\Salutation;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
@@ -96,7 +97,7 @@ abstract class AbstractEventMailForm
         }
 
         /** @var \Tx_Seminars_Mapper_Event $mapper */
-        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
         $this->event = $mapper->find($eventUid);
     }
 
@@ -404,7 +405,7 @@ abstract class AbstractEventMailForm
             $mailer = $mailerFactory->getMailer();
 
             /** @var \Tx_Seminars_Mapper_Registration $registrationMapper */
-            $registrationMapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+            $registrationMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
             /** @var \Tx_Seminars_OldModel_Registration $oldRegistration */
             foreach ($registrations as $oldRegistration) {
                 /** @var \Tx_Seminars_Model_Registration $registration */

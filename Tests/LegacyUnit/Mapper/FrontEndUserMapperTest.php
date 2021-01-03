@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
@@ -28,9 +29,7 @@ class FrontEndUserMapperTest extends TestCase
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
 
-        $this->subject = \Tx_Oelib_MapperRegistry::get(
-            \Tx_Seminars_Mapper_FrontEndUser::class
-        );
+        $this->subject = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
     }
 
     protected function tearDown()
@@ -59,7 +58,7 @@ class FrontEndUserMapperTest extends TestCase
      */
     public function relationToRegistrationIsReadFromRegistrationMapper()
     {
-        $registration = \Tx_Oelib_MapperRegistry
+        $registration = MapperRegistry
             ::get(\Tx_Seminars_Mapper_Registration::class)->getNewGhost();
 
         /** @var \Tx_Seminars_Model_FrontEndUser $model */

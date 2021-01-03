@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\BackEnd;
 
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\BackEnd\CancelEventMailForm;
@@ -34,7 +35,7 @@ class CancelEventMailFormTest extends TestCase
         $this->unifyTestingEnvironment();
 
         $this->testingFramework = new TestingFramework('tx_seminars');
-        \Tx_Oelib_MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
+        MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
 
         $dummySysFolderUid = $this->testingFramework->createSystemFolder();
         \Tx_Oelib_PageFinder::getInstance()->setPageUid($dummySysFolderUid);

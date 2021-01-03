@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
@@ -394,7 +395,7 @@ final class SingleViewLinkBuilderTest extends TestCase
     public function createAbsoluteUrlForEventWithExternalDetailsPageAddsProtocolAndNoSeminarParameter()
     {
         /** @var \Tx_Seminars_Model_Event $event */
-        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
             ->getLoadedTestingModel(['details_page' => 'www.example.com']);
 
         $subject = new TestingSingleViewLinkBuilder();
@@ -413,7 +414,7 @@ final class SingleViewLinkBuilderTest extends TestCase
         $pageUid = $this->testingFramework->createFrontEndPage();
 
         /** @var \Tx_Seminars_Model_Event $event */
-        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
             ->getLoadedTestingModel(['details_page' => $pageUid]);
 
         $subject = new TestingSingleViewLinkBuilder();

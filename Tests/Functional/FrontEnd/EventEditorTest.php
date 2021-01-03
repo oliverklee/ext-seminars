@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Tests\Functional\FrontEnd;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
@@ -70,7 +71,7 @@ final class EventEditorTest extends FunctionalTestCase
     protected function tearDown()
     {
         FrontEndLoginManager::purgeInstance();
-        \Tx_Oelib_MapperRegistry::purgeInstance();
+        MapperRegistry::purgeInstance();
 
         parent::tearDown();
     }
@@ -112,7 +113,7 @@ final class EventEditorTest extends FunctionalTestCase
     private function getUserMapper(): \Tx_Seminars_Mapper_FrontEndUser
     {
         /** @var \Tx_Seminars_Mapper_FrontEndUser $mapper */
-        $mapper = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
+        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
 
         return $mapper;
     }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
@@ -77,7 +78,7 @@ class RegistrationMapperTest extends TestCase
      */
     public function getEventWithEventReturnsEventInstance()
     {
-        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
             ->getNewGhost();
         /** @var \Tx_Seminars_Model_Registration $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel(['seminar' => $event->getUid()]);
@@ -90,7 +91,7 @@ class RegistrationMapperTest extends TestCase
      */
     public function getSeminarWithEventReturnsEventInstance()
     {
-        $event = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
             ->getNewGhost();
         /** @var \Tx_Seminars_Model_Registration $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel(['seminar' => $event->getUid()]);
@@ -107,7 +108,7 @@ class RegistrationMapperTest extends TestCase
      */
     public function getFrontEndUserWithFrontEndUserReturnsSameFrontEndUser()
     {
-        $frontEndUser = \Tx_Oelib_MapperRegistry::
+        $frontEndUser = MapperRegistry::
         get(\Tx_Seminars_Mapper_FrontEndUser::class)->getNewGhost();
         /** @var \Tx_Seminars_Model_Registration $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel(['user' => $frontEndUser->getUid()]);
@@ -135,7 +136,7 @@ class RegistrationMapperTest extends TestCase
      */
     public function getPaymentMethodWithPaymentMethodReturnsPaymentMethodInstance()
     {
-        $paymentMethod = \Tx_Oelib_MapperRegistry::
+        $paymentMethod = MapperRegistry::
         get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
         /** @var \Tx_Seminars_Model_Registration $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel(['method_of_payment' => $paymentMethod->getUid()]);
@@ -164,7 +165,7 @@ class RegistrationMapperTest extends TestCase
     public function getLodgingsWithOneLodgingReturnsListOfLodgings()
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_attendances');
-        $lodging = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Lodging::class)
+        $lodging = MapperRegistry::get(\Tx_Seminars_Mapper_Lodging::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_attendances',
@@ -184,7 +185,7 @@ class RegistrationMapperTest extends TestCase
     public function getLodgingsWithOneLodgingReturnsOneLodging()
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_attendances');
-        $lodging = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Lodging::class)
+        $lodging = MapperRegistry::get(\Tx_Seminars_Mapper_Lodging::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_attendances',
@@ -222,8 +223,7 @@ class RegistrationMapperTest extends TestCase
     public function getFoodsWithOneFoodReturnsListOfFoods()
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_attendances');
-        $food = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Food::class)
-            ->getNewGhost();
+        $food = MapperRegistry::get(\Tx_Seminars_Mapper_Food::class)->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_attendances',
             $uid,
@@ -242,7 +242,7 @@ class RegistrationMapperTest extends TestCase
     public function getFoodsWithOneFoodReturnsOneFood()
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_attendances');
-        $food = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Food::class)
+        $food = MapperRegistry::get(\Tx_Seminars_Mapper_Food::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_attendances',
@@ -280,7 +280,7 @@ class RegistrationMapperTest extends TestCase
     public function getCheckboxesWithOneCheckboxReturnsListOfCheckboxes()
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_attendances');
-        $checkbox = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Checkbox::class)
+        $checkbox = MapperRegistry::get(\Tx_Seminars_Mapper_Checkbox::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_attendances',
@@ -303,7 +303,7 @@ class RegistrationMapperTest extends TestCase
     public function getCheckboxesWithOneCheckboxReturnsOneCheckbox()
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_attendances');
-        $checkbox = \Tx_Oelib_MapperRegistry::get(\Tx_Seminars_Mapper_Checkbox::class)
+        $checkbox = MapperRegistry::get(\Tx_Seminars_Mapper_Checkbox::class)
             ->getNewGhost();
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_attendances',
