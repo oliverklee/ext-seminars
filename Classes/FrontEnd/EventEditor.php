@@ -6,8 +6,6 @@ use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
-use OliverKlee\Oelib\Email\Mail;
-use OliverKlee\Oelib\Email\MailerFactory;
 use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Interfaces\MailRole;
@@ -19,6 +17,7 @@ use OliverKlee\Oelib\Model\Country;
 use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Visibility\Tree;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
+use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
@@ -1429,17 +1428,17 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $event = $mapper->findByPublicationHash($this->publicationHash);
 
         if ($event !== null && $event->isHidden()) {
-            /** @var Mail $eMail */
-            $eMail = GeneralUtility::makeInstance(Mail::class);
-            $eMail->addRecipient($reviewer);
-            $eMail->setSender($this->getEmailSender());
-            $eMail->setReplyTo(self::getLoggedInUser());
-            $eMail->setSubject($this->translate('publish_event_subject'));
-            $eMail->setMessage($this->createEMailContent($event));
+            $sender = $this->getEmailSender();
+            $loggedInUser = self::getLoggedInUser();
 
-            /** @var MailerFactory $mailerFactory */
-            $mailerFactory = GeneralUtility::makeInstance(MailerFactory::class);
-            $mailerFactory->getMailer()->send($eMail);
+            /** @var MailMessage $eMail */
+            $eMail = GeneralUtility::makeInstance(MailMessage::class);
+            $eMail->setTo($reviewer->getEmailAddress(), $reviewer->getName());
+            $eMail->setFrom($sender->getEmailAddress(), $sender->getName());
+            $eMail->setReplyTo($loggedInUser->getEmailAddress(), $loggedInUser->getName());
+            $eMail->setSubject($this->translate('publish_event_subject'));
+            $eMail->setBody($this->createEMailContent($event));
+            $eMail->send();
         }
     }
 
@@ -1538,17 +1537,17 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
             return;
         }
 
-        /** @var Mail $eMail */
-        $eMail = GeneralUtility::makeInstance(Mail::class);
-        $eMail->addRecipient($reviewer);
-        $eMail->setSender($this->getEmailSender());
-        $eMail->setReplyTo(self::getLoggedInUser());
-        $eMail->setSubject($this->translate('save_event_subject'));
-        $eMail->setMessage($this->createAdditionalEmailContent());
+        $sender = $this->getEmailSender();
+        $loggedInUser = self::getLoggedInUser();
 
-        /** @var MailerFactory $mailerFactory */
-        $mailerFactory = GeneralUtility::makeInstance(MailerFactory::class);
-        $mailerFactory->getMailer()->send($eMail);
+        /** @var MailMessage $eMail */
+        $eMail = GeneralUtility::makeInstance(MailMessage::class);
+        $eMail->setTo($reviewer->getEmailAddress(), $reviewer->getName());
+        $eMail->setFrom($sender->getEmailAddress(), $sender->getName());
+        $eMail->setReplyTo($loggedInUser->getEmailAddress(), $loggedInUser->getName());
+        $eMail->setSubject($this->translate('save_event_subject'));
+        $eMail->setBody($this->createAdditionalEmailContent());
+        $eMail->send();
     }
 
     /**
