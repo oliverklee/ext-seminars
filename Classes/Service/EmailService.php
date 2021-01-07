@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Service;
 
 use OliverKlee\Oelib\Email\Mail;
-use OliverKlee\Oelib\Email\MailerFactory;
 use OliverKlee\Seminar\Email\Salutation;
+use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Lang\LanguageService;
@@ -55,10 +55,6 @@ class EmailService implements SingletonInterface
      */
     public function sendEmailToAttendees(\Tx_Seminars_Model_Event $event, string $subject, string $body)
     {
-        /** @var MailerFactory $mailerFactory */
-        $mailerFactory = GeneralUtility::makeInstance(MailerFactory::class);
-        $mailer = $mailerFactory->getMailer();
-
         /** @var \Tx_Seminars_Model_Registration $registration */
         foreach ($event->getRegistrations() as $registration) {
             $user = $registration->getFrontEndUser();
@@ -66,16 +62,17 @@ class EmailService implements SingletonInterface
                 continue;
             }
 
-            /** @var Mail $eMail */
-            $eMail = GeneralUtility::makeInstance(Mail::class);
-            $eMail->setSender($event->getEmailSender());
-            $eMail->setReplyTo($event->getFirstOrganizer());
-            $eMail->addRecipient($user);
+            $sender = $event->getEmailSender();
+            $replyTo = $event->getFirstOrganizer();
+
+            /** @var MailMessage $eMail */
+            $eMail = GeneralUtility::makeInstance(MailMessage::class);
+            $eMail->setTo($user->getEmailAddress(), $user->getName());
+            $eMail->setFrom($sender->getEmailAddress(), $sender->getName());
+            $eMail->setReplyTo($replyTo->getEmailAddress(), $replyTo->getName());
             $eMail->setSubject($this->replaceMarkers($subject, $event, $user));
-
-            $eMail->setMessage($this->buildMessageBody($body, $event, $user));
-
-            $mailer->send($eMail);
+            $eMail->setBody($this->buildMessageBody($body, $event, $user));
+            $eMail->send();
         }
     }
 
