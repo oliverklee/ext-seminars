@@ -910,7 +910,7 @@ $tca = [
                 'eval' => 'date, int',
                 'default' => 0,
                 'range' => [
-                    'upper' => mktime(0, 0, 0, 12, 31, 2020),
+                    'upper' => mktime(0, 0, 0, 1, 1, 2038),
                     'lower' => mktime(0, 0, 0, date('m') - 1, date('d'), date('Y')),
                 ],
             ],
