@@ -383,7 +383,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends \Tx_Oelib_TemplateHelper im
      *
      * @return bool TRUE if we are properly initialized, FALSE otherwise
      */
-    public function isInitialized()
+    public function isInitialized(): bool
     {
         return $this->isInitialized && is_object($this->configurationService);
     }
