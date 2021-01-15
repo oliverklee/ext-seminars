@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Add a missing return type declaration (#680)
 - Drop some outdated tests (#681)
 - Raise limit of field endtime to 2038-1-1 (#678)
 - Stop using event model prophecies in the scheduler task tests (#651)
