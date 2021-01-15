@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Raise limit of field endtime to 2038-1-1 (#678)
 - Stop using event model prophecies in the scheduler task tests (#651)
 - Stop converting class names to PSR-4 (#597)
 
