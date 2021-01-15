@@ -6241,45 +6241,6 @@ final class Tx_Seminars_Tests_Unit_OldModel_EventTest extends TestCase
     /**
      * @test
      */
-    public function getAttachedFilesWithTwoSetAttachedFilesReturnsAttachedFilesAsArrayWithCorrectFileSize()
-    {
-        $this->createPi1();
-        $dummyFile1 = $this->testingFramework->createDummyFile();
-        $dummyFileName1 =
-            $this->testingFramework->getPathRelativeToUploadDirectory($dummyFile1);
-        $dummyFile2 = $this->testingFramework->createDummyFile();
-        $dummyFileName2 =
-            $this->testingFramework->getPathRelativeToUploadDirectory($dummyFile2);
-        $this->subject->setAttachedFiles($dummyFileName1 . ',' . $dummyFileName2);
-
-        GeneralUtility::writeFile($dummyFile2, 'Test');
-
-        $attachedFiles = $this->subject->getAttachedFiles($this->pi1);
-
-        self::assertContains(
-            'uploads/tx_seminars/' . $dummyFileName1,
-            $attachedFiles[0]['name']
-        );
-
-        self::assertSame(
-            GeneralUtility::formatSize(filesize($dummyFile1)),
-            $attachedFiles[0]['size']
-        );
-
-        self::assertContains(
-            'uploads/tx_seminars/' . $dummyFileName2,
-            $attachedFiles[1]['name']
-        );
-
-        self::assertSame(
-            GeneralUtility::formatSize(filesize($dummyFile2)),
-            $attachedFiles[1]['size']
-        );
-    }
-
-    /**
-     * @test
-     */
     public function getAttachedFilesWithAttachedFileWithFileEndingReturnsFileType()
     {
         $this->createPi1();

@@ -550,27 +550,6 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function createCategoryListWithConfigurationValueSetToIconSetsHtmlSpecialcharedCategoryTitleAsImageTitle()
-    {
-        $this->subject->setConfigurationValue('categoriesInListView', 'icon');
-        $singleCategory =
-            [
-                99 => [
-                    'title' => 'te & st',
-                    'icon' => 'foo.gif',
-                ],
-            ];
-        $this->testingFramework->createDummyFile('foo.gif', base64_decode(self::BLANK_GIF, true));
-
-        self::assertRegExp(
-            '/<img[^>]+title="te &amp; st"/',
-            $this->subject->createCategoryList($singleCategory)
-        );
-    }
-
     public function testCreateCategoryListWithConfigurationValueSetToIconDoesNotReturnTitleOutsideTheImageTag()
     {
         $this->subject->setConfigurationValue('categoriesInListView', 'icon');
@@ -587,33 +566,6 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends TestCase
         self::assertNotRegExp(
             '/<img[^>]*>.*test/',
             $this->subject->createCategoryList($singleCategory)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function createCategoryListWithConfigurationValueSetToIconCanReturnMultipleIcons()
-    {
-        $this->subject->setConfigurationValue('categoriesInListView', 'icon');
-        $multipleCategories =
-            [
-                99 => [
-                    'title' => 'test',
-                    'icon' => 'foo.gif',
-                ],
-                100 => [
-                    'title' => 'new_test',
-                    'icon' => 'foo2.gif',
-                ],
-            ];
-
-        $this->testingFramework->createDummyFile('foo.gif', base64_decode(self::BLANK_GIF, true));
-        $this->testingFramework->createDummyFile('foo2.gif', base64_decode(self::BLANK_GIF, true));
-
-        self::assertRegExp(
-            '/<img[^>]+title="test"[^>]*>.*<img[^>]+title="new_test"[^>]*>/',
-            $this->subject->createCategoryList($multipleCategories)
         );
     }
 
@@ -634,29 +586,6 @@ class Tx_Seminars_Tests_Unit_FrontEnd_CategoryListTest extends TestCase
 
         self::assertRegExp(
             '/foo.*bar/',
-            $this->subject->createCategoryList($multipleCategories)
-        );
-    }
-
-    public function testCreateCategoryListWithConfigurationValueSetToIconDoesNotUseCommasAsSeparators()
-    {
-        $this->subject->setConfigurationValue('categoriesInListView', 'icon');
-        $this->testingFramework->createDummyFile('foo.gif', base64_decode(self::BLANK_GIF, true));
-        $this->testingFramework->createDummyFile('foo2.gif', base64_decode(self::BLANK_GIF, true));
-        $multipleCategories =
-            [
-                99 => [
-                    'title' => 'foo',
-                    'icon' => 'foo.gif',
-                ],
-                100 => [
-                    'title' => 'bar',
-                    'icon' => 'foo2.gif',
-                ],
-            ];
-
-        self::assertNotContains(
-            ',',
             $this->subject->createCategoryList($multipleCategories)
         );
     }
