@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add traits for testing email and `makeInstance` instances (#683)
 
 ### Changed
 - Require oelib >= 3.2.0 (#657)
