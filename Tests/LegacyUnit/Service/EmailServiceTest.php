@@ -7,14 +7,15 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
-use OliverKlee\Oelib\Email\EmailCollector;
-use OliverKlee\Oelib\Email\MailerFactory;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Service\EmailService;
+use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
+use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
+use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Core\Bootstrap;
+use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\SingletonInterface;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Lang\LanguageService;
 
 /**
@@ -24,6 +25,9 @@ use TYPO3\CMS\Lang\LanguageService;
  */
 final class EmailServiceTest extends TestCase
 {
+    use EmailTrait;
+    use MakeInstanceTrait;
+
     /**
      * @var string
      */
@@ -60,11 +64,6 @@ final class EmailServiceTest extends TestCase
     private $testingFramework;
 
     /**
-     * @var EmailCollector
-     */
-    private $mailer = null;
-
-    /**
      * @var \Tx_Seminars_Model_Event
      */
     private $event = null;
@@ -83,6 +82,11 @@ final class EmailServiceTest extends TestCase
      * @var LanguageService
      */
     private $languageBackup;
+
+    /**
+     * @var MockObject|MailMessage|null
+     */
+    private $email = null;
 
     protected function setUp()
     {
@@ -103,10 +107,7 @@ final class EmailServiceTest extends TestCase
 
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
 
-        /** @var MailerFactory $mailerFactory */
-        $mailerFactory = GeneralUtility::makeInstance(MailerFactory::class);
-        $mailerFactory->enableTestMode();
-        $this->mailer = $mailerFactory->getMailer();
+        $this->email = $this->createEmailMock();
 
         $this->organizer = new \Tx_Seminars_Model_Organizer();
         $this->organizer->setData(
@@ -165,10 +166,10 @@ final class EmailServiceTest extends TestCase
     {
         $this->event->setRegistrations(new Collection());
 
-        $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
+        $this->email->expects(self::exactly(0))->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $email = $this->mailer->getFirstSentEmail();
-        self::assertNull($email);
+        $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
     }
 
     /**
@@ -181,13 +182,14 @@ final class EmailServiceTest extends TestCase
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = $defaultMailFromAddress;
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = $defaultMailFromName;
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
 
-        $email = $this->mailer->getFirstSentEmail();
-        self::assertNotNull($email);
         self::assertArrayHasKey(
             $defaultMailFromAddress,
-            $email->getFrom()
+            $this->email->getFrom()
         );
     }
 
@@ -199,13 +201,14 @@ final class EmailServiceTest extends TestCase
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = 'system-foo@example.com';
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = 'Mr. Default';
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
 
-        $email = $this->mailer->getFirstSentEmail();
-        self::assertNotNull($email);
         self::assertSame(
             $this->organizer->getEMailAddress(),
-            \key($email->getReplyTo())
+            \key($this->email->getReplyTo())
         );
     }
 
@@ -217,13 +220,14 @@ final class EmailServiceTest extends TestCase
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = '';
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = '';
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
 
-        $email = $this->mailer->getFirstSentEmail();
-        self::assertNotNull($email);
         self::assertArrayHasKey(
             $this->organizer->getEMailAddress(),
-            $email->getFrom()
+            $this->email->getFrom()
         );
     }
 
@@ -234,13 +238,14 @@ final class EmailServiceTest extends TestCase
     {
         $subject = 'Bonjour!';
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEmailToAttendees($this->event, $subject, 'Hello!');
 
-        $email = $this->mailer->getFirstSentEmail();
-        self::assertNotNull($email);
         self::assertSame(
             $subject,
-            $email->getSubject()
+            $this->email->getSubject()
         );
     }
 
@@ -251,13 +256,14 @@ final class EmailServiceTest extends TestCase
     {
         $subjectPrefix = 'Event title goes here: ';
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEmailToAttendees($this->event, $subjectPrefix . '%eventTitle', 'Hello!');
 
-        $email = $this->mailer->getFirstSentEmail();
-        self::assertNotNull($email);
         self::assertSame(
             $subjectPrefix . $this->event->getTitle(),
-            $email->getSubject()
+            $this->email->getSubject()
         );
     }
 
@@ -270,13 +276,14 @@ final class EmailServiceTest extends TestCase
 
         $formattedDate = (new \Tx_Seminars_ViewHelper_DateRange())->render($this->event, '-');
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEmailToAttendees($this->event, $subjectPrefix . '%eventDate', 'Hello!');
 
-        $email = $this->mailer->getFirstSentEmail();
-        self::assertNotNull($email);
         self::assertSame(
             $subjectPrefix . $formattedDate,
-            $email->getSubject()
+            $this->email->getSubject()
         );
     }
 
@@ -287,13 +294,14 @@ final class EmailServiceTest extends TestCase
     {
         $body = 'Life is good.';
 
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
+        $this->email->expects(self::once())->method('send');
         $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', $body);
 
-        $email = $this->mailer->getFirstSentEmail();
-        self::assertNotNull($email);
         self::assertContains(
             $body,
-            $email->getBody()
+            $this->email->getBody()
         );
     }
 
@@ -302,13 +310,14 @@ final class EmailServiceTest extends TestCase
      */
     public function sendEmailToAttendeesSendsToFirstAttendee()
     {
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
+        $this->email->expects(self::once())->method('send');
         $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
 
-        $email = $this->mailer->getFirstSentEmail();
-        self::assertNotNull($email);
         self::assertSame(
             [$this->user->getEmailAddress() => $this->user->getName()],
-            $email->getTo()
+            $this->email->getTo()
         );
     }
 
@@ -324,9 +333,14 @@ final class EmailServiceTest extends TestCase
         $secondRegistration->setFrontEndUser($secondUser);
         $this->event->attachRegistration($secondRegistration);
 
-        $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
+        $this->email
+            ->expects(self::exactly(2))
+            ->method('send')
+            ->willReturn(2);
+        $this->addMockedInstance(MailMessage::class, $this->email);
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
-        self::assertCount(2, $this->mailer->getSentEmails());
+        $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
     }
 
     /**
@@ -340,10 +354,10 @@ final class EmailServiceTest extends TestCase
         $registrations->add($registration);
         $this->event->setRegistrations($registrations);
 
-        $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
+        $this->email->expects(self::exactly(0))->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $email = $this->mailer->getFirstSentEmail();
-        self::assertNull($email);
+        $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
     }
 
     /**
@@ -353,10 +367,10 @@ final class EmailServiceTest extends TestCase
     {
         $this->user->setEmailAddress('');
 
-        $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
+        $this->email->expects(self::exactly(0))->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $email = $this->mailer->getFirstSentEmail();
-        self::assertNull($email);
+        $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
     }
 
     /**
@@ -364,13 +378,14 @@ final class EmailServiceTest extends TestCase
      */
     public function sendEmailToAttendeesInsertsSalutationIntoMailTextWithSalutationMarker()
     {
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
+        $this->email->expects(self::once())->method('send');
         $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', '%salutation (This was the salutation)');
 
-        $email = $this->mailer->getFirstSentEmail();
-        self::assertNotNull($email);
         self::assertContains(
             $this->user->getName(),
-            $email->getBody()
+            $this->email->getBody()
         );
     }
 
@@ -379,13 +394,14 @@ final class EmailServiceTest extends TestCase
      */
     public function sendEmailToAttendeesInsertsUserNameIntoMailTextWithUserNameMarker()
     {
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
+        $this->email->expects(self::once())->method('send');
         $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello %userName!');
 
-        $email = $this->mailer->getFirstSentEmail();
-        self::assertNotNull($email);
         self::assertContains(
             'Hello ' . $this->user->getName() . '!',
-            $email->getBody()
+            $this->email->getBody()
         );
     }
 
@@ -394,13 +410,14 @@ final class EmailServiceTest extends TestCase
      */
     public function sendEmailToAttendeesInsertsEventTitleIntoMailTextWithEventTitleMarker()
     {
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
+        $this->email->expects(self::once())->method('send');
         $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Event: %eventTitle');
 
-        $email = $this->mailer->getFirstSentEmail();
-        self::assertNotNull($email);
         self::assertContains(
             'Event: ' . $this->event->getTitle(),
-            $email->getBody()
+            $this->email->getBody()
         );
     }
 
@@ -409,15 +426,16 @@ final class EmailServiceTest extends TestCase
      */
     public function sendEmailToAttendeesInsertsEventDateIntoMailTextWithEventDateMarker()
     {
-        $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Date: %eventDate');
-
         $formattedDate = (new \Tx_Seminars_ViewHelper_DateRange())->render($this->event, '-');
 
-        $email = $this->mailer->getFirstSentEmail();
-        self::assertNotNull($email);
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
+        $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Date: %eventDate');
+
         self::assertContains(
             'Date: ' . $formattedDate,
-            $email->getBody()
+            $this->email->getBody()
         );
     }
 
@@ -426,15 +444,16 @@ final class EmailServiceTest extends TestCase
      */
     public function sendEmailToAttendeesForOrganizerWithoutFooterNotAppendsFooterSeparator()
     {
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->organizer->setEMailFooter('');
 
+        $this->email->expects(self::once())->method('send');
         $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
 
-        $email = $this->mailer->getFirstSentEmail();
-        self::assertNotNull($email);
         self::assertNotContains(
             '-- ',
-            $email->getBody()
+            $this->email->getBody()
         );
     }
 
@@ -443,13 +462,14 @@ final class EmailServiceTest extends TestCase
      */
     public function sendEmailToAttendeesForOrganizerWithFooterAppendsFooter()
     {
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
 
-        $email = $this->mailer->getFirstSentEmail();
-        self::assertNotNull($email);
         self::assertContains(
             LF . '-- ' . LF . $this->organizer->getEMailFooter(),
-            $email->getBody()
+            $this->email->getBody()
         );
     }
 }
