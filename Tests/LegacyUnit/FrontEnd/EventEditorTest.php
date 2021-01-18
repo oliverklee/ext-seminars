@@ -8,13 +8,14 @@ use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
-use OliverKlee\Oelib\Email\EmailCollector;
-use OliverKlee\Oelib\Email\MailerFactory;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
+use PHPUnit\Framework\MockObject\MockObject;
+use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
@@ -26,6 +27,8 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 class EventEditorTest extends TestCase
 {
     use LanguageHelper;
+    use EmailTrait;
+    use MakeInstanceTrait;
 
     /**
      * @var \Tx_Seminars_FrontEnd_EventEditor
@@ -38,11 +41,6 @@ class EventEditorTest extends TestCase
     private $testingFramework = null;
 
     /**
-     * @var EmailCollector
-     */
-    private $mailer = null;
-
-    /**
      * @var Configuration
      */
     private $configuration = null;
@@ -51,6 +49,11 @@ class EventEditorTest extends TestCase
      * @var int
      */
     private $recordsPageUid = 0;
+
+    /**
+     * @var MockObject|MailMessage|null
+     */
+    private $email = null;
 
     protected function setUp()
     {
@@ -74,10 +77,7 @@ class EventEditorTest extends TestCase
         );
         $this->subject->setTestMode();
 
-        /** @var MailerFactory $mailerFactory */
-        $mailerFactory = GeneralUtility::makeInstance(MailerFactory::class);
-        $mailerFactory->enableTestMode();
-        $this->mailer = $mailerFactory->getMailer();
+        $this->email = $this->createEmailMock();
     }
 
     protected function tearDown()
@@ -1505,18 +1505,19 @@ class EventEditorTest extends TestCase
 
     /**
      * @test
+     * @group sendEMailToReviewer
      */
     public function eventEditorForNonHiddenEventDoesNotSendMail()
     {
-        $this->subject->sendEMailToReviewer();
+        $this->email->expects(self::exactly(0))->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
-        self::assertNull(
-            $this->mailer->getFirstSentEmail()
-        );
+        $this->subject->sendEMailToReviewer();
     }
 
     /**
      * @test
+     * @group sendEMailToReviewer
      */
     public function eventEditorForEventHiddenBeforeEditingDoesNotSendMail()
     {
@@ -1529,15 +1530,15 @@ class EventEditorTest extends TestCase
         $this->subject->setObjectUid($seminarUid);
         $this->subject->modifyDataToInsert([]);
 
-        $this->subject->sendEMailToReviewer();
+        $this->email->expects(self::exactly(0))->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
-        self::assertNull(
-            $this->mailer->getFirstSentEmail()
-        );
+        $this->subject->sendEMailToReviewer();
     }
 
     /**
      * @test
+     * @group sendEMailToReviewer
      */
     public function eventEditorForEventHiddenByFormDoesSendMail()
     {
@@ -1556,16 +1557,15 @@ class EventEditorTest extends TestCase
             ]
         );
 
-        $this->subject->sendEMailToReviewer();
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
-        self::assertGreaterThan(
-            0,
-            $this->mailer->getNumberOfSentEmails()
-        );
+        $this->subject->sendEMailToReviewer();
     }
 
     /**
      * @test
+     * @group sendEMailToReviewer
      */
     public function sendEMailToReviewerSendsMailToReviewerMailAddress()
     {
@@ -1584,16 +1584,20 @@ class EventEditorTest extends TestCase
             ]
         );
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEMailToReviewer();
 
         self::assertArrayHasKey(
             'foo@bar.com',
-            $this->mailer->getFirstSentEmail()->getTo()
+            $this->email->getTo()
         );
     }
 
     /**
      * @test
+     * @group sendEMailToReviewer
      */
     public function sendEMailToReviewerSetsPublishEventSubjectInMail()
     {
@@ -1612,16 +1616,20 @@ class EventEditorTest extends TestCase
             ]
         );
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEMailToReviewer();
 
         self::assertSame(
             $this->getLanguageService()->getLL('publish_event_subject'),
-            $this->mailer->getFirstSentEmail()->getSubject()
+            $this->email->getSubject()
         );
     }
 
     /**
      * @test
+     * @group sendEMailToReviewer
      */
     public function sendEMailToReviewerSendsTheTitleOfTheEvent()
     {
@@ -1643,16 +1651,20 @@ class EventEditorTest extends TestCase
             ]
         );
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEMailToReviewer();
 
         self::assertContains(
             'foo Event',
-            $this->mailer->getFirstSentEmail()->getBody()
+            $this->email->getBody()
         );
     }
 
     /**
      * @test
+     * @group sendEMailToReviewer
      */
     public function sendEMailToReviewerForEventWithDateSendsTheDateOfTheEvent()
     {
@@ -1675,6 +1687,9 @@ class EventEditorTest extends TestCase
             ]
         );
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEMailToReviewer();
 
         self::assertContains(
@@ -1682,12 +1697,13 @@ class EventEditorTest extends TestCase
                 $this->subject->getConfValueString('dateFormatYMD'),
                 $GLOBALS['SIM_EXEC_TIME']
             ),
-            $this->mailer->getFirstSentEmail()->getBody()
+            $this->email->getBody()
         );
     }
 
     /**
      * @test
+     * @group sendEMailToReviewer
      */
     public function sendEMailToReviewerForEventWithoutDateHidesDateMarker()
     {
@@ -1709,16 +1725,20 @@ class EventEditorTest extends TestCase
             ]
         );
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEMailToReviewer();
 
         self::assertNotContains(
             '###PUBLISH_EVENT_DATE###',
-            $this->mailer->getFirstSentEmail()->getBody()
+            $this->email->getBody()
         );
     }
 
     /**
      * @test
+     * @group sendEMailToReviewer
      */
     public function sendEMailToReviewerForEventWithoutDateDoesNotSendDate()
     {
@@ -1741,16 +1761,20 @@ class EventEditorTest extends TestCase
             ]
         );
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEMailToReviewer();
 
         self::assertNotContains(
             'foo event,',
-            $this->mailer->getFirstSentEmail()->getBody()
+            $this->email->getBody()
         );
     }
 
     /**
      * @test
+     * @group sendEMailToReviewer
      */
     public function sendEMailToReviewerSendsMailWithoutAnyUnreplacedMarkers()
     {
@@ -1771,16 +1795,20 @@ class EventEditorTest extends TestCase
             ]
         );
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEMailToReviewer();
 
         self::assertNotContains(
             '###',
-            $this->mailer->getFirstSentEmail()->getBody()
+            $this->email->getBody()
         );
     }
 
     /**
      * @test
+     * @group sendEMailToReviewer
      */
     public function sendEMailToReviewerForEventWithDescriptionShowsDescriptionInMail()
     {
@@ -1802,16 +1830,20 @@ class EventEditorTest extends TestCase
             ]
         );
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEMailToReviewer();
 
         self::assertContains(
             'Foo Description',
-            $this->mailer->getFirstSentEmail()->getBody()
+            $this->email->getBody()
         );
     }
 
     /**
      * @test
+     * @group sendEMailToReviewer
      */
     public function sendEMailToReviewerSendsPublicationLinkInMail()
     {
@@ -1832,18 +1864,22 @@ class EventEditorTest extends TestCase
             ]
         );
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEMailToReviewer();
 
         self::assertContains(
             'tx_seminars_publication%5Bhash%5D=' . $formData['publication_hash'],
-            $this->mailer->getFirstSentEmail()->getBody()
+            $this->email->getBody()
         );
     }
 
     /**
      * @test
+     * @group sendEMailToReviewer
      */
-    public function sendEMailToReviewerUsesTypo3DefaultFromNameAsFromNameForMail()
+    public function sendEMailToReviewerUsesTypo3DefaultFromEmailAndDefaultFromNameAsFromNameForMail()
     {
         $seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->createAndLoginUserWithReviewer();
@@ -1865,47 +1901,20 @@ class EventEditorTest extends TestCase
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = $defaultFromAddress;
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = $defaultFromName;
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEMailToReviewer();
 
         self::assertContains(
             $defaultFromName,
-            $this->mailer->getFirstSentEmail()->getFrom()
+            $this->email->getFrom()
         );
     }
 
     /**
      * @test
-     */
-    public function sendEMailToReviewerUsesTypo3DefaultFromAddressAsFromAddressForMail()
-    {
-        $seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
-        $this->createAndLoginUserWithReviewer();
-
-        $this->subject->setObjectUid($seminarUid);
-        $formData = $this->subject->modifyDataToInsert([]);
-
-        $this->testingFramework->changeRecord(
-            'tx_seminars_seminars',
-            $seminarUid,
-            [
-                'hidden' => 1,
-                'publication_hash' => $formData['publication_hash'],
-            ]
-        );
-
-        $defaultFromAddress = 'system-foo@example.com';
-        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = $defaultFromAddress;
-
-        $this->subject->sendEMailToReviewer();
-
-        self::assertArrayHasKey(
-            $defaultFromAddress,
-            $this->mailer->getFirstSentEmail()->getFrom()
-        );
-    }
-
-    /**
-     * @test
+     * @group sendEMailToReviewer
      */
     public function sendEMailToReviewerUsesFrontEndUserAsReplyToForMail()
     {
@@ -1927,18 +1936,22 @@ class EventEditorTest extends TestCase
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = 'system-foo@example.com';
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = 'Mr. Default';
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEMailToReviewer();
 
         self::assertSame(
             ['mail@foo.com' => 'Mr. Bar'],
-            $this->mailer->getFirstSentEmail()->getReplyTo()
+            $this->email->getReplyTo()
         );
     }
 
     /**
      * @test
+     * @group sendEMailToReviewer
      */
-    public function sendEMailToReviewerWithoutTypo3DefaultFromAdressAndNameUsesFrontEndUserNameAsFromNameForMail()
+    public function sendEMailToReviewerWithoutTypo3DefaultFromAddressAndNameUsesFrontEndUserNameAsFromNameForMail()
     {
         $seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->createAndLoginUserWithReviewer();
@@ -1958,16 +1971,20 @@ class EventEditorTest extends TestCase
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = '';
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = '';
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEMailToReviewer();
 
         self::assertContains(
             'Mr. Bar',
-            $this->mailer->getFirstSentEmail()->getFrom()
+            $this->email->getFrom()
         );
     }
 
     /**
      * @test
+     * @group sendEMailToReviewer
      */
     public function sendEMailToReviewerWithoutTypo3DefaultFromAddressUsesFrontEndUserMailAddressAsFromAddressForMail()
     {
@@ -1989,11 +2006,14 @@ class EventEditorTest extends TestCase
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = '';
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = '';
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEMailToReviewer();
 
         self::assertArrayHasKey(
             'mail@foo.com',
-            $this->mailer->getFirstSentEmail()->getFrom()
+            $this->email->getFrom()
         );
     }
 
@@ -2003,70 +2023,72 @@ class EventEditorTest extends TestCase
 
     /**
      * @test
+     * @group sendNotificationMailsToReceiver
      */
     public function sendAdditionalNotificationEmailToReviewerWithReviewerAndFeatureEnabledSendsEmail()
     {
         $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
 
-        $this->subject->sendAdditionalNotificationEmailToReviewer();
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
-        self::assertNotNull(
-            $this->mailer->getFirstSentEmail()
-        );
+        $this->subject->sendAdditionalNotificationEmailToReviewer();
     }
 
     /**
      * @test
+     * @group sendNotificationMailsToReceiver
      */
     public function sendAdditionalNotificationEmailToReviewerWithoutReviewerAndFeatureEnabledNotSendsEmail()
     {
         $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithPublishSetting(\Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY);
 
-        $this->subject->sendAdditionalNotificationEmailToReviewer();
+        $this->email->expects(self::exactly(0))->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
-        self::assertNull(
-            $this->mailer->getFirstSentEmail()
-        );
+        $this->subject->sendAdditionalNotificationEmailToReviewer();
     }
 
     /**
      * @test
+     * @group sendNotificationMailsToReceiver
      */
     public function sendAdditionalNotificationEmailToReviewerWithReviewerAndFeatureDisabledNotSendsEmail()
     {
         $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', false);
         $this->createAndLoginUserWithReviewer();
 
-        $this->subject->sendAdditionalNotificationEmailToReviewer();
+        $this->email->expects(self::exactly(0))->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
-        self::assertNull(
-            $this->mailer->getFirstSentEmail()
-        );
+        $this->subject->sendAdditionalNotificationEmailToReviewer();
     }
 
     /**
      * @test
+     * @group sendNotificationMailsToReceiver
      */
     public function sendAdditionalNotificationEmailToReviewerSendsEmailToReviewer()
     {
         $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
-        self::assertNotNull(
-            $this->mailer->getFirstSentEmail()
-        );
         self::assertArrayHasKey(
             'foo@bar.com',
-            $this->mailer->getFirstSentEmail()->getTo()
+            $this->email->getTo()
         );
     }
 
     /**
      * @test
+     * @group sendNotificationMailsToReceiver
      */
     public function sendAdditionalNotificationEmailToReviewerUsesTypo3DefaultFromNameAsFromName()
     {
@@ -2078,19 +2100,20 @@ class EventEditorTest extends TestCase
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = $defaultMailFromAddress;
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = $defaultMailFromName;
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
-        self::assertNotNull(
-            $this->mailer->getFirstSentEmail()
-        );
         self::assertContains(
             $defaultMailFromName,
-            $this->mailer->getFirstSentEmail()->getFrom()
+            $this->email->getFrom()
         );
     }
 
     /**
      * @test
+     * @group sendNotificationMailsToReceiver
      */
     public function sendAdditionalNotificationEmailToReviewerUsesTypo3DefaultFromAddressAsFromAddress()
     {
@@ -2102,19 +2125,20 @@ class EventEditorTest extends TestCase
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = $defaultMailFromAddress;
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = $defaultMailFromName;
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
-        self::assertNotNull(
-            $this->mailer->getFirstSentEmail()
-        );
         self::assertArrayHasKey(
             $defaultMailFromAddress,
-            $this->mailer->getFirstSentEmail()->getFrom()
+            $this->email->getFrom()
         );
     }
 
     /**
      * @test
+     * @group sendNotificationMailsToReceiver
      */
     public function sendAdditionalNotificationEmailToReviewerUsesFrontEndUserMailAsReplyTo()
     {
@@ -2124,19 +2148,20 @@ class EventEditorTest extends TestCase
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = 'system-foo@example.com';
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = 'Mr. Default';
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
-        self::assertNotNull(
-            $this->mailer->getFirstSentEmail()
-        );
         self::assertSame(
             ['mail@foo.com' => 'Mr. Bar'],
-            $this->mailer->getFirstSentEmail()->getReplyTo()
+            $this->email->getReplyTo()
         );
     }
 
     /**
      * @test
+     * @group sendNotificationMailsToReceiver
      */
     public function sendAdditionalNotificationEmailToReviewerWithoutTypo3DefaultFromAddressUsesFrontEndUserAsFromName()
     {
@@ -2146,19 +2171,20 @@ class EventEditorTest extends TestCase
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = '';
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = '';
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
-        self::assertNotNull(
-            $this->mailer->getFirstSentEmail()
-        );
         self::assertContains(
             'Mr. Bar',
-            $this->mailer->getFirstSentEmail()->getFrom()
+            $this->email->getFrom()
         );
     }
 
     /**
      * @test
+     * @group sendNotificationMailsToReceiver
      */
     public function sendAdditionalNotificationEmailToReviewerWithoutTypo3DefaultFromAddressUsesFrontEndUserAsFromAddress()
     {
@@ -2168,95 +2194,100 @@ class EventEditorTest extends TestCase
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = '';
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = '';
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
-        self::assertNotNull(
-            $this->mailer->getFirstSentEmail()
-        );
         self::assertArrayHasKey(
             'mail@foo.com',
-            $this->mailer->getFirstSentEmail()->getFrom()
+            $this->email->getFrom()
         );
     }
 
     /**
      * @test
+     * @group sendNotificationMailsToReceiver
      */
     public function sendAdditionalNotificationEmailToReviewerUsesEventSavedSubject()
     {
         $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
-        self::assertNotNull(
-            $this->mailer->getFirstSentEmail()
-        );
         self::assertSame(
             $this->getLanguageService()->getLL('save_event_subject'),
-            $this->mailer->getFirstSentEmail()->getSubject()
+            $this->email->getSubject()
         );
     }
 
     /**
      * @test
+     * @group sendNotificationMailsToReceiver
      */
     public function sendAdditionalNotificationEmailToReviewerHasIntroductoryText()
     {
         $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
-        self::assertNotNull(
-            $this->mailer->getFirstSentEmail()
-        );
         self::assertContains(
             $this->getLanguageService()->getLL('label_save_event_text'),
-            $this->mailer->getFirstSentEmail()->getBody()
+            $this->email->getBody()
         );
     }
 
     /**
      * @test
+     * @group sendNotificationMailsToReceiver
      */
     public function sendAdditionalNotificationEmailToReviewerHasOverviewText()
     {
         $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
-        self::assertNotNull(
-            $this->mailer->getFirstSentEmail()
-        );
         self::assertContains(
             $this->getLanguageService()->getLL('label_save_event_overview'),
-            $this->mailer->getFirstSentEmail()->getBody()
+            $this->email->getBody()
         );
     }
 
     /**
      * @test
+     * @group sendNotificationMailsToReceiver
      */
     public function sendAdditionalNotificationEmailToReviewerHasNoUnreplacedMarkers()
     {
         $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
-        self::assertNotNull(
-            $this->mailer->getFirstSentEmail()
-        );
         self::assertNotContains(
             '###',
-            $this->mailer->getFirstSentEmail()->getBody()
+            $this->email->getBody()
         );
     }
 
     /**
      * @test
+     * @group sendNotificationMailsToReceiver
      */
     public function sendAdditionalNotificationEmailToReviewerHasEventTitleInBody()
     {
@@ -2266,19 +2297,20 @@ class EventEditorTest extends TestCase
         $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
-        self::assertNotNull(
-            $this->mailer->getFirstSentEmail()
-        );
         self::assertContains(
             $title,
-            $this->mailer->getFirstSentEmail()->getBody()
+            $this->email->getBody()
         );
     }
 
     /**
      * @test
+     * @group sendNotificationMailsToReceiver
      */
     public function sendAdditionalNotificationEmailToReviewerHasEventDescriptionInBody()
     {
@@ -2288,19 +2320,20 @@ class EventEditorTest extends TestCase
         $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
-        self::assertNotNull(
-            $this->mailer->getFirstSentEmail()
-        );
         self::assertContains(
             $description,
-            $this->mailer->getFirstSentEmail()->getBody()
+            $this->email->getBody()
         );
     }
 
     /**
      * @test
+     * @group sendNotificationMailsToReceiver
      */
     public function sendAdditionalNotificationEmailToReviewerHasEventDateInBody()
     {
@@ -2311,14 +2344,14 @@ class EventEditorTest extends TestCase
         $this->subject->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
         $this->createAndLoginUserWithReviewer();
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
-        self::assertNotNull(
-            $this->mailer->getFirstSentEmail()
-        );
         self::assertContains(
             '02.04.1975',
-            $this->mailer->getFirstSentEmail()->getBody()
+            $this->email->getBody()
         );
     }
 
