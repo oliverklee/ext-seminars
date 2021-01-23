@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Document how to run the tests (#685)
 - Add traits for testing email and `makeInstance` instances (#683)
 
 ### Changed
