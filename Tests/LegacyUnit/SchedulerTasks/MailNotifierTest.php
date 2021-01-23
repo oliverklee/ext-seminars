@@ -8,8 +8,6 @@ use OliverKlee\Oelib\Authentication\BackEndLoginManager;
 use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
-use OliverKlee\Oelib\Email\EmailCollector;
-use OliverKlee\Oelib\Email\MailerFactory;
 use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\Interfaces\AccessibleObject;
@@ -19,12 +17,14 @@ use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
 use OliverKlee\Seminars\SchedulerTasks\MailNotifier;
 use OliverKlee\Seminars\Service\EmailService;
 use OliverKlee\Seminars\Service\EventStatusService;
+use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
+use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use Prophecy\Prophecy\ObjectProphecy;
 use Prophecy\Prophecy\ProphecySubjectInterface;
 use TYPO3\CMS\Core\Core\Bootstrap;
+use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Lang\LanguageService;
 use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
@@ -37,6 +37,9 @@ use TYPO3\CMS\Scheduler\Task\AbstractTask;
  */
 class MailNotifierTest extends TestCase
 {
+    use EmailTrait;
+    use MakeInstanceTrait;
+
     /**
      * @var MailNotifier|MockObject|AccessibleObject
      */
@@ -51,11 +54,6 @@ class MailNotifierTest extends TestCase
      * @var Configuration
      */
     protected $configuration = null;
-
-    /**
-     * @var EmailCollector
-     */
-    protected $mailer = null;
 
     /**
      * @var EventStatusService|MockObject
@@ -96,6 +94,11 @@ class MailNotifierTest extends TestCase
      * @var RegistrationDigest|ProphecySubjectInterface
      */
     private $registrationDigest = null;
+
+    /**
+     * @var MockObject|MailMessage|null
+     */
+    private $email = null;
 
     protected function setUp()
     {
@@ -142,18 +145,14 @@ class MailNotifierTest extends TestCase
         $this->eventMapper = $this->createMock(\Tx_Seminars_Mapper_Event::class);
         $this->subject->_set('eventMapper', $this->eventMapper);
 
-        /** @var MailerFactory $mailerFactory */
-        $mailerFactory = GeneralUtility::makeInstance(MailerFactory::class);
-        $mailerFactory->enableTestMode();
-        $this->mailer = $mailerFactory->getMailer();
-        $this->subject->_set('mailer', $this->mailer);
-
         $this->emailSalutation = $this->createMock(Salutation::class);
         $this->subject->_set('emailSalutation', $this->emailSalutation);
 
         $this->registrationDigestProphecy = $this->prophesize(RegistrationDigest::class);
         $this->registrationDigest = $this->registrationDigestProphecy->reveal();
         $this->subject->_set('registrationDigest', $this->registrationDigest);
+
+        $this->email = $this->createEmailMock();
     }
 
     protected function tearDown()
@@ -222,7 +221,7 @@ class MailNotifierTest extends TestCase
      */
     protected function getFirstEmailAttachment(): \Swift_Mime_Attachment
     {
-        $children = $this->mailer->getFirstSentEmail()->getChildren();
+        $children = $this->email->getChildren();
         return $children[0];
     }
 
@@ -465,12 +464,10 @@ class MailNotifierTest extends TestCase
             ]
         );
 
-        $this->subject->sendEventTakesPlaceReminders();
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
-        self::assertSame(
-            1,
-            $this->mailer->getNumberOfSentEmails()
-        );
+        $this->subject->sendEventTakesPlaceReminders();
     }
 
     /**
@@ -492,11 +489,14 @@ class MailNotifierTest extends TestCase
             ]
         );
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEventTakesPlaceReminders();
 
         self::assertContains(
             $subject,
-            $this->mailer->getFirstSentEmail()->getSubject()
+            $this->email->getSubject()
         );
     }
 
@@ -519,11 +519,14 @@ class MailNotifierTest extends TestCase
             ]
         );
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEventTakesPlaceReminders();
 
         self::assertContains(
             substr($message, 0, strpos($message, '%') - 1),
-            $this->mailer->getFirstSentEmail()->getBody()
+            $this->email->getBody()
         );
     }
 
@@ -545,12 +548,11 @@ class MailNotifierTest extends TestCase
             ]
         );
 
-        $this->subject->sendEventTakesPlaceReminders();
+        $this->email->expects(self::exactly(2))->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
-        self::assertSame(
-            2,
-            $this->mailer->getNumberOfSentEmails()
-        );
+        $this->subject->sendEventTakesPlaceReminders();
     }
 
     /**
@@ -571,12 +573,11 @@ class MailNotifierTest extends TestCase
         $this->testingFramework->createRelation('tx_seminars_seminars_organizers_mm', $eventUid, $organizerUid);
         $this->testingFramework->changeRecord('tx_seminars_seminars', $eventUid, ['organizers' => 2]);
 
-        $this->subject->sendEventTakesPlaceReminders();
+        $this->email->expects(self::exactly(2))->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
-        self::assertSame(
-            2,
-            $this->mailer->getNumberOfSentEmails()
-        );
+        $this->subject->sendEventTakesPlaceReminders();
     }
 
     /**
@@ -614,11 +615,10 @@ class MailNotifierTest extends TestCase
             ]
         );
 
-        $this->subject->sendEventTakesPlaceReminders();
+        $this->email->expects(self::never())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
-        self::assertNull(
-            $this->mailer->getFirstSentEmail()
-        );
+        $this->subject->sendEventTakesPlaceReminders();
     }
 
     /**
@@ -633,11 +633,10 @@ class MailNotifierTest extends TestCase
             ]
         );
 
-        $this->subject->sendEventTakesPlaceReminders();
+        $this->email->expects(self::never())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
-        self::assertNull(
-            $this->mailer->getFirstSentEmail()
-        );
+        $this->subject->sendEventTakesPlaceReminders();
     }
 
     /**
@@ -652,11 +651,10 @@ class MailNotifierTest extends TestCase
             ]
         );
 
-        $this->subject->sendEventTakesPlaceReminders();
+        $this->email->expects(self::never())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
-        self::assertNull(
-            $this->mailer->getFirstSentEmail()
-        );
+        $this->subject->sendEventTakesPlaceReminders();
     }
 
     /**
@@ -672,11 +670,10 @@ class MailNotifierTest extends TestCase
         );
         $this->configuration->setAsInteger('sendEventTakesPlaceReminderDaysBeforeBeginDate', 0);
 
-        $this->subject->sendEventTakesPlaceReminders();
+        $this->email->expects(self::never())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
-        self::assertNull(
-            $this->mailer->getFirstSentEmail()
-        );
+        $this->subject->sendEventTakesPlaceReminders();
     }
 
     /**
@@ -691,11 +688,10 @@ class MailNotifierTest extends TestCase
             ]
         );
 
-        $this->subject->sendEventTakesPlaceReminders();
+        $this->email->expects(self::never())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
-        self::assertNull(
-            $this->mailer->getFirstSentEmail()
-        );
+        $this->subject->sendEventTakesPlaceReminders();
     }
 
     /**
@@ -710,11 +706,10 @@ class MailNotifierTest extends TestCase
             ]
         );
 
-        $this->subject->sendEventTakesPlaceReminders();
+        $this->email->expects(self::never())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
-        self::assertNull(
-            $this->mailer->getFirstSentEmail()
-        );
+        $this->subject->sendEventTakesPlaceReminders();
     }
 
     /*
@@ -735,12 +730,10 @@ class MailNotifierTest extends TestCase
             )
         );
 
-        $this->subject->sendCancellationDeadlineReminders();
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
-        self::assertSame(
-            1,
-            $this->mailer->getNumberOfSentEmails()
-        );
+        $this->subject->sendCancellationDeadlineReminders();
     }
 
     /**
@@ -764,11 +757,14 @@ class MailNotifierTest extends TestCase
             )
         );
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendCancellationDeadlineReminders();
 
         self::assertContains(
             $subject,
-            $this->mailer->getFirstSentEmail()->getSubject()
+            $this->email->getSubject()
         );
     }
 
@@ -792,12 +788,14 @@ class MailNotifierTest extends TestCase
                 ]
             )
         );
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
         $this->subject->sendCancellationDeadlineReminders();
 
         self::assertContains(
             substr($message, 0, strpos($message, '%') - 1),
-            $this->mailer->getFirstSentEmail()->getBody()
+            $this->email->getBody()
         );
     }
 
@@ -823,12 +821,11 @@ class MailNotifierTest extends TestCase
             )
         );
 
-        $this->subject->sendCancellationDeadlineReminders();
+        $this->email->expects(self::exactly(2))->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
-        self::assertSame(
-            2,
-            $this->mailer->getNumberOfSentEmails()
-        );
+        $this->subject->sendCancellationDeadlineReminders();
     }
 
     /**
@@ -858,12 +855,11 @@ class MailNotifierTest extends TestCase
             ['organizers' => 2]
         );
 
-        $this->subject->sendCancellationDeadlineReminders();
+        $this->email->expects(self::exactly(2))->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
-        self::assertSame(
-            2,
-            $this->mailer->getNumberOfSentEmails()
-        );
+        $this->subject->sendCancellationDeadlineReminders();
     }
 
     /**
@@ -879,6 +875,9 @@ class MailNotifierTest extends TestCase
                 ]
             )
         );
+
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
         $this->subject->sendCancellationDeadlineReminders();
 
@@ -902,11 +901,10 @@ class MailNotifierTest extends TestCase
             )
         );
 
-        $this->subject->sendCancellationDeadlineReminders();
+        $this->email->expects(self::never())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
-        self::assertNull(
-            $this->mailer->getFirstSentEmail()
-        );
+        $this->subject->sendCancellationDeadlineReminders();
     }
 
     /**
@@ -923,11 +921,10 @@ class MailNotifierTest extends TestCase
             )
         );
 
-        $this->subject->sendCancellationDeadlineReminders();
+        $this->email->expects(self::never())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
-        self::assertNull(
-            $this->mailer->getFirstSentEmail()
-        );
+        $this->subject->sendCancellationDeadlineReminders();
     }
 
     /**
@@ -944,11 +941,10 @@ class MailNotifierTest extends TestCase
             )
         );
 
-        $this->subject->sendCancellationDeadlineReminders();
+        $this->email->expects(self::never())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
-        self::assertNull(
-            $this->mailer->getFirstSentEmail()
-        );
+        $this->subject->sendCancellationDeadlineReminders();
     }
 
     /**
@@ -966,11 +962,10 @@ class MailNotifierTest extends TestCase
         );
         $this->configuration->setAsBoolean('sendCancelationDeadlineReminder', false);
 
-        $this->subject->sendCancellationDeadlineReminders();
+        $this->email->expects(self::never())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
-        self::assertNull(
-            $this->mailer->getFirstSentEmail()
-        );
+        $this->subject->sendCancellationDeadlineReminders();
     }
 
     /**
@@ -987,11 +982,10 @@ class MailNotifierTest extends TestCase
             )
         );
 
-        $this->subject->sendCancellationDeadlineReminders();
+        $this->email->expects(self::never())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
-        self::assertNull(
-            $this->mailer->getFirstSentEmail()
-        );
+        $this->subject->sendCancellationDeadlineReminders();
     }
 
     /**
@@ -1008,11 +1002,10 @@ class MailNotifierTest extends TestCase
             )
         );
 
-        $this->subject->sendCancellationDeadlineReminders();
+        $this->email->expects(self::never())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
-        self::assertNull(
-            $this->mailer->getFirstSentEmail()
-        );
+        $this->subject->sendCancellationDeadlineReminders();
     }
 
     /*
@@ -1033,11 +1026,14 @@ class MailNotifierTest extends TestCase
             ]
         );
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEventTakesPlaceReminders();
 
         self::assertArrayHasKey(
             'MrTest@example.com',
-            $this->mailer->getFirstSentEmail()->getTo()
+            $this->email->getTo()
         );
     }
 
@@ -1058,11 +1054,14 @@ class MailNotifierTest extends TestCase
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = $defaultMailFromAddress;
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = $defaultMailFromName;
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEventTakesPlaceReminders();
 
         self::assertArrayHasKey(
             $defaultMailFromAddress,
-            $this->mailer->getFirstSentEmail()->getFrom()
+            $this->email->getFrom()
         );
     }
 
@@ -1089,11 +1088,15 @@ class MailNotifierTest extends TestCase
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = $defaultMailFromAddress;
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = $defaultMailFromName;
 
+        $this->email->expects(self::exactly(2))->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEventTakesPlaceReminders();
 
         self::assertArrayHasKey(
             $defaultMailFromAddress,
-            $this->mailer->getFirstSentEmail()->getFrom()
+            $this->email->getFrom()
         );
     }
 
@@ -1118,11 +1121,15 @@ class MailNotifierTest extends TestCase
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = 'system-foo@example.com';
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = 'Mr. Default';
 
+        $this->email->expects(self::exactly(2))->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEventTakesPlaceReminders();
 
         self::assertSame(
             ['MrTest@example.com' => 'Mr. Test'],
-            $this->mailer->getFirstSentEmail()->getReplyTo()
+            $this->email->getReplyTo()
         );
     }
 
@@ -1141,11 +1148,14 @@ class MailNotifierTest extends TestCase
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = '';
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = '';
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEventTakesPlaceReminders();
 
         self::assertArrayHasKey(
             'MrTest@example.com',
-            $this->mailer->getFirstSentEmail()->getFrom()
+            $this->email->getFrom()
         );
     }
 
@@ -1170,11 +1180,15 @@ class MailNotifierTest extends TestCase
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = '';
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = '';
 
+        $this->email->expects(self::exactly(2))->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEventTakesPlaceReminders();
 
         self::assertArrayHasKey(
             'MrTest@example.com',
-            $this->mailer->getFirstSentEmail()->getFrom()
+            $this->email->getFrom()
         );
     }
 
@@ -1196,11 +1210,14 @@ class MailNotifierTest extends TestCase
             ]
         );
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEventTakesPlaceReminders();
 
         self::assertSame(
             [],
-            $this->mailer->getFirstSentEmail()->getChildren()
+            $this->email->getChildren()
         );
     }
 
@@ -1225,6 +1242,10 @@ class MailNotifierTest extends TestCase
                 'user' => $this->testingFramework->createFrontEndUser(),
             ]
         );
+
+        $this->email->expects(self::once())->method('send');
+
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
         $this->subject->sendEventTakesPlaceReminders();
 
@@ -1255,11 +1276,14 @@ class MailNotifierTest extends TestCase
             ]
         );
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEventTakesPlaceReminders();
 
         self::assertSame(
             [],
-            $this->mailer->getFirstSentEmail()->getChildren()
+            $this->email->getChildren()
         );
     }
 
@@ -1283,6 +1307,9 @@ class MailNotifierTest extends TestCase
                 'user' => $this->testingFramework->createFrontEndUser(),
             ]
         );
+
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
         $this->subject->sendEventTakesPlaceReminders();
 
@@ -1315,6 +1342,9 @@ class MailNotifierTest extends TestCase
                 'user' => $this->testingFramework->createFrontEndUser('', ['email' => 'foo@bar.com']),
             ]
         );
+
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
         $this->subject->sendEventTakesPlaceReminders();
 
@@ -1354,6 +1384,9 @@ class MailNotifierTest extends TestCase
                 'registration_queue' => 1,
             ]
         );
+
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
 
         $this->subject->sendEventTakesPlaceReminders();
 
@@ -1396,6 +1429,9 @@ class MailNotifierTest extends TestCase
             ]
         );
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEventTakesPlaceReminders();
 
         self::assertNotContains(
@@ -1421,11 +1457,14 @@ class MailNotifierTest extends TestCase
             ]
         );
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEventTakesPlaceReminders();
 
         self::assertContains(
             'test event',
-            $this->mailer->getFirstSentEmail()->getSubject()
+            $this->email->getSubject()
         );
     }
 
@@ -1441,11 +1480,14 @@ class MailNotifierTest extends TestCase
             ]
         );
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEventTakesPlaceReminders();
 
         self::assertContains(
             '2',
-            $this->mailer->getFirstSentEmail()->getSubject()
+            $this->email->getSubject()
         );
     }
 
@@ -1465,11 +1507,14 @@ class MailNotifierTest extends TestCase
             ]
         );
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEventTakesPlaceReminders();
 
         self::assertContains(
             'Mr. Test',
-            $this->mailer->getFirstSentEmail()->getBody()
+            $this->email->getBody()
         );
     }
 
@@ -1486,11 +1531,14 @@ class MailNotifierTest extends TestCase
             ]
         );
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEventTakesPlaceReminders();
 
         self::assertContains(
             'test event',
-            $this->mailer->getFirstSentEmail()->getBody()
+            $this->email->getBody()
         );
     }
 
@@ -1506,11 +1554,14 @@ class MailNotifierTest extends TestCase
             ]
         );
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEventTakesPlaceReminders();
 
         self::assertContains(
             (string)$uid,
-            $this->mailer->getFirstSentEmail()->getBody()
+            $this->email->getBody()
         );
     }
 
@@ -1526,11 +1577,14 @@ class MailNotifierTest extends TestCase
             ]
         );
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEventTakesPlaceReminders();
 
         self::assertContains(
             '2',
-            $this->mailer->getFirstSentEmail()->getBody()
+            $this->email->getBody()
         );
     }
 
@@ -1548,6 +1602,9 @@ class MailNotifierTest extends TestCase
             )
         );
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendCancellationDeadlineReminders();
 
         self::assertContains(
@@ -1555,7 +1612,7 @@ class MailNotifierTest extends TestCase
                 $this->configuration->getAsString('dateFormatYMD'),
                 $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY
             ),
-            $this->mailer->getFirstSentEmail()->getBody()
+            $this->email->getBody()
         );
     }
 
@@ -1571,11 +1628,14 @@ class MailNotifierTest extends TestCase
             ]
         );
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEventTakesPlaceReminders();
 
         self::assertContains(
             '0',
-            $this->mailer->getFirstSentEmail()->getBody()
+            $this->email->getBody()
         );
     }
 
@@ -1599,11 +1659,14 @@ class MailNotifierTest extends TestCase
             ]
         );
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEventTakesPlaceReminders();
 
         self::assertContains(
             '1',
-            $this->mailer->getFirstSentEmail()->getBody()
+            $this->email->getBody()
         );
     }
 
