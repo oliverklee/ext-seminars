@@ -1655,7 +1655,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
             $hookClasses = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'];
             if (is_array($hookClasses)) {
                 foreach ($hookClasses as $hookClass) {
-                    $hookObject = GeneralUtility::getUserObj($hookClass);
+                    $hookObject = GeneralUtility::makeInstance($hookClass);
                     $this->hooks[] = $hookObject;
                     if ($hookObject instanceof RegistrationEmailHookInterface) {
                         GeneralUtility::deprecationLog(

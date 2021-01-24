@@ -674,7 +674,7 @@ abstract class AbstractEventMailForm
             $hookClasses = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['backEndModule'];
             if (\is_array($hookClasses)) {
                 foreach ($hookClasses as $hookClass) {
-                    $hookInstance = GeneralUtility::getUserObj($hookClass);
+                    $hookInstance = GeneralUtility::makeInstance($hookClass);
                     if (!($hookInstance instanceof \Tx_Seminars_Interface_Hook_BackEndModule)) {
                         throw new \UnexpectedValueException(
                             'The class ' . \get_class($hookInstance) . ' is used for the event list view hook, ' .

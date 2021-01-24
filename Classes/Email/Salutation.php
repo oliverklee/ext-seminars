@@ -78,7 +78,7 @@ class Salutation
         $hooks = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['modifyEmailSalutation'];
         if (is_array($hooks)) {
             foreach ($hooks as $classReference) {
-                $result[] = GeneralUtility::getUserObj($classReference);
+                $result[] = GeneralUtility::makeInstance($classReference);
             }
         }
 
