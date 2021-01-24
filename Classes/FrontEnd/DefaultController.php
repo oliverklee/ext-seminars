@@ -413,7 +413,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
             $hookClasses = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView'];
             if (is_array($hookClasses)) {
                 foreach ($hookClasses as $hookClass) {
-                    $hookInstance = GeneralUtility::getUserObj($hookClass);
+                    $hookInstance = GeneralUtility::makeInstance($hookClass);
                     if (!($hookInstance instanceof \Tx_Seminars_Interface_Hook_EventListView)) {
                         throw new \UnexpectedValueException(
                             'The class ' . get_class($hookInstance) . ' is used for the event list view hook, ' .
@@ -467,7 +467,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
                         $hookClass . ' - since seminars 3.0, interface \\Tx_Seminars_Interface_Hook_EventSingleView'
                         . ' will be removed in seminars 4.0'
                     );
-                    $hookInstance = GeneralUtility::getUserObj($hookClass);
+                    $hookInstance = GeneralUtility::makeInstance($hookClass);
                     if (!($hookInstance instanceof \Tx_Seminars_Interface_Hook_EventSingleView)) {
                         throw new \UnexpectedValueException(
                             'The class ' . get_class($hookInstance) . ' is used for the event single view hook, ' .
