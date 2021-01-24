@@ -17,7 +17,7 @@ class Tx_Seminars_ViewHelper_CommaSeparatedTitles
      *
      * The titles will be htmlspecialchared before being returned.
      *
-     * @param Collection<\Tx_Seminars_Interface_Titled> $list
+     * @param Collection<Titled> $list
      *
      * @return string the titles of the elements in $list as a comma-separated list or an empty string if the list is empty
      */
@@ -29,7 +29,7 @@ class Tx_Seminars_ViewHelper_CommaSeparatedTitles
         foreach ($list as $element) {
             if (!$element instanceof Titled) {
                 throw new \InvalidArgumentException(
-                    'All elements in $list must implement the interface Tx_Seminars_Interface_Titled.',
+                    'All elements in $list must implement the interface OliverKlee\\Seminars\\Model\\Interfaces\\Titled.',
                     1333658899
                 );
             }
