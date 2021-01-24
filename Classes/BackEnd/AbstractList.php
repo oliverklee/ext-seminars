@@ -14,6 +14,7 @@ use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Lang\LanguageService;
 
 /**
@@ -113,7 +114,7 @@ abstract class AbstractList
         }
 
         $langEdit = \htmlspecialchars($this->getLanguageService()->getLL('edit'), ENT_QUOTES | ENT_HTML5);
-        $icon = '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') .
+        $icon = '<img src="/' . PathUtility::stripPathSitePrefix(ExtensionManagementUtility::extPath('seminars')) .
             'Resources/Public/Icons/Edit.gif" alt="' . $langEdit . '" class="icon" />';
 
         $urlParameters = [
@@ -162,7 +163,7 @@ abstract class AbstractList
             $result = '<a class="btn btn-default" href="' .
                 \htmlspecialchars($url, ENT_QUOTES | ENT_HTML5) .
                 '" onclick="' . $confirmation . '">' .
-                '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') .
+                '<img src="/' . PathUtility::stripPathSitePrefix(ExtensionManagementUtility::extPath('seminars')) .
                 'Resources/Public/Icons/Garbage.gif" title="' . \htmlspecialchars($langDelete, ENT_QUOTES | ENT_HTML5) .
                 '" alt="' . \htmlspecialchars($langDelete, ENT_QUOTES | ENT_HTML5) . '" class="deleteicon" />' .
                 '</a>';
@@ -217,7 +218,7 @@ abstract class AbstractList
 
             $result = '<div id="typo3-newRecordLink">' .
                 '<a class="btn btn-default" href="' . \htmlspecialchars($actionUrl, ENT_QUOTES | ENT_HTML5) . '">' .
-                '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') .
+                '<img src="/' . PathUtility::stripPathSitePrefix(ExtensionManagementUtility::extPath('seminars')) .
                 'Resources/Public/Icons/New.gif"' .
                 // We use an empty alt attribute as we already have a textual
                 // representation directly next to the icon.
@@ -282,7 +283,7 @@ abstract class AbstractList
         return '<div id="typo3-csvLink">' .
             '<a class="btn btn-default" href="' . \htmlspecialchars($csvUrl, ENT_QUOTES | ENT_HTML5) .
             $this->getAdditionalCsvParameters() . '">' .
-            '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') .
+            '<img src="/' . PathUtility::stripPathSitePrefix(ExtensionManagementUtility::extPath('seminars')) .
             'Resources/Public/Icons/Csv.gif" title="' . $csvLabel . '" alt="" class="icon" />' .
             // We use an empty alt attribute as we already have a textual
             // representation directly next to the icon.
@@ -323,7 +324,7 @@ abstract class AbstractList
             $url = $this->getRouteUrl('tce_db', $urlParameters);
             $result = '<a class="btn btn-default" href="' .
                 \htmlspecialchars($url, ENT_QUOTES | ENT_HTML5) . '">' .
-                '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') . 'Resources/Public/Icons/' .
+                '<img src="/' . PathUtility::stripPathSitePrefix(ExtensionManagementUtility::extPath('seminars')) . 'Resources/Public/Icons/' .
                 $icon . '" title="' . $langHide . '" alt="' . $langHide . '" class="hideicon" />' .
                 '</a>';
         }

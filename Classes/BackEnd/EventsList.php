@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\BackEnd;
 use OliverKlee\Seminars\Csv\BackEndRegistrationAccessCheck;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\PathUtility;
 
 /**
  * This class creates an events list in the back end.
@@ -266,7 +267,7 @@ class EventsList extends AbstractList
         }
         $label = $this->getLanguageService()->getLL($labelKey);
 
-        return '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') . 'Resources/Public/Icons/' . $icon .
+        return '<img src="/' . PathUtility::stripPathSitePrefix(ExtensionManagementUtility::extPath('seminars')) . 'Resources/Public/Icons/' . $icon .
             '" title="' . $label . '" alt="' . $label . '"/>';
     }
 
@@ -287,7 +288,7 @@ class EventsList extends AbstractList
         $pageData = $this->page->getPageData();
         $csvLabel = $this->getLanguageService()->getLL('csvExport');
 
-        $imageTag = '<img src="/' . ExtensionManagementUtility::siteRelPath('seminars') .
+        $imageTag = '<img src="/' . PathUtility::stripPathSitePrefix(ExtensionManagementUtility::extPath('seminars')) .
             'Resources/Public/Icons/Csv.gif" title="' . $csvLabel . '" alt="' . $csvLabel . '" class="icon" />';
 
         $urlParameters = [
