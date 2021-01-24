@@ -67,7 +67,7 @@ class CommaSeparatedTitlesViewHelperTest extends TestCase
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage(
-            'All elements in $list must implement the interface Tx_Seminars_Interface_Titled.'
+            'All elements in $list must implement the interface OliverKlee\\Seminars\\Model\\Interfaces\\Titled.'
         );
         $this->expectExceptionCode(1333658899);
 
