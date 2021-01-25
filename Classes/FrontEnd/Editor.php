@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Sys25\RnBase\Configuration\Processor as ConfigurationProcessor;
+
 /**
  * This class is the base class for any kind of front-end editor, for example the event editor or the registration editor.
  *
@@ -148,9 +150,9 @@ class Tx_Seminars_FrontEnd_Editor extends \Tx_Seminars_FrontEnd_AbstractView
         /**
          * Configuration instance for plugin data. Necessary for LABEL translation.
          *
-         * @var \Tx_Rnbase_Configuration_Processor $pluginConfiguration
+         * @var ConfigurationProcessor $pluginConfiguration
          */
-        $pluginConfiguration = \tx_rnbase::makeInstance(\Tx_Rnbase_Configuration_Processor::class);
+        $pluginConfiguration = \tx_rnbase::makeInstance(ConfigurationProcessor::class);
         $pluginConfiguration->init($this->conf, $this->cObj, 'mkforms', 'mkforms');
 
         // Initialize the form from TypoScript data and provide configuration for the plugin.
