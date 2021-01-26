@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\FrontEnd;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd\Fixtures\TestingDefaultController;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
@@ -60,7 +61,9 @@ final class DefaultControllerTest extends FunctionalTestCase
         }
         $frontEndController->determineId();
         $frontEndController->cObj = $contentObject;
-        $frontEndController->initTemplate();
+        if (Typo3Version::isNotHigherThan(8)) {
+            $frontEndController->initTemplate();
+        }
 
         $this->frontEndController = $frontEndController;
         $GLOBALS['TSFE'] = $frontEndController;
