@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\Functional\FrontEnd;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
+use OliverKlee\Oelib\System\Typo3Version;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
@@ -90,7 +91,9 @@ final class EventEditorTest extends FunctionalTestCase
         }
         $frontEndController->determineId();
         $frontEndController->cObj = $contentObject;
-        $frontEndController->initTemplate();
+        if (Typo3Version::isNotHigherThan(8)) {
+            $frontEndController->initTemplate();
+        }
 
         $this->frontEndController = $frontEndController;
         $GLOBALS['TSFE'] = $frontEndController;
