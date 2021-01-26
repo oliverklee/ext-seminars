@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
 use OliverKlee\Oelib\Mapper\CurrencyMapper;
+use TYPO3\CMS\Core\Database\Connection;
 
 /**
  * This class represents a mapper for registrations.
@@ -44,6 +45,8 @@ class Tx_Seminars_Mapper_Registration extends AbstractDataMapper
      */
     public function countByFrontEndUser(\Tx_Seminars_Model_FrontEndUser $user): int
     {
-        return $this->countByWhereClause('user = ' . $user->getUid());
+        /** @var Connection $connection */
+        $connection = $this->getConnectionForTable($this->getTableName());
+        return $connection->count('*', $this->getTableName(), ['user' => $user->getUid()]);
     }
 }
