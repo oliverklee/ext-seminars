@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminar\Email;
 
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
-use OliverKlee\Oelib\Language\Translator;
-use OliverKlee\Oelib\Language\TranslatorRegistry;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * This class creates a salutation for e-mails.
@@ -16,19 +15,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class Salutation
 {
-    /**
-     * @var Translator
-     */
-    private $translator = null;
-
-    /**
-     * the constructor
-     */
-    public function __construct()
-    {
-        $this->translator = TranslatorRegistry::get('seminars');
-    }
-
     /**
      * Creates the salutation for the given user.
      *
@@ -47,13 +33,13 @@ class Salutation
         $salutationMode = ConfigurationRegistry::get('plugin.tx_seminars')->getAsString('salutation');
         switch ($salutationMode) {
             case 'informal':
-                $salutationParts['dear'] = $this->translator->translate('email_hello_informal');
+                $salutationParts['dear'] = LocalizationUtility::translate('email_hello_informal', 'seminars');
                 $salutationParts['name'] = $user->getFirstOrFullName();
                 break;
             default:
                 $gender = $user->getGender();
-                $salutationParts['dear'] = $this->translator->translate('email_hello_formal_' . $gender);
-                $salutationParts['title'] = $this->translator->translate('email_salutation_title_' . $gender);
+                $salutationParts['dear'] = LocalizationUtility::translate('email_hello_formal_' . $gender, 'seminars');
+                $salutationParts['title'] = LocalizationUtility::translate('email_salutation_title_' . $gender, 'seminars');
                 $salutationParts['name'] = $user->getLastOrFullName();
         }
 
@@ -109,15 +95,17 @@ class Salutation
         if (!$event->hasDate()) {
             return $result;
         }
-
-        $result .= ' ' . sprintf($this->translator->translate('email_eventDate'), $event->getDate('-'));
+        $result .= ' ' . sprintf(
+            LocalizationUtility::translate('email_eventDate', 'seminars'),
+            $event->getDate('-')
+        );
 
         if ($event->hasTime() && !$event->hasTimeslots()) {
-            $timeToLabelWithPlaceholders = $this->translator->translate('email_timeTo');
+            $timeToLabelWithPlaceholders = LocalizationUtility::translate('email_timeTo', 'seminars');
             $time = $event->getTime(' ' . $timeToLabelWithPlaceholders . ' ');
             $label = ' ' . (!$event->isOpenEnded()
-                    ? $this->translator->translate('email_timeFrom')
-                    : $this->translator->translate('email_timeAt'));
+                    ? LocalizationUtility::translate('email_timeFrom', 'seminars')
+                    : LocalizationUtility::translate('email_timeAt', 'seminars'));
             $result .= sprintf($label, $time);
         }
 

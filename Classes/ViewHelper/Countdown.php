@@ -3,8 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\Interfaces\Time;
-use OliverKlee\Oelib\Language\Translator;
-use OliverKlee\Oelib\Language\TranslatorRegistry;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * This class represents a view helper for rendering a countdown.
@@ -13,19 +12,6 @@ use OliverKlee\Oelib\Language\TranslatorRegistry;
  */
 class Tx_Seminars_ViewHelper_Countdown
 {
-    /**
-     * @var Translator
-     */
-    protected $translator = null;
-
-    /**
-     * The constructor.
-     */
-    public function __construct()
-    {
-        $this->translator = TranslatorRegistry::get('seminars');
-    }
-
     /**
      * Returns a localized string representing an amount of seconds in words.
      * For example:
@@ -66,9 +52,9 @@ class Tx_Seminars_ViewHelper_Countdown
     {
         $countdownValue = (int)\round($seconds / Time::SECONDS_PER_DAY);
         if ($countdownValue > 1 || $countdownValue === 0) {
-            $countdownText = $this->translator->translate('countdown_days_plural');
+            $countdownText = LocalizationUtility::translate('countdown_days_plural', 'seminars');
         } else {
-            $countdownText = $this->translator->translate('countdown_days_singular');
+            $countdownText = LocalizationUtility::translate('countdown_days_singular', 'seminars');
         }
 
         return $this->getFormattedMessage($countdownValue, $countdownText);
@@ -85,9 +71,9 @@ class Tx_Seminars_ViewHelper_Countdown
     {
         $countdownValue = (int)\round($seconds / Time::SECONDS_PER_HOUR);
         if ($countdownValue > 1 || $countdownValue === 0) {
-            $countdownText = $this->translator->translate('countdown_hours_plural');
+            $countdownText = LocalizationUtility::translate('countdown_hours_plural', 'seminars');
         } else {
-            $countdownText = $this->translator->translate('countdown_hours_singular');
+            $countdownText = LocalizationUtility::translate('countdown_hours_singular', 'seminars');
         }
 
         return $this->getFormattedMessage($countdownValue, $countdownText);
@@ -104,9 +90,9 @@ class Tx_Seminars_ViewHelper_Countdown
     {
         $countdownValue = (int)\round($seconds / Time::SECONDS_PER_MINUTE);
         if ($countdownValue > 1 || $countdownValue === 0) {
-            $countdownText = $this->translator->translate('countdown_minutes_plural');
+            $countdownText = LocalizationUtility::translate('countdown_minutes_plural', 'seminars');
         } else {
-            $countdownText = $this->translator->translate('countdown_minutes_singular');
+            $countdownText = LocalizationUtility::translate('countdown_minutes_singular', 'seminars');
         }
 
         return $this->getFormattedMessage($countdownValue, $countdownText);
@@ -122,7 +108,7 @@ class Tx_Seminars_ViewHelper_Countdown
     protected function getAsSeconds(int $seconds): string
     {
         $countdownValue = $seconds;
-        $countdownText = $this->translator->translate('countdown_seconds_plural');
+        $countdownText = LocalizationUtility::translate('countdown_seconds_plural', 'seminars');
 
         return $this->getFormattedMessage($countdownValue, $countdownText);
     }
@@ -137,6 +123,10 @@ class Tx_Seminars_ViewHelper_Countdown
      */
     protected function getFormattedMessage(int $countdownValue, string $countdownText): string
     {
-        return \sprintf($this->translator->translate('message_countdown'), $countdownValue, $countdownText);
+        return \sprintf(
+            LocalizationUtility::translate('message_countdown', 'seminars'),
+            $countdownValue,
+            $countdownText
+        );
     }
 }

@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
-use OliverKlee\Oelib\Language\Translator;
-use OliverKlee\Oelib\Language\TranslatorRegistry;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * This class represents a view helper for rendering date ranges.
@@ -20,17 +19,11 @@ class Tx_Seminars_ViewHelper_DateRange
     protected $configuration = null;
 
     /**
-     * @var Translator
-     */
-    protected $translator = null;
-
-    /**
      * The constructor.
      */
     public function __construct()
     {
         $this->configuration = ConfigurationRegistry::get('plugin.tx_seminars');
-        $this->translator = TranslatorRegistry::get('seminars');
     }
 
     /**
@@ -48,7 +41,7 @@ class Tx_Seminars_ViewHelper_DateRange
     public function render(\Tx_Seminars_Model_AbstractTimeSpan $timeSpan, $dash = '&#8211;'): string
     {
         if (!$timeSpan->hasBeginDate()) {
-            return $this->translator->translate('message_willBeAnnounced');
+            return LocalizationUtility::translate('message_willBeAnnounced', 'seminars');
         }
 
         $beginDate = $timeSpan->getBeginDateAsUnixTimeStamp();
