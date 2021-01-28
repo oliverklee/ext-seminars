@@ -9,6 +9,7 @@ use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Http\HeaderCollector;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
+use OliverKlee\Oelib\System\Typo3Version;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Core\Bootstrap;
@@ -80,7 +81,11 @@ trait BackEndTestsTrait
     private function unifyTestingEnvironment()
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
-        Bootstrap::getInstance()->initializeBackendAuthentication();
+        if (Typo3Version::isNotHigherThan(8)) {
+            Bootstrap::getInstance()->initializeBackendAuthentication();
+        } else {
+            Bootstrap::initializeBackendAuthentication();
+        }
         $this->cleanRequestVariables();
         $this->replaceBackEndUserWithMock();
         $this->unifyBackEndLanguage();
