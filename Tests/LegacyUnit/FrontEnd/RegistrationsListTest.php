@@ -9,6 +9,8 @@ use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
@@ -138,11 +140,14 @@ class RegistrationsListTest extends TestCase
     public function createLogInAndRegisterFrontEndUserCreatesRegistrationRecord()
     {
         $this->createLogInAndRegisterFrontEndUser();
+        /** @var ConnectionPool $connectionPool */
+        $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
 
-        self::assertTrue(
-            $this->testingFramework->existsExactlyOneRecord(
-                'tx_seminars_attendances'
-            )
+        $connection = $connectionPool->getConnectionForTable('tx_seminars_attendances');
+
+        self::assertSame(
+            1,
+            $connection->count('*', 'tx_seminars_attendances', [])
         );
     }
 
