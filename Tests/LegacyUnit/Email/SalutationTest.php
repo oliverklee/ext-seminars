@@ -9,6 +9,7 @@ use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
+use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminar\Email\Salutation;
@@ -46,7 +47,11 @@ final class SalutationTest extends TestCase
     protected function setUp()
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
-        Bootstrap::getInstance()->initializeBackendAuthentication();
+        if (Typo3Version::isNotHigherThan(8)) {
+            Bootstrap::getInstance()->initializeBackendAuthentication();
+        } else {
+            Bootstrap::initializeBackendAuthentication();
+        }
 
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->subject = new Salutation();

@@ -9,6 +9,7 @@ use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Interfaces\Time;
+use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\Interfaces\AccessibleObject;
 use OliverKlee\PhpUnit\TestCase;
@@ -108,7 +109,11 @@ class MailNotifierTest extends TestCase
         if (!ExtensionManagementUtility::isLoaded('scheduler')) {
             self::markTestSkipped('This tests needs the scheduler extension.');
         }
-        Bootstrap::getInstance()->initializeBackendAuthentication();
+        if (Typo3Version::isNotHigherThan(8)) {
+            Bootstrap::getInstance()->initializeBackendAuthentication();
+        } else {
+            Bootstrap::initializeBackendAuthentication();
+        }
 
         $this->languageService = new LanguageService();
         $this->languageService->init('default');

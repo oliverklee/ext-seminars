@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Service\EmailService;
@@ -90,7 +91,11 @@ final class EmailServiceTest extends TestCase
 
     protected function setUp()
     {
-        Bootstrap::getInstance()->initializeBackendAuthentication();
+        if (Typo3Version::isNotHigherThan(8)) {
+            Bootstrap::getInstance()->initializeBackendAuthentication();
+        } else {
+            Bootstrap::initializeBackendAuthentication();
+        }
         $this->languageBackup = $GLOBALS['LANG'] ?? null;
         $languageService = new LanguageService();
         $languageService->init('default');
