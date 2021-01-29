@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\BagBuilder;
 
-use OliverKlee\Oelib\Database\DatabaseService;
+use OliverKlee\Oelib\Domain\Repository\PageRepository as OelibPageRepository;
 use OliverKlee\Seminars\Bag\AbstractBag;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -134,9 +134,14 @@ abstract class AbstractBagBuilder
             return;
         }
 
-        $recursivePidList = DatabaseService::createRecursivePageList($sourcePagePids, $recursionDepth);
+        // Transform the incoming comma separated uids into an array
+        // Todo: Remove this after we pass an array from outside
+        $uids = GeneralUtility::intExplode(',', $sourcePagePids);
 
-        $this->whereClauseParts['pages'] = $this->tableName . '.pid IN (' . $recursivePidList . ')';
+        $recursivePidList =
+            GeneralUtility::makeInstance(OelibPageRepository::class)->findWithinParentPages($uids, $recursionDepth);
+
+        $this->whereClauseParts['pages'] = $this->tableName . '.pid IN (' . \implode(',', $recursivePidList) . ')';
     }
 
     /**
