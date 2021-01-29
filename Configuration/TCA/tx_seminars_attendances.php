@@ -15,7 +15,6 @@ $tca = [
             'disabled' => 'hidden',
         ],
         'iconfile' => 'EXT:seminars/Resources/Public/Icons/Registration.gif',
-        'dividers2tabs' => true,
         'searchFields' => 'title',
     ],
     'interface' => [

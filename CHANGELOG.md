@@ -19,6 +19,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Drop the obsolete `dividers2tabs` option from TCA (#722)
 - Raise limit of field endtime to 2038-1-1 (#678)
 - Use the namespaced oelib classes (#658, #569, #661, #662, #663, #664, #665, #666, #667, #668, #669, #670, #671)
 - Stop using event model prophecies in the scheduler task tests (#651)

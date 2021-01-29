@@ -27,7 +27,6 @@ $tca = [
             '1' => 'tx-seminars-event-topic',
             '2' => 'tx-seminars-event-date',
         ],
-        'dividers2tabs' => true,
         'hideAtCopy' => true,
         'searchFields' => 'title,accreditation_number',
     ],
