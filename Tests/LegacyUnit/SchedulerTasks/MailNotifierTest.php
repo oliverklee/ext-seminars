@@ -614,6 +614,9 @@ class MailNotifierTest extends TestCase
             ]
         );
 
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $this->subject->sendEventTakesPlaceReminders();
         $connection = $this->getConnectionForTable('tx_seminars_seminars');
 

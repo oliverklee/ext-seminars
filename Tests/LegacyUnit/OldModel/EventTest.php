@@ -12,6 +12,8 @@ use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Test case.
@@ -58,6 +60,9 @@ final class EventTest extends TestCase
      */
     private $placeRelationSorting = 1;
 
+    /** @var ConnectionPool */
+    private $connectionPool = null;
+
     protected function setUp()
     {
         // Make sure that the test results do not depend on the machine's PHP time zone.
@@ -91,6 +96,8 @@ final class EventTest extends TestCase
                 'unregistrationDeadlineDaysBeforeBeginDate' => 0,
             ]
         );
+
+        $this->connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
     }
 
     protected function tearDown()
@@ -502,30 +509,23 @@ final class EventTest extends TestCase
      */
     public function addPlaceRelationCreatesRelations()
     {
+        $connection = $this->connectionPool->getConnectionForTable('tx_seminars_seminars_place_mm');
+
         self::assertSame(
             0,
-            $this->testingFramework->countRecords(
-                'tx_seminars_seminars_place_mm',
-                'uid_local=' . $this->subject->getUid()
-            )
+            $connection->count('*', 'tx_seminars_seminars_place_mm', ['uid_local' => $this->subject->getUid()])
         );
 
         $this->addPlaceRelation();
         self::assertSame(
             1,
-            $this->testingFramework->countRecords(
-                'tx_seminars_seminars_place_mm',
-                'uid_local=' . $this->subject->getUid()
-            )
+            $connection->count('*', 'tx_seminars_seminars_place_mm', ['uid_local' => $this->subject->getUid()])
         );
 
         $this->addPlaceRelation();
         self::assertSame(
             2,
-            $this->testingFramework->countRecords(
-                'tx_seminars_seminars_place_mm',
-                'uid_local=' . $this->subject->getUid()
-            )
+            $connection->count('*', 'tx_seminars_seminars_place_mm', ['uid_local' => $this->subject->getUid()])
         );
     }
 
@@ -580,30 +580,23 @@ final class EventTest extends TestCase
      */
     public function addCategoryRelationCreatesRelations()
     {
+        $connection = $this->connectionPool->getConnectionForTable('tx_seminars_seminars_categories_mm');
+
         self::assertSame(
             0,
-            $this->testingFramework->countRecords(
-                'tx_seminars_seminars_categories_mm',
-                'uid_local=' . $this->subject->getUid()
-            )
+            $connection->count('*', 'tx_seminars_seminars_categories_mm', ['uid_local' => $this->subject->getUid()])
         );
 
         $this->addCategoryRelation();
         self::assertSame(
             1,
-            $this->testingFramework->countRecords(
-                'tx_seminars_seminars_categories_mm',
-                'uid_local=' . $this->subject->getUid()
-            )
+            $connection->count('*', 'tx_seminars_seminars_categories_mm', ['uid_local' => $this->subject->getUid()])
         );
 
         $this->addCategoryRelation();
         self::assertSame(
             2,
-            $this->testingFramework->countRecords(
-                'tx_seminars_seminars_categories_mm',
-                'uid_local=' . $this->subject->getUid()
-            )
+            $connection->count('*', 'tx_seminars_seminars_categories_mm', ['uid_local' => $this->subject->getUid()])
         );
     }
 
@@ -612,12 +605,16 @@ final class EventTest extends TestCase
      */
     public function addCategoryRelationCanSetSortingInRelationTable()
     {
+        $connection = $this->connectionPool->getConnectionForTable('tx_seminars_seminars_categories_mm');
+
         $this->addCategoryRelation([], 42);
+
         self::assertSame(
             1,
-            $this->testingFramework->countRecords(
+            $connection->count(
+                '*',
                 'tx_seminars_seminars_categories_mm',
-                'uid_local=' . $this->subject->getUid() . ' AND sorting=42'
+                ['uid_local' => $this->subject->getUid(), 'sorting' => 42]
             )
         );
     }
@@ -671,30 +668,23 @@ final class EventTest extends TestCase
      */
     public function addTargetGroupRelationCreatesRelations()
     {
+        $connection = $this->connectionPool->getConnectionForTable('tx_seminars_seminars_target_groups_mm');
+
         self::assertSame(
             0,
-            $this->testingFramework->countRecords(
-                'tx_seminars_seminars_target_groups_mm',
-                'uid_local=' . $this->subject->getUid()
-            )
+            $connection->count('*', 'tx_seminars_seminars_target_groups_mm', ['uid_local' => $this->subject->getUid()])
         );
 
         $this->addTargetGroupRelation();
         self::assertSame(
             1,
-            $this->testingFramework->countRecords(
-                'tx_seminars_seminars_target_groups_mm',
-                'uid_local=' . $this->subject->getUid()
-            )
+            $connection->count('*', 'tx_seminars_seminars_target_groups_mm', ['uid_local' => $this->subject->getUid()])
         );
 
         $this->addTargetGroupRelation();
         self::assertSame(
             2,
-            $this->testingFramework->countRecords(
-                'tx_seminars_seminars_target_groups_mm',
-                'uid_local=' . $this->subject->getUid()
-            )
+            $connection->count('*', 'tx_seminars_seminars_target_groups_mm', ['uid_local' => $this->subject->getUid()])
         );
     }
 
@@ -772,30 +762,23 @@ final class EventTest extends TestCase
      */
     public function addOrganizingPartnerRelationCreatesRelations()
     {
+        $connection = $this->connectionPool->getConnectionForTable('tx_seminars_seminars_organizing_partners_mm');
+
         self::assertSame(
             0,
-            $this->testingFramework->countRecords(
-                'tx_seminars_seminars_organizing_partners_mm',
-                'uid_local=' . $this->subject->getUid()
-            )
+            $connection->count('*', 'tx_seminars_seminars_organizing_partners_mm', ['uid_local' => $this->subject->getUid()])
         );
 
         $this->addOrganizingPartnerRelation();
         self::assertSame(
             1,
-            $this->testingFramework->countRecords(
-                'tx_seminars_seminars_organizing_partners_mm',
-                'uid_local=' . $this->subject->getUid()
-            )
+            $connection->count('*', 'tx_seminars_seminars_organizing_partners_mm', ['uid_local' => $this->subject->getUid()])
         );
 
         $this->addOrganizingPartnerRelation();
         self::assertSame(
             2,
-            $this->testingFramework->countRecords(
-                'tx_seminars_seminars_organizing_partners_mm',
-                'uid_local=' . $this->subject->getUid()
-            )
+            $connection->count('*', 'tx_seminars_seminars_organizing_partners_mm', ['uid_local' => $this->subject->getUid()])
         );
     }
 
@@ -873,30 +856,23 @@ final class EventTest extends TestCase
      */
     public function addSpeakerRelationCreatesRelations()
     {
+        $connection = $this->connectionPool->getConnectionForTable('tx_seminars_seminars_speakers_mm');
+
         self::assertSame(
             0,
-            $this->testingFramework->countRecords(
-                'tx_seminars_seminars_speakers_mm',
-                'uid_local=' . $this->subject->getUid()
-            )
+            $connection->count('*', 'tx_seminars_seminars_speakers_mm', ['uid_local' => $this->subject->getUid()])
         );
 
         $this->addSpeakerRelation([]);
         self::assertSame(
             1,
-            $this->testingFramework->countRecords(
-                'tx_seminars_seminars_speakers_mm',
-                'uid_local=' . $this->subject->getUid()
-            )
+            $connection->count('*', 'tx_seminars_seminars_speakers_mm', ['uid_local' => $this->subject->getUid()])
         );
 
         $this->addSpeakerRelation([]);
         self::assertSame(
             2,
-            $this->testingFramework->countRecords(
-                'tx_seminars_seminars_speakers_mm',
-                'uid_local=' . $this->subject->getUid()
-            )
+            $connection->count('*', 'tx_seminars_seminars_speakers_mm', ['uid_local' => $this->subject->getUid()])
         );
     }
 
@@ -928,30 +904,23 @@ final class EventTest extends TestCase
      */
     public function addPartnerRelationCreatesRelations()
     {
+        $connection = $this->connectionPool->getConnectionForTable('tx_seminars_seminars_speakers_mm_partners');
+
         self::assertSame(
             0,
-            $this->testingFramework->countRecords(
-                'tx_seminars_seminars_speakers_mm_partners',
-                'uid_local=' . $this->subject->getUid()
-            )
+            $connection->count('*', 'tx_seminars_seminars_speakers_mm_partners', ['uid_local' => $this->subject->getUid()])
         );
 
         $this->addPartnerRelation([]);
         self::assertSame(
             1,
-            $this->testingFramework->countRecords(
-                'tx_seminars_seminars_speakers_mm_partners',
-                'uid_local=' . $this->subject->getUid()
-            )
+            $connection->count('*', 'tx_seminars_seminars_speakers_mm_partners', ['uid_local' => $this->subject->getUid()])
         );
 
         $this->addPartnerRelation([]);
         self::assertSame(
             2,
-            $this->testingFramework->countRecords(
-                'tx_seminars_seminars_speakers_mm_partners',
-                'uid_local=' . $this->subject->getUid()
-            )
+            $connection->count('*', 'tx_seminars_seminars_speakers_mm_partners', ['uid_local' => $this->subject->getUid()])
         );
     }
 
@@ -983,30 +952,23 @@ final class EventTest extends TestCase
      */
     public function addTutorRelationCreatesRelations()
     {
+        $connection = $this->connectionPool->getConnectionForTable('tx_seminars_seminars_speakers_mm_tutors');
+
         self::assertSame(
             0,
-            $this->testingFramework->countRecords(
-                'tx_seminars_seminars_speakers_mm_tutors',
-                'uid_local=' . $this->subject->getUid()
-            )
+            $connection->count('*', 'tx_seminars_seminars_speakers_mm_tutors', ['uid_local' => $this->subject->getUid()])
         );
 
         $this->addTutorRelation([]);
         self::assertSame(
             1,
-            $this->testingFramework->countRecords(
-                'tx_seminars_seminars_speakers_mm_tutors',
-                'uid_local=' . $this->subject->getUid()
-            )
+            $connection->count('*', 'tx_seminars_seminars_speakers_mm_tutors', ['uid_local' => $this->subject->getUid()])
         );
 
         $this->addTutorRelation([]);
         self::assertSame(
             2,
-            $this->testingFramework->countRecords(
-                'tx_seminars_seminars_speakers_mm_tutors',
-                'uid_local=' . $this->subject->getUid()
-            )
+            $connection->count('*', 'tx_seminars_seminars_speakers_mm_tutors', ['uid_local' => $this->subject->getUid()])
         );
     }
 
@@ -1038,30 +1000,23 @@ final class EventTest extends TestCase
      */
     public function addLeaderRelationCreatesRelations()
     {
+        $connection = $this->connectionPool->getConnectionForTable('tx_seminars_seminars_speakers_mm_leaders');
+
         self::assertSame(
             0,
-            $this->testingFramework->countRecords(
-                'tx_seminars_seminars_speakers_mm_leaders',
-                'uid_local=' . $this->subject->getUid()
-            )
+            $connection->count('*', 'tx_seminars_seminars_speakers_mm_leaders', ['uid_local' => $this->subject->getUid()])
         );
 
         $this->addLeaderRelation([]);
         self::assertSame(
             1,
-            $this->testingFramework->countRecords(
-                'tx_seminars_seminars_speakers_mm_leaders',
-                'uid_local=' . $this->subject->getUid()
-            )
+            $connection->count('*', 'tx_seminars_seminars_speakers_mm_leaders', ['uid_local' => $this->subject->getUid()])
         );
 
         $this->addLeaderRelation([]);
         self::assertSame(
             2,
-            $this->testingFramework->countRecords(
-                'tx_seminars_seminars_speakers_mm_leaders',
-                'uid_local=' . $this->subject->getUid()
-            )
+            $connection->count('*', 'tx_seminars_seminars_speakers_mm_leaders', ['uid_local' => $this->subject->getUid()])
         );
     }
 

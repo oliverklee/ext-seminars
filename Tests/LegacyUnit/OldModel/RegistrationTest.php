@@ -9,6 +9,8 @@ use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Test case.
@@ -39,6 +41,9 @@ final class RegistrationTest extends TestCase
      * @var int the UID of the user the registration relates to
      */
     private $feUserUid = 0;
+
+    /** @var ConnectionPool */
+    private $connectionPool = null;
 
     protected function setUp()
     {
@@ -95,6 +100,8 @@ final class RegistrationTest extends TestCase
             'templateFile',
             'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
         );
+
+        $this->connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
     }
 
     protected function tearDown()
@@ -556,16 +563,14 @@ final class RegistrationTest extends TestCase
         $registration->setRegistrationData($seminar, 0, []);
         $registration->enableTestMode();
         $this->testingFramework->markTableAsDirty('tx_seminars_attendances');
+        $connection = $this->connectionPool->getConnectionForTable('tx_seminars_attendances');
 
         self::assertTrue(
             $registration->commitToDatabase()
         );
         self::assertSame(
             1,
-            $this->testingFramework->countRecords(
-                'tx_seminars_attendances',
-                'uid=' . $registration->getUid()
-            ),
+            $connection->count('*', 'tx_seminars_attendances', ['uid' => $registration->getUid()]),
             'The registration record cannot be found in the DB.'
         );
     }
@@ -592,23 +597,25 @@ final class RegistrationTest extends TestCase
             'tx_seminars_attendances_lodgings_mm'
         );
 
+        $connection = $this->connectionPool->getConnectionForTable('tx_seminars_attendances');
+
         self::assertTrue(
             $registration->commitToDatabase()
         );
         self::assertSame(
             1,
-            $this->testingFramework->countRecords(
-                'tx_seminars_attendances',
-                'uid=' . $registration->getUid()
-            ),
+            $connection->count('*', 'tx_seminars_attendances', ['uid' => $registration->getUid()]),
             'The registration record cannot be found in the DB.'
         );
+
+        $connection = $this->connectionPool->getConnectionForTable('tx_seminars_attendances_lodgings_mm');
+
         self::assertSame(
             1,
-            $this->testingFramework->countRecords(
+            $connection->count(
+                '*',
                 'tx_seminars_attendances_lodgings_mm',
-                'uid_local=' . $registration->getUid()
-                . ' AND uid_foreign=' . $lodgingsUid
+                ['uid_local' => $registration->getUid(), 'uid_foreign' => $lodgingsUid]
             ),
             'The relation record cannot be found in the DB.'
         );
@@ -639,20 +646,20 @@ final class RegistrationTest extends TestCase
         self::assertTrue(
             $registration->commitToDatabase()
         );
+        $connection = $this->connectionPool->getConnectionForTable('tx_seminars_attendances');
+
         self::assertSame(
             1,
-            $this->testingFramework->countRecords(
-                'tx_seminars_attendances',
-                'uid=' . $registration->getUid()
-            ),
+            $connection->count('*', 'tx_seminars_attendances', ['uid' => $registration->getUid()]),
             'The registration record cannot be found in the DB.'
         );
+        $connection = $this->connectionPool->getConnectionForTable('tx_seminars_attendances_foods_mm');
         self::assertSame(
             1,
-            $this->testingFramework->countRecords(
+            $connection->count(
+                '*',
                 'tx_seminars_attendances_foods_mm',
-                'uid_local=' . $registration->getUid()
-                . ' AND uid_foreign=' . $foodsUid
+                ['uid_local' => $registration->getUid(), 'uid_foreign' => $foodsUid]
             ),
             'The relation record cannot be found in the DB.'
         );
@@ -683,20 +690,19 @@ final class RegistrationTest extends TestCase
         self::assertTrue(
             $registration->commitToDatabase()
         );
+        $connection = $this->connectionPool->getConnectionForTable('tx_seminars_attendances');
         self::assertSame(
             1,
-            $this->testingFramework->countRecords(
-                'tx_seminars_attendances',
-                'uid=' . $registration->getUid()
-            ),
+            $connection->count('*', 'tx_seminars_attendances', ['uid' => $registration->getUid()]),
             'The registration record cannot be found in the DB.'
         );
+        $connection = $this->connectionPool->getConnectionForTable('tx_seminars_attendances_checkboxes_mm');
         self::assertSame(
             1,
-            $this->testingFramework->countRecords(
+            $connection->count(
+                '*',
                 'tx_seminars_attendances_checkboxes_mm',
-                'uid_local=' . $registration->getUid()
-                . ' AND uid_foreign=' . $checkboxesUid
+                ['uid_local' => $registration->getUid(), 'uid_foreign' => $checkboxesUid]
             ),
             'The relation record cannot be found in the DB.'
         );
