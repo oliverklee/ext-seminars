@@ -22,6 +22,7 @@ use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
 use OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd\Fixtures\TestingDefaultController;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -87,6 +88,9 @@ class DefaultControllerTest extends TestCase
      * @var HeaderCollector
      */
     private $headerCollector = null;
+
+    /** @var ConnectionPool */
+    private $connectionPool = null;
 
     protected function setUp()
     {
@@ -165,6 +169,8 @@ class DefaultControllerTest extends TestCase
             '<img src="foo.jpg" alt="bar"/>'
         );
         $this->subject->cObj = $content;
+
+        $this->connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
     }
 
     protected function tearDown()
@@ -395,40 +401,35 @@ class DefaultControllerTest extends TestCase
 
     public function testAddTargetGroupRelationCreatesRelations()
     {
+        $connection = $this->connectionPool->getConnectionForTable('tx_seminars_seminars_target_groups_mm');
+
         self::assertEquals(
             0,
-            $this->testingFramework->countRecords(
-                'tx_seminars_seminars_target_groups_mm',
-                'uid_local=' . $this->seminarUid
-            )
+            $connection->count('*', 'tx_seminars_seminars_target_groups_mm', ['uid_local' => $this->seminarUid])
         );
 
         $this->addTargetGroupRelation();
         self::assertEquals(
             1,
-            $this->testingFramework->countRecords(
-                'tx_seminars_seminars_target_groups_mm',
-                'uid_local=' . $this->seminarUid
-            )
+            $connection->count('*', 'tx_seminars_seminars_target_groups_mm', ['uid_local' => $this->seminarUid])
         );
 
         $this->addTargetGroupRelation();
         self::assertEquals(
             2,
-            $this->testingFramework->countRecords(
-                'tx_seminars_seminars_target_groups_mm',
-                'uid_local=' . $this->seminarUid
-            )
+            $connection->count('*', 'tx_seminars_seminars_target_groups_mm', ['uid_local' => $this->seminarUid])
         );
     }
 
     public function testCreateLogInAndAddFeUserAsVipCreatesFeUser()
     {
+        $connection = $this->connectionPool->getConnectionForTable('fe_users');
+
         $this->createLogInAndAddFeUserAsVip();
 
         self::assertEquals(
             1,
-            $this->testingFramework->countRecords('fe_users')
+            $connection->count('*', 'fe_users', [])
         );
     }
 
@@ -443,14 +444,13 @@ class DefaultControllerTest extends TestCase
 
     public function testCreateLogInAndAddFeUserAsVipAddsUserAsVip()
     {
+        $connection = $this->connectionPool->getConnectionForTable('tx_seminars_seminars');
+
         $this->createLogInAndAddFeUserAsVip();
 
         self::assertEquals(
             1,
-            $this->testingFramework->countRecords(
-                'tx_seminars_seminars',
-                'uid=' . $this->seminarUid . ' AND vips=1'
-            )
+            $connection->count('*', 'tx_seminars_seminars', ['uid' => $this->seminarUid, 'vips' => 1])
         );
     }
 
@@ -491,30 +491,23 @@ class DefaultControllerTest extends TestCase
 
     public function testAddCategoryRelationCreatesRelations()
     {
+        $connection = $this->connectionPool->getConnectionForTable('tx_seminars_seminars_categories_mm');
+
         self::assertEquals(
             0,
-            $this->testingFramework->countRecords(
-                'tx_seminars_seminars_categories_mm',
-                'uid_local=' . $this->seminarUid
-            )
+            $connection->count('*', 'tx_seminars_seminars_categories_mm', ['uid_local' => $this->seminarUid])
         );
 
         $this->addCategoryRelation();
         self::assertEquals(
             1,
-            $this->testingFramework->countRecords(
-                'tx_seminars_seminars_categories_mm',
-                'uid_local=' . $this->seminarUid
-            )
+            $connection->count('*', 'tx_seminars_seminars_categories_mm', ['uid_local' => $this->seminarUid])
         );
 
         $this->addCategoryRelation();
         self::assertEquals(
             2,
-            $this->testingFramework->countRecords(
-                'tx_seminars_seminars_categories_mm',
-                'uid_local=' . $this->seminarUid
-            )
+            $connection->count('*', 'tx_seminars_seminars_categories_mm', ['uid_local' => $this->seminarUid])
         );
     }
 

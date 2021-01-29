@@ -15,7 +15,9 @@ use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
 use PHPUnit\Framework\MockObject\MockObject;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Mail\MailMessage;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
@@ -55,6 +57,9 @@ class EventEditorTest extends TestCase
      */
     private $email = null;
 
+    /** @var ConnectionPool */
+    private $connectionPool = null;
+
     protected function setUp()
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
@@ -78,6 +83,8 @@ class EventEditorTest extends TestCase
         $this->subject->setTestMode();
 
         $this->email = $this->createEmailMock();
+
+        $this->connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
     }
 
     protected function tearDown()
@@ -242,11 +249,13 @@ class EventEditorTest extends TestCase
 
     public function testCreateLogInAndAddFeUserAsVipCreatesFeUser()
     {
+        $connection = $this->connectionPool->getConnectionForTable('fe_users');
+
         $this->createLogInAndAddFeUserAsVip();
 
         self::assertEquals(
             1,
-            $this->testingFramework->countRecords('fe_users')
+            $connection->count('*', 'fe_users', [])
         );
     }
 
@@ -261,24 +270,25 @@ class EventEditorTest extends TestCase
 
     public function testCreateLogInAndAddFeUserAsVipAddsUserAsVip()
     {
+        $connection = $this->connectionPool->getConnectionForTable('tx_seminars_seminars');
+
         $this->createLogInAndAddFeUserAsVip();
 
         self::assertEquals(
             1,
-            $this->testingFramework->countRecords(
-                'tx_seminars_seminars',
-                'uid=' . $this->subject->getObjectUid() . ' AND vips=1'
-            )
+            $connection->count('*', 'tx_seminars_seminars', ['uid' => $this->subject->getObjectUid(), 'vips' => 1])
         );
     }
 
     public function testCreateLogInAndAddFeUserAsOwnerCreatesFeUser()
     {
+        $connection = $this->connectionPool->getConnectionForTable('fe_users');
+
         $this->createLogInAndAddFeUserAsOwner();
 
         self::assertEquals(
             1,
-            $this->testingFramework->countRecords('fe_users')
+            $connection->count('*', 'fe_users', [])
         );
     }
 
@@ -293,24 +303,34 @@ class EventEditorTest extends TestCase
 
     public function testCreateLogInAndAddFeUserAsOwnerAddsUserAsOwner()
     {
+        $query = $this->connectionPool->getQueryBuilderForTable('tx_seminars_seminars');
+
         $this->createLogInAndAddFeUserAsOwner();
+        $result = $query
+            ->count('*')
+            ->from('tx_seminars_seminars')
+            ->where(
+                $query->expr()->eq('uid', $query->createNamedParameter($this->subject->getObjectUid(), \PDO::PARAM_INT)),
+                $query->expr()->gt('owner_feuser', $query->createNamedParameter(0, \PDO::PARAM_INT))
+            )
+            ->execute()
+            ->fetchColumn(0);
 
         self::assertEquals(
             1,
-            $this->testingFramework->countRecords(
-                'tx_seminars_seminars',
-                'uid=' . $this->subject->getObjectUid() . ' AND owner_feuser>0'
-            )
+            $result
         );
     }
 
     public function testCreateLogInAndAddFeUserAsDefaultVipCreatesFeUser()
     {
+        $connection = $this->connectionPool->getConnectionForTable('fe_users');
+
         $this->createLogInAndAddFeUserAsDefaultVip();
 
         self::assertEquals(
             1,
-            $this->testingFramework->countRecords('fe_users')
+            $connection->count('*', 'fe_users', [])
         );
     }
 
@@ -325,13 +345,16 @@ class EventEditorTest extends TestCase
 
     public function testCreateLogInAndAddFeUserAsDefaultVipAddsFeUserAsDefaultVip()
     {
+        $connection = $this->connectionPool->getConnectionForTable('fe_users');
+
         $userUid = $this->createLogInAndAddFeUserAsDefaultVip();
 
         self::assertSame(
             1,
-            $this->testingFramework->countRecords(
+            $connection->count(
+                '*',
                 'fe_users',
-                'uid=' . $userUid . ' AND usergroup=' . $this->subject->getConfValueInteger('defaultEventVipsFeGroupID')
+                ['uid' => $userUid, 'usergroup' => $this->subject->getConfValueInteger('defaultEventVipsFeGroupID')]
             )
         );
     }
@@ -341,11 +364,13 @@ class EventEditorTest extends TestCase
      */
     public function createLogInAndAddFrontEndUserToEventEditorFrontEndGroupCreatesFeUser()
     {
+        $connection = $this->connectionPool->getConnectionForTable('fe_users');
+
         $this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup();
 
         self::assertEquals(
             1,
-            $this->testingFramework->countRecords('fe_users')
+            $connection->count('*', 'fe_users', [])
         );
     }
 
@@ -366,13 +391,16 @@ class EventEditorTest extends TestCase
      */
     public function createLogInAndAddFrontEndUserToEventEditorFrontEndGroupAddsFrontEndUserToEventEditorFrontEndGroup()
     {
+        $connection = $this->connectionPool->getConnectionForTable('fe_users');
+
         $userUid = $this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup();
 
         self::assertSame(
             1,
-            $this->testingFramework->countRecords(
+            $connection->count(
+                '*',
                 'fe_users',
-                'uid=' . $userUid . ' AND usergroup=' . $this->subject->getConfValueInteger('eventEditorFeGroupID')
+                ['uid' => $userUid, 'usergroup' => $this->subject->getConfValueInteger('eventEditorFeGroupID')]
             )
         );
     }
