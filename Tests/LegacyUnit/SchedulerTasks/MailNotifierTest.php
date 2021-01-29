@@ -282,7 +282,7 @@ class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function createSeminarWithOrganizerCreatesRealtionBetweenSeminarAndOrganizer()
+    public function createSeminarWithOrganizerCreatesRelationBetweenSeminarAndOrganizer()
     {
         $this->createSeminarWithOrganizer();
         $connection = $this->getConnectionForTable('tx_seminars_seminars_organizers_mm');
