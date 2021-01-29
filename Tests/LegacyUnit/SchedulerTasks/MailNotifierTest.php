@@ -24,8 +24,11 @@ use PHPUnit\Framework\MockObject\MockObject;
 use Prophecy\Prophecy\ObjectProphecy;
 use Prophecy\Prophecy\ProphecySubjectInterface;
 use TYPO3\CMS\Core\Core\Bootstrap;
+use TYPO3\CMS\Core\Database\Connection;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Lang\LanguageService;
 use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
@@ -240,9 +243,11 @@ class MailNotifierTest extends TestCase
     public function createSeminarWithOrganizerCreatesSeminarRecord()
     {
         $this->createSeminarWithOrganizer();
+        $connection = $this->getConnectionForTable('tx_seminars_seminars');
 
-        self::assertTrue(
-            $this->testingFramework->existsRecord('tx_seminars_seminars', '1=1')
+        self::assertGreaterThan(
+            0,
+            $connection->count('*', 'tx_seminars_seminars', [])
         );
     }
 
@@ -252,9 +257,11 @@ class MailNotifierTest extends TestCase
     public function createSeminarWithOrganizerCreatesSeminarRecordWithAdditionalData()
     {
         $this->createSeminarWithOrganizer(['title' => 'foo']);
+        $connection = $this->getConnectionForTable('tx_seminars_seminars');
 
-        self::assertTrue(
-            $this->testingFramework->existsRecord('tx_seminars_seminars', 'title = "foo"')
+        self::assertGreaterThan(
+            0,
+            $connection->count('*', 'tx_seminars_seminars', ['title' => 'foo'])
         );
     }
 
@@ -264,9 +271,11 @@ class MailNotifierTest extends TestCase
     public function createSeminarWithOrganizerCreatesOrganizerRecord()
     {
         $this->createSeminarWithOrganizer();
+        $connection = $this->getConnectionForTable('tx_seminars_organizers');
 
-        self::assertTrue(
-            $this->testingFramework->existsRecord('tx_seminars_organizers', '1=1')
+        self::assertGreaterThan(
+            0,
+            $connection->count('*', 'tx_seminars_organizers', [])
         );
     }
 
@@ -276,9 +285,11 @@ class MailNotifierTest extends TestCase
     public function createSeminarWithOrganizerCreatesRealtionBetweenSeminarAndOrganizer()
     {
         $this->createSeminarWithOrganizer();
+        $connection = $this->getConnectionForTable('tx_seminars_seminars_organizers_mm');
 
-        self::assertTrue(
-            $this->testingFramework->existsRecord('tx_seminars_seminars_organizers_mm', '1=1')
+        self::assertGreaterThan(
+            0,
+            $connection->count('*', 'tx_seminars_seminars_organizers_mm', [])
         );
     }
 
@@ -288,9 +299,11 @@ class MailNotifierTest extends TestCase
     public function addSpeakerCreatesSpeakerRecord()
     {
         $this->addSpeaker($this->createSeminarWithOrganizer());
+        $connection = $this->getConnectionForTable('tx_seminars_speakers');
 
-        self::assertTrue(
-            $this->testingFramework->existsRecord('tx_seminars_speakers', '1=1')
+        self::assertGreaterThan(
+            0,
+            $connection->count('*', 'tx_seminars_speakers', [])
         );
     }
 
@@ -300,9 +313,11 @@ class MailNotifierTest extends TestCase
     public function addSpeakerCreatesSpeakerRelation()
     {
         $this->addSpeaker($this->createSeminarWithOrganizer());
+        $connection = $this->getConnectionForTable('tx_seminars_seminars_speakers_mm');
 
-        self::assertTrue(
-            $this->testingFramework->existsRecord('tx_seminars_seminars_speakers_mm', '1=1')
+        self::assertGreaterThan(
+            0,
+            $connection->count('*', 'tx_seminars_seminars_speakers_mm', [])
         );
     }
 
@@ -312,9 +327,11 @@ class MailNotifierTest extends TestCase
     public function addSpeakerSetsNumberOfSpeakersToOneForTheSeminarWithTheProvidedUid()
     {
         $this->addSpeaker($this->createSeminarWithOrganizer());
+        $connection = $this->getConnectionForTable('tx_seminars_seminars');
 
-        self::assertTrue(
-            $this->testingFramework->existsRecord('tx_seminars_seminars', 'speakers = 1')
+        self::assertGreaterThan(
+            0,
+            $connection->count('*', 'tx_seminars_seminars', ['speakers' => 1])
         );
     }
 
@@ -598,12 +615,11 @@ class MailNotifierTest extends TestCase
         );
 
         $this->subject->sendEventTakesPlaceReminders();
+        $connection = $this->getConnectionForTable('tx_seminars_seminars');
 
-        self::assertTrue(
-            $this->testingFramework->existsRecord(
-                'tx_seminars_seminars',
-                'event_takes_place_reminder_sent = 1'
-            )
+        self::assertGreaterThan(
+            0,
+            $connection->count('*', 'tx_seminars_seminars', ['event_takes_place_reminder_sent' => 1])
         );
     }
 
@@ -885,9 +901,11 @@ class MailNotifierTest extends TestCase
         $this->addMockedInstance(MailMessage::class, $this->email);
 
         $this->subject->sendCancellationDeadlineReminders();
+        $connection = $this->getConnectionForTable('tx_seminars_seminars');
 
-        self::assertTrue(
-            $this->testingFramework->existsRecord('tx_seminars_seminars', 'cancelation_deadline_reminder_sent = 1')
+        self::assertGreaterThan(
+            0,
+            $connection->count('*', 'tx_seminars_seminars', ['cancelation_deadline_reminder_sent' => 1])
         );
     }
 
@@ -1941,5 +1959,12 @@ class MailNotifierTest extends TestCase
         $this->eventStatusService->method('updateStatusAndSave')->willReturn(true);
 
         $this->subject->automaticallyChangeEventStatuses();
+    }
+
+    private function getConnectionForTable(string $table): Connection
+    {
+        /** @var ConnectionPool $connectionPool */
+        $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
+        return $connectionPool->getConnectionForTable($table);
     }
 }

@@ -7,6 +7,9 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
+use TYPO3\CMS\Core\Database\Connection;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Test case.
@@ -132,11 +135,11 @@ class PublishEventTest extends TestCase
 
         $this->subject->render();
 
-        self::assertTrue(
-            $this->testingFramework->existsRecord(
-                'tx_seminars_seminars',
-                'uid = ' . $eventUid . ' AND hidden = 0'
-            )
+        $connection = $this->getConnectionForTable('tx_seminars_seminars');
+
+        self::assertGreaterThan(
+            0,
+            $connection->count('*', 'tx_seminars_seminars', ['uid' => $eventUid])
         );
     }
 
@@ -153,13 +156,18 @@ class PublishEventTest extends TestCase
         $this->subject->piVars['hash'] = '123456ABC';
 
         $this->subject->render();
+        $connection = $this->getConnectionForTable('tx_seminars_seminars');
 
-        self::assertTrue(
-            $this->testingFramework->existsRecord(
-                'tx_seminars_seminars',
-                'uid = ' . $eventUid .
-                ' AND publication_hash = ""'
-            )
+        self::assertGreaterThan(
+            0,
+            $connection->count('*', 'tx_seminars_seminars', ['uid' => $eventUid, 'publication_hash' => ''])
         );
+    }
+
+    private function getConnectionForTable(string $table): Connection
+    {
+        /** @var ConnectionPool $connectionPool */
+        $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
+        return $connectionPool->getConnectionForTable($table);
     }
 }

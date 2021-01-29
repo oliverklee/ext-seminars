@@ -1938,13 +1938,22 @@ final class RegistrationManagerTest extends TestCase
         );
 
         $this->subject->removeRegistration($registrationUid, $this->pi1);
-
-        self::assertTrue(
-            $this->testingFramework->existsRecord(
-                'tx_seminars_attendances',
-                'user = ' . $userUid . ' AND seminar = ' . $seminarUid .
-                ' AND hidden = 1'
+        $query = $this->getConnectionPool()->getQueryBuilderForTable('tx_seminars_attendances');
+        $query->getRestrictions()->removeAll();
+        $numberOfRows = $query
+            ->count('*')
+            ->from('tx_seminars_attendances')
+            ->where(
+                $query->expr()->eq('user', $query->createNamedParameter($userUid, \PDO::PARAM_INT)),
+                $query->expr()->eq('seminar', $query->createNamedParameter($seminarUid, \PDO::PARAM_INT)),
+                $query->expr()->eq('hidden', $query->createNamedParameter(1, \PDO::PARAM_INT))
             )
+            ->execute()
+            ->fetchColumn(0);
+
+        self::assertSame(
+            1,
+            $numberOfRows
         );
     }
 
@@ -2004,11 +2013,14 @@ final class RegistrationManagerTest extends TestCase
         );
 
         $this->subject->removeRegistration($registrationUid, $this->pi1);
+        $connection = $this->getConnectionForTable('tx_seminars_attendances');
 
-        self::assertTrue(
-            $this->testingFramework->existsRecord(
+        self::assertGreaterThan(
+            0,
+            $connection->count(
+                '*',
                 'tx_seminars_attendances',
-                'registration_queue = 0 AND uid = ' . $queueRegistrationUid
+                ['registration_queue' => 0, 'uid' => $queueRegistrationUid]
             )
         );
     }
@@ -8638,11 +8650,16 @@ final class RegistrationManagerTest extends TestCase
         self::assertSame(['regular', 'regular_board'], array_keys($prices));
     }
 
-    private function getConnectionForTable(string $table): Connection
+    private function getConnectionPool(): ConnectionPool
     {
         /** @var ConnectionPool $connectionPool */
         $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
 
-        return $connectionPool->getConnectionForTable($table);
+        return $connectionPool;
+    }
+
+    private function getConnectionForTable(string $table): Connection
+    {
+        return $this->getConnectionPool()->getConnectionForTable($table);
     }
 }
