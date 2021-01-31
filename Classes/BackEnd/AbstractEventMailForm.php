@@ -10,6 +10,7 @@ use OliverKlee\Oelib\Email\MailerFactory;
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
+use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Seminar\Email\Salutation;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
@@ -703,11 +704,15 @@ abstract class AbstractEventMailForm
     protected function getRouteUrl(string $moduleName, array $urlParameters = []): string
     {
         $uriBuilder = $this->getUriBuilder();
-        try {
+        if (Typo3Version::isNotHigherThan(8)) {
+            try {
+                $uri = $uriBuilder->buildUriFromRoute($moduleName, $urlParameters);
+            } catch (\TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException $e) {
+                // no route registered, use the fallback logic to check for a module
+                $uri = $uriBuilder->buildUriFromModule($moduleName, $urlParameters);
+            }
+        } else {
             $uri = $uriBuilder->buildUriFromRoute($moduleName, $urlParameters);
-        } catch (\TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException $e) {
-            // no route registered, use the fallback logic to check for a module
-            $uri = $uriBuilder->buildUriFromModule($moduleName, $urlParameters);
         }
 
         return (string)$uri;
