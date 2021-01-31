@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\BackEnd;
 
 use OliverKlee\Oelib\Authentication\BackEndLoginManager;
+use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Templating\TemplateRegistry;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
@@ -422,11 +423,15 @@ abstract class AbstractList
     protected function getRouteUrl(string $moduleName, array $urlParameters = []): string
     {
         $uriBuilder = $this->getUriBuilder();
-        try {
+        if (Typo3Version::isNotHigherThan(8)) {
+            try {
+                $uri = $uriBuilder->buildUriFromRoute($moduleName, $urlParameters);
+            } catch (\TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException $e) {
+                // no route registered, use the fallback logic to check for a module
+                $uri = $uriBuilder->buildUriFromModule($moduleName, $urlParameters);
+            }
+        } else {
             $uri = $uriBuilder->buildUriFromRoute($moduleName, $urlParameters);
-        } catch (\TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException $e) {
-            // no route registered, use the fallback logic to check for a module
-            $uri = $uriBuilder->buildUriFromModule($moduleName, $urlParameters);
         }
 
         return (string)$uri;

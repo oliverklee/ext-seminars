@@ -8,6 +8,7 @@ use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\Configuration\PageFinder;
 use OliverKlee\Oelib\Http\HeaderCollector;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
+use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Seminars\BackEnd\AbstractEventMailForm;
 use OliverKlee\Seminars\Tests\Functional\BackEnd\Fixtures\TestingEventMailForm;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
@@ -70,11 +71,15 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
     private function getRouteUrl(string $moduleName, array $urlParameters = []): string
     {
         $uriBuilder = $this->getUriBuilder();
-        try {
+        if (Typo3Version::isNotHigherThan(8)) {
+            try {
+                $uri = $uriBuilder->buildUriFromRoute($moduleName, $urlParameters);
+            } catch (\TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException $e) {
+                // no route registered, use the fallback logic to check for a module
+                $uri = $uriBuilder->buildUriFromModule($moduleName, $urlParameters);
+            }
+        } else {
             $uri = $uriBuilder->buildUriFromRoute($moduleName, $urlParameters);
-        } catch (\TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException $e) {
-            // no route registered, use the fallback logic to check for a module
-            $uri = $uriBuilder->buildUriFromModule($moduleName, $urlParameters);
         }
 
         return (string)$uri;
