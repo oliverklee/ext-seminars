@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Doctrine\DBAL\Driver\Connection;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
@@ -102,9 +103,27 @@ class Tx_Seminars_Mapper_Event extends AbstractDataMapper
             throw new \InvalidArgumentException('$minimum must be <= $maximum.');
         }
 
-        return $this->findByWhereClause(
-            'begin_date BETWEEN ' . $minimum . ' AND ' . $maximum
-        );
+        $queryBuilder = $this->getQueryBuilderForTable($this->getTableName());
+        $rows = $queryBuilder
+            ->select('*')
+            ->from($this->getTableName())
+            ->where(
+                $queryBuilder->expr()->andX(
+                    $queryBuilder->expr()->gte(
+                        'begin_date',
+                        $queryBuilder->createNamedParameter($minimum, \PDO::PARAM_INT)
+                    ),
+                    $queryBuilder->expr()->lte(
+                        'begin_date',
+                        $queryBuilder->createNamedParameter($maximum, \PDO::PARAM_INT)
+                    )
+                )
+            )
+            ->orderBy('begin_date')
+            ->execute()
+            ->fetchAll();
+
+        return $this->getListOfModels($rows);
     }
 
     /**
@@ -158,9 +177,27 @@ class Tx_Seminars_Mapper_Event extends AbstractDataMapper
      */
     public function findForAutomaticStatusChange(): Collection
     {
-        $whereClause = 'cancelled = ' . \Tx_Seminars_Model_Event::STATUS_PLANNED . ' AND automatic_confirmation_cancelation = 1';
+        $queryBuilder = $this->getQueryBuilderForTable($this->getTableName());
+        $rows = $queryBuilder
+            ->select('*')
+            ->from($this->getTableName())
+            ->where(
+                $queryBuilder->expr()->andX(
+                    $queryBuilder->expr()->eq(
+                        'cancelled',
+                        $queryBuilder->createNamedParameter(\Tx_Seminars_Model_Event::STATUS_PLANNED, \PDO::PARAM_INT)
+                    ),
+                    $queryBuilder->expr()->eq(
+                        'automatic_confirmation_cancelation',
+                        $queryBuilder->createNamedParameter(1, \PDO::PARAM_INT)
+                    )
+                )
+            )
+            ->orderBy('uid')
+            ->execute()
+            ->fetchAll();
 
-        return $this->findByWhereClause($whereClause);
+        return $this->getListOfModels($rows);
     }
 
     /**
@@ -174,8 +211,8 @@ class Tx_Seminars_Mapper_Event extends AbstractDataMapper
      */
     public function findForRegistrationDigestEmail(): Collection
     {
-        $whereClause = 'registrations <> 0' .
-            ' AND object_type <> ' . \Tx_Seminars_Model_Event::TYPE_TOPIC .
+        $whereClause = 'registrations <> 0 AND object_type <> ' . \Tx_Seminars_Model_Event::TYPE_TOPIC .
+            ' AND hidden = 0 AND deleted = 0 ' .
             ' AND EXISTS (' .
             'SELECT * FROM tx_seminars_attendances ' .
             'WHERE tx_seminars_attendances.deleted = 0 ' .
@@ -183,6 +220,14 @@ class Tx_Seminars_Mapper_Event extends AbstractDataMapper
             ' AND tx_seminars_attendances.crdate > tx_seminars_seminars.date_of_last_registration_digest' .
             ')';
 
-        return $this->findByWhereClause($whereClause, 'begin_date ASC');
+        $sql = 'SELECT * FROM ' . $this->getTableName() . ' WHERE ' . $whereClause . ' ORDER BY begin_date ASC';
+
+        /** @var Connection $connection */
+        $connection = $this->getConnectionForTable($this->getTableName());
+        $statement = $connection->prepare($sql);
+        $statement->execute();
+        $rows = $statement->fetchAll();
+
+        return $this->getListOfModels($rows);
     }
 }

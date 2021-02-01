@@ -830,6 +830,7 @@ class EventMapperTest extends TestCase
      * @test
      *
      * @doesNotPerformAssertions
+     * @group findAllByBeginDate
      */
     public function findAllByBeginDateForPositiveSameMinimumAndMaximumNotThrowsException()
     {
@@ -840,6 +841,7 @@ class EventMapperTest extends TestCase
      * @test
      *
      * @doesNotPerformAssertions
+     * @group findAllByBeginDate
      */
     public function findAllByBeginDateForZeroMinimumAndPositiveMaximumNotThrowsException()
     {
@@ -848,6 +850,7 @@ class EventMapperTest extends TestCase
 
     /**
      * @test
+     * @group findAllByBeginDate
      */
     public function findAllByBeginDateForZeroMinimumAndZeroMaximumThrowsException()
     {
@@ -860,6 +863,7 @@ class EventMapperTest extends TestCase
      * @test
      *
      * @doesNotPerformAssertions
+     * @group findAllByBeginDate
      */
     public function findAllByBeginDateForMinimumSmallerThanMaximumNotThrowsException()
     {
@@ -868,6 +872,7 @@ class EventMapperTest extends TestCase
 
     /**
      * @test
+     * @group findAllByBeginDate
      */
     public function findAllByBeginDateForNegativeMinimumSmallerThanMaximumThrowsException()
     {
@@ -878,6 +883,7 @@ class EventMapperTest extends TestCase
 
     /**
      * @test
+     * @group findAllByBeginDate
      */
     public function findAllByBeginDateForMinimumGreaterThanMaximumThrowsException()
     {
@@ -888,6 +894,7 @@ class EventMapperTest extends TestCase
 
     /**
      * @test
+     * @group findAllByBeginDate
      */
     public function findAllByBeginDateNotFindsEventWithBeginDateSmallerThanMinimum()
     {
@@ -903,6 +910,7 @@ class EventMapperTest extends TestCase
 
     /**
      * @test
+     * @group findAllByBeginDate
      */
     public function findAllByBeginDateFindsEventWithBeginDateEqualToMinimum()
     {
@@ -918,6 +926,7 @@ class EventMapperTest extends TestCase
 
     /**
      * @test
+     * @group findAllByBeginDate
      */
     public function findAllByBeginDateFindsEventWithBeginDateBetweenMinimumAndMaximum()
     {
@@ -933,6 +942,7 @@ class EventMapperTest extends TestCase
 
     /**
      * @test
+     * @group findAllByBeginDate
      */
     public function findAllByBeginDateFindsEventWithBeginDateEqualToMaximum()
     {
@@ -948,6 +958,7 @@ class EventMapperTest extends TestCase
 
     /**
      * @test
+     * @group findAllByBeginDate
      */
     public function findAllByBeginDateNotFindsEventWithBeginDateGreaterThanMaximum()
     {
@@ -963,6 +974,7 @@ class EventMapperTest extends TestCase
 
     /**
      * @test
+     * @group findAllByBeginDate
      */
     public function findAllByBeginDateCanFindEventWithZeroBeginDate()
     {
@@ -978,6 +990,7 @@ class EventMapperTest extends TestCase
 
     /**
      * @test
+     * @group findAllByBeginDate
      */
     public function findAllByBeginDateCanFindTwoEvents()
     {
