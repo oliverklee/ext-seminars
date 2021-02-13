@@ -6,6 +6,18 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## 3.3.2
+
+### Added
 - Document how to run the tests (#685)
 - Add traits for testing email and `makeInstance` instances (#683)
 
@@ -13,10 +25,6 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Require oelib >= 3.2.0 (#657)
 - Move more tests to the new testing framework (#653, #655)
 - Namespace some classes and tests (#599, #624, #627, #626, #625, #628)
-
-### Deprecated
-
-### Removed
 
 ### Fixed
 - Stop using Core functionality deprecated in 9LTS (#602, #603, #707, #708, #712, #716, #717, #723, #714, #730)
