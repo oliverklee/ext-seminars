@@ -12,16 +12,28 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Changed
 - Require oelib >= 3.2.0 (#657)
 - Move more tests to the new testing framework (#653, #655)
-- Namespace the legacy tests (#599)
+- Namespace some classes and tests (#599, #624, #627, #626, #625, #628)
 
 ### Deprecated
 
 ### Removed
 
 ### Fixed
+- Stop using Core functionality deprecated in 9LTS (#602, #603, #707, #708, #712, #716, #717, #723, #714, #730)
+- Stop using deprecated oelib functionality (#630, #631, #632, #636, #633, #638, #640, #641, #639, #642, #643, #644, #675, #676, #660, #715, #719, #724, #714)
+- Replace the usage of a deprecated rn_base class (#709)
+- Drop the deprecated `cellspacing` HTML attribute (#710)
 - Drop the obsolete `dividers2tabs` option from TCA (#722)
 - Raise limit of field endtime to 2038-1-1 (#678)
 - Use the namespaced oelib classes (#658, #569, #661, #662, #663, #664, #665, #666, #667, #668, #669, #670, #671)
+- Add more type declarations (#601, #596)
+
+## 3.3.1
+
+### Fixed
+- Add a missing return type declaration (#680)
+- Drop some outdated tests (#681)
+- Raise limit of field endtime to 2038-1-1 (#678)
 - Stop using event model prophecies in the scheduler task tests (#651)
 - Stop converting class names to PSR-4 (#597)
 
