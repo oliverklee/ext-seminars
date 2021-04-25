@@ -202,7 +202,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     {
         return $this->isEventDate()
             ? $this->getTopic()->getCategories()
-            : $this->getAsList('categories');
+            : $this->getAsCollection('categories');
     }
 
     /**
@@ -403,7 +403,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      */
     public function getTimeSlots(): Collection
     {
-        return $this->getAsList('timeslots');
+        return $this->getAsCollection('timeslots');
     }
 
     /**
@@ -728,7 +728,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      */
     public function getPlaces(): Collection
     {
-        return $this->getAsList('place');
+        return $this->getAsCollection('place');
     }
 
     /**
@@ -739,7 +739,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      */
     public function getLodgings(): Collection
     {
-        return $this->getAsList('lodgings');
+        return $this->getAsCollection('lodgings');
     }
 
     /**
@@ -750,7 +750,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      */
     public function getFoods(): Collection
     {
-        return $this->getAsList('foods');
+        return $this->getAsCollection('foods');
     }
 
     /**
@@ -761,7 +761,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      */
     public function getPartners(): Collection
     {
-        return $this->getAsList('partners');
+        return $this->getAsCollection('partners');
     }
 
     /**
@@ -772,7 +772,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      */
     public function getTutors(): Collection
     {
-        return $this->getAsList('tutors');
+        return $this->getAsCollection('tutors');
     }
 
     /**
@@ -783,7 +783,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      */
     public function getLeaders(): Collection
     {
-        return $this->getAsList('leaders');
+        return $this->getAsCollection('leaders');
     }
 
     /**
@@ -1249,7 +1249,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     {
         return $this->isEventDate()
             ? $this->getTopic()->getPaymentMethods()
-            : $this->getAsList('payment_methods');
+            : $this->getAsCollection('payment_methods');
     }
 
     /**
@@ -1283,7 +1283,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      */
     public function getOrganizers(): Collection
     {
-        return $this->getAsList('organizers');
+        return $this->getAsCollection('organizers');
     }
 
     /**
@@ -1307,7 +1307,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      */
     public function getOrganizingPartners(): Collection
     {
-        return $this->getAsList('organizing_partners');
+        return $this->getAsCollection('organizing_partners');
     }
 
     /**
@@ -1463,7 +1463,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     {
         return $this->isEventDate()
             ? $this->getTopic()->getTargetGroups()
-            : $this->getAsList('target_groups');
+            : $this->getAsCollection('target_groups');
     }
 
     /**
@@ -1584,7 +1584,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      */
     public function getEventManagers(): Collection
     {
-        return $this->getAsList('vips');
+        return $this->getAsCollection('vips');
     }
 
     /**
@@ -1597,7 +1597,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     {
         return $this->isEventDate()
             ? $this->getTopic()->getCheckboxes()
-            : $this->getAsList('checkboxes');
+            : $this->getAsCollection('checkboxes');
     }
 
     /**
@@ -1741,7 +1741,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     {
         return $this->isEventDate()
             ? $this->getTopic()->getRequirements()
-            : $this->getAsList('requirements');
+            : $this->getAsCollection('requirements');
     }
 
     /**
@@ -1754,7 +1754,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     {
         return $this->isEventDate()
             ? $this->getTopic()->getDependencies()
-            : $this->getAsList('dependencies');
+            : $this->getAsCollection('dependencies');
     }
 
     /**
@@ -1934,7 +1934,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      */
     public function getRegistrations(): Collection
     {
-        return $this->getAsList('registrations');
+        return $this->getAsCollection('registrations');
     }
 
     /**

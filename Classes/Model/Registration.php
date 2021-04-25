@@ -276,7 +276,7 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
      */
     public function getAdditionalPersons(): Collection
     {
-        return $this->getAsList('additional_persons');
+        return $this->getAsCollection('additional_persons');
     }
 
     /**
@@ -770,7 +770,7 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
      */
     public function getLodgings(): Collection
     {
-        return $this->getAsList('lodgings');
+        return $this->getAsCollection('lodgings');
     }
 
     /**
@@ -802,7 +802,7 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
      */
     public function getFoods(): Collection
     {
-        return $this->getAsList('foods');
+        return $this->getAsCollection('foods');
     }
 
     /**
@@ -885,6 +885,6 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
      */
     public function getCheckboxes(): Collection
     {
-        return $this->getAsList('checkboxes');
+        return $this->getAsCollection('checkboxes');
     }
 }
