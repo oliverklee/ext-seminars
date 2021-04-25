@@ -162,7 +162,7 @@ class Tx_Seminars_Model_Speaker extends AbstractModel implements MailRole
      */
     public function getSkills(): Collection
     {
-        return $this->getAsList('skills');
+        return $this->getAsCollection('skills');
     }
 
     /**

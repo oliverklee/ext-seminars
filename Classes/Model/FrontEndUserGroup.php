@@ -122,7 +122,7 @@ class Tx_Seminars_Model_FrontEndUserGroup extends OelibFrontEndUserGroup impleme
      */
     public function getDefaultCategories(): Collection
     {
-        return $this->getAsList('tx_seminars_default_categories');
+        return $this->getAsCollection('tx_seminars_default_categories');
     }
 
     /**

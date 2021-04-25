@@ -93,7 +93,7 @@ abstract class Tx_Seminars_Model_AbstractTimeSpan extends AbstractModel
      */
     public function getSpeakers(): Collection
     {
-        return $this->getAsList('speakers');
+        return $this->getAsCollection('speakers');
     }
 
     /**
