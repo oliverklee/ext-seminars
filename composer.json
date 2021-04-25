@@ -29,7 +29,7 @@
         "ext-json": "*",
         "digedag/rn-base": "^1.11.4",
         "dmk/mkforms": "^9.5.2",
-        "oliverklee/oelib": "^3.2.0",
+        "oliverklee/oelib": "^3.3.0",
         "psr/http-message": "^1.0",
         "sjbr/static-info-tables": "^6.7.0",
         "typo3/cms-backend": "^8.7 || ^9.5",
