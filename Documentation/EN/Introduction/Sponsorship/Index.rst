@@ -19,71 +19,79 @@ Sponsorship
 Development of this extension has been funded by the following
 organizations and persons:
 
-- `4viewture UG <https://www.4viewture.eu/>`_
+- `4viewture UG <https://www.4viewture.eu/>`__
 
-- `A3PLUS GmbH <https://www.a3plus.de/>`_
+- `A3PLUS GmbH <https://www.a3plus.de/>`__
 
-- `AltaMediNet GmbH <http://www.altamedinet.de/>`_
+- `AltaMediNet GmbH <https://www.altamedinet.de/>`__
 
-- `AmedickSommer Neue Medien GmbH <http://www.amedick-sommer.de/>`_
+- `AmedickSommer Neue Medien GmbH <http://www.amedick-sommer.de/>`__
 
-- `AnD-Institut <https://www.and.at/>`_
+- `AnD-Institut <https://www.and.at/>`__
 
-- `ASTERIOS Design e.U. <https://www.multimedia-agentur.at>`_
+- `Arroba IT <https://arroba-it.de/>`__
 
-- `Barthauer Software GmbH <https://www.barthauer.de/>`_
+- `ASTERIOS Design e.U. <https://www.multimedia-agentur.at/>`__
 
-- `Bamboozle <https://www.bamboozle.ch/>`_
+- `Barthauer Software GmbH <https://www.barthauer.de/>`__
 
-- `Bucerius Education GmbH <https://www.law-school.de/>`_
+- `Bamboozle <https://www.bamboozle.ch/>`__
 
-- `björn hahnefeld IT <https://www.hahnefeld.de/>`_
+- `Bucerius Education GmbH <https://www.law-school.de/>`__
+
+- `björn hahnefeld IT <https://www.hahnefeld.de/>`__
+
+- `Bundesarbeitsgemeinschaft Schulgarten e.V. <https://www.bag-schulgarten.de/>`__
 
 - Career Service Bonn (CaSeBo)
 
 - CITRUS - Agentur für E-Marketing und Neue Medien
 
-- `ComLog Werbung <https://www.comlog.de/>`_
+- `ComLog Werbung <https://www.comlog.de/>`__
 
-- `IT:Agenten GmbH <https://it-agenten.com/>`_
+- `Geek Space 9 GmbH <https://gs-9.com/>`__ (formerly known as IT:Agenten GmbH)
 
-- `Data Quest AG <https://www.dataquest.ch/>`_
+- `Data Quest AG <https://www.dq-solutions.ch/>`__
 
-- `Designwerkstatt Dana Brösdorf <https://www.designwerkstatt.net/>`_
+- `Designwerkstatt Dana Brösdorf <https://www.designwerkstatt.net/>`__
 
-- `die medienagenten oHG <http://www.medienagenten.de/>`_
+- `die medienagenten oHG <https://www.medienagenten.de/>`__
 
-- `dkd Internet Service GmbH <https://www.dkd.de/>`_
+- `dkd Internet Service GmbH <https://www.dkd.de/>`__
 
-- `docnet: Doctoral Network at the University of St. Gallen <https://wp.docnet-hsg.ch/>`_
+- `docnet: Doctoral Network at the University of St. Gallen
+   <https://wp.docnet-hsg.ch/>`__
 
 - edv-rose
 
-- `elementare teilchen GmbH <https://www.elementare-teilchen.de/>`_
+- `elementare teilchen GmbH <https://www.elementare-teilchen.de/>`__
 
-- `eventnetzwerke <https://www.eventnetzwerke.de/>`_
+- `eventnetzwerke <https://www.eventnetzwerke.de/>`__
 
-- `F7 Media GmbH <https://www.f7.de/>`_
+- `F7 Media GmbH <https://www.f7.de/>`__
 
 - f.com GmbH + Co. KG
 
-- `Geonet GmbH <https://geonet.eu/>`_
+- FGS Kommunikation
 
-- `.hausformat <https://www.hausformat.ch/>`_
+- `Geonet GmbH <https://geonet.eu/>`__
+
+- `.hausformat <https://www.hausformat.ch/>`__
 
 - `Hochschule für angewandte Wissenschaften Würzburg-Schweinfurt
-  <https://www.fhws.de/>`_
+   <https://www.fhws.de/>`__
 
-- `infoklick.ch <https://www.infoklick.ch/>`_
+- `infoklick.ch <https://www.infoklick.ch/>`__
 
-- `Jugendbildungsstätte Windberg, 94336 Windberg (Bay. Wald), Seminarhaus, Fortbildungen, Tagungshaus, Seminare
-  <http://www.jugendbildungsstaette-windberg.de/>`_
+- `Jugendbildungsstätte Windberg, 94336 Windberg (Bay. Wald),
+   Seminarhaus, Fortbildungen, Tagungshaus, Seminare
+   <https://www.jugendbildungsstaette-windberg.de/>`__
 
-- `jweiland.net <https://jweiland.net>`_
+- `jweiland.net <https://jweiland.net/>`__
 
-- `Kienast Datenverarbeitung <http://www.kienastdv.de/>`_
+- `Kienast Datenverarbeitung <https://www.kienastdv.de/>`__
 
-- `Klare Köpfe <http://klarekoepfe.de/>`_
+- `Klare Köpfe <https://klarekoepfe.de/>`__
 
 - Kompetenzzentrum IT am
   Staatlichen Schulamt für den Landkreis Offenbach und die Stadt
@@ -93,77 +101,81 @@ organizations and persons:
 
 - lucidlogic
 
-- `maddesigns - Sven Wolfermann <http://maddesigns.de/>`_
+- `maddesigns - Sven Wolfermann <http://maddesigns.de/>`__
 
 - Max Weickl
 
-- `medien+bildung.com gGmbH <http://medienundbildung.com/>`_
+- `medien+bildung.com gGmbH <https://medienundbildung.com/>`__
 
-- `mentronic . Digitale Kommunikation <https://www.mentronic.com/>`_
+- `mentronic . Digitale Kommunikation <https://www.mentronic.com/>`__
 
 - Michael Bakonyi – Neue Medien
 
-- `MK Office Monika Kaderabek <http://www.mk-office.ch/>`_
+- `MK Office Monika Kaderabek <https://www.mk-office.ch/>`__
 
-- `m\|r\|o\|net <https://www.mronet.at/>`_
+- `m\|r\|o\|net <https://www.mronet.at/>`__
 
-- `netboot internet solutions <http://www.netboot.ch/>`_
+- `netboot internet solutions <https://www.netboot.ch/>`__
 
-- `MLVB - Montessori Landesverband Bayern <https://www.montessoribayern.de/>`_
+- `MLVB - Montessori Landesverband Bayern <https://www.montessoribayern.de/>`__
 
-- `net/bureau new media services GmbH & Co. KG <https://www.netbureau.de/>`_
+- `net/bureau new media services GmbH & Co. KG <https://www.netbureau.de/>`__
 
-- `NetzWerkPlan GmbH <https://netzwerkplan.de/>`_
+- `NetzWerkPlan GmbH <https://netzwerkplan.de/>`__
 
-- `North Coast Church <https://www.northcoastchurch.com/>`_
+- `North Coast Church <https://www.northcoastchurch.com/>`__
 
-- `nulabor <http://www.nulabor.de/>`_
+- `nulabor <http://www.nulabor.de/>`__
 
-- `platzhirsche.net / SeminarPool GmbH <https://www.platzhirsche.net/>`_
+- `platzhirsche.net / SeminarPool GmbH <https://www.platzhirsche.net/>`__
+
+- `R2L2 borrelli & maschka gbr <https://www.r2l2.de/>`__
 
 - Ralf Thierfelder
 
-- `randombit EDV-Dienstleistungen <http://randombit.de/>`_
+- `randombit EDV-Dienstleistungen <https://randombit.de/>`__
 
 - Reiner Schmidt
 
 - Rob De Vries
 
-- `SaaS Web Internet Solutions GmbH <https://www.saasweb.net/de>`_
+- `SaaS Web Internet Solutions GmbH <https://www.saasweb.net/de>`__
 
-- `Sankt Michaelsbund Mediendienste <https://www.st-michaelsbund.de/>`_
+- `Sankt Michaelsbund Mediendienste <https://www.st-michaelsbund.de/>`__
 
-- Scheltwort IT-Services KG
+- `Scheltwort IT-Services KG <https://www.scheltwort-its.de/>`__
 
-- `sitegeist media solutions GmbH <https://sitegeist.de/>`_
+- `sitegeist media solutions GmbH <https://sitegeist.de/>`__
 
-- `SIVA creative media <https://www.siva-creative.net/>`_
+- `SIVA creative media <https://www.siva-creative.net/>`__
 
-- `Ski-Club Au e.V. <https://www.ski-club-au.de/>`_
+- `Ski-Club Au e.V. <https://www.ski-club-au.de/>`__
 
 - SONNENDEQ - Form + eFunktion
 
-- `Systemhaus SAR GmbH <https://www.sar.de/>`_
+- `Systemhaus SAR GmbH <https://www.sar.de/>`__
 
-- `T3 Premium <https://www.t3premium.de/>`_
+- `T3 Premium <https://www.t3premium.de/>`__
 
-- `takomat Agentur GbR <https://www.takomat-agentur.de/>`_
+- `takomat Agentur GbR <https://www.takomat-agentur.de/>`__
 
 - thinkhouse GmbH
 
 - Thomas Waurick
 
-- `tsitrone medien GmbH & Co. KG <https://www.tsitrone.de/>`_
+- `tsitrone medien GmbH & Co. KG <https://www.tsitrone.de/>`__
 
-- `WebShade <https://www.webshade.nl/>`_
+- `WebShade <https://www.webshade.nl/>`__
 
 - `webspiration - webdesign, edv & internetservices
-  <http://www.webspiration.ch/>`_
+  <http://www.webspiration.ch/>`__
 
-- `Weinsberger Forum <http://www.weinsberger-forum.de/>`_
+- `Weinsberger Forum <http://www.weinsberger-forum.de/>`__
 
-- `WIKAFI <http://wikafi.be/>`_
+- `WestLotto.de <https://www.westlotto.de/>`__
 
-- `xmental <https://www.xmental.de/>`_
+- `WIKAFI <https://wikafi.be/>`__
 
-- `ZfDB OHG <http://www.zfdb-verlag.de/>`_
+- `xmental <https://www.xmental.de/>`__
+
+- ZfDB OHG
