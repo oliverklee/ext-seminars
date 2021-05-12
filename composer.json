@@ -1,134 +1,134 @@
 {
-    "name": "oliverklee/seminars",
-    "description": "TYPO3 extension that allows you to create and manage a list of seminars, workshops, lectures, theater performances and other events, allowing front-end users to sign up. FE users also can create and edit events.",
-    "type": "typo3-cms-extension",
-    "keywords": [
-        "seminars",
-        "workshops",
-        "event",
-        "registration",
-        "education",
-        "talks"
-    ],
-    "homepage": "https://www.oliverklee.de/typo3-services/seminarmanager/",
-    "license": "GPL-2.0-or-later",
-    "authors": [
-        {
-            "name": "Oliver Klee",
-            "email": "typo3-coding@oliverklee.de",
-            "homepage": "https://www.oliverklee.de",
-            "role": "developer"
-        }
-    ],
-    "support": {
-        "issues": "https://github.com/oliverklee/ext-seminars/issues",
-        "source": "https://github.com/oliverklee/ext-seminars"
-    },
-    "require": {
-        "php": "~7.0.0 || ~7.1.0 || ~7.2.0 || ~7.3.0 || ~7.4.0",
-        "ext-json": "*",
-        "digedag/rn-base": "^1.11.4",
-        "dmk/mkforms": "^9.5.2",
-        "oliverklee/oelib": "^3.3.0",
-        "psr/http-message": "^1.0",
-        "sjbr/static-info-tables": "^6.7.0",
-        "typo3/cms-backend": "^8.7 || ^9.5",
-        "typo3/cms-core": "^8.7.9 || ^9.5.7",
-        "typo3/cms-extbase": "^8.7 || ^9.5",
-        "typo3/cms-fluid": "^8.7 || ^9.5",
-        "typo3/cms-frontend": "^8.7 || ^9.5",
-        "typo3/cms-lang": "^8.7 || ^9.5"
-    },
-    "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.16.6",
-        "helhum/typo3-console": "^5.8.6",
-        "helmich/typo3-typoscript-lint": "^1.5.0 || ^2.3.0",
-        "mikey179/vfsstream": "^1.6.8",
-        "nimut/testing-framework": "^5.1.0",
-        "oliverklee/phpunit": "^6.5.16",
-        "phpspec/prophecy": "^1.10.3",
-        "phpunit/phpunit": "^6.5.14",
-        "squizlabs/php_codesniffer": "^3.5.8",
-        "typo3/cms-scheduler": "^8.7 || ^9.5"
-    },
-    "suggest": {
-        "in2code/femanager": "^4.2 || ^5.4",
-        "oliverklee/onetimeaccount": "^4.2",
-        "sjbr/sr-feuser-register": "^5.1 || ^6.0 || ^7.0"
-    },
-    "replace": {
-        "typo3-ter/seminars": "self.version"
-    },
-    "autoload": {
-        "classmap": [
-            "Classes"
-        ]
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "OliverKlee\\Seminars\\Tests\\": "Tests/"
-        }
-    },
-    "prefer-stable": true,
-    "config": {
-        "preferred-install": {
-            "*": "dist"
-        },
-        "sort-packages": true,
-        "process-timeout": 1000,
-        "vendor-dir": ".Build/vendor"
-    },
-    "scripts": {
-        "php:fix": ".Build/vendor/bin/php-cs-fixer --config=Configuration/php-cs-fixer.php fix Classes Tests && .Build/vendor/bin/phpcbf Classes Configuration Tests",
-        "ci:php:lint": "find *.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
-        "ci:php:sniff": ".Build/vendor/bin/phpcs Classes Configuration Tests",
-        "ci:php:fixer": ".Build/vendor/bin/php-cs-fixer --config=Configuration/php-cs-fixer.php fix --dry-run -v --show-progress=dots --diff-format=udiff Classes Tests",
-        "ci:ts:lint": ".Build/vendor/bin/typoscript-lint -c Configuration/TsLint.yml --ansi -n --fail-on-warnings -vvv Configuration/TypoScript",
-        "ci:tests:unit": ".Build/vendor/bin/phpunit -c .Build/vendor/nimut/testing-framework/res/Configuration/UnitTests.xml Tests/Unit",
-        "ci:tests:unit-legacy": ".Build/vendor/bin/typo3 phpunit:run Tests/LegacyUnit",
-        "ci:tests:functional": "find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running functional test suite {}\"; .Build/vendor/bin/phpunit -c .Build/vendor/nimut/testing-framework/res/Configuration/FunctionalTests.xml {}';",
-        "ci:tests": [
-            "@ci:tests:unit",
-            "@ci:tests:unit-legacy",
-            "@ci:tests:functional"
-        ],
-        "ci:dynamic": [
-            "@ci:tests"
-        ],
-        "ci:static": [
-            "@ci:php:lint",
-            "@ci:php:sniff",
-            "@ci:php:fixer",
-            "@ci:ts:lint"
-        ],
-        "ci": [
-            "@ci:static",
-            "@ci:dynamic"
-        ],
-        "link-extension": [
-            "@php -r 'is_dir($extFolder=__DIR__.\"/.Build/public/typo3conf/ext/\") || mkdir($extFolder, 0777, true);'",
-            "@php -r 'file_exists($extFolder=__DIR__.\"/.Build/public/typo3conf/ext/seminars\") || symlink(__DIR__,$extFolder);'"
-        ],
-        "post-autoload-dump": [
-            "@link-extension"
-        ],
-        "typo3:docs:render": [
-            "docker-compose run --rm t3docmake"
-        ],
-        "typo3:docs:serve": [
-            "php -S 127.0.0.1:4000 -t Documentation-GENERATED-temp/Result/project/0.0.0"
-        ]
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-main": "3.3.x-dev"
-        },
-        "typo3/cms": {
-            "extension-key": "seminars",
-            "web-dir": ".Build/public"
-        },
-        "helhum/typo3-console": {
-            "install-extension-dummy": "0"
-        }
-    }
+	"name": "oliverklee/seminars",
+	"description": "TYPO3 extension that allows you to create and manage a list of seminars, workshops, lectures, theater performances and other events, allowing front-end users to sign up. FE users also can create and edit events.",
+	"type": "typo3-cms-extension",
+	"keywords": [
+		"seminars",
+		"workshops",
+		"event",
+		"registration",
+		"education",
+		"talks"
+	],
+	"homepage": "https://www.oliverklee.de/typo3-services/seminarmanager/",
+	"license": "GPL-2.0-or-later",
+	"authors": [
+		{
+			"name": "Oliver Klee",
+			"email": "typo3-coding@oliverklee.de",
+			"homepage": "https://www.oliverklee.de",
+			"role": "developer"
+		}
+	],
+	"support": {
+		"issues": "https://github.com/oliverklee/ext-seminars/issues",
+		"source": "https://github.com/oliverklee/ext-seminars"
+	},
+	"require": {
+		"php": "~7.0.0 || ~7.1.0 || ~7.2.0 || ~7.3.0 || ~7.4.0",
+		"ext-json": "*",
+		"digedag/rn-base": "^1.11.4",
+		"dmk/mkforms": "^9.5.2",
+		"oliverklee/oelib": "^3.3.0",
+		"psr/http-message": "^1.0",
+		"sjbr/static-info-tables": "^6.7.0",
+		"typo3/cms-backend": "^8.7 || ^9.5",
+		"typo3/cms-core": "^8.7.9 || ^9.5.7",
+		"typo3/cms-extbase": "^8.7 || ^9.5",
+		"typo3/cms-fluid": "^8.7 || ^9.5",
+		"typo3/cms-frontend": "^8.7 || ^9.5",
+		"typo3/cms-lang": "^8.7 || ^9.5"
+	},
+	"require-dev": {
+		"friendsofphp/php-cs-fixer": "^2.16.6",
+		"helhum/typo3-console": "^5.8.6",
+		"helmich/typo3-typoscript-lint": "^1.5.0 || ^2.3.0",
+		"mikey179/vfsstream": "^1.6.8",
+		"nimut/testing-framework": "^5.1.0",
+		"oliverklee/phpunit": "^6.5.16",
+		"phpspec/prophecy": "^1.10.3",
+		"phpunit/phpunit": "^6.5.14",
+		"squizlabs/php_codesniffer": "^3.5.8",
+		"typo3/cms-scheduler": "^8.7 || ^9.5"
+	},
+	"suggest": {
+		"in2code/femanager": "^4.2 || ^5.4",
+		"oliverklee/onetimeaccount": "^4.2",
+		"sjbr/sr-feuser-register": "^5.1 || ^6.0 || ^7.0"
+	},
+	"replace": {
+		"typo3-ter/seminars": "self.version"
+	},
+	"autoload": {
+		"classmap": [
+			"Classes"
+		]
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"OliverKlee\\Seminars\\Tests\\": "Tests/"
+		}
+	},
+	"prefer-stable": true,
+	"config": {
+		"preferred-install": {
+			"*": "dist"
+		},
+		"sort-packages": true,
+		"process-timeout": 1000,
+		"vendor-dir": ".Build/vendor"
+	},
+	"scripts": {
+		"php:fix": ".Build/vendor/bin/php-cs-fixer --config=Configuration/php-cs-fixer.php fix Classes Tests && .Build/vendor/bin/phpcbf Classes Configuration Tests",
+		"ci:php:lint": "find *.php Classes Configuration Tests -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l",
+		"ci:php:sniff": ".Build/vendor/bin/phpcs Classes Configuration Tests",
+		"ci:php:fixer": ".Build/vendor/bin/php-cs-fixer --config=Configuration/php-cs-fixer.php fix --dry-run -v --show-progress=dots --diff-format=udiff Classes Tests",
+		"ci:ts:lint": ".Build/vendor/bin/typoscript-lint -c Configuration/TsLint.yml --ansi -n --fail-on-warnings -vvv Configuration/TypoScript",
+		"ci:tests:unit": ".Build/vendor/bin/phpunit -c .Build/vendor/nimut/testing-framework/res/Configuration/UnitTests.xml Tests/Unit",
+		"ci:tests:unit-legacy": ".Build/vendor/bin/typo3 phpunit:run Tests/LegacyUnit",
+		"ci:tests:functional": "find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'echo; echo \"Running functional test suite {}\"; .Build/vendor/bin/phpunit -c .Build/vendor/nimut/testing-framework/res/Configuration/FunctionalTests.xml {}';",
+		"ci:tests": [
+			"@ci:tests:unit",
+			"@ci:tests:unit-legacy",
+			"@ci:tests:functional"
+		],
+		"ci:dynamic": [
+			"@ci:tests"
+		],
+		"ci:static": [
+			"@ci:php:lint",
+			"@ci:php:sniff",
+			"@ci:php:fixer",
+			"@ci:ts:lint"
+		],
+		"ci": [
+			"@ci:static",
+			"@ci:dynamic"
+		],
+		"link-extension": [
+			"@php -r 'is_dir($extFolder=__DIR__.\"/.Build/public/typo3conf/ext/\") || mkdir($extFolder, 0777, true);'",
+			"@php -r 'file_exists($extFolder=__DIR__.\"/.Build/public/typo3conf/ext/seminars\") || symlink(__DIR__,$extFolder);'"
+		],
+		"post-autoload-dump": [
+			"@link-extension"
+		],
+		"typo3:docs:render": [
+			"docker-compose run --rm t3docmake"
+		],
+		"typo3:docs:serve": [
+			"php -S 127.0.0.1:4000 -t Documentation-GENERATED-temp/Result/project/0.0.0"
+		]
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-main": "3.3.x-dev"
+		},
+		"typo3/cms": {
+			"extension-key": "seminars",
+			"web-dir": ".Build/public"
+		},
+		"helhum/typo3-console": {
+			"install-extension-dummy": "0"
+		}
+	}
 }

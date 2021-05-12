@@ -1,1925 +1,1925 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-    <file source-language="en" datatype="plaintext" original="messages" date="2016-07-18T21:20:42Z"
-          product-name="seminars">
-        <header/>
-        <body>
-            <trans-unit id="pi1_title" xml:space="preserve">
-                <source>Seminar Manager</source>
-            </trans-unit>
-            <trans-unit id="pi1_description" xml:space="preserve">
-                <source>Displays seminars in the FE</source>
-            </trans-unit>
-            <trans-unit id="label_title" xml:space="preserve">
-                <source>Title</source>
-            </trans-unit>
-            <trans-unit id="label_uid" xml:space="preserve">
-                <source>Number</source>
-            </trans-unit>
-            <trans-unit id="label_registration_uid" xml:space="preserve">
-                <source>Ticket ID</source>
-            </trans-unit>
-            <trans-unit id="label_event_type" xml:space="preserve">
-                <source>Event type</source>
-            </trans-unit>
-            <trans-unit id="label_accreditation_number" xml:space="preserve">
-                <source>Accreditation number</source>
-            </trans-unit>
-            <trans-unit id="label_credit_points" xml:space="preserve">
-                <source>Credit points</source>
-            </trans-unit>
-            <trans-unit id="label_date" xml:space="preserve">
-                <source>Date</source>
-            </trans-unit>
-            <trans-unit id="label_time" xml:space="preserve">
-                <source>Time</source>
-            </trans-unit>
-            <trans-unit id="label_place" xml:space="preserve">
-                <source>Place</source>
-            </trans-unit>
-            <trans-unit id="label_room" xml:space="preserve">
-                <source>Room</source>
-            </trans-unit>
-            <trans-unit id="label_seats" xml:space="preserve">
-                <source>Seats</source>
-            </trans-unit>
-            <trans-unit id="label_total_price" xml:space="preserve">
-                <source>Total price</source>
-            </trans-unit>
-            <trans-unit id="label_attendees_names" xml:space="preserve">
-                <source>Registered persons</source>
-            </trans-unit>
-            <trans-unit id="label_lodgings" xml:space="preserve">
-                <source>Selected lodging options</source>
-            </trans-unit>
-            <trans-unit id="label_accommodation" xml:space="preserve">
-                <source>Accommodation</source>
-            </trans-unit>
-            <trans-unit id="label_foods" xml:space="preserve">
-                <source>Selected food options</source>
-            </trans-unit>
-            <trans-unit id="label_food" xml:space="preserve">
-                <source>Food</source>
-            </trans-unit>
-            <trans-unit id="label_kids" xml:space="preserve">
-                <source>Number of kids</source>
-            </trans-unit>
-            <trans-unit id="label_price" xml:space="preserve">
-                <source>Price</source>
-            </trans-unit>
-            <trans-unit id="label_price_general" xml:space="preserve">
-                <source>Price</source>
-            </trans-unit>
-            <trans-unit id="label_price_regular" xml:space="preserve">
-                <source>Regular price</source>
-            </trans-unit>
-            <trans-unit id="label_price_regular_early" xml:space="preserve">
-                <source>Early-bird price</source>
-            </trans-unit>
-            <trans-unit id="label_price_earlybird_regular" xml:space="preserve">
-                <source>Early-bird price</source>
-            </trans-unit>
-            <trans-unit id="label_price_board_regular" xml:space="preserve">
-                <source>Regular price including full board</source>
-            </trans-unit>
-            <trans-unit id="label_price_special" xml:space="preserve">
-                <source>Special price</source>
-            </trans-unit>
-            <trans-unit id="label_price_special_early" xml:space="preserve">
-                <source>Early-bird special price</source>
-            </trans-unit>
-            <trans-unit id="label_price_earlybird_special" xml:space="preserve">
-                <source>Early-bird special price</source>
-            </trans-unit>
-            <trans-unit id="label_price_board_special" xml:space="preserve">
-                <source>Special price including full board</source>
-            </trans-unit>
-            <trans-unit id="label_method_of_payment" xml:space="preserve">
-                <source>Method of payment</source>
-            </trans-unit>
-            <trans-unit id="label_gender" xml:space="preserve">
-                <source>Gender</source>
-            </trans-unit>
-            <trans-unit id="label_username" xml:space="preserve">
-                <source>User name</source>
-            </trans-unit>
-            <trans-unit id="label_name" xml:space="preserve">
-                <source>Name</source>
-            </trans-unit>
-            <trans-unit id="label_address" xml:space="preserve">
-                <source>Address</source>
-            </trans-unit>
-            <trans-unit id="label_zip" xml:space="preserve">
-                <source>ZIP code</source>
-            </trans-unit>
-            <trans-unit id="label_city" xml:space="preserve">
-                <source>City</source>
-            </trans-unit>
-            <trans-unit id="label_country" xml:space="preserve">
-                <source>Country</source>
-            </trans-unit>
-            <trans-unit id="label_attendees" xml:space="preserve">
-                <source>Attendees</source>
-            </trans-unit>
-            <trans-unit id="label_vacancies" xml:space="preserve">
-                <source>Vacancies</source>
-            </trans-unit>
-            <trans-unit id="label_unlimited" xml:space="preserve">
-                <source>unlimited</source>
-            </trans-unit>
-            <trans-unit id="label_enough_attendees" xml:space="preserve">
-                <source>Enough attendees</source>
-            </trans-unit>
-            <trans-unit id="label_is_full" xml:space="preserve">
-                <source>Is full</source>
-            </trans-unit>
-            <trans-unit id="label_paymentmethod" xml:space="preserve">
-                <source>Selected method of payment</source>
-            </trans-unit>
-            <trans-unit id="label_billing_address" xml:space="preserve">
-                <source>Billing address</source>
-            </trans-unit>
-            <trans-unit id="label_telephone" xml:space="preserve">
-                <source>Phone</source>
-            </trans-unit>
-            <trans-unit id="label_fax" xml:space="preserve">
-                <source>Fax</source>
-            </trans-unit>
-            <trans-unit id="label_email" xml:space="preserve">
-                <source>E-mail address</source>
-            </trans-unit>
-            <trans-unit id="label_interests" xml:space="preserve">
-                <source>Special interests</source>
-            </trans-unit>
-            <trans-unit id="label_expectations" xml:space="preserve">
-                <source>Expectations</source>
-            </trans-unit>
-            <trans-unit id="label_background_knowledge" xml:space="preserve">
-                <source>Background knowledge</source>
-            </trans-unit>
-            <trans-unit id="label_known_from" xml:space="preserve">
-                <source>Known from</source>
-            </trans-unit>
-            <trans-unit id="label_notes" xml:space="preserve">
-                <source>Notes</source>
-            </trans-unit>
-            <trans-unit id="label_url" xml:space="preserve">
-                <source>More information</source>
-            </trans-unit>
-            <trans-unit id="label_seminardata" xml:space="preserve">
-                <source>Seminar data</source>
-            </trans-unit>
-            <trans-unit id="label_feuserdata" xml:space="preserve">
-                <source>Account data</source>
-            </trans-unit>
-            <trans-unit id="label_attendancedata" xml:space="preserve">
-                <source>Data that has been entered on registration</source>
-            </trans-unit>
-            <trans-unit id="label_gender.I.0" xml:space="preserve">
-                <source>Mr.</source>
-            </trans-unit>
-            <trans-unit id="label_gender.I.1" xml:space="preserve">
-                <source>Ms.</source>
-            </trans-unit>
-            <trans-unit id="label_status.I.1" xml:space="preserve">
-                <source>Student</source>
-            </trans-unit>
-            <trans-unit id="label_status.I.2" xml:space="preserve">
-                <source>Job seeking</source>
-            </trans-unit>
-            <trans-unit id="label_status.I.3" xml:space="preserve">
-                <source>Working</source>
-            </trans-unit>
-            <trans-unit id="label_status.I.4" xml:space="preserve">
-                <source>Retired</source>
-            </trans-unit>
-            <trans-unit id="status_regular" xml:space="preserve">
-                <source>regular</source>
-            </trans-unit>
-            <trans-unit id="status_waiting_list" xml:space="preserve">
-                <source>waiting list</source>
-            </trans-unit>
-            <trans-unit id="label_yes" xml:space="preserve">
-                <source>yes</source>
-            </trans-unit>
-            <trans-unit id="label_no" xml:space="preserve">
-                <source>no</source>
-            </trans-unit>
-            <trans-unit id="label_hours" xml:space="preserve">
-                <source>h</source>
-            </trans-unit>
-            <trans-unit id="label_checkboxes" xml:space="preserve">
-                <source>Selected options</source>
-            </trans-unit>
-            <trans-unit id="message_notLoggedIn" xml:space="preserve">
-                <source>Please log in first.</source>
-            </trans-unit>
-            <trans-unit id="message_notLoggedIn_informal" xml:space="preserve">
-                <source>Please log in first.</source>
-            </trans-unit>
-            <trans-unit id="message_alreadyRegistered" xml:space="preserve">
-                <source>You already have registered for this event.</source>
-            </trans-unit>
-            <trans-unit id="message_alreadyRegistered_informal" xml:space="preserve">
-                <source>You already have registered for this event.</source>
-            </trans-unit>
-            <trans-unit id="message_userIsBlocked" xml:space="preserve">
-                <source>You are already registered for an event that collides with this event.</source>
-            </trans-unit>
-            <trans-unit id="message_userIsBlocked_informal" xml:space="preserve">
-                <source>You are already registered for an event that collides with this event.</source>
-            </trans-unit>
-            <trans-unit id="message_missingSeminarNumber" xml:space="preserve">
-                <source>The even UID is missing from the URL. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
-            </trans-unit>
-            <trans-unit id="message_wrongSeminarNumber" xml:space="preserve">
-                <source>There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
-            </trans-unit>
-            <trans-unit id="message_wrongSeminarNumber_informal" xml:space="preserve">
-                <source>There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
-            </trans-unit>
-            <trans-unit id="message_noRegistrationNecessary" xml:space="preserve">
-                <source>For this event, no registration is necessary.</source>
-            </trans-unit>
-            <trans-unit id="message_seminarCancelled" xml:space="preserve">
-                <source>Alas, this event has been canceled.</source>
-            </trans-unit>
-            <trans-unit id="message_noDate" xml:space="preserve">
-                <source>This event has no date yet.</source>
-            </trans-unit>
-            <trans-unit id="message_seminarRegistrationIsClosed" xml:space="preserve">
-                <source>Sorry, the registration period for this event is over.</source>
-            </trans-unit>
-            <trans-unit id="message_noVacancies" xml:space="preserve">
-                <source>Sorry, there are no more vancacies.</source>
-            </trans-unit>
-            <trans-unit id="message_invalidNumberOfSeats" xml:space="preserve">
-                <source>Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</source>
-            </trans-unit>
-            <trans-unit id="message_invalidNumberOfSeats_informal" xml:space="preserve">
-                <source>Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</source>
-            </trans-unit>
-            <trans-unit id="message_willBeAnnounced" xml:space="preserve">
-                <source>will be announced</source>
-            </trans-unit>
-            <trans-unit id="message_forFree" xml:space="preserve">
-                <source>free</source>
-            </trans-unit>
-            <trans-unit id="message_enough" xml:space="preserve">
-                <source>enough</source>
-            </trans-unit>
-            <trans-unit id="message_fullyBooked" xml:space="preserve">
-                <source>fully booked</source>
-            </trans-unit>
-            <trans-unit id="message_registrationOpensOn" xml:space="preserve">
-                <source>starting %s</source>
-            </trans-unit>
-            <trans-unit id="message_accessDenied" xml:space="preserve">
-                <source>Sorry, you don't have access to this part of the site.</source>
-            </trans-unit>
-            <trans-unit id="message_accessDenied_informal" xml:space="preserve">
-                <source>Sorry, you don't have access to this part of the site.</source>
-            </trans-unit>
-            <trans-unit id="email_confirmationSubject" xml:space="preserve">
-                <source>Registration confirmation</source>
-            </trans-unit>
-            <trans-unit id="email_confirmationHello" xml:space="preserve">
-                <source>thank you for registering for the event &quot;%s&quot;</source>
-            </trans-unit>
-            <trans-unit id="email_confirmationHello_informal" xml:space="preserve">
-                <source>thank you for registering for the event &quot;%s&quot;</source>
-            </trans-unit>
-            <trans-unit id="email_price" xml:space="preserve">
-                <source>at the total price of %s</source>
-            </trans-unit>
-            <trans-unit id="email_confirmationOnUnregistrationSubject" xml:space="preserve">
-                <source>Unregistration confirmation</source>
-            </trans-unit>
-            <trans-unit id="email_confirmationOnUnregistrationHello" xml:space="preserve">
-                <source>hereby, we confirm your unregistration from the event &quot;%s&quot;</source>
-            </trans-unit>
-            <trans-unit id="email_confirmationOnUnregistrationHello_informal" xml:space="preserve">
-                <source>hereby, we confirm your unregistration from the event &quot;%s&quot;</source>
-            </trans-unit>
-            <trans-unit id="email_confirmationOnRegistrationForQueueSubject" xml:space="preserve">
-                <source>Registration for the waiting list confirmation</source>
-            </trans-unit>
-            <trans-unit id="email_confirmationOnRegistrationForQueueHello" xml:space="preserve">
-                <source>thank you for registering for the waiting list of the event &quot;%s&quot;</source>
-            </trans-unit>
-            <trans-unit id="email_confirmationOnRegistrationForQueueHello_informal" xml:space="preserve">
-                <source>thank you for registering for the waiting list of the event &quot;%s&quot;</source>
-            </trans-unit>
-            <trans-unit id="email_confirmationOnQueueUpdateSubject" xml:space="preserve">
-                <source>Registration became a regular registration confirmation</source>
-            </trans-unit>
-            <trans-unit id="email_confirmationOnQueueUpdateHello" xml:space="preserve">
-                <source>your registration just has become a regular registration for the event &quot;%s&quot;</source>
-            </trans-unit>
-            <trans-unit id="email_confirmationOnQueueUpdateHello_informal" xml:space="preserve">
-                <source>your registration just has become a regular registration for the event &quot;%s&quot;</source>
-            </trans-unit>
-            <trans-unit id="email_unregistrationNotice" xml:space="preserve">
-                <source>You will be able to unregister for free until %s. After this date you will have to pay the event fee.</source>
-            </trans-unit>
-            <trans-unit id="email_unregistrationNotice_informal" xml:space="preserve">
-                <source>You will be able to unregister for free until %s. After this date you will have to pay the event fee.</source>
-            </trans-unit>
-            <trans-unit id="email_additionalNotificationEnoughRegistrations" xml:space="preserve">
-                <source>Your event has now enough registrations to be held.</source>
-            </trans-unit>
-            <trans-unit id="email_additionalNotificationEnoughRegistrationsSubject" xml:space="preserve">
-                <source>Event has enough registrations: %d - %s</source>
-            </trans-unit>
-            <trans-unit id="email_additionalNotificationIsFull" xml:space="preserve">
-                <source>Your event is full, there are no empty seats left.</source>
-            </trans-unit>
-            <trans-unit id="email_additionalNotificationIsFullSubject" xml:space="preserve">
-                <source>Event is full: %d - %s</source>
-            </trans-unit>
-            <trans-unit id="email_notificationSubject" xml:space="preserve">
-                <source>Registration notification</source>
-            </trans-unit>
-            <trans-unit id="email_notificationHello" xml:space="preserve">
-                <source>Hello,
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-07-18T21:20:42Z"
+		  product-name="seminars">
+		<header/>
+		<body>
+			<trans-unit id="pi1_title" xml:space="preserve">
+				<source>Seminar Manager</source>
+			</trans-unit>
+			<trans-unit id="pi1_description" xml:space="preserve">
+				<source>Displays seminars in the FE</source>
+			</trans-unit>
+			<trans-unit id="label_title" xml:space="preserve">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="label_uid" xml:space="preserve">
+				<source>Number</source>
+			</trans-unit>
+			<trans-unit id="label_registration_uid" xml:space="preserve">
+				<source>Ticket ID</source>
+			</trans-unit>
+			<trans-unit id="label_event_type" xml:space="preserve">
+				<source>Event type</source>
+			</trans-unit>
+			<trans-unit id="label_accreditation_number" xml:space="preserve">
+				<source>Accreditation number</source>
+			</trans-unit>
+			<trans-unit id="label_credit_points" xml:space="preserve">
+				<source>Credit points</source>
+			</trans-unit>
+			<trans-unit id="label_date" xml:space="preserve">
+				<source>Date</source>
+			</trans-unit>
+			<trans-unit id="label_time" xml:space="preserve">
+				<source>Time</source>
+			</trans-unit>
+			<trans-unit id="label_place" xml:space="preserve">
+				<source>Place</source>
+			</trans-unit>
+			<trans-unit id="label_room" xml:space="preserve">
+				<source>Room</source>
+			</trans-unit>
+			<trans-unit id="label_seats" xml:space="preserve">
+				<source>Seats</source>
+			</trans-unit>
+			<trans-unit id="label_total_price" xml:space="preserve">
+				<source>Total price</source>
+			</trans-unit>
+			<trans-unit id="label_attendees_names" xml:space="preserve">
+				<source>Registered persons</source>
+			</trans-unit>
+			<trans-unit id="label_lodgings" xml:space="preserve">
+				<source>Selected lodging options</source>
+			</trans-unit>
+			<trans-unit id="label_accommodation" xml:space="preserve">
+				<source>Accommodation</source>
+			</trans-unit>
+			<trans-unit id="label_foods" xml:space="preserve">
+				<source>Selected food options</source>
+			</trans-unit>
+			<trans-unit id="label_food" xml:space="preserve">
+				<source>Food</source>
+			</trans-unit>
+			<trans-unit id="label_kids" xml:space="preserve">
+				<source>Number of kids</source>
+			</trans-unit>
+			<trans-unit id="label_price" xml:space="preserve">
+				<source>Price</source>
+			</trans-unit>
+			<trans-unit id="label_price_general" xml:space="preserve">
+				<source>Price</source>
+			</trans-unit>
+			<trans-unit id="label_price_regular" xml:space="preserve">
+				<source>Regular price</source>
+			</trans-unit>
+			<trans-unit id="label_price_regular_early" xml:space="preserve">
+				<source>Early-bird price</source>
+			</trans-unit>
+			<trans-unit id="label_price_earlybird_regular" xml:space="preserve">
+				<source>Early-bird price</source>
+			</trans-unit>
+			<trans-unit id="label_price_board_regular" xml:space="preserve">
+				<source>Regular price including full board</source>
+			</trans-unit>
+			<trans-unit id="label_price_special" xml:space="preserve">
+				<source>Special price</source>
+			</trans-unit>
+			<trans-unit id="label_price_special_early" xml:space="preserve">
+				<source>Early-bird special price</source>
+			</trans-unit>
+			<trans-unit id="label_price_earlybird_special" xml:space="preserve">
+				<source>Early-bird special price</source>
+			</trans-unit>
+			<trans-unit id="label_price_board_special" xml:space="preserve">
+				<source>Special price including full board</source>
+			</trans-unit>
+			<trans-unit id="label_method_of_payment" xml:space="preserve">
+				<source>Method of payment</source>
+			</trans-unit>
+			<trans-unit id="label_gender" xml:space="preserve">
+				<source>Gender</source>
+			</trans-unit>
+			<trans-unit id="label_username" xml:space="preserve">
+				<source>User name</source>
+			</trans-unit>
+			<trans-unit id="label_name" xml:space="preserve">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="label_address" xml:space="preserve">
+				<source>Address</source>
+			</trans-unit>
+			<trans-unit id="label_zip" xml:space="preserve">
+				<source>ZIP code</source>
+			</trans-unit>
+			<trans-unit id="label_city" xml:space="preserve">
+				<source>City</source>
+			</trans-unit>
+			<trans-unit id="label_country" xml:space="preserve">
+				<source>Country</source>
+			</trans-unit>
+			<trans-unit id="label_attendees" xml:space="preserve">
+				<source>Attendees</source>
+			</trans-unit>
+			<trans-unit id="label_vacancies" xml:space="preserve">
+				<source>Vacancies</source>
+			</trans-unit>
+			<trans-unit id="label_unlimited" xml:space="preserve">
+				<source>unlimited</source>
+			</trans-unit>
+			<trans-unit id="label_enough_attendees" xml:space="preserve">
+				<source>Enough attendees</source>
+			</trans-unit>
+			<trans-unit id="label_is_full" xml:space="preserve">
+				<source>Is full</source>
+			</trans-unit>
+			<trans-unit id="label_paymentmethod" xml:space="preserve">
+				<source>Selected method of payment</source>
+			</trans-unit>
+			<trans-unit id="label_billing_address" xml:space="preserve">
+				<source>Billing address</source>
+			</trans-unit>
+			<trans-unit id="label_telephone" xml:space="preserve">
+				<source>Phone</source>
+			</trans-unit>
+			<trans-unit id="label_fax" xml:space="preserve">
+				<source>Fax</source>
+			</trans-unit>
+			<trans-unit id="label_email" xml:space="preserve">
+				<source>E-mail address</source>
+			</trans-unit>
+			<trans-unit id="label_interests" xml:space="preserve">
+				<source>Special interests</source>
+			</trans-unit>
+			<trans-unit id="label_expectations" xml:space="preserve">
+				<source>Expectations</source>
+			</trans-unit>
+			<trans-unit id="label_background_knowledge" xml:space="preserve">
+				<source>Background knowledge</source>
+			</trans-unit>
+			<trans-unit id="label_known_from" xml:space="preserve">
+				<source>Known from</source>
+			</trans-unit>
+			<trans-unit id="label_notes" xml:space="preserve">
+				<source>Notes</source>
+			</trans-unit>
+			<trans-unit id="label_url" xml:space="preserve">
+				<source>More information</source>
+			</trans-unit>
+			<trans-unit id="label_seminardata" xml:space="preserve">
+				<source>Seminar data</source>
+			</trans-unit>
+			<trans-unit id="label_feuserdata" xml:space="preserve">
+				<source>Account data</source>
+			</trans-unit>
+			<trans-unit id="label_attendancedata" xml:space="preserve">
+				<source>Data that has been entered on registration</source>
+			</trans-unit>
+			<trans-unit id="label_gender.I.0" xml:space="preserve">
+				<source>Mr.</source>
+			</trans-unit>
+			<trans-unit id="label_gender.I.1" xml:space="preserve">
+				<source>Ms.</source>
+			</trans-unit>
+			<trans-unit id="label_status.I.1" xml:space="preserve">
+				<source>Student</source>
+			</trans-unit>
+			<trans-unit id="label_status.I.2" xml:space="preserve">
+				<source>Job seeking</source>
+			</trans-unit>
+			<trans-unit id="label_status.I.3" xml:space="preserve">
+				<source>Working</source>
+			</trans-unit>
+			<trans-unit id="label_status.I.4" xml:space="preserve">
+				<source>Retired</source>
+			</trans-unit>
+			<trans-unit id="status_regular" xml:space="preserve">
+				<source>regular</source>
+			</trans-unit>
+			<trans-unit id="status_waiting_list" xml:space="preserve">
+				<source>waiting list</source>
+			</trans-unit>
+			<trans-unit id="label_yes" xml:space="preserve">
+				<source>yes</source>
+			</trans-unit>
+			<trans-unit id="label_no" xml:space="preserve">
+				<source>no</source>
+			</trans-unit>
+			<trans-unit id="label_hours" xml:space="preserve">
+				<source>h</source>
+			</trans-unit>
+			<trans-unit id="label_checkboxes" xml:space="preserve">
+				<source>Selected options</source>
+			</trans-unit>
+			<trans-unit id="message_notLoggedIn" xml:space="preserve">
+				<source>Please log in first.</source>
+			</trans-unit>
+			<trans-unit id="message_notLoggedIn_informal" xml:space="preserve">
+				<source>Please log in first.</source>
+			</trans-unit>
+			<trans-unit id="message_alreadyRegistered" xml:space="preserve">
+				<source>You already have registered for this event.</source>
+			</trans-unit>
+			<trans-unit id="message_alreadyRegistered_informal" xml:space="preserve">
+				<source>You already have registered for this event.</source>
+			</trans-unit>
+			<trans-unit id="message_userIsBlocked" xml:space="preserve">
+				<source>You are already registered for an event that collides with this event.</source>
+			</trans-unit>
+			<trans-unit id="message_userIsBlocked_informal" xml:space="preserve">
+				<source>You are already registered for an event that collides with this event.</source>
+			</trans-unit>
+			<trans-unit id="message_missingSeminarNumber" xml:space="preserve">
+				<source>The even UID is missing from the URL. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
+			</trans-unit>
+			<trans-unit id="message_wrongSeminarNumber" xml:space="preserve">
+				<source>There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
+			</trans-unit>
+			<trans-unit id="message_wrongSeminarNumber_informal" xml:space="preserve">
+				<source>There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
+			</trans-unit>
+			<trans-unit id="message_noRegistrationNecessary" xml:space="preserve">
+				<source>For this event, no registration is necessary.</source>
+			</trans-unit>
+			<trans-unit id="message_seminarCancelled" xml:space="preserve">
+				<source>Alas, this event has been canceled.</source>
+			</trans-unit>
+			<trans-unit id="message_noDate" xml:space="preserve">
+				<source>This event has no date yet.</source>
+			</trans-unit>
+			<trans-unit id="message_seminarRegistrationIsClosed" xml:space="preserve">
+				<source>Sorry, the registration period for this event is over.</source>
+			</trans-unit>
+			<trans-unit id="message_noVacancies" xml:space="preserve">
+				<source>Sorry, there are no more vancacies.</source>
+			</trans-unit>
+			<trans-unit id="message_invalidNumberOfSeats" xml:space="preserve">
+				<source>Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</source>
+			</trans-unit>
+			<trans-unit id="message_invalidNumberOfSeats_informal" xml:space="preserve">
+				<source>Sorry, this number of seats cannot be reserved. Please reserve at most %s seats.</source>
+			</trans-unit>
+			<trans-unit id="message_willBeAnnounced" xml:space="preserve">
+				<source>will be announced</source>
+			</trans-unit>
+			<trans-unit id="message_forFree" xml:space="preserve">
+				<source>free</source>
+			</trans-unit>
+			<trans-unit id="message_enough" xml:space="preserve">
+				<source>enough</source>
+			</trans-unit>
+			<trans-unit id="message_fullyBooked" xml:space="preserve">
+				<source>fully booked</source>
+			</trans-unit>
+			<trans-unit id="message_registrationOpensOn" xml:space="preserve">
+				<source>starting %s</source>
+			</trans-unit>
+			<trans-unit id="message_accessDenied" xml:space="preserve">
+				<source>Sorry, you don't have access to this part of the site.</source>
+			</trans-unit>
+			<trans-unit id="message_accessDenied_informal" xml:space="preserve">
+				<source>Sorry, you don't have access to this part of the site.</source>
+			</trans-unit>
+			<trans-unit id="email_confirmationSubject" xml:space="preserve">
+				<source>Registration confirmation</source>
+			</trans-unit>
+			<trans-unit id="email_confirmationHello" xml:space="preserve">
+				<source>thank you for registering for the event &quot;%s&quot;</source>
+			</trans-unit>
+			<trans-unit id="email_confirmationHello_informal" xml:space="preserve">
+				<source>thank you for registering for the event &quot;%s&quot;</source>
+			</trans-unit>
+			<trans-unit id="email_price" xml:space="preserve">
+				<source>at the total price of %s</source>
+			</trans-unit>
+			<trans-unit id="email_confirmationOnUnregistrationSubject" xml:space="preserve">
+				<source>Unregistration confirmation</source>
+			</trans-unit>
+			<trans-unit id="email_confirmationOnUnregistrationHello" xml:space="preserve">
+				<source>hereby, we confirm your unregistration from the event &quot;%s&quot;</source>
+			</trans-unit>
+			<trans-unit id="email_confirmationOnUnregistrationHello_informal" xml:space="preserve">
+				<source>hereby, we confirm your unregistration from the event &quot;%s&quot;</source>
+			</trans-unit>
+			<trans-unit id="email_confirmationOnRegistrationForQueueSubject" xml:space="preserve">
+				<source>Registration for the waiting list confirmation</source>
+			</trans-unit>
+			<trans-unit id="email_confirmationOnRegistrationForQueueHello" xml:space="preserve">
+				<source>thank you for registering for the waiting list of the event &quot;%s&quot;</source>
+			</trans-unit>
+			<trans-unit id="email_confirmationOnRegistrationForQueueHello_informal" xml:space="preserve">
+				<source>thank you for registering for the waiting list of the event &quot;%s&quot;</source>
+			</trans-unit>
+			<trans-unit id="email_confirmationOnQueueUpdateSubject" xml:space="preserve">
+				<source>Registration became a regular registration confirmation</source>
+			</trans-unit>
+			<trans-unit id="email_confirmationOnQueueUpdateHello" xml:space="preserve">
+				<source>your registration just has become a regular registration for the event &quot;%s&quot;</source>
+			</trans-unit>
+			<trans-unit id="email_confirmationOnQueueUpdateHello_informal" xml:space="preserve">
+				<source>your registration just has become a regular registration for the event &quot;%s&quot;</source>
+			</trans-unit>
+			<trans-unit id="email_unregistrationNotice" xml:space="preserve">
+				<source>You will be able to unregister for free until %s. After this date you will have to pay the event fee.</source>
+			</trans-unit>
+			<trans-unit id="email_unregistrationNotice_informal" xml:space="preserve">
+				<source>You will be able to unregister for free until %s. After this date you will have to pay the event fee.</source>
+			</trans-unit>
+			<trans-unit id="email_additionalNotificationEnoughRegistrations" xml:space="preserve">
+				<source>Your event has now enough registrations to be held.</source>
+			</trans-unit>
+			<trans-unit id="email_additionalNotificationEnoughRegistrationsSubject" xml:space="preserve">
+				<source>Event has enough registrations: %d - %s</source>
+			</trans-unit>
+			<trans-unit id="email_additionalNotificationIsFull" xml:space="preserve">
+				<source>Your event is full, there are no empty seats left.</source>
+			</trans-unit>
+			<trans-unit id="email_additionalNotificationIsFullSubject" xml:space="preserve">
+				<source>Event is full: %d - %s</source>
+			</trans-unit>
+			<trans-unit id="email_notificationSubject" xml:space="preserve">
+				<source>Registration notification</source>
+			</trans-unit>
+			<trans-unit id="email_notificationHello" xml:space="preserve">
+				<source>Hello,
 
 someone just has registered for an event:</source>
-            </trans-unit>
-            <trans-unit id="email_notificationOnUnregistrationSubject" xml:space="preserve">
-                <source>Unregistration notification</source>
-            </trans-unit>
-            <trans-unit id="email_notificationOnUnregistrationHello" xml:space="preserve">
-                <source>Hello,
+			</trans-unit>
+			<trans-unit id="email_notificationOnUnregistrationSubject" xml:space="preserve">
+				<source>Unregistration notification</source>
+			</trans-unit>
+			<trans-unit id="email_notificationOnUnregistrationHello" xml:space="preserve">
+				<source>Hello,
 
 someone just has unregistered from an event:</source>
-            </trans-unit>
-            <trans-unit id="email_notificationOnRegistrationForQueueSubject" xml:space="preserve">
-                <source>Registration for waiting list notification</source>
-            </trans-unit>
-            <trans-unit id="email_notificationOnRegistrationForQueueHello" xml:space="preserve">
-                <source>Hello,
+			</trans-unit>
+			<trans-unit id="email_notificationOnRegistrationForQueueSubject" xml:space="preserve">
+				<source>Registration for waiting list notification</source>
+			</trans-unit>
+			<trans-unit id="email_notificationOnRegistrationForQueueHello" xml:space="preserve">
+				<source>Hello,
 
 someone just has registered for the waiting list of an event:</source>
-            </trans-unit>
-            <trans-unit id="email_notificationOnQueueUpdateSubject" xml:space="preserve">
-                <source>Registration became a regular registration notification</source>
-            </trans-unit>
-            <trans-unit id="email_notificationOnQueueUpdateHello" xml:space="preserve">
-                <source>Hello,
+			</trans-unit>
+			<trans-unit id="email_notificationOnQueueUpdateSubject" xml:space="preserve">
+				<source>Registration became a regular registration notification</source>
+			</trans-unit>
+			<trans-unit id="email_notificationOnQueueUpdateHello" xml:space="preserve">
+				<source>Hello,
 
 someone's registration just has become a regular registration of an event:</source>
-            </trans-unit>
-            <trans-unit id="email_eventTakesPlaceReminderSubject" xml:space="preserve">
-                <source>&quot;%event&quot; begins in %days days</source>
-            </trans-unit>
-            <trans-unit id="email_eventTakesPlaceReminder" xml:space="preserve">
-                <source>Hello %organizer,
+			</trans-unit>
+			<trans-unit id="email_eventTakesPlaceReminderSubject" xml:space="preserve">
+				<source>&quot;%event&quot; begins in %days days</source>
+			</trans-unit>
+			<trans-unit id="email_eventTakesPlaceReminder" xml:space="preserve">
+				<source>Hello %organizer,
 
 the event &quot;%event&quot; (Event number: %uid) will take place in %days days. Currently, there are %registrations registrations for this event.</source>
-            </trans-unit>
-            <trans-unit id="email_cancelationDeadlineReminderSubject" xml:space="preserve">
-                <source>Cancelation deadline for &quot;%event&quot; has just passed</source>
-            </trans-unit>
-            <trans-unit id="email_cancelationDeadlineReminder" xml:space="preserve">
-                <source>Hello %organizer,
+			</trans-unit>
+			<trans-unit id="email_cancelationDeadlineReminderSubject" xml:space="preserve">
+				<source>Cancelation deadline for &quot;%event&quot; has just passed</source>
+			</trans-unit>
+			<trans-unit id="email_cancelationDeadlineReminder" xml:space="preserve">
+				<source>Hello %organizer,
 
 the speakers' cancelation deadline for the event &quot;%event&quot; has just passed (Event number: %uid, begin date: %begin_date). Currently, the event is neither confirmed nor canceled and there are %registrations registrations for this event.</source>
-            </trans-unit>
-            <trans-unit id="label_planned_disclaimer" xml:space="preserve">
-                <source>For this event to take place, a minimum number of registrations is needed. In case this number is not reached, the event will not take place. Of course, you then will be notified as soon as possible.</source>
-            </trans-unit>
-            <trans-unit id="email_hello_informal" xml:space="preserve">
-                <source>Dear</source>
-            </trans-unit>
-            <trans-unit id="email_hello_formal_0" xml:space="preserve">
-                <source>Dear</source>
-            </trans-unit>
-            <trans-unit id="email_hello_formal_1" xml:space="preserve">
-                <source>Dear</source>
-            </trans-unit>
-            <trans-unit id="email_hello_formal_2" xml:space="preserve">
-                <source>Dear</source>
-            </trans-unit>
-            <trans-unit id="email_hello_formal_99" xml:space="preserve">
-                <source>Dear</source>
-            </trans-unit>
-            <trans-unit id="email_salutation_title_0" xml:space="preserve">
-                <source>Mr.</source>
-            </trans-unit>
-            <trans-unit id="email_salutation_title_1" xml:space="preserve">
-                <source>Ms.</source>
-            </trans-unit>
-            <trans-unit id="email_salutation_title_2" xml:space="preserve">
-                <source></source>
-            </trans-unit>
-            <trans-unit id="email_salutation_title_99" xml:space="preserve">
-                <source></source>
-            </trans-unit>
-            <trans-unit id="email_eventDate" xml:space="preserve">
-                <source>on %s</source>
-            </trans-unit>
-            <trans-unit id="email_timeFrom" xml:space="preserve">
-                <source>from %s</source>
-            </trans-unit>
-            <trans-unit id="email_timeAt" xml:space="preserve">
-                <source>at %s</source>
-            </trans-unit>
-            <trans-unit id="email_timeTo" xml:space="preserve">
-                <source>to</source>
-            </trans-unit>
-            <trans-unit id="schedulerTasks.mailNotifier.name" xml:space="preserve">
-                <source>E-mail notifications</source>
-            </trans-unit>
-            <trans-unit id="schedulerTasks.mailNotifier.description" xml:space="preserve">
-                <source>This tasks sends e-mail notifications, including reminders that an event will take place shortly or that the cancelation deadline is due.</source>
-            </trans-unit>
-            <trans-unit id="schedulerTasks.fields.page-uid" xml:space="preserve">
-                <source>UID of the page with the TypoScript configuration</source>
-            </trans-unit>
-            <trans-unit id="schedulerTasks.errors.page-uid" xml:space="preserve">
-                <source>Please enter the UID of an existing page.</source>
-            </trans-unit>
-            <trans-unit id="email-event-canceled-subject" xml:space="preserve">
-                <source>Event canceled: %eventTitle %eventDate</source>
-            </trans-unit>
-            <trans-unit id="email-event-confirmed-subject" xml:space="preserve">
-                <source>Event confirmed: %eventTitle %eventDate</source>
-            </trans-unit>
-            <trans-unit id="email-event-canceled-body" xml:space="preserve">
-                <source>%salutation
+			</trans-unit>
+			<trans-unit id="label_planned_disclaimer" xml:space="preserve">
+				<source>For this event to take place, a minimum number of registrations is needed. In case this number is not reached, the event will not take place. Of course, you then will be notified as soon as possible.</source>
+			</trans-unit>
+			<trans-unit id="email_hello_informal" xml:space="preserve">
+				<source>Dear</source>
+			</trans-unit>
+			<trans-unit id="email_hello_formal_0" xml:space="preserve">
+				<source>Dear</source>
+			</trans-unit>
+			<trans-unit id="email_hello_formal_1" xml:space="preserve">
+				<source>Dear</source>
+			</trans-unit>
+			<trans-unit id="email_hello_formal_2" xml:space="preserve">
+				<source>Dear</source>
+			</trans-unit>
+			<trans-unit id="email_hello_formal_99" xml:space="preserve">
+				<source>Dear</source>
+			</trans-unit>
+			<trans-unit id="email_salutation_title_0" xml:space="preserve">
+				<source>Mr.</source>
+			</trans-unit>
+			<trans-unit id="email_salutation_title_1" xml:space="preserve">
+				<source>Ms.</source>
+			</trans-unit>
+			<trans-unit id="email_salutation_title_2" xml:space="preserve">
+				<source></source>
+			</trans-unit>
+			<trans-unit id="email_salutation_title_99" xml:space="preserve">
+				<source></source>
+			</trans-unit>
+			<trans-unit id="email_eventDate" xml:space="preserve">
+				<source>on %s</source>
+			</trans-unit>
+			<trans-unit id="email_timeFrom" xml:space="preserve">
+				<source>from %s</source>
+			</trans-unit>
+			<trans-unit id="email_timeAt" xml:space="preserve">
+				<source>at %s</source>
+			</trans-unit>
+			<trans-unit id="email_timeTo" xml:space="preserve">
+				<source>to</source>
+			</trans-unit>
+			<trans-unit id="schedulerTasks.mailNotifier.name" xml:space="preserve">
+				<source>E-mail notifications</source>
+			</trans-unit>
+			<trans-unit id="schedulerTasks.mailNotifier.description" xml:space="preserve">
+				<source>This tasks sends e-mail notifications, including reminders that an event will take place shortly or that the cancelation deadline is due.</source>
+			</trans-unit>
+			<trans-unit id="schedulerTasks.fields.page-uid" xml:space="preserve">
+				<source>UID of the page with the TypoScript configuration</source>
+			</trans-unit>
+			<trans-unit id="schedulerTasks.errors.page-uid" xml:space="preserve">
+				<source>Please enter the UID of an existing page.</source>
+			</trans-unit>
+			<trans-unit id="email-event-canceled-subject" xml:space="preserve">
+				<source>Event canceled: %eventTitle %eventDate</source>
+			</trans-unit>
+			<trans-unit id="email-event-confirmed-subject" xml:space="preserve">
+				<source>Event confirmed: %eventTitle %eventDate</source>
+			</trans-unit>
+			<trans-unit id="email-event-canceled-body" xml:space="preserve">
+				<source>%salutation
 
 you registered for the event &quot;%eventTitle&quot; (%eventDate).
 
 Unfortunately, we had to cancel this event.</source>
-            </trans-unit>
-            <trans-unit id="email-event-confirmed-body" xml:space="preserve">
-                <source>%salutation
+			</trans-unit>
+			<trans-unit id="email-event-confirmed-body" xml:space="preserve">
+				<source>%salutation
 
 you registered for the event &quot;%eventTitle&quot; (%eventDate).
 
 This event now has been confirmed.</source>
-            </trans-unit>
-            <trans-unit id="message_onRequest" xml:space="preserve">
-                <source>on request</source>
-            </trans-unit>
-            <trans-unit id="registrationDigestEmail_Subject" xml:space="preserve">
-                <source>New registrations</source>
-            </trans-unit>
-            <trans-unit id="dateFormat" xml:space="preserve">
-                <source>Y-m-d</source>
-            </trans-unit>
-            <trans-unit id="message_403" xml:space="preserve">
-                <source>Error 403. Sorry, you don't have access to this data.</source>
-            </trans-unit>
-            <trans-unit id="message_404" xml:space="preserve">
-                <source>Error 404. The requested page does not exist. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
-            </trans-unit>
-            <trans-unit id="message_404_registrations" xml:space="preserve">
-                <source>Error 404. There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
-            </trans-unit>
-            <trans-unit id="title" xml:space="preserve">
-                <source>Events</source>
-            </trans-unit>
-            <trans-unit id="subModuleTitle_registrations" xml:space="preserve">
-                <source>Registrations</source>
-            </trans-unit>
-            <trans-unit id="subModuleTitle_events" xml:space="preserve">
-                <source>Events</source>
-            </trans-unit>
-            <trans-unit id="subModuleTitle_speakers" xml:space="preserve">
-                <source>Speakers</source>
-            </trans-unit>
-            <trans-unit id="subModuleTitle_organizers" xml:space="preserve">
-                <source>Organizers</source>
-            </trans-unit>
-            <trans-unit id="eventlist.accreditation_number" xml:space="preserve">
-                <source>Accreditation number</source>
-            </trans-unit>
-            <trans-unit id="eventlist.date" xml:space="preserve">
-                <source>Date</source>
-            </trans-unit>
-            <trans-unit id="eventlist.begin_date" xml:space="preserve">
-                <source>Begin date and time</source>
-            </trans-unit>
-            <trans-unit id="eventlist.end_date" xml:space="preserve">
-                <source>End date and time</source>
-            </trans-unit>
-            <trans-unit id="eventlist.title" xml:space="preserve">
-                <source>Title</source>
-            </trans-unit>
-            <trans-unit id="eventlist.attendees" xml:space="preserve">
-                <source>Cur.</source>
-            </trans-unit>
-            <trans-unit id="eventlist.attendeesOnRegistrationQueue" xml:space="preserve">
-                <source>Waiting</source>
-            </trans-unit>
-            <trans-unit id="eventlist.attendees_min" xml:space="preserve">
-                <source>Min.</source>
-            </trans-unit>
-            <trans-unit id="eventlist.attendees_max" xml:space="preserve">
-                <source>Max.</source>
-            </trans-unit>
-            <trans-unit id="eventlist.enough_attendees" xml:space="preserve">
-                <source>Enough</source>
-            </trans-unit>
-            <trans-unit id="eventlist.is_full" xml:space="preserve">
-                <source>Full</source>
-            </trans-unit>
-            <trans-unit id="eventlist_status" xml:space="preserve">
-                <source>Status</source>
-            </trans-unit>
-            <trans-unit id="eventlist_status_canceled" xml:space="preserve">
-                <source>canceled</source>
-            </trans-unit>
-            <trans-unit id="eventlist_status_confirmed" xml:space="preserve">
-                <source>confirmed</source>
-            </trans-unit>
-            <trans-unit id="eventlist_button_email" xml:space="preserve">
-                <source>E-mail</source>
-            </trans-unit>
-            <trans-unit id="eventlist_button_confirm" xml:space="preserve">
-                <source>Confirm</source>
-            </trans-unit>
-            <trans-unit id="eventlist_button_cancel" xml:space="preserve">
-                <source>Cancel</source>
-            </trans-unit>
-            <trans-unit id="speakerlist.title" xml:space="preserve">
-                <source>Name</source>
-            </trans-unit>
-            <trans-unit id="speakerlist.skills" xml:space="preserve">
-                <source>Skills</source>
-            </trans-unit>
-            <trans-unit id="organizerlist.title" xml:space="preserve">
-                <source>Name</source>
-            </trans-unit>
-            <trans-unit id="registrationlist.feuser.name" xml:space="preserve">
-                <source>Name</source>
-            </trans-unit>
-            <trans-unit id="registrationlist.deleted" xml:space="preserve">
-                <source>(deleted)</source>
-            </trans-unit>
-            <trans-unit id="registrationlist.seminar.accreditation_number" xml:space="preserve">
-                <source>Accreditation number</source>
-            </trans-unit>
-            <trans-unit id="registrationlist.seminar.title" xml:space="preserve">
-                <source>Event</source>
-            </trans-unit>
-            <trans-unit id="registrationlist.seminar.date" xml:space="preserve">
-                <source>Event date</source>
-            </trans-unit>
-            <trans-unit id="registrationlist.label_regularRegistrations" xml:space="preserve">
-                <source>Regular attendances</source>
-            </trans-unit>
-            <trans-unit id="registrationlist.label_queueRegistrations" xml:space="preserve">
-                <source>Attendances on the registration queue</source>
-            </trans-unit>
-            <trans-unit id="registrationlist.label_registrationsHeading" xml:space="preserve">
-                <source>Registrations for event &quot;%s&quot; (UID %u)</source>
-            </trans-unit>
-            <trans-unit id="label_create_record_in_foreign_folder" xml:space="preserve">
-                <source>The new record will be created in the folder: %s (UID %u)</source>
-            </trans-unit>
-            <trans-unit id="label_create_record_in_current_folder" xml:space="preserve">
-                <source>The new record will be created in the current folder: %s (UID %u).</source>
-            </trans-unit>
-            <trans-unit id="eventMailForm_subject" xml:space="preserve">
-                <source>Subject:</source>
-            </trans-unit>
-            <trans-unit id="eventMailForm_message" xml:space="preserve">
-                <source>Message:</source>
-            </trans-unit>
-            <trans-unit id="eventMailForm_backButton" xml:space="preserve">
-                <source>Back</source>
-            </trans-unit>
-            <trans-unit id="eventMailForm_error_subjectMustNotBeEmpty" xml:space="preserve">
-                <source>Please enter a subject.</source>
-            </trans-unit>
-            <trans-unit id="eventMailForm_error_messageBodyMustNotBeEmpty" xml:space="preserve">
-                <source>Please enter a message body.</source>
-            </trans-unit>
-            <trans-unit id="eventMailForm_error_noDetailsPageFound" xml:space="preserve">
-                <source>The single view page is not set. If this is not set, the link to the single view page cannot be sent in the cancelation emails. To fix this problem, please set plugin.tx_seminars_pi1.detailPID in the TS Setup of the current page.</source>
-            </trans-unit>
-            <trans-unit id="referencesWarning" xml:space="preserve">
-                <source>(There are %s reference(s) to this record!)</source>
-            </trans-unit>
-            <trans-unit id="confirmMailForm_sendButton" xml:space="preserve">
-                <source>Confirm and send</source>
-            </trans-unit>
-            <trans-unit id="confirmMailForm_prefillField_subject" xml:space="preserve">
-                <source>Event confirmed:</source>
-            </trans-unit>
-            <trans-unit id="confirmMailForm_prefillField_messageBody" xml:space="preserve">
-                <source>This event now is confirmed.</source>
-            </trans-unit>
-            <trans-unit id="confirmMailForm_prefillField_introduction" xml:space="preserve">
-                <source>you registered for the event %s.</source>
-            </trans-unit>
-            <trans-unit id="cancelMailForm_sendButton" xml:space="preserve">
-                <source>Send cancelation</source>
-            </trans-unit>
-            <trans-unit id="cancelMailForm_prefillField_subject" xml:space="preserve">
-                <source>Event canceled</source>
-            </trans-unit>
-            <trans-unit id="cancelMailForm_prefillField_messageBody" xml:space="preserve">
-                <source>Unfortunately, we had to cancel this event.</source>
-            </trans-unit>
-            <trans-unit id="cancelMailForm_prefillField_introduction" xml:space="preserve">
-                <source>you registered for the event %s.</source>
-            </trans-unit>
-            <trans-unit id="generalMailForm_sendButton" xml:space="preserve">
-                <source>Send e-mail</source>
-            </trans-unit>
-            <trans-unit id="generalMailForm_prefillField_subject" xml:space="preserve">
-                <source>Event</source>
-            </trans-unit>
-            <trans-unit id="generalMailForm_prefillField_introduction" xml:space="preserve">
-                <source>you registered for the event %s.</source>
-            </trans-unit>
-            <trans-unit id="message_noPageTypeSelected" xml:space="preserve">
-                <source>Please select a folder in the page tree.</source>
-            </trans-unit>
-            <trans-unit id="message_noStaticTemplateFound" xml:space="preserve">
-                <source>No static template was found. Please include the seminars static template in the TS setup of this folder.</source>
-            </trans-unit>
-            <trans-unit id="message.crowdfundingCampaign">
-                <source>
-                    This extension is not compatible with TYPO3 10LTS/10.4 yet.
-                    With this crowdfunding campaign, you can help support the necessary programming work:
-                </source>
-            </trans-unit>
-            <trans-unit id="testForm_prefillField_subject" xml:space="preserve">
-                <source>Event tested</source>
-            </trans-unit>
-            <trans-unit id="testForm_prefillField_messageBody" xml:space="preserve">
-                <source>This is the message body.</source>
-            </trans-unit>
-            <trans-unit id="testForm_prefillField_introduction" xml:space="preserve">
-                <source>This is the introduction: %s</source>
-            </trans-unit>
-            <trans-unit id="label_show_event_registrations" xml:space="preserve">
-                <source>show</source>
-            </trans-unit>
-            <trans-unit id="message_emailToAttendeesSent" xml:space="preserve">
-                <source>The e-mail to the attendees has been sent.</source>
-            </trans-unit>
-            <trans-unit id="message_eventCanceled" xml:space="preserve">
-                <source>The event has been canceled.</source>
-            </trans-unit>
-            <trans-unit id="message_eventConfirmed" xml:space="preserve">
-                <source>The event has been confirmed.</source>
-            </trans-unit>
-            <trans-unit id="csvExport">
-                <source>Download CSV file</source>
-            </trans-unit>
-            <trans-unit id="mlang_tabs_tab" xml:space="preserve">
-                <source>Events</source>
-            </trans-unit>
-            <trans-unit id="mlang_labels_tabdescr" xml:space="preserve">
-                <source>This module allows you to manage events, registrations, event sites and speakers.</source>
-            </trans-unit>
-            <trans-unit id="mlang_labels_tablabel" xml:space="preserve">
-                <source>Events</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.sheet_general" xml:space="preserve">
-                <source>General</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.what_to_display" xml:space="preserve">
-                <source>What should be displayed:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.sheet_template_and_special" xml:space="preserve">
-                <source>Templates and special properties</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.seminar_list" xml:space="preserve">
-                <source>Event List</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.single_view" xml:space="preserve">
-                <source>Event Single View</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.topic_list" xml:space="preserve">
-                <source>Topic List</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.my_events" xml:space="preserve">
-                <source>My Events</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.my_vip_events" xml:space="preserve">
-                <source>My Managed Events</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.seminar_registration" xml:space="preserve">
-                <source>Event Registration</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.list_registrations" xml:space="preserve">
-                <source>List of Registrations (for attendees)</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.list_vip_registrations" xml:space="preserve">
-                <source>List of Registrations (for event managers)</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.event_editor" xml:space="preserve">
-                <source>Event Editor</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.my_entered_events" xml:space="preserve">
-                <source>Events which I have entered</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.countdown" xml:space="preserve">
-                <source>Countdown to the next event</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.category_list" xml:space="preserve">
-                <source>Category List</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.listPID" xml:space="preserve">
-                <source>Page that contains the seminar list:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.detailPID" xml:space="preserve">
-                <source>Page that contains the detailed view:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.myEventsPID" xml:space="preserve">
-                <source>Page that contains the &quot;my events&quot; list:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.registerPID" xml:space="preserve">
-                <source>Page that contains the event registration form:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.loginPID" xml:space="preserve">
-                <source>Page that contains the login form:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.registrationsListPID" xml:space="preserve">
-                <source>Page that contains the list of registrations (for attendees):</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.registrationsVipListPID" xml:space="preserve">
-                <source>Page that contains the list of registrations (for event managers):</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.salutation" xml:space="preserve">
-                <source>Salutation mode on the page:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.formal" xml:space="preserve">
-                <source>formal</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.informal" xml:space="preserve">
-                <source>informal</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.sheet_list_view" xml:space="preserve">
-                <source>List view</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.displaySearchFormFields" xml:space="preserve">
-                <source>Display search widget options:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.searchForm.type" xml:space="preserve">
-                <source>Event type</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.searchForm.language" xml:space="preserve">
-                <source>Language</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.searchForm.country" xml:space="preserve">
-                <source>Country</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.searchForm.city" xml:space="preserve">
-                <source>City</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.searchForm.place" xml:space="preserve">
-                <source>Place</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.searchForm.organizer" xml:space="preserve">
-                <source>Organizer</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.searchForm.categories" xml:space="preserve">
-                <source>Categories</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.searchForm.date" xml:space="preserve">
-                <source>Date</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.searchForm.age" xml:space="preserve">
-                <source>Age</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.searchForm.price" xml:space="preserve">
-                <source>Price</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.searchForm.textField" xml:space="preserve">
-                <source>Full-text search</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.limitListViewToEventTypes" xml:space="preserve">
-                <source>List events only of these types:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.limitListViewToCategories" xml:space="preserve">
-                <source>List events only from these categories:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.limitListViewToPlaces" xml:space="preserve">
-                <source>List events only at these places:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.limitListViewToOrganizers" xml:space="preserve">
-                <source>List events only of these organizers:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.showOnlyEventsWithVacancies" xml:space="preserve">
-                <source>Show only events which have vacancies:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.mayManagersEditTheirEvents" xml:space="preserve">
-                <source>Event managers may edit their events:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.sheet_single_view" xml:space="preserve">
-                <source>Single view</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.showOwnerDataInSingleView" xml:space="preserve">
-                <source>Show the owner data on the single view page:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.limitFileDownloadToAttendees" xml:space="preserve">
-                <source>Show attached files list only to attendees:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.startingpoint">
-                <source>Data source:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.recursive">
-                <source>Recursion:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.templateFile" xml:space="preserve">
-                <source>File name of the HTML template:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.showSingleEvent" xml:space="preserve">
-                <source>Which event should be shown in a detailed view?</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.timeframeInList" xml:space="preserve">
-                <source>Only show events from this time-frame:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.timeframeInList1" xml:space="preserve">
-                <source>all events</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.timeframeInList2" xml:space="preserve">
-                <source>past events</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.timeframeInList3" xml:space="preserve">
-                <source>past and current events</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.timeframeInList4" xml:space="preserve">
-                <source>current events</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.timeframeInList5" xml:space="preserve">
-                <source>current and upcoming events</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.timeframeInList6" xml:space="preserve">
-                <source>upcoming events</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.timeframeInList7" xml:space="preserve">
-                <source>events with the deadline in the future</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.timeframeInList8" xml:space="preserve">
-                <source>today</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.hideFields" xml:space="preserve">
-                <source>Hide fields in detailed view (comma-separated):</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.showEmptyEntryInOptionLists" xml:space="preserve">
-                <source>Show empty option in selector widget:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.numberOfYearsInDateFilter" xml:space="preserve">
-                <source>Number of years a user can search into the future:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.hideSearchForm" xml:space="preserve">
-                <source>Hide the search form in list view:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.hidePageBrowser" xml:space="preserve">
-                <source>Hide the page browser in list view:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.hideCanceledEvents" xml:space="preserve">
-                <source>Hide canceled events in list view:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.sortListViewByCategory" xml:space="preserve">
-                <source>Sort the list view by category:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.defaultEventVipsFeGroupID" xml:space="preserve">
-                <source>FE user group for event managers:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.hideColumns" xml:space="preserve">
-                <source>Hide column names in list view (comma-separated):</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.generalPriceInList" xml:space="preserve">
-                <source>Use &quot;Price&quot; as column title for the standard price in the list view:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.generalPriceInSingle" xml:space="preserve">
-                <source>Use &quot;Price&quot; as heading for the standard price in the single view and the registration page:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.omitDateIfSameAsPrevious" xml:space="preserve">
-                <source>Omit the date in the list view if it is the same as the previous item's:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.eventFieldsOnRegistrationPage" xml:space="preserve">
-                <source>Event data that should be displayed on the registration page:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.showRegistrationFields" xml:space="preserve">
-                <source>Show text input fields for online registration (comma-separated):</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.showSpeakerDetails" xml:space="preserve">
-                <source>Show speaker details</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.showSiteDetails" xml:space="preserve">
-                <source>Show site details</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.sheet_registrationsListView" xml:space="preserve">
-                <source>Registrations list view</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.showFeUserFieldsInRegistrationsList" xml:space="preserve">
-                <source>Which FEuser fields to show in the list of registrations for an event</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.showRegistrationFieldsInRegistrationList" xml:space="preserve">
-                <source>Which registration fields to show in the list of registrations for an event:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.sheet_registration" xml:space="preserve">
-                <source>Registration</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.numberOfClicksForRegistration" xml:space="preserve">
-                <source>Number of clicks for registration</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.thankYouAfterRegistrationPID" xml:space="preserve">
-                <source>Page that will be displayed after a user has registered for an event</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.sendParametersToThankYouAfterRegistrationPageUrl" xml:space="preserve">
-                <source>Send parameters to page which is displayed after registration</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.pageToShowAfterUnregistrationPID" xml:space="preserve">
-                <source>Page that will be displayed after a user has unregistered for an event</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.sendParametersToPageToShowAfterUnregistrationUrl" xml:space="preserve">
-                <source>Send parameters to page which is displayed after unregistration</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.createAdditionalAttendeesAsFrontEndUsers" xml:space="preserve">
-                <source>Create FE user records for additional attendees</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.sysFolderForAdditionalAttendeeUsersPID" xml:space="preserve">
-                <source>System folder in which the created FE user records will be stored</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.userGroupUidsForAdditionalAttendeesFrontEndUsers" xml:space="preserve">
-                <source>FE user groups for the created FE users</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.sheet_fe_editing" xml:space="preserve">
-                <source>Front-end editing</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.eventEditorFeGroupID" xml:space="preserve">
-                <source>FE user group that is allowed to enter and edit events</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.eventEditorPID" xml:space="preserve">
-                <source>Page that contains the plug-in for editing event records</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.createEventsPID" xml:space="preserve">
-                <source>Sysfolder to store FE-created events in</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.createAuxiliaryRecordsPID" xml:space="preserve">
-                <source>Sysfolder to store FE-created auxiliary records in</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.eventSuccessfullySavedPID" xml:space="preserve">
-                <source>Page to redirect to after saving an event in the front end</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.allowedExtensionsForUpload" xml:space="preserve">
-                <source>List of allowed file extensions for the upload</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.displayFrontEndEditorFields" xml:space="preserve">
-                <source>Fields to display in the front-end editor:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.requiredFrontEndEditorFields" xml:space="preserve">
-                <source>Fields which are required to be filled in the front-end editor:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.event_headline" xml:space="preserve">
-                <source>Event headline</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.categoriesInListView" xml:space="preserve">
-                <source>Display of the categories:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.iconAndText" xml:space="preserve">
-                <source>Icons and text</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.iconOnly" xml:space="preserve">
-                <source>Icons only</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.textOnly" xml:space="preserve">
-                <source>Text only</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.linkToSingleView" xml:space="preserve">
-                <source>Link the single view from the list view:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.always" xml:space="preserve">
-                <source>always</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.never" xml:space="preserve">
-                <source>never</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.onlyForNonEmptyDescription" xml:space="preserve">
-                <source>if the event has a description</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.fromTsSetup" xml:space="preserve">
-                <source>(from TS setup)</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfSpeakers" xml:space="preserve">
-                <source>Allow editing speakers:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfPlaces" xml:space="preserve">
-                <source>Allow editing places:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfOrganizers" xml:space="preserve">
-                <source>Allow editing organizers:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfPaymentMethods" xml:space="preserve">
-                <source>Allow editing payment methods:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfEventTypes" xml:space="preserve">
-                <source>Allow editing event types:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfCheckboxes" xml:space="preserve">
-                <source>Allow editing checkboxes:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfLodgings" xml:space="preserve">
-                <source>Allow editing lodgings:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfFoods" xml:space="preserve">
-                <source>Allow editing foods:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfTargetGroups" xml:space="preserve">
-                <source>Allow editing target groups:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfCategories" xml:space="preserve">
-                <source>Allow editing categories:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfSkills" xml:space="preserve">
-                <source>Allow editing skills:</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.recursive.I.0" xml:space="preserve">
-                <source>0 levels (only selected page)</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.recursive.I.1" xml:space="preserve">
-                <source>1 level</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.recursive.I.2" xml:space="preserve">
-                <source>2 levels</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.recursive.I.3" xml:space="preserve">
-                <source>3 levels</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.recursive.I.4" xml:space="preserve">
-                <source>4 levels</source>
-            </trans-unit>
-            <trans-unit id="seminars.pi_flexform.recursive.I.5" xml:space="preserve">
-                <source>Infinite</source>
-            </trans-unit>
-            <trans-unit id="pi_list_browseresults_prev" xml:space="preserve">
-                <source>&lt; Previous</source>
-            </trans-unit>
-            <trans-unit id="pi_list_browseresults_page" xml:space="preserve">
-                <source>Page</source>
-            </trans-unit>
-            <trans-unit id="pi_list_browseresults_next" xml:space="preserve">
-                <source>Next &gt;</source>
-            </trans-unit>
-            <trans-unit id="pi_list_browseresults_displays" xml:space="preserve">
-                <source>Displaying results ###SPAN_BEGIN###%s to %s&lt;/span&gt; out of ###SPAN_BEGIN###%s&lt;/span&gt;</source>
-            </trans-unit>
-            <trans-unit id="pi_list_browseresults_noResults" xml:space="preserve">
-                <source>Sorry, no events were found.</source>
-            </trans-unit>
-            <trans-unit id="pi_list_searchBox_search" xml:space="preserve">
-                <source>Search</source>
-            </trans-unit>
-            <trans-unit id="label_myevents" xml:space="preserve">
-                <source>You are registered for the following events:</source>
-            </trans-unit>
-            <trans-unit id="label_myevents_informal" xml:space="preserve">
-                <source>You are registered for the following events:</source>
-            </trans-unit>
-            <trans-unit id="label_myvipevents" xml:space="preserve">
-                <source>You are an editor for the following events:</source>
-            </trans-unit>
-            <trans-unit id="label_myvipevents_informal" xml:space="preserve">
-                <source>You are an editor for the following events:</source>
-            </trans-unit>
-            <trans-unit id="label_myenteredevents" xml:space="preserve">
-                <source>You have entered the following events:</source>
-            </trans-unit>
-            <trans-unit id="label_myenteredevents_informal" xml:space="preserve">
-                <source>You have entered the following events:</source>
-            </trans-unit>
-            <trans-unit id="label_category" xml:space="preserve">
-                <source>Category</source>
-            </trans-unit>
-            <trans-unit id="label_title" xml:space="preserve">
-                <source>Title</source>
-            </trans-unit>
-            <trans-unit id="label_subtitle" xml:space="preserve">
-                <source>Subtitle</source>
-            </trans-unit>
-            <trans-unit id="label_uid" xml:space="preserve">
-                <source>Number</source>
-            </trans-unit>
-            <trans-unit id="label_registration_uid" xml:space="preserve">
-                <source>Ticket ID</source>
-            </trans-unit>
-            <trans-unit id="label_accreditation_number" xml:space="preserve">
-                <source>Accreditation number</source>
-            </trans-unit>
-            <trans-unit id="label_credit_points" xml:space="preserve">
-                <source>Credit points</source>
-            </trans-unit>
-            <trans-unit id="label_date" xml:space="preserve">
-                <source>Date</source>
-            </trans-unit>
-            <trans-unit id="label_time" xml:space="preserve">
-                <source>Time</source>
-            </trans-unit>
-            <trans-unit id="label_place" xml:space="preserve">
-                <source>Place</source>
-            </trans-unit>
-            <trans-unit id="label_room" xml:space="preserve">
-                <source>Room</source>
-            </trans-unit>
-            <trans-unit id="label_timeslots" xml:space="preserve">
-                <source>Time slots</source>
-            </trans-unit>
-            <trans-unit id="label_expiry" xml:space="preserve">
-                <source>License expiry</source>
-            </trans-unit>
-            <trans-unit id="label_speakers_single_male" xml:space="preserve">
-                <source>Speaker</source>
-            </trans-unit>
-            <trans-unit id="label_speakers_single_female" xml:space="preserve">
-                <source>Speaker</source>
-            </trans-unit>
-            <trans-unit id="label_speakers_single_unknown" xml:space="preserve">
-                <source>Speaker</source>
-            </trans-unit>
-            <trans-unit id="label_speakers_multiple_male" xml:space="preserve">
-                <source>Speakers</source>
-            </trans-unit>
-            <trans-unit id="label_speakers_multiple_female" xml:space="preserve">
-                <source>Speakers</source>
-            </trans-unit>
-            <trans-unit id="label_speakers" xml:space="preserve">
-                <source>Speakers</source>
-            </trans-unit>
-            <trans-unit id="label_partners_single_male" xml:space="preserve">
-                <source>Partner</source>
-            </trans-unit>
-            <trans-unit id="label_partners_single_female" xml:space="preserve">
-                <source>Partner</source>
-            </trans-unit>
-            <trans-unit id="label_partners_single_unknown" xml:space="preserve">
-                <source>Partner</source>
-            </trans-unit>
-            <trans-unit id="label_partners_multiple_male" xml:space="preserve">
-                <source>Partners</source>
-            </trans-unit>
-            <trans-unit id="label_partners_multiple_female" xml:space="preserve">
-                <source>Partners</source>
-            </trans-unit>
-            <trans-unit id="label_partners" xml:space="preserve">
-                <source>Partners</source>
-            </trans-unit>
-            <trans-unit id="label_tutors_single_male" xml:space="preserve">
-                <source>Tutor</source>
-            </trans-unit>
-            <trans-unit id="label_tutors_single_female" xml:space="preserve">
-                <source>Tutor</source>
-            </trans-unit>
-            <trans-unit id="label_tutors_single_unknown" xml:space="preserve">
-                <source>Tutor</source>
-            </trans-unit>
-            <trans-unit id="label_tutors_multiple_male" xml:space="preserve">
-                <source>Tutors</source>
-            </trans-unit>
-            <trans-unit id="label_tutors_multiple_female" xml:space="preserve">
-                <source>Tutors</source>
-            </trans-unit>
-            <trans-unit id="label_tutors" xml:space="preserve">
-                <source>Tutors</source>
-            </trans-unit>
-            <trans-unit id="label_leaders_single_male" xml:space="preserve">
-                <source>Leader</source>
-            </trans-unit>
-            <trans-unit id="label_leaders_single_female" xml:space="preserve">
-                <source>Leader</source>
-            </trans-unit>
-            <trans-unit id="label_leaders_single_unknown" xml:space="preserve">
-                <source>Leader</source>
-            </trans-unit>
-            <trans-unit id="label_leaders_multiple_male" xml:space="preserve">
-                <source>Leaders</source>
-            </trans-unit>
-            <trans-unit id="label_leaders_multiple_female" xml:space="preserve">
-                <source>Leaders</source>
-            </trans-unit>
-            <trans-unit id="label_leaders" xml:space="preserve">
-                <source>Leaders</source>
-            </trans-unit>
-            <trans-unit id="label_language" xml:space="preserve">
-                <source>Language</source>
-            </trans-unit>
-            <trans-unit id="label_price_general" xml:space="preserve">
-                <source>Price</source>
-            </trans-unit>
-            <trans-unit id="label_select_price" xml:space="preserve">
-                <source>Price:</source>
-            </trans-unit>
-            <trans-unit id="label_price" xml:space="preserve">
-                <source>Price</source>
-            </trans-unit>
-            <trans-unit id="label_price_range" xml:space="preserve">
-                <source>Price</source>
-            </trans-unit>
-            <trans-unit id="label_price_regular" xml:space="preserve">
-                <source>Regular price</source>
-            </trans-unit>
-            <trans-unit id="label_price_earlybird_regular" xml:space="preserve">
-                <source>Early-bird price</source>
-            </trans-unit>
-            <trans-unit id="label_price_board_regular" xml:space="preserve">
-                <source>Regular price including full board</source>
-            </trans-unit>
-            <trans-unit id="label_price_special" xml:space="preserve">
-                <source>Special price</source>
-            </trans-unit>
-            <trans-unit id="label_price_earlybird_special" xml:space="preserve">
-                <source>Early-bird special price</source>
-            </trans-unit>
-            <trans-unit id="label_price_board_special" xml:space="preserve">
-                <source>Special price including full board</source>
-            </trans-unit>
-            <trans-unit id="label_total_price" xml:space="preserve">
-                <source>Total price</source>
-            </trans-unit>
-            <trans-unit id="label_paymentmethods" xml:space="preserve">
-                <source>Available methods of payment</source>
-            </trans-unit>
-            <trans-unit id="label_select_paymentmethod" xml:space="preserve">
-                <source>Payment method:</source>
-            </trans-unit>
-            <trans-unit id="label_event_type" xml:space="preserve">
-                <source>Event type</source>
-            </trans-unit>
-            <trans-unit id="label_target_groups" xml:space="preserve">
-                <source>Target Groups</source>
-            </trans-unit>
-            <trans-unit id="label_attached_files_short" xml:space="preserve">
-                <source>Files</source>
-            </trans-unit>
-            <trans-unit id="label_requirements" xml:space="preserve">
-                <source>Requirements</source>
-            </trans-unit>
-            <trans-unit id="label_dependencies" xml:space="preserve">
-                <source>Required for</source>
-            </trans-unit>
-            <trans-unit id="label_organizers" xml:space="preserve">
-                <source>Organizers</source>
-            </trans-unit>
-            <trans-unit id="label_organizing_partners" xml:space="preserve">
-                <source>Organizing partners</source>
-            </trans-unit>
-            <trans-unit id="label_categories" xml:space="preserve">
-                <source>Categories</source>
-            </trans-unit>
-            <trans-unit id="label_vacancies" xml:space="preserve">
-                <source>Vacancies</source>
-            </trans-unit>
-            <trans-unit id="label_deadline_registration" xml:space="preserve">
-                <source>Deadline for registration</source>
-            </trans-unit>
-            <trans-unit id="label_status_registration" xml:space="preserve">
-                <source>Status</source>
-            </trans-unit>
-            <trans-unit id="label_registration" xml:space="preserve">
-                <source>Registration</source>
-            </trans-unit>
-            <trans-unit id="label_attached_files" xml:space="preserve">
-                <source>Attached files</source>
-            </trans-unit>
-            <trans-unit id="label_registrations" xml:space="preserve">
-                <source>Registrations</source>
-            </trans-unit>
-            <trans-unit id="label_registrationsAsCsv" xml:space="preserve">
-                <source>registrations (as CSV)</source>
-            </trans-unit>
-            <trans-unit id="label_onlineRegistration" xml:space="preserve">
-                <source>Register now</source>
-            </trans-unit>
-            <trans-unit id="label_onlineRegistrationOnQueue" xml:space="preserve">
-                <source>Register for the waiting list&lt;br /&gt;(%d registrations on the waiting list)</source>
-            </trans-unit>
-            <trans-unit id="label_onlinePrebooking" xml:space="preserve">
-                <source>Prebook now</source>
-            </trans-unit>
-            <trans-unit id="label_onlineUnregistration" xml:space="preserve">
-                <source>Unregister now</source>
-            </trans-unit>
-            <trans-unit id="label_list_registrations" xml:space="preserve">
-                <source>List of registrations</source>
-            </trans-unit>
-            <trans-unit id="label_listRegistrationsLink" xml:space="preserve">
-                <source>View the list of registrations</source>
-            </trans-unit>
-            <trans-unit id="label_status" xml:space="preserve">
-                <source>Status</source>
-            </trans-unit>
-            <trans-unit id="visibility_status_published" xml:space="preserve">
-                <source>published</source>
-            </trans-unit>
-            <trans-unit id="visibility_status_pending" xml:space="preserve">
-                <source>pending</source>
-            </trans-unit>
-            <trans-unit id="label_list_otherdates" xml:space="preserve">
-                <source>Other dates for this topic</source>
-            </trans-unit>
-            <trans-unit id="label_list_dates" xml:space="preserve">
-                <source>Dates for this topic</source>
-            </trans-unit>
-            <trans-unit id="label_eventsnextday" xml:space="preserve">
-                <source>Subsequent events</source>
-            </trans-unit>
-            <trans-unit id="label_actions" xml:space="preserve">
-                <source>Actions</source>
-            </trans-unit>
-            <trans-unit id="label_edit" xml:space="preserve">
-                <source>Edit</source>
-            </trans-unit>
-            <trans-unit id="label_hide" xml:space="preserve">
-                <source>hide</source>
-            </trans-unit>
-            <trans-unit id="label_unhide" xml:space="preserve">
-                <source>unhide</source>
-            </trans-unit>
-            <trans-unit id="label_copy" xml:space="preserve">
-                <source>copy</source>
-            </trans-unit>
-            <trans-unit id="label_back" xml:space="preserve">
-                <source>Back to listing</source>
-            </trans-unit>
-            <trans-unit id="label_save" xml:space="preserve">
-                <source>Save</source>
-            </trans-unit>
-            <trans-unit id="label_save_and_back" xml:space="preserve">
-                <source>Save and back</source>
-            </trans-unit>
-            <trans-unit id="label_step_counter" xml:space="preserve">
-                <source>Registration form: step %d of %d</source>
-            </trans-unit>
-            <trans-unit id="label_register_additional_information" xml:space="preserve">
-                <source>Additional information</source>
-            </trans-unit>
-            <trans-unit id="label_checkboxes" xml:space="preserve">
-                <source>Additional information:</source>
-            </trans-unit>
-            <trans-unit id="label_interests" xml:space="preserve">
-                <source>Special interests:</source>
-            </trans-unit>
-            <trans-unit id="label_expectations" xml:space="preserve">
-                <source>Expectations for the event:</source>
-            </trans-unit>
-            <trans-unit id="label_background_knowledge" xml:space="preserve">
-                <source>Background knowledge:</source>
-            </trans-unit>
-            <trans-unit id="label_register_lodging_and_food" xml:space="preserve">
-                <source>Lodging and food</source>
-            </trans-unit>
-            <trans-unit id="label_accommodation" xml:space="preserve">
-                <source>How are your lodging preferences (if possible a single room, a double room, no lodging)?</source>
-            </trans-unit>
-            <trans-unit id="label_food" xml:space="preserve">
-                <source>Which kind of food do you prefer (normal, vegetarian, or a special diet):</source>
-            </trans-unit>
-            <trans-unit id="label_known_from" xml:space="preserve">
-                <source>How have you heard of this event?</source>
-            </trans-unit>
-            <trans-unit id="label_known_from_informal" xml:space="preserve">
-                <source>How have you heard of this event?</source>
-            </trans-unit>
-            <trans-unit id="label_notes" xml:space="preserve">
-                <source>Additional notes:</source>
-            </trans-unit>
-            <trans-unit id="label_register_additional_attendees" xml:space="preserve">
-                <source>Persons to register:</source>
-            </trans-unit>
-            <trans-unit id="label_seats" xml:space="preserve">
-                <source>Seats</source>
-            </trans-unit>
-            <trans-unit id="label_registered_themselves" xml:space="preserve">
-                <source>myself</source>
-            </trans-unit>
-            <trans-unit id="label_firstname" xml:space="preserve">
-                <source>First name:</source>
-            </trans-unit>
-            <trans-unit id="label_lastname" xml:space="preserve">
-                <source>Last name:</source>
-            </trans-unit>
-            <trans-unit id="label_position" xml:space="preserve">
-                <source>Position:</source>
-            </trans-unit>
-            <trans-unit id="label_register_seats" xml:space="preserve">
-                <source>Seats to book:</source>
-            </trans-unit>
-            <trans-unit id="label_attendees_names" xml:space="preserve">
-                <source>Registered persons:</source>
-            </trans-unit>
-            <trans-unit id="label_kids" xml:space="preserve">
-                <source>Number of kids:</source>
-            </trans-unit>
-            <trans-unit id="label_legend_payment" xml:space="preserve">
-                <source>Payment</source>
-            </trans-unit>
-            <trans-unit id="label_account_number" xml:space="preserve">
-                <source>Account number:</source>
-            </trans-unit>
-            <trans-unit id="label_bank_code" xml:space="preserve">
-                <source>Bank code:</source>
-            </trans-unit>
-            <trans-unit id="label_bank_name" xml:space="preserve">
-                <source>Bank name:</source>
-            </trans-unit>
-            <trans-unit id="label_account_owner" xml:space="preserve">
-                <source>Account owner:</source>
-            </trans-unit>
-            <trans-unit id="label_billing_address" xml:space="preserve">
-                <source>Billing address</source>
-            </trans-unit>
-            <trans-unit id="label_company" xml:space="preserve">
-                <source>Company:</source>
-            </trans-unit>
-            <trans-unit id="label_gender" xml:space="preserve">
-                <source>Mr./Mrs.:</source>
-            </trans-unit>
-            <trans-unit id="label_gender.I.0" xml:space="preserve">
-                <source>Mr.</source>
-            </trans-unit>
-            <trans-unit id="label_gender.I.1" xml:space="preserve">
-                <source>Ms.</source>
-            </trans-unit>
-            <trans-unit id="label_name" xml:space="preserve">
-                <source>Name:</source>
-            </trans-unit>
-            <trans-unit id="label_address" xml:space="preserve">
-                <source>Street:</source>
-            </trans-unit>
-            <trans-unit id="label_zip" xml:space="preserve">
-                <source>ZIP:</source>
-            </trans-unit>
-            <trans-unit id="label_city" xml:space="preserve">
-                <source>City:</source>
-            </trans-unit>
-            <trans-unit id="label_country" xml:space="preserve">
-                <source>Country:</source>
-            </trans-unit>
-            <trans-unit id="label_telephone" xml:space="preserve">
-                <source>Phone number:</source>
-            </trans-unit>
-            <trans-unit id="label_email" xml:space="preserve">
-                <source>E-mail address:</source>
-            </trans-unit>
-            <trans-unit id="label_lodgings" xml:space="preserve">
-                <source>Lodging:</source>
-            </trans-unit>
-            <trans-unit id="label_foods" xml:space="preserve">
-                <source>Food:</source>
-            </trans-unit>
-            <trans-unit id="label_register_entered_data" xml:space="preserve">
-                <source>Your registration data</source>
-            </trans-unit>
-            <trans-unit id="label_register_entered_data_informal" xml:space="preserve">
-                <source>Your registration data</source>
-            </trans-unit>
-            <trans-unit id="label_register_all_terms" xml:space="preserve">
-                <source>Registration terms</source>
-            </trans-unit>
-            <trans-unit id="label_terms" xml:space="preserve">
-                <source>I accept the terms and conditions.</source>
-            </trans-unit>
-            <trans-unit id="label_terms_2" xml:space="preserve">
-                <source>I accept the terms for travelling.</source>
-            </trans-unit>
-            <trans-unit id="label_submit_registration" xml:space="preserve">
-                <source>Submit registration</source>
-            </trans-unit>
-            <trans-unit id="label_proceed_registration" xml:space="preserve">
-                <source>Proceed to checkout</source>
-            </trans-unit>
-            <trans-unit id="label_back_registration" xml:space="preserve">
-                <source>Back</source>
-            </trans-unit>
-            <trans-unit id="label_your_user_data" xml:space="preserve">
-                <source>Your address data:</source>
-            </trans-unit>
-            <trans-unit id="label_your_user_data_informal" xml:space="preserve">
-                <source>Your address data:</source>
-            </trans-unit>
-            <trans-unit id="label_method_of_payment" xml:space="preserve">
-                <source>Selected method of payment:</source>
-            </trans-unit>
-            <trans-unit id="label_timeslot_date" xml:space="preserve">
-                <source>Date</source>
-            </trans-unit>
-            <trans-unit id="label_timeslot_time" xml:space="preserve">
-                <source>Time</source>
-            </trans-unit>
-            <trans-unit id="label_timeslot_entry_date" xml:space="preserve">
-                <source>Entry date</source>
-            </trans-unit>
-            <trans-unit id="label_timeslot_room" xml:space="preserve">
-                <source>Room</source>
-            </trans-unit>
-            <trans-unit id="label_timeslot_place" xml:space="preserve">
-                <source>Place</source>
-            </trans-unit>
-            <trans-unit id="label_timeslot_speakers" xml:space="preserve">
-                <source>Speakers</source>
-            </trans-unit>
-            <trans-unit id="label_unregistration_message" xml:space="preserve">
-                <source>Do you really want to unregister from this event?</source>
-            </trans-unit>
-            <trans-unit id="label_unregistration_message_informal" xml:space="preserve">
-                <source>Do you really want to unregister from this event?</source>
-            </trans-unit>
-            <trans-unit id="label_cancel" xml:space="preserve">
-                <source>Cancel</source>
-            </trans-unit>
-            <trans-unit id="label_unregister" xml:space="preserve">
-                <source>Unregister</source>
-            </trans-unit>
-            <trans-unit id="label_selector_submit" xml:space="preserve">
-                <source>Apply filter</source>
-            </trans-unit>
-            <trans-unit id="label_selector_pleaseChoose" xml:space="preserve">
-                <source>please choose...</source>
-            </trans-unit>
-            <trans-unit id="label_selector_reset" xml:space="preserve">
-                <source>Reset</source>
-            </trans-unit>
-            <trans-unit id="label_selector_searchbox" xml:space="preserve">
-                <source>Search term</source>
-            </trans-unit>
-            <trans-unit id="label_to" xml:space="preserve">
-                <source>to</source>
-            </trans-unit>
-            <trans-unit id="label_organizer" xml:space="preserve">
-                <source>Organizer</source>
-            </trans-unit>
-            <trans-unit id="label_date_search" xml:space="preserve">
-                <source>Period from</source>
-            </trans-unit>
-            <trans-unit id="label_age_search" xml:space="preserve">
-                <source>Age:</source>
-            </trans-unit>
-            <trans-unit id="label_price_search" xml:space="preserve">
-                <source>Price</source>
-            </trans-unit>
-            <trans-unit id="label_searching_hints" xml:space="preserve">
-                <source>You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</source>
-            </trans-unit>
-            <trans-unit id="label_searching_hints_informal" xml:space="preserve">
-                <source>You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</source>
-            </trans-unit>
-            <trans-unit id="label_we_offer_events_in_categories" xml:space="preserve">
-                <source>Currently, we offer you events in the following categories:</source>
-            </trans-unit>
-            <trans-unit id="label_we_offer_events_in_categories_informal" xml:space="preserve">
-                <source>Currently, we offer you events in the following categories:</source>
-            </trans-unit>
-            <trans-unit id="label_no_categories" xml:space="preserve">
-                <source>Currently, we aren't offering any categorized events.</source>
-            </trans-unit>
-            <trans-unit id="label_delete" xml:space="preserve">
-                <source>Mark to delete</source>
-            </trans-unit>
-            <trans-unit id="label_really_delete" xml:space="preserve">
-                <source>Do you really want to mark this attachment for deletion?</source>
-            </trans-unit>
-            <trans-unit id="label_really_delete_informal" xml:space="preserve">
-                <source>Do you really want to mark this attachment for deletion?</source>
-            </trans-unit>
-            <trans-unit id="label_owner" xml:space="preserve">
-                <source>Event manager</source>
-            </trans-unit>
-            <trans-unit id="label_registration_requirements" xml:space="preserve">
-                <source>Please register for the following events first:</source>
-            </trans-unit>
-            <trans-unit id="label_registration_requirements_informal" xml:space="preserve">
-                <source>Please register for the following events first:</source>
-            </trans-unit>
-            <trans-unit id="label_waiting_list" xml:space="preserve">
-                <source>Waiting list</source>
-            </trans-unit>
-            <trans-unit id="message_file_too_large" xml:space="preserve">
-                <source>The file to upload is too large. Please choose a smaller file. The maximum allowed size is</source>
-            </trans-unit>
-            <trans-unit id="message_file_too_large_informal" xml:space="preserve">
-                <source>The file to upload is too large. Please choose a smaller file. The maximum allowed size is</source>
-            </trans-unit>
-            <trans-unit id="message_invalid_type" xml:space="preserve">
-                <source>The file to upload is of an invalid type. Please choose another file. Allowed types are</source>
-            </trans-unit>
-            <trans-unit id="message_invalid_type_informal" xml:space="preserve">
-                <source>The file to upload is of an invalid type. Please choose another file. Allowed types are</source>
-            </trans-unit>
-            <trans-unit id="message_missingSeminarNumber" xml:space="preserve">
-                <source>The even UID is missing from the URL. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
-            </trans-unit>
-            <trans-unit id="message_wrongSeminarNumber" xml:space="preserve">
-                <source>There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
-            </trans-unit>
-            <trans-unit id="message_wrongSeminarNumber_informal" xml:space="preserve">
-                <source>There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
-            </trans-unit>
-            <trans-unit id="message_noResults" xml:space="preserve">
-                <source>Sorry, currently no events could be found.</source>
-            </trans-unit>
-            <trans-unit id="message_notLoggedIn" xml:space="preserve">
-                <source>Sorry, you are not logged in.</source>
-            </trans-unit>
-            <trans-unit id="message_notLoggedIn_informal" xml:space="preserve">
-                <source>Sorry, you are not logged in.</source>
-            </trans-unit>
-            <trans-unit id="message_pleaseLogIn" xml:space="preserve">
-                <source>Please log in to view this page.</source>
-            </trans-unit>
-            <trans-unit id="message_pleaseLogIn_informal" xml:space="preserve">
-                <source>Please log in to view this page.</source>
-            </trans-unit>
-            <trans-unit id="message_noRegistrations" xml:space="preserve">
-                <source>For this event, there are no registrations yet.</source>
-            </trans-unit>
-            <trans-unit id="message_earlybird_price" xml:space="preserve">
-                <source>price valid and bookable until %s</source>
-            </trans-unit>
-            <trans-unit id="message_emptyTitle" xml:space="preserve">
-                <source>Please enter a title.</source>
-            </trans-unit>
-            <trans-unit id="message_emptyName" xml:space="preserve">
-                <source>Please enter a name.</source>
-            </trans-unit>
-            <trans-unit id="message_emptyOrganizer" xml:space="preserve">
-                <source>Please select at least one organizer.</source>
-            </trans-unit>
-            <trans-unit id="message_emptySubtitle" xml:space="preserve">
-                <source>Please enter a subtitle.</source>
-            </trans-unit>
-            <trans-unit id="message_noCategoryChosen" xml:space="preserve">
-                <source>Please select at least one category.</source>
-            </trans-unit>
-            <trans-unit id="message_emptyTeaser" xml:space="preserve">
-                <source>Please enter a teaser.</source>
-            </trans-unit>
-            <trans-unit id="message_emptyDescription" xml:space="preserve">
-                <source>Please enter a description.</source>
-            </trans-unit>
-            <trans-unit id="message_emptyAddress" xml:space="preserve">
-                <source>Please enter an address.</source>
-            </trans-unit>
-            <trans-unit id="message_emptyZip" xml:space="preserve">
-                <source>Please enter a ZIP code.</source>
-            </trans-unit>
-            <trans-unit id="message_emptyCity" xml:space="preserve">
-                <source>Please enter a city.</source>
-            </trans-unit>
-            <trans-unit id="message_emptyCountry" xml:space="preserve">
-                <source>Please select a country.</source>
-            </trans-unit>
-            <trans-unit id="message_emptyHomepage" xml:space="preserve">
-                <source>Please enter a homepage URL.</source>
-            </trans-unit>
-            <trans-unit id="message_emptyDirections" xml:space="preserve">
-                <source>Please enter some directions.</source>
-            </trans-unit>
-            <trans-unit id="message_noEventTypeChosen" xml:space="preserve">
-                <source>Please select an event type.</source>
-            </trans-unit>
-            <trans-unit id="message_accreditationNumberZero" xml:space="preserve">
-                <source>Please enter an accreditation number.</source>
-            </trans-unit>
-            <trans-unit id="message_creditPointsZero" xml:space="preserve">
-                <source>Please enter the credit points.</source>
-            </trans-unit>
-            <trans-unit id="message_invalidBeginDate" xml:space="preserve">
-                <source>Please enter a valid begin date.</source>
-            </trans-unit>
-            <trans-unit id="message_invalidEndDate" xml:space="preserve">
-                <source>Please enter a valid end date.</source>
-            </trans-unit>
-            <trans-unit id="message_invalidBeginDateRegistration" xml:space="preserve">
-                <source>Please enter a valid begin date for the registration.</source>
-            </trans-unit>
-            <trans-unit id="message_invalidDeadlineRegistration" xml:space="preserve">
-                <source>Please enter a valid registration deadline.</source>
-            </trans-unit>
-            <trans-unit id="message_invalidDeadlineEarlyBird" xml:space="preserve">
-                <source>Please enter a valid early bird deadline for the registration.</source>
-            </trans-unit>
-            <trans-unit id="message_invalidDeadlineUnregistration" xml:space="preserve">
-                <source>Please enter a valid unregistration deadline.</source>
-            </trans-unit>
-            <trans-unit id="message_noPlaceChosen" xml:space="preserve">
-                <source>Please select at least one place.</source>
-            </trans-unit>
-            <trans-unit id="message_emptyRoom" xml:space="preserve">
-                <source>Please enter a room.</source>
-            </trans-unit>
-            <trans-unit id="message_noLodgingsChosen" xml:space="preserve">
-                <source>Please select at least one lodging.</source>
-            </trans-unit>
-            <trans-unit id="message_noFoodsChosen" xml:space="preserve">
-                <source>Please select at least one food.</source>
-            </trans-unit>
-            <trans-unit id="message_noSpeakersChosen" xml:space="preserve">
-                <source>Please select at least one speaker.</source>
-            </trans-unit>
-            <trans-unit id="message_noPartnersChosen" xml:space="preserve">
-                <source>Please select at least one partner.</source>
-            </trans-unit>
-            <trans-unit id="message_noTutorsChosen" xml:space="preserve">
-                <source>Please select at least one tutor.</source>
-            </trans-unit>
-            <trans-unit id="message_noLeadersChosen" xml:space="preserve">
-                <source>Please select at least one leader.</source>
-            </trans-unit>
-            <trans-unit id="message_invalidPriceRegular" xml:space="preserve">
-                <source>Please enter a valid regular price.</source>
-            </trans-unit>
-            <trans-unit id="message_invalidPriceRegularEarly" xml:space="preserve">
-                <source>Please enter a valid regular early bird price.</source>
-            </trans-unit>
-            <trans-unit id="message_invalidPriceRegularBoard" xml:space="preserve">
-                <source>Please enter a valid regular board price.</source>
-            </trans-unit>
-            <trans-unit id="message_invalidPriceSpecial" xml:space="preserve">
-                <source>Please enter a valid special price.</source>
-            </trans-unit>
-            <trans-unit id="message_invalidPriceSpecialEarly" xml:space="preserve">
-                <source>Please enter a valid special early bird price.</source>
-            </trans-unit>
-            <trans-unit id="message_invalidPriceSpecialBoard" xml:space="preserve">
-                <source>Please enter a valid special board price.</source>
-            </trans-unit>
-            <trans-unit id="message_emptyAdditionalInformation" xml:space="preserve">
-                <source>Please enter additional information.</source>
-            </trans-unit>
-            <trans-unit id="message_noCheckboxesChosen" xml:space="preserve">
-                <source>Please select at least one additional information checkbox.</source>
-            </trans-unit>
-            <trans-unit id="message_noPaymentMethodsChosen" xml:space="preserve">
-                <source>Please select at leasr one payment method.</source>
-            </trans-unit>
-            <trans-unit id="message_attendeesMinZero" xml:space="preserve">
-                <source>Please enter the minimal number of attendees.</source>
-            </trans-unit>
-            <trans-unit id="message_attendeesMaxZero" xml:space="preserve">
-                <source>Please enter the maximum number of attendees.</source>
-            </trans-unit>
-            <trans-unit id="message_offlineAttendeesZero" xml:space="preserve">
-                <source>Please enter the number of offline-registered attendees.</source>
-            </trans-unit>
-            <trans-unit id="message_noTargetGroupsChosen" xml:space="preserve">
-                <source>Please select at least target group.</source>
-            </trans-unit>
-            <trans-unit id="message_emptyNotes" xml:space="preserve">
-                <source>Please enter internal notes.</source>
-            </trans-unit>
-            <trans-unit id="message_noAccessToEventEditor" xml:space="preserve">
-                <source>Sorry, you don't have access to the event editor.</source>
-            </trans-unit>
-            <trans-unit id="message_noAccessToEventEditor_informal" xml:space="preserve">
-                <source>Sorry, you don't have access to the event editor.</source>
-            </trans-unit>
-            <trans-unit id="message_noSeatsNumber" xml:space="preserve">
-                <source>Please enter only numbers for the number of seats.</source>
-            </trans-unit>
-            <trans-unit id="message_invalidNumberOfSeats" xml:space="preserve">
-                <source>Sorry, there are not that many vacancies for this event.</source>
-            </trans-unit>
-            <trans-unit id="message_moreAttendeesThanSeats" xml:space="preserve">
-                <source>Please register only as many persons as you are booking seats.</source>
-            </trans-unit>
-            <trans-unit id="message_moreAttendeesThanSeats_informal" xml:space="preserve">
-                <source>Please register only as many persons as you are booking seats.</source>
-            </trans-unit>
-            <trans-unit id="message_lessAttendeesThanSeats" xml:space="preserve">
-                <source>Please provide the names of all persons to register.</source>
-            </trans-unit>
-            <trans-unit id="message_lessAttendeesThanSeats_informal" xml:space="preserve">
-                <source>Please provide the names of all persons to register.</source>
-            </trans-unit>
-            <trans-unit id="message_invalidEMailAddress" xml:space="preserve">
-                <source>Please enter a valid e-mail address for each person.</source>
-            </trans-unit>
-            <trans-unit id="message_noKidsNumber" xml:space="preserve">
-                <source>Please enter only numbers for the number of kids.</source>
-            </trans-unit>
-            <trans-unit id="message_choosePrice" xml:space="preserve">
-                <source>Please select a price.</source>
-            </trans-unit>
-            <trans-unit id="message_chooseMethodOfPayment" xml:space="preserve">
-                <source>Please select a method of payment.</source>
-            </trans-unit>
-            <trans-unit id="message_provideBankData" xml:space="preserve">
-                <source>Please provide your bank data.</source>
-            </trans-unit>
-            <trans-unit id="message_selectLodging" xml:space="preserve">
-                <source>Please select at least one lodging option.</source>
-            </trans-unit>
-            <trans-unit id="message_selectFood" xml:space="preserve">
-                <source>Please select at least one food option.</source>
-            </trans-unit>
-            <trans-unit id="message_acceptTerms" xml:space="preserve">
-                <source>Please accept the terms and conditions in order to register for this event.</source>
-            </trans-unit>
-            <trans-unit id="message_acceptTerms2" xml:space="preserve">
-                <source>Please accept the terms for travelling in order to register for this event.</source>
-            </trans-unit>
-            <trans-unit id="message_countdown" xml:space="preserve">
-                <source>%d %s left until the next event starts!</source>
-            </trans-unit>
-            <trans-unit id="message_countdown_noEventFound" xml:space="preserve">
-                <source>There are no upcoming events. Please come back later.</source>
-            </trans-unit>
-            <trans-unit id="message_countdown_noEventFound_informal" xml:space="preserve">
-                <source>There are no upcoming events. Please come back later.</source>
-            </trans-unit>
-            <trans-unit id="message_notRegisteredForThisEvent" xml:space="preserve">
-                <source>You are not registered for this event.</source>
-            </trans-unit>
-            <trans-unit id="message_notRegisteredForThisEvent_informal" xml:space="preserve">
-                <source>You are not registered for this event.</source>
-            </trans-unit>
-            <trans-unit id="message_unregistrationNotPossible" xml:space="preserve">
-                <source>The unregistration deadline already has passed.</source>
-            </trans-unit>
-            <trans-unit id="message_requirementsNotFulfilled" xml:space="preserve">
-                <source>You are not registered for all required events yet.</source>
-            </trans-unit>
-            <trans-unit id="message_requirementsNotFulfilled_informal" xml:space="preserve">
-                <source>You are not registered for all required events yet.</source>
-            </trans-unit>
-            <trans-unit id="message_registrationOpensOn" xml:space="preserve">
-                <source>starting %s</source>
-            </trans-unit>
-            <trans-unit id="message_noTargetGroupAgeNumber" xml:space="preserve">
-                <source>Please enter only positive numbers as minimum and maximum age.</source>
-            </trans-unit>
-            <trans-unit id="message_targetGroupMaximumAgeSmallerThanMinimumAge" xml:space="preserve">
-                <source>Please enter a maximum age that is at equal to or greater than the minimum age.</source>
-            </trans-unit>
-            <trans-unit id="countdown_days_plural" xml:space="preserve">
-                <source>days</source>
-            </trans-unit>
-            <trans-unit id="countdown_days_singular" xml:space="preserve">
-                <source>day</source>
-            </trans-unit>
-            <trans-unit id="countdown_hours_plural" xml:space="preserve">
-                <source>hours</source>
-            </trans-unit>
-            <trans-unit id="countdown_hours_singular" xml:space="preserve">
-                <source>hour</source>
-            </trans-unit>
-            <trans-unit id="countdown_minutes_plural" xml:space="preserve">
-                <source>minutes</source>
-            </trans-unit>
-            <trans-unit id="countdown_minutes_singular" xml:space="preserve">
-                <source>minute</source>
-            </trans-unit>
-            <trans-unit id="countdown_seconds_plural" xml:space="preserve">
-                <source>seconds</source>
-            </trans-unit>
-            <trans-unit id="newPlaceButton" xml:space="preserve">
-                <source>Create new place</source>
-            </trans-unit>
-            <trans-unit id="newSpeakerButton" xml:space="preserve">
-                <source>Create new speaker</source>
-            </trans-unit>
-            <trans-unit id="newCheckboxButton" xml:space="preserve">
-                <source>Create new checkbox</source>
-            </trans-unit>
-            <trans-unit id="newTargetGroupButton" xml:space="preserve">
-                <source>Create new target group</source>
-            </trans-unit>
-            <trans-unit id="message_publishingSuccessful" xml:space="preserve">
-                <source>The event has been published.</source>
-            </trans-unit>
-            <trans-unit id="message_publishingFailed" xml:space="preserve">
-                <source>There is no such pending event.</source>
-            </trans-unit>
-            <trans-unit id="publish_event_subject" xml:space="preserve">
-                <source>Event available for publication</source>
-            </trans-unit>
-            <trans-unit id="save_event_subject" xml:space="preserve">
-                <source>Event created/updated</source>
-            </trans-unit>
-            <trans-unit id="label_publish_event_text" xml:space="preserve">
-                <source>An event has been edited in the front-end editor and currently is awaiting publication.</source>
-            </trans-unit>
-            <trans-unit id="label_publish_event_overview" xml:space="preserve">
-                <source>The entered data as an overview:</source>
-            </trans-unit>
-            <trans-unit id="label_publish_event_link" xml:space="preserve">
-                <source>If you want to publish this event, please click this link:</source>
-            </trans-unit>
-            <trans-unit id="label_publish_event_notice" xml:space="preserve">
-                <source>If you do not want to publish this event, no action is needed.</source>
-            </trans-unit>
-            <trans-unit id="label_save_event_text" xml:space="preserve">
-                <source>An event has been edited in the front-end editor.</source>
-            </trans-unit>
-            <trans-unit id="label_save_event_overview" xml:space="preserve">
-                <source>The entered data as an overview:</source>
-            </trans-unit>
-            <trans-unit id="speakerImage.alt">
-                <source>portrait image</source>
-            </trans-unit>
-            <trans-unit id="label_date_of_birth">
-                <source>Date of birth</source>
-            </trans-unit>
-        </body>
-    </file>
+			</trans-unit>
+			<trans-unit id="message_onRequest" xml:space="preserve">
+				<source>on request</source>
+			</trans-unit>
+			<trans-unit id="registrationDigestEmail_Subject" xml:space="preserve">
+				<source>New registrations</source>
+			</trans-unit>
+			<trans-unit id="dateFormat" xml:space="preserve">
+				<source>Y-m-d</source>
+			</trans-unit>
+			<trans-unit id="message_403" xml:space="preserve">
+				<source>Error 403. Sorry, you don't have access to this data.</source>
+			</trans-unit>
+			<trans-unit id="message_404" xml:space="preserve">
+				<source>Error 404. The requested page does not exist. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
+			</trans-unit>
+			<trans-unit id="message_404_registrations" xml:space="preserve">
+				<source>Error 404. There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
+			</trans-unit>
+			<trans-unit id="title" xml:space="preserve">
+				<source>Events</source>
+			</trans-unit>
+			<trans-unit id="subModuleTitle_registrations" xml:space="preserve">
+				<source>Registrations</source>
+			</trans-unit>
+			<trans-unit id="subModuleTitle_events" xml:space="preserve">
+				<source>Events</source>
+			</trans-unit>
+			<trans-unit id="subModuleTitle_speakers" xml:space="preserve">
+				<source>Speakers</source>
+			</trans-unit>
+			<trans-unit id="subModuleTitle_organizers" xml:space="preserve">
+				<source>Organizers</source>
+			</trans-unit>
+			<trans-unit id="eventlist.accreditation_number" xml:space="preserve">
+				<source>Accreditation number</source>
+			</trans-unit>
+			<trans-unit id="eventlist.date" xml:space="preserve">
+				<source>Date</source>
+			</trans-unit>
+			<trans-unit id="eventlist.begin_date" xml:space="preserve">
+				<source>Begin date and time</source>
+			</trans-unit>
+			<trans-unit id="eventlist.end_date" xml:space="preserve">
+				<source>End date and time</source>
+			</trans-unit>
+			<trans-unit id="eventlist.title" xml:space="preserve">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="eventlist.attendees" xml:space="preserve">
+				<source>Cur.</source>
+			</trans-unit>
+			<trans-unit id="eventlist.attendeesOnRegistrationQueue" xml:space="preserve">
+				<source>Waiting</source>
+			</trans-unit>
+			<trans-unit id="eventlist.attendees_min" xml:space="preserve">
+				<source>Min.</source>
+			</trans-unit>
+			<trans-unit id="eventlist.attendees_max" xml:space="preserve">
+				<source>Max.</source>
+			</trans-unit>
+			<trans-unit id="eventlist.enough_attendees" xml:space="preserve">
+				<source>Enough</source>
+			</trans-unit>
+			<trans-unit id="eventlist.is_full" xml:space="preserve">
+				<source>Full</source>
+			</trans-unit>
+			<trans-unit id="eventlist_status" xml:space="preserve">
+				<source>Status</source>
+			</trans-unit>
+			<trans-unit id="eventlist_status_canceled" xml:space="preserve">
+				<source>canceled</source>
+			</trans-unit>
+			<trans-unit id="eventlist_status_confirmed" xml:space="preserve">
+				<source>confirmed</source>
+			</trans-unit>
+			<trans-unit id="eventlist_button_email" xml:space="preserve">
+				<source>E-mail</source>
+			</trans-unit>
+			<trans-unit id="eventlist_button_confirm" xml:space="preserve">
+				<source>Confirm</source>
+			</trans-unit>
+			<trans-unit id="eventlist_button_cancel" xml:space="preserve">
+				<source>Cancel</source>
+			</trans-unit>
+			<trans-unit id="speakerlist.title" xml:space="preserve">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="speakerlist.skills" xml:space="preserve">
+				<source>Skills</source>
+			</trans-unit>
+			<trans-unit id="organizerlist.title" xml:space="preserve">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="registrationlist.feuser.name" xml:space="preserve">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="registrationlist.deleted" xml:space="preserve">
+				<source>(deleted)</source>
+			</trans-unit>
+			<trans-unit id="registrationlist.seminar.accreditation_number" xml:space="preserve">
+				<source>Accreditation number</source>
+			</trans-unit>
+			<trans-unit id="registrationlist.seminar.title" xml:space="preserve">
+				<source>Event</source>
+			</trans-unit>
+			<trans-unit id="registrationlist.seminar.date" xml:space="preserve">
+				<source>Event date</source>
+			</trans-unit>
+			<trans-unit id="registrationlist.label_regularRegistrations" xml:space="preserve">
+				<source>Regular attendances</source>
+			</trans-unit>
+			<trans-unit id="registrationlist.label_queueRegistrations" xml:space="preserve">
+				<source>Attendances on the registration queue</source>
+			</trans-unit>
+			<trans-unit id="registrationlist.label_registrationsHeading" xml:space="preserve">
+				<source>Registrations for event &quot;%s&quot; (UID %u)</source>
+			</trans-unit>
+			<trans-unit id="label_create_record_in_foreign_folder" xml:space="preserve">
+				<source>The new record will be created in the folder: %s (UID %u)</source>
+			</trans-unit>
+			<trans-unit id="label_create_record_in_current_folder" xml:space="preserve">
+				<source>The new record will be created in the current folder: %s (UID %u).</source>
+			</trans-unit>
+			<trans-unit id="eventMailForm_subject" xml:space="preserve">
+				<source>Subject:</source>
+			</trans-unit>
+			<trans-unit id="eventMailForm_message" xml:space="preserve">
+				<source>Message:</source>
+			</trans-unit>
+			<trans-unit id="eventMailForm_backButton" xml:space="preserve">
+				<source>Back</source>
+			</trans-unit>
+			<trans-unit id="eventMailForm_error_subjectMustNotBeEmpty" xml:space="preserve">
+				<source>Please enter a subject.</source>
+			</trans-unit>
+			<trans-unit id="eventMailForm_error_messageBodyMustNotBeEmpty" xml:space="preserve">
+				<source>Please enter a message body.</source>
+			</trans-unit>
+			<trans-unit id="eventMailForm_error_noDetailsPageFound" xml:space="preserve">
+				<source>The single view page is not set. If this is not set, the link to the single view page cannot be sent in the cancelation emails. To fix this problem, please set plugin.tx_seminars_pi1.detailPID in the TS Setup of the current page.</source>
+			</trans-unit>
+			<trans-unit id="referencesWarning" xml:space="preserve">
+				<source>(There are %s reference(s) to this record!)</source>
+			</trans-unit>
+			<trans-unit id="confirmMailForm_sendButton" xml:space="preserve">
+				<source>Confirm and send</source>
+			</trans-unit>
+			<trans-unit id="confirmMailForm_prefillField_subject" xml:space="preserve">
+				<source>Event confirmed:</source>
+			</trans-unit>
+			<trans-unit id="confirmMailForm_prefillField_messageBody" xml:space="preserve">
+				<source>This event now is confirmed.</source>
+			</trans-unit>
+			<trans-unit id="confirmMailForm_prefillField_introduction" xml:space="preserve">
+				<source>you registered for the event %s.</source>
+			</trans-unit>
+			<trans-unit id="cancelMailForm_sendButton" xml:space="preserve">
+				<source>Send cancelation</source>
+			</trans-unit>
+			<trans-unit id="cancelMailForm_prefillField_subject" xml:space="preserve">
+				<source>Event canceled</source>
+			</trans-unit>
+			<trans-unit id="cancelMailForm_prefillField_messageBody" xml:space="preserve">
+				<source>Unfortunately, we had to cancel this event.</source>
+			</trans-unit>
+			<trans-unit id="cancelMailForm_prefillField_introduction" xml:space="preserve">
+				<source>you registered for the event %s.</source>
+			</trans-unit>
+			<trans-unit id="generalMailForm_sendButton" xml:space="preserve">
+				<source>Send e-mail</source>
+			</trans-unit>
+			<trans-unit id="generalMailForm_prefillField_subject" xml:space="preserve">
+				<source>Event</source>
+			</trans-unit>
+			<trans-unit id="generalMailForm_prefillField_introduction" xml:space="preserve">
+				<source>you registered for the event %s.</source>
+			</trans-unit>
+			<trans-unit id="message_noPageTypeSelected" xml:space="preserve">
+				<source>Please select a folder in the page tree.</source>
+			</trans-unit>
+			<trans-unit id="message_noStaticTemplateFound" xml:space="preserve">
+				<source>No static template was found. Please include the seminars static template in the TS setup of this folder.</source>
+			</trans-unit>
+			<trans-unit id="message.crowdfundingCampaign">
+				<source>
+					This extension is not compatible with TYPO3 10LTS/10.4 yet.
+					With this crowdfunding campaign, you can help support the necessary programming work:
+				</source>
+			</trans-unit>
+			<trans-unit id="testForm_prefillField_subject" xml:space="preserve">
+				<source>Event tested</source>
+			</trans-unit>
+			<trans-unit id="testForm_prefillField_messageBody" xml:space="preserve">
+				<source>This is the message body.</source>
+			</trans-unit>
+			<trans-unit id="testForm_prefillField_introduction" xml:space="preserve">
+				<source>This is the introduction: %s</source>
+			</trans-unit>
+			<trans-unit id="label_show_event_registrations" xml:space="preserve">
+				<source>show</source>
+			</trans-unit>
+			<trans-unit id="message_emailToAttendeesSent" xml:space="preserve">
+				<source>The e-mail to the attendees has been sent.</source>
+			</trans-unit>
+			<trans-unit id="message_eventCanceled" xml:space="preserve">
+				<source>The event has been canceled.</source>
+			</trans-unit>
+			<trans-unit id="message_eventConfirmed" xml:space="preserve">
+				<source>The event has been confirmed.</source>
+			</trans-unit>
+			<trans-unit id="csvExport">
+				<source>Download CSV file</source>
+			</trans-unit>
+			<trans-unit id="mlang_tabs_tab" xml:space="preserve">
+				<source>Events</source>
+			</trans-unit>
+			<trans-unit id="mlang_labels_tabdescr" xml:space="preserve">
+				<source>This module allows you to manage events, registrations, event sites and speakers.</source>
+			</trans-unit>
+			<trans-unit id="mlang_labels_tablabel" xml:space="preserve">
+				<source>Events</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.sheet_general" xml:space="preserve">
+				<source>General</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.what_to_display" xml:space="preserve">
+				<source>What should be displayed:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.sheet_template_and_special" xml:space="preserve">
+				<source>Templates and special properties</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.seminar_list" xml:space="preserve">
+				<source>Event List</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.single_view" xml:space="preserve">
+				<source>Event Single View</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.topic_list" xml:space="preserve">
+				<source>Topic List</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.my_events" xml:space="preserve">
+				<source>My Events</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.my_vip_events" xml:space="preserve">
+				<source>My Managed Events</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.seminar_registration" xml:space="preserve">
+				<source>Event Registration</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.list_registrations" xml:space="preserve">
+				<source>List of Registrations (for attendees)</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.list_vip_registrations" xml:space="preserve">
+				<source>List of Registrations (for event managers)</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.event_editor" xml:space="preserve">
+				<source>Event Editor</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.my_entered_events" xml:space="preserve">
+				<source>Events which I have entered</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.countdown" xml:space="preserve">
+				<source>Countdown to the next event</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.category_list" xml:space="preserve">
+				<source>Category List</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.listPID" xml:space="preserve">
+				<source>Page that contains the seminar list:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.detailPID" xml:space="preserve">
+				<source>Page that contains the detailed view:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.myEventsPID" xml:space="preserve">
+				<source>Page that contains the &quot;my events&quot; list:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.registerPID" xml:space="preserve">
+				<source>Page that contains the event registration form:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.loginPID" xml:space="preserve">
+				<source>Page that contains the login form:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.registrationsListPID" xml:space="preserve">
+				<source>Page that contains the list of registrations (for attendees):</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.registrationsVipListPID" xml:space="preserve">
+				<source>Page that contains the list of registrations (for event managers):</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.salutation" xml:space="preserve">
+				<source>Salutation mode on the page:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.formal" xml:space="preserve">
+				<source>formal</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.informal" xml:space="preserve">
+				<source>informal</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.sheet_list_view" xml:space="preserve">
+				<source>List view</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.displaySearchFormFields" xml:space="preserve">
+				<source>Display search widget options:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.searchForm.type" xml:space="preserve">
+				<source>Event type</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.searchForm.language" xml:space="preserve">
+				<source>Language</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.searchForm.country" xml:space="preserve">
+				<source>Country</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.searchForm.city" xml:space="preserve">
+				<source>City</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.searchForm.place" xml:space="preserve">
+				<source>Place</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.searchForm.organizer" xml:space="preserve">
+				<source>Organizer</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.searchForm.categories" xml:space="preserve">
+				<source>Categories</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.searchForm.date" xml:space="preserve">
+				<source>Date</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.searchForm.age" xml:space="preserve">
+				<source>Age</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.searchForm.price" xml:space="preserve">
+				<source>Price</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.searchForm.textField" xml:space="preserve">
+				<source>Full-text search</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.limitListViewToEventTypes" xml:space="preserve">
+				<source>List events only of these types:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.limitListViewToCategories" xml:space="preserve">
+				<source>List events only from these categories:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.limitListViewToPlaces" xml:space="preserve">
+				<source>List events only at these places:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.limitListViewToOrganizers" xml:space="preserve">
+				<source>List events only of these organizers:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.showOnlyEventsWithVacancies" xml:space="preserve">
+				<source>Show only events which have vacancies:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.mayManagersEditTheirEvents" xml:space="preserve">
+				<source>Event managers may edit their events:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.sheet_single_view" xml:space="preserve">
+				<source>Single view</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.showOwnerDataInSingleView" xml:space="preserve">
+				<source>Show the owner data on the single view page:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.limitFileDownloadToAttendees" xml:space="preserve">
+				<source>Show attached files list only to attendees:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.startingpoint">
+				<source>Data source:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.recursive">
+				<source>Recursion:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.templateFile" xml:space="preserve">
+				<source>File name of the HTML template:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.showSingleEvent" xml:space="preserve">
+				<source>Which event should be shown in a detailed view?</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.timeframeInList" xml:space="preserve">
+				<source>Only show events from this time-frame:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.timeframeInList1" xml:space="preserve">
+				<source>all events</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.timeframeInList2" xml:space="preserve">
+				<source>past events</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.timeframeInList3" xml:space="preserve">
+				<source>past and current events</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.timeframeInList4" xml:space="preserve">
+				<source>current events</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.timeframeInList5" xml:space="preserve">
+				<source>current and upcoming events</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.timeframeInList6" xml:space="preserve">
+				<source>upcoming events</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.timeframeInList7" xml:space="preserve">
+				<source>events with the deadline in the future</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.timeframeInList8" xml:space="preserve">
+				<source>today</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.hideFields" xml:space="preserve">
+				<source>Hide fields in detailed view (comma-separated):</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.showEmptyEntryInOptionLists" xml:space="preserve">
+				<source>Show empty option in selector widget:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.numberOfYearsInDateFilter" xml:space="preserve">
+				<source>Number of years a user can search into the future:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.hideSearchForm" xml:space="preserve">
+				<source>Hide the search form in list view:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.hidePageBrowser" xml:space="preserve">
+				<source>Hide the page browser in list view:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.hideCanceledEvents" xml:space="preserve">
+				<source>Hide canceled events in list view:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.sortListViewByCategory" xml:space="preserve">
+				<source>Sort the list view by category:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.defaultEventVipsFeGroupID" xml:space="preserve">
+				<source>FE user group for event managers:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.hideColumns" xml:space="preserve">
+				<source>Hide column names in list view (comma-separated):</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.generalPriceInList" xml:space="preserve">
+				<source>Use &quot;Price&quot; as column title for the standard price in the list view:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.generalPriceInSingle" xml:space="preserve">
+				<source>Use &quot;Price&quot; as heading for the standard price in the single view and the registration page:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.omitDateIfSameAsPrevious" xml:space="preserve">
+				<source>Omit the date in the list view if it is the same as the previous item's:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.eventFieldsOnRegistrationPage" xml:space="preserve">
+				<source>Event data that should be displayed on the registration page:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.showRegistrationFields" xml:space="preserve">
+				<source>Show text input fields for online registration (comma-separated):</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.showSpeakerDetails" xml:space="preserve">
+				<source>Show speaker details</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.showSiteDetails" xml:space="preserve">
+				<source>Show site details</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.sheet_registrationsListView" xml:space="preserve">
+				<source>Registrations list view</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.showFeUserFieldsInRegistrationsList" xml:space="preserve">
+				<source>Which FEuser fields to show in the list of registrations for an event</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.showRegistrationFieldsInRegistrationList" xml:space="preserve">
+				<source>Which registration fields to show in the list of registrations for an event:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.sheet_registration" xml:space="preserve">
+				<source>Registration</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.numberOfClicksForRegistration" xml:space="preserve">
+				<source>Number of clicks for registration</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.thankYouAfterRegistrationPID" xml:space="preserve">
+				<source>Page that will be displayed after a user has registered for an event</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.sendParametersToThankYouAfterRegistrationPageUrl" xml:space="preserve">
+				<source>Send parameters to page which is displayed after registration</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.pageToShowAfterUnregistrationPID" xml:space="preserve">
+				<source>Page that will be displayed after a user has unregistered for an event</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.sendParametersToPageToShowAfterUnregistrationUrl" xml:space="preserve">
+				<source>Send parameters to page which is displayed after unregistration</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.createAdditionalAttendeesAsFrontEndUsers" xml:space="preserve">
+				<source>Create FE user records for additional attendees</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.sysFolderForAdditionalAttendeeUsersPID" xml:space="preserve">
+				<source>System folder in which the created FE user records will be stored</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.userGroupUidsForAdditionalAttendeesFrontEndUsers" xml:space="preserve">
+				<source>FE user groups for the created FE users</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.sheet_fe_editing" xml:space="preserve">
+				<source>Front-end editing</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.eventEditorFeGroupID" xml:space="preserve">
+				<source>FE user group that is allowed to enter and edit events</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.eventEditorPID" xml:space="preserve">
+				<source>Page that contains the plug-in for editing event records</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.createEventsPID" xml:space="preserve">
+				<source>Sysfolder to store FE-created events in</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.createAuxiliaryRecordsPID" xml:space="preserve">
+				<source>Sysfolder to store FE-created auxiliary records in</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.eventSuccessfullySavedPID" xml:space="preserve">
+				<source>Page to redirect to after saving an event in the front end</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.allowedExtensionsForUpload" xml:space="preserve">
+				<source>List of allowed file extensions for the upload</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.displayFrontEndEditorFields" xml:space="preserve">
+				<source>Fields to display in the front-end editor:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.requiredFrontEndEditorFields" xml:space="preserve">
+				<source>Fields which are required to be filled in the front-end editor:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.event_headline" xml:space="preserve">
+				<source>Event headline</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.categoriesInListView" xml:space="preserve">
+				<source>Display of the categories:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.iconAndText" xml:space="preserve">
+				<source>Icons and text</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.iconOnly" xml:space="preserve">
+				<source>Icons only</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.textOnly" xml:space="preserve">
+				<source>Text only</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.linkToSingleView" xml:space="preserve">
+				<source>Link the single view from the list view:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.always" xml:space="preserve">
+				<source>always</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.never" xml:space="preserve">
+				<source>never</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.onlyForNonEmptyDescription" xml:space="preserve">
+				<source>if the event has a description</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.fromTsSetup" xml:space="preserve">
+				<source>(from TS setup)</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfSpeakers" xml:space="preserve">
+				<source>Allow editing speakers:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfPlaces" xml:space="preserve">
+				<source>Allow editing places:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfOrganizers" xml:space="preserve">
+				<source>Allow editing organizers:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfPaymentMethods" xml:space="preserve">
+				<source>Allow editing payment methods:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfEventTypes" xml:space="preserve">
+				<source>Allow editing event types:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfCheckboxes" xml:space="preserve">
+				<source>Allow editing checkboxes:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfLodgings" xml:space="preserve">
+				<source>Allow editing lodgings:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfFoods" xml:space="preserve">
+				<source>Allow editing foods:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfTargetGroups" xml:space="preserve">
+				<source>Allow editing target groups:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfCategories" xml:space="preserve">
+				<source>Allow editing categories:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfSkills" xml:space="preserve">
+				<source>Allow editing skills:</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.recursive.I.0" xml:space="preserve">
+				<source>0 levels (only selected page)</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.recursive.I.1" xml:space="preserve">
+				<source>1 level</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.recursive.I.2" xml:space="preserve">
+				<source>2 levels</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.recursive.I.3" xml:space="preserve">
+				<source>3 levels</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.recursive.I.4" xml:space="preserve">
+				<source>4 levels</source>
+			</trans-unit>
+			<trans-unit id="seminars.pi_flexform.recursive.I.5" xml:space="preserve">
+				<source>Infinite</source>
+			</trans-unit>
+			<trans-unit id="pi_list_browseresults_prev" xml:space="preserve">
+				<source>&lt; Previous</source>
+			</trans-unit>
+			<trans-unit id="pi_list_browseresults_page" xml:space="preserve">
+				<source>Page</source>
+			</trans-unit>
+			<trans-unit id="pi_list_browseresults_next" xml:space="preserve">
+				<source>Next &gt;</source>
+			</trans-unit>
+			<trans-unit id="pi_list_browseresults_displays" xml:space="preserve">
+				<source>Displaying results ###SPAN_BEGIN###%s to %s&lt;/span&gt; out of ###SPAN_BEGIN###%s&lt;/span&gt;</source>
+			</trans-unit>
+			<trans-unit id="pi_list_browseresults_noResults" xml:space="preserve">
+				<source>Sorry, no events were found.</source>
+			</trans-unit>
+			<trans-unit id="pi_list_searchBox_search" xml:space="preserve">
+				<source>Search</source>
+			</trans-unit>
+			<trans-unit id="label_myevents" xml:space="preserve">
+				<source>You are registered for the following events:</source>
+			</trans-unit>
+			<trans-unit id="label_myevents_informal" xml:space="preserve">
+				<source>You are registered for the following events:</source>
+			</trans-unit>
+			<trans-unit id="label_myvipevents" xml:space="preserve">
+				<source>You are an editor for the following events:</source>
+			</trans-unit>
+			<trans-unit id="label_myvipevents_informal" xml:space="preserve">
+				<source>You are an editor for the following events:</source>
+			</trans-unit>
+			<trans-unit id="label_myenteredevents" xml:space="preserve">
+				<source>You have entered the following events:</source>
+			</trans-unit>
+			<trans-unit id="label_myenteredevents_informal" xml:space="preserve">
+				<source>You have entered the following events:</source>
+			</trans-unit>
+			<trans-unit id="label_category" xml:space="preserve">
+				<source>Category</source>
+			</trans-unit>
+			<trans-unit id="label_title" xml:space="preserve">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="label_subtitle" xml:space="preserve">
+				<source>Subtitle</source>
+			</trans-unit>
+			<trans-unit id="label_uid" xml:space="preserve">
+				<source>Number</source>
+			</trans-unit>
+			<trans-unit id="label_registration_uid" xml:space="preserve">
+				<source>Ticket ID</source>
+			</trans-unit>
+			<trans-unit id="label_accreditation_number" xml:space="preserve">
+				<source>Accreditation number</source>
+			</trans-unit>
+			<trans-unit id="label_credit_points" xml:space="preserve">
+				<source>Credit points</source>
+			</trans-unit>
+			<trans-unit id="label_date" xml:space="preserve">
+				<source>Date</source>
+			</trans-unit>
+			<trans-unit id="label_time" xml:space="preserve">
+				<source>Time</source>
+			</trans-unit>
+			<trans-unit id="label_place" xml:space="preserve">
+				<source>Place</source>
+			</trans-unit>
+			<trans-unit id="label_room" xml:space="preserve">
+				<source>Room</source>
+			</trans-unit>
+			<trans-unit id="label_timeslots" xml:space="preserve">
+				<source>Time slots</source>
+			</trans-unit>
+			<trans-unit id="label_expiry" xml:space="preserve">
+				<source>License expiry</source>
+			</trans-unit>
+			<trans-unit id="label_speakers_single_male" xml:space="preserve">
+				<source>Speaker</source>
+			</trans-unit>
+			<trans-unit id="label_speakers_single_female" xml:space="preserve">
+				<source>Speaker</source>
+			</trans-unit>
+			<trans-unit id="label_speakers_single_unknown" xml:space="preserve">
+				<source>Speaker</source>
+			</trans-unit>
+			<trans-unit id="label_speakers_multiple_male" xml:space="preserve">
+				<source>Speakers</source>
+			</trans-unit>
+			<trans-unit id="label_speakers_multiple_female" xml:space="preserve">
+				<source>Speakers</source>
+			</trans-unit>
+			<trans-unit id="label_speakers" xml:space="preserve">
+				<source>Speakers</source>
+			</trans-unit>
+			<trans-unit id="label_partners_single_male" xml:space="preserve">
+				<source>Partner</source>
+			</trans-unit>
+			<trans-unit id="label_partners_single_female" xml:space="preserve">
+				<source>Partner</source>
+			</trans-unit>
+			<trans-unit id="label_partners_single_unknown" xml:space="preserve">
+				<source>Partner</source>
+			</trans-unit>
+			<trans-unit id="label_partners_multiple_male" xml:space="preserve">
+				<source>Partners</source>
+			</trans-unit>
+			<trans-unit id="label_partners_multiple_female" xml:space="preserve">
+				<source>Partners</source>
+			</trans-unit>
+			<trans-unit id="label_partners" xml:space="preserve">
+				<source>Partners</source>
+			</trans-unit>
+			<trans-unit id="label_tutors_single_male" xml:space="preserve">
+				<source>Tutor</source>
+			</trans-unit>
+			<trans-unit id="label_tutors_single_female" xml:space="preserve">
+				<source>Tutor</source>
+			</trans-unit>
+			<trans-unit id="label_tutors_single_unknown" xml:space="preserve">
+				<source>Tutor</source>
+			</trans-unit>
+			<trans-unit id="label_tutors_multiple_male" xml:space="preserve">
+				<source>Tutors</source>
+			</trans-unit>
+			<trans-unit id="label_tutors_multiple_female" xml:space="preserve">
+				<source>Tutors</source>
+			</trans-unit>
+			<trans-unit id="label_tutors" xml:space="preserve">
+				<source>Tutors</source>
+			</trans-unit>
+			<trans-unit id="label_leaders_single_male" xml:space="preserve">
+				<source>Leader</source>
+			</trans-unit>
+			<trans-unit id="label_leaders_single_female" xml:space="preserve">
+				<source>Leader</source>
+			</trans-unit>
+			<trans-unit id="label_leaders_single_unknown" xml:space="preserve">
+				<source>Leader</source>
+			</trans-unit>
+			<trans-unit id="label_leaders_multiple_male" xml:space="preserve">
+				<source>Leaders</source>
+			</trans-unit>
+			<trans-unit id="label_leaders_multiple_female" xml:space="preserve">
+				<source>Leaders</source>
+			</trans-unit>
+			<trans-unit id="label_leaders" xml:space="preserve">
+				<source>Leaders</source>
+			</trans-unit>
+			<trans-unit id="label_language" xml:space="preserve">
+				<source>Language</source>
+			</trans-unit>
+			<trans-unit id="label_price_general" xml:space="preserve">
+				<source>Price</source>
+			</trans-unit>
+			<trans-unit id="label_select_price" xml:space="preserve">
+				<source>Price:</source>
+			</trans-unit>
+			<trans-unit id="label_price" xml:space="preserve">
+				<source>Price</source>
+			</trans-unit>
+			<trans-unit id="label_price_range" xml:space="preserve">
+				<source>Price</source>
+			</trans-unit>
+			<trans-unit id="label_price_regular" xml:space="preserve">
+				<source>Regular price</source>
+			</trans-unit>
+			<trans-unit id="label_price_earlybird_regular" xml:space="preserve">
+				<source>Early-bird price</source>
+			</trans-unit>
+			<trans-unit id="label_price_board_regular" xml:space="preserve">
+				<source>Regular price including full board</source>
+			</trans-unit>
+			<trans-unit id="label_price_special" xml:space="preserve">
+				<source>Special price</source>
+			</trans-unit>
+			<trans-unit id="label_price_earlybird_special" xml:space="preserve">
+				<source>Early-bird special price</source>
+			</trans-unit>
+			<trans-unit id="label_price_board_special" xml:space="preserve">
+				<source>Special price including full board</source>
+			</trans-unit>
+			<trans-unit id="label_total_price" xml:space="preserve">
+				<source>Total price</source>
+			</trans-unit>
+			<trans-unit id="label_paymentmethods" xml:space="preserve">
+				<source>Available methods of payment</source>
+			</trans-unit>
+			<trans-unit id="label_select_paymentmethod" xml:space="preserve">
+				<source>Payment method:</source>
+			</trans-unit>
+			<trans-unit id="label_event_type" xml:space="preserve">
+				<source>Event type</source>
+			</trans-unit>
+			<trans-unit id="label_target_groups" xml:space="preserve">
+				<source>Target Groups</source>
+			</trans-unit>
+			<trans-unit id="label_attached_files_short" xml:space="preserve">
+				<source>Files</source>
+			</trans-unit>
+			<trans-unit id="label_requirements" xml:space="preserve">
+				<source>Requirements</source>
+			</trans-unit>
+			<trans-unit id="label_dependencies" xml:space="preserve">
+				<source>Required for</source>
+			</trans-unit>
+			<trans-unit id="label_organizers" xml:space="preserve">
+				<source>Organizers</source>
+			</trans-unit>
+			<trans-unit id="label_organizing_partners" xml:space="preserve">
+				<source>Organizing partners</source>
+			</trans-unit>
+			<trans-unit id="label_categories" xml:space="preserve">
+				<source>Categories</source>
+			</trans-unit>
+			<trans-unit id="label_vacancies" xml:space="preserve">
+				<source>Vacancies</source>
+			</trans-unit>
+			<trans-unit id="label_deadline_registration" xml:space="preserve">
+				<source>Deadline for registration</source>
+			</trans-unit>
+			<trans-unit id="label_status_registration" xml:space="preserve">
+				<source>Status</source>
+			</trans-unit>
+			<trans-unit id="label_registration" xml:space="preserve">
+				<source>Registration</source>
+			</trans-unit>
+			<trans-unit id="label_attached_files" xml:space="preserve">
+				<source>Attached files</source>
+			</trans-unit>
+			<trans-unit id="label_registrations" xml:space="preserve">
+				<source>Registrations</source>
+			</trans-unit>
+			<trans-unit id="label_registrationsAsCsv" xml:space="preserve">
+				<source>registrations (as CSV)</source>
+			</trans-unit>
+			<trans-unit id="label_onlineRegistration" xml:space="preserve">
+				<source>Register now</source>
+			</trans-unit>
+			<trans-unit id="label_onlineRegistrationOnQueue" xml:space="preserve">
+				<source>Register for the waiting list&lt;br /&gt;(%d registrations on the waiting list)</source>
+			</trans-unit>
+			<trans-unit id="label_onlinePrebooking" xml:space="preserve">
+				<source>Prebook now</source>
+			</trans-unit>
+			<trans-unit id="label_onlineUnregistration" xml:space="preserve">
+				<source>Unregister now</source>
+			</trans-unit>
+			<trans-unit id="label_list_registrations" xml:space="preserve">
+				<source>List of registrations</source>
+			</trans-unit>
+			<trans-unit id="label_listRegistrationsLink" xml:space="preserve">
+				<source>View the list of registrations</source>
+			</trans-unit>
+			<trans-unit id="label_status" xml:space="preserve">
+				<source>Status</source>
+			</trans-unit>
+			<trans-unit id="visibility_status_published" xml:space="preserve">
+				<source>published</source>
+			</trans-unit>
+			<trans-unit id="visibility_status_pending" xml:space="preserve">
+				<source>pending</source>
+			</trans-unit>
+			<trans-unit id="label_list_otherdates" xml:space="preserve">
+				<source>Other dates for this topic</source>
+			</trans-unit>
+			<trans-unit id="label_list_dates" xml:space="preserve">
+				<source>Dates for this topic</source>
+			</trans-unit>
+			<trans-unit id="label_eventsnextday" xml:space="preserve">
+				<source>Subsequent events</source>
+			</trans-unit>
+			<trans-unit id="label_actions" xml:space="preserve">
+				<source>Actions</source>
+			</trans-unit>
+			<trans-unit id="label_edit" xml:space="preserve">
+				<source>Edit</source>
+			</trans-unit>
+			<trans-unit id="label_hide" xml:space="preserve">
+				<source>hide</source>
+			</trans-unit>
+			<trans-unit id="label_unhide" xml:space="preserve">
+				<source>unhide</source>
+			</trans-unit>
+			<trans-unit id="label_copy" xml:space="preserve">
+				<source>copy</source>
+			</trans-unit>
+			<trans-unit id="label_back" xml:space="preserve">
+				<source>Back to listing</source>
+			</trans-unit>
+			<trans-unit id="label_save" xml:space="preserve">
+				<source>Save</source>
+			</trans-unit>
+			<trans-unit id="label_save_and_back" xml:space="preserve">
+				<source>Save and back</source>
+			</trans-unit>
+			<trans-unit id="label_step_counter" xml:space="preserve">
+				<source>Registration form: step %d of %d</source>
+			</trans-unit>
+			<trans-unit id="label_register_additional_information" xml:space="preserve">
+				<source>Additional information</source>
+			</trans-unit>
+			<trans-unit id="label_checkboxes" xml:space="preserve">
+				<source>Additional information:</source>
+			</trans-unit>
+			<trans-unit id="label_interests" xml:space="preserve">
+				<source>Special interests:</source>
+			</trans-unit>
+			<trans-unit id="label_expectations" xml:space="preserve">
+				<source>Expectations for the event:</source>
+			</trans-unit>
+			<trans-unit id="label_background_knowledge" xml:space="preserve">
+				<source>Background knowledge:</source>
+			</trans-unit>
+			<trans-unit id="label_register_lodging_and_food" xml:space="preserve">
+				<source>Lodging and food</source>
+			</trans-unit>
+			<trans-unit id="label_accommodation" xml:space="preserve">
+				<source>How are your lodging preferences (if possible a single room, a double room, no lodging)?</source>
+			</trans-unit>
+			<trans-unit id="label_food" xml:space="preserve">
+				<source>Which kind of food do you prefer (normal, vegetarian, or a special diet):</source>
+			</trans-unit>
+			<trans-unit id="label_known_from" xml:space="preserve">
+				<source>How have you heard of this event?</source>
+			</trans-unit>
+			<trans-unit id="label_known_from_informal" xml:space="preserve">
+				<source>How have you heard of this event?</source>
+			</trans-unit>
+			<trans-unit id="label_notes" xml:space="preserve">
+				<source>Additional notes:</source>
+			</trans-unit>
+			<trans-unit id="label_register_additional_attendees" xml:space="preserve">
+				<source>Persons to register:</source>
+			</trans-unit>
+			<trans-unit id="label_seats" xml:space="preserve">
+				<source>Seats</source>
+			</trans-unit>
+			<trans-unit id="label_registered_themselves" xml:space="preserve">
+				<source>myself</source>
+			</trans-unit>
+			<trans-unit id="label_firstname" xml:space="preserve">
+				<source>First name:</source>
+			</trans-unit>
+			<trans-unit id="label_lastname" xml:space="preserve">
+				<source>Last name:</source>
+			</trans-unit>
+			<trans-unit id="label_position" xml:space="preserve">
+				<source>Position:</source>
+			</trans-unit>
+			<trans-unit id="label_register_seats" xml:space="preserve">
+				<source>Seats to book:</source>
+			</trans-unit>
+			<trans-unit id="label_attendees_names" xml:space="preserve">
+				<source>Registered persons:</source>
+			</trans-unit>
+			<trans-unit id="label_kids" xml:space="preserve">
+				<source>Number of kids:</source>
+			</trans-unit>
+			<trans-unit id="label_legend_payment" xml:space="preserve">
+				<source>Payment</source>
+			</trans-unit>
+			<trans-unit id="label_account_number" xml:space="preserve">
+				<source>Account number:</source>
+			</trans-unit>
+			<trans-unit id="label_bank_code" xml:space="preserve">
+				<source>Bank code:</source>
+			</trans-unit>
+			<trans-unit id="label_bank_name" xml:space="preserve">
+				<source>Bank name:</source>
+			</trans-unit>
+			<trans-unit id="label_account_owner" xml:space="preserve">
+				<source>Account owner:</source>
+			</trans-unit>
+			<trans-unit id="label_billing_address" xml:space="preserve">
+				<source>Billing address</source>
+			</trans-unit>
+			<trans-unit id="label_company" xml:space="preserve">
+				<source>Company:</source>
+			</trans-unit>
+			<trans-unit id="label_gender" xml:space="preserve">
+				<source>Mr./Mrs.:</source>
+			</trans-unit>
+			<trans-unit id="label_gender.I.0" xml:space="preserve">
+				<source>Mr.</source>
+			</trans-unit>
+			<trans-unit id="label_gender.I.1" xml:space="preserve">
+				<source>Ms.</source>
+			</trans-unit>
+			<trans-unit id="label_name" xml:space="preserve">
+				<source>Name:</source>
+			</trans-unit>
+			<trans-unit id="label_address" xml:space="preserve">
+				<source>Street:</source>
+			</trans-unit>
+			<trans-unit id="label_zip" xml:space="preserve">
+				<source>ZIP:</source>
+			</trans-unit>
+			<trans-unit id="label_city" xml:space="preserve">
+				<source>City:</source>
+			</trans-unit>
+			<trans-unit id="label_country" xml:space="preserve">
+				<source>Country:</source>
+			</trans-unit>
+			<trans-unit id="label_telephone" xml:space="preserve">
+				<source>Phone number:</source>
+			</trans-unit>
+			<trans-unit id="label_email" xml:space="preserve">
+				<source>E-mail address:</source>
+			</trans-unit>
+			<trans-unit id="label_lodgings" xml:space="preserve">
+				<source>Lodging:</source>
+			</trans-unit>
+			<trans-unit id="label_foods" xml:space="preserve">
+				<source>Food:</source>
+			</trans-unit>
+			<trans-unit id="label_register_entered_data" xml:space="preserve">
+				<source>Your registration data</source>
+			</trans-unit>
+			<trans-unit id="label_register_entered_data_informal" xml:space="preserve">
+				<source>Your registration data</source>
+			</trans-unit>
+			<trans-unit id="label_register_all_terms" xml:space="preserve">
+				<source>Registration terms</source>
+			</trans-unit>
+			<trans-unit id="label_terms" xml:space="preserve">
+				<source>I accept the terms and conditions.</source>
+			</trans-unit>
+			<trans-unit id="label_terms_2" xml:space="preserve">
+				<source>I accept the terms for travelling.</source>
+			</trans-unit>
+			<trans-unit id="label_submit_registration" xml:space="preserve">
+				<source>Submit registration</source>
+			</trans-unit>
+			<trans-unit id="label_proceed_registration" xml:space="preserve">
+				<source>Proceed to checkout</source>
+			</trans-unit>
+			<trans-unit id="label_back_registration" xml:space="preserve">
+				<source>Back</source>
+			</trans-unit>
+			<trans-unit id="label_your_user_data" xml:space="preserve">
+				<source>Your address data:</source>
+			</trans-unit>
+			<trans-unit id="label_your_user_data_informal" xml:space="preserve">
+				<source>Your address data:</source>
+			</trans-unit>
+			<trans-unit id="label_method_of_payment" xml:space="preserve">
+				<source>Selected method of payment:</source>
+			</trans-unit>
+			<trans-unit id="label_timeslot_date" xml:space="preserve">
+				<source>Date</source>
+			</trans-unit>
+			<trans-unit id="label_timeslot_time" xml:space="preserve">
+				<source>Time</source>
+			</trans-unit>
+			<trans-unit id="label_timeslot_entry_date" xml:space="preserve">
+				<source>Entry date</source>
+			</trans-unit>
+			<trans-unit id="label_timeslot_room" xml:space="preserve">
+				<source>Room</source>
+			</trans-unit>
+			<trans-unit id="label_timeslot_place" xml:space="preserve">
+				<source>Place</source>
+			</trans-unit>
+			<trans-unit id="label_timeslot_speakers" xml:space="preserve">
+				<source>Speakers</source>
+			</trans-unit>
+			<trans-unit id="label_unregistration_message" xml:space="preserve">
+				<source>Do you really want to unregister from this event?</source>
+			</trans-unit>
+			<trans-unit id="label_unregistration_message_informal" xml:space="preserve">
+				<source>Do you really want to unregister from this event?</source>
+			</trans-unit>
+			<trans-unit id="label_cancel" xml:space="preserve">
+				<source>Cancel</source>
+			</trans-unit>
+			<trans-unit id="label_unregister" xml:space="preserve">
+				<source>Unregister</source>
+			</trans-unit>
+			<trans-unit id="label_selector_submit" xml:space="preserve">
+				<source>Apply filter</source>
+			</trans-unit>
+			<trans-unit id="label_selector_pleaseChoose" xml:space="preserve">
+				<source>please choose...</source>
+			</trans-unit>
+			<trans-unit id="label_selector_reset" xml:space="preserve">
+				<source>Reset</source>
+			</trans-unit>
+			<trans-unit id="label_selector_searchbox" xml:space="preserve">
+				<source>Search term</source>
+			</trans-unit>
+			<trans-unit id="label_to" xml:space="preserve">
+				<source>to</source>
+			</trans-unit>
+			<trans-unit id="label_organizer" xml:space="preserve">
+				<source>Organizer</source>
+			</trans-unit>
+			<trans-unit id="label_date_search" xml:space="preserve">
+				<source>Period from</source>
+			</trans-unit>
+			<trans-unit id="label_age_search" xml:space="preserve">
+				<source>Age:</source>
+			</trans-unit>
+			<trans-unit id="label_price_search" xml:space="preserve">
+				<source>Price</source>
+			</trans-unit>
+			<trans-unit id="label_searching_hints" xml:space="preserve">
+				<source>You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</source>
+			</trans-unit>
+			<trans-unit id="label_searching_hints_informal" xml:space="preserve">
+				<source>You can shorten the list of events by applying one ore more filter criteria. To see the whole list, just reset the filter.</source>
+			</trans-unit>
+			<trans-unit id="label_we_offer_events_in_categories" xml:space="preserve">
+				<source>Currently, we offer you events in the following categories:</source>
+			</trans-unit>
+			<trans-unit id="label_we_offer_events_in_categories_informal" xml:space="preserve">
+				<source>Currently, we offer you events in the following categories:</source>
+			</trans-unit>
+			<trans-unit id="label_no_categories" xml:space="preserve">
+				<source>Currently, we aren't offering any categorized events.</source>
+			</trans-unit>
+			<trans-unit id="label_delete" xml:space="preserve">
+				<source>Mark to delete</source>
+			</trans-unit>
+			<trans-unit id="label_really_delete" xml:space="preserve">
+				<source>Do you really want to mark this attachment for deletion?</source>
+			</trans-unit>
+			<trans-unit id="label_really_delete_informal" xml:space="preserve">
+				<source>Do you really want to mark this attachment for deletion?</source>
+			</trans-unit>
+			<trans-unit id="label_owner" xml:space="preserve">
+				<source>Event manager</source>
+			</trans-unit>
+			<trans-unit id="label_registration_requirements" xml:space="preserve">
+				<source>Please register for the following events first:</source>
+			</trans-unit>
+			<trans-unit id="label_registration_requirements_informal" xml:space="preserve">
+				<source>Please register for the following events first:</source>
+			</trans-unit>
+			<trans-unit id="label_waiting_list" xml:space="preserve">
+				<source>Waiting list</source>
+			</trans-unit>
+			<trans-unit id="message_file_too_large" xml:space="preserve">
+				<source>The file to upload is too large. Please choose a smaller file. The maximum allowed size is</source>
+			</trans-unit>
+			<trans-unit id="message_file_too_large_informal" xml:space="preserve">
+				<source>The file to upload is too large. Please choose a smaller file. The maximum allowed size is</source>
+			</trans-unit>
+			<trans-unit id="message_invalid_type" xml:space="preserve">
+				<source>The file to upload is of an invalid type. Please choose another file. Allowed types are</source>
+			</trans-unit>
+			<trans-unit id="message_invalid_type_informal" xml:space="preserve">
+				<source>The file to upload is of an invalid type. Please choose another file. Allowed types are</source>
+			</trans-unit>
+			<trans-unit id="message_missingSeminarNumber" xml:space="preserve">
+				<source>The even UID is missing from the URL. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
+			</trans-unit>
+			<trans-unit id="message_wrongSeminarNumber" xml:space="preserve">
+				<source>There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
+			</trans-unit>
+			<trans-unit id="message_wrongSeminarNumber_informal" xml:space="preserve">
+				<source>There is no event with this number. If you get this error message using a link on this page, please notify the webmaster. Thank you!</source>
+			</trans-unit>
+			<trans-unit id="message_noResults" xml:space="preserve">
+				<source>Sorry, currently no events could be found.</source>
+			</trans-unit>
+			<trans-unit id="message_notLoggedIn" xml:space="preserve">
+				<source>Sorry, you are not logged in.</source>
+			</trans-unit>
+			<trans-unit id="message_notLoggedIn_informal" xml:space="preserve">
+				<source>Sorry, you are not logged in.</source>
+			</trans-unit>
+			<trans-unit id="message_pleaseLogIn" xml:space="preserve">
+				<source>Please log in to view this page.</source>
+			</trans-unit>
+			<trans-unit id="message_pleaseLogIn_informal" xml:space="preserve">
+				<source>Please log in to view this page.</source>
+			</trans-unit>
+			<trans-unit id="message_noRegistrations" xml:space="preserve">
+				<source>For this event, there are no registrations yet.</source>
+			</trans-unit>
+			<trans-unit id="message_earlybird_price" xml:space="preserve">
+				<source>price valid and bookable until %s</source>
+			</trans-unit>
+			<trans-unit id="message_emptyTitle" xml:space="preserve">
+				<source>Please enter a title.</source>
+			</trans-unit>
+			<trans-unit id="message_emptyName" xml:space="preserve">
+				<source>Please enter a name.</source>
+			</trans-unit>
+			<trans-unit id="message_emptyOrganizer" xml:space="preserve">
+				<source>Please select at least one organizer.</source>
+			</trans-unit>
+			<trans-unit id="message_emptySubtitle" xml:space="preserve">
+				<source>Please enter a subtitle.</source>
+			</trans-unit>
+			<trans-unit id="message_noCategoryChosen" xml:space="preserve">
+				<source>Please select at least one category.</source>
+			</trans-unit>
+			<trans-unit id="message_emptyTeaser" xml:space="preserve">
+				<source>Please enter a teaser.</source>
+			</trans-unit>
+			<trans-unit id="message_emptyDescription" xml:space="preserve">
+				<source>Please enter a description.</source>
+			</trans-unit>
+			<trans-unit id="message_emptyAddress" xml:space="preserve">
+				<source>Please enter an address.</source>
+			</trans-unit>
+			<trans-unit id="message_emptyZip" xml:space="preserve">
+				<source>Please enter a ZIP code.</source>
+			</trans-unit>
+			<trans-unit id="message_emptyCity" xml:space="preserve">
+				<source>Please enter a city.</source>
+			</trans-unit>
+			<trans-unit id="message_emptyCountry" xml:space="preserve">
+				<source>Please select a country.</source>
+			</trans-unit>
+			<trans-unit id="message_emptyHomepage" xml:space="preserve">
+				<source>Please enter a homepage URL.</source>
+			</trans-unit>
+			<trans-unit id="message_emptyDirections" xml:space="preserve">
+				<source>Please enter some directions.</source>
+			</trans-unit>
+			<trans-unit id="message_noEventTypeChosen" xml:space="preserve">
+				<source>Please select an event type.</source>
+			</trans-unit>
+			<trans-unit id="message_accreditationNumberZero" xml:space="preserve">
+				<source>Please enter an accreditation number.</source>
+			</trans-unit>
+			<trans-unit id="message_creditPointsZero" xml:space="preserve">
+				<source>Please enter the credit points.</source>
+			</trans-unit>
+			<trans-unit id="message_invalidBeginDate" xml:space="preserve">
+				<source>Please enter a valid begin date.</source>
+			</trans-unit>
+			<trans-unit id="message_invalidEndDate" xml:space="preserve">
+				<source>Please enter a valid end date.</source>
+			</trans-unit>
+			<trans-unit id="message_invalidBeginDateRegistration" xml:space="preserve">
+				<source>Please enter a valid begin date for the registration.</source>
+			</trans-unit>
+			<trans-unit id="message_invalidDeadlineRegistration" xml:space="preserve">
+				<source>Please enter a valid registration deadline.</source>
+			</trans-unit>
+			<trans-unit id="message_invalidDeadlineEarlyBird" xml:space="preserve">
+				<source>Please enter a valid early bird deadline for the registration.</source>
+			</trans-unit>
+			<trans-unit id="message_invalidDeadlineUnregistration" xml:space="preserve">
+				<source>Please enter a valid unregistration deadline.</source>
+			</trans-unit>
+			<trans-unit id="message_noPlaceChosen" xml:space="preserve">
+				<source>Please select at least one place.</source>
+			</trans-unit>
+			<trans-unit id="message_emptyRoom" xml:space="preserve">
+				<source>Please enter a room.</source>
+			</trans-unit>
+			<trans-unit id="message_noLodgingsChosen" xml:space="preserve">
+				<source>Please select at least one lodging.</source>
+			</trans-unit>
+			<trans-unit id="message_noFoodsChosen" xml:space="preserve">
+				<source>Please select at least one food.</source>
+			</trans-unit>
+			<trans-unit id="message_noSpeakersChosen" xml:space="preserve">
+				<source>Please select at least one speaker.</source>
+			</trans-unit>
+			<trans-unit id="message_noPartnersChosen" xml:space="preserve">
+				<source>Please select at least one partner.</source>
+			</trans-unit>
+			<trans-unit id="message_noTutorsChosen" xml:space="preserve">
+				<source>Please select at least one tutor.</source>
+			</trans-unit>
+			<trans-unit id="message_noLeadersChosen" xml:space="preserve">
+				<source>Please select at least one leader.</source>
+			</trans-unit>
+			<trans-unit id="message_invalidPriceRegular" xml:space="preserve">
+				<source>Please enter a valid regular price.</source>
+			</trans-unit>
+			<trans-unit id="message_invalidPriceRegularEarly" xml:space="preserve">
+				<source>Please enter a valid regular early bird price.</source>
+			</trans-unit>
+			<trans-unit id="message_invalidPriceRegularBoard" xml:space="preserve">
+				<source>Please enter a valid regular board price.</source>
+			</trans-unit>
+			<trans-unit id="message_invalidPriceSpecial" xml:space="preserve">
+				<source>Please enter a valid special price.</source>
+			</trans-unit>
+			<trans-unit id="message_invalidPriceSpecialEarly" xml:space="preserve">
+				<source>Please enter a valid special early bird price.</source>
+			</trans-unit>
+			<trans-unit id="message_invalidPriceSpecialBoard" xml:space="preserve">
+				<source>Please enter a valid special board price.</source>
+			</trans-unit>
+			<trans-unit id="message_emptyAdditionalInformation" xml:space="preserve">
+				<source>Please enter additional information.</source>
+			</trans-unit>
+			<trans-unit id="message_noCheckboxesChosen" xml:space="preserve">
+				<source>Please select at least one additional information checkbox.</source>
+			</trans-unit>
+			<trans-unit id="message_noPaymentMethodsChosen" xml:space="preserve">
+				<source>Please select at leasr one payment method.</source>
+			</trans-unit>
+			<trans-unit id="message_attendeesMinZero" xml:space="preserve">
+				<source>Please enter the minimal number of attendees.</source>
+			</trans-unit>
+			<trans-unit id="message_attendeesMaxZero" xml:space="preserve">
+				<source>Please enter the maximum number of attendees.</source>
+			</trans-unit>
+			<trans-unit id="message_offlineAttendeesZero" xml:space="preserve">
+				<source>Please enter the number of offline-registered attendees.</source>
+			</trans-unit>
+			<trans-unit id="message_noTargetGroupsChosen" xml:space="preserve">
+				<source>Please select at least target group.</source>
+			</trans-unit>
+			<trans-unit id="message_emptyNotes" xml:space="preserve">
+				<source>Please enter internal notes.</source>
+			</trans-unit>
+			<trans-unit id="message_noAccessToEventEditor" xml:space="preserve">
+				<source>Sorry, you don't have access to the event editor.</source>
+			</trans-unit>
+			<trans-unit id="message_noAccessToEventEditor_informal" xml:space="preserve">
+				<source>Sorry, you don't have access to the event editor.</source>
+			</trans-unit>
+			<trans-unit id="message_noSeatsNumber" xml:space="preserve">
+				<source>Please enter only numbers for the number of seats.</source>
+			</trans-unit>
+			<trans-unit id="message_invalidNumberOfSeats" xml:space="preserve">
+				<source>Sorry, there are not that many vacancies for this event.</source>
+			</trans-unit>
+			<trans-unit id="message_moreAttendeesThanSeats" xml:space="preserve">
+				<source>Please register only as many persons as you are booking seats.</source>
+			</trans-unit>
+			<trans-unit id="message_moreAttendeesThanSeats_informal" xml:space="preserve">
+				<source>Please register only as many persons as you are booking seats.</source>
+			</trans-unit>
+			<trans-unit id="message_lessAttendeesThanSeats" xml:space="preserve">
+				<source>Please provide the names of all persons to register.</source>
+			</trans-unit>
+			<trans-unit id="message_lessAttendeesThanSeats_informal" xml:space="preserve">
+				<source>Please provide the names of all persons to register.</source>
+			</trans-unit>
+			<trans-unit id="message_invalidEMailAddress" xml:space="preserve">
+				<source>Please enter a valid e-mail address for each person.</source>
+			</trans-unit>
+			<trans-unit id="message_noKidsNumber" xml:space="preserve">
+				<source>Please enter only numbers for the number of kids.</source>
+			</trans-unit>
+			<trans-unit id="message_choosePrice" xml:space="preserve">
+				<source>Please select a price.</source>
+			</trans-unit>
+			<trans-unit id="message_chooseMethodOfPayment" xml:space="preserve">
+				<source>Please select a method of payment.</source>
+			</trans-unit>
+			<trans-unit id="message_provideBankData" xml:space="preserve">
+				<source>Please provide your bank data.</source>
+			</trans-unit>
+			<trans-unit id="message_selectLodging" xml:space="preserve">
+				<source>Please select at least one lodging option.</source>
+			</trans-unit>
+			<trans-unit id="message_selectFood" xml:space="preserve">
+				<source>Please select at least one food option.</source>
+			</trans-unit>
+			<trans-unit id="message_acceptTerms" xml:space="preserve">
+				<source>Please accept the terms and conditions in order to register for this event.</source>
+			</trans-unit>
+			<trans-unit id="message_acceptTerms2" xml:space="preserve">
+				<source>Please accept the terms for travelling in order to register for this event.</source>
+			</trans-unit>
+			<trans-unit id="message_countdown" xml:space="preserve">
+				<source>%d %s left until the next event starts!</source>
+			</trans-unit>
+			<trans-unit id="message_countdown_noEventFound" xml:space="preserve">
+				<source>There are no upcoming events. Please come back later.</source>
+			</trans-unit>
+			<trans-unit id="message_countdown_noEventFound_informal" xml:space="preserve">
+				<source>There are no upcoming events. Please come back later.</source>
+			</trans-unit>
+			<trans-unit id="message_notRegisteredForThisEvent" xml:space="preserve">
+				<source>You are not registered for this event.</source>
+			</trans-unit>
+			<trans-unit id="message_notRegisteredForThisEvent_informal" xml:space="preserve">
+				<source>You are not registered for this event.</source>
+			</trans-unit>
+			<trans-unit id="message_unregistrationNotPossible" xml:space="preserve">
+				<source>The unregistration deadline already has passed.</source>
+			</trans-unit>
+			<trans-unit id="message_requirementsNotFulfilled" xml:space="preserve">
+				<source>You are not registered for all required events yet.</source>
+			</trans-unit>
+			<trans-unit id="message_requirementsNotFulfilled_informal" xml:space="preserve">
+				<source>You are not registered for all required events yet.</source>
+			</trans-unit>
+			<trans-unit id="message_registrationOpensOn" xml:space="preserve">
+				<source>starting %s</source>
+			</trans-unit>
+			<trans-unit id="message_noTargetGroupAgeNumber" xml:space="preserve">
+				<source>Please enter only positive numbers as minimum and maximum age.</source>
+			</trans-unit>
+			<trans-unit id="message_targetGroupMaximumAgeSmallerThanMinimumAge" xml:space="preserve">
+				<source>Please enter a maximum age that is at equal to or greater than the minimum age.</source>
+			</trans-unit>
+			<trans-unit id="countdown_days_plural" xml:space="preserve">
+				<source>days</source>
+			</trans-unit>
+			<trans-unit id="countdown_days_singular" xml:space="preserve">
+				<source>day</source>
+			</trans-unit>
+			<trans-unit id="countdown_hours_plural" xml:space="preserve">
+				<source>hours</source>
+			</trans-unit>
+			<trans-unit id="countdown_hours_singular" xml:space="preserve">
+				<source>hour</source>
+			</trans-unit>
+			<trans-unit id="countdown_minutes_plural" xml:space="preserve">
+				<source>minutes</source>
+			</trans-unit>
+			<trans-unit id="countdown_minutes_singular" xml:space="preserve">
+				<source>minute</source>
+			</trans-unit>
+			<trans-unit id="countdown_seconds_plural" xml:space="preserve">
+				<source>seconds</source>
+			</trans-unit>
+			<trans-unit id="newPlaceButton" xml:space="preserve">
+				<source>Create new place</source>
+			</trans-unit>
+			<trans-unit id="newSpeakerButton" xml:space="preserve">
+				<source>Create new speaker</source>
+			</trans-unit>
+			<trans-unit id="newCheckboxButton" xml:space="preserve">
+				<source>Create new checkbox</source>
+			</trans-unit>
+			<trans-unit id="newTargetGroupButton" xml:space="preserve">
+				<source>Create new target group</source>
+			</trans-unit>
+			<trans-unit id="message_publishingSuccessful" xml:space="preserve">
+				<source>The event has been published.</source>
+			</trans-unit>
+			<trans-unit id="message_publishingFailed" xml:space="preserve">
+				<source>There is no such pending event.</source>
+			</trans-unit>
+			<trans-unit id="publish_event_subject" xml:space="preserve">
+				<source>Event available for publication</source>
+			</trans-unit>
+			<trans-unit id="save_event_subject" xml:space="preserve">
+				<source>Event created/updated</source>
+			</trans-unit>
+			<trans-unit id="label_publish_event_text" xml:space="preserve">
+				<source>An event has been edited in the front-end editor and currently is awaiting publication.</source>
+			</trans-unit>
+			<trans-unit id="label_publish_event_overview" xml:space="preserve">
+				<source>The entered data as an overview:</source>
+			</trans-unit>
+			<trans-unit id="label_publish_event_link" xml:space="preserve">
+				<source>If you want to publish this event, please click this link:</source>
+			</trans-unit>
+			<trans-unit id="label_publish_event_notice" xml:space="preserve">
+				<source>If you do not want to publish this event, no action is needed.</source>
+			</trans-unit>
+			<trans-unit id="label_save_event_text" xml:space="preserve">
+				<source>An event has been edited in the front-end editor.</source>
+			</trans-unit>
+			<trans-unit id="label_save_event_overview" xml:space="preserve">
+				<source>The entered data as an overview:</source>
+			</trans-unit>
+			<trans-unit id="speakerImage.alt">
+				<source>portrait image</source>
+			</trans-unit>
+			<trans-unit id="label_date_of_birth">
+				<source>Date of birth</source>
+			</trans-unit>
+		</body>
+	</file>
 </xliff>

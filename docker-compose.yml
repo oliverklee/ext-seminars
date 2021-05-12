@@ -3,6 +3,6 @@ services:
   t3docmake:
     image: t3docs/render-documentation:latest
     volumes:
-    - ./:/PROJECT:ro
-    - ./Documentation-GENERATED-temp:/RESULT
+      - ./:/PROJECT:ro
+      - ./Documentation-GENERATED-temp:/RESULT
     command: makehtml
