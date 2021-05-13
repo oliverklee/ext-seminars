@@ -4,139 +4,139 @@
 		  product-name="seminars">
 		<header/>
 		<body>
-			<trans-unit id="moduleFunction.tx_seminars_modfunc1" xml:space="preserve" approved="yes">
+			<trans-unit id="moduleFunction.tx_seminars_modfunc1" xml:space="preserve">
 				<source>Seminars</source>
 				<target>Arrangementer</target>
 			</trans-unit>
-			<trans-unit id="LGL.telephone" xml:space="preserve" approved="yes">
+			<trans-unit id="LGL.telephone" xml:space="preserve">
 				<source>Phone</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="LGL.gender" xml:space="preserve" approved="yes">
+			<trans-unit id="LGL.gender" xml:space="preserve">
 				<source>Gender</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars" xml:space="preserve">
 				<source>Seminars</source>
 				<target>Arrangementer</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.divLabelGeneral" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.divLabelGeneral" xml:space="preserve">
 				<source>General</source>
 				<target>Generel</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.uid" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.uid" xml:space="preserve">
 				<source>Event number</source>
 				<target>Arrangement nr.</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.object_type" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.object_type" xml:space="preserve">
 				<source>Type</source>
 				<target>Type</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.object_type.I.0" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.object_type.I.0" xml:space="preserve">
 				<source>Single event</source>
 				<target>Enkelt arrangement (indtast information om både emne og dato for afholdelsen)</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.object_type.I.1" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.object_type.I.1" xml:space="preserve">
 				<source>Topic for multiple events</source>
 				<target>Arrangementsemne  (Hvis arrangementet løber over flere datoer kan du her indtaste info om selve arrangementet)</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.object_type.I.2" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.object_type.I.2" xml:space="preserve">
 				<source>Date</source>
 				<target>Arrangementssdato (Samme som ovenfor. Her vælger du blot et Arrangementsemne og indtaster så info om tid, m.m.).</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.title" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.title" xml:space="preserve">
 				<source>Title</source>
 				<target>Titel</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.subtitle" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.subtitle" xml:space="preserve">
 				<source>Subtitle</source>
 				<target>Undertitel</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.categories" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.categories" xml:space="preserve">
 				<source>Categories</source>
 				<target>Kategorier</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.teaser" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.teaser" xml:space="preserve">
 				<source>Teaser text</source>
 				<target>Teaser tekst</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.description" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.description" xml:space="preserve">
 				<source>Description</source>
 				<target>Beskrivelse</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.topic" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.topic" xml:space="preserve">
 				<source>Topic</source>
 				<target>Emne</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.event_type" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.event_type" xml:space="preserve">
 				<source>Event type</source>
 				<target>Arrangementtype</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.date" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.date" xml:space="preserve">
 				<source>Date</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.time" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.time" xml:space="preserve">
 				<source>Time</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.language" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.language" xml:space="preserve">
 				<source>Language</source>
 				<target>Sprog</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.accreditation_number" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.accreditation_number" xml:space="preserve">
 				<source>Accreditation number</source>
 				<target>Tilmeldings nr.</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.credit_points" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.credit_points" xml:space="preserve">
 				<source>Credit points</source>
 				<target>Kredit points</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.details_page" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.details_page" xml:space="preserve">
 				<source>Page with the details view</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.additional_information" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.additional_information" xml:space="preserve">
 				<source>Additional information</source>
 				<target>Yderligere information</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.checkboxes" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.checkboxes" xml:space="preserve">
 				<source>Registration options with checkbox</source>
 				<target>Registreringsmuligheder med afkrydsningsboks</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.uses_terms_2" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.uses_terms_2" xml:space="preserve">
 				<source>Display the travelling terms checkbox in the registration form</source>
 				<target>Vis afkrydsningsfelt for rejsebetingelser i registreringsformularen</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.needs_registration" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.needs_registration" xml:space="preserve">
 				<source>Needs registration</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.allows_multiple_registrations" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.allows_multiple_registrations" xml:space="preserve">
 				<source>Allows multiple registrations from the same person</source>
 				<target>Tillad flere indregistreringer fra samme person</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.skip_collision_check" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.skip_collision_check" xml:space="preserve">
 				<source>Skip the collision check for this event</source>
 				<target>Undlad kollisionscheck for dette arrangement</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.registrations" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.registrations" xml:space="preserve">
 				<source>Registrations</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.cancelled" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.cancelled" xml:space="preserve">
 				<source>Status</source>
 				<target>Er blevet aflyst</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.cancelled_planned" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.cancelled_planned" xml:space="preserve">
 				<source>planned</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.cancelled_canceled" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.cancelled_canceled" xml:space="preserve">
 				<source>canceled</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.cancelled_confirmed" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.cancelled_confirmed" xml:space="preserve">
 				<source>confirmed</source>
 				<target></target>
 			</trans-unit>
@@ -145,47 +145,47 @@
 				<source>Set the status automatically</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.notes" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.notes" xml:space="preserve">
 				<source>Internal Notes</source>
 				<target>Interne noter</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.attached_files" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.attached_files" xml:space="preserve">
 				<source>Attached files</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.divLabelSpeakers" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.divLabelSpeakers" xml:space="preserve">
 				<source>Speakers</source>
 				<target>Foredragsholdere</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.speakers" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.speakers" xml:space="preserve">
 				<source>Speakers</source>
 				<target>Foredragsholdere</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.partners" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.partners" xml:space="preserve">
 				<source>Partners</source>
 				<target>Partnere</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.tutors" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.tutors" xml:space="preserve">
 				<source>Tutors</source>
 				<target>Tutorer</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.leaders" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.leaders" xml:space="preserve">
 				<source>Leaders</source>
 				<target>Ledere</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.divLabelOrganizers" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.divLabelOrganizers" xml:space="preserve">
 				<source>Organizer</source>
 				<target>Arrangør</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.organizers" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.organizers" xml:space="preserve">
 				<source>Organizers</source>
 				<target>Arrangører</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.organizing_partners" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.organizing_partners" xml:space="preserve">
 				<source>Organizing Partners</source>
 				<target>Samarbejdspartnere</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.event_takes_place_reminder_sent" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.event_takes_place_reminder_sent" xml:space="preserve">
 				<source>Organizers have been reminded about this event being about to take place</source>
 				<target></target>
 			</trans-unit>
@@ -194,79 +194,79 @@
 				<source>Organizers have been notified that the cancelation deadline has just passed</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.divLabelPlaceTime" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.divLabelPlaceTime" xml:space="preserve">
 				<source>Place/Time</source>
 				<target>Sted/Tid</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.begin_date" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.begin_date" xml:space="preserve">
 				<source>Begin time and date</source>
 				<target>Start tid og dato</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.end_date" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.end_date" xml:space="preserve">
 				<source>End time and date</source>
 				<target>Slut tid og dato</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.timeslots" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.timeslots" xml:space="preserve">
 				<source>Time slots</source>
 				<target>Tidsblokke</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.begin_date_registration" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.begin_date_registration" xml:space="preserve">
 				<source>Begin date for registration</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.deadline_registration" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.deadline_registration" xml:space="preserve">
 				<source>Registration deadline</source>
 				<target>Tilmeldingsfrist</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.deadline_early_bird" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.deadline_early_bird" xml:space="preserve">
 				<source>Early bird deadline</source>
 				<target>Tilmeldingsfrist (for tidlig tilmeldingsoption)</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.deadline_unregistration" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.deadline_unregistration" xml:space="preserve">
 				<source>Unregistration deadline</source>
 				<target>Afmeldings-deadline</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.expiry" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.expiry" xml:space="preserve">
 				<source>License expiry</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.place" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.place" xml:space="preserve">
 				<source>Place</source>
 				<target>Sted</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.room" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.room" xml:space="preserve">
 				<source>Room</source>
 				<target>Rum</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.divLabelLodging" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.divLabelLodging" xml:space="preserve">
 				<source>Lodging/Food</source>
 				<target>Overnatning/Kost</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.lodgings" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.lodgings" xml:space="preserve">
 				<source>Available lodgings</source>
 				<target>Tilgængelige logi-muligheder</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.foods" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.foods" xml:space="preserve">
 				<source>Available foods</source>
 				<target>Tilgængelige kost-muligheder</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.divLabelAttendees" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.divLabelAttendees" xml:space="preserve">
 				<source>Attendees</source>
 				<target>Deltagere</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.attendees_min" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.attendees_min" xml:space="preserve">
 				<source>Minimal number of attendees</source>
 				<target>Min. deltagerantal</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.attendees_max" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.attendees_max" xml:space="preserve">
 				<source>Maximal number of attendees</source>
 				<target>Max. deltagerantal</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.queue_size" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.queue_size" xml:space="preserve">
 				<source>Registration queue</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.offline_attendees" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.offline_attendees" xml:space="preserve">
 				<source>Number of offline-registered attendees</source>
 				<target></target>
 			</trans-unit>
@@ -275,599 +275,599 @@
 				<source>Organizers have been notified that the minimum number of attendees has been reached</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.mute_notification_emails" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.mute_notification_emails" xml:space="preserve">
 				<source>Mute the notification emails to the organizers</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.target_groups" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.target_groups" xml:space="preserve">
 				<source>Target groups</source>
 				<target>Målgruppe</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.attendees" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.attendees" xml:space="preserve">
 				<source>Current number of attendees</source>
 				<target>Antal tilmeldte (på nuværende tidspunkt)</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.vacancies" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.vacancies" xml:space="preserve">
 				<source>Current number of vacancies</source>
 				<target>Antal ledige pladser (på nuværende tidpunkt)</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.enough_attendees" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.enough_attendees" xml:space="preserve">
 				<source>Has enough registrations</source>
 				<target>Har nok tilmeldte</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.is_full" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.is_full" xml:space="preserve">
 				<source>Is full</source>
 				<target>Optaget</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.divLabelPayment" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.divLabelPayment" xml:space="preserve">
 				<source>Payment</source>
 				<target>Betaling</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.price_regular" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.price_regular" xml:space="preserve">
 				<source>Regular price</source>
 				<target>Normal pris</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.price_regular_early" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.price_regular_early" xml:space="preserve">
 				<source>Regular price (early bird)</source>
 				<target>Normal pris (ved tidlig tilmelding)</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.price_regular_board" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.price_regular_board" xml:space="preserve">
 				<source>Regular price including full board</source>
 				<target>Normal pris inkl. helpension</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.price_special" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.price_special" xml:space="preserve">
 				<source>Special price</source>
 				<target>Speciel pris</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.price_special_early" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.price_special_early" xml:space="preserve">
 				<source>Special price (early bird)</source>
 				<target>Speciel pris (ved tidlig tilmelding)</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.price_special_board" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.price_special_board" xml:space="preserve">
 				<source>Special price including full board</source>
 				<target>Speciel pris inkl. helpension</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.payment_methods" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.payment_methods" xml:space="preserve">
 				<source>Allowed methods of payment</source>
 				<target>Tilladte betalingsmåder</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.divLabelAccess" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.divLabelAccess" xml:space="preserve">
 				<source>Access</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.vips" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.vips" xml:space="preserve">
 				<source>Managers of this event</source>
 				<target>Front end brugere der har tilladelse til at se listen over tilmeldte</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.image" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.image" xml:space="preserve">
 				<source>Image</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.requirements" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.requirements" xml:space="preserve">
 				<source>Requirements</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.dependencies" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.dependencies" xml:space="preserve">
 				<source>Requirement for</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.publication_hash" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_seminars.publication_hash" xml:space="preserve">
 				<source>Publication hash</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_speakers" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_speakers" xml:space="preserve">
 				<source>Speakers</source>
 				<target>Foredragsholdere</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.title" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_speakers.title" xml:space="preserve">
 				<source>Name</source>
 				<target>Navn</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.gender" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_speakers.gender" xml:space="preserve">
 				<source>Gender</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.gender_male" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_speakers.gender_male" xml:space="preserve">
 				<source>male</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.gender_female" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_speakers.gender_female" xml:space="preserve">
 				<source>female</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.organization" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_speakers.organization" xml:space="preserve">
 				<source>Organization</source>
 				<target>Organisation</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.homepage" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_speakers.homepage" xml:space="preserve">
 				<source>Homepage</source>
 				<target>Hjemmeside</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.description" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_speakers.description" xml:space="preserve">
 				<source>Description</source>
 				<target>Beskrivelse</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.skills" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_speakers.skills" xml:space="preserve">
 				<source>Skills</source>
 				<target>Færdigheder</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.notes" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_speakers.notes" xml:space="preserve">
 				<source>Internal Notes</source>
 				<target>Interne noter</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.address" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_speakers.address" xml:space="preserve">
 				<source>Address</source>
 				<target>Adresse</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.phone_work" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_speakers.phone_work" xml:space="preserve">
 				<source>Phone number (work)</source>
 				<target>Telefon (arbejde)</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.phone_home" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_speakers.phone_home" xml:space="preserve">
 				<source>Phone numer (home)</source>
 				<target>Telefon (hjem)</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.phone_mobile" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_speakers.phone_mobile" xml:space="preserve">
 				<source>Phone number (mobile)</source>
 				<target>Telefon (mobil)</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.fax" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_speakers.fax" xml:space="preserve">
 				<source>Fax number</source>
 				<target>Fax nr.</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.email" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_speakers.email" xml:space="preserve">
 				<source>E-mail address</source>
 				<target>E-mail adresse</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.cancelation_period" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_speakers.cancelation_period" xml:space="preserve">
 				<source>Cancelation period (in days)</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances" xml:space="preserve">
 				<source>Attendances</source>
 				<target>Deltagere</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.divLabelOverview" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.divLabelOverview" xml:space="preserve">
 				<source>Overview</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.divLabelBookingInformation" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.divLabelBookingInformation" xml:space="preserve">
 				<source>Booking Information</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.divLabelRegistrationComments" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.divLabelRegistrationComments" xml:space="preserve">
 				<source>Registration Comments</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.divLabelPaymentInformation" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.divLabelPaymentInformation" xml:space="preserve">
 				<source>Payment Information</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.divLabelBillingAddress" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.divLabelBillingAddress" xml:space="preserve">
 				<source>Billing Address</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.uid" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.uid" xml:space="preserve">
 				<source>Ticket ID</source>
 				<target>RegistreringsID</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.crdate" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.crdate" xml:space="preserve">
 				<source>Registration date</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.title" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.title" xml:space="preserve">
 				<source>Title</source>
 				<target>Titel</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.user" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.user" xml:space="preserve">
 				<source>Front-end User</source>
 				<target>Frontend Bruger</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.seminar" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.seminar" xml:space="preserve">
 				<source>Seminar</source>
 				<target>Arrangement</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.registration_queue" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.registration_queue" xml:space="preserve">
 				<source>Is on the registration queue</source>
 				<target>Er i tilmeldingskøen</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.price" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.price" xml:space="preserve">
 				<source>Price to pay</source>
 				<target>Pris</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.total_price" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.total_price" xml:space="preserve">
 				<source>Total price for this attendance</source>
 				<target>Total pris for denne deltagelse</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.currency" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.currency" xml:space="preserve">
 				<source>Currency of total price</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.including_tax" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.including_tax" xml:space="preserve">
 				<source>Including/excluding Tax</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.including_tax.including" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.including_tax.including" xml:space="preserve">
 				<source>including</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.including_tax.excluding" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.including_tax.excluding" xml:space="preserve">
 				<source>excluding</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.datepaid" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.datepaid" xml:space="preserve">
 				<source>Date of payment</source>
 				<target>Betalingsdato</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.method_of_payment" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.method_of_payment" xml:space="preserve">
 				<source>Method of payment</source>
 				<target>Betalingsmetode</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.account_number" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.account_number" xml:space="preserve">
 				<source>Account number</source>
 				<target>Kontonr</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.bank_code" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.bank_code" xml:space="preserve">
 				<source>Bank code</source>
 				<target>Bank kode</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.bank_name" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.bank_name" xml:space="preserve">
 				<source>Bank name</source>
 				<target>Bank navn</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.account_owner" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.account_owner" xml:space="preserve">
 				<source>Account owner</source>
 				<target>Kontoindehaver</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.company" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.company" xml:space="preserve">
 				<source>Company</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.name" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.name" xml:space="preserve">
 				<source>Name</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.gender" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.gender" xml:space="preserve">
 				<source>Gender</source>
 				<target>Køn</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.gender.I.0" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.gender.I.0" xml:space="preserve">
 				<source>Mr.</source>
 				<target>Hr.</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.gender.I.1" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.gender.I.1" xml:space="preserve">
 				<source>Ms.</source>
 				<target>Frk.</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.address" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.address" xml:space="preserve">
 				<source>Address</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.zip" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.zip" xml:space="preserve">
 				<source>ZIP</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.city" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.city" xml:space="preserve">
 				<source>City</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.country" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.country" xml:space="preserve">
 				<source>Country</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.telephone" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.telephone" xml:space="preserve">
 				<source>Telephone</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.email" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.email" xml:space="preserve">
 				<source>E-mail</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.been_there" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.been_there" xml:space="preserve">
 				<source>Has attended</source>
 				<target>Har deltaget</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.checkboxes" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.checkboxes" xml:space="preserve">
 				<source>Selected options</source>
 				<target>Valgte muligheder</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.interests" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.interests" xml:space="preserve">
 				<source>Special interests</source>
 				<target>Specielle interesser</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.expectations" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.expectations" xml:space="preserve">
 				<source>Expectations for the event</source>
 				<target>Forventninger til arrangementet</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.background_knowledge" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.background_knowledge" xml:space="preserve">
 				<source>Background knowledge</source>
 				<target>Baggrundsviden</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.lodgings" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.lodgings" xml:space="preserve">
 				<source>Selected lodging options</source>
 				<target>Vælg logi muligheder</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.accommodation" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.accommodation" xml:space="preserve">
 				<source>How are your lodging preferences (if possible a single room, a double room, no lodging)?</source>
 				<target>Hvilken indlogering foretrækker du (enkelt-rum, dobbelt-rum, ingen indlogering)?</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.foods" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.foods" xml:space="preserve">
 				<source>Selected food options</source>
 				<target>Vælg kosttype</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.food" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.food" xml:space="preserve">
 				<source>Which kind of food do you prefer (normal, vegetarian, or a special diet)</source>
 				<target>Hvilken slags mad foretrækker du (normal, vegetar, eller en speciel dieæt)</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.known_from" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.known_from" xml:space="preserve">
 				<source>How have you heard of this event?</source>
 				<target>Hvordan har du hørt om dette arrangement?</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.notes" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.notes" xml:space="preserve">
 				<source>Additional notes</source>
 				<target>Yderligere noter</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.registered_themselves" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.registered_themselves" xml:space="preserve">
 				<source>Has signed up themselves</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.seats" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.seats" xml:space="preserve">
 				<source>Number of seats</source>
 				<target>Antal pladser</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.attendees_names" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.attendees_names" xml:space="preserve">
 				<source>Additional registered persons</source>
 				<target>Yderligere deltagere</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.additional_persons" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.additional_persons" xml:space="preserve">
 				<source>Additional registered persons</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_attendances.kids" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_attendances.kids" xml:space="preserve">
 				<source>Number of kids</source>
 				<target>Antal børn</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_sites" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_sites" xml:space="preserve">
 				<source>Seminar Sites</source>
 				<target>Arrangementslokationer</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_sites.title" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_sites.title" xml:space="preserve">
 				<source>Name</source>
 				<target>Navn</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_sites.address" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_sites.address" xml:space="preserve">
 				<source>Address</source>
 				<target>Adresse</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_sites.zip" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_sites.zip" xml:space="preserve">
 				<source>ZIP code</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_sites.city" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_sites.city" xml:space="preserve">
 				<source>City</source>
 				<target>By</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_sites.country" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_sites.country" xml:space="preserve">
 				<source>Country</source>
 				<target>Land</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_sites.homepage" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_sites.homepage" xml:space="preserve">
 				<source>Homepage</source>
 				<target>Hjemmeside</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_sites.directions" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_sites.directions" xml:space="preserve">
 				<source>Directions</source>
 				<target>Kørevejledning</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_sites.notes" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_sites.notes" xml:space="preserve">
 				<source>Internal Notes</source>
 				<target>Interne noter</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_organizers" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_organizers" xml:space="preserve">
 				<source>Organizers</source>
 				<target>Arrangør</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_organizers.title" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_organizers.title" xml:space="preserve">
 				<source>Name</source>
 				<target>Navn</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_organizers.description" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_organizers.description" xml:space="preserve">
 				<source>Description</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_organizers.homepage" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_organizers.homepage" xml:space="preserve">
 				<source>Homepage</source>
 				<target>Hjemmeside</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_organizers.email" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_organizers.email" xml:space="preserve">
 				<source>E-mail address</source>
 				<target>E-mail adresse</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_organizers.email_footer" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_organizers.email_footer" xml:space="preserve">
 				<source>Footer text to be appended to all e-mails from this organizer</source>
 				<target>Fodtekst til bekræftelses email</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_organizers.attendances_pid" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_organizers.attendances_pid" xml:space="preserve">
 				<source>SysFolder to store the registration records in</source>
 				<target>Sys-folder at gemme registreringer i</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_payment_methods" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_payment_methods" xml:space="preserve">
 				<source>Methods of payment</source>
 				<target>Betalingsmetoder</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_payment_methods.title" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_payment_methods.title" xml:space="preserve">
 				<source>Title</source>
 				<target>Titel</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_payment_methods.description" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_payment_methods.description" xml:space="preserve">
 				<source>Detailed description for e-mails</source>
 				<target>Detaljeret beskrivelse for e-mails</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_event_types" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_event_types" xml:space="preserve">
 				<source>Event types</source>
 				<target>Arrangementstyper</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_event_types.title" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_event_types.title" xml:space="preserve">
 				<source>Title</source>
 				<target>Titel</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_event_types.single_view_page" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_event_types.single_view_page" xml:space="preserve">
 				<source>Single view page for events of this type</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_checkboxes" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_checkboxes" xml:space="preserve">
 				<source>Registration options with checkbox</source>
 				<target>Tilmeldingsmuligheder med afkrydsningsboks</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_checkboxes.title" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_checkboxes.title" xml:space="preserve">
 				<source>Title</source>
 				<target>Titel</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_lodgings" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_lodgings" xml:space="preserve">
 				<source>Lodging options</source>
 				<target>Logimuligheder</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_lodgings.title" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_lodgings.title" xml:space="preserve">
 				<source>Title</source>
 				<target>Titel</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_foods" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_foods" xml:space="preserve">
 				<source>Food options</source>
 				<target>Kostmuligheder</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_foods.title" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_foods.title" xml:space="preserve">
 				<source>Title</source>
 				<target>Titel</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_timeslots" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_timeslots" xml:space="preserve">
 				<source>Time slots</source>
 				<target>Tidsblokke</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_timeslots.begin_date" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_timeslots.begin_date" xml:space="preserve">
 				<source>Begin date</source>
 				<target>Startdato</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_timeslots.end_date" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_timeslots.end_date" xml:space="preserve">
 				<source>End date</source>
 				<target>Slutdato</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_timeslots.entry_date" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_timeslots.entry_date" xml:space="preserve">
 				<source>Entry date</source>
 				<target>Oprettelsesdato</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_timeslots.speakers" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_timeslots.speakers" xml:space="preserve">
 				<source>Speakers</source>
 				<target>Talere</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_timeslots.place" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_timeslots.place" xml:space="preserve">
 				<source>Place</source>
 				<target>Sted</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_timeslots.room" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_timeslots.room" xml:space="preserve">
 				<source>Room</source>
 				<target>Lokale</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_target_groups" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_target_groups" xml:space="preserve">
 				<source>Target Groups</source>
 				<target>Målgrupper</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_target_groups.title" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_target_groups.title" xml:space="preserve">
 				<source>Title</source>
 				<target>Titel</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_target_groups.minimum_age" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_target_groups.minimum_age" xml:space="preserve">
 				<source>Minimum age</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_target_groups.maximum_age" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_target_groups.maximum_age" xml:space="preserve">
 				<source>Maximum age</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_categories" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_categories" xml:space="preserve">
 				<source>Categories</source>
 				<target>Kategorier</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_categories.title" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_categories.title" xml:space="preserve">
 				<source>Title</source>
 				<target>Titel</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_categories.icon" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_categories.icon" xml:space="preserve">
 				<source>Icon</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_categories.single_view_page" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_categories.single_view_page" xml:space="preserve">
 				<source>Single view page for events in this category</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_skills" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_skills" xml:space="preserve">
 				<source>Skills</source>
 				<target>Færdigheder</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_skills.title" xml:space="preserve" approved="yes">
+			<trans-unit id="tx_seminars_skills.title" xml:space="preserve">
 				<source>Title</source>
 				<target>Titel</target>
 			</trans-unit>
-			<trans-unit id="tt_content.list_type_pi1" xml:space="preserve" approved="yes">
+			<trans-unit id="tt_content.list_type_pi1" xml:space="preserve">
 				<source>Seminar Manager</source>
 				<target>Arrangementsmanager</target>
 			</trans-unit>
-			<trans-unit id="fe_groups.tx_seminars_publish_events" xml:space="preserve" approved="yes">
+			<trans-unit id="fe_groups.tx_seminars_publish_events" xml:space="preserve">
 				<source>Publish FE-edited events</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="fe_groups.tx_seminars_publish_events.I.0" xml:space="preserve" approved="yes">
+			<trans-unit id="fe_groups.tx_seminars_publish_events.I.0" xml:space="preserve">
 				<source>publish immediately</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="fe_groups.tx_seminars_publish_events.I.1" xml:space="preserve" approved="yes">
+			<trans-unit id="fe_groups.tx_seminars_publish_events.I.1" xml:space="preserve">
 				<source>only newly created events are hidden</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="fe_groups.tx_seminars_publish_events.I.2" xml:space="preserve" approved="yes">
+			<trans-unit id="fe_groups.tx_seminars_publish_events.I.2" xml:space="preserve">
 				<source>newly created and edited events are hidden</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="fe_groups.tab_event_management" xml:space="preserve" approved="yes">
+			<trans-unit id="fe_groups.tab_event_management" xml:space="preserve">
 				<source>Event management</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="fe_groups.tx_seminars_auxiliary_records_pid" xml:space="preserve" approved="yes">
+			<trans-unit id="fe_groups.tx_seminars_auxiliary_records_pid" xml:space="preserve">
 				<source>Store auxiliary records for seminars in page</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="fe_groups.tx_seminars_reviewer" xml:space="preserve" approved="yes">
+			<trans-unit id="fe_groups.tx_seminars_reviewer" xml:space="preserve">
 				<source>BE user to receive the publication e-mail for FE-edited events</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="fe_groups.tx_seminars_events_pid" xml:space="preserve" approved="yes">
+			<trans-unit id="fe_groups.tx_seminars_events_pid" xml:space="preserve">
 				<source>Store events created in the FE-editor in this page</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="fe_groups.tx_seminars_default_categories" xml:space="preserve" approved="yes">
+			<trans-unit id="fe_groups.tx_seminars_default_categories" xml:space="preserve">
 				<source>Default categories for the FE editor</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="fe_groups.tx_seminars_default_organizer" xml:space="preserve" approved="yes">
+			<trans-unit id="fe_groups.tx_seminars_default_organizer" xml:space="preserve">
 				<source>Default organizer for the FE editor</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="owner_feuser" xml:space="preserve" approved="yes">
+			<trans-unit id="owner_feuser" xml:space="preserve">
 				<source>Front-end user who has created this record</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="be_groups.tab_event_management" xml:space="preserve" approved="yes">
+			<trans-unit id="be_groups.tab_event_management" xml:space="preserve">
 				<source>Event management</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="be_groups.tx_seminars_events_folder" xml:space="preserve" approved="yes">
+			<trans-unit id="be_groups.tx_seminars_events_folder" xml:space="preserve">
 				<source>Sysfolder for new events</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="be_groups.tx_seminars_registrations_folder" xml:space="preserve" approved="yes">
+			<trans-unit id="be_groups.tx_seminars_registrations_folder" xml:space="preserve">
 				<source>Sysfolder for new registrations</source>
 				<target></target>
 			</trans-unit>
-			<trans-unit id="be_groups.tx_seminars_auxiliaries_folder" xml:space="preserve" approved="yes">
+			<trans-unit id="be_groups.tx_seminars_auxiliaries_folder" xml:space="preserve">
 				<source>Sysfolder for new auxiliary records</source>
 				<target></target>
 			</trans-unit>
