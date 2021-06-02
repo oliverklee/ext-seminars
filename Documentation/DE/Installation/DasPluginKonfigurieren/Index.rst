@@ -26,7 +26,8 @@ Wichtig ist, dass Sie dieses Template *nach* dem MKFORMS-Template einbinden.
 
 Wenn Ihre Seite nicht ohnehin schon jQuery einbindet, binden Sie noch
 folgendes statisches Template ein::
-  MKFORMS JQuery-JS (mkforms)
+
+   MKFORMS JQuery-JS (mkforms)
 
 Dann konfigurieren Sie das Plugin in Ihrem TS template setup oder in
 den Plugin Flexforms. Die Eigenschaften sind in der Referenz

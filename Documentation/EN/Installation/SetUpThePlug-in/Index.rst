@@ -26,7 +26,8 @@ template *below* the MKFORMS template.
 
 If your site does not use jQuery by default, also include the following
 static template::
-  MKFORMS JQuery-JS (mkforms)
+
+   MKFORMS JQuery-JS (mkforms)
 
 Then configure the plug-in in your TS template setup or the plug-in
 flexforms. The properties are listed in the reference.
