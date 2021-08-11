@@ -25,7 +25,7 @@
 		"source": "https://github.com/oliverklee/ext-seminars"
 	},
 	"require": {
-		"php": "~7.0.0 || ~7.1.0 || ~7.2.0 || ~7.3.0 || ~7.4.0",
+		"php": "^7.0.0 || ~8.0.0",
 		"ext-json": "*",
 		"digedag/rn-base": "^1.11.4",
 		"dmk/mkforms": "^9.5.2",

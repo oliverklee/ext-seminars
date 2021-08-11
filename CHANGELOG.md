@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Allow installations up to PHP 8.0 (#758)
 
 ### Changed
 - Update the `.editorconfig` to better match the Core (#739)
