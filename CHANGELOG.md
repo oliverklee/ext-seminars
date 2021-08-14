@@ -18,6 +18,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop the `approved` flag from locallang labels (#745)
 
 ### Fixed
+- Drop reference to a removed feature from the manual (#755)
 - Fix ReST rendering warnings in the documentation (#750)
 - Fix saving of new speakers with MySQL in strict mode (#749)
 
