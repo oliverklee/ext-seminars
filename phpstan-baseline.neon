@@ -1,0 +1,17 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Result of method Tx_Seminars_FrontEnd_RegistrationsList\\:\\:createTableBody\\(\\) \\(void\\) is used\\.$#"
+			count: 1
+			path: Classes/FrontEnd/RegistrationsList.php
+
+		-
+			message: "#^Access to an undefined property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\AbstractRegistrationListViewTest\\:\\:\\$extConfBackup\\.$#"
+			count: 2
+			path: Tests/LegacyUnit/Csv/AbstractRegistrationListViewTest.php
+
+		-
+			message: "#^Access to an undefined property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\AbstractRegistrationListViewTest\\:\\:\\$mockedClassNames\\.$#"
+			count: 6
+			path: Tests/LegacyUnit/Csv/AbstractRegistrationListViewTest.php
+
