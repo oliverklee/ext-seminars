@@ -55,12 +55,6 @@ The default values are good for starters.
   extension, you should enable it again and check whether there are any
   warnings on the FE pages with the plug-in on it.
 
-- Enable “Use the page browser” only if you have upgraded from an older
-  version and you have distributed your organizer, speaker, location
-  etc. records to more than one folder and you cannot move them. It is
-  no problem to have registrations or events in different folders,
-  though.
-
 - Disable “Select topic records from all pages” only in one of the
   following two cases:
 

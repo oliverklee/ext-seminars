@@ -62,13 +62,6 @@ speichern Sie diese Einstellungen einmal (auch wenn Sie sie nicht
   aktivieren und überprüfen, ob Warnungen auf Seiten erscheinen, auf
   denen das Plugin verwendet wird.
 
-- Aktivieren Sie “Use the page browser” ausschließlich, wenn Sie von
-  einer älteren Version geupgradet haben und Sie die Veranstalter,
-  Redner, Veranstaltungsorte, etc in mehr als einem Ordner verteilt
-  haben und diese nicht verschieben können. Es ist kein allerdings auch
-  kein Problem, die Registrierungen oder Veranstaltungen in
-  unterschiedlichen Ordnern zu haben.
-
 - Deaktivieren Sie“Select topic records from all pages” ausschließlich
   in einem der folgenden Fälle:
 
