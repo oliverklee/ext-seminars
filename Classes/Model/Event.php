@@ -2165,7 +2165,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
             }
 
             if (!$hasAdditionalPersons) {
-                foreach (explode(CRLF, $registration->getAttendeesNames()) as $name) {
+                foreach (explode("\r\n", $registration->getAttendeesNames()) as $name) {
                     $trimmedName = trim($name);
                     if ($trimmedName !== '') {
                         $names[] = $trimmedName;

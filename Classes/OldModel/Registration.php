@@ -460,9 +460,9 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements Configu
                 $result = $this->getRecordPropertyString($trimmedKey);
         }
 
-        $carriageReturnRemoved = \str_replace(CR, LF, (string)$result);
+        $carriageReturnRemoved = \str_replace("\r", "\n", (string)$result);
 
-        return \trim(\preg_replace('/\\x0a{2,}/', LF, $carriageReturnRemoved));
+        return \trim(\preg_replace('/\\x0a{2,}/', "\n", $carriageReturnRemoved));
     }
 
     /**
@@ -892,7 +892,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements Configu
                 $padding = \str_pad('', $maximumLabelLength - \mb_strlen($label, 'utf-8'));
                 $result .= $label . ': ' . $padding . $value . "\n";
             } else {
-                $result .= $label . ':' . LF;
+                $result .= $label . ":\n";
             }
         }
 
@@ -931,17 +931,17 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements Configu
         foreach ($labels as $key => $currentLabel) {
             $value = $this->getRegistrationData($key);
             if ($value === '') {
-                $result .= $currentLabel . ':' . LF;
+                $result .= $currentLabel . ":\n";
                 continue;
             }
 
-            if (\strpos($value, LF) !== false) {
-                $result .= $currentLabel . ': ' . LF;
+            if (\strpos($value, "\n") !== false) {
+                $result .= $currentLabel . ": \n";
             } else {
                 $padding = \str_pad('', $maximumLabelLength - \mb_strlen($currentLabel, 'utf-8'));
                 $result .= $currentLabel . ': ' . $padding;
             }
-            $result .= $value . LF;
+            $result .= $value . "\n";
         }
 
         return $result;
@@ -1346,7 +1346,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements Configu
             return '';
         }
 
-        $names = GeneralUtility::trimExplode(LF, $this->getAttendeesNames(), true);
+        $names = GeneralUtility::trimExplode("\n", $this->getAttendeesNames(), true);
         if ($this->hasRegisteredThemselves()) {
             \array_unshift($names, $this->getFrontEndUser()->getName());
         }
@@ -1360,7 +1360,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements Configu
                 $enumeratedNames[] = $attendeeCounter . '. ' . $name;
                 $attendeeCounter++;
             }
-            $result = implode(LF, $enumeratedNames);
+            $result = implode("\n", $enumeratedNames);
         }
 
         return $result;

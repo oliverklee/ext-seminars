@@ -157,7 +157,7 @@ class EventListViewTest extends TestCase
 
         self::assertSame(
             $this->localizeAndRemoveColon('tx_seminars_seminars.uid') . ';' .
-            $this->localizeAndRemoveColon('tx_seminars_seminars.title') . CRLF,
+            $this->localizeAndRemoveColon('tx_seminars_seminars.title') . "\r\n",
             $this->subject->render()
         );
     }
@@ -174,9 +174,9 @@ class EventListViewTest extends TestCase
         $this->configuration->setAsBoolean('addExcelSpecificSeparatorLineToCsv', true);
 
         self::assertSame(
-            'sep=;' . CRLF .
+            "sep=;\r\n" .
             $this->localizeAndRemoveColon('tx_seminars_seminars.uid') . ';' .
-            $this->localizeAndRemoveColon('tx_seminars_seminars.title') . CRLF,
+            $this->localizeAndRemoveColon('tx_seminars_seminars.title') . "\r\n",
             $this->subject->render()
         );
     }
@@ -259,7 +259,7 @@ class EventListViewTest extends TestCase
         self::assertContains(
             $this->localizeAndRemoveColon(
                 'tx_seminars_seminars.uid'
-            ) . CRLF . $firstEventUid . CRLF . $secondEventUid . CRLF,
+            ) . "\r\n" . $firstEventUid . "\r\n" . $secondEventUid . "\r\n",
             $this->subject->render()
         );
     }
@@ -318,12 +318,12 @@ class EventListViewTest extends TestCase
      */
     public function renderWrapsValuesWithLineFeedsInDoubleQuotes()
     {
-        $this->createEventInFolderAndSetPageUid(['title' => 'foo' . LF . 'bar']);
+        $this->createEventInFolderAndSetPageUid(['title' => "foo\nbar"]);
 
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
 
         self::assertContains(
-            '"foo' . LF . 'bar"',
+            "\"foo\nbar\"",
             $this->subject->render()
         );
     }

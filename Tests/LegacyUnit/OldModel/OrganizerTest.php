@@ -49,7 +49,7 @@ final class OrganizerTest extends TestCase
                 'title' => 'Test organizer',
                 'homepage' => 'http://www.test.com/',
                 'email' => 'maximal-foo@test.com',
-                'email_footer' => 'line 1' . LF . 'line 2',
+                'email_footer' => "line 1\nline 2",
                 'attendances_pid' => 99,
                 'description' => 'foo',
             ]
@@ -131,7 +131,7 @@ final class OrganizerTest extends TestCase
     public function getEmailFooterForNonEmptyFooterReturnsThisFooter()
     {
         self::assertEquals(
-            'line 1' . LF . 'line 2',
+            "line 1\nline 2",
             $this->maximalFixture->getEmailFooter()
         );
     }

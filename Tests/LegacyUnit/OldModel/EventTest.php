@@ -3127,7 +3127,7 @@ final class EventTest extends TestCase
         $this->addPaymentMethodRelation(['title' => 'Payment Method 2']);
 
         self::assertContains(
-            'Payment Method 1' . LF . 'Payment Method 2',
+            "Payment Method 1\nPayment Method 2",
             $this->subject->getPaymentMethodsPlainShort()
         );
     }
@@ -3141,7 +3141,7 @@ final class EventTest extends TestCase
         $this->addPaymentMethodRelation(['title' => 'Payment Method 2']);
 
         self::assertNotContains(
-            'Payment Method 1' . CRLF . 'Payment Method 2',
+            "Payment Method 1\r\nPayment Method 2",
             $this->subject->getPaymentMethodsPlainShort()
         );
     }
@@ -3168,7 +3168,7 @@ final class EventTest extends TestCase
         $uid = $this->addPaymentMethodRelation(['title' => $title]);
 
         self::assertSame(
-            $title . LF . LF,
+            $title . "\n\n",
             $this->subject->getSinglePaymentMethodPlain($uid)
         );
     }
@@ -3183,7 +3183,7 @@ final class EventTest extends TestCase
         $uid = $this->addPaymentMethodRelation(['title' => $title, 'description' => $description]);
 
         self::assertSame(
-            $title . ': ' . $description . LF . LF,
+            $title . ': ' . $description . "\n\n",
             $this->subject->getSinglePaymentMethodPlain($uid)
         );
     }
@@ -3875,7 +3875,7 @@ final class EventTest extends TestCase
         $this->addOrganizerRelation(['title' => 'test organizer 2']);
 
         self::assertContains(
-            'test organizer 1' . LF . 'test organizer 2',
+            "test organizer 1\ntest organizer 2",
             $this->subject->getOrganizersRaw()
         );
     }
@@ -3889,7 +3889,7 @@ final class EventTest extends TestCase
         $this->addOrganizerRelation(['title' => 'test organizer 2']);
 
         self::assertNotContains(
-            'test organizer 1' . CRLF . 'test organizer 2',
+            "test organizer 1\r\ntest organizer 2",
             $this->subject->getOrganizersRaw()
         );
     }
@@ -4656,7 +4656,7 @@ final class EventTest extends TestCase
         $this->addSpeakerRelation(['title' => 'bar']);
 
         self::assertContains(
-            'foo' . LF . 'bar',
+            "foo\nbar",
             $this->subject->getSpeakersWithDescriptionRaw()
         );
     }
@@ -4670,7 +4670,7 @@ final class EventTest extends TestCase
         $this->addSpeakerRelation(['title' => 'bar']);
 
         self::assertNotContains(
-            'foo' . CRLF . 'bar',
+            "foo\r\nbar",
             $this->subject->getSpeakersWithDescriptionRaw()
         );
     }
@@ -4688,7 +4688,7 @@ final class EventTest extends TestCase
         );
 
         self::assertNotRegExp(
-            '/foo' . CRLF . 'bar/',
+            "/foo\r\nbar/",
             $this->subject->getSpeakersWithDescriptionRaw()
         );
     }
@@ -4706,7 +4706,7 @@ final class EventTest extends TestCase
         );
 
         self::assertRegExp(
-            '/foo' . LF . 'bar/',
+            "/foo\nbar/",
             $this->subject->getSpeakersWithDescriptionRaw()
         );
     }
@@ -5773,7 +5773,7 @@ final class EventTest extends TestCase
         $this->addPlaceRelation(['title' => 'another place']);
 
         self::assertContains(
-            'a place' . LF . 'another place',
+            "a place\nanother place",
             $this->subject->getPlaceWithDetailsRaw()
         );
     }
@@ -5787,7 +5787,7 @@ final class EventTest extends TestCase
         $this->addPlaceRelation(['title' => 'another place']);
 
         self::assertNotContains(
-            'another place' . CRLF . 'a place',
+            "another place\r\na place",
             $this->subject->getPlaceWithDetailsRaw()
         );
     }
@@ -7276,7 +7276,7 @@ final class EventTest extends TestCase
         $this->subject->setNumberOfLodgings(2);
 
         self::assertContains(
-            'foo' . LF . 'bar',
+            "foo\nbar",
             $this->subject->getEventData('lodgings')
         );
     }
@@ -7309,7 +7309,7 @@ final class EventTest extends TestCase
         $this->subject->setNumberOfLodgings(2);
 
         self::assertNotContains(
-            'foo' . CRLF . 'bar',
+            "foo\r\nbar",
             $this->subject->getEventData('lodgings')
         );
     }
@@ -7319,10 +7319,10 @@ final class EventTest extends TestCase
      */
     public function getEventDataDataWithCarriageReturnAndLinefeedGetsConvertedToLineFeedOnly()
     {
-        $this->subject->setDescription('foo' . CRLF . 'bar');
+        $this->subject->setDescription("foo\r\nbar");
 
         self::assertContains(
-            'foo' . LF . 'bar',
+            "foo\nbar",
             $this->subject->getEventData('description')
         );
     }
@@ -7332,10 +7332,10 @@ final class EventTest extends TestCase
      */
     public function getEventDataDataWithTwoAdjacentLineFeedsReturnsStringWithOnlyOneLineFeed()
     {
-        $this->subject->setDescription('foo' . LF . LF . 'bar');
+        $this->subject->setDescription("foo\n\nbar");
 
         self::assertContains(
-            'foo' . LF . 'bar',
+            "foo\nbar",
             $this->subject->getEventData('description')
         );
     }
@@ -7345,10 +7345,10 @@ final class EventTest extends TestCase
      */
     public function getEventDataDataWithThreeAdjacentLineFeedsReturnsStringWithOnlyOneLineFeed()
     {
-        $this->subject->setDescription('foo' . LF . LF . LF . 'bar');
+        $this->subject->setDescription("foo\n\n\nbar");
 
         self::assertContains(
-            'foo' . LF . 'bar',
+            "foo\nbar",
             $this->subject->getEventData('description')
         );
     }
@@ -7358,10 +7358,10 @@ final class EventTest extends TestCase
      */
     public function getEventDataDataWithFourAdjacentLineFeedsReturnsStringWithOnlyOneLineFeed()
     {
-        $this->subject->setDescription('foo' . LF . LF . LF . LF . 'bar');
+        $this->subject->setDescription("foo\n\n\n\nbar");
 
         self::assertContains(
-            'foo' . LF . 'bar',
+            "foo\nbar",
             $this->subject->getEventData('description')
         );
     }
@@ -7447,7 +7447,7 @@ final class EventTest extends TestCase
         $subject->method('hasPlace')->willReturn(true);
 
         self::assertSame(
-            'Hotel Ibis' . LF . 'Wasserwerk',
+            "Hotel Ibis\nWasserwerk",
             $subject->getEventData('place')
         );
     }
@@ -7555,7 +7555,7 @@ final class EventTest extends TestCase
         $this->subject->setDescription('');
 
         self::assertSame(
-            $this->getLanguageService()->getLL('label_description') . ':' . LF,
+            $this->getLanguageService()->getLL('label_description') . ":\n",
             $this->subject->dumpSeminarValues('description')
         );
     }
@@ -7570,7 +7570,7 @@ final class EventTest extends TestCase
         $this->subject->setNeedsRegistration(true);
 
         self::assertSame(
-            $this->getLanguageService()->getLL('label_vacancies') . ': 0' . LF,
+            $this->getLanguageService()->getLL('label_vacancies') . ": 0\n",
             $this->subject->dumpSeminarValues('vacancies')
         );
     }
@@ -7585,7 +7585,7 @@ final class EventTest extends TestCase
         $this->subject->setNeedsRegistration(true);
 
         self::assertSame(
-            $this->getLanguageService()->getLL('label_vacancies') . ': 1' . LF,
+            $this->getLanguageService()->getLL('label_vacancies') . ": 1\n",
             $this->subject->dumpSeminarValues('vacancies')
         );
     }
@@ -7599,7 +7599,7 @@ final class EventTest extends TestCase
 
         self::assertSame(
             $this->getLanguageService()->getLL('label_vacancies') . ': ' .
-            $this->getLanguageService()->getLL('label_unlimited') . LF,
+            $this->getLanguageService()->getLL('label_unlimited') . "\n",
             $this->subject->dumpSeminarValues('vacancies')
         );
     }

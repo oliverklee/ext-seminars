@@ -920,36 +920,35 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         $calendarEntry = GeneralUtility::makeInstance(Attachment::class);
         $calendarEntry->setContentType('text/calendar; charset="utf-8"; component="vevent"; method="publish"');
         $calendarEntry->setFileName('event.ics');
-        $content = 'BEGIN:VCALENDAR' . CRLF .
-            'VERSION:2.0' . CRLF .
-            'PRODID:TYPO3 CMS' . CRLF .
-            'METHOD:PUBLISH' . CRLF .
-            'BEGIN:VEVENT' . CRLF .
-            'UID:' . uniqid('event/' . $event->getUid() . '/', true) . CRLF .
-            'DTSTAMP:' . strftime('%Y%m%dT%H%M%S', $GLOBALS['SIM_EXEC_TIME']) . CRLF .
-            'SUMMARY:' . $event->getTitle() . CRLF .
-            'DESCRIPTION:' . $event->getSubtitle() . CRLF .
-            'DTSTART' . $this->formatDateForWithZone($event->getBeginDateAsUnixTimeStamp(), $timeZone) . CRLF;
+        $content = "BEGIN:VCALENDAR\r\n" .
+            "VERSION:2.0\r\n" .
+            "PRODID:TYPO3 CMS\r\n" .
+            "METHOD:PUBLISH\r\n" .
+            "BEGIN:VEVENT\r\n" .
+            'UID:' . uniqid('event/' . $event->getUid() . '/', true) . "\r\n" .
+            'DTSTAMP:' . strftime('%Y%m%dT%H%M%S', $GLOBALS['SIM_EXEC_TIME']) . "\r\n" .
+            'SUMMARY:' . $event->getTitle() . "\r\n" .
+            'DESCRIPTION:' . $event->getSubtitle() . "\r\n" .
+            'DTSTART' . $this->formatDateForWithZone($event->getBeginDateAsUnixTimeStamp(), $timeZone) . "\r\n";
 
         if ($event->hasEndDate()) {
-            $content .= 'DTEND' . $this->formatDateForWithZone($event->getEndDateAsUnixTimeStamp(), $timeZone) . CRLF;
+            $content .= 'DTEND' . $this->formatDateForWithZone($event->getEndDateAsUnixTimeStamp(), $timeZone) . "\r\n";
         }
         if (!$event->getPlaces()->isEmpty()) {
             /** @var \Tx_Seminars_Model_Place $firstPlace */
             $firstPlace = $event->getPlaces()->first();
             $normalizedPlaceTitle = str_replace(
-                [CRLF, LF],
+                ["\r\n", "\n"],
                 ', ',
                 trim($firstPlace->getTitle() . ', ' . $firstPlace->getAddress())
             );
-            $content .= 'LOCATION:' . $normalizedPlaceTitle . CRLF;
+            $content .= 'LOCATION:' . $normalizedPlaceTitle . "\r\n";
         }
 
         $organizer = $event->getFirstOrganizer();
         $content .= 'ORGANIZER;CN="' . addcslashes($organizer->getTitle(), '"') .
-            '":mailto:' . $organizer->getEMailAddress() . CRLF;
-        $content .= 'END:VEVENT' . CRLF .
-            'END:VCALENDAR';
+            '":mailto:' . $organizer->getEMailAddress() . "\r\n";
+        $content .= "END:VEVENT\r\nEND:VCALENDAR";
         $calendarEntry->setContent($content);
 
         $email->addAttachment($calendarEntry);
@@ -1419,7 +1418,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         }
 
         $footers = $event->getOrganizersFooter();
-        $this->setMarker('footer', !empty($footers) ? LF . '-- ' . LF . $footers[0] : '');
+        $this->setMarker('footer', !empty($footers) ? "\n-- \n" . $footers[0] : '');
 
         /** @var \Tx_Seminars_Mapper_Registration $registrationMapper */
         $registrationMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
@@ -1516,7 +1515,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
             return;
         }
 
-        $newline = $useHtml ? '<br />' : LF;
+        $newline = $useHtml ? '<br />' : "\n";
 
         $formattedPlaces = [];
         /** @var \Tx_Seminars_Model_Place $place */

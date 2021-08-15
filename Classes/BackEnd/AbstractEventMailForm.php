@@ -585,7 +585,7 @@ abstract class AbstractEventMailForm
         );
         $introduction = sprintf($this->getLanguageService()->getLL($prefix . 'introduction'), $eventDetails);
 
-        return '%salutation' . LF . LF . $introduction . LF
+        return "%salutation\n\n" . $introduction . "\n"
             . $this->getLanguageService()->getLL($prefix . 'messageBody');
     }
 
@@ -612,7 +612,7 @@ abstract class AbstractEventMailForm
             $this->getPostData('messageBody')
         );
         $messageFooter = $organizer->hasEMailFooter()
-            ? LF . '-- ' . LF . $organizer->getEMailFooter() : '';
+            ? "\n-- \n" . $organizer->getEMailFooter() : '';
 
         return $messageText . $messageFooter;
     }

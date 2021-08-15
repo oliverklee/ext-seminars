@@ -482,8 +482,8 @@ class AbstractRegistrationListViewTest extends TestCase
         );
 
         self::assertContains(
-            CRLF . $firstRegistrationUid . CRLF .
-            $secondRegistrationUid . CRLF,
+            "\r\n" . $firstRegistrationUid . "\r\n" .
+            $secondRegistrationUid . "\r\n",
             $this->subject->render()
         );
     }
@@ -600,12 +600,12 @@ class AbstractRegistrationListViewTest extends TestCase
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $this->testingFramework->createFrontEndUser(),
-                'address' => 'foo' . LF . 'bar',
+                'address' => "foo\nbar",
             ]
         );
 
         self::assertContains(
-            '"foo' . LF . 'bar"',
+            "\"foo\nbar\"",
             $this->subject->render()
         );
     }
@@ -741,7 +741,7 @@ class AbstractRegistrationListViewTest extends TestCase
         $this->configuration->setAsBoolean('addExcelSpecificSeparatorLineToCsv', true);
 
         self::assertSame(
-            'sep=;' . CRLF . CRLF,
+            "sep=;\r\n\r\n",
             $this->subject->render()
         );
     }
@@ -754,7 +754,7 @@ class AbstractRegistrationListViewTest extends TestCase
         $this->configuration->setAsBoolean('addExcelSpecificSeparatorLineToCsv', false);
 
         self::assertSame(
-            CRLF,
+            "\r\n",
             $this->subject->render()
         );
     }
@@ -844,8 +844,8 @@ class AbstractRegistrationListViewTest extends TestCase
     public function renderCallsHookAndReturnsModifiedValue()
     {
         $this->configuration->setAsBoolean('addExcelSpecificSeparatorLineToCsv', false);
-        $renderResult = CRLF;
-        $modifiedResult = 'modified CSV' . CRLF;
+        $renderResult = "\r\n";
+        $modifiedResult = "modified CSV\r\n";
 
         $hook = $this->createMock(RegistrationListCsv::class);
         $hook->expects(self::once())->method('modifyCsv')

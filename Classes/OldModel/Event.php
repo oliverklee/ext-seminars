@@ -527,12 +527,12 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         foreach ($this->getPlacesAsArray() as $place) {
             $placeText = $place['title'];
             if ($place['homepage'] != '') {
-                $placeText .= LF . $place['homepage'];
+                $placeText .= "\n" . $place['homepage'];
             }
 
             $descriptionParts = [];
             if ($place['address'] != '') {
-                $descriptionParts[] = str_replace(CR, ',', $place['address']);
+                $descriptionParts[] = str_replace("\r", ',', $place['address']);
             }
             if ($place['city'] != '') {
                 $descriptionParts[] = trim(
@@ -552,13 +552,13 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
                 $placeText .= ', ' . implode(', ', $descriptionParts);
             }
             if ($place['directions'] != '') {
-                $placeText .= LF . str_replace(CR, ', ', $place['directions']);
+                $placeText .= "\n" . str_replace("\r", ', ', $place['directions']);
             }
 
             $placeTexts[] = $placeText;
         }
 
-        return implode(LF, $placeTexts);
+        return implode("\n", $placeTexts);
     }
 
     /**
@@ -694,7 +694,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             $result[] = $plugin->getSubpart('SPEAKER_LIST_ITEM');
         }
 
-        return \implode(LF, $result);
+        return \implode("\n", $result);
     }
 
     private function renderSpeakerImage(\Tx_Seminars_OldModel_Speaker $speaker, TemplateHelper $plugin): string
@@ -744,10 +744,10 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             if ($speaker->hasHomepage()) {
                 $result .= ', ' . $speaker->getHomepage();
             }
-            $result .= LF;
+            $result .= "\n";
 
             if ($speaker->hasDescription()) {
-                $result .= $speaker->getDescriptionRaw() . LF;
+                $result .= $speaker->getDescriptionRaw() . "\n";
             }
         }
 
@@ -1395,7 +1395,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         foreach ($this->getPaymentMethodsAsArray() as $paymentMethod) {
             $result .= $paymentMethod['title'] . ': ';
-            $result .= $paymentMethod['description'] . LF . LF;
+            $result .= $paymentMethod['description'] . "\n\n";
         }
 
         return $result;
@@ -1414,7 +1414,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             return '';
         }
 
-        return implode(LF, $this->getPaymentMethods());
+        return implode("\n", $this->getPaymentMethods());
     }
 
     /**
@@ -2044,7 +2044,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             $result[] = $organizer->getName() . ($organizer->hasHomepage() ? ', ' . $organizer->getHomepage() : '');
         }
 
-        return implode(LF, $result);
+        return implode("\n", $result);
     }
 
     /**
@@ -2305,7 +2305,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
                 $padding = \str_pad('', $maxLength - \mb_strlen($currentLabel, 'utf-8'));
                 $result .= $currentLabel . ': ' . $padding . $value . "\n";
             } else {
-                $result .= $currentLabel . ':' . LF;
+                $result .= $currentLabel . ":\n";
             }
         }
 
@@ -3474,11 +3474,11 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
                 $result = '';
         }
 
-        $carriageReturnRemoved = (strpos($result, CR) === false)
+        $carriageReturnRemoved = (strpos($result, "\r") === false)
             ? $result
-            : str_replace(CR, LF, $result);
+            : str_replace("\r", "\n", $result);
 
-        return preg_replace('/\\x0a{2,}/', LF, $carriageReturnRemoved);
+        return preg_replace('/\\x0a{2,}/', "\n", $carriageReturnRemoved);
     }
 
     /**

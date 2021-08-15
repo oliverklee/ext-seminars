@@ -935,7 +935,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
 
         $this->setMarker('registration_data_heading', $this->createLabelForRegistrationElementOnConfirmationPage($key));
 
-        $fieldContent = str_replace(CR, '<br />', \htmlspecialchars($currentFormData, ENT_QUOTES | ENT_HTML5));
+        $fieldContent = str_replace("\r", '<br />', \htmlspecialchars($currentFormData, ENT_QUOTES | ENT_HTML5));
         $this->setMarker('registration_data_body', $fieldContent);
 
         return $this->getSubpart('REGISTRATION_CONFIRMATION_DATA');
@@ -1035,7 +1035,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
                         }
                     }
 
-                    $currentFormData = implode(', ', $userData) . CR . $currentFormData;
+                    $currentFormData = implode(', ', $userData) . "\r" . $currentFormData;
                 }
                 break;
             default:
@@ -1207,7 +1207,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
                 $wrappedFormData = '<span class="tx-seminars-billing-data-item tx-seminars-billing-data-item-' . $key . '">' .
                     $processedFormData . '</span>';
 
-                $result .= $wrappedLabel . ' ' . $wrappedFormData . '<br />' . LF;
+                $result .= $wrappedLabel . ' ' . $wrappedFormData . "<br />\n";
             }
         }
 
