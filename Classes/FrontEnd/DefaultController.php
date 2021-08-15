@@ -746,9 +746,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
         );
     }
 
-    /*
-     * Single view functions.
-     */
+    // Single view functions.
 
     /**
      * Displays detailed data for an event.
@@ -2892,9 +2890,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
         );
     }
 
-    /*
-     * Registration view functions.
-     */
+    // Registration view functions.
 
     /**
      * Creates the HTML for the registration page.

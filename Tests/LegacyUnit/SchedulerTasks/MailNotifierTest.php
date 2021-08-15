@@ -42,6 +42,7 @@ use TYPO3\CMS\Scheduler\Task\AbstractTask;
 class MailNotifierTest extends TestCase
 {
     use EmailTrait;
+
     use MakeInstanceTrait;
 
     /**
@@ -173,9 +174,7 @@ class MailNotifierTest extends TestCase
         $this->languageBackup = null;
     }
 
-    /*
-     * Utility functions
-     */
+    // Utility functions
 
     /**
      * Creates a seminar record and an organizer record and the relation
@@ -233,9 +232,7 @@ class MailNotifierTest extends TestCase
         return $children[0];
     }
 
-    /*
-     * Tests for the utility functions
-     */
+    // Tests for the utility functions
 
     /**
      * @test
@@ -335,9 +332,7 @@ class MailNotifierTest extends TestCase
         );
     }
 
-    /*
-     * Basic tests
-     */
+    // Basic tests
 
     /**
      * @test
@@ -470,9 +465,7 @@ class MailNotifierTest extends TestCase
         $this->registrationDigestProphecy->execute()->shouldHaveBeenCalled();
     }
 
-    /*
-     * Tests concerning sendEventTakesPlaceReminders
-     */
+    // Tests concerning sendEventTakesPlaceReminders
 
     /**
      * @test
@@ -736,9 +729,7 @@ class MailNotifierTest extends TestCase
         $this->subject->sendEventTakesPlaceReminders();
     }
 
-    /*
-     * Tests concerning sendCancellationDeadlineReminders
-     */
+    // Tests concerning sendCancellationDeadlineReminders
 
     /**
      * @test
@@ -1218,9 +1209,7 @@ class MailNotifierTest extends TestCase
         );
     }
 
-    /*
-     * * attached CSV
-     */
+    // attached CSV
 
     /**
      * @test
@@ -1466,9 +1455,7 @@ class MailNotifierTest extends TestCase
         );
     }
 
-    /*
-     * * customized subject
-     */
+    // customized subject
 
     /**
      * @test
@@ -1517,9 +1504,7 @@ class MailNotifierTest extends TestCase
         );
     }
 
-    /*
-     * * customized message
-     */
+    // customized message
 
     /**
      * @test

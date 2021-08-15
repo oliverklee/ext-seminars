@@ -103,9 +103,7 @@ final class RegistrationTest extends FunctionalTestCase
         self::assertSame(1, $event->getUid());
     }
 
-    /*
-     * Tests concerning getUserData
-     */
+    // Tests concerning getUserData
 
     /**
      * @test
@@ -157,9 +155,7 @@ final class RegistrationTest extends FunctionalTestCase
         self::assertSame('Group 2, Group 1', $result);
     }
 
-    /*
-     * Tests concerning dumpUserValues
-     */
+    // Tests concerning dumpUserValues
 
     /**
      * @test
@@ -527,9 +523,7 @@ final class RegistrationTest extends FunctionalTestCase
         self::assertContains('Group 2, Group 1', $result);
     }
 
-    /*
-     * Tests regarding the billing address
-     */
+    // Tests regarding the billing address
 
     /**
      * @test

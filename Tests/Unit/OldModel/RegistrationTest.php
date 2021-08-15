@@ -286,9 +286,7 @@ final class RegistrationTest extends UnitTestCase
         self::assertSame($value, $result);
     }
 
-    /*
-     * Tests regarding the billing address
-     */
+    // Tests regarding the billing address
 
     /**
      * @test

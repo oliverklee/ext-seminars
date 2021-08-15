@@ -77,9 +77,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
         ]);
     }
 
-    /*
-     * Test for getting the time.
-     */
+    // Test for getting the time.
 
     /**
      * @test
@@ -244,9 +242,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
         );
     }
 
-    /*
-     * Test for getting the date.
-     */
+    // Test for getting the date.
 
     /**
      * @test

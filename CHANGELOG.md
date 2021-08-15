@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Allow installations up to PHP 8.0 (#758)
 
 ### Changed
+- Update the php-cs-fixer configuration (#773)
 - Update the `.editorconfig` to better match the Core (#739)
 - Require oelib >= 3.3.0 (#737, #738)
 

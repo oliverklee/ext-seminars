@@ -56,9 +56,7 @@ class EventBagBuilderTest extends TestCase
         \Tx_Seminars_Service_RegistrationManager::purgeInstance();
     }
 
-    /*
-     * Tests for the basic builder functions.
-     */
+    // Tests for the basic builder functions.
 
     public function testBuilderBuildsABag()
     {
@@ -5418,9 +5416,7 @@ class EventBagBuilderTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning limitToEarliestBeginOrEndDate
-     */
+    // Tests concerning limitToEarliestBeginOrEndDate
 
     /**
      * @test
@@ -5526,9 +5522,7 @@ class EventBagBuilderTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning limitToLatestBeginOrEndDate
-     */
+    // Tests concerning limitToLatestBeginOrEndDate
 
     /**
      * @test

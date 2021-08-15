@@ -67,9 +67,7 @@ final class SalutationTest extends TestCase
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
     }
 
-    /*
-     * Utility functions
-     */
+    // Utility functions
 
     /**
      * Creates an FE-user with the given gender and the name "Foo".
@@ -104,9 +102,7 @@ final class SalutationTest extends TestCase
         }
     }
 
-    /*
-     * Tests concerning the utility functions
-     */
+    // Tests concerning the utility functions
 
     /**
      * @test
@@ -129,9 +125,7 @@ final class SalutationTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning getSalutation
-     */
+    // Tests concerning getSalutation
 
     /**
      * @test
@@ -355,9 +349,7 @@ final class SalutationTest extends TestCase
         self::assertNotContains('formal', $string);
     }
 
-    /*
-     * Tests concerning the hooks
-     */
+    // Tests concerning the hooks
 
     /**
      * @test
@@ -407,9 +399,7 @@ final class SalutationTest extends TestCase
         $this->subject->getSalutation($frontendUser);
     }
 
-    /*
-     * Tests concerning createIntroduction
-     */
+    // Tests concerning createIntroduction
 
     /**
      * @test

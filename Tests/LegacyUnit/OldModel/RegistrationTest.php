@@ -111,9 +111,7 @@ final class RegistrationTest extends TestCase
         \Tx_Seminars_Service_RegistrationManager::purgeInstance();
     }
 
-    /*
-     * Utility functions.
-     */
+    // Utility functions.
 
     /**
      * Inserts a payment method record into the database and creates a relation
@@ -132,9 +130,7 @@ final class RegistrationTest extends TestCase
         return $uid;
     }
 
-    /*
-     * Tests for the utility functions.
-     */
+    // Tests for the utility functions.
 
     /**
      * @test
@@ -165,9 +161,7 @@ final class RegistrationTest extends TestCase
         self::assertTrue($this->subject->isOk());
     }
 
-    /*
-     * Tests concerning the payment method in setRegistrationData
-     */
+    // Tests concerning the payment method in setRegistrationData
 
     /**
      * @test
@@ -217,9 +211,7 @@ final class RegistrationTest extends TestCase
         );
     }
 
-    /*
-     * Tests regarding the registration queue.
-     */
+    // Tests regarding the registration queue.
 
     /**
      * @test
@@ -258,9 +250,7 @@ final class RegistrationTest extends TestCase
         );
     }
 
-    /*
-     * Tests regarding getting the registration data.
-     */
+    // Tests regarding getting the registration data.
 
     /**
      * @test
@@ -377,9 +367,7 @@ final class RegistrationTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning dumpAttendanceValues
-     */
+    // Tests concerning dumpAttendanceValues
 
     /**
      * @test
@@ -549,9 +537,7 @@ final class RegistrationTest extends TestCase
         self::assertNotContains('::', $result);
     }
 
-    /*
-     * Tests regarding committing registrations to the database.
-     */
+    // Tests regarding committing registrations to the database.
 
     /**
      * @test
@@ -708,9 +694,7 @@ final class RegistrationTest extends TestCase
         );
     }
 
-    /*
-     * Tests regarding the cached seminars.
-     */
+    // Tests regarding the cached seminars.
 
     /**
      * @test
@@ -742,9 +726,7 @@ final class RegistrationTest extends TestCase
         );
     }
 
-    /*
-     * Tests for setting and getting the user data
-     */
+    // Tests for setting and getting the user data
 
     /**
      * @test
@@ -763,9 +745,7 @@ final class RegistrationTest extends TestCase
         );
     }
 
-    /*
-     * Tests for isPaid()
-     */
+    // Tests for isPaid()
 
     /**
      * @test
@@ -801,9 +781,7 @@ final class RegistrationTest extends TestCase
         );
     }
 
-    /*
-     * Tests regarding hasExistingFrontEndUser().
-     */
+    // Tests regarding hasExistingFrontEndUser().
 
     /**
      * @test
@@ -843,9 +821,7 @@ final class RegistrationTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning setRegistrationData
-     */
+    // Tests concerning setRegistrationData
 
     /**
      * @test
@@ -1057,9 +1033,7 @@ final class RegistrationTest extends TestCase
         );
     }
 
-    /*
-     * Tests regarding the seats.
-     */
+    // Tests regarding the seats.
 
     /**
      * @test
@@ -1135,9 +1109,7 @@ final class RegistrationTest extends TestCase
         );
     }
 
-    /*
-     * Tests regarding the attendees names.
-     */
+    // Tests regarding the attendees names.
 
     /**
      * @test
@@ -1185,9 +1157,7 @@ final class RegistrationTest extends TestCase
         );
     }
 
-    /*
-     * Tests regarding the kids.
-     */
+    // Tests regarding the kids.
 
     /**
      * @test
@@ -1263,9 +1233,7 @@ final class RegistrationTest extends TestCase
         );
     }
 
-    /*
-     * Tests regarding the price.
-     */
+    // Tests regarding the price.
 
     /**
      * @test
@@ -1313,9 +1281,7 @@ final class RegistrationTest extends TestCase
         );
     }
 
-    /*
-     * Tests regarding the total price.
-     */
+    // Tests regarding the total price.
 
     /**
      * @test
@@ -1364,9 +1330,7 @@ final class RegistrationTest extends TestCase
         );
     }
 
-    /*
-     * Tests regarding the method of payment.
-     */
+    // Tests regarding the method of payment.
 
     /**
      * @test
@@ -1442,9 +1406,7 @@ final class RegistrationTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning getEnumeratedAttendeeNames
-     */
+    // Tests concerning getEnumeratedAttendeeNames
 
     /**
      * @test
@@ -1556,9 +1518,7 @@ final class RegistrationTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning the food
-     */
+    // Tests concerning the food
 
     /**
      * @test
@@ -1602,9 +1562,7 @@ final class RegistrationTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning the accommodation
-     */
+    // Tests concerning the accommodation
 
     /**
      * @test
@@ -1648,9 +1606,7 @@ final class RegistrationTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning the interests
-     */
+    // Tests concerning the interests
 
     /**
      * @test

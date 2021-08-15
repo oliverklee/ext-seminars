@@ -1074,9 +1074,7 @@ class EventMapperTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning findForAutomaticStatusChange
-     */
+    // Tests concerning findForAutomaticStatusChange
 
     /**
      * @test

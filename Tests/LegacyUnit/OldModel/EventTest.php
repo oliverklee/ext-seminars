@@ -107,9 +107,7 @@ final class EventTest extends TestCase
         \Tx_Seminars_Service_RegistrationManager::purgeInstance();
     }
 
-    /*
-     * Utility functions
-     */
+    // Utility functions
 
     /**
      * Creates a fake front end and a pi1 instance in $this->pi1.
@@ -430,9 +428,7 @@ final class EventTest extends TestCase
         return $uid;
     }
 
-    /*
-     * Tests for the utility functions
-     */
+    // Tests for the utility functions
 
     /**
      * @test
@@ -1043,9 +1039,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests for some basic functionality
-     */
+    // Tests for some basic functionality
 
     /**
      * @test
@@ -1057,9 +1051,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning getTitle
-     */
+    // Tests concerning getTitle
 
     /**
      * @test
@@ -1120,9 +1112,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests regarding the ability to register for an event
-     */
+    // Tests regarding the ability to register for an event
 
     /**
      * @test
@@ -1360,9 +1350,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning canSomebodyRegisterMessage
-     */
+    // Tests concerning canSomebodyRegisterMessage
 
     /**
      * @test
@@ -1591,9 +1579,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests regarding the language of an event
-     */
+    // Tests regarding the language of an event
 
     /**
      * @test
@@ -1772,9 +1758,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests regarding the registration.
-     */
+    // Tests regarding the registration.
 
     /**
      * @test
@@ -1800,9 +1784,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning hasUnlimitedVacancies
-     */
+    // Tests concerning hasUnlimitedVacancies
 
     /**
      * @test
@@ -1856,9 +1838,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning isFull
-     */
+    // Tests concerning isFull
 
     /**
      * @test
@@ -1942,9 +1922,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests regarding the unregistration and the queue
-     */
+    // Tests regarding the unregistration and the queue
 
     /**
      * @test
@@ -2033,9 +2011,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning isUnregistrationPossible()
-     */
+    // Tests concerning isUnregistrationPossible()
 
     /**
      * @test
@@ -2352,9 +2328,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning getUnregistrationDeadlineFromModelAndConfiguration
-     */
+    // Tests concerning getUnregistrationDeadlineFromModelAndConfiguration
 
     /**
      * @test
@@ -2461,9 +2435,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning hasRegistrationQueue
-     */
+    // Tests concerning hasRegistrationQueue
 
     /**
      * @test
@@ -2489,9 +2461,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning getAttendancesOnRegistrationQueue
-     */
+    // Tests concerning getAttendancesOnRegistrationQueue
 
     /**
      * @test
@@ -2626,9 +2596,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests regarding the country field of the place records
-     */
+    // Tests regarding the country field of the place records
 
     /**
      * @test
@@ -2918,9 +2886,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests regarding the target groups
-     */
+    // Tests regarding the target groups
 
     /**
      * @test
@@ -2986,9 +2952,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests regarding the payment methods
-     */
+    // Tests regarding the payment methods
 
     /**
      * @test
@@ -3109,9 +3073,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning getPaymentMethodsPlainShort
-     */
+    // Tests concerning getPaymentMethodsPlainShort
 
     /**
      * @test
@@ -3184,9 +3146,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning getSinglePaymentMethodPlain
-     */
+    // Tests concerning getSinglePaymentMethodPlain
 
     /**
      * @test
@@ -3279,9 +3239,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests regarding the event type
-     */
+    // Tests regarding the event type
 
     /**
      * @test
@@ -3476,9 +3434,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests regarding the organizing partners
-     */
+    // Tests regarding the organizing partners
 
     /**
      * @test
@@ -3538,9 +3494,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests regarding the categories
-     */
+    // Tests regarding the categories
 
     /**
      * @test
@@ -3653,9 +3607,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests regarding the time slots
-     */
+    // Tests regarding the time slots
 
     /**
      * @test
@@ -3690,9 +3642,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests regarding the organizers
-     */
+    // Tests regarding the organizers
 
     /**
      * @test
@@ -3752,9 +3702,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning getOrganizers
-     */
+    // Tests concerning getOrganizers
 
     /**
      * @test
@@ -3823,9 +3771,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning getOrganizersRaw
-     */
+    // Tests concerning getOrganizersRaw
 
     /**
      * @test
@@ -3948,9 +3894,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning getOrganizersNameAndEmail
-     */
+    // Tests concerning getOrganizersNameAndEmail
 
     /**
      * @test
@@ -4042,9 +3986,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning getOrganizersFooter
-     */
+    // Tests concerning getOrganizersFooter
 
     /**
      * @test
@@ -4115,9 +4057,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning getFirstOrganizer
-     */
+    // Tests concerning getFirstOrganizer
 
     /**
      * @test
@@ -4156,9 +4096,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning getAttendancesPid
-     */
+    // Tests concerning getAttendancesPid
 
     /**
      * @test
@@ -4196,9 +4134,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests regarding getOrganizerBag().
-     */
+    // Tests regarding getOrganizerBag().
 
     /**
      * @test
@@ -4225,9 +4161,7 @@ final class EventTest extends TestCase
         self::assertInstanceOf(\Tx_Seminars_Bag_Organizer::class, $this->subject->getOrganizerBag());
     }
 
-    /*
-     * Tests regarding the speakers
-     */
+    // Tests regarding the speakers
 
     /**
      * @test
@@ -4502,9 +4436,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning getSpeakersWithDescriptionRaw
-     */
+    // Tests concerning getSpeakersWithDescriptionRaw
 
     /**
      * @test
@@ -4779,9 +4711,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning getSpeakersShort
-     */
+    // Tests concerning getSpeakersShort
 
     /**
      * @test
@@ -4922,9 +4852,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Test concerning the collision check
-     */
+    // Test concerning the collision check
 
     /**
      * @test
@@ -5308,9 +5236,7 @@ final class EventTest extends TestCase
         self::assertFalse($this->subject->isUserBlocked($userUid));
     }
 
-    /*
-     * Tests for the icons
-     */
+    // Tests for the icons
 
     /**
      * @test
@@ -5468,9 +5394,7 @@ final class EventTest extends TestCase
         self::assertContains('overlay-endtime.svg', $this->subject->getRecordIcon());
     }
 
-    /*
-     * Tests for hasSeparateDetailsPage
-     */
+    // Tests for hasSeparateDetailsPage
 
     /**
      * @test
@@ -5521,9 +5445,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests for getDetailsPage
-     */
+    // Tests for getDetailsPage
 
     /**
      * @test
@@ -5578,9 +5500,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning getPlaceWithDetails
-     */
+    // Tests concerning getPlaceWithDetails
 
     /**
      * @test
@@ -5731,9 +5651,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning getPlaceWithDetailsRaw
-     */
+    // Tests concerning getPlaceWithDetailsRaw
 
     /**
      * @test
@@ -5874,9 +5792,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests for getPlaceShort
-     */
+    // Tests for getPlaceShort
 
     /**
      * @test
@@ -5924,9 +5840,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning getPlaces
-     */
+    // Tests concerning getPlaces
 
     /**
      * @test
@@ -5959,9 +5873,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning isOwnerFeUser
-     */
+    // Tests concerning isOwnerFeUser
 
     /**
      * @test
@@ -6002,9 +5914,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning getOwner
-     */
+    // Tests concerning getOwner
 
     /**
      * @test
@@ -6043,9 +5953,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning hasOwner
-     */
+    // Tests concerning hasOwner
 
     /**
      * @test
@@ -6071,9 +5979,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning getVacanciesString
-     */
+    // Tests concerning getVacanciesString
 
     /**
      * @test
@@ -6209,9 +6115,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests for the getImage function
-     */
+    // Tests for the getImage function
 
     /**
      * @test
@@ -6237,9 +6141,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests for the hasImage function
-     */
+    // Tests for the hasImage function
 
     /**
      * @test
@@ -6263,9 +6165,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests for getLanguageKeySuffixForType
-     */
+    // Tests for getLanguageKeySuffixForType
 
     /**
      * @test
@@ -6439,9 +6339,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning hasRequirements
-     */
+    // Tests concerning hasRequirements
 
     /**
      * @test
@@ -6586,9 +6484,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning hasDependencies
-     */
+    // Tests concerning hasDependencies
 
     /**
      * @test
@@ -6751,9 +6647,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning getRequirements
-     */
+    // Tests concerning getRequirements
 
     /**
      * @test
@@ -6884,9 +6778,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning getDependencies
-     */
+    // Tests concerning getDependencies
 
     /**
      * @test
@@ -7034,9 +6926,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning isConfirmed
-     */
+    // Tests concerning isConfirmed
 
     /**
      * @test
@@ -7074,9 +6964,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning isCanceled
-     */
+    // Tests concerning isCanceled
 
     /**
      * @test
@@ -7114,9 +7002,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning isPlanned
-     */
+    // Tests concerning isPlanned
 
     /**
      * @test
@@ -7154,9 +7040,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning setEventTakesPlaceReminderSentFlag
-     */
+    // Tests concerning setEventTakesPlaceReminderSentFlag
 
     /**
      * @test
@@ -7172,9 +7056,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning setCancelationDeadlineReminderSentFlag
-     */
+    // Tests concerning setCancelationDeadlineReminderSentFlag
 
     /**
      * @test
@@ -7190,9 +7072,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning getCancelationDeadline
-     */
+    // Tests concerning getCancelationDeadline
 
     /**
      * @test
@@ -7282,9 +7162,7 @@ final class EventTest extends TestCase
         $this->subject->getCancelationDeadline();
     }
 
-    /*
-     * Tests concerning the license expiry
-     */
+    // Tests concerning the license expiry
 
     /**
      * @test
@@ -7332,9 +7210,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning getEventData
-     */
+    // Tests concerning getEventData
 
     /**
      * @test
@@ -7622,9 +7498,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning dumpSeminarValues
-     */
+    // Tests concerning dumpSeminarValues
 
     /**
      * @test
@@ -7786,9 +7660,7 @@ final class EventTest extends TestCase
         self::assertNotContains('::', $result);
     }
 
-    /*
-     * Tests regarding the registration begin date
-     */
+    // Tests regarding the registration begin date
 
     /**
      * @test
@@ -7872,9 +7744,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests regarding the description.
-     */
+    // Tests regarding the description.
 
     /**
      * @test
@@ -7922,9 +7792,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests regarding the additional information.
-     */
+    // Tests regarding the additional information.
 
     /**
      * @test
@@ -7972,9 +7840,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning getLatestPossibleRegistrationTime
-     */
+    // Tests concerning getLatestPossibleRegistrationTime
 
     /**
      * @test
@@ -8117,9 +7983,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning getTopicInteger
-     */
+    // Tests concerning getTopicInteger
 
     /**
      * @test
@@ -8162,9 +8026,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning hasTopicInteger
-     */
+    // Tests concerning hasTopicInteger
 
     /**
      * @test
@@ -8256,9 +8118,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning the publication status
-     */
+    // Tests concerning the publication status
 
     /**
      * @test
@@ -8313,9 +8173,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning canViewRegistrationsList
-     */
+    // Tests concerning canViewRegistrationsList
 
     /**
      * Data provider for testing the canViewRegistrationsList function
@@ -9062,9 +8920,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning canViewRegistrationsListMessage
-     */
+    // Tests concerning canViewRegistrationsListMessage
 
     /**
      * @test
@@ -9274,9 +9130,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning hasAnyPrice
-     */
+    // Tests concerning hasAnyPrice
 
     /**
      * Data provider for hasAnyPriceWithDataProvider.
@@ -9450,9 +9304,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests regarding the flag for organizers having been notified about enough attendees.
-     */
+    // Tests regarding the flag for organizers having been notified about enough attendees.
 
     /**
      * @test
@@ -9492,9 +9344,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests regarding the flag for organizers having been notified about enough attendees.
-     */
+    // Tests regarding the flag for organizers having been notified about enough attendees.
 
     /**
      * @test
@@ -9534,9 +9384,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests regarding the flag for automatic cancelation/confirmation
-     */
+    // Tests regarding the flag for automatic cancelation/confirmation
 
     /**
      * @test
@@ -9564,9 +9412,7 @@ final class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests regarding the number of associated registration records
-     */
+    // Tests regarding the number of associated registration records
 
     /**
      * @test
@@ -9617,9 +9463,7 @@ final class EventTest extends TestCase
         self::assertSame(3, $subject->getNumberOfAssociatedRegistrationRecords());
     }
 
-    /*
-     * Tests concerning the price
-     */
+    // Tests concerning the price
 
     /**
      * @test

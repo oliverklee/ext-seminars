@@ -63,9 +63,7 @@ class RequirementsListTest extends TestCase
         return $GLOBALS['TSFE'];
     }
 
-    /*
-     * Tests for the render function
-     */
+    // Tests for the render function
 
     /**
      * @test
@@ -192,9 +190,7 @@ class RequirementsListTest extends TestCase
         );
     }
 
-    /*
-     * Tests for limiting the results
-     */
+    // Tests for limiting the results
 
     /**
      * @test

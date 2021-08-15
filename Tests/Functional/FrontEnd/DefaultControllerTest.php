@@ -71,9 +71,7 @@ final class DefaultControllerTest extends FunctionalTestCase
         return $frontEndController;
     }
 
-    /*
-     * Tests concerning the plugin definition
-     */
+    // Tests concerning the plugin definition
 
     private function getContentRenderingConfiguration(): string
     {
@@ -139,9 +137,7 @@ final class DefaultControllerTest extends FunctionalTestCase
         );
     }
 
-    /*
-     * Tests concerning the list view
-     */
+    // Tests concerning the list view
 
     private function buildSubjectForListView(string $fixtureFileName): TestingDefaultController
     {

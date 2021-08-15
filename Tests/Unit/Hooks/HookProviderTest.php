@@ -46,9 +46,7 @@ final class HookProviderTest extends UnitTestCase
         parent::tearDown();
     }
 
-    /*
-     * Utility functions.
-     */
+    // Utility functions.
 
     /**
      * Creates a TestingHookInterface implementor object.
@@ -86,9 +84,7 @@ final class HookProviderTest extends UnitTestCase
         return new HookProvider(TestingHookInterface::class, $index);
     }
 
-    /*
-     * Tests concerning the TestingHookImplementor.
-     */
+    // Tests concerning the TestingHookImplementor.
 
     /**
      * @test
@@ -133,9 +129,7 @@ final class HookProviderTest extends UnitTestCase
         self::assertSame(1, TestingHookImplementor::$wasCalled);
     }
 
-    /*
-     * Tests concerning the TestingHookImplementor2.
-     */
+    // Tests concerning the TestingHookImplementor2.
 
     /**
      * @test
@@ -180,9 +174,7 @@ final class HookProviderTest extends UnitTestCase
         self::assertSame(1, TestingHookImplementor2::$wasCalled);
     }
 
-    /*
-     * Tests concerning the Hook object.
-     */
+    // Tests concerning the Hook object.
 
     /**
      * @test
@@ -233,9 +225,7 @@ final class HookProviderTest extends UnitTestCase
         self::assertInstanceOf(HookProvider::class, $this->createHookObject('anyIndex'));
     }
 
-    /*
-     * Tests concerning Hook::executeHook().
-     */
+    // Tests concerning Hook::executeHook().
 
     /**
      * @test
@@ -365,9 +355,7 @@ final class HookProviderTest extends UnitTestCase
         self::assertSame(1, TestingHookImplementor2::$wasCalled);
     }
 
-    /*
-     * Tests concerning Hook::executeHookReturningMergedArray().
-     */
+    // Tests concerning Hook::executeHookReturningMergedArray().
 
     /**
      * @test
@@ -467,9 +455,7 @@ final class HookProviderTest extends UnitTestCase
         );
     }
 
-    /*
-     * Tests concerning Hook::executeHookReturningModifiedValue().
-     */
+    // Tests concerning Hook::executeHookReturningModifiedValue().
 
     /**
      * @test

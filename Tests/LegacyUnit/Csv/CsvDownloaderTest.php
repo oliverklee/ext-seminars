@@ -72,9 +72,7 @@ class CsvDownloaderTest extends TestCase
         $this->restoreOriginalEnvironment();
     }
 
-    /*
-     * Utility functions
-     */
+    // Utility functions
 
     private function getLanguageService(): LanguageService
     {
@@ -93,9 +91,7 @@ class CsvDownloaderTest extends TestCase
         return \rtrim($this->getLanguageService()->getLL($key), ':');
     }
 
-    /*
-     * Tests for the CSV export of events.
-     */
+    // Tests for the CSV export of events.
 
     /**
      * @test
@@ -429,9 +425,7 @@ class CsvDownloaderTest extends TestCase
         );
     }
 
-    /*
-     * Tests for the CSV export of registrations.
-     */
+    // Tests for the CSV export of registrations.
 
     /**
      * @test
@@ -609,9 +603,7 @@ class CsvDownloaderTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning the main function
-     */
+    // Tests concerning the main function
 
     /**
      * @test
@@ -781,9 +773,7 @@ class CsvDownloaderTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning createAndOutputListOfRegistrations
-     */
+    // Tests concerning createAndOutputListOfRegistrations
 
     /**
      * @test
@@ -1293,9 +1283,7 @@ class CsvDownloaderTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning the export mode and the configuration
-     */
+    // Tests concerning the export mode and the configuration
 
     /**
      * @test

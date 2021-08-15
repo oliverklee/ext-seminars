@@ -117,9 +117,7 @@ class AbstractRegistrationListViewTest extends TestCase
         $this->testingFramework->cleanUp();
     }
 
-    /*
-     * Utility functions
-     */
+    // Utility functions
 
     private function getLanguageService(): LanguageService
     {
@@ -161,9 +159,7 @@ class AbstractRegistrationListViewTest extends TestCase
         $this->mockedClassNames = [];
     }
 
-    /*
-     * Tests for the utility functions
-     */
+    // Tests for the utility functions
 
     /**
      * @test

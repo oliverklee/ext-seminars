@@ -69,9 +69,7 @@ class CategoryListTest extends TestCase
         return $GLOBALS['TSFE'];
     }
 
-    /*
-     * Tests for render
-     */
+    // Tests for render
 
     public function testRenderCreatesCategoryListContainingTwoCategoryTitles()
     {
@@ -392,9 +390,7 @@ class CategoryListTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning createCategoryList
-     */
+    // Tests concerning createCategoryList
 
     public function testCreateCategoryListWithNoGivenCategoriesReturnsEmptyString()
     {

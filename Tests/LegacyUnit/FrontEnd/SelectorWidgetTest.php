@@ -1762,9 +1762,7 @@ class SelectorWidgetTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning the category search widget
-     */
+    // Tests concerning the category search widget
 
     /**
      * @test
@@ -2099,9 +2097,7 @@ class SelectorWidgetTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning the rendering of the category option box
-     */
+    // Tests concerning the rendering of the category option box
 
     /**
      * @test
