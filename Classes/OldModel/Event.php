@@ -9,9 +9,11 @@ use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Mapper\FrontEndUserMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\FrontEndUser;
+use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Oelib\ViewHelpers\PriceViewHelper;
 use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
+use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
@@ -4025,7 +4027,12 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         $topic = $this->getTopic();
         $allFiles = $topic instanceof \Tx_Seminars_OldModel_Event ? $topic->getAttachedFiles($plugin) : [];
 
-        $uploadFolderPath = PATH_site . 'uploads/tx_seminars/';
+        if (Typo3Version::isNotHigherThan(8)) {
+            // @phpstan-ignore-next-line We run the PHPStan checks with TYPO3 9LTS, and this code is for 8 only.
+            $uploadFolderPath = PATH_site . 'uploads/tx_seminars/';
+        } else {
+            $uploadFolderPath = Environment::getPublicPath() . '/uploads/tx_seminars/';
+        }
         $uploadFolderUrl = GeneralUtility::getIndpEnv('TYPO3_SITE_URL') . 'uploads/tx_seminars/';
         $fileNamesFromSelf = GeneralUtility::trimExplode(',', $this->getRecordPropertyString('attached_files'), true);
         foreach ($fileNamesFromSelf as $fileName) {

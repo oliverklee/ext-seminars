@@ -21,11 +21,6 @@ parameters:
 			path: Classes/Model/Registration.php
 
 		-
-			message: "#^Constant PATH_site not found\\.$#"
-			count: 1
-			path: Classes/OldModel/Event.php
-
-		-
 			message: "#^Binary operation \"\\*\" between int\\<1, max\\> and string results in an error\\.$#"
 			count: 1
 			path: Classes/OldModel/Registration.php

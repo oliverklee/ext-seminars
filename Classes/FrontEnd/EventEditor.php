@@ -14,9 +14,11 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\AbstractModel;
 use OliverKlee\Oelib\Model\BackEndUser;
 use OliverKlee\Oelib\Model\Country;
+use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Visibility\Tree;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
+use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -1074,7 +1076,13 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      */
     private function purgeUploadedFile(string $fileName)
     {
-        @unlink(PATH_site . 'uploads/tx_seminars/' . $fileName);
+        if (Typo3Version::isNotHigherThan(8)) {
+            // @phpstan-ignore-next-line We run the PHPStan checks with TYPO3 9LTS, and this code is for 8 only.
+            $fullPath = PATH_site . 'uploads/tx_seminars/' . $fileName;
+        } else {
+            $fullPath = Environment::getPublicPath() . '/uploads/tx_seminars/' . $fileName;
+        }
+        @unlink($fullPath);
         $keyToPurge = array_search($fileName, $this->attachedFiles, true);
         if ($keyToPurge !== false) {
             /** @var string|int $keyToPurge */
