@@ -20,6 +20,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop the `approved` flag from locallang labels (#745)
 
 ### Fixed
+- Fix PHPStan level 0 warnings (#775)
 - Add a missing comma in a language label (#771)
 - Drop reference to a removed feature from the manual (#755)
 - Fix ReST rendering warnings in the documentation (#750)
