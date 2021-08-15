@@ -1,7 +1,342 @@
 parameters:
 	ignoreErrors:
 		-
+			message: "#^PHPDoc tag @return with type Tx_Seminars_OldModel_Event\\|null is not subtype of native type Tx_Seminars_OldModel_Event\\.$#"
+			count: 1
+			path: Classes/FrontEnd/DefaultController.php
+
+		-
+			message: "#^PHPDoc tag @return with type Tx_Seminars_OldModel_Registration\\|null is not subtype of native type Tx_Seminars_OldModel_Registration\\.$#"
+			count: 1
+			path: Classes/FrontEnd/DefaultController.php
+
+		-
+			message: "#^PHPDoc tag @param has invalid value \\(string\\[\\] &\\$options options, may be empty\\)\\: Unexpected token \"&\", expected variable at offset 600$#"
+			count: 1
+			path: Classes/FrontEnd/SelectorWidget.php
+
+		-
+			message: "#^PHPDoc tag @return with type Tx_Seminars_Model_Event\\|null is not subtype of native type Tx_Seminars_Model_Event\\.$#"
+			count: 1
+			path: Classes/Model/Registration.php
+
+		-
 			message: "#^Constant PATH_site not found\\.$#"
 			count: 1
 			path: Classes/OldModel/Event.php
+
+		-
+			message: "#^Binary operation \"\\*\" between int\\<1, max\\> and string results in an error\\.$#"
+			count: 1
+			path: Classes/OldModel/Registration.php
+
+		-
+			message: "#^Cannot call method willReturn\\(\\) on bool\\.$#"
+			count: 1
+			path: Tests/Functional/FrontEnd/CategoryListTest.php
+
+		-
+			message: "#^Cannot call method willReturn\\(\\) on bool\\.$#"
+			count: 1
+			path: Tests/Functional/Model/SpeakerTest.php
+
+		-
+			message: "#^Cannot call method willReturn\\(\\) on bool\\.$#"
+			count: 1
+			path: Tests/Functional/OldModel/SpeakerTest.php
+
+		-
+			message: "#^Access to an undefined property PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\:\\:\\$user\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/AbstractEventMailFormTest.php
+
+		-
+			message: "#^Call to an undefined method OliverKlee\\\\Oelib\\\\Interfaces\\\\Configuration\\:\\:setAsBoolean\\(\\)\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/AbstractEventMailFormTest.php
+
+		-
+			message: "#^Call to an undefined method OliverKlee\\\\Oelib\\\\Interfaces\\\\Configuration\\:\\:setAsBoolean\\(\\)\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/AbstractModuleTest.php
+
+		-
+			message: "#^Access to an undefined property PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\:\\:\\$user\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/CancelEventMailFormTest.php
+
+		-
+			message: "#^Call to an undefined method OliverKlee\\\\Oelib\\\\Interfaces\\\\Configuration\\:\\:setAsBoolean\\(\\)\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/CancelEventMailFormTest.php
+
+		-
+			message: "#^Access to an undefined property PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\:\\:\\$user\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/ConfirmEventMailFormTest.php
+
+		-
+			message: "#^Call to an undefined method OliverKlee\\\\Oelib\\\\Interfaces\\\\Configuration\\:\\:setAsBoolean\\(\\)\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/ConfirmEventMailFormTest.php
+
+		-
+			message: "#^Access to an undefined property PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\:\\:\\$user\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/ControllerTest.php
+
+		-
+			message: "#^Call to an undefined method OliverKlee\\\\Oelib\\\\Interfaces\\\\Configuration\\:\\:setAsBoolean\\(\\)\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/ControllerTest.php
+
+		-
+			message: "#^Call to an undefined method Psr\\\\Http\\\\Message\\\\StreamInterface\\:\\:shouldBeCalled\\(\\)\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/ControllerTest.php
+
+		-
+			message: "#^Cannot call method shouldBeCalled\\(\\) on int\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/ControllerTest.php
+
+		-
+			message: "#^Cannot call method shouldBeCalled\\(\\) on string\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/ControllerTest.php
+
+		-
+			message: "#^Access to an undefined property PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\:\\:\\$user\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/EventsListTest.php
+
+		-
+			message: "#^Call to an undefined method OliverKlee\\\\Oelib\\\\Interfaces\\\\Configuration\\:\\:setAsBoolean\\(\\)\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/EventsListTest.php
+
+		-
+			message: "#^Access to an undefined property PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\:\\:\\$user\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/GeneralEventMailFormTest.php
+
+		-
+			message: "#^Call to an undefined method OliverKlee\\\\Oelib\\\\Interfaces\\\\Configuration\\:\\:setAsBoolean\\(\\)\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/GeneralEventMailFormTest.php
+
+		-
+			message: "#^Access to an undefined property PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\:\\:\\$user\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/OrganizersListTest.php
+
+		-
+			message: "#^Call to an undefined method OliverKlee\\\\Oelib\\\\Interfaces\\\\Configuration\\:\\:setAsBoolean\\(\\)\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/OrganizersListTest.php
+
+		-
+			message: "#^Access to an undefined property PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\:\\:\\$user\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/RegistrationsListTest.php
+
+		-
+			message: "#^Call to an undefined method OliverKlee\\\\Oelib\\\\Interfaces\\\\Configuration\\:\\:setAsBoolean\\(\\)\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/RegistrationsListTest.php
+
+		-
+			message: "#^Access to an undefined property PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\:\\:\\$user\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/SpeakersListTest.php
+
+		-
+			message: "#^Call to an undefined method OliverKlee\\\\Oelib\\\\Interfaces\\\\Configuration\\:\\:setAsBoolean\\(\\)\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/SpeakersListTest.php
+
+		-
+			message: "#^Call to an undefined method OliverKlee\\\\Oelib\\\\Interfaces\\\\Configuration\\:\\:setAsBoolean\\(\\)\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/ConfigCheckTest.php
+
+		-
+			message: "#^Call to an undefined method PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\:\\:setEventUid\\(\\)\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/Csv/AbstractRegistrationListViewTest.php
+
+		-
+			message: "#^Access to an undefined property PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\:\\:\\$user\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
+
+		-
+			message: "#^Call to an undefined method OliverKlee\\\\Oelib\\\\Interfaces\\\\Configuration\\:\\:setAsBoolean\\(\\)\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
+
+		-
+			message: "#^Call to an undefined method OliverKlee\\\\Oelib\\\\Interfaces\\\\Configuration\\:\\:setAsString\\(\\)\\.$#"
+			count: 8
+			path: Tests/LegacyUnit/Email/SalutationTest.php
+
+		-
+			message:
+				"""
+					#^PHPDoc tag @param has invalid value \\(int
+					       \\$offlineRegistrations the number of offline registrations for this
+					       event, must be \\>\\= 0\\)\\: Unexpected token "\\\\n     \\* ", expected variable at offset 77$#
+				"""
+			count: 1
+			path: Tests/LegacyUnit/Fixtures/OldModel/TestingEvent.php
+
+		-
+			message: "#^Call to an undefined method OliverKlee\\\\Oelib\\\\Interfaces\\\\Configuration\\:\\:setAsBoolean\\(\\)\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/CategoryListTest.php
+
+		-
+			message: "#^Call to an undefined method OliverKlee\\\\Oelib\\\\Interfaces\\\\Configuration\\:\\:setAsBoolean\\(\\)\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/CountdownTest.php
+
+		-
+			message: "#^Call to an undefined method OliverKlee\\\\Oelib\\\\Interfaces\\\\Configuration\\:\\:setAsBoolean\\(\\)\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^PHPDoc tag @return with type PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\|TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage is not subtype of native type TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
+
+		-
+			message: "#^Call to an undefined method OliverKlee\\\\Oelib\\\\Interfaces\\\\Configuration\\:\\:setAsString\\(\\)\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/RegistrationFormTest.php
+
+		-
+			message: "#^Call to an undefined method OliverKlee\\\\Oelib\\\\Http\\\\Interfaces\\\\HeaderProxy\\:\\:getLastAddedHeader\\(\\)\\.$#"
+			count: 5
+			path: Tests/LegacyUnit/FrontEnd/RegistrationsListTest.php
+
+		-
+			message: "#^Call to an undefined method OliverKlee\\\\Oelib\\\\Interfaces\\\\Configuration\\:\\:setAsBoolean\\(\\)\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/RegistrationsListTest.php
+
+		-
+			message: "#^Call to an undefined method OliverKlee\\\\Oelib\\\\Interfaces\\\\Configuration\\:\\:setAsString\\(\\)\\.$#"
+			count: 2
+			path: Tests/LegacyUnit/OldModel/RegistrationTest.php
+
+		-
+			message: "#^Call to an undefined method OliverKlee\\\\PhpUnit\\\\Interfaces\\\\AccessibleObject\\|PHPUnit_Framework_MockObject_MockObject\\:\\:setConfigurationPageUid\\(\\)\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
+
+		-
+			message: "#^PHPDoc tag @return with type PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\|TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage is not subtype of native type TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
+
+		-
+			message: "#^Call to an undefined method OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection\\:\\:willReturn\\(\\)\\.$#"
+			count: 9
+			path: Tests/LegacyUnit/SchedulerTasks/RegistrationDigestTest.php
+
+		-
+			message: "#^Call to an undefined method TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\:\\:shouldHaveBeenCalled\\(\\)\\.$#"
+			count: 5
+			path: Tests/LegacyUnit/SchedulerTasks/RegistrationDigestTest.php
+
+		-
+			message: "#^Call to an undefined method TYPO3\\\\CMS\\\\Fluid\\\\View\\\\StandaloneView\\:\\:shouldBeCalled\\(\\)\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/SchedulerTasks/RegistrationDigestTest.php
+
+		-
+			message: "#^Cannot call method shouldBeCalled\\(\\) on void\\.$#"
+			count: 7
+			path: Tests/LegacyUnit/SchedulerTasks/RegistrationDigestTest.php
+
+		-
+			message: "#^Cannot call method shouldHaveBeenCalled\\(\\) on int\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/SchedulerTasks/RegistrationDigestTest.php
+
+		-
+			message: "#^Cannot call method shouldNotHaveBeenCalled\\(\\) on int\\.$#"
+			count: 2
+			path: Tests/LegacyUnit/SchedulerTasks/RegistrationDigestTest.php
+
+		-
+			message: "#^Cannot call method willReturn\\(\\) on string\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/SchedulerTasks/RegistrationDigestTest.php
+
+		-
+			message: "#^Result of method OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>\\:\\:save\\(\\) \\(void\\) is used\\.$#"
+			count: 7
+			path: Tests/LegacyUnit/SchedulerTasks/RegistrationDigestTest.php
+
+		-
+			message: "#^Variable \\$viewProphecy in PHPDoc tag @var does not exist\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/SchedulerTasks/RegistrationDigestTest.php
+
+		-
+			message: "#^PHPDoc tag @return with type PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\|TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage is not subtype of native type TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/Service/EmailServiceTest.php
+
+		-
+			message: "#^Call to an undefined method OliverKlee\\\\Oelib\\\\Interfaces\\\\Configuration\\:\\:setAsInteger\\(\\)\\.$#"
+			count: 17
+			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
+
+		-
+			message: "#^Call to an undefined method OliverKlee\\\\Oelib\\\\Interfaces\\\\Configuration\\:\\:setAsString\\(\\)\\.$#"
+			count: 8
+			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
+
+		-
+			message: "#^Variable \\$attachment in PHPDoc tag @var does not exist\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
+
+		-
+			message: "#^Call to an undefined method OliverKlee\\\\Oelib\\\\Interfaces\\\\Configuration\\:\\:set\\(\\)\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/Service/SingleViewLinkBuilderTest.php
+
+		-
+			message: "#^Call to an undefined method Tx_Seminars_Model_Event\\:\\:method\\(\\)\\.$#"
+			count: 9
+			path: Tests/LegacyUnit/Service/SingleViewLinkBuilderTest.php
+
+		-
+			message: "#^Cannot call method willReturn\\(\\) on int\\.$#"
+			count: 4
+			path: Tests/Unit/FrontEnd/RegistrationFormTest.php
+
+		-
+			message: "#^Cannot call method willReturn\\(\\) on string\\.$#"
+			count: 8
+			path: Tests/Unit/FrontEnd/RegistrationFormTest.php
+
+		-
+			message: "#^Call to an undefined method Tx_Seminars_OldModel_Event\\:\\:setEventData\\(\\)\\.$#"
+			count: 1
+			path: Tests/Unit/OldModel/EventTest.php
+
+		-
+			message: "#^Call to an undefined method TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\:\\:expects\\(\\)\\.$#"
+			count: 1
+			path: Tests/Unit/Traits/EmailTraitTest.php
+
+		-
+			message: "#^PHPDoc tag @return with type PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\|TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage is not subtype of native type TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage\\.$#"
+			count: 1
+			path: Tests/Unit/Traits/EmailTraitTest.php
 
