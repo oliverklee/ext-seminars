@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Require rn_base >= 1.13.12 (#774)
 - Move PHPStan from PHIVE to Composer (#849)
 - Rename sub-namespace `Interface` to `Interfaces` (#623)
 
