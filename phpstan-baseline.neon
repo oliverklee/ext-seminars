@@ -1,2 +1,117 @@
 parameters:
 	ignoreErrors:
+		-
+			message: "#^Constant LF not found\\.$#"
+			count: 5
+			path: Classes/BackEnd/AbstractEventMailForm.php
+
+		-
+			message: "#^Constant LF not found\\.$#"
+			count: 1
+			path: Classes/Csv/AbstractListView.php
+
+		-
+			message: "#^Constant LF not found\\.$#"
+			count: 4
+			path: Classes/Csv/CsvDownloader.php
+
+		-
+			message: "#^Constant TYPO3_MODE not found\\.$#"
+			count: 1
+			path: Classes/Csv/CsvDownloader.php
+
+		-
+			message: "#^Constant CR not found\\.$#"
+			count: 4
+			path: Classes/OldModel/Event.php
+
+		-
+			message: "#^Constant LF not found\\.$#"
+			count: 13
+			path: Classes/OldModel/Event.php
+
+		-
+			message: "#^Constant PATH_site not found\\.$#"
+			count: 1
+			path: Classes/OldModel/Event.php
+
+		-
+			message: "#^Constant CR not found\\.$#"
+			count: 1
+			path: Classes/OldModel/Registration.php
+
+		-
+			message: "#^Constant LF not found\\.$#"
+			count: 9
+			path: Classes/OldModel/Registration.php
+
+		-
+			message: "#^Constant LF not found\\.$#"
+			count: 2
+			path: Classes/Service/EmailService.php
+
+		-
+			message: "#^Constant LF not found\\.$#"
+			count: 4
+			path: Classes/Service/RegistrationManager.php
+
+		-
+			message: "#^Constant LF not found\\.$#"
+			count: 2
+			path: Tests/LegacyUnit/Csv/AbstractRegistrationListViewTest.php
+
+		-
+			message: "#^Constant LF not found\\.$#"
+			count: 4
+			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
+
+		-
+			message: "#^Constant LF not found\\.$#"
+			count: 2
+			path: Tests/LegacyUnit/Csv/EventListViewTest.php
+
+		-
+			message: "#^Constant CR not found\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/FrontEnd/RegistrationFormTest.php
+
+		-
+			message: "#^Constant LF not found\\.$#"
+			count: 28
+			path: Tests/LegacyUnit/OldModel/EventTest.php
+
+		-
+			message: "#^Constant LF not found\\.$#"
+			count: 2
+			path: Tests/LegacyUnit/OldModel/OrganizerTest.php
+
+		-
+			message: "#^Constant CR not found\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/OldModel/RegistrationTest.php
+
+		-
+			message: "#^Constant LF not found\\.$#"
+			count: 14
+			path: Tests/LegacyUnit/OldModel/RegistrationTest.php
+
+		-
+			message: "#^Constant LF not found\\.$#"
+			count: 2
+			path: Tests/LegacyUnit/Service/EmailServiceTest.php
+
+		-
+			message: "#^Constant CR not found\\.$#"
+			count: 4
+			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
+
+		-
+			message: "#^Constant LF not found\\.$#"
+			count: 22
+			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
+
+		-
+			message: "#^Constant TAB not found\\.$#"
+			count: 8
+			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
+
