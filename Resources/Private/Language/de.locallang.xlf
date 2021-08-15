@@ -1172,7 +1172,7 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.numberOfYearsInDateFilter" xml:space="preserve">
 				<source>Number of years a user can search into the future:</source>
-				<target>Anzahl der Jahre die der User in die Zukunft suchen kann:</target>
+				<target>Anzahl der Jahre, die der User in die Zukunft suchen kann:</target>
 			</trans-unit>
 			<trans-unit id="seminars.pi_flexform.hideSearchForm" xml:space="preserve">
 				<source>Hide the search form in list view:</source>
