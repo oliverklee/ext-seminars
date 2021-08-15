@@ -362,9 +362,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
 
         $frontEndUser = self::getLoggedInUser();
 
-        $showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(
-            ['relatedRecordType' => 'Places']
-        ) && $form !== null;
+        $showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(['relatedRecordType' => 'Places'])
+            && $form !== null;
 
         /** @var \Tx_Seminars_Model_Place $place */
         foreach ($places as $place) {
@@ -435,9 +434,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
 
         $frontEndUser = self::getLoggedInUser();
 
-        $showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(
-            ['relatedRecordType' => 'Speakers']
-        ) && $form !== null;
+        $showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(['relatedRecordType' => 'Speakers'])
+            && $form !== null;
 
         $type = $parameters['type'];
         if (empty($parameters['lister'])) {
@@ -529,9 +527,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
 
         $frontEndUser = self::getLoggedInUser();
 
-        $showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(
-            ['relatedRecordType' => 'Checkboxes']
-        ) && $form !== null;
+        $showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(['relatedRecordType' => 'Checkboxes'])
+            && $form !== null;
 
         /** @var \Tx_Seminars_Model_Checkbox $checkbox */
         foreach ($checkboxes as $checkbox) {
@@ -604,9 +601,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
 
         $frontEndUser = self::getLoggedInUser();
 
-        $showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(
-            ['relatedRecordType' => 'TargetGroups']
-        ) && $form !== null;
+        $showEditButton = $this->isFrontEndEditingOfRelatedRecordsAllowed(['relatedRecordType' => 'TargetGroups'])
+            && $form !== null;
 
         /** @var \Tx_Seminars_Model_TargetGroup $targetGroup */
         foreach ($targetGroups as $targetGroup) {
@@ -1918,7 +1914,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      */
     public function createNewSpeaker(array $formData, \tx_mkforms_forms_Base $form): array
     {
-        $formData = self::removePathFromWidgetData($formData, $form);
+        $formData = $this->removePathFromWidgetData($formData, $form);
         $validationErrors = self::validateSpeaker(
             $form,
             ['title' => $formData['newSpeaker_title']]
@@ -1966,7 +1962,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      */
     public function updateSpeaker(array $formData, \tx_mkforms_forms_Base $form): array
     {
-        $formData = self::removePathFromWidgetData($formData, $form);
+        $formData = $this->removePathFromWidgetData($formData, $form);
         $frontEndUser = self::getLoggedInUser();
         /** @var \Tx_Seminars_Mapper_Speaker $speakerMapper */
         $speakerMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class);
@@ -2855,5 +2851,19 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
             $sender = self::getLoggedInUser();
         }
         return $sender;
+    }
+
+    /**
+     * Eliminates the renderlet path info from the given form data.
+     *
+     * @param array<string, mixed> $formData submitted renderlet data
+     * @param \tx_mkforms_forms_Base $form
+     *
+     * @return array<string, mixed> renderlet data with the path info removed from the keys
+     */
+    private function removePathFromWidgetData(array $formData, \tx_mkforms_forms_Base $form): array
+    {
+        \tx_rnbase::load(\tx_mkforms_util_FormBase::class);
+        return \tx_mkforms_util_FormBase::removePathFromWidgetData($formData, $form);
     }
 }

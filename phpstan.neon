@@ -20,7 +20,6 @@ parameters:
     - Tests
 
   excludePaths:
-    - Classes/FrontEnd/AbstractView.php
     - Classes/FrontEnd/Editor.php
     - Classes/FrontEnd/EventEditor.php
     - Classes/FrontEnd/RegistrationForm.php
