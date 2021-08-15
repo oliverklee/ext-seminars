@@ -10,7 +10,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Allow installations up to PHP 8.0 (#758)
 
 ### Changed
-- Raise PHPStan to level 1 (#776)
+- Raise PHPStan to level 2 (#776, #782)
 - Update the php-cs-fixer configuration (#773)
 - Update the `.editorconfig` to better match the Core (#739)
 - Require oelib >= 3.4.0 (#737, #738, #777)
