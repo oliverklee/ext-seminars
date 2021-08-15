@@ -14,10 +14,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Lang\LanguageService;
 
 /**
- * Test case.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- * @author Niels Pardon <mail@niels-pardon.de>
+ * @covers \Tx_Seminars_Csv_AbstractRegistrationListView
  */
 class AbstractRegistrationListViewTest extends TestCase
 {
@@ -59,6 +56,18 @@ class AbstractRegistrationListViewTest extends TestCase
      * @var array[]
      */
     public $registrationFieldKeys = [];
+
+    /**
+     * @var array<int, class-string>
+     */
+    private $mockedClassNames = [];
+
+    /**
+     * backed-up extension configuration of the TYPO3 configuration variables
+     *
+     * @var array
+     */
+    private $extConfBackup = [];
 
     protected function setUp()
     {
