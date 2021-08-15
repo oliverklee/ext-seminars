@@ -1,11 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Constant TYPO3_MODE not found\\.$#"
-			count: 1
-			path: Classes/Csv/CsvDownloader.php
-
-		-
 			message: "#^Constant PATH_site not found\\.$#"
 			count: 1
 			path: Classes/OldModel/Event.php

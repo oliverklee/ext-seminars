@@ -368,6 +368,7 @@ class CsvDownloader extends TemplateHelper
             return $this->typo3Mode;
         }
 
+        // @phpstan-ignore-next-line PHPStan does not know about TYPO3_mode.
         return TYPO3_MODE;
     }
 
