@@ -89,8 +89,8 @@ final class RegistrationTest extends TestCase
                 'seminar' => $this->seminarUid,
                 'interests' => 'nothing',
                 'expectations' => '',
-                'background_knowledge' => 'foo' . LF . 'bar',
-                'known_from' => 'foo' . CR . 'bar',
+                'background_knowledge' => "foo\nbar",
+                'known_from' => "foo\rbar",
                 'user' => $this->feUserUid,
             ]
         );
@@ -322,11 +322,11 @@ final class RegistrationTest extends TestCase
         $this->subject->setRegistrationData(
             $seminar,
             0,
-            ['notes' => 'foo' . CRLF . 'bar']
+            ['notes' => "foo\r\nbar"]
         );
 
         self::assertNotContains(
-            CRLF,
+            "\r\n",
             $this->subject->getRegistrationData('notes')
         );
     }
@@ -340,11 +340,11 @@ final class RegistrationTest extends TestCase
         $this->subject->setRegistrationData(
             $seminar,
             0,
-            ['notes' => 'foo' . CRLF . 'bar']
+            ['notes' => "foo\r\nbar"]
         );
 
         self::assertSame(
-            'foo' . LF . 'bar',
+            "foo\nbar",
             $this->subject->getRegistrationData('notes')
         );
     }
@@ -358,11 +358,11 @@ final class RegistrationTest extends TestCase
         $this->subject->setRegistrationData(
             $seminar,
             0,
-            ['attendees_names' => 'foo' . LF . 'bar']
+            ['attendees_names' => "foo\nbar"]
         );
 
         self::assertSame(
-            '1. foo' . LF . '2. bar',
+            "1. foo\n2. bar",
             $this->subject->getRegistrationData('attendees_names')
         );
     }
@@ -452,7 +452,7 @@ final class RegistrationTest extends TestCase
     public function dumpAttendanceValuesForDataWithLineFeedStartsDataOnNewLine()
     {
         self::assertContains(
-            LF . 'foo' . LF . 'bar',
+            "\nfoo\nbar",
             $this->subject->dumpAttendanceValues('background_knowledge')
         );
     }
@@ -463,7 +463,7 @@ final class RegistrationTest extends TestCase
     public function dumpAttendanceValuesForDataWithCarriageReturnStartsDataOnNewLine()
     {
         self::assertContains(
-            LF . 'foo' . LF . 'bar',
+            "\nfoo\nbar",
             $this->subject->dumpAttendanceValues('known_from')
         );
     }
@@ -1024,11 +1024,11 @@ final class RegistrationTest extends TestCase
         $this->subject->setRegistrationData(
             $this->subject->getSeminarObject(),
             $userUid,
-            ['company' => 'Foo' . LF . 'Bar Inc']
+            ['company' => "Foo\nBar Inc"]
         );
 
         self::assertSame(
-            'Foo' . LF . 'Bar Inc',
+            "Foo\nBar Inc",
             $this->subject->getRegistrationData('company')
         );
     }
@@ -1417,7 +1417,7 @@ final class RegistrationTest extends TestCase
         $this->subject->setRegistrationData(
             $seminar,
             0,
-            ['attendees_names' => 'foo' . LF . 'bar']
+            ['attendees_names' => "foo\nbar"]
         );
 
         self::assertSame(
@@ -1453,11 +1453,11 @@ final class RegistrationTest extends TestCase
         $this->subject->setRegistrationData(
             $seminar,
             0,
-            ['attendees_names' => 'foo' . LF . 'bar']
+            ['attendees_names' => "foo\nbar"]
         );
 
         self::assertSame(
-            '1. foo' . LF . '2. bar',
+            "1. foo\n2. bar",
             $this->subject->getEnumeratedAttendeeNames()
         );
     }
@@ -1513,7 +1513,7 @@ final class RegistrationTest extends TestCase
         $this->subject->setRegisteredThemselves(true);
 
         self::assertSame(
-            '1. foo_user' . LF . '2. foo',
+            "1. foo_user\n2. foo",
             $this->subject->getEnumeratedAttendeeNames()
         );
     }

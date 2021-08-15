@@ -1555,7 +1555,7 @@ class RegistrationFormTest extends TestCase
 
         $event = new \Tx_Seminars_OldModel_Event($this->seminarUid);
         $subject->setSeminar($event);
-        $subject->setFakedFormValue('interests', 'Love' . CR . 'Peace');
+        $subject->setFakedFormValue('interests', "Love\rPeace");
 
         self::assertContains(
             'Love<br />Peace',

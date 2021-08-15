@@ -25,7 +25,7 @@ abstract class AbstractListView
     /**
      * @var string
      */
-    const LINE_SEPARATOR = CRLF;
+    const LINE_SEPARATOR = "\r\n";
 
     /**
      * @var int the depth of the recursion for the back-end pages
@@ -214,7 +214,7 @@ abstract class AbstractListView
     {
         if (strpos($fieldContent, '"') !== false) {
             $escapedFieldValue = '"' . str_replace('"', '""', $fieldContent) . '"';
-        } elseif ((strpos($fieldContent, ';') !== false) || (strpos($fieldContent, LF) !== false)) {
+        } elseif ((strpos($fieldContent, ';') !== false) || (strpos($fieldContent, "\n") !== false)) {
             $escapedFieldValue = '"' . $fieldContent . '"';
         } else {
             $escapedFieldValue = $fieldContent;

@@ -3238,7 +3238,7 @@ class EventTest extends TestCase
                 'user' => $user,
                 'registered_themselves' => false,
                 'additional_persons' => new Collection(),
-                'attendees_names' => 'Jane Doe' . CRLF . 'John Doe',
+                'attendees_names' => "Jane Doe\r\nJohn Doe",
             ]
         );
         $registrations = new Collection();
@@ -3344,7 +3344,7 @@ class EventTest extends TestCase
                 'user' => $user,
                 'registered_themselves' => false,
                 'additional_persons' => new Collection(),
-                'attendees_names' => 'John Doe' . CRLF . 'Jane Doe',
+                'attendees_names' => "John Doe\r\nJane Doe",
             ]
         );
         $registrations = new Collection();

@@ -93,7 +93,7 @@ class EmailService implements SingletonInterface
         $bodyWithFooter = $this->replaceMarkers($rawBody, $event, $user);
         $organizer = $event->getFirstOrganizer();
         if ($organizer->hasEMailFooter()) {
-            $bodyWithFooter .= LF . '-- ' . LF . $organizer->getEMailFooter();
+            $bodyWithFooter .= "\n-- \n" . $organizer->getEMailFooter();
         }
 
         return $bodyWithFooter;

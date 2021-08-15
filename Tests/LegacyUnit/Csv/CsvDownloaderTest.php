@@ -123,7 +123,7 @@ class CsvDownloaderTest extends TestCase
 
         self::assertSame(
             $this->localizeAndRemoveColon('tx_seminars_seminars.uid') . ';' .
-            $this->localizeAndRemoveColon('tx_seminars_seminars.title') . CRLF,
+            $this->localizeAndRemoveColon('tx_seminars_seminars.title') . "\r\n",
             $this->subject->createListOfEvents($pid)
         );
     }
@@ -249,7 +249,7 @@ class CsvDownloaderTest extends TestCase
 
         self::assertContains(
             $this->localizeAndRemoveColon('tx_seminars_seminars.uid') .
-            CRLF . $this->eventUid . CRLF . $secondEventUid . CRLF,
+            "\r\n" . $this->eventUid . "\r\n" . $secondEventUid . "\r\n",
             $this->subject->createAndOutputListOfEvents($this->pid)
         );
     }
@@ -321,13 +321,13 @@ class CsvDownloaderTest extends TestCase
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->eventUid,
-            ['title' => 'foo' . LF . 'bar']
+            ['title' => "foo\nbar"]
         );
 
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
 
         self::assertContains(
-            '"foo' . LF . 'bar"',
+            "\"foo\nbar\"",
             $this->subject->createAndOutputListOfEvents($this->pid)
         );
     }
@@ -908,8 +908,8 @@ class CsvDownloaderTest extends TestCase
         );
 
         self::assertContains(
-            CRLF . $firstRegistrationUid . CRLF .
-            $secondRegistrationUid . CRLF,
+            "\r\n" . $firstRegistrationUid . "\r\n" .
+            $secondRegistrationUid . "\r\n",
             $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
     }
@@ -1027,12 +1027,12 @@ class CsvDownloaderTest extends TestCase
                 'seminar' => $this->eventUid,
                 'crdate' => $GLOBALS['SIM_EXEC_TIME'],
                 'user' => $this->testingFramework->createFrontEndUser(),
-                'address' => 'foo' . LF . 'bar',
+                'address' => "foo\nbar",
             ]
         );
 
         self::assertContains(
-            '"foo' . LF . 'bar"',
+            "\"foo\nbar\"",
             $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
     }
@@ -1155,7 +1155,7 @@ class CsvDownloaderTest extends TestCase
         $this->configuration->setAsString('fieldsFromFeUserForCsv', '');
 
         self::assertSame(
-            CRLF,
+            "\r\n",
             $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
     }

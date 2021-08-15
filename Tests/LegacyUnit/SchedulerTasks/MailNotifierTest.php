@@ -1329,7 +1329,7 @@ class MailNotifierTest extends TestCase
         $this->subject->sendEventTakesPlaceReminders();
 
         self::assertContains(
-            'test registration' . CRLF,
+            "test registration\r\n",
             $this->getFirstEmailAttachment()->getBody()
         );
     }

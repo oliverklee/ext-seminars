@@ -105,7 +105,7 @@ class CsvDownloader extends TemplateHelper
             }
         } catch (\Exception $exception) {
             HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 500 Internal Server Error');
-            $result = $exception->getMessage() . LF . LF . $exception->getTraceAsString() . LF . LF;
+            $result = $exception->getMessage() . "\n\n" . $exception->getTraceAsString() . "\n\n";
         }
 
         return $result;

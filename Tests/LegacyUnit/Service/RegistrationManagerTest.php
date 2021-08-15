@@ -2867,7 +2867,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
-            LF . '-- ' . LF . 'organizer footer',
+            "\n-- \norganizer footer",
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -3018,11 +3018,11 @@ final class RegistrationManagerTest extends TestCase
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $registration->setAttendeesNames('foo1' . LF . 'foo2');
+        $registration->setAttendeesNames("foo1\nfoo2");
         $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
-            '1. foo1' . LF . '2. foo2',
+            "1. foo1\n2. foo2",
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -3044,7 +3044,7 @@ final class RegistrationManagerTest extends TestCase
         $pi1->init();
 
         $registration = $this->createRegistration();
-        $registration->setAttendeesNames('foo1' . LF . 'foo2');
+        $registration->setAttendeesNames("foo1\nfoo2");
         $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertRegExp(
@@ -3153,7 +3153,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
-            'place_title' . LF . 'place_address',
+            "place_title\nplace_address",
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -3218,7 +3218,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
-            'place_title' . LF . 'place_address',
+            "place_title\nplace_address",
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -3231,7 +3231,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->setConfigurationValue('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['address' => 'address1' . LF . 'address2']
+            ['address' => "address1\naddress2"]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -3260,7 +3260,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->setConfigurationValue('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['address' => 'address1' . CR . 'address2']
+            ['address' => 'address1' . "\r" . 'address2']
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -3289,7 +3289,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->setConfigurationValue('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['address' => 'address1' . CRLF . 'address2']
+            ['address' => "address1\r\naddress2"]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -3318,7 +3318,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->setConfigurationValue('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['address' => 'address1' . CR . CR . 'address2']
+            ['address' => 'address1' . "\r" . "\r" . 'address2']
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -3347,7 +3347,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->setConfigurationValue('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['address' => 'address1' . LF . LF . 'address2']
+            ['address' => "address1\n\naddress2"]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -3383,7 +3383,7 @@ final class RegistrationManagerTest extends TestCase
 
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['address' => 'address1' . LF . LF . 'address2']
+            ['address' => "address1\n\naddress2"]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -3419,7 +3419,7 @@ final class RegistrationManagerTest extends TestCase
 
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['address' => 'address1' . LF . 'address2' . CR . CRLF . 'address3']
+            ['address' => "address1\naddress2\r\r\naddress3"]
         );
         $this->testingFramework->createRelationAndUpdateCounter(
             'tx_seminars_seminars',
@@ -3556,7 +3556,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->notifyAttendee($registration, $pi1);
 
         self::assertContains(
-            'address' . LF . 'footown',
+            "address\nfootown",
             $this->mailer->getFirstSentEmail()->getBody()
         );
     }
@@ -3717,7 +3717,7 @@ final class RegistrationManagerTest extends TestCase
         /** @var \Swift_Mime_Attachment $attachment */
         $attachment = $attachments[0];
         $content = $attachment->getBody();
-        self::assertContains(CRLF, $content);
+        self::assertContains("\r\n", $content);
     }
 
     /**
@@ -4037,7 +4037,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $siteUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
-            ['title' => 'location title', 'address' => 'some address' . CRLF . 'more' . LF . 'even more' . LF]
+            ['title' => 'location title', 'address' => "some address\r\nmore\neven more\n"]
         );
         $this->testingFramework->createRelation('tx_seminars_seminars_place_mm', $this->seminarUid, $siteUid);
         $this->testingFramework->changeRecord(
@@ -4058,7 +4058,7 @@ final class RegistrationManagerTest extends TestCase
         /** @var \Swift_Mime_Attachment $attachment */
         $attachment = $attachments[0];
         $content = $attachment->getBody();
-        self::assertContains('LOCATION:location title, some address, more, even more' . CRLF, $content);
+        self::assertContains("LOCATION:location title, some address, more, even more\r\n", $content);
     }
 
     /**
@@ -6783,11 +6783,11 @@ final class RegistrationManagerTest extends TestCase
 
         $subject->setRegistrationData(
             $registration,
-            ['attendees_names' => 'John Doe' . LF . 'Jane Doe']
+            ['attendees_names' => "John Doe\nJane Doe"]
         );
 
         self::assertSame(
-            'John Doe' . LF . 'Jane Doe',
+            "John Doe\nJane Doe",
             $registration->getAttendeesNames()
         );
     }
@@ -7235,7 +7235,7 @@ final class RegistrationManagerTest extends TestCase
 
         $subject->setRegistrationData(
             $registration,
-            ['account_number' => '123' . CRLF . '455' . TAB . ' ABC']
+            ['account_number' => "123\r\n455\t ABC"]
         );
 
         self::assertSame(
@@ -7338,7 +7338,7 @@ final class RegistrationManagerTest extends TestCase
 
         $subject->setRegistrationData(
             $registration,
-            ['bank_code' => '123' . CRLF . '455' . TAB . ' ABC']
+            ['bank_code' => "123\r\n455\t ABC"]
         );
 
         self::assertSame(
@@ -7441,7 +7441,7 @@ final class RegistrationManagerTest extends TestCase
 
         $subject->setRegistrationData(
             $registration,
-            ['bank_name' => 'Swiss' . CRLF . 'Tax' . TAB . ' Protection']
+            ['bank_name' => "Swiss\r\nTax\t Protection"]
         );
 
         self::assertSame(
@@ -7544,7 +7544,7 @@ final class RegistrationManagerTest extends TestCase
 
         $subject->setRegistrationData(
             $registration,
-            ['account_owner' => 'John' . CRLF . TAB . ' Doe']
+            ['account_owner' => "John\r\n\t Doe"]
         );
 
         self::assertSame(
@@ -7607,11 +7607,11 @@ final class RegistrationManagerTest extends TestCase
 
         $subject->setRegistrationData(
             $registration,
-            ['company' => 'Business Ltd.' . LF . 'Tom, Dick & Harry']
+            ['company' => "Business Ltd.\nTom, Dick & Harry"]
         );
 
         self::assertSame(
-            'Business Ltd.' . LF . 'Tom, Dick & Harry',
+            "Business Ltd.\nTom, Dick & Harry",
             $registration->getCompany()
         );
     }
@@ -7854,7 +7854,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $subject->setRegistrationData($registration, ['name' => 'John' . CRLF . TAB . ' Doe']);
+        $subject->setRegistrationData($registration, ['name' => "John\r\n\t Doe"]);
 
         self::assertSame(
             'John Doe',
@@ -7914,10 +7914,10 @@ final class RegistrationManagerTest extends TestCase
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $subject->setRegistrationData($registration, ['address' => 'Back Road 42' . LF . '(second door)']);
+        $subject->setRegistrationData($registration, ['address' => "Back Road 42\n(second door)"]);
 
         self::assertSame(
-            'Back Road 42' . LF . '(second door)',
+            "Back Road 42\n(second door)",
             $registration->getAddress()
         );
     }
@@ -8034,7 +8034,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $subject->setRegistrationData($registration, ['zip' => '12345' . CRLF . TAB . ' ABC']);
+        $subject->setRegistrationData($registration, ['zip' => "12345\r\n\t ABC"]);
 
         self::assertSame(
             '12345 ABC',
@@ -8134,7 +8134,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $subject->setRegistrationData($registration, ['city' => 'Santiago' . CRLF . TAB . ' de Chile']);
+        $subject->setRegistrationData($registration, ['city' => "Santiago\r\n\t de Chile"]);
 
         self::assertSame(
             'Santiago de Chile',
@@ -8234,7 +8234,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setEvent($event);
 
-        $subject->setRegistrationData($registration, ['country' => 'South' . CRLF . TAB . ' Africa']);
+        $subject->setRegistrationData($registration, ['country' => "South\r\n\t Africa"]);
 
         self::assertSame(
             'South Africa',

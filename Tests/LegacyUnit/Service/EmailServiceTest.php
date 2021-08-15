@@ -472,7 +472,7 @@ final class EmailServiceTest extends TestCase
         $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
 
         self::assertContains(
-            LF . '-- ' . LF . $this->organizer->getEMailFooter(),
+            "\n-- \n" . $this->organizer->getEMailFooter(),
             $this->email->getBody()
         );
     }
