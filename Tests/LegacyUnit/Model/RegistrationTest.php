@@ -1105,9 +1105,7 @@ class RegistrationTest extends TestCase
         );
     }
 
-    /*
-     * Tests regarding the phone number.
-     */
+    // Tests regarding the phone number.
 
     /**
      * @test

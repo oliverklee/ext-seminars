@@ -137,9 +137,7 @@ final class EventEditorTest extends FunctionalTestCase
         return $subject;
     }
 
-    /*
-     * Tests concerning getEventSuccessfullySavedUrl
-     */
+    // Tests concerning getEventSuccessfullySavedUrl
 
     /**
      * @test
@@ -189,9 +187,7 @@ final class EventEditorTest extends FunctionalTestCase
         self::assertContains('tx_seminars_pi1%5Bseminar%5D=' . self::EVENT_UID, $result);
     }
 
-    /*
-     * Tests concerning populateListOrganizers().
-     */
+    // Tests concerning populateListOrganizers().
 
     /**
      * @test
@@ -229,9 +225,7 @@ final class EventEditorTest extends FunctionalTestCase
         self::assertNotContains(['caption' => 'some organizer', 'value' => 1], $result);
     }
 
-    /*
-     * Tests concerning modifyDataToInsert
-     */
+    // Tests concerning modifyDataToInsert
 
     /**
      * @test
@@ -473,9 +467,7 @@ final class EventEditorTest extends FunctionalTestCase
         self::assertFalse(isset($result['categories']));
     }
 
-    /*
-     * Tests concerning validateCheckboxes
-     */
+    // Tests concerning validateCheckboxes
 
     /**
      * @test

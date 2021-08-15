@@ -165,9 +165,7 @@ class TimeSlotMapperTest extends TestCase
         self::assertInstanceOf(\Tx_Seminars_Model_Place::class, $model->getPlace());
     }
 
-    /*
-     * Tests regarding the seminar.
-     */
+    // Tests regarding the seminar.
 
     /**
      * @test

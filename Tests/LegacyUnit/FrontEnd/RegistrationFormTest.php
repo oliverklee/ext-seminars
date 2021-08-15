@@ -113,9 +113,7 @@ class RegistrationFormTest extends TestCase
         return $GLOBALS['TSFE'];
     }
 
-    /*
-     * Test concerning getAllFeUserData
-     */
+    // Test concerning getAllFeUserData
 
     /**
      * @test
@@ -859,9 +857,7 @@ class RegistrationFormTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning the validation of the number of persons to register
-     */
+    // Tests concerning the validation of the number of persons to register
 
     /**
      * @test
@@ -1771,9 +1767,7 @@ class RegistrationFormTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning getSeminar and getEvent
-     */
+    // Tests concerning getSeminar and getEvent
 
     /**
      * @test
@@ -1803,9 +1797,7 @@ class RegistrationFormTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning populateSeats
-     */
+    // Tests concerning populateSeats
 
     /**
      * @test

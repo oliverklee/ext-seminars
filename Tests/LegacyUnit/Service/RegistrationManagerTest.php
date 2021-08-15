@@ -201,9 +201,7 @@ final class RegistrationManagerTest extends TestCase
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
     }
 
-    /*
-     * Utility functions
-     */
+    // Utility functions
 
     private function getFrontEndController(): TypoScriptFrontendController
     {
@@ -372,9 +370,7 @@ final class RegistrationManagerTest extends TestCase
         $this->mockedClassNames = [];
     }
 
-    /*
-     * Tests for the utility functions
-     */
+    // Tests for the utility functions
 
     /**
      * @test
@@ -516,9 +512,7 @@ final class RegistrationManagerTest extends TestCase
         self::assertNotSame($mockedInstance, GeneralUtility::makeInstance($mockedClassName));
     }
 
-    /*
-     * Tests regarding the Singleton property.
-     */
+    // Tests regarding the Singleton property.
 
     /**
      * @test
@@ -567,9 +561,7 @@ final class RegistrationManagerTest extends TestCase
         );
     }
 
-    /*
-     * Tests for the link to the registration page
-     */
+    // Tests for the link to the registration page
 
     public function testGetLinkToRegistrationOrLoginPageWithLoggedOutUserCreatesLinkTag()
     {
@@ -735,9 +727,7 @@ final class RegistrationManagerTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning getRegistrationLink
-     */
+    // Tests concerning getRegistrationLink
 
     /**
      * @test
@@ -940,9 +930,7 @@ final class RegistrationManagerTest extends TestCase
         self::assertSame('', $this->subject->getRegistrationLink($this->pi1, $this->seminar));
     }
 
-    /*
-     * Tests concerning canRegisterIfLoggedIn
-     */
+    // Tests concerning canRegisterIfLoggedIn
 
     /**
      * @test
@@ -1209,9 +1197,7 @@ final class RegistrationManagerTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning canRegisterIfLoggedInMessage
-     */
+    // Tests concerning canRegisterIfLoggedInMessage
 
     /**
      * @test
@@ -1512,9 +1498,7 @@ final class RegistrationManagerTest extends TestCase
         );
     }
 
-    /*
-     * Test concerning userFulfillsRequirements
-     */
+    // Test concerning userFulfillsRequirements
 
     public function testUserFulfillsRequirementsForEventWithoutRequirementsReturnsTrue()
     {
@@ -1626,9 +1610,7 @@ final class RegistrationManagerTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning getMissingRequiredTopics
-     */
+    // Tests concerning getMissingRequiredTopics
 
     public function testGetMissingRequiredTopicsReturnsSeminarBag()
     {
@@ -1915,9 +1897,7 @@ final class RegistrationManagerTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning removeRegistration
-     */
+    // Tests concerning removeRegistration
 
     /**
      * @test
@@ -2063,9 +2043,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->removeRegistration($registrationUid, $this->pi1);
     }
 
-    /*
-     * Tests concerning canRegisterSeats
-     */
+    // Tests concerning canRegisterSeats
 
     /**
      * @test
@@ -2268,9 +2246,7 @@ final class RegistrationManagerTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning notifyAttendee
-     */
+    // Tests concerning notifyAttendee
 
     /**
      * @test
@@ -3702,9 +3678,7 @@ final class RegistrationManagerTest extends TestCase
         self::assertNotContains('formal', $string);
     }
 
-    /*
-     * Tests concerning the iCalendar attachment
-     */
+    // Tests concerning the iCalendar attachment
 
     /**
      * @test
@@ -4148,9 +4122,7 @@ final class RegistrationManagerTest extends TestCase
         self::assertContains('DTSTAMP:' . $formattedDate, $content);
     }
 
-    /*
-     * Tests concerning the salutation
-     */
+    // Tests concerning the salutation
 
     /**
      * @test
@@ -4860,9 +4832,7 @@ final class RegistrationManagerTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning the unregistration notice
-     */
+    // Tests concerning the unregistration notice
 
     /**
      * @test
@@ -5102,9 +5072,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->notifyAttendee($registrationOld, $controller);
     }
 
-    /*
-     * Tests regarding the notification of organizers
-     */
+    // Tests regarding the notification of organizers
 
     /**
      * @test
@@ -5441,9 +5409,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->notifyOrganizers($registration);
     }
 
-    /*
-     * Tests concerning sendAdditionalNotification
-     */
+    // Tests concerning sendAdditionalNotification
 
     /**
      * @test
@@ -6090,9 +6056,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->sendAdditionalNotification($registration);
     }
 
-    /*
-     * Tests concerning allowsRegistrationByDate
-     */
+    // Tests concerning allowsRegistrationByDate
 
     /**
      * @test
@@ -6198,9 +6162,7 @@ final class RegistrationManagerTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning allowsRegistrationBySeats
-     */
+    // Tests concerning allowsRegistrationBySeats
 
     /**
      * @test
@@ -6256,9 +6218,7 @@ final class RegistrationManagerTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning registrationHasStarted
-     */
+    // Tests concerning registrationHasStarted
 
     /**
      * @test
@@ -6300,9 +6260,7 @@ final class RegistrationManagerTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning createRegistration
-     */
+    // Tests concerning createRegistration
 
     /**
      * @TODO: This is just a transitional test that needs to be removed once
@@ -6495,9 +6453,7 @@ final class RegistrationManagerTest extends TestCase
         $connection->delete('tx_seminars_attendances', ['uid' => $uid]);
     }
 
-    /*
-     * Tests concerning setRegistrationData()
-     */
+    // Tests concerning setRegistrationData()
 
     /**
      * @test
@@ -8326,9 +8282,7 @@ final class RegistrationManagerTest extends TestCase
         );
     }
 
-    /*
-     *  Tests concerning existsSeminar and existsSeminarMessage
-     */
+    // Tests concerning existsSeminar and existsSeminarMessage
 
     /**
      * @test
@@ -8498,9 +8452,7 @@ final class RegistrationManagerTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning getPricesAvailableForUser
-     */
+    // Tests concerning getPricesAvailableForUser
 
     /**
      * @test

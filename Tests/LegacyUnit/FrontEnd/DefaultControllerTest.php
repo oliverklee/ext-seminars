@@ -4939,9 +4939,7 @@ class DefaultControllerTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning limiting the list view to places
-     */
+    // Tests concerning limiting the list view to places
 
     /**
      * @test
@@ -5653,9 +5651,7 @@ class DefaultControllerTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning getFieldHeader
-     */
+    // Tests concerning getFieldHeader
 
     /**
      * @test
@@ -6832,9 +6828,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->main('', []);
     }
 
-    /*
-     * Tests concerning getVacanciesClasses
-     */
+    // Tests concerning getVacanciesClasses
 
     /**
      * @test
@@ -7469,9 +7463,7 @@ class DefaultControllerTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning the "edit", "hide", "unhide" and "copy" links
-     */
+    // Tests concerning the "edit", "hide", "unhide" and "copy" links
 
     /**
      * @test
@@ -7709,9 +7701,7 @@ class DefaultControllerTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning the hide/unhide and copy functionality
-     */
+    // Tests concerning the hide/unhide and copy functionality
 
     /**
      * @test
@@ -9008,9 +8998,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->main('', []);
     }
 
-    /*
-     * Tests concerning createSingleViewLink
-     */
+    // Tests concerning createSingleViewLink
 
     /**
      * @test
@@ -9161,9 +9149,7 @@ class DefaultControllerTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning the price in the single view
-     */
+    // Tests concerning the price in the single view
 
     /**
      * @test

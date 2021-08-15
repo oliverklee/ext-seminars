@@ -118,9 +118,7 @@ class TimeSlotTest extends TestCase
         );
     }
 
-    /*
-     * Tests for the seminar association.
-     */
+    // Tests for the seminar association.
 
     /**
      * @test

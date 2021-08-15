@@ -45,9 +45,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
         self::assertInstanceOf(TestingTimeSpan::class, $result);
     }
 
-    /*
-     * Test for getting the begin and end date.
-     */
+    // Test for getting the begin and end date.
 
     /**
      * @test
@@ -168,9 +166,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
         self::assertSame(0, $this->subject->getEndDateAsTimestampEvenIfOpenEnded());
     }
 
-    /*
-     * Test for getting the time.
-     */
+    // Test for getting the time.
 
     /**
      * @test
@@ -200,9 +196,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
         self::assertTrue($this->subject->hasEndTime());
     }
 
-    /*
-     * Test for open-ended events.
-     */
+    // Test for open-ended events.
 
     /**
      * @test
@@ -253,9 +247,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
         self::assertFalse($this->subject->isOpenEnded());
     }
 
-    /*
-     * Tests for getting the end date and time for open-ended events.
-     */
+    // Tests for getting the end date and time for open-ended events.
 
     /**
      * @test
@@ -301,9 +293,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
         self::assertSame(\mktime(0, 0, 0, 1, 2, 2010), $this->subject->getEndDateAsTimestampEvenIfOpenEnded());
     }
 
-    /*
-     * Tests for for the begin date.
-     */
+    // Tests for for the begin date.
 
     /**
      * @test
@@ -335,9 +325,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
         self::assertFalse($this->subject->hasStarted());
     }
 
-    /*
-     * Tests concerning the places.
-     */
+    // Tests concerning the places.
 
     /**
      * @test
@@ -358,9 +346,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
         self::assertSame($value, $this->subject->getNumberOfPlaces());
     }
 
-    /*
-     * Tests for getting the room.
-     */
+    // Tests for getting the room.
 
     /**
      * @test

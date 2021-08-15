@@ -261,9 +261,7 @@ class EventTest extends TestCase
         self::assertSame('Superhero', $this->subject->getTitle());
     }
 
-    /*
-     * Tests regarding the time zone.
-     */
+    // Tests regarding the time zone.
 
     /**
      * @test
@@ -1565,9 +1563,7 @@ class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests regarding the status.
-     */
+    // Tests regarding the status.
 
     /**
      * @test
@@ -2106,9 +2102,7 @@ class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning the offline registrations
-     */
+    // Tests concerning the offline registrations
 
     /**
      * @test
@@ -2176,9 +2170,7 @@ class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning the registrations
-     */
+    // Tests concerning the registrations
 
     /**
      * @test
@@ -2945,9 +2937,7 @@ class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests regarding the flag for organizers having been notified about enough attendees.
-     */
+    // Tests regarding the flag for organizers having been notified about enough attendees.
 
     /**
      * @test
@@ -2987,9 +2977,7 @@ class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests regarding the flag for organizers having been notified about enough attendees.
-     */
+    // Tests regarding the flag for organizers having been notified about enough attendees.
 
     /**
      * @test
@@ -3029,9 +3017,7 @@ class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests regarding the flag for automatic cancelation/confirmation
-     */
+    // Tests regarding the flag for automatic cancelation/confirmation
 
     /**
      * @test
@@ -3059,9 +3045,7 @@ class EventTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning the organizers
-     */
+    // Tests concerning the organizers
 
     /**
      * @test
@@ -3120,9 +3104,7 @@ class EventTest extends TestCase
         self::assertSame($firstOrganizer, $result);
     }
 
-    /*
-     * Tests concerning getAttendeeNames
-     */
+    // Tests concerning getAttendeeNames
 
     /**
      * @test
@@ -3432,9 +3414,7 @@ class EventTest extends TestCase
         self::assertSame([], $this->subject->getAttendeeNamesAfterLastDigest());
     }
 
-    /*
-     * Tests concerning "price on request"
-     */
+    // Tests concerning "price on request"
 
     public function getPriceOnRequestByDefaultReturnsFalse()
     {
@@ -3453,9 +3433,7 @@ class EventTest extends TestCase
         self::assertTrue($this->subject->getPriceOnRequest());
     }
 
-    /*
-     * Tests regarding the date of the last registration digest email
-     */
+    // Tests regarding the date of the last registration digest email
 
     /**
      * @test
@@ -3511,9 +3489,7 @@ class EventTest extends TestCase
         self::assertSame(42, $this->subject->getDateOfLastRegistrationDigestEmailAsUnixTimeStamp());
     }
 
-    /*
-     * Tests concerning the dates
-     */
+    // Tests concerning the dates
 
     /**
      * @test

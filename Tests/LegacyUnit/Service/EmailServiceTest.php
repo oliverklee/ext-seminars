@@ -27,6 +27,7 @@ use TYPO3\CMS\Lang\LanguageService;
 final class EmailServiceTest extends TestCase
 {
     use EmailTrait;
+
     use MakeInstanceTrait;
 
     /**
@@ -160,9 +161,7 @@ final class EmailServiceTest extends TestCase
         self::assertInstanceOf(SingletonInterface::class, $this->subject);
     }
 
-    /*
-     * Tests for sendEmailToAttendees
-     */
+    // Tests for sendEmailToAttendees
 
     /**
      * @test

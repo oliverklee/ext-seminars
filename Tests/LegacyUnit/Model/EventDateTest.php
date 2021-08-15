@@ -1700,9 +1700,7 @@ class EventDateTest extends TestCase
         $this->subject->setPaymentMethods(new Collection());
     }
 
-    /*
-     * Tests concerning "price on request"
-     */
+    // Tests concerning "price on request"
 
     /**
      * @test

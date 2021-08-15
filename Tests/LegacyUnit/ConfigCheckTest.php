@@ -33,9 +33,7 @@ class ConfigCheckTest extends TestCase
         $this->subject = new \Tx_Seminars_ConfigCheck($this->objectToCheck);
     }
 
-    /*
-     * Tests concerning checkCurrency
-     */
+    // Tests concerning checkCurrency
 
     /**
      * @test

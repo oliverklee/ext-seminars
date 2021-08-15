@@ -75,9 +75,7 @@ class RegistrationsListTest extends TestCase
         $this->restoreOriginalEnvironment();
     }
 
-    /*
-     * Utility functions
-     */
+    // Utility functions
 
     /**
      * Adds an instance to the Typo3 instance FIFO buffer used by `GeneralUtility::makeInstance()`
@@ -114,9 +112,7 @@ class RegistrationsListTest extends TestCase
         $this->mockedClassNames = [];
     }
 
-    /*
-     * Tests for the utility functions
-     */
+    // Tests for the utility functions
 
     /**
      * @test

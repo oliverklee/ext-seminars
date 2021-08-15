@@ -29,7 +29,9 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 class EventEditorTest extends TestCase
 {
     use LanguageHelper;
+
     use EmailTrait;
+
     use MakeInstanceTrait;
 
     /**
@@ -95,9 +97,7 @@ class EventEditorTest extends TestCase
         ConfigurationProxy::purgeInstances();
     }
 
-    /*
-     * Utility functions.
-     */
+    // Utility functions.
 
     private function getFrontEndController(): TypoScriptFrontendController
     {
@@ -243,9 +243,7 @@ class EventEditorTest extends TestCase
         return $result;
     }
 
-    /*
-     * Tests for the utility functions.
-     */
+    // Tests for the utility functions.
 
     public function testCreateLogInAndAddFeUserAsVipCreatesFeUser()
     {
@@ -2045,9 +2043,7 @@ class EventEditorTest extends TestCase
         );
     }
 
-    /*
-     * Tests concerning the notification e-mails
-     */
+    // Tests concerning the notification e-mails
 
     /**
      * @test
