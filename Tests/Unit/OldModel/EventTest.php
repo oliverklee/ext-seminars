@@ -19,7 +19,7 @@ use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 final class EventTest extends UnitTestCase
 {
     /**
-     * @var \Tx_Seminars_OldModel_Event
+     * @var TestingEvent
      */
     private $subject = null;
 

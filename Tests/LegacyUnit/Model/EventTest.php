@@ -1081,7 +1081,7 @@ class EventTest extends TestCase
      */
     public function hasCombinedSingleViewPageForEmptySingleViewPageReturnsFalse()
     {
-        /** @var \Tx_Seminars_Model_Event|MockObject $subject */
+        /** @var \Tx_Seminars_Model_Event&MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getCombinedSingleViewPage']
@@ -1099,7 +1099,7 @@ class EventTest extends TestCase
      */
     public function hasCombinedSingleViewPageForNonEmptySingleViewPageReturnsTrue()
     {
-        /** @var \Tx_Seminars_Model_Event|MockObject $subject */
+        /** @var \Tx_Seminars_Model_Event&MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getCombinedSingleViewPage']
@@ -2277,7 +2277,7 @@ class EventTest extends TestCase
         $registration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)
             ->getLoadedTestingModel(['registration_queue' => 1]);
         $registrations->add($registration);
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getQueueRegistrations']
@@ -2343,7 +2343,7 @@ class EventTest extends TestCase
      */
     public function hasQueueRegistrationsForNoQueueRegistrationReturnsFalse()
     {
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getQueueRegistrations']
@@ -2393,7 +2393,7 @@ class EventTest extends TestCase
      */
     public function getRegisteredSeatsForNoRegularRegistrationsReturnsZero()
     {
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegularRegistrations']
@@ -2417,7 +2417,7 @@ class EventTest extends TestCase
         $registration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)
             ->getLoadedTestingModel(['seats' => 1]);
         $registrations->add($registration);
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegularRegistrations']
@@ -2441,7 +2441,7 @@ class EventTest extends TestCase
         $registration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)
             ->getLoadedTestingModel(['seats' => 2]);
         $registrations->add($registration);
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegularRegistrations']
@@ -2465,7 +2465,7 @@ class EventTest extends TestCase
         $registration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)
             ->getLoadedTestingModel(['seats' => 1]);
         $queueRegistrations->add($registration);
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegularRegistrations', 'getQueueRegistrations']
@@ -2487,7 +2487,7 @@ class EventTest extends TestCase
      */
     public function getRegisteredSeatsCountsOfflineRegistrations()
     {
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegularRegistrations']
@@ -2511,7 +2511,7 @@ class EventTest extends TestCase
      */
     public function hasEnoughRegistrationsForZeroSeatsAndZeroNeededReturnsTrue()
     {
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
@@ -2530,7 +2530,7 @@ class EventTest extends TestCase
      */
     public function hasEnoughRegistrationsForLessSeatsThanNeededReturnsFalse()
     {
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
@@ -2549,7 +2549,7 @@ class EventTest extends TestCase
      */
     public function hasEnoughRegistrationsForAsManySeatsAsNeededReturnsTrue()
     {
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
@@ -2568,7 +2568,7 @@ class EventTest extends TestCase
      */
     public function hasEnoughRegistrationsForMoreSeatsThanNeededReturnsTrue()
     {
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
@@ -2591,7 +2591,7 @@ class EventTest extends TestCase
      */
     public function getVacanciesForOneRegisteredAndTwoMaximumReturnsOne()
     {
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
@@ -2611,7 +2611,7 @@ class EventTest extends TestCase
      */
     public function getVacanciesForAsManySeatsRegisteredAsMaximumReturnsZero()
     {
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
@@ -2631,7 +2631,7 @@ class EventTest extends TestCase
      */
     public function getVacanciesForAsMoreSeatsRegisteredThanMaximumReturnsZero()
     {
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
@@ -2651,7 +2651,7 @@ class EventTest extends TestCase
      */
     public function getVacanciesForNonZeroSeatsRegisteredAndUnlimitedVacanciesReturnsZero()
     {
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
@@ -2675,7 +2675,7 @@ class EventTest extends TestCase
      */
     public function hasVacanciesForOneRegisteredAndTwoMaximumReturnsTrue()
     {
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
@@ -2694,7 +2694,7 @@ class EventTest extends TestCase
      */
     public function hasVacanciesForAsManySeatsRegisteredAsMaximumReturnsFalse()
     {
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
@@ -2713,7 +2713,7 @@ class EventTest extends TestCase
      */
     public function hasVacanciesForAsMoreSeatsRegisteredThanMaximumReturnsFalse()
     {
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
@@ -2732,7 +2732,7 @@ class EventTest extends TestCase
      */
     public function hasVacanciesForNonZeroSeatsRegisteredAndUnlimitedVacanciesReturnsTrue()
     {
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
@@ -2755,7 +2755,7 @@ class EventTest extends TestCase
      */
     public function isFullForLessSeatsThanMaximumReturnsFalse()
     {
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
@@ -2774,7 +2774,7 @@ class EventTest extends TestCase
      */
     public function isFullForAsManySeatsAsMaximumReturnsTrue()
     {
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
@@ -2793,7 +2793,7 @@ class EventTest extends TestCase
      */
     public function isFullForMoreSeatsThanMaximumReturnsTrue()
     {
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
@@ -2812,7 +2812,7 @@ class EventTest extends TestCase
      */
     public function isFullForZeroSeatsAndUnlimitedMaximumReturnsFalse()
     {
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']
@@ -2831,7 +2831,7 @@ class EventTest extends TestCase
      */
     public function isFullForPositiveSeatsAndUnlimitedMaximumReturnsFalse()
     {
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
             \Tx_Seminars_Model_Event::class,
             ['getRegisteredSeats']

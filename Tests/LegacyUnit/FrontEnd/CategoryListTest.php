@@ -41,7 +41,9 @@ class CategoryListTest extends TestCase
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
-        ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', false);
+        /** @var ConfigurationProxy $configuration */
+        $configuration = ConfigurationProxy::getInstance('seminars');
+        $configuration->setAsBoolean('enableConfigCheck', false);
 
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();

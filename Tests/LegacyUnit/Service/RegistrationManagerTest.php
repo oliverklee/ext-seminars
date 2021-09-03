@@ -137,8 +137,9 @@ final class RegistrationManagerTest extends TestCase
         $this->mailer = $mailerFactory->getMailer();
 
         \Tx_Seminars_OldModel_Registration::purgeCachedSeminars();
-        ConfigurationProxy::getInstance('seminars')
-            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_TEXT_MAIL);
+        /** @var ConfigurationProxy $configurationProxy */
+        $configurationProxy = ConfigurationProxy::getInstance('seminars');
+        $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_TEXT_MAIL);
         $configurationRegistry = ConfigurationRegistry::getInstance();
         $configurationRegistry->set('plugin.tx_seminars', new Configuration());
         $configurationRegistry->set('plugin.tx_seminars._LOCAL_LANG.default', new Configuration());
@@ -180,7 +181,7 @@ final class RegistrationManagerTest extends TestCase
         $this->seminar = new TestingEvent($this->seminarUid);
         $this->subject = TestingRegistrationManager::getInstance();
 
-        /** @var \Tx_Seminars_Service_SingleViewLinkBuilder|MockObject $linkBuilder */
+        /** @var \Tx_Seminars_Service_SingleViewLinkBuilder&MockObject $linkBuilder */
         $linkBuilder = $this->createPartialMock(
             \Tx_Seminars_Service_SingleViewLinkBuilder::class,
             ['createAbsoluteUrlForEvent']
@@ -2336,8 +2337,9 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForSendConfirmationTrueCallsRegistrationEmailHookMethodsForPlainTextEmail()
     {
-        ConfigurationProxy::getInstance('seminars')
-            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_TEXT_MAIL);
+        /** @var ConfigurationProxy $configurationProxy */
+        $configurationProxy = ConfigurationProxy::getInstance('seminars');
+        $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_TEXT_MAIL);
 
         /** @var \Tx_Seminars_OldModel_Registration $registrationOld */
         $registrationOld = $this->createRegistration();
@@ -2377,8 +2379,9 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForSendConfirmationTrueAndPlainTextEmailCallsPostProcessAttendeeEmailTextHookOnce()
     {
-        ConfigurationProxy::getInstance('seminars')
-            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_TEXT_MAIL);
+        /** @var ConfigurationProxy $configurationProxy */
+        $configurationProxy = ConfigurationProxy::getInstance('seminars');
+        $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_TEXT_MAIL);
 
         $registration = $this->createRegistration();
 
@@ -2402,8 +2405,9 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForSendConfirmationTrueCallsRegistrationEmailHookMethodsForHtmlEmail()
     {
-        ConfigurationProxy::getInstance('seminars')
-            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+        /** @var ConfigurationProxy $configurationProxy */
+        $configurationProxy = ConfigurationProxy::getInstance('seminars');
+        $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
 
         /** @var \Tx_Seminars_OldModel_Registration $registrationOld */
         $registrationOld = $this->createRegistration();
@@ -2447,8 +2451,9 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForSendConfirmationTrueAndHtmlEmailCallsPostProcessAttendeeEmailTextHookTwice()
     {
-        ConfigurationProxy::getInstance('seminars')
-            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+        /** @var ConfigurationProxy $configurationProxy */
+        $configurationProxy = ConfigurationProxy::getInstance('seminars');
+        $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
 
         $registration = $this->createRegistration();
 
@@ -2683,8 +2688,9 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForHtmlMailSetHasHtmlBody()
     {
         $this->subject->setConfigurationValue('sendConfirmation', true);
-        ConfigurationProxy::getInstance('seminars')
-            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+        /** @var ConfigurationProxy $configurationProxy */
+        $configurationProxy = ConfigurationProxy::getInstance('seminars');
+        $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -2739,8 +2745,9 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForHtmlMailHasNoUnreplacedMarkers()
     {
         $this->subject->setConfigurationValue('sendConfirmation', true);
-        ConfigurationProxy::getInstance('seminars')
-            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+        /** @var ConfigurationProxy $configurationProxy */
+        $configurationProxy = ConfigurationProxy::getInstance('seminars');
+        $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -2759,8 +2766,9 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForMailSetToUserModeAndUserSetToHtmlMailsHasHtmlBody()
     {
         $this->subject->setConfigurationValue('sendConfirmation', true);
-        ConfigurationProxy::getInstance('seminars')
-            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_USER_MAIL);
+        /** @var ConfigurationProxy $configurationProxy */
+        $configurationProxy = ConfigurationProxy::getInstance('seminars');
+        $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_USER_MAIL);
         $registration = $this->createRegistration();
         $registration->getFrontEndUser()->setData(
             [
@@ -2785,8 +2793,9 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForMailSetToUserModeAndUserSetToTextMailsNotHasHtmlBody()
     {
         $this->subject->setConfigurationValue('sendConfirmation', true);
-        ConfigurationProxy::getInstance('seminars')
-            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_USER_MAIL);
+        /** @var ConfigurationProxy $configurationProxy */
+        $configurationProxy = ConfigurationProxy::getInstance('seminars');
+        $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_USER_MAIL);
         $registration = $this->createRegistration();
         $registration->getFrontEndUser()->setData(
             [
@@ -2811,8 +2820,9 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForHtmlMailsContainsNameOfUserInBody()
     {
         $this->subject->setConfigurationValue('sendConfirmation', true);
-        ConfigurationProxy::getInstance('seminars')
-            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+        /** @var ConfigurationProxy $configurationProxy */
+        $configurationProxy = ConfigurationProxy::getInstance('seminars');
+        $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -2836,8 +2846,9 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForHtmlMailsHasLinkToSeminarInBody()
     {
         $this->subject->setConfigurationValue('sendConfirmation', true);
-        ConfigurationProxy::getInstance('seminars')
-            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+        /** @var ConfigurationProxy $configurationProxy */
+        $configurationProxy = ConfigurationProxy::getInstance('seminars');
+        $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
         $registration = $this->createRegistration();
         $registration->getFrontEndUser()->setData(
             ['email' => 'foo@bar.com']
@@ -2970,8 +2981,9 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForHtmlMailsHasCssStylesFromFile()
     {
         $this->subject->setConfigurationValue('sendConfirmation', true);
-        ConfigurationProxy::getInstance('seminars')
-            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+        /** @var ConfigurationProxy $configurationProxy */
+        $configurationProxy = ConfigurationProxy::getInstance('seminars');
+        $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
         $this->subject->setConfigurationValue(
             'cssFileForAttendeeMail',
             'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
@@ -3033,8 +3045,9 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForHtmlMailReturnsAttendeesNamesInOrderedList()
     {
         $this->subject->setConfigurationValue('sendConfirmation', true);
-        ConfigurationProxy::getInstance('seminars')
-            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+        /** @var ConfigurationProxy $configurationProxy */
+        $configurationProxy = ConfigurationProxy::getInstance('seminars');
+        $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
         $this->subject->setConfigurationValue(
             'cssFileForAttendeeMail',
             'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
@@ -3164,8 +3177,9 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForHtmlMailSeparatesPlacesTitleAndAddressWithBreaks()
     {
         $this->subject->setConfigurationValue('sendConfirmation', true);
-        ConfigurationProxy::getInstance('seminars')
-            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+        /** @var ConfigurationProxy $configurationProxy */
+        $configurationProxy = ConfigurationProxy::getInstance('seminars');
+        $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
         $this->subject->setConfigurationValue(
             'cssFileForAttendeeMail',
             'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
@@ -3374,8 +3388,9 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForPlaceAddressAndHtmlMailsReplacesMultipleLineFeedsWithSpaces()
     {
         $this->subject->setConfigurationValue('sendConfirmation', true);
-        ConfigurationProxy::getInstance('seminars')
-            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+        /** @var ConfigurationProxy $configurationProxy */
+        $configurationProxy = ConfigurationProxy::getInstance('seminars');
+        $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
         $this->subject->setConfigurationValue(
             'cssFileForAttendeeMail',
             'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
@@ -3410,8 +3425,9 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForPlaceAddressReplacesMultipleLineFeedAndCarriageReturnsWithSpaces()
     {
         $this->subject->setConfigurationValue('sendConfirmation', true);
-        ConfigurationProxy::getInstance('seminars')
-            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+        /** @var ConfigurationProxy $configurationProxy */
+        $configurationProxy = ConfigurationProxy::getInstance('seminars');
+        $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
         $this->subject->setConfigurationValue(
             'cssFileForAttendeeMail',
             'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
@@ -3567,8 +3583,9 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForPlaceAddressAndHtmlMailsSeparatresAddressAndCityLineWithBreaks()
     {
         $this->subject->setConfigurationValue('sendConfirmation', true);
-        ConfigurationProxy::getInstance('seminars')
-            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+        /** @var ConfigurationProxy $configurationProxy */
+        $configurationProxy = ConfigurationProxy::getInstance('seminars');
+        $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
         $this->subject->setConfigurationValue(
             'cssFileForAttendeeMail',
             'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
@@ -3734,7 +3751,9 @@ final class RegistrationManagerTest extends TestCase
 
         $attachments = $this->filterEmailAttachmentsByTitle($this->mailer->getFirstSentEmail(), 'text/calendar');
         self::assertNotEmpty($attachments);
-        /** @var \Swift_Mime_Attachment $attachment */
+        $attachment = $attachments[0];
+        self::assertContains('BEGIN:VCALENDAR', $attachment->getBody());
+        self::assertContains('END:VCALENDAR', $attachment->getBody());
     }
 
     /**
@@ -4130,7 +4149,9 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForInformalSalutationContainsInformalSalutation()
     {
         $this->subject->setConfigurationValue('sendConfirmation', true);
-        ConfigurationRegistry::get('plugin.tx_seminars')->setAsString('salutation', 'informal');
+        /** @var Configuration $configuration */
+        $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
+        $configuration->setAsString('salutation', 'informal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4158,7 +4179,9 @@ final class RegistrationManagerTest extends TestCase
         }
 
         $this->subject->setConfigurationValue('sendConfirmation', true);
-        ConfigurationRegistry::get('plugin.tx_seminars')->setAsString('salutation', 'formal');
+        /** @var Configuration $configuration */
+        $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
+        $configuration->setAsString('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4186,7 +4209,9 @@ final class RegistrationManagerTest extends TestCase
         }
 
         $this->subject->setConfigurationValue('sendConfirmation', true);
-        ConfigurationRegistry::get('plugin.tx_seminars')->setAsString('salutation', 'formal');
+        /** @var Configuration $configuration */
+        $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
+        $configuration->setAsString('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4214,7 +4239,9 @@ final class RegistrationManagerTest extends TestCase
         }
 
         $this->subject->setConfigurationValue('sendConfirmation', true);
-        ConfigurationRegistry::get('plugin.tx_seminars')->setAsString('salutation', 'formal');
+        /** @var Configuration $configuration */
+        $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
+        $configuration->setAsString('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4508,7 +4535,9 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForInformalSalutationNotContainsRawTemplateMarkers()
     {
         $this->subject->setConfigurationValue('sendConfirmation', true);
-        ConfigurationRegistry::get('plugin.tx_seminars')->setAsString('salutation', 'informal');
+        /** @var Configuration $configuration */
+        $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
+        $configuration->setAsString('salutation', 'informal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4535,7 +4564,9 @@ final class RegistrationManagerTest extends TestCase
         }
 
         $this->subject->setConfigurationValue('sendConfirmation', true);
-        ConfigurationRegistry::get('plugin.tx_seminars')->setAsString('salutation', 'formal');
+        /** @var Configuration $configuration */
+        $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
+        $configuration->setAsString('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4562,7 +4593,9 @@ final class RegistrationManagerTest extends TestCase
         }
 
         $this->subject->setConfigurationValue('sendConfirmation', true);
-        ConfigurationRegistry::get('plugin.tx_seminars')->setAsString('salutation', 'formal');
+        /** @var Configuration $configuration */
+        $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
+        $configuration->setAsString('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4589,7 +4622,9 @@ final class RegistrationManagerTest extends TestCase
         }
 
         $this->subject->setConfigurationValue('sendConfirmation', true);
-        ConfigurationRegistry::get('plugin.tx_seminars')->setAsString('salutation', 'formal');
+        /** @var Configuration $configuration */
+        $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
+        $configuration->setAsString('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4839,7 +4874,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForUnregistrationMailDoesNotAppendUnregistrationNotice()
     {
-        /** @var TestingRegistrationManager|MockObject $subject */
+        /** @var TestingRegistrationManager&MockObject $subject */
         $subject = $this->getMockBuilder(TestingRegistrationManager::class)
             ->setMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::never())->method('getUnregistrationNotice');
@@ -4870,7 +4905,7 @@ final class RegistrationManagerTest extends TestCase
     {
         TemplateHelper::setCachedConfigurationValue('allowUnregistrationWithEmptyWaitingList', false);
 
-        /** @var TestingRegistrationManager|MockObject $subject */
+        /** @var TestingRegistrationManager&MockObject $subject */
         $subject = $this->getMockBuilder(TestingRegistrationManager::class)
             ->setMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::never())->method('getUnregistrationNotice');
@@ -4898,7 +4933,7 @@ final class RegistrationManagerTest extends TestCase
     {
         TemplateHelper::setCachedConfigurationValue('allowUnregistrationWithEmptyWaitingList', true);
 
-        /** @var TestingRegistrationManager|MockObject $subject */
+        /** @var TestingRegistrationManager&MockObject $subject */
         $subject = $this->getMockBuilder(TestingRegistrationManager::class)
             ->setMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::once())->method('getUnregistrationNotice');
@@ -4929,7 +4964,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForRegistrationOnQueueMailAndUnregistrationPossibleAddsUnregistrationNotice()
     {
-        /** @var TestingRegistrationManager|MockObject $subject */
+        /** @var TestingRegistrationManager&MockObject $subject */
         $subject = $this->getMockBuilder(TestingRegistrationManager::class)
             ->setMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::once())->method('getUnregistrationNotice');
@@ -4969,7 +5004,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForQueueUpdateMailAndUnregistrationPossibleAddsUnregistrationNotice()
     {
-        /** @var TestingRegistrationManager|MockObject $subject */
+        /** @var TestingRegistrationManager&MockObject $subject */
         $subject = $this->getMockBuilder(TestingRegistrationManager::class)
             ->setMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::once())->method('getUnregistrationNotice');
@@ -6274,7 +6309,7 @@ final class RegistrationManagerTest extends TestCase
 
         $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
         $plugin->cObj = $this->getFrontEndController()->cObj;
-        /** @var TestingRegistrationManager|MockObject $subject */
+        /** @var TestingRegistrationManager&MockObject $subject */
         $subject = $this->createPartialMock(
             TestingRegistrationManager::class,
             [
@@ -6310,7 +6345,7 @@ final class RegistrationManagerTest extends TestCase
 
         $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
         $plugin->cObj = $this->getFrontEndController()->cObj;
-        /** @var TestingRegistrationManager|MockObject $subject */
+        /** @var TestingRegistrationManager&MockObject $subject */
         $subject = $this->createPartialMock(
             TestingRegistrationManager::class,
             [
@@ -6342,7 +6377,7 @@ final class RegistrationManagerTest extends TestCase
 
         $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
         $plugin->cObj = $this->getFrontEndController()->cObj;
-        /** @var TestingRegistrationManager|MockObject $subject */
+        /** @var TestingRegistrationManager&MockObject $subject */
         $subject = $this->createPartialMock(
             TestingRegistrationManager::class,
             [
@@ -6384,7 +6419,7 @@ final class RegistrationManagerTest extends TestCase
 
         $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
         $plugin->cObj = $this->getFrontEndController()->cObj;
-        /** @var TestingRegistrationManager|MockObject $subject */
+        /** @var TestingRegistrationManager&MockObject $subject */
         $subject = $this->createPartialMock(
             TestingRegistrationManager::class,
             [
@@ -6431,7 +6466,7 @@ final class RegistrationManagerTest extends TestCase
 
         $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
         $plugin->cObj = $this->getFrontEndController()->cObj;
-        /** @var TestingRegistrationManager|MockObject $subject */
+        /** @var TestingRegistrationManager&MockObject $subject */
         $subject = $this->createPartialMock(
             TestingRegistrationManager::class,
             [
@@ -6620,7 +6655,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
         $event->setData(['payment_methods' => new Collection()]);
         $event->method('getAvailablePrices')
@@ -6646,7 +6681,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
         $event->setData(['payment_methods' => new Collection()]);
         $event->method('getAvailablePrices')
@@ -6672,7 +6707,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
         $event->setData(['payment_methods' => new Collection()]);
         $event->method('getAvailablePrices')
@@ -6698,7 +6733,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
         $event->setData(['payment_methods' => new Collection()]);
         $event->method('getAvailablePrices')
@@ -6724,7 +6759,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
         $event->setData(['payment_methods' => new Collection()]);
         $event->method('getAvailablePrices')
@@ -6750,7 +6785,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices']);
         $event->setData(['payment_methods' => new Collection()]);
         $event->method('getAvailablePrices')
@@ -6964,7 +6999,7 @@ final class RegistrationManagerTest extends TestCase
         $paymentMethods = new Collection();
         $paymentMethods->add($paymentMethod);
 
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 12]);
@@ -6994,7 +7029,7 @@ final class RegistrationManagerTest extends TestCase
         $paymentMethods->add($paymentMethod1);
         $paymentMethods->add($paymentMethod2);
 
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 12]);
@@ -7022,7 +7057,7 @@ final class RegistrationManagerTest extends TestCase
         $paymentMethods = new Collection();
         $paymentMethods->add($paymentMethod);
 
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 0]);
@@ -7045,7 +7080,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $subject = new TestingRegistrationManager();
 
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 0]);
@@ -7077,7 +7112,7 @@ final class RegistrationManagerTest extends TestCase
         $paymentMethods->add($paymentMethod1);
         $paymentMethods->add($paymentMethod2);
 
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 12]);
@@ -7104,7 +7139,7 @@ final class RegistrationManagerTest extends TestCase
         $paymentMethods = new Collection();
         $paymentMethods->add($paymentMethod);
 
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 12]);
@@ -7134,7 +7169,7 @@ final class RegistrationManagerTest extends TestCase
         $paymentMethods->add($paymentMethod1);
         $paymentMethods->add($paymentMethod2);
 
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 12]);
@@ -7164,7 +7199,7 @@ final class RegistrationManagerTest extends TestCase
         $paymentMethods = new Collection();
         $paymentMethods->add($paymentMethod);
 
-        /** @var \Tx_Seminars_Model_Event|MockObject $event */
+        /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(\Tx_Seminars_Model_Event::class, ['getAvailablePrices', 'getPaymentMethods']);
         $event->method('getAvailablePrices')
             ->willReturn(['regular' => 12]);

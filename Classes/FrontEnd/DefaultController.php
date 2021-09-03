@@ -602,7 +602,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
      *
      * @return \Tx_Seminars_OldModel_Event|null
      */
-    public function getSeminar(): \Tx_Seminars_OldModel_Event
+    public function getSeminar()
     {
         return $this->seminar;
     }
@@ -612,7 +612,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
      *
      * @return \Tx_Seminars_OldModel_Registration|null
      */
-    public function getRegistration(): \Tx_Seminars_OldModel_Registration
+    public function getRegistration()
     {
         return $this->registration;
     }

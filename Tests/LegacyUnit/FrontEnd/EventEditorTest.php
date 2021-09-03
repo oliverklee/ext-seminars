@@ -55,7 +55,7 @@ class EventEditorTest extends TestCase
     private $recordsPageUid = 0;
 
     /**
-     * @var MockObject|MailMessage|null
+     * @var (MockObject&MailMessage)|null
      */
     private $email = null;
 

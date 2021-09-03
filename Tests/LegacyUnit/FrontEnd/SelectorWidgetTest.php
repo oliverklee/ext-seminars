@@ -455,7 +455,7 @@ class SelectorWidgetTest extends TestCase
      */
     public function itemsInSearchBoxAreSortedAlphabetically()
     {
-        /** @var \Tx_Seminars_FrontEnd_SelectorWidget|MockObject $subject */
+        /** @var \Tx_Seminars_FrontEnd_SelectorWidget&MockObject $subject */
         $subject = $this->getMockBuilder(\Tx_Seminars_FrontEnd_SelectorWidget::class)
             ->setMethods(
                 [

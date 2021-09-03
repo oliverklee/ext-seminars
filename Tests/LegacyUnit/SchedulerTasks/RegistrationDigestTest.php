@@ -35,27 +35,27 @@ class RegistrationDigestTest extends TestCase
     private $configuration = null;
 
     /**
-     * @var \Tx_Seminars_Mapper_Event|ObjectProphecy
+     * @var ObjectProphecy
      */
     private $eventMapperProphecy = null;
 
     /**
-     * @var \Tx_Seminars_Mapper_Event|ProphecySubjectInterface
+     * @var \Tx_Seminars_Mapper_Event&ProphecySubjectInterface
      */
     private $eventMapper = null;
 
     /**
-     * @var ObjectManager|ObjectProphecy
+     * @var ObjectProphecy
      */
     private $objectManagerProphecy = null;
 
     /**
-     * @var MailMessage|ObjectProphecy
+     * @var ObjectProphecy
      */
     private $emailProphecy = null;
 
     /**
-     * @var StandaloneView|ObjectProphecy
+     * @var ObjectProphecy
      */
     private $viewProphecy = null;
 
@@ -78,7 +78,7 @@ class RegistrationDigestTest extends TestCase
         $this->subject->setConfiguration($this->configuration);
 
         $this->objectManagerProphecy = $this->prophesize(ObjectManager::class);
-        /** @var ObjectManager|ProphecySubjectInterface $objectManager */
+        /** @var ObjectManager&ProphecySubjectInterface $objectManager */
         $objectManager = $this->objectManagerProphecy->reveal();
         $this->subject->injectObjectManager($objectManager);
 
@@ -111,7 +111,9 @@ class RegistrationDigestTest extends TestCase
      */
     private function setObjectManagerReturnValues()
     {
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->objectManagerProphecy->get(StandaloneView::class)->willReturn($this->viewProphecy->reveal());
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->objectManagerProphecy->get(MailMessage::class)->willReturn($this->emailProphecy->reveal());
     }
 
@@ -125,17 +127,18 @@ class RegistrationDigestTest extends TestCase
         $events = new Collection();
         $event = new \Tx_Seminars_Model_Event();
         $events->add($event);
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
 
-        /** @var MailMessage|ObjectProphecy $emailProphecy */
+        /** @var ObjectProphecy $emailProphecy */
         $emailProphecy = $this->prophesize(MailMessage::class);
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->objectManagerProphecy->get(MailMessage::class)->willReturn($emailProphecy->reveal());
 
         $this->subject->execute();
 
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $emailProphecy->send()->shouldNotHaveBeenCalled();
-        /** @var StandaloneView|ObjectProphecy $viewProphecy */
-        $this->prophesize(StandaloneView::class);
     }
 
     /**
@@ -146,10 +149,12 @@ class RegistrationDigestTest extends TestCase
         $this->setObjectManagerReturnValues();
         $this->configuration->setAsBoolean('enable', true);
 
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn(new Collection());
 
         $this->subject->execute();
 
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->emailProphecy->send()->shouldNotHaveBeenCalled();
     }
 
@@ -164,11 +169,14 @@ class RegistrationDigestTest extends TestCase
         $events = new Collection();
         $event = new \Tx_Seminars_Model_Event();
         $events->add($event);
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->eventMapperProphecy->save($event)->shouldBeCalled();
 
         $this->subject->execute();
 
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->emailProphecy->send()->shouldHaveBeenCalled();
     }
 
@@ -188,11 +196,14 @@ class RegistrationDigestTest extends TestCase
         $events = new Collection();
         $event = new \Tx_Seminars_Model_Event();
         $events->add($event);
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->eventMapperProphecy->save($event)->shouldBeCalled();
 
         $this->subject->execute();
 
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->emailProphecy->setFrom($fromEmail, $fromName)->shouldHaveBeenCalled();
     }
 
@@ -212,11 +223,14 @@ class RegistrationDigestTest extends TestCase
         $events = new Collection();
         $event = new \Tx_Seminars_Model_Event();
         $events->add($event);
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->eventMapperProphecy->save($event)->shouldBeCalled();
 
         $this->subject->execute();
 
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->emailProphecy->setTo($toEmail, $toName)->shouldHaveBeenCalled();
     }
 
@@ -236,12 +250,15 @@ class RegistrationDigestTest extends TestCase
         $events = new Collection();
         $event = new \Tx_Seminars_Model_Event();
         $events->add($event);
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->eventMapperProphecy->save($event)->shouldBeCalled();
 
         $this->subject->execute();
 
         $expectedSubject = LocalizationUtility::translate('registrationDigestEmail_Subject', 'seminars');
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->emailProphecy->setSubject($expectedSubject)->shouldHaveBeenCalled();
     }
 
@@ -266,20 +283,28 @@ class RegistrationDigestTest extends TestCase
         $events = new Collection();
         $event = new \Tx_Seminars_Model_Event();
         $events->add($event);
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->eventMapperProphecy->save($event)->shouldBeCalled();
 
         $expectedBody = 'Text body';
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->viewProphecy->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName($plaintextTemplatePath))
             ->shouldBeCalled();
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->viewProphecy->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName($htmlTemplatePath))
             ->shouldBeCalled();
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->viewProphecy->assign('events', $events)->shouldBeCalled();
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->viewProphecy->render()->willReturn($expectedBody);
 
         $this->subject->execute();
 
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->emailProphecy->setBody($expectedBody)->shouldHaveBeenCalled();
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->emailProphecy->addPart($expectedBody, 'text/html')->shouldHaveBeenCalled();
     }
 
@@ -294,7 +319,9 @@ class RegistrationDigestTest extends TestCase
         $events = new Collection();
         $event = new \Tx_Seminars_Model_Event();
         $events->add($event);
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->eventMapperProphecy->save($event)->shouldBeCalled();
 
         $this->subject->execute();
@@ -313,7 +340,9 @@ class RegistrationDigestTest extends TestCase
         $events = new Collection();
         $event = new \Tx_Seminars_Model_Event();
         $events->add($event);
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->eventMapperProphecy->save($event)->shouldBeCalled();
 
         $this->subject->execute();

@@ -55,11 +55,6 @@ trait BackEndTestsTrait
     private $t3VarBackup = [];
 
     /**
-     * @var MockObject|BackendUserAuthentication
-     */
-    private $mockBackEndUser = null;
-
-    /**
      * @var Configuration
      */
     private $configuration = null;
@@ -90,7 +85,9 @@ trait BackEndTestsTrait
         $this->replaceBackEndUserWithMock();
         $this->unifyBackEndLanguage();
         $this->unifyExtensionSettings();
-        ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', false);
+        /** @var ConfigurationProxy $configuration */
+        $configuration = ConfigurationProxy::getInstance('seminars');
+        $configuration->setAsBoolean('enableConfigCheck', false);
         $this->setUpExtensionConfiguration();
         $headerProxyFactory = HeaderProxyFactory::getInstance();
         $headerProxyFactory->enableTestMode();
@@ -116,14 +113,15 @@ trait BackEndTestsTrait
         /** @var BackendUserAuthentication $currentBackEndUser */
         $currentBackEndUser = $GLOBALS['BE_USER'];
         $this->backEndUserBackup = $currentBackEndUser;
-        $this->mockBackEndUser = $this->createPartialMock(
+        /** @var BackendUserAuthentication&MockObject $mockBackEndUser */
+        $mockBackEndUser = $this->createPartialMock(
             BackendUserAuthentication::class,
             ['check', 'doesUserHaveAccess', 'setAndSaveSessionData', 'writeUC']
         );
-        $this->mockBackEndUser->method('check')->willReturn(true);
-        $this->mockBackEndUser->method('doesUserHaveAccess')->willReturn(true);
-        $this->mockBackEndUser->user['uid'] = (int)$currentBackEndUser->user['uid'];
-        $GLOBALS['BE_USER'] = $this->mockBackEndUser;
+        $mockBackEndUser->method('check')->willReturn(true);
+        $mockBackEndUser->method('doesUserHaveAccess')->willReturn(true);
+        $mockBackEndUser->user['uid'] = (int)$currentBackEndUser->user['uid'];
+        $GLOBALS['BE_USER'] = $mockBackEndUser;
     }
 
     /**

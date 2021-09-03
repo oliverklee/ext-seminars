@@ -26,7 +26,7 @@ final class RegistrationFormTest extends FunctionalTestCase
     private $subject = null;
 
     /**
-     * @var ContentObjectRenderer|ProphecySubjectInterface
+     * @var ContentObjectRenderer&ProphecySubjectInterface
      */
     private $contentObject = null;
 

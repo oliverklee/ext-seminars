@@ -19,7 +19,7 @@ use TYPO3\CMS\Lang\LanguageService;
 class AbstractRegistrationListViewTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_Csv_AbstractRegistrationListView
+     * @var \Tx_Seminars_Csv_AbstractRegistrationListView&MockObject
      */
     private $subject = null;
 
@@ -96,26 +96,26 @@ class AbstractRegistrationListViewTest extends TestCase
             ]
         );
 
-        $this->subject = $this->getMockForAbstractClass(\Tx_Seminars_Csv_AbstractRegistrationListView::class);
-        $this->subject->method(
-            'shouldAlsoContainRegistrationsOnQueue'
-        )->willReturn(true);
+        /** @var \Tx_Seminars_Csv_AbstractRegistrationListView&MockObject $subject */
+        $subject = $this->getMockForAbstractClass(\Tx_Seminars_Csv_AbstractRegistrationListView::class);
+        $subject->method('shouldAlsoContainRegistrationsOnQueue')->willReturn(true);
 
         $testCase = $this;
-        $this->subject->method('getFrontEndUserFieldKeys')
+        $subject->method('getFrontEndUserFieldKeys')
             ->willReturnCallback(
-                static function () use ($testCase) {
+                static function () use ($testCase): array {
                     return $testCase->frontEndUserFieldKeys;
                 }
             );
-        $this->subject->method('getRegistrationFieldKeys')
+        $subject->method('getRegistrationFieldKeys')
             ->willReturnCallback(
-                static function () use ($testCase) {
+                static function () use ($testCase): array {
                     return $testCase->registrationFieldKeys;
                 }
             );
 
-        $this->subject->setEventUid($this->eventUid);
+        $subject->setEventUid($this->eventUid);
+        $this->subject = $subject;
     }
 
     protected function tearDown()
@@ -308,7 +308,7 @@ class AbstractRegistrationListViewTest extends TestCase
     {
         $this->expectException(\BadMethodCallException::class);
 
-        /** @var \Tx_Seminars_Csv_AbstractRegistrationListView|MockObject $subject */
+        /** @var \Tx_Seminars_Csv_AbstractRegistrationListView&MockObject $subject */
         $subject = $this->getMockForAbstractClass(\Tx_Seminars_Csv_AbstractRegistrationListView::class);
 
         self::assertSame(
@@ -324,7 +324,7 @@ class AbstractRegistrationListViewTest extends TestCase
     {
         $this->expectException(\BadMethodCallException::class);
 
-        /** @var \Tx_Seminars_Csv_AbstractRegistrationListView|MockObject $subject */
+        /** @var \Tx_Seminars_Csv_AbstractRegistrationListView&MockObject $subject */
         $subject = $this->getMockForAbstractClass(\Tx_Seminars_Csv_AbstractRegistrationListView::class);
         $subject->setEventUid($this->eventUid);
         $subject->setPageUid($this->pageUid);

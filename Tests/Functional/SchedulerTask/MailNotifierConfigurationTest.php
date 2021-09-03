@@ -45,7 +45,7 @@ class MailNotifierConfigurationTest extends FunctionalTestCase
     private $subject = null;
 
     /**
-     * @var SchedulerModuleController|MockObject
+     * @var SchedulerModuleController&MockObject
      */
     private $moduleController = null;
 
@@ -206,7 +206,7 @@ class MailNotifierConfigurationTest extends FunctionalTestCase
         $pageUid = 1;
         $submittedData = ['seminars_configurationPageUid' => (string)$pageUid];
 
-        /** @var MailNotifier|MockObject $task */
+        /** @var MailNotifier&MockObject $task */
         $task = $this->createMock(MailNotifier::class);
         $task->expects(self::once())->method('setConfigurationPageUid')->with($pageUid);
 

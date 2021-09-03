@@ -30,7 +30,7 @@ final class EventStateServiceTest extends TestCase
     private $testingFramework = null;
 
     /**
-     * @var \Tx_Seminars_Mapper_Event|MockObject
+     * @var \Tx_Seminars_Mapper_Event&MockObject
      */
     private $eventMapper = null;
 

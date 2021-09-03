@@ -126,7 +126,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
      * dummy option will always be the first one in the array and thus shown
      * first in the drop-down.
      *
-     * @param string[] &$options options, may be empty
+     * @param string[] $options options, may be empty
      *
      * @return void
      */

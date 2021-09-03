@@ -1165,7 +1165,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      * regular, regular_early, regular_board,
      * special, special_early, special_board
      *
-     * @return float[] the available prices as an associative array, will not be empty
+     * @return array<string, float> the available prices as an associative array, will not be empty
      */
     public function getAvailablePrices(): array
     {

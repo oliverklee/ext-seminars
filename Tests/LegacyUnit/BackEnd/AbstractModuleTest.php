@@ -22,7 +22,9 @@ class AbstractModuleTest extends TestCase
 
     protected function setUp()
     {
-        ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', false);
+        /** @var ConfigurationProxy $configuration */
+        $configuration = ConfigurationProxy::getInstance('seminars');
+        $configuration->setAsBoolean('enableConfigCheck', false);
 
         $this->subject = new DummyModule();
     }

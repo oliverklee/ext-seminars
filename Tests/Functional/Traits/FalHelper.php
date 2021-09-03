@@ -24,8 +24,10 @@ trait FalHelper
      */
     private function provideAdminBackEndUserForFal()
     {
-        /** @var BackendUserAuthentication|ObjectProphecy $backEndUserProphecy */
+        /** @var ObjectProphecy $backEndUserProphecy */
         $backEndUserProphecy = $this->prophesize(BackendUserAuthentication::class);
+
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $backEndUserProphecy->isAdmin()->willReturn(true);
         $GLOBALS['BE_USER'] = $backEndUserProphecy->reveal();
     }

@@ -86,7 +86,7 @@ final class EmailServiceTest extends TestCase
     private $languageBackup;
 
     /**
-     * @var MockObject|MailMessage|null
+     * @var (MockObject&MailMessage)|null
      */
     private $email = null;
 

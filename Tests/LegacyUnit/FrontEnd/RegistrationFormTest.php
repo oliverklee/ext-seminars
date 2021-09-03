@@ -448,9 +448,7 @@ class RegistrationFormTest extends TestCase
         );
     }
 
-    //////////////////////////////////////
     // Tests concerning getFeUserData().
-    //////////////////////////////////////
 
     /**
      * @test
@@ -459,8 +457,9 @@ class RegistrationFormTest extends TestCase
     {
         $this->testingFramework->createAndLoginFrontEndUser();
 
-        ConfigurationRegistry::get('plugin.tx_staticinfotables_pi1')->
-        setAsString('countryCode', 'DEU');
+        /** @var Configuration $configuration */
+        $configuration = ConfigurationRegistry::get('plugin.tx_staticinfotables_pi1');
+        $configuration->setAsString('countryCode', 'DEU');
 
         self::assertEquals(
             'Deutschland',
@@ -683,7 +682,7 @@ class RegistrationFormTest extends TestCase
             $this->getFrontEndController()->cObj
         );
 
-        /** @var \Tx_Seminars_OldModel_Event|MockObject $event */
+        /** @var \Tx_Seminars_OldModel_Event&MockObject $event */
         $event = $this->createMock(\Tx_Seminars_OldModel_Event::class);
         $subject->setSeminar($event);
 
@@ -710,7 +709,7 @@ class RegistrationFormTest extends TestCase
             ['showRegistrationFields' => $key],
             $this->getFrontEndController()->cObj
         );
-        /** @var \Tx_Seminars_OldModel_Event|MockObject $event */
+        /** @var \Tx_Seminars_OldModel_Event&MockObject $event */
         $event = $this->createMock(\Tx_Seminars_OldModel_Event::class);
         $subject->setSeminar($event);
 
@@ -999,7 +998,7 @@ class RegistrationFormTest extends TestCase
      */
     public function validateNumberOfRegisteredPersonsForOnePersonAndOneSeatReturnsTrue()
     {
-        /** @var \Tx_Seminars_FrontEnd_RegistrationForm|MockObject $subject */
+        /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getNumberOfEnteredPersons', 'isFormFieldEnabled']
@@ -1022,7 +1021,7 @@ class RegistrationFormTest extends TestCase
      */
     public function validateNumberOfRegisteredPersonsForOnePersonAndTwoSeatsReturnsFalse()
     {
-        /** @var \Tx_Seminars_FrontEnd_RegistrationForm|MockObject $subject */
+        /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getNumberOfEnteredPersons', 'isFormFieldEnabled']
@@ -1045,7 +1044,7 @@ class RegistrationFormTest extends TestCase
      */
     public function validateNumberOfRegisteredPersonsForTwoPersonsAndOneSeatReturnsFalse()
     {
-        /** @var \Tx_Seminars_FrontEnd_RegistrationForm|MockObject $subject */
+        /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getNumberOfEnteredPersons', 'isFormFieldEnabled']
@@ -1068,7 +1067,7 @@ class RegistrationFormTest extends TestCase
      */
     public function validateNumberOfRegisteredPersonsForTwoPersonsAndTwoSeatsReturnsTrue()
     {
-        /** @var \Tx_Seminars_FrontEnd_RegistrationForm|MockObject $subject */
+        /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getNumberOfEnteredPersons', 'isFormFieldEnabled']
@@ -1174,7 +1173,7 @@ class RegistrationFormTest extends TestCase
      */
     public function validateAdditionalPersonsEMailAddressesForDisabledFrontEndUserCreationReturnsTrue()
     {
-        /** @var \Tx_Seminars_FrontEnd_RegistrationForm|MockObject $subject */
+        /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled']
@@ -1199,7 +1198,7 @@ class RegistrationFormTest extends TestCase
      */
     public function validateAdditionalPersonsEMailAddressesForDisabledFormFieldReturnsTrue()
     {
-        /** @var \Tx_Seminars_FrontEnd_RegistrationForm|MockObject $subject */
+        /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled']
@@ -1224,7 +1223,7 @@ class RegistrationFormTest extends TestCase
      */
     public function validateAdditionalPersonsEMailAddressesForNoPersonsReturnsTrue()
     {
-        /** @var \Tx_Seminars_FrontEnd_RegistrationForm|MockObject $subject */
+        /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled']
@@ -1249,7 +1248,7 @@ class RegistrationFormTest extends TestCase
      */
     public function validateAdditionalPersonsEMailAddressesForOneValidEMailAddressReturnsTrue()
     {
-        /** @var \Tx_Seminars_FrontEnd_RegistrationForm|MockObject $subject */
+        /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled']
@@ -1276,7 +1275,7 @@ class RegistrationFormTest extends TestCase
      */
     public function validateAdditionalPersonsEMailAddressesForOneInvalidEMailAddressReturnsFalse()
     {
-        /** @var \Tx_Seminars_FrontEnd_RegistrationForm|MockObject $subject */
+        /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled']
@@ -1303,7 +1302,7 @@ class RegistrationFormTest extends TestCase
      */
     public function validateAdditionalPersonsEMailAddressesForOneEmptyAddressReturnsFalse()
     {
-        /** @var \Tx_Seminars_FrontEnd_RegistrationForm|MockObject $subject */
+        /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled']
@@ -1330,7 +1329,7 @@ class RegistrationFormTest extends TestCase
      */
     public function validateAdditionalPersonsEMailAddressesForOneMissingAddressReturnsFalse()
     {
-        /** @var \Tx_Seminars_FrontEnd_RegistrationForm|MockObject $subject */
+        /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled']
@@ -1357,7 +1356,7 @@ class RegistrationFormTest extends TestCase
      */
     public function validateAdditionalPersonsEMailAddressesForOneValidAndOneInvalidEMailAddressReturnsFalse()
     {
-        /** @var \Tx_Seminars_FrontEnd_RegistrationForm|MockObject $subject */
+        /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_FrontEnd_RegistrationForm::class,
             ['getAdditionalRegisteredPersonsData', 'isFormFieldEnabled']

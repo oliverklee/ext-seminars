@@ -32,7 +32,7 @@ class CountdownTest extends TestCase
     private $testingFramework = null;
 
     /**
-     * @var \Tx_Seminars_Mapper_Event|MockObject
+     * @var \Tx_Seminars_Mapper_Event&MockObject
      */
     private $mapper = null;
 
@@ -43,7 +43,9 @@ class CountdownTest extends TestCase
         $configurationRegistry->set('page.config', new Configuration());
         $configurationRegistry->set('plugin.tx_seminars._LOCAL_LANG.default', new Configuration());
 
-        ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', false);
+        /** @var ConfigurationProxy $configuration */
+        $configuration = ConfigurationProxy::getInstance('seminars');
+        $configuration->setAsBoolean('enableConfigCheck', false);
 
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
@@ -136,7 +138,7 @@ class CountdownTest extends TestCase
             ->method('findNextUpcoming')
             ->willReturn($event);
 
-        /** @var \Tx_Seminars_ViewHelper_Countdown|MockObject $viewHelper */
+        /** @var \Tx_Seminars_ViewHelper_Countdown&MockObject $viewHelper */
         $viewHelper = $this->createPartialMock(\Tx_Seminars_ViewHelper_Countdown::class, ['render']);
         $viewHelper->expects(self::once())
             ->method('render')
