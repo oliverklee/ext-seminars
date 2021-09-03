@@ -6,6 +6,7 @@
 /.phive export-ignore
 /.php_cs.dist export-ignore
 /CODE_OF_CONDUCT.md export-ignore
+/Resources/Private/Patches/ export-ignore
 /Resources/Private/Php/update.sh export-ignore
 /Tests/ export-ignore
 /docker-compose.yml export-ignore
