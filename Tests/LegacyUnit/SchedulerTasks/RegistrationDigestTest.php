@@ -130,7 +130,6 @@ class RegistrationDigestTest extends TestCase
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->eventMapperProphecy->findForRegistrationDigestEmail()->willReturn($events);
 
-        /** @var ObjectProphecy $emailProphecy */
         $emailProphecy = $this->prophesize(MailMessage::class);
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->objectManagerProphecy->get(MailMessage::class)->willReturn($emailProphecy->reveal());

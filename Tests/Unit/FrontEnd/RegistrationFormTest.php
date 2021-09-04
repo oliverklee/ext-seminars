@@ -70,7 +70,6 @@ final class RegistrationFormTest extends UnitTestCase
 
     protected function setUp()
     {
-        /** @var ObjectProphecy $frontEndProphecy */
         $frontEndProphecy = $this->prophesize(TypoScriptFrontendController::class);
         /** @var TypoScriptFrontendController&ProphecySubjectInterface $frontEnd */
         $frontEnd = $frontEndProphecy->reveal();
