@@ -43,16 +43,13 @@ class EventMapperTest extends TestCase
         $this->testingFramework->cleanUp();
     }
 
-    ////////////////////////////////////
     // Tests regarding getTimeSlots().
-    ////////////////////////////////////
 
     /**
      * @test
      */
     public function getTimeSlotsReturnsListInstance()
     {
-        /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
         self::assertInstanceOf(Collection::class, $testingModel->getTimeSlots());
@@ -74,7 +71,6 @@ class EventMapperTest extends TestCase
             ['timeslots' => 1]
         );
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find($uid);
         self::assertInstanceOf(
             \Tx_Seminars_Model_TimeSlot::class,
@@ -98,7 +94,6 @@ class EventMapperTest extends TestCase
             ['timeslots' => 1]
         );
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find($uid);
         self::assertEquals(
             $timeSlotUid,
@@ -106,16 +101,13 @@ class EventMapperTest extends TestCase
         );
     }
 
-    /////////////////////////////////
     // Tests regarding getPlaces().
-    /////////////////////////////////
 
     /**
      * @test
      */
     public function getPlacesReturnsListInstance()
     {
-        /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
         self::assertInstanceOf(Collection::class, $testingModel->getPlaces());
@@ -136,7 +128,6 @@ class EventMapperTest extends TestCase
             'place'
         );
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find($uid);
         self::assertInstanceOf(\Tx_Seminars_Model_Place::class, $model->getPlaces()->first());
     }
@@ -156,7 +147,6 @@ class EventMapperTest extends TestCase
             'place'
         );
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find($uid);
         self::assertEquals(
             $place->getUid(),
@@ -164,16 +154,13 @@ class EventMapperTest extends TestCase
         );
     }
 
-    ///////////////////////////////////
     // Tests regarding getLodgings().
-    ///////////////////////////////////
 
     /**
      * @test
      */
     public function getLodgingsReturnsListInstance()
     {
-        /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
         self::assertInstanceOf(Collection::class, $testingModel->getLodgings());
@@ -194,7 +181,6 @@ class EventMapperTest extends TestCase
             'lodgings'
         );
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find($uid);
         self::assertInstanceOf(\Tx_Seminars_Model_Lodging::class, $model->getLodgings()->first());
     }
@@ -214,7 +200,6 @@ class EventMapperTest extends TestCase
             'lodgings'
         );
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find($uid);
         self::assertEquals(
             $lodging->getUid(),
@@ -222,16 +207,13 @@ class EventMapperTest extends TestCase
         );
     }
 
-    ////////////////////////////////
     // Tests regarding getFoods().
-    ////////////////////////////////
 
     /**
      * @test
      */
     public function getFoodsReturnsListInstance()
     {
-        /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
         self::assertInstanceOf(Collection::class, $testingModel->getFoods());
@@ -252,7 +234,6 @@ class EventMapperTest extends TestCase
             'foods'
         );
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find($uid);
         self::assertInstanceOf(\Tx_Seminars_Model_Food::class, $model->getFoods()->first());
     }
@@ -272,7 +253,6 @@ class EventMapperTest extends TestCase
             'foods'
         );
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find($uid);
         self::assertEquals(
             $food->getUid(),
@@ -280,16 +260,13 @@ class EventMapperTest extends TestCase
         );
     }
 
-    ///////////////////////////////////
     // Tests regarding getSpeakers().
-    ///////////////////////////////////
 
     /**
      * @test
      */
     public function getSpeakersReturnsListInstance()
     {
-        /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
         self::assertInstanceOf(Collection::class, $testingModel->getSpeakers());
@@ -310,7 +287,6 @@ class EventMapperTest extends TestCase
             'speakers'
         );
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find($uid);
         self::assertInstanceOf(
             \Tx_Seminars_Model_Speaker::class,
@@ -333,7 +309,6 @@ class EventMapperTest extends TestCase
             'speakers'
         );
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find($uid);
         self::assertEquals(
             $speaker->getUid(),
@@ -341,16 +316,13 @@ class EventMapperTest extends TestCase
         );
     }
 
-    ///////////////////////////////////
     // Tests regarding getPartners().
-    ///////////////////////////////////
 
     /**
      * @test
      */
     public function getPartnersReturnsListInstance()
     {
-        /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
         self::assertInstanceOf(Collection::class, $testingModel->getPartners());
@@ -371,7 +343,6 @@ class EventMapperTest extends TestCase
             'partners'
         );
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find($uid);
         self::assertInstanceOf(
             \Tx_Seminars_Model_Speaker::class,
@@ -394,7 +365,6 @@ class EventMapperTest extends TestCase
             'partners'
         );
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find($uid);
         self::assertEquals(
             $speaker->getUid(),
@@ -402,16 +372,13 @@ class EventMapperTest extends TestCase
         );
     }
 
-    ///////////////////////////////////
     // Tests regarding getTutors().
-    ///////////////////////////////////
 
     /**
      * @test
      */
     public function getTutorsReturnsListInstance()
     {
-        /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
         self::assertInstanceOf(Collection::class, $testingModel->getTutors());
@@ -432,7 +399,6 @@ class EventMapperTest extends TestCase
             'tutors'
         );
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find($uid);
         self::assertInstanceOf(
             \Tx_Seminars_Model_Speaker::class,
@@ -455,7 +421,6 @@ class EventMapperTest extends TestCase
             'tutors'
         );
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find($uid);
         self::assertEquals(
             $speaker->getUid(),
@@ -463,16 +428,13 @@ class EventMapperTest extends TestCase
         );
     }
 
-    ///////////////////////////////////
     // Tests regarding getLeaders().
-    ///////////////////////////////////
 
     /**
      * @test
      */
     public function getLeadersReturnsListInstance()
     {
-        /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
         self::assertInstanceOf(Collection::class, $testingModel->getLeaders());
@@ -493,7 +455,6 @@ class EventMapperTest extends TestCase
             'leaders'
         );
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find($uid);
         self::assertInstanceOf(
             \Tx_Seminars_Model_Speaker::class,
@@ -516,7 +477,6 @@ class EventMapperTest extends TestCase
             'leaders'
         );
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find($uid);
         self::assertEquals(
             $speaker->getUid(),
@@ -524,16 +484,13 @@ class EventMapperTest extends TestCase
         );
     }
 
-    /////////////////////////////////////
     // Tests regarding getOrganizers().
-    /////////////////////////////////////
 
     /**
      * @test
      */
     public function getOrganizersReturnsListInstance()
     {
-        /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
         self::assertInstanceOf(Collection::class, $testingModel->getOrganizers());
@@ -556,7 +513,6 @@ class EventMapperTest extends TestCase
             $organizer->getUid()
         );
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find($uid);
         self::assertInstanceOf(\Tx_Seminars_Model_Organizer::class, $model->getOrganizers()->first());
     }
@@ -578,7 +534,6 @@ class EventMapperTest extends TestCase
             $organizer->getUid()
         );
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find($uid);
         self::assertEquals(
             $organizer->getUid(),
@@ -586,16 +541,13 @@ class EventMapperTest extends TestCase
         );
     }
 
-    /////////////////////////////////////////////
     // Tests regarding getOrganizingPartners().
-    /////////////////////////////////////////////
 
     /**
      * @test
      */
     public function getOrganizingPartnersReturnsListInstance()
     {
-        /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
         self::assertInstanceOf(Collection::class, $testingModel->getOrganizingPartners());
@@ -616,7 +568,6 @@ class EventMapperTest extends TestCase
             'organizing_partners'
         );
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find($uid);
         self::assertInstanceOf(\Tx_Seminars_Model_Organizer::class, $model->getOrganizingPartners()->first());
     }
@@ -636,7 +587,6 @@ class EventMapperTest extends TestCase
             'organizing_partners'
         );
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find($uid);
         self::assertEquals(
             $organizer->getUid(),
@@ -644,16 +594,13 @@ class EventMapperTest extends TestCase
         );
     }
 
-    ////////////////////////////////
     // Tests regarding getOwner().
-    ////////////////////////////////
 
     /**
      * @test
      */
     public function getOwnerWithoutOwnerReturnsNull()
     {
-        /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
         self::assertNull($testingModel->getOwner());
@@ -664,25 +611,20 @@ class EventMapperTest extends TestCase
      */
     public function getOwnerWithOwnerReturnsOwnerInstance()
     {
-        /** @var FrontEndUser $frontEndUser */
         $frontEndUser = MapperRegistry::get(FrontEndUserMapper::class)
             ->getLoadedTestingModel([]);
-        /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel(['owner_feuser' => $frontEndUser->getUid()]);
 
         self::assertInstanceOf(FrontEndUser::class, $testingModel->getOwner());
     }
 
-    ////////////////////////////////////////
     // Tests regarding getEventManagers().
-    ////////////////////////////////////////
 
     /**
      * @test
      */
     public function getEventManagersReturnsListInstance()
     {
-        /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
         self::assertInstanceOf(Collection::class, $testingModel->getEventManagers());
@@ -702,7 +644,6 @@ class EventMapperTest extends TestCase
             'vips'
         );
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find($uid);
         self::assertInstanceOf(FrontEndUser::class, $model->getEventManagers()->first());
     }
@@ -721,7 +662,6 @@ class EventMapperTest extends TestCase
             'vips'
         );
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find($uid);
         self::assertEquals(
             $frontEndUser->getUid(),
@@ -729,9 +669,7 @@ class EventMapperTest extends TestCase
         );
     }
 
-    ///////////////////////////////////////////
     // Tests concerning findByPublicationHash
-    ///////////////////////////////////////////
 
     /**
      * @test
@@ -814,7 +752,6 @@ class EventMapperTest extends TestCase
             ['seminar' => $eventUid]
         );
 
-        /** @var \Tx_Seminars_Model_Event $event */
         $event = $this->subject->find($eventUid);
         self::assertEquals(
             $registrationUid,
@@ -822,9 +759,7 @@ class EventMapperTest extends TestCase
         );
     }
 
-    ////////////////////////////////////////
     // Tests concerning findAllByBeginDate
-    ////////////////////////////////////////
 
     /**
      * @test

@@ -108,14 +108,12 @@ final class EventEditorTest extends FunctionalTestCase
      */
     private function logInUser(int $uid)
     {
-        /** @var \Tx_Seminars_Model_FrontEndUser $user */
         $user = $this->getUserMapper()->find($uid);
         FrontEndLoginManager::getInstance()->logInUser($user);
     }
 
     private function getUserMapper(): \Tx_Seminars_Mapper_FrontEndUser
     {
-        /** @var \Tx_Seminars_Mapper_FrontEndUser $mapper */
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
 
         return $mapper;

@@ -610,7 +610,6 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements Configu
             return null;
         }
 
-        /** @var \Tx_Seminars_Mapper_FrontEndUser $mapper */
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
         $this->user = $mapper->find($uid);
 
@@ -638,7 +637,6 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements Configu
             return false;
         }
 
-        /** @var \Tx_Seminars_Mapper_FrontEndUser $mapper */
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
 
         return $mapper->existsModel($this->getUser());

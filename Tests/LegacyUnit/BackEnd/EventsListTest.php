@@ -62,7 +62,6 @@ class EventsListTest extends TestCase
 
         $backEndGroup = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUserGroup::class)
             ->getLoadedTestingModel(['tx_seminars_events_folder' => $this->dummySysFolderPid + 1]);
-        /** @var \Tx_Seminars_Model_BackEndUser $backEndUser */
         $backEndUser = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUser::class)
             ->getLoadedTestingModel(['usergroup' => $backEndGroup->getUid()]);
         BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
@@ -741,7 +740,6 @@ class EventsListTest extends TestCase
 
     public function testNewButtonForNoEventStorageSettingInUserGroupsSetsCurrentPageIdAsNewRecordPid()
     {
-        /** @var \Tx_Seminars_Model_BackEndUser $backEndUser */
         $backEndUser = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUser::class)->getLoadedTestingModel([]);
         BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
 
@@ -750,7 +748,6 @@ class EventsListTest extends TestCase
 
     public function testNewButtonForEventStoredOnCurrentPageHasCurrentFolderLabel()
     {
-        /** @var \Tx_Seminars_Model_BackEndUser $backEndUser */
         $backEndUser = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUser::class)->getLoadedTestingModel([]);
         BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
 

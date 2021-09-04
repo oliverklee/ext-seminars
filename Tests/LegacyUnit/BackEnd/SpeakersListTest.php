@@ -135,7 +135,6 @@ class SpeakersListTest extends TestCase
         $newSpeakerFolder = $this->dummySysFolderPid + 1;
         $backEndGroup = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUserGroup::class)
             ->getLoadedTestingModel(['tx_seminars_auxiliaries_folder' => $newSpeakerFolder]);
-        /** @var \Tx_Seminars_Model_BackEndUser $backEndUser */
         $backEndUser = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUser::class)
             ->getLoadedTestingModel(['usergroup' => $backEndGroup->getUid()]);
         BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);

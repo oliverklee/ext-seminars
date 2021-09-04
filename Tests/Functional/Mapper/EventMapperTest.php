@@ -54,7 +54,6 @@ final class EventMapperTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
-        /** @var \Tx_Seminars_Model_Event $result */
         $result = $this->subject->find(1);
 
         self::assertSame('a complete event', $result->getTitle());
@@ -217,7 +216,6 @@ final class EventMapperTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find(1);
         $result = $model->getDependencies();
 
@@ -232,7 +230,6 @@ final class EventMapperTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find(1);
         $result = $model->getRequirements();
 

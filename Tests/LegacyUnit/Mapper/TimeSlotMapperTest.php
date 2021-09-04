@@ -38,9 +38,7 @@ class TimeSlotMapperTest extends TestCase
         $this->testingFramework->cleanUp();
     }
 
-    //////////////////////////
     // Tests concerning find
-    //////////////////////////
 
     /**
      * @test
@@ -60,15 +58,12 @@ class TimeSlotMapperTest extends TestCase
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_timeslots');
 
-        /** @var \Tx_Seminars_Model_TimeSlot $model */
         $model = $this->subject->find($uid);
 
         self::assertSame($uid, $model->getUid());
     }
 
-    //////////////////////////////////
     // Tests regarding the speakers.
-    //////////////////////////////////
 
     /**
      * @test
@@ -77,7 +72,6 @@ class TimeSlotMapperTest extends TestCase
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_timeslots');
 
-        /** @var \Tx_Seminars_Model_TimeSlot $model */
         $model = $this->subject->find($uid);
         self::assertInstanceOf(Collection::class, $model->getSpeakers());
     }
@@ -98,7 +92,6 @@ class TimeSlotMapperTest extends TestCase
             'speakers'
         );
 
-        /** @var \Tx_Seminars_Model_TimeSlot $model */
         $model = $this->subject->find($timeSlotUid);
         self::assertInstanceOf(
             \Tx_Seminars_Model_Speaker::class,
@@ -123,7 +116,6 @@ class TimeSlotMapperTest extends TestCase
             'speakers'
         );
 
-        /** @var \Tx_Seminars_Model_TimeSlot $model */
         $model = $this->subject->find($timeSlotUid);
         self::assertEquals(
             $speaker->getUid(),
@@ -131,9 +123,7 @@ class TimeSlotMapperTest extends TestCase
         );
     }
 
-    ///////////////////////////////
     // Tests regarding the place.
-    ///////////////////////////////
 
     /**
      * @test
@@ -142,7 +132,6 @@ class TimeSlotMapperTest extends TestCase
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_timeslots');
 
-        /** @var \Tx_Seminars_Model_TimeSlot $model */
         $model = $this->subject->find($uid);
         self::assertNull(
             $model->getPlace()
@@ -160,7 +149,6 @@ class TimeSlotMapperTest extends TestCase
             ['place' => $place->getUid()]
         );
 
-        /** @var \Tx_Seminars_Model_TimeSlot $model */
         $model = $this->subject->find($timeSlotUid);
         self::assertInstanceOf(\Tx_Seminars_Model_Place::class, $model->getPlace());
     }
@@ -174,7 +162,6 @@ class TimeSlotMapperTest extends TestCase
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_timeslots');
 
-        /** @var \Tx_Seminars_Model_TimeSlot $model */
         $model = $this->subject->find($uid);
         self::assertNull(
             $model->getSeminar()
@@ -192,7 +179,6 @@ class TimeSlotMapperTest extends TestCase
             ['seminar' => $seminar->getUid()]
         );
 
-        /** @var \Tx_Seminars_Model_TimeSlot $model */
         $model = $this->subject->find($timeSlotUid);
         self::assertInstanceOf(
             \Tx_Seminars_Model_Event::class,

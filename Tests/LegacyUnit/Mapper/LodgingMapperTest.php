@@ -36,9 +36,7 @@ class LodgingMapperTest extends TestCase
         $this->testingFramework->cleanUp();
     }
 
-    //////////////////////////
     // Tests concerning find
-    //////////////////////////
 
     /**
      * @test
@@ -58,7 +56,6 @@ class LodgingMapperTest extends TestCase
             ['title' => 'Shack']
         );
 
-        /** @var \Tx_Seminars_Model_Lodging $model */
         $model = $this->subject->find($uid);
         self::assertEquals(
             'Shack',

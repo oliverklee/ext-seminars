@@ -444,7 +444,6 @@ class RegistrationBagBuilderTest extends TestCase
             ['seminar' => $eventUid, 'user' => $feUserUid]
         );
 
-        /** @var \Tx_Seminars_Model_FrontEndUser $user */
         $user = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)->find($feUserUid);
         $this->subject->limitToAttendee($user);
         $bag = $this->subject->build();
@@ -472,7 +471,6 @@ class RegistrationBagBuilderTest extends TestCase
             ['tx_seminars_registration' => $registrationUid]
         );
 
-        /** @var \Tx_Seminars_Model_FrontEndUser $user */
         $user = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)->find($feUserUid);
         $this->subject->limitToAttendee($user);
         $bag = $this->subject->build();
@@ -491,7 +489,6 @@ class RegistrationBagBuilderTest extends TestCase
         $feUserUid = $this->testingFramework->createFrontEndUser();
         $this->testingFramework->createRecord('tx_seminars_seminars');
 
-        /** @var \Tx_Seminars_Model_FrontEndUser $user */
         $user = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)->find($feUserUid);
         $this->subject->limitToAttendee($user);
         $bag = $this->subject->build();
@@ -515,7 +512,6 @@ class RegistrationBagBuilderTest extends TestCase
             ['seminar' => $eventUid, 'user' => $feUserUid2]
         );
 
-        /** @var \Tx_Seminars_Model_FrontEndUser $user */
         $user = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)->find($feUserUid);
         $this->subject->limitToAttendee($user);
         $bag = $this->subject->build();
@@ -539,7 +535,6 @@ class RegistrationBagBuilderTest extends TestCase
             ['seminar' => $eventUid, 'user' => $feUserUid2]
         );
 
-        /** @var \Tx_Seminars_Model_FrontEndUser $user */
         $user = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)->find($feUserUid);
         $this->subject->limitToAttendee($user);
         $this->subject->limitToAttendee();
@@ -551,9 +546,7 @@ class RegistrationBagBuilderTest extends TestCase
         );
     }
 
-    //////////////////////////////////////
     // Tests for setOrderByEventColumn()
-    //////////////////////////////////////
 
     public function testSetOrderByEventColumnCanSortAscendingByEventTitle()
     {

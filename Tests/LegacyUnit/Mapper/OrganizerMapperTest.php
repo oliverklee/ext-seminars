@@ -36,9 +36,7 @@ class OrganizerMapperTest extends TestCase
         $this->testingFramework->cleanUp();
     }
 
-    //////////////////////////
     // Tests concerning find
-    //////////////////////////
 
     /**
      * @test
@@ -58,7 +56,6 @@ class OrganizerMapperTest extends TestCase
             ['title' => 'Fabulous organizer']
         );
 
-        /** @var \Tx_Seminars_Model_Organizer $model */
         $model = $this->subject->find($uid);
         self::assertEquals(
             'Fabulous organizer',

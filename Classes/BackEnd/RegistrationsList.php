@@ -76,11 +76,9 @@ class RegistrationsList extends AbstractList
         $this->template->setMarker('label_event_date', $languageService->getLL('registrationlist.seminar.date'));
 
         $eventUid = (int)GeneralUtility::_GP('eventUid');
-        /** @var \Tx_Seminars_Mapper_Event $mapper */
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
         if (($eventUid > 0) && $mapper->existsModel($eventUid)) {
             $this->eventUid = $eventUid;
-            /** @var \Tx_Seminars_Model_Event $event */
             $event = $mapper->find($eventUid);
             $registrationsHeading = sprintf(
                 $languageService->getLL('registrationlist.label_registrationsHeading'),
@@ -165,12 +163,10 @@ class RegistrationsList extends AbstractList
         $tableRows = '';
         $languageService = $this->getLanguageService();
 
-        /** @var \Tx_Seminars_Mapper_Registration $mapper */
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
 
         /** @var \Tx_Seminars_OldModel_Registration $registration */
         foreach ($registrationBag as $registration) {
-            /** @var \Tx_Seminars_Model_Registration $registrationNew */
             $registrationNew = $mapper->find($registration->getUid());
 
             try {

@@ -36,9 +36,7 @@ class CategoryMapperTest extends TestCase
         $this->testingFramework->cleanUp();
     }
 
-    //////////////////////////
     // Tests concerning find
-    //////////////////////////
 
     /**
      * @test
@@ -57,7 +55,6 @@ class CategoryMapperTest extends TestCase
             'tx_seminars_categories',
             ['title' => 'Lecture']
         );
-        /** @var \Tx_Seminars_Model_Category $model */
         $model = $this->subject->find($uid);
 
         self::assertEquals(

@@ -37,9 +37,7 @@ class PlaceMapperTest extends TestCase
         $this->testingFramework->cleanUp();
     }
 
-    //////////////////////////
     // Tests concerning find
-    //////////////////////////
 
     /**
      * @test
@@ -59,7 +57,6 @@ class PlaceMapperTest extends TestCase
             ['title' => 'Nice place']
         );
 
-        /** @var \Tx_Seminars_Model_Place $model */
         $model = $this->subject->find($uid);
         self::assertEquals(
             'Nice place',
@@ -67,16 +64,13 @@ class PlaceMapperTest extends TestCase
         );
     }
 
-    ///////////////////////////////
     // Tests regarding the owner.
-    ///////////////////////////////
 
     /**
      * @test
      */
     public function getOwnerWithoutOwnerReturnsNull()
     {
-        /** @var \Tx_Seminars_Model_Place $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
         self::assertNull($testingModel->getOwner());
@@ -88,7 +82,6 @@ class PlaceMapperTest extends TestCase
     public function getOwnerWithOwnerReturnsOwnerInstance()
     {
         $frontEndUser = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)->getLoadedTestingModel([]);
-        /** @var \Tx_Seminars_Model_Place $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel(
             ['owner' => $frontEndUser->getUid()]
         );

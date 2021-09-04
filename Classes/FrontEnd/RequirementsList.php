@@ -87,11 +87,9 @@ class Tx_Seminars_FrontEnd_RequirementsList extends \Tx_Seminars_FrontEnd_Abstra
 
         $output = '';
 
-        /** @var \Tx_Seminars_Mapper_Event $eventMapper */
         $eventMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
         /** @var \Tx_Seminars_OldModel_Event $requirement */
         foreach ($this->getRequirements() as $requirement) {
-            /** @var \Tx_Seminars_Model_Event $event */
             $event = $eventMapper->find($requirement->getUid());
 
             $singleViewUrl = $this->linkBuilder->createRelativeUrlForEvent($event);

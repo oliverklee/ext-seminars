@@ -26,9 +26,7 @@ class EventDateTest extends TestCase
         $this->subject = new \Tx_Seminars_Model_Event();
     }
 
-    ////////////////////////////////
     // Tests concerning the title.
-    ////////////////////////////////
 
     /**
      * @test
@@ -71,9 +69,7 @@ class EventDateTest extends TestCase
         );
     }
 
-    //////////////////////////////////
     // Tests regarding the subtitle.
-    //////////////////////////////////
 
     /**
      * @test
@@ -120,7 +116,6 @@ class EventDateTest extends TestCase
      */
     public function setSubtitleForEventDateSetsSubtitle()
     {
-        /** @var \Tx_Seminars_Model_Event $topic */
         $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -174,9 +169,7 @@ class EventDateTest extends TestCase
         );
     }
 
-    ////////////////////////////////
     // Tests regarding the teaser.
-    ////////////////////////////////
 
     /**
      * @test
@@ -277,9 +270,7 @@ class EventDateTest extends TestCase
         );
     }
 
-    /////////////////////////////////////
     // Tests regarding the description.
-    /////////////////////////////////////
 
     /**
      * @test
@@ -328,7 +319,6 @@ class EventDateTest extends TestCase
      */
     public function setDescriptionForEventDateSetsDescription()
     {
-        /** @var \Tx_Seminars_Model_Event $topic */
         $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -384,9 +374,7 @@ class EventDateTest extends TestCase
         );
     }
 
-    ///////////////////////////////////////
     // Tests regarding the credit points.
-    ///////////////////////////////////////
 
     /**
      * @test
@@ -433,7 +421,6 @@ class EventDateTest extends TestCase
      */
     public function setCreditPointsForEventDateWithZeroCreditPointsSetsCreditPoints()
     {
-        /** @var \Tx_Seminars_Model_Event $topic */
         $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -508,9 +495,7 @@ class EventDateTest extends TestCase
         );
     }
 
-    ///////////////////////////////////////
     // Tests regarding the regular price.
-    ///////////////////////////////////////
 
     /**
      * @test
@@ -557,7 +542,6 @@ class EventDateTest extends TestCase
      */
     public function setRegularPriceForEventDateWithZeroRegularPriceSetsRegularPrice()
     {
-        /** @var \Tx_Seminars_Model_Event $topic */
         $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -578,7 +562,6 @@ class EventDateTest extends TestCase
      */
     public function setRegularPriceForEventDateWithPositiveRegularPriceSetsRegularPrice()
     {
-        /** @var \Tx_Seminars_Model_Event $topic */
         $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -632,9 +615,7 @@ class EventDateTest extends TestCase
         );
     }
 
-    //////////////////////////////////////////////////
     // Tests regarding the regular early bird price.
-    //////////////////////////////////////////////////
 
     /**
      * @test
@@ -681,7 +662,6 @@ class EventDateTest extends TestCase
      */
     public function setRegularEarlyBirdPriceForEventDateWithZeroRegularEarlyBirdPriceSetsRegularEarlyBirdPrice()
     {
-        /** @var \Tx_Seminars_Model_Event $topic */
         $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -702,7 +682,6 @@ class EventDateTest extends TestCase
      */
     public function setRegularEarlyBirdPriceForEventDateWithPositiveRegularEarlyBirdPriceSetsRegularEarlyBirdPrice()
     {
-        /** @var \Tx_Seminars_Model_Event $topic */
         $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -756,9 +735,7 @@ class EventDateTest extends TestCase
         );
     }
 
-    /////////////////////////////////////////////
     // Tests regarding the regular board price.
-    /////////////////////////////////////////////
 
     /**
      * @test
@@ -805,7 +782,6 @@ class EventDateTest extends TestCase
      */
     public function setRegularBoardPriceForEventDateWithZeroRegularBoardPriceSetsRegularBoardPrice()
     {
-        /** @var \Tx_Seminars_Model_Event $topic */
         $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -826,7 +802,6 @@ class EventDateTest extends TestCase
      */
     public function setRegularBoardPriceForEventDateWithPositiveRegularBoardPriceSetsRegularBoardPrice()
     {
-        /** @var \Tx_Seminars_Model_Event $topic */
         $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -880,9 +855,7 @@ class EventDateTest extends TestCase
         );
     }
 
-    ///////////////////////////////////////
     // Tests regarding the special price.
-    ///////////////////////////////////////
 
     /**
      * @test
@@ -929,7 +902,6 @@ class EventDateTest extends TestCase
      */
     public function setSpecialPriceForEventDateWithZeroSpecialPriceSetsSpecialPrice()
     {
-        /** @var \Tx_Seminars_Model_Event $topic */
         $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -950,7 +922,6 @@ class EventDateTest extends TestCase
      */
     public function setSpecialPriceForEventDateWithPositiveSpecialPriceSetsSpecialPrice()
     {
-        /** @var \Tx_Seminars_Model_Event $topic */
         $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -1004,9 +975,7 @@ class EventDateTest extends TestCase
         );
     }
 
-    //////////////////////////////////////////////////
     // Tests regarding the special early bird price.
-    //////////////////////////////////////////////////
 
     /**
      * @test
@@ -1053,7 +1022,6 @@ class EventDateTest extends TestCase
      */
     public function setSpecialEarlyBirdPriceForEventDateWithZeroSpecialEarlyBirdPriceSetsSpecialEarlyBirdPrice()
     {
-        /** @var \Tx_Seminars_Model_Event $topic */
         $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -1074,7 +1042,6 @@ class EventDateTest extends TestCase
      */
     public function setSpecialEarlyBirdPriceForEventDateWithPositiveSpecialEarlyBirdPriceSetsSpecialEarlyBirdPrice()
     {
-        /** @var \Tx_Seminars_Model_Event $topic */
         $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -1128,9 +1095,7 @@ class EventDateTest extends TestCase
         );
     }
 
-    /////////////////////////////////////////////
     // Tests regarding the special board price.
-    /////////////////////////////////////////////
 
     /**
      * @test
@@ -1177,7 +1142,6 @@ class EventDateTest extends TestCase
      */
     public function setSpecialBoardPriceForEventDateWithZeroSpecialBoardPriceSetsSpecialBoardPrice()
     {
-        /** @var \Tx_Seminars_Model_Event $topic */
         $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -1198,7 +1162,6 @@ class EventDateTest extends TestCase
      */
     public function setSpecialBoardPriceForEventDateWithPositiveSpecialBoardPriceSetsSpecialBoardPrice()
     {
-        /** @var \Tx_Seminars_Model_Event $topic */
         $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -1252,9 +1215,7 @@ class EventDateTest extends TestCase
         );
     }
 
-    ////////////////////////////////////////////////
     // Tests regarding the additional information.
-    ////////////////////////////////////////////////
 
     /**
      * @test
@@ -1303,7 +1264,6 @@ class EventDateTest extends TestCase
      */
     public function setAdditionalInformationForEventDateSetsAdditionalInformation()
     {
-        /** @var \Tx_Seminars_Model_Event $topic */
         $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -1359,9 +1319,7 @@ class EventDateTest extends TestCase
         );
     }
 
-    //////////////////////////////////////////////////
     // Tests regarding allowsMultipleRegistration().
-    //////////////////////////////////////////////////
 
     /**
      * @test
@@ -1403,9 +1361,7 @@ class EventDateTest extends TestCase
         );
     }
 
-    //////////////////////////////////
     // Tests regarding usesTerms2().
-    //////////////////////////////////
 
     /**
      * @test
@@ -1445,9 +1401,7 @@ class EventDateTest extends TestCase
         );
     }
 
-    ///////////////////////////////
     // Tests regarding the notes.
-    ///////////////////////////////
 
     /**
      * @test
@@ -1494,7 +1448,6 @@ class EventDateTest extends TestCase
      */
     public function setNotesForEventDateSetsNotes()
     {
-        /** @var \Tx_Seminars_Model_Event $topic */
         $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -1548,9 +1501,7 @@ class EventDateTest extends TestCase
         );
     }
 
-    ///////////////////////////////
     // Tests regarding the image.
-    ///////////////////////////////
 
     /**
      * @test
@@ -1597,7 +1548,6 @@ class EventDateTest extends TestCase
      */
     public function setImageForEventDateSetsImage()
     {
-        /** @var \Tx_Seminars_Model_Event $topic */
         $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $this->subject->setData(
             [
@@ -1651,9 +1601,7 @@ class EventDateTest extends TestCase
         );
     }
 
-    /////////////////////////////////////////
     // Tests concerning the payment methods
-    /////////////////////////////////////////
 
     /**
      * @test

@@ -36,9 +36,7 @@ class BackEndUserMapperTest extends TestCase
         $this->testingFramework->cleanUp();
     }
 
-    //////////////////////////
     // Tests concerning find
-    //////////////////////////
 
     public function testFindWithUidOfExistingRecordReturnsBackEndUserInstance()
     {

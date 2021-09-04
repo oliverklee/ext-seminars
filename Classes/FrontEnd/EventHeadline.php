@@ -45,7 +45,6 @@ class Tx_Seminars_FrontEnd_EventHeadline extends \Tx_Seminars_FrontEnd_AbstractV
             return '';
         }
 
-        /** @var \Tx_Seminars_Model_Event $event */
         $event = $this->mapper->find($eventId);
 
         if (!$this->mapper->existsModel($eventId)) {

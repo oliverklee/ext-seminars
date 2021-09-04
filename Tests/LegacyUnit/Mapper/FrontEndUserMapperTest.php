@@ -58,10 +58,8 @@ class FrontEndUserMapperTest extends TestCase
      */
     public function relationToRegistrationIsReadFromRegistrationMapper()
     {
-        $registration = MapperRegistry
-            ::get(\Tx_Seminars_Mapper_Registration::class)->getNewGhost();
+        $registration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)->getNewGhost();
 
-        /** @var \Tx_Seminars_Model_FrontEndUser $model */
         $model = $this->subject->getLoadedTestingModel(
             ['tx_seminars_registration' => $registration->getUid()]
         );

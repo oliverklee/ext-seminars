@@ -3260,9 +3260,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             return null;
         }
 
-        /** @var FrontEndUserMapper $mapper */
         $mapper = MapperRegistry::get(FrontEndUserMapper::class);
-        /** @var FrontEndUser|null $owner */
         $owner = $mapper->find($this->getRecordPropertyInteger('owner_feuser'));
 
         return $owner;

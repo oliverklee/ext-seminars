@@ -37,9 +37,7 @@ class TargetGroupMapperTest extends TestCase
         $this->testingFramework->cleanUp();
     }
 
-    //////////////////////////
     // Tests concerning find
-    //////////////////////////
 
     /**
      * @test
@@ -62,7 +60,6 @@ class TargetGroupMapperTest extends TestCase
             ['title' => 'Housewives']
         );
 
-        /** @var \Tx_Seminars_Model_TargetGroup $model */
         $model = $this->subject->find($uid);
         self::assertEquals(
             'Housewives',
@@ -70,16 +67,13 @@ class TargetGroupMapperTest extends TestCase
         );
     }
 
-    ///////////////////////////////
     // Tests regarding the owner.
-    ///////////////////////////////
 
     /**
      * @test
      */
     public function getOwnerWithoutOwnerReturnsNull()
     {
-        /** @var \Tx_Seminars_Model_TargetGroup $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
         self::assertNull($testingModel->getOwner());
@@ -91,7 +85,6 @@ class TargetGroupMapperTest extends TestCase
     public function getOwnerWithOwnerReturnsOwnerInstance()
     {
         $frontEndUser = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)->getLoadedTestingModel([]);
-        /** @var \Tx_Seminars_Model_TargetGroup $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel(
             ['owner' => $frontEndUser->getUid()]
         );
