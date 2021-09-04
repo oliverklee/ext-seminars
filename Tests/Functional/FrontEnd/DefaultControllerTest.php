@@ -83,7 +83,7 @@ final class DefaultControllerTest extends FunctionalTestCase
      *
      * @param string $reference
      *
-     * @return string class name
+     * @return class-string
      */
     private function extractClassNameFromUserFunction(string $reference): string
     {

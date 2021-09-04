@@ -142,8 +142,8 @@ class AbstractRegistrationListViewTest extends TestCase
      * fail. This function adds it to the list of instances to purge in `tearDown()` in addition
      * to `GeneralUtility::addInstance()`.
      *
-     * @param string $className
-     * @param mixed $instance
+     * @param class-string $className
+     * @param object $instance
      *
      * @return void
      */

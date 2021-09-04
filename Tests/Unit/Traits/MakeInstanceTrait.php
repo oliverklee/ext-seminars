@@ -18,7 +18,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 trait MakeInstanceTrait
 {
     /**
-     * @var string[]
+     * @var array<int, class-string>
      */
     private $mockClassNames = [];
 
@@ -31,6 +31,7 @@ trait MakeInstanceTrait
      * fail. This function adds it to the list of instances to purge in `tearDown()` in addition
      * to `GeneralUtility::addInstance()`.
      *
+     * @param class-string $className
      * @param object $instance
      *
      * @return void
