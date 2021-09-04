@@ -512,9 +512,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
             }
         }
 
-        /** @var \Tx_Seminars_Mapper_Registration $mapper */
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
-        /** @var \Tx_Seminars_Model_Registration $registration */
         $registration = $mapper->find($this->registration->getUid());
 
         return $registration;
@@ -597,9 +595,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
                     $paymentMethodUid = isset($formData['method_of_payment'])
                         ? max(0, (int)$formData['method_of_payment']) : 0;
                     if (($paymentMethodUid > 0) && $availablePaymentMethods->hasUid($paymentMethodUid)) {
-                        /** @var \Tx_Seminars_Mapper_PaymentMethod $mapper */
                         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_PaymentMethod::class);
-                        /** @var \Tx_Seminars_Model_PaymentMethod $paymentMethod */
                         $paymentMethod = $mapper->find($paymentMethodUid);
                     }
                 }
@@ -859,9 +855,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
 
         $eMailNotification->setMessage($this->buildEmailContent($oldRegistration, $plugin, $helloSubjectPrefix));
 
-        /** @var \Tx_Seminars_Mapper_Registration $mapper */
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
-        /** @var \Tx_Seminars_Model_Registration $registration */
         $registration = $mapper->find($oldRegistration->getUid());
 
         $this->addCalendarAttachment($eMailNotification, $registration);
@@ -1045,9 +1039,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
 
         $eMailNotification->setMessage($this->getSubpart('MAIL_NOTIFICATION'));
 
-        /** @var \Tx_Seminars_Mapper_Registration $registrationMapper */
         $registrationMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
-        /** @var \Tx_Seminars_Model_Registration $registrationNew */
         $registrationNew = $registrationMapper->find($registration->getUid());
 
         $this->getRegistrationEmailHookProvider()
@@ -1144,9 +1136,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
             $eMail->addRecipient($organizer);
         }
 
-        /** @var \Tx_Seminars_Mapper_Registration $registrationMapper */
         $registrationMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
-        /** @var \Tx_Seminars_Model_Registration $registrationNew */
         $registrationNew = $registrationMapper->find($registration->getUid());
 
         $this->getRegistrationEmailHookProvider()
@@ -1404,9 +1394,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
             $this->hideSubparts('interests', $wrapperPrefix);
         }
 
-        /** @var \Tx_Seminars_Mapper_Event $mapper */
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
-        /** @var \Tx_Seminars_Model_Event $newEvent */
         $newEvent = $mapper->find($event->getUid());
         $singleViewUrl = $this->linkBuilder->createAbsoluteUrlForEvent($newEvent);
         $this->setMarker('url', $useHtml ? \htmlspecialchars($singleViewUrl, ENT_QUOTES | ENT_HTML5) : $singleViewUrl);
@@ -1420,9 +1408,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         $footers = $event->getOrganizersFooter();
         $this->setMarker('footer', !empty($footers) ? "\n-- \n" . $footers[0] : '');
 
-        /** @var \Tx_Seminars_Mapper_Registration $registrationMapper */
         $registrationMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
-        /** @var \Tx_Seminars_Model_Registration $registrationNew */
         $registrationNew = $registrationMapper->find($registration->getUid());
 
         $this->getRegistrationEmailHookProvider()->executeHook(

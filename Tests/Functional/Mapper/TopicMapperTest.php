@@ -41,7 +41,6 @@ final class TopicMapperTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Topics.xml');
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find(1);
         $result = $model->getRequirements();
 
@@ -56,7 +55,6 @@ final class TopicMapperTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Topics.xml');
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find(2);
         $result = $model->getRequirements();
 
@@ -71,7 +69,6 @@ final class TopicMapperTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Topics.xml');
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find(1);
         $result = $model->getDependencies();
 
@@ -86,7 +83,6 @@ final class TopicMapperTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Topics.xml');
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find(3);
         $result = $model->getDependencies();
 

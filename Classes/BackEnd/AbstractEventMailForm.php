@@ -101,7 +101,6 @@ abstract class AbstractEventMailForm
             throw new NotFoundException('There is no event with this UID.', 1333292164);
         }
 
-        /** @var \Tx_Seminars_Mapper_Event $mapper */
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
         $this->event = $mapper->find($eventUid);
     }
@@ -409,11 +408,9 @@ abstract class AbstractEventMailForm
             $mailerFactory = GeneralUtility::makeInstance(MailerFactory::class);
             $mailer = $mailerFactory->getMailer();
 
-            /** @var \Tx_Seminars_Mapper_Registration $registrationMapper */
             $registrationMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
             /** @var \Tx_Seminars_OldModel_Registration $oldRegistration */
             foreach ($registrations as $oldRegistration) {
-                /** @var \Tx_Seminars_Model_Registration $registration */
                 $registration = $registrationMapper->find($oldRegistration->getUid());
                 $user = $registration->getFrontEndUser();
                 if (($user === null) || !$user->hasEmailAddress()) {

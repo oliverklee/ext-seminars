@@ -144,7 +144,6 @@ class Tx_Seminars_Model_Place extends AbstractModel implements Titled
         }
 
         try {
-            /** @var CountryMapper $mapper */
             $mapper = MapperRegistry::get(CountryMapper::class);
             $country = $mapper->findByIsoAlpha2Code($countryCode);
         } catch (NotFoundException $exception) {

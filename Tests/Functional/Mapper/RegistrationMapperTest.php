@@ -43,7 +43,6 @@ final class RegistrationMapperTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Registrations.xml');
 
-        /** @var \Tx_Seminars_Model_FrontEndUser $user */
         $user = $this->userMapper->find(1);
 
         self::assertSame(0, $this->subject->countByFrontEndUser($user));
@@ -56,7 +55,6 @@ final class RegistrationMapperTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Registrations.xml');
 
-        /** @var \Tx_Seminars_Model_FrontEndUser $user */
         $user = $this->userMapper->find(2);
 
         self::assertSame(1, $this->subject->countByFrontEndUser($user));

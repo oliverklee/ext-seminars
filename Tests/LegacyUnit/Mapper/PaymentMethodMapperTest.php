@@ -36,9 +36,7 @@ class PaymentMethodMapperTest extends TestCase
         $this->testingFramework->cleanUp();
     }
 
-    //////////////////////////
     // Tests concerning find
-    //////////////////////////
 
     /**
      * @test
@@ -58,7 +56,6 @@ class PaymentMethodMapperTest extends TestCase
             ['title' => 'Cash']
         );
 
-        /** @var \Tx_Seminars_Model_PaymentMethod $model */
         $model = $this->subject->find($uid);
         self::assertEquals(
             'Cash',

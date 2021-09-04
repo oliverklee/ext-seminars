@@ -38,9 +38,7 @@ class SpeakerMapperTest extends TestCase
         $this->testingFramework->cleanUp();
     }
 
-    //////////////////////////
     // Tests concerning find
-    //////////////////////////
 
     /**
      * @test
@@ -65,7 +63,6 @@ class SpeakerMapperTest extends TestCase
             ['title' => 'John Doe']
         );
 
-        /** @var \Tx_Seminars_Model_Speaker $model */
         $model = $this->subject->find($uid);
         self::assertEquals(
             'John Doe',
@@ -73,9 +70,7 @@ class SpeakerMapperTest extends TestCase
         );
     }
 
-    ////////////////////////////////
     // Tests regarding the skills.
-    ////////////////////////////////
 
     /**
      * @test
@@ -84,7 +79,6 @@ class SpeakerMapperTest extends TestCase
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_speakers');
 
-        /** @var \Tx_Seminars_Model_Speaker $model */
         $model = $this->subject->find($uid);
         self::assertInstanceOf(Collection::class, $model->getSkills());
     }
@@ -96,7 +90,6 @@ class SpeakerMapperTest extends TestCase
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_speakers');
 
-        /** @var \Tx_Seminars_Model_Speaker $model */
         $model = $this->subject->find($uid);
         self::assertTrue(
             $model->getSkills()->isEmpty()
@@ -117,7 +110,6 @@ class SpeakerMapperTest extends TestCase
             'skills'
         );
 
-        /** @var \Tx_Seminars_Model_Speaker $model */
         $model = $this->subject->find($speakerUid);
         self::assertFalse(
             $model->getSkills()->isEmpty()
@@ -139,7 +131,6 @@ class SpeakerMapperTest extends TestCase
             'skills'
         );
 
-        /** @var \Tx_Seminars_Model_Speaker $model */
         $model = $this->subject->find($speakerUid);
         self::assertEquals(
             $skill->getUid(),
@@ -147,16 +138,13 @@ class SpeakerMapperTest extends TestCase
         );
     }
 
-    ///////////////////////////////
     // Tests regarding the owner.
-    ///////////////////////////////
 
     /**
      * @test
      */
     public function getOwnerWithoutOwnerReturnsNull()
     {
-        /** @var \Tx_Seminars_Model_Speaker $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
         self::assertNull($testingModel->getOwner());
@@ -169,7 +157,6 @@ class SpeakerMapperTest extends TestCase
     {
         $frontEndUser = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)
             ->getLoadedTestingModel([]);
-        /** @var \Tx_Seminars_Model_Speaker $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel(
             ['owner' => $frontEndUser->getUid()]
         );

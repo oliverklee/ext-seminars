@@ -392,7 +392,6 @@ final class SingleViewLinkBuilderTest extends TestCase
      */
     public function createAbsoluteUrlForEventWithExternalDetailsPageAddsProtocolAndNoSeminarParameter()
     {
-        /** @var \Tx_Seminars_Model_Event $event */
         $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
             ->getLoadedTestingModel(['details_page' => 'www.example.com']);
 
@@ -411,7 +410,6 @@ final class SingleViewLinkBuilderTest extends TestCase
     {
         $pageUid = $this->testingFramework->createFrontEndPage();
 
-        /** @var \Tx_Seminars_Model_Event $event */
         $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
             ->getLoadedTestingModel(['details_page' => $pageUid]);
 
@@ -423,9 +421,7 @@ final class SingleViewLinkBuilderTest extends TestCase
         );
     }
 
-    //////////////////////////////////////
     // Tests concerning getContentObject
-    //////////////////////////////////////
 
     /**
      * @test

@@ -39,9 +39,7 @@ class RegistrationMapperTest extends TestCase
         $this->testingFramework->cleanUp();
     }
 
-    //////////////////////////
     // Tests concerning find
-    //////////////////////////
 
     /**
      * @test
@@ -61,7 +59,6 @@ class RegistrationMapperTest extends TestCase
             ['title' => 'registration for event']
         );
 
-        /** @var \Tx_Seminars_Model_Registration $model */
         $model = $this->subject->find($uid);
         self::assertEquals(
             'registration for event',
@@ -69,9 +66,7 @@ class RegistrationMapperTest extends TestCase
         );
     }
 
-    ////////////////////////////////
     // Tests concerning the event.
-    ////////////////////////////////
 
     /**
      * @test
@@ -80,7 +75,6 @@ class RegistrationMapperTest extends TestCase
     {
         $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
             ->getNewGhost();
-        /** @var \Tx_Seminars_Model_Registration $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel(['seminar' => $event->getUid()]);
 
         self::assertInstanceOf(\Tx_Seminars_Model_Event::class, $testingModel->getEvent());
@@ -93,15 +87,12 @@ class RegistrationMapperTest extends TestCase
     {
         $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
             ->getNewGhost();
-        /** @var \Tx_Seminars_Model_Registration $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel(['seminar' => $event->getUid()]);
 
         self::assertInstanceOf(\Tx_Seminars_Model_Event::class, $testingModel->getSeminar());
     }
 
-    /////////////////////////////////////////
     // Tests concerning the front-end user.
-    /////////////////////////////////////////
 
     /**
      * @test
@@ -110,22 +101,18 @@ class RegistrationMapperTest extends TestCase
     {
         $frontEndUser = MapperRegistry::
         get(\Tx_Seminars_Mapper_FrontEndUser::class)->getNewGhost();
-        /** @var \Tx_Seminars_Model_Registration $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel(['user' => $frontEndUser->getUid()]);
 
         self::assertSame($frontEndUser, $testingModel->getFrontEndUser());
     }
 
-    /////////////////////////////////////////
     // Tests concerning the payment method.
-    /////////////////////////////////////////
 
     /**
      * @test
      */
     public function getPaymentMethodWithoutPaymentMethodReturnsNull()
     {
-        /** @var \Tx_Seminars_Model_Registration $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
         self::assertNull($testingModel->getPaymentMethod());
@@ -138,22 +125,18 @@ class RegistrationMapperTest extends TestCase
     {
         $paymentMethod = MapperRegistry::
         get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
-        /** @var \Tx_Seminars_Model_Registration $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel(['method_of_payment' => $paymentMethod->getUid()]);
 
         self::assertInstanceOf(\Tx_Seminars_Model_PaymentMethod::class, $testingModel->getPaymentMethod());
     }
 
-    ///////////////////////////////////
     // Tests concerning the lodgings.
-    ///////////////////////////////////
 
     /**
      * @test
      */
     public function getLodgingsReturnsListInstance()
     {
-        /** @var \Tx_Seminars_Model_Registration $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
         self::assertInstanceOf(Collection::class, $testingModel->getLodgings());
@@ -174,7 +157,6 @@ class RegistrationMapperTest extends TestCase
             'lodgings'
         );
 
-        /** @var \Tx_Seminars_Model_Registration $model */
         $model = $this->subject->find($uid);
         self::assertInstanceOf(\Tx_Seminars_Model_Lodging::class, $model->getLodgings()->first());
     }
@@ -194,7 +176,6 @@ class RegistrationMapperTest extends TestCase
             'lodgings'
         );
 
-        /** @var \Tx_Seminars_Model_Registration $model */
         $model = $this->subject->find($uid);
         self::assertEquals(
             $lodging->getUid(),
@@ -202,16 +183,13 @@ class RegistrationMapperTest extends TestCase
         );
     }
 
-    ////////////////////////////////
     // Tests concerning the foods.
-    ////////////////////////////////
 
     /**
      * @test
      */
     public function getFoodsReturnsListInstance()
     {
-        /** @var \Tx_Seminars_Model_Registration $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
         self::assertInstanceOf(Collection::class, $testingModel->getFoods());
@@ -231,7 +209,6 @@ class RegistrationMapperTest extends TestCase
             'foods'
         );
 
-        /** @var \Tx_Seminars_Model_Registration $model */
         $model = $this->subject->find($uid);
         self::assertInstanceOf(\Tx_Seminars_Model_Food::class, $model->getFoods()->first());
     }
@@ -251,7 +228,6 @@ class RegistrationMapperTest extends TestCase
             'foods'
         );
 
-        /** @var \Tx_Seminars_Model_Registration $model */
         $model = $this->subject->find($uid);
         self::assertEquals(
             $food->getUid(),
@@ -259,16 +235,13 @@ class RegistrationMapperTest extends TestCase
         );
     }
 
-    /////////////////////////////////////
     // Tests concerning the checkboxes.
-    /////////////////////////////////////
 
     /**
      * @test
      */
     public function getCheckboxesReturnsListInstance()
     {
-        /** @var \Tx_Seminars_Model_Registration $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
         self::assertInstanceOf(Collection::class, $testingModel->getCheckboxes());
@@ -289,7 +262,6 @@ class RegistrationMapperTest extends TestCase
             'checkboxes'
         );
 
-        /** @var \Tx_Seminars_Model_Registration $model */
         $model = $this->subject->find($uid);
         self::assertEquals(
             $checkbox->getUid(),
@@ -312,7 +284,6 @@ class RegistrationMapperTest extends TestCase
             'checkboxes'
         );
 
-        /** @var \Tx_Seminars_Model_Registration $model */
         $model = $this->subject->find($uid);
         self::assertEquals(
             $checkbox->getUid(),
@@ -320,9 +291,7 @@ class RegistrationMapperTest extends TestCase
         );
     }
 
-    ///////////////////////////////////////////////////////////////////////
     // Tests concerning the relation to the additional registered persons
-    ///////////////////////////////////////////////////////////////////////
 
     /**
      * @test
@@ -338,7 +307,6 @@ class RegistrationMapperTest extends TestCase
             ['tx_seminars_registration' => $registrationUid]
         );
 
-        /** @var \Tx_Seminars_Model_Registration $model */
         $model = $this->subject->find($registrationUid);
         self::assertEquals(
             (string)$personUid,

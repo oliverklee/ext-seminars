@@ -124,7 +124,6 @@ class CountdownTest extends TestCase
     public function renderCallsRenderMethodOfCountdownViewHelperWithNextUpcomingEventsBeginDateAsUnixTimeStamp()
     {
         $this->subject->injectEventMapper($this->mapper);
-        /** @var \Tx_Seminars_Model_Event $event */
         $event = $this->mapper->getLoadedTestingModel(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,

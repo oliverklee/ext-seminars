@@ -787,9 +787,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
      */
     protected function createSingleViewForExistingEvent(): string
     {
-        /** @var \Tx_Seminars_Mapper_Event $mapper */
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
-        /** @var \Tx_Seminars_Model_Event $event */
         $event = $mapper->find($this->showUid);
 
         // Lets warnings from the seminar bubble up to us.
@@ -1064,7 +1062,6 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
 
         $this->hideSubparts('date,time', 'field_wrapper');
 
-        /** @var \Tx_Seminars_Mapper_TimeSlot $timeSlotMapper */
         $timeSlotMapper = MapperRegistry::get(\Tx_Seminars_Mapper_TimeSlot::class);
 
         $timeSlotsOutput = '';
@@ -1076,7 +1073,6 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
             $this->setMarker('timeslot_place', \htmlspecialchars($timeSlotData['place'], ENT_QUOTES | ENT_HTML5));
             $this->setMarker('timeslot_speakers', \htmlspecialchars($timeSlotData['speakers'], ENT_QUOTES | ENT_HTML5));
 
-            /** @var \Tx_Seminars_Model_TimeSlot $timeSlot */
             $timeSlot = $timeSlotMapper->find($timeSlotData['uid']);
 
             foreach ($this->getSingleViewHooks() as $hook) {
@@ -1448,12 +1444,10 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
 
         $output = '';
 
-        /** @var \Tx_Seminars_Mapper_Event $eventMapper */
         $eventMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
 
         /** @var \Tx_Seminars_OldModel_Event $dependency */
         foreach ($this->seminar->getDependencies() as $dependency) {
-            /** @var \Tx_Seminars_Model_Event $event */
             $event = $eventMapper->find($dependency->getUid());
             $this->setMarker(
                 'dependency_title',
@@ -2078,9 +2072,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
         $result = '';
 
         if ($this->seminar->comesFromDatabase()) {
-            /** @var \Tx_Seminars_Mapper_Event $mapper */
             $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
-            /** @var \Tx_Seminars_Model_Event $event */
             $event = $mapper->find($this->getSeminar()->getUid());
 
             $cssClasses = [];
@@ -2207,9 +2199,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
             $this->getListViewHookProvider()->executeHook('modifyListRow', $this);
 
             if ($whatToDisplay === 'my_events') {
-                /** @var \Tx_Seminars_Mapper_Registration $mapper */
                 $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
-                /** @var \Tx_Seminars_Model_Registration $registration */
                 $registration = $mapper->find($this->registration->getUid());
 
                 foreach ($this->getListViewHooks() as $hook) {
@@ -3517,9 +3507,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
             return;
         }
 
-        /** @var \Tx_Seminars_Mapper_Event $mapper */
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
-        /** @var \Tx_Seminars_Model_Event $event */
         $event = $mapper->find($this->piVars['seminar']);
         if (!$event->isPublished()) {
             return;
@@ -3549,7 +3537,6 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
     protected function hideEvent(\Tx_Seminars_Model_Event $event)
     {
         $event->markAsHidden();
-        /** @var \Tx_Seminars_Mapper_Event $mapper */
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
         $mapper->save($event);
 
@@ -3566,7 +3553,6 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
     protected function unhideEvent(\Tx_Seminars_Model_Event $event)
     {
         $event->markAsVisible();
-        /** @var \Tx_Seminars_Mapper_Event $mapper */
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
         $mapper->save($event);
 
@@ -3586,7 +3572,6 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
         $copy->markAsHidden();
         $copy->setRegistrations(new Collection());
 
-        /** @var \Tx_Seminars_Mapper_Event $mapper */
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
         $mapper->save($copy);
 

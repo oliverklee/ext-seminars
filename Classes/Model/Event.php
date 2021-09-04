@@ -797,7 +797,6 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
             return null;
         }
 
-        /** @var LanguageMapper $mapper */
         $mapper = MapperRegistry::get(LanguageMapper::class);
         return $mapper->findByIsoAlpha2Code($this->getAsString('language'));
     }

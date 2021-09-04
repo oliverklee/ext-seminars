@@ -227,7 +227,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      */
     public function populateListCategories(): array
     {
-        /** @var \Tx_Seminars_Mapper_Category $mapper */
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Category::class);
         $categories = $mapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
@@ -243,7 +242,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      */
     public function populateListEventTypes(): array
     {
-        /** @var \Tx_Seminars_Mapper_EventType $mapper */
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_EventType::class);
         $eventTypes = $mapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
@@ -259,7 +257,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      */
     public function populateListLodgings(): array
     {
-        /** @var \Tx_Seminars_Mapper_Lodging $mapper */
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Lodging::class);
         $lodgings = $mapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
@@ -275,7 +272,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      */
     public function populateListFoods(): array
     {
-        /** @var \Tx_Seminars_Mapper_Food $mapper */
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Food::class);
         $foods = $mapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
@@ -291,7 +287,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      */
     public function populateListPaymentMethods(): array
     {
-        /** @var \Tx_Seminars_Mapper_PaymentMethod $mapper */
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_PaymentMethod::class);
         $paymentMethods = $mapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
@@ -315,7 +310,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         if ($frontEndUser->hasDefaultOrganizers()) {
             $organizers = $frontEndUser->getDefaultOrganizers();
         } else {
-            /** @var \Tx_Seminars_Mapper_Organizer $mapper */
             $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Organizer::class);
             $organizers = $mapper->findByPageUid((string)$this->getPidForAuxiliaryRecords(), 'title ASC');
         }
@@ -348,7 +342,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     {
         $result = $items;
 
-        /** @var \Tx_Seminars_Mapper_Place $placeMapper */
         $placeMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Place::class);
         $places = $placeMapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
@@ -420,7 +413,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     ): array {
         $result = [];
 
-        /** @var \Tx_Seminars_Mapper_Speaker $speakerMapper */
         $speakerMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class);
         $speakers = $speakerMapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
@@ -513,7 +505,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     ): array {
         $result = $items;
 
-        /** @var \Tx_Seminars_Mapper_Checkbox $checkboxMapper */
         $checkboxMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Checkbox::class);
         $checkboxes = $checkboxMapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
@@ -587,7 +578,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     ): array {
         $result = $items;
 
-        /** @var \Tx_Seminars_Mapper_TargetGroup $targetGroupMapper */
         $targetGroupMapper = MapperRegistry::get(\Tx_Seminars_Mapper_TargetGroup::class);
         $targetGroups = $targetGroupMapper->findByPageUid($this->getPidForAuxiliaryRecords(), 'title ASC');
 
@@ -942,9 +932,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         if ($isNew) {
             $eventIsHidden = false;
         } else {
-            /** @var \Tx_Seminars_Mapper_Event $mapper */
             $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
-            /** @var \Tx_Seminars_Model_Event $event */
             $event = $mapper->find($eventUid);
             $eventIsHidden = $event->isHidden();
         }
@@ -1426,7 +1414,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
             return;
         }
 
-        /** @var \Tx_Seminars_Mapper_Event $mapper */
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
         /** @var \Tx_Seminars_Model_Event $event */
         $event = $mapper->findByPublicationHash($this->publicationHash);
@@ -1623,7 +1610,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $place->setData(self::createBasicAuxiliaryData());
         self::setPlaceData($place, 'newPlace_', $formData);
         $place->markAsDirty();
-        /** @var \Tx_Seminars_Mapper_Place $mapper */
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Place::class);
         $mapper->save($place);
 
@@ -1670,11 +1656,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $ajax = $form->getMajix();
         $formData = $ajax->getParams();
         $frontEndUser = self::getLoggedInUser();
-        /** @var \Tx_Seminars_Mapper_Place $placeMapper */
         $placeMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Place::class);
 
         try {
-            /** @var \Tx_Seminars_Model_Place $place */
             $place = $placeMapper->find((int)$formData['editPlace_uid']);
         } catch (\Exception $exception) {
             return $form->majixExecJs(
@@ -1799,9 +1783,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $countryUid = (int)$formData[$prefix . 'country'];
         if ($countryUid > 0) {
             try {
-                /** @var CountryMapper $mapper */
                 $mapper = MapperRegistry::get(CountryMapper::class);
-                /** @var Country $country */
                 $country = $mapper->find($countryUid);
             } catch (\Exception $exception) {
                 $country = null;
@@ -1834,11 +1816,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
             return $form->majixExecJs('alert("$placeUid must be >= 0.");');
         }
 
-        /** @var \Tx_Seminars_Mapper_Place $placeMapper */
         $placeMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Place::class);
 
         try {
-            /** @var \Tx_Seminars_Model_Place $place */
             $place = $placeMapper->find((int)$placeUid);
         } catch (NotFoundException $exception) {
             return $form->majixExecJs(
@@ -1943,7 +1923,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $speaker->setData(array_merge(self::createBasicAuxiliaryData(), ['skills' => new Collection()]));
         self::setSpeakerData($speaker, 'newSpeaker_', $formData);
         $speaker->markAsDirty();
-        /** @var \Tx_Seminars_Mapper_Speaker $mapper */
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class);
         $mapper->save($speaker);
 
@@ -1972,11 +1951,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     {
         $formData = $this->removePathFromWidgetData($formData, $form);
         $frontEndUser = self::getLoggedInUser();
-        /** @var \Tx_Seminars_Mapper_Speaker $speakerMapper */
         $speakerMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class);
 
         try {
-            /** @var \Tx_Seminars_Model_Speaker $speaker */
             $speaker = $speakerMapper->find((int)$formData['editSpeaker_uid']);
         } catch (\Exception $exception) {
             return $form->majixExecJs(
@@ -2074,7 +2051,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      */
     private static function setSpeakerData(\Tx_Seminars_Model_Speaker $speaker, string $prefix, array $formData)
     {
-        /** @var \Tx_Seminars_Mapper_Skill $skillMapper */
         $skillMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Skill::class);
         $skills = new Collection();
 
@@ -2082,7 +2058,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
             foreach ($formData[$prefix . 'skills'] as $rawUid) {
                 $safeUid = (int)$rawUid;
                 if ($safeUid > 0) {
-                    /** @var \Tx_Seminars_Model_Skill $skill */
                     $skill = $skillMapper->find($safeUid);
                     $skills->add($skill);
                 }
@@ -2138,11 +2113,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
             return $form->majixExecJs('alert("$speakerUid must be >= 0.");');
         }
 
-        /** @var \Tx_Seminars_Mapper_Speaker $speakerMapper */
         $speakerMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class);
 
         try {
-            /** @var \Tx_Seminars_Model_Speaker $speaker */
             $speaker = $speakerMapper->find((int)$speakerUid);
         } catch (NotFoundException $exception) {
             return $form->majixExecJs(
@@ -2231,7 +2204,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $checkbox->setData(self::createBasicAuxiliaryData());
         self::setCheckboxData($checkbox, 'newCheckbox_', $formData);
         $checkbox->markAsDirty();
-        /** @var \Tx_Seminars_Mapper_Checkbox $mapper */
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Checkbox::class);
         $mapper->save($checkbox);
 
@@ -2279,11 +2251,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $ajax = $form->getMajix();
         $formData = $ajax->getParams();
         $frontEndUser = self::getLoggedInUser();
-        /** @var \Tx_Seminars_Mapper_Checkbox $checkboxMapper */
         $checkboxMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Checkbox::class);
 
         try {
-            /** @var \Tx_Seminars_Model_Checkbox $checkbox */
             $checkbox = $checkboxMapper->find((int)$formData['editCheckbox_uid']);
         } catch (\Exception $exception) {
             return $form->majixExecJs(
@@ -2381,11 +2351,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
             return $form->majixExecJs('alert("$checkboxUid must be >= 0.");');
         }
 
-        /** @var \Tx_Seminars_Mapper_Checkbox $checkboxMapper */
         $checkboxMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Checkbox::class);
 
         try {
-            /** @var \Tx_Seminars_Model_Checkbox $checkbox */
             $checkbox = $checkboxMapper->find((int)$checkboxUid);
         } catch (NotFoundException $exception) {
             return $form->majixExecJs(
@@ -2455,7 +2423,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $targetGroup->setData(self::createBasicAuxiliaryData());
         self::setTargetGroupData($targetGroup, 'newTargetGroup_', $formData);
         $targetGroup->markAsDirty();
-        /** @var \Tx_Seminars_Mapper_TargetGroup $mapper */
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_TargetGroup::class);
         $mapper->save($targetGroup);
 
@@ -2503,11 +2470,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $ajax = $form->getMajix();
         $formData = $ajax->getParams();
         $frontEndUser = self::getLoggedInUser();
-        /** @var \Tx_Seminars_Mapper_TargetGroup $targetGroupMapper */
         $targetGroupMapper = MapperRegistry::get(\Tx_Seminars_Mapper_TargetGroup::class);
 
         try {
-            /** @var \Tx_Seminars_Model_TargetGroup $targetGroup */
             $targetGroup = $targetGroupMapper->find((int)$formData['editTargetGroup_uid']);
         } catch (\Exception $exception) {
             return $form->majixExecJs(
@@ -2634,11 +2599,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
             return $form->majixExecJs('alert("$targetGroupUid must be >= 0.");');
         }
 
-        /** @var \Tx_Seminars_Mapper_TargetGroup $targetGroupMapper */
         $targetGroupMapper = MapperRegistry::get(\Tx_Seminars_Mapper_TargetGroup::class);
 
         try {
-            /** @var \Tx_Seminars_Model_TargetGroup $targetGroup */
             $targetGroup = $targetGroupMapper->find((int)$targetGroupUid);
         } catch (NotFoundException $exception) {
             return $form->majixExecJs(
@@ -2690,7 +2653,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     {
         $result = [];
 
-        /** @var CountryMapper $mapper */
         $mapper = MapperRegistry::get(CountryMapper::class);
         /** @var Country $country */
         foreach ($mapper->findAll('cn_short_local') as $country) {
@@ -2710,7 +2672,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      */
     public static function populateListSkills(): array
     {
-        /** @var \Tx_Seminars_Mapper_Skill $mapper */
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Skill::class);
         $skills = $mapper->findAll('title ASC');
 

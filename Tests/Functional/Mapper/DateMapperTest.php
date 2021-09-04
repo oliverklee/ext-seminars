@@ -41,7 +41,6 @@ final class DateMapperTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Dates.xml');
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find(2);
         $result = $model->getRequirements();
 
@@ -56,7 +55,6 @@ final class DateMapperTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Dates.xml');
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find(5);
         $result = $model->getRequirements();
 
@@ -71,7 +69,6 @@ final class DateMapperTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Dates.xml');
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find(2);
         $result = $model->getDependencies();
 
@@ -86,7 +83,6 @@ final class DateMapperTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Dates.xml');
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find(6);
         $result = $model->getDependencies();
 

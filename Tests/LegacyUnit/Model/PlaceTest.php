@@ -271,9 +271,7 @@ class PlaceTest extends TestCase
      */
     public function getCountryWithCountryReturnsCountryInstance()
     {
-        /** @var CountryMapper $mapper */
         $mapper = MapperRegistry::get(CountryMapper::class);
-        /** @var Country $country */
         $country = $mapper->find(54);
         $this->subject->setData(['country' => $country->getIsoAlpha2Code()]);
 
@@ -288,9 +286,7 @@ class PlaceTest extends TestCase
      */
     public function getCountryWithCountryReturnsCountryAsModel()
     {
-        /** @var CountryMapper $mapper */
         $mapper = MapperRegistry::get(CountryMapper::class);
-        /** @var Country $country */
         $country = $mapper->find(54);
         $this->subject->setData(['country' => $country->getIsoAlpha2Code()]);
 
@@ -305,9 +301,7 @@ class PlaceTest extends TestCase
      */
     public function setCountrySetsCountry()
     {
-        /** @var CountryMapper $mapper */
         $mapper = MapperRegistry::get(CountryMapper::class);
-        /** @var Country $country */
         $country = $mapper->find(54);
         $this->subject->setCountry($country);
 
@@ -358,9 +352,7 @@ class PlaceTest extends TestCase
      */
     public function hasCountryWithCountryReturnsTrue()
     {
-        /** @var CountryMapper $mapper */
         $mapper = MapperRegistry::get(CountryMapper::class);
-        /** @var Country $country */
         $country = $mapper->find(54);
         $this->subject->setCountry($country);
 

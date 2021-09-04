@@ -38,7 +38,6 @@ final class BackEndUserGroupMapperTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/BackEndUsers.xml');
 
-        /** @var \Tx_Seminars_Model_BackEndUserGroup $userGroup */
         $userGroup = $this->subject->find(1);
 
         self::assertInstanceOf(\Tx_Seminars_Model_BackEndUserGroup::class, $userGroup);
@@ -51,7 +50,6 @@ final class BackEndUserGroupMapperTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/BackEndUsers.xml');
 
-        /** @var \Tx_Seminars_Model_BackEndUserGroup $userGroup */
         $userGroup = $this->subject->find(1);
 
         $this->subject->load($userGroup);

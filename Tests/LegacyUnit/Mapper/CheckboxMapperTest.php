@@ -37,9 +37,7 @@ class CheckboxMapperTest extends TestCase
         $this->testingFramework->cleanUp();
     }
 
-    //////////////////////////
     // Tests concerning find
-    //////////////////////////
 
     /**
      * @test
@@ -58,7 +56,6 @@ class CheckboxMapperTest extends TestCase
             'tx_seminars_checkboxes',
             ['title' => 'I agree with the T&C.']
         );
-        /** @var \Tx_Seminars_Model_Checkbox $model */
         $model = $this->subject->find($uid);
 
         self::assertEquals(
@@ -67,16 +64,13 @@ class CheckboxMapperTest extends TestCase
         );
     }
 
-    ///////////////////////////////
     // Tests regarding the owner.
-    ///////////////////////////////
 
     /**
      * @test
      */
     public function getOwnerWithoutOwnerReturnsNull()
     {
-        /** @var \Tx_Seminars_Model_Checkbox $model */
         $model = $this->subject->getLoadedTestingModel([]);
 
         self::assertNull($model->getOwner());
@@ -89,7 +83,6 @@ class CheckboxMapperTest extends TestCase
     {
         $frontEndUser = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)
             ->getLoadedTestingModel([]);
-        /** @var \Tx_Seminars_Model_Checkbox $model */
         $model = $this->subject->getLoadedTestingModel(['owner' => $frontEndUser->getUid()]);
 
         self::assertInstanceOf(\Tx_Seminars_Model_FrontEndUser::class, $model->getOwner());

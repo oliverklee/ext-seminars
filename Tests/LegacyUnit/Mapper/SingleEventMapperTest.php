@@ -54,7 +54,6 @@ class SingleEventMapperTest extends TestCase
             'This function may only be called for date records.'
         );
 
-        /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
@@ -62,16 +61,13 @@ class SingleEventMapperTest extends TestCase
         $testingModel->getTopic();
     }
 
-    //////////////////////////////////////
     // Tests regarding getCategories().
-    //////////////////////////////////////
 
     /**
      * @test
      */
     public function getCategoriesForSingleEventReturnsListInstance()
     {
-        /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
@@ -97,7 +93,6 @@ class SingleEventMapperTest extends TestCase
             'categories'
         );
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find($uid);
         self::assertInstanceOf(\Tx_Seminars_Model_Category::class, $model->getCategories()->first());
     }
@@ -119,7 +114,6 @@ class SingleEventMapperTest extends TestCase
             'categories'
         );
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find($uid);
         self::assertEquals(
             $category->getUid(),
@@ -127,16 +121,13 @@ class SingleEventMapperTest extends TestCase
         );
     }
 
-    ////////////////////////////////////
     // Tests regarding getEventType().
-    ////////////////////////////////////
 
     /**
      * @test
      */
     public function getEventTypeForSingleEventWithoutEventTypeReturnsNull()
     {
-        /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
@@ -151,7 +142,6 @@ class SingleEventMapperTest extends TestCase
     {
         $eventType = MapperRegistry::get(\Tx_Seminars_Mapper_EventType::class)
             ->getLoadedTestingModel([]);
-        /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE,
@@ -162,16 +152,13 @@ class SingleEventMapperTest extends TestCase
         self::assertInstanceOf(\Tx_Seminars_Model_EventType::class, $testingModel->getEventType());
     }
 
-    /////////////////////////////////////////
     // Tests regarding getPaymentMethods().
-    /////////////////////////////////////////
 
     /**
      * @test
      */
     public function getPaymentMethodsForSingleEventReturnsListInstance()
     {
-        /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
@@ -199,7 +186,6 @@ class SingleEventMapperTest extends TestCase
             $paymentMethod->getUid()
         );
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find($uid);
         self::assertInstanceOf(\Tx_Seminars_Model_PaymentMethod::class, $model->getPaymentMethods()->first());
     }
@@ -224,7 +210,6 @@ class SingleEventMapperTest extends TestCase
             $paymentMethod->getUid()
         );
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find($uid);
         self::assertEquals(
             $paymentMethod->getUid(),
@@ -241,7 +226,6 @@ class SingleEventMapperTest extends TestCase
      */
     public function getTargetGroupsForSingleEventReturnsListInstance()
     {
-        /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
@@ -267,7 +251,6 @@ class SingleEventMapperTest extends TestCase
             'target_groups'
         );
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find($uid);
         self::assertInstanceOf(
             \Tx_Seminars_Model_TargetGroup::class,
@@ -293,7 +276,6 @@ class SingleEventMapperTest extends TestCase
             'target_groups'
         );
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find($uid);
         self::assertEquals(
             $targetGroup->getUid(),
@@ -306,7 +288,6 @@ class SingleEventMapperTest extends TestCase
      */
     public function getTargetGroupsForEventTopicReturnsListInstance()
     {
-        /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
         );
@@ -332,7 +313,6 @@ class SingleEventMapperTest extends TestCase
             'target_groups'
         );
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find($uid);
         self::assertInstanceOf(
             \Tx_Seminars_Model_TargetGroup::class,
@@ -358,7 +338,6 @@ class SingleEventMapperTest extends TestCase
             'target_groups'
         );
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find($uid);
         self::assertEquals(
             $targetGroup->getUid(),
@@ -366,16 +345,13 @@ class SingleEventMapperTest extends TestCase
         );
     }
 
-    /////////////////////////////////////
     // Tests regarding getCheckboxes().
-    /////////////////////////////////////
 
     /**
      * @test
      */
     public function getCheckboxesForSingleEventReturnsListInstance()
     {
-        /** @var \Tx_Seminars_Model_Event $testingModel */
         $testingModel = $this->subject->getLoadedTestingModel(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
@@ -401,7 +377,6 @@ class SingleEventMapperTest extends TestCase
             'checkboxes'
         );
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find($uid);
         self::assertInstanceOf(\Tx_Seminars_Model_Checkbox::class, $model->getCheckboxes()->first());
     }
@@ -424,7 +399,6 @@ class SingleEventMapperTest extends TestCase
             'checkboxes'
         );
 
-        /** @var \Tx_Seminars_Model_Event $model */
         $model = $this->subject->find($uid);
         self::assertEquals(
             $checkbox->getUid(),

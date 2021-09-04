@@ -40,9 +40,7 @@ class FrontEndUserTest extends TestCase
         $this->testingFramework->cleanUp();
     }
 
-    ////////////////////////////////////////
     // Tests concerning getPublishSettings
-    ////////////////////////////////////////
 
     /**
      * @test
@@ -241,9 +239,7 @@ class FrontEndUserTest extends TestCase
         );
     }
 
-    ///////////////////////////////////////////////
     // Tests concerning getAuxiliaryRecordsPid().
-    ///////////////////////////////////////////////
 
     /**
      * @test
@@ -349,9 +345,7 @@ class FrontEndUserTest extends TestCase
         );
     }
 
-    //////////////////////////////////////////
     // Tests concerning getReviewerFromGroup
-    //////////////////////////////////////////
 
     /**
      * @test
@@ -456,9 +450,7 @@ class FrontEndUserTest extends TestCase
         );
     }
 
-    //////////////////////////////////////////
     // Tests concerning getEventRecordsPid()
-    //////////////////////////////////////////
 
     /**
      * @test
@@ -564,9 +556,7 @@ class FrontEndUserTest extends TestCase
         );
     }
 
-    ///////////////////////////////////////////////////
     // Tests concerning getDefaultCategoriesFromGroup
-    ///////////////////////////////////////////////////
 
     /**
      * @test
@@ -713,9 +703,7 @@ class FrontEndUserTest extends TestCase
         );
     }
 
-    //////////////////////////////////////////
     // Tests concerning hasDefaultCategories
-    //////////////////////////////////////////
 
     /**
      * @test
@@ -754,9 +742,7 @@ class FrontEndUserTest extends TestCase
         );
     }
 
-    /////////////////////////////////////////////////////////
     // Tests concerning getRegistration and setRegistration
-    /////////////////////////////////////////////////////////
 
     /**
      * @test
@@ -800,9 +786,7 @@ class FrontEndUserTest extends TestCase
         );
     }
 
-    //////////////////////////////////////////
     // Tests concerning getDefaultOrganizers
-    //////////////////////////////////////////
 
     /**
      * @test
@@ -868,9 +852,7 @@ class FrontEndUserTest extends TestCase
         );
     }
 
-    //////////////////////////////////////////
     // Tests concerning hasDefaultOrganizers
-    //////////////////////////////////////////
 
     /**
      * @test

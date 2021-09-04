@@ -2856,7 +2856,6 @@ class EventTest extends TestCase
     {
         $this->subject->setRegistrations(new Collection());
 
-        /** @var \Tx_Seminars_Model_Registration $registration */
         $registration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel([]);
         $this->subject->attachRegistration($registration);
 
@@ -2875,7 +2874,6 @@ class EventTest extends TestCase
         $registrations->add($oldRegistration);
         $this->subject->setRegistrations($registrations);
 
-        /** @var \Tx_Seminars_Model_Registration $newRegistration */
         $newRegistration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel([]);
         $this->subject->attachRegistration($newRegistration);
 
@@ -2891,7 +2889,6 @@ class EventTest extends TestCase
     {
         $this->subject->setRegistrations(new Collection());
 
-        /** @var \Tx_Seminars_Model_Registration $registration */
         $registration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel([]);
         $this->subject->attachRegistration($registration);
 
@@ -2901,9 +2898,7 @@ class EventTest extends TestCase
         );
     }
 
-    /////////////////////////////////////////
     // Tests concerning the payment methods
-    /////////////////////////////////////////
 
     /**
      * @test

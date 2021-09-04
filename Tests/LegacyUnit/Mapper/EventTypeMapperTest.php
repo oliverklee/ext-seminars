@@ -36,9 +36,7 @@ class EventTypeMapperTest extends TestCase
         $this->testingFramework->cleanUp();
     }
 
-    //////////////////////////
     // Tests concerning find
-    //////////////////////////
 
     /**
      * @test
@@ -58,7 +56,6 @@ class EventTypeMapperTest extends TestCase
             ['title' => 'Workshop']
         );
 
-        /** @var \Tx_Seminars_Model_EventType $model */
         $model = $this->subject->find($uid);
         self::assertEquals(
             'Workshop',

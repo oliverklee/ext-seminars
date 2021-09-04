@@ -36,9 +36,7 @@ class SkillMapperTest extends TestCase
         $this->testingFramework->cleanUp();
     }
 
-    //////////////////////////
     // Tests concerning find
-    //////////////////////////
 
     /**
      * @test
@@ -61,7 +59,6 @@ class SkillMapperTest extends TestCase
             ['title' => 'Superhero']
         );
 
-        /** @var \Tx_Seminars_Model_Skill $model */
         $model = $this->subject->find($uid);
         self::assertEquals(
             'Superhero',

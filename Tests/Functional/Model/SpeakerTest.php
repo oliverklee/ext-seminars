@@ -43,7 +43,6 @@ final class SpeakerTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 
-        /** @var \Tx_Seminars_Model_Speaker $subject */
         $subject = $this->speakerMapper->find(1);
 
         self::assertNull($subject->getImage());
@@ -56,7 +55,6 @@ final class SpeakerTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 
-        /** @var \Tx_Seminars_Model_Speaker $subject */
         $subject = $this->speakerMapper->find(2);
 
         self::assertNull($subject->getImage());
@@ -69,7 +67,6 @@ final class SpeakerTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 
-        /** @var \Tx_Seminars_Model_Speaker $subject */
         $subject = $this->speakerMapper->find(3);
 
         $result = $subject->getImage();

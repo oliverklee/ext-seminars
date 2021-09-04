@@ -51,9 +51,7 @@ class FrontEndUserGroupMapperTest extends TestCase
         self::assertInstanceOf(\Tx_Seminars_Model_FrontEndUserGroup::class, $this->subject->getNewGhost());
     }
 
-    //////////////////////////////////
     // Tests concerning the reviewer
-    //////////////////////////////////
 
     /**
      * @test
@@ -65,15 +63,12 @@ class FrontEndUserGroupMapperTest extends TestCase
             ['tx_seminars_reviewer' => $backEndUser->getUid()]
         );
 
-        /** @var \Tx_Seminars_Model_FrontEndUserGroup $model */
         $model = $this->subject->find($frontEndUserGroup->getUid());
 
         self::assertInstanceOf(BackEndUser::class, $model->getReviewer());
     }
 
-    ////////////////////////////////////////////
     // Tests concerning the default categories
-    ////////////////////////////////////////////
 
     /**
      * @test
@@ -92,14 +87,11 @@ class FrontEndUserGroupMapperTest extends TestCase
             'tx_seminars_default_categories'
         );
 
-        /** @var \Tx_Seminars_Model_FrontEndUserGroup $model */
         $model = $this->subject->find($frontEndUserGroupUid);
         self::assertInstanceOf(\Tx_Seminars_Model_Category::class, $model->getDefaultCategories()->first());
     }
 
-    ///////////////////////////////////////////
     // Tests concerning the default organizer
-    ///////////////////////////////////////////
 
     /**
      * @test
@@ -113,7 +105,6 @@ class FrontEndUserGroupMapperTest extends TestCase
             ['tx_seminars_default_organizer' => $organizerUid]
         );
 
-        /** @var \Tx_Seminars_Model_FrontEndUserGroup $model */
         $model = $this->subject->find($groupUid);
         self::assertInstanceOf(\Tx_Seminars_Model_Organizer::class, $model->getDefaultOrganizer());
     }

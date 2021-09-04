@@ -245,7 +245,6 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
             ->execute()
             ->fetchAll();
 
-        /** @var \Tx_Seminars_Mapper_Place $mapper */
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Place::class);
         $this->places = $mapper->getListOfModels($dataOfPlaces);
     }

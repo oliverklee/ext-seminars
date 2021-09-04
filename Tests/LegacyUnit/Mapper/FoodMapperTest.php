@@ -36,9 +36,7 @@ class FoodMapperTest extends TestCase
         $this->testingFramework->cleanUp();
     }
 
-    //////////////////////////
     // Tests concerning find
-    //////////////////////////
 
     /**
      * @test
@@ -58,7 +56,6 @@ class FoodMapperTest extends TestCase
             ['title' => 'Crunchy crisps']
         );
 
-        /** @var \Tx_Seminars_Model_Food $model */
         $model = $this->subject->find($uid);
         self::assertEquals(
             'Crunchy crisps',

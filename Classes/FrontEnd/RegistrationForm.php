@@ -188,9 +188,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      */
     public function getEvent(): \Tx_Seminars_Model_Event
     {
-        /** @var \Tx_Seminars_Mapper_Event $eventMapper */
         $eventMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
-        /** @var \Tx_Seminars_Model_Event $event */
         $event = $eventMapper->find($this->getSeminar()->getUid());
 
         return $event;
@@ -378,11 +376,9 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
             return;
         }
 
-        /** @var \Tx_Seminars_Mapper_FrontEndUser $userMapper */
         $userMapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
         $pageUid = $this->getConfValueInteger('sysFolderForAdditionalAttendeeUsersPID', 's_registration');
 
-        /** @var \Tx_Seminars_Mapper_FrontEndUserGroup $userGroupMapper */
         $userGroupMapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class);
         $userGroups = new Collection();
         $userGroupUids = GeneralUtility::intExplode(
@@ -391,7 +387,6 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
             true
         );
         foreach ($userGroupUids as $uid) {
-            /** @var \Tx_Seminars_Model_FrontEndUserGroup $userGroup */
             $userGroup = $userGroupMapper->find($uid);
             $userGroups->add($userGroup);
         }
@@ -436,7 +431,6 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
             $additionalPersons->add($user);
         }
 
-        /** @var \Tx_Seminars_Mapper_Registration $registrationMapper */
         $registrationMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
         $registrationMapper->save($registration);
     }
