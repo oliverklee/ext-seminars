@@ -7,13 +7,15 @@ use OliverKlee\Seminars\BagBuilder\AbstractBagBuilder;
 /**
  * This builder class creates customized category bag objects.
  *
+ * @extends AbstractBagBuilder<\Tx_Seminars_Bag_Category>
+ *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */
 class Tx_Seminars_BagBuilder_Category extends AbstractBagBuilder
 {
     /**
-     * @var string class name of the bag class that will be built
+     * @var class-string<\Tx_Seminars_Bag_Category> class name of the bag class that will be built
      */
     protected $bagClassName = \Tx_Seminars_Bag_Category::class;
 

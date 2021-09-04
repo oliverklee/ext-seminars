@@ -7,13 +7,15 @@ use OliverKlee\Seminars\BagBuilder\AbstractBagBuilder;
 /**
  * This builder class creates customized registration bag objects.
  *
+ * @extends AbstractBagBuilder<\Tx_Seminars_Bag_Registration>
+ *
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class Tx_Seminars_BagBuilder_Registration extends AbstractBagBuilder
 {
     /**
-     * @var string class name of the bag class that will be built
+     * @var class-string<\Tx_Seminars_Bag_Registration> class name of the bag class that will be built
      */
     protected $bagClassName = \Tx_Seminars_Bag_Registration::class;
 
