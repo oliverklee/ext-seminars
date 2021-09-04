@@ -7,12 +7,14 @@ use OliverKlee\Seminars\BagBuilder\AbstractBagBuilder;
 /**
  * This builder class creates customized organizer bag objects.
  *
+ * @extends AbstractBagBuilder<\Tx_Seminars_Bag_Organizer>
+ *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
 class Tx_Seminars_BagBuilder_Organizer extends AbstractBagBuilder
 {
     /**
-     * @var string class name of the bag class that will be built
+     * @var class-string<\Tx_Seminars_Bag_Organizer> class name of the bag class that will be built
      */
     protected $bagClassName = \Tx_Seminars_Bag_Organizer::class;
 
