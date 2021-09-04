@@ -8,14 +8,16 @@ use OliverKlee\Seminars\Bag\AbstractBag;
 use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingModel;
 
 /**
- * This aggregate class holds a bunch of test objects and allows to iterate over them.
+ * This aggregate class holds a bunch of test objects and allows iterating over them.
+ *
+ * @extends AbstractBag<TestingModel>
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 final class TestingBag extends AbstractBag
 {
     /**
-     * @var string
+     * @var class-string<TestingModel>
      */
     protected static $modelClassName = TestingModel::class;
 
