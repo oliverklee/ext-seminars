@@ -56,7 +56,9 @@ class MailNotifierConfigurationTest extends FunctionalTestCase
         $this->setUpBackendUserFromFixture(1);
         $this->initializeBackEndLanguage();
 
-        $this->moduleController = $this->createMock(SchedulerModuleController::class);
+        /** @var SchedulerModuleController&MockObject $moduleController */
+        $moduleController = $this->createMock(SchedulerModuleController::class);
+        $this->moduleController = $moduleController;
         // We can remove this line once we have moved to PHPUnit 7.5.
         // The reason is that PHPUnit 6.5 creates some deprecation notices in the mock builder with PHP 7.4.
         $this->getFlashMessageQueue()->clear();

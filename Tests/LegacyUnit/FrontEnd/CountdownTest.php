@@ -50,8 +50,9 @@ class CountdownTest extends TestCase
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
 
-        $this->mapper = $this->getMockBuilder(\Tx_Seminars_Mapper_Event::class)
-            ->setMethods(['findNextUpcoming'])->getMock();
+        /** @var \Tx_Seminars_Mapper_Event&MockObject $mapper */
+        $mapper = $this->getMockBuilder(\Tx_Seminars_Mapper_Event::class)->setMethods(['findNextUpcoming'])->getMock();
+        $this->mapper = $mapper;
 
         $this->subject = new \Tx_Seminars_FrontEnd_Countdown(
             [
