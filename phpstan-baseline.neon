@@ -51,11 +51,6 @@ parameters:
 			path: Classes/ViewHelper/TimeRange.php
 
 		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\AbstractEventMailFormTest\\:\\:\\$headerProxy \\(OliverKlee\\\\Oelib\\\\Http\\\\HeaderCollector\\) does not accept OliverKlee\\\\Oelib\\\\Http\\\\Interfaces\\\\HeaderProxy\\.$#"
-			count: 1
-			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
-
-		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\BackEnd\\\\AbstractEventMailFormTest\\:\\:\\$mailer \\(OliverKlee\\\\Oelib\\\\Email\\\\EmailCollector\\) does not accept OliverKlee\\\\Oelib\\\\Email\\\\AbstractMailer\\.$#"
 			count: 1
 			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
@@ -76,11 +71,6 @@ parameters:
 			path: Tests/Functional/BackEnd/GeneralEventMailFormTest.php
 
 		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Csv\\\\CsvDownloaderTest\\:\\:\\$headerProxy \\(OliverKlee\\\\Oelib\\\\Http\\\\HeaderCollector\\) does not accept OliverKlee\\\\Oelib\\\\Http\\\\Interfaces\\\\HeaderProxy\\.$#"
-			count: 1
-			path: Tests/Functional/Csv/CsvDownloaderTest.php
-
-		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\SchedulerTasks\\\\MailNotifierConfigurationTest\\:\\:\\$moduleController \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Scheduler\\\\Controller\\\\SchedulerModuleController\\) does not accept PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\.$#"
 			count: 1
 			path: Tests/Functional/SchedulerTask/MailNotifierConfigurationTest.php
@@ -96,51 +86,6 @@ parameters:
 			path: Tests/Functional/Service/RegistrationManagerTest.php
 
 		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\AbstractEventMailFormTest\\:\\:\\$headerProxy \\(OliverKlee\\\\Oelib\\\\Http\\\\HeaderCollector\\) does not accept OliverKlee\\\\Oelib\\\\Http\\\\Interfaces\\\\HeaderProxy\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/AbstractEventMailFormTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\CancelEventMailFormTest\\:\\:\\$headerProxy \\(OliverKlee\\\\Oelib\\\\Http\\\\HeaderCollector\\) does not accept OliverKlee\\\\Oelib\\\\Http\\\\Interfaces\\\\HeaderProxy\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/CancelEventMailFormTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\ConfirmEventMailFormTest\\:\\:\\$headerProxy \\(OliverKlee\\\\Oelib\\\\Http\\\\HeaderCollector\\) does not accept OliverKlee\\\\Oelib\\\\Http\\\\Interfaces\\\\HeaderProxy\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/ConfirmEventMailFormTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\ControllerTest\\:\\:\\$headerProxy \\(OliverKlee\\\\Oelib\\\\Http\\\\HeaderCollector\\) does not accept OliverKlee\\\\Oelib\\\\Http\\\\Interfaces\\\\HeaderProxy\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/ControllerTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\EventsListTest\\:\\:\\$headerProxy \\(OliverKlee\\\\Oelib\\\\Http\\\\HeaderCollector\\) does not accept OliverKlee\\\\Oelib\\\\Http\\\\Interfaces\\\\HeaderProxy\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/EventsListTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\GeneralEventMailFormTest\\:\\:\\$headerProxy \\(OliverKlee\\\\Oelib\\\\Http\\\\HeaderCollector\\) does not accept OliverKlee\\\\Oelib\\\\Http\\\\Interfaces\\\\HeaderProxy\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/GeneralEventMailFormTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\OrganizersListTest\\:\\:\\$headerProxy \\(OliverKlee\\\\Oelib\\\\Http\\\\HeaderCollector\\) does not accept OliverKlee\\\\Oelib\\\\Http\\\\Interfaces\\\\HeaderProxy\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/OrganizersListTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\RegistrationsListTest\\:\\:\\$headerProxy \\(OliverKlee\\\\Oelib\\\\Http\\\\HeaderCollector\\) does not accept OliverKlee\\\\Oelib\\\\Http\\\\Interfaces\\\\HeaderProxy\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/RegistrationsListTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\BackEnd\\\\SpeakersListTest\\:\\:\\$headerProxy \\(OliverKlee\\\\Oelib\\\\Http\\\\HeaderCollector\\) does not accept OliverKlee\\\\Oelib\\\\Http\\\\Interfaces\\\\HeaderProxy\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/SpeakersListTest.php
-
-		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\AbstractRegistrationListViewTest\\:\\:\\$registrationFieldKeys \\(array\\<array\\>\\) does not accept array\\<int, string\\>\\.$#"
 			count: 19
 			path: Tests/LegacyUnit/Csv/AbstractRegistrationListViewTest.php
@@ -154,11 +99,6 @@ parameters:
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\BackEndRegistrationAccessCheckTest\\:\\:\\$backEndUser \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Authentication\\\\BackendUserAuthentication\\) does not accept PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Csv/BackEndRegistrationAccessCheckTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\CsvDownloaderTest\\:\\:\\$headerProxy \\(OliverKlee\\\\Oelib\\\\Http\\\\HeaderCollector\\) does not accept OliverKlee\\\\Oelib\\\\Http\\\\Interfaces\\\\HeaderProxy\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\SalutationTest\\:\\:createFrontEndUser\\(\\) should return Tx_Seminars_Model_FrontEndUser but returns OliverKlee\\\\Oelib\\\\Model\\\\FrontEndUser\\.$#"

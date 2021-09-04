@@ -47,7 +47,9 @@ final class CsvDownloaderTest extends FunctionalTestCase
 
         $headerProxyFactory = HeaderProxyFactory::getInstance();
         $headerProxyFactory->enableTestMode();
-        $this->headerProxy = $headerProxyFactory->getHeaderProxy();
+        /** @var HeaderCollector $headerProxy */
+        $headerProxy = $headerProxyFactory->getHeaderProxy();
+        $this->headerProxy = $headerProxy;
 
         $this->setUpBackendUserFromFixture(1);
         $this->setUpExtensionConfiguration();
