@@ -9,6 +9,8 @@ use TYPO3\CMS\Core\Database\Connection;
 /**
  * This class represents a mapper for registrations.
  *
+ * @extends AbstractDataMapper<\Tx_Seminars_Model_Registration>
+ *
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
@@ -20,12 +22,13 @@ class Tx_Seminars_Mapper_Registration extends AbstractDataMapper
     protected $tableName = 'tx_seminars_attendances';
 
     /**
-     * @var string the model class name for this mapper, must not be empty
+     * @var class-string<\Tx_Seminars_Model_Registration> the model class name for this mapper, must not be empty
      */
     protected $modelClassName = \Tx_Seminars_Model_Registration::class;
 
     /**
-     * @var string[] the (possible) relations of the created models in the format DB column name => mapper name
+     * @var array<string, class-string<AbstractDataMapper>>
+     *      the (possible) relations of the created models in the format DB column name => mapper name
      */
     protected $relations = [
         'seminar' => \Tx_Seminars_Mapper_Event::class,

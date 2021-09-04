@@ -7,6 +7,8 @@ use OliverKlee\Oelib\Mapper\AbstractDataMapper;
 /**
  * This class represents a mapper for speakers.
  *
+ * @extends AbstractDataMapper<\Tx_Seminars_Model_Speaker>
+ *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
 class Tx_Seminars_Mapper_Speaker extends AbstractDataMapper
@@ -17,12 +19,13 @@ class Tx_Seminars_Mapper_Speaker extends AbstractDataMapper
     protected $tableName = 'tx_seminars_speakers';
 
     /**
-     * @var string the model class name for this mapper, must not be empty
+     * @var class-string<\Tx_Seminars_Model_Speaker> the model class name for this mapper, must not be empty
      */
     protected $modelClassName = \Tx_Seminars_Model_Speaker::class;
 
     /**
-     * @var string[] the (possible) relations of the created models in the format DB column name => mapper name
+     * @var array<string, class-string<AbstractDataMapper>>
+     *      the (possible) relations of the created models in the format DB column name => mapper name
      */
     protected $relations = [
         'skills' => \Tx_Seminars_Mapper_Skill::class,
