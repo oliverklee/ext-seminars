@@ -8,7 +8,7 @@ use OliverKlee\Oelib\Mapper\FrontEndUserMapper as OelibFrontEndUserMapper;
 /**
  * This class represents a mapper for front-end users.
  *
- * @extends AbstractDataMapper<\Tx_Seminars_Model_FrontEndUser>
+ * @extends OelibFrontEndUserMapper<\Tx_Seminars_Model_FrontEndUser>
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */

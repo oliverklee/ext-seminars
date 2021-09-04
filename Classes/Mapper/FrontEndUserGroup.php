@@ -9,7 +9,7 @@ use OliverKlee\Oelib\Mapper\FrontEndUserGroupMapper as OelibFrontEndUserGroupMap
 /**
  * This class represents a mapper for front-end user groups.
  *
- * @extends AbstractDataMapper<\Tx_Seminars_Model_FrontEndUserGroup>
+ * @extends OelibFrontEndUserGroupMapper<\Tx_Seminars_Model_FrontEndUserGroup>
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
