@@ -71,11 +71,6 @@ parameters:
 			path: Tests/Functional/BackEnd/GeneralEventMailFormTest.php
 
 		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\SchedulerTasks\\\\MailNotifierConfigurationTest\\:\\:\\$moduleController \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Scheduler\\\\Controller\\\\SchedulerModuleController\\) does not accept PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\.$#"
-			count: 1
-			path: Tests/Functional/SchedulerTask/MailNotifierConfigurationTest.php
-
-		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Service\\\\RegistrationManagerTest\\:\\:\\$mailer \\(OliverKlee\\\\Oelib\\\\Email\\\\EmailCollector\\) does not accept OliverKlee\\\\Oelib\\\\Email\\\\AbstractMailer\\.$#"
 			count: 1
 			path: Tests/Functional/Service/RegistrationManagerTest.php
@@ -91,29 +86,9 @@ parameters:
 			path: Tests/LegacyUnit/Csv/AbstractRegistrationListViewTest.php
 
 		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\BackEndEventAccessCheckTest\\:\\:\\$backEndUser \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Authentication\\\\BackendUserAuthentication\\) does not accept PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Csv/BackEndEventAccessCheckTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\BackEndRegistrationAccessCheckTest\\:\\:\\$backEndUser \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Authentication\\\\BackendUserAuthentication\\) does not accept PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Csv/BackEndRegistrationAccessCheckTest.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\SalutationTest\\:\\:createFrontEndUser\\(\\) should return Tx_Seminars_Model_FrontEndUser but returns OliverKlee\\\\Oelib\\\\Model\\\\FrontEndUser\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Email/SalutationTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\CountdownTest\\:\\:\\$mapper \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&Tx_Seminars_Mapper_Event\\) does not accept PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/FrontEnd/CountdownTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\DefaultControllerTest\\:\\:createContentMock\\(\\) should return PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer but returns PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
 
 		-
 			message: "#^Call to an undefined method OliverKlee\\\\Oelib\\\\Model\\\\FrontEndUserGroup\\:\\:getDefaultCategories\\(\\)\\.$#"

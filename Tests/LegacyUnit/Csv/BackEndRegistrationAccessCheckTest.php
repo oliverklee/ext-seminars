@@ -26,7 +26,7 @@ class BackEndRegistrationAccessCheckTest extends TestCase
     private $subject = null;
 
     /**
-     * @var MockObject&BackendUserAuthentication
+     * @var BackendUserAuthentication&MockObject
      */
     private $backEndUser = null;
 
@@ -43,8 +43,10 @@ class BackEndRegistrationAccessCheckTest extends TestCase
     protected function setUp()
     {
         $this->backEndUserBackup = $GLOBALS['BE_USER'];
-        $this->backEndUser = $this->createMock(BackendUserAuthentication::class);
-        $GLOBALS['BE_USER'] = $this->backEndUser;
+        /** @var BackendUserAuthentication&MockObject $backEndUser */
+        $backEndUser = $this->createMock(BackendUserAuthentication::class);
+        $this->backEndUser = $backEndUser;
+        $GLOBALS['BE_USER'] = $backEndUser;
 
         $this->testingFramework = new TestingFramework('tx_seminars');
 

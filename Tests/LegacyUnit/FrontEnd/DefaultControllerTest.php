@@ -335,8 +335,9 @@ class DefaultControllerTest extends TestCase
      *
      * @return ContentObjectRenderer&MockObject a mock content object
      */
-    private function createContentMock()
+    private function createContentMock(): ContentObjectRenderer
     {
+        /** @var ContentObjectRenderer&MockObject $mock */
         $mock = $this->createPartialMock(ContentObjectRenderer::class, ['getTypoLink']);
         $mock->method('getTypoLink')->willReturnCallback([$this, 'getTypoLink']);
 
