@@ -18,7 +18,9 @@ use TYPO3\CMS\Frontend\Page\PageRepository;
 
 /**
  * This aggregate class holds a bunch of objects that are created from
- * the result of an SQL query and allows to iterate over them.
+ * the result of an SQL query and allows iterating over them.
+ *
+ * @template M of AbstractModel
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
@@ -26,9 +28,9 @@ use TYPO3\CMS\Frontend\Page\PageRepository;
 abstract class AbstractBag implements \Iterator, ConfigurationCheckable
 {
     /**
-     * @var string
+     * @var class-string<M>
      */
-    protected static $modelClassName = '';
+    protected static $modelClassName;
 
     /**
      * @var string the name of the main DB table from which we get the records for this bag
@@ -106,7 +108,7 @@ abstract class AbstractBag implements \Iterator, ConfigurationCheckable
     protected $pageRepository = null;
 
     /**
-     * Creates a bag that contains test records and allows to iterate over them.
+     * Creates a bag that contains test records and allows iterating over them.
      *
      * @param string $queryParameters
      *        string that will be prepended to the WHERE clause using AND, e.g. 'pid=42'
@@ -238,7 +240,7 @@ abstract class AbstractBag implements \Iterator, ConfigurationCheckable
     /**
      * Advances to the next record and returns a reference to that object.
      *
-     * @return AbstractModel|null
+     * @return M|null
      */
     public function next()
     {
@@ -248,9 +250,9 @@ abstract class AbstractBag implements \Iterator, ConfigurationCheckable
     }
 
     /**
-     * Returns the current object (which may be NULL).
+     * Returns the current object.
      *
-     * @return AbstractModel|null
+     * @return M|null
      */
     public function current()
     {
@@ -299,8 +301,7 @@ abstract class AbstractBag implements \Iterator, ConfigurationCheckable
      * Retrieves the number of objects this bag would hold if the LIMIT part of
      * the query would not have been used.
      *
-     * @return int the total number of objects in this bag without any
-     *                 limit, may be zero
+     * @return int the total number of objects in this bag without any limit, may be zero
      */
     public function countWithoutLimit(): int
     {
@@ -359,7 +360,7 @@ abstract class AbstractBag implements \Iterator, ConfigurationCheckable
         $this->executeQueryIfNotDoneYet();
 
         $uids = [];
-        /** @var AbstractModel $currentItem */
+        /** @var M $currentItem */
         foreach ($this as $currentItem) {
             $uids[] = $currentItem->getUid();
         }

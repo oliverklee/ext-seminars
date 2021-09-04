@@ -5,14 +5,16 @@ declare(strict_types=1);
 use OliverKlee\Seminars\Bag\AbstractBag;
 
 /**
- * This aggregate class holds a bunch of category objects and allows to iterate over them.
+ * This aggregate class holds a bunch of category objects and allows iterating over them.
+ *
+ * @extends AbstractBag<\Tx_Seminars_OldModel_Category>
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class Tx_Seminars_Bag_Category extends AbstractBag
 {
     /**
-     * @var string
+     * @var class-string<\Tx_Seminars_OldModel_Category>
      */
     protected static $modelClassName = \Tx_Seminars_OldModel_Category::class;
 
