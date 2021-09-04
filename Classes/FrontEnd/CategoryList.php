@@ -13,7 +13,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class Tx_Seminars_FrontEnd_CategoryList extends \Tx_Seminars_FrontEnd_AbstractView
 {
     /**
-     * Creates a HTML list of categories.
+     * Creates an HTML list of categories.
      *
      * This list is limited to categories for which there are events in the
      * selected time-frame and in the selected sysfolders. Categories for which

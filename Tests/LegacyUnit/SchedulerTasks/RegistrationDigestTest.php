@@ -9,7 +9,6 @@ use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
 use Prophecy\Prophecy\ObjectProphecy;
-use Prophecy\Prophecy\ProphecySubjectInterface;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -40,7 +39,7 @@ class RegistrationDigestTest extends TestCase
     private $eventMapperProphecy = null;
 
     /**
-     * @var \Tx_Seminars_Mapper_Event&ProphecySubjectInterface
+     * @var \Tx_Seminars_Mapper_Event
      */
     private $eventMapper = null;
 
@@ -78,7 +77,7 @@ class RegistrationDigestTest extends TestCase
         $this->subject->setConfiguration($this->configuration);
 
         $this->objectManagerProphecy = $this->prophesize(ObjectManager::class);
-        /** @var ObjectManager&ProphecySubjectInterface $objectManager */
+        /** @var ObjectManager $objectManager */
         $objectManager = $this->objectManagerProphecy->reveal();
         $this->subject->injectObjectManager($objectManager);
 

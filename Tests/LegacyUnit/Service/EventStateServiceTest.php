@@ -55,7 +55,9 @@ final class EventStateServiceTest extends TestCase
         MapperRegistry::denyDatabaseAccess();
         MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
 
-        $this->eventMapper = $this->createMock(\Tx_Seminars_Mapper_Event::class);
+        /** @var \Tx_Seminars_Mapper_Event&MockObject $eventMapper */
+        $eventMapper = $this->createMock(\Tx_Seminars_Mapper_Event::class);
+        $this->eventMapper = $eventMapper;
         MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $this->eventMapper);
 
         $this->subject = new EventStatusService();

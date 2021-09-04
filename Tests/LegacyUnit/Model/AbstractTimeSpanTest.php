@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
 use OliverKlee\PhpUnit\TestCase;
+use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * Test case.
@@ -14,18 +15,18 @@ use OliverKlee\PhpUnit\TestCase;
 class AbstractTimeSpanTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_Model_AbstractTimeSpan
+     * @var \Tx_Seminars_Model_AbstractTimeSpan&MockObject
      */
     private $subject;
 
     protected function setUp()
     {
-        $this->subject = $this->getMockForAbstractClass(\Tx_Seminars_Model_AbstractTimeSpan::class);
+        /** @var \Tx_Seminars_Model_AbstractTimeSpan&MockObject $subject */
+        $subject = $this->getMockForAbstractClass(\Tx_Seminars_Model_AbstractTimeSpan::class);
+        $this->subject = $subject;
     }
 
-    ////////////////////////////////////
     // Tests regarding the begin date.
-    ////////////////////////////////////
 
     /**
      * @test
@@ -118,9 +119,7 @@ class AbstractTimeSpanTest extends TestCase
         );
     }
 
-    //////////////////////////////////
     // Tests regarding the end date.
-    //////////////////////////////////
 
     /**
      * @test
@@ -213,9 +212,7 @@ class AbstractTimeSpanTest extends TestCase
         );
     }
 
-    //////////////////////////////
     // Tests regarding the room.
-    //////////////////////////////
 
     /**
      * @test

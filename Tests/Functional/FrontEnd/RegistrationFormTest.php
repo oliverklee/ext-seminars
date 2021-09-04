@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\FrontEnd;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
-use Prophecy\Prophecy\ProphecySubjectInterface;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
@@ -26,7 +25,7 @@ final class RegistrationFormTest extends FunctionalTestCase
     private $subject = null;
 
     /**
-     * @var ContentObjectRenderer&ProphecySubjectInterface
+     * @var ContentObjectRenderer
      */
     private $contentObject = null;
 

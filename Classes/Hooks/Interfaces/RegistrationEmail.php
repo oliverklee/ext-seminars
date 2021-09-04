@@ -42,7 +42,7 @@ interface RegistrationEmail extends Hook
      * Modifies the attendee "Thank you" email body just before the subpart is rendered to plain text.
      *
      * This method is called for every confirmation email, even if HTML emails are configured.
-     * The body of a HTML email always contains a plain text version, too.
+     * The body of an HTML email always contains a plain text version, too.
      *
      * You may modify or set marker values in the template.
      *

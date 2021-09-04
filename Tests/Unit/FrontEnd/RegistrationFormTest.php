@@ -8,7 +8,6 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\Session\FakeSession;
 use OliverKlee\Oelib\Session\Session;
 use Prophecy\Prophecy\ObjectProphecy;
-use Prophecy\Prophecy\ProphecySubjectInterface;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -49,7 +48,7 @@ final class RegistrationFormTest extends UnitTestCase
     private $contentObjectProphecy = null;
 
     /**
-     * @var ContentObjectRenderer&ProphecySubjectInterface
+     * @var ContentObjectRenderer
      */
     private $contentObject = null;
 
@@ -64,14 +63,14 @@ final class RegistrationFormTest extends UnitTestCase
     private $eventProphecy = null;
 
     /**
-     * @var \Tx_Seminars_OldModel_Event&ProphecySubjectInterface
+     * @var \Tx_Seminars_OldModel_Event
      */
     private $event = null;
 
     protected function setUp()
     {
         $frontEndProphecy = $this->prophesize(TypoScriptFrontendController::class);
-        /** @var TypoScriptFrontendController&ProphecySubjectInterface $frontEnd */
+        /** @var TypoScriptFrontendController $frontEnd */
         $frontEnd = $frontEndProphecy->reveal();
         $GLOBALS['TSFE'] = $frontEnd;
 
@@ -80,7 +79,7 @@ final class RegistrationFormTest extends UnitTestCase
         $frontEnd->cObj = $this->contentObject;
 
         $this->userProphecy = $this->prophesize(FrontendUserAuthentication::class);
-        /** @var FrontendUserAuthentication&ProphecySubjectInterface $user */
+        /** @var FrontendUserAuthentication $user */
         $user = $this->userProphecy->reveal();
         $frontEnd->fe_user = $user;
 

@@ -9,7 +9,6 @@ use OliverKlee\Seminars\BackEnd\AbstractModule;
 use OliverKlee\Seminars\BackEnd\Controller;
 use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
-use Prophecy\Prophecy\ProphecySubjectInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamInterface;
@@ -56,23 +55,23 @@ class ControllerTest extends TestCase
         $exporterProphecy = $this->prophesize(CsvDownloader::class);
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $exporterProphecy->main()->shouldBeCalled()->willReturn($csvBody);
-        /** @var CsvDownloader&ProphecySubjectInterface $exporterMock */
+        /** @var CsvDownloader $exporterMock */
         $exporterMock = $exporterProphecy->reveal();
         GeneralUtility::addInstance(CsvDownloader::class, $exporterMock);
 
-        /** @var ServerRequestInterface&ProphecySubjectInterface $requestMock */
+        /** @var ServerRequestInterface $requestMock */
         $requestMock = $this->prophesize(ServerRequestInterface::class)->reveal();
 
         $bodyProphecy = $this->prophesize(StreamInterface::class);
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $bodyProphecy->write($csvBody)->shouldBeCalled();
-        /** @var StreamInterface&ProphecySubjectInterface $bodyMock */
+        /** @var StreamInterface $bodyMock */
         $bodyMock = $bodyProphecy->reveal();
 
         $responseProphecy = $this->prophesize(ResponseInterface::class);
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $responseProphecy->getBody()->shouldBeCalled()->willReturn($bodyMock);
-        /** @var ResponseInterface&ProphecySubjectInterface $responseMock */
+        /** @var ResponseInterface $responseMock */
         $responseMock = $responseProphecy->reveal();
 
         $GLOBALS['_GET']['csv'] = '1';

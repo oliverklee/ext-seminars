@@ -133,7 +133,9 @@ final class RegistrationManagerTest extends TestCase
         /** @var MailerFactory $mailerFactory */
         $mailerFactory = GeneralUtility::makeInstance(MailerFactory::class);
         $mailerFactory->enableTestMode();
-        $this->mailer = $mailerFactory->getMailer();
+        /** @var EmailCollector $mailer */
+        $mailer = $mailerFactory->getMailer();
+        $this->mailer = $mailer;
 
         \Tx_Seminars_OldModel_Registration::purgeCachedSeminars();
         /** @var ConfigurationProxy $configurationProxy */
@@ -175,7 +177,9 @@ final class RegistrationManagerTest extends TestCase
 
         $headerProxyFactory = HeaderProxyFactory::getInstance();
         $headerProxyFactory->enableTestMode();
-        $this->headerCollector = $headerProxyFactory->getHeaderProxy();
+        /** @var HeaderCollector $headerCollector */
+        $headerCollector = $headerProxyFactory->getHeaderProxy();
+        $this->headerCollector = $headerCollector;
 
         $this->seminar = new TestingEvent($this->seminarUid);
         $this->subject = TestingRegistrationManager::getInstance();
@@ -188,7 +192,8 @@ final class RegistrationManagerTest extends TestCase
         $linkBuilder->method('createAbsoluteUrlForEvent')->willReturn('http://singleview.example.com/');
         $this->subject->injectLinkBuilder($linkBuilder);
 
-        $this->frontEndUserMapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
+        $frontEndUserMapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
+        $this->frontEndUserMapper = $frontEndUserMapper;
     }
 
     protected function tearDown()
