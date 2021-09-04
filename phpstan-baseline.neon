@@ -71,34 +71,14 @@ parameters:
 			path: Classes/SchedulerTasks/MailNotifier.php
 
 		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\SchedulerTasks\\\\MailNotifier\\:\\:\\$eventMapper \\(Tx_Seminars_Mapper_Event\\) does not accept OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\.$#"
-			count: 1
-			path: Classes/SchedulerTasks/MailNotifier.php
-
-		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\SchedulerTask\\\\RegistrationDigest\\:\\:\\$configuration \\(OliverKlee\\\\Oelib\\\\Configuration\\\\TypoScriptConfiguration\\) does not accept OliverKlee\\\\Oelib\\\\Interfaces\\\\Configuration\\.$#"
 			count: 1
 			path: Classes/SchedulerTasks/RegistrationDigest.php
 
 		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\SchedulerTask\\\\RegistrationDigest\\:\\:\\$eventMapper \\(Tx_Seminars_Mapper_Event\\) does not accept OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\.$#"
-			count: 1
-			path: Classes/SchedulerTasks/RegistrationDigest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Service\\\\EventStatusService\\:\\:\\$eventMapper \\(Tx_Seminars_Mapper_Event\\) does not accept OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\.$#"
-			count: 1
-			path: Classes/Service/EventStatusService.php
-
-		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Service\\\\EventStatusService\\:\\:\\$eventMapper \\(Tx_Seminars_Mapper_Event\\) does not accept default value of type false\\.$#"
 			count: 1
 			path: Classes/Service/EventStatusService.php
-
-		-
-			message: "#^Method Tx_Seminars_Service_RegistrationManager\\:\\:getRegistrationMapper\\(\\) should return Tx_Seminars_Mapper_Registration but returns OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\.$#"
-			count: 1
-			path: Classes/Service/RegistrationManager.php
 
 		-
 			message: "#^Static property Tx_Seminars_Service_RegistrationManager\\:\\:\\$instance \\(Tx_Seminars_Service_RegistrationManager\\) does not accept null\\.$#"
@@ -231,7 +211,7 @@ parameters:
 			path: Tests/LegacyUnit/Csv/CsvDownloaderTest.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\SalutationTest\\:\\:createFrontEndUser\\(\\) should return Tx_Seminars_Model_FrontEndUser but returns OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\.$#"
+			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\SalutationTest\\:\\:createFrontEndUser\\(\\) should return Tx_Seminars_Model_FrontEndUser but returns OliverKlee\\\\Oelib\\\\Model\\\\FrontEndUser\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Email/SalutationTest.php
 
@@ -254,31 +234,6 @@ parameters:
 			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\FrontEnd\\\\EventEditorTest\\:\\:createEmailMock\\(\\) should return PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&TYPO3\\\\CMS\\\\Core\\\\Mail\\\\MailMessage but returns PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Mapper\\\\EventDateMapperTest\\:\\:\\$subject \\(Tx_Seminars_Mapper_Event\\) does not accept OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Mapper/EventDateMapperTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Mapper\\\\EventMapperTest\\:\\:\\$subject \\(Tx_Seminars_Mapper_Event\\) does not accept OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Mapper/EventMapperTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Mapper\\\\EventTopicMapperTest\\:\\:\\$subject \\(Tx_Seminars_Mapper_Event\\) does not accept OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Mapper/EventTopicMapperTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Mapper\\\\FrontEndUserMapperTest\\:\\:\\$subject \\(Tx_Seminars_Mapper_FrontEndUser\\) does not accept OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Mapper/FrontEndUserMapperTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Mapper\\\\SingleEventMapperTest\\:\\:\\$subject \\(Tx_Seminars_Mapper_Event\\) does not accept OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Mapper/SingleEventMapperTest.php
 
 		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Model\\\\AbstractTimeSpanTest\\:\\:\\$subject \\(Tx_Seminars_Model_AbstractTimeSpan\\) does not accept PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\.$#"
@@ -354,11 +309,6 @@ parameters:
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\EventStateServiceTest\\:\\:\\$eventMapper \\(PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&Tx_Seminars_Mapper_Event\\) does not accept PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Service/EventStateServiceTest.php
-
-		-
-			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\RegistrationManagerTest\\:\\:\\$frontEndUserMapper \\(Tx_Seminars_Mapper_FrontEndUser\\) does not accept OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\RegistrationManagerTest\\:\\:\\$headerCollector \\(OliverKlee\\\\Oelib\\\\Http\\\\HeaderCollector\\) does not accept OliverKlee\\\\Oelib\\\\Http\\\\Interfaces\\\\HeaderProxy\\.$#"
