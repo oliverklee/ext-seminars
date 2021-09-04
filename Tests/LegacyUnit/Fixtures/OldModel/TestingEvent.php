@@ -609,9 +609,7 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
     /**
      * Sets the number of offline registrations.
      *
-     * @param int
-     *        $offlineRegistrations the number of offline registrations for this
-     *        event, must be >= 0
+     * @param int $offlineRegistrations the number of offline registrations for this event, must be >= 0
      *
      * @return void
      */

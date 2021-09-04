@@ -86,7 +86,7 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
      *
      * @see getEvent
      */
-    public function getSeminar(): \Tx_Seminars_Model_Event
+    public function getSeminar()
     {
         return $this->getEvent();
     }

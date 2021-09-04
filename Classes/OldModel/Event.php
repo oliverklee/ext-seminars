@@ -3515,8 +3515,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * The return array's pointer will already be reset to its first element.
      *
-     * @return string[][] the available prices as a reset array of arrays with the keys "caption" (for the title) and "value
-     *                    (for the price code), might be empty
+     * @return array<string, array{value: string, amount: string, caption: string}> the available prices, might be empty
      */
     public function getAvailablePrices(): array
     {

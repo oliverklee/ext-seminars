@@ -26,7 +26,7 @@ class BackEndRegistrationAccessCheckTest extends TestCase
     private $subject = null;
 
     /**
-     * @var MockObject|BackendUserAuthentication
+     * @var MockObject&BackendUserAuthentication
      */
     private $backEndUser = null;
 

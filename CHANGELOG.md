@@ -24,7 +24,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Fixed
 - Stop using `PATH_site` in TYPO3 9LTS (#780)
 - Stop using the Core-provided whitespace constants (#778)
-- Fix PHPStan level 0 warnings (#775)
+- Fix PHPStan level warnings (#775, #788)
 - Add a missing comma in a language label (#771)
 - Drop reference to a removed feature from the manual (#755)
 - Fix ReST rendering warnings in the documentation (#750)

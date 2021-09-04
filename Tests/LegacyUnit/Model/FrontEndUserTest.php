@@ -877,7 +877,7 @@ class FrontEndUserTest extends TestCase
      */
     public function hasDefaultOrganizersForEmptyDefaultOrganizersReturnsFalse()
     {
-        /** @var \Tx_Seminars_Model_FrontEndUser|MockObject $subject */
+        /** @var \Tx_Seminars_Model_FrontEndUser&MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Model_FrontEndUser::class,
             ['getDefaultOrganizers']
@@ -899,7 +899,7 @@ class FrontEndUserTest extends TestCase
         $organizers = new Collection();
         $organizers->add($organizer);
 
-        /** @var \Tx_Seminars_Model_FrontEndUser|MockObject $subject */
+        /** @var \Tx_Seminars_Model_FrontEndUser&MockObject $subject */
         $subject = $this->createPartialMock(
             \Tx_Seminars_Model_FrontEndUser::class,
             ['getDefaultOrganizers']

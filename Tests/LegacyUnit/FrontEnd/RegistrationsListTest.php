@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 
 use OliverKlee\Oelib\Configuration\ConfigurationProxy;
+use OliverKlee\Oelib\Http\HeaderCollector;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
@@ -52,7 +53,9 @@ class RegistrationsListTest extends TestCase
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
-        ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', false);
+        /** @var ConfigurationProxy $configurationProxy */
+        $configurationProxy = ConfigurationProxy::getInstance('seminars');
+        $configurationProxy->setAsBoolean('enableConfigCheck', false);
         HeaderProxyFactory::getInstance()->enableTestMode();
 
         $this->testingFramework = new TestingFramework('tx_seminars');
@@ -233,9 +236,11 @@ class RegistrationsListTest extends TestCase
         );
         $subject->render();
 
+        /** @var HeaderCollector $headerProxy */
+        $headerProxy = HeaderProxyFactory::getInstance()->getHeaderProxy();
         self::assertEquals(
             'Status: 404 Not Found',
-            HeaderProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
+            $headerProxy->getLastAddedHeader()
         );
     }
 
@@ -252,9 +257,11 @@ class RegistrationsListTest extends TestCase
         );
         $subject->render();
 
+        /** @var HeaderCollector $headerProxy */
+        $headerProxy = HeaderProxyFactory::getInstance()->getHeaderProxy();
         self::assertEquals(
             'Status: 404 Not Found',
-            HeaderProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
+            $headerProxy->getLastAddedHeader()
         );
     }
 
@@ -265,9 +272,11 @@ class RegistrationsListTest extends TestCase
     {
         $this->subject->render();
 
+        /** @var HeaderCollector $headerProxy */
+        $headerProxy = HeaderProxyFactory::getInstance()->getHeaderProxy();
         self::assertEquals(
             'Status: 403 Forbidden',
-            HeaderProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
+            $headerProxy->getLastAddedHeader()
         );
     }
 
@@ -279,9 +288,11 @@ class RegistrationsListTest extends TestCase
         $this->testingFramework->createFrontEndUser();
         $this->subject->render();
 
+        /** @var HeaderCollector $headerProxy */
+        $headerProxy = HeaderProxyFactory::getInstance()->getHeaderProxy();
         self::assertEquals(
             'Status: 403 Forbidden',
-            HeaderProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
+            $headerProxy->getLastAddedHeader()
         );
     }
 
@@ -293,9 +304,11 @@ class RegistrationsListTest extends TestCase
         $this->createLogInAndRegisterFrontEndUser();
         $this->subject->render();
 
+        /** @var HeaderCollector $headerProxy */
+        $headerProxy = HeaderProxyFactory::getInstance()->getHeaderProxy();
         self::assertNotContains(
             '403',
-            HeaderProxyFactory::getInstance()->getHeaderProxy()->getLastAddedHeader()
+            $headerProxy->getLastAddedHeader()
         );
     }
 

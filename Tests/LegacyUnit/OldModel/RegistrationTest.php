@@ -186,7 +186,9 @@ final class RegistrationTest extends TestCase
      */
     public function setRegistrationDataForNoPaymentMethodSetAndPositiveTotalPriceWithSeminarWithOnePaymentMethodSelectsThatPaymentMethod()
     {
-        ConfigurationRegistry::get('plugin.tx_seminars')->setAsString('currency', 'EUR');
+        /** @var Configuration $configuration */
+        $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
+        $configuration->setAsString('currency', 'EUR');
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
@@ -1299,7 +1301,9 @@ final class RegistrationTest extends TestCase
      */
     public function setTotalPriceWithTotalPriceSetsTotalPrice()
     {
-        ConfigurationRegistry::get('plugin.tx_seminars')->setAsString('currency', 'EUR');
+        /** @var Configuration $configuration */
+        $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
+        $configuration->setAsString('currency', 'EUR');
         $this->subject->setTotalPrice('42.42');
 
         self::assertSame(

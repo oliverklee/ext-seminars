@@ -19,7 +19,7 @@ use TYPO3\CMS\Core\Mail\MailMessage;
 trait EmailTrait
 {
     /**
-     * @return MailMessage|MockObject
+     * @return MailMessage&MockObject
      */
     private function createEmailMock(): MailMessage
     {

@@ -182,7 +182,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements Configu
             ? $registrationData['price'] : key($availablePrices);
         $this->recordData['price'] = $availablePrices[$selectedPrice]['caption'];
 
-        $this->recordData['total_price'] = $seats * $availablePrices[$selectedPrice]['amount'];
+        $this->recordData['total_price'] = $seats * (float)$availablePrices[$selectedPrice]['amount'];
 
         $this->recordData['attendees_names'] = $registrationData['attendees_names'];
 

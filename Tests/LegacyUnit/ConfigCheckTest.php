@@ -27,7 +27,9 @@ class ConfigCheckTest extends TestCase
 
     protected function setUp()
     {
-        ConfigurationProxy::getInstance('seminars')->setAsBoolean('enableConfigCheck', true);
+        /** @var ConfigurationProxy $configuration */
+        $configuration = ConfigurationProxy::getInstance('seminars');
+        $configuration->setAsBoolean('enableConfigCheck', true);
 
         $this->objectToCheck = new DummyObjectToCheck([]);
         $this->subject = new \Tx_Seminars_ConfigCheck($this->objectToCheck);

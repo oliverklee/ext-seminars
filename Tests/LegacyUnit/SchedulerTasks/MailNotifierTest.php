@@ -46,7 +46,7 @@ class MailNotifierTest extends TestCase
     use MakeInstanceTrait;
 
     /**
-     * @var MailNotifier|MockObject|AccessibleObject
+     * @var MailNotifier&MockObject&AccessibleObject
      */
     protected $subject = null;
 
@@ -61,22 +61,22 @@ class MailNotifierTest extends TestCase
     protected $configuration = null;
 
     /**
-     * @var EventStatusService|MockObject
+     * @var EventStatusService&MockObject
      */
     protected $eventStatusService = null;
 
     /**
-     * @var EmailService|MockObject
+     * @var EmailService&MockObject
      */
     protected $emailService = null;
 
     /**
-     * @var \Tx_Seminars_Mapper_Event|MockObject
+     * @var \Tx_Seminars_Mapper_Event&MockObject
      */
     protected $eventMapper = null;
 
     /**
-     * @var Salutation|MockObject
+     * @var Salutation&MockObject
      */
     protected $emailSalutation = null;
 
@@ -91,17 +91,17 @@ class MailNotifierTest extends TestCase
     private $languageService = null;
 
     /**
-     * @var RegistrationDigest|ObjectProphecy
+     * @var ObjectProphecy
      */
     private $registrationDigestProphecy = null;
 
     /**
-     * @var RegistrationDigest|ProphecySubjectInterface
+     * @var RegistrationDigest&ProphecySubjectInterface
      */
     private $registrationDigest = null;
 
     /**
-     * @var MockObject|MailMessage|null
+     * @var (MockObject&MailMessage)|null
      */
     private $email = null;
 
@@ -140,26 +140,28 @@ class MailNotifierTest extends TestCase
         );
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->configuration);
 
-        $this->subject = $this->getAccessibleMock(MailNotifier::class, ['dummy']);
+        /** @var MailNotifier&MockObject&AccessibleObject $subject */
+        $subject = $this->getAccessibleMock(MailNotifier::class, ['dummy']);
+        $this->subject = $subject;
 
         $configurationPageUid = $this->testingFramework->createFrontEndPage();
-        $this->subject->setConfigurationPageUid($configurationPageUid);
+        $subject->setConfigurationPageUid($configurationPageUid);
 
         $this->eventStatusService = $this->createMock(EventStatusService::class);
-        $this->subject->_set('eventStatusService', $this->eventStatusService);
+        $subject->_set('eventStatusService', $this->eventStatusService);
 
         $this->emailService = $this->createMock(EmailService::class);
-        $this->subject->_set('emailService', $this->emailService);
+        $subject->_set('emailService', $this->emailService);
 
         $this->eventMapper = $this->createMock(\Tx_Seminars_Mapper_Event::class);
-        $this->subject->_set('eventMapper', $this->eventMapper);
+        $subject->_set('eventMapper', $this->eventMapper);
 
         $this->emailSalutation = $this->createMock(Salutation::class);
-        $this->subject->_set('emailSalutation', $this->emailSalutation);
+        $subject->_set('emailSalutation', $this->emailSalutation);
 
         $this->registrationDigestProphecy = $this->prophesize(RegistrationDigest::class);
         $this->registrationDigest = $this->registrationDigestProphecy->reveal();
-        $this->subject->_set('registrationDigest', $this->registrationDigest);
+        $subject->_set('registrationDigest', $this->registrationDigest);
 
         $this->email = $this->createEmailMock();
     }
@@ -407,7 +409,7 @@ class MailNotifierTest extends TestCase
      */
     public function executeWithPageConfigurationCallsAllSeparateSteps()
     {
-        /** @var MailNotifier|MockObject $subject */
+        /** @var MailNotifier&MockObject $subject */
         $subject = $this->createPartialMock(
             MailNotifier::class,
             ['sendEventTakesPlaceReminders', 'sendCancellationDeadlineReminders', 'automaticallyChangeEventStatuses']
@@ -427,7 +429,7 @@ class MailNotifierTest extends TestCase
      */
     public function executeWithoutPageConfigurationNotCallsAnySeparateStep()
     {
-        /** @var MailNotifier|MockObject $subject */
+        /** @var MailNotifier&MockObject $subject */
         $subject = $this->createPartialMock(
             MailNotifier::class,
             ['sendEventTakesPlaceReminders', 'sendCancellationDeadlineReminders', 'automaticallyChangeEventStatuses']
@@ -447,7 +449,7 @@ class MailNotifierTest extends TestCase
     public function executeWithPageConfigurationExecutesRegistrationDigest()
     {
 
-        /** @var MailNotifier|MockObject|AccessibleObject $subject */
+        /** @var MailNotifier&MockObject&AccessibleObject $subject */
         $subject = $this->getAccessibleMock(
             MailNotifier::class,
             ['sendEventTakesPlaceReminders', 'sendCancellationDeadlineReminders', 'automaticallyChangeEventStatuses'],
@@ -462,6 +464,7 @@ class MailNotifierTest extends TestCase
 
         $subject->_call('executeAfterInitialization');
 
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->registrationDigestProphecy->execute()->shouldHaveBeenCalled();
     }
 

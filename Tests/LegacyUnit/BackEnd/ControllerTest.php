@@ -54,26 +54,29 @@ class ControllerTest extends TestCase
     public function mainActionWithCsvFlagReturnsCsvDownload()
     {
         $csvBody = 'foo;bar';
-        /** @var CsvDownloader|ObjectProphecy $exporterProphecy */
+        /** @var ObjectProphecy $exporterProphecy */
         $exporterProphecy = $this->prophesize(CsvDownloader::class);
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $exporterProphecy->main()->shouldBeCalled()->willReturn($csvBody);
-        /** @var CsvDownloader|ProphecySubjectInterface $exporterMock */
+        /** @var CsvDownloader&ProphecySubjectInterface $exporterMock */
         $exporterMock = $exporterProphecy->reveal();
         GeneralUtility::addInstance(CsvDownloader::class, $exporterMock);
 
-        /** @var ServerRequestInterface|ProphecySubjectInterface $requestMock */
+        /** @var ServerRequestInterface&ProphecySubjectInterface $requestMock */
         $requestMock = $this->prophesize(ServerRequestInterface::class)->reveal();
 
-        /** @var StreamInterface|ObjectProphecy $bodyProphecy */
+        /** @var ObjectProphecy $bodyProphecy */
         $bodyProphecy = $this->prophesize(StreamInterface::class);
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $bodyProphecy->write($csvBody)->shouldBeCalled();
-        /** @var StreamInterface|ProphecySubjectInterface $bodyMock */
+        /** @var StreamInterface&ProphecySubjectInterface $bodyMock */
         $bodyMock = $bodyProphecy->reveal();
 
-        /** @var ResponseInterface|ObjectProphecy $responseProphecy */
+        /** @var ObjectProphecy $responseProphecy */
         $responseProphecy = $this->prophesize(ResponseInterface::class);
+        // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $responseProphecy->getBody()->shouldBeCalled()->willReturn($bodyMock);
-        /** @var ResponseInterface|ProphecySubjectInterface $responseMock */
+        /** @var ResponseInterface&ProphecySubjectInterface $responseMock */
         $responseMock = $responseProphecy->reveal();
 
         $GLOBALS['_GET']['csv'] = '1';
