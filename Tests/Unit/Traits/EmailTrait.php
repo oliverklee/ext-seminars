@@ -23,11 +23,14 @@ trait EmailTrait
      */
     private function createEmailMock(): MailMessage
     {
-        return $this->getMockBuilder(MailMessage::class)
+        /** @var MailMessage&MockObject $message */
+        $message = $this->getMockBuilder(MailMessage::class)
             ->disableOriginalClone()
             ->disableArgumentCloning()
             ->disallowMockingUnknownTypes()
             ->setMethods(['send'])
             ->getMock();
+
+        return $message;
     }
 }

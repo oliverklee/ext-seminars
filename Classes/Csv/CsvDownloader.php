@@ -75,7 +75,9 @@ class CsvDownloader extends TemplateHelper
             $this->getLanguageService()->includeLLFile('EXT:seminars/Resources/Private/Language/locallang.xlf');
         }
 
-        $this->configuration = ConfigurationRegistry::get('plugin.tx_seminars');
+        /** @var Configuration $configuration */
+        $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
+        $this->configuration = $configuration;
     }
 
     /**

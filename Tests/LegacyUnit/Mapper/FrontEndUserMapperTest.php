@@ -16,7 +16,7 @@ use OliverKlee\PhpUnit\TestCase;
 class FrontEndUserMapperTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_Mapper_FrontEndUser the object to test
+     * @var \Tx_Seminars_Mapper_FrontEndUser
      */
     private $subject = null;
 
@@ -37,9 +37,7 @@ class FrontEndUserMapperTest extends TestCase
         $this->testingFramework->cleanUp();
     }
 
-    //////////////////////////////////////
     // Tests for the basic functionality
-    //////////////////////////////////////
 
     /**
      * @test
@@ -49,9 +47,7 @@ class FrontEndUserMapperTest extends TestCase
         self::assertInstanceOf(\Tx_Seminars_Model_FrontEndUser::class, $this->subject->getNewGhost());
     }
 
-    ///////////////////////////////////
     // Tests concerning the relations
-    ///////////////////////////////////
 
     /**
      * @test

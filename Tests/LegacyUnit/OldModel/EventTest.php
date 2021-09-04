@@ -51,7 +51,7 @@ final class EventTest extends TestCase
     private $now = 1524751343;
 
     /**
-     * @var \Tx_Seminars_FrontEnd_DefaultController
+     * @var \Tx_Seminars_FrontEnd_DefaultController|null
      */
     private $pi1 = null;
 
@@ -5119,7 +5119,7 @@ final class EventTest extends TestCase
     }
 
     /**
-     * @return int[][][]
+     * @return array<string, array<int, array<int, array<int, int>>>>
      */
     public function timeSlotsCollidingWithTimeSlotsDataProvider(): array
     {
@@ -5174,7 +5174,7 @@ final class EventTest extends TestCase
     }
 
     /**
-     * @return int[][][]
+     * @return array<string, array<int, array<int, array<int, int>>>>
      */
     public function timeSlotsNotCollidingWithTimeSlotsDataProvider(): array
     {

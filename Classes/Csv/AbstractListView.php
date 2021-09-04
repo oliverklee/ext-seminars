@@ -57,7 +57,9 @@ abstract class AbstractListView
      */
     public function __construct()
     {
-        $this->configuration = ConfigurationRegistry::get('plugin.tx_seminars');
+        /** @var Configuration $configuration */
+        $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
+        $this->configuration = $configuration;
     }
 
     /**

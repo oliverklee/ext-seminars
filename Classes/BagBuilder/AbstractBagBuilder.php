@@ -43,7 +43,7 @@ abstract class AbstractBagBuilder
     protected $orderBy = 'uid';
 
     /**
-     * @var int the field by which the DB query result should be grouped
+     * @var string the field by which the DB query result should be grouped
      */
     protected $groupBy = '';
 
@@ -88,11 +88,11 @@ abstract class AbstractBagBuilder
     /**
      * Creates and returns the customized bag.
      *
-     * @return AbstractBag customized, newly-created bag
+     * @return M customized, newly-created bag
      */
     public function build(): AbstractBag
     {
-        /** @var AbstractBag $bag */
+        /** @var M $bag */
         $bag = GeneralUtility::makeInstance(
             $this->bagClassName,
             $this->getWhereClause(),

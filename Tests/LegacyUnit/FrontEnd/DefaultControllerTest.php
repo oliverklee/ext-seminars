@@ -106,7 +106,9 @@ class DefaultControllerTest extends TestCase
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
         HeaderProxyFactory::getInstance()->enableTestMode();
-        $this->headerCollector = HeaderProxyFactory::getInstance()->getHeaderProxy();
+        /** @var HeaderCollector $headerCollector */
+        $headerCollector = HeaderProxyFactory::getInstance()->getHeaderProxy();
+        $this->headerCollector = $headerCollector;
 
         $configuration = new Configuration();
         $configuration->setAsString('currency', 'EUR');

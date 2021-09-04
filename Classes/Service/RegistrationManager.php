@@ -44,7 +44,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
     public $extKey = 'seminars';
 
     /**
-     * @var \Tx_Seminars_Service_RegistrationManager
+     * @var static|null
      */
     private static $instance = null;
 
@@ -114,12 +114,14 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
     /**
      * Returns the instance of this class.
      *
-     * @return \Tx_Seminars_Service_RegistrationManager the current Singleton instance
+     * @return static the current Singleton instance
      */
     public static function getInstance(): \Tx_Seminars_Service_RegistrationManager
     {
-        if (self::$instance === null) {
-            self::$instance = GeneralUtility::makeInstance(static::class);
+        if (!self::$instance instanceof static) {
+            /** @var static $instance */
+            $instance = GeneralUtility::makeInstance(static::class);
+            self::$instance = $instance;
         }
 
         return self::$instance;

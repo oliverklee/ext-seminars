@@ -22,7 +22,6 @@ use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use Prophecy\Prophecy\ObjectProphecy;
-use Prophecy\Prophecy\ProphecySubjectInterface;
 use TYPO3\CMS\Core\Core\Bootstrap;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -81,7 +80,7 @@ class MailNotifierTest extends TestCase
     protected $emailSalutation = null;
 
     /**
-     * @var LanguageService
+     * @var LanguageService|null
      */
     private $languageBackup = null;
 
@@ -96,7 +95,7 @@ class MailNotifierTest extends TestCase
     private $registrationDigestProphecy = null;
 
     /**
-     * @var RegistrationDigest&ProphecySubjectInterface
+     * @var RegistrationDigest
      */
     private $registrationDigest = null;
 
@@ -147,17 +146,25 @@ class MailNotifierTest extends TestCase
         $configurationPageUid = $this->testingFramework->createFrontEndPage();
         $subject->setConfigurationPageUid($configurationPageUid);
 
-        $this->eventStatusService = $this->createMock(EventStatusService::class);
-        $subject->_set('eventStatusService', $this->eventStatusService);
+        /** @var EventStatusService&MockObject $eventStatusService */
+        $eventStatusService = $this->createMock(EventStatusService::class);
+        $this->eventStatusService = $eventStatusService;
+        $subject->_set('eventStatusService', $eventStatusService);
 
-        $this->emailService = $this->createMock(EmailService::class);
-        $subject->_set('emailService', $this->emailService);
+        /** @var EmailService&MockObject $emailService */
+        $emailService = $this->createMock(EmailService::class);
+        $this->emailService = $emailService;
+        $subject->_set('emailService', $emailService);
 
-        $this->eventMapper = $this->createMock(\Tx_Seminars_Mapper_Event::class);
-        $subject->_set('eventMapper', $this->eventMapper);
+        /** @var \Tx_Seminars_Mapper_Event&MockObject $eventMapper */
+        $eventMapper = $this->createMock(\Tx_Seminars_Mapper_Event::class);
+        $this->eventMapper = $eventMapper;
+        $subject->_set('eventMapper', $eventMapper);
 
-        $this->emailSalutation = $this->createMock(Salutation::class);
-        $subject->_set('emailSalutation', $this->emailSalutation);
+        /** @var Salutation&MockObject $emailSalutation */
+        $emailSalutation = $this->createMock(Salutation::class);
+        $this->emailSalutation = $emailSalutation;
+        $subject->_set('emailSalutation', $emailSalutation);
 
         $this->registrationDigestProphecy = $this->prophesize(RegistrationDigest::class);
         $this->registrationDigest = $this->registrationDigestProphecy->reveal();
@@ -231,7 +238,12 @@ class MailNotifierTest extends TestCase
     protected function getFirstEmailAttachment(): \Swift_Mime_Attachment
     {
         $children = $this->email->getChildren();
-        return $children[0];
+        $attachment = $children[0];
+        if (!$attachment instanceof \Swift_Mime_Attachment) {
+            throw new \UnexpectedValueException('Attachment is no Swift_Mime_Attachment.', 1630771213);
+        }
+
+        return $attachment;
     }
 
     // Tests for the utility functions
