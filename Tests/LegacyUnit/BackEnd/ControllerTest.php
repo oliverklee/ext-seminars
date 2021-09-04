@@ -9,7 +9,6 @@ use OliverKlee\Seminars\BackEnd\AbstractModule;
 use OliverKlee\Seminars\BackEnd\Controller;
 use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Prophecy\Prophecy\ProphecySubjectInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -54,7 +53,6 @@ class ControllerTest extends TestCase
     public function mainActionWithCsvFlagReturnsCsvDownload()
     {
         $csvBody = 'foo;bar';
-        /** @var ObjectProphecy $exporterProphecy */
         $exporterProphecy = $this->prophesize(CsvDownloader::class);
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $exporterProphecy->main()->shouldBeCalled()->willReturn($csvBody);
@@ -65,14 +63,12 @@ class ControllerTest extends TestCase
         /** @var ServerRequestInterface&ProphecySubjectInterface $requestMock */
         $requestMock = $this->prophesize(ServerRequestInterface::class)->reveal();
 
-        /** @var ObjectProphecy $bodyProphecy */
         $bodyProphecy = $this->prophesize(StreamInterface::class);
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $bodyProphecy->write($csvBody)->shouldBeCalled();
         /** @var StreamInterface&ProphecySubjectInterface $bodyMock */
         $bodyMock = $bodyProphecy->reveal();
 
-        /** @var ObjectProphecy $responseProphecy */
         $responseProphecy = $this->prophesize(ResponseInterface::class);
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $responseProphecy->getBody()->shouldBeCalled()->willReturn($bodyMock);
