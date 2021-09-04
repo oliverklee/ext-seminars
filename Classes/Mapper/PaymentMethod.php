@@ -7,6 +7,8 @@ use OliverKlee\Oelib\Mapper\AbstractDataMapper;
 /**
  * This class represents a mapper for payment methods.
  *
+ * @extends AbstractDataMapper<\Tx_Seminars_Model_PaymentMethod>
+ *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
 class Tx_Seminars_Mapper_PaymentMethod extends AbstractDataMapper
@@ -17,7 +19,7 @@ class Tx_Seminars_Mapper_PaymentMethod extends AbstractDataMapper
     protected $tableName = 'tx_seminars_payment_methods';
 
     /**
-     * @var string the model class name for this mapper, must not be empty
+     * @var class-string<\Tx_Seminars_Model_PaymentMethod> the model class name for this mapper, must not be empty
      */
     protected $modelClassName = \Tx_Seminars_Model_PaymentMethod::class;
 }

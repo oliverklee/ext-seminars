@@ -7,6 +7,8 @@ use OliverKlee\Oelib\Mapper\AbstractDataMapper;
 /**
  * This class represents a mapper for checkboxes.
  *
+ * @extends AbstractDataMapper<\Tx_Seminars_Model_Checkbox>
+ *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
 class Tx_Seminars_Mapper_Checkbox extends AbstractDataMapper
@@ -22,7 +24,8 @@ class Tx_Seminars_Mapper_Checkbox extends AbstractDataMapper
     protected $modelClassName = \Tx_Seminars_Model_Checkbox::class;
 
     /**
-     * @var string[] the (possible) relations of the created models in the format DB column name => mapper name
+     * @var array<string, class-string<AbstractDataMapper>>
+     *      the (possible) relations of the created models in the format DB column name => mapper name
      */
     protected $relations = [
         'owner' => \Tx_Seminars_Mapper_FrontEndUser::class,

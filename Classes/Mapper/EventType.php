@@ -7,6 +7,8 @@ use OliverKlee\Oelib\Mapper\AbstractDataMapper;
 /**
  * This class represents a mapper for event types.
  *
+ * @extends AbstractDataMapper<\Tx_Seminars_Model_EventType>
+ *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
 class Tx_Seminars_Mapper_EventType extends AbstractDataMapper

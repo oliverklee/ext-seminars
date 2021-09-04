@@ -7,6 +7,8 @@ use OliverKlee\Oelib\Mapper\AbstractDataMapper;
 /**
  * This class represents a mapper for lodgings.
  *
+ * @extends AbstractDataMapper<\Tx_Seminars_Model_Lodging>
+ *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
 class Tx_Seminars_Mapper_Lodging extends AbstractDataMapper
@@ -17,7 +19,7 @@ class Tx_Seminars_Mapper_Lodging extends AbstractDataMapper
     protected $tableName = 'tx_seminars_lodgings';
 
     /**
-     * @var string the model class name for this mapper, must not be empty
+     * @var class-string<\Tx_Seminars_Model_Lodging> the model class name for this mapper, must not be empty
      */
     protected $modelClassName = \Tx_Seminars_Model_Lodging::class;
 }

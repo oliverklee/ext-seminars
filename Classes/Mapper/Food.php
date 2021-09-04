@@ -7,6 +7,8 @@ use OliverKlee\Oelib\Mapper\AbstractDataMapper;
 /**
  * This class represents a mapper for food.
  *
+ * @extends AbstractDataMapper<\Tx_Seminars_Model_Food>
+ *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
 class Tx_Seminars_Mapper_Food extends AbstractDataMapper

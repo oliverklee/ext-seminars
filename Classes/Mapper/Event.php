@@ -11,6 +11,8 @@ use OliverKlee\Oelib\Mapper\FrontEndUserMapper;
 /**
  * This class represents a mapper for events.
  *
+ * @extends AbstractDataMapper<\Tx_Seminars_Model_Event>
+ *
  * @author Niels Pardon <mail@niels-pardon.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
@@ -27,7 +29,8 @@ class Tx_Seminars_Mapper_Event extends AbstractDataMapper
     protected $modelClassName = \Tx_Seminars_Model_Event::class;
 
     /**
-     * @var string[] the (possible) relations of the created models in the format DB column name => mapper name
+     * @var array<string, class-string<AbstractDataMapper>>
+     *      the (possible) relations of the created models in the format DB column name => mapper name
      */
     protected $relations = [
         'topic' => \Tx_Seminars_Mapper_Event::class,
