@@ -22,7 +22,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop the `approved` flag from locallang labels (#745)
 
 ### Fixed
-- Improve the type annotations (#790, #791, #792, #793, #796, #797)
+- Improve the type annotations (#790, #791, #792, #793, #796, #797, #798)
 - Stop using `PATH_site` in TYPO3 9LTS (#780)
 - Stop using the Core-provided whitespace constants (#778)
 - Fix PHPStan level warnings (#775, #788)

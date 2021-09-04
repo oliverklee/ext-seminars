@@ -21,26 +21,6 @@ parameters:
 			path: Classes/FrontEnd/SelectorWidget.php
 
 		-
-			message: "#^The @extends tag of class Tx_Seminars_Mapper_BackEndUser describes OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper but the class extends OliverKlee\\\\Oelib\\\\Mapper\\\\BackEndUserMapper\\.$#"
-			count: 1
-			path: Classes/Mapper/BackEndUser.php
-
-		-
-			message: "#^The @extends tag of class Tx_Seminars_Mapper_BackEndUserGroup describes OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper but the class extends OliverKlee\\\\Oelib\\\\Mapper\\\\BackEndUserGroupMapper\\.$#"
-			count: 1
-			path: Classes/Mapper/BackEndUserGroup.php
-
-		-
-			message: "#^The @extends tag of class Tx_Seminars_Mapper_FrontEndUser describes OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper but the class extends OliverKlee\\\\Oelib\\\\Mapper\\\\FrontEndUserMapper\\.$#"
-			count: 1
-			path: Classes/Mapper/FrontEndUser.php
-
-		-
-			message: "#^The @extends tag of class Tx_Seminars_Mapper_FrontEndUserGroup describes OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper but the class extends OliverKlee\\\\Oelib\\\\Mapper\\\\FrontEndUserGroupMapper\\.$#"
-			count: 1
-			path: Classes/Mapper/FrontEndUserGroup.php
-
-		-
 			message: "#^Method Tx_Seminars_Model_Event\\:\\:getConfiguration\\(\\) should return OliverKlee\\\\Oelib\\\\Configuration\\\\TypoScriptConfiguration but returns OliverKlee\\\\Oelib\\\\Interfaces\\\\Configuration\\.$#"
 			count: 1
 			path: Classes/Model/Event.php

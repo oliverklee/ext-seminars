@@ -8,7 +8,7 @@ use OliverKlee\Oelib\Mapper\BackEndUserMapper as OelibBackEndUserMapper;
 /**
  * This class represents a mapper for back-end users.
  *
- * @extends AbstractDataMapper<\Tx_Seminars_Model_BackEndUser>
+ * @extends OelibBackEndUserMapper<\Tx_Seminars_Model_BackEndUser>
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
