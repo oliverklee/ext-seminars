@@ -106,8 +106,7 @@ class DefaultControllerTest extends TestCase
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
         HeaderProxyFactory::getInstance()->enableTestMode();
-        /** @var HeaderCollector $headerCollector */
-        $headerCollector = HeaderProxyFactory::getInstance()->getHeaderProxy();
+        $headerCollector = HeaderProxyFactory::getInstance()->getHeaderCollector();
         $this->headerCollector = $headerCollector;
 
         $configuration = new Configuration();

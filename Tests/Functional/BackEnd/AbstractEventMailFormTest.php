@@ -64,9 +64,7 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
 
         $headerProxyFactory = HeaderProxyFactory::getInstance();
         $headerProxyFactory->enableTestMode();
-        /** @var HeaderCollector $headerProxy */
-        $headerProxy = $headerProxyFactory->getHeaderProxy();
-        $this->headerProxy = $headerProxy;
+        $this->headerProxy = $headerProxyFactory->getHeaderCollector();
     }
 
     protected function tearDown()

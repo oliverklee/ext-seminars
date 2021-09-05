@@ -91,9 +91,7 @@ trait BackEndTestsTrait
         $this->setUpExtensionConfiguration();
         $headerProxyFactory = HeaderProxyFactory::getInstance();
         $headerProxyFactory->enableTestMode();
-        /** @var HeaderCollector $headerProxy */
-        $headerProxy = $headerProxyFactory->getHeaderProxy();
-        $this->headerProxy = $headerProxy;
+        $this->headerProxy = $headerProxyFactory->getHeaderCollector();
     }
 
     /**
