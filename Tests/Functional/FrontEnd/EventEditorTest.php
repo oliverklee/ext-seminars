@@ -54,7 +54,7 @@ final class EventEditorTest extends FunctionalTestCase
     private $subject = null;
 
     /**
-     * @var TypoScriptFrontendController
+     * @var TypoScriptFrontendController|null
      */
     private $frontEndController = null;
 
@@ -87,7 +87,7 @@ final class EventEditorTest extends FunctionalTestCase
         $frontEndController = new TypoScriptFrontendController(null, self::CURRENT_PAGE_UID, 0);
         $frontEndController->fe_user = $this->prophesize(FrontendUserAuthentication::class)->reveal();
         if ($frontEndController instanceof LoggerAwareInterface) {
-            $frontEndController->logger = $this->prophesize(LoggerInterface::class)->reveal();
+            $frontEndController->setLogger($this->prophesize(LoggerInterface::class)->reveal());
         }
         $frontEndController->determineId();
         $frontEndController->cObj = $contentObject;

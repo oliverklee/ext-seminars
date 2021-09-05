@@ -36,7 +36,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**
-     * @var TypoScriptFrontendController
+     * @var TypoScriptFrontendController|null
      */
     private $frontEndController = null;
 
@@ -57,7 +57,7 @@ final class DefaultControllerTest extends FunctionalTestCase
         $frontEndController = new TypoScriptFrontendController(null, self::CURRENT_PAGE_UID, 0);
         $frontEndController->fe_user = $this->prophesize(FrontendUserAuthentication::class)->reveal();
         if ($frontEndController instanceof LoggerAwareInterface) {
-            $frontEndController->logger = $this->prophesize(LoggerInterface::class)->reveal();
+            $frontEndController->setLogger($this->prophesize(LoggerInterface::class)->reveal());
         }
         $frontEndController->determineId();
         $frontEndController->cObj = $contentObject;
