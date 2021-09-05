@@ -170,7 +170,6 @@ class MailNotifier extends AbstractTask
     {
         $attachment = null;
 
-        /** @var \Tx_Seminars_OldModel_Organizer $replyTo */
         $replyTo = $event->getFirstOrganizer();
         $sender = $event->getEmailSender();
         $subject = $this->customizeMessage($messageKey . 'Subject', $event);
@@ -184,7 +183,7 @@ class MailNotifier extends AbstractTask
             $mail = GeneralUtility::makeInstance(MailMessage::class);
             $mail->setFrom($sender->getEmailAddress(), $sender->getName());
             $mail->setTo($organizer->getEmailAddress(), $organizer->getName());
-            if ($replyTo !== null && $replyTo !== '') {
+            if ($replyTo instanceof \Tx_Seminars_OldModel_Organizer) {
                 $mail->setReplyTo($replyTo->getEMailAddress(), $replyTo->getName());
             }
             $mail->setSubject($subject);

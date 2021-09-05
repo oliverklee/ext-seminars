@@ -52,7 +52,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements Configu
     public $prefixId = \Tx_Seminars_OldModel_Registration::class;
 
     /**
-     * @var \Tx_Seminars_OldModel_Event the event to which this registration relates
+     * @var \Tx_Seminars_OldModel_Event|null the event to which this registration relates
      */
     private $seminar = null;
 
@@ -671,7 +671,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements Configu
      */
     public function getSeminarObject(): \Tx_Seminars_OldModel_Event
     {
-        if (!$this->seminar && $this->isOk()) {
+        if (!$this->seminar instanceof \Tx_Seminars_OldModel_Event && $this->isOk()) {
             $seminarUid = $this->getRecordPropertyInteger('seminar');
             if (isset(self::$cachedSeminars[$seminarUid])) {
                 $this->seminar = self::$cachedSeminars[$seminarUid];

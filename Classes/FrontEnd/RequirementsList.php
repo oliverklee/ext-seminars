@@ -15,19 +15,16 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class Tx_Seminars_FrontEnd_RequirementsList extends \Tx_Seminars_FrontEnd_AbstractView
 {
     /**
-     * @var \Tx_Seminars_OldModel_Event the event to build the requirements list for
+     * @var \Tx_Seminars_OldModel_Event|null the event to build the requirements list for
      */
     private $event = null;
 
     /**
-     * @var bool whether to limit the requirements to the events the user
-     *              still needs to register
+     * @var bool whether to limit the requirements to the events the user still needs to register
      */
     private $limitRequirementsToMissing = false;
 
     /**
-     * a link builder instance
-     *
      * @var \Tx_Seminars_Service_SingleViewLinkBuilder
      */
     private $linkBuilder = null;
@@ -71,7 +68,7 @@ class Tx_Seminars_FrontEnd_RequirementsList extends \Tx_Seminars_FrontEnd_Abstra
      */
     public function render(): string
     {
-        if (!$this->event) {
+        if (!$this->event instanceof Tx_Seminars_OldModel_Event) {
             throw new \BadMethodCallException(
                 'No event was set, please set an event before calling render.',
                 1333293250

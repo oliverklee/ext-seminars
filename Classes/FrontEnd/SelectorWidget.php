@@ -42,7 +42,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
     private $seminarBag = null;
 
     /**
-     * @var Collection all places which are assigned to at least one event
+     * @var Collection<\Tx_Seminars_Model_Place>|null all places which are assigned to at least one event
      */
     private $places = null;
 
@@ -216,7 +216,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
                 1333293276
             );
         }
-        if ($this->places) {
+        if ($this->places instanceof Collection) {
             return;
         }
 
