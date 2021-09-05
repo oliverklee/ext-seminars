@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Allow installations up to PHP 8.0 (#758)
 
 ### Changed
+- Move more tests to the nimut testing framework (#804)
 - Truncate changed tables only for functional tests (#786)
 - Raise PHPStan to levels 1, 2 and 3 (#776, #782, #789)
 - Update the php-cs-fixer configuration (#773)
