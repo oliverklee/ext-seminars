@@ -1,2 +1,162 @@
 parameters:
 	ignoreErrors:
+		-
+			message: "#^Parameter \\#2 \\$ref of static method TYPO3\\\\CMS\\\\Backend\\\\Utility\\\\BackendUtility\\:\\:referenceCount\\(\\) expects string, int given\\.$#"
+			count: 1
+			path: Classes/BackEnd/AbstractList.php
+
+		-
+			message: "#^Parameter \\#2 \\$params of method TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\:\\:getTypoLink\\(\\) expects string, int given\\.$#"
+			count: 1
+			path: Classes/FrontEnd/CategoryList.php
+
+		-
+			message: "#^Parameter \\#1 \\$keys of method OliverKlee\\\\Oelib\\\\Templating\\\\TemplateHelper\\:\\:ensureIntegerArrayValues\\(\\) expects array\\<string, string\\>, array\\<int, string\\> given\\.$#"
+			count: 1
+			path: Classes/FrontEnd/DefaultController.php
+
+		-
+			message: "#^Parameter \\#2 \\$pageId of method Tx_Seminars_FrontEnd_DefaultController\\:\\:getLoginLink\\(\\) expects int, string given\\.$#"
+			count: 1
+			path: Classes/FrontEnd/DefaultController.php
+
+		-
+			message: "#^Parameter \\#2 \\$params of method TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\:\\:getTypoLink\\(\\) expects string, int given\\.$#"
+			count: 2
+			path: Classes/FrontEnd/DefaultController.php
+
+		-
+			message: "#^Parameter \\#2 \\$params of method TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\:\\:getTypoLink\\(\\) expects string, int\\<min, \\-1\\>\\|int\\<1, max\\> given\\.$#"
+			count: 1
+			path: Classes/FrontEnd/DefaultController.php
+
+		-
+			message: "#^Parameter \\#2 \\$params of method TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\:\\:getTypoLink\\(\\) expects string, int given\\.$#"
+			count: 1
+			path: Classes/FrontEnd/RegistrationsList.php
+
+		-
+			message: "#^Parameter \\#1 \\$list of method OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection\\:\\:append\\(\\) expects iterable\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>&OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection, OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection given\\.$#"
+			count: 1
+			path: Classes/Model/FrontEndUser.php
+
+		-
+			message: "#^Parameter \\#1 \\$paymentMethod of method Tx_Seminars_Model_Registration\\:\\:setPaymentMethod\\(\\) expects Tx_Seminars_Model_PaymentMethod\\|null, OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\|null given\\.$#"
+			count: 1
+			path: Classes/Service/RegistrationManager.php
+
+		-
+			message: "#^Parameter \\#2 \\$params of method TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\:\\:getTypoLink\\(\\) expects string, int given\\.$#"
+			count: 2
+			path: Classes/Service/RegistrationManager.php
+
+		-
+			message: "#^Parameter \\#2 \\$array of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) expects array\\|ArrayAccess, string given\\.$#"
+			count: 1
+			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$pageData of method OliverKlee\\\\Seminars\\\\BackEnd\\\\AbstractModule\\:\\:setPageData\\(\\) expects array\\<string\\>, array\\<string, int\\> given\\.$#"
+			count: 2
+			path: Tests/Functional/BackEnd/EventsListTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$formData of method Tx_Seminars_FrontEnd_EventEditor\\:\\:validateCheckboxes\\(\\) expects array\\<array\\>, array\\<string, array\\<int, int\\>\\|string\\> given\\.$#"
+			count: 1
+			path: Tests/Functional/FrontEnd/EventEditorTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$formData of method Tx_Seminars_FrontEnd_EventEditor\\:\\:validateCheckboxes\\(\\) expects array\\<array\\>, array\\<string, array\\|string\\> given\\.$#"
+			count: 1
+			path: Tests/Functional/FrontEnd/EventEditorTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$formData of method Tx_Seminars_FrontEnd_EventEditor\\:\\:validateCheckboxes\\(\\) expects array\\<array\\>, array\\<string, string\\> given\\.$#"
+			count: 4
+			path: Tests/Functional/FrontEnd/EventEditorTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$pageData of method OliverKlee\\\\Seminars\\\\BackEnd\\\\AbstractModule\\:\\:setPageData\\(\\) expects array\\<string\\>, array\\<string, int\\> given\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/EventsListTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$pageData of method OliverKlee\\\\Seminars\\\\BackEnd\\\\AbstractModule\\:\\:setPageData\\(\\) expects array\\<string\\>, array\\<string, int\\> given\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/OrganizersListTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$pageData of method OliverKlee\\\\Seminars\\\\BackEnd\\\\AbstractModule\\:\\:setPageData\\(\\) expects array\\<string\\>, array\\<string, int\\> given\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/RegistrationsListTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$pageData of method OliverKlee\\\\Seminars\\\\BackEnd\\\\AbstractModule\\:\\:setPageData\\(\\) expects array\\<string\\>, array\\<string, int\\> given\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/BackEnd/SpeakersListTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$uids of method Tx_Seminars_BagBuilder_Event\\:\\:limitToEventTypes\\(\\) expects array\\<string\\>, array\\<int, int\\> given\\.$#"
+			count: 11
+			path: Tests/LegacyUnit/BagBuilder/EventBagBuilderTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$uids of method Tx_Seminars_BagBuilder_Event\\:\\:limitToPlaces\\(\\) expects array\\<string\\>, array\\<int, int\\> given\\.$#"
+			count: 6
+			path: Tests/LegacyUnit/BagBuilder/EventBagBuilderTest.php
+
+		-
+			message: "#^Parameter \\#2 \\$params of method TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\:\\:getTypoLink\\(\\) expects string, int given\\.$#"
+			count: 4
+			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$formData of method Tx_Seminars_FrontEnd_EventEditor\\:\\:validateDate\\(\\) expects array\\<array\\>, array\\<string, string\\> given\\.$#"
+			count: 4
+			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$formData of method Tx_Seminars_FrontEnd_EventEditor\\:\\:validateInteger\\(\\) expects array\\<array\\>, array\\<string, int\\|string\\> given\\.$#"
+			count: 3
+			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$formData of method Tx_Seminars_FrontEnd_EventEditor\\:\\:validatePrice\\(\\) expects array\\<array\\>, array\\<string, string\\> given\\.$#"
+			count: 4
+			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$formData of method Tx_Seminars_FrontEnd_EventEditor\\:\\:validateString\\(\\) expects array\\<array\\>, array\\<string, string\\> given\\.$#"
+			count: 3
+			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$data of method OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<Tx_Seminars_Model_Event\\>\\:\\:getLoadedTestingModel\\(\\) expects array\\<string, int\\|string\\>, array\\<string, int\\|Tx_Seminars_Model_Event\\> given\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/Mapper/EventDateMapperTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$data of method OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<Tx_Seminars_Model_Event\\>\\:\\:getLoadedTestingModel\\(\\) expects array\\<string, int\\|string\\>, array\\<string, float\\> given\\.$#"
+			count: 13
+			path: Tests/LegacyUnit/Model/EventDateTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$data of method OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<Tx_Seminars_Model_Event\\>\\:\\:getLoadedTestingModel\\(\\) expects array\\<string, int\\|string\\>, array\\<string, true\\> given\\.$#"
+			count: 2
+			path: Tests/LegacyUnit/Model/EventDateTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$array_arg of function key expects array, string given\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/Service/EmailServiceTest.php
+
+		-
+			message: "#^Parameter \\#2 \\$array of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) expects array\\|ArrayAccess, string given\\.$#"
+			count: 2
+			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$list of method Tx_Seminars_ViewHelper_CommaSeparatedTitles\\:\\:render\\(\\) expects iterable\\<OliverKlee\\\\Seminars\\\\Model\\\\Interfaces\\\\Titled\\>&OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection, OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection given\\.$#"
+			count: 5
+			path: Tests/LegacyUnit/ViewHelpers/CommaSeparatedTitlesViewHelperTest.php
+
