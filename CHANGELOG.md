@@ -13,7 +13,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Simplify the user and group mapper inheritance chains (#806)
 - Move more tests to the nimut testing framework (#804)
 - Truncate changed tables only for functional tests (#786)
-- Raise PHPStan to levels 1, 2, 3 and 4 (#776, #782, #789, #808)
+- Raise PHPStan to levels 1, 2, 3, 4 and 5 (#776, #782, #789, #808, #810)
 - Update the php-cs-fixer configuration (#773)
 - Update the `.editorconfig` to better match the Core (#739)
 - Require oelib >= 3.6.0 (#737, #738, #777, #787, #795, #802)
