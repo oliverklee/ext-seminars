@@ -91,6 +91,16 @@ parameters:
 			path: Tests/Functional/BackEnd/GeneralEventMailFormTest.php
 
 		-
+			message: "#^Call to an undefined method OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\:\\:getTitle\\(\\)\\.$#"
+			count: 1
+			path: Tests/Functional/Mapper/FrontEndUserMapperTest.php
+
+		-
+			message: "#^Call to an undefined method OliverKlee\\\\Oelib\\\\Model\\\\FrontEndUser\\:\\:getRegistration\\(\\)\\.$#"
+			count: 1
+			path: Tests/Functional/Mapper/FrontEndUserMapperTest.php
+
+		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Service\\\\RegistrationManagerTest\\:\\:\\$mailer \\(OliverKlee\\\\Oelib\\\\Email\\\\EmailCollector\\) does not accept OliverKlee\\\\Oelib\\\\Email\\\\AbstractMailer\\.$#"
 			count: 1
 			path: Tests/Functional/Service/RegistrationManagerTest.php
@@ -124,9 +134,4 @@ parameters:
 			message: "#^Call to an undefined method OliverKlee\\\\Oelib\\\\Model\\\\FrontEndUserGroup\\:\\:getReviewer\\(\\)\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Mapper/FrontEndUserGroupMapperTest.php
-
-		-
-			message: "#^Call to an undefined method OliverKlee\\\\Oelib\\\\Model\\\\FrontEndUser\\:\\:getRegistration\\(\\)\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Mapper/FrontEndUserMapperTest.php
 

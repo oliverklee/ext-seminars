@@ -7,9 +7,9 @@ namespace OliverKlee\Seminars\Tests\Functional\Mapper;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 
 /**
- * @covers \Tx_Seminars_Mapper_BackEndUserGroup
+ * @covers \Tx_Seminars_Mapper_FrontEndUserGroup
  */
-final class BackEndUserGroupMapperTest extends FunctionalTestCase
+final class FrontEndUserGroupMapperTest extends FunctionalTestCase
 {
     /**
      * @var string[]
@@ -17,7 +17,7 @@ final class BackEndUserGroupMapperTest extends FunctionalTestCase
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**
-     * @var \Tx_Seminars_Mapper_BackEndUserGroup
+     * @var \Tx_Seminars_Mapper_FrontEndUserGroup
      */
     private $subject = null;
 
@@ -25,7 +25,7 @@ final class BackEndUserGroupMapperTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        $this->subject = new \Tx_Seminars_Mapper_BackEndUserGroup();
+        $this->subject = new \Tx_Seminars_Mapper_FrontEndUserGroup();
     }
 
     /**
@@ -33,12 +33,12 @@ final class BackEndUserGroupMapperTest extends FunctionalTestCase
      */
     public function loadForExistingRecordLoadsScalarData()
     {
-        $this->importDataSet(__DIR__ . '/Fixtures/BackEndUsers.xml');
+        $this->importDataSet(__DIR__ . '/Fixtures/FrontEndUsers.xml');
 
         $model = $this->subject->find(1);
 
         $this->subject->load($model);
 
-        self::assertSame('Content people', $model->getTitle());
+        self::assertSame('Editors', $model->getTitle());
     }
 }
