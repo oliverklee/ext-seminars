@@ -33,14 +33,6 @@ final class FrontEndUserGroupMapperTest extends UnitTestCase
     /**
      * @test
      */
-    public function isOelibMapper()
-    {
-        self::assertInstanceOf(\OliverKlee\Oelib\Mapper\FrontEndUserGroupMapper::class, $this->subject);
-    }
-
-    /**
-     * @test
-     */
     public function createFrontEndUserGroupModel()
     {
         $model = $this->subject->getNewGhost();

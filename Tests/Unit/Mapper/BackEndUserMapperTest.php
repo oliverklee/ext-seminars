@@ -33,14 +33,6 @@ final class BackEndUserMapperTest extends UnitTestCase
     /**
      * @test
      */
-    public function isOelibMapper()
-    {
-        self::assertInstanceOf(\OliverKlee\Oelib\Mapper\BackEndUserMapper::class, $this->subject);
-    }
-
-    /**
-     * @test
-     */
     public function createBackEndUserModel()
     {
         $model = $this->subject->getNewGhost();
