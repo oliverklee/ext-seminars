@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\Service;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
-use OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures\TestingRegistrationManager;
+use OliverKlee\Oelib\Email\EmailCollector;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -27,12 +27,12 @@ final class RegistrationManagerTest extends FunctionalTestCase
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**
-     * @var TestingRegistrationManager
+     * @var \Tx_Seminars_Service_RegistrationManager
      */
     private $subject = null;
 
     /**
-     * @var \Tx_Oelib_EmailCollector
+     * @var EmailCollector
      */
     private $mailer = null;
 
@@ -45,7 +45,9 @@ final class RegistrationManagerTest extends FunctionalTestCase
         /** @var \Tx_Oelib_MailerFactory $mailerFactory */
         $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
         $mailerFactory->enableTestMode();
-        $this->mailer = $mailerFactory->getMailer();
+        /** @var EmailCollector $mailer */
+        $mailer = $mailerFactory->getMailer();
+        $this->mailer = $mailer;
 
         $this->subject = \Tx_Seminars_Service_RegistrationManager::getInstance();
     }

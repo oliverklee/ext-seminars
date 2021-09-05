@@ -53,6 +53,7 @@ final class FrontEndUserMapperTest extends FunctionalTestCase
 
         $this->subject->load($model);
 
+        /** @var \Tx_Seminars_Model_FrontEndUserGroup $firstGroup */
         $firstGroup = $model->getUserGroups()->first();
         self::assertInstanceOf(\Tx_Seminars_Model_FrontEndUserGroup::class, $firstGroup);
         self::assertSame(1, $firstGroup->getUid());
