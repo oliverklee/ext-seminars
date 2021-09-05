@@ -1,6 +1,26 @@
 parameters:
 	ignoreErrors:
 		-
+			message: "#^PHPDoc tag @extends contains generic type OliverKlee\\\\Oelib\\\\Mapper\\\\BackEndUserMapper\\<Tx_Seminars_Model_BackEndUser\\> but class OliverKlee\\\\Oelib\\\\Mapper\\\\BackEndUserMapper is not generic\\.$#"
+			count: 1
+			path: Classes/Mapper/BackEndUser.php
+
+		-
+			message: "#^PHPDoc tag @extends contains generic type OliverKlee\\\\Oelib\\\\Mapper\\\\BackEndUserGroupMapper\\<Tx_Seminars_Model_BackEndUserGroup\\> but class OliverKlee\\\\Oelib\\\\Mapper\\\\BackEndUserGroupMapper is not generic\\.$#"
+			count: 1
+			path: Classes/Mapper/BackEndUserGroup.php
+
+		-
+			message: "#^PHPDoc tag @extends contains generic type OliverKlee\\\\Oelib\\\\Mapper\\\\FrontEndUserMapper\\<Tx_Seminars_Model_FrontEndUser\\> but class OliverKlee\\\\Oelib\\\\Mapper\\\\FrontEndUserMapper is not generic\\.$#"
+			count: 1
+			path: Classes/Mapper/FrontEndUser.php
+
+		-
+			message: "#^PHPDoc tag @extends contains generic type OliverKlee\\\\Oelib\\\\Mapper\\\\FrontEndUserGroupMapper\\<Tx_Seminars_Model_FrontEndUserGroup\\> but class OliverKlee\\\\Oelib\\\\Mapper\\\\FrontEndUserGroupMapper is not generic\\.$#"
+			count: 1
+			path: Classes/Mapper/FrontEndUserGroup.php
+
+		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\:\\:fromData\\(\\) should return static\\(OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\) but returns OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\.$#"
 			count: 1
 			path: Classes/OldModel/AbstractModel.php

@@ -14,7 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Raise PHPStan to levels 1, 2 and 3 (#776, #782, #789)
 - Update the php-cs-fixer configuration (#773)
 - Update the `.editorconfig` to better match the Core (#739)
-- Require oelib >= 3.5.0 (#737, #738, #777, #787, #795)
+- Require oelib >= 3.6.0 (#737, #738, #777, #787, #795, #802)
 
 ### Deprecated
 
