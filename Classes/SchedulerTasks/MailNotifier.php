@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\SchedulerTasks;
 
 use OliverKlee\Oelib\Authentication\BackEndLoginManager;
-use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\PageFinder;
+use OliverKlee\Oelib\Interfaces\Configuration;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\Csv\EmailRegistrationListView;
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
@@ -301,7 +301,10 @@ class MailNotifier extends AbstractTask
         $csvString = $csvCreator->render();
 
         $fileName = $this->getConfiguration()->getAsString('filenameForRegistrationsCsv');
-        return \Swift_Attachment::newInstance($csvString, $fileName, 'text/csv');
+        /** @var \Swift_Attachment $attachment */
+        $attachment = \Swift_Attachment::newInstance($csvString, $fileName, 'text/csv');
+
+        return $attachment;
     }
 
     /**

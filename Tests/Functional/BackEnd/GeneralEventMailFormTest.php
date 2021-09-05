@@ -42,7 +42,9 @@ final class GeneralEventMailFormTest extends FunctionalTestCase
         /** @var MailerFactory $mailerFactory */
         $mailerFactory = GeneralUtility::makeInstance(MailerFactory::class);
         $mailerFactory->enableTestMode();
-        $this->mailer = $mailerFactory->getMailer();
+        /** @var EmailCollector $mailer */
+        $mailer = $mailerFactory->getMailer();
+        $this->mailer = $mailer;
     }
 
     protected function tearDown()

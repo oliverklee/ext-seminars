@@ -83,7 +83,7 @@ abstract class AbstractModel extends TemplateHelper
      */
     public static function fromData(array $data): AbstractModel
     {
-        /** @var AbstractModel $model */
+        /** @var static $model */
         $model = GeneralUtility::makeInstance(static::class);
         $model->setData($data);
 

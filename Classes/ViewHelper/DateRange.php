@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Interfaces\Configuration;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**

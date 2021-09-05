@@ -17,7 +17,7 @@ class EventStatusService implements SingletonInterface
     /**
      * @var \Tx_Seminars_Mapper_Event
      */
-    protected $eventMapper = false;
+    protected $eventMapper;
 
     /**
      * Constructor.

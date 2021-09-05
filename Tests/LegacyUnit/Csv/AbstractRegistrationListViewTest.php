@@ -48,12 +48,12 @@ class AbstractRegistrationListViewTest extends TestCase
     private $eventUid = 0;
 
     /**
-     * @var string[]
+     * @var array<int, string>
      */
     public $frontEndUserFieldKeys = [];
 
     /**
-     * @var array[]
+     * @var array<int, string>
      */
     public $registrationFieldKeys = [];
 
@@ -65,7 +65,7 @@ class AbstractRegistrationListViewTest extends TestCase
     /**
      * backed-up extension configuration of the TYPO3 configuration variables
      *
-     * @var array
+     * @var array<string, mixed>
      */
     private $extConfBackup = [];
 
