@@ -33,14 +33,6 @@ final class FrontEndUserMapperTest extends UnitTestCase
     /**
      * @test
      */
-    public function isOelibMapper()
-    {
-        self::assertInstanceOf(\OliverKlee\Oelib\Mapper\FrontEndUserMapper::class, $this->subject);
-    }
-
-    /**
-     * @test
-     */
     public function createFrontEndUserModel()
     {
         $model = $this->subject->getNewGhost();

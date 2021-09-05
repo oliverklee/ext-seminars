@@ -3,17 +3,21 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
-use OliverKlee\Oelib\Mapper\BackEndUserMapper as OelibBackEndUserMapper;
 
 /**
  * This class represents a mapper for back-end users.
  *
- * @extends OelibBackEndUserMapper<\Tx_Seminars_Model_BackEndUser>
+ * @extends AbstractDataMapper<\Tx_Seminars_Model_BackEndUser>
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class Tx_Seminars_Mapper_BackEndUser extends OelibBackEndUserMapper
+class Tx_Seminars_Mapper_BackEndUser extends AbstractDataMapper
 {
+    /**
+     * @var string the name of the database table for this mapper
+     */
+    protected $tableName = 'be_users';
+
     /**
      * @var string the model class name for this mapper, must not be empty
      */

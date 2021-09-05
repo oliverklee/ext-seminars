@@ -3,17 +3,21 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
-use OliverKlee\Oelib\Mapper\BackEndUserGroupMapper as OelibBackEndUserGroupMapper;
 
 /**
  * This class represents a mapper for back-end user groups.
  *
- * @extends OelibBackEndUserGroupMapper<\Tx_Seminars_Model_BackEndUserGroup>
+ * @extends AbstractDataMapper<\Tx_Seminars_Model_BackEndUserGroup>
  *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
-class Tx_Seminars_Mapper_BackEndUserGroup extends OelibBackEndUserGroupMapper
+class Tx_Seminars_Mapper_BackEndUserGroup extends AbstractDataMapper
 {
+    /**
+     * @var string the name of the database table for this mapper
+     */
+    protected $tableName = 'be_groups';
+
     /**
      * @var string the model class name for this mapper, must not be empty
      */

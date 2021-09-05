@@ -1,44 +1,9 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^PHPDoc tag @extends contains generic type OliverKlee\\\\Oelib\\\\Mapper\\\\BackEndUserMapper\\<Tx_Seminars_Model_BackEndUser\\> but class OliverKlee\\\\Oelib\\\\Mapper\\\\BackEndUserMapper is not generic\\.$#"
-			count: 1
-			path: Classes/Mapper/BackEndUser.php
-
-		-
-			message: "#^PHPDoc tag @extends contains generic type OliverKlee\\\\Oelib\\\\Mapper\\\\BackEndUserGroupMapper\\<Tx_Seminars_Model_BackEndUserGroup\\> but class OliverKlee\\\\Oelib\\\\Mapper\\\\BackEndUserGroupMapper is not generic\\.$#"
-			count: 1
-			path: Classes/Mapper/BackEndUserGroup.php
-
-		-
-			message: "#^PHPDoc tag @extends contains generic type OliverKlee\\\\Oelib\\\\Mapper\\\\FrontEndUserMapper\\<Tx_Seminars_Model_FrontEndUser\\> but class OliverKlee\\\\Oelib\\\\Mapper\\\\FrontEndUserMapper is not generic\\.$#"
-			count: 1
-			path: Classes/Mapper/FrontEndUser.php
-
-		-
-			message: "#^PHPDoc tag @extends contains generic type OliverKlee\\\\Oelib\\\\Mapper\\\\FrontEndUserGroupMapper\\<Tx_Seminars_Model_FrontEndUserGroup\\> but class OliverKlee\\\\Oelib\\\\Mapper\\\\FrontEndUserGroupMapper is not generic\\.$#"
-			count: 1
-			path: Classes/Mapper/FrontEndUserGroup.php
-
-		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\:\\:fromData\\(\\) should return static\\(OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\) but returns OliverKlee\\\\Seminars\\\\OldModel\\\\AbstractModel\\.$#"
 			count: 1
 			path: Classes/OldModel/AbstractModel.php
-
-		-
-			message: "#^Method Tx_Seminars_OldModel_Registration\\:\\:getFrontEndUser\\(\\) should return Tx_Seminars_Model_FrontEndUser\\|null but returns OliverKlee\\\\Oelib\\\\Model\\\\FrontEndUser\\.$#"
-			count: 1
-			path: Classes/OldModel/Registration.php
-
-		-
-			message: "#^Property Tx_Seminars_OldModel_Registration\\:\\:\\$user \\(Tx_Seminars_Model_FrontEndUser\\|null\\) does not accept OliverKlee\\\\Oelib\\\\Model\\\\FrontEndUser\\.$#"
-			count: 1
-			path: Classes/OldModel/Registration.php
-
-		-
-			message: "#^Method Tx_Seminars_OldModel_Speaker\\:\\:getOwner\\(\\) should return Tx_Seminars_Model_FrontEndUser\\|null but returns OliverKlee\\\\Oelib\\\\Model\\\\FrontEndUser\\.$#"
-			count: 1
-			path: Classes/OldModel/Speaker.php
 
 		-
 			message: "#^Method OliverKlee\\\\Seminars\\\\SchedulerTasks\\\\MailNotifier\\:\\:getConfiguration\\(\\) should return OliverKlee\\\\Oelib\\\\Configuration\\\\TypoScriptConfiguration but returns OliverKlee\\\\Oelib\\\\Interfaces\\\\Configuration\\.$#"
@@ -96,11 +61,6 @@ parameters:
 			path: Tests/Functional/Mapper/FrontEndUserMapperTest.php
 
 		-
-			message: "#^Call to an undefined method OliverKlee\\\\Oelib\\\\Model\\\\FrontEndUser\\:\\:getRegistration\\(\\)\\.$#"
-			count: 1
-			path: Tests/Functional/Mapper/FrontEndUserMapperTest.php
-
-		-
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\Functional\\\\Service\\\\RegistrationManagerTest\\:\\:\\$mailer \\(OliverKlee\\\\Oelib\\\\Email\\\\EmailCollector\\) does not accept OliverKlee\\\\Oelib\\\\Email\\\\AbstractMailer\\.$#"
 			count: 1
 			path: Tests/Functional/Service/RegistrationManagerTest.php
@@ -114,24 +74,4 @@ parameters:
 			message: "#^Property OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Csv\\\\AbstractRegistrationListViewTest\\:\\:\\$registrationFieldKeys \\(array\\<array\\>\\) does not accept array\\<int, string\\>\\.$#"
 			count: 19
 			path: Tests/LegacyUnit/Csv/AbstractRegistrationListViewTest.php
-
-		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\Tests\\\\LegacyUnit\\\\Service\\\\SalutationTest\\:\\:createFrontEndUser\\(\\) should return Tx_Seminars_Model_FrontEndUser but returns OliverKlee\\\\Oelib\\\\Model\\\\FrontEndUser\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Email/SalutationTest.php
-
-		-
-			message: "#^Call to an undefined method OliverKlee\\\\Oelib\\\\Model\\\\FrontEndUserGroup\\:\\:getDefaultCategories\\(\\)\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Mapper/FrontEndUserGroupMapperTest.php
-
-		-
-			message: "#^Call to an undefined method OliverKlee\\\\Oelib\\\\Model\\\\FrontEndUserGroup\\:\\:getDefaultOrganizer\\(\\)\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Mapper/FrontEndUserGroupMapperTest.php
-
-		-
-			message: "#^Call to an undefined method OliverKlee\\\\Oelib\\\\Model\\\\FrontEndUserGroup\\:\\:getReviewer\\(\\)\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Mapper/FrontEndUserGroupMapperTest.php
 
