@@ -177,9 +177,7 @@ final class RegistrationManagerTest extends TestCase
 
         $headerProxyFactory = HeaderProxyFactory::getInstance();
         $headerProxyFactory->enableTestMode();
-        /** @var HeaderCollector $headerCollector */
-        $headerCollector = $headerProxyFactory->getHeaderProxy();
-        $this->headerCollector = $headerCollector;
+        $this->headerCollector = $headerProxyFactory->getHeaderCollector();
 
         $this->seminar = new TestingEvent($this->seminarUid);
         $this->subject = TestingRegistrationManager::getInstance();
