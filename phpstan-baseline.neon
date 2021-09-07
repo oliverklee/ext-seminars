@@ -6,11 +6,6 @@ parameters:
 			path: Classes/BackEnd/AbstractList.php
 
 		-
-			message: "#^Parameter \\#2 \\$params of method TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\:\\:getTypoLink\\(\\) expects string, int given\\.$#"
-			count: 1
-			path: Classes/FrontEnd/CategoryList.php
-
-		-
 			message: "#^Parameter \\#1 \\$keys of method OliverKlee\\\\Oelib\\\\Templating\\\\TemplateHelper\\:\\:ensureIntegerArrayValues\\(\\) expects array\\<string, string\\>, array\\<int, string\\> given\\.$#"
 			count: 1
 			path: Classes/FrontEnd/DefaultController.php
@@ -21,21 +16,6 @@ parameters:
 			path: Classes/FrontEnd/DefaultController.php
 
 		-
-			message: "#^Parameter \\#2 \\$params of method TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\:\\:getTypoLink\\(\\) expects string, int given\\.$#"
-			count: 2
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
-			message: "#^Parameter \\#2 \\$params of method TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\:\\:getTypoLink\\(\\) expects string, int\\<min, \\-1\\>\\|int\\<1, max\\> given\\.$#"
-			count: 1
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
-			message: "#^Parameter \\#2 \\$params of method TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\:\\:getTypoLink\\(\\) expects string, int given\\.$#"
-			count: 1
-			path: Classes/FrontEnd/RegistrationsList.php
-
-		-
 			message: "#^Parameter \\#1 \\$list of method OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection\\:\\:append\\(\\) expects iterable\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>&OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection, OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection given\\.$#"
 			count: 1
 			path: Classes/Model/FrontEndUser.php
@@ -43,11 +23,6 @@ parameters:
 		-
 			message: "#^Parameter \\#1 \\$paymentMethod of method Tx_Seminars_Model_Registration\\:\\:setPaymentMethod\\(\\) expects Tx_Seminars_Model_PaymentMethod\\|null, OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\|null given\\.$#"
 			count: 1
-			path: Classes/Service/RegistrationManager.php
-
-		-
-			message: "#^Parameter \\#2 \\$params of method TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\:\\:getTypoLink\\(\\) expects string, int given\\.$#"
-			count: 2
 			path: Classes/Service/RegistrationManager.php
 
 		-
@@ -104,11 +79,6 @@ parameters:
 			message: "#^Parameter \\#1 \\$uids of method Tx_Seminars_BagBuilder_Event\\:\\:limitToPlaces\\(\\) expects array\\<string\\>, array\\<int, int\\> given\\.$#"
 			count: 6
 			path: Tests/LegacyUnit/BagBuilder/EventBagBuilderTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$params of method TYPO3\\\\CMS\\\\Frontend\\\\ContentObject\\\\ContentObjectRenderer\\:\\:getTypoLink\\(\\) expects string, int given\\.$#"
-			count: 4
-			path: Tests/LegacyUnit/FrontEnd/DefaultControllerTest.php
 
 		-
 			message: "#^Parameter \\#1 \\$formData of method Tx_Seminars_FrontEnd_EventEditor\\:\\:validateDate\\(\\) expects array\\<array\\>, array\\<string, string\\> given\\.$#"

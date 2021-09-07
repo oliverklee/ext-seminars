@@ -99,7 +99,7 @@ class Tx_Seminars_FrontEnd_CategoryList extends \Tx_Seminars_FrontEnd_AbstractVi
 
         return $this->cObj->getTypoLink(
             $title,
-            $this->getConfValueInteger('listPID'),
+            (string)$this->getConfValueInteger('listPID'),
             ['tx_seminars_pi1[category]' => $categoryUid]
         );
     }

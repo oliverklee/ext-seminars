@@ -331,7 +331,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
             // provides the registration link
             $result = $plugin->cObj->getTypoLink(
                 $label,
-                $plugin->getConfValueInteger('registerPID'),
+                (string)$plugin->getConfValueInteger('registerPID'),
                 ['tx_seminars_pi1[seminar]' => $event->getUid(), 'tx_seminars_pi1[action]' => 'register']
             );
         } else {
@@ -355,7 +355,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
     ): string {
         return $plugin->cObj->getTypoLink(
             $plugin->translate('label_onlineUnregistration'),
-            $plugin->getConfValueInteger('registerPID'),
+            (string)$plugin->getConfValueInteger('registerPID'),
             ['tx_seminars_pi1[registration]' => $registration->getUid(), 'tx_seminars_pi1[action]' => 'unregister']
         );
     }
