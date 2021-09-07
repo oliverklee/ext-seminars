@@ -677,7 +677,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
         if ($targetPageId) {
             $result = $this->cObj->getTypoLink(
                 $this->translate('label_listRegistrationsLink'),
-                $targetPageId,
+                (string)$targetPageId,
                 ['tx_seminars_pi1[seminar]' => $this->seminar->getUid()]
             );
         }
@@ -2544,7 +2544,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
     {
         return $this->cObj->getTypoLink(
             $this->translate('label_edit'),
-            $this->getConfValueInteger('eventEditorPID', 's_fe_editing'),
+            (string)$this->getConfValueInteger('eventEditorPID', 's_fe_editing'),
             ['tx_seminars_pi1[seminar]' => $this->seminar->getUid()]
         );
     }
@@ -2598,7 +2598,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
     {
         $seminarUid = $this->seminar->getUid();
 
-        $aTag = $this->cObj->getTypoLink($this->translate('label_' . $action), (int)$this->getFrontEndController()->id);
+        $aTag = $this->cObj
+            ->getTypoLink($this->translate('label_' . $action), (string)$this->getFrontEndController()->id);
 
         /** @var string[] $dataAttributes */
         $dataAttributes = [

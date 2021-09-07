@@ -532,7 +532,7 @@ class DefaultControllerTest extends TestCase
 
         self::assertContains(
             '<a href="index.php?id=42',
-            $contentMock->getTypoLink('link label', 42)
+            $contentMock->getTypoLink('link label', '42')
         );
     }
 
@@ -545,7 +545,7 @@ class DefaultControllerTest extends TestCase
 
         self::assertContains(
             '>link label</a>',
-            $contentMock->getTypoLink('link label', 42)
+            $contentMock->getTypoLink('link label', '42')
         );
     }
 
@@ -573,7 +573,7 @@ class DefaultControllerTest extends TestCase
             'tx_seminars_pi1%5Bseminar%5D=42',
             $contentMock->getTypoLink(
                 'link label',
-                1,
+                '1',
                 ['tx_seminars_pi1%5Bseminar%5D' => 42]
             )
         );
@@ -590,7 +590,7 @@ class DefaultControllerTest extends TestCase
             'tx_seminars_pi1%5Bseminar%5D=42&amp;foo=bar',
             $contentMock->getTypoLink(
                 'link label',
-                1,
+                '1',
                 [
                     'tx_seminars_pi1%5Bseminar%5D' => 42,
                     'foo' => 'bar',
