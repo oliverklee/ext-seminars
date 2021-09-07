@@ -23,7 +23,7 @@ abstract class AbstractModule extends BaseScriptClass
     /**
      * data of the current BE page
      *
-     * @var string[]
+     * @var array<string, string|int>
      */
     private $pageData = [];
 
@@ -74,7 +74,7 @@ abstract class AbstractModule extends BaseScriptClass
     /**
      * Returns the data of the current BE page.
      *
-     * @return string[] the data of the current BE page, may be emtpy
+     * @return string[] the data of the current BE page, may be empty
      */
     public function getPageData(): array
     {
@@ -84,7 +84,7 @@ abstract class AbstractModule extends BaseScriptClass
     /**
      * Sets the data for the current BE page.
      *
-     * @param string[] $pageData page data, may be empty
+     * @param array<string, string|int> $pageData page data, may be empty
      *
      * @return void
      */
