@@ -25,7 +25,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Fixed
 - Fix the parameter type in the typolink creation calls (#811)
-- Improve the type annotations (#790, #791, #792, #793, #796, #797, #798, #799, #800, #801, #805, #807, #809)
+- Improve the type annotations (#790, #791, #792, #793, #796, #797, #798, #799, #800, #801, #805, #807, #809, #812)
 - Stop using `PATH_site` in TYPO3 9LTS (#780)
 - Stop using the Core-provided whitespace constants (#778)
 - Fix PHPStan level warnings (#775, #788)

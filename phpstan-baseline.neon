@@ -26,11 +26,6 @@ parameters:
 			path: Classes/Service/RegistrationManager.php
 
 		-
-			message: "#^Parameter \\#2 \\$array of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) expects array\\|ArrayAccess, string given\\.$#"
-			count: 1
-			path: Tests/Functional/BackEnd/AbstractEventMailFormTest.php
-
-		-
 			message: "#^Parameter \\#1 \\$pageData of method OliverKlee\\\\Seminars\\\\BackEnd\\\\AbstractModule\\:\\:setPageData\\(\\) expects array\\<string\\>, array\\<string, int\\> given\\.$#"
 			count: 2
 			path: Tests/Functional/BackEnd/EventsListTest.php
@@ -119,11 +114,6 @@ parameters:
 			message: "#^Parameter \\#1 \\$array_arg of function key expects array, string given\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Service/EmailServiceTest.php
-
-		-
-			message: "#^Parameter \\#2 \\$array of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) expects array\\|ArrayAccess, string given\\.$#"
-			count: 2
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
 			message: "#^Parameter \\#1 \\$list of method Tx_Seminars_ViewHelper_CommaSeparatedTitles\\:\\:render\\(\\) expects iterable\\<OliverKlee\\\\Seminars\\\\Model\\\\Interfaces\\\\Titled\\>&OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection, OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection given\\.$#"

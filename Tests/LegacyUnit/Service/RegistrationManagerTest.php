@@ -5565,14 +5565,12 @@ final class RegistrationManagerTest extends TestCase
 
         $sentEmails = $this->mailer->getSentEmails();
 
-        self::assertArrayHasKey(
-            'mail@example.com',
-            $sentEmails[0]->getReplyTo()
-        );
-        self::assertArrayHasKey(
-            'mail@example.com',
-            $sentEmails[1]->getReplyTo()
-        );
+        /** @var array<array-key, string> $replyTosOfFirstEmail */
+        $replyTosOfFirstEmail = $sentEmails[0]->getReplyTo();
+        self::assertArrayHasKey('mail@example.com', $replyTosOfFirstEmail);
+        /** @var array<array-key, string> $replyTosOfSecondEmail */
+        $replyTosOfSecondEmail = $sentEmails[1]->getReplyTo();
+        self::assertArrayHasKey('mail@example.com', $replyTosOfSecondEmail);
     }
 
     /**
@@ -6338,7 +6336,8 @@ final class RegistrationManagerTest extends TestCase
 
         $subject->createRegistration($this->seminar, [], $plugin);
         $seminarsConnection = $this->getConnectionForTable('tx_seminars_seminars');
-        $seminarData = $seminarsConnection->select(['*'], 'tx_seminars_seminars', ['uid' => $this->seminarUid])->fetch();
+        $seminarData = $seminarsConnection->select(['*'], 'tx_seminars_seminars', ['uid' => $this->seminarUid])
+            ->fetch();
 
         $registrationUid = $subject->getRegistration()->getUid();
 
