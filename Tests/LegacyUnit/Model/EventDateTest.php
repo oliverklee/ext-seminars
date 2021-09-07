@@ -503,7 +503,7 @@ class EventDateTest extends TestCase
     public function getRegularPriceForEventDateWithoutRegularPriceReturnsZero()
     {
         $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel(['price_regular' => 0.00]);
+            ->getLoadedTestingModel(['price_regular' => '0.0']);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -512,7 +512,7 @@ class EventDateTest extends TestCase
         );
 
         self::assertEquals(
-            0.00,
+            0.0,
             $this->subject->getRegularPrice()
         );
     }
@@ -523,7 +523,7 @@ class EventDateTest extends TestCase
     public function getRegularPriceForEventDateWithPositiveRegularPriceReturnsRegularPrice()
     {
         $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel(['price_regular' => 42.42]);
+            ->getLoadedTestingModel(['price_regular' => '42.42']);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -602,7 +602,7 @@ class EventDateTest extends TestCase
     public function hasRegularPriceForEventDateWithRegularPriceReturnsTrue()
     {
         $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel(['price_regular' => 42.42]);
+            ->getLoadedTestingModel(['price_regular' => '42.42']);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -643,7 +643,7 @@ class EventDateTest extends TestCase
     public function getRegularEarlyBirdPriceForEventDateWithPositiveRegularEarlyBirdPriceReturnsRegularEarlyBirdPrice()
     {
         $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel(['price_regular_early' => 42.42]);
+            ->getLoadedTestingModel(['price_regular_early' => '42.42']);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -722,7 +722,7 @@ class EventDateTest extends TestCase
     public function hasRegularEarlyBirdPriceForEventDateWithRegularEarlyBirdPriceReturnsTrue()
     {
         $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel(['price_regular_early' => 42.42]);
+            ->getLoadedTestingModel(['price_regular_early' => '42.42']);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -763,7 +763,7 @@ class EventDateTest extends TestCase
     public function getRegularBoardPriceForEventDateWithPositiveRegularBoardPriceReturnsRegularBoardPrice()
     {
         $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel(['price_regular_board' => 42.42]);
+            ->getLoadedTestingModel(['price_regular_board' => '42.42']);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -842,7 +842,7 @@ class EventDateTest extends TestCase
     public function hasRegularBoardPriceForEventDateWithRegularBoardPriceReturnsTrue()
     {
         $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel(['price_regular_board' => 42.42]);
+            ->getLoadedTestingModel(['price_regular_board' => '42.42']);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -883,7 +883,7 @@ class EventDateTest extends TestCase
     public function getSpecialPriceForEventDateWithSpecialPriceReturnsSpecialPrice()
     {
         $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel(['price_special' => 42.42]);
+            ->getLoadedTestingModel(['price_special' => '42.42']);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -962,7 +962,7 @@ class EventDateTest extends TestCase
     public function hasSpecialPriceForEventDateWithSpecialPriceReturnsTrue()
     {
         $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel(['price_special' => 42.42]);
+            ->getLoadedTestingModel(['price_special' => '42.42']);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -1003,7 +1003,7 @@ class EventDateTest extends TestCase
     public function getSpecialEarlyBirdPriceForEventDateWithPositiveSpecialEarlyBirdPriceReturnsSpecialEarlyBirdPrice()
     {
         $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel(['price_special_early' => 42.42]);
+            ->getLoadedTestingModel(['price_special_early' => '42.42']);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -1082,7 +1082,7 @@ class EventDateTest extends TestCase
     public function hasSpecialEarlyBirdPriceForEventDateWithSpecialEarlyBirdPriceReturnsTrue()
     {
         $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel(['price_special_early' => 42.42]);
+            ->getLoadedTestingModel(['price_special_early' => '42.42']);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -1123,7 +1123,7 @@ class EventDateTest extends TestCase
     public function getSpecialBoardPriceForEventDateWithSpecialBoardPriceReturnsSpecialBoardPrice()
     {
         $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel(['price_special_board' => 42.42]);
+            ->getLoadedTestingModel(['price_special_board' => '42.42']);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -1202,7 +1202,7 @@ class EventDateTest extends TestCase
     public function hasSpecialBoardPriceForEventDateWithSpecialBoardPriceReturnsTrue()
     {
         $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel(['price_special_board' => 42.42]);
+            ->getLoadedTestingModel(['price_special_board' => '42.42']);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -1346,9 +1346,7 @@ class EventDateTest extends TestCase
     public function allowsMultipleRegistrationForEventDateWithSetAllowsMultipleRegistrationReturnsTrue()
     {
         $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel(
-                ['allows_multiple_registrations' => true]
-            );
+            ->getLoadedTestingModel(['allows_multiple_registrations' => 1]);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -1387,8 +1385,7 @@ class EventDateTest extends TestCase
      */
     public function usesTerms2ForEventDateWithSetUseTerms2ReturnsTrue()
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
-            ->getLoadedTestingModel(['use_terms_2' => true]);
+        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(['use_terms_2' => 1]);
         $this->subject->setData(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
