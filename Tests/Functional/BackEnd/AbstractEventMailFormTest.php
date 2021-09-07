@@ -212,7 +212,9 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
         );
         $subject->render();
 
-        self::assertArrayHasKey('oliver@example.com', $this->mailer->getFirstSentEmail()->getReplyTo());
+        /** @var array<array-key, string> $replyTos */
+        $replyTos = $this->mailer->getFirstSentEmail()->getReplyTo();
+        self::assertArrayHasKey('oliver@example.com', $replyTos);
     }
 
     /**
