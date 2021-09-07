@@ -1,11 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Parameter \\#2 \\$ref of static method TYPO3\\\\CMS\\\\Backend\\\\Utility\\\\BackendUtility\\:\\:referenceCount\\(\\) expects string, int given\\.$#"
-			count: 1
-			path: Classes/BackEnd/AbstractList.php
-
-		-
 			message: "#^Parameter \\#1 \\$keys of method OliverKlee\\\\Oelib\\\\Templating\\\\TemplateHelper\\:\\:ensureIntegerArrayValues\\(\\) expects array\\<string, string\\>, array\\<int, string\\> given\\.$#"
 			count: 1
 			path: Classes/FrontEnd/DefaultController.php
@@ -26,11 +21,6 @@ parameters:
 			path: Classes/Service/RegistrationManager.php
 
 		-
-			message: "#^Parameter \\#1 \\$pageData of method OliverKlee\\\\Seminars\\\\BackEnd\\\\AbstractModule\\:\\:setPageData\\(\\) expects array\\<string\\>, array\\<string, int\\> given\\.$#"
-			count: 2
-			path: Tests/Functional/BackEnd/EventsListTest.php
-
-		-
 			message: "#^Parameter \\#1 \\$formData of method Tx_Seminars_FrontEnd_EventEditor\\:\\:validateCheckboxes\\(\\) expects array\\<array\\>, array\\<string, array\\<int, int\\>\\|string\\> given\\.$#"
 			count: 1
 			path: Tests/Functional/FrontEnd/EventEditorTest.php
@@ -44,26 +34,6 @@ parameters:
 			message: "#^Parameter \\#1 \\$formData of method Tx_Seminars_FrontEnd_EventEditor\\:\\:validateCheckboxes\\(\\) expects array\\<array\\>, array\\<string, string\\> given\\.$#"
 			count: 4
 			path: Tests/Functional/FrontEnd/EventEditorTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$pageData of method OliverKlee\\\\Seminars\\\\BackEnd\\\\AbstractModule\\:\\:setPageData\\(\\) expects array\\<string\\>, array\\<string, int\\> given\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/EventsListTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$pageData of method OliverKlee\\\\Seminars\\\\BackEnd\\\\AbstractModule\\:\\:setPageData\\(\\) expects array\\<string\\>, array\\<string, int\\> given\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/OrganizersListTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$pageData of method OliverKlee\\\\Seminars\\\\BackEnd\\\\AbstractModule\\:\\:setPageData\\(\\) expects array\\<string\\>, array\\<string, int\\> given\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/RegistrationsListTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$pageData of method OliverKlee\\\\Seminars\\\\BackEnd\\\\AbstractModule\\:\\:setPageData\\(\\) expects array\\<string\\>, array\\<string, int\\> given\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/BackEnd/SpeakersListTest.php
 
 		-
 			message: "#^Parameter \\#1 \\$uids of method Tx_Seminars_BagBuilder_Event\\:\\:limitToEventTypes\\(\\) expects array\\<string\\>, array\\<int, int\\> given\\.$#"

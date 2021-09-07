@@ -144,7 +144,7 @@ abstract class AbstractList
         if ($this->doesUserHaveAccess($pageUid) && $this->getBackEndUser()->check('tables_modify', $this->tableName)) {
             $referenceWarning = BackendUtility::referenceCount(
                 $this->tableName,
-                $recordUid,
+                (string)$recordUid,
                 ' ' . $languageService->getLL('referencesWarning')
             );
 
