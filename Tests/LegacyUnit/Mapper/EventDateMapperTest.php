@@ -149,9 +149,7 @@ class EventDateMapperTest extends TestCase
         );
     }
 
-    ////////////////////////////////////
     // Tests regarding getEventType().
-    ////////////////////////////////////
 
     /**
      * @test
@@ -162,7 +160,7 @@ class EventDateMapperTest extends TestCase
         $testingModel = $this->subject->getLoadedTestingModel(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
-                'topic' => $topic,
+                'topic' => $topic->getUid(),
             ]
         );
 
@@ -187,9 +185,7 @@ class EventDateMapperTest extends TestCase
         self::assertInstanceOf(\Tx_Seminars_Model_EventType::class, $testingModel->getEventType());
     }
 
-    /////////////////////////////////////////
     // Tests regarding getPaymentMethods().
-    /////////////////////////////////////////
 
     /**
      * @test

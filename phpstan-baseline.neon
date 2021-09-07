@@ -96,21 +96,6 @@ parameters:
 			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$data of method OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<Tx_Seminars_Model_Event\\>\\:\\:getLoadedTestingModel\\(\\) expects array\\<string, int\\|string\\>, array\\<string, int\\|Tx_Seminars_Model_Event\\> given\\.$#"
-			count: 1
-			path: Tests/LegacyUnit/Mapper/EventDateMapperTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$data of method OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<Tx_Seminars_Model_Event\\>\\:\\:getLoadedTestingModel\\(\\) expects array\\<string, int\\|string\\>, array\\<string, float\\> given\\.$#"
-			count: 13
-			path: Tests/LegacyUnit/Model/EventDateTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$data of method OliverKlee\\\\Oelib\\\\Mapper\\\\AbstractDataMapper\\<Tx_Seminars_Model_Event\\>\\:\\:getLoadedTestingModel\\(\\) expects array\\<string, int\\|string\\>, array\\<string, true\\> given\\.$#"
-			count: 2
-			path: Tests/LegacyUnit/Model/EventDateTest.php
-
-		-
 			message: "#^Parameter \\#1 \\$array_arg of function key expects array, string given\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Service/EmailServiceTest.php
