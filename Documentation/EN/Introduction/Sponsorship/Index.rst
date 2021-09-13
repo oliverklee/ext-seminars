@@ -113,6 +113,8 @@ organizations and persons:
 
 *  `MK Office Monika Kaderabek <https://www.mk-office.ch/>`__
 
+*  `mobivention GmbH <https://mobivention.com/>`__
+
 *  `m\|r\|o\|net <https://www.mronet.at/>`__
 
 *  `netboot internet solutions <https://www.netboot.ch/>`__
