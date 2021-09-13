@@ -21,6 +21,12 @@ Please consider supporting the
 [crowdfunding campaign](https://github.com/oliverklee/ext-seminars/wiki/10LTS-Crowdfunding-Campaign)
 to make this happen.
 
+## Give it a try!
+
+If you would like to test the extension yourself, there is a
+[DDEV-based TYPO3 distribution](https://github.com/oliverklee/TYPO3-testing-distribution)
+with this extension installed and some test records ready to go.
+
 ## Running the tests locally
 
 You will need to have a Git clone of the extension for this
