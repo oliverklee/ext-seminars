@@ -79,7 +79,7 @@ final class EventHeadlineTest extends FunctionalTestCase
     public function renderWithUidOfExistingEventReturnsTitleOfSelectedEvent()
     {
         $this->importDataSet(__DIR__ . '/Fixtures/EventHeadline.xml');
-        $this->subject->piVars['uid'] = '1';
+        $this->subject->piVars['showUid'] = '1';
 
         $result = $this->subject->render();
 
@@ -92,7 +92,7 @@ final class EventHeadlineTest extends FunctionalTestCase
     public function renderEncodesEventTitle()
     {
         $this->importDataSet(__DIR__ . '/Fixtures/EventHeadline.xml');
-        $this->subject->piVars['uid'] = '2';
+        $this->subject->piVars['showUid'] = '2';
 
         $result = $this->subject->render();
 
@@ -105,7 +105,7 @@ final class EventHeadlineTest extends FunctionalTestCase
     public function renderWithUidOfExistingEventReturnsDateOfSelectedEvent()
     {
         $this->importDataSet(__DIR__ . '/Fixtures/EventHeadline.xml');
-        $this->subject->piVars['uid'] = '1';
+        $this->subject->piVars['showUid'] = '1';
 
         $result = $this->subject->render();
 
@@ -128,7 +128,7 @@ final class EventHeadlineTest extends FunctionalTestCase
      */
     public function renderWithInexistentUidReturnsEmptyString()
     {
-        $this->subject->piVars['uid'] = '1';
+        $this->subject->piVars['showUid'] = '1';
 
         $result = $this->subject->render();
 
@@ -140,7 +140,7 @@ final class EventHeadlineTest extends FunctionalTestCase
      */
     public function renderWithNonNumericUidReturnsEmptyString()
     {
-        $this->subject->piVars['uid'] = 'foo';
+        $this->subject->piVars['showUid'] = 'foo';
 
         $result = $this->subject->render();
 

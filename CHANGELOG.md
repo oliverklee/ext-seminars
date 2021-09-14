@@ -25,6 +25,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop the `approved` flag from locallang labels (#745)
 
 ### Fixed
+- Use the correct GET parameter for the UID in the event headline (#838)
 - Do not duplicate places when copying them from time slots (#833)
 - Require `ext-pdo` in the `composer.json` (#837)
 - Fix the parameter type in the typolink creation calls (#811)
