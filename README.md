@@ -114,7 +114,7 @@ Also set the following environment variables in your runner configuration:
 
 ### Running the legacy tests
 
-It is only possible to run the legacy tests on the command, but not
+It is only possible to run the legacy tests on the command line, but not
 in PhpStorm.
 
 As with the functional tests, you will need a local MySQL user that
