@@ -46,15 +46,11 @@ class DataHandlerHook
 
     /**
      * @var string
-     *
-     * @deprecated will be removed in seminars 4.0
      */
     const DATE_RENDER_FORMAT = 'Y-m-d\\TH:i:s\\Z';
 
     /**
      * @var string
-     *
-     * @deprecated will be removed in seminars 4.0
      */
     const DATE_PARSE_FORMAT = 'Y-m-d?H:i:s?';
 
@@ -67,8 +63,6 @@ class DataHandlerHook
      * Creates the time slots requested by the time slot wizard (if any are requested).
      *
      * @return void
-     *
-     * @deprecated will be removed in seminars 4.0
      */
     public function processDatamap_beforeStart(DataHandler $dataHandler)
     {
@@ -276,9 +270,6 @@ class DataHandlerHook
         }
     }
 
-    /**
-     * @deprecated will be removed in seminars 4.0
-     */
     private function isValidTimeSlotConfiguration(array $configuration): bool
     {
         $requiredFields = ['first_start', 'first_end', 'all', 'frequency', 'until'];
@@ -308,8 +299,6 @@ class DataHandlerHook
      * @param string|int $eventUid
      *
      * @return void
-     *
-     * @deprecated will be removed in seminars 4.0
      */
     private function createTimeSlots(array &$event, $eventUid, array $configuration, array &$allTimeSlots)
     {

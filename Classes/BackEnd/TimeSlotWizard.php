@@ -13,8 +13,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Form engine wizard that renders a wizard for creating a series of time slots.
- *
- * @deprecated will be removed in seminars 4.0
  */
 class TimeSlotWizard extends AbstractFormElement
 {
