@@ -97,7 +97,6 @@ $boot = static function () {
     );
 
     // register the time slot wizard
-    // @deprecated will be removed in seminars 4.0
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['nodeRegistry'][1558632705] = [
         'nodeName' => 'time_slot_wizard',
         'priority' => 70,
