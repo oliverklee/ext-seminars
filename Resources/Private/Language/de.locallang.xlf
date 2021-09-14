@@ -1230,13 +1230,11 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Registrations list view</source>
 				<target>Anmeldungslistenansicht</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.showFeUserFieldsInRegistrationsList" xml:space="preserve"
-						approved="yes">
+			<trans-unit id="seminars.pi_flexform.showFeUserFieldsInRegistrationsList" xml:space="preserve">
 				<source>Which FEuser fields to show in the list of registrations for an event</source>
 				<target>Zeige diese FEuser-Felder in der Liste der Anmeldungen</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.showRegistrationFieldsInRegistrationList" xml:space="preserve"
-						approved="yes">
+			<trans-unit id="seminars.pi_flexform.showRegistrationFieldsInRegistrationList" xml:space="preserve">
 				<source>Which registration fields to show in the list of registrations for an event:</source>
 				<target>Zeige diese Anmeldungs-Felder in der Liste der Anmeldungen:</target>
 			</trans-unit>
@@ -1252,8 +1250,7 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Page that will be displayed after a user has registered for an event</source>
 				<target>Seite, die nach erfolgreicher Anmeldung für eine Veranstaltung angezeigt wird</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.sendParametersToThankYouAfterRegistrationPageUrl" xml:space="preserve"
-						approved="yes">
+			<trans-unit id="seminars.pi_flexform.sendParametersToThankYouAfterRegistrationPageUrl" xml:space="preserve">
 				<source>Send parameters to page which is displayed after registration</source>
 				<target>Parameter an Seite schicken, die nach erfolgreicher Anmeldung angezeigt wird</target>
 			</trans-unit>
@@ -1261,23 +1258,19 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Page that will be displayed after a user has unregistered for an event</source>
 				<target>Seite, die nach erfolgreicher Abmeldung für eine Veranstaltung angezeigt wird</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.sendParametersToPageToShowAfterUnregistrationUrl" xml:space="preserve"
-						approved="yes">
+			<trans-unit id="seminars.pi_flexform.sendParametersToPageToShowAfterUnregistrationUrl" xml:space="preserve">
 				<source>Send parameters to page which is displayed after unregistration</source>
 				<target>Parameter an Seite schicken, die nach erfolgreicher Abmeldung angezeigt wird</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.createAdditionalAttendeesAsFrontEndUsers" xml:space="preserve"
-						approved="yes">
+			<trans-unit id="seminars.pi_flexform.createAdditionalAttendeesAsFrontEndUsers" xml:space="preserve">
 				<source>Create FE user records for additional attendees</source>
 				<target>FE-Benutzer-Datensätze für die zusätzlich angemeldeten Personen anlegen</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.sysFolderForAdditionalAttendeeUsersPID" xml:space="preserve"
-						approved="yes">
+			<trans-unit id="seminars.pi_flexform.sysFolderForAdditionalAttendeeUsersPID" xml:space="preserve">
 				<source>System folder in which the created FE user records will be stored</source>
 				<target>Ordner für die angelegten FE-Benutzer-Datensätze</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.userGroupUidsForAdditionalAttendeesFrontEndUsers" xml:space="preserve"
-						approved="yes">
+			<trans-unit id="seminars.pi_flexform.userGroupUidsForAdditionalAttendeesFrontEndUsers" xml:space="preserve">
 				<source>FE user groups for the created FE users</source>
 				<target>FE-Benutzergruppen für die angelegten FE-Benutzer-Datensätze</target>
 			</trans-unit>
@@ -1369,8 +1362,7 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Allow editing organizers:</source>
 				<target>Erlaube das Bearbeiten von Veranstaltern:</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfPaymentMethods" xml:space="preserve"
-						approved="yes">
+			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfPaymentMethods" xml:space="preserve">
 				<source>Allow editing payment methods:</source>
 				<target>Erlaube das Bearbeiten von Zahlungsarten:</target>
 			</trans-unit>
@@ -1390,8 +1382,7 @@ Wir konnten dieser Veranstaltung nun fest zusagen.</target>
 				<source>Allow editing foods:</source>
 				<target>Erlaube das Bearbeiten von Verpflegungen:</target>
 			</trans-unit>
-			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfTargetGroups" xml:space="preserve"
-						approved="yes">
+			<trans-unit id="seminars.pi_flexform.allowFrontEndEditingOfTargetGroups" xml:space="preserve">
 				<source>Allow editing target groups:</source>
 				<target>Erlaube das Bearbeiten von Zielgruppen:</target>
 			</trans-unit>

@@ -152,8 +152,7 @@
 				<source>confirmed</source>
 				<target>bestätigt</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.automatic_confirmation_cancelation" xml:space="preserve"
-						approved="yes">
+			<trans-unit id="tx_seminars_seminars.automatic_confirmation_cancelation" xml:space="preserve">
 				<source>Set the status automatically</source>
 				<target>Den Status automatisch setzen</target>
 			</trans-unit>
@@ -201,8 +200,7 @@
 				<source>Organizers have been reminded about this event being about to take place</source>
 				<target>Veranstalter wurde an den baldigen Veranstaltungsbeginn erinnert</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.cancelation_deadline_reminder_sent" xml:space="preserve"
-						approved="yes">
+			<trans-unit id="tx_seminars_seminars.cancelation_deadline_reminder_sent" xml:space="preserve">
 				<source>Organizers have been notified that the cancelation deadline has just passed</source>
 				<target>Veranstalter wurden an die vor kurzem abgelaufene Absagefrist erinnert</target>
 			</trans-unit>
@@ -338,8 +336,7 @@
 				<source>Number of offline-registered attendees</source>
 				<target>Anzahl der offline angemeldeten TeilnehmerInnen</target>
 			</trans-unit>
-			<trans-unit id="tx_seminars_seminars.organizers_notified_about_minimum_reached" xml:space="preserve"
-						approved="yes">
+			<trans-unit id="tx_seminars_seminars.organizers_notified_about_minimum_reached" xml:space="preserve">
 				<source>Organizers have been notified that the minimum number of attendees has been reached</source>
 				<target>Veranstalter wurde benachrichtigt, dass es genug Teilnehmer gibt</target>
 			</trans-unit>
