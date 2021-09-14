@@ -25,6 +25,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop the `approved` flag from locallang labels (#745)
 
 ### Fixed
+- Require `ext-pdo` in the `composer.json` (#837)
 - Fix the parameter type in the typolink creation calls (#811)
 - Improve the type annotations
   (#790, #791, #792, #793, #796, #797, #798, #799, #800, #801, #805, #807, #809, #812, #813, #814)

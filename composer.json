@@ -27,6 +27,7 @@
 	"require": {
 		"php": "^7.0.0 || ~8.0.0",
 		"ext-json": "*",
+		"ext-pdo": "*",
 		"digedag/rn-base": "^1.11.4",
 		"dmk/mkforms": "^9.5.2",
 		"oliverklee/oelib": "^3.6.0",
