@@ -163,7 +163,7 @@ class DataHandlerHook
         $this->copyDatesFromTimeSlots($uid, $updatedData);
         $this->sanitizeEventDates($updatedData);
 
-        /** @var HookProvider $dataSanitizationHookProvider*/
+        /** @var HookProvider $dataSanitizationHookProvider */
         $dataSanitizationHookProvider = GeneralUtility::makeInstance(HookProvider::class, DataSanitization::class);
         $updatedData = array_merge(
             $updatedData,
@@ -184,25 +184,26 @@ class DataHandlerHook
             return;
         }
 
-        $this->getConnectionForTable(self::TABLE_PLACES_ASSOCIATION)
-            ->delete(self::TABLE_PLACES_ASSOCIATION, ['uid_local' => $uid]);
-
         $timeSlots = $this->getConnectionForTable(self::TABLE_TIME_SLOTS)
             ->select(['*'], self::TABLE_TIME_SLOTS, ['seminar' => $uid])->fetchAll();
 
-        $placesCount = 0;
+        /** @var array<int, int> $placesUids */
+        $placesUids = [];
         foreach ($timeSlots as $timeSlot) {
-            $place = (int)$timeSlot['place'];
-            if ($place === 0) {
+            $placeUid = (int)$timeSlot['place'];
+            if ($placeUid === 0) {
                 continue;
             }
-
-            $this->getConnectionForTable(self::TABLE_PLACES_ASSOCIATION)
-                ->insert(self::TABLE_PLACES_ASSOCIATION, ['uid_local' => $uid, 'uid_foreign' => $place]);
-            $placesCount++;
+            $placesUids[] = $placeUid;
         }
 
-        $data['place'] = $placesCount;
+        $connection = $this->getConnectionForTable(self::TABLE_PLACES_ASSOCIATION);
+        $connection->delete(self::TABLE_PLACES_ASSOCIATION, ['uid_local' => $uid]);
+        foreach (\array_unique($placesUids, SORT_NUMERIC) as $placeUid) {
+            $connection->insert(self::TABLE_PLACES_ASSOCIATION, ['uid_local' => $uid, 'uid_foreign' => $placeUid]);
+        }
+
+        $data['place'] = \count($placesUids);
     }
 
     /**

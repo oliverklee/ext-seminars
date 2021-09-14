@@ -570,13 +570,14 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * The second dimension is associative with the following keys:
      * title, address, city, country, homepage, directions
      *
-     * @return array[] all places as a two-dimensional array, will be empty if there are no places assigned
+     * @return array<int, array<string, string|int>>
+     *         all places as a two-dimensional array, will be empty if there are no places assigned
      */
     protected function getPlacesAsArray(): array
     {
         $queryBuilder = self::getQueryBuilderForTable('tx_seminars_sites');
 
-        return $queryBuilder
+        $result = $queryBuilder
             ->select('uid', 'title', 'address', 'zip', 'city', 'country', 'homepage', 'directions')
             ->from('tx_seminars_sites')
             ->leftJoin(
@@ -597,6 +598,19 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             ->orderBy('mm.sorting')
             ->execute()
             ->fetchAll();
+
+        /** @var array<int, array<string, string|int>> $resultWithoutDuplicates */
+        $resultWithoutDuplicates = [];
+        /** @var array<int, bool> $usedUids */
+        $usedUids = [];
+        foreach ($result as $row) {
+            $placeUid = $row['uid'];
+            if (!isset($usedUids[$placeUid])) {
+                $usedUids[$placeUid] = true;
+                $resultWithoutDuplicates[] = $row;
+            }
+        }
+        return $resultWithoutDuplicates;
     }
 
     /**
