@@ -32,7 +32,7 @@ class Tx_Seminars_FrontEnd_EventHeadline extends \Tx_Seminars_FrontEnd_AbstractV
     /**
      * Creates the event headline, consisting of the event title and date.
      *
-     * @return string HTML code of the event headline, will be empty if an invalid or no event ID was set in piVar 'uid'
+     * @return string HTML code of the event headline, will be empty if an invalid or no event ID was set in piVar 'showUid'
      */
     public function render(): string
     {
@@ -40,7 +40,7 @@ class Tx_Seminars_FrontEnd_EventHeadline extends \Tx_Seminars_FrontEnd_AbstractV
             throw new \BadMethodCallException('The method injectEventMapper() needs to be called first.', 1333614794);
         }
 
-        $eventId = (int)$this->piVars['uid'];
+        $eventId = (int)$this->piVars['showUid'];
         if ($eventId <= 0) {
             return '';
         }
