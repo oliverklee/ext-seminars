@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\OldModel;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
+use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
-use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
 /**
  * Test case.
@@ -18,8 +19,10 @@ use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
  */
 final class EventTest extends FunctionalTestCase
 {
+    use LanguageHelper;
+
     /**
-     * @var array
+     * @var array<string, string>
      */
     const CONFIGURATION = [
         'dateFormatYMD' => '%d.%m.%Y',
@@ -27,22 +30,22 @@ final class EventTest extends FunctionalTestCase
     ];
 
     /**
-     * @var string[]
+     * @var array<int, string>
      */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**
-     * @var string[]
+     * @var array<int, string>
      */
     protected $additionalFoldersToCreate = ['uploads/tx_seminars'];
 
     /**
-     * @var string[]
+     * @var array<int, string>
      */
     private $filesToDelete = [];
 
     /**
-     * @var AbstractPlugin|null
+     * @var TemplateHelper|null
      */
     private $plugin = null;
 
@@ -55,7 +58,8 @@ final class EventTest extends FunctionalTestCase
 
     private function buildPlugin()
     {
-        $plugin = new AbstractPlugin();
+        $plugin = new TemplateHelper();
+        $plugin->init(['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html']);
         $plugin->cObj = new ContentObjectRenderer();
         $this->plugin = $plugin;
     }
@@ -683,5 +687,155 @@ final class EventTest extends FunctionalTestCase
 
         self::assertContains($topicFileName, $result[0]['name']);
         self::assertContains($dateFileName, $result[1]['name']);
+    }
+
+    /**
+     * @test
+     */
+    public function getPlacesWithCountryWithoutPlacesReturnsEmptyArray()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+
+        $subject = TestingEvent::fromUid(1);
+        $result = $subject->getPlacesWithCountry();
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getPlacesWithCountryForPlacesWithoutCountryReturnsEmptyArray()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+
+        $subject = TestingEvent::fromUid(2);
+        $result = $subject->getPlacesWithCountry();
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getPlacesWithCountryForPlacesWithValidCountryReturnsCountryCode()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+
+        $subject = TestingEvent::fromUid(4);
+        $result = $subject->getPlacesWithCountry();
+
+        self::assertSame(['ch'], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getPlacesWithCountryForPlacesWithInvalidCountryReturnsCountryCode()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+
+        $subject = TestingEvent::fromUid(5);
+        $result = $subject->getPlacesWithCountry();
+
+        self::assertSame(['xy'], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getPlacesWithCountryWillReturnCountriesInSortingOrder()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+
+        $subject = TestingEvent::fromUid(7);
+        $result = $subject->getPlacesWithCountry();
+
+        self::assertSame(['de', 'ch'], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function getPlacesWithCountryIgnoresDeletedCountry()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+
+        $subject = TestingEvent::fromUid(6);
+        $result = $subject->getPlacesWithCountry();
+
+        self::assertSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function hasCountryForNoPlacesReturnsFalse()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+
+        $subject = TestingEvent::fromUid(1);
+
+        self::assertFalse($subject->hasCountry());
+    }
+
+    /**
+     * @test
+     */
+    public function hasCountryForPlaceWithoutCountryReturnsFalse()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+
+        $subject = TestingEvent::fromUid(2);
+
+        self::assertFalse($subject->hasCountry());
+    }
+
+    /**
+     * @test
+     */
+    public function hasCountryForPlaceWithDeletedCountryReturnsFalse()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+
+        $subject = TestingEvent::fromUid(6);
+
+        self::assertFalse($subject->hasCountry());
+    }
+
+    /**
+     * @test
+     */
+    public function hasCountryForPlaceWithCountryReturnsTrue()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+
+        $subject = TestingEvent::fromUid(4);
+
+        self::assertTrue($subject->hasCountry());
+    }
+
+    /**
+     * @test
+     */
+    public function getPlaceShortReturnsPlaceName()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+
+        $subject = TestingEvent::fromUid(2);
+
+        self::assertContains('The Castle', $subject->getPlaceShort());
+    }
+
+    /**
+     * @test
+     */
+    public function getPlaceShortIgnoresDuplicatePlaces()
+    {
+        $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
+
+        $subject = TestingEvent::fromUid(3);
+
+        self::assertSame(1, \substr_count($subject->getPlaceShort(), 'The Castle'));
     }
 }

@@ -762,19 +762,31 @@ final class EventTest extends TestCase
 
         self::assertSame(
             0,
-            $connection->count('*', 'tx_seminars_seminars_organizing_partners_mm', ['uid_local' => $this->subject->getUid()])
+            $connection->count(
+                '*',
+                'tx_seminars_seminars_organizing_partners_mm',
+                ['uid_local' => $this->subject->getUid()]
+            )
         );
 
         $this->addOrganizingPartnerRelation();
         self::assertSame(
             1,
-            $connection->count('*', 'tx_seminars_seminars_organizing_partners_mm', ['uid_local' => $this->subject->getUid()])
+            $connection->count(
+                '*',
+                'tx_seminars_seminars_organizing_partners_mm',
+                ['uid_local' => $this->subject->getUid()]
+            )
         );
 
         $this->addOrganizingPartnerRelation();
         self::assertSame(
             2,
-            $connection->count('*', 'tx_seminars_seminars_organizing_partners_mm', ['uid_local' => $this->subject->getUid()])
+            $connection->count(
+                '*',
+                'tx_seminars_seminars_organizing_partners_mm',
+                ['uid_local' => $this->subject->getUid()]
+            )
         );
     }
 
@@ -904,19 +916,31 @@ final class EventTest extends TestCase
 
         self::assertSame(
             0,
-            $connection->count('*', 'tx_seminars_seminars_speakers_mm_partners', ['uid_local' => $this->subject->getUid()])
+            $connection->count(
+                '*',
+                'tx_seminars_seminars_speakers_mm_partners',
+                ['uid_local' => $this->subject->getUid()]
+            )
         );
 
         $this->addPartnerRelation([]);
         self::assertSame(
             1,
-            $connection->count('*', 'tx_seminars_seminars_speakers_mm_partners', ['uid_local' => $this->subject->getUid()])
+            $connection->count(
+                '*',
+                'tx_seminars_seminars_speakers_mm_partners',
+                ['uid_local' => $this->subject->getUid()]
+            )
         );
 
         $this->addPartnerRelation([]);
         self::assertSame(
             2,
-            $connection->count('*', 'tx_seminars_seminars_speakers_mm_partners', ['uid_local' => $this->subject->getUid()])
+            $connection->count(
+                '*',
+                'tx_seminars_seminars_speakers_mm_partners',
+                ['uid_local' => $this->subject->getUid()]
+            )
         );
     }
 
@@ -952,19 +976,31 @@ final class EventTest extends TestCase
 
         self::assertSame(
             0,
-            $connection->count('*', 'tx_seminars_seminars_speakers_mm_tutors', ['uid_local' => $this->subject->getUid()])
+            $connection->count(
+                '*',
+                'tx_seminars_seminars_speakers_mm_tutors',
+                ['uid_local' => $this->subject->getUid()]
+            )
         );
 
         $this->addTutorRelation([]);
         self::assertSame(
             1,
-            $connection->count('*', 'tx_seminars_seminars_speakers_mm_tutors', ['uid_local' => $this->subject->getUid()])
+            $connection->count(
+                '*',
+                'tx_seminars_seminars_speakers_mm_tutors',
+                ['uid_local' => $this->subject->getUid()]
+            )
         );
 
         $this->addTutorRelation([]);
         self::assertSame(
             2,
-            $connection->count('*', 'tx_seminars_seminars_speakers_mm_tutors', ['uid_local' => $this->subject->getUid()])
+            $connection->count(
+                '*',
+                'tx_seminars_seminars_speakers_mm_tutors',
+                ['uid_local' => $this->subject->getUid()]
+            )
         );
     }
 
@@ -1000,19 +1036,31 @@ final class EventTest extends TestCase
 
         self::assertSame(
             0,
-            $connection->count('*', 'tx_seminars_seminars_speakers_mm_leaders', ['uid_local' => $this->subject->getUid()])
+            $connection->count(
+                '*',
+                'tx_seminars_seminars_speakers_mm_leaders',
+                ['uid_local' => $this->subject->getUid()]
+            )
         );
 
         $this->addLeaderRelation([]);
         self::assertSame(
             1,
-            $connection->count('*', 'tx_seminars_seminars_speakers_mm_leaders', ['uid_local' => $this->subject->getUid()])
+            $connection->count(
+                '*',
+                'tx_seminars_seminars_speakers_mm_leaders',
+                ['uid_local' => $this->subject->getUid()]
+            )
         );
 
         $this->addLeaderRelation([]);
         self::assertSame(
             2,
-            $connection->count('*', 'tx_seminars_seminars_speakers_mm_leaders', ['uid_local' => $this->subject->getUid()])
+            $connection->count(
+                '*',
+                'tx_seminars_seminars_speakers_mm_leaders',
+                ['uid_local' => $this->subject->getUid()]
+            )
         );
     }
 
@@ -2593,191 +2641,6 @@ final class EventTest extends TestCase
 
         self::assertTrue(
             $this->subject->isUnregistrationPossible()
-        );
-    }
-
-    // Tests regarding the country field of the place records
-
-    /**
-     * @test
-     */
-    public function getPlacesWithCountry()
-    {
-        $this->addPlaceRelation(
-            [
-                'country' => 'ch',
-            ]
-        );
-
-        self::assertSame(
-            ['ch'],
-            $this->subject->getPlacesWithCountry()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getPlacesWithCountryWithNoCountry()
-    {
-        $this->addPlaceRelation(
-            [
-                'country' => '',
-            ]
-        );
-
-        self::assertSame(
-            [],
-            $this->subject->getPlacesWithCountry()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getPlacesWithCountryWithInvalidCountry()
-    {
-        $this->addPlaceRelation(
-            [
-                'country' => 'xy',
-            ]
-        );
-
-        self::assertSame(
-            ['xy'],
-            $this->subject->getPlacesWithCountry()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getPlacesWithCountryWithNoPlace()
-    {
-        self::assertSame(
-            [],
-            $this->subject->getPlacesWithCountry()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getPlacesWithCountryWithDeletedPlace()
-    {
-        $this->addPlaceRelation(
-            [
-                'country' => 'at',
-                'deleted' => 1,
-            ]
-        );
-
-        self::assertSame(
-            [],
-            $this->subject->getPlacesWithCountry()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getPlacesWithCountryWithMultipleCountries()
-    {
-        $this->addPlaceRelation(
-            [
-                'country' => 'ch',
-            ]
-        );
-        $this->addPlaceRelation(
-            [
-                'country' => 'de',
-            ]
-        );
-
-        self::assertSame(
-            ['ch', 'de'],
-            $this->subject->getPlacesWithCountry()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasCountry()
-    {
-        $this->addPlaceRelation(
-            [
-                'country' => 'ch',
-            ]
-        );
-
-        self::assertTrue(
-            $this->subject->hasCountry()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasCountryWithNoCountry()
-    {
-        $this->addPlaceRelation(
-            [
-                'country' => '',
-            ]
-        );
-
-        self::assertFalse(
-            $this->subject->hasCountry()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasCountryWithInvalicCountry()
-    {
-        $this->addPlaceRelation(
-            [
-                'country' => 'xy',
-            ]
-        );
-
-        // We expect a TRUE even if the country code is invalid! See function's
-        // comment on this.
-        self::assertTrue(
-            $this->subject->hasCountry()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasCountryWithNoPlace()
-    {
-        self::assertFalse(
-            $this->subject->hasCountry()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function hasCountryWithMultipleCountries()
-    {
-        $this->addPlaceRelation(
-            [
-                'country' => 'ch',
-            ]
-        );
-        $this->addPlaceRelation(
-            [
-                'country' => 'de',
-            ]
-        );
-
-        self::assertTrue(
-            $this->subject->hasCountry()
         );
     }
 
@@ -5550,6 +5413,25 @@ final class EventTest extends TestCase
     /**
      * @test
      */
+    public function getPlaceWithDetailsListsDuplicateAssociationsOnlyOnce()
+    {
+        $this->createPi1();
+        $placeTitle = 'a place';
+        $placeUid = $this->testingFramework->createRecord('tx_seminars_sites', ['title' => $placeTitle]);
+        $eventUid = $this->subject->getUid();
+
+        $this->testingFramework->createRelation('tx_seminars_seminars_place_mm', $eventUid, $placeUid);
+        $this->testingFramework->createRelation('tx_seminars_seminars_place_mm', $eventUid, $placeUid);
+        $this->subject->setNumberOfPlaces(2);
+
+        $result = $this->subject->getPlaceWithDetails($this->pi1);
+
+        self::assertSame(1, \substr_count($result, $placeTitle));
+    }
+
+    /**
+     * @test
+     */
     public function getPlaceWithDetailsContainsAddressOfOnePlace()
     {
         $this->createPi1();
@@ -5700,6 +5582,24 @@ final class EventTest extends TestCase
     /**
      * @test
      */
+    public function getPlaceWithDetailsRawListsDuplicateAssociationsOnlyOnce()
+    {
+        $placeTitle = 'a place';
+        $placeUid = $this->testingFramework->createRecord('tx_seminars_sites', ['title' => $placeTitle]);
+        $eventUid = $this->subject->getUid();
+
+        $this->testingFramework->createRelation('tx_seminars_seminars_place_mm', $eventUid, $placeUid);
+        $this->testingFramework->createRelation('tx_seminars_seminars_place_mm', $eventUid, $placeUid);
+        $this->subject->setNumberOfPlaces(2);
+
+        $result = $this->subject->getPlaceWithDetailsRaw();
+
+        self::assertSame(1, \substr_count($result, $placeTitle));
+    }
+
+    /**
+     * @test
+     */
     public function getPlaceWithDetailsRawContainsAddressOfOnePlace()
     {
         $this->addPlaceRelation(
@@ -5838,6 +5738,24 @@ final class EventTest extends TestCase
             'another place',
             $this->subject->getPlaceShort()
         );
+    }
+
+    /**
+     * @test
+     */
+    public function getPlaceShortListsDuplicateAssociationsOnlyOnce()
+    {
+        $placeTitle = 'a place';
+        $placeUid = $this->testingFramework->createRecord('tx_seminars_sites', ['title' => $placeTitle]);
+        $eventUid = $this->subject->getUid();
+
+        $this->testingFramework->createRelation('tx_seminars_seminars_place_mm', $eventUid, $placeUid);
+        $this->testingFramework->createRelation('tx_seminars_seminars_place_mm', $eventUid, $placeUid);
+        $this->subject->setNumberOfPlaces(2);
+
+        $result = $this->subject->getPlaceShort();
+
+        self::assertSame(1, \substr_count($result, $placeTitle));
     }
 
     // Tests concerning getPlaces

@@ -510,23 +510,19 @@ final class DataHandlerHookTest extends FunctionalTestCase
     }
 
     /**
-     * @return int[][]
+     * @return array<string, array<int, int>>
      */
     public function placesToAddFromTimeSlotsDataProvider(): array
     {
         return [
             '1 time slot with place' => [1, 1],
-            // This currently is broken: #212
-            // '2 time slots with the same place' => [2, 1],
+            '2 time slots with the same place' => [2, 1],
             '2 time slots with different places' => [3, 2],
         ];
     }
 
     /**
      * @test
-     *
-     * @param int $uid
-     * @param int $expected
      *
      * @dataProvider placesToAddFromTimeSlotsDataProvider
      */
