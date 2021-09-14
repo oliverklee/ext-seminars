@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Hooks;
 
 use OliverKlee\Seminars\Hooks\Interfaces\DataSanitization;
+use Recurr\Rule;
+use Recurr\Transformer\ArrayTransformer;
+use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
@@ -42,9 +45,54 @@ class DataHandlerHook
     const TABLE_PLACES_ASSOCIATION = 'tx_seminars_seminars_place_mm';
 
     /**
+     * @var string
+     *
+     * @deprecated will be removed in seminars 4.0
+     */
+    const DATE_RENDER_FORMAT = 'Y-m-d\\TH:i:s\\Z';
+
+    /**
+     * @var string
+     *
+     * @deprecated will be removed in seminars 4.0
+     */
+    const DATE_PARSE_FORMAT = 'Y-m-d?H:i:s?';
+
+    /**
      * @var DataHandler
      */
     private $dataHandler = null;
+
+    /**
+     * Creates the time slots requested by the time slot wizard (if any are requested).
+     *
+     * @return void
+     *
+     * @deprecated will be removed in seminars 4.0
+     */
+    public function processDatamap_beforeStart(DataHandler $dataHandler)
+    {
+        $allData = &$dataHandler->datamap;
+        if (!isset($allData['tx_seminars_seminars'])) {
+            return;
+        }
+
+        if (!isset($allData['tx_seminars_timeslots'])) {
+            $allData['tx_seminars_timeslots'] = [];
+        }
+        $allTimeSlots = &$allData['tx_seminars_timeslots'];
+
+        $events = &$allData['tx_seminars_seminars'];
+        foreach ($events as $eventUid => &$event) {
+            $wizardConfiguration = (array)$event['time_slot_wizard'];
+            unset($event['time_slot_wizard']);
+            if (!$this->isValidTimeSlotConfiguration($wizardConfiguration)) {
+                continue;
+            }
+
+            $this->createTimeSlots($event, $eventUid, $wizardConfiguration, $allTimeSlots);
+        }
+    }
 
     /**
      * Handles data after everything had been written to the database.
@@ -134,9 +182,6 @@ class DataHandlerHook
     }
 
     /**
-     * @param int $uid
-     * @param array $data
-     *
      * @return void
      */
     private function copyPlacesFromTimeSlots(int $uid, array &$data)
@@ -167,9 +212,6 @@ class DataHandlerHook
     }
 
     /**
-     * @param int $uid
-     * @param array $data
-     *
      * @return void
      */
     private function copyDatesFromTimeSlots(int $uid, array &$data)
@@ -183,9 +225,6 @@ class DataHandlerHook
     }
 
     /**
-     * @param int $uid
-     * @param array $data
-     *
      * @return void
      */
     private function copyBeginDateFromTimeSlots(int $uid, array &$data)
@@ -202,9 +241,6 @@ class DataHandlerHook
     }
 
     /**
-     * @param int $uid
-     * @param array $data
-     *
      * @return void
      */
     private function copyEndDateFromTimeSlots(int $uid, array &$data)
@@ -238,6 +274,88 @@ class DataHandlerHook
         if ($earlyBirdDeadline > $beginDate || $earlyBirdDeadline > $registrationDeadline) {
             $data['deadline_early_bird'] = 0;
         }
+    }
+
+    /**
+     * @deprecated will be removed in seminars 4.0
+     */
+    private function isValidTimeSlotConfiguration(array $configuration): bool
+    {
+        $requiredFields = ['first_start', 'first_end', 'all', 'frequency', 'until'];
+        foreach ($requiredFields as $field) {
+            if (empty($configuration[$field])) {
+                return false;
+            }
+        }
+
+        $all = (int)$configuration['all'];
+        $valid = $all > 0;
+
+        $validFrequencies = ['daily', 'weekly', 'monthly', 'yearly'];
+        $frequency = $configuration['frequency'];
+        $valid = $valid && \in_array($frequency, $validFrequencies, true);
+
+        $firstStart = \DateTime::createFromFormat(self::DATE_RENDER_FORMAT, $configuration['first_start'])
+            ->getTimestamp();
+        $firstEnd = \DateTime::createFromFormat(self::DATE_RENDER_FORMAT, $configuration['first_end'])->getTimestamp();
+        $until = \DateTime::createFromFormat(self::DATE_RENDER_FORMAT, $configuration['until'])->getTimestamp();
+        $valid = $valid && $firstStart > 0 && $firstEnd > $firstStart && $until > $firstStart;
+
+        return $valid;
+    }
+
+    /**
+     * @param string|int $eventUid
+     *
+     * @return void
+     *
+     * @deprecated will be removed in seminars 4.0
+     */
+    private function createTimeSlots(array &$event, $eventUid, array $configuration, array &$allTimeSlots)
+    {
+        if (!\class_exists(Rule::class)) {
+            require_once __DIR__ . '/../../Resources/Private/Php/vendor/autoload.php';
+        }
+
+        if (isset($event['pid'])) {
+            $eventPid = (int)$event['pid'];
+        } else {
+            $record = BackendUtility::getRecord('tx_seminars_seminars', $eventUid, 'pid');
+            $eventPid = (int)$record['pid'];
+        }
+
+        $timeSlotUids = GeneralUtility::trimExplode(',', $event['timeslots']);
+
+        $all = (int)$configuration['all'];
+        $frequency = $configuration['frequency'];
+        $firstStart = \DateTime::createFromFormat(self::DATE_RENDER_FORMAT, $configuration['first_start']);
+        $firstEnd = \DateTime::createFromFormat(self::DATE_RENDER_FORMAT, $configuration['first_end']);
+        $until = \DateTime::createFromFormat(self::DATE_RENDER_FORMAT, $configuration['until']);
+
+        $frequencyCommand = \strtoupper($frequency);
+        $rule = new Rule();
+        $rule->setStartDate($firstStart)
+            ->setEndDate($firstEnd)
+            ->setFreq($frequencyCommand)
+            ->setInterval($all)
+            ->setUntil($until);
+
+        $recurrences = (new ArrayTransformer())->transform($rule);
+        foreach ($recurrences as $recurrence) {
+            $temporaryUid = \uniqid('NEW', true);
+            $timeSlotUids[] = $temporaryUid;
+            $start = $recurrence->getStart();
+            $end = $recurrence->getEnd();
+            $formattedStart = $start->format(self::DATE_RENDER_FORMAT);
+            $formattedEnd = $end->format(self::DATE_RENDER_FORMAT);
+            $allTimeSlots[$temporaryUid] = [
+                'pid' => $eventPid,
+                'begin_date' => $formattedStart,
+                'end_date' => $formattedEnd,
+            ];
+        }
+
+        $event['timeslots'] = \implode(',', $timeSlotUids);
     }
 
     protected function getQueryBuilderForTable(string $table): QueryBuilder
