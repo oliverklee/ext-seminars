@@ -54,6 +54,7 @@ Known problems
   need to remove `STRICT_TRANS_TABLES` from `sql_mode`:
 
 .. code-block:: ini
+
    # This is required for the seminars FE editor to graciously convert "" to 0
    # for integer columns (which is a shortcoming of the "mkforms" extension).
    sql_mode=ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
