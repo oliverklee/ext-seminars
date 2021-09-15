@@ -6,8 +6,8 @@
 conf.py:
     copyright: 2021
     project: Seminar Manager
-    version: 3.3
-    release: 3.3.3
+    version: 3.4
+    release: 3.4.0
     latex_documents:
     -   - Index
         - seminars.tex

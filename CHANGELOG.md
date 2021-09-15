@@ -6,6 +6,18 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+### Fixed
+
+## x.y.z
+
+### Added
 - Document the upgrade path (#844)
 - Add a BE forms wizard for creating a series of time slots (#820, #832)
 - Add PHPStan to the CI builds (#763)
@@ -20,8 +32,6 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Update the php-cs-fixer configuration (#773)
 - Update the `.editorconfig` to better match the Core (#739)
 - Require oelib >= 3.6.1 (#737, #738, #777, #787, #795, #802, #841)
-
-### Deprecated
 
 ### Removed
 - Drop the `approved` flag from locallang labels (#745)
