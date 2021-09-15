@@ -68,3 +68,11 @@ Bekannte Probleme
 - Wenn die maximale Upload-Dateigröße in PHP auf einen niedrigeren Wert
   gesetzt ist, als in TYPO3 konfiguriert ist, wird bei der Bearbeitung
   von Veranstaltungen in FE keine Fehlermeldung angezeigt.
+
+- Der Front-end-Editor funktioniert mit MySQL/MariaDB nicht im Strict-Mode.
+  Deswegen ist es notwendig, `STRICT_TRANS_TABLES` aus `sql_mode` zu entfernen:
+
+.. code-block:: ini
+   # This is required for the seminars FE editor to graciously convert "" to 0
+   # for integer columns (which is a shortcoming of the "mkforms" extension).
+   sql_mode=ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION

@@ -49,3 +49,11 @@ Known problems
 - If the maximum upload file size in PHP is set to a lower value than
   the one in TYPO3, the FE editor does not show an error message if one
   tries to upload a too large file.
+
+- The front-end editor does not work with MySQL/MariaDB in strict mode. You will
+  need to remove `STRICT_TRANS_TABLES` from `sql_mode`:
+
+.. code-block:: ini
+   # This is required for the seminars FE editor to graciously convert "" to 0
+   # for integer columns (which is a shortcoming of the "mkforms" extension).
+   sql_mode=ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
