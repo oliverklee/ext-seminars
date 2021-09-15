@@ -1,11 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Parameter \\#1 \\$keys of method OliverKlee\\\\Oelib\\\\Templating\\\\TemplateHelper\\:\\:ensureIntegerArrayValues\\(\\) expects array\\<string, string\\>, array\\<int, string\\> given\\.$#"
-			count: 1
-			path: Classes/FrontEnd/DefaultController.php
-
-		-
 			message: "#^Parameter \\#2 \\$pageId of method Tx_Seminars_FrontEnd_DefaultController\\:\\:getLoginLink\\(\\) expects int, string given\\.$#"
 			count: 1
 			path: Classes/FrontEnd/DefaultController.php
