@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Document the upgrade path (#844)
 - Add a BE forms wizard for creating a series of time slots (#820, #832)
 - Add PHPStan to the CI builds (#763)
 - Allow installations up to PHP 8.0 (#758)

@@ -23,6 +23,7 @@ Installation
    :glob:
 
    DieErweiterungInstallieren/Index
+   Upgrading
    HinweiseZuFlexformsUndTs-setup/Index
    KonfigurationEinesFrontend-benutzer-logins(egalWelcheLogin-erweiterung)/Index
    DasPluginKonfigurieren/Index
