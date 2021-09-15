@@ -50,7 +50,7 @@ Hooks zur Einzelansicht
 """""""""""""""""""""""
 
 .. important::
-    Die Nutzung von :php:`\Tx_Seminars_Interface_Hook_EventSingleView` ist veraltet seit
+    Die Nutzung von :php:`\Tx_Seminars_Interfaces_Hook_EventSingleView` ist veraltet seit
     seminars 3. Es wird in seminars 4 entfernt werden. Bitte aktualisieren Sie auf
     :php:`\OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView`.
 
@@ -95,7 +95,7 @@ Hooks zur Listenansicht
 """""""""""""""""""""""
 
 .. important::
-    Die Nutzung von :php:`\Tx_Seminars_Interface_Hook_EventListView` ist veraltet seit
+    Die Nutzung von :php:`\Tx_Seminars_Interfaces_Hook_EventListView` ist veraltet seit
     seminars 3. Es wird in seminars 4 entfernt werden. Bitte aktualisieren Sie auf
     :php:`\OliverKlee\Seminars\Hooks\Interfaces\SeminarListView`.
 
@@ -662,7 +662,7 @@ It's used like this:
 
 .. code-block:: php
 
-   class tx_seminarspaypal_Hooks_BackEndModule implements Tx_Seminars_Interface_Hook_BackEndModule {
+   class tx_seminarspaypal_Hooks_BackEndModule implements Tx_Seminars_Interfaces_Hook_BackEndModule {
          /**
         * Modifies the general e-mail sent via the back-end module.
         *

@@ -9,7 +9,7 @@ use OliverKlee\Oelib\Email\Mail;
  *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
-interface Tx_Seminars_Interface_Hook_BackEndModule
+interface Tx_Seminars_Interfaces_Hook_BackEndModule
 {
     /**
      * Modifies the general e-mail sent via the back-end module.
