@@ -40,7 +40,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: "${{ matrix.php-version }}"
-          tools: composer:v2,phive
+          tools: composer:v2
           extensions: zip
           coverage: none
       - name: "Show Composer version"
@@ -53,8 +53,6 @@ jobs:
           restore-keys: "php${{ matrix.php-version }}-composer-\n"
       - name: "Install Composer dependencies"
         run: "composer install --no-progress"
-      - name: "Install development tools"
-        run: "phive --no-progress install --trust-gpg-keys D32680D5957DC7116BE29C14CF1A108D0E7AE720"
       - name: "Run command"
         run: "composer ci:${{ matrix.command }}"
     strategy:

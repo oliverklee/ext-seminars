@@ -61,7 +61,7 @@ parameters:
 			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$array_arg of function key expects array, string given\\.$#"
+			message: "#^Parameter \\#1 \\$array_arg of function key expects array\\|object, string given\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Service/EmailServiceTest.php
 
