@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\Mapper;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
-use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 
 /**
  * @covers \Tx_Seminars_Mapper_BackEndUser
@@ -25,7 +24,6 @@ final class BackEndUserMapperTest extends FunctionalTestCase
     protected function setUp()
     {
         parent::setUp();
-        $GLOBALS['BE_USER'] = $this->prophesize(BackendUserAuthentication::class)->reveal();
 
         $this->subject = new \Tx_Seminars_Mapper_BackEndUser();
     }
