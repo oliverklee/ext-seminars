@@ -23,6 +23,7 @@ Installation
    :glob:
 
    InstallingTheExtension/Index
+   Upgrading
    RegardingFlexformsAndTsSetup/Index
    GetAFront-endUserLogin(anyPossiblyRegistration)Running/Index
    SetUpThePlug-in/Index
