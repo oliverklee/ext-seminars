@@ -303,7 +303,7 @@ final class EmailServiceTest extends TestCase
         $this->email->expects(self::once())->method('send');
         $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', $body);
 
-        self::assertContains(
+        self::assertStringContainsString(
             $body,
             $this->email->getBody()
         );
@@ -387,7 +387,7 @@ final class EmailServiceTest extends TestCase
         $this->email->expects(self::once())->method('send');
         $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', '%salutation (This was the salutation)');
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->user->getName(),
             $this->email->getBody()
         );
@@ -403,7 +403,7 @@ final class EmailServiceTest extends TestCase
         $this->email->expects(self::once())->method('send');
         $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello %userName!');
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Hello ' . $this->user->getName() . '!',
             $this->email->getBody()
         );
@@ -419,7 +419,7 @@ final class EmailServiceTest extends TestCase
         $this->email->expects(self::once())->method('send');
         $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Event: %eventTitle');
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Event: ' . $this->event->getTitle(),
             $this->email->getBody()
         );
@@ -437,7 +437,7 @@ final class EmailServiceTest extends TestCase
 
         $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Date: %eventDate');
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Date: ' . $formattedDate,
             $this->email->getBody()
         );
@@ -455,7 +455,7 @@ final class EmailServiceTest extends TestCase
         $this->email->expects(self::once())->method('send');
         $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '-- ',
             $this->email->getBody()
         );
@@ -471,7 +471,7 @@ final class EmailServiceTest extends TestCase
 
         $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
 
-        self::assertContains(
+        self::assertStringContainsString(
             "\n-- \n" . $this->organizer->getEMailFooter(),
             $this->email->getBody()
         );

@@ -2858,7 +2858,7 @@ final class EventTest extends TestCase
         $title = 'Test title';
         $this->addPaymentMethodRelation(['title' => $title]);
 
-        self::assertContains(
+        self::assertStringContainsString(
             $title,
             $this->subject->getPaymentMethodsPlain()
         );
@@ -2874,11 +2874,11 @@ final class EventTest extends TestCase
         $this->addPaymentMethodRelation(['title' => $firstTitle]);
         $this->addPaymentMethodRelation(['title' => $secondTitle]);
 
-        self::assertContains(
+        self::assertStringContainsString(
             $firstTitle,
             $this->subject->getPaymentMethodsPlain()
         );
-        self::assertContains(
+        self::assertStringContainsString(
             $secondTitle,
             $this->subject->getPaymentMethodsPlain()
         );
@@ -2957,7 +2957,7 @@ final class EventTest extends TestCase
         $title = 'Test title';
         $this->addPaymentMethodRelation(['title' => $title]);
 
-        self::assertContains(
+        self::assertStringContainsString(
             $title,
             $this->subject->getPaymentMethodsPlainShort()
         );
@@ -2971,11 +2971,11 @@ final class EventTest extends TestCase
         $this->addPaymentMethodRelation(['title' => 'Payment Method 1']);
         $this->addPaymentMethodRelation(['title' => 'Payment Method 2']);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Payment Method 1',
             $this->subject->getPaymentMethodsPlainShort()
         );
-        self::assertContains(
+        self::assertStringContainsString(
             'Payment Method 2',
             $this->subject->getPaymentMethodsPlainShort()
         );
@@ -2989,7 +2989,7 @@ final class EventTest extends TestCase
         $this->addPaymentMethodRelation(['title' => 'Payment Method 1']);
         $this->addPaymentMethodRelation(['title' => 'Payment Method 2']);
 
-        self::assertContains(
+        self::assertStringContainsString(
             "Payment Method 1\nPayment Method 2",
             $this->subject->getPaymentMethodsPlainShort()
         );
@@ -3003,7 +3003,7 @@ final class EventTest extends TestCase
         $this->addPaymentMethodRelation(['title' => 'Payment Method 1']);
         $this->addPaymentMethodRelation(['title' => 'Payment Method 2']);
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             "Payment Method 1\r\nPayment Method 2",
             $this->subject->getPaymentMethodsPlainShort()
         );
@@ -3083,7 +3083,7 @@ final class EventTest extends TestCase
         $title = 'Test payment method';
         $uid = $this->addPaymentMethodRelation(['title' => $title]);
 
-        self::assertContains(
+        self::assertStringContainsString(
             $title,
             $this->subject->getSinglePaymentMethodShort($uid)
         );
@@ -3588,7 +3588,7 @@ final class EventTest extends TestCase
         $this->createPi1();
         $this->addOrganizerRelation(['title' => 'foo']);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo',
             $this->subject->getOrganizers($this->pi1)
         );
@@ -3607,7 +3607,7 @@ final class EventTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<a href="http://www.bar.com',
             $this->subject->getOrganizers($this->pi1)
         );
@@ -3624,11 +3624,11 @@ final class EventTest extends TestCase
 
         $organizers = $this->subject->getOrganizers($this->pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo',
             $organizers
         );
-        self::assertContains(
+        self::assertStringContainsString(
             'bar',
             $organizers
         );
@@ -3691,11 +3691,11 @@ final class EventTest extends TestCase
             ['title' => 'test organizer 2', 'homepage' => '']
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'test organizer 1',
             $this->subject->getOrganizersRaw()
         );
-        self::assertContains(
+        self::assertStringContainsString(
             'test organizer 2',
             $this->subject->getOrganizersRaw()
         );
@@ -3719,11 +3719,11 @@ final class EventTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'test homepage 1',
             $this->subject->getOrganizersRaw()
         );
-        self::assertContains(
+        self::assertStringContainsString(
             'test homepage 2',
             $this->subject->getOrganizersRaw()
         );
@@ -3737,7 +3737,7 @@ final class EventTest extends TestCase
         $this->addOrganizerRelation(['title' => 'test organizer 1']);
         $this->addOrganizerRelation(['title' => 'test organizer 2']);
 
-        self::assertContains(
+        self::assertStringContainsString(
             "test organizer 1\ntest organizer 2",
             $this->subject->getOrganizersRaw()
         );
@@ -3751,7 +3751,7 @@ final class EventTest extends TestCase
         $this->addOrganizerRelation(['title' => 'test organizer 1']);
         $this->addOrganizerRelation(['title' => 'test organizer 2']);
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             "test organizer 1\r\ntest organizer 2",
             $this->subject->getOrganizersRaw()
         );
@@ -4319,7 +4319,7 @@ final class EventTest extends TestCase
     {
         $this->addSpeakerRelation(['title' => 'test speaker']);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'test speaker',
             $this->subject->getSpeakersWithDescriptionRaw()
         );
@@ -4332,7 +4332,7 @@ final class EventTest extends TestCase
     {
         $this->addSpeakerRelation(['organization' => 'test organization']);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'test organization',
             $this->subject->getSpeakersWithDescriptionRaw()
         );
@@ -4345,7 +4345,7 @@ final class EventTest extends TestCase
     {
         $this->addSpeakerRelation(['homepage' => 'test homepage']);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'test homepage',
             $this->subject->getSpeakersWithDescriptionRaw()
         );
@@ -4376,7 +4376,7 @@ final class EventTest extends TestCase
     {
         $this->addSpeakerRelation(['description' => 'test description']);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'test description',
             $this->subject->getSpeakersWithDescriptionRaw()
         );
@@ -4425,11 +4425,11 @@ final class EventTest extends TestCase
         $this->addSpeakerRelation(['title' => 'test speaker 1']);
         $this->addSpeakerRelation(['title' => 'test speaker 2']);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'test speaker 1',
             $this->subject->getSpeakersWithDescriptionRaw()
         );
-        self::assertContains(
+        self::assertStringContainsString(
             'test speaker 2',
             $this->subject->getSpeakersWithDescriptionRaw()
         );
@@ -4447,11 +4447,11 @@ final class EventTest extends TestCase
             ['organization' => 'test organization 2']
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'test organization 1',
             $this->subject->getSpeakersWithDescriptionRaw()
         );
-        self::assertContains(
+        self::assertStringContainsString(
             'test organization 2',
             $this->subject->getSpeakersWithDescriptionRaw()
         );
@@ -4465,7 +4465,7 @@ final class EventTest extends TestCase
         $this->addSpeakerRelation(['title' => 'test speaker']);
         $this->addPartnerRelation(['title' => 'test partner']);
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'test partner',
             $this->subject->getSpeakersWithDescriptionRaw()
         );
@@ -4478,7 +4478,7 @@ final class EventTest extends TestCase
     {
         $this->addPartnerRelation(['title' => 'test partner']);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'test partner',
             $this->subject->getSpeakersWithDescriptionRaw('partners')
         );
@@ -4491,7 +4491,7 @@ final class EventTest extends TestCase
     {
         $this->addLeaderRelation(['title' => 'test leader']);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'test leader',
             $this->subject->getSpeakersWithDescriptionRaw('leaders')
         );
@@ -4504,7 +4504,7 @@ final class EventTest extends TestCase
     {
         $this->addTutorRelation(['title' => 'test tutor']);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'test tutor',
             $this->subject->getSpeakersWithDescriptionRaw('tutors')
         );
@@ -4518,7 +4518,7 @@ final class EventTest extends TestCase
         $this->addSpeakerRelation(['title' => 'foo']);
         $this->addSpeakerRelation(['title' => 'bar']);
 
-        self::assertContains(
+        self::assertStringContainsString(
             "foo\nbar",
             $this->subject->getSpeakersWithDescriptionRaw()
         );
@@ -4532,7 +4532,7 @@ final class EventTest extends TestCase
         $this->addSpeakerRelation(['title' => 'foo']);
         $this->addSpeakerRelation(['title' => 'bar']);
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             "foo\r\nbar",
             $this->subject->getSpeakersWithDescriptionRaw()
         );
@@ -4705,11 +4705,11 @@ final class EventTest extends TestCase
         $shortSpeakerOutput
             = $this->subject->getSpeakersShort($this->pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'test speaker',
             $shortSpeakerOutput
         );
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '<a',
             $shortSpeakerOutput
         );
@@ -5108,7 +5108,7 @@ final class EventTest extends TestCase
     {
         $this->subject->setRecordType(\Tx_Seminars_Model_Event::TYPE_COMPLETE);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'EventComplete.',
             $this->subject->getRecordIcon()
         );
@@ -5121,7 +5121,7 @@ final class EventTest extends TestCase
     {
         $this->subject->setRecordType(\Tx_Seminars_Model_Event::TYPE_TOPIC);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'EventTopic.',
             $this->subject->getRecordIcon()
         );
@@ -5134,7 +5134,7 @@ final class EventTest extends TestCase
     {
         $this->subject->setRecordType(\Tx_Seminars_Model_Event::TYPE_DATE);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'EventDate.',
             $this->subject->getRecordIcon()
         );
@@ -5148,7 +5148,7 @@ final class EventTest extends TestCase
         $this->subject->setRecordType(\Tx_Seminars_Model_Event::TYPE_COMPLETE);
         $this->subject->setHidden(true);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'overlay-hidden.svg',
             $this->subject->getRecordIcon()
         );
@@ -5162,7 +5162,7 @@ final class EventTest extends TestCase
         $this->subject->setRecordType(\Tx_Seminars_Model_Event::TYPE_TOPIC);
         $this->subject->setHidden(true);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'overlay-hidden.svg',
             $this->subject->getRecordIcon()
         );
@@ -5176,7 +5176,7 @@ final class EventTest extends TestCase
         $this->subject->setRecordType(\Tx_Seminars_Model_Event::TYPE_DATE);
         $this->subject->setHidden(true);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'overlay-hidden.svg',
             $this->subject->getRecordIcon()
         );
@@ -5190,7 +5190,7 @@ final class EventTest extends TestCase
         $this->subject->setRecordType(\Tx_Seminars_Model_Event::TYPE_COMPLETE);
         $this->subject->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'EventComplete.',
             $this->subject->getRecordIcon()
         );
@@ -5204,7 +5204,7 @@ final class EventTest extends TestCase
         $this->subject->setRecordType(\Tx_Seminars_Model_Event::TYPE_TOPIC);
         $this->subject->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'EventTopic.',
             $this->subject->getRecordIcon()
         );
@@ -5218,7 +5218,7 @@ final class EventTest extends TestCase
         $this->subject->setRecordType(\Tx_Seminars_Model_Event::TYPE_DATE);
         $this->subject->setRecordStartTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'EventDate.',
             $this->subject->getRecordIcon()
         );
@@ -5232,7 +5232,7 @@ final class EventTest extends TestCase
         $this->subject->setRecordType(\Tx_Seminars_Model_Event::TYPE_COMPLETE);
         $this->subject->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
-        self::assertContains('overlay-endtime.svg', $this->subject->getRecordIcon());
+        self::assertStringContainsString('overlay-endtime.svg', $this->subject->getRecordIcon());
     }
 
     /**
@@ -5243,7 +5243,7 @@ final class EventTest extends TestCase
         $this->subject->setRecordType(\Tx_Seminars_Model_Event::TYPE_TOPIC);
         $this->subject->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
-        self::assertContains('overlay-endtime.svg', $this->subject->getRecordIcon());
+        self::assertStringContainsString('overlay-endtime.svg', $this->subject->getRecordIcon());
     }
 
     /**
@@ -5254,7 +5254,7 @@ final class EventTest extends TestCase
         $this->subject->setRecordType(\Tx_Seminars_Model_Event::TYPE_DATE);
         $this->subject->setRecordEndTime($GLOBALS['SIM_EXEC_TIME'] - 1000);
 
-        self::assertContains('overlay-endtime.svg', $this->subject->getRecordIcon());
+        self::assertStringContainsString('overlay-endtime.svg', $this->subject->getRecordIcon());
     }
 
     // Tests for hasSeparateDetailsPage
@@ -5371,7 +5371,7 @@ final class EventTest extends TestCase
     public function getPlaceWithDetailsReturnsWillBeAnnouncedForNoPlace()
     {
         $this->createPi1();
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('message_willBeAnnounced'),
             $this->subject->getPlaceWithDetails($this->pi1)
         );
@@ -5385,7 +5385,7 @@ final class EventTest extends TestCase
         $this->createPi1();
         $this->addPlaceRelation(['title' => 'a place']);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'a place',
             $this->subject->getPlaceWithDetails($this->pi1)
         );
@@ -5400,11 +5400,11 @@ final class EventTest extends TestCase
         $this->addPlaceRelation(['title' => 'a place']);
         $this->addPlaceRelation(['title' => 'another place']);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'a place',
             $this->subject->getPlaceWithDetails($this->pi1)
         );
-        self::assertContains(
+        self::assertStringContainsString(
             'another place',
             $this->subject->getPlaceWithDetails($this->pi1)
         );
@@ -5439,7 +5439,7 @@ final class EventTest extends TestCase
             ['title' => 'a place', 'address' => 'a street']
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'a street',
             $this->subject->getPlaceWithDetails($this->pi1)
         );
@@ -5455,7 +5455,7 @@ final class EventTest extends TestCase
             ['title' => 'a place', 'zip' => '12345', 'city' => 'Hamm']
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '12345',
             $this->subject->getPlaceWithDetails($this->pi1)
         );
@@ -5471,7 +5471,7 @@ final class EventTest extends TestCase
             ['title' => 'a place', 'zip' => '12345', 'city' => '']
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '12345',
             $this->subject->getPlaceWithDetails($this->pi1)
         );
@@ -5485,7 +5485,7 @@ final class EventTest extends TestCase
         $this->createPi1();
         $this->addPlaceRelation(['title' => 'a place', 'city' => 'Emden']);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Emden',
             $this->subject->getPlaceWithDetails($this->pi1)
         );
@@ -5499,7 +5499,7 @@ final class EventTest extends TestCase
         $this->createPi1();
         $this->addPlaceRelation(['title' => 'a place', 'country' => 'de']);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Deutschland',
             $this->subject->getPlaceWithDetails($this->pi1)
         );
@@ -5513,7 +5513,7 @@ final class EventTest extends TestCase
         $this->createPi1();
         $this->addPlaceRelation(['homepage' => 'www.test.com']);
 
-        self::assertContains(
+        self::assertStringContainsString(
             ' href="http://www.test.com',
             $this->subject->getPlaceWithDetails($this->pi1)
         );
@@ -5527,7 +5527,7 @@ final class EventTest extends TestCase
         $this->createPi1();
         $this->addPlaceRelation(['directions' => 'Turn right.']);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Turn right.',
             $this->subject->getPlaceWithDetails($this->pi1)
         );
@@ -5542,7 +5542,7 @@ final class EventTest extends TestCase
     {
         $this->testingFramework->createFakeFrontEnd();
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('message_willBeAnnounced'),
             $this->subject->getPlaceWithDetailsRaw()
         );
@@ -5555,7 +5555,7 @@ final class EventTest extends TestCase
     {
         $this->addPlaceRelation(['title' => 'a place']);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'a place',
             $this->subject->getPlaceWithDetailsRaw()
         );
@@ -5569,11 +5569,11 @@ final class EventTest extends TestCase
         $this->addPlaceRelation(['title' => 'a place']);
         $this->addPlaceRelation(['title' => 'another place']);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'a place',
             $this->subject->getPlaceWithDetailsRaw()
         );
-        self::assertContains(
+        self::assertStringContainsString(
             'another place',
             $this->subject->getPlaceWithDetailsRaw()
         );
@@ -5606,7 +5606,7 @@ final class EventTest extends TestCase
             ['title' => 'a place', 'address' => 'a street']
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'a street',
             $this->subject->getPlaceWithDetailsRaw()
         );
@@ -5619,7 +5619,7 @@ final class EventTest extends TestCase
     {
         $this->addPlaceRelation(['title' => 'a place', 'city' => 'Emden']);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Emden',
             $this->subject->getPlaceWithDetailsRaw()
         );
@@ -5632,7 +5632,7 @@ final class EventTest extends TestCase
     {
         $this->addPlaceRelation(['title' => 'a place', 'country' => 'de']);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Deutschland',
             $this->subject->getPlaceWithDetailsRaw()
         );
@@ -5645,7 +5645,7 @@ final class EventTest extends TestCase
     {
         $this->addPlaceRelation(['homepage' => 'www.test.com']);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'www.test.com',
             $this->subject->getPlaceWithDetailsRaw()
         );
@@ -5658,7 +5658,7 @@ final class EventTest extends TestCase
     {
         $this->addPlaceRelation(['directions' => 'Turn right.']);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Turn right.',
             $this->subject->getPlaceWithDetailsRaw()
         );
@@ -5672,7 +5672,7 @@ final class EventTest extends TestCase
         $this->addPlaceRelation(['title' => 'a place']);
         $this->addPlaceRelation(['title' => 'another place']);
 
-        self::assertContains(
+        self::assertStringContainsString(
             "a place\nanother place",
             $this->subject->getPlaceWithDetailsRaw()
         );
@@ -5686,7 +5686,7 @@ final class EventTest extends TestCase
         $this->addPlaceRelation(['title' => 'a place']);
         $this->addPlaceRelation(['title' => 'another place']);
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             "another place\r\na place",
             $this->subject->getPlaceWithDetailsRaw()
         );
@@ -5726,15 +5726,15 @@ final class EventTest extends TestCase
         $this->addPlaceRelation(['title' => 'a place']);
         $this->addPlaceRelation(['title' => 'another place']);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'a place',
             $this->subject->getPlaceShort()
         );
-        self::assertContains(
+        self::assertStringContainsString(
             ', ',
             $this->subject->getPlaceShort()
         );
-        self::assertContains(
+        self::assertStringContainsString(
             'another place',
             $this->subject->getPlaceShort()
         );
@@ -5785,10 +5785,7 @@ final class EventTest extends TestCase
     {
         $this->addPlaceRelation();
 
-        self::assertSame(
-            1,
-            $this->subject->getPlaces()->count()
-        );
+        self::assertCount(1, $this->subject->getPlaces());
     }
 
     // Tests concerning isOwnerFeUser
@@ -6092,7 +6089,7 @@ final class EventTest extends TestCase
     {
         $this->addLeaderRelation([]);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'leaders_',
             $this->subject->getLanguageKeySuffixForType('leaders')
         );
@@ -6107,7 +6104,7 @@ final class EventTest extends TestCase
             ['gender' => \Tx_Seminars_OldModel_Speaker::GENDER_MALE]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '_male',
             $this->subject->getLanguageKeySuffixForType('leaders')
         );
@@ -6122,7 +6119,7 @@ final class EventTest extends TestCase
             ['gender' => \Tx_Seminars_OldModel_Speaker::GENDER_FEMALE]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '_female',
             $this->subject->getLanguageKeySuffixForType('leaders')
         );
@@ -6137,7 +6134,7 @@ final class EventTest extends TestCase
             ['gender' => \Tx_Seminars_OldModel_Speaker::GENDER_UNKNOWN]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '_unknown',
             $this->subject->getLanguageKeySuffixForType('leaders')
         );
@@ -6150,7 +6147,7 @@ final class EventTest extends TestCase
     {
         $this->addSpeakerRelation([]);
 
-        self::assertContains(
+        self::assertStringContainsString(
             '_single_',
             $this->subject->getLanguageKeySuffixForType('speakers')
         );
@@ -6164,7 +6161,7 @@ final class EventTest extends TestCase
         $this->addSpeakerRelation([]);
         $this->addSpeakerRelation([]);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'speakers',
             $this->subject->getLanguageKeySuffixForType('speakers')
         );
@@ -6182,7 +6179,7 @@ final class EventTest extends TestCase
             ['gender' => \Tx_Seminars_OldModel_Speaker::GENDER_MALE]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '_multiple_male',
             $this->subject->getLanguageKeySuffixForType('speakers')
         );
@@ -6200,7 +6197,7 @@ final class EventTest extends TestCase
             ['gender' => \Tx_Seminars_OldModel_Speaker::GENDER_FEMALE]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '_multiple_female',
             $this->subject->getLanguageKeySuffixForType('speakers')
         );
@@ -6218,7 +6215,7 @@ final class EventTest extends TestCase
             ['gender' => \Tx_Seminars_OldModel_Speaker::GENDER_FEMALE]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'speakers',
             $this->subject->getLanguageKeySuffixForType('speakers')
         );
@@ -6236,7 +6233,7 @@ final class EventTest extends TestCase
             ['gender' => \Tx_Seminars_OldModel_Speaker::GENDER_MALE]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'leaders',
             $this->subject->getLanguageKeySuffixForType('leaders')
         );
@@ -7193,7 +7190,7 @@ final class EventTest extends TestCase
 
         $this->subject->setNumberOfLodgings(2);
 
-        self::assertContains(
+        self::assertStringContainsString(
             "foo\nbar",
             $this->subject->getEventData('lodgings')
         );
@@ -7226,7 +7223,7 @@ final class EventTest extends TestCase
 
         $this->subject->setNumberOfLodgings(2);
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             "foo\r\nbar",
             $this->subject->getEventData('lodgings')
         );
@@ -7239,7 +7236,7 @@ final class EventTest extends TestCase
     {
         $this->subject->setDescription("foo\r\nbar");
 
-        self::assertContains(
+        self::assertStringContainsString(
             "foo\nbar",
             $this->subject->getEventData('description')
         );
@@ -7252,7 +7249,7 @@ final class EventTest extends TestCase
     {
         $this->subject->setDescription("foo\n\nbar");
 
-        self::assertContains(
+        self::assertStringContainsString(
             "foo\nbar",
             $this->subject->getEventData('description')
         );
@@ -7265,7 +7262,7 @@ final class EventTest extends TestCase
     {
         $this->subject->setDescription("foo\n\n\nbar");
 
-        self::assertContains(
+        self::assertStringContainsString(
             "foo\nbar",
             $this->subject->getEventData('description')
         );
@@ -7278,7 +7275,7 @@ final class EventTest extends TestCase
     {
         $this->subject->setDescription("foo\n\n\n\nbar");
 
-        self::assertContains(
+        self::assertStringContainsString(
             "foo\nbar",
             $this->subject->getEventData('description')
         );
@@ -7292,7 +7289,7 @@ final class EventTest extends TestCase
         $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME']);
         $this->subject->setEndDate($GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY);
 
-        self::assertContains(
+        self::assertStringContainsString(
             '-',
             $this->subject->getEventData('date')
         );
@@ -7306,7 +7303,7 @@ final class EventTest extends TestCase
         $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME']);
         $this->subject->setEndDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
 
-        self::assertContains(
+        self::assertStringContainsString(
             '-',
             $this->subject->getEventData('time')
         );
@@ -7423,7 +7420,7 @@ final class EventTest extends TestCase
      */
     public function dumpSeminarValuesForTitleGivenReturnsTitle()
     {
-        self::assertContains(
+        self::assertStringContainsString(
             $this->subject->getTitle(),
             $this->subject->dumpSeminarValues('title')
         );
@@ -7434,7 +7431,7 @@ final class EventTest extends TestCase
      */
     public function dumpSeminarValuesForTitleGivenReturnsLabelForTitle()
     {
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('label_title'),
             $this->subject->dumpSeminarValues('title')
         );
@@ -7575,7 +7572,7 @@ final class EventTest extends TestCase
 
         $result = $this->subject->dumpSeminarValues($fieldName);
 
-        self::assertNotContains('::', $result);
+        self::assertStringNotContainsString('::', $result);
     }
 
     // Tests regarding the registration begin date

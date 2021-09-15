@@ -571,7 +571,7 @@ final class RegistrationManagerTest extends TestCase
         $this->testingFramework->logoutFrontEndUser();
         $this->createFrontEndPages();
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<a ',
             $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
         );
@@ -582,7 +582,7 @@ final class RegistrationManagerTest extends TestCase
         $this->testingFramework->logoutFrontEndUser();
         $this->createFrontEndPages();
 
-        self::assertContains(
+        self::assertStringContainsString(
             '?id=' . $this->loginPageUid,
             $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
         );
@@ -593,11 +593,11 @@ final class RegistrationManagerTest extends TestCase
         $this->testingFramework->logoutFrontEndUser();
         $this->createFrontEndPages();
 
-        self::assertContains(
+        self::assertStringContainsString(
             'redirect_url',
             $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
         );
-        self::assertContains(
+        self::assertStringContainsString(
             '%255Bseminar%255D%3D' . $this->seminarUid,
             $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
         );
@@ -608,7 +608,7 @@ final class RegistrationManagerTest extends TestCase
         $this->createFrontEndPages();
         $this->createAndLogInFrontEndUser();
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<a ',
             $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
         );
@@ -619,14 +619,14 @@ final class RegistrationManagerTest extends TestCase
         $this->createFrontEndPages();
         $this->createAndLogInFrontEndUser();
 
-        self::assertContains(
+        self::assertStringContainsString(
             '?id=' . $this->registrationPageUid,
             $this->subject->getLinkToRegistrationOrLoginPage(
                 $this->pi1,
                 $this->seminar
             )
         );
-        self::assertContains(
+        self::assertStringContainsString(
             '%5Bseminar%5D=' . $this->seminarUid,
             $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
         );
@@ -646,7 +646,7 @@ final class RegistrationManagerTest extends TestCase
 
         $this->createAndLogInFrontEndUser();
 
-        self::assertContains(
+        self::assertStringContainsString(
             '?id=' . $this->registrationPageUid,
             $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
         );
@@ -657,7 +657,7 @@ final class RegistrationManagerTest extends TestCase
         $this->createFrontEndPages();
         $this->createAndLogInFrontEndUser();
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'redirect_url',
             $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
         );
@@ -672,7 +672,7 @@ final class RegistrationManagerTest extends TestCase
         $this->createAndLogInFrontEndUser();
         $this->seminar->setBeginDate(0);
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('label_onlinePrebooking'),
             $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
         );
@@ -689,7 +689,7 @@ final class RegistrationManagerTest extends TestCase
         $this->seminar->setNumberOfAttendances(5);
         $this->seminar->setAttendancesMax(5);
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('label_onlineRegistration'),
             $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
         );
@@ -707,7 +707,7 @@ final class RegistrationManagerTest extends TestCase
         $this->seminar->setAttendancesMax(5);
         $this->seminar->setRegistrationQueue(true);
 
-        self::assertContains(
+        self::assertStringContainsString(
             \sprintf($this->getLanguageService()->getLL('label_onlineRegistrationOnQueue'), 0),
             $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
         );
@@ -724,7 +724,7 @@ final class RegistrationManagerTest extends TestCase
         $this->seminar->setAttendancesMax(5);
         $this->seminar->setRegistrationQueue(true);
 
-        self::assertContains(
+        self::assertStringContainsString(
             \sprintf($this->getLanguageService()->getLL('label_onlineRegistrationOnQueue'), 0),
             $this->subject->getLinkToRegistrationOrLoginPage($this->pi1, $this->seminar)
         );
@@ -740,7 +740,7 @@ final class RegistrationManagerTest extends TestCase
         $this->createFrontEndPages();
         $this->createAndLogInFrontEndUser();
 
-        self::assertContains(
+        self::assertStringContainsString(
             '?id=' . $this->registrationPageUid,
             $this->subject->getRegistrationLink($this->pi1, $this->seminar)
         );
@@ -754,7 +754,7 @@ final class RegistrationManagerTest extends TestCase
         $this->createFrontEndPages();
         $this->createAndLogInFrontEndUser();
 
-        self::assertContains(
+        self::assertStringContainsString(
             '%5Bseminar%5D=' . $this->seminarUid,
             $this->subject->getRegistrationLink($this->pi1, $this->seminar)
         );
@@ -767,7 +767,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $this->createFrontEndPages();
 
-        self::assertContains(
+        self::assertStringContainsString(
             '?id=' . $this->loginPageUid,
             $this->subject->getRegistrationLink($this->pi1, $this->seminar)
         );
@@ -866,7 +866,7 @@ final class RegistrationManagerTest extends TestCase
         $this->createAndLogInFrontEndUser();
         $this->seminar->setUnlimitedVacancies();
 
-        self::assertContains(
+        self::assertStringContainsString(
             '%5Bseminar%5D=' . $this->seminarUid,
             $this->subject->getRegistrationLink($this->pi1, $this->seminar)
         );
@@ -880,7 +880,7 @@ final class RegistrationManagerTest extends TestCase
         $this->createFrontEndPages();
         $this->seminar->setUnlimitedVacancies();
 
-        self::assertContains(
+        self::assertStringContainsString(
             '?id=' . $this->loginPageUid,
             $this->subject->getRegistrationLink($this->pi1, $this->seminar)
         );
@@ -898,7 +898,7 @@ final class RegistrationManagerTest extends TestCase
         $this->seminar->setNumberOfAttendances(1);
         $this->seminar->setRegistrationQueue(true);
 
-        self::assertContains(
+        self::assertStringContainsString(
             '%5Bseminar%5D=' . $this->seminarUid,
             $this->subject->getRegistrationLink($this->pi1, $this->seminar)
         );
@@ -915,7 +915,7 @@ final class RegistrationManagerTest extends TestCase
         $this->seminar->setNumberOfAttendances(1);
         $this->seminar->setRegistrationQueue(true);
 
-        self::assertContains(
+        self::assertStringContainsString(
             '?id=' . $this->loginPageUid,
             $this->subject->getRegistrationLink($this->pi1, $this->seminar)
         );
@@ -2480,7 +2480,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('email_confirmationSubject'),
             $this->mailer->getFirstSentEmail()->getSubject()
         );
@@ -2498,7 +2498,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'test event',
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -2535,7 +2535,7 @@ final class RegistrationManagerTest extends TestCase
 
         $result = $this->mailer->getFirstSentEmail()->getBody();
 
-        self::assertNotContains(' ,', $result);
+        self::assertStringNotContainsString(' ,', $result);
     }
 
     /**
@@ -2550,7 +2550,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'something nice to eat',
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -2568,7 +2568,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'a nice, dry place',
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -2586,7 +2586,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'learning Ruby on Rails',
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -2604,7 +2604,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'test event',
             $this->mailer->getFirstSentEmail()->getSubject()
         );
@@ -2693,7 +2693,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<html',
             $this->getEmailHtmlPart()
         );
@@ -2729,7 +2729,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '###',
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -2750,7 +2750,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '###',
             $this->getEmailHtmlPart()
         );
@@ -2777,7 +2777,7 @@ final class RegistrationManagerTest extends TestCase
 
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<html',
             $this->getEmailHtmlPart()
         );
@@ -2830,7 +2830,7 @@ final class RegistrationManagerTest extends TestCase
 
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Harry Callagan',
             $this->getEmailHtmlPart()
         );
@@ -2855,7 +2855,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->notifyAttendee($registration, $pi1);
         $seminarLink = 'http://singleview.example.com/';
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<a href="' . $seminarLink,
             $this->getEmailHtmlPart()
         );
@@ -2873,7 +2873,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             "\n-- \norganizer footer",
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -2895,7 +2895,7 @@ final class RegistrationManagerTest extends TestCase
 
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             $this->getLanguageService()->getLL('label_planned_disclaimer'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -2917,7 +2917,7 @@ final class RegistrationManagerTest extends TestCase
 
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             $this->getLanguageService()->getLL('label_planned_disclaimer'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -2939,7 +2939,7 @@ final class RegistrationManagerTest extends TestCase
 
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('label_planned_disclaimer'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -2965,7 +2965,7 @@ final class RegistrationManagerTest extends TestCase
 
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             $this->getLanguageService()->getLL('label_planned_disclaimer'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -2991,7 +2991,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'style=',
             $this->getEmailHtmlPart()
         );
@@ -3010,7 +3010,7 @@ final class RegistrationManagerTest extends TestCase
         $registration->setAttendeesNames('foo1 foo2');
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo1 foo2',
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -3029,7 +3029,7 @@ final class RegistrationManagerTest extends TestCase
         $registration->setAttendeesNames("foo1\nfoo2");
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             "1. foo1\n2. foo2",
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -3085,7 +3085,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo_place',
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -3114,7 +3114,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo_street',
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -3132,7 +3132,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('message_willBeAnnounced'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -3161,7 +3161,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             "place_title\nplace_address",
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -3198,7 +3198,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'place_title<br>place_address',
             $this->getEmailHtmlPart()
         );
@@ -3227,7 +3227,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             "place_title\nplace_address",
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -3256,7 +3256,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'address1 address2',
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -3285,7 +3285,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'address1 address2',
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -3314,7 +3314,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'address1 address2',
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -3343,7 +3343,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'address1 address2',
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -3372,7 +3372,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'address1 address2',
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -3409,7 +3409,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'address1 address2',
             $this->getEmailHtmlPart()
         );
@@ -3446,7 +3446,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'address1 address2 address3',
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -3475,7 +3475,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'footown',
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -3504,7 +3504,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             '12345 footown',
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -3565,7 +3565,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             "address\nfootown",
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -3602,7 +3602,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'address<br>footown',
             $this->getEmailHtmlPart()
         );
@@ -3638,7 +3638,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'footown, ' . $country->getLocalShortName(),
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -3667,7 +3667,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'footown,',
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -3682,9 +3682,9 @@ final class RegistrationManagerTest extends TestCase
      */
     private function assertNotContainsRawLabelKey(string $string)
     {
-        self::assertNotContains('_', $string);
-        self::assertNotContains('salutation', $string);
-        self::assertNotContains('formal', $string);
+        self::assertStringNotContainsString('_', $string);
+        self::assertStringNotContainsString('salutation', $string);
+        self::assertStringNotContainsString('formal', $string);
     }
 
     // Tests concerning the iCalendar attachment
@@ -3705,8 +3705,8 @@ final class RegistrationManagerTest extends TestCase
         self::assertNotEmpty($attachments);
         /** @var \Swift_Mime_Attachment $attachment */
         $attachment = $attachments[0];
-        self::assertContains('text/calendar', $attachment->getContentType());
-        self::assertContains('charset="utf-8"', $attachment->getContentType());
+        self::assertStringContainsString('text/calendar', $attachment->getContentType());
+        self::assertStringContainsString('charset="utf-8"', $attachment->getContentType());
     }
 
     /**
@@ -3726,7 +3726,7 @@ final class RegistrationManagerTest extends TestCase
         /** @var \Swift_Mime_Attachment $attachment */
         $attachment = $attachments[0];
         $content = $attachment->getBody();
-        self::assertContains("\r\n", $content);
+        self::assertStringContainsString("\r\n", $content);
     }
 
     /**
@@ -3764,7 +3764,7 @@ final class RegistrationManagerTest extends TestCase
         self::assertNotEmpty($attachments);
         /** @var \Swift_Mime_Attachment $attachment */
         $attachment = $attachments[0];
-        self::assertContains('method="publish"', $attachment->getContentType());
+        self::assertStringContainsString('method="publish"', $attachment->getContentType());
     }
 
     /**
@@ -3783,7 +3783,7 @@ final class RegistrationManagerTest extends TestCase
         self::assertNotEmpty($attachments);
         /** @var \Swift_Mime_Attachment $attachment */
         $attachment = $attachments[0];
-        self::assertContains('component="vevent"', $attachment->getContentType());
+        self::assertStringContainsString('component="vevent"', $attachment->getContentType());
     }
 
     /**
@@ -3823,7 +3823,7 @@ final class RegistrationManagerTest extends TestCase
         /** @var \Swift_Mime_Attachment $attachment */
         $attachment = $attachments[0];
         $content = $attachment->getBody();
-        self::assertContains($value, $content);
+        self::assertStringContainsString($value, $content);
     }
 
     /**
@@ -3843,7 +3843,7 @@ final class RegistrationManagerTest extends TestCase
         /** @var \Swift_Mime_Attachment $attachment */
         $attachment = $attachments[0];
         $content = $attachment->getBody();
-        self::assertContains('SUMMARY:' . $this->seminar->getTitle(), $content);
+        self::assertStringContainsString('SUMMARY:' . $this->seminar->getTitle(), $content);
     }
 
     /**
@@ -3868,7 +3868,7 @@ final class RegistrationManagerTest extends TestCase
         $attachment = $attachments[0];
         $content = $attachment->getBody();
         $formattedDate = strftime('%Y%m%dT%H%M%S', $this->seminar->getBeginDateAsTimestamp());
-        self::assertContains('DTSTART;TZID=/' . $timeZone . ':' . $formattedDate, $content);
+        self::assertStringContainsString('DTSTART;TZID=/' . $timeZone . ':' . $formattedDate, $content);
     }
 
     /**
@@ -3892,7 +3892,7 @@ final class RegistrationManagerTest extends TestCase
         $attachment = $attachments[0];
         $content = $attachment->getBody();
         $formattedDate = strftime('%Y%m%dT%H%M%S', $this->seminar->getBeginDateAsTimestamp());
-        self::assertContains('DTSTART;TZID=/' . $timeZone . ':' . $formattedDate, $content);
+        self::assertStringContainsString('DTSTART;TZID=/' . $timeZone . ':' . $formattedDate, $content);
     }
 
     /**
@@ -3918,7 +3918,7 @@ final class RegistrationManagerTest extends TestCase
         /** @var \Swift_Mime_Attachment $attachment */
         $attachment = $attachments[0];
         $content = $attachment->getBody();
-        self::assertNotContains('DTEND:', $content);
+        self::assertStringNotContainsString('DTEND:', $content);
     }
 
     /**
@@ -3943,7 +3943,7 @@ final class RegistrationManagerTest extends TestCase
         $attachment = $attachments[0];
         $content = $attachment->getBody();
         $formattedDate = strftime('%Y%m%dT%H%M%S', $this->seminar->getEndDateAsTimestampEvenIfOpenEnded());
-        self::assertContains('DTEND;TZID=/' . $timeZone . ':' . $formattedDate, $content);
+        self::assertStringContainsString('DTEND;TZID=/' . $timeZone . ':' . $formattedDate, $content);
     }
 
     /**
@@ -3967,7 +3967,7 @@ final class RegistrationManagerTest extends TestCase
         $attachment = $attachments[0];
         $content = $attachment->getBody();
         $formattedDate = strftime('%Y%m%dT%H%M%S', $this->seminar->getEndDateAsTimestampEvenIfOpenEnded());
-        self::assertContains('DTEND;TZID=/' . $timeZone . ':' . $formattedDate, $content);
+        self::assertStringContainsString('DTEND;TZID=/' . $timeZone . ':' . $formattedDate, $content);
     }
 
     /**
@@ -3987,7 +3987,7 @@ final class RegistrationManagerTest extends TestCase
         /** @var \Swift_Mime_Attachment $attachment */
         $attachment = $attachments[0];
         $content = $attachment->getBody();
-        self::assertContains('DESCRIPTION:' . $this->seminar->getSubtitle(), $content);
+        self::assertStringContainsString('DESCRIPTION:' . $this->seminar->getSubtitle(), $content);
     }
 
     /**
@@ -4007,7 +4007,7 @@ final class RegistrationManagerTest extends TestCase
         /** @var \Swift_Mime_Attachment $attachment */
         $attachment = $attachments[0];
         $content = $attachment->getBody();
-        self::assertNotContains('LOCATION:', $content);
+        self::assertStringNotContainsString('LOCATION:', $content);
     }
 
     /**
@@ -4038,7 +4038,7 @@ final class RegistrationManagerTest extends TestCase
         /** @var \Swift_Mime_Attachment $attachment */
         $attachment = $attachments[0];
         $content = $attachment->getBody();
-        self::assertContains('LOCATION:location title, some address', $content);
+        self::assertStringContainsString('LOCATION:location title, some address', $content);
     }
 
     /**
@@ -4069,7 +4069,7 @@ final class RegistrationManagerTest extends TestCase
         /** @var \Swift_Mime_Attachment $attachment */
         $attachment = $attachments[0];
         $content = $attachment->getBody();
-        self::assertContains("LOCATION:location title, some address, more, even more\r\n", $content);
+        self::assertStringContainsString("LOCATION:location title, some address, more, even more\r\n", $content);
     }
 
     /**
@@ -4089,7 +4089,7 @@ final class RegistrationManagerTest extends TestCase
         /** @var \Swift_Mime_Attachment $attachment */
         $attachment = $attachments[0];
         $content = $attachment->getBody();
-        self::assertContains('ORGANIZER;CN="test organizer":mailto:mail@example.com', $content);
+        self::assertStringContainsString('ORGANIZER;CN="test organizer":mailto:mail@example.com', $content);
     }
 
     /**
@@ -4109,7 +4109,7 @@ final class RegistrationManagerTest extends TestCase
         /** @var \Swift_Mime_Attachment $attachment */
         $attachment = $attachments[0];
         $content = $attachment->getBody();
-        self::assertContains('UID:', $content);
+        self::assertStringContainsString('UID:', $content);
     }
 
     /**
@@ -4130,7 +4130,7 @@ final class RegistrationManagerTest extends TestCase
         $attachment = $attachments[0];
         $content = $attachment->getBody();
         $formattedDate = strftime('%Y%m%dT%H%M%S', $GLOBALS['SIM_EXEC_TIME']);
-        self::assertContains('DTSTAMP:' . $formattedDate, $content);
+        self::assertStringContainsString('DTSTAMP:' . $formattedDate, $content);
     }
 
     // Tests concerning the salutation
@@ -4155,7 +4155,7 @@ final class RegistrationManagerTest extends TestCase
 
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('email_hello_informal'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -4185,7 +4185,7 @@ final class RegistrationManagerTest extends TestCase
 
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('email_hello_formal_2'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -4215,7 +4215,7 @@ final class RegistrationManagerTest extends TestCase
 
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('email_hello_formal_0'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -4245,7 +4245,7 @@ final class RegistrationManagerTest extends TestCase
 
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('email_hello_formal_1'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -4269,7 +4269,7 @@ final class RegistrationManagerTest extends TestCase
 
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             sprintf(
                 $this->getLanguageService()->getLL('email_confirmationHello'),
                 $this->seminar->getTitle()
@@ -4296,7 +4296,7 @@ final class RegistrationManagerTest extends TestCase
 
         $this->subject->notifyAttendee($registration, $pi1);
 
-        self::assertContains(
+        self::assertStringContainsString(
             sprintf(
                 $this->getLanguageService()->getLL('email_confirmationHello_informal'),
                 $this->seminar->getTitle()
@@ -4330,7 +4330,7 @@ final class RegistrationManagerTest extends TestCase
             'confirmationOnUnregistration'
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             sprintf(
                 $this->getLanguageService()->getLL(
                     'email_confirmationOnUnregistrationHello'
@@ -4366,7 +4366,7 @@ final class RegistrationManagerTest extends TestCase
             'confirmationOnUnregistration'
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             sprintf(
                 $this->getLanguageService()->getLL(
                     'email_confirmationOnUnregistrationHello_informal'
@@ -4402,7 +4402,7 @@ final class RegistrationManagerTest extends TestCase
             'confirmationOnRegistrationForQueue'
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             sprintf(
                 $this->getLanguageService()->getLL(
                     'email_confirmationOnRegistrationForQueueHello'
@@ -4438,7 +4438,7 @@ final class RegistrationManagerTest extends TestCase
             'confirmationOnRegistrationForQueue'
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             sprintf(
                 $this->getLanguageService()->getLL(
                     'email_confirmationOnRegistrationForQueueHello_informal'
@@ -4474,7 +4474,7 @@ final class RegistrationManagerTest extends TestCase
             'confirmationOnQueueUpdate'
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             sprintf(
                 $this->getLanguageService()->getLL(
                     'email_confirmationOnQueueUpdateHello'
@@ -4510,7 +4510,7 @@ final class RegistrationManagerTest extends TestCase
             'confirmationOnQueueUpdate'
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             sprintf(
                 $this->getLanguageService()->getLL(
                     'email_confirmationOnQueueUpdateHello_informal'
@@ -5210,7 +5210,7 @@ final class RegistrationManagerTest extends TestCase
 
         $this->subject->notifyOrganizers($registration);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Hello',
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -5260,7 +5260,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->notifyOrganizers($registration);
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('label_vacancies') . ': ' .
             $this->getLanguageService()->getLL('label_unlimited'),
             $this->mailer->getFirstSentEmail()->getBody()
@@ -5290,7 +5290,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = new \Tx_Seminars_OldModel_Registration($registrationUid);
         $this->subject->notifyOrganizers($registration);
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('label_company'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -5319,7 +5319,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = new \Tx_Seminars_OldModel_Registration($registrationUid);
         $this->subject->notifyOrganizers($registration);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo inc.',
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -5637,7 +5637,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->sendAdditionalNotification($registration);
 
-        self::assertContains(
+        self::assertStringContainsString(
             sprintf(
                 $this->getLanguageService()->getLL('email_additionalNotificationEnoughRegistrationsSubject'),
                 $this->seminarUid,
@@ -5722,7 +5722,7 @@ final class RegistrationManagerTest extends TestCase
 
         $firstEmail = $this->mailer->getFirstSentEmail();
         self::assertNotNull($firstEmail);
-        self::assertContains(
+        self::assertStringContainsString(
             sprintf(
                 $this->getLanguageService()->getLL('email_additionalNotificationEnoughRegistrationsSubject'),
                 $this->seminarUid,
@@ -5879,7 +5879,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->sendAdditionalNotification($registration);
 
-        self::assertContains(
+        self::assertStringContainsString(
             sprintf(
                 $this->getLanguageService()->getLL('email_additionalNotificationIsFullSubject'),
                 $this->seminarUid,
@@ -5902,7 +5902,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->sendAdditionalNotification($registration);
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('email_additionalNotificationIsFull'),
             $this->mailer->getFirstSentEmail()->getBody()
         );
@@ -6007,7 +6007,7 @@ final class RegistrationManagerTest extends TestCase
         $registration = $this->createRegistration();
         $this->subject->sendAdditionalNotification($registration);
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('label_vacancies') . ': '
             . $this->getLanguageService()->getLL('label_unlimited'),
             $this->mailer->getFirstSentEmail()->getBody()
@@ -8296,7 +8296,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function existsSeminarMessageForZeroUidReturnsErrorMessage()
     {
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('message_missingSeminarNumber'),
             $this->subject->existsSeminarMessage(0)
         );
@@ -8320,7 +8320,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function existsSeminarMessageForInexistentUidReturnsErrorMessage()
     {
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('message_wrongSeminarNumber'),
             $this->subject->existsSeminarMessage($this->testingFramework->getAutoIncrement('tx_seminars_seminars'))
         );
@@ -8350,7 +8350,7 @@ final class RegistrationManagerTest extends TestCase
             ['deleted' => 1]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('message_wrongSeminarNumber'),
             $this->subject->existsSeminarMessage($this->seminarUid)
         );
@@ -8367,7 +8367,7 @@ final class RegistrationManagerTest extends TestCase
             ['hidden' => 1]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('message_wrongSeminarNumber'),
             $this->subject->existsSeminarMessage($this->seminarUid)
         );

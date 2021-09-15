@@ -87,7 +87,7 @@ final class CategoryListTest extends FunctionalTestCase
 
         $result = $this->subject->render();
 
-        self::assertNotContains('<table', $result);
+        self::assertStringNotContainsString('<table', $result);
     }
 
     /**
@@ -99,7 +99,7 @@ final class CategoryListTest extends FunctionalTestCase
 
         $result = $this->subject->render();
 
-        self::assertContains($this->getLanguageService()->getLL('label_no_categories'), $result);
+        self::assertStringContainsString($this->getLanguageService()->getLL('label_no_categories'), $result);
     }
 
     /**
@@ -111,7 +111,7 @@ final class CategoryListTest extends FunctionalTestCase
 
         $result = $this->subject->render();
 
-        self::assertContains('category with ASCII title', $result);
+        self::assertStringContainsString('category with ASCII title', $result);
     }
 
     /**
@@ -123,7 +123,7 @@ final class CategoryListTest extends FunctionalTestCase
 
         $result = $this->subject->render();
 
-        self::assertContains('category with ampersand &amp;', $result);
+        self::assertStringContainsString('category with ampersand &amp;', $result);
     }
 
     /**

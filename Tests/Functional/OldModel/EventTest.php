@@ -536,7 +536,7 @@ final class EventTest extends FunctionalTestCase
 
         $result = $subject->getAttachedFiles($this->plugin);
 
-        self::assertContains('uploads/tx_seminars/' . $fileName, $result[0]['name']);
+        self::assertStringContainsString('uploads/tx_seminars/' . $fileName, $result[0]['name']);
     }
 
     /**
@@ -635,7 +635,7 @@ final class EventTest extends FunctionalTestCase
 
         $result = $date->getAttachedFiles($this->plugin);
 
-        self::assertContains('uploads/tx_seminars/' . $fileName, $result[0]['name']);
+        self::assertStringContainsString('uploads/tx_seminars/' . $fileName, $result[0]['name']);
     }
 
     /**
@@ -657,7 +657,7 @@ final class EventTest extends FunctionalTestCase
 
         $result = $date->getAttachedFiles($this->plugin);
 
-        self::assertContains('uploads/tx_seminars/' . $fileName, $result[0]['name']);
+        self::assertStringContainsString('uploads/tx_seminars/' . $fileName, $result[0]['name']);
     }
 
     /**
@@ -685,8 +685,8 @@ final class EventTest extends FunctionalTestCase
 
         $result = $date->getAttachedFiles($this->plugin);
 
-        self::assertContains($topicFileName, $result[0]['name']);
-        self::assertContains($dateFileName, $result[1]['name']);
+        self::assertStringContainsString($topicFileName, $result[0]['name']);
+        self::assertStringContainsString($dateFileName, $result[1]['name']);
     }
 
     /**
@@ -824,7 +824,7 @@ final class EventTest extends FunctionalTestCase
 
         $subject = TestingEvent::fromUid(2);
 
-        self::assertContains('The Castle', $subject->getPlaceShort());
+        self::assertStringContainsString('The Castle', $subject->getPlaceShort());
     }
 
     /**

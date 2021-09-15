@@ -58,7 +58,7 @@ final class DateMapperTest extends FunctionalTestCase
         $model = $this->subject->find(5);
         $result = $model->getRequirements();
 
-        self::assertSame(1, $result->count());
+        self::assertCount(1, $result);
         self::assertContainsModelWithUid($result, 4);
     }
 
@@ -86,7 +86,7 @@ final class DateMapperTest extends FunctionalTestCase
         $model = $this->subject->find(6);
         $result = $model->getDependencies();
 
-        self::assertSame(1, $result->count());
+        self::assertCount(1, $result);
         self::assertContainsModelWithUid($result, 3);
     }
 }

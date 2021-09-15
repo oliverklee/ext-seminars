@@ -216,7 +216,7 @@ class RegistrationsListTest extends TestCase
      */
     public function renderContainsHtmlspecialcharedEventTitle()
     {
-        self::assertContains(
+        self::assertStringContainsString(
             'Test event &amp; more',
             $this->subject->render()
         );
@@ -295,7 +295,7 @@ class RegistrationsListTest extends TestCase
         $this->createLogInAndRegisterFrontEndUser();
         $this->subject->render();
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '403',
             HeaderProxyFactory::getInstance()->getHeaderCollector()->getLastAddedHeader()
         );
@@ -312,7 +312,7 @@ class RegistrationsListTest extends TestCase
         );
         $this->createLogInAndRegisterFrontEndUser();
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<th scope="col">Number</th>',
             $this->subject->render()
         );
@@ -329,7 +329,7 @@ class RegistrationsListTest extends TestCase
         );
         $this->createLogInAndRegisterFrontEndUser();
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<td>' . $this->feUserUid . '</td>',
             $this->subject->render()
         );
@@ -346,7 +346,7 @@ class RegistrationsListTest extends TestCase
         );
         $this->createLogInAndRegisterFrontEndUser();
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<th scope="col">Name:</th>',
             $this->subject->render()
         );
@@ -363,7 +363,7 @@ class RegistrationsListTest extends TestCase
         );
         $this->createLogInAndRegisterFrontEndUser();
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<td>Tom &amp; Jerry</td>',
             $this->subject->render()
         );
@@ -381,11 +381,11 @@ class RegistrationsListTest extends TestCase
         $this->createLogInAndRegisterFrontEndUser();
         $result = $this->subject->render();
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<th scope="col">Number</th>',
             $result
         );
-        self::assertContains(
+        self::assertStringContainsString(
             '<th scope="col">Name:</th>',
             $result
         );
@@ -408,11 +408,11 @@ class RegistrationsListTest extends TestCase
         );
         $result = $this->subject->render();
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<td>' . $this->feUserUid . '</td>',
             $result
         );
-        self::assertContains(
+        self::assertStringContainsString(
             '<td>Tom &amp; Jerry</td>',
             $result
         );
@@ -429,7 +429,7 @@ class RegistrationsListTest extends TestCase
         );
         $this->createLogInAndRegisterFrontEndUser();
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<th scope="col">Ticket ID</th>',
             $this->subject->render()
         );
@@ -446,7 +446,7 @@ class RegistrationsListTest extends TestCase
         );
         $this->createLogInAndRegisterFrontEndUser();
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<td>' . $this->registrationUid . '</td>',
             $this->subject->render()
         );
@@ -463,7 +463,7 @@ class RegistrationsListTest extends TestCase
         );
         $this->createLogInAndRegisterFrontEndUser();
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<th scope="col">Seats</th>',
             $this->subject->render()
         );
@@ -485,7 +485,7 @@ class RegistrationsListTest extends TestCase
             ['seats' => 42]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<td>42</td>',
             $this->subject->render()
         );
@@ -507,7 +507,7 @@ class RegistrationsListTest extends TestCase
             ['interests' => 'everything practical & theoretical']
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<td>everything practical &amp; theoretical</td>',
             $this->subject->render()
         );
@@ -524,11 +524,11 @@ class RegistrationsListTest extends TestCase
         );
         $this->createLogInAndRegisterFrontEndUser();
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<th scope="col">Ticket ID</th>',
             $this->subject->render()
         );
-        self::assertContains(
+        self::assertStringContainsString(
             '<th scope="col">Seats</th>',
             $this->subject->render()
         );
@@ -550,11 +550,11 @@ class RegistrationsListTest extends TestCase
             ['seats' => 42]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<td>' . $this->registrationUid . '</td>',
             $this->subject->render()
         );
-        self::assertContains(
+        self::assertStringContainsString(
             '<td>42</td>',
             $this->subject->render()
         );
@@ -571,7 +571,7 @@ class RegistrationsListTest extends TestCase
             ''
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'label_',
             $this->subject->render()
         );
@@ -588,7 +588,7 @@ class RegistrationsListTest extends TestCase
             ''
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'label_',
             $this->subject->render()
         );
@@ -612,7 +612,7 @@ class RegistrationsListTest extends TestCase
             ['deleted' => 1]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             (string)$this->registrationUid,
             $this->subject->render()
         );
@@ -655,7 +655,7 @@ class RegistrationsListTest extends TestCase
      */
     public function renderForNoWaitingListRegistrationsNotContainsWaitingListLabel()
     {
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             $this->getLanguageService()->getLL('label_waiting_list'),
             $this->subject->render()
         );
@@ -682,7 +682,7 @@ class RegistrationsListTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('label_waiting_list'),
             $this->subject->render()
         );

@@ -135,7 +135,7 @@ class CsvDownloaderTest extends TestCase
     {
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'uid');
 
-        self::assertContains(
+        self::assertStringContainsString(
             (string)$this->eventUid,
             $this->subject->createListOfEvents($this->pid)
         );
@@ -157,7 +157,7 @@ class CsvDownloaderTest extends TestCase
 
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
 
-        self::assertContains(
+        self::assertStringContainsString(
             'another event',
             $this->subject->createListOfEvents($this->pid)
         );
@@ -173,7 +173,7 @@ class CsvDownloaderTest extends TestCase
         $this->subject->piVars['table'] = 'tx_seminars_seminars';
         $this->subject->piVars['pid'] = $this->pid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             (string)$this->eventUid,
             $this->subject->main()
         );
@@ -195,11 +195,11 @@ class CsvDownloaderTest extends TestCase
         );
         $eventList = $this->subject->createListOfEvents($this->pid);
 
-        self::assertContains(
+        self::assertStringContainsString(
             (string)$this->eventUid,
             $eventList
         );
-        self::assertContains(
+        self::assertStringContainsString(
             (string)$secondEventUid,
             $eventList
         );
@@ -222,11 +222,11 @@ class CsvDownloaderTest extends TestCase
 
         $output = $this->subject->createAndOutputListOfEvents($this->pid);
 
-        self::assertContains(
+        self::assertStringContainsString(
             (string)$this->eventUid,
             $output
         );
-        self::assertContains(
+        self::assertStringContainsString(
             (string)$secondEventUid,
             $output
         );
@@ -247,7 +247,7 @@ class CsvDownloaderTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->localizeAndRemoveColon('tx_seminars_seminars.uid') .
             "\r\n" . $this->eventUid . "\r\n" . $secondEventUid . "\r\n",
             $this->subject->createAndOutputListOfEvents($this->pid)
@@ -288,7 +288,7 @@ class CsvDownloaderTest extends TestCase
 
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '"bar"',
             $this->subject->createAndOutputListOfEvents($this->pid)
         );
@@ -307,7 +307,7 @@ class CsvDownloaderTest extends TestCase
 
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'description');
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo "" bar',
             $this->subject->createAndOutputListOfEvents($this->pid)
         );
@@ -326,7 +326,7 @@ class CsvDownloaderTest extends TestCase
 
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
 
-        self::assertContains(
+        self::assertStringContainsString(
             "\"foo\nbar\"",
             $this->subject->createAndOutputListOfEvents($this->pid)
         );
@@ -345,7 +345,7 @@ class CsvDownloaderTest extends TestCase
 
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
 
-        self::assertContains(
+        self::assertStringContainsString(
             '"foo "" bar"',
             $this->subject->createAndOutputListOfEvents($this->pid)
         );
@@ -364,7 +364,7 @@ class CsvDownloaderTest extends TestCase
 
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
 
-        self::assertContains(
+        self::assertStringContainsString(
             '"foo ; bar"',
             $this->subject->createAndOutputListOfEvents($this->pid)
         );
@@ -383,7 +383,7 @@ class CsvDownloaderTest extends TestCase
 
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'description,title');
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo;bar',
             $this->subject->createAndOutputListOfEvents($this->pid)
         );
@@ -401,11 +401,11 @@ class CsvDownloaderTest extends TestCase
             'tx_seminars_seminars.description'
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             $description,
             $eventList
         );
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '"' . $description . '"',
             $eventList
         );
@@ -418,7 +418,7 @@ class CsvDownloaderTest extends TestCase
     {
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'description,title');
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->localizeAndRemoveColon('tx_seminars_seminars.description') .
             ';' . $this->localizeAndRemoveColon('tx_seminars_seminars.title'),
             $this->subject->createAndOutputListOfEvents($this->pid)
@@ -443,7 +443,7 @@ class CsvDownloaderTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             (string)$registrationUid,
             $this->subject->createListOfRegistrations($this->eventUid)
         );
@@ -467,7 +467,7 @@ class CsvDownloaderTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             (string)$registrationUid,
             $this->subject->createListOfRegistrations($this->eventUid)
         );
@@ -495,7 +495,7 @@ class CsvDownloaderTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             (string)$registrationUid,
             $this->subject->createListOfRegistrations($this->eventUid)
         );
@@ -518,7 +518,7 @@ class CsvDownloaderTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->localizeAndRemoveColon(
                 'tx_seminars_attendances.registered_themselves'
             ),
@@ -543,7 +543,7 @@ class CsvDownloaderTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->localizeAndRemoveColon('tx_seminars_attendances.company'),
             $this->subject->createListOfRegistrations($this->eventUid)
         );
@@ -566,7 +566,7 @@ class CsvDownloaderTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo bar inc.',
             $this->subject->createListOfRegistrations($this->eventUid)
         );
@@ -597,7 +597,7 @@ class CsvDownloaderTest extends TestCase
 
         $GLOBALS['BE_USER'] = $globalBackEndUser;
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo bar inc.',
             $result
         );
@@ -624,7 +624,7 @@ class CsvDownloaderTest extends TestCase
         $this->subject->piVars['table'] = 'tx_seminars_attendances';
         $this->subject->piVars['eventUid'] = $this->eventUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             (string)$registrationUid,
             $this->subject->main()
         );
@@ -657,11 +657,11 @@ class CsvDownloaderTest extends TestCase
         $registrationsList
             = $this->subject->createListOfRegistrations($this->eventUid);
 
-        self::assertContains(
+        self::assertStringContainsString(
             (string)$firstRegistrationUid,
             $registrationsList
         );
-        self::assertContains(
+        self::assertStringContainsString(
             (string)$secondRegistrationUid,
             $registrationsList
         );
@@ -685,7 +685,7 @@ class CsvDownloaderTest extends TestCase
         $this->subject->piVars['table'] = 'tx_seminars_seminars';
         $this->subject->piVars['pid'] = $this->pid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Schöne Bären führen',
             $this->subject->main()
         );
@@ -711,7 +711,7 @@ class CsvDownloaderTest extends TestCase
 
         $this->configuration->setAsString('charsetForCsv', 'iso-8859-15');
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Sch' . chr(246) . 'ne B' . chr(228) . 'ren f' . chr(252) . 'hren',
             $this->subject->main()
         );
@@ -738,7 +738,7 @@ class CsvDownloaderTest extends TestCase
         $this->subject->piVars['table'] = 'tx_seminars_attendances';
         $this->subject->piVars['pid'] = $this->pid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Schöne Bären führen',
             $this->subject->main()
         );
@@ -767,7 +767,7 @@ class CsvDownloaderTest extends TestCase
 
         $this->configuration->setAsString('charsetForCsv', 'iso-8859-15');
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Sch' . chr(246) . 'ne B' . chr(228) . 'ren f' . chr(252) . 'hren',
             $this->subject->main()
         );
@@ -801,11 +801,11 @@ class CsvDownloaderTest extends TestCase
         );
 
         $registrationsList = $this->subject->createAndOutputListOfRegistrations($this->eventUid);
-        self::assertContains(
+        self::assertStringContainsString(
             (string)$firstRegistrationUid,
             $registrationsList
         );
-        self::assertContains(
+        self::assertStringContainsString(
             (string)$secondRegistrationUid,
             $registrationsList
         );
@@ -829,7 +829,7 @@ class CsvDownloaderTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo_user',
             $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
@@ -853,7 +853,7 @@ class CsvDownloaderTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             (string)$registrationUid,
             $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
@@ -876,7 +876,7 @@ class CsvDownloaderTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             (string)$registrationUid,
             $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
@@ -907,7 +907,7 @@ class CsvDownloaderTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             "\r\n" . $firstRegistrationUid . "\r\n" .
             $secondRegistrationUid . "\r\n",
             $this->subject->createAndOutputListOfRegistrations($this->eventUid)
@@ -962,7 +962,7 @@ class CsvDownloaderTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo "" bar',
             $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
@@ -985,7 +985,7 @@ class CsvDownloaderTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '"foo bar"',
             $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
@@ -1008,7 +1008,7 @@ class CsvDownloaderTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '"foo ; bar"',
             $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
@@ -1031,7 +1031,7 @@ class CsvDownloaderTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             "\"foo\nbar\"",
             $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
@@ -1054,7 +1054,7 @@ class CsvDownloaderTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '"foo "" bar"',
             $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
@@ -1078,7 +1078,7 @@ class CsvDownloaderTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo;test',
             $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
@@ -1094,11 +1094,11 @@ class CsvDownloaderTest extends TestCase
         $registrationsList = $this->subject->createAndOutputListOfRegistrations($this->eventUid);
         $localizedAddress = $this->localizeAndRemoveColon('tx_seminars_attendances.address');
 
-        self::assertContains(
+        self::assertStringContainsString(
             $localizedAddress,
             $registrationsList
         );
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '"' . $localizedAddress . '"',
             $registrationsList
         );
@@ -1111,7 +1111,7 @@ class CsvDownloaderTest extends TestCase
     {
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'address,title');
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->localizeAndRemoveColon('tx_seminars_attendances.address') .
             ';' . $this->localizeAndRemoveColon('tx_seminars_attendances.title'),
             $this->subject->createAndOutputListOfRegistrations($this->eventUid)
@@ -1126,7 +1126,7 @@ class CsvDownloaderTest extends TestCase
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', '');
         $this->configuration->setAsString('fieldsFromFeUserForCsv', 'name');
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'name;',
             $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
@@ -1140,7 +1140,7 @@ class CsvDownloaderTest extends TestCase
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'address');
         $this->configuration->setAsString('fieldsFromFeUserForCsv', '');
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             ';address',
             $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
@@ -1178,7 +1178,7 @@ class CsvDownloaderTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo',
             $this->subject->createAndOutputListOfRegistrations()
         );
@@ -1202,7 +1202,7 @@ class CsvDownloaderTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'foo',
             $this->subject->createAndOutputListOfRegistrations()
         );
@@ -1227,7 +1227,7 @@ class CsvDownloaderTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo',
             $this->subject->createAndOutputListOfRegistrations()
         );
@@ -1242,7 +1242,7 @@ class CsvDownloaderTest extends TestCase
             $this->testingFramework->getAutoIncrement('tx_seminars_seminars')
         );
 
-        self::assertContains('404', $this->headerProxy->getLastAddedHeader());
+        self::assertStringContainsString('404', $this->headerProxy->getLastAddedHeader());
     }
 
     /**
@@ -1253,7 +1253,7 @@ class CsvDownloaderTest extends TestCase
         $this->subject->setTypo3Mode('FE');
         $this->subject->createAndOutputListOfRegistrations();
 
-        self::assertContains('403', $this->headerProxy->getLastAddedHeader());
+        self::assertStringContainsString('403', $this->headerProxy->getLastAddedHeader());
     }
 
     /**
@@ -1299,7 +1299,7 @@ class CsvDownloaderTest extends TestCase
             ['seminar' => $this->eventUid, 'user' => $frontEndUserUid]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'foo@bar.com',
             $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
@@ -1322,7 +1322,7 @@ class CsvDownloaderTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'foo bank',
             $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );
@@ -1355,7 +1355,7 @@ class CsvDownloaderTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             (string)$queueUid,
             $this->subject->createAndOutputListOfRegistrations($this->eventUid)
         );

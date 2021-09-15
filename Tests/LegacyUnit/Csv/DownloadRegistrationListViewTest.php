@@ -110,7 +110,7 @@ class DownloadRegistrationListViewTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             (string)$registrationUid,
             $this->subject->render()
         );
@@ -139,7 +139,7 @@ class DownloadRegistrationListViewTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             $firstName,
             $this->subject->render()
         );
@@ -168,7 +168,7 @@ class DownloadRegistrationListViewTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             $lastName,
             $this->subject->render()
         );
@@ -196,7 +196,7 @@ class DownloadRegistrationListViewTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             $knownFrom,
             $this->subject->render()
         );
@@ -224,7 +224,7 @@ class DownloadRegistrationListViewTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             $notes,
             $this->subject->render()
         );
@@ -251,7 +251,7 @@ class DownloadRegistrationListViewTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             (string)$registrationUid,
             $this->subject->render()
         );
@@ -278,7 +278,7 @@ class DownloadRegistrationListViewTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             (string)$registrationUid,
             $this->subject->render()
         );

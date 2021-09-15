@@ -122,7 +122,7 @@ class RegistrationFormTest extends TestCase
     {
         $this->testingFramework->createAndLoginFrontEndUser('', ['name' => 'John Doe']);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'John Doe',
             $this->subject->getAllFeUserData()
         );
@@ -135,7 +135,7 @@ class RegistrationFormTest extends TestCase
     {
         $this->testingFramework->createAndLoginFrontEndUser('', ['email' => 'john@example.com']);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'mail',
             $this->subject->getAllFeUserData()
         );
@@ -161,7 +161,7 @@ class RegistrationFormTest extends TestCase
     {
         $this->testingFramework->createAndLoginFrontEndUser('', ['name' => 'John Doe']);
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '###',
             $this->subject->getAllFeUserData()
         );
@@ -373,7 +373,7 @@ class RegistrationFormTest extends TestCase
 
         $this->subject->setPage(['next_page' => 0]);
 
-        self::assertContains(
+        self::assertStringContainsString(
             '1',
             $this->subject->getStepCounter()
         );
@@ -394,7 +394,7 @@ class RegistrationFormTest extends TestCase
         );
         $this->subject->setPage(['next_page' => 0]);
 
-        self::assertContains(
+        self::assertStringContainsString(
             '2',
             $this->subject->getStepCounter()
         );
@@ -1508,7 +1508,7 @@ class RegistrationFormTest extends TestCase
         $subject->setSeminar($event);
         $subject->setFakedFormValue('price', 'price_regular');
 
-        self::assertContains(
+        self::assertStringContainsString(
             '42',
             $subject->getAllRegistrationDataForConfirmation()
         );
@@ -1532,7 +1532,7 @@ class RegistrationFormTest extends TestCase
         $subject->setSeminar($event);
         $subject->setFakedFormValue('interests', 'A, B & C');
 
-        self::assertContains(
+        self::assertStringContainsString(
             'A, B &amp; C',
             $subject->getAllRegistrationDataForConfirmation()
         );
@@ -1556,7 +1556,7 @@ class RegistrationFormTest extends TestCase
         $subject->setSeminar($event);
         $subject->setFakedFormValue('interests', "Love\rPeace");
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Love<br />Peace',
             $subject->getAllRegistrationDataForConfirmation()
         );
@@ -1580,7 +1580,7 @@ class RegistrationFormTest extends TestCase
         $subject->setSeminar($event);
         $subject->setFakedFormValue('attendees_names', 'John Doe');
 
-        self::assertContains(
+        self::assertStringContainsString(
             'John Doe',
             $subject->getAllRegistrationDataForConfirmation()
         );
@@ -1610,7 +1610,7 @@ class RegistrationFormTest extends TestCase
         $subject->setFakedFormValue('attendees_names', 'John Doe');
         $subject->setFakedFormValue('registered_themselves', '1');
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Jane Doe',
             $subject->getAllRegistrationDataForConfirmation()
         );
@@ -1640,7 +1640,7 @@ class RegistrationFormTest extends TestCase
         $subject->setFakedFormValue('attendees_names', 'John Doe');
         $subject->setFakedFormValue('registered_themselves', '');
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'Jane Doe',
             $subject->getAllRegistrationDataForConfirmation()
         );
@@ -1670,7 +1670,7 @@ class RegistrationFormTest extends TestCase
         $subject->setSeminar($event);
         $subject->setFakedFormValue('registered_themselves', '1');
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'facility manager',
             $subject->getAllRegistrationDataForConfirmation()
         );
@@ -1700,7 +1700,7 @@ class RegistrationFormTest extends TestCase
         $subject->setSeminar($event);
         $subject->setFakedFormValue('registered_themselves', '1');
 
-        self::assertContains(
+        self::assertStringContainsString(
             'facility manager',
             $subject->getAllRegistrationDataForConfirmation()
         );
@@ -1730,7 +1730,7 @@ class RegistrationFormTest extends TestCase
         $subject->setSeminar($event);
         $subject->setFakedFormValue('registered_themselves', '1');
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'jane@example.com',
             $subject->getAllRegistrationDataForConfirmation()
         );
@@ -1760,7 +1760,7 @@ class RegistrationFormTest extends TestCase
         $subject->setSeminar($event);
         $subject->setFakedFormValue('registered_themselves', '1');
 
-        self::assertContains(
+        self::assertStringContainsString(
             'jane@example.com',
             $subject->getAllRegistrationDataForConfirmation()
         );

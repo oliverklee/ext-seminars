@@ -157,7 +157,7 @@ final class EventEditorTest extends FunctionalTestCase
 
         $result = $this->subject->getEventSuccessfullySavedUrl();
 
-        self::assertContains('?id=' . $targetPageUid, $result);
+        self::assertStringContainsString('?id=' . $targetPageUid, $result);
     }
 
     /**
@@ -169,7 +169,7 @@ final class EventEditorTest extends FunctionalTestCase
 
         $result = $this->subject->getEventSuccessfullySavedUrl();
 
-        self::assertContains('?id=' . self::CURRENT_PAGE_UID, $result);
+        self::assertStringContainsString('?id=' . self::CURRENT_PAGE_UID, $result);
     }
 
     /**
@@ -182,7 +182,7 @@ final class EventEditorTest extends FunctionalTestCase
 
         $result = $this->subject->getEventSuccessfullySavedUrl();
 
-        self::assertContains('tx_seminars_pi1%5Bseminar%5D=' . self::EVENT_UID, $result);
+        self::assertStringContainsString('tx_seminars_pi1%5Bseminar%5D=' . self::EVENT_UID, $result);
     }
 
     // Tests concerning populateListOrganizers().

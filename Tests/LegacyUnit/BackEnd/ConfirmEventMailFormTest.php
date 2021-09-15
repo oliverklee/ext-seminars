@@ -83,7 +83,7 @@ class ConfirmEventMailFormTest extends TestCase
      */
     public function renderContainsSubmitButton()
     {
-        self::assertContains(
+        self::assertStringContainsString(
             '<button class="submitButton confirmEvent"><p>' .
             $this->getLanguageService()->getLL('confirmMailForm_sendButton') .
             '</p></button>',
@@ -96,7 +96,7 @@ class ConfirmEventMailFormTest extends TestCase
      */
     public function renderContainsPrefilledBodyFieldWithLocalizedSalutation()
     {
-        self::assertContains('salutation', $this->subject->render());
+        self::assertStringContainsString('salutation', $this->subject->render());
     }
 
     /**
@@ -104,7 +104,7 @@ class ConfirmEventMailFormTest extends TestCase
      */
     public function renderContainsTheConfirmEventActionForThisForm()
     {
-        self::assertContains(
+        self::assertStringContainsString(
             '<input type="hidden" name="action" value="confirmEvent" />',
             $this->subject->render()
         );

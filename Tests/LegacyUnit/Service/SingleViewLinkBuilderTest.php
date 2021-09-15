@@ -415,7 +415,7 @@ final class SingleViewLinkBuilderTest extends TestCase
 
         $subject = new TestingSingleViewLinkBuilder();
 
-        self::assertContains(
+        self::assertStringContainsString(
             '?id=' . $pageUid . '&tx_seminars_pi1%5BshowUid%5D=' . $event->getUid(),
             $subject->createAbsoluteUrlForEvent($event)
         );

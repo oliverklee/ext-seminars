@@ -172,7 +172,7 @@ final class RegistrationTest extends FunctionalTestCase
 
         $result = $this->subject->dumpUserValues('name');
 
-        self::assertContains($name, $result);
+        self::assertStringContainsString($name, $result);
     }
 
     /**
@@ -191,8 +191,8 @@ final class RegistrationTest extends FunctionalTestCase
 
         $result = $this->subject->dumpUserValues('name , email');
 
-        self::assertContains($name, $result);
-        self::assertContains($email, $result);
+        self::assertStringContainsString($name, $result);
+        self::assertStringContainsString($email, $result);
     }
 
     /**
@@ -206,7 +206,7 @@ final class RegistrationTest extends FunctionalTestCase
 
         $result = $this->subject->dumpUserValues('email');
 
-        self::assertContains($this->getLanguageService()->getLL('label_email'), $result);
+        self::assertStringContainsString($this->getLanguageService()->getLL('label_email'), $result);
     }
 
     /**
@@ -225,8 +225,8 @@ final class RegistrationTest extends FunctionalTestCase
 
         $result = $this->subject->dumpUserValues('name , email');
 
-        self::assertContains($this->getLanguageService()->getLL('label_name'), $result);
-        self::assertContains($this->getLanguageService()->getLL('label_email'), $result);
+        self::assertStringContainsString($this->getLanguageService()->getLL('label_name'), $result);
+        self::assertStringContainsString($this->getLanguageService()->getLL('label_email'), $result);
     }
 
     /**
@@ -238,7 +238,7 @@ final class RegistrationTest extends FunctionalTestCase
 
         $result = $this->subject->dumpUserValues('pid');
 
-        self::assertNotContains('label_pid', $result);
+        self::assertStringNotContainsString('label_pid', $result);
     }
 
     /**
@@ -250,7 +250,7 @@ final class RegistrationTest extends FunctionalTestCase
 
         $result = $this->subject->dumpUserValues('is_dummy_record');
 
-        self::assertContains('Is_dummy_record: 1', $result);
+        self::assertStringContainsString('Is_dummy_record: 1', $result);
     }
 
     /**
@@ -281,7 +281,7 @@ final class RegistrationTest extends FunctionalTestCase
         $result = $this->subject->dumpUserValues($fieldName);
 
         $expected = \strftime(self::DATE_FORMAT, $value) . ' ' . \strftime(self::TIME_FORMAT, $value);
-        self::assertContains($expected, $result);
+        self::assertStringContainsString($expected, $result);
     }
 
     /**
@@ -380,7 +380,7 @@ final class RegistrationTest extends FunctionalTestCase
 
         $result = $this->subject->dumpUserValues($fieldName);
 
-        self::assertNotContains('::', $result);
+        self::assertStringNotContainsString('::', $result);
     }
 
     /**
@@ -431,7 +431,7 @@ final class RegistrationTest extends FunctionalTestCase
 
         $result = $this->subject->dumpUserValues($fieldName);
 
-        self::assertContains($value, $result);
+        self::assertStringContainsString($value, $result);
     }
 
     /**
@@ -466,7 +466,7 @@ final class RegistrationTest extends FunctionalTestCase
 
         $result = $this->subject->dumpUserValues($fieldName);
 
-        self::assertContains((string)$value, $result);
+        self::assertStringContainsString((string)$value, $result);
     }
 
     /**
@@ -494,7 +494,7 @@ final class RegistrationTest extends FunctionalTestCase
 
         $result = $this->subject->dumpUserValues('gender');
 
-        self::assertContains($this->getLanguageService()->getLL('label_gender.I.' . $value), $result);
+        self::assertStringContainsString($this->getLanguageService()->getLL('label_gender.I.' . $value), $result);
     }
 
     /**
@@ -507,7 +507,7 @@ final class RegistrationTest extends FunctionalTestCase
 
         $result = $this->subject->dumpUserValues('usergroup');
 
-        self::assertContains('Group 1', $result);
+        self::assertStringContainsString('Group 1', $result);
     }
 
     /**
@@ -520,7 +520,7 @@ final class RegistrationTest extends FunctionalTestCase
 
         $result = $this->subject->dumpUserValues('usergroup');
 
-        self::assertContains('Group 2, Group 1', $result);
+        self::assertStringContainsString('Group 2, Group 1', $result);
     }
 
     // Tests regarding the billing address
@@ -534,7 +534,7 @@ final class RegistrationTest extends FunctionalTestCase
 
         $result = $subject->getBillingAddress();
 
-        self::assertContains($this->getLanguageService()->getLL('label_gender.I.0'), $result);
+        self::assertStringContainsString($this->getLanguageService()->getLL('label_gender.I.0'), $result);
     }
 
     /**
@@ -546,7 +546,7 @@ final class RegistrationTest extends FunctionalTestCase
 
         $result = $subject->getBillingAddress();
 
-        self::assertContains($this->getLanguageService()->getLL('label_gender.I.1'), $result);
+        self::assertStringContainsString($this->getLanguageService()->getLL('label_gender.I.1'), $result);
     }
 
     /**
@@ -559,7 +559,7 @@ final class RegistrationTest extends FunctionalTestCase
 
         $result = $subject->getBillingAddress();
 
-        self::assertContains($value, $result);
+        self::assertStringContainsString($value, $result);
     }
 
     /**
@@ -572,6 +572,6 @@ final class RegistrationTest extends FunctionalTestCase
 
         $result = $subject->getBillingAddress();
 
-        self::assertContains($value, $result);
+        self::assertStringContainsString($value, $result);
     }
 }

@@ -79,7 +79,7 @@ class SpeakersListTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Icons/Hide.gif',
             $this->subject->show()
         );
@@ -98,7 +98,7 @@ class SpeakersListTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Icons/Unhide.gif',
             $this->subject->show()
         );
@@ -120,7 +120,7 @@ class SpeakersListTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Speaker in subfolder',
             $this->subject->show()
         );
@@ -139,6 +139,6 @@ class SpeakersListTest extends TestCase
             ->getLoadedTestingModel(['usergroup' => $backEndGroup->getUid()]);
         BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
 
-        self::assertContains((string)$newSpeakerFolder, $this->subject->show());
+        self::assertStringContainsString((string)$newSpeakerFolder, $this->subject->show());
     }
 }

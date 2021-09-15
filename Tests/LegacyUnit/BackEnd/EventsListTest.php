@@ -79,7 +79,7 @@ class EventsListTest extends TestCase
 
     public function testShowContainsNoBodyHeaderWithEmptySystemFolder()
     {
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '<td class="datecol">',
             $this->subject->show()
         );
@@ -92,7 +92,7 @@ class EventsListTest extends TestCase
             ['pid' => $this->dummySysFolderPid]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<td class="datecol">',
             $this->subject->show()
         );
@@ -106,7 +106,7 @@ class EventsListTest extends TestCase
             ['pid' => $this->dummySysFolderPid + 1]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '<td class="datecol">',
             $this->subject->show()
         );
@@ -122,7 +122,7 @@ class EventsListTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'event_1',
             $this->subject->show()
         );
@@ -145,11 +145,11 @@ class EventsListTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'event_1',
             $this->subject->show()
         );
-        self::assertContains(
+        self::assertStringContainsString(
             'event_2',
             $this->subject->show()
         );
@@ -166,7 +166,7 @@ class EventsListTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'event_1',
             $this->subject->show()
         );
@@ -183,7 +183,7 @@ class EventsListTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'event_1',
             $this->subject->show()
         );
@@ -200,7 +200,7 @@ class EventsListTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'accreditation number 123',
             $this->subject->show()
         );
@@ -217,7 +217,7 @@ class EventsListTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '&amp;&quot;&lt;&gt;',
             $this->subject->show()
         );
@@ -233,7 +233,7 @@ class EventsListTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<img src="/typo3conf/ext/seminars/Resources/Public/Icons/Canceled.png" title="canceled" alt="canceled"/>',
             $this->subject->show()
         );
@@ -249,7 +249,7 @@ class EventsListTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<img src="/typo3conf/ext/seminars/Resources/Public/Icons/Confirmed.png" title="confirmed" alt="confirmed"/>',
             $this->subject->show()
         );
@@ -265,12 +265,12 @@ class EventsListTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '<img src="/typo3conf/ext/seminars/Resources/Public/Icons/Canceled.png" title="canceled" alt="canceled"/>',
             $this->subject->show()
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '<img src="/typo3conf/ext/seminars/Resources/Public/Icons/Confirmed.png" title="confirmed" alt="confirmed"/>',
             $this->subject->show()
         );
@@ -296,7 +296,7 @@ class EventsListTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<button><p>E-mail</p></button>',
             $this->subject->show()
         );
@@ -313,7 +313,7 @@ class EventsListTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '<button><p>Confirm</p></button>',
             $this->subject->show()
         );
@@ -329,7 +329,7 @@ class EventsListTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '<button><p>Confirm</p></button>',
             $this->subject->show()
         );
@@ -346,7 +346,7 @@ class EventsListTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<button><p>Confirm</p></button>',
             $this->subject->show()
         );
@@ -363,7 +363,7 @@ class EventsListTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<button><p>Confirm</p></button>',
             $this->subject->show()
         );
@@ -379,7 +379,7 @@ class EventsListTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '<button><p>Confirm</p></button>',
             $this->subject->show()
         );
@@ -395,7 +395,7 @@ class EventsListTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<button><p>Confirm</p></button>' .
             '<input type="hidden" name="eventUid" value="' . $uid . '" />',
             $this->subject->show()
@@ -415,7 +415,7 @@ class EventsListTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '<button><p>Confirm</p></button>',
             $this->subject->show()
         );
@@ -432,7 +432,7 @@ class EventsListTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '<button><p>Cancel</p></button>',
             $this->subject->show()
         );
@@ -448,7 +448,7 @@ class EventsListTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '<button><p>Cancel</p></button>',
             $this->subject->show()
         );
@@ -464,7 +464,7 @@ class EventsListTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<button><p>Cancel</p></button>',
             $this->subject->show()
         );
@@ -481,7 +481,7 @@ class EventsListTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<button><p>Cancel</p></button>',
             $this->subject->show()
         );
@@ -498,7 +498,7 @@ class EventsListTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '<button><p>Cancel</p></button>',
             $this->subject->show()
         );
@@ -514,7 +514,7 @@ class EventsListTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<button><p>Cancel</p></button>' .
             '<input type="hidden" name="eventUid" value="' . $uid . '" />',
             $this->subject->show()
@@ -534,7 +534,7 @@ class EventsListTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '<button><p>Cancel</p></button>',
             $this->subject->show()
         );
@@ -561,7 +561,7 @@ class EventsListTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '=' . $eventUid,
             $this->subject->show()
         );
@@ -589,7 +589,7 @@ class EventsListTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '<a href="mod.php?M=web_txseminarsM2&amp;csv=1&amp;id=' .
             $this->dummySysFolderPid .
             '&amp;tx_seminars_pi2[table]=tx_seminars_attendances' .
@@ -614,7 +614,7 @@ class EventsListTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Event in subfolder',
             $this->subject->show()
         );
@@ -632,7 +632,7 @@ class EventsListTest extends TestCase
             ['pid' => $this->dummySysFolderPid, 'seminar' => $eventUid]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('label_show_event_registrations'),
             $this->subject->show()
         );
@@ -650,7 +650,7 @@ class EventsListTest extends TestCase
             ['pid' => $this->dummySysFolderPid, 'seminar' => $eventUid]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '&amp;subModule=2',
             $this->subject->show()
         );
@@ -668,7 +668,7 @@ class EventsListTest extends TestCase
             ['pid' => $this->dummySysFolderPid, 'seminar' => $eventUid]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '&amp;eventUid=' . $eventUid,
             $this->subject->show()
         );
@@ -690,7 +690,7 @@ class EventsListTest extends TestCase
             ['pid' => $this->dummySysFolderPid, 'seminar' => $eventUid]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             $this->getLanguageService()->getLL('label_show_event_registrations'),
             $this->subject->show()
         );
@@ -711,7 +711,7 @@ class EventsListTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'EventComplete.gif',
             $this->subject->show()
         );
@@ -732,7 +732,7 @@ class EventsListTest extends TestCase
 
     public function testEventListCanContainNewButton()
     {
-        self::assertContains(
+        self::assertStringContainsString(
             'newRecordLink',
             $this->subject->show()
         );
@@ -743,7 +743,7 @@ class EventsListTest extends TestCase
         $backEndUser = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUser::class)->getLoadedTestingModel([]);
         BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
 
-        self::assertContains((string)$this->dummySysFolderPid, $this->subject->show());
+        self::assertStringContainsString((string)$this->dummySysFolderPid, $this->subject->show());
     }
 
     public function testNewButtonForEventStoredOnCurrentPageHasCurrentFolderLabel()
@@ -751,7 +751,7 @@ class EventsListTest extends TestCase
         $backEndUser = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUser::class)->getLoadedTestingModel([]);
         BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
 
-        self::assertContains(
+        self::assertStringContainsString(
             \sprintf(
                 $this->getLanguageService()->getLL('label_create_record_in_current_folder'),
                 '',
@@ -768,7 +768,7 @@ class EventsListTest extends TestCase
             ->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
         $newEventFolder = $loggedInUser->getEventFolderFromGroup();
 
-        self::assertContains((string)$newEventFolder, $this->subject->show());
+        self::assertStringContainsString((string)$newEventFolder, $this->subject->show());
     }
 
     public function testNewButtonForEventStoredInPageDeterminedByGroupHasForeignFolderLabel()
@@ -778,7 +778,7 @@ class EventsListTest extends TestCase
             ->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
         $newEventFolder = $loggedInUser->getEventFolderFromGroup();
 
-        self::assertContains(
+        self::assertStringContainsString(
             \sprintf(
                 $this->getLanguageService()->getLL('label_create_record_in_foreign_folder'),
                 '',

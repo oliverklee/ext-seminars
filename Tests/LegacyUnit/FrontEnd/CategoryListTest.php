@@ -104,11 +104,11 @@ class CategoryListTest extends TestCase
         );
 
         $output = $this->subject->render();
-        self::assertContains(
+        self::assertStringContainsString(
             'first category',
             $output
         );
-        self::assertContains(
+        self::assertStringContainsString(
             'second category',
             $output
         );
@@ -174,7 +174,7 @@ class CategoryListTest extends TestCase
             $categoryUid
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'one category',
             $this->subject->render()
         );
@@ -202,7 +202,7 @@ class CategoryListTest extends TestCase
             $categoryUid
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'one category',
             $this->subject->render()
         );
@@ -232,7 +232,7 @@ class CategoryListTest extends TestCase
             $categoryUid
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'one category',
             $this->subject->render()
         );
@@ -260,7 +260,7 @@ class CategoryListTest extends TestCase
             $categoryUid
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'one category',
             $this->subject->render()
         );
@@ -288,7 +288,7 @@ class CategoryListTest extends TestCase
             $categoryUid
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'one category',
             $this->subject->render()
         );
@@ -321,7 +321,7 @@ class CategoryListTest extends TestCase
             $categoryUid
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'one category',
             $this->subject->render()
         );
@@ -354,7 +354,7 @@ class CategoryListTest extends TestCase
             $categoryUid
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'one category',
             $this->subject->render()
         );
@@ -386,7 +386,7 @@ class CategoryListTest extends TestCase
             $categoryUid
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'tx_seminars_pi1%5Bcategory%5D=' . $categoryUid,
             $this->subject->render()
         );
@@ -431,7 +431,7 @@ class CategoryListTest extends TestCase
             ];
         $this->testingFramework->createDummyFile('foo.gif', base64_decode(self::BLANK_GIF, true));
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'foo.gif',
             $this->subject->createCategoryList($singleCategory)
         );
@@ -471,11 +471,11 @@ class CategoryListTest extends TestCase
                 ],
             ];
 
-        self::assertContains(
+        self::assertStringContainsString(
             'test &amp; more',
             $this->subject->createCategoryList($singleCategory)
         );
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'test & more',
             $this->subject->createCategoryList($singleCategory)
         );
