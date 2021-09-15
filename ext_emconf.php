@@ -11,6 +11,7 @@ $EM_CONF[$_EXTKEY] = [
             'typo3' => '9.5.0-9.5.99',
             'oelib' => '3.6.1-3.99.99',
             'mkforms' => '9.5.2-9.5.99',
+            'rn_base' => '1.13.12-1.99.99',
             'static_info_tables' => '6.7.0-6.99.99',
         ],
         'conflicts' => [
