@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Allow installations up to PHP 8.0 (#758)
 
 ### Changed
+- Document the required MySQL/MariaDB settings for the FE editor (#843)
 - Simplify the user and group mapper inheritance chains (#806)
 - Move more tests to the nimut testing framework (#804)
 - Truncate changed tables only for functional tests (#786)
