@@ -8,7 +8,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
-class CheckboxMapperTest extends TestCase
+final class CheckboxMapperTest extends TestCase
 {
     /**
      * @var TestingFramework

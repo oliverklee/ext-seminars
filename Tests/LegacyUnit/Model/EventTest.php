@@ -12,7 +12,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\PhpUnit\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class EventTest extends TestCase
+final class EventTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Model_Event

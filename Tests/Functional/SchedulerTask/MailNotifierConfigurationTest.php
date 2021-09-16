@@ -15,7 +15,7 @@ use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Scheduler\Controller\SchedulerModuleController;
 
-class MailNotifierConfigurationTest extends FunctionalTestCase
+final class MailNotifierConfigurationTest extends FunctionalTestCase
 {
     use LanguageHelper;
 

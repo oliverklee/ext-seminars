@@ -10,7 +10,7 @@ use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\BackEnd\GeneralEventMailForm;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
 
-class GeneralEventMailFormTest extends TestCase
+final class GeneralEventMailFormTest extends TestCase
 {
     use BackEndTestsTrait;
 

@@ -6,7 +6,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
 use OliverKlee\PhpUnit\TestCase;
 
-class TimeSlotTest extends TestCase
+final class TimeSlotTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Model_TimeSlot

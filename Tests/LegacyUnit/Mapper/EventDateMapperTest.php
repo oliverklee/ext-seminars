@@ -12,7 +12,7 @@ use OliverKlee\PhpUnit\TestCase;
 /**
  * This test case holds all tests specific to event dates.
  */
-class EventDateMapperTest extends TestCase
+final class EventDateMapperTest extends TestCase
 {
     /**
      * @var TestingFramework

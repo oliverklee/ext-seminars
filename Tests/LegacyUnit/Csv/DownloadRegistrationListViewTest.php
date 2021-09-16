@@ -11,7 +11,7 @@ use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Csv\DownloadRegistrationListView;
 use TYPO3\CMS\Lang\LanguageService;
 
-class DownloadRegistrationListViewTest extends TestCase
+final class DownloadRegistrationListViewTest extends TestCase
 {
     /**
      * @var DownloadRegistrationListView

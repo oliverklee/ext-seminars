@@ -13,7 +13,7 @@ use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
-class RegistrationsListTest extends TestCase
+final class RegistrationsListTest extends TestCase
 {
     use LanguageHelper;
 

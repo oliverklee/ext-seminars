@@ -7,7 +7,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\PhpUnit\TestCase;
 
-class SpeakerTest extends TestCase
+final class SpeakerTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Model_Speaker

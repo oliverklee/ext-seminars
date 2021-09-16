@@ -8,7 +8,7 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Bag\AbstractBag;
 
-class SpeakerBagBuilderTest extends TestCase
+final class SpeakerBagBuilderTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_BagBuilder_Speaker

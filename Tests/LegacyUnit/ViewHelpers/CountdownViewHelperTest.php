@@ -9,7 +9,7 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 
-class CountdownViewHelperTest extends TestCase
+final class CountdownViewHelperTest extends TestCase
 {
     use LanguageHelper;
 

@@ -8,7 +8,7 @@ use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\DummyObjectToCheck;
 
-class ConfigCheckTest extends TestCase
+final class ConfigCheckTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_ConfigCheck

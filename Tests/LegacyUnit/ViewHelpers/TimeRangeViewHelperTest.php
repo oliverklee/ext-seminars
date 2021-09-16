@@ -11,7 +11,7 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 
-class TimeRangeViewHelperTest extends TestCase
+final class TimeRangeViewHelperTest extends TestCase
 {
     use LanguageHelper;
 

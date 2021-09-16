@@ -11,7 +11,7 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class FrontEndUserTest extends TestCase
+final class FrontEndUserTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Model_FrontEndUser the object to test

@@ -9,6 +9,6 @@ use OliverKlee\Oelib\Model\AbstractModel;
 /**
  * This class represents an untitled model for testing purposes.
  */
-class UntitledTestingModel extends AbstractModel
+final class UntitledTestingModel extends AbstractModel
 {
 }

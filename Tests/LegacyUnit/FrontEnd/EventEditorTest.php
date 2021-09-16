@@ -20,7 +20,7 @@ use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
-class EventEditorTest extends TestCase
+final class EventEditorTest extends TestCase
 {
     use LanguageHelper;
 

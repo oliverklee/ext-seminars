@@ -8,7 +8,7 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\BackEnd\FlexForms;
 
-class FlexFormsTest extends TestCase
+final class FlexFormsTest extends TestCase
 {
     /**
      * @var FlexForms

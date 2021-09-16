@@ -11,7 +11,7 @@ use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Csv\EventListView;
 use TYPO3\CMS\Lang\LanguageService;
 
-class EventListViewTest extends TestCase
+final class EventListViewTest extends TestCase
 {
     /**
      * @var EventListView

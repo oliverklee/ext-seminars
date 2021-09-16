@@ -9,7 +9,7 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Bag\AbstractBag;
 
-class EventBagBuilderTest extends TestCase
+final class EventBagBuilderTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_BagBuilder_Event

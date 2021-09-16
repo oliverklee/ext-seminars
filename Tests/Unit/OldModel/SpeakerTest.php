@@ -8,7 +8,7 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\OldModel\AbstractModel;
 
-class SpeakerTest extends UnitTestCase
+final class SpeakerTest extends UnitTestCase
 {
     /**
      * @var \Tx_Seminars_OldModel_Speaker

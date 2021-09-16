@@ -9,7 +9,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
-class SpeakerMapperTest extends TestCase
+final class SpeakerMapperTest extends TestCase
 {
     /**
      * @var TestingFramework

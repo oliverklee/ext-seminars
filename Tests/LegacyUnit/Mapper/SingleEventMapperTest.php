@@ -12,7 +12,7 @@ use OliverKlee\PhpUnit\TestCase;
 /**
  * This test case holds tests which are specific to single events.
  */
-class SingleEventMapperTest extends TestCase
+final class SingleEventMapperTest extends TestCase
 {
     /**
      * @var TestingFramework

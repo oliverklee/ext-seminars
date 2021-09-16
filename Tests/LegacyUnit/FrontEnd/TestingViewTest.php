@@ -9,7 +9,7 @@ use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\FrontEnd\TestingView;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
-class TestingViewTest extends TestCase
+final class TestingViewTest extends TestCase
 {
     /**
      * @var TestingView

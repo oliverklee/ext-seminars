@@ -8,7 +8,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
-class PlaceMapperTest extends TestCase
+final class PlaceMapperTest extends TestCase
 {
     /**
      * @var TestingFramework

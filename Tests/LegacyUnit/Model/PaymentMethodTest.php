@@ -6,7 +6,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
 use OliverKlee\PhpUnit\TestCase;
 
-class PaymentMethodTest extends TestCase
+final class PaymentMethodTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Model_PaymentMethod

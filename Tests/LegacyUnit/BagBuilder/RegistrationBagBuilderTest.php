@@ -9,7 +9,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
-class RegistrationBagBuilderTest extends TestCase
+final class RegistrationBagBuilderTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_BagBuilder_Registration

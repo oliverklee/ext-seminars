@@ -12,7 +12,7 @@ use OliverKlee\Oelib\Model\FrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
-class EventMapperTest extends TestCase
+final class EventMapperTest extends TestCase
 {
     /**
      * @var TestingFramework

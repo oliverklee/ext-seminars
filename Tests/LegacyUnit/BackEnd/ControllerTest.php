@@ -14,7 +14,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-class ControllerTest extends TestCase
+final class ControllerTest extends TestCase
 {
     use BackEndTestsTrait;
 

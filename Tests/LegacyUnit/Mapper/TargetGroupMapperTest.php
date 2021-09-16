@@ -8,7 +8,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
-class TargetGroupMapperTest extends TestCase
+final class TargetGroupMapperTest extends TestCase
 {
     /**
      * @var TestingFramework

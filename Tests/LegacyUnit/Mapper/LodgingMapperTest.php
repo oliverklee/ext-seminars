@@ -7,7 +7,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
-class LodgingMapperTest extends TestCase
+final class LodgingMapperTest extends TestCase
 {
     /**
      * @var TestingFramework

@@ -9,7 +9,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
-class RegistrationMapperTest extends TestCase
+final class RegistrationMapperTest extends TestCase
 {
     /**
      * @var TestingFramework

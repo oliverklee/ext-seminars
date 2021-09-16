@@ -10,7 +10,7 @@ use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-class EventTest extends UnitTestCase
+final class EventTest extends UnitTestCase
 {
     /**
      * @var \Tx_Seminars_Model_Event

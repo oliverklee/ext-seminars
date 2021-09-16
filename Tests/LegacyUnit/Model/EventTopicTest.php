@@ -8,7 +8,7 @@ use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\PhpUnit\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class EventTopicTest extends TestCase
+final class EventTopicTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Model_Event

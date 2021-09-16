@@ -7,7 +7,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
-class EventTypeMapperTest extends TestCase
+final class EventTypeMapperTest extends TestCase
 {
     /**
      * @var TestingFramework

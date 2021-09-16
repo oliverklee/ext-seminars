@@ -10,7 +10,7 @@ use OliverKlee\Seminars\Bag\AbstractBag;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\BagBuilder\BrokenBagBuilder;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\BagBuilder\TestingBagBuilder;
 
-class AbstractBagBuilderTest extends TestCase
+final class AbstractBagBuilderTest extends TestCase
 {
     /**
      * @var TestingBagBuilder

@@ -10,7 +10,7 @@ use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
 
-class RegistrationDigestTest extends UnitTestCase
+final class RegistrationDigestTest extends UnitTestCase
 {
     /**
      * @var RegistrationDigest

@@ -6,7 +6,7 @@ namespace OliverKlee\Seminars\Tests\Unit\Model;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 
-class SpeakerTest extends UnitTestCase
+final class SpeakerTest extends UnitTestCase
 {
     /**
      * @var \Tx_Seminars_Model_Speaker

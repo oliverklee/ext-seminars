@@ -10,7 +10,7 @@ use OliverKlee\Oelib\Model\BackEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
-class FrontEndUserGroupMapperTest extends TestCase
+final class FrontEndUserGroupMapperTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Mapper_FrontEndUserGroup the object to test
