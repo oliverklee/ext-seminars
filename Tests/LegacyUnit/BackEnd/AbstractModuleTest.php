@@ -8,7 +8,7 @@ use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\LegacyUnit\BackEnd\Fixtures\DummyModule;
 
-class AbstractModuleTest extends TestCase
+final class AbstractModuleTest extends TestCase
 {
     /**
      * @var DummyModule

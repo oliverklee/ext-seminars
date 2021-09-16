@@ -6,7 +6,7 @@ namespace OliverKlee\Seminars\Tests\Unit\Model;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 
-class SkillTest extends UnitTestCase
+final class SkillTest extends UnitTestCase
 {
     /**
      * @var \Tx_Seminars_Model_Skill

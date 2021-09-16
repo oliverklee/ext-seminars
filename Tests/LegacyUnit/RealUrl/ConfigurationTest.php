@@ -10,7 +10,7 @@ use OliverKlee\Seminars\RealUrl\Configuration as RealUrlConfiguration;
 /**
  * Testcase.
  */
-class ConfigurationTest extends TestCase
+final class ConfigurationTest extends TestCase
 {
     /**
      * @var RealUrlConfiguration

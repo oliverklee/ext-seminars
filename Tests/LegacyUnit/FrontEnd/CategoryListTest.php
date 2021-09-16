@@ -9,7 +9,7 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
-class CategoryListTest extends TestCase
+final class CategoryListTest extends TestCase
 {
     /**
      * @var string

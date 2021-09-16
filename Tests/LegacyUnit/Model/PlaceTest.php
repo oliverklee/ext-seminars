@@ -9,7 +9,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\Country;
 use OliverKlee\PhpUnit\TestCase;
 
-class PlaceTest extends TestCase
+final class PlaceTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Model_Place

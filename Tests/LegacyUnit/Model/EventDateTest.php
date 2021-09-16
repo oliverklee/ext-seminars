@@ -11,7 +11,7 @@ use OliverKlee\PhpUnit\TestCase;
 /**
  * This test case holds all tests specific to event dates.
  */
-class EventDateTest extends TestCase
+final class EventDateTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Model_Event

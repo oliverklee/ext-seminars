@@ -7,7 +7,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
-class FoodMapperTest extends TestCase
+final class FoodMapperTest extends TestCase
 {
     /**
      * @var TestingFramework

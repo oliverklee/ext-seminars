@@ -10,7 +10,7 @@ use OliverKlee\Seminars\Model\Interfaces\Titled;
 /**
  * This class represents a titled model for testing purposes.
  */
-class TitledTestingModel extends AbstractModel implements Titled
+final class TitledTestingModel extends AbstractModel implements Titled
 {
     /**
      * Returns our title.

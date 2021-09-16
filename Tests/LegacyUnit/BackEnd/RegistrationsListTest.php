@@ -17,7 +17,7 @@ use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
 use TYPO3\CMS\Backend\Template\DocumentTemplate;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-class RegistrationsListTest extends TestCase
+final class RegistrationsListTest extends TestCase
 {
     use BackEndTestsTrait;
 

@@ -16,7 +16,7 @@ use TYPO3\CMS\Lang\LanguageService;
 /**
  * @covers \Tx_Seminars_Csv_AbstractRegistrationListView
  */
-class AbstractRegistrationListViewTest extends TestCase
+final class AbstractRegistrationListViewTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Csv_AbstractRegistrationListView&MockObject

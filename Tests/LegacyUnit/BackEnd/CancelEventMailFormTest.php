@@ -11,7 +11,7 @@ use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\BackEnd\CancelEventMailForm;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
 
-class CancelEventMailFormTest extends TestCase
+final class CancelEventMailFormTest extends TestCase
 {
     use BackEndTestsTrait;
 

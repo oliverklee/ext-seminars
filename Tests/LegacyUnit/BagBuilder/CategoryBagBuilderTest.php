@@ -8,7 +8,7 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Bag\AbstractBag;
 
-class CategoryBagBuilderTest extends TestCase
+final class CategoryBagBuilderTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_BagBuilder_Category

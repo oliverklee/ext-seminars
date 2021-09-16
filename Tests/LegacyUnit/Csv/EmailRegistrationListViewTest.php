@@ -11,7 +11,7 @@ use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Csv\EmailRegistrationListView;
 use TYPO3\CMS\Lang\LanguageService;
 
-class EmailRegistrationListViewTest extends TestCase
+final class EmailRegistrationListViewTest extends TestCase
 {
     /**
      * @var EmailRegistrationListView

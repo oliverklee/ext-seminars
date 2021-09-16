@@ -6,7 +6,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
 use OliverKlee\PhpUnit\TestCase;
 
-class EventTypeTest extends TestCase
+final class EventTypeTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Model_EventType

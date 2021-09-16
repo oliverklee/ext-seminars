@@ -7,7 +7,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Bag;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
-class OrganizerBagTest extends TestCase
+final class OrganizerBagTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Bag_Organizer

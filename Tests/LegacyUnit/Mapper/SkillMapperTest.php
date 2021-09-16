@@ -7,7 +7,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
-class SkillMapperTest extends TestCase
+final class SkillMapperTest extends TestCase
 {
     /**
      * @var TestingFramework

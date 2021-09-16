@@ -8,7 +8,7 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Bag\AbstractBag;
 
-class OrganizerBagBuilderTest extends TestCase
+final class OrganizerBagBuilderTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_BagBuilder_Organizer

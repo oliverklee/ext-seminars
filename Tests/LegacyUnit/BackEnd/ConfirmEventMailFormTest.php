@@ -11,7 +11,7 @@ use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\BackEnd\ConfirmEventMailForm;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
 
-class ConfirmEventMailFormTest extends TestCase
+final class ConfirmEventMailFormTest extends TestCase
 {
     use BackEndTestsTrait;
 

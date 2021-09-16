@@ -10,7 +10,7 @@ use OliverKlee\Oelib\Templating\TemplateHelper;
 /**
  * This a class to test the configuration check class.
  */
-class DummyObjectToCheck extends TemplateHelper implements ConfigurationCheckable
+final class DummyObjectToCheck extends TemplateHelper implements ConfigurationCheckable
 {
     /**
      * @param array $configuration

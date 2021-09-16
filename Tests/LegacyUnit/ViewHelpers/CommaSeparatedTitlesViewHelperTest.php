@@ -10,7 +10,7 @@ use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\Model\TitledTestingModel;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\Model\UntitledTestingModel;
 
-class CommaSeparatedTitlesViewHelperTest extends TestCase
+final class CommaSeparatedTitlesViewHelperTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_ViewHelper_CommaSeparatedTitles

@@ -12,7 +12,7 @@ use OliverKlee\PhpUnit\TestCase;
 /**
  * This test case holds all tests specific to event topics.
  */
-class EventTopicMapperTest extends TestCase
+final class EventTopicMapperTest extends TestCase
 {
     /**
      * @var TestingFramework

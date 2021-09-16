@@ -9,7 +9,7 @@ use OliverKlee\PhpUnit\TestCase;
 /**
  * This test case holds all tests specific to single events.
  */
-class SingleEventTest extends TestCase
+final class SingleEventTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Model_Event

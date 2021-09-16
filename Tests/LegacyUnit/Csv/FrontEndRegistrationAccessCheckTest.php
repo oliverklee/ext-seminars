@@ -12,7 +12,7 @@ use OliverKlee\Seminars\Csv\FrontEndRegistrationAccessCheck;
 use OliverKlee\Seminars\Csv\Interfaces\CsvAccessCheck;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class FrontEndRegistrationAccessCheckTest extends TestCase
+final class FrontEndRegistrationAccessCheckTest extends TestCase
 {
     /**
      * @var FrontEndRegistrationAccessCheck

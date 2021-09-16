@@ -8,7 +8,7 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
-class EditorTest extends TestCase
+final class EditorTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_FrontEnd_Editor

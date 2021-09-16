@@ -6,7 +6,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
 use OliverKlee\PhpUnit\TestCase;
 
-class BackEndUserGroupTest extends TestCase
+final class BackEndUserGroupTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Model_BackEndUserGroup

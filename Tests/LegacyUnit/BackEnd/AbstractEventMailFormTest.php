@@ -11,7 +11,7 @@ use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\Functional\BackEnd\Fixtures\TestingEventMailForm;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
 
-class AbstractEventMailFormTest extends TestCase
+final class AbstractEventMailFormTest extends TestCase
 {
     use BackEndTestsTrait;
 

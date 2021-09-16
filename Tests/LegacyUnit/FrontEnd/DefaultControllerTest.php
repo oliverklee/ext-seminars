@@ -27,7 +27,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
-class DefaultControllerTest extends TestCase
+final class DefaultControllerTest extends TestCase
 {
     use LanguageHelper;
 

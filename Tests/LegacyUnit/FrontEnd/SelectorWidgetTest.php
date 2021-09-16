@@ -13,7 +13,7 @@ use SJBR\StaticInfoTables\PiBaseApi;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
-class SelectorWidgetTest extends TestCase
+final class SelectorWidgetTest extends TestCase
 {
     use LanguageHelper;
 

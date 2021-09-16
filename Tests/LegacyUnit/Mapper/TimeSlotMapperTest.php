@@ -9,7 +9,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
-class TimeSlotMapperTest extends TestCase
+final class TimeSlotMapperTest extends TestCase
 {
     /**
      * @var TestingFramework

@@ -7,7 +7,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 use OliverKlee\PhpUnit\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class AbstractTimeSpanTest extends TestCase
+final class AbstractTimeSpanTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Model_AbstractTimeSpan&MockObject

@@ -12,7 +12,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 
-class BackEndEventAccessCheckTest extends TestCase
+final class BackEndEventAccessCheckTest extends TestCase
 {
     /**
      * @var BackEndEventAccessCheck

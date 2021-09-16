@@ -6,7 +6,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
 use OliverKlee\PhpUnit\TestCase;
 
-class TargetGroupTest extends TestCase
+final class TargetGroupTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Model_TargetGroup

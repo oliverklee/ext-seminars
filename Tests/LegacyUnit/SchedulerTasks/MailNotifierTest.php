@@ -30,7 +30,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Lang\LanguageService;
 use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
-class MailNotifierTest extends TestCase
+final class MailNotifierTest extends TestCase
 {
     use EmailTrait;
 

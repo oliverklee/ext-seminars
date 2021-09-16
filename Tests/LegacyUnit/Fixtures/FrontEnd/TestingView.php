@@ -7,7 +7,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\FrontEnd;
 /**
  * This class represents a view for testing purposes.
  */
-class TestingView extends \Tx_Seminars_FrontEnd_AbstractView
+final class TestingView extends \Tx_Seminars_FrontEnd_AbstractView
 {
     /**
      * Renders the view and returns its content.

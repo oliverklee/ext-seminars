@@ -8,7 +8,7 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\SchedulerTasks\MailNotifierConfiguration;
 use TYPO3\CMS\Scheduler\AdditionalFieldProviderInterface;
 
-class MailNotifierConfigurationTest extends UnitTestCase
+final class MailNotifierConfigurationTest extends UnitTestCase
 {
     /**
      * @var MailNotifierConfiguration

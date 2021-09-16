@@ -6,7 +6,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
 use OliverKlee\PhpUnit\TestCase;
 
-class CheckboxTest extends TestCase
+final class CheckboxTest extends TestCase
 {
     /**
      * @var \Tx_Seminars_Model_Checkbox
