@@ -9,8 +9,6 @@ use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Seminars\Tests\Functional\Traits\CollectionHelper;
 
 /**
- * Test case.
- *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 final class DateMapperTest extends FunctionalTestCase

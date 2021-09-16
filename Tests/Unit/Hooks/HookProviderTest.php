@@ -20,8 +20,6 @@ use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookInterfaceReturnsArr
 use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookInterfaceReturnsModifiedValue;
 
 /**
- * Test case.
- *
  * @author Michael Kramer <m.kramer@mxp.de>
  */
 final class HookProviderTest extends UnitTestCase

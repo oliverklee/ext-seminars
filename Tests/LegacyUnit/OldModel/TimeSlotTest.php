@@ -12,8 +12,6 @@ use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * Test case.
- *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
 final class TimeSlotTest extends TestCase

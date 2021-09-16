@@ -9,8 +9,6 @@ use OliverKlee\Seminars\Tests\Functional\Traits\BagHelper;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\BagBuilder\TestingBagBuilder;
 
 /**
- * Test case.
- *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 final class AbstractBagBuilderTest extends FunctionalTestCase

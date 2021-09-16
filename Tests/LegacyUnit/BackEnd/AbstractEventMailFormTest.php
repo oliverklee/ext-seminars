@@ -12,8 +12,6 @@ use OliverKlee\Seminars\Tests\Functional\BackEnd\Fixtures\TestingEventMailForm;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
 
 /**
- * Test case.
- *
  * @author Mario Rimann <mario@screenteam.com>
  */
 class AbstractEventMailFormTest extends TestCase

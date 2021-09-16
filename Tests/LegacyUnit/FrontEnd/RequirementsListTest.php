@@ -9,8 +9,6 @@ use OliverKlee\PhpUnit\TestCase;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
- * Test case.
- *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
 class RequirementsListTest extends TestCase

@@ -9,8 +9,6 @@ use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\DummyObjectToCheck;
 
 /**
- * Test case.
- *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
 class ConfigCheckTest extends TestCase

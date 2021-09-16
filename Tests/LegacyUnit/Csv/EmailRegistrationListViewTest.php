@@ -12,8 +12,6 @@ use OliverKlee\Seminars\Csv\EmailRegistrationListView;
 use TYPO3\CMS\Lang\LanguageService;
 
 /**
- * Test case.
- *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  * @author Niels Pardon <mail@niels-pardon.de>
  */

@@ -10,8 +10,6 @@ use OliverKlee\Seminars\Tests\Functional\Traits\CollectionHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * Test case.
- *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 final class EventMapperTest extends FunctionalTestCase

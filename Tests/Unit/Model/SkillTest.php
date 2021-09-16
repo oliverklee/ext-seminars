@@ -7,8 +7,6 @@ namespace OliverKlee\Seminars\Tests\Unit\Model;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
- * Test case.
- *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
 class SkillTest extends UnitTestCase

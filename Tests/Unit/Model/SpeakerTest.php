@@ -7,8 +7,6 @@ namespace OliverKlee\Seminars\Tests\Unit\Model;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
- * Test case.
- *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class SpeakerTest extends UnitTestCase

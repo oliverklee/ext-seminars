@@ -9,8 +9,6 @@ use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\BackEnd\FlexForms;
 
 /**
- * Test case.
- *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
 class FlexFormsTest extends TestCase

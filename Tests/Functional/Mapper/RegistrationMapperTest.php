@@ -7,8 +7,6 @@ namespace OliverKlee\Seminars\Tests\Functional\Mapper;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 
 /**
- * Test case.
- *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 final class RegistrationMapperTest extends FunctionalTestCase
