@@ -139,11 +139,11 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function getEMailAddressWithEMailAddressReturnsEMailAddress()
+    public function getEmailAddressWithEmailAddressReturnsEmailAddress()
     {
         self::assertEquals(
             'foo@test.com',
-            $this->subject->getEMailAddress()
+            $this->subject->getEmailAddress()
         );
     }
 

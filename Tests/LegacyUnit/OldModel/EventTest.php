@@ -3896,7 +3896,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getOrganizersFootersWithSingleOrganizerWithoutEMailFooterReturnsEmptyArray()
+    public function getOrganizersFootersWithSingleOrganizerWithoutEmailFooterReturnsEmptyArray()
     {
         $this->addOrganizerRelation();
 

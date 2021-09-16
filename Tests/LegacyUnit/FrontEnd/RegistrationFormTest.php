@@ -1165,13 +1165,13 @@ class RegistrationFormTest extends TestCase
     }
 
     /////////////////////////////////////////////////////////////
-    // Tests concerning validateAdditionalPersonsEMailAddresses
+    // Tests concerning validateAdditionalPersonsEmailAddresses
     /////////////////////////////////////////////////////////////
 
     /**
      * @test
      */
-    public function validateAdditionalPersonsEMailAddressesForDisabledFrontEndUserCreationReturnsTrue()
+    public function validateAdditionalPersonsEmailAddressesForDisabledFrontEndUserCreationReturnsTrue()
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -1196,7 +1196,7 @@ class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function validateAdditionalPersonsEMailAddressesForDisabledFormFieldReturnsTrue()
+    public function validateAdditionalPersonsEmailAddressesForDisabledFormFieldReturnsTrue()
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -1221,7 +1221,7 @@ class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function validateAdditionalPersonsEMailAddressesForNoPersonsReturnsTrue()
+    public function validateAdditionalPersonsEmailAddressesForNoPersonsReturnsTrue()
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -1246,7 +1246,7 @@ class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function validateAdditionalPersonsEMailAddressesForOneValidEMailAddressReturnsTrue()
+    public function validateAdditionalPersonsEmailAddressesForOneValidEmailAddressReturnsTrue()
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -1273,7 +1273,7 @@ class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function validateAdditionalPersonsEMailAddressesForOneInvalidEMailAddressReturnsFalse()
+    public function validateAdditionalPersonsEmailAddressesForOneInvalidEmailAddressReturnsFalse()
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -1300,7 +1300,7 @@ class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function validateAdditionalPersonsEMailAddressesForOneEmptyAddressReturnsFalse()
+    public function validateAdditionalPersonsEmailAddressesForOneEmptyAddressReturnsFalse()
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -1327,7 +1327,7 @@ class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function validateAdditionalPersonsEMailAddressesForOneMissingAddressReturnsFalse()
+    public function validateAdditionalPersonsEmailAddressesForOneMissingAddressReturnsFalse()
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -1354,7 +1354,7 @@ class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function validateAdditionalPersonsEMailAddressesForOneValidAndOneInvalidEMailAddressReturnsFalse()
+    public function validateAdditionalPersonsEmailAddressesForOneValidAndOneInvalidEmailAddressReturnsFalse()
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -1709,7 +1709,7 @@ class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationDataForThemselvesSelectedAndSeparateAttendeesRecordsDisabledNotContainsEMailAddress()
+    public function getRegistrationDataForThemselvesSelectedAndSeparateAttendeesRecordsDisabledNotContainsEmailAddress()
     {
         $this->testingFramework->createAndLoginFrontEndUser(
             '',
@@ -1739,7 +1739,7 @@ class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationDataForThemselvesSelectedAndSeparateAttendeesRecordsEnabledContainsEMailAddress()
+    public function getRegistrationDataForThemselvesSelectedAndSeparateAttendeesRecordsEnabledContainsEmailAddress()
     {
         $this->testingFramework->createAndLoginFrontEndUser(
             '',

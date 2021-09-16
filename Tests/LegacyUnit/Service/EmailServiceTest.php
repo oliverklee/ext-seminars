@@ -206,7 +206,7 @@ final class EmailServiceTest extends TestCase
         $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
 
         self::assertSame(
-            $this->organizer->getEMailAddress(),
+            $this->organizer->getEmailAddress(),
             \key($this->email->getReplyTo())
         );
     }
@@ -225,7 +225,7 @@ final class EmailServiceTest extends TestCase
         $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
 
         self::assertArrayHasKey(
-            $this->organizer->getEMailAddress(),
+            $this->organizer->getEmailAddress(),
             $this->email->getFrom()
         );
     }
@@ -362,7 +362,7 @@ final class EmailServiceTest extends TestCase
     /**
      * @test
      */
-    public function sendEmailToAttendeesForAttendeeWithoutEMailAddressNotSendsMail()
+    public function sendEmailToAttendeesForAttendeeWithoutEmailAddressNotSendsMail()
     {
         $this->user->setEmailAddress('');
 

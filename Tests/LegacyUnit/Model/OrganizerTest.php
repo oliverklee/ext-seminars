@@ -155,7 +155,7 @@ class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function setEMailAddressWithEmptyEMailAddressThrowsException()
+    public function setEmailAddressWithEmptyEmailAddressThrowsException()
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -164,32 +164,32 @@ class OrganizerTest extends TestCase
             'The parameter $eMailAddress must not be empty.'
         );
 
-        $this->subject->setEMailAddress('');
+        $this->subject->setEmailAddress('');
     }
 
     /**
      * @test
      */
-    public function setEMailAddressSetsEMailAddress()
+    public function setEmailAddressSetsEmailAddress()
     {
-        $this->subject->setEMailAddress('mail@example.com');
+        $this->subject->setEmailAddress('mail@example.com');
 
         self::assertEquals(
             'mail@example.com',
-            $this->subject->getEMailAddress()
+            $this->subject->getEmailAddress()
         );
     }
 
     /**
      * @test
      */
-    public function getEMailAddressWithNonEmptyEMailAddressReturnsEMailAddress()
+    public function getEmailAddressWithNonEmptyEmailAddressReturnsEmailAddress()
     {
         $this->subject->setData(['email' => 'mail@example.com']);
 
         self::assertEquals(
             'mail@example.com',
-            $this->subject->getEMailAddress()
+            $this->subject->getEmailAddress()
         );
     }
 
@@ -200,7 +200,7 @@ class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function getEMailFooterInitiallyReturnsAnEmptyString()
+    public function getEmailFooterInitiallyReturnsAnEmptyString()
     {
         $this->subject->setData([]);
 
@@ -213,7 +213,7 @@ class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function getEMailFooterWithNonEmptyEMailFooterReturnsEMailFooter()
+    public function getEmailFooterWithNonEmptyEmailFooterReturnsEmailFooter()
     {
         $this->subject->setData(['email_footer' => 'Example Inc.']);
 
@@ -226,7 +226,7 @@ class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function setEMailFooterSetsEMailFooter()
+    public function setEmailFooterSetsEmailFooter()
     {
         $this->subject->setEmailFooter('Example Inc.');
 
@@ -239,7 +239,7 @@ class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function hasEMailFooterInitiallyReturnsFalse()
+    public function hasEmailFooterInitiallyReturnsFalse()
     {
         $this->subject->setData([]);
 
@@ -251,7 +251,7 @@ class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function hasEMailFooterWithNonEmptyEMailFooterReturnsTrue()
+    public function hasEmailFooterWithNonEmptyEmailFooterReturnsTrue()
     {
         $this->subject->setEmailFooter('Example Inc.');
 
