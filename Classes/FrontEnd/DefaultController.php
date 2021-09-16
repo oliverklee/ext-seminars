@@ -174,45 +174,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
     ];
 
     /**
-     * hook objects for the list view
-     *
-     * @var \Tx_Seminars_Interfaces_Hook_EventListView[]
-     *
-     * @deprecated will be removed in seminars 4; use `->getListViewHookProvider()` instead
-     */
-    private $listViewHooks = [];
-
-    /**
-     * whether the hooks in $this->listViewHooks have been retrieved
-     *
-     * @var bool
-     *
-     * @deprecated will be removed in seminars 4; use `->getListViewHookProvider()` instead
-     */
-    private $listViewHooksHaveBeenRetrieved = false;
-
-    /**
      * @var HookProvider|null
      */
     protected $listViewHookProvider = null;
-
-    /**
-     * hook objects for the single view
-     *
-     * @var \Tx_Seminars_Interfaces_Hook_EventSingleView[]
-     *
-     * @deprecated will be removed in seminars 4; see ->getSingleViewHookProvider()
-     */
-    private $singleViewHooks = [];
-
-    /**
-     * whether the hooks in $this->singleViewHooks have been retrieved
-     *
-     * @var bool
-     *
-     * @deprecated will be removed in seminars 4; see ->getSingleViewHookProvider()
-     */
-    private $singleViewHooksHaveBeenRetrieved = false;
 
     /**
      * @var HookProvider|null
@@ -396,42 +360,6 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
     }
 
     /**
-     * Gets the hooks for the list view.
-     *
-     * @return \Tx_Seminars_Interfaces_Hook_EventListView[]
-     *         the hook objects, will be empty if no hooks have been set
-     *
-     * @throws \UnexpectedValueException
-     *          if there are registered hook classes that do not implement the
-     *          \Tx_Seminars_Interfaces_Hook_EventListView interface
-     *
-     * @deprecated will be removed in seminars 4; use `->getListViewHookProvider()` instead
-     */
-    protected function getListViewHooks(): array
-    {
-        if (!$this->listViewHooksHaveBeenRetrieved) {
-            $hookClasses = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView'];
-            if (is_array($hookClasses)) {
-                foreach ($hookClasses as $hookClass) {
-                    $hookInstance = GeneralUtility::makeInstance($hookClass);
-                    if (!($hookInstance instanceof \Tx_Seminars_Interfaces_Hook_EventListView)) {
-                        throw new \UnexpectedValueException(
-                            'The class ' . get_class($hookInstance) . ' is used for the event list view hook, ' .
-                            'but does not implement the \\Tx_Seminars_Interfaces_Hook_EventListView interface.',
-                            1301928334
-                        );
-                    }
-                    $this->listViewHooks[] = $hookInstance;
-                }
-            }
-
-            $this->listViewHooksHaveBeenRetrieved = true;
-        }
-
-        return $this->listViewHooks;
-    }
-
-    /**
      * Gets the hook provider for the list view.
      *
      * @return HookProvider
@@ -443,46 +371,6 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
         }
 
         return $this->listViewHookProvider;
-    }
-
-    /**
-     * Gets the hooks for the single view.
-     *
-     * @return \Tx_Seminars_Interfaces_Hook_EventSingleView[]
-     *         the hook objects, will be empty if no hooks have been set
-     *
-     * @throws \UnexpectedValueException
-     *          if there are registered hook classes that do not implement the
-     *          \Tx_Seminars_Interfaces_Hook_EventSingleView interface
-     *
-     * @deprecated will be removed in seminars 4; use `->getSingleViewHookProvider()` instead
-     */
-    protected function getSingleViewHooks(): array
-    {
-        if (!$this->singleViewHooksHaveBeenRetrieved) {
-            $hookClasses = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['singleView'];
-            if (is_array($hookClasses)) {
-                foreach ($hookClasses as $hookClass) {
-                    GeneralUtility::deprecationLog(
-                        $hookClass . ' - since seminars 3.0, interface \\Tx_Seminars_Interfaces_Hook_EventSingleView'
-                        . ' will be removed in seminars 4.0'
-                    );
-                    $hookInstance = GeneralUtility::makeInstance($hookClass);
-                    if (!($hookInstance instanceof \Tx_Seminars_Interfaces_Hook_EventSingleView)) {
-                        throw new \UnexpectedValueException(
-                            'The class ' . get_class($hookInstance) . ' is used for the event single view hook, ' .
-                            'but does not implement the \\Tx_Seminars_Interfaces_Hook_EventSingleView interface.',
-                            1306432026
-                        );
-                    }
-                    $this->singleViewHooks[] = $hookInstance;
-                }
-            }
-
-            $this->singleViewHooksHaveBeenRetrieved = true;
-        }
-
-        return $this->singleViewHooks;
     }
 
     /**
@@ -863,10 +751,6 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
 
         $this->hideUnneededSubpartsForTopicRecords();
 
-        foreach ($this->getSingleViewHooks() as $hook) {
-            $hook->modifyEventSingleView($event, $this->getTemplate());
-        }
-
         $this->getSingleViewHookProvider()->executeHook('modifySingleView', $this);
 
         $result = $this->getSubpart('SINGLE_VIEW');
@@ -1072,12 +956,6 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
             $this->setMarker('timeslot_room', \htmlspecialchars($timeSlotData['room'], ENT_QUOTES | ENT_HTML5));
             $this->setMarker('timeslot_place', \htmlspecialchars($timeSlotData['place'], ENT_QUOTES | ENT_HTML5));
             $this->setMarker('timeslot_speakers', \htmlspecialchars($timeSlotData['speakers'], ENT_QUOTES | ENT_HTML5));
-
-            $timeSlot = $timeSlotMapper->find($timeSlotData['uid']);
-
-            foreach ($this->getSingleViewHooks() as $hook) {
-                $hook->modifyTimeSlotListRow($timeSlot, $this->getTemplate());
-            }
 
             $timeSlotsOutput .= $this->getSubpart('SINGLE_TIMESLOT');
         }
@@ -2192,20 +2070,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
 
             $this->setMarker('registrations', $this->getCsvExportLink());
 
-            foreach ($this->getListViewHooks() as $hook) {
-                $hook->modifyListRow($event, $this->getTemplate());
-            }
-
             $this->getListViewHookProvider()->executeHook('modifyListRow', $this);
 
             if ($whatToDisplay === 'my_events') {
-                $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
-                $registration = $mapper->find($this->registration->getUid());
-
-                foreach ($this->getListViewHooks() as $hook) {
-                    $hook->modifyMyEventsListRow($registration, $this->getTemplate());
-                }
-
                 $this->getListViewHookProvider()->executeHook('modifyMyEventsListRow', $this);
             }
 

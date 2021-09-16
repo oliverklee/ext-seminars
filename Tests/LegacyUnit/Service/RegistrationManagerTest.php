@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 
-use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
@@ -23,9 +22,7 @@ use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
-use OliverKlee\Seminars\Hooks\RegistrationEmailHookInterface;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
-use OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures\RegistrationHookInterface;
 use OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures\TestingRegistrationManager;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -462,6 +459,7 @@ final class RegistrationManagerTest extends TestCase
     public function addMockedInstanceAddsClassnameToList()
     {
         $mockedInstance = $this->createMock(\stdClass::class);
+        /** @var class-string<\stdClass&MockObject> $mockedClassName */
         $mockedClassName = \get_class($mockedInstance);
 
         $this->addMockedInstance($mockedClassName, $mockedInstance);
@@ -478,7 +476,11 @@ final class RegistrationManagerTest extends TestCase
     public function addMockedInstanceAddsInstanceToTypo3InstanceBuffer()
     {
         $mockedInstance = $this->createMock(\stdClass::class);
+        /** @var class-string<\stdClass&MockObject> $mockedClassName */
         $mockedClassName = \get_class($mockedInstance);
+
+        // manually purge the Typo3 FIFO here, as purgeMockedInstances() is not tested yet
+        GeneralUtility::makeInstance($mockedClassName);
 
         $this->addMockedInstance($mockedClassName, $mockedInstance);
 
@@ -491,6 +493,7 @@ final class RegistrationManagerTest extends TestCase
     public function purgeMockedInstancesRemovesClassnameFromList()
     {
         $mockedInstance = $this->createMock(\stdClass::class);
+        /** @var class-string<\stdClass&MockObject> $mockedClassName */
         $mockedClassName = \get_class($mockedInstance);
         $this->addMockedInstance($mockedClassName, $mockedInstance);
 
@@ -507,6 +510,7 @@ final class RegistrationManagerTest extends TestCase
     public function purgeMockedInstancesRemovesInstanceFromTypo3InstanceBuffer()
     {
         $mockedInstance = $this->createMock(\stdClass::class);
+        /** @var class-string<\stdClass&MockObject> $mockedClassName */
         $mockedClassName = \get_class($mockedInstance);
         $this->addMockedInstance($mockedClassName, $mockedInstance);
 
@@ -1126,80 +1130,6 @@ final class RegistrationManagerTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function canRegisterIfLoggedInForRegistrationPossibleCallsCanRegisterForSeminarHook()
-    {
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $user = FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
-
-        $hookClass = 'RegistrationHook' . \uniqid('', false);
-        $hook = $this->getMockBuilder(RegistrationHookInterface::class)->setMockClassName($hookClass)->getMock();
-        $hook->expects(self::once())->method('canRegisterForSeminar')->with($this->seminar, $user);
-
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
-        GeneralUtility::addInstance($hookClass, $hook);
-
-        $this->subject->canRegisterIfLoggedIn($this->seminar);
-    }
-
-    /**
-     * @test
-     */
-    public function canRegisterIfLoggedInForRegistrationNotPossibleNotCallsCanRegisterForSeminarHook()
-    {
-        $this->seminar->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
-        $this->testingFramework->createAndLoginFrontEndUser();
-
-        $hookClass = 'RegistrationHook' . \uniqid('', false);
-        $hook = $this->getMockBuilder(RegistrationHookInterface::class)->setMockClassName($hookClass)->getMock();
-        $hook->expects(self::never())->method('canRegisterForSeminar');
-
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
-        GeneralUtility::addInstance($hookClass, $hook);
-
-        $this->subject->canRegisterIfLoggedIn($this->seminar);
-    }
-
-    /**
-     * @test
-     */
-    public function canRegisterIfLoggedInForRegistrationPossibleAndHookReturningTrueReturnsTrue()
-    {
-        $this->testingFramework->createAndLoginFrontEndUser();
-
-        $hookClass = 'RegistrationHook' . \uniqid('', false);
-        $hook = $this->getMockBuilder(RegistrationHookInterface::class)->setMockClassName($hookClass)->getMock();
-        $hook->expects(self::once())->method('canRegisterForSeminar')->willReturn(true);
-
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
-        GeneralUtility::addInstance($hookClass, $hook);
-
-        self::assertTrue(
-            $this->subject->canRegisterIfLoggedIn($this->seminar)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function canRegisterIfLoggedInForRegistrationPossibleAndHookReturningFalseReturnsFalse()
-    {
-        $this->testingFramework->createAndLoginFrontEndUser();
-
-        $hookClass = 'RegistrationHook' . \uniqid('', false);
-        $hook = $this->getMockBuilder(RegistrationHookInterface::class)->setMockClassName($hookClass)->getMock();
-        $hook->expects(self::once())->method('canRegisterForSeminar')->willReturn(false);
-
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
-        GeneralUtility::addInstance($hookClass, $hook);
-
-        self::assertFalse(
-            $this->subject->canRegisterIfLoggedIn($this->seminar)
-        );
-    }
-
     // Tests concerning canRegisterIfLoggedInMessage
 
     /**
@@ -1391,112 +1321,6 @@ final class RegistrationManagerTest extends TestCase
 
         self::assertSame(
             '',
-            $this->subject->canRegisterIfLoggedInMessage($this->seminar)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function canRegisterIfLoggedInMessageForRegistrationPossibleCallsCanUserRegisterForSeminarMessageHook()
-    {
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $user = FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
-
-        $hookClass = 'RegistrationHook' . \uniqid('', false);
-        $hook = $this->getMockBuilder(RegistrationHookInterface::class)->setMockClassName($hookClass)->getMock();
-        $hook->expects(self::once())->method('canRegisterForSeminarMessage')->with($this->seminar, $user);
-
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
-        GeneralUtility::addInstance($hookClass, $hook);
-
-        $this->subject->canRegisterIfLoggedInMessage($this->seminar);
-    }
-
-    /**
-     * @test
-     */
-    public function canRegisterIfLoggedInMessageForRegistrationNotPossibleNotCallsCanUserRegisterForSeminarMessageHook()
-    {
-        $this->testingFramework->createAndLoginFrontEndUser();
-        $this->seminar->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
-
-        $hookClass = 'RegistrationHook' . \uniqid('', false);
-        $hook = $this->getMockBuilder(RegistrationHookInterface::class)->setMockClassName($hookClass)->getMock();
-        $hook->expects(self::never())->method('canRegisterForSeminarMessage');
-
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
-        GeneralUtility::addInstance($hookClass, $hook);
-
-        $this->subject->canRegisterIfLoggedInMessage($this->seminar);
-    }
-
-    /**
-     * @test
-     */
-    public function canRegisterIfLoggedInMessageForRegistrationPossibleReturnsStringFromHook()
-    {
-        $this->testingFramework->createAndLoginFrontEndUser();
-
-        $hookClass = 'RegistrationHook' . \uniqid('', false);
-        $hook = $this->getMockBuilder(RegistrationHookInterface::class)->setMockClassName($hookClass)->getMock();
-        $hook->expects(self::once())->method('canRegisterForSeminarMessage')->willReturn('Hello world!');
-
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
-        GeneralUtility::addInstance($hookClass, $hook);
-
-        self::assertSame(
-            'Hello world!',
-            $this->subject->canRegisterIfLoggedInMessage($this->seminar)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function canRegisterIfLoggedInMessageForRegistrationPossibleReturnsNonEmptyStringFromFirstHook()
-    {
-        $this->testingFramework->createAndLoginFrontEndUser();
-
-        $hookClass1 = 'OneRegistrationHook' . \uniqid('', false);
-        $hook1 = $this->getMockBuilder(RegistrationHookInterface::class)->setMockClassName($hookClass1)->getMock();
-        $hook1->method('canRegisterForSeminarMessage')->willReturn('message 1');
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass1] = $hookClass1;
-        GeneralUtility::addInstance($hookClass1, $hook1);
-
-        $hookClass2 = 'AnotherRegistrationHook' . \uniqid('', false);
-        $hook2 = $this->getMockBuilder(RegistrationHookInterface::class)->setMockClassName($hookClass2)->getMock();
-        $hook2->method('canRegisterForSeminarMessage')->willReturn('message 2');
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass2] = $hookClass2;
-        GeneralUtility::addInstance($hookClass2, $hook2);
-
-        self::assertSame(
-            'message 1',
-            $this->subject->canRegisterIfLoggedInMessage($this->seminar)
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function canRegisterIfLoggedInMessageForRegistrationPossibleReturnsFirstNonEmptyStringFromHooks()
-    {
-        $this->testingFramework->createAndLoginFrontEndUser();
-
-        $hookClass1 = 'OneRegistrationHook' . \uniqid('', false);
-        $hook1 = $this->getMockBuilder(RegistrationHookInterface::class)->setMockClassName($hookClass1)->getMock();
-        $hook1->method('canRegisterForSeminarMessage')->willReturn('');
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass1] = $hookClass1;
-        GeneralUtility::addInstance($hookClass1, $hook1);
-
-        $hookClass2 = 'AnotherRegistrationHook' . \uniqid('', false);
-        $hook2 = $this->getMockBuilder(RegistrationHookInterface::class)->setMockClassName($hookClass2)->getMock();
-        $hook2->method('canRegisterForSeminarMessage')->willReturn('message 2');
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass2] = $hookClass2;
-        GeneralUtility::addInstance($hookClass2, $hook2);
-
-        self::assertSame(
-            'message 2',
             $this->subject->canRegisterIfLoggedInMessage($this->seminar)
         );
     }
@@ -1943,35 +1767,6 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function removeRegistrationCallsSeminarRegistrationRemovedHook()
-    {
-        $hookClass = 'RegistrationHook' . \uniqid('', false);
-        $hook = $this->getMockBuilder(RegistrationHookInterface::class)->setMockClassName($hookClass)->getMock();
-        // We cannot test for the expected parameters because the registration
-        // instance does not exist yet at this point.
-        $hook->expects(self::once())->method('seminarRegistrationRemoved');
-
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
-        GeneralUtility::addInstance($hookClass, $hook);
-
-        $userUid = $this->testingFramework->createAndLoginFrontEndUser();
-        $seminarUid = $this->seminarUid;
-        $this->createFrontEndPages();
-
-        $registrationUid = $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            [
-                'user' => $userUid,
-                'seminar' => $seminarUid,
-            ]
-        );
-
-        $this->subject->removeRegistration($registrationUid, $this->pi1);
-    }
-
-    /**
-     * @test
-     */
     public function removeRegistrationWithFittingQueueRegistrationMovesItFromQueue()
     {
         $userUid = $this->testingFramework->createAndLoginFrontEndUser();
@@ -2006,44 +1801,6 @@ final class RegistrationManagerTest extends TestCase
                 ['registration_queue' => 0, 'uid' => $queueRegistrationUid]
             )
         );
-    }
-
-    /**
-     * @test
-     */
-    public function removeRegistrationWithFittingQueueRegistrationCallsSeminarRegistrationMovedFromQueueHook()
-    {
-        $hookClass = 'RegistrationHook' . \uniqid('', false);
-        $hook = $this->getMockBuilder(RegistrationHookInterface::class)->setMockClassName($hookClass)->getMock();
-        // We cannot test for the expected parameters because the registration
-        // instance does not exist yet at this point.
-        $hook->expects(self::once())->method('seminarRegistrationMovedFromQueue');
-
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
-        GeneralUtility::addInstance($hookClass, $hook);
-
-        $userUid = $this->testingFramework->createAndLoginFrontEndUser();
-        $seminarUid = $this->seminarUid;
-        $this->createFrontEndPages();
-
-        $registrationUid = $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            [
-                'user' => $userUid,
-                'seminar' => $seminarUid,
-            ]
-        );
-        $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            [
-                'user' => $userUid,
-                'seminar' => $seminarUid,
-                'seats' => 1,
-                'registration_queue' => 1,
-            ]
-        );
-
-        $this->subject->removeRegistration($registrationUid, $this->pi1);
     }
 
     // Tests concerning canRegisterSeats
@@ -2297,46 +2054,6 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForSendConfirmationTrueCallsModifyThankYouEmailHook()
-    {
-        $hookClass = 'RegistrationHook' . \uniqid('', false);
-        $hook = $this->getMockBuilder(RegistrationHookInterface::class)->setMockClassName($hookClass)->getMock();
-        $hook->expects(self::once())->method('modifyThankYouEmail');
-
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
-        GeneralUtility::addInstance($hookClass, $hook);
-
-        $this->subject->setConfigurationValue('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
-        $pi1->init();
-
-        $registration = $this->createRegistration();
-        $this->subject->notifyAttendee($registration, $pi1);
-    }
-
-    /**
-     * @test
-     */
-    public function notifyAttendeeForSendConfirmationFalseNotCallsModifyThankYouEmailHook()
-    {
-        $hookClass = 'RegistrationHook' . \uniqid('', false);
-        $hook = $this->getMockBuilder(RegistrationHookInterface::class)->setMockClassName($hookClass)->getMock();
-        $hook->expects(self::never())->method('modifyThankYouEmail');
-
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
-        GeneralUtility::addInstance($hookClass, $hook);
-
-        $this->subject->setConfigurationValue('sendConfirmation', false);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
-        $pi1->init();
-
-        $registration = $this->createRegistration();
-        $this->subject->notifyAttendee($registration, $pi1);
-    }
-
-    /**
-     * @test
-     */
     public function notifyAttendeeForSendConfirmationTrueCallsRegistrationEmailHookMethodsForPlainTextEmail()
     {
         /** @var ConfigurationProxy $configurationProxy */
@@ -2371,32 +2088,6 @@ final class RegistrationManagerTest extends TestCase
         $controller->init();
 
         $this->subject->notifyAttendee($registrationOld, $controller);
-    }
-
-    /**
-     * @test
-     */
-    public function notifyAttendeeForSendConfirmationTrueAndPlainTextEmailCallsPostProcessAttendeeEmailTextHookOnce()
-    {
-        /** @var ConfigurationProxy $configurationProxy */
-        $configurationProxy = ConfigurationProxy::getInstance('seminars');
-        $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_TEXT_MAIL);
-
-        $registration = $this->createRegistration();
-
-        $hookClassName = 'RegistrationEmailHook' . \uniqid('', false);
-        $hook = $this->getMockBuilder(RegistrationEmailHookInterface::class)
-            ->setMockClassName($hookClassName)->getMock();
-        $hook->expects(self::once())->method('postProcessAttendeeEmailText');
-
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
-        GeneralUtility::addInstance($hookClassName, $hook);
-
-        $this->subject->setConfigurationValue('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
-        $pi1->init();
-
-        $this->subject->notifyAttendee($registration, $pi1);
     }
 
     /**
@@ -2440,32 +2131,6 @@ final class RegistrationManagerTest extends TestCase
         $controller->init();
 
         $this->subject->notifyAttendee($registrationOld, $controller);
-    }
-
-    /**
-     * @test
-     */
-    public function notifyAttendeeForSendConfirmationTrueAndHtmlEmailCallsPostProcessAttendeeEmailTextHookTwice()
-    {
-        /** @var ConfigurationProxy $configurationProxy */
-        $configurationProxy = ConfigurationProxy::getInstance('seminars');
-        $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
-
-        $registration = $this->createRegistration();
-
-        $hookClassName = 'RegistrationEmailHook' . \uniqid('', false);
-        $hook = $this->getMockBuilder(RegistrationEmailHookInterface::class)
-            ->setMockClassName($hookClassName)->getMock();
-        $hook->expects(self::exactly(2))->method('postProcessAttendeeEmailText');
-
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
-        GeneralUtility::addInstance($hookClassName, $hook);
-
-        $this->subject->setConfigurationValue('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
-        $pi1->init();
-
-        $this->subject->notifyAttendee($registration, $pi1);
     }
 
     /**
@@ -5030,48 +4695,6 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForSendConfirmationTrueCallsPostProcessAttendeeEmailHook()
-    {
-        $hookClassName = 'RegistrationEmailHook' . \uniqid('', false);
-        $hook = $this->getMockBuilder(RegistrationEmailHookInterface::class)
-            ->setMockClassName($hookClassName)->getMock();
-        $hook->expects(self::once())->method('postProcessAttendeeEmail');
-
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
-        GeneralUtility::addInstance($hookClassName, $hook);
-
-        $this->subject->setConfigurationValue('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
-        $pi1->init();
-
-        $registration = $this->createRegistration();
-        $this->subject->notifyAttendee($registration, $pi1);
-    }
-
-    /**
-     * @test
-     */
-    public function notifyAttendeeForSendConfirmationFalseNeverCallsPostProcessAttendeeEmailHook()
-    {
-        $hookClassName = 'RegistrationEmailHook' . \uniqid('', false);
-        $hook = $this->getMockBuilder(RegistrationEmailHookInterface::class)
-            ->setMockClassName($hookClassName)->getMock();
-        $hook->expects(self::never())->method('postProcessAttendeeEmail');
-
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
-        GeneralUtility::addInstance($hookClassName, $hook);
-
-        $this->subject->setConfigurationValue('sendConfirmation', false);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
-        $pi1->init();
-
-        $registration = $this->createRegistration();
-        $this->subject->notifyAttendee($registration, $pi1);
-    }
-
-    /**
-     * @test
-     */
     public function notifyAttendeeForSendConfirmationFalseNeverCallsRegistrationEmailHookMethods()
     {
         $registrationOld = $this->createRegistration();
@@ -5357,30 +4980,6 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyOrganizersForSendConfirmationTrueCallsPostProcessOrganizerEmailHook()
-    {
-        $this->subject->setConfigurationValue('sendNotification', true);
-
-        $registrationUid = $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            ['seminar' => $this->seminarUid, 'user' => $this->testingFramework->createFrontEndUser()]
-        );
-        $registration = new \Tx_Seminars_OldModel_Registration($registrationUid);
-
-        $hookClassName = 'RegistrationEmailHook' . \uniqid('', false);
-        $hook = $this->getMockBuilder(RegistrationEmailHookInterface::class)
-            ->setMockClassName($hookClassName)->getMock();
-        $hook->expects(self::once())->method('postProcessOrganizerEmail');
-
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
-        GeneralUtility::addInstance($hookClassName, $hook);
-
-        $this->subject->notifyOrganizers($registration);
-    }
-
-    /**
-     * @test
-     */
     public function notifyOrganizersForSendNotificationFalseNeverCallsRegistrationEmailHookMethods()
     {
         $this->subject->setConfigurationValue('sendNotification', false);
@@ -5401,30 +5000,6 @@ final class RegistrationManagerTest extends TestCase
         $this->addMockedInstance($hookClass, $hook);
 
         $this->subject->notifyOrganizers($registrationOld);
-    }
-
-    /**
-     * @test
-     */
-    public function notifyOrganizersForSendConfirmationFalseNeverCallsPostProcessOrganizerEmailHook()
-    {
-        $this->subject->setConfigurationValue('sendNotification', false);
-
-        $registrationUid = $this->testingFramework->createRecord(
-            'tx_seminars_attendances',
-            ['seminar' => $this->seminarUid, 'user' => $this->testingFramework->createFrontEndUser()]
-        );
-        $registration = new \Tx_Seminars_OldModel_Registration($registrationUid);
-
-        $hookClassName = 'RegistrationEmailHook' . \uniqid('', false);
-        $hook = $this->getMockBuilder(RegistrationEmailHookInterface::class)
-            ->setMockClassName($hookClassName)->getMock();
-        $hook->expects(self::never())->method('postProcessOrganizerEmail');
-
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
-        GeneralUtility::addInstance($hookClassName, $hook);
-
-        $this->subject->notifyOrganizers($registration);
     }
 
     // Tests concerning sendAdditionalNotification
@@ -6047,28 +5622,6 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->sendAdditionalNotification($registrationOld);
     }
 
-    /**
-     * @test
-     */
-    public function sendAdditionalNotificationCallsPostProcessOrganizerEmailHook()
-    {
-        $this->testingFramework->changeRecord(
-            'tx_seminars_seminars',
-            $this->seminarUid,
-            ['attendees_max' => 1]
-        );
-        $hookClassName = 'RegistrationEmailHook' . \uniqid('', false);
-        $hook = $this->getMockBuilder(RegistrationEmailHookInterface::class)
-            ->setMockClassName($hookClassName)->getMock();
-        $hook->expects(self::once())->method('postProcessAdditionalEmail');
-
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClassName] = $hookClassName;
-        GeneralUtility::addInstance($hookClassName, $hook);
-
-        $registration = $this->createRegistration();
-        $this->subject->sendAdditionalNotification($registration);
-    }
-
     // Tests concerning allowsRegistrationByDate
 
     /**
@@ -6425,46 +5978,6 @@ final class RegistrationManagerTest extends TestCase
             $registration->getUid(),
             $subject->getRegistration()->getUid()
         );
-    }
-
-    /**
-     * @test
-     */
-    public function createRegistrationCallsSeminarRegistrationCreatedHook()
-    {
-        $this->createAndLogInFrontEndUser();
-
-        $hookClass = 'RegistrationHook' . \uniqid('', false);
-        $hook = $this->getMockBuilder(RegistrationHookInterface::class)->setMockClassName($hookClass)->getMock();
-        // We cannot test for the expected parameters because the registration
-        // instance does not exist yet at this point.
-        $hook->expects(self::once())->method('seminarRegistrationCreated');
-
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['registration'][$hookClass] = $hookClass;
-        GeneralUtility::addInstance($hookClass, $hook);
-
-        $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
-        $plugin->cObj = $this->getFrontEndController()->cObj;
-        /** @var TestingRegistrationManager&MockObject $subject */
-        $subject = $this->createPartialMock(
-            TestingRegistrationManager::class,
-            [
-                'notifyAttendee',
-                'notifyOrganizers',
-                'sendAdditionalNotification',
-                'setRegistrationData',
-            ]
-        );
-
-        $subject->createRegistration(
-            $this->seminar,
-            [],
-            $plugin
-        );
-
-        $uid = $subject->getRegistration()->getUid();
-        $connection = $this->getConnectionForTable('tx_seminars_attendances');
-        $connection->delete('tx_seminars_attendances', ['uid' => $uid]);
     }
 
     // Tests concerning setRegistrationData()

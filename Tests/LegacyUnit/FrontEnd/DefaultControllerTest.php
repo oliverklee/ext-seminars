@@ -1207,27 +1207,6 @@ class DefaultControllerTest extends TestCase
     /**
      * @test
      */
-    public function singleViewCallsModifyEventSingleViewHook()
-    {
-        $this->subject->setConfigurationValue('what_to_display', 'single_view');
-
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->find($this->seminarUid);
-        $hook = $this->createMock(\Tx_Seminars_Interfaces_Hook_EventSingleView::class);
-        $hook->expects(self::once())->method('modifyEventSingleView')->with($event, self::anything());
-        // We don't test for the second parameter (the template instance here)
-        // because we cannot access it from the outside.
-
-        $hookClass = get_class($hook);
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['singleView'][$hookClass] = $hookClass;
-        GeneralUtility::addInstance($hookClass, $hook);
-
-        $this->subject->piVars['showUid'] = $this->seminarUid;
-        $this->subject->main('', []);
-    }
-
-    /**
-     * @test
-     */
     public function singleViewCallsHookSeminarSingleViewModifySingleView()
     {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
@@ -1243,9 +1222,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->main('', []);
     }
 
-    ///////////////////////////////////////////////////////
     // Tests concerning attached files in the single view
-    ///////////////////////////////////////////////////////
 
     public function testSingleViewWithOneAttachedFileAndDisabledLimitFileDownloadToAttendeesContainsFileNameOfFile()
     {
@@ -1956,97 +1933,7 @@ class DefaultControllerTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function timeSlotHookForEventWithoutTimeSlotsNotGetsCalled()
-    {
-        $this->subject->setConfigurationValue('what_to_display', 'single_view');
-
-        $hook = $this->createMock(\Tx_Seminars_Interfaces_Hook_EventSingleView::class);
-        $hook->expects(self::never())->method('modifyTimeSlotListRow');
-
-        $hookClass = get_class($hook);
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['singleView'][$hookClass] = $hookClass;
-        GeneralUtility::addInstance($hookClass, $hook);
-
-        $this->subject->piVars['showUid'] = $this->seminarUid;
-        $this->subject->main('', []);
-    }
-
-    /**
-     * @test
-     */
-    public function timeSlotHookForEventWithOneTimeSlotGetsCalledOnceWithTimeSlot()
-    {
-        $this->subject->setConfigurationValue('what_to_display', 'single_view');
-        $timeSlotUid = $this->testingFramework->createRecord(
-            'tx_seminars_timeslots',
-            [
-                'seminar' => $this->seminarUid,
-                'room' => 'room 1',
-            ]
-        );
-        $this->testingFramework->changeRecord(
-            'tx_seminars_seminars',
-            $this->seminarUid,
-            ['timeslots' => 1]
-        );
-
-        $timeSlot = MapperRegistry::get(\Tx_Seminars_Mapper_TimeSlot::class)->find($timeSlotUid);
-        $hook = $this->createMock(\Tx_Seminars_Interfaces_Hook_EventSingleView::class);
-        $hook->expects(self::once())->method('modifyTimeSlotListRow')->with($timeSlot, self::anything());
-        // We don't test for the second parameter (the template instance here)
-        // because we cannot access it from the outside.
-
-        $hookClass = get_class($hook);
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['singleView'][$hookClass] = $hookClass;
-        GeneralUtility::addInstance($hookClass, $hook);
-
-        $this->subject->piVars['showUid'] = $this->seminarUid;
-        $this->subject->main('', []);
-    }
-
-    /**
-     * @test
-     */
-    public function timeSlotHookForEventWithTwoTimeSlotGetsCalledTwice()
-    {
-        $this->subject->setConfigurationValue('what_to_display', 'single_view');
-        $this->testingFramework->createRecord(
-            'tx_seminars_timeslots',
-            [
-                'seminar' => $this->seminarUid,
-                'room' => 'room 1',
-            ]
-        );
-        $this->testingFramework->createRecord(
-            'tx_seminars_timeslots',
-            [
-                'seminar' => $this->seminarUid,
-                'room' => 'room 2',
-            ]
-        );
-        $this->testingFramework->changeRecord(
-            'tx_seminars_seminars',
-            $this->seminarUid,
-            ['timeslots' => 2]
-        );
-
-        $hook = $this->createMock(\Tx_Seminars_Interfaces_Hook_EventSingleView::class);
-        $hook->expects(self::exactly(2))->method('modifyTimeSlotListRow');
-
-        $hookClass = get_class($hook);
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['singleView'][$hookClass] = $hookClass;
-        GeneralUtility::addInstance($hookClass, $hook);
-
-        $this->subject->piVars['showUid'] = $this->seminarUid;
-        $this->subject->main('', []);
-    }
-
-    ///////////////////////////////////////////////////////
     // Tests concerning target groups in the single view.
-    ///////////////////////////////////////////////////////
 
     public function testTargetGroupsSubpartIsHiddenInSingleViewWithoutTargetGroups()
     {
@@ -8657,122 +8544,7 @@ class DefaultControllerTest extends TestCase
         $subject->hideListRegistrationsColumnIfNecessary($whatToDisplay);
     }
 
-    ///////////////////////////////////////////////////
     // Tests concerning the hooks for the event lists
-    ///////////////////////////////////////////////////
-
-    /**
-     * @test
-     */
-    public function eventsListCallsModifyListRowHook()
-    {
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->find($this->seminarUid);
-
-        $hook = $this->createMock(\Tx_Seminars_Interfaces_Hook_EventListView::class);
-        $hook->expects(self::once())->method('modifyListRow')->with($event, self::anything());
-        // We don't test for the second parameter (the template instance here)
-        // because we cannot access it from the outside.
-
-        $hookClass = get_class($hook);
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView'][$hookClass] = $hookClass;
-        GeneralUtility::addInstance($hookClass, $hook);
-
-        $this->subject->main('', []);
-    }
-
-    /**
-     * @test
-     */
-    public function eventsListForModifyListRowHookWithoutInterfaceThrowsException()
-    {
-        $this->expectException(\UnexpectedValueException::class);
-
-        $hook = $this->createMock(\stdClass::class);
-        $hookClass = \get_class($hook);
-
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView'][$hookClass] = $hookClass;
-        GeneralUtility::addInstance($hookClass, $hook);
-
-        $this->subject->main('', []);
-    }
-
-    /**
-     * @test
-     */
-    public function myEventsListCallsModifyMyEventsListRowHook()
-    {
-        $this->subject->setConfigurationValue('what_to_display', 'my_events');
-
-        $registrationUid = $this->createLogInAndRegisterFeUser();
-        $registration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)->find($registrationUid);
-
-        $hook = $this->createMock(\Tx_Seminars_Interfaces_Hook_EventListView::class);
-        $hook->expects(self::once())->method('modifyMyEventsListRow')->with($registration, self::anything());
-        // We don't test for the second parameter (the template instance here)
-        // because we cannot access it from the outside.
-
-        $hookClass = get_class($hook);
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView'][$hookClass] = $hookClass;
-        GeneralUtility::addInstance($hookClass, $hook);
-
-        $this->subject->main('', []);
-    }
-
-    /**
-     * @test
-     */
-    public function myEventsListCallsModifyListRowHook()
-    {
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->find($this->seminarUid);
-
-        $this->testingFramework->createAndLoginFrontEndUser();
-
-        $hook = $this->createMock(\Tx_Seminars_Interfaces_Hook_EventListView::class);
-        $hook->expects(self::once())->method('modifyListRow')->with($event, self::anything());
-        // We don't test for the second parameter (the template instance here)
-        // because we cannot access it from the outside.
-
-        $hookClass = get_class($hook);
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView'][$hookClass] = $hookClass;
-        GeneralUtility::addInstance($hookClass, $hook);
-
-        $this->subject->main('', []);
-    }
-
-    /**
-     * @test
-     */
-    public function eventListNotCallsModifyMyEventsListRowHook()
-    {
-        $hook = $this->createMock(\Tx_Seminars_Interfaces_Hook_EventListView::class);
-        $hook->expects(self::never())->method('modifyMyEventsListRow');
-
-        $hookClass = get_class($hook);
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView'][$hookClass] = $hookClass;
-        GeneralUtility::addInstance($hookClass, $hook);
-
-        $this->subject->main('', []);
-    }
-
-    /**
-     * @test
-     */
-    public function myEventsListForModifyMyEventsListRowHookWithoutInterfaceThrowsException()
-    {
-        $this->expectException(\UnexpectedValueException::class);
-
-        $this->subject->setConfigurationValue('what_to_display', 'my_events');
-
-        $this->createLogInAndRegisterFeUser();
-
-        $hook = $this->createMock(\stdClass::class);
-        $hookClass = \get_class($hook);
-
-        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['listView'][$hookClass] = $hookClass;
-        GeneralUtility::addInstance($hookClass, $hook);
-
-        $this->subject->main('', []);
-    }
 
     /**
      * @test

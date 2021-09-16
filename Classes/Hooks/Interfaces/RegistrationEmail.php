@@ -10,8 +10,6 @@ use OliverKlee\Oelib\Templating\Template;
 /**
  * Use this interface for hooks concerning the registration emails.
  *
- * It supersedes the deprecated `RegistrationEmailHookInterface` interface.
- *
  * You can use it to customize emails before they are sent.
  *
  * @author Pascal Rinker <projects@jweiland.net>
