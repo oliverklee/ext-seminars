@@ -1531,7 +1531,7 @@ class EventEditorTest extends TestCase
 
     /**
      * @test
-     * @group sendEMailToReviewer
+     * @group sendEmailToReviewer
      */
     public function eventEditorForNonHiddenEventDoesNotSendMail()
     {
@@ -1543,7 +1543,7 @@ class EventEditorTest extends TestCase
 
     /**
      * @test
-     * @group sendEMailToReviewer
+     * @group sendEmailToReviewer
      */
     public function eventEditorForEventHiddenBeforeEditingDoesNotSendMail()
     {
@@ -1564,7 +1564,7 @@ class EventEditorTest extends TestCase
 
     /**
      * @test
-     * @group sendEMailToReviewer
+     * @group sendEmailToReviewer
      */
     public function eventEditorForEventHiddenByFormDoesSendMail()
     {
@@ -1591,9 +1591,9 @@ class EventEditorTest extends TestCase
 
     /**
      * @test
-     * @group sendEMailToReviewer
+     * @group sendEmailToReviewer
      */
-    public function sendEMailToReviewerSendsMailToReviewerMailAddress()
+    public function sendEmailToReviewerSendsMailToReviewerMailAddress()
     {
         $seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->createAndLoginUserWithReviewer();
@@ -1623,9 +1623,9 @@ class EventEditorTest extends TestCase
 
     /**
      * @test
-     * @group sendEMailToReviewer
+     * @group sendEmailToReviewer
      */
-    public function sendEMailToReviewerSetsPublishEventSubjectInMail()
+    public function sendEmailToReviewerSetsPublishEventSubjectInMail()
     {
         $seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->createAndLoginUserWithReviewer();
@@ -1655,9 +1655,9 @@ class EventEditorTest extends TestCase
 
     /**
      * @test
-     * @group sendEMailToReviewer
+     * @group sendEmailToReviewer
      */
-    public function sendEMailToReviewerSendsTheTitleOfTheEvent()
+    public function sendEmailToReviewerSendsTheTitleOfTheEvent()
     {
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1690,9 +1690,9 @@ class EventEditorTest extends TestCase
 
     /**
      * @test
-     * @group sendEMailToReviewer
+     * @group sendEmailToReviewer
      */
-    public function sendEMailToReviewerForEventWithDateSendsTheDateOfTheEvent()
+    public function sendEmailToReviewerForEventWithDateSendsTheDateOfTheEvent()
     {
         $this->subject->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
         $seminarUid = $this->testingFramework->createRecord(
@@ -1729,9 +1729,9 @@ class EventEditorTest extends TestCase
 
     /**
      * @test
-     * @group sendEMailToReviewer
+     * @group sendEmailToReviewer
      */
-    public function sendEMailToReviewerForEventWithoutDateHidesDateMarker()
+    public function sendEmailToReviewerForEventWithoutDateHidesDateMarker()
     {
         $this->subject->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
         $seminarUid = $this->testingFramework->createRecord(
@@ -1764,9 +1764,9 @@ class EventEditorTest extends TestCase
 
     /**
      * @test
-     * @group sendEMailToReviewer
+     * @group sendEmailToReviewer
      */
-    public function sendEMailToReviewerForEventWithoutDateDoesNotSendDate()
+    public function sendEmailToReviewerForEventWithoutDateDoesNotSendDate()
     {
         $this->subject->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
         $seminarUid = $this->testingFramework->createRecord(
@@ -1800,9 +1800,9 @@ class EventEditorTest extends TestCase
 
     /**
      * @test
-     * @group sendEMailToReviewer
+     * @group sendEmailToReviewer
      */
-    public function sendEMailToReviewerSendsMailWithoutAnyUnreplacedMarkers()
+    public function sendEmailToReviewerSendsMailWithoutAnyUnreplacedMarkers()
     {
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -1834,9 +1834,9 @@ class EventEditorTest extends TestCase
 
     /**
      * @test
-     * @group sendEMailToReviewer
+     * @group sendEmailToReviewer
      */
-    public function sendEMailToReviewerForEventWithDescriptionShowsDescriptionInMail()
+    public function sendEmailToReviewerForEventWithDescriptionShowsDescriptionInMail()
     {
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1869,9 +1869,9 @@ class EventEditorTest extends TestCase
 
     /**
      * @test
-     * @group sendEMailToReviewer
+     * @group sendEmailToReviewer
      */
-    public function sendEMailToReviewerSendsPublicationLinkInMail()
+    public function sendEmailToReviewerSendsPublicationLinkInMail()
     {
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -1903,9 +1903,9 @@ class EventEditorTest extends TestCase
 
     /**
      * @test
-     * @group sendEMailToReviewer
+     * @group sendEmailToReviewer
      */
-    public function sendEMailToReviewerUsesTypo3DefaultFromEmailAndDefaultFromNameAsFromNameForMail()
+    public function sendEmailToReviewerUsesTypo3DefaultFromEmailAndDefaultFromNameAsFromNameForMail()
     {
         $seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->createAndLoginUserWithReviewer();
@@ -1940,9 +1940,9 @@ class EventEditorTest extends TestCase
 
     /**
      * @test
-     * @group sendEMailToReviewer
+     * @group sendEmailToReviewer
      */
-    public function sendEMailToReviewerUsesFrontEndUserAsReplyToForMail()
+    public function sendEmailToReviewerUsesFrontEndUserAsReplyToForMail()
     {
         $seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->createAndLoginUserWithReviewer();
@@ -1975,9 +1975,9 @@ class EventEditorTest extends TestCase
 
     /**
      * @test
-     * @group sendEMailToReviewer
+     * @group sendEmailToReviewer
      */
-    public function sendEMailToReviewerWithoutTypo3DefaultFromAddressAndNameUsesFrontEndUserNameAsFromNameForMail()
+    public function sendEmailToReviewerWithoutTypo3DefaultFromAddressAndNameUsesFrontEndUserNameAsFromNameForMail()
     {
         $seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->createAndLoginUserWithReviewer();
@@ -2010,9 +2010,9 @@ class EventEditorTest extends TestCase
 
     /**
      * @test
-     * @group sendEMailToReviewer
+     * @group sendEmailToReviewer
      */
-    public function sendEMailToReviewerWithoutTypo3DefaultFromAddressUsesFrontEndUserMailAddressAsFromAddressForMail()
+    public function sendEmailToReviewerWithoutTypo3DefaultFromAddressUsesFrontEndUserMailAddressAsFromAddressForMail()
     {
         $seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->createAndLoginUserWithReviewer();

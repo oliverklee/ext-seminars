@@ -565,7 +565,7 @@ final class RegistrationTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getBillingAddressWithEMailAddressContainsEMailAddress()
+    public function getBillingAddressWithEmailAddressContainsEmailAddress()
     {
         $value = 'max@example.com';
         $subject = \Tx_Seminars_OldModel_Registration::fromData(['email' => $value]);

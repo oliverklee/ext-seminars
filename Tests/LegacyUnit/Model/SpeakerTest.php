@@ -612,46 +612,46 @@ class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function getEMailAddressWithoutEMailAddressReturnsAnEmptyString()
+    public function getEmailAddressWithoutEmailAddressReturnsAnEmptyString()
     {
         $this->subject->setData([]);
 
         self::assertEquals(
             '',
-            $this->subject->getEMailAddress()
+            $this->subject->getEmailAddress()
         );
     }
 
     /**
      * @test
      */
-    public function getEMailAddressWithNonEmptyEMailAddressReturnsEMailAddress()
+    public function getEmailAddressWithNonEmptyEmailAddressReturnsEmailAddress()
     {
         $this->subject->setData(['email' => 'mail@example.com']);
 
         self::assertEquals(
             'mail@example.com',
-            $this->subject->getEMailAddress()
+            $this->subject->getEmailAddress()
         );
     }
 
     /**
      * @test
      */
-    public function setEMailAddressSetsEMailAddress()
+    public function setEmailAddressSetsEmailAddress()
     {
         $this->subject->setEmailAddress('mail@example.com');
 
         self::assertEquals(
             'mail@example.com',
-            $this->subject->getEMailAddress()
+            $this->subject->getEmailAddress()
         );
     }
 
     /**
      * @test
      */
-    public function hasEMailAddressWithoutEMailAddressReturnsFalse()
+    public function hasEmailAddressWithoutEmailAddressReturnsFalse()
     {
         $this->subject->setData([]);
 
@@ -663,7 +663,7 @@ class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function hasEMailAddressWithEMailAddressReturnsTrue()
+    public function hasEmailAddressWithEmailAddressReturnsTrue()
     {
         $this->subject->setEmailAddress('mail@example.com');
 

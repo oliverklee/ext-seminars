@@ -6205,7 +6205,7 @@ class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testSingleViewForSeminarWithOwnerAndOwnerDataEnabledCanContainOwnerEMailAddress()
+    public function testSingleViewForSeminarWithOwnerAndOwnerDataEnabledCanContainOwnerEmailAddress()
     {
         $ownerUid = $this->testingFramework->createFrontEndUser(
             '',

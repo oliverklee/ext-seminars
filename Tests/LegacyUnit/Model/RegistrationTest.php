@@ -1153,7 +1153,7 @@ class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getEMailAddressWithoutEMailAddressReturnsEmptyString()
+    public function getEmailAddressWithoutEmailAddressReturnsEmptyString()
     {
         $this->subject->setData([]);
 
@@ -1166,7 +1166,7 @@ class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getEMailAddressWithEMailAddressReturnsEMailAddress()
+    public function getEmailAddressWithEmailAddressReturnsEmailAddress()
     {
         $this->subject->setData(['email' => 'john@doe.com']);
 
@@ -1179,7 +1179,7 @@ class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setEMailAddressSetsEMailAddress()
+    public function setEmailAddressSetsEmailAddress()
     {
         $this->subject->setEnailAddress('john@doe.com');
 
