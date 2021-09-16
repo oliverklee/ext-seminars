@@ -10,9 +10,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class offers timespan-related methods for the time slot and seminar classes.
- *
- * @author Niels Pardon <mail@niels-pardon.de>
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel implements ConfigurationCheckable
 {

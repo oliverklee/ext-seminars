@@ -10,8 +10,6 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * This class creates a salutation for e-mails.
- *
- * @author Bernd Schönbach <bernd@oliverklee.de>
  */
 class Salutation
 {

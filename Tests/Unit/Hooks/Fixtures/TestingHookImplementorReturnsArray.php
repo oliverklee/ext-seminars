@@ -8,8 +8,6 @@ namespace OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures;
  * Valid test interface implementation to use with the HookProviderTest.
  *
  * Will be accepted because it implements TestingHookInterfaceReturnsArray.
- *
- * @author Michael Kramer <m.kramer@mxp.de>
  */
 final class TestingHookImplementorReturnsArray implements TestingHookInterfaceReturnsArray
 {

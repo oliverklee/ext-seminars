@@ -16,8 +16,6 @@ use TYPO3\CMS\Fluid\View\StandaloneView;
 
 /**
  * This class takes care of sending the daily registration digest email for events.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class RegistrationDigest
 {

@@ -8,8 +8,6 @@ use OliverKlee\Seminars\BagBuilder\AbstractBagBuilder;
  * This builder class creates customized organizer bag objects.
  *
  * @extends AbstractBagBuilder<\Tx_Seminars_Bag_Organizer>
- *
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 class Tx_Seminars_BagBuilder_Organizer extends AbstractBagBuilder
 {

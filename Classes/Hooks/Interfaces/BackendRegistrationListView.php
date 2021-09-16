@@ -8,8 +8,6 @@ use OliverKlee\Oelib\Templating\Template;
 
 /**
  * Use this interface for hooks concerning the backend registration list view.
- *
- * @author Michael Kramer <m.kramer@mxp.de>
  */
 interface BackendRegistrationListView extends Hook
 {

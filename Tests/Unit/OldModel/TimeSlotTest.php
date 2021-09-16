@@ -7,9 +7,6 @@ namespace OliverKlee\Seminars\Tests\Unit\OldModel;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\OldModel\AbstractModel;
 
-/**
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- */
 final class TimeSlotTest extends UnitTestCase
 {
     /**

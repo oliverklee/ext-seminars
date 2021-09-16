@@ -7,10 +7,6 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Bag;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
-/**
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- * @author Niels Pardon <mail@niels-pardon.de>
- */
 class CategoryBagTest extends TestCase
 {
     /**

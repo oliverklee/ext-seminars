@@ -15,8 +15,6 @@ use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
 /**
  * This is the configuration for the e-mail notifier task.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class MailNotifierConfiguration implements AdditionalFieldProviderInterface
 {

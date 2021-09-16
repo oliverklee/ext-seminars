@@ -9,8 +9,6 @@ use OliverKlee\Seminars\RealUrl\Configuration as RealUrlConfiguration;
 
 /**
  * Testcase.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class ConfigurationTest extends TestCase
 {

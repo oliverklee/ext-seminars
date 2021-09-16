@@ -6,9 +6,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class creates a category list.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 class Tx_Seminars_FrontEnd_CategoryList extends \Tx_Seminars_FrontEnd_AbstractView
 {

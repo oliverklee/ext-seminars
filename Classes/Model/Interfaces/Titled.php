@@ -6,8 +6,6 @@ namespace OliverKlee\Seminars\Model\Interfaces;
 
 /**
  * This interface is used for models having a title and is needed for the `CommaSeparatedTitles` view helper.
- *
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 interface Titled
 {

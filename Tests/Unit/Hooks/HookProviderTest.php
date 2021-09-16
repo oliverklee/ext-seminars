@@ -19,9 +19,6 @@ use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookInterfaceNotExtends
 use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookInterfaceReturnsArray;
 use OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures\TestingHookInterfaceReturnsModifiedValue;
 
-/**
- * @author Michael Kramer <m.kramer@mxp.de>
- */
 final class HookProviderTest extends UnitTestCase
 {
     /**

@@ -8,8 +8,6 @@ use OliverKlee\Seminars\BackEnd\AbstractModule;
 
 /**
  * Just a testing subclass.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 final class DummyModule extends AbstractModule
 {

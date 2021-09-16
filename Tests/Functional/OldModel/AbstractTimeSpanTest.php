@@ -10,9 +10,6 @@ use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingTimeSpan;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- */
 final class AbstractTimeSpanTest extends FunctionalTestCase
 {
     use LanguageHelper;

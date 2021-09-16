@@ -8,8 +8,6 @@ use OliverKlee\Oelib\Mapper\AbstractDataMapper;
  * This class represents a mapper for lodgings.
  *
  * @extends AbstractDataMapper<\Tx_Seminars_Model_Lodging>
- *
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 class Tx_Seminars_Mapper_Lodging extends AbstractDataMapper
 {

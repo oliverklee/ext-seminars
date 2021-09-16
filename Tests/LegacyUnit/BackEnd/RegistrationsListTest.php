@@ -17,9 +17,6 @@ use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
 use TYPO3\CMS\Backend\Template\DocumentTemplate;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * @author Niels Pardon <mail@niels-pardon.de>
- */
 class RegistrationsListTest extends TestCase
 {
     use BackEndTestsTrait;

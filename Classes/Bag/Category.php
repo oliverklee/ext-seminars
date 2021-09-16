@@ -8,8 +8,6 @@ use OliverKlee\Seminars\Bag\AbstractBag;
  * This aggregate class holds a bunch of category objects and allows iterating over them.
  *
  * @extends AbstractBag<\Tx_Seminars_OldModel_Category>
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class Tx_Seminars_Bag_Category extends AbstractBag
 {

@@ -7,9 +7,6 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\PhpUnit\TestCase;
 
-/**
- * @author Niels Pardon <mail@niels-pardon.de>
- */
 class SpeakerTest extends TestCase
 {
     /**

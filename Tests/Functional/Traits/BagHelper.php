@@ -9,8 +9,6 @@ use OliverKlee\Seminars\OldModel\AbstractModel;
 
 /**
  * This trait provides methods useful when testing bags and bag builders.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 trait BagHelper
 {

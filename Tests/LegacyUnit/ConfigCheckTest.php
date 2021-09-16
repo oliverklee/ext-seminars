@@ -8,9 +8,6 @@ use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\DummyObjectToCheck;
 
-/**
- * @author Niels Pardon <mail@niels-pardon.de>
- */
 class ConfigCheckTest extends TestCase
 {
     /**

@@ -12,9 +12,6 @@ use OliverKlee\Seminars\Tests\LegacyUnit\BackEnd\Fixtures\DummyModule;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use TYPO3\CMS\Backend\Template\DocumentTemplate;
 
-/**
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- */
 final class EventsListTest extends FunctionalTestCase
 {
     use LanguageHelper;

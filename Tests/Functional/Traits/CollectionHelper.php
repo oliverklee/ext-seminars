@@ -8,8 +8,6 @@ use OliverKlee\Oelib\DataStructures\Collection;
 
 /**
  * This trait provides methods useful for testing collections (usually in functional tests).
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 trait CollectionHelper
 {

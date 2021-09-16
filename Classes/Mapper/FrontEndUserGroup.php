@@ -9,9 +9,6 @@ use OliverKlee\Oelib\Mapper\BackEndUserMapper;
  * This class represents a mapper for front-end user groups.
  *
  * @extends AbstractDataMapper<\Tx_Seminars_Model_FrontEndUserGroup>
- *
- * @author Bernd Schönbach <bernd@oliverklee.de>
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class Tx_Seminars_Mapper_FrontEndUserGroup extends AbstractDataMapper
 {

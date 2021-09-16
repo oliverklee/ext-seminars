@@ -16,9 +16,6 @@ use TYPO3\CMS\Frontend\Page\PageRepository;
  * This builder class creates customized bag objects.
  *
  * @template M of AbstractBag
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 abstract class AbstractBagBuilder
 {

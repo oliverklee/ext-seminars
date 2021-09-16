@@ -21,11 +21,6 @@ use TYPO3\CMS\Core\Utility\MathUtility;
  * These functions are called from DataHandler via hooks.
  *
  * phpcs:disable PSR1.Methods.CamelCapsMethodName
- *
- * @author Mario Rimann <typo3-coding@rimann.org>
- * @author Niels Pardon <mail@niels-pardon.de>
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- * @author Michael Kramer <m.kramer@mxp.de>
  */
 class DataHandlerHook
 {

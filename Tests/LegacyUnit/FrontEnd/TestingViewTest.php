@@ -9,9 +9,6 @@ use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\FrontEnd\TestingView;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
-/**
- * @author Niels Pardon <mail@niels-pardon.de>
- */
 class TestingViewTest extends TestCase
 {
     /**

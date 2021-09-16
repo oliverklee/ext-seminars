@@ -6,8 +6,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class represents a time slot.
- *
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 class Tx_Seminars_OldModel_TimeSlot extends \Tx_Seminars_OldModel_AbstractTimeSpan
 {

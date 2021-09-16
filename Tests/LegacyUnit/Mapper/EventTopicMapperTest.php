@@ -11,8 +11,6 @@ use OliverKlee\PhpUnit\TestCase;
 
 /**
  * This test case holds all tests specific to event topics.
- *
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 class EventTopicMapperTest extends TestCase
 {

@@ -6,8 +6,6 @@ namespace OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures;
 
 /**
  * This class represents a test object from the database.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 final class TestingTimeSpan extends \Tx_Seminars_OldModel_AbstractTimeSpan
 {

@@ -6,9 +6,6 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
 use OliverKlee\PhpUnit\TestCase;
 
-/**
- * @author Niels Pardon <mail@niels-pardon.de>
- */
 class OrganizerTest extends TestCase
 {
     /**

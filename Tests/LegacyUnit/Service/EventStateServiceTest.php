@@ -12,9 +12,6 @@ use OliverKlee\Seminars\Service\EventStatusService;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\SingletonInterface;
 
-/**
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- */
 final class EventStateServiceTest extends TestCase
 {
     /**

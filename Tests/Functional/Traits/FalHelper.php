@@ -8,8 +8,6 @@ use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 
 /**
  * This trait provides methods useful when testing FAL output.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 trait FalHelper
 {

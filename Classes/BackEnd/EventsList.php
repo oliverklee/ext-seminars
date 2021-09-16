@@ -11,10 +11,6 @@ use TYPO3\CMS\Core\Utility\PathUtility;
 
 /**
  * This class creates an events list in the back end.
- *
- * @author Niels Pardon <mail@niels-pardon.de>
- * @author Bernd Schönbach <bernd@oliverklee.de>
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class EventsList extends AbstractList
 {

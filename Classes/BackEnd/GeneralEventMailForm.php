@@ -8,8 +8,6 @@ use TYPO3\CMS\Core\Mail\MailMessage;
 
 /**
  * This class represents an e-mail form that does not change the event's status.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class GeneralEventMailForm extends AbstractEventMailForm
 {

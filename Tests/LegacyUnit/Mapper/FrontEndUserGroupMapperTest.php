@@ -10,10 +10,6 @@ use OliverKlee\Oelib\Model\BackEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
-/**
- * @author Bernd Schönbach <bernd@oliverklee.de>
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- */
 class FrontEndUserGroupMapperTest extends TestCase
 {
     /**

@@ -8,9 +8,6 @@ use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\LegacyUnit\BackEnd\Fixtures\DummyModule;
 
-/**
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- */
 class AbstractModuleTest extends TestCase
 {
     /**

@@ -16,9 +16,6 @@ use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Lang\LanguageService;
 
-/**
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- */
 trait BackEndTestsTrait
 {
     /**

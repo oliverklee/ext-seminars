@@ -11,8 +11,6 @@ namespace OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures;
  *
  * The methods are designed to return a different value when the test is not calling the methods from
  * `TestingHookImplementorReturnsModifiedValue` first.
- *
- * @author Michael Kramer <m.kramer@mxp.de>
  */
 final class TestingHookImplementorReturnsModifiedValue2 implements TestingHookInterfaceReturnsModifiedValue
 {

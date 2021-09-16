@@ -8,8 +8,6 @@ use OliverKlee\Seminars\OldModel\AbstractModel;
 
 /**
  * This class represents a test object from the database.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 final class TestingModel extends AbstractModel
 {

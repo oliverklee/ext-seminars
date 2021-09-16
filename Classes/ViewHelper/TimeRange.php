@@ -8,8 +8,6 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * This class represents a view helper for rendering time ranges.
- *
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 class Tx_Seminars_ViewHelper_TimeRange
 {

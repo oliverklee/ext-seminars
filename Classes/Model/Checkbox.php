@@ -7,8 +7,6 @@ use OliverKlee\Seminars\Model\Interfaces\Titled;
 
 /**
  * This class represents a checkbox.
- *
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 class Tx_Seminars_Model_Checkbox extends AbstractModel implements Titled
 {

@@ -9,11 +9,6 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\BackEndUser;
 use OliverKlee\PhpUnit\TestCase;
 
-/**
- * @author Bernd Schönbach <bernd@oliverklee.de>
- * @author Niels Pardon <mail@niels-pardon.de>
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- */
 class FrontEndUserGroupTest extends TestCase
 {
     /**

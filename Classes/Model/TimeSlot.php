@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 /**
  * This class represents a time-slot.
- *
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 class Tx_Seminars_Model_TimeSlot extends \Tx_Seminars_Model_AbstractTimeSpan
 {

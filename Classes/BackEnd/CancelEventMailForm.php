@@ -11,9 +11,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class creates back-end e-mail form for canceling an event.
- *
- * @author Mario Rimann <mario@screenteam.com>
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class CancelEventMailForm extends AbstractEventMailForm
 {

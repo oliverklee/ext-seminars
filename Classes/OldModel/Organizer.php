@@ -7,8 +7,6 @@ use OliverKlee\Seminars\OldModel\AbstractModel;
 
 /**
  * This class represents an organizer.
- *
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 class Tx_Seminars_OldModel_Organizer extends AbstractModel implements MailRole
 {

@@ -12,9 +12,6 @@ use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
-/**
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- */
 final class RegistrationFormTest extends UnitTestCase
 {
     /**

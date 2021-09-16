@@ -8,9 +8,6 @@ use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Seminars\Tests\Functional\Traits\CollectionHelper;
 
-/**
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- */
 final class TopicMapperTest extends FunctionalTestCase
 {
     use CollectionHelper;

@@ -6,8 +6,6 @@ use TYPO3\CMS\Core\Mail\MailMessage;
 
 /**
  * This interface needs to be used for hooks concerning the back-end module.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 interface Tx_Seminars_Interfaces_Hook_BackEndModule
 {

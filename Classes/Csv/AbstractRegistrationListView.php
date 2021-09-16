@@ -9,8 +9,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class creates a CSV export of registrations.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends AbstractListView
 {

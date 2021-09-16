@@ -10,8 +10,6 @@ use TYPO3\CMS\Core\Mail\MailMessage;
 
 /**
  * @covers \OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 final class EmailTraitTest extends UnitTestCase
 {

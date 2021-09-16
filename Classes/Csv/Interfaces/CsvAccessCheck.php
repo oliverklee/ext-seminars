@@ -6,8 +6,6 @@ namespace OliverKlee\Seminars\Csv\Interfaces;
 
 /**
  * This interface is used for the access check to CSV exports.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 interface CsvAccessCheck
 {

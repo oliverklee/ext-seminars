@@ -20,8 +20,6 @@ use TYPO3\CMS\Lang\LanguageService;
  * %userName
  * %eventTitle
  * %eventDate
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class EmailService implements SingletonInterface
 {

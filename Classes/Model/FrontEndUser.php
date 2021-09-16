@@ -8,9 +8,6 @@ use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 
 /**
  * This class represents a front-end user.
- *
- * @author Bernd Schönbach <bernd@oliverklee.de>
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class Tx_Seminars_Model_FrontEndUser extends OelibFrontEndUser
 {

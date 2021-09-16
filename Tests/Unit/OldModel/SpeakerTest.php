@@ -8,10 +8,6 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\OldModel\AbstractModel;
 
-/**
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- * @author Niels Pardon <mail@niels-pardon.de>
- */
 class SpeakerTest extends UnitTestCase
 {
     /**

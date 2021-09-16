@@ -6,8 +6,6 @@ namespace OliverKlee\Seminars\RealUrl;
 
 /**
  * This class adds a RealURL configuration.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class Configuration
 {

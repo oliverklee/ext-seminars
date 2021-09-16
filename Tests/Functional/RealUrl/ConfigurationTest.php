@@ -7,9 +7,6 @@ namespace OliverKlee\Seminars\Tests\Functional\RealUrl;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Seminars\RealUrl\Configuration;
 
-/**
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- */
 final class ConfigurationTest extends FunctionalTestCase
 {
     /**

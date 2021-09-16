@@ -21,9 +21,6 @@ use TYPO3\CMS\Scheduler\Task\AbstractTask;
 
 /**
  * This class sends reminders to the organizers.
- *
- * @author Saskia Metzler <saskia@merlin.owl.de>
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class MailNotifier extends AbstractTask
 {

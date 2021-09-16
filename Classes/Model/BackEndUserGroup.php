@@ -7,8 +7,6 @@ use OliverKlee\Seminars\Model\Interfaces\Titled;
 
 /**
  * This class represents a back-end user group.
- *
- * @author Bernd Schönbach <bernd@oliverklee.de>
  */
 class Tx_Seminars_Model_BackEndUserGroup extends OelibBackEndUserGroup implements Titled
 {

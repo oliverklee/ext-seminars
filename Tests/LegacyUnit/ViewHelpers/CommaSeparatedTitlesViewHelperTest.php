@@ -10,9 +10,6 @@ use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\Model\TitledTestingModel;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\Model\UntitledTestingModel;
 
-/**
- * @author Niels Pardon <mail@niels-pardon.de>
- */
 class CommaSeparatedTitlesViewHelperTest extends TestCase
 {
     /**

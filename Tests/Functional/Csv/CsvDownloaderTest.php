@@ -12,9 +12,6 @@ use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 
-/**
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- */
 final class CsvDownloaderTest extends FunctionalTestCase
 {
     use LanguageHelper;

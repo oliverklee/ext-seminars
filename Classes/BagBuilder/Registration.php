@@ -8,9 +8,6 @@ use OliverKlee\Seminars\BagBuilder\AbstractBagBuilder;
  * This builder class creates customized registration bag objects.
  *
  * @extends AbstractBagBuilder<\Tx_Seminars_Bag_Registration>
- *
- * @author Niels Pardon <mail@niels-pardon.de>
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class Tx_Seminars_BagBuilder_Registration extends AbstractBagBuilder
 {

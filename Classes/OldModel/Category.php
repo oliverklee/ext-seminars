@@ -6,8 +6,6 @@ use OliverKlee\Seminars\OldModel\AbstractModel;
 
 /**
  * This class represents an event category.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class Tx_Seminars_OldModel_Category extends AbstractModel
 {

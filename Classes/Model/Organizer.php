@@ -8,8 +8,6 @@ use OliverKlee\Seminars\Model\Interfaces\Titled;
 
 /**
  * This class represents an organizer.
- *
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 class Tx_Seminars_Model_Organizer extends AbstractModel implements MailRole, Titled
 {

@@ -19,9 +19,6 @@ use TYPO3\CMS\Lang\LanguageService;
 
 /**
  * This is the base class for e-mail forms in the back end.
- *
- * @author Mario Rimann <mario@screenteam.com>
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 abstract class AbstractEventMailForm
 {

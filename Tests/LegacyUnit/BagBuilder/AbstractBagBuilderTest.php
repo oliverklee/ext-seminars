@@ -10,10 +10,6 @@ use OliverKlee\Seminars\Bag\AbstractBag;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\BagBuilder\BrokenBagBuilder;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\BagBuilder\TestingBagBuilder;
 
-/**
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- * @author Niels Pardon <mail@niels-pardon.de>
- */
 class AbstractBagBuilderTest extends TestCase
 {
     /**

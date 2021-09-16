@@ -7,8 +7,6 @@ use OliverKlee\Oelib\Model\AbstractModel;
 
 /**
  * This abstract class represents a time span.
- *
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 abstract class Tx_Seminars_Model_AbstractTimeSpan extends AbstractModel
 {

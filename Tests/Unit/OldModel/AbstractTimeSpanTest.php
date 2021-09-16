@@ -8,9 +8,6 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\OldModel\AbstractModel;
 use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingTimeSpan;
 
-/**
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- */
 final class AbstractTimeSpanTest extends UnitTestCase
 {
     /**

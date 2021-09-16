@@ -6,8 +6,6 @@ use Sys25\RnBase\Configuration\Processor as ConfigurationProcessor;
 
 /**
  * This class is the base class for any kind of front-end editor, for example the event editor or the registration editor.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class Tx_Seminars_FrontEnd_Editor extends \Tx_Seminars_FrontEnd_AbstractView
 {

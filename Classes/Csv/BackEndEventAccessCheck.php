@@ -6,8 +6,6 @@ namespace OliverKlee\Seminars\Csv;
 
 /**
  * This class provides the access check for the CSV export of events in the back end.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class BackEndEventAccessCheck extends AbstractBackEndAccessCheck
 {

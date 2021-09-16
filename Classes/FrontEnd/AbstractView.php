@@ -8,8 +8,6 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * This class represents a basic view.
- *
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 abstract class Tx_Seminars_FrontEnd_AbstractView extends TemplateHelper implements ConfigurationCheckable
 {
