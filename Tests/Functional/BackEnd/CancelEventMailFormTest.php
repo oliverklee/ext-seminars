@@ -6,11 +6,13 @@ namespace OliverKlee\Seminars\Tests\Functional\BackEnd;
 
 use Doctrine\DBAL\Driver\Statement;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
-use OliverKlee\Oelib\Email\EmailCollector;
-use OliverKlee\Oelib\Email\MailerFactory;
 use OliverKlee\Seminars\BackEnd\CancelEventMailForm;
 use OliverKlee\Seminars\Tests\Functional\BackEnd\Fixtures\TestingHookImplementor;
+use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
+use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
+use PHPUnit\Framework\MockObject\MockObject;
+use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -22,15 +24,19 @@ final class CancelEventMailFormTest extends FunctionalTestCase
 {
     use LanguageHelper;
 
+    use EmailTrait;
+
+    use MakeInstanceTrait;
+
     /**
      * @var string[]
      */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**
-     * @var EmailCollector
+     * @var MockObject|MailMessage|null
      */
-    private $mailer = null;
+    private $email = null;
 
     protected function setUp()
     {
@@ -40,12 +46,7 @@ final class CancelEventMailFormTest extends FunctionalTestCase
         $this->setUpBackendUserFromFixture(1);
         $this->initializeBackEndLanguage();
 
-        /** @var MailerFactory $mailerFactory */
-        $mailerFactory = GeneralUtility::makeInstance(MailerFactory::class);
-        $mailerFactory->enableTestMode();
-        /** @var EmailCollector $mailer */
-        $mailer = $mailerFactory->getMailer();
-        $this->mailer = $mailer;
+        $this->email = $this->createEmailMock();
     }
 
     protected function tearDown()
@@ -101,6 +102,10 @@ final class CancelEventMailFormTest extends FunctionalTestCase
                 'messageBody' => 'some message body',
             ]
         );
+
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $subject->render();
 
         self::assertSame(1, $hook->getCountCallForCancelEmail());
@@ -127,6 +132,11 @@ final class CancelEventMailFormTest extends FunctionalTestCase
                 'messageBody' => 'some message body',
             ]
         );
+
+        $this->email->expects(self::exactly(2))->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $subject->render();
 
         self::assertSame(2, $hook->getCountCallForCancelEmail());
@@ -150,8 +160,12 @@ final class CancelEventMailFormTest extends FunctionalTestCase
                 'messageBody' => $messageBody,
             ]
         );
+
+        $this->email->expects(self::once())->method('send');
+        $this->addMockedInstance(MailMessage::class, $this->email);
+
         $subject->render();
 
-        self::assertStringContainsString('Joe Johnson', $this->mailer->getFirstSentEmail()->getBody());
+        self::assertStringContainsString('Joe Johnson', $this->email->getBody());
     }
 }

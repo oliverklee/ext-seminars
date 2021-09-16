@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Functional\BackEnd\Fixtures;
 
-use OliverKlee\Oelib\Email\Mail;
+use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\SingletonInterface;
 
 /**
@@ -29,17 +29,17 @@ final class TestingHookImplementor implements \Tx_Seminars_Interfaces_Hook_BackE
      */
     private $countCallForCancelEmail = 0;
 
-    public function modifyGeneralEmail(\Tx_Seminars_Model_Registration $registration, Mail $eMail)
+    public function modifyGeneralEmail(\Tx_Seminars_Model_Registration $registration, MailMessage $eMail)
     {
         $this->countCallForGeneralEmail++;
     }
 
-    public function modifyConfirmEmail(\Tx_Seminars_Model_Registration $registration, Mail $eMail)
+    public function modifyConfirmEmail(\Tx_Seminars_Model_Registration $registration, MailMessage $eMail)
     {
         $this->countCallForConfirmEmail++;
     }
 
-    public function modifyCancelEmail(\Tx_Seminars_Model_Registration $registration, Mail $eMail)
+    public function modifyCancelEmail(\Tx_Seminars_Model_Registration $registration, MailMessage $eMail)
     {
         $this->countCallForCancelEmail++;
     }
