@@ -46,7 +46,7 @@ class ConfigCheckTest extends TestCase
 
         $this->subject->checkCurrency();
 
-        self::assertContains(
+        self::assertStringContainsString(
             'The specified currency setting is either empty or not a valid ISO 4217 alpha 3 code.',
             $this->subject->getRawMessage()
         );
@@ -61,7 +61,7 @@ class ConfigCheckTest extends TestCase
 
         $this->subject->checkCurrency();
 
-        self::assertContains(
+        self::assertStringContainsString(
             'The specified currency setting is either empty or not a valid ISO 4217 alpha 3 code.',
             $this->subject->getRawMessage()
         );

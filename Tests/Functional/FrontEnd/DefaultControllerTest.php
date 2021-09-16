@@ -113,8 +113,8 @@ final class DefaultControllerTest extends FunctionalTestCase
     {
         $configuration = $this->getContentRenderingConfiguration();
 
-        self::assertContains('TypoScript added by extension "seminars"', $configuration);
-        self::assertContains('tt_content.list.20.seminars_pi1 = < plugin.tx_seminars_pi1', $configuration);
+        self::assertStringContainsString('TypoScript added by extension "seminars"', $configuration);
+        self::assertStringContainsString('tt_content.list.20.seminars_pi1 = < plugin.tx_seminars_pi1', $configuration);
     }
 
     /**
@@ -175,7 +175,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $result = $subject->main('', []);
 
-        self::assertContains('test event', $result);
+        self::assertStringContainsString('test event', $result);
     }
 
     /**
@@ -187,7 +187,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $result = $subject->main('', []);
 
-        self::assertContains('test &amp; event', $result);
+        self::assertStringContainsString('test &amp; event', $result);
     }
 
     /**
@@ -199,7 +199,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $result = $subject->main('', []);
 
-        self::assertNotContains('hidden single event', $result);
+        self::assertStringNotContainsString('hidden single event', $result);
     }
 
     /**
@@ -211,7 +211,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $result = $subject->main('', []);
 
-        self::assertNotContains('deleted single event', $result);
+        self::assertStringNotContainsString('deleted single event', $result);
     }
 
     /**
@@ -223,7 +223,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $result = $subject->main('', []);
 
-        self::assertContains('visible event with category', $result);
+        self::assertStringContainsString('visible event with category', $result);
     }
 
     /**
@@ -235,7 +235,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $result = $subject->main('', []);
 
-        self::assertContains('visible event with first type', $result);
+        self::assertStringContainsString('visible event with first type', $result);
     }
 
     /**
@@ -247,7 +247,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $result = $subject->main('', []);
 
-        self::assertContains('visible event with place', $result);
+        self::assertStringContainsString('visible event with place', $result);
     }
 
     /**
@@ -259,7 +259,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $result = $subject->main('', []);
 
-        self::assertContains('test topic', $result);
+        self::assertStringContainsString('test topic', $result);
     }
 
     /**
@@ -271,7 +271,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $result = $subject->main('', []);
 
-        self::assertNotContains('test date', $result);
+        self::assertStringNotContainsString('test date', $result);
     }
 
     /**
@@ -283,7 +283,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $result = $subject->main('', []);
 
-        self::assertNotContains('another topic', $result);
+        self::assertStringNotContainsString('another topic', $result);
     }
 
     /**
@@ -296,7 +296,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $result = $subject->main('', []);
 
-        self::assertContains('visible event with category', $result);
+        self::assertStringContainsString('visible event with category', $result);
     }
 
     /**
@@ -309,7 +309,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $result = $subject->main('', []);
 
-        self::assertNotContains('visible event without category', $result);
+        self::assertStringNotContainsString('visible event without category', $result);
     }
 
     /**
@@ -322,7 +322,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $result = $subject->main('', []);
 
-        self::assertNotContains('visible event with category', $result);
+        self::assertStringNotContainsString('visible event with category', $result);
     }
 
     /**
@@ -335,7 +335,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $result = $subject->main('', []);
 
-        self::assertNotContains('hidden event with category', $result);
+        self::assertStringNotContainsString('hidden event with category', $result);
     }
 
     /**
@@ -348,7 +348,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $result = $subject->main('', []);
 
-        self::assertNotContains('deleted event with category', $result);
+        self::assertStringNotContainsString('deleted event with category', $result);
     }
 
     /**
@@ -361,7 +361,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $result = $subject->main('', []);
 
-        self::assertContains('visible event with first type', $result);
+        self::assertStringContainsString('visible event with first type', $result);
     }
 
     /**
@@ -374,7 +374,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $result = $subject->main('', []);
 
-        self::assertContains('visible event with first type', $result);
+        self::assertStringContainsString('visible event with first type', $result);
     }
 
     /**
@@ -387,7 +387,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $result = $subject->main('', []);
 
-        self::assertNotContains('visible event without type', $result);
+        self::assertStringNotContainsString('visible event without type', $result);
     }
 
     /**
@@ -400,7 +400,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $result = $subject->main('', []);
 
-        self::assertNotContains('visible event with first type', $result);
+        self::assertStringNotContainsString('visible event with first type', $result);
     }
 
     /**
@@ -413,7 +413,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $result = $subject->main('', []);
 
-        self::assertNotContains('hidden event with first type', $result);
+        self::assertStringNotContainsString('hidden event with first type', $result);
     }
 
     /**
@@ -426,7 +426,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $result = $subject->main('', []);
 
-        self::assertNotContains('deleted event with first type', $result);
+        self::assertStringNotContainsString('deleted event with first type', $result);
     }
 
     /**
@@ -439,7 +439,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $result = $subject->main('', []);
 
-        self::assertContains('visible event with place', $result);
+        self::assertStringContainsString('visible event with place', $result);
     }
 
     /**
@@ -452,7 +452,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $result = $subject->main('', []);
 
-        self::assertContains('visible event with place', $result);
+        self::assertStringContainsString('visible event with place', $result);
     }
 
     /**
@@ -465,7 +465,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $result = $subject->main('', []);
 
-        self::assertContains('visible event with two places', $result);
+        self::assertStringContainsString('visible event with two places', $result);
     }
 
     /**
@@ -478,7 +478,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $result = $subject->main('', []);
 
-        self::assertNotContains('visible event without place', $result);
+        self::assertStringNotContainsString('visible event without place', $result);
     }
 
     /**
@@ -491,7 +491,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $result = $subject->main('', []);
 
-        self::assertNotContains('visible event with place', $result);
+        self::assertStringNotContainsString('visible event with place', $result);
     }
 
     /**
@@ -504,7 +504,7 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $result = $subject->main('', []);
 
-        self::assertNotContains('hidden event with place', $result);
+        self::assertStringNotContainsString('hidden event with place', $result);
     }
 
     /**
@@ -517,6 +517,6 @@ final class DefaultControllerTest extends FunctionalTestCase
 
         $result = $subject->main('', []);
 
-        self::assertNotContains('deleted event with place', $result);
+        self::assertStringNotContainsString('deleted event with place', $result);
     }
 }

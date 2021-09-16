@@ -87,7 +87,7 @@ final class CsvDownloaderTest extends FunctionalTestCase
     {
         $this->subject->createAndOutputListOfRegistrations(1);
 
-        self::assertContains('404', $this->headerProxy->getLastAddedHeader());
+        self::assertStringContainsString('404', $this->headerProxy->getLastAddedHeader());
     }
 
     /**
@@ -132,6 +132,6 @@ final class CsvDownloaderTest extends FunctionalTestCase
 
         $expected = $this->localizeAndRemoveColon('LGL.name') . ';' .
             $this->localizeAndRemoveColon('tx_seminars_attendances.address');
-        self::assertContains($expected, $result);
+        self::assertStringContainsString($expected, $result);
     }
 }

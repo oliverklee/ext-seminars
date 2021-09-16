@@ -298,7 +298,7 @@ final class RegistrationTest extends UnitTestCase
 
         $result = $subject->getBillingAddress();
 
-        self::assertContains($value, $result);
+        self::assertStringContainsString($value, $result);
     }
 
     /**
@@ -311,7 +311,7 @@ final class RegistrationTest extends UnitTestCase
 
         $result = $subject->getBillingAddress();
 
-        self::assertContains($value, $result);
+        self::assertStringContainsString($value, $result);
     }
 
     /**
@@ -324,7 +324,7 @@ final class RegistrationTest extends UnitTestCase
 
         $result = $subject->getBillingAddress();
 
-        self::assertContains($value, $result);
+        self::assertStringContainsString($value, $result);
     }
 
     /**
@@ -337,7 +337,7 @@ final class RegistrationTest extends UnitTestCase
 
         $result = $subject->getBillingAddress();
 
-        self::assertContains($value, $result);
+        self::assertStringContainsString($value, $result);
     }
 
     /**
@@ -350,7 +350,7 @@ final class RegistrationTest extends UnitTestCase
 
         $result = $subject->getBillingAddress();
 
-        self::assertContains($value, $result);
+        self::assertStringContainsString($value, $result);
     }
 
     /**
@@ -363,6 +363,6 @@ final class RegistrationTest extends UnitTestCase
 
         $result = $subject->getBillingAddress();
 
-        self::assertContains($value, $result);
+        self::assertStringContainsString($value, $result);
     }
 }

@@ -105,7 +105,7 @@ class RequirementsListTest extends TestCase
         );
         $this->subject->setEvent(new \Tx_Seminars_OldModel_Event($this->seminarUid));
 
-        self::assertContains(
+        self::assertStringContainsString(
             'required &amp; foo',
             $this->subject->render()
         );
@@ -265,7 +265,7 @@ class RequirementsListTest extends TestCase
         $this->subject->setEvent(new \Tx_Seminars_OldModel_Event($this->seminarUid));
         $this->subject->limitToMissingRegistrations();
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'required_bar',
             $this->subject->render()
         );

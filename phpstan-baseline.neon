@@ -31,6 +31,11 @@ parameters:
 			path: Tests/Functional/FrontEnd/EventEditorTest.php
 
 		-
+			message: "#^Parameter \\#1 \\$className of static method TYPO3\\\\CMS\\\\Core\\\\Utility\\\\GeneralUtility\\:\\:makeInstance\\(\\) expects class\\-string\\<PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&stdClass\\>, class\\-string\\<PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\>&class\\-string\\<stdClass\\> given\\.$#"
+			count: 4
+			path: Tests/LegacyUnit/BackEnd/RegistrationsListTest.php
+
+		-
 			message: "#^Parameter \\#1 \\$uids of method Tx_Seminars_BagBuilder_Event\\:\\:limitToEventTypes\\(\\) expects array\\<string\\>, array\\<int, int\\> given\\.$#"
 			count: 11
 			path: Tests/LegacyUnit/BagBuilder/EventBagBuilderTest.php
@@ -39,6 +44,21 @@ parameters:
 			message: "#^Parameter \\#1 \\$uids of method Tx_Seminars_BagBuilder_Event\\:\\:limitToPlaces\\(\\) expects array\\<string\\>, array\\<int, int\\> given\\.$#"
 			count: 6
 			path: Tests/LegacyUnit/BagBuilder/EventBagBuilderTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$className of static method TYPO3\\\\CMS\\\\Core\\\\Utility\\\\GeneralUtility\\:\\:makeInstance\\(\\) expects class\\-string\\<PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&stdClass\\>, class\\-string\\<PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\>&class\\-string\\<stdClass\\> given\\.$#"
+			count: 4
+			path: Tests/LegacyUnit/Csv/AbstractRegistrationListViewTest.php
+
+		-
+			message: "#^Trying to mock an undefined method modifySalutation\\(\\) on class stdClass\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/Email/SalutationTest.php
+
+		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\) with array\\('mail@foo\\.com' \\=\\> 'Mr\\. Bar'\\) and string will always evaluate to false\\.$#"
+			count: 2
+			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
 
 		-
 			message: "#^Parameter \\#1 \\$formData of method Tx_Seminars_FrontEnd_EventEditor\\:\\:validateDate\\(\\) expects array\\<array\\>, array\\<string, string\\> given\\.$#"
@@ -61,12 +81,42 @@ parameters:
 			path: Tests/LegacyUnit/FrontEnd/EventEditorTest.php
 
 		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\) with array\\('foo' \\=\\> 'foo', 'bar' \\=\\> 'bar'\\) and array\\<int\\> will always evaluate to false\\.$#"
+			count: 3
+			path: Tests/LegacyUnit/OldModel/RegistrationTest.php
+
+		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\) with array\\('MrTest@example\\.com' \\=\\> 'Mr\\. Test'\\) and string will always evaluate to false\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/SchedulerTasks/MailNotifierTest.php
+
+		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\) with string and null will always evaluate to false\\.$#"
+			count: 1
+			path: Tests/LegacyUnit/Service/EmailServiceTest.php
+
+		-
 			message: "#^Parameter \\#1 \\$array_arg of function key expects array\\|object, string given\\.$#"
 			count: 1
 			path: Tests/LegacyUnit/Service/EmailServiceTest.php
 
 		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\) with array\\('mail@example\\.com' \\=\\> 'test organizer'\\) and string will always evaluate to false\\.$#"
+			count: 2
+			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$className of static method TYPO3\\\\CMS\\\\Core\\\\Utility\\\\GeneralUtility\\:\\:makeInstance\\(\\) expects class\\-string\\<PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&stdClass\\>, class\\-string\\<PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\>&class\\-string\\<stdClass\\> given\\.$#"
+			count: 4
+			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
+
+		-
 			message: "#^Parameter \\#1 \\$list of method Tx_Seminars_ViewHelper_CommaSeparatedTitles\\:\\:render\\(\\) expects iterable\\<OliverKlee\\\\Seminars\\\\Model\\\\Interfaces\\\\Titled\\>&OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection, OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection given\\.$#"
 			count: 5
 			path: Tests/LegacyUnit/ViewHelpers/CommaSeparatedTitlesViewHelperTest.php
+
+		-
+			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\) with array\\('max@example\\.com' \\=\\> 'Max'\\) and string will always evaluate to false\\.$#"
+			count: 1
+			path: Tests/Unit/Traits/EmailTraitTest.php
 

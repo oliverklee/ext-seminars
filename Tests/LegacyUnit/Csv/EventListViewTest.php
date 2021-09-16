@@ -190,7 +190,7 @@ class EventListViewTest extends TestCase
 
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'uid');
 
-        self::assertContains(
+        self::assertStringContainsString(
             (string)$eventUid,
             $this->subject->render()
         );
@@ -212,7 +212,7 @@ class EventListViewTest extends TestCase
 
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
 
-        self::assertContains(
+        self::assertStringContainsString(
             'another event',
             $this->subject->render()
         );
@@ -233,11 +233,11 @@ class EventListViewTest extends TestCase
 
         $eventList = $this->subject->render();
 
-        self::assertContains(
+        self::assertStringContainsString(
             (string)$firstEventUid,
             $eventList
         );
-        self::assertContains(
+        self::assertStringContainsString(
             (string)$secondEventUid,
             $eventList
         );
@@ -256,7 +256,7 @@ class EventListViewTest extends TestCase
             ['pid' => $this->pageUid, 'begin_date' => $GLOBALS['SIM_EXEC_TIME'] - 3600]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->localizeAndRemoveColon(
                 'tx_seminars_seminars.uid'
             ) . "\r\n" . $firstEventUid . "\r\n" . $secondEventUid . "\r\n",
@@ -292,7 +292,7 @@ class EventListViewTest extends TestCase
 
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '"bar"',
             $this->subject->render()
         );
@@ -307,7 +307,7 @@ class EventListViewTest extends TestCase
 
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'description');
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo "" bar',
             $this->subject->render()
         );
@@ -322,7 +322,7 @@ class EventListViewTest extends TestCase
 
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
 
-        self::assertContains(
+        self::assertStringContainsString(
             "\"foo\nbar\"",
             $this->subject->render()
         );
@@ -337,7 +337,7 @@ class EventListViewTest extends TestCase
 
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
 
-        self::assertContains(
+        self::assertStringContainsString(
             '"foo "" bar"',
             $this->subject->render()
         );
@@ -352,7 +352,7 @@ class EventListViewTest extends TestCase
 
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
 
-        self::assertContains(
+        self::assertStringContainsString(
             '"foo ; bar"',
             $this->subject->render()
         );
@@ -367,7 +367,7 @@ class EventListViewTest extends TestCase
 
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'description,title');
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo;bar',
             $this->subject->render()
         );
@@ -384,11 +384,11 @@ class EventListViewTest extends TestCase
         $eventList = $this->subject->render();
         $description = $this->localizeAndRemoveColon('tx_seminars_seminars.description');
 
-        self::assertContains(
+        self::assertStringContainsString(
             $description,
             $eventList
         );
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '"' . $description . '"',
             $eventList
         );
@@ -402,7 +402,7 @@ class EventListViewTest extends TestCase
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'description,title');
         $this->createEventInFolderAndSetPageUid();
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->localizeAndRemoveColon('tx_seminars_seminars.description') .
             ';' . $this->localizeAndRemoveColon('tx_seminars_seminars.title'),
             $this->subject->render()

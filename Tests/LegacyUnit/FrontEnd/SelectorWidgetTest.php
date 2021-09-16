@@ -129,7 +129,7 @@ class SelectorWidgetTest extends TestCase
             'city'
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('label_searching_hints'),
             $this->subject->render()
         );
@@ -145,7 +145,7 @@ class SelectorWidgetTest extends TestCase
             'city'
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<input type="submit" value="' .
             $this->getLanguageService()->getLL('label_selector_submit') . '" />',
             $this->subject->render()
@@ -162,7 +162,7 @@ class SelectorWidgetTest extends TestCase
             'city'
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<input type="submit" value="' .
             $this->getLanguageService()->getLL('label_selector_reset') . '"',
             $this->subject->render()
@@ -183,7 +183,7 @@ class SelectorWidgetTest extends TestCase
             true
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<option value="0">' .
             $this->getLanguageService()->getLL('label_selector_pleaseChoose') .
             '</option>',
@@ -203,11 +203,11 @@ class SelectorWidgetTest extends TestCase
 
         $output = $this->subject->render();
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('label_event_type'),
             $output
         );
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('label_language'),
             $output
         );
@@ -224,7 +224,7 @@ class SelectorWidgetTest extends TestCase
             'age,organizer,price'
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '###',
             $this->subject->render()
         );
@@ -322,7 +322,7 @@ class SelectorWidgetTest extends TestCase
             ['event_type' => $eventTypeUid]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<option value="' . $eventTypeUid . '">' . $eventTypeTitle .
             '</option>',
             $this->subject->render()
@@ -349,7 +349,7 @@ class SelectorWidgetTest extends TestCase
             ['event_type' => $eventTypeUid]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<option value="' . $eventTypeUid . '">' .
             \htmlspecialchars($eventTypeTitle, ENT_QUOTES | ENT_HTML5) .
             '</option>',
@@ -379,7 +379,7 @@ class SelectorWidgetTest extends TestCase
 
         $this->subject->piVars['event_type'][] = (string)$eventTypeUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             $eventTypeUid . '" selected="selected">' . $eventTypeTitle .
             '</option>',
             $this->subject->render()
@@ -421,12 +421,12 @@ class SelectorWidgetTest extends TestCase
 
         $output = $this->subject->render();
 
-        self::assertContains(
+        self::assertStringContainsString(
             $eventTypeUid . '" selected="selected">' . $eventTypeTitle .
             '</option>',
             $output
         );
-        self::assertContains(
+        self::assertStringContainsString(
             $eventTypeUid2 . '" selected="selected">' . $eventTypeTitle2 .
             '</option>',
             $output
@@ -443,7 +443,7 @@ class SelectorWidgetTest extends TestCase
             'event_type'
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<select name="tx_seminars_pi1[event_type][]" ' .
             'id="tx_seminars_pi1-event_type" size="5" multiple="multiple">',
             $this->subject->render()
@@ -526,7 +526,7 @@ class SelectorWidgetTest extends TestCase
             'city'
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '###OPTIONS_LANGUAGE###',
             $this->subject->render()
         );
@@ -557,7 +557,7 @@ class SelectorWidgetTest extends TestCase
             ['language' => $languageIsoCode]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<option value="' . $languageIsoCode . '">' . $languageName .
             '</option>',
             $this->subject->render()
@@ -574,7 +574,7 @@ class SelectorWidgetTest extends TestCase
             'language'
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<select name="tx_seminars_pi1[language][]" ' .
             'id="tx_seminars_pi1-language" size="5" multiple="multiple">',
             $this->subject->render()
@@ -608,7 +608,7 @@ class SelectorWidgetTest extends TestCase
 
         $this->subject->piVars['language'][] = $languageIsoCode;
 
-        self::assertContains(
+        self::assertStringContainsString(
             $languageIsoCode . '" selected="selected">' . $languageName .
             '</option>',
             $this->subject->render()
@@ -657,12 +657,12 @@ class SelectorWidgetTest extends TestCase
 
         $output = $this->subject->render();
 
-        self::assertContains(
+        self::assertStringContainsString(
             $languageIsoCode . '" selected="selected">' . $languageName .
             '</option>',
             $output
         );
-        self::assertContains(
+        self::assertStringContainsString(
             $languageIsoCode2 . '" selected="selected">' . $languageName2 .
             '</option>',
             $output
@@ -714,7 +714,7 @@ class SelectorWidgetTest extends TestCase
             'place'
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<option value="' . $placeUid . '">' . $placeTitle . '</option>',
             $this->subject->render()
         );
@@ -744,7 +744,7 @@ class SelectorWidgetTest extends TestCase
             'place'
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<option value="' . $placeUid . '">' .
             \htmlspecialchars($placeTitle, ENT_QUOTES | ENT_HTML5) . '</option>',
             $this->subject->render()
@@ -761,7 +761,7 @@ class SelectorWidgetTest extends TestCase
             'place'
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<select name="tx_seminars_pi1[place][]" ' .
             'id="tx_seminars_pi1-place" size="5" multiple="multiple">',
             $this->subject->render()
@@ -794,7 +794,7 @@ class SelectorWidgetTest extends TestCase
 
         $this->subject->piVars['place'][] = (string)$placeUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<option value="' . $placeUid . '" selected="selected">' . $placeTitle . '</option>',
             $this->subject->render()
         );
@@ -841,12 +841,12 @@ class SelectorWidgetTest extends TestCase
 
         $output = $this->subject->render();
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<option value="' . $placeUid . '" selected="selected">' .
             $placeTitle . '</option>',
             $output
         );
-        self::assertContains(
+        self::assertStringContainsString(
             '<option value="' . $placeUid2 . '" selected="selected">' .
             $placeTitle2 . '</option>',
             $output
@@ -896,7 +896,7 @@ class SelectorWidgetTest extends TestCase
             'place'
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<option value="' . $cityName . '">' . $cityName . '</option>',
             $this->subject->render()
         );
@@ -941,11 +941,11 @@ class SelectorWidgetTest extends TestCase
 
         $output = $this->subject->render();
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<option value="' . $cityName1 . '">' . $cityName1 . '</option>',
             $output
         );
-        self::assertContains(
+        self::assertStringContainsString(
             '<option value="' . $cityName2 . '">' . $cityName2 . '</option>',
             $output
         );
@@ -974,7 +974,7 @@ class SelectorWidgetTest extends TestCase
 
         $this->subject->piVars['city'][] = $cityTitle;
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<option value="' . $cityTitle . '" selected="selected">' .
             $cityTitle . '</option>',
             $this->subject->render()
@@ -1023,12 +1023,12 @@ class SelectorWidgetTest extends TestCase
 
         $output = $this->subject->render();
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<option value="' . $cityTitle1 . '" selected="selected">' .
             $cityTitle1 . '</option>',
             $output
         );
-        self::assertContains(
+        self::assertStringContainsString(
             '<option value="' . $cityTitle2 . '" selected="selected">' .
             $cityTitle2 . '</option>',
             $output
@@ -1066,7 +1066,7 @@ class SelectorWidgetTest extends TestCase
             'city'
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '###OPTIONS_COUNTRY###',
             $this->subject->render()
         );
@@ -1103,7 +1103,7 @@ class SelectorWidgetTest extends TestCase
             'place'
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<option value="' . $countryIsoCode . '">' . $countryName .
             '</option>',
             $this->subject->render()
@@ -1164,12 +1164,12 @@ class SelectorWidgetTest extends TestCase
 
         $output = $this->subject->render();
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<option value="' . $countryIsoCode1 . '">' . $countryName1 .
             '</option>',
             $output
         );
-        self::assertContains(
+        self::assertStringContainsString(
             '<option value="' . $countryIsoCode2 . '">' . $countryName2 .
             '</option>',
             $output
@@ -1209,7 +1209,7 @@ class SelectorWidgetTest extends TestCase
 
         $this->subject->piVars['country'][] = $countryIsoCode;
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<option value="' . $countryIsoCode . '" selected="selected">' .
             $countryName . '</option>',
             $this->subject->render()
@@ -1273,12 +1273,12 @@ class SelectorWidgetTest extends TestCase
 
         $output = $this->subject->render();
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<option value="' . $countryIsoCode1 . '" selected="selected">' .
             $countryName1 . '</option>',
             $output
         );
-        self::assertContains(
+        self::assertStringContainsString(
             '<option value="' . $countryIsoCode2 . '" selected="selected">' .
             $countryName2 . '</option>',
             $output
@@ -1336,7 +1336,7 @@ class SelectorWidgetTest extends TestCase
         $searchWord = 'foo bar';
         $this->subject->piVars['sword'] = $searchWord;
 
-        self::assertContains(
+        self::assertStringContainsString(
             $searchWord,
             $this->subject->render()
         );
@@ -1355,7 +1355,7 @@ class SelectorWidgetTest extends TestCase
         $searchWord = '<>';
         $this->subject->piVars['sword'] = $searchWord;
 
-        self::assertContains(
+        self::assertStringContainsString(
             \htmlspecialchars($searchWord, ENT_QUOTES | ENT_HTML5),
             $this->subject->render()
         );
@@ -1392,7 +1392,7 @@ class SelectorWidgetTest extends TestCase
             'date'
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<select name="tx_seminars_pi1[from_day]"',
             $this->subject->render()
         );
@@ -1408,7 +1408,7 @@ class SelectorWidgetTest extends TestCase
             'date'
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<select name="tx_seminars_pi1[from_month]"',
             $this->subject->render()
         );
@@ -1424,7 +1424,7 @@ class SelectorWidgetTest extends TestCase
             'date'
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<select name="tx_seminars_pi1[from_year]"',
             $this->subject->render()
         );
@@ -1440,7 +1440,7 @@ class SelectorWidgetTest extends TestCase
             'date'
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<select name="tx_seminars_pi1[to_day]"',
             $this->subject->render()
         );
@@ -1456,7 +1456,7 @@ class SelectorWidgetTest extends TestCase
             'date'
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<select name="tx_seminars_pi1[to_month]"',
             $this->subject->render()
         );
@@ -1472,7 +1472,7 @@ class SelectorWidgetTest extends TestCase
             'date'
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<select name="tx_seminars_pi1[to_year]"',
             $this->subject->render()
         );
@@ -1495,11 +1495,11 @@ class SelectorWidgetTest extends TestCase
         $output = $this->subject->render();
         $currentYear = (int)date('Y');
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<option value="' . $currentYear . '">' . $currentYear . '</option>',
             $output
         );
-        self::assertContains(
+        self::assertStringContainsString(
             '<option value="' . ($currentYear + 1) . '">' . ($currentYear + 1) . '</option>',
             $output
         );
@@ -1515,7 +1515,7 @@ class SelectorWidgetTest extends TestCase
             'date'
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<option value="0">&nbsp;</option>',
             $this->subject->render()
         );
@@ -1533,7 +1533,7 @@ class SelectorWidgetTest extends TestCase
 
         $this->subject->piVars['to_month'] = 5;
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<option value="5" selected="selected">5</option>',
             $this->subject->render()
         );
@@ -1560,15 +1560,15 @@ class SelectorWidgetTest extends TestCase
 
         $output = $this->subject->render();
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<option value="2" selected="selected">2</option>',
             $output
         );
-        self::assertContains(
+        self::assertStringContainsString(
             '<option value="5" selected="selected">5</option>',
             $output
         );
-        self::assertContains(
+        self::assertStringContainsString(
             '<option value="' . $thisYear . '" selected="selected">' .
             $thisYear . '</option>',
             $output
@@ -1589,7 +1589,7 @@ class SelectorWidgetTest extends TestCase
             2
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'selected="selected"',
             $this->subject->render()
         );
@@ -1616,7 +1616,7 @@ class SelectorWidgetTest extends TestCase
         $this->subject->piVars['to_month'] = 0;
         $this->subject->piVars['to_year'] = 0;
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'selected="selected"',
             $this->subject->render()
         );
@@ -1650,7 +1650,7 @@ class SelectorWidgetTest extends TestCase
             $eventTypeUid
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo_type',
             $this->subject->render()
         );
@@ -1684,7 +1684,7 @@ class SelectorWidgetTest extends TestCase
             $eventTypeUid
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'bar_type',
             $this->subject->render()
         );
@@ -1720,7 +1720,7 @@ class SelectorWidgetTest extends TestCase
             $organizerUid
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Organizer Foo',
             $this->subject->render()
         );
@@ -1756,7 +1756,7 @@ class SelectorWidgetTest extends TestCase
             $organizerUid2
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'Organizer Bar',
             $this->subject->render()
         );
@@ -1781,7 +1781,7 @@ class SelectorWidgetTest extends TestCase
 
         $this->subject->setConfigurationValue('limitListViewToCategories', $categoryUid);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Category Foo',
             $this->subject->render()
         );
@@ -1806,7 +1806,7 @@ class SelectorWidgetTest extends TestCase
 
         $this->subject->setConfigurationValue('limitListViewToCategories', $categoryUid2);
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'Category Bar',
             $this->subject->render()
         );
@@ -1863,7 +1863,7 @@ class SelectorWidgetTest extends TestCase
         $searchedAge = 15;
         $this->subject->piVars['age'] = $searchedAge;
 
-        self::assertContains(
+        self::assertStringContainsString(
             (string)$searchedAge,
             $this->subject->render()
         );
@@ -1882,7 +1882,7 @@ class SelectorWidgetTest extends TestCase
         $searchedAge = 0;
         $this->subject->piVars['age'] = $searchedAge;
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'age]" value="' . $searchedAge . '"',
             $this->subject->render()
         );
@@ -1901,7 +1901,7 @@ class SelectorWidgetTest extends TestCase
         $searchedAge = 'Hallo';
         $this->subject->piVars['age'] = $searchedAge;
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             $searchedAge,
             $this->subject->render()
         );
@@ -1953,7 +1953,7 @@ class SelectorWidgetTest extends TestCase
             'organizers'
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<option value="' . $organizerUid . '">' . $organizerName .
             '</option>',
             $this->subject->render()
@@ -1985,7 +1985,7 @@ class SelectorWidgetTest extends TestCase
             'organizers'
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<option value="' . $organizerUid . '">' .
             \htmlspecialchars($organizerName, ENT_QUOTES | ENT_HTML5) .
             '</option>',
@@ -2020,7 +2020,7 @@ class SelectorWidgetTest extends TestCase
 
         $this->subject->piVars['organizer'][] = (string)$organizerUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             $organizerUid . '" selected="selected">' . $organizerName .
             '</option>',
             $this->subject->render()
@@ -2068,12 +2068,12 @@ class SelectorWidgetTest extends TestCase
 
         $output = $this->subject->render();
 
-        self::assertContains(
+        self::assertStringContainsString(
             $organizerUid1 . '" selected="selected">' . $organizerName1 .
             '</option>',
             $output
         );
-        self::assertContains(
+        self::assertStringContainsString(
             $organizerUid2 . '" selected="selected">' . $organizerName2 .
             '</option>',
             $output
@@ -2130,7 +2130,7 @@ class SelectorWidgetTest extends TestCase
             'categories'
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<option value="' . $categoryUid . '">' . $categoryName . '</option>',
             $this->subject->render()
         );
@@ -2153,7 +2153,7 @@ class SelectorWidgetTest extends TestCase
             'categories'
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<option value="' . $categoryUid . '">' . \htmlspecialchars(
                 $categoryName,
                 ENT_QUOTES | ENT_HTML5
@@ -2181,7 +2181,7 @@ class SelectorWidgetTest extends TestCase
 
         $this->subject->piVars['categories'][] = (string)$categoryUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             $categoryUid . '" selected="selected">' . $categoryName . '</option>',
             $this->subject->render()
         );
@@ -2219,11 +2219,11 @@ class SelectorWidgetTest extends TestCase
 
         $output = $this->subject->render();
 
-        self::assertContains(
+        self::assertStringContainsString(
             $categoryUid1 . '" selected="selected">' . $categoryName1 . '</option>',
             $output
         );
-        self::assertContains(
+        self::assertStringContainsString(
             $categoryUid2 . '" selected="selected">' . $categoryName2 . '</option>',
             $output
         );
@@ -2293,7 +2293,7 @@ class SelectorWidgetTest extends TestCase
         $priceFrom = 10;
         $this->subject->piVars['price_from'] = $priceFrom;
 
-        self::assertContains(
+        self::assertStringContainsString(
             (string)$priceFrom,
             $this->subject->render()
         );
@@ -2312,7 +2312,7 @@ class SelectorWidgetTest extends TestCase
         $priceTo = 50;
         $this->subject->piVars['price_to'] = $priceTo;
 
-        self::assertContains(
+        self::assertStringContainsString(
             (string)$priceTo,
             $this->subject->render()
         );
@@ -2331,7 +2331,7 @@ class SelectorWidgetTest extends TestCase
         $priceFrom = 0;
         $this->subject->piVars['price_from'] = $priceFrom;
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'price_from]" value="' . $priceFrom . '"',
             $this->subject->render()
         );
@@ -2350,7 +2350,7 @@ class SelectorWidgetTest extends TestCase
         $priceTo = 0;
         $this->subject->piVars['price_to'] = $priceTo;
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'price_to]" value="' . $priceTo . '"',
             $this->subject->render()
         );
@@ -2369,7 +2369,7 @@ class SelectorWidgetTest extends TestCase
         $priceFrom = 'Hallo';
         $this->subject->piVars['price_from'] = $priceFrom;
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             $priceFrom,
             $this->subject->render()
         );
@@ -2388,7 +2388,7 @@ class SelectorWidgetTest extends TestCase
         $priceTo = 'Hallo';
         $this->subject->piVars['price_from'] = $priceTo;
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             $priceTo,
             $this->subject->render()
         );

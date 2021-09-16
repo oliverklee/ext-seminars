@@ -127,6 +127,6 @@ final class GeneralEventMailFormTest extends FunctionalTestCase
         );
         $subject->render();
 
-        self::assertContains('Joe Johnson', $this->mailer->getFirstSentEmail()->getBody());
+        self::assertStringContainsString('Joe Johnson', $this->mailer->getFirstSentEmail()->getBody());
     }
 }

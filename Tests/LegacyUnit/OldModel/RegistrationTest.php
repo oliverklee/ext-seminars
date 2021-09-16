@@ -283,7 +283,7 @@ final class RegistrationTest extends TestCase
         $title = 'Test payment method';
         $this->setPaymentMethodRelation(['title' => $title]);
 
-        self::assertContains(
+        self::assertStringContainsString(
             $title,
             $this->subject->getRegistrationData('method_of_payment')
         );
@@ -327,7 +327,7 @@ final class RegistrationTest extends TestCase
             ['notes' => "foo\r\nbar"]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             "\r\n",
             $this->subject->getRegistrationData('notes')
         );
@@ -376,7 +376,7 @@ final class RegistrationTest extends TestCase
      */
     public function dumpAttendanceValuesCanContainUid()
     {
-        self::assertContains(
+        self::assertStringContainsString(
             (string)$this->subject->getUid(),
             $this->subject->dumpAttendanceValues('uid')
         );
@@ -387,7 +387,7 @@ final class RegistrationTest extends TestCase
      */
     public function dumpAttendanceValuesContainsInterestsIfRequested()
     {
-        self::assertContains(
+        self::assertStringContainsString(
             'nothing',
             $this->subject->dumpAttendanceValues('interests')
         );
@@ -398,7 +398,7 @@ final class RegistrationTest extends TestCase
      */
     public function dumpAttendanceValuesContainsInterestsIfRequestedEvenForSpaceAfterCommaInKeyList()
     {
-        self::assertContains(
+        self::assertStringContainsString(
             'nothing',
             $this->subject->dumpAttendanceValues('email, interests')
         );
@@ -409,7 +409,7 @@ final class RegistrationTest extends TestCase
      */
     public function dumpAttendanceValuesContainsInterestsIfRequestedEvenForSpaceBeforeCommaInKeyList()
     {
-        self::assertContains(
+        self::assertStringContainsString(
             'nothing',
             $this->subject->dumpAttendanceValues('interests ,email')
         );
@@ -420,7 +420,7 @@ final class RegistrationTest extends TestCase
      */
     public function dumpAttendanceValuesContainsLabelForInterestsIfRequested()
     {
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('label_interests'),
             $this->subject->dumpAttendanceValues('interests')
         );
@@ -431,7 +431,7 @@ final class RegistrationTest extends TestCase
      */
     public function dumpAttendanceValuesContainsLabelEvenForSpaceAfterCommaInKeyList()
     {
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('label_interests'),
             $this->subject->dumpAttendanceValues('interests, expectations')
         );
@@ -442,7 +442,7 @@ final class RegistrationTest extends TestCase
      */
     public function dumpAttendanceValuesContainsLabelEvenForSpaceBeforeCommaInKeyList()
     {
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('label_interests'),
             $this->subject->dumpAttendanceValues('interests ,expectations')
         );
@@ -453,7 +453,7 @@ final class RegistrationTest extends TestCase
      */
     public function dumpAttendanceValuesForDataWithLineFeedStartsDataOnNewLine()
     {
-        self::assertContains(
+        self::assertStringContainsString(
             "\nfoo\nbar",
             $this->subject->dumpAttendanceValues('background_knowledge')
         );
@@ -464,7 +464,7 @@ final class RegistrationTest extends TestCase
      */
     public function dumpAttendanceValuesForDataWithCarriageReturnStartsDataOnNewLine()
     {
-        self::assertContains(
+        self::assertStringContainsString(
             "\nfoo\nbar",
             $this->subject->dumpAttendanceValues('known_from')
         );
@@ -475,7 +475,7 @@ final class RegistrationTest extends TestCase
      */
     public function dumpAttendanceValuesCanContainNonRegisteredField()
     {
-        self::assertContains(
+        self::assertStringContainsString(
             'label_is_dummy_record: 1',
             $this->subject->dumpAttendanceValues('is_dummy_record')
         );
@@ -536,7 +536,7 @@ final class RegistrationTest extends TestCase
 
         $result = $subject->dumpAttendanceValues($fieldName);
 
-        self::assertNotContains('::', $result);
+        self::assertStringNotContainsString('::', $result);
     }
 
     // Tests regarding committing registrations to the database.
@@ -838,10 +838,7 @@ final class RegistrationTest extends TestCase
             []
         );
 
-        self::assertInternalType(
-            'array',
-            $this->subject->getFoodsUids()
-        );
+        self::assertIsArray($this->subject->getFoodsUids());
     }
 
     /**
@@ -877,10 +874,7 @@ final class RegistrationTest extends TestCase
             ['foods' => '']
         );
 
-        self::assertInternalType(
-            'array',
-            $this->subject->getFoodsUids()
-        );
+        self::assertIsArray($this->subject->getFoodsUids());
     }
 
     /**
@@ -896,10 +890,7 @@ final class RegistrationTest extends TestCase
             []
         );
 
-        self::assertInternalType(
-            'array',
-            $this->subject->getLodgingsUids()
-        );
+        self::assertIsArray($this->subject->getLodgingsUids());
     }
 
     /**
@@ -935,10 +926,7 @@ final class RegistrationTest extends TestCase
             ['lodgings' => '']
         );
 
-        self::assertInternalType(
-            'array',
-            $this->subject->getLodgingsUids()
-        );
+        self::assertIsArray($this->subject->getLodgingsUids());
     }
 
     /**
@@ -954,10 +942,7 @@ final class RegistrationTest extends TestCase
             []
         );
 
-        self::assertInternalType(
-            'array',
-            $this->subject->getCheckboxesUids()
-        );
+        self::assertIsArray($this->subject->getCheckboxesUids());
     }
 
     /**
@@ -993,10 +978,7 @@ final class RegistrationTest extends TestCase
             ['checkboxes' => '']
         );
 
-        self::assertInternalType(
-            'array',
-            $this->subject->getCheckboxesUids()
-        );
+        self::assertIsArray($this->subject->getCheckboxesUids());
     }
 
     /**

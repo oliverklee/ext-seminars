@@ -113,7 +113,7 @@ class CountdownTest extends TestCase
             ->method('findNextUpcoming')
             ->will(self::throwException(new NotFoundException()));
 
-        self::assertContains(
+        self::assertStringContainsString(
             'There are no upcoming events. Please come back later.',
             $this->subject->render()
         );

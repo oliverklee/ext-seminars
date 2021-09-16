@@ -204,7 +204,7 @@ class RegistrationsListTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'accreditation number 123',
             $this->subject->show()
         );
@@ -229,7 +229,7 @@ class RegistrationsListTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '&amp;&quot;&lt;&gt;',
             $this->subject->show()
         );
@@ -254,7 +254,7 @@ class RegistrationsListTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo_user',
             $this->subject->show()
         );
@@ -280,7 +280,7 @@ class RegistrationsListTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'foo_user',
             $this->subject->show()
         );
@@ -303,7 +303,7 @@ class RegistrationsListTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'foo_user',
             $this->subject->show()
         );
@@ -327,7 +327,7 @@ class RegistrationsListTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'event_1',
             $this->subject->show()
         );
@@ -352,7 +352,7 @@ class RegistrationsListTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'event_1',
             $this->subject->show()
         );
@@ -377,7 +377,7 @@ class RegistrationsListTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'user_foo',
             $this->subject->show()
         );
@@ -407,7 +407,7 @@ class RegistrationsListTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'event for registration in subfolder',
             $this->subject->show()
         );
@@ -431,7 +431,7 @@ class RegistrationsListTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'csv=1',
             $this->subject->show()
         );
@@ -447,7 +447,7 @@ class RegistrationsListTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'mod.php?M=web_txseminarsM2&amp;csv=1',
             $this->subject->show()
         );
@@ -466,7 +466,7 @@ class RegistrationsListTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'event_1',
             $this->subject->show()
         );
@@ -486,7 +486,7 @@ class RegistrationsListTest extends TestCase
         );
         $_GET['eventUid'] = $eventUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             '(UID ' . $eventUid . ')',
             $this->subject->show()
         );
@@ -512,7 +512,7 @@ class RegistrationsListTest extends TestCase
 
         $_GET['eventUid'] = $eventUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             'user_foo',
             $this->subject->show()
         );
@@ -539,7 +539,7 @@ class RegistrationsListTest extends TestCase
             'tx_seminars_seminars'
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'user_foo',
             $this->subject->show()
         );
@@ -565,7 +565,7 @@ class RegistrationsListTest extends TestCase
 
         $_GET['eventUid'] = $eventUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             'tx_seminars_pi2[eventUid]=' . $eventUid,
             $this->subject->show()
         );
@@ -591,7 +591,7 @@ class RegistrationsListTest extends TestCase
 
         $_GET['eventUid'] = $eventUid;
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'tx_seminars_pi2[pid]=',
             $this->subject->show()
         );
@@ -615,7 +615,7 @@ class RegistrationsListTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'tx_seminars_pi2[eventUid]=',
             $this->subject->show()
         );
@@ -686,6 +686,6 @@ class RegistrationsListTest extends TestCase
             ->getLoadedTestingModel(['usergroup' => $backEndGroup->getUid()]);
         BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
 
-        self::assertContains((string)$newRegistrationFolder, $this->subject->show());
+        self::assertStringContainsString((string)$newRegistrationFolder, $this->subject->show());
     }
 }

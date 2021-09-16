@@ -56,10 +56,9 @@ final class AbstractModelTest extends UnitTestCase
      */
     public function fromDataProvidesModelWithGivenData()
     {
-        $data = ['test' => true];
-        $result = TestingModel::fromData($data);
+        $result = TestingModel::fromData(['test' => true]);
 
-        self::assertSame($data['test'], $result->getBooleanTest());
+        self::assertTrue($result->getBooleanTest());
     }
 
     /**

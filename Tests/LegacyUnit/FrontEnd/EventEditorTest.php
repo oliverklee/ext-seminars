@@ -415,7 +415,7 @@ class EventEditorTest extends TestCase
             )
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('message_notLoggedIn'),
             $this->subject->hasAccessMessage()
         );
@@ -430,7 +430,7 @@ class EventEditorTest extends TestCase
         );
         $this->testingFramework->createAndLoginFrontEndUser();
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('message_noAccessToEventEditor'),
             $this->subject->hasAccessMessage()
         );
@@ -456,7 +456,7 @@ class EventEditorTest extends TestCase
         $this->subject->setConfigurationValue('mayManagersEditTheirEvents', 0);
         $this->createLogInAndAddFeUserAsVip();
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('message_noAccessToEventEditor'),
             $this->subject->hasAccessMessage()
         );
@@ -488,7 +488,7 @@ class EventEditorTest extends TestCase
         $this->subject->setConfigurationValue('mayManagersEditTheirEvents', 0);
         $this->createLogInAndAddFeUserAsDefaultVip();
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('message_noAccessToEventEditor'),
             $this->subject->hasAccessMessage()
         );
@@ -517,7 +517,7 @@ class EventEditorTest extends TestCase
     {
         $this->testingFramework->createAndLoginFrontEndUser();
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('message_noAccessToEventEditor'),
             $this->subject->hasAccessMessage()
         );
@@ -558,7 +558,7 @@ class EventEditorTest extends TestCase
             )
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('message_noAccessToEventEditor'),
             $this->subject->hasAccessMessage()
         );
@@ -599,7 +599,7 @@ class EventEditorTest extends TestCase
 
         $this->subject->setObjectUid($this->testingFramework->getAutoIncrement('tx_seminars_seminars'));
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('message_wrongSeminarNumber'),
             $this->subject->hasAccessMessage()
         );
@@ -622,7 +622,7 @@ class EventEditorTest extends TestCase
             )
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('message_wrongSeminarNumber'),
             $this->subject->hasAccessMessage()
         );
@@ -1682,7 +1682,7 @@ class EventEditorTest extends TestCase
 
         $this->subject->sendEMailToReviewer();
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo Event',
             $this->email->getBody()
         );
@@ -1756,7 +1756,7 @@ class EventEditorTest extends TestCase
 
         $this->subject->sendEMailToReviewer();
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '###PUBLISH_EVENT_DATE###',
             $this->email->getBody()
         );
@@ -1792,7 +1792,7 @@ class EventEditorTest extends TestCase
 
         $this->subject->sendEMailToReviewer();
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'foo event,',
             $this->email->getBody()
         );
@@ -1826,7 +1826,7 @@ class EventEditorTest extends TestCase
 
         $this->subject->sendEMailToReviewer();
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '###',
             $this->email->getBody()
         );
@@ -1861,7 +1861,7 @@ class EventEditorTest extends TestCase
 
         $this->subject->sendEMailToReviewer();
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Foo Description',
             $this->email->getBody()
         );
@@ -1895,7 +1895,7 @@ class EventEditorTest extends TestCase
 
         $this->subject->sendEMailToReviewer();
 
-        self::assertContains(
+        self::assertStringContainsString(
             'tx_seminars_publication%5Bhash%5D=' . $formData['publication_hash'],
             $this->email->getBody()
         );
@@ -2263,7 +2263,7 @@ class EventEditorTest extends TestCase
 
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('label_save_event_text'),
             $this->email->getBody()
         );
@@ -2283,7 +2283,7 @@ class EventEditorTest extends TestCase
 
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('label_save_event_overview'),
             $this->email->getBody()
         );
@@ -2303,7 +2303,7 @@ class EventEditorTest extends TestCase
 
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '###',
             $this->email->getBody()
         );
@@ -2326,7 +2326,7 @@ class EventEditorTest extends TestCase
 
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
-        self::assertContains(
+        self::assertStringContainsString(
             $title,
             $this->email->getBody()
         );
@@ -2349,7 +2349,7 @@ class EventEditorTest extends TestCase
 
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
-        self::assertContains(
+        self::assertStringContainsString(
             $description,
             $this->email->getBody()
         );
@@ -2373,7 +2373,7 @@ class EventEditorTest extends TestCase
 
         $this->subject->sendAdditionalNotificationEmailToReviewer();
 
-        self::assertContains(
+        self::assertStringContainsString(
             '02.04.1975',
             $this->email->getBody()
         );

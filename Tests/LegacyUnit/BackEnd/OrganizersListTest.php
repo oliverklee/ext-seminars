@@ -82,7 +82,7 @@ class OrganizersListTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Organizer in subfolder',
             $this->subject->show()
         );
@@ -101,6 +101,6 @@ class OrganizersListTest extends TestCase
             ->getLoadedTestingModel(['usergroup' => $backEndGroup->getUid()]);
         BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
 
-        self::assertContains((string)$newOrganizerFolder, $this->subject->show());
+        self::assertStringContainsString((string)$newOrganizerFolder, $this->subject->show());
     }
 }

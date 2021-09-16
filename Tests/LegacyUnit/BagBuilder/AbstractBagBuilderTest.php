@@ -66,10 +66,7 @@ class AbstractBagBuilderTest extends TestCase
     {
         $bag = $this->subject->build();
 
-        self::assertInternalType(
-            'object',
-            $bag
-        );
+        self::assertIsObject($bag);
     }
 
     public function testBuilderBuildsABag()
@@ -425,7 +422,7 @@ class AbstractBagBuilderTest extends TestCase
 
         // We're using assertContains here because the PID in the WHERE clause
         // may be prefixed with the table name.
-        self::assertContains(
+        self::assertStringContainsString(
             'pid IN (' . $this->dummySysFolderPid . ')',
             $this->subject->getWhereClause()
         );
@@ -481,7 +478,7 @@ class AbstractBagBuilderTest extends TestCase
 
         // We're using assertNotContains here because the WHERE clause always
         // contains a test-specific prefix
-        self::assertNotContains(' AND ', $this->subject->getWhereClause());
+        self::assertStringNotContainsString(' AND ', $this->subject->getWhereClause());
     }
 
     /**
@@ -493,7 +490,7 @@ class AbstractBagBuilderTest extends TestCase
 
         // We're using assertContains here because the WHERE clause always
         // contains a test-specific prefix
-        self::assertContains(' AND testpart IN (1,2,3)', $this->subject->getWhereClause());
+        self::assertStringContainsString(' AND testpart IN (1,2,3)', $this->subject->getWhereClause());
     }
 
     /////////////////////////////////
@@ -734,7 +731,7 @@ class AbstractBagBuilderTest extends TestCase
 
     public function testSetTestModeAddsTheTableNameBeforeIsDummy()
     {
-        self::assertContains(
+        self::assertStringContainsString(
             'tx_seminars_test.is_dummy_record = 1',
             $this->subject->getWhereClause()
         );

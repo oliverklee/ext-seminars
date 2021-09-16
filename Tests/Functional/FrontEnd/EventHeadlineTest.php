@@ -83,7 +83,7 @@ final class EventHeadlineTest extends FunctionalTestCase
 
         $result = $this->subject->render();
 
-        self::assertContains('Code sprint', $result);
+        self::assertStringContainsString('Code sprint', $result);
     }
 
     /**
@@ -96,7 +96,7 @@ final class EventHeadlineTest extends FunctionalTestCase
 
         $result = $this->subject->render();
 
-        self::assertContains('Food &amp; drink', $result);
+        self::assertStringContainsString('Food &amp; drink', $result);
     }
 
     /**

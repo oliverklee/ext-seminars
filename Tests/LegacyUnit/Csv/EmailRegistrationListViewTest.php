@@ -112,7 +112,7 @@ class EmailRegistrationListViewTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             (string)$registrationUid,
             $this->subject->render()
         );
@@ -141,7 +141,7 @@ class EmailRegistrationListViewTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             $firstName,
             $this->subject->render()
         );
@@ -170,7 +170,7 @@ class EmailRegistrationListViewTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             $lastName,
             $this->subject->render()
         );
@@ -198,7 +198,7 @@ class EmailRegistrationListViewTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             $knownFrom,
             $this->subject->render()
         );
@@ -226,7 +226,7 @@ class EmailRegistrationListViewTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             $notes,
             $this->subject->render()
         );
@@ -253,7 +253,7 @@ class EmailRegistrationListViewTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             (string)$registrationUid,
             $this->subject->render()
         );
@@ -280,7 +280,7 @@ class EmailRegistrationListViewTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             (string)$registrationUid,
             $this->subject->render()
         );

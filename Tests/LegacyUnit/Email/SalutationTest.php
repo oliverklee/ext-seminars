@@ -132,7 +132,7 @@ final class SalutationTest extends TestCase
      */
     public function getSalutationReturnsUsernameOfRegistration()
     {
-        self::assertContains(
+        self::assertStringContainsString(
             'Foo',
             $this->subject->getSalutation($this->createFrontEndUser())
         );
@@ -147,7 +147,7 @@ final class SalutationTest extends TestCase
 
         $user = $this->createFrontEndUser();
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('email_hello_formal_0'),
             $this->subject->getSalutation($user)
         );
@@ -162,7 +162,7 @@ final class SalutationTest extends TestCase
 
         $user = $this->createFrontEndUser();
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('email_salutation_title_0') .
             ' ' . $user->getLastOrFullName(),
             $this->subject->getSalutation($user)
@@ -178,7 +178,7 @@ final class SalutationTest extends TestCase
 
         $user = $this->createFrontEndUser(OelibFrontEndUser::GENDER_FEMALE);
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('email_hello_formal_1'),
             $this->subject->getSalutation($user)
         );
@@ -193,7 +193,7 @@ final class SalutationTest extends TestCase
 
         $user = $this->createFrontEndUser(OelibFrontEndUser::GENDER_FEMALE);
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('email_salutation_title_1') .
             ' ' . $user->getLastOrFullName(),
             $this->subject->getSalutation($user)
@@ -207,7 +207,7 @@ final class SalutationTest extends TestCase
     {
         $user = $this->createFrontEndUser(OelibFrontEndUser::GENDER_UNKNOWN);
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('email_hello_formal_99'),
             $this->subject->getSalutation($user)
         );
@@ -220,7 +220,7 @@ final class SalutationTest extends TestCase
     {
         $user = $this->createFrontEndUser(OelibFrontEndUser::GENDER_UNKNOWN);
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('email_salutation_title_99') . ' ' . $user->getLastOrFullName(),
             $this->subject->getSalutation($user)
         );
@@ -236,7 +236,7 @@ final class SalutationTest extends TestCase
         $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
         $configuration->setAsString('salutation', 'informal');
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('email_hello_informal'),
             $this->subject->getSalutation($user)
         );
@@ -252,7 +252,7 @@ final class SalutationTest extends TestCase
         $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
         $configuration->setAsString('salutation', 'informal');
 
-        self::assertContains(
+        self::assertStringContainsString(
             $user->getLastOrFullName(),
             $this->subject->getSalutation($user)
         );
@@ -289,19 +289,19 @@ final class SalutationTest extends TestCase
         $user = $this->createFrontEndUser($gender);
         $salutation = $this->subject->getSalutation($user);
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '_',
             $salutation
         );
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'salutation',
             $salutation
         );
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'email',
             $salutation
         );
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'formal',
             $salutation
         );
@@ -354,9 +354,9 @@ final class SalutationTest extends TestCase
      */
     private function assertNotContainsRawLabelKey(string $string)
     {
-        self::assertNotContains('_', $string);
-        self::assertNotContains('salutation', $string);
-        self::assertNotContains('formal', $string);
+        self::assertStringNotContainsString('_', $string);
+        self::assertStringNotContainsString('salutation', $string);
+        self::assertStringNotContainsString('formal', $string);
     }
 
     // Tests concerning the hooks
@@ -469,7 +469,7 @@ final class SalutationTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             strftime($dateFormatD, $GLOBALS['SIM_EXEC_TIME']) .
             '-' .
             strftime($dateFormatYMD, $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY),
@@ -520,7 +520,7 @@ final class SalutationTest extends TestCase
             $this->getLanguageService()->getLL('email_timeTo') . ' ' .
             \strftime($timeFormat, $endDate);
 
-        self::assertContains(
+        self::assertStringContainsString(
             \sprintf($this->getLanguageService()->getLL('email_timeFrom'), $timeInsert),
             $this->subject->createIntroduction('%s', $event)
         );

@@ -129,7 +129,7 @@ final class RegistrationFormTest extends UnitTestCase
 
         $result = $subject->getThankYouAfterRegistrationUrl();
 
-        self::assertNotContains('showUid', $result);
+        self::assertStringNotContainsString('showUid', $result);
     }
 
     /**
@@ -157,8 +157,8 @@ final class RegistrationFormTest extends UnitTestCase
 
         $result = $subject->getThankYouAfterRegistrationUrl();
 
-        self::assertContains('showUid', $result);
-        self::assertContains('=' . $eventUid, $result);
+        self::assertStringContainsString('showUid', $result);
+        self::assertStringContainsString('=' . $eventUid, $result);
     }
 
     /**
@@ -186,8 +186,8 @@ final class RegistrationFormTest extends UnitTestCase
 
         $result = $subject->getThankYouAfterRegistrationUrl();
 
-        self::assertContains('%5BshowUid%5D', $result);
-        self::assertNotContains('[showUid]', $result);
+        self::assertStringContainsString('%5BshowUid%5D', $result);
+        self::assertStringNotContainsString('[showUid]', $result);
     }
 
     /**
@@ -287,7 +287,7 @@ final class RegistrationFormTest extends UnitTestCase
 
         $result = $subject->getPageToShowAfterUnregistrationUrl();
 
-        self::assertNotContains('showUid', $result);
+        self::assertStringNotContainsString('showUid', $result);
     }
 
     /**
@@ -315,8 +315,8 @@ final class RegistrationFormTest extends UnitTestCase
 
         $result = $subject->getPageToShowAfterUnregistrationUrl();
 
-        self::assertContains('showUid', $result);
-        self::assertContains('=' . $eventUid, $result);
+        self::assertStringContainsString('showUid', $result);
+        self::assertStringContainsString('=' . $eventUid, $result);
     }
 
     /**
@@ -344,7 +344,7 @@ final class RegistrationFormTest extends UnitTestCase
 
         $result = $subject->getPageToShowAfterUnregistrationUrl();
 
-        self::assertContains('%5BshowUid%5D', $result);
-        self::assertNotContains('[showUid]', $result);
+        self::assertStringContainsString('%5BshowUid%5D', $result);
+        self::assertStringNotContainsString('[showUid]', $result);
     }
 }

@@ -739,7 +739,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Test &amp; event',
             $this->subject->main('', [])
         );
@@ -753,7 +753,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Something for you &amp; me',
             $this->subject->main('', [])
         );
@@ -767,7 +767,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Rooms 2 &amp; 3',
             $this->subject->main('', [])
         );
@@ -781,7 +781,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             '1 &amp; 1',
             $this->subject->main('', [])
         );
@@ -826,7 +826,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $dateUid1;
 
-        self::assertContains(
+        self::assertStringContainsString(
             'tx_seminars_pi1%5BshowUid%5D=1337',
             $this->subject->main('', [])
         );
@@ -878,7 +878,7 @@ class DefaultControllerTest extends TestCase
 
         $result = $this->subject->main('', []);
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'tx_seminars_pi1%5BshowUid%5D=' . $singleEventUid,
             $result
         );
@@ -926,7 +926,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $dateUid1;
 
-        self::assertContains(
+        self::assertStringContainsString(
             'tx_seminars_pi1%5BshowUid%5D=1337',
             $this->subject->main('', [])
         );
@@ -978,7 +978,7 @@ class DefaultControllerTest extends TestCase
 
         $this->subject->piVars['showUid'] = $dateUid1;
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'tx_seminars_pi1%5BshowUid%5D=' . $dateUid2,
             $this->subject->main('', [])
         );
@@ -1015,7 +1015,7 @@ class DefaultControllerTest extends TestCase
             ['speakers' => '1']
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo &amp; bar',
             $this->subject->main('', [])
         );
@@ -1052,7 +1052,7 @@ class DefaultControllerTest extends TestCase
             ['speakers' => '1']
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo &amp; bar',
             $this->subject->main('', [])
         );
@@ -1147,8 +1147,8 @@ class DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = (string)$this->seminarUid;
         $result = $this->subject->main('', []);
 
-        self::assertNotContains('<p class="tx-seminars-pi1-image">', $result);
-        self::assertNotContains('<img', $result);
+        self::assertStringNotContainsString('<p class="tx-seminars-pi1-image">', $result);
+        self::assertStringNotContainsString('<img', $result);
     }
 
     /**
@@ -1173,8 +1173,8 @@ class DefaultControllerTest extends TestCase
 
         $this->testingFramework->deleteDummyFile('test_foo.gif');
 
-        self::assertContains('<p class="tx-seminars-pi1-image">', $result);
-        self::assertContains('<img', $result);
+        self::assertStringContainsString('<p class="tx-seminars-pi1-image">', $result);
+        self::assertStringContainsString('<img', $result);
     }
 
     /**
@@ -1200,8 +1200,8 @@ class DefaultControllerTest extends TestCase
 
         $this->testingFramework->deleteDummyFile('test_foo.gif');
 
-        self::assertNotContains('<p class="tx-seminars-pi1-image">', $result);
-        self::assertNotContains('<img', $result);
+        self::assertStringNotContainsString('<p class="tx-seminars-pi1-image">', $result);
+        self::assertStringNotContainsString('<img', $result);
     }
 
     /**
@@ -1263,7 +1263,7 @@ class DefaultControllerTest extends TestCase
         );
 
         $this->subject->piVars['showUid'] = $this->seminarUid;
-        self::assertContains(
+        self::assertStringContainsString(
             $dummyFileName,
             $this->subject->main('', [])
         );
@@ -1343,11 +1343,11 @@ class DefaultControllerTest extends TestCase
 
         $this->subject->piVars['showUid'] = $this->seminarUid;
         $result = $this->subject->main('', []);
-        self::assertContains(
+        self::assertStringContainsString(
             $dummyFileName,
             $result
         );
-        self::assertContains(
+        self::assertStringContainsString(
             $dummyFileName2,
             $result
         );
@@ -1397,7 +1397,7 @@ class DefaultControllerTest extends TestCase
         );
 
         $this->subject->piVars['showUid'] = $this->seminarUid;
-        self::assertContains(
+        self::assertStringContainsString(
             $dummyFileName,
             $this->subject->main('', [])
         );
@@ -1479,11 +1479,11 @@ class DefaultControllerTest extends TestCase
 
         $this->subject->piVars['showUid'] = $this->seminarUid;
         $result = $this->subject->main('', []);
-        self::assertContains(
+        self::assertStringContainsString(
             $dummyFileName,
             $result
         );
-        self::assertContains(
+        self::assertStringContainsString(
             $dummyFileName2,
             $result
         );
@@ -1686,7 +1686,7 @@ class DefaultControllerTest extends TestCase
         );
         $this->subject->piVars['showUid'] = $eventUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             'a &amp; place',
             $this->subject->main('', [])
         );
@@ -1715,7 +1715,7 @@ class DefaultControllerTest extends TestCase
         );
         $this->subject->piVars['showUid'] = $eventUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             'a &amp; place',
             $this->subject->main('', [])
         );
@@ -1744,7 +1744,7 @@ class DefaultControllerTest extends TestCase
         );
         $this->subject->piVars['showUid'] = $eventUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             'over &amp; the rainbow',
             $this->subject->main('', [])
         );
@@ -1773,7 +1773,7 @@ class DefaultControllerTest extends TestCase
         );
         $this->subject->piVars['showUid'] = $eventUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Knödlingen &amp; Großwürsteling',
             $this->subject->main('', [])
         );
@@ -1802,7 +1802,7 @@ class DefaultControllerTest extends TestCase
         );
         $this->subject->piVars['showUid'] = $eventUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             '12 &amp; 45',
             $this->subject->main('', [])
         );
@@ -1865,7 +1865,7 @@ class DefaultControllerTest extends TestCase
         );
 
         $this->subject->piVars['showUid'] = $this->seminarUid;
-        self::assertContains(
+        self::assertStringContainsString(
             '9:45&#8211;18:30',
             $this->subject->main('', [])
         );
@@ -1891,7 +1891,7 @@ class DefaultControllerTest extends TestCase
         );
 
         $this->subject->piVars['showUid'] = $this->seminarUid;
-        self::assertContains(
+        self::assertStringContainsString(
             'room &amp; 1',
             $this->subject->main('', [])
         );
@@ -1946,11 +1946,11 @@ class DefaultControllerTest extends TestCase
 
         $this->subject->piVars['showUid'] = $this->seminarUid;
         $result = $this->subject->main('', []);
-        self::assertContains(
+        self::assertStringContainsString(
             'room 1',
             $result
         );
-        self::assertContains(
+        self::assertStringContainsString(
             'room 2',
             $result
         );
@@ -2082,7 +2082,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             'group 1 &amp; 2',
             $this->subject->main('', [])
         );
@@ -2118,11 +2118,11 @@ class DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
         $result = $this->subject->main('', []);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'group 1',
             $result
         );
-        self::assertContains(
+        self::assertStringContainsString(
             'group 2',
             $result
         );
@@ -2268,7 +2268,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             'depending_foo',
             $this->subject->main('', [])
         );
@@ -2302,7 +2302,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             '>depending_foo</a>',
             $this->subject->main('', [])
         );
@@ -2350,11 +2350,11 @@ class DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         $renderedOutput = $this->subject->main('', []);
-        self::assertContains(
+        self::assertStringContainsString(
             'depending_bar',
             $renderedOutput
         );
-        self::assertContains(
+        self::assertStringContainsString(
             'depending_foo',
             $renderedOutput
         );
@@ -2383,7 +2383,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo &amp; type:',
             $this->subject->main('', [])
         );
@@ -2415,7 +2415,7 @@ class DefaultControllerTest extends TestCase
 
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
-        self::assertContains(
+        self::assertStringContainsString(
             'category &amp; 1',
             $this->subject->main('', [])
         );
@@ -2434,11 +2434,11 @@ class DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
         $result = $this->subject->main('', []);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'category 1',
             $result
         );
-        self::assertContains(
+        self::assertStringContainsString(
             'category 2',
             $result
         );
@@ -2461,7 +2461,7 @@ class DefaultControllerTest extends TestCase
 
         $this->testingFramework->deleteDummyFile('foo_test.gif');
 
-        self::assertContains(
+        self::assertStringContainsString(
             'category 1 <img src="',
             $singleCategoryWithIcon
         );
@@ -2491,12 +2491,12 @@ class DefaultControllerTest extends TestCase
 
         $this->testingFramework->deleteDummyFile('foo_test.gif');
 
-        self::assertContains(
+        self::assertStringContainsString(
             'category 1 <img src="',
             $multipleCategoriesWithIcons
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'category 2 <img src="',
             $multipleCategoriesWithIcons
         );
@@ -2511,7 +2511,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'category 1 <img src="',
             $this->subject->main('', [])
         );
@@ -2535,7 +2535,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $uid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             '01.01.2008',
             $this->subject->main('', [])
         );
@@ -2555,7 +2555,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $uid;
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             $this->getLanguageService()->getLL('label_expiry'),
             $this->subject->main('', [])
         );
@@ -2573,7 +2573,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             $this->getLanguageService()->getLL('label_paymentmethods'),
             $this->subject->main('', [])
         );
@@ -2602,7 +2602,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('label_paymentmethods'),
             $this->subject->main('', [])
         );
@@ -2631,7 +2631,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Payment Method',
             $this->subject->main('', [])
         );
@@ -2672,11 +2672,11 @@ class DefaultControllerTest extends TestCase
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
         $result = $this->subject->main('', []);
-        self::assertContains(
+        self::assertStringContainsString(
             'Payment Method 1',
             $result
         );
-        self::assertContains(
+        self::assertStringContainsString(
             'Payment Method 2',
             $result
         );
@@ -2706,7 +2706,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             \htmlspecialchars($paymentMethodTitle, ENT_QUOTES | ENT_HTML5),
             $this->subject->main('', [])
         );
@@ -2726,7 +2726,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo &amp; organizer',
             $this->subject->main('', [])
         );
@@ -2744,7 +2744,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             'organizer description',
             $this->subject->main('', [])
         );
@@ -2778,7 +2778,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '###',
             $this->subject->main('', [])
         );
@@ -2813,7 +2813,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo&lt;bar',
             $this->subject->main('', [])
         );
@@ -2831,7 +2831,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             \htmlspecialchars('foo<bar', ENT_QUOTES | ENT_HTML5),
             $this->subject->main('', [])
         );
@@ -2849,7 +2849,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = 0;
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('message_missingSeminarNumber'),
             $this->subject->main('', [])
         );
@@ -2869,7 +2869,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('message_wrongSeminarNumber'),
             $this->subject->main('', [])
         );
@@ -2890,7 +2890,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('message_wrongSeminarNumber'),
             $this->subject->main('', [])
         );
@@ -2915,7 +2915,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             'hidden event',
             $this->subject->main('', [])
         );
@@ -2984,7 +2984,7 @@ class DefaultControllerTest extends TestCase
      */
     public function listViewShowsHtmlspecialcharedEventSubtitle()
     {
-        self::assertContains(
+        self::assertStringContainsString(
             'Something for you &amp; me',
             $this->subject->main('', [])
         );
@@ -3006,7 +3006,7 @@ class DefaultControllerTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo &amp; type',
             $this->subject->main('', [])
         );
@@ -3017,7 +3017,7 @@ class DefaultControllerTest extends TestCase
      */
     public function listViewShowsHtmlspecialcharedAccreditationNumber()
     {
-        self::assertContains(
+        self::assertStringContainsString(
             '1 &amp; 1',
             $this->subject->main('', [])
         );
@@ -3043,7 +3043,7 @@ class DefaultControllerTest extends TestCase
             $placeUid
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'a &amp; place',
             $this->subject->main('', [])
         );
@@ -3069,7 +3069,7 @@ class DefaultControllerTest extends TestCase
             $placeUid
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Bonn &amp; Köln',
             $this->subject->main('', [])
         );
@@ -3082,7 +3082,7 @@ class DefaultControllerTest extends TestCase
     {
         $this->addOrganizerRelation(['title' => 'foo & organizer']);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo &amp; organizer',
             $this->subject->main('', [])
         );
@@ -3097,7 +3097,7 @@ class DefaultControllerTest extends TestCase
             ['title' => 'group 1 & 2']
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'group 1 &amp; 2',
             $this->subject->main('', [])
         );
@@ -3115,7 +3115,7 @@ class DefaultControllerTest extends TestCase
         $listViewWithImage = $this->subject->main('', []);
         $this->testingFramework->deleteDummyFile('test_foo.gif');
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<img src="',
             $listViewWithImage
         );
@@ -3123,7 +3123,7 @@ class DefaultControllerTest extends TestCase
 
     public function testListViewForSeminarWithoutImageDoesNotDisplayImage()
     {
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '<img src="',
             $this->subject->main('', [])
         );
@@ -3131,7 +3131,7 @@ class DefaultControllerTest extends TestCase
 
     public function testListViewForSeminarWithoutImageRemovesImageMarker()
     {
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '###IMAGE###',
             $this->subject->main('', [])
         );
@@ -3187,7 +3187,7 @@ class DefaultControllerTest extends TestCase
 
     public function testListViewNotContainsExpiryLabel()
     {
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             $this->getLanguageService()->getLL('label_expiry'),
             $this->subject->main('', [])
         );
@@ -3221,7 +3221,7 @@ class DefaultControllerTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Foo Event',
             $this->subject->main('', [])
         );
@@ -3248,7 +3248,7 @@ class DefaultControllerTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'Foo Event',
             $this->subject->main('', [])
         );
@@ -3354,7 +3354,7 @@ class DefaultControllerTest extends TestCase
         );
         $this->subject->piVars['category'] = $categoryUid2;
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Event with category',
             $this->subject->main('', [])
         );
@@ -3381,7 +3381,7 @@ class DefaultControllerTest extends TestCase
         $this->testingFramework->createRelation('tx_seminars_seminars_categories_mm', $eventUid, $categoryUid);
         $this->subject->piVars['categories'][] = (string)$categoryUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Event with category',
             $this->subject->main('', [])
         );
@@ -3411,7 +3411,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->piVars['from_month'] = date('n', $fromTime);
         $this->subject->piVars['from_year'] = date('Y', $fromTime);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Foo Event From',
             $this->subject->main('', [])
         );
@@ -3438,7 +3438,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->piVars['from_month'] = date('n', $fromTime);
         $this->subject->piVars['from_year'] = date('Y', $fromTime);
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'Foo Event From',
             $this->subject->main('', [])
         );
@@ -3463,7 +3463,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->piVars['from_month'] = date('n', $simTime);
         $this->subject->piVars['from_year'] = date('Y', $simTime);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Foo Event From',
             $this->subject->main('', [])
         );
@@ -3489,7 +3489,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->piVars['from_day'] = date('j', $fromTime);
         $this->subject->piVars['from_month'] = date('n', $fromTime);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Foo Event From',
             $this->subject->main('', [])
         );
@@ -3514,7 +3514,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->piVars['from_day'] = date('j', $simTime);
         $this->subject->piVars['from_year'] = date('Y', $simTime);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Foo Event From',
             $this->subject->main('', [])
         );
@@ -3538,7 +3538,7 @@ class DefaultControllerTest extends TestCase
 
         $this->subject->piVars['from_year'] = date('Y', $simTime);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Foo Event From',
             $this->subject->main('', [])
         );
@@ -3565,7 +3565,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->piVars['to_month'] = date('n', $toTime);
         $this->subject->piVars['to_year'] = date('Y', $toTime);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Foo Event To',
             $this->subject->main('', [])
         );
@@ -3592,7 +3592,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->piVars['to_month'] = date('n', $toTime);
         $this->subject->piVars['to_year'] = date('Y', $toTime);
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'Foo Event To',
             $this->subject->main('', [])
         );
@@ -3617,7 +3617,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->piVars['to_month'] = date('n', $simTime);
         $this->subject->piVars['to_year'] = date('Y', $simTime);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Foo Event To',
             $this->subject->main('', [])
         );
@@ -3643,7 +3643,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->piVars['to_day'] = date('j', $toTime);
         $this->subject->piVars['to_month'] = date('n', $toTime);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Foo Event To',
             $this->subject->main('', [])
         );
@@ -3667,7 +3667,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->piVars['to_day'] = date('j', $simTime);
         $this->subject->piVars['to_year'] = date('Y', $simTime);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Foo Event To',
             $this->subject->main('', [])
         );
@@ -3690,7 +3690,7 @@ class DefaultControllerTest extends TestCase
 
         $this->subject->piVars['to_year'] = date('Y', $simTime);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Foo Event To',
             $this->subject->main('', [])
         );
@@ -3721,7 +3721,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->piVars['to_month'] = date('n', $toTime);
         $this->subject->piVars['to_year'] = date('Y', $toTime);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Foo Event To',
             $this->subject->main('', [])
         );
@@ -3762,11 +3762,11 @@ class DefaultControllerTest extends TestCase
 
         $output = $this->subject->main('', []);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Foo Event To',
             $output
         );
-        self::assertContains(
+        self::assertStringContainsString(
             'Bar Event To',
             $output
         );
@@ -3796,7 +3796,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->piVars['to_month'] = date('n', $toTime);
         $this->subject->piVars['to_year'] = date('Y', $toTime);
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'Foo Event',
             $this->subject->main('', [])
         );
@@ -3826,7 +3826,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->piVars['to_month'] = date('n', $simTime);
         $this->subject->piVars['to_year'] = date('Y', $simTime);
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'Foo Event',
             $this->subject->main('', [])
         );
@@ -3852,7 +3852,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->piVars['to_month'] = 0;
         $this->subject->piVars['to_year'] = 0;
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Foo Event',
             $this->subject->main('', [])
         );
@@ -3888,7 +3888,7 @@ class DefaultControllerTest extends TestCase
 
         $this->subject->piVars['age'] = 15;
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Foo Event To',
             $this->subject->main('', [])
         );
@@ -3920,7 +3920,7 @@ class DefaultControllerTest extends TestCase
 
         $this->subject->piVars['age'] = 4;
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'Foo Event To',
             $this->subject->main('', [])
         );
@@ -3952,7 +3952,7 @@ class DefaultControllerTest extends TestCase
 
         $this->subject->piVars['organizer'][] = $organizerUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Foo Event',
             $this->subject->main('', [])
         );
@@ -3981,7 +3981,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->piVars['organizer'][]
             = $this->testingFramework->createRecord('tx_seminars_organizers');
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'Foo Event',
             $this->subject->main('', [])
         );
@@ -4007,7 +4007,7 @@ class DefaultControllerTest extends TestCase
 
         $this->subject->piVars['price_from'] = 20;
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Foo Event',
             $this->subject->main('', [])
         );
@@ -4029,7 +4029,7 @@ class DefaultControllerTest extends TestCase
 
         $this->subject->piVars['price_to'] = 20;
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Foo Event',
             $this->subject->main('', [])
         );
@@ -4052,7 +4052,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->piVars['price_from'] = 20;
         $this->subject->piVars['price_to'] = 22;
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Foo Event',
             $this->subject->main('', [])
         );
@@ -4075,7 +4075,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->piVars['price_from'] = 20;
         $this->subject->piVars['price_to'] = 22;
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'Foo Event',
             $this->subject->main('', [])
         );
@@ -4384,11 +4384,11 @@ class DefaultControllerTest extends TestCase
         $this->subject->piVars['sort'] = 'title:0';
         $output = $this->subject->main('', []);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Category X',
             $output
         );
-        self::assertContains(
+        self::assertStringContainsString(
             'Category Y',
             $output
         );
@@ -4414,7 +4414,7 @@ class DefaultControllerTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             '>Test Teaser</a>',
             $this->subject->main('', [])
         );
@@ -4448,7 +4448,7 @@ class DefaultControllerTest extends TestCase
             $categoryUid
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'tx_seminars_pi1%5Bcategory%5D=' . $categoryUid,
             $this->subject->main('', [])
         );
@@ -4481,7 +4481,7 @@ class DefaultControllerTest extends TestCase
         );
         $this->subject->createSeminar($eventUid);
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'tx_seminars_pi1[category%5D=' . $categoryUid,
             $this->subject->main('', [])
         );
@@ -4519,11 +4519,11 @@ class DefaultControllerTest extends TestCase
         );
 
         $output = $this->subject->main('', []);
-        self::assertContains(
+        self::assertStringContainsString(
             '2020',
             $output
         );
-        self::assertContains(
+        self::assertStringContainsString(
             '2021',
             $output
         );
@@ -4557,11 +4557,11 @@ class DefaultControllerTest extends TestCase
         );
 
         $output = $this->subject->main('', []);
-        self::assertContains(
+        self::assertStringContainsString(
             '2020',
             $output
         );
-        self::assertContains(
+        self::assertStringContainsString(
             '2021',
             $output
         );
@@ -4646,7 +4646,7 @@ class DefaultControllerTest extends TestCase
             $eventTypeUid
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'Test &amp; event',
             $this->subject->main('', [])
         );
@@ -4686,11 +4686,11 @@ class DefaultControllerTest extends TestCase
         );
 
         $result = $this->subject->main('', []);
-        self::assertContains(
+        self::assertStringContainsString(
             'Event with type',
             $result
         );
-        self::assertContains(
+        self::assertStringContainsString(
             'Event with another type',
             $result
         );
@@ -4720,7 +4720,7 @@ class DefaultControllerTest extends TestCase
             $eventTypeUid2
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'Event with type',
             $this->subject->main('', [])
         );
@@ -4761,11 +4761,11 @@ class DefaultControllerTest extends TestCase
         $this->subject->piVars['event_type'] = [$eventTypeUid2];
 
         $result = $this->subject->main('', []);
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'Event with type',
             $result
         );
-        self::assertContains(
+        self::assertStringContainsString(
             'Event with another type',
             $result
         );
@@ -4786,7 +4786,7 @@ class DefaultControllerTest extends TestCase
             $categoryUid
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'Test &amp; event',
             $this->subject->main('', [])
         );
@@ -4838,11 +4838,11 @@ class DefaultControllerTest extends TestCase
         );
 
         $result = $this->subject->main('', []);
-        self::assertContains(
+        self::assertStringContainsString(
             'Event with category',
             $result
         );
-        self::assertContains(
+        self::assertStringContainsString(
             'Event with another category',
             $result
         );
@@ -4878,7 +4878,7 @@ class DefaultControllerTest extends TestCase
             $categoryUid2
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'Event with category',
             $this->subject->main('', [])
         );
@@ -4931,11 +4931,11 @@ class DefaultControllerTest extends TestCase
         $this->subject->piVars['category'] = $categoryUid2;
 
         $result = $this->subject->main('', []);
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'Event with category',
             $result
         );
-        self::assertContains(
+        self::assertStringContainsString(
             'Event with another category',
             $result
         );
@@ -4995,11 +4995,11 @@ class DefaultControllerTest extends TestCase
         $this->subject->piVars['place'] = [$placeUid2];
 
         $result = $this->subject->main('', []);
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'Event with place',
             $result
         );
-        self::assertContains(
+        self::assertStringContainsString(
             'Event with another place',
             $result
         );
@@ -5035,7 +5035,7 @@ class DefaultControllerTest extends TestCase
 
         $result = $this->subject->main('', []);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Event with organizer 1',
             $result
         );
@@ -5082,7 +5082,7 @@ class DefaultControllerTest extends TestCase
             $organizerUid1
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'Event with organizer 2',
             $this->subject->main('', [])
         );
@@ -5132,11 +5132,11 @@ class DefaultControllerTest extends TestCase
 
         $result = $this->subject->main('', []);
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'Event with organizer 1',
             $result
         );
-        self::assertContains(
+        self::assertStringContainsString(
             'Event with organizer 2',
             $result
         );
@@ -5162,7 +5162,7 @@ class DefaultControllerTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('label_onlineRegistration'),
             $this->subject->main('', [])
         );
@@ -5192,7 +5192,7 @@ class DefaultControllerTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             sprintf(
                 $this->getLanguageService()->getLL('label_onlineRegistrationOnQueue'),
                 0
@@ -5225,7 +5225,7 @@ class DefaultControllerTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             sprintf(
                 $this->getLanguageService()->getLL('label_onlineRegistrationOnQueue'),
                 0
@@ -5249,7 +5249,7 @@ class DefaultControllerTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             $this->getLanguageService()->getLL('label_onlinePrebooking'),
             $this->subject->main('', [])
         );
@@ -5273,7 +5273,7 @@ class DefaultControllerTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             $this->getLanguageService()->getLL('label_onlineRegistration'),
             $this->subject->main('', [])
         );
@@ -5298,7 +5298,7 @@ class DefaultControllerTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             sprintf(
                 $this->getLanguageService()->getLL('message_registrationOpensOn'),
                 strftime('%d.%m.%Y %H:%M', $registrationBegin)
@@ -5325,7 +5325,7 @@ class DefaultControllerTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('label_onlineRegistration'),
             $this->subject->main('', [])
         );
@@ -5348,7 +5348,7 @@ class DefaultControllerTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('label_onlineRegistration'),
             $this->subject->main('', [])
         );
@@ -5363,7 +5363,7 @@ class DefaultControllerTest extends TestCase
         $this->createLogInAndRegisterFeUser();
         $this->subject->setConfigurationValue('what_to_display', 'my_events');
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Test &amp; event',
             $this->subject->main('', [])
         );
@@ -5374,7 +5374,7 @@ class DefaultControllerTest extends TestCase
         $this->testingFramework->createAndLoginFrontEndUser();
         $this->subject->setConfigurationValue('what_to_display', 'my_events');
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'Test &amp; event',
             $this->subject->main('', [])
         );
@@ -5390,7 +5390,7 @@ class DefaultControllerTest extends TestCase
         );
         $this->subject->setConfigurationValue('what_to_display', 'my_events');
 
-        self::assertContains(
+        self::assertStringContainsString(
             '01.01.2008',
             $this->subject->main('', [])
         );
@@ -5432,7 +5432,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('eventEditorPID', $editorPid);
         $this->subject->setConfigurationValue('what_to_display', 'my_vip_events');
 
-        self::assertContains(
+        self::assertStringContainsString(
             '?id=' . $editorPid,
             $this->subject->main('', [])
         );
@@ -5491,7 +5491,7 @@ class DefaultControllerTest extends TestCase
         );
         $this->subject->setConfigurationValue('what_to_display', 'my_vip_events');
 
-        self::assertContains(
+        self::assertStringContainsString(
             'tx_seminars_pi2%5BeventUid%5D',
             $this->subject->main('', [])
         );
@@ -5509,7 +5509,7 @@ class DefaultControllerTest extends TestCase
         );
         $this->subject->setConfigurationValue('what_to_display', 'my_vip_events');
 
-        self::assertContains(
+        self::assertStringContainsString(
             'tx_seminars_pi2%5Btable%5D=tx_seminars_attendances',
             $this->subject->main('', [])
         );
@@ -5535,7 +5535,7 @@ class DefaultControllerTest extends TestCase
             'categories'
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'category_foo',
             $this->subject->main('', [])
         );
@@ -5563,7 +5563,7 @@ class DefaultControllerTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'currentEvent',
             $this->subject->main('', [])
         );
@@ -5587,7 +5587,7 @@ class DefaultControllerTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'futureEvent',
             $this->subject->main('', [])
         );
@@ -5632,7 +5632,7 @@ class DefaultControllerTest extends TestCase
         $this->createLogInAndAddFeUserAsVip();
         $this->subject->setConfigurationValue('what_to_display', 'my_vip_events');
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('visibility_status_published'),
             $this->subject->main('', [])
         );
@@ -5660,7 +5660,7 @@ class DefaultControllerTest extends TestCase
      */
     public function getFieldHeaderContainsLabelOfKey()
     {
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('label_date'),
             $this->subject->getFieldHeader('date')
         );
@@ -5673,7 +5673,7 @@ class DefaultControllerTest extends TestCase
     {
         $this->subject->setConfigurationValue('enableSortingLinksInListView', true);
 
-        self::assertContains(
+        self::assertStringContainsString(
             '<a',
             $this->subject->getFieldHeader('date')
         );
@@ -5686,7 +5686,7 @@ class DefaultControllerTest extends TestCase
     {
         $this->subject->setConfigurationValue('enableSortingLinksInListView', false);
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '<a',
             $this->subject->getFieldHeader('date')
         );
@@ -5699,7 +5699,7 @@ class DefaultControllerTest extends TestCase
     {
         $this->subject->setConfigurationValue('enableSortingLinksInListView', true);
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             '<a',
             $this->subject->getFieldHeader('register')
         );
@@ -5725,7 +5725,7 @@ class DefaultControllerTest extends TestCase
             $this->testingFramework->createFrontEndPage()
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             rawurlencode('tx_seminars_pi1[uid]') . '=' . $eventUid,
             $this->subject->getLoginLink(
                 'foo',
@@ -5749,7 +5749,7 @@ class DefaultControllerTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Event A',
             $this->subject->main('', [])
         );
@@ -5773,11 +5773,11 @@ class DefaultControllerTest extends TestCase
         );
 
         $output = $this->subject->main('', []);
-        self::assertContains(
+        self::assertStringContainsString(
             'Event A',
             $output
         );
-        self::assertContains(
+        self::assertStringContainsString(
             'Event B',
             $output
         );
@@ -5809,7 +5809,7 @@ class DefaultControllerTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'Event B',
             $this->subject->main('', [])
         );
@@ -5842,7 +5842,7 @@ class DefaultControllerTest extends TestCase
         );
 
         $this->subject->piVars['pointer'] = 1;
-        self::assertContains(
+        self::assertStringContainsString(
             'Event B',
             $this->subject->main('', [])
         );
@@ -6006,7 +6006,7 @@ class DefaultControllerTest extends TestCase
             ['attached_files' => $dummyFileName]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             $dummyFileName,
             $this->subject->main('', [])
         );
@@ -6036,11 +6036,11 @@ class DefaultControllerTest extends TestCase
 
         $output = $this->subject->main('', []);
 
-        self::assertContains(
+        self::assertStringContainsString(
             $dummyFileName,
             $output
         );
-        self::assertContains(
+        self::assertStringContainsString(
             $dummyFileName2,
             $output
         );
@@ -6064,7 +6064,7 @@ class DefaultControllerTest extends TestCase
             ['attached_files' => $dummyFileName]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             $dummyFileName,
             $this->subject->main('', [])
         );
@@ -6088,7 +6088,7 @@ class DefaultControllerTest extends TestCase
             ['attached_files' => $dummyFileName]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             $dummyFileName,
             $this->subject->main('', [])
         );
@@ -6145,7 +6145,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('label_owner'),
             $this->subject->main('', [])
         );
@@ -6184,7 +6184,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             $this->getLanguageService()->getLL('label_owner'),
             $this->subject->main('', [])
         );
@@ -6207,7 +6207,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             $this->getLanguageService()->getLL('label_owner'),
             $this->subject->main('', [])
         );
@@ -6233,7 +6233,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             'John Doe',
             $this->subject->main('', [])
         );
@@ -6259,7 +6259,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Tom &amp; Jerry',
             $this->subject->main('', [])
         );
@@ -6286,7 +6286,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'Jon Doe',
             $this->subject->main('', [])
         );
@@ -6312,7 +6312,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             '0123 4567',
             $this->subject->main('', [])
         );
@@ -6338,7 +6338,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo@bar.com',
             $this->subject->main('', [])
         );
@@ -6367,7 +6367,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('label_onlineRegistration'),
             $this->subject->main('', [])
         );
@@ -6400,7 +6400,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             sprintf(
                 $this->getLanguageService()->getLL('label_onlineRegistrationOnQueue'),
                 0
@@ -6436,7 +6436,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             sprintf(
                 $this->getLanguageService()->getLL('label_onlineRegistrationOnQueue'),
                 0
@@ -6463,7 +6463,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             $this->getLanguageService()->getLL('label_onlinePrebooking'),
             $this->subject->main('', [])
         );
@@ -6489,7 +6489,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             $this->getLanguageService()->getLL('label_onlineRegistration'),
             $this->subject->main('', [])
         );
@@ -6516,7 +6516,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             sprintf(
                 $this->getLanguageService()->getLL('message_registrationOpensOn'),
                 strftime('%d.%m.%Y %H:%M', $registrationBegin)
@@ -6545,7 +6545,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('label_onlineRegistration'),
             $this->subject->main('', [])
         );
@@ -6571,7 +6571,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('label_onlineRegistration'),
             $this->subject->main('', [])
         );
@@ -6606,7 +6606,7 @@ class DefaultControllerTest extends TestCase
 
         $this->subject->piVars['seminar'] = $eventUid;
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo &amp; bar',
             $this->subject->main('', [])
         );
@@ -6644,7 +6644,7 @@ class DefaultControllerTest extends TestCase
         );
         $this->subject->piVars['seminar'] = $date;
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             $this->getLanguageService()->getLL('label_your_user_data'),
             $this->subject->main('', [])
         );
@@ -6843,7 +6843,7 @@ class DefaultControllerTest extends TestCase
         $event->setNeedsRegistration(true);
         $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'tx-seminars-pi1-vacancies-available',
             $this->subject->getVacanciesClasses($event)
         );
@@ -6860,7 +6860,7 @@ class DefaultControllerTest extends TestCase
         $event->setNeedsRegistration(true);
         $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'tx-seminars-pi1-vacancies-1',
             $this->subject->getVacanciesClasses($event)
         );
@@ -6877,7 +6877,7 @@ class DefaultControllerTest extends TestCase
         $event->setNeedsRegistration(true);
         $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'tx-seminars-pi1-vacancies-2',
             $this->subject->getVacanciesClasses($event)
         );
@@ -6894,7 +6894,7 @@ class DefaultControllerTest extends TestCase
         $event->setNeedsRegistration(true);
         $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'tx-seminars-pi1-vacancies-0',
             $this->subject->getVacanciesClasses($event)
         );
@@ -6909,7 +6909,7 @@ class DefaultControllerTest extends TestCase
         $event->setUnlimitedVacancies();
         $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'tx-seminars-pi1-vacancies-available',
             $this->subject->getVacanciesClasses($event)
         );
@@ -6924,7 +6924,7 @@ class DefaultControllerTest extends TestCase
         $event->setUnlimitedVacancies();
         $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'tx-seminars-pi1-vacancies-0',
             $this->subject->getVacanciesClasses($event)
         );
@@ -6939,7 +6939,7 @@ class DefaultControllerTest extends TestCase
         $event->setUnlimitedVacancies();
         $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'tx-seminars-pi1-vacancies-unlimited',
             $this->subject->getVacanciesClasses($event)
         );
@@ -6955,7 +6955,7 @@ class DefaultControllerTest extends TestCase
         $event->setRegistrationDeadline($GLOBALS['SIM_EXEC_TIME'] - 45);
         $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'tx-seminars-pi1-registration-deadline-over',
             $this->subject->getVacanciesClasses($event)
         );
@@ -6970,7 +6970,7 @@ class DefaultControllerTest extends TestCase
         $event->setNeedsRegistration(true);
         $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 45);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'tx-seminars-pi1-event-begin-date-over',
             $this->subject->getVacanciesClasses($event)
         );
@@ -6989,7 +6989,7 @@ class DefaultControllerTest extends TestCase
             1
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'tx-seminars-pi1-vacancies-available',
             $this->subject->getVacanciesClasses($event)
         );
@@ -7007,7 +7007,7 @@ class DefaultControllerTest extends TestCase
         $event->setRegistrationQueue(true);
         $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'tx-seminars-pi1-has-registration-queue',
             $this->subject->getVacanciesClasses($event)
         );
@@ -7025,7 +7025,7 @@ class DefaultControllerTest extends TestCase
         $event->setRegistrationQueue(false);
         $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'tx-seminars-pi1-has-registration-queue',
             $this->subject->getVacanciesClasses($event)
         );
@@ -7052,7 +7052,7 @@ class DefaultControllerTest extends TestCase
 
         $output = $this->subject->getVacanciesClasses($event);
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->subject->pi_getClassName('vacancies-available'),
             $output
         );
@@ -7074,7 +7074,7 @@ class DefaultControllerTest extends TestCase
 
         $output = $this->subject->getVacanciesClasses($event);
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->subject->pi_getClassName('vacancies-1'),
             $output
         );
@@ -7096,7 +7096,7 @@ class DefaultControllerTest extends TestCase
 
         $output = $this->subject->getVacanciesClasses($event);
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->subject->pi_getClassName('vacancies-2'),
             $output
         );
@@ -7118,7 +7118,7 @@ class DefaultControllerTest extends TestCase
 
         $output = $this->subject->getVacanciesClasses($event);
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->subject->pi_getClassName('vacancies-0'),
             $output
         );
@@ -7139,7 +7139,7 @@ class DefaultControllerTest extends TestCase
 
         $output = $this->subject->getVacanciesClasses($event);
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->subject->pi_getClassName('vacancies-available'),
             $output
         );
@@ -7160,7 +7160,7 @@ class DefaultControllerTest extends TestCase
 
         $output = $this->subject->getVacanciesClasses($event);
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             $this->subject->pi_getClassName('registration-deadline-over'),
             $output
         );
@@ -7199,7 +7199,7 @@ class DefaultControllerTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'hiddenEvent',
             $this->subject->main('', [])
         );
@@ -7268,7 +7268,7 @@ class DefaultControllerTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('visibility_status_pending'),
             $this->subject->main('', [])
         );
@@ -7300,7 +7300,7 @@ class DefaultControllerTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('visibility_status_published'),
             $this->subject->main('', [])
         );
@@ -7338,7 +7338,7 @@ class DefaultControllerTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'pastEvent',
             $this->subject->main('', [])
         );
@@ -8984,7 +8984,7 @@ class DefaultControllerTest extends TestCase
     {
         $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'href="index.php?id=42&amp;tx_seminars_pi1%5BshowUid%5D=1337"',
             $this->subject->createSingleViewLink($event, 'foo')
         );
@@ -8998,7 +8998,7 @@ class DefaultControllerTest extends TestCase
         $this->subject->setConfigurationValue('linkToSingleView', 'always');
         $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel(['description' => '']);
 
-        self::assertContains(
+        self::assertStringContainsString(
             '>foo</a>',
             $this->subject->createSingleViewLink($event, 'foo')
         );
@@ -9013,7 +9013,7 @@ class DefaultControllerTest extends TestCase
         $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
             ->getLoadedTestingModel(['description' => 'Hello world!']);
 
-        self::assertContains(
+        self::assertStringContainsString(
             '>foo</a>',
             $this->subject->createSingleViewLink($event, 'foo')
         );
@@ -9042,7 +9042,7 @@ class DefaultControllerTest extends TestCase
         $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
             ->getLoadedTestingModel(['description' => 'Hello world!']);
 
-        self::assertContains(
+        self::assertStringContainsString(
             '>foo &amp; bar</a>',
             $this->subject->createSingleViewLink($event, 'foo & bar')
         );
@@ -9084,7 +9084,7 @@ class DefaultControllerTest extends TestCase
     {
         $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Chaos &amp; Confusion',
             $this->subject->createSingleViewLink($event, 'Chaos & Confusion')
         );
@@ -9097,7 +9097,7 @@ class DefaultControllerTest extends TestCase
     {
         $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Chaos &amp; Confusion',
             $this->subject->createSingleViewLink($event, 'Chaos & Confusion')
         );
@@ -9110,7 +9110,7 @@ class DefaultControllerTest extends TestCase
     {
         $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Chaos & Confusion',
             $this->subject->createSingleViewLink($event, 'Chaos & Confusion', false)
         );
@@ -9128,7 +9128,7 @@ class DefaultControllerTest extends TestCase
 
         $result = $this->subject->main('', []);
 
-        self::assertContains($this->getLanguageService()->getLL('message_forFree'), $result);
+        self::assertStringContainsString($this->getLanguageService()->getLL('message_forFree'), $result);
     }
 
     /**
@@ -9143,6 +9143,6 @@ class DefaultControllerTest extends TestCase
 
         $result = $this->subject->main('', []);
 
-        self::assertContains($this->getLanguageService()->getLL('message_onRequest'), $result);
+        self::assertStringContainsString($this->getLanguageService()->getLL('message_onRequest'), $result);
     }
 }

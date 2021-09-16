@@ -144,7 +144,7 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
         );
         $subject->render();
 
-        self::assertContains('Joe Johnson', $this->mailer->getFirstSentEmail()->getBody());
+        self::assertStringContainsString('Joe Johnson', $this->mailer->getFirstSentEmail()->getBody());
     }
 
     /**
@@ -236,7 +236,7 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
         );
         $subject->render();
 
-        self::assertContains("\n-- \nThe one and only", $this->mailer->getFirstSentEmail()->getBody());
+        self::assertStringContainsString("\n-- \nThe one and only", $this->mailer->getFirstSentEmail()->getBody());
     }
 
     /**

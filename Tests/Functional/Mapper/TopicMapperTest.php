@@ -58,7 +58,7 @@ final class TopicMapperTest extends FunctionalTestCase
         $model = $this->subject->find(2);
         $result = $model->getRequirements();
 
-        self::assertSame(1, $result->count());
+        self::assertCount(1, $result);
         self::assertContainsModelWithUid($result, 3);
     }
 
@@ -86,7 +86,7 @@ final class TopicMapperTest extends FunctionalTestCase
         $model = $this->subject->find(3);
         $result = $model->getDependencies();
 
-        self::assertSame(1, $result->count());
+        self::assertCount(1, $result);
         self::assertContainsModelWithUid($result, 2);
     }
 }

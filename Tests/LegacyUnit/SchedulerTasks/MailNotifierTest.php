@@ -1343,7 +1343,7 @@ class MailNotifierTest extends TestCase
 
         $this->subject->sendEventTakesPlaceReminders();
 
-        self::assertContains(
+        self::assertStringContainsString(
             "test registration\r\n",
             $this->getFirstEmailAttachment()->getBody()
         );
@@ -1378,7 +1378,7 @@ class MailNotifierTest extends TestCase
 
         $this->subject->sendEventTakesPlaceReminders();
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo@bar.com',
             $this->getFirstEmailAttachment()->getBody()
         );
@@ -1420,7 +1420,7 @@ class MailNotifierTest extends TestCase
 
         $this->subject->sendEventTakesPlaceReminders();
 
-        self::assertContains(
+        self::assertStringContainsString(
             'on queue',
             $this->getFirstEmailAttachment()->getBody()
         );
@@ -1464,7 +1464,7 @@ class MailNotifierTest extends TestCase
 
         $this->subject->sendEventTakesPlaceReminders();
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'on queue',
             $this->getFirstEmailAttachment()->getBody()
         );
@@ -1490,7 +1490,7 @@ class MailNotifierTest extends TestCase
 
         $this->subject->sendEventTakesPlaceReminders();
 
-        self::assertContains(
+        self::assertStringContainsString(
             'test event',
             $this->email->getSubject()
         );
@@ -1513,7 +1513,7 @@ class MailNotifierTest extends TestCase
 
         $this->subject->sendEventTakesPlaceReminders();
 
-        self::assertContains(
+        self::assertStringContainsString(
             '2',
             $this->email->getSubject()
         );
@@ -1538,7 +1538,7 @@ class MailNotifierTest extends TestCase
 
         $this->subject->sendEventTakesPlaceReminders();
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Mr. Test',
             $this->email->getBody()
         );
@@ -1562,7 +1562,7 @@ class MailNotifierTest extends TestCase
 
         $this->subject->sendEventTakesPlaceReminders();
 
-        self::assertContains(
+        self::assertStringContainsString(
             'test event',
             $this->email->getBody()
         );
@@ -1585,7 +1585,7 @@ class MailNotifierTest extends TestCase
 
         $this->subject->sendEventTakesPlaceReminders();
 
-        self::assertContains(
+        self::assertStringContainsString(
             (string)$uid,
             $this->email->getBody()
         );
@@ -1608,7 +1608,7 @@ class MailNotifierTest extends TestCase
 
         $this->subject->sendEventTakesPlaceReminders();
 
-        self::assertContains(
+        self::assertStringContainsString(
             '2',
             $this->email->getBody()
         );
@@ -1659,7 +1659,7 @@ class MailNotifierTest extends TestCase
 
         $this->subject->sendEventTakesPlaceReminders();
 
-        self::assertContains(
+        self::assertStringContainsString(
             '0',
             $this->email->getBody()
         );
@@ -1690,7 +1690,7 @@ class MailNotifierTest extends TestCase
 
         $this->subject->sendEventTakesPlaceReminders();
 
-        self::assertContains(
+        self::assertStringContainsString(
             '1',
             $this->email->getBody()
         );

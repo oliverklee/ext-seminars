@@ -79,7 +79,7 @@ class GeneralEventMailFormTest extends TestCase
      */
     public function renderContainsSubmitButton()
     {
-        self::assertContains(
+        self::assertStringContainsString(
             '<button class="submitButton sendEmail"><p>' .
             $this->getLanguageService()->getLL('generalMailForm_sendButton') .
             '</p></button>',
@@ -92,7 +92,7 @@ class GeneralEventMailFormTest extends TestCase
      */
     public function renderContainsPrefilledBodyFieldWithLocalizedSalutation()
     {
-        self::assertContains('salutation', $this->subject->render());
+        self::assertStringContainsString('salutation', $this->subject->render());
     }
 
     /**
@@ -100,7 +100,7 @@ class GeneralEventMailFormTest extends TestCase
      */
     public function renderContainsTheCancelEventActionForThisForm()
     {
-        self::assertContains(
+        self::assertStringContainsString(
             '<input type="hidden" name="action" value="sendEmail" />',
             $this->subject->render()
         );

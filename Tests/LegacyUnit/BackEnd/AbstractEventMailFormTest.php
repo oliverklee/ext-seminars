@@ -113,7 +113,7 @@ class AbstractEventMailFormTest extends TestCase
     {
         PageFinder::getInstance()->setPageUid(42);
 
-        self::assertContains(
+        self::assertStringContainsString(
             '&amp;id=42',
             $this->subject->render()
         );
@@ -124,7 +124,7 @@ class AbstractEventMailFormTest extends TestCase
      */
     public function renderContainsEventTitleInSubjectFieldForNewForm()
     {
-        self::assertContains(
+        self::assertStringContainsString(
             'Dummy Event',
             $this->subject->render()
         );
@@ -135,7 +135,7 @@ class AbstractEventMailFormTest extends TestCase
      */
     public function renderContainsPrefilledBodyField()
     {
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('testForm_prefillField_messageBody'),
             $this->subject->render()
         );
@@ -146,7 +146,7 @@ class AbstractEventMailFormTest extends TestCase
      */
     public function renderContainsBodyFieldWithIntroduction()
     {
-        self::assertContains(
+        self::assertStringContainsString(
             \sprintf(
                 $this->getLanguageService()->getLL('testForm_prefillField_introduction'),
                 \htmlspecialchars('"Dummy Event"', ENT_QUOTES | ENT_HTML5)
@@ -168,7 +168,7 @@ class AbstractEventMailFormTest extends TestCase
             ]
         );
 
-        self::assertNotContains(
+        self::assertStringNotContainsString(
             'Dummy event',
             $this->subject->render()
         );
@@ -199,7 +199,7 @@ class AbstractEventMailFormTest extends TestCase
         );
         $formOutput = $this->subject->render();
 
-        self::assertContains(
+        self::assertStringContainsString(
             '&lt;test&gt;',
             $formOutput
         );
@@ -210,7 +210,7 @@ class AbstractEventMailFormTest extends TestCase
      */
     public function renderFormContainsCancelButton()
     {
-        self::assertContains(
+        self::assertStringContainsString(
             '<input type="button" value="' .
             $this->getLanguageService()->getLL('eventMailForm_backButton') .
             '" class="backButton"' .
@@ -232,7 +232,7 @@ class AbstractEventMailFormTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('eventMailForm_error_subjectMustNotBeEmpty'),
             $this->subject->render()
         );
@@ -251,7 +251,7 @@ class AbstractEventMailFormTest extends TestCase
             ]
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             $this->getLanguageService()->getLL('eventMailForm_error_messageBodyMustNotBeEmpty'),
             $this->subject->render()
         );
@@ -271,7 +271,7 @@ class AbstractEventMailFormTest extends TestCase
         );
         $this->subject->markAsIncomplete();
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo bar',
             $this->subject->render()
         );
@@ -290,7 +290,7 @@ class AbstractEventMailFormTest extends TestCase
             ]
         );
         $this->subject->markAsIncomplete();
-        self::assertContains(
+        self::assertStringContainsString(
             '&lt;foo&gt; &amp; &quot;bar&quot;',
             $this->subject->render()
         );
@@ -310,7 +310,7 @@ class AbstractEventMailFormTest extends TestCase
         );
         $this->subject->markAsIncomplete();
 
-        self::assertContains(
+        self::assertStringContainsString(
             'foo bar',
             $this->subject->render()
         );
@@ -321,7 +321,7 @@ class AbstractEventMailFormTest extends TestCase
      */
     public function renderContainsHiddenFieldWithVariableEventUid()
     {
-        self::assertContains(
+        self::assertStringContainsString(
             '<input type="hidden" name="eventUid" value="' . $this->eventUid . '" />',
             $this->subject->render()
         );
@@ -346,7 +346,7 @@ class AbstractEventMailFormTest extends TestCase
             $this->eventUid
         );
 
-        self::assertContains(
+        self::assertStringContainsString(
             'FooBar',
             $subject->getInitialValue('subject')
         );
@@ -404,7 +404,7 @@ class AbstractEventMailFormTest extends TestCase
     {
         $this->subject->setErrorMessage('subject', 'Foo');
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Foo',
             $this->subject->getErrorMessage('subject')
         );
@@ -418,7 +418,7 @@ class AbstractEventMailFormTest extends TestCase
         $this->subject->markAsIncomplete();
         $this->subject->setErrorMessage('subject', 'Foo');
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Foo',
             $this->subject->getErrorMessage('subject')
         );
@@ -434,11 +434,11 @@ class AbstractEventMailFormTest extends TestCase
         $this->subject->setErrorMessage('subject', 'Bar');
         $errorMessage = $this->subject->getErrorMessage('subject');
 
-        self::assertContains(
+        self::assertStringContainsString(
             'Foo',
             $errorMessage
         );
-        self::assertContains(
+        self::assertStringContainsString(
             'Bar',
             $errorMessage
         );

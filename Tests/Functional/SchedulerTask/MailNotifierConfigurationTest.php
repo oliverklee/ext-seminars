@@ -148,7 +148,7 @@ class MailNotifierConfigurationTest extends FunctionalTestCase
 
         $this->subject->validateAdditionalFields($submittedData, $this->moduleController);
 
-        self::assertSame(0, $this->getFlashMessageQueue()->count());
+        self::assertCount(0, $this->getFlashMessageQueue());
     }
 
     /**

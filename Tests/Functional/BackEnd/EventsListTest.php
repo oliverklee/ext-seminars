@@ -64,7 +64,7 @@ final class EventsListTest extends FunctionalTestCase
         $result = $this->subject->show();
 
         $label = $this->getLanguageService()->getLL('label_show_event_registrations');
-        self::assertNotContains($label, $result);
+        self::assertStringNotContainsString($label, $result);
     }
 
     /**
@@ -82,6 +82,6 @@ final class EventsListTest extends FunctionalTestCase
         $result = $this->subject->show();
 
         $label = $this->getLanguageService()->getLL('label_email_button');
-        self::assertNotContains('<button><p>' . $label . '</p></button>', $result);
+        self::assertStringNotContainsString('<button><p>' . $label . '</p></button>', $result);
     }
 }
