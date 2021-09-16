@@ -19,8 +19,6 @@ use TYPO3\CMS\Core\Core\Bootstrap;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * Test case.
- *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  */
 final class SalutationTest extends TestCase

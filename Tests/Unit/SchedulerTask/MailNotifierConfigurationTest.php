@@ -9,8 +9,6 @@ use OliverKlee\Seminars\SchedulerTasks\MailNotifierConfiguration;
 use TYPO3\CMS\Scheduler\AdditionalFieldProviderInterface;
 
 /**
- * Test case.
- *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class MailNotifierConfigurationTest extends UnitTestCase

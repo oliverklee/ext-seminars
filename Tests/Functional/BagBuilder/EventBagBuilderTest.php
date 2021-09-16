@@ -9,8 +9,6 @@ use OliverKlee\Seminars\Bag\AbstractBag;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * Test case.
- *
  * @author Bernd Schönbach <bernd@oliverklee.de>
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */

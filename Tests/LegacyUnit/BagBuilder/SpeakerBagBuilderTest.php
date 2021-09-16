@@ -9,8 +9,6 @@ use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Bag\AbstractBag;
 
 /**
- * Test case.
- *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
 class SpeakerBagBuilderTest extends TestCase

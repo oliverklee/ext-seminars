@@ -10,8 +10,6 @@ use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingModel;
 use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingModelWithConfiguration;
 
 /**
- * Test case.
- *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 final class AbstractModelTest extends TestCase

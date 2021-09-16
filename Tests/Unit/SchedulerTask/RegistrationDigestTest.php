@@ -11,8 +11,6 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
 
 /**
- * Test case.
- *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class RegistrationDigestTest extends UnitTestCase

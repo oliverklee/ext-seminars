@@ -8,8 +8,6 @@ use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 
 /**
- * Test case.
- *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 final class RegistrationTest extends FunctionalTestCase

@@ -18,8 +18,6 @@ use TYPO3\CMS\Backend\Template\DocumentTemplate;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * Test case.
- *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
 class RegistrationsListTest extends TestCase

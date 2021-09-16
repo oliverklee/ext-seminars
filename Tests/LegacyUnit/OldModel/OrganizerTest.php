@@ -8,8 +8,6 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
 /**
- * Test case.
- *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 final class OrganizerTest extends TestCase

@@ -19,8 +19,6 @@ use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Lang\LanguageService;
 
 /**
- * Test case.
- *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 final class EmailServiceTest extends TestCase

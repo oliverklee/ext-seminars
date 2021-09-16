@@ -13,8 +13,6 @@ use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 
 /**
- * Test case.
- *
  * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 final class CsvDownloaderTest extends FunctionalTestCase

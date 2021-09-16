@@ -10,8 +10,6 @@ use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 
 /**
- * Test case.
- *
  * @author Niels Pardon <mail@niels-pardon.de>
  */
 class CountdownViewHelperTest extends TestCase
