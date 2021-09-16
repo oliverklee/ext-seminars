@@ -16,6 +16,7 @@ use OliverKlee\Seminar\Email\Salutation;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 use OliverKlee\Seminars\Hooks\RegistrationEmailHookInterface;
+use Pelago\Emogrifier\CssInliner;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -844,14 +845,8 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         if (
             $emailFormat === self::SEND_HTML_MAIL || ($emailFormat === self::SEND_USER_MAIL && $user->wantsHtmlEmail())
         ) {
-            $eMailNotification->setCssFile($this->getConfValueString('cssFileForAttendeeMail'));
             $eMailNotification->setHTMLMessage(
-                $this->buildEmailContent(
-                    $oldRegistration,
-                    $plugin,
-                    $helloSubjectPrefix,
-                    true
-                )
+                $this->buildEmailContent($oldRegistration, $plugin, $helloSubjectPrefix, true)
             );
         }
 
@@ -1421,7 +1416,38 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         );
         $this->callPostProcessAttendeeEmailTextHooks($registration, $this->getTemplate());
 
-        return $this->getSubpart($useHtml ? 'MAIL_THANKYOU_HTML' : 'MAIL_THANKYOU');
+        if ($useHtml) {
+            $emailBody = $this->addCssToHtmlEmail($this->getSubpart('MAIL_THANKYOU_HTML'));
+        } else {
+            $emailBody = $this->getSubpart('MAIL_THANKYOU');
+        }
+
+        return $emailBody;
+    }
+
+    private function addCssToHtmlEmail(string $emailBody): string
+    {
+        if (!$this->hasConfValueString('cssFileForAttendeeMail')) {
+            return $emailBody;
+        }
+        $cssFile = $this->getConfValueString('cssFileForAttendeeMail');
+        $absolutePath = GeneralUtility::getFileAbsFileName($cssFile);
+        if (\is_readable($absolutePath)) {
+            $this->loadEmogrifier();
+            $css = \file_get_contents($absolutePath);
+            $htmlWithCss = CssInliner::fromHtml($emailBody)->inlineCss($css)->render();
+        } else {
+            $htmlWithCss = $emailBody;
+        }
+
+        return $htmlWithCss;
+    }
+
+    private function loadEmogrifier(): void
+    {
+        if (!\class_exists(CssInliner::class)) {
+            require_once __DIR__ . '/../../Resources/Private/Php/vendor/autoload.php';
+        }
     }
 
     /**

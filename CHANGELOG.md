@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Package and use Emogrifier for inlining CSS into HTML emails (#863)
 - Update `simshaun/recurr` to version 5.0.0 (#862)
 - !!! Rename the TypoScript files to `*.typoscript` (#861)
 - Allow mkforms 10.0.0 (#860)

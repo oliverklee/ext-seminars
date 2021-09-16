@@ -31,6 +31,7 @@
 		"digedag/rn-base": "^1.13.12",
 		"dmk/mkforms": "^9.5.2 || ^10.0.0",
 		"oliverklee/oelib": "^3.6.1",
+		"pelago/emogrifier": "^4.0.0",
 		"psr/http-message": "^1.0",
 		"simshaun/recurr": "^5.0.0",
 		"sjbr/static-info-tables": "^6.7.0",
