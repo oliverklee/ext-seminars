@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- !!! Rename the TypoScript files to `*.typoscript` (#861)
 - Allow mkforms 10.0.0 (#860)
 - Upgrade to PHP-CS-Fixer V3 (#854)
 - Upgrade to PHPUnit 7 (#853)
