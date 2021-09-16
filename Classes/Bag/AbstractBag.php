@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Bag;
 
 use Doctrine\DBAL\FetchMode;
-use OliverKlee\Oelib\Database\DatabaseService;
 use OliverKlee\Oelib\Interfaces\ConfigurationCheckable;
-use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Seminars\OldModel\AbstractModel;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\EndTimeRestriction;
@@ -322,15 +320,11 @@ abstract class AbstractBag implements \Iterator, ConfigurationCheckable
             $queryBuilder->from($tableName);
         }
 
-        if (Typo3Version::isNotHigherThan(8)) {
-            $count = DatabaseService::count($this->allTableNames, $this->queryParameters . $this->enabledFieldsQuery);
-        } else {
-            $count = $queryBuilder
-               ->count('*')
-               ->where($this->queryParameters)
-               ->execute()
-               ->fetch(FetchMode::COLUMN);
-        }
+        $count = $queryBuilder
+           ->count('*')
+           ->where($this->queryParameters)
+           ->execute()
+           ->fetch(FetchMode::COLUMN);
 
         $this->countWithoutLimit = $count;
         $this->hasCountWithoutLimit = true;

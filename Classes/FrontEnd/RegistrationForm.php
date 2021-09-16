@@ -9,7 +9,6 @@ use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Session\Session;
-use OliverKlee\Oelib\System\Typo3Version;
 use SJBR\StaticInfoTables\PiBaseApi;
 use SJBR\StaticInfoTables\Utility\LocalizationUtility;
 use TYPO3\CMS\Core\Crypto\Random;
@@ -701,9 +700,6 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
             && Session::getInstance(Session::TYPE_USER)->getAsBoolean('onetimeaccount')
         ) {
             $this->getFrontEndController()->fe_user->logoff();
-            if (Typo3Version::isNotHigherThan(8)) {
-                $this->getFrontEndController()->loginUser = 0;
-            }
         }
 
         $pageUid = $this->getConfValueInteger('thankYouAfterRegistrationPID', 's_registration');

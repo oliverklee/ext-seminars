@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
-use OliverKlee\Oelib\System\Typo3Version;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
@@ -120,12 +119,7 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
             0
         );
 
-        if (Typo3Version::isNotHigherThan(8)) {
-            // simulates a normal FE without any logged-in FE or BE user
-            $frontEnd->initFEuser();
-        } else {
-            $frontEnd->fe_user = GeneralUtility::makeInstance(FrontendUserAuthentication::class);
-        }
+        $frontEnd->fe_user = GeneralUtility::makeInstance(FrontendUserAuthentication::class);
 
         $frontEnd->determineId();
         $frontEnd->initTemplate();
