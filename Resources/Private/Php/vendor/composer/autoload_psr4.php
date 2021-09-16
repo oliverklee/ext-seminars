@@ -7,4 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Recurr\\' => array($vendorDir . '/simshaun/recurr/src/Recurr'),
+    'Doctrine\\Common\\Collections\\' => array($vendorDir . '/doctrine/collections/lib/Doctrine/Common/Collections'),
 );
