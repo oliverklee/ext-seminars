@@ -1,12 +1,12 @@
 {
 	"require": {
 		"php": ">=7.0",
-		"simshaun/recurr": "^4.0.5"
+		"simshaun/recurr": "^5.0.0"
 	},
 	"prefer-stable": true,
 	"config": {
 		"platform": {
-			"php": "7.0.9"
+			"php": "7.2.9"
 		},
 		"preferred-install": {
 			"*": "dist"

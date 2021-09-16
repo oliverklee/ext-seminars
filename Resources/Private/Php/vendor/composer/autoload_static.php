@@ -11,6 +11,10 @@ class ComposerStaticInitb7a7f2445d0ed6faefa6416f44d3a7bd
         array (
             'Recurr\\' => 7,
         ),
+        'D' => 
+        array (
+            'Doctrine\\Common\\Collections\\' => 28,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -18,15 +22,9 @@ class ComposerStaticInitb7a7f2445d0ed6faefa6416f44d3a7bd
         array (
             0 => __DIR__ . '/..' . '/simshaun/recurr/src/Recurr',
         ),
-    );
-
-    public static $prefixesPsr0 = array (
-        'D' => 
+        'Doctrine\\Common\\Collections\\' => 
         array (
-            'Doctrine\\Common\\Collections\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/doctrine/collections/lib',
-            ),
+            0 => __DIR__ . '/..' . '/doctrine/collections/lib/Doctrine/Common/Collections',
         ),
     );
 
@@ -76,7 +74,6 @@ class ComposerStaticInitb7a7f2445d0ed6faefa6416f44d3a7bd
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitb7a7f2445d0ed6faefa6416f44d3a7bd::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitb7a7f2445d0ed6faefa6416f44d3a7bd::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitb7a7f2445d0ed6faefa6416f44d3a7bd::$prefixesPsr0;
             $loader->classMap = ComposerStaticInitb7a7f2445d0ed6faefa6416f44d3a7bd::$classMap;
 
         }, null, ClassLoader::class);
