@@ -48,11 +48,6 @@ Please contact us if you need additional hooks.
 Hooks for the single view
 """""""""""""""""""""""""
 
-.. important::
-    Using :php:`\Tx_Seminars_Interfaces_Hook_EventSingleView` is deprecated since
-    seminars 3. It will be removed in seminars 4. Please update to
-    :php:`\OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView`.
-
 There is a hook into the single view. It is executed just before the template
 gets rendered to HTML. You may set custom markers or change existing values for
 markers. See also :file:`Classes/Frontend/DefaultController.php` for available
@@ -94,12 +89,7 @@ Implement the methods required by the interface:
 Hooks for the list view
 """""""""""""""""""""""
 
-.. important::
-    Using :php:`\Tx_Seminars_Interfaces_Hook_EventListView` is deprecated since
-    seminars 3. It will be removed in seminars 4. Please update to
-    :php:`\OliverKlee\Seminars\Hooks\Interfaces\SeminarListView`.
-
-There are 5 hooks into the list view(s). First hook is called just before the
+There are 4 hooks into the list view(s). First hook is called just before the
 seminar bag (the seminars to show in the list) or the registration bag (the
 seminars a user is registered for) is build. It is always called, even when
 there will be an empty list.

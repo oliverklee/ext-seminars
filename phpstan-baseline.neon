@@ -106,11 +106,6 @@ parameters:
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$className of static method TYPO3\\\\CMS\\\\Core\\\\Utility\\\\GeneralUtility\\:\\:makeInstance\\(\\) expects class\\-string\\<PHPUnit\\\\Framework\\\\MockObject\\\\MockObject&stdClass\\>, class\\-string\\<PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\>&class\\-string\\<stdClass\\> given\\.$#"
-			count: 4
-			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
-
-		-
 			message: "#^Parameter \\#1 \\$list of method Tx_Seminars_ViewHelper_CommaSeparatedTitles\\:\\:render\\(\\) expects iterable\\<OliverKlee\\\\Seminars\\\\Model\\\\Interfaces\\\\Titled\\>&OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection, OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection given\\.$#"
 			count: 5
 			path: Tests/LegacyUnit/ViewHelpers/CommaSeparatedTitlesViewHelperTest.php

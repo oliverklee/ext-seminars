@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures;
 
-use OliverKlee\Oelib\Email\Mail;
-use OliverKlee\Oelib\Templating\Template;
-
 /**
  * Interface for building mocks for registrations hook tests.
  *
@@ -53,28 +50,4 @@ interface RegistrationHookInterface
         \Tx_Seminars_OldModel_Registration $registration,
         \Tx_Seminars_Model_FrontEndUser $user
     );
-
-    /**
-     * @return void
-     *
-     * @deprecated
-     */
-    public function modifyThankYouEmail(Mail $email, \Tx_Seminars_Model_Registration $registration);
-
-    /**
-     * @return void
-     *
-     * @deprecated
-     */
-    public function modifyOrganizerNotificationEmail(
-        \Tx_Seminars_OldModel_Registration $registration,
-        Template $emailTemplate
-    );
-
-    /**
-     * @return void
-     *
-     * @deprecated
-     */
-    public function modifyAttendeeEmailText(\Tx_Seminars_OldModel_Registration $registration, Template $emailTemplate);
 }

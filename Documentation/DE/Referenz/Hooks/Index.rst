@@ -49,11 +49,6 @@ Bitte nehmen Sie Kontakt zu uns auf, wenn Sie weitere Hooks benötigen.
 Hooks zur Einzelansicht
 """""""""""""""""""""""
 
-.. important::
-    Die Nutzung von :php:`\Tx_Seminars_Interfaces_Hook_EventSingleView` ist veraltet seit
-    seminars 3. Es wird in seminars 4 entfernt werden. Bitte aktualisieren Sie auf
-    :php:`\OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView`.
-
 Es gibt einen Hook in die Einzelansicht. Er wird aufgerufen, bevor das Template zu HTML
 umgewandelt wird. Sie können damit eigene Marker ausfüllen oder bestehende Marker-Werte
 verändern. Für Details zu Eigenschaften und Methoden siehe :file:`Classes/Frontend/DefaultController.php`.
@@ -94,12 +89,7 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
 Hooks zur Listenansicht
 """""""""""""""""""""""
 
-.. important::
-    Die Nutzung von :php:`\Tx_Seminars_Interfaces_Hook_EventListView` ist veraltet seit
-    seminars 3. Es wird in seminars 4 entfernt werden. Bitte aktualisieren Sie auf
-    :php:`\OliverKlee\Seminars\Hooks\Interfaces\SeminarListView`.
-
-Es gibt 5 Hooks in die Listenansicht(en). Der erste Hook wird vor der Erstellung der
+Es gibt 4 Hooks in die Listenansicht(en). Der erste Hook wird vor der Erstellung der
 Seminar-Bag (die in der Liste auszugebenden Seminare) oder der Registrierungen-Bag (die
 Seminare, für die sich ein Benutzer angemeldet hat) aufgerufen. Der Hook wird immer aufgerufen,
 auch wenn die Liste leer sein wird.
