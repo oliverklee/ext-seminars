@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Configuration\ConfigurationProxy;
-use OliverKlee\Oelib\Email\Attachment;
-use OliverKlee\Oelib\Email\Mail;
-use OliverKlee\Oelib\Email\MailerFactory;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\FrontEndUser;
@@ -17,6 +14,7 @@ use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 use Pelago\Emogrifier\CssInliner;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
@@ -760,11 +758,13 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
             return;
         }
 
-        /** @var Mail $eMailNotification */
-        $eMailNotification = GeneralUtility::makeInstance(Mail::class);
-        $eMailNotification->addRecipient($user);
-        $eMailNotification->setSender($event->getEmailSender());
-        $eMailNotification->setReplyTo($event->getFirstOrganizer());
+        /** @var MailMessage $eMailNotification */
+        $eMailNotification = GeneralUtility::makeInstance(MailMessage::class);
+        $eMailNotification->setTo($user->getEmailAddress(), $user->getName());
+        $sender = $event->getEmailSender();
+        $eMailNotification->setFrom($sender->getEmailAddress(), $sender->getName());
+        $firstOrganizer = $event->getFirstOrganizer();
+        $eMailNotification->setReplyTo($firstOrganizer->getEmailAddress(), $firstOrganizer->getName());
         $eMailNotification->setSubject(
             $this->translate('email_' . $helloSubjectPrefix . 'Subject') . ': ' . $event->getTitleAndDate('-')
         );
@@ -775,12 +775,13 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         if (
             $emailFormat === self::SEND_HTML_MAIL || ($emailFormat === self::SEND_USER_MAIL && $user->wantsHtmlEmail())
         ) {
-            $eMailNotification->setHTMLMessage(
-                $this->buildEmailContent($oldRegistration, $plugin, $helloSubjectPrefix, true)
+            $eMailNotification->addPart(
+                $this->buildEmailContent($oldRegistration, $plugin, $helloSubjectPrefix, true),
+                'text/html'
             );
         }
 
-        $eMailNotification->setMessage($this->buildEmailContent($oldRegistration, $plugin, $helloSubjectPrefix));
+        $eMailNotification->setBody($this->buildEmailContent($oldRegistration, $plugin, $helloSubjectPrefix));
 
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
         $registration = $mapper->find($oldRegistration->getUid());
@@ -790,28 +791,19 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         $this->getRegistrationEmailHookProvider()
             ->executeHook('modifyAttendeeEmail', $eMailNotification, $registration, $helloSubjectPrefix);
 
-        /** @var MailerFactory $mailerFactory */
-        $mailerFactory = GeneralUtility::makeInstance(MailerFactory::class);
-        $mailerFactory->getMailer()->send($eMailNotification);
+        $eMailNotification->send();
     }
 
     /**
      * Adds an iCalendar attachment with the event's most important data to $email.
      *
-     * @param Mail $email
-     * @param \Tx_Seminars_Model_Registration $registration
-     *
      * @return void
      */
-    private function addCalendarAttachment(Mail $email, \Tx_Seminars_Model_Registration $registration)
+    private function addCalendarAttachment(MailMessage $email, \Tx_Seminars_Model_Registration $registration)
     {
         $event = $registration->getEvent();
         $timeZone = $event->getTimeZone() ?: $this->getConfValueString('defaultTimeZone');
 
-        /** @var Attachment $calendarEntry */
-        $calendarEntry = GeneralUtility::makeInstance(Attachment::class);
-        $calendarEntry->setContentType('text/calendar; charset="utf-8"; component="vevent"; method="publish"');
-        $calendarEntry->setFileName('event.ics');
         $content = "BEGIN:VCALENDAR\r\n" .
             "VERSION:2.0\r\n" .
             "PRODID:TYPO3 CMS\r\n" .
@@ -841,9 +833,8 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         $content .= 'ORGANIZER;CN="' . addcslashes($organizer->getTitle(), '"') .
             '":mailto:' . $organizer->getEmailAddress() . "\r\n";
         $content .= "END:VEVENT\r\nEND:VCALENDAR";
-        $calendarEntry->setContent($content);
 
-        $email->addAttachment($calendarEntry);
+        $email->addPart($content, 'text/calendar; charset="utf-8"; component="vevent"; method="publish"');
     }
 
     /**
@@ -888,14 +879,16 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         }
 
         $organizers = $event->getOrganizerBag();
-        /** @var Mail $eMailNotification */
-        $eMailNotification = GeneralUtility::makeInstance(Mail::class);
-        $eMailNotification->setSender($event->getEmailSender());
-        $eMailNotification->setReplyTo($event->getFirstOrganizer());
+        /** @var MailMessage $eMailNotification */
+        $eMailNotification = GeneralUtility::makeInstance(MailMessage::class);
+        $sender = $event->getEmailSender();
+        $eMailNotification->setFrom($sender->getEmailAddress(), $sender->getName());
+        $firstOrganizer = $event->getFirstOrganizer();
+        $eMailNotification->setReplyTo($firstOrganizer->getEmailAddress(), $firstOrganizer->getName());
 
         /** @var \Tx_Seminars_OldModel_Organizer $organizer */
         foreach ($organizers as $organizer) {
-            $eMailNotification->addRecipient($organizer);
+            $eMailNotification->addTo($organizer->getEmailAddress(), $organizer->getName());
         }
 
         $eMailNotification->setSubject(
@@ -935,7 +928,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
             $this->hideSubparts('attendancedata', 'field_wrapper');
         }
 
-        $eMailNotification->setMessage($this->getSubpart('MAIL_NOTIFICATION'));
+        $eMailNotification->setBody($this->getSubpart('MAIL_NOTIFICATION'));
 
         $registrationMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
         $registrationNew = $registrationMapper->find($registration->getUid());
@@ -943,9 +936,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         $this->getRegistrationEmailHookProvider()
             ->executeHook('modifyOrganizerEmail', $eMailNotification, $registrationNew, $helloSubjectPrefix);
 
-        /** @var MailerFactory $mailerFactory */
-        $mailerFactory = GeneralUtility::makeInstance(MailerFactory::class);
-        $mailerFactory->getMailer()->send($eMailNotification);
+        $eMailNotification->send();
     }
 
     /**
@@ -977,11 +968,13 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
             return;
         }
 
-        /** @var Mail $eMail */
-        $eMail = GeneralUtility::makeInstance(Mail::class);
-        $eMail->setSender($event->getEmailSender());
-        $eMail->setReplyTo($event->getFirstOrganizer());
-        $eMail->setMessage($this->getMessageForNotification($registration, $emailReason));
+        /** @var MailMessage $eMail */
+        $eMail = GeneralUtility::makeInstance(MailMessage::class);
+        $sender = $event->getEmailSender();
+        $eMail->setFrom($sender->getEmailAddress(), $sender->getName());
+        $firstOrganizer = $event->getFirstOrganizer();
+        $eMail->setReplyTo($firstOrganizer->getEmailAddress(), $firstOrganizer->getName());
+        $eMail->setBody($this->getMessageForNotification($registration, $emailReason));
         $eMail->setSubject(
             sprintf(
                 $this->translate('email_additionalNotification' . $emailReason . 'Subject'),
@@ -992,7 +985,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
 
         /** @var \Tx_Seminars_OldModel_Organizer $organizer */
         foreach ($event->getOrganizerBag() as $organizer) {
-            $eMail->addRecipient($organizer);
+            $eMail->addTo($organizer->getEmailAddress(), $organizer->getName());
         }
 
         $registrationMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
@@ -1001,9 +994,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         $this->getRegistrationEmailHookProvider()
             ->executeHook('modifyAdditionalEmail', $eMail, $registrationNew, $emailReason);
 
-        /** @var MailerFactory $mailerFactory */
-        $mailerFactory = GeneralUtility::makeInstance(MailerFactory::class);
-        $mailerFactory->getMailer()->send($eMail);
+        $eMail->send();
 
         if ($event->hasEnoughAttendances() && !$event->haveOrganizersBeenNotifiedAboutEnoughAttendees()) {
             $event->setOrganizersBeenNotifiedAboutEnoughAttendees();

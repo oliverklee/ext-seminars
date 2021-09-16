@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Hooks\Interfaces;
 
-use OliverKlee\Oelib\Email\Mail;
 use OliverKlee\Oelib\Templating\Template;
+use TYPO3\CMS\Core\Mail\MailMessage;
 
 /**
  * Use this interface for hooks concerning the registration emails.
@@ -28,7 +28,7 @@ interface RegistrationEmail extends Hook
      * @return void
      */
     public function modifyAttendeeEmail(
-        Mail $email,
+        MailMessage $email,
         \Tx_Seminars_Model_Registration $registration,
         string $emailReason
     );
@@ -90,7 +90,7 @@ interface RegistrationEmail extends Hook
      * @return void
      */
     public function modifyOrganizerEmail(
-        Mail $email,
+        MailMessage $email,
         \Tx_Seminars_Model_Registration $registration,
         string $emailReason
     );
@@ -108,7 +108,7 @@ interface RegistrationEmail extends Hook
      * @return void
      */
     public function modifyAdditionalEmail(
-        Mail $email,
+        MailMessage $email,
         \Tx_Seminars_Model_Registration $registration,
         string $emailReason
     );

@@ -13,7 +13,6 @@ use OliverKlee\Seminars\Tests\Functional\BackEnd\Fixtures\TestingEventMailForm;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
-use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -30,11 +29,6 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
      * @var string[]
      */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
-
-    /**
-     * @var MockObject|MailMessage|null
-     */
-    private $email = null;
 
     /**
      * @var HeaderCollector
@@ -63,11 +57,6 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
         $headerProxyFactory = HeaderProxyFactory::getInstance();
         $headerProxyFactory->enableTestMode();
         $this->headerProxy = $headerProxyFactory->getHeaderCollector();
-    }
-
-    protected function tearDown()
-    {
-        parent::tearDown();
     }
 
     /**

@@ -428,7 +428,7 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          * @return void
          */
         public function modifyAttendeeEmail(
-            Mail $email,
+            MailMessage $email,
             \Tx_Seminars_Model_Registration $registration,
             string $emailReason
         ) {
@@ -498,7 +498,7 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          * @return void
          */
         public function modifyOrganizerEmail(
-            Mail $email,
+            MailMessage $email,
             \Tx_Seminars_Model_Registration $registration,
             string $emailReason
         ) {
@@ -518,7 +518,7 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          * @return void
          */
         public function modifyAdditionalEmail(
-            Mail $email,
+            MailMessage $email,
             \Tx_Seminars_Model_Registration $registration,
             string $emailReason
         ) {

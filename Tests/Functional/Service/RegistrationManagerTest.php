@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\Service;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
-use OliverKlee\Oelib\Email\EmailCollector;
+use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
+use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
+use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -15,6 +17,10 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 final class RegistrationManagerTest extends FunctionalTestCase
 {
     use LanguageHelper;
+
+    use EmailTrait;
+
+    use MakeInstanceTrait;
 
     /**
      * @var string
@@ -31,23 +37,13 @@ final class RegistrationManagerTest extends FunctionalTestCase
      */
     private $subject = null;
 
-    /**
-     * @var EmailCollector
-     */
-    private $mailer = null;
-
     protected function setUp()
     {
         parent::setUp();
 
         $this->initializeBackEndLanguage();
 
-        /** @var \Tx_Oelib_MailerFactory $mailerFactory */
-        $mailerFactory = GeneralUtility::makeInstance(\Tx_Oelib_MailerFactory::class);
-        $mailerFactory->enableTestMode();
-        /** @var EmailCollector $mailer */
-        $mailer = $mailerFactory->getMailer();
-        $this->mailer = $mailer;
+        $this->email = $this->createEmailMock();
 
         $this->subject = \Tx_Seminars_Service_RegistrationManager::getInstance();
     }
@@ -56,6 +52,9 @@ final class RegistrationManagerTest extends FunctionalTestCase
     {
         \Tx_Seminars_Service_RegistrationManager::purgeCachedConfigurations();
         \Tx_Seminars_Service_RegistrationManager::purgeInstance();
+        // Purge the FIFO buffer of mocks
+        GeneralUtility::makeInstance(MailMessage::class);
+        GeneralUtility::makeInstance(MailMessage::class);
 
         parent::tearDown();
     }
@@ -66,6 +65,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     public function notifyOrganizersForEventWithOneVacancyShowsVacanciesLabelWithVacancyNumber()
     {
         $this->importDataSet(__DIR__ . '/Fixtures/RegistrationManagerRecords.xml');
+        $this->addMockedInstance(MailMessage::class, $this->email);
         $registration = \Tx_Seminars_OldModel_Registration::fromUid(1);
 
         $this->subject->setConfigurationValue('sendNotification', true);
@@ -74,7 +74,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
         $this->subject->notifyOrganizers($registration);
 
-        $expectedExpression = '/' . $this->getLanguageService()->getLL('label_vacancies') . ': 1$/';
-        self::assertRegExp($expectedExpression, $this->mailer->getFirstSentEmail()->getBody());
+        $expectedExpression = '/' . $this->getLanguageService()->getLL('label_vacancies') . ': 1\\n*$/';
+        self::assertRegExp($expectedExpression, $this->email->getBody());
     }
 }

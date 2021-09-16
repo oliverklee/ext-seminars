@@ -91,11 +91,6 @@ final class MailNotifierTest extends TestCase
      */
     private $registrationDigest = null;
 
-    /**
-     * @var (MockObject&MailMessage)|null
-     */
-    private $email = null;
-
     protected function setUp()
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
