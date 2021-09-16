@@ -11,9 +11,6 @@ use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * @author 2009 Bernd Schönbach <bernd@oliverklee.de>
- */
 class PublishEventTest extends TestCase
 {
     use LanguageHelper;

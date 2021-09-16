@@ -8,8 +8,6 @@ use OliverKlee\Oelib\Mapper\AbstractDataMapper;
  * This class represents a mapper for target groups.
  *
  * @extends AbstractDataMapper<\Tx_Seminars_Model_TargetGroup>
- *
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 class Tx_Seminars_Mapper_TargetGroup extends AbstractDataMapper
 {

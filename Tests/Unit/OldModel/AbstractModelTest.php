@@ -8,9 +8,6 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\OldModel\AbstractModel;
 use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingModel;
 
-/**
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- */
 final class AbstractModelTest extends UnitTestCase
 {
     /**

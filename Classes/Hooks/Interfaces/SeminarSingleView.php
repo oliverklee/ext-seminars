@@ -8,8 +8,6 @@ namespace OliverKlee\Seminars\Hooks\Interfaces;
  * Use this interface for hooks concerning the seminar single view.
  *
  * It supersedes the deprecated `EventSingleView` interface.
- *
- * @author Michael Kramer <m.kramer@mxp.de>
  */
 interface SeminarSingleView extends Hook
 {

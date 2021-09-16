@@ -9,10 +9,6 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Bag\AbstractBag;
 
-/**
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- * @author Niels Pardon <mail@niels-pardon.de>
- */
 class EventBagBuilderTest extends TestCase
 {
     /**

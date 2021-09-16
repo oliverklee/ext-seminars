@@ -13,10 +13,6 @@ use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
-/**
- * @author Niels Pardon <mail@niels-pardon.de>
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- */
 class RegistrationsListTest extends TestCase
 {
     use LanguageHelper;

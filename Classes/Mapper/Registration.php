@@ -10,9 +10,6 @@ use TYPO3\CMS\Core\Database\Connection;
  * This class represents a mapper for registrations.
  *
  * @extends AbstractDataMapper<\Tx_Seminars_Model_Registration>
- *
- * @author Niels Pardon <mail@niels-pardon.de>
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class Tx_Seminars_Mapper_Registration extends AbstractDataMapper
 {

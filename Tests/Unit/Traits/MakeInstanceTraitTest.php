@@ -9,9 +9,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * @covers \OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait
- *
- * @author Stefano Kowalke <info@arroba-it.de>
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 final class MakeInstanceTraitTest extends UnitTestCase
 {

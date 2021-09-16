@@ -9,8 +9,6 @@ use TYPO3\CMS\Core\SingletonInterface;
 
 /**
  * This class takes care of managing the status of events.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class EventStatusService implements SingletonInterface
 {

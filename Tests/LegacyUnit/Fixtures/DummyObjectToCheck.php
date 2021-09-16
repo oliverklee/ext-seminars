@@ -9,8 +9,6 @@ use OliverKlee\Oelib\Templating\TemplateHelper;
 
 /**
  * This a class to test the configuration check class.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class DummyObjectToCheck extends TemplateHelper implements ConfigurationCheckable
 {

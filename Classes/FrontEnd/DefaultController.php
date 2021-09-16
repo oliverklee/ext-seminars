@@ -20,9 +20,6 @@ use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 
 /**
  * Plugin "Seminar Manager".
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements ConfigurationCheckable
 {

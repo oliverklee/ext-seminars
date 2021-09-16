@@ -19,9 +19,6 @@ use TYPO3\CMS\Lang\LanguageService;
 
 /**
  * This is the base class for lists in the back end.
- *
- * @author Niels Pardon <mail@niels-pardon.de>
- * @author Bernd Schönbach <bernd@oliverklee.de>
  */
 abstract class AbstractList
 {

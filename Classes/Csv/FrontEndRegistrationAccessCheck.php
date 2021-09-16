@@ -10,8 +10,6 @@ use OliverKlee\Seminars\Csv\Interfaces\CsvAccessCheck;
 
 /**
  * This class provides the access check for the CSV export of registrations in the front end.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class FrontEndRegistrationAccessCheck implements CsvAccessCheck
 {

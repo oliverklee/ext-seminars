@@ -6,8 +6,6 @@ namespace OliverKlee\Seminars\Hooks\Interfaces;
 
 /**
  * Use this interface for hooks concerning the date or the time span.
- *
- * @author Michael Kramer <m.kramer@mxp.de>
  */
 interface DateTimeSpan extends Hook
 {

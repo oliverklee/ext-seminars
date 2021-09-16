@@ -7,9 +7,6 @@ namespace OliverKlee\Seminars\Tests\Functional\Configuration;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 
-/**
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- */
 final class TypoScriptSetupTest extends FunctionalTestCase
 {
     /**

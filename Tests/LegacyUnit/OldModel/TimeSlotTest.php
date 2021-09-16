@@ -11,9 +11,6 @@ use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * @author Niels Pardon <mail@niels-pardon.de>
- */
 final class TimeSlotTest extends TestCase
 {
     use LanguageHelper;

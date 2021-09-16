@@ -8,10 +8,6 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Bag\AbstractBag;
 
-/**
- * @author Niels Pardon <mail@niels-pardon.de>
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- */
 class OrganizerBagBuilderTest extends TestCase
 {
     /**

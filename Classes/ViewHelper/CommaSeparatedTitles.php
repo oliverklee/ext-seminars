@@ -7,8 +7,6 @@ use OliverKlee\Seminars\Model\Interfaces\Titled;
 
 /**
  * This class represents a view helper for rendering the elements of a list as comma-separated titles.
- *
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 class Tx_Seminars_ViewHelper_CommaSeparatedTitles
 {

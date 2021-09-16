@@ -9,10 +9,6 @@ use OliverKlee\Seminars\Model\Interfaces\Titled;
 
 /**
  * This class represents a front-end user group.
- *
- * @author Bernd Schönbach <bernd@oliverklee.de>
- * @author Niels Pardon <mail@niels-pardon.de>
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class Tx_Seminars_Model_FrontEndUserGroup extends OelibFrontEndUserGroup implements Titled
 {

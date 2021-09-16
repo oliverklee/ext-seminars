@@ -7,8 +7,6 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * This class represents a view helper for rendering a countdown.
- *
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 class Tx_Seminars_ViewHelper_Countdown
 {

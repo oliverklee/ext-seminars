@@ -12,9 +12,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class creates a registration list in the back end.
- *
- * @author Niels Pardon <mail@niels-pardon.de>
- * @author Bernd Schönbach <bernd@oliverklee.de>
  */
 class RegistrationsList extends AbstractList
 {

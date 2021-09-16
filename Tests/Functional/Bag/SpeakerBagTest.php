@@ -7,9 +7,6 @@ namespace OliverKlee\Seminars\Tests\Functional\BagBuilder;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Seminars\Tests\Functional\Traits\BagHelper;
 
-/**
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- */
 final class SpeakerBagTest extends FunctionalTestCase
 {
     use BagHelper;

@@ -14,9 +14,6 @@ use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
 
 /**
  * This class represents an event.
- *
- * @author Niels Pardon <mail@niels-pardon.de>
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implements Titled
 {

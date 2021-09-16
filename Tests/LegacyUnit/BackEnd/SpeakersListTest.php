@@ -14,9 +14,6 @@ use OliverKlee\Seminars\Tests\LegacyUnit\BackEnd\Fixtures\DummyModule;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
 use TYPO3\CMS\Backend\Template\DocumentTemplate;
 
-/**
- * @author Niels Pardon <mail@niels-pardon.de>
- */
 class SpeakersListTest extends TestCase
 {
     use BackEndTestsTrait;

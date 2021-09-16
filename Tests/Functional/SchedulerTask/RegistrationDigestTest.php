@@ -11,9 +11,6 @@ use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 
-/**
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- */
 class RegistrationDigestTest extends FunctionalTestCase
 {
     /**

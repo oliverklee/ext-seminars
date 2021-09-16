@@ -1,10 +1,6 @@
 /*
  * This file provides some JavaScript functions for the seminars front-end
  * editor and the registration form.
- *
- * @author Saskia Metzler <saskia@merlin.owl.de>
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 
 var TYPO3 = TYPO3 || {};

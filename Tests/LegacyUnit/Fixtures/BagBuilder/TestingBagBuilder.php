@@ -11,9 +11,6 @@ use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\Bag\TestingBag;
  * This builder class creates customized test bag objects.
  *
  * @extends AbstractBagBuilder<TestingBag>
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 final class TestingBagBuilder extends AbstractBagBuilder
 {

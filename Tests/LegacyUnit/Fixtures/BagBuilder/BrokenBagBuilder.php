@@ -11,8 +11,6 @@ use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\Bag\TestingBag;
  * This builder class creates customized test bag objects.
  *
  * @extends AbstractBagBuilder<TestingBag>
- *
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 final class BrokenBagBuilder extends AbstractBagBuilder
 {

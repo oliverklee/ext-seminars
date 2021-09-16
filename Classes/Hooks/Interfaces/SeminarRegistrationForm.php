@@ -6,8 +6,6 @@ namespace OliverKlee\Seminars\Hooks\Interfaces;
 
 /**
  * Use this interface for hooks concerning the registration form.
- *
- * @author Michael Kramer <m.kramer@mxp.de>
  */
 interface SeminarRegistrationForm extends Hook
 {

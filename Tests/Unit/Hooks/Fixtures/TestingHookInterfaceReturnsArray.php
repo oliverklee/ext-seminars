@@ -10,8 +10,6 @@ use OliverKlee\Seminars\Hooks\Interfaces\Hook;
  * Valid test interface returning an array to use with the HookProviderTest.
  *
  * Will be accepted because it extends `Hook`.
- *
- * @author Michael Kramer <m.kramer@mxp.de>
  */
 interface TestingHookInterfaceReturnsArray extends Hook
 {

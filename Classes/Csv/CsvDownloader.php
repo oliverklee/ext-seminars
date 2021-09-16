@@ -13,10 +13,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Plugin "CSV export".
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- * @author Niels Pardon <mail@niels-pardon.de>
- * @author Bernd Schönbach <bernd@oliverklee.de>
  */
 class CsvDownloader extends TemplateHelper
 {

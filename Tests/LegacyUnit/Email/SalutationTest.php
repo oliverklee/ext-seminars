@@ -18,9 +18,6 @@ use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use TYPO3\CMS\Core\Core\Bootstrap;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * @author Bernd Schönbach <bernd@oliverklee.de>
- */
 final class SalutationTest extends TestCase
 {
     use LanguageHelper;

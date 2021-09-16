@@ -10,9 +10,6 @@ use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
 
-/**
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- */
 class RegistrationDigestTest extends UnitTestCase
 {
     /**

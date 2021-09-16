@@ -6,8 +6,6 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd\Fixtures;
 
 /**
  * Proxy class to make some things public.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class TestingDefaultController extends \Tx_Seminars_FrontEnd_DefaultController
 {

@@ -6,8 +6,6 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel;
 
 /**
  * This is mere a class used for unit tests. Don't use it for any other purpose.
- *
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 final class TestingTimeSlot extends \Tx_Seminars_OldModel_TimeSlot
 {

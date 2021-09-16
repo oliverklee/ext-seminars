@@ -8,10 +8,6 @@ use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Seminars\Bag\AbstractBag;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * @author Bernd Schönbach <bernd@oliverklee.de>
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- */
 final class EventBagBuilderTest extends FunctionalTestCase
 {
     /**

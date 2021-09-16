@@ -7,9 +7,6 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\OldModel;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
-/**
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- */
 final class OrganizerTest extends TestCase
 {
     /**

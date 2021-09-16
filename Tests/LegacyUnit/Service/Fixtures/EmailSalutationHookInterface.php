@@ -6,8 +6,6 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures;
 
 /**
  * Interface for building mocks for email salutation hook tests.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 interface EmailSalutationHookInterface
 {

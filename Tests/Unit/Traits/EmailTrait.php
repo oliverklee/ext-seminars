@@ -12,9 +12,6 @@ use TYPO3\CMS\Core\Mail\MailMessage;
  * Helper for creating email mocks.
  *
  * @mixin TestCase
- *
- * @author Stefano Kowalke <info@arroba-it.de>
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 trait EmailTrait
 {

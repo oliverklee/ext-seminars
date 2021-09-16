@@ -24,9 +24,6 @@ use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
  * This utility class checks and creates registrations for seminars.
  *
  * This file does not include the locallang file in the BE because objectfromdb already does that.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
 {

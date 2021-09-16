@@ -11,9 +11,6 @@ use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
-/**
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- */
 final class EventTest extends UnitTestCase
 {
     /**

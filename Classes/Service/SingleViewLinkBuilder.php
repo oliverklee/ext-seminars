@@ -11,8 +11,6 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * This class provides functions for creating the link/URL to the single view page of an event.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class Tx_Seminars_Service_SingleViewLinkBuilder
 {

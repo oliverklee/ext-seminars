@@ -7,9 +7,6 @@ use OliverKlee\Seminars\Model\Interfaces\Titled;
 
 /**
  * This class represents a category.
- *
- * @author Niels Pardon <mail@niels-pardon.de>
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class Tx_Seminars_Model_Category extends AbstractModel implements Titled
 {

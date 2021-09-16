@@ -8,8 +8,6 @@ use OliverKlee\Oelib\Mapper\AbstractDataMapper;
  * This class represents a mapper for places.
  *
  * @extends AbstractDataMapper<\Tx_Seminars_Model_Place>
- *
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 class Tx_Seminars_Mapper_Place extends AbstractDataMapper
 {

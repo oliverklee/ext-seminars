@@ -7,9 +7,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class represents a countdown to the next upcoming event.
- *
- * @author Niels Pardon <mail@niels-pardon.de>
- * @author Mario Rimann <typo3-coding@rimann.org>
  */
 class Tx_Seminars_FrontEnd_Countdown extends \Tx_Seminars_FrontEnd_AbstractView
 {

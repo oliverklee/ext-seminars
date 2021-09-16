@@ -6,8 +6,6 @@ namespace OliverKlee\Seminars\Csv;
 
 /**
  * This class creates a CSV export of registrations for download.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class DownloadRegistrationListView extends \Tx_Seminars_Csv_AbstractRegistrationListView
 {

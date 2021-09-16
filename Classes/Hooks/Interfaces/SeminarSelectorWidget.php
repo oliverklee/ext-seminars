@@ -6,8 +6,6 @@ namespace OliverKlee\Seminars\Hooks\Interfaces;
 
 /**
  * Use this interface for hooks concerning the seminar selector widget.
- *
- * @author Michael Kramer <m.kramer@mxp.de>
  */
 interface SeminarSelectorWidget extends Hook
 {

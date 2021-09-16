@@ -8,8 +8,6 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * This class just makes some functions public for testing purposes.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class TestingSingleViewLinkBuilder extends \Tx_Seminars_Service_SingleViewLinkBuilder
 {

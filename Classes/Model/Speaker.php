@@ -11,8 +11,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class represents an speaker.
- *
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 class Tx_Seminars_Model_Speaker extends AbstractModel implements MailRole
 {

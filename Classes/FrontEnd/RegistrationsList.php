@@ -8,9 +8,6 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * This class represents a list of registrations for the front end.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_AbstractView
 {

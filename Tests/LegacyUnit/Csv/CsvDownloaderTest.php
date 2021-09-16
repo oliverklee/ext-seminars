@@ -10,10 +10,6 @@ use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
 use TYPO3\CMS\Lang\LanguageService;
 
-/**
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- * @author Niels Pardon <mail@niels-pardon.de>
- */
 class CsvDownloaderTest extends TestCase
 {
     use BackEndTestsTrait;

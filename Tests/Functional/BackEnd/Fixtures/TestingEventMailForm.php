@@ -8,8 +8,6 @@ use OliverKlee\Seminars\BackEnd\AbstractEventMailForm;
 
 /**
  * This class represents a testing implementation of the AbstractEventMailForm class.
- *
- * @author Mario Rimann <mario@screenteam.com>
  */
 final class TestingEventMailForm extends AbstractEventMailForm
 {

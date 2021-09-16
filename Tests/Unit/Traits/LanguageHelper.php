@@ -8,8 +8,6 @@ use TYPO3\CMS\Lang\LanguageService;
 
 /**
  * This trait provides methods useful for initializing languages.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 trait LanguageHelper
 {

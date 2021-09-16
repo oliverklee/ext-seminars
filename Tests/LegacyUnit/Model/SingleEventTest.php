@@ -8,8 +8,6 @@ use OliverKlee\PhpUnit\TestCase;
 
 /**
  * This test case holds all tests specific to single events.
- *
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 class SingleEventTest extends TestCase
 {

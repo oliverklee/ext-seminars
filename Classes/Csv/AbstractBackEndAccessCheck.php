@@ -11,8 +11,6 @@ use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 
 /**
  * This class provides an access check for the CSV export in the back end.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 abstract class AbstractBackEndAccessCheck implements CsvAccessCheck
 {

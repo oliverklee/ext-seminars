@@ -16,9 +16,6 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 
-/**
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- */
 class RegistrationDigestTest extends TestCase
 {
     /**

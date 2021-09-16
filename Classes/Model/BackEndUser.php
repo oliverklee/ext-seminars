@@ -6,8 +6,6 @@ use OliverKlee\Oelib\Model\BackEndUser as OelibBackEndUser;
 
 /**
  * This class represents a back-end user.
- *
- * @author Bernd Schönbach <bernd@oliverklee.de>
  */
 class Tx_Seminars_Model_BackEndUser extends OelibBackEndUser
 {

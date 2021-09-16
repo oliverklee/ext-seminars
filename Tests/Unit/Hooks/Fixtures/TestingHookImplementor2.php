@@ -8,8 +8,6 @@ namespace OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures;
  * Second valid test interface implementation to use with the HookProviderTest.
  *
  * Will be accepted as a second hooked-in class.
- *
- * @author Michael Kramer <m.kramer@mxp.de>
  */
 final class TestingHookImplementor2 extends TestingHookImplementor
 {

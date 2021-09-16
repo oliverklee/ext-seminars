@@ -7,8 +7,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class publishes events which are hidden through editing or creation in the FE editor.
- *
- * @author Bernd Schönbach <bernd@oliverklee.de>
  */
 class Tx_Seminars_FrontEnd_PublishEvent extends TemplateHelper
 {

@@ -13,9 +13,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * language files so it works even under the worst of circumstances.
  *
  * phpcs:disable PSR1.Methods.CamelCapsMethodName
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 class Tx_Seminars_ConfigCheck extends ConfigurationCheck
 {

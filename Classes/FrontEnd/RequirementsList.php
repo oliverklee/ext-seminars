@@ -8,9 +8,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class is a view which creates the requirements lists for the front end.
- *
- * @author Bernd Schönbach <bernd@oliverklee.de>
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class Tx_Seminars_FrontEnd_RequirementsList extends \Tx_Seminars_FrontEnd_AbstractView
 {

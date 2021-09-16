@@ -8,9 +8,6 @@ use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\PhpUnit\TestCase;
 
-/**
- * @author Bernd Schönbach <bernd@oliverklee.de>
- */
 class BackEndUserTest extends TestCase
 {
     /**

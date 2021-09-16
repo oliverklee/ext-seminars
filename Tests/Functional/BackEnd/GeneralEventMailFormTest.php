@@ -14,9 +14,6 @@ use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- */
 final class GeneralEventMailFormTest extends FunctionalTestCase
 {
     use LanguageHelper;

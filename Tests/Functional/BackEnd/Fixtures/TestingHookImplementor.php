@@ -9,8 +9,6 @@ use TYPO3\CMS\Core\SingletonInterface;
 
 /**
  * Testing implementor for the BE hooks.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 final class TestingHookImplementor implements \Tx_Seminars_Interfaces_Hook_BackEndModule, SingletonInterface
 {

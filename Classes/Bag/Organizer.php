@@ -8,8 +8,6 @@ use OliverKlee\Seminars\Bag\AbstractBag;
  * This aggregate class holds a bunch of organizer objects and allows iterating over them.
  *
  * @extends AbstractBag<\Tx_Seminars_OldModel_Organizer>
- *
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 class Tx_Seminars_Bag_Organizer extends AbstractBag
 {

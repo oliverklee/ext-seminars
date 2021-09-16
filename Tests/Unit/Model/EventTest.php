@@ -10,9 +10,6 @@ use OliverKlee\Oelib\Email\SystemEmailFromBuilder;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- */
 class EventTest extends UnitTestCase
 {
     /**

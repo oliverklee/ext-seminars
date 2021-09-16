@@ -8,10 +8,6 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\Bag\TestingBag;
 
-/**
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- * @author Niels Pardon <mail@niels-pardon.de>
- */
 class AbstractBagTest extends TestCase
 {
     /**

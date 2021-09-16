@@ -8,8 +8,6 @@ use OliverKlee\Oelib\Authentication\BackEndLoginManager;
 
 /**
  * This class provides the access check for the CSV export of registrations in the back end.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class BackEndRegistrationAccessCheck extends AbstractBackEndAccessCheck
 {

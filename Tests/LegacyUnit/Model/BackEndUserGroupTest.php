@@ -6,9 +6,6 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
 use OliverKlee\PhpUnit\TestCase;
 
-/**
- * @author Bernd Schönbach <bernd@oliverklee.de>
- */
 class BackEndUserGroupTest extends TestCase
 {
     /**

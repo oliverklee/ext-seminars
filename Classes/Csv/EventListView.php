@@ -9,8 +9,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class creates a CSV export of events.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class EventListView extends AbstractListView
 {

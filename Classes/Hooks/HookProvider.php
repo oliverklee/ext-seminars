@@ -33,8 +33,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * There is an optional index to `$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']`, provided
  * for easier conversion of existing hooks to this class.
- *
- * @author Michael Kramer <m.kramer@mxp.de>
  */
 class HookProvider
 {

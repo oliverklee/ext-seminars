@@ -12,10 +12,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class creates a selector widget.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- * @author Niels Pardon <mail@niels-pardon.de>
- * @author Mario Rimann <typo3-coding@rimann.org>
  */
 class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_AbstractView
 {

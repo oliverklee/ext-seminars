@@ -11,10 +11,6 @@ use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Csv\EmailRegistrationListView;
 use TYPO3\CMS\Lang\LanguageService;
 
-/**
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- * @author Niels Pardon <mail@niels-pardon.de>
- */
 class EmailRegistrationListViewTest extends TestCase
 {
     /**

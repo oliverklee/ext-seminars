@@ -9,8 +9,6 @@ use OliverKlee\Seminars\Model\Interfaces\Titled;
 
 /**
  * This class represents a titled model for testing purposes.
- *
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 class TitledTestingModel extends AbstractModel implements Titled
 {

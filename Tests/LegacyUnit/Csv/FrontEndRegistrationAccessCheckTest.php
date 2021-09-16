@@ -12,9 +12,6 @@ use OliverKlee\Seminars\Csv\FrontEndRegistrationAccessCheck;
 use OliverKlee\Seminars\Csv\Interfaces\CsvAccessCheck;
 use PHPUnit\Framework\MockObject\MockObject;
 
-/**
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- */
 class FrontEndRegistrationAccessCheckTest extends TestCase
 {
     /**

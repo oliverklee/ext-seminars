@@ -11,8 +11,6 @@ use OliverKlee\PhpUnit\TestCase;
 
 /**
  * This test case holds tests which are specific to single events.
- *
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 class SingleEventMapperTest extends TestCase
 {

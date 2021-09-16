@@ -6,8 +6,6 @@ namespace OliverKlee\Seminars\Hooks\Interfaces;
 
 /**
  * Use this interface for hooks concerning data sanitization.
- *
- * @author Michael Kramer <m.kramer@mxp.de>
  */
 interface DataSanitization extends Hook
 {

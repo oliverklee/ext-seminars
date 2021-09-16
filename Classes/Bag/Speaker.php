@@ -8,8 +8,6 @@ use OliverKlee\Seminars\Bag\AbstractBag;
  * This aggregate class holds a bunch of speaker objects and allows iterating over them.
  *
  * @extends AbstractBag<\Tx_Seminars_OldModel_Speaker>
- *
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 class Tx_Seminars_Bag_Speaker extends AbstractBag
 {

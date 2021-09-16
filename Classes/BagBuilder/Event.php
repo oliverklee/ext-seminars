@@ -9,9 +9,6 @@ use OliverKlee\Seminars\BagBuilder\AbstractBagBuilder;
  * This builder class creates customized event bags.
  *
  * @extends AbstractBagBuilder<\Tx_Seminars_Bag_Event>
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
 {

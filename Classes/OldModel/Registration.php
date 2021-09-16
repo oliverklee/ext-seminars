@@ -18,9 +18,6 @@ use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
 /**
  * This class represents a registration/attendance.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 class Tx_Seminars_OldModel_Registration extends AbstractModel implements ConfigurationCheckable
 {

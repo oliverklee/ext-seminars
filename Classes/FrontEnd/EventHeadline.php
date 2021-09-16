@@ -6,9 +6,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class displays an event headline consisting of the event title and date.
- *
- * @author Bernd Schönbach <bernd@oliverklee.de>
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 class Tx_Seminars_FrontEnd_EventHeadline extends \Tx_Seminars_FrontEnd_AbstractView
 {

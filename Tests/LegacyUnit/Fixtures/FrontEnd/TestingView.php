@@ -6,8 +6,6 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\FrontEnd;
 
 /**
  * This class represents a view for testing purposes.
- *
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 class TestingView extends \Tx_Seminars_FrontEnd_AbstractView
 {

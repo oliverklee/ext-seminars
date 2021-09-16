@@ -12,8 +12,6 @@ use TYPO3\CMS\Lang\LanguageService;
 
 /**
  * This class creates a CSV export of registrations.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 abstract class AbstractListView
 {

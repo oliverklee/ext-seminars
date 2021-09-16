@@ -19,9 +19,6 @@ use TYPO3\CMS\Frontend\Page\PageRepository;
  * the result of an SQL query and allows iterating over them.
  *
  * @template M of AbstractModel
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
- * @author Niels Pardon <mail@niels-pardon.de>
  */
 abstract class AbstractBag implements \Iterator, ConfigurationCheckable
 {

@@ -6,8 +6,6 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures;
 
 /**
  * Proxy class to make some things public.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class TestingRegistrationManager extends \Tx_Seminars_Service_RegistrationManager
 {

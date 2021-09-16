@@ -8,8 +8,6 @@ namespace OliverKlee\Seminars\Hooks\Interfaces;
  * Use this interface for hooks concerning the seminar list views.
  *
  * It supersedes the deprecated `EventListView` interface.
- *
- * @author Michael Kramer <m.kramer@mxp.de>
  */
 interface SeminarListView extends Hook
 {

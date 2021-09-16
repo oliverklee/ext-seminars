@@ -8,9 +8,6 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Bag\AbstractBag;
 
-/**
- * @author Niels Pardon <mail@niels-pardon.de>
- */
 class SpeakerBagBuilderTest extends TestCase
 {
     /**

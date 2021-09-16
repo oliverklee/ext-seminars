@@ -6,8 +6,6 @@ use OliverKlee\Oelib\Templating\TemplateHelper;
 
 /**
  * This class provides a way to access config values from plugin.tx_seminars to classes within FrontEnd/.
- *
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class Tx_Seminars_Service_ConfigurationService extends TemplateHelper
 {

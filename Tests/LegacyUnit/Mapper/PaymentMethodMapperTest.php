@@ -7,9 +7,6 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
-/**
- * @author Niels Pardon <mail@niels-pardon.de>
- */
 class PaymentMethodMapperTest extends TestCase
 {
     /**

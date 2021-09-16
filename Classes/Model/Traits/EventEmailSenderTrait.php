@@ -10,8 +10,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Trait that adds the method getEmailSender() to get the sender MailRole for the current Event.
- *
- * @author Pascal Rinker <projects@jweiland.net>
  */
 trait EventEmailSenderTrait
 {

@@ -18,10 +18,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Back-end module "Events".
- *
- * @author Mario Rimann <typo3-coding@rimann.org>
- * @author Niels Pardon <mail@niels-pardon.de>
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class Controller extends AbstractModule
 {

@@ -11,9 +11,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * Helper for injecting objects into `GeneralUtility::makeInstance` and automatically cleaning them up afterwards.
  *
  * @mixin TestCase
- *
- * @author Stefano Kowalke <info@arroba-it.de>
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 trait MakeInstanceTrait
 {

@@ -7,9 +7,6 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 use OliverKlee\PhpUnit\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
-/**
- * @author Niels Pardon <mail@niels-pardon.de>
- */
 class AbstractTimeSpanTest extends TestCase
 {
     /**

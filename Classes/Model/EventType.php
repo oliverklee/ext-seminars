@@ -7,9 +7,6 @@ use OliverKlee\Seminars\Model\Interfaces\Titled;
 
 /**
  * This class represents an event type.
- *
- * @author Niels Pardon <mail@niels-pardon.de>
- * @author Oliver Klee <typo3-coding@oliverklee.de>
  */
 class Tx_Seminars_Model_EventType extends AbstractModel implements Titled
 {

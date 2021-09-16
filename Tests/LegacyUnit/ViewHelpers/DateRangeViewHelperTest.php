@@ -10,9 +10,6 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 
-/**
- * @author Niels Pardon <mail@niels-pardon.de>
- */
 class DateRangeViewHelperTest extends TestCase
 {
     use LanguageHelper;
