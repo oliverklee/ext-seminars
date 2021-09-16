@@ -10,7 +10,6 @@ use OliverKlee\Seminars\Tests\Functional\BackEnd\Fixtures\TestingHookImplementor
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
-use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -26,11 +25,6 @@ final class GeneralEventMailFormTest extends FunctionalTestCase
      * @var string[]
      */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
-
-    /**
-     * @var MockObject|MailMessage|null
-     */
-    private $email = null;
 
     protected function setUp()
     {

@@ -12,7 +12,6 @@ use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Service\EmailService;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
-use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Core\Bootstrap;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\SingletonInterface;
@@ -78,11 +77,6 @@ final class EmailServiceTest extends TestCase
      * @var LanguageService
      */
     private $languageBackup;
-
-    /**
-     * @var (MockObject&MailMessage)|null
-     */
-    private $email = null;
 
     protected function setUp()
     {

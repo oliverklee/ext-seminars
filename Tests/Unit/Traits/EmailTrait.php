@@ -16,6 +16,11 @@ use TYPO3\CMS\Core\Mail\MailMessage;
 trait EmailTrait
 {
     /**
+     * @var (MailMessage&MockObject)|null
+     */
+    private $email = null;
+
+    /**
      * @return MailMessage&MockObject
      */
     private function createEmailMock(): MailMessage

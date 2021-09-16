@@ -14,7 +14,6 @@ use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
-use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -47,11 +46,6 @@ final class EventEditorTest extends TestCase
      * @var int
      */
     private $recordsPageUid = 0;
-
-    /**
-     * @var (MockObject&MailMessage)|null
-     */
-    private $email = null;
 
     /** @var ConnectionPool */
     private $connectionPool = null;

@@ -15,7 +15,7 @@ trait EventEmailSenderTrait
 {
     /**
      * Returns a MailRole with the default email data from TYPO3 if set.
-     * It otherwise returns a MailRole with the mail of the first organizer.
+     * It otherwise returns a MailRole with the email of the first organizer.
      */
     public function getEmailSender(): MailRole
     {

@@ -32,11 +32,6 @@ final class RegistrationFormTest extends FunctionalTestCase
         $this->subject = new \Tx_Seminars_FrontEnd_RegistrationForm([], $this->contentObject);
     }
 
-    protected function tearDown()
-    {
-        parent::tearDown();
-    }
-
     /**
      * @test
      */
