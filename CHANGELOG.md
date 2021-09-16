@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Allow mkforms 10.0.0 (#860)
 - Upgrade to PHP-CS-Fixer V3 (#854)
 - Upgrade to PHPUnit 7 (#853)
 - Require rn_base >= 1.13.12 (#774)
