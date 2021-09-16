@@ -206,7 +206,7 @@ class OrganizerTest extends TestCase
 
         self::assertEquals(
             '',
-            $this->subject->getEMailFooter()
+            $this->subject->getEmailFooter()
         );
     }
 
@@ -219,7 +219,7 @@ class OrganizerTest extends TestCase
 
         self::assertEquals(
             'Example Inc.',
-            $this->subject->getEMailFooter()
+            $this->subject->getEmailFooter()
         );
     }
 
@@ -228,11 +228,11 @@ class OrganizerTest extends TestCase
      */
     public function setEMailFooterSetsEMailFooter()
     {
-        $this->subject->setEMailFooter('Example Inc.');
+        $this->subject->setEmailFooter('Example Inc.');
 
         self::assertEquals(
             'Example Inc.',
-            $this->subject->getEMailFooter()
+            $this->subject->getEmailFooter()
         );
     }
 
@@ -244,7 +244,7 @@ class OrganizerTest extends TestCase
         $this->subject->setData([]);
 
         self::assertFalse(
-            $this->subject->hasEMailFooter()
+            $this->subject->hasEmailFooter()
         );
     }
 
@@ -253,10 +253,10 @@ class OrganizerTest extends TestCase
      */
     public function hasEMailFooterWithNonEmptyEMailFooterReturnsTrue()
     {
-        $this->subject->setEMailFooter('Example Inc.');
+        $this->subject->setEmailFooter('Example Inc.');
 
         self::assertTrue(
-            $this->subject->hasEMailFooter()
+            $this->subject->hasEmailFooter()
         );
     }
 

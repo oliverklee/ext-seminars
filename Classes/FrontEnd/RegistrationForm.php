@@ -1803,7 +1803,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *         TRUE if either additional persons as FE users are disabled or all entered e-mail addresses are non-empty and valid,
      *         FALSE otherwise
      */
-    public function validateAdditionalPersonsEMailAddresses(): bool
+    public function validateAdditionalPersonsEmailAddresses(): bool
     {
         if (!$this->isFormFieldEnabled('attendees_names')) {
             return true;

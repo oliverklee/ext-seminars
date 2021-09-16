@@ -1538,7 +1538,7 @@ class EventEditorTest extends TestCase
         $this->email->expects(self::exactly(0))->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $this->subject->sendEMailToReviewer();
+        $this->subject->sendEmailToReviewer();
     }
 
     /**
@@ -1559,7 +1559,7 @@ class EventEditorTest extends TestCase
         $this->email->expects(self::exactly(0))->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $this->subject->sendEMailToReviewer();
+        $this->subject->sendEmailToReviewer();
     }
 
     /**
@@ -1586,7 +1586,7 @@ class EventEditorTest extends TestCase
         $this->email->expects(self::once())->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $this->subject->sendEMailToReviewer();
+        $this->subject->sendEmailToReviewer();
     }
 
     /**
@@ -1613,7 +1613,7 @@ class EventEditorTest extends TestCase
         $this->email->expects(self::once())->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $this->subject->sendEMailToReviewer();
+        $this->subject->sendEmailToReviewer();
 
         self::assertArrayHasKey(
             'foo@bar.com',
@@ -1645,7 +1645,7 @@ class EventEditorTest extends TestCase
         $this->email->expects(self::once())->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $this->subject->sendEMailToReviewer();
+        $this->subject->sendEmailToReviewer();
 
         self::assertSame(
             $this->getLanguageService()->getLL('publish_event_subject'),
@@ -1680,7 +1680,7 @@ class EventEditorTest extends TestCase
         $this->email->expects(self::once())->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $this->subject->sendEMailToReviewer();
+        $this->subject->sendEmailToReviewer();
 
         self::assertStringContainsString(
             'foo Event',
@@ -1716,7 +1716,7 @@ class EventEditorTest extends TestCase
         $this->email->expects(self::once())->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $this->subject->sendEMailToReviewer();
+        $this->subject->sendEmailToReviewer();
 
         self::assertContains(
             strftime(
@@ -1754,7 +1754,7 @@ class EventEditorTest extends TestCase
         $this->email->expects(self::once())->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $this->subject->sendEMailToReviewer();
+        $this->subject->sendEmailToReviewer();
 
         self::assertStringNotContainsString(
             '###PUBLISH_EVENT_DATE###',
@@ -1790,7 +1790,7 @@ class EventEditorTest extends TestCase
         $this->email->expects(self::once())->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $this->subject->sendEMailToReviewer();
+        $this->subject->sendEmailToReviewer();
 
         self::assertStringNotContainsString(
             'foo event,',
@@ -1824,7 +1824,7 @@ class EventEditorTest extends TestCase
         $this->email->expects(self::once())->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $this->subject->sendEMailToReviewer();
+        $this->subject->sendEmailToReviewer();
 
         self::assertStringNotContainsString(
             '###',
@@ -1859,7 +1859,7 @@ class EventEditorTest extends TestCase
         $this->email->expects(self::once())->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $this->subject->sendEMailToReviewer();
+        $this->subject->sendEmailToReviewer();
 
         self::assertStringContainsString(
             'Foo Description',
@@ -1893,7 +1893,7 @@ class EventEditorTest extends TestCase
         $this->email->expects(self::once())->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $this->subject->sendEMailToReviewer();
+        $this->subject->sendEmailToReviewer();
 
         self::assertStringContainsString(
             'tx_seminars_publication%5Bhash%5D=' . $formData['publication_hash'],
@@ -1930,7 +1930,7 @@ class EventEditorTest extends TestCase
         $this->email->expects(self::once())->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $this->subject->sendEMailToReviewer();
+        $this->subject->sendEmailToReviewer();
 
         self::assertContains(
             $defaultFromName,
@@ -1965,7 +1965,7 @@ class EventEditorTest extends TestCase
         $this->email->expects(self::once())->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $this->subject->sendEMailToReviewer();
+        $this->subject->sendEmailToReviewer();
 
         self::assertSame(
             ['mail@foo.com' => 'Mr. Bar'],
@@ -2000,7 +2000,7 @@ class EventEditorTest extends TestCase
         $this->email->expects(self::once())->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $this->subject->sendEMailToReviewer();
+        $this->subject->sendEmailToReviewer();
 
         self::assertContains(
             'Mr. Bar',
@@ -2035,7 +2035,7 @@ class EventEditorTest extends TestCase
         $this->email->expects(self::once())->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $this->subject->sendEMailToReviewer();
+        $this->subject->sendEmailToReviewer();
 
         self::assertArrayHasKey(
             'mail@foo.com',

@@ -184,7 +184,7 @@ class MailNotifier extends AbstractTask
             $mail->setFrom($sender->getEmailAddress(), $sender->getName());
             $mail->setTo($organizer->getEmailAddress(), $organizer->getName());
             if ($replyTo instanceof \Tx_Seminars_OldModel_Organizer) {
-                $mail->setReplyTo($replyTo->getEMailAddress(), $replyTo->getName());
+                $mail->setReplyTo($replyTo->getEmailAddress(), $replyTo->getName());
             }
             $mail->setSubject($subject);
             $mail->setBody($this->customizeMessage($messageKey, $event, $organizer->getName()));

@@ -1398,7 +1398,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return void
      */
-    public function sendEMailToReviewer()
+    public function sendEmailToReviewer()
     {
         if ($this->publicationHash === '') {
             return;
@@ -1422,7 +1422,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
             $eMail->setFrom($sender->getEmailAddress(), $sender->getName());
             $eMail->setReplyTo($loggedInUser->getEmailAddress(), $loggedInUser->getName());
             $eMail->setSubject($this->translate('publish_event_subject'));
-            $eMail->setBody($this->createEMailContent($event));
+            $eMail->setBody($this->createEmailContent($event));
             $eMail->send();
         }
     }
@@ -1447,7 +1447,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * @return string the e-mail body for the publishing e-mail, will not be
      *                empty
      */
-    private function createEMailContent(\Tx_Seminars_Model_Event $event): string
+    private function createEmailContent(\Tx_Seminars_Model_Event $event): string
     {
         $this->getTemplateCode(true);
         $this->setLabels();
@@ -2071,7 +2071,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $speaker->setPhoneHome(trim(strip_tags($formData[$prefix . 'phone_home'])));
         $speaker->setPhoneMobile(trim(strip_tags($formData[$prefix . 'phone_mobile'])));
         $speaker->setFax(trim(strip_tags($formData[$prefix . 'fax'])));
-        $speaker->setEMailAddress(trim(strip_tags($formData[$prefix . 'email'])));
+        $speaker->setEmailAddress(trim(strip_tags($formData[$prefix . 'email'])));
         $speaker->setCancelationPeriod((int)$formData[$prefix . 'cancelation_period']);
     }
 
@@ -2137,7 +2137,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
             'phone_home' => $speaker->getPhoneHome(),
             'phone_mobile' => $speaker->getPhoneMobile(),
             'fax' => $speaker->getFax(),
-            'email' => $speaker->getEMailAddress(),
+            'email' => $speaker->getEmailAddress(),
             'cancelation_period' => $speaker->getCancelationPeriod(),
         ];
 

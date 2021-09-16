@@ -76,7 +76,7 @@ class Tx_Seminars_Model_Organizer extends AbstractModel implements MailRole, Tit
      *
      * @return string our e-mail address, will not be empty
      */
-    public function getEMailAddress(): string
+    public function getEmailAddress(): string
     {
         return $this->getAsString('email');
     }
@@ -88,7 +88,7 @@ class Tx_Seminars_Model_Organizer extends AbstractModel implements MailRole, Tit
      *
      * @return void
      */
-    public function setEMailAddress(string $eMailAddress)
+    public function setEmailAddress(string $eMailAddress)
     {
         if ($eMailAddress == '') {
             throw new \InvalidArgumentException('The parameter $eMailAddress must not be empty.', 1333296861);
@@ -102,7 +102,7 @@ class Tx_Seminars_Model_Organizer extends AbstractModel implements MailRole, Tit
      *
      * @return string our e-mail footer, may be empty
      */
-    public function getEMailFooter(): string
+    public function getEmailFooter(): string
     {
         return $this->getAsString('email_footer');
     }
@@ -114,7 +114,7 @@ class Tx_Seminars_Model_Organizer extends AbstractModel implements MailRole, Tit
      *
      * @return void
      */
-    public function setEMailFooter(string $eMailFooter)
+    public function setEmailFooter(string $eMailFooter)
     {
         $this->setAsString('email_footer', $eMailFooter);
     }
@@ -124,7 +124,7 @@ class Tx_Seminars_Model_Organizer extends AbstractModel implements MailRole, Tit
      *
      * @return bool TRUE if this organizer has an e-mail footer, FALSE otherwise
      */
-    public function hasEMailFooter(): bool
+    public function hasEmailFooter(): bool
     {
         return $this->hasString('email_footer');
     }

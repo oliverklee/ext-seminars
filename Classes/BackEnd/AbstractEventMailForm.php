@@ -608,8 +608,8 @@ abstract class AbstractEventMailForm
             $salutation->getSalutation($user),
             $this->getPostData('messageBody')
         );
-        $messageFooter = $organizer->hasEMailFooter()
-            ? "\n-- \n" . $organizer->getEMailFooter() : '';
+        $messageFooter = $organizer->hasEmailFooter()
+            ? "\n-- \n" . $organizer->getEmailFooter() : '';
 
         return $messageText . $messageFooter;
     }
