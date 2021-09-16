@@ -1189,7 +1189,7 @@ class RegistrationFormTest extends TestCase
         );
 
         self::assertTrue(
-            $subject->validateAdditionalPersonsEMailAddresses()
+            $subject->validateAdditionalPersonsEmailAddresses()
         );
     }
 
@@ -1214,7 +1214,7 @@ class RegistrationFormTest extends TestCase
         );
 
         self::assertTrue(
-            $subject->validateAdditionalPersonsEMailAddresses()
+            $subject->validateAdditionalPersonsEmailAddresses()
         );
     }
 
@@ -1239,7 +1239,7 @@ class RegistrationFormTest extends TestCase
         );
 
         self::assertTrue(
-            $subject->validateAdditionalPersonsEMailAddresses()
+            $subject->validateAdditionalPersonsEmailAddresses()
         );
     }
 
@@ -1266,7 +1266,7 @@ class RegistrationFormTest extends TestCase
         );
 
         self::assertTrue(
-            $subject->validateAdditionalPersonsEMailAddresses()
+            $subject->validateAdditionalPersonsEmailAddresses()
         );
     }
 
@@ -1293,7 +1293,7 @@ class RegistrationFormTest extends TestCase
         );
 
         self::assertFalse(
-            $subject->validateAdditionalPersonsEMailAddresses()
+            $subject->validateAdditionalPersonsEmailAddresses()
         );
     }
 
@@ -1320,7 +1320,7 @@ class RegistrationFormTest extends TestCase
         );
 
         self::assertFalse(
-            $subject->validateAdditionalPersonsEMailAddresses()
+            $subject->validateAdditionalPersonsEmailAddresses()
         );
     }
 
@@ -1347,7 +1347,7 @@ class RegistrationFormTest extends TestCase
         );
 
         self::assertFalse(
-            $subject->validateAdditionalPersonsEMailAddresses()
+            $subject->validateAdditionalPersonsEmailAddresses()
         );
     }
 
@@ -1374,7 +1374,7 @@ class RegistrationFormTest extends TestCase
         );
 
         self::assertFalse(
-            $subject->validateAdditionalPersonsEMailAddresses()
+            $subject->validateAdditionalPersonsEmailAddresses()
         );
     }
 

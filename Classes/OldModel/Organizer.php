@@ -59,7 +59,7 @@ class Tx_Seminars_OldModel_Organizer extends AbstractModel implements MailRole
      * @return string the organizer's e-mail address, will only be empty if
      *                there is an error
      */
-    public function getEMailAddress(): string
+    public function getEmailAddress(): string
     {
         return $this->getRecordPropertyString('email');
     }

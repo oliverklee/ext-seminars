@@ -348,7 +348,7 @@ class Tx_Seminars_Model_Speaker extends AbstractModel implements MailRole
      *
      * @return string our e-mail address, will not be empty
      */
-    public function getEMailAddress(): string
+    public function getEmailAddress(): string
     {
         return $this->getAsString('email');
     }
@@ -360,7 +360,7 @@ class Tx_Seminars_Model_Speaker extends AbstractModel implements MailRole
      *
      * @return void
      */
-    public function setEMailAddress(string $eMailAddress)
+    public function setEmailAddress(string $eMailAddress)
     {
         $this->setAsString('email', $eMailAddress);
     }
@@ -368,10 +368,9 @@ class Tx_Seminars_Model_Speaker extends AbstractModel implements MailRole
     /**
      * Returns whether this speaker has an e-mail address.
      *
-     * @return bool TRUE if this speaker has an e-mail address, FALSE
-     *                 otherwise
+     * @return bool whether this speaker has an e-mail address
      */
-    public function hasEMailAddress(): bool
+    public function hasEmailAddress(): bool
     {
         return $this->hasString('email');
     }

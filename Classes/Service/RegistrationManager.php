@@ -842,7 +842,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
 
         $organizer = $event->getFirstOrganizer();
         $content .= 'ORGANIZER;CN="' . addcslashes($organizer->getTitle(), '"') .
-            '":mailto:' . $organizer->getEMailAddress() . "\r\n";
+            '":mailto:' . $organizer->getEmailAddress() . "\r\n";
         $content .= "END:VEVENT\r\nEND:VCALENDAR";
         $calendarEntry->setContent($content);
 
@@ -1126,7 +1126,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         $this->setMarker('html_mail_charset', 'utf-8');
         $this->hideSubparts($this->getConfValueString('hideFieldsInThankYouMail'), $wrapperPrefix);
 
-        $this->setEMailIntroduction($helloSubjectPrefix, $registration);
+        $this->setEmailIntroduction($helloSubjectPrefix, $registration);
         $event = $registration->getSeminarObject();
         $this->fillOrHideUnregistrationNotice($helloSubjectPrefix, $registration, $useHtml);
 
@@ -1415,7 +1415,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      *
      * @return void
      */
-    private function setEMailIntroduction(string $helloSubjectPrefix, \Tx_Seminars_OldModel_Registration $registration)
+    private function setEmailIntroduction(string $helloSubjectPrefix, \Tx_Seminars_OldModel_Registration $registration)
     {
         /** @var Salutation $salutation */
         $salutation = GeneralUtility::makeInstance(Salutation::class);

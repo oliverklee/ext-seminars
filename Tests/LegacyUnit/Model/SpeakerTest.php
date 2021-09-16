@@ -640,7 +640,7 @@ class SpeakerTest extends TestCase
      */
     public function setEMailAddressSetsEMailAddress()
     {
-        $this->subject->setEMailAddress('mail@example.com');
+        $this->subject->setEmailAddress('mail@example.com');
 
         self::assertEquals(
             'mail@example.com',
@@ -656,7 +656,7 @@ class SpeakerTest extends TestCase
         $this->subject->setData([]);
 
         self::assertFalse(
-            $this->subject->hasEMailAddress()
+            $this->subject->hasEmailAddress()
         );
     }
 
@@ -665,10 +665,10 @@ class SpeakerTest extends TestCase
      */
     public function hasEMailAddressWithEMailAddressReturnsTrue()
     {
-        $this->subject->setEMailAddress('mail@example.com');
+        $this->subject->setEmailAddress('mail@example.com');
 
         self::assertTrue(
-            $this->subject->hasEMailAddress()
+            $this->subject->hasEmailAddress()
         );
     }
 

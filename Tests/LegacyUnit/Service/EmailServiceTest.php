@@ -445,7 +445,7 @@ final class EmailServiceTest extends TestCase
     {
         $this->addMockedInstance(MailMessage::class, $this->email);
 
-        $this->organizer->setEMailFooter('');
+        $this->organizer->setEmailFooter('');
 
         $this->email->expects(self::once())->method('send');
         $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
@@ -467,7 +467,7 @@ final class EmailServiceTest extends TestCase
         $this->subject->sendEmailToAttendees($this->event, 'Bonjour!', 'Hello!');
 
         self::assertStringContainsString(
-            "\n-- \n" . $this->organizer->getEMailFooter(),
+            "\n-- \n" . $this->organizer->getEmailFooter(),
             $this->email->getBody()
         );
     }
