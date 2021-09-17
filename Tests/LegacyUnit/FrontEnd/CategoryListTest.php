@@ -67,7 +67,10 @@ final class CategoryListTest extends TestCase
 
     // Tests for render
 
-    public function testRenderCreatesCategoryListContainingTwoCategoryTitles()
+    /**
+     * @test
+     */
+    public function renderCreatesCategoryListContainingTwoCategoryTitles()
     {
         $categoryUid1 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
@@ -108,7 +111,10 @@ final class CategoryListTest extends TestCase
         );
     }
 
-    public function testRenderCreatesCategoryListWhichIsSortedAlphabetically()
+    /**
+     * @test
+     */
+    public function renderCreatesCategoryListWhichIsSortedAlphabetically()
     {
         $categoryUid1 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
@@ -144,7 +150,10 @@ final class CategoryListTest extends TestCase
         );
     }
 
-    public function testRenderCreatesCategoryListByUsingRecursion()
+    /**
+     * @test
+     */
+    public function renderCreatesCategoryListByUsingRecursion()
     {
         $systemSubFolderUid = $this->testingFramework->createSystemFolder(
             $this->systemFolderPid
@@ -174,7 +183,10 @@ final class CategoryListTest extends TestCase
         );
     }
 
-    public function testRenderIgnoresOtherSysFolders()
+    /**
+     * @test
+     */
+    public function renderIgnoresOtherSysFolders()
     {
         $otherSystemFolderUid = $this->testingFramework->createSystemFolder();
         $categoryUid = $this->testingFramework->createRecord(
@@ -202,7 +214,10 @@ final class CategoryListTest extends TestCase
         );
     }
 
-    public function testRenderCanReadFromAllSystemFolders()
+    /**
+     * @test
+     */
+    public function renderCanReadFromAllSystemFolders()
     {
         $this->subject->setConfigurationValue('pages', '');
 
@@ -232,7 +247,10 @@ final class CategoryListTest extends TestCase
         );
     }
 
-    public function testRenderIgnoresCanceledEvents()
+    /**
+     * @test
+     */
+    public function renderIgnoresCanceledEvents()
     {
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
@@ -260,7 +278,10 @@ final class CategoryListTest extends TestCase
         );
     }
 
-    public function testRenderFindsConfirmedEvents()
+    /**
+     * @test
+     */
+    public function renderFindsConfirmedEvents()
     {
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
@@ -288,7 +309,10 @@ final class CategoryListTest extends TestCase
         );
     }
 
-    public function testRenderCreatesCategoryListOfEventsFromSelectedTimeFrames()
+    /**
+     * @test
+     */
+    public function renderCreatesCategoryListOfEventsFromSelectedTimeFrames()
     {
         $this->subject->setConfigurationValue(
             'timeframeInList',
@@ -321,7 +345,10 @@ final class CategoryListTest extends TestCase
         );
     }
 
-    public function testRenderIgnoresEventsFromDeselectedTimeFrames()
+    /**
+     * @test
+     */
+    public function renderIgnoresEventsFromDeselectedTimeFrames()
     {
         $this->subject->setConfigurationValue(
             'timeframeInList',
@@ -354,7 +381,10 @@ final class CategoryListTest extends TestCase
         );
     }
 
-    public function testRenderCreatesCategoryListContainingLinksToListPageLimitedToCategory()
+    /**
+     * @test
+     */
+    public function renderCreatesCategoryListContainingLinksToListPageLimitedToCategory()
     {
         $this->subject->setConfigurationValue(
             'listPID',
@@ -388,7 +418,10 @@ final class CategoryListTest extends TestCase
 
     // Tests concerning createCategoryList
 
-    public function testCreateCategoryListWithNoGivenCategoriesReturnsEmptyString()
+    /**
+     * @test
+     */
+    public function createCategoryListWithNoGivenCategoriesReturnsEmptyString()
     {
         self::assertEquals(
             '',
@@ -396,7 +429,10 @@ final class CategoryListTest extends TestCase
         );
     }
 
-    public function testCreateCategoryListWithConfigurationValueSetToTextReturnsCategoryTitle()
+    /**
+     * @test
+     */
+    public function createCategoryListWithConfigurationValueSetToTextReturnsCategoryTitle()
     {
         $this->subject->setConfigurationValue('categoriesInListView', 'text');
         $singleCategory =
@@ -413,7 +449,10 @@ final class CategoryListTest extends TestCase
         );
     }
 
-    public function testCreateCategoryListWithConfigurationValueSetToTextDoesNotReturnIcon()
+    /**
+     * @test
+     */
+    public function createCategoryListWithConfigurationValueSetToTextDoesNotReturnIcon()
     {
         $this->subject->setConfigurationValue('categoriesInListView', 'text');
         $singleCategory =
@@ -495,7 +534,10 @@ final class CategoryListTest extends TestCase
         );
     }
 
-    public function testCreateCategoryListWithConfigurationValueSetToTextCanReturnMultipleCategoryTitles()
+    /**
+     * @test
+     */
+    public function createCategoryListWithConfigurationValueSetToTextCanReturnMultipleCategoryTitles()
     {
         $this->subject->setConfigurationValue('categoriesInListView', 'text');
         $multipleCategories =
@@ -516,7 +558,10 @@ final class CategoryListTest extends TestCase
         );
     }
 
-    public function testCreateCategoryForCategoryWithoutImageAndListWithConfigurationValueSetToIconUsesCommasAsSeparators()
+    /**
+     * @test
+     */
+    public function createCategoryForCategoryWithoutImageAndListWithConfigurationValueSetToIconUsesCommasAsSeparators()
     {
         $this->subject->setConfigurationValue('categoriesInListView', 'icon');
         $multipleCategories =
@@ -537,7 +582,10 @@ final class CategoryListTest extends TestCase
         );
     }
 
-    public function testCreateCategoryListWithConfigurationValueSetToTextUsesCommasAsSeparators()
+    /**
+     * @test
+     */
+    public function createCategoryListWithConfigurationValueSetToTextUsesCommasAsSeparators()
     {
         $this->subject->setConfigurationValue('categoriesInListView', 'text');
         $multipleCategories =
@@ -558,7 +606,10 @@ final class CategoryListTest extends TestCase
         );
     }
 
-    public function testCreateCategoryListWithConfigurationValueSetToBothUsesCommasAsSeparators()
+    /**
+     * @test
+     */
+    public function createCategoryListWithConfigurationValueSetToBothUsesCommasAsSeparators()
     {
         $this->subject->setConfigurationValue('categoriesInListView', 'both');
         $this->testingFramework->createDummyFile('foo.gif', base64_decode(self::BLANK_GIF, true));

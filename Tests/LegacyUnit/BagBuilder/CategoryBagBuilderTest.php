@@ -37,12 +37,18 @@ final class CategoryBagBuilderTest extends TestCase
     // Tests for the basic builder functions.
     ///////////////////////////////////////////
 
-    public function testBuilderBuildsABag()
+    /**
+     * @test
+     */
+    public function builderBuildsABag()
     {
         self::assertInstanceOf(AbstractBag::class, $this->subject->build());
     }
 
-    public function testBuiltBagIsSortedAscendingByTitle()
+    /**
+     * @test
+     */
+    public function builtBagIsSortedAscendingByTitle()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_categories',
@@ -73,7 +79,10 @@ final class CategoryBagBuilderTest extends TestCase
     // Test for limiting the bag to categories of certain events.
     ///////////////////////////////////////////////////////////////
 
-    public function testSkippingLimitToEventResultsInAllCategories()
+    /**
+     * @test
+     */
+    public function skippingLimitToEventResultsInAllCategories()
     {
         $this->testingFramework->createRecord('tx_seminars_categories');
 
@@ -96,7 +105,10 @@ final class CategoryBagBuilderTest extends TestCase
         );
     }
 
-    public function testToLimitEmptyEventUidsResultsInAllCategories()
+    /**
+     * @test
+     */
+    public function toLimitEmptyEventUidsResultsInAllCategories()
     {
         $this->testingFramework->createRecord('tx_seminars_categories');
 
@@ -121,7 +133,10 @@ final class CategoryBagBuilderTest extends TestCase
         );
     }
 
-    public function testLimitToZeroEventUidFails()
+    /**
+     * @test
+     */
+    public function limitToZeroEventUidFails()
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -132,7 +147,10 @@ final class CategoryBagBuilderTest extends TestCase
         $this->subject->limitToEvents('0');
     }
 
-    public function testLimitToNegativeEventUidFails()
+    /**
+     * @test
+     */
+    public function limitToNegativeEventUidFails()
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -143,7 +161,10 @@ final class CategoryBagBuilderTest extends TestCase
         $this->subject->limitToEvents('-2');
     }
 
-    public function testLimitToInvalidEventUidAtTheStartFails()
+    /**
+     * @test
+     */
+    public function limitToInvalidEventUidAtTheStartFails()
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -154,7 +175,10 @@ final class CategoryBagBuilderTest extends TestCase
         $this->subject->limitToEvents('0,1');
     }
 
-    public function testLimitToInvalidEventUidAtTheEndFails()
+    /**
+     * @test
+     */
+    public function limitToInvalidEventUidAtTheEndFails()
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -165,7 +189,10 @@ final class CategoryBagBuilderTest extends TestCase
         $this->subject->limitToEvents('1,0');
     }
 
-    public function testLimitToInvalidEventUidInTheMiddleFails()
+    /**
+     * @test
+     */
+    public function limitToInvalidEventUidInTheMiddleFails()
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -176,7 +203,10 @@ final class CategoryBagBuilderTest extends TestCase
         $this->subject->limitToEvents('1,0,2');
     }
 
-    public function testLimitToEventsCanResultInOneCategory()
+    /**
+     * @test
+     */
+    public function limitToEventsCanResultInOneCategory()
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -199,7 +229,10 @@ final class CategoryBagBuilderTest extends TestCase
         );
     }
 
-    public function testLimitToEventsCanResultInTwoCategoriesForOneEvent()
+    /**
+     * @test
+     */
+    public function limitToEventsCanResultInTwoCategoriesForOneEvent()
     {
         $this->testingFramework->createRecord('tx_seminars_categories');
 
@@ -234,7 +267,10 @@ final class CategoryBagBuilderTest extends TestCase
         );
     }
 
-    public function testLimitToEventsCanResultInTwoCategoriesForTwoEvents()
+    /**
+     * @test
+     */
+    public function limitToEventsCanResultInTwoCategoriesForTwoEvents()
     {
         $this->testingFramework->createRecord('tx_seminars_categories');
 
@@ -271,7 +307,10 @@ final class CategoryBagBuilderTest extends TestCase
         );
     }
 
-    public function testLimitToEventsWillExcludeUnassignedCategories()
+    /**
+     * @test
+     */
+    public function limitToEventsWillExcludeUnassignedCategories()
     {
         $this->testingFramework->createRecord('tx_seminars_categories');
 
@@ -299,7 +338,10 @@ final class CategoryBagBuilderTest extends TestCase
         );
     }
 
-    public function testLimitToEventsWillExcludeCategoriesOfOtherEvents()
+    /**
+     * @test
+     */
+    public function limitToEventsWillExcludeCategoriesOfOtherEvents()
     {
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -338,7 +380,10 @@ final class CategoryBagBuilderTest extends TestCase
         );
     }
 
-    public function testLimitToEventsResultsInAnEmptyBagIfThereAreNoMatches()
+    /**
+     * @test
+     */
+    public function limitToEventsResultsInAnEmptyBagIfThereAreNoMatches()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_categories'
@@ -372,7 +417,10 @@ final class CategoryBagBuilderTest extends TestCase
     // Tests for sortByRelationOrder
     //////////////////////////////////
 
-    public function testSortByRelationOrderThrowsExceptionIfLimitToEventsHasNotBeenCalledBefore()
+    /**
+     * @test
+     */
+    public function sortByRelationOrderThrowsExceptionIfLimitToEventsHasNotBeenCalledBefore()
     {
         $this->expectException(
             \BadMethodCallException::class

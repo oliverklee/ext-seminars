@@ -361,14 +361,20 @@ final class DefaultControllerTest extends TestCase
     // Tests for the utility functions.
     /////////////////////////////////////
 
-    public function testAddTargetGroupRelationReturnsUid()
+    /**
+     * @test
+     */
+    public function addTargetGroupRelationReturnsUid()
     {
         self::assertTrue(
             $this->addTargetGroupRelation() > 0
         );
     }
 
-    public function testAddTargetGroupRelationCreatesNewUids()
+    /**
+     * @test
+     */
+    public function addTargetGroupRelationCreatesNewUids()
     {
         $this->addTargetGroupRelation();
         self::assertNotEquals(
@@ -377,7 +383,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testAddTargetGroupRelationIncreasesTheNumberOfTargetGroups()
+    /**
+     * @test
+     */
+    public function addTargetGroupRelationIncreasesTheNumberOfTargetGroups()
     {
         self::assertEquals(
             0,
@@ -397,7 +406,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testAddTargetGroupRelationCreatesRelations()
+    /**
+     * @test
+     */
+    public function addTargetGroupRelationCreatesRelations()
     {
         $connection = $this->connectionPool->getConnectionForTable('tx_seminars_seminars_target_groups_mm');
 
@@ -419,7 +431,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testCreateLogInAndAddFeUserAsVipCreatesFeUser()
+    /**
+     * @test
+     */
+    public function createLogInAndAddFeUserAsVipCreatesFeUser()
     {
         $connection = $this->connectionPool->getConnectionForTable('fe_users');
 
@@ -431,7 +446,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testCreateLogInAndAddFeUserAsVipLogsInFeUser()
+    /**
+     * @test
+     */
+    public function createLogInAndAddFeUserAsVipLogsInFeUser()
     {
         $this->createLogInAndAddFeUserAsVip();
 
@@ -440,7 +458,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testCreateLogInAndAddFeUserAsVipAddsUserAsVip()
+    /**
+     * @test
+     */
+    public function createLogInAndAddFeUserAsVipAddsUserAsVip()
     {
         $connection = $this->connectionPool->getConnectionForTable('tx_seminars_seminars');
 
@@ -452,14 +473,20 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testAddCategoryRelationReturnsPositiveUid()
+    /**
+     * @test
+     */
+    public function addCategoryRelationReturnsPositiveUid()
     {
         self::assertTrue(
             $this->addCategoryRelation() > 0
         );
     }
 
-    public function testAddCategoryRelationCreatesNewUids()
+    /**
+     * @test
+     */
+    public function addCategoryRelationCreatesNewUids()
     {
         self::assertNotEquals(
             $this->addCategoryRelation(),
@@ -467,7 +494,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testAddCategoryRelationIncreasesTheNumberOfCategories()
+    /**
+     * @test
+     */
+    public function addCategoryRelationIncreasesTheNumberOfCategories()
     {
         self::assertEquals(
             0,
@@ -487,7 +517,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testAddCategoryRelationCreatesRelations()
+    /**
+     * @test
+     */
+    public function addCategoryRelationCreatesRelations()
     {
         $connection = $this->connectionPool->getConnectionForTable('tx_seminars_seminars_categories_mm');
 
@@ -597,7 +630,10 @@ final class DefaultControllerTest extends TestCase
     // Test concerning the base functionality.
     ////////////////////////////////////////////
 
-    public function testPi1MustBeInitialized()
+    /**
+     * @test
+     */
+    public function pi1MustBeInitialized()
     {
         self::assertNotNull(
             $this->subject
@@ -607,7 +643,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testGetSeminarReturnsSeminarIfSet()
+    /**
+     * @test
+     */
+    public function getSeminarReturnsSeminarIfSet()
     {
         $this->subject->createSeminar($this->seminarUid);
 
@@ -617,7 +656,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testGetRegistrationReturnsRegistrationIfSet()
+    /**
+     * @test
+     */
+    public function getRegistrationReturnsRegistrationIfSet()
     {
         $this->subject->createRegistration(
             $this->testingFramework->createRecord(
@@ -632,7 +674,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testGetRegistrationManagerReturnsRegistrationManager()
+    /**
+     * @test
+     */
+    public function getRegistrationManagerReturnsRegistrationManager()
     {
         self::assertInstanceOf(
             \Tx_Seminars_Service_RegistrationManager::class,
@@ -826,7 +871,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testOtherDatesListInSingleViewDoesNotContainSingleEventRecordWithTopicSet()
+    /**
+     * @test
+     */
+    public function otherDatesListInSingleViewDoesNotContainSingleEventRecordWithTopicSet()
     {
         $this->subject->setConfigurationValue(
             'detailPID',
@@ -1218,7 +1266,10 @@ final class DefaultControllerTest extends TestCase
 
     // Tests concerning attached files in the single view
 
-    public function testSingleViewWithOneAttachedFileAndDisabledLimitFileDownloadToAttendeesContainsFileNameOfFile()
+    /**
+     * @test
+     */
+    public function singleViewWithOneAttachedFileAndDisabledLimitFileDownloadToAttendeesContainsFileNameOfFile()
     {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->setConfigurationValue('limitFileDownloadToAttendees', 0);
@@ -1293,7 +1344,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testSingleViewWithTwoAttachedFilesAndDisabledLimitFileDownloadToAttendeesContainsBothFileNames()
+    /**
+     * @test
+     */
+    public function singleViewWithTwoAttachedFilesAndDisabledLimitFileDownloadToAttendeesContainsBothFileNames()
     {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->setConfigurationValue('limitFileDownloadToAttendees', 0);
@@ -1324,7 +1378,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testSingleViewWithTwoAttachedFilesAndDisabledLimitFileDownloadToAttendeesContainsTwoAttachedFilesWithSortingSetInBackEnd()
+    /**
+     * @test
+     */
+    public function singleViewWithTwoAttachedFilesAndDisabledLimitFileDownloadToAttendeesContainsTwoAttachedFilesWithSortingSetInBackEnd()
     {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->setConfigurationValue('limitFileDownloadToAttendees', 0);
@@ -1351,7 +1408,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testSingleViewWithOneAttachedFileAndLoggedInFeUserAndRegisteredContainsFileNameOfFile()
+    /**
+     * @test
+     */
+    public function singleViewWithOneAttachedFileAndLoggedInFeUserAndRegisteredContainsFileNameOfFile()
     {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->setConfigurationValue('limitFileDownloadToAttendees', 1);
@@ -1428,7 +1488,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testSingleViewWithTwoAttachedFilesAndLoggedInFeUserAndRegisteredContainsBothFileNames()
+    /**
+     * @test
+     */
+    public function singleViewWithTwoAttachedFilesAndLoggedInFeUserAndRegisteredContainsBothFileNames()
     {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->setConfigurationValue('limitFileDownloadToAttendees', 1);
@@ -1460,7 +1523,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testSingleViewWithTwoAttachedFilesAndLoggedInFeUserAndRegisteredContainsTwoAttachedFilesWithSortingSetInBackEnd()
+    /**
+     * @test
+     */
+    public function singleViewWithTwoAttachedFilesAndLoggedInFeUserAndRegisteredContainsTwoAttachedFilesWithSortingSetInBackEnd()
     {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->setConfigurationValue('limitFileDownloadToAttendees', 1);
@@ -1516,7 +1582,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testAttachedFilesSubpartIsHiddenInSingleViewWithoutAttachedFilesAndWithLoggedInAndRegisteredFeUser()
+    /**
+     * @test
+     */
+    public function attachedFilesSubpartIsHiddenInSingleViewWithoutAttachedFilesAndWithLoggedInAndRegisteredFeUser()
     {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->setConfigurationValue('limitFileDownloadToAttendees', 1);
@@ -1529,7 +1598,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testAttachedFilesSubpartIsHiddenInSingleViewWithAttachedFilesAndLoggedInAndUnregisteredFeUser()
+    /**
+     * @test
+     */
+    public function attachedFilesSubpartIsHiddenInSingleViewWithAttachedFilesAndLoggedInAndUnregisteredFeUser()
     {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->setConfigurationValue('limitFileDownloadToAttendees', 1);
@@ -1552,7 +1624,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testAttachedFilesSubpartIsHiddenInSingleViewWithAttachedFilesAndNoLoggedInFeUser()
+    /**
+     * @test
+     */
+    public function attachedFilesSubpartIsHiddenInSingleViewWithAttachedFilesAndNoLoggedInFeUser()
     {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->setConfigurationValue('limitFileDownloadToAttendees', 1);
@@ -1573,7 +1648,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testAttachedFilesSubpartIsVisibleInSingleViewWithAttachedFilesAndLoggedInAndRegisteredFeUser()
+    /**
+     * @test
+     */
+    public function attachedFilesSubpartIsVisibleInSingleViewWithAttachedFilesAndLoggedInAndRegisteredFeUser()
     {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->setConfigurationValue('limitFileDownloadToAttendees', 1);
@@ -1596,7 +1674,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testAttachedFilesSubpartIsVisibleInSingleViewWithAttachedFilesAndDisabledLimitFileDownloadToAttendees()
+    /**
+     * @test
+     */
+    public function attachedFilesSubpartIsVisibleInSingleViewWithAttachedFilesAndDisabledLimitFileDownloadToAttendees()
     {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->setConfigurationValue('limitFileDownloadToAttendees', 0);
@@ -1618,7 +1699,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testAttachedFilesSubpartIsHiddenInSingleViewWithoutAttachedFilesAndWithDisabledLimitFileDownloadToAttendees()
+    /**
+     * @test
+     */
+    public function attachedFilesSubpartIsHiddenInSingleViewWithoutAttachedFilesAndWithDisabledLimitFileDownloadToAttendees()
     {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->setConfigurationValue('limitFileDownloadToAttendees', 0);
@@ -1783,7 +1867,10 @@ final class DefaultControllerTest extends TestCase
     // Tests concerning time slots in the single view.
     ////////////////////////////////////////////////////
 
-    public function testTimeSlotsSubpartIsHiddenInSingleViewWithoutTimeSlots()
+    /**
+     * @test
+     */
+    public function timeSlotsSubpartIsHiddenInSingleViewWithoutTimeSlots()
     {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
@@ -1793,7 +1880,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testTimeSlotsSubpartIsVisibleInSingleViewWithOneTimeSlot()
+    /**
+     * @test
+     */
+    public function timeSlotsSubpartIsVisibleInSingleViewWithOneTimeSlot()
     {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->testingFramework->createRecord(
@@ -1868,7 +1958,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testTimeSlotsSubpartIsVisibleInSingleViewWithTwoTimeSlots()
+    /**
+     * @test
+     */
+    public function timeSlotsSubpartIsVisibleInSingleViewWithTwoTimeSlots()
     {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->testingFramework->createRecord(
@@ -1892,7 +1985,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testSingleViewCanContainTwoTimeSlotRooms()
+    /**
+     * @test
+     */
+    public function singleViewCanContainTwoTimeSlotRooms()
     {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->testingFramework->createRecord(
@@ -1929,7 +2025,10 @@ final class DefaultControllerTest extends TestCase
 
     // Tests concerning target groups in the single view.
 
-    public function testTargetGroupsSubpartIsHiddenInSingleViewWithoutTargetGroups()
+    /**
+     * @test
+     */
+    public function targetGroupsSubpartIsHiddenInSingleViewWithoutTargetGroups()
     {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
@@ -1939,7 +2038,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testTargetGroupsSubpartIsVisibleInSingleViewWithOneTargetGroup()
+    /**
+     * @test
+     */
+    public function targetGroupsSubpartIsVisibleInSingleViewWithOneTargetGroup()
     {
         $this->addTargetGroupRelation();
 
@@ -1969,7 +2071,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testTargetGroupsSubpartIsVisibleInSingleViewWithTwoTargetGroups()
+    /**
+     * @test
+     */
+    public function targetGroupsSubpartIsVisibleInSingleViewWithTwoTargetGroups()
     {
         $this->addTargetGroupRelation(
             ['title' => 'group 1']
@@ -1986,7 +2091,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testSingleViewCanContainTwoTargetGroupTitles()
+    /**
+     * @test
+     */
+    public function singleViewCanContainTwoTargetGroupTitles()
     {
         $this->addTargetGroupRelation(
             ['title' => 'group 1']
@@ -2013,7 +2121,10 @@ final class DefaultControllerTest extends TestCase
     // Tests concerning requirements in the single view.
     ///////////////////////////////////////////////////////
 
-    public function testSingleViewForSeminarWithoutRequirementsHidesRequirementsSubpart()
+    /**
+     * @test
+     */
+    public function singleViewForSeminarWithoutRequirementsHidesRequirementsSubpart()
     {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
@@ -2023,7 +2134,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testSingleViewForSeminarWithOneRequirementDisplaysRequirementsSubpart()
+    /**
+     * @test
+     */
+    public function singleViewForSeminarWithOneRequirementDisplaysRequirementsSubpart()
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -2049,7 +2163,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testSingleViewForSeminarWithOneRequirementLinksRequirementToItsSingleView()
+    /**
+     * @test
+     */
+    public function singleViewForSeminarWithOneRequirementLinksRequirementToItsSingleView()
     {
         $this->subject->setConfigurationValue(
             'detailPID',
@@ -2086,7 +2203,10 @@ final class DefaultControllerTest extends TestCase
     // Tests concerning dependencies in the single view.
     ///////////////////////////////////////////////////////
 
-    public function testSingleViewForSeminarWithoutDependenciesHidesDependenciesSubpart()
+    /**
+     * @test
+     */
+    public function singleViewForSeminarWithoutDependenciesHidesDependenciesSubpart()
     {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
@@ -2096,7 +2216,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testSingleViewForSeminarWithOneDependencyDisplaysDependenciesSubpart()
+    /**
+     * @test
+     */
+    public function singleViewForSeminarWithOneDependencyDisplaysDependenciesSubpart()
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -2124,7 +2247,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testSingleViewForSeminarWithOneDependenciesShowsTitleOfDependency()
+    /**
+     * @test
+     */
+    public function singleViewForSeminarWithOneDependenciesShowsTitleOfDependency()
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -2270,7 +2396,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testSingleViewNotContainsColonBeforeEventTitleIfEventHasNoEventType()
+    /**
+     * @test
+     */
+    public function singleViewNotContainsColonBeforeEventTitleIfEventHasNoEventType()
     {
         $this->subject->setConfigurationValue('what_to_display', 'single_view');
         $this->subject->piVars['showUid'] = $this->seminarUid;
@@ -2302,7 +2431,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testSingleViewCanContainTwoCategories()
+    /**
+     * @test
+     */
+    public function singleViewCanContainTwoCategories()
     {
         $this->addCategoryRelation(
             ['title' => 'category 1']
@@ -2325,7 +2457,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testSingleViewShowsCategoryIcon()
+    /**
+     * @test
+     */
+    public function singleViewShowsCategoryIcon()
     {
         $this->testingFramework->createDummyFile('foo_test.gif', base64_decode(self::BLANK_GIF, true));
         $this->addCategoryRelation(
@@ -2348,7 +2483,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testSingleViewShowsMultipleCategoriesWithIcons()
+    /**
+     * @test
+     */
+    public function singleViewShowsMultipleCategoriesWithIcons()
     {
         $this->testingFramework->createDummyFile('foo_test.gif', base64_decode(self::BLANK_GIF, true));
         $this->testingFramework->createDummyFile('foo_test2.gif', base64_decode(self::BLANK_GIF, true));
@@ -2383,7 +2521,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testSingleViewForCategoryWithoutIconDoesNotShowCategoryIcon()
+    /**
+     * @test
+     */
+    public function singleViewForCategoryWithoutIconDoesNotShowCategoryIcon()
     {
         $this->addCategoryRelation(
             ['title' => 'category 1']
@@ -2402,7 +2543,10 @@ final class DefaultControllerTest extends TestCase
     // Tests concerning the expiry in the single view
     ///////////////////////////////////////////////////
 
-    public function testSingleViewForDateRecordWithExpiryContainsExpiryDate()
+    /**
+     * @test
+     */
+    public function singleViewForDateRecordWithExpiryContainsExpiryDate()
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -2422,7 +2566,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testSingleViewForDateRecordWithoutExpiryNotContainsExpiryLabel()
+    /**
+     * @test
+     */
+    public function singleViewForDateRecordWithoutExpiryNotContainsExpiryLabel()
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -2984,7 +3131,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testListViewDisplaysSeminarImage()
+    /**
+     * @test
+     */
+    public function listViewDisplaysSeminarImage()
     {
         $this->testingFramework->createDummyFile('test_foo.gif', base64_decode(self::BLANK_GIF, true));
 
@@ -3002,7 +3152,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testListViewForSeminarWithoutImageDoesNotDisplayImage()
+    /**
+     * @test
+     */
+    public function listViewForSeminarWithoutImageDoesNotDisplayImage()
     {
         self::assertStringNotContainsString(
             '<img src="',
@@ -3010,7 +3163,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testListViewForSeminarWithoutImageRemovesImageMarker()
+    /**
+     * @test
+     */
+    public function listViewForSeminarWithoutImageRemovesImageMarker()
     {
         self::assertStringNotContainsString(
             '###IMAGE###',
@@ -3066,7 +3222,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testListViewNotContainsExpiryLabel()
+    /**
+     * @test
+     */
+    public function listViewNotContainsExpiryLabel()
     {
         self::assertStringNotContainsString(
             $this->getLanguageService()->getLL('label_expiry'),
@@ -3139,7 +3298,10 @@ final class DefaultControllerTest extends TestCase
     // Tests concerning the result counter in the list view
     /////////////////////////////////////////////////////////
 
-    public function testResultCounterIsZeroForNoResults()
+    /**
+     * @test
+     */
+    public function resultCounterIsZeroForNoResults()
     {
         $this->subject->setConfigurationValue(
             'pidList',
@@ -3153,7 +3315,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testResultCounterIsOneForOneResult()
+    /**
+     * @test
+     */
+    public function resultCounterIsOneForOneResult()
     {
         $this->subject->main('', []);
 
@@ -3163,7 +3328,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testResultCounterIsTwoForTwoResultsOnOnePage()
+    /**
+     * @test
+     */
+    public function resultCounterIsTwoForTwoResultsOnOnePage()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3180,7 +3348,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testResultCounterIsSixForSixResultsOnTwoPages()
+    /**
+     * @test
+     */
+    public function resultCounterIsSixForSixResultsOnTwoPages()
     {
         for ($i = 0; $i < 5; $i++) {
             $this->testingFramework->createRecord(
@@ -3203,7 +3374,10 @@ final class DefaultControllerTest extends TestCase
     // Tests concerning the list view, filtered by category.
     //////////////////////////////////////////////////////////
 
-    public function testListViewWithCategoryContainsEventsWithSelectedAndOtherCategory()
+    /**
+     * @test
+     */
+    public function listViewWithCategoryContainsEventsWithSelectedAndOtherCategory()
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3966,7 +4140,10 @@ final class DefaultControllerTest extends TestCase
     // Tests concerning the sorting in the list view.
     ///////////////////////////////////////////////////
 
-    public function testListViewCanBeSortedByTitleAscending()
+    /**
+     * @test
+     */
+    public function listViewCanBeSortedByTitleAscending()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3991,7 +4168,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testListViewCanBeSortedByTitleDescending()
+    /**
+     * @test
+     */
+    public function listViewCanBeSortedByTitleDescending()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -4031,7 +4211,10 @@ final class DefaultControllerTest extends TestCase
         $subject->main('', []);
     }
 
-    public function testListViewCanBeSortedByTitleAscendingWithinOneCategory()
+    /**
+     * @test
+     */
+    public function listViewCanBeSortedByTitleAscendingWithinOneCategory()
     {
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
@@ -4077,7 +4260,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testListViewCanBeSortedByTitleDescendingWithinOneCategory()
+    /**
+     * @test
+     */
+    public function listViewCanBeSortedByTitleDescendingWithinOneCategory()
     {
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
@@ -4123,7 +4309,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testListViewCategorySortingComesBeforeSortingByTitle()
+    /**
+     * @test
+     */
+    public function listViewCategorySortingComesBeforeSortingByTitle()
     {
         $categoryUid1 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
@@ -4172,7 +4361,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testListViewCategorySortingHidesRepeatedCategoryNames()
+    /**
+     * @test
+     */
+    public function listViewCategorySortingHidesRepeatedCategoryNames()
     {
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
@@ -4221,7 +4413,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testListViewCategorySortingListsDifferentCategoryNames()
+    /**
+     * @test
+     */
+    public function listViewCategorySortingListsDifferentCategoryNames()
     {
         $categoryUid1 = $this->testingFramework->createRecord(
             'tx_seminars_categories',
@@ -4305,7 +4500,10 @@ final class DefaultControllerTest extends TestCase
     // Tests concerning the category links in the list view.
     //////////////////////////////////////////////////////////
 
-    public function testCategoryIsLinkedToTheFilteredListView()
+    /**
+     * @test
+     */
+    public function categoryIsLinkedToTheFilteredListView()
     {
         $frontEndPageUid = $this->testingFramework->createFrontEndPage();
         $this->subject->setConfigurationValue('listPID', $frontEndPageUid);
@@ -4335,7 +4533,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testCategoryIsNotLinkedFromSpecializedListView()
+    /**
+     * @test
+     */
+    public function categoryIsNotLinkedFromSpecializedListView()
     {
         $frontEndPageUid = $this->testingFramework->createFrontEndPage();
         $this->subject->setConfigurationValue('listPID', $frontEndPageUid);
@@ -4372,7 +4573,10 @@ final class DefaultControllerTest extends TestCase
     // Tests concerning omitDateIfSameAsPrevious.
     ///////////////////////////////////////////////
 
-    public function testOmitDateIfSameAsPreviousOnDifferentDatesWithActiveConfig()
+    /**
+     * @test
+     */
+    public function omitDateIfSameAsPreviousOnDifferentDatesWithActiveConfig()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -4410,7 +4614,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testOmitDateIfSameAsPreviousOnDifferentDatesWithInactiveConfig()
+    /**
+     * @test
+     */
+    public function omitDateIfSameAsPreviousOnDifferentDatesWithInactiveConfig()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -4448,7 +4655,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testOmitDateIfSameAsPreviousOnSameDatesWithActiveConfig()
+    /**
+     * @test
+     */
+    public function omitDateIfSameAsPreviousOnSameDatesWithActiveConfig()
     {
         $eventData = [
             'pid' => $this->systemFolderPid,
@@ -4480,7 +4690,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testOmitDateIfSameAsPreviousOnSameDatesWithInactiveConfig()
+    /**
+     * @test
+     */
+    public function omitDateIfSameAsPreviousOnSameDatesWithInactiveConfig()
     {
         $eventData = [
             'pid' => $this->systemFolderPid,
@@ -4516,7 +4729,10 @@ final class DefaultControllerTest extends TestCase
     // Tests concerning limiting the list view to event types
     ///////////////////////////////////////////////////////////
 
-    public function testListViewLimitedToEventTypesIgnoresEventsWithoutEventType()
+    /**
+     * @test
+     */
+    public function listViewLimitedToEventTypesIgnoresEventsWithoutEventType()
     {
         $eventTypeUid = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
@@ -4533,7 +4749,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testListViewLimitedToEventTypesContainsEventsWithMultipleSelectedEventTypes()
+    /**
+     * @test
+     */
+    public function listViewLimitedToEventTypesContainsEventsWithMultipleSelectedEventTypes()
     {
         $eventTypeUid1 = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
@@ -4577,7 +4796,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testListViewLimitedToEventTypesIgnoresEventsWithNotSelectedEventType()
+    /**
+     * @test
+     */
+    public function listViewLimitedToEventTypesIgnoresEventsWithNotSelectedEventType()
     {
         $eventTypeUid1 = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
@@ -4607,7 +4829,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testListViewForSingleEventTypeOverridesLimitToEventTypes()
+    /**
+     * @test
+     */
+    public function listViewForSingleEventTypeOverridesLimitToEventTypes()
     {
         $eventTypeUid1 = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
@@ -4656,7 +4881,10 @@ final class DefaultControllerTest extends TestCase
     // Tests concerning limiting the list view to categories
     //////////////////////////////////////////////////////////
 
-    public function testListViewLimitedToCategoriesIgnoresEventsWithoutCategory()
+    /**
+     * @test
+     */
+    public function listViewLimitedToCategoriesIgnoresEventsWithoutCategory()
     {
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
@@ -4673,7 +4901,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testListViewLimitedToCategoriesContainsEventsWithMultipleSelectedCategories()
+    /**
+     * @test
+     */
+    public function listViewLimitedToCategoriesContainsEventsWithMultipleSelectedCategories()
     {
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -4729,7 +4960,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testListViewLimitedToCategoriesIgnoresEventsWithNotSelectedCategory()
+    /**
+     * @test
+     */
+    public function listViewLimitedToCategoriesIgnoresEventsWithNotSelectedCategory()
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -4765,7 +4999,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testListViewForSingleCategoryOverridesLimitToCategories()
+    /**
+     * @test
+     */
+    public function listViewForSingleCategoryOverridesLimitToCategories()
     {
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -4890,7 +5127,10 @@ final class DefaultControllerTest extends TestCase
     // Tests concerning limiting the list view to organizers
     //////////////////////////////////////////////////////////
 
-    public function testListViewLimitedToOrganizersContainsEventsWithSelectedOrganizer()
+    /**
+     * @test
+     */
+    public function listViewLimitedToOrganizersContainsEventsWithSelectedOrganizer()
     {
         $organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers'
@@ -4922,7 +5162,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testListViewLimitedToOrganizerExcludesEventsWithNotSelectedOrganizer()
+    /**
+     * @test
+     */
+    public function listViewLimitedToOrganizerExcludesEventsWithNotSelectedOrganizer()
     {
         $organizerUid1 = $this->testingFramework->createRecord(
             'tx_seminars_organizers'
@@ -4969,7 +5212,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testListViewLimitedToOrganizersFromSelectorWidgetIgnoresFlexFormsValues()
+    /**
+     * @test
+     */
+    public function listViewLimitedToOrganizersFromSelectorWidgetIgnoresFlexFormsValues()
     {
         $organizerUid1 = $this->testingFramework->createRecord(
             'tx_seminars_organizers'
@@ -5239,7 +5485,10 @@ final class DefaultControllerTest extends TestCase
     // Tests concerning the "my events" view
     //////////////////////////////////////////
 
-    public function testMyEventsContainsTitleOfEventWithRegistrationForLoggedInUser()
+    /**
+     * @test
+     */
+    public function myEventsContainsTitleOfEventWithRegistrationForLoggedInUser()
     {
         $this->createLogInAndRegisterFeUser();
         $this->subject->setConfigurationValue('what_to_display', 'my_events');
@@ -5250,7 +5499,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testMyEventsNotContainsTitleOfEventWithoutRegistrationForLoggedInUser()
+    /**
+     * @test
+     */
+    public function myEventsNotContainsTitleOfEventWithoutRegistrationForLoggedInUser()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $this->subject->setConfigurationValue('what_to_display', 'my_events');
@@ -5261,7 +5513,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testMyEventsContainsExpiryOfEventWithExpiryAndRegistrationForLoggedInUser()
+    /**
+     * @test
+     */
+    public function myEventsContainsExpiryOfEventWithExpiryAndRegistrationForLoggedInUser()
     {
         $this->createLogInAndRegisterFeUser();
         $this->testingFramework->changeRecord(
@@ -5281,7 +5536,10 @@ final class DefaultControllerTest extends TestCase
     // Tests concerning mayManagersEditTheirEvents in the "my vip events" list view
     /////////////////////////////////////////////////////////////////////////////////
 
-    public function testEditSubpartWithMayManagersEditTheirEventsSetToFalseIsHiddenInMyVipEventsListView()
+    /**
+     * @test
+     */
+    public function editSubpartWithMayManagersEditTheirEventsSetToFalseIsHiddenInMyVipEventsListView()
     {
         $this->createLogInAndAddFeUserAsVip();
         $this->subject->setConfigurationValue('mayManagersEditTheirEvents', 0);
@@ -5293,7 +5551,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testEditSubpartWithMayManagersEditTheirEventsSetToTrueIsVisibleInMyVipEventsListView()
+    /**
+     * @test
+     */
+    public function editSubpartWithMayManagersEditTheirEventsSetToTrueIsVisibleInMyVipEventsListView()
     {
         $this->createLogInAndAddFeUserAsVip();
         $this->subject->setConfigurationValue('mayManagersEditTheirEvents', 1);
@@ -5305,7 +5566,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testManagedEventsViewWithMayManagersEditTheirEventsSetToTrueContainsEditLink()
+    /**
+     * @test
+     */
+    public function managedEventsViewWithMayManagersEditTheirEventsSetToTrueContainsEditLink()
     {
         $this->createLogInAndAddFeUserAsVip();
         $this->subject->setConfigurationValue('mayManagersEditTheirEvents', 1);
@@ -5400,7 +5664,10 @@ final class DefaultControllerTest extends TestCase
     // Tests concerning the category list in the my vip events view
     /////////////////////////////////////////////////////////////////
 
-    public function testMyVipEventsViewShowsCategoryTitleOfEvent()
+    /**
+     * @test
+     */
+    public function myVipEventsViewShowsCategoryTitleOfEvent()
     {
         $this->createLogInAndAddFeUserAsVip();
         $this->subject->setConfigurationValue('what_to_display', 'my_vip_events');
@@ -5590,7 +5857,10 @@ final class DefaultControllerTest extends TestCase
     // Tests concerning the getLoginLink function.
     ////////////////////////////////////////////////
 
-    public function testGetLoginLinkWithLoggedOutUserAddsUidPiVarToUrl()
+    /**
+     * @test
+     */
+    public function getLoginLinkWithLoggedOutUserAddsUidPiVarToUrl()
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5620,7 +5890,10 @@ final class DefaultControllerTest extends TestCase
     // Tests concerning the pagination of the list view.
     //////////////////////////////////////////////////////
 
-    public function testListViewCanContainOneItemOnTheFirstPage()
+    /**
+     * @test
+     */
+    public function listViewCanContainOneItemOnTheFirstPage()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5636,7 +5909,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testListViewCanContainTwoItemsOnTheFirstPage()
+    /**
+     * @test
+     */
+    public function listViewCanContainTwoItemsOnTheFirstPage()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5664,7 +5940,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testFirstPageOfListViewNotContainsItemForTheSecondPage()
+    /**
+     * @test
+     */
+    public function firstPageOfListViewNotContainsItemForTheSecondPage()
     {
         $this->subject->setConfigurationValue(
             'listView.',
@@ -5696,7 +5975,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testSecondPageOfListViewContainsItemForTheSecondPage()
+    /**
+     * @test
+     */
+    public function secondPageOfListViewContainsItemForTheSecondPage()
     {
         $this->subject->setConfigurationValue(
             'listView.',
@@ -5975,7 +6257,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testListViewEnsuresPlacePiVarArray()
+    /**
+     * @test
+     */
+    public function listViewEnsuresPlacePiVarArray()
     {
         $this->subject->piVars['place'] = ['foo'];
         $this->subject->main('', []);
@@ -5985,7 +6270,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testListViewEnsuresOrganizerPiVarArray()
+    /**
+     * @test
+     */
+    public function listViewEnsuresOrganizerPiVarArray()
     {
         $this->subject->piVars['organizer'] = ['foo'];
         $this->subject->main('', []);
@@ -5995,7 +6283,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testListViewEnsuresEventTypePiVarArray()
+    /**
+     * @test
+     */
+    public function listViewEnsuresEventTypePiVarArray()
     {
         $this->subject->piVars['event_type'] = ['foo'];
         $this->subject->main('', []);
@@ -6009,7 +6300,10 @@ final class DefaultControllerTest extends TestCase
     // Tests concerning the owner data in the single view
     ///////////////////////////////////////////////////////
 
-    public function testSingleViewForSeminarWithOwnerAndOwnerDataEnabledContainsOwnerDataHeading()
+    /**
+     * @test
+     */
+    public function singleViewForSeminarWithOwnerAndOwnerDataEnabledContainsOwnerDataHeading()
     {
         $ownerUid = $this->testingFramework->createFrontEndUser();
         $this->testingFramework->changeRecord(
@@ -6032,7 +6326,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testSingleViewForSeminarWithOwnerAndOwnerDataEnabledNotContainsEmptyLines()
+    /**
+     * @test
+     */
+    public function singleViewForSeminarWithOwnerAndOwnerDataEnabledNotContainsEmptyLines()
     {
         $ownerUid = $this->testingFramework->createFrontEndUser();
         $this->testingFramework->changeRecord(
@@ -6055,7 +6352,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testSingleViewForSeminarWithoutOwnerAndOwnerDataEnabledNotContainsOwnerDataHeading()
+    /**
+     * @test
+     */
+    public function singleViewForSeminarWithoutOwnerAndOwnerDataEnabledNotContainsOwnerDataHeading()
     {
         $this->subject->setConfigurationValue(
             'showOwnerDataInSingleView',
@@ -6071,7 +6371,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testSingleViewForSeminarWithOwnerAndOwnerDataDisabledNotContainsOwnerDataHeading()
+    /**
+     * @test
+     */
+    public function singleViewForSeminarWithOwnerAndOwnerDataDisabledNotContainsOwnerDataHeading()
     {
         $ownerUid = $this->testingFramework->createFrontEndUser();
         $this->testingFramework->changeRecord(
@@ -6094,7 +6397,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testSingleViewForSeminarWithOwnerAndOwnerDataEnabledContainsOwnerName()
+    /**
+     * @test
+     */
+    public function singleViewForSeminarWithOwnerAndOwnerDataEnabledContainsOwnerName()
     {
         $ownerUid = $this->testingFramework->createFrontEndUser(
             '',
@@ -6120,7 +6426,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testSingleViewForSeminarWithOwnerHtmlSpecialCharsOwnerName()
+    /**
+     * @test
+     */
+    public function singleViewForSeminarWithOwnerHtmlSpecialCharsOwnerName()
     {
         $ownerUid = $this->testingFramework->createFrontEndUser(
             '',
@@ -6146,7 +6455,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testSingleViewForSeminarWithOwnerAndOwnerDataDisabledNotContainsOwnerName()
+    /**
+     * @test
+     */
+    public function singleViewForSeminarWithOwnerAndOwnerDataDisabledNotContainsOwnerName()
     {
         $ownerUid = $this->testingFramework->createFrontEndUser(
             '',
@@ -6173,7 +6485,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testSingleViewForSeminarWithOwnerAndOwnerDataEnabledCanContainOwnerPhone()
+    /**
+     * @test
+     */
+    public function singleViewForSeminarWithOwnerAndOwnerDataEnabledCanContainOwnerPhone()
     {
         $ownerUid = $this->testingFramework->createFrontEndUser(
             '',
@@ -6199,7 +6514,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testSingleViewForSeminarWithOwnerAndOwnerDataEnabledCanContainOwnerEmailAddress()
+    /**
+     * @test
+     */
+    public function singleViewForSeminarWithOwnerAndOwnerDataEnabledCanContainOwnerEmailAddress()
     {
         $ownerUid = $this->testingFramework->createFrontEndUser(
             '',
@@ -6493,7 +6811,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testRegistrationFormForEventWithOneNotFullfilledRequirementIsHidden()
+    /**
+     * @test
+     */
+    public function registrationFormForEventWithOneNotFullfilledRequirementIsHidden()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $this->subject->setConfigurationValue('what_to_display', 'seminar_registration');
@@ -6531,7 +6852,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testListOfRequirementsForEventWithOneNotFulfilledRequirementListIsShown()
+    /**
+     * @test
+     */
+    public function listOfRequirementsForEventWithOneNotFulfilledRequirementListIsShown()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $this->subject->setConfigurationValue('what_to_display', 'seminar_registration');
@@ -6618,7 +6942,10 @@ final class DefaultControllerTest extends TestCase
         );
     }
 
-    public function testListOfRequirementsForEventWithTwoNotFulfilledRequirementsShownsTitlesOfBothRequirements()
+    /**
+     * @test
+     */
+    public function listOfRequirementsForEventWithTwoNotFulfilledRequirementsShownsTitlesOfBothRequirements()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $this->subject->setConfigurationValue('what_to_display', 'seminar_registration');

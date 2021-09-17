@@ -70,7 +70,10 @@ final class EventsListTest extends TestCase
     // Tests for the events list functions.
     /////////////////////////////////////////
 
-    public function testShowContainsNoBodyHeaderWithEmptySystemFolder()
+    /**
+     * @test
+     */
+    public function showContainsNoBodyHeaderWithEmptySystemFolder()
     {
         self::assertStringNotContainsString(
             '<td class="datecol">',
@@ -78,7 +81,10 @@ final class EventsListTest extends TestCase
         );
     }
 
-    public function testShowContainsTableBodyHeaderForOneEvent()
+    /**
+     * @test
+     */
+    public function showContainsTableBodyHeaderForOneEvent()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -91,7 +97,10 @@ final class EventsListTest extends TestCase
         );
     }
 
-    public function testShowContainsNoBodyHeaderIfEventIsOnOtherPage()
+    /**
+     * @test
+     */
+    public function showContainsNoBodyHeaderIfEventIsOnOtherPage()
     {
         // Puts this record on a non-existing page. This is intentional.
         $this->testingFramework->createRecord(
@@ -105,7 +114,10 @@ final class EventsListTest extends TestCase
         );
     }
 
-    public function testShowContainsEventTitleForOneEvent()
+    /**
+     * @test
+     */
+    public function showContainsEventTitleForOneEvent()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -121,7 +133,10 @@ final class EventsListTest extends TestCase
         );
     }
 
-    public function testShowContainsEventTitleForTwoEvents()
+    /**
+     * @test
+     */
+    public function showContainsEventTitleForTwoEvents()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -148,7 +163,10 @@ final class EventsListTest extends TestCase
         );
     }
 
-    public function testShowContainsEventTitleForOneHiddenEvent()
+    /**
+     * @test
+     */
+    public function showContainsEventTitleForOneHiddenEvent()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -165,7 +183,10 @@ final class EventsListTest extends TestCase
         );
     }
 
-    public function testShowContainsEventTitleForOneTimedEvent()
+    /**
+     * @test
+     */
+    public function showContainsEventTitleForOneTimedEvent()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -182,7 +203,10 @@ final class EventsListTest extends TestCase
         );
     }
 
-    public function testShowForOneEventContainsAccreditationNumber()
+    /**
+     * @test
+     */
+    public function showForOneEventContainsAccreditationNumber()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -199,7 +223,10 @@ final class EventsListTest extends TestCase
         );
     }
 
-    public function testShowForOneEventContainsHtmlSpecialCharedAccreditationNumber()
+    /**
+     * @test
+     */
+    public function showForOneEventContainsHtmlSpecialCharedAccreditationNumber()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -216,7 +243,10 @@ final class EventsListTest extends TestCase
         );
     }
 
-    public function testShowContainsCanceledStatusIconForCanceledEvent()
+    /**
+     * @test
+     */
+    public function showContainsCanceledStatusIconForCanceledEvent()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -232,7 +262,10 @@ final class EventsListTest extends TestCase
         );
     }
 
-    public function testShowContainsConfirmedStatusIconForConfirmedEvent()
+    /**
+     * @test
+     */
+    public function showContainsConfirmedStatusIconForConfirmedEvent()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -248,7 +281,10 @@ final class EventsListTest extends TestCase
         );
     }
 
-    public function testShowDoesNotContainCanceledOrConfirmedStatusIconForPlannedEvent()
+    /**
+     * @test
+     */
+    public function showDoesNotContainCanceledOrConfirmedStatusIconForPlannedEvent()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -295,7 +331,10 @@ final class EventsListTest extends TestCase
         );
     }
 
-    public function testShowDoesNotContainConfirmButtonForEventThatIsAlreadyConfirmed()
+    /**
+     * @test
+     */
+    public function showDoesNotContainConfirmButtonForEventThatIsAlreadyConfirmed()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -312,7 +351,10 @@ final class EventsListTest extends TestCase
         );
     }
 
-    public function testShowDoesNotContainConfirmButtonForPlannedEventThatHasAlreadyBegun()
+    /**
+     * @test
+     */
+    public function showDoesNotContainConfirmButtonForPlannedEventThatHasAlreadyBegun()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -328,7 +370,10 @@ final class EventsListTest extends TestCase
         );
     }
 
-    public function testShowContainsConfirmButtonForPlannedEventThatHasNotStartedYet()
+    /**
+     * @test
+     */
+    public function showContainsConfirmButtonForPlannedEventThatHasNotStartedYet()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -345,7 +390,10 @@ final class EventsListTest extends TestCase
         );
     }
 
-    public function testShowContainsConfirmButtonForCanceledEventThatHasNotStartedYet()
+    /**
+     * @test
+     */
+    public function showContainsConfirmButtonForCanceledEventThatHasNotStartedYet()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -362,7 +410,10 @@ final class EventsListTest extends TestCase
         );
     }
 
-    public function testShowDoesNotContainConfirmButtonForTopicRecords()
+    /**
+     * @test
+     */
+    public function showDoesNotContainConfirmButtonForTopicRecords()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -378,7 +429,10 @@ final class EventsListTest extends TestCase
         );
     }
 
-    public function testShowContainsConfirmButtonWithVariableEventUidInHiddenField()
+    /**
+     * @test
+     */
+    public function showContainsConfirmButtonWithVariableEventUidInHiddenField()
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -414,7 +468,10 @@ final class EventsListTest extends TestCase
         );
     }
 
-    public function testShowDoesNotContainCancelButtonForAlreadyCanceledEvent()
+    /**
+     * @test
+     */
+    public function showDoesNotContainCancelButtonForAlreadyCanceledEvent()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -431,7 +488,10 @@ final class EventsListTest extends TestCase
         );
     }
 
-    public function testShowDoesNotContainCancelButtonPlannedEventThatHasAlreadyBegun()
+    /**
+     * @test
+     */
+    public function showDoesNotContainCancelButtonPlannedEventThatHasAlreadyBegun()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -447,7 +507,10 @@ final class EventsListTest extends TestCase
         );
     }
 
-    public function testShowContainsCancelButtonForPlannedEventThatHasNotStartedYet()
+    /**
+     * @test
+     */
+    public function showContainsCancelButtonForPlannedEventThatHasNotStartedYet()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -463,7 +526,10 @@ final class EventsListTest extends TestCase
         );
     }
 
-    public function testShowContainsCancelButtonForConfirmedEventThatHasNotStartedYet()
+    /**
+     * @test
+     */
+    public function showContainsCancelButtonForConfirmedEventThatHasNotStartedYet()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -480,7 +546,10 @@ final class EventsListTest extends TestCase
         );
     }
 
-    public function testShowDoesNotContainCancelButtonForTopicRecords()
+    /**
+     * @test
+     */
+    public function showDoesNotContainCancelButtonForTopicRecords()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -497,7 +566,10 @@ final class EventsListTest extends TestCase
         );
     }
 
-    public function testShowContainsCancelButtonWithVariableEventUidInHiddenField()
+    /**
+     * @test
+     */
+    public function showContainsCancelButtonWithVariableEventUidInHiddenField()
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -613,7 +685,10 @@ final class EventsListTest extends TestCase
         );
     }
 
-    public function testShowForEventWithRegistrationHasShowLink()
+    /**
+     * @test
+     */
+    public function showForEventWithRegistrationHasShowLink()
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -631,7 +706,10 @@ final class EventsListTest extends TestCase
         );
     }
 
-    public function testShowLinkLinksToRegistrationsTab()
+    /**
+     * @test
+     */
+    public function showLinkLinksToRegistrationsTab()
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -649,7 +727,10 @@ final class EventsListTest extends TestCase
         );
     }
 
-    public function testShowLinkLinksToTheEvent()
+    /**
+     * @test
+     */
+    public function showLinkLinksToTheEvent()
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -667,7 +748,10 @@ final class EventsListTest extends TestCase
         );
     }
 
-    public function testShowForHiddenEventWithRegistrationDoesNotHaveShowLink()
+    /**
+     * @test
+     */
+    public function showForHiddenEventWithRegistrationDoesNotHaveShowLink()
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -693,7 +777,10 @@ final class EventsListTest extends TestCase
     // Tests for the icons.
     /////////////////////////
 
-    public function testHasEventIcon()
+    /**
+     * @test
+     */
+    public function hasEventIcon()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -714,7 +801,10 @@ final class EventsListTest extends TestCase
     // Tests for the localization.
     ////////////////////////////////
 
-    public function testLocalizationReturnsLocalizedStringForExistingKey()
+    /**
+     * @test
+     */
+    public function localizationReturnsLocalizedStringForExistingKey()
     {
         self::assertSame('Events', $this->getLanguageService()->getLL('title'));
     }
@@ -723,7 +813,10 @@ final class EventsListTest extends TestCase
     // Tests concerning the new record button
     ///////////////////////////////////////////
 
-    public function testEventListCanContainNewButton()
+    /**
+     * @test
+     */
+    public function eventListCanContainNewButton()
     {
         self::assertStringContainsString(
             'newRecordLink',
@@ -731,7 +824,10 @@ final class EventsListTest extends TestCase
         );
     }
 
-    public function testNewButtonForNoEventStorageSettingInUserGroupsSetsCurrentPageIdAsNewRecordPid()
+    /**
+     * @test
+     */
+    public function newButtonForNoEventStorageSettingInUserGroupsSetsCurrentPageIdAsNewRecordPid()
     {
         $backEndUser = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUser::class)->getLoadedTestingModel([]);
         BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
@@ -739,7 +835,10 @@ final class EventsListTest extends TestCase
         self::assertStringContainsString((string)$this->dummySysFolderPid, $this->subject->show());
     }
 
-    public function testNewButtonForEventStoredOnCurrentPageHasCurrentFolderLabel()
+    /**
+     * @test
+     */
+    public function newButtonForEventStoredOnCurrentPageHasCurrentFolderLabel()
     {
         $backEndUser = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUser::class)->getLoadedTestingModel([]);
         BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
@@ -754,7 +853,10 @@ final class EventsListTest extends TestCase
         );
     }
 
-    public function testNewButtonForEventStorageSettingSetInUsersGroupSetsThisPidAsNewRecordPid()
+    /**
+     * @test
+     */
+    public function newButtonForEventStorageSettingSetInUsersGroupSetsThisPidAsNewRecordPid()
     {
         /** @var \Tx_Seminars_Model_BackEndUser $loggedInUser */
         $loggedInUser = BackEndLoginManager::getInstance()
@@ -764,7 +866,10 @@ final class EventsListTest extends TestCase
         self::assertStringContainsString((string)$newEventFolder, $this->subject->show());
     }
 
-    public function testNewButtonForEventStoredInPageDeterminedByGroupHasForeignFolderLabel()
+    /**
+     * @test
+     */
+    public function newButtonForEventStoredInPageDeterminedByGroupHasForeignFolderLabel()
     {
         /** @var \Tx_Seminars_Model_BackEndUser $loggedInUser */
         $loggedInUser = BackEndLoginManager::getInstance()

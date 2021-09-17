@@ -37,7 +37,10 @@ final class SpeakerBagBuilderTest extends TestCase
     // Tests for the basic builder functions.
     ///////////////////////////////////////////
 
-    public function testBuilderBuildsABag()
+    /**
+     * @test
+     */
+    public function builderBuildsABag()
     {
         self::assertInstanceOf(AbstractBag::class, $this->subject->build());
     }

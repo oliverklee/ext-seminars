@@ -125,7 +125,10 @@ final class SpeakersListTest extends TestCase
     // Tests concerning the "new" button
     //////////////////////////////////////
 
-    public function testNewButtonForSpeakerStorageSettingSetInUsersGroupSetsThisPidAsNewRecordPid()
+    /**
+     * @test
+     */
+    public function newButtonForSpeakerStorageSettingSetInUsersGroupSetsThisPidAsNewRecordPid()
     {
         $newSpeakerFolder = $this->dummySysFolderPid + 1;
         $backEndGroup = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUserGroup::class)

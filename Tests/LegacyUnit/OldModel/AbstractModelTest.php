@@ -64,7 +64,10 @@ final class AbstractModelTest extends TestCase
     // Tests for getting attributes.
     //////////////////////////////////
 
-    public function testGetUid()
+    /**
+     * @test
+     */
+    public function getUid()
     {
         self::assertEquals(
             $this->subjectUid,
@@ -72,7 +75,10 @@ final class AbstractModelTest extends TestCase
         );
     }
 
-    public function testHasUidIsTrueForObjectsWithAUid()
+    /**
+     * @test
+     */
+    public function hasUidIsTrueForObjectsWithAUid()
     {
         self::assertNotEquals(
             0,
@@ -83,7 +89,10 @@ final class AbstractModelTest extends TestCase
         );
     }
 
-    public function testHasUidIsFalseForObjectsWithoutUid()
+    /**
+     * @test
+     */
+    public function hasUidIsFalseForObjectsWithoutUid()
     {
         $virginFixture = new TestingModel();
 
@@ -96,7 +105,10 @@ final class AbstractModelTest extends TestCase
         );
     }
 
-    public function testGetTitle()
+    /**
+     * @test
+     */
+    public function getTitle()
     {
         self::assertEquals(
             'Test',
@@ -108,7 +120,10 @@ final class AbstractModelTest extends TestCase
     // Tests for setting attributes.
     //////////////////////////////////
 
-    public function testSetAndGetRecordBooleanTest()
+    /**
+     * @test
+     */
+    public function setAndGetRecordBooleanTest()
     {
         self::assertFalse(
             $this->subject->getBooleanTest()
@@ -120,7 +135,10 @@ final class AbstractModelTest extends TestCase
         );
     }
 
-    public function testSetAndGetTitle()
+    /**
+     * @test
+     */
+    public function setAndGetTitle()
     {
         $title = 'Test';
         $this->subject->setTitle($title);

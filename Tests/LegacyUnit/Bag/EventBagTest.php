@@ -42,7 +42,10 @@ final class EventBagTest extends TestCase
     // Tests for the basic bag functionality.
     ///////////////////////////////////////////
 
-    public function testBagCanHaveAtLeastOneElement()
+    /**
+     * @test
+     */
+    public function bagCanHaveAtLeastOneElement()
     {
         self::assertFalse(
             $this->subject->isEmpty()

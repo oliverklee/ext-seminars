@@ -170,7 +170,10 @@ final class RegistrationFormTest extends TestCase
     // Tests concerning saveDataToSession
     ///////////////////////////////////////
 
-    public function testSaveDataToSessionCanWriteEmptyZipToUserSession()
+    /**
+     * @test
+     */
+    public function saveDataToSessionCanWriteEmptyZipToUserSession()
     {
         $this->subject->processRegistration(['zip' => '']);
 
@@ -180,7 +183,10 @@ final class RegistrationFormTest extends TestCase
         );
     }
 
-    public function testSaveDataToSessionCanWriteNonEmptyZipToUserSession()
+    /**
+     * @test
+     */
+    public function saveDataToSessionCanWriteNonEmptyZipToUserSession()
     {
         $this->subject->processRegistration(['zip' => '12345']);
 
@@ -190,7 +196,10 @@ final class RegistrationFormTest extends TestCase
         );
     }
 
-    public function testSaveDataToSessionCanOverwriteNonEmptyZipWithEmptyZipInUserSession()
+    /**
+     * @test
+     */
+    public function saveDataToSessionCanOverwriteNonEmptyZipWithEmptyZipInUserSession()
     {
         $this->session->setAsString(
             'tx_seminars_registration_editor_zip',
@@ -238,7 +247,10 @@ final class RegistrationFormTest extends TestCase
     // Tests concerning retrieveDataFromSession
     /////////////////////////////////////////////
 
-    public function testRetrieveDataFromSessionWithUnusedKeyReturnsEmptyString()
+    /**
+     * @test
+     */
+    public function retrieveDataFromSessionWithUnusedKeyReturnsEmptyString()
     {
         self::assertEquals(
             '',
@@ -246,7 +258,10 @@ final class RegistrationFormTest extends TestCase
         );
     }
 
-    public function testRetrieveDataFromSessionWithKeySetInUserSessionReturnsDataForThatKey()
+    /**
+     * @test
+     */
+    public function retrieveDataFromSessionWithKeySetInUserSessionReturnsDataForThatKey()
     {
         $this->session->setAsString(
             'tx_seminars_registration_editor_zip',
@@ -273,7 +288,10 @@ final class RegistrationFormTest extends TestCase
         $this->subject->populateListPaymentMethods();
     }
 
-    public function testPopulateListPaymentMethodsForEventWithOnePaymentMethodReturnsOneItem()
+    /**
+     * @test
+     */
+    public function populateListPaymentMethodsForEventWithOnePaymentMethodReturnsOneItem()
     {
         $paymentMethodUid = $this->testingFramework->createRecord(
             'tx_seminars_payment_methods'
@@ -291,7 +309,10 @@ final class RegistrationFormTest extends TestCase
         );
     }
 
-    public function testPopulateListPaymentMethodsForEventWithOnePaymentMethodReturnsThisMethodsTitle()
+    /**
+     * @test
+     */
+    public function populateListPaymentMethodsForEventWithOnePaymentMethodReturnsThisMethodsTitle()
     {
         $paymentMethodUid = $this->testingFramework->createRecord(
             'tx_seminars_payment_methods',
@@ -312,7 +333,10 @@ final class RegistrationFormTest extends TestCase
         );
     }
 
-    public function testPopulateListPaymentMethodsForEventWithOnePaymentMethodReturnsThisMethodsUid()
+    /**
+     * @test
+     */
+    public function populateListPaymentMethodsForEventWithOnePaymentMethodReturnsThisMethodsUid()
     {
         $paymentMethodUid = $this->testingFramework->createRecord(
             'tx_seminars_payment_methods'
@@ -332,7 +356,10 @@ final class RegistrationFormTest extends TestCase
         );
     }
 
-    public function testPopulateListPaymentMethodsForEventWithTwoPaymentMethodsReturnsBothPaymentMethods()
+    /**
+     * @test
+     */
+    public function populateListPaymentMethodsForEventWithTwoPaymentMethodsReturnsBothPaymentMethods()
     {
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_payment_methods_mm',
