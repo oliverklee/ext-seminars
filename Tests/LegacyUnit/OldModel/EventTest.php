@@ -49,11 +49,6 @@ final class EventTest extends TestCase
      */
     private $pi1 = null;
 
-    /**
-     * @var int
-     */
-    private $placeRelationSorting = 1;
-
     /** @var ConnectionPool */
     private $connectionPool = null;
 
@@ -140,13 +135,7 @@ final class EventTest extends TestCase
             $placeData
         );
 
-        $this->testingFramework->createRelation(
-            'tx_seminars_seminars_place_mm',
-            $this->subject->getUid(),
-            $uid,
-            $this->placeRelationSorting
-        );
-        $this->placeRelationSorting++;
+        $this->testingFramework->createRelation('tx_seminars_seminars_place_mm', $this->subject->getUid(), $uid);
         $this->subject->setNumberOfPlaces(
             $this->subject->getNumberOfPlaces() + 1
         );
