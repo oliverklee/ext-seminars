@@ -42,12 +42,11 @@
 		"typo3/cms-lang": "^8.7 || ^9.5"
 	},
 	"require-dev": {
-		"cweagans/composer-patches": "^1.7.1",
 		"friendsofphp/php-cs-fixer": "^2.19.1",
 		"helhum/typo3-console": "^5.8.6",
 		"helmich/typo3-typoscript-lint": "^1.5.0 || ^2.3.0",
 		"mikey179/vfsstream": "^1.6.8",
-		"nimut/testing-framework": "^5.1.0",
+		"nimut/testing-framework": "dev-task/faster-truncate",
 		"oliverklee/phpunit": "^6.5.16",
 		"phpspec/prophecy": "^1.10.3",
 		"phpunit/phpunit": "^6.5.14",
@@ -73,6 +72,12 @@
 		}
 	},
 	"prefer-stable": true,
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "https://github.com/oliverklee/testing-framework/"
+		}
+	],
 	"config": {
 		"preferred-install": {
 			"*": "dist"
@@ -141,12 +146,6 @@
 		},
 		"helhum/typo3-console": {
 			"install-extension-dummy": "0"
-		},
-		"composer-exit-on-patch-failure": true,
-		"patches": {
-			"nimut/testing-framework": {
-				"Only truncate changed tables": "Resources/Private/Patches/testing-framework/faster-truncate.diff"
-			}
 		}
 	}
 }

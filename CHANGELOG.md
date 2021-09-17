@@ -14,6 +14,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Removed
 
 ### Fixed
+- Stop using patches for dependencies (#876)
 
 ## x.y.z
 
