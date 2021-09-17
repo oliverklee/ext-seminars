@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 
-use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Http\HeaderCollector;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
@@ -116,6 +116,11 @@ final class RegistrationManagerTest extends TestCase
      */
     private $secondEmail = null;
 
+    /**
+     * @var DummyConfiguration
+     */
+    private $generalConfiguration;
+
     protected function setUp()
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
@@ -135,10 +140,11 @@ final class RegistrationManagerTest extends TestCase
         $configurationProxy = ConfigurationProxy::getInstance('seminars');
         $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_TEXT_MAIL);
         $configurationRegistry = ConfigurationRegistry::getInstance();
-        $configurationRegistry->set('plugin.tx_seminars', new Configuration());
-        $configurationRegistry->set('plugin.tx_seminars._LOCAL_LANG.default', new Configuration());
-        $configurationRegistry->set('config', new Configuration());
-        $configurationRegistry->set('page.config', new Configuration());
+        $this->generalConfiguration = new DummyConfiguration();
+        $configurationRegistry->set('plugin.tx_seminars', $this->generalConfiguration);
+        $configurationRegistry->set('plugin.tx_seminars._LOCAL_LANG.default', new DummyConfiguration());
+        $configurationRegistry->set('config', new DummyConfiguration());
+        $configurationRegistry->set('page.config', new DummyConfiguration());
 
         $organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
@@ -3800,9 +3806,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForInformalSalutationContainsInformalSalutation()
     {
         $this->subject->setConfigurationValue('sendConfirmation', true);
-        /** @var Configuration $configuration */
-        $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
-        $configuration->setAsString('salutation', 'informal');
+        $this->generalConfiguration->setAsString('salutation', 'informal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -3830,9 +3834,7 @@ final class RegistrationManagerTest extends TestCase
         }
 
         $this->subject->setConfigurationValue('sendConfirmation', true);
-        /** @var Configuration $configuration */
-        $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
-        $configuration->setAsString('salutation', 'formal');
+        $this->generalConfiguration->setAsString('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -3860,9 +3862,7 @@ final class RegistrationManagerTest extends TestCase
         }
 
         $this->subject->setConfigurationValue('sendConfirmation', true);
-        /** @var Configuration $configuration */
-        $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
-        $configuration->setAsString('salutation', 'formal');
+        $this->generalConfiguration->setAsString('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -3890,9 +3890,7 @@ final class RegistrationManagerTest extends TestCase
         }
 
         $this->subject->setConfigurationValue('sendConfirmation', true);
-        /** @var Configuration $configuration */
-        $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
-        $configuration->setAsString('salutation', 'formal');
+        $this->generalConfiguration->setAsString('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4186,9 +4184,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForInformalSalutationNotContainsRawTemplateMarkers()
     {
         $this->subject->setConfigurationValue('sendConfirmation', true);
-        /** @var Configuration $configuration */
-        $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
-        $configuration->setAsString('salutation', 'informal');
+        $this->generalConfiguration->setAsString('salutation', 'informal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4215,9 +4211,7 @@ final class RegistrationManagerTest extends TestCase
         }
 
         $this->subject->setConfigurationValue('sendConfirmation', true);
-        /** @var Configuration $configuration */
-        $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
-        $configuration->setAsString('salutation', 'formal');
+        $this->generalConfiguration->setAsString('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4244,9 +4238,7 @@ final class RegistrationManagerTest extends TestCase
         }
 
         $this->subject->setConfigurationValue('sendConfirmation', true);
-        /** @var Configuration $configuration */
-        $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
-        $configuration->setAsString('salutation', 'formal');
+        $this->generalConfiguration->setAsString('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4273,9 +4265,7 @@ final class RegistrationManagerTest extends TestCase
         }
 
         $this->subject->setConfigurationValue('sendConfirmation', true);
-        /** @var Configuration $configuration */
-        $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
-        $configuration->setAsString('salutation', 'formal');
+        $this->generalConfiguration->setAsString('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 
-use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
@@ -88,7 +88,7 @@ final class EmailServiceTest extends TestCase
 
         $this->testingFramework = new TestingFramework('tx_seminars');
 
-        $configuration = new Configuration();
+        $configuration = new DummyConfiguration();
         $configuration->setAsString('dateFormatYMD', self::DATE_FORMAT_YMD);
         $configuration->setAsString('dateFormatY', self::DATE_FORMAT_Y);
         $configuration->setAsString('dateFormatM', self::DATE_FORMAT_M);

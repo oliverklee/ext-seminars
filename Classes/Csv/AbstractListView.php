@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Csv;
 
-use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Interfaces\Configuration;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Lang\LanguageService;
@@ -55,9 +55,7 @@ abstract class AbstractListView
      */
     public function __construct()
     {
-        /** @var Configuration $configuration */
-        $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
-        $this->configuration = $configuration;
+        $this->configuration = ConfigurationRegistry::get('plugin.tx_seminars');
     }
 
     /**

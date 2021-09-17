@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
-use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\LanguageMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
@@ -20,7 +20,7 @@ final class EventTest extends TestCase
     private $subject = null;
 
     /**
-     * @var Configuration
+     * @var DummyConfiguration
      */
     private $configuration = null;
 
@@ -33,7 +33,7 @@ final class EventTest extends TestCase
     {
         $GLOBALS['SIM_EXEC_TIME'] = $this->now;
         $configurationRegistry = ConfigurationRegistry::getInstance();
-        $this->configuration = new Configuration();
+        $this->configuration = new DummyConfiguration();
         $configurationRegistry->set('plugin.tx_seminars', $this->configuration);
 
         $this->subject = new \Tx_Seminars_Model_Event();

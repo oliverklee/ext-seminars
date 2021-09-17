@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 
-use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Http\HeaderCollector;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
@@ -103,7 +103,7 @@ final class DefaultControllerTest extends TestCase
         $headerCollector = HeaderProxyFactory::getInstance()->getHeaderCollector();
         $this->headerCollector = $headerCollector;
 
-        $configuration = new Configuration();
+        $configuration = new DummyConfiguration();
         $configuration->setAsString('currency', 'EUR');
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
 

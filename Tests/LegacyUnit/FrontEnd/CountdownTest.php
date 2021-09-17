@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 
-use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
@@ -33,9 +33,9 @@ final class CountdownTest extends TestCase
     protected function setUp()
     {
         $configurationRegistry = ConfigurationRegistry::getInstance();
-        $configurationRegistry->set('config', new Configuration());
-        $configurationRegistry->set('page.config', new Configuration());
-        $configurationRegistry->set('plugin.tx_seminars._LOCAL_LANG.default', new Configuration());
+        $configurationRegistry->set('config', new DummyConfiguration());
+        $configurationRegistry->set('page.config', new DummyConfiguration());
+        $configurationRegistry->set('plugin.tx_seminars._LOCAL_LANG.default', new DummyConfiguration());
 
         /** @var ConfigurationProxy $configuration */
         $configuration = ConfigurationProxy::getInstance('seminars');

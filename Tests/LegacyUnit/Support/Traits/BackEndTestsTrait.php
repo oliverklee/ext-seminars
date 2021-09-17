@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits;
 
-use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Http\HeaderCollector;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -49,7 +49,7 @@ trait BackEndTestsTrait
     private $t3VarBackup = [];
 
     /**
-     * @var Configuration
+     * @var DummyConfiguration
      */
     private $configuration = null;
 
@@ -145,8 +145,8 @@ trait BackEndTestsTrait
     private function setUpExtensionConfiguration()
     {
         $configurationRegistry = ConfigurationRegistry::getInstance();
-        $configurationRegistry->set('plugin', new Configuration());
-        $this->configuration = new Configuration();
+        $configurationRegistry->set('plugin', new DummyConfiguration());
+        $this->configuration = new DummyConfiguration();
         $configurationRegistry->set('plugin.tx_seminars', $this->configuration);
     }
 

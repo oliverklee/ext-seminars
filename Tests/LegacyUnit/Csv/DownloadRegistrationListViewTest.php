@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Csv;
 
-use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Csv\DownloadRegistrationListView;
@@ -24,7 +24,7 @@ final class DownloadRegistrationListViewTest extends TestCase
     private $testingFramework = null;
 
     /**
-     * @var Configuration
+     * @var DummyConfiguration
      */
     private $configuration = null;
 
@@ -45,9 +45,9 @@ final class DownloadRegistrationListViewTest extends TestCase
         $this->testingFramework = new TestingFramework('tx_seminars');
 
         $configurationRegistry = ConfigurationRegistry::getInstance();
-        $configurationRegistry->set('plugin', new Configuration());
-        $this->configuration = new Configuration();
-        $this->configuration->setData(['charsetForCsv' => 'utf-8']);
+        $configurationRegistry->set('plugin', new DummyConfiguration());
+        $this->configuration = new DummyConfiguration();
+        $this->configuration->setAsString('charsetForCsv', 'utf-8');
         $configurationRegistry->set('plugin.tx_seminars', $this->configuration);
 
         $pageUid = $this->testingFramework->createSystemFolder();

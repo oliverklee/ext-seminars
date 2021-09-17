@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\FrontEnd;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
-use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
@@ -36,7 +36,7 @@ final class EventHeadlineTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        $pluginConfiguration = new Configuration();
+        $pluginConfiguration = new DummyConfiguration();
         $pluginConfiguration->setAsString('dateFormatYMD', self::DATE_FORMAT);
         $configurationRegistry = ConfigurationRegistry::getInstance();
         $configurationRegistry->set('plugin.tx_seminars', $pluginConfiguration);

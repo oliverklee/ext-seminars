@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Csv;
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
-use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Csv\FrontEndRegistrationAccessCheck;
 use OliverKlee\Seminars\Csv\Interfaces\CsvAccessCheck;
@@ -20,7 +20,7 @@ final class FrontEndRegistrationAccessCheckTest extends TestCase
     private $subject = null;
 
     /**
-     * @var Configuration
+     * @var DummyConfiguration
      */
     private $seminarsPluginConfiguration = null;
 
@@ -32,9 +32,9 @@ final class FrontEndRegistrationAccessCheckTest extends TestCase
     protected function setUp()
     {
         $configurationRegistry = ConfigurationRegistry::getInstance();
-        $configurationRegistry->set('plugin', new Configuration());
+        $configurationRegistry->set('plugin', new DummyConfiguration());
 
-        $this->seminarsPluginConfiguration = new Configuration();
+        $this->seminarsPluginConfiguration = new DummyConfiguration();
         $this->seminarsPluginConfiguration->setAsInteger('defaultEventVipsFeGroupID', $this->vipsGroupUid);
         $configurationRegistry->set('plugin.tx_seminars_pi1', $this->seminarsPluginConfiguration);
 
