@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Require oelib >= 3.6.2 (#878)
 
 ### Deprecated
 
