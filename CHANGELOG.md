@@ -8,11 +8,17 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
-- Require oelib >= 3.6.2 (#878)
 
 ### Deprecated
 
 ### Removed
+
+### Fixed
+
+## 3.4.1
+
+### Changed
+- Require oelib >= 3.6.2 (#878)
 
 ### Fixed
 - Stop using patches for dependencies (#876)
