@@ -28,6 +28,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop support for PHP 7.0 and 7.1 (#847)
 
 ### Fixed
+- Stop using a deprecated testing framework parameter (#880)
 - Stop using patches for dependencies (#875)
 
 ## 3.4.0

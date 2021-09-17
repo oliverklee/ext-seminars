@@ -241,28 +241,18 @@ final class EventTest extends TestCase
      * from the fixture.
      *
      * @param array $categoryData data of the category to add, may be empty
-     * @param int $sorting the sorting index of the category to add, must be >= 0
      *
      * @return int the UID of the created record, will be > 0
      */
-    private function addCategoryRelation(
-        array $categoryData = [],
-        int $sorting = 0
-    ): int {
+    private function addCategoryRelation(array $categoryData = []): int
+    {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
             $categoryData
         );
 
-        $this->testingFramework->createRelation(
-            'tx_seminars_seminars_categories_mm',
-            $this->subject->getUid(),
-            $uid,
-            $sorting
-        );
-        $this->subject->setNumberOfCategories(
-            $this->subject->getNumberOfCategories() + 1
-        );
+        $this->testingFramework->createRelation('tx_seminars_seminars_categories_mm', $this->subject->getUid(), $uid);
+        $this->subject->setNumberOfCategories($this->subject->getNumberOfCategories() + 1);
 
         return $uid;
     }
@@ -587,25 +577,6 @@ final class EventTest extends TestCase
         self::assertSame(
             2,
             $connection->count('*', 'tx_seminars_seminars_categories_mm', ['uid_local' => $this->subject->getUid()])
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function addCategoryRelationCanSetSortingInRelationTable()
-    {
-        $connection = $this->connectionPool->getConnectionForTable('tx_seminars_seminars_categories_mm');
-
-        $this->addCategoryRelation([], 42);
-
-        self::assertSame(
-            1,
-            $connection->count(
-                '*',
-                'tx_seminars_seminars_categories_mm',
-                ['uid_local' => $this->subject->getUid(), 'sorting' => 42]
-            )
         );
     }
 
@@ -3448,8 +3419,8 @@ final class EventTest extends TestCase
      */
     public function getCategoriesReturnsCategoriesOrderedBySorting()
     {
-        $categoryUid1 = $this->addCategoryRelation(['title' => 'Test 1'], 2);
-        $categoryUid2 = $this->addCategoryRelation(['title' => 'Test 2'], 1);
+        $categoryUid1 = $this->addCategoryRelation(['title' => 'Test 1']);
+        $categoryUid2 = $this->addCategoryRelation(['title' => 'Test 2']);
 
         self::assertTrue(
             $this->subject->hasCategories()
@@ -3457,8 +3428,8 @@ final class EventTest extends TestCase
 
         self::assertSame(
             [
-                $categoryUid2 => ['title' => 'Test 2', 'icon' => ''],
                 $categoryUid1 => ['title' => 'Test 1', 'icon' => ''],
+                $categoryUid2 => ['title' => 'Test 2', 'icon' => ''],
             ],
             $this->subject->getCategories()
         );
