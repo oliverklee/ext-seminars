@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\ViewHelpers;
 
-use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
@@ -25,7 +25,7 @@ final class DateRangeViewHelperTest extends TestCase
     private $testingFramework;
 
     /**
-     * @var Configuration
+     * @var DummyConfiguration
      */
     private $configuration;
 
@@ -67,7 +67,7 @@ final class DateRangeViewHelperTest extends TestCase
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd($this->testingFramework->createFrontEndPage());
 
-        $this->configuration = new Configuration();
+        $this->configuration = new DummyConfiguration();
         $this->configuration->setAsString('dateFormatYMD', self::DATE_FORMAT_YMD);
         $this->configuration->setAsString('dateFormatY', self::DATE_FORMAT_Y);
         $this->configuration->setAsString('dateFormatM', self::DATE_FORMAT_M);

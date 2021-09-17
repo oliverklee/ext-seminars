@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Csv;
 
-use OliverKlee\Oelib\Configuration\Configuration;
+use OliverKlee\Oelib\Interfaces\Configuration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**

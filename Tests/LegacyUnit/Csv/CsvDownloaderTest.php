@@ -53,7 +53,7 @@ final class CsvDownloaderTest extends TestCase
             ]
         );
 
-        $this->configuration->setData(['charsetForCsv' => 'utf-8']);
+        $this->configuration->setAsString('charsetForCsv', 'utf-8');
 
         $this->subject = new CsvDownloader();
         $this->subject->init([]);

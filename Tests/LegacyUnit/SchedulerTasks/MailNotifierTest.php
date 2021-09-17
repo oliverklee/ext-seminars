@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\SchedulerTasks;
 
 use OliverKlee\Oelib\Authentication\BackEndLoginManager;
-use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Testing\TestingFramework;
@@ -47,7 +47,7 @@ final class MailNotifierTest extends TestCase
     protected $testingFramework = null;
 
     /**
-     * @var Configuration
+     * @var DummyConfiguration
      */
     protected $configuration = null;
 
@@ -108,18 +108,14 @@ final class MailNotifierTest extends TestCase
 
         $this->testingFramework = new TestingFramework('tx_seminars');
 
-        ConfigurationRegistry::getInstance()->set('plugin', new Configuration());
-        $this->configuration = new Configuration();
-        $this->configuration->setData(
-            [
-                'sendEventTakesPlaceReminderDaysBeforeBeginDate' => 2,
-                'sendCancelationDeadlineReminder' => true,
-                'filenameForRegistrationsCsv' => 'registrations.csv',
-                'dateFormatYMD' => '%d.%m.%Y',
-                'fieldsFromAttendanceForEmailCsv' => 'title',
-                'showAttendancesOnRegistrationQueueInEmailCsv' => true,
-            ]
-        );
+        ConfigurationRegistry::getInstance()->set('plugin', new DummyConfiguration());
+        $this->configuration = new DummyConfiguration();
+        $this->configuration->setAsInteger('sendEventTakesPlaceReminderDaysBeforeBeginDate', 2);
+        $this->configuration->setAsBoolean('sendCancelationDeadlineReminder', true);
+        $this->configuration->setAsString('filenameForRegistrationsCsv', 'registrations.csv');
+        $this->configuration->setAsString('dateFormatYMD', '%d.%m.%Y');
+        $this->configuration->setAsString('fieldsFromAttendanceForEmailCsv', 'title');
+        $this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInEmailCsv', true);
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->configuration);
 
         /** @var MailNotifier&MockObject&AccessibleObject $subject */

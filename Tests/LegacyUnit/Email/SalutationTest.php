@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 
-use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
@@ -38,6 +38,11 @@ final class SalutationTest extends TestCase
      */
     private $extConfBackup = [];
 
+    /**
+     * @var DummyConfiguration
+     */
+    private $configuration;
+
     protected function setUp()
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
@@ -45,9 +50,9 @@ final class SalutationTest extends TestCase
 
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->subject = new Salutation();
-        $configuration = new Configuration();
-        $configuration->setAsString('salutation', 'formal');
-        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
+        $this->configuration = new DummyConfiguration();
+        $this->configuration->setAsString('salutation', 'formal');
+        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->configuration);
         $this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
     }
 
@@ -222,9 +227,7 @@ final class SalutationTest extends TestCase
     public function getSalutationForInformalSalutationReturnsInformalSalutation()
     {
         $user = $this->createFrontEndUser();
-        /** @var Configuration $configuration */
-        $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
-        $configuration->setAsString('salutation', 'informal');
+        $this->configuration->setAsString('salutation', 'informal');
 
         self::assertStringContainsString(
             $this->getLanguageService()->getLL('email_hello_informal'),
@@ -238,9 +241,7 @@ final class SalutationTest extends TestCase
     public function getSalutationForInformalSalutationReturnsUsersName()
     {
         $user = $this->createFrontEndUser();
-        /** @var Configuration $configuration */
-        $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
-        $configuration->setAsString('salutation', 'informal');
+        $this->configuration->setAsString('salutation', 'informal');
 
         self::assertStringContainsString(
             $user->getLastOrFullName(),
@@ -272,9 +273,7 @@ final class SalutationTest extends TestCase
      */
     public function getSalutationForFormalSalutationModeContainsNoRawLabelKeys(int $gender)
     {
-        /** @var Configuration $configuration */
-        $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
-        $configuration->setAsString('salutation', 'formal');
+        $this->configuration->setAsString('salutation', 'formal');
 
         $user = $this->createFrontEndUser($gender);
         $salutation = $this->subject->getSalutation($user);
@@ -306,9 +305,7 @@ final class SalutationTest extends TestCase
      */
     public function getSalutationForInformalSalutationModeContainsNoRawLabelKeys(int $gender)
     {
-        /** @var Configuration $configuration */
-        $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
-        $configuration->setAsString('salutation', 'informal');
+        $this->configuration->setAsString('salutation', 'informal');
 
         $user = $this->createFrontEndUser($gender);
         $salutation = $this->subject->getSalutation($user);
@@ -325,9 +322,7 @@ final class SalutationTest extends TestCase
      */
     public function getSalutationForNoSalutationModeContainsNoRawLabelKeys(int $gender)
     {
-        /** @var Configuration $configuration */
-        $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
-        $configuration->setAsString('salutation', '');
+        $this->configuration->setAsString('salutation', '');
 
         $user = $this->createFrontEndUser($gender);
         $salutation = $this->subject->getSalutation($user);
@@ -547,9 +542,7 @@ final class SalutationTest extends TestCase
     public function createIntroductionForFormalSalutationModeContainsNoRawLabelKeys()
     {
         $salutation = 'formal';
-        /** @var Configuration $configuration */
-        $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
-        $configuration->setAsString('salutation', $salutation);
+        $this->configuration->setAsString('salutation', $salutation);
 
         $dateFormatYMD = '%d.%m.%Y';
         $eventUid = $this->testingFramework->createRecord(
@@ -571,9 +564,7 @@ final class SalutationTest extends TestCase
     public function createIntroductionForInformalSalutationModeContainsNoRawLabelKeys()
     {
         $salutation = 'informal';
-        /** @var Configuration $configuration */
-        $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
-        $configuration->setAsString('salutation', $salutation);
+        $this->configuration->setAsString('salutation', $salutation);
 
         $dateFormatYMD = '%d.%m.%Y';
         $eventUid = $this->testingFramework->createRecord(
@@ -595,9 +586,7 @@ final class SalutationTest extends TestCase
     public function createIntroductionForNoSalutationModeContainsNoRawLabelKeys()
     {
         $salutation = '';
-        /** @var Configuration $configuration */
-        $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
-        $configuration->setAsString('salutation', $salutation);
+        $this->configuration->setAsString('salutation', $salutation);
 
         $dateFormatYMD = '%d.%m.%Y';
         $eventUid = $this->testingFramework->createRecord(

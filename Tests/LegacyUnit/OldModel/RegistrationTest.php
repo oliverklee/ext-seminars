@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\OldModel;
 
-use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
@@ -39,6 +39,11 @@ final class RegistrationTest extends TestCase
     /** @var ConnectionPool */
     private $connectionPool = null;
 
+    /**
+     * @var DummyConfiguration
+     */
+    private $configuration;
+
     protected function setUp()
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
@@ -48,7 +53,8 @@ final class RegistrationTest extends TestCase
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
 
-        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', new Configuration());
+        $this->configuration = new DummyConfiguration();
+        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->configuration);
 
         $organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
@@ -180,9 +186,7 @@ final class RegistrationTest extends TestCase
      */
     public function setRegistrationDataForNoPaymentMethodSetAndPositiveTotalPriceWithSeminarWithOnePaymentMethodSelectsThatPaymentMethod()
     {
-        /** @var Configuration $configuration */
-        $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
-        $configuration->setAsString('currency', 'EUR');
+        $this->configuration->setAsString('currency', 'EUR');
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
@@ -1277,9 +1281,7 @@ final class RegistrationTest extends TestCase
      */
     public function setTotalPriceWithTotalPriceSetsTotalPrice()
     {
-        /** @var Configuration $configuration */
-        $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
-        $configuration->setAsString('currency', 'EUR');
+        $this->configuration->setAsString('currency', 'EUR');
         $this->subject->setTotalPrice('42.42');
 
         self::assertSame(

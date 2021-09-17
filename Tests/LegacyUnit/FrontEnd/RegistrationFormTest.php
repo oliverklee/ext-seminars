@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 
-use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Session\FakeSession;
 use OliverKlee\Oelib\Session\Session;
 use OliverKlee\Oelib\Testing\TestingFramework;
@@ -44,6 +44,11 @@ final class RegistrationFormTest extends TestCase
      */
     private $seminar = null;
 
+    /**
+     * @var DummyConfiguration
+     */
+    private $infoTablesConfiguration;
+
     protected function setUp()
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
@@ -54,10 +59,11 @@ final class RegistrationFormTest extends TestCase
         Session::setInstance(Session::TYPE_USER, $this->session);
 
         $configurationRegistry = ConfigurationRegistry::getInstance();
-        $configuration = new Configuration();
+        $configuration = new DummyConfiguration();
         $configuration->setAsString('currency', 'EUR');
         $configurationRegistry->set('plugin.tx_seminars', $configuration);
-        $configurationRegistry->set('plugin.tx_staticinfotables_pi1', new Configuration());
+        $this->infoTablesConfiguration = new DummyConfiguration();
+        $configurationRegistry->set('plugin.tx_staticinfotables_pi1', $this->infoTablesConfiguration);
 
         $this->seminar = new \Tx_Seminars_OldModel_Event(
             $this->testingFramework->createRecord(
@@ -450,9 +456,7 @@ final class RegistrationFormTest extends TestCase
     {
         $this->testingFramework->createAndLoginFrontEndUser();
 
-        /** @var Configuration $configuration */
-        $configuration = ConfigurationRegistry::get('plugin.tx_staticinfotables_pi1');
-        $configuration->setAsString('countryCode', 'DEU');
+        $this->infoTablesConfiguration->setAsString('countryCode', 'DEU');
 
         self::assertEquals(
             'Deutschland',

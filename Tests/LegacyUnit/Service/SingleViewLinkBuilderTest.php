@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Service;
 
-use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Oelib\Testing\TestingFramework;
@@ -44,6 +44,11 @@ final class SingleViewLinkBuilderTest extends TestCase
      */
     private $typo3confVarsBackup;
 
+    /**
+     * @var DummyConfiguration
+     */
+    private $configuration;
+
     protected function setUp()
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
@@ -52,7 +57,8 @@ final class SingleViewLinkBuilderTest extends TestCase
         $this->getBackup = $_GET;
         $this->typo3confVarsBackup = $GLOBALS['TYPO3_CONF_VARS'];
 
-        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars_pi1', new Configuration());
+        $this->configuration = new DummyConfiguration();
+        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars_pi1', $this->configuration);
     }
 
     protected function tearDown()
@@ -281,9 +287,7 @@ final class SingleViewLinkBuilderTest extends TestCase
      */
     public function getSingleViewPageFromConfigurationForNoPluginSetReturnsPageUidFromTypoScriptSetup()
     {
-        /** @var Configuration $configuration */
-        $configuration = ConfigurationRegistry::get('plugin.tx_seminars_pi1');
-        $configuration->set('detailPID', 91);
+        $this->configuration->setAsInteger('detailPID', 91);
 
         $subject = new TestingSingleViewLinkBuilder();
 

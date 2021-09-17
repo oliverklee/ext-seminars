@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 
-use OliverKlee\Oelib\Configuration\Configuration;
 use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
@@ -38,7 +38,7 @@ final class EventEditorTest extends TestCase
     private $testingFramework = null;
 
     /**
-     * @var Configuration
+     * @var DummyConfiguration
      */
     private $configuration = null;
 
@@ -59,7 +59,7 @@ final class EventEditorTest extends TestCase
         MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
 
         $this->recordsPageUid = $this->testingFramework->createSystemFolder();
-        $this->configuration = new Configuration();
+        $this->configuration = new DummyConfiguration();
         $this->configuration->setAsInteger('createAuxiliaryRecordsPID', $this->recordsPageUid);
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars_pi1', $this->configuration);
 
