@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Add more type declarations (#887)
 - Use the new configuration classes (#725)
 - Require oelib >= 3.6.2 (#877)
 - Use the Core email functions (#674, #874)

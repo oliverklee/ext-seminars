@@ -79,7 +79,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @param array|\tx_mkforms_forms_IForm|null $configuration
      */
-    public function init($configuration = null)
+    public function init($configuration = null): void
     {
         if (is_array($configuration)) {
             parent::init($configuration);
