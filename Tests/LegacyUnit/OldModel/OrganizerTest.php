@@ -61,7 +61,10 @@ final class OrganizerTest extends TestCase
     // Tests for creating organizer objects.
     //////////////////////////////////////////
 
-    public function testCreateFromUid()
+    /**
+     * @test
+     */
+    public function createFromUid()
     {
         self::assertTrue(
             $this->subject->isOk()
@@ -83,21 +86,30 @@ final class OrganizerTest extends TestCase
         );
     }
 
-    public function testHasHomepageWithEmptyHomepageReturnsFalse()
+    /**
+     * @test
+     */
+    public function hasHomepageWithEmptyHomepageReturnsFalse()
     {
         self::assertFalse(
             $this->subject->hasHomepage()
         );
     }
 
-    public function testHasHomepageWithHomepageReturnsTrue()
+    /**
+     * @test
+     */
+    public function hasHomepageWithHomepageReturnsTrue()
     {
         self::assertTrue(
             $this->maximalFixture->hasHomepage()
         );
     }
 
-    public function testGetHomepage()
+    /**
+     * @test
+     */
+    public function getHomepage()
     {
         self::assertEquals(
             '',
@@ -142,7 +154,10 @@ final class OrganizerTest extends TestCase
         );
     }
 
-    public function testGetAttendancesPidWithNoAttendancesPidReturnsZero()
+    /**
+     * @test
+     */
+    public function getAttendancesPidWithNoAttendancesPidReturnsZero()
     {
         self::assertEquals(
             0,
@@ -150,7 +165,10 @@ final class OrganizerTest extends TestCase
         );
     }
 
-    public function testGetAttendancesPidWithAttendancesPidReturnsAttendancesPid()
+    /**
+     * @test
+     */
+    public function getAttendancesPidWithAttendancesPidReturnsAttendancesPid()
     {
         self::assertEquals(
             99,

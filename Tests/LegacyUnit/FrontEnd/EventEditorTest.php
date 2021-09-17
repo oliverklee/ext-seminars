@@ -233,7 +233,10 @@ final class EventEditorTest extends TestCase
 
     // Tests for the utility functions.
 
-    public function testCreateLogInAndAddFeUserAsVipCreatesFeUser()
+    /**
+     * @test
+     */
+    public function createLogInAndAddFeUserAsVipCreatesFeUser()
     {
         $connection = $this->connectionPool->getConnectionForTable('fe_users');
 
@@ -245,7 +248,10 @@ final class EventEditorTest extends TestCase
         );
     }
 
-    public function testCreateLogInAndAddFeUserAsVipLogsInFeUser()
+    /**
+     * @test
+     */
+    public function createLogInAndAddFeUserAsVipLogsInFeUser()
     {
         $this->createLogInAndAddFeUserAsVip();
 
@@ -254,7 +260,10 @@ final class EventEditorTest extends TestCase
         );
     }
 
-    public function testCreateLogInAndAddFeUserAsVipAddsUserAsVip()
+    /**
+     * @test
+     */
+    public function createLogInAndAddFeUserAsVipAddsUserAsVip()
     {
         $connection = $this->connectionPool->getConnectionForTable('tx_seminars_seminars');
 
@@ -266,7 +275,10 @@ final class EventEditorTest extends TestCase
         );
     }
 
-    public function testCreateLogInAndAddFeUserAsOwnerCreatesFeUser()
+    /**
+     * @test
+     */
+    public function createLogInAndAddFeUserAsOwnerCreatesFeUser()
     {
         $connection = $this->connectionPool->getConnectionForTable('fe_users');
 
@@ -278,7 +290,10 @@ final class EventEditorTest extends TestCase
         );
     }
 
-    public function testCreateLogInAndAddFeUserAsOwnerLogsInFeUser()
+    /**
+     * @test
+     */
+    public function createLogInAndAddFeUserAsOwnerLogsInFeUser()
     {
         $this->createLogInAndAddFeUserAsOwner();
 
@@ -287,7 +302,10 @@ final class EventEditorTest extends TestCase
         );
     }
 
-    public function testCreateLogInAndAddFeUserAsOwnerAddsUserAsOwner()
+    /**
+     * @test
+     */
+    public function createLogInAndAddFeUserAsOwnerAddsUserAsOwner()
     {
         $query = $this->connectionPool->getQueryBuilderForTable('tx_seminars_seminars');
 
@@ -308,7 +326,10 @@ final class EventEditorTest extends TestCase
         );
     }
 
-    public function testCreateLogInAndAddFeUserAsDefaultVipCreatesFeUser()
+    /**
+     * @test
+     */
+    public function createLogInAndAddFeUserAsDefaultVipCreatesFeUser()
     {
         $connection = $this->connectionPool->getConnectionForTable('fe_users');
 
@@ -320,7 +341,10 @@ final class EventEditorTest extends TestCase
         );
     }
 
-    public function testCreateLogInAndAddFeUserAsDefaultVipLogsInFeUser()
+    /**
+     * @test
+     */
+    public function createLogInAndAddFeUserAsDefaultVipLogsInFeUser()
     {
         $this->createLogInAndAddFeUserAsDefaultVip();
 
@@ -329,7 +353,10 @@ final class EventEditorTest extends TestCase
         );
     }
 
-    public function testCreateLogInAndAddFeUserAsDefaultVipAddsFeUserAsDefaultVip()
+    /**
+     * @test
+     */
+    public function createLogInAndAddFeUserAsDefaultVipAddsFeUserAsDefaultVip()
     {
         $connection = $this->connectionPool->getConnectionForTable('fe_users');
 
@@ -395,7 +422,10 @@ final class EventEditorTest extends TestCase
     // Tests concerning hasAccessMessage()
     ////////////////////////////////////////
 
-    public function testHasAccessMessageWithNoLoggedInFeUserReturnsNotLoggedInMessage()
+    /**
+     * @test
+     */
+    public function hasAccessMessageWithNoLoggedInFeUserReturnsNotLoggedInMessage()
     {
         $this->subject->setObjectUid(
             $this->testingFramework->createRecord(
@@ -409,7 +439,10 @@ final class EventEditorTest extends TestCase
         );
     }
 
-    public function testHasAccessMessageWithLoggedInFeUserWhoIsNeitherVipNorOwnerReturnsNoAccessMessage()
+    /**
+     * @test
+     */
+    public function hasAccessMessageWithLoggedInFeUserWhoIsNeitherVipNorOwnerReturnsNoAccessMessage()
     {
         $this->subject->setObjectUid(
             $this->testingFramework->createRecord(
@@ -424,7 +457,10 @@ final class EventEditorTest extends TestCase
         );
     }
 
-    public function testHasAccessMessageWithLoggedInFeUserAsOwnerReturnsEmptyResult()
+    /**
+     * @test
+     */
+    public function hasAccessMessageWithLoggedInFeUserAsOwnerReturnsEmptyResult()
     {
         $this->createLogInAndAddFeUserAsOwner();
 
@@ -434,7 +470,10 @@ final class EventEditorTest extends TestCase
         );
     }
 
-    public function testHasAccessMessageWithLoggedInFeUserAsVipAndVipsMayNotEditTheirEventsReturnsNonEmptyResult()
+    /**
+     * @test
+     */
+    public function hasAccessMessageWithLoggedInFeUserAsVipAndVipsMayNotEditTheirEventsReturnsNonEmptyResult()
     {
         $this->subject->setObjectUid(
             $this->testingFramework->createRecord(
@@ -450,7 +489,10 @@ final class EventEditorTest extends TestCase
         );
     }
 
-    public function testHasAccessMessageWithLoggedInFeUserAsVipAndVipsMayEditTheirEventsReturnsEmptyResult()
+    /**
+     * @test
+     */
+    public function hasAccessMessageWithLoggedInFeUserAsVipAndVipsMayEditTheirEventsReturnsEmptyResult()
     {
         $this->subject->setObjectUid(
             $this->testingFramework->createRecord(
@@ -466,7 +508,10 @@ final class EventEditorTest extends TestCase
         );
     }
 
-    public function testHasAccessWithLoggedInFeUserAsDefaultVipAndVipsMayNotEditTheirEventsReturnsNonEmptyResult()
+    /**
+     * @test
+     */
+    public function hasAccessWithLoggedInFeUserAsDefaultVipAndVipsMayNotEditTheirEventsReturnsNonEmptyResult()
     {
         $this->subject->setObjectUid(
             $this->testingFramework->createRecord(
@@ -482,7 +527,10 @@ final class EventEditorTest extends TestCase
         );
     }
 
-    public function testHasAccessWithLoggedInFeUserAsDefaultVipAndVipsMayEditTheirEventsReturnsEmptyResult()
+    /**
+     * @test
+     */
+    public function hasAccessWithLoggedInFeUserAsDefaultVipAndVipsMayEditTheirEventsReturnsEmptyResult()
     {
         $this->subject->setObjectUid(
             $this->testingFramework->createRecord(
@@ -616,7 +664,10 @@ final class EventEditorTest extends TestCase
         );
     }
 
-    public function testHasAccessMessageForHiddenSeminarUidAndUserLoggedInReturnsEmptyString()
+    /**
+     * @test
+     */
+    public function hasAccessMessageForHiddenSeminarUidAndUserLoggedInReturnsEmptyString()
     {
         $this->subject->setObjectUid(
             $this->testingFramework->createRecord(

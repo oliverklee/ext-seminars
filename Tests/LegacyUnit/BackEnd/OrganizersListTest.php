@@ -87,7 +87,10 @@ final class OrganizersListTest extends TestCase
     // Tests concerning the "new" button
     //////////////////////////////////////
 
-    public function testNewButtonForOrganizerStorageSettingSetInUsersGroupSetsThisPidAsNewRecordPid()
+    /**
+     * @test
+     */
+    public function newButtonForOrganizerStorageSettingSetInUsersGroupSetsThisPidAsNewRecordPid()
     {
         $newOrganizerFolder = $this->dummySysFolderPid + 1;
         $backEndGroup = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUserGroup::class)

@@ -180,7 +180,10 @@ final class RegistrationsListTest extends TestCase
     // Tests for the registrations list functions.
     ////////////////////////////////////////////////
 
-    public function testShowForOneEventContainsAccreditationNumber()
+    /**
+     * @test
+     */
+    public function showForOneEventContainsAccreditationNumber()
     {
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -205,7 +208,10 @@ final class RegistrationsListTest extends TestCase
         );
     }
 
-    public function testShowForOneEventContainsHtmlSpecialCharedAccreditationNumber()
+    /**
+     * @test
+     */
+    public function showForOneEventContainsHtmlSpecialCharedAccreditationNumber()
     {
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -230,7 +236,10 @@ final class RegistrationsListTest extends TestCase
         );
     }
 
-    public function testShowShowsUserName()
+    /**
+     * @test
+     */
+    public function showShowsUserName()
     {
         $userUid = $this->testingFramework->createFrontEndUser(
             '',
@@ -255,7 +264,10 @@ final class RegistrationsListTest extends TestCase
         );
     }
 
-    public function testShowWithRegistrationForDeletedUserDoesNotShowUserName()
+    /**
+     * @test
+     */
+    public function showWithRegistrationForDeletedUserDoesNotShowUserName()
     {
         $userUid = $this->testingFramework->createFrontEndUser(
             '',
@@ -281,7 +293,10 @@ final class RegistrationsListTest extends TestCase
         );
     }
 
-    public function testShowWithRegistrationForInexistentUserDoesNotShowUserName()
+    /**
+     * @test
+     */
+    public function showWithRegistrationForInexistentUserDoesNotShowUserName()
     {
         $userUid = $this->testingFramework->getAutoIncrement('fe_users');
         $seminarUid = $this->testingFramework->createRecord(
@@ -304,7 +319,10 @@ final class RegistrationsListTest extends TestCase
         );
     }
 
-    public function testShowForOneEventContainsEventTitle()
+    /**
+     * @test
+     */
+    public function showForOneEventContainsEventTitle()
     {
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -328,7 +346,10 @@ final class RegistrationsListTest extends TestCase
         );
     }
 
-    public function testShowForOneDeletedEventDoesNotContainEventTitle()
+    /**
+     * @test
+     */
+    public function showForOneDeletedEventDoesNotContainEventTitle()
     {
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -353,7 +374,10 @@ final class RegistrationsListTest extends TestCase
         );
     }
 
-    public function testShowForOneInexistentEventShowsUserName()
+    /**
+     * @test
+     */
+    public function showForOneInexistentEventShowsUserName()
     {
         $userUid = $this->testingFramework->createFrontEndUser(
             '',
@@ -408,7 +432,10 @@ final class RegistrationsListTest extends TestCase
         );
     }
 
-    public function testShowForNonEmptyRegularRegistrationsListContainsCsvExportButton()
+    /**
+     * @test
+     */
+    public function showForNonEmptyRegularRegistrationsListContainsCsvExportButton()
     {
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -432,7 +459,10 @@ final class RegistrationsListTest extends TestCase
         );
     }
 
-    public function testShowForEmptyRegularRegistrationsListContainsCsvExportButton()
+    /**
+     * @test
+     */
+    public function showForEmptyRegularRegistrationsListContainsCsvExportButton()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -672,7 +702,10 @@ final class RegistrationsListTest extends TestCase
     // Tests concerning the "new" button
     //////////////////////////////////////
 
-    public function testNewButtonForRegistrationStorageSettingSetInUsersGroupSetsThisPidAsNewRecordPid()
+    /**
+     * @test
+     */
+    public function newButtonForRegistrationStorageSettingSetInUsersGroupSetsThisPidAsNewRecordPid()
     {
         $newRegistrationFolder = $this->dummySysFolderPid + 1;
         $backEndGroup = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUserGroup::class)

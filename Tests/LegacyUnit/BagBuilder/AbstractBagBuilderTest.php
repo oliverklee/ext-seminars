@@ -48,7 +48,10 @@ final class AbstractBagBuilderTest extends TestCase
     // Tests for the basic builder functions.
     ///////////////////////////////////////////
 
-    public function testBuilderThrowsExceptionForEmptyTableName()
+    /**
+     * @test
+     */
+    public function builderThrowsExceptionForEmptyTableName()
     {
         $this->expectException(\RuntimeException::class);
         $this->expectExceptionMessage('The attribute $this->tableName must not be empty.');
@@ -56,21 +59,30 @@ final class AbstractBagBuilderTest extends TestCase
         new BrokenBagBuilder();
     }
 
-    public function testBuilderBuildsAnObject()
+    /**
+     * @test
+     */
+    public function builderBuildsAnObject()
     {
         $bag = $this->subject->build();
 
         self::assertIsObject($bag);
     }
 
-    public function testBuilderBuildsABag()
+    /**
+     * @test
+     */
+    public function builderBuildsABag()
     {
         $bag = $this->subject->build();
 
         self::assertInstanceOf(AbstractBag::class, $bag);
     }
 
-    public function testBuilderBuildsBagSortedAscendingByUid()
+    /**
+     * @test
+     */
+    public function builderBuildsBagSortedAscendingByUid()
     {
         $eventUid1 = $this->testingFramework->createRecord('tx_seminars_test');
         $eventUid2 = $this->testingFramework->createRecord('tx_seminars_test');
@@ -107,14 +119,20 @@ final class AbstractBagBuilderTest extends TestCase
     // Tests concerning source pages.
     ///////////////////////////////////
 
-    public function testBuilderInitiallyHasNoSourcePages()
+    /**
+     * @test
+     */
+    public function builderInitiallyHasNoSourcePages()
     {
         self::assertFalse(
             $this->subject->hasSourcePages()
         );
     }
 
-    public function testBuilderHasSourcePagesWithOnePage()
+    /**
+     * @test
+     */
+    public function builderHasSourcePagesWithOnePage()
     {
         $this->subject->setSourcePages((string)$this->dummySysFolderPid);
 
@@ -123,7 +141,10 @@ final class AbstractBagBuilderTest extends TestCase
         );
     }
 
-    public function testBuilderHasSourcePagesWithTwoPages()
+    /**
+     * @test
+     */
+    public function builderHasSourcePagesWithTwoPages()
     {
         $this->subject->setSourcePages($this->dummySysFolderPid . ',' . ($this->dummySysFolderPid + 1));
 
@@ -132,7 +153,10 @@ final class AbstractBagBuilderTest extends TestCase
         );
     }
 
-    public function testBuilderHasNoSourcePagesWithEvilSql()
+    /**
+     * @test
+     */
+    public function builderHasNoSourcePagesWithEvilSql()
     {
         $this->subject->setSourcePages('; DROP TABLE tx_seminars_test;');
 
@@ -141,7 +165,10 @@ final class AbstractBagBuilderTest extends TestCase
         );
     }
 
-    public function testBuilderSelectsRecordsFromAllPagesByDefault()
+    /**
+     * @test
+     */
+    public function builderSelectsRecordsFromAllPagesByDefault()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_test',
@@ -160,7 +187,10 @@ final class AbstractBagBuilderTest extends TestCase
         );
     }
 
-    public function testBuilderSelectsRecordsFromAllPagesWithEmptySourcePages()
+    /**
+     * @test
+     */
+    public function builderSelectsRecordsFromAllPagesWithEmptySourcePages()
     {
         $this->subject->setSourcePages('');
         $this->testingFramework->createRecord(
@@ -180,7 +210,10 @@ final class AbstractBagBuilderTest extends TestCase
         );
     }
 
-    public function testBuilderSelectsRecordsFromAllPagesWithEmptyAfterNonEmptySourcePages()
+    /**
+     * @test
+     */
+    public function builderSelectsRecordsFromAllPagesWithEmptyAfterNonEmptySourcePages()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_test',
@@ -202,7 +235,10 @@ final class AbstractBagBuilderTest extends TestCase
         );
     }
 
-    public function testBuilderSelectsRecordsFromAllPagesWithEmptySourcePagesAndZeroRecursion()
+    /**
+     * @test
+     */
+    public function builderSelectsRecordsFromAllPagesWithEmptySourcePagesAndZeroRecursion()
     {
         $this->subject->setSourcePages('');
         $this->testingFramework->createRecord(
@@ -222,7 +258,10 @@ final class AbstractBagBuilderTest extends TestCase
         );
     }
 
-    public function testBuilderSelectsRecordsFromAllPagesWithEmptySourcePagesAndNonZeroRecursion()
+    /**
+     * @test
+     */
+    public function builderSelectsRecordsFromAllPagesWithEmptySourcePagesAndNonZeroRecursion()
     {
         $this->subject->setSourcePages('', 1);
         $this->testingFramework->createRecord(
@@ -242,7 +281,10 @@ final class AbstractBagBuilderTest extends TestCase
         );
     }
 
-    public function testBuilderSelectsRecordsFromOnePage()
+    /**
+     * @test
+     */
+    public function builderSelectsRecordsFromOnePage()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_test',
@@ -263,7 +305,10 @@ final class AbstractBagBuilderTest extends TestCase
         );
     }
 
-    public function testBuilderSelectsRecordsFromTwoPages()
+    /**
+     * @test
+     */
+    public function builderSelectsRecordsFromTwoPages()
     {
         $this->testingFramework->createRecord(
             'tx_seminars_test',
@@ -284,7 +329,10 @@ final class AbstractBagBuilderTest extends TestCase
         );
     }
 
-    public function testBuilderIgnoresRecordsOnSubpageWithoutRecursion()
+    /**
+     * @test
+     */
+    public function builderIgnoresRecordsOnSubpageWithoutRecursion()
     {
         $subPagePid = $this->testingFramework->createSystemFolder(
             $this->dummySysFolderPid
@@ -303,7 +351,10 @@ final class AbstractBagBuilderTest extends TestCase
         );
     }
 
-    public function testBuilderSelectsRecordsOnSubpageWithRecursion()
+    /**
+     * @test
+     */
+    public function builderSelectsRecordsOnSubpageWithRecursion()
     {
         $subPagePid = $this->testingFramework->createSystemFolder(
             $this->dummySysFolderPid
@@ -323,7 +374,10 @@ final class AbstractBagBuilderTest extends TestCase
         );
     }
 
-    public function testBuilderSelectsRecordsOnTwoSubpagesWithRecursion()
+    /**
+     * @test
+     */
+    public function builderSelectsRecordsOnTwoSubpagesWithRecursion()
     {
         $subPagePid1 = $this->testingFramework->createSystemFolder(
             $this->dummySysFolderPid
@@ -350,7 +404,10 @@ final class AbstractBagBuilderTest extends TestCase
         );
     }
 
-    public function testBuilderSelectsRecordsOnSubpageFromTwoParentsWithRecursion()
+    /**
+     * @test
+     */
+    public function builderSelectsRecordsOnSubpageFromTwoParentsWithRecursion()
     {
         $subPagePid1 = $this->testingFramework->createSystemFolder(
             $this->dummySysFolderPid
@@ -376,7 +433,10 @@ final class AbstractBagBuilderTest extends TestCase
         );
     }
 
-    public function testBuilderIgnoresRecordsOnSubpageWithTooShallowRecursion()
+    /**
+     * @test
+     */
+    public function builderIgnoresRecordsOnSubpageWithTooShallowRecursion()
     {
         $subPagePid = $this->testingFramework->createSystemFolder(
             $this->dummySysFolderPid
@@ -402,7 +462,10 @@ final class AbstractBagBuilderTest extends TestCase
     // Tests concerning hidden/deleted/timed etc. records.
     ////////////////////////////////////////////////////////
 
-    public function testWhereClauseInitiallyIsNotEmpty()
+    /**
+     * @test
+     */
+    public function whereClauseInitiallyIsNotEmpty()
     {
         self::assertNotEquals(
             '',
@@ -410,7 +473,10 @@ final class AbstractBagBuilderTest extends TestCase
         );
     }
 
-    public function testWhereClauseCanSelectPids()
+    /**
+     * @test
+     */
+    public function whereClauseCanSelectPids()
     {
         $this->subject->setSourcePages((string)$this->dummySysFolderPid);
 
@@ -491,7 +557,10 @@ final class AbstractBagBuilderTest extends TestCase
     // Test concerning limitToTitle
     /////////////////////////////////
 
-    public function testLimitToTitleFindsRecordWithThatTitle()
+    /**
+     * @test
+     */
+    public function limitToTitleFindsRecordWithThatTitle()
     {
         $this->subject->limitToTitle('foo');
         $this->testingFramework->createRecord(
@@ -506,7 +575,10 @@ final class AbstractBagBuilderTest extends TestCase
         );
     }
 
-    public function testLimitToTitleIgnoresRecordWithOtherTitle()
+    /**
+     * @test
+     */
+    public function limitToTitleIgnoresRecordWithOtherTitle()
     {
         $this->subject->limitToTitle('foo');
         $this->testingFramework->createRecord(
@@ -524,7 +596,10 @@ final class AbstractBagBuilderTest extends TestCase
     // Test concerning the combination of limitations
     ///////////////////////////////////////////////////
 
-    public function testLimitToTitleAndPagesFindsRecordThatMatchesBoth()
+    /**
+     * @test
+     */
+    public function limitToTitleAndPagesFindsRecordThatMatchesBoth()
     {
         $this->subject->setSourcePages((string)$this->dummySysFolderPid);
         $this->subject->limitToTitle('foo');
@@ -540,7 +615,10 @@ final class AbstractBagBuilderTest extends TestCase
         );
     }
 
-    public function testLimitToTitleAndPagesExcludesRecordThatMatchesOnlyTheTitle()
+    /**
+     * @test
+     */
+    public function limitToTitleAndPagesExcludesRecordThatMatchesOnlyTheTitle()
     {
         $this->subject->setSourcePages((string)$this->dummySysFolderPid);
         $this->subject->limitToTitle('foo');
@@ -555,7 +633,10 @@ final class AbstractBagBuilderTest extends TestCase
         );
     }
 
-    public function testLimitToTitleAndPagesExcludesRecordThatMatchesOnlyThePage()
+    /**
+     * @test
+     */
+    public function limitToTitleAndPagesExcludesRecordThatMatchesOnlyThePage()
     {
         $this->subject->setSourcePages((string)$this->dummySysFolderPid);
         $this->subject->limitToTitle('foo');
@@ -574,7 +655,10 @@ final class AbstractBagBuilderTest extends TestCase
     // Tests concerning addAdditionalTableName()
     //////////////////////////////////////////////
 
-    public function testAddAdditionalTableNameWithEmptyTableNameThrowsException()
+    /**
+     * @test
+     */
+    public function addAdditionalTableNameWithEmptyTableNameThrowsException()
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -586,7 +670,10 @@ final class AbstractBagBuilderTest extends TestCase
         $this->subject->addAdditionalTableName('');
     }
 
-    public function testAddAdditionalTableNameWithTableNameAddsAdditionalTableName()
+    /**
+     * @test
+     */
+    public function addAdditionalTableNameWithTableNameAddsAdditionalTableName()
     {
         $this->subject->addAdditionalTableName('tx_seminars_seminars');
 
@@ -600,7 +687,10 @@ final class AbstractBagBuilderTest extends TestCase
     // Tests concerning removeAdditionalTableName()
     /////////////////////////////////////////////////
 
-    public function testRemoveAdditionalTableNameWithEmptyTableNameThrowsException()
+    /**
+     * @test
+     */
+    public function removeAdditionalTableNameWithEmptyTableNameThrowsException()
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -612,7 +702,10 @@ final class AbstractBagBuilderTest extends TestCase
         $this->subject->removeAdditionalTableName('');
     }
 
-    public function testRemoveAdditionalTableNameWithNotSetTableNameThrowsException()
+    /**
+     * @test
+     */
+    public function removeAdditionalTableNameWithNotSetTableNameThrowsException()
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -625,7 +718,10 @@ final class AbstractBagBuilderTest extends TestCase
         $this->subject->removeAdditionalTableName('tx_seminars_seminars');
     }
 
-    public function testRemoveAdditionalTableNameWithSetTableNameRemovesAdditionalTableName()
+    /**
+     * @test
+     */
+    public function removeAdditionalTableNameWithSetTableNameRemovesAdditionalTableName()
     {
         $this->subject->addAdditionalTableName('tx_seminars_seminars');
         $this->subject->removeAdditionalTableName('tx_seminars_seminars');
@@ -640,7 +736,10 @@ final class AbstractBagBuilderTest extends TestCase
     // Tests concerning setOrderBy()
     //////////////////////////////////
 
-    public function testSetOrderByWithOrderBySetsOrderBy()
+    /**
+     * @test
+     */
+    public function setOrderByWithOrderBySetsOrderBy()
     {
         $this->subject->setOrderBy('field ASC');
 
@@ -650,7 +749,10 @@ final class AbstractBagBuilderTest extends TestCase
         );
     }
 
-    public function testSetOrderByWithEmptyStringRemovesOrderBy()
+    /**
+     * @test
+     */
+    public function setOrderByWithEmptyStringRemovesOrderBy()
     {
         $this->subject->setOrderBy('');
 
@@ -660,7 +762,10 @@ final class AbstractBagBuilderTest extends TestCase
         );
     }
 
-    public function testSetOrderByWithOrderByActuallySortsTheBag()
+    /**
+     * @test
+     */
+    public function setOrderByWithOrderByActuallySortsTheBag()
     {
         $this->subject->setOrderBy('uid DESC');
         $eventUid1 = $this->testingFramework->createRecord('tx_seminars_test');
@@ -686,7 +791,10 @@ final class AbstractBagBuilderTest extends TestCase
     // Tests concerning setLimit()
     ////////////////////////////////
 
-    public function testSetLimitWithNonEmptyLimitSetsLimit()
+    /**
+     * @test
+     */
+    public function setLimitWithNonEmptyLimitSetsLimit()
     {
         $this->subject->setLimit('0, 30');
 
@@ -696,7 +804,10 @@ final class AbstractBagBuilderTest extends TestCase
         );
     }
 
-    public function testSetLimitWithEmptyStringRemovesLimit()
+    /**
+     * @test
+     */
+    public function setLimitWithEmptyStringRemovesLimit()
     {
         $this->subject->setLimit('');
 
@@ -706,7 +817,10 @@ final class AbstractBagBuilderTest extends TestCase
         );
     }
 
-    public function testSetLimitWithLimitActuallyLimitsTheBag()
+    /**
+     * @test
+     */
+    public function setLimitWithLimitActuallyLimitsTheBag()
     {
         $this->testingFramework->createRecord('tx_seminars_test');
         $this->testingFramework->createRecord('tx_seminars_test');
@@ -723,7 +837,10 @@ final class AbstractBagBuilderTest extends TestCase
     // Tests concerning setTestMode()
     ///////////////////////////////////
 
-    public function testSetTestModeAddsTheTableNameBeforeIsDummy()
+    /**
+     * @test
+     */
+    public function setTestModeAddsTheTableNameBeforeIsDummy()
     {
         self::assertStringContainsString(
             'tx_seminars_test.is_dummy_record = 1',

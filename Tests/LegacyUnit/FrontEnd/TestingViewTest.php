@@ -41,7 +41,10 @@ final class TestingViewTest extends TestCase
         return $GLOBALS['TSFE'];
     }
 
-    public function testRenderCanReturnAViewsContent()
+    /**
+     * @test
+     */
+    public function renderCanReturnAViewsContent()
     {
         self::assertSame('Hi, I am the testingFrontEndView!', $this->subject->render());
     }

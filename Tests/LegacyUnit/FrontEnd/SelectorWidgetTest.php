@@ -77,7 +77,10 @@ final class SelectorWidgetTest extends TestCase
     // Tests for the utility functions
     ////////////////////////////////////
 
-    public function testInstantiateStaticInfoCreateStaticInfoInstance()
+    /**
+     * @test
+     */
+    public function instantiateStaticInfoCreateStaticInfoInstance()
     {
         $this->instantiateStaticInfo();
 
@@ -91,7 +94,10 @@ final class SelectorWidgetTest extends TestCase
     // General tests concerning the fixture.
     //////////////////////////////////////////
 
-    public function testFixtureIsAFrontEndSelectorWidgetObject()
+    /**
+     * @test
+     */
+    public function fixtureIsAFrontEndSelectorWidgetObject()
     {
         self::assertInstanceOf(\Tx_Seminars_FrontEnd_SelectorWidget::class, $this->subject);
     }
@@ -245,7 +251,10 @@ final class SelectorWidgetTest extends TestCase
     // Test for removeDummyOptionFromFormData()
     /////////////////////////////////////////////
 
-    public function testRemoveDummyOptionFromFormDataRemovesDummyOptionAtBeginningOfArray()
+    /**
+     * @test
+     */
+    public function removeDummyOptionFromFormDataRemovesDummyOptionAtBeginningOfArray()
     {
         self::assertEquals(
             ['CH', 'DE'],
@@ -255,7 +264,10 @@ final class SelectorWidgetTest extends TestCase
         );
     }
 
-    public function testRemoveDummyOptionFromFormDataRemovesDummyOptionInMiddleOfArray()
+    /**
+     * @test
+     */
+    public function removeDummyOptionFromFormDataRemovesDummyOptionInMiddleOfArray()
     {
         self::assertEquals(
             ['CH', 'DE'],
@@ -265,7 +277,10 @@ final class SelectorWidgetTest extends TestCase
         );
     }
 
-    public function testRemoveDummyOptionFromFormDataWithEmptyFormDataReturnsEmptyArray()
+    /**
+     * @test
+     */
+    public function removeDummyOptionFromFormDataWithEmptyFormDataReturnsEmptyArray()
     {
         self::assertEquals(
             [],

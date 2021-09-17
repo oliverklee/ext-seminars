@@ -37,7 +37,10 @@ final class OrganizerBagBuilderTest extends TestCase
     // Tests for the basic builder functions.
     ///////////////////////////////////////////
 
-    public function testBuilderBuildsABag()
+    /**
+     * @test
+     */
+    public function builderBuildsABag()
     {
         self::assertInstanceOf(AbstractBag::class, $this->subject->build());
     }
@@ -46,7 +49,10 @@ final class OrganizerBagBuilderTest extends TestCase
     // Tests for limitToEvent()
     /////////////////////////////
 
-    public function testLimitToEventWithNegativeEventUidThrowsException()
+    /**
+     * @test
+     */
+    public function limitToEventWithNegativeEventUidThrowsException()
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -58,7 +64,10 @@ final class OrganizerBagBuilderTest extends TestCase
         $this->subject->limitToEvent(-1);
     }
 
-    public function testLimitToEventWithZeroEventUidThrowsException()
+    /**
+     * @test
+     */
+    public function limitToEventWithZeroEventUidThrowsException()
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -70,7 +79,10 @@ final class OrganizerBagBuilderTest extends TestCase
         $this->subject->limitToEvent(0);
     }
 
-    public function testLimitToEventFindsOneOrganizerOfEvent()
+    /**
+     * @test
+     */
+    public function limitToEventFindsOneOrganizerOfEvent()
     {
         $organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers'
@@ -94,7 +106,10 @@ final class OrganizerBagBuilderTest extends TestCase
         );
     }
 
-    public function testLimitToEventFindsTwoOrganizersOfEvent()
+    /**
+     * @test
+     */
+    public function limitToEventFindsTwoOrganizersOfEvent()
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -126,7 +141,10 @@ final class OrganizerBagBuilderTest extends TestCase
         );
     }
 
-    public function testLimitToEventIgnoresOrganizerOfOtherEvent()
+    /**
+     * @test
+     */
+    public function limitToEventIgnoresOrganizerOfOtherEvent()
     {
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',

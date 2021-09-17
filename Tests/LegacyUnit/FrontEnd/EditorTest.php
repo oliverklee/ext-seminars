@@ -45,14 +45,20 @@ final class EditorTest extends TestCase
     // Testing the test mode flag
     //////////////////////////////
 
-    public function testIsTestModeReturnsTrueForTestModeEnabled()
+    /**
+     * @test
+     */
+    public function isTestModeReturnsTrueForTestModeEnabled()
     {
         self::assertTrue(
             $this->subject->isTestMode()
         );
     }
 
-    public function testIsTestModeReturnsFalseForTestModeDisabled()
+    /**
+     * @test
+     */
+    public function isTestModeReturnsFalseForTestModeDisabled()
     {
         $subject = new \Tx_Seminars_FrontEnd_Editor([], $this->getFrontEndController()->cObj);
 
@@ -65,7 +71,10 @@ final class EditorTest extends TestCase
     // Tests for setting and getting the object UID
     /////////////////////////////////////////////////
 
-    public function testGetObjectUidReturnsTheSetObjectUidForZero()
+    /**
+     * @test
+     */
+    public function getObjectUidReturnsTheSetObjectUidForZero()
     {
         $this->subject->setObjectUid(0);
 
@@ -75,7 +84,10 @@ final class EditorTest extends TestCase
         );
     }
 
-    public function testGetObjectUidReturnsTheSetObjectUidForExistingObjectUid()
+    /**
+     * @test
+     */
+    public function getObjectUidReturnsTheSetObjectUidForExistingObjectUid()
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_test');
         $this->subject->setObjectUid($uid);
@@ -90,7 +102,10 @@ final class EditorTest extends TestCase
     // Tests for getting form values and setting faked form values
     ////////////////////////////////////////////////////////////////
 
-    public function testGetFormValueReturnsEmptyStringForRequestedFormValueNotSet()
+    /**
+     * @test
+     */
+    public function getFormValueReturnsEmptyStringForRequestedFormValueNotSet()
     {
         self::assertEquals(
             '',
@@ -98,7 +113,10 @@ final class EditorTest extends TestCase
         );
     }
 
-    public function testGetFormValueReturnsValueSetViaSetFakedFormValue()
+    /**
+     * @test
+     */
+    public function getFormValueReturnsValueSetViaSetFakedFormValue()
     {
         $this->subject->setFakedFormValue('title', 'foo');
 

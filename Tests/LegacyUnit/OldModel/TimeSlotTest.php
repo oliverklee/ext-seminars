@@ -53,7 +53,10 @@ final class TimeSlotTest extends TestCase
     // Tests for creating time slot objects.
     //////////////////////////////////////////
 
-    public function testCreateFromUid()
+    /**
+     * @test
+     */
+    public function createFromUid()
     {
         self::assertTrue(
             $this->subject->isOk()
@@ -64,7 +67,10 @@ final class TimeSlotTest extends TestCase
     // Tests for the time slot's sites.
     /////////////////////////////////////
 
-    public function testPlaceIsInitiallyZero()
+    /**
+     * @test
+     */
+    public function placeIsInitiallyZero()
     {
         self::assertEquals(
             0,
@@ -72,14 +78,20 @@ final class TimeSlotTest extends TestCase
         );
     }
 
-    public function testHasPlaceInitiallyReturnsFalse()
+    /**
+     * @test
+     */
+    public function hasPlaceInitiallyReturnsFalse()
     {
         self::assertFalse(
             $this->subject->hasPlace()
         );
     }
 
-    public function testGetPlaceReturnsUidOfPlaceSetViaSetPlace()
+    /**
+     * @test
+     */
+    public function getPlaceReturnsUidOfPlaceSetViaSetPlace()
     {
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites'
@@ -92,7 +104,10 @@ final class TimeSlotTest extends TestCase
         );
     }
 
-    public function testHasPlaceReturnsTrueIfPlaceIsSet()
+    /**
+     * @test
+     */
+    public function hasPlaceReturnsTrueIfPlaceIsSet()
     {
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites'
@@ -108,7 +123,10 @@ final class TimeSlotTest extends TestCase
     // Tests for getPlaceShort
     ////////////////////////////
 
-    public function testGetPlaceShortReturnsWillBeAnnouncedForNoPlaces()
+    /**
+     * @test
+     */
+    public function getPlaceShortReturnsWillBeAnnouncedForNoPlaces()
     {
         self::assertSame(
             $this->getLanguageService()->getLL('message_willBeAnnounced'),
@@ -116,7 +134,10 @@ final class TimeSlotTest extends TestCase
         );
     }
 
-    public function testGetPlaceShortReturnsPlaceNameForOnePlace()
+    /**
+     * @test
+     */
+    public function getPlaceShortReturnsPlaceNameForOnePlace()
     {
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
@@ -161,14 +182,20 @@ final class TimeSlotTest extends TestCase
     // Tests for the time slot's entry date.
     //////////////////////////////////////////
 
-    public function testHasEntryDateIsInitiallyFalse()
+    /**
+     * @test
+     */
+    public function hasEntryDateIsInitiallyFalse()
     {
         self::assertFalse(
             $this->subject->hasEntryDate()
         );
     }
 
-    public function testHasEntryDate()
+    /**
+     * @test
+     */
+    public function hasEntryDate()
     {
         $this->subject->setEntryDate(42);
         self::assertTrue(
@@ -176,7 +203,10 @@ final class TimeSlotTest extends TestCase
         );
     }
 
-    public function testGetEntryDateWithBeginDateOnSameDayAsEntryDateReturnsTime()
+    /**
+     * @test
+     */
+    public function getEntryDateWithBeginDateOnSameDayAsEntryDateReturnsTime()
     {
         // chosen randomly 2001-01-01 13:01
         $time = 978354060;
@@ -191,7 +221,10 @@ final class TimeSlotTest extends TestCase
         );
     }
 
-    public function testGetEntryDateWithBeginDateOnDifferentDayAsEntryDateReturnsTimeAndDate()
+    /**
+     * @test
+     */
+    public function getEntryDateWithBeginDateOnDifferentDayAsEntryDateReturnsTimeAndDate()
     {
         // chosen randomly 2001-01-01 13:01
         $time = 978354060;

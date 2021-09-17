@@ -387,7 +387,10 @@ final class RegistrationManagerTest extends TestCase
         );
     }
 
-    public function testCreateFrontEndPagesCreatesNonZeroRegistrationPageUid()
+    /**
+     * @test
+     */
+    public function createFrontEndPagesCreatesNonZeroRegistrationPageUid()
     {
         $this->createFrontEndPages();
 
@@ -397,7 +400,10 @@ final class RegistrationManagerTest extends TestCase
         );
     }
 
-    public function testCreateFrontEndPagesCreatesPi1()
+    /**
+     * @test
+     */
+    public function createFrontEndPagesCreatesPi1()
     {
         $this->createFrontEndPages();
 
@@ -410,7 +416,10 @@ final class RegistrationManagerTest extends TestCase
         );
     }
 
-    public function testCreateAndLogInFrontEndUserCreatesNonZeroUserUid()
+    /**
+     * @test
+     */
+    public function createAndLogInFrontEndUserCreatesNonZeroUserUid()
     {
         $this->createAndLogInFrontEndUser();
 
@@ -420,7 +429,10 @@ final class RegistrationManagerTest extends TestCase
         );
     }
 
-    public function testCreateAndLogInFrontEndUserLogsInFrontEndUser()
+    /**
+     * @test
+     */
+    public function createAndLogInFrontEndUserLogsInFrontEndUser()
     {
         $this->createAndLogInFrontEndUser();
         self::assertTrue(
@@ -428,7 +440,10 @@ final class RegistrationManagerTest extends TestCase
         );
     }
 
-    public function testCreateBookedOutSeminarSetsSeminarInstance()
+    /**
+     * @test
+     */
+    public function createBookedOutSeminarSetsSeminarInstance()
     {
         $this->createBookedOutSeminar();
 
@@ -438,7 +453,10 @@ final class RegistrationManagerTest extends TestCase
         );
     }
 
-    public function testCreatedBookedOutSeminarHasUidGreaterZero()
+    /**
+     * @test
+     */
+    public function createdBookedOutSeminarHasUidGreaterZero()
     {
         $this->createBookedOutSeminar();
 
@@ -572,7 +590,10 @@ final class RegistrationManagerTest extends TestCase
 
     // Tests for the link to the registration page
 
-    public function testGetLinkToRegistrationOrLoginPageWithLoggedOutUserCreatesLinkTag()
+    /**
+     * @test
+     */
+    public function getLinkToRegistrationOrLoginPageWithLoggedOutUserCreatesLinkTag()
     {
         $this->testingFramework->logoutFrontEndUser();
         $this->createFrontEndPages();
@@ -583,7 +604,10 @@ final class RegistrationManagerTest extends TestCase
         );
     }
 
-    public function testGetLinkToRegistrationOrLoginPageWithLoggedOutUserCreatesLinkToLoginPage()
+    /**
+     * @test
+     */
+    public function getLinkToRegistrationOrLoginPageWithLoggedOutUserCreatesLinkToLoginPage()
     {
         $this->testingFramework->logoutFrontEndUser();
         $this->createFrontEndPages();
@@ -594,7 +618,10 @@ final class RegistrationManagerTest extends TestCase
         );
     }
 
-    public function testGetLinkToRegistrationOrLoginPageWithLoggedOutUserContainsRedirectWithEventUid()
+    /**
+     * @test
+     */
+    public function getLinkToRegistrationOrLoginPageWithLoggedOutUserContainsRedirectWithEventUid()
     {
         $this->testingFramework->logoutFrontEndUser();
         $this->createFrontEndPages();
@@ -609,7 +636,10 @@ final class RegistrationManagerTest extends TestCase
         );
     }
 
-    public function testGetLinkToRegistrationOrLoginPageWithLoggedInUserCreatesLinkTag()
+    /**
+     * @test
+     */
+    public function getLinkToRegistrationOrLoginPageWithLoggedInUserCreatesLinkTag()
     {
         $this->createFrontEndPages();
         $this->createAndLogInFrontEndUser();
@@ -620,7 +650,10 @@ final class RegistrationManagerTest extends TestCase
         );
     }
 
-    public function testGetLinkToRegistrationOrLoginPageWithLoggedInUserCreatesLinkToRegistrationPageWithEventUid()
+    /**
+     * @test
+     */
+    public function getLinkToRegistrationOrLoginPageWithLoggedInUserCreatesLinkToRegistrationPageWithEventUid()
     {
         $this->createFrontEndPages();
         $this->createAndLogInFrontEndUser();
@@ -658,7 +691,10 @@ final class RegistrationManagerTest extends TestCase
         );
     }
 
-    public function testGetLinkToRegistrationOrLoginPageWithLoggedInUserDoesNotContainRedirect()
+    /**
+     * @test
+     */
+    public function getLinkToRegistrationOrLoginPageWithLoggedInUserDoesNotContainRedirect()
     {
         $this->createFrontEndPages();
         $this->createAndLogInFrontEndUser();
@@ -1329,7 +1365,10 @@ final class RegistrationManagerTest extends TestCase
 
     // Test concerning userFulfillsRequirements
 
-    public function testUserFulfillsRequirementsForEventWithoutRequirementsReturnsTrue()
+    /**
+     * @test
+     */
+    public function userFulfillsRequirementsForEventWithoutRequirementsReturnsTrue()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
 
@@ -1352,7 +1391,10 @@ final class RegistrationManagerTest extends TestCase
         );
     }
 
-    public function testUserFulfillsRequirementsForEventWithOneFulfilledRequirementReturnsTrue()
+    /**
+     * @test
+     */
+    public function userFulfillsRequirementsForEventWithOneFulfilledRequirementReturnsTrue()
     {
         $requiredTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1399,7 +1441,10 @@ final class RegistrationManagerTest extends TestCase
         );
     }
 
-    public function testUserFulfillsRequirementsForEventWithOneUnfulfilledRequirementReturnsFalse()
+    /**
+     * @test
+     */
+    public function userFulfillsRequirementsForEventWithOneUnfulfilledRequirementReturnsFalse()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $requiredTopicUid = $this->testingFramework->createRecord(
@@ -1441,7 +1486,10 @@ final class RegistrationManagerTest extends TestCase
 
     // Tests concerning getMissingRequiredTopics
 
-    public function testGetMissingRequiredTopicsReturnsSeminarBag()
+    /**
+     * @test
+     */
+    public function getMissingRequiredTopicsReturnsSeminarBag()
     {
         self::assertInstanceOf(
             \Tx_Seminars_Bag_Event::class,
@@ -1449,7 +1497,10 @@ final class RegistrationManagerTest extends TestCase
         );
     }
 
-    public function testGetMissingRequiredTopicsForTopicWithOneNotFulfilledRequirementReturnsOneItem()
+    /**
+     * @test
+     */
+    public function getMissingRequiredTopicsForTopicWithOneNotFulfilledRequirementReturnsOneItem()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $requiredTopicUid = $this->testingFramework->createRecord(
@@ -1493,7 +1544,10 @@ final class RegistrationManagerTest extends TestCase
         );
     }
 
-    public function testGetMissingRequiredTopicsForTopicWithOneNotFulfilledRequirementReturnsRequiredTopic()
+    /**
+     * @test
+     */
+    public function getMissingRequiredTopicsForTopicWithOneNotFulfilledRequirementReturnsRequiredTopic()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $requiredTopicUid = $this->testingFramework->createRecord(
@@ -1537,7 +1591,10 @@ final class RegistrationManagerTest extends TestCase
         );
     }
 
-    public function testGetMissingRequiredTopicsForTopicWithOneTwoNotFulfilledRequirementReturnsTwoItems()
+    /**
+     * @test
+     */
+    public function getMissingRequiredTopicsForTopicWithOneTwoNotFulfilledRequirementReturnsTwoItems()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $topicUid = $this->testingFramework->createRecord(
