@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\BackEnd;
 
+use Recurr\Rule;
 use TYPO3\CMS\Backend\Form\Element\AbstractFormElement;
 use TYPO3\CMS\Backend\Form\Exception as FormException;
 use TYPO3\CMS\Backend\Template\Components\Buttons\InputButton;
@@ -34,6 +35,12 @@ class TimeSlotWizard extends AbstractFormElement
     public function render(): array
     {
         $result = $this->initializeResultArray();
+        // The time-slot wizard uses a Composer-provided library and hence is a Composer-only feature.
+        if (!\class_exists(Rule::class)) {
+            $result['html'] = '';
+            return $result;
+        }
+
         $result['requireJsModules'] = ['TYPO3/CMS/Seminars/TimeSlotWizard'];
         $result['stylesheetFiles'] = ['EXT:seminars/Resources/Public/CSS/BackEnd/TimeSlotWizard.css'];
 
@@ -188,7 +195,6 @@ class TimeSlotWizard extends AbstractFormElement
         /** @var InputButton $button */
         $button = GeneralUtility::makeInstance(InputButton::class);
         $button->setTitle($this->getLanguageService()->sL(self::LABEL_KEY_PREFIX . 'create'))
-//            ->setName('_createTimeSlots')
             ->setName('_savedok')
             ->setValue('1')
             ->setForm('EditDocumentController')
