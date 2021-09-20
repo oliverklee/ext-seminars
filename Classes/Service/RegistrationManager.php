@@ -1256,13 +1256,14 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
 
     private function addCssToHtmlEmail(string $emailBody): string
     {
-        if (!$this->hasConfValueString('cssFileForAttendeeMail')) {
+        // The CSS inlining uses a Composer-provided library and hence is a Composer-only feature.
+        if (!$this->hasConfValueString('cssFileForAttendeeMail') || !\class_exists(CssInliner::class)) {
             return $emailBody;
         }
+
         $cssFile = $this->getConfValueString('cssFileForAttendeeMail');
         $absolutePath = GeneralUtility::getFileAbsFileName($cssFile);
         if (\is_readable($absolutePath)) {
-            $this->loadEmogrifier();
             $css = \file_get_contents($absolutePath);
             $htmlWithCss = CssInliner::fromHtml($emailBody)->inlineCss($css)->render();
         } else {
@@ -1270,13 +1271,6 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         }
 
         return $htmlWithCss;
-    }
-
-    private function loadEmogrifier(): void
-    {
-        if (!\class_exists(CssInliner::class)) {
-            require_once __DIR__ . '/../../Resources/Private/Php/vendor/autoload.php';
-        }
     }
 
     /**

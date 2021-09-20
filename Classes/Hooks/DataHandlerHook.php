@@ -298,8 +298,9 @@ class DataHandlerHook
      */
     private function createTimeSlots(array &$event, $eventUid, array $configuration, array &$allTimeSlots)
     {
+        // The time-slot wizard uses a Composer-provided library and hence is a Composer-only feature.
         if (!\class_exists(Rule::class)) {
-            require_once __DIR__ . '/../../Resources/Private/Php/vendor/autoload.php';
+            return;
         }
 
         if (isset($event['pid'])) {

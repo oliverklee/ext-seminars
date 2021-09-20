@@ -50,6 +50,12 @@ Known problems
   the one in TYPO3, the FE editor does not show an error message if one
   tries to upload a too large file.
 
+- The time-slot wizard in the TCEforms is available in Composer-mode only
+  as this feature makes use of a third-party library.
+
+- The inlining of CSS in HTML emails is available in Composer-mode only
+  as this feature makes use of a third-party library.
+
 - The front-end editor does not work with MySQL/MariaDB in strict mode. You will
   need to remove `STRICT_TRANS_TABLES` from `sql_mode`:
 

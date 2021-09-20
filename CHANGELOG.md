@@ -25,6 +25,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Make the time slot wizard and CSS in emails Composer-only (#904)
 - Remove the deprecated hooks (#867)
 - Drop support for TYPO3 8LTS (#848, #859)
 - Drop support for PHP 7.0 and 7.1 (#847)
