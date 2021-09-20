@@ -99,8 +99,6 @@ class SpeakersList extends AbstractList
         $this->template->setSubpart('SPEAKER_ROW', $tableRows);
         $content .= $this->template->getSubpart('SEMINARS_SPEAKER_LIST');
 
-        $content .= $speakerBag->checkConfiguration();
-
         return $content;
     }
 

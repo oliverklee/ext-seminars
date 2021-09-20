@@ -212,10 +212,6 @@ class RegistrationsList extends AbstractList
             $tableRows .= $this->template->getSubpart('REGISTRATION_TABLE_ROW');
         }
 
-        if ($this->configCheckWarnings === '') {
-            $this->configCheckWarnings = $registrationBag->checkConfiguration();
-        }
-
         $this->template->setMarker('label_registrations', $languageService->getLL($tableLabel));
         $this->template->setMarker('number_of_registrations', $registrationBag->count());
         $this->getListViewHookProvider()->executeHook(

@@ -17,111 +17,11 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class Tx_Seminars_ConfigCheck extends ConfigurationCheck
 {
     /**
-     * Checks the configuration for: \Tx_Seminars_Service_RegistrationManager/.
-     *
-     * @return void
-     */
-    protected function check_Tx_Seminars_Service_RegistrationManager()
-    {
-        // The registration manager needs to be able to create registration
-        // objects. So we check whether the prerequisites for registrations
-        // are fulfilled as well.
-        $this->check_Tx_Seminars_OldModel_Registration();
-    }
-
-    /**
-     * Checks the configuration for: \Tx_Seminars_OldModel_Event/.
-     *
-     * @return void
-     */
-    protected function check_Tx_Seminars_OldModel_Event()
-    {
-        $this->checkStaticIncluded();
-        $this->checkSalutationMode();
-        $this->checkTimeAndDate();
-        $this->checkCurrency();
-        $this->checkShowToBeAnnouncedForEmptyPrice();
-
-        if ($this->objectToCheck->getConfValueBoolean('enableRegistration')) {
-            $this->checkShowTimeOfRegistrationDeadline();
-            $this->checkShowTimeOfEarlyBirdDeadline();
-            $this->checkShowVacanciesThreshold();
-            $this->checkAllowRegistrationForStartedEvents();
-            $this->checkAllowRegistrationForEventsWithoutDate();
-            $this->checkSkipRegistrationCollisionCheck();
-        }
-    }
-
-    /**
-     * Checks the configuration for: \Tx_Seminars_OldModel_Registration/.
-     *
-     * @return void
-     */
-    protected function check_Tx_Seminars_OldModel_Registration()
-    {
-        $this->checkStaticIncluded();
-        $this->checkTemplateFile();
-        $this->checkSalutationMode();
-
-        $this->checkRegistrationFlag();
-
-        $this->checkThankYouMail();
-        $this->checkGeneralPriceInMail();
-        $this->checkNotificationMail();
-
-        if ($this->objectToCheck->getConfValueBoolean('enableRegistration')) {
-            $this->checkAttendancesPid();
-            $this->checkUnregistrationDeadlineDaysBeforeBeginDate();
-            $this->checkAllowUnregistrationWithEmptyWaitingList();
-        }
-    }
-
-    /**
-     * Checks the configuration for: \Tx_Seminars_OldModel_Speaker/.
-     *
-     * @return void
-     */
-    protected function check_Tx_Seminars_OldModel_Speaker()
-    {
-        $this->checkStaticIncluded();
-    }
-
-    /**
-     * Checks the configuration for: \Tx_Seminars_OldModel_Organizer/.
-     *
-     * @return void
-     */
-    protected function check_Tx_Seminars_OldModel_Organizer()
-    {
-        $this->checkStaticIncluded();
-    }
-
-    /**
-     * Checks the configuration for: \Tx_Seminars_OldModel_TimeSlot/.
-     *
-     * @return void
-     */
-    protected function check_Tx_Seminars_OldModel_TimeSlot()
-    {
-        $this->checkStaticIncluded();
-    }
-
-    /**
      * Checks the configuration for: tx_seminars_test/.
      *
      * @return void
      */
     protected function check_tx_seminars_test()
-    {
-        $this->checkStaticIncluded();
-    }
-
-    /**
-     * Checks the configuration for: \Tx_Seminars_OldModel_Category/.
-     *
-     * @return void
-     */
-    protected function check_Tx_Seminars_OldModel_Category()
     {
         $this->checkStaticIncluded();
     }
@@ -425,63 +325,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
     }
 
     /**
-     * Checks the configuration related to thank-you e-mails.
-     *
-     * @return void
-     */
-    private function checkThankYouMail()
-    {
-        $this->checkHideFieldsInThankYouMail();
-        $this->checkSendConfirmation();
-        $this->checkSendConfirmationOnQueueUpdate();
-        $this->checkSendConfirmationOnRegistrationForQueue();
-        $this->checkSendConfirmationOnUnregistration();
-    }
-
-    /**
-     * Checks the configuration related to notification e-mails.
-     *
-     * @return void
-     */
-    private function checkNotificationMail()
-    {
-        $this->checkHideFieldsInNotificationMail();
-        $this->checkShowSeminarFieldsInNotificationMail();
-        $this->checkShowFeUserFieldsInNotificationMail();
-        $this->checkShowAttendanceFieldsInNotificationMail();
-        $this->checkSendAdditionalNotificationEmails();
-        $this->checkSendNotification();
-        $this->checkSendNotificationOnQueueUpdate();
-        $this->checkSendNotificationOnRegistrationForQueue();
-        $this->checkSendNotificationOnUnregistration();
-    }
-
-    /**
-     * Checks the settings for time and date format.
-     *
-     * @return void
-     */
-    private function checkTimeAndDate()
-    {
-        $explanation = 'This determines the way dates and times are '
-            . 'displayed. If this is not set correctly, dates and times might '
-            . 'be mangled or not get displayed at all.';
-        $configVariables = [
-            'timeFormat',
-            'dateFormatY',
-            'dateFormatM',
-            'dateFormatD',
-            'dateFormatYMD',
-            'dateFormatMD',
-        ];
-        foreach ($configVariables as $configVariableToCheck) {
-            $this->checkForNonEmptyString($configVariableToCheck, false, '', $explanation);
-        }
-
-        $this->checkAbbreviateDateRanges();
-    }
-
-    /**
      * Checks the setting of the configuration value enableRegistration.
      *
      * @return void
@@ -527,99 +370,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
                 'category_list',
                 'event_headline',
             ]
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value showTimeOfRegistrationDeadline.
-     *
-     * @return void
-     */
-    private function checkShowTimeOfRegistrationDeadline()
-    {
-        $this->checkIfBoolean(
-            'showTimeOfRegistrationDeadline',
-            false,
-            '',
-            'This value specifies whether to also show the time of '
-            . 'registration deadlines. If this value is incorrect, the '
-            . 'time might get shown although this is not intended '
-            . '(or vice versa).'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value showTimeOfEarlyBirdDeadline.
-     *
-     * @return void
-     */
-    private function checkShowTimeOfEarlyBirdDeadline()
-    {
-        $this->checkIfBoolean(
-            'showTimeOfEarlyBirdDeadline',
-            false,
-            '',
-            'This value specifies whether to also show the time of '
-            . 'early bird deadlines. If this value is incorrect, the '
-            . 'time might get shown although this is not intended '
-            . '(or vice versa).'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value showVacanciesThreshold.
-     *
-     * @return void
-     */
-    private function checkShowVacanciesThreshold()
-    {
-        $this->checkIfInteger(
-            'showVacanciesThreshold',
-            false,
-            '',
-            'This value specifies down from which threshold the exact number '
-            . 'of vancancies will be displayed. If this value is incorrect, '
-            . 'the number might get shown although this is not intended '
-            . '(or vice versa).'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value generalPriceInMail.
-     *
-     * @return void
-     */
-    private function checkGeneralPriceInMail()
-    {
-        $this->checkIfBoolean(
-            'generalPriceInMail',
-            false,
-            '',
-            'This value specifies which wording to use for the standard price '
-            . 'in e-mails. If this value is incorrect, the wrong wording '
-            . 'might get used.'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value attendancesPID.
-     *
-     * @return void
-     */
-    private function checkAttendancesPid()
-    {
-        $this->checkIfSingleSysFolderNotEmpty(
-            'attendancesPID',
-            false,
-            '',
-            'This value specifies the page on which registrations will be '
-            . 'stored. If this value is not set correctly, registration '
-            . 'records will be dumped in the TYPO3 root page. If you '
-            . 'explicitely do not wish to use the online registration '
-            . 'feature, you can disable these checks by setting '
-            . '<strong>plugin.tx_seminars.enableRegistration</strong> and '
-            . '<strong>plugin.tx_seminars_pi1.enableRegistration</strong> '
-            . 'to 0.'
         );
     }
 
@@ -882,7 +632,7 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
      *
      * @return void
      */
-    protected function checkHideFieldsInNotificationMail()
+    private function checkHideFieldsInNotificationMail()
     {
         $this->checkIfMultiInSetOrEmpty(
             'hideFieldsInNotificationMail',
@@ -1910,25 +1660,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
     }
 
     /**
-     * Checks the setting of the configuration value showToBeAnnouncedForEmptyPrice.
-     *
-     * @return void
-     */
-    private function checkShowToBeAnnouncedForEmptyPrice()
-    {
-        $this->checkIfBoolean(
-            'showToBeAnnouncedForEmptyPrice',
-            false,
-            '',
-            'This value specifies whether &quot;to be announced&quot; should be '
-            . 'displayed instead of &quot;free&quot; if an event has no '
-            . 'regular price set yet.'
-            . 'If this value is not set correctly, the wrong wording '
-            . 'might get displayed.'
-        );
-    }
-
-    /**
      * Checks whether the HTML template for the registration form is provided
      * and the file exists.
      *
@@ -2135,27 +1866,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
     }
 
     /**
-     * Checks the setting of the configuration value
-     * unregistrationDeadlineDaysBeforeBeginDate.
-     *
-     * @return void
-     */
-    private function checkUnregistrationDeadlineDaysBeforeBeginDate()
-    {
-        $this->checkIfPositiveIntegerOrEmpty(
-            'unregistrationDeadlineDaysBeforeBeginDate',
-            false,
-            '',
-            'This value specifies the number of days before the start of an '
-            . 'event until unregistration is possible. (If you want to '
-            . 'disable this feature, just leave this value empty.) If this '
-            . 'value is incorrect, unregistration will fail to work or the '
-            . 'unregistration period will be a different number of days than '
-            . 'desired.'
-        );
-    }
-
-    /**
      * Checks the setting of the configuration value sendNotification.
      *
      * @return void
@@ -2306,63 +2016,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
     }
 
     /**
-     * Checks the setting of the configuration value
-     * allowRegistrationForStartedEvents.
-     *
-     * @return void
-     */
-    private function checkAllowRegistrationForStartedEvents()
-    {
-        $this->checkIfBoolean(
-            'allowRegistrationForStartedEvents',
-            false,
-            '',
-            'This value specifies whether registration is possible even when ' .
-            'an event already has started. ' .
-            'If this value is incorrect, registration might be possible ' .
-            'even when this is not desired (or vice versa).'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value
-     * allowRegistrationForEventsWithoutDate.
-     *
-     * @return void
-     */
-    private function checkAllowRegistrationForEventsWithoutDate()
-    {
-        $this->checkIfBoolean(
-            'allowRegistrationForEventsWithoutDate',
-            false,
-            '',
-            'This value specifies whether registration is possible for ' .
-            'events without a fixed date. ' .
-            'If this value is incorrect, registration might be possible ' .
-            'even when this is not desired (or vice versa).'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value
-     * allowUnregistrationWithEmptyWaitingList.
-     *
-     * @return void
-     */
-    private function checkAllowUnregistrationWithEmptyWaitingList()
-    {
-        $this->checkIfBoolean(
-            'allowUnregistrationWithEmptyWaitingList',
-            false,
-            '',
-            'This value specifies whether unregistration is possible even when '
-            . 'there are no registrations on the waiting list yet. '
-            . 'If this value is incorrect, unregistration might be possible '
-            . 'even when this is not desired (or vice versa).'
-        );
-    }
-
-    /**
      * Checks the setting of the configuration value externalLinkTarget.
      * But currently does nothing as we don't think there's something to check for.
      *
@@ -2460,24 +2113,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
             'This value specifies the organizers for which the list view ' .
             'should be filtered. If this value is not set correctly, ' .
             'some events might unintentionally get hidden or shown.'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value skipRegistrationCollisionCheck.
-     *
-     * @return void
-     */
-    private function checkSkipRegistrationCollisionCheck()
-    {
-        $this->checkIfBoolean(
-            'skipRegistrationCollisionCheck',
-            false,
-            '',
-            'This value specifies whether the registration collision check ' .
-            'should be disabled for all events. If this value is incorrect, ' .
-            'the registration collision check might be enabled although it ' .
-            'should be disabled (or vice versa).'
         );
     }
 

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Bag;
 
 use Doctrine\DBAL\FetchMode;
-use OliverKlee\Oelib\Interfaces\ConfigurationCheckable;
 use OliverKlee\Seminars\OldModel\AbstractModel;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\EndTimeRestriction;
@@ -20,7 +19,7 @@ use TYPO3\CMS\Frontend\Page\PageRepository;
  *
  * @template M of AbstractModel
  */
-abstract class AbstractBag implements \Iterator, ConfigurationCheckable
+abstract class AbstractBag implements \Iterator
 {
     /**
      * @var class-string<M>
@@ -358,31 +357,6 @@ abstract class AbstractBag implements \Iterator, ConfigurationCheckable
         \sort($uids, SORT_NUMERIC);
 
         return \implode(',', $uids);
-    }
-
-    /**
-     * Checks whether the current item is okay and returns its error messages
-     * from the configuration check.
-     *
-     * @return string error messages from the configuration check, may be empty
-     */
-    public function checkConfiguration(): string
-    {
-        if ($this->current() !== null && $this->current()->comesFromDatabase()) {
-            return $this->current()->checkConfiguration(true);
-        }
-
-        return '';
-    }
-
-    /**
-     * Returns the prefix for the configuration to check, e.g. "plugin.tx_seminars_pi1.".
-     *
-     * @return string the namespace prefix, will end with a dot
-     */
-    public function getTypoScriptNamespace(): string
-    {
-        return 'plugin.tx_seminars.';
     }
 
     private function getConnectionPool(): ConnectionPool

@@ -87,8 +87,6 @@ class OrganizersList extends AbstractList
 
         $content .= $this->template->getSubpart('SEMINARS_ORGANIZER_LIST');
 
-        $content .= $organizerBag->checkConfiguration();
-
         return $content;
     }
 

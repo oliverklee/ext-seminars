@@ -3,12 +3,15 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
+use OliverKlee\Oelib\Configuration\ConfigurationProxy;
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Interfaces\ConfigurationCheckable;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Seminars\Bag\AbstractBag;
+use OliverKlee\Seminars\Configuration\SharedConfigurationCheck;
 use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
 use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Hooks\HookProvider;
@@ -227,9 +230,6 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
         $this->setLabels();
         $this->createHelperObjects();
 
-        // Lets warnings from the registration manager bubble up to us.
-        $this->setErrorMessage($this->getRegistrationManager()->checkConfiguration(true));
-
         // Sets the UID of a single event that is requested (either by the
         // configuration in the flexform or by a parameter in the URL).
         if ($this->hasConfValueInteger('showSingleEvent', 's_template_special')) {
@@ -341,6 +341,13 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
         // messages.
         $this->checkConfiguration();
         $result .= $this->getWrappedConfigCheckMessage();
+
+        if (ConfigurationProxy::getInstance('seminars')->getAsBoolean('enableConfigCheck')) {
+            $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
+            $configurationCheck = new SharedConfigurationCheck($configuration, 'plugin.tx_seminars');
+            $configurationCheck->check();
+            $result .= \implode("\n", $configurationCheck->getWarningsAsHtml());
+        }
 
         return $this->pi_wrapInBaseClass($result);
     }
@@ -677,9 +684,6 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
     {
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
         $event = $mapper->find($this->showUid);
-
-        // Lets warnings from the seminar bubble up to us.
-        $this->setErrorMessage($this->seminar->checkConfiguration(true));
 
         // This sets the title of the page for use in indexed search results:
         $this->getFrontEndController()->indexedDocTitle = $this->seminar->getTitle();
@@ -1534,10 +1538,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
             $result = $this->getSubpart('EVENTSNEXTDAY_VIEW');
         }
 
-        // Lets warnings from the seminar and the seminar bag bubble up to us.
-        $this->setErrorMessage($seminarBag->checkConfiguration());
-
-        // Let's also check the list view configuration..
+        // Let's also check the list view configuration.
         $this->checkConfiguration(true, 'seminar_list');
 
         return $result;
@@ -1584,9 +1585,6 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
             // Un-hides the previously hidden columns.
             $this->unhideColumns($temporaryHiddenColumns);
         }
-
-        // Lets warnings from the seminar and the seminar bag bubble up to us.
-        $this->setErrorMessage($seminarBag->checkConfiguration());
 
         // Let's also check the list view configuration..
         $this->checkConfiguration(true, 'seminar_list');
@@ -1690,9 +1688,6 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
             if (!$this->getConfValueBoolean('hidePageBrowser', 's_template_special')) {
                 $result .= $this->pi_list_browseresults();
             }
-
-            // Lets warnings from the seminar and the seminar bag bubble up to us.
-            $this->setErrorMessage($seminarOrRegistrationBag->checkConfiguration());
         }
 
         return $result;
@@ -2767,9 +2762,6 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
 
         $eventUid = (int)$this->piVars['seminar'];
         if ($this->createSeminar($eventUid)) {
-            // Lets warnings from the seminar bubble up to us.
-            $this->setErrorMessage($this->seminar->checkConfiguration(true));
-
             if ($this->getRegistrationManager()->canRegisterIfLoggedIn($this->seminar)) {
                 if ($this->isLoggedIn()) {
                     $isOkay = true;

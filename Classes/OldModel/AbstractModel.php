@@ -534,6 +534,8 @@ abstract class AbstractModel extends TemplateHelper
      * Returns the prefix for the configuration to check, e.g. "plugin.tx_seminars_pi1.".
      *
      * @return string the namespace prefix, will end with a dot
+     *
+     * @deprecated This method can be removed once the model does not extend `TemplateHelper` anymore.
      */
     public function getTypoScriptNamespace(): string
     {
