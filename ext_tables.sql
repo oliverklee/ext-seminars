@@ -33,20 +33,9 @@ CREATE TABLE be_groups (
 # Table structure for table 'tx_seminars_test'
 #
 CREATE TABLE tx_seminars_test (
-    uid int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
-    pid int(11) unsigned DEFAULT '0' NOT NULL,
-    tstamp int(11) unsigned DEFAULT '0' NOT NULL,
-    crdate int(11) unsigned DEFAULT '0' NOT NULL,
-    cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
-    deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
-    hidden tinyint(4) unsigned DEFAULT '0' NOT NULL,
-    starttime int(11) unsigned DEFAULT '0' NOT NULL,
-    endtime int(11) unsigned DEFAULT '0' NOT NULL,
     is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     title tinytext,
 
-    PRIMARY KEY (uid),
-    KEY parent (pid),
     KEY dummy (is_dummy_record)
 );
 
@@ -220,17 +209,8 @@ CREATE TABLE tx_seminars_seminars_payment_methods_mm (
 # Table structure for table 'tx_seminars_seminars'
 #
 CREATE TABLE tx_seminars_seminars (
-    uid int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
-    pid int(11) unsigned DEFAULT '0' NOT NULL,
-    tstamp int(11) unsigned DEFAULT '0' NOT NULL,
-    crdate int(11) unsigned DEFAULT '0' NOT NULL,
-    cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
-    deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
     is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     object_type int(11) unsigned DEFAULT '0' NOT NULL,
-    hidden tinyint(4) unsigned DEFAULT '0' NOT NULL,
-    starttime int(11) unsigned DEFAULT '0' NOT NULL,
-    endtime int(11) unsigned DEFAULT '0' NOT NULL,
     title tinytext,
     topic int(11) unsigned DEFAULT '0' NOT NULL,
     subtitle tinytext,
@@ -297,8 +277,6 @@ CREATE TABLE tx_seminars_seminars (
     price_on_request tinyint(1) unsigned DEFAULT '0' NOT NULL,
     date_of_last_registration_digest int(11) unsigned DEFAULT '0' NOT NULL,
 
-    PRIMARY KEY (uid),
-    KEY parent (pid),
     KEY dummy (is_dummy_record),
     KEY object_type (object_type),
     KEY topic (topic),
@@ -328,13 +306,6 @@ CREATE TABLE tx_seminars_seminars_feusers_mm (
 # Table structure for table 'tx_seminars_speakers'
 #
 CREATE TABLE tx_seminars_speakers (
-    uid int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
-    pid int(11) unsigned DEFAULT '0' NOT NULL,
-    tstamp int(11) unsigned DEFAULT '0' NOT NULL,
-    crdate int(11) unsigned DEFAULT '0' NOT NULL,
-    cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
-    deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
-    hidden tinyint(1) unsigned DEFAULT '0' NOT NULL,
     is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     owner int(11) unsigned DEFAULT '0' NOT NULL,
     title tinytext,
@@ -353,8 +324,6 @@ CREATE TABLE tx_seminars_speakers (
     gender tinyint(1) unsigned DEFAULT '0' NOT NULL,
     cancelation_period int(11) unsigned DEFAULT '0' NOT NULL,
 
-    PRIMARY KEY (uid),
-    KEY parent (pid),
     KEY dummy (is_dummy_record),
     FULLTEXT index_searchfields (title)
 ) ENGINE = MyISAM;
@@ -379,14 +348,7 @@ CREATE TABLE tx_seminars_speakers_skills_mm (
 # Table structure for table 'tx_seminars_attendances'
 #
 CREATE TABLE tx_seminars_attendances (
-    uid int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
-    pid int(11) unsigned DEFAULT '0' NOT NULL,
-    tstamp int(11) unsigned DEFAULT '0' NOT NULL,
-    crdate int(11) unsigned DEFAULT '0' NOT NULL,
-    cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
-    deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
     is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
-    hidden tinyint(4) unsigned DEFAULT '0' NOT NULL,
     title tinytext,
     user int(11) unsigned DEFAULT '0' NOT NULL,
     seminar int(11) unsigned DEFAULT '0' NOT NULL,
@@ -427,8 +389,6 @@ CREATE TABLE tx_seminars_attendances (
     kids int(11) unsigned DEFAULT '0' NOT NULL,
     checkboxes int(11) unsigned DEFAULT '0' NOT NULL,
 
-    PRIMARY KEY (uid),
-    KEY parent (pid),
     KEY dummy (is_dummy_record),
     KEY seminar (seminar),
     KEY user (user)
@@ -439,12 +399,6 @@ CREATE TABLE tx_seminars_attendances (
 # Table structure for table 'tx_seminars_sites'
 #
 CREATE TABLE tx_seminars_sites (
-    uid int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
-    pid int(11) unsigned DEFAULT '0' NOT NULL,
-    tstamp int(11) unsigned DEFAULT '0' NOT NULL,
-    crdate int(11) unsigned DEFAULT '0' NOT NULL,
-    cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
-    deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
     is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     owner int(11) unsigned DEFAULT '0' NOT NULL,
     title tinytext,
@@ -456,8 +410,6 @@ CREATE TABLE tx_seminars_sites (
     directions text,
     notes text,
 
-    PRIMARY KEY (uid),
-    KEY parent (pid),
     KEY dummy (is_dummy_record),
     FULLTEXT index_searchfields (title,city)
 ) ENGINE = MyISAM;
@@ -467,12 +419,6 @@ CREATE TABLE tx_seminars_sites (
 # Table structure for table 'tx_seminars_organizers'
 #
 CREATE TABLE tx_seminars_organizers (
-    uid int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
-    pid int(11) unsigned DEFAULT '0' NOT NULL,
-    tstamp int(11) unsigned DEFAULT '0' NOT NULL,
-    crdate int(11) unsigned DEFAULT '0' NOT NULL,
-    cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
-    deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
     is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     title tinytext,
     homepage tinytext,
@@ -481,8 +427,6 @@ CREATE TABLE tx_seminars_organizers (
     attendances_pid int(11) unsigned DEFAULT '0' NOT NULL,
     description text,
 
-    PRIMARY KEY (uid),
-    KEY parent (pid),
     KEY dummy (is_dummy_record)
 );
 
@@ -491,18 +435,10 @@ CREATE TABLE tx_seminars_organizers (
 # Table structure for table 'tx_seminars_payment_methods'
 #
 CREATE TABLE tx_seminars_payment_methods (
-    uid int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
-    pid int(11) unsigned DEFAULT '0' NOT NULL,
-    tstamp int(11) unsigned DEFAULT '0' NOT NULL,
-    crdate int(11) unsigned DEFAULT '0' NOT NULL,
-    cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
-    deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
     is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     title tinytext,
     description text,
 
-    PRIMARY KEY (uid),
-    KEY parent (pid),
     KEY dummy (is_dummy_record)
 );
 
@@ -511,18 +447,10 @@ CREATE TABLE tx_seminars_payment_methods (
 # Table structure for table 'tx_seminars_event_types'
 #
 CREATE TABLE tx_seminars_event_types (
-    uid int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
-    pid int(11) unsigned DEFAULT '0' NOT NULL,
-    tstamp int(11) unsigned DEFAULT '0' NOT NULL,
-    crdate int(11) unsigned DEFAULT '0' NOT NULL,
-    cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
-    deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
     is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     title tinytext,
     single_view_page int(11) unsigned DEFAULT '0' NOT NULL,
 
-    PRIMARY KEY (uid),
-    KEY parent (pid),
     KEY dummy (is_dummy_record),
     FULLTEXT index_searchfields (title)
 ) ENGINE = MyISAM;
@@ -532,19 +460,11 @@ CREATE TABLE tx_seminars_event_types (
 # Table structure for table 'tx_seminars_checkboxes'
 #
 CREATE TABLE tx_seminars_checkboxes (
-    uid int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
-    pid int(11) unsigned DEFAULT '0' NOT NULL,
-    tstamp int(11) unsigned DEFAULT '0' NOT NULL,
-    crdate int(11) unsigned DEFAULT '0' NOT NULL,
-    cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
-    deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
     is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     owner int(11) unsigned DEFAULT '0' NOT NULL,
     title tinytext,
     description text,
 
-    PRIMARY KEY (uid),
-    KEY parent (pid),
     KEY dummy (is_dummy_record)
 );
 
@@ -583,17 +503,9 @@ CREATE TABLE tx_seminars_attendances_checkboxes_mm (
 # Table structure for table 'tx_seminars_lodgings'
 #
 CREATE TABLE tx_seminars_lodgings (
-    uid int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
-    pid int(11) unsigned DEFAULT '0' NOT NULL,
-    tstamp int(11) unsigned DEFAULT '0' NOT NULL,
-    crdate int(11) unsigned DEFAULT '0' NOT NULL,
-    cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
-    deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
     is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     title tinytext,
 
-    PRIMARY KEY (uid),
-    KEY parent (pid),
     KEY dummy (is_dummy_record)
 );
 
@@ -632,17 +544,9 @@ CREATE TABLE tx_seminars_attendances_lodgings_mm (
 # Table structure for table 'tx_seminars_foods'
 #
 CREATE TABLE tx_seminars_foods (
-    uid int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
-    pid int(11) unsigned DEFAULT '0' NOT NULL,
-    tstamp int(11) unsigned DEFAULT '0' NOT NULL,
-    crdate int(11) unsigned DEFAULT '0' NOT NULL,
-    cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
-    deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
     is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     title tinytext,
 
-    PRIMARY KEY (uid),
-    KEY parent (pid),
     KEY dummy (is_dummy_record)
 );
 
@@ -681,12 +585,6 @@ CREATE TABLE tx_seminars_attendances_foods_mm (
 # Table structure for table 'tx_seminars_timeslots'
 #
 CREATE TABLE tx_seminars_timeslots (
-    uid int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
-    pid int(11) unsigned DEFAULT '0' NOT NULL,
-    tstamp int(11) unsigned DEFAULT '0' NOT NULL,
-    crdate int(11) unsigned DEFAULT '0' NOT NULL,
-    cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
-    deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
     is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     seminar int(11) unsigned DEFAULT '0' NOT NULL,
     begin_date int(11) unsigned DEFAULT '0' NOT NULL,
@@ -696,8 +594,6 @@ CREATE TABLE tx_seminars_timeslots (
     place int(11) unsigned DEFAULT '0' NOT NULL,
     room text,
 
-    PRIMARY KEY (uid),
-    KEY parent (pid),
     KEY dummy (is_dummy_record),
     KEY seminar (seminar)
 );
@@ -722,20 +618,12 @@ CREATE TABLE tx_seminars_timeslots_speakers_mm (
 # Table structure for table 'tx_seminars_target_groups'
 #
 CREATE TABLE tx_seminars_target_groups (
-    uid int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
-    pid int(11) unsigned DEFAULT '0' NOT NULL,
-    tstamp int(11) unsigned DEFAULT '0' NOT NULL,
-    crdate int(11) unsigned DEFAULT '0' NOT NULL,
-    cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
-    deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
     is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     owner int(11) unsigned DEFAULT '0' NOT NULL,
     title tinytext,
     minimum_age tinyint(3) unsigned DEFAULT '0' NOT NULL,
     maximum_age tinyint(3) unsigned DEFAULT '0' NOT NULL,
 
-    PRIMARY KEY (uid),
-    KEY parent (pid),
     KEY dummy (is_dummy_record),
     FULLTEXT index_searchfields (title)
 ) ENGINE = MyISAM;
@@ -745,19 +633,11 @@ CREATE TABLE tx_seminars_target_groups (
 # Table structure for table 'tx_seminars_categories'
 #
 CREATE TABLE tx_seminars_categories (
-    uid int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
-    pid int(11) unsigned DEFAULT '0' NOT NULL,
-    tstamp int(11) unsigned DEFAULT '0' NOT NULL,
-    crdate int(11) unsigned DEFAULT '0' NOT NULL,
-    cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
-    deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
     is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     title tinytext,
     icon tinytext,
     single_view_page int(11) unsigned DEFAULT '0' NOT NULL,
 
-    PRIMARY KEY (uid),
-    KEY parent (pid),
     KEY dummy (is_dummy_record),
     FULLTEXT index_searchfields (title)
 ) ENGINE = MyISAM;
@@ -767,17 +647,9 @@ CREATE TABLE tx_seminars_categories (
 # Table structure for table 'tx_seminars_skills'
 #
 CREATE TABLE tx_seminars_skills (
-    uid int(11) unsigned DEFAULT '0' NOT NULL auto_increment,
-    pid int(11) unsigned DEFAULT '0' NOT NULL,
-    tstamp int(11) unsigned DEFAULT '0' NOT NULL,
-    crdate int(11) unsigned DEFAULT '0' NOT NULL,
-    cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
-    deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
     is_dummy_record tinyint(1) unsigned DEFAULT '0' NOT NULL,
     title tinytext,
 
-    PRIMARY KEY (uid),
-    KEY parent (pid),
     KEY dummy (is_dummy_record)
 );
 
