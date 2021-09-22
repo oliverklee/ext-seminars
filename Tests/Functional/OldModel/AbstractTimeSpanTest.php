@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\OldModel;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Seminars\Hooks\Interfaces\DateTimeSpan;
 use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingTimeSpan;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
@@ -45,6 +47,19 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     const DATE_FORMAT_Y = '%Y';
 
     /**
+     * @var array<string, string|int>
+     */
+    private const CONFIGURATION = [
+        'timeFormat' => self::TIME_FORMAT,
+        'dateFormatYMD' => self::DATE_FORMAT_YMD,
+        'dateFormatMD' => self::DATE_FORMAT_MD,
+        'dateFormatD' => self::DATE_FORMAT_D,
+        'dateFormatM' => self::DATE_FORMAT_M,
+        'dateFormatY' => self::DATE_FORMAT_Y,
+        'abbreviateDateRanges' => 1,
+    ];
+
+    /**
      * @var string[]
      */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
@@ -54,22 +69,21 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
      */
     private $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
         $this->initializeBackEndLanguage();
 
         $this->subject = new TestingTimeSpan();
-        $this->subject->overrideConfiguration([
-            'timeFormat' => self::TIME_FORMAT,
-            'dateFormatYMD' => self::DATE_FORMAT_YMD,
-            'dateFormatMD' => self::DATE_FORMAT_MD,
-            'dateFormatD' => self::DATE_FORMAT_D,
-            'dateFormatM' => self::DATE_FORMAT_M,
-            'dateFormatY' => self::DATE_FORMAT_Y,
-            'abbreviateDateRanges' => 1,
-        ]);
+
+        $configuration = new DummyConfiguration(self::CONFIGURATION);
+        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
+    }
+
+    protected function tearDown(): void
+    {
+        ConfigurationRegistry::purgeInstance();
     }
 
     // Test for getting the time.

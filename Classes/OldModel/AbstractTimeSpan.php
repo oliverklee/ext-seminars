@@ -26,7 +26,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel imple
     public function getBeginDate(): string
     {
         return $this->hasBeginDate()
-            ? \strftime($this->getConfValueString('dateFormatYMD'), $this->getBeginDateAsTimestamp())
+            ? \strftime($this->getDateFormat(), $this->getBeginDateAsTimestamp())
             : $this->translate('message_willBeAnnounced');
     }
 
@@ -49,7 +49,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel imple
     public function getEndDate(): string
     {
         return $this->hasEndDate()
-            ? \strftime($this->getConfValueString('dateFormatYMD'), $this->getEndDateAsTimestamp())
+            ? \strftime($this->getDateFormat(), $this->getEndDateAsTimestamp())
             : $this->translate('message_willBeAnnounced');
     }
 
@@ -92,27 +92,29 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel imple
             $beginDate = $this->getBeginDateAsTimestamp();
             $endDate = $this->getEndDateAsTimestamp();
 
-            $beginDateDay = \strftime($this->getConfValueString('dateFormatYMD'), $beginDate);
-            $endDateDay = \strftime($this->getConfValueString('dateFormatYMD'), $endDate);
+            $dateFormat = $this->getDateFormat();
+            $beginDateDay = \strftime($dateFormat, $beginDate);
+            $endDateDay = \strftime($dateFormat, $endDate);
 
             // Does the workshop span only one day (or is open-ended)?
             if ($beginDateDay === $endDateDay || !$this->hasEndDate()) {
                 $result = $beginDateDay;
             } else {
-                if ($this->getConfValueBoolean('abbreviateDateRanges')) {
+                $configuration = $this->getSharedConfiguration();
+                if ($configuration->getAsBoolean('abbreviateDateRanges')) {
                     // Are the years different? Then includes the complete begin date.
                     if (
-                        \strftime($this->getConfValueString('dateFormatY'), $beginDate)
-                        !== \strftime($this->getConfValueString('dateFormatY'), $endDate)
+                        \strftime($configuration->getAsString('dateFormatY'), $beginDate)
+                        !== \strftime($configuration->getAsString('dateFormatY'), $endDate)
                     ) {
                         $result = $beginDateDay;
                     } elseif (
-                        \strftime($this->getConfValueString('dateFormatM'), $beginDate)
-                        !== \strftime($this->getConfValueString('dateFormatM'), $endDate)
+                        \strftime($configuration->getAsString('dateFormatM'), $beginDate)
+                        !== \strftime($configuration->getAsString('dateFormatM'), $endDate)
                     ) {
-                        $result = \strftime($this->getConfValueString('dateFormatMD'), $beginDate);
+                        $result = \strftime($configuration->getAsString('dateFormatMD'), $beginDate);
                     } else {
-                        $result = \strftime($this->getConfValueString('dateFormatD'), $beginDate);
+                        $result = \strftime($configuration->getAsString('dateFormatD'), $beginDate);
                     }
                 } else {
                     $result = $beginDateDay;
@@ -160,7 +162,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel imple
             return $this->translate('message_willBeAnnounced');
         }
 
-        $timeFormat = $this->getConfValueString('timeFormat');
+        $timeFormat = $this->getTimeFormat();
         $beginTime = \strftime($timeFormat, $this->getBeginDateAsTimestamp());
         $endTime = \strftime($timeFormat, $this->getEndDateAsTimestamp());
 

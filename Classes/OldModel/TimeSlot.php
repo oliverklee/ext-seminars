@@ -111,11 +111,11 @@ class Tx_Seminars_OldModel_TimeSlot extends \Tx_Seminars_OldModel_AbstractTimeSp
         $entryDate = $this->getRecordPropertyInteger('entry_date');
 
         if (\strftime('%d-%m-%Y', $entryDate) !== \strftime('%d-%m-%Y', $beginDate)) {
-            $dateFormat = $this->getConfValueString('dateFormatYMD') . ' ';
+            $dateFormat = $this->getDateFormat() . ' ';
         } else {
             $dateFormat = '';
         }
-        $dateFormat .= $this->getConfValueString('timeFormat');
+        $dateFormat .= $this->getTimeFormat();
 
         return \strftime($dateFormat, $entryDate);
     }

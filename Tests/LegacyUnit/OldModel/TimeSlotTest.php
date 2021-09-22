@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\OldModel;
 
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingTimeSlot;
@@ -11,6 +13,9 @@ use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
+/**
+ * @covers \Tx_Seminars_OldModel_TimeSlot
+ */
 final class TimeSlotTest extends TestCase
 {
     use LanguageHelper;
@@ -25,9 +30,16 @@ final class TimeSlotTest extends TestCase
      */
     private $testingFramework = null;
 
+    /**
+     * @var DummyConfiguration
+     */
+    private $configuration;
+
     protected function setUp()
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
+        $this->configuration = new DummyConfiguration([]);
+        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->configuration);
 
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -212,8 +224,8 @@ final class TimeSlotTest extends TestCase
         $time = 978354060;
         $this->subject->setEntryDate($time);
         $this->subject->setBeginDate($time);
-        $this->subject->setConfigurationValue('dateFormatYMD', '%d - %m - %Y');
-        $this->subject->setConfigurationValue('timeFormat', '%H:%M');
+        $this->configuration->setAsString('dateFormatYMD', '%d - %m - %Y');
+        $this->configuration->setAsString('timeFormat', '%H:%M');
 
         self::assertEquals(
             strftime('%H:%M', $time),
@@ -230,8 +242,8 @@ final class TimeSlotTest extends TestCase
         $time = 978354060;
         $this->subject->setEntryDate($time);
         $this->subject->setBeginDate($time + 86400);
-        $this->subject->setConfigurationValue('dateFormatYMD', '%d - %m - %Y');
-        $this->subject->setConfigurationValue('timeFormat', '%H:%M');
+        $this->configuration->setAsString('dateFormatYMD', '%d - %m - %Y');
+        $this->configuration->setAsString('timeFormat', '%H:%M');
 
         self::assertEquals(
             strftime('%d - %m - %Y %H:%M', $time),
