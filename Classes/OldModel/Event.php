@@ -4271,10 +4271,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             return '';
         }
 
-        return strftime(
-            $this->getConfValueString('dateFormatYMD'),
-            $this->getRecordPropertyInteger('expiry')
-        );
+        return \strftime($this->getDateFormat(), $this->getRecordPropertyInteger('expiry'));
     }
 
     /**
@@ -4318,9 +4315,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             return '';
         }
 
-        return strftime(
-            $this->getConfValueString('dateFormatYMD') . ' '
-            . $this->getConfValueString('timeFormat'),
+        return \strftime(
+            $this->getDateFormat() . ' ' . $this->getTimeFormat(),
             $this->getRecordPropertyInteger('begin_date_registration')
         );
     }
