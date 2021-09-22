@@ -1938,7 +1938,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
                 $this->getConfValueString('dateFormatYMD'),
                 $this->getRecordPropertyInteger('deadline_unregistration')
             );
-            if ($this->getConfValueBoolean('showTimeOfUnregistrationDeadline')) {
+            if ($this->getSharedConfiguration()->getAsBoolean('showTimeOfUnregistrationDeadline')) {
                 $result .= strftime(
                     ' ' . $this->getConfValueString('timeFormat'),
                     $this->getRecordPropertyInteger('deadline_unregistration')
@@ -1952,7 +1952,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Checks whether this seminar has a deadline for unregistration set.
      *
-     * @return bool TRUE if the seminar has a unregistration deadline set.
+     * @return bool whether the seminar has an unregistration deadline set
      */
     public function hasUnregistrationDeadline(): bool
     {

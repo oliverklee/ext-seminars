@@ -84,21 +84,6 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
     }
 
     /**
-     * Sets the configuration for showTimeOfUnregistrationDeadline.
-     *
-     * @param int $value value for showTimeOfUnregistrationDeadline (0 or 1)
-     *
-     * @return void
-     */
-    public function setShowTimeOfUnregistrationDeadline(int $value)
-    {
-        $this->setConfigurationValue(
-            'showTimeOfUnregistrationDeadline',
-            $value
-        );
-    }
-
-    /**
      * Sets the TypoScript configuration for the parameter
      * unregistrationDeadlineDaysBeforeBeginDate.
      *
