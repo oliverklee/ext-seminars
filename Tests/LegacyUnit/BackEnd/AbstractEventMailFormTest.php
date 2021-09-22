@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\BackEnd;
 
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Configuration\PageFinder;
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Testing\TestingFramework;
@@ -37,8 +39,10 @@ final class AbstractEventMailFormTest extends TestCase
         $this->unifyTestingEnvironment();
 
         $this->testingFramework = new TestingFramework('tx_seminars');
-
         PageFinder::getInstance()->setPageUid($this->testingFramework->createSystemFolder());
+
+        $configuration = new DummyConfiguration(['dateFormatYMD' => '%d.%m.%Y']);
+        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
 
         $organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
@@ -70,6 +74,7 @@ final class AbstractEventMailFormTest extends TestCase
 
     protected function tearDown()
     {
+        ConfigurationRegistry::purgeInstance();
         $this->testingFramework->cleanUp();
         $this->restoreOriginalEnvironment();
     }
