@@ -21,5 +21,3 @@ parameters:
 
   excludePaths:
     - Classes/FrontEnd/Editor.php
-    - Classes/FrontEnd/EventEditor.php
-    - Classes/FrontEnd/RegistrationForm.php
