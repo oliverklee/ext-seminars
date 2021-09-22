@@ -119,7 +119,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @var DummyConfiguration
      */
-    private $generalConfiguration;
+    private $configuration;
 
     protected function setUp()
     {
@@ -140,8 +140,8 @@ final class RegistrationManagerTest extends TestCase
         $configurationProxy = ConfigurationProxy::getInstance('seminars');
         $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_TEXT_MAIL);
         $configurationRegistry = ConfigurationRegistry::getInstance();
-        $this->generalConfiguration = new DummyConfiguration();
-        $configurationRegistry->set('plugin.tx_seminars', $this->generalConfiguration);
+        $this->configuration = new DummyConfiguration();
+        $configurationRegistry->set('plugin.tx_seminars', $this->configuration);
         $configurationRegistry->set('plugin.tx_seminars._LOCAL_LANG.default', new DummyConfiguration());
         $configurationRegistry->set('config', new DummyConfiguration());
         $configurationRegistry->set('page.config', new DummyConfiguration());
@@ -2072,7 +2072,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeSendsMailToAttendeesMailAddress()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -2090,7 +2090,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForAttendeeWithoutMailAddressNotSendsEmail()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -2116,6 +2116,7 @@ final class RegistrationManagerTest extends TestCase
         /** @var ConfigurationProxy $configurationProxy */
         $configurationProxy = ConfigurationProxy::getInstance('seminars');
         $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_TEXT_MAIL);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
 
         $registrationOld = $this->createRegistration();
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
@@ -2140,7 +2141,6 @@ final class RegistrationManagerTest extends TestCase
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][RegistrationEmail::class][] = $hookClass;
         $this->addMockedInstance($hookClass, $hook);
 
-        $this->subject->setConfigurationValue('sendConfirmation', true);
         $controller = new \Tx_Seminars_FrontEnd_DefaultController();
         $controller->init();
 
@@ -2155,6 +2155,7 @@ final class RegistrationManagerTest extends TestCase
         /** @var ConfigurationProxy $configurationProxy */
         $configurationProxy = ConfigurationProxy::getInstance('seminars');
         $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
 
         $registrationOld = $this->createRegistration();
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
@@ -2183,7 +2184,6 @@ final class RegistrationManagerTest extends TestCase
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][RegistrationEmail::class][] = $hookClass;
         $this->addMockedInstance($hookClass, $hook);
 
-        $this->subject->setConfigurationValue('sendConfirmation', true);
         $controller = new \Tx_Seminars_FrontEnd_DefaultController();
         $controller->init();
 
@@ -2195,7 +2195,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeMailSubjectContainsConfirmationSubject()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -2213,7 +2213,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeMailBodyContainsEventTitle()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -2231,7 +2231,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeMailBodyNotContainsRawTemplateMarkers()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -2248,7 +2248,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeMailBodyNotContainsSpaceBeforeComma()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -2265,7 +2265,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeMailBodyContainsRegistrationFood()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -2283,7 +2283,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeMailBodyContainsRegistrationAccommodation()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -2301,7 +2301,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeMailBodyContainsRegistrationInterests()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -2319,7 +2319,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeMailSubjectContainsEventTitle()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -2337,7 +2337,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeSetsTypo3DefaultFromAddressAsSender()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -2361,7 +2361,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeSetsOrganizerAsReplyTo()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -2383,7 +2383,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeWithoutTypo3DefaultFromAddressSetsOrganizerAsSender()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -2405,7 +2405,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForHtmlMailSetHasHtmlBody()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         /** @var ConfigurationProxy $configurationProxy */
         $configurationProxy = ConfigurationProxy::getInstance('seminars');
         $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
@@ -2426,7 +2426,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForTextMailSetDoesNotHaveHtmlBody()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -2444,7 +2444,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForTextMailSetHasNoUnreplacedMarkers()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -2462,7 +2462,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForHtmlMailHasNoUnreplacedMarkers()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         /** @var ConfigurationProxy $configurationProxy */
         $configurationProxy = ConfigurationProxy::getInstance('seminars');
         $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
@@ -2483,7 +2483,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForMailSetToUserModeAndUserSetToHtmlMailsHasHtmlBody()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         /** @var ConfigurationProxy $configurationProxy */
         $configurationProxy = ConfigurationProxy::getInstance('seminars');
         $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_USER_MAIL);
@@ -2510,7 +2510,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForMailSetToUserModeAndUserSetToTextMailsNotHasHtmlBody()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         /** @var ConfigurationProxy $configurationProxy */
         $configurationProxy = ConfigurationProxy::getInstance('seminars');
         $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_USER_MAIL);
@@ -2537,7 +2537,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForHtmlMailsContainsNameOfUserInBody()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         /** @var ConfigurationProxy $configurationProxy */
         $configurationProxy = ConfigurationProxy::getInstance('seminars');
         $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
@@ -2563,7 +2563,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForHtmlMailsHasLinkToSeminarInBody()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         /** @var ConfigurationProxy $configurationProxy */
         $configurationProxy = ConfigurationProxy::getInstance('seminars');
         $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
@@ -2588,7 +2588,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeAppendsOrganizersFooterToMailBody()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -2606,7 +2606,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForConfirmedEventNotHasPlannedDisclaimer()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $registration = $this->createRegistration();
         $registration->getSeminarObject()->setStatus(
             \Tx_Seminars_Model_Event::STATUS_CONFIRMED
@@ -2628,7 +2628,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForCancelledEventNotHasPlannedDisclaimer()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $registration = $this->createRegistration();
         $registration->getSeminarObject()->setStatus(
             \Tx_Seminars_Model_Event::STATUS_CANCELED
@@ -2650,7 +2650,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForPlannedEventDisplaysPlannedDisclaimer()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $registration = $this->createRegistration();
         $registration->getSeminarObject()->setStatus(
             \Tx_Seminars_Model_Event::STATUS_PLANNED
@@ -2672,7 +2672,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeehiddenDisclaimerFieldAndPlannedEventHidesPlannedDisclaimer()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->subject->setConfigurationValue(
             'hideFieldsInThankYouMail',
             'planned_disclaimer'
@@ -2698,7 +2698,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForHtmlMailsHasCssStylesFromFile()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         /** @var ConfigurationProxy $configurationProxy */
         $configurationProxy = ConfigurationProxy::getInstance('seminars');
         $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
@@ -2724,7 +2724,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeMailBodyCanContainAttendeesNames()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -2743,7 +2743,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForPlainTextMailEnumeratesAttendeesNames()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -2762,7 +2762,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForHtmlMailReturnsAttendeesNamesInOrderedList()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         /** @var ConfigurationProxy $configurationProxy */
         $configurationProxy = ConfigurationProxy::getInstance('seminars');
         $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
@@ -2789,7 +2789,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeCanSendPlaceTitleInMailBody()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
             ['title' => 'foo_place']
@@ -2818,7 +2818,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeCanSendPlaceAddressInMailBody()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
             ['address' => 'foo_street']
@@ -2847,7 +2847,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForEventWithNoPlaceSendsWillBeAnnouncedMessage()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -2865,7 +2865,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForPlainTextMailSeparatesPlacesTitleAndAddressWithLinefeed()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
             ['title' => 'place_title', 'address' => 'place_address']
@@ -2894,7 +2894,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForHtmlMailSeparatesPlacesTitleAndAddressWithBreaks()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         /** @var ConfigurationProxy $configurationProxy */
         $configurationProxy = ConfigurationProxy::getInstance('seminars');
         $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
@@ -2931,7 +2931,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeStripsHtmlTagsFromPlaceAddress()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
             ['title' => 'place_title', 'address' => 'place<h2>_address</h2>']
@@ -2960,7 +2960,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForPlaceAddressReplacesLineFeedsWithSpaces()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
             ['address' => "address1\naddress2"]
@@ -2989,7 +2989,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForPlaceAddressReplacesCarriageReturnsWithSpaces()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
             ['address' => 'address1' . "\r" . 'address2']
@@ -3018,7 +3018,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForPlaceAddressReplacesCarriageReturnAndLineFeedWithOneSpace()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
             ['address' => "address1\r\naddress2"]
@@ -3047,7 +3047,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForPlaceAddressReplacesMultipleCarriageReturnsWithOneSpace()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
             ['address' => 'address1' . "\r" . "\r" . 'address2']
@@ -3076,7 +3076,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForPlaceAddressAndPlainTextMailsReplacesMultipleLineFeedsWithSpaces()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
             ['address' => "address1\n\naddress2"]
@@ -3105,7 +3105,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForPlaceAddressAndHtmlMailsReplacesMultipleLineFeedsWithSpaces()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         /** @var ConfigurationProxy $configurationProxy */
         $configurationProxy = ConfigurationProxy::getInstance('seminars');
         $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
@@ -3142,7 +3142,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForPlaceAddressReplacesMultipleLineFeedAndCarriageReturnsWithSpaces()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         /** @var ConfigurationProxy $configurationProxy */
         $configurationProxy = ConfigurationProxy::getInstance('seminars');
         $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
@@ -3179,7 +3179,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForPlaceAddressAndPlainTextMailsSendsCityOfPlace()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
             ['city' => 'footown']
@@ -3208,7 +3208,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForPlaceAddressAndPlainTextMailsSendsZipAndCityOfPlace()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
             ['zip' => '12345', 'city' => 'footown']
@@ -3237,7 +3237,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForPlaceAddressAndPlainTextMailsSendsCountryOfPlace()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
 
         $mapper = MapperRegistry::get(CountryMapper::class);
         $country = $mapper->find(54);
@@ -3269,7 +3269,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForPlaceAddressAndPlainTextMailsSeparatesAddressAndCityWithNewline()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
             ['address' => 'address', 'city' => 'footown']
@@ -3298,7 +3298,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForPlaceAddressAndHtmlMailsSeparatresAddressAndCityLineWithBreaks()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         /** @var ConfigurationProxy $configurationProxy */
         $configurationProxy = ConfigurationProxy::getInstance('seminars');
         $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
@@ -3335,7 +3335,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForPlaceAddressWithCountryAndCitySeparatesCountryAndCityWithComma()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
 
         $mapper = MapperRegistry::get(CountryMapper::class);
         $country = $mapper->find(54);
@@ -3371,7 +3371,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForPlaceAddressWithCityAndNoCountryNotAddsSurplusCommaAfterCity()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
             ['address' => 'address', 'city' => 'footown']
@@ -3416,7 +3416,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeHasUtf8CalendarAttachment()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -3436,7 +3436,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeHasCalendarAttachmentWithWindowsLineEndings()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -3456,7 +3456,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeHasCalendarAttachmentWithStartAndEndMarkers()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -3475,7 +3475,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeHasCalendarAttachmentWithPublishMethod()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -3494,7 +3494,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeHasCalendarAttachmentWithEvent()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -3533,7 +3533,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeHasCalendarAttachmentWithImportantFields(string $value)
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -3553,7 +3553,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeHasCalendarAttachmentWithEventTitleAsSummary()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -3577,7 +3577,7 @@ final class RegistrationManagerTest extends TestCase
         $this->testingFramework->changeRecord('tx_seminars_seminars', $this->seminarUid, ['time_zone' => $timeZone]);
         $this->subject->setConfigurationValue('defaultTimeZone', 'Europe/Berlin');
 
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -3601,7 +3601,7 @@ final class RegistrationManagerTest extends TestCase
         $timeZone = 'Europe/Berlin';
         $this->subject->setConfigurationValue('defaultTimeZone', $timeZone);
 
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -3628,7 +3628,7 @@ final class RegistrationManagerTest extends TestCase
             ['end_date' => 0]
         );
 
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -3652,7 +3652,7 @@ final class RegistrationManagerTest extends TestCase
         $this->testingFramework->changeRecord('tx_seminars_seminars', $this->seminarUid, ['time_zone' => $timeZone]);
         $this->subject->setConfigurationValue('defaultTimeZone', 'Europe/Berlin');
 
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -3676,7 +3676,7 @@ final class RegistrationManagerTest extends TestCase
         $timeZone = 'Europe/Berlin';
         $this->subject->setConfigurationValue('defaultTimeZone', $timeZone);
 
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -3697,7 +3697,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeHasCalendarAttachmentWithEventSubtitleAsDescription()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -3717,7 +3717,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForEventWithoutPlaceHasCalendarAttachmentWithoutLocation()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -3748,7 +3748,7 @@ final class RegistrationManagerTest extends TestCase
             ['place' => 1]
         );
 
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -3779,7 +3779,7 @@ final class RegistrationManagerTest extends TestCase
             ['place' => 1]
         );
 
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -3799,7 +3799,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeHasCalendarAttachmentWithOrganizer()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -3819,7 +3819,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeHasCalendarAttachmentWithUid()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -3839,7 +3839,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeHasCalendarAttachmentWithTimestamp()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -3862,8 +3862,8 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForInformalSalutationContainsInformalSalutation()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
-        $this->generalConfiguration->setAsString('salutation', 'informal');
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $this->configuration->setAsString('salutation', 'informal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -3890,8 +3890,8 @@ final class RegistrationManagerTest extends TestCase
             self::markTestSkipped('This test is only applicable if there is no FrontEndUser.gender field.');
         }
 
-        $this->subject->setConfigurationValue('sendConfirmation', true);
-        $this->generalConfiguration->setAsString('salutation', 'formal');
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $this->configuration->setAsString('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -3918,8 +3918,8 @@ final class RegistrationManagerTest extends TestCase
             self::markTestSkipped('This test is only applicable if there is a FrontEndUser.gender field.');
         }
 
-        $this->subject->setConfigurationValue('sendConfirmation', true);
-        $this->generalConfiguration->setAsString('salutation', 'formal');
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $this->configuration->setAsString('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -3946,8 +3946,8 @@ final class RegistrationManagerTest extends TestCase
             self::markTestSkipped('This test is only applicable if there is a FrontEndUser.gender field.');
         }
 
-        $this->subject->setConfigurationValue('sendConfirmation', true);
-        $this->generalConfiguration->setAsString('salutation', 'formal');
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $this->configuration->setAsString('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -3970,7 +3970,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForFormalSalutationAndConfirmationContainsFormalConfirmationText()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->subject->setConfigurationValue('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
@@ -3997,7 +3997,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForInformalSalutationAndConfirmationContainsInformalConfirmationText()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->subject->setConfigurationValue('salutation', 'informal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
@@ -4024,10 +4024,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForFormalSalutationAndUnregistrationContainsFormalUnregistrationText()
     {
-        $this->subject->setConfigurationValue(
-            'sendConfirmationOnUnregistration',
-            true
-        );
+        $this->configuration->setAsBoolean('sendConfirmationOnUnregistration', true);
         $this->subject->setConfigurationValue('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
@@ -4060,10 +4057,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForInformalSalutationAndUnregistrationContainsInformalUnregistrationText()
     {
-        $this->subject->setConfigurationValue(
-            'sendConfirmationOnUnregistration',
-            true
-        );
+        $this->configuration->setAsBoolean('sendConfirmationOnUnregistration', true);
         $this->subject->setConfigurationValue('salutation', 'informal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
@@ -4096,10 +4090,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForFormalSalutationAndQueueConfirmationContainsFormalQueueConfirmationText()
     {
-        $this->subject->setConfigurationValue(
-            'sendConfirmationOnRegistrationForQueue',
-            true
-        );
+        $this->configuration->setAsBoolean('sendConfirmationOnRegistrationForQueue', true);
         $this->subject->setConfigurationValue('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
@@ -4132,10 +4123,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForInformalSalutationAndQueueConfirmationContainsInformalQueueConfirmationText()
     {
-        $this->subject->setConfigurationValue(
-            'sendConfirmationOnRegistrationForQueue',
-            true
-        );
+        $this->configuration->setAsBoolean('sendConfirmationOnRegistrationForQueue', true);
         $this->subject->setConfigurationValue('salutation', 'informal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
@@ -4168,10 +4156,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForFormalSalutationAndQueueUpdateContainsFormalQueueUpdateText()
     {
-        $this->subject->setConfigurationValue(
-            'sendConfirmationOnQueueUpdate',
-            true
-        );
+        $this->configuration->setAsBoolean('sendConfirmationOnQueueUpdate', true);
         $this->subject->setConfigurationValue('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
@@ -4204,10 +4189,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForInformalSalutationAndQueueUpdateContainsInformalQueueUpdateText()
     {
-        $this->subject->setConfigurationValue(
-            'sendConfirmationOnQueueUpdate',
-            true
-        );
+        $this->configuration->setAsBoolean('sendConfirmationOnQueueUpdate', true);
         $this->subject->setConfigurationValue('salutation', 'informal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
@@ -4240,8 +4222,8 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForInformalSalutationNotContainsRawTemplateMarkers()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
-        $this->generalConfiguration->setAsString('salutation', 'informal');
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $this->configuration->setAsString('salutation', 'informal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4267,8 +4249,8 @@ final class RegistrationManagerTest extends TestCase
             self::markTestSkipped('This test is only applicable if there is no FrontEndUser.gender field.');
         }
 
-        $this->subject->setConfigurationValue('sendConfirmation', true);
-        $this->generalConfiguration->setAsString('salutation', 'formal');
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $this->configuration->setAsString('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4294,8 +4276,8 @@ final class RegistrationManagerTest extends TestCase
             self::markTestSkipped('This test is only applicable if there is a FrontEndUser.gender field.');
         }
 
-        $this->subject->setConfigurationValue('sendConfirmation', true);
-        $this->generalConfiguration->setAsString('salutation', 'formal');
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $this->configuration->setAsString('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4321,8 +4303,8 @@ final class RegistrationManagerTest extends TestCase
             self::markTestSkipped('This test is only applicable if there is a FrontEndUser.gender field.');
         }
 
-        $this->subject->setConfigurationValue('sendConfirmation', true);
-        $this->generalConfiguration->setAsString('salutation', 'formal');
+        $this->configuration->setAsBoolean('sendConfirmation', true);
+        $this->configuration->setAsString('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -4344,7 +4326,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForFormalSalutationAndConfirmationNotContainsRawTemplateMarkers()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->subject->setConfigurationValue('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
@@ -4367,7 +4349,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForInformalSalutationAndConfirmationNotContainsRawTemplateMarkers()
     {
-        $this->subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->subject->setConfigurationValue('salutation', 'informal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
@@ -4390,10 +4372,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForFormalSalutationAndUnregistrationNotContainsRawTemplateMarkers()
     {
-        $this->subject->setConfigurationValue(
-            'sendConfirmationOnUnregistration',
-            true
-        );
+        $this->configuration->setAsBoolean('sendConfirmationOnUnregistration', true);
         $this->subject->setConfigurationValue('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
@@ -4420,10 +4399,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForInformalSalutationAndUnregistrationNotContainsRawTemplateMarkers()
     {
-        $this->subject->setConfigurationValue(
-            'sendConfirmationOnUnregistration',
-            true
-        );
+        $this->configuration->setAsBoolean('sendConfirmationOnUnregistration', true);
         $this->subject->setConfigurationValue('salutation', 'informal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
@@ -4450,10 +4426,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForFormalSalutationAndQueueConfirmationNotContainsRawTemplateMarkers()
     {
-        $this->subject->setConfigurationValue(
-            'sendConfirmationOnRegistrationForQueue',
-            true
-        );
+        $this->configuration->setAsBoolean('sendConfirmationOnRegistrationForQueue', true);
         $this->subject->setConfigurationValue('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
@@ -4480,10 +4453,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForInformalSalutationAndQueueConfirmationNotContainsRawTemplateMarkers()
     {
-        $this->subject->setConfigurationValue(
-            'sendConfirmationOnRegistrationForQueue',
-            true
-        );
+        $this->configuration->setAsBoolean('sendConfirmationOnRegistrationForQueue', true);
         $this->subject->setConfigurationValue('salutation', 'informal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
@@ -4510,10 +4480,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForFormalSalutationAndQueueUpdateNotContainsRawTemplateMarkers()
     {
-        $this->subject->setConfigurationValue(
-            'sendConfirmationOnQueueUpdate',
-            true
-        );
+        $this->configuration->setAsBoolean('sendConfirmationOnQueueUpdate', true);
         $this->subject->setConfigurationValue('salutation', 'formal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
@@ -4540,10 +4507,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForInformalSalutationAndQueueUpdateNotContainsRawTemplateMarkers()
     {
-        $this->subject->setConfigurationValue(
-            'sendConfirmationOnQueueUpdate',
-            true
-        );
+        $this->configuration->setAsBoolean('sendConfirmationOnQueueUpdate', true);
         $this->subject->setConfigurationValue('salutation', 'informal');
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
@@ -4577,7 +4541,7 @@ final class RegistrationManagerTest extends TestCase
             ->setMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::never())->method('getUnregistrationNotice');
 
-        $subject->setConfigurationValue('sendConfirmationOnUnregistration', true);
+        $this->configuration->setAsBoolean('sendConfirmationOnUnregistration', true);
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -4607,7 +4571,7 @@ final class RegistrationManagerTest extends TestCase
         $subject = $this->getMockBuilder(TestingRegistrationManager::class)
             ->setMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::never())->method('getUnregistrationNotice');
-        $subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
 
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
@@ -4635,7 +4599,7 @@ final class RegistrationManagerTest extends TestCase
         $subject = $this->getMockBuilder(TestingRegistrationManager::class)
             ->setMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::once())->method('getUnregistrationNotice');
-        $subject->setConfigurationValue('sendConfirmation', true);
+        $this->configuration->setAsBoolean('sendConfirmation', true);
 
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
@@ -4662,15 +4626,13 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForRegistrationOnQueueMailAndUnregistrationPossibleAddsUnregistrationNotice()
     {
+        $this->configuration->setAsBoolean('sendConfirmationOnRegistrationForQueue', true);
+
         /** @var TestingRegistrationManager&MockObject $subject */
         $subject = $this->getMockBuilder(TestingRegistrationManager::class)
             ->setMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::once())->method('getUnregistrationNotice');
 
-        $subject->setConfigurationValue(
-            'sendConfirmationOnRegistrationForQueue',
-            true
-        );
         $registration = $this->createRegistration();
         $this->createRegistration();
         $this->testingFramework->changeRecord(
@@ -4702,12 +4664,13 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForQueueUpdateMailAndUnregistrationPossibleAddsUnregistrationNotice()
     {
+        $this->configuration->setAsBoolean('sendConfirmationOnQueueUpdate', true);
+
         /** @var TestingRegistrationManager&MockObject $subject */
         $subject = $this->getMockBuilder(TestingRegistrationManager::class)
             ->setMethods(['getUnregistrationNotice'])->getMock();
         $subject->expects(self::once())->method('getUnregistrationNotice');
 
-        $subject->setConfigurationValue('sendConfirmationOnQueueUpdate', true);
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -4738,6 +4701,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForSendConfirmationFalseNeverCallsRegistrationEmailHookMethods()
     {
+        $this->configuration->setAsBoolean('sendConfirmation', false);
         $registrationOld = $this->createRegistration();
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
         $registration = $mapper->find($registrationOld->getUid());
@@ -4753,7 +4717,6 @@ final class RegistrationManagerTest extends TestCase
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][RegistrationEmail::class][] = $hookClass;
         $this->addMockedInstance($hookClass, $hook);
 
-        $this->subject->setConfigurationValue('sendConfirmation', false);
         $controller = new \Tx_Seminars_FrontEnd_DefaultController();
         $controller->init();
 
@@ -4767,7 +4730,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyOrganizersForEventWithEmailsMutedNotSendsEmail()
     {
-        $this->subject->setConfigurationValue('sendNotification', true);
+        $this->configuration->setAsBoolean('sendNotification', true);
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
             $this->seminarUid,
@@ -4785,7 +4748,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyOrganizersUsesTypo3DefaultFromAddressAsFrom()
     {
-        $this->subject->setConfigurationValue('sendNotification', true);
+        $this->configuration->setAsBoolean('sendNotification', true);
 
         $registration = $this->createRegistration();
 
@@ -4807,7 +4770,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyOrganizersUsesOrganizerAsReplyTo()
     {
-        $this->subject->setConfigurationValue('sendNotification', true);
+        $this->configuration->setAsBoolean('sendNotification', true);
 
         $registration = $this->createRegistration();
 
@@ -4827,7 +4790,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyOrganizersWithoutTypo3DefaultFromAddressUsesOrganizerAsFrom()
     {
-        $this->subject->setConfigurationValue('sendNotification', true);
+        $this->configuration->setAsBoolean('sendNotification', true);
 
         $registration = $this->createRegistration();
 
@@ -4849,7 +4812,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyOrganizersUsesOrganizerAsTo()
     {
-        $this->subject->setConfigurationValue('sendNotification', true);
+        $this->configuration->setAsBoolean('sendNotification', true);
 
         $registration = $this->createRegistration();
         $this->subject->notifyOrganizers($registration);
@@ -4866,7 +4829,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyOrganizersIncludesHelloIfNotHidden()
     {
         $registration = $this->createRegistration();
-        $this->subject->setConfigurationValue('sendNotification', true);
+        $this->configuration->setAsBoolean('sendNotification', true);
         $this->subject->setConfigurationValue(
             'hideFieldsInNotificationMail',
             ''
@@ -4885,7 +4848,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyOrganizersForEventWithOneVacancyShowsVacanciesLabelWithVacancyNumber()
     {
-        $this->subject->setConfigurationValue('sendNotification', true);
+        $this->configuration->setAsBoolean('sendNotification', true);
         $this->subject->setConfigurationValue(
             'showSeminarFieldsInNotificationMail',
             'vacancies'
@@ -4910,7 +4873,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyOrganizersForEventWithUnlimitedVacanciesShowsVacanciesLabelWithUnlimitedLabel()
     {
-        $this->subject->setConfigurationValue('sendNotification', true);
+        $this->configuration->setAsBoolean('sendNotification', true);
         $this->subject->setConfigurationValue(
             'showSeminarFieldsInNotificationMail',
             'vacancies'
@@ -4936,7 +4899,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyOrganizersForRegistrationWithCompanyShowsLabelOfCompany()
     {
-        $this->subject->setConfigurationValue('sendNotification', true);
+        $this->configuration->setAsBoolean('sendNotification', true);
         $this->subject->setConfigurationValue(
             'showAttendanceFieldsInNotificationMail',
             'company'
@@ -4965,7 +4928,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyOrganizersForRegistrationWithCompanyShowsCompanyOfRegistration()
     {
-        $this->subject->setConfigurationValue('sendNotification', true);
+        $this->configuration->setAsBoolean('sendNotification', true);
         $this->subject->setConfigurationValue(
             'showAttendanceFieldsInNotificationMail',
             'company'
@@ -4994,7 +4957,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyOrganizersForSendNotificationTrueCallsRegistrationEmailHookMethods()
     {
-        $this->subject->setConfigurationValue('sendNotification', true);
+        $this->configuration->setAsBoolean('sendNotification', true);
 
         $registrationOld = $this->createRegistration();
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
@@ -5023,7 +4986,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyOrganizersForSendNotificationFalseNeverCallsRegistrationEmailHookMethods()
     {
-        $this->subject->setConfigurationValue('sendNotification', false);
+        $this->configuration->setAsBoolean('sendNotification', false);
 
         $registrationOld = $this->createRegistration();
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Configuration\ConfigurationProxy;
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
+use OliverKlee\Oelib\Interfaces\Configuration;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\FrontEndUser;
 use OliverKlee\Oelib\Templating\TemplateHelper;
@@ -74,11 +76,14 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
     const SEND_USER_MAIL = 2;
 
     /**
-     * a link builder instance
-     *
      * @var \Tx_Seminars_Service_SingleViewLinkBuilder
      */
     private $linkBuilder = null;
+
+    /**
+     * @var Configuration|null
+     */
+    private $configuration = null;
 
     /**
      * The constructor.
@@ -481,7 +486,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
             $this->notifyOrganizers($this->registration);
         }
 
-        if ($this->getConfValueBoolean('sendAdditionalNotificationEmails')) {
+        if ($this->getSharedConfiguration()->getAsBoolean('sendAdditionalNotificationEmails')) {
             $this->sendAdditionalNotification($this->registration);
         }
     }
@@ -658,6 +663,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         $registrationBagBuilder->limitToOnQueue();
         $registrationBagBuilder->limitToSeatsAtMost($vacancies);
 
+        $configuration = $this->getSharedConfiguration();
         /** @var \Tx_Seminars_OldModel_Registration $registration */
         foreach ($registrationBagBuilder->build() as $registration) {
             if ($vacancies <= 0) {
@@ -675,7 +681,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
                 $this->notifyAttendee($registration, $plugin, 'confirmationOnQueueUpdate');
                 $this->notifyOrganizers($registration, 'notificationOnQueueUpdate');
 
-                if ($this->getConfValueBoolean('sendAdditionalNotificationEmails')) {
+                if ($configuration->getAsBoolean('sendAdditionalNotificationEmails')) {
                     $this->sendAdditionalNotification($registration);
                 }
             }
@@ -739,7 +745,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         TemplateHelper $plugin,
         string $helloSubjectPrefix = 'confirmation'
     ) {
-        if (!$this->getConfValueBoolean('send' . ucfirst($helloSubjectPrefix))) {
+        if (!$this->getSharedConfiguration()->getAsBoolean('send' . ucfirst($helloSubjectPrefix))) {
             return;
         }
 
@@ -867,7 +873,8 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         \Tx_Seminars_OldModel_Registration $registration,
         string $helloSubjectPrefix = 'notification'
     ) {
-        if (!$this->getConfValueBoolean('send' . ucfirst($helloSubjectPrefix))) {
+        $configuration = $this->getSharedConfiguration();
+        if (!$configuration->getAsBoolean('send' . ucfirst($helloSubjectPrefix))) {
             return;
         }
         if (!$registration->hasExistingFrontEndUser()) {
@@ -1561,5 +1568,14 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
 
         return $connectionPool->getConnectionForTable($table);
+    }
+
+    private function getSharedConfiguration(): Configuration
+    {
+        if (!$this->configuration instanceof Configuration) {
+            $this->configuration = ConfigurationRegistry::get('plugin.tx_seminars');
+        }
+
+        return $this->configuration;
     }
 }

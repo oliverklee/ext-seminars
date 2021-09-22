@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\Service;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
@@ -37,11 +39,18 @@ final class RegistrationManagerTest extends FunctionalTestCase
      */
     private $subject = null;
 
+    /**
+     * @var DummyConfiguration
+     */
+    private $configuration;
+
     protected function setUp()
     {
         parent::setUp();
 
         $this->initializeBackEndLanguage();
+        $this->configuration = new DummyConfiguration([]);
+        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->configuration);
 
         $this->email = $this->createEmailMock();
 
@@ -51,6 +60,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     protected function tearDown()
     {
         \Tx_Seminars_Service_RegistrationManager::purgeCachedConfigurations();
+        ConfigurationRegistry::purgeInstance();
         \Tx_Seminars_Service_RegistrationManager::purgeInstance();
         // Purge the FIFO buffer of mocks
         GeneralUtility::makeInstance(MailMessage::class);
@@ -68,7 +78,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->addMockedInstance(MailMessage::class, $this->email);
         $registration = \Tx_Seminars_OldModel_Registration::fromUid(1);
 
-        $this->subject->setConfigurationValue('sendNotification', true);
+        $this->configuration->setAsBoolean('sendNotification', true);
         $this->subject->setConfigurationValue('showSeminarFieldsInNotificationMail', 'vacancies');
         $this->subject->setConfigurationValue('templateFile', self::EMAIL_TEMPLATE_PATH);
 
