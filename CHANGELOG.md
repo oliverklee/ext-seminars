@@ -15,7 +15,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Package and use Emogrifier for inlining CSS into HTML emails (#863)
 - Update `simshaun/recurr` to version 5.0.0 (#862)
 - !!! Rename the TypoScript files to `*.typoscript` (#861)
-- Allow mkforms 10.0.0 (#860)
+- Allow mkforms 10.x (#860)
 - Upgrade to PHP-CS-Fixer V3 (#854)
 - Upgrade to PHPUnit 7 (#853)
 - Require rn_base >= 1.13.13 (#774, #911)
