@@ -9,7 +9,9 @@ use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Interfaces\Configuration;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\FrontEndUser;
+use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Templating\TemplateHelper;
+use OliverKlee\Oelib\Templating\TemplateRegistry;
 use OliverKlee\Seminar\Email\Salutation;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
@@ -50,10 +52,9 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
     private $registration = null;
 
     /**
-     * @var bool whether we have already initialized the templates
-     *              (which is done lazily)
+     * @var Template|null
      */
-    private $isTemplateInitialized = false;
+    private $emailTemplate;
 
     /**
      * @var HookProvider|null
@@ -775,8 +776,6 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
             $this->translate('email_' . $helloSubjectPrefix . 'Subject') . ': ' . $event->getTitleAndDate('-')
         );
 
-        $this->initializeTemplate();
-
         $emailFormat = ConfigurationProxy::getInstance('seminars')->getAsInteger('eMailFormatForAttendees');
         if (
             $emailFormat === self::SEND_HTML_MAIL || ($emailFormat === self::SEND_USER_MAIL && $user->wantsHtmlEmail())
@@ -902,40 +901,40 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
             $this->translate('email_' . $helloSubjectPrefix . 'Subject') . ': ' . $registration->getTitle()
         );
 
-        $this->initializeTemplate();
-        $this->hideSubparts($this->getConfValueString('hideFieldsInNotificationMail'), 'field_wrapper');
+        $template = $this->getInitializedEmailTemplate();
+        $template->hideSubparts($this->getConfValueString('hideFieldsInNotificationMail'), 'field_wrapper');
 
-        $this->setMarker('hello', $this->translate('email_' . $helloSubjectPrefix . 'Hello'));
-        $this->setMarker('summary', $registration->getTitle());
+        $template->setMarker('hello', $this->translate('email_' . $helloSubjectPrefix . 'Hello'));
+        $template->setMarker('summary', $registration->getTitle());
 
         if ($this->hasConfValueString('showSeminarFieldsInNotificationMail')) {
-            $this->setMarker(
+            $template->setMarker(
                 'seminardata',
                 $event->dumpSeminarValues($this->getConfValueString('showSeminarFieldsInNotificationMail'))
             );
         } else {
-            $this->hideSubparts('seminardata', 'field_wrapper');
+            $template->hideSubparts('seminardata', 'field_wrapper');
         }
 
         if ($this->hasConfValueString('showFeUserFieldsInNotificationMail')) {
-            $this->setMarker(
+            $template->setMarker(
                 'feuserdata',
                 $registration->dumpUserValues($this->getConfValueString('showFeUserFieldsInNotificationMail'))
             );
         } else {
-            $this->hideSubparts('feuserdata', 'field_wrapper');
+            $template->hideSubparts('feuserdata', 'field_wrapper');
         }
 
         if ($this->hasConfValueString('showAttendanceFieldsInNotificationMail')) {
-            $this->setMarker(
+            $template->setMarker(
                 'attendancedata',
                 $registration->dumpAttendanceValues($this->getConfValueString('showAttendanceFieldsInNotificationMail'))
             );
         } else {
-            $this->hideSubparts('attendancedata', 'field_wrapper');
+            $template->hideSubparts('attendancedata', 'field_wrapper');
         }
 
-        $eMailNotification->setBody($this->getSubpart('MAIL_NOTIFICATION'));
+        $eMailNotification->setBody($template->getSubpart('MAIL_NOTIFICATION'));
 
         $registrationMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
         $registrationNew = $registrationMapper->find($registration->getUid());
@@ -1054,36 +1053,40 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         string $reasonForNotification
     ): string {
         $localLanguageKey = 'email_additionalNotification' . $reasonForNotification;
-        $this->initializeTemplate();
+        $template = $this->getInitializedEmailTemplate();
 
-        $this->setMarker('message', $this->translate($localLanguageKey));
+        $template->setMarker('message', $this->translate($localLanguageKey));
         $showSeminarFields = $this->getConfValueString('showSeminarFieldsInNotificationMail');
         if ($showSeminarFields != '') {
-            $this->setMarker('seminardata', $registration->getSeminarObject()->dumpSeminarValues($showSeminarFields));
+            $template->setMarker('seminardata', $registration->getSeminarObject()->dumpSeminarValues($showSeminarFields));
         } else {
-            $this->hideSubparts('seminardata', 'field_wrapper');
+            $template->hideSubparts('seminardata', 'field_wrapper');
         }
 
-        return $this->getSubpart('MAIL_ADDITIONALNOTIFICATION');
+        return $template->getSubpart('MAIL_ADDITIONALNOTIFICATION');
     }
 
     /**
      * Reads and initializes the templates.
+     *
      * If this has already been called for this instance, this function does nothing.
      *
-     * This function will read the template file as it is set in the TypoScript setup. If there is a template file set in the
-     * flexform of pi1, this will be ignored!
-     *
-     * @return void
+     * This function will read the template file as it is set in the TypoScript setup.
      */
-    private function initializeTemplate()
+    private function getInitializedEmailTemplate(): Template
     {
-        if (!$this->isTemplateInitialized) {
-            $this->getTemplateCode(true);
-            $this->setLabels();
-
-            $this->isTemplateInitialized = true;
+        if ($this->emailTemplate instanceof Template) {
+            return $this->emailTemplate;
         }
+
+        $templateFileName = $this->getSharedConfiguration()->getAsString('templateFile');
+        $template = TemplateRegistry::get($templateFileName);
+        foreach ($template->getLabelMarkerNames() as $label) {
+            $template->setMarker($label, $this->translate($label));
+        }
+        $this->emailTemplate = $template;
+
+        return $template;
     }
 
     /**
@@ -1118,144 +1121,145 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
 
         $wrapperPrefix = ($useHtml ? 'html_' : '') . 'field_wrapper';
 
-        $this->setMarker('html_mail_charset', 'utf-8');
-        $this->hideSubparts($this->getConfValueString('hideFieldsInThankYouMail'), $wrapperPrefix);
+        $template = $this->getInitializedEmailTemplate();
+        $template->setMarker('html_mail_charset', 'utf-8');
+        $template->hideSubparts($this->getConfValueString('hideFieldsInThankYouMail'), $wrapperPrefix);
 
         $this->setEmailIntroduction($helloSubjectPrefix, $registration);
         $event = $registration->getSeminarObject();
         $this->fillOrHideUnregistrationNotice($helloSubjectPrefix, $registration, $useHtml);
 
-        $this->setMarker('uid', $event->getUid());
+        $template->setMarker('uid', $event->getUid());
 
-        $this->setMarker('registration_uid', $registration->getUid());
+        $template->setMarker('registration_uid', $registration->getUid());
 
         if ($registration->hasSeats()) {
-            $this->setMarker('seats', $registration->getSeats());
+            $template->setMarker('seats', $registration->getSeats());
         } else {
-            $this->hideSubparts('seats', $wrapperPrefix);
+            $template->hideSubparts('seats', $wrapperPrefix);
         }
 
         $this->fillOrHideAttendeeMarker($registration, $useHtml);
 
         if ($registration->hasLodgings()) {
-            $this->setMarker('lodgings', $registration->getLodgings());
+            $template->setMarker('lodgings', $registration->getLodgings());
         } else {
-            $this->hideSubparts('lodgings', $wrapperPrefix);
+            $template->hideSubparts('lodgings', $wrapperPrefix);
         }
 
         if ($registration->hasAccommodation()) {
-            $this->setMarker('accommodation', $registration->getAccommodation());
+            $template->setMarker('accommodation', $registration->getAccommodation());
         } else {
-            $this->hideSubparts('accommodation', $wrapperPrefix);
+            $template->hideSubparts('accommodation', $wrapperPrefix);
         }
 
         if ($registration->hasFoods()) {
-            $this->setMarker('foods', $registration->getFoods());
+            $template->setMarker('foods', $registration->getFoods());
         } else {
-            $this->hideSubparts('foods', $wrapperPrefix);
+            $template->hideSubparts('foods', $wrapperPrefix);
         }
 
         if ($registration->hasFood()) {
-            $this->setMarker('food', $registration->getFood());
+            $template->setMarker('food', $registration->getFood());
         } else {
-            $this->hideSubparts('food', $wrapperPrefix);
+            $template->hideSubparts('food', $wrapperPrefix);
         }
 
         if ($registration->hasCheckboxes()) {
-            $this->setMarker('checkboxes', $registration->getCheckboxes());
+            $template->setMarker('checkboxes', $registration->getCheckboxes());
         } else {
-            $this->hideSubparts('checkboxes', $wrapperPrefix);
+            $template->hideSubparts('checkboxes', $wrapperPrefix);
         }
 
         if ($registration->hasKids()) {
-            $this->setMarker('kids', $registration->getNumberOfKids());
+            $template->setMarker('kids', $registration->getNumberOfKids());
         } else {
-            $this->hideSubparts('kids', $wrapperPrefix);
+            $template->hideSubparts('kids', $wrapperPrefix);
         }
 
         if ($event->hasAccreditationNumber()) {
-            $this->setMarker('accreditation_number', $event->getAccreditationNumber());
+            $template->setMarker('accreditation_number', $event->getAccreditationNumber());
         } else {
-            $this->hideSubparts('accreditation_number', $wrapperPrefix);
+            $template->hideSubparts('accreditation_number', $wrapperPrefix);
         }
 
         if ($event->hasCreditPoints()) {
-            $this->setMarker('credit_points', $event->getCreditPoints());
+            $template->setMarker('credit_points', $event->getCreditPoints());
         } else {
-            $this->hideSubparts('credit_points', $wrapperPrefix);
+            $template->hideSubparts('credit_points', $wrapperPrefix);
         }
 
-        $this->setMarker('date', $event->getDate(($useHtml ? '&#8212;' : '-')));
-        $this->setMarker('time', $event->getTime(($useHtml ? '&#8212;' : '-')));
+        $template->setMarker('date', $event->getDate(($useHtml ? '&#8212;' : '-')));
+        $template->setMarker('time', $event->getTime(($useHtml ? '&#8212;' : '-')));
 
         $this->fillPlacesMarker($event, $useHtml);
 
         if ($event->hasRoom()) {
-            $this->setMarker('room', $event->getRoom());
+            $template->setMarker('room', $event->getRoom());
         } else {
-            $this->hideSubparts('room', $wrapperPrefix);
+            $template->hideSubparts('room', $wrapperPrefix);
         }
 
         if ($registration->hasPrice()) {
-            $this->setMarker('price', $registration->getPrice());
+            $template->setMarker('price', $registration->getPrice());
         } else {
-            $this->hideSubparts('price', $wrapperPrefix);
+            $template->hideSubparts('price', $wrapperPrefix);
         }
 
         if ($registration->hasTotalPrice()) {
-            $this->setMarker('total_price', $registration->getTotalPrice());
+            $template->setMarker('total_price', $registration->getTotalPrice());
         } else {
-            $this->hideSubparts('total_price', $wrapperPrefix);
+            $template->hideSubparts('total_price', $wrapperPrefix);
         }
 
         // We don't need to check $this->seminar->hasPaymentMethods() here as
         // method_of_payment can only be set (using the registration form) if
         // the event has at least one payment method.
         if ($registration->hasMethodOfPayment()) {
-            $this->setMarker(
+            $template->setMarker(
                 'paymentmethod',
                 $event->getSinglePaymentMethodPlain($registration->getMethodOfPaymentUid())
             );
         } else {
-            $this->hideSubparts('paymentmethod', $wrapperPrefix);
+            $template->hideSubparts('paymentmethod', $wrapperPrefix);
         }
 
-        $this->setMarker('billing_address', $registration->getBillingAddress());
+        $template->setMarker('billing_address', $registration->getBillingAddress());
 
         if ($registration->hasInterests()) {
-            $this->setMarker('interests', $registration->getInterests());
+            $template->setMarker('interests', $registration->getInterests());
         } else {
-            $this->hideSubparts('interests', $wrapperPrefix);
+            $template->hideSubparts('interests', $wrapperPrefix);
         }
 
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
         $newEvent = $mapper->find($event->getUid());
         $singleViewUrl = $this->linkBuilder->createAbsoluteUrlForEvent($newEvent);
-        $this->setMarker('url', $useHtml ? \htmlspecialchars($singleViewUrl, ENT_QUOTES | ENT_HTML5) : $singleViewUrl);
+        $template->setMarker('url', $useHtml ? \htmlspecialchars($singleViewUrl, ENT_QUOTES | ENT_HTML5) : $singleViewUrl);
 
         if ($event->isPlanned()) {
-            $this->unhideSubparts('planned_disclaimer', $wrapperPrefix);
+            $template->unhideSubparts('planned_disclaimer', $wrapperPrefix);
         } else {
-            $this->hideSubparts('planned_disclaimer', $wrapperPrefix);
+            $template->hideSubparts('planned_disclaimer', $wrapperPrefix);
         }
 
         $footers = $event->getOrganizersFooter();
-        $this->setMarker('footer', !empty($footers) ? "\n-- \n" . $footers[0] : '');
+        $template->setMarker('footer', !empty($footers) ? "\n-- \n" . $footers[0] : '');
 
         $registrationMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
         $registrationNew = $registrationMapper->find($registration->getUid());
 
         $this->getRegistrationEmailHookProvider()->executeHook(
             $useHtml ? 'modifyAttendeeEmailBodyHtml' : 'modifyAttendeeEmailBodyPlainText',
-            $this->getTemplate(),
+            $template,
             $registrationNew,
             $helloSubjectPrefix
         );
 
         if ($useHtml) {
-            $emailBody = $this->addCssToHtmlEmail($this->getSubpart('MAIL_THANKYOU_HTML'));
+            $emailBody = $this->addCssToHtmlEmail($template->getSubpart('MAIL_THANKYOU_HTML'));
         } else {
-            $emailBody = $this->getSubpart('MAIL_THANKYOU');
+            $emailBody = $template->getSubpart('MAIL_THANKYOU');
         }
 
         return $emailBody;
@@ -1336,12 +1340,13 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      */
     private function fillOrHideAttendeeMarker(\Tx_Seminars_OldModel_Registration $registration, bool $useHtml)
     {
+        $template = $this->getInitializedEmailTemplate();
         if (!$registration->hasAttendeesNames()) {
-            $this->hideSubparts('attendees_names', ($useHtml ? 'html_' : '') . 'field_wrapper');
+            $template->hideSubparts('attendees_names', ($useHtml ? 'html_' : '') . 'field_wrapper');
             return;
         }
 
-        $this->setMarker('attendees_names', $registration->getEnumeratedAttendeeNames($useHtml));
+        $template->setMarker('attendees_names', $registration->getEnumeratedAttendeeNames($useHtml));
     }
 
     /**
@@ -1354,8 +1359,9 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      */
     private function fillPlacesMarker(\Tx_Seminars_OldModel_Event $event, bool $useHtml)
     {
+        $template = $this->getInitializedEmailTemplate();
         if (!$event->hasPlace()) {
-            $this->setMarker('place', $this->translate('message_willBeAnnounced'));
+            $template->setMarker('place', $this->translate('message_willBeAnnounced'));
             return;
         }
 
@@ -1367,7 +1373,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
             $formattedPlaces[] = $this->formatPlace($place, $newline);
         }
 
-        $this->setMarker('place', implode($newline . $newline, $formattedPlaces));
+        $template->setMarker('place', implode($newline . $newline, $formattedPlaces));
     }
 
     /**
@@ -1406,6 +1412,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      */
     private function setEmailIntroduction(string $helloSubjectPrefix, \Tx_Seminars_OldModel_Registration $registration)
     {
+        $template = $this->getInitializedEmailTemplate();
         /** @var Salutation $salutation */
         $salutation = GeneralUtility::makeInstance(Salutation::class);
         $user = $registration->getFrontEndUser();
@@ -1414,7 +1421,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         } else {
             $salutationText = '';
         }
-        $this->setMarker('salutation', $salutationText);
+        $template->setMarker('salutation', $salutationText);
 
         $event = $registration->getSeminarObject();
         $introductionTemplate = $this->translate('email_' . $helloSubjectPrefix . 'Hello');
@@ -1424,7 +1431,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
             $introduction .= ' ' . sprintf($this->translate('email_price'), $registration->getTotalPrice());
         }
 
-        $this->setMarker('introduction', \trim($introduction . '.'));
+        $template->setMarker('introduction', \trim($introduction . '.'));
     }
 
     /**
@@ -1449,12 +1456,13 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         bool $useHtml
     ) {
         $event = $registration->getSeminarObject();
+        $template = $this->getInitializedEmailTemplate();
         if (($helloSubjectPrefix === 'confirmationOnUnregistration') || !$event->isUnregistrationPossible()) {
-            $this->hideSubparts('unregistration_notice', ($useHtml ? 'html_' : '') . 'field_wrapper');
+            $template->hideSubparts('unregistration_notice', ($useHtml ? 'html_' : '') . 'field_wrapper');
             return;
         }
 
-        $this->setMarker('unregistration_notice', $this->getUnregistrationNotice($event));
+        $template->setMarker('unregistration_notice', $this->getUnregistrationNotice($event));
     }
 
     /**

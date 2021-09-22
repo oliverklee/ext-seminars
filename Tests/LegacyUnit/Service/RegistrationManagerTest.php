@@ -31,6 +31,9 @@ use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
+/**
+ * @covers \Tx_Seminars_Service_RegistrationManager
+ */
 final class RegistrationManagerTest extends TestCase
 {
     use LanguageHelper;
@@ -140,7 +143,11 @@ final class RegistrationManagerTest extends TestCase
         $configurationProxy = ConfigurationProxy::getInstance('seminars');
         $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_TEXT_MAIL);
         $configurationRegistry = ConfigurationRegistry::getInstance();
-        $this->configuration = new DummyConfiguration();
+        $this->configuration = new DummyConfiguration(
+            [
+                'templateFile' => 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html',
+            ]
+        );
         $configurationRegistry->set('plugin.tx_seminars', $this->configuration);
         $configurationRegistry->set('plugin.tx_seminars._LOCAL_LANG.default', new DummyConfiguration());
         $configurationRegistry->set('config', new DummyConfiguration());
@@ -168,11 +175,6 @@ final class RegistrationManagerTest extends TestCase
             ]
         );
         $this->testingFramework->createRelation('tx_seminars_seminars_organizers_mm', $this->seminarUid, $organizerUid);
-
-        TemplateHelper::setCachedConfigurationValue(
-            'templateFile',
-            'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
-        );
 
         $headerProxyFactory = HeaderProxyFactory::getInstance();
         $headerProxyFactory->enableTestMode();
