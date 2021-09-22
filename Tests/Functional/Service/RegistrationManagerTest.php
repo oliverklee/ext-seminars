@@ -59,7 +59,6 @@ final class RegistrationManagerTest extends FunctionalTestCase
 
     protected function tearDown()
     {
-        \Tx_Seminars_Service_RegistrationManager::purgeCachedConfigurations();
         ConfigurationRegistry::purgeInstance();
         \Tx_Seminars_Service_RegistrationManager::purgeInstance();
         // Purge the FIFO buffer of mocks
@@ -79,8 +78,8 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $registration = \Tx_Seminars_OldModel_Registration::fromUid(1);
 
         $this->configuration->setAsBoolean('sendNotification', true);
+        $this->configuration->setAsString('templateFile', self::EMAIL_TEMPLATE_PATH);
         $this->subject->setConfigurationValue('showSeminarFieldsInNotificationMail', 'vacancies');
-        $this->subject->setConfigurationValue('templateFile', self::EMAIL_TEMPLATE_PATH);
 
         $this->subject->notifyOrganizers($registration);
 
