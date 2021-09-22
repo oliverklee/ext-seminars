@@ -403,19 +403,6 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
     }
 
     /**
-     * Sets the TypoScript configuration for the parameter
-     * allowUnregistrationWithEmptyWaitingList.
-     *
-     * @param bool $isAllowed whether unregistration is possible even when the waiting list is empty
-     *
-     * @return void
-     */
-    public function setAllowUnregistrationWithEmptyWaitingList(bool $isAllowed)
-    {
-        $this->setConfigurationValue('allowUnregistrationWithEmptyWaitingList', (int)$isAllowed);
-    }
-
-    /**
      * Sets the UID of the owner FE user.
      *
      * @param int $ownerUid the UID of the owner FE user, must be >= 0

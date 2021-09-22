@@ -3820,7 +3820,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             return false;
         }
 
-        $canUnregisterByQueue = $this->getConfValueBoolean('allowUnregistrationWithEmptyWaitingList')
+        $canUnregisterByQueue = $this->getSharedConfiguration()->getAsBoolean('allowUnregistrationWithEmptyWaitingList')
             || ($this->hasRegistrationQueue() && $this->hasAttendancesOnRegistrationQueue());
 
         $deadline = $this->getUnregistrationDeadlineFromModelAndConfiguration();
