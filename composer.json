@@ -146,6 +146,7 @@
 		},
 		"typo3/cms": {
 			"extension-key": "seminars",
+			"app-dir": ".Build",
 			"web-dir": ".Build/public"
 		},
 		"helhum/typo3-console": {
