@@ -1148,8 +1148,7 @@ final class EventTest extends TestCase
      */
     public function canSomebodyRegisterIsTrueForEventWithFutureDateAndRegistrationWithoutDateActivated()
     {
-        // Activates the configuration switch "canRegisterForEventsWithoutDate".
-        $this->subject->setAllowRegistrationForEventsWithoutDate(1);
+        $this->configuration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
 
         $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
         self::assertTrue(
@@ -1174,8 +1173,7 @@ final class EventTest extends TestCase
      */
     public function canSomebodyRegisterIsFalseForPastEventWithRegistrationWithoutDateActivated()
     {
-        // Activates the configuration switch "canRegisterForEventsWithoutDate".
-        $this->subject->setAllowRegistrationForEventsWithoutDate(1);
+        $this->configuration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
 
         $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 7200);
         $this->subject->setEndDate($GLOBALS['SIM_EXEC_TIME'] - 3600);
@@ -1201,8 +1199,7 @@ final class EventTest extends TestCase
      */
     public function canSomebodyRegisterIsFalseForCurrentlyRunningEventWithRegistrationWithoutDateActivated()
     {
-        // Activates the configuration switch "canRegisterForEventsWithoutDate".
-        $this->subject->setAllowRegistrationForEventsWithoutDate(1);
+        $this->configuration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
 
         $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 3600);
         $this->subject->setEndDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
@@ -1226,8 +1223,7 @@ final class EventTest extends TestCase
      */
     public function canSomebodyRegisterIsTrueForEventWithoutDateAndRegistrationWithoutDateActivated()
     {
-        // Activates the configuration switch "canRegisterForEventsWithoutDate".
-        $this->subject->setAllowRegistrationForEventsWithoutDate(1);
+        $this->configuration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
 
         self::assertTrue(
             $this->subject->canSomebodyRegister()
@@ -1252,8 +1248,7 @@ final class EventTest extends TestCase
      */
     public function canSomebodyRegisterForCancelledEventReturnsFalse()
     {
-        // Activates the configuration switch "canRegisterForEventsWithoutDate".
-        $this->subject->setAllowRegistrationForEventsWithoutDate(1);
+        $this->configuration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
 
         $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
 
@@ -1402,8 +1397,7 @@ final class EventTest extends TestCase
      */
     public function canSomebodyRegisterMessageForPastEventWithRegistrationWithoutDateActivatedReturnsRegistrationDeadlineOverMessage()
     {
-        // Activates the configuration switch "canRegisterForEventsWithoutDate".
-        $this->subject->setAllowRegistrationForEventsWithoutDate(1);
+        $this->configuration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
 
         $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 7200);
         $this->subject->setEndDate($GLOBALS['SIM_EXEC_TIME'] - 3600);
@@ -1433,8 +1427,7 @@ final class EventTest extends TestCase
      */
     public function canSomebodyRegisterMessageForCurrentlyRunningEventWithRegistrationWithoutDateActivatedReturnsSeminarRegistrationClosesMessage()
     {
-        // Activates the configuration switch "canRegisterForEventsWithoutDate".
-        $this->subject->setAllowRegistrationForEventsWithoutDate(1);
+        $this->configuration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
 
         $this->subject->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 3600);
         $this->subject->setEndDate($GLOBALS['SIM_EXEC_TIME'] + 3600);
@@ -1461,8 +1454,8 @@ final class EventTest extends TestCase
      */
     public function canSomebodyRegisterMessageForEventWithoutDateAndRegistrationWithoutDateActivatedReturnsEmptyString()
     {
-        // Activates the configuration switch "canRegisterForEventsWithoutDate".
-        $this->subject->setAllowRegistrationForEventsWithoutDate(1);
+        $this->configuration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
+
         $this->subject->setBeginDate(0);
         $this->subject->setRegistrationDeadline(0);
 

@@ -48,21 +48,6 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
     }
 
     /**
-     * Sets the configuration value "allowRegistrationForEventsWithoutDate".
-     *
-     * @param int $value whether this option is enabled or not, value must be either 0 or 1
-     *
-     * @return void
-     */
-    public function setAllowRegistrationForEventsWithoutDate(int $value)
-    {
-        $this->setConfigurationValue(
-            'allowRegistrationForEventsWithoutDate',
-            $value
-        );
-    }
-
-    /**
      * Sets the event's begin date.
      *
      * @param int $beginDate begin date as UNIX timestamp (has to be >= 0, 0 will unset the begin date)

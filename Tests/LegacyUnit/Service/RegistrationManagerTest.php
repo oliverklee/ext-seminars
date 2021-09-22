@@ -5608,7 +5608,8 @@ final class RegistrationManagerTest extends TestCase
      */
     public function allowsRegistrationByDateForEventWithoutDateAndRegistrationForEventsWithoutDateAllowedReturnsTrue()
     {
-        $this->seminar->setAllowRegistrationForEventsWithoutDate(1);
+        $this->configuration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
+
         $this->seminar->setBeginDate(0);
 
         self::assertTrue(
@@ -5621,7 +5622,8 @@ final class RegistrationManagerTest extends TestCase
      */
     public function allowsRegistrationByDateForEventWithoutDateAndRegistrationForEventsWithoutDateNotAllowedIsFalse()
     {
-        $this->seminar->setAllowRegistrationForEventsWithoutDate(0);
+        $this->configuration->setAsBoolean('allowRegistrationForEventsWithoutDate', false);
+
         $this->seminar->setBeginDate(0);
 
         self::assertFalse(

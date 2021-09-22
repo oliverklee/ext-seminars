@@ -1296,7 +1296,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         if ($event->hasDate()) {
             $result = !$event->isRegistrationDeadlineOver();
         } else {
-            $result = $event->getConfValueBoolean('allowRegistrationForEventsWithoutDate');
+            $result = $this->getSharedConfiguration()->getAsBoolean('allowRegistrationForEventsWithoutDate');
         }
 
         return $result && $this->registrationHasStarted($event);

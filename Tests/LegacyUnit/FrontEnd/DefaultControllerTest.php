@@ -7253,14 +7253,12 @@ final class DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForEventWithoutDateAndWithEnoughVacanciesReturnsAvailableClass()
     {
+        $this->sharedConfiguration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
+
         $event = new TestingEvent($this->seminarUid);
         $event->setAttendancesMax(10);
         $event->setNeedsRegistration(true);
         $event->setNumberOfAttendances(0);
-        $this->subject->getConfigurationService()->setConfigurationValue(
-            'allowRegistrationForEventsWithoutDate',
-            1
-        );
 
         $output = $this->subject->getVacanciesClasses($event);
 
@@ -7275,14 +7273,12 @@ final class DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForEventWithoutDateAndWithOneVacancyReturnsVacancyOneClass()
     {
+        $this->sharedConfiguration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
+
         $event = new TestingEvent($this->seminarUid);
         $event->setAttendancesMax(10);
         $event->setNeedsRegistration(true);
         $event->setNumberOfAttendances(9);
-        $this->subject->getConfigurationService()->setConfigurationValue(
-            'allowRegistrationForEventsWithoutDate',
-            1
-        );
 
         $output = $this->subject->getVacanciesClasses($event);
 
@@ -7297,14 +7293,12 @@ final class DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForEventWithoutDateAndWithTwoVacanciesReturnsVacancyTwoClass()
     {
+        $this->sharedConfiguration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
+
         $event = new TestingEvent($this->seminarUid);
         $event->setAttendancesMax(10);
         $event->setNeedsRegistration(true);
         $event->setNumberOfAttendances(8);
-        $this->subject->getConfigurationService()->setConfigurationValue(
-            'allowRegistrationForEventsWithoutDate',
-            1
-        );
 
         $output = $this->subject->getVacanciesClasses($event);
 
@@ -7319,14 +7313,12 @@ final class DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForEventWithoutDateAndWithNoVacanciesReturnsVacancyZeroClass()
     {
+        $this->sharedConfiguration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
+
         $event = new TestingEvent($this->seminarUid);
         $event->setAttendancesMax(10);
         $event->setNeedsRegistration(true);
         $event->setNumberOfAttendances(10);
-        $this->subject->getConfigurationService()->setConfigurationValue(
-            'allowRegistrationForEventsWithoutDate',
-            1
-        );
 
         $output = $this->subject->getVacanciesClasses($event);
 
@@ -7341,13 +7333,11 @@ final class DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForEventWithoutDateAndWithUnlimitedVacanciesReturnsAvailableClass()
     {
+        $this->sharedConfiguration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
+
         $event = new TestingEvent($this->seminarUid);
         $event->setUnlimitedVacancies();
         $event->setNumberOfAttendances(0);
-        $this->subject->getConfigurationService()->setConfigurationValue(
-            'allowRegistrationForEventsWithoutDate',
-            1
-        );
 
         $output = $this->subject->getVacanciesClasses($event);
 
@@ -7362,13 +7352,11 @@ final class DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForEventWithoutDateAndWithUnlimitedVacanciesDoesNotReturnDeadlineOverClass()
     {
+        $this->sharedConfiguration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
+
         $event = new TestingEvent($this->seminarUid);
         $event->setUnlimitedVacancies();
         $event->setNumberOfAttendances(0);
-        $this->subject->getConfigurationService()->setConfigurationValue(
-            'allowRegistrationForEventsWithoutDate',
-            1
-        );
 
         $output = $this->subject->getVacanciesClasses($event);
 

@@ -2738,8 +2738,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         } elseif ($this->isCanceled()) {
             $message = $this->translate('message_seminarCancelled');
         } elseif (
-            !$this->hasDate() &&
-            !$this->getConfValueBoolean('allowRegistrationForEventsWithoutDate')
+            !$this->hasDate() && !$this->getSharedConfiguration()->getAsBoolean('allowRegistrationForEventsWithoutDate')
         ) {
             $message = $this->translate('message_noDate');
         } elseif ($this->hasDate() && $this->isRegistrationDeadlineOver()) {
