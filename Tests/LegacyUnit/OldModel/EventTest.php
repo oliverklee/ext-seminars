@@ -77,6 +77,7 @@ final class EventTest extends TestCase
         $configuration = [
             'dateFormatYMD' => '%d.%m.%Y',
             'timeFormat' => '%H:%M',
+            'showTimeOfUnregistrationDeadline' => false,
         ];
         $this->configuration = new DummyConfiguration($configuration);
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->configuration);
@@ -98,7 +99,6 @@ final class EventTest extends TestCase
             [
                 'dateFormatYMD' => '%d.%m.%Y',
                 'timeFormat' => '%H:%M',
-                'showTimeOfUnregistrationDeadline' => 0,
                 'unregistrationDeadlineDaysBeforeBeginDate' => 0,
             ]
         );
@@ -1979,8 +1979,9 @@ final class EventTest extends TestCase
      */
     public function getNonUnregistrationDeadlineWithTimeForZero()
     {
+        $this->configuration->setAsBoolean('showTimeOfUnregistrationDeadline', true);
+
         $this->subject->setUnregistrationDeadline(1893488400);
-        $this->subject->setShowTimeOfUnregistrationDeadline(1);
 
         self::assertSame('01.01.2030 09:00', $this->subject->getUnregistrationDeadline());
     }
@@ -7095,8 +7096,9 @@ final class EventTest extends TestCase
      */
     public function getEventDataReturnsFormattedUnregistrationDeadline()
     {
+        $this->configuration->setAsBoolean('showTimeOfUnregistrationDeadline', false);
         $this->subject->setUnregistrationDeadline(1893488400);
-        $this->subject->setShowTimeOfUnregistrationDeadline(0);
+
         self::assertSame(
             '01.01.2030',
             $this->subject->getEventData('deadline_unregistration')
@@ -7108,8 +7110,8 @@ final class EventTest extends TestCase
      */
     public function getEventDataForShowTimeOfUnregistrationDeadlineTrueReturnsFormattedUnregistrationDeadlineWithTime()
     {
+        $this->configuration->setAsBoolean('showTimeOfUnregistrationDeadline', true);
         $this->subject->setUnregistrationDeadline(1893488400);
-        $this->subject->setShowTimeOfUnregistrationDeadline(1);
 
         self::assertSame('01.01.2030 09:00', $this->subject->getEventData('deadline_unregistration'));
     }
