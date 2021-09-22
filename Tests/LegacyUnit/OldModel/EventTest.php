@@ -2036,7 +2036,7 @@ final class EventTest extends TestCase
      */
     public function isUnregistrationPossibleWithoutDeadlineReturnsFalse()
     {
-        $this->subject->setAllowUnregistrationWithEmptyWaitingList(true);
+        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
 
         $this->subject->setGlobalUnregistrationDeadline(0);
         $this->subject->setUnregistrationDeadline(0);
@@ -2053,7 +2053,7 @@ final class EventTest extends TestCase
      */
     public function isUnregistrationPossibleWithNoBeginDateAndNoDeadlineReturnsFalse()
     {
-        $this->subject->setAllowUnregistrationWithEmptyWaitingList(true);
+        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
 
         $this->subject->setGlobalUnregistrationDeadline(0);
         $this->subject->setUnregistrationDeadline(0);
@@ -2070,7 +2070,7 @@ final class EventTest extends TestCase
      */
     public function isUnregistrationPossibleWithGlobalDeadlineInFutureReturnsTrue()
     {
-        $this->subject->setAllowUnregistrationWithEmptyWaitingList(true);
+        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
 
         $this->subject->setGlobalUnregistrationDeadline(1);
         $this->subject->setUnregistrationDeadline(0);
@@ -2087,7 +2087,7 @@ final class EventTest extends TestCase
      */
     public function isUnregistrationPossibleWithGlobalDeadlineInPastReturnsFalse()
     {
-        $this->subject->setAllowUnregistrationWithEmptyWaitingList(true);
+        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
 
         $this->subject->setGlobalUnregistrationDeadline(5);
         $this->subject->setUnregistrationDeadline(0);
@@ -2104,7 +2104,7 @@ final class EventTest extends TestCase
      */
     public function isUnregistrationPossibleWithoutBeginDateAndWithGlobalDeadlineReturnsTrue()
     {
-        $this->subject->setAllowUnregistrationWithEmptyWaitingList(true);
+        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
 
         $this->subject->setGlobalUnregistrationDeadline(1);
         $this->subject->setUnregistrationDeadline(0);
@@ -2121,7 +2121,7 @@ final class EventTest extends TestCase
      */
     public function isUnregistrationPossibleWithFutureEventDeadlineReturnsTrue()
     {
-        $this->subject->setAllowUnregistrationWithEmptyWaitingList(true);
+        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
 
         $this->subject->setGlobalUnregistrationDeadline(0);
         $this->subject->setUnregistrationDeadline(
@@ -2140,7 +2140,7 @@ final class EventTest extends TestCase
      */
     public function isUnregistrationPossibleWithPastEventDeadlineReturnsFalse()
     {
-        $this->subject->setAllowUnregistrationWithEmptyWaitingList(true);
+        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
 
         $this->subject->setGlobalUnregistrationDeadline(0);
         $this->subject->setUnregistrationDeadline(
@@ -2159,7 +2159,7 @@ final class EventTest extends TestCase
      */
     public function isUnregistrationPossibleWithoutBeginDateAndWithFutureEventDeadlineReturnsTrue()
     {
-        $this->subject->setAllowUnregistrationWithEmptyWaitingList(true);
+        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
 
         $this->subject->setGlobalUnregistrationDeadline(0);
         $this->subject->setUnregistrationDeadline(
@@ -2178,7 +2178,7 @@ final class EventTest extends TestCase
      */
     public function isUnregistrationPossibleWithoutBeginDateAndWithPastEventDeadlineReturnsFalse()
     {
-        $this->subject->setAllowUnregistrationWithEmptyWaitingList(true);
+        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
 
         $this->subject->setGlobalUnregistrationDeadline(0);
         $this->subject->setUnregistrationDeadline(
@@ -2197,7 +2197,7 @@ final class EventTest extends TestCase
      */
     public function isUnregistrationPossibleWithBothDeadlinesInFutureReturnsTrue()
     {
-        $this->subject->setAllowUnregistrationWithEmptyWaitingList(true);
+        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
 
         $this->subject->setGlobalUnregistrationDeadline(1);
         $this->subject->setUnregistrationDeadline(
@@ -2216,7 +2216,7 @@ final class EventTest extends TestCase
      */
     public function isUnregistrationPossibleWithBothDeadlinesInPastReturnsFalse()
     {
-        $this->subject->setAllowUnregistrationWithEmptyWaitingList(true);
+        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
 
         $this->subject->setGlobalUnregistrationDeadline(2);
         $this->subject->setAttendancesMax(10);
@@ -2235,7 +2235,7 @@ final class EventTest extends TestCase
      */
     public function isUnregistrationPossibleWithoutBeginDateAndWithBothDeadlinesInFutureReturnsTrue()
     {
-        $this->subject->setAllowUnregistrationWithEmptyWaitingList(true);
+        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
 
         $this->subject->setGlobalUnregistrationDeadline(1);
         $this->subject->setUnregistrationDeadline(
@@ -2254,7 +2254,7 @@ final class EventTest extends TestCase
      */
     public function isUnregistrationPossibleWithoutBeginDateAndWithBothDeadlinesInPastReturnsFalse()
     {
-        $this->subject->setAllowUnregistrationWithEmptyWaitingList(true);
+        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
 
         $this->subject->setGlobalUnregistrationDeadline(1);
         $this->subject->setBeginDate(0);
@@ -2273,7 +2273,7 @@ final class EventTest extends TestCase
      */
     public function isUnregistrationPossibleWithPassedEventUnregistrationDeadlineReturnsFalse()
     {
-        $this->subject->setAllowUnregistrationWithEmptyWaitingList(true);
+        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
 
         $this->subject->setGlobalUnregistrationDeadline(1);
         $this->subject->setBeginDate($this->now + 2 * Time::SECONDS_PER_DAY);
@@ -2292,7 +2292,7 @@ final class EventTest extends TestCase
      */
     public function isUnregistrationPossibleWithNonZeroAttendancesMaxReturnsTrue()
     {
-        $this->subject->setAllowUnregistrationWithEmptyWaitingList(true);
+        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
 
         $this->subject->setAttendancesMax(10);
         $this->subject->setGlobalUnregistrationDeadline(1);
@@ -2311,7 +2311,7 @@ final class EventTest extends TestCase
      */
     public function isUnregistrationPossibleForNeedsRegistrationFalseReturnsFalse()
     {
-        $this->subject->setAllowUnregistrationWithEmptyWaitingList(true);
+        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
 
         $this->subject->setNeedsRegistration(false);
         $this->subject->setGlobalUnregistrationDeadline(1);
@@ -2330,7 +2330,7 @@ final class EventTest extends TestCase
      */
     public function isUnregistrationPossibleForEventWithEmptyWaitingListAndAllowUnregistrationWithEmptyWaitingListReturnsTrue()
     {
-        $this->subject->setAllowUnregistrationWithEmptyWaitingList(true);
+        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
 
         $this->subject->setAttendancesMax(10);
         $this->subject->setGlobalUnregistrationDeadline(1);
@@ -2596,7 +2596,7 @@ final class EventTest extends TestCase
      */
     public function isUnregistrationPossibleIsTrueWithEmptyQueueIfAllowedByConfiguration()
     {
-        $this->subject->setAllowUnregistrationWithEmptyWaitingList(true);
+        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
 
         $this->subject->setAttendancesMax(1);
         $this->subject->setRegistrationQueue(true);

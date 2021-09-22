@@ -15,7 +15,6 @@ use OliverKlee\Oelib\Mapper\CountryMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Templating\Template;
-use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
@@ -4567,7 +4566,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForRegistrationMailAndNoUnregistrationPossibleNotAddsUnregistrationNotice()
     {
-        TemplateHelper::setCachedConfigurationValue('allowUnregistrationWithEmptyWaitingList', false);
+        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', false);
 
         /** @var TestingRegistrationManager&MockObject $subject */
         $subject = $this->getMockBuilder(TestingRegistrationManager::class)
@@ -4595,7 +4594,7 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForRegistrationMailAndUnregistrationPossibleAddsUnregistrationNotice()
     {
-        TemplateHelper::setCachedConfigurationValue('allowUnregistrationWithEmptyWaitingList', true);
+        $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
 
         /** @var TestingRegistrationManager&MockObject $subject */
         $subject = $this->getMockBuilder(TestingRegistrationManager::class)
