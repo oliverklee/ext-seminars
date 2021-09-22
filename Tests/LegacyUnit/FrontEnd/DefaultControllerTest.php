@@ -12,7 +12,6 @@ use OliverKlee\Oelib\Http\HeaderCollector;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
-use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarListView;
@@ -27,6 +26,9 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
+/**
+ * @covers \Tx_Seminars_FrontEnd_DefaultController
+ */
 final class DefaultControllerTest extends TestCase
 {
     use LanguageHelper;
@@ -86,13 +88,18 @@ final class DefaultControllerTest extends TestCase
     /** @var ConnectionPool */
     private $connectionPool = null;
 
+    /**
+     * @var DummyConfiguration
+     */
+    private $sharedConfiguration;
+
     protected function setUp()
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
-        /** @var ConfigurationProxy $configuration */
-        $configuration = ConfigurationProxy::getInstance('seminars');
-        $configuration->setAsBoolean('enableConfigCheck', false);
+        /** @var ConfigurationProxy $globalConfiguration */
+        $globalConfiguration = ConfigurationProxy::getInstance('seminars');
+        $globalConfiguration->setAsBoolean('enableConfigCheck', false);
 
         $this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'] = [];
@@ -103,9 +110,14 @@ final class DefaultControllerTest extends TestCase
         $headerCollector = HeaderProxyFactory::getInstance()->getHeaderCollector();
         $this->headerCollector = $headerCollector;
 
-        $configuration = new DummyConfiguration();
-        $configuration->setAsString('currency', 'EUR');
-        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
+        $this->sharedConfiguration = new DummyConfiguration(
+            [
+                'dateFormatYMD' => '%d.%m.%Y',
+                'timeFormat' => '%H:%M',
+                'currency' => 'EUR',
+            ]
+        );
+        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->sharedConfiguration);
 
         $this->systemFolderPid = $this->testingFramework->createSystemFolder();
         $this->seminarUid = $this->testingFramework->createRecord(
@@ -142,14 +154,6 @@ final class DefaultControllerTest extends TestCase
         $this->subject->getTemplateCode();
         $this->subject->setLabels();
         $this->subject->createHelperObjects();
-        TemplateHelper::setCachedConfigurationValue(
-            'dateFormatYMD',
-            '%d.%m.%Y'
-        );
-        TemplateHelper::setCachedConfigurationValue(
-            'timeFormat',
-            '%H:%M'
-        );
 
         /** @var \Tx_Seminars_Service_SingleViewLinkBuilder&MockObject $linkBuilder */
         $linkBuilder = $this->createPartialMock(

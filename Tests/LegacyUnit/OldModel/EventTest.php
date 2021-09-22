@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\OldModel;
 
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Model\FrontEndUser;
@@ -15,9 +17,17 @@ use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
+/**
+ * @covers \Tx_Seminars_OldModel_Event
+ */
 final class EventTest extends TestCase
 {
     use LanguageHelper;
+
+    /**
+     * @var DummyConfiguration
+     */
+    private $configuration;
 
     /**
      * @var TestingEvent
@@ -62,6 +72,14 @@ final class EventTest extends TestCase
         $this->unregistrationDeadline = ($this->now + Time::SECONDS_PER_WEEK);
 
         $this->testingFramework = new TestingFramework('tx_seminars');
+        $this->connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
+
+        $configuration = [
+            'dateFormatYMD' => '%d.%m.%Y',
+            'timeFormat' => '%H:%M',
+        ];
+        $this->configuration = new DummyConfiguration($configuration);
+        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->configuration);
 
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -75,7 +93,6 @@ final class EventTest extends TestCase
                 'needs_registration' => 1,
             ]
         );
-
         $this->subject = new TestingEvent($uid);
         $this->subject->overrideConfiguration(
             [
@@ -85,14 +102,13 @@ final class EventTest extends TestCase
                 'unregistrationDeadlineDaysBeforeBeginDate' => 0,
             ]
         );
-
-        $this->connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
     }
 
     protected function tearDown()
     {
         $this->testingFramework->cleanUp();
 
+        ConfigurationRegistry::purgeInstance();
         \Tx_Seminars_Service_RegistrationManager::purgeInstance();
     }
 

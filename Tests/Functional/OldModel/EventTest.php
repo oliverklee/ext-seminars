@@ -5,12 +5,17 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\OldModel;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
+/**
+ * @covers \Tx_Seminars_OldModel_Event
+ */
 final class EventTest extends FunctionalTestCase
 {
     use LanguageHelper;
@@ -18,7 +23,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @var array<string, string>
      */
-    const CONFIGURATION = [
+    private const CONFIGURATION = [
         'dateFormatYMD' => '%d.%m.%Y',
         'timeFormat' => '%H:%M',
     ];
@@ -43,11 +48,20 @@ final class EventTest extends FunctionalTestCase
      */
     private $plugin = null;
 
-    protected function tearDown()
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $configuration = new DummyConfiguration(self::CONFIGURATION);
+        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
+    }
+
+    protected function tearDown(): void
     {
         foreach ($this->filesToDelete as $file) {
             \unlink($this->getInstancePath() . '/' . $file);
         }
+        ConfigurationRegistry::purgeInstance();
     }
 
     private function buildPlugin()
