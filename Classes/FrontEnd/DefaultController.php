@@ -3542,7 +3542,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
 
     private function buildConfigurationWithFlexForms(): Configuration
     {
-        $typoScriptConfiguration = ConfigurationRegistry::get('plugin.tx_seminars');
+        $typoScriptConfiguration = ConfigurationRegistry::get('plugin.tx_seminars_pi1');
         if (!$this->cObj instanceof ContentObjectRenderer) {
             return $typoScriptConfiguration;
         }
