@@ -68,9 +68,6 @@ class EventsList extends AbstractList
 
         $content .= $this->template->getSubpart('SEMINARS_EVENT_LIST');
 
-        // Checks the BE configuration and the CSV export configuration.
-        $content .= $seminarBag->checkConfiguration();
-
         return $content;
     }
 

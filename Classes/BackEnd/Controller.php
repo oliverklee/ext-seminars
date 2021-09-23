@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\BackEnd;
 
+use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Seminars\Configuration\SharedConfigurationCheck;
 use OliverKlee\Seminars\Csv\CsvDownloader;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -170,6 +172,13 @@ class Controller extends AbstractModule
                 }
                 break;
             default:
+        }
+
+        if (ConfigurationProxy::getInstance('seminars')->getAsBoolean('enableConfigCheck')) {
+            $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
+            $configurationCheck = new SharedConfigurationCheck($configuration, 'plugin.tx_seminars');
+            $configurationCheck->check();
+            $content .= \implode("\n", $configurationCheck->getWarningsAsHtml());
         }
 
         return $content . $document->endPage();
