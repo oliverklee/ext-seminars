@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Require static_info_tables >= 6.9.5 (#925)
 - Add more type declarations (#887)
 - Use the new configuration classes
   (#725, #910, #913, #914, #915, #916, #917, #919, #922)
