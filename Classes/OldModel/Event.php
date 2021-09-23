@@ -1821,7 +1821,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         if ($this->hasRegistrationDeadline()) {
             return $this->getRecordPropertyInteger('deadline_registration');
         }
-        if (!$this->getConfValueBoolean('allowRegistrationForStartedEvents')) {
+        if (!$this->getSharedConfiguration()->getAsBoolean('allowRegistrationForStartedEvents')) {
             return $this->getBeginDateAsTimestamp();
         }
 
