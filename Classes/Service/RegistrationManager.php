@@ -1472,9 +1472,9 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
     {
         $unregistrationDeadline = $event->getUnregistrationDeadlineFromModelAndConfiguration();
 
-        return sprintf(
+        return \sprintf(
             $this->translate('email_unregistrationNotice'),
-            strftime($this->getConfValueString('dateFormatYMD'), $unregistrationDeadline)
+            \strftime($this->getDateFormat(), $unregistrationDeadline)
         );
     }
 

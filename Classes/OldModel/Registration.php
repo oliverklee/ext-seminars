@@ -407,7 +407,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements Configu
             case 'crdate':
                 // The fallthrough is intended.
             case 'tstamp':
-                $format = $this->getConfValueString('dateFormatYMD') . ' ' . $this->getConfValueString('timeFormat');
+                $format = $this->getDateFormat() . ' ' . $this->getTimeFormat();
                 $result = \strftime($format, $this->getRecordPropertyInteger($trimmedKey));
                 break;
             case 'uid':
@@ -426,10 +426,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements Configu
                     ? $this->translate('label_yes') : $this->translate('label_no');
                 break;
             case 'datepaid':
-                $result = \strftime(
-                    $this->getConfValueString('dateFormatYMD'),
-                    $this->getRecordPropertyInteger($trimmedKey)
-                );
+                $result = \strftime($this->getDateFormat(), $this->getRecordPropertyInteger($trimmedKey));
                 break;
             case 'method_of_payment':
                 $result = $this->getSeminarObject()
@@ -499,11 +496,11 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel implements Configu
             case 'crdate':
                 // The fallthrough is intended.
             case 'tstamp':
-                $format = $this->getConfValueString('dateFormatYMD') . ' ' . $this->getConfValueString('timeFormat');
+                $format = $this->getDateFormat() . ' ' . $this->getTimeFormat();
                 $result = \strftime($format, (int)$rawData);
                 break;
             case 'date_of_birth':
-                $result = \strftime($this->getConfValueString('dateFormatYMD'), (int)$rawData);
+                $result = \strftime($this->getDateFormat(), (int)$rawData);
                 break;
             case 'name':
                 $user = $this->getFrontEndUser();

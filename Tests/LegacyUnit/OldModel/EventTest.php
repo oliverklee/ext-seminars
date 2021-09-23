@@ -25,6 +25,16 @@ final class EventTest extends TestCase
     use LanguageHelper;
 
     /**
+     * @var array<string, string|int|bool>
+     */
+    private const CONFIGURATION = [
+        'dateFormatYMD' => '%d.%m.%Y',
+        'timeFormat' => '%H:%M',
+        'showTimeOfUnregistrationDeadline' => false,
+        'unregistrationDeadlineDaysBeforeBeginDate' => 0,
+    ];
+
+    /**
      * @var DummyConfiguration
      */
     private $configuration;
@@ -74,13 +84,7 @@ final class EventTest extends TestCase
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
 
-        $configuration = [
-            'dateFormatYMD' => '%d.%m.%Y',
-            'timeFormat' => '%H:%M',
-            'showTimeOfUnregistrationDeadline' => false,
-            'unregistrationDeadlineDaysBeforeBeginDate' => 0,
-        ];
-        $this->configuration = new DummyConfiguration($configuration);
+        $this->configuration = new DummyConfiguration(self::CONFIGURATION);
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->configuration);
 
         $uid = $this->testingFramework->createRecord(
@@ -96,12 +100,6 @@ final class EventTest extends TestCase
             ]
         );
         $this->subject = new TestingEvent($uid);
-        $this->subject->overrideConfiguration(
-            [
-                'dateFormatYMD' => '%d.%m.%Y',
-                'timeFormat' => '%H:%M',
-            ]
-        );
     }
 
     protected function tearDown()
@@ -7573,9 +7571,6 @@ final class EventTest extends TestCase
      */
     public function getRegistrationBeginForEventWithoutRegistrationBeginReturnsEmptyString()
     {
-        $this->subject->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
-        $this->subject->setConfigurationValue('timeFormat', '%H:%M');
-
         $this->subject->setRegistrationBeginDate(0);
 
         self::assertSame(
@@ -7589,9 +7584,6 @@ final class EventTest extends TestCase
      */
     public function getRegistrationBeginForEventWithRegistrationBeginReturnsFormattedRegistrationBegin()
     {
-        $this->subject->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
-        $this->subject->setConfigurationValue('timeFormat', '%H:%M');
-
         $this->subject->setRegistrationBeginDate($GLOBALS['SIM_EXEC_TIME']);
 
         self::assertSame(

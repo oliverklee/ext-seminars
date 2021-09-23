@@ -27,7 +27,7 @@ trait SharedPluginConfiguration
     }
 
     /**
-     * Returns the date format for a full date (with year, month and day) for `sprintf`.
+     * Returns the date format for a full date (with year, month and day) for `strftime`.
      */
     protected function getDateFormat(): string
     {
@@ -35,7 +35,7 @@ trait SharedPluginConfiguration
     }
 
     /**
-     * Returns the time format for `sprintf`.
+     * Returns the time format for `strftime`.
      */
     protected function getTimeFormat(): string
     {

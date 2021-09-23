@@ -39,6 +39,15 @@ final class DefaultControllerTest extends TestCase
     const BLANK_GIF = 'R0lGODlhAQABAJH/AP///wAAAMDAwAAAACH5BAEAAAIALAAAAAABAAEAAAICVAEAOw==';
 
     /**
+     * @var array<string, string>
+     */
+    private const CONFIGURATION = [
+        'dateFormatYMD' => '%d.%m.%Y',
+        'timeFormat' => '%H:%M',
+        'currency' => 'EUR',
+    ];
+
+    /**
      * @var TestingDefaultController
      */
     private $subject = null;
@@ -110,13 +119,7 @@ final class DefaultControllerTest extends TestCase
         $headerCollector = HeaderProxyFactory::getInstance()->getHeaderCollector();
         $this->headerCollector = $headerCollector;
 
-        $this->sharedConfiguration = new DummyConfiguration(
-            [
-                'dateFormatYMD' => '%d.%m.%Y',
-                'timeFormat' => '%H:%M',
-                'currency' => 'EUR',
-            ]
-        );
+        $this->sharedConfiguration = new DummyConfiguration(self::CONFIGURATION);
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->sharedConfiguration);
 
         $this->systemFolderPid = $this->testingFramework->createSystemFolder();
@@ -178,6 +181,7 @@ final class DefaultControllerTest extends TestCase
     {
         $this->testingFramework->cleanUp();
 
+        ConfigurationRegistry::purgeInstance();
         \Tx_Seminars_Service_RegistrationManager::purgeInstance();
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;

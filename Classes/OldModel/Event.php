@@ -1859,12 +1859,12 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         if ($this->hasRegistrationDeadline()) {
             $result = \strftime(
-                $this->getConfValueString('dateFormatYMD'),
+                $this->getDateFormat(),
                 $this->getRecordPropertyInteger('deadline_registration')
             );
             if ($this->getConfValueBoolean('showTimeOfRegistrationDeadline')) {
                 $result .= \strftime(
-                    ' ' . $this->getConfValueString('timeFormat'),
+                    ' ' . $this->getTimeFormat(),
                     $this->getRecordPropertyInteger('deadline_registration')
                 );
             }
@@ -1902,13 +1902,10 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         $result = '';
 
         if ($this->hasEarlyBirdDeadline()) {
-            $result = strftime(
-                $this->getConfValueString('dateFormatYMD'),
-                $this->getRecordPropertyInteger('deadline_early_bird')
-            );
+            $result = \strftime($this->getDateFormat(), $this->getRecordPropertyInteger('deadline_early_bird'));
             if ($this->getConfValueBoolean('showTimeOfEarlyBirdDeadline')) {
-                $result .= strftime(
-                    ' ' . $this->getConfValueString('timeFormat'),
+                $result .= \strftime(
+                    ' ' . $this->getTimeFormat(),
                     $this->getRecordPropertyInteger('deadline_early_bird')
                 );
             }
@@ -1934,13 +1931,10 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         $result = '';
 
         if ($this->hasUnregistrationDeadline()) {
-            $result = strftime(
-                $this->getConfValueString('dateFormatYMD'),
-                $this->getRecordPropertyInteger('deadline_unregistration')
-            );
+            $result = \strftime($this->getDateFormat(), $this->getRecordPropertyInteger('deadline_unregistration'));
             if ($this->getSharedConfiguration()->getAsBoolean('showTimeOfUnregistrationDeadline')) {
-                $result .= strftime(
-                    ' ' . $this->getConfValueString('timeFormat'),
+                $result .= \strftime(
+                    ' ' . $this->getTimeFormat(),
                     $this->getRecordPropertyInteger('deadline_unregistration')
                 );
             }
@@ -3370,7 +3364,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
                 // The fallthrough is intended.
             case 'crdate':
                 $result = \strftime(
-                    $this->getConfValueString('dateFormatYMD') . ' ' . $this->getConfValueString('timeFormat'),
+                    $this->getDateFormat() . ' ' . $this->getTimeFormat(),
                     $this->getRecordPropertyInteger($trimmedKey)
                 );
                 break;

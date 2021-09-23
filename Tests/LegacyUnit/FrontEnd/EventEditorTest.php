@@ -31,6 +31,13 @@ final class EventEditorTest extends TestCase
     use MakeInstanceTrait;
 
     /**
+     * @var array<string, string>
+     */
+    private const CONFIGURATION = [
+        'dateFormatYMD' => '%d.%m.%Y',
+    ];
+
+    /**
      * @var \Tx_Seminars_FrontEnd_EventEditor
      */
     private $subject = null;
@@ -43,7 +50,7 @@ final class EventEditorTest extends TestCase
     /**
      * @var DummyConfiguration
      */
-    private $configuration = null;
+    private $pluginConfiguration = null;
 
     /**
      * @var int
@@ -61,10 +68,12 @@ final class EventEditorTest extends TestCase
         $this->testingFramework->createFakeFrontEnd();
         MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
 
+        $sharedConfiguration = new DummyConfiguration(self::CONFIGURATION);
+        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $sharedConfiguration);
         $this->recordsPageUid = $this->testingFramework->createSystemFolder();
-        $this->configuration = new DummyConfiguration();
-        $this->configuration->setAsInteger('createAuxiliaryRecordsPID', $this->recordsPageUid);
-        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars_pi1', $this->configuration);
+        $this->pluginConfiguration = new DummyConfiguration(self::CONFIGURATION);
+        $this->pluginConfiguration->setAsInteger('createAuxiliaryRecordsPID', $this->recordsPageUid);
+        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars_pi1', $this->pluginConfiguration);
 
         $this->subject = new \Tx_Seminars_FrontEnd_EventEditor(
             [
@@ -725,7 +734,7 @@ final class EventEditorTest extends TestCase
      */
     public function populateListCategoriesForNoSetStoragePageReturnsRecordWithAnyPageId()
     {
-        $this->configuration->setAsInteger('createAuxiliaryRecordsPID', 0);
+        $this->pluginConfiguration->setAsInteger('createAuxiliaryRecordsPID', 0);
         $this->testingFramework->createAndLoginFrontEndUser();
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
@@ -765,7 +774,7 @@ final class EventEditorTest extends TestCase
     public function populateListEventTypesReturnsRecordWithAnyPageId()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
-        $this->configuration->setAsInteger('createAuxiliaryRecordsPID', 0);
+        $this->pluginConfiguration->setAsInteger('createAuxiliaryRecordsPID', 0);
         $eventTypeUid = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
             ['pid' => $this->recordsPageUid + 1]
@@ -804,7 +813,7 @@ final class EventEditorTest extends TestCase
     public function populateListLodgingsReturnsRecordWithAnyPageId()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
-        $this->configuration->setAsInteger('createAuxiliaryRecordsPID', 0);
+        $this->pluginConfiguration->setAsInteger('createAuxiliaryRecordsPID', 0);
         $lodgingUid = $this->testingFramework->createRecord(
             'tx_seminars_lodgings',
             ['pid' => $this->recordsPageUid + 1]
@@ -843,7 +852,7 @@ final class EventEditorTest extends TestCase
     public function populateListFoodsReturnsRecordWithAnyPageId()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
-        $this->configuration->setAsInteger('createAuxiliaryRecordsPID', 0);
+        $this->pluginConfiguration->setAsInteger('createAuxiliaryRecordsPID', 0);
         $foodUid = $this->testingFramework->createRecord(
             'tx_seminars_foods',
             ['pid' => $this->recordsPageUid + 1]
@@ -882,7 +891,7 @@ final class EventEditorTest extends TestCase
     public function populateListPaymentMethodsReturnsRecordWithAnyPageId()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
-        $this->configuration->setAsInteger('createAuxiliaryRecordsPID', 0);
+        $this->pluginConfiguration->setAsInteger('createAuxiliaryRecordsPID', 0);
         $paymentMethodUid = $this->testingFramework->createRecord(
             'tx_seminars_payment_methods',
             ['pid' => $this->recordsPageUid + 1]
@@ -967,7 +976,7 @@ final class EventEditorTest extends TestCase
     public function populateListPlacesReturnsRecordWithAnyPageId()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
-        $this->configuration->setAsInteger('createAuxiliaryRecordsPID', 0);
+        $this->pluginConfiguration->setAsInteger('createAuxiliaryRecordsPID', 0);
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
             ['pid' => $this->recordsPageUid + 1]
@@ -1056,7 +1065,7 @@ final class EventEditorTest extends TestCase
     public function populateListCheckboxesReturnsRecordWithAnyPageId()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
-        $this->configuration->setAsInteger('createAuxiliaryRecordsPID', 0);
+        $this->pluginConfiguration->setAsInteger('createAuxiliaryRecordsPID', 0);
         $checkboxUid = $this->testingFramework->createRecord(
             'tx_seminars_checkboxes',
             ['pid' => $this->recordsPageUid + 1]
@@ -1145,7 +1154,7 @@ final class EventEditorTest extends TestCase
     public function populateListTargetGroupsReturnsRecordWithAnyPageId()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
-        $this->configuration->setAsInteger('createAuxiliaryRecordsPID', 0);
+        $this->pluginConfiguration->setAsInteger('createAuxiliaryRecordsPID', 0);
         $targetGroupUid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
             ['pid' => $this->recordsPageUid + 1]
@@ -1234,7 +1243,7 @@ final class EventEditorTest extends TestCase
     public function populateListSpeakersReturnsRecordWithAnyPageId()
     {
         $this->testingFramework->createAndLoginFrontEndUser();
-        $this->configuration->setAsInteger('createAuxiliaryRecordsPID', 0);
+        $this->pluginConfiguration->setAsInteger('createAuxiliaryRecordsPID', 0);
         $speakerUid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
             ['pid' => $this->recordsPageUid + 1]
@@ -2093,7 +2102,7 @@ final class EventEditorTest extends TestCase
      */
     public function sendAdditionalNotificationEmailToReviewerWithReviewerAndFeatureEnabledSendsEmail()
     {
-        $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
+        $this->pluginConfiguration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
 
         $this->email->expects(self::once())->method('send');
@@ -2108,7 +2117,7 @@ final class EventEditorTest extends TestCase
      */
     public function sendAdditionalNotificationEmailToReviewerWithoutReviewerAndFeatureEnabledNotSendsEmail()
     {
-        $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
+        $this->pluginConfiguration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithPublishSetting(\Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY);
 
         $this->email->expects(self::exactly(0))->method('send');
@@ -2123,7 +2132,7 @@ final class EventEditorTest extends TestCase
      */
     public function sendAdditionalNotificationEmailToReviewerWithReviewerAndFeatureDisabledNotSendsEmail()
     {
-        $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', false);
+        $this->pluginConfiguration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', false);
         $this->createAndLoginUserWithReviewer();
 
         $this->email->expects(self::exactly(0))->method('send');
@@ -2138,7 +2147,7 @@ final class EventEditorTest extends TestCase
      */
     public function sendAdditionalNotificationEmailToReviewerSendsEmailToReviewer()
     {
-        $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
+        $this->pluginConfiguration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
 
         $this->email->expects(self::once())->method('send');
@@ -2158,7 +2167,7 @@ final class EventEditorTest extends TestCase
      */
     public function sendAdditionalNotificationEmailToReviewerUsesTypo3DefaultFromNameAsFromName()
     {
-        $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
+        $this->pluginConfiguration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
 
         $defaultMailFromAddress = 'system-foo@example.com';
@@ -2183,7 +2192,7 @@ final class EventEditorTest extends TestCase
      */
     public function sendAdditionalNotificationEmailToReviewerUsesTypo3DefaultFromAddressAsFromAddress()
     {
-        $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
+        $this->pluginConfiguration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
 
         $defaultMailFromAddress = 'system-foo@example.com';
@@ -2208,7 +2217,7 @@ final class EventEditorTest extends TestCase
      */
     public function sendAdditionalNotificationEmailToReviewerUsesFrontEndUserMailAsReplyTo()
     {
-        $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
+        $this->pluginConfiguration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
 
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = 'system-foo@example.com';
@@ -2231,7 +2240,7 @@ final class EventEditorTest extends TestCase
      */
     public function sendAdditionalNotificationEmailToReviewerWithoutTypo3DefaultFromAddressUsesFrontEndUserAsFromName()
     {
-        $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
+        $this->pluginConfiguration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
 
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = '';
@@ -2254,7 +2263,7 @@ final class EventEditorTest extends TestCase
      */
     public function sendAdditionalNotificationEmailToReviewerWithoutTypo3DefaultFromAddressUsesFrontEndUserAsFromAddress()
     {
-        $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
+        $this->pluginConfiguration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
 
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = '';
@@ -2277,7 +2286,7 @@ final class EventEditorTest extends TestCase
      */
     public function sendAdditionalNotificationEmailToReviewerUsesEventSavedSubject()
     {
-        $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
+        $this->pluginConfiguration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
 
         $this->email->expects(self::once())->method('send');
@@ -2297,7 +2306,7 @@ final class EventEditorTest extends TestCase
      */
     public function sendAdditionalNotificationEmailToReviewerHasIntroductoryText()
     {
-        $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
+        $this->pluginConfiguration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
 
         $this->email->expects(self::once())->method('send');
@@ -2317,7 +2326,7 @@ final class EventEditorTest extends TestCase
      */
     public function sendAdditionalNotificationEmailToReviewerHasOverviewText()
     {
-        $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
+        $this->pluginConfiguration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
 
         $this->email->expects(self::once())->method('send');
@@ -2337,7 +2346,7 @@ final class EventEditorTest extends TestCase
      */
     public function sendAdditionalNotificationEmailToReviewerHasNoUnreplacedMarkers()
     {
-        $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
+        $this->pluginConfiguration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
 
         $this->email->expects(self::once())->method('send');
@@ -2360,7 +2369,7 @@ final class EventEditorTest extends TestCase
         $title = 'Some nice event';
         $this->subject->setSavedFormValue('title', $title);
 
-        $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
+        $this->pluginConfiguration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
 
         $this->email->expects(self::once())->method('send');
@@ -2383,7 +2392,7 @@ final class EventEditorTest extends TestCase
         $description = 'Everybody needs to attend!';
         $this->subject->setSavedFormValue('description', $description);
 
-        $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
+        $this->pluginConfiguration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
 
         $this->email->expects(self::once())->method('send');
@@ -2406,7 +2415,7 @@ final class EventEditorTest extends TestCase
         $beginDate = mktime(10, 0, 0, 4, 2, 1975);
         $this->subject->setSavedFormValue('begin_date', $beginDate);
 
-        $this->configuration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
+        $this->pluginConfiguration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->subject->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
         $this->createAndLoginUserWithReviewer();
 

@@ -50,7 +50,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     const DATE_FORMAT_Y = '%Y';
 
     /**
-     * @var array<string, string|int>
+     * @var array<string, string|bool>
      */
     private const CONFIGURATION = [
         'timeFormat' => self::TIME_FORMAT,
@@ -59,7 +59,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
         'dateFormatD' => self::DATE_FORMAT_D,
         'dateFormatM' => self::DATE_FORMAT_M,
         'dateFormatY' => self::DATE_FORMAT_Y,
-        'abbreviateDateRanges' => 1,
+        'abbreviateDateRanges' => true,
     ];
 
     /**
@@ -79,7 +79,6 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
         $this->initializeBackEndLanguage();
 
         $this->subject = new TestingTimeSpan();
-
         $configuration = new DummyConfiguration(self::CONFIGURATION);
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
     }

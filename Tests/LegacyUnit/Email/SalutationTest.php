@@ -41,6 +41,16 @@ final class SalutationTest extends TestCase
     private const TIME_FORMAT = '%H:%M';
 
     /**
+     * @var array<string, string>
+     */
+    private const CONFIGURATION = [
+        'salutation' => 'formal',
+        'dateFormatYMD' => self::DATE_FORMAT,
+        'dateFormatD' => self::DATE_FORMAT_DAY,
+        'timeFormat' => self::TIME_FORMAT,
+    ];
+
+    /**
      * @var TestingFramework the testing framework
      */
     private $testingFramework = null;
@@ -63,21 +73,16 @@ final class SalutationTest extends TestCase
 
     protected function setUp()
     {
+        $this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
+
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
         Bootstrap::initializeBackendAuthentication();
 
         $this->testingFramework = new TestingFramework('tx_seminars');
-        $this->subject = new Salutation();
-        $this->configuration = new DummyConfiguration(
-            [
-                'salutation' => 'formal',
-                'dateFormatYMD' => self::DATE_FORMAT,
-                'dateFormatD' => self::DATE_FORMAT_DAY,
-                'timeFormat' => self::TIME_FORMAT,
-            ]
-        );
+        $this->configuration = new DummyConfiguration(self::CONFIGURATION);
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->configuration);
-        $this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
+
+        $this->subject = new Salutation();
     }
 
     protected function tearDown()

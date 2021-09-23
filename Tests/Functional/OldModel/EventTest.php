@@ -80,7 +80,6 @@ final class EventTest extends FunctionalTestCase
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
         $subject = TestingEvent::fromUid(1);
-        $subject->overrideConfiguration(self::CONFIGURATION);
         self::assertSame('event with all scalar data set', $subject->getTitle());
         self::assertSame('Cooking for beginners', $subject->getSubtitle());
         self::assertSame('Never be hungry again.', $subject->getTeaser());

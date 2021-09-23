@@ -2,8 +2,7 @@
 
 declare(strict_types=1);
 
-use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
-use OliverKlee\Oelib\Interfaces\Configuration;
+use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -11,18 +10,7 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  */
 class Tx_Seminars_ViewHelper_TimeRange
 {
-    /**
-     * @var Configuration
-     */
-    protected $configuration = null;
-
-    /**
-     * The constructor.
-     */
-    public function __construct()
-    {
-        $this->configuration = ConfigurationRegistry::get('plugin.tx_seminars');
-    }
+    use SharedPluginConfiguration;
 
     /**
      * Gets the time.
@@ -99,7 +87,7 @@ class Tx_Seminars_ViewHelper_TimeRange
      */
     protected function getAsTime(int $timestamp): string
     {
-        return strftime($this->configuration->getAsString('timeFormat'), $timestamp);
+        return \strftime($this->getTimeFormat(), $timestamp);
     }
 
     /**
@@ -111,6 +99,6 @@ class Tx_Seminars_ViewHelper_TimeRange
      */
     protected function getTimeFromTimestamp(int $timestamp): string
     {
-        return strftime('%H:%M', $timestamp);
+        return \strftime('%H:%M', $timestamp);
     }
 }

@@ -16,8 +16,7 @@ interface DateTimeSpan extends Hook
      * E.g., for Hungarian: '01.-03.01.2019' -> '2019.01.01.-03.'.
      *
      * The date format for the date parts are configured in TypoScript (`dateFormatYMD` etc.).
-     * Get them from `$dateTimeSpan->getConfValueString('dateFormatYMD')` etc. The event
-     * dates are also retrievable:
+     * The event dates are also retrievable:
      * `$beginDateTime = $dateTimeSpan->getBeginDateAsTimestamp();`
      * `$endDateTime = $dateTimeSpan->getEndDateAsTimestamp();`
      *
@@ -40,8 +39,7 @@ interface DateTimeSpan extends Hook
      * E.g., for Hungarian: '9:00-10:30' -> '9:00tol 10:30ban'.
      *
      * The time format for the time parts is configured in TypoScript (`timeFormat`).
-     * Get it from `$dateTimeSpan->getConfValueString('timeFormat')`. The event
-     * times are also retrievable:
+     * The event times are also retrievable:
      * `$beginDateTime = $dateTimeSpan->getBeginDateAsTimestamp();`
      * `$endDateTime = $dateTimeSpan->getEndDateAsTimestamp();`
      *

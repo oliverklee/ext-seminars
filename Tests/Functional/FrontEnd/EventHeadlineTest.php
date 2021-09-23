@@ -39,10 +39,9 @@ final class EventHeadlineTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        $pluginConfiguration = new DummyConfiguration();
-        $pluginConfiguration->setAsString('dateFormatYMD', self::DATE_FORMAT);
+        $con = new DummyConfiguration(['dateFormatYMD' => self::DATE_FORMAT]);
         $configurationRegistry = ConfigurationRegistry::getInstance();
-        $configurationRegistry->set('plugin.tx_seminars', $pluginConfiguration);
+        $configurationRegistry->set('plugin.tx_seminars', $con);
         $GLOBALS['TSFE'] = $this->prophesize(TypoScriptFrontendController::class)->reveal();
 
         $this->subject = new \Tx_Seminars_FrontEnd_EventHeadline(self::CONFIGURATION, new ContentObjectRenderer());
