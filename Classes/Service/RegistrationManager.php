@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Configuration\ConfigurationProxy;
-use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
-use OliverKlee\Oelib\Interfaces\Configuration;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\FrontEndUser;
 use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Oelib\Templating\TemplateRegistry;
 use OliverKlee\Seminar\Email\Salutation;
+use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 use Pelago\Emogrifier\CssInliner;
@@ -29,6 +28,8 @@ use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
  */
 class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
 {
+    use SharedPluginConfiguration;
+
     /**
      * faking $this->scriptRelPath so the locallang.xlf file is found
      *
@@ -80,11 +81,6 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      * @var \Tx_Seminars_Service_SingleViewLinkBuilder
      */
     private $linkBuilder = null;
-
-    /**
-     * @var Configuration|null
-     */
-    private $configuration = null;
 
     /**
      * The constructor.
@@ -1576,14 +1572,5 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         $connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
 
         return $connectionPool->getConnectionForTable($table);
-    }
-
-    private function getSharedConfiguration(): Configuration
-    {
-        if (!$this->configuration instanceof Configuration) {
-            $this->configuration = ConfigurationRegistry::get('plugin.tx_seminars');
-        }
-
-        return $this->configuration;
     }
 }

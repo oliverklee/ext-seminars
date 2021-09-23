@@ -3,14 +3,13 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
-use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
-use OliverKlee\Oelib\Interfaces\Configuration;
 use OliverKlee\Oelib\Interfaces\ConfigurationCheckable;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Seminars\Bag\AbstractBag;
+use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
 use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarListView;
@@ -25,6 +24,8 @@ use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
  */
 class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements ConfigurationCheckable
 {
+    use SharedPluginConfiguration;
+
     /**
      * @var string[]
      */
@@ -58,11 +59,6 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
      * @var \Tx_Seminars_Service_ConfigurationService
      */
     private $configurationService = null;
-
-    /**
-     * @var Configuration|null
-     */
-    private $configuration = null;
 
     /**
      * @var \Tx_Seminars_OldModel_Event|null the seminar which we want to list/show or
@@ -3529,14 +3525,5 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
     public function getTypoScriptNamespace(): string
     {
         return 'plugin.tx_seminars_pi1.';
-    }
-
-    private function getSharedConfiguration(): Configuration
-    {
-        if (!$this->configuration instanceof Configuration) {
-            $this->configuration = ConfigurationRegistry::get('plugin.tx_seminars');
-        }
-
-        return $this->configuration;
     }
 }
