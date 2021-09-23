@@ -15,16 +15,6 @@ final class TestingTimeSpan extends \Tx_Seminars_OldModel_AbstractTimeSpan
     protected $needsTemplateHelperInitialization = false;
 
     /**
-     * @param array $configuration
-     *
-     * @return void
-     */
-    public function overrideConfiguration(array $configuration)
-    {
-        $this->conf = $configuration;
-    }
-
-    /**
      * Sets this time span's begin date and time.
      *
      * @param int $beginDate begin date and time as a UNIX timestamp, may be zero

@@ -7764,6 +7764,8 @@ final class EventTest extends TestCase
      */
     public function getLatestPossibleRegistrationTimeForEventWithBeginAndEndDateAndRegistrationForStartedEventsAllowedReturnsEndDate()
     {
+        $this->configuration->setAsBoolean('allowRegistrationForStartedEvents', true);
+
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
@@ -7775,7 +7777,6 @@ final class EventTest extends TestCase
             ]
         );
         $subject = new TestingEvent($uid);
-        $subject->overrideConfiguration(['allowRegistrationForStartedEvents' => 1]);
 
         self::assertSame(
             $this->now + 1000,
@@ -7788,6 +7789,8 @@ final class EventTest extends TestCase
      */
     public function getLatestPossibleRegistrationTimeForEventWithBeginDateAndRegistrationDeadlineAndRegistrationForStartedEventsAllowedReturnsRegistrationDeadline()
     {
+        $this->configuration->setAsBoolean('allowRegistrationForStartedEvents', true);
+
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
@@ -7799,7 +7802,6 @@ final class EventTest extends TestCase
             ]
         );
         $subject = new TestingEvent($uid);
-        $subject->overrideConfiguration(['allowRegistrationForStartedEvents' => 1]);
 
         self::assertSame(
             $this->now - 1000,
@@ -7812,6 +7814,8 @@ final class EventTest extends TestCase
      */
     public function getLatestPossibleRegistrationTimeForEventWithBeginDateAndWithoutEndDateAndRegistrationForStartedEventsAllowedReturnsBeginDate()
     {
+        $this->configuration->setAsBoolean('allowRegistrationForStartedEvents', true);
+
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
             [
@@ -7823,7 +7827,6 @@ final class EventTest extends TestCase
             ]
         );
         $subject = new TestingEvent($uid);
-        $subject->overrideConfiguration(['allowRegistrationForStartedEvents' => 1]);
 
         self::assertSame(
             $this->now,

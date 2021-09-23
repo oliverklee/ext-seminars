@@ -10,16 +10,6 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel;
 final class TestingEvent extends \Tx_Seminars_OldModel_Event
 {
     /**
-     * @param array $configuration
-     *
-     * @return void
-     */
-    public function overrideConfiguration(array $configuration)
-    {
-        $this->conf = $configuration;
-    }
-
-    /**
      * Sets the event data.
      *
      * @param array $eventData event data array
