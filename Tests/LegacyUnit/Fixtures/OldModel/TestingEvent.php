@@ -84,22 +84,6 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
     }
 
     /**
-     * Sets the TypoScript configuration for the parameter
-     * unregistrationDeadlineDaysBeforeBeginDate.
-     *
-     * @param int $days days before the begin date until unregistration should be possible
-     *
-     * @return void
-     */
-    public function setGlobalUnregistrationDeadline(int $days)
-    {
-        $this->setConfigurationValue(
-            'unregistrationDeadlineDaysBeforeBeginDate',
-            $days
-        );
-    }
-
-    /**
      * Sets whether the event has a registration queue.
      *
      * @param bool $hasRegistrationQueue whether the event should have a registration queue

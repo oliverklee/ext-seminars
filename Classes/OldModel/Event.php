@@ -4422,12 +4422,13 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      */
     private function getUnregistrationDeadlineFromConfiguration(): int
     {
-        if (!$this->hasConfValueInteger('unregistrationDeadlineDaysBeforeBeginDate')) {
+        $configuration = $this->getSharedConfiguration();
+        if (!$configuration->hasInteger('unregistrationDeadlineDaysBeforeBeginDate')) {
             return 0;
         }
 
         $secondsForUnregistration = Time::SECONDS_PER_DAY
-            * $this->getConfValueInteger('unregistrationDeadlineDaysBeforeBeginDate');
+            * $configuration->getAsInteger('unregistrationDeadlineDaysBeforeBeginDate');
 
         return $this->getBeginDateAsTimestamp() - $secondsForUnregistration;
     }
