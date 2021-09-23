@@ -3,14 +3,17 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
-use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Configuration\FallbackConfiguration;
+use OliverKlee\Oelib\Configuration\FlexformsConfiguration;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
+use OliverKlee\Oelib\Interfaces\Configuration;
 use OliverKlee\Oelib\Interfaces\ConfigurationCheckable;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Seminars\Bag\AbstractBag;
+use OliverKlee\Seminars\Configuration\RegistrationListConfigurationCheck;
 use OliverKlee\Seminars\Configuration\SharedConfigurationCheck;
 use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
 use OliverKlee\Seminars\Csv\CsvDownloader;
@@ -21,6 +24,7 @@ use OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * Plugin "Seminar Manager".
@@ -244,10 +248,10 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
             !\in_array(
                 $this->whatToDisplay,
                 [
-                'list_registrations',
-                'list_vip_registrations',
-                'countdown',
-                'category_list',
+                    'list_registrations',
+                    'list_vip_registrations',
+                    'countdown',
+                    'category_list',
                 ]
             )
         ) {
@@ -277,6 +281,14 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
                     $this->cObj
                 );
                 $result = $registrationsList->render();
+                if ($this->isConfigurationCheckEnabled()) {
+                    $configurationCheck = new RegistrationListConfigurationCheck(
+                        $this->buildConfigurationWithFlexForms(),
+                        'plugin.tx_seminars_pi1'
+                    );
+                    $configurationCheck->check();
+                    $result .= \implode("\n", $configurationCheck->getWarningsAsHtml());
+                }
                 break;
             case 'countdown':
                 /** @var \Tx_Seminars_FrontEnd_Countdown $countdown */
@@ -337,12 +349,11 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
 
         // Let's check the configuration and display any errors.
         // Here, we don't use the direct return value from
-        // $this->checkConfiguration as this would ignore any previous error
-        // messages.
+        // `$this->checkConfiguration` as this would ignore any previous error messages.
         $this->checkConfiguration();
         $result .= $this->getWrappedConfigCheckMessage();
 
-        if (ConfigurationProxy::getInstance('seminars')->getAsBoolean('enableConfigCheck')) {
+        if ($this->isConfigurationCheckEnabled()) {
             $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
             $configurationCheck = new SharedConfigurationCheck($configuration, 'plugin.tx_seminars');
             $configurationCheck->check();
@@ -3497,10 +3508,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
     }
 
     /**
-     * Injects a link builder.
-     *
-     * @param \Tx_Seminars_Service_SingleViewLinkBuilder $linkBuilder
-     *        the link builder instance to use
+     * @param \Tx_Seminars_Service_SingleViewLinkBuilder $linkBuilder the link builder instance to use
      *
      * @return void
      */
@@ -3517,5 +3525,17 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
     public function getTypoScriptNamespace(): string
     {
         return 'plugin.tx_seminars_pi1.';
+    }
+
+    private function buildConfigurationWithFlexForms(): Configuration
+    {
+        $typoScriptConfiguration = ConfigurationRegistry::get('plugin.tx_seminars');
+        if (!$this->cObj instanceof ContentObjectRenderer) {
+            return $typoScriptConfiguration;
+        }
+
+        $flexFormsConfiguration = new FlexformsConfiguration($this->cObj);
+
+        return new FallbackConfiguration($flexFormsConfiguration, $typoScriptConfiguration);
     }
 }
