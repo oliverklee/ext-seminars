@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- Add sr_feuser_register as a dev dependency (#926)
 - Require static_info_tables >= 6.9.5 (#925)
 - Add more type declarations (#887)
 - Use the new configuration classes
