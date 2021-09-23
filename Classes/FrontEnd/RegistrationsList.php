@@ -117,12 +117,7 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_Abstr
             $this->cObj->getTypoLink($this->translate('label_back'), (string)$this->getConfValueInteger('listPID'))
         );
 
-        $result = $this->getSubpart('REGISTRATIONS_LIST_VIEW');
-
-        $this->checkConfiguration();
-        $result .= $this->getWrappedConfigCheckMessage();
-
-        return $result;
+        return $this->getSubpart('REGISTRATIONS_LIST_VIEW') . '<h1>asdfasdf</h1>';
     }
 
     /**
