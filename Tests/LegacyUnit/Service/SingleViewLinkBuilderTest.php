@@ -16,6 +16,9 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
+/**
+ * @covers \Tx_Seminars_Service_SingleViewLinkBuilder
+ */
 final class SingleViewLinkBuilderTest extends TestCase
 {
     /**

@@ -13,6 +13,9 @@ use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
+/**
+ * @covers \Tx_Seminars_FrontEnd_EventEditor
+ */
 final class EventEditorTest extends FunctionalTestCase
 {
     /**

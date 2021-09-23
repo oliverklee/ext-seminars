@@ -15,6 +15,9 @@ use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
+/**
+ * @covers \Tx_Seminars_FrontEnd_RegistrationForm
+ */
 final class RegistrationFormTest extends TestCase
 {
     use LanguageHelper;

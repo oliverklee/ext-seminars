@@ -11,6 +11,9 @@ use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 
+/**
+ * @covers \Tx_Seminars_OldModel_Event
+ */
 final class EventTest extends UnitTestCase
 {
     /**

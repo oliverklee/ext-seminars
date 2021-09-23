@@ -13,6 +13,9 @@ use OliverKlee\PhpUnit\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
+/**
+ * @covers \Tx_Seminars_FrontEnd_Countdown
+ */
 final class CountdownTest extends TestCase
 {
     /**

@@ -8,6 +8,9 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\OldModel\AbstractModel;
 use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingModel;
 
+/**
+ * @covers \OliverKlee\Seminars\OldModel\AbstractModel
+ */
 final class AbstractModelTest extends UnitTestCase
 {
     /**

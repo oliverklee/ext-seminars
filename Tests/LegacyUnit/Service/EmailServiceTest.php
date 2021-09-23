@@ -17,6 +17,9 @@ use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Lang\LanguageService;
 
+/**
+ * @covers \OliverKlee\Seminars\Service\EmailService
+ */
 final class EmailServiceTest extends TestCase
 {
     use EmailTrait;

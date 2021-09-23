@@ -7,6 +7,9 @@ namespace OliverKlee\Seminars\Tests\Functional\FrontEnd;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
+/**
+ * @covers \Tx_Seminars_FrontEnd_RegistrationForm
+ */
 final class RegistrationFormTest extends FunctionalTestCase
 {
     /**
