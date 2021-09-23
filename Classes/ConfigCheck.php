@@ -51,48 +51,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
      */
     protected function check_Tx_Seminars_FrontEnd_DefaultController_seminar_registration()
     {
-        $this->checkCommonFrontEndSettings();
-
-        $this->checkRegistrationFlag();
-        if (!$this->objectToCheck->getConfValueBoolean('enableRegistration')) {
-            $message = 'You are using the registration page although online '
-                . 'registration is disabled. This will break the registration '
-                . 'page and the automatic configuration check. '
-                . 'Please either enable online registration by setting the TS '
-                . 'setup variable <strong>' . $this->getTSSetupPath()
-                . 'enableRegistration</strong> to <strong>1</strong> or remove '
-                . 'the registration page.';
-            $this->setErrorMessage($message);
-        }
-
-        $this->checkRegistrationEditorTemplateFile();
-
-        $this->checkNumberOfClicksForRegistration();
-        $this->checkNumberOfFirstRegistrationPage();
-        $this->checkNumberOfLastRegistrationPage();
-        $this->checkRegistrationPageNumbers();
-        $this->checkGeneralPriceInSingle();
-        $this->checkEventFieldsOnRegistrationPage();
-        $this->checkShowRegistrationFields();
-        $this->checkShowFeUserFieldsInRegistrationForm();
-        $this->checkShowFeUserFieldsInRegistrationFormWithLabel();
-        $this->checkThankYouAfterRegistrationPID();
-        $this->checkSendParametersToThankYouAfterRegistrationPageUrl();
-        $this->checkPageToShowAfterUnregistrationPID();
-        $this->checkSendParametersToPageToShowAfterUnregistrationUrl();
-
-        $this->checkCreateAdditionalAttendeesAsFrontEndUsers();
-        if ($this->objectToCheck->getConfValueBoolean('createAdditionalAttendeesAsFrontEndUsers', 's_registration')) {
-            $this->checkSysFolderForAdditionalAttendeeUsersPID();
-            $this->checkUserGroupUidsForAdditionalAttendeesFrontEndUsers();
-        }
-
-        $this->checkListPid();
-        $this->checkLoginPid();
-        $this->checkBankTransferUid();
-        $this->checkLogOutOneTimeAccountsAfterRegistration();
-        $this->checkMyEventsPid();
-        $this->checkDetailPid();
     }
 
     /**
@@ -688,115 +646,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
     }
 
     /**
-     * Checks the setting of the configuration value eventFieldsOnRegistrationPage.
-     *
-     * @return void
-     */
-    private function checkEventFieldsOnRegistrationPage()
-    {
-        $this->checkIfMultiInSetNotEmpty(
-            'eventFieldsOnRegistrationPage',
-            true,
-            's_template_special',
-            'This value specifies which data fields of the selected event '
-            . 'will be displayed on the registration page. '
-            . 'Incorrect values will cause those fields to not get displayed.',
-            ['uid', 'title', 'price_regular', 'price_special', 'vacancies']
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value showRegistrationFields.
-     *
-     * @return void
-     */
-    private function checkShowRegistrationFields()
-    {
-        $this->checkIfMultiInSetNotEmpty(
-            'showRegistrationFields',
-            true,
-            's_template_special',
-            'This value specifies which registration fields ' .
-            'will be displayed on the registration page. ' .
-            'Incorrect values will cause those fields to not get displayed.',
-            [
-                'step_counter',
-                'price',
-                'method_of_payment',
-                'account_number',
-                'bank_code',
-                'bank_name',
-                'account_owner',
-                'billing_address',
-                'company',
-                'gender',
-                'name',
-                'first_name',
-                'last_name',
-                'address',
-                'zip',
-                'city',
-                'country',
-                'telephone',
-                'email',
-                'interests',
-                'expectations',
-                'background_knowledge',
-                'accommodation',
-                'food',
-                'known_from',
-                'seats',
-                'registered_themselves',
-                'attendees_names',
-                'kids',
-                'lodgings',
-                'foods',
-                'checkboxes',
-                'notes',
-                'total_price',
-                'feuser_data',
-                'registration_data',
-                'terms',
-                'terms_2',
-            ]
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value showFeUserFieldsInRegistrationForm.
-     *
-     * @return void
-     */
-    private function checkShowFeUserFieldsInRegistrationForm()
-    {
-        $this->checkIfMultiInTableOrEmpty(
-            'showFeUserFieldsInRegistrationFormMail',
-            false,
-            '',
-            'These values specify the FE user fields to show in the registration form. ' .
-            'A mistyped field name will cause the field to not get included.',
-            'fe_users'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value showFeUserFieldsInRegistrationFormWithLabel.
-     *
-     * @return void
-     */
-    private function checkShowFeUserFieldsInRegistrationFormWithLabel()
-    {
-        $this->checkIfMultiInTableOrEmpty(
-            'showFeUserFieldsInRegistrationFormWithLabel',
-            false,
-            '',
-            'These values specify the FE user labels to show in the registration form. ' .
-            'A mistyped field name will cause the label to not get displayed.',
-            'fe_users'
-        );
-    }
-
-    /**
      * Checks the setting of the configuration value showSpeakerDetails.
      *
      * @return void
@@ -887,24 +736,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
     }
 
     /**
-     * Checks the setting of the configuration value myEventsPID.
-     *
-     * @return void
-     */
-    private function checkMyEventsPid()
-    {
-        $this->checkIfSingleFePageNotEmpty(
-            'myEventsPID',
-            true,
-            'sDEF',
-            'This value specifies the page that contains the <em>my events</em> '
-            . 'list. If this value is not set correctly, the redirection to '
-            . 'the my events list after canceling the unregistration process '
-            . 'will not work correctly.'
-        );
-    }
-
-    /**
      * Checks the setting of the configuration value registerPID.
      *
      * @return void
@@ -917,7 +748,7 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
             'sDEF',
             'This value specifies the page that contains the registration '
             . 'form. If this value is not set correctly, the link to the '
-            . 'registration page will not work. If you explicitely do not '
+            . 'registration page will not work. If you explicitly do not '
             . 'wish to use the online registration feature, you can '
             . 'disable these checks by setting '
             . '<strong>plugin.tx_seminars.enableRegistration</strong> and '
@@ -939,7 +770,7 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
             'sDEF',
             'This value specifies the page that contains the login form. '
             . 'If this value is not set correctly, the link to the '
-            . 'login page will not work. If you explicitely do not '
+            . 'login page will not work. If you explicitly do not '
             . 'wish to use the online registration feature, you can '
             . 'disable these checks by setting '
             . '<strong>plugin.tx_seminars.enableRegistration</strong> and '
@@ -1160,58 +991,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
     }
 
     /**
-     * Checks the setting of the configuration value thankYouAfterRegistrationPID.
-     *
-     * @return void
-     */
-    private function checkThankYouAfterRegistrationPID()
-    {
-        $this->checkIfSingleFePageNotEmpty(
-            'thankYouAfterRegistrationPID',
-            true,
-            's_registration',
-            'This value specifies the page that will be displayed after a user '
-            . 'signed up for an event. If this value is not set correctly, '
-            . 'the user will see the list of events instead.'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value pageToShowAfterUnregistrationPID.
-     *
-     * @return void
-     */
-    private function checkPageToShowAfterUnregistrationPID()
-    {
-        $this->checkIfSingleFePageNotEmpty(
-            'pageToShowAfterUnregistrationPID',
-            true,
-            's_registration',
-            'This value specifies the page that will be displayed after a user '
-            . 'has unregistered from an event. If this value is not set correctly, '
-            . 'the user will see the list of events instead.'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value bankTransferUID.
-     *
-     * @return void
-     */
-    private function checkBankTransferUid()
-    {
-        $this->checkIfPositiveIntegerOrEmpty(
-            'bankTransferUID',
-            false,
-            '',
-            'This value specifies the payment method that corresponds to '
-            . 'a bank transfer. If this value is not set correctly, '
-            . 'validation of the bank data in the event registration '
-            . 'form will not work correctly.'
-        );
-    }
-
-    /**
      * Checks the CSV-related settings.
      *
      * @return void
@@ -1409,212 +1188,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
             'e-mail mode. A mistyped field name will cause the field to not ' .
             'get included.',
             'tx_seminars_attendances'
-        );
-    }
-
-    /**
-     * Checks whether the HTML template for the registration form is provided
-     * and the file exists.
-     *
-     * @return void
-     */
-    private function checkRegistrationEditorTemplateFile()
-    {
-        $errorMessage = 'This specifies the HTML template for the registration ' .
-            'form. If this file is not available, the registration form cannot ' .
-            'be used.';
-
-        $this->checkForNonEmptyString('registrationEditorTemplateFile', false, '', $errorMessage);
-
-        if ($this->objectToCheck->hasConfValueString('registrationEditorTemplateFile', '', true)) {
-            $rawFileName = $this->objectToCheck->getConfValueString('registrationEditorTemplateFile', '', true, true);
-
-            $file = GeneralUtility::getFileAbsFileName($rawFileName);
-            if ($file === '' || !\is_file($file)) {
-                $message = 'The specified HTML template file <strong>' .
-                    \htmlspecialchars($rawFileName, ENT_QUOTES | ENT_HTML5) . '</strong> cannot be read. ' .
-                    $errorMessage . ' ' .
-                    'Please either create the file <strong>' . $rawFileName .
-                    '</strong> or select an existing file using the TS setup ' .
-                    'variable <strong>' . $this->getTSSetupPath() .
-                    'templateFile</strong> or via FlexForms.';
-                $this->setErrorMessage($message);
-            }
-        }
-    }
-
-    /**
-     * Checks the setting of the configuration value
-     * logOutOneTimeAccountsAfterRegistration.
-     *
-     * @return void
-     */
-    private function checkLogOutOneTimeAccountsAfterRegistration()
-    {
-        $this->checkIfBoolean(
-            'logOutOneTimeAccountsAfterRegistration',
-            false,
-            '',
-            'This value specifies whether one-time FE user accounts will '
-            . 'automatically be logged out after registering for an event. '
-            . 'If this value is incorrect, the automatic logout will not work.'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value
-     * numberOfFirstRegistrationPage.
-     *
-     * @return void
-     */
-    private function checkNumberOfFirstRegistrationPage()
-    {
-        $this->checkIfPositiveInteger(
-            'numberOfFirstRegistrationPage',
-            false,
-            '',
-            'This value specifies the number of the first registration page '
-            . '(for the <em>Step x of y</em> heading). '
-            . 'If this value is not set correctly, the number of the current '
-            . 'page will not be displayed correctly.'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value
-     * numberOfLastRegistrationPage.
-     *
-     * @return void
-     */
-    private function checkNumberOfLastRegistrationPage()
-    {
-        $this->checkIfPositiveInteger(
-            'numberOfLastRegistrationPage',
-            false,
-            '',
-            'This value specifies the number of the last registration page '
-            . '(for the <em>Step x of y</em> heading). '
-            . 'If this value is not set correctly, the number of the last '
-            . 'page will not be displayed correctly.'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value
-     * numberOfClicksForRegistration.
-     *
-     * @return void
-     */
-    private function checkNumberOfClicksForRegistration()
-    {
-        $this->checkIfInteger(
-            'numberOfClicksForRegistration',
-            true,
-            's_registration',
-            'This specifies the number of clicks for registration'
-        );
-
-        $this->checkIfIntegerInRange(
-            'numberOfClicksForRegistration',
-            2,
-            3,
-            true,
-            's_registration',
-            'This specifies the number of clicks for registration.'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value
-     * sendParametersToThankYouAfterRegistrationPageUrl.
-     *
-     * @return void
-     */
-    private function checkSendParametersToThankYouAfterRegistrationPageUrl()
-    {
-        $this->checkIfBoolean(
-            'sendParametersToThankYouAfterRegistrationPageUrl',
-            true,
-            's_registration',
-            'This value specifies whether the sending of parameters to the '
-            . 'thank you page after a registration should be enabled or not. '
-            . 'If this value is incorrect the sending of parameters will '
-            . 'not be enabled or disabled correctly.'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value
-     * sendParametersToPageToShowAfterUnregistrationUrl.
-     *
-     * @return void
-     */
-    private function checkSendParametersToPageToShowAfterUnregistrationUrl()
-    {
-        $this->checkIfBoolean(
-            'sendParametersToPageToShowAfterUnregistrationUrl',
-            true,
-            's_registration',
-            'This value specifies whether the sending of parameters to the page '
-            . 'which is shown after an unregistration should be enabled or '
-            . 'not. If this value is incorrect the sending of parameters '
-            . 'will not be enabled or disabled correctly.'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value
-     * createAdditionalAttendeesAsFrontEndUsers.
-     *
-     * @return void
-     */
-    private function checkCreateAdditionalAttendeesAsFrontEndUsers()
-    {
-        $this->checkIfBoolean(
-            'createAdditionalAttendeesAsFrontEndUsers',
-            true,
-            's_registration',
-            'This value specifies whether additional attendees will be ' .
-            'stored as FE user record . If this value is incorrect, ' .
-            'those records will no be created, and the registration ' .
-            'form will look different than intended.'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value
-     * sysFolderForAdditionalAttendeeUsersPID.
-     *
-     * @return void
-     */
-    private function checkSysFolderForAdditionalAttendeeUsersPID()
-    {
-        $this->checkIfSingleSysFolderNotEmpty(
-            'sysFolderForAdditionalAttendeeUsersPID',
-            true,
-            's_registration',
-            'This value specifies the system folder in which the FE user ' .
-            'records for additional attendees will be stored. If this ' .
-            'value is not set correctly, those records will be dumped ' .
-            'in the TYPO3 root page.'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value
-     * userGroupUidsForAdditionalAttendeesFrontEndUsers.
-     *
-     * @return void
-     */
-    private function checkUserGroupUidsForAdditionalAttendeesFrontEndUsers()
-    {
-        $this->checkIfPidListNotEmpty(
-            'userGroupUidsForAdditionalAttendeesFrontEndUsers',
-            true,
-            's_registration',
-            'This value specifies the FE user groups for the FE users ' .
-            'created for additional attendees. If this value is not set ' .
-            'correctly, those FE users might not be able to log in.'
         );
     }
 
@@ -2186,34 +1759,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
             'properly, events with no vacancies will be shown in the ' .
             'list view.'
         );
-    }
-
-    /**
-     * Checks the relation between last and first page and the number of clicks.
-     *
-     * @return void
-     */
-    private function checkRegistrationPageNumbers()
-    {
-        $clicks = $this->objectToCheck->getConfValueInteger(
-            'numberOfClicksForRegistration',
-            's_registration'
-        );
-        $firstPage = $this->objectToCheck->getConfValueInteger('numberOfFirstRegistrationPage');
-        $lastPage = $this->objectToCheck->getConfValueInteger('numberOfLastRegistrationPage');
-        $calculatedSteps = $lastPage - $firstPage + 2;
-
-        if ($calculatedSteps != $clicks) {
-            $message = 'The specified number of clicks does not correspond ' .
-                'to the number of the first and last registration page. ' .
-                'Please correct the values of <strong>' .
-                'numberOfClicksForRegistration</strong>, ' .
-                '<strong>numberOfFirstRegistrationPage</strong> or ' .
-                '<strong>numberOfLastRegistrationPage</strong>. A not ' .
-                'properly configured setting will lead to a misleading ' .
-                'number of steps, shown on the registration page.';
-            $this->setErrorMessage($message);
-        }
     }
 
     /**

@@ -117,7 +117,7 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_Abstr
             $this->cObj->getTypoLink($this->translate('label_back'), (string)$this->getConfValueInteger('listPID'))
         );
 
-        return $this->getSubpart('REGISTRATIONS_LIST_VIEW') . '<h1>asdfasdf</h1>';
+        return $this->getSubpart('REGISTRATIONS_LIST_VIEW');
     }
 
     /**
