@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\OldModel;
 
-use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
-use OliverKlee\Oelib\Interfaces\Configuration;
 use OliverKlee\Oelib\Templating\TemplateHelper;
+use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
@@ -24,6 +23,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 abstract class AbstractModel extends TemplateHelper
 {
+    use SharedPluginConfiguration;
+
     /**
      * @var string the extension key
      */
@@ -55,11 +56,6 @@ abstract class AbstractModel extends TemplateHelper
      * @var bool
      */
     protected $isPersisted = false;
-
-    /**
-     * @var Configuration|null
-     */
-    private $configuration = null;
 
     /**
      * @param int $uid the UID of the record to retrieve from the DB
@@ -638,24 +634,5 @@ abstract class AbstractModel extends TemplateHelper
     private static function getConnectionPool(): ConnectionPool
     {
         return GeneralUtility::makeInstance(ConnectionPool::class);
-    }
-
-    protected function getSharedConfiguration(): Configuration
-    {
-        if (!$this->configuration instanceof Configuration) {
-            $this->configuration = ConfigurationRegistry::get('plugin.tx_seminars');
-        }
-
-        return $this->configuration;
-    }
-
-    protected function getDateFormat(): string
-    {
-        return $this->getSharedConfiguration()->getAsString('dateFormatYMD') ?: '%Y-%m-%d';
-    }
-
-    protected function getTimeFormat(): string
-    {
-        return $this->getSharedConfiguration()->getAsString('timeFormat') ?: '%H:%M';
     }
 }
