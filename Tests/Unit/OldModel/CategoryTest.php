@@ -7,6 +7,9 @@ namespace OliverKlee\Seminars\Tests\Unit\OldModel;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Seminars\OldModel\AbstractModel;
 
+/**
+ * @covers \Tx_Seminars_OldModel_Category
+ */
 final class CategoryTest extends UnitTestCase
 {
     /**

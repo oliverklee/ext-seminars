@@ -12,7 +12,10 @@ use OliverKlee\Seminars\Service\EventStatusService;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\SingletonInterface;
 
-final class EventStateServiceTest extends TestCase
+/**
+ * @covers \OliverKlee\Seminars\Service\EventStatusService
+ */
+final class EventStatusServiceTest extends TestCase
 {
     /**
      * @var EventStatusService

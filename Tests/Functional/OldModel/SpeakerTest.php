@@ -8,6 +8,9 @@ use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Seminars\Tests\Functional\Traits\FalHelper;
 use TYPO3\CMS\Core\Resource\FileReference;
 
+/**
+ * @covers \Tx_Seminars_Model_Speaker
+ */
 final class SpeakerTest extends FunctionalTestCase
 {
     use FalHelper;

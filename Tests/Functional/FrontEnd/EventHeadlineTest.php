@@ -10,6 +10,9 @@ use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
+/**
+ * @author \Tx_Seminars_FrontEnd_EventHeadline
+ */
 final class EventHeadlineTest extends FunctionalTestCase
 {
     /**

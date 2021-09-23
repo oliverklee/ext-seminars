@@ -8,6 +8,9 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
+/**
+ * @covers \Tx_Seminars_FrontEnd_RequirementsList
+ */
 final class RequirementsListTest extends TestCase
 {
     /**

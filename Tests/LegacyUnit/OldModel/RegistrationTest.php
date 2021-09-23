@@ -12,6 +12,9 @@ use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
+/**
+ * @covers \Tx_Seminars_OldModel_Registration
+ */
 final class RegistrationTest extends TestCase
 {
     use LanguageHelper;

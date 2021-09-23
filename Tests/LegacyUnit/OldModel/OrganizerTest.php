@@ -7,6 +7,9 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\OldModel;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 
+/**
+ * @covers \Tx_Seminars_OldModel_Organizer
+ */
 final class OrganizerTest extends TestCase
 {
     /**

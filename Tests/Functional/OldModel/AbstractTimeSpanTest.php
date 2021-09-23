@@ -12,6 +12,9 @@ use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingTimeSpan;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
+/**
+ * @covers \Tx_Seminars_OldModel_AbstractTimeSpan
+ */
 final class AbstractTimeSpanTest extends FunctionalTestCase
 {
     use LanguageHelper;

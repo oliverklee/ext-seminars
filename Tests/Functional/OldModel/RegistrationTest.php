@@ -7,6 +7,9 @@ namespace OliverKlee\Seminars\Tests\Functional\OldModel;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 
+/**
+ * @covers \Tx_Seminars_OldModel_Registration
+ */
 final class RegistrationTest extends FunctionalTestCase
 {
     use LanguageHelper;

@@ -8,6 +8,9 @@ use Doctrine\DBAL\Driver\Statement;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingModel;
 
+/**
+ * @covers \OliverKlee\Seminars\OldModel\AbstractModel
+ */
 final class AbstractModelTest extends FunctionalTestCase
 {
     /**

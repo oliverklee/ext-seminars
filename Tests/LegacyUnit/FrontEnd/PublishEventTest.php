@@ -11,6 +11,9 @@ use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
+/**
+ * @covers \Tx_Seminars_FrontEnd_PublishEvent
+ */
 final class PublishEventTest extends TestCase
 {
     use LanguageHelper;
