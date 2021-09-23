@@ -13,6 +13,7 @@ use OliverKlee\Oelib\Interfaces\ConfigurationCheckable;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Seminars\Bag\AbstractBag;
+use OliverKlee\Seminars\Configuration\RegistrationFormConfigurationCheck;
 use OliverKlee\Seminars\Configuration\RegistrationListConfigurationCheck;
 use OliverKlee\Seminars\Configuration\SharedConfigurationCheck;
 use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
@@ -2759,7 +2760,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
     /**
      * Creates the HTML for the registration page.
      *
-     * @return string HTML code for the registration page
+     * @return string HTML for the registration page
      */
     protected function createRegistrationPage(): string
     {
@@ -2821,7 +2822,19 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
             }
         }
 
-        return $this->createRegistrationHeading($errorMessage) . $registrationForm . $this->createRegistrationFooter();
+        $output = $this->createRegistrationHeading($errorMessage) . $registrationForm .
+            $this->createRegistrationFooter();
+
+        if ($this->isConfigurationCheckEnabled()) {
+            $configurationCheck = new RegistrationFormConfigurationCheck(
+                $this->buildConfigurationWithFlexForms(),
+                'plugin.tx_seminars_pi1'
+            );
+            $configurationCheck->check();
+            $output .= \implode("\n", $configurationCheck->getWarningsAsHtml());
+        }
+
+        return $output;
     }
 
     /**
@@ -2865,7 +2878,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
      * Note that $this->seminar must be set before calling this function and if "unregister" is the action to perform,
      * $this->registration must also be set.
      *
-     * @return string HTML code for the form
+     * @return string HTML for the form
      */
     protected function createRegistrationForm(): string
     {
