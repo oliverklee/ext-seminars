@@ -9,7 +9,8 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 - Add more type declarations (#887)
-- Use the new configuration classes (#725, #910, #913, #914, #915, #916, #917, #919)
+- Use the new configuration classes
+  (#725, #910, #913, #914, #915, #916, #917, #919, #922)
 - Require oelib >= 3.6.2 (#877)
 - Use the Core email functions (#674, #874)
 - Package and use Emogrifier for inlining CSS into HTML emails (#863)
