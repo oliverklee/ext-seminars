@@ -2,8 +2,7 @@
 
 declare(strict_types=1);
 
-use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
-use OliverKlee\Oelib\Interfaces\Configuration;
+use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -11,18 +10,7 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  */
 class Tx_Seminars_ViewHelper_DateRange
 {
-    /**
-     * @var Configuration
-     */
-    protected $configuration = null;
-
-    /**
-     * The constructor.
-     */
-    public function __construct()
-    {
-        $this->configuration = ConfigurationRegistry::get('plugin.tx_seminars');
-    }
+    use SharedPluginConfiguration;
 
     /**
      * Gets the date.
@@ -50,7 +38,7 @@ class Tx_Seminars_ViewHelper_DateRange
             return $this->getAsDateFormatYmd($beginDate);
         }
 
-        if ($this->configuration->getAsBoolean('abbreviateDateRanges')) {
+        if ($this->getSharedConfiguration()->getAsBoolean('abbreviateDateRanges')) {
             $formattedBeginDate = $this->getAsAbbreviatedDateRange($beginDate, $endDate);
         } else {
             $formattedBeginDate = $this->getAsDateFormatYmd($beginDate);
@@ -130,7 +118,7 @@ class Tx_Seminars_ViewHelper_DateRange
      */
     protected function getAsDateFormatYmd($timestamp): string
     {
-        return strftime($this->configuration->getAsString('dateFormatYMD'), $timestamp);
+        return \strftime($this->getDateFormat(), $timestamp);
     }
 
     /**
@@ -142,7 +130,7 @@ class Tx_Seminars_ViewHelper_DateRange
      */
     protected function getAsDateFormatY(int $timestamp): string
     {
-        return strftime($this->configuration->getAsString('dateFormatY'), $timestamp);
+        return \strftime($this->getSharedConfiguration()->getAsString('dateFormatY'), $timestamp);
     }
 
     /**
@@ -154,7 +142,7 @@ class Tx_Seminars_ViewHelper_DateRange
      */
     protected function getAsDateFormatM(int $timestamp): string
     {
-        return strftime($this->configuration->getAsString('dateFormatM'), $timestamp);
+        return \strftime($this->getSharedConfiguration()->getAsString('dateFormatM'), $timestamp);
     }
 
     /**
@@ -166,7 +154,7 @@ class Tx_Seminars_ViewHelper_DateRange
      */
     protected function getAsDateFormatMd(int $timestamp): string
     {
-        return strftime($this->configuration->getAsString('dateFormatMD'), $timestamp);
+        return \strftime($this->getSharedConfiguration()->getAsString('dateFormatMD'), $timestamp);
     }
 
     /**
@@ -178,6 +166,6 @@ class Tx_Seminars_ViewHelper_DateRange
      */
     protected function getAsDateFormatD(int $timestamp): string
     {
-        return strftime($this->configuration->getAsString('dateFormatD'), $timestamp);
+        return \strftime($this->getSharedConfiguration()->getAsString('dateFormatD'), $timestamp);
     }
 }

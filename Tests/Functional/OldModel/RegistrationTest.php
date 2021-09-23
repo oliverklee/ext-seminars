@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\OldModel;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 
 /**
@@ -34,15 +36,28 @@ final class RegistrationTest extends FunctionalTestCase
      */
     private $subject = null;
 
+    /**
+     * @var array<string, string>
+     */
+    private const CONFIGURATION = [
+        'dateFormatYMD' => self::DATE_FORMAT,
+        'timeFormat' => self::TIME_FORMAT,
+    ];
+
     protected function setUp()
     {
         parent::setUp();
 
         $this->initializeBackEndLanguage();
+        $configuration = new DummyConfiguration(self::CONFIGURATION);
+        ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $configuration);
 
         $this->subject = new \Tx_Seminars_OldModel_Registration();
-        $this->subject->setConfigurationValue('dateFormatYMD', self::DATE_FORMAT);
-        $this->subject->setConfigurationValue('timeFormat', self::TIME_FORMAT);
+    }
+
+    protected function tearDown(): void
+    {
+        ConfigurationRegistry::purgeInstance();
     }
 
     /**

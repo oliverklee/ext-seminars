@@ -16,6 +16,7 @@ use OliverKlee\Oelib\Model\BackEndUser;
 use OliverKlee\Oelib\Model\Country;
 use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Visibility\Tree;
+use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Mail\MailMessage;
@@ -27,6 +28,8 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  */
 class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
 {
+    use SharedPluginConfiguration;
+
     /**
      * @var string stores a validation error message if there was one
      */
@@ -1452,10 +1455,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $markerPrefix = 'publish_event';
 
         if ($event->hasBeginDate()) {
-            $beginDate = strftime(
-                $this->getConfValueString('dateFormatYMD'),
-                $event->getBeginDateAsUnixTimeStamp()
-            );
+            $beginDate = \strftime($this->getDateFormat(), $event->getBeginDateAsUnixTimeStamp());
         } else {
             $beginDate = '';
         }
@@ -1550,8 +1550,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $this->setMarker('description', $description, $markerPrefix);
 
         $beginDateAsTimeStamp = isset($this->savedFormData['begin_date']) ? (int)$this->savedFormData['begin_date'] : 0;
-        $beginDate = ($beginDateAsTimeStamp !== 0)
-            ? strftime($this->getConfValueString('dateFormatYMD'), $beginDateAsTimeStamp) : '';
+        $beginDate = $beginDateAsTimeStamp !== 0 ? \strftime($this->getDateFormat(), $beginDateAsTimeStamp) : '';
         $this->setOrDeleteMarkerIfNotEmpty(
             'date',
             $beginDate,
