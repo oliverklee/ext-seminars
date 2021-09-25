@@ -60,31 +60,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
      */
     protected function check_Tx_Seminars_FrontEnd_DefaultController_single_view()
     {
-        $this->checkCommonFrontEndSettings();
-
-        $this->checkRegistrationFlag();
-
-        $this->checkShowSingleEvent();
-        $this->checkHideFields();
-        $this->checkGeneralPriceInSingle();
-        $this->checkShowSpeakerDetails();
-        $this->checkShowSiteDetails();
-        if ($this->objectToCheck->getConfValueBoolean('enableRegistration')) {
-            $this->checkRegisterPid();
-            $this->checkLoginPid();
-        }
-        $this->checkRegistrationsListPidOptional();
-        $this->checkRegistrationsVipListPidOptional();
-        $this->checkDetailPid();
-        $this->checkDefaultEventVipsFeGroupID();
-        $this->checkExternalLinkTarget();
-        $this->checkSingleViewImageSizes();
-        $this->checkShowOwnerDataInSingleView();
-        if ($this->objectToCheck->getConfValueBoolean('showOwnerDataInSingleView', 's_singleView')) {
-            $this->checkOwnerPictureMaxWidth();
-        }
-        $this->checkLimitFileDownloadToAttendees();
-        $this->checkShowOnlyEventsWithVacancies();
     }
 
     /**
@@ -327,64 +302,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
     }
 
     /**
-     * Checks the setting of the configuration value hideFields.
-     *
-     * @return void
-     */
-    private function checkHideFields()
-    {
-        $this->checkIfMultiInSetOrEmpty(
-            'hideFields',
-            true,
-            's_template_special',
-            'This value specifies which section to remove from the details view. '
-            . 'Incorrect values will cause the sections to still be displayed.',
-            [
-                'image',
-                'event_type',
-                'title',
-                'subtitle',
-                'description',
-                'accreditation_number',
-                'credit_points',
-                'category',
-                'date',
-                'timeslots',
-                'uid',
-                'time',
-                'place',
-                'room',
-                'expiry',
-                'speakers',
-                'language',
-                'partners',
-                'tutors',
-                'leaders',
-                'price_regular',
-                // We use "price_board_regular" instead of "price_regular_board"
-                // to keep the subpart names prefix-free.
-                'price_board_regular',
-                'price_special',
-                // Ditto for "price_board_special".
-                'price_board_special',
-                'paymentmethods',
-                'additional_information',
-                'target_groups',
-                'attached_files',
-                'organizers',
-                'vacancies',
-                'deadline_registration',
-                'otherdates',
-                'eventsnextday',
-                'registration',
-                'back',
-                'requirements',
-                'dependencies',
-            ]
-        );
-    }
-
-    /**
      * Checks the setting of the configuration value hideColumns.
      *
      * @return void
@@ -552,24 +469,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
     }
 
     /**
-     * Checks the setting of the configuration value generalPriceInSingle.
-     *
-     * @return void
-     */
-    private function checkGeneralPriceInSingle()
-    {
-        $this->checkIfBoolean(
-            'generalPriceInSingle',
-            true,
-            's_template_special',
-            'This value specifies whether the heading for the standard price '
-            . 'in the detailed view and on the registration page will be '
-            . 'just <em>Price</em> instead of <em>Standard price</em>. '
-            . 'If this value is incorrect, the wrong label might be used.'
-        );
-    }
-
-    /**
      * Checks the setting of the configuration value omitDateIfSameAsPrevious.
      *
      * @return void
@@ -642,42 +541,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
             'This value specifies whether VIPs may edit their events. If this ' .
             'value is incorrect, VIPs may be allowed to edit their events ' .
             ' although they should not be allowed to (or vice versa).'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value showSpeakerDetails.
-     *
-     * @return void
-     */
-    private function checkShowSpeakerDetails()
-    {
-        $this->checkIfBoolean(
-            'showSpeakerDetails',
-            true,
-            's_template_special',
-            'This value specifies whether to show detailed information of '
-            . 'the speakers in the single view. '
-            . 'If this value is incorrect, the detailed information might '
-            . 'be shown although this is not intended (or vice versa).'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value showSiteDetails.
-     *
-     * @return void
-     */
-    private function checkShowSiteDetails()
-    {
-        $this->checkIfBoolean(
-            'showSiteDetails',
-            true,
-            's_template_special',
-            'This value specifies whether to show detailed information of '
-            . 'the locations in the single view. '
-            . 'If this value is incorrect, the detailed information might '
-            . 'be shown although this is not intended (or vice versa).'
         );
     }
 
@@ -1192,17 +1055,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
     }
 
     /**
-     * Checks the setting of the configuration value externalLinkTarget.
-     * But currently does nothing as we don't think there's something to check for.
-     *
-     * @return void
-     */
-    private function checkExternalLinkTarget()
-    {
-        // Does nothing.
-    }
-
-    /**
      * Checks the setting of the configuration value
      * showSingleEvent.
      *
@@ -1354,17 +1206,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
     }
 
     /**
-     * Checks the settings for the image width, and height in the single view.
-     *
-     * @return void
-     */
-    private function checkSingleViewImageSizes()
-    {
-        $this->checkSingleViewImageWidth();
-        $this->checkSingleViewImageHeight();
-    }
-
-    /**
      * Checks the settings for seminarImageSingleViewWidth.
      *
      * @return void
@@ -1393,42 +1234,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
             '',
             'This value specifies the height of the image of a seminar. If ' .
             'this value is not set, the image will be shown in full size.'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value showOwnerDataInSingleView.
-     *
-     * @return void
-     */
-    private function checkShowOwnerDataInSingleView()
-    {
-        $this->checkIfBoolean(
-            'showOwnerDataInSingleView',
-            true,
-            's_singleView',
-            'This value specifies whether the owner data will be displayed  ' .
-            'on the single view page. If this value is incorrect, ' .
-            'the the data might be displayed although it should not be ' .
-            '(which is a privacy issue) or vice versa.'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value ownerPictureMaxWidth.
-     *
-     * @return void
-     */
-    private function checkOwnerPictureMaxWidth()
-    {
-        $this->checkIfPositiveInteger(
-            'ownerPictureMaxWidth',
-            false,
-            '',
-            'This value specifies the maximum width for the owner picture ' .
-            'on the single view page. If this value is not set ' .
-            'correctly, the image might be too large or not get ' .
-            'displayed at all.'
         );
     }
 

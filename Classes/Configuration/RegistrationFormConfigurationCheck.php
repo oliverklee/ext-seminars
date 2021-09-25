@@ -14,7 +14,7 @@ class RegistrationFormConfigurationCheck extends AbstractFrontEndConfigurationCh
         $this->checkCommonFrontEndSettings();
 
         $this->checkRegistrationFlag();
-        if (!$this->configuration->getAsBoolean('enableRegistration')) {
+        if (!$this->isRegistrationEnabled()) {
             $explanation = 'You are using the registration page although online registration is disabled.
                 This will break the registration page and the automatic configuration check.';
             $this->addWarningAndRequestCorrection('enableRegistration', $explanation);
@@ -48,15 +48,6 @@ class RegistrationFormConfigurationCheck extends AbstractFrontEndConfigurationCh
         $this->checkLogOutOneTimeAccountsAfterRegistration();
         $this->checkMyEventsPid();
         $this->checkDetailPid();
-    }
-
-    private function checkRegistrationFlag(): void
-    {
-        $this->checkIfBoolean(
-            'enableRegistration',
-            'This value specifies whether the extension will provide online registration.
-            If this value is incorrect, the online registration will not be enabled or disabled correctly.'
-        );
     }
 
     private function checkRegistrationEditorTemplateFile(): void
@@ -117,16 +108,6 @@ class RegistrationFormConfigurationCheck extends AbstractFrontEndConfigurationCh
                 shown on the registration page.';
             $this->addWarning($warning);
         }
-    }
-
-    private function checkGeneralPriceInSingle(): void
-    {
-        $this->checkIfBoolean(
-            'generalPriceInSingle',
-            'This value specifies whether the heading for the standard price in the detailed view
-            and on the registration page will be just <em>Price</em> instead of <em>Standard price</em>.
-            If this value is incorrect, the wrong label might be used.'
-        );
     }
 
     private function checkEventFieldsOnRegistrationPage(): void
@@ -275,18 +256,6 @@ class RegistrationFormConfigurationCheck extends AbstractFrontEndConfigurationCh
         );
     }
 
-    private function checkLoginPid(): void
-    {
-        $this->checkIfPositiveInteger(
-            'loginPID',
-            'This value specifies the page that contains the login form.
-            If this value is not set correctly, the link to the login page will not work.
-            If you explicitly do not wish to use the online registration feature,
-            you can disable these checks by setting <strong>plugin.tx_seminars.enableRegistration</strong> and
-            <strong>plugin.tx_seminars_pi1.enableRegistration</strong> to 0.'
-        );
-    }
-
     private function checkBankTransferUid(): void
     {
         $this->checkIfPositiveIntegerOrEmpty(
@@ -314,15 +283,6 @@ class RegistrationFormConfigurationCheck extends AbstractFrontEndConfigurationCh
             'This value specifies the page that contains the <em>my events</em> list.
             If this value is not set correctly, the redirection to the <em>my events</em> list
             after canceling the unregistration process will not work correctly.'
-        );
-    }
-
-    private function checkDetailPid(): void
-    {
-        $this->checkIfPositiveInteger(
-            'detailPID',
-            'This value specifies the page that contains the detailed view.
-            If this value is not set correctly, the links to single events will not work as expected.'
         );
     }
 }
