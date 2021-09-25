@@ -16,6 +16,7 @@ use OliverKlee\Seminars\Bag\AbstractBag;
 use OliverKlee\Seminars\Configuration\RegistrationFormConfigurationCheck;
 use OliverKlee\Seminars\Configuration\RegistrationListConfigurationCheck;
 use OliverKlee\Seminars\Configuration\SharedConfigurationCheck;
+use OliverKlee\Seminars\Configuration\SingleViewConfigurationCheck;
 use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
 use OliverKlee\Seminars\Csv\CsvDownloader;
 use OliverKlee\Seminars\Hooks\HookProvider;
@@ -683,6 +684,15 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
             $this->pi_linkTP($this->translate('label_back'), [], true, $this->getConfValueInteger('listPID'))
         );
         $result .= $this->getSubpart('BACK_VIEW');
+
+        if ($this->isConfigurationCheckEnabled()) {
+            $configurationCheck = new SingleViewConfigurationCheck(
+                $this->buildConfigurationWithFlexForms(),
+                'plugin.tx_seminars_pi1'
+            );
+            $configurationCheck->check();
+            $result .= \implode("\n", $configurationCheck->getWarningsAsHtml());
+        }
 
         return $result;
     }
@@ -1598,7 +1608,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
             $this->unhideColumns($temporaryHiddenColumns);
         }
 
-        // Let's also check the list view configuration..
+        // Let's also check the list view configuration.
         $this->checkConfiguration(true, 'seminar_list');
 
         return $result;
