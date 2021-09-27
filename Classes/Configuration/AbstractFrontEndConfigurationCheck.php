@@ -167,4 +167,14 @@ abstract class AbstractFrontEndConfigurationCheck extends AbstractConfigurationC
             If this value is not set correctly, some events might not get displayed in the list view.'
         );
     }
+
+    protected function checkEventEditorFeGroupID(): void
+    {
+        $this->checkIfPositiveInteger(
+            'eventEditorFeGroupID',
+            'This value specifies the front-end user group that is allowed
+            to enter and edit event records in the front end.
+            If this value is not set correctly, FE editing for events will not work.'
+        );
+    }
 }
