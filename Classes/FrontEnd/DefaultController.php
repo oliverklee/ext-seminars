@@ -13,6 +13,7 @@ use OliverKlee\Oelib\Interfaces\ConfigurationCheckable;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Seminars\Bag\AbstractBag;
+use OliverKlee\Seminars\Configuration\CategoryListConfigurationCheck;
 use OliverKlee\Seminars\Configuration\CountdownConfigurationCheck;
 use OliverKlee\Seminars\Configuration\EventEditorConfigurationCheck;
 use OliverKlee\Seminars\Configuration\ListViewConfigurationCheck;
@@ -322,6 +323,14 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
                     $this->cObj
                 );
                 $result = $categoryList->render();
+                if ($this->isConfigurationCheckEnabled()) {
+                    $configurationCheck = new CategoryListConfigurationCheck(
+                        $this->buildConfigurationWithFlexForms(),
+                        'plugin.tx_seminars_pi1'
+                    );
+                    $configurationCheck->check();
+                    $result .= \implode("\n", $configurationCheck->getWarningsAsHtml());
+                }
                 break;
             case 'event_headline':
                 /** @var \Tx_Seminars_FrontEnd_EventHeadline $eventHeadline */
