@@ -69,9 +69,6 @@ class Tx_Seminars_FrontEnd_CategoryList extends \Tx_Seminars_FrontEnd_AbstractVi
             $result = $this->getSubpart('VIEW_NO_CATEGORIES');
         }
 
-        $this->checkConfiguration();
-        $result .= $this->getWrappedConfigCheckMessage();
-
         return $result;
     }
 

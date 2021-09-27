@@ -378,12 +378,6 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
                 $result = $this->createListView($this->whatToDisplay);
         }
 
-        // Let's check the configuration and display any errors.
-        // Here, we don't use the direct return value from
-        // `$this->checkConfiguration` as this would ignore any previous error messages.
-        $this->checkConfiguration();
-        $result .= $this->getWrappedConfigCheckMessage();
-
         if ($this->isConfigurationCheckEnabled()) {
             $configuration = ConfigurationRegistry::get('plugin.tx_seminars');
             $configurationCheck = new SharedConfigurationCheck($configuration, 'plugin.tx_seminars');
