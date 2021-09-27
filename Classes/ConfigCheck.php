@@ -87,7 +87,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
      */
     protected function check_Tx_Seminars_FrontEnd_DefaultController_my_vip_events()
     {
-        $this->check_Tx_Seminars_FrontEnd_DefaultController_seminar_list();
         $this->checkRegistrationsVipListPid();
         $this->checkDefaultEventVipsFeGroupID();
         $this->checkMayManagersEditTheirEvents();
@@ -105,7 +104,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
      */
     protected function check_Tx_Seminars_FrontEnd_DefaultController_topic_list()
     {
-        $this->check_Tx_Seminars_FrontEnd_DefaultController_seminar_list();
     }
 
     /**
@@ -115,7 +113,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
      */
     protected function check_Tx_Seminars_FrontEnd_DefaultController_my_events()
     {
-        $this->check_Tx_Seminars_FrontEnd_DefaultController_seminar_list();
     }
 
     /**
@@ -149,7 +146,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
      */
     protected function check_Tx_Seminars_FrontEnd_DefaultController_my_entered_events()
     {
-        $this->check_Tx_Seminars_FrontEnd_DefaultController_seminar_list();
         $this->checkEventEditorFeGroupID();
         $this->checkEventEditorPID();
     }
@@ -176,7 +172,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
      */
     protected function check_Tx_Seminars_FrontEnd_DefaultController_favorites_list()
     {
-        $this->check_Tx_Seminars_FrontEnd_DefaultController_seminar_list();
     }
 
     /**
