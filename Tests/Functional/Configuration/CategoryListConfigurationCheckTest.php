@@ -26,18 +26,11 @@ final class CategoryListConfigurationCheckTest extends FunctionalTestCase
      */
     private $subject;
 
-    /**
-     * @var DummyConfiguration
-     */
-    private $configuration;
-
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->configuration = new DummyConfiguration();
-
-        $this->subject = new CategoryListConfigurationCheck($this->configuration, 'plugin.tx_seminars_pi1');
+        $this->subject = new CategoryListConfigurationCheck(new DummyConfiguration(), 'plugin.tx_seminars_pi1');
     }
 
     /**

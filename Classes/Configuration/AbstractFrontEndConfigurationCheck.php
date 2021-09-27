@@ -207,4 +207,14 @@ abstract class AbstractFrontEndConfigurationCheck extends AbstractConfigurationC
             ]
         );
     }
+
+    protected function checkEventEditorPID(): void
+    {
+        $this->checkIfPositiveInteger(
+            'eventEditorPID',
+            'This value specifies the page that contains the plug-in for editing event records in the front end.
+            If this value is not set correctly, the <em>edit</em> link in the <em>events which I have entered</em> list
+            will not work.'
+        );
+    }
 }

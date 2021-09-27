@@ -50,14 +50,4 @@ class MyVipEventsConfigurationCheck extends AbstractFrontEndConfigurationCheck
             from the &quot;my VIP events&quot; view although they should not be allowed to (or vice versa).'
         );
     }
-
-    private function checkEventEditorPID(): void
-    {
-        $this->checkIfSingleFePageNotEmpty(
-            'eventEditorPID',
-            'This value specifies the page that contains the plug-in for editing event records in the front end.
-            If this value is not set correctly, the <em>edit</em> link in the <em>events which I have entered</em> list
-            will not work.'
-        );
-    }
 }
