@@ -78,8 +78,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
      */
     protected function check_Tx_Seminars_FrontEnd_Countdown()
     {
-        $this->checkCommonFrontEndSettings();
-        $this->checkPages();
     }
 
     /**
@@ -338,24 +336,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
             'This value specifies the page that contains the list of '
             . 'registrations for an event. If this value is not set '
             . 'correctly, the link to that page will not work.'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value pages.
-     *
-     * @return void
-     */
-    private function checkPages()
-    {
-        $this->checkIfSysFoldersNotEmpty(
-            'pages',
-            true,
-            'sDEF',
-            'This value specifies the system folders that contain the '
-            . 'event records for the list view. If this value is not set '
-            . 'correctly, some events might not get displayed in the list '
-            . 'view.'
         );
     }
 
@@ -698,38 +678,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
             'e-mail mode. A mistyped field name will cause the field to not ' .
             'get included.',
             'tx_seminars_attendances'
-        );
-    }
-
-    /**
-     * Checks the settings for seminarImageListViewWidth.
-     *
-     * @return void
-     */
-    private function checkListViewImageWidth()
-    {
-        $this->checkIfPositiveInteger(
-            'seminarImageListViewWidth',
-            false,
-            '',
-            'This value specifies the width of the image of a seminar. If this ' .
-            'value is not set, the image will be shown in full size.'
-        );
-    }
-
-    /**
-     * Checks the settings for seminarImageListViewHeight.
-     *
-     * @return void
-     */
-    private function checkListViewImageHeight()
-    {
-        $this->checkIfPositiveInteger(
-            'seminarImageListViewHeight',
-            false,
-            '',
-            'This value specifies the height of the image of a seminar. If ' .
-            'this value is not set, the image will be shown in full size.'
         );
     }
 

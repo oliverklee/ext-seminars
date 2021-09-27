@@ -9,7 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Changed
 - Migrate to the new configuration check
-  (#935, #937, #939, #940, #943, #944, #945)
+  (#935, #937, #939, #940, #943, #944, #946, #948)
 - Add sr_feuser_register as a dev dependency (#926)
 - Require static_info_tables >= 6.9.5 (#925)
 - Add more type declarations (#887)
