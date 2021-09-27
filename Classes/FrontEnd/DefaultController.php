@@ -16,6 +16,7 @@ use OliverKlee\Seminars\Bag\AbstractBag;
 use OliverKlee\Seminars\Configuration\CategoryListConfigurationCheck;
 use OliverKlee\Seminars\Configuration\CountdownConfigurationCheck;
 use OliverKlee\Seminars\Configuration\EventEditorConfigurationCheck;
+use OliverKlee\Seminars\Configuration\EventHeadlineConfigurationCheck;
 use OliverKlee\Seminars\Configuration\ListViewConfigurationCheck;
 use OliverKlee\Seminars\Configuration\MyEnteredEventsConfigurationCheck;
 use OliverKlee\Seminars\Configuration\MyVipEventsConfigurationCheck;
@@ -342,9 +343,14 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
                 );
                 $eventHeadline->injectEventMapper($this->eventMapper);
                 $result = $eventHeadline->render();
-                $this->setErrorMessage(
-                    $eventHeadline->checkConfiguration(true)
-                );
+                if ($this->isConfigurationCheckEnabled()) {
+                    $configurationCheck = new EventHeadlineConfigurationCheck(
+                        $this->buildConfigurationWithFlexForms(),
+                        'plugin.tx_seminars_pi1'
+                    );
+                    $configurationCheck->check();
+                    $result .= \implode("\n", $configurationCheck->getWarningsAsHtml());
+                }
                 break;
             case 'my_vip_events':
                 // The fallthrough is intended
