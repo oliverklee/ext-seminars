@@ -31,4 +31,27 @@ final class EventHeadlineConfigurationCheckTest extends UnitTestCase
     {
         self::assertInstanceOf(AbstractConfigurationCheck::class, $this->subject);
     }
+
+    /**
+     * @test
+     */
+    public function checkWithEmptyConfigurationCreatesErrors(): void
+    {
+        $this->subject->check();
+
+        $result = $this->subject->getWarningsAsHtml();
+        self::assertNotSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function checkWithEmptyConfigurationUsesProvidedNamespaceForErrors(): void
+    {
+        $this->subject->check();
+
+        $result = $this->subject->getWarningsAsHtml();
+        self::assertArrayHasKey(1, $result);
+        self::assertStringContainsString('plugin.tx_seminars_pi1', $result[1]);
+    }
 }
