@@ -16,6 +16,7 @@ use OliverKlee\Seminars\Bag\AbstractBag;
 use OliverKlee\Seminars\Configuration\CountdownConfigurationCheck;
 use OliverKlee\Seminars\Configuration\EventEditorConfigurationCheck;
 use OliverKlee\Seminars\Configuration\ListViewConfigurationCheck;
+use OliverKlee\Seminars\Configuration\MyVipEventsConfigurationCheck;
 use OliverKlee\Seminars\Configuration\RegistrationFormConfigurationCheck;
 use OliverKlee\Seminars\Configuration\RegistrationListConfigurationCheck;
 use OliverKlee\Seminars\Configuration\SharedConfigurationCheck;
@@ -1696,6 +1697,15 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
                     );
                     $isOkay = false;
                 }
+                if ($this->isConfigurationCheckEnabled()) {
+                    $configurationCheck = new MyVipEventsConfigurationCheck(
+                        $this->buildConfigurationWithFlexForms(),
+                        'plugin.tx_seminars_pi1'
+                    );
+                    $configurationCheck->check();
+                    $result .= \implode("\n", $configurationCheck->getWarningsAsHtml());
+                }
+
                 break;
             case 'my_entered_events':
                 if ($this->hasEventEditorAccess()) {
