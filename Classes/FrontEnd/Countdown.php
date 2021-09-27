@@ -60,8 +60,6 @@ class Tx_Seminars_FrontEnd_Countdown extends \Tx_Seminars_FrontEnd_AbstractView
             $this->injectCountDownViewHelper($viewHelper);
         }
 
-        $this->setErrorMessage($this->checkConfiguration(true));
-
         try {
             /** @var \Tx_Seminars_Model_Event $event */
             $event = $this->mapper->findNextUpcoming();

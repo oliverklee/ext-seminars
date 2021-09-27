@@ -51,8 +51,6 @@ class Tx_Seminars_FrontEnd_EventHeadline extends \Tx_Seminars_FrontEnd_AbstractV
         $this->setMarker('title_and_date', $this->getTitleAndDate($event));
         $result = $this->getSubpart('VIEW_HEADLINE');
 
-        $this->setErrorMessage($this->checkConfiguration(true));
-
         return $result;
     }
 
