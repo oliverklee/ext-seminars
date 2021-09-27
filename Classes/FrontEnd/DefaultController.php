@@ -13,6 +13,7 @@ use OliverKlee\Oelib\Interfaces\ConfigurationCheckable;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Seminars\Bag\AbstractBag;
+use OliverKlee\Seminars\Configuration\CountdownConfigurationCheck;
 use OliverKlee\Seminars\Configuration\ListViewConfigurationCheck;
 use OliverKlee\Seminars\Configuration\RegistrationFormConfigurationCheck;
 use OliverKlee\Seminars\Configuration\RegistrationListConfigurationCheck;
@@ -302,6 +303,14 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
                 );
                 $countdown->injectEventMapper($this->eventMapper);
                 $result = $countdown->render();
+                if ($this->isConfigurationCheckEnabled()) {
+                    $configurationCheck = new CountdownConfigurationCheck(
+                        $this->buildConfigurationWithFlexForms(),
+                        'plugin.tx_seminars_pi1'
+                    );
+                    $configurationCheck->check();
+                    $result .= \implode("\n", $configurationCheck->getWarningsAsHtml());
+                }
                 break;
             case 'category_list':
                 /** @var \Tx_Seminars_FrontEnd_CategoryList $categoryList */

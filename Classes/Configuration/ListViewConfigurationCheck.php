@@ -53,15 +53,6 @@ class ListViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
         $this->checkLinkToSingleView();
     }
 
-    private function checkPages(): void
-    {
-        $this->checkIfIntegerListNotEmpty(
-            'pages',
-            'This value specifies the system folders that contain the event records for the list view.
-            If this value is not set correctly, some events might not get displayed in the list view.'
-        );
-    }
-
     private function checkRecursive(): void
     {
         $this->checkIfNonNegativeIntegerOrEmpty(
