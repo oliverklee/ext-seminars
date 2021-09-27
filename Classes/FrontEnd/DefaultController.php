@@ -14,6 +14,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Seminars\Bag\AbstractBag;
 use OliverKlee\Seminars\Configuration\CountdownConfigurationCheck;
+use OliverKlee\Seminars\Configuration\EventEditorConfigurationCheck;
 use OliverKlee\Seminars\Configuration\ListViewConfigurationCheck;
 use OliverKlee\Seminars\Configuration\RegistrationFormConfigurationCheck;
 use OliverKlee\Seminars\Configuration\RegistrationListConfigurationCheck;
@@ -2996,11 +2997,18 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
     protected function createEventEditorHtml(): string
     {
         $eventEditor = $this->createEventEditorInstance();
-
         $hasAccessMessage = $eventEditor->hasAccessMessage();
 
-        if ($hasAccessMessage == '') {
+        if ($hasAccessMessage === '') {
             $result = $eventEditor->render();
+            if ($this->isConfigurationCheckEnabled()) {
+                $configurationCheck = new EventEditorConfigurationCheck(
+                    $this->buildConfigurationWithFlexForms(),
+                    'plugin.tx_seminars_pi1'
+                );
+                $configurationCheck->check();
+                $result .= \implode("\n", $configurationCheck->getWarningsAsHtml());
+            }
         } else {
             $result = $hasAccessMessage;
             HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Status: 403 Forbidden');
