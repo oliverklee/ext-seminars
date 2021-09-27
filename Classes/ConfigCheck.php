@@ -3,8 +3,6 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\Configuration\ConfigurationCheck;
-use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * This class checks the Seminar Manager configuration for basic sanity.
@@ -87,14 +85,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
      */
     protected function check_Tx_Seminars_FrontEnd_DefaultController_my_vip_events()
     {
-        $this->checkRegistrationsVipListPid();
-        $this->checkDefaultEventVipsFeGroupID();
-        $this->checkMayManagersEditTheirEvents();
-        $this->checkAllowCsvExportOfRegistrationsInMyVipEventsView();
-
-        if ($this->objectToCheck->getConfValueBoolean('mayManagersEditTheirEvents', 's_listView')) {
-            $this->checkEventEditorPID();
-        }
     }
 
     /**
@@ -248,43 +238,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
     }
 
     /**
-     * Checks the setting of the configuration value
-     * allowCsvExportOfRegistrationsInMyVipEventsView.
-     *
-     * @return void
-     */
-    private function checkAllowCsvExportOfRegistrationsInMyVipEventsView()
-    {
-        $this->checkIfBoolean(
-            'allowCsvExportOfRegistrationsInMyVipEventsView',
-            false,
-            '',
-            'This value specifies whether managers are allowed to access the ' .
-            'CSV export of registrations from the &quot;my VIP events&quot; view. ' .
-            'If this value is incorrect, managers may be allowed to access ' .
-            'the CSV export of registrations from the &quot;my VIP events ' .
-            'view&quot; although they should not be allowed to (or vice versa).'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value mayManagersEditTheirEvents.
-     *
-     * @return void
-     */
-    private function checkMayManagersEditTheirEvents()
-    {
-        $this->checkIfBoolean(
-            'mayManagersEditTheirEvents',
-            true,
-            's_listView',
-            'This value specifies whether VIPs may edit their events. If this ' .
-            'value is incorrect, VIPs may be allowed to edit their events ' .
-            ' although they should not be allowed to (or vice versa).'
-        );
-    }
-
-    /**
      * Checks the setting of the configuration value listPID.
      *
      * @return void
@@ -299,23 +252,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
             . 'If this value is not set correctly, the links in the list '
             . 'view and the back link on the list of registrations will '
             . 'not work.'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value registrationsVipListPID.
-     *
-     * @return void
-     */
-    private function checkRegistrationsVipListPid()
-    {
-        $this->checkIfSingleFePageNotEmpty(
-            'registrationsVipListPID',
-            true,
-            'sDEF',
-            'This value specifies the page that contains the list of '
-            . 'registrations for an event. If this value is not set '
-            . 'correctly, the link to that page will not work.'
         );
     }
 
@@ -369,25 +305,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
             'This value specifies the front-end user group that is allowed to '
             . 'enter and edit event records in the front end. If this value '
             . 'is not set correctly, FE editing for events will not work.'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value defaultEventVipsFeGroupID.
-     *
-     * @return void
-     */
-    private function checkDefaultEventVipsFeGroupID()
-    {
-        $this->checkIfPositiveIntegerOrEmpty(
-            'defaultEventVipsFeGroupID',
-            true,
-            '',
-            'This value specifies the front-end user group that is allowed to '
-            . 'see the registrations for all events and get all events listed '
-            . 'on their &quot;my VIP events&quot; page. If this value is not set '
-            . 'correctly, the users of this group will not be treated as '
-            . 'VIPs for all events.'
         );
     }
 
@@ -611,36 +528,11 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
     }
 
     /**
-     * Checks whether plugin.tx_seminars.currency is not empty and a valid ISO
-     * 4217 alpha 3.
-     *
-     * @return void
-     */
-    public function checkCurrency()
-    {
-        /** @var ConnectionPool $pool */
-        $pool = GeneralUtility::makeInstance(ConnectionPool::class);
-        $connection = $pool->getConnectionForTable('static_currencies');
-        $result = $connection->select(['cu_iso_3'], 'static_currencies')->fetchAll();
-        $allowedValues = array_column($result, 'cu_iso_3');
-
-        $this->checkIfSingleInSetNotEmpty(
-            'currency',
-            false,
-            '',
-            'The specified currency setting is either empty or not a valid ' .
-            'ISO 4217 alpha 3 code. Please correct the value of <strong>' .
-            $this->getTSSetupPath() . 'currency</strong>.',
-            $allowedValues
-        );
-    }
-
-    /**
      * Checks the setting of showAttendancesOnRegistrationQueueInEmailCsv
      *
      * @return void
      */
-    public function checkShowAttendancesOnRegistrationQueueInEmailCsv()
+    private function checkShowAttendancesOnRegistrationQueueInEmailCsv()
     {
         $this->checkIfBoolean(
             'showAttendancesOnRegistrationQueueInEmailCsv',
