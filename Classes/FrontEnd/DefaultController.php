@@ -17,6 +17,7 @@ use OliverKlee\Seminars\Configuration\CategoryListConfigurationCheck;
 use OliverKlee\Seminars\Configuration\CountdownConfigurationCheck;
 use OliverKlee\Seminars\Configuration\EventEditorConfigurationCheck;
 use OliverKlee\Seminars\Configuration\ListViewConfigurationCheck;
+use OliverKlee\Seminars\Configuration\MyEnteredEventsConfigurationCheck;
 use OliverKlee\Seminars\Configuration\MyVipEventsConfigurationCheck;
 use OliverKlee\Seminars\Configuration\RegistrationFormConfigurationCheck;
 use OliverKlee\Seminars\Configuration\RegistrationListConfigurationCheck;
@@ -1719,6 +1720,14 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
             case 'my_entered_events':
                 if ($this->hasEventEditorAccess()) {
                     $result .= $this->getSubpart('MESSAGE_MY_ENTERED_EVENTS');
+                    if ($this->isConfigurationCheckEnabled()) {
+                        $configurationCheck = new MyEnteredEventsConfigurationCheck(
+                            $this->buildConfigurationWithFlexForms(),
+                            'plugin.tx_seminars_pi1'
+                        );
+                        $configurationCheck->check();
+                        $result .= \implode("\n", $configurationCheck->getWarningsAsHtml());
+                    }
                 } else {
                     $isOkay = false;
                 }

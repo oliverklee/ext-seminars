@@ -26,18 +26,11 @@ final class CountdownConfigurationCheckTest extends FunctionalTestCase
      */
     private $subject;
 
-    /**
-     * @var DummyConfiguration
-     */
-    private $configuration;
-
     protected function setUp(): void
     {
         parent::setUp();
 
-        $this->configuration = new DummyConfiguration();
-
-        $this->subject = new CountdownConfigurationCheck($this->configuration, 'plugin.tx_seminars_pi1');
+        $this->subject = new CountdownConfigurationCheck(new DummyConfiguration(), 'plugin.tx_seminars_pi1');
     }
 
     /**

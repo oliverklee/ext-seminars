@@ -6,12 +6,12 @@ namespace OliverKlee\Seminars\Tests\Functional\Configuration;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
-use OliverKlee\Seminars\Configuration\EventEditorConfigurationCheck;
+use OliverKlee\Seminars\Configuration\MyEnteredEventsConfigurationCheck;
 
 /**
- * @covers \OliverKlee\Seminars\Configuration\EventEditorConfigurationCheck
+ * @covers \OliverKlee\Seminars\Configuration\MyEnteredEventsConfigurationCheck
  */
-final class EventEditorConfigurationCheckTest extends FunctionalTestCase
+final class MyEnteredEventsConfigurationCheckTest extends FunctionalTestCase
 {
     /**
      * @var array<int, string>
@@ -22,7 +22,7 @@ final class EventEditorConfigurationCheckTest extends FunctionalTestCase
     ];
 
     /**
-     * @var EventEditorConfigurationCheck
+     * @var MyEnteredEventsConfigurationCheck
      */
     private $subject;
 
@@ -30,7 +30,7 @@ final class EventEditorConfigurationCheckTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        $this->subject = new EventEditorConfigurationCheck(new DummyConfiguration(), 'plugin.tx_seminars_pi1');
+        $this->subject = new MyEnteredEventsConfigurationCheck(new DummyConfiguration(), 'plugin.tx_seminars_pi1');
     }
 
     /**

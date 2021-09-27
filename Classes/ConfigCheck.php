@@ -121,8 +121,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
      */
     protected function check_Tx_Seminars_FrontEnd_DefaultController_my_entered_events()
     {
-        $this->checkEventEditorFeGroupID();
-        $this->checkEventEditorPID();
     }
 
     /**
@@ -218,41 +216,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
         $this->checkCssFileFromConstants();
         $this->checkSalutationMode(true);
         $this->checkWhatToDisplay();
-    }
-
-    /**
-     * Checks the setting of the configuration value eventEditorFeGroupID.
-     *
-     * @return void
-     */
-    private function checkEventEditorFeGroupID()
-    {
-        $this->checkIfPositiveInteger(
-            'eventEditorFeGroupID',
-            true,
-            's_fe_editing',
-            'This value specifies the front-end user group that is allowed to '
-            . 'enter and edit event records in the front end. If this value '
-            . 'is not set correctly, FE editing for events will not work.'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value eventEditorPID.
-     *
-     * @return void
-     */
-    private function checkEventEditorPID()
-    {
-        $this->checkIfSingleFePageNotEmpty(
-            'eventEditorPID',
-            true,
-            's_fe_editing',
-            'This value specifies the page that contains the plug-in for '
-            . 'editing event records in the front end. If this value is not '
-            . 'set correctly, the <em>edit</em> link in the <em>events '
-            . 'which I have entered</em> list will not work.'
-        );
     }
 
     /**
