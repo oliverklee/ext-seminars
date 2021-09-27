@@ -13,6 +13,7 @@ use OliverKlee\Oelib\Interfaces\ConfigurationCheckable;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Seminars\Bag\AbstractBag;
+use OliverKlee\Seminars\Configuration\ListViewConfigurationCheck;
 use OliverKlee\Seminars\Configuration\RegistrationFormConfigurationCheck;
 use OliverKlee\Seminars\Configuration\RegistrationListConfigurationCheck;
 use OliverKlee\Seminars\Configuration\SharedConfigurationCheck;
@@ -572,13 +573,13 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
         ) {
             // So a link to the VIP list is possible.
             $targetPageId = $this->getConfValueInteger('registrationsVipListPID');
-        // No link to the VIP list ... so maybe to the list for the participants.
         } elseif (
             $this->seminar->canViewRegistrationsList(
                 $this->whatToDisplay,
                 $this->getConfValueInteger('registrationsListPID')
             )
         ) {
+            // No link to the VIP list ... so maybe to the list for the participants.
             $targetPageId = $this->getConfValueInteger('registrationsListPID');
         }
 
@@ -613,17 +614,13 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
         $linkConfiguration = ['parameter' => $pageId];
 
         if ($eventId) {
-            $linkConfiguration['additionalParams']
-                = GeneralUtility::implodeArrayForUrl(
-                    'tx_seminars_pi1',
-                    [
-                    'seminar' => $eventId,
-                    'action' => 'register',
-                    ],
-                    '',
-                    false,
-                    true
-                );
+            $linkConfiguration['additionalParams'] = GeneralUtility::implodeArrayForUrl(
+                'tx_seminars_pi1',
+                ['seminar' => $eventId, 'action' => 'register'],
+                '',
+                false,
+                true
+            );
         }
 
         $redirectUrl = GeneralUtility::locationHeaderUrl(
@@ -1559,11 +1556,27 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
 
             $result = $this->getSubpart('EVENTSNEXTDAY_VIEW');
         }
-
-        // Let's also check the list view configuration.
-        $this->checkConfiguration(true, 'seminar_list');
+        $result .= $this->checkListViewConfiguration();
 
         return $result;
+    }
+
+    /**
+     * @return string error messages as HTML; will be empty if there are none of if the configuration check is disabled
+     */
+    private function checkListViewConfiguration(): string
+    {
+        if (!$this->isConfigurationCheckEnabled()) {
+            return '';
+        }
+
+        $configurationCheck = new ListViewConfigurationCheck(
+            $this->buildConfigurationWithFlexForms(),
+            'plugin.tx_seminars_pi1'
+        );
+        $configurationCheck->check();
+
+        return \implode("\n", $configurationCheck->getWarningsAsHtml());
     }
 
     /**
@@ -1607,9 +1620,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
             // Un-hides the previously hidden columns.
             $this->unhideColumns($temporaryHiddenColumns);
         }
-
-        // Let's also check the list view configuration.
-        $this->checkConfiguration(true, 'seminar_list');
+        $result .= $this->checkListViewConfiguration();
 
         return $result;
     }
@@ -1711,6 +1722,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
                 $result .= $this->pi_list_browseresults();
             }
         }
+        $result .= $this->checkListViewConfiguration();
 
         return $result;
     }
@@ -2670,14 +2682,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
     private function hideCsvExportOfRegistrationsColumnIfNecessary(string $whatToDisplay)
     {
         $isCsvExportOfRegistrationsInMyVipEventsViewAllowed
-            = $this->getConfValueBoolean(
-                'allowCsvExportOfRegistrationsInMyVipEventsView'
-            );
+            = $this->getConfValueBoolean('allowCsvExportOfRegistrationsInMyVipEventsView');
 
-        if (
-            ($whatToDisplay != 'my_vip_events')
-            || !$isCsvExportOfRegistrationsInMyVipEventsViewAllowed
-        ) {
+        if ($whatToDisplay != 'my_vip_events' || !$isCsvExportOfRegistrationsInMyVipEventsViewAllowed) {
             $this->hideColumns(['registrations']);
         }
     }

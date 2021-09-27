@@ -78,8 +78,8 @@ class SharedConfigurationCheck extends AbstractConfigurationCheck
     {
         $this->checkIfBoolean(
             'showToBeAnnouncedForEmptyPrice',
-            'This value specifies whether "to be announced" should be displayed instead of "free" if an event has no
-            regular price set yet.
+            'This value specifies whether &quot;to be announced&quot; should be displayed instead of &quot;free&quot;
+            if an event has no regular price set yet.
             If this value is not set correctly, the wrong wording might get displayed.'
         );
     }

@@ -125,7 +125,7 @@ abstract class AbstractFrontEndConfigurationCheck extends AbstractConfigurationC
         $this->checkIfPositiveIntegerOrEmpty(
             'defaultEventVipsFeGroupID',
             'This value specifies the front-end user group that is allowed to see the registrations for all events
-            and get all events listed on their "my VIP events" page.
+            and get all events listed on their &quot;my VIP events&quot; page.
             If this value is not set correctly, the users of this group will not be treated as VIPs for all events.'
         );
     }
@@ -147,6 +147,15 @@ abstract class AbstractFrontEndConfigurationCheck extends AbstractConfigurationC
             'showOnlyEventsWithVacancies',
             'This value specifies whether only events with vacancies should be shown in the list view.
             If this value is not configured properly, events with no vacancies will be shown in the list view.'
+        );
+    }
+
+    protected function checkShowSingleEvent(): void
+    {
+        $this->checkIfPositiveIntegerOrEmpty(
+            'showSingleEvent',
+            'This value specifies which fixed single event should be shown.
+            If this value is not set correctly, an error message will be shown instead.'
         );
     }
 }
