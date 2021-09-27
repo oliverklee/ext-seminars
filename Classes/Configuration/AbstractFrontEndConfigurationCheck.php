@@ -168,6 +168,16 @@ abstract class AbstractFrontEndConfigurationCheck extends AbstractConfigurationC
         );
     }
 
+    protected function checkRecursive(): void
+    {
+        $this->checkIfNonNegativeIntegerOrEmpty(
+            'recursive',
+            'This value specifies the how deep the recursion will be for selecting
+            the pages that contain the event records for the list view.
+            If this value is not set correctly, some events might not get displayed in the list view.'
+        );
+    }
+
     protected function checkEventEditorFeGroupID(): void
     {
         $this->checkIfPositiveInteger(
@@ -175,6 +185,26 @@ abstract class AbstractFrontEndConfigurationCheck extends AbstractConfigurationC
             'This value specifies the front-end user group that is allowed
             to enter and edit event records in the front end.
             If this value is not set correctly, FE editing for events will not work.'
+        );
+    }
+
+    protected function checkTimeframeInList(): void
+    {
+        $this->checkIfSingleInSetNotEmpty(
+            'timeframeInList',
+            'This value specifies the time-frame from which events should be displayed in the list view.
+            An incorrect value will events from a different time-frame cause to be displayed
+            and other events to not get displayed.',
+            [
+                'all',
+                'past',
+                'pastAndCurrent',
+                'current',
+                'currentAndUpcoming',
+                'upcoming',
+                'deadlineNotOver',
+                'today',
+            ]
         );
     }
 }

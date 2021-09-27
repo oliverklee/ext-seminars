@@ -132,12 +132,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
      */
     protected function check_Tx_Seminars_FrontEnd_CategoryList()
     {
-        $this->checkCommonFrontEndSettings();
-
-        $this->checkRecursive();
-        $this->checkTimeframeInList();
-
-        $this->checkListPid();
     }
 
     /**
@@ -206,71 +200,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
                 'category_list',
                 'event_headline',
             ]
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value timeframeInList.
-     *
-     * @return void
-     */
-    private function checkTimeframeInList()
-    {
-        $this->checkIfSingleInSetNotEmpty(
-            'timeframeInList',
-            true,
-            's_template_special',
-            'This value specifies the time-frame from which events should be '
-            . 'displayed in the list view. An incorrect value will events '
-            . 'from a different time-frame cause to be displayed and other '
-            . 'events to not get displayed.',
-            [
-                'all',
-                'past',
-                'pastAndCurrent',
-                'current',
-                'currentAndUpcoming',
-                'upcoming',
-                'deadlineNotOver',
-                'today',
-            ]
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value listPID.
-     *
-     * @return void
-     */
-    private function checkListPid()
-    {
-        $this->checkIfSingleFePageNotEmpty(
-            'listPID',
-            true,
-            'sDEF',
-            'This value specifies the page that contains the list of events. '
-            . 'If this value is not set correctly, the links in the list '
-            . 'view and the back link on the list of registrations will '
-            . 'not work.'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value recursive,
-     * but also allows empty values.
-     *
-     * @return void
-     */
-    private function checkRecursive()
-    {
-        $this->checkIfInteger(
-            'recursive',
-            true,
-            'sDEF',
-            'This value specifies the how deep the recursion will be for '
-            . 'selecting the pages that contain the event records for the '
-            . 'list view. If this value is not set correctly, some events '
-            . 'might not get displayed in the list view.'
         );
     }
 

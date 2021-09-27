@@ -5,14 +5,17 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Configuration;
 
 /**
- * Configuration check for the event countdown view.
+ * Configuration check for the category list.
  */
-class CountdownConfigurationCheck extends AbstractFrontEndConfigurationCheck
+class CategoryListConfigurationCheck extends AbstractFrontEndConfigurationCheck
 {
     protected function checkAllConfigurationValues(): void
     {
         $this->checkCommonFrontEndSettings();
-        $this->checkPages();
+
         $this->checkRecursive();
+        $this->checkTimeframeInList();
+
+        $this->checkListPid();
     }
 }
