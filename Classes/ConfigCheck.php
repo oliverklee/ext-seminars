@@ -69,49 +69,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
      */
     protected function check_Tx_Seminars_FrontEnd_DefaultController_seminar_list()
     {
-        $this->checkCommonFrontEndSettings();
-
-        $this->checkRegistrationFlag();
-
-        $this->checkPages();
-        $this->checkRecursive();
-        /** @var \Tx_Seminars_FrontEnd_DefaultController $objectToCheck */
-        $objectToCheck = $this->objectToCheck;
-        $this->checkListView(array_keys($objectToCheck->orderByList));
-
-        // This is checked for the list view as well because an invalid value
-        // might cause the list view to be displayed instead of the single view.
-        $this->checkShowSingleEvent();
-        $this->checkHideColumns();
-        $this->checkTimeframeInList();
-        $this->checkShowEmptyEntryInOptionLists();
-        $this->checkHidePageBrowser();
-        $this->checkHideCanceledEvents();
-        $this->checkSortListViewByCategory();
-        $this->checkGeneralPriceInList();
-        $this->checkOmitDateIfSameAsPrevious();
-        $this->checkListPid();
-        $this->checkDetailPid();
-        if ($this->objectToCheck->getConfValueBoolean('enableRegistration')) {
-            $this->checkRegisterPid();
-            $this->checkLoginPid();
-        }
-        $this->checkAccessToFrontEndRegistrationLists();
-        $this->checkRegistrationsListPidOptional();
-        $this->checkRegistrationsVipListPidOptional();
-        $this->checkDefaultEventVipsFeGroupID();
-        $this->checkLimitListViewToEventTypes();
-        $this->checkLimitListViewToCategories();
-        $this->checkLimitListViewToPlaces();
-        $this->checkLimitListViewToOrganizers();
-        $this->checkCategoryIconDisplay();
-        $this->checkSeminarImageSizes();
-        $this->checkDisplaySearchFormFields();
-        $this->checkNumberOfYearsInDateFilter();
-        $this->checkLimitFileDownloadToAttendees();
-        $this->checkShowOnlyEventsWithVacancies();
-        $this->checkEnableSortingLinksInListView();
-        $this->checkLinkToSingleView();
     }
 
     /**
@@ -253,23 +210,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
     }
 
     /**
-     * Checks the setting of the configuration value enableRegistration.
-     *
-     * @return void
-     */
-    private function checkRegistrationFlag()
-    {
-        $this->checkIfBoolean(
-            'enableRegistration',
-            false,
-            '',
-            'This value specifies whether the extension will provide online '
-            . 'registration. If this value is incorrect, the online '
-            . 'registration will not be enabled or disabled correctly.'
-        );
-    }
-
-    /**
      * Checks the setting of the configuration value what_to_display.
      *
      * @return void
@@ -297,54 +237,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
                 'countdown',
                 'category_list',
                 'event_headline',
-            ]
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value hideColumns.
-     *
-     * @return void
-     */
-    private function checkHideColumns()
-    {
-        $this->checkIfMultiInSetOrEmpty(
-            'hideColumns',
-            true,
-            's_template_special',
-            'This value specifies which columns to remove from the list view. '
-            . 'Incorrect values will cause the colums to still be displayed.',
-            [
-                'image',
-                'category',
-                'title',
-                'subtitle',
-                'uid',
-                'event_type',
-                'accreditation_number',
-                'credit_points',
-                'teaser',
-                'speakers',
-                'language',
-                'date',
-                'time',
-                'expiry',
-                'place',
-                'city',
-                'seats',
-                'country',
-                'price_regular',
-                'price_special',
-                'total_price',
-                'organizers',
-                'target_groups',
-                'attached_files',
-                'vacancies',
-                'status_registration',
-                'registration',
-                'list_registrations',
-                'status',
-                'edit',
             ]
         );
     }
@@ -378,136 +270,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
     }
 
     /**
-     * Checks the setting of the configuration value showEmptyEntryInOptionLists.
-     *
-     * @return void
-     */
-    private function checkShowEmptyEntryInOptionLists()
-    {
-        $this->checkIfBoolean(
-            'showEmptyEntryInOptionLists',
-            true,
-            's_template_special',
-            'This value specifies whether the option boxes in the selector widget '
-            . 'will contain a dummy entry called "not selected". This is only '
-            . 'needed if you changed the HTML template to show the selectors '
-            . 'as dropdown menues. If this value is incorrect, the dummy entry '
-            . 'might get displayed when this is not intended (or vice versa).'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value hidePageBrowser.
-     *
-     * @return void
-     */
-    private function checkHidePageBrowser()
-    {
-        $this->checkIfBoolean(
-            'hidePageBrowser',
-            true,
-            's_template_special',
-            'This value specifies whether the page browser in the list view '
-            . 'will be displayed. If this value is incorrect, the page '
-            . 'browser might get displayed when this is not intended (or '
-            . 'vice versa).'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value hideCanceledEvents.
-     *
-     * @return void
-     */
-    private function checkHideCanceledEvents()
-    {
-        $this->checkIfBoolean(
-            'hideCanceledEvents',
-            true,
-            's_template_special',
-            'This value specifies whether canceled events will be removed '
-            . 'from the list view. If this value is incorrect, canceled '
-            . 'events might get displayed when this is not intended (or '
-            . 'vice versa).'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value sortListViewByCategory.
-     *
-     * @return void
-     */
-    private function checkSortListViewByCategory()
-    {
-        $this->checkIfBoolean(
-            'sortListViewByCategory',
-            true,
-            's_template_special',
-            'This value specifies whether the list view should be sorted by '
-            . 'category before applying the normal sorting. If this value '
-            . 'is incorrect, the list view might get sorted by category '
-            . 'when this is not intended (or vice versa).'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value generalPriceInList.
-     *
-     * @return void
-     */
-    private function checkGeneralPriceInList()
-    {
-        $this->checkIfBoolean(
-            'generalPriceInList',
-            true,
-            's_template_special',
-            'This value specifies whether the column header for the standard '
-            . 'price in the list view will be just <em>Price</em> instead '
-            . 'of <em>Standard price</em>. '
-            . 'If this value is incorrect, the wrong label might be used.'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value omitDateIfSameAsPrevious.
-     *
-     * @return void
-     */
-    private function checkOmitDateIfSameAsPrevious()
-    {
-        $this->checkIfBoolean(
-            'omitDateIfSameAsPrevious',
-            true,
-            's_template_special',
-            'This value specifies whether to omit the date in the '
-            . 'list view if it is the same as the previous item\'s. '
-            . 'If this value is incorrect, the date might be omited '
-            . 'although this is not intended (or vice versa).'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value
-     * accessToFrontEndRegistrationLists.
-     *
-     * @return void
-     */
-    private function checkAccessToFrontEndRegistrationLists()
-    {
-        $this->checkIfSingleInSetNotEmpty(
-            'accessToFrontEndRegistrationLists',
-            false,
-            '',
-            'This value specifies who is able to see the registered persons  ' .
-            'an event in the front end. ' .
-            'If this value is incorrect, persons may access the ' .
-            'registration lists although they should not be allowed to ' .
-            '(or vice versa).',
-            ['attendees_and_managers', 'login', 'world']
-        );
-    }
-
-    /**
      * Checks the setting of the configuration value
      * allowCsvExportOfRegistrationsInMyVipEventsView.
      *
@@ -520,10 +282,10 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
             false,
             '',
             'This value specifies whether managers are allowed to access the ' .
-            'CSV export of registrations from the "my VIP events" view. ' .
+            'CSV export of registrations from the &quot;my VIP events&quot; view. ' .
             'If this value is incorrect, managers may be allowed to access ' .
-            'the CSV export of registrations from the "my VIP events ' .
-            'view" although they should not be allowed to (or vice versa).'
+            'the CSV export of registrations from the &quot;my VIP events ' .
+            'view&quot; although they should not be allowed to (or vice versa).'
         );
     }
 
@@ -541,25 +303,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
             'This value specifies whether VIPs may edit their events. If this ' .
             'value is incorrect, VIPs may be allowed to edit their events ' .
             ' although they should not be allowed to (or vice versa).'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value limitFileDownloadToAttendees.
-     *
-     * @return void
-     */
-    private function checkLimitFileDownloadToAttendees()
-    {
-        $this->checkIfBoolean(
-            'limitFileDownloadToAttendees',
-            true,
-            's_singleView',
-            'This value specifies whether the list of attached files is only ' .
-            'shown to logged in and registered attendees. If this value is ' .
-            'incorrect, the attached files may be shown to the public ' .
-            'although they should be visible only to the attendees ' .
-            '(or vice versa).'
         );
     }
 
@@ -582,84 +325,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
     }
 
     /**
-     * Checks the setting of the configuration value detailPID.
-     *
-     * @return void
-     */
-    private function checkDetailPid()
-    {
-        $this->checkIfSingleFePageNotEmpty(
-            'detailPID',
-            true,
-            'sDEF',
-            'This value specifies the page that contains the detailed view. '
-            . 'If this value is not set correctly, the links to single '
-            . 'events will not work as expected.'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value registerPID.
-     *
-     * @return void
-     */
-    private function checkRegisterPid()
-    {
-        $this->checkIfSingleFePageNotEmpty(
-            'registerPID',
-            true,
-            'sDEF',
-            'This value specifies the page that contains the registration '
-            . 'form. If this value is not set correctly, the link to the '
-            . 'registration page will not work. If you explicitly do not '
-            . 'wish to use the online registration feature, you can '
-            . 'disable these checks by setting '
-            . '<strong>plugin.tx_seminars.enableRegistration</strong> and '
-            . '<strong>plugin.tx_seminars_pi1.enableRegistration</strong> '
-            . 'to 0.'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value loginPID.
-     *
-     * @return void
-     */
-    private function checkLoginPid()
-    {
-        $this->checkIfSingleFePageNotEmpty(
-            'loginPID',
-            true,
-            'sDEF',
-            'This value specifies the page that contains the login form. '
-            . 'If this value is not set correctly, the link to the '
-            . 'login page will not work. If you explicitly do not '
-            . 'wish to use the online registration feature, you can '
-            . 'disable these checks by setting '
-            . '<strong>plugin.tx_seminars.enableRegistration</strong> and '
-            . '<strong>plugin.tx_seminars_pi1.enableRegistration</strong> '
-            . 'to 0.'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value registrationsListPID.
-     *
-     * @return void
-     */
-    private function checkRegistrationsListPidOptional()
-    {
-        $this->checkIfSingleFePageOrEmpty(
-            'registrationsListPID',
-            true,
-            'sDEF',
-            'This value specifies the page that contains the list of '
-            . 'registrations for an event. If this value is not set '
-            . 'correctly, the link to that page will not work.'
-        );
-    }
-
-    /**
      * Checks the setting of the configuration value registrationsVipListPID.
      *
      * @return void
@@ -667,24 +332,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
     private function checkRegistrationsVipListPid()
     {
         $this->checkIfSingleFePageNotEmpty(
-            'registrationsVipListPID',
-            true,
-            'sDEF',
-            'This value specifies the page that contains the list of '
-            . 'registrations for an event. If this value is not set '
-            . 'correctly, the link to that page will not work.'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value registrationsVipListPID,
-     * but also allows empty values.
-     *
-     * @return void
-     */
-    private function checkRegistrationsVipListPidOptional()
-    {
-        $this->checkIfSingleFePageOrEmpty(
             'registrationsVipListPID',
             true,
             'sDEF',
@@ -778,7 +425,7 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
             '',
             'This value specifies the front-end user group that is allowed to '
             . 'see the registrations for all events and get all events listed '
-            . 'on their "my VIP events" page. If this value is not set '
+            . 'on their &quot;my VIP events&quot; page. If this value is not set '
             . 'correctly, the users of this group will not be treated as '
             . 'VIPs for all events.'
         );
@@ -1055,125 +702,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
     }
 
     /**
-     * Checks the setting of the configuration value
-     * showSingleEvent.
-     *
-     * @return void
-     */
-    private function checkShowSingleEvent()
-    {
-        $this->checkIfPositiveIntegerOrEmpty(
-            'showSingleEvent',
-            true,
-            's_template_special',
-            'This value specifies which fixed single event should be shown. If '
-            . 'this value is not set correctly, an error message will be '
-            . 'shown instead.'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value
-     * limitListViewToEventTypes.
-     *
-     * @return void
-     */
-    private function checkLimitListViewToEventTypes()
-    {
-        $this->checkIfPidListOrEmpty(
-            'limitListViewToEventTypes',
-            true,
-            's_listView',
-            'This value specifies the event types by which the list view ' .
-            'should be filtered. If this value is not set correctly, ' .
-            'some events might unintentionally get hidden or shown.'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value
-     * limitListViewToCategories.
-     *
-     * @return void
-     */
-    private function checkLimitListViewToCategories()
-    {
-        $this->checkIfPidListOrEmpty(
-            'limitListViewToCategories',
-            true,
-            's_listView',
-            'This value specifies the categories by which the list view ' .
-            'should be filtered. If this value is not set correctly, ' .
-            'some events might unintentionally get hidden or shown.'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value
-     * limitListViewToPlaces.
-     *
-     * @return void
-     */
-    private function checkLimitListViewToPlaces()
-    {
-        $this->checkIfPidListOrEmpty(
-            'limitListViewToPlaces',
-            true,
-            's_listView',
-            'This value specifies the places for which the list view ' .
-            'should be filtered. If this value is not set correctly, ' .
-            'some events might unintentionally get hidden or shown.'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value
-     * limitListViewToOrganizers.
-     *
-     * @return void
-     */
-    private function checkLimitListViewToOrganizers()
-    {
-        $this->checkIfPidListOrEmpty(
-            'limitListViewToOrganizers',
-            true,
-            's_listView',
-            'This value specifies the organizers for which the list view ' .
-            'should be filtered. If this value is not set correctly, ' .
-            'some events might unintentionally get hidden or shown.'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value categoriesInListView.
-     *
-     * @return void
-     */
-    private function checkCategoryIconDisplay()
-    {
-        $this->checkIfSingleInSetNotEmpty(
-            'categoriesInListView',
-            true,
-            's_listView',
-            'This setting determines whether the seminar category is shown, as ' .
-            'icon and text, as text only or as icon only. If this value is ' .
-            'not set correctly, the category will only be shown as text.',
-            ['both', 'text', 'icon']
-        );
-    }
-
-    /**
-     * Checks the settings for the image width, and height in the list view.
-     *
-     * @return void
-     */
-    private function checkSeminarImageSizes()
-    {
-        $this->checkListViewImageWidth();
-        $this->checkListViewImageHeight();
-    }
-
-    /**
      * Checks the settings for seminarImageListViewWidth.
      *
      * @return void
@@ -1202,86 +730,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
             '',
             'This value specifies the height of the image of a seminar. If ' .
             'this value is not set, the image will be shown in full size.'
-        );
-    }
-
-    /**
-     * Checks the settings for seminarImageSingleViewWidth.
-     *
-     * @return void
-     */
-    private function checkSingleViewImageWidth()
-    {
-        $this->checkIfPositiveInteger(
-            'seminarImageSingleViewWidth',
-            false,
-            '',
-            'This value specifies the width of the image of a seminar. If this ' .
-            'value is not set, the image will be shown in full size.'
-        );
-    }
-
-    /**
-     * Checks the settings for seminarImageSingleViewHeight.
-     *
-     * @return void
-     */
-    private function checkSingleViewImageHeight()
-    {
-        $this->checkIfPositiveInteger(
-            'seminarImageSingleViewHeight',
-            false,
-            '',
-            'This value specifies the height of the image of a seminar. If ' .
-            'this value is not set, the image will be shown in full size.'
-        );
-    }
-
-    /**
-     * Checks the setting for displaySearchFormFields.
-     *
-     * @return void
-     */
-    private function checkDisplaySearchFormFields()
-    {
-        $this->checkIfMultiInSetOrEmpty(
-            'displaySearchFormFields',
-            true,
-            's_listView',
-            'This value specifies which search widget fields to display in the ' .
-            'list view. The search widget will not display any fields at ' .
-            'all if this value is empty or contains only invalid keys.',
-            [
-                'event_type',
-                'language',
-                'country',
-                'city',
-                'place',
-                'full_text_search',
-                'date',
-                'age',
-                'organizer',
-                'categories',
-                'price',
-            ]
-        );
-    }
-
-    /**
-     * Checks the settings for numberOfYearsInDateFilter.
-     *
-     * @return void
-     */
-    private function checkNumberOfYearsInDateFilter()
-    {
-        $this->checkIfPositiveInteger(
-            'numberOfYearsInDateFilter',
-            true,
-            's_listView',
-            'This value specifies the number years of years the user can ' .
-            'search for events in the event list. The date search will ' .
-            'have an empty drop-down for the year if this variable is ' .
-            'misconfigured.'
         );
     }
 
@@ -1549,24 +997,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
     }
 
     /**
-     * Checks the setting of the configuration value showOnlyEventsWithVacancies.
-     *
-     * @return void
-     */
-    private function checkShowOnlyEventsWithVacancies()
-    {
-        $this->checkIfBoolean(
-            'showOnlyEventsWithVacancies',
-            true,
-            's_listView',
-            'This value specifies whether only events with vacancies should be ' .
-            'shown in the list view. If this value is not configured ' .
-            'properly, events with no vacancies will be shown in the ' .
-            'list view.'
-        );
-    }
-
-    /**
      * Checks whether plugin.tx_seminars.currency is not empty and a valid ISO
      * 4217 alpha 3.
      *
@@ -1606,46 +1036,6 @@ class Tx_Seminars_ConfigCheck extends ConfigurationCheck
             'should also be exported in the CSV file in the e-mail mode.' .
             'If this is not set correctly, the attendances on the ' .
             'registration queue might not get exported.'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value
-     * enableSortingLinksInListView.
-     *
-     * @return void
-     */
-    private function checkEnableSortingLinksInListView()
-    {
-        $this->checkIfBoolean(
-            'enableSortingLinksInListView',
-            false,
-            '',
-            'This value specifies whether the list view header should be sorting links. ' .
-            'If this value is incorrect, the sorting might be enabled ' .
-            'even when this is not desired (or vice versa).'
-        );
-    }
-
-    /**
-     * Checks the setting of the configuration value linkToSingleView.
-     *
-     * @return void
-     */
-    private function checkLinkToSingleView()
-    {
-        $this->checkIfSingleInSetNotEmpty(
-            'linkToSingleView',
-            true,
-            's_listView',
-            'This value specifies when the list view will link to the single view. '
-            . 'If this value is not set correctly, the single view might not be linked although this is intended '
-            . '(or vice versa).',
-            [
-                'always',
-                'never',
-                'onlyForNonEmptyDescription',
-            ]
         );
     }
 }

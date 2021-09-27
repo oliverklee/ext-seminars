@@ -38,15 +38,6 @@ class SingleViewConfigurationCheck extends AbstractFrontEndConfigurationCheck
         $this->checkShowOnlyEventsWithVacancies();
     }
 
-    private function checkShowSingleEvent(): void
-    {
-        $this->checkIfPositiveIntegerOrEmpty(
-            'showSingleEvent',
-            'This value specifies which fixed single event should be shown.
-            If this value is not set correctly, an error message will be shown instead.'
-        );
-    }
-
     private function checkHideFields(): void
     {
         $this->checkIfMultiInSetOrEmpty(
