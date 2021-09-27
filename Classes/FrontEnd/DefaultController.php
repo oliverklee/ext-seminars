@@ -253,21 +253,6 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
         }
 
         $this->whatToDisplay = $this->getConfValueString('what_to_display');
-
-        if (
-            !\in_array(
-                $this->whatToDisplay,
-                [
-                    'list_registrations',
-                    'list_vip_registrations',
-                    'countdown',
-                    'category_list',
-                ]
-            )
-        ) {
-            $this->setFlavor($this->whatToDisplay);
-        }
-
         switch ($this->whatToDisplay) {
             case 'single_view':
                 $result = $this->createSingleView();
