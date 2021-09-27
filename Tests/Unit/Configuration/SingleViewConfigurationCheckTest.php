@@ -19,9 +19,16 @@ final class SingleViewConfigurationCheckTest extends UnitTestCase
      */
     private $subject;
 
+    /**
+     * @var DummyConfiguration
+     */
+    private $configuration;
+
     protected function setUp(): void
     {
-        $this->subject = new SingleViewConfigurationCheck(new DummyConfiguration(), 'plugin.tx_seminars_pi1');
+        $this->configuration = new DummyConfiguration();
+
+        $this->subject = new SingleViewConfigurationCheck($this->configuration, 'plugin.tx_seminars_pi1');
     }
 
     /**
@@ -30,5 +37,56 @@ final class SingleViewConfigurationCheckTest extends UnitTestCase
     public function isConfigurationCheck(): void
     {
         self::assertInstanceOf(AbstractConfigurationCheck::class, $this->subject);
+    }
+
+    /**
+     * @test
+     */
+    public function checkWithEmptyConfigurationCreatesErrors(): void
+    {
+        $this->subject->check();
+
+        $result = $this->subject->getWarningsAsHtml();
+        self::assertNotSame([], $result);
+    }
+
+    /**
+     * @test
+     */
+    public function checkWithEmptyConfigurationUsesProvidedNamespaceForErrors(): void
+    {
+        $this->subject->check();
+
+        $result = $this->subject->getWarningsAsHtml();
+        self::assertArrayHasKey(1, $result);
+        self::assertStringContainsString('plugin.tx_seminars_pi1', $result[1]);
+    }
+
+    /**
+     * @test
+     */
+    public function checkWithRegistrationEnabledCreatesErrors(): void
+    {
+        $this->configuration->setAsBoolean('enableRegistration', true);
+
+        $this->subject->check();
+
+        $result = $this->subject->getWarningsAsHtml();
+        self::assertArrayHasKey(1, $result);
+        self::assertStringContainsString('plugin.tx_seminars_pi1', $result[1]);
+    }
+
+    /**
+     * @test
+     */
+    public function checkWithShowOwnerDataCreatesErrors(): void
+    {
+        $this->configuration->setAsString('showOwnerDataInSingleView', 's_singleView');
+
+        $this->subject->check();
+
+        $result = $this->subject->getWarningsAsHtml();
+        self::assertArrayHasKey(1, $result);
+        self::assertStringContainsString('plugin.tx_seminars_pi1', $result[1]);
     }
 }
