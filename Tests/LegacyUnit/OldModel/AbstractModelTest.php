@@ -7,7 +7,6 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\OldModel;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingModel;
-use OliverKlee\Seminars\Tests\Unit\OldModel\Fixtures\TestingModelWithConfiguration;
 
 /**
  * @covers \OliverKlee\Seminars\OldModel\AbstractModel
@@ -152,19 +151,7 @@ final class AbstractModelTest extends TestCase
         );
     }
 
-    /**
-     * @test
-     */
-    public function typoScriptConfigurationIsLoaded()
-    {
-        $subject = new TestingModelWithConfiguration($this->subjectUid);
-
-        self::assertTrue($subject->getConfValueBoolean('isStaticTemplateLoaded'));
-    }
-
-    ////////////////////////////////
     // Tests concerning getPageUid
-    ////////////////////////////////
 
     /**
      * @test

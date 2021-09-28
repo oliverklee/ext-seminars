@@ -480,22 +480,6 @@ abstract class AbstractModel extends TemplateHelper
     }
 
     /**
-     * Gets our PID.
-     *
-     * @return int our PID (or 0 if there is an error)
-     */
-    public function getCurrentBePageId(): int
-    {
-        $result = parent::getCurrentBePageId();
-
-        if (!$result) {
-            $result = $this->getRecordPropertyInteger('pid');
-        }
-
-        return $result;
-    }
-
-    /**
      * Gets an HTML image tag with the URL of the icon file of the record as
      * configured in TCA.
      *
