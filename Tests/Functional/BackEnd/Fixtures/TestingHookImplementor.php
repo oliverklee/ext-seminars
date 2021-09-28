@@ -27,17 +27,17 @@ final class TestingHookImplementor implements \Tx_Seminars_Interfaces_Hook_BackE
      */
     private $countCallForCancelEmail = 0;
 
-    public function modifyGeneralEmail(\Tx_Seminars_Model_Registration $registration, MailMessage $eMail)
+    public function modifyGeneralEmail(\Tx_Seminars_Model_Registration $registration, MailMessage $eMail): void
     {
         $this->countCallForGeneralEmail++;
     }
 
-    public function modifyConfirmEmail(\Tx_Seminars_Model_Registration $registration, MailMessage $eMail)
+    public function modifyConfirmEmail(\Tx_Seminars_Model_Registration $registration, MailMessage $eMail): void
     {
         $this->countCallForConfirmEmail++;
     }
 
-    public function modifyCancelEmail(\Tx_Seminars_Model_Registration $registration, MailMessage $eMail)
+    public function modifyCancelEmail(\Tx_Seminars_Model_Registration $registration, MailMessage $eMail): void
     {
         $this->countCallForCancelEmail++;
     }

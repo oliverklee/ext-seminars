@@ -45,7 +45,7 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
         ],
     ];
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -88,7 +88,7 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function sendEmailForTwoRegistrationsSendsTwoEmails()
+    public function sendEmailForTwoRegistrationsSendsTwoEmails(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 
@@ -112,7 +112,7 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function sendEmailSendsEmailWithNameOfRegisteredUserInSalutationMarker()
+    public function sendEmailSendsEmailWithNameOfRegisteredUserInSalutationMarker(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 
@@ -138,7 +138,7 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function sendEmailUsesTypo3DefaultFromAddressAsSender()
+    public function sendEmailUsesTypo3DefaultFromAddressAsSender(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 
@@ -164,7 +164,7 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function sendEmailUsesFirstOrganizerAsSender()
+    public function sendEmailUsesFirstOrganizerAsSender(): void
     {
         $GLOBALS['TYPO3_CONF_VARS']['MAIL'] = [];
 
@@ -191,7 +191,7 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function sendEmailUsesFirstOrganizerAsReplyTo()
+    public function sendEmailUsesFirstOrganizerAsReplyTo(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 
@@ -216,7 +216,7 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function sendEmailAppendsFirstOrganizerFooterToMessageBody()
+    public function sendEmailAppendsFirstOrganizerFooterToMessageBody(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 
@@ -242,7 +242,7 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function sendEmailUsesProvidedEmailSubject()
+    public function sendEmailUsesProvidedEmailSubject(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 
@@ -267,7 +267,7 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function sendEmailNotSendsEmailToUserWithoutEmailAddress()
+    public function sendEmailNotSendsEmailToUserWithoutEmailAddress(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 
@@ -289,7 +289,7 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function redirectsToListViewAfterSendingEmail()
+    public function redirectsToListViewAfterSendingEmail(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 

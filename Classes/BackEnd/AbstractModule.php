@@ -59,10 +59,7 @@ abstract class AbstractModule extends BaseScriptClass
         $this->MCONF = ['name' => static::MODULE_NAME];
     }
 
-    /**
-     * @return void
-     */
-    public function init()
+    public function init(): void
     {
         parent::init();
         $this->id = (int)GeneralUtility::_GP('id');
@@ -83,10 +80,8 @@ abstract class AbstractModule extends BaseScriptClass
      * Sets the data for the current BE page.
      *
      * @param array<string, string|int> $pageData page data, may be empty
-     *
-     * @return void
      */
-    public function setPageData(array $pageData)
+    public function setPageData(array $pageData): void
     {
         $this->pageData = $pageData;
     }

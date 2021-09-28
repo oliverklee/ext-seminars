@@ -27,7 +27,7 @@ final class CancelEventMailFormTest extends FunctionalTestCase
      */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -38,7 +38,7 @@ final class CancelEventMailFormTest extends FunctionalTestCase
         $this->email = $this->createEmailMock();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         GeneralUtility::purgeInstances();
         unset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['backEndModule']);
@@ -49,7 +49,7 @@ final class CancelEventMailFormTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function sendEmailSetsEventStatusToCanceled()
+    public function sendEmailSetsEventStatusToCanceled(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 
@@ -73,7 +73,7 @@ final class CancelEventMailFormTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function sendEmailCallsHookWithRegistration()
+    public function sendEmailCallsHookWithRegistration(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 
@@ -103,7 +103,7 @@ final class CancelEventMailFormTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function sendEmailForTwoRegistrationsCallsHookTwice()
+    public function sendEmailForTwoRegistrationsCallsHookTwice(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 
@@ -134,7 +134,7 @@ final class CancelEventMailFormTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function sendEmailSendsEmailWithNameOfRegisteredUserInSalutationMarker()
+    public function sendEmailSendsEmailWithNameOfRegisteredUserInSalutationMarker(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 

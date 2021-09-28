@@ -37,13 +37,8 @@ class GeneralEventMailForm extends AbstractEventMailForm
 
     /**
      * Calls all registered hooks for modifying the e-mail.
-     *
-     * @param \Tx_Seminars_Model_Registration $registration
-     *        the registration to which the e-mail refers
-     *
-     * @return void
      */
-    protected function modifyEmailWithHook(\Tx_Seminars_Model_Registration $registration, MailMessage $eMail)
+    protected function modifyEmailWithHook(\Tx_Seminars_Model_Registration $registration, MailMessage $eMail): void
     {
         foreach ($this->getHooks() as $hook) {
             $hook->modifyGeneralEmail($registration, $eMail);

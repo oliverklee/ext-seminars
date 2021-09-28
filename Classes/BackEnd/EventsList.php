@@ -75,10 +75,8 @@ class EventsList extends AbstractList
      * Sets the labels for the heading for the events table.
      *
      * The labels are set directly in the template, so nothing is returned.
-     *
-     * @return void
      */
-    private function createTableHeading()
+    private function createTableHeading(): void
     {
         $languageService = $this->getLanguageService();
 
@@ -128,12 +126,8 @@ class EventsList extends AbstractList
      * Creates all table rows for the list view.
      *
      * The table rows are set directly in the template, so nothing is returned.
-     *
-     * @param \Tx_Seminars_Bag_Event $events the events to list
-     *
-     * @return void
      */
-    private function createListBody(\Tx_Seminars_Bag_Event $events)
+    private function createListBody(\Tx_Seminars_Bag_Event $events): void
     {
         $tableRows = '';
 
@@ -315,12 +309,8 @@ class EventsList extends AbstractList
      * event.
      *
      * The button will only be visible if the event has at least one registration.
-     *
-     * @param \Tx_Seminars_OldModel_Event $event the event to get the e-mail button for
-     *
-     * @return void
      */
-    private function setEmailButtonMarkers(\Tx_Seminars_OldModel_Event $event)
+    private function setEmailButtonMarkers(\Tx_Seminars_OldModel_Event $event): void
     {
         if (!$event->hasAttendances()) {
             $this->template->hideSubpartsArray(['EMAIL_BUTTON']);
@@ -349,10 +339,8 @@ class EventsList extends AbstractList
      * In all other cases the corresponding subpart is hidden.
      *
      * @param \Tx_Seminars_OldModel_Event $event the event to get the cancel button for
-     *
-     * @return void
      */
-    private function setCancelButtonMarkers(\Tx_Seminars_OldModel_Event $event)
+    private function setCancelButtonMarkers(\Tx_Seminars_OldModel_Event $event): void
     {
         $this->template->unhideSubpartsArray(['CANCEL_BUTTON']);
         $pageData = $this->page->getPageData();
@@ -384,12 +372,8 @@ class EventsList extends AbstractList
      * - the event is not confirmed yet
      * - the event has not started yet
      * In all other cases the corresponding subpart is hidden.
-     *
-     * @param \Tx_Seminars_OldModel_Event $event the event to get the confirm button for
-     *
-     * @return void
      */
-    private function setConfirmButtonMarkers(\Tx_Seminars_OldModel_Event $event)
+    private function setConfirmButtonMarkers(\Tx_Seminars_OldModel_Event $event): void
     {
         $this->template->unhideSubpartsArray(['CONFIRM_BUTTON']);
         $pageData = $this->page->getPageData();

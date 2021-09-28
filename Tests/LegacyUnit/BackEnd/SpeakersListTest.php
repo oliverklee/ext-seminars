@@ -33,7 +33,7 @@ final class SpeakersListTest extends TestCase
      */
     private $dummySysFolderPid = 0;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->unifyTestingEnvironment();
 
@@ -55,7 +55,7 @@ final class SpeakersListTest extends TestCase
         $this->subject = new SpeakersList($backEndModule);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
         $this->restoreOriginalEnvironment();
@@ -64,7 +64,7 @@ final class SpeakersListTest extends TestCase
     /**
      * @test
      */
-    public function showContainsHideButtonForVisibleSpeaker()
+    public function showContainsHideButtonForVisibleSpeaker(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_speakers',
@@ -83,7 +83,7 @@ final class SpeakersListTest extends TestCase
     /**
      * @test
      */
-    public function showContainsUnhideButtonForHiddenSpeaker()
+    public function showContainsUnhideButtonForHiddenSpeaker(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_speakers',
@@ -102,7 +102,7 @@ final class SpeakersListTest extends TestCase
     /**
      * @test
      */
-    public function showContainsSpeakerFromSubfolder()
+    public function showContainsSpeakerFromSubfolder(): void
     {
         $subfolderPid = $this->testingFramework->createSystemFolder(
             $this->dummySysFolderPid
@@ -128,7 +128,7 @@ final class SpeakersListTest extends TestCase
     /**
      * @test
      */
-    public function newButtonForSpeakerStorageSettingSetInUsersGroupSetsThisPidAsNewRecordPid()
+    public function newButtonForSpeakerStorageSettingSetInUsersGroupSetsThisPidAsNewRecordPid(): void
     {
         $newSpeakerFolder = $this->dummySysFolderPid + 1;
         $backEndGroup = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUserGroup::class)

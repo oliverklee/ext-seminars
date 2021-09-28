@@ -200,10 +200,8 @@ abstract class AbstractEventMailForm
      * mail and do any further processing with the event.
      *
      * This method is public for testing only.
-     *
-     * @return void
      */
-    public function markAsIncomplete()
+    public function markAsIncomplete(): void
     {
         $this->isComplete = false;
     }
@@ -340,10 +338,8 @@ abstract class AbstractEventMailForm
      * Sets the POST data.
      *
      * @param array $postData associative array with the POST data, may be empty
-     *
-     * @return void
      */
-    public function setPostData(array $postData)
+    public function setPostData(array $postData): void
     {
         $this->postData = $postData;
     }
@@ -385,10 +381,8 @@ abstract class AbstractEventMailForm
 
     /**
      * Sends an e-mail to the attendees to inform about the changed event status.
-     *
-     * @return void
      */
-    private function sendEmailToAttendees()
+    private function sendEmailToAttendees(): void
     {
         $event = $this->getEvent();
         $organizer = $event->getFirstOrganizer();
@@ -437,10 +431,8 @@ abstract class AbstractEventMailForm
      * Adds a flash message to the queue.
      *
      * @param FlashMessage $flashMessage
-     *
-     * @return void
      */
-    protected function addFlashMessage(FlashMessage $flashMessage)
+    protected function addFlashMessage(FlashMessage $flashMessage): void
     {
         /** @var FlashMessageService $flashMessageService */
         $flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);
@@ -450,32 +442,22 @@ abstract class AbstractEventMailForm
 
     /**
      * Calls all registered hooks for modifying the e-mail.
-     *
-     * @param \Tx_Seminars_Model_Registration $registration
-     *        the registration to which the e-mail refers
-     *
-     * @return void
      */
-    protected function modifyEmailWithHook(\Tx_Seminars_Model_Registration $registration, MailMessage $eMail)
+    protected function modifyEmailWithHook(\Tx_Seminars_Model_Registration $registration, MailMessage $eMail): void
     {
     }
 
     /**
-     * Marks an event according to the status to set (if any) and commits the
-     * change to the database.
-     *
-     * @return void
+     * Marks an event according to the status to set (if any) and commits the change to the database.
      */
-    protected function setEventStatus()
+    protected function setEventStatus(): void
     {
     }
 
     /**
      * Redirects to the list view.
-     *
-     * @return void
      */
-    private function redirectToListView()
+    private function redirectToListView(): void
     {
         $urlParameters = ['id' => PageFinder::getInstance()->getPageUid()];
         $url = $this->getRouteUrl(self::MODULE_NAME, $urlParameters);
@@ -617,14 +599,10 @@ abstract class AbstractEventMailForm
     /**
      * Sets an error message.
      *
-     * @param string $fieldName
-     *        the field name to set the error message for, must be "messageBody"
-     *        or "subject"
+     * @param string $fieldName the field name to set the error message for, must be "messageBody" or "subject"
      * @param string $message the error message to set, may be empty
-     *
-     * @return void
      */
-    protected function setErrorMessage(string $fieldName, string $message)
+    protected function setErrorMessage(string $fieldName, string $message): void
     {
         if ($this->hasErrorMessage($fieldName)) {
             $this->errorMessages[$fieldName] .= '<br />' . $message;

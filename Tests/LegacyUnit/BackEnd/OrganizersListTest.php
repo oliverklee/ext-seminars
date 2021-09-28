@@ -33,7 +33,7 @@ final class OrganizersListTest extends TestCase
      */
     private $dummySysFolderPid = 0;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->unifyTestingEnvironment();
 
@@ -55,7 +55,7 @@ final class OrganizersListTest extends TestCase
         $this->subject = new OrganizersList($backEndModule);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
         $this->restoreOriginalEnvironment();
@@ -64,7 +64,7 @@ final class OrganizersListTest extends TestCase
     /**
      * @test
      */
-    public function showContainsOrganizerFromSubfolder()
+    public function showContainsOrganizerFromSubfolder(): void
     {
         $subfolderPid = $this->testingFramework->createSystemFolder(
             $this->dummySysFolderPid
@@ -90,7 +90,7 @@ final class OrganizersListTest extends TestCase
     /**
      * @test
      */
-    public function newButtonForOrganizerStorageSettingSetInUsersGroupSetsThisPidAsNewRecordPid()
+    public function newButtonForOrganizerStorageSettingSetInUsersGroupSetsThisPidAsNewRecordPid(): void
     {
         $newOrganizerFolder = $this->dummySysFolderPid + 1;
         $backEndGroup = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUserGroup::class)

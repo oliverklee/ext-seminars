@@ -31,7 +31,7 @@ final class EventsListTest extends FunctionalTestCase
      */
     private $backEndModule = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -47,7 +47,7 @@ final class EventsListTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function showForEventWithoutRegistrationsNotContainsShowRegistrationsLink()
+    public function showForEventWithoutRegistrationsNotContainsShowRegistrationsLink(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 
@@ -65,7 +65,7 @@ final class EventsListTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function showForEventWithoutRegistrationsNotContainsEmailButton()
+    public function showForEventWithoutRegistrationsNotContainsEmailButton(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Records.xml');
 

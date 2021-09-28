@@ -17,10 +17,8 @@ class TceForms
      * Creates the values for a language selector in the TCA, using the alpha 2 codes as array keys.
      *
      * @param array[] $parameters
-     *
-     * @return void
      */
-    public function createLanguageSelector(array &$parameters)
+    public function createLanguageSelector(array &$parameters): void
     {
         $items = [['', '']];
 
@@ -36,10 +34,8 @@ class TceForms
      * Creates the values for a country selector in the TCA, using the alpha 2 codes as array keys.
      *
      * @param array[] $parameters
-     *
-     * @return void
      */
-    public function createCountrySelector(array &$parameters)
+    public function createCountrySelector(array &$parameters): void
     {
         $items = [['', '']];
 

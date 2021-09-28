@@ -20,13 +20,13 @@ final class FlexFormsTest extends TestCase
      */
     private $testingFramework = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->subject = new FlexForms();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
     }
@@ -34,7 +34,7 @@ final class FlexFormsTest extends TestCase
     /**
      * @test
      */
-    public function classCanBeInstantiated()
+    public function classCanBeInstantiated(): void
     {
         self::assertInstanceOf(FlexForms::class, $this->subject);
     }

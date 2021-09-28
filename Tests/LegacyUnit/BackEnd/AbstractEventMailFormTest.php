@@ -34,7 +34,7 @@ final class AbstractEventMailFormTest extends TestCase
      */
     private $eventUid;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->unifyTestingEnvironment();
 
@@ -72,7 +72,7 @@ final class AbstractEventMailFormTest extends TestCase
         $this->subject->setDateFormat();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         ConfigurationRegistry::purgeInstance();
         $this->testingFramework->cleanUp();
@@ -86,7 +86,7 @@ final class AbstractEventMailFormTest extends TestCase
     /**
      * @test
      */
-    public function renderThrowsExceptionForInvalidEventUid()
+    public function renderThrowsExceptionForInvalidEventUid(): void
     {
         $this->expectException(NotFoundException::class);
         $this->expectExceptionMessage('There is no event with this UID.');
@@ -103,7 +103,7 @@ final class AbstractEventMailFormTest extends TestCase
     /**
      * @test
      */
-    public function formActionContainsCurrentPage()
+    public function formActionContainsCurrentPage(): void
     {
         PageFinder::getInstance()->setPageUid(42);
 
@@ -116,7 +116,7 @@ final class AbstractEventMailFormTest extends TestCase
     /**
      * @test
      */
-    public function renderContainsEventTitleInSubjectFieldForNewForm()
+    public function renderContainsEventTitleInSubjectFieldForNewForm(): void
     {
         self::assertStringContainsString(
             'Dummy Event',
@@ -127,7 +127,7 @@ final class AbstractEventMailFormTest extends TestCase
     /**
      * @test
      */
-    public function renderContainsPrefilledBodyField()
+    public function renderContainsPrefilledBodyField(): void
     {
         self::assertStringContainsString(
             $this->getLanguageService()->getLL('testForm_prefillField_messageBody'),
@@ -138,7 +138,7 @@ final class AbstractEventMailFormTest extends TestCase
     /**
      * @test
      */
-    public function renderContainsBodyFieldWithIntroduction()
+    public function renderContainsBodyFieldWithIntroduction(): void
     {
         self::assertStringContainsString(
             \sprintf(
@@ -152,7 +152,7 @@ final class AbstractEventMailFormTest extends TestCase
     /**
      * @test
      */
-    public function renderNotPrefillsSubjectFieldIfEmptyStringWasSentViaPost()
+    public function renderNotPrefillsSubjectFieldIfEmptyStringWasSentViaPost(): void
     {
         $this->subject->setPostData(
             [
@@ -171,7 +171,7 @@ final class AbstractEventMailFormTest extends TestCase
     /**
      * @test
      */
-    public function renderContainsEventDateInSubjectFieldForNewFormAndEventWithBeginDate()
+    public function renderContainsEventDateInSubjectFieldForNewFormAndEventWithBeginDate(): void
     {
         self::assertContains(
             strftime('%d.%m.%Y', $GLOBALS['SIM_EXEC_TIME'] + 42),
@@ -182,7 +182,7 @@ final class AbstractEventMailFormTest extends TestCase
     /**
      * @test
      */
-    public function renderSanitizesPostDataWhenPreFillingAFormField()
+    public function renderSanitizesPostDataWhenPreFillingAFormField(): void
     {
         $this->subject->setPostData(
             [
@@ -202,7 +202,7 @@ final class AbstractEventMailFormTest extends TestCase
     /**
      * @test
      */
-    public function renderFormContainsCancelButton()
+    public function renderFormContainsCancelButton(): void
     {
         self::assertStringContainsString(
             '<input type="button" value="' .
@@ -216,7 +216,7 @@ final class AbstractEventMailFormTest extends TestCase
     /**
      * @test
      */
-    public function renderContainsErrorMessageIfFormWasSubmittedWithEmptySubjectField()
+    public function renderContainsErrorMessageIfFormWasSubmittedWithEmptySubjectField(): void
     {
         $this->subject->setPostData(
             [
@@ -235,7 +235,7 @@ final class AbstractEventMailFormTest extends TestCase
     /**
      * @test
      */
-    public function renderContainsErrorMessageIfFormWasSubmittedWithEmptyMessageField()
+    public function renderContainsErrorMessageIfFormWasSubmittedWithEmptyMessageField(): void
     {
         $this->subject->setPostData(
             [
@@ -254,7 +254,7 @@ final class AbstractEventMailFormTest extends TestCase
     /**
      * @test
      */
-    public function renderContainsSubjectFieldPrefilledByUserInputIfFormIsReRendered()
+    public function renderContainsSubjectFieldPrefilledByUserInputIfFormIsReRendered(): void
     {
         $this->subject->setPostData(
             [
@@ -274,7 +274,7 @@ final class AbstractEventMailFormTest extends TestCase
     /**
      * @test
      */
-    public function renderEncodesHtmlSpecialCharsInSubjectField()
+    public function renderEncodesHtmlSpecialCharsInSubjectField(): void
     {
         $this->subject->setPostData(
             [
@@ -293,7 +293,7 @@ final class AbstractEventMailFormTest extends TestCase
     /**
      * @test
      */
-    public function renderContainsMessageFieldPrefilledByUserInputIfFormIsReRendered()
+    public function renderContainsMessageFieldPrefilledByUserInputIfFormIsReRendered(): void
     {
         $this->subject->setPostData(
             [
@@ -313,7 +313,7 @@ final class AbstractEventMailFormTest extends TestCase
     /**
      * @test
      */
-    public function renderContainsHiddenFieldWithVariableEventUid()
+    public function renderContainsHiddenFieldWithVariableEventUid(): void
     {
         self::assertStringContainsString(
             '<input type="hidden" name="eventUid" value="' . $this->eventUid . '" />',
@@ -328,7 +328,7 @@ final class AbstractEventMailFormTest extends TestCase
     /**
      * @test
      */
-    public function getInitialValueForSubjectAppendsEventTitle()
+    public function getInitialValueForSubjectAppendsEventTitle(): void
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -349,7 +349,7 @@ final class AbstractEventMailFormTest extends TestCase
     /**
      * @test
      */
-    public function getInitialValueForSubjectAppendsEventDate()
+    public function getInitialValueForSubjectAppendsEventDate(): void
     {
         $beginDate = strftime('%d.%m.%Y', $GLOBALS['SIM_EXEC_TIME'] + 42);
 
@@ -362,7 +362,7 @@ final class AbstractEventMailFormTest extends TestCase
     /**
      * @test
      */
-    public function getInitialValueForFooThrowsException()
+    public function getInitialValueForFooThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -381,7 +381,7 @@ final class AbstractEventMailFormTest extends TestCase
     /**
      * @test
      */
-    public function getErrorMessageForIncompleteFormAndNoStoredMessageReturnsEmptyString()
+    public function getErrorMessageForIncompleteFormAndNoStoredMessageReturnsEmptyString(): void
     {
         $this->subject->markAsIncomplete();
 
@@ -394,7 +394,7 @@ final class AbstractEventMailFormTest extends TestCase
     /**
      * @test
      */
-    public function getErrorMessageForCompleteFormAndStoredMessageReturnsStoredMessage()
+    public function getErrorMessageForCompleteFormAndStoredMessageReturnsStoredMessage(): void
     {
         $this->subject->setErrorMessage('subject', 'Foo');
 
@@ -407,7 +407,7 @@ final class AbstractEventMailFormTest extends TestCase
     /**
      * @test
      */
-    public function getErrorMessageForInCompleteFormAndStoredMessageReturnsThisErrorMessage()
+    public function getErrorMessageForInCompleteFormAndStoredMessageReturnsThisErrorMessage(): void
     {
         $this->subject->markAsIncomplete();
         $this->subject->setErrorMessage('subject', 'Foo');
@@ -421,7 +421,7 @@ final class AbstractEventMailFormTest extends TestCase
     /**
      * @test
      */
-    public function setErrorMessageForAlreadySetErrorMessageAppendsNewMessage()
+    public function setErrorMessageForAlreadySetErrorMessageAppendsNewMessage(): void
     {
         $this->subject->markAsIncomplete();
         $this->subject->setErrorMessage('subject', 'Foo');

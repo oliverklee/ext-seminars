@@ -37,6 +37,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop support for PHP 7.0 and 7.1 (#847)
 
 ### Fixed
+- Add more type declarations (#967)
 - Stop treating a model PID as current BE page ID (#963)
 - Complete `extras/typo3-cms` in the `composer.json` (#918)
 - Stop using a deprecated testing framework parameter (#880, #881)
