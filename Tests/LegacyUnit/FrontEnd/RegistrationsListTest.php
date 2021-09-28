@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 
-use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
@@ -49,9 +48,6 @@ final class RegistrationsListTest extends TestCase
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
-        /** @var ConfigurationProxy $configurationProxy */
-        $configurationProxy = ConfigurationProxy::getInstance('seminars');
-        $configurationProxy->setAsBoolean('enableConfigCheck', false);
         HeaderProxyFactory::getInstance()->enableTestMode();
 
         $this->testingFramework = new TestingFramework('tx_seminars');
