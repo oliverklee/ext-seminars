@@ -1648,6 +1648,13 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
      */
     protected function createListView(string $whatToDisplay): string
     {
+        $configurationCheckResult = $this->checkListViewConfiguration();
+        if ($configurationCheckResult !== '') {
+            // There are configuration check errors. As some of those detected configuration problems
+            // could cause exceptions, we'd rather display the (more helpful) warnings than crash.
+            return $configurationCheckResult;
+        }
+
         $result = '';
         $isOkay = true;
         $this->ensureIntegerPiVars(
@@ -1750,7 +1757,6 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
                 $result .= $this->pi_list_browseresults();
             }
         }
-        $result .= $this->checkListViewConfiguration();
 
         return $result;
     }

@@ -102,6 +102,11 @@ final class DefaultControllerTest extends TestCase
      */
     private $sharedConfiguration;
 
+    /**
+     * @var DummyConfiguration
+     */
+    private $extensionConfiguration;
+
     protected function setUp()
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
@@ -119,6 +124,8 @@ final class DefaultControllerTest extends TestCase
         $headerCollector = HeaderProxyFactory::getInstance()->getHeaderCollector();
         $this->headerCollector = $headerCollector;
 
+        $this->extensionConfiguration = new DummyConfiguration();
+        ConfigurationProxy::setInstance('seminars', $this->extensionConfiguration);
         $this->sharedConfiguration = new DummyConfiguration(self::CONFIGURATION);
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->sharedConfiguration);
 
@@ -182,6 +189,7 @@ final class DefaultControllerTest extends TestCase
         $this->testingFramework->cleanUp();
 
         ConfigurationRegistry::purgeInstance();
+        ConfigurationProxy::purgeInstances();
         \Tx_Seminars_Service_RegistrationManager::purgeInstance();
 
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
@@ -4209,12 +4217,12 @@ final class DefaultControllerTest extends TestCase
      *
      * @doesNotPerformAssertions
      */
-    public function listViewSortedByCategoryWithoutStaticTemplateDoesNotCrash()
+    public function listViewSortedByCategoryWithoutStaticTemplateAndEnabledConfigurationCheckDoesNotCrash(): void
     {
+        $this->extensionConfiguration->setAsBoolean('enableConfigCheck', true);
+
         $subject = new TestingDefaultController();
-        $subject->init(
-            ['sortListViewByCategory' => 1]
-        );
+        $subject->init(['sortListViewByCategory' => 1]);
 
         $subject->main('', []);
     }
