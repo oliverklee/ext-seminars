@@ -24,14 +24,14 @@ final class EventTopicMapperTest extends TestCase
      */
     private $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
 
         $this->subject = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
     }
@@ -43,7 +43,7 @@ final class EventTopicMapperTest extends TestCase
     /**
      * @test
      */
-    public function getTopicForTopicRecordThrowsException()
+    public function getTopicForTopicRecordThrowsException(): void
     {
         $this->expectException(
             \BadMethodCallException::class
@@ -64,7 +64,7 @@ final class EventTopicMapperTest extends TestCase
     /**
      * @test
      */
-    public function getCategoriesForEventTopicReturnsListInstance()
+    public function getCategoriesForEventTopicReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -76,7 +76,7 @@ final class EventTopicMapperTest extends TestCase
     /**
      * @test
      */
-    public function getCategoriesForEventTopicWithOneCategoryReturnsListOfCategories()
+    public function getCategoriesForEventTopicWithOneCategoryReturnsListOfCategories(): void
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -98,7 +98,7 @@ final class EventTopicMapperTest extends TestCase
     /**
      * @test
      */
-    public function getCategoriesForEventTopicWithOneCategoryReturnsOneCategory()
+    public function getCategoriesForEventTopicWithOneCategoryReturnsOneCategory(): void
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -125,7 +125,7 @@ final class EventTopicMapperTest extends TestCase
     /**
      * @test
      */
-    public function getEventTypeForEventTopicWithoutEventTypeReturnsNull()
+    public function getEventTypeForEventTopicWithoutEventTypeReturnsNull(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -137,7 +137,7 @@ final class EventTopicMapperTest extends TestCase
     /**
      * @test
      */
-    public function getEventTypeForEventTopicWithEventTypeReturnsEventTypeInstance()
+    public function getEventTypeForEventTopicWithEventTypeReturnsEventTypeInstance(): void
     {
         $eventType = MapperRegistry::get(\Tx_Seminars_Mapper_EventType::class)
             ->getLoadedTestingModel([]);
@@ -156,7 +156,7 @@ final class EventTopicMapperTest extends TestCase
     /**
      * @test
      */
-    public function getPaymentMethodsForEventTopicReturnsListInstance()
+    public function getPaymentMethodsForEventTopicReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -168,7 +168,7 @@ final class EventTopicMapperTest extends TestCase
     /**
      * @test
      */
-    public function getPaymentMethodsForEventTopicWithOnePaymentMethodReturnsListOfPaymentMethods()
+    public function getPaymentMethodsForEventTopicWithOnePaymentMethodReturnsListOfPaymentMethods(): void
     {
         $paymentMethod = MapperRegistry::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
         $uid = $this->testingFramework->createRecord(
@@ -191,7 +191,7 @@ final class EventTopicMapperTest extends TestCase
     /**
      * @test
      */
-    public function getPaymentMethodsForEventTopicWithOnePaymentMethodReturnsOnePaymentMethod()
+    public function getPaymentMethodsForEventTopicWithOnePaymentMethodReturnsOnePaymentMethod(): void
     {
         $paymentMethod = MapperRegistry::
         get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
@@ -220,7 +220,7 @@ final class EventTopicMapperTest extends TestCase
     /**
      * @test
      */
-    public function getTargetGroupsForEventTopicReturnsListInstance()
+    public function getTargetGroupsForEventTopicReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -232,7 +232,7 @@ final class EventTopicMapperTest extends TestCase
     /**
      * @test
      */
-    public function getTargetGroupsForEventTopicWithOneTargetGroupReturnsListOfTargetGroups()
+    public function getTargetGroupsForEventTopicWithOneTargetGroupReturnsListOfTargetGroups(): void
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -257,7 +257,7 @@ final class EventTopicMapperTest extends TestCase
     /**
      * @test
      */
-    public function getTargetGroupsForEventTopicWithOneTargetGroupReturnsOneTargetGroup()
+    public function getTargetGroupsForEventTopicWithOneTargetGroupReturnsOneTargetGroup(): void
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -284,7 +284,7 @@ final class EventTopicMapperTest extends TestCase
     /**
      * @test
      */
-    public function getCheckboxesForEventTopicReturnsListInstance()
+    public function getCheckboxesForEventTopicReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -296,7 +296,7 @@ final class EventTopicMapperTest extends TestCase
     /**
      * @test
      */
-    public function getCheckboxesForEventTopicWithOneCheckboxReturnsListOfCheckboxes()
+    public function getCheckboxesForEventTopicWithOneCheckboxReturnsListOfCheckboxes(): void
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -318,7 +318,7 @@ final class EventTopicMapperTest extends TestCase
     /**
      * @test
      */
-    public function getCheckboxesForEventTopicWithOneCheckboxReturnsOneCheckbox()
+    public function getCheckboxesForEventTopicWithOneCheckboxReturnsOneCheckbox(): void
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',

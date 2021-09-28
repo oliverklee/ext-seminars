@@ -21,14 +21,14 @@ final class RegistrationMapperTest extends TestCase
      */
     private $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
 
         $this->subject = new \Tx_Seminars_Mapper_Registration();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
     }
@@ -38,7 +38,7 @@ final class RegistrationMapperTest extends TestCase
     /**
      * @test
      */
-    public function findWithUidReturnsRegistrationInstance()
+    public function findWithUidReturnsRegistrationInstance(): void
     {
         self::assertInstanceOf(\Tx_Seminars_Model_Registration::class, $this->subject->find(1));
     }
@@ -46,7 +46,7 @@ final class RegistrationMapperTest extends TestCase
     /**
      * @test
      */
-    public function findWithUidOfExistingRecordReturnsRecordAsModel()
+    public function findWithUidOfExistingRecordReturnsRecordAsModel(): void
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -65,7 +65,7 @@ final class RegistrationMapperTest extends TestCase
     /**
      * @test
      */
-    public function getEventWithEventReturnsEventInstance()
+    public function getEventWithEventReturnsEventInstance(): void
     {
         $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
             ->getNewGhost();
@@ -77,7 +77,7 @@ final class RegistrationMapperTest extends TestCase
     /**
      * @test
      */
-    public function getSeminarWithEventReturnsEventInstance()
+    public function getSeminarWithEventReturnsEventInstance(): void
     {
         $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
             ->getNewGhost();
@@ -91,7 +91,7 @@ final class RegistrationMapperTest extends TestCase
     /**
      * @test
      */
-    public function getFrontEndUserWithFrontEndUserReturnsSameFrontEndUser()
+    public function getFrontEndUserWithFrontEndUserReturnsSameFrontEndUser(): void
     {
         $frontEndUser = MapperRegistry::
         get(\Tx_Seminars_Mapper_FrontEndUser::class)->getNewGhost();
@@ -105,7 +105,7 @@ final class RegistrationMapperTest extends TestCase
     /**
      * @test
      */
-    public function getPaymentMethodWithoutPaymentMethodReturnsNull()
+    public function getPaymentMethodWithoutPaymentMethodReturnsNull(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
@@ -115,7 +115,7 @@ final class RegistrationMapperTest extends TestCase
     /**
      * @test
      */
-    public function getPaymentMethodWithPaymentMethodReturnsPaymentMethodInstance()
+    public function getPaymentMethodWithPaymentMethodReturnsPaymentMethodInstance(): void
     {
         $paymentMethod = MapperRegistry::
         get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
@@ -129,7 +129,7 @@ final class RegistrationMapperTest extends TestCase
     /**
      * @test
      */
-    public function getLodgingsReturnsListInstance()
+    public function getLodgingsReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
@@ -139,7 +139,7 @@ final class RegistrationMapperTest extends TestCase
     /**
      * @test
      */
-    public function getLodgingsWithOneLodgingReturnsListOfLodgings()
+    public function getLodgingsWithOneLodgingReturnsListOfLodgings(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_attendances');
         $lodging = MapperRegistry::get(\Tx_Seminars_Mapper_Lodging::class)
@@ -158,7 +158,7 @@ final class RegistrationMapperTest extends TestCase
     /**
      * @test
      */
-    public function getLodgingsWithOneLodgingReturnsOneLodging()
+    public function getLodgingsWithOneLodgingReturnsOneLodging(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_attendances');
         $lodging = MapperRegistry::get(\Tx_Seminars_Mapper_Lodging::class)
@@ -182,7 +182,7 @@ final class RegistrationMapperTest extends TestCase
     /**
      * @test
      */
-    public function getFoodsReturnsListInstance()
+    public function getFoodsReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
@@ -192,7 +192,7 @@ final class RegistrationMapperTest extends TestCase
     /**
      * @test
      */
-    public function getFoodsWithOneFoodReturnsListOfFoods()
+    public function getFoodsWithOneFoodReturnsListOfFoods(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_attendances');
         $food = MapperRegistry::get(\Tx_Seminars_Mapper_Food::class)->getNewGhost();
@@ -210,7 +210,7 @@ final class RegistrationMapperTest extends TestCase
     /**
      * @test
      */
-    public function getFoodsWithOneFoodReturnsOneFood()
+    public function getFoodsWithOneFoodReturnsOneFood(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_attendances');
         $food = MapperRegistry::get(\Tx_Seminars_Mapper_Food::class)
@@ -234,7 +234,7 @@ final class RegistrationMapperTest extends TestCase
     /**
      * @test
      */
-    public function getCheckboxesReturnsListInstance()
+    public function getCheckboxesReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
@@ -244,7 +244,7 @@ final class RegistrationMapperTest extends TestCase
     /**
      * @test
      */
-    public function getCheckboxesWithOneCheckboxReturnsListOfCheckboxes()
+    public function getCheckboxesWithOneCheckboxReturnsListOfCheckboxes(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_attendances');
         $checkbox = MapperRegistry::get(\Tx_Seminars_Mapper_Checkbox::class)
@@ -266,7 +266,7 @@ final class RegistrationMapperTest extends TestCase
     /**
      * @test
      */
-    public function getCheckboxesWithOneCheckboxReturnsOneCheckbox()
+    public function getCheckboxesWithOneCheckboxReturnsOneCheckbox(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_attendances');
         $checkbox = MapperRegistry::get(\Tx_Seminars_Mapper_Checkbox::class)
@@ -290,7 +290,7 @@ final class RegistrationMapperTest extends TestCase
     /**
      * @test
      */
-    public function relationToAdditionalPersonsReturnsPersonsFromDatabase()
+    public function relationToAdditionalPersonsReturnsPersonsFromDatabase(): void
     {
         $registrationUid = $this->testingFramework->createRecord(
             'tx_seminars_attendances',

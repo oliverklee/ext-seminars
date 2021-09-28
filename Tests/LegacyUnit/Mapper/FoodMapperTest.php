@@ -19,14 +19,14 @@ final class FoodMapperTest extends TestCase
      */
     private $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
 
         $this->subject = new \Tx_Seminars_Mapper_Food();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
     }
@@ -36,7 +36,7 @@ final class FoodMapperTest extends TestCase
     /**
      * @test
      */
-    public function findWithUidReturnsFoodInstance()
+    public function findWithUidReturnsFoodInstance(): void
     {
         self::assertInstanceOf(\Tx_Seminars_Model_Food::class, $this->subject->find(1));
     }
@@ -44,7 +44,7 @@ final class FoodMapperTest extends TestCase
     /**
      * @test
      */
-    public function findWithUidOfExistingRecordReturnsRecordAsModel()
+    public function findWithUidOfExistingRecordReturnsRecordAsModel(): void
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_foods',

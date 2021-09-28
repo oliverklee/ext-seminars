@@ -23,7 +23,7 @@ final class CountdownViewHelperTest extends TestCase
      */
     private $testingFramework = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd($this->testingFramework->createFrontEndPage());
@@ -31,7 +31,7 @@ final class CountdownViewHelperTest extends TestCase
         $this->subject = new \Tx_Seminars_ViewHelper_Countdown();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUpWithoutDatabase();
     }
@@ -39,7 +39,7 @@ final class CountdownViewHelperTest extends TestCase
     /**
      * @test
      */
-    public function renderWithBeginDateInThirtySecondsReturnsThirtySecondsLeft()
+    public function renderWithBeginDateInThirtySecondsReturnsThirtySecondsLeft(): void
     {
         $offset = 30;
 
@@ -56,7 +56,7 @@ final class CountdownViewHelperTest extends TestCase
     /**
      * @test
      */
-    public function renderWithBeginDateInOneMinuteReturnsOneMinuteLeft()
+    public function renderWithBeginDateInOneMinuteReturnsOneMinuteLeft(): void
     {
         $offset = 60;
 
@@ -73,7 +73,7 @@ final class CountdownViewHelperTest extends TestCase
     /**
      * @test
      */
-    public function renderWithBeginDateInTwoMinutesReturnsTwoMinutesLeft()
+    public function renderWithBeginDateInTwoMinutesReturnsTwoMinutesLeft(): void
     {
         $offset = 120;
 
@@ -90,7 +90,7 @@ final class CountdownViewHelperTest extends TestCase
     /**
      * @test
      */
-    public function renderWithBeginDateInOneHourReturnsOneHourLeft()
+    public function renderWithBeginDateInOneHourReturnsOneHourLeft(): void
     {
         $offset = 3600;
 
@@ -107,7 +107,7 @@ final class CountdownViewHelperTest extends TestCase
     /**
      * @test
      */
-    public function renderWithBeginDateInTwoHoursReturnsTwoHoursLeft()
+    public function renderWithBeginDateInTwoHoursReturnsTwoHoursLeft(): void
     {
         $offset = 7200;
 
@@ -124,7 +124,7 @@ final class CountdownViewHelperTest extends TestCase
     /**
      * @test
      */
-    public function renderWithBeginDateInOneDayReturnsOneDayLeft()
+    public function renderWithBeginDateInOneDayReturnsOneDayLeft(): void
     {
         $offset = 86400;
 
@@ -141,7 +141,7 @@ final class CountdownViewHelperTest extends TestCase
     /**
      * @test
      */
-    public function renderWithBeginDateInTwoDaysReturnsTwoDaysLeft()
+    public function renderWithBeginDateInTwoDaysReturnsTwoDaysLeft(): void
     {
         $offset = 2 * 86400;
 

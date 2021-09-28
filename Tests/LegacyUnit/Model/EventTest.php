@@ -29,7 +29,7 @@ final class EventTest extends TestCase
      */
     protected $now = 1424751343;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $GLOBALS['SIM_EXEC_TIME'] = $this->now;
         $configurationRegistry = ConfigurationRegistry::getInstance();
@@ -39,7 +39,7 @@ final class EventTest extends TestCase
         $this->subject = new \Tx_Seminars_Model_Event();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         ConfigurationRegistry::purgeInstance();
     }
@@ -51,7 +51,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function isSingleEventForSingleRecordReturnsTrue()
+    public function isSingleEventForSingleRecordReturnsTrue(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
@@ -65,7 +65,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function isSingleEventForTopicRecordReturnsFalse()
+    public function isSingleEventForTopicRecordReturnsFalse(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -79,7 +79,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function isSingleEventForDateRecordReturnsFalse()
+    public function isSingleEventForDateRecordReturnsFalse(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_DATE]
@@ -97,7 +97,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function isEventDateForSingleRecordReturnsFalse()
+    public function isEventDateForSingleRecordReturnsFalse(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
@@ -111,7 +111,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function isEventDateForTopicRecordReturnsFalse()
+    public function isEventDateForTopicRecordReturnsFalse(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -125,7 +125,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function isEventDateForDateRecordWithTopicReturnsTrue()
+    public function isEventDateForDateRecordWithTopicReturnsTrue(): void
     {
         $this->subject->setData(
             [
@@ -142,7 +142,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function isEventDateForDateRecordWithoutTopicReturnsFalse()
+    public function isEventDateForDateRecordWithoutTopicReturnsFalse(): void
     {
         $this->subject->setData(
             [
@@ -163,7 +163,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getRecordTypeWithRecordTypeCompleteReturnsRecordTypeComplete()
+    public function getRecordTypeWithRecordTypeCompleteReturnsRecordTypeComplete(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
@@ -178,7 +178,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getRecordTypeWithRecordTypeDateReturnsRecordTypeDate()
+    public function getRecordTypeWithRecordTypeDateReturnsRecordTypeDate(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_DATE]
@@ -193,7 +193,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getRecordTypeWithRecordTypeTopicReturnsRecordTypeTopic()
+    public function getRecordTypeWithRecordTypeTopicReturnsRecordTypeTopic(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -212,7 +212,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getTitleWithNonEmptyTitleReturnsTitle()
+    public function getTitleWithNonEmptyTitleReturnsTitle(): void
     {
         $this->subject->setData(['title' => 'Superhero']);
 
@@ -225,7 +225,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getRawTitleWithNonEmptyTitleReturnsTitle()
+    public function getRawTitleWithNonEmptyTitleReturnsTitle(): void
     {
         $this->subject->setData(['title' => 'Superhero']);
 
@@ -238,7 +238,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setTitleWithEmptyTitleThrowsException()
+    public function setTitleWithEmptyTitleThrowsException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -248,7 +248,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setTitleSetsTitle()
+    public function setTitleSetsTitle(): void
     {
         $this->subject->setTitle('Superhero');
 
@@ -260,7 +260,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getTimeZoneInitiallyReturnsEmptyString()
+    public function getTimeZoneInitiallyReturnsEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -270,7 +270,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getTimeZoneReturnsTimeZone()
+    public function getTimeZoneReturnsTimeZone(): void
     {
         $value = 'Europe/Berlin';
         $this->subject->setData(['time_zone' => $value]);
@@ -281,7 +281,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setTimeZoneSetsTimeZone()
+    public function setTimeZoneSetsTimeZone(): void
     {
         $this->subject->setData([]);
 
@@ -298,7 +298,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getAccreditationNumberWithoutAccreditationNumberReturnsAnEmptyString()
+    public function getAccreditationNumberWithoutAccreditationNumberReturnsAnEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -311,7 +311,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getAccreditationNumberWithAccreditationNumberReturnsAccreditationNumber()
+    public function getAccreditationNumberWithAccreditationNumberReturnsAccreditationNumber(): void
     {
         $this->subject->setData(['accreditation_number' => 'a1234567890']);
 
@@ -324,7 +324,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setAccreditationNumberSetsAccreditationNumber()
+    public function setAccreditationNumberSetsAccreditationNumber(): void
     {
         $this->subject->setAccreditationNumber('a1234567890');
 
@@ -337,7 +337,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasAccreditationNumberWithoutAccreditationNumberReturnsFalse()
+    public function hasAccreditationNumberWithoutAccreditationNumberReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -349,7 +349,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasAccreditationNumberWithAccreditationNumberReturnsTrue()
+    public function hasAccreditationNumberWithAccreditationNumberReturnsTrue(): void
     {
         $this->subject->setAccreditationNumber('a1234567890');
 
@@ -365,7 +365,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationDeadlineAsUnixTimeStampWithoutRegistrationDeadlineReturnsZero()
+    public function getRegistrationDeadlineAsUnixTimeStampWithoutRegistrationDeadlineReturnsZero(): void
     {
         $this->subject->setData([]);
 
@@ -378,7 +378,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationDeadlineAsUnixTimeStampWithPositiveRegistrationDeadlineReturnsRegistrationDeadline()
+    public function getRegistrationDeadlineAsUnixTimeStampWithPositiveRegistrationDeadlineReturnsRegistrationDeadline(): void
     {
         $this->subject->setData(['deadline_registration' => 42]);
 
@@ -391,7 +391,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDeadlineAsUnixTimeStampWithNegativeRegistrationDeadlineThrowsException()
+    public function setRegistrationDeadlineAsUnixTimeStampWithNegativeRegistrationDeadlineThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -406,7 +406,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDeadlineAsUnixTimeStampWithZeroRegistrationDeadlineSetsRegistrationDeadline()
+    public function setRegistrationDeadlineAsUnixTimeStampWithZeroRegistrationDeadlineSetsRegistrationDeadline(): void
     {
         $this->subject->setRegistrationDeadlineAsUnixTimeStamp(0);
 
@@ -419,7 +419,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDeadlineAsUnixTimeStampWithPositiveRegistrationDeadlineSetsRegistrationDeadline()
+    public function setRegistrationDeadlineAsUnixTimeStampWithPositiveRegistrationDeadlineSetsRegistrationDeadline(): void
     {
         $this->subject->setRegistrationDeadlineAsUnixTimeStamp(42);
 
@@ -432,7 +432,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasRegistrationDeadlineWithoutRegistrationDeadlineReturnsFalse()
+    public function hasRegistrationDeadlineWithoutRegistrationDeadlineReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -444,7 +444,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasRegistrationDeadlineWithRegistrationDeadlineReturnsTrue()
+    public function hasRegistrationDeadlineWithRegistrationDeadlineReturnsTrue(): void
     {
         $this->subject->setRegistrationDeadlineAsUnixTimeStamp(42);
 
@@ -456,7 +456,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getLatestPossibleRegistrationTimeAsUnixTimeStampWithoutAnyDatesReturnsZero()
+    public function getLatestPossibleRegistrationTimeAsUnixTimeStampWithoutAnyDatesReturnsZero(): void
     {
         $this->subject->setData(
             [
@@ -474,7 +474,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getLatestPossibleRegistrationTimeAsUnixTimeStampWithBeginDateReturnsBeginDate()
+    public function getLatestPossibleRegistrationTimeAsUnixTimeStampWithBeginDateReturnsBeginDate(): void
     {
         $beginDate = 1524751343;
         $endDate = $beginDate + 100000;
@@ -494,7 +494,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getLatestPossibleRegistrationTimeAsUnixTimeStampWithRegistrationDeadlineReturnsRegistrationDeadline()
+    public function getLatestPossibleRegistrationTimeAsUnixTimeStampWithRegistrationDeadlineReturnsRegistrationDeadline(): void
     {
         $beginDate = 1524751343;
         $endDate = $beginDate + 100000;
@@ -515,7 +515,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getLatestPossibleRegistrationTimeAsUnixTimeStampWithBeginAndEndAndLateRegistrationReturnsEndDate()
+    public function getLatestPossibleRegistrationTimeAsUnixTimeStampWithBeginAndEndAndLateRegistrationReturnsEndDate(): void
     {
         $this->configuration->setAsBoolean('allowRegistrationForStartedEvents', true);
 
@@ -537,7 +537,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getLatestPossibleRegistrationTimeAsUnixTimeStampWithDeadlineAndLateRegistrationReturnsDeadline()
+    public function getLatestPossibleRegistrationTimeAsUnixTimeStampWithDeadlineAndLateRegistrationReturnsDeadline(): void
     {
         $this->configuration->setAsBoolean('allowRegistrationForStartedEvents', true);
         $beginDate = 1524751343;
@@ -559,7 +559,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getLatestPossibleRegistrationTimeAsUnixTimeStampWithBeginAndWithoutEndLateAllowedReturnsBeginDate()
+    public function getLatestPossibleRegistrationTimeAsUnixTimeStampWithBeginAndWithoutEndLateAllowedReturnsBeginDate(): void
     {
         $this->configuration->setAsBoolean('allowRegistrationForStartedEvents', true);
         $beginDate = $this->now - 100;
@@ -583,7 +583,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getEarlyBirdDeadlineAsUnixTimeStampWithoutEarlyBirdDeadlineReturnsZero()
+    public function getEarlyBirdDeadlineAsUnixTimeStampWithoutEarlyBirdDeadlineReturnsZero(): void
     {
         $this->subject->setData([]);
 
@@ -596,7 +596,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getEarlyBirdDeadlineAsUnixTimeStampWithPositiveEarlyBirdDeadlineReturnsEarlyBirdDeadline()
+    public function getEarlyBirdDeadlineAsUnixTimeStampWithPositiveEarlyBirdDeadlineReturnsEarlyBirdDeadline(): void
     {
         $this->subject->setData(['deadline_early_bird' => 42]);
 
@@ -609,7 +609,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setEarlyBirdDeadlineAsUnixTimeStampWithNegativeEarlyBirdDeadlineThrowsException()
+    public function setEarlyBirdDeadlineAsUnixTimeStampWithNegativeEarlyBirdDeadlineThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -624,7 +624,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setEarlyBirdDeadlineAsUnixTimeStampWithZeroEarlyBirdDeadlineSetsEarlyBirdDeadline()
+    public function setEarlyBirdDeadlineAsUnixTimeStampWithZeroEarlyBirdDeadlineSetsEarlyBirdDeadline(): void
     {
         $this->subject->setEarlyBirdDeadlineAsUnixTimeStamp(0);
 
@@ -637,7 +637,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setEarlyBirdDeadlineWithPositiveEarlyBirdDeadlineSetsEarlyBirdDeadline()
+    public function setEarlyBirdDeadlineWithPositiveEarlyBirdDeadlineSetsEarlyBirdDeadline(): void
     {
         $this->subject->setEarlyBirdDeadlineAsUnixTimeStamp(42);
 
@@ -650,7 +650,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasEarlyBirdDeadlineWithoutEarlyBirdDeadlineReturnsFalse()
+    public function hasEarlyBirdDeadlineWithoutEarlyBirdDeadlineReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -662,7 +662,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasEarlyBirdDeadlineWithEarlyBirdDeadlineReturnsTrue()
+    public function hasEarlyBirdDeadlineWithEarlyBirdDeadlineReturnsTrue(): void
     {
         $this->subject->setEarlyBirdDeadlineAsUnixTimeStamp(42);
 
@@ -678,7 +678,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getUnregistrationDeadlineAsUnixTimeStampWithoutUnregistrationDeadlineReturnsZero()
+    public function getUnregistrationDeadlineAsUnixTimeStampWithoutUnregistrationDeadlineReturnsZero(): void
     {
         $this->subject->setData([]);
 
@@ -691,7 +691,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getUnregistrationDeadlineAsUnixTimeStampWithPositiveUnregistrationDeadlineReturnsUnregistrationDeadline()
+    public function getUnregistrationDeadlineAsUnixTimeStampWithPositiveUnregistrationDeadlineReturnsUnregistrationDeadline(): void
     {
         $this->subject->setData(['deadline_unregistration' => 42]);
 
@@ -704,7 +704,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setUnregistrationDeadlineAsUnixTimeStampWithNegativeUnregistrationDeadlineThrowsException()
+    public function setUnregistrationDeadlineAsUnixTimeStampWithNegativeUnregistrationDeadlineThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -719,7 +719,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setUnregistrationDeadlineAsUnixTimeStampWithZeroUnregistrationDeadlineSetsUnregistrationDeadline()
+    public function setUnregistrationDeadlineAsUnixTimeStampWithZeroUnregistrationDeadlineSetsUnregistrationDeadline(): void
     {
         $this->subject->setUnregistrationDeadlineAsUnixTimeStamp(0);
 
@@ -732,7 +732,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setUnregistrationDeadlineAsUnixTimeStampWithPositiveUnregistrationDeadlineSetsUnregistrationDeadline()
+    public function setUnregistrationDeadlineAsUnixTimeStampWithPositiveUnregistrationDeadlineSetsUnregistrationDeadline(): void
     {
         $this->subject->setUnregistrationDeadlineAsUnixTimeStamp(42);
 
@@ -745,7 +745,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasUnregistrationDeadlineWithoutUnregistrationDeadlineReturnsFalse()
+    public function hasUnregistrationDeadlineWithoutUnregistrationDeadlineReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -757,7 +757,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasUnregistrationDeadlineWithUnregistrationDeadlineReturnsTrue()
+    public function hasUnregistrationDeadlineWithUnregistrationDeadlineReturnsTrue(): void
     {
         $this->subject->setUnregistrationDeadlineAsUnixTimeStamp(42);
 
@@ -773,7 +773,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getExpiryAsUnixTimeStampWithoutExpiryReturnsZero()
+    public function getExpiryAsUnixTimeStampWithoutExpiryReturnsZero(): void
     {
         $this->subject->setData([]);
 
@@ -786,7 +786,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getExpiryAsUnixTimeStampWithPositiveExpiryReturnsExpiry()
+    public function getExpiryAsUnixTimeStampWithPositiveExpiryReturnsExpiry(): void
     {
         $this->subject->setData(['expiry' => 42]);
 
@@ -799,7 +799,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setExpiryAsUnixTimeStampWithNegativeExpiryThrowsException()
+    public function setExpiryAsUnixTimeStampWithNegativeExpiryThrowsException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -809,7 +809,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setExpiryAsUnixTimeStampWithZeroExpirySetsExpiry()
+    public function setExpiryAsUnixTimeStampWithZeroExpirySetsExpiry(): void
     {
         $this->subject->setExpiryAsUnixTimeStamp(0);
 
@@ -822,7 +822,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setExpiryAsUnixTimeStampWithPositiveExpirySetsExpiry()
+    public function setExpiryAsUnixTimeStampWithPositiveExpirySetsExpiry(): void
     {
         $this->subject->setExpiryAsUnixTimeStamp(42);
 
@@ -835,7 +835,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasExpiryWithoutExpiryReturnsFalse()
+    public function hasExpiryWithoutExpiryReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -847,7 +847,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasExpiryWithExpiryReturnsTrue()
+    public function hasExpiryWithExpiryReturnsTrue(): void
     {
         $this->subject->setExpiryAsUnixTimeStamp(42);
 
@@ -863,7 +863,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getDetailsPageWithoutDetailsPageReturnsEmptyString()
+    public function getDetailsPageWithoutDetailsPageReturnsEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -876,7 +876,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getDetailsPageWithDetailsPageReturnsDetailsPage()
+    public function getDetailsPageWithDetailsPageReturnsDetailsPage(): void
     {
         $this->subject->setData(['details_page' => 'http://example.com']);
 
@@ -889,7 +889,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setDetailsPageSetsDetailsPage()
+    public function setDetailsPageSetsDetailsPage(): void
     {
         $this->subject->setDetailsPage('http://example.com');
 
@@ -902,7 +902,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasDetailsPageWithoutDetailsPageReturnsFalse()
+    public function hasDetailsPageWithoutDetailsPageReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -914,7 +914,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasDetailsPageWithDetailsPageReturnsTrue()
+    public function hasDetailsPageWithDetailsPageReturnsTrue(): void
     {
         $this->subject->setDetailsPage('http://example.com');
 
@@ -930,7 +930,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getCombinedSingleViewPageInitiallyReturnsEmptyString()
+    public function getCombinedSingleViewPageInitiallyReturnsEmptyString(): void
     {
         $this->subject->setData(['categories' => new Collection()]);
 
@@ -943,7 +943,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getCombinedSingleViewPageForAvailableDetailsPageUidReturnsTheDetailsPageUid()
+    public function getCombinedSingleViewPageForAvailableDetailsPageUidReturnsTheDetailsPageUid(): void
     {
         $this->subject->setData(
             [
@@ -961,7 +961,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getCombinedSingleViewPageForAvailableDetailsPageUrlReturnsTheDetailsPageUrl()
+    public function getCombinedSingleViewPageForAvailableDetailsPageUrlReturnsTheDetailsPageUrl(): void
     {
         $this->subject->setData(
             [
@@ -979,7 +979,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getCombinedSingleViewPageForAvailableEventTypeWithoutSingleViewPageReturnsEmptyString()
+    public function getCombinedSingleViewPageForAvailableEventTypeWithoutSingleViewPageReturnsEmptyString(): void
     {
         $eventType = new \Tx_Seminars_Model_EventType();
         $eventType->setData([]);
@@ -999,7 +999,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getCombinedSingleViewPageForAvailableEventTypeWithSingleViewPageReturnsSingleViewPageFromEventType()
+    public function getCombinedSingleViewPageForAvailableEventTypeWithSingleViewPageReturnsSingleViewPageFromEventType(): void
     {
         $eventType = new \Tx_Seminars_Model_EventType();
         $eventType->setData(['single_view_page' => 42]);
@@ -1019,7 +1019,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getCombinedSingleViewPageForAvailableCategoryWithoutSingleViewPageReturnsEmptyString()
+    public function getCombinedSingleViewPageForAvailableCategoryWithoutSingleViewPageReturnsEmptyString(): void
     {
         $category = new \Tx_Seminars_Model_Category();
         $category->setData([]);
@@ -1036,7 +1036,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getCombinedSingleViewPageForAvailableCategoryTypeWithSingleViewPageReturnsSingleViewPageFromCategory()
+    public function getCombinedSingleViewPageForAvailableCategoryTypeWithSingleViewPageReturnsSingleViewPageFromCategory(): void
     {
         $category = new \Tx_Seminars_Model_Category();
         $category->setData(['single_view_page' => 42]);
@@ -1053,7 +1053,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getCombinedSingleViewPageForTwoAvailableCategoriesWithSingleViewPageReturnsSingleViewPageFromFirstCategory()
+    public function getCombinedSingleViewPageForTwoAvailableCategoriesWithSingleViewPageReturnsSingleViewPageFromFirstCategory(): void
     {
         $category1 = new \Tx_Seminars_Model_Category();
         $category1->setData(['single_view_page' => 42]);
@@ -1073,7 +1073,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasCombinedSingleViewPageForEmptySingleViewPageReturnsFalse()
+    public function hasCombinedSingleViewPageForEmptySingleViewPageReturnsFalse(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -1091,7 +1091,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasCombinedSingleViewPageForNonEmptySingleViewPageReturnsTrue()
+    public function hasCombinedSingleViewPageForNonEmptySingleViewPageReturnsTrue(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -1109,7 +1109,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getCombinedSingleViewPageUsesDetailsPageInsteadOfEventTypeIfBothAreAvailable()
+    public function getCombinedSingleViewPageUsesDetailsPageInsteadOfEventTypeIfBothAreAvailable(): void
     {
         $eventType = new \Tx_Seminars_Model_EventType();
         $eventType->setData(['single_view_page' => 42]);
@@ -1131,7 +1131,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getCombinedSingleViewPageUsesEventTypeInsteadOfCategoriesIfBothAreAvailable()
+    public function getCombinedSingleViewPageUsesEventTypeInsteadOfCategoriesIfBothAreAvailable(): void
     {
         $eventType = new \Tx_Seminars_Model_EventType();
         $eventType->setData(['single_view_page' => 42]);
@@ -1160,7 +1160,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getLanguageWithoutLanguageReturnsNull()
+    public function getLanguageWithoutLanguageReturnsNull(): void
     {
         $this->subject->setData([]);
 
@@ -1172,7 +1172,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getLanguageWithLanguageReturnsLanguage()
+    public function getLanguageWithLanguageReturnsLanguage(): void
     {
         $this->subject->setData(['language' => 'DE']);
 
@@ -1187,7 +1187,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setLanguageSetsLanguage()
+    public function setLanguageSetsLanguage(): void
     {
         /** @var LanguageMapper $mapper */
         $mapper = MapperRegistry::get(LanguageMapper::class);
@@ -1203,7 +1203,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasLanguageWithoutLanguageReturnsFalse()
+    public function hasLanguageWithoutLanguageReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -1215,7 +1215,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasLanguageWithLanguageReturnsTrue()
+    public function hasLanguageWithLanguageReturnsTrue(): void
     {
         /** @var LanguageMapper $mapper */
         $mapper = MapperRegistry::get(LanguageMapper::class);
@@ -1234,7 +1234,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function eventTakesPlaceReminderHasBeenSentWithUnsetEventTakesPlaceReminderSentReturnsFalse()
+    public function eventTakesPlaceReminderHasBeenSentWithUnsetEventTakesPlaceReminderSentReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -1246,7 +1246,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function eventTakesPlaceReminderHasBeenSentWithSetEventTakesPlaceReminderSentReturnsTrue()
+    public function eventTakesPlaceReminderHasBeenSentWithSetEventTakesPlaceReminderSentReturnsTrue(): void
     {
         $this->subject->setData(['event_takes_place_reminder_sent' => true]);
 
@@ -1262,7 +1262,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function cancelationDeadlineReminderHasBeenSentWithUnsetCancelationDeadlineReminderSentReturnsFalse()
+    public function cancelationDeadlineReminderHasBeenSentWithUnsetCancelationDeadlineReminderSentReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -1274,7 +1274,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function cancelationDeadlineReminderHasBeenSentWithSetCancelationDeadlineReminderSentReturnsTrue()
+    public function cancelationDeadlineReminderHasBeenSentWithSetCancelationDeadlineReminderSentReturnsTrue(): void
     {
         $this->subject->setData(['cancelation_deadline_reminder_sent' => true]);
 
@@ -1290,7 +1290,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function needsRegistrationWithUnsetNeedsRegistrationReturnsFalse()
+    public function needsRegistrationWithUnsetNeedsRegistrationReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -1302,7 +1302,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function needsRegistrationWithSetNeedsRegistrationReturnsTrue()
+    public function needsRegistrationWithSetNeedsRegistrationReturnsTrue(): void
     {
         $this->subject->setData(['needs_registration' => true]);
 
@@ -1318,7 +1318,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getMinimumAttendeesWithoutMinimumAttendeesReturnsZero()
+    public function getMinimumAttendeesWithoutMinimumAttendeesReturnsZero(): void
     {
         $this->subject->setData([]);
 
@@ -1331,7 +1331,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getMinimumAttendeesWithPositiveMinimumAttendeesReturnsMinimumAttendees()
+    public function getMinimumAttendeesWithPositiveMinimumAttendeesReturnsMinimumAttendees(): void
     {
         $this->subject->setData(['attendees_min' => 42]);
 
@@ -1344,7 +1344,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setMinimumAttendeesWithNegativeMinimumAttendeesThrowsException()
+    public function setMinimumAttendeesWithNegativeMinimumAttendeesThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -1359,7 +1359,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setMinimumAttendeesWithZeroMinimumAttendeesSetsMinimumAttendees()
+    public function setMinimumAttendeesWithZeroMinimumAttendeesSetsMinimumAttendees(): void
     {
         $this->subject->setMinimumAttendees(0);
 
@@ -1372,7 +1372,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setMinimumAttendeesWithPositiveMinimumAttendeesSetsMinimumAttendees()
+    public function setMinimumAttendeesWithPositiveMinimumAttendeesSetsMinimumAttendees(): void
     {
         $this->subject->setMinimumAttendees(42);
 
@@ -1385,7 +1385,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasMinimumAttendeesWithoutMinimumAttendeesReturnsFalse()
+    public function hasMinimumAttendeesWithoutMinimumAttendeesReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -1397,7 +1397,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasMinimumAttendeesWithMinimumAttendeesReturnsTrue()
+    public function hasMinimumAttendeesWithMinimumAttendeesReturnsTrue(): void
     {
         $this->subject->setMinimumAttendees(42);
 
@@ -1413,7 +1413,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getMaximumAttendeesWithoutMaximumAttendeesReturnsZero()
+    public function getMaximumAttendeesWithoutMaximumAttendeesReturnsZero(): void
     {
         $this->subject->setData([]);
 
@@ -1426,7 +1426,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getMaximumAttendeesWithMaximumAttendeesReturnsMaximumAttendees()
+    public function getMaximumAttendeesWithMaximumAttendeesReturnsMaximumAttendees(): void
     {
         $this->subject->setData(['attendees_max' => 42]);
 
@@ -1439,7 +1439,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setMaximumAttendeesWithNegativeMaximumAttendeesThrowsException()
+    public function setMaximumAttendeesWithNegativeMaximumAttendeesThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -1454,7 +1454,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setMaximumAttendeesWithZeroMaximumAttendeesSetsMaximumAttendees()
+    public function setMaximumAttendeesWithZeroMaximumAttendeesSetsMaximumAttendees(): void
     {
         $this->subject->setMaximumAttendees(0);
 
@@ -1467,7 +1467,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setMaximumAttendeesWithPositiveAttendeesSetsMaximumAttendees()
+    public function setMaximumAttendeesWithPositiveAttendeesSetsMaximumAttendees(): void
     {
         $this->subject->setMaximumAttendees(42);
 
@@ -1480,7 +1480,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasMaximumAttendeesWithoutMaximumAttendeesReturnsFalse()
+    public function hasMaximumAttendeesWithoutMaximumAttendeesReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -1492,7 +1492,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasMaximumAttendeesWithMaximumAttendeesReturnsTrue()
+    public function hasMaximumAttendeesWithMaximumAttendeesReturnsTrue(): void
     {
         $this->subject->setMaximumAttendees(42);
 
@@ -1508,7 +1508,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasRegistrationQueueWithoutRegistrationQueueReturnsFalse()
+    public function hasRegistrationQueueWithoutRegistrationQueueReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -1520,7 +1520,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasRegistrationQueueWithRegistrationQueueReturnsTrue()
+    public function hasRegistrationQueueWithRegistrationQueueReturnsTrue(): void
     {
         $this->subject->setData(['queue_size' => true]);
 
@@ -1536,7 +1536,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function shouldSkipCollectionCheckWithoutSkipCollsionCheckReturnsFalse()
+    public function shouldSkipCollectionCheckWithoutSkipCollsionCheckReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -1548,7 +1548,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function shouldSkipCollectionCheckWithSkipCollisionCheckReturnsTrue()
+    public function shouldSkipCollectionCheckWithSkipCollisionCheckReturnsTrue(): void
     {
         $this->subject->setData(['skip_collision_check' => true]);
 
@@ -1562,7 +1562,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getStatusWithoutStatusReturnsStatusPlanned()
+    public function getStatusWithoutStatusReturnsStatusPlanned(): void
     {
         $this->subject->setData([]);
 
@@ -1575,7 +1575,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getStatusWithStatusPlannedReturnsStatusPlanned()
+    public function getStatusWithStatusPlannedReturnsStatusPlanned(): void
     {
         $this->subject->setData(
             ['cancelled' => \Tx_Seminars_Model_Event::STATUS_PLANNED]
@@ -1590,7 +1590,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getStatusWithStatusCanceledReturnStatusCanceled()
+    public function getStatusWithStatusCanceledReturnStatusCanceled(): void
     {
         $this->subject->setData(
             ['cancelled' => \Tx_Seminars_Model_Event::STATUS_CANCELED]
@@ -1605,7 +1605,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getStatusWithStatusConfirmedReturnsStatusConfirmed()
+    public function getStatusWithStatusConfirmedReturnsStatusConfirmed(): void
     {
         $this->subject->setData(
             ['cancelled' => \Tx_Seminars_Model_Event::STATUS_CONFIRMED]
@@ -1620,7 +1620,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setStatusWithInvalidStatusThrowsException()
+    public function setStatusWithInvalidStatusThrowsException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -1630,7 +1630,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setStatusWithStatusPlannedSetsStatus()
+    public function setStatusWithStatusPlannedSetsStatus(): void
     {
         $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
 
@@ -1643,7 +1643,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setStatusWithStatusCanceledSetsStatus()
+    public function setStatusWithStatusCanceledSetsStatus(): void
     {
         $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
 
@@ -1656,7 +1656,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setStatusWithStatusConfirmedSetsStatus()
+    public function setStatusWithStatusConfirmedSetsStatus(): void
     {
         $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
 
@@ -1669,7 +1669,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function isPlannedForPlannedStatusReturnsTrue()
+    public function isPlannedForPlannedStatusReturnsTrue(): void
     {
         $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
 
@@ -1679,7 +1679,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function isPlannedForCanceledStatusReturnsFalse()
+    public function isPlannedForCanceledStatusReturnsFalse(): void
     {
         $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
 
@@ -1689,7 +1689,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function isPlannedForConfirmedStatusReturnsFalse()
+    public function isPlannedForConfirmedStatusReturnsFalse(): void
     {
         $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
 
@@ -1699,7 +1699,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function isCanceledForPlannedStatusReturnsFalse()
+    public function isCanceledForPlannedStatusReturnsFalse(): void
     {
         $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
 
@@ -1709,7 +1709,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function isCanceledForCanceledStatusReturnsTrue()
+    public function isCanceledForCanceledStatusReturnsTrue(): void
     {
         $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
 
@@ -1719,7 +1719,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function isCanceledForConfirmedStatusReturnsFalse()
+    public function isCanceledForConfirmedStatusReturnsFalse(): void
     {
         $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
 
@@ -1729,7 +1729,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function isConfirmedForPlannedStatusReturnsFalse()
+    public function isConfirmedForPlannedStatusReturnsFalse(): void
     {
         $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
 
@@ -1739,7 +1739,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function isConfirmedForCanceledStatusReturnsFalse()
+    public function isConfirmedForCanceledStatusReturnsFalse(): void
     {
         $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
 
@@ -1749,7 +1749,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function isConfirmedForConfirmedStatusReturnsTrue()
+    public function isConfirmedForConfirmedStatusReturnsTrue(): void
     {
         $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
 
@@ -1759,7 +1759,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function cancelCanMakePlannedEventCanceled()
+    public function cancelCanMakePlannedEventCanceled(): void
     {
         $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
 
@@ -1771,7 +1771,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function cancelCanMakeConfirmedEventCanceled()
+    public function cancelCanMakeConfirmedEventCanceled(): void
     {
         $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
 
@@ -1785,7 +1785,7 @@ final class EventTest extends TestCase
      *
      * @doesNotPerformAssertions
      */
-    public function cancelForCanceledEventNotThrowsException()
+    public function cancelForCanceledEventNotThrowsException(): void
     {
         $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
 
@@ -1795,7 +1795,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function confirmCanMakePlannedEventConfirmed()
+    public function confirmCanMakePlannedEventConfirmed(): void
     {
         $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_PLANNED);
 
@@ -1807,7 +1807,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function confirmCanMakeCanceledEventConfirmed()
+    public function confirmCanMakeCanceledEventConfirmed(): void
     {
         $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
 
@@ -1821,7 +1821,7 @@ final class EventTest extends TestCase
      *
      * @doesNotPerformAssertions
      */
-    public function confirmForConfirmedEventNotThrowsException()
+    public function confirmForConfirmedEventNotThrowsException(): void
     {
         $this->subject->setStatus(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
 
@@ -1835,7 +1835,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getAttachedFilesWithoutAttachedFilesReturnsEmptyArray()
+    public function getAttachedFilesWithoutAttachedFilesReturnsEmptyArray(): void
     {
         $this->subject->setData([]);
 
@@ -1848,7 +1848,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getAttachedFilesWithOneAttachedFileReturnsArrayWithAttachedFile()
+    public function getAttachedFilesWithOneAttachedFileReturnsArrayWithAttachedFile(): void
     {
         $this->subject->setData(['attached_files' => 'file.txt']);
 
@@ -1861,7 +1861,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getAttachedFilesWithTwoAttachedFilesReturnsArrayWithBothAttachedFiles()
+    public function getAttachedFilesWithTwoAttachedFilesReturnsArrayWithBothAttachedFiles(): void
     {
         $this->subject->setData(['attached_files' => 'file.txt,file2.txt']);
 
@@ -1874,7 +1874,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setAttachedFilesSetsAttachedFiles()
+    public function setAttachedFilesSetsAttachedFiles(): void
     {
         $this->subject->setAttachedFiles(['file.txt']);
 
@@ -1887,7 +1887,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasAttachedFilesWithoutAttachedFilesReturnsFalse()
+    public function hasAttachedFilesWithoutAttachedFilesReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -1899,7 +1899,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasAttachedFilesWithAttachedFileReturnsTrue()
+    public function hasAttachedFilesWithAttachedFileReturnsTrue(): void
     {
         $this->subject->setAttachedFiles(['file.txt']);
 
@@ -1915,7 +1915,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasRegistrationBeginForNoRegistrationBeginReturnsFalse()
+    public function hasRegistrationBeginForNoRegistrationBeginReturnsFalse(): void
     {
         $this->subject->setData(['begin_date_registration' => 0]);
 
@@ -1927,7 +1927,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasRegistrationBeginForEventWithRegistrationBeginReturnsTrue()
+    public function hasRegistrationBeginForEventWithRegistrationBeginReturnsTrue(): void
     {
         $this->subject->setData(['begin_date_registration' => 42]);
 
@@ -1939,7 +1939,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationBeginAsUnixTimestampForEventWithoutRegistrationBeginReturnsZero()
+    public function getRegistrationBeginAsUnixTimestampForEventWithoutRegistrationBeginReturnsZero(): void
     {
         $this->subject->setData(['begin_date_registration' => 0]);
 
@@ -1952,7 +1952,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationBeginAsUnixTimestampForEventWithRegistrationBeginReturnsRegistrationBeginAsUnixTimestamp()
+    public function getRegistrationBeginAsUnixTimestampForEventWithRegistrationBeginReturnsRegistrationBeginAsUnixTimestamp(): void
     {
         $this->subject->setData(['begin_date_registration' => 42]);
 
@@ -1969,7 +1969,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasPublicationHashForNoPublicationHashSetReturnsFalse()
+    public function hasPublicationHashForNoPublicationHashSetReturnsFalse(): void
     {
         $this->subject->setData(['publication_hash' => '']);
 
@@ -1981,7 +1981,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasPublicationHashForPublicationHashSetReturnsTrue()
+    public function hasPublicationHashForPublicationHashSetReturnsTrue(): void
     {
         $this->subject->setData(['publication_hash' => 'fooo']);
 
@@ -1993,7 +1993,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getPublicationHashForNoPublicationHashSetReturnsEmptyString()
+    public function getPublicationHashForNoPublicationHashSetReturnsEmptyString(): void
     {
         $this->subject->setData(['publication_hash' => '']);
 
@@ -2006,7 +2006,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getPublicationHashForPublicationHashSetReturnsPublicationHash()
+    public function getPublicationHashForPublicationHashSetReturnsPublicationHash(): void
     {
         $this->subject->setData(['publication_hash' => 'fooo']);
 
@@ -2019,7 +2019,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setPublicationHashSetsPublicationHash()
+    public function setPublicationHashSetsPublicationHash(): void
     {
         $this->subject->setPublicationHash('5318761asdf35as5sad35asd35asd');
 
@@ -2032,7 +2032,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setPublicationHashWithEmptyStringOverridesNonEmptyData()
+    public function setPublicationHashWithEmptyStringOverridesNonEmptyData(): void
     {
         $this->subject->setData(['publication_hash' => 'fooo']);
 
@@ -2047,7 +2047,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function purgePublicationHashForPublicationHashSetInModelPurgesPublicationHash()
+    public function purgePublicationHashForPublicationHashSetInModelPurgesPublicationHash(): void
     {
         $this->subject->setData(['publication_hash' => 'fooo']);
 
@@ -2061,7 +2061,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function purgePublicationHashForNoPublicationHashSetInModelPurgesPublicationHash()
+    public function purgePublicationHashForNoPublicationHashSetInModelPurgesPublicationHash(): void
     {
         $this->subject->setData(['publication_hash' => '']);
 
@@ -2075,7 +2075,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function isPublishedForEventWithoutPublicationHashIsTrue()
+    public function isPublishedForEventWithoutPublicationHashIsTrue(): void
     {
         $this->subject->setPublicationHash('');
 
@@ -2087,7 +2087,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function isPublishedForEventWithPublicationHashIsFalse()
+    public function isPublishedForEventWithPublicationHashIsFalse(): void
     {
         $this->subject->setPublicationHash('5318761asdf35as5sad35asd35asd');
 
@@ -2101,7 +2101,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasOfflineRegistrationsForEventWithoutOfflineRegistrationsReturnsFalse()
+    public function hasOfflineRegistrationsForEventWithoutOfflineRegistrationsReturnsFalse(): void
     {
         $this->subject->setData(['offline_attendees' => 0]);
 
@@ -2113,7 +2113,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasOfflineRegistrationsForEventWithTwoOfflineRegistrationsReturnsTrue()
+    public function hasOfflineRegistrationsForEventWithTwoOfflineRegistrationsReturnsTrue(): void
     {
         $this->subject->setData(['offline_attendees' => 2]);
 
@@ -2125,7 +2125,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getOfflineRegistrationsForEventWithoutOfflineRegistrationsReturnsZero()
+    public function getOfflineRegistrationsForEventWithoutOfflineRegistrationsReturnsZero(): void
     {
         $this->subject->setData(['offline_attendees' => 0]);
 
@@ -2138,7 +2138,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getOfflineRegistrationsForEventWithTwoOfflineRegistrationsReturnsTwo()
+    public function getOfflineRegistrationsForEventWithTwoOfflineRegistrationsReturnsTwo(): void
     {
         $this->subject->setData(['offline_attendees' => 2]);
 
@@ -2151,7 +2151,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setOfflineRegistrationsSetsOfflineRegistrations()
+    public function setOfflineRegistrationsSetsOfflineRegistrations(): void
     {
         $numberOfOfflineRegistrations = 2;
         $this->subject->setData(['offline_attendees' => 0]);
@@ -2169,7 +2169,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationsReturnsRegistrations()
+    public function getRegistrationsReturnsRegistrations(): void
     {
         $registrations = new Collection();
 
@@ -2184,7 +2184,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationsSetsRegistrations()
+    public function setRegistrationsSetsRegistrations(): void
     {
         $registrations = new Collection();
 
@@ -2199,7 +2199,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getRegularRegistrationsReturnsRegularRegistrations()
+    public function getRegularRegistrationsReturnsRegularRegistrations(): void
     {
         $registrations = new Collection();
         $registration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)
@@ -2216,7 +2216,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getRegularRegistrationsNotReturnsQueueRegistrations()
+    public function getRegularRegistrationsNotReturnsQueueRegistrations(): void
     {
         $registrations = new Collection();
         $registration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)
@@ -2232,7 +2232,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getQueueRegistrationsReturnsQueueRegistrations()
+    public function getQueueRegistrationsReturnsQueueRegistrations(): void
     {
         $registrations = new Collection();
         $registration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)
@@ -2249,7 +2249,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getQueueRegistrationsNotReturnsRegularRegistrations()
+    public function getQueueRegistrationsNotReturnsRegularRegistrations(): void
     {
         $registrations = new Collection();
         $registration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)
@@ -2265,7 +2265,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasQueueRegistrationsForOneQueueRegistrationReturnsTrue()
+    public function hasQueueRegistrationsForOneQueueRegistrationReturnsTrue(): void
     {
         $registrations = new Collection();
         $registration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)
@@ -2287,7 +2287,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationsAfterLastDigestReturnsNewerRegistrations()
+    public function getRegistrationsAfterLastDigestReturnsNewerRegistrations(): void
     {
         $this->subject->setDateOfLastRegistrationDigestEmailAsUnixTimeStamp(1);
 
@@ -2303,7 +2303,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationsAfterLastDigestNotReturnsOlderRegistrations()
+    public function getRegistrationsAfterLastDigestNotReturnsOlderRegistrations(): void
     {
         $this->subject->setDateOfLastRegistrationDigestEmailAsUnixTimeStamp(2);
 
@@ -2319,7 +2319,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationsAfterLastDigestNotReturnsRegistrationsExactlyAtDigestDate()
+    public function getRegistrationsAfterLastDigestNotReturnsRegistrationsExactlyAtDigestDate(): void
     {
         $this->subject->setDateOfLastRegistrationDigestEmailAsUnixTimeStamp(1);
 
@@ -2335,7 +2335,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasQueueRegistrationsForNoQueueRegistrationReturnsFalse()
+    public function hasQueueRegistrationsForNoQueueRegistrationReturnsFalse(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
@@ -2357,7 +2357,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasUnlimitedVacanciesForMaxAttendeesZeroReturnsTrue()
+    public function hasUnlimitedVacanciesForMaxAttendeesZeroReturnsTrue(): void
     {
         $this->subject->setData(['attendees_max' => 0]);
 
@@ -2369,7 +2369,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasUnlimitedVacanciesForMaxAttendeesOneReturnsFalse()
+    public function hasUnlimitedVacanciesForMaxAttendeesOneReturnsFalse(): void
     {
         $this->subject->setData(['attendees_max' => 1]);
 
@@ -2385,7 +2385,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getRegisteredSeatsForNoRegularRegistrationsReturnsZero()
+    public function getRegisteredSeatsForNoRegularRegistrationsReturnsZero(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
@@ -2405,7 +2405,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getRegisteredSeatsCountsSingleSeatRegularRegistrations()
+    public function getRegisteredSeatsCountsSingleSeatRegularRegistrations(): void
     {
         $registrations = new Collection();
         $registration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)
@@ -2429,7 +2429,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getRegisteredSeatsCountsMultiSeatRegularRegistrations()
+    public function getRegisteredSeatsCountsMultiSeatRegularRegistrations(): void
     {
         $registrations = new Collection();
         $registration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)
@@ -2453,7 +2453,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getRegisteredSeatsNotCountsQueueRegistrations()
+    public function getRegisteredSeatsNotCountsQueueRegistrations(): void
     {
         $queueRegistrations = new Collection();
         $registration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)
@@ -2479,7 +2479,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getRegisteredSeatsCountsOfflineRegistrations()
+    public function getRegisteredSeatsCountsOfflineRegistrations(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
@@ -2503,7 +2503,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasEnoughRegistrationsForZeroSeatsAndZeroNeededReturnsTrue()
+    public function hasEnoughRegistrationsForZeroSeatsAndZeroNeededReturnsTrue(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
@@ -2522,7 +2522,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasEnoughRegistrationsForLessSeatsThanNeededReturnsFalse()
+    public function hasEnoughRegistrationsForLessSeatsThanNeededReturnsFalse(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
@@ -2541,7 +2541,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasEnoughRegistrationsForAsManySeatsAsNeededReturnsTrue()
+    public function hasEnoughRegistrationsForAsManySeatsAsNeededReturnsTrue(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
@@ -2560,7 +2560,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasEnoughRegistrationsForMoreSeatsThanNeededReturnsTrue()
+    public function hasEnoughRegistrationsForMoreSeatsThanNeededReturnsTrue(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
@@ -2583,7 +2583,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getVacanciesForOneRegisteredAndTwoMaximumReturnsOne()
+    public function getVacanciesForOneRegisteredAndTwoMaximumReturnsOne(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
@@ -2603,7 +2603,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getVacanciesForAsManySeatsRegisteredAsMaximumReturnsZero()
+    public function getVacanciesForAsManySeatsRegisteredAsMaximumReturnsZero(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
@@ -2623,7 +2623,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getVacanciesForAsMoreSeatsRegisteredThanMaximumReturnsZero()
+    public function getVacanciesForAsMoreSeatsRegisteredThanMaximumReturnsZero(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
@@ -2643,7 +2643,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getVacanciesForNonZeroSeatsRegisteredAndUnlimitedVacanciesReturnsZero()
+    public function getVacanciesForNonZeroSeatsRegisteredAndUnlimitedVacanciesReturnsZero(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
@@ -2667,7 +2667,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasVacanciesForOneRegisteredAndTwoMaximumReturnsTrue()
+    public function hasVacanciesForOneRegisteredAndTwoMaximumReturnsTrue(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
@@ -2686,7 +2686,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasVacanciesForAsManySeatsRegisteredAsMaximumReturnsFalse()
+    public function hasVacanciesForAsManySeatsRegisteredAsMaximumReturnsFalse(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
@@ -2705,7 +2705,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasVacanciesForAsMoreSeatsRegisteredThanMaximumReturnsFalse()
+    public function hasVacanciesForAsMoreSeatsRegisteredThanMaximumReturnsFalse(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
@@ -2724,7 +2724,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function hasVacanciesForNonZeroSeatsRegisteredAndUnlimitedVacanciesReturnsTrue()
+    public function hasVacanciesForNonZeroSeatsRegisteredAndUnlimitedVacanciesReturnsTrue(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
@@ -2747,7 +2747,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function isFullForLessSeatsThanMaximumReturnsFalse()
+    public function isFullForLessSeatsThanMaximumReturnsFalse(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
@@ -2766,7 +2766,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function isFullForAsManySeatsAsMaximumReturnsTrue()
+    public function isFullForAsManySeatsAsMaximumReturnsTrue(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
@@ -2785,7 +2785,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function isFullForMoreSeatsThanMaximumReturnsTrue()
+    public function isFullForMoreSeatsThanMaximumReturnsTrue(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
@@ -2804,7 +2804,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function isFullForZeroSeatsAndUnlimitedMaximumReturnsFalse()
+    public function isFullForZeroSeatsAndUnlimitedMaximumReturnsFalse(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
@@ -2823,7 +2823,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function isFullForPositiveSeatsAndUnlimitedMaximumReturnsFalse()
+    public function isFullForPositiveSeatsAndUnlimitedMaximumReturnsFalse(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
@@ -2846,7 +2846,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function attachRegistrationAddsRegistration()
+    public function attachRegistrationAddsRegistration(): void
     {
         $this->subject->setRegistrations(new Collection());
 
@@ -2861,7 +2861,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function attachRegistrationNotRemovesExistingRegistration()
+    public function attachRegistrationNotRemovesExistingRegistration(): void
     {
         $registrations = new Collection();
         $oldRegistration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)->getNewGhost();
@@ -2879,7 +2879,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function attachRegistrationSetsEventForRegistration()
+    public function attachRegistrationSetsEventForRegistration(): void
     {
         $this->subject->setRegistrations(new Collection());
 
@@ -2897,7 +2897,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getPaymentMethodsReturnsPaymentMethods()
+    public function getPaymentMethodsReturnsPaymentMethods(): void
     {
         $paymentMethods = new Collection();
         $this->subject->setData(
@@ -2913,7 +2913,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setPaymentMethodsSetsPaymentMethods()
+    public function setPaymentMethodsSetsPaymentMethods(): void
     {
         $this->subject->setData([]);
 
@@ -2931,7 +2931,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function haveOrganizersBeenNotifiedAboutEnoughAttendeesByDefaultReturnsFalse()
+    public function haveOrganizersBeenNotifiedAboutEnoughAttendeesByDefaultReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -2943,7 +2943,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function haveOrganizersBeenNotifiedAboutEnoughAttendeesReturnsFalseValueFromDatabase()
+    public function haveOrganizersBeenNotifiedAboutEnoughAttendeesReturnsFalseValueFromDatabase(): void
     {
         $this->subject->setData(['organizers_notified_about_minimum_reached' => 1]);
 
@@ -2955,7 +2955,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setOrganizersBeenNotifiedAboutEnoughAttendeesMarksItAsTrue()
+    public function setOrganizersBeenNotifiedAboutEnoughAttendeesMarksItAsTrue(): void
     {
         $this->subject->setData([]);
 
@@ -2971,7 +2971,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function shouldMuteNotificationEmailsByDefaultReturnsFalse()
+    public function shouldMuteNotificationEmailsByDefaultReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -2983,7 +2983,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function shouldMuteNotificationEmailsReturnsTrueValueFromDatabase()
+    public function shouldMuteNotificationEmailsReturnsTrueValueFromDatabase(): void
     {
         $this->subject->setData(
             ['mute_notification_emails' => 1]
@@ -2997,7 +2997,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function muteNotificationEmailsSetsShouldMute()
+    public function muteNotificationEmailsSetsShouldMute(): void
     {
         $this->subject->muteNotificationEmails();
 
@@ -3011,7 +3011,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function shouldAutomaticallyConfirmOrCancelByDefaultReturnsFalse()
+    public function shouldAutomaticallyConfirmOrCancelByDefaultReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -3023,7 +3023,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function shouldAutomaticallyConfirmOrCancelReturnsTrueValueFromDatabase()
+    public function shouldAutomaticallyConfirmOrCancelReturnsTrueValueFromDatabase(): void
     {
         $this->subject->setData(
             ['automatic_confirmation_cancelation' => 1]
@@ -3039,7 +3039,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getOrganizersGetsOrganizers()
+    public function getOrganizersGetsOrganizers(): void
     {
         $organizers = new Collection();
         $this->subject->setData(['organizers' => $organizers]);
@@ -3052,7 +3052,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getFirstOrganizerForNoOrganizersReturnsNull()
+    public function getFirstOrganizerForNoOrganizersReturnsNull(): void
     {
         $organizers = new Collection();
         $this->subject->setData(['organizers' => $organizers]);
@@ -3065,7 +3065,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getFirstOrganizerForOneOrganizerReturnsThatOrganizer()
+    public function getFirstOrganizerForOneOrganizerReturnsThatOrganizer(): void
     {
         $organizer = new \Tx_Seminars_Model_Organizer();
         $organizers = new Collection();
@@ -3080,7 +3080,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getFirstOrganizerForTwoOrganizersReturnsFirstOrganizer()
+    public function getFirstOrganizerForTwoOrganizersReturnsFirstOrganizer(): void
     {
         $firstOrganizer = new \Tx_Seminars_Model_Organizer();
         $organizers = new Collection();
@@ -3098,7 +3098,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getAttendeeNamesForNoRegistrationsReturnsEmptyArray()
+    public function getAttendeeNamesForNoRegistrationsReturnsEmptyArray(): void
     {
         $this->subject->setData(['registrations' => new Collection()]);
 
@@ -3108,7 +3108,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getAttendeeNamesForRegistrationWithRegisteredThemselvesReturnsThatName()
+    public function getAttendeeNamesForRegistrationWithRegisteredThemselvesReturnsThatName(): void
     {
         $firstName = 'Oliver';
         $lastName = 'Klee';
@@ -3135,7 +3135,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getAttendeeNamesForRegistrationOnlyWithoutRegisteredThemselvesReturnsEmptyArray()
+    public function getAttendeeNamesForRegistrationOnlyWithoutRegisteredThemselvesReturnsEmptyArray(): void
     {
         $user = new \Tx_Seminars_Model_FrontEndUser();
         $user->setData([]);
@@ -3155,7 +3155,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getAttendeeNamesForRegistrationReturnsAdditionalAttendeeNamesFromAttachedUsers()
+    public function getAttendeeNamesForRegistrationReturnsAdditionalAttendeeNamesFromAttachedUsers(): void
     {
         $firstName = 'Oliver';
         $lastName = 'Klee';
@@ -3183,7 +3183,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getAttendeeNamesForRegistrationForAttachedUsersIgnoresFreeTextNames()
+    public function getAttendeeNamesForRegistrationForAttachedUsersIgnoresFreeTextNames(): void
     {
         $firstName = 'Oliver';
         $lastName = 'Klee';
@@ -3216,7 +3216,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getAttendeeNamesForRegistrationReturnsAdditionalAttendeeNamesFromFreeTextField()
+    public function getAttendeeNamesForRegistrationReturnsAdditionalAttendeeNamesFromFreeTextField(): void
     {
         $user = new \Tx_Seminars_Model_FrontEndUser();
         $user->setData([]);
@@ -3241,7 +3241,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getAttendeeNamesSortsNamesFromRegisteredThemselvesByFullName()
+    public function getAttendeeNamesSortsNamesFromRegisteredThemselvesByFullName(): void
     {
         $registrations = new Collection();
 
@@ -3283,7 +3283,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getAttendeeNamesSortsNamesFromAdditionalAttendeesFromUsersByFullName()
+    public function getAttendeeNamesSortsNamesFromAdditionalAttendeesFromUsersByFullName(): void
     {
         $user = new \Tx_Seminars_Model_FrontEndUser();
         $user->setData([]);
@@ -3322,7 +3322,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getAttendeeNamesForRegistrationSortAdditionalAttendeeNamesFromFreeTextField()
+    public function getAttendeeNamesForRegistrationSortAdditionalAttendeeNamesFromFreeTextField(): void
     {
         $user = new \Tx_Seminars_Model_FrontEndUser();
         $user->setData([]);
@@ -3347,7 +3347,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getAttendeeNamesAfterLastDigestUsesNewerRegistration()
+    public function getAttendeeNamesAfterLastDigestUsesNewerRegistration(): void
     {
         $firstName = 'Oliver';
         $lastName = 'Klee';
@@ -3378,7 +3378,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getAttendeeNamesAfterLastDigestIgnoresOlderRegistration()
+    public function getAttendeeNamesAfterLastDigestIgnoresOlderRegistration(): void
     {
         $firstName = 'Oliver';
         $lastName = 'Klee';
@@ -3405,7 +3405,7 @@ final class EventTest extends TestCase
 
     // Tests concerning "price on request"
 
-    public function getPriceOnRequestByDefaultReturnsFalse()
+    public function getPriceOnRequestByDefaultReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -3415,7 +3415,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getPriceOnRequestReturnsPriceOnRequest()
+    public function getPriceOnRequestReturnsPriceOnRequest(): void
     {
         $this->subject->setData(['price_on_request' => true]);
 
@@ -3427,7 +3427,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getDateOfLastRegistrationDigestEmailAsUnixTimeStampWithoutDateReturnsZero()
+    public function getDateOfLastRegistrationDigestEmailAsUnixTimeStampWithoutDateReturnsZero(): void
     {
         $this->subject->setData([]);
 
@@ -3440,7 +3440,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getDateOfLastRegistrationDigestEmailAsUnixTimeStampWithPositiveDateReturnsIt()
+    public function getDateOfLastRegistrationDigestEmailAsUnixTimeStampWithPositiveDateReturnsIt(): void
     {
         $this->subject->setData(['date_of_last_registration_digest' => 42]);
 
@@ -3450,7 +3450,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setDateOfLastRegistrationDigestEmailAsUnixTimeStampWithNegativeDateThrowsException()
+    public function setDateOfLastRegistrationDigestEmailAsUnixTimeStampWithNegativeDateThrowsException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -3460,7 +3460,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setDateOfLastRegistrationDigestEmailAsUnixTimeStampWithZeroDateSetsIt()
+    public function setDateOfLastRegistrationDigestEmailAsUnixTimeStampWithZeroDateSetsIt(): void
     {
         $this->subject->setData(['date_of_last_registration_digest' => 42]);
         $this->subject->setDateOfLastRegistrationDigestEmailAsUnixTimeStamp(0);
@@ -3471,7 +3471,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function setDateOfLastRegistrationDigestEmailAsUnixTimeStampWithPositiveDateSetsIs()
+    public function setDateOfLastRegistrationDigestEmailAsUnixTimeStampWithPositiveDateSetsIs(): void
     {
         $this->subject->setDateOfLastRegistrationDigestEmailAsUnixTimeStamp(42);
 
@@ -3483,7 +3483,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getBeginDateAsUnixTimeStampByDefaultReturnsZero()
+    public function getBeginDateAsUnixTimeStampByDefaultReturnsZero(): void
     {
         $this->subject->setData([]);
 
@@ -3493,7 +3493,7 @@ final class EventTest extends TestCase
     /**
      * @test
      */
-    public function getBeginDateAsUnixTimeStampReturnsBeginDate()
+    public function getBeginDateAsUnixTimeStampReturnsBeginDate(): void
     {
         $timeStamp = 455456;
         $this->subject->setData(['begin_date' => $timeStamp]);

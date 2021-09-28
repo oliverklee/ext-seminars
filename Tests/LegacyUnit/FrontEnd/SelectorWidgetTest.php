@@ -35,7 +35,7 @@ final class SelectorWidgetTest extends TestCase
      */
     protected $staticInfo = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
@@ -49,7 +49,7 @@ final class SelectorWidgetTest extends TestCase
         );
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
 
@@ -62,10 +62,8 @@ final class SelectorWidgetTest extends TestCase
 
     /**
      * Creates and initializes $this->staticInfo.
-     *
-     * @return void
      */
-    private function instantiateStaticInfo()
+    private function instantiateStaticInfo(): void
     {
         $this->staticInfo = new PiBaseApi();
         $this->staticInfo->init();
@@ -83,7 +81,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function instantiateStaticInfoCreateStaticInfoInstance()
+    public function instantiateStaticInfoCreateStaticInfoInstance(): void
     {
         $this->instantiateStaticInfo();
 
@@ -100,7 +98,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function fixtureIsAFrontEndSelectorWidgetObject()
+    public function fixtureIsAFrontEndSelectorWidgetObject(): void
     {
         self::assertInstanceOf(\Tx_Seminars_FrontEnd_SelectorWidget::class, $this->subject);
     }
@@ -112,7 +110,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderWithAllSearchOptionsHiddenReturnsEmptyString()
+    public function renderWithAllSearchOptionsHiddenReturnsEmptyString(): void
     {
         $this->subject->setConfigurationValue('displaySearchFormFields', '');
 
@@ -125,7 +123,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledSearchWidgetContainsSearchingHints()
+    public function renderForEnabledSearchWidgetContainsSearchingHints(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -141,7 +139,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledSearchWidgetContainsSubmitButton()
+    public function renderForEnabledSearchWidgetContainsSubmitButton(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -158,7 +156,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledSearchWidgetContainsResetButton()
+    public function renderForEnabledSearchWidgetContainsResetButton(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -175,7 +173,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledShowEmptyEntryInOptionListsContainsEmptyOption()
+    public function renderForEnabledShowEmptyEntryInOptionListsContainsEmptyOption(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -197,7 +195,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForTwoEnabledSearchPartsRendersBothSearchParts()
+    public function renderForTwoEnabledSearchPartsRendersBothSearchParts(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -219,7 +217,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledSearchWidgetDoesNotHaveUnreplacedMarkers()
+    public function renderForEnabledSearchWidgetDoesNotHaveUnreplacedMarkers(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -236,7 +234,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledSearchWidgetCallsSeminarSelectorWidgetHook()
+    public function renderForEnabledSearchWidgetCallsSeminarSelectorWidgetHook(): void
     {
         $this->subject->setConfigurationValue('displaySearchFormFields', 'city');
 
@@ -257,7 +255,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function removeDummyOptionFromFormDataRemovesDummyOptionAtBeginningOfArray()
+    public function removeDummyOptionFromFormDataRemovesDummyOptionAtBeginningOfArray(): void
     {
         self::assertEquals(
             ['CH', 'DE'],
@@ -270,7 +268,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function removeDummyOptionFromFormDataRemovesDummyOptionInMiddleOfArray()
+    public function removeDummyOptionFromFormDataRemovesDummyOptionInMiddleOfArray(): void
     {
         self::assertEquals(
             ['CH', 'DE'],
@@ -283,7 +281,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function removeDummyOptionFromFormDataWithEmptyFormDataReturnsEmptyArray()
+    public function removeDummyOptionFromFormDataWithEmptyFormDataReturnsEmptyArray(): void
     {
         self::assertEquals(
             [],
@@ -300,7 +298,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEventTypeHiddenInConfigurationHidesEventTypeSubpart()
+    public function renderForEventTypeHiddenInConfigurationHidesEventTypeSubpart(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -317,7 +315,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledEventTypeCanContainEventTypeOption()
+    public function renderForEnabledEventTypeCanContainEventTypeOption(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -344,7 +342,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledEventTypeHtmlSpecialCharsTheEventTypeTitle()
+    public function renderForEnabledEventTypeHtmlSpecialCharsTheEventTypeTitle(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -372,7 +370,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledEventTypePreselectsSelectedValue()
+    public function renderForEnabledEventTypePreselectsSelectedValue(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -401,7 +399,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledEventTypeCanPreselectTwoValues()
+    public function renderForEnabledEventTypeCanPreselectTwoValues(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -448,7 +446,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledEventTypeContainsSelectorForEventTypes()
+    public function renderForEnabledEventTypeContainsSelectorForEventTypes(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -465,7 +463,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function itemsInSearchBoxAreSortedAlphabetically()
+    public function itemsInSearchBoxAreSortedAlphabetically(): void
     {
         /** @var \Tx_Seminars_FrontEnd_SelectorWidget&MockObject $subject */
         $subject = $this->getMockBuilder(\Tx_Seminars_FrontEnd_SelectorWidget::class)
@@ -514,7 +512,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForLanguageOptionsHiddenInConfigurationHidesLanguageSubpart()
+    public function renderForLanguageOptionsHiddenInConfigurationHidesLanguageSubpart(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -531,7 +529,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForLanguageOptionsHiddenInConfigurationDoesNotShowLanguageOptionsMarker()
+    public function renderForLanguageOptionsHiddenInConfigurationDoesNotShowLanguageOptionsMarker(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -547,7 +545,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledLanguageOptionsContainsLanguageOption()
+    public function renderForEnabledLanguageOptionsContainsLanguageOption(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -579,7 +577,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledLanguageOptionsContainsSelectorForLanguages()
+    public function renderForEnabledLanguageOptionsContainsSelectorForLanguages(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -596,7 +594,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledLanguageOptionsCanPreselectSelectedLanguage()
+    public function renderForEnabledLanguageOptionsCanPreselectSelectedLanguage(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -630,7 +628,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledLanguageOptionsCanPreselectMultipleLanguages()
+    public function renderForEnabledLanguageOptionsCanPreselectMultipleLanguages(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -688,7 +686,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForDisabledPlaceOptionsHidesPlaceSubpart()
+    public function renderForDisabledPlaceOptionsHidesPlaceSubpart(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -705,7 +703,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledPlaceOptionsContainsPlaceOptions()
+    public function renderForEnabledPlaceOptionsContainsPlaceOptions(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -735,7 +733,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledPlaceOptionsHtmlSpecialCharsThePlaceTitle()
+    public function renderForEnabledPlaceOptionsHtmlSpecialCharsThePlaceTitle(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -766,7 +764,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledPlaceOptionsContainsSelectorForPlaces()
+    public function renderForEnabledPlaceOptionsContainsSelectorForPlaces(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -783,7 +781,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledPlaceOptionsCanPreselectPlaceOption()
+    public function renderForEnabledPlaceOptionsCanPreselectPlaceOption(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -815,7 +813,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledPlaceOptionsCanPreselectMultiplePlaceOptions()
+    public function renderForEnabledPlaceOptionsCanPreselectMultiplePlaceOptions(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -872,7 +870,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForDisabledCityOptionsHidesCitySubpart()
+    public function renderForDisabledCityOptionsHidesCitySubpart(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -889,7 +887,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledCityOptionsCanContainCityOption()
+    public function renderForEnabledCityOptionsCanContainCityOption(): void
     {
         $this->subject->setConfigurationValue('displaySearchFormFields', 'city');
 
@@ -917,7 +915,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledCityOptionsCanContainTwoCityOptiona()
+    public function renderForEnabledCityOptionsCanContainTwoCityOptiona(): void
     {
         $this->subject->setConfigurationValue('displaySearchFormFields', 'city');
         $cityName1 = 'foo city';
@@ -966,7 +964,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledCityOptionsCanPreselectCityOption()
+    public function renderForEnabledCityOptionsCanPreselectCityOption(): void
     {
         $this->subject->setConfigurationValue('displaySearchFormFields', 'city');
         $cityTitle = 'test city';
@@ -996,7 +994,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledCityOptionsCanPreselectMultipleCityOptions()
+    public function renderForEnabledCityOptionsCanPreselectMultipleCityOptions(): void
     {
         $this->subject->setConfigurationValue('displaySearchFormFields', 'city');
         $cityTitle1 = 'bar city';
@@ -1054,7 +1052,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForDisabledCountryOptionsHidesCountrySubpart()
+    public function renderForDisabledCountryOptionsHidesCountrySubpart(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -1071,7 +1069,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForDisabledCountryOptionsDoesNotShowCountryOptionsMarker()
+    public function renderForDisabledCountryOptionsDoesNotShowCountryOptionsMarker(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -1087,7 +1085,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledCountryOptionsCanContainCountryOption()
+    public function renderForEnabledCountryOptionsCanContainCountryOption(): void
     {
         $this->instantiateStaticInfo();
         $this->subject->setConfigurationValue(
@@ -1125,7 +1123,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledCountryOptionsCanContainMultipleCountryOptions()
+    public function renderForEnabledCountryOptionsCanContainMultipleCountryOptions(): void
     {
         $this->instantiateStaticInfo();
         $this->subject->setConfigurationValue(
@@ -1191,7 +1189,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledCountryOptionsCanPreselectOneCountryOption()
+    public function renderForEnabledCountryOptionsCanPreselectOneCountryOption(): void
     {
         $this->instantiateStaticInfo();
         $this->subject->setConfigurationValue(
@@ -1231,7 +1229,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledCountryOptionsCanPreselectMultipleCountryOptions()
+    public function renderForEnabledCountryOptionsCanPreselectMultipleCountryOptions(): void
     {
         $this->instantiateStaticInfo();
         $this->subject->setConfigurationValue(
@@ -1304,7 +1302,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForDisabledFullTextSearchHidesFullTextSearchSubpart()
+    public function renderForDisabledFullTextSearchHidesFullTextSearchSubpart(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -1321,7 +1319,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledFullTextSearchContainsFullTextSearchSubpart()
+    public function renderForEnabledFullTextSearchContainsFullTextSearchSubpart(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -1338,7 +1336,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledFullTextSearchCanFillSearchedWordIntoTextbox()
+    public function renderForEnabledFullTextSearchCanFillSearchedWordIntoTextbox(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -1357,7 +1355,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledFullTextSearchHtmlSpecialCharsSearchedWord()
+    public function renderForEnabledFullTextSearchHtmlSpecialCharsSearchedWord(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -1380,7 +1378,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForDisabledDateSearchHidesDateSearchSubpart()
+    public function renderForDisabledDateSearchHidesDateSearchSubpart(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -1397,7 +1395,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledDateSearchContainsDayFromDropDown()
+    public function renderForEnabledDateSearchContainsDayFromDropDown(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -1413,7 +1411,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledDateSearchContainsMonthFromDropDown()
+    public function renderForEnabledDateSearchContainsMonthFromDropDown(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -1429,7 +1427,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledDateSearchContainsYearFromDropDown()
+    public function renderForEnabledDateSearchContainsYearFromDropDown(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -1445,7 +1443,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledDateSearchContainsDayToDropDown()
+    public function renderForEnabledDateSearchContainsDayToDropDown(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -1461,7 +1459,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledDateSearchContainsMonthToDropDown()
+    public function renderForEnabledDateSearchContainsMonthToDropDown(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -1477,7 +1475,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledDateSearchContainsYearToDropDown()
+    public function renderForEnabledDateSearchContainsYearToDropDown(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -1493,7 +1491,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledDateSearchAndNumberOfYearsInDateFilterSetToTwoContainsTwoYearsInDropDown()
+    public function renderForEnabledDateSearchAndNumberOfYearsInDateFilterSetToTwoContainsTwoYearsInDropDown(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -1520,7 +1518,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledDateSearchAddsAnEmptyOptionToTheDropDown()
+    public function renderForEnabledDateSearchAddsAnEmptyOptionToTheDropDown(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -1536,7 +1534,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForSentToMonthValuePreselectsToMonthValue()
+    public function renderForSentToMonthValuePreselectsToMonthValue(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -1554,7 +1552,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForSentFromDatePreselectsFromDateValues()
+    public function renderForSentFromDatePreselectsFromDateValues(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -1590,7 +1588,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForNoSentDatePreselectsNoDateValues()
+    public function renderForNoSentDatePreselectsNoDateValues(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -1610,7 +1608,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForBothSentDatesZeroPreselectsNoDateValues()
+    public function renderForBothSentDatesZeroPreselectsNoDateValues(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -1641,7 +1639,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEventTypeLimitedAndEventTypeDisplayedShowsTheLimitedEventType()
+    public function renderForEventTypeLimitedAndEventTypeDisplayedShowsTheLimitedEventType(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -1671,7 +1669,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEventTypeLimitedAndEventTypeDisplayedHidesEventTypeNotLimited()
+    public function renderForEventTypeLimitedAndEventTypeDisplayedHidesEventTypeNotLimited(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -1709,7 +1707,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForOrganizersLimitedAndOrganizerDisplayedShowsTheLimitedOrganizers()
+    public function renderForOrganizersLimitedAndOrganizerDisplayedShowsTheLimitedOrganizers(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -1741,7 +1739,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForOrganizerLimitedAndOrganizersDisplayedHidesTheOrganizersWhichAreNotTheLimitedOnes()
+    public function renderForOrganizerLimitedAndOrganizersDisplayedHidesTheOrganizersWhichAreNotTheLimitedOnes(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -1779,7 +1777,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForCategoriesLimitedAndCategoryDisplayedShowsTheLimitedCategories()
+    public function renderForCategoriesLimitedAndCategoryDisplayedShowsTheLimitedCategories(): void
     {
         $this->subject->setConfigurationValue('displaySearchFormFields', 'categories');
 
@@ -1802,7 +1800,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForCategoryLimitedAndCategoriesDisplayedHidesTheCategoriesWhichAreNotTheLimitedOnes()
+    public function renderForCategoryLimitedAndCategoriesDisplayedHidesTheCategoriesWhichAreNotTheLimitedOnes(): void
     {
         $this->subject->setConfigurationValue('displaySearchFormFields', 'categories');
 
@@ -1831,7 +1829,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForDisabledAgeSearchHidesAgeSearchSubpart()
+    public function renderForDisabledAgeSearchHidesAgeSearchSubpart(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -1848,7 +1846,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledAgeSearchContainsAgeSearchSubpart()
+    public function renderForEnabledAgeSearchContainsAgeSearchSubpart(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -1865,7 +1863,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledAgeSearchCanFillSearchedAgeIntoTextbox()
+    public function renderForEnabledAgeSearchCanFillSearchedAgeIntoTextbox(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -1884,7 +1882,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledAgeSearchAndAgeValueZeroDoesNotShowAgeValueZero()
+    public function renderForEnabledAgeSearchAndAgeValueZeroDoesNotShowAgeValueZero(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -1903,7 +1901,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledAgeSearchDoesNotIncludeNonIntegerAgeAsValue()
+    public function renderForEnabledAgeSearchDoesNotIncludeNonIntegerAgeAsValue(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -1926,7 +1924,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForOrganizerHiddenInConfigurationHidesOrganizerSubpart()
+    public function renderForOrganizerHiddenInConfigurationHidesOrganizerSubpart(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -1943,7 +1941,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledOrganizerContainsOrganizerOption()
+    public function renderForEnabledOrganizerContainsOrganizerOption(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -1975,7 +1973,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledOrganizerHtmlSpecialCharsTheOrganizersName()
+    public function renderForEnabledOrganizerHtmlSpecialCharsTheOrganizersName(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -2008,7 +2006,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledOrganizerPreselectsSelectedValue()
+    public function renderForEnabledOrganizerPreselectsSelectedValue(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -2042,7 +2040,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledOrganizerCanPreselectTwoValues()
+    public function renderForEnabledOrganizerCanPreselectTwoValues(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -2095,7 +2093,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledOrganizerContainsOrganizersSubpart()
+    public function renderForEnabledOrganizerContainsOrganizersSubpart(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -2114,7 +2112,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForCategoryHiddenInConfigurationHidesCategorySubpart()
+    public function renderForCategoryHiddenInConfigurationHidesCategorySubpart(): void
     {
         $this->subject->setConfigurationValue('displaySearchFormFields', 'city');
 
@@ -2128,7 +2126,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledCategoryContainsCategoryOption()
+    public function renderForEnabledCategoryContainsCategoryOption(): void
     {
         $this->subject->setConfigurationValue('displaySearchFormFields', 'categories');
 
@@ -2151,7 +2149,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledCategoryHtmlSpecialCharsTheCategoriesName()
+    public function renderForEnabledCategoryHtmlSpecialCharsTheCategoriesName(): void
     {
         $this->subject->setConfigurationValue('displaySearchFormFields', 'categories');
 
@@ -2177,7 +2175,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledCategoryPreselectsSelectedValue()
+    public function renderForEnabledCategoryPreselectsSelectedValue(): void
     {
         $this->subject->setConfigurationValue('displaySearchFormFields', 'categories');
 
@@ -2202,7 +2200,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledCategoryCanPreselectTwoValues()
+    public function renderForEnabledCategoryCanPreselectTwoValues(): void
     {
         $this->subject->setConfigurationValue('displaySearchFormFields', 'categories');
 
@@ -2244,7 +2242,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledCategoryContainsCategoriesSubpart()
+    public function renderForEnabledCategoryContainsCategoriesSubpart(): void
     {
         $this->subject->setConfigurationValue('displaySearchFormFields', 'categories');
         $this->subject->render();
@@ -2261,7 +2259,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForDisabledPriceSearchHidesPriceSearchSubpart()
+    public function renderForDisabledPriceSearchHidesPriceSearchSubpart(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -2278,7 +2276,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledPriceSearchContainsPriceSearchSubpart()
+    public function renderForEnabledPriceSearchContainsPriceSearchSubpart(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -2295,7 +2293,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledPriceSearchCanFillSearchedPriceFromIntoTextbox()
+    public function renderForEnabledPriceSearchCanFillSearchedPriceFromIntoTextbox(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -2314,7 +2312,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledPriceSearchCanFillSearchedPriceToIntoTextbox()
+    public function renderForEnabledPriceSearchCanFillSearchedPriceToIntoTextbox(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -2333,7 +2331,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledPriceSearchAndPriceFromZeroDoesNotShowZeroForPriceFrom()
+    public function renderForEnabledPriceSearchAndPriceFromZeroDoesNotShowZeroForPriceFrom(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -2352,7 +2350,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledPriceSearchAndPriceToZeroDoesNotShowZeroForPriceTo()
+    public function renderForEnabledPriceSearchAndPriceToZeroDoesNotShowZeroForPriceTo(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -2371,7 +2369,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledPriceSearchDoesNotIncludeNonIntegerPriceFromAsValue()
+    public function renderForEnabledPriceSearchDoesNotIncludeNonIntegerPriceFromAsValue(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',
@@ -2390,7 +2388,7 @@ final class SelectorWidgetTest extends TestCase
     /**
      * @test
      */
-    public function renderForEnabledPriceSearchDoesNotIncludeNonIntegerPriceToAsValue()
+    public function renderForEnabledPriceSearchDoesNotIncludeNonIntegerPriceToAsValue(): void
     {
         $this->subject->setConfigurationValue(
             'displaySearchFormFields',

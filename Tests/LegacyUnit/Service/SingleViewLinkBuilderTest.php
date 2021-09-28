@@ -52,7 +52,7 @@ final class SingleViewLinkBuilderTest extends TestCase
      */
     private $configuration;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
 
@@ -64,7 +64,7 @@ final class SingleViewLinkBuilderTest extends TestCase
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars_pi1', $this->configuration);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $GLOBALS['TYPO3_CONF_VARS'] = $this->typo3confVarsBackup;
         $_GET = $this->getBackup;
@@ -83,7 +83,7 @@ final class SingleViewLinkBuilderTest extends TestCase
     /**
      * @test
      */
-    public function getSingleViewPageForEventForEventWithSingleViewPageAndNoConfigurationReturnsSingleViewPageOfEvent()
+    public function getSingleViewPageForEventForEventWithSingleViewPageAndNoConfigurationReturnsSingleViewPageOfEvent(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
@@ -118,7 +118,7 @@ final class SingleViewLinkBuilderTest extends TestCase
     /**
      * @test
      */
-    public function getSingleViewPageForEventForEventWithoutSingleViewPageReturnsSingleViewPageFromConfiguration()
+    public function getSingleViewPageForEventForEventWithoutSingleViewPageReturnsSingleViewPageFromConfiguration(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
@@ -153,7 +153,7 @@ final class SingleViewLinkBuilderTest extends TestCase
     /**
      * @test
      */
-    public function getSingleViewPageForEventForEventAndConfigurationWithSingleViewPageReturnsSingleViewPageFromEvent()
+    public function getSingleViewPageForEventForEventAndConfigurationWithSingleViewPageReturnsSingleViewPageFromEvent(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
@@ -188,7 +188,7 @@ final class SingleViewLinkBuilderTest extends TestCase
     /**
      * @test
      */
-    public function getSingleViewPageForEventForEventWithoutSingleViewPageAndConfigurationWithoutSettingIsEmpty()
+    public function getSingleViewPageForEventForEventWithoutSingleViewPageAndConfigurationWithoutSettingIsEmpty(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $event */
         $event = $this->createPartialMock(
@@ -227,7 +227,7 @@ final class SingleViewLinkBuilderTest extends TestCase
     /**
      * @test
      */
-    public function configurationHasSingleViewPageForZeroPageFromConfigurationReturnsFalse()
+    public function configurationHasSingleViewPageForZeroPageFromConfigurationReturnsFalse(): void
     {
         /** @var TestingSingleViewLinkBuilder&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -246,7 +246,7 @@ final class SingleViewLinkBuilderTest extends TestCase
     /**
      * @test
      */
-    public function configurationHasSingleViewPageForNonZeroPageFromConfigurationReturnsTrue()
+    public function configurationHasSingleViewPageForNonZeroPageFromConfigurationReturnsTrue(): void
     {
         /** @var TestingSingleViewLinkBuilder&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -269,7 +269,7 @@ final class SingleViewLinkBuilderTest extends TestCase
     /**
      * @test
      */
-    public function getSingleViewPageFromConfigurationForPluginSetReturnsPageUidFromPluginConfiguration()
+    public function getSingleViewPageFromConfigurationForPluginSetReturnsPageUidFromPluginConfiguration(): void
     {
         /** @var TemplateHelper&MockObject $plugin */
         $plugin = $this->createPartialMock(TemplateHelper::class, ['hasConfValueInteger', 'getConfValueInteger']);
@@ -288,7 +288,7 @@ final class SingleViewLinkBuilderTest extends TestCase
     /**
      * @test
      */
-    public function getSingleViewPageFromConfigurationForNoPluginSetReturnsPageUidFromTypoScriptSetup()
+    public function getSingleViewPageFromConfigurationForNoPluginSetReturnsPageUidFromTypoScriptSetup(): void
     {
         $this->configuration->setAsInteger('detailPID', 91);
 
@@ -305,7 +305,7 @@ final class SingleViewLinkBuilderTest extends TestCase
     /**
      * @test
      */
-    public function createAbsoluteUrlForEventReturnsRelativeUrlMadeAbsolute()
+    public function createAbsoluteUrlForEventReturnsRelativeUrlMadeAbsolute(): void
     {
         $relativeUrl = 'index.php?id=42&tx_seminars%5BshowUid%5D=17';
         /** @var \Tx_Seminars_Model_Event&MockObject $event */
@@ -328,7 +328,7 @@ final class SingleViewLinkBuilderTest extends TestCase
     /**
      * @test
      */
-    public function createRelativeUrlForEventCreatesUrlViaTslibContent()
+    public function createRelativeUrlForEventCreatesUrlViaTslibContent(): void
     {
         $eventUid = 19;
         $singleViewPageUid = 42;
@@ -364,7 +364,7 @@ final class SingleViewLinkBuilderTest extends TestCase
     /**
      * @test
      */
-    public function createRelativeUrlReturnsUrlFromTypolinkUrl()
+    public function createRelativeUrlReturnsUrlFromTypolinkUrl(): void
     {
         $relativeUrl = 'index.php?id=42&tx_seminars%5BshowUid%5D=17';
 
@@ -392,7 +392,7 @@ final class SingleViewLinkBuilderTest extends TestCase
     /**
      * @test
      */
-    public function createAbsoluteUrlForEventWithExternalDetailsPageAddsProtocolAndNoSeminarParameter()
+    public function createAbsoluteUrlForEventWithExternalDetailsPageAddsProtocolAndNoSeminarParameter(): void
     {
         $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
             ->getLoadedTestingModel(['details_page' => 'www.example.com']);
@@ -408,7 +408,7 @@ final class SingleViewLinkBuilderTest extends TestCase
     /**
      * @test
      */
-    public function createAbsoluteUrlForEventWithInternalDetailsPageAddsSeminarParameter()
+    public function createAbsoluteUrlForEventWithInternalDetailsPageAddsSeminarParameter(): void
     {
         $pageUid = $this->testingFramework->createFrontEndPage();
 
@@ -428,7 +428,7 @@ final class SingleViewLinkBuilderTest extends TestCase
     /**
      * @test
      */
-    public function getContentObjectForAvailableFrontEndReturnsFrontEndContentObject()
+    public function getContentObjectForAvailableFrontEndReturnsFrontEndContentObject(): void
     {
         $this->testingFramework->createFakeFrontEnd();
 
@@ -443,7 +443,7 @@ final class SingleViewLinkBuilderTest extends TestCase
     /**
      * @test
      */
-    public function getContentObjectForNoFrontEndReturnsContentObjectRenderer()
+    public function getContentObjectForNoFrontEndReturnsContentObjectRenderer(): void
     {
         $subject = new TestingSingleViewLinkBuilder();
 

@@ -34,8 +34,6 @@ class TestingDefaultController extends \Tx_Seminars_FrontEnd_DefaultController
 
     /**
      * @param \Tx_Seminars_Model_Event $event
-     *
-     * @return void
      */
     public function hideEvent(\Tx_Seminars_Model_Event $event)
     {
@@ -44,8 +42,6 @@ class TestingDefaultController extends \Tx_Seminars_FrontEnd_DefaultController
 
     /**
      * @param \Tx_Seminars_Model_Event $event
-     *
-     * @return void
      */
     public function unhideEvent(\Tx_Seminars_Model_Event $event)
     {
@@ -54,8 +50,6 @@ class TestingDefaultController extends \Tx_Seminars_FrontEnd_DefaultController
 
     /**
      * @param \Tx_Seminars_Model_Event $event
-     *
-     * @return void
      */
     public function copyEvent(\Tx_Seminars_Model_Event $event)
     {

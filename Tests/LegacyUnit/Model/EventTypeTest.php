@@ -13,7 +13,7 @@ final class EventTypeTest extends TestCase
      */
     private $subject;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new \Tx_Seminars_Model_EventType();
     }
@@ -21,7 +21,7 @@ final class EventTypeTest extends TestCase
     /**
      * @test
      */
-    public function setTitleWithEmptyTitleThrowsException()
+    public function setTitleWithEmptyTitleThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -36,7 +36,7 @@ final class EventTypeTest extends TestCase
     /**
      * @test
      */
-    public function setTitleSetsTitle()
+    public function setTitleSetsTitle(): void
     {
         $this->subject->setTitle('Workshop');
 
@@ -49,7 +49,7 @@ final class EventTypeTest extends TestCase
     /**
      * @test
      */
-    public function getTitleWithNonEmptyTitleReturnsTitle()
+    public function getTitleWithNonEmptyTitleReturnsTitle(): void
     {
         $this->subject->setData(['title' => 'Workshop']);
 
@@ -66,7 +66,7 @@ final class EventTypeTest extends TestCase
     /**
      * @test
      */
-    public function getSingleViewPageUidReturnsSingleViewPageUid()
+    public function getSingleViewPageUidReturnsSingleViewPageUid(): void
     {
         $this->subject->setData(['single_view_page' => 42]);
 
@@ -79,7 +79,7 @@ final class EventTypeTest extends TestCase
     /**
      * @test
      */
-    public function hasSingleViewPageUidForZeroPageUidReturnsFalse()
+    public function hasSingleViewPageUidForZeroPageUidReturnsFalse(): void
     {
         $this->subject->setData(['single_view_page' => 0]);
 
@@ -91,7 +91,7 @@ final class EventTypeTest extends TestCase
     /**
      * @test
      */
-    public function hasSingleViewPageUidForNonZeroPageUidReturnsTrue()
+    public function hasSingleViewPageUidForNonZeroPageUidReturnsTrue(): void
     {
         $this->subject->setData(['single_view_page' => 42]);
 

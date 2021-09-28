@@ -69,7 +69,7 @@ final class AbstractRegistrationListViewTest extends TestCase
      */
     private $extConfBackup = [];
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
@@ -118,7 +118,7 @@ final class AbstractRegistrationListViewTest extends TestCase
         $this->subject = $subject;
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->purgeMockedInstances();
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
@@ -153,10 +153,8 @@ final class AbstractRegistrationListViewTest extends TestCase
     /**
      * Purges possibly leftover instances from the Typo3 instance FIFO buffer used by
      * `GeneralUtility::makeInstance()`.
-     *
-     * @return void
      */
-    private function purgeMockedInstances()
+    private function purgeMockedInstances(): void
     {
         foreach ($this->mockedClassNames as $className) {
             GeneralUtility::makeInstance($className);
@@ -170,7 +168,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function mockedInstancesListIsEmptyInitially()
+    public function mockedInstancesListIsEmptyInitially(): void
     {
         self::assertEmpty($this->mockedClassNames);
     }
@@ -178,7 +176,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function addMockedInstanceAddsClassnameToList()
+    public function addMockedInstanceAddsClassnameToList(): void
     {
         $mockedInstance = $this->createMock(\stdClass::class);
         $mockedClassName = \get_class($mockedInstance);
@@ -194,7 +192,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function addMockedInstanceAddsInstanceToTypo3InstanceBuffer()
+    public function addMockedInstanceAddsInstanceToTypo3InstanceBuffer(): void
     {
         $mockedInstance = $this->createMock(\stdClass::class);
         $mockedClassName = \get_class($mockedInstance);
@@ -207,7 +205,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function purgeMockedInstancesRemovesClassnameFromList()
+    public function purgeMockedInstancesRemovesClassnameFromList(): void
     {
         $mockedInstance = $this->createMock(\stdClass::class);
         $mockedClassName = \get_class($mockedInstance);
@@ -223,7 +221,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function purgeMockedInstancesRemovesInstanceFromTypo3InstanceBuffer()
+    public function purgeMockedInstancesRemovesInstanceFromTypo3InstanceBuffer(): void
     {
         $mockedInstance = $this->createMock(\stdClass::class);
         $mockedClassName = \get_class($mockedInstance);
@@ -253,7 +251,7 @@ final class AbstractRegistrationListViewTest extends TestCase
      *
      * @doesNotPerformAssertions
      */
-    public function setPageUidWithPositivePageUidNotThrowsException()
+    public function setPageUidWithPositivePageUidNotThrowsException(): void
     {
         $this->subject->setPageUid($this->testingFramework->createSystemFolder());
     }
@@ -263,7 +261,7 @@ final class AbstractRegistrationListViewTest extends TestCase
      *
      * @doesNotPerformAssertions
      */
-    public function setPageUidWithZeroPageUidNotThrowsException()
+    public function setPageUidWithZeroPageUidNotThrowsException(): void
     {
         $this->subject->setPageUid(0);
     }
@@ -271,7 +269,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function setPageUidWithNegativePageUidThrowsException()
+    public function setPageUidWithNegativePageUidThrowsException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -283,7 +281,7 @@ final class AbstractRegistrationListViewTest extends TestCase
      *
      * @doesNotPerformAssertions
      */
-    public function setEventUidWithZeroEventUidNotThrowsException()
+    public function setEventUidWithZeroEventUidNotThrowsException(): void
     {
         $this->subject->setEventUid(0);
     }
@@ -291,7 +289,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function setEventUidWithNegativeEventUidThrowsException()
+    public function setEventUidWithNegativeEventUidThrowsException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -301,7 +299,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderForNoPageAndNoEventThrowsException()
+    public function renderForNoPageAndNoEventThrowsException(): void
     {
         $this->expectException(\BadMethodCallException::class);
 
@@ -317,7 +315,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderForPageAndEventThrowsException()
+    public function renderForPageAndEventThrowsException(): void
     {
         $this->expectException(\BadMethodCallException::class);
 
@@ -332,7 +330,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderCanContainOneRegistrationUid()
+    public function renderCanContainOneRegistrationUid(): void
     {
         $this->registrationFieldKeys = ['uid'];
 
@@ -354,7 +352,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderCanContainTwoRegistrationUids()
+    public function renderCanContainTwoRegistrationUids(): void
     {
         $this->registrationFieldKeys = ['uid'];
 
@@ -389,7 +387,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderCanContainNameOfUser()
+    public function renderCanContainNameOfUser(): void
     {
         $this->frontEndUserFieldKeys = ['name'];
 
@@ -412,7 +410,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderNotContainsUidOfRegistrationWithDeletedUser()
+    public function renderNotContainsUidOfRegistrationWithDeletedUser(): void
     {
         $this->registrationFieldKeys = ['uid'];
 
@@ -435,7 +433,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderNotContainsUidOfRegistrationWithInexistentUser()
+    public function renderNotContainsUidOfRegistrationWithInexistentUser(): void
     {
         $this->registrationFieldKeys = ['uid'];
 
@@ -457,7 +455,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderSeparatesLinesWithCarriageReturnAndLineFeed()
+    public function renderSeparatesLinesWithCarriageReturnAndLineFeed(): void
     {
         $this->registrationFieldKeys = ['uid'];
 
@@ -488,7 +486,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderHasResultThatEndsWithCarriageReturnAndLineFeed()
+    public function renderHasResultThatEndsWithCarriageReturnAndLineFeed(): void
     {
         $this->registrationFieldKeys = ['uid'];
 
@@ -518,7 +516,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderEscapesDoubleQuotes()
+    public function renderEscapesDoubleQuotes(): void
     {
         $this->registrationFieldKeys = ['uid', 'address'];
 
@@ -541,7 +539,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderNotEscapesRegularValues()
+    public function renderNotEscapesRegularValues(): void
     {
         $this->registrationFieldKeys = ['address'];
 
@@ -564,7 +562,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderWrapsValuesWithSemicolonsInDoubleQuotes()
+    public function renderWrapsValuesWithSemicolonsInDoubleQuotes(): void
     {
         $this->registrationFieldKeys = ['address'];
 
@@ -587,7 +585,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderWrapsValuesWithLineFeedsInDoubleQuotes()
+    public function renderWrapsValuesWithLineFeedsInDoubleQuotes(): void
     {
         $this->registrationFieldKeys = ['address'];
 
@@ -610,7 +608,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderWrapsValuesWithDoubleQuotesInDoubleQuotes()
+    public function renderWrapsValuesWithDoubleQuotesInDoubleQuotes(): void
     {
         $this->registrationFieldKeys = ['address'];
 
@@ -633,7 +631,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderSeparatesTwoValuesWithSemicolons()
+    public function renderSeparatesTwoValuesWithSemicolons(): void
     {
         $this->registrationFieldKeys = ['address', 'title'];
 
@@ -657,7 +655,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderDoesNotWrapHeadlineFieldsInDoubleQuotes()
+    public function renderDoesNotWrapHeadlineFieldsInDoubleQuotes(): void
     {
         $this->registrationFieldKeys = ['address'];
 
@@ -677,7 +675,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderSeparatesHeadlineFieldsWithSemicolons()
+    public function renderSeparatesHeadlineFieldsWithSemicolons(): void
     {
         $this->registrationFieldKeys = ['address', 'title'];
 
@@ -691,7 +689,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderForConfigurationAttendanceCsvFieldsEmptyDoesNotAddSemicolonOnEndOfHeadline()
+    public function renderForConfigurationAttendanceCsvFieldsEmptyDoesNotAddSemicolonOnEndOfHeadline(): void
     {
         $this->frontEndUserFieldKeys = ['name'];
 
@@ -704,7 +702,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderForConfigurationFeUserCsvFieldsEmptyDoesNotAddSemicolonAtBeginningOfHeadline()
+    public function renderForConfigurationFeUserCsvFieldsEmptyDoesNotAddSemicolonAtBeginningOfHeadline(): void
     {
         $this->registrationFieldKeys = ['address'];
 
@@ -717,7 +715,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderForBothConfigurationFieldsNotEmptyAddsSemicolonBetweenConfigurationFields()
+    public function renderForBothConfigurationFieldsNotEmptyAddsSemicolonBetweenConfigurationFields(): void
     {
         $this->registrationFieldKeys = ['address'];
         $this->frontEndUserFieldKeys = ['name'];
@@ -733,7 +731,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderForBothConfigurationFieldsEmptyAndSeparatorEnabledReturnsSeparatorMarkerAndEmptyLine()
+    public function renderForBothConfigurationFieldsEmptyAndSeparatorEnabledReturnsSeparatorMarkerAndEmptyLine(): void
     {
         $this->configuration->setAsBoolean('addExcelSpecificSeparatorLineToCsv', true);
 
@@ -746,7 +744,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderForBothConfigurationFieldsEmptyAndSeparatorDisabledReturnsEmptyLine()
+    public function renderForBothConfigurationFieldsEmptyAndSeparatorDisabledReturnsEmptyLine(): void
     {
         $this->configuration->setAsBoolean('addExcelSpecificSeparatorLineToCsv', false);
 
@@ -759,7 +757,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderReturnsRegistrationsOnSetPage()
+    public function renderReturnsRegistrationsOnSetPage(): void
     {
         $this->subject->setEventUid(0);
         $this->subject->setPageUid($this->pageUid);
@@ -785,7 +783,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderNotReturnsRegistrationsOnOtherPage()
+    public function renderNotReturnsRegistrationsOnOtherPage(): void
     {
         $this->subject->setEventUid(0);
         $this->subject->setPageUid($this->pageUid);
@@ -811,7 +809,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderReturnsRegistrationsOnSubpageOfGivenPage()
+    public function renderReturnsRegistrationsOnSubpageOfGivenPage(): void
     {
         $this->subject->setEventUid(0);
         $this->subject->setPageUid($this->pageUid);
@@ -838,7 +836,7 @@ final class AbstractRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderCallsHookAndReturnsModifiedValue()
+    public function renderCallsHookAndReturnsModifiedValue(): void
     {
         $this->configuration->setAsBoolean('addExcelSpecificSeparatorLineToCsv', false);
         $renderResult = "\r\n";

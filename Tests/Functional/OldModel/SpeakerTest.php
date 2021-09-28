@@ -23,7 +23,7 @@ final class SpeakerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function fromUidMapsDataFromDatabase()
+    public function fromUidMapsDataFromDatabase(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 
@@ -46,7 +46,7 @@ final class SpeakerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function canHaveOneSkill()
+    public function canHaveOneSkill(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 
@@ -58,7 +58,7 @@ final class SpeakerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getSkillsShortWithSingleSkillReturnsSingleSkill()
+    public function getSkillsShortWithSingleSkillReturnsSingleSkill(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 
@@ -71,7 +71,7 @@ final class SpeakerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getSkillsShortWithMultipleSkillsReturnsMultipleSkills()
+    public function getSkillsShortWithMultipleSkillsReturnsMultipleSkills(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 
@@ -83,7 +83,7 @@ final class SpeakerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getImageWithoutImageReturnsNull()
+    public function getImageWithoutImageReturnsNull(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 
@@ -95,7 +95,7 @@ final class SpeakerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getImageWithPositiveImageCountWithoutFileReferenceReturnsNull()
+    public function getImageWithPositiveImageCountWithoutFileReferenceReturnsNull(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 
@@ -107,7 +107,7 @@ final class SpeakerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getImageWithFileReferenceReturnsFileReference()
+    public function getImageWithFileReferenceReturnsFileReference(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
         $this->provideAdminBackEndUserForFal();

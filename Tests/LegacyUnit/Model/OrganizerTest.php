@@ -13,7 +13,7 @@ final class OrganizerTest extends TestCase
      */
     private $subject;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new \Tx_Seminars_Model_Organizer();
     }
@@ -25,7 +25,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function setNameWithEmptyNameThrowsException()
+    public function setNameWithEmptyNameThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -40,7 +40,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function setNameSetsName()
+    public function setNameSetsName(): void
     {
         $this->subject->setName('Fabulous organizer');
 
@@ -53,7 +53,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function getNameWithNonEmptyNameReturnsName()
+    public function getNameWithNonEmptyNameReturnsName(): void
     {
         $this->subject->setData(['title' => 'Fabulous organizer']);
 
@@ -66,7 +66,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function getTitleWithNonEmptyNameReturnsName()
+    public function getTitleWithNonEmptyNameReturnsName(): void
     {
         $this->subject->setData(['title' => 'Fabulous organizer']);
 
@@ -83,7 +83,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function getHomepageInitiallyReturnsAnEmptyString()
+    public function getHomepageInitiallyReturnsAnEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -96,7 +96,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function getHomepageWithNonEmptyHomepageReturnsHomepage()
+    public function getHomepageWithNonEmptyHomepageReturnsHomepage(): void
     {
         $this->subject->setData(['homepage' => 'http://example.com']);
 
@@ -109,7 +109,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function setHomepageSetsHomepage()
+    public function setHomepageSetsHomepage(): void
     {
         $this->subject->setHomepage('http://example.com');
 
@@ -122,7 +122,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function hasHomepageInitiallyReturnsFalse()
+    public function hasHomepageInitiallyReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -134,7 +134,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function hasHomepageWithNonEmptyHomepageReturnsTrue()
+    public function hasHomepageWithNonEmptyHomepageReturnsTrue(): void
     {
         $this->subject->setHomepage('http://example.com');
 
@@ -150,7 +150,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function setEmailAddressWithEmptyEmailAddressThrowsException()
+    public function setEmailAddressWithEmptyEmailAddressThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -165,7 +165,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function setEmailAddressSetsEmailAddress()
+    public function setEmailAddressSetsEmailAddress(): void
     {
         $this->subject->setEmailAddress('mail@example.com');
 
@@ -178,7 +178,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function getEmailAddressWithNonEmptyEmailAddressReturnsEmailAddress()
+    public function getEmailAddressWithNonEmptyEmailAddressReturnsEmailAddress(): void
     {
         $this->subject->setData(['email' => 'mail@example.com']);
 
@@ -195,7 +195,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function getEmailFooterInitiallyReturnsAnEmptyString()
+    public function getEmailFooterInitiallyReturnsAnEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -208,7 +208,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function getEmailFooterWithNonEmptyEmailFooterReturnsEmailFooter()
+    public function getEmailFooterWithNonEmptyEmailFooterReturnsEmailFooter(): void
     {
         $this->subject->setData(['email_footer' => 'Example Inc.']);
 
@@ -221,7 +221,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function setEmailFooterSetsEmailFooter()
+    public function setEmailFooterSetsEmailFooter(): void
     {
         $this->subject->setEmailFooter('Example Inc.');
 
@@ -234,7 +234,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function hasEmailFooterInitiallyReturnsFalse()
+    public function hasEmailFooterInitiallyReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -246,7 +246,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function hasEmailFooterWithNonEmptyEmailFooterReturnsTrue()
+    public function hasEmailFooterWithNonEmptyEmailFooterReturnsTrue(): void
     {
         $this->subject->setEmailFooter('Example Inc.');
 
@@ -262,7 +262,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function getAttendancesPIDInitiallyReturnsZero()
+    public function getAttendancesPIDInitiallyReturnsZero(): void
     {
         $this->subject->setData([]);
 
@@ -275,7 +275,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function getAttendancesPIDWithAttendancesPIDReturnsAttendancesPID()
+    public function getAttendancesPIDWithAttendancesPIDReturnsAttendancesPID(): void
     {
         $this->subject->setData(['attendances_pid' => 42]);
 
@@ -288,7 +288,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function setAttendancesPIDWithPositiveAttendancesPIDSetsAttendancesPID()
+    public function setAttendancesPIDWithPositiveAttendancesPIDSetsAttendancesPID(): void
     {
         $this->subject->setAttendancesPID(42);
 
@@ -301,7 +301,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function setAttendancesPIDWithZeroAttendancesPIDSetsAttendancesPID()
+    public function setAttendancesPIDWithZeroAttendancesPIDSetsAttendancesPID(): void
     {
         $this->subject->setAttendancesPID(0);
 
@@ -314,7 +314,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function setAttendancesPIDWithNegativeAttendancesPIDThrowsException()
+    public function setAttendancesPIDWithNegativeAttendancesPIDThrowsException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -324,7 +324,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function hasAttendancesPIDInitiallyReturnsFalse()
+    public function hasAttendancesPIDInitiallyReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -336,7 +336,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function hasAttendancesPIDWithAttendancesPIDReturnsTrue()
+    public function hasAttendancesPIDWithAttendancesPIDReturnsTrue(): void
     {
         $this->subject->setAttendancesPID(42);
 
@@ -352,7 +352,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function hasDescriptionForOrganizerWithoutDescriptionReturnsFalse()
+    public function hasDescriptionForOrganizerWithoutDescriptionReturnsFalse(): void
     {
         $this->subject->setData(['description' => '']);
 
@@ -364,7 +364,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function hasDescriptionForOrganizerWithDescriptionReturnsTrue()
+    public function hasDescriptionForOrganizerWithDescriptionReturnsTrue(): void
     {
         $this->subject->setData(['description' => 'foo']);
 
@@ -376,7 +376,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function getDescriptionForOrganizerWithoutDescriptionReturnsEmptyString()
+    public function getDescriptionForOrganizerWithoutDescriptionReturnsEmptyString(): void
     {
         $this->subject->setData(['description' => '']);
 
@@ -389,7 +389,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function getDescriptionForOrganizerWithDescriptionReturnsDescription()
+    public function getDescriptionForOrganizerWithDescriptionReturnsDescription(): void
     {
         $this->subject->setData(['description' => 'foo']);
 

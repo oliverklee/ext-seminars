@@ -32,7 +32,7 @@ final class CountdownTest extends TestCase
      */
     private $mapper = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $configurationRegistry = ConfigurationRegistry::getInstance();
         $configurationRegistry->set('config', new DummyConfiguration());
@@ -55,7 +55,7 @@ final class CountdownTest extends TestCase
         );
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
 
@@ -74,7 +74,7 @@ final class CountdownTest extends TestCase
     /**
      * @test
      */
-    public function fixtureIsAFrontEndCountdownObject()
+    public function fixtureIsAFrontEndCountdownObject(): void
     {
         self::assertInstanceOf(\Tx_Seminars_FrontEnd_Countdown::class, $this->subject);
     }
@@ -86,7 +86,7 @@ final class CountdownTest extends TestCase
     /**
      * @test
      */
-    public function renderWithoutCallingInjectEventMapperFirstThrowsBadMethodCallException()
+    public function renderWithoutCallingInjectEventMapperFirstThrowsBadMethodCallException(): void
     {
         $this->expectException(\BadMethodCallException::class);
         $this->expectExceptionMessage('The method injectEventMapper() needs to be called first.');
@@ -98,7 +98,7 @@ final class CountdownTest extends TestCase
     /**
      * @test
      */
-    public function renderWithMapperFindNextUpcomingThrowingEmptyQueryResultExceptionReturnsNoEventsFoundMessage()
+    public function renderWithMapperFindNextUpcomingThrowingEmptyQueryResultExceptionReturnsNoEventsFoundMessage(): void
     {
         $this->subject->injectEventMapper($this->mapper);
         $this->mapper->expects(self::once())
@@ -114,7 +114,7 @@ final class CountdownTest extends TestCase
     /**
      * @test
      */
-    public function renderCallsRenderMethodOfCountdownViewHelperWithNextUpcomingEventsBeginDateAsUnixTimeStamp()
+    public function renderCallsRenderMethodOfCountdownViewHelperWithNextUpcomingEventsBeginDateAsUnixTimeStamp(): void
     {
         $this->subject->injectEventMapper($this->mapper);
         $event = $this->mapper->getLoadedTestingModel(

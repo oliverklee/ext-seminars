@@ -22,7 +22,7 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
      */
     private $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -34,7 +34,7 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findsVisibleRecords()
+    public function findsVisibleRecords(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Testing.xml');
 
@@ -46,7 +46,7 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function byDefaultIgnoresHiddenRecords()
+    public function byDefaultIgnoresHiddenRecords(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Testing.xml');
 
@@ -58,7 +58,7 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function inBackEndModeFindsHiddenRecords()
+    public function inBackEndModeFindsHiddenRecords(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Testing.xml');
 
@@ -71,7 +71,7 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function byDefaultIgnoresTimedRecords()
+    public function byDefaultIgnoresTimedRecords(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Testing.xml');
 
@@ -83,7 +83,7 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function inBackEndModeFindsTimedRecords()
+    public function inBackEndModeFindsTimedRecords(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Testing.xml');
 
@@ -96,7 +96,7 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function byDefaultIgnoresDeletedRecords()
+    public function byDefaultIgnoresDeletedRecords(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Testing.xml');
 
@@ -108,7 +108,7 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function inBackEndModeIgnoresDeletedRecords()
+    public function inBackEndModeIgnoresDeletedRecords(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Testing.xml');
 
@@ -121,7 +121,7 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function limitToTitleFindRecordWithMatchingTitle()
+    public function limitToTitleFindRecordWithMatchingTitle(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Testing.xml');
 
@@ -134,7 +134,7 @@ final class AbstractBagBuilderTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function limitToTitleIgnoresRecordWithNonMatchingTitle()
+    public function limitToTitleIgnoresRecordWithNonMatchingTitle(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Testing.xml');
 

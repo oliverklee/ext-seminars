@@ -42,7 +42,7 @@ final class TimeRangeViewHelperTest extends TestCase
      */
     private $translatedHours = '';
 
-    protected function setUp()
+    protected function setUp(): void
     {
         // Make sure that the test results do not depend on the machine's PHP time zone.
         \date_default_timezone_set('UTC');
@@ -59,7 +59,7 @@ final class TimeRangeViewHelperTest extends TestCase
         $this->subject = new \Tx_Seminars_ViewHelper_TimeRange();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
     }
@@ -67,7 +67,7 @@ final class TimeRangeViewHelperTest extends TestCase
     /**
      * @test
      */
-    public function renderWithTimeSpanWithNoDatesReturnMessageWillBeAnnounced()
+    public function renderWithTimeSpanWithNoDatesReturnMessageWillBeAnnounced(): void
     {
         /** @var \Tx_Seminars_Model_AbstractTimeSpan $timeSpan */
         $timeSpan = $this->getMockForAbstractClass(\Tx_Seminars_Model_AbstractTimeSpan::class);
@@ -82,7 +82,7 @@ final class TimeRangeViewHelperTest extends TestCase
     /**
      * @test
      */
-    public function renderWithTimeSpanWithBeginDateWithZeroHoursReturnsMessageWillBeAnnounced()
+    public function renderWithTimeSpanWithBeginDateWithZeroHoursReturnsMessageWillBeAnnounced(): void
     {
         /** @var \Tx_Seminars_Model_AbstractTimeSpan $timeSpan */
         $timeSpan = $this->getMockForAbstractClass(\Tx_Seminars_Model_AbstractTimeSpan::class);
@@ -97,7 +97,7 @@ final class TimeRangeViewHelperTest extends TestCase
     /**
      * @test
      */
-    public function renderWithTimeSpanWithBeginDateOnlyReturnsTimePortionOfBeginDate()
+    public function renderWithTimeSpanWithBeginDateOnlyReturnsTimePortionOfBeginDate(): void
     {
         /** @var \Tx_Seminars_Model_AbstractTimeSpan $timeSpan */
         $timeSpan = $this->getMockForAbstractClass(\Tx_Seminars_Model_AbstractTimeSpan::class);
@@ -112,7 +112,7 @@ final class TimeRangeViewHelperTest extends TestCase
     /**
      * @test
      */
-    public function renderWithTimeSpanWithEqualBeginAndEndTimestampsReturnsOnlyTimePortionOfBeginDate()
+    public function renderWithTimeSpanWithEqualBeginAndEndTimestampsReturnsOnlyTimePortionOfBeginDate(): void
     {
         /** @var \Tx_Seminars_Model_AbstractTimeSpan $timeSpan */
         $timeSpan = $this->getMockForAbstractClass(\Tx_Seminars_Model_AbstractTimeSpan::class);
@@ -128,7 +128,7 @@ final class TimeRangeViewHelperTest extends TestCase
     /**
      * @test
      */
-    public function renderWithTimeSpanWithBeginAndEndDateReturnsTimePortionsOfBeginDateAndEndDate()
+    public function renderWithTimeSpanWithBeginAndEndDateReturnsTimePortionsOfBeginDateAndEndDate(): void
     {
         /** @var \Tx_Seminars_Model_AbstractTimeSpan $timeSpan */
         $timeSpan = $this->getMockForAbstractClass(\Tx_Seminars_Model_AbstractTimeSpan::class);
@@ -148,7 +148,7 @@ final class TimeRangeViewHelperTest extends TestCase
     /**
      * @test
      */
-    public function renderWithTimeSpanWithBeginAndEndDateReturnsTimePortionsOfBeginDateAndEndDateSeparatedBySpecifiedDash()
+    public function renderWithTimeSpanWithBeginAndEndDateReturnsTimePortionsOfBeginDateAndEndDateSeparatedBySpecifiedDash(): void
     {
         $dash = '#DASH#';
         /** @var \Tx_Seminars_Model_AbstractTimeSpan $timeSpan */

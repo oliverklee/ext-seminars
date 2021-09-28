@@ -12,12 +12,12 @@ use OliverKlee\Seminars\OldModel\AbstractModel;
  */
 trait BagHelper
 {
-    private static function assertBagHasUid(AbstractBag $bag, int $uid)
+    private static function assertBagHasUid(AbstractBag $bag, int $uid): void
     {
         self::assertTrue(self::bagHasUid($bag, $uid), 'The bag does not have this UID: ' . $uid);
     }
 
-    private static function assertBagNotHasUid(AbstractBag $bag, int $uid)
+    private static function assertBagNotHasUid(AbstractBag $bag, int $uid): void
     {
         self::assertFalse(self::bagHasUid($bag, $uid), 'The bag has this UID, but was expected not to: ' . $uid);
     }

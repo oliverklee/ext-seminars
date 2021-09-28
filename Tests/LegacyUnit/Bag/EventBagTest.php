@@ -19,7 +19,7 @@ final class EventBagTest extends TestCase
      */
     private $testingFramework = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
 
@@ -31,7 +31,7 @@ final class EventBagTest extends TestCase
         $this->subject = new \Tx_Seminars_Bag_Event('is_dummy_record=1');
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
 
@@ -45,7 +45,7 @@ final class EventBagTest extends TestCase
     /**
      * @test
      */
-    public function bagCanHaveAtLeastOneElement()
+    public function bagCanHaveAtLeastOneElement(): void
     {
         self::assertFalse(
             $this->subject->isEmpty()

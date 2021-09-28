@@ -17,7 +17,7 @@ final class CategoryTest extends UnitTestCase
      */
     private $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new \Tx_Seminars_OldModel_Category();
     }
@@ -25,7 +25,7 @@ final class CategoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function isAbstractModel()
+    public function isAbstractModel(): void
     {
         self::assertInstanceOf(AbstractModel::class, $this->subject);
     }
@@ -33,7 +33,7 @@ final class CategoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function fromDataCreatesInstanceOfSubclass()
+    public function fromDataCreatesInstanceOfSubclass(): void
     {
         $result = \Tx_Seminars_OldModel_Category::fromData([]);
 
@@ -43,7 +43,7 @@ final class CategoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function getTitleReturnsTitle()
+    public function getTitleReturnsTitle(): void
     {
         $title = 'Test category';
         $subject = \Tx_Seminars_OldModel_Category::fromData(['title' => $title]);
@@ -54,7 +54,7 @@ final class CategoryTest extends UnitTestCase
     /**
      * @test
      */
-    public function getIconReturnsIcon()
+    public function getIconReturnsIcon(): void
     {
         $icon = 'foo.gif';
         $subject = \Tx_Seminars_OldModel_Category::fromData(['icon' => $icon]);

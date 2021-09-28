@@ -29,7 +29,7 @@ final class FrontEndRegistrationAccessCheckTest extends TestCase
      */
     private $vipsGroupUid = 12431;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $configurationRegistry = ConfigurationRegistry::getInstance();
         $configurationRegistry->set('plugin', new DummyConfiguration());
@@ -41,7 +41,7 @@ final class FrontEndRegistrationAccessCheckTest extends TestCase
         $this->subject = new FrontEndRegistrationAccessCheck();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         ConfigurationRegistry::purgeInstance();
         FrontEndLoginManager::purgeInstance();
@@ -50,7 +50,7 @@ final class FrontEndRegistrationAccessCheckTest extends TestCase
     /**
      * @test
      */
-    public function subjectImplementsAccessCheck()
+    public function subjectImplementsAccessCheck(): void
     {
         self::assertInstanceOf(
             CsvAccessCheck::class,
@@ -61,7 +61,7 @@ final class FrontEndRegistrationAccessCheckTest extends TestCase
     /**
      * @test
      */
-    public function hasAccessForNoFrontEndUserReturnsFalse()
+    public function hasAccessForNoFrontEndUserReturnsFalse(): void
     {
         FrontEndLoginManager::getInstance()->logInUser();
 
@@ -77,7 +77,7 @@ final class FrontEndRegistrationAccessCheckTest extends TestCase
     /**
      * @test
      */
-    public function hasAccessForNonVipFrontEndUserAndNoVipAccessReturnsFalse()
+    public function hasAccessForNonVipFrontEndUserAndNoVipAccessReturnsFalse(): void
     {
         $this->seminarsPluginConfiguration->setAsBoolean('allowCsvExportOfRegistrationsInMyVipEventsView', false);
 
@@ -103,7 +103,7 @@ final class FrontEndRegistrationAccessCheckTest extends TestCase
     /**
      * @test
      */
-    public function hasAccessForVipFrontEndUserAndNoVipAccessReturnsFalse()
+    public function hasAccessForVipFrontEndUserAndNoVipAccessReturnsFalse(): void
     {
         $this->seminarsPluginConfiguration->setAsBoolean('allowCsvExportOfRegistrationsInMyVipEventsView', false);
 
@@ -129,7 +129,7 @@ final class FrontEndRegistrationAccessCheckTest extends TestCase
     /**
      * @test
      */
-    public function hasAccessForNonVipFrontEndUserAndVipAccessReturnsFalse()
+    public function hasAccessForNonVipFrontEndUserAndVipAccessReturnsFalse(): void
     {
         $this->seminarsPluginConfiguration->setAsBoolean('allowCsvExportOfRegistrationsInMyVipEventsView', true);
 
@@ -155,7 +155,7 @@ final class FrontEndRegistrationAccessCheckTest extends TestCase
     /**
      * @test
      */
-    public function hasAccessForVipFrontEndUserAndVipAccessReturnsTrue()
+    public function hasAccessForVipFrontEndUserAndVipAccessReturnsTrue(): void
     {
         $this->seminarsPluginConfiguration->setAsBoolean('allowCsvExportOfRegistrationsInMyVipEventsView', true);
 

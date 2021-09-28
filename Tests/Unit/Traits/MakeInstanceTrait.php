@@ -44,10 +44,8 @@ trait MakeInstanceTrait
      * `tearDown()`.
      *
      * @after
-     *
-     * @return void
      */
-    public function purgeMockedInstances()
+    public function purgeMockedInstances(): void
     {
         foreach ($this->mockClassNames as $className) {
             GeneralUtility::makeInstance($className);

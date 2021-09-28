@@ -47,7 +47,7 @@ final class RegistrationTest extends TestCase
      */
     private $configuration;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
@@ -107,7 +107,7 @@ final class RegistrationTest extends TestCase
         $this->connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
 
@@ -138,7 +138,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setPaymentMethodRelationReturnsUid()
+    public function setPaymentMethodRelationReturnsUid(): void
     {
         self::assertTrue(
             $this->setPaymentMethodRelation([]) > 0
@@ -148,7 +148,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setPaymentMethodRelationCreatesNewUid()
+    public function setPaymentMethodRelationCreatesNewUid(): void
     {
         self::assertNotEquals(
             $this->setPaymentMethodRelation([]),
@@ -159,7 +159,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function isOk()
+    public function isOk(): void
     {
         self::assertTrue($this->subject->isOk());
     }
@@ -169,7 +169,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataUsesPaymentMethodUidFromSetRegistrationData()
+    public function setRegistrationDataUsesPaymentMethodUidFromSetRegistrationData(): void
     {
         $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
         $this->subject->setRegistrationData(
@@ -187,7 +187,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForNoPaymentMethodSetAndPositiveTotalPriceWithSeminarWithOnePaymentMethodSelectsThatPaymentMethod()
+    public function setRegistrationDataForNoPaymentMethodSetAndPositiveTotalPriceWithSeminarWithOnePaymentMethodSelectsThatPaymentMethod(): void
     {
         $this->configuration->setAsString('currency', 'EUR');
         $this->testingFramework->changeRecord(
@@ -219,7 +219,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function statusIsInitiallyRegular()
+    public function statusIsInitiallyRegular(): void
     {
         self::assertSame(
             'regular',
@@ -230,7 +230,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function statusIsRegularIfNotOnQueue()
+    public function statusIsRegularIfNotOnQueue(): void
     {
         $this->subject->setIsOnRegistrationQueue(false);
 
@@ -243,7 +243,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function statusIsWaitingListIfOnQueue()
+    public function statusIsWaitingListIfOnQueue(): void
     {
         $this->subject->setIsOnRegistrationQueue(true);
 
@@ -258,7 +258,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationDataForEmptyKeyThrowsException()
+    public function getRegistrationDataForEmptyKeyThrowsException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -268,7 +268,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationDataCanGetUid()
+    public function getRegistrationDataCanGetUid(): void
     {
         self::assertSame(
             (string)$this->subject->getUid(),
@@ -279,7 +279,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationDataWithKeyMethodOfPaymentReturnsMethodOfPayment()
+    public function getRegistrationDataWithKeyMethodOfPaymentReturnsMethodOfPayment(): void
     {
         $title = 'Test payment method';
         $this->setPaymentMethodRelation(['title' => $title]);
@@ -293,7 +293,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationDataForRegisteredThemselvesFalseReturnsLabelNo()
+    public function getRegistrationDataForRegisteredThemselvesFalseReturnsLabelNo(): void
     {
         $this->subject->setRegisteredThemselves(false);
 
@@ -306,7 +306,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationDataForRegisteredThemselvesTrueReturnsLabelYes()
+    public function getRegistrationDataForRegisteredThemselvesTrueReturnsLabelYes(): void
     {
         $this->subject->setRegisteredThemselves(true);
 
@@ -319,7 +319,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationDataForNotesWithCarriageReturnRemovesCarriageReturnFromNotes()
+    public function getRegistrationDataForNotesWithCarriageReturnRemovesCarriageReturnFromNotes(): void
     {
         $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
         $this->subject->setRegistrationData(
@@ -337,7 +337,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationDataForNotesWithCarriageReturnAndLineFeedReturnsNotesWithLinefeedAndNoCarriageReturn()
+    public function getRegistrationDataForNotesWithCarriageReturnAndLineFeedReturnsNotesWithLinefeedAndNoCarriageReturn(): void
     {
         $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
         $this->subject->setRegistrationData(
@@ -355,7 +355,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationDataForMultipleAttendeeNamesReturnsAttendeeNamesWithEnumeration()
+    public function getRegistrationDataForMultipleAttendeeNamesReturnsAttendeeNamesWithEnumeration(): void
     {
         $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
         $this->subject->setRegistrationData(
@@ -375,7 +375,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function dumpAttendanceValuesCanContainUid()
+    public function dumpAttendanceValuesCanContainUid(): void
     {
         self::assertStringContainsString(
             (string)$this->subject->getUid(),
@@ -386,7 +386,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function dumpAttendanceValuesContainsInterestsIfRequested()
+    public function dumpAttendanceValuesContainsInterestsIfRequested(): void
     {
         self::assertStringContainsString(
             'nothing',
@@ -397,7 +397,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function dumpAttendanceValuesContainsInterestsIfRequestedEvenForSpaceAfterCommaInKeyList()
+    public function dumpAttendanceValuesContainsInterestsIfRequestedEvenForSpaceAfterCommaInKeyList(): void
     {
         self::assertStringContainsString(
             'nothing',
@@ -408,7 +408,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function dumpAttendanceValuesContainsInterestsIfRequestedEvenForSpaceBeforeCommaInKeyList()
+    public function dumpAttendanceValuesContainsInterestsIfRequestedEvenForSpaceBeforeCommaInKeyList(): void
     {
         self::assertStringContainsString(
             'nothing',
@@ -419,7 +419,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function dumpAttendanceValuesContainsLabelForInterestsIfRequested()
+    public function dumpAttendanceValuesContainsLabelForInterestsIfRequested(): void
     {
         self::assertStringContainsString(
             $this->getLanguageService()->getLL('label_interests'),
@@ -430,7 +430,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function dumpAttendanceValuesContainsLabelEvenForSpaceAfterCommaInKeyList()
+    public function dumpAttendanceValuesContainsLabelEvenForSpaceAfterCommaInKeyList(): void
     {
         self::assertStringContainsString(
             $this->getLanguageService()->getLL('label_interests'),
@@ -441,7 +441,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function dumpAttendanceValuesContainsLabelEvenForSpaceBeforeCommaInKeyList()
+    public function dumpAttendanceValuesContainsLabelEvenForSpaceBeforeCommaInKeyList(): void
     {
         self::assertStringContainsString(
             $this->getLanguageService()->getLL('label_interests'),
@@ -452,7 +452,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function dumpAttendanceValuesForDataWithLineFeedStartsDataOnNewLine()
+    public function dumpAttendanceValuesForDataWithLineFeedStartsDataOnNewLine(): void
     {
         self::assertStringContainsString(
             "\nfoo\nbar",
@@ -463,7 +463,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function dumpAttendanceValuesForDataWithCarriageReturnStartsDataOnNewLine()
+    public function dumpAttendanceValuesForDataWithCarriageReturnStartsDataOnNewLine(): void
     {
         self::assertStringContainsString(
             "\nfoo\nbar",
@@ -474,7 +474,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function dumpAttendanceValuesCanContainNonRegisteredField()
+    public function dumpAttendanceValuesCanContainNonRegisteredField(): void
     {
         self::assertStringContainsString(
             'label_is_dummy_record: 1',
@@ -531,7 +531,7 @@ final class RegistrationTest extends TestCase
      *
      * @dataProvider dumpableRegistrationFieldsDataProvider
      */
-    public function dumpAttendanceValuesCreatesNoDoubleColonsAfterLabel(string $fieldName)
+    public function dumpAttendanceValuesCreatesNoDoubleColonsAfterLabel(string $fieldName): void
     {
         $subject = \Tx_Seminars_OldModel_Registration::fromData([$fieldName => '1234 some value']);
 
@@ -545,7 +545,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function commitToDbCanCreateNewRecord()
+    public function commitToDbCanCreateNewRecord(): void
     {
         $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
         $registration = new \Tx_Seminars_OldModel_Registration();
@@ -567,7 +567,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function commitToDbCanCreateLodgingsRelation()
+    public function commitToDbCanCreateLodgingsRelation(): void
     {
         $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
         $lodgingsUid = $this->testingFramework->createRecord(
@@ -613,7 +613,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function commitToDbCanCreateFoodsRelation()
+    public function commitToDbCanCreateFoodsRelation(): void
     {
         $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
         $foodsUid = $this->testingFramework->createRecord(
@@ -657,7 +657,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function commitToDbCanCreateCheckboxesRelation()
+    public function commitToDbCanCreateCheckboxesRelation(): void
     {
         $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
         $checkboxesUid = $this->testingFramework->createRecord(
@@ -702,7 +702,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function purgeCachedSeminarsResultsInDifferentDataForSameSeminarUid()
+    public function purgeCachedSeminarsResultsInDifferentDataForSameSeminarUid(): void
     {
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -736,7 +736,7 @@ final class RegistrationTest extends TestCase
      *
      * @doesNotPerformAssertions
      */
-    public function instantiationWithoutLoggedInUserDoesNotThrowException()
+    public function instantiationWithoutLoggedInUserDoesNotThrowException(): void
     {
         $this->testingFramework->logoutFrontEndUser();
 
@@ -753,7 +753,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function isPaidInitiallyReturnsFalse()
+    public function isPaidInitiallyReturnsFalse(): void
     {
         self::assertFalse(
             $this->subject->isPaid()
@@ -763,7 +763,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function isPaidForPaidRegistrationReturnsTrue()
+    public function isPaidForPaidRegistrationReturnsTrue(): void
     {
         $this->subject->setPaymentDateAsUnixTimestamp($GLOBALS['SIM_EXEC_TIME']);
 
@@ -775,7 +775,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function isPaidForUnpaidRegistrationReturnsFalse()
+    public function isPaidForUnpaidRegistrationReturnsFalse(): void
     {
         $this->subject->setPaymentDateAsUnixTimestamp(0);
 
@@ -789,7 +789,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function hasExistingFrontEndUserWithExistingFrontEndUserReturnsTrue()
+    public function hasExistingFrontEndUserWithExistingFrontEndUserReturnsTrue(): void
     {
         self::assertTrue(
             $this->subject->hasExistingFrontEndUser()
@@ -799,7 +799,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function hasExistingFrontEndUserWithInexistentFrontEndUserReturnsFalse()
+    public function hasExistingFrontEndUserWithInexistentFrontEndUserReturnsFalse(): void
     {
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -815,7 +815,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function hasExistingFrontEndUserWithZeroFrontEndUserUIDReturnsFalse()
+    public function hasExistingFrontEndUserWithZeroFrontEndUserUIDReturnsFalse(): void
     {
         $this->subject->setFrontEndUserUid(0);
 
@@ -829,7 +829,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataWithNoFoodOptionsInitializesFoodOptionsAsArray()
+    public function setRegistrationDataWithNoFoodOptionsInitializesFoodOptionsAsArray(): void
     {
         $userUid = $this->testingFramework->createAndLoginFrontEndUser();
 
@@ -845,7 +845,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForFoodOptionsStoresFoodOptionsInFoodsVariable()
+    public function setRegistrationDataForFoodOptionsStoresFoodOptionsInFoodsVariable(): void
     {
         $userUid = $this->testingFramework->createAndLoginFrontEndUser();
 
@@ -865,7 +865,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataWithEmptyFoodOptionsInitializesFoodOptionsAsArray()
+    public function setRegistrationDataWithEmptyFoodOptionsInitializesFoodOptionsAsArray(): void
     {
         $userUid = $this->testingFramework->createAndLoginFrontEndUser();
 
@@ -881,7 +881,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataWithNoLodgingOptionsInitializesLodgingOptionsAsArray()
+    public function setRegistrationDataWithNoLodgingOptionsInitializesLodgingOptionsAsArray(): void
     {
         $userUid = $this->testingFramework->createAndLoginFrontEndUser();
 
@@ -897,7 +897,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataWithLodgingOptionsStoresLodgingOptionsInLodgingVariable()
+    public function setRegistrationDataWithLodgingOptionsStoresLodgingOptionsInLodgingVariable(): void
     {
         $userUid = $this->testingFramework->createAndLoginFrontEndUser();
 
@@ -917,7 +917,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataWithEmptyLodgingOptionsInitializesLodgingOptionsAsArray()
+    public function setRegistrationDataWithEmptyLodgingOptionsInitializesLodgingOptionsAsArray(): void
     {
         $userUid = $this->testingFramework->createAndLoginFrontEndUser();
 
@@ -933,7 +933,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataWithNoCheckboxOptionsInitializesCheckboxOptionsAsArray()
+    public function setRegistrationDataWithNoCheckboxOptionsInitializesCheckboxOptionsAsArray(): void
     {
         $userUid = $this->testingFramework->createAndLoginFrontEndUser();
 
@@ -949,7 +949,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataWithCheckboxOptionsStoresCheckboxOptionsInCheckboxVariable()
+    public function setRegistrationDataWithCheckboxOptionsStoresCheckboxOptionsInCheckboxVariable(): void
     {
         $userUid = $this->testingFramework->createAndLoginFrontEndUser();
 
@@ -969,7 +969,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataWithEmptyCheckboxOptionsInitializesCheckboxOptionsAsArray()
+    public function setRegistrationDataWithEmptyCheckboxOptionsInitializesCheckboxOptionsAsArray(): void
     {
         $userUid = $this->testingFramework->createAndLoginFrontEndUser();
 
@@ -985,7 +985,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataWithRegisteredThemselvesGivenStoresRegisteredThemselvesIntoTheObject()
+    public function setRegistrationDataWithRegisteredThemselvesGivenStoresRegisteredThemselvesIntoTheObject(): void
     {
         $userUid = $this->testingFramework->createAndLoginFrontEndUser();
         $this->subject->setRegistrationData(
@@ -1003,7 +1003,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataWithCompanyGivenStoresCompanyIntoTheObject()
+    public function setRegistrationDataWithCompanyGivenStoresCompanyIntoTheObject(): void
     {
         $userUid = $this->testingFramework->createAndLoginFrontEndUser();
         $this->subject->setRegistrationData(
@@ -1023,7 +1023,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getSeatsWithoutSeatsReturnsOne()
+    public function getSeatsWithoutSeatsReturnsOne(): void
     {
         self::assertSame(
             1,
@@ -1034,7 +1034,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setSeatsWithNegativeSeatsThrowsException()
+    public function setSeatsWithNegativeSeatsThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -1049,7 +1049,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setSeatsWithZeroSeatsSetsSeats()
+    public function setSeatsWithZeroSeatsSetsSeats(): void
     {
         $this->subject->setSeats(0);
 
@@ -1062,7 +1062,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setSeatsWithPositiveSeatsSetsSeats()
+    public function setSeatsWithPositiveSeatsSetsSeats(): void
     {
         $this->subject->setSeats(42);
 
@@ -1075,7 +1075,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function hasSeatsWithoutSeatsReturnsFalse()
+    public function hasSeatsWithoutSeatsReturnsFalse(): void
     {
         self::assertFalse(
             $this->subject->hasSeats()
@@ -1085,7 +1085,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function hasSeatsWithSeatsReturnsTrue()
+    public function hasSeatsWithSeatsReturnsTrue(): void
     {
         $this->subject->setSeats(42);
 
@@ -1099,7 +1099,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getAttendeesNamesWithoutAttendeesNamesReturnsEmptyString()
+    public function getAttendeesNamesWithoutAttendeesNamesReturnsEmptyString(): void
     {
         self::assertSame(
             '',
@@ -1110,7 +1110,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setAttendeesNamesWithAttendeesNamesSetsAttendeesNames()
+    public function setAttendeesNamesWithAttendeesNamesSetsAttendeesNames(): void
     {
         $this->subject->setAttendeesNames('John Doe');
 
@@ -1123,7 +1123,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function hasAttendeesNamesWithoutAttendeesNamesReturnsFalse()
+    public function hasAttendeesNamesWithoutAttendeesNamesReturnsFalse(): void
     {
         self::assertFalse(
             $this->subject->hasAttendeesNames()
@@ -1133,7 +1133,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function hasAttendeesNamesWithAttendeesNamesReturnsTrue()
+    public function hasAttendeesNamesWithAttendeesNamesReturnsTrue(): void
     {
         $this->subject->setAttendeesNames('John Doe');
 
@@ -1147,7 +1147,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getNumberOfKidsWithoutKidsReturnsZero()
+    public function getNumberOfKidsWithoutKidsReturnsZero(): void
     {
         self::assertSame(
             0,
@@ -1158,7 +1158,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setNumberOfKidsWithNegativeNumberOfKidsThrowsException()
+    public function setNumberOfKidsWithNegativeNumberOfKidsThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -1173,7 +1173,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setNumberOfKidsWithZeroNumberOfKidsSetsNumberOfKids()
+    public function setNumberOfKidsWithZeroNumberOfKidsSetsNumberOfKids(): void
     {
         $this->subject->setNumberOfKids(0);
 
@@ -1186,7 +1186,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setNumberOfKidsWithPositiveNumberOfKidsSetsNumberOfKids()
+    public function setNumberOfKidsWithPositiveNumberOfKidsSetsNumberOfKids(): void
     {
         $this->subject->setNumberOfKids(42);
 
@@ -1199,7 +1199,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function hasKidsWithoutKidsReturnsFalse()
+    public function hasKidsWithoutKidsReturnsFalse(): void
     {
         self::assertFalse(
             $this->subject->hasKids()
@@ -1209,7 +1209,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function hasKidsWithKidsReturnsTrue()
+    public function hasKidsWithKidsReturnsTrue(): void
     {
         $this->subject->setNumberOfKids(42);
 
@@ -1223,7 +1223,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getPriceWithoutPriceReturnsEmptyString()
+    public function getPriceWithoutPriceReturnsEmptyString(): void
     {
         self::assertSame(
             '',
@@ -1234,7 +1234,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setPriceWithPriceSetsPrice()
+    public function setPriceWithPriceSetsPrice(): void
     {
         $this->subject->setPrice('Regular price: 42.42');
 
@@ -1247,7 +1247,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function hasPriceWithoutPriceReturnsFalse()
+    public function hasPriceWithoutPriceReturnsFalse(): void
     {
         self::assertFalse(
             $this->subject->hasPrice()
@@ -1257,7 +1257,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function hasPriceWithPriceReturnsTrue()
+    public function hasPriceWithPriceReturnsTrue(): void
     {
         $this->subject->setPrice('Regular price: 42.42');
 
@@ -1271,7 +1271,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getTotalPriceWithoutTotalPriceReturnsEmptyString()
+    public function getTotalPriceWithoutTotalPriceReturnsEmptyString(): void
     {
         self::assertSame(
             '',
@@ -1282,7 +1282,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setTotalPriceWithTotalPriceSetsTotalPrice()
+    public function setTotalPriceWithTotalPriceSetsTotalPrice(): void
     {
         $this->configuration->setAsString('currency', 'EUR');
         $this->subject->setTotalPrice('42.42');
@@ -1296,7 +1296,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function hasTotalPriceWithoutTotalPriceReturnsFalse()
+    public function hasTotalPriceWithoutTotalPriceReturnsFalse(): void
     {
         self::assertFalse(
             $this->subject->hasTotalPrice()
@@ -1306,7 +1306,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function hasTotalPriceWithTotalPriceReturnsTrue()
+    public function hasTotalPriceWithTotalPriceReturnsTrue(): void
     {
         $this->subject->setTotalPrice('42.42');
 
@@ -1320,7 +1320,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getMethodOfPaymentUidWithoutMethodOfPaymentReturnsZero()
+    public function getMethodOfPaymentUidWithoutMethodOfPaymentReturnsZero(): void
     {
         self::assertSame(
             0,
@@ -1331,7 +1331,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setMethodOfPaymentUidWithNegativeUidThrowsException()
+    public function setMethodOfPaymentUidWithNegativeUidThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -1346,7 +1346,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setMethodOfPaymentUidWithZeroUidSetsMethodOfPaymentUid()
+    public function setMethodOfPaymentUidWithZeroUidSetsMethodOfPaymentUid(): void
     {
         $this->subject->setMethodOfPaymentUid(0);
 
@@ -1359,7 +1359,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setMethodOfPaymentUidWithPositiveUidSetsMethodOfPaymentUid()
+    public function setMethodOfPaymentUidWithPositiveUidSetsMethodOfPaymentUid(): void
     {
         $this->subject->setMethodOfPaymentUid(42);
 
@@ -1372,7 +1372,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function hasMethodOfPaymentWithoutMethodOfPaymentReturnsFalse()
+    public function hasMethodOfPaymentWithoutMethodOfPaymentReturnsFalse(): void
     {
         self::assertFalse(
             $this->subject->hasMethodOfPayment()
@@ -1382,7 +1382,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function hasMethodOfPaymentWithMethodOfPaymentReturnsTrue()
+    public function hasMethodOfPaymentWithMethodOfPaymentReturnsTrue(): void
     {
         $this->subject->setMethodOfPaymentUid(42);
 
@@ -1396,7 +1396,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getEnumeratedAttendeeNamesWithUseHtmlSeparatesAttendeesNamesWithListItems()
+    public function getEnumeratedAttendeeNamesWithUseHtmlSeparatesAttendeesNamesWithListItems(): void
     {
         $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
         $this->subject->setRegistrationData(
@@ -1414,7 +1414,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getEnumeratedAttendeeNamesWithUseHtmlAndEmptyAttendeesNamesReturnsEmptyString()
+    public function getEnumeratedAttendeeNamesWithUseHtmlAndEmptyAttendeesNamesReturnsEmptyString(): void
     {
         $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
         $this->subject->setRegistrationData(
@@ -1432,7 +1432,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getEnumeratedAttendeeNamesWithUsePlainTextSeparatesAttendeesNamesWithLineFeed()
+    public function getEnumeratedAttendeeNamesWithUsePlainTextSeparatesAttendeesNamesWithLineFeed(): void
     {
         $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
         $this->subject->setRegistrationData(
@@ -1450,7 +1450,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getEnumeratedAttendeeNamesWithUsePlainTextAndEmptyAttendeesNamesReturnsEmptyString()
+    public function getEnumeratedAttendeeNamesWithUsePlainTextAndEmptyAttendeesNamesReturnsEmptyString(): void
     {
         $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
         $this->subject->setRegistrationData(
@@ -1468,7 +1468,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getEnumeratedAttendeeNamesForSelfRegisteredUserAndNoAttendeeNamesReturnsUsersName()
+    public function getEnumeratedAttendeeNamesForSelfRegisteredUserAndNoAttendeeNamesReturnsUsersName(): void
     {
         $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
         $this->subject->setRegistrationData(
@@ -1487,7 +1487,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getEnumeratedAttendeeNamesForSelfRegisteredUserAndAttendeeNamesReturnsUserInFirstPosition()
+    public function getEnumeratedAttendeeNamesForSelfRegisteredUserAndAttendeeNamesReturnsUserInFirstPosition(): void
     {
         $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
         $this->subject->setRegistrationData(
@@ -1508,7 +1508,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getFoodReturnsFood()
+    public function getFoodReturnsFood(): void
     {
         $food = 'a hamburger';
 
@@ -1524,7 +1524,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function hasFoodForEmptyFoodReturnsFalse()
+    public function hasFoodForEmptyFoodReturnsFalse(): void
     {
         $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
         $this->subject->setRegistrationData($seminar, $this->feUserUid, ['food' => '']);
@@ -1537,7 +1537,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function hasFoodForNonEmptyFoodReturnsTrue()
+    public function hasFoodForNonEmptyFoodReturnsTrue(): void
     {
         $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
         $this->subject->setRegistrationData($seminar, $this->feUserUid, ['food' => 'two donuts']);
@@ -1552,7 +1552,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getAccommodationReturnsAccommodation()
+    public function getAccommodationReturnsAccommodation(): void
     {
         $accommodation = 'a tent in the woods';
 
@@ -1568,7 +1568,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function hasAccommodationForEmptyAccommodationReturnsFalse()
+    public function hasAccommodationForEmptyAccommodationReturnsFalse(): void
     {
         $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
         $this->subject->setRegistrationData($seminar, $this->feUserUid, ['accommodation' => '']);
@@ -1581,7 +1581,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function hasAccommodationForNonEmptyAccommodationReturnsTrue()
+    public function hasAccommodationForNonEmptyAccommodationReturnsTrue(): void
     {
         $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
         $this->subject->setRegistrationData($seminar, $this->feUserUid, ['accommodation' => 'a youth hostel']);
@@ -1596,7 +1596,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getInterestsReturnsInterests()
+    public function getInterestsReturnsInterests(): void
     {
         $interests = 'new experiences';
 
@@ -1612,7 +1612,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function hasInterestsForEmptyInterestsReturnsFalse()
+    public function hasInterestsForEmptyInterestsReturnsFalse(): void
     {
         $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
         $this->subject->setRegistrationData($seminar, $this->feUserUid, ['interests' => '']);
@@ -1625,7 +1625,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function hasInterestsForNonEmptyInterestsReturnsTrue()
+    public function hasInterestsForNonEmptyInterestsReturnsTrue(): void
     {
         $seminar = new \Tx_Seminars_OldModel_Event($this->seminarUid);
         $this->subject->setRegistrationData($seminar, $this->feUserUid, ['interests' => 'meeting people']);

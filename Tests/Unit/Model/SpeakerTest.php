@@ -13,7 +13,7 @@ final class SpeakerTest extends UnitTestCase
      */
     private $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new \Tx_Seminars_Model_Speaker();
     }
@@ -21,7 +21,7 @@ final class SpeakerTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasImageWithoutImageReturnsFalse()
+    public function hasImageWithoutImageReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -31,7 +31,7 @@ final class SpeakerTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasImageWithImageReturnsTrue()
+    public function hasImageWithImageReturnsTrue(): void
     {
         $this->subject->setData(['image' => 1]);
 

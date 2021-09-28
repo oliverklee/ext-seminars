@@ -24,14 +24,14 @@ final class SingleEventMapperTest extends TestCase
      */
     private $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
 
         $this->subject = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
     }
@@ -43,7 +43,7 @@ final class SingleEventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getTopicForSingleRecordThrowsException()
+    public function getTopicForSingleRecordThrowsException(): void
     {
         $this->expectException(
             \BadMethodCallException::class
@@ -64,7 +64,7 @@ final class SingleEventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getCategoriesForSingleEventReturnsListInstance()
+    public function getCategoriesForSingleEventReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
@@ -76,7 +76,7 @@ final class SingleEventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getCategoriesForSingleEventWithOneCategoryReturnsListOfCategories()
+    public function getCategoriesForSingleEventWithOneCategoryReturnsListOfCategories(): void
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -98,7 +98,7 @@ final class SingleEventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getCategoriesForSingleEventWithOneCategoryReturnsOneCategory()
+    public function getCategoriesForSingleEventWithOneCategoryReturnsOneCategory(): void
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -124,7 +124,7 @@ final class SingleEventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getEventTypeForSingleEventWithoutEventTypeReturnsNull()
+    public function getEventTypeForSingleEventWithoutEventTypeReturnsNull(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
@@ -136,7 +136,7 @@ final class SingleEventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getEventTypeForSingleEventWithEventTypeReturnsEventTypeInstance()
+    public function getEventTypeForSingleEventWithEventTypeReturnsEventTypeInstance(): void
     {
         $eventType = MapperRegistry::get(\Tx_Seminars_Mapper_EventType::class)
             ->getLoadedTestingModel([]);
@@ -155,7 +155,7 @@ final class SingleEventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getPaymentMethodsForSingleEventReturnsListInstance()
+    public function getPaymentMethodsForSingleEventReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
@@ -167,7 +167,7 @@ final class SingleEventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getPaymentMethodsForSingleEventWithOnePaymentMethodReturnsListOfPaymentMethods()
+    public function getPaymentMethodsForSingleEventWithOnePaymentMethodReturnsListOfPaymentMethods(): void
     {
         $paymentMethod = MapperRegistry::
         get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
@@ -191,7 +191,7 @@ final class SingleEventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getPaymentMethodsForSingleEventWithOnePaymentMethodReturnsOnePaymentMethod()
+    public function getPaymentMethodsForSingleEventWithOnePaymentMethodReturnsOnePaymentMethod(): void
     {
         $paymentMethod = MapperRegistry::
         get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
@@ -222,7 +222,7 @@ final class SingleEventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getTargetGroupsForSingleEventReturnsListInstance()
+    public function getTargetGroupsForSingleEventReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
@@ -234,7 +234,7 @@ final class SingleEventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getTargetGroupsForSingleEventWithOneTargetGroupReturnsListOfTargetGroups()
+    public function getTargetGroupsForSingleEventWithOneTargetGroupReturnsListOfTargetGroups(): void
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -259,7 +259,7 @@ final class SingleEventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getTargetGroupsForSingleEventWithOneTargetGroupReturnsOneTargetGroup()
+    public function getTargetGroupsForSingleEventWithOneTargetGroupReturnsOneTargetGroup(): void
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -284,7 +284,7 @@ final class SingleEventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getTargetGroupsForEventTopicReturnsListInstance()
+    public function getTargetGroupsForEventTopicReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -296,7 +296,7 @@ final class SingleEventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getTargetGroupsForEventTopicWithOneTargetGroupReturnsListOfTargetGroups()
+    public function getTargetGroupsForEventTopicWithOneTargetGroupReturnsListOfTargetGroups(): void
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -321,7 +321,7 @@ final class SingleEventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getTargetGroupsForEventTopicWithOneTargetGroupReturnsOneTargetGroup()
+    public function getTargetGroupsForEventTopicWithOneTargetGroupReturnsOneTargetGroup(): void
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -348,7 +348,7 @@ final class SingleEventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getCheckboxesForSingleEventReturnsListInstance()
+    public function getCheckboxesForSingleEventReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
@@ -360,7 +360,7 @@ final class SingleEventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getCheckboxesForSingleEventWithOneCheckboxReturnsListOfCheckboxes()
+    public function getCheckboxesForSingleEventWithOneCheckboxReturnsListOfCheckboxes(): void
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -382,7 +382,7 @@ final class SingleEventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getCheckboxesForSingleEventWithOneCheckboxReturnsOneCheckbox()
+    public function getCheckboxesForSingleEventWithOneCheckboxReturnsOneCheckbox(): void
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',

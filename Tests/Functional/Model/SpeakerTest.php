@@ -22,7 +22,7 @@ final class SpeakerTest extends FunctionalTestCase
      */
     private $speakerMapper = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -34,7 +34,7 @@ final class SpeakerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getImageWithoutImageReturnsNull()
+    public function getImageWithoutImageReturnsNull(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 
@@ -46,7 +46,7 @@ final class SpeakerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getImageWithPositiveImageCountWithoutFileReferenceReturnsNull()
+    public function getImageWithPositiveImageCountWithoutFileReferenceReturnsNull(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 
@@ -58,7 +58,7 @@ final class SpeakerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getImageWithFileReferenceReturnsFileReference()
+    public function getImageWithFileReferenceReturnsFileReference(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 

@@ -16,7 +16,7 @@ final class FrontEndUserGroupTest extends TestCase
      */
     private $subject;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new \Tx_Seminars_Model_FrontEndUserGroup();
     }
@@ -28,7 +28,7 @@ final class FrontEndUserGroupTest extends TestCase
     /**
      * @test
      */
-    public function getPublishSettingWithoutPublishSettingReturnsPublishAll()
+    public function getPublishSettingWithoutPublishSettingReturnsPublishAll(): void
     {
         $this->subject->setData([]);
 
@@ -41,7 +41,7 @@ final class FrontEndUserGroupTest extends TestCase
     /**
      * @test
      */
-    public function getPublishSettingWithPublishSettingSetToZeroReturnsPublishAll()
+    public function getPublishSettingWithPublishSettingSetToZeroReturnsPublishAll(): void
     {
         $this->subject->setData(['tx_seminars_publish_events' => 0]);
 
@@ -54,7 +54,7 @@ final class FrontEndUserGroupTest extends TestCase
     /**
      * @test
      */
-    public function getPublishSettingWithPublishSettingSetToOneReturnsHideNew()
+    public function getPublishSettingWithPublishSettingSetToOneReturnsHideNew(): void
     {
         $this->subject->setData(['tx_seminars_publish_events' => 1]);
 
@@ -67,7 +67,7 @@ final class FrontEndUserGroupTest extends TestCase
     /**
      * @test
      */
-    public function getPublishSettingWithPublishSettingSetToTwoReturnsHideEdited()
+    public function getPublishSettingWithPublishSettingSetToTwoReturnsHideEdited(): void
     {
         $this->subject->setData(['tx_seminars_publish_events' => 2]);
 
@@ -84,7 +84,7 @@ final class FrontEndUserGroupTest extends TestCase
     /**
      * @test
      */
-    public function getAuxiliaryRecordsPidWithoutPidReturnsZero()
+    public function getAuxiliaryRecordsPidWithoutPidReturnsZero(): void
     {
         $this->subject->setData([]);
 
@@ -97,7 +97,7 @@ final class FrontEndUserGroupTest extends TestCase
     /**
      * @test
      */
-    public function getAuxiliaryRecordsPidWithPidReturnsPid()
+    public function getAuxiliaryRecordsPidWithPidReturnsPid(): void
     {
         $this->subject->setData(['tx_seminars_auxiliary_records_pid' => 42]);
 
@@ -114,7 +114,7 @@ final class FrontEndUserGroupTest extends TestCase
     /**
      * @test
      */
-    public function hasAuxiliaryRecordsPidWithoutPidReturnsFalse()
+    public function hasAuxiliaryRecordsPidWithoutPidReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -126,7 +126,7 @@ final class FrontEndUserGroupTest extends TestCase
     /**
      * @test
      */
-    public function hasAuxiliaryRecordsPidWithPidReturnsTrue()
+    public function hasAuxiliaryRecordsPidWithPidReturnsTrue(): void
     {
         $this->subject->setData(['tx_seminars_auxiliary_records_pid' => 42]);
 
@@ -142,7 +142,7 @@ final class FrontEndUserGroupTest extends TestCase
     /**
      * @test
      */
-    public function hasReviewerForGroupWithoutReviewerReturnsFalse()
+    public function hasReviewerForGroupWithoutReviewerReturnsFalse(): void
     {
         $this->subject->setData(['tx_seminars_reviewer' => null]);
 
@@ -154,7 +154,7 @@ final class FrontEndUserGroupTest extends TestCase
     /**
      * @test
      */
-    public function hasReviewerForGroupWithReviewerReturnsTrue()
+    public function hasReviewerForGroupWithReviewerReturnsTrue(): void
     {
         $backEndUser = new BackEndUser();
 
@@ -168,7 +168,7 @@ final class FrontEndUserGroupTest extends TestCase
     /**
      * @test
      */
-    public function getReviewerForGroupWithoutReviewerReturnsNull()
+    public function getReviewerForGroupWithoutReviewerReturnsNull(): void
     {
         $this->subject->setData(['tx_seminars_reviewer' => null]);
 
@@ -180,7 +180,7 @@ final class FrontEndUserGroupTest extends TestCase
     /**
      * @test
      */
-    public function getReviewerForGroupWithReviewerReturnsReviewer()
+    public function getReviewerForGroupWithReviewerReturnsReviewer(): void
     {
         $backEndUser = new BackEndUser();
 
@@ -199,7 +199,7 @@ final class FrontEndUserGroupTest extends TestCase
     /**
      * @test
      */
-    public function hasEventRecordPidForNoPidSetReturnsFalse()
+    public function hasEventRecordPidForNoPidSetReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -211,7 +211,7 @@ final class FrontEndUserGroupTest extends TestCase
     /**
      * @test
      */
-    public function hasEventRecordPidForPidSetReturnsTrue()
+    public function hasEventRecordPidForPidSetReturnsTrue(): void
     {
         $this->subject->setData(['tx_seminars_events_pid' => 42]);
 
@@ -223,7 +223,7 @@ final class FrontEndUserGroupTest extends TestCase
     /**
      * @test
      */
-    public function getEventRecordPidForNoPidSetReturnsZero()
+    public function getEventRecordPidForNoPidSetReturnsZero(): void
     {
         $this->subject->setData([]);
 
@@ -236,7 +236,7 @@ final class FrontEndUserGroupTest extends TestCase
     /**
      * @test
      */
-    public function getEventRecordPidForPidSetReturnsThisPid()
+    public function getEventRecordPidForPidSetReturnsThisPid(): void
     {
         $this->subject->setData(['tx_seminars_events_pid' => 42]);
 
@@ -253,7 +253,7 @@ final class FrontEndUserGroupTest extends TestCase
     /**
      * @test
      */
-    public function getDefaultCategoriesForNoCategoriesReturnsAList()
+    public function getDefaultCategoriesForNoCategoriesReturnsAList(): void
     {
         $this->subject->setData(['tx_seminars_default_categories' => new Collection()]);
 
@@ -263,7 +263,7 @@ final class FrontEndUserGroupTest extends TestCase
     /**
      * @test
      */
-    public function getDefaultCategoriesForOneAssignedCategoryReturnsThisCategoryInList()
+    public function getDefaultCategoriesForOneAssignedCategoryReturnsThisCategoryInList(): void
     {
         $list = new Collection();
         $category = MapperRegistry::get(\Tx_Seminars_Mapper_Category::class)->getNewGhost();
@@ -284,7 +284,7 @@ final class FrontEndUserGroupTest extends TestCase
     /**
      * @test
      */
-    public function hasDefaultCategoriesForNoAssignedCategoriesReturnsFalse()
+    public function hasDefaultCategoriesForNoAssignedCategoriesReturnsFalse(): void
     {
         $this->subject->setData(['tx_seminars_default_categories' => new Collection()]);
 
@@ -296,7 +296,7 @@ final class FrontEndUserGroupTest extends TestCase
     /**
      * @test
      */
-    public function hasDefaultCategoriesForOneAssignedCategoryReturnsTrue()
+    public function hasDefaultCategoriesForOneAssignedCategoryReturnsTrue(): void
     {
         $list = new Collection();
         $list->add(MapperRegistry::get(\Tx_Seminars_Mapper_Category::class)->getNewGhost());
@@ -315,7 +315,7 @@ final class FrontEndUserGroupTest extends TestCase
     /**
      * @test
      */
-    public function getDefaultOrganizerForSetOrganizerReturnsIt()
+    public function getDefaultOrganizerForSetOrganizerReturnsIt(): void
     {
         $organizer = MapperRegistry::get(\Tx_Seminars_Mapper_Organizer::class)->getNewGhost();
         $this->subject->setData(['tx_seminars_default_organizer' => $organizer]);
@@ -329,7 +329,7 @@ final class FrontEndUserGroupTest extends TestCase
     /**
      * @test
      */
-    public function hasDefaultOrganizerForSetOrganizerReturnsTrue()
+    public function hasDefaultOrganizerForSetOrganizerReturnsTrue(): void
     {
         $organizer = MapperRegistry::get(\Tx_Seminars_Mapper_Organizer::class)->getNewGhost();
         $this->subject->setData(['tx_seminars_default_organizer' => $organizer]);
@@ -342,7 +342,7 @@ final class FrontEndUserGroupTest extends TestCase
     /**
      * @test
      */
-    public function hasDefaultOrganizerForNotSetOrganizerReturnsFalse()
+    public function hasDefaultOrganizerForNotSetOrganizerReturnsFalse(): void
     {
         $this->subject->setData(['tx_seminars_default_organizer' => null]);
 

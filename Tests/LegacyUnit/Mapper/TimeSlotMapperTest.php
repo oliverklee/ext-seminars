@@ -21,14 +21,14 @@ final class TimeSlotMapperTest extends TestCase
      */
     private $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
 
         $this->subject = new \Tx_Seminars_Mapper_TimeSlot();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
     }
@@ -38,7 +38,7 @@ final class TimeSlotMapperTest extends TestCase
     /**
      * @test
      */
-    public function findWithUidReturnsTimeSlotInstance()
+    public function findWithUidReturnsTimeSlotInstance(): void
     {
         self::assertInstanceOf(
             \Tx_Seminars_Model_TimeSlot::class,
@@ -49,7 +49,7 @@ final class TimeSlotMapperTest extends TestCase
     /**
      * @test
      */
-    public function findWithUidOfExistingRecordReturnsRecordAsModel()
+    public function findWithUidOfExistingRecordReturnsRecordAsModel(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_timeslots');
 
@@ -63,7 +63,7 @@ final class TimeSlotMapperTest extends TestCase
     /**
      * @test
      */
-    public function getSpeakersReturnsListInstance()
+    public function getSpeakersReturnsListInstance(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_timeslots');
 
@@ -74,7 +74,7 @@ final class TimeSlotMapperTest extends TestCase
     /**
      * @test
      */
-    public function getSpeakersWithOneSpeakerReturnsListOfSpeakers()
+    public function getSpeakersWithOneSpeakerReturnsListOfSpeakers(): void
     {
         $timeSlotUid = $this->testingFramework->createRecord(
             'tx_seminars_timeslots'
@@ -97,7 +97,7 @@ final class TimeSlotMapperTest extends TestCase
     /**
      * @test
      */
-    public function getSpeakersWithOneSpeakerReturnsOneSpeaker()
+    public function getSpeakersWithOneSpeakerReturnsOneSpeaker(): void
     {
         $timeSlotUid = $this->testingFramework->createRecord(
             'tx_seminars_timeslots'
@@ -123,7 +123,7 @@ final class TimeSlotMapperTest extends TestCase
     /**
      * @test
      */
-    public function getPlaceWithoutPlaceReturnsNull()
+    public function getPlaceWithoutPlaceReturnsNull(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_timeslots');
 
@@ -136,7 +136,7 @@ final class TimeSlotMapperTest extends TestCase
     /**
      * @test
      */
-    public function getPlaceWithPlaceReturnsPlaceInstance()
+    public function getPlaceWithPlaceReturnsPlaceInstance(): void
     {
         $place = MapperRegistry::get(\Tx_Seminars_Mapper_Place::class)->getNewGhost();
         $timeSlotUid = $this->testingFramework->createRecord(
@@ -153,7 +153,7 @@ final class TimeSlotMapperTest extends TestCase
     /**
      * @test
      */
-    public function getSeminarWithoutSeminarReturnsNull()
+    public function getSeminarWithoutSeminarReturnsNull(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_timeslots');
 
@@ -166,7 +166,7 @@ final class TimeSlotMapperTest extends TestCase
     /**
      * @test
      */
-    public function getSeminarWithSeminarReturnsEventInstance()
+    public function getSeminarWithSeminarReturnsEventInstance(): void
     {
         $seminar = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getNewGhost();
         $timeSlotUid = $this->testingFramework->createRecord(

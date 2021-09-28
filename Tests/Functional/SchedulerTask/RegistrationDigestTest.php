@@ -18,7 +18,7 @@ final class RegistrationDigestTest extends FunctionalTestCase
      */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         MapperRegistry::purgeInstance();
         ConfigurationRegistry::purgeInstance();
@@ -29,7 +29,7 @@ final class RegistrationDigestTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function objectManagerInitializesObject()
+    public function objectManagerInitializesObject(): void
     {
         /** @var ObjectManager $objectManager */
         $objectManager = GeneralUtility::makeInstance(ObjectManager::class);

@@ -44,7 +44,7 @@ final class RegistrationsListTest extends TestCase
      */
     private $registrationUid = 0;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
@@ -75,7 +75,7 @@ final class RegistrationsListTest extends TestCase
         );
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
 
@@ -96,10 +96,8 @@ final class RegistrationsListTest extends TestCase
      * $this->seminarUid and logs them in.
      *
      * Note: This function creates a registration record.
-     *
-     * @return void
      */
-    private function createLogInAndRegisterFrontEndUser()
+    private function createLogInAndRegisterFrontEndUser(): void
     {
         $this->feUserUid = $this->testingFramework->createAndLoginFrontEndUser(
             '',
@@ -121,7 +119,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function createLogInAndRegisterFrontEndUserLogsInFrontEndUser()
+    public function createLogInAndRegisterFrontEndUserLogsInFrontEndUser(): void
     {
         $this->createLogInAndRegisterFrontEndUser();
 
@@ -133,7 +131,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function createLogInAndRegisterFrontEndUserCreatesRegistrationRecord()
+    public function createLogInAndRegisterFrontEndUserCreatesRegistrationRecord(): void
     {
         $this->createLogInAndRegisterFrontEndUser();
         /** @var ConnectionPool $connectionPool */
@@ -154,7 +152,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function createFixtureWithInvalidWhatToDisplayThrowsException()
+    public function createFixtureWithInvalidWhatToDisplayThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -176,7 +174,7 @@ final class RegistrationsListTest extends TestCase
      *
      * @doesNotPerformAssertions
      */
-    public function createFixtureWithListRegistrationsAsWhatToDisplayDoesNotThrowException()
+    public function createFixtureWithListRegistrationsAsWhatToDisplayDoesNotThrowException(): void
     {
         new \Tx_Seminars_FrontEnd_RegistrationsList(
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
@@ -191,7 +189,7 @@ final class RegistrationsListTest extends TestCase
      *
      * @doesNotPerformAssertions
      */
-    public function createFixtureWithListVipRegistrationsAsWhatToDisplayDoesNotThrowException()
+    public function createFixtureWithListVipRegistrationsAsWhatToDisplayDoesNotThrowException(): void
     {
         new \Tx_Seminars_FrontEnd_RegistrationsList(
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
@@ -208,7 +206,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function renderContainsHtmlspecialcharedEventTitle()
+    public function renderContainsHtmlspecialcharedEventTitle(): void
     {
         self::assertStringContainsString(
             'Test event &amp; more',
@@ -219,7 +217,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function renderWithNegativeSeminarUidReturnsHeader404()
+    public function renderWithNegativeSeminarUidReturnsHeader404(): void
     {
         $subject = new \Tx_Seminars_FrontEnd_RegistrationsList(
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
@@ -238,7 +236,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function renderWithZeroSeminarUidReturnsHeader404()
+    public function renderWithZeroSeminarUidReturnsHeader404(): void
     {
         $subject = new \Tx_Seminars_FrontEnd_RegistrationsList(
             ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'],
@@ -257,7 +255,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function renderWithoutLoggedInFrontEndUserReturnsHeader403()
+    public function renderWithoutLoggedInFrontEndUserReturnsHeader403(): void
     {
         $this->subject->render();
 
@@ -270,7 +268,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function renderWithLoggedInAndNotRegisteredFrontEndUserReturnsHeader403()
+    public function renderWithLoggedInAndNotRegisteredFrontEndUserReturnsHeader403(): void
     {
         $this->testingFramework->createFrontEndUser();
         $this->subject->render();
@@ -284,7 +282,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function renderWithLoggedInAndRegisteredFrontEndUserDoesNotReturnHeader403()
+    public function renderWithLoggedInAndRegisteredFrontEndUserDoesNotReturnHeader403(): void
     {
         $this->createLogInAndRegisterFrontEndUser();
         $this->subject->render();
@@ -298,7 +296,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function renderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheFrontEndUserUid()
+    public function renderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheFrontEndUserUid(): void
     {
         $this->subject->setConfigurationValue(
             'showFeUserFieldsInRegistrationsList',
@@ -315,7 +313,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function renderWithLoggedInAndRegisteredFrontEndUserCanContainTheFrontEndUserUid()
+    public function renderWithLoggedInAndRegisteredFrontEndUserCanContainTheFrontEndUserUid(): void
     {
         $this->subject->setConfigurationValue(
             'showFeUserFieldsInRegistrationsList',
@@ -332,7 +330,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function renderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheFrontEndUserName()
+    public function renderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheFrontEndUserName(): void
     {
         $this->subject->setConfigurationValue(
             'showFeUserFieldsInRegistrationsList',
@@ -349,7 +347,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function renderWithLoggedInAndRegisteredFrontEndUserCanContainTheFrontEndUserName()
+    public function renderWithLoggedInAndRegisteredFrontEndUserCanContainTheFrontEndUserName(): void
     {
         $this->subject->setConfigurationValue(
             'showFeUserFieldsInRegistrationsList',
@@ -366,7 +364,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function renderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheFrontEndUserUidAndName()
+    public function renderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheFrontEndUserUidAndName(): void
     {
         $this->subject->setConfigurationValue(
             'showFeUserFieldsInRegistrationsList',
@@ -388,7 +386,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function renderWithLoggedInAndRegisteredFrontEndUserCanContainTheFrontEndUserUidAndName()
+    public function renderWithLoggedInAndRegisteredFrontEndUserCanContainTheFrontEndUserUidAndName(): void
     {
         $this->subject->setConfigurationValue(
             'showFeUserFieldsInRegistrationsList',
@@ -415,7 +413,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function renderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheRegistrationUid()
+    public function renderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheRegistrationUid(): void
     {
         $this->subject->setConfigurationValue(
             'showRegistrationFieldsInRegistrationList',
@@ -432,7 +430,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function renderWithLoggedInAndRegisteredFrontEndUserCanContainTheRegistrationUid()
+    public function renderWithLoggedInAndRegisteredFrontEndUserCanContainTheRegistrationUid(): void
     {
         $this->subject->setConfigurationValue(
             'showRegistrationFieldsInRegistrationList',
@@ -449,7 +447,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function renderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheRegistrationSeats()
+    public function renderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheRegistrationSeats(): void
     {
         $this->subject->setConfigurationValue(
             'showRegistrationFieldsInRegistrationList',
@@ -466,7 +464,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function renderWithLoggedInAndRegisteredFrontEndUserCanContainTheRegistrationSeats()
+    public function renderWithLoggedInAndRegisteredFrontEndUserCanContainTheRegistrationSeats(): void
     {
         $this->subject->setConfigurationValue(
             'showRegistrationFieldsInRegistrationList',
@@ -488,7 +486,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function renderCanContainTheRegistrationInterests()
+    public function renderCanContainTheRegistrationInterests(): void
     {
         $this->subject->setConfigurationValue(
             'showRegistrationFieldsInRegistrationList',
@@ -510,7 +508,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function renderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheRegistrationUidAndSeats()
+    public function renderWithLoggedInAndRegisteredFrontEndUserCanContainHeaderForTheRegistrationUidAndSeats(): void
     {
         $this->subject->setConfigurationValue(
             'showRegistrationFieldsInRegistrationList',
@@ -531,7 +529,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function renderWithLoggedInAndRegisteredFrontEndUserCanContainTheRegistrationUidAndSeats()
+    public function renderWithLoggedInAndRegisteredFrontEndUserCanContainTheRegistrationUidAndSeats(): void
     {
         $this->subject->setConfigurationValue(
             'showRegistrationFieldsInRegistrationList',
@@ -557,7 +555,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function renderWithEmptyShowFeUserFieldsInRegistrationsListDoesNotContainUnresolvedLabel()
+    public function renderWithEmptyShowFeUserFieldsInRegistrationsListDoesNotContainUnresolvedLabel(): void
     {
         $this->createLogInAndRegisterFrontEndUser();
         $this->subject->setConfigurationValue(
@@ -574,7 +572,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function renderWithEmptyShowRegistrationFieldsInRegistrationListDoesNotContainUnresolvedLabel()
+    public function renderWithEmptyShowRegistrationFieldsInRegistrationListDoesNotContainUnresolvedLabel(): void
     {
         $this->createLogInAndRegisterFrontEndUser();
         $this->subject->setConfigurationValue(
@@ -591,7 +589,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function renderWithDeletedUserForRegistrationHidesUsersRegistration()
+    public function renderWithDeletedUserForRegistrationHidesUsersRegistration(): void
     {
         $this->subject->setConfigurationValue(
             'showRegistrationFieldsInRegistrationList',
@@ -615,7 +613,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function renderSeparatesMultipleRegistrationsWithTableRows()
+    public function renderSeparatesMultipleRegistrationsWithTableRows(): void
     {
         $this->subject->setConfigurationValue(
             'showRegistrationFieldsInRegistrationList',
@@ -647,7 +645,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function renderForNoWaitingListRegistrationsNotContainsWaitingListLabel()
+    public function renderForNoWaitingListRegistrationsNotContainsWaitingListLabel(): void
     {
         self::assertStringNotContainsString(
             $this->getLanguageService()->getLL('label_waiting_list'),
@@ -658,7 +656,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function renderForWaitingListRegistrationsContainsWaitingListLabel()
+    public function renderForWaitingListRegistrationsContainsWaitingListLabel(): void
     {
         $this->subject->setConfigurationValue(
             'showRegistrationFieldsInRegistrationList',
@@ -685,7 +683,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function renderCanContainWaitingListRegistrations()
+    public function renderCanContainWaitingListRegistrations(): void
     {
         $this->subject->setConfigurationValue(
             'showRegistrationFieldsInRegistrationList',

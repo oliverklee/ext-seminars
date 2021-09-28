@@ -81,7 +81,7 @@ final class EmailServiceTest extends TestCase
      */
     private $languageBackup;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         Bootstrap::initializeBackendAuthentication();
         $this->languageBackup = $GLOBALS['LANG'] ?? null;
@@ -134,7 +134,7 @@ final class EmailServiceTest extends TestCase
         $this->subject = new EmailService();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
         $GLOBALS['LANG'] = $this->languageBackup;
@@ -143,7 +143,7 @@ final class EmailServiceTest extends TestCase
     /**
      * @test
      */
-    public function classIsSingleton()
+    public function classIsSingleton(): void
     {
         self::assertInstanceOf(SingletonInterface::class, $this->subject);
     }
@@ -153,7 +153,7 @@ final class EmailServiceTest extends TestCase
     /**
      * @test
      */
-    public function sendEmailToAttendeesForEventWithoutRegistrationsNotSendsMail()
+    public function sendEmailToAttendeesForEventWithoutRegistrationsNotSendsMail(): void
     {
         $this->event->setRegistrations(new Collection());
 
@@ -166,7 +166,7 @@ final class EmailServiceTest extends TestCase
     /**
      * @test
      */
-    public function sendEmailToAttendeesUsesTypo3DefaultFromAddressAsSender()
+    public function sendEmailToAttendeesUsesTypo3DefaultFromAddressAsSender(): void
     {
         $defaultMailFromAddress = 'system-foo@example.com';
         $defaultMailFromName = 'Mr. Default';
@@ -187,7 +187,7 @@ final class EmailServiceTest extends TestCase
     /**
      * @test
      */
-    public function sendEmailToAttendeesUsesFirstOrganizerAsReplyTo()
+    public function sendEmailToAttendeesUsesFirstOrganizerAsReplyTo(): void
     {
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = 'system-foo@example.com';
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = 'Mr. Default';
@@ -206,7 +206,7 @@ final class EmailServiceTest extends TestCase
     /**
      * @test
      */
-    public function sendEmailToAttendeesWithoutTypo3DefaultFromAddressUsesFirstOrganizerAsSender()
+    public function sendEmailToAttendeesWithoutTypo3DefaultFromAddressUsesFirstOrganizerAsSender(): void
     {
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = '';
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = '';
@@ -225,7 +225,7 @@ final class EmailServiceTest extends TestCase
     /**
      * @test
      */
-    public function sendEmailToAttendeesSendsEmailWithProvidedSubject()
+    public function sendEmailToAttendeesSendsEmailWithProvidedSubject(): void
     {
         $subject = 'Bonjour!';
 
@@ -243,7 +243,7 @@ final class EmailServiceTest extends TestCase
     /**
      * @test
      */
-    public function sendEmailToAttendeesReplacesEventTitleInSubject()
+    public function sendEmailToAttendeesReplacesEventTitleInSubject(): void
     {
         $subjectPrefix = 'Event title goes here: ';
 
@@ -261,7 +261,7 @@ final class EmailServiceTest extends TestCase
     /**
      * @test
      */
-    public function sendEmailToAttendeesReplacesEventDateInSubject()
+    public function sendEmailToAttendeesReplacesEventDateInSubject(): void
     {
         $subjectPrefix = 'Event date goes here: ';
 
@@ -281,7 +281,7 @@ final class EmailServiceTest extends TestCase
     /**
      * @test
      */
-    public function sendEmailToAttendeesSendsEmailWithProvidedBody()
+    public function sendEmailToAttendeesSendsEmailWithProvidedBody(): void
     {
         $body = 'Life is good.';
 
@@ -299,7 +299,7 @@ final class EmailServiceTest extends TestCase
     /**
      * @test
      */
-    public function sendEmailToAttendeesSendsToFirstAttendee()
+    public function sendEmailToAttendeesSendsToFirstAttendee(): void
     {
         $this->addMockedInstance(MailMessage::class, $this->email);
 
@@ -315,7 +315,7 @@ final class EmailServiceTest extends TestCase
     /**
      * @test
      */
-    public function sendEmailToAttendeesForTwoRegistrationsSendsTwoEmails()
+    public function sendEmailToAttendeesForTwoRegistrationsSendsTwoEmails(): void
     {
         $secondUser = new \Tx_Seminars_Model_FrontEndUser();
         $secondUser->setData(['email' => 'jane@example.com', 'name' => 'Jane Doe']);
@@ -337,7 +337,7 @@ final class EmailServiceTest extends TestCase
     /**
      * @test
      */
-    public function sendEmailToAttendeesForRegistrationWithoutUserNotSendsMail()
+    public function sendEmailToAttendeesForRegistrationWithoutUserNotSendsMail(): void
     {
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setData([]);
@@ -354,7 +354,7 @@ final class EmailServiceTest extends TestCase
     /**
      * @test
      */
-    public function sendEmailToAttendeesForAttendeeWithoutEmailAddressNotSendsMail()
+    public function sendEmailToAttendeesForAttendeeWithoutEmailAddressNotSendsMail(): void
     {
         $this->user->setEmailAddress('');
 
@@ -367,7 +367,7 @@ final class EmailServiceTest extends TestCase
     /**
      * @test
      */
-    public function sendEmailToAttendeesInsertsSalutationIntoMailTextWithSalutationMarker()
+    public function sendEmailToAttendeesInsertsSalutationIntoMailTextWithSalutationMarker(): void
     {
         $this->addMockedInstance(MailMessage::class, $this->email);
 
@@ -383,7 +383,7 @@ final class EmailServiceTest extends TestCase
     /**
      * @test
      */
-    public function sendEmailToAttendeesInsertsUserNameIntoMailTextWithUserNameMarker()
+    public function sendEmailToAttendeesInsertsUserNameIntoMailTextWithUserNameMarker(): void
     {
         $this->addMockedInstance(MailMessage::class, $this->email);
 
@@ -399,7 +399,7 @@ final class EmailServiceTest extends TestCase
     /**
      * @test
      */
-    public function sendEmailToAttendeesInsertsEventTitleIntoMailTextWithEventTitleMarker()
+    public function sendEmailToAttendeesInsertsEventTitleIntoMailTextWithEventTitleMarker(): void
     {
         $this->addMockedInstance(MailMessage::class, $this->email);
 
@@ -415,7 +415,7 @@ final class EmailServiceTest extends TestCase
     /**
      * @test
      */
-    public function sendEmailToAttendeesInsertsEventDateIntoMailTextWithEventDateMarker()
+    public function sendEmailToAttendeesInsertsEventDateIntoMailTextWithEventDateMarker(): void
     {
         $formattedDate = (new \Tx_Seminars_ViewHelper_DateRange())->render($this->event, '-');
 
@@ -433,7 +433,7 @@ final class EmailServiceTest extends TestCase
     /**
      * @test
      */
-    public function sendEmailToAttendeesForOrganizerWithoutFooterNotAppendsFooterSeparator()
+    public function sendEmailToAttendeesForOrganizerWithoutFooterNotAppendsFooterSeparator(): void
     {
         $this->addMockedInstance(MailMessage::class, $this->email);
 
@@ -451,7 +451,7 @@ final class EmailServiceTest extends TestCase
     /**
      * @test
      */
-    public function sendEmailToAttendeesForOrganizerWithFooterAppendsFooter()
+    public function sendEmailToAttendeesForOrganizerWithFooterAppendsFooter(): void
     {
         $this->email->expects(self::once())->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);

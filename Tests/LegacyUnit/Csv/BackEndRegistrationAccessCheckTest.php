@@ -35,7 +35,7 @@ final class BackEndRegistrationAccessCheckTest extends TestCase
      */
     private $testingFramework = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->backEndUserBackup = $GLOBALS['BE_USER'];
         /** @var BackendUserAuthentication&MockObject $backEndUser */
@@ -48,7 +48,7 @@ final class BackEndRegistrationAccessCheckTest extends TestCase
         $this->subject = new BackEndRegistrationAccessCheck();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         BackEndLoginManager::purgeInstance();
 
@@ -59,7 +59,7 @@ final class BackEndRegistrationAccessCheckTest extends TestCase
     /**
      * @test
      */
-    public function subjectImplementsAccessCheck()
+    public function subjectImplementsAccessCheck(): void
     {
         self::assertInstanceOf(
             CsvAccessCheck::class,
@@ -70,7 +70,7 @@ final class BackEndRegistrationAccessCheckTest extends TestCase
     /**
      * @test
      */
-    public function hasAccessForNoBackEndUserReturnsFalse()
+    public function hasAccessForNoBackEndUserReturnsFalse(): void
     {
         unset($GLOBALS['BE_USER']);
 
@@ -82,7 +82,7 @@ final class BackEndRegistrationAccessCheckTest extends TestCase
     /**
      * @test
      */
-    public function hasAccessForNoAccessToEventsTableAndNoAccessToRegistrationsTableReturnsFalse()
+    public function hasAccessForNoAccessToEventsTableAndNoAccessToRegistrationsTableReturnsFalse(): void
     {
         $this->backEndUser->expects(self::at(0))->method('check')
             ->with('tables_select', 'tx_seminars_seminars')
@@ -96,7 +96,7 @@ final class BackEndRegistrationAccessCheckTest extends TestCase
     /**
      * @test
      */
-    public function hasAccessForNoAccessToEventsTableAndAccessToRegistrationsTableReturnsFalse()
+    public function hasAccessForNoAccessToEventsTableAndAccessToRegistrationsTableReturnsFalse(): void
     {
         $this->backEndUser->expects(self::at(0))->method('check')
             ->with('tables_select', 'tx_seminars_seminars')
@@ -110,7 +110,7 @@ final class BackEndRegistrationAccessCheckTest extends TestCase
     /**
      * @test
      */
-    public function hasAccessForAccessToEventsTableAndNoAccessToRegistrationsTableReturnsFalse()
+    public function hasAccessForAccessToEventsTableAndNoAccessToRegistrationsTableReturnsFalse(): void
     {
         $this->backEndUser->expects(self::at(0))->method('check')
             ->with('tables_select', 'tx_seminars_seminars')
@@ -127,7 +127,7 @@ final class BackEndRegistrationAccessCheckTest extends TestCase
     /**
      * @test
      */
-    public function hasAccessForAccessToEventsTableAndAccessToRegistrationsTableReturnsTrue()
+    public function hasAccessForAccessToEventsTableAndAccessToRegistrationsTableReturnsTrue(): void
     {
         $this->backEndUser->expects(self::at(0))->method('check')
             ->with('tables_select', 'tx_seminars_seminars')
@@ -144,7 +144,7 @@ final class BackEndRegistrationAccessCheckTest extends TestCase
     /**
      * @test
      */
-    public function hasAccessForAccessToEventsTableAndAccessToRegistrationsTableAndAccessToSetPageReturnsTrue()
+    public function hasAccessForAccessToEventsTableAndAccessToRegistrationsTableAndAccessToSetPageReturnsTrue(): void
     {
         $this->backEndUser->method('check')
             ->with('tables_select', self::anything())
@@ -165,7 +165,7 @@ final class BackEndRegistrationAccessCheckTest extends TestCase
     /**
      * @test
      */
-    public function hasAccessForAccessToEventsTableAndAccessToRegistrationsTableAndNoAccessToSetPageReturnsFalse()
+    public function hasAccessForAccessToEventsTableAndAccessToRegistrationsTableAndNoAccessToSetPageReturnsFalse(): void
     {
         $this->backEndUser->method('check')
             ->with('tables_select', self::anything())

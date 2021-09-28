@@ -12,8 +12,6 @@ class TestingRegistrationManager extends \Tx_Seminars_Service_RegistrationManage
     /**
      * @param \Tx_Seminars_Model_Registration $registration
      * @param array $formData
-     *
-     * @return void
      */
     public function setRegistrationData(\Tx_Seminars_Model_Registration $registration, array $formData)
     {

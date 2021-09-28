@@ -16,10 +16,8 @@ trait FalHelper
      *
      * This is necessary to as the nimut testing framework always runs with
      * TYPO3_REQUESTTYPE_BE | TYPO3_REQUESTTYPE_CLI.
-     *
-     * @return void
      */
-    private function provideAdminBackEndUserForFal()
+    private function provideAdminBackEndUserForFal(): void
     {
         $backEndUserProphecy = $this->prophesize(BackendUserAuthentication::class);
 

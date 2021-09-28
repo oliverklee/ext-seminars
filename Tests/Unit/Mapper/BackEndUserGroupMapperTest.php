@@ -17,7 +17,7 @@ final class BackEndUserGroupMapperTest extends UnitTestCase
      */
     private $subject;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new \Tx_Seminars_Mapper_BackEndUserGroup();
     }
@@ -25,7 +25,7 @@ final class BackEndUserGroupMapperTest extends UnitTestCase
     /**
      * @test
      */
-    public function isMapper()
+    public function isMapper(): void
     {
         self::assertInstanceOf(AbstractDataMapper::class, $this->subject);
     }
@@ -33,7 +33,7 @@ final class BackEndUserGroupMapperTest extends UnitTestCase
     /**
      * @test
      */
-    public function createBackEndUserGroupModel()
+    public function createBackEndUserGroupModel(): void
     {
         $model = $this->subject->getNewGhost();
 

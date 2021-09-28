@@ -19,14 +19,14 @@ final class CategoryMapperTest extends TestCase
      */
     private $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
 
         $this->subject = new \Tx_Seminars_Mapper_Category();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
     }
@@ -36,7 +36,7 @@ final class CategoryMapperTest extends TestCase
     /**
      * @test
      */
-    public function findWithUidReturnsCategoryInstance()
+    public function findWithUidReturnsCategoryInstance(): void
     {
         self::assertInstanceOf(\Tx_Seminars_Model_Category::class, $this->subject->find(1));
     }
@@ -44,7 +44,7 @@ final class CategoryMapperTest extends TestCase
     /**
      * @test
      */
-    public function findWithUidOfExistingRecordReturnsRecordAsModel()
+    public function findWithUidOfExistingRecordReturnsRecordAsModel(): void
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_categories',

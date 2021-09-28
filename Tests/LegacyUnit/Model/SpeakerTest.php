@@ -14,7 +14,7 @@ final class SpeakerTest extends TestCase
      */
     private $subject;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new \Tx_Seminars_Model_Speaker();
     }
@@ -26,7 +26,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function setNameWithEmptyNameThrowsException()
+    public function setNameWithEmptyNameThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -41,7 +41,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function setNameSetsName()
+    public function setNameSetsName(): void
     {
         $this->subject->setName('John Doe');
 
@@ -54,7 +54,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function getNameWithNonEmptyNameReturnsName()
+    public function getNameWithNonEmptyNameReturnsName(): void
     {
         $this->subject->setData(['title' => 'John Doe']);
 
@@ -71,7 +71,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function getOrganizationWithoutOrganizationReturnsAnEmptyString()
+    public function getOrganizationWithoutOrganizationReturnsAnEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -84,7 +84,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function getOrganizationWithNonEmptyOrganizationReturnsOrganization()
+    public function getOrganizationWithNonEmptyOrganizationReturnsOrganization(): void
     {
         $this->subject->setData(['organization' => 'Happy organization']);
 
@@ -97,7 +97,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function setOrganizationSetsOrganization()
+    public function setOrganizationSetsOrganization(): void
     {
         $this->subject->setOrganization('Happy organization');
 
@@ -110,7 +110,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function hasOrganizationWithoutOrganizationReturnsFalse()
+    public function hasOrganizationWithoutOrganizationReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -122,7 +122,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function hasOrganizationWithNonEmptyOrganizationReturnsTrue()
+    public function hasOrganizationWithNonEmptyOrganizationReturnsTrue(): void
     {
         $this->subject->setOrganization('Happy organization');
 
@@ -138,7 +138,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function getHomepageWithoutHomepageReturnsAnEmptyString()
+    public function getHomepageWithoutHomepageReturnsAnEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -151,7 +151,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function getHomepageWithNonEmptyHomepageReturnsHomepage()
+    public function getHomepageWithNonEmptyHomepageReturnsHomepage(): void
     {
         $this->subject->setData(['homepage' => 'http://example.com']);
 
@@ -164,7 +164,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function setHomepageSetsHomepage()
+    public function setHomepageSetsHomepage(): void
     {
         $this->subject->setHomepage('http://example.com');
 
@@ -177,7 +177,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function hasHomepageWithoutHomepageReturnsFalse()
+    public function hasHomepageWithoutHomepageReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -189,7 +189,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function hasHomepageWithNonEmptyHomepageReturnsTrue()
+    public function hasHomepageWithNonEmptyHomepageReturnsTrue(): void
     {
         $this->subject->setHomepage('http://example.com');
 
@@ -205,7 +205,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function getDescriptionWithoutDescriptionReturnsAnEmptyString()
+    public function getDescriptionWithoutDescriptionReturnsAnEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -218,7 +218,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function getDescriptionWithDescriptionReturnsDescription()
+    public function getDescriptionWithDescriptionReturnsDescription(): void
     {
         $this->subject->setData(['description' => 'This is a good speaker.']);
 
@@ -231,7 +231,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function setDescriptionSetsDescription()
+    public function setDescriptionSetsDescription(): void
     {
         $this->subject->setDescription('This is a good speaker.');
 
@@ -244,7 +244,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function hasDescriptionWithoutDescriptionReturnsFalse()
+    public function hasDescriptionWithoutDescriptionReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -256,7 +256,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function hasDescriptionWithDescriptionReturnsTrue()
+    public function hasDescriptionWithDescriptionReturnsTrue(): void
     {
         $this->subject->setDescription('This is a good speaker.');
 
@@ -272,7 +272,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function getAddressWithoutAddressReturnsAnEmptyString()
+    public function getAddressWithoutAddressReturnsAnEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -285,7 +285,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function getAddressWithNonEmptyAddressReturnsAddress()
+    public function getAddressWithNonEmptyAddressReturnsAddress(): void
     {
         $this->subject->setData(['address' => 'Backstreet 42']);
 
@@ -298,7 +298,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function setAddressSetsAddress()
+    public function setAddressSetsAddress(): void
     {
         $this->subject->setAddress('Backstreet 42');
 
@@ -311,7 +311,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function hasAddressWithoutAddressReturnsFalse()
+    public function hasAddressWithoutAddressReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -323,7 +323,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function hasAddressWithNonEmptyAddressReturnsTrue()
+    public function hasAddressWithNonEmptyAddressReturnsTrue(): void
     {
         $this->subject->setAddress('Backstreet 42');
 
@@ -339,7 +339,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function getPhoneWorkWithoutPhoneWorkReturnsAnEmptyString()
+    public function getPhoneWorkWithoutPhoneWorkReturnsAnEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -352,7 +352,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function getPhoneWorkWithPhoneWorkReturnsPhoneWork()
+    public function getPhoneWorkWithPhoneWorkReturnsPhoneWork(): void
     {
         $this->subject->setData(['phone_work' => '12345']);
 
@@ -365,7 +365,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function setPhoneWorkSetsPhoneWork()
+    public function setPhoneWorkSetsPhoneWork(): void
     {
         $this->subject->setPhoneWork('12345');
 
@@ -378,7 +378,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function hasPhoneWorkWithoutPhoneWorkReturnsFalse()
+    public function hasPhoneWorkWithoutPhoneWorkReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -390,7 +390,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function hasPhoneWorkWithPhoneWorkReturnsTrue()
+    public function hasPhoneWorkWithPhoneWorkReturnsTrue(): void
     {
         $this->subject->setPhoneWork('12345');
 
@@ -406,7 +406,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function getPhoneHomeWithoutPhoneHomeReturnsAnEmptyString()
+    public function getPhoneHomeWithoutPhoneHomeReturnsAnEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -419,7 +419,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function getPhoneHomeWithPhoneHomeReturnsPhoneHome()
+    public function getPhoneHomeWithPhoneHomeReturnsPhoneHome(): void
     {
         $this->subject->setData(['phone_home' => '12345']);
 
@@ -432,7 +432,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function setPhoneHomeSetsPhoneHome()
+    public function setPhoneHomeSetsPhoneHome(): void
     {
         $this->subject->setPhoneHome('12345');
 
@@ -445,7 +445,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function hasPhoneHomeWithoutPhoneHomeReturnsFalse()
+    public function hasPhoneHomeWithoutPhoneHomeReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -457,7 +457,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function hasPhoneHomeWithPhoneHomeReturnsTrue()
+    public function hasPhoneHomeWithPhoneHomeReturnsTrue(): void
     {
         $this->subject->setPhoneHome('12345');
 
@@ -473,7 +473,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function getPhoneMobileWithoutPhoneMobileReturnsAnEmptyString()
+    public function getPhoneMobileWithoutPhoneMobileReturnsAnEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -486,7 +486,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function getPhoneMobileWithPhoneMobileReturnsPhoneMobile()
+    public function getPhoneMobileWithPhoneMobileReturnsPhoneMobile(): void
     {
         $this->subject->setData(['phone_mobile' => '12345']);
 
@@ -499,7 +499,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function setPhoneMobileSetsPhoneMobile()
+    public function setPhoneMobileSetsPhoneMobile(): void
     {
         $this->subject->setPhoneMobile('12345');
 
@@ -512,7 +512,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function hasPhoneMobileWithoutPhoneMobileReturnsFalse()
+    public function hasPhoneMobileWithoutPhoneMobileReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -524,7 +524,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function hasPhoneMobileWithPhoneMobileReturnsTrue()
+    public function hasPhoneMobileWithPhoneMobileReturnsTrue(): void
     {
         $this->subject->setPhoneMobile('12345');
 
@@ -540,7 +540,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function getFaxWithoutFaxReturnsAnEmptyString()
+    public function getFaxWithoutFaxReturnsAnEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -553,7 +553,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function getFaxWithFaxReturnsFax()
+    public function getFaxWithFaxReturnsFax(): void
     {
         $this->subject->setData(['fax' => '12345']);
 
@@ -566,7 +566,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function setFaxSetsFax()
+    public function setFaxSetsFax(): void
     {
         $this->subject->setFax('12345');
 
@@ -579,7 +579,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function hasFaxWithoutFaxReturnsFalse()
+    public function hasFaxWithoutFaxReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -591,7 +591,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function hasFaxWithFaxReturnsTrue()
+    public function hasFaxWithFaxReturnsTrue(): void
     {
         $this->subject->setFax('12345');
 
@@ -607,7 +607,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function getEmailAddressWithoutEmailAddressReturnsAnEmptyString()
+    public function getEmailAddressWithoutEmailAddressReturnsAnEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -620,7 +620,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function getEmailAddressWithNonEmptyEmailAddressReturnsEmailAddress()
+    public function getEmailAddressWithNonEmptyEmailAddressReturnsEmailAddress(): void
     {
         $this->subject->setData(['email' => 'mail@example.com']);
 
@@ -633,7 +633,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function setEmailAddressSetsEmailAddress()
+    public function setEmailAddressSetsEmailAddress(): void
     {
         $this->subject->setEmailAddress('mail@example.com');
 
@@ -646,7 +646,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function hasEmailAddressWithoutEmailAddressReturnsFalse()
+    public function hasEmailAddressWithoutEmailAddressReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -658,7 +658,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function hasEmailAddressWithEmailAddressReturnsTrue()
+    public function hasEmailAddressWithEmailAddressReturnsTrue(): void
     {
         $this->subject->setEmailAddress('mail@example.com');
 
@@ -674,7 +674,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function getGenderWithoutGenderReturnsUnknownGender()
+    public function getGenderWithoutGenderReturnsUnknownGender(): void
     {
         $this->subject->setData([]);
 
@@ -687,7 +687,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function getGenderWithGenderMaleReturnsMaleGender()
+    public function getGenderWithGenderMaleReturnsMaleGender(): void
     {
         $this->subject->setData(
             ['gender' => \Tx_Seminars_Model_Speaker::GENDER_MALE]
@@ -702,7 +702,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function getGenderWithGenderFemaleReturnsFemaleGender()
+    public function getGenderWithGenderFemaleReturnsFemaleGender(): void
     {
         $this->subject->setData(
             ['gender' => \Tx_Seminars_Model_Speaker::GENDER_FEMALE]
@@ -717,7 +717,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function setGenderSetsGender()
+    public function setGenderSetsGender(): void
     {
         $this->subject->setGender(\Tx_Seminars_Model_Speaker::GENDER_MALE);
 
@@ -730,7 +730,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function hasGenderWithoutGenderReturnsFalse()
+    public function hasGenderWithoutGenderReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -742,7 +742,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function hasGenderWithGenderMaleReturnsTrue()
+    public function hasGenderWithGenderMaleReturnsTrue(): void
     {
         $this->subject->setGender(\Tx_Seminars_Model_Speaker::GENDER_MALE);
 
@@ -754,7 +754,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function hasGenderWithGenderFemaleReturnsTrue()
+    public function hasGenderWithGenderFemaleReturnsTrue(): void
     {
         $this->subject->setGender(\Tx_Seminars_Model_Speaker::GENDER_FEMALE);
 
@@ -770,7 +770,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function getNotesWithoutNotesReturnsAnEmptyString()
+    public function getNotesWithoutNotesReturnsAnEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -783,7 +783,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function getNotesWithNonEmptyNotesReturnsNotes()
+    public function getNotesWithNonEmptyNotesReturnsNotes(): void
     {
         $this->subject->setData(['notes' => 'Nothing of interest.']);
 
@@ -796,7 +796,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function setNotesSetsNotes()
+    public function setNotesSetsNotes(): void
     {
         $this->subject->setNotes('Nothing of interest.');
 
@@ -813,7 +813,7 @@ final class SpeakerTest extends TestCase
     /**
      * @test
      */
-    public function setSkillsSetsSkills()
+    public function setSkillsSetsSkills(): void
     {
         $skills = new Collection();
         $this->subject->setSkills($skills);

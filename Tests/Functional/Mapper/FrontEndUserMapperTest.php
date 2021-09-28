@@ -21,7 +21,7 @@ final class FrontEndUserMapperTest extends FunctionalTestCase
      */
     private $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -31,7 +31,7 @@ final class FrontEndUserMapperTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function loadForExistingRecordLoadsScalarData()
+    public function loadForExistingRecordLoadsScalarData(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/FrontEndUsers.xml');
 
@@ -45,7 +45,7 @@ final class FrontEndUserMapperTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function loadPopulatesUserGroupsAssociation()
+    public function loadPopulatesUserGroupsAssociation(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/FrontEndUsers.xml');
 
@@ -63,7 +63,7 @@ final class FrontEndUserMapperTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function loadPopulatesRegistrationsAssociation()
+    public function loadPopulatesRegistrationsAssociation(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/FrontEndUsers.xml');
 

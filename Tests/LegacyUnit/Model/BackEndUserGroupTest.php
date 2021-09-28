@@ -13,7 +13,7 @@ final class BackEndUserGroupTest extends TestCase
      */
     private $subject;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new \Tx_Seminars_Model_BackEndUserGroup();
     }
@@ -25,7 +25,7 @@ final class BackEndUserGroupTest extends TestCase
     /**
      * @test
      */
-    public function getTitleForNonEmptyGroupTitleReturnsGroupTitle()
+    public function getTitleForNonEmptyGroupTitleReturnsGroupTitle(): void
     {
         $this->subject->setData(['title' => 'foo']);
 
@@ -38,7 +38,7 @@ final class BackEndUserGroupTest extends TestCase
     /**
      * @test
      */
-    public function getTitleForEmptyGroupTitleReturnsEmptyString()
+    public function getTitleForEmptyGroupTitleReturnsEmptyString(): void
     {
         $this->subject->setData(['title' => '']);
 
@@ -55,7 +55,7 @@ final class BackEndUserGroupTest extends TestCase
     /**
      * @test
      */
-    public function getEventFolderForNoSetEventFolderReturnsZero()
+    public function getEventFolderForNoSetEventFolderReturnsZero(): void
     {
         $this->subject->setData([]);
 
@@ -68,7 +68,7 @@ final class BackEndUserGroupTest extends TestCase
     /**
      * @test
      */
-    public function getEventFolderForSetEventFolderReturnsEventFolderPid()
+    public function getEventFolderForSetEventFolderReturnsEventFolderPid(): void
     {
         $this->subject->setData(['tx_seminars_events_folder' => 42]);
 
@@ -85,7 +85,7 @@ final class BackEndUserGroupTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationFolderForNoSetRegistrationFolderReturnsZero()
+    public function getRegistrationFolderForNoSetRegistrationFolderReturnsZero(): void
     {
         $this->subject->setData([]);
 
@@ -98,7 +98,7 @@ final class BackEndUserGroupTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationFolderForSetRegistrationFolderReturnsRegistrationFolderPid()
+    public function getRegistrationFolderForSetRegistrationFolderReturnsRegistrationFolderPid(): void
     {
         $this->subject->setData(['tx_seminars_registrations_folder' => 42]);
 
@@ -115,7 +115,7 @@ final class BackEndUserGroupTest extends TestCase
     /**
      * @test
      */
-    public function getAuxiliaryRecordsFolderForNoSetAuxiliaryRecordsFolderReturnsZero()
+    public function getAuxiliaryRecordsFolderForNoSetAuxiliaryRecordsFolderReturnsZero(): void
     {
         $this->subject->setData([]);
 
@@ -128,7 +128,7 @@ final class BackEndUserGroupTest extends TestCase
     /**
      * @test
      */
-    public function getAuxiliaryRecordsFolderForSetAuxiliaryRecordsFolderReturnsAuxiliaryRecordsFolderPid()
+    public function getAuxiliaryRecordsFolderForSetAuxiliaryRecordsFolderReturnsAuxiliaryRecordsFolderPid(): void
     {
         $this->subject->setData(['tx_seminars_auxiliaries_folder' => 42]);
 

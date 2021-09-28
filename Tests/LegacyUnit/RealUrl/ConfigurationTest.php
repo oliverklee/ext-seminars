@@ -17,7 +17,7 @@ final class ConfigurationTest extends TestCase
      */
     protected $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new RealUrlConfiguration();
     }
@@ -25,7 +25,7 @@ final class ConfigurationTest extends TestCase
     /**
      * @test
      */
-    public function addConfigurationAddsEventSingleViewPostVarSet()
+    public function addConfigurationAddsEventSingleViewPostVarSet(): void
     {
         $configurationBefore = ['config' => []];
 

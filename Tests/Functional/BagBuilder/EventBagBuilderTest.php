@@ -20,7 +20,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
      */
     private $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -30,10 +30,8 @@ final class EventBagBuilderTest extends FunctionalTestCase
     /**
      * @param int $uid
      * @param AbstractBag $bag
-     *
-     * @return void
      */
-    private static function assertBagContainsUid(int $uid, AbstractBag $bag)
+    private static function assertBagContainsUid(int $uid, AbstractBag $bag): void
     {
         $uids = GeneralUtility::intExplode(',', $bag->getUids(), true);
         self::assertContains($uid, $uids);
@@ -42,7 +40,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function limitToEventsWithVacanciesForEventWithVacanciesAndOnlyOfflineAttendeesFindsThisEvent()
+    public function limitToEventsWithVacanciesForEventWithVacanciesAndOnlyOfflineAttendeesFindsThisEvent(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -55,7 +53,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function limitToEventsWithVacanciesForEventWithOneVacancyFindsThisEvent()
+    public function limitToEventsWithVacanciesForEventWithOneVacancyFindsThisEvent(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 

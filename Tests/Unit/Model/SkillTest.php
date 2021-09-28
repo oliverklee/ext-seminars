@@ -13,7 +13,7 @@ final class SkillTest extends UnitTestCase
      */
     private $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new \Tx_Seminars_Model_Skill();
     }
@@ -21,7 +21,7 @@ final class SkillTest extends UnitTestCase
     /**
      * @test
      */
-    public function setTitleWithEmptyTitleThrowsException()
+    public function setTitleWithEmptyTitleThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -36,7 +36,7 @@ final class SkillTest extends UnitTestCase
     /**
      * @test
      */
-    public function setTitleSetsTitle()
+    public function setTitleSetsTitle(): void
     {
         $this->subject->setTitle('Superhero');
 
@@ -49,7 +49,7 @@ final class SkillTest extends UnitTestCase
     /**
      * @test
      */
-    public function getTitleWithNonEmptyTitleReturnsTitle()
+    public function getTitleWithNonEmptyTitleReturnsTitle(): void
     {
         $this->subject->setData(['title' => 'Superhero']);
 

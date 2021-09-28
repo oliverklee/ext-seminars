@@ -12,8 +12,6 @@ interface EmailSalutationHookInterface
     /**
      * @param string[] $salutationParts
      * @param \Tx_Seminars_Model_FrontEndUser $user
-     *
-     * @return void
      */
-    public function modifySalutation(array $salutationParts, \Tx_Seminars_Model_FrontEndUser $user);
+    public function modifySalutation(array $salutationParts, \Tx_Seminars_Model_FrontEndUser $user): void;
 }

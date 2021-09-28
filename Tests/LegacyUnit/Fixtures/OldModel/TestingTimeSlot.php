@@ -13,10 +13,8 @@ final class TestingTimeSlot extends \Tx_Seminars_OldModel_TimeSlot
      * Sets the place field of the time slot.
      *
      * @param int $place the UID of the place (has to be > 0)
-     *
-     * @return void
      */
-    public function setPlace(int $place)
+    public function setPlace(int $place): void
     {
         $this->setRecordPropertyInteger('place', $place);
     }
@@ -25,10 +23,8 @@ final class TestingTimeSlot extends \Tx_Seminars_OldModel_TimeSlot
      * Sets the entry date.
      *
      * @param int $entryDate the entry date as a UNIX timestamp (has to be >= 0, 0 will unset the entry date)
-     *
-     * @return void
      */
-    public function setEntryDate(int $entryDate)
+    public function setEntryDate(int $entryDate): void
     {
         $this->setRecordPropertyInteger('entry_date', $entryDate);
     }
@@ -37,10 +33,8 @@ final class TestingTimeSlot extends \Tx_Seminars_OldModel_TimeSlot
      * Sets the begin date and time.
      *
      * @param int $beginDate the begin date as a UNIX timestamp (has to be >= 0, 0 will unset the begin date)
-     *
-     * @return void
      */
-    public function setBeginDate(int $beginDate)
+    public function setBeginDate(int $beginDate): void
     {
         $this->setRecordPropertyInteger('begin_date', $beginDate);
     }

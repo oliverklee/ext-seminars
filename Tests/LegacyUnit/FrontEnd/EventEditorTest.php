@@ -60,7 +60,7 @@ final class EventEditorTest extends TestCase
     /** @var ConnectionPool */
     private $connectionPool = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
@@ -90,7 +90,7 @@ final class EventEditorTest extends TestCase
         $this->connectionPool = GeneralUtility::makeInstance(ConnectionPool::class);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
 
@@ -108,10 +108,8 @@ final class EventEditorTest extends TestCase
     /**
      * Creates a FE user, adds him/her as a VIP to the seminar with the UID in
      * $this->seminarUid and logs him/her in.
-     *
-     * @return void
      */
-    private function createLogInAndAddFeUserAsVip()
+    private function createLogInAndAddFeUserAsVip(): void
     {
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -144,10 +142,8 @@ final class EventEditorTest extends TestCase
     /**
      * Creates a FE user, adds him/her as a owner to the seminar with the UID in
      * $this->seminarUid and logs him/her in.
-     *
-     * @return void
      */
-    private function createLogInAndAddFeUserAsOwner()
+    private function createLogInAndAddFeUserAsOwner(): void
     {
         $this->subject->setObjectUid(
             $this->testingFramework->createRecord(
@@ -249,7 +245,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function createLogInAndAddFeUserAsVipCreatesFeUser()
+    public function createLogInAndAddFeUserAsVipCreatesFeUser(): void
     {
         $connection = $this->connectionPool->getConnectionForTable('fe_users');
 
@@ -264,7 +260,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function createLogInAndAddFeUserAsVipLogsInFeUser()
+    public function createLogInAndAddFeUserAsVipLogsInFeUser(): void
     {
         $this->createLogInAndAddFeUserAsVip();
 
@@ -276,7 +272,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function createLogInAndAddFeUserAsVipAddsUserAsVip()
+    public function createLogInAndAddFeUserAsVipAddsUserAsVip(): void
     {
         $connection = $this->connectionPool->getConnectionForTable('tx_seminars_seminars');
 
@@ -291,7 +287,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function createLogInAndAddFeUserAsOwnerCreatesFeUser()
+    public function createLogInAndAddFeUserAsOwnerCreatesFeUser(): void
     {
         $connection = $this->connectionPool->getConnectionForTable('fe_users');
 
@@ -306,7 +302,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function createLogInAndAddFeUserAsOwnerLogsInFeUser()
+    public function createLogInAndAddFeUserAsOwnerLogsInFeUser(): void
     {
         $this->createLogInAndAddFeUserAsOwner();
 
@@ -318,7 +314,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function createLogInAndAddFeUserAsOwnerAddsUserAsOwner()
+    public function createLogInAndAddFeUserAsOwnerAddsUserAsOwner(): void
     {
         $query = $this->connectionPool->getQueryBuilderForTable('tx_seminars_seminars');
 
@@ -342,7 +338,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function createLogInAndAddFeUserAsDefaultVipCreatesFeUser()
+    public function createLogInAndAddFeUserAsDefaultVipCreatesFeUser(): void
     {
         $connection = $this->connectionPool->getConnectionForTable('fe_users');
 
@@ -357,7 +353,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function createLogInAndAddFeUserAsDefaultVipLogsInFeUser()
+    public function createLogInAndAddFeUserAsDefaultVipLogsInFeUser(): void
     {
         $this->createLogInAndAddFeUserAsDefaultVip();
 
@@ -369,7 +365,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function createLogInAndAddFeUserAsDefaultVipAddsFeUserAsDefaultVip()
+    public function createLogInAndAddFeUserAsDefaultVipAddsFeUserAsDefaultVip(): void
     {
         $connection = $this->connectionPool->getConnectionForTable('fe_users');
 
@@ -388,7 +384,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function createLogInAndAddFrontEndUserToEventEditorFrontEndGroupCreatesFeUser()
+    public function createLogInAndAddFrontEndUserToEventEditorFrontEndGroupCreatesFeUser(): void
     {
         $connection = $this->connectionPool->getConnectionForTable('fe_users');
 
@@ -403,7 +399,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function createLogInAndAddFrontEndUserToEventEditorFrontEndGroupLogsInFrontEndUser()
+    public function createLogInAndAddFrontEndUserToEventEditorFrontEndGroupLogsInFrontEndUser(): void
     {
         $this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup();
 
@@ -415,7 +411,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function createLogInAndAddFrontEndUserToEventEditorFrontEndGroupAddsFrontEndUserToEventEditorFrontEndGroup()
+    public function createLogInAndAddFrontEndUserToEventEditorFrontEndGroupAddsFrontEndUserToEventEditorFrontEndGroup(): void
     {
         $connection = $this->connectionPool->getConnectionForTable('fe_users');
 
@@ -438,7 +434,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function hasAccessMessageWithNoLoggedInFeUserReturnsNotLoggedInMessage()
+    public function hasAccessMessageWithNoLoggedInFeUserReturnsNotLoggedInMessage(): void
     {
         $this->subject->setObjectUid(
             $this->testingFramework->createRecord(
@@ -455,7 +451,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function hasAccessMessageWithLoggedInFeUserWhoIsNeitherVipNorOwnerReturnsNoAccessMessage()
+    public function hasAccessMessageWithLoggedInFeUserWhoIsNeitherVipNorOwnerReturnsNoAccessMessage(): void
     {
         $this->subject->setObjectUid(
             $this->testingFramework->createRecord(
@@ -473,7 +469,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function hasAccessMessageWithLoggedInFeUserAsOwnerReturnsEmptyResult()
+    public function hasAccessMessageWithLoggedInFeUserAsOwnerReturnsEmptyResult(): void
     {
         $this->createLogInAndAddFeUserAsOwner();
 
@@ -486,7 +482,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function hasAccessMessageWithLoggedInFeUserAsVipAndVipsMayNotEditTheirEventsReturnsNonEmptyResult()
+    public function hasAccessMessageWithLoggedInFeUserAsVipAndVipsMayNotEditTheirEventsReturnsNonEmptyResult(): void
     {
         $this->subject->setObjectUid(
             $this->testingFramework->createRecord(
@@ -505,7 +501,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function hasAccessMessageWithLoggedInFeUserAsVipAndVipsMayEditTheirEventsReturnsEmptyResult()
+    public function hasAccessMessageWithLoggedInFeUserAsVipAndVipsMayEditTheirEventsReturnsEmptyResult(): void
     {
         $this->subject->setObjectUid(
             $this->testingFramework->createRecord(
@@ -524,7 +520,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function hasAccessWithLoggedInFeUserAsDefaultVipAndVipsMayNotEditTheirEventsReturnsNonEmptyResult()
+    public function hasAccessWithLoggedInFeUserAsDefaultVipAndVipsMayNotEditTheirEventsReturnsNonEmptyResult(): void
     {
         $this->subject->setObjectUid(
             $this->testingFramework->createRecord(
@@ -543,7 +539,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function hasAccessWithLoggedInFeUserAsDefaultVipAndVipsMayEditTheirEventsReturnsEmptyResult()
+    public function hasAccessWithLoggedInFeUserAsDefaultVipAndVipsMayEditTheirEventsReturnsEmptyResult(): void
     {
         $this->subject->setObjectUid(
             $this->testingFramework->createRecord(
@@ -562,7 +558,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function hasAccessForLoggedInUserInUnauthorizedUserGroupReturnsNonEmptyResult()
+    public function hasAccessForLoggedInUserInUnauthorizedUserGroupReturnsNonEmptyResult(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser();
 
@@ -575,7 +571,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function hasAccessForLoggedInUserInAuthorizedUserGroupAndNoUidSetReturnsEmptyResult()
+    public function hasAccessForLoggedInUserInAuthorizedUserGroupAndNoUidSetReturnsEmptyResult(): void
     {
         $groupUid = $this->testingFramework->createFrontEndUserGroup(
             ['title' => 'test']
@@ -593,7 +589,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function hasAccessForLoggedInNonOwnerInAuthorizedUserGroupReturnsNoAccessMessage()
+    public function hasAccessForLoggedInNonOwnerInAuthorizedUserGroupReturnsNoAccessMessage(): void
     {
         $groupUid = $this->testingFramework->createFrontEndUserGroup(
             ['title' => 'test']
@@ -616,7 +612,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function hasAccessForLoggedInOwnerInAuthorizedUserGroupReturnsEmptyResult()
+    public function hasAccessForLoggedInOwnerInAuthorizedUserGroupReturnsEmptyResult(): void
     {
         $groupUid = $this->testingFramework->createFrontEndUserGroup(
             ['title' => 'test']
@@ -640,7 +636,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function hasAccessForLoggedInUserAndInvalidSeminarUidReturnsWrongSeminarMessage()
+    public function hasAccessForLoggedInUserAndInvalidSeminarUidReturnsWrongSeminarMessage(): void
     {
         $groupUid = $this->testingFramework->createFrontEndUserGroup(['title' => 'test']);
         $this->subject->setConfigurationValue('eventEditorFeGroupID', $groupUid);
@@ -657,7 +653,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function hasAccessMessageForDeletedSeminarUidAndUserLoggedInReturnsWrongSeminarMessage()
+    public function hasAccessMessageForDeletedSeminarUidAndUserLoggedInReturnsWrongSeminarMessage(): void
     {
         $groupUid = $this->testingFramework->createFrontEndUserGroup(
             ['title' => 'test']
@@ -680,7 +676,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function hasAccessMessageForHiddenSeminarUidAndUserLoggedInReturnsEmptyString()
+    public function hasAccessMessageForHiddenSeminarUidAndUserLoggedInReturnsEmptyString(): void
     {
         $this->subject->setObjectUid(
             $this->testingFramework->createRecord(
@@ -707,7 +703,7 @@ final class EventEditorTest extends TestCase
      *
      * @doesNotPerformAssertions
      */
-    public function populateListCategoriesDoesNotCrash()
+    public function populateListCategoriesDoesNotCrash(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $this->subject->populateListCategories();
@@ -716,7 +712,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function populateListCategoriesShowsCategory()
+    public function populateListCategoriesShowsCategory(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $categoryUid = $this->testingFramework->createRecord(
@@ -733,7 +729,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function populateListCategoriesForNoSetStoragePageReturnsRecordWithAnyPageId()
+    public function populateListCategoriesForNoSetStoragePageReturnsRecordWithAnyPageId(): void
     {
         $this->pluginConfiguration->setAsInteger('createAuxiliaryRecordsPID', 0);
         $this->testingFramework->createAndLoginFrontEndUser();
@@ -755,7 +751,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function populateListEventTypesShowsEventType()
+    public function populateListEventTypesShowsEventType(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $eventTypeUid = $this->testingFramework->createRecord(
@@ -772,7 +768,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function populateListEventTypesReturnsRecordWithAnyPageId()
+    public function populateListEventTypesReturnsRecordWithAnyPageId(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $this->pluginConfiguration->setAsInteger('createAuxiliaryRecordsPID', 0);
@@ -794,7 +790,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function populateListLodgingsShowsLodging()
+    public function populateListLodgingsShowsLodging(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $lodgingUid = $this->testingFramework->createRecord(
@@ -811,7 +807,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function populateListLodgingsReturnsRecordWithAnyPageId()
+    public function populateListLodgingsReturnsRecordWithAnyPageId(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $this->pluginConfiguration->setAsInteger('createAuxiliaryRecordsPID', 0);
@@ -833,7 +829,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function populateListFoodsShowsFood()
+    public function populateListFoodsShowsFood(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $foodUid = $this->testingFramework->createRecord(
@@ -850,7 +846,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function populateListFoodsReturnsRecordWithAnyPageId()
+    public function populateListFoodsReturnsRecordWithAnyPageId(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $this->pluginConfiguration->setAsInteger('createAuxiliaryRecordsPID', 0);
@@ -872,7 +868,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function populateListPaymentMethodsShowsPaymentMethod()
+    public function populateListPaymentMethodsShowsPaymentMethod(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $paymentMethodUid = $this->testingFramework->createRecord(
@@ -889,7 +885,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function populateListPaymentMethodsReturnsRecordWithAnyPageId()
+    public function populateListPaymentMethodsReturnsRecordWithAnyPageId(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $this->pluginConfiguration->setAsInteger('createAuxiliaryRecordsPID', 0);
@@ -911,7 +907,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function populateListPlacesShowsPlaceWithoutOwner()
+    public function populateListPlacesShowsPlaceWithoutOwner(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $placeUid = $this->testingFramework->createRecord(
@@ -932,7 +928,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function populateListPlacesShowsPlaceWithOwnerIsLoggedInFrontEndUser()
+    public function populateListPlacesShowsPlaceWithOwnerIsLoggedInFrontEndUser(): void
     {
         $frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
         $placeUid = $this->testingFramework->createRecord(
@@ -953,7 +949,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function populateListPlacesHidesPlaceWithOwnerIsNotLoggedInFrontEndUser()
+    public function populateListPlacesHidesPlaceWithOwnerIsNotLoggedInFrontEndUser(): void
     {
         $frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
         $placeUid = $this->testingFramework->createRecord(
@@ -974,7 +970,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function populateListPlacesReturnsRecordWithAnyPageId()
+    public function populateListPlacesReturnsRecordWithAnyPageId(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $this->pluginConfiguration->setAsInteger('createAuxiliaryRecordsPID', 0);
@@ -1000,7 +996,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function populateListCheckboxesShowsCheckboxWithoutOwner()
+    public function populateListCheckboxesShowsCheckboxWithoutOwner(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $checkboxUid = $this->testingFramework->createRecord(
@@ -1021,7 +1017,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function populateListCheckboxesShowsCheckboxWithOwnerIsLoggedInFrontEndUser()
+    public function populateListCheckboxesShowsCheckboxWithOwnerIsLoggedInFrontEndUser(): void
     {
         $frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
         $checkboxUid = $this->testingFramework->createRecord(
@@ -1042,7 +1038,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function populateListCheckboxesHidesCheckboxWithOwnerIsNotLoggedInFrontEndUser()
+    public function populateListCheckboxesHidesCheckboxWithOwnerIsNotLoggedInFrontEndUser(): void
     {
         $frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
         $checkboxUid = $this->testingFramework->createRecord(
@@ -1063,7 +1059,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function populateListCheckboxesReturnsRecordWithAnyPageId()
+    public function populateListCheckboxesReturnsRecordWithAnyPageId(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $this->pluginConfiguration->setAsInteger('createAuxiliaryRecordsPID', 0);
@@ -1089,7 +1085,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function populateListTargetGroupsShowsTargetGroupWithoutOwner()
+    public function populateListTargetGroupsShowsTargetGroupWithoutOwner(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $targetGroupUid = $this->testingFramework->createRecord(
@@ -1110,7 +1106,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function populateListTargetGroupsShowsTargetGroupWithOwnerIsLoggedInFrontEndUser()
+    public function populateListTargetGroupsShowsTargetGroupWithOwnerIsLoggedInFrontEndUser(): void
     {
         $frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
         $targetGroupUid = $this->testingFramework->createRecord(
@@ -1131,7 +1127,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function populateListTargetGroupsHidesTargetGroupWithOwnerIsNotLoggedInFrontEndUser()
+    public function populateListTargetGroupsHidesTargetGroupWithOwnerIsNotLoggedInFrontEndUser(): void
     {
         $frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
         $targetGroupUid = $this->testingFramework->createRecord(
@@ -1152,7 +1148,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function populateListTargetGroupsReturnsRecordWithAnyPageId()
+    public function populateListTargetGroupsReturnsRecordWithAnyPageId(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $this->pluginConfiguration->setAsInteger('createAuxiliaryRecordsPID', 0);
@@ -1178,7 +1174,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function populateListSpeakersShowsSpeakerWithoutOwner()
+    public function populateListSpeakersShowsSpeakerWithoutOwner(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $speakerUid = $this->testingFramework->createRecord(
@@ -1199,7 +1195,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function populateListSpeakersShowsSpeakerWithOwnerIsLoggedInFrontEndUser()
+    public function populateListSpeakersShowsSpeakerWithOwnerIsLoggedInFrontEndUser(): void
     {
         $frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
         $speakerUid = $this->testingFramework->createRecord(
@@ -1220,7 +1216,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function populateListSpeakersHidesSpeakerWithOwnerIsNotLoggedInFrontEndUser()
+    public function populateListSpeakersHidesSpeakerWithOwnerIsNotLoggedInFrontEndUser(): void
     {
         $frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
         $speakerUid = $this->testingFramework->createRecord(
@@ -1241,7 +1237,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function populateListSpeakersReturnsRecordWithAnyPageId()
+    public function populateListSpeakersReturnsRecordWithAnyPageId(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $this->pluginConfiguration->setAsInteger('createAuxiliaryRecordsPID', 0);
@@ -1267,7 +1263,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function isFrontEndEditingOfRelatedRecordsAllowedWithoutPermissionAndWithoutPidReturnsFalse()
+    public function isFrontEndEditingOfRelatedRecordsAllowedWithoutPermissionAndWithoutPidReturnsFalse(): void
     {
         $this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup();
 
@@ -1286,7 +1282,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function isFrontEndEditingOfRelatedRecordsAllowedWithPermissionAndWithoutPidReturnsFalse()
+    public function isFrontEndEditingOfRelatedRecordsAllowedWithPermissionAndWithoutPidReturnsFalse(): void
     {
         $this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup();
 
@@ -1305,7 +1301,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function isFrontEndEditingOfRelatedRecordsAllowedWithoutPermissionAndWithPidReturnsFalse()
+    public function isFrontEndEditingOfRelatedRecordsAllowedWithoutPermissionAndWithPidReturnsFalse(): void
     {
         $this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup(
             ['tx_seminars_auxiliary_records_pid' => 42]
@@ -1326,7 +1322,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function isFrontEndEditingOfRelatedRecordsAllowedWithPermissionAndWithPidReturnsTrue()
+    public function isFrontEndEditingOfRelatedRecordsAllowedWithPermissionAndWithPidReturnsTrue(): void
     {
         $this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup(
             ['tx_seminars_auxiliary_records_pid' => 42]
@@ -1347,7 +1343,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function isFrontEndEditingOfRelatedRecordsAllowedWithPermissionAndWithPidSetInSetupButNotUserGroupReturnsTrue()
+    public function isFrontEndEditingOfRelatedRecordsAllowedWithPermissionAndWithPidSetInSetupButNotUserGroupReturnsTrue(): void
     {
         $this->createLoginAndAddFrontEndUserToEventEditorFrontEndGroup();
 
@@ -1374,7 +1370,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function validateStringFieldForNonRequiredFieldAndEmptyStringReturnsTrue()
+    public function validateStringFieldForNonRequiredFieldAndEmptyStringReturnsTrue(): void
     {
         self::assertTrue(
             $this->subject->validateString(
@@ -1386,7 +1382,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function validateStringFieldForRequiredFieldAndEmptyStringReturnsFalse()
+    public function validateStringFieldForRequiredFieldAndEmptyStringReturnsFalse(): void
     {
         $subject = $this->getFixtureWithRequiredField('teaser');
 
@@ -1400,7 +1396,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function validateStringFieldForRequiredFieldAndNonEmptyStringReturnsTrue()
+    public function validateStringFieldForRequiredFieldAndNonEmptyStringReturnsTrue(): void
     {
         $subject = $this->getFixtureWithRequiredField('teaser');
 
@@ -1418,7 +1414,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function validateIntegerFieldForNonRequiredFieldAndValueZeroReturnsTrue()
+    public function validateIntegerFieldForNonRequiredFieldAndValueZeroReturnsTrue(): void
     {
         self::assertTrue(
             $this->subject->validateInteger(
@@ -1430,7 +1426,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function validateIntegerFieldForRequiredFieldAndValueZeroReturnsFalse()
+    public function validateIntegerFieldForRequiredFieldAndValueZeroReturnsFalse(): void
     {
         $subject = $this->getFixtureWithRequiredField('attendees_max');
 
@@ -1444,7 +1440,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function validateIntegerFieldForRequiredFieldAndValueNonZeroReturnsTrue()
+    public function validateIntegerFieldForRequiredFieldAndValueNonZeroReturnsTrue(): void
     {
         $subject = $this->getFixtureWithRequiredField('attendees_max');
 
@@ -1462,7 +1458,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function validateDateForNonRequiredFieldAndEmptyStringReturnsTrue()
+    public function validateDateForNonRequiredFieldAndEmptyStringReturnsTrue(): void
     {
         self::assertTrue(
             $this->subject->validateDate(
@@ -1474,7 +1470,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function validateDateForRequiredFieldAndEmptyStringReturnsFalse()
+    public function validateDateForRequiredFieldAndEmptyStringReturnsFalse(): void
     {
         $subject = $this->getFixtureWithRequiredField('begin_date');
 
@@ -1488,7 +1484,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function validateDateForRequiredFieldAndValidDateReturnsTrue()
+    public function validateDateForRequiredFieldAndValidDateReturnsTrue(): void
     {
         $subject = $this->getFixtureWithRequiredField('begin_date');
 
@@ -1505,7 +1501,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function validateDateForRequiredFieldAndNonValidDateReturnsFalse()
+    public function validateDateForRequiredFieldAndNonValidDateReturnsFalse(): void
     {
         $subject = $this->getFixtureWithRequiredField('begin_date');
 
@@ -1526,7 +1522,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function validatePriceForNonRequiredFieldAndEmptyStringReturnsTrue()
+    public function validatePriceForNonRequiredFieldAndEmptyStringReturnsTrue(): void
     {
         self::assertTrue(
             $this->subject->validatePrice(
@@ -1538,7 +1534,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function validatePriceForRequiredFieldAndEmptyStringReturnsFalse()
+    public function validatePriceForRequiredFieldAndEmptyStringReturnsFalse(): void
     {
         $subject = $this->getFixtureWithRequiredField('price_regular');
 
@@ -1552,7 +1548,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function validatePriceForRequiredFieldAndValidPriceReturnsTrue()
+    public function validatePriceForRequiredFieldAndValidPriceReturnsTrue(): void
     {
         $subject = $this->getFixtureWithRequiredField('price_regular');
 
@@ -1566,7 +1562,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function validatePriceForRequiredFieldAndInvalidPriceReturnsFalse()
+    public function validatePriceForRequiredFieldAndInvalidPriceReturnsFalse(): void
     {
         $subject = $this->getFixtureWithRequiredField('price_regular');
 
@@ -1585,7 +1581,7 @@ final class EventEditorTest extends TestCase
      * @test
      * @group sendEmailToReviewer
      */
-    public function eventEditorForNonHiddenEventDoesNotSendMail()
+    public function eventEditorForNonHiddenEventDoesNotSendMail(): void
     {
         $this->email->expects(self::exactly(0))->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
@@ -1597,7 +1593,7 @@ final class EventEditorTest extends TestCase
      * @test
      * @group sendEmailToReviewer
      */
-    public function eventEditorForEventHiddenBeforeEditingDoesNotSendMail()
+    public function eventEditorForEventHiddenBeforeEditingDoesNotSendMail(): void
     {
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1618,7 +1614,7 @@ final class EventEditorTest extends TestCase
      * @test
      * @group sendEmailToReviewer
      */
-    public function eventEditorForEventHiddenByFormDoesSendMail()
+    public function eventEditorForEventHiddenByFormDoesSendMail(): void
     {
         $seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->createAndLoginUserWithReviewer();
@@ -1645,7 +1641,7 @@ final class EventEditorTest extends TestCase
      * @test
      * @group sendEmailToReviewer
      */
-    public function sendEmailToReviewerSendsMailToReviewerMailAddress()
+    public function sendEmailToReviewerSendsMailToReviewerMailAddress(): void
     {
         $seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->createAndLoginUserWithReviewer();
@@ -1677,7 +1673,7 @@ final class EventEditorTest extends TestCase
      * @test
      * @group sendEmailToReviewer
      */
-    public function sendEmailToReviewerSetsPublishEventSubjectInMail()
+    public function sendEmailToReviewerSetsPublishEventSubjectInMail(): void
     {
         $seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->createAndLoginUserWithReviewer();
@@ -1709,7 +1705,7 @@ final class EventEditorTest extends TestCase
      * @test
      * @group sendEmailToReviewer
      */
-    public function sendEmailToReviewerSendsTheTitleOfTheEvent()
+    public function sendEmailToReviewerSendsTheTitleOfTheEvent(): void
     {
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1744,7 +1740,7 @@ final class EventEditorTest extends TestCase
      * @test
      * @group sendEmailToReviewer
      */
-    public function sendEmailToReviewerForEventWithDateSendsTheDateOfTheEvent()
+    public function sendEmailToReviewerForEventWithDateSendsTheDateOfTheEvent(): void
     {
         $this->subject->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
         $seminarUid = $this->testingFramework->createRecord(
@@ -1783,7 +1779,7 @@ final class EventEditorTest extends TestCase
      * @test
      * @group sendEmailToReviewer
      */
-    public function sendEmailToReviewerForEventWithoutDateHidesDateMarker()
+    public function sendEmailToReviewerForEventWithoutDateHidesDateMarker(): void
     {
         $this->subject->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
         $seminarUid = $this->testingFramework->createRecord(
@@ -1818,7 +1814,7 @@ final class EventEditorTest extends TestCase
      * @test
      * @group sendEmailToReviewer
      */
-    public function sendEmailToReviewerForEventWithoutDateDoesNotSendDate()
+    public function sendEmailToReviewerForEventWithoutDateDoesNotSendDate(): void
     {
         $this->subject->setConfigurationValue('dateFormatYMD', '%d.%m.%Y');
         $seminarUid = $this->testingFramework->createRecord(
@@ -1854,7 +1850,7 @@ final class EventEditorTest extends TestCase
      * @test
      * @group sendEmailToReviewer
      */
-    public function sendEmailToReviewerSendsMailWithoutAnyUnreplacedMarkers()
+    public function sendEmailToReviewerSendsMailWithoutAnyUnreplacedMarkers(): void
     {
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -1888,7 +1884,7 @@ final class EventEditorTest extends TestCase
      * @test
      * @group sendEmailToReviewer
      */
-    public function sendEmailToReviewerForEventWithDescriptionShowsDescriptionInMail()
+    public function sendEmailToReviewerForEventWithDescriptionShowsDescriptionInMail(): void
     {
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1923,7 +1919,7 @@ final class EventEditorTest extends TestCase
      * @test
      * @group sendEmailToReviewer
      */
-    public function sendEmailToReviewerSendsPublicationLinkInMail()
+    public function sendEmailToReviewerSendsPublicationLinkInMail(): void
     {
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -1957,7 +1953,7 @@ final class EventEditorTest extends TestCase
      * @test
      * @group sendEmailToReviewer
      */
-    public function sendEmailToReviewerUsesTypo3DefaultFromEmailAndDefaultFromNameAsFromNameForMail()
+    public function sendEmailToReviewerUsesTypo3DefaultFromEmailAndDefaultFromNameAsFromNameForMail(): void
     {
         $seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->createAndLoginUserWithReviewer();
@@ -1994,7 +1990,7 @@ final class EventEditorTest extends TestCase
      * @test
      * @group sendEmailToReviewer
      */
-    public function sendEmailToReviewerUsesFrontEndUserAsReplyToForMail()
+    public function sendEmailToReviewerUsesFrontEndUserAsReplyToForMail(): void
     {
         $seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->createAndLoginUserWithReviewer();
@@ -2029,7 +2025,7 @@ final class EventEditorTest extends TestCase
      * @test
      * @group sendEmailToReviewer
      */
-    public function sendEmailToReviewerWithoutTypo3DefaultFromAddressAndNameUsesFrontEndUserNameAsFromNameForMail()
+    public function sendEmailToReviewerWithoutTypo3DefaultFromAddressAndNameUsesFrontEndUserNameAsFromNameForMail(): void
     {
         $seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->createAndLoginUserWithReviewer();
@@ -2064,7 +2060,7 @@ final class EventEditorTest extends TestCase
      * @test
      * @group sendEmailToReviewer
      */
-    public function sendEmailToReviewerWithoutTypo3DefaultFromAddressUsesFrontEndUserMailAddressAsFromAddressForMail()
+    public function sendEmailToReviewerWithoutTypo3DefaultFromAddressUsesFrontEndUserMailAddressAsFromAddressForMail(): void
     {
         $seminarUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->createAndLoginUserWithReviewer();
@@ -2101,7 +2097,7 @@ final class EventEditorTest extends TestCase
      * @test
      * @group sendNotificationMailsToReceiver
      */
-    public function sendAdditionalNotificationEmailToReviewerWithReviewerAndFeatureEnabledSendsEmail()
+    public function sendAdditionalNotificationEmailToReviewerWithReviewerAndFeatureEnabledSendsEmail(): void
     {
         $this->pluginConfiguration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
@@ -2116,7 +2112,7 @@ final class EventEditorTest extends TestCase
      * @test
      * @group sendNotificationMailsToReceiver
      */
-    public function sendAdditionalNotificationEmailToReviewerWithoutReviewerAndFeatureEnabledNotSendsEmail()
+    public function sendAdditionalNotificationEmailToReviewerWithoutReviewerAndFeatureEnabledNotSendsEmail(): void
     {
         $this->pluginConfiguration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithPublishSetting(\Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY);
@@ -2131,7 +2127,7 @@ final class EventEditorTest extends TestCase
      * @test
      * @group sendNotificationMailsToReceiver
      */
-    public function sendAdditionalNotificationEmailToReviewerWithReviewerAndFeatureDisabledNotSendsEmail()
+    public function sendAdditionalNotificationEmailToReviewerWithReviewerAndFeatureDisabledNotSendsEmail(): void
     {
         $this->pluginConfiguration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', false);
         $this->createAndLoginUserWithReviewer();
@@ -2146,7 +2142,7 @@ final class EventEditorTest extends TestCase
      * @test
      * @group sendNotificationMailsToReceiver
      */
-    public function sendAdditionalNotificationEmailToReviewerSendsEmailToReviewer()
+    public function sendAdditionalNotificationEmailToReviewerSendsEmailToReviewer(): void
     {
         $this->pluginConfiguration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
@@ -2166,7 +2162,7 @@ final class EventEditorTest extends TestCase
      * @test
      * @group sendNotificationMailsToReceiver
      */
-    public function sendAdditionalNotificationEmailToReviewerUsesTypo3DefaultFromNameAsFromName()
+    public function sendAdditionalNotificationEmailToReviewerUsesTypo3DefaultFromNameAsFromName(): void
     {
         $this->pluginConfiguration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
@@ -2191,7 +2187,7 @@ final class EventEditorTest extends TestCase
      * @test
      * @group sendNotificationMailsToReceiver
      */
-    public function sendAdditionalNotificationEmailToReviewerUsesTypo3DefaultFromAddressAsFromAddress()
+    public function sendAdditionalNotificationEmailToReviewerUsesTypo3DefaultFromAddressAsFromAddress(): void
     {
         $this->pluginConfiguration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
@@ -2216,7 +2212,7 @@ final class EventEditorTest extends TestCase
      * @test
      * @group sendNotificationMailsToReceiver
      */
-    public function sendAdditionalNotificationEmailToReviewerUsesFrontEndUserMailAsReplyTo()
+    public function sendAdditionalNotificationEmailToReviewerUsesFrontEndUserMailAsReplyTo(): void
     {
         $this->pluginConfiguration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
@@ -2239,7 +2235,7 @@ final class EventEditorTest extends TestCase
      * @test
      * @group sendNotificationMailsToReceiver
      */
-    public function sendAdditionalNotificationEmailToReviewerWithoutTypo3DefaultFromAddressUsesFrontEndUserAsFromName()
+    public function sendAdditionalNotificationEmailToReviewerWithoutTypo3DefaultFromAddressUsesFrontEndUserAsFromName(): void
     {
         $this->pluginConfiguration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
@@ -2262,7 +2258,7 @@ final class EventEditorTest extends TestCase
      * @test
      * @group sendNotificationMailsToReceiver
      */
-    public function sendAdditionalNotificationEmailToReviewerWithoutTypo3DefaultFromAddressUsesFrontEndUserAsFromAddress()
+    public function sendAdditionalNotificationEmailToReviewerWithoutTypo3DefaultFromAddressUsesFrontEndUserAsFromAddress(): void
     {
         $this->pluginConfiguration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
@@ -2285,7 +2281,7 @@ final class EventEditorTest extends TestCase
      * @test
      * @group sendNotificationMailsToReceiver
      */
-    public function sendAdditionalNotificationEmailToReviewerUsesEventSavedSubject()
+    public function sendAdditionalNotificationEmailToReviewerUsesEventSavedSubject(): void
     {
         $this->pluginConfiguration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
@@ -2305,7 +2301,7 @@ final class EventEditorTest extends TestCase
      * @test
      * @group sendNotificationMailsToReceiver
      */
-    public function sendAdditionalNotificationEmailToReviewerHasIntroductoryText()
+    public function sendAdditionalNotificationEmailToReviewerHasIntroductoryText(): void
     {
         $this->pluginConfiguration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
@@ -2325,7 +2321,7 @@ final class EventEditorTest extends TestCase
      * @test
      * @group sendNotificationMailsToReceiver
      */
-    public function sendAdditionalNotificationEmailToReviewerHasOverviewText()
+    public function sendAdditionalNotificationEmailToReviewerHasOverviewText(): void
     {
         $this->pluginConfiguration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
@@ -2345,7 +2341,7 @@ final class EventEditorTest extends TestCase
      * @test
      * @group sendNotificationMailsToReceiver
      */
-    public function sendAdditionalNotificationEmailToReviewerHasNoUnreplacedMarkers()
+    public function sendAdditionalNotificationEmailToReviewerHasNoUnreplacedMarkers(): void
     {
         $this->pluginConfiguration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
         $this->createAndLoginUserWithReviewer();
@@ -2365,7 +2361,7 @@ final class EventEditorTest extends TestCase
      * @test
      * @group sendNotificationMailsToReceiver
      */
-    public function sendAdditionalNotificationEmailToReviewerHasEventTitleInBody()
+    public function sendAdditionalNotificationEmailToReviewerHasEventTitleInBody(): void
     {
         $title = 'Some nice event';
         $this->subject->setSavedFormValue('title', $title);
@@ -2388,7 +2384,7 @@ final class EventEditorTest extends TestCase
      * @test
      * @group sendNotificationMailsToReceiver
      */
-    public function sendAdditionalNotificationEmailToReviewerHasEventDescriptionInBody()
+    public function sendAdditionalNotificationEmailToReviewerHasEventDescriptionInBody(): void
     {
         $description = 'Everybody needs to attend!';
         $this->subject->setSavedFormValue('description', $description);
@@ -2411,7 +2407,7 @@ final class EventEditorTest extends TestCase
      * @test
      * @group sendNotificationMailsToReceiver
      */
-    public function sendAdditionalNotificationEmailToReviewerHasEventDateInBody()
+    public function sendAdditionalNotificationEmailToReviewerHasEventDateInBody(): void
     {
         $beginDate = mktime(10, 0, 0, 4, 2, 1975);
         $this->subject->setSavedFormValue('begin_date', $beginDate);
@@ -2438,7 +2434,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function populateListCountriesContainsGermany()
+    public function populateListCountriesContainsGermany(): void
     {
         self::assertContains(
             ['caption' => 'Deutschland', 'value' => 54],
@@ -2449,7 +2445,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function populateListCountriesSortsResultsByLocalCountryName()
+    public function populateListCountriesSortsResultsByLocalCountryName(): void
     {
         $countries = \Tx_Seminars_FrontEnd_EventEditor::populateListCountries();
         $positionGermany = \array_search(
@@ -2475,7 +2471,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function populateListSkillsHasSkillFromDatabase()
+    public function populateListSkillsHasSkillFromDatabase(): void
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_skills',
@@ -2495,7 +2491,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function makeListToFormidableListForEmptyListGivenReturnsEmptyArray()
+    public function makeListToFormidableListForEmptyListGivenReturnsEmptyArray(): void
     {
         self::assertEquals(
             [],
@@ -2506,7 +2502,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function makeListToFormidableListForListWithOneElementReturnsModelDataInArray()
+    public function makeListToFormidableListForListWithOneElementReturnsModelDataInArray(): void
     {
         $targetGroup = MapperRegistry::get(\Tx_Seminars_Mapper_TargetGroup::class)
             ->getLoadedTestingModel(['title' => 'foo']);
@@ -2523,7 +2519,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function makeListToFormidableListForListWithTwoElementsReturnsArrayWithTwoModels()
+    public function makeListToFormidableListForListWithTwoElementsReturnsArrayWithTwoModels(): void
     {
         $targetGroup1 = MapperRegistry::get(\Tx_Seminars_Mapper_TargetGroup::class)->getLoadedTestingModel([]);
         $targetGroup2 = MapperRegistry::get(\Tx_Seminars_Mapper_TargetGroup::class)->getLoadedTestingModel([]);
@@ -2545,7 +2541,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function getPreselectedOrganizerForNoAvailableOrganizerReturnsZero()
+    public function getPreselectedOrganizerForNoAvailableOrganizerReturnsZero(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser();
 
@@ -2558,7 +2554,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function getPreselectedOrganizerForOneAvailableOrganizerReturnsTheOrganizersUid()
+    public function getPreselectedOrganizerForOneAvailableOrganizerReturnsTheOrganizersUid(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $organizerUid = $this->testingFramework->createRecord(
@@ -2575,7 +2571,7 @@ final class EventEditorTest extends TestCase
     /**
      * @test
      */
-    public function getPreselectedOrganizerForTwoAvailableOrganizersReturnsZero()
+    public function getPreselectedOrganizerForTwoAvailableOrganizersReturnsZero(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $this->testingFramework->createRecord('tx_seminars_organizers', ['pid' => $this->recordsPageUid]);

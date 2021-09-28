@@ -44,7 +44,7 @@ final class CategoryListTest extends FunctionalTestCase
      */
     private $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -59,7 +59,7 @@ final class CategoryListTest extends FunctionalTestCase
         );
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         foreach ($this->filesToDelete as $file) {
             \unlink($this->getInstancePath() . '/' . $file);
@@ -79,7 +79,7 @@ final class CategoryListTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function renderWithoutCategoriesDoesNotCreateCategoryTable()
+    public function renderWithoutCategoriesDoesNotCreateCategoryTable(): void
     {
         $this->subject->setConfigurationValue('pages', 1);
 
@@ -91,7 +91,7 @@ final class CategoryListTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function renderWithoutCategoriesOutputsMessageAboutNoCategories()
+    public function renderWithoutCategoriesOutputsMessageAboutNoCategories(): void
     {
         $this->subject->setConfigurationValue('pages', 1);
 
@@ -103,7 +103,7 @@ final class CategoryListTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function renderIncludesTitleOfCategoryWithEvent()
+    public function renderIncludesTitleOfCategoryWithEvent(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/CategoryList/OneCategoryWithAsciiTitle.xml');
 
@@ -115,7 +115,7 @@ final class CategoryListTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function renderEncodesCategoryTitles()
+    public function renderEncodesCategoryTitles(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/CategoryList/OneCategoryWithSpecialCharactersInTitle.xml');
 
@@ -127,7 +127,7 @@ final class CategoryListTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function createCategoryListRendersIconWithEncodedCategoryTitleAsImageTitle()
+    public function createCategoryListRendersIconWithEncodedCategoryTitleAsImageTitle(): void
     {
         $this->provideAdminBackEndUserForFal();
         $title = 'a & b';

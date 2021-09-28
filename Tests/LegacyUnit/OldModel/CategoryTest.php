@@ -17,12 +17,12 @@ final class CategoryTest extends TestCase
      */
     private $testingFramework;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
     }
@@ -30,7 +30,7 @@ final class CategoryTest extends TestCase
     /**
      * @test
      */
-    public function createFromUidMapsAllFields()
+    public function createFromUidMapsAllFields(): void
     {
         $title = 'Test category';
         $icon = 'foo.gif';

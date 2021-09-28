@@ -21,14 +21,14 @@ final class SpeakerMapperTest extends TestCase
      */
     private $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
 
         $this->subject = new \Tx_Seminars_Mapper_Speaker();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
     }
@@ -38,7 +38,7 @@ final class SpeakerMapperTest extends TestCase
     /**
      * @test
      */
-    public function findWithUidOfExistingRecordReturnsOrganizerInstance()
+    public function findWithUidOfExistingRecordReturnsOrganizerInstance(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_speakers');
 
@@ -51,7 +51,7 @@ final class SpeakerMapperTest extends TestCase
     /**
      * @test
      */
-    public function findWithUidOfExistingRecordReturnsRecordAsModel()
+    public function findWithUidOfExistingRecordReturnsRecordAsModel(): void
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
@@ -70,7 +70,7 @@ final class SpeakerMapperTest extends TestCase
     /**
      * @test
      */
-    public function getSkillsReturnsListInstance()
+    public function getSkillsReturnsListInstance(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_speakers');
 
@@ -81,7 +81,7 @@ final class SpeakerMapperTest extends TestCase
     /**
      * @test
      */
-    public function getSkillsWithoutSkillsReturnsEmptyList()
+    public function getSkillsWithoutSkillsReturnsEmptyList(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_speakers');
 
@@ -94,7 +94,7 @@ final class SpeakerMapperTest extends TestCase
     /**
      * @test
      */
-    public function getSkillsWithOneSkillReturnsNonEmptyList()
+    public function getSkillsWithOneSkillReturnsNonEmptyList(): void
     {
         $speakerUid = $this->testingFramework->createRecord('tx_seminars_speakers');
         $skill = MapperRegistry::get(\Tx_Seminars_Mapper_Skill::class)->getNewGhost();
@@ -114,7 +114,7 @@ final class SpeakerMapperTest extends TestCase
     /**
      * @test
      */
-    public function getSkillsWithOneSkillReturnsOneSkill()
+    public function getSkillsWithOneSkillReturnsOneSkill(): void
     {
         $speakerUid = $this->testingFramework->createRecord('tx_seminars_speakers');
         $skill = MapperRegistry::get(\Tx_Seminars_Mapper_Skill::class)
@@ -138,7 +138,7 @@ final class SpeakerMapperTest extends TestCase
     /**
      * @test
      */
-    public function getOwnerWithoutOwnerReturnsNull()
+    public function getOwnerWithoutOwnerReturnsNull(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
@@ -148,7 +148,7 @@ final class SpeakerMapperTest extends TestCase
     /**
      * @test
      */
-    public function getOwnerWithOwnerReturnsOwnerInstance()
+    public function getOwnerWithOwnerReturnsOwnerInstance(): void
     {
         $frontEndUser = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)
             ->getLoadedTestingModel([]);

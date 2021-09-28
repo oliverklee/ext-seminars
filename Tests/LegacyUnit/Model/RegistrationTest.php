@@ -22,7 +22,7 @@ final class RegistrationTest extends TestCase
      */
     private $testingFramework;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
@@ -30,7 +30,7 @@ final class RegistrationTest extends TestCase
         $this->subject = new \Tx_Seminars_Model_Registration();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
     }
@@ -42,7 +42,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setTitleWithEmptyTitleThrowsException()
+    public function setTitleWithEmptyTitleThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -57,7 +57,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setTitleSetsTitle()
+    public function setTitleSetsTitle(): void
     {
         $this->subject->setTitle('registration for event');
 
@@ -70,7 +70,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getTitleWithNonEmptyTitleReturnsTitle()
+    public function getTitleWithNonEmptyTitleReturnsTitle(): void
     {
         $this->subject->setData(['title' => 'registration for event']);
 
@@ -102,7 +102,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getEventReturnsEvent()
+    public function getEventReturnsEvent(): void
     {
         $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
             ->getNewGhost();
@@ -117,7 +117,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getSeminarReturnsEvent()
+    public function getSeminarReturnsEvent(): void
     {
         $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
             ->getNewGhost();
@@ -132,7 +132,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setEventSetsEvent()
+    public function setEventSetsEvent(): void
     {
         /** @var \Tx_Seminars_Model_Event $event */
         $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getNewGhost();
@@ -147,7 +147,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setSeminarSetsEvent()
+    public function setSeminarSetsEvent(): void
     {
         /** @var \Tx_Seminars_Model_Event $event */
         $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getNewGhost();
@@ -166,7 +166,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function isOnRegistrationQueueForRegularRegistrationReturnsFalse()
+    public function isOnRegistrationQueueForRegularRegistrationReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -178,7 +178,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function isOnRegistrationQueueForQueueRegistrationReturnsTrue()
+    public function isOnRegistrationQueueForQueueRegistrationReturnsTrue(): void
     {
         $this->subject->setData(['registration_queue' => true]);
 
@@ -190,7 +190,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setOnRegistrationQueueTrueSetsRegistrationQueuetoToTrue()
+    public function setOnRegistrationQueueTrueSetsRegistrationQueuetoToTrue(): void
     {
         $this->subject->setData(['registration_queue' => false]);
         $this->subject->setOnRegistrationQueue(true);
@@ -203,7 +203,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setOnRegistrationQueueFalseSetsRegistrationQueuetoToFalse()
+    public function setOnRegistrationQueueFalseSetsRegistrationQueuetoToFalse(): void
     {
         $this->subject->setData(['registration_queue' => true]);
         $this->subject->setOnRegistrationQueue(false);
@@ -220,7 +220,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setPriceSetsPrice()
+    public function setPriceSetsPrice(): void
     {
         $price = 'Price Regular';
         $this->subject->setPrice($price);
@@ -234,7 +234,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getPriceWithNonEmptyPriceReturnsPrice()
+    public function getPriceWithNonEmptyPriceReturnsPrice(): void
     {
         $price = 'Price Regular';
         $this->subject->setData(['price' => $price]);
@@ -248,7 +248,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getPriceWithoutPriceReturnsEmptyString()
+    public function getPriceWithoutPriceReturnsEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -265,7 +265,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getSeatsWithoutSeatsReturnsZero()
+    public function getSeatsWithoutSeatsReturnsZero(): void
     {
         $this->subject->setData([]);
 
@@ -278,7 +278,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getSeatsWithNonZeroSeatsReturnsSeats()
+    public function getSeatsWithNonZeroSeatsReturnsSeats(): void
     {
         $this->subject->setData(['seats' => 42]);
 
@@ -291,7 +291,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setSeatsSetsSeats()
+    public function setSeatsSetsSeats(): void
     {
         $this->subject->setSeats(42);
 
@@ -304,7 +304,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setSeatsWithNegativeSeatsThrowsException()
+    public function setSeatsWithNegativeSeatsThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -323,7 +323,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function hasRegisteredThemselvesForThirdPartyRegistrationReturnsFalse()
+    public function hasRegisteredThemselvesForThirdPartyRegistrationReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -335,7 +335,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function hasRegisteredThemselvesForSelfRegistrationReturnsTrue()
+    public function hasRegisteredThemselvesForSelfRegistrationReturnsTrue(): void
     {
         $this->subject->setData(['registered_themselves' => true]);
 
@@ -347,7 +347,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setRegisteredThemselvesSetsRegisteredThemselves()
+    public function setRegisteredThemselvesSetsRegisteredThemselves(): void
     {
         $this->subject->setRegisteredThemselves(true);
 
@@ -363,7 +363,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getTotalPriceWithoutTotalPriceReturnsZero()
+    public function getTotalPriceWithoutTotalPriceReturnsZero(): void
     {
         $this->subject->setData([]);
 
@@ -376,7 +376,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getTotalPriceWithTotalPriceReturnsTotalPrice()
+    public function getTotalPriceWithTotalPriceReturnsTotalPrice(): void
     {
         $this->subject->setData(['total_price' => 42.13]);
 
@@ -389,7 +389,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setTotalPriceForNegativePriceThrowsException()
+    public function setTotalPriceForNegativePriceThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -404,7 +404,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setTotalPriceSetsTotalPrice()
+    public function setTotalPriceSetsTotalPrice(): void
     {
         $this->subject->setTotalPrice(42.13);
 
@@ -421,7 +421,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getAttendeesNamesWithoutAttendeesNamesReturnsEmptyString()
+    public function getAttendeesNamesWithoutAttendeesNamesReturnsEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -434,7 +434,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getAttendeesNamesWithAttendeesNamesReturnsAttendeesNames()
+    public function getAttendeesNamesWithAttendeesNamesReturnsAttendeesNames(): void
     {
         $this->subject->setData(['attendees_names' => 'John Doe']);
 
@@ -447,7 +447,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setAttendeesNamesSetsAttendeesNames()
+    public function setAttendeesNamesSetsAttendeesNames(): void
     {
         $this->subject->setAttendeesNames('John Doe');
 
@@ -464,7 +464,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function isPaidForUnpaidRegistrationReturnsFalse()
+    public function isPaidForUnpaidRegistrationReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -476,7 +476,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function isPaidForPaidRegistrationReturnsTrue()
+    public function isPaidForPaidRegistrationReturnsTrue(): void
     {
         $this->subject->setData(['datepaid' => $GLOBALS['SIM_EXEC_TIME']]);
 
@@ -492,7 +492,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getPaymentDateAsUnixTimestampWithoutPaymentDateReturnsZero()
+    public function getPaymentDateAsUnixTimestampWithoutPaymentDateReturnsZero(): void
     {
         $this->subject->setData([]);
 
@@ -505,7 +505,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getPaymentDateAsUnixTimestampWithPaymentDateReturnsPaymentDate()
+    public function getPaymentDateAsUnixTimestampWithPaymentDateReturnsPaymentDate(): void
     {
         $this->subject->setData(['datepaid' => 42]);
 
@@ -518,7 +518,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setPaymentDateAsUnixTimestampSetsPaymentDate()
+    public function setPaymentDateAsUnixTimestampSetsPaymentDate(): void
     {
         $this->subject->setPaymentDateAsUnixTimestamp(42);
 
@@ -531,7 +531,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setPaymentDateAsUnixTimestampWithNegativeTimestampThrowsException()
+    public function setPaymentDateAsUnixTimestampWithNegativeTimestampThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -550,7 +550,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setPaymentMethodSetsPaymentMethod()
+    public function setPaymentMethodSetsPaymentMethod(): void
     {
         /** @var \Tx_Seminars_Model_PaymentMethod $paymentMethod */
         $paymentMethod = MapperRegistry::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
@@ -565,7 +565,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setPaymentMethodCanSetPaymentMethodToNull()
+    public function setPaymentMethodCanSetPaymentMethodToNull(): void
     {
         $this->subject->setPaymentMethod();
 
@@ -581,7 +581,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getAccountNumberWithoutAccountNumberReturnsEmptyString()
+    public function getAccountNumberWithoutAccountNumberReturnsEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -594,7 +594,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getAccountNumberWithAccountNumberReturnsAccountNumber()
+    public function getAccountNumberWithAccountNumberReturnsAccountNumber(): void
     {
         $this->subject->setData(['account_number' => '1234567']);
 
@@ -607,7 +607,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setAccountNumberSetsAccountNumber()
+    public function setAccountNumberSetsAccountNumber(): void
     {
         $this->subject->setAccountNumber('1234567');
 
@@ -624,7 +624,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getBankCodeWithoutBankCodeReturnsEmptyString()
+    public function getBankCodeWithoutBankCodeReturnsEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -637,7 +637,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getBankCodeWithBankCodeReturnsBankCode()
+    public function getBankCodeWithBankCodeReturnsBankCode(): void
     {
         $this->subject->setData(['bank_code' => '1234567']);
 
@@ -650,7 +650,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setBankCodeSetsBankCode()
+    public function setBankCodeSetsBankCode(): void
     {
         $this->subject->setBankCode('1234567');
 
@@ -667,7 +667,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getBankNameWithoutBankNameReturnsEmptyString()
+    public function getBankNameWithoutBankNameReturnsEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -680,7 +680,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getBankNameWithBankNameReturnsBankName()
+    public function getBankNameWithBankNameReturnsBankName(): void
     {
         $this->subject->setData(['bank_name' => 'Cayman Island Bank']);
 
@@ -693,7 +693,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setBankNameSetsBankName()
+    public function setBankNameSetsBankName(): void
     {
         $this->subject->setBankName('Cayman Island Bank');
 
@@ -710,7 +710,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getAccountOwnerWithoutAccountOwnerReturnsEmptyString()
+    public function getAccountOwnerWithoutAccountOwnerReturnsEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -723,7 +723,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getAccountOwnerWithAccountOwnerReturnsAccountOwner()
+    public function getAccountOwnerWithAccountOwnerReturnsAccountOwner(): void
     {
         $this->subject->setData(['account_owner' => 'John Doe']);
 
@@ -736,7 +736,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setAccountOwnerSetsAccountOwner()
+    public function setAccountOwnerSetsAccountOwner(): void
     {
         $this->subject->setAccountOwner('John Doe');
 
@@ -753,7 +753,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getCompanyWithoutCompanyReturnsEmptyString()
+    public function getCompanyWithoutCompanyReturnsEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -766,7 +766,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getCompanyWithCompanyReturnsCompany()
+    public function getCompanyWithCompanyReturnsCompany(): void
     {
         $this->subject->setData(['company' => 'Example Inc.']);
 
@@ -779,7 +779,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setCompanySetsCompany()
+    public function setCompanySetsCompany(): void
     {
         $this->subject->setCompany('Example Inc.');
 
@@ -796,7 +796,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getNameWithoutNameReturnsEmptyString()
+    public function getNameWithoutNameReturnsEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -809,7 +809,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getNameWithNameReturnsName()
+    public function getNameWithNameReturnsName(): void
     {
         $this->subject->setData(['name' => 'John Doe']);
 
@@ -822,7 +822,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setNameSetsName()
+    public function setNameSetsName(): void
     {
         $this->subject->setName('John Doe');
 
@@ -839,7 +839,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getGenderWithGenderMaleReturnsGenderMale()
+    public function getGenderWithGenderMaleReturnsGenderMale(): void
     {
         $this->subject->setData([]);
 
@@ -852,7 +852,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getGenderWithGenderFemaleReturnsGenderFemale()
+    public function getGenderWithGenderFemaleReturnsGenderFemale(): void
     {
         $this->subject->setData(
             ['gender' => FrontEndUser::GENDER_FEMALE]
@@ -867,7 +867,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getGenderWithGenderUnknownReturnsGenderUnknown()
+    public function getGenderWithGenderUnknownReturnsGenderUnknown(): void
     {
         $this->subject->setData(
             ['gender' => FrontEndUser::GENDER_UNKNOWN]
@@ -882,7 +882,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setGenderWithUnsupportedGenderThrowsException()
+    public function setGenderWithUnsupportedGenderThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -898,7 +898,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setGenderWithGenderMaleSetsGender()
+    public function setGenderWithGenderMaleSetsGender(): void
     {
         $this->subject->setGender(FrontEndUser::GENDER_MALE);
 
@@ -911,7 +911,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setGenderWithGenderFemaleSetsGender()
+    public function setGenderWithGenderFemaleSetsGender(): void
     {
         $this->subject->setGender(FrontEndUser::GENDER_FEMALE);
 
@@ -924,7 +924,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setGenderWithGenderUnknownSetsGender()
+    public function setGenderWithGenderUnknownSetsGender(): void
     {
         $this->subject->setGender(FrontEndUser::GENDER_UNKNOWN);
 
@@ -941,7 +941,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getAddressWithoutAddressReturnsEmptyString()
+    public function getAddressWithoutAddressReturnsEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -954,7 +954,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getAddressWithAdressReturnsAddress()
+    public function getAddressWithAdressReturnsAddress(): void
     {
         $this->subject->setData(['address' => 'Main Street 123']);
 
@@ -967,7 +967,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setAddressSetsAddress()
+    public function setAddressSetsAddress(): void
     {
         $this->subject->setAddress('Main Street 123');
 
@@ -984,7 +984,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getZipWithoutZipReturnsEmptyString()
+    public function getZipWithoutZipReturnsEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -997,7 +997,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getZipWithZipReturnsZip()
+    public function getZipWithZipReturnsZip(): void
     {
         $this->subject->setData(['zip' => '12345']);
 
@@ -1010,7 +1010,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setZipSetsZip()
+    public function setZipSetsZip(): void
     {
         $this->subject->setZip('12345');
 
@@ -1027,7 +1027,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getCityWithoutCityReturnsEmptyString()
+    public function getCityWithoutCityReturnsEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -1040,7 +1040,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getCityWithCityReturnsCity()
+    public function getCityWithCityReturnsCity(): void
     {
         $this->subject->setData(['city' => 'Nowhere Ville']);
 
@@ -1053,7 +1053,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setCitySetsCity()
+    public function setCitySetsCity(): void
     {
         $this->subject->setCity('Nowhere Ville');
 
@@ -1070,7 +1070,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getCountryInitiallyReturnsEmptyString()
+    public function getCountryInitiallyReturnsEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -1083,7 +1083,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setCountrySetsCountry()
+    public function setCountrySetsCountry(): void
     {
         $country = 'Germany';
         $this->subject->setCountry($country);
@@ -1099,7 +1099,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getPhoneWithoutPhoneReturnsEmptyString()
+    public function getPhoneWithoutPhoneReturnsEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -1112,7 +1112,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getPhoneWithPhoneReturnsPhone()
+    public function getPhoneWithPhoneReturnsPhone(): void
     {
         $this->subject->setData(['telephone' => '+49123456789']);
 
@@ -1125,7 +1125,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setPhoneSetsPhone()
+    public function setPhoneSetsPhone(): void
     {
         $this->subject->setPhone('+49123456789');
 
@@ -1142,7 +1142,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getEmailAddressWithoutEmailAddressReturnsEmptyString()
+    public function getEmailAddressWithoutEmailAddressReturnsEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -1155,7 +1155,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getEmailAddressWithEmailAddressReturnsEmailAddress()
+    public function getEmailAddressWithEmailAddressReturnsEmailAddress(): void
     {
         $this->subject->setData(['email' => 'john@doe.com']);
 
@@ -1168,7 +1168,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setEmailAddressSetsEmailAddress()
+    public function setEmailAddressSetsEmailAddress(): void
     {
         $this->subject->setEnailAddress('john@doe.com');
 
@@ -1185,7 +1185,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function hasAttendedWithoutAttendeeHasAttendedReturnsFalse()
+    public function hasAttendedWithoutAttendeeHasAttendedReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -1197,7 +1197,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function hasAttendedWithAttendeeHasAttendedReturnsTrue()
+    public function hasAttendedWithAttendeeHasAttendedReturnsTrue(): void
     {
         $this->subject->setData(['been_there' => true]);
 
@@ -1213,7 +1213,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getInterestsWithoutInterestsReturnsEmptyString()
+    public function getInterestsWithoutInterestsReturnsEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -1226,7 +1226,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getInterestsWithInterestsReturnsInterests()
+    public function getInterestsWithInterestsReturnsInterests(): void
     {
         $this->subject->setData(['interests' => 'TYPO3']);
 
@@ -1239,7 +1239,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setInterestsSetsInterests()
+    public function setInterestsSetsInterests(): void
     {
         $this->subject->setInterests('TYPO3');
 
@@ -1256,7 +1256,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getExpectationsWithoutExpectationsReturnsEmptyString()
+    public function getExpectationsWithoutExpectationsReturnsEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -1269,7 +1269,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getExpectationsWithExpectationsReturnsExpectations()
+    public function getExpectationsWithExpectationsReturnsExpectations(): void
     {
         $this->subject->setData(
             ['expectations' => 'It\'s going to be nice.']
@@ -1284,7 +1284,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setExpectationsSetsExpectations()
+    public function setExpectationsSetsExpectations(): void
     {
         $this->subject->setExpectations('It\'s going to be nice.');
 
@@ -1301,7 +1301,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getBackgroundKnowledgeWithoutBackgroundKnowledgeReturnsEmptyString()
+    public function getBackgroundKnowledgeWithoutBackgroundKnowledgeReturnsEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -1314,7 +1314,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getBackgroundKnowledgeWithBackgroundKnowledgeReturnsBackgroundKnowledge()
+    public function getBackgroundKnowledgeWithBackgroundKnowledgeReturnsBackgroundKnowledge(): void
     {
         $this->subject->setData(['background_knowledge' => 'Unit Testing']);
 
@@ -1327,7 +1327,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setBackgroundKnowledgeSetsBackgroundKnowledge()
+    public function setBackgroundKnowledgeSetsBackgroundKnowledge(): void
     {
         $this->subject->setBackgroundKnowledge('Unit Testing');
 
@@ -1344,7 +1344,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getAccommodationWithoutAccommodationReturnsEmptyString()
+    public function getAccommodationWithoutAccommodationReturnsEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -1357,7 +1357,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getAccommodationWithAccommodationReturnsAccommodation()
+    public function getAccommodationWithAccommodationReturnsAccommodation(): void
     {
         $this->subject->setData(['accommodation' => 'tent']);
 
@@ -1370,7 +1370,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setAccommodationSetsAccommodation()
+    public function setAccommodationSetsAccommodation(): void
     {
         $this->subject->setAccommodation('tent');
 
@@ -1387,7 +1387,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getFoodWithoutFoodReturnsEmptyString()
+    public function getFoodWithoutFoodReturnsEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -1400,7 +1400,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getFoodWithFoodReturnsFood()
+    public function getFoodWithFoodReturnsFood(): void
     {
         $this->subject->setData(['food' => 'delicious food']);
 
@@ -1413,7 +1413,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setFoodSetsFood()
+    public function setFoodSetsFood(): void
     {
         $this->subject->setFood('delicious food');
 
@@ -1430,7 +1430,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getKnownFromWithoutKnownFromReturnsEmptyString()
+    public function getKnownFromWithoutKnownFromReturnsEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -1443,7 +1443,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getKnownFromWithKnownFromReturnsKnownFrom()
+    public function getKnownFromWithKnownFromReturnsKnownFrom(): void
     {
         $this->subject->setData(['known_from' => 'Google']);
 
@@ -1456,7 +1456,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setKnownFromSetsKnownFrom()
+    public function setKnownFromSetsKnownFrom(): void
     {
         $this->subject->setKnownFrom('Google');
 
@@ -1473,7 +1473,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getNotesWithoutNotesReturnsEmptyString()
+    public function getNotesWithoutNotesReturnsEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -1486,7 +1486,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getNotesWithNotesReturnsNotes()
+    public function getNotesWithNotesReturnsNotes(): void
     {
         $this->subject->setData(['notes' => 'This is a nice registration.']);
 
@@ -1499,7 +1499,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setNotesSetsNotes()
+    public function setNotesSetsNotes(): void
     {
         $this->subject->setNotes('This is a nice registration.');
 
@@ -1516,7 +1516,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getKidsWithoutKidsReturnsZero()
+    public function getKidsWithoutKidsReturnsZero(): void
     {
         $this->subject->setData([]);
 
@@ -1529,7 +1529,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getKidsWithKidsReturnsKids()
+    public function getKidsWithKidsReturnsKids(): void
     {
         $this->subject->setData(['kids' => 3]);
 
@@ -1542,7 +1542,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setKidsWithNegativeKidsThrowsException()
+    public function setKidsWithNegativeKidsThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -1557,7 +1557,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setKidsWithPositiveKidsSetsKids()
+    public function setKidsWithPositiveKidsSetsKids(): void
     {
         $this->subject->setKids(3);
 
@@ -1574,7 +1574,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function getAdditionalPersonsGetsAdditionalPersons()
+    public function getAdditionalPersonsGetsAdditionalPersons(): void
     {
         $additionalPersons = new Collection();
         $this->subject->setData(
@@ -1590,7 +1590,7 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setAdditionalPersonsSetsAdditionalPersons()
+    public function setAdditionalPersonsSetsAdditionalPersons(): void
     {
         $additionalPersons = new Collection();
         $this->subject->setAdditionalPersons($additionalPersons);

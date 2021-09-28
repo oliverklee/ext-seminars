@@ -18,10 +18,8 @@ final class TestingTimeSpan extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * Sets this time span's begin date and time.
      *
      * @param int $beginDate begin date and time as a UNIX timestamp, may be zero
-     *
-     * @return void
      */
-    public function setBeginDateAndTime(int $beginDate)
+    public function setBeginDateAndTime(int $beginDate): void
     {
         $this->setRecordPropertyInteger('begin_date', $beginDate);
     }
@@ -30,10 +28,8 @@ final class TestingTimeSpan extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * Sets this time span's end date and time.
      *
      * @param int $endDate end date and time as a UNIX timestamp, may be zero
-     *
-     * @return void
      */
-    public function setEndDateAndTime(int $endDate)
+    public function setEndDateAndTime(int $endDate): void
     {
         $this->setRecordPropertyInteger('end_date', $endDate);
     }
@@ -42,10 +38,8 @@ final class TestingTimeSpan extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * Sets this time span's room.
      *
      * @param string $room room name
-     *
-     * @return void
      */
-    public function setRoom(string $room)
+    public function setRoom(string $room): void
     {
         $this->setRecordPropertyString('room', $room);
     }
@@ -54,10 +48,8 @@ final class TestingTimeSpan extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * Sets the number of places for this time span.
      *
      * @param int $places the number of places that are associated with this time span
-     *
-     * @return void
      */
-    public function setNumberOfPlaces(int $places)
+    public function setNumberOfPlaces(int $places): void
     {
         $this->setRecordPropertyInteger('place', $places);
     }

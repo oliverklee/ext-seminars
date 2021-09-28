@@ -18,7 +18,7 @@ final class AbstractModelTest extends UnitTestCase
      */
     private $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new TestingModel();
     }
@@ -26,7 +26,7 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
-    public function isAbstractModel()
+    public function isAbstractModel(): void
     {
         self::assertInstanceOf(AbstractModel::class, $this->subject);
     }
@@ -34,7 +34,7 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
-    public function comesFromDatabaseInitiallyIsFalse()
+    public function comesFromDatabaseInitiallyIsFalse(): void
     {
         self::assertFalse($this->subject->comesFromDatabase());
     }
@@ -42,7 +42,7 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
-    public function fromDataCreatesInstanceOfSubclass()
+    public function fromDataCreatesInstanceOfSubclass(): void
     {
         $result = TestingModel::fromData([]);
 
@@ -52,7 +52,7 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
-    public function fromDataProvidesModelWithGivenData()
+    public function fromDataProvidesModelWithGivenData(): void
     {
         $result = TestingModel::fromData(['test' => true]);
 
@@ -62,7 +62,7 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
-    public function fromDataResultsInOkay()
+    public function fromDataResultsInOkay(): void
     {
         $subject = TestingModel::fromData(['title' => 'Foo']);
 
@@ -72,7 +72,7 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
-    public function comesFromDatabaseAfterFromDataWithEmptyDataIsFalse()
+    public function comesFromDatabaseAfterFromDataWithEmptyDataIsFalse(): void
     {
         $subject = TestingModel::fromData(['title' => 'Foo']);
 
@@ -82,7 +82,7 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
-    public function comesFromDatabaseAfterFromDataWithNonEmptyDataIsFalse()
+    public function comesFromDatabaseAfterFromDataWithNonEmptyDataIsFalse(): void
     {
         $subject = TestingModel::fromData(['title' => 'Foo']);
 
@@ -92,7 +92,7 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
-    public function getRecordPropertyStringByDefaultReturnsEmptyString()
+    public function getRecordPropertyStringByDefaultReturnsEmptyString(): void
     {
         self::assertSame('', $this->subject->getRecordPropertyString('title'));
     }
@@ -100,7 +100,7 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
-    public function getRecordPropertyStringReturnsValue()
+    public function getRecordPropertyStringReturnsValue(): void
     {
         $value = 'A nice object!';
         $subject = TestingModel::fromData(['something' => $value]);
@@ -111,7 +111,7 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
-    public function getRecordPropertyStringReturnsTrimmedValue()
+    public function getRecordPropertyStringReturnsTrimmedValue(): void
     {
         $value = 'A nice object!';
         $subject = TestingModel::fromData(['something' => ' ' . $value . ' ']);
@@ -122,7 +122,7 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasRecordPropertyStringForInexistentKeyReturnsFalse()
+    public function hasRecordPropertyStringForInexistentKeyReturnsFalse(): void
     {
         self::assertFalse($this->subject->hasRecordPropertyString('something'));
     }
@@ -130,7 +130,7 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasRecordPropertyStringForEmptyStringReturnsFalse()
+    public function hasRecordPropertyStringForEmptyStringReturnsFalse(): void
     {
         $subject = TestingModel::fromData(['something' => '']);
 
@@ -140,7 +140,7 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasRecordPropertyStringForWhitespaceOnlyStringReturnsFalse()
+    public function hasRecordPropertyStringForWhitespaceOnlyStringReturnsFalse(): void
     {
         $subject = TestingModel::fromData(['something' => ' ']);
 
@@ -150,7 +150,7 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasRecordPropertyStringForNonEmptyStringReturnsTrue()
+    public function hasRecordPropertyStringForNonEmptyStringReturnsTrue(): void
     {
         $subject = TestingModel::fromData(['something' => 'The cake is a lie.']);
 
@@ -160,7 +160,7 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
-    public function getRecordPropertyDecimalByDefaultReturnsZeroWithDecimals()
+    public function getRecordPropertyDecimalByDefaultReturnsZeroWithDecimals(): void
     {
         self::assertSame('0.00', $this->subject->getRecordPropertyDecimal('something'));
     }
@@ -168,7 +168,7 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
-    public function getRecordPropertyDecimalReturnsValue()
+    public function getRecordPropertyDecimalReturnsValue(): void
     {
         $value = '12.34';
         $subject = TestingModel::fromData(['something' => $value]);
@@ -179,7 +179,7 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
-    public function getRecordPropertyDecimalReturnsTrimmedValue()
+    public function getRecordPropertyDecimalReturnsTrimmedValue(): void
     {
         $value = '12.34';
         $subject = TestingModel::fromData(['something' => ' ' . $value . ' ']);
@@ -190,7 +190,7 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasRecordPropertyDecimalForInexistentKeyReturnsFalse()
+    public function hasRecordPropertyDecimalForInexistentKeyReturnsFalse(): void
     {
         self::assertFalse($this->subject->hasRecordPropertyDecimal('something'));
     }
@@ -198,7 +198,7 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasRecordPropertyDecimalForEmptyDecimalReturnsFalse()
+    public function hasRecordPropertyDecimalForEmptyDecimalReturnsFalse(): void
     {
         $subject = TestingModel::fromData(['something' => '']);
 
@@ -208,7 +208,7 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasRecordPropertyDecimalForZeroDecimalReturnsFalse()
+    public function hasRecordPropertyDecimalForZeroDecimalReturnsFalse(): void
     {
         $subject = TestingModel::fromData(['something' => '0.00']);
 
@@ -218,7 +218,7 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasRecordPropertyDecimalForZeroWithoutDecimalsReturnsFalse()
+    public function hasRecordPropertyDecimalForZeroWithoutDecimalsReturnsFalse(): void
     {
         $subject = TestingModel::fromData(['something' => '0']);
 
@@ -228,7 +228,7 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasRecordPropertyDecimalForPositiveDecimalReturnsTrue()
+    public function hasRecordPropertyDecimalForPositiveDecimalReturnsTrue(): void
     {
         $subject = TestingModel::fromData(['something' => '12.00']);
 
@@ -238,7 +238,7 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
-    public function getRecordPropertyIntegerByDefaultReturnsZero()
+    public function getRecordPropertyIntegerByDefaultReturnsZero(): void
     {
         self::assertSame(0, $this->subject->getRecordPropertyInteger('something'));
     }
@@ -246,7 +246,7 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
-    public function getRecordPropertyIntegerReturnsValueFromInteger()
+    public function getRecordPropertyIntegerReturnsValueFromInteger(): void
     {
         $value = 42;
         $subject = TestingModel::fromData(['something' => $value]);
@@ -257,7 +257,7 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
-    public function getRecordPropertyIntegerReturnsValueFromString()
+    public function getRecordPropertyIntegerReturnsValueFromString(): void
     {
         $value = 42;
         $subject = TestingModel::fromData(['something' => (string)$value]);
@@ -268,7 +268,7 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasRecordPropertyIntegerForInexistentKeyReturnsFalse()
+    public function hasRecordPropertyIntegerForInexistentKeyReturnsFalse(): void
     {
         self::assertFalse($this->subject->hasRecordPropertyInteger('something'));
     }
@@ -276,7 +276,7 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasRecordPropertyIntegerForZeroIntegerReturnsFalse()
+    public function hasRecordPropertyIntegerForZeroIntegerReturnsFalse(): void
     {
         $subject = TestingModel::fromData(['something' => 0]);
 
@@ -286,7 +286,7 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasRecordPropertyIntegerForZeroStringReturnsFalse()
+    public function hasRecordPropertyIntegerForZeroStringReturnsFalse(): void
     {
         $subject = TestingModel::fromData(['something' => '0']);
 
@@ -296,7 +296,7 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasRecordPropertyIntegerForPositiveIntegerReturnsTrue()
+    public function hasRecordPropertyIntegerForPositiveIntegerReturnsTrue(): void
     {
         $subject = TestingModel::fromData(['something' => 12]);
 
@@ -306,7 +306,7 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasRecordPropertyIntegerForNegativeIntegerReturnsTrue()
+    public function hasRecordPropertyIntegerForNegativeIntegerReturnsTrue(): void
     {
         $subject = TestingModel::fromData(['something' => -12]);
 
@@ -316,7 +316,7 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
-    public function getRecordPropertyBooleanByDefaultReturnsFalse()
+    public function getRecordPropertyBooleanByDefaultReturnsFalse(): void
     {
         self::assertFalse($this->subject->getRecordPropertyBoolean('something'));
     }
@@ -339,7 +339,7 @@ final class AbstractModelTest extends UnitTestCase
      *
      * @dataProvider booleanDataProvider
      */
-    public function getRecordPropertyBooleanReturnsValueFromString(bool $value)
+    public function getRecordPropertyBooleanReturnsValueFromString(bool $value): void
     {
         $subject = TestingModel::fromData(['something' => (string)(int)$value]);
 
@@ -353,7 +353,7 @@ final class AbstractModelTest extends UnitTestCase
      *
      * @dataProvider booleanDataProvider
      */
-    public function getRecordPropertyBooleanReturnsValueFromInt(bool $value)
+    public function getRecordPropertyBooleanReturnsValueFromInt(bool $value): void
     {
         $subject = TestingModel::fromData(['something' => (int)$value]);
 
@@ -363,7 +363,7 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
-    public function createMmRecordsForEmptyTableNameThrowsException()
+    public function createMmRecordsForEmptyTableNameThrowsException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionCode(1333292359);
@@ -374,7 +374,7 @@ final class AbstractModelTest extends UnitTestCase
     /**
      * @test
      */
-    public function createMmRecordsOnObjectWithoutUidThrowsException()
+    public function createMmRecordsOnObjectWithoutUidThrowsException(): void
     {
         $this->expectException(\BadMethodCallException::class);
         $this->expectExceptionCode(1333292371);

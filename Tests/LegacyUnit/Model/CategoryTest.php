@@ -13,7 +13,7 @@ final class CategoryTest extends TestCase
      */
     private $subject;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new \Tx_Seminars_Model_Category();
     }
@@ -25,7 +25,7 @@ final class CategoryTest extends TestCase
     /**
      * @test
      */
-    public function setTitleWithEmptyTitleThrowsException()
+    public function setTitleWithEmptyTitleThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -40,7 +40,7 @@ final class CategoryTest extends TestCase
     /**
      * @test
      */
-    public function setTitleSetsTitle()
+    public function setTitleSetsTitle(): void
     {
         $this->subject->setTitle('Lecture');
 
@@ -53,7 +53,7 @@ final class CategoryTest extends TestCase
     /**
      * @test
      */
-    public function getTitleWithNonEmptyTitleReturnsTitle()
+    public function getTitleWithNonEmptyTitleReturnsTitle(): void
     {
         $this->subject->setData(['title' => 'Lecture']);
 
@@ -70,7 +70,7 @@ final class CategoryTest extends TestCase
     /**
      * @test
      */
-    public function getIconInitiallyReturnsAnEmptyString()
+    public function getIconInitiallyReturnsAnEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -83,7 +83,7 @@ final class CategoryTest extends TestCase
     /**
      * @test
      */
-    public function getIconWithNonEmptyIconReturnsIcon()
+    public function getIconWithNonEmptyIconReturnsIcon(): void
     {
         $this->subject->setData(['icon' => 'icon.gif']);
 
@@ -96,7 +96,7 @@ final class CategoryTest extends TestCase
     /**
      * @test
      */
-    public function setIconSetsIcon()
+    public function setIconSetsIcon(): void
     {
         $this->subject->setIcon('icon.gif');
 
@@ -109,7 +109,7 @@ final class CategoryTest extends TestCase
     /**
      * @test
      */
-    public function hasIconInitiallyReturnsFalse()
+    public function hasIconInitiallyReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -121,7 +121,7 @@ final class CategoryTest extends TestCase
     /**
      * @test
      */
-    public function hasIconWithIconReturnsTrue()
+    public function hasIconWithIconReturnsTrue(): void
     {
         $this->subject->setIcon('icon.gif');
 
@@ -137,7 +137,7 @@ final class CategoryTest extends TestCase
     /**
      * @test
      */
-    public function getSingleViewPageUidReturnsSingleViewPageUid()
+    public function getSingleViewPageUidReturnsSingleViewPageUid(): void
     {
         $this->subject->setData(['single_view_page' => 42]);
 
@@ -150,7 +150,7 @@ final class CategoryTest extends TestCase
     /**
      * @test
      */
-    public function hasSingleViewPageUidForZeroPageUidReturnsFalse()
+    public function hasSingleViewPageUidForZeroPageUidReturnsFalse(): void
     {
         $this->subject->setData(['single_view_page' => 0]);
 
@@ -162,7 +162,7 @@ final class CategoryTest extends TestCase
     /**
      * @test
      */
-    public function hasSingleViewPageUidForNonZeroPageUidReturnsTrue()
+    public function hasSingleViewPageUidForNonZeroPageUidReturnsTrue(): void
     {
         $this->subject->setData(['single_view_page' => 42]);
 

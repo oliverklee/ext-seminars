@@ -37,7 +37,7 @@ final class DefaultControllerTest extends FunctionalTestCase
      */
     private $frontEndController = null;
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         \Tx_Seminars_Service_RegistrationManager::purgeInstance();
 
@@ -103,7 +103,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function defaultContentRenderingIsGenerated()
+    public function defaultContentRenderingIsGenerated(): void
     {
         $configuration = $this->getContentRenderingConfiguration();
 
@@ -114,7 +114,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function pluginUserFuncPointsToExistingMethodInExistingDefaultControllerClass()
+    public function pluginUserFuncPointsToExistingMethodInExistingDefaultControllerClass(): void
     {
         $configuration = $this->getContentRenderingConfiguration();
 
@@ -163,7 +163,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function listViewShowsVisibleSingleEvent()
+    public function listViewShowsVisibleSingleEvent(): void
     {
         $subject = $this->buildSubjectForListView('EventList');
 
@@ -175,7 +175,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function listViewEncodesEventTitle()
+    public function listViewEncodesEventTitle(): void
     {
         $subject = $this->buildSubjectForListView('EventList');
 
@@ -187,7 +187,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function listViewHidesHiddenSingleEvent()
+    public function listViewHidesHiddenSingleEvent(): void
     {
         $subject = $this->buildSubjectForListView('EventList');
 
@@ -199,7 +199,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function listViewHidesDeletedSingleEvent()
+    public function listViewHidesDeletedSingleEvent(): void
     {
         $subject = $this->buildSubjectForListView('EventList');
 
@@ -211,7 +211,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function listViewByDefaultShowsEventWithCategory()
+    public function listViewByDefaultShowsEventWithCategory(): void
     {
         $subject = $this->buildSubjectForListView('EventListWithCategories');
 
@@ -223,7 +223,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function listViewByDefaultShowsEventWithType()
+    public function listViewByDefaultShowsEventWithType(): void
     {
         $subject = $this->buildSubjectForListView('EventListWithTypes');
 
@@ -235,7 +235,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function listViewByDefaultShowsEventWithPlace()
+    public function listViewByDefaultShowsEventWithPlace(): void
     {
         $subject = $this->buildSubjectForListView('EventListWithPlaces');
 
@@ -247,7 +247,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function listViewShowsVisibleTopicByTopicTitle()
+    public function listViewShowsVisibleTopicByTopicTitle(): void
     {
         $subject = $this->buildSubjectForListView('EventList');
 
@@ -259,7 +259,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function listViewNotShowsDateTitle()
+    public function listViewNotShowsDateTitle(): void
     {
         $subject = $this->buildSubjectForListView('EventList');
 
@@ -271,7 +271,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function listViewHidesHiddenDate()
+    public function listViewHidesHiddenDate(): void
     {
         $subject = $this->buildSubjectForListView('EventList');
 
@@ -283,7 +283,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function listViewByCategoryShowsSingleEventWithSelectedCategory()
+    public function listViewByCategoryShowsSingleEventWithSelectedCategory(): void
     {
         $subject = $this->buildSubjectForListView('EventListWithCategories');
         $subject->piVars['category'] = '1';
@@ -296,7 +296,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function listViewByCategoryHidesSingleEventWithoutCategory()
+    public function listViewByCategoryHidesSingleEventWithoutCategory(): void
     {
         $subject = $this->buildSubjectForListView('EventListWithCategories');
         $subject->piVars['category'] = '1';
@@ -309,7 +309,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function listViewByCategoryHidesSingleEventOnlyWithOtherCategory()
+    public function listViewByCategoryHidesSingleEventOnlyWithOtherCategory(): void
     {
         $subject = $this->buildSubjectForListView('EventListWithCategories');
         $subject->piVars['category'] = '2';
@@ -322,7 +322,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function listViewByCategoryHidesHiddenSingleEventWithSelectedCategory()
+    public function listViewByCategoryHidesHiddenSingleEventWithSelectedCategory(): void
     {
         $subject = $this->buildSubjectForListView('EventListWithCategories');
         $subject->piVars['category'] = '1';
@@ -335,7 +335,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function listViewByCategoryHidesDeletedSingleEventWithSelectedCategory()
+    public function listViewByCategoryHidesDeletedSingleEventWithSelectedCategory(): void
     {
         $subject = $this->buildSubjectForListView('EventListWithCategories');
         $subject->piVars['category'] = '1';
@@ -348,7 +348,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function listViewByTypeShowsSingleEventWithSelectedType()
+    public function listViewByTypeShowsSingleEventWithSelectedType(): void
     {
         $subject = $this->buildSubjectForListView('EventListWithTypes');
         $subject->piVars['event_type'] = ['1'];
@@ -361,7 +361,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function listViewByTypeShowsSingleEventWithOneOfMultipleSelectedTypes()
+    public function listViewByTypeShowsSingleEventWithOneOfMultipleSelectedTypes(): void
     {
         $subject = $this->buildSubjectForListView('EventListWithTypes');
         $subject->piVars['event_type'] = ['1', '2'];
@@ -374,7 +374,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function listViewByTypeHidesSingleEventWithoutType()
+    public function listViewByTypeHidesSingleEventWithoutType(): void
     {
         $subject = $this->buildSubjectForListView('EventListWithTypes');
         $subject->piVars['event_type'] = ['1'];
@@ -387,7 +387,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function listViewByTypeHidesSingleEventWithOtherType()
+    public function listViewByTypeHidesSingleEventWithOtherType(): void
     {
         $subject = $this->buildSubjectForListView('EventListWithTypes');
         $subject->piVars['event_type'] = ['2'];
@@ -400,7 +400,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function listViewByTypeHidesHiddenSingleEventWithSelectedType()
+    public function listViewByTypeHidesHiddenSingleEventWithSelectedType(): void
     {
         $subject = $this->buildSubjectForListView('EventListWithTypes');
         $subject->piVars['event_type'] = ['1'];
@@ -413,7 +413,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function listViewByTypeHidesDeletedSingleEventWithSelectedType()
+    public function listViewByTypeHidesDeletedSingleEventWithSelectedType(): void
     {
         $subject = $this->buildSubjectForListView('EventListWithTypes');
         $subject->piVars['event_type'] = ['1'];
@@ -426,7 +426,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function listViewByPlaceShowsSingleEventWithSelectedPlace()
+    public function listViewByPlaceShowsSingleEventWithSelectedPlace(): void
     {
         $subject = $this->buildSubjectForListView('EventListWithPlaces');
         $subject->setConfigurationValue('limitListViewToPlaces', '1');
@@ -439,7 +439,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function listViewByPlaceShowsSingleEventWithOneOfMultipleSelectedPlaces()
+    public function listViewByPlaceShowsSingleEventWithOneOfMultipleSelectedPlaces(): void
     {
         $subject = $this->buildSubjectForListView('EventListWithPlaces');
         $subject->setConfigurationValue('limitListViewToPlaces', '1,2');
@@ -452,7 +452,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function listViewByPlaceShowsSingleEventWithAllSelectedPlaces()
+    public function listViewByPlaceShowsSingleEventWithAllSelectedPlaces(): void
     {
         $subject = $this->buildSubjectForListView('EventListWithPlaces');
         $subject->setConfigurationValue('limitListViewToPlaces', '1,2');
@@ -465,7 +465,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function listViewByPlaceHidesSingleEventWithoutPlace()
+    public function listViewByPlaceHidesSingleEventWithoutPlace(): void
     {
         $subject = $this->buildSubjectForListView('EventListWithPlaces');
         $subject->setConfigurationValue('limitListViewToPlaces', '1');
@@ -478,7 +478,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function listViewByPlaceHidesSingleEventOnlyWithOtherPlace()
+    public function listViewByPlaceHidesSingleEventOnlyWithOtherPlace(): void
     {
         $subject = $this->buildSubjectForListView('EventListWithPlaces');
         $subject->setConfigurationValue('limitListViewToPlaces', '2');
@@ -491,7 +491,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function listViewByPlaceHidesHiddenSingleEventWithSelectedPlace()
+    public function listViewByPlaceHidesHiddenSingleEventWithSelectedPlace(): void
     {
         $subject = $this->buildSubjectForListView('EventListWithPlaces');
         $subject->setConfigurationValue('limitListViewToPlaces', '1');
@@ -504,7 +504,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function listViewByPlaceHidesDeletedSingleEventWithSelectedPlace()
+    public function listViewByPlaceHidesDeletedSingleEventWithSelectedPlace(): void
     {
         $subject = $this->buildSubjectForListView('EventListWithPlaces');
         $subject->setConfigurationValue('limitListViewToPlaces', '1');

@@ -38,7 +38,7 @@ final class CsvDownloaderTest extends TestCase
      */
     private $eventUid = 0;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->unifyTestingEnvironment();
 
@@ -59,7 +59,7 @@ final class CsvDownloaderTest extends TestCase
         $this->subject->init([]);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
         \Tx_Seminars_Service_RegistrationManager::purgeInstance();
@@ -90,7 +90,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createListOfEventsForZeroPidThrowsException()
+    public function createListOfEventsForZeroPidThrowsException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -100,7 +100,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createListOfEventsForNegativePidThrowsException()
+    public function createListOfEventsForNegativePidThrowsException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -110,7 +110,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createListOfEventsForZeroRecordsHasOnlyHeaderLine()
+    public function createListOfEventsForZeroRecordsHasOnlyHeaderLine(): void
     {
         $pid = $this->testingFramework->createSystemFolder();
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'uid,title');
@@ -125,7 +125,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createListOfEventsCanContainOneEventUid()
+    public function createListOfEventsCanContainOneEventUid(): void
     {
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'uid');
 
@@ -138,7 +138,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createListOfEventsCanContainEventFromSubFolder()
+    public function createListOfEventsCanContainEventFromSubFolder(): void
     {
         $subFolderPid = $this->testingFramework->createSystemFolder($this->pid);
         $this->testingFramework->createRecord(
@@ -160,7 +160,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function mainCanExportOneEventUid()
+    public function mainCanExportOneEventUid(): void
     {
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'uid');
 
@@ -176,7 +176,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createListOfEventsCanContainTwoEventUids()
+    public function createListOfEventsCanContainTwoEventUids(): void
     {
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'uid');
 
@@ -202,7 +202,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfEventsCanContainTwoEventUids()
+    public function createAndOutputListOfEventsCanContainTwoEventUids(): void
     {
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'uid');
 
@@ -229,7 +229,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfEventsSeparatesLinesWithCarriageReturnsAndLineFeeds()
+    public function createAndOutputListOfEventsSeparatesLinesWithCarriageReturnsAndLineFeeds(): void
     {
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'uid');
 
@@ -251,7 +251,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfEventsHasResultEndingWithCarriageReturnAndLineFeed()
+    public function createAndOutputListOfEventsHasResultEndingWithCarriageReturnAndLineFeed(): void
     {
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'uid');
 
@@ -272,7 +272,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfEventsDoesNotWrapRegularValuesWithDoubleQuotes()
+    public function createAndOutputListOfEventsDoesNotWrapRegularValuesWithDoubleQuotes(): void
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -291,7 +291,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfEventsEscapesDoubleQuotes()
+    public function createAndOutputListOfEventsEscapesDoubleQuotes(): void
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -310,7 +310,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfEventsDoesWrapValuesWithLineFeedsInDoubleQuotes()
+    public function createAndOutputListOfEventsDoesWrapValuesWithLineFeedsInDoubleQuotes(): void
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -329,7 +329,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfEventsDoesWrapValuesWithDoubleQuotesInDoubleQuotes()
+    public function createAndOutputListOfEventsDoesWrapValuesWithDoubleQuotesInDoubleQuotes(): void
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -348,7 +348,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfEventsDoesWrapValuesWithSemicolonsInDoubleQuotes()
+    public function createAndOutputListOfEventsDoesWrapValuesWithSemicolonsInDoubleQuotes(): void
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -367,7 +367,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfEventsSeparatesValuesWithSemicolons()
+    public function createAndOutputListOfEventsSeparatesValuesWithSemicolons(): void
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -386,7 +386,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfEventsDoesNotWrapHeaderFieldsInDoubleQuotes()
+    public function createAndOutputListOfEventsDoesNotWrapHeaderFieldsInDoubleQuotes(): void
     {
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'description,title');
 
@@ -408,7 +408,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfEventsSeparatesHeaderFieldsWithSemicolons()
+    public function createAndOutputListOfEventsSeparatesHeaderFieldsWithSemicolons(): void
     {
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'description,title');
 
@@ -424,7 +424,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createListOfRegistrationsCanContainOneRegistrationUid()
+    public function createListOfRegistrationsCanContainOneRegistrationUid(): void
     {
         $this->configuration->setAsString('fieldsFromFeUserForCsv', '');
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'uid');
@@ -446,7 +446,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createListOfRegistrationsCanContainOneRegistrationUidOfHiddenEvent()
+    public function createListOfRegistrationsCanContainOneRegistrationUidOfHiddenEvent(): void
     {
         $this->testingFramework->changeRecord('tx_seminars_seminars', $this->eventUid, ['hidden' => 1]);
 
@@ -470,7 +470,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createListOfRegistrationsCanContainOneRegistrationUidOfEventWithPastEndTime()
+    public function createListOfRegistrationsCanContainOneRegistrationUidOfEventWithPastEndTime(): void
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -498,7 +498,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createListOfRegistrationsCanContainLocalizedRegisteredThemselves()
+    public function createListOfRegistrationsCanContainLocalizedRegisteredThemselves(): void
     {
         $this->configuration->setAsString('fieldsFromFeUserForCsv', '');
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'registered_themselves');
@@ -523,7 +523,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createListOfRegistrationsCanContainLocalizedCompanyHeading()
+    public function createListOfRegistrationsCanContainLocalizedCompanyHeading(): void
     {
         $this->configuration->setAsString('fieldsFromFeUserForCsv', '');
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'company');
@@ -546,7 +546,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createListOfRegistrationsCanContainCompanyContent()
+    public function createListOfRegistrationsCanContainCompanyContent(): void
     {
         $this->configuration->setAsString('fieldsFromFeUserForCsv', '');
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'company');
@@ -569,7 +569,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createListOfRegistrationsForFrontEndModeCanExportRegistrationsBelongingToAnEvent()
+    public function createListOfRegistrationsForFrontEndModeCanExportRegistrationsBelongingToAnEvent(): void
     {
         $this->subject->setTypo3Mode('FE');
         $globalBackEndUser = $GLOBALS['BE_USER'];
@@ -602,7 +602,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function mainCanExportOneRegistrationUid()
+    public function mainCanExportOneRegistrationUid(): void
     {
         $this->configuration->setAsString('fieldsFromFeUserForCsv', '');
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'uid');
@@ -627,7 +627,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createListOfRegistrationsCanContainTwoRegistrationUids()
+    public function createListOfRegistrationsCanContainTwoRegistrationUids(): void
     {
         $this->configuration->setAsString('fieldsFromFeUserForCsv', '');
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'uid');
@@ -664,7 +664,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function mainCanKeepEventDataInUtf8()
+    public function mainCanKeepEventDataInUtf8(): void
     {
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
 
@@ -688,7 +688,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function mainCanChangeEventDataToIso885915()
+    public function mainCanChangeEventDataToIso885915(): void
     {
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'title');
 
@@ -714,7 +714,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function mainCanKeepRegistrationDataInUtf8()
+    public function mainCanKeepRegistrationDataInUtf8(): void
     {
         $this->configuration->setAsString('fieldsFromFeUserForCsv', '');
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'title');
@@ -741,7 +741,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function mainCanChangeRegistrationDataToIso885915()
+    public function mainCanChangeRegistrationDataToIso885915(): void
     {
         $this->configuration->setAsString('fieldsFromFeUserForCsv', '');
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'title');
@@ -772,7 +772,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfRegistrationsCanContainTwoRegistrationUids()
+    public function createAndOutputListOfRegistrationsCanContainTwoRegistrationUids(): void
     {
         $this->configuration->setAsString('fieldsFromFeUserForCsv', '');
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'uid');
@@ -808,7 +808,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfRegistrationsCanContainNameOfUser()
+    public function createAndOutputListOfRegistrationsCanContainNameOfUser(): void
     {
         $this->configuration->setAsString('fieldsFromFeUserForCsv', 'name');
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', '');
@@ -832,7 +832,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfRegistrationsDoesNotContainUidOfRegistrationWithDeletedUser()
+    public function createAndOutputListOfRegistrationsDoesNotContainUidOfRegistrationWithDeletedUser(): void
     {
         $this->configuration->setAsString('fieldsFromFeUserForCsv', '');
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'uid');
@@ -856,7 +856,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfRegistrationsDoesNotContainUidOfRegistrationWithInexistentUser()
+    public function createAndOutputListOfRegistrationsDoesNotContainUidOfRegistrationWithInexistentUser(): void
     {
         $this->configuration->setAsString('fieldsFromFeUserForCsv', '');
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'uid');
@@ -879,7 +879,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfRegistrationsSeparatesLinesWithCarriageReturnAndLineFeed()
+    public function createAndOutputListOfRegistrationsSeparatesLinesWithCarriageReturnAndLineFeed(): void
     {
         $this->configuration->setAsString('fieldsFromFeUserForCsv', '');
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'uid');
@@ -911,7 +911,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfRegistrationsHasResultThatEndsWithCarriageReturnAndLineFeed()
+    public function createAndOutputListOfRegistrationsHasResultThatEndsWithCarriageReturnAndLineFeed(): void
     {
         $this->configuration->setAsString('fieldsFromFeUserForCsv', '');
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'uid');
@@ -942,7 +942,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfRegistrationsEscapesDoubleQuotes()
+    public function createAndOutputListOfRegistrationsEscapesDoubleQuotes(): void
     {
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'uid,address');
 
@@ -965,7 +965,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfRegistrationsDoesNotEscapeRegularValues()
+    public function createAndOutputListOfRegistrationsDoesNotEscapeRegularValues(): void
     {
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'address');
 
@@ -988,7 +988,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfRegistrationsWrapsValuesWithSemicolonsInDoubleQuotes()
+    public function createAndOutputListOfRegistrationsWrapsValuesWithSemicolonsInDoubleQuotes(): void
     {
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'address');
 
@@ -1011,7 +1011,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfRegistrationsWrapsValuesWithLineFeedsInDoubleQuotes()
+    public function createAndOutputListOfRegistrationsWrapsValuesWithLineFeedsInDoubleQuotes(): void
     {
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'address');
 
@@ -1034,7 +1034,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfRegistrationsWrapsValuesWithDoubleQuotesInDoubleQuotes()
+    public function createAndOutputListOfRegistrationsWrapsValuesWithDoubleQuotesInDoubleQuotes(): void
     {
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'address');
 
@@ -1057,7 +1057,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfRegistrationsSeparatesTwoValuesWithSemicolons()
+    public function createAndOutputListOfRegistrationsSeparatesTwoValuesWithSemicolons(): void
     {
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'address,title');
 
@@ -1081,7 +1081,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfRegistrationsDoesNotWrapHeaderFieldsInDoubleQuotes()
+    public function createAndOutputListOfRegistrationsDoesNotWrapHeaderFieldsInDoubleQuotes(): void
     {
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'address');
 
@@ -1101,7 +1101,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfRegistrationsSeparatesHeaderFieldsWithSemicolons()
+    public function createAndOutputListOfRegistrationsSeparatesHeaderFieldsWithSemicolons(): void
     {
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'address,title');
 
@@ -1115,7 +1115,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createListOfRegistrationsForConfigurationAttendanceCsvFieldsEmptyDoesNotAddSemicolonOnEndOfHeader()
+    public function createListOfRegistrationsForConfigurationAttendanceCsvFieldsEmptyDoesNotAddSemicolonOnEndOfHeader(): void
     {
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', '');
         $this->configuration->setAsString('fieldsFromFeUserForCsv', 'name');
@@ -1129,7 +1129,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createListOfRegistrationsForConfigurationFeUserCsvFieldsEmptyDoesNotAddSemicolonAtBeginningOfHeader()
+    public function createListOfRegistrationsForConfigurationFeUserCsvFieldsEmptyDoesNotAddSemicolonAtBeginningOfHeader(): void
     {
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'address');
         $this->configuration->setAsString('fieldsFromFeUserForCsv', '');
@@ -1143,7 +1143,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createListOfRegistrationsForBothConfigurationFieldsEmptyReturnsCrLf()
+    public function createListOfRegistrationsForBothConfigurationFieldsEmptyReturnsCrLf(): void
     {
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', '');
         $this->configuration->setAsString('fieldsFromFeUserForCsv', '');
@@ -1157,7 +1157,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOuptutListOfRegistrationsForNoEventUidGivenReturnsRegistrationsOnCurrentPage()
+    public function createAndOuptutListOfRegistrationsForNoEventUidGivenReturnsRegistrationsOnCurrentPage(): void
     {
         $this->subject->piVars['pid'] = $this->pid;
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'address');
@@ -1181,7 +1181,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOuptutListOfRegistrationsForNoEventUidGivenDoesNotReturnRegistrationsOnOtherPage()
+    public function createAndOuptutListOfRegistrationsForNoEventUidGivenDoesNotReturnRegistrationsOnOtherPage(): void
     {
         $this->subject->piVars['pid'] = $this->pid;
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', 'address');
@@ -1205,7 +1205,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOuptutListOfRegistrationsForNoEventUidGivenReturnsRegistrationsOnSubpageOfCurrentPage()
+    public function createAndOuptutListOfRegistrationsForNoEventUidGivenReturnsRegistrationsOnSubpageOfCurrentPage(): void
     {
         $this->subject->piVars['pid'] = $this->pid;
         $subpagePid = $this->testingFramework->createSystemFolder($this->pid);
@@ -1230,7 +1230,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfRegistrationsForNonExistingEventUidAddsNotFoundStatusToHeader()
+    public function createAndOutputListOfRegistrationsForNonExistingEventUidAddsNotFoundStatusToHeader(): void
     {
         $this->subject->createAndOutputListOfRegistrations(
             $this->testingFramework->getAutoIncrement('tx_seminars_seminars')
@@ -1242,7 +1242,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfRegistrationsForNoGivenEventUidAndFeModeAddsAccessForbiddenStatusToHeader()
+    public function createAndOutputListOfRegistrationsForNoGivenEventUidAndFeModeAddsAccessForbiddenStatusToHeader(): void
     {
         $this->subject->setTypo3Mode('FE');
         $this->subject->createAndOutputListOfRegistrations();
@@ -1253,7 +1253,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfRegistrationsForEventUidGivenSetsPageContentTypeToCsv()
+    public function createAndOutputListOfRegistrationsForEventUidGivenSetsPageContentTypeToCsv(): void
     {
         $this->subject->createAndOutputListOfRegistrations($this->eventUid);
 
@@ -1266,7 +1266,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfRegistrationsForNoEventUidGivenSetsPageContentTypeToCsv()
+    public function createAndOutputListOfRegistrationsForNoEventUidGivenSetsPageContentTypeToCsv(): void
     {
         $this->subject->piVars['pid'] = $this->pid;
         $this->subject->createAndOutputListOfRegistrations();
@@ -1282,7 +1282,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfRegistrationsForWebModeNotUsesUserFieldsFromEmailConfiguration()
+    public function createAndOutputListOfRegistrationsForWebModeNotUsesUserFieldsFromEmailConfiguration(): void
     {
         $this->configuration->setAsString('fieldsFromFeUserForEmailCsv', 'email');
         $this->configuration->setAsString('fieldsFromFeUserForCsv', 'name');
@@ -1302,7 +1302,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfRegistrationsForWebModeNotUsesRegistrationFieldsFromEmailConfiguration()
+    public function createAndOutputListOfRegistrationsForWebModeNotUsesRegistrationFieldsFromEmailConfiguration(): void
     {
         $this->configuration->setAsString('fieldsFromAttendanceForEmailCsv', 'bank_name');
         $this->configuration->setAsString('fieldsFromAttendanceForCsv', '');
@@ -1325,7 +1325,7 @@ final class CsvDownloaderTest extends TestCase
     /**
      * @test
      */
-    public function createAndOutputListOfRegistrationsForWebModeNotUsesRegistrationsOnQueueSettingFromConfiguration()
+    public function createAndOutputListOfRegistrationsForWebModeNotUsesRegistrationsOnQueueSettingFromConfiguration(): void
     {
         $this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInEmailCsv', true);
         $this->configuration->setAsString('fieldsFromAttendanceForEmailCsv', 'uid');

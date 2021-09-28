@@ -17,7 +17,7 @@ final class OrganizerTest extends UnitTestCase
      */
     private $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new \Tx_Seminars_OldModel_Organizer();
     }
@@ -25,7 +25,7 @@ final class OrganizerTest extends UnitTestCase
     /**
      * @test
      */
-    public function isAbstractModel()
+    public function isAbstractModel(): void
     {
         self::assertInstanceOf(AbstractModel::class, $this->subject);
     }
@@ -33,7 +33,7 @@ final class OrganizerTest extends UnitTestCase
     /**
      * @test
      */
-    public function fromDataCreatesInstanceOfSubclass()
+    public function fromDataCreatesInstanceOfSubclass(): void
     {
         $result = \Tx_Seminars_OldModel_Organizer::fromData([]);
 

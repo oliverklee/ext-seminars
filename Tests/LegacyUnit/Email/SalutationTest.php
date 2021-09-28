@@ -71,7 +71,7 @@ final class SalutationTest extends TestCase
      */
     private $configuration;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
 
@@ -85,7 +85,7 @@ final class SalutationTest extends TestCase
         $this->subject = new Salutation();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         ConfigurationRegistry::purgeInstance();
         $this->testingFramework->cleanUp();
@@ -114,10 +114,8 @@ final class SalutationTest extends TestCase
     /**
      * Checks whether the FrontEndUser.gender fields exists and
      * marks the test as skipped if that extension is not installed.
-     *
-     * @return void
      */
-    protected function skipWithoutGenderField()
+    protected function skipWithoutGenderField(): void
     {
         if (!OelibFrontEndUser::hasGenderField()) {
             self::markTestSkipped(
@@ -132,7 +130,7 @@ final class SalutationTest extends TestCase
     /**
      * @test
      */
-    public function createFrontEndUserReturnsFeUserModel()
+    public function createFrontEndUserReturnsFeUserModel(): void
     {
         self::assertInstanceOf(\Tx_Seminars_Model_FrontEndUser::class, $this->createFrontEndUser());
     }
@@ -140,7 +138,7 @@ final class SalutationTest extends TestCase
     /**
      * @test
      */
-    public function createFrontEndUserForGivenGenderAssignsGenderToFrontEndUser()
+    public function createFrontEndUserForGivenGenderAssignsGenderToFrontEndUser(): void
     {
         $this->skipWithoutGenderField();
 
@@ -155,7 +153,7 @@ final class SalutationTest extends TestCase
     /**
      * @test
      */
-    public function getSalutationReturnsUsernameOfRegistration()
+    public function getSalutationReturnsUsernameOfRegistration(): void
     {
         self::assertStringContainsString(
             'Foo',
@@ -166,7 +164,7 @@ final class SalutationTest extends TestCase
     /**
      * @test
      */
-    public function getSalutationForMaleUserReturnsMaleSalutation()
+    public function getSalutationForMaleUserReturnsMaleSalutation(): void
     {
         $this->skipWithoutGenderField();
 
@@ -181,7 +179,7 @@ final class SalutationTest extends TestCase
     /**
      * @test
      */
-    public function getSalutationForMaleUserReturnsUsersNameWithGenderSpecificTitle()
+    public function getSalutationForMaleUserReturnsUsersNameWithGenderSpecificTitle(): void
     {
         $this->skipWithoutGenderField();
 
@@ -197,7 +195,7 @@ final class SalutationTest extends TestCase
     /**
      * @test
      */
-    public function getSalutationForFemaleUserReturnsFemaleSalutation()
+    public function getSalutationForFemaleUserReturnsFemaleSalutation(): void
     {
         $this->skipWithoutGenderField();
 
@@ -212,7 +210,7 @@ final class SalutationTest extends TestCase
     /**
      * @test
      */
-    public function getSalutationForFemaleUserReturnsUsersNameWithGenderSpecificTitle()
+    public function getSalutationForFemaleUserReturnsUsersNameWithGenderSpecificTitle(): void
     {
         $this->skipWithoutGenderField();
 
@@ -228,7 +226,7 @@ final class SalutationTest extends TestCase
     /**
      * @test
      */
-    public function getSalutationForUnknownUserReturnsUnknownSalutation()
+    public function getSalutationForUnknownUserReturnsUnknownSalutation(): void
     {
         $user = $this->createFrontEndUser(OelibFrontEndUser::GENDER_UNKNOWN);
 
@@ -241,7 +239,7 @@ final class SalutationTest extends TestCase
     /**
      * @test
      */
-    public function getSalutationForUnknownUserReturnsUsersNameWithGenderSpecificTitle()
+    public function getSalutationForUnknownUserReturnsUsersNameWithGenderSpecificTitle(): void
     {
         $user = $this->createFrontEndUser(OelibFrontEndUser::GENDER_UNKNOWN);
 
@@ -254,7 +252,7 @@ final class SalutationTest extends TestCase
     /**
      * @test
      */
-    public function getSalutationForInformalSalutationReturnsInformalSalutation()
+    public function getSalutationForInformalSalutationReturnsInformalSalutation(): void
     {
         $user = $this->createFrontEndUser();
         $this->configuration->setAsString('salutation', 'informal');
@@ -268,7 +266,7 @@ final class SalutationTest extends TestCase
     /**
      * @test
      */
-    public function getSalutationForInformalSalutationReturnsUsersName()
+    public function getSalutationForInformalSalutationReturnsUsersName(): void
     {
         $user = $this->createFrontEndUser();
         $this->configuration->setAsString('salutation', 'informal');
@@ -301,7 +299,7 @@ final class SalutationTest extends TestCase
      *
      * @dataProvider genderDataProvider
      */
-    public function getSalutationForFormalSalutationModeContainsNoRawLabelKeys(int $gender)
+    public function getSalutationForFormalSalutationModeContainsNoRawLabelKeys(int $gender): void
     {
         $this->configuration->setAsString('salutation', 'formal');
 
@@ -333,7 +331,7 @@ final class SalutationTest extends TestCase
      *
      * @dataProvider genderDataProvider
      */
-    public function getSalutationForInformalSalutationModeContainsNoRawLabelKeys(int $gender)
+    public function getSalutationForInformalSalutationModeContainsNoRawLabelKeys(int $gender): void
     {
         $this->configuration->setAsString('salutation', 'informal');
 
@@ -350,7 +348,7 @@ final class SalutationTest extends TestCase
      *
      * @dataProvider genderDataProvider
      */
-    public function getSalutationForNoSalutationModeContainsNoRawLabelKeys(int $gender)
+    public function getSalutationForNoSalutationModeContainsNoRawLabelKeys(int $gender): void
     {
         $this->configuration->setAsString('salutation', '');
 
@@ -364,10 +362,8 @@ final class SalutationTest extends TestCase
      * Checks that $string does not contain a raw label key.
      *
      * @param string $string
-     *
-     * @return void
      */
-    private function assertNotContainsRawLabelKey(string $string)
+    private function assertNotContainsRawLabelKey(string $string): void
     {
         self::assertStringNotContainsString('_', $string);
         self::assertStringNotContainsString('salutation', $string);
@@ -379,7 +375,7 @@ final class SalutationTest extends TestCase
     /**
      * @test
      */
-    public function getSalutationForHookSetInConfigurationCallsThisHook()
+    public function getSalutationForHookSetInConfigurationCallsThisHook(): void
     {
         $salutationHookMock = $this->createPartialMock(\stdClass::class, ['modifySalutation']);
         $hookClassName = \get_class($salutationHookMock);
@@ -398,7 +394,7 @@ final class SalutationTest extends TestCase
     /**
      * @test
      */
-    public function getSalutationCanCallMultipleSetHooks()
+    public function getSalutationCanCallMultipleSetHooks(): void
     {
         $hookClassName1 = 'AnEmailSalutationHook';
         $salutationHookMock1 = $this->getMockBuilder(EmailSalutationHookInterface::class)
@@ -429,7 +425,7 @@ final class SalutationTest extends TestCase
     /**
      * @test
      */
-    public function createIntroductionWithEmptyBeginThrowsException()
+    public function createIntroductionWithEmptyBeginThrowsException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -443,7 +439,7 @@ final class SalutationTest extends TestCase
     /**
      * @test
      */
-    public function createIntroductionForEventWithDateReturnsEventsDate()
+    public function createIntroductionForEventWithDateReturnsEventsDate(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -461,7 +457,7 @@ final class SalutationTest extends TestCase
     /**
      * @test
      */
-    public function createIntroductionForEventWithBeginAndEndDateOnDifferentDaysReturnsEventsDateFromTo()
+    public function createIntroductionForEventWithBeginAndEndDateOnDifferentDaysReturnsEventsDateFromTo(): void
     {
         $this->configuration->setAsBoolean('abbreviateDateRanges', true);
         $eventUid = $this->testingFramework->createRecord(
@@ -483,7 +479,7 @@ final class SalutationTest extends TestCase
     /**
      * @test
      */
-    public function createIntroductionForEventWithTimeReturnsEventsTime()
+    public function createIntroductionForEventWithTimeReturnsEventsTime(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -503,7 +499,7 @@ final class SalutationTest extends TestCase
     /**
      * @test
      */
-    public function createIntroductionForEventWithStartAndEndOnOneDayReturnsTimeFromTo()
+    public function createIntroductionForEventWithStartAndEndOnOneDayReturnsTimeFromTo(): void
     {
         $endDate = $GLOBALS['SIM_EXEC_TIME'] + 3600;
         $eventUid = $this->testingFramework->createRecord(
@@ -528,7 +524,7 @@ final class SalutationTest extends TestCase
     /**
      * @test
      */
-    public function createIntroductionForEventWithStartAndEndOnOneDayContainsDate()
+    public function createIntroductionForEventWithStartAndEndOnOneDayContainsDate(): void
     {
         $endDate = $GLOBALS['SIM_EXEC_TIME'] + 3600;
         $eventUid = $this->testingFramework->createRecord(
@@ -551,7 +547,7 @@ final class SalutationTest extends TestCase
     /**
      * @test
      */
-    public function createIntroductionForFormalSalutationModeContainsNoRawLabelKeys()
+    public function createIntroductionForFormalSalutationModeContainsNoRawLabelKeys(): void
     {
         $salutation = 'formal';
         $this->configuration->setAsString('salutation', $salutation);
@@ -571,7 +567,7 @@ final class SalutationTest extends TestCase
     /**
      * @test
      */
-    public function createIntroductionForInformalSalutationModeContainsNoRawLabelKeys()
+    public function createIntroductionForInformalSalutationModeContainsNoRawLabelKeys(): void
     {
         $salutation = 'informal';
         $this->configuration->setAsString('salutation', $salutation);
@@ -591,7 +587,7 @@ final class SalutationTest extends TestCase
     /**
      * @test
      */
-    public function createIntroductionForNoSalutationModeContainsNoRawLabelKeys()
+    public function createIntroductionForNoSalutationModeContainsNoRawLabelKeys(): void
     {
         $salutation = '';
         $this->configuration->setAsString('salutation', $salutation);

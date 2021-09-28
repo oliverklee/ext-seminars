@@ -42,7 +42,7 @@ final class EventStatusServiceTest extends TestCase
      */
     private $future = 0;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
         $this->past = $GLOBALS['SIM_EXEC_TIME'] - 1;
@@ -61,7 +61,7 @@ final class EventStatusServiceTest extends TestCase
         $this->subject = new EventStatusService();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
     }
@@ -69,7 +69,7 @@ final class EventStatusServiceTest extends TestCase
     /**
      * @test
      */
-    public function classIsSingleton()
+    public function classIsSingleton(): void
     {
         self::assertInstanceOf(SingletonInterface::class, $this->subject);
     }
@@ -77,7 +77,7 @@ final class EventStatusServiceTest extends TestCase
     /**
      * @test
      */
-    public function updateStatusAndSaveForAlreadyConfirmedEventAndFlagSetReturnsFalse()
+    public function updateStatusAndSaveForAlreadyConfirmedEventAndFlagSetReturnsFalse(): void
     {
         $event = new \Tx_Seminars_Model_Event();
         $event->setData(['registrations' => new Collection(), 'automatic_confirmation_cancelation' => 1]);
@@ -91,7 +91,7 @@ final class EventStatusServiceTest extends TestCase
     /**
      * @test
      */
-    public function updateStatusAndSaveForPlannedEventWithEnoughRegistrationsReturnsTrue()
+    public function updateStatusAndSaveForPlannedEventWithEnoughRegistrationsReturnsTrue(): void
     {
         $event = new \Tx_Seminars_Model_Event();
         $event->setData(
@@ -112,7 +112,7 @@ final class EventStatusServiceTest extends TestCase
     /**
      * @test
      */
-    public function updateStatusAndSaveForPlannedEventWithEnoughRegistrationsConfirmsEvent()
+    public function updateStatusAndSaveForPlannedEventWithEnoughRegistrationsConfirmsEvent(): void
     {
         $event = new \Tx_Seminars_Model_Event();
         $event->setData(
@@ -133,7 +133,7 @@ final class EventStatusServiceTest extends TestCase
     /**
      * @test
      */
-    public function updateStatusAndSaveForPlannedEventWithEnoughRegistrationsSavesEvent()
+    public function updateStatusAndSaveForPlannedEventWithEnoughRegistrationsSavesEvent(): void
     {
         $event = new \Tx_Seminars_Model_Event();
         $event->setData(
@@ -154,7 +154,7 @@ final class EventStatusServiceTest extends TestCase
     /**
      * @test
      */
-    public function updateStatusAndSaveForPlannedEventWithEnoughRegistrationsWithoutAutomaticFlagReturnsFalse()
+    public function updateStatusAndSaveForPlannedEventWithEnoughRegistrationsWithoutAutomaticFlagReturnsFalse(): void
     {
         $event = new \Tx_Seminars_Model_Event();
         $event->setData(
@@ -175,7 +175,7 @@ final class EventStatusServiceTest extends TestCase
     /**
      * @test
      */
-    public function updateStatusAndSaveForPlannedEventWithEnoughRegistrationsWithoutAutomaticFlagKeepsEventAsPlanned()
+    public function updateStatusAndSaveForPlannedEventWithEnoughRegistrationsWithoutAutomaticFlagKeepsEventAsPlanned(): void
     {
         $event = new \Tx_Seminars_Model_Event();
         $event->setData(
@@ -196,7 +196,7 @@ final class EventStatusServiceTest extends TestCase
     /**
      * @test
      */
-    public function updateStatusAndSaveForAlreadyCanceledEventAndFlagSetReturnsFalse()
+    public function updateStatusAndSaveForAlreadyCanceledEventAndFlagSetReturnsFalse(): void
     {
         $event = new \Tx_Seminars_Model_Event();
         $event->setData(['registrations' => new Collection(), 'automatic_confirmation_cancelation' => 1]);
@@ -210,7 +210,7 @@ final class EventStatusServiceTest extends TestCase
     /**
      * @test
      */
-    public function updateStatusAndSaveForPlannedEventWithNotEnoughRegistrationsWithoutRegistrationDeadlineIsFalse()
+    public function updateStatusAndSaveForPlannedEventWithNotEnoughRegistrationsWithoutRegistrationDeadlineIsFalse(): void
     {
         $event = new \Tx_Seminars_Model_Event();
         $event->setData(
@@ -232,7 +232,7 @@ final class EventStatusServiceTest extends TestCase
     /**
      * @test
      */
-    public function updateStatusAndSaveForPlannedWithNotEnoughRegistrationsWithRegistrationDeadlineInFutureIsFalse()
+    public function updateStatusAndSaveForPlannedWithNotEnoughRegistrationsWithRegistrationDeadlineInFutureIsFalse(): void
     {
         $event = new \Tx_Seminars_Model_Event();
         $event->setData(
@@ -254,7 +254,7 @@ final class EventStatusServiceTest extends TestCase
     /**
      * @test
      */
-    public function updateStatusAndSaveForPlannedEventWithNotEnoughRegistrationsWithRegistrationDeadlineInPastIsTrue()
+    public function updateStatusAndSaveForPlannedEventWithNotEnoughRegistrationsWithRegistrationDeadlineInPastIsTrue(): void
     {
         $event = new \Tx_Seminars_Model_Event();
         $event->setData(
@@ -276,7 +276,7 @@ final class EventStatusServiceTest extends TestCase
     /**
      * @test
      */
-    public function updateStatusAndSaveForPlannedEventWithNotEnoughRegistrationsWithDeadlineInPastCancelsEvent()
+    public function updateStatusAndSaveForPlannedEventWithNotEnoughRegistrationsWithDeadlineInPastCancelsEvent(): void
     {
         $event = new \Tx_Seminars_Model_Event();
         $event->setData(
@@ -298,7 +298,7 @@ final class EventStatusServiceTest extends TestCase
     /**
      * @test
      */
-    public function updateStatusAndSaveForPlannedEventWithNotEnoughRegistrationsWithDeadlineInPastSavesEvent()
+    public function updateStatusAndSaveForPlannedEventWithNotEnoughRegistrationsWithDeadlineInPastSavesEvent(): void
     {
         $event = new \Tx_Seminars_Model_Event();
         $event->setData(
@@ -320,7 +320,7 @@ final class EventStatusServiceTest extends TestCase
     /**
      * @test
      */
-    public function cancelAndSaveCancelsEvent()
+    public function cancelAndSaveCancelsEvent(): void
     {
         $event = new \Tx_Seminars_Model_Event();
         $event->setData([]);
@@ -333,7 +333,7 @@ final class EventStatusServiceTest extends TestCase
     /**
      * @test
      */
-    public function cancelAndSaveSavesEvent()
+    public function cancelAndSaveSavesEvent(): void
     {
         $event = new \Tx_Seminars_Model_Event();
         $event->setData([]);
@@ -346,7 +346,7 @@ final class EventStatusServiceTest extends TestCase
     /**
      * @test
      */
-    public function confirmAndSaveConfirmsEvent()
+    public function confirmAndSaveConfirmsEvent(): void
     {
         $event = new \Tx_Seminars_Model_Event();
         $event->setData([]);
@@ -359,7 +359,7 @@ final class EventStatusServiceTest extends TestCase
     /**
      * @test
      */
-    public function confirmAndSaveSavesEvent()
+    public function confirmAndSaveSavesEvent(): void
     {
         $event = new \Tx_Seminars_Model_Event();
         $event->setData([]);

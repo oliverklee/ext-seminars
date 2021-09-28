@@ -13,7 +13,7 @@ final class CheckboxTest extends TestCase
      */
     private $subject;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new \Tx_Seminars_Model_Checkbox();
     }
@@ -21,7 +21,7 @@ final class CheckboxTest extends TestCase
     /**
      * @test
      */
-    public function setTitleWithEmptyTitleThrowsException()
+    public function setTitleWithEmptyTitleThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -36,7 +36,7 @@ final class CheckboxTest extends TestCase
     /**
      * @test
      */
-    public function setTitleSetsTitle()
+    public function setTitleSetsTitle(): void
     {
         $this->subject->setTitle('I agree with the T&C.');
 
@@ -49,7 +49,7 @@ final class CheckboxTest extends TestCase
     /**
      * @test
      */
-    public function getTitleWithNonEmptyTitleReturnsTitle()
+    public function getTitleWithNonEmptyTitleReturnsTitle(): void
     {
         $this->subject->setData(['title' => 'I agree with the T&C.']);
 
@@ -66,7 +66,7 @@ final class CheckboxTest extends TestCase
     /**
      * @test
      */
-    public function getDescriptionWithoutDescriptionReturnsAnEmptyString()
+    public function getDescriptionWithoutDescriptionReturnsAnEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -79,7 +79,7 @@ final class CheckboxTest extends TestCase
     /**
      * @test
      */
-    public function getDescriptionWithDescriptionReturnsDescription()
+    public function getDescriptionWithDescriptionReturnsDescription(): void
     {
         $this->subject->setData(['description' => 'I agree with the T&C.']);
 
@@ -92,7 +92,7 @@ final class CheckboxTest extends TestCase
     /**
      * @test
      */
-    public function setDescriptionSetsDescription()
+    public function setDescriptionSetsDescription(): void
     {
         $this->subject->setDescription('I agree with the T&C.');
 
@@ -105,7 +105,7 @@ final class CheckboxTest extends TestCase
     /**
      * @test
      */
-    public function hasDescriptionWithoutDescriptionReturnsFalse()
+    public function hasDescriptionWithoutDescriptionReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -117,7 +117,7 @@ final class CheckboxTest extends TestCase
     /**
      * @test
      */
-    public function hasDescriptionWithDescriptionReturnsTrue()
+    public function hasDescriptionWithDescriptionReturnsTrue(): void
     {
         $this->subject->setDescription('I agree with the T&C.');
 

@@ -20,7 +20,7 @@ final class OrganizerBagBuilderTest extends TestCase
      */
     private $testingFramework = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
 
@@ -28,7 +28,7 @@ final class OrganizerBagBuilderTest extends TestCase
         $this->subject->setTestMode();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
     }
@@ -40,7 +40,7 @@ final class OrganizerBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function builderBuildsABag()
+    public function builderBuildsABag(): void
     {
         self::assertInstanceOf(AbstractBag::class, $this->subject->build());
     }
@@ -52,7 +52,7 @@ final class OrganizerBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventWithNegativeEventUidThrowsException()
+    public function limitToEventWithNegativeEventUidThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -67,7 +67,7 @@ final class OrganizerBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventWithZeroEventUidThrowsException()
+    public function limitToEventWithZeroEventUidThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -82,7 +82,7 @@ final class OrganizerBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventFindsOneOrganizerOfEvent()
+    public function limitToEventFindsOneOrganizerOfEvent(): void
     {
         $organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers'
@@ -109,7 +109,7 @@ final class OrganizerBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventFindsTwoOrganizersOfEvent()
+    public function limitToEventFindsTwoOrganizersOfEvent(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -144,7 +144,7 @@ final class OrganizerBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventIgnoresOrganizerOfOtherEvent()
+    public function limitToEventIgnoresOrganizerOfOtherEvent(): void
     {
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -173,7 +173,7 @@ final class OrganizerBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventSortsByRelationSorting()
+    public function limitToEventSortsByRelationSorting(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',

@@ -24,7 +24,7 @@ final class AbstractViewTest extends TestCase
      */
     private $testingFramework = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
@@ -34,7 +34,7 @@ final class AbstractViewTest extends TestCase
         );
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
     }
@@ -47,7 +47,7 @@ final class AbstractViewTest extends TestCase
     /**
      * @test
      */
-    public function renderCanReturnAViewsContent()
+    public function renderCanReturnAViewsContent(): void
     {
         self::assertSame('Hi, I am the testingFrontEndView!', $this->subject->render());
     }

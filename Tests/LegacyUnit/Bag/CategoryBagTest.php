@@ -19,7 +19,7 @@ final class CategoryBagTest extends TestCase
      */
     private $testingFramework = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
 
@@ -28,7 +28,7 @@ final class CategoryBagTest extends TestCase
         $this->subject = new \Tx_Seminars_Bag_Category('is_dummy_record=1');
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
     }
@@ -40,7 +40,7 @@ final class CategoryBagTest extends TestCase
     /**
      * @test
      */
-    public function bagCanHaveAtLeastOneElement()
+    public function bagCanHaveAtLeastOneElement(): void
     {
         self::assertFalse(
             $this->subject->isEmpty()

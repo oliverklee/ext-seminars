@@ -23,7 +23,7 @@ final class EventMapperTest extends FunctionalTestCase
      */
     private $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -33,7 +33,7 @@ final class EventMapperTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findWithUidReturnsEventInstance()
+    public function findWithUidReturnsEventInstance(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -45,7 +45,7 @@ final class EventMapperTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findWithUidOfExistingRecordReturnsRecordAsModel()
+    public function findWithUidOfExistingRecordReturnsRecordAsModel(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -57,7 +57,7 @@ final class EventMapperTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findForRegistrationDigestEmailIgnoresEventWithoutRegistrationsWithoutDigestDate()
+    public function findForRegistrationDigestEmailIgnoresEventWithoutRegistrationsWithoutDigestDate(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -69,7 +69,7 @@ final class EventMapperTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findForRegistrationDigestEmailIgnoresEventWithoutRegistrationsWithDigestDateInPast()
+    public function findForRegistrationDigestEmailIgnoresEventWithoutRegistrationsWithDigestDateInPast(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -81,7 +81,7 @@ final class EventMapperTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findForRegistrationDigestEmailFindsEventWithRegistrationAndWithoutDigestDate()
+    public function findForRegistrationDigestEmailFindsEventWithRegistrationAndWithoutDigestDate(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -93,7 +93,7 @@ final class EventMapperTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findForRegistrationDigestEmailSortsEventsByBeginDateInAscendingOrder()
+    public function findForRegistrationDigestEmailSortsEventsByBeginDateInAscendingOrder(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -111,7 +111,7 @@ final class EventMapperTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findForRegistrationDigestEmailFindsEventWithRegistrationAfterDigestDate()
+    public function findForRegistrationDigestEmailFindsEventWithRegistrationAfterDigestDate(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -123,7 +123,7 @@ final class EventMapperTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findForRegistrationDigestEmailIgnoresEventWithRegistrationOnlyBeforeDigestDate()
+    public function findForRegistrationDigestEmailIgnoresEventWithRegistrationOnlyBeforeDigestDate(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -135,7 +135,7 @@ final class EventMapperTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findForRegistrationDigestEmailFindsEventWithRegistrationsBeforeAndAfterDigestDate()
+    public function findForRegistrationDigestEmailFindsEventWithRegistrationsBeforeAndAfterDigestDate(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -147,7 +147,7 @@ final class EventMapperTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findForRegistrationDigestEmailFindsDateWithRegistrationAfterDigestDate()
+    public function findForRegistrationDigestEmailFindsDateWithRegistrationAfterDigestDate(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -159,7 +159,7 @@ final class EventMapperTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findForRegistrationDigestEmailIgnoresTopicWithRegistrationAfterDigestDate()
+    public function findForRegistrationDigestEmailIgnoresTopicWithRegistrationAfterDigestDate(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -171,7 +171,7 @@ final class EventMapperTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findForRegistrationDigestEmailIgnoresHiddenEvent()
+    public function findForRegistrationDigestEmailIgnoresHiddenEvent(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -183,7 +183,7 @@ final class EventMapperTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findForRegistrationDigestEmailIgnoresDeletedEvent()
+    public function findForRegistrationDigestEmailIgnoresDeletedEvent(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -195,7 +195,7 @@ final class EventMapperTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findForRegistrationDigestEmailIgnoresDeletedRegistration()
+    public function findForRegistrationDigestEmailIgnoresDeletedRegistration(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -207,7 +207,7 @@ final class EventMapperTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getDependenciesReturnsEmptyList()
+    public function getDependenciesReturnsEmptyList(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -221,7 +221,7 @@ final class EventMapperTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getRequirementsReturnsEmptyList()
+    public function getRequirementsReturnsEmptyList(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 

@@ -18,7 +18,7 @@ final class SpeakerTest extends UnitTestCase
      */
     private $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new \Tx_Seminars_OldModel_Speaker();
     }
@@ -26,7 +26,7 @@ final class SpeakerTest extends UnitTestCase
     /**
      * @test
      */
-    public function isAbstractModel()
+    public function isAbstractModel(): void
     {
         self::assertInstanceOf(AbstractModel::class, $this->subject);
     }
@@ -34,7 +34,7 @@ final class SpeakerTest extends UnitTestCase
     /**
      * @test
      */
-    public function fromDataCreatesInstanceOfSubclass()
+    public function fromDataCreatesInstanceOfSubclass(): void
     {
         $result = \Tx_Seminars_OldModel_Speaker::fromData([]);
 
@@ -44,7 +44,7 @@ final class SpeakerTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasOrganizationWithNoOrganizationReturnsFalse()
+    public function hasOrganizationWithNoOrganizationReturnsFalse(): void
     {
         $subject = \Tx_Seminars_OldModel_Speaker::fromData(['organization' => '']);
 
@@ -54,7 +54,7 @@ final class SpeakerTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasOrganizationWithOrganizationReturnsTrue()
+    public function hasOrganizationWithOrganizationReturnsTrue(): void
     {
         $organization = 'Foo inc.';
         $subject = \Tx_Seminars_OldModel_Speaker::fromData(['organization' => $organization]);
@@ -65,7 +65,7 @@ final class SpeakerTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasHomepageWithNoHomepageReturnsFalse()
+    public function hasHomepageWithNoHomepageReturnsFalse(): void
     {
         $subject = \Tx_Seminars_OldModel_Speaker::fromData(['homepage' => '']);
 
@@ -75,7 +75,7 @@ final class SpeakerTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasHomepageWithHomepageReturnsTrue()
+    public function hasHomepageWithHomepageReturnsTrue(): void
     {
         $homepage = 'Foo inc.';
         $subject = \Tx_Seminars_OldModel_Speaker::fromData(['homepage' => $homepage]);
@@ -86,7 +86,7 @@ final class SpeakerTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasDescriptionWithNoDescriptionReturnsFalse()
+    public function hasDescriptionWithNoDescriptionReturnsFalse(): void
     {
         $subject = \Tx_Seminars_OldModel_Speaker::fromData(['description' => '']);
 
@@ -96,7 +96,7 @@ final class SpeakerTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasDescriptionWithDescriptionReturnsTrue()
+    public function hasDescriptionWithDescriptionReturnsTrue(): void
     {
         $description = 'Foo inc.';
         $subject = \Tx_Seminars_OldModel_Speaker::fromData(['description' => $description]);
@@ -107,7 +107,7 @@ final class SpeakerTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasSkillsInitiallyIsFalse()
+    public function hasSkillsInitiallyIsFalse(): void
     {
         $subject = new \Tx_Seminars_OldModel_Speaker();
 
@@ -117,7 +117,7 @@ final class SpeakerTest extends UnitTestCase
     /**
      * @test
      */
-    public function getSkillsShortWithNoSkillReturnsEmptyString()
+    public function getSkillsShortWithNoSkillReturnsEmptyString(): void
     {
         $subject = new \Tx_Seminars_OldModel_Speaker();
 
@@ -127,7 +127,7 @@ final class SpeakerTest extends UnitTestCase
     /**
      * @test
      */
-    public function getNumberOfSkillsReturnsNumberOfSkills()
+    public function getNumberOfSkillsReturnsNumberOfSkills(): void
     {
         $subject = \Tx_Seminars_OldModel_Speaker::fromData(['skills' => 2]);
 
@@ -137,7 +137,7 @@ final class SpeakerTest extends UnitTestCase
     /**
      * @test
      */
-    public function getGenderForNoGenderSetReturnsUnknownGenderValue()
+    public function getGenderForNoGenderSetReturnsUnknownGenderValue(): void
     {
         $subject = new \Tx_Seminars_OldModel_Speaker();
 
@@ -147,7 +147,7 @@ final class SpeakerTest extends UnitTestCase
     /**
      * @test
      */
-    public function getGenderForKnownGenderReturnsGender()
+    public function getGenderForKnownGenderReturnsGender(): void
     {
         $subject = new \Tx_Seminars_OldModel_Speaker();
         $subject->setGender(\Tx_Seminars_OldModel_Speaker::GENDER_MALE);
@@ -158,7 +158,7 @@ final class SpeakerTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasCancelationPeriodWithoutCancelationPeriodReturnsFalse()
+    public function hasCancelationPeriodWithoutCancelationPeriodReturnsFalse(): void
     {
         $subject = new \Tx_Seminars_OldModel_Speaker();
 
@@ -168,7 +168,7 @@ final class SpeakerTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasCancelationPeriodWithCancelationPeriodReturnsTrue()
+    public function hasCancelationPeriodWithCancelationPeriodReturnsTrue(): void
     {
         $subject = new \Tx_Seminars_OldModel_Speaker();
         $subject->setCancelationPeriod(42);
@@ -179,7 +179,7 @@ final class SpeakerTest extends UnitTestCase
     /**
      * @test
      */
-    public function getOwnerWithoutOwnerReturnsNull()
+    public function getOwnerWithoutOwnerReturnsNull(): void
     {
         $subject = new \Tx_Seminars_OldModel_Speaker();
         self::assertNull($subject->getOwner());
@@ -188,7 +188,7 @@ final class SpeakerTest extends UnitTestCase
     /**
      * @test
      */
-    public function getOwnerWithOwnerReturnsOwner()
+    public function getOwnerWithOwnerReturnsOwner(): void
     {
         $subject = new \Tx_Seminars_OldModel_Speaker();
         /** @var \Tx_Seminars_Model_FrontEndUser $frontEndUser */
@@ -201,7 +201,7 @@ final class SpeakerTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasImageWithoutImageReturnsFalse()
+    public function hasImageWithoutImageReturnsFalse(): void
     {
         $subject = new \Tx_Seminars_OldModel_Speaker();
 
@@ -211,7 +211,7 @@ final class SpeakerTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasImageWithImageReturnsTrue()
+    public function hasImageWithImageReturnsTrue(): void
     {
         $subject = \Tx_Seminars_OldModel_Speaker::fromData(['image' => 1]);
 

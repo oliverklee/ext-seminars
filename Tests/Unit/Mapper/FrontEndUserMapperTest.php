@@ -17,7 +17,7 @@ final class FrontEndUserMapperTest extends UnitTestCase
      */
     private $subject;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new \Tx_Seminars_Mapper_FrontEndUser();
     }
@@ -25,7 +25,7 @@ final class FrontEndUserMapperTest extends UnitTestCase
     /**
      * @test
      */
-    public function isMapper()
+    public function isMapper(): void
     {
         self::assertInstanceOf(AbstractDataMapper::class, $this->subject);
     }
@@ -33,7 +33,7 @@ final class FrontEndUserMapperTest extends UnitTestCase
     /**
      * @test
      */
-    public function createFrontEndUserModel()
+    public function createFrontEndUserModel(): void
     {
         $model = $this->subject->getNewGhost();
 

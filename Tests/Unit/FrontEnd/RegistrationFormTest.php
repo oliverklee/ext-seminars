@@ -65,7 +65,7 @@ final class RegistrationFormTest extends UnitTestCase
      */
     private $event = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $frontEndProphecy = $this->prophesize(TypoScriptFrontendController::class);
         /** @var TypoScriptFrontendController $frontEnd */
@@ -88,7 +88,7 @@ final class RegistrationFormTest extends UnitTestCase
         $this->event = $this->eventProphecy->reveal();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         Session::purgeInstances();
         parent::tearDown();
@@ -97,7 +97,7 @@ final class RegistrationFormTest extends UnitTestCase
     /**
      * @test
      */
-    public function getThankYouAfterRegistrationUrlReturnsUrlStartingWithHttp()
+    public function getThankYouAfterRegistrationUrlReturnsUrlStartingWithHttp(): void
     {
         $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(self::CONFIGURATION, $this->contentObject);
 
@@ -114,7 +114,7 @@ final class RegistrationFormTest extends UnitTestCase
     /**
      * @test
      */
-    public function getThankYouAfterRegistrationUrlWithoutSendParametersNotContainsShowSeminarUid()
+    public function getThankYouAfterRegistrationUrlWithoutSendParametersNotContainsShowSeminarUid(): void
     {
         $configuration = self::CONFIGURATION;
         $configuration['sendParametersToThankYouAfterRegistrationPageUrl'] = false;
@@ -133,7 +133,7 @@ final class RegistrationFormTest extends UnitTestCase
     /**
      * @test
      */
-    public function getThankYouAfterRegistrationUrlWithSendParametersContainsShowSeminarUid()
+    public function getThankYouAfterRegistrationUrlWithSendParametersContainsShowSeminarUid(): void
     {
         $configuration = self::CONFIGURATION;
         $configuration['sendParametersToThankYouAfterRegistrationPageUrl'] = true;
@@ -162,7 +162,7 @@ final class RegistrationFormTest extends UnitTestCase
     /**
      * @test
      */
-    public function getThankYouAfterRegistrationUrlWithSendParametersEncodesBracketsInUrl()
+    public function getThankYouAfterRegistrationUrlWithSendParametersEncodesBracketsInUrl(): void
     {
         $configuration = self::CONFIGURATION;
         $configuration['sendParametersToThankYouAfterRegistrationPageUrl'] = true;
@@ -191,7 +191,7 @@ final class RegistrationFormTest extends UnitTestCase
     /**
      * @test
      */
-    public function getThankYouAfterRegistrationUrlWithoutOneTimeAccountAndLogOutEnabledNotLogsUserOff()
+    public function getThankYouAfterRegistrationUrlWithoutOneTimeAccountAndLogOutEnabledNotLogsUserOff(): void
     {
         $configuration = self::CONFIGURATION;
         $configuration['logOutOneTimeAccountsAfterRegistration'] = true;
@@ -206,7 +206,7 @@ final class RegistrationFormTest extends UnitTestCase
     /**
      * @test
      */
-    public function getThankYouAfterRegistrationUrlWithOneTimeAccountAndLogOutDisabledNotLogsUserOff()
+    public function getThankYouAfterRegistrationUrlWithOneTimeAccountAndLogOutDisabledNotLogsUserOff(): void
     {
         $this->session->setAsBoolean('onetimeaccount', true);
 
@@ -223,7 +223,7 @@ final class RegistrationFormTest extends UnitTestCase
     /**
      * @test
      */
-    public function getThankYouAfterRegistrationUrlWithoutOneTimeAccountAndLogOutDisabledNotLogsUserOff()
+    public function getThankYouAfterRegistrationUrlWithoutOneTimeAccountAndLogOutDisabledNotLogsUserOff(): void
     {
         $configuration = self::CONFIGURATION;
         $configuration['logOutOneTimeAccountsAfterRegistration'] = false;
@@ -238,7 +238,7 @@ final class RegistrationFormTest extends UnitTestCase
     /**
      * @test
      */
-    public function getThankYouAfterRegistrationUrlWithOneTimeAccountAndLogOutEnabledLogsUserOff()
+    public function getThankYouAfterRegistrationUrlWithOneTimeAccountAndLogOutEnabledLogsUserOff(): void
     {
         $this->session->setAsBoolean('onetimeaccount', true);
 
@@ -255,7 +255,7 @@ final class RegistrationFormTest extends UnitTestCase
     /**
      * @test
      */
-    public function getPageToShowAfterUnregistrationUrlReturnsUrlStartingWithHttp()
+    public function getPageToShowAfterUnregistrationUrlReturnsUrlStartingWithHttp(): void
     {
         $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(self::CONFIGURATION, $this->contentObject);
 
@@ -272,7 +272,7 @@ final class RegistrationFormTest extends UnitTestCase
     /**
      * @test
      */
-    public function getPageToShowAfterUnregistrationUrlWithoutSendParametersNotContainsShowSeminarUid()
+    public function getPageToShowAfterUnregistrationUrlWithoutSendParametersNotContainsShowSeminarUid(): void
     {
         $configuration = self::CONFIGURATION;
         $configuration['sendParametersToPageToShowAfterUnregistrationUrl'] = false;
@@ -291,7 +291,7 @@ final class RegistrationFormTest extends UnitTestCase
     /**
      * @test
      */
-    public function getPageToShowAfterUnregistrationUrlWithSendParametersContainsShowSeminarUid()
+    public function getPageToShowAfterUnregistrationUrlWithSendParametersContainsShowSeminarUid(): void
     {
         $configuration = self::CONFIGURATION;
         $configuration['sendParametersToPageToShowAfterUnregistrationUrl'] = true;
@@ -320,7 +320,7 @@ final class RegistrationFormTest extends UnitTestCase
     /**
      * @test
      */
-    public function getPageToShowAfterUnregistrationUrlWithSendParametersEncodesBracketsInUrl()
+    public function getPageToShowAfterUnregistrationUrlWithSendParametersEncodesBracketsInUrl(): void
     {
         $configuration = self::CONFIGURATION;
         $configuration['sendParametersToPageToShowAfterUnregistrationUrl'] = true;

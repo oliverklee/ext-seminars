@@ -91,7 +91,7 @@ final class MailNotifierTest extends TestCase
      */
     private $registrationDigest = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
@@ -152,7 +152,7 @@ final class MailNotifierTest extends TestCase
         $this->email = $this->createEmailMock();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         if ($this->testingFramework !== null) {
             $this->testingFramework->cleanUp();
@@ -195,10 +195,8 @@ final class MailNotifierTest extends TestCase
      * Note: This function must only be called once per test.
      *
      * @param int $eventUid event UID, must be > 0
-     *
-     * @return void
      */
-    private function addSpeaker(int $eventUid)
+    private function addSpeaker(int $eventUid): void
     {
         $speakerUid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
@@ -230,7 +228,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function createSeminarWithOrganizerCreatesSeminarRecord()
+    public function createSeminarWithOrganizerCreatesSeminarRecord(): void
     {
         $this->createSeminarWithOrganizer();
         $connection = $this->getConnectionForTable('tx_seminars_seminars');
@@ -244,7 +242,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function createSeminarWithOrganizerCreatesSeminarRecordWithAdditionalData()
+    public function createSeminarWithOrganizerCreatesSeminarRecordWithAdditionalData(): void
     {
         $this->createSeminarWithOrganizer(['title' => 'foo']);
         $connection = $this->getConnectionForTable('tx_seminars_seminars');
@@ -258,7 +256,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function createSeminarWithOrganizerCreatesOrganizerRecord()
+    public function createSeminarWithOrganizerCreatesOrganizerRecord(): void
     {
         $this->createSeminarWithOrganizer();
         $connection = $this->getConnectionForTable('tx_seminars_organizers');
@@ -272,7 +270,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function createSeminarWithOrganizerCreatesRelationBetweenSeminarAndOrganizer()
+    public function createSeminarWithOrganizerCreatesRelationBetweenSeminarAndOrganizer(): void
     {
         $this->createSeminarWithOrganizer();
         $connection = $this->getConnectionForTable('tx_seminars_seminars_organizers_mm');
@@ -286,7 +284,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function addSpeakerCreatesSpeakerRecord()
+    public function addSpeakerCreatesSpeakerRecord(): void
     {
         $this->addSpeaker($this->createSeminarWithOrganizer());
         $connection = $this->getConnectionForTable('tx_seminars_speakers');
@@ -300,7 +298,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function addSpeakerCreatesSpeakerRelation()
+    public function addSpeakerCreatesSpeakerRelation(): void
     {
         $this->addSpeaker($this->createSeminarWithOrganizer());
         $connection = $this->getConnectionForTable('tx_seminars_seminars_speakers_mm');
@@ -314,7 +312,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function addSpeakerSetsNumberOfSpeakersToOneForTheSeminarWithTheProvidedUid()
+    public function addSpeakerSetsNumberOfSpeakersToOneForTheSeminarWithTheProvidedUid(): void
     {
         $this->addSpeaker($this->createSeminarWithOrganizer());
         $connection = $this->getConnectionForTable('tx_seminars_seminars');
@@ -332,7 +330,7 @@ final class MailNotifierTest extends TestCase
      *
      * @doesNotPerformAssertions
      */
-    public function classCanBeInstantiated()
+    public function classCanBeInstantiated(): void
     {
         new MailNotifier();
     }
@@ -340,7 +338,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function classIsSchedulerTask()
+    public function classIsSchedulerTask(): void
     {
         self::assertInstanceOf(AbstractTask::class, $this->subject);
     }
@@ -348,7 +346,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function setConfigurationPageUidSetsConfigiurationPageUid()
+    public function setConfigurationPageUidSetsConfigiurationPageUid(): void
     {
         $uid = 42;
         $this->subject->setConfigurationPageUid($uid);
@@ -361,7 +359,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function executeWithoutPageConfigurationReturnsFalse()
+    public function executeWithoutPageConfigurationReturnsFalse(): void
     {
         $result = (new MailNotifier())->execute();
 
@@ -371,7 +369,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function executeWithZeroPageConfigurationReturnsFalse()
+    public function executeWithZeroPageConfigurationReturnsFalse(): void
     {
         $subject = new MailNotifier();
         $subject->setConfigurationPageUid(0);
@@ -384,7 +382,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function executeWithPageConfigurationReturnsTrue()
+    public function executeWithPageConfigurationReturnsTrue(): void
     {
         $subject = new MailNotifier();
         $pageUid = $this->testingFramework->createFrontEndPage();
@@ -398,7 +396,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function executeWithPageConfigurationCallsAllSeparateSteps()
+    public function executeWithPageConfigurationCallsAllSeparateSteps(): void
     {
         /** @var MailNotifier&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -418,7 +416,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function executeWithoutPageConfigurationNotCallsAnySeparateStep()
+    public function executeWithoutPageConfigurationNotCallsAnySeparateStep(): void
     {
         /** @var MailNotifier&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -437,7 +435,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function executeWithPageConfigurationExecutesRegistrationDigest()
+    public function executeWithPageConfigurationExecutesRegistrationDigest(): void
     {
 
         /** @var MailNotifier&MockObject&AccessibleObject $subject */
@@ -464,7 +462,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendEventTakesPlaceRemindersForConfirmedEventWithinConfiguredTimeFrameSendsReminder()
+    public function sendEventTakesPlaceRemindersForConfirmedEventWithinConfiguredTimeFrameSendsReminder(): void
     {
         $this->createSeminarWithOrganizer(
             [
@@ -482,7 +480,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendEventTakesPlaceRemindersSendsReminderWithEventTakesPlaceSubject()
+    public function sendEventTakesPlaceRemindersSendsReminderWithEventTakesPlaceSubject(): void
     {
         /** @var \Tx_Seminars_Model_BackEndUser $user */
         $user = BackEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
@@ -512,7 +510,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendEventTakesPlaceRemindersSendsReminderWithEventTakesPlaceMessage()
+    public function sendEventTakesPlaceRemindersSendsReminderWithEventTakesPlaceMessage(): void
     {
         /** @var \Tx_Seminars_Model_BackEndUser $user */
         $user = BackEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
@@ -542,7 +540,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendEventTakesPlaceRemindersForTwoConfirmedEventsWithinConfiguredTimeFrameSendsTwoReminders()
+    public function sendEventTakesPlaceRemindersForTwoConfirmedEventsWithinConfiguredTimeFrameSendsTwoReminders(): void
     {
         $this->createSeminarWithOrganizer(
             [
@@ -567,7 +565,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendEventTakesPlaceRemindersForConfirmedWithTwoOrganizersAndWithinTimeFrameSendsTwoReminders()
+    public function sendEventTakesPlaceRemindersForConfirmedWithTwoOrganizersAndWithinTimeFrameSendsTwoReminders(): void
     {
         $eventUid = $this->createSeminarWithOrganizer(
             [
@@ -592,7 +590,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendEventTakesPlaceRemindersSetsSentFlagInTheDatabaseWhenReminderWasSent()
+    public function sendEventTakesPlaceRemindersSetsSentFlagInTheDatabaseWhenReminderWasSent(): void
     {
         $this->createSeminarWithOrganizer(
             [
@@ -616,7 +614,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendEventTakesPlaceRemindersForConfirmedWithinTimeFrameAndReminderSentFlagTrueSendsNoReminder()
+    public function sendEventTakesPlaceRemindersForConfirmedWithinTimeFrameAndReminderSentFlagTrueSendsNoReminder(): void
     {
         $this->createSeminarWithOrganizer(
             [
@@ -635,7 +633,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendEventTakesPlaceRemindersForConfirmedEventWithPassedBeginDateSendsNoReminder()
+    public function sendEventTakesPlaceRemindersForConfirmedEventWithPassedBeginDateSendsNoReminder(): void
     {
         $this->createSeminarWithOrganizer(
             [
@@ -653,7 +651,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendEventTakesPlaceRemindersForConfirmedEventBeginningLaterThanConfiguredTimeFrameSendsNoReminder()
+    public function sendEventTakesPlaceRemindersForConfirmedEventBeginningLaterThanConfiguredTimeFrameSendsNoReminder(): void
     {
         $this->createSeminarWithOrganizer(
             [
@@ -671,7 +669,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendEventTakesPlaceRemindersForConfirmedEventAndNoTimeFrameConfiguredSendsNoReminder()
+    public function sendEventTakesPlaceRemindersForConfirmedEventAndNoTimeFrameConfiguredSendsNoReminder(): void
     {
         $this->createSeminarWithOrganizer(
             [
@@ -690,7 +688,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendEventTakesPlaceRemindersForCanceledEventWithinConfiguredTimeFrameSendsNoReminder()
+    public function sendEventTakesPlaceRemindersForCanceledEventWithinConfiguredTimeFrameSendsNoReminder(): void
     {
         $this->createSeminarWithOrganizer(
             [
@@ -708,7 +706,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendEventTakesPlaceRemindersForPlannedEventWithinConfiguredTimeFrameSendsNoReminder()
+    public function sendEventTakesPlaceRemindersForPlannedEventWithinConfiguredTimeFrameSendsNoReminder(): void
     {
         $this->createSeminarWithOrganizer(
             [
@@ -728,7 +726,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendCancellationDeadlineRemindersForPlannedEventAndOptionEnabledSendsReminder()
+    public function sendCancellationDeadlineRemindersForPlannedEventAndOptionEnabledSendsReminder(): void
     {
         $this->addSpeaker(
             $this->createSeminarWithOrganizer(
@@ -748,7 +746,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendCancellationDeadlineRemindersSendsReminderWithCancelationDeadlineSubject()
+    public function sendCancellationDeadlineRemindersSendsReminderWithCancelationDeadlineSubject(): void
     {
         /** @var \Tx_Seminars_Model_BackEndUser $user */
         $user = BackEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
@@ -780,7 +778,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendCancellationDeadlineRemindersSendsReminderWithCancelationDeadlineMessage()
+    public function sendCancellationDeadlineRemindersSendsReminderWithCancelationDeadlineMessage(): void
     {
         /** @var \Tx_Seminars_Model_BackEndUser $user */
         $user = BackEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
@@ -811,7 +809,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendCancellationDeadlineRemindersForTwoPlannedEventsAndOptionEnabledSendsTwoReminders()
+    public function sendCancellationDeadlineRemindersForTwoPlannedEventsAndOptionEnabledSendsTwoReminders(): void
     {
         $this->addSpeaker(
             $this->createSeminarWithOrganizer(
@@ -840,7 +838,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendCancellationDeadlineRemindersForPlannedEventWithTwoOrganizersAndOptionEnabledSendsTwoReminders()
+    public function sendCancellationDeadlineRemindersForPlannedEventWithTwoOrganizersAndOptionEnabledSendsTwoReminders(): void
     {
         $eventUid = $this->createSeminarWithOrganizer(
             [
@@ -874,7 +872,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendCancellationDeadlineRemindersSetsFlagInTheDatabaseWhenReminderWasSent()
+    public function sendCancellationDeadlineRemindersSetsFlagInTheDatabaseWhenReminderWasSent(): void
     {
         $this->addSpeaker(
             $this->createSeminarWithOrganizer(
@@ -900,7 +898,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendCancellationDeadlineRemindersForPlannedAndOptionEnabledAndReminderSentFlagTrueSendsNoReminder()
+    public function sendCancellationDeadlineRemindersForPlannedAndOptionEnabledAndReminderSentFlagTrueSendsNoReminder(): void
     {
         $this->addSpeaker(
             $this->createSeminarWithOrganizer(
@@ -921,7 +919,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendCancellationDeadlineRemindersForPlannedEventWithPassedBeginDateSendsNoReminder()
+    public function sendCancellationDeadlineRemindersForPlannedEventWithPassedBeginDateSendsNoReminder(): void
     {
         $this->addSpeaker(
             $this->createSeminarWithOrganizer(
@@ -941,7 +939,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendCancellationDeadlineRemindersForPlannedEventWithSpeakersDeadlineNotYetReachedSendsNoReminder()
+    public function sendCancellationDeadlineRemindersForPlannedEventWithSpeakersDeadlineNotYetReachedSendsNoReminder(): void
     {
         $this->addSpeaker(
             $this->createSeminarWithOrganizer(
@@ -961,7 +959,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendCancellationDeadlineRemindersForPlannedEventAndOptionDisabledSendsNoReminder()
+    public function sendCancellationDeadlineRemindersForPlannedEventAndOptionDisabledSendsNoReminder(): void
     {
         $this->addSpeaker(
             $this->createSeminarWithOrganizer(
@@ -982,7 +980,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendCancellationDeadlineRemindersForCanceledEventAndOptionEnabledSendsNoReminder()
+    public function sendCancellationDeadlineRemindersForCanceledEventAndOptionEnabledSendsNoReminder(): void
     {
         $this->addSpeaker(
             $this->createSeminarWithOrganizer(
@@ -1002,7 +1000,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendCancellationDeadlineRemindersForConfirmedEventAndOptionEnabledSendsNoReminder()
+    public function sendCancellationDeadlineRemindersForConfirmedEventAndOptionEnabledSendsNoReminder(): void
     {
         $this->addSpeaker(
             $this->createSeminarWithOrganizer(
@@ -1028,7 +1026,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendRemindersToOrganizersSendsEmailWithOrganizerAsRecipient()
+    public function sendRemindersToOrganizersSendsEmailWithOrganizerAsRecipient(): void
     {
         $this->createSeminarWithOrganizer(
             [
@@ -1051,7 +1049,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendRemindersToOrganizersSendsEmailWithTypo3DefaultFromAddressAsSender()
+    public function sendRemindersToOrganizersSendsEmailWithTypo3DefaultFromAddressAsSender(): void
     {
         $this->createSeminarWithOrganizer(
             [
@@ -1079,7 +1077,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendRemindersToOrganizersForEventWithTwoOrganizersSendsEmailWithTypo3DefaultFromAddressAsSender()
+    public function sendRemindersToOrganizersForEventWithTwoOrganizersSendsEmailWithTypo3DefaultFromAddressAsSender(): void
     {
         $eventUid = $this->createSeminarWithOrganizer(
             [
@@ -1114,7 +1112,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendRemindersToOrganizersForEventWithTwoOrganizersSendsEmailWithFirstOrganizerAsReplyTo()
+    public function sendRemindersToOrganizersForEventWithTwoOrganizersSendsEmailWithFirstOrganizerAsReplyTo(): void
     {
         $eventUid = $this->createSeminarWithOrganizer(
             [
@@ -1147,7 +1145,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendRemindersToOrganizersWithoutTypo3DefaultFromAddressSendsEmailWithOrganizerAsSender()
+    public function sendRemindersToOrganizersWithoutTypo3DefaultFromAddressSendsEmailWithOrganizerAsSender(): void
     {
         $this->createSeminarWithOrganizer(
             [
@@ -1173,7 +1171,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendRemindersToOrganizersForEventWithTwoOrganizersWithoutTypo3DefaultFromAddressSendsEmailWithFirstOrganizerAsSender()
+    public function sendRemindersToOrganizersForEventWithTwoOrganizersWithoutTypo3DefaultFromAddressSendsEmailWithFirstOrganizerAsSender(): void
     {
         $eventUid = $this->createSeminarWithOrganizer(
             [
@@ -1208,7 +1206,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendRemindersToOrganizersForEventWithNoAttendancesAndAttachCsvFileTrueNotAttachesRegistrationsCsv()
+    public function sendRemindersToOrganizersForEventWithNoAttendancesAndAttachCsvFileTrueNotAttachesRegistrationsCsv(): void
     {
         $this->configuration->setAsBoolean('addRegistrationCsvToOrganizerReminderMail', true);
 
@@ -1233,7 +1231,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendRemindersToOrganizersForEventWithAttendancesAndAttachCsvFileTrueAttachesRegistrationsCsv()
+    public function sendRemindersToOrganizersForEventWithAttendancesAndAttachCsvFileTrueAttachesRegistrationsCsv(): void
     {
         $this->configuration->setAsBoolean('addRegistrationCsvToOrganizerReminderMail', true);
 
@@ -1267,7 +1265,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendRemindersToOrganizersForEventWithAttendancesAndAttachCsvFileFalseNotAttachesRegistrationsCsv()
+    public function sendRemindersToOrganizersForEventWithAttendancesAndAttachCsvFileFalseNotAttachesRegistrationsCsv(): void
     {
         $this->configuration->setAsBoolean('addRegistrationCsvToOrganizerReminderMail', false);
         $eventUid = $this->createSeminarWithOrganizer(
@@ -1299,7 +1297,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendRemindersToOrganizersSendsEmailWithCsvFileWhichContainsRegistration()
+    public function sendRemindersToOrganizersSendsEmailWithCsvFileWhichContainsRegistration(): void
     {
         $this->configuration->setAsBoolean('addRegistrationCsvToOrganizerReminderMail', true);
         $eventUid = $this->createSeminarWithOrganizer(
@@ -1331,7 +1329,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendRemindersToOrganizersSendsEmailWithCsvFileWithOfFrontEndUserData()
+    public function sendRemindersToOrganizersSendsEmailWithCsvFileWithOfFrontEndUserData(): void
     {
         $this->configuration->setAsBoolean('addRegistrationCsvToOrganizerReminderMail', true);
         $this->configuration->setAsString('fieldsFromFeUserForEmailCsv', 'email');
@@ -1366,7 +1364,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendRemindersToOrganizersForShowAttendancesOnQueueInEmailCsvSendsEmailWithRegistrationsOnQueue()
+    public function sendRemindersToOrganizersForShowAttendancesOnQueueInEmailCsvSendsEmailWithRegistrationsOnQueue(): void
     {
         $this->configuration->setAsBoolean('addRegistrationCsvToOrganizerReminderMail', true);
         $eventUid = $this->createSeminarWithOrganizer(
@@ -1408,7 +1406,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendRemindersToOrganizersForShowAttendancesOnQueueFalseSendsWithCsvFileWithoutQueueAttendances()
+    public function sendRemindersToOrganizersForShowAttendancesOnQueueFalseSendsWithCsvFileWithoutQueueAttendances(): void
     {
         $this->configuration->setAsBoolean('addRegistrationCsvToOrganizerReminderMail', true);
         $this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInEmailCsv', false);
@@ -1454,7 +1452,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendRemindersToOrganizersSendsReminderWithSubjectWithEventTitle()
+    public function sendRemindersToOrganizersSendsReminderWithSubjectWithEventTitle(): void
     {
         $this->createSeminarWithOrganizer(
             [
@@ -1478,7 +1476,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendRemindersToOrganizersSendsReminderWithSubjectWithDaysUntilBeginDate()
+    public function sendRemindersToOrganizersSendsReminderWithSubjectWithDaysUntilBeginDate(): void
     {
         $this->createSeminarWithOrganizer(
             [
@@ -1503,7 +1501,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendRemindersToOrganizersSendsReminderWithMessageWithOrganizerName()
+    public function sendRemindersToOrganizersSendsReminderWithMessageWithOrganizerName(): void
     {
         $this->createSeminarWithOrganizer(
             [
@@ -1526,7 +1524,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendRemindersToOrganizersSendsReminderWithMessageWithEventTitle()
+    public function sendRemindersToOrganizersSendsReminderWithMessageWithEventTitle(): void
     {
         $this->createSeminarWithOrganizer(
             [
@@ -1550,7 +1548,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendRemindersToOrganizersSendsReminderWithMessageWithEventUid()
+    public function sendRemindersToOrganizersSendsReminderWithMessageWithEventUid(): void
     {
         $uid = $this->createSeminarWithOrganizer(
             [
@@ -1573,7 +1571,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendRemindersToOrganizersSendsReminderWithMessageWithDaysUntilBeginDate()
+    public function sendRemindersToOrganizersSendsReminderWithMessageWithDaysUntilBeginDate(): void
     {
         $this->createSeminarWithOrganizer(
             [
@@ -1596,7 +1594,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendRemindersToOrganizersSendsReminderWithMessageWithEventsBeginDate()
+    public function sendRemindersToOrganizersSendsReminderWithMessageWithEventsBeginDate(): void
     {
         $this->addSpeaker(
             $this->createSeminarWithOrganizer(
@@ -1624,7 +1622,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendRemindersToOrganizersForEventWithNoRegistrationSendsReminderWithNumberOfRegistrations()
+    public function sendRemindersToOrganizersForEventWithNoRegistrationSendsReminderWithNumberOfRegistrations(): void
     {
         $this->createSeminarWithOrganizer(
             [
@@ -1647,7 +1645,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function sendRemindersToOrganizersForEventWithOneRegistrationsSendsReminderWithNumberOfRegistrations()
+    public function sendRemindersToOrganizersForEventWithOneRegistrationsSendsReminderWithNumberOfRegistrations(): void
     {
         $eventUid = $this->createSeminarWithOrganizer(
             [
@@ -1682,7 +1680,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function automaticallyChangeEventStatusesForNoEventsForStatusChangeNotRequestsStatusChange()
+    public function automaticallyChangeEventStatusesForNoEventsForStatusChangeNotRequestsStatusChange(): void
     {
         $events = new Collection();
         $this->eventMapper->expects(self::once())->method(
@@ -1697,7 +1695,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function automaticallyChangeEventStatusesForNoEventsForStatusChangeSendsNoEmail()
+    public function automaticallyChangeEventStatusesForNoEventsForStatusChangeSendsNoEmail(): void
     {
         $events = new Collection();
         $this->eventMapper->expects(self::once())->method(
@@ -1712,7 +1710,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function automaticallyChangeEventStatusesForOneEventForStatusChangeRequestsStatusChangeWithThatEvent()
+    public function automaticallyChangeEventStatusesForOneEventForStatusChangeRequestsStatusChangeWithThatEvent(): void
     {
         $events = new Collection();
         $event = new \Tx_Seminars_Model_Event();
@@ -1731,7 +1729,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function automaticallyChangeEventStatusesForOneEventWithNoStatusChangeNeededNotSendsEmail()
+    public function automaticallyChangeEventStatusesForOneEventWithNoStatusChangeNeededNotSendsEmail(): void
     {
         $events = new Collection();
         $event = new \Tx_Seminars_Model_Event();
@@ -1750,7 +1748,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function automaticallyChangeEventStatusesForOneEventWithConfirmedStatusChangeSendsEmail()
+    public function automaticallyChangeEventStatusesForOneEventWithConfirmedStatusChangeSendsEmail(): void
     {
         $events = new Collection();
         $event = new \Tx_Seminars_Model_Event();
@@ -1771,7 +1769,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function automaticallyChangeEventStatusesForOneEventWithConfirmedStatusChangeSendsEmailWithConfirmSubject()
+    public function automaticallyChangeEventStatusesForOneEventWithConfirmedStatusChangeSendsEmailWithConfirmSubject(): void
     {
         $events = new Collection();
         $event = new \Tx_Seminars_Model_Event();
@@ -1793,7 +1791,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function automaticallyChangeEventStatusesForOneEventWithConfirmedStatusChangeSendsEmailWithConfirmBody()
+    public function automaticallyChangeEventStatusesForOneEventWithConfirmedStatusChangeSendsEmailWithConfirmBody(): void
     {
         $events = new Collection();
         $event = new \Tx_Seminars_Model_Event();
@@ -1815,7 +1813,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function automaticallyChangeEventStatusesForTwoEventsWithConfirmedStatusChangeSendsTwoEmails()
+    public function automaticallyChangeEventStatusesForTwoEventsWithConfirmedStatusChangeSendsTwoEmails(): void
     {
         $events = new Collection();
         $event1 = new \Tx_Seminars_Model_Event();
@@ -1838,7 +1836,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function automaticallyChangeEventStatusesForOneEventWithCanceledStatusChangeSendsEmail()
+    public function automaticallyChangeEventStatusesForOneEventWithCanceledStatusChangeSendsEmail(): void
     {
         $events = new Collection();
         $event = new \Tx_Seminars_Model_Event();
@@ -1859,7 +1857,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function automaticallyChangeEventStatusesForOneEventWithCanceledStatusChangeSendsEmailWithCancelSubject()
+    public function automaticallyChangeEventStatusesForOneEventWithCanceledStatusChangeSendsEmailWithCancelSubject(): void
     {
         $events = new Collection();
         $event = new \Tx_Seminars_Model_Event();
@@ -1881,7 +1879,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function automaticallyChangeEventStatusesForOneEventWithCanceledStatusChangeSendsEmailWithCancelBody()
+    public function automaticallyChangeEventStatusesForOneEventWithCanceledStatusChangeSendsEmailWithCancelBody(): void
     {
         $events = new Collection();
         $event = new \Tx_Seminars_Model_Event();
@@ -1903,7 +1901,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function automaticallyChangeEventStatusesForTwoEventsWithCanceledStatusChangeSendsTwoEmails()
+    public function automaticallyChangeEventStatusesForTwoEventsWithCanceledStatusChangeSendsTwoEmails(): void
     {
         $events = new Collection();
         $event1 = new \Tx_Seminars_Model_Event();
@@ -1926,7 +1924,7 @@ final class MailNotifierTest extends TestCase
     /**
      * @test
      */
-    public function automaticallyChangeEventStatusesForOneEventWithPlannedStatusChangeThrowsException()
+    public function automaticallyChangeEventStatusesForOneEventWithPlannedStatusChangeThrowsException(): void
     {
         $this->expectException(\UnexpectedValueException::class);
 
