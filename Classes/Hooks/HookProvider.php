@@ -90,10 +90,8 @@ class HookProvider
      *
      * @param string $method the method to execute
      * @param mixed $params parameters to `$method()`
-     *
-     * @return void
      */
-    public function executeHook(string $method, ...$params)
+    public function executeHook(string $method, ...$params): void
     {
         $this->validateHookMethod($method);
 
@@ -158,11 +156,9 @@ class HookProvider
     /**
      * Retrieves the hook objects for the interface.
      *
-     * @return void
-     *
      * @throws \UnexpectedValueException
      */
-    protected function retrieveHooks()
+    protected function retrieveHooks(): void
     {
         if ($this->hooksHaveBeenRetrieved) {
             return;
@@ -189,12 +185,10 @@ class HookProvider
      *
      * @param string $method the method to execute
      *
-     * @return void
-     *
      * @throws \InvalidArgumentException
      * @throws \UnexpectedValueException
      */
-    protected function validateHookMethod(string $method)
+    protected function validateHookMethod(string $method): void
     {
         if ($method === '') {
             throw new \InvalidArgumentException('The parameter $method must not be empty.', 1573479911);

@@ -16,5 +16,5 @@ interface TestingHookInterface extends Hook
     /**
      * Gets called during HookProvider tests.
      */
-    public function testHookMethod();
+    public function testHookMethod(): void;
 }

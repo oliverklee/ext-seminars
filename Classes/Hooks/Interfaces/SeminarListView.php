@@ -27,14 +27,12 @@ interface SeminarListView extends Hook
      * @param \Tx_Seminars_BagBuilder_Event $builder the bag builder
      * @param string $whatToDisplay the flavor of list view: 'seminar_list', 'topic_list',
      *        'my_vip_events', 'my_entered_events', 'events_next_day' or 'other_dates'
-     *
-     * @return void
      */
     public function modifyEventBagBuilder(
         \Tx_Seminars_FrontEnd_DefaultController $controller,
         \Tx_Seminars_BagBuilder_Event $builder,
         string $whatToDisplay
-    );
+    ): void;
 
     /**
      * Modifies the list view registration bag builder (the item collection for a "my events" list).
@@ -50,14 +48,12 @@ interface SeminarListView extends Hook
      * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
      * @param \Tx_Seminars_BagBuilder_Registration $builder the bag builder
      * @param string $whatToDisplay the flavor of list view ('my_events' only?)
-     *
-     * @return void
      */
     public function modifyRegistrationBagBuilder(
         \Tx_Seminars_FrontEnd_DefaultController $controller,
         \Tx_Seminars_BagBuilder_Registration $builder,
         string $whatToDisplay
-    );
+    ): void;
 
     /**
      * Modifies the list view header row in a seminar list.
@@ -67,10 +63,8 @@ interface SeminarListView extends Hook
      * "events next day", "other dates").
      *
      * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
-     *
-     * @return void
      */
-    public function modifyListHeader(\Tx_Seminars_FrontEnd_DefaultController $controller);
+    public function modifyListHeader(\Tx_Seminars_FrontEnd_DefaultController $controller): void;
 
     /**
      * Modifies a list row in a seminar list.
@@ -80,10 +74,8 @@ interface SeminarListView extends Hook
      * "events next day", "other dates").
      *
      * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
-     *
-     * @return void
      */
-    public function modifyListRow(\Tx_Seminars_FrontEnd_DefaultController $controller);
+    public function modifyListRow(\Tx_Seminars_FrontEnd_DefaultController $controller): void;
 
     /**
      * Modifies a list view row in a "my seminars" list.
@@ -92,10 +84,8 @@ interface SeminarListView extends Hook
      * "my entered events" lists only.
      *
      * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
-     *
-     * @return void
      */
-    public function modifyMyEventsListRow(\Tx_Seminars_FrontEnd_DefaultController $controller);
+    public function modifyMyEventsListRow(\Tx_Seminars_FrontEnd_DefaultController $controller): void;
 
     /**
      * Modifies the list view footer in a seminars list.
@@ -105,8 +95,6 @@ interface SeminarListView extends Hook
      * "events next day", "other dates").
      *
      * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
-     *
-     * @return void
      */
-    public function modifyListFooter(\Tx_Seminars_FrontEnd_DefaultController $controller);
+    public function modifyListFooter(\Tx_Seminars_FrontEnd_DefaultController $controller): void;
 }

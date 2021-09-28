@@ -9,11 +9,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures;
  */
 class TestingRegistrationManager extends \Tx_Seminars_Service_RegistrationManager
 {
-    /**
-     * @param \Tx_Seminars_Model_Registration $registration
-     * @param array $formData
-     */
-    public function setRegistrationData(\Tx_Seminars_Model_Registration $registration, array $formData)
+    public function setRegistrationData(\Tx_Seminars_Model_Registration $registration, array $formData): void
     {
         parent::setRegistrationData($registration, $formData);
     }

@@ -17,8 +17,6 @@ interface SeminarSingleView extends Hook
      * This function will be called for all types of seminars (single events, topics, and dates).
      *
      * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
-     *
-     * @return void
      */
-    public function modifySingleView(\Tx_Seminars_FrontEnd_DefaultController $controller);
+    public function modifySingleView(\Tx_Seminars_FrontEnd_DefaultController $controller): void;
 }

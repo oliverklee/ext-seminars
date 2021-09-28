@@ -16,11 +16,9 @@ interface SeminarSelectorWidget extends Hook
      *
      * @param \Tx_Seminars_FrontEnd_SelectorWidget $selectorWidget
      * @param \Tx_Seminars_Bag_Event $seminarBag the seminars used to create the selector widget
-     *
-     * @return void
      */
     public function modifySelectorWidget(
         \Tx_Seminars_FrontEnd_SelectorWidget $selectorWidget,
         \Tx_Seminars_Bag_Event $seminarBag
-    );
+    ): void;
 }

@@ -24,34 +24,22 @@ class TestingDefaultController extends \Tx_Seminars_FrontEnd_DefaultController
         return parent::mayCurrentUserEditCurrentEvent();
     }
 
-    /**
-     * @return void
-     */
-    public function processEventEditorActions()
+    public function processEventEditorActions(): void
     {
         parent::processEventEditorActions();
     }
 
-    /**
-     * @param \Tx_Seminars_Model_Event $event
-     */
-    public function hideEvent(\Tx_Seminars_Model_Event $event)
+    public function hideEvent(\Tx_Seminars_Model_Event $event): void
     {
         parent::hideEvent($event);
     }
 
-    /**
-     * @param \Tx_Seminars_Model_Event $event
-     */
-    public function unhideEvent(\Tx_Seminars_Model_Event $event)
+    public function unhideEvent(\Tx_Seminars_Model_Event $event): void
     {
         parent::unhideEvent($event);
     }
 
-    /**
-     * @param \Tx_Seminars_Model_Event $event
-     */
-    public function copyEvent(\Tx_Seminars_Model_Event $event)
+    public function copyEvent(\Tx_Seminars_Model_Event $event): void
     {
         parent::copyEvent($event);
     }

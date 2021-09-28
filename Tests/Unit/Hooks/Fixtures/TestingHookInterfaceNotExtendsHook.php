@@ -11,8 +11,5 @@ namespace OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures;
  */
 interface TestingHookInterfaceNotExtendsHook
 {
-    /**
-     * @return void
-     */
-    public function testHookMethod();
+    public function testHookMethod(): void;
 }
