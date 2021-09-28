@@ -27,11 +27,9 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends AbstractList
      *
      * @param int $pageUid the page UID of the records, must be >= 0
      *
-     * @return void
-     *
      * @throws \InvalidArgumentException
      */
-    public function setPageUid(int $pageUid)
+    public function setPageUid(int $pageUid): void
     {
         if ($pageUid < 0) {
             throw new \InvalidArgumentException('$pageUid must be >= 0, but actually is: ' . $pageUid, 1390307753);
@@ -45,11 +43,9 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends AbstractList
      *
      * @param int $eventUid the event UID of the registrations, must be >= 0
      *
-     * @return void
-     *
      * @throws \InvalidArgumentException
      */
-    public function setEventUid(int $eventUid)
+    public function setEventUid(int $eventUid): void
     {
         if ($eventUid < 0) {
             throw new \InvalidArgumentException('$eventUid must be >= 0, but actually is: ' . $eventUid, 1390320633);
@@ -70,8 +66,6 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends AbstractList
 
     /**
      * Checks whether a non-zero event UID has been set.
-     *
-     * @return bool
      */
     protected function hasEventUid(): bool
     {
@@ -79,10 +73,6 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends AbstractList
     }
 
     /**
-     * Renders this CSV list.
-     *
-     * @return string
-     *
      * @throws \BadMethodCallException
      */
     public function render(): string
@@ -200,8 +190,6 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends AbstractList
 
     /**
      * Checks whether the export should also contain registrations that are on the queue.
-     *
-     * @return bool
      */
     abstract protected function shouldAlsoContainRegistrationsOnQueue(): bool;
 
@@ -210,8 +198,8 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends AbstractList
      *
      * The fields are separated by semicolons and the lines by CRLF.
      *
-     * @param \Tx_Seminars_BagBuilder_Registration $builder
-     *        the bag builder already limited to the registrations which should be returned
+     * @param \Tx_Seminars_BagBuilder_Registration $builder the bag builder already limited to the registrations
+     *        which should be returned
      *
      * @return string[] the list of registrations, will be empty if no registrations have been given
      *

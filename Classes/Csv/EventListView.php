@@ -27,11 +27,9 @@ class EventListView extends AbstractListView
      *
      * @param int $pageUid the page UID of the records, must be > 0
      *
-     * @return void
-     *
      * @throws \InvalidArgumentException
      */
-    public function setPageUid(int $pageUid)
+    public function setPageUid(int $pageUid): void
     {
         if ($pageUid <= 0) {
             throw new \InvalidArgumentException('$pageUid must be > 0, but actually is: ' . $pageUid, 1390329634);
@@ -50,11 +48,6 @@ class EventListView extends AbstractListView
         return $this->configuration->getAsTrimmedArray('fieldsFromEventsForCsv');
     }
 
-    /**
-     * Renders this CSV list.
-     *
-     * @return string
-     */
     public function render(): string
     {
         if (!$this->hasPageUid()) {

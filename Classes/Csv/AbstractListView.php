@@ -50,9 +50,6 @@ abstract class AbstractListView
      */
     protected $configuration = null;
 
-    /**
-     * The constructor.
-     */
     public function __construct()
     {
         $this->configuration = ConfigurationRegistry::get('plugin.tx_seminars');
@@ -70,8 +67,6 @@ abstract class AbstractListView
 
     /**
      * Loads the language data and returns the corresponding translator instance.
-     *
-     * @return LanguageService
      */
     protected function getInitializedTranslator(): LanguageService
     {
@@ -101,10 +96,8 @@ abstract class AbstractListView
      * Includes additional language files for $this->translator.
      *
      * This function is intended to be overwritten in subclasses.
-     *
-     * @return void
      */
-    protected function includeAdditionalLanguageFiles()
+    protected function includeAdditionalLanguageFiles(): void
     {
     }
 
@@ -113,11 +106,9 @@ abstract class AbstractListView
      *
      * @param int $pageUid the page UID of the records
      *
-     * @return void
-     *
      * @throws \InvalidArgumentException
      */
-    abstract public function setPageUid(int $pageUid);
+    abstract public function setPageUid(int $pageUid): void;
 
     /**
      * Returns the page UID of the records to check.
@@ -131,8 +122,6 @@ abstract class AbstractListView
 
     /**
      * Checks whether a non-zero page UID has been set.
-     *
-     * @return bool
      */
     protected function hasPageUid(): bool
     {
@@ -141,26 +130,17 @@ abstract class AbstractListView
 
     /**
      * Returns the name of the main table for this CSV export.
-     *
-     * @return string
      */
     protected function getTableName(): string
     {
         return $this->tableName;
     }
 
-    /**
-     * Renders this CSV list.
-     *
-     * @return string
-     */
     abstract public function render(): string;
 
     /**
      * Depending on the configuration, either returns the first line containing the specification of the separator character
      * or just an empty string.
-     *
-     * @return string
      */
     protected function createCsvSeparatorLine(): string
     {
@@ -197,10 +177,6 @@ abstract class AbstractListView
 
     /**
      * Escapes a single field for CSV.
-     *
-     * @param string $fieldContent
-     *
-     * @return string
      */
     protected function escapeFieldForCsv(string $fieldContent): string
     {

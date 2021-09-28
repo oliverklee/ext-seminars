@@ -31,8 +31,6 @@ class DownloadRegistrationListView extends \Tx_Seminars_Csv_AbstractRegistration
 
     /**
      * Checks whether the export should also contain registrations that are on the queue.
-     *
-     * @return bool
      */
     protected function shouldAlsoContainRegistrationsOnQueue(): bool
     {
