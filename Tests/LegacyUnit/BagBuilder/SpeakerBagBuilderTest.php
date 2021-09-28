@@ -20,7 +20,7 @@ final class SpeakerBagBuilderTest extends TestCase
      */
     private $testingFramework = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
 
@@ -28,7 +28,7 @@ final class SpeakerBagBuilderTest extends TestCase
         $this->subject->setTestMode();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
     }
@@ -40,7 +40,7 @@ final class SpeakerBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function builderBuildsABag()
+    public function builderBuildsABag(): void
     {
         self::assertInstanceOf(AbstractBag::class, $this->subject->build());
     }

@@ -18,7 +18,7 @@ final class EmailTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function createEmailMockCreatesMock()
+    public function createEmailMockCreatesMock(): void
     {
         $mock = $this->createEmailMock();
 
@@ -28,7 +28,7 @@ final class EmailTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function createEmailMockCreatesMailMessage()
+    public function createEmailMockCreatesMailMessage(): void
     {
         $mock = $this->createEmailMock();
 
@@ -38,7 +38,7 @@ final class EmailTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function mocksTheSendMethod()
+    public function mocksTheSendMethod(): void
     {
         $mock = $this->createEmailMock();
         $mock->expects(self::once())->method('send');
@@ -49,7 +49,7 @@ final class EmailTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function mockRemembersTo()
+    public function mockRemembersTo(): void
     {
         $mock = $this->createEmailMock();
         $mock->setTo('max@example.com', 'Max');
@@ -60,7 +60,7 @@ final class EmailTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function mockRemembersFrom()
+    public function mockRemembersFrom(): void
     {
         $mock = $this->createEmailMock();
         $mock->setFrom('max@example.com', 'Max');
@@ -71,7 +71,7 @@ final class EmailTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function mockRemembersReplyTo()
+    public function mockRemembersReplyTo(): void
     {
         $mock = $this->createEmailMock();
         $mock->setReplyTo('max@example.com', 'Max');
@@ -82,7 +82,7 @@ final class EmailTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function mockRemembersSubject()
+    public function mockRemembersSubject(): void
     {
         $subject = 'What is love?';
         $mock = $this->createEmailMock();
@@ -94,7 +94,7 @@ final class EmailTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function mockRemembersBody()
+    public function mockRemembersBody(): void
     {
         $body = 'What is love?';
         $mock = $this->createEmailMock();

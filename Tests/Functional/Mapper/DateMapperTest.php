@@ -22,7 +22,7 @@ final class DateMapperTest extends FunctionalTestCase
      */
     private $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -32,7 +32,7 @@ final class DateMapperTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getRequirementsForNoRequirementsReturnsEmptyList()
+    public function getRequirementsForNoRequirementsReturnsEmptyList(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Dates.xml');
 
@@ -46,7 +46,7 @@ final class DateMapperTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getRequirementsReturnsTopicRequirements()
+    public function getRequirementsReturnsTopicRequirements(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Dates.xml');
 
@@ -60,7 +60,7 @@ final class DateMapperTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getDependenciesForNoDependenciesReturnsEmptyList()
+    public function getDependenciesForNoDependenciesReturnsEmptyList(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Dates.xml');
 
@@ -74,7 +74,7 @@ final class DateMapperTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getDependenciesReturnsTopicDependencies()
+    public function getDependenciesReturnsTopicDependencies(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Dates.xml');
 

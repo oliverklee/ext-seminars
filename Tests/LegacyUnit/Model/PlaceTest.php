@@ -16,7 +16,7 @@ final class PlaceTest extends TestCase
      */
     private $subject;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new \Tx_Seminars_Model_Place();
     }
@@ -28,7 +28,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function setTitleWithEmptyTitleThrowsException()
+    public function setTitleWithEmptyTitleThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -43,7 +43,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function setTitleSetsTitle()
+    public function setTitleSetsTitle(): void
     {
         $this->subject->setTitle('Nice place');
 
@@ -56,7 +56,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function getTitleWithNonEmptyTitleReturnsTitle()
+    public function getTitleWithNonEmptyTitleReturnsTitle(): void
     {
         $this->subject->setData(['title' => 'Nice place']);
 
@@ -73,7 +73,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function getAddressWithoutAddressReturnsAnEmptyString()
+    public function getAddressWithoutAddressReturnsAnEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -86,7 +86,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function getAddressWithNonEmptyAddressReturnsAddress()
+    public function getAddressWithNonEmptyAddressReturnsAddress(): void
     {
         $this->subject->setData(['address' => 'Backstreet 42']);
 
@@ -99,7 +99,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function setAddressSetsAddress()
+    public function setAddressSetsAddress(): void
     {
         $this->subject->setAddress('Backstreet 42');
 
@@ -112,7 +112,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function hasAddressWithoutAddressReturnsFalse()
+    public function hasAddressWithoutAddressReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -124,7 +124,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function hasAddressWithNonEmptyAddressReturnsTrue()
+    public function hasAddressWithNonEmptyAddressReturnsTrue(): void
     {
         $this->subject->setAddress('Backstreet 42');
 
@@ -140,7 +140,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function getZipWithNonEmptyZipReturnsZip()
+    public function getZipWithNonEmptyZipReturnsZip(): void
     {
         $this->subject->setData(['zip' => '13373']);
 
@@ -153,7 +153,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function setZipSetsZip()
+    public function setZipSetsZip(): void
     {
         $this->subject->setZip('13373');
 
@@ -166,7 +166,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function hasZipWithNonEmptyZipReturnsTrue()
+    public function hasZipWithNonEmptyZipReturnsTrue(): void
     {
         $this->subject->setData(['zip' => '13373']);
 
@@ -178,7 +178,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function hasZipWithEmptyZipReturnsFalse()
+    public function hasZipWithEmptyZipReturnsFalse(): void
     {
         $this->subject->setData(['zip' => '']);
 
@@ -194,7 +194,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function setCityWithEmptyCityThrowsException()
+    public function setCityWithEmptyCityThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -209,7 +209,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function setCitySetsCity()
+    public function setCitySetsCity(): void
     {
         $this->subject->setCity('Hicksville');
 
@@ -222,7 +222,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function getCityWithNonEmptyCityReturnsCity()
+    public function getCityWithNonEmptyCityReturnsCity(): void
     {
         $this->subject->setData(['city' => 'Hicksville']);
 
@@ -239,7 +239,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function getCountryWithoutCountryReturnsNull()
+    public function getCountryWithoutCountryReturnsNull(): void
     {
         $this->subject->setData([]);
 
@@ -251,7 +251,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function getCountryWithInvalidCountryCodeReturnsNull()
+    public function getCountryWithInvalidCountryCodeReturnsNull(): void
     {
         $this->subject->setData(['country' => '0']);
 
@@ -263,7 +263,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function getCountryWithCountryReturnsCountryInstance()
+    public function getCountryWithCountryReturnsCountryInstance(): void
     {
         $mapper = MapperRegistry::get(CountryMapper::class);
         $country = $mapper->find(54);
@@ -278,7 +278,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function getCountryWithCountryReturnsCountryAsModel()
+    public function getCountryWithCountryReturnsCountryAsModel(): void
     {
         $mapper = MapperRegistry::get(CountryMapper::class);
         $country = $mapper->find(54);
@@ -293,7 +293,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function setCountrySetsCountry()
+    public function setCountrySetsCountry(): void
     {
         $mapper = MapperRegistry::get(CountryMapper::class);
         $country = $mapper->find(54);
@@ -308,7 +308,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function countryCanBeSetToNull()
+    public function countryCanBeSetToNull(): void
     {
         $this->subject->setCountry();
 
@@ -320,7 +320,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function hasCountryWithoutCountryReturnsFalse()
+    public function hasCountryWithoutCountryReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -332,7 +332,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function hasCountryWithInvalidCountryReturnsFalse()
+    public function hasCountryWithInvalidCountryReturnsFalse(): void
     {
         $this->subject->setData(['country' => '0']);
 
@@ -344,7 +344,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function hasCountryWithCountryReturnsTrue()
+    public function hasCountryWithCountryReturnsTrue(): void
     {
         $mapper = MapperRegistry::get(CountryMapper::class);
         $country = $mapper->find(54);
@@ -362,7 +362,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function getHomepageWithoutHomepageReturnsAnEmptyString()
+    public function getHomepageWithoutHomepageReturnsAnEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -375,7 +375,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function getHomepageWithNonEmptyHomepageReturnsHomepage()
+    public function getHomepageWithNonEmptyHomepageReturnsHomepage(): void
     {
         $this->subject->setData(['homepage' => 'http://example.com']);
 
@@ -388,7 +388,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function setHomepageSetsHomepage()
+    public function setHomepageSetsHomepage(): void
     {
         $this->subject->setHomepage('http://example.com');
 
@@ -401,7 +401,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function hasHomepageWithoutHomepageReturnsFalse()
+    public function hasHomepageWithoutHomepageReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -413,7 +413,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function hasHomepageWithNonEmptyHomepageReturnsTrue()
+    public function hasHomepageWithNonEmptyHomepageReturnsTrue(): void
     {
         $this->subject->setHomepage('http://example.com');
 
@@ -429,7 +429,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function getDirectionsWithoutDirectionsReturnsAnEmptyString()
+    public function getDirectionsWithoutDirectionsReturnsAnEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -442,7 +442,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function getDirectionsWithNonEmptyDirectionsReturnsDirections()
+    public function getDirectionsWithNonEmptyDirectionsReturnsDirections(): void
     {
         $this->subject->setData(['directions' => 'left, right, straight']);
 
@@ -455,7 +455,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function setDirectionsSetsDirections()
+    public function setDirectionsSetsDirections(): void
     {
         $this->subject->setDirections('left, right, straight');
 
@@ -468,7 +468,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function hasDirectionsWithoutDirectionsReturnsFalse()
+    public function hasDirectionsWithoutDirectionsReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -480,7 +480,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function hasDirectionsWithNonEmptyDirectionsReturnsTrue()
+    public function hasDirectionsWithNonEmptyDirectionsReturnsTrue(): void
     {
         $this->subject->setDirections('left, right, straight');
 
@@ -496,7 +496,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function getNotesWithoutNotesReturnsAnEmptyString()
+    public function getNotesWithoutNotesReturnsAnEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -509,7 +509,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function getNotesWithNonEmptyNotesReturnsNotes()
+    public function getNotesWithNonEmptyNotesReturnsNotes(): void
     {
         $this->subject->setData(['notes' => 'Nothing of interest.']);
 
@@ -522,7 +522,7 @@ final class PlaceTest extends TestCase
     /**
      * @test
      */
-    public function setNotesSetsNotes()
+    public function setNotesSetsNotes(): void
     {
         $this->subject->setNotes('Nothing of interest.');
 

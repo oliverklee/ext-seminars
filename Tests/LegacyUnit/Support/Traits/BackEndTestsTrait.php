@@ -63,10 +63,8 @@ trait BackEndTestsTrait
      * and sets a fixed SIM_EXEC_TIME.
      *
      * If you use this method, make sure to call restoreOriginalEnvironment() in tearDown().
-     *
-     * @return void
      */
-    private function unifyTestingEnvironment()
+    private function unifyTestingEnvironment(): void
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
         Bootstrap::initializeBackendAuthentication();
@@ -83,7 +81,7 @@ trait BackEndTestsTrait
     /**
      * @return void
      */
-    private function cleanRequestVariables()
+    private function cleanRequestVariables(): void
     {
         $this->getBackup = $GLOBALS['_GET'];
         $GLOBALS['_GET'] = [];
@@ -94,7 +92,7 @@ trait BackEndTestsTrait
     /**
      * @return void
      */
-    private function replaceBackEndUserWithMock()
+    private function replaceBackEndUserWithMock(): void
     {
         /** @var BackendUserAuthentication $currentBackEndUser */
         $currentBackEndUser = $GLOBALS['BE_USER'];
@@ -113,7 +111,7 @@ trait BackEndTestsTrait
     /**
      * @return void
      */
-    private function unifyBackEndLanguage()
+    private function unifyBackEndLanguage(): void
     {
         $this->languageBackup = $GLOBALS['LANG']->lang;
 
@@ -128,7 +126,7 @@ trait BackEndTestsTrait
     /**
      * @return void
      */
-    private function unifyExtensionSettings()
+    private function unifyExtensionSettings(): void
     {
         $this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
         $this->t3VarBackup = $GLOBALS['T3_VAR']['getUserObj'];
@@ -138,7 +136,7 @@ trait BackEndTestsTrait
     /**
      * @return void
      */
-    private function setUpExtensionConfiguration()
+    private function setUpExtensionConfiguration(): void
     {
         $configurationRegistry = ConfigurationRegistry::getInstance();
         $configurationRegistry->set('plugin', new DummyConfiguration());
@@ -149,7 +147,7 @@ trait BackEndTestsTrait
     /**
      * @return void
      */
-    private function restoreOriginalEnvironment()
+    private function restoreOriginalEnvironment(): void
     {
         $this->flushAllFlashMessages();
         if ($this->backEndUserBackup !== null) {
@@ -172,10 +170,8 @@ trait BackEndTestsTrait
 
     /**
      * Flushes all flash messages from the queue.
-     *
-     * @return void
      */
-    private function flushAllFlashMessages()
+    private function flushAllFlashMessages(): void
     {
         /** @var FlashMessageService $flashMessageService */
         $flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);

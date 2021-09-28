@@ -24,14 +24,14 @@ final class EventDateMapperTest extends TestCase
      */
     private $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
 
         $this->subject = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
     }
@@ -43,7 +43,7 @@ final class EventDateMapperTest extends TestCase
     /**
      * @test
      */
-    public function getTopicWithoutTopicThrowsException()
+    public function getTopicWithoutTopicThrowsException(): void
     {
         $this->expectException(\BadMethodCallException::class);
 
@@ -57,7 +57,7 @@ final class EventDateMapperTest extends TestCase
     /**
      * @test
      */
-    public function getTopicWithTopicReturnsEventInstance()
+    public function getTopicWithTopicReturnsEventInstance(): void
     {
         $topic = $this->subject->getNewGhost();
 
@@ -78,7 +78,7 @@ final class EventDateMapperTest extends TestCase
     /**
      * @test
      */
-    public function getCategoriesForEventDateReturnsListInstance()
+    public function getCategoriesForEventDateReturnsListInstance(): void
     {
         $topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
 
@@ -95,7 +95,7 @@ final class EventDateMapperTest extends TestCase
     /**
      * @test
      */
-    public function getCategoriesForEventDateWithOneCategoryReturnsListOfCategories()
+    public function getCategoriesForEventDateWithOneCategoryReturnsListOfCategories(): void
     {
         $topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $uid = $this->testingFramework->createRecord(
@@ -121,7 +121,7 @@ final class EventDateMapperTest extends TestCase
     /**
      * @test
      */
-    public function getCategoriesForEventDateWithOneCategoryReturnsOneCategory()
+    public function getCategoriesForEventDateWithOneCategoryReturnsOneCategory(): void
     {
         $topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $uid = $this->testingFramework->createRecord(
@@ -152,7 +152,7 @@ final class EventDateMapperTest extends TestCase
     /**
      * @test
      */
-    public function getEventTypeForEventDateWithoutEventTypeReturnsNull()
+    public function getEventTypeForEventDateWithoutEventTypeReturnsNull(): void
     {
         $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
         $testingModel = $this->subject->getLoadedTestingModel(
@@ -168,7 +168,7 @@ final class EventDateMapperTest extends TestCase
     /**
      * @test
      */
-    public function getEventTypeForEventDateWithEventTypeReturnsEventTypeInstance()
+    public function getEventTypeForEventDateWithEventTypeReturnsEventTypeInstance(): void
     {
         $eventType = MapperRegistry::get(\Tx_Seminars_Mapper_EventType::class)->getLoadedTestingModel([]);
         $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
@@ -188,7 +188,7 @@ final class EventDateMapperTest extends TestCase
     /**
      * @test
      */
-    public function getPaymentMethodsForEventDateReturnsListInstance()
+    public function getPaymentMethodsForEventDateReturnsListInstance(): void
     {
         $topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $testingModel = $this->subject->getLoadedTestingModel(
@@ -204,7 +204,7 @@ final class EventDateMapperTest extends TestCase
     /**
      * @test
      */
-    public function getPaymentMethodsForEventDateWithOnePaymentMethodReturnsListOfPaymentMethods()
+    public function getPaymentMethodsForEventDateWithOnePaymentMethodReturnsListOfPaymentMethods(): void
     {
         $paymentMethod = MapperRegistry::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
         $topicUid = $this->testingFramework->createRecord(
@@ -231,7 +231,7 @@ final class EventDateMapperTest extends TestCase
     /**
      * @test
      */
-    public function getPaymentMethodsForEventDateWithOnePaymentMethodReturnsOnePaymentMethod()
+    public function getPaymentMethodsForEventDateWithOnePaymentMethodReturnsOnePaymentMethod(): void
     {
         $paymentMethod = MapperRegistry::get(\Tx_Seminars_Mapper_PaymentMethod::class)->getNewGhost();
         $topicUid = $this->testingFramework->createRecord(
@@ -265,7 +265,7 @@ final class EventDateMapperTest extends TestCase
     /**
      * @test
      */
-    public function getTargetGroupsForEventDateReturnsListInstance()
+    public function getTargetGroupsForEventDateReturnsListInstance(): void
     {
         $topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $testingModel = $this->subject->getLoadedTestingModel(
@@ -281,7 +281,7 @@ final class EventDateMapperTest extends TestCase
     /**
      * @test
      */
-    public function getTargetGroupsForEventDateWithOneTargetGroupReturnsListOfTargetGroups()
+    public function getTargetGroupsForEventDateWithOneTargetGroupReturnsListOfTargetGroups(): void
     {
         $topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $uid = $this->testingFramework->createRecord(
@@ -309,7 +309,7 @@ final class EventDateMapperTest extends TestCase
     /**
      * @test
      */
-    public function getTargetGroupsForEventDateWithOneTargetGroupReturnsOneTargetGroup()
+    public function getTargetGroupsForEventDateWithOneTargetGroupReturnsOneTargetGroup(): void
     {
         $topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $uid = $this->testingFramework->createRecord(
@@ -341,7 +341,7 @@ final class EventDateMapperTest extends TestCase
     /**
      * @test
      */
-    public function getCheckboxesForEventDateReturnsListInstance()
+    public function getCheckboxesForEventDateReturnsListInstance(): void
     {
         $topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $testingModel = $this->subject->getLoadedTestingModel(
@@ -357,7 +357,7 @@ final class EventDateMapperTest extends TestCase
     /**
      * @test
      */
-    public function getCheckboxesForEventDateWithOneCheckboxReturnsListOfCheckboxes()
+    public function getCheckboxesForEventDateWithOneCheckboxReturnsListOfCheckboxes(): void
     {
         $topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $uid = $this->testingFramework->createRecord(
@@ -383,7 +383,7 @@ final class EventDateMapperTest extends TestCase
     /**
      * @test
      */
-    public function getCheckboxesForEventDateWithOneCheckboxReturnsOneCheckbox()
+    public function getCheckboxesForEventDateWithOneCheckboxReturnsOneCheckbox(): void
     {
         $topicUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $uid = $this->testingFramework->createRecord(

@@ -19,14 +19,14 @@ final class SkillMapperTest extends TestCase
      */
     private $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
 
         $this->subject = new \Tx_Seminars_Mapper_Skill();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
     }
@@ -36,7 +36,7 @@ final class SkillMapperTest extends TestCase
     /**
      * @test
      */
-    public function findWithUidReturnsSkillInstance()
+    public function findWithUidReturnsSkillInstance(): void
     {
         self::assertInstanceOf(
             \Tx_Seminars_Model_Skill::class,
@@ -47,7 +47,7 @@ final class SkillMapperTest extends TestCase
     /**
      * @test
      */
-    public function findWithUidOfExistingRecordReturnsRecordAsModel()
+    public function findWithUidOfExistingRecordReturnsRecordAsModel(): void
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_skills',

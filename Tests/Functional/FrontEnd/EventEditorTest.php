@@ -55,7 +55,7 @@ final class EventEditorTest extends FunctionalTestCase
      */
     private $frontEndController = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -66,7 +66,7 @@ final class EventEditorTest extends FunctionalTestCase
         $this->subject = $this->buildSubject(self::CONFIGURATION);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         FrontEndLoginManager::purgeInstance();
         MapperRegistry::purgeInstance();
@@ -97,10 +97,8 @@ final class EventEditorTest extends FunctionalTestCase
 
     /**
      * @param int $uid
-     *
-     * @return void
      */
-    private function logInUser(int $uid)
+    private function logInUser(int $uid): void
     {
         $user = $this->getUserMapper()->find($uid);
         FrontEndLoginManager::getInstance()->logInUser($user);
@@ -134,7 +132,7 @@ final class EventEditorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getEventSuccessfullySavedUrlReturnsUrlStartingWithProtocol()
+    public function getEventSuccessfullySavedUrlReturnsUrlStartingWithProtocol(): void
     {
         $result = $this->subject->getEventSuccessfullySavedUrl();
 
@@ -144,7 +142,7 @@ final class EventEditorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getEventSuccessfullySavedUrlReturnsConfiguredTargetPid()
+    public function getEventSuccessfullySavedUrlReturnsConfiguredTargetPid(): void
     {
         $targetPageUid = 2;
         $this->subject->setConfigurationValue('eventSuccessfullySavedPID', $targetPageUid);
@@ -157,7 +155,7 @@ final class EventEditorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getEventSuccessfullySavedUrlForProceedUploadReturnsCurrentPageUidAsTargetUid()
+    public function getEventSuccessfullySavedUrlForProceedUploadReturnsCurrentPageUidAsTargetUid(): void
     {
         $this->subject->setFakedFormValue('proceed_file_upload', 1);
 
@@ -169,7 +167,7 @@ final class EventEditorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getEventSuccessfullySavedUrlForProceedUploadReturnsSeminarToEditAsLinkParameter()
+    public function getEventSuccessfullySavedUrlForProceedUploadReturnsSeminarToEditAsLinkParameter(): void
     {
         $this->subject->setFakedFormValue('proceed_file_upload', 1);
         $this->subject->setObjectUid(self::EVENT_UID);
@@ -184,7 +182,7 @@ final class EventEditorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function populateListOrganizersShowsOrganizerFromDatabase()
+    public function populateListOrganizersShowsOrganizerFromDatabase(): void
     {
         $this->logInUser(1);
 
@@ -196,7 +194,7 @@ final class EventEditorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function populateListOrganizersShowsDefaultOrganizerFromUserGroup()
+    public function populateListOrganizersShowsDefaultOrganizerFromUserGroup(): void
     {
         $this->logInUser(2);
 
@@ -208,7 +206,7 @@ final class EventEditorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function populateListOrganizersForDefaultOrganizerInUserGroupNotIncludesOtherOrganizer()
+    public function populateListOrganizersForDefaultOrganizerInUserGroupNotIncludesOtherOrganizer(): void
     {
         $this->logInUser(2);
 
@@ -222,7 +220,7 @@ final class EventEditorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function modifyDataToInsertForPublishSettingPublishImmediatelyNotHidesCreatedEvent()
+    public function modifyDataToInsertForPublishSettingPublishImmediatelyNotHidesCreatedEvent(): void
     {
         $this->logInUser(1);
 
@@ -234,7 +232,7 @@ final class EventEditorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function modifyDataToInsertForPublishSettingPublishImmediatelyNotHidesEditedEvent()
+    public function modifyDataToInsertForPublishSettingPublishImmediatelyNotHidesEditedEvent(): void
     {
         $this->logInUser(1);
         $this->subject->setObjectUid(1);
@@ -247,7 +245,7 @@ final class EventEditorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function modifyDataToInsertForPublishSettingHideNewHidesCreatedEvent()
+    public function modifyDataToInsertForPublishSettingHideNewHidesCreatedEvent(): void
     {
         $this->logInUser(2);
 
@@ -259,7 +257,7 @@ final class EventEditorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function modifyDataToInsertForPublishSettingHideEditedHidesCreatedEvent()
+    public function modifyDataToInsertForPublishSettingHideEditedHidesCreatedEvent(): void
     {
         $this->logInUser(3);
 
@@ -271,7 +269,7 @@ final class EventEditorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function modifyDataToInsertForPublishSettingHideEditedHidesEditedEvent()
+    public function modifyDataToInsertForPublishSettingHideEditedHidesEditedEvent(): void
     {
         $this->logInUser(3);
         $this->subject->setObjectUid(1);
@@ -284,7 +282,7 @@ final class EventEditorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function modifyDataToInsertForPublishSettingHideNewNotHidesEditedEvent()
+    public function modifyDataToInsertForPublishSettingHideNewNotHidesEditedEvent(): void
     {
         $this->logInUser(2);
         $this->subject->setObjectUid(1);
@@ -297,7 +295,7 @@ final class EventEditorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function modifyDataToInsertForEventHiddenOnEditingAddsPublicationHash()
+    public function modifyDataToInsertForEventHiddenOnEditingAddsPublicationHash(): void
     {
         $this->logInUser(3);
 
@@ -309,7 +307,7 @@ final class EventEditorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function modifyDataToInsertForEventHiddenOnCreationAddsPublicationHash()
+    public function modifyDataToInsertForEventHiddenOnCreationAddsPublicationHash(): void
     {
         $this->logInUser(2);
 
@@ -321,7 +319,7 @@ final class EventEditorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function modifyDataToInsertForEventNotHiddenOnEditingNotAddsPublicationHash()
+    public function modifyDataToInsertForEventNotHiddenOnEditingNotAddsPublicationHash(): void
     {
         $this->logInUser(2);
         $this->subject->setObjectUid(1);
@@ -334,7 +332,7 @@ final class EventEditorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function modifyDataToInsertForEventNotHiddenOnCreationNotAddsPublicationHash()
+    public function modifyDataToInsertForEventNotHiddenOnCreationNotAddsPublicationHash(): void
     {
         $this->logInUser(1);
 
@@ -346,7 +344,7 @@ final class EventEditorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function modifyDataToInsertForHiddenEventNotAddsPublicationHash()
+    public function modifyDataToInsertForHiddenEventNotAddsPublicationHash(): void
     {
         $this->logInUser(2);
         $this->subject->setObjectUid(2);
@@ -358,7 +356,7 @@ final class EventEditorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function modifyDataToInsertSetsTimestampToCurrentExecutionTime()
+    public function modifyDataToInsertSetsTimestampToCurrentExecutionTime(): void
     {
         $this->logInUser(1);
 
@@ -370,7 +368,7 @@ final class EventEditorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function modifyDataToInsertSetsCreationDateToCurrentExecutionTime()
+    public function modifyDataToInsertSetsCreationDateToCurrentExecutionTime(): void
     {
         $this->logInUser(1);
 
@@ -385,7 +383,7 @@ final class EventEditorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function modifyDataToInsertSetsOwnerFeUserToCurrentlyLoggedInUser()
+    public function modifyDataToInsertSetsOwnerFeUserToCurrentlyLoggedInUser(): void
     {
         $userUid = 1;
         $this->logInUser(1);
@@ -398,7 +396,7 @@ final class EventEditorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function modifyDataToInsertForNoUserGroupSpecificEventPidSetsPidFromTsSetupAsEventPid()
+    public function modifyDataToInsertForNoUserGroupSpecificEventPidSetsPidFromTsSetupAsEventPid(): void
     {
         $this->logInUser(1);
         $pageUid = 42;
@@ -412,7 +410,7 @@ final class EventEditorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function modifyDataToInsertForUserGroupSpecificEventPidSetsPidFromUserGroupAsEventPid()
+    public function modifyDataToInsertForUserGroupSpecificEventPidSetsPidFromUserGroupAsEventPid(): void
     {
         $this->logInUser(2);
         $this->subject->setConfigurationValue('createEventsPID', 42);
@@ -425,7 +423,7 @@ final class EventEditorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function modifyDataToInsertForNewEventAndUserWithoutDefaultCategoriesNotAddsAnyCategories()
+    public function modifyDataToInsertForNewEventAndUserWithoutDefaultCategoriesNotAddsAnyCategories(): void
     {
         $this->logInUser(1);
 
@@ -437,7 +435,7 @@ final class EventEditorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function modifyDataToInsertForNewEventAndUserWithOneDefaultCategoryAddsThisCategory()
+    public function modifyDataToInsertForNewEventAndUserWithOneDefaultCategoryAddsThisCategory(): void
     {
         $this->logInUser(4);
 
@@ -449,7 +447,7 @@ final class EventEditorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function modifyDataToInsertForEditedEventAndUserWithOneDefaultCategoryNotAddsTheUsersCategory()
+    public function modifyDataToInsertForEditedEventAndUserWithOneDefaultCategoryNotAddsTheUsersCategory(): void
     {
         $this->logInUser(4);
         $this->subject->setObjectUid(1);
@@ -464,7 +462,7 @@ final class EventEditorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function validateCheckboxesForNonRequiredFieldAndEmptyValueReturnsTrue()
+    public function validateCheckboxesForNonRequiredFieldAndEmptyValueReturnsTrue(): void
     {
         $this->logInUser(1);
 
@@ -477,7 +475,7 @@ final class EventEditorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function validateCheckboxesForRequiredFieldAndValueNotArrayReturnsFalse()
+    public function validateCheckboxesForRequiredFieldAndValueNotArrayReturnsFalse(): void
     {
         $this->logInUser(1);
         $subject = $this->buildSubjectWithRequiredField('categories');
@@ -491,7 +489,7 @@ final class EventEditorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function validateCheckboxesForRequiredFieldAndValueEmptyArrayReturnsFalse()
+    public function validateCheckboxesForRequiredFieldAndValueEmptyArrayReturnsFalse(): void
     {
         $this->logInUser(1);
         $subject = $this->buildSubjectWithRequiredField('categories');
@@ -505,7 +503,7 @@ final class EventEditorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function validateCheckboxesForRequiredFieldAndValueNonEmptyArrayReturnsTrue()
+    public function validateCheckboxesForRequiredFieldAndValueNonEmptyArrayReturnsTrue(): void
     {
         $this->logInUser(1);
         $subject = $this->buildSubjectWithRequiredField('categories');
@@ -519,7 +517,7 @@ final class EventEditorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function validateCheckboxesForUserWithDefaultCategoriesAndCategoriesRequiredAndEmptyReturnsTrue()
+    public function validateCheckboxesForUserWithDefaultCategoriesAndCategoriesRequiredAndEmptyReturnsTrue(): void
     {
         $this->logInUser(4);
         $subject = $this->buildSubjectWithRequiredField('categories');
@@ -533,7 +531,7 @@ final class EventEditorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function validateCheckboxesForUserWithoutDefaultCategoriesAndCategoriesRequiredAndEmptyReturnsFalse()
+    public function validateCheckboxesForUserWithoutDefaultCategoriesAndCategoriesRequiredAndEmptyReturnsFalse(): void
     {
         $this->logInUser(1);
         $subject = $this->buildSubjectWithRequiredField('categories');

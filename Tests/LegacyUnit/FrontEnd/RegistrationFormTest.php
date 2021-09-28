@@ -52,7 +52,7 @@ final class RegistrationFormTest extends TestCase
      */
     private $infoTablesConfiguration;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
         $frontEndPageUid = $this->testingFramework->createFrontEndPage();
@@ -103,7 +103,7 @@ final class RegistrationFormTest extends TestCase
         $this->subject->setTestMode();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
 
@@ -120,7 +120,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getAllFeUserContainsNonEmptyNameOfFrontEndUser()
+    public function getAllFeUserContainsNonEmptyNameOfFrontEndUser(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser('', ['name' => 'John Doe']);
 
@@ -133,7 +133,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getAllFeUserContainsLabelForNonEmptyEmailOfFrontEndUser()
+    public function getAllFeUserContainsLabelForNonEmptyEmailOfFrontEndUser(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser('', ['email' => 'john@example.com']);
 
@@ -146,7 +146,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getAllFeUserDoesNotContainEmptyLinesForMissingCompanyName()
+    public function getAllFeUserDoesNotContainEmptyLinesForMissingCompanyName(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser('', ['name' => 'John Doe']);
 
@@ -159,7 +159,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getAllFeUserContainsNoUnreplacedMarkers()
+    public function getAllFeUserContainsNoUnreplacedMarkers(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser('', ['name' => 'John Doe']);
 
@@ -176,7 +176,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function saveDataToSessionCanWriteEmptyZipToUserSession()
+    public function saveDataToSessionCanWriteEmptyZipToUserSession(): void
     {
         $this->subject->processRegistration(['zip' => '']);
 
@@ -189,7 +189,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function saveDataToSessionCanWriteNonEmptyZipToUserSession()
+    public function saveDataToSessionCanWriteNonEmptyZipToUserSession(): void
     {
         $this->subject->processRegistration(['zip' => '12345']);
 
@@ -202,7 +202,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function saveDataToSessionCanOverwriteNonEmptyZipWithEmptyZipInUserSession()
+    public function saveDataToSessionCanOverwriteNonEmptyZipWithEmptyZipInUserSession(): void
     {
         $this->session->setAsString(
             'tx_seminars_registration_editor_zip',
@@ -219,7 +219,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function saveDataToSessionCanStoreCompanyInSession()
+    public function saveDataToSessionCanStoreCompanyInSession(): void
     {
         $this->subject->processRegistration(['company' => 'foo inc.']);
 
@@ -234,7 +234,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function saveDataToSessionCanStoreNameInSession()
+    public function saveDataToSessionCanStoreNameInSession(): void
     {
         $this->subject->processRegistration(['name' => 'foo']);
 
@@ -253,7 +253,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function retrieveDataFromSessionWithUnusedKeyReturnsEmptyString()
+    public function retrieveDataFromSessionWithUnusedKeyReturnsEmptyString(): void
     {
         self::assertEquals(
             '',
@@ -264,7 +264,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function retrieveDataFromSessionWithKeySetInUserSessionReturnsDataForThatKey()
+    public function retrieveDataFromSessionWithKeySetInUserSessionReturnsDataForThatKey(): void
     {
         $this->session->setAsString(
             'tx_seminars_registration_editor_zip',
@@ -286,7 +286,7 @@ final class RegistrationFormTest extends TestCase
      *
      * @doesNotPerformAssertions
      */
-    public function populateListPaymentMethodsDoesNotCrash()
+    public function populateListPaymentMethodsDoesNotCrash(): void
     {
         $this->subject->populateListPaymentMethods();
     }
@@ -294,7 +294,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function populateListPaymentMethodsForEventWithOnePaymentMethodReturnsOneItem()
+    public function populateListPaymentMethodsForEventWithOnePaymentMethodReturnsOneItem(): void
     {
         $paymentMethodUid = $this->testingFramework->createRecord(
             'tx_seminars_payment_methods'
@@ -315,7 +315,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function populateListPaymentMethodsForEventWithOnePaymentMethodReturnsThisMethodsTitle()
+    public function populateListPaymentMethodsForEventWithOnePaymentMethodReturnsThisMethodsTitle(): void
     {
         $paymentMethodUid = $this->testingFramework->createRecord(
             'tx_seminars_payment_methods',
@@ -339,7 +339,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function populateListPaymentMethodsForEventWithOnePaymentMethodReturnsThisMethodsUid()
+    public function populateListPaymentMethodsForEventWithOnePaymentMethodReturnsThisMethodsUid(): void
     {
         $paymentMethodUid = $this->testingFramework->createRecord(
             'tx_seminars_payment_methods'
@@ -362,7 +362,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function populateListPaymentMethodsForEventWithTwoPaymentMethodsReturnsBothPaymentMethods()
+    public function populateListPaymentMethodsForEventWithTwoPaymentMethodsReturnsBothPaymentMethods(): void
     {
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_payment_methods_mm',
@@ -389,7 +389,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getStepCounterReturnsNumberOfCurrentPageIfCurrentPageNumberIsLowerThanNumberOfLastPage()
+    public function getStepCounterReturnsNumberOfCurrentPageIfCurrentPageNumberIsLowerThanNumberOfLastPage(): void
     {
         $this->subject->setConfigurationValue(
             'numberOfFirstRegistrationPage',
@@ -411,7 +411,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getStepCounterReturnsNumberOfLastRegistrationPage()
+    public function getStepCounterReturnsNumberOfLastRegistrationPage(): void
     {
         $this->subject->setConfigurationValue(
             'numberOfFirstRegistrationPage',
@@ -432,7 +432,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getStepCounterForNumberAboveLastRegistrationPageReturnsNumberOfLastRegistrationPageAsCurrentPage()
+    public function getStepCounterForNumberAboveLastRegistrationPageReturnsNumberOfLastRegistrationPageAsCurrentPage(): void
     {
         $this->subject->setConfigurationValue(
             'numberOfFirstRegistrationPage',
@@ -458,7 +458,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function populateListCountriesWithLanguageSetToDefaultNotContainsEnglishCountryNameForGermany()
+    public function populateListCountriesWithLanguageSetToDefaultNotContainsEnglishCountryNameForGermany(): void
     {
         self::assertNotContains(
             ['caption' => 'Germany', 'value' => 'Germany'],
@@ -469,7 +469,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function populateListCountriesContainsLocalCountryNameForGermany()
+    public function populateListCountriesContainsLocalCountryNameForGermany(): void
     {
         self::assertContains(
             ['caption' => 'Deutschland', 'value' => 'Deutschland'],
@@ -482,7 +482,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getFeUserDataWithKeyCountryAndNoCountrySetReturnsDefaultCountrySetViaTypoScriptSetup()
+    public function getFeUserDataWithKeyCountryAndNoCountrySetReturnsDefaultCountrySetViaTypoScriptSetup(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser();
 
@@ -497,7 +497,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getFeUserDataWithKeyCountryAndStaticInfoCountrySetReturnsStaticInfoCountry()
+    public function getFeUserDataWithKeyCountryAndStaticInfoCountrySetReturnsStaticInfoCountry(): void
     {
         if (!ExtensionManagementUtility::isLoaded('sr_feuser_register')) {
             self::markTestSkipped('This test only is available is sr_feuser_register is installed.');
@@ -517,7 +517,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getFeUserDataWithKeyCountryAndCountrySetReturnsCountry()
+    public function getFeUserDataWithKeyCountryAndCountrySetReturnsCountry(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser(
             '',
@@ -702,7 +702,7 @@ final class RegistrationFormTest extends TestCase
      *
      * @dataProvider formFieldsDataProvider
      */
-    public function isFormFieldEnabledForNoFieldsEnabledReturnsFalseForEachField(string $key)
+    public function isFormFieldEnabledForNoFieldsEnabledReturnsFalseForEachField(string $key): void
     {
         $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
             ['showRegistrationFields' => ''],
@@ -731,7 +731,7 @@ final class RegistrationFormTest extends TestCase
     public function isFormFieldEnabledForNoFieldsEnabledReturnsTrueForSelfContainedFields(
         string $key,
         bool $isSelfContained
-    ) {
+    ): void {
         $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
             ['showRegistrationFields' => $key],
             $this->getFrontEndController()->cObj
@@ -749,7 +749,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function isFormFieldEnabledForEnabledRegisteredThemselvesFieldOnlyReturnsFalseForMoreSeats()
+    public function isFormFieldEnabledForEnabledRegisteredThemselvesFieldOnlyReturnsFalseForMoreSeats(): void
     {
         $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
             ['showRegistrationFields' => 'registered_themselves'],
@@ -764,7 +764,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function isFormFieldEnabledForEnabledCompanyFieldReturnsTrueForBillingAddress()
+    public function isFormFieldEnabledForEnabledCompanyFieldReturnsTrueForBillingAddress(): void
     {
         $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
             ['showRegistrationFields' => 'company, billing_address'],
@@ -783,7 +783,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getAdditionalRegisteredPersonsDataForNoDataReturnsEmptyArray()
+    public function getAdditionalRegisteredPersonsDataForNoDataReturnsEmptyArray(): void
     {
         self::assertEquals(
             [],
@@ -794,7 +794,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getAdditionalRegisteredPersonsDataForNoEmptyReturnsEmptyArray()
+    public function getAdditionalRegisteredPersonsDataForNoEmptyReturnsEmptyArray(): void
     {
         $this->subject->setFakedFormValue('structured_attendees_names', '');
 
@@ -807,7 +807,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getAdditionalRegisteredPersonsDataCanReturnDataOfOnePerson()
+    public function getAdditionalRegisteredPersonsDataCanReturnDataOfOnePerson(): void
     {
         $this->subject->setFakedFormValue(
             'structured_attendees_names',
@@ -830,7 +830,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getAdditionalRegisteredPersonsDataCanReturnDataOfTwoPersons()
+    public function getAdditionalRegisteredPersonsDataCanReturnDataOfTwoPersons(): void
     {
         $this->subject->setFakedFormValue(
             'structured_attendees_names',
@@ -860,7 +860,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getAdditionalRegisteredPersonsDataForNonArrayDataReturnsEmptyArray()
+    public function getAdditionalRegisteredPersonsDataForNonArrayDataReturnsEmptyArray(): void
     {
         $this->subject->setFakedFormValue('structured_attendees_names', '"Foo"');
 
@@ -873,7 +873,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getAdditionalRegisteredPersonsDataForInvalidJsonReturnsEmptyArray()
+    public function getAdditionalRegisteredPersonsDataForInvalidJsonReturnsEmptyArray(): void
     {
         $this->subject->setFakedFormValue('structured_attendees_names', 'argh');
 
@@ -888,7 +888,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getNumberOfEnteredPersonsForEmptyFormDataReturnsZero()
+    public function getNumberOfEnteredPersonsForEmptyFormDataReturnsZero(): void
     {
         self::assertSame(
             0,
@@ -899,7 +899,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getNumberOfEnteredPersonsForNoSelfRegistrationReturnsZero()
+    public function getNumberOfEnteredPersonsForNoSelfRegistrationReturnsZero(): void
     {
         $this->subject->setFakedFormValue('registered_themselves', 0);
 
@@ -924,7 +924,7 @@ final class RegistrationFormTest extends TestCase
      *
      * @dataProvider registerThemselvesDataProvider
      */
-    public function getNumberOfEnteredPersonsForFieldHiddenReturnsValueFromConfiguration(int $configurationValue)
+    public function getNumberOfEnteredPersonsForFieldHiddenReturnsValueFromConfiguration(int $configurationValue): void
     {
         $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
             [
@@ -948,7 +948,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getNumberOfEnteredPersonsForSelfRegistrationReturnsOne()
+    public function getNumberOfEnteredPersonsForSelfRegistrationReturnsOne(): void
     {
         $this->subject->setFakedFormValue('registered_themselves', 1);
 
@@ -958,7 +958,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getNumberOfEnteredPersonsForOneAdditionalAndNoSelfRegistrationPersonReturnsOne()
+    public function getNumberOfEnteredPersonsForOneAdditionalAndNoSelfRegistrationPersonReturnsOne(): void
     {
         $this->subject->setFakedFormValue(
             'structured_attendees_names',
@@ -971,7 +971,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getNumberOfEnteredPersonsForTwoAdditionalPersonsAndNoSelfRegistrationReturnsTwo()
+    public function getNumberOfEnteredPersonsForTwoAdditionalPersonsAndNoSelfRegistrationReturnsTwo(): void
     {
         $this->subject->setFakedFormValue(
             'structured_attendees_names',
@@ -985,7 +985,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getNumberOfEnteredPersonsForSelfRegistrationAndOneAdditionalPersonReturnsTwo()
+    public function getNumberOfEnteredPersonsForSelfRegistrationAndOneAdditionalPersonReturnsTwo(): void
     {
         $this->subject->setFakedFormValue(
             'structured_attendees_names',
@@ -999,7 +999,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function validateNumberOfRegisteredPersonsForZeroSeatsReturnsFalse()
+    public function validateNumberOfRegisteredPersonsForZeroSeatsReturnsFalse(): void
     {
         $this->subject->setFakedFormValue('seats', 0);
 
@@ -1011,7 +1011,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function validateNumberOfRegisteredPersonsForNegativeSeatsReturnsFalse()
+    public function validateNumberOfRegisteredPersonsForNegativeSeatsReturnsFalse(): void
     {
         $this->subject->setFakedFormValue('seats', -1);
 
@@ -1023,7 +1023,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function validateNumberOfRegisteredPersonsForOnePersonAndOneSeatReturnsTrue()
+    public function validateNumberOfRegisteredPersonsForOnePersonAndOneSeatReturnsTrue(): void
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -1046,7 +1046,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function validateNumberOfRegisteredPersonsForOnePersonAndTwoSeatsReturnsFalse()
+    public function validateNumberOfRegisteredPersonsForOnePersonAndTwoSeatsReturnsFalse(): void
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -1069,7 +1069,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function validateNumberOfRegisteredPersonsForTwoPersonsAndOneSeatReturnsFalse()
+    public function validateNumberOfRegisteredPersonsForTwoPersonsAndOneSeatReturnsFalse(): void
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -1092,7 +1092,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function validateNumberOfRegisteredPersonsForTwoPersonsAndTwoSeatsReturnsTrue()
+    public function validateNumberOfRegisteredPersonsForTwoPersonsAndTwoSeatsReturnsTrue(): void
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -1115,7 +1115,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getMessageForSeatsNotMatchingRegisteredPersonsForOnePersonAndOneSeatReturnsEmptyString()
+    public function getMessageForSeatsNotMatchingRegisteredPersonsForOnePersonAndOneSeatReturnsEmptyString(): void
     {
         $this->subject->setFakedFormValue(
             'structured_attendees_names',
@@ -1132,7 +1132,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getMessageForSeatsNotMatchingRegisteredPersonsForOnePersonAndTwoSeatsReturnsMessage()
+    public function getMessageForSeatsNotMatchingRegisteredPersonsForOnePersonAndTwoSeatsReturnsMessage(): void
     {
         $this->subject->setFakedFormValue(
             'structured_attendees_names',
@@ -1149,7 +1149,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getMessageForSeatsNotMatchingRegisteredPersonsForTwoPersonsAndOneSeatReturnsMessage()
+    public function getMessageForSeatsNotMatchingRegisteredPersonsForTwoPersonsAndOneSeatReturnsMessage(): void
     {
         $this->subject->setFakedFormValue(
             'structured_attendees_names',
@@ -1167,7 +1167,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function validateNumberOfRegisteredPersonsForAttendeesNamesHiddenAndManySeatsReturnsTrue()
+    public function validateNumberOfRegisteredPersonsForAttendeesNamesHiddenAndManySeatsReturnsTrue(): void
     {
         $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
             [
@@ -1198,7 +1198,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function validateAdditionalPersonsEmailAddressesForDisabledFrontEndUserCreationReturnsTrue()
+    public function validateAdditionalPersonsEmailAddressesForDisabledFrontEndUserCreationReturnsTrue(): void
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -1223,7 +1223,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function validateAdditionalPersonsEmailAddressesForDisabledFormFieldReturnsTrue()
+    public function validateAdditionalPersonsEmailAddressesForDisabledFormFieldReturnsTrue(): void
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -1248,7 +1248,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function validateAdditionalPersonsEmailAddressesForNoPersonsReturnsTrue()
+    public function validateAdditionalPersonsEmailAddressesForNoPersonsReturnsTrue(): void
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -1273,7 +1273,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function validateAdditionalPersonsEmailAddressesForOneValidEmailAddressReturnsTrue()
+    public function validateAdditionalPersonsEmailAddressesForOneValidEmailAddressReturnsTrue(): void
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -1300,7 +1300,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function validateAdditionalPersonsEmailAddressesForOneInvalidEmailAddressReturnsFalse()
+    public function validateAdditionalPersonsEmailAddressesForOneInvalidEmailAddressReturnsFalse(): void
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -1327,7 +1327,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function validateAdditionalPersonsEmailAddressesForOneEmptyAddressReturnsFalse()
+    public function validateAdditionalPersonsEmailAddressesForOneEmptyAddressReturnsFalse(): void
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -1354,7 +1354,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function validateAdditionalPersonsEmailAddressesForOneMissingAddressReturnsFalse()
+    public function validateAdditionalPersonsEmailAddressesForOneMissingAddressReturnsFalse(): void
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -1381,7 +1381,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function validateAdditionalPersonsEmailAddressesForOneValidAndOneInvalidEmailAddressReturnsFalse()
+    public function validateAdditionalPersonsEmailAddressesForOneValidAndOneInvalidEmailAddressReturnsFalse(): void
     {
         /** @var \Tx_Seminars_FrontEnd_RegistrationForm&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -1412,7 +1412,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getPreselectedPaymentMethodForOnePaymentMethodReturnsItsUid()
+    public function getPreselectedPaymentMethodForOnePaymentMethodReturnsItsUid(): void
     {
         $paymentMethodUid = $this->testingFramework->createRecord(
             'tx_seminars_payment_methods',
@@ -1434,7 +1434,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getPreselectedPaymentMethodForTwoNotSelectedPaymentMethodsReturnsZero()
+    public function getPreselectedPaymentMethodForTwoNotSelectedPaymentMethodsReturnsZero(): void
     {
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_payment_methods_mm',
@@ -1456,7 +1456,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getPreselectedPaymentMethodForTwoPaymentMethodsOneSelectedOneNotReturnsUidOfSelectedRecord()
+    public function getPreselectedPaymentMethodForTwoPaymentMethodsOneSelectedOneNotReturnsUidOfSelectedRecord(): void
     {
         $this->testingFramework->createRelation(
             'tx_seminars_seminars_payment_methods_mm',
@@ -1490,7 +1490,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationDataForDisabledPaymentMethodFieldReturnsEmptyString()
+    public function getRegistrationDataForDisabledPaymentMethodFieldReturnsEmptyString(): void
     {
         $selectedPaymentMethodUid = $this->testingFramework->createRecord(
             'tx_seminars_payment_methods',
@@ -1515,7 +1515,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationDataForEnabledPriceFieldReturnsSelectedPriceValue()
+    public function getRegistrationDataForEnabledPriceFieldReturnsSelectedPriceValue(): void
     {
         $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
             [
@@ -1544,7 +1544,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationDataHtmlspecialcharsInterestsField()
+    public function getRegistrationDataHtmlspecialcharsInterestsField(): void
     {
         $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
             [
@@ -1568,7 +1568,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationDataReplacesCarriageReturnInInterestsFieldWithBr()
+    public function getRegistrationDataReplacesCarriageReturnInInterestsFieldWithBr(): void
     {
         $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
             [
@@ -1592,7 +1592,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationDataCanContainAttendeesNames()
+    public function getRegistrationDataCanContainAttendeesNames(): void
     {
         $subject = new \Tx_Seminars_FrontEnd_RegistrationForm(
             [
@@ -1616,7 +1616,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationDataForAttendeesNamesAndThemselvesSelectedContainsUserName()
+    public function getRegistrationDataForAttendeesNamesAndThemselvesSelectedContainsUserName(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser(
             '',
@@ -1646,7 +1646,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationDataForAttendeesNamesEnabledAndThemselvesNotSelectedNotContainsUserName()
+    public function getRegistrationDataForAttendeesNamesEnabledAndThemselvesNotSelectedNotContainsUserName(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser(
             '',
@@ -1676,7 +1676,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationDataForThemselvesSelectedAndSeparateAttendeesRecordsDisabledNotContainsTitle()
+    public function getRegistrationDataForThemselvesSelectedAndSeparateAttendeesRecordsDisabledNotContainsTitle(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser(
             '',
@@ -1706,7 +1706,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationDataForThemselvesSelectedAndSeparateAttendeesRecordsEnabledContainsTitle()
+    public function getRegistrationDataForThemselvesSelectedAndSeparateAttendeesRecordsEnabledContainsTitle(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser(
             '',
@@ -1736,7 +1736,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationDataForThemselvesSelectedAndSeparateAttendeesRecordsDisabledNotContainsEmailAddress()
+    public function getRegistrationDataForThemselvesSelectedAndSeparateAttendeesRecordsDisabledNotContainsEmailAddress(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser(
             '',
@@ -1766,7 +1766,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationDataForThemselvesSelectedAndSeparateAttendeesRecordsEnabledContainsEmailAddress()
+    public function getRegistrationDataForThemselvesSelectedAndSeparateAttendeesRecordsEnabledContainsEmailAddress(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser(
             '',
@@ -1798,7 +1798,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getSeminarReturnsSeminarFromSetSeminar()
+    public function getSeminarReturnsSeminarFromSetSeminar(): void
     {
         self::assertSame(
             $this->seminar,
@@ -1809,7 +1809,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function getEventReturnsEventWithSeminarUid()
+    public function getEventReturnsEventWithSeminarUid(): void
     {
         $event = $this->subject->getEvent();
         self::assertInstanceOf(
@@ -1828,7 +1828,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function populateSeatsForOneVacancyReturnsItemOfOne()
+    public function populateSeatsForOneVacancyReturnsItemOfOne(): void
     {
         $event = $this->subject->getEvent();
         $event->setMaximumAttendees(1);
@@ -1845,7 +1845,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function populateSeatsForLessVacanciesThanMaximumSeatsReturnsVacancyValues()
+    public function populateSeatsForLessVacanciesThanMaximumSeatsReturnsVacancyValues(): void
     {
         $event = $this->subject->getEvent();
         $event->setMaximumAttendees(9);
@@ -1872,7 +1872,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function populateSeatsForAsManyVacanciesAsMaximumSeatsReturnsMaximumValues()
+    public function populateSeatsForAsManyVacanciesAsMaximumSeatsReturnsMaximumValues(): void
     {
         $event = $this->subject->getEvent();
         $event->setMaximumAttendees(10);
@@ -1900,7 +1900,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function populateSeatsForMoreVacanciesThanMaximumSeatsReturnsMaximumValues10FromConfiguration()
+    public function populateSeatsForMoreVacanciesThanMaximumSeatsReturnsMaximumValues10FromConfiguration(): void
     {
         $event = $this->subject->getEvent();
         $event->setMaximumAttendees(11);
@@ -1928,7 +1928,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function populateSeatsForMoreVacanciesThanMaximumSeatsReturnsMaximumValues3FromConfiguration()
+    public function populateSeatsForMoreVacanciesThanMaximumSeatsReturnsMaximumValues3FromConfiguration(): void
     {
         $event = $this->subject->getEvent();
         $event->setMaximumAttendees(11);
@@ -1957,7 +1957,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function populateSeatsForNoVacanciesReturnsMaximumValues()
+    public function populateSeatsForNoVacanciesReturnsMaximumValues(): void
     {
         $event = $this->subject->getEvent();
         $event->setMaximumAttendees(1);
@@ -1986,7 +1986,7 @@ final class RegistrationFormTest extends TestCase
     /**
      * @test
      */
-    public function populateSeatsForUnlimitedRegistrationsReturnsMaximumValues()
+    public function populateSeatsForUnlimitedRegistrationsReturnsMaximumValues(): void
     {
         $event = $this->subject->getEvent();
         self::assertTrue($event->hasVacancies());

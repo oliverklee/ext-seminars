@@ -28,7 +28,7 @@ final class AbstractModelTest extends TestCase
      */
     private $subjectUid = 0;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
@@ -57,7 +57,7 @@ final class AbstractModelTest extends TestCase
         $this->subject = new TestingModel($this->subjectUid);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
     }
@@ -69,7 +69,7 @@ final class AbstractModelTest extends TestCase
     /**
      * @test
      */
-    public function getUid()
+    public function getUid(): void
     {
         self::assertEquals(
             $this->subjectUid,
@@ -80,7 +80,7 @@ final class AbstractModelTest extends TestCase
     /**
      * @test
      */
-    public function hasUidIsTrueForObjectsWithAUid()
+    public function hasUidIsTrueForObjectsWithAUid(): void
     {
         self::assertNotEquals(
             0,
@@ -94,7 +94,7 @@ final class AbstractModelTest extends TestCase
     /**
      * @test
      */
-    public function hasUidIsFalseForObjectsWithoutUid()
+    public function hasUidIsFalseForObjectsWithoutUid(): void
     {
         $virginFixture = new TestingModel();
 
@@ -110,7 +110,7 @@ final class AbstractModelTest extends TestCase
     /**
      * @test
      */
-    public function getTitle()
+    public function getTitle(): void
     {
         self::assertEquals(
             'Test',
@@ -125,7 +125,7 @@ final class AbstractModelTest extends TestCase
     /**
      * @test
      */
-    public function setAndGetRecordBooleanTest()
+    public function setAndGetRecordBooleanTest(): void
     {
         self::assertFalse(
             $this->subject->getBooleanTest()
@@ -140,7 +140,7 @@ final class AbstractModelTest extends TestCase
     /**
      * @test
      */
-    public function setAndGetTitle()
+    public function setAndGetTitle(): void
     {
         $title = 'Test';
         $this->subject->setTitle($title);
@@ -156,7 +156,7 @@ final class AbstractModelTest extends TestCase
     /**
      * @test
      */
-    public function getPageUidCanReturnRecordsPageUid()
+    public function getPageUidCanReturnRecordsPageUid(): void
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_test',
@@ -174,7 +174,7 @@ final class AbstractModelTest extends TestCase
     /**
      * @test
      */
-    public function getPageUidForRecordWithPageUidZeroReturnsZero()
+    public function getPageUidForRecordWithPageUidZeroReturnsZero(): void
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_test',

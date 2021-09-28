@@ -93,7 +93,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getTimeForNoTimeReturnsWillBeAnnouncesMessage()
+    public function getTimeForNoTimeReturnsWillBeAnnouncesMessage(): void
     {
         self::assertSame(
             $this->getLanguageService()->getLL('message_willBeAnnounced'),
@@ -104,7 +104,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getTimeForBeginTimeOnlyReturnsBeginTime()
+    public function getTimeForBeginTimeOnlyReturnsBeginTime(): void
     {
         $this->subject->setBeginDateAndTime(\mktime(9, 50, 0, 1, 1, 2010));
 
@@ -117,7 +117,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getTimeForBeginTimeAndEndTimeOnSameDayReturnsBothTimesWithMDashByDefault()
+    public function getTimeForBeginTimeAndEndTimeOnSameDayReturnsBothTimesWithMDashByDefault(): void
     {
         $this->subject->setBeginDateAndTime(\mktime(9, 50, 0, 1, 1, 2010));
         $this->subject->setEndDateAndTime(\mktime(18, 30, 0, 1, 1, 2010));
@@ -131,7 +131,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getTimeForBeginTimeAndEndTimeOnSameDayReturnsBothTimesWithProvidedDash()
+    public function getTimeForBeginTimeAndEndTimeOnSameDayReturnsBothTimesWithProvidedDash(): void
     {
         $this->subject->setBeginDateAndTime(\mktime(9, 50, 0, 1, 1, 2010));
         $this->subject->setEndDateAndTime(\mktime(18, 30, 0, 1, 1, 2010));
@@ -145,7 +145,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getTimeForBeginTimeAndEndTimeOnDifferentDaysReturnsBothTimesWithMDashByDefault()
+    public function getTimeForBeginTimeAndEndTimeOnDifferentDaysReturnsBothTimesWithMDashByDefault(): void
     {
         $this->subject->setBeginDateAndTime(\mktime(9, 50, 0, 1, 1, 2010));
         $this->subject->setEndDateAndTime(\mktime(18, 30, 0, 1, 2, 2010));
@@ -159,7 +159,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getTimeForNoTimeNotCallsHook()
+    public function getTimeForNoTimeNotCallsHook(): void
     {
         $hook = $this->createMock(DateTimeSpan::class);
         $hook->expects(self::never())->method('modifyDateSpan');
@@ -175,7 +175,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getTimeForBeginTimeOnlyNotCallsHook()
+    public function getTimeForBeginTimeOnlyNotCallsHook(): void
     {
         $this->subject->setBeginDateAndTime(\mktime(9, 50, 0, 1, 1, 2010));
 
@@ -193,7 +193,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getTimeForEndTimeOnlyNotCallsHook()
+    public function getTimeForEndTimeOnlyNotCallsHook(): void
     {
         $this->subject->setEndDateAndTime(\mktime(18, 30, 0, 1, 1, 2010));
 
@@ -211,7 +211,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getTimeForBeginTimeAndEndTimeOnSameTimeNotCallsHook()
+    public function getTimeForBeginTimeAndEndTimeOnSameTimeNotCallsHook(): void
     {
         $this->subject->setBeginDateAndTime(\mktime(9, 50, 0, 1, 1, 2010));
         $this->subject->setEndDateAndTime(\mktime(9, 50, 0, 1, 3, 2010));
@@ -230,7 +230,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getTimeForBeginTimeAndEndTimeOnDifferentTimesCallsHookAndUsesModifiedValue()
+    public function getTimeForBeginTimeAndEndTimeOnDifferentTimesCallsHookAndUsesModifiedValue(): void
     {
         $modifiedValue = 'modified';
 
@@ -258,7 +258,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getDateForNoDateReturnsWillBeAnnouncedMessage()
+    public function getDateForNoDateReturnsWillBeAnnouncedMessage(): void
     {
         self::assertSame(
             $this->getLanguageService()->getLL('message_willBeAnnounced'),
@@ -269,7 +269,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getDateForBeginDateReturnsBeginDate()
+    public function getDateForBeginDateReturnsBeginDate(): void
     {
         $this->subject->setBeginDateAndTime(\mktime(0, 0, 0, 1, 1, 2010));
 
@@ -282,7 +282,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getDateForEndDateReturnsWillBeAnnouncedMessage()
+    public function getDateForEndDateReturnsWillBeAnnouncedMessage(): void
     {
         $this->subject->setEndDateAndTime(\mktime(0, 0, 0, 1, 1, 2010));
 
@@ -295,7 +295,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getDateForBeginDateAndEndDateOnSameDayReturnsBeginDate()
+    public function getDateForBeginDateAndEndDateOnSameDayReturnsBeginDate(): void
     {
         $this->subject->setBeginDateAndTime(\mktime(0, 0, 0, 1, 1, 2010));
         $this->subject->setEndDateAndTime(\mktime(0, 0, 0, 1, 1, 2010));
@@ -309,7 +309,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getDateForBeginDateAndEndDateOnDifferentDaysReturnsDateSpan()
+    public function getDateForBeginDateAndEndDateOnDifferentDaysReturnsDateSpan(): void
     {
         $this->subject->setBeginDateAndTime(\mktime(0, 0, 0, 1, 1, 2010));
         $this->subject->setEndDateAndTime(\mktime(0, 0, 0, 1, 3, 2010));
@@ -323,7 +323,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getDateForNoDateNotCallsHook()
+    public function getDateForNoDateNotCallsHook(): void
     {
         $hook = $this->createMock(DateTimeSpan::class);
         $hook->expects(self::never())->method('modifyDateSpan');
@@ -339,7 +339,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getDateForBeginDateNotCallsHook()
+    public function getDateForBeginDateNotCallsHook(): void
     {
         $this->subject->setBeginDateAndTime(\mktime(0, 0, 0, 1, 1, 2010));
 
@@ -357,7 +357,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getDateForEndDateNotCallsHook()
+    public function getDateForEndDateNotCallsHook(): void
     {
         $this->subject->setEndDateAndTime(\mktime(0, 0, 0, 1, 1, 2010));
 
@@ -375,7 +375,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getDateForBeginDateAndEndDateOnSameDayNotCallsHook()
+    public function getDateForBeginDateAndEndDateOnSameDayNotCallsHook(): void
     {
         $this->subject->setBeginDateAndTime(\mktime(0, 0, 0, 1, 1, 2010));
         $this->subject->setEndDateAndTime(\mktime(0, 0, 0, 1, 1, 2010));
@@ -394,7 +394,7 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getDateForBeginDateAndEndDateOnDifferentDaysCallsHookAndUsesModifiedValue()
+    public function getDateForBeginDateAndEndDateOnDifferentDaysCallsHookAndUsesModifiedValue(): void
     {
         $modifiedValue = 'modified';
 

@@ -20,14 +20,14 @@ final class PlaceMapperTest extends TestCase
      */
     private $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
 
         $this->subject = new \Tx_Seminars_Mapper_Place();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
     }
@@ -37,7 +37,7 @@ final class PlaceMapperTest extends TestCase
     /**
      * @test
      */
-    public function findWithUidReturnsPlaceInstance()
+    public function findWithUidReturnsPlaceInstance(): void
     {
         self::assertInstanceOf(\Tx_Seminars_Model_Place::class, $this->subject->find(1));
     }
@@ -45,7 +45,7 @@ final class PlaceMapperTest extends TestCase
     /**
      * @test
      */
-    public function findWithUidOfExistingRecordReturnsRecordAsModel()
+    public function findWithUidOfExistingRecordReturnsRecordAsModel(): void
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
@@ -64,7 +64,7 @@ final class PlaceMapperTest extends TestCase
     /**
      * @test
      */
-    public function getOwnerWithoutOwnerReturnsNull()
+    public function getOwnerWithoutOwnerReturnsNull(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
@@ -74,7 +74,7 @@ final class PlaceMapperTest extends TestCase
     /**
      * @test
      */
-    public function getOwnerWithOwnerReturnsOwnerInstance()
+    public function getOwnerWithOwnerReturnsOwnerInstance(): void
     {
         $frontEndUser = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)->getLoadedTestingModel([]);
         $testingModel = $this->subject->getLoadedTestingModel(

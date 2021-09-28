@@ -17,7 +17,7 @@ final class MakeInstanceTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function mockedInstancesListIsEmptyInitially()
+    public function mockedInstancesListIsEmptyInitially(): void
     {
         self::assertSame([], $this->mockClassNames);
     }
@@ -25,7 +25,7 @@ final class MakeInstanceTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function addMockedInstanceAddsClassNameToList()
+    public function addMockedInstanceAddsClassNameToList(): void
     {
         $mockedInstance = new \stdClass();
         $mockedClassName = \stdClass::class;
@@ -38,7 +38,7 @@ final class MakeInstanceTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function addMockedInstanceAddsInstanceToTypo3InstanceBuffer()
+    public function addMockedInstanceAddsInstanceToTypo3InstanceBuffer(): void
     {
         $mockedInstance = new \stdClass();
         $mockedClassName = \stdClass::class;
@@ -51,7 +51,7 @@ final class MakeInstanceTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function purgeMockedInstancesRemovesClassnameFromList()
+    public function purgeMockedInstancesRemovesClassnameFromList(): void
     {
         $mockedInstance = new \stdClass();
         $mockedClassName = \stdClass::class;
@@ -67,7 +67,7 @@ final class MakeInstanceTraitTest extends UnitTestCase
     /**
      * @test
      */
-    public function purgeMockedInstancesRemovesInstanceFromTypoInstanceBuffer()
+    public function purgeMockedInstancesRemovesInstanceFromTypoInstanceBuffer(): void
     {
         $mockedInstance = new \stdClass();
         $mockedClassName = \stdClass::class;

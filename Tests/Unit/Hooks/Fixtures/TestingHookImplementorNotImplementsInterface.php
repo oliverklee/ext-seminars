@@ -14,7 +14,7 @@ final class TestingHookImplementorNotImplementsInterface implements TestingHookI
     /**
      * @return void
      */
-    public function testHookMethod()
+    public function testHookMethod(): void
     {
     }
 }

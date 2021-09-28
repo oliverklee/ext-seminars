@@ -29,7 +29,7 @@ final class BackEndEventAccessCheckTest extends TestCase
      */
     private $backEndUserBackup = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->backEndUserBackup = $GLOBALS['BE_USER'];
         /** @var BackendUserAuthentication&MockObject $backEndUser */
@@ -40,7 +40,7 @@ final class BackEndEventAccessCheckTest extends TestCase
         $this->subject = new BackEndEventAccessCheck();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         BackEndLoginManager::purgeInstance();
         $GLOBALS['BE_USER'] = $this->backEndUserBackup;
@@ -49,7 +49,7 @@ final class BackEndEventAccessCheckTest extends TestCase
     /**
      * @test
      */
-    public function subjectImplementsAccessCheck()
+    public function subjectImplementsAccessCheck(): void
     {
         self::assertInstanceOf(
             CsvAccessCheck::class,
@@ -60,7 +60,7 @@ final class BackEndEventAccessCheckTest extends TestCase
     /**
      * @test
      */
-    public function hasAccessForNoBackEndUserReturnsFalse()
+    public function hasAccessForNoBackEndUserReturnsFalse(): void
     {
         unset($GLOBALS['BE_USER']);
 
@@ -72,7 +72,7 @@ final class BackEndEventAccessCheckTest extends TestCase
     /**
      * @test
      */
-    public function hasAccessForNoAccessToTableAndNoAccessToPageReturnsFalse()
+    public function hasAccessForNoAccessToTableAndNoAccessToPageReturnsFalse(): void
     {
         $pageUid = 12341;
         $this->subject->setPageUid($pageUid);
@@ -94,7 +94,7 @@ final class BackEndEventAccessCheckTest extends TestCase
     /**
      * @test
      */
-    public function hasAccessForNoAccessToTableAndAccessToPageReturnsFalse()
+    public function hasAccessForNoAccessToTableAndAccessToPageReturnsFalse(): void
     {
         $pageUid = 12341;
         $this->subject->setPageUid($pageUid);
@@ -116,7 +116,7 @@ final class BackEndEventAccessCheckTest extends TestCase
     /**
      * @test
      */
-    public function hasAccessForAccessToTableAndNoAccessToPageReturnsFalse()
+    public function hasAccessForAccessToTableAndNoAccessToPageReturnsFalse(): void
     {
         $pageUid = 12341;
         $this->subject->setPageUid($pageUid);
@@ -138,7 +138,7 @@ final class BackEndEventAccessCheckTest extends TestCase
     /**
      * @test
      */
-    public function hasAccessForAccessToTableAndAccessToPageReturnsTrue()
+    public function hasAccessForAccessToTableAndAccessToPageReturnsTrue(): void
     {
         $pageUid = 12341;
         $this->subject->setPageUid($pageUid);

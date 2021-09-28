@@ -28,10 +28,8 @@ final class TestingBagBuilder extends AbstractBagBuilder
      * Limits the bag to records with a particular title.
      *
      * @param string $title title which the bag elements must match, may be empty, must already be SQL-safe
-     *
-     * @return void
      */
-    public function limitToTitle(string $title)
+    public function limitToTitle(string $title): void
     {
         $this->whereClauseParts['title'] = 'title = "' . $title . '"';
     }
@@ -70,10 +68,8 @@ final class TestingBagBuilder extends AbstractBagBuilder
      * Sets $this->tableName with the value in the parameter $tableName.
      *
      * @param string $tableName the table name to set, may be empty for testing
-     *
-     * @return void
      */
-    public function setTableName(string $tableName)
+    public function setTableName(string $tableName): void
     {
         $this->tableName = $tableName;
     }

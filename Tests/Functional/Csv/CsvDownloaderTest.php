@@ -36,7 +36,7 @@ final class CsvDownloaderTest extends FunctionalTestCase
      */
     private $configuration = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -55,7 +55,7 @@ final class CsvDownloaderTest extends FunctionalTestCase
     /**
      * @return void
      */
-    private function setUpExtensionConfiguration()
+    private function setUpExtensionConfiguration(): void
     {
         $configurationRegistry = ConfigurationRegistry::getInstance();
         $configurationRegistry->set('plugin', new DummyConfiguration());
@@ -78,7 +78,7 @@ final class CsvDownloaderTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function createAndOutputListOfRegistrationsForInexistentEventUidSetsNotFoundHeader()
+    public function createAndOutputListOfRegistrationsForInexistentEventUidSetsNotFoundHeader(): void
     {
         $this->subject->createAndOutputListOfRegistrations(1);
 
@@ -88,7 +88,7 @@ final class CsvDownloaderTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function createAndOutputListOfRegistrationsForInexistentEventUidReturnsNotFoundMessage()
+    public function createAndOutputListOfRegistrationsForInexistentEventUidReturnsNotFoundMessage(): void
     {
         $result = $this->subject->createAndOutputListOfRegistrations(1);
 
@@ -98,7 +98,7 @@ final class CsvDownloaderTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function createAndOutputListOfRegistrationsForExistentEventWithoutRegistrationsHasHeaderOnly()
+    public function createAndOutputListOfRegistrationsForExistentEventWithoutRegistrationsHasHeaderOnly(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/EventsAndRegistrations.xml');
 
@@ -116,7 +116,7 @@ final class CsvDownloaderTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function createListOfRegistrationsForBothConfigurationFieldsNotEmptyAddsSemicolonBetweenFieldsHeaders()
+    public function createListOfRegistrationsForBothConfigurationFieldsNotEmptyAddsSemicolonBetweenFieldsHeaders(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/EventsAndRegistrations.xml');
 

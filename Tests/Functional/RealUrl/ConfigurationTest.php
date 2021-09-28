@@ -52,7 +52,7 @@ final class ConfigurationTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function autoConfigurationReferencesExistingClass()
+    public function autoConfigurationReferencesExistingClass(): void
     {
         $reference = $this->getRealUrlConfigurationForSeminars();
         $className = $this->extractClassNameFromUserFunction($reference);
@@ -64,7 +64,7 @@ final class ConfigurationTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function autoConfigurationReferencesExistingMethod()
+    public function autoConfigurationReferencesExistingMethod(): void
     {
         $reference = $this->getRealUrlConfigurationForSeminars();
         $methodName = $this->extractMethodNameFromUserFunction($reference);

@@ -22,7 +22,7 @@ final class TopicMapperTest extends FunctionalTestCase
      */
     private $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -32,7 +32,7 @@ final class TopicMapperTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getRequirementsForNoRequirementsReturnsEmptyList()
+    public function getRequirementsForNoRequirementsReturnsEmptyList(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Topics.xml');
 
@@ -46,7 +46,7 @@ final class TopicMapperTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getRequirementsReturnsRequirements()
+    public function getRequirementsReturnsRequirements(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Topics.xml');
 
@@ -60,7 +60,7 @@ final class TopicMapperTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getDependenciesForNoDependenciesReturnsEmptyList()
+    public function getDependenciesForNoDependenciesReturnsEmptyList(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Topics.xml');
 
@@ -74,7 +74,7 @@ final class TopicMapperTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getDependenciesReturnsDependencies()
+    public function getDependenciesReturnsDependencies(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Topics.xml');
 

@@ -32,7 +32,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
      */
     private $dataHandler = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -51,7 +51,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function tceMainHookReferencesExistingClass()
+    public function tceMainHookReferencesExistingClass(): void
     {
         $reference = $this->getDataMapperConfigurationForSeminars();
 
@@ -60,10 +60,8 @@ final class DataHandlerHookTest extends FunctionalTestCase
 
     /**
      * @param int $uid
-     *
-     * @return void
      */
-    private function processUpdateActionForSeminarsTable(int $uid)
+    private function processUpdateActionForSeminarsTable(int $uid): void
     {
         $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
         $this->dataHandler->datamap[self::TABLE_SEMINARS][$uid] = $data;
@@ -73,10 +71,8 @@ final class DataHandlerHookTest extends FunctionalTestCase
 
     /**
      * @param int $uid
-     *
-     * @return void
      */
-    private function processNewActionForSeminarsTable(int $uid)
+    private function processNewActionForSeminarsTable(int $uid): void
     {
         $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
         $temporaryUid = 'NEW5e0f43477dcd4869591288';
@@ -89,7 +85,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function afterDatabaseOperationsOnUpdateCallsSanitizeEventDataHook()
+    public function afterDatabaseOperationsOnUpdateCallsSanitizeEventDataHook(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook.xml');
         $uid = 1;
@@ -110,7 +106,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function afterDatabaseOperationsOnUpdateSanitizeHookWillModifyData()
+    public function afterDatabaseOperationsOnUpdateSanitizeHookWillModifyData(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook.xml');
         $uid = 1;
@@ -135,7 +131,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function afterDatabaseOperationsOnNewCallsSanitizeEventDataHook()
+    public function afterDatabaseOperationsOnNewCallsSanitizeEventDataHook(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook.xml');
         $uid = 1;
@@ -156,7 +152,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function afterDatabaseOperationsOnNewSanitizeHookWillModifyData()
+    public function afterDatabaseOperationsOnNewSanitizeHookWillModifyData(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook.xml');
         $uid = 1;
@@ -198,7 +194,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
      *
      * @dataProvider validRegistrationDeadlineDataProvider
      */
-    public function afterDatabaseOperationsOnUpdateKeepsValidRegistrationDeadline(int $uid)
+    public function afterDatabaseOperationsOnUpdateKeepsValidRegistrationDeadline(int $uid): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook.xml');
         $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
@@ -228,7 +224,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
      *
      * @dataProvider invalidRegistrationDeadlineDataProvider
      */
-    public function afterDatabaseOperationsOnUpdateResetsInvalidRegistrationDeadline(int $uid)
+    public function afterDatabaseOperationsOnUpdateResetsInvalidRegistrationDeadline(int $uid): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook.xml');
 
@@ -245,7 +241,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
      *
      * @dataProvider invalidRegistrationDeadlineDataProvider
      */
-    public function afterDatabaseOperationsOnNewResetsInvalidRegistrationDeadline(int $uid)
+    public function afterDatabaseOperationsOnNewResetsInvalidRegistrationDeadline(int $uid): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook.xml');
 
@@ -275,7 +271,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
      *
      * @dataProvider validEarlyBirdDeadlineDataProvider
      */
-    public function afterDatabaseOperationsOnUpdateKeepsValidEarlyBirdDeadline(int $uid)
+    public function afterDatabaseOperationsOnUpdateKeepsValidEarlyBirdDeadline(int $uid): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook.xml');
         $data = $this->getDatabaseConnection()->selectSingleRow('*', self::TABLE_SEMINARS, 'uid = ' . $uid);
@@ -306,7 +302,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
      *
      * @dataProvider invalidEarlyBirdDeadlineDataProvider
      */
-    public function afterDatabaseOperationsOnUpdateResetsInvalidEarlyBirdDeadline(int $uid)
+    public function afterDatabaseOperationsOnUpdateResetsInvalidEarlyBirdDeadline(int $uid): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook.xml');
 
@@ -323,7 +319,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
      *
      * @dataProvider invalidEarlyBirdDeadlineDataProvider
      */
-    public function afterDatabaseOperationsOnNewResetsInvalidEarlyBirdDeadline(int $uid)
+    public function afterDatabaseOperationsOnNewResetsInvalidEarlyBirdDeadline(int $uid): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook.xml');
 
@@ -336,7 +332,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function afterDatabaseOperationsOnUpdateWithoutTimeSlotsKeepsBeginDate()
+    public function afterDatabaseOperationsOnUpdateWithoutTimeSlotsKeepsBeginDate(): void
     {
         $uid = 1;
         $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook/TimeSlots.xml');
@@ -368,7 +364,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
      *
      * @dataProvider beginDateWithTimeSlotsDataProvider
      */
-    public function afterDatabaseOperationsOnUpdateWithTimeSlotsOverwritesBeginDate(int $uid, int $expectedDate)
+    public function afterDatabaseOperationsOnUpdateWithTimeSlotsOverwritesBeginDate(int $uid, int $expectedDate): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook/TimeSlots.xml');
 
@@ -381,7 +377,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function afterDatabaseOperationsOnNewWithoutTimeSlotsKeepsBeginDate()
+    public function afterDatabaseOperationsOnNewWithoutTimeSlotsKeepsBeginDate(): void
     {
         $uid = 1;
         $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook/TimeSlots.xml');
@@ -402,7 +398,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
      *
      * @dataProvider beginDateWithTimeSlotsDataProvider
      */
-    public function afterDatabaseOperationsOnNewWithTimeSlotsOverwritesBeginDate(int $uid, int $expectedDate)
+    public function afterDatabaseOperationsOnNewWithTimeSlotsOverwritesBeginDate(int $uid, int $expectedDate): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook/TimeSlots.xml');
 
@@ -431,7 +427,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
      *
      * @dataProvider endDateWithTimeSlotsDataProvider
      */
-    public function afterDatabaseOperationsOnUpdateWithTimeSlotsOverwritesEndDate(int $uid, int $expectedDate)
+    public function afterDatabaseOperationsOnUpdateWithTimeSlotsOverwritesEndDate(int $uid, int $expectedDate): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook/TimeSlots.xml');
 
@@ -444,7 +440,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function afterDatabaseOperationsOnNewWithoutTimeSlotsKeepsEndDate()
+    public function afterDatabaseOperationsOnNewWithoutTimeSlotsKeepsEndDate(): void
     {
         $uid = 1;
         $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook/TimeSlots.xml');
@@ -465,7 +461,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
      *
      * @dataProvider endDateWithTimeSlotsDataProvider
      */
-    public function afterDatabaseOperationsOnNewWithTimeSlotsOverwritesEndDate(int $uid, int $expectedDate)
+    public function afterDatabaseOperationsOnNewWithTimeSlotsOverwritesEndDate(int $uid, int $expectedDate): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook/TimeSlots.xml');
 
@@ -493,7 +489,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
      *
      * @dataProvider noPlacesToAddFromTimeSlotsDataProvider
      */
-    public function afterDatabaseOperationsOnUpdateForNoPlacesFromTimeSlotsNotAddsPlaces(int $uid)
+    public function afterDatabaseOperationsOnUpdateForNoPlacesFromTimeSlotsNotAddsPlaces(int $uid): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook/NoPlacesFromTimeSlots.xml');
 
@@ -521,7 +517,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
      *
      * @dataProvider placesToAddFromTimeSlotsDataProvider
      */
-    public function afterDatabaseOperationsOnUpdateForFromTimeSlotsAddsPlacesToEvent(int $uid, int $expected)
+    public function afterDatabaseOperationsOnUpdateForFromTimeSlotsAddsPlacesToEvent(int $uid, int $expected): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/DataMapperHook/PlacesFromTimeSlots.xml');
 

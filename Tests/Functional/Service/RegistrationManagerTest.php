@@ -44,7 +44,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
      */
     private $configuration;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -57,7 +57,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
         $this->subject = \Tx_Seminars_Service_RegistrationManager::getInstance();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         ConfigurationRegistry::purgeInstance();
         \Tx_Seminars_Service_RegistrationManager::purgeInstance();
@@ -71,7 +71,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function notifyOrganizersForEventWithOneVacancyShowsVacanciesLabelWithVacancyNumber()
+    public function notifyOrganizersForEventWithOneVacancyShowsVacanciesLabelWithVacancyNumber(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/RegistrationManagerRecords.xml');
         $this->addMockedInstance(MailMessage::class, $this->email);

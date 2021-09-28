@@ -32,14 +32,14 @@ final class CommaSeparatedTitlesViewHelperTest extends TestCase
      */
     const TIME_FORMAT = '%H:%M';
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->list = new Collection();
         $this->subject = new \Tx_Seminars_ViewHelper_CommaSeparatedTitles();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
     }
@@ -47,7 +47,7 @@ final class CommaSeparatedTitlesViewHelperTest extends TestCase
     /**
      * @test
      */
-    public function renderWithEmptyListReturnsEmptyString()
+    public function renderWithEmptyListReturnsEmptyString(): void
     {
         self::assertSame(
             '',
@@ -58,7 +58,7 @@ final class CommaSeparatedTitlesViewHelperTest extends TestCase
     /**
      * @test
      */
-    public function renderWithElementsInListWithoutGetTitleMethodThrowsBadMethodCallException()
+    public function renderWithElementsInListWithoutGetTitleMethodThrowsBadMethodCallException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage(
@@ -77,7 +77,7 @@ final class CommaSeparatedTitlesViewHelperTest extends TestCase
     /**
      * @test
      */
-    public function renderWithOneElementListReturnsOneElementsTitle()
+    public function renderWithOneElementListReturnsOneElementsTitle(): void
     {
         $model = new TitledTestingModel();
         $model->setData(['title' => 'Testing model']);
@@ -93,7 +93,7 @@ final class CommaSeparatedTitlesViewHelperTest extends TestCase
     /**
      * @test
      */
-    public function renderWithTwoElementsListReturnsTwoElementTitlesSeparatedByComma()
+    public function renderWithTwoElementsListReturnsTwoElementTitlesSeparatedByComma(): void
     {
         $firstModel = new TitledTestingModel();
         $firstModel->setData(['title' => 'First testing model']);
@@ -112,7 +112,7 @@ final class CommaSeparatedTitlesViewHelperTest extends TestCase
     /**
      * @test
      */
-    public function renderWithOneElementListReturnsOneElementsTitleHtmlspecialchared()
+    public function renderWithOneElementListReturnsOneElementsTitleHtmlspecialchared(): void
     {
         $model = new TitledTestingModel();
         $model->setData(['title' => '<test>Testing model</test>']);

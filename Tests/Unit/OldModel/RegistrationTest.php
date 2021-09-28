@@ -17,7 +17,7 @@ final class RegistrationTest extends UnitTestCase
      */
     private $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = \Tx_Seminars_OldModel_Registration::fromData([]);
     }
@@ -25,7 +25,7 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function isAbstractModel()
+    public function isAbstractModel(): void
     {
         self::assertInstanceOf(AbstractModel::class, $this->subject);
     }
@@ -33,7 +33,7 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function fromDataCreatesInstanceOfSubclass()
+    public function fromDataCreatesInstanceOfSubclass(): void
     {
         $result = \Tx_Seminars_OldModel_Registration::fromData([]);
 
@@ -43,7 +43,7 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getFrontEndUserWithoutUserUidReturnsNull()
+    public function getFrontEndUserWithoutUserUidReturnsNull(): void
     {
         $result = $this->subject->getFrontEndUser();
 
@@ -53,7 +53,7 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setFrontEndUserSetsFrontEndUser()
+    public function setFrontEndUserSetsFrontEndUser(): void
     {
         $user = new \Tx_Seminars_Model_FrontEndUser();
 
@@ -65,7 +65,7 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function isOnRegistrationByDefaultReturnsFalse()
+    public function isOnRegistrationByDefaultReturnsFalse(): void
     {
         self::assertFalse($this->subject->isOnRegistrationQueue());
 
@@ -78,7 +78,7 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function isOnRegistrationReturnsRegistrationQueue()
+    public function isOnRegistrationReturnsRegistrationQueue(): void
     {
         $subject = \Tx_Seminars_OldModel_Registration::fromData(['registration_queue' => 1]);
 
@@ -103,7 +103,7 @@ final class RegistrationTest extends UnitTestCase
      *
      * @dataProvider booleanDataProvider
      */
-    public function setIsOnRegistrationQueueSetsOnRegistrationQueue(bool $value)
+    public function setIsOnRegistrationQueueSetsOnRegistrationQueue(bool $value): void
     {
         $this->subject->setIsOnRegistrationQueue($value);
 
@@ -113,7 +113,7 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getMethodOfPaymentUidInitiallyReturnsZero()
+    public function getMethodOfPaymentUidInitiallyReturnsZero(): void
     {
         self::assertSame(0, $this->subject->getMethodOfPaymentUid());
     }
@@ -121,7 +121,7 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setMethodOfPaymentUidReturnsMethodOfPaymentUid()
+    public function setMethodOfPaymentUidReturnsMethodOfPaymentUid(): void
     {
         $uid = 42;
 
@@ -133,7 +133,7 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setMethodOfPaymentUidSetsMethodOfPaymentUid()
+    public function setMethodOfPaymentUidSetsMethodOfPaymentUid(): void
     {
         $value = 123456;
         $this->subject->setMethodOfPaymentUid($value);
@@ -144,7 +144,7 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setMethodOfPaymentUidCanSetMethodOfPaymentUidToZero()
+    public function setMethodOfPaymentUidCanSetMethodOfPaymentUidToZero(): void
     {
         $value = 0;
         $this->subject->setMethodOfPaymentUid($value);
@@ -155,7 +155,7 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setMethodOfPaymentUidNegativeValueThrowsException()
+    public function setMethodOfPaymentUidNegativeValueThrowsException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -165,7 +165,7 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getUserDataForEmptyKeyReturnsEmptyString()
+    public function getUserDataForEmptyKeyReturnsEmptyString(): void
     {
         $result = $this->subject->getUserData('');
 
@@ -175,7 +175,7 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getUserDataForInexistentKeyNameReturnsEmptyString()
+    public function getUserDataForInexistentKeyNameReturnsEmptyString(): void
     {
         $this->subject->setUserData(['name' => 'John Doe']);
 
@@ -187,7 +187,7 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setUserDataSetsUserData()
+    public function setUserDataSetsUserData(): void
     {
         $key = 'www';
         $value = 'https://www.example.com/';
@@ -200,7 +200,7 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getUserDataReturnsIntegersAsString()
+    public function getUserDataReturnsIntegersAsString(): void
     {
         $key = 'pid';
         $value = 42;
@@ -235,7 +235,7 @@ final class RegistrationTest extends UnitTestCase
      *
      * @dataProvider nameUserDataDataProvider
      */
-    public function getUserDataForNameAssemblesNameFromSeveralSources(array $data, string $expectedName)
+    public function getUserDataForNameAssemblesNameFromSeveralSources(array $data, string $expectedName): void
     {
         $this->subject->setUserData($data);
 
@@ -249,7 +249,7 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasRegisteredThemselvesForRegisteredThemselvesByDefaultFalseReturnsFalse()
+    public function hasRegisteredThemselvesForRegisteredThemselvesByDefaultFalseReturnsFalse(): void
     {
         $result = $this->subject->hasRegisteredThemselves();
 
@@ -259,7 +259,7 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasRegisteredThemselvesReturnsRegisteredThemselves()
+    public function hasRegisteredThemselvesReturnsRegisteredThemselves(): void
     {
         $subject = \Tx_Seminars_OldModel_Registration::fromData(['registered_themselves' => 1]);
 
@@ -275,7 +275,7 @@ final class RegistrationTest extends UnitTestCase
      *
      * @dataProvider booleanDataProvider
      */
-    public function setRegisteredThemselvesSetsRegisteredThemselves(bool $value)
+    public function setRegisteredThemselvesSetsRegisteredThemselves(bool $value): void
     {
         $this->subject->setRegisteredThemselves($value);
 
@@ -289,7 +289,7 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getBillingAddressWithCompanyContainsCompany()
+    public function getBillingAddressWithCompanyContainsCompany(): void
     {
         $value = 'Psijic Order';
         $subject = \Tx_Seminars_OldModel_Registration::fromData(['company' => $value]);
@@ -302,7 +302,7 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getBillingAddressWithNameContainsName()
+    public function getBillingAddressWithNameContainsName(): void
     {
         $value = 'Max Doe';
         $subject = \Tx_Seminars_OldModel_Registration::fromData(['name' => $value]);
@@ -315,7 +315,7 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getBillingAddressWithAddressContainsAddress()
+    public function getBillingAddressWithAddressContainsAddress(): void
     {
         $value = 'Main Street 123';
         $subject = \Tx_Seminars_OldModel_Registration::fromData(['address' => $value]);
@@ -328,7 +328,7 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getBillingAddressWithZipCodeContainsZipCode()
+    public function getBillingAddressWithZipCodeContainsZipCode(): void
     {
         $value = '12345';
         $subject = \Tx_Seminars_OldModel_Registration::fromData(['zip' => $value]);
@@ -341,7 +341,7 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getBillingAddressWithCityContainsCity()
+    public function getBillingAddressWithCityContainsCity(): void
     {
         $value = 'Big City';
         $subject = \Tx_Seminars_OldModel_Registration::fromData(['city' => $value]);
@@ -354,7 +354,7 @@ final class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getBillingAddressWithCountryContainsCountry()
+    public function getBillingAddressWithCountryContainsCountry(): void
     {
         $value = 'Takka-Tukka-Land';
         $subject = \Tx_Seminars_OldModel_Registration::fromData(['country' => $value]);

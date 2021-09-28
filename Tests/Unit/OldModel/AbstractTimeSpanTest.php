@@ -18,7 +18,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
      */
     private $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
@@ -28,7 +28,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @test
      */
-    public function isAbstractModel()
+    public function isAbstractModel(): void
     {
         self::assertInstanceOf(AbstractModel::class, $this->subject);
     }
@@ -36,7 +36,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @test
      */
-    public function fromDataCreatesInstanceOfSubclass()
+    public function fromDataCreatesInstanceOfSubclass(): void
     {
         $result = TestingTimeSpan::fromData([]);
 
@@ -48,7 +48,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasDateInitiallyReturnsFalse()
+    public function hasDateInitiallyReturnsFalse(): void
     {
         self::assertFalse($this->subject->hasDate());
     }
@@ -56,7 +56,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @test
      */
-    public function getBeginDateAsTimestampInitiallyReturnsZero()
+    public function getBeginDateAsTimestampInitiallyReturnsZero(): void
     {
         self::assertSame(0, $this->subject->getBeginDateAsTimestamp());
     }
@@ -64,7 +64,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasBeginDateInitiallyReturnsFalse()
+    public function hasBeginDateInitiallyReturnsFalse(): void
     {
         self::assertFalse($this->subject->hasBeginDate());
     }
@@ -72,7 +72,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @test
      */
-    public function getEndDateAsTimestampInitiallyReturnsZero()
+    public function getEndDateAsTimestampInitiallyReturnsZero(): void
     {
         self::assertSame(0, $this->subject->getEndDateAsTimestamp());
     }
@@ -80,7 +80,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasEndDateInitiallyReturnsFalse()
+    public function hasEndDateInitiallyReturnsFalse(): void
     {
         self::assertFalse($this->subject->hasEndDate());
     }
@@ -88,7 +88,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @test
      */
-    public function getEndDateAsTimestampEvenIfOpenEndedInitiallyReturnsZero()
+    public function getEndDateAsTimestampEvenIfOpenEndedInitiallyReturnsZero(): void
     {
         self::assertSame(0, $this->subject->getEndDateAsTimestampEvenIfOpenEnded());
     }
@@ -96,7 +96,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @test
      */
-    public function setBeginDateAndTimeSetsBeginDate()
+    public function setBeginDateAndTimeSetsBeginDate(): void
     {
         $value = 42;
         $this->subject->setBeginDateAndTime($value);
@@ -107,7 +107,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @test
      */
-    public function setBeginDateAndTimeMarksBeginDateAsSet()
+    public function setBeginDateAndTimeMarksBeginDateAsSet(): void
     {
         $this->subject->setBeginDateAndTime(42);
 
@@ -117,7 +117,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasDateAfterSettingBeginDateReturnsTrue()
+    public function hasDateAfterSettingBeginDateReturnsTrue(): void
     {
         $this->subject->setBeginDateAndTime(42);
 
@@ -127,7 +127,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @test
      */
-    public function setEndDateAndTimeSetsEndDate()
+    public function setEndDateAndTimeSetsEndDate(): void
     {
         $this->subject->setEndDateAndTime(42);
 
@@ -137,7 +137,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @test
      */
-    public function setEndDateAndTimeMarksEndDateAsSet()
+    public function setEndDateAndTimeMarksEndDateAsSet(): void
     {
         $this->subject->setEndDateAndTime(42);
 
@@ -147,7 +147,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @test
      */
-    public function setEndDateAndTimeWithoutBegingDateNotMarksDateAsSet()
+    public function setEndDateAndTimeWithoutBegingDateNotMarksDateAsSet(): void
     {
         $this->subject->setEndDateAndTime(42);
 
@@ -157,7 +157,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @test
      */
-    public function getEndDateAsTimestampEvenIfOpenEndedAfterSettingEndDateOnlyReturnsZero()
+    public function getEndDateAsTimestampEvenIfOpenEndedAfterSettingEndDateOnlyReturnsZero(): void
     {
         $this->subject->setEndDateAndTime(42);
 
@@ -169,7 +169,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasTimeInitiallyReturnsZero()
+    public function hasTimeInitiallyReturnsZero(): void
     {
         self::assertFalse($this->subject->hasTime());
     }
@@ -177,7 +177,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasEndTimeWithEndTimeAtMidnightReturnsFalse()
+    public function hasEndTimeWithEndTimeAtMidnightReturnsFalse(): void
     {
         $this->subject->setEndDateAndTime(\mktime(0, 0, 0, 1, 1, 2010));
 
@@ -187,7 +187,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasEndTimeWithEndTimeDuringTheDayReturnsTrue()
+    public function hasEndTimeWithEndTimeDuringTheDayReturnsTrue(): void
     {
         $this->subject->setEndDateAndTime(\mktime(9, 0, 0, 1, 1, 2010));
 
@@ -199,7 +199,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @test
      */
-    public function isOpenEndedInitiallyReturnsTrue()
+    public function isOpenEndedInitiallyReturnsTrue(): void
     {
         self::assertTrue($this->subject->isOpenEnded());
     }
@@ -207,7 +207,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @test
      */
-    public function isOpenEndedAfterSettingOnlyTheBeginDateReturnsTrue()
+    public function isOpenEndedAfterSettingOnlyTheBeginDateReturnsTrue(): void
     {
         $this->subject->setBeginDateAndTime(42);
 
@@ -217,7 +217,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @test
      */
-    public function isOpenEndedAfterSettingOnlyTheEndDateToMorningReturnsFalse()
+    public function isOpenEndedAfterSettingOnlyTheEndDateToMorningReturnsFalse(): void
     {
         $this->subject->setEndDateAndTime(\mktime(9, 0, 0, 1, 1, 2010));
 
@@ -227,7 +227,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @test
      */
-    public function isOpenEndedAfterSettingBeginAndEndDateToMorningReturnsFalse()
+    public function isOpenEndedAfterSettingBeginAndEndDateToMorningReturnsFalse(): void
     {
         $this->subject->setBeginDateAndTime(\mktime(8, 0, 0, 1, 1, 2010));
         $this->subject->setEndDateAndTime(\mktime(9, 0, 0, 1, 1, 2010));
@@ -238,7 +238,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @test
      */
-    public function isOpenEndedIfEndsAtMidnightReturnsFalse()
+    public function isOpenEndedIfEndsAtMidnightReturnsFalse(): void
     {
         $this->subject->setEndDateAndTime(\mktime(0, 0, 0, 1, 1, 2010));
 
@@ -250,7 +250,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @test
      */
-    public function endDateIsMidnightIfOpenEndedStartsAtOneOClock()
+    public function endDateIsMidnightIfOpenEndedStartsAtOneOClock(): void
     {
         $this->subject->setBeginDateAndTime(\mktime(1, 0, 0, 1, 1, 2010));
 
@@ -261,7 +261,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @test
      */
-    public function endDateIsMidnightIfOpenEndedStartsAtMorning()
+    public function endDateIsMidnightIfOpenEndedStartsAtMorning(): void
     {
         $this->subject->setBeginDateAndTime(\mktime(9, 0, 0, 1, 1, 2010));
 
@@ -272,7 +272,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @test
      */
-    public function endDateIsMidnightIfOpenEndedStartsAtElevenPm()
+    public function endDateIsMidnightIfOpenEndedStartsAtElevenPm(): void
     {
         $this->subject->setBeginDateAndTime(\mktime(23, 0, 0, 1, 1, 2010));
 
@@ -283,7 +283,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @test
      */
-    public function endDateIsMidnightIfOpenEndedStartsAtMidnight()
+    public function endDateIsMidnightIfOpenEndedStartsAtMidnight(): void
     {
         $this->subject->setBeginDateAndTime(\mktime(0, 0, 0, 1, 1, 2010));
 
@@ -296,7 +296,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasStartedForStartedEventReturnsTrue()
+    public function hasStartedForStartedEventReturnsTrue(): void
     {
         $this->subject->setBeginDateAndTime($GLOBALS['SIM_EXEC_TIME'] - 42);
 
@@ -306,7 +306,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasStartedForUpcomingEventReturnsFalse()
+    public function hasStartedForUpcomingEventReturnsFalse(): void
     {
         $this->subject->setBeginDateAndTime($GLOBALS['SIM_EXEC_TIME'] + 42);
 
@@ -316,7 +316,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasStartedForEventWithoutBeginDateReturnsFalse()
+    public function hasStartedForEventWithoutBeginDateReturnsFalse(): void
     {
         $this->subject->setBeginDateAndTime(0);
 
@@ -328,7 +328,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @test
      */
-    public function numberOfPlacesInitiallyIsZero()
+    public function numberOfPlacesInitiallyIsZero(): void
     {
         self::assertSame(0, $this->subject->getNumberOfPlaces());
     }
@@ -336,7 +336,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @test
      */
-    public function setNumberOfPlacesSetsNumberOfPlace()
+    public function setNumberOfPlacesSetsNumberOfPlace(): void
     {
         $value = 42;
         $this->subject->setNumberOfPlaces($value);
@@ -349,7 +349,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @test
      */
-    public function getRoomInitiallyReturnsEmptyString()
+    public function getRoomInitiallyReturnsEmptyString(): void
     {
         self::assertSame('', $this->subject->getRoom());
     }
@@ -357,7 +357,7 @@ final class AbstractTimeSpanTest extends UnitTestCase
     /**
      * @test
      */
-    public function setRoomSetsRoom()
+    public function setRoomSetsRoom(): void
     {
         $value = 'the first test chamber';
         $this->subject->setRoom($value);

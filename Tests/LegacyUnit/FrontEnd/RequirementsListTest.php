@@ -28,7 +28,7 @@ final class RequirementsListTest extends TestCase
      */
     private $testingFramework = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
         $pageUid = $this->testingFramework->createFrontEndPage();
@@ -50,7 +50,7 @@ final class RequirementsListTest extends TestCase
         );
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
 
@@ -67,7 +67,7 @@ final class RequirementsListTest extends TestCase
     /**
      * @test
      */
-    public function renderWithoutSetSeminarThrowsException()
+    public function renderWithoutSetSeminarThrowsException(): void
     {
         $this->expectException(
             \BadMethodCallException::class
@@ -82,7 +82,7 @@ final class RequirementsListTest extends TestCase
     /**
      * @test
      */
-    public function renderShowsHtmlspecialcharedTitleOfOneRequirement()
+    public function renderShowsHtmlspecialcharedTitleOfOneRequirement(): void
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -113,7 +113,7 @@ final class RequirementsListTest extends TestCase
     /**
      * @test
      */
-    public function renderLinksOneRequirementToTheSingleView()
+    public function renderLinksOneRequirementToTheSingleView(): void
     {
         $this->subject->setConfigurationValue(
             'detailPID',
@@ -148,7 +148,7 @@ final class RequirementsListTest extends TestCase
     /**
      * @test
      */
-    public function renderShowsTitleOfTwoRequirements()
+    public function renderShowsTitleOfTwoRequirements(): void
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -194,7 +194,7 @@ final class RequirementsListTest extends TestCase
     /**
      * @test
      */
-    public function limitToMissingRegistrationsWithNoLoggedInFeUserThrowsException()
+    public function limitToMissingRegistrationsWithNoLoggedInFeUserThrowsException(): void
     {
         $this->expectException(
             \BadMethodCallException::class
@@ -209,7 +209,7 @@ final class RequirementsListTest extends TestCase
     /**
      * @test
      */
-    public function limitToMissingRegistrationsLimitsOutputToMissingRegistrationsOnly()
+    public function limitToMissingRegistrationsLimitsOutputToMissingRegistrationsOnly(): void
     {
         $userUid = $this->testingFramework->createAndLoginFrontEndUser();
         $this->testingFramework->changeRecord(

@@ -13,7 +13,7 @@ final class TargetGroupTest extends TestCase
      */
     private $subject;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new \Tx_Seminars_Model_TargetGroup();
     }
@@ -21,7 +21,7 @@ final class TargetGroupTest extends TestCase
     /**
      * @test
      */
-    public function setTitleWithEmptyTitleThrowsException()
+    public function setTitleWithEmptyTitleThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -36,7 +36,7 @@ final class TargetGroupTest extends TestCase
     /**
      * @test
      */
-    public function setTitleSetsTitle()
+    public function setTitleSetsTitle(): void
     {
         $this->subject->setTitle('Housewives');
 
@@ -49,7 +49,7 @@ final class TargetGroupTest extends TestCase
     /**
      * @test
      */
-    public function getTitleWithNonEmptyTitleReturnsTitle()
+    public function getTitleWithNonEmptyTitleReturnsTitle(): void
     {
         $this->subject->setData(['title' => 'Housewives']);
 
@@ -66,7 +66,7 @@ final class TargetGroupTest extends TestCase
     /**
      * @test
      */
-    public function getMinimumAgeWithNoMinimumAgeSetReturnsZero()
+    public function getMinimumAgeWithNoMinimumAgeSetReturnsZero(): void
     {
         $this->subject->setData([]);
 
@@ -79,7 +79,7 @@ final class TargetGroupTest extends TestCase
     /**
      * @test
      */
-    public function getMinimumAgeWithNonZeroMinimumAgeReturnsMinimumAge()
+    public function getMinimumAgeWithNonZeroMinimumAgeReturnsMinimumAge(): void
     {
         $this->subject->setData(['minimum_age' => 18]);
 
@@ -92,7 +92,7 @@ final class TargetGroupTest extends TestCase
     /**
      * @test
      */
-    public function setMinimumAgeSetsMinimumAge()
+    public function setMinimumAgeSetsMinimumAge(): void
     {
         $this->subject->setMinimumAge(18);
 
@@ -109,7 +109,7 @@ final class TargetGroupTest extends TestCase
     /**
      * @test
      */
-    public function getMaximumAgeWithNoMaximumAgeSetReturnsZero()
+    public function getMaximumAgeWithNoMaximumAgeSetReturnsZero(): void
     {
         $this->subject->setData([]);
 
@@ -122,7 +122,7 @@ final class TargetGroupTest extends TestCase
     /**
      * @test
      */
-    public function getMaximumAgeWithNonZeroMaximumAgeReturnsMaximumAge()
+    public function getMaximumAgeWithNonZeroMaximumAgeReturnsMaximumAge(): void
     {
         $this->subject->setData(['maximum_age' => 18]);
 
@@ -135,7 +135,7 @@ final class TargetGroupTest extends TestCase
     /**
      * @test
      */
-    public function setMaximumAgeSetsMaximumAge()
+    public function setMaximumAgeSetsMaximumAge(): void
     {
         $this->subject->setMaximumAge(18);
 

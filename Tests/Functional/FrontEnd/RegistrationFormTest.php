@@ -27,7 +27,7 @@ final class RegistrationFormTest extends FunctionalTestCase
      */
     private $contentObject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -38,7 +38,7 @@ final class RegistrationFormTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function populateCheckboxesForEventWithoutCheckboxesReturnsEmptyArray()
+    public function populateCheckboxesForEventWithoutCheckboxesReturnsEmptyArray(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/RegistrationEditor/EventsWithCheckboxes.xml');
 
@@ -53,7 +53,7 @@ final class RegistrationFormTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function populateCheckboxesForEventWithCheckboxesReturnsCheckboxes()
+    public function populateCheckboxesForEventWithCheckboxesReturnsCheckboxes(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/RegistrationEditor/EventsWithCheckboxes.xml');
 
@@ -69,7 +69,7 @@ final class RegistrationFormTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function populateCheckboxesForEventWithCheckboxesReturnsCheckboxesOrderedBySorting()
+    public function populateCheckboxesForEventWithCheckboxesReturnsCheckboxesOrderedBySorting(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/RegistrationEditor/EventsWithCheckboxes.xml');
 
@@ -85,7 +85,7 @@ final class RegistrationFormTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function hasCheckboxesForEventWithoutCheckboxesAndCheckboxesFieldDisabledReturnsFalse()
+    public function hasCheckboxesForEventWithoutCheckboxesAndCheckboxesFieldDisabledReturnsFalse(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/RegistrationEditor/EventsWithCheckboxes.xml');
 
@@ -101,7 +101,7 @@ final class RegistrationFormTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function hasCheckboxesForEventWithoutCheckboxesAndCheckboxesFieldEnabledReturnsFalse()
+    public function hasCheckboxesForEventWithoutCheckboxesAndCheckboxesFieldEnabledReturnsFalse(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/RegistrationEditor/EventsWithCheckboxes.xml');
 
@@ -117,7 +117,7 @@ final class RegistrationFormTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function hasCheckboxesForEventWithCheckboxesAndCheckboxesFieldDisabledReturnsFalse()
+    public function hasCheckboxesForEventWithCheckboxesAndCheckboxesFieldDisabledReturnsFalse(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/RegistrationEditor/EventsWithCheckboxes.xml');
 
@@ -133,7 +133,7 @@ final class RegistrationFormTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function hasCheckboxesForEventWithCheckboxesAndCheckboxesFieldEnabledReturnsTrue()
+    public function hasCheckboxesForEventWithCheckboxesAndCheckboxesFieldEnabledReturnsTrue(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/RegistrationEditor/EventsWithCheckboxes.xml');
 

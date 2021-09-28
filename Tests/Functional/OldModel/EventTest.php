@@ -64,7 +64,7 @@ final class EventTest extends FunctionalTestCase
         ConfigurationRegistry::purgeInstance();
     }
 
-    private function buildPlugin()
+    private function buildPlugin(): void
     {
         $plugin = new TemplateHelper();
         $plugin->init(['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html']);
@@ -75,7 +75,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function fromUidMapsDataFromDatabase()
+    public function fromUidMapsDataFromDatabase(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -120,7 +120,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getAttendancesForNoRegistrationsReturnsZero()
+    public function getAttendancesForNoRegistrationsReturnsZero(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -132,7 +132,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getAttendancesCountsOfflineRegistrations()
+    public function getAttendancesCountsOfflineRegistrations(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -144,7 +144,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getAttendancesSumsSeatsOfRegistrationsWithSeats()
+    public function getAttendancesSumsSeatsOfRegistrationsWithSeats(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -156,7 +156,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getAttendancesCalculatesSeatsOfRegistrationsWithoutSeatsAsOneEach()
+    public function getAttendancesCalculatesSeatsOfRegistrationsWithoutSeatsAsOneEach(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -168,7 +168,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getAttendancesIgnoresRegistrationsOnQueue()
+    public function getAttendancesIgnoresRegistrationsOnQueue(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -180,7 +180,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getAttendancesOnRegistrationQueueCountsQueueRegistrationsOnly()
+    public function getAttendancesOnRegistrationQueueCountsQueueRegistrationsOnly(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -192,7 +192,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getAttendancesPaidNotCountsNonQueueUnpaidRegistrations()
+    public function getAttendancesPaidNotCountsNonQueueUnpaidRegistrations(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -204,7 +204,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getAttendancesPaidNotCountsOfflineRegistrations()
+    public function getAttendancesPaidNotCountsOfflineRegistrations(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -216,7 +216,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getAttendancesPaidCountsNonQueuePaidRegistrations()
+    public function getAttendancesPaidCountsNonQueuePaidRegistrations(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -228,7 +228,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getAttendancesPaidCountsQueuePaidRegistrations()
+    public function getAttendancesPaidCountsQueuePaidRegistrations(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -240,7 +240,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getAttendancesNotPaidCountsNonQueueUnpaidRegistrations()
+    public function getAttendancesNotPaidCountsNonQueueUnpaidRegistrations(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -252,7 +252,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getAttendancesNotPaidCountsOfflineRegistrations()
+    public function getAttendancesNotPaidCountsOfflineRegistrations(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -264,7 +264,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getAttendancesNotPaidNotCountsNonQueuePaidRegistrations()
+    public function getAttendancesNotPaidNotCountsNonQueuePaidRegistrations(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -276,7 +276,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getAttendancesNotPaidNotCountsQueuePaidRegistrations()
+    public function getAttendancesNotPaidNotCountsQueuePaidRegistrations(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -288,7 +288,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function calculateStatisticsTakesNewOfflineRegistrationsIntoAccount()
+    public function calculateStatisticsTakesNewOfflineRegistrationsIntoAccount(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -305,7 +305,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function calculateStatisticsTakesNewRegistrationRecordsIntoAccount()
+    public function calculateStatisticsTakesNewRegistrationRecordsIntoAccount(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -322,7 +322,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getVacanciesForNoMaxAttendancesAndNoRegistrationsReturnsZero()
+    public function getVacanciesForNoMaxAttendancesAndNoRegistrationsReturnsZero(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -334,7 +334,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getVacanciesForMaxAttendancesAndNoRegistrationsReturnsMaxAttendances()
+    public function getVacanciesForMaxAttendancesAndNoRegistrationsReturnsMaxAttendances(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -346,7 +346,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getVacanciesReturnsMaxVacanciesMinusOfflineRegistrations()
+    public function getVacanciesReturnsMaxVacanciesMinusOfflineRegistrations(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -358,7 +358,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getVacanciesReturnsMaxVacanciesMinusRegistrations()
+    public function getVacanciesReturnsMaxVacanciesMinusRegistrations(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -370,7 +370,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getVacanciesForMoreRegisteredSeatsThanAllowedReturnsZero()
+    public function getVacanciesForMoreRegisteredSeatsThanAllowedReturnsZero(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -382,7 +382,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getVacanciesIgnoresQueueRegistrations()
+    public function getVacanciesIgnoresQueueRegistrations(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events.xml');
 
@@ -394,7 +394,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getCheckboxesForNoCheckboxesReturnsEmptyArray()
+    public function getCheckboxesForNoCheckboxesReturnsEmptyArray(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/Checkboxes.xml');
 
@@ -407,7 +407,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getCheckboxesReturnsCaptionAndUidOfAssociatedCheckboxesForSingleEvent()
+    public function getCheckboxesReturnsCaptionAndUidOfAssociatedCheckboxesForSingleEvent(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/Checkboxes.xml');
 
@@ -421,7 +421,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getCheckboxesReturnsCaptionAndUidOfAssociatedCheckboxesForEventDate()
+    public function getCheckboxesReturnsCaptionAndUidOfAssociatedCheckboxesForEventDate(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/Checkboxes.xml');
 
@@ -435,7 +435,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getCheckboxesReturnsAssociatedCheckboxesOrderedBySorting()
+    public function getCheckboxesReturnsAssociatedCheckboxesOrderedBySorting(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/Checkboxes.xml');
 
@@ -449,7 +449,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getTargetGroupsAsArrayForNoTargetGroupsReturnsEmptyArray()
+    public function getTargetGroupsAsArrayForNoTargetGroupsReturnsEmptyArray(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/TargetGroups.xml');
 
@@ -462,7 +462,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getTargetGroupsAsArrayReturnsTitlesOfAssociatedTargetGroups()
+    public function getTargetGroupsAsArrayReturnsTitlesOfAssociatedTargetGroups(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/TargetGroups.xml');
 
@@ -476,7 +476,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getTargetGroupsAsArrayReturnsAssociatedTargetGroupsOrderedBySorting()
+    public function getTargetGroupsAsArrayReturnsAssociatedTargetGroupsOrderedBySorting(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/TargetGroups.xml');
 
@@ -490,7 +490,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getTargetGroupsAsArrayForDateReturnsTitlesOfTopicTargetGroups()
+    public function getTargetGroupsAsArrayForDateReturnsTitlesOfTopicTargetGroups(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/TargetGroups.xml');
 
@@ -504,7 +504,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getAttachedFilesForOneFileReturnsOneElement()
+    public function getAttachedFilesForOneFileReturnsOneElement(): void
     {
         $this->buildPlugin();
 
@@ -519,7 +519,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getAttachedFilesForTwoFilesReturnsTwoElements()
+    public function getAttachedFilesForTwoFilesReturnsTwoElements(): void
     {
         $this->buildPlugin();
 
@@ -534,7 +534,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getAttachedFilesReturnsFileName()
+    public function getAttachedFilesReturnsFileName(): void
     {
         $this->buildPlugin();
 
@@ -549,7 +549,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getAttachedFilesReturnsSize()
+    public function getAttachedFilesReturnsSize(): void
     {
         $this->buildPlugin();
 
@@ -566,7 +566,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getAttachedFilesReturnsTypeBySuffix()
+    public function getAttachedFilesReturnsTypeBySuffix(): void
     {
         $this->buildPlugin();
 
@@ -581,7 +581,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getAttachedFilesForDotAndSuffixOnlyReturnsTypeBySuffix()
+    public function getAttachedFilesForDotAndSuffixOnlyReturnsTypeBySuffix(): void
     {
         $this->buildPlugin();
 
@@ -596,7 +596,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getAttachedFilesForDotOnlyReturnsTypeNone()
+    public function getAttachedFilesForDotOnlyReturnsTypeNone(): void
     {
         $this->buildPlugin();
 
@@ -611,7 +611,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getAttachedFilesForFileWithoutSuffixReturnsTypeNone()
+    public function getAttachedFilesForFileWithoutSuffixReturnsTypeNone(): void
     {
         $this->buildPlugin();
 
@@ -626,7 +626,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getAttachedFilesForDateWithFilesReturnsFilesFromDate()
+    public function getAttachedFilesForDateWithFilesReturnsFilesFromDate(): void
     {
         $this->buildPlugin();
 
@@ -648,7 +648,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getAttachedFilesForDateWithoutFilesAndTopicWithFilesReturnsFilesFromTopic()
+    public function getAttachedFilesForDateWithoutFilesAndTopicWithFilesReturnsFilesFromTopic(): void
     {
         $this->buildPlugin();
 
@@ -670,7 +670,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getAttachedFilesForDateAndTopicWithFilesReturnsFilesFromDTopicAndDate()
+    public function getAttachedFilesForDateAndTopicWithFilesReturnsFilesFromDTopicAndDate(): void
     {
         $this->buildPlugin();
 
@@ -699,7 +699,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getPlacesWithCountryWithoutPlacesReturnsEmptyArray()
+    public function getPlacesWithCountryWithoutPlacesReturnsEmptyArray(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
 
@@ -712,7 +712,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getPlacesWithCountryForPlacesWithoutCountryReturnsEmptyArray()
+    public function getPlacesWithCountryForPlacesWithoutCountryReturnsEmptyArray(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
 
@@ -725,7 +725,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getPlacesWithCountryForPlacesWithValidCountryReturnsCountryCode()
+    public function getPlacesWithCountryForPlacesWithValidCountryReturnsCountryCode(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
 
@@ -738,7 +738,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getPlacesWithCountryForPlacesWithInvalidCountryReturnsCountryCode()
+    public function getPlacesWithCountryForPlacesWithInvalidCountryReturnsCountryCode(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
 
@@ -751,7 +751,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getPlacesWithCountryWillReturnCountriesInSortingOrder()
+    public function getPlacesWithCountryWillReturnCountriesInSortingOrder(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
 
@@ -764,7 +764,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getPlacesWithCountryIgnoresDeletedCountry()
+    public function getPlacesWithCountryIgnoresDeletedCountry(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
 
@@ -777,7 +777,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function hasCountryForNoPlacesReturnsFalse()
+    public function hasCountryForNoPlacesReturnsFalse(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
 
@@ -789,7 +789,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function hasCountryForPlaceWithoutCountryReturnsFalse()
+    public function hasCountryForPlaceWithoutCountryReturnsFalse(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
 
@@ -801,7 +801,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function hasCountryForPlaceWithDeletedCountryReturnsFalse()
+    public function hasCountryForPlaceWithDeletedCountryReturnsFalse(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
 
@@ -813,7 +813,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function hasCountryForPlaceWithCountryReturnsTrue()
+    public function hasCountryForPlaceWithCountryReturnsTrue(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
 
@@ -825,7 +825,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getPlaceShortReturnsPlaceName()
+    public function getPlaceShortReturnsPlaceName(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
 
@@ -837,7 +837,7 @@ final class EventTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getPlaceShortIgnoresDuplicatePlaces()
+    public function getPlaceShortIgnoresDuplicatePlaces(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Events/EventsWithPlaces.xml');
 

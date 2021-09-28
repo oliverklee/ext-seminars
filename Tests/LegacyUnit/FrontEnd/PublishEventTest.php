@@ -28,14 +28,14 @@ final class PublishEventTest extends TestCase
      */
     private $testingFramework = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
         $this->subject = new \Tx_Seminars_FrontEnd_PublishEvent();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
     }
@@ -47,7 +47,7 @@ final class PublishEventTest extends TestCase
     /**
      * @test
      */
-    public function renderForNoPublicationHashSetInPiVarsReturnsPublishFailedMessage()
+    public function renderForNoPublicationHashSetInPiVarsReturnsPublishFailedMessage(): void
     {
         self::assertEquals(
             $this->getLanguageService()->getLL('message_publishingFailed'),
@@ -58,7 +58,7 @@ final class PublishEventTest extends TestCase
     /**
      * @test
      */
-    public function renderForEmptyPublicationHashSetInPiVarsReturnsPublishFailedMessage()
+    public function renderForEmptyPublicationHashSetInPiVarsReturnsPublishFailedMessage(): void
     {
         $this->subject->piVars['hash'] = '';
 
@@ -71,7 +71,7 @@ final class PublishEventTest extends TestCase
     /**
      * @test
      */
-    public function renderForInvalidPublicationHashSetInPiVarsReturnsPublishFailedMessage()
+    public function renderForInvalidPublicationHashSetInPiVarsReturnsPublishFailedMessage(): void
     {
         $this->subject->piVars['hash'] = 'foo';
 
@@ -84,7 +84,7 @@ final class PublishEventTest extends TestCase
     /**
      * @test
      */
-    public function renderForValidPublicationHashAndVisibleEventReturnsPublishFailedMessage()
+    public function renderForValidPublicationHashAndVisibleEventReturnsPublishFailedMessage(): void
     {
         $this->subject->init([]);
         $this->testingFramework->createRecord(
@@ -103,7 +103,7 @@ final class PublishEventTest extends TestCase
     /**
      * @test
      */
-    public function renderForValidPublicationHashAndHiddenEventReturnsPublishSuccessfulMessage()
+    public function renderForValidPublicationHashAndHiddenEventReturnsPublishSuccessfulMessage(): void
     {
         $this->subject->init([]);
         $this->testingFramework->createRecord(
@@ -122,7 +122,7 @@ final class PublishEventTest extends TestCase
     /**
      * @test
      */
-    public function renderForValidPublicationHashUnhidesEventWithPublicationHash()
+    public function renderForValidPublicationHashUnhidesEventWithPublicationHash(): void
     {
         $this->subject->init([]);
         $eventUid = $this->testingFramework->createRecord(
@@ -144,7 +144,7 @@ final class PublishEventTest extends TestCase
     /**
      * @test
      */
-    public function renderForValidPublicationHashRemovesPublicationHashFromEvent()
+    public function renderForValidPublicationHashRemovesPublicationHashFromEvent(): void
     {
         $this->subject->init([]);
         $eventUid = $this->testingFramework->createRecord(

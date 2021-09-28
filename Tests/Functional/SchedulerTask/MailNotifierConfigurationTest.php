@@ -44,7 +44,7 @@ final class MailNotifierConfigurationTest extends FunctionalTestCase
      */
     private $moduleController = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -61,7 +61,7 @@ final class MailNotifierConfigurationTest extends FunctionalTestCase
         $this->subject = new MailNotifierConfiguration();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->getFlashMessageQueue()->clear();
 
@@ -79,7 +79,7 @@ final class MailNotifierConfigurationTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getAdditionalFieldsInitiallyReturnsEmptyField()
+    public function getAdditionalFieldsInitiallyReturnsEmptyField(): void
     {
         $taskInfo = [];
         $result = $this->subject->getAdditionalFields($taskInfo, null, $this->moduleController);
@@ -99,7 +99,7 @@ final class MailNotifierConfigurationTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getAdditionalFieldsForTaskWithPageUidReturnsFieldWithUid()
+    public function getAdditionalFieldsForTaskWithPageUidReturnsFieldWithUid(): void
     {
         $taskInfo = [];
         $uid = 112;
@@ -123,7 +123,7 @@ final class MailNotifierConfigurationTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function validateAdditionalFieldsForUidOfExistingPageReturnsTrue()
+    public function validateAdditionalFieldsForUidOfExistingPageReturnsTrue(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/MailNotifierConfiguration.xml');
         $submittedData = ['seminars_configurationPageUid' => '1'];
@@ -136,7 +136,7 @@ final class MailNotifierConfigurationTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function validateAdditionalFieldsForUidOfExistingPageNotAddsErrorMessage()
+    public function validateAdditionalFieldsForUidOfExistingPageNotAddsErrorMessage(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/MailNotifierConfiguration.xml');
         $submittedData = ['seminars_configurationPageUid' => '1'];
@@ -149,7 +149,7 @@ final class MailNotifierConfigurationTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function validateAdditionalFieldsForUidOfInexistentPageReturnsFalse()
+    public function validateAdditionalFieldsForUidOfInexistentPageReturnsFalse(): void
     {
         $submittedData = ['seminars_configurationPageUid' => '2'];
 
@@ -161,7 +161,7 @@ final class MailNotifierConfigurationTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function validateAdditionalFieldsForUidOfInexistentPageAddsErrorMessage()
+    public function validateAdditionalFieldsForUidOfInexistentPageAddsErrorMessage(): void
     {
         $submittedData = ['seminars_configurationPageUid' => '2'];
 
@@ -173,7 +173,7 @@ final class MailNotifierConfigurationTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function validateAdditionalFieldsForZeroUidReturnsFalse()
+    public function validateAdditionalFieldsForZeroUidReturnsFalse(): void
     {
         $submittedData = ['seminars_configurationPageUid' => '0'];
 
@@ -185,7 +185,7 @@ final class MailNotifierConfigurationTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function validateAdditionalFieldsForZeroUidAddsErrorMessage()
+    public function validateAdditionalFieldsForZeroUidAddsErrorMessage(): void
     {
         $submittedData = ['seminars_configurationPageUid' => '0'];
 
@@ -197,7 +197,7 @@ final class MailNotifierConfigurationTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function saveAdditionalFieldsSavesIntegerPageUidToTask()
+    public function saveAdditionalFieldsSavesIntegerPageUidToTask(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/MailNotifierConfiguration.xml');
         $pageUid = 1;

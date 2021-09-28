@@ -21,7 +21,7 @@ final class EventTest extends UnitTestCase
      */
     private $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = TestingEvent::fromData(
             [
@@ -35,7 +35,7 @@ final class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function isAbstractModel()
+    public function isAbstractModel(): void
     {
         self::assertInstanceOf(AbstractModel::class, $this->subject);
     }
@@ -43,7 +43,7 @@ final class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function fromDataCreatesInstanceOfSubclass()
+    public function fromDataCreatesInstanceOfSubclass(): void
     {
         $result = \Tx_Seminars_OldModel_Event::fromData([]);
 
@@ -53,7 +53,7 @@ final class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getTopicByDefaultReturnsNull()
+    public function getTopicByDefaultReturnsNull(): void
     {
         self::assertNull($this->subject->getTopic());
     }
@@ -61,7 +61,7 @@ final class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function setTopicSetsTopic()
+    public function setTopicSetsTopic(): void
     {
         $topic = new \Tx_Seminars_OldModel_Event();
 
@@ -73,7 +73,7 @@ final class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getAttendancesMinByDefaultReturnsZero()
+    public function getAttendancesMinByDefaultReturnsZero(): void
     {
         self::assertSame(0, $this->subject->getAttendancesMin());
     }
@@ -81,7 +81,7 @@ final class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getAttendancesMinReturnsAttendancesMin()
+    public function getAttendancesMinReturnsAttendancesMin(): void
     {
         $number = 4;
         $subject = \Tx_Seminars_OldModel_Event::fromData(['attendees_min' => $number]);
@@ -92,7 +92,7 @@ final class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getAttendancesMaxByDefaultReturnsZero()
+    public function getAttendancesMaxByDefaultReturnsZero(): void
     {
         self::assertSame(0, $this->subject->getAttendancesMax());
     }
@@ -100,7 +100,7 @@ final class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getAttendancesMaxReturnsAttendancesMax()
+    public function getAttendancesMaxReturnsAttendancesMax(): void
     {
         $number = 4;
         $subject = \Tx_Seminars_OldModel_Event::fromData(['attendees_max' => $number]);
@@ -111,7 +111,7 @@ final class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getOfflineRegistrationsByDefaultReturnsZero()
+    public function getOfflineRegistrationsByDefaultReturnsZero(): void
     {
         self::assertSame(0, $this->subject->getOfflineRegistrations());
     }
@@ -119,7 +119,7 @@ final class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getOfflineRegistrationsReturnsOfflineRegistrations()
+    public function getOfflineRegistrationsReturnsOfflineRegistrations(): void
     {
         $number = 4;
         $subject = \Tx_Seminars_OldModel_Event::fromData(['offline_attendees' => $number]);
@@ -130,7 +130,7 @@ final class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasOfflineRegistrationsInitiallyReturnsFalse()
+    public function hasOfflineRegistrationsInitiallyReturnsFalse(): void
     {
         self::assertFalse($this->subject->hasOfflineRegistrations());
     }
@@ -138,7 +138,7 @@ final class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasOfflineRegistrationsForOfflineRegistrationsReturnsTrue()
+    public function hasOfflineRegistrationsForOfflineRegistrationsReturnsTrue(): void
     {
         $subject = \Tx_Seminars_OldModel_Event::fromData(['offline_attendees' => 4]);
 
@@ -148,7 +148,7 @@ final class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasCheckboxesForSingleEventWithNoCheckboxesReturnsFalse()
+    public function hasCheckboxesForSingleEventWithNoCheckboxesReturnsFalse(): void
     {
         $subject = \Tx_Seminars_OldModel_Event::fromData(['checkboxes' => 0]);
 
@@ -158,7 +158,7 @@ final class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasCheckboxesForSingleEventWithOneCheckboxReturnsTrue()
+    public function hasCheckboxesForSingleEventWithOneCheckboxReturnsTrue(): void
     {
         $subject = \Tx_Seminars_OldModel_Event::fromData(['checkboxes' => 1]);
 
@@ -168,7 +168,7 @@ final class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasCheckboxesForDateWithOneCheckboxReturnsTrue()
+    public function hasCheckboxesForDateWithOneCheckboxReturnsTrue(): void
     {
         $data = [
             'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -184,7 +184,7 @@ final class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getEmailSenderReturnsSystemEmailMailRole()
+    public function getEmailSenderReturnsSystemEmailMailRole(): void
     {
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = 'system-foo@example.com';
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = 'Mr. Default';
@@ -199,7 +199,7 @@ final class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getEmailSenderReturnsFirstOrganizerMailRole()
+    public function getEmailSenderReturnsFirstOrganizerMailRole(): void
     {
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = '';
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = '';
@@ -227,7 +227,7 @@ final class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasAttachedFilesInitiallyReturnsFalse()
+    public function hasAttachedFilesInitiallyReturnsFalse(): void
     {
         self::assertFalse($this->subject->hasAttachedFiles());
     }
@@ -235,7 +235,7 @@ final class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasAttachedFilesWithOneAttachedFileReturnsTrue()
+    public function hasAttachedFilesWithOneAttachedFileReturnsTrue(): void
     {
         $this->subject->setAttachedFiles('test.file');
 
@@ -245,7 +245,7 @@ final class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasAttachedFilesWithTwoAttachedFilesReturnsTrue()
+    public function hasAttachedFilesWithTwoAttachedFilesReturnsTrue(): void
     {
         $this->subject->setAttachedFiles('test.file,test_02.file');
 
@@ -255,7 +255,7 @@ final class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasAttachedFilesForDateWithoutFilesAndTopicWithOneFileReturnsTrue()
+    public function hasAttachedFilesForDateWithoutFilesAndTopicWithOneFileReturnsTrue(): void
     {
         $topic = \Tx_Seminars_OldModel_Event::fromData(
             [
@@ -272,7 +272,7 @@ final class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function hasAttachedFilesForDateAndTopicWithoutFilesReturnsFalse()
+    public function hasAttachedFilesForDateAndTopicWithoutFilesReturnsFalse(): void
     {
         $topic = \Tx_Seminars_OldModel_Event::fromData(['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]);
         $date = \Tx_Seminars_OldModel_Event::fromData(['object_type' => \Tx_Seminars_Model_Event::TYPE_DATE]);
@@ -284,7 +284,7 @@ final class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getAttachedFilesForNoAttachedFilesReturnsAnEmptyArray()
+    public function getAttachedFilesForNoAttachedFilesReturnsAnEmptyArray(): void
     {
         $plugin = new AbstractPlugin();
 

@@ -31,7 +31,7 @@ final class EventBagBuilderTest extends TestCase
      */
     private $future = 0;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
         $this->future = $GLOBALS['SIM_EXEC_TIME'] + 50;
@@ -43,7 +43,7 @@ final class EventBagBuilderTest extends TestCase
         $this->subject->setTestMode();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
 
@@ -55,7 +55,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function builderBuildsABag()
+    public function builderBuildsABag(): void
     {
         $bag = $this->subject->build();
 
@@ -65,7 +65,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function builderFindsHiddenEventsInBackEndMode()
+    public function builderFindsHiddenEventsInBackEndMode(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -83,7 +83,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function builderIgnoresTimedEventsByDefault()
+    public function builderIgnoresTimedEventsByDefault(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -99,7 +99,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function builderFindsTimedEventsInBackEndMode()
+    public function builderFindsTimedEventsInBackEndMode(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -121,7 +121,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function skippingLimitToCategoriesResultsInAllEvents()
+    public function skippingLimitToCategoriesResultsInAllEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -151,7 +151,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEmptyCategoryUidResultsInAllEvents()
+    public function limitToEmptyCategoryUidResultsInAllEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -183,7 +183,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEmptyCategoryAfterLimitToNonEmptyCategoriesUidResultsInAllEvents()
+    public function limitToEmptyCategoryAfterLimitToNonEmptyCategoriesUidResultsInAllEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -216,7 +216,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToCategoriesCanResultInOneEvent()
+    public function limitToCategoriesCanResultInOneEvent(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -243,7 +243,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToCategoriesCanResultInTwoEvents()
+    public function limitToCategoriesCanResultInTwoEvents(): void
     {
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories'
@@ -281,7 +281,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToCategoriesExcludesUnassignedEvents()
+    public function limitToCategoriesExcludesUnassignedEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -317,7 +317,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToCategoriesExcludesEventsOfOtherCategories()
+    public function limitToCategoriesExcludesEventsOfOtherCategories(): void
     {
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -361,7 +361,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToCategoriesForNoMatchesResultsInEmptyBag()
+    public function limitToCategoriesForNoMatchesResultsInEmptyBag(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -396,7 +396,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToCategoriesCanFindTopicRecords()
+    public function limitToCategoriesCanFindTopicRecords(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -423,7 +423,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToCategoriesForMatchingTopicFindsDateRecordAndTopic()
+    public function limitToCategoriesForMatchingTopicFindsDateRecordAndTopic(): void
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -467,7 +467,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToCategoriesFindsDateRecordForSingle()
+    public function limitToCategoriesFindsDateRecordForSingle(): void
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -501,7 +501,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToCategoriesIgnoresTopicOfDateRecord()
+    public function limitToCategoriesIgnoresTopicOfDateRecord(): void
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -543,7 +543,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToCategoriesCanFindEventsFromMultipleCategories()
+    public function limitToCategoriesCanFindEventsFromMultipleCategories(): void
     {
         $categoryUid1 = $this->testingFramework->createRecord(
             'tx_seminars_categories'
@@ -587,7 +587,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToPlacesFindsEventsInOnePlace()
+    public function limitToPlacesFindsEventsInOnePlace(): void
     {
         $siteUid = $this->testingFramework->createRecord('tx_seminars_sites');
         $eventUid = $this->testingFramework->createRecord(
@@ -615,7 +615,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToPlacesIgnoresEventsWithoutPlace()
+    public function limitToPlacesIgnoresEventsWithoutPlace(): void
     {
         $siteUid = $this->testingFramework->createRecord('tx_seminars_sites');
         $this->testingFramework->createRecord(
@@ -632,7 +632,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToPlacesFindsEventsInTwoPlaces()
+    public function limitToPlacesFindsEventsInTwoPlaces(): void
     {
         $siteUid1 = $this->testingFramework->createRecord('tx_seminars_sites');
         $siteUid2 = $this->testingFramework->createRecord('tx_seminars_sites');
@@ -666,7 +666,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToPlacesWithEmptyPlacesArrayFindsAllEvents()
+    public function limitToPlacesWithEmptyPlacesArrayFindsAllEvents(): void
     {
         $siteUid = $this->testingFramework->createRecord('tx_seminars_sites');
         $this->testingFramework->createRecord(
@@ -685,7 +685,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToPlacesIgnoresEventsWithDifferentPlace()
+    public function limitToPlacesIgnoresEventsWithDifferentPlace(): void
     {
         $siteUid1 = $this->testingFramework->createRecord('tx_seminars_sites');
         $siteUid2 = $this->testingFramework->createRecord('tx_seminars_sites');
@@ -709,7 +709,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToPlacesWithOnePlaceFindsEventInTwoPlaces()
+    public function limitToPlacesWithOnePlaceFindsEventInTwoPlaces(): void
     {
         $siteUid1 = $this->testingFramework->createRecord('tx_seminars_sites');
         $siteUid2 = $this->testingFramework->createRecord('tx_seminars_sites');
@@ -743,7 +743,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function builderFindsCanceledEventsByDefault()
+    public function builderFindsCanceledEventsByDefault(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -760,7 +760,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function builderIgnoresCanceledEventsWithHideCanceledEvents()
+    public function builderIgnoresCanceledEventsWithHideCanceledEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -778,7 +778,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function builderFindsConfirmedEventsWithHideCanceledEvents()
+    public function builderFindsConfirmedEventsWithHideCanceledEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -797,7 +797,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function builderFindsCanceledEventsWithHideCanceledEventsDisabled()
+    public function builderFindsCanceledEventsWithHideCanceledEventsDisabled(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -816,7 +816,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function builderFindsCanceledEventsWithHideCanceledEventsEnabledThenDisabled()
+    public function builderFindsCanceledEventsWithHideCanceledEventsEnabledThenDisabled(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -836,7 +836,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function builderIgnoresCanceledEventsWithHideCanceledDisabledThenEnabled()
+    public function builderIgnoresCanceledEventsWithHideCanceledDisabledThenEnabled(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -861,7 +861,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameFailsWithEmptyKey()
+    public function setTimeFrameFailsWithEmptyKey(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -875,7 +875,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameFailsWithInvalidKey()
+    public function setTimeFrameFailsWithInvalidKey(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -895,7 +895,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFramePastFindsPastEvents()
+    public function setTimeFramePastFindsPastEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -917,7 +917,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFramePastFindsOpenEndedPastEvents()
+    public function setTimeFramePastFindsOpenEndedPastEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -939,7 +939,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFramePastIgnoresCurrentEvents()
+    public function setTimeFramePastIgnoresCurrentEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -960,7 +960,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFramePastIgnoresUpcomingEvents()
+    public function setTimeFramePastIgnoresUpcomingEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -981,7 +981,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFramePastIgnoresUpcomingOpenEndedEvents()
+    public function setTimeFramePastIgnoresUpcomingOpenEndedEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1002,7 +1002,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFramePastIgnoresEventsWithoutDate()
+    public function setTimeFramePastIgnoresEventsWithoutDate(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1029,7 +1029,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFramePastAndCurrentFindsPastEvents()
+    public function setTimeFramePastAndCurrentFindsPastEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1051,7 +1051,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFramePastAndCurrentFindsOpenEndedPastEvents()
+    public function setTimeFramePastAndCurrentFindsOpenEndedPastEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1073,7 +1073,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFramePastAndCurrentFindsCurrentEvents()
+    public function setTimeFramePastAndCurrentFindsCurrentEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1095,7 +1095,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFramePastAndCurrentIgnoresUpcomingEvents()
+    public function setTimeFramePastAndCurrentIgnoresUpcomingEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1116,7 +1116,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFramePastAndCurrentIgnoresUpcomingOpenEndedEvents()
+    public function setTimeFramePastAndCurrentIgnoresUpcomingOpenEndedEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1137,7 +1137,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFramePastAndCurrentIgnoresEventsWithoutDate()
+    public function setTimeFramePastAndCurrentIgnoresEventsWithoutDate(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1164,7 +1164,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameCurrentIgnoresPastEvents()
+    public function setTimeFrameCurrentIgnoresPastEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1185,7 +1185,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameCurrentIgnoresOpenEndedPastEvents()
+    public function setTimeFrameCurrentIgnoresOpenEndedPastEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1206,7 +1206,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameCurrentFindsCurrentEvents()
+    public function setTimeFrameCurrentFindsCurrentEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1228,7 +1228,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameCurrentIgnoresUpcomingEvents()
+    public function setTimeFrameCurrentIgnoresUpcomingEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1249,7 +1249,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameCurrentIgnoresUpcomingOpenEndedEvents()
+    public function setTimeFrameCurrentIgnoresUpcomingOpenEndedEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1270,7 +1270,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameCurrentIgnoresEventsWithoutDate()
+    public function setTimeFrameCurrentIgnoresEventsWithoutDate(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1297,7 +1297,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameCurrentAndUpcomingIgnoresPastEvents()
+    public function setTimeFrameCurrentAndUpcomingIgnoresPastEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1318,7 +1318,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameCurrentAndUpcomingIgnoresOpenEndedPastEvents()
+    public function setTimeFrameCurrentAndUpcomingIgnoresOpenEndedPastEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1339,7 +1339,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameCurrentAndUpcomingFindsCurrentEvents()
+    public function setTimeFrameCurrentAndUpcomingFindsCurrentEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1361,7 +1361,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameCurrentAndUpcomingFindsUpcomingEvents()
+    public function setTimeFrameCurrentAndUpcomingFindsUpcomingEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1383,7 +1383,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameCurrentAndUpcomingFindsUpcomingOpenEndedEvents()
+    public function setTimeFrameCurrentAndUpcomingFindsUpcomingOpenEndedEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1405,7 +1405,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameCurrentAndUpcomingFindsEventsWithoutDate()
+    public function setTimeFrameCurrentAndUpcomingFindsEventsWithoutDate(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1433,7 +1433,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameUpcomingIgnoresPastEvents()
+    public function setTimeFrameUpcomingIgnoresPastEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1454,7 +1454,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameUpcomingIgnoresOpenEndedPastEvents()
+    public function setTimeFrameUpcomingIgnoresOpenEndedPastEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1475,7 +1475,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameUpcomingIgnoresCurrentEvents()
+    public function setTimeFrameUpcomingIgnoresCurrentEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1496,7 +1496,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameUpcomingFindsUpcomingEvents()
+    public function setTimeFrameUpcomingFindsUpcomingEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1518,7 +1518,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameUpcomingFindsUpcomingOpenEndedEvents()
+    public function setTimeFrameUpcomingFindsUpcomingOpenEndedEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1540,7 +1540,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameUpcomingFindsEventsWithoutDate()
+    public function setTimeFrameUpcomingFindsEventsWithoutDate(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1568,7 +1568,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameUpcomingWithBeginDateIgnoresPastEvents()
+    public function setTimeFrameUpcomingWithBeginDateIgnoresPastEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1589,7 +1589,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameUpcomingWithBeginDateIgnoresOpenEndedPastEvents()
+    public function setTimeFrameUpcomingWithBeginDateIgnoresOpenEndedPastEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1610,7 +1610,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameUpcomingWithBeginDateIgnoresCurrentEvents()
+    public function setTimeFrameUpcomingWithBeginDateIgnoresCurrentEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1631,7 +1631,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameUpcomingWithBeginDateFindsUpcomingEvents()
+    public function setTimeFrameUpcomingWithBeginDateFindsUpcomingEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1653,7 +1653,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameUpcomingWithBeginDateFindsUpcomingOpenEndedEvents()
+    public function setTimeFrameUpcomingWithBeginDateFindsUpcomingOpenEndedEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1675,7 +1675,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameUpcomingWithBeginDateNotFindsEventsWithoutDate()
+    public function setTimeFrameUpcomingWithBeginDateNotFindsEventsWithoutDate(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1703,7 +1703,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameDeadlineNotOverIgnoresPastEvents()
+    public function setTimeFrameDeadlineNotOverIgnoresPastEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1725,7 +1725,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameDeadlineNotOverIgnoresOpenEndedPastEvents()
+    public function setTimeFrameDeadlineNotOverIgnoresOpenEndedPastEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1747,7 +1747,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameDeadlineNotOverIgnoresCurrentEvents()
+    public function setTimeFrameDeadlineNotOverIgnoresCurrentEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1769,7 +1769,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameDeadlineNotOverFindsUpcomingEvents()
+    public function setTimeFrameDeadlineNotOverFindsUpcomingEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1792,7 +1792,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameDeadlineNotOverFindsUpcomingEventsWithUpcomingDeadline()
+    public function setTimeFrameDeadlineNotOverFindsUpcomingEventsWithUpcomingDeadline(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1815,7 +1815,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameDeadlineNotOverIgnoresUpcomingEventsWithPassedDeadline()
+    public function setTimeFrameDeadlineNotOverIgnoresUpcomingEventsWithPassedDeadline(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1837,7 +1837,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameDeadlineNotOverFindsUpcomingOpenEndedEvents()
+    public function setTimeFrameDeadlineNotOverFindsUpcomingOpenEndedEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1860,7 +1860,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameDeadlineNotOverFindsEventsWithoutDate()
+    public function setTimeFrameDeadlineNotOverFindsEventsWithoutDate(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1889,7 +1889,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameTodayFindsOpenEndedEventStartingToday()
+    public function setTimeFrameTodayFindsOpenEndedEventStartingToday(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1911,7 +1911,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameTodayNotFindsOpenEndedEventStartingTomorrow()
+    public function setTimeFrameTodayNotFindsOpenEndedEventStartingTomorrow(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1932,7 +1932,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameTodayFindsEventStartingTodayEndingTomorrow()
+    public function setTimeFrameTodayFindsEventStartingTodayEndingTomorrow(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1954,7 +1954,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameTodayFindsEventStartingYesterdayEndingToday()
+    public function setTimeFrameTodayFindsEventStartingYesterdayEndingToday(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1976,7 +1976,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameTodayFindsEventStartingYesterdayEndingTomorrow()
+    public function setTimeFrameTodayFindsEventStartingYesterdayEndingTomorrow(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1998,7 +1998,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameTodayIgnoresEventStartingLastWeekEndingYesterday()
+    public function setTimeFrameTodayIgnoresEventStartingLastWeekEndingYesterday(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -2019,7 +2019,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameTodayIgnoresEventStartingTomorrowEndingNextWeek()
+    public function setTimeFrameTodayIgnoresEventStartingTomorrowEndingNextWeek(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -2040,7 +2040,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameTodayIgnoresEventWithoutDate()
+    public function setTimeFrameTodayIgnoresEventWithoutDate(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -2067,7 +2067,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameAllFindsPastEvents()
+    public function setTimeFrameAllFindsPastEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -2089,7 +2089,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameAllFindsOpenEndedPastEvents()
+    public function setTimeFrameAllFindsOpenEndedPastEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -2111,7 +2111,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameAllFindsCurrentEvents()
+    public function setTimeFrameAllFindsCurrentEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -2133,7 +2133,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameAllFindsUpcomingEvents()
+    public function setTimeFrameAllFindsUpcomingEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -2155,7 +2155,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameAllFindsUpcomingOpenEndedEvents()
+    public function setTimeFrameAllFindsUpcomingOpenEndedEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -2177,7 +2177,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setTimeFrameAllFindsEventsWithoutDate()
+    public function setTimeFrameAllFindsEventsWithoutDate(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -2203,7 +2203,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function skippingLimitToEventTypesResultsInAllEvents()
+    public function skippingLimitToEventTypesResultsInAllEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -2231,7 +2231,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEmptyTypeUidResultsInAllEvents()
+    public function limitToEmptyTypeUidResultsInAllEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -2261,7 +2261,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEmptyTypeUidAfterLimitToNotEmptyTypesResultsInAllEvents()
+    public function limitToEmptyTypeUidAfterLimitToNotEmptyTypesResultsInAllEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -2292,7 +2292,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventTypesCanResultInOneEvent()
+    public function limitToEventTypesCanResultInOneEvent(): void
     {
         $typeUid = $this->testingFramework->createRecord(
             'tx_seminars_event_types'
@@ -2317,7 +2317,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventTypesCanResultInTwoEvents()
+    public function limitToEventTypesCanResultInTwoEvents(): void
     {
         $typeUid = $this->testingFramework->createRecord(
             'tx_seminars_event_types'
@@ -2349,7 +2349,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventTypesWillExcludeUnassignedEvents()
+    public function limitToEventTypesWillExcludeUnassignedEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -2383,7 +2383,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventTypesWillExcludeEventsOfOtherTypes()
+    public function limitToEventTypesWillExcludeEventsOfOtherTypes(): void
     {
         $typeUid1 = $this->testingFramework->createRecord(
             'tx_seminars_event_types'
@@ -2423,7 +2423,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventTypesResultsInAnEmptyBagIfThereAreNoMatches()
+    public function limitToEventTypesResultsInAnEmptyBagIfThereAreNoMatches(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -2456,7 +2456,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventTypesFindsDateRecordForTopic()
+    public function limitToEventTypesFindsDateRecordForTopic(): void
     {
         $typeUid = $this->testingFramework->createRecord('tx_seminars_event_types');
         $topicUid = $this->testingFramework->createRecord(
@@ -2484,7 +2484,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventTypesFindsDateRecordForSingle()
+    public function limitToEventTypesFindsDateRecordForSingle(): void
     {
         $typeUid = $this->testingFramework->createRecord(
             'tx_seminars_event_types'
@@ -2516,7 +2516,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventTypesIgnoresTopicOfDateRecord()
+    public function limitToEventTypesIgnoresTopicOfDateRecord(): void
     {
         $typeUid1 = $this->testingFramework->createRecord(
             'tx_seminars_event_types'
@@ -2552,7 +2552,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventTypesCanFindEventsFromMultipleTypes()
+    public function limitToEventTypesCanFindEventsFromMultipleTypes(): void
     {
         $typeUid1 = $this->testingFramework->createRecord(
             'tx_seminars_event_types'
@@ -2588,7 +2588,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventTypesAndTopicsFindsTopicOfThisType()
+    public function limitToEventTypesAndTopicsFindsTopicOfThisType(): void
     {
         $typeUid = $this->testingFramework->createRecord('tx_seminars_event_types');
         $topicUid = $this->testingFramework->createRecord(
@@ -2616,7 +2616,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToCitiesFindsEventsInOneCity()
+    public function limitToCitiesFindsEventsInOneCity(): void
     {
         $siteUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
@@ -2647,7 +2647,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToCitiesIgnoresEventsInOtherCity()
+    public function limitToCitiesIgnoresEventsInOtherCity(): void
     {
         $siteUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
@@ -2673,7 +2673,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToCitiesWithTwoCitiesFindsEventsEachInOneOfBothCities()
+    public function limitToCitiesWithTwoCitiesFindsEventsEachInOneOfBothCities(): void
     {
         $siteUid1 = $this->testingFramework->createRecord(
             'tx_seminars_sites',
@@ -2713,7 +2713,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToCitiesWithEmptyCitiesArrayFindsEventsWithCities()
+    public function limitToCitiesWithEmptyCitiesArrayFindsEventsWithCities(): void
     {
         $siteUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
@@ -2741,7 +2741,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToCitiesIgnoresEventsWithDifferentCity()
+    public function limitToCitiesIgnoresEventsWithDifferentCity(): void
     {
         $siteUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
@@ -2767,7 +2767,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToCitiesIgnoresEventWithPlaceWithoutCity()
+    public function limitToCitiesIgnoresEventWithPlaceWithoutCity(): void
     {
         $siteUid = $this->testingFramework->createRecord('tx_seminars_sites');
         $eventUid = $this->testingFramework->createRecord(
@@ -2790,7 +2790,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToCitiesWithTwoCitiesFindsOneEventInBothCities()
+    public function limitToCitiesWithTwoCitiesFindsOneEventInBothCities(): void
     {
         $siteUid1 = $this->testingFramework->createRecord(
             'tx_seminars_sites',
@@ -2826,7 +2826,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToCitiesWithOneCityFindsEventInTwoCities()
+    public function limitToCitiesWithOneCityFindsEventInTwoCities(): void
     {
         $siteUid1 = $this->testingFramework->createRecord(
             'tx_seminars_sites',
@@ -2862,7 +2862,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToCitiesWithTwoCitiesOneDifferentFindsEventInOneOfTheCities()
+    public function limitToCitiesWithTwoCitiesOneDifferentFindsEventInOneOfTheCities(): void
     {
         $siteUid1 = $this->testingFramework->createRecord(
             'tx_seminars_sites',
@@ -2902,7 +2902,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToCountriesFindsEventsInOneCountry()
+    public function limitToCountriesFindsEventsInOneCountry(): void
     {
         $siteUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
@@ -2933,7 +2933,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToCountriesIgnoresEventsInOtherCountry()
+    public function limitToCountriesIgnoresEventsInOtherCountry(): void
     {
         $siteUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
@@ -2959,7 +2959,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToCountriesFindsEventsInTwoCountries()
+    public function limitToCountriesFindsEventsInTwoCountries(): void
     {
         $siteUid1 = $this->testingFramework->createRecord(
             'tx_seminars_sites',
@@ -2999,7 +2999,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToCountriesWithEmptyCountriesArrayFindsAllEvents()
+    public function limitToCountriesWithEmptyCountriesArrayFindsAllEvents(): void
     {
         $siteUid1 = $this->testingFramework->createRecord(
             'tx_seminars_sites',
@@ -3027,7 +3027,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToCountriesIgnoresEventsWithDifferentCountry()
+    public function limitToCountriesIgnoresEventsWithDifferentCountry(): void
     {
         $siteUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
@@ -3053,7 +3053,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToCountriesIgnoresEventsWithPlaceWithoutCountry()
+    public function limitToCountriesIgnoresEventsWithPlaceWithoutCountry(): void
     {
         $siteUid = $this->testingFramework->createRecord('tx_seminars_sites');
         $eventUid = $this->testingFramework->createRecord(
@@ -3076,7 +3076,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToCountriesWithOneCountryFindsEventInTwoCountries()
+    public function limitToCountriesWithOneCountryFindsEventInTwoCountries(): void
     {
         $siteUid1 = $this->testingFramework->createRecord(
             'tx_seminars_sites',
@@ -3116,7 +3116,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToLanguagesFindsEventsInOneLanguage()
+    public function limitToLanguagesFindsEventsInOneLanguage(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3138,7 +3138,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToLanguagesFindsEventsInTwoLanguages()
+    public function limitToLanguagesFindsEventsInTwoLanguages(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3160,7 +3160,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToLanguagesWithEmptyLanguagesArrayFindsAllEvents()
+    public function limitToLanguagesWithEmptyLanguagesArrayFindsAllEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3179,7 +3179,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToLanguagesIgnoresEventsWithDifferentLanguage()
+    public function limitToLanguagesIgnoresEventsWithDifferentLanguage(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3196,7 +3196,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToLanguagesIgnoresEventsWithoutLanguage()
+    public function limitToLanguagesIgnoresEventsWithoutLanguage(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -3216,7 +3216,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToTopicRecordsFindsTopicEventRecords()
+    public function limitToTopicRecordsFindsTopicEventRecords(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3234,7 +3234,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToTopicRecordsIgnoresSingleEventRecords()
+    public function limitToTopicRecordsIgnoresSingleEventRecords(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3251,7 +3251,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToTopicRecordsIgnoresEventDateRecords()
+    public function limitToTopicRecordsIgnoresEventDateRecords(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3272,7 +3272,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function removeLimitToTopicRecordsFindsSingleEventRecords()
+    public function removeLimitToTopicRecordsFindsSingleEventRecords(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3291,7 +3291,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function removeLimitToTopicRecordsFindsEventDateRecords()
+    public function removeLimitToTopicRecordsFindsEventDateRecords(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3314,7 +3314,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToOwnerWithNegativeFeUserUidThrowsException()
+    public function limitToOwnerWithNegativeFeUserUidThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -3329,7 +3329,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToOwnerWithPositiveFeUserUidFindsEventsWithOwner()
+    public function limitToOwnerWithPositiveFeUserUidFindsEventsWithOwner(): void
     {
         $feUserUid = $this->testingFramework->createFrontEndUser();
         $this->testingFramework->createRecord(
@@ -3348,7 +3348,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToOwnerWithPositiveFeUserUidIgnoresEventsWithoutOwner()
+    public function limitToOwnerWithPositiveFeUserUidIgnoresEventsWithoutOwner(): void
     {
         $feUserUid = $this->testingFramework->createFrontEndUser();
         $this->testingFramework->createRecord(
@@ -3365,7 +3365,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToOwnerWithPositiveFeUserUidIgnoresEventsWithDifferentOwner()
+    public function limitToOwnerWithPositiveFeUserUidIgnoresEventsWithDifferentOwner(): void
     {
         $feUserUid = $this->testingFramework->createFrontEndUser();
         $this->testingFramework->createRecord(
@@ -3383,7 +3383,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToOwnerWithZeroFeUserUidFindsEventsWithoutOwner()
+    public function limitToOwnerWithZeroFeUserUidFindsEventsWithoutOwner(): void
     {
         $feUserUid = $this->testingFramework->createFrontEndUser();
         $this->testingFramework->createRecord(
@@ -3402,7 +3402,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToOwnerWithZeroFeUserUidFindsEventsWithOwner()
+    public function limitToOwnerWithZeroFeUserUidFindsEventsWithOwner(): void
     {
         $feUserUid = $this->testingFramework->createFrontEndUser();
         $this->testingFramework->createRecord(
@@ -3426,7 +3426,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToDateAndSingleRecordsFindsDateRecords()
+    public function limitToDateAndSingleRecordsFindsDateRecords(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3444,7 +3444,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToDateAndSingleRecordsFindsSingleRecords()
+    public function limitToDateAndSingleRecordsFindsSingleRecords(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3462,7 +3462,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToDateAndSingleRecordsIgnoresTopicRecords()
+    public function limitToDateAndSingleRecordsIgnoresTopicRecords(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3479,7 +3479,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function removeLimitToDateAndSingleRecordsFindsTopicRecords()
+    public function removeLimitToDateAndSingleRecordsFindsTopicRecords(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3502,7 +3502,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventManagerWithNegativeFeUserUidThrowsException()
+    public function limitToEventManagerWithNegativeFeUserUidThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -3517,7 +3517,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventManagerWithPositiveFeUserUidFindsEventsWithEventManager()
+    public function limitToEventManagerWithPositiveFeUserUidFindsEventsWithEventManager(): void
     {
         $feUserUid = $this->testingFramework->createFrontEndUser();
         $eventUid = $this->testingFramework->createRecord(
@@ -3542,7 +3542,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventManagerWithPositiveFeUserUidIgnoresEventsWithoutEventManager()
+    public function limitToEventManagerWithPositiveFeUserUidIgnoresEventsWithoutEventManager(): void
     {
         $feUserUid = $this->testingFramework->createFrontEndUser();
         $this->testingFramework->createRecord(
@@ -3560,7 +3560,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventManagerWithZeroFeUserUidFindsEventsWithoutEventManager()
+    public function limitToEventManagerWithZeroFeUserUidFindsEventsWithoutEventManager(): void
     {
         $feUserUid = $this->testingFramework->createFrontEndUser();
         $this->testingFramework->createRecord(
@@ -3584,7 +3584,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventsNextDayFindsEventsNextDay()
+    public function limitToEventsNextDayFindsEventsNextDay(): void
     {
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3614,7 +3614,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventsNextDayIgnoresEarlierEvents()
+    public function limitToEventsNextDayIgnoresEarlierEvents(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3639,7 +3639,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventsNextDayIgnoresEventsLaterThanOneDay()
+    public function limitToEventsNextDayIgnoresEventsLaterThanOneDay(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3664,7 +3664,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventsNextDayWithEventWithEmptyEndDateThrowsException()
+    public function limitToEventsNextDayWithEventWithEmptyEndDateThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -3689,7 +3689,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToOtherDatesForTopicFindsOtherDateForTopic()
+    public function limitToOtherDatesForTopicFindsOtherDateForTopic(): void
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3726,7 +3726,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToOtherDatesForTopicWithTopicRecordFindsAllDatesForTopic()
+    public function limitToOtherDatesForTopicWithTopicRecordFindsAllDatesForTopic(): void
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3759,7 +3759,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToOtherDatesForTopicWithSingleEventRecordThrowsException()
+    public function limitToOtherDatesForTopicWithSingleEventRecordThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -3779,7 +3779,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToOtherDatesForTopicIgnoresDateForOtherTopic()
+    public function limitToOtherDatesForTopicIgnoresDateForOtherTopic(): void
     {
         $topicUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3815,7 +3815,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToOtherDatesForTopicIgnoresSingleEventRecordWithTopic()
+    public function limitToOtherDatesForTopicIgnoresSingleEventRecordWithTopic(): void
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3847,7 +3847,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function removeLimitToOtherDatesForTopicRemovesLimitAndFindsAllDateAndTopicRecords()
+    public function removeLimitToOtherDatesForTopicRemovesLimitAndFindsAllDateAndTopicRecords(): void
     {
         $topicUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3885,7 +3885,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function removeLimitToOtherDatesForTopicFindsSingleEventRecords()
+    public function removeLimitToOtherDatesForTopicFindsSingleEventRecords(): void
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3923,7 +3923,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchWithTwoCommasAsSearchWordFindsAllEvents()
+    public function limitToFullTextSearchWithTwoCommasAsSearchWordFindsAllEvents(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3945,7 +3945,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchWithTwoSearchWordsSeparatedByTwoSpacesFindsEvents()
+    public function limitToFullTextSearchWithTwoSearchWordsSeparatedByTwoSpacesFindsEvents(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3967,7 +3967,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchWithTwoCommasSeparatedByTwoSpacesFindsAllEvents()
+    public function limitToFullTextSearchWithTwoCommasSeparatedByTwoSpacesFindsAllEvents(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -3989,7 +3989,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchWithTooShortSearchWordFindsAllEvents()
+    public function limitToFullTextSearchWithTooShortSearchWordFindsAllEvents(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -4011,7 +4011,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchFindsEventWithSearchWordInAccreditationNumber()
+    public function limitToFullTextSearchFindsEventWithSearchWordInAccreditationNumber(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -4036,7 +4036,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchIgnoresEventWithoutSearchWordInAccreditationNumber()
+    public function limitToFullTextSearchIgnoresEventWithoutSearchWordInAccreditationNumber(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -4056,7 +4056,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchFindsEventWithSearchWordInTitle()
+    public function limitToFullTextSearchFindsEventWithSearchWordInTitle(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -4078,7 +4078,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchIgnoresEventWithoutSearchWordInTitle()
+    public function limitToFullTextSearchIgnoresEventWithoutSearchWordInTitle(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -4095,7 +4095,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchFindsEventWithSearchWordInSubtitle()
+    public function limitToFullTextSearchFindsEventWithSearchWordInSubtitle(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -4117,7 +4117,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchIgnoresEventWithoutSearchWordInSubtitle()
+    public function limitToFullTextSearchIgnoresEventWithoutSearchWordInSubtitle(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -4134,7 +4134,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchFindsEventWithSearchWordInDescription()
+    public function limitToFullTextSearchFindsEventWithSearchWordInDescription(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -4156,7 +4156,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchIgnoresEventWithoutSearchWordInDescription()
+    public function limitToFullTextSearchIgnoresEventWithoutSearchWordInDescription(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -4173,7 +4173,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchFindsEventWithSearchWordInSpeakerTitle()
+    public function limitToFullTextSearchFindsEventWithSearchWordInSpeakerTitle(): void
     {
         $speakerUid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
@@ -4207,7 +4207,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchIgnoresEventWithoutSearchWordInSpeakerTitle()
+    public function limitToFullTextSearchIgnoresEventWithoutSearchWordInSpeakerTitle(): void
     {
         $speakerUid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
@@ -4236,7 +4236,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchFindsEventWithSearchWordInPlaceTitle()
+    public function limitToFullTextSearchFindsEventWithSearchWordInPlaceTitle(): void
     {
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
@@ -4270,7 +4270,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchIgnoresEventWithoutSearchWordInPlaceTitle()
+    public function limitToFullTextSearchIgnoresEventWithoutSearchWordInPlaceTitle(): void
     {
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
@@ -4299,7 +4299,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchFindsEventWithSearchWordInPlaceCity()
+    public function limitToFullTextSearchFindsEventWithSearchWordInPlaceCity(): void
     {
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
@@ -4333,7 +4333,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchIgnoresEventWithoutSearchWordInPlaceCity()
+    public function limitToFullTextSearchIgnoresEventWithoutSearchWordInPlaceCity(): void
     {
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
@@ -4362,7 +4362,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchFindsEventWithSearchWordInEventTypeTitle()
+    public function limitToFullTextSearchFindsEventWithSearchWordInEventTypeTitle(): void
     {
         $eventTypeUid = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
@@ -4391,7 +4391,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchIgnoresEventWithoutSearchWordInEventTypeTitle()
+    public function limitToFullTextSearchIgnoresEventWithoutSearchWordInEventTypeTitle(): void
     {
         $eventTypeUid = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
@@ -4415,7 +4415,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchFindsEventWithSearchWordInCategoryTitle()
+    public function limitToFullTextSearchFindsEventWithSearchWordInCategoryTitle(): void
     {
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
@@ -4449,7 +4449,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchIgnoresEventWithoutSearchWordInCategoryTitle()
+    public function limitToFullTextSearchIgnoresEventWithoutSearchWordInCategoryTitle(): void
     {
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
@@ -4478,7 +4478,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchWithTwoSearchWordsSeparatedBySpaceFindsTwoEventsWithSearchWordsInTitle()
+    public function limitToFullTextSearchWithTwoSearchWordsSeparatedBySpaceFindsTwoEventsWithSearchWordsInTitle(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -4500,7 +4500,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchWithTwoSearchWordsSeparatedByCommaFindsTwoEventsWithSearchWordsInTitle()
+    public function limitToFullTextSearchWithTwoSearchWordsSeparatedByCommaFindsTwoEventsWithSearchWordsInTitle(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -4522,7 +4522,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchFindsEventWithSearchWordInTargetGroupTitle()
+    public function limitToFullTextSearchFindsEventWithSearchWordInTargetGroupTitle(): void
     {
         $targetGroupUid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
@@ -4556,7 +4556,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchIgnoresEventWithoutSearchWordInTargetGroupTitle()
+    public function limitToFullTextSearchIgnoresEventWithoutSearchWordInTargetGroupTitle(): void
     {
         $targetGroupUid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
@@ -4589,7 +4589,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchFindsEventWithSearchWordInTopicTitle()
+    public function limitToFullTextSearchFindsEventWithSearchWordInTopicTitle(): void
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -4622,7 +4622,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchIgnoresEventWithoutSearchWordInTopicTitle()
+    public function limitToFullTextSearchIgnoresEventWithoutSearchWordInTopicTitle(): void
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -4650,7 +4650,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchFindsEventWithSearchWordInTopicSubtitle()
+    public function limitToFullTextSearchFindsEventWithSearchWordInTopicSubtitle(): void
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -4683,7 +4683,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchIgnoresEventWithoutSearchWordInTopicSubtitle()
+    public function limitToFullTextSearchIgnoresEventWithoutSearchWordInTopicSubtitle(): void
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -4711,7 +4711,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchFindsEventWithSearchWordInTopicDescription()
+    public function limitToFullTextSearchFindsEventWithSearchWordInTopicDescription(): void
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -4744,7 +4744,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchIgnoresEventWithoutSearchWordInTopicDescription()
+    public function limitToFullTextSearchIgnoresEventWithoutSearchWordInTopicDescription(): void
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -4772,7 +4772,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchFindsEventWithSearchWordInTopicCategoryTitle()
+    public function limitToFullTextSearchFindsEventWithSearchWordInTopicCategoryTitle(): void
     {
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
@@ -4814,7 +4814,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchIgnoresEventWithoutSearchWordInTopicCategoryTitle()
+    public function limitToFullTextSearchIgnoresEventWithoutSearchWordInTopicCategoryTitle(): void
     {
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories',
@@ -4851,7 +4851,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchFindsEventWithSearchWordInTopicEventTypeTitle()
+    public function limitToFullTextSearchFindsEventWithSearchWordInTopicEventTypeTitle(): void
     {
         $eventTypeUid = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
@@ -4888,7 +4888,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchIgnoresEventWithoutSearchWordInTopicEventTypeTitle()
+    public function limitToFullTextSearchIgnoresEventWithoutSearchWordInTopicEventTypeTitle(): void
     {
         $eventTypeUid = $this->testingFramework->createRecord(
             'tx_seminars_event_types',
@@ -4924,7 +4924,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchFindsEventDateWithSearchWordInAccreditationNumber()
+    public function limitToFullTextSearchFindsEventDateWithSearchWordInAccreditationNumber(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -4949,7 +4949,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchIgnoresEventDateWithoutSearchWordInAccreditationNumber()
+    public function limitToFullTextSearchIgnoresEventDateWithoutSearchWordInAccreditationNumber(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -4969,7 +4969,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchFindsEventDateWithSearchWordInSpeakerTitle()
+    public function limitToFullTextSearchFindsEventDateWithSearchWordInSpeakerTitle(): void
     {
         $speakerUid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
@@ -5003,7 +5003,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchIgnoresEventDateWithoutSearchWordInSpeakerTitle()
+    public function limitToFullTextSearchIgnoresEventDateWithoutSearchWordInSpeakerTitle(): void
     {
         $speakerUid = $this->testingFramework->createRecord(
             'tx_seminars_speakers',
@@ -5032,7 +5032,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchFindsEventDateWithSearchWordInPlaceTitle()
+    public function limitToFullTextSearchFindsEventDateWithSearchWordInPlaceTitle(): void
     {
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
@@ -5066,7 +5066,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchIgnoresEventDateWithoutSearchWordInPlaceTitle()
+    public function limitToFullTextSearchIgnoresEventDateWithoutSearchWordInPlaceTitle(): void
     {
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
@@ -5095,7 +5095,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchFindsEventDateWithSearchWordInPlaceCity()
+    public function limitToFullTextSearchFindsEventDateWithSearchWordInPlaceCity(): void
     {
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
@@ -5129,7 +5129,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToFullTextSearchIgnoresEventDateWithoutSearchWordInPlaceCity()
+    public function limitToFullTextSearchIgnoresEventDateWithoutSearchWordInPlaceCity(): void
     {
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
@@ -5162,7 +5162,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToRequiredEventsCanFindOneRequiredEvent()
+    public function limitToRequiredEventsCanFindOneRequiredEvent(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5189,7 +5189,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToRequiredEventsCanFindTwoRequiredEvents()
+    public function limitToRequiredEventsCanFindTwoRequiredEvents(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5225,7 +5225,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToRequiredEventsFindsOnlyRequiredEvents()
+    public function limitToRequiredEventsFindsOnlyRequiredEvents(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5269,7 +5269,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToDependingEventsCanFindOneDependingEvent()
+    public function limitToDependingEventsCanFindOneDependingEvent(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5296,7 +5296,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToDependingEventsCanFindTwoDependingEvents()
+    public function limitToDependingEventsCanFindTwoDependingEvents(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5332,7 +5332,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToDependingEventsFindsOnlyDependingEvents()
+    public function limitToDependingEventsFindsOnlyDependingEvents(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5376,7 +5376,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToTopicsWithoutRegistrationByUserFindsTopicWithoutDate()
+    public function limitToTopicsWithoutRegistrationByUserFindsTopicWithoutDate(): void
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5401,7 +5401,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToTopicsWithoutRegistrationByUserFindsTopicWithDate()
+    public function limitToTopicsWithoutRegistrationByUserFindsTopicWithDate(): void
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5433,7 +5433,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToTopicsWithoutRegistrationByUserNotFindsDate()
+    public function limitToTopicsWithoutRegistrationByUserNotFindsDate(): void
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5461,7 +5461,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToTopicsWithoutRegistrationByUserFindsTopicWithDateWithRegistrationByOtherUser()
+    public function limitToTopicsWithoutRegistrationByUserFindsTopicWithDateWithRegistrationByOtherUser(): void
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5500,7 +5500,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToWithoutRegistrationByUserDoesNotFindTopicWithDateRegistrationByTheUserWithoutExpiry()
+    public function limitToWithoutRegistrationByUserDoesNotFindTopicWithDateRegistrationByTheUserWithoutExpiry(): void
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5531,7 +5531,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToWithoutRegistrationByUserDoesNotFindTopicWithDateRegistrationByTheUserWithFutureExpiry()
+    public function limitToWithoutRegistrationByUserDoesNotFindTopicWithDateRegistrationByTheUserWithFutureExpiry(): void
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5562,7 +5562,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToWithoutRegistrationByUserFindsTopicWithDateRegistrationByTheUserWithPastExpiry()
+    public function limitToWithoutRegistrationByUserFindsTopicWithDateRegistrationByTheUserWithPastExpiry(): void
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5594,7 +5594,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToWithoutRegistrationByUserDoesNotFindTopicWithDateRegistrationByTheUserAndOtherUser()
+    public function limitToWithoutRegistrationByUserDoesNotFindTopicWithDateRegistrationByTheUserAndOtherUser(): void
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5631,7 +5631,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToTopicsWithoutRegistrationByUserAndLimitToRequiredEventTopicsCanReturnOneEntry()
+    public function limitToTopicsWithoutRegistrationByUserAndLimitToRequiredEventTopicsCanReturnOneEntry(): void
     {
         $requiredTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5677,7 +5677,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToCancelationDeadlineReminderNotSentFindsEventWithCancelationReminderSentFlagFalse()
+    public function limitToCancelationDeadlineReminderNotSentFindsEventWithCancelationReminderSentFlagFalse(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5696,7 +5696,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToCancelationDeadlineReminderNotSentNotFindsEventWithCancelationReminderSentFlagTrue()
+    public function limitToCancelationDeadlineReminderNotSentNotFindsEventWithCancelationReminderSentFlagTrue(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5719,7 +5719,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventTakesPlaceReminderNotSentFindsEventWithConfirmationInformationSentFlagFalse()
+    public function limitToEventTakesPlaceReminderNotSentFindsEventWithConfirmationInformationSentFlagFalse(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5738,7 +5738,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventTakesPlaceReminderNotSentNotFindsEventWithConfirmationInformationSentFlagTrue()
+    public function limitToEventTakesPlaceReminderNotSentNotFindsEventWithConfirmationInformationSentFlagTrue(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5761,7 +5761,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToStatusFindsEventWithStatusCanceledIfLimitIsStatusCanceled()
+    public function limitToStatusFindsEventWithStatusCanceledIfLimitIsStatusCanceled(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5780,7 +5780,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToStatusNotFindsEventWithStatusPlannedIfLimitIsStatusCanceled()
+    public function limitToStatusNotFindsEventWithStatusPlannedIfLimitIsStatusCanceled(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5799,7 +5799,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToStatusNotFindsEventWithStatusConfirmedIfLimitIsStatusCanceled()
+    public function limitToStatusNotFindsEventWithStatusConfirmedIfLimitIsStatusCanceled(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5818,7 +5818,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToStatusFindsEventWithStatusConfirmedIfLimitIsStatusConfirmed()
+    public function limitToStatusFindsEventWithStatusConfirmedIfLimitIsStatusConfirmed(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5837,7 +5837,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToStatusNotFindsEventWithStatusPlannedIfLimitIsStatusConfirmed()
+    public function limitToStatusNotFindsEventWithStatusPlannedIfLimitIsStatusConfirmed(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5856,7 +5856,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToStatusNotFindsEventWithStatusCanceledIfLimitIsStatusConfirmed()
+    public function limitToStatusNotFindsEventWithStatusCanceledIfLimitIsStatusConfirmed(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5875,7 +5875,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToStatusFindsEventWithStatusPlannedIfLimitIsStatusPlanned()
+    public function limitToStatusFindsEventWithStatusPlannedIfLimitIsStatusPlanned(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5894,7 +5894,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToStatusNotFindsEventWithStatusConfirmedIfLimitIsStatusPlanned()
+    public function limitToStatusNotFindsEventWithStatusConfirmedIfLimitIsStatusPlanned(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5913,7 +5913,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToStatusNotFindsEventWithStatusCanceledIfLimitIsStatusPlanned()
+    public function limitToStatusNotFindsEventWithStatusCanceledIfLimitIsStatusPlanned(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5936,7 +5936,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function testlimitToDaysBeforeBeginDateFindsEventWithFutureBeginDateWithinProvidedDays()
+    public function testlimitToDaysBeforeBeginDateFindsEventWithFutureBeginDateWithinProvidedDays(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5955,7 +5955,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function testlimitToDaysBeforeBeginDateFindsEventWithPastBeginDateWithinProvidedDays()
+    public function testlimitToDaysBeforeBeginDateFindsEventWithPastBeginDateWithinProvidedDays(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5974,7 +5974,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function testlimitToDaysBeforeBeginDateNotFindsEventWithFutureBeginDateOutOfProvidedDays()
+    public function testlimitToDaysBeforeBeginDateNotFindsEventWithFutureBeginDateOutOfProvidedDays(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -5993,7 +5993,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function testlimitToDaysBeforeBeginDateFindsEventWithPastBeginDate()
+    public function testlimitToDaysBeforeBeginDateFindsEventWithPastBeginDate(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -6012,7 +6012,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function testlimitToDaysBeforeBeginDateFindsEventWithNoBeginDate()
+    public function testlimitToDaysBeforeBeginDateFindsEventWithNoBeginDate(): void
     {
         $this->testingFramework->createRecord('tx_seminars_seminars');
 
@@ -6030,7 +6030,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEarliestBeginOrEndDateForEventWithoutBeginDateFindsThisEvent()
+    public function limitToEarliestBeginOrEndDateForEventWithoutBeginDateFindsThisEvent(): void
     {
         $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->subject->limitToEarliestBeginOrEndDate(42);
@@ -6045,7 +6045,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEarliestBeginOrEndDateForEventWithBeginDateEqualToGivenTimestampFindsThisEvent()
+    public function limitToEarliestBeginOrEndDateForEventWithBeginDateEqualToGivenTimestampFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -6063,7 +6063,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEarliestBeginOrEndDateForEventWithGreaterBeginDateThanGivenTimestampFindsThisEvent()
+    public function limitToEarliestBeginOrEndDateForEventWithGreaterBeginDateThanGivenTimestampFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -6081,7 +6081,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEarliestBeginOrEndDateForEventWithBeginDateLowerThanGivenTimestampDoesNotFindThisEvent()
+    public function limitToEarliestBeginOrEndDateForEventWithBeginDateLowerThanGivenTimestampDoesNotFindThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -6098,7 +6098,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEarliestBeginOrEndDateForZeroGivenAsTimestampUnsetsFilter()
+    public function limitToEarliestBeginOrEndDateForZeroGivenAsTimestampUnsetsFilter(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -6119,7 +6119,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEarliestBeginOrEndDateForFindsEventStartingBeforeAndEndingAfterDeadline()
+    public function limitToEarliestBeginOrEndDateForFindsEventStartingBeforeAndEndingAfterDeadline(): void
     {
         $this->testingFramework->createRecord('tx_seminars_seminars', ['begin_date' => 8, 'end_date' => 10]);
         $this->subject->limitToEarliestBeginOrEndDate(9);
@@ -6136,7 +6136,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToLatestBeginOrEndDateForEventWithoutDateDoesNotFindThisEvent()
+    public function limitToLatestBeginOrEndDateForEventWithoutDateDoesNotFindThisEvent(): void
     {
         $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->subject->limitToLatestBeginOrEndDate(42);
@@ -6150,7 +6150,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToLatestBeginOrEndDateForEventBeginDateEqualToGivenTimestampFindsThisEvent()
+    public function limitToLatestBeginOrEndDateForEventBeginDateEqualToGivenTimestampFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -6168,7 +6168,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToLatestBeginOrEndDateForEventWithBeginDateAfterGivenTimestampDoesNotFindThisEvent()
+    public function limitToLatestBeginOrEndDateForEventWithBeginDateAfterGivenTimestampDoesNotFindThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -6185,7 +6185,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToLatestBeginOrEndDateForEventBeginDateBeforeGivenTimestampFindsThisEvent()
+    public function limitToLatestBeginOrEndDateForEventBeginDateBeforeGivenTimestampFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -6203,7 +6203,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToLatestBeginOrEndDateForEventEndDateEqualToGivenTimestampFindsThisEvent()
+    public function limitToLatestBeginOrEndDateForEventEndDateEqualToGivenTimestampFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -6221,7 +6221,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToLatestBeginOrEndDateForEventWithEndDateAfterGivenTimestampDoesNotFindThisEvent()
+    public function limitToLatestBeginOrEndDateForEventWithEndDateAfterGivenTimestampDoesNotFindThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -6238,7 +6238,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToLatestBeginOrEndDateForEventEndDateBeforeGivenTimestampFindsThisEvent()
+    public function limitToLatestBeginOrEndDateForEventEndDateBeforeGivenTimestampFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -6256,7 +6256,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToLatestBeginOrEndDateForZeroGivenUnsetsTheFilter()
+    public function limitToLatestBeginOrEndDateForZeroGivenUnsetsTheFilter(): void
     {
         $this->testingFramework->createRecord('tx_seminars_seminars');
 
@@ -6277,7 +6277,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function showHiddenRecordsForHiddenEventFindsThisEvent()
+    public function showHiddenRecordsForHiddenEventFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -6296,7 +6296,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function showHiddenRecordsForVisibleEventFindsThisEvent()
+    public function showHiddenRecordsForVisibleEventFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -6319,7 +6319,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventsWithVacanciesForEventWithNoRegistrationNeededFindsThisEvent()
+    public function limitToEventsWithVacanciesForEventWithNoRegistrationNeededFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -6338,7 +6338,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventsWithVacanciesForEventWithUnlimitedVacanciesFindsThisEvent()
+    public function limitToEventsWithVacanciesForEventWithUnlimitedVacanciesFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -6357,7 +6357,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventsWithVacanciesForEventNoVacanciesAndQueueDoesNotFindThisEvent()
+    public function limitToEventsWithVacanciesForEventNoVacanciesAndQueueDoesNotFindThisEvent(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -6384,7 +6384,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventsWithVacanciesForEventWithNoVacanciesDoesNotFindThisEvent()
+    public function limitToEventsWithVacanciesForEventWithNoVacanciesDoesNotFindThisEvent(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -6407,7 +6407,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventsWithVacanciesForEventWithNoVacanciesThroughOfflineRegistrationsDoesNotFindThisEvent()
+    public function limitToEventsWithVacanciesForEventWithNoVacanciesThroughOfflineRegistrationsDoesNotFindThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -6429,7 +6429,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventsWithVacanciesForEventWithNoVacanciesThroughRegistrationsWithMultipleSeatsNotFindsIt()
+    public function limitToEventsWithVacanciesForEventWithNoVacanciesThroughRegistrationsWithMultipleSeatsNotFindsIt(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -6455,7 +6455,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventsWithVacanciesForEventWithNoVacanciesThroughRegularAndOfflineRegistrationsNotFindsIt()
+    public function limitToEventsWithVacanciesForEventWithNoVacanciesThroughRegularAndOfflineRegistrationsNotFindsIt(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -6482,7 +6482,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventsWithVacanciesForEventWithVacanciesAndNoAttendeesFindsThisEvent()
+    public function limitToEventsWithVacanciesForEventWithVacanciesAndNoAttendeesFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -6505,7 +6505,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToOrganizersForOneProvidedOrganizerAndEventWithThisOrganizerFindsThisEvent()
+    public function limitToOrganizersForOneProvidedOrganizerAndEventWithThisOrganizerFindsThisEvent(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -6532,7 +6532,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToOrganizersForOneProvidedOrganizerAndEventWithoutOrganizerDoesNotFindThisEvent()
+    public function limitToOrganizersForOneProvidedOrganizerAndEventWithoutOrganizerDoesNotFindThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -6552,7 +6552,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToOrganizersForOneProvidedOrganizerAndEventWithOtherOrganizerDoesNotFindThisEvent()
+    public function limitToOrganizersForOneProvidedOrganizerAndEventWithOtherOrganizerDoesNotFindThisEvent(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -6581,7 +6581,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToOrganizersForTwoProvidedOrganizersAndEventWithFirstOrganizerFindsThisEvent()
+    public function limitToOrganizersForTwoProvidedOrganizersAndEventWithFirstOrganizerFindsThisEvent(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -6612,7 +6612,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToOrganizersForProvidedOrganizerAndTwoEventsWithThisOrganizerFindsTheseEvents()
+    public function limitToOrganizersForProvidedOrganizerAndTwoEventsWithThisOrganizerFindsTheseEvents(): void
     {
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -6649,7 +6649,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToOrganizersForProvidedOrganizerAndTopicWithOrganizerReturnsTheTopicsDate()
+    public function limitToOrganizersForProvidedOrganizerAndTopicWithOrganizerReturnsTheTopicsDate(): void
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -6690,7 +6690,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToOrganizersForNoProvidedOrganizerFindsEventWithOrganizer()
+    public function limitToOrganizersForNoProvidedOrganizerFindsEventWithOrganizer(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -6721,7 +6721,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToAgeForAgeWithinEventsAgeRangeFindsThisEvent()
+    public function limitToAgeForAgeWithinEventsAgeRangeFindsThisEvent(): void
     {
         $targetGroupUid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
@@ -6749,7 +6749,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToAgeForAgeEqualToLowerLimitOfAgeRangeFindsThisEvent()
+    public function limitToAgeForAgeEqualToLowerLimitOfAgeRangeFindsThisEvent(): void
     {
         $targetGroupUid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
@@ -6777,7 +6777,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToAgeForAgeEqualToHigherLimitOfAgeRangeFindsThisEvent()
+    public function limitToAgeForAgeEqualToHigherLimitOfAgeRangeFindsThisEvent(): void
     {
         $targetGroupUid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
@@ -6805,7 +6805,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToAgeForNoLowerLimitAndAgeLowerThanMaximumAgeFindsThisEvent()
+    public function limitToAgeForNoLowerLimitAndAgeLowerThanMaximumAgeFindsThisEvent(): void
     {
         $targetGroupUid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
@@ -6833,7 +6833,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToAgeForAgeHigherThanMaximumAgeDoesNotFindThisEvent()
+    public function limitToAgeForAgeHigherThanMaximumAgeDoesNotFindThisEvent(): void
     {
         $targetGroupUid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
@@ -6860,7 +6860,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToAgeForNoHigherLimitAndAgeHigherThanMinimumAgeFindsThisEvent()
+    public function limitToAgeForNoHigherLimitAndAgeHigherThanMinimumAgeFindsThisEvent(): void
     {
         $targetGroupUid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
@@ -6888,7 +6888,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToAgeForAgeLowerThanMinimumAgeFindsThisEvent()
+    public function limitToAgeForAgeLowerThanMinimumAgeFindsThisEvent(): void
     {
         $targetGroupUid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
@@ -6915,7 +6915,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToAgeForEventWithoutTargetGroupAndAgeProvidedFindsThisEvent()
+    public function limitToAgeForEventWithoutTargetGroupAndAgeProvidedFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -6933,7 +6933,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToAgeForEventWithTargetGroupWithNoLimitsFindsThisEvent()
+    public function limitToAgeForEventWithTargetGroupWithNoLimitsFindsThisEvent(): void
     {
         $targetGroupUid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups'
@@ -6960,7 +6960,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToAgeForEventWithTwoTargetGroupOneWithMatchingRangeAndOneWithoutMatchingRangeFindsThisEvent()
+    public function limitToAgeForEventWithTwoTargetGroupOneWithMatchingRangeAndOneWithoutMatchingRangeFindsThisEvent(): void
     {
         $targetGroupUid1 = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
@@ -6998,7 +6998,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToAgeForEventWithTwoTargetGroupBothWithMatchingRangesFindsThisEventOnlyOnce()
+    public function limitToAgeForEventWithTwoTargetGroupBothWithMatchingRangesFindsThisEventOnlyOnce(): void
     {
         $targetGroupUid1 = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
@@ -7036,7 +7036,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToAgeForAgeZeroGivenFindsEventWithAgeLimits()
+    public function limitToAgeForAgeZeroGivenFindsEventWithAgeLimits(): void
     {
         $targetGroupUid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
@@ -7068,7 +7068,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMaximumPriceForEventWithRegularPriceLowerThanMaximumFindsThisEvent()
+    public function limitToMaximumPriceForEventWithRegularPriceLowerThanMaximumFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7087,7 +7087,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMaximumPriceForEventWithRegularPriceZeroFindsThisEvent()
+    public function limitToMaximumPriceForEventWithRegularPriceZeroFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7106,7 +7106,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMaximumPriceForEventWithRegularPriceEqualToMaximumFindsThisEvent()
+    public function limitToMaximumPriceForEventWithRegularPriceEqualToMaximumFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7125,7 +7125,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMaximumPriceForEventWithRegularPriceHigherThanMaximumDoesNotFindThisEvent()
+    public function limitToMaximumPriceForEventWithRegularPriceHigherThanMaximumDoesNotFindThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7143,7 +7143,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMaximumPriceForEventWithSpecialPriceLowerThanMaximumFindsThisEvent()
+    public function limitToMaximumPriceForEventWithSpecialPriceLowerThanMaximumFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7162,7 +7162,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMaximumPriceForEventWithSpecialPriceEqualToMaximumFindsThisEvent()
+    public function limitToMaximumPriceForEventWithSpecialPriceEqualToMaximumFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7181,7 +7181,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMaximumPriceForEventWithSpecialPriceHigherThanMaximumDoesNotFindThisEvent()
+    public function limitToMaximumPriceForEventWithSpecialPriceHigherThanMaximumDoesNotFindThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7199,7 +7199,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMaximumPriceForEventWithRegularBoardPriceLowerThanMaximumFindsThisEvent()
+    public function limitToMaximumPriceForEventWithRegularBoardPriceLowerThanMaximumFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7218,7 +7218,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMaximumPriceForEventWithRegularBoardPriceEqualToMaximumFindsThisEvent()
+    public function limitToMaximumPriceForEventWithRegularBoardPriceEqualToMaximumFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7237,7 +7237,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMaximumPriceForEventWithRegularBoardPriceHigherThanMaximumDoesNotFindThisEvent()
+    public function limitToMaximumPriceForEventWithRegularBoardPriceHigherThanMaximumDoesNotFindThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7255,7 +7255,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMaximumPriceForEventWithSpecialBoardPriceLowerThanMaximumFindsThisEvent()
+    public function limitToMaximumPriceForEventWithSpecialBoardPriceLowerThanMaximumFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7274,7 +7274,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMaximumPriceForEventWithSpecialBoardPriceEqualToMaximumFindsThisEvent()
+    public function limitToMaximumPriceForEventWithSpecialBoardPriceEqualToMaximumFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7293,7 +7293,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMaximumPriceForEventWithSpecialBoardPriceHigherThanMaximumDoesNotFindThisEvent()
+    public function limitToMaximumPriceForEventWithSpecialBoardPriceHigherThanMaximumDoesNotFindThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7311,7 +7311,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMaximumPriceForTopicWithRegularPriceLowerThanMaximumFindsTheDateForThisEvent()
+    public function limitToMaximumPriceForTopicWithRegularPriceLowerThanMaximumFindsTheDateForThisEvent(): void
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7344,7 +7344,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMaximumPriceForTopicWithRegularPriceHigherThanMaximumDoesNotFindTheDateForThisEvent()
+    public function limitToMaximumPriceForTopicWithRegularPriceHigherThanMaximumDoesNotFindTheDateForThisEvent(): void
     {
         $topicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7372,7 +7372,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMaximumPriceForEventWithEarlyBirdDeadlineInFutureAndRegularEarlyPriceLowerThanMaximumFindsIt()
+    public function limitToMaximumPriceForEventWithEarlyBirdDeadlineInFutureAndRegularEarlyPriceLowerThanMaximumFindsIt(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7395,7 +7395,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMaximumPriceForEventWithEarlyBirdDeadlineInFutureAndRegularEarlyPriceEqualToMaximumFindsIt()
+    public function limitToMaximumPriceForEventWithEarlyBirdDeadlineInFutureAndRegularEarlyPriceEqualToMaximumFindsIt(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7418,7 +7418,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMaximumPriceForEventWithDeadlineInFutureAndRegularEarlyPriceHigherThanMaxNotFindsIt()
+    public function limitToMaximumPriceForEventWithDeadlineInFutureAndRegularEarlyPriceHigherThanMaxNotFindsIt(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7440,7 +7440,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMaximumPriceForEventWithEarlyBirdDeadlineInPastAndRegularEarlyPriceLowerThanMaxNotFindsIt()
+    public function limitToMaximumPriceForEventWithEarlyBirdDeadlineInPastAndRegularEarlyPriceLowerThanMaxNotFindsIt(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7462,7 +7462,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMaximumPriceForEventWithEarlyBirdDeadlineInFutureAndSpecialEarlyPriceLowerThanMaxFindsIt()
+    public function limitToMaximumPriceForEventWithEarlyBirdDeadlineInFutureAndSpecialEarlyPriceLowerThanMaxFindsIt(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7485,7 +7485,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMaximumPriceForEventWithEarlyBirdDeadlineInFutureAndSpecialEarlyPriceEqualToMaxFindsIt()
+    public function limitToMaximumPriceForEventWithEarlyBirdDeadlineInFutureAndSpecialEarlyPriceEqualToMaxFindsIt(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7508,7 +7508,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMaximumPriceForEventWithDeadlineInFutureAndSpecialEarlyPriceHigherThanMaxNotFindsIt()
+    public function limitToMaximumPriceForEventWithDeadlineInFutureAndSpecialEarlyPriceHigherThanMaxNotFindsIt(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7530,7 +7530,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMaximumPriceForFutureEarlyBirdDeadlineAndNoEarlyBirdPriceDoesNotFindThisEvent()
+    public function limitToMaximumPriceForFutureEarlyBirdDeadlineAndNoEarlyBirdPriceDoesNotFindThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7551,7 +7551,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMaximumPriceForEventWithEarlyBirdDeadlineInPastAndSpecialEarlyPriceLowerThanMaxNotFindsIt()
+    public function limitToMaximumPriceForEventWithEarlyBirdDeadlineInPastAndSpecialEarlyPriceLowerThanMaxNotFindsIt(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7573,7 +7573,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMaximumPriceWithDeadlineInFutureAndRegularEarlyHigherThanAndRegularLowerThanMaxiNotFindsIt()
+    public function limitToMaximumPriceWithDeadlineInFutureAndRegularEarlyHigherThanAndRegularLowerThanMaxiNotFindsIt(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7595,7 +7595,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMaximumPriceWithDeadlineInFutureAndNoSpecialEarlyAndRegularPriceLowerThanMaximumFindsIt()
+    public function limitToMaximumPriceWithDeadlineInFutureAndNoSpecialEarlyAndRegularPriceLowerThanMaximumFindsIt(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7617,7 +7617,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMaximumPriceForEventWithEarlyBirdDeadlineInFutureAndNoEarlySpecialPriceAndSpecialPriceLowerThanMaximumFindsThisEvent()
+    public function limitToMaximumPriceForEventWithEarlyBirdDeadlineInFutureAndNoEarlySpecialPriceAndSpecialPriceLowerThanMaximumFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7640,7 +7640,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMaximumPriceForEventWithEarlyBirdDeadlineInFutureAndNoRegularEarlyPriceAndRegularPriceLowerThanMaximumFindsThisEvent()
+    public function limitToMaximumPriceForEventWithEarlyBirdDeadlineInFutureAndNoRegularEarlyPriceAndRegularPriceLowerThanMaximumFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7662,7 +7662,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMaximumPriceForZeroGivenFindsEventWithNonZeroPrice()
+    public function limitToMaximumPriceForZeroGivenFindsEventWithNonZeroPrice(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7687,7 +7687,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMinimumPriceForEventWithRegularPriceLowerThanMinimumDoesNotFindThisEvent()
+    public function limitToMinimumPriceForEventWithRegularPriceLowerThanMinimumDoesNotFindThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7705,7 +7705,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMinimumPriceForPriceGivenAndEventWithoutPricesDoesNotFindThisEvent()
+    public function limitToMinimumPriceForPriceGivenAndEventWithoutPricesDoesNotFindThisEvent(): void
     {
         $this->testingFramework->createRecord('tx_seminars_seminars');
 
@@ -7720,7 +7720,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMinimumPriceForEventWithRegularPriceEqualToMinimumFindsThisEvent()
+    public function limitToMinimumPriceForEventWithRegularPriceEqualToMinimumFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7739,7 +7739,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMinimumPriceForEventWithRegularPriceGreaterThanMinimumFindsThisEvent()
+    public function limitToMinimumPriceForEventWithRegularPriceGreaterThanMinimumFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7758,7 +7758,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMinimumPriceForEventWithRegularBoardPriceGreaterThanMinimumFindsThisEvent()
+    public function limitToMinimumPriceForEventWithRegularBoardPriceGreaterThanMinimumFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7777,7 +7777,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMinimumPriceForEventWithRegularBoardPriceEqualToMinimumFindsThisEvent()
+    public function limitToMinimumPriceForEventWithRegularBoardPriceEqualToMinimumFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7796,7 +7796,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMinimumPriceForEventWithRegularBoardPriceLowerThanMinimumDoesNotFindThisEvent()
+    public function limitToMinimumPriceForEventWithRegularBoardPriceLowerThanMinimumDoesNotFindThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7814,7 +7814,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMinimumPriceForEventWithSpecialBoardPriceGreaterThanMinimumFindsThisEvent()
+    public function limitToMinimumPriceForEventWithSpecialBoardPriceGreaterThanMinimumFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7833,7 +7833,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMinimumPriceForEventWithSpecialBoardPriceEqualToMinimumFindsThisEvent()
+    public function limitToMinimumPriceForEventWithSpecialBoardPriceEqualToMinimumFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7852,7 +7852,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMinimumPriceForEventWithSpecialBoardPriceLowerThanMinimumDoesNotFindThisEvent()
+    public function limitToMinimumPriceForEventWithSpecialBoardPriceLowerThanMinimumDoesNotFindThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7870,7 +7870,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMinimumPriceForEventWithSpecialPriceGreaterThanMinimumFindsThisEvent()
+    public function limitToMinimumPriceForEventWithSpecialPriceGreaterThanMinimumFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7889,7 +7889,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMinimumPriceForEventWithSpecialPriceEqualToMinimumFindsThisEvent()
+    public function limitToMinimumPriceForEventWithSpecialPriceEqualToMinimumFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7908,7 +7908,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMinimumPriceForEventWithSpecialPriceLowerThanMinimumDoesNotFindThisEvent()
+    public function limitToMinimumPriceForEventWithSpecialPriceLowerThanMinimumDoesNotFindThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7926,7 +7926,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMinimumPriceForEarlyBirdDeadlineInFutureAndRegularEarlyPriceZeroAndRegularPriceHigherThanMinimumFindsThisEvent()
+    public function limitToMinimumPriceForEarlyBirdDeadlineInFutureAndRegularEarlyPriceZeroAndRegularPriceHigherThanMinimumFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7948,7 +7948,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMinimumPriceForEarlyBirdDeadlineInFutureNoPriceSetDoesNotFindThisEvent()
+    public function limitToMinimumPriceForEarlyBirdDeadlineInFutureNoPriceSetDoesNotFindThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7966,7 +7966,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMinimumPriceForEarlyBirdDeadlineInFutureAndRegularEarlyPriceLowerThanMinimumDoesNotFindThisEvent()
+    public function limitToMinimumPriceForEarlyBirdDeadlineInFutureAndRegularEarlyPriceLowerThanMinimumDoesNotFindThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -7987,7 +7987,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMinimumPriceForEarlyBirdDeadlineInFutureAndRegularEarlyPriceEqualToMinimumFindsThisEvent()
+    public function limitToMinimumPriceForEarlyBirdDeadlineInFutureAndRegularEarlyPriceEqualToMinimumFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -8009,7 +8009,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMinimumPriceForEarlyBirdDeadlineInFutureAndRegularEarlyPriceHigherThanMinimumFindsThisEvent()
+    public function limitToMinimumPriceForEarlyBirdDeadlineInFutureAndRegularEarlyPriceHigherThanMinimumFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -8031,7 +8031,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMinimumPriceForEarlyBirdDeadlineInFutureAndSpecialEarlyPriceZeroAndSpecialPriceHigherThanMinimumFindsThisEvent()
+    public function limitToMinimumPriceForEarlyBirdDeadlineInFutureAndSpecialEarlyPriceZeroAndSpecialPriceHigherThanMinimumFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -8053,7 +8053,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMinimumPriceForEarlyBirdDeadlineInFutureAndSpecialEarlyPriceLowerThanMinimumDoesNotFindThisEvent()
+    public function limitToMinimumPriceForEarlyBirdDeadlineInFutureAndSpecialEarlyPriceLowerThanMinimumDoesNotFindThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -8074,7 +8074,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMinimumPriceForEarlyBirdDeadlineInFutureAndSpecialEarlyPriceEqualToMinimumFindsThisEvent()
+    public function limitToMinimumPriceForEarlyBirdDeadlineInFutureAndSpecialEarlyPriceEqualToMinimumFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -8096,7 +8096,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMinimumPriceForEarlyBirdDeadlineInFutureAndSpecialEarlyPriceHigherThanMinimumFindsThisEvent()
+    public function limitToMinimumPriceForEarlyBirdDeadlineInFutureAndSpecialEarlyPriceHigherThanMinimumFindsThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -8118,7 +8118,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMinimumPriceForEarlyBirdDeadlineInPastAndRegularEarlyPriceHigherThanMinimumDoesNotFindThisEvent()
+    public function limitToMinimumPriceForEarlyBirdDeadlineInPastAndRegularEarlyPriceHigherThanMinimumDoesNotFindThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -8139,7 +8139,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMinimumPriceForEarlyBirdDeadlineInPastAndSpecialEarlyPriceHigherThanMinimumDoesNotFindThisEvent()
+    public function limitToMinimumPriceForEarlyBirdDeadlineInPastAndSpecialEarlyPriceHigherThanMinimumDoesNotFindThisEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -8160,7 +8160,7 @@ final class EventBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToMinimumPriceForMinimumPriceZeroFindsEventWithRegularPrice()
+    public function limitToMinimumPriceForMinimumPriceZeroFindsEventWithRegularPrice(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',

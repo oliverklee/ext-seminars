@@ -25,10 +25,8 @@ final class TestingModel extends AbstractModel
      * Sets the test field of this record to a boolean value.
      *
      * @param bool $test the boolean value to set
-     *
-     * @return void
      */
-    public function setBooleanTest(bool $test)
+    public function setBooleanTest(bool $test): void
     {
         $this->setRecordPropertyBoolean('test', $test);
     }

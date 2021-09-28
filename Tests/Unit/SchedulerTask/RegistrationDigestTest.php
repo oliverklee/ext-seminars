@@ -17,12 +17,12 @@ final class RegistrationDigestTest extends UnitTestCase
      */
     private $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new RegistrationDigest();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         MapperRegistry::purgeInstance();
         ConfigurationRegistry::purgeInstance();
@@ -33,7 +33,7 @@ final class RegistrationDigestTest extends UnitTestCase
     /**
      * @test
      */
-    public function isInitializedInitiallyReturnsFalse()
+    public function isInitializedInitiallyReturnsFalse(): void
     {
         self::assertFalse($this->subject->isInitialized());
     }
@@ -41,7 +41,7 @@ final class RegistrationDigestTest extends UnitTestCase
     /**
      * @test
      */
-    public function isInitializedAfterInitializeObjectReturnsTrue()
+    public function isInitializedAfterInitializeObjectReturnsTrue(): void
     {
         $this->subject->initializeObject();
 
@@ -51,7 +51,7 @@ final class RegistrationDigestTest extends UnitTestCase
     /**
      * @test
      */
-    public function initializeObjectCanBeCalledTwice()
+    public function initializeObjectCanBeCalledTwice(): void
     {
         $this->subject->initializeObject();
         $this->subject->initializeObject();
@@ -62,7 +62,7 @@ final class RegistrationDigestTest extends UnitTestCase
     /**
      * @test
      */
-    public function initializeObjectInitializesConfiguration()
+    public function initializeObjectInitializesConfiguration(): void
     {
         $this->subject->initializeObject();
 
@@ -72,7 +72,7 @@ final class RegistrationDigestTest extends UnitTestCase
     /**
      * @test
      */
-    public function initializeObjectInitializesEventMapper()
+    public function initializeObjectInitializesEventMapper(): void
     {
         $this->subject->initializeObject();
 

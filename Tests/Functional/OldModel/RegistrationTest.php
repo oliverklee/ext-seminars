@@ -44,7 +44,7 @@ final class RegistrationTest extends FunctionalTestCase
         'timeFormat' => self::TIME_FORMAT,
     ];
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -63,7 +63,7 @@ final class RegistrationTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function fromUidMapsDataFromDatabase()
+    public function fromUidMapsDataFromDatabase(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Registrations.xml');
 
@@ -89,7 +89,7 @@ final class RegistrationTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function mapsFrontEndUser()
+    public function mapsFrontEndUser(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Registrations.xml');
 
@@ -104,7 +104,7 @@ final class RegistrationTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function mapsEvent()
+    public function mapsEvent(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Registrations.xml');
 
@@ -121,7 +121,7 @@ final class RegistrationTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getUserDataForNoGroupReturnsEmptyString()
+    public function getUserDataForNoGroupReturnsEmptyString(): void
     {
         $this->subject->setUserData(['usergroup' => '']);
 
@@ -133,7 +133,7 @@ final class RegistrationTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getUserDataForInexistentGroupReturnsEmptyString()
+    public function getUserDataForInexistentGroupReturnsEmptyString(): void
     {
         $this->subject->setUserData(['usergroup' => '1234']);
 
@@ -145,7 +145,7 @@ final class RegistrationTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getUserDataForOneGroupReturnsGroupTitle()
+    public function getUserDataForOneGroupReturnsGroupTitle(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Registrations/Users.xml');
         $this->subject->setUserData(['usergroup' => '1']);
@@ -158,7 +158,7 @@ final class RegistrationTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getUserDataForTwoGroupReturnsCommaSeparatedTitlesInGivenOrder()
+    public function getUserDataForTwoGroupReturnsCommaSeparatedTitlesInGivenOrder(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Registrations/Users.xml');
         $this->subject->setUserData(['usergroup' => '2,1']);
@@ -173,7 +173,7 @@ final class RegistrationTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function dumpUserValuesCanDumpName()
+    public function dumpUserValuesCanDumpName(): void
     {
         $name = 'Max Doe';
         $userData = ['name' => $name];
@@ -191,7 +191,7 @@ final class RegistrationTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function dumpUserValuesForSpaceAroundCommaCanDumpTwoFields()
+    public function dumpUserValuesForSpaceAroundCommaCanDumpTwoFields(): void
     {
         $name = 'Max Doe';
         $email = 'max@example.com';
@@ -211,7 +211,7 @@ final class RegistrationTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function dumpUserValuesContainsLabel()
+    public function dumpUserValuesContainsLabel(): void
     {
         $email = 'max@example.com';
         $userData = ['email' => $email];
@@ -225,7 +225,7 @@ final class RegistrationTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function dumpUserValuesForSpaceAroundCommaCanHaveTwoLabels()
+    public function dumpUserValuesForSpaceAroundCommaCanHaveTwoLabels(): void
     {
         $name = 'Max Doe';
         $email = 'max@example.com';
@@ -245,7 +245,7 @@ final class RegistrationTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function dumpUserValuesDoesNotContainRawLabelNameAsLabelForPid()
+    public function dumpUserValuesDoesNotContainRawLabelNameAsLabelForPid(): void
     {
         $this->subject->setUserData(['pid' => 1234]);
 
@@ -257,7 +257,7 @@ final class RegistrationTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function dumpUserValuesCanContainNonRegisteredField()
+    public function dumpUserValuesCanContainNonRegisteredField(): void
     {
         $this->subject->setUserData(['is_dummy_record' => true]);
 
@@ -286,7 +286,7 @@ final class RegistrationTest extends FunctionalTestCase
      *
      * @dataProvider userDateAndTimeFieldsDataProvider
      */
-    public function dumpUserValuesCanDumpDateAndTimeField(string $fieldName)
+    public function dumpUserValuesCanDumpDateAndTimeField(string $fieldName): void
     {
         $value = 1579816569;
         $this->subject->setUserData([$fieldName => $value]);
@@ -316,7 +316,7 @@ final class RegistrationTest extends FunctionalTestCase
      *
      * @dataProvider userDateFieldsDataProvider
      */
-    public function dumpUserValuesCanDumpDate(string $fieldName)
+    public function dumpUserValuesCanDumpDate(string $fieldName): void
     {
         $value = 1579816569;
         $this->subject->setUserData([$fieldName => $value]);
@@ -382,7 +382,7 @@ final class RegistrationTest extends FunctionalTestCase
      *
      * @dataProvider dumpableUserFieldsDataProvider
      */
-    public function dumpUserValuesCreatesNoDoubleColonsAfterLabel(string $fieldName)
+    public function dumpUserValuesCreatesNoDoubleColonsAfterLabel(string $fieldName): void
     {
         $userData = [$fieldName => '1234 some value'];
         $this->subject->setUserData($userData);
@@ -432,7 +432,7 @@ final class RegistrationTest extends FunctionalTestCase
      *
      * @dataProvider dumpableStringUserFieldsDataProvider
      */
-    public function dumpUserValuesCanDumpStringValues(string $fieldName)
+    public function dumpUserValuesCanDumpStringValues(string $fieldName): void
     {
         $value = 'some value';
         $userData = [$fieldName => $value];
@@ -467,7 +467,7 @@ final class RegistrationTest extends FunctionalTestCase
      *
      * @dataProvider dumpableIntegerUserFieldsDataProvider
      */
-    public function dumpUserValuesCanDumpIntegerValues(string $fieldName)
+    public function dumpUserValuesCanDumpIntegerValues(string $fieldName): void
     {
         $value = 1234;
         $userData = [$fieldName => $value];
@@ -500,7 +500,7 @@ final class RegistrationTest extends FunctionalTestCase
      *
      * @dataProvider genderDataProvider
      */
-    public function dumpUserValuesCanDumpGender(int $value)
+    public function dumpUserValuesCanDumpGender(int $value): void
     {
         $userData = ['gender' => $value];
         $this->subject->setUserData($userData);
@@ -513,7 +513,7 @@ final class RegistrationTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function dumpUserValuesForOneGroupDumpsGroupTitle()
+    public function dumpUserValuesForOneGroupDumpsGroupTitle(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Registrations/Users.xml');
         $this->subject->setUserData(['usergroup' => '1']);
@@ -526,7 +526,7 @@ final class RegistrationTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function dumpUserValuesForTwoGroupsDumpsGroupTitlesInGivenOrder()
+    public function dumpUserValuesForTwoGroupsDumpsGroupTitlesInGivenOrder(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Registrations/Users.xml');
         $this->subject->setUserData(['usergroup' => '2,1']);
@@ -541,7 +541,7 @@ final class RegistrationTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getBillingAddressWithGenderMaleContainsLabelForGenderMale()
+    public function getBillingAddressWithGenderMaleContainsLabelForGenderMale(): void
     {
         $subject = \Tx_Seminars_OldModel_Registration::fromData(['gender' => 0]);
 
@@ -553,7 +553,7 @@ final class RegistrationTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getBillingAddressWithGenderFemaleContainsLabelForGenderFemale()
+    public function getBillingAddressWithGenderFemaleContainsLabelForGenderFemale(): void
     {
         $subject = \Tx_Seminars_OldModel_Registration::fromData(['gender' => 1]);
 
@@ -565,7 +565,7 @@ final class RegistrationTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getBillingAddressWithTelephoneNumberContainsTelephoneNumber()
+    public function getBillingAddressWithTelephoneNumberContainsTelephoneNumber(): void
     {
         $value = '01234-56789';
         $subject = \Tx_Seminars_OldModel_Registration::fromData(['telephone' => $value]);
@@ -578,7 +578,7 @@ final class RegistrationTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function getBillingAddressWithEmailAddressContainsEmailAddress()
+    public function getBillingAddressWithEmailAddressContainsEmailAddress(): void
     {
         $value = 'max@example.com';
         $subject = \Tx_Seminars_OldModel_Registration::fromData(['email' => $value]);

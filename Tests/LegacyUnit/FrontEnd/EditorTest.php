@@ -23,7 +23,7 @@ final class EditorTest extends TestCase
      */
     private $testingFramework = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
@@ -32,7 +32,7 @@ final class EditorTest extends TestCase
         $this->subject->setTestMode();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
 
@@ -51,7 +51,7 @@ final class EditorTest extends TestCase
     /**
      * @test
      */
-    public function isTestModeReturnsTrueForTestModeEnabled()
+    public function isTestModeReturnsTrueForTestModeEnabled(): void
     {
         self::assertTrue(
             $this->subject->isTestMode()
@@ -61,7 +61,7 @@ final class EditorTest extends TestCase
     /**
      * @test
      */
-    public function isTestModeReturnsFalseForTestModeDisabled()
+    public function isTestModeReturnsFalseForTestModeDisabled(): void
     {
         $subject = new \Tx_Seminars_FrontEnd_Editor([], $this->getFrontEndController()->cObj);
 
@@ -77,7 +77,7 @@ final class EditorTest extends TestCase
     /**
      * @test
      */
-    public function getObjectUidReturnsTheSetObjectUidForZero()
+    public function getObjectUidReturnsTheSetObjectUidForZero(): void
     {
         $this->subject->setObjectUid(0);
 
@@ -90,7 +90,7 @@ final class EditorTest extends TestCase
     /**
      * @test
      */
-    public function getObjectUidReturnsTheSetObjectUidForExistingObjectUid()
+    public function getObjectUidReturnsTheSetObjectUidForExistingObjectUid(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_test');
         $this->subject->setObjectUid($uid);
@@ -108,7 +108,7 @@ final class EditorTest extends TestCase
     /**
      * @test
      */
-    public function getFormValueReturnsEmptyStringForRequestedFormValueNotSet()
+    public function getFormValueReturnsEmptyStringForRequestedFormValueNotSet(): void
     {
         self::assertEquals(
             '',
@@ -119,7 +119,7 @@ final class EditorTest extends TestCase
     /**
      * @test
      */
-    public function getFormValueReturnsValueSetViaSetFakedFormValue()
+    public function getFormValueReturnsValueSetViaSetFakedFormValue(): void
     {
         $this->subject->setFakedFormValue('title', 'foo');
 

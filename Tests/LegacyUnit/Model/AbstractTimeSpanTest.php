@@ -14,7 +14,7 @@ final class AbstractTimeSpanTest extends TestCase
      */
     private $subject;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         /** @var \Tx_Seminars_Model_AbstractTimeSpan&MockObject $subject */
         $subject = $this->getMockForAbstractClass(\Tx_Seminars_Model_AbstractTimeSpan::class);
@@ -26,7 +26,7 @@ final class AbstractTimeSpanTest extends TestCase
     /**
      * @test
      */
-    public function getBeginDateAsUnixTimeStampWithoutBeginDateReturnsZero()
+    public function getBeginDateAsUnixTimeStampWithoutBeginDateReturnsZero(): void
     {
         $this->subject->setData([]);
 
@@ -39,7 +39,7 @@ final class AbstractTimeSpanTest extends TestCase
     /**
      * @test
      */
-    public function getBeginDateAsUnixTimeStampWithBeginDateReturnsBeginDate()
+    public function getBeginDateAsUnixTimeStampWithBeginDateReturnsBeginDate(): void
     {
         $this->subject->setData(['begin_date' => 42]);
 
@@ -52,7 +52,7 @@ final class AbstractTimeSpanTest extends TestCase
     /**
      * @test
      */
-    public function setBeginDateAsUnixTimeStampWithNegativeTimeStampThrowsException()
+    public function setBeginDateAsUnixTimeStampWithNegativeTimeStampThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -67,7 +67,7 @@ final class AbstractTimeSpanTest extends TestCase
     /**
      * @test
      */
-    public function setBeginDateAsUnixTimeStampWithZeroTimeStampSetsBeginDate()
+    public function setBeginDateAsUnixTimeStampWithZeroTimeStampSetsBeginDate(): void
     {
         $this->subject->setBeginDateAsUnixTimeStamp(0);
 
@@ -80,7 +80,7 @@ final class AbstractTimeSpanTest extends TestCase
     /**
      * @test
      */
-    public function setBeginDateAsUnixTimeStampWithPositiveTimeStampSetsBeginDate()
+    public function setBeginDateAsUnixTimeStampWithPositiveTimeStampSetsBeginDate(): void
     {
         $this->subject->setBeginDateAsUnixTimeStamp(42);
 
@@ -93,7 +93,7 @@ final class AbstractTimeSpanTest extends TestCase
     /**
      * @test
      */
-    public function hasBeginDateWithoutBeginDateReturnsFalse()
+    public function hasBeginDateWithoutBeginDateReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -105,7 +105,7 @@ final class AbstractTimeSpanTest extends TestCase
     /**
      * @test
      */
-    public function hasBeginDateWithBeginDateReturnsTrue()
+    public function hasBeginDateWithBeginDateReturnsTrue(): void
     {
         $this->subject->setBeginDateAsUnixTimeStamp(42);
 
@@ -119,7 +119,7 @@ final class AbstractTimeSpanTest extends TestCase
     /**
      * @test
      */
-    public function getEndDateAsUnixTimeStampWithoutEndDateReturnsZero()
+    public function getEndDateAsUnixTimeStampWithoutEndDateReturnsZero(): void
     {
         $this->subject->setData([]);
 
@@ -132,7 +132,7 @@ final class AbstractTimeSpanTest extends TestCase
     /**
      * @test
      */
-    public function getEndDateAsUnixTimeStampWithEndDateReturnsEndDate()
+    public function getEndDateAsUnixTimeStampWithEndDateReturnsEndDate(): void
     {
         $this->subject->setData(['end_date' => 42]);
 
@@ -145,7 +145,7 @@ final class AbstractTimeSpanTest extends TestCase
     /**
      * @test
      */
-    public function setEndDateAsUnixTimeStampWithNegativeTimeStampThrowsException()
+    public function setEndDateAsUnixTimeStampWithNegativeTimeStampThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -160,7 +160,7 @@ final class AbstractTimeSpanTest extends TestCase
     /**
      * @test
      */
-    public function setEndDateAsUnixTimeStampWithZeroTimeStampSetsEndDate()
+    public function setEndDateAsUnixTimeStampWithZeroTimeStampSetsEndDate(): void
     {
         $this->subject->setEndDateAsUnixTimeStamp(0);
 
@@ -173,7 +173,7 @@ final class AbstractTimeSpanTest extends TestCase
     /**
      * @test
      */
-    public function setEndDateAsUnixTimeStampWithPositiveTimeStampSetsEndDate()
+    public function setEndDateAsUnixTimeStampWithPositiveTimeStampSetsEndDate(): void
     {
         $this->subject->setEndDateAsUnixTimeStamp(42);
 
@@ -186,7 +186,7 @@ final class AbstractTimeSpanTest extends TestCase
     /**
      * @test
      */
-    public function hasEndDateWithoutEndDateReturnsFalse()
+    public function hasEndDateWithoutEndDateReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -198,7 +198,7 @@ final class AbstractTimeSpanTest extends TestCase
     /**
      * @test
      */
-    public function hasEndDateWithEndDateReturnsTrue()
+    public function hasEndDateWithEndDateReturnsTrue(): void
     {
         $this->subject->setEndDateAsUnixTimeStamp(42);
 
@@ -212,7 +212,7 @@ final class AbstractTimeSpanTest extends TestCase
     /**
      * @test
      */
-    public function getRoomWithoutRoomReturnsAnEmptyString()
+    public function getRoomWithoutRoomReturnsAnEmptyString(): void
     {
         $this->subject->setData([]);
 
@@ -225,7 +225,7 @@ final class AbstractTimeSpanTest extends TestCase
     /**
      * @test
      */
-    public function getRoomWithRoomReturnsRoom()
+    public function getRoomWithRoomReturnsRoom(): void
     {
         $this->subject->setData(['room' => 'cuby']);
 
@@ -238,7 +238,7 @@ final class AbstractTimeSpanTest extends TestCase
     /**
      * @test
      */
-    public function setRoomSetsRoom()
+    public function setRoomSetsRoom(): void
     {
         $this->subject->setRoom('cuby');
 
@@ -251,7 +251,7 @@ final class AbstractTimeSpanTest extends TestCase
     /**
      * @test
      */
-    public function hasRoomWithoutRoomReturnsFalse()
+    public function hasRoomWithoutRoomReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -263,7 +263,7 @@ final class AbstractTimeSpanTest extends TestCase
     /**
      * @test
      */
-    public function hasRoomWithRoomReturnsTrue()
+    public function hasRoomWithRoomReturnsTrue(): void
     {
         $this->subject->setRoom('cuby');
 

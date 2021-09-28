@@ -30,7 +30,7 @@ final class AbstractBagTest extends TestCase
      */
     private $uidOfSecondRecord = 0;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
 
@@ -46,7 +46,7 @@ final class AbstractBagTest extends TestCase
         $this->subject = new TestingBag('is_dummy_record=1');
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
     }
@@ -58,7 +58,7 @@ final class AbstractBagTest extends TestCase
     /**
      * @test
      */
-    public function emptyBagHasNoUids()
+    public function emptyBagHasNoUids(): void
     {
         $bag = new TestingBag('1 = 2');
 
@@ -71,7 +71,7 @@ final class AbstractBagTest extends TestCase
     /**
      * @test
      */
-    public function bagCanHaveOneUid()
+    public function bagCanHaveOneUid(): void
     {
         $bag = new TestingBag('uid = ' . $this->uidOfFirstRecord);
 
@@ -84,7 +84,7 @@ final class AbstractBagTest extends TestCase
     /**
      * @test
      */
-    public function bagCanHaveTwoUids()
+    public function bagCanHaveTwoUids(): void
     {
         self::assertEquals(
             $this->uidOfFirstRecord . ',' . $this->uidOfSecondRecord,
@@ -95,7 +95,7 @@ final class AbstractBagTest extends TestCase
     /**
      * @test
      */
-    public function bagSortsByUidByDefault()
+    public function bagSortsByUidByDefault(): void
     {
         self::assertEquals(
             $this->uidOfFirstRecord,
@@ -115,7 +115,7 @@ final class AbstractBagTest extends TestCase
     /**
      * @test
      */
-    public function countForEmptyBagReturnsZero()
+    public function countForEmptyBagReturnsZero(): void
     {
         $bag = new TestingBag('1 = 2');
 
@@ -128,7 +128,7 @@ final class AbstractBagTest extends TestCase
     /**
      * @test
      */
-    public function countForBagWithOneElementReturnsOne()
+    public function countForBagWithOneElementReturnsOne(): void
     {
         $bag = new TestingBag('uid=' . $this->uidOfFirstRecord);
 
@@ -141,7 +141,7 @@ final class AbstractBagTest extends TestCase
     /**
      * @test
      */
-    public function countForBagWithTwoElementsReturnsTwo()
+    public function countForBagWithTwoElementsReturnsTwo(): void
     {
         self::assertEquals(
             2,
@@ -152,7 +152,7 @@ final class AbstractBagTest extends TestCase
     /**
      * @test
      */
-    public function countAfterCallingNextForBagWithTwoElementsReturnsTwo()
+    public function countAfterCallingNextForBagWithTwoElementsReturnsTwo(): void
     {
         $this->subject->rewind();
         $this->subject->next();
@@ -166,7 +166,7 @@ final class AbstractBagTest extends TestCase
     /**
      * @test
      */
-    public function countForBagWithTwoMatchesElementsAndLimitOfOneReturnsOne()
+    public function countForBagWithTwoMatchesElementsAndLimitOfOneReturnsOne(): void
     {
         $bag = new TestingBag('is_dummy_record = 1', '', '', '', '1');
 
@@ -183,7 +183,7 @@ final class AbstractBagTest extends TestCase
     /**
      * @test
      */
-    public function countWithoutLimitForEmptyBagReturnsZero()
+    public function countWithoutLimitForEmptyBagReturnsZero(): void
     {
         $bag = new TestingBag('1 = 2');
 
@@ -196,7 +196,7 @@ final class AbstractBagTest extends TestCase
     /**
      * @test
      */
-    public function countWithoutLimitForBagWithOneElementReturnsOne()
+    public function countWithoutLimitForBagWithOneElementReturnsOne(): void
     {
         $bag = new TestingBag('uid = ' . $this->uidOfFirstRecord);
 
@@ -209,7 +209,7 @@ final class AbstractBagTest extends TestCase
     /**
      * @test
      */
-    public function countWithoutLimitForBagWithTwoElementsReturnsTwo()
+    public function countWithoutLimitForBagWithTwoElementsReturnsTwo(): void
     {
         self::assertEquals(
             2,
@@ -220,7 +220,7 @@ final class AbstractBagTest extends TestCase
     /**
      * @test
      */
-    public function countWithoutLimitAfterCallingNextForBagWithTwoElementsReturnsTwo()
+    public function countWithoutLimitAfterCallingNextForBagWithTwoElementsReturnsTwo(): void
     {
         $this->subject->rewind();
         $this->subject->next();
@@ -234,7 +234,7 @@ final class AbstractBagTest extends TestCase
     /**
      * @test
      */
-    public function countWithoutLimitForBagWithTwoMatchesElementsAndLimitOfOneReturnsTwo()
+    public function countWithoutLimitForBagWithTwoMatchesElementsAndLimitOfOneReturnsTwo(): void
     {
         $bag = new TestingBag('is_dummy_record = 1', '', '', '', '1');
 
@@ -251,7 +251,7 @@ final class AbstractBagTest extends TestCase
     /**
      * @test
      */
-    public function isEmptyForEmptyBagReturnsTrue()
+    public function isEmptyForEmptyBagReturnsTrue(): void
     {
         $bag = new TestingBag('1=2');
 
@@ -263,7 +263,7 @@ final class AbstractBagTest extends TestCase
     /**
      * @test
      */
-    public function isEmptyForBagWithOneElementReturnsFalse()
+    public function isEmptyForBagWithOneElementReturnsFalse(): void
     {
         $bag = new TestingBag('uid = ' . $this->uidOfFirstRecord);
 
@@ -275,7 +275,7 @@ final class AbstractBagTest extends TestCase
     /**
      * @test
      */
-    public function isEmptyForBagWithTwoElementsReturnsFalse()
+    public function isEmptyForBagWithTwoElementsReturnsFalse(): void
     {
         self::assertFalse(
             $this->subject->isEmpty()

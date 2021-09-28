@@ -15,7 +15,7 @@ final class MailNotifierConfigurationTest extends UnitTestCase
      */
     private $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new MailNotifierConfiguration();
     }
@@ -23,7 +23,7 @@ final class MailNotifierConfigurationTest extends UnitTestCase
     /**
      * @test
      */
-    public function classImplementsAdditionalFieldProvider()
+    public function classImplementsAdditionalFieldProvider(): void
     {
         self::assertInstanceOf(AdditionalFieldProviderInterface::class, $this->subject);
     }

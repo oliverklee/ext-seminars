@@ -23,7 +23,7 @@ final class RegistrationMapperTest extends FunctionalTestCase
      */
     private $userMapper = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -34,7 +34,7 @@ final class RegistrationMapperTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function countByFrontEndUserIgnoresRegistrationFromOtherUsers()
+    public function countByFrontEndUserIgnoresRegistrationFromOtherUsers(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Registrations.xml');
 
@@ -46,7 +46,7 @@ final class RegistrationMapperTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function countByFrontEndUserCountsRegistrationFromGivenUser()
+    public function countByFrontEndUserCountsRegistrationFromGivenUser(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Registrations.xml');
 

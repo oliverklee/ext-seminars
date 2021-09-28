@@ -29,7 +29,7 @@ final class OrganizerTest extends TestCase
      */
     private $maximalFixture;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
         $subjectUid = $this->testingFramework->createRecord(
@@ -55,7 +55,7 @@ final class OrganizerTest extends TestCase
         $this->maximalFixture = new \Tx_Seminars_OldModel_Organizer($maximalFixtureUid);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
     }
@@ -67,7 +67,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function createFromUid()
+    public function createFromUid(): void
     {
         self::assertTrue(
             $this->subject->isOk()
@@ -81,7 +81,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function getNameWithNameReturnsName()
+    public function getNameWithNameReturnsName(): void
     {
         self::assertEquals(
             'Test organizer',
@@ -92,7 +92,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function hasHomepageWithEmptyHomepageReturnsFalse()
+    public function hasHomepageWithEmptyHomepageReturnsFalse(): void
     {
         self::assertFalse(
             $this->subject->hasHomepage()
@@ -102,7 +102,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function hasHomepageWithHomepageReturnsTrue()
+    public function hasHomepageWithHomepageReturnsTrue(): void
     {
         self::assertTrue(
             $this->maximalFixture->hasHomepage()
@@ -112,7 +112,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function getHomepage()
+    public function getHomepage(): void
     {
         self::assertEquals(
             '',
@@ -127,7 +127,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function getEmailFooterForEmptyFooterReturnsEmptyString()
+    public function getEmailFooterForEmptyFooterReturnsEmptyString(): void
     {
         self::assertEquals(
             '',
@@ -138,7 +138,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function getEmailFooterForNonEmptyFooterReturnsThisFooter()
+    public function getEmailFooterForNonEmptyFooterReturnsThisFooter(): void
     {
         self::assertEquals(
             "line 1\nline 2",
@@ -149,7 +149,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function getEmailAddressWithEmailAddressReturnsEmailAddress()
+    public function getEmailAddressWithEmailAddressReturnsEmailAddress(): void
     {
         self::assertEquals(
             'foo@test.com',
@@ -160,7 +160,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function getAttendancesPidWithNoAttendancesPidReturnsZero()
+    public function getAttendancesPidWithNoAttendancesPidReturnsZero(): void
     {
         self::assertEquals(
             0,
@@ -171,7 +171,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function getAttendancesPidWithAttendancesPidReturnsAttendancesPid()
+    public function getAttendancesPidWithAttendancesPidReturnsAttendancesPid(): void
     {
         self::assertEquals(
             99,
@@ -186,7 +186,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function hasDescriptionForOrganizerWithoutDescriptionReturnsFalse()
+    public function hasDescriptionForOrganizerWithoutDescriptionReturnsFalse(): void
     {
         self::assertFalse(
             $this->subject->hasDescription()
@@ -196,7 +196,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function hasDescriptionForOrganizerWithDescriptionReturnsTrue()
+    public function hasDescriptionForOrganizerWithDescriptionReturnsTrue(): void
     {
         self::assertTrue(
             $this->maximalFixture->hasDescription()
@@ -206,7 +206,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function getDescriptionForOrganizerWithoutDescriptionReturnsEmptyString()
+    public function getDescriptionForOrganizerWithoutDescriptionReturnsEmptyString(): void
     {
         self::assertEquals(
             '',
@@ -217,7 +217,7 @@ final class OrganizerTest extends TestCase
     /**
      * @test
      */
-    public function getDescriptionForOrganizerWithDescriptionReturnsDescription()
+    public function getDescriptionForOrganizerWithDescriptionReturnsDescription(): void
     {
         self::assertEquals(
             'foo',

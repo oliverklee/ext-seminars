@@ -31,7 +31,7 @@ interface RegistrationHookInterface
     public function seminarRegistrationCreated(
         \Tx_Seminars_OldModel_Registration $registration,
         \Tx_Seminars_Model_FrontEndUser $user
-    );
+    ): void;
 
     /**
      * @return void
@@ -39,7 +39,7 @@ interface RegistrationHookInterface
     public function seminarRegistrationRemoved(
         \Tx_Seminars_OldModel_Registration $registration,
         \Tx_Seminars_Model_FrontEndUser $user
-    );
+    ): void;
 
     /**
      * @return void
@@ -47,5 +47,5 @@ interface RegistrationHookInterface
     public function seminarRegistrationMovedFromQueue(
         \Tx_Seminars_OldModel_Registration $registration,
         \Tx_Seminars_Model_FrontEndUser $user
-    );
+    ): void;
 }

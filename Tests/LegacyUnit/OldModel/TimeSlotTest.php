@@ -35,7 +35,7 @@ final class TimeSlotTest extends TestCase
      */
     private $configuration;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->configuration = new DummyConfiguration([]);
@@ -56,7 +56,7 @@ final class TimeSlotTest extends TestCase
         $this->subject = new TestingTimeSlot($subjectUid);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
     }
@@ -68,7 +68,7 @@ final class TimeSlotTest extends TestCase
     /**
      * @test
      */
-    public function createFromUid()
+    public function createFromUid(): void
     {
         self::assertTrue(
             $this->subject->isOk()
@@ -82,7 +82,7 @@ final class TimeSlotTest extends TestCase
     /**
      * @test
      */
-    public function placeIsInitiallyZero()
+    public function placeIsInitiallyZero(): void
     {
         self::assertEquals(
             0,
@@ -93,7 +93,7 @@ final class TimeSlotTest extends TestCase
     /**
      * @test
      */
-    public function hasPlaceInitiallyReturnsFalse()
+    public function hasPlaceInitiallyReturnsFalse(): void
     {
         self::assertFalse(
             $this->subject->hasPlace()
@@ -103,7 +103,7 @@ final class TimeSlotTest extends TestCase
     /**
      * @test
      */
-    public function getPlaceReturnsUidOfPlaceSetViaSetPlace()
+    public function getPlaceReturnsUidOfPlaceSetViaSetPlace(): void
     {
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites'
@@ -119,7 +119,7 @@ final class TimeSlotTest extends TestCase
     /**
      * @test
      */
-    public function hasPlaceReturnsTrueIfPlaceIsSet()
+    public function hasPlaceReturnsTrueIfPlaceIsSet(): void
     {
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites'
@@ -138,7 +138,7 @@ final class TimeSlotTest extends TestCase
     /**
      * @test
      */
-    public function getPlaceShortReturnsWillBeAnnouncedForNoPlaces()
+    public function getPlaceShortReturnsWillBeAnnouncedForNoPlaces(): void
     {
         self::assertSame(
             $this->getLanguageService()->getLL('message_willBeAnnounced'),
@@ -149,7 +149,7 @@ final class TimeSlotTest extends TestCase
     /**
      * @test
      */
-    public function getPlaceShortReturnsPlaceNameForOnePlace()
+    public function getPlaceShortReturnsPlaceNameForOnePlace(): void
     {
         $placeUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
@@ -166,7 +166,7 @@ final class TimeSlotTest extends TestCase
     /**
      * @test
      */
-    public function getPlaceShortForInexistentPlaceUidReturnsEmptyString()
+    public function getPlaceShortForInexistentPlaceUidReturnsEmptyString(): void
     {
         $placeUid = $this->testingFramework->createRecord('tx_seminars_sites');
         $this->subject->setPlace($placeUid);
@@ -181,7 +181,7 @@ final class TimeSlotTest extends TestCase
     /**
      * @test
      */
-    public function getPlaceShortForDeletedPlaceReturnsEmptyString()
+    public function getPlaceShortForDeletedPlaceReturnsEmptyString(): void
     {
         $placeUid = $this->testingFramework->createRecord('tx_seminars_sites', ['deleted' => 1]);
 
@@ -197,7 +197,7 @@ final class TimeSlotTest extends TestCase
     /**
      * @test
      */
-    public function hasEntryDateIsInitiallyFalse()
+    public function hasEntryDateIsInitiallyFalse(): void
     {
         self::assertFalse(
             $this->subject->hasEntryDate()
@@ -207,7 +207,7 @@ final class TimeSlotTest extends TestCase
     /**
      * @test
      */
-    public function hasEntryDate()
+    public function hasEntryDate(): void
     {
         $this->subject->setEntryDate(42);
         self::assertTrue(
@@ -218,7 +218,7 @@ final class TimeSlotTest extends TestCase
     /**
      * @test
      */
-    public function getEntryDateWithBeginDateOnSameDayAsEntryDateReturnsTime()
+    public function getEntryDateWithBeginDateOnSameDayAsEntryDateReturnsTime(): void
     {
         // chosen randomly 2001-01-01 13:01
         $time = 978354060;
@@ -236,7 +236,7 @@ final class TimeSlotTest extends TestCase
     /**
      * @test
      */
-    public function getEntryDateWithBeginDateOnDifferentDayAsEntryDateReturnsTimeAndDate()
+    public function getEntryDateWithBeginDateOnDifferentDayAsEntryDateReturnsTimeAndDate(): void
     {
         // chosen randomly 2001-01-01 13:01
         $time = 978354060;

@@ -13,10 +13,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * Sets the event data.
      *
      * @param array $eventData event data array
-     *
-     * @return void
      */
-    public function setEventData(array $eventData)
+    public function setEventData(array $eventData): void
     {
         $this->recordData = $eventData;
         $this->isPersisted = true;
@@ -26,10 +24,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * Sets the event's unregistration deadline.
      *
      * @param int $unregistrationDeadline unregistration deadline as UNIX timestamp
-     *
-     * @return void
      */
-    public function setUnregistrationDeadline(int $unregistrationDeadline)
+    public function setUnregistrationDeadline(int $unregistrationDeadline): void
     {
         $this->setRecordPropertyInteger(
             'deadline_unregistration',
@@ -41,10 +37,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * Sets the event's begin date.
      *
      * @param int $beginDate begin date as UNIX timestamp (has to be >= 0, 0 will unset the begin date)
-     *
-     * @return void
      */
-    public function setBeginDate(int $beginDate)
+    public function setBeginDate(int $beginDate): void
     {
         $this->setRecordPropertyInteger('begin_date', $beginDate);
     }
@@ -53,10 +47,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * Sets the event's end date.
      *
      * @param int $endDate end date as UNIX timestamp (has to be >= 0, 0 will unset the end date)
-     *
-     * @return void
      */
-    public function setEndDate(int $endDate)
+    public function setEndDate(int $endDate): void
     {
         $this->setRecordPropertyInteger('end_date', $endDate);
     }
@@ -65,10 +57,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * Sets the event's maximum number of attendances.
      *
      * @param int $attendancesMax maximum attendances number
-     *
-     * @return void
      */
-    public function setAttendancesMax(int $attendancesMax)
+    public function setAttendancesMax(int $attendancesMax): void
     {
         $this->setRecordPropertyInteger('attendees_max', $attendancesMax);
     }
@@ -77,10 +67,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * Sets whether the event has a registration queue.
      *
      * @param bool $hasRegistrationQueue whether the event should have a registration queue
-     *
-     * @return void
      */
-    public function setRegistrationQueue(bool $hasRegistrationQueue)
+    public function setRegistrationQueue(bool $hasRegistrationQueue): void
     {
         $this->setRecordPropertyBoolean('queue_size', $hasRegistrationQueue);
     }
@@ -89,10 +77,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * Sets the number of attendances.
      *
      * @param int $number the number of attendances, must be >= 0
-     *
-     * @return void
      */
-    public function setNumberOfAttendances(int $number)
+    public function setNumberOfAttendances(int $number): void
     {
         $this->numberOfAttendances = $number;
         $this->statisticsHaveBeenCalculated = true;
@@ -102,10 +88,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * Sets the number of attendances on the registration queue.
      *
      * @param int $number the number of attendances on the registration queue, must be >= 0
-     *
-     * @return void
      */
-    public function setNumberOfAttendancesOnQueue(int $number)
+    public function setNumberOfAttendancesOnQueue(int $number): void
     {
         $this->numberOfAttendancesOnQueue = $number;
         $this->statisticsHaveBeenCalculated = true;
@@ -119,10 +103,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * @see https://bugs.oliverklee.com/show_bug.cgi?id=1403
      *
      * @param int $places the number of places that are associated with this event, must be >= 0
-     *
-     * @return void
      */
-    public function setNumberOfPlaces(int $places)
+    public function setNumberOfPlaces(int $places): void
     {
         $this->setRecordPropertyInteger('place', $places);
     }
@@ -135,10 +117,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * @see https://bugs.oliverklee.com/show_bug.cgi?id=1403
      *
      * @param int $targetGroups the number of target groups that are associated with this event, must be >= 0
-     *
-     * @return void
      */
-    public function setNumberOfTargetGroups(int $targetGroups)
+    public function setNumberOfTargetGroups(int $targetGroups): void
     {
         $this->setRecordPropertyInteger('target_groups', $targetGroups);
     }
@@ -153,10 +133,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * @see https://bugs.oliverklee.com/show_bug.cgi?id=2948
      *
      * @param int $paymentMethods the number of payment methods that are associated with this event, must be >= 0
-     *
-     * @return void
      */
-    public function setNumberOfPaymentMethods(int $paymentMethods)
+    public function setNumberOfPaymentMethods(int $paymentMethods): void
     {
         $this->setRecordPropertyInteger('payment_methods', $paymentMethods);
     }
@@ -171,10 +149,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      *
      * @param int $numberOfOrganizingPartners
      *        the number of organizing partners that are associated with this event, must be >= 0
-     *
-     * @return void
      */
-    public function setNumberOfOrganizingPartners(int $numberOfOrganizingPartners)
+    public function setNumberOfOrganizingPartners(int $numberOfOrganizingPartners): void
     {
         $this->setRecordPropertyInteger(
             'organizing_partners',
@@ -190,10 +166,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * @see https://bugs.oliverklee.com/show_bug.cgi?id=1403
      *
      * @param int $number the number of categories that are associated with this event, must be >= 0
-     *
-     * @return void
      */
-    public function setNumberOfCategories(int $number)
+    public function setNumberOfCategories(int $number): void
     {
         $this->setRecordPropertyInteger('categories', $number);
     }
@@ -207,10 +181,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * @see https://bugs.oliverklee.com/show_bug.cgi?id=1403
      *
      * @param int $number the number of organizers that are associated with this event, must be >= 0
-     *
-     * @return void
      */
-    public function setNumberOfOrganizers(int $number)
+    public function setNumberOfOrganizers(int $number): void
     {
         $this->setRecordPropertyInteger('organizers', $number);
     }
@@ -224,10 +196,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * @see https://bugs.oliverklee.com/show_bug.cgi?id=1403
      *
      * @param int $number the number of speakers that are associated with this event, must be >= 0
-     *
-     * @return void
      */
-    public function setNumberOfSpeakers(int $number)
+    public function setNumberOfSpeakers(int $number): void
     {
         $this->setRecordPropertyInteger('speakers', $number);
     }
@@ -241,10 +211,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * @see https://bugs.oliverklee.com/show_bug.cgi?id=1403
      *
      * @param int $number the number of partners that are associated with this event, must be >= 0
-     *
-     * @return void
      */
-    public function setNumberOfPartners(int $number)
+    public function setNumberOfPartners(int $number): void
     {
         $this->setRecordPropertyInteger('partners', $number);
     }
@@ -258,10 +226,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * @see https://bugs.oliverklee.com/show_bug.cgi?id=1403
      *
      * @param int $number the number of tutors that are associated with this event, must be >= 0
-     *
-     * @return void
      */
-    public function setNumberOfTutors(int $number)
+    public function setNumberOfTutors(int $number): void
     {
         $this->setRecordPropertyInteger('tutors', $number);
     }
@@ -275,10 +241,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * @see https://bugs.oliverklee.com/show_bug.cgi?id=1403
      *
      * @param int $number the number of leaders that are associated with this event, must be >= 0
-     *
-     * @return void
      */
-    public function setNumberOfLeaders(int $number)
+    public function setNumberOfLeaders(int $number): void
     {
         $this->setRecordPropertyInteger('leaders', $number);
     }
@@ -287,10 +251,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * Sets whether the collision check should be skipped for this event.
      *
      * @param bool $skipIt whether the collision check should be skipped for this event
-     *
-     * @return void
      */
-    public function setSkipCollisionCheck(bool $skipIt)
+    public function setSkipCollisionCheck(bool $skipIt): void
     {
         $this->setRecordPropertyBoolean('skip_collision_check', $skipIt);
     }
@@ -301,10 +263,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * @param int $recordType
      *        the record type for this event record, must be either \Tx_Seminars_Model_Event::TYPE_COMPLETE,
      *        \Tx_Seminars_Model_Event::TYPE_TOPIC or \Tx_Seminars_Model_Event::TYPE_DATE
-     *
-     * @return void
      */
-    public function setRecordType(int $recordType)
+    public function setRecordType(int $recordType): void
     {
         $this->setRecordPropertyInteger('object_type', $recordType);
     }
@@ -314,10 +274,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * TYPO3).
      *
      * @param bool $hidden whether this record should be marked as hidden
-     *
-     * @return void
      */
-    public function setHidden(bool $hidden)
+    public function setHidden(bool $hidden): void
     {
         $this->setRecordPropertyBoolean('hidden', $hidden);
     }
@@ -326,10 +284,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * Sets this record's start timestamp (concerning the visibility in TYPO3).
      *
      * @param int $timeStamp this record's start time as a UNIX timestamp, set to 0 to set no start time
-     *
-     * @return void
      */
-    public function setRecordStartTime(int $timeStamp)
+    public function setRecordStartTime(int $timeStamp): void
     {
         $this->setRecordPropertyInteger('starttime', $timeStamp);
     }
@@ -338,10 +294,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * Sets this record's end timestamp (concerning the visibility in TYPO3).
      *
      * @param int $timeStamp this record's end time as a UNIX timestamp, set to 0 to set no start time
-     *
-     * @return void
      */
-    public function setRecordEndTime(int $timeStamp)
+    public function setRecordEndTime(int $timeStamp): void
     {
         $this->setRecordPropertyInteger('endtime', $timeStamp);
     }
@@ -350,10 +304,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * Sets the UID of the owner FE user.
      *
      * @param int $ownerUid the UID of the owner FE user, must be >= 0
-     *
-     * @return void
      */
-    public function setOwnerUid(int $ownerUid)
+    public function setOwnerUid(int $ownerUid): void
     {
         $this->setRecordPropertyInteger('owner_feuser', $ownerUid);
     }
@@ -362,10 +314,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * Sets the number of time slots.
      *
      * @param int $numberOfTimeSlots the number of time slots for this event, must be >= 0
-     *
-     * @return void
      */
-    public function setNumberOfTimeSlots(int $numberOfTimeSlots)
+    public function setNumberOfTimeSlots(int $numberOfTimeSlots): void
     {
         $this->setRecordPropertyInteger('timeslots', $numberOfTimeSlots);
     }
@@ -374,10 +324,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * Sets the file name of the image.
      *
      * @param string $fileName the name of the image, must not be empty
-     *
-     * @return void
      */
-    public function setImage(string $fileName)
+    public function setImage(string $fileName): void
     {
         $this->setRecordPropertyString('image', $fileName);
     }
@@ -386,10 +334,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * Sets whether multiple registrations are allowed.
      *
      * @param bool $allowMultipleRegistrations whether multiple registrations should be allowed
-     *
-     * @return void
      */
-    public function setAllowsMultipleRegistrations(bool $allowMultipleRegistrations)
+    public function setAllowsMultipleRegistrations(bool $allowMultipleRegistrations): void
     {
         $this->setRecordPropertyBoolean(
             'allows_multiple_registrations',
@@ -401,10 +347,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * Sets this event's license expiry.
      *
      * @param int $expiry the license expiry as a timestamp, may be 0
-     *
-     * @return void
      */
-    public function setExpiry(int $expiry)
+    public function setExpiry(int $expiry): void
     {
         $this->setRecordPropertyInteger('expiry', $expiry);
     }
@@ -427,10 +371,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * Sets the number of lodgings for this record.
      *
      * @param int $lodgings the number of lodgings that are associated with this event, must be >= 0
-     *
-     * @return void
      */
-    public function setNumberOfLodgings(int $lodgings)
+    public function setNumberOfLodgings(int $lodgings): void
     {
         $this->setRecordPropertyInteger('lodgings', $lodgings);
     }
@@ -481,10 +423,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * Sets whether registration is needed.
      *
      * @param bool $needsRegistration whether registration is needed
-     *
-     * @return void
      */
-    public function setNeedsRegistration(bool $needsRegistration)
+    public function setNeedsRegistration(bool $needsRegistration): void
     {
         $this->setRecordPropertyBoolean(
             'needs_registration',
@@ -496,10 +436,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * Sets the registration deadline.
      *
      * @param int $registrationDeadline the registration deadline as timestamp, set to 0 to unset the registration deadline
-     *
-     * @return void
      */
-    public function setRegistrationDeadline(int $registrationDeadline)
+    public function setRegistrationDeadline(int $registrationDeadline): void
     {
         $this->setRecordPropertyInteger(
             'deadline_registration',
@@ -510,10 +448,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
     /**
      * Sets the seminar to have unlimitedVacancies by setting needs_registration
      * to 1 and attendees_max to 0.
-     *
-     * @return void
      */
-    public function setUnlimitedVacancies()
+    public function setUnlimitedVacancies(): void
     {
         $this->setNeedsRegistration(true);
         $this->setAttendancesMax(0);
@@ -524,10 +460,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      *
      * @param int $registrationBeginDate the registration begin date as time-stamp, set to 0 to
      *                unset the registration begin date
-     *
-     * @return void
      */
-    public function setRegistrationBeginDate(int $registrationBeginDate)
+    public function setRegistrationBeginDate(int $registrationBeginDate): void
     {
         $this->setRecordPropertyInteger(
             'begin_date_registration',
@@ -539,10 +473,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * Sets the number of offline registrations.
      *
      * @param int $offlineRegistrations the number of offline registrations for this event, must be >= 0
-     *
-     * @return void
      */
-    public function setOfflineRegistrationNumber(int $offlineRegistrations)
+    public function setOfflineRegistrationNumber(int $offlineRegistrations): void
     {
         $this->setRecordPropertyInteger(
             'offline_attendees',
@@ -584,10 +516,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      *
      * @param string $key key of the element to set (must be non-empty)
      * @param int $value the value that will be written into the element
-     *
-     * @return void
      */
-    public function setRecordPropertyInteger(string $key, int $value)
+    public function setRecordPropertyInteger(string $key, int $value): void
     {
         parent::setRecordPropertyInteger($key, $value);
     }
@@ -597,10 +527,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      *
      * @param string $key key of the element to set (must be non-empty)
      * @param string $value the value that will be written into the element
-     *
-     * @return void
      */
-    public function setRecordPropertyString(string $key, string $value)
+    public function setRecordPropertyString(string $key, string $value): void
     {
         parent::setRecordPropertyString($key, $value);
     }
@@ -609,10 +537,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * Sets the ID of the separate details page for this event.
      *
      * @param string|int $pageId the page UID or alias, may also be empty
-     *
-     * @return void
      */
-    public function setDetailsPage($pageId)
+    public function setDetailsPage($pageId): void
     {
         $this->setRecordPropertyString('details_page', (string)$pageId);
     }

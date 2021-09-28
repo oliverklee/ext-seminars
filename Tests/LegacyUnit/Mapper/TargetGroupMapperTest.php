@@ -20,14 +20,14 @@ final class TargetGroupMapperTest extends TestCase
      */
     private $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
 
         $this->subject = new \Tx_Seminars_Mapper_TargetGroup();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
     }
@@ -37,7 +37,7 @@ final class TargetGroupMapperTest extends TestCase
     /**
      * @test
      */
-    public function findWithUidReturnsTargetGroupInstance()
+    public function findWithUidReturnsTargetGroupInstance(): void
     {
         self::assertInstanceOf(
             \Tx_Seminars_Model_TargetGroup::class,
@@ -48,7 +48,7 @@ final class TargetGroupMapperTest extends TestCase
     /**
      * @test
      */
-    public function findWithUidOfExistingRecordReturnsRecordAsModel()
+    public function findWithUidOfExistingRecordReturnsRecordAsModel(): void
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_target_groups',
@@ -67,7 +67,7 @@ final class TargetGroupMapperTest extends TestCase
     /**
      * @test
      */
-    public function getOwnerWithoutOwnerReturnsNull()
+    public function getOwnerWithoutOwnerReturnsNull(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
@@ -77,7 +77,7 @@ final class TargetGroupMapperTest extends TestCase
     /**
      * @test
      */
-    public function getOwnerWithOwnerReturnsOwnerInstance()
+    public function getOwnerWithOwnerReturnsOwnerInstance(): void
     {
         $frontEndUser = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)->getLoadedTestingModel([]);
         $testingModel = $this->subject->getLoadedTestingModel(

@@ -21,7 +21,7 @@ final class RegistrationBagBuilderTest extends TestCase
      */
     private $testingFramework = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
@@ -31,7 +31,7 @@ final class RegistrationBagBuilderTest extends TestCase
         $this->subject->setTestMode();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
 
@@ -45,7 +45,7 @@ final class RegistrationBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function bagBuilderBuildsARegistrationBag()
+    public function bagBuilderBuildsARegistrationBag(): void
     {
         self::assertInstanceOf(\Tx_Seminars_Bag_Registration::class, $this->subject->build());
     }
@@ -53,7 +53,7 @@ final class RegistrationBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function buildReturnsBagWhichIsSortedAscendingByCrDate()
+    public function buildReturnsBagWhichIsSortedAscendingByCrDate(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -83,7 +83,7 @@ final class RegistrationBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function buildWithoutLimitReturnsBagWithAllRegistrations()
+    public function buildWithoutLimitReturnsBagWithAllRegistrations(): void
     {
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -111,7 +111,7 @@ final class RegistrationBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventWithNegativeEventUidThrowsException()
+    public function limitToEventWithNegativeEventUidThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -126,7 +126,7 @@ final class RegistrationBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventWithZeroEventUidThrowsException()
+    public function limitToEventWithZeroEventUidThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -141,7 +141,7 @@ final class RegistrationBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventWithValidEventUidFindsRegistrationOfEvent()
+    public function limitToEventWithValidEventUidFindsRegistrationOfEvent(): void
     {
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -162,7 +162,7 @@ final class RegistrationBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToEventWithValidEventUidIgnoresRegistrationOfOtherEvent()
+    public function limitToEventWithValidEventUidIgnoresRegistrationOfOtherEvent(): void
     {
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -189,7 +189,7 @@ final class RegistrationBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToPaidFindsPaidRegistration()
+    public function limitToPaidFindsPaidRegistration(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -205,7 +205,7 @@ final class RegistrationBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToPaidIgnoresUnpaidRegistration()
+    public function limitToPaidIgnoresUnpaidRegistration(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -226,7 +226,7 @@ final class RegistrationBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToUnpaidFindsUnpaidRegistration()
+    public function limitToUnpaidFindsUnpaidRegistration(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -242,7 +242,7 @@ final class RegistrationBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToUnpaidIgnoresPaidRegistration()
+    public function limitToUnpaidIgnoresPaidRegistration(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -263,7 +263,7 @@ final class RegistrationBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function removePaymentLimitationRemovesPaidLimit()
+    public function removePaymentLimitationRemovesPaidLimit(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -280,7 +280,7 @@ final class RegistrationBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function removePaymentLimitationRemovesUnpaidLimit()
+    public function removePaymentLimitationRemovesUnpaidLimit(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -301,7 +301,7 @@ final class RegistrationBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToOnQueueFindsRegistrationOnQueue()
+    public function limitToOnQueueFindsRegistrationOnQueue(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -317,7 +317,7 @@ final class RegistrationBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToOnQueueIgnoresRegularRegistration()
+    public function limitToOnQueueIgnoresRegularRegistration(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -338,7 +338,7 @@ final class RegistrationBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToRegularFindsRegularRegistration()
+    public function limitToRegularFindsRegularRegistration(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -354,7 +354,7 @@ final class RegistrationBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToRegularIgnoresRegistrationOnQueue()
+    public function limitToRegularIgnoresRegistrationOnQueue(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -375,7 +375,7 @@ final class RegistrationBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function removeQueueLimitationRemovesOnQueueLimit()
+    public function removeQueueLimitationRemovesOnQueueLimit(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -392,7 +392,7 @@ final class RegistrationBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function removeQueueLimitationRemovesRegularLimit()
+    public function removeQueueLimitationRemovesRegularLimit(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -413,7 +413,7 @@ final class RegistrationBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToSeatsAtMostWithNegativeVacanciesThrowsException()
+    public function limitToSeatsAtMostWithNegativeVacanciesThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -428,7 +428,7 @@ final class RegistrationBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToSeatsAtMostFindsRegistrationWithEqualSeats()
+    public function limitToSeatsAtMostFindsRegistrationWithEqualSeats(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -444,7 +444,7 @@ final class RegistrationBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToSeatsAtMostFindsRegistrationWithLessSeats()
+    public function limitToSeatsAtMostFindsRegistrationWithLessSeats(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -460,7 +460,7 @@ final class RegistrationBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToSeatsAtMostIgnoresRegistrationWithMoreSeats()
+    public function limitToSeatsAtMostIgnoresRegistrationWithMoreSeats(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -477,7 +477,7 @@ final class RegistrationBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToSeatsAtMostWithZeroSeatsFindsAllRegistrations()
+    public function limitToSeatsAtMostWithZeroSeatsFindsAllRegistrations(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -499,7 +499,7 @@ final class RegistrationBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToAttendeeWithUserFindsRegistrationsWithAttendee()
+    public function limitToAttendeeWithUserFindsRegistrationsWithAttendee(): void
     {
         $feUserUid = $this->testingFramework->createFrontEndUser();
         $eventUid = $this->testingFramework->createRecord(
@@ -523,7 +523,7 @@ final class RegistrationBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToAttendeeWithUserFindsRegistrationsWithUserAsAdditionalRegisteredPerson()
+    public function limitToAttendeeWithUserFindsRegistrationsWithUserAsAdditionalRegisteredPerson(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars'
@@ -550,7 +550,7 @@ final class RegistrationBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToAttendeeWithUserIgnoresRegistrationsWithoutAttendee()
+    public function limitToAttendeeWithUserIgnoresRegistrationsWithoutAttendee(): void
     {
         $feUserUid = $this->testingFramework->createFrontEndUser();
         $this->testingFramework->createRecord('tx_seminars_seminars');
@@ -567,7 +567,7 @@ final class RegistrationBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToAttendeeWithUserIgnoresRegistrationsWithOtherAttendee()
+    public function limitToAttendeeWithUserIgnoresRegistrationsWithOtherAttendee(): void
     {
         $feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
         $feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
@@ -590,7 +590,7 @@ final class RegistrationBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToAttendeeWithNullFindsRegistrationsWithOtherAttendee()
+    public function limitToAttendeeWithNullFindsRegistrationsWithOtherAttendee(): void
     {
         $feUserGroupUid = $this->testingFramework->createFrontEndUserGroup();
         $feUserUid = $this->testingFramework->createFrontEndUser($feUserGroupUid);
@@ -617,7 +617,7 @@ final class RegistrationBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setOrderByEventColumnCanSortAscendingByEventTitle()
+    public function setOrderByEventColumnCanSortAscendingByEventTitle(): void
     {
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -654,7 +654,7 @@ final class RegistrationBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function setOrderByEventColumnCanSortDescendingByEventTitle()
+    public function setOrderByEventColumnCanSortDescendingByEventTitle(): void
     {
         $eventUid1 = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -695,7 +695,7 @@ final class RegistrationBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToExistingUsersFindsRegistrationWithExistingUser()
+    public function limitToExistingUsersFindsRegistrationWithExistingUser(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -712,7 +712,7 @@ final class RegistrationBagBuilderTest extends TestCase
     /**
      * @test
      */
-    public function limitToExistingUsersDoesNotFindRegistrationWithDeletedUser()
+    public function limitToExistingUsersDoesNotFindRegistrationWithDeletedUser(): void
     {
         $feUserUid = $this->testingFramework->createFrontEndUser();
 

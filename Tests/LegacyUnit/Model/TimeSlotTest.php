@@ -13,7 +13,7 @@ final class TimeSlotTest extends TestCase
      */
     private $subject;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new \Tx_Seminars_Model_TimeSlot();
     }
@@ -25,7 +25,7 @@ final class TimeSlotTest extends TestCase
     /**
      * @test
      */
-    public function getEntryDateAsUnixTimeStampWithoutEntryDateReturnsZero()
+    public function getEntryDateAsUnixTimeStampWithoutEntryDateReturnsZero(): void
     {
         $this->subject->setData([]);
 
@@ -38,7 +38,7 @@ final class TimeSlotTest extends TestCase
     /**
      * @test
      */
-    public function getEntryDateAsUnixTimeStampWithEntryDateReturnsEntryDate()
+    public function getEntryDateAsUnixTimeStampWithEntryDateReturnsEntryDate(): void
     {
         $this->subject->setData(['entry_date' => 42]);
 
@@ -51,7 +51,7 @@ final class TimeSlotTest extends TestCase
     /**
      * @test
      */
-    public function setEntryDateAsUnixTimeStampWithNegativeTimeStampThrowsException()
+    public function setEntryDateAsUnixTimeStampWithNegativeTimeStampThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -66,7 +66,7 @@ final class TimeSlotTest extends TestCase
     /**
      * @test
      */
-    public function setEntryDateAsUnixTimeStampWithZeroTimeStampSetsEntryDate()
+    public function setEntryDateAsUnixTimeStampWithZeroTimeStampSetsEntryDate(): void
     {
         $this->subject->setEntryDateAsUnixTimeStamp(0);
 
@@ -79,7 +79,7 @@ final class TimeSlotTest extends TestCase
     /**
      * @test
      */
-    public function setEntryDateAsUnixTimeStampWithPositiveTimeStampSetsEntryDate()
+    public function setEntryDateAsUnixTimeStampWithPositiveTimeStampSetsEntryDate(): void
     {
         $this->subject->setEntryDateAsUnixTimeStamp(42);
 
@@ -92,7 +92,7 @@ final class TimeSlotTest extends TestCase
     /**
      * @test
      */
-    public function hasEntryDateWithoutEntryDateReturnsFalse()
+    public function hasEntryDateWithoutEntryDateReturnsFalse(): void
     {
         $this->subject->setData([]);
 
@@ -104,7 +104,7 @@ final class TimeSlotTest extends TestCase
     /**
      * @test
      */
-    public function hasEntryDateWithEntryDateReturnsTrue()
+    public function hasEntryDateWithEntryDateReturnsTrue(): void
     {
         $this->subject->setEntryDateAsUnixTimeStamp(42);
 
@@ -118,7 +118,7 @@ final class TimeSlotTest extends TestCase
     /**
      * @test
      */
-    public function getSeminarByDefaultReturnsNull()
+    public function getSeminarByDefaultReturnsNull(): void
     {
         $this->subject->setData([]);
 
@@ -128,7 +128,7 @@ final class TimeSlotTest extends TestCase
     /**
      * @test
      */
-    public function setSeminarSetsSeminar()
+    public function setSeminarSetsSeminar(): void
     {
         $seminar = new \Tx_Seminars_Model_Event();
 

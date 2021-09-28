@@ -22,7 +22,7 @@ final class EventTest extends UnitTestCase
      */
     private $organizer = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->organizer = new \Tx_Seminars_Model_Organizer();
         $this->organizer->setData(
@@ -50,7 +50,7 @@ final class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function isTitled()
+    public function isTitled(): void
     {
         self::assertInstanceOf(Titled::class, $this->subject);
     }
@@ -58,7 +58,7 @@ final class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getEmailSenderReturnsSystemEmailMailRole()
+    public function getEmailSenderReturnsSystemEmailMailRole(): void
     {
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = 'system-foo@example.com';
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = 'Mr. Default';
@@ -73,7 +73,7 @@ final class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getEmailSenderReturnsFirstOrganizerMailRole()
+    public function getEmailSenderReturnsFirstOrganizerMailRole(): void
     {
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromAddress'] = '';
         $GLOBALS['TYPO3_CONF_VARS']['MAIL']['defaultMailFromName'] = '';

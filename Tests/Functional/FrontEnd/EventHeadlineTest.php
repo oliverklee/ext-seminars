@@ -35,7 +35,7 @@ final class EventHeadlineTest extends FunctionalTestCase
      */
     private $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -50,7 +50,7 @@ final class EventHeadlineTest extends FunctionalTestCase
         $this->subject->injectEventMapper($mapper);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         \Tx_Seminars_Service_RegistrationManager::purgeInstance();
 
@@ -60,7 +60,7 @@ final class EventHeadlineTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function renderWithoutInjectedEventMapperThrowsException()
+    public function renderWithoutInjectedEventMapperThrowsException(): void
     {
         $this->expectException(\BadMethodCallException::class);
         $this->expectExceptionCode(1333614794);
@@ -73,7 +73,7 @@ final class EventHeadlineTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function renderWithUidOfExistingEventReturnsTitleOfSelectedEvent()
+    public function renderWithUidOfExistingEventReturnsTitleOfSelectedEvent(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/EventHeadline.xml');
         $this->subject->piVars['showUid'] = '1';
@@ -86,7 +86,7 @@ final class EventHeadlineTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function renderEncodesEventTitle()
+    public function renderEncodesEventTitle(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/EventHeadline.xml');
         $this->subject->piVars['showUid'] = '2';
@@ -99,7 +99,7 @@ final class EventHeadlineTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function renderWithUidOfExistingEventReturnsDateOfSelectedEvent()
+    public function renderWithUidOfExistingEventReturnsDateOfSelectedEvent(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/EventHeadline.xml');
         $this->subject->piVars['showUid'] = '1';
@@ -113,7 +113,7 @@ final class EventHeadlineTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function renderWithoutProvidedEventUidReturnsEmptyString()
+    public function renderWithoutProvidedEventUidReturnsEmptyString(): void
     {
         $result = $this->subject->render();
 
@@ -123,7 +123,7 @@ final class EventHeadlineTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function renderWithInexistentUidReturnsEmptyString()
+    public function renderWithInexistentUidReturnsEmptyString(): void
     {
         $this->subject->piVars['showUid'] = '1';
 
@@ -135,7 +135,7 @@ final class EventHeadlineTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function renderWithNonNumericUidReturnsEmptyString()
+    public function renderWithNonNumericUidReturnsEmptyString(): void
     {
         $this->subject->piVars['showUid'] = 'foo';
 

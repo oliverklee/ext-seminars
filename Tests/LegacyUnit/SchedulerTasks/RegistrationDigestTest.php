@@ -58,7 +58,7 @@ final class RegistrationDigestTest extends TestCase
      */
     private $now = 1509028643;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         if (!ExtensionManagementUtility::isLoaded('scheduler')) {
             self::markTestSkipped('This tests needs the scheduler extension.');
@@ -87,7 +87,7 @@ final class RegistrationDigestTest extends TestCase
     /**
      * @test
      */
-    public function setConfigurationSetsConfiguration()
+    public function setConfigurationSetsConfiguration(): void
     {
         self::assertSame($this->configuration, $this->subject->getConfiguration());
     }
@@ -95,7 +95,7 @@ final class RegistrationDigestTest extends TestCase
     /**
      * @test
      */
-    public function setEventMapperSetsEventMapper()
+    public function setEventMapperSetsEventMapper(): void
     {
         self::assertSame($this->eventMapper, $this->subject->getEventMapper());
     }
@@ -103,7 +103,7 @@ final class RegistrationDigestTest extends TestCase
     /**
      * @return void
      */
-    private function setObjectManagerReturnValues()
+    private function setObjectManagerReturnValues(): void
     {
         // @phpstan-ignore-next-line PHPStan does not know Prophecy (at least not without the corresponding plugin).
         $this->objectManagerProphecy->get(StandaloneView::class)->willReturn($this->viewProphecy->reveal());
@@ -114,7 +114,7 @@ final class RegistrationDigestTest extends TestCase
     /**
      * @test
      */
-    public function executeForDisabledDigestAndOneApplicableEventNotSendsEmail()
+    public function executeForDisabledDigestAndOneApplicableEventNotSendsEmail(): void
     {
         $this->configuration->setAsBoolean('enable', false);
 
@@ -137,7 +137,7 @@ final class RegistrationDigestTest extends TestCase
     /**
      * @test
      */
-    public function executeForEnabledDigestAndNoApplicableEventsNotSendsEmail()
+    public function executeForEnabledDigestAndNoApplicableEventsNotSendsEmail(): void
     {
         $this->setObjectManagerReturnValues();
         $this->configuration->setAsBoolean('enable', true);
@@ -154,7 +154,7 @@ final class RegistrationDigestTest extends TestCase
     /**
      * @test
      */
-    public function executeForEnabledDigestAndOneApplicableEventSendsEmail()
+    public function executeForEnabledDigestAndOneApplicableEventSendsEmail(): void
     {
         $this->setObjectManagerReturnValues();
         $this->configuration->setAsBoolean('enable', true);
@@ -176,7 +176,7 @@ final class RegistrationDigestTest extends TestCase
     /**
      * @test
      */
-    public function emailUsesSenderFromConfiguration()
+    public function emailUsesSenderFromConfiguration(): void
     {
         $this->setObjectManagerReturnValues();
         $this->configuration->setAsBoolean('enable', true);
@@ -203,7 +203,7 @@ final class RegistrationDigestTest extends TestCase
     /**
      * @test
      */
-    public function emailUsesToFromConfiguration()
+    public function emailUsesToFromConfiguration(): void
     {
         $this->setObjectManagerReturnValues();
         $this->configuration->setAsBoolean('enable', true);
@@ -230,7 +230,7 @@ final class RegistrationDigestTest extends TestCase
     /**
      * @test
      */
-    public function emailHasLocalizedSubject()
+    public function emailHasLocalizedSubject(): void
     {
         $this->setObjectManagerReturnValues();
         $this->configuration->setAsBoolean('enable', true);
@@ -258,7 +258,7 @@ final class RegistrationDigestTest extends TestCase
     /**
      * @test
      */
-    public function emailHasContentFromTemplateWithEvents()
+    public function emailHasContentFromTemplateWithEvents(): void
     {
         $plaintextTemplatePath = 'EXT:seminars/Resources/Private/Templates/Mail/RegistrationDigest.txt';
         $htmlTemplatePath = 'EXT:seminars/Resources/Private/Templates/Mail/RegistrationDigest.html';
@@ -304,7 +304,7 @@ final class RegistrationDigestTest extends TestCase
     /**
      * @test
      */
-    public function executeSetsDateOfLastDigestInEventsToNow()
+    public function executeSetsDateOfLastDigestInEventsToNow(): void
     {
         $this->setObjectManagerReturnValues();
         $this->configuration->setAsBoolean('enable', true);
@@ -325,7 +325,7 @@ final class RegistrationDigestTest extends TestCase
     /**
      * @test
      */
-    public function executeSavesEvents()
+    public function executeSavesEvents(): void
     {
         $this->setObjectManagerReturnValues();
         $this->configuration->setAsBoolean('enable', true);

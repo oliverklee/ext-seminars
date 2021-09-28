@@ -35,7 +35,7 @@ final class EmailRegistrationListViewTest extends TestCase
      */
     private $eventUid = 0;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
@@ -63,7 +63,7 @@ final class EmailRegistrationListViewTest extends TestCase
         $this->subject->setEventUid($this->eventUid);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
     }
@@ -90,7 +90,7 @@ final class EmailRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderCanContainOneRegistrationUid()
+    public function renderCanContainOneRegistrationUid(): void
     {
         $this->configuration->setAsString('fieldsFromFeUserForCsv', '');
         $this->configuration->setAsString('fieldsFromFeUserForEmailCsv', '');
@@ -115,7 +115,7 @@ final class EmailRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderNotContainsFrontEndUserFieldsForDownload()
+    public function renderNotContainsFrontEndUserFieldsForDownload(): void
     {
         $firstName = 'John';
         $lastName = 'Doe';
@@ -144,7 +144,7 @@ final class EmailRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderContainsFrontEndUserFieldsForEmail()
+    public function renderContainsFrontEndUserFieldsForEmail(): void
     {
         $firstName = 'John';
         $lastName = 'Doe';
@@ -173,7 +173,7 @@ final class EmailRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderNotContainsRegistrationFieldsForDownload()
+    public function renderNotContainsRegistrationFieldsForDownload(): void
     {
         $knownFrom = 'Google';
         $notes = 'Looking forward to the event!';
@@ -201,7 +201,7 @@ final class EmailRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderContainsRegistrationFieldsForEmail()
+    public function renderContainsRegistrationFieldsForEmail(): void
     {
         $knownFrom = 'Google';
         $notes = 'Looking forward to the event!';
@@ -229,7 +229,7 @@ final class EmailRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderForQueueRegistrationsNotAllowedForEmailNotContainsRegistrationOnQueue()
+    public function renderForQueueRegistrationsNotAllowedForEmailNotContainsRegistrationOnQueue(): void
     {
         $this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInEmailCsv', false);
         $this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInCSV', true);
@@ -256,7 +256,7 @@ final class EmailRegistrationListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderForQueueRegistrationsAllowedForEmailNotContainsRegistrationOnQueue()
+    public function renderForQueueRegistrationsAllowedForEmailNotContainsRegistrationOnQueue(): void
     {
         $this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInEmailCsv', true);
         $this->configuration->setAsBoolean('showAttendancesOnRegistrationQueueInCSV', false);

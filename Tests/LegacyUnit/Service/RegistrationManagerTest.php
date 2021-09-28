@@ -128,7 +128,7 @@ final class RegistrationManagerTest extends TestCase
      */
     private $extensionConfiguration;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
@@ -201,7 +201,7 @@ final class RegistrationManagerTest extends TestCase
         $this->frontEndUserMapper = $frontEndUserMapper;
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
 
@@ -224,10 +224,8 @@ final class RegistrationManagerTest extends TestCase
      * in $this->loginPageUid and $this->registrationPageUid.
      *
      * In addition, it provides the fixture's configuration with the UIDs.
-     *
-     * @return void
      */
-    private function createFrontEndPages()
+    private function createFrontEndPages(): void
     {
         $this->loginPageUid = $this->testingFramework->createFrontEndPage();
         $this->registrationPageUid
@@ -246,20 +244,16 @@ final class RegistrationManagerTest extends TestCase
 
     /**
      * Creates a FE user, stores it UID in $this->frontEndUserUid and logs it in.
-     *
-     * @return void
      */
-    private function createAndLogInFrontEndUser()
+    private function createAndLogInFrontEndUser(): void
     {
         $this->frontEndUserUid = $this->testingFramework->createAndLoginFrontEndUser();
     }
 
     /**
      * Creates a seminar which is booked out.
-     *
-     * @return void
      */
-    private function createBookedOutSeminar()
+    private function createBookedOutSeminar(): void
     {
         $this->fullyBookedSeminar = new TestingEvent(
             $this->testingFramework->createRecord(
@@ -366,10 +360,8 @@ final class RegistrationManagerTest extends TestCase
     /**
      * Purges possibly leftover instances from the Typo3 instance FIFO buffer used by
      * `GeneralUtility::makeInstance()`.
-     *
-     * @return void
      */
-    private function purgeMockedInstances()
+    private function purgeMockedInstances(): void
     {
         foreach ($this->mockedClassNames as $className) {
             GeneralUtility::makeInstance($className);
@@ -383,7 +375,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function createFrontEndPagesCreatesNonZeroLoginPageUid()
+    public function createFrontEndPagesCreatesNonZeroLoginPageUid(): void
     {
         $this->createFrontEndPages();
 
@@ -396,7 +388,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function createFrontEndPagesCreatesNonZeroRegistrationPageUid()
+    public function createFrontEndPagesCreatesNonZeroRegistrationPageUid(): void
     {
         $this->createFrontEndPages();
 
@@ -409,7 +401,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function createFrontEndPagesCreatesPi1()
+    public function createFrontEndPagesCreatesPi1(): void
     {
         $this->createFrontEndPages();
 
@@ -425,7 +417,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function createAndLogInFrontEndUserCreatesNonZeroUserUid()
+    public function createAndLogInFrontEndUserCreatesNonZeroUserUid(): void
     {
         $this->createAndLogInFrontEndUser();
 
@@ -438,7 +430,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function createAndLogInFrontEndUserLogsInFrontEndUser()
+    public function createAndLogInFrontEndUserLogsInFrontEndUser(): void
     {
         $this->createAndLogInFrontEndUser();
         self::assertTrue(
@@ -449,7 +441,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function createBookedOutSeminarSetsSeminarInstance()
+    public function createBookedOutSeminarSetsSeminarInstance(): void
     {
         $this->createBookedOutSeminar();
 
@@ -462,7 +454,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function createdBookedOutSeminarHasUidGreaterZero()
+    public function createdBookedOutSeminarHasUidGreaterZero(): void
     {
         $this->createBookedOutSeminar();
 
@@ -474,7 +466,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function mockedInstancesListInitiallyHasTwoInstances()
+    public function mockedInstancesListInitiallyHasTwoInstances(): void
     {
         self::assertCount(2, $this->mockedClassNames);
     }
@@ -482,7 +474,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function addMockedInstanceAddsClassnameToList()
+    public function addMockedInstanceAddsClassnameToList(): void
     {
         $mockedInstance = $this->createMock(\stdClass::class);
         /** @var class-string<\stdClass&MockObject> $mockedClassName */
@@ -499,7 +491,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function addMockedInstanceAddsInstanceToTypo3InstanceBuffer()
+    public function addMockedInstanceAddsInstanceToTypo3InstanceBuffer(): void
     {
         $mockedInstance = $this->createMock(\stdClass::class);
         /** @var class-string<\stdClass&MockObject> $mockedClassName */
@@ -516,7 +508,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function purgeMockedInstancesRemovesClassnameFromList()
+    public function purgeMockedInstancesRemovesClassnameFromList(): void
     {
         $mockedInstance = $this->createMock(\stdClass::class);
         /** @var class-string<\stdClass&MockObject> $mockedClassName */
@@ -533,7 +525,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function purgeMockedInstancesRemovesInstanceFromTypo3InstanceBuffer()
+    public function purgeMockedInstancesRemovesInstanceFromTypo3InstanceBuffer(): void
     {
         $mockedInstance = $this->createMock(\stdClass::class);
         /** @var class-string<\stdClass&MockObject> $mockedClassName */
@@ -550,7 +542,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getInstanceReturnsRegistrationManagerInstance()
+    public function getInstanceReturnsRegistrationManagerInstance(): void
     {
         self::assertInstanceOf(
             \Tx_Seminars_Service_RegistrationManager::class,
@@ -561,7 +553,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getInstanceReturnsTestingRegistrationManagerInstance()
+    public function getInstanceReturnsTestingRegistrationManagerInstance(): void
     {
         self::assertInstanceOf(
             TestingRegistrationManager::class,
@@ -572,7 +564,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getInstanceTwoTimesReturnsSameInstance()
+    public function getInstanceTwoTimesReturnsSameInstance(): void
     {
         self::assertSame(
             TestingRegistrationManager::getInstance(),
@@ -583,7 +575,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getInstanceAfterPurgeInstanceReturnsNewInstance()
+    public function getInstanceAfterPurgeInstanceReturnsNewInstance(): void
     {
         $firstInstance = TestingRegistrationManager::getInstance();
         TestingRegistrationManager::purgeInstance();
@@ -599,7 +591,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getLinkToRegistrationOrLoginPageWithLoggedOutUserCreatesLinkTag()
+    public function getLinkToRegistrationOrLoginPageWithLoggedOutUserCreatesLinkTag(): void
     {
         $this->testingFramework->logoutFrontEndUser();
         $this->createFrontEndPages();
@@ -613,7 +605,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getLinkToRegistrationOrLoginPageWithLoggedOutUserCreatesLinkToLoginPage()
+    public function getLinkToRegistrationOrLoginPageWithLoggedOutUserCreatesLinkToLoginPage(): void
     {
         $this->testingFramework->logoutFrontEndUser();
         $this->createFrontEndPages();
@@ -627,7 +619,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getLinkToRegistrationOrLoginPageWithLoggedOutUserContainsRedirectWithEventUid()
+    public function getLinkToRegistrationOrLoginPageWithLoggedOutUserContainsRedirectWithEventUid(): void
     {
         $this->testingFramework->logoutFrontEndUser();
         $this->createFrontEndPages();
@@ -645,7 +637,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getLinkToRegistrationOrLoginPageWithLoggedInUserCreatesLinkTag()
+    public function getLinkToRegistrationOrLoginPageWithLoggedInUserCreatesLinkTag(): void
     {
         $this->createFrontEndPages();
         $this->createAndLogInFrontEndUser();
@@ -659,7 +651,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getLinkToRegistrationOrLoginPageWithLoggedInUserCreatesLinkToRegistrationPageWithEventUid()
+    public function getLinkToRegistrationOrLoginPageWithLoggedInUserCreatesLinkToRegistrationPageWithEventUid(): void
     {
         $this->createFrontEndPages();
         $this->createAndLogInFrontEndUser();
@@ -682,7 +674,7 @@ final class RegistrationManagerTest extends TestCase
      *
      * @see https://bugs.oliverklee.com/show_bug.cgi?id=4504
      */
-    public function getLinkToRegistrationOrLoginPageWithLoggedInAndSeparateDetailsPageCreatesLinkToRegistrationPage()
+    public function getLinkToRegistrationOrLoginPageWithLoggedInAndSeparateDetailsPageCreatesLinkToRegistrationPage(): void
     {
         $this->createFrontEndPages();
 
@@ -700,7 +692,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getLinkToRegistrationOrLoginPageWithLoggedInUserDoesNotContainRedirect()
+    public function getLinkToRegistrationOrLoginPageWithLoggedInUserDoesNotContainRedirect(): void
     {
         $this->createFrontEndPages();
         $this->createAndLogInFrontEndUser();
@@ -714,7 +706,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getLinkToRegistrationOrLoginPageWithLoggedInUserAndSeminarWithoutDateHasLinkWithPrebookingLabel()
+    public function getLinkToRegistrationOrLoginPageWithLoggedInUserAndSeminarWithoutDateHasLinkWithPrebookingLabel(): void
     {
         $this->createFrontEndPages();
         $this->createAndLogInFrontEndUser();
@@ -729,7 +721,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getLinkToRegistrationOrLoginPageWithLoggedInSeminarWithoutDateAndNoVacanciesHasRegistrationLabel()
+    public function getLinkToRegistrationOrLoginPageWithLoggedInSeminarWithoutDateAndNoVacanciesHasRegistrationLabel(): void
     {
         $this->createFrontEndPages();
         $this->createAndLogInFrontEndUser();
@@ -746,7 +738,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getLinkToRegistrationOrLoginPageWithLoggedInUserAndFullyBookedSeminarWithQueueHasQueueRegistration()
+    public function getLinkToRegistrationOrLoginPageWithLoggedInUserAndFullyBookedSeminarWithQueueHasQueueRegistration(): void
     {
         $this->createFrontEndPages();
         $this->createAndLogInFrontEndUser();
@@ -764,7 +756,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getLinkToRegistrationOrLoginPageWithLoggedOutAndFullyBookedSeminarWithQueueHasQueueRegistration()
+    public function getLinkToRegistrationOrLoginPageWithLoggedOutAndFullyBookedSeminarWithQueueHasQueueRegistration(): void
     {
         $this->createFrontEndPages();
         $this->seminar->setBeginDate($GLOBALS['EXEC_SIM_TIME'] + 45);
@@ -783,7 +775,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationLinkForLoggedInUserAndSeminarWithVacanciesReturnsLinkToRegistrationPage()
+    public function getRegistrationLinkForLoggedInUserAndSeminarWithVacanciesReturnsLinkToRegistrationPage(): void
     {
         $this->createFrontEndPages();
         $this->createAndLogInFrontEndUser();
@@ -797,7 +789,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationLinkForLoggedInUserAndSeminarWithVacanciesReturnsLinkWithSeminarUid()
+    public function getRegistrationLinkForLoggedInUserAndSeminarWithVacanciesReturnsLinkWithSeminarUid(): void
     {
         $this->createFrontEndPages();
         $this->createAndLogInFrontEndUser();
@@ -811,7 +803,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationLinkForLoggedOutUserAndSeminarWithVacanciesReturnsLoginLink()
+    public function getRegistrationLinkForLoggedOutUserAndSeminarWithVacanciesReturnsLoginLink(): void
     {
         $this->createFrontEndPages();
 
@@ -824,7 +816,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationLinkForLoggedInUserAndFullyBookedSeminarReturnsEmptyString()
+    public function getRegistrationLinkForLoggedInUserAndFullyBookedSeminarReturnsEmptyString(): void
     {
         $this->createFrontEndPages();
         $this->createAndLogInFrontEndUser();
@@ -840,7 +832,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationLinkForLoggedOutUserAndFullyBookedSeminarReturnsEmptyString()
+    public function getRegistrationLinkForLoggedOutUserAndFullyBookedSeminarReturnsEmptyString(): void
     {
         $this->createFrontEndPages();
 
@@ -855,7 +847,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationLinkForBeginDateBeforeCurrentDateReturnsEmptyString()
+    public function getRegistrationLinkForBeginDateBeforeCurrentDateReturnsEmptyString(): void
     {
         $this->createFrontEndPages();
         $this->createAndLogInFrontEndUser();
@@ -881,7 +873,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationLinkForAlreadyEndedRegistrationDeadlineReturnsEmptyString()
+    public function getRegistrationLinkForAlreadyEndedRegistrationDeadlineReturnsEmptyString(): void
     {
         $this->createFrontEndPages();
         $this->createAndLogInFrontEndUser();
@@ -908,7 +900,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationLinkForLoggedInUserAndSeminarWithUnlimitedVacanciesReturnsLinkWithSeminarUid()
+    public function getRegistrationLinkForLoggedInUserAndSeminarWithUnlimitedVacanciesReturnsLinkWithSeminarUid(): void
     {
         $this->createFrontEndPages();
         $this->createAndLogInFrontEndUser();
@@ -923,7 +915,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationLinkForLoggedOutUserAndSeminarWithUnlimitedVacanciesReturnsLoginLink()
+    public function getRegistrationLinkForLoggedOutUserAndSeminarWithUnlimitedVacanciesReturnsLoginLink(): void
     {
         $this->createFrontEndPages();
         $this->seminar->setUnlimitedVacancies();
@@ -937,7 +929,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationLinkForLoggedInUserAndFullyBookedSeminarWithQueueEnabledReturnsLinkWithSeminarUid()
+    public function getRegistrationLinkForLoggedInUserAndFullyBookedSeminarWithQueueEnabledReturnsLinkWithSeminarUid(): void
     {
         $this->createFrontEndPages();
         $this->createAndLogInFrontEndUser();
@@ -955,7 +947,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationLinkForLoggedOutUserAndFullyBookedSeminarWithQueueEnabledReturnsLoginLink()
+    public function getRegistrationLinkForLoggedOutUserAndFullyBookedSeminarWithQueueEnabledReturnsLoginLink(): void
     {
         $this->createFrontEndPages();
         $this->seminar->setNeedsRegistration(true);
@@ -972,7 +964,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationLinkForPriceOnRequestReturnsEmptyString()
+    public function getRegistrationLinkForPriceOnRequestReturnsEmptyString(): void
     {
         $this->seminar->setPriceOnRequest(true);
         $this->createFrontEndPages();
@@ -986,7 +978,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterIfLoggedInForLoggedOutUserAndSeminarRegistrationOpenReturnsTrue()
+    public function canRegisterIfLoggedInForLoggedOutUserAndSeminarRegistrationOpenReturnsTrue(): void
     {
         self::assertTrue(
             $this->subject->canRegisterIfLoggedIn($this->seminar)
@@ -996,7 +988,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterIfLoggedInForPriceOnRequestReturnsFalse()
+    public function canRegisterIfLoggedInForPriceOnRequestReturnsFalse(): void
     {
         $this->seminar->setPriceOnRequest(true);
 
@@ -1006,7 +998,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterIfLoggedInForLoggedInUserAndRegistrationOpenReturnsTrue()
+    public function canRegisterIfLoggedInForLoggedInUserAndRegistrationOpenReturnsTrue(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser();
 
@@ -1018,7 +1010,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterIfLoggedInForLoggedInButAlreadyRegisteredUserReturnsFalse()
+    public function canRegisterIfLoggedInForLoggedInButAlreadyRegisteredUserReturnsFalse(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -1036,7 +1028,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterIfLoggedInForLoggedInButAlreadyRegisteredAndWithMultipleRegistrationsAllowedIsTrue()
+    public function canRegisterIfLoggedInForLoggedInButAlreadyRegisteredAndWithMultipleRegistrationsAllowedIsTrue(): void
     {
         $this->seminar->setAllowsMultipleRegistrations(true);
 
@@ -1056,7 +1048,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterIfLoggedInForLoggedInButBlockedUserReturnsFalse()
+    public function canRegisterIfLoggedInForLoggedInButBlockedUserReturnsFalse(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -1086,7 +1078,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterIfLoggedInForLoggedOutUserAndFullyBookedSeminarReturnsFalse()
+    public function canRegisterIfLoggedInForLoggedOutUserAndFullyBookedSeminarReturnsFalse(): void
     {
         $this->createBookedOutSeminar();
 
@@ -1098,7 +1090,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterIfLoggedInForLoggedOutUserAndCanceledSeminarReturnsFalse()
+    public function canRegisterIfLoggedInForLoggedOutUserAndCanceledSeminarReturnsFalse(): void
     {
         $this->seminar->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
 
@@ -1110,7 +1102,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterIfLoggedInForLoggedOutUserAndSeminarWithoutRegistrationReturnsFalse()
+    public function canRegisterIfLoggedInForLoggedOutUserAndSeminarWithoutRegistrationReturnsFalse(): void
     {
         $this->seminar->setAttendancesMax(0);
         $this->seminar->setNeedsRegistration(false);
@@ -1123,7 +1115,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterIfLoggedInForLoggedOutUserAndSeminarWithUnlimitedVacanciesReturnsTrue()
+    public function canRegisterIfLoggedInForLoggedOutUserAndSeminarWithUnlimitedVacanciesReturnsTrue(): void
     {
         $this->seminar->setUnlimitedVacancies();
 
@@ -1135,7 +1127,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterIfLoggedInForLoggedInUserAndSeminarWithUnlimitedVacanciesReturnsTrue()
+    public function canRegisterIfLoggedInForLoggedInUserAndSeminarWithUnlimitedVacanciesReturnsTrue(): void
     {
         $this->seminar->setUnlimitedVacancies();
         $this->testingFramework->createAndLoginFrontEndUser();
@@ -1148,7 +1140,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterIfLoggedInForLoggedOutUserAndFullyBookedSeminarWithQueueReturnsTrue()
+    public function canRegisterIfLoggedInForLoggedOutUserAndFullyBookedSeminarWithQueueReturnsTrue(): void
     {
         $this->seminar->setAttendancesMax(5);
         $this->seminar->setNumberOfAttendances(5);
@@ -1162,7 +1154,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterIfLoggedInForLoggedInUserAndFullyBookedSeminarWithQueueReturnsTrue()
+    public function canRegisterIfLoggedInForLoggedInUserAndFullyBookedSeminarWithQueueReturnsTrue(): void
     {
         $this->seminar->setAttendancesMax(5);
         $this->seminar->setNumberOfAttendances(5);
@@ -1179,7 +1171,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterIfLoggedInMessageForLoggedOutUserAndSeminarRegistrationOpenReturnsEmptyString()
+    public function canRegisterIfLoggedInMessageForLoggedOutUserAndSeminarRegistrationOpenReturnsEmptyString(): void
     {
         self::assertSame(
             '',
@@ -1190,7 +1182,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterIfLoggedInMessageForLoggedInUserAndRegistrationOpenReturnsEmptyString()
+    public function canRegisterIfLoggedInMessageForLoggedInUserAndRegistrationOpenReturnsEmptyString(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser();
 
@@ -1203,7 +1195,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterIfLoggedInMessageForLoggedInButAlreadyRegisteredUserReturnsAlreadyRegisteredMessage()
+    public function canRegisterIfLoggedInMessageForLoggedInButAlreadyRegisteredUserReturnsAlreadyRegisteredMessage(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -1222,7 +1214,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterIfLoggedInMessageForLoggedInButAlreadyRegisteredAndMultipleRegistrationsAllowedIsEmpty()
+    public function canRegisterIfLoggedInMessageForLoggedInButAlreadyRegisteredAndMultipleRegistrationsAllowedIsEmpty(): void
     {
         $this->seminar->setAllowsMultipleRegistrations(true);
 
@@ -1243,7 +1235,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterIfLoggedInMessageForLoggedInButBlockedUserReturnsUserIsBlockedMessage()
+    public function canRegisterIfLoggedInMessageForLoggedInButBlockedUserReturnsUserIsBlockedMessage(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_attendances',
@@ -1274,7 +1266,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterIfLoggedInMessageForLoggedOutUserAndFullyBookedSeminarReturnsFullyBookedMessage()
+    public function canRegisterIfLoggedInMessageForLoggedOutUserAndFullyBookedSeminarReturnsFullyBookedMessage(): void
     {
         $this->createBookedOutSeminar();
 
@@ -1287,7 +1279,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterIfLoggedInMessageForLoggedOutUserAndCanceledSeminarReturnsSeminarCancelledMessage()
+    public function canRegisterIfLoggedInMessageForLoggedOutUserAndCanceledSeminarReturnsSeminarCancelledMessage(): void
     {
         $this->seminar->setStatus(\Tx_Seminars_Model_Event::STATUS_CANCELED);
 
@@ -1300,7 +1292,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterIfLoggedInMessageForLoggedOutAndWithoutRegistrationReturnsNoRegistrationNeededMessage()
+    public function canRegisterIfLoggedInMessageForLoggedOutAndWithoutRegistrationReturnsNoRegistrationNeededMessage(): void
     {
         $this->seminar->setAttendancesMax(0);
         $this->seminar->setNeedsRegistration(false);
@@ -1314,7 +1306,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterIfLoggedInMessageForLoggedOutUserAndSeminarWithUnlimitedVacanciesReturnsEmptyString()
+    public function canRegisterIfLoggedInMessageForLoggedOutUserAndSeminarWithUnlimitedVacanciesReturnsEmptyString(): void
     {
         $this->seminar->setUnlimitedVacancies();
 
@@ -1327,7 +1319,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterIfLoggedInMessageForLoggedInUserAndSeminarWithUnlimitedVacanciesReturnsEmptyString()
+    public function canRegisterIfLoggedInMessageForLoggedInUserAndSeminarWithUnlimitedVacanciesReturnsEmptyString(): void
     {
         $this->seminar->setUnlimitedVacancies();
         $this->testingFramework->createAndLoginFrontEndUser();
@@ -1341,7 +1333,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterIfLoggedInMessageForLoggedOutUserAndFullyBookedSeminarWithQueueReturnsEmptyString()
+    public function canRegisterIfLoggedInMessageForLoggedOutUserAndFullyBookedSeminarWithQueueReturnsEmptyString(): void
     {
         $this->seminar->setAttendancesMax(5);
         $this->seminar->setNumberOfAttendances(5);
@@ -1356,7 +1348,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterIfLoggedInMessageForLoggedInUserAndFullyBookedSeminarWithQueueReturnsEmptyString()
+    public function canRegisterIfLoggedInMessageForLoggedInUserAndFullyBookedSeminarWithQueueReturnsEmptyString(): void
     {
         $this->seminar->setAttendancesMax(5);
         $this->seminar->setNumberOfAttendances(5);
@@ -1374,7 +1366,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function userFulfillsRequirementsForEventWithoutRequirementsReturnsTrue()
+    public function userFulfillsRequirementsForEventWithoutRequirementsReturnsTrue(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser();
 
@@ -1400,7 +1392,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function userFulfillsRequirementsForEventWithOneFulfilledRequirementReturnsTrue()
+    public function userFulfillsRequirementsForEventWithOneFulfilledRequirementReturnsTrue(): void
     {
         $requiredTopicUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1450,7 +1442,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function userFulfillsRequirementsForEventWithOneUnfulfilledRequirementReturnsFalse()
+    public function userFulfillsRequirementsForEventWithOneUnfulfilledRequirementReturnsFalse(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $requiredTopicUid = $this->testingFramework->createRecord(
@@ -1495,7 +1487,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getMissingRequiredTopicsReturnsSeminarBag()
+    public function getMissingRequiredTopicsReturnsSeminarBag(): void
     {
         self::assertInstanceOf(
             \Tx_Seminars_Bag_Event::class,
@@ -1506,7 +1498,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getMissingRequiredTopicsForTopicWithOneNotFulfilledRequirementReturnsOneItem()
+    public function getMissingRequiredTopicsForTopicWithOneNotFulfilledRequirementReturnsOneItem(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $requiredTopicUid = $this->testingFramework->createRecord(
@@ -1553,7 +1545,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getMissingRequiredTopicsForTopicWithOneNotFulfilledRequirementReturnsRequiredTopic()
+    public function getMissingRequiredTopicsForTopicWithOneNotFulfilledRequirementReturnsRequiredTopic(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $requiredTopicUid = $this->testingFramework->createRecord(
@@ -1600,7 +1592,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getMissingRequiredTopicsForTopicWithOneTwoNotFulfilledRequirementReturnsTwoItems()
+    public function getMissingRequiredTopicsForTopicWithOneTwoNotFulfilledRequirementReturnsTwoItems(): void
     {
         $this->testingFramework->createAndLoginFrontEndUser();
         $topicUid = $this->testingFramework->createRecord(
@@ -1666,7 +1658,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getMissingRequiredTopicsForTopicWithTwoRequirementsOneFulfilledOneUnfulfilledReturnsUnfulfilled()
+    public function getMissingRequiredTopicsForTopicWithTwoRequirementsOneFulfilledOneUnfulfilledReturnsUnfulfilled(): void
     {
         $userUid = $this->testingFramework->createAndLoginFrontEndUser();
         $topicUid = $this->testingFramework->createRecord(
@@ -1729,7 +1721,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getMissingRequiredTopicsForTopicWithOneFulfilledOneUnfulfilledDoesNotReturnFulfilled()
+    public function getMissingRequiredTopicsForTopicWithOneFulfilledOneUnfulfilledDoesNotReturnFulfilled(): void
     {
         $userUid = $this->testingFramework->createAndLoginFrontEndUser();
         $topicUid = $this->testingFramework->createRecord(
@@ -1794,7 +1786,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function removeRegistrationHidesRegistrationOfUser()
+    public function removeRegistrationHidesRegistrationOfUser(): void
     {
         $userUid = $this->testingFramework->createAndLoginFrontEndUser();
         $seminarUid = $this->seminarUid;
@@ -1832,7 +1824,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function removeRegistrationWithFittingQueueRegistrationMovesItFromQueue()
+    public function removeRegistrationWithFittingQueueRegistrationMovesItFromQueue(): void
     {
         $userUid = $this->testingFramework->createAndLoginFrontEndUser();
         $seminarUid = $this->seminarUid;
@@ -1873,7 +1865,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterSeatsForFullyBookedEventAndZeroSeatsGivenReturnsFalse()
+    public function canRegisterSeatsForFullyBookedEventAndZeroSeatsGivenReturnsFalse(): void
     {
         $this->seminar->setAttendancesMax(1);
         $this->seminar->setNumberOfAttendances(1);
@@ -1886,7 +1878,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterSeatsForFullyBookedEventAndOneSeatGivenReturnsFalse()
+    public function canRegisterSeatsForFullyBookedEventAndOneSeatGivenReturnsFalse(): void
     {
         $this->seminar->setAttendancesMax(1);
         $this->seminar->setNumberOfAttendances(1);
@@ -1899,7 +1891,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterSeatsForEventWithOneVacancyAndZeroSeatsGivenReturnsTrue()
+    public function canRegisterSeatsForEventWithOneVacancyAndZeroSeatsGivenReturnsTrue(): void
     {
         $this->seminar->setAttendancesMax(1);
 
@@ -1911,7 +1903,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterSeatsForEventWithOneVacancyAndOneSeatGivenReturnsTrue()
+    public function canRegisterSeatsForEventWithOneVacancyAndOneSeatGivenReturnsTrue(): void
     {
         $this->seminar->setAttendancesMax(1);
 
@@ -1923,7 +1915,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterSeatsForEventWithOneVacancyAndTwoSeatsGivenReturnsFalse()
+    public function canRegisterSeatsForEventWithOneVacancyAndTwoSeatsGivenReturnsFalse(): void
     {
         $this->seminar->setAttendancesMax(1);
 
@@ -1935,7 +1927,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterSeatsForEventWithTwoVacanciesAndOneSeatGivenReturnsTrue()
+    public function canRegisterSeatsForEventWithTwoVacanciesAndOneSeatGivenReturnsTrue(): void
     {
         $this->seminar->setAttendancesMax(2);
 
@@ -1947,7 +1939,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterSeatsForEventWithTwoVacanciesAndTwoSeatsGivenReturnsTrue()
+    public function canRegisterSeatsForEventWithTwoVacanciesAndTwoSeatsGivenReturnsTrue(): void
     {
         $this->seminar->setAttendancesMax(2);
 
@@ -1959,7 +1951,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterSeatsForEventWithTwoVacanciesAndThreeSeatsGivenReturnsFalse()
+    public function canRegisterSeatsForEventWithTwoVacanciesAndThreeSeatsGivenReturnsFalse(): void
     {
         $this->seminar->setAttendancesMax(2);
 
@@ -1971,7 +1963,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterSeatsForEventWithUnlimitedVacanciesAndZeroSeatsGivenReturnsTrue()
+    public function canRegisterSeatsForEventWithUnlimitedVacanciesAndZeroSeatsGivenReturnsTrue(): void
     {
         $this->seminar->setUnlimitedVacancies();
 
@@ -1983,7 +1975,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterSeatsForEventWithUnlimitedVacanciesAndOneSeatGivenReturnsTrue()
+    public function canRegisterSeatsForEventWithUnlimitedVacanciesAndOneSeatGivenReturnsTrue(): void
     {
         $this->seminar->setUnlimitedVacancies();
 
@@ -1995,7 +1987,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterSeatsForEventWithUnlimitedVacanciesAndTwoSeatsGivenReturnsTrue()
+    public function canRegisterSeatsForEventWithUnlimitedVacanciesAndTwoSeatsGivenReturnsTrue(): void
     {
         $this->seminar->setUnlimitedVacancies();
 
@@ -2007,7 +1999,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterSeatsForEventWithUnlimitedVacanciesAndFortytwoSeatsGivenReturnsTrue()
+    public function canRegisterSeatsForEventWithUnlimitedVacanciesAndFortytwoSeatsGivenReturnsTrue(): void
     {
         $this->seminar->setUnlimitedVacancies();
 
@@ -2019,7 +2011,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterSeatsForFullyBookedEventWithQueueAndZeroSeatsGivenReturnsTrue()
+    public function canRegisterSeatsForFullyBookedEventWithQueueAndZeroSeatsGivenReturnsTrue(): void
     {
         $this->seminar->setAttendancesMax(1);
         $this->seminar->setNumberOfAttendances(1);
@@ -2033,7 +2025,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterSeatsForFullyBookedEventWithQueueAndOneSeatGivenReturnsTrue()
+    public function canRegisterSeatsForFullyBookedEventWithQueueAndOneSeatGivenReturnsTrue(): void
     {
         $this->seminar->setAttendancesMax(1);
         $this->seminar->setNumberOfAttendances(1);
@@ -2047,7 +2039,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterSeatsForFullyBookedEventWithQueueAndTwoSeatsGivenReturnsTrue()
+    public function canRegisterSeatsForFullyBookedEventWithQueueAndTwoSeatsGivenReturnsTrue(): void
     {
         $this->seminar->setAttendancesMax(1);
         $this->seminar->setNumberOfAttendances(1);
@@ -2061,7 +2053,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function canRegisterSeatsForEventWithTwoVacanciesAndWithQueueAndFortytwoSeatsGivenReturnsTrue()
+    public function canRegisterSeatsForEventWithTwoVacanciesAndWithQueueAndFortytwoSeatsGivenReturnsTrue(): void
     {
         $this->seminar->setAttendancesMax(2);
         $this->seminar->setRegistrationQueue(true);
@@ -2076,7 +2068,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeSendsMailToAttendeesMailAddress()
+    public function notifyAttendeeSendsMailToAttendeesMailAddress(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
@@ -2094,7 +2086,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForAttendeeWithoutMailAddressNotSendsEmail()
+    public function notifyAttendeeForAttendeeWithoutMailAddressNotSendsEmail(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
@@ -2117,7 +2109,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForSendConfirmationTrueCallsRegistrationEmailHookMethodsForPlainTextEmail()
+    public function notifyAttendeeForSendConfirmationTrueCallsRegistrationEmailHookMethodsForPlainTextEmail(): void
     {
         $this->extensionConfiguration
             ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_TEXT_MAIL);
@@ -2155,7 +2147,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForSendConfirmationTrueCallsRegistrationEmailHookMethodsForHtmlEmail()
+    public function notifyAttendeeForSendConfirmationTrueCallsRegistrationEmailHookMethodsForHtmlEmail(): void
     {
         $this->extensionConfiguration
             ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
@@ -2197,7 +2189,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeMailSubjectContainsConfirmationSubject()
+    public function notifyAttendeeMailSubjectContainsConfirmationSubject(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
@@ -2215,7 +2207,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeMailBodyContainsEventTitle()
+    public function notifyAttendeeMailBodyContainsEventTitle(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
@@ -2233,7 +2225,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeMailBodyNotContainsRawTemplateMarkers()
+    public function notifyAttendeeMailBodyNotContainsRawTemplateMarkers(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
@@ -2250,7 +2242,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeMailBodyNotContainsSpaceBeforeComma()
+    public function notifyAttendeeMailBodyNotContainsSpaceBeforeComma(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
@@ -2267,7 +2259,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeMailBodyContainsRegistrationFood()
+    public function notifyAttendeeMailBodyContainsRegistrationFood(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
@@ -2285,7 +2277,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeMailBodyContainsRegistrationAccommodation()
+    public function notifyAttendeeMailBodyContainsRegistrationAccommodation(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
@@ -2303,7 +2295,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeMailBodyContainsRegistrationInterests()
+    public function notifyAttendeeMailBodyContainsRegistrationInterests(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
@@ -2321,7 +2313,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeMailSubjectContainsEventTitle()
+    public function notifyAttendeeMailSubjectContainsEventTitle(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
@@ -2339,7 +2331,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeSetsTypo3DefaultFromAddressAsSender()
+    public function notifyAttendeeSetsTypo3DefaultFromAddressAsSender(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
@@ -2363,7 +2355,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeSetsOrganizerAsReplyTo()
+    public function notifyAttendeeSetsOrganizerAsReplyTo(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
@@ -2385,7 +2377,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeWithoutTypo3DefaultFromAddressSetsOrganizerAsSender()
+    public function notifyAttendeeWithoutTypo3DefaultFromAddressSetsOrganizerAsSender(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
@@ -2407,7 +2399,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForHtmlMailSetHasHtmlBody()
+    public function notifyAttendeeForHtmlMailSetHasHtmlBody(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->extensionConfiguration
@@ -2427,7 +2419,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForTextMailSetDoesNotHaveHtmlBody()
+    public function notifyAttendeeForTextMailSetDoesNotHaveHtmlBody(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
@@ -2445,7 +2437,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForTextMailSetHasNoUnreplacedMarkers()
+    public function notifyAttendeeForTextMailSetHasNoUnreplacedMarkers(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
@@ -2463,7 +2455,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForHtmlMailHasNoUnreplacedMarkers()
+    public function notifyAttendeeForHtmlMailHasNoUnreplacedMarkers(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->extensionConfiguration
@@ -2483,7 +2475,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForMailSetToUserModeAndUserSetToHtmlMailsHasHtmlBody()
+    public function notifyAttendeeForMailSetToUserModeAndUserSetToHtmlMailsHasHtmlBody(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->extensionConfiguration
@@ -2509,7 +2501,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForMailSetToUserModeAndUserSetToTextMailsNotHasHtmlBody()
+    public function notifyAttendeeForMailSetToUserModeAndUserSetToTextMailsNotHasHtmlBody(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->extensionConfiguration
@@ -2535,7 +2527,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForHtmlMailsContainsNameOfUserInBody()
+    public function notifyAttendeeForHtmlMailsContainsNameOfUserInBody(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->extensionConfiguration
@@ -2560,7 +2552,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForHtmlMailsHasLinkToSeminarInBody()
+    public function notifyAttendeeForHtmlMailsHasLinkToSeminarInBody(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->extensionConfiguration
@@ -2584,7 +2576,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeAppendsOrganizersFooterToMailBody()
+    public function notifyAttendeeAppendsOrganizersFooterToMailBody(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
@@ -2602,7 +2594,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForConfirmedEventNotHasPlannedDisclaimer()
+    public function notifyAttendeeForConfirmedEventNotHasPlannedDisclaimer(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $registration = $this->createRegistration();
@@ -2624,7 +2616,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForCancelledEventNotHasPlannedDisclaimer()
+    public function notifyAttendeeForCancelledEventNotHasPlannedDisclaimer(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $registration = $this->createRegistration();
@@ -2646,7 +2638,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForPlannedEventDisplaysPlannedDisclaimer()
+    public function notifyAttendeeForPlannedEventDisplaysPlannedDisclaimer(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $registration = $this->createRegistration();
@@ -2668,7 +2660,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeehiddenDisclaimerFieldAndPlannedEventHidesPlannedDisclaimer()
+    public function notifyAttendeehiddenDisclaimerFieldAndPlannedEventHidesPlannedDisclaimer(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->subject->setConfigurationValue(
@@ -2694,7 +2686,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForHtmlMailsHasCssStylesFromFile()
+    public function notifyAttendeeForHtmlMailsHasCssStylesFromFile(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->extensionConfiguration
@@ -2719,7 +2711,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeMailBodyCanContainAttendeesNames()
+    public function notifyAttendeeMailBodyCanContainAttendeesNames(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
@@ -2738,7 +2730,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForPlainTextMailEnumeratesAttendeesNames()
+    public function notifyAttendeeForPlainTextMailEnumeratesAttendeesNames(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
@@ -2757,7 +2749,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForHtmlMailReturnsAttendeesNamesInOrderedList()
+    public function notifyAttendeeForHtmlMailReturnsAttendeesNamesInOrderedList(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->extensionConfiguration
@@ -2783,7 +2775,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeCanSendPlaceTitleInMailBody()
+    public function notifyAttendeeCanSendPlaceTitleInMailBody(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
@@ -2812,7 +2804,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeCanSendPlaceAddressInMailBody()
+    public function notifyAttendeeCanSendPlaceAddressInMailBody(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
@@ -2841,7 +2833,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForEventWithNoPlaceSendsWillBeAnnouncedMessage()
+    public function notifyAttendeeForEventWithNoPlaceSendsWillBeAnnouncedMessage(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
@@ -2859,7 +2851,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForPlainTextMailSeparatesPlacesTitleAndAddressWithLinefeed()
+    public function notifyAttendeeForPlainTextMailSeparatesPlacesTitleAndAddressWithLinefeed(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
@@ -2888,7 +2880,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForHtmlMailSeparatesPlacesTitleAndAddressWithBreaks()
+    public function notifyAttendeeForHtmlMailSeparatesPlacesTitleAndAddressWithBreaks(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->extensionConfiguration
@@ -2924,7 +2916,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeStripsHtmlTagsFromPlaceAddress()
+    public function notifyAttendeeStripsHtmlTagsFromPlaceAddress(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
@@ -2953,7 +2945,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForPlaceAddressReplacesLineFeedsWithSpaces()
+    public function notifyAttendeeForPlaceAddressReplacesLineFeedsWithSpaces(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
@@ -2982,7 +2974,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForPlaceAddressReplacesCarriageReturnsWithSpaces()
+    public function notifyAttendeeForPlaceAddressReplacesCarriageReturnsWithSpaces(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
@@ -3011,7 +3003,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForPlaceAddressReplacesCarriageReturnAndLineFeedWithOneSpace()
+    public function notifyAttendeeForPlaceAddressReplacesCarriageReturnAndLineFeedWithOneSpace(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
@@ -3040,7 +3032,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForPlaceAddressReplacesMultipleCarriageReturnsWithOneSpace()
+    public function notifyAttendeeForPlaceAddressReplacesMultipleCarriageReturnsWithOneSpace(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
@@ -3069,7 +3061,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForPlaceAddressAndPlainTextMailsReplacesMultipleLineFeedsWithSpaces()
+    public function notifyAttendeeForPlaceAddressAndPlainTextMailsReplacesMultipleLineFeedsWithSpaces(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
@@ -3098,7 +3090,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForPlaceAddressAndHtmlMailsReplacesMultipleLineFeedsWithSpaces()
+    public function notifyAttendeeForPlaceAddressAndHtmlMailsReplacesMultipleLineFeedsWithSpaces(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->extensionConfiguration
@@ -3134,7 +3126,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForPlaceAddressReplacesMultipleLineFeedAndCarriageReturnsWithSpaces()
+    public function notifyAttendeeForPlaceAddressReplacesMultipleLineFeedAndCarriageReturnsWithSpaces(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->extensionConfiguration
@@ -3170,7 +3162,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForPlaceAddressAndPlainTextMailsSendsCityOfPlace()
+    public function notifyAttendeeForPlaceAddressAndPlainTextMailsSendsCityOfPlace(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
@@ -3199,7 +3191,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForPlaceAddressAndPlainTextMailsSendsZipAndCityOfPlace()
+    public function notifyAttendeeForPlaceAddressAndPlainTextMailsSendsZipAndCityOfPlace(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
@@ -3228,7 +3220,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForPlaceAddressAndPlainTextMailsSendsCountryOfPlace()
+    public function notifyAttendeeForPlaceAddressAndPlainTextMailsSendsCountryOfPlace(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
 
@@ -3260,7 +3252,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForPlaceAddressAndPlainTextMailsSeparatesAddressAndCityWithNewline()
+    public function notifyAttendeeForPlaceAddressAndPlainTextMailsSeparatesAddressAndCityWithNewline(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
@@ -3289,7 +3281,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForPlaceAddressAndHtmlMailsSeparatresAddressAndCityLineWithBreaks()
+    public function notifyAttendeeForPlaceAddressAndHtmlMailsSeparatresAddressAndCityLineWithBreaks(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->extensionConfiguration
@@ -3325,7 +3317,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForPlaceAddressWithCountryAndCitySeparatesCountryAndCityWithComma()
+    public function notifyAttendeeForPlaceAddressWithCountryAndCitySeparatesCountryAndCityWithComma(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
 
@@ -3361,7 +3353,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForPlaceAddressWithCityAndNoCountryNotAddsSurplusCommaAfterCity()
+    public function notifyAttendeeForPlaceAddressWithCityAndNoCountryNotAddsSurplusCommaAfterCity(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $uid = $this->testingFramework->createRecord(
@@ -3391,10 +3383,8 @@ final class RegistrationManagerTest extends TestCase
      * Checks that $string does not contain a raw label key.
      *
      * @param string $string
-     *
-     * @return void
      */
-    private function assertNotContainsRawLabelKey(string $string)
+    private function assertNotContainsRawLabelKey(string $string): void
     {
         self::assertStringNotContainsString('_', $string);
         self::assertStringNotContainsString('salutation', $string);
@@ -3406,7 +3396,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeHasUtf8CalendarAttachment()
+    public function notifyAttendeeHasUtf8CalendarAttachment(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
@@ -3426,7 +3416,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeHasCalendarAttachmentWithWindowsLineEndings()
+    public function notifyAttendeeHasCalendarAttachmentWithWindowsLineEndings(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
@@ -3446,7 +3436,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeHasCalendarAttachmentWithStartAndEndMarkers()
+    public function notifyAttendeeHasCalendarAttachmentWithStartAndEndMarkers(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
@@ -3465,7 +3455,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeHasCalendarAttachmentWithPublishMethod()
+    public function notifyAttendeeHasCalendarAttachmentWithPublishMethod(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
@@ -3484,7 +3474,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeHasCalendarAttachmentWithEvent()
+    public function notifyAttendeeHasCalendarAttachmentWithEvent(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
@@ -3523,7 +3513,7 @@ final class RegistrationManagerTest extends TestCase
      *
      * @dataProvider iCalDataProvider
      */
-    public function notifyAttendeeHasCalendarAttachmentWithImportantFields(string $value)
+    public function notifyAttendeeHasCalendarAttachmentWithImportantFields(string $value): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
@@ -3543,7 +3533,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeHasCalendarAttachmentWithEventTitleAsSummary()
+    public function notifyAttendeeHasCalendarAttachmentWithEventTitleAsSummary(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
@@ -3563,7 +3553,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeHasCalendarAttachmentWithEventStartDateWithTimeZoneFromEvent()
+    public function notifyAttendeeHasCalendarAttachmentWithEventStartDateWithTimeZoneFromEvent(): void
     {
         $timeZone = 'America/Chicago';
         $this->testingFramework->changeRecord('tx_seminars_seminars', $this->seminarUid, ['time_zone' => $timeZone]);
@@ -3588,7 +3578,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeFoEventWithoutTimeZoneHasAttachmentWithEventStartDateWithTimeZoneDefaultTimeZone()
+    public function notifyAttendeeFoEventWithoutTimeZoneHasAttachmentWithEventStartDateWithTimeZoneDefaultTimeZone(): void
     {
         $timeZone = 'Europe/Berlin';
         $this->subject->setConfigurationValue('defaultTimeZone', $timeZone);
@@ -3612,7 +3602,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForEventWithoutEndDateHasCalendarAttachmentWithoutEndDate()
+    public function notifyAttendeeForEventWithoutEndDateHasCalendarAttachmentWithoutEndDate(): void
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -3638,7 +3628,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeHasCalendarAttachmentWithEventEndDateTimeZoneFromEvent()
+    public function notifyAttendeeHasCalendarAttachmentWithEventEndDateTimeZoneFromEvent(): void
     {
         $timeZone = 'America/Chicago';
         $this->testingFramework->changeRecord('tx_seminars_seminars', $this->seminarUid, ['time_zone' => $timeZone]);
@@ -3663,7 +3653,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForEventWithoutTimeZoneHasCalendarAttachmentWithEndDateDefaultTimeZone()
+    public function notifyAttendeeForEventWithoutTimeZoneHasCalendarAttachmentWithEndDateDefaultTimeZone(): void
     {
         $timeZone = 'Europe/Berlin';
         $this->subject->setConfigurationValue('defaultTimeZone', $timeZone);
@@ -3687,7 +3677,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeHasCalendarAttachmentWithEventSubtitleAsDescription()
+    public function notifyAttendeeHasCalendarAttachmentWithEventSubtitleAsDescription(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
@@ -3707,7 +3697,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForEventWithoutPlaceHasCalendarAttachmentWithoutLocation()
+    public function notifyAttendeeForEventWithoutPlaceHasCalendarAttachmentWithoutLocation(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
@@ -3727,7 +3717,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeHasCalendarAttachmentWithEventLocation()
+    public function notifyAttendeeHasCalendarAttachmentWithEventLocation(): void
     {
         $siteUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
@@ -3758,7 +3748,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeReplacesNewlinesInCalendarAttachment()
+    public function notifyAttendeeReplacesNewlinesInCalendarAttachment(): void
     {
         $siteUid = $this->testingFramework->createRecord(
             'tx_seminars_sites',
@@ -3789,7 +3779,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeHasCalendarAttachmentWithOrganizer()
+    public function notifyAttendeeHasCalendarAttachmentWithOrganizer(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
@@ -3809,7 +3799,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeHasCalendarAttachmentWithUid()
+    public function notifyAttendeeHasCalendarAttachmentWithUid(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
@@ -3829,7 +3819,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeHasCalendarAttachmentWithTimestamp()
+    public function notifyAttendeeHasCalendarAttachmentWithTimestamp(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
@@ -3852,7 +3842,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForInformalSalutationContainsInformalSalutation()
+    public function notifyAttendeeForInformalSalutationContainsInformalSalutation(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->configuration->setAsString('salutation', 'informal');
@@ -3876,7 +3866,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForFormalSalutationAndGenderUnknownContainsFormalUnknownSalutation()
+    public function notifyAttendeeForFormalSalutationAndGenderUnknownContainsFormalUnknownSalutation(): void
     {
         if (OelibFrontEndUser::hasGenderField()) {
             self::markTestSkipped('This test is only applicable if there is no FrontEndUser.gender field.');
@@ -3904,7 +3894,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForFormalSalutationAndGenderMaleContainsFormalMaleSalutation()
+    public function notifyAttendeeForFormalSalutationAndGenderMaleContainsFormalMaleSalutation(): void
     {
         if (!OelibFrontEndUser::hasGenderField()) {
             self::markTestSkipped('This test is only applicable if there is a FrontEndUser.gender field.');
@@ -3932,7 +3922,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForFormalSalutationAndGenderFemaleContainsFormalFemaleSalutation()
+    public function notifyAttendeeForFormalSalutationAndGenderFemaleContainsFormalFemaleSalutation(): void
     {
         if (!OelibFrontEndUser::hasGenderField()) {
             self::markTestSkipped('This test is only applicable if there is a FrontEndUser.gender field.');
@@ -3960,7 +3950,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForFormalSalutationAndConfirmationContainsFormalConfirmationText()
+    public function notifyAttendeeForFormalSalutationAndConfirmationContainsFormalConfirmationText(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->subject->setConfigurationValue('salutation', 'formal');
@@ -3987,7 +3977,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForInformalSalutationAndConfirmationContainsInformalConfirmationText()
+    public function notifyAttendeeForInformalSalutationAndConfirmationContainsInformalConfirmationText(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->subject->setConfigurationValue('salutation', 'informal');
@@ -4014,7 +4004,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForFormalSalutationAndUnregistrationContainsFormalUnregistrationText()
+    public function notifyAttendeeForFormalSalutationAndUnregistrationContainsFormalUnregistrationText(): void
     {
         $this->configuration->setAsBoolean('sendConfirmationOnUnregistration', true);
         $this->subject->setConfigurationValue('salutation', 'formal');
@@ -4047,7 +4037,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForInformalSalutationAndUnregistrationContainsInformalUnregistrationText()
+    public function notifyAttendeeForInformalSalutationAndUnregistrationContainsInformalUnregistrationText(): void
     {
         $this->configuration->setAsBoolean('sendConfirmationOnUnregistration', true);
         $this->subject->setConfigurationValue('salutation', 'informal');
@@ -4080,7 +4070,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForFormalSalutationAndQueueConfirmationContainsFormalQueueConfirmationText()
+    public function notifyAttendeeForFormalSalutationAndQueueConfirmationContainsFormalQueueConfirmationText(): void
     {
         $this->configuration->setAsBoolean('sendConfirmationOnRegistrationForQueue', true);
         $this->subject->setConfigurationValue('salutation', 'formal');
@@ -4113,7 +4103,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForInformalSalutationAndQueueConfirmationContainsInformalQueueConfirmationText()
+    public function notifyAttendeeForInformalSalutationAndQueueConfirmationContainsInformalQueueConfirmationText(): void
     {
         $this->configuration->setAsBoolean('sendConfirmationOnRegistrationForQueue', true);
         $this->subject->setConfigurationValue('salutation', 'informal');
@@ -4146,7 +4136,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForFormalSalutationAndQueueUpdateContainsFormalQueueUpdateText()
+    public function notifyAttendeeForFormalSalutationAndQueueUpdateContainsFormalQueueUpdateText(): void
     {
         $this->configuration->setAsBoolean('sendConfirmationOnQueueUpdate', true);
         $this->subject->setConfigurationValue('salutation', 'formal');
@@ -4179,7 +4169,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForInformalSalutationAndQueueUpdateContainsInformalQueueUpdateText()
+    public function notifyAttendeeForInformalSalutationAndQueueUpdateContainsInformalQueueUpdateText(): void
     {
         $this->configuration->setAsBoolean('sendConfirmationOnQueueUpdate', true);
         $this->subject->setConfigurationValue('salutation', 'informal');
@@ -4212,7 +4202,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForInformalSalutationNotContainsRawTemplateMarkers()
+    public function notifyAttendeeForInformalSalutationNotContainsRawTemplateMarkers(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->configuration->setAsString('salutation', 'informal');
@@ -4235,7 +4225,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForFormalSalutationAndGenderUnknownNotContainsRawTemplateMarkers()
+    public function notifyAttendeeForFormalSalutationAndGenderUnknownNotContainsRawTemplateMarkers(): void
     {
         if (OelibFrontEndUser::hasGenderField()) {
             self::markTestSkipped('This test is only applicable if there is no FrontEndUser.gender field.');
@@ -4262,7 +4252,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForFormalSalutationAndGenderMaleNotContainsRawTemplateMarkers()
+    public function notifyAttendeeForFormalSalutationAndGenderMaleNotContainsRawTemplateMarkers(): void
     {
         if (!OelibFrontEndUser::hasGenderField()) {
             self::markTestSkipped('This test is only applicable if there is a FrontEndUser.gender field.');
@@ -4289,7 +4279,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForFormalSalutationAndGenderFemaleNotContainsRawTemplateMarkers()
+    public function notifyAttendeeForFormalSalutationAndGenderFemaleNotContainsRawTemplateMarkers(): void
     {
         if (!OelibFrontEndUser::hasGenderField()) {
             self::markTestSkipped('This test is only applicable if there is a FrontEndUser.gender field.');
@@ -4316,7 +4306,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForFormalSalutationAndConfirmationNotContainsRawTemplateMarkers()
+    public function notifyAttendeeForFormalSalutationAndConfirmationNotContainsRawTemplateMarkers(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->subject->setConfigurationValue('salutation', 'formal');
@@ -4339,7 +4329,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForInformalSalutationAndConfirmationNotContainsRawTemplateMarkers()
+    public function notifyAttendeeForInformalSalutationAndConfirmationNotContainsRawTemplateMarkers(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->subject->setConfigurationValue('salutation', 'informal');
@@ -4362,7 +4352,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForFormalSalutationAndUnregistrationNotContainsRawTemplateMarkers()
+    public function notifyAttendeeForFormalSalutationAndUnregistrationNotContainsRawTemplateMarkers(): void
     {
         $this->configuration->setAsBoolean('sendConfirmationOnUnregistration', true);
         $this->subject->setConfigurationValue('salutation', 'formal');
@@ -4389,7 +4379,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForInformalSalutationAndUnregistrationNotContainsRawTemplateMarkers()
+    public function notifyAttendeeForInformalSalutationAndUnregistrationNotContainsRawTemplateMarkers(): void
     {
         $this->configuration->setAsBoolean('sendConfirmationOnUnregistration', true);
         $this->subject->setConfigurationValue('salutation', 'informal');
@@ -4416,7 +4406,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForFormalSalutationAndQueueConfirmationNotContainsRawTemplateMarkers()
+    public function notifyAttendeeForFormalSalutationAndQueueConfirmationNotContainsRawTemplateMarkers(): void
     {
         $this->configuration->setAsBoolean('sendConfirmationOnRegistrationForQueue', true);
         $this->subject->setConfigurationValue('salutation', 'formal');
@@ -4443,7 +4433,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForInformalSalutationAndQueueConfirmationNotContainsRawTemplateMarkers()
+    public function notifyAttendeeForInformalSalutationAndQueueConfirmationNotContainsRawTemplateMarkers(): void
     {
         $this->configuration->setAsBoolean('sendConfirmationOnRegistrationForQueue', true);
         $this->subject->setConfigurationValue('salutation', 'informal');
@@ -4470,7 +4460,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForFormalSalutationAndQueueUpdateNotContainsRawTemplateMarkers()
+    public function notifyAttendeeForFormalSalutationAndQueueUpdateNotContainsRawTemplateMarkers(): void
     {
         $this->configuration->setAsBoolean('sendConfirmationOnQueueUpdate', true);
         $this->subject->setConfigurationValue('salutation', 'formal');
@@ -4497,7 +4487,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForInformalSalutationAndQueueUpdateNotContainsRawTemplateMarkers()
+    public function notifyAttendeeForInformalSalutationAndQueueUpdateNotContainsRawTemplateMarkers(): void
     {
         $this->configuration->setAsBoolean('sendConfirmationOnQueueUpdate', true);
         $this->subject->setConfigurationValue('salutation', 'informal');
@@ -4526,7 +4516,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForUnregistrationMailDoesNotAppendUnregistrationNotice()
+    public function notifyAttendeeForUnregistrationMailDoesNotAppendUnregistrationNotice(): void
     {
         /** @var TestingRegistrationManager&MockObject $subject */
         $subject = $this->getMockBuilder(TestingRegistrationManager::class)
@@ -4555,7 +4545,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForRegistrationMailAndNoUnregistrationPossibleNotAddsUnregistrationNotice()
+    public function notifyAttendeeForRegistrationMailAndNoUnregistrationPossibleNotAddsUnregistrationNotice(): void
     {
         $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', false);
 
@@ -4583,7 +4573,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForRegistrationMailAndUnregistrationPossibleAddsUnregistrationNotice()
+    public function notifyAttendeeForRegistrationMailAndUnregistrationPossibleAddsUnregistrationNotice(): void
     {
         $this->configuration->setAsBoolean('allowUnregistrationWithEmptyWaitingList', true);
 
@@ -4616,7 +4606,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForRegistrationOnQueueMailAndUnregistrationPossibleAddsUnregistrationNotice()
+    public function notifyAttendeeForRegistrationOnQueueMailAndUnregistrationPossibleAddsUnregistrationNotice(): void
     {
         $this->configuration->setAsBoolean('sendConfirmationOnRegistrationForQueue', true);
 
@@ -4654,7 +4644,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForQueueUpdateMailAndUnregistrationPossibleAddsUnregistrationNotice()
+    public function notifyAttendeeForQueueUpdateMailAndUnregistrationPossibleAddsUnregistrationNotice(): void
     {
         $this->configuration->setAsBoolean('sendConfirmationOnQueueUpdate', true);
 
@@ -4691,7 +4681,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyAttendeeForSendConfirmationFalseNeverCallsRegistrationEmailHookMethods()
+    public function notifyAttendeeForSendConfirmationFalseNeverCallsRegistrationEmailHookMethods(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', false);
         $registrationOld = $this->createRegistration();
@@ -4720,7 +4710,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyOrganizersForEventWithEmailsMutedNotSendsEmail()
+    public function notifyOrganizersForEventWithEmailsMutedNotSendsEmail(): void
     {
         $this->configuration->setAsBoolean('sendNotification', true);
         $this->testingFramework->changeRecord(
@@ -4738,7 +4728,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyOrganizersUsesTypo3DefaultFromAddressAsFrom()
+    public function notifyOrganizersUsesTypo3DefaultFromAddressAsFrom(): void
     {
         $this->configuration->setAsBoolean('sendNotification', true);
 
@@ -4760,7 +4750,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyOrganizersUsesOrganizerAsReplyTo()
+    public function notifyOrganizersUsesOrganizerAsReplyTo(): void
     {
         $this->configuration->setAsBoolean('sendNotification', true);
 
@@ -4780,7 +4770,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyOrganizersWithoutTypo3DefaultFromAddressUsesOrganizerAsFrom()
+    public function notifyOrganizersWithoutTypo3DefaultFromAddressUsesOrganizerAsFrom(): void
     {
         $this->configuration->setAsBoolean('sendNotification', true);
 
@@ -4802,7 +4792,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyOrganizersUsesOrganizerAsTo()
+    public function notifyOrganizersUsesOrganizerAsTo(): void
     {
         $this->configuration->setAsBoolean('sendNotification', true);
 
@@ -4818,7 +4808,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyOrganizersIncludesHelloIfNotHidden()
+    public function notifyOrganizersIncludesHelloIfNotHidden(): void
     {
         $registration = $this->createRegistration();
         $this->configuration->setAsBoolean('sendNotification', true);
@@ -4838,7 +4828,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyOrganizersForEventWithOneVacancyShowsVacanciesLabelWithVacancyNumber()
+    public function notifyOrganizersForEventWithOneVacancyShowsVacanciesLabelWithVacancyNumber(): void
     {
         $this->configuration->setAsBoolean('sendNotification', true);
         $this->subject->setConfigurationValue(
@@ -4863,7 +4853,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyOrganizersForEventWithUnlimitedVacanciesShowsVacanciesLabelWithUnlimitedLabel()
+    public function notifyOrganizersForEventWithUnlimitedVacanciesShowsVacanciesLabelWithUnlimitedLabel(): void
     {
         $this->configuration->setAsBoolean('sendNotification', true);
         $this->subject->setConfigurationValue(
@@ -4889,7 +4879,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyOrganizersForRegistrationWithCompanyShowsLabelOfCompany()
+    public function notifyOrganizersForRegistrationWithCompanyShowsLabelOfCompany(): void
     {
         $this->configuration->setAsBoolean('sendNotification', true);
         $this->subject->setConfigurationValue(
@@ -4918,7 +4908,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyOrganizersForRegistrationWithCompanyShowsCompanyOfRegistration()
+    public function notifyOrganizersForRegistrationWithCompanyShowsCompanyOfRegistration(): void
     {
         $this->configuration->setAsBoolean('sendNotification', true);
         $this->subject->setConfigurationValue(
@@ -4947,7 +4937,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyOrganizersForSendNotificationTrueCallsRegistrationEmailHookMethods()
+    public function notifyOrganizersForSendNotificationTrueCallsRegistrationEmailHookMethods(): void
     {
         $this->configuration->setAsBoolean('sendNotification', true);
 
@@ -4976,7 +4966,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function notifyOrganizersForSendNotificationFalseNeverCallsRegistrationEmailHookMethods()
+    public function notifyOrganizersForSendNotificationFalseNeverCallsRegistrationEmailHookMethods(): void
     {
         $this->configuration->setAsBoolean('sendNotification', false);
 
@@ -5003,7 +4993,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function sendAdditionalNotificationCanSendEmailToOneOrganizer()
+    public function sendAdditionalNotificationCanSendEmailToOneOrganizer(): void
     {
         $registration = $this->createRegistration();
         $this->subject->sendAdditionalNotification($registration);
@@ -5017,7 +5007,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function sendAdditionalNotificationForEmailMutedNotSendsEmail()
+    public function sendAdditionalNotificationForEmailMutedNotSendsEmail(): void
     {
         $registration = $this->createRegistration();
         $event = $registration->getSeminarObject();
@@ -5031,7 +5021,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function sendAdditionalNotificationCanSendEmailsToTwoOrganizers()
+    public function sendAdditionalNotificationCanSendEmailsToTwoOrganizers(): void
     {
         $organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
@@ -5063,7 +5053,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function sendAdditionalNotificationUsesTypo3DefaultFromAddressAsSenderIfEmailIsSentToTwoOrganizers()
+    public function sendAdditionalNotificationUsesTypo3DefaultFromAddressAsSenderIfEmailIsSentToTwoOrganizers(): void
     {
         $organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
@@ -5101,7 +5091,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function sendAdditionalNotificationUsesTheFirstOrganizerAsReplyToIfEmailIsSentToTwoOrganizers()
+    public function sendAdditionalNotificationUsesTheFirstOrganizerAsReplyToIfEmailIsSentToTwoOrganizers(): void
     {
         $organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
@@ -5136,7 +5126,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function sendAdditionalNotificationUsesTheFirstOrganizerAsSenderIfEmailIsSentToTwoOrganizers()
+    public function sendAdditionalNotificationUsesTheFirstOrganizerAsSenderIfEmailIsSentToTwoOrganizers(): void
     {
         $organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers',
@@ -5172,7 +5162,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function sendAdditionalNotificationForEventWithEnoughAttendancesSendsEnoughAttendancesMail()
+    public function sendAdditionalNotificationForEventWithEnoughAttendancesSendsEnoughAttendancesMail(): void
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -5204,7 +5194,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function sendAdditionalNotificationForEventWithNotEnoughAttendancesNotSendsEmail()
+    public function sendAdditionalNotificationForEventWithNotEnoughAttendancesNotSendsEmail(): void
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -5228,7 +5218,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function sendAdditionalNotificationForEventWithNotEnoughAttendancesNotSetsNotificationFlag()
+    public function sendAdditionalNotificationForEventWithNotEnoughAttendancesNotSetsNotificationFlag(): void
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -5255,7 +5245,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function sendAdditionalNotificationForEventWithMoreThanEnoughAttendancesSendsEnoughAttendancesMail()
+    public function sendAdditionalNotificationForEventWithMoreThanEnoughAttendancesSendsEnoughAttendancesMail(): void
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -5289,7 +5279,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function sendAdditionalNotificationForEventWithEnoughAttendancesSetsNotifiedFlag()
+    public function sendAdditionalNotificationForEventWithEnoughAttendancesSetsNotifiedFlag(): void
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -5316,7 +5306,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function sendAdditionalNotificationForEventWithMoreThanEnoughAttendancesSetsNotifiedFlag()
+    public function sendAdditionalNotificationForEventWithMoreThanEnoughAttendancesSetsNotifiedFlag(): void
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -5344,7 +5334,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function sendAdditionalNotificationForEventWithEnoughAttendancesAndOrganizersAlreadyNotifiedNotSendsEmail()
+    public function sendAdditionalNotificationForEventWithEnoughAttendancesAndOrganizersAlreadyNotifiedNotSendsEmail(): void
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -5368,7 +5358,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function sendAdditionalNotificationForMoreThanEnoughAttendancesAndOrganizersAlreadyNotifiedNotSends()
+    public function sendAdditionalNotificationForMoreThanEnoughAttendancesAndOrganizersAlreadyNotifiedNotSends(): void
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -5393,7 +5383,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function sendAdditionalNotificationForEventWithZeroAttendeesMinDoesNotSendAnyMail()
+    public function sendAdditionalNotificationForEventWithZeroAttendeesMinDoesNotSendAnyMail(): void
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -5418,7 +5408,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function sendAdditionalNotificationForBookedOutEventSendsEmailWithBookedOutSubject()
+    public function sendAdditionalNotificationForBookedOutEventSendsEmailWithBookedOutSubject(): void
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -5442,7 +5432,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function sendAdditionalNotificationForBookedOutEventSendsEmailWithBookedOutMessage()
+    public function sendAdditionalNotificationForBookedOutEventSendsEmailWithBookedOutMessage(): void
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -5461,7 +5451,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function sendAdditionalNotificationForEventWithNotEnoughAttendancesAndNotBookedOutSendsNoEmail()
+    public function sendAdditionalNotificationForEventWithNotEnoughAttendancesAndNotBookedOutSendsNoEmail(): void
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -5484,7 +5474,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function sendAdditionalNotificationForEventWithEnoughAttendancesAndUnlimitedVacanciesSendsEmail()
+    public function sendAdditionalNotificationForEventWithEnoughAttendancesAndUnlimitedVacanciesSendsEmail(): void
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -5505,7 +5495,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function sendAdditionalNotificationForEventWithEnoughAttendancesAndOneVacancyHasVacancyNumber()
+    public function sendAdditionalNotificationForEventWithEnoughAttendancesAndOneVacancyHasVacancyNumber(): void
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -5533,7 +5523,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function sendAdditionalNotificationForEnoughAttendancesAndUnlimitedVacanciesHasUnlimitedLabel()
+    public function sendAdditionalNotificationForEnoughAttendancesAndUnlimitedVacanciesHasUnlimitedLabel(): void
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -5562,7 +5552,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function sendAdditionalNotificationCallsRegistrationEmailHookMethods()
+    public function sendAdditionalNotificationCallsRegistrationEmailHookMethods(): void
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -5597,7 +5587,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function allowsRegistrationByDateForEventWithoutDateAndRegistrationForEventsWithoutDateAllowedReturnsTrue()
+    public function allowsRegistrationByDateForEventWithoutDateAndRegistrationForEventsWithoutDateAllowedReturnsTrue(): void
     {
         $this->configuration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
 
@@ -5611,7 +5601,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function allowsRegistrationByDateForEventWithoutDateAndRegistrationForEventsWithoutDateNotAllowedIsFalse()
+    public function allowsRegistrationByDateForEventWithoutDateAndRegistrationForEventsWithoutDateNotAllowedIsFalse(): void
     {
         $this->configuration->setAsBoolean('allowRegistrationForEventsWithoutDate', false);
 
@@ -5625,7 +5615,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function allowsRegistrationByDateForBeginDateAndRegistrationDeadlineOverReturnsFalse()
+    public function allowsRegistrationByDateForBeginDateAndRegistrationDeadlineOverReturnsFalse(): void
     {
         $this->seminar->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
         $this->seminar->setRegistrationDeadline($GLOBALS['SIM_EXEC_TIME'] - 42);
@@ -5638,7 +5628,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function allowsRegistrationByDateForBeginDateAndRegistrationDeadlineInFutureReturnsTrue()
+    public function allowsRegistrationByDateForBeginDateAndRegistrationDeadlineInFutureReturnsTrue(): void
     {
         $this->seminar->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
         $this->seminar->setRegistrationDeadline($GLOBALS['SIM_EXEC_TIME'] + 42);
@@ -5651,7 +5641,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function allowsRegistrationByDateForRegistrationBeginInFutureReturnsFalse()
+    public function allowsRegistrationByDateForRegistrationBeginInFutureReturnsFalse(): void
     {
         $this->seminar->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
         $this->seminar->setRegistrationBeginDate($GLOBALS['SIM_EXEC_TIME'] + 10);
@@ -5664,7 +5654,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function allowsRegistrationByDateForRegistrationBeginInPastReturnsTrue()
+    public function allowsRegistrationByDateForRegistrationBeginInPastReturnsTrue(): void
     {
         $this->seminar->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
         $this->seminar->setRegistrationBeginDate($GLOBALS['SIM_EXEC_TIME'] - 42);
@@ -5677,7 +5667,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function allowsRegistrationByDateForNoRegistrationBeginReturnsTrue()
+    public function allowsRegistrationByDateForNoRegistrationBeginReturnsTrue(): void
     {
         $this->seminar->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
         $this->seminar->setRegistrationBeginDate(0);
@@ -5690,7 +5680,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function allowsRegistrationByDateForBeginDateInPastAndRegistrationBeginInPastReturnsFalse()
+    public function allowsRegistrationByDateForBeginDateInPastAndRegistrationBeginInPastReturnsFalse(): void
     {
         $this->seminar->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 42);
         $this->seminar->setRegistrationBeginDate($GLOBALS['SIM_EXEC_TIME'] - 50);
@@ -5705,7 +5695,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function allowsRegistrationBySeatsForEventWithNoVacanciesAndNoQueueReturnsFalse()
+    public function allowsRegistrationBySeatsForEventWithNoVacanciesAndNoQueueReturnsFalse(): void
     {
         $this->seminar->setNumberOfAttendances(1);
         $this->seminar->setAttendancesMax(1);
@@ -5719,7 +5709,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function allowsRegistrationBySeatsForEventWithUnlimitedVacanciesReturnsTrue()
+    public function allowsRegistrationBySeatsForEventWithUnlimitedVacanciesReturnsTrue(): void
     {
         $this->seminar->setUnlimitedVacancies();
 
@@ -5731,7 +5721,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function allowsRegistrationBySeatsForEventWithRegistrationQueueReturnsTrue()
+    public function allowsRegistrationBySeatsForEventWithRegistrationQueueReturnsTrue(): void
     {
         $this->seminar->setNumberOfAttendances(1);
         $this->seminar->setAttendancesMax(1);
@@ -5745,7 +5735,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function allowsRegistrationBySeatsForEventWithVacanciesReturnsTrue()
+    public function allowsRegistrationBySeatsForEventWithVacanciesReturnsTrue(): void
     {
         $this->seminar->setNumberOfAttendances(0);
         $this->seminar->setAttendancesMax(1);
@@ -5761,7 +5751,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function registrationHasStartedForEventWithoutRegistrationBeginReturnsTrue()
+    public function registrationHasStartedForEventWithoutRegistrationBeginReturnsTrue(): void
     {
         $this->seminar->setRegistrationBeginDate(0);
 
@@ -5773,7 +5763,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function registrationHasStartedForEventWithRegistrationBeginInPastReturnsTrue()
+    public function registrationHasStartedForEventWithRegistrationBeginInPastReturnsTrue(): void
     {
         $this->seminar->setRegistrationBeginDate(
             $GLOBALS['SIM_EXEC_TIME'] - 42
@@ -5787,7 +5777,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function registrationHasStartedForEventWithRegistrationBeginInFutureReturnsFalse()
+    public function registrationHasStartedForEventWithRegistrationBeginInFutureReturnsFalse(): void
     {
         $this->seminar->setRegistrationBeginDate(
             $GLOBALS['SIM_EXEC_TIME'] + 42
@@ -5806,7 +5796,7 @@ final class RegistrationManagerTest extends TestCase
      *
      * @test
      */
-    public function createRegistrationSavesRegistration()
+    public function createRegistrationSavesRegistration(): void
     {
         $this->createAndLogInFrontEndUser();
 
@@ -5842,7 +5832,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function createRegistrationIncreasesRegistrationCountInEventFromZeroToOne()
+    public function createRegistrationIncreasesRegistrationCountInEventFromZeroToOne(): void
     {
         $this->createAndLogInFrontEndUser();
 
@@ -5875,7 +5865,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function createRegistrationReturnsRegistration()
+    public function createRegistrationReturnsRegistration(): void
     {
         $this->createAndLogInFrontEndUser();
 
@@ -5912,7 +5902,7 @@ final class RegistrationManagerTest extends TestCase
      *
      * @test
      */
-    public function createRegistrationCreatesOldAndNewRegistrationModelForTheSameUid()
+    public function createRegistrationCreatesOldAndNewRegistrationModelForTheSameUid(): void
     {
         // Drops the non-saving mapper so that the registration mapper (once we use it) actually saves the registration.
         MapperRegistry::purgeInstance();
@@ -5957,7 +5947,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForPositiveSeatsSetsSeats()
+    public function setRegistrationDataForPositiveSeatsSetsSeats(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -5979,7 +5969,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForMissingSeatsSetsOneSeat()
+    public function setRegistrationDataForMissingSeatsSetsOneSeat(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6001,7 +5991,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForZeroSeatsSetsOneSeat()
+    public function setRegistrationDataForZeroSeatsSetsOneSeat(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6023,7 +6013,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForNegativeSeatsSetsOneSeat()
+    public function setRegistrationDataForNegativeSeatsSetsOneSeat(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6045,7 +6035,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForRegisteredThemselvesOneSetsItToTrue()
+    public function setRegistrationDataForRegisteredThemselvesOneSetsItToTrue(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6066,7 +6056,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForRegisteredThemselvesZeroSetsItToFalse()
+    public function setRegistrationDataForRegisteredThemselvesZeroSetsItToFalse(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6087,7 +6077,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForRegisteredThemselvesMissingSetsItToFalse()
+    public function setRegistrationDataForRegisteredThemselvesMissingSetsItToFalse(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6108,7 +6098,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForSelectedAvailablePricePutsSelectedPriceCodeToPrice()
+    public function setRegistrationDataForSelectedAvailablePricePutsSelectedPriceCodeToPrice(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6134,7 +6124,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForSelectedNotAvailablePricePutsFirstPriceCodeToPrice()
+    public function setRegistrationDataForSelectedNotAvailablePricePutsFirstPriceCodeToPrice(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6160,7 +6150,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForNoSelectedPricePutsFirstPriceCodeToPrice()
+    public function setRegistrationDataForNoSelectedPricePutsFirstPriceCodeToPrice(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6186,7 +6176,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForNoSelectedAndOnlyFreeRegularPriceAvailablePutsRegularPriceCodeToPrice()
+    public function setRegistrationDataForNoSelectedAndOnlyFreeRegularPriceAvailablePutsRegularPriceCodeToPrice(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6212,7 +6202,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForOneSeatsCalculatesTotalPriceFromSelectedPriceAndSeats()
+    public function setRegistrationDataForOneSeatsCalculatesTotalPriceFromSelectedPriceAndSeats(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6238,7 +6228,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForTwoSeatsCalculatesTotalPriceFromSelectedPriceAndSeats()
+    public function setRegistrationDataForTwoSeatsCalculatesTotalPriceFromSelectedPriceAndSeats(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6264,7 +6254,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForNonEmptyAttendeesNamesSetsAttendeesNames()
+    public function setRegistrationDataForNonEmptyAttendeesNamesSetsAttendeesNames(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6286,7 +6276,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataDropsHtmlTagsFromAttendeesNames()
+    public function setRegistrationDataDropsHtmlTagsFromAttendeesNames(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6308,7 +6298,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForEmptyAttendeesNamesSetsEmptyAttendeesNames()
+    public function setRegistrationDataForEmptyAttendeesNamesSetsEmptyAttendeesNames(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6330,7 +6320,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForMissingAttendeesNamesSetsEmptyAttendeesNames()
+    public function setRegistrationDataForMissingAttendeesNamesSetsEmptyAttendeesNames(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6352,7 +6342,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForPositiveKidsSetsNumberOfKids()
+    public function setRegistrationDataForPositiveKidsSetsNumberOfKids(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6374,7 +6364,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForMissingKidsSetsZeroKids()
+    public function setRegistrationDataForMissingKidsSetsZeroKids(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6396,7 +6386,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForZeroKidsSetsZeroKids()
+    public function setRegistrationDataForZeroKidsSetsZeroKids(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6418,7 +6408,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForNegativeKidsSetsZeroKids()
+    public function setRegistrationDataForNegativeKidsSetsZeroKids(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6440,7 +6430,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForSelectedAvailablePaymentMethodFromOneSetsIt()
+    public function setRegistrationDataForSelectedAvailablePaymentMethodFromOneSetsIt(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6468,7 +6458,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForSelectedAvailablePaymentMethodFromTwoSetsIt()
+    public function setRegistrationDataForSelectedAvailablePaymentMethodFromTwoSetsIt(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6498,7 +6488,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForSelectedAvailablePaymentMethodFromOneForFreeEventsSetsNoPaymentMethod()
+    public function setRegistrationDataForSelectedAvailablePaymentMethodFromOneForFreeEventsSetsNoPaymentMethod(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6525,7 +6515,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForMissingPaymentMethodAndNoneAvailableSetsNone()
+    public function setRegistrationDataForMissingPaymentMethodAndNoneAvailableSetsNone(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6551,7 +6541,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForMissingPaymentMethodAndTwoAvailableSetsNone()
+    public function setRegistrationDataForMissingPaymentMethodAndTwoAvailableSetsNone(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6580,7 +6570,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForMissingPaymentMethodAndOneAvailableSetsIt()
+    public function setRegistrationDataForMissingPaymentMethodAndOneAvailableSetsIt(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6608,7 +6598,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForUnavailablePaymentMethodAndTwoAvailableSetsNone()
+    public function setRegistrationDataForUnavailablePaymentMethodAndTwoAvailableSetsNone(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6640,7 +6630,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForUnavailablePaymentMethodAndOneAvailableSetsAvailable()
+    public function setRegistrationDataForUnavailablePaymentMethodAndOneAvailableSetsAvailable(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6668,7 +6658,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForNonEmptyAccountNumberSetsAccountNumber()
+    public function setRegistrationDataForNonEmptyAccountNumberSetsAccountNumber(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6687,7 +6677,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataDropsHtmlTagsFromAccountNumber()
+    public function setRegistrationDataDropsHtmlTagsFromAccountNumber(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6706,7 +6696,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataChangesWhitespaceToSpaceInAccountNumber()
+    public function setRegistrationDataChangesWhitespaceToSpaceInAccountNumber(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6728,7 +6718,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForEmptyAccountNumberSetsEmptyAccountNumber()
+    public function setRegistrationDataForEmptyAccountNumberSetsEmptyAccountNumber(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6747,7 +6737,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForMissingAccountNumberSetsEmptyAccountNumber()
+    public function setRegistrationDataForMissingAccountNumberSetsEmptyAccountNumber(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6766,7 +6756,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForNonEmptyBankCodeSetsBankCode()
+    public function setRegistrationDataForNonEmptyBankCodeSetsBankCode(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6785,7 +6775,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataDropsHtmlTagsFromBankCode()
+    public function setRegistrationDataDropsHtmlTagsFromBankCode(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6804,7 +6794,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataChangesWhitespaceToSpaceInBankCode()
+    public function setRegistrationDataChangesWhitespaceToSpaceInBankCode(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6826,7 +6816,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForEmptyBankCodeSetsEmptyBankCode()
+    public function setRegistrationDataForEmptyBankCodeSetsEmptyBankCode(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6845,7 +6835,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForMissingBankCodeSetsEmptyBankCode()
+    public function setRegistrationDataForMissingBankCodeSetsEmptyBankCode(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6864,7 +6854,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForNonEmptyBankNameSetsBankName()
+    public function setRegistrationDataForNonEmptyBankNameSetsBankName(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6883,7 +6873,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataDropsHtmlTagsFromBankName()
+    public function setRegistrationDataDropsHtmlTagsFromBankName(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6902,7 +6892,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataChangesWhitespaceToSpaceInBankName()
+    public function setRegistrationDataChangesWhitespaceToSpaceInBankName(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6924,7 +6914,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForEmptyBankNameSetsEmptyBankName()
+    public function setRegistrationDataForEmptyBankNameSetsEmptyBankName(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6943,7 +6933,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForMissingBankNameSetsEmptyBankName()
+    public function setRegistrationDataForMissingBankNameSetsEmptyBankName(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6962,7 +6952,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForNonEmptyAccountOwnerSetsAccountOwner()
+    public function setRegistrationDataForNonEmptyAccountOwnerSetsAccountOwner(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -6981,7 +6971,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataDropsHtmlTagsFromAccountOwner()
+    public function setRegistrationDataDropsHtmlTagsFromAccountOwner(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7000,7 +6990,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataChangesWhitespaceToSpaceInAccountOwner()
+    public function setRegistrationDataChangesWhitespaceToSpaceInAccountOwner(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7022,7 +7012,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForEmptyAccountOwnerSetsEmptyAccountOwner()
+    public function setRegistrationDataForEmptyAccountOwnerSetsEmptyAccountOwner(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7041,7 +7031,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForMissingAccountOwnerSetsEmptyAccountOwner()
+    public function setRegistrationDataForMissingAccountOwnerSetsEmptyAccountOwner(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7060,7 +7050,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForNonEmptyCompanySetsCompany()
+    public function setRegistrationDataForNonEmptyCompanySetsCompany(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7082,7 +7072,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataDropsHtmlTagsFromCompany()
+    public function setRegistrationDataDropsHtmlTagsFromCompany(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7101,7 +7091,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForEmptyCompanySetsEmptyCompany()
+    public function setRegistrationDataForEmptyCompanySetsEmptyCompany(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7120,7 +7110,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForMissingCompanySetsEmptyCompany()
+    public function setRegistrationDataForMissingCompanySetsEmptyCompany(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7139,7 +7129,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForMaleGenderSetsGender()
+    public function setRegistrationDataForMaleGenderSetsGender(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7161,7 +7151,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForFemaleGenderSetsGender()
+    public function setRegistrationDataForFemaleGenderSetsGender(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7183,7 +7173,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForInvalidIntegerGenderSetsUnknownGender()
+    public function setRegistrationDataForInvalidIntegerGenderSetsUnknownGender(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7202,7 +7192,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForInvalidStringGenderSetsUnknownGender()
+    public function setRegistrationDataForInvalidStringGenderSetsUnknownGender(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7221,7 +7211,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForEmptyGenderSetsUnknownGender()
+    public function setRegistrationDataForEmptyGenderSetsUnknownGender(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7240,7 +7230,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForMissingGenderSetsUnknownGender()
+    public function setRegistrationDataForMissingGenderSetsUnknownGender(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7259,7 +7249,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForNonEmptyNameSetsName()
+    public function setRegistrationDataForNonEmptyNameSetsName(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7278,7 +7268,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataDropsHtmlTagsFromName()
+    public function setRegistrationDataDropsHtmlTagsFromName(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7297,7 +7287,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataChangesWhitespaceToSpaceInName()
+    public function setRegistrationDataChangesWhitespaceToSpaceInName(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7316,7 +7306,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForEmptyNameSetsEmptyName()
+    public function setRegistrationDataForEmptyNameSetsEmptyName(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7335,7 +7325,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForMissingNameSetsEmptyName()
+    public function setRegistrationDataForMissingNameSetsEmptyName(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7354,7 +7344,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForNonEmptyAddressSetsAddress()
+    public function setRegistrationDataForNonEmptyAddressSetsAddress(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7373,7 +7363,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataDropsHtmlTagsFromAddress()
+    public function setRegistrationDataDropsHtmlTagsFromAddress(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7392,7 +7382,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForEmptyAddressSetsEmptyAddress()
+    public function setRegistrationDataForEmptyAddressSetsEmptyAddress(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7411,7 +7401,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForMissingAddressSetsEmptyAddress()
+    public function setRegistrationDataForMissingAddressSetsEmptyAddress(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7430,7 +7420,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForNonEmptyZipSetsZip()
+    public function setRegistrationDataForNonEmptyZipSetsZip(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7449,7 +7439,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataDropsHtmlTagsFromZip()
+    public function setRegistrationDataDropsHtmlTagsFromZip(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7468,7 +7458,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataChangesWhitespaceToSpaceInZip()
+    public function setRegistrationDataChangesWhitespaceToSpaceInZip(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7487,7 +7477,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForEmptyZipSetsEmptyZip()
+    public function setRegistrationDataForEmptyZipSetsEmptyZip(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7506,7 +7496,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForMissingZipSetsEmptyZip()
+    public function setRegistrationDataForMissingZipSetsEmptyZip(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7525,7 +7515,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForNonEmptyCitySetsCity()
+    public function setRegistrationDataForNonEmptyCitySetsCity(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7544,7 +7534,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataDropsHtmlTagsFromCity()
+    public function setRegistrationDataDropsHtmlTagsFromCity(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7563,7 +7553,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataChangesWhitespaceToSpaceInCity()
+    public function setRegistrationDataChangesWhitespaceToSpaceInCity(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7582,7 +7572,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForEmptyCitySetsEmptyCity()
+    public function setRegistrationDataForEmptyCitySetsEmptyCity(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7601,7 +7591,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForMissingCitySetsEmptyCity()
+    public function setRegistrationDataForMissingCitySetsEmptyCity(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7620,7 +7610,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForNonEmptyCountrySetsCountry()
+    public function setRegistrationDataForNonEmptyCountrySetsCountry(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7639,7 +7629,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataDropsHtmlTagsFromCountry()
+    public function setRegistrationDataDropsHtmlTagsFromCountry(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7658,7 +7648,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataChangesWhitespaceToSpaceInCountry()
+    public function setRegistrationDataChangesWhitespaceToSpaceInCountry(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7677,7 +7667,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForEmptyCountrySetsEmptyCountry()
+    public function setRegistrationDataForEmptyCountrySetsEmptyCountry(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7696,7 +7686,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function setRegistrationDataForMissingCountrySetsEmptyCountry()
+    public function setRegistrationDataForMissingCountrySetsEmptyCountry(): void
     {
         $subject = new TestingRegistrationManager();
 
@@ -7717,7 +7707,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function existsSeminarForZeroUidReturnsFalse()
+    public function existsSeminarForZeroUidReturnsFalse(): void
     {
         self::assertFalse(
             $this->subject->existsSeminar(0)
@@ -7727,7 +7717,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function existsSeminarForInexistentUidReturnsFalse()
+    public function existsSeminarForInexistentUidReturnsFalse(): void
     {
         self::assertFalse(
             $this->subject->existsSeminar($this->testingFramework->getAutoIncrement('tx_seminars_seminars'))
@@ -7737,7 +7727,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function existsSeminarForExistingDeleteUidReturnsFalse()
+    public function existsSeminarForExistingDeleteUidReturnsFalse(): void
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -7753,7 +7743,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function existsSeminarForExistingHiddenUidReturnsFalse()
+    public function existsSeminarForExistingHiddenUidReturnsFalse(): void
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -7769,7 +7759,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function existsSeminarForExistingUidReturnsTrue()
+    public function existsSeminarForExistingUidReturnsTrue(): void
     {
         self::assertTrue(
             $this->subject->existsSeminar($this->seminarUid)
@@ -7779,7 +7769,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function existsSeminarMessageForZeroUidReturnsErrorMessage()
+    public function existsSeminarMessageForZeroUidReturnsErrorMessage(): void
     {
         self::assertStringContainsString(
             $this->getLanguageService()->getLL('message_missingSeminarNumber'),
@@ -7790,7 +7780,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function existsSeminarMessageForZeroUidSendsNotFoundHeader()
+    public function existsSeminarMessageForZeroUidSendsNotFoundHeader(): void
     {
         $this->subject->existsSeminarMessage(0);
 
@@ -7803,7 +7793,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function existsSeminarMessageForInexistentUidReturnsErrorMessage()
+    public function existsSeminarMessageForInexistentUidReturnsErrorMessage(): void
     {
         self::assertStringContainsString(
             $this->getLanguageService()->getLL('message_wrongSeminarNumber'),
@@ -7814,7 +7804,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function existsSeminarMessageForInexistentUidSendsNotFoundHeader()
+    public function existsSeminarMessageForInexistentUidSendsNotFoundHeader(): void
     {
         $this->subject->existsSeminarMessage($this->testingFramework->getAutoIncrement('tx_seminars_seminars'));
 
@@ -7827,7 +7817,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function existsSeminarMessageForExistingDeleteUidReturnsErrorMessage()
+    public function existsSeminarMessageForExistingDeleteUidReturnsErrorMessage(): void
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -7844,7 +7834,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function existsSeminarMessageForExistingHiddenUidReturnsErrorMessage()
+    public function existsSeminarMessageForExistingHiddenUidReturnsErrorMessage(): void
     {
         $this->testingFramework->changeRecord(
             'tx_seminars_seminars',
@@ -7861,7 +7851,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function existsSeminarMessageForExistingUidReturnsEmptyString()
+    public function existsSeminarMessageForExistingUidReturnsEmptyString(): void
     {
         self::assertSame(
             '',
@@ -7872,7 +7862,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function existsSeminarMessageForExistingUidNotSendsHttpHeader()
+    public function existsSeminarMessageForExistingUidNotSendsHttpHeader(): void
     {
         $this->subject->existsSeminarMessage($this->seminarUid);
 
@@ -7887,7 +7877,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getPricesAvailableForUserForNoAutomaticPricesAndNoRegistrationsReturnsAllAvailablePrices()
+    public function getPricesAvailableForUserForNoAutomaticPricesAndNoRegistrationsReturnsAllAvailablePrices(): void
     {
         $this->subject->setConfigurationValue('automaticSpecialPriceForSubsequentRegistrationsBySameUser', false);
 
@@ -7915,7 +7905,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getPricesAvailableForUserForNoAutomaticPricesAndOneRegistrationReturnsAllAvailablePrices()
+    public function getPricesAvailableForUserForNoAutomaticPricesAndOneRegistrationReturnsAllAvailablePrices(): void
     {
         $this->subject->setConfigurationValue('automaticSpecialPriceForSubsequentRegistrationsBySameUser', false);
 
@@ -7945,7 +7935,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getPricesAvailableForUserForAutomaticPricesAndNoRegistrationsRemovesSpecialPrices()
+    public function getPricesAvailableForUserForAutomaticPricesAndNoRegistrationsRemovesSpecialPrices(): void
     {
         $this->subject->setConfigurationValue('automaticSpecialPriceForSubsequentRegistrationsBySameUser', true);
 
@@ -7973,7 +7963,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getPricesAvailableForUserForNoAutomaticPricesAndOneRegistrationRemovesRegularPrices()
+    public function getPricesAvailableForUserForNoAutomaticPricesAndOneRegistrationRemovesRegularPrices(): void
     {
         $this->subject->setConfigurationValue('automaticSpecialPriceForSubsequentRegistrationsBySameUser', true);
 
@@ -8003,7 +7993,7 @@ final class RegistrationManagerTest extends TestCase
     /**
      * @test
      */
-    public function getPricesAvailableForUserForNoAutomaticPricesAndOneRegistrationAndNoSpecialPriceKeepsRegularPrice()
+    public function getPricesAvailableForUserForNoAutomaticPricesAndOneRegistrationAndNoSpecialPriceKeepsRegularPrice(): void
     {
         $this->subject->setConfigurationValue('automaticSpecialPriceForSubsequentRegistrationsBySameUser', true);
 

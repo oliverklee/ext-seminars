@@ -24,7 +24,7 @@ final class EventMapperTest extends TestCase
      */
     private $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
         MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
@@ -32,7 +32,7 @@ final class EventMapperTest extends TestCase
         $this->subject = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
     }
@@ -42,7 +42,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getTimeSlotsReturnsListInstance()
+    public function getTimeSlotsReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
@@ -52,7 +52,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getTimeSlotsWithOneTimeSlotReturnsListOfTimeSlots()
+    public function getTimeSlotsWithOneTimeSlotReturnsListOfTimeSlots(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->testingFramework->createRecord(
@@ -75,7 +75,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getTimeSlotsWithOneTimeSlotReturnsOneTimeSlot()
+    public function getTimeSlotsWithOneTimeSlotReturnsOneTimeSlot(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $timeSlotUid = $this->testingFramework->createRecord(
@@ -100,7 +100,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getPlacesReturnsListInstance()
+    public function getPlacesReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
@@ -110,7 +110,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getPlacesWithOnePlaceReturnsListOfPlaces()
+    public function getPlacesWithOnePlaceReturnsListOfPlaces(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $place = MapperRegistry::get(\Tx_Seminars_Mapper_Place::class)
@@ -129,7 +129,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getPlacesWithOnePlaceReturnsOnePlace()
+    public function getPlacesWithOnePlaceReturnsOnePlace(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $place = MapperRegistry::get(\Tx_Seminars_Mapper_Place::class)
@@ -153,7 +153,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getLodgingsReturnsListInstance()
+    public function getLodgingsReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
@@ -163,7 +163,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getLodgingsWithOneLodgingReturnsListOfLodgings()
+    public function getLodgingsWithOneLodgingReturnsListOfLodgings(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $lodging = MapperRegistry::get(\Tx_Seminars_Mapper_Lodging::class)
@@ -182,7 +182,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getLodgingsWithOneLodgingReturnsOneLodging()
+    public function getLodgingsWithOneLodgingReturnsOneLodging(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $lodging = MapperRegistry::get(\Tx_Seminars_Mapper_Lodging::class)
@@ -206,7 +206,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getFoodsReturnsListInstance()
+    public function getFoodsReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
@@ -216,7 +216,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getFoodsWithOneFoodReturnsListOfFoods()
+    public function getFoodsWithOneFoodReturnsListOfFoods(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $food = MapperRegistry::get(\Tx_Seminars_Mapper_Food::class)
@@ -235,7 +235,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getFoodsWithOneFoodReturnsOneFood()
+    public function getFoodsWithOneFoodReturnsOneFood(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $food = MapperRegistry::get(\Tx_Seminars_Mapper_Food::class)
@@ -259,7 +259,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getSpeakersReturnsListInstance()
+    public function getSpeakersReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
@@ -269,7 +269,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getSpeakersWithOneSpeakerReturnsListOfSpeakers()
+    public function getSpeakersWithOneSpeakerReturnsListOfSpeakers(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $speaker = MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class)
@@ -291,7 +291,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getSpeakersWithOneSpeakerReturnsOneSpeaker()
+    public function getSpeakersWithOneSpeakerReturnsOneSpeaker(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $speaker = MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class)
@@ -315,7 +315,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getPartnersReturnsListInstance()
+    public function getPartnersReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
@@ -325,7 +325,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getPartnersWithOnePartnerReturnsListOfSpeakers()
+    public function getPartnersWithOnePartnerReturnsListOfSpeakers(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $speaker = MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class)
@@ -347,7 +347,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getPartnersWithOnePartnerReturnsOnePartner()
+    public function getPartnersWithOnePartnerReturnsOnePartner(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $speaker = MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class)
@@ -371,7 +371,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getTutorsReturnsListInstance()
+    public function getTutorsReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
@@ -381,7 +381,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getTutorsWithOneTutorReturnsListOfSpeakers()
+    public function getTutorsWithOneTutorReturnsListOfSpeakers(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $speaker = MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class)
@@ -403,7 +403,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getTutorsWithOneTutorReturnsOneTutor()
+    public function getTutorsWithOneTutorReturnsOneTutor(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $speaker = MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class)
@@ -427,7 +427,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getLeadersReturnsListInstance()
+    public function getLeadersReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
@@ -437,7 +437,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getLeadersWithOneLeaderReturnsListOfSpeakers()
+    public function getLeadersWithOneLeaderReturnsListOfSpeakers(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $speaker = MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class)
@@ -459,7 +459,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getLeadersWithOneLeaderReturnsOneLeader()
+    public function getLeadersWithOneLeaderReturnsOneLeader(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $speaker = MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class)
@@ -483,7 +483,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getOrganizersReturnsListInstance()
+    public function getOrganizersReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
@@ -493,7 +493,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getOrganizersWithOneOrganizerReturnsListOfOrganizers()
+    public function getOrganizersWithOneOrganizerReturnsListOfOrganizers(): void
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -514,7 +514,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getOrganizersWithOneOrganizerReturnsOneOrganizer()
+    public function getOrganizersWithOneOrganizerReturnsOneOrganizer(): void
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -540,7 +540,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getOrganizingPartnersReturnsListInstance()
+    public function getOrganizingPartnersReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
@@ -550,7 +550,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getOrganizingPartnersWithOneOrganizingReturnsListOfOrganizers()
+    public function getOrganizingPartnersWithOneOrganizingReturnsListOfOrganizers(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $organizer = MapperRegistry::get(\Tx_Seminars_Mapper_Organizer::class)
@@ -569,7 +569,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getOrganizingPartnersWithOneOrganizingPartnersReturnsOneOrganizingPartner()
+    public function getOrganizingPartnersWithOneOrganizingPartnersReturnsOneOrganizingPartner(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $organizer = MapperRegistry::get(\Tx_Seminars_Mapper_Organizer::class)
@@ -593,7 +593,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getOwnerWithoutOwnerReturnsNull()
+    public function getOwnerWithoutOwnerReturnsNull(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
@@ -603,7 +603,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getOwnerWithOwnerReturnsOwnerInstance()
+    public function getOwnerWithOwnerReturnsOwnerInstance(): void
     {
         $frontEndUser = MapperRegistry::get(FrontEndUserMapper::class)
             ->getLoadedTestingModel([]);
@@ -617,7 +617,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getEventManagersReturnsListInstance()
+    public function getEventManagersReturnsListInstance(): void
     {
         $testingModel = $this->subject->getLoadedTestingModel([]);
 
@@ -627,7 +627,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getEventManagersWithOneEventManagerReturnsListOfFrontEndUsers()
+    public function getEventManagersWithOneEventManagerReturnsListOfFrontEndUsers(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $frontEndUser = MapperRegistry::get(FrontEndUserMapper::class)->getNewGhost();
@@ -645,7 +645,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getEventManagersWithOneEventManagerReturnsOneEventManager()
+    public function getEventManagersWithOneEventManagerReturnsOneEventManager(): void
     {
         $uid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $frontEndUser = MapperRegistry::get(FrontEndUserMapper::class)->getNewGhost();
@@ -668,7 +668,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function findByPublicationHashForEmptyPublicationHashGivenThrowsException()
+    public function findByPublicationHashForEmptyPublicationHashGivenThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -683,7 +683,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function findByPublicationForEventWithProvidedPublicationHashReturnsThisEvent()
+    public function findByPublicationForEventWithProvidedPublicationHashReturnsThisEvent(): void
     {
         $publicationHash = 'blubb';
 
@@ -701,7 +701,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function findByPublicationForNoEventWithProvidedPublicationHashReturnsNull()
+    public function findByPublicationForNoEventWithProvidedPublicationHashReturnsNull(): void
     {
         $this->testingFramework->createRecord('tx_seminars_seminars');
 
@@ -713,7 +713,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function findByPublicationForEventWithProvidedPublicationHashReturnsEventModel()
+    public function findByPublicationForEventWithProvidedPublicationHashReturnsEventModel(): void
     {
         $publicationHash = 'blubb';
 
@@ -735,7 +735,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function getRegistrationsWithOneRegistrationReturnsOneRegistration()
+    public function getRegistrationsWithOneRegistrationReturnsOneRegistration(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -761,7 +761,7 @@ final class EventMapperTest extends TestCase
      * @doesNotPerformAssertions
      * @group findAllByBeginDate
      */
-    public function findAllByBeginDateForPositiveSameMinimumAndMaximumNotThrowsException()
+    public function findAllByBeginDateForPositiveSameMinimumAndMaximumNotThrowsException(): void
     {
         $this->subject->findAllByBeginDate(42, 42);
     }
@@ -772,7 +772,7 @@ final class EventMapperTest extends TestCase
      * @doesNotPerformAssertions
      * @group findAllByBeginDate
      */
-    public function findAllByBeginDateForZeroMinimumAndPositiveMaximumNotThrowsException()
+    public function findAllByBeginDateForZeroMinimumAndPositiveMaximumNotThrowsException(): void
     {
         $this->subject->findAllByBeginDate(0, 1);
     }
@@ -781,7 +781,7 @@ final class EventMapperTest extends TestCase
      * @test
      * @group findAllByBeginDate
      */
-    public function findAllByBeginDateForZeroMinimumAndZeroMaximumThrowsException()
+    public function findAllByBeginDateForZeroMinimumAndZeroMaximumThrowsException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -794,7 +794,7 @@ final class EventMapperTest extends TestCase
      * @doesNotPerformAssertions
      * @group findAllByBeginDate
      */
-    public function findAllByBeginDateForMinimumSmallerThanMaximumNotThrowsException()
+    public function findAllByBeginDateForMinimumSmallerThanMaximumNotThrowsException(): void
     {
         $this->subject->findAllByBeginDate(1, 2);
     }
@@ -803,7 +803,7 @@ final class EventMapperTest extends TestCase
      * @test
      * @group findAllByBeginDate
      */
-    public function findAllByBeginDateForNegativeMinimumSmallerThanMaximumThrowsException()
+    public function findAllByBeginDateForNegativeMinimumSmallerThanMaximumThrowsException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -814,7 +814,7 @@ final class EventMapperTest extends TestCase
      * @test
      * @group findAllByBeginDate
      */
-    public function findAllByBeginDateForMinimumGreaterThanMaximumThrowsException()
+    public function findAllByBeginDateForMinimumGreaterThanMaximumThrowsException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -825,7 +825,7 @@ final class EventMapperTest extends TestCase
      * @test
      * @group findAllByBeginDate
      */
-    public function findAllByBeginDateNotFindsEventWithBeginDateSmallerThanMinimum()
+    public function findAllByBeginDateNotFindsEventWithBeginDateSmallerThanMinimum(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -841,7 +841,7 @@ final class EventMapperTest extends TestCase
      * @test
      * @group findAllByBeginDate
      */
-    public function findAllByBeginDateFindsEventWithBeginDateEqualToMinimum()
+    public function findAllByBeginDateFindsEventWithBeginDateEqualToMinimum(): void
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -857,7 +857,7 @@ final class EventMapperTest extends TestCase
      * @test
      * @group findAllByBeginDate
      */
-    public function findAllByBeginDateFindsEventWithBeginDateBetweenMinimumAndMaximum()
+    public function findAllByBeginDateFindsEventWithBeginDateBetweenMinimumAndMaximum(): void
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -873,7 +873,7 @@ final class EventMapperTest extends TestCase
      * @test
      * @group findAllByBeginDate
      */
-    public function findAllByBeginDateFindsEventWithBeginDateEqualToMaximum()
+    public function findAllByBeginDateFindsEventWithBeginDateEqualToMaximum(): void
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -889,7 +889,7 @@ final class EventMapperTest extends TestCase
      * @test
      * @group findAllByBeginDate
      */
-    public function findAllByBeginDateNotFindsEventWithBeginDateGreaterThanMaximum()
+    public function findAllByBeginDateNotFindsEventWithBeginDateGreaterThanMaximum(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -905,7 +905,7 @@ final class EventMapperTest extends TestCase
      * @test
      * @group findAllByBeginDate
      */
-    public function findAllByBeginDateCanFindEventWithZeroBeginDate()
+    public function findAllByBeginDateCanFindEventWithZeroBeginDate(): void
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -921,7 +921,7 @@ final class EventMapperTest extends TestCase
      * @test
      * @group findAllByBeginDate
      */
-    public function findAllByBeginDateCanFindTwoEvents()
+    public function findAllByBeginDateCanFindTwoEvents(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -945,7 +945,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function findNextUpcomingWithNoEventsThrowsEmptyQueryResultException()
+    public function findNextUpcomingWithNoEventsThrowsEmptyQueryResultException(): void
     {
         $this->expectException(NotFoundException::class);
 
@@ -955,7 +955,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function findNextUpcomingWithPastEventThrowsEmptyQueryResultException()
+    public function findNextUpcomingWithPastEventThrowsEmptyQueryResultException(): void
     {
         $this->expectException(NotFoundException::class);
 
@@ -970,7 +970,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function findNextUpcomingWithUpcomingEventReturnsModelOfUpcomingEvent()
+    public function findNextUpcomingWithUpcomingEventReturnsModelOfUpcomingEvent(): void
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -986,7 +986,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function findNextUpcomingWithTwoUpcomingEventsReturnsOnlyModelOfNextUpcomingEvent()
+    public function findNextUpcomingWithTwoUpcomingEventsReturnsOnlyModelOfNextUpcomingEvent(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1008,7 +1008,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function findForAutomaticStatusChangeForNoEventsReturnsEmptyList()
+    public function findForAutomaticStatusChangeForNoEventsReturnsEmptyList(): void
     {
         $result = $this->subject->findForAutomaticStatusChange();
 
@@ -1019,7 +1019,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function findForAutomaticStatusChangeFindsPlannedEventWithAutomaticStatusChange()
+    public function findForAutomaticStatusChangeFindsPlannedEventWithAutomaticStatusChange(): void
     {
         $uid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1035,7 +1035,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function findForAutomaticStatusChangeNotFindsCanceledEventWithAutomaticStatusChange()
+    public function findForAutomaticStatusChangeNotFindsCanceledEventWithAutomaticStatusChange(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1050,7 +1050,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function findForAutomaticStatusChangeNotFindsConfirmedEventWithAutomaticStatusChange()
+    public function findForAutomaticStatusChangeNotFindsConfirmedEventWithAutomaticStatusChange(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -1065,7 +1065,7 @@ final class EventMapperTest extends TestCase
     /**
      * @test
      */
-    public function findForAutomaticStatusChangeNotFindsPlannedEventWithoutAutomaticStatusChange()
+    public function findForAutomaticStatusChangeNotFindsPlannedEventWithoutAutomaticStatusChange(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',

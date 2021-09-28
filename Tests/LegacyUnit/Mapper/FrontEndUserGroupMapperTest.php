@@ -22,13 +22,13 @@ final class FrontEndUserGroupMapperTest extends TestCase
      */
     private $testingFramework = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new \Tx_Seminars_Mapper_FrontEndUserGroup();
         $this->testingFramework = new TestingFramework('tx_seminars');
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
     }
@@ -40,7 +40,7 @@ final class FrontEndUserGroupMapperTest extends TestCase
     /**
      * @test
      */
-    public function mapperForGhostReturnsSeminarsFrontEndUserGroupInstance()
+    public function mapperForGhostReturnsSeminarsFrontEndUserGroupInstance(): void
     {
         self::assertInstanceOf(\Tx_Seminars_Model_FrontEndUserGroup::class, $this->subject->getNewGhost());
     }
@@ -50,7 +50,7 @@ final class FrontEndUserGroupMapperTest extends TestCase
     /**
      * @test
      */
-    public function frontEndUserGroupCanReturnBackEndUserModel()
+    public function frontEndUserGroupCanReturnBackEndUserModel(): void
     {
         $backEndUser = MapperRegistry::get(BackEndUserMapper::class)->getNewGhost();
         $frontEndUserGroup = $this->subject->getLoadedTestingModel(
@@ -67,7 +67,7 @@ final class FrontEndUserGroupMapperTest extends TestCase
     /**
      * @test
      */
-    public function frontEndUserGroupReturnsListOfCategories()
+    public function frontEndUserGroupReturnsListOfCategories(): void
     {
         $categoryUid = $this->testingFramework->createRecord(
             'tx_seminars_categories'
@@ -90,7 +90,7 @@ final class FrontEndUserGroupMapperTest extends TestCase
     /**
      * @test
      */
-    public function getDefaultOrganizerForExistingOrganizerReturnsOrganizer()
+    public function getDefaultOrganizerForExistingOrganizerReturnsOrganizer(): void
     {
         $organizerUid = $this->testingFramework->createRecord(
             'tx_seminars_organizers'

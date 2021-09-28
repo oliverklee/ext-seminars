@@ -35,7 +35,7 @@ final class EventListViewTest extends TestCase
      */
     private $pageUid = 0;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
@@ -53,7 +53,7 @@ final class EventListViewTest extends TestCase
         $this->subject = new EventListView();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
     }
@@ -102,7 +102,7 @@ final class EventListViewTest extends TestCase
      *
      * @doesNotPerformAssertions
      */
-    public function setPageUidWithPositivePageUidNotThrowsException()
+    public function setPageUidWithPositivePageUidNotThrowsException(): void
     {
         $this->subject->setPageUid($this->testingFramework->createSystemFolder());
     }
@@ -110,7 +110,7 @@ final class EventListViewTest extends TestCase
     /**
      * @test
      */
-    public function setPageUidWithZeroPageUidThrowsException()
+    public function setPageUidWithZeroPageUidThrowsException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -120,7 +120,7 @@ final class EventListViewTest extends TestCase
     /**
      * @test
      */
-    public function setPageUidWithNegativePageUidThrowsException()
+    public function setPageUidWithNegativePageUidThrowsException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
@@ -130,7 +130,7 @@ final class EventListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderIsEmptyForNoPageUid()
+    public function renderIsEmptyForNoPageUid(): void
     {
         self::assertSame(
             '',
@@ -141,7 +141,7 @@ final class EventListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderForZeroRecordsAndSeparatorDisabledReturnsOnlyHeader()
+    public function renderForZeroRecordsAndSeparatorDisabledReturnsOnlyHeader(): void
     {
         $pageUid = $this->testingFramework->createSystemFolder();
         $this->subject->setPageUid($pageUid);
@@ -159,7 +159,7 @@ final class EventListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderForZeroRecordsAndSeparatorEnabledReturnsOnlySeparatorSpecificationAndHeader()
+    public function renderForZeroRecordsAndSeparatorEnabledReturnsOnlySeparatorSpecificationAndHeader(): void
     {
         $pageUid = $this->testingFramework->createSystemFolder();
         $this->subject->setPageUid($pageUid);
@@ -178,7 +178,7 @@ final class EventListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderCanContainOneEventUid()
+    public function renderCanContainOneEventUid(): void
     {
         $eventUid = $this->createEventInFolderAndSetPageUid();
 
@@ -193,7 +193,7 @@ final class EventListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderCanContainEventFromSubFolder()
+    public function renderCanContainEventFromSubFolder(): void
     {
         $pageUid = $this->testingFramework->createSystemFolder();
         $this->subject->setPageUid($pageUid);
@@ -215,7 +215,7 @@ final class EventListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderCanContainTwoEventUids()
+    public function renderCanContainTwoEventUids(): void
     {
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'uid');
 
@@ -240,7 +240,7 @@ final class EventListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderSeparatesLinesWithCarriageReturnsAndLineFeeds()
+    public function renderSeparatesLinesWithCarriageReturnsAndLineFeeds(): void
     {
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'uid');
 
@@ -261,7 +261,7 @@ final class EventListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderHasResultEndingWithCarriageReturnAndLineFeed()
+    public function renderHasResultEndingWithCarriageReturnAndLineFeed(): void
     {
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'uid');
 
@@ -280,7 +280,7 @@ final class EventListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderNotWrapsRegularValuesWithDoubleQuotes()
+    public function renderNotWrapsRegularValuesWithDoubleQuotes(): void
     {
         $this->createEventInFolderAndSetPageUid(['title' => 'bar']);
 
@@ -295,7 +295,7 @@ final class EventListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderEscapesDoubleQuotes()
+    public function renderEscapesDoubleQuotes(): void
     {
         $this->createEventInFolderAndSetPageUid(['description' => 'foo " bar']);
 
@@ -310,7 +310,7 @@ final class EventListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderWrapsValuesWithLineFeedsInDoubleQuotes()
+    public function renderWrapsValuesWithLineFeedsInDoubleQuotes(): void
     {
         $this->createEventInFolderAndSetPageUid(['title' => "foo\nbar"]);
 
@@ -325,7 +325,7 @@ final class EventListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderWrapsValuesWithDoubleQuotesInDoubleQuotes()
+    public function renderWrapsValuesWithDoubleQuotesInDoubleQuotes(): void
     {
         $this->createEventInFolderAndSetPageUid(['title' => 'foo " bar']);
 
@@ -340,7 +340,7 @@ final class EventListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderWrapsValuesWithSemicolonsInDoubleQuotes()
+    public function renderWrapsValuesWithSemicolonsInDoubleQuotes(): void
     {
         $this->createEventInFolderAndSetPageUid(['title' => 'foo ; bar']);
 
@@ -355,7 +355,7 @@ final class EventListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderSeparatesValuesWithSemicolons()
+    public function renderSeparatesValuesWithSemicolons(): void
     {
         $this->createEventInFolderAndSetPageUid(['description' => 'foo', 'title' => 'bar']);
 
@@ -370,7 +370,7 @@ final class EventListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderNotWrapsHeadlineFieldsInDoubleQuotes()
+    public function renderNotWrapsHeadlineFieldsInDoubleQuotes(): void
     {
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'description,title');
         $this->createEventInFolderAndSetPageUid();
@@ -391,7 +391,7 @@ final class EventListViewTest extends TestCase
     /**
      * @test
      */
-    public function renderSeparatesHeadlineFieldsWithSemicolons()
+    public function renderSeparatesHeadlineFieldsWithSemicolons(): void
     {
         $this->configuration->setAsString('fieldsFromEventsForCsv', 'description,title');
         $this->createEventInFolderAndSetPageUid();

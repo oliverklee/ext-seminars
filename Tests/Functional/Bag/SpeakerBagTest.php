@@ -19,7 +19,7 @@ final class SpeakerBagTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function canHaveAtLeastOneElement()
+    public function canHaveAtLeastOneElement(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 
@@ -31,7 +31,7 @@ final class SpeakerBagTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function containsVisibleSpeakers()
+    public function containsVisibleSpeakers(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 
@@ -43,7 +43,7 @@ final class SpeakerBagTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function byDefaultIgnoresHiddenSpeakers()
+    public function byDefaultIgnoresHiddenSpeakers(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 
@@ -55,7 +55,7 @@ final class SpeakerBagTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function withShowHiddenRecordsSetToMinusOneIgnoresHiddenSpeakers()
+    public function withShowHiddenRecordsSetToMinusOneIgnoresHiddenSpeakers(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 
@@ -67,7 +67,7 @@ final class SpeakerBagTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function withShowHiddenRecordsSetToOneFindsHiddenSpeakers()
+    public function withShowHiddenRecordsSetToOneFindsHiddenSpeakers(): void
     {
         $this->importDataSet(__DIR__ . '/Fixtures/Speakers.xml');
 

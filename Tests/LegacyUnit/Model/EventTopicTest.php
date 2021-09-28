@@ -15,7 +15,7 @@ final class EventTopicTest extends TestCase
      */
     private $subject;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
@@ -29,7 +29,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getTitleWithNonEmptyTitleReturnsTitle()
+    public function getTitleWithNonEmptyTitleReturnsTitle(): void
     {
         $this->subject->setData(['title' => 'Superhero']);
 
@@ -42,7 +42,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getRawTitleWithNonEmptyTitleReturnsTitle()
+    public function getRawTitleWithNonEmptyTitleReturnsTitle(): void
     {
         $this->subject->setData(['title' => 'Superhero']);
 
@@ -59,7 +59,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getSubtitleForEventTopicWithoutSubtitleReturnsAnEmptyString()
+    public function getSubtitleForEventTopicWithoutSubtitleReturnsAnEmptyString(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -74,7 +74,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getSubtitleForEventTopicWithSubtitleReturnsSubtitle()
+    public function getSubtitleForEventTopicWithSubtitleReturnsSubtitle(): void
     {
         $this->subject->setData(
             [
@@ -92,7 +92,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function setSubtitleForEventTopicSetsSubtitle()
+    public function setSubtitleForEventTopicSetsSubtitle(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -108,7 +108,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function hasSubtitleForEventTopicWithoutSubtitleReturnsFalse()
+    public function hasSubtitleForEventTopicWithoutSubtitleReturnsFalse(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -122,7 +122,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function hasSubtitleForEventTopicWithSubtitleReturnsTrue()
+    public function hasSubtitleForEventTopicWithSubtitleReturnsTrue(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -141,7 +141,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getTeaserForEventTopicWithoutTeaserReturnsAnEmptyString()
+    public function getTeaserForEventTopicWithoutTeaserReturnsAnEmptyString(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -156,7 +156,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getTeaserForEventTopicWithTeaserReturnsTeaser()
+    public function getTeaserForEventTopicWithTeaserReturnsTeaser(): void
     {
         $this->subject->setData(
             [
@@ -174,7 +174,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function setTeaserForEventTopicSetsTeaser()
+    public function setTeaserForEventTopicSetsTeaser(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -190,7 +190,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function hasTeaserForEventTopicWithoutTeaserReturnsFalse()
+    public function hasTeaserForEventTopicWithoutTeaserReturnsFalse(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -204,7 +204,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function hasTeaserForEventTopicWithTeaserReturnsTrue()
+    public function hasTeaserForEventTopicWithTeaserReturnsTrue(): void
     {
         $this->subject->setData(
             [
@@ -225,7 +225,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getDescriptionForEventTopicWithoutDescriptionReturnsAnEmptyString()
+    public function getDescriptionForEventTopicWithoutDescriptionReturnsAnEmptyString(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -240,7 +240,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getDescriptionForEventTopicWithDescriptionReturnsDescription()
+    public function getDescriptionForEventTopicWithDescriptionReturnsDescription(): void
     {
         $this->subject->setData(
             [
@@ -258,7 +258,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function setDescriptionForEventTopicSetsDescription()
+    public function setDescriptionForEventTopicSetsDescription(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -274,7 +274,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function hasDescriptionForEventTopicWithoutDescriptionReturnsFalse()
+    public function hasDescriptionForEventTopicWithoutDescriptionReturnsFalse(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -288,7 +288,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function hasDescriptionForEventTopicWithDescriptionReturnsTrue()
+    public function hasDescriptionForEventTopicWithDescriptionReturnsTrue(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -307,7 +307,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getCreditPointsForEventTopicWithoutCreditPointsReturnsZero()
+    public function getCreditPointsForEventTopicWithoutCreditPointsReturnsZero(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -322,7 +322,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getCreditPointsForEventTopicWithPositiveCreditPointsReturnsCreditPoints()
+    public function getCreditPointsForEventTopicWithPositiveCreditPointsReturnsCreditPoints(): void
     {
         $this->subject->setData(
             [
@@ -340,7 +340,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function setCreditPointsForEventTopicWithZeroCreditPointsSetsCreditPoints()
+    public function setCreditPointsForEventTopicWithZeroCreditPointsSetsCreditPoints(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -356,7 +356,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function setCreditPointsForEventTopicWithPositiveCreditPointsSetsCreditPoints()
+    public function setCreditPointsForEventTopicWithPositiveCreditPointsSetsCreditPoints(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -372,7 +372,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function hasCreditPointsForEventTopicWithoutCreditPointsReturnsFalse()
+    public function hasCreditPointsForEventTopicWithoutCreditPointsReturnsFalse(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -386,7 +386,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function hasCreditPointsForEventTopicWithCreditPointsReturnsTrue()
+    public function hasCreditPointsForEventTopicWithCreditPointsReturnsTrue(): void
     {
         $this->subject->setData(
             [
@@ -407,7 +407,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getRegularPriceForEventTopicWithoutRegularPriceReturnsZero()
+    public function getRegularPriceForEventTopicWithoutRegularPriceReturnsZero(): void
     {
         $this->subject->setData(
             [
@@ -425,7 +425,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getRegularPriceForEventTopicWithPositiveRegularPriceReturnsRegularPrice()
+    public function getRegularPriceForEventTopicWithPositiveRegularPriceReturnsRegularPrice(): void
     {
         $this->subject->setData(
             [
@@ -443,7 +443,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function setRegularPriceForEventTopicWithZeroRegularPriceSetsRegularPrice()
+    public function setRegularPriceForEventTopicWithZeroRegularPriceSetsRegularPrice(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -459,7 +459,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function setRegularPriceForEventTopicWithPositiveRegularPriceSetsRegularPrice()
+    public function setRegularPriceForEventTopicWithPositiveRegularPriceSetsRegularPrice(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -475,7 +475,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function hasRegularPriceForEventTopicWithoutRegularPriceReturnsFalse()
+    public function hasRegularPriceForEventTopicWithoutRegularPriceReturnsFalse(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -489,7 +489,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function hasRegularPriceForEventTopicWithRegularPriceReturnsTrue()
+    public function hasRegularPriceForEventTopicWithRegularPriceReturnsTrue(): void
     {
         $this->subject->setData(
             [
@@ -510,7 +510,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getRegularEarlyBirdPriceForEventTopicWithoutRegularEarlyBirdPriceReturnsZero()
+    public function getRegularEarlyBirdPriceForEventTopicWithoutRegularEarlyBirdPriceReturnsZero(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -525,7 +525,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getRegularEarlyBirdPriceForEventTopicWithPositiveRegularEarlyBirdPriceReturnsRegularEarlyBirdPrice()
+    public function getRegularEarlyBirdPriceForEventTopicWithPositiveRegularEarlyBirdPriceReturnsRegularEarlyBirdPrice(): void
     {
         $this->subject->setData(
             [
@@ -543,7 +543,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function setRegularEarlyBirdPriceForEventTopicWithNegativeRegularEarlyBirdPriceThrowsException()
+    public function setRegularEarlyBirdPriceForEventTopicWithNegativeRegularEarlyBirdPriceThrowsException(): void
     {
         $this->expectException(
             \InvalidArgumentException::class
@@ -558,7 +558,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function setRegularEarlyBirdPriceForEventTopicWithZeroRegularEarlyBirdPriceSetsRegularEarlyBirdPrice()
+    public function setRegularEarlyBirdPriceForEventTopicWithZeroRegularEarlyBirdPriceSetsRegularEarlyBirdPrice(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -574,7 +574,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function setRegularEarlyBirdPriceForEventTopicWithPositiveRegularEarlyBirdPriceSetsRegularEarlyBirdPrice()
+    public function setRegularEarlyBirdPriceForEventTopicWithPositiveRegularEarlyBirdPriceSetsRegularEarlyBirdPrice(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -590,7 +590,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function hasRegularEarlyBirdPriceForEventTopicWithoutRegularEarlyBirdPriceReturnsFalse()
+    public function hasRegularEarlyBirdPriceForEventTopicWithoutRegularEarlyBirdPriceReturnsFalse(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -604,7 +604,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function hasRegularEarlyBirdPriceForEventTopicWithRegularEarlyBirdPriceReturnsTrue()
+    public function hasRegularEarlyBirdPriceForEventTopicWithRegularEarlyBirdPriceReturnsTrue(): void
     {
         $this->subject->setData(
             [
@@ -625,7 +625,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getRegularBoardPriceForEventTopicWithoutRegularBoardPriceReturnsZero()
+    public function getRegularBoardPriceForEventTopicWithoutRegularBoardPriceReturnsZero(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -640,7 +640,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getRegularBoardPriceForEventTopicWithPositiveRegularBoardPriceReturnsRegularBoardPrice()
+    public function getRegularBoardPriceForEventTopicWithPositiveRegularBoardPriceReturnsRegularBoardPrice(): void
     {
         $this->subject->setData(
             [
@@ -658,7 +658,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function setRegularBoardPriceForEventTopicWithZeroRegularBoardPriceSetsRegularBoardPrice()
+    public function setRegularBoardPriceForEventTopicWithZeroRegularBoardPriceSetsRegularBoardPrice(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -674,7 +674,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function setRegularBoardPriceForEventTopicWithPositiveRegularBoardPriceSetsRegularBoardPrice()
+    public function setRegularBoardPriceForEventTopicWithPositiveRegularBoardPriceSetsRegularBoardPrice(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -690,7 +690,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function hasRegularBoardPriceForEventTopicWithoutRegularBoardPriceReturnsFalse()
+    public function hasRegularBoardPriceForEventTopicWithoutRegularBoardPriceReturnsFalse(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -704,7 +704,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function hasRegularBoardPriceForEventTopicWithRegularBoardPriceReturnsTrue()
+    public function hasRegularBoardPriceForEventTopicWithRegularBoardPriceReturnsTrue(): void
     {
         $this->subject->setData(
             [
@@ -725,7 +725,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getSpecialPriceForEventTopicWithoutSpecialPriceReturnsZero()
+    public function getSpecialPriceForEventTopicWithoutSpecialPriceReturnsZero(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -740,7 +740,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getSpecialPriceForEventTopicWithSpecialPriceReturnsSpecialPrice()
+    public function getSpecialPriceForEventTopicWithSpecialPriceReturnsSpecialPrice(): void
     {
         $this->subject->setData(
             [
@@ -758,7 +758,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function setSpecialPriceForEventTopicWithZeroSpecialPriceSetsSpecialPrice()
+    public function setSpecialPriceForEventTopicWithZeroSpecialPriceSetsSpecialPrice(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -774,7 +774,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function setSpecialPriceForEventTopicWithPositiveSpecialPriceSetsSpecialPrice()
+    public function setSpecialPriceForEventTopicWithPositiveSpecialPriceSetsSpecialPrice(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -790,7 +790,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function hasSpecialPriceForEventTopicWithoutSpecialPriceReturnsFalse()
+    public function hasSpecialPriceForEventTopicWithoutSpecialPriceReturnsFalse(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -804,7 +804,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function hasSpecialPriceForEventTopicWithSpecialPriceReturnsTrue()
+    public function hasSpecialPriceForEventTopicWithSpecialPriceReturnsTrue(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -823,7 +823,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getSpecialEarlyBirdPriceForEventTopicWithoutSpecialEarlyBirdPriceReturnsZero()
+    public function getSpecialEarlyBirdPriceForEventTopicWithoutSpecialEarlyBirdPriceReturnsZero(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -838,7 +838,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getSpecialEarlyBirdPriceForEventTopicWithPositiveSpecialEarlyBirdPriceReturnsSpecialEarlyBirdPrice()
+    public function getSpecialEarlyBirdPriceForEventTopicWithPositiveSpecialEarlyBirdPriceReturnsSpecialEarlyBirdPrice(): void
     {
         $this->subject->setData(
             [
@@ -856,7 +856,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function setSpecialEarlyBirdPriceForEventTopicWithZeroSpecialEarlyBirdPriceSetsSpecialEarlyBirdPrice()
+    public function setSpecialEarlyBirdPriceForEventTopicWithZeroSpecialEarlyBirdPriceSetsSpecialEarlyBirdPrice(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -872,7 +872,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function setSpecialEarlyBirdPriceForEventTopicWithPositiveSpecialEarlyBirdPriceSetsSpecialEarlyBirdPrice()
+    public function setSpecialEarlyBirdPriceForEventTopicWithPositiveSpecialEarlyBirdPriceSetsSpecialEarlyBirdPrice(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -888,7 +888,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function hasSpecialEarlyBirdPriceForEventTopicWithoutSpecialEarlyBirdPriceReturnsFalse()
+    public function hasSpecialEarlyBirdPriceForEventTopicWithoutSpecialEarlyBirdPriceReturnsFalse(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -902,7 +902,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function hasSpecialEarlyBirdPriceForEventTopicWithSpecialEarlyBirdPriceReturnsTrue()
+    public function hasSpecialEarlyBirdPriceForEventTopicWithSpecialEarlyBirdPriceReturnsTrue(): void
     {
         $this->subject->setData(
             [
@@ -923,7 +923,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getSpecialBoardPriceForEventTopicWithoutSpecialBoardPriceReturnsZero()
+    public function getSpecialBoardPriceForEventTopicWithoutSpecialBoardPriceReturnsZero(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -938,7 +938,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getSpecialBoardPriceForEventTopicWithSpecialBoardPriceReturnsSpecialBoardPrice()
+    public function getSpecialBoardPriceForEventTopicWithSpecialBoardPriceReturnsSpecialBoardPrice(): void
     {
         $this->subject->setData(
             [
@@ -956,7 +956,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function setSpecialBoardPriceForEventTopicWithZeroSpecialBoardPriceSetsSpecialBoardPrice()
+    public function setSpecialBoardPriceForEventTopicWithZeroSpecialBoardPriceSetsSpecialBoardPrice(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -972,7 +972,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function setSpecialBoardPriceForEventTopicWithPositiveSpecialBoardPriceSetsSpecialBoardPrice()
+    public function setSpecialBoardPriceForEventTopicWithPositiveSpecialBoardPriceSetsSpecialBoardPrice(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -988,7 +988,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function hasSpecialBoardPriceForEventTopicWithoutSpecialBoardPriceReturnsFalse()
+    public function hasSpecialBoardPriceForEventTopicWithoutSpecialBoardPriceReturnsFalse(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -1002,7 +1002,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function hasSpecialBoardPriceForEventTopicWithSpecialBoardPriceReturnsTrue()
+    public function hasSpecialBoardPriceForEventTopicWithSpecialBoardPriceReturnsTrue(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -1021,7 +1021,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getAdditionalInformationForEventTopicWithoutAdditionalInformationReturnsEmptyString()
+    public function getAdditionalInformationForEventTopicWithoutAdditionalInformationReturnsEmptyString(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -1036,7 +1036,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getAdditionalInformationForEventTopicWithAdditionalInformationReturnsAdditionalInformation()
+    public function getAdditionalInformationForEventTopicWithAdditionalInformationReturnsAdditionalInformation(): void
     {
         $this->subject->setData(
             [
@@ -1054,7 +1054,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function setAdditionalInformationForEventTopicSetsAdditionalInformation()
+    public function setAdditionalInformationForEventTopicSetsAdditionalInformation(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -1070,7 +1070,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function hasAdditionalInformationForEventTopicWithoutAdditionalInformationReturnsFalse()
+    public function hasAdditionalInformationForEventTopicWithoutAdditionalInformationReturnsFalse(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -1084,7 +1084,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function hasAdditionalInformationForEventTopicWithAdditionalInformationReturnsTrue()
+    public function hasAdditionalInformationForEventTopicWithAdditionalInformationReturnsTrue(): void
     {
         $this->subject->setData(
             [
@@ -1105,7 +1105,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function allowsMultipleRegistrationForEventTopicWithUnsetAllowsMultipleRegistrationReturnsFalse()
+    public function allowsMultipleRegistrationForEventTopicWithUnsetAllowsMultipleRegistrationReturnsFalse(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -1119,7 +1119,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function allowsMultipleRegistrationForEventTopicWithSetAllowsMultipleRegistrationReturnsTrue()
+    public function allowsMultipleRegistrationForEventTopicWithSetAllowsMultipleRegistrationReturnsTrue(): void
     {
         $this->subject->setData(
             [
@@ -1140,7 +1140,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function usesTerms2ForEventTopicWithUnsetUseTerms2ReturnsFalse()
+    public function usesTerms2ForEventTopicWithUnsetUseTerms2ReturnsFalse(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -1154,7 +1154,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function usesTerms2ForEventTopicWithSetUseTerms2ReturnsTrue()
+    public function usesTerms2ForEventTopicWithSetUseTerms2ReturnsTrue(): void
     {
         $this->subject->setData(
             [
@@ -1175,7 +1175,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getNotesForEventTopicWithoutNotesReturnsEmptyString()
+    public function getNotesForEventTopicWithoutNotesReturnsEmptyString(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -1190,7 +1190,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getNotesForEventTopicWithNotesReturnsNotes()
+    public function getNotesForEventTopicWithNotesReturnsNotes(): void
     {
         $this->subject->setData(
             [
@@ -1208,7 +1208,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function setNotesForEventTopicSetsNotes()
+    public function setNotesForEventTopicSetsNotes(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -1224,7 +1224,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function hasNotesForEventTopicWithoutNotesReturnsFalse()
+    public function hasNotesForEventTopicWithoutNotesReturnsFalse(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -1238,7 +1238,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function hasNotesForEventTopicWithNotesReturnsTrue()
+    public function hasNotesForEventTopicWithNotesReturnsTrue(): void
     {
         $this->subject->setData(
             [
@@ -1259,7 +1259,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getImageForEventTopicWithoutImageReturnsEmptyString()
+    public function getImageForEventTopicWithoutImageReturnsEmptyString(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -1274,7 +1274,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getImageForEventTopicWithImageReturnsImage()
+    public function getImageForEventTopicWithImageReturnsImage(): void
     {
         $this->subject->setData(
             [
@@ -1292,7 +1292,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function setImageForEventTopicSetsImage()
+    public function setImageForEventTopicSetsImage(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -1308,7 +1308,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function hasImageForEventTopicWithoutImageReturnsFalse()
+    public function hasImageForEventTopicWithoutImageReturnsFalse(): void
     {
         $this->subject->setData(
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_TOPIC]
@@ -1322,7 +1322,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function hasImageForEventTopicWithImageReturnsTrue()
+    public function hasImageForEventTopicWithImageReturnsTrue(): void
     {
         $this->subject->setData(
             [
@@ -1343,7 +1343,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function hasEarlyBirdPriceForNoDeadlineAndAllPricesSetReturnsFalse()
+    public function hasEarlyBirdPriceForNoDeadlineAndAllPricesSetReturnsFalse(): void
     {
         $this->subject->setData(
             [
@@ -1363,7 +1363,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function hasEarlyBirdPriceForDeadlineAndAllPricesSetReturnsTrue()
+    public function hasEarlyBirdPriceForDeadlineAndAllPricesSetReturnsTrue(): void
     {
         $this->subject->setData(
             [
@@ -1383,7 +1383,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function hasEarlyBirdPriceForDeadlinAndAllRegularPricesSetReturnsTrue()
+    public function hasEarlyBirdPriceForDeadlinAndAllRegularPricesSetReturnsTrue(): void
     {
         $this->subject->setData(
             [
@@ -1401,7 +1401,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function hasEarlyBirdPriceForDeadlineAndRegularPriceAndAllSpecialPricesSetReturnsFalse()
+    public function hasEarlyBirdPriceForDeadlineAndRegularPriceAndAllSpecialPricesSetReturnsFalse(): void
     {
         $this->subject->setData(
             [
@@ -1420,7 +1420,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function hasEarlyBirdPriceForDeadlineAndNoRegularPriceAndAllSpecialPricesSetReturnsFalse()
+    public function hasEarlyBirdPriceForDeadlineAndNoRegularPriceAndAllSpecialPricesSetReturnsFalse(): void
     {
         $this->subject->setData(
             [
@@ -1438,7 +1438,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function hasEarlyBirdPriceForDeadlineAndOnlyEarlyBirdPricesSetReturnsFalse()
+    public function hasEarlyBirdPriceForDeadlineAndOnlyEarlyBirdPricesSetReturnsFalse(): void
     {
         $this->subject->setData(
             [
@@ -1460,7 +1460,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function isEarlyBirdDeadlineOverForNoEarlyBirdDeadlineReturnsTrue()
+    public function isEarlyBirdDeadlineOverForNoEarlyBirdDeadlineReturnsTrue(): void
     {
         $this->subject->setData([]);
 
@@ -1472,7 +1472,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function isEarlyBirdDeadlineOverForEarlyBirdDeadlineInPastReturnsTrue()
+    public function isEarlyBirdDeadlineOverForEarlyBirdDeadlineInPastReturnsTrue(): void
     {
         $this->subject->setData(
             ['deadline_early_bird' => $GLOBALS['SIM_EXEC_TIME'] - 1]
@@ -1486,7 +1486,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function isEarlyBirdDeadlineOverForEarlyBirdDeadlineNowReturnsTrue()
+    public function isEarlyBirdDeadlineOverForEarlyBirdDeadlineNowReturnsTrue(): void
     {
         $this->subject->setData(
             ['deadline_early_bird' => $GLOBALS['SIM_EXEC_TIME']]
@@ -1500,7 +1500,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function isEarlyBirdDeadlineOverForEarlyBirdDeadlineInFutureReturnsFalse()
+    public function isEarlyBirdDeadlineOverForEarlyBirdDeadlineInFutureReturnsFalse(): void
     {
         $this->subject->setData(
             ['deadline_early_bird' => $GLOBALS['SIM_EXEC_TIME'] + 1]
@@ -1518,7 +1518,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function earlyBirdAppliesForNoEarlyBirdPriceAndDeadlineOverReturnsFalse()
+    public function earlyBirdAppliesForNoEarlyBirdPriceAndDeadlineOverReturnsFalse(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -1538,7 +1538,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function earlyBirdAppliesForEarlyBirdPriceAndDeadlineOverReturnsFalse()
+    public function earlyBirdAppliesForEarlyBirdPriceAndDeadlineOverReturnsFalse(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -1558,7 +1558,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function earlyBirdAppliesForEarlyBirdPriceAndDeadlineNotOverReturnsTrue()
+    public function earlyBirdAppliesForEarlyBirdPriceAndDeadlineNotOverReturnsTrue(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -1582,7 +1582,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getAvailablePricesForNoPricesSetAndNoEarlyBirdReturnsZeroRegularPrice()
+    public function getAvailablePricesForNoPricesSetAndNoEarlyBirdReturnsZeroRegularPrice(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -1602,7 +1602,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getAvailablePricesForRegularPriceSetAndNoEarlyBirdReturnsRegularPrice()
+    public function getAvailablePricesForRegularPriceSetAndNoEarlyBirdReturnsRegularPrice(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -1622,7 +1622,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getAvailablePricesForRegularEarlyBirdPriceSetAndEarlyBirdReturnsEarlyBirdPrice()
+    public function getAvailablePricesForRegularEarlyBirdPriceSetAndEarlyBirdReturnsEarlyBirdPrice(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -1647,7 +1647,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getAvailablePricesForRegularEarlyBirdPriceSetAndNoEarlyBirdReturnsRegularPrice()
+    public function getAvailablePricesForRegularEarlyBirdPriceSetAndNoEarlyBirdReturnsRegularPrice(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -1672,7 +1672,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getAvailablePricesForRegularBoardPriceSetAndNoEarlyBirdReturnsRegularBoardPrice()
+    public function getAvailablePricesForRegularBoardPriceSetAndNoEarlyBirdReturnsRegularBoardPrice(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -1699,7 +1699,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getAvailablePricesForSpecialBoardPriceSetAndNoEarlyBirdReturnsSpecialBoardPrice()
+    public function getAvailablePricesForSpecialBoardPriceSetAndNoEarlyBirdReturnsSpecialBoardPrice(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -1726,7 +1726,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getAvailablePricesForSpecialPriceSetAndNoEarlyBirdReturnsSpecialPrice()
+    public function getAvailablePricesForSpecialPriceSetAndNoEarlyBirdReturnsSpecialPrice(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -1749,7 +1749,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getAvailablePricesForSpecialPriceSetAndSpecialEarlyBirdPriceSetAndEarlyBirdReturnsSpecialEarlyBirdPrice()
+    public function getAvailablePricesForSpecialPriceSetAndSpecialEarlyBirdPriceSetAndEarlyBirdReturnsSpecialEarlyBirdPrice(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -1777,7 +1777,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getAvailablePricesForNoSpecialPriceSetAndSpecialEarlyBirdPriceSetAndEarlyBirdNotReturnsSpecialEarlyBirdPrice()
+    public function getAvailablePricesForNoSpecialPriceSetAndSpecialEarlyBirdPriceSetAndEarlyBirdNotReturnsSpecialEarlyBirdPrice(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -1802,7 +1802,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function getAvailablePricesForSpecialPriceSetAndSpecialEarlyBirdPriceSetAndNoEarlyBirdReturnsSpecialPrice()
+    public function getAvailablePricesForSpecialPriceSetAndSpecialEarlyBirdPriceSetAndNoEarlyBirdReturnsSpecialPrice(): void
     {
         /** @var \Tx_Seminars_Model_Event&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -1834,7 +1834,7 @@ final class EventTopicTest extends TestCase
     /**
      * @test
      */
-    public function setPaymentMethodsSetsPaymentMethods()
+    public function setPaymentMethodsSetsPaymentMethods(): void
     {
         $this->subject->setData([]);
 

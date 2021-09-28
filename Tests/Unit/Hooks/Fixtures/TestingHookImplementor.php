@@ -23,8 +23,6 @@ class TestingHookImplementor implements TestingHookInterface
 
     /**
      * Gets called during HookProvider tests.
-     *
-     * @return void
      */
     public function testHookMethod()
     {
