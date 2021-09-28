@@ -7923,7 +7923,10 @@ final class DefaultControllerTest extends TestCase
 
         $subject->main(
             '',
-            ['what_to_display' => 'seminar_list']
+            [
+                'what_to_display' => 'seminar_list',
+                'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
+            ]
         );
     }
 
@@ -7943,7 +7946,10 @@ final class DefaultControllerTest extends TestCase
 
         $subject->main(
             '',
-            ['what_to_display' => 'my_entered_events']
+            [
+                'what_to_display' => 'my_entered_events',
+                'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
+            ]
         );
     }
 
@@ -7961,7 +7967,10 @@ final class DefaultControllerTest extends TestCase
 
         $subject->main(
             '',
-            ['what_to_display' => 'my_vip_events']
+            [
+                'what_to_display' => 'my_vip_events',
+                'templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html',
+            ]
         );
     }
 
