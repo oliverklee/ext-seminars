@@ -12,6 +12,7 @@ use OliverKlee\Seminars\Tests\Functional\BackEnd\Fixtures\TestingEventMailForm;
 use OliverKlee\Seminars\Tests\Functional\Traits\LanguageHelper;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
+use TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -69,7 +70,7 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
         $uriBuilder = $this->getUriBuilder();
         try {
             $uri = $uriBuilder->buildUriFromRoute($moduleName, $urlParameters);
-        } catch (\TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException $e) {
+        } catch (RouteNotFoundException $e) {
             // no route registered, use the fallback logic to check for a module
             $uri = $uriBuilder->buildUriFromModule($moduleName, $urlParameters);
         }

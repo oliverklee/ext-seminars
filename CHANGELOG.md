@@ -6,6 +6,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ## x.y.z
 
 ### Added
+- Add Rector to the toolchain (#1094)
 
 ### Changed
 - Raise PHPStan to level 6 (#1093)
