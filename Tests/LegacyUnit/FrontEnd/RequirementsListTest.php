@@ -31,7 +31,8 @@ final class RequirementsListTest extends TestCase
     protected function setUp()
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
-        $this->testingFramework->createFakeFrontEnd();
+        $pageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->createFakeFrontEnd($pageUid);
 
         $systemFolderPid = $this->testingFramework->createSystemFolder();
 
