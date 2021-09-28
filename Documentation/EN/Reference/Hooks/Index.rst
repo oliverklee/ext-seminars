@@ -75,10 +75,8 @@ Implement the methods required by the interface:
          * This function will be called for all types of seminars (single events, topics, and dates).
          *
          * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
-         *
-         * @return void
          */
-        public function modifySingleView(\Tx_Seminars_FrontEnd_DefaultController $controller)
+        public function modifySingleView(\Tx_Seminars_FrontEnd_DefaultController $controller): void
         {
             // Your code here
         }
@@ -155,14 +153,12 @@ Implement the methods required by the interface:
          * @param \Tx_Seminars_BagBuilder_Event $builder the bag builder
          * @param string $whatToDisplay the flavor of list view: 'seminar_list', 'topic_list',
          *        'my_vip_events', 'my_entered_events', 'events_next_day' or 'other_dates'
-         *
-         * @return void
          */
         public function modifyEventBagBuilder(
             \Tx_Seminars_FrontEnd_DefaultController $controller,
             \Tx_Seminars_BagBuilder_Event $builder,
             string $whatToDisplay
-        ) {
+        ): void {
             // Your code here
         }
 
@@ -180,14 +176,12 @@ Implement the methods required by the interface:
          * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
          * @param \Tx_Seminars_BagBuilder_Registration $builder the bag builder
          * @param string $whatToDisplay the flavor of list view ('my_events' only?)
-         *
-         * @return void
          */
         public function modifyRegistrationBagBuilder(
             \Tx_Seminars_FrontEnd_DefaultController $controller,
             \Tx_Seminars_BagBuilder_Registration $builder,
             string $whatToDisplay
-        ) {
+        ): void {
             // Your code here
         }
 
@@ -199,10 +193,8 @@ Implement the methods required by the interface:
          * "events next day", "other dates").
          *
          * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
-         *
-         * @return void
          */
-        public function modifyListHeader(\Tx_Seminars_FrontEnd_DefaultController $controller)
+        public function modifyListHeader(\Tx_Seminars_FrontEnd_DefaultController $controller): void
         {
             // Your code here
         }
@@ -215,10 +207,8 @@ Implement the methods required by the interface:
          * "events next day", "other dates").
          *
          * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
-         *
-         * @return void
          */
-        public function modifyListRow(\Tx_Seminars_FrontEnd_DefaultController $controller)
+        public function modifyListRow(\Tx_Seminars_FrontEnd_DefaultController $controller): void
         {
             // Your code here
         }
@@ -230,10 +220,8 @@ Implement the methods required by the interface:
          * "my entered events" lists only.
          *
          * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
-         *
-         * @return void
          */
-        public function modifyMyEventsListRow(\Tx_Seminars_FrontEnd_DefaultController $controller)
+        public function modifyMyEventsListRow(\Tx_Seminars_FrontEnd_DefaultController $controller): void
         {
             // Your code here
         }
@@ -246,10 +234,8 @@ Implement the methods required by the interface:
          * "events next day", "other dates").
          *
          * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
-         *
-         * @return void
          */
-        public function modifyListFooter(\Tx_Seminars_FrontEnd_DefaultController $controller)
+        public function modifyListFooter(\Tx_Seminars_FrontEnd_DefaultController $controller): void
         {
             // Your code here
         }
@@ -288,13 +274,11 @@ Implement the methods required by the interface:
          *
          * @param \Tx_Seminars_FrontEnd_SelectorWidget $selectorWidget
          * @param \Tx_Seminars_Bag_Event $seminarBag the seminars used to create the selector widget
-         *
-         * @return void
          */
         public function modifySelectorWidget(
             \Tx_Seminars_FrontEnd_SelectorWidget $selectorWidget,
             \Tx_Seminars_Bag_Event $seminarBag
-        ) {
+        ): void {
             // Your code here
         }
     }
@@ -340,10 +324,8 @@ Implement the methods required by the interface:
          * Modifies the header of the seminar registration form.
          *
          * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
-         *
-         * @return void
          */
-        public function modifyRegistrationHeader(\Tx_Seminars_FrontEnd_DefaultController $controller)
+        public function modifyRegistrationHeader(\Tx_Seminars_FrontEnd_DefaultController $controller): void
         {
             // Your code here
         }
@@ -353,13 +335,11 @@ Implement the methods required by the interface:
          *
          * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
          * @param \Tx_Seminars_FrontEnd_RegistrationForm $registrationEditor the registration form
-         *
-         * @return void
          */
         public function modifyRegistrationForm(
             \Tx_Seminars_FrontEnd_DefaultController $controller,
             \Tx_Seminars_FrontEnd_RegistrationForm $registrationEditor
-        ) {
+        ): void {
             // Your code here
         }
 
@@ -367,10 +347,8 @@ Implement the methods required by the interface:
          * Modifies the footer of the seminar registration form.
          *
          * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
-         *
-         * @return void
          */
-        public function modifyRegistrationFooter(\Tx_Seminars_FrontEnd_DefaultController $controller)
+        public function modifyRegistrationFooter(\Tx_Seminars_FrontEnd_DefaultController $controller): void
         {
             // Your code here
         }
@@ -424,14 +402,12 @@ Implement the methods required by the interface:
          *          - confirmationOnUnregistration
          *          - confirmationOnRegistrationForQueue
          *          - confirmationOnQueueUpdate
-         *
-         * @return void
          */
         public function modifyAttendeeEmail(
             MailMessage $email,
             \Tx_Seminars_Model_Registration $registration,
             string $emailReason
-        ) {
+        ): void {
             // Your code here
         }
 
@@ -449,14 +425,12 @@ Implement the methods required by the interface:
          *          - confirmationOnUnregistration
          *          - confirmationOnRegistrationForQueue
          *          - confirmationOnQueueUpdate
-         *
-         * @return void
          */
         public function modifyAttendeeEmailBodyPlainText(
             Template $emailTemplate,
             \Tx_Seminars_Model_Registration $registration,
             string $emailReason
-        ) {
+        ): void {
             // Your code here
         }
 
@@ -473,14 +447,12 @@ Implement the methods required by the interface:
          *          - confirmationOnUnregistration
          *          - confirmationOnRegistrationForQueue
          *          - confirmationOnQueueUpdate
-         *
-         * @return void
          */
         public function modifyAttendeeEmailBodyHtml(
             Template $emailTemplate,
             \Tx_Seminars_Model_Registration $registration,
             string $emailReason
-        ) {
+        ): void {
             // Your code here
         }
 
@@ -494,14 +466,12 @@ Implement the methods required by the interface:
          *        - notificationOnUnregistration
          *        - notificationOnRegistrationForQueue
          *        - notificationOnQueueUpdate
-         *
-         * @return void
          */
         public function modifyOrganizerEmail(
             MailMessage $email,
             \Tx_Seminars_Model_Registration $registration,
             string $emailReason
-        ) {
+        ): void {
             // Your code here
         }
 
@@ -514,14 +484,12 @@ Implement the methods required by the interface:
          *          - 'EnoughRegistrations' if the event has enough attendances
          *          - 'IsFull' if the event is fully booked
          *          see Tx_Seminars_Service_RegistrationManager::getReasonForNotification()
-         *
-         * @return void
          */
         public function modifyAdditionalEmail(
             MailMessage $email,
             \Tx_Seminars_Model_Registration $registration,
             string $emailReason
-        ) {
+        ): void {
             // Your code here
         }
     }
@@ -660,20 +628,16 @@ It's used like this:
         *
         * @param \Tx_Seminars_Model_Registration $registration
         *        the registration to which the e-mail refers
-        *
-        * @return void
         */
-         public function modifyGeneralEmail(\Tx_Seminars_Model_Registration $registration, MailMessage $eMail) {…}
+         public function modifyGeneralEmail(\Tx_Seminars_Model_Registration $registration, MailMessage $eMail): void {…}
 
          /**
         * Modifies the confirmation e-mail sent via the back-end module.
         *
         * @param Tx_Seminars_Model_Registration $registration
         *        the registration to which the e-mail refers
-        *
-        * @return void
         */
-         public function modifyConfirmEmail(\Tx_Seminars_Model_Registration $registration, MailMessage $eMail) {…}
+         public function modifyConfirmEmail(\Tx_Seminars_Model_Registration $registration, MailMessage $eMail): void {…}
 
          /**
         * Modifies the cancelation e-mail sent via the back-end module.
@@ -683,10 +647,8 @@ It's used like this:
         *
         * @param \Tx_Seminars_Model_Registration $registration
         *        the registration to which the e-mail refers
-        *
-        * @return void
         */
-          public function modifyCancelEmail(\Tx_Seminars_Model_Registration $registration, MailMessage $eMail) {…}
+          public function modifyCancelEmail(\Tx_Seminars_Model_Registration $registration, MailMessage $eMail): void {…}
 
 .. _backendregistrationlistview_en:
 
@@ -738,14 +700,12 @@ Implement the methods required by the interface:
          * @param Template $template the template that will be used to create the registration list
          * @param int $registrationsToShow
          *        the type of registration shown in the list
-         *
-         * @return void
          */
         public function modifyListRow(
             \Tx_Seminars_Model_Registration $registration,
             Template $template,
             int $registrationsToShow
-        ) {
+        ): void {
             // Your code here
         }
 
@@ -762,14 +722,12 @@ Implement the methods required by the interface:
          * @param Template $template the template that will be used to create the registration list
          * @param int $registrationsToShow
          *        the type of registration shown in the list
-         *
-         * @return void
          */
         public function modifyListHeader(
             \Tx_Seminars_Bag_Registration $registrationBag,
             Template $template,
             int $registrationsToShow
-        ) {
+        ): void {
             // Your code here
         }
 
@@ -786,14 +744,12 @@ Implement the methods required by the interface:
          * @param Template $template the template that will be used to create the registration list
          * @param int $registrationsToShow
          *        the type of registration shown in the list
-         *
-         * @return void
          */
         public function modifyList(
             \Tx_Seminars_Bag_Registration $registrationBag,
             Template $template,
             int $registrationsToShow
-        ) {
+        ): void {
             // Your code here
         }
     }
