@@ -164,6 +164,12 @@ jobs:
             php-version: 7.3
           - typo3-version: ^9.5
             php-version: 7.4
+          - typo3-version: ^10.4
+            php-version: 7.2
+          - typo3-version: ^10.4
+            php-version: 7.3
+          - typo3-version: ^10.4
+            php-version: 7.4
   legacy-tests:
     name: "Legacy tests"
     runs-on: ubuntu-20.04
@@ -225,4 +231,10 @@ jobs:
           - typo3-version: ^9.5
             php-version: 7.3
           - typo3-version: ^9.5
+            php-version: 7.4
+          - typo3-version: ^10.4
+            php-version: 7.2
+          - typo3-version: ^10.4
+            php-version: 7.3
+          - typo3-version: ^10.4
             php-version: 7.4
