@@ -41,7 +41,7 @@ final class RegistrationsListTest extends TestCase
      */
     private $mockedClassNames = [];
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->unifyTestingEnvironment();
 
@@ -61,7 +61,7 @@ final class RegistrationsListTest extends TestCase
         $this->subject = new RegistrationsList($backEndModule);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->purgeMockedInstances();
 
@@ -82,11 +82,8 @@ final class RegistrationsListTest extends TestCase
      * to `GeneralUtility::addInstance()`.
      *
      * @param class-string $className
-     * @param object $instance
-     *
-     * @return void
      */
-    private function addMockedInstance(string $className, $instance)
+    private function addMockedInstance(string $className, object $instance): void
     {
         GeneralUtility::addInstance($className, $instance);
         $this->mockedClassNames[] = $className;
@@ -95,10 +92,8 @@ final class RegistrationsListTest extends TestCase
     /**
      * Purges possibly leftover instances from the Typo3 instance FIFO buffer used by
      * `GeneralUtility::makeInstance()`.
-     *
-     * @return void
      */
-    private function purgeMockedInstances()
+    private function purgeMockedInstances(): void
     {
         foreach ($this->mockedClassNames as $className) {
             GeneralUtility::makeInstance($className);
@@ -112,7 +107,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function mockedInstancesListIsEmptyInitially()
+    public function mockedInstancesListIsEmptyInitially(): void
     {
         self::assertEmpty($this->mockedClassNames);
     }
@@ -120,7 +115,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function addMockedInstanceAddsClassnameToList()
+    public function addMockedInstanceAddsClassnameToList(): void
     {
         $mockedInstance = $this->createMock(\stdClass::class);
         $mockedClassName = \get_class($mockedInstance);
@@ -136,7 +131,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function addMockedInstanceAddsInstanceToTypo3InstanceBuffer()
+    public function addMockedInstanceAddsInstanceToTypo3InstanceBuffer(): void
     {
         $mockedInstance = $this->createMock(\stdClass::class);
         $mockedClassName = \get_class($mockedInstance);
@@ -149,7 +144,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function purgeMockedInstancesRemovesClassnameFromList()
+    public function purgeMockedInstancesRemovesClassnameFromList(): void
     {
         $mockedInstance = $this->createMock(\stdClass::class);
         $mockedClassName = \get_class($mockedInstance);
@@ -165,7 +160,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function purgeMockedInstancesRemovesInstanceFromTypo3InstanceBuffer()
+    public function purgeMockedInstancesRemovesInstanceFromTypo3InstanceBuffer(): void
     {
         $mockedInstance = $this->createMock(\stdClass::class);
         $mockedClassName = \get_class($mockedInstance);
@@ -183,7 +178,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function showForOneEventContainsAccreditationNumber()
+    public function showForOneEventContainsAccreditationNumber(): void
     {
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -211,7 +206,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function showForOneEventContainsHtmlSpecialCharedAccreditationNumber()
+    public function showForOneEventContainsHtmlSpecialCharedAccreditationNumber(): void
     {
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -239,7 +234,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function showShowsUserName()
+    public function showShowsUserName(): void
     {
         $userUid = $this->testingFramework->createFrontEndUser(
             '',
@@ -267,7 +262,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function showWithRegistrationForDeletedUserDoesNotShowUserName()
+    public function showWithRegistrationForDeletedUserDoesNotShowUserName(): void
     {
         $userUid = $this->testingFramework->createFrontEndUser(
             '',
@@ -296,7 +291,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function showWithRegistrationForInexistentUserDoesNotShowUserName()
+    public function showWithRegistrationForInexistentUserDoesNotShowUserName(): void
     {
         $userUid = $this->testingFramework->getAutoIncrement('fe_users');
         $seminarUid = $this->testingFramework->createRecord(
@@ -322,7 +317,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function showForOneEventContainsEventTitle()
+    public function showForOneEventContainsEventTitle(): void
     {
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -349,7 +344,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function showForOneDeletedEventDoesNotContainEventTitle()
+    public function showForOneDeletedEventDoesNotContainEventTitle(): void
     {
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -377,7 +372,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function showForOneInexistentEventShowsUserName()
+    public function showForOneInexistentEventShowsUserName(): void
     {
         $userUid = $this->testingFramework->createFrontEndUser(
             '',
@@ -405,7 +400,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function showContainsRegistrationFromSubfolder()
+    public function showContainsRegistrationFromSubfolder(): void
     {
         $subfolderPid = $this->testingFramework->createSystemFolder(
             $this->dummySysFolderPid
@@ -435,7 +430,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function showForNonEmptyRegularRegistrationsListContainsCsvExportButton()
+    public function showForNonEmptyRegularRegistrationsListContainsCsvExportButton(): void
     {
         $seminarUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -462,7 +457,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function showForEmptyRegularRegistrationsListContainsCsvExportButton()
+    public function showForEmptyRegularRegistrationsListContainsCsvExportButton(): void
     {
         $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -481,7 +476,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function showForEventUidSetShowsTitleOfThisEvent()
+    public function showForEventUidSetShowsTitleOfThisEvent(): void
     {
         $_GET['eventUid'] = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -500,7 +495,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function showForEventUidSetShowsUidOfThisEvent()
+    public function showForEventUidSetShowsUidOfThisEvent(): void
     {
         $eventUid = $this->testingFramework->createRecord(
             'tx_seminars_seminars',
@@ -520,7 +515,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function showForEventUidSetShowsRegistrationOfThisEvent()
+    public function showForEventUidSetShowsRegistrationOfThisEvent(): void
     {
         $userUid = $this->testingFramework->createFrontEndUser(
             '',
@@ -546,7 +541,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function showForEventUidSetDoesNotShowRegistrationOfAnotherEvent()
+    public function showForEventUidSetDoesNotShowRegistrationOfAnotherEvent(): void
     {
         $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->testingFramework->createRecord(
@@ -573,7 +568,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function showForEventUidAddsEventUidToCsvExportIcon()
+    public function showForEventUidAddsEventUidToCsvExportIcon(): void
     {
         $userUid = $this->testingFramework->createFrontEndUser(
             '',
@@ -599,7 +594,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function showForEventUidDoesNotAddPidToCsvExportIcon()
+    public function showForEventUidDoesNotAddPidToCsvExportIcon(): void
     {
         $userUid = $this->testingFramework->createFrontEndUser(
             '',
@@ -625,7 +620,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function showForNoEventUidDoesNotAddEventUidToCsvExportIcon()
+    public function showForNoEventUidDoesNotAddEventUidToCsvExportIcon(): void
     {
         $userUid = $this->testingFramework->createFrontEndUser(
             '',
@@ -649,7 +644,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function showForOneEventCallsBackEndRegistrationListViewHooks()
+    public function showForOneEventCallsBackEndRegistrationListViewHooks(): void
     {
         $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
         $this->testingFramework->createRecord(
@@ -705,7 +700,7 @@ final class RegistrationsListTest extends TestCase
     /**
      * @test
      */
-    public function newButtonForRegistrationStorageSettingSetInUsersGroupSetsThisPidAsNewRecordPid()
+    public function newButtonForRegistrationStorageSettingSetInUsersGroupSetsThisPidAsNewRecordPid(): void
     {
         $newRegistrationFolder = $this->dummySysFolderPid + 1;
         $backEndGroup = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUserGroup::class)

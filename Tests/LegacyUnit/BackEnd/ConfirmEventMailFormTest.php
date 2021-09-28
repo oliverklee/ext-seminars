@@ -25,7 +25,7 @@ final class ConfirmEventMailFormTest extends TestCase
      */
     private $testingFramework = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->unifyTestingEnvironment();
 
@@ -62,7 +62,7 @@ final class ConfirmEventMailFormTest extends TestCase
         $this->subject = new ConfirmEventMailForm($eventUid);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
         $this->restoreOriginalEnvironment();
@@ -75,7 +75,7 @@ final class ConfirmEventMailFormTest extends TestCase
     /**
      * @test
      */
-    public function renderContainsSubmitButton()
+    public function renderContainsSubmitButton(): void
     {
         self::assertStringContainsString(
             '<button class="submitButton confirmEvent"><p>' .
@@ -88,7 +88,7 @@ final class ConfirmEventMailFormTest extends TestCase
     /**
      * @test
      */
-    public function renderContainsPrefilledBodyFieldWithLocalizedSalutation()
+    public function renderContainsPrefilledBodyFieldWithLocalizedSalutation(): void
     {
         self::assertStringContainsString('salutation', $this->subject->render());
     }
@@ -96,7 +96,7 @@ final class ConfirmEventMailFormTest extends TestCase
     /**
      * @test
      */
-    public function renderContainsTheConfirmEventActionForThisForm()
+    public function renderContainsTheConfirmEventActionForThisForm(): void
     {
         self::assertStringContainsString(
             '<input type="hidden" name="action" value="confirmEvent" />',

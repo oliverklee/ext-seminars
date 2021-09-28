@@ -249,12 +249,8 @@ abstract class AbstractList
 
     /**
      * Adds a flash message to the queue.
-     *
-     * @param FlashMessage $flashMessage
-     *
-     * @return void
      */
-    protected function addFlashMessage(FlashMessage $flashMessage)
+    protected function addFlashMessage(FlashMessage $flashMessage): void
     {
         /** @var FlashMessageService $flashMessageService */
         $flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);

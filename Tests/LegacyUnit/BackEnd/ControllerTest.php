@@ -23,14 +23,14 @@ final class ControllerTest extends TestCase
      */
     private $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->unifyTestingEnvironment();
 
         $this->subject = new Controller();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->restoreOriginalEnvironment();
     }
@@ -38,7 +38,7 @@ final class ControllerTest extends TestCase
     /**
      * @test
      */
-    public function isAbstractModule()
+    public function isAbstractModule(): void
     {
         self::assertInstanceOf(AbstractModule::class, $this->subject);
     }
@@ -46,7 +46,7 @@ final class ControllerTest extends TestCase
     /**
      * @test
      */
-    public function mainActionWithCsvFlagReturnsCsvDownload()
+    public function mainActionWithCsvFlagReturnsCsvDownload(): void
     {
         $csvBody = 'foo;bar';
         $exporterProphecy = $this->prophesize(CsvDownloader::class);

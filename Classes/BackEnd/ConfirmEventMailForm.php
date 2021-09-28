@@ -38,13 +38,8 @@ class ConfirmEventMailForm extends AbstractEventMailForm
 
     /**
      * Calls all registered hooks for modifying the e-mail.
-     *
-     * @param \Tx_Seminars_Model_Registration $registration
-     *        the registration to which the e-mail refers
-     *
-     * @return void
      */
-    protected function modifyEmailWithHook(\Tx_Seminars_Model_Registration $registration, MailMessage $eMail)
+    protected function modifyEmailWithHook(\Tx_Seminars_Model_Registration $registration, MailMessage $eMail): void
     {
         foreach ($this->getHooks() as $hook) {
             $hook->modifyConfirmEmail($registration, $eMail);
@@ -52,12 +47,9 @@ class ConfirmEventMailForm extends AbstractEventMailForm
     }
 
     /**
-     * Marks an event according to the status to set and commits the change to
-     * the database.
-     *
-     * @return void
+     * Marks an event according to the status to set and commits the change to the database.
      */
-    protected function setEventStatus()
+    protected function setEventStatus(): void
     {
         /** @var EventStatusService $eventStatusService */
         $eventStatusService = GeneralUtility::makeInstance(EventStatusService::class);

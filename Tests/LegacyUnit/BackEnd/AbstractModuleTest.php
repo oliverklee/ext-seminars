@@ -14,7 +14,7 @@ final class AbstractModuleTest extends TestCase
      */
     private $subject = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new DummyModule();
     }
@@ -22,7 +22,7 @@ final class AbstractModuleTest extends TestCase
     /**
      * @test
      */
-    public function getPageDataInitiallyReturnsEmptyArray()
+    public function getPageDataInitiallyReturnsEmptyArray(): void
     {
         self::assertSame([], $this->subject->getPageData());
     }
@@ -30,7 +30,7 @@ final class AbstractModuleTest extends TestCase
     /**
      * @test
      */
-    public function getPageDataReturnsCompleteDataSetViaSetPageData()
+    public function getPageDataReturnsCompleteDataSetViaSetPageData(): void
     {
         $this->subject->setPageData(['foo' => 'bar']);
 

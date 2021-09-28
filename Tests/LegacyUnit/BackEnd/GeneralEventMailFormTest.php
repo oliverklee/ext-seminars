@@ -24,7 +24,7 @@ final class GeneralEventMailFormTest extends TestCase
      */
     private $testingFramework = null;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->unifyTestingEnvironment();
 
@@ -59,7 +59,7 @@ final class GeneralEventMailFormTest extends TestCase
         $this->subject = new GeneralEventMailForm($eventUid);
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->testingFramework->cleanUp();
         $this->restoreOriginalEnvironment();
@@ -72,7 +72,7 @@ final class GeneralEventMailFormTest extends TestCase
     /**
      * @test
      */
-    public function renderContainsSubmitButton()
+    public function renderContainsSubmitButton(): void
     {
         self::assertStringContainsString(
             '<button class="submitButton sendEmail"><p>' .
@@ -85,7 +85,7 @@ final class GeneralEventMailFormTest extends TestCase
     /**
      * @test
      */
-    public function renderContainsPrefilledBodyFieldWithLocalizedSalutation()
+    public function renderContainsPrefilledBodyFieldWithLocalizedSalutation(): void
     {
         self::assertStringContainsString('salutation', $this->subject->render());
     }
@@ -93,7 +93,7 @@ final class GeneralEventMailFormTest extends TestCase
     /**
      * @test
      */
-    public function renderContainsTheCancelEventActionForThisForm()
+    public function renderContainsTheCancelEventActionForThisForm(): void
     {
         self::assertStringContainsString(
             '<input type="hidden" name="action" value="sendEmail" />',
