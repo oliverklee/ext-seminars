@@ -65,8 +65,9 @@ final class EventEditorTest extends TestCase
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
         $this->testingFramework = new TestingFramework('tx_seminars');
-        $this->testingFramework->createFakeFrontEnd();
         MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
+        $pageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->createFakeFrontEnd($pageUid);
 
         $sharedConfiguration = new DummyConfiguration(self::CONFIGURATION);
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $sharedConfiguration);

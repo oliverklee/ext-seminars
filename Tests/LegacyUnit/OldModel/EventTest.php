@@ -113,15 +113,12 @@ final class EventTest extends TestCase
     // Utility functions
 
     /**
-     * Creates a fake front end and a pi1 instance in $this->pi1.
-     *
-     * @param int $detailPageUid UID of the detail view page
-     *
-     * @return void
+     * Creates a fake front end and a pi1 instance in `$this->pi1`.
      */
-    private function createPi1(int $detailPageUid = 0)
+    private function createPi1(int $detailPageUid = 0): void
     {
-        $this->testingFramework->createFakeFrontEnd();
+        $pageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->createFakeFrontEnd($pageUid);
 
         $this->pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $this->pi1->init(
@@ -5478,7 +5475,8 @@ final class EventTest extends TestCase
      */
     public function getPlaceWithDetailsRawReturnsWillBeAnnouncedForNoPlace()
     {
-        $this->testingFramework->createFakeFrontEnd();
+        $pageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->createFakeFrontEnd($pageUid);
 
         self::assertStringContainsString(
             $this->getLanguageService()->getLL('message_willBeAnnounced'),
@@ -5743,7 +5741,8 @@ final class EventTest extends TestCase
      */
     public function isOwnerFeUserForLoggedInUserOtherThanOwnerReturnsFalse()
     {
-        $this->testingFramework->createFakeFrontEnd();
+        $pageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->createFakeFrontEnd($pageUid);
         $userUid = $this->testingFramework->createAndLoginFrontEndUser();
 
         $this->subject->setOwnerUid($userUid + 1);
@@ -5758,7 +5757,8 @@ final class EventTest extends TestCase
      */
     public function isOwnerFeUserForLoggedInUserOtherThanOwnerReturnsTrue()
     {
-        $this->testingFramework->createFakeFrontEnd();
+        $pageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->createFakeFrontEnd($pageUid);
         $ownerUid = $this->testingFramework->createAndLoginFrontEndUser();
         $this->subject->setOwnerUid($ownerUid);
 
@@ -5774,7 +5774,8 @@ final class EventTest extends TestCase
      */
     public function getOwnerForExistingOwnerReturnsFrontEndUserInstance()
     {
-        $this->testingFramework->createFakeFrontEnd();
+        $pageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->createFakeFrontEnd($pageUid);
         $ownerUid = $this->testingFramework->createAndLoginFrontEndUser();
         $this->subject->setOwnerUid($ownerUid);
 
@@ -5786,7 +5787,8 @@ final class EventTest extends TestCase
      */
     public function getOwnerForExistingOwnerReturnsUserWithOwnersUid()
     {
-        $this->testingFramework->createFakeFrontEnd();
+        $pageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->createFakeFrontEnd($pageUid);
         $ownerUid = $this->testingFramework->createAndLoginFrontEndUser();
         $this->subject->setOwnerUid($ownerUid);
 
@@ -5813,7 +5815,8 @@ final class EventTest extends TestCase
      */
     public function hasOwnerForExistingOwnerReturnsTrue()
     {
-        $this->testingFramework->createFakeFrontEnd();
+        $pageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->createFakeFrontEnd($pageUid);
         $ownerUid = $this->testingFramework->createAndLoginFrontEndUser();
         $this->subject->setOwnerUid($ownerUid);
 
@@ -8211,7 +8214,8 @@ final class EventTest extends TestCase
             ->willReturn($isVip);
 
         if ($loggedIn) {
-            $this->testingFramework->createFakeFrontEnd();
+            $pageUid = $this->testingFramework->createFrontEndPage();
+            $this->testingFramework->createFakeFrontEnd($pageUid);
             $this->testingFramework->createAndLoginFrontEndUser();
         }
 
@@ -8262,7 +8266,8 @@ final class EventTest extends TestCase
             ->willReturn($isVip);
 
         if ($loggedIn) {
-            $this->testingFramework->createFakeFrontEnd();
+            $pageUid = $this->testingFramework->createFrontEndPage();
+            $this->testingFramework->createFakeFrontEnd($pageUid);
             $this->testingFramework->createAndLoginFrontEndUser();
         }
 
@@ -8341,7 +8346,8 @@ final class EventTest extends TestCase
         );
 
         if ($loggedIn) {
-            $this->testingFramework->createFakeFrontEnd();
+            $pageUid = $this->testingFramework->createFrontEndPage();
+            $this->testingFramework->createFakeFrontEnd($pageUid);
             $this->testingFramework->createAndLoginFrontEndUser();
         }
 
@@ -8545,7 +8551,8 @@ final class EventTest extends TestCase
             ->willReturn($isVip);
 
         if ($loggedIn) {
-            $this->testingFramework->createFakeFrontEnd();
+            $pageUid = $this->testingFramework->createFrontEndPage();
+            $this->testingFramework->createFakeFrontEnd($pageUid);
             $this->testingFramework->createAndLoginFrontEndUser();
         }
 
@@ -8755,7 +8762,8 @@ final class EventTest extends TestCase
             ->willReturn($isVip);
 
         if ($loggedIn) {
-            $this->testingFramework->createFakeFrontEnd();
+            $pageUid = $this->testingFramework->createFrontEndPage();
+            $this->testingFramework->createFakeFrontEnd($pageUid);
             $this->testingFramework->createAndLoginFrontEndUser();
         }
 
@@ -8931,7 +8939,8 @@ final class EventTest extends TestCase
             ->with($whichPlugin, 0, 0, 0, $accessLevel)
             ->willReturn(true);
 
-        $this->testingFramework->createFakeFrontEnd();
+        $pageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->createFakeFrontEnd($pageUid);
         $this->testingFramework->createAndLoginFrontEndUser();
 
         $subject->canViewRegistrationsListMessage($whichPlugin, $accessLevel);
@@ -8950,7 +8959,8 @@ final class EventTest extends TestCase
         $subject->method('needsRegistration')->willReturn(true);
         $subject->method('canViewRegistrationsList')->willReturn(true);
 
-        $this->testingFramework->createFakeFrontEnd();
+        $pageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->createFakeFrontEnd($pageUid);
         $this->testingFramework->createAndLoginFrontEndUser();
 
         self::assertSame(
@@ -8972,7 +8982,8 @@ final class EventTest extends TestCase
         $subject->method('needsRegistration')->willReturn(true);
         $subject->method('canViewRegistrationsList')->willReturn(false);
 
-        $this->testingFramework->createFakeFrontEnd();
+        $pageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->createFakeFrontEnd($pageUid);
         $this->testingFramework->createAndLoginFrontEndUser();
 
         self::assertSame(

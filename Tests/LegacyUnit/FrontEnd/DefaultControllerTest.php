@@ -115,7 +115,8 @@ final class DefaultControllerTest extends TestCase
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'] = [];
 
         $this->testingFramework = new TestingFramework('tx_seminars');
-        $this->testingFramework->createFakeFrontEnd();
+        $pageUid = $this->testingFramework->createFrontEndPage();
+        $this->testingFramework->createFakeFrontEnd($pageUid);
         HeaderProxyFactory::getInstance()->enableTestMode();
         $headerCollector = HeaderProxyFactory::getInstance()->getHeaderCollector();
         $this->headerCollector = $headerCollector;
