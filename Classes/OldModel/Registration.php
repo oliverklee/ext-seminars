@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\Exception\NotFoundException;
-use OliverKlee\Oelib\Interfaces\ConfigurationCheckable;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\OldModel\AbstractModel;
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -19,7 +18,7 @@ use TYPO3\CMS\Frontend\Plugin\AbstractPlugin;
 /**
  * This class represents a registration/attendance.
  */
-class Tx_Seminars_OldModel_Registration extends AbstractModel implements ConfigurationCheckable
+class Tx_Seminars_OldModel_Registration extends AbstractModel
 {
     /**
      * @var string[][]
