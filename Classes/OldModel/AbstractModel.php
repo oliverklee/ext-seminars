@@ -531,18 +531,6 @@ abstract class AbstractModel extends TemplateHelper
     }
 
     /**
-     * Returns the prefix for the configuration to check, e.g. "plugin.tx_seminars_pi1.".
-     *
-     * @return string the namespace prefix, will end with a dot
-     *
-     * @deprecated This method can be removed once the model does not extend `TemplateHelper` anymore.
-     */
-    public function getTypoScriptNamespace(): string
-    {
-        return 'plugin.tx_seminars.';
-    }
-
-    /**
      * Gets a list of the titles of records referenced by the this record.
      *
      * @param string $foreignTable the name of the foreign table (must not be empty), having the uid and title fields

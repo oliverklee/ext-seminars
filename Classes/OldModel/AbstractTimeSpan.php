@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use OliverKlee\Oelib\Interfaces\ConfigurationCheckable;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\DateTimeSpan;
 use OliverKlee\Seminars\OldModel\AbstractModel;
@@ -11,7 +10,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * This class offers timespan-related methods for the time slot and seminar classes.
  */
-abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel implements ConfigurationCheckable
+abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel
 {
     /**
      * @var HookProvider|null

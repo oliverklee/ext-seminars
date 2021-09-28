@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-use OliverKlee\Oelib\Interfaces\ConfigurationCheckable;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * This class represents a basic view.
  */
-abstract class Tx_Seminars_FrontEnd_AbstractView extends TemplateHelper implements ConfigurationCheckable
+abstract class Tx_Seminars_FrontEnd_AbstractView extends TemplateHelper
 {
     /**
      * the relative path to the uploaded files
@@ -64,14 +63,4 @@ abstract class Tx_Seminars_FrontEnd_AbstractView extends TemplateHelper implemen
      * @return string the view's content
      */
     abstract public function render(): string;
-
-    /**
-     * Returns the prefix for the configuration to check, e.g. "plugin.tx_seminars_pi1.".
-     *
-     * @return string the namespace prefix, will end with a dot
-     */
-    public function getTypoScriptNamespace(): string
-    {
-        return 'plugin.tx_seminars_pi1.';
-    }
 }

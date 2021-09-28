@@ -9,7 +9,6 @@ use OliverKlee\Oelib\Configuration\FlexformsConfiguration;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Interfaces\Configuration;
-use OliverKlee\Oelib\Interfaces\ConfigurationCheckable;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Seminars\Bag\AbstractBag;
@@ -39,7 +38,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 /**
  * Plugin "Seminar Manager".
  */
-class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements ConfigurationCheckable
+class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
 {
     use SharedPluginConfiguration;
 
@@ -3581,16 +3580,6 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper implements C
     public function injectLinkBuilder(\Tx_Seminars_Service_SingleViewLinkBuilder $linkBuilder)
     {
         $this->linkBuilder = $linkBuilder;
-    }
-
-    /**
-     * Returns the prefix for the configuration to check, e.g. "plugin.tx_seminars_pi1.".
-     *
-     * @return string the namespace prefix, will end with a dot
-     */
-    public function getTypoScriptNamespace(): string
-    {
-        return 'plugin.tx_seminars_pi1.';
     }
 
     private function buildConfigurationWithFlexForms(): Configuration
