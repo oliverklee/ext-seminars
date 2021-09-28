@@ -3416,10 +3416,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
 
     /**
      * Processes hide/unhide and copy events for the FE-editable events.
-     *
-     * @return void
      */
-    protected function processEventEditorActions()
+    protected function processEventEditorActions(): void
     {
         $this->ensureIntegerPiVars(['seminar']);
         if ($this->piVars['seminar'] <= 0) {
@@ -3454,13 +3452,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     }
 
     /**
-     * Marks $event as hidden and saves it.
-     *
-     * @param \Tx_Seminars_Model_Event $event the event to hide
-     *
-     * @return void
+     * Marks the given event as hidden and saves it.
      */
-    protected function hideEvent(\Tx_Seminars_Model_Event $event)
+    protected function hideEvent(\Tx_Seminars_Model_Event $event): void
     {
         $event->markAsHidden();
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
@@ -3470,13 +3464,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     }
 
     /**
-     * Marks $event as visible and saves it.
-     *
-     * @param \Tx_Seminars_Model_Event $event the event to unhide
-     *
-     * @return void
+     * Marks the given event as visible and saves it.
      */
-    protected function unhideEvent(\Tx_Seminars_Model_Event $event)
+    protected function unhideEvent(\Tx_Seminars_Model_Event $event): void
     {
         $event->markAsVisible();
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
@@ -3486,13 +3476,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     }
 
     /**
-     * Creates a hidden copy of $event and saves it.
-     *
-     * @param \Tx_Seminars_Model_Event $event the event copy
-     *
-     * @return void
+     * Creates a hidden copy of the given and saves it.
      */
-    protected function copyEvent(\Tx_Seminars_Model_Event $event)
+    protected function copyEvent(\Tx_Seminars_Model_Event $event): void
     {
         $copy = clone $event;
         $copy->markAsHidden();

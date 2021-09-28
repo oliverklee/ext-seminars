@@ -24,14 +24,12 @@ interface RegistrationEmail extends Hook
      *          - confirmationOnUnregistration
      *          - confirmationOnRegistrationForQueue
      *          - confirmationOnQueueUpdate
-     *
-     * @return void
      */
     public function modifyAttendeeEmail(
         MailMessage $email,
         \Tx_Seminars_Model_Registration $registration,
         string $emailReason
-    );
+    ): void;
 
     /**
      * Modifies the attendee "Thank you" email body just before the subpart is rendered to plain text.
@@ -46,14 +44,12 @@ interface RegistrationEmail extends Hook
      *          - confirmationOnUnregistration
      *          - confirmationOnRegistrationForQueue
      *          - confirmationOnQueueUpdate
-     *
-     * @return void
      */
     public function modifyAttendeeEmailBodyPlainText(
         Template $emailTemplate,
         \Tx_Seminars_Model_Registration $registration,
         string $emailReason
-    );
+    ): void;
 
     /**
      * Modifies the attendee "Thank you" email body just before the subpart is rendered to HTML.
@@ -67,14 +63,12 @@ interface RegistrationEmail extends Hook
      *          - confirmationOnUnregistration
      *          - confirmationOnRegistrationForQueue
      *          - confirmationOnQueueUpdate
-     *
-     * @return void
      */
     public function modifyAttendeeEmailBodyHtml(
         Template $emailTemplate,
         \Tx_Seminars_Model_Registration $registration,
         string $emailReason
-    );
+    ): void;
 
     /**
      * Modifies the organizer notification email just before it is sent.
@@ -86,14 +80,12 @@ interface RegistrationEmail extends Hook
      *        - notificationOnUnregistration
      *        - notificationOnRegistrationForQueue
      *        - notificationOnQueueUpdate
-     *
-     * @return void
      */
     public function modifyOrganizerEmail(
         MailMessage $email,
         \Tx_Seminars_Model_Registration $registration,
         string $emailReason
-    );
+    ): void;
 
     /**
      * Modifies the organizer additional notification email just before it is sent.
@@ -104,12 +96,10 @@ interface RegistrationEmail extends Hook
      *          - 'EnoughRegistrations' if the event has enough attendances
      *          - 'IsFull' if the event is fully booked
      *          see Tx_Seminars_Service_RegistrationManager::getReasonForNotification()
-     *
-     * @return void
      */
     public function modifyAdditionalEmail(
         MailMessage $email,
         \Tx_Seminars_Model_Registration $registration,
         string $emailReason
-    );
+    ): void;
 }

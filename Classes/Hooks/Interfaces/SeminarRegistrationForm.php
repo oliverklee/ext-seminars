@@ -13,30 +13,24 @@ interface SeminarRegistrationForm extends Hook
      * Modifies the header of the seminar registration form.
      *
      * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
-     *
-     * @return void
      */
-    public function modifyRegistrationHeader(\Tx_Seminars_FrontEnd_DefaultController $controller);
+    public function modifyRegistrationHeader(\Tx_Seminars_FrontEnd_DefaultController $controller): void;
 
     /**
      * Modifies the seminar registration form.
      *
      * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
      * @param \Tx_Seminars_FrontEnd_RegistrationForm $registrationEditor the registration form
-     *
-     * @return void
      */
     public function modifyRegistrationForm(
         \Tx_Seminars_FrontEnd_DefaultController $controller,
         \Tx_Seminars_FrontEnd_RegistrationForm $registrationEditor
-    );
+    ): void;
 
     /**
      * Modifies the footer of the seminar registration form.
      *
      * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
-     *
-     * @return void
      */
-    public function modifyRegistrationFooter(\Tx_Seminars_FrontEnd_DefaultController $controller);
+    public function modifyRegistrationFooter(\Tx_Seminars_FrontEnd_DefaultController $controller): void;
 }

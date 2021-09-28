@@ -11,9 +11,6 @@ namespace OliverKlee\Seminars\Tests\Unit\Hooks\Fixtures;
  */
 final class TestingHookImplementorNotImplementsInterface implements TestingHookInterfaceNotExtendsHook
 {
-    /**
-     * @return void
-     */
     public function testHookMethod(): void
     {
     }

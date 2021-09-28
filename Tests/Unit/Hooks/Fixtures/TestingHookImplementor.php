@@ -24,7 +24,7 @@ class TestingHookImplementor implements TestingHookInterface
     /**
      * Gets called during HookProvider tests.
      */
-    public function testHookMethod()
+    public function testHookMethod(): void
     {
         static::$wasCalled++;
     }

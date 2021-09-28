@@ -56,10 +56,8 @@ class DataHandlerHook
 
     /**
      * Creates the time slots requested by the time slot wizard (if any are requested).
-     *
-     * @return void
      */
-    public function processDatamap_beforeStart(DataHandler $dataHandler)
+    public function processDatamap_beforeStart(DataHandler $dataHandler): void
     {
         $allData = &$dataHandler->datamap;
         if (!isset($allData['tx_seminars_seminars'])) {
@@ -87,12 +85,8 @@ class DataHandlerHook
      * Handles data after everything had been written to the database.
      *
      * This method is called once for all records together.
-     *
-     * @param DataHandler $dataHandler
-     *
-     * @return void
      */
-    public function processDatamap_afterAllOperations(DataHandler $dataHandler)
+    public function processDatamap_afterAllOperations(DataHandler $dataHandler): void
     {
         $this->dataHandler = $dataHandler;
         $this->processEvents();
@@ -100,10 +94,8 @@ class DataHandlerHook
 
     /**
      * Processes all events.
-     *
-     * @return void
      */
-    private function processEvents()
+    private function processEvents(): void
     {
         /** @var array[] $map */
         $map = (array)($this->dataHandler->datamap[self::TABLE_EVENTS] ?? []);
@@ -139,12 +131,8 @@ class DataHandlerHook
 
     /**
      * Processes a single event.
-     *
-     * @param int $uid
-     *
-     * @return void
      */
-    private function processSingleEvent(int $uid)
+    private function processSingleEvent(int $uid): void
     {
         /** @var array|bool $originalData */
         $originalData = $this->getConnectionForTable(self::TABLE_EVENTS)
@@ -170,10 +158,7 @@ class DataHandlerHook
         }
     }
 
-    /**
-     * @return void
-     */
-    private function copyPlacesFromTimeSlots(int $uid, array &$data)
+    private function copyPlacesFromTimeSlots(int $uid, array &$data): void
     {
         if ((int)$data['timeslots'] === 0) {
             return;
@@ -201,10 +186,7 @@ class DataHandlerHook
         $data['place'] = \count($placesUids);
     }
 
-    /**
-     * @return void
-     */
-    private function copyDatesFromTimeSlots(int $uid, array &$data)
+    private function copyDatesFromTimeSlots(int $uid, array &$data): void
     {
         if ((int)$data['timeslots'] === 0) {
             return;
@@ -214,10 +196,7 @@ class DataHandlerHook
         $this->copyEndDateFromTimeSlots($uid, $data);
     }
 
-    /**
-     * @return void
-     */
-    private function copyBeginDateFromTimeSlots(int $uid, array &$data)
+    private function copyBeginDateFromTimeSlots(int $uid, array &$data): void
     {
         $query = $this->getQueryBuilderForTable(self::TABLE_TIME_SLOTS);
         $result = $query->addSelectLiteral($query->expr()->min('begin_date', 'begin_date'))
@@ -230,10 +209,7 @@ class DataHandlerHook
         }
     }
 
-    /**
-     * @return void
-     */
-    private function copyEndDateFromTimeSlots(int $uid, array &$data)
+    private function copyEndDateFromTimeSlots(int $uid, array &$data): void
     {
         $query = $this->getQueryBuilderForTable(self::TABLE_TIME_SLOTS);
         $result = $query->addSelectLiteral($query->expr()->max('end_date', 'end_date'))
@@ -248,10 +224,8 @@ class DataHandlerHook
 
     /**
      * @param array $data data, might get changed
-     *
-     * @return void
      */
-    private function sanitizeEventDates(array &$data)
+    private function sanitizeEventDates(array &$data): void
     {
         $beginDate = (int)$data['begin_date'];
         $registrationDeadline = (int)$data['deadline_registration'];
@@ -293,10 +267,8 @@ class DataHandlerHook
 
     /**
      * @param string|int $eventUid
-     *
-     * @return void
      */
-    private function createTimeSlots(array &$event, $eventUid, array $configuration, array &$allTimeSlots)
+    private function createTimeSlots(array &$event, $eventUid, array $configuration, array &$allTimeSlots): void
     {
         // The time-slot wizard uses a Composer-provided library and hence is a Composer-only feature.
         if (!\class_exists(Rule::class)) {

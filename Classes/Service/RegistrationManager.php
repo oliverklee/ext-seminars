@@ -501,10 +501,8 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      *
      * @param \Tx_Seminars_Model_Registration $registration the registration to fill, must already have an event assigned
      * @param array $formData the raw data submitted via the form, may be empty
-     *
-     * @return void
      */
-    protected function setRegistrationData(\Tx_Seminars_Model_Registration $registration, array $formData)
+    protected function setRegistrationData(\Tx_Seminars_Model_Registration $registration, array $formData): void
     {
         $event = $registration->getEvent();
 
