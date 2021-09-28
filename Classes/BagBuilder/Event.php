@@ -60,10 +60,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
     /**
      * Configures the seminar bag to work like a BE list: It will use the
      * default sorting in the BE, and hidden records will be shown.
-     *
-     * @return void
      */
-    public function setBackEndMode()
+    public function setBackEndMode(): void
     {
         $this->useBackEndSorting();
         parent::setBackEndMode();
@@ -71,10 +69,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
 
     /**
      * Sets the sorting to be the same as in the BE.
-     *
-     * @return void
      */
-    private function useBackEndSorting()
+    private function useBackEndSorting(): void
     {
         $this->orderBy = 'begin_date DESC';
     }
@@ -86,10 +82,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * @param string $categoryUids
      *        comma-separated list of UIDs of the categories which the bag
      *        should be limited to, set to an empty string for no limitation
-     *
-     * @return void
      */
-    public function limitToCategories(string $categoryUids)
+    public function limitToCategories(string $categoryUids): void
     {
         if ($categoryUids === '') {
             unset($this->whereClauseParts['categories']);
@@ -129,10 +123,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * the parameter $placeUids.
      *
      * @param string[] $uids place UIDs, set to an empty array for no limitation, need not be SQL-safe
-     *
-     * @return void
      */
-    public function limitToPlaces(array $uids = [])
+    public function limitToPlaces(array $uids = []): void
     {
         if (empty($uids)) {
             unset($this->whereClauseParts['places']);
@@ -154,20 +146,16 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
 
     /**
      * Sets the bag to ignore canceled events.
-     *
-     * @return void
      */
-    public function ignoreCanceledEvents()
+    public function ignoreCanceledEvents(): void
     {
         $this->whereClauseParts['hideCanceledEvents'] = 'cancelled <> ' . \Tx_Seminars_Model_Event::STATUS_CANCELED;
     }
 
     /**
      * Allows the bag to include canceled events again.
-     *
-     * @return void
      */
-    public function allowCanceledEvents()
+    public function allowCanceledEvents(): void
     {
         unset($this->whereClauseParts['hideCanceledEvents']);
     }
@@ -178,10 +166,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * @param string $timeFrameKey
      *        key for the selected time-frame, must not be empty, must be one of the following:
      *        past, pastAndCurrent, current, currentAndUpcoming, upcoming, deadlineNotOver, all
-     *
-     * @return void
      */
-    public function setTimeFrame(string $timeFrameKey)
+    public function setTimeFrame(string $timeFrameKey): void
     {
         if (!\in_array($timeFrameKey, self::$validTimeFrames, true)) {
             throw new \InvalidArgumentException('The time-frame key ' . $timeFrameKey . ' is not valid.', 1333292705);
@@ -305,10 +291,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * provided as the parameter $eventTypeUids.
      *
      * @param string[] $uids event type UIDs, set to an empty array for no limitation, need not be SQL-safe
-     *
-     * @return void
      */
-    public function limitToEventTypes(array $uids = [])
+    public function limitToEventTypes(array $uids = []): void
     {
         if (empty($uids)) {
             unset($this->whereClauseParts['eventTypes']);
@@ -335,10 +319,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * $cities.
      *
      * @param string[] $cities city names, set to an empty array for no limitation, may not be SQL-safe
-     *
-     * @return void
      */
-    public function limitToCities(array $cities = [])
+    public function limitToCities(array $cities = []): void
     {
         if (empty($cities)) {
             unset($this->whereClauseParts['cities']);
@@ -365,10 +347,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * @param string[] $countries
      *        ISO 3166-2 (alpha2) country codes, invalid country codes are allowed, set to an empty array for no limitation,
      *        need not be SQL-safe
-     *
-     * @return void
      */
-    public function limitToCountries(array $countries = [])
+    public function limitToCountries(array $countries = []): void
     {
         if (empty($countries)) {
             unset($this->whereClauseParts['countries']);
@@ -395,10 +375,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * @param string[] $languages
      *        ISO 639-1 (alpha2) language codes, invalid language codes are allowed, set to an empty array for no limitation,
      *        need not be SQL-safe
-     *
-     * @return void
      */
-    public function limitToLanguages(array $languages = [])
+    public function limitToLanguages(array $languages = []): void
     {
         if (empty($languages)) {
             unset($this->whereClauseParts['languages']);
@@ -428,10 +406,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
 
     /**
      * Limits the bag to topic event records.
-     *
-     * @return void
      */
-    public function limitToTopicRecords()
+    public function limitToTopicRecords(): void
     {
         $this->whereClauseParts['topic'] = 'tx_seminars_seminars' .
             '.object_type = ' . \Tx_Seminars_Model_Event::TYPE_TOPIC;
@@ -439,10 +415,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
 
     /**
      * Removes the limitation for topic event records.
-     *
-     * @return void
      */
-    public function removeLimitToTopicRecords()
+    public function removeLimitToTopicRecords(): void
     {
         unset($this->whereClauseParts['topic']);
     }
@@ -452,10 +426,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * $feUserUid is the owner.
      *
      * @param int $feUserUid the FE user UID of the owner to limit for, set to 0 to remove the limitation, must be >= 0
-     *
-     * @return void
      */
-    public function limitToOwner(int $feUserUid)
+    public function limitToOwner(int $feUserUid): void
     {
         if ($feUserUid < 0) {
             throw new \InvalidArgumentException('The parameter $feUserUid must be >= 0.', 1333292720);
@@ -471,10 +443,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
 
     /**
      * Limits the bag to date and single records.
-     *
-     * @return void
      */
-    public function limitToDateAndSingleRecords()
+    public function limitToDateAndSingleRecords(): void
     {
         $this->whereClauseParts['date_single'] = '(tx_seminars_seminars' .
             '.object_type = ' . \Tx_Seminars_Model_Event::TYPE_DATE . ' OR ' .
@@ -484,10 +454,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
 
     /**
      * Removes the limitation for date and single records.
-     *
-     * @return void
      */
-    public function removeLimitToDateAndSingleRecords()
+    public function removeLimitToDateAndSingleRecords(): void
     {
         unset($this->whereClauseParts['date_single']);
     }
@@ -498,10 +466,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      *
      * @param int $feUserUid
      *        the FE user UID of the event manager to limit for, set to 0 to remove the limitation, must be >= 0
-     *
-     * @return void
      */
-    public function limitToEventManager(int $feUserUid)
+    public function limitToEventManager(int $feUserUid): void
     {
         if ($feUserUid < 0) {
             throw new \InvalidArgumentException('The parameter $feUserUid must be >= 0.', 1333292729);
@@ -524,10 +490,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * event in the first parameter $event.
      *
      * @param \Tx_Seminars_OldModel_Event $event the event object with the end date to limit for, must have an end date
-     *
-     * @return void
      */
-    public function limitToEventsNextDay(\Tx_Seminars_OldModel_Event $event)
+    public function limitToEventsNextDay(\Tx_Seminars_OldModel_Event $event): void
     {
         if (!$event->hasEndDate()) {
             throw new \InvalidArgumentException(
@@ -546,10 +510,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
 
     /**
      * Removes the limitation to events on the next day.
-     *
-     * @return void
      */
-    public function removeLimitToEventsNextDay()
+    public function removeLimitToEventsNextDay(): void
     {
         unset($this->whereClauseParts['next_day']);
     }
@@ -559,10 +521,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * given in the first parameter $event.
      *
      * @param \Tx_Seminars_OldModel_Event $event the date or topic object to find other dates of the same topic for
-     *
-     * @return void
      */
-    public function limitToOtherDatesForTopic(\Tx_Seminars_OldModel_Event $event)
+    public function limitToOtherDatesForTopic(\Tx_Seminars_OldModel_Event $event): void
     {
         if (!$event->isEventDate() && !$event->isEventTopic()) {
             throw new \InvalidArgumentException(
@@ -580,10 +540,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
 
     /**
      * Removes the limitation for other dates of this topic.
-     *
-     * @return void
      */
-    public function removeLimitToOtherDatesForTopic()
+    public function removeLimitToOtherDatesForTopic(): void
     {
         unset($this->whereClauseParts['other_dates']);
     }
@@ -592,10 +550,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * Limits the bag based on the input search words (using OR of full-text search).
      *
      * @param string $searchWords the search words, separated by spaces or commas, may be empty, need not be SQL-safe
-     *
-     * @return void
      */
-    public function limitToFullTextSearch(string $searchWords)
+    public function limitToFullTextSearch(string $searchWords): void
     {
         $searchWords = \trim($searchWords, self::TRIM_CHARACTER_LIST);
 
@@ -647,10 +603,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
     /**
      * Limits the bag to future events for which the cancelation deadline
      * reminder has not been sent yet.
-     *
-     * @return void
      */
-    public function limitToCancelationDeadlineReminderNotSent()
+    public function limitToCancelationDeadlineReminderNotSent(): void
     {
         $this->whereClauseParts['cancelation_reminder_not_sent']
             = 'tx_seminars_seminars.cancelation_deadline_reminder_sent = 0';
@@ -659,10 +613,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
     /**
      * Limits the bag to future events for which the reminder that an event is
      * about to take place has not been sent yet.
-     *
-     * @return void
      */
-    public function limitToEventTakesPlaceReminderNotSent()
+    public function limitToEventTakesPlaceReminderNotSent(): void
     {
         $this->whereClauseParts['event_takes_place_reminder_not_sent']
             = 'tx_seminars_seminars.event_takes_place_reminder_sent = 0';
@@ -672,10 +624,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * Limits the bag to events in status $status.
      *
      * @param int $status \Tx_Seminars_Model_Event::STATUS_PLANNED, ::STATUS_CONFIRMED or ::STATUS_CANCELED
-     *
-     * @return void
      */
-    public function limitToStatus(int $status)
+    public function limitToStatus(int $status): void
     {
         $this->whereClauseParts['event_status']
             = 'tx_seminars_seminars.cancelled = ' . $status;
@@ -686,10 +636,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * begin date.
      *
      * @param int $days days before the begin date, must be > 0
-     *
-     * @return void
      */
-    public function limitToDaysBeforeBeginDate(int $days)
+    public function limitToDaysBeforeBeginDate(int $days): void
     {
         $nowPlusDays = $GLOBALS['SIM_EXEC_TIME'] + $days * Time::SECONDS_PER_DAY;
 
@@ -973,15 +921,13 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      *        the foreign table to search in, must not be empty
      * @param string $mmTable
      *        the m:n relation table, must not be empty
-     *
-     * @return void
      */
     private function checkParametersForMmSearchFunctions(
         string $searchWord,
         string $searchFieldKey,
         string $foreignTable,
         string $mmTable
-    ) {
+    ): void {
         if (\trim($searchWord, self::TRIM_CHARACTER_LIST . '\'%') === '') {
             throw new \InvalidArgumentException('The first parameter $searchWord must no be empty.', 1333292804);
         }
@@ -1007,10 +953,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * given topic.
      *
      * @param int $eventUid the UID of the topic event for which the requirements should be found, must be > 0
-     *
-     * @return void
      */
-    public function limitToRequiredEventTopics(int $eventUid)
+    public function limitToRequiredEventTopics(int $eventUid): void
     {
         $this->whereClauseParts['requiredEventTopics'] =
             'tx_seminars_seminars_requirements_mm.uid_local = ' . $eventUid .
@@ -1024,10 +968,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * Limits the search result to topics which depend on the given topic.
      *
      * @param int $eventUid the UID of the topic event which the searched events depend on, must be > 0
-     *
-     * @return void
      */
-    public function limitToDependingEventTopics(int $eventUid)
+    public function limitToDependingEventTopics(int $eventUid): void
     {
         $this->whereClauseParts['dependingEventTopics'] =
             'tx_seminars_seminars_requirements_mm.uid_foreign = ' . $eventUid .
@@ -1047,10 +989,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * be counted as not existing.
      *
      * @param int $uid the UID of the front-end user whose registered events should be removed from the bag, must be > 0
-     *
-     * @return void
      */
-    public function limitToTopicsWithoutRegistrationByUser(int $uid)
+    public function limitToTopicsWithoutRegistrationByUser(int $uid): void
     {
         $this->limitToTopicRecords();
         $this->whereClauseParts['topicsWithoutUserRegistration'] =
@@ -1071,10 +1011,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * A $earliestBeginDate of 0 will remove the filter.
      *
      * @param int $earliestBeginDate the earliest begin date as UNIX time-stamp, 0 will remove the limit
-     *
-     * @return void
      */
-    public function limitToEarliestBeginOrEndDate(int $earliestBeginDate)
+    public function limitToEarliestBeginOrEndDate(int $earliestBeginDate): void
     {
         if ($earliestBeginDate === 0) {
             unset($this->whereClauseParts['earliestBeginDate']);
@@ -1097,10 +1035,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * A $latestBeginDate of 0 will remove the filter.
      *
      * @param int $latestBeginDate the latest begin date as UNIX time-stamp, 0 will remove the limit
-     *
-     * @return void
      */
-    public function limitToLatestBeginOrEndDate(int $latestBeginDate)
+    public function limitToLatestBeginOrEndDate(int $latestBeginDate): void
     {
         if ($latestBeginDate === 0) {
             unset($this->whereClauseParts['latestBeginDate']);
@@ -1116,10 +1052,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
 
     /**
      * Limits the bag to events which are not fully-booked yet (or have a queue).
-     *
-     * @return void
      */
-    public function limitToEventsWithVacancies()
+    public function limitToEventsWithVacancies(): void
     {
         $seats = '(SELECT COALESCE(SUM(seats),0) FROM tx_seminars_attendances ' .
             'WHERE seminar = tx_seminars_seminars.uid' .
@@ -1140,10 +1074,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * @param string $organizerUids
      *               comma-separated list of organizer UIDs to limit the bag to,
      *               may be empty
-     *
-     * @return void
      */
-    public function limitToOrganizers(string $organizerUids)
+    public function limitToOrganizers(string $organizerUids): void
     {
         if ($organizerUids === '') {
             return;
@@ -1181,10 +1113,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * the provided age.
      *
      * @param int $age the age to limit the bag to, must be >= 0
-     *
-     * @return void
      */
-    public function limitToAge(int $age)
+    public function limitToAge(int $age): void
     {
         if ($age === 0) {
             return;
@@ -1280,10 +1210,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * maximum price.
      *
      * @param int $maximumPrice the maximum price an event is allowed to cost, must be >= 0
-     *
-     * @return void
      */
-    public function limitToMaximumPrice(int $maximumPrice)
+    public function limitToMaximumPrice(int $maximumPrice): void
     {
         if ($maximumPrice === 0) {
             return;
@@ -1340,10 +1268,8 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
      * minimum price.
      *
      * @param int $minimumPrice the minimum price an event is allowed to cost, must be >= 0
-     *
-     * @return void
      */
-    public function limitToMinimumPrice(int $minimumPrice)
+    public function limitToMinimumPrice(int $minimumPrice): void
     {
         if ($minimumPrice === 0) {
             return;

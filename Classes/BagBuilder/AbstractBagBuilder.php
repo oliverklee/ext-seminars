@@ -106,10 +106,8 @@ abstract class AbstractBagBuilder
     /**
      * Configures the bag to work like a BE list: It will use the default
      * sorting in the BE, and hidden records will be shown.
-     *
-     * @return void
      */
-    public function setBackEndMode()
+    public function setBackEndMode(): void
     {
         $this->showHiddenRecords();
         $this->ignoreTimingOfRecords = true;
@@ -123,10 +121,8 @@ abstract class AbstractBagBuilder
      *        must not be empty; need not be safeguarded against SQL injection
      * @param int $recursionDepth
      *        recursion depth, must be >= 0
-     *
-     * @return void
      */
-    public function setSourcePages(string $sourcePagePids, int $recursionDepth = 0)
+    public function setSourcePages(string $sourcePagePids, int $recursionDepth = 0): void
     {
         if (!\preg_match('/^([\\d+,] *)*\\d+$/', $sourcePagePids)) {
             unset($this->whereClauseParts['pages']);
@@ -157,10 +153,8 @@ abstract class AbstractBagBuilder
     /**
      * Sets the created bag to only take records into account that have been
      * created with the oelib testing framework.
-     *
-     * @return void
      */
-    public function setTestMode()
+    public function setTestMode(): void
     {
         $this->whereClauseParts['tests'] = $this->tableName . '.is_dummy_record = 1';
     }
@@ -206,10 +200,8 @@ abstract class AbstractBagBuilder
      *
      * @param string $key the limitation key to return, must not be empty
      * @param string $value the WHERE clause part of a limitation, empty value removes the limitation
-     *
-     * @return void
      */
-    public function setWhereClausePart(string $key, string $value)
+    public function setWhereClausePart(string $key, string $value): void
     {
         if (empty($key)) {
             throw new \InvalidArgumentException('The parameter $key must not be empty.', 1569331332);
@@ -228,10 +220,8 @@ abstract class AbstractBagBuilder
      * $this->additionalTableNames.
      *
      * @param string $additionalTableName the table name to add to the additional table names array, must not be empty
-     *
-     * @return void
      */
-    public function addAdditionalTableName(string $additionalTableName)
+    public function addAdditionalTableName(string $additionalTableName): void
     {
         if ($additionalTableName === '') {
             throw new \InvalidArgumentException('The parameter $additionalTableName must not be empty.', 1333292599);
@@ -245,10 +235,8 @@ abstract class AbstractBagBuilder
      * $this->additionalTableNames.
      *
      * @param string $additionalTableName the table name to remove from the additional table names array, must not be empty
-     *
-     * @return void
      */
-    public function removeAdditionalTableName(string $additionalTableName)
+    public function removeAdditionalTableName(string $additionalTableName): void
     {
         if ($additionalTableName === '') {
             throw new \InvalidArgumentException('The parameter $additionalTableName must not be empty.', 1333292576);
@@ -268,10 +256,8 @@ abstract class AbstractBagBuilder
      * Sets the ORDER BY statement for the bag to build.
      *
      * @param string $orderBy the ORDER BY statement to set, may be empty
-     *
-     * @return void
      */
-    public function setOrderBy(string $orderBy)
+    public function setOrderBy(string $orderBy): void
     {
         $this->orderBy = $orderBy;
     }
@@ -285,20 +271,16 @@ abstract class AbstractBagBuilder
      * - "10" to limit the bag to the first 10 records
      *
      * @param string $limit the LIMIT statement to set, may be empty
-     *
-     * @return void
      */
-    public function setLimit(string $limit)
+    public function setLimit(string $limit): void
     {
         $this->limit = $limit;
     }
 
     /**
      * Configures the bag to also contain hidden records.
-     *
-     * @return void
      */
-    public function showHiddenRecords()
+    public function showHiddenRecords(): void
     {
         $this->showHiddenRecords = true;
     }

@@ -143,10 +143,8 @@ abstract class AbstractBag implements \Iterator
      * $this->enabledFieldsQuery.
      *
      * @param int $showHiddenRecords If $showHiddenRecords is set (0/1), any hidden-fields in records are ignored.
-     *
-     * @return void
      */
-    private function createEnabledFieldsQuery(int $showHiddenRecords = -1)
+    private function createEnabledFieldsQuery(int $showHiddenRecords = -1): void
     {
         $query = '';
         foreach (GeneralUtility::trimExplode(',', $this->allTableNames, true) as $table) {
@@ -201,10 +199,8 @@ abstract class AbstractBag implements \Iterator
      * query parameters from $this->queryParameters for the DB query.
      * The query works so that the column names are *not*
      * prefixed with the table name.
-     *
-     * @return void
      */
-    public function rewind()
+    public function rewind(): void
     {
         $this->key = 0;
     }
@@ -212,7 +208,7 @@ abstract class AbstractBag implements \Iterator
     /**
      * @return void
      */
-    private function executeQueryIfNotDoneYet()
+    private function executeQueryIfNotDoneYet(): void
     {
         if ($this->queryHasBeenExecuted) {
             return;
@@ -271,10 +267,8 @@ abstract class AbstractBag implements \Iterator
 
     /**
      * Returns the key of the current item (not the UID).
-     *
-     * @return int|null
      */
-    public function key()
+    public function key(): ?int
     {
         return $this->key;
     }

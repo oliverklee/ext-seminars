@@ -27,10 +27,8 @@ class Tx_Seminars_BagBuilder_Organizer extends AbstractBagBuilder
      * have any organizers).
      *
      * @param int $eventUid the event UID to limit the organizers for, must be > 0
-     *
-     * @return void
      */
-    public function limitToEvent(int $eventUid)
+    public function limitToEvent(int $eventUid): void
     {
         if ($eventUid <= 0) {
             throw new \InvalidArgumentException('The parameter $eventUid must be > 0.', 1333292898);
