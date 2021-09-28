@@ -316,12 +316,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         return self::makeListToFormidableList($organizers);
     }
 
-    /**
-     * Returns the logged-in user.
-     *
-     * @return \Tx_Seminars_Model_FrontEndUser|null
-     */
-    protected static function getLoggedInUser()
+    protected static function getLoggedInUser(): ?\Tx_Seminars_Model_FrontEndUser
     {
         return FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
     }
@@ -330,14 +325,12 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * Provides data items for the list of available places.
      *
      * @param array[] $items any pre-filled data (may be empty)
-     * @param array|null $unused unused
-     * @param \tx_mkforms_forms_Base $form
      *
      * @return array[] $items with additional items from the places table
      *               as an array with the keys "caption" (for the title)
      *               and "value" (for the UID)
      */
-    public function populateListPlaces(array $items, $unused = null, \tx_mkforms_forms_Base $form = null): array
+    public function populateListPlaces(array $items, ?array $unused = null, ?\tx_mkforms_forms_Base $form = null): array
     {
         $result = $items;
 
@@ -399,16 +392,13 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Provides data items for the list of available speakers.
      *
-     * @param array $parameters the parameters sent to this function by FORMidable
-     * @param \tx_mkforms_forms_Base $form
-     *
      * @return array[] $items with additional items from the speakers table
      *               as an array with the keys "caption" (for the title)
      *               and "value" (for the UID)
      */
     public function populateListSpeakers(
         array $parameters = [],
-        \tx_mkforms_forms_Base $form = null
+        ?\tx_mkforms_forms_Base $form = null
     ): array {
         $result = [];
 
@@ -490,8 +480,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * Provides data items for the list of available checkboxes.
      *
      * @param array[] $items any pre-filled data (may be empty)
-     * @param array|null $unused unused
-     * @param \tx_mkforms_forms_Base $form
      *
      * @return array[] $items with additional items from the checkboxes
      *               table as an array with the keys "caption" (for the
@@ -499,7 +487,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      */
     public function populateListCheckboxes(
         array $items,
-        $unused = null,
+        ?array $unused = null,
         \tx_mkforms_forms_Base $form = null
     ): array {
         $result = $items;
@@ -563,8 +551,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * Provides data items for the list of available target groups.
      *
      * @param array[] $items array any pre-filled data (may be empty)
-     * @param array|null $unused unused
-     * @param \tx_mkforms_forms_Base $form
      *
      * @return array[] $items with additional items from the target groups
      *               table as an array with the keys "caption" (for the
@@ -572,8 +558,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      */
     public function populateListTargetGroups(
         array $items,
-        $unused = null,
-        \tx_mkforms_forms_Base $form = null
+        ?array $unused = null,
+        ?\tx_mkforms_forms_Base $form = null
     ): array {
         $result = $items;
 
@@ -1429,10 +1415,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
 
     /**
      * Gets the reviewer for new/edited records.
-     *
-     * @return BackEndUser|null
      */
-    protected function getReviewer()
+    protected function getReviewer(): ?BackEndUser
     {
         MapperRegistry::purgeInstance();
         return self::getLoggedInUser()->getReviewerFromGroup();

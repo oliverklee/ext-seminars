@@ -203,10 +203,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
 
     /**
      * Returns the current registration object.
-     *
-     * @return \Tx_Seminars_OldModel_Registration|null
      */
-    private function getRegistration()
+    private function getRegistration(): ?\Tx_Seminars_OldModel_Registration
     {
         return $this->registration;
     }

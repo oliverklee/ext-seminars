@@ -36,12 +36,7 @@ class Tx_Seminars_Model_TargetGroup extends AbstractModel implements Titled
         $this->setAsString('title', $title);
     }
 
-    /**
-     * Returns our owner.
-     *
-     * @return \Tx_Seminars_Model_FrontEndUser|null
-     */
-    public function getOwner()
+    public function getOwner(): ?\Tx_Seminars_Model_FrontEndUser
     {
         /** @var \Tx_Seminars_Model_FrontEndUser|null $owner */
         $owner = $this->getAsModel('owner');

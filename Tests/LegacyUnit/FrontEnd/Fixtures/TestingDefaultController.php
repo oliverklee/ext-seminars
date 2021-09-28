@@ -9,12 +9,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd\Fixtures;
  */
 class TestingDefaultController extends \Tx_Seminars_FrontEnd_DefaultController
 {
-    /**
-     * @param \Tx_Seminars_OldModel_Event|null $event
-     *
-     * @return void
-     */
-    public function setSeminar(\Tx_Seminars_OldModel_Event $event = null)
+    public function setSeminar(?\Tx_Seminars_OldModel_Event $event = null): void
     {
         parent::setSeminar($event);
     }

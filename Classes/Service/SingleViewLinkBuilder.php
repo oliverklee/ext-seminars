@@ -33,10 +33,8 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
 
     /**
      * Returns the plugin used for accessing the flexforms plugin settings.
-     *
-     * @return TemplateHelper|null
      */
-    protected function getPlugin()
+    protected function getPlugin(): ?TemplateHelper
     {
         return $this->plugin;
     }
@@ -91,10 +89,7 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
         return $this->getFrontEndController()->cObj;
     }
 
-    /**
-     * @return TypoScriptFrontendController|null
-     */
-    private function getFrontEndController()
+    private function getFrontEndController(): ?TypoScriptFrontendController
     {
         return $GLOBALS['TSFE'] ?? null;
     }

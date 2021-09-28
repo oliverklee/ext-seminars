@@ -304,10 +304,8 @@ class Tx_Seminars_OldModel_Speaker extends AbstractModel
 
     /**
      * Returns our owner.
-     *
-     * @return \Tx_Seminars_Model_FrontEndUser|null
      */
-    public function getOwner()
+    public function getOwner(): ?\Tx_Seminars_Model_FrontEndUser
     {
         if (!$this->hasRecordPropertyInteger('owner')) {
             return null;
@@ -349,10 +347,7 @@ class Tx_Seminars_OldModel_Speaker extends AbstractModel
         return $this->getRecordPropertyInteger('image') > 0;
     }
 
-    /**
-     * @return FileReference|null
-     */
-    public function getImage()
+    public function getImage(): ?FileReference
     {
         if (!$this->hasImage()) {
             return null;

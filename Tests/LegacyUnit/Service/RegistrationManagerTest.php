@@ -355,11 +355,8 @@ final class RegistrationManagerTest extends TestCase
      * to `GeneralUtility::addInstance()`.
      *
      * @param class-string $className
-     * @param object $instance
-     *
-     * @return void
      */
-    private function addMockedInstance(string $className, $instance)
+    private function addMockedInstance(string $className, object $instance): void
     {
         GeneralUtility::addInstance($className, $instance);
         $this->mockedClassNames[] = $className;

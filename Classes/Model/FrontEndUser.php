@@ -76,10 +76,8 @@ class Tx_Seminars_Model_FrontEndUser extends OelibFrontEndUser
      * Returns the reviewer set in the groups of this user.
      *
      * Will return the first reviewer found.
-     *
-     * @return BackEndUser|null
      */
-    public function getReviewerFromGroup()
+    public function getReviewerFromGroup(): ?BackEndUser
     {
         $result = null;
 
@@ -189,10 +187,8 @@ class Tx_Seminars_Model_FrontEndUser extends OelibFrontEndUser
     /**
      * Gets the registration record for which this user is related to as
      * "additional registered person".
-     *
-     * @return \Tx_Seminars_Model_Registration|null
      */
-    public function getRegistration()
+    public function getRegistration(): ?\Tx_Seminars_Model_Registration
     {
         /** @var \Tx_Seminars_Model_Registration|null $registration */
         $registration = $this->getAsModel('tx_seminars_registration');

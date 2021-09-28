@@ -130,10 +130,7 @@ class Tx_Seminars_Model_Place extends AbstractModel implements Titled
         $this->setAsString('city', $city);
     }
 
-    /**
-     * @return Country|null
-     */
-    public function getCountry()
+    public function getCountry(): ?Country
     {
         $countryCode = $this->getAsString('country');
         if ($countryCode == '') {
@@ -234,12 +231,7 @@ class Tx_Seminars_Model_Place extends AbstractModel implements Titled
         return $this->hasString('directions');
     }
 
-    /**
-     * Returns our owner.
-     *
-     * @return \Tx_Seminars_Model_FrontEndUser|null
-     */
-    public function getOwner()
+    public function getOwner(): ?\Tx_Seminars_Model_FrontEndUser
     {
         /** @var \Tx_Seminars_Model_FrontEndUser|null $owner */
         $owner = $this->getAsModel('owner');

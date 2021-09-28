@@ -1480,10 +1480,8 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
 
     /**
      * Returns the (old) registration created via createRegistration.
-     *
-     * @return \Tx_Seminars_OldModel_Registration|null
      */
-    public function getRegistration()
+    public function getRegistration(): ?\Tx_Seminars_OldModel_Registration
     {
         return $this->registration;
     }

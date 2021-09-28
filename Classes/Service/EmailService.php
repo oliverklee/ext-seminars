@@ -129,11 +129,9 @@ class EmailService implements SingletonInterface
     }
 
     /**
-     * Returns $GLOBALS['LANG'].
-     *
-     * @return LanguageService|null
+     * Returns `$GLOBALS['LANG']`.
      */
-    protected function getLanguageService()
+    protected function getLanguageService(): ?LanguageService
     {
         return $GLOBALS['LANG'] ?? null;
     }
