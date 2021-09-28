@@ -462,12 +462,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
 
     /**
      * Sets the current seminar for the list view.
-     *
-     * @param \Tx_Seminars_OldModel_Event|null $event the current seminar
-     *
-     * @return void
      */
-    protected function setSeminar(\Tx_Seminars_OldModel_Event $event = null)
+    protected function setSeminar(?\Tx_Seminars_OldModel_Event $event = null): void
     {
         $this->seminar = $event;
     }
@@ -512,22 +508,15 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
         }
     }
 
-    /**
-     * Gets our seminar object.
-     *
-     * @return \Tx_Seminars_OldModel_Event|null
-     */
-    public function getSeminar()
+    public function getSeminar(): ?\Tx_Seminars_OldModel_Event
     {
         return $this->seminar;
     }
 
     /**
      * Returns the current registration.
-     *
-     * @return \Tx_Seminars_OldModel_Registration|null
      */
-    public function getRegistration()
+    public function getRegistration(): ?\Tx_Seminars_OldModel_Registration
     {
         return $this->registration;
     }
@@ -543,14 +532,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     }
 
     /**
-     * Returns our config getter (which might be NULL if we aren't initialized
-     * properly yet).
-     *
      * This function is intended for testing purposes only.
-     *
-     * @return \Tx_Seminars_Service_ConfigurationService|null
      */
-    public function getConfigurationService()
+    public function getConfigurationService(): ?\Tx_Seminars_Service_ConfigurationService
     {
         return $this->configurationService;
     }

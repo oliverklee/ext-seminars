@@ -55,13 +55,8 @@ class Tx_Seminars_Mapper_Event extends AbstractDataMapper
 
     /**
      * Retrieves an event model with the publication hash provided.
-     *
-     * @param string $publicationHash
-     *        the publication hash to find the event for, must not be empty
-     *
-     * @return \Tx_Seminars_Model_Event|null
      */
-    public function findByPublicationHash(string $publicationHash)
+    public function findByPublicationHash(string $publicationHash): ?\Tx_Seminars_Model_Event
     {
         if ($publicationHash === '') {
             throw new \InvalidArgumentException('The given publication hash was empty.', 1333292411);

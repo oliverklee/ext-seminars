@@ -80,10 +80,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      */
     private $topic = null;
 
-    /**
-     * @return \Tx_Seminars_OldModel_Event|null
-     */
-    public function getTopic()
+    public function getTopic(): ?\Tx_Seminars_OldModel_Event
     {
         if ($this->topic instanceof \Tx_Seminars_OldModel_Event) {
             return $this->topic;
@@ -1987,12 +1984,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         return $bag;
     }
 
-    /**
-     * Returns the first organizer.
-     *
-     * @return \Tx_Seminars_OldModel_Organizer|null
-     */
-    public function getFirstOrganizer()
+    public function getFirstOrganizer(): ?\Tx_Seminars_OldModel_Organizer
     {
         if (!$this->hasOrganizers()) {
             return null;
@@ -2916,10 +2908,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * Retrieves the topic from the DB and returns it as an object.
      *
      * In case of an error, the return value will be null.
-     *
-     * @return \Tx_Seminars_OldModel_Event|null
      */
-    private function loadTopic()
+    private function loadTopic(): ?\Tx_Seminars_OldModel_Event
     {
         return self::fromUid($this->getRecordPropertyInteger('topic'));
     }
@@ -3254,10 +3244,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
     /**
      * Gets this event's owner (the FE user who has created this event).
-     *
-     * @return FrontEndUser|null
      */
-    public function getOwner()
+    public function getOwner(): ?FrontEndUser
     {
         if (!$this->hasRecordPropertyInteger('owner_feuser')) {
             return null;

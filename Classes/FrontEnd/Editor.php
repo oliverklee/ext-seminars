@@ -71,12 +71,7 @@ class Tx_Seminars_FrontEnd_Editor extends \Tx_Seminars_FrontEnd_AbstractView
         $this->formConfiguration = $formConfiguration;
     }
 
-    /**
-     * Returns the FORMidable instance.
-     *
-     * @return \tx_mkforms_forms_Base|null
-     */
-    public function getFormCreator()
+    public function getFormCreator(): ?\tx_mkforms_forms_Base
     {
         if ($this->formCreator === null) {
             $this->formCreator = $this->makeFormCreator();
@@ -125,11 +120,9 @@ class Tx_Seminars_FrontEnd_Editor extends \Tx_Seminars_FrontEnd_AbstractView
      *
      * This function does nothing if this instance is running in test mode.
      *
-     * @return \tx_mkforms_forms_Base|null
-     *
      * @throws \BadMethodCallException
      */
-    protected function makeFormCreator()
+    protected function makeFormCreator(): ?\tx_mkforms_forms_Base
     {
         if ($this->isTestMode()) {
             return null;

@@ -94,9 +94,6 @@ abstract class AbstractModel extends TemplateHelper
     /**
      * Instantiates a model from the database. If there is no record with the given UID, this method will return null.
      *
-     * @param int $uid
-     * @param bool $allowHidden
-     *
      * @return static|null
      */
     public static function fromUid(int $uid, bool $allowHidden = false)

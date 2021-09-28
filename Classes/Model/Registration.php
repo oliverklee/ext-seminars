@@ -40,12 +40,7 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
         $this->setAsString('title', $title);
     }
 
-    /**
-     * Returns the front-end user of this registration.
-     *
-     * @return \Tx_Seminars_Model_FrontEndUser|null
-     */
-    public function getFrontEndUser()
+    public function getFrontEndUser(): ?\Tx_Seminars_Model_FrontEndUser
     {
         /** @var \Tx_Seminars_Model_FrontEndUser|null $user */
         $user = $this->getAsModel('user');
@@ -53,10 +48,7 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
         return $user;
     }
 
-    /**
-     * @return void
-     */
-    public function setFrontEndUser(OelibFrontEndUser $user)
+    public function setFrontEndUser(\Tx_Seminars_Model_FrontEndUser $user): void
     {
         $this->set('user', $user);
     }
@@ -77,13 +69,11 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
     /**
      * Returns the event of this registration.
      *
-     * This is an alias for getEvent necessary for the relation to the event.
-     *
-     * @return \Tx_Seminars_Model_Event|null
+     * This is an alias for `getEvent` necessary for the relation to the event.
      *
      * @see getEvent
      */
-    public function getSeminar()
+    public function getSeminar(): ?\Tx_Seminars_Model_Event
     {
         return $this->getEvent();
     }
@@ -326,12 +316,7 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
         $this->setAsInteger('datepaid', $timestamp);
     }
 
-    /**
-     * Returns the payment method of this registration.
-     *
-     * @return \Tx_Seminars_Model_PaymentMethod|null
-     */
-    public function getPaymentMethod()
+    public function getPaymentMethod(): ?\Tx_Seminars_Model_PaymentMethod
     {
         /** @var \Tx_Seminars_Model_PaymentMethod|null $paymentMethod */
         $paymentMethod = $this->getAsModel('method_of_payment');
@@ -339,15 +324,7 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
         return $paymentMethod;
     }
 
-    /**
-     * Sets the payment method of this registration.
-     *
-     * @param \Tx_Seminars_Model_PaymentMethod|null $paymentMethod
-     *        the payment method of this registration to set, use NULL to set no payment method
-     *
-     * @return void
-     */
-    public function setPaymentMethod(\Tx_Seminars_Model_PaymentMethod $paymentMethod = null)
+    public function setPaymentMethod(?\Tx_Seminars_Model_PaymentMethod $paymentMethod = null): void
     {
         $this->set('method_of_payment', $paymentMethod);
     }

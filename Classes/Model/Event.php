@@ -282,12 +282,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
             : $this->hasString('description');
     }
 
-    /**
-     * Returns our event type.
-     *
-     * @return \Tx_Seminars_Model_EventType|null our event type, will be null if this event has no event type
-     */
-    public function getEventType()
+    public function getEventType(): ?\Tx_Seminars_Model_EventType
     {
         /** @var Tx_Seminars_Model_EventType|null $type */
         $type = $this->isEventDate() ? $this->getTopic()->getEventType() : $this->getAsModel('event_type');
@@ -783,12 +778,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
         return $this->getAsCollection('leaders');
     }
 
-    /**
-     * Returns our language.
-     *
-     * @return Language|null
-     */
-    public function getLanguage()
+    public function getLanguage(): ?Language
     {
         if (!$this->hasLanguage()) {
             return null;
@@ -1282,12 +1272,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
         return $this->getAsCollection('organizers');
     }
 
-    /**
-     * Retrieves the first organizer.
-     *
-     * @return \Tx_Seminars_Model_Organizer|null
-     */
-    public function getFirstOrganizer()
+    public function getFirstOrganizer(): ?\Tx_Seminars_Model_Organizer
     {
         /** @var \Tx_Seminars_Model_Organizer|null $organizer */
         $organizer = $this->getOrganizers()->first();
@@ -1296,7 +1281,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Returns our organinzing partners.
+     * Returns our organizing partners.
      *
      * @return Collection our organizing partners, will be empty if this event
      *                       has no organizing partners
@@ -1559,12 +1544,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
         $this->setStatus(self::STATUS_CONFIRMED);
     }
 
-    /**
-     * Returns our owner.
-     *
-     * @return OelibFrontEndUser|null
-     */
-    public function getOwner()
+    public function getOwner(): ?OelibFrontEndUser
     {
         /** @var OelibFrontEndUser|null $owner */
         $owner = $this->getAsModel('owner_feuser');

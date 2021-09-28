@@ -134,13 +134,10 @@ class Tx_Seminars_BagBuilder_Registration extends AbstractBagBuilder
      * himself, or for which they have been entered as "additional registered
      * persons".
      *
-     * @param \Tx_Seminars_Model_FrontEndUser|null $user
-     *        the front-end user to limit the bag for, set to NULL to remove the
-     *        limitation
-     *
-     * @return void
+     * @param \Tx_Seminars_Model_FrontEndUser|null $user the front-end user to limit the bag for,
+     *        set to null to remove the limitation
      */
-    public function limitToAttendee(\Tx_Seminars_Model_FrontEndUser $user = null)
+    public function limitToAttendee(?\Tx_Seminars_Model_FrontEndUser $user = null): void
     {
         if ($user === null) {
             unset($this->whereClauseParts['attendee']);

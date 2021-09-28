@@ -103,12 +103,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel
      */
     private $frontEndUserGroupRepository = null;
 
-    /**
-     * @param ContentObjectRenderer|null $contentObjectRenderer
-     *
-     * @return void
-     */
-    public function setContentObject(ContentObjectRenderer $contentObjectRenderer = null)
+    public function setContentObject(?ContentObjectRenderer $contentObjectRenderer = null): void
     {
         $this->cObj = $contentObjectRenderer;
     }
@@ -117,10 +112,8 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel
      * Purges our cached seminars array.
      *
      * This function is intended for testing purposes only.
-     *
-     * @return void
      */
-    public static function purgeCachedSeminars()
+    public static function purgeCachedSeminars(): void
     {
         self::$cachedSeminars = [];
     }
@@ -588,12 +581,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel
         return '"' . $this->getUserData('name') . '" <' . $this->getUserData('email') . '>';
     }
 
-    /**
-     * Returns the front-end user of the registration.
-     *
-     * @return \Tx_Seminars_Model_FrontEndUser|null the front-end user of the registration
-     */
-    public function getFrontEndUser()
+    public function getFrontEndUser(): ?\Tx_Seminars_Model_FrontEndUser
     {
         if ($this->user instanceof \Tx_Seminars_Model_FrontEndUser) {
             return $this->user;

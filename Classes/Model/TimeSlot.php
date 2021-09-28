@@ -44,12 +44,7 @@ class Tx_Seminars_Model_TimeSlot extends \Tx_Seminars_Model_AbstractTimeSpan
         return $this->hasInteger('entry_date');
     }
 
-    /**
-     * Returns our place.
-     *
-     * @return \Tx_Seminars_Model_Place|null
-     */
-    public function getPlace()
+    public function getPlace(): ?\Tx_Seminars_Model_Place
     {
         /** @var \Tx_Seminars_Model_Place|null $model */
         $model = $this->getAsModel('place');
@@ -59,10 +54,8 @@ class Tx_Seminars_Model_TimeSlot extends \Tx_Seminars_Model_AbstractTimeSpan
 
     /**
      * Returns the seminar/event this time-slot belongs to.
-     *
-     * @return \Tx_Seminars_Model_Event|null
      */
-    public function getSeminar()
+    public function getSeminar(): ?\Tx_Seminars_Model_Event
     {
         /** @var \Tx_Seminars_Model_Event|null $model */
         $model = $this->getAsModel('seminar');

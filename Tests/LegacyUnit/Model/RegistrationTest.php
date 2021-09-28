@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 
 use OliverKlee\Oelib\DataStructures\Collection;
-use OliverKlee\Oelib\Mapper\FrontEndUserMapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\FrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
@@ -88,16 +87,12 @@ final class RegistrationTest extends TestCase
     /**
      * @test
      */
-    public function setFrontEndUserSetsFrontEndUser()
+    public function setFrontEndUserSetsFrontEndUser(): void
     {
-        /** @var FrontEndUser $frontEndUser */
-        $frontEndUser = MapperRegistry::get(FrontEndUserMapper::class)->getNewGhost();
+        $frontEndUser = new \Tx_Seminars_Model_FrontEndUser();
         $this->subject->setFrontEndUser($frontEndUser);
 
-        self::assertSame(
-            $frontEndUser,
-            $this->subject->getFrontEndUser()
-        );
+        self::assertSame($frontEndUser, $this->subject->getFrontEndUser());
     }
 
     ///////////////////////////////

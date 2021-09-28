@@ -58,18 +58,12 @@ abstract class AbstractListView
         $this->configuration = ConfigurationRegistry::get('plugin.tx_seminars');
     }
 
-    /**
-     * @return LanguageService|null
-     */
-    protected function getLanguageService()
+    protected function getLanguageService(): ?LanguageService
     {
         return $GLOBALS['LANG'] ?? null;
     }
 
-    /**
-     * @return BackendUserAuthentication|null
-     */
-    protected function getBackEndUser()
+    protected function getBackEndUser(): ?BackendUserAuthentication
     {
         return $GLOBALS['BE_USER'] ?? null;
     }
