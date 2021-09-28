@@ -123,6 +123,11 @@ final class RegistrationManagerTest extends TestCase
      */
     private $configuration;
 
+    /**
+     * @var DummyConfiguration
+     */
+    private $extensionConfiguration;
+
     protected function setUp()
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
@@ -138,9 +143,10 @@ final class RegistrationManagerTest extends TestCase
         $this->addMockedInstance(MailMessage::class, $this->secondEmail);
 
         \Tx_Seminars_OldModel_Registration::purgeCachedSeminars();
-        /** @var ConfigurationProxy $configurationProxy */
-        $configurationProxy = ConfigurationProxy::getInstance('seminars');
-        $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_TEXT_MAIL);
+        $this->extensionConfiguration = new DummyConfiguration(
+            ['eMailFormatForAttendees' => TestingRegistrationManager::SEND_TEXT_MAIL]
+        );
+        ConfigurationProxy::setInstance('seminars', $this->extensionConfiguration);
         $configurationRegistry = ConfigurationRegistry::getInstance();
         $this->configuration = new DummyConfiguration(
             [
@@ -200,6 +206,7 @@ final class RegistrationManagerTest extends TestCase
 
         $this->purgeMockedInstances();
 
+        ConfigurationProxy::purgeInstances();
         TestingRegistrationManager::purgeInstance();
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'] = $this->extConfBackup;
     }
@@ -2114,9 +2121,8 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForSendConfirmationTrueCallsRegistrationEmailHookMethodsForPlainTextEmail()
     {
-        /** @var ConfigurationProxy $configurationProxy */
-        $configurationProxy = ConfigurationProxy::getInstance('seminars');
-        $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_TEXT_MAIL);
+        $this->extensionConfiguration
+            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_TEXT_MAIL);
         $this->configuration->setAsBoolean('sendConfirmation', true);
 
         $registrationOld = $this->createRegistration();
@@ -2153,9 +2159,8 @@ final class RegistrationManagerTest extends TestCase
      */
     public function notifyAttendeeForSendConfirmationTrueCallsRegistrationEmailHookMethodsForHtmlEmail()
     {
-        /** @var ConfigurationProxy $configurationProxy */
-        $configurationProxy = ConfigurationProxy::getInstance('seminars');
-        $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+        $this->extensionConfiguration
+            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
         $this->configuration->setAsBoolean('sendConfirmation', true);
 
         $registrationOld = $this->createRegistration();
@@ -2407,9 +2412,8 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForHtmlMailSetHasHtmlBody()
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        /** @var ConfigurationProxy $configurationProxy */
-        $configurationProxy = ConfigurationProxy::getInstance('seminars');
-        $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+        $this->extensionConfiguration
+            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -2464,9 +2468,8 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForHtmlMailHasNoUnreplacedMarkers()
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        /** @var ConfigurationProxy $configurationProxy */
-        $configurationProxy = ConfigurationProxy::getInstance('seminars');
-        $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+        $this->extensionConfiguration
+            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
         $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
         $pi1->init();
 
@@ -2485,9 +2488,8 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForMailSetToUserModeAndUserSetToHtmlMailsHasHtmlBody()
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        /** @var ConfigurationProxy $configurationProxy */
-        $configurationProxy = ConfigurationProxy::getInstance('seminars');
-        $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_USER_MAIL);
+        $this->extensionConfiguration
+            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_USER_MAIL);
         $registration = $this->createRegistration();
         $registration->getFrontEndUser()->setData(
             [
@@ -2512,9 +2514,8 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForMailSetToUserModeAndUserSetToTextMailsNotHasHtmlBody()
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        /** @var ConfigurationProxy $configurationProxy */
-        $configurationProxy = ConfigurationProxy::getInstance('seminars');
-        $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_USER_MAIL);
+        $this->extensionConfiguration
+            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_USER_MAIL);
         $registration = $this->createRegistration();
         $registration->getFrontEndUser()->setData(
             [
@@ -2539,9 +2540,8 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForHtmlMailsContainsNameOfUserInBody()
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        /** @var ConfigurationProxy $configurationProxy */
-        $configurationProxy = ConfigurationProxy::getInstance('seminars');
-        $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+        $this->extensionConfiguration
+            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
         $registration = $this->createRegistration();
         $this->testingFramework->changeRecord(
             'fe_users',
@@ -2565,9 +2565,8 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForHtmlMailsHasLinkToSeminarInBody()
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        /** @var ConfigurationProxy $configurationProxy */
-        $configurationProxy = ConfigurationProxy::getInstance('seminars');
-        $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+        $this->extensionConfiguration
+            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
         $registration = $this->createRegistration();
         $registration->getFrontEndUser()->setData(
             ['email' => 'foo@bar.com']
@@ -2700,9 +2699,8 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForHtmlMailsHasCssStylesFromFile()
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        /** @var ConfigurationProxy $configurationProxy */
-        $configurationProxy = ConfigurationProxy::getInstance('seminars');
-        $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+        $this->extensionConfiguration
+            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
         $this->subject->setConfigurationValue(
             'cssFileForAttendeeMail',
             'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
@@ -2764,9 +2762,8 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForHtmlMailReturnsAttendeesNamesInOrderedList()
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        /** @var ConfigurationProxy $configurationProxy */
-        $configurationProxy = ConfigurationProxy::getInstance('seminars');
-        $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+        $this->extensionConfiguration
+            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
         $this->subject->setConfigurationValue(
             'cssFileForAttendeeMail',
             'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
@@ -2896,9 +2893,8 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForHtmlMailSeparatesPlacesTitleAndAddressWithBreaks()
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        /** @var ConfigurationProxy $configurationProxy */
-        $configurationProxy = ConfigurationProxy::getInstance('seminars');
-        $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+        $this->extensionConfiguration
+            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
         $this->subject->setConfigurationValue(
             'cssFileForAttendeeMail',
             'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
@@ -3107,9 +3103,8 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForPlaceAddressAndHtmlMailsReplacesMultipleLineFeedsWithSpaces()
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        /** @var ConfigurationProxy $configurationProxy */
-        $configurationProxy = ConfigurationProxy::getInstance('seminars');
-        $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+        $this->extensionConfiguration
+            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
         $this->subject->setConfigurationValue(
             'cssFileForAttendeeMail',
             'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
@@ -3144,9 +3139,8 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForPlaceAddressReplacesMultipleLineFeedAndCarriageReturnsWithSpaces()
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        /** @var ConfigurationProxy $configurationProxy */
-        $configurationProxy = ConfigurationProxy::getInstance('seminars');
-        $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+        $this->extensionConfiguration
+            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
         $this->subject->setConfigurationValue(
             'cssFileForAttendeeMail',
             'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
@@ -3300,9 +3294,8 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForPlaceAddressAndHtmlMailsSeparatresAddressAndCityLineWithBreaks()
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        /** @var ConfigurationProxy $configurationProxy */
-        $configurationProxy = ConfigurationProxy::getInstance('seminars');
-        $configurationProxy->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
+        $this->extensionConfiguration
+            ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
         $this->subject->setConfigurationValue(
             'cssFileForAttendeeMail',
             'EXT:seminars/Resources/Private/CSS/thankYouMail.css'

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 
-use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Exception\NotFoundException;
@@ -39,10 +38,6 @@ final class CountdownTest extends TestCase
         $configurationRegistry->set('config', new DummyConfiguration());
         $configurationRegistry->set('page.config', new DummyConfiguration());
         $configurationRegistry->set('plugin.tx_seminars._LOCAL_LANG.default', new DummyConfiguration());
-
-        /** @var ConfigurationProxy $configuration */
-        $configuration = ConfigurationProxy::getInstance('seminars');
-        $configuration->setAsBoolean('enableConfigCheck', false);
 
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();

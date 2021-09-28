@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 
-use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -37,10 +36,6 @@ final class CategoryListTest extends TestCase
     protected function setUp()
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
-
-        /** @var ConfigurationProxy $configuration */
-        $configuration = ConfigurationProxy::getInstance('seminars');
-        $configuration->setAsBoolean('enableConfigCheck', false);
 
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits;
 
-use OliverKlee\Oelib\Configuration\ConfigurationProxy;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Http\HeaderCollector;
@@ -75,9 +74,6 @@ trait BackEndTestsTrait
         $this->replaceBackEndUserWithMock();
         $this->unifyBackEndLanguage();
         $this->unifyExtensionSettings();
-        /** @var ConfigurationProxy $configuration */
-        $configuration = ConfigurationProxy::getInstance('seminars');
-        $configuration->setAsBoolean('enableConfigCheck', false);
         $this->setUpExtensionConfiguration();
         $headerProxyFactory = HeaderProxyFactory::getInstance();
         $headerProxyFactory->enableTestMode();

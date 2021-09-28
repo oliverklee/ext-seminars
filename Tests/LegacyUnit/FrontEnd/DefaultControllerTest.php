@@ -111,10 +111,6 @@ final class DefaultControllerTest extends TestCase
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
-        /** @var ConfigurationProxy $globalConfiguration */
-        $globalConfiguration = ConfigurationProxy::getInstance('seminars');
-        $globalConfiguration->setAsBoolean('enableConfigCheck', false);
-
         $this->extConfBackup = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF'];
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'] = [];
 
