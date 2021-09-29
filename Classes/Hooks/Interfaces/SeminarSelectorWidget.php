@@ -14,7 +14,6 @@ interface SeminarSelectorWidget extends Hook
      *
      * This function will be called for all types of seminar lists, if `displaySearchFormFields` is configured for it.
      *
-     * @param \Tx_Seminars_FrontEnd_SelectorWidget $selectorWidget
      * @param \Tx_Seminars_Bag_Event $seminarBag the seminars used to create the selector widget
      */
     public function modifySelectorWidget(

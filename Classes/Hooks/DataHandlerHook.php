@@ -109,8 +109,6 @@ class DataHandlerHook
 
     /**
      * @param int|string $possibleUid
-     *
-     * @return int
      */
     private function createRealUid($possibleUid): int
     {
@@ -121,8 +119,6 @@ class DataHandlerHook
 
     /**
      * @param int|string $uid
-     *
-     * @return bool
      */
     private function isRealUid($uid): bool
     {
