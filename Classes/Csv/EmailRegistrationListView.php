@@ -7,7 +7,7 @@ namespace OliverKlee\Seminars\Csv;
 /**
  * This class creates a CSV export of registrations for download.
  */
-class EmailRegistrationListView extends \Tx_Seminars_Csv_AbstractRegistrationListView
+class EmailRegistrationListView extends AbstractRegistrationListView
 {
     /**
      * Returns the keys of the front-end user fields to export.

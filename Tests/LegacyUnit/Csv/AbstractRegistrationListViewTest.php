@@ -8,18 +8,19 @@ use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Csv\AbstractRegistrationListView;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationListCsv;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * @covers \Tx_Seminars_Csv_AbstractRegistrationListView
+ * @covers \OliverKlee\Seminars\Csv\AbstractRegistrationListView
  */
 final class AbstractRegistrationListViewTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_Csv_AbstractRegistrationListView&MockObject
+     * @var AbstractRegistrationListView&MockObject
      */
     private $subject = null;
 
@@ -96,8 +97,8 @@ final class AbstractRegistrationListViewTest extends TestCase
             ]
         );
 
-        /** @var \Tx_Seminars_Csv_AbstractRegistrationListView&MockObject $subject */
-        $subject = $this->getMockForAbstractClass(\Tx_Seminars_Csv_AbstractRegistrationListView::class);
+        /** @var AbstractRegistrationListView&MockObject $subject */
+        $subject = $this->getMockForAbstractClass(AbstractRegistrationListView::class);
         $subject->method('shouldAlsoContainRegistrationsOnQueue')->willReturn(true);
 
         $testCase = $this;
@@ -303,8 +304,8 @@ final class AbstractRegistrationListViewTest extends TestCase
     {
         $this->expectException(\BadMethodCallException::class);
 
-        /** @var \Tx_Seminars_Csv_AbstractRegistrationListView&MockObject $subject */
-        $subject = $this->getMockForAbstractClass(\Tx_Seminars_Csv_AbstractRegistrationListView::class);
+        /** @var AbstractRegistrationListView&MockObject $subject */
+        $subject = $this->getMockForAbstractClass(AbstractRegistrationListView::class);
 
         self::assertSame(
             '',
@@ -319,8 +320,8 @@ final class AbstractRegistrationListViewTest extends TestCase
     {
         $this->expectException(\BadMethodCallException::class);
 
-        /** @var \Tx_Seminars_Csv_AbstractRegistrationListView&MockObject $subject */
-        $subject = $this->getMockForAbstractClass(\Tx_Seminars_Csv_AbstractRegistrationListView::class);
+        /** @var AbstractRegistrationListView&MockObject $subject */
+        $subject = $this->getMockForAbstractClass(AbstractRegistrationListView::class);
         $subject->setEventUid($this->eventUid);
         $subject->setPageUid($this->pageUid);
 
