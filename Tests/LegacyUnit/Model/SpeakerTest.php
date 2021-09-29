@@ -806,15 +806,14 @@ final class SpeakerTest extends TestCase
         );
     }
 
-    ///////////////////////////////
     // Test regarding the skills.
-    ///////////////////////////////
 
     /**
      * @test
      */
     public function setSkillsSetsSkills(): void
     {
+        /** @var Collection<\Tx_Seminars_Model_Skill> $skills */
         $skills = new Collection();
         $this->subject->setSkills($skills);
 

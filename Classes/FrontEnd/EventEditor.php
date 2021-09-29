@@ -1938,6 +1938,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     private static function setSpeakerData(\Tx_Seminars_Model_Speaker $speaker, string $prefix, array $formData): void
     {
         $skillMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Skill::class);
+        /** @var Collection<\Tx_Seminars_Model_Skill> $skills */
         $skills = new Collection();
 
         if (is_array($formData[$prefix . 'skills'])) {

@@ -11,8 +11,6 @@ use OliverKlee\Seminars\Model\Interfaces\Titled;
 class Tx_Seminars_Model_TargetGroup extends AbstractModel implements Titled
 {
     /**
-     * Returns our title.
-     *
      * @return string our title, will not be empty
      */
     public function getTitle(): string
@@ -21,13 +19,9 @@ class Tx_Seminars_Model_TargetGroup extends AbstractModel implements Titled
     }
 
     /**
-     * Sets our title.
-     *
      * @param string $title our title to set, must not be empty
-     *
-     * @return void
      */
-    public function setTitle(string $title)
+    public function setTitle(string $title): void
     {
         if ($title == '') {
             throw new \InvalidArgumentException('The parameter $title must not be empty.', 1333297060);
@@ -44,23 +38,13 @@ class Tx_Seminars_Model_TargetGroup extends AbstractModel implements Titled
         return $owner;
     }
 
-    /**
-     * Sets our owner.
-     *
-     * @param \Tx_Seminars_Model_FrontEndUser $frontEndUser the owner of this model to set
-     *
-     * @return void
-     */
-    public function setOwner(\Tx_Seminars_Model_FrontEndUser $frontEndUser)
+    public function setOwner(\Tx_Seminars_Model_FrontEndUser $frontEndUser): void
     {
         $this->set('owner', $frontEndUser);
     }
 
     /**
-     * Returns this target group's minimum age.
-     *
-     * @return int this target group's minimum age, will be >= 0; will be 0
-     *                 if no minimum age has been set
+     * @return int this target group's minimum age, will be >= 0; will be 0 if no minimum age has been set
      */
     public function getMinimumAge(): int
     {
@@ -68,23 +52,15 @@ class Tx_Seminars_Model_TargetGroup extends AbstractModel implements Titled
     }
 
     /**
-     * Sets this target group's minimum age.
-     *
-     * @param int $minimumAge
-     *        this target group's minimum age, must be >= 0; set to 0 to unset the minimum age
-     *
-     * @return void
+     * @param int $minimumAge this target group's minimum age, must be >= 0; set to 0 to unset the minimum age
      */
-    public function setMinimumAge(int $minimumAge)
+    public function setMinimumAge(int $minimumAge): void
     {
         $this->setAsInteger('minimum_age', $minimumAge);
     }
 
     /**
-     * Returns this target group's maximum age.
-     *
-     * @return int this target group's maximum age, will be >= 0; will be 0
-     *                 if no maximum age has been set
+     * @return int this target group's maximum age, will be >= 0; will be 0 if no maximum age has been set
      */
     public function getMaximumAge(): int
     {
@@ -92,14 +68,9 @@ class Tx_Seminars_Model_TargetGroup extends AbstractModel implements Titled
     }
 
     /**
-     * Sets this target group's maximum age.
-     *
-     * @param int $maximumAge
-     *        this target group's maximum age, must be >= 0; set to 0 to unset the maximum age
-     *
-     * @return void
+     * @param int $maximumAge this target group's maximum age, must be >= 0; set to 0 to unset the maximum age
      */
-    public function setMaximumAge(int $maximumAge)
+    public function setMaximumAge(int $maximumAge): void
     {
         $this->setAsInteger('maximum_age', $maximumAge);
     }

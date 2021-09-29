@@ -123,12 +123,13 @@ class Tx_Seminars_Model_FrontEndUser extends OelibFrontEndUser
     /**
      * Returns all default categories assigned to this user's groups.
      *
-     * @return Collection the categories assigned to this user's groups, will
+     * @return Collection<\Tx_Seminars_Model_Category> the categories assigned to this user's groups, will
      *                       be empty if no default categories have been assigned
      *                       to any of the user's groups
      */
     public function getDefaultCategoriesFromGroup(): Collection
     {
+        /** @var Collection<\Tx_Seminars_Model_Category> $categories */
         $categories = new Collection();
 
         /** @var \Tx_Seminars_Model_FrontEndUserGroup $group */
@@ -143,9 +144,6 @@ class Tx_Seminars_Model_FrontEndUser extends OelibFrontEndUser
 
     /**
      * Checks whether this user's groups have any default categories.
-     *
-     * @return bool TRUE if at least one of the user's groups has a default
-     *                 category, FALSE otherwise
      */
     public function hasDefaultCategories(): bool
     {
@@ -155,12 +153,13 @@ class Tx_Seminars_Model_FrontEndUser extends OelibFrontEndUser
     /**
      * Returns all default organizers assigned to this user's groups.
      *
-     * @return Collection the organizers assigned to this user's groups, will
+     * @return Collection<\Tx_Seminars_Model_Organizer> the organizers assigned to this user's groups, will
      *                       be empty if no default organizers have been assigned
      *                       to any of the user's groups
      */
     public function getDefaultOrganizers(): Collection
     {
+        /** @var Collection<\Tx_Seminars_Model_Organizer> $organizers */
         $organizers = new Collection();
 
         /** @var \Tx_Seminars_Model_FrontEndUserGroup $group */
@@ -173,20 +172,13 @@ class Tx_Seminars_Model_FrontEndUser extends OelibFrontEndUser
         return $organizers;
     }
 
-    /**
-     * Checks whether this user's groups have any default organizers.
-     *
-     * @return bool TRUE if at least one of the user's groups has a default
-     *                 organizer, FALSE otherwise
-     */
     public function hasDefaultOrganizers(): bool
     {
         return !$this->getDefaultOrganizers()->isEmpty();
     }
 
     /**
-     * Gets the registration record for which this user is related to as
-     * "additional registered person".
+     * Gets the registration record for which this user is related to as "additional registered person".
      */
     public function getRegistration(): ?\Tx_Seminars_Model_Registration
     {
@@ -197,15 +189,9 @@ class Tx_Seminars_Model_FrontEndUser extends OelibFrontEndUser
     }
 
     /**
-     * sets the registration record for which this user is related to as
-     * "additional registered person".
-     *
-     * @param \Tx_Seminars_Model_Registration $registration
-     *        the associated registration, may be NULL
-     *
-     * @return void
+     * Sets the registration record for which this user is related to as "additional registered person".
      */
-    public function setRegistration(\Tx_Seminars_Model_Registration $registration = null)
+    public function setRegistration(?\Tx_Seminars_Model_Registration $registration = null): void
     {
         $this->set('tx_seminars_registration', $registration);
     }

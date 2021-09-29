@@ -89,11 +89,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Returns our topic.
-     *
      * This method may only be called for date records.
-     *
-     * @return \Tx_Seminars_Model_Event our topic
      *
      * @throws \BadMethodCallException if this event is no (valid) date
      */
@@ -109,8 +105,6 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Returns our title.
-     *
      * @return string our title, will be empty if this event has no title
      */
     public function getTitle(): string
@@ -133,15 +127,11 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Sets our title.
-     *
      * @param string $title our title to set, must not be empty
-     *
-     * @return void
      *
      * @throws \InvalidArgumentException
      */
-    public function setTitle(string $title)
+    public function setTitle(string $title): void
     {
         if ($title === '') {
             throw new \InvalidArgumentException('$title must not be empty.', 1333293446);
@@ -151,8 +141,6 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Returns our subtitle.
-     *
      * @return string our subtitle, will be empty if this event has no subtitle
      */
     public function getSubtitle(): string
@@ -163,13 +151,9 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Sets our subtitle.
-     *
      * @param string $subtitle our subtitle to set, may be empty
-     *
-     * @return void
      */
-    public function setSubtitle(string $subtitle)
+    public function setSubtitle(string $subtitle): void
     {
         if ($this->isEventDate()) {
             $this->getTopic()->setSubtitle($subtitle);
@@ -178,11 +162,6 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
         }
     }
 
-    /**
-     * Returns whether this event has a subtitle.
-     *
-     * @return bool TRUE if this event has a subtitle, FALSE otherwise
-     */
     public function hasSubtitle(): bool
     {
         return $this->isEventDate()
@@ -191,20 +170,21 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Returns our categories.
-     *
-     * @return Collection our categories
+     * @return Collection<\Tx_Seminars_Model_Category>
      */
     public function getCategories(): Collection
     {
-        return $this->isEventDate()
-            ? $this->getTopic()->getCategories()
-            : $this->getAsCollection('categories');
+        if ($this->isEventDate()) {
+            return $this->getTopic()->getCategories();
+        }
+
+        /** @var Collection<\Tx_Seminars_Model_Category> $categories */
+        $categories = $this->getAsCollection('categories');
+
+        return $categories;
     }
 
     /**
-     * Returns our teaser.
-     *
      * @return string our teaser, might be empty
      */
     public function getTeaser(): string
@@ -215,13 +195,9 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Sets our teaser.
-     *
      * @param string $teaser our teaser, may be empty
-     *
-     * @return void
      */
-    public function setTeaser(string $teaser)
+    public function setTeaser(string $teaser): void
     {
         if ($this->isEventDate()) {
             $this->getTopic()->setTeaser($teaser);
@@ -230,11 +206,6 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
         }
     }
 
-    /**
-     * Returns whether this event has a teaser.
-     *
-     * @return bool TRUE if this event has a teaser, FALSE otherwise
-     */
     public function hasTeaser(): bool
     {
         return $this->isEventDate()
@@ -243,8 +214,6 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Returns our description.
-     *
      * @return string our description, might be empty
      */
     public function getDescription(): string
@@ -255,13 +224,9 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Sets our description.
-     *
      * @param string $description our description, may be empty
-     *
-     * @return void
      */
-    public function setDescription(string $description)
+    public function setDescription(string $description): void
     {
         if ($this->isEventDate()) {
             $this->getTopic()->setDescription($description);
@@ -270,11 +235,6 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
         }
     }
 
-    /**
-     * Returns whether this event has a description.
-     *
-     * @return bool
-     */
     public function hasDescription(): bool
     {
         return $this->isEventDate()
@@ -290,27 +250,17 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
         return $type;
     }
 
-    /**
-     * @return string
-     */
     public function getTimeZone(): string
     {
         return $this->getAsString('time_zone');
     }
 
-    /**
-     * @param string $timeZone
-     *
-     * @return void
-     */
-    public function setTimeZone(string $timeZone)
+    public function setTimeZone(string $timeZone): void
     {
         $this->setAsString('time_zone', $timeZone);
     }
 
     /**
-     * Returns our accreditation number.
-     *
      * @return string our accreditation number, will be empty if this event has
      *                no accreditation number
      */
@@ -320,31 +270,19 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Sets our accreditation number.
-     *
      * @param string $accreditationNumber our accreditation number, may be empty
-     *
-     * @return void
      */
-    public function setAccreditationNumber(string $accreditationNumber)
+    public function setAccreditationNumber(string $accreditationNumber): void
     {
         $this->setAsString('accreditation_number', $accreditationNumber);
     }
 
-    /**
-     * Returns whether this event has an accreditation number.
-     *
-     * @return bool TRUE if this event has an accreditation number, FALSE
-     *                 otherwise
-     */
     public function hasAccreditationNumber(): bool
     {
         return $this->hasString('accreditation_number');
     }
 
     /**
-     * Returns our credit points.
-     *
      * @return int our credit points, will be 0 if this event has no credit
      *                 points, will be >= 0
      */
@@ -356,13 +294,9 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Sets our credit points.
-     *
      * @param int $creditPoints our credit points, must be >= 0
-     *
-     * @return void
      */
-    public function setCreditPoints(int $creditPoints)
+    public function setCreditPoints(int $creditPoints): void
     {
         if ($creditPoints < 0) {
             throw new \InvalidArgumentException('The parameter $creditPoints must be >= 0.', 1333296336);
@@ -375,11 +309,6 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
         }
     }
 
-    /**
-     * Returns whether this event has credit points.
-     *
-     * @return bool TRUE if this event has credit points, FALSE otherwise
-     */
     public function hasCreditPoints(): bool
     {
         return $this->isEventDate()
@@ -388,22 +317,18 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Returns our time-slots.
-     *
-     * @return Collection our time-slots, will be empty if this event has no
-     *                       time-slots
+     * @return Collection<\Tx_Seminars_Model_TimeSlot>
      */
     public function getTimeSlots(): Collection
     {
-        return $this->getAsCollection('timeslots');
+        /** @var Collection<\Tx_Seminars_Model_TimeSlot> $timeSlots */
+        $timeSlots = $this->getAsCollection('timeslots');
+
+        return $timeSlots;
     }
 
     /**
-     * Returns our registration deadline as UNIX time-stamp.
-     *
-     * @return int our registration deadline as UNIX time-stamp, will be
-     *                 0 if this event has no registration deadline, will be
-     *                 >= 0
+     * @return int our registration deadline as UNIX time-stamp, will be 0 if this event has no registration deadline
      */
     public function getRegistrationDeadlineAsUnixTimeStamp(): int
     {
@@ -411,14 +336,10 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Sets our registration deadline as UNIX time-stamp.
-     *
-     * @param int $registrationDeadline
-     *        our registration deadline as UNIX time-stamp, must be >= 0, 0 unsets the registration deadline
-     *
-     * @return void
+     * @param int $registrationDeadline our registration deadline as UNIX time-stamp, must be >= 0,
+     *        0 unsets the registration deadline
      */
-    public function setRegistrationDeadlineAsUnixTimeStamp(int $registrationDeadline)
+    public function setRegistrationDeadlineAsUnixTimeStamp(int $registrationDeadline): void
     {
         if ($registrationDeadline < 0) {
             throw new \InvalidArgumentException('The parameter $registrationDeadline must be >= 0.', 1333296347);
@@ -427,12 +348,6 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
         $this->setAsInteger('deadline_registration', $registrationDeadline);
     }
 
-    /**
-     * Returns whether this event has a registration deadline set.
-     *
-     * @return bool TRUE if this event has a registration deadline set, FALSE
-     *                 otherwise
-     */
     public function hasRegistrationDeadline(): bool
     {
         return $this->hasInteger('deadline_registration');
@@ -442,8 +357,6 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      * Returns the latest date/time to register for a seminar.
      * This is either the registration deadline (if set) or the begin date of an
      * event.
-     *
-     * @return int the latest possible moment to register for this event
      */
     public function getLatestPossibleRegistrationTimeAsUnixTimeStamp(): int
     {
@@ -469,14 +382,10 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Sets our early bird deadline as UNIX time-stamp.
-     *
-     * @param int $earlyBirdDeadline
-     *        our early bird deadline as UNIX time-stamp, must be >= 0, 0 unsets the early bird deadline
-     *
-     * @return void
+     * @param int $earlyBirdDeadline our early bird deadline as UNIX time-stamp, must be >= 0,
+     *        0 unsets the early bird deadline
      */
-    public function setEarlyBirdDeadlineAsUnixTimeStamp(int $earlyBirdDeadline)
+    public function setEarlyBirdDeadlineAsUnixTimeStamp(int $earlyBirdDeadline): void
     {
         if ($earlyBirdDeadline < 0) {
             throw new \InvalidArgumentException('The parameter $earlyBirdDeadline must be >= 0.', 1333296359);
@@ -485,12 +394,6 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
         $this->setAsInteger('deadline_early_bird', $earlyBirdDeadline);
     }
 
-    /**
-     * Returns whether this event has an early bird deadline.
-     *
-     * @return bool TRUE if this event has an early bird deadline, FALSE
-     *                 otherwise
-     */
     public function hasEarlyBirdDeadline(): bool
     {
         return $this->hasInteger('deadline_early_bird');
@@ -500,8 +403,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      * Returns our unregistration deadline as UNIX time-stamp.
      *
      * @return int our unregistration deadline as UNIX time-stamp, will be
-     *                 0 if this event has no unregistration deadline, will be
-     *                 >= 0
+     *                 0 if this event has no unregistration deadline, will be >= 0
      */
     public function getUnregistrationDeadlineAsUnixTimeStamp(): int
     {
@@ -509,14 +411,10 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Sets our unregistration deadline as UNIX time-stamp.
-     *
-     * @param int $unregistrationDeadline
-     *        our unregistration deadline as UNIX time-stamp, must be >= 0, 0 unsets the unregistration deadline
-     *
-     * @return void
+     * @param int $unregistrationDeadline our unregistration deadline as UNIX time-stamp, must be >= 0,
+     *        0 unsets the unregistration deadline
      */
-    public function setUnregistrationDeadlineAsUnixTimeStamp(int $unregistrationDeadline)
+    public function setUnregistrationDeadlineAsUnixTimeStamp(int $unregistrationDeadline): void
     {
         if ($unregistrationDeadline < 0) {
             throw new \InvalidArgumentException('The parameter $unregistrationDeadline must be >= 0.', 1333296369);
@@ -525,19 +423,12 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
         $this->setAsInteger('deadline_unregistration', $unregistrationDeadline);
     }
 
-    /**
-     * Returns whether this event has an unregistration deadline.
-     *
-     * @return bool
-     */
     public function hasUnregistrationDeadline(): bool
     {
         return $this->hasInteger('deadline_unregistration');
     }
 
     /**
-     * Returns our expiry as UNIX time-stamp.
-     *
      * @return int our expiry as UNIX time-stamp, will be 0 if this event
      *                 has no expiry, will be >= 0
      */
@@ -547,13 +438,9 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Sets our expiry as UNIX time-stamp.
-     *
      * @param int $expiry our expiry as UNIX time-stamp, must be >= 0, 0 unsets the expiry
-     *
-     * @return void
      */
-    public function setExpiryAsUnixTimeStamp(int $expiry)
+    public function setExpiryAsUnixTimeStamp(int $expiry): void
     {
         if ($expiry < 0) {
             throw new \InvalidArgumentException('The parameter $expiry must be >= 0.', 1333296380);
@@ -562,19 +449,12 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
         $this->setAsInteger('expiry', $expiry);
     }
 
-    /**
-     * Returns whether this event has an expiry.
-     *
-     * @return bool TRUE if this event has an expiry, FALSE otherwise
-     */
     public function hasExpiry(): bool
     {
         return $this->hasInteger('expiry');
     }
 
     /**
-     * Returns our details page.
-     *
      * @return string our separate details page, will be empty if this event has no separate details page
      */
     public function getDetailsPage(): string
@@ -582,24 +462,11 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
         return $this->getAsString('details_page');
     }
 
-    /**
-     * Sets our separate details page.
-     *
-     * @param string $detailsPage our separate details page
-     *
-     * @return void
-     */
-    public function setDetailsPage(string $detailsPage)
+    public function setDetailsPage(string $detailsPage): void
     {
         $this->setAsString('details_page', $detailsPage);
     }
 
-    /**
-     * Returns whether this event has a separate details page.
-     *
-     * @return bool TRUE if this event has a separate details page, FALSE
-     *                 otherwise
-     */
     public function hasDetailsPage(): bool
     {
         return $this->hasString('details_page');
@@ -612,9 +479,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      * Note: This function does not take the TS setup configuration or flexform
      * settings into account.
      *
-     * @return string
-     *         the single view page UID/URL, will be an empty string if none
-     *         has been set
+     * @return string the single view page UID/URL, will be an empty string if none has been set
      */
     public function getCombinedSingleViewPage(): string
     {
@@ -631,23 +496,13 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
         return $result;
     }
 
-    /**
-     * Checks whether this event has a separate single view page (combined
-     * from the event itself, the event type and the categories).
-     *
-     * @return bool
-     *         TRUE if this event has a single view page set, FALSE otherwise
-     */
     public function hasCombinedSingleViewPage(): bool
     {
         return $this->getCombinedSingleViewPage() != '';
     }
 
     /**
-     * Gets the single view page from the event type.
-     *
-     * @return int
-     *         the single view page UID from the event type, will be > 0 if
+     * @return int the single view page UID from the event type, will be > 0 if
      *         this event has an event type and a that type has a single view
      *         page UID, will be 0 otherwise
      */
@@ -660,14 +515,6 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
         return $this->getEventType()->getSingleViewPageUid();
     }
 
-    /**
-     * Checks whether this event has an event type with a non-zero single view
-     * page UID.
-     *
-     * @return bool
-     *         TRUE if this event has an event type and if that event type has
-     *         a non-zero single view page, FALSE otherwise
-     */
     protected function hasSingleViewPageUidFromEventType(): bool
     {
         return ($this->getEventType() !== null)
@@ -675,12 +522,9 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Gets the single view page UID from the categories.
-     *
      * This function returns the first found UID from the event categories.
      *
-     * @return int
-     *         the single view page UID from the categories, will be > 0 if
+     * @return int the single view page UID from the categories, will be > 0 if
      *         this event has at least one category with a single view page
      *         UID, will be 0 otherwise
      */
@@ -699,83 +543,75 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
         return $result;
     }
 
-    /**
-     * Checks whether this event has at least one category with a single view
-     * page UID.
-     *
-     * @return bool
-     *         TRUE if this event has at least one category with a single view
-     *         page UID, FALSE otherwise
-     */
     protected function hasSingleViewPageUidFromCategories(): bool
     {
         return $this->getSingleViewPageUidFromCategories() > 0;
     }
 
     /**
-     * Returns our places.
-     *
-     * @return Collection our places, will be empty if this event has no
-     *                       places
+     * @return Collection<\Tx_Seminars_Model_Place>
      */
     public function getPlaces(): Collection
     {
-        return $this->getAsCollection('place');
+        /** @var Collection<\Tx_Seminars_Model_Place> $places */
+        $places = $this->getAsCollection('place');
+
+        return $places;
     }
 
     /**
-     * Returns our lodgings.
-     *
-     * @return Collection our lodgings, will be empty if this event has no
-     *                       lodgings
+     * @return Collection<\Tx_Seminars_Model_Lodging>
      */
     public function getLodgings(): Collection
     {
-        return $this->getAsCollection('lodgings');
+        /** @var Collection<\Tx_Seminars_Model_Lodging> $lodgings */
+        $lodgings = $this->getAsCollection('lodgings');
+
+        return $lodgings;
     }
 
     /**
-     * Returns our foods.
-     *
-     * @return Collection our foods, will be empty if this event has no
-     *                       foods
+     * @return Collection<\Tx_Seminars_Model_Food>
      */
     public function getFoods(): Collection
     {
-        return $this->getAsCollection('foods');
+        /** @var Collection<\Tx_Seminars_Model_Food> $foods */
+        $foods = $this->getAsCollection('foods');
+
+        return $foods;
     }
 
     /**
-     * Returns our partners.
-     *
-     * @return Collection our partners, will be empty if this event has no
-     *                       partners
+     * @return Collection<\Tx_Seminars_Model_Speaker>
      */
     public function getPartners(): Collection
     {
-        return $this->getAsCollection('partners');
+        /** @var Collection<\Tx_Seminars_Model_Speaker> $partners */
+        $partners = $this->getAsCollection('partners');
+
+        return $partners;
     }
 
     /**
-     * Returns our tutors.
-     *
-     * @return Collection our tutors, will be empty if this event has no
-     *                       tutors
+     * @return Collection<\Tx_Seminars_Model_Speaker>
      */
     public function getTutors(): Collection
     {
-        return $this->getAsCollection('tutors');
+        /** @var Collection<\Tx_Seminars_Model_Speaker> $tutors */
+        $tutors = $this->getAsCollection('tutors');
+
+        return $tutors;
     }
 
     /**
-     * Returns our leaders.
-     *
-     * @return Collection our leaders, will be empty if this event has no
-     *                       leaders
+     * @return Collection<\Tx_Seminars_Model_Speaker>
      */
     public function getLeaders(): Collection
     {
-        return $this->getAsCollection('leaders');
+        /** @var Collection<\Tx_Seminars_Model_Speaker> $leaders */
+        $leaders = $this->getAsCollection('leaders');
+
+        return $leaders;
     }
 
     public function getLanguage(): ?Language
@@ -788,37 +624,23 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
         return $mapper->findByIsoAlpha2Code($this->getAsString('language'));
     }
 
-    /**
-     * @return void
-     */
-    public function setLanguage(Language $language)
+    public function setLanguage(Language $language): void
     {
         $this->setAsString('language', $language->getIsoAlpha2Code());
     }
 
-    /**
-     * Returns whether this event has a language.
-     *
-     * @return bool TRUE if this event has a language, FALSE otherwise
-     */
     public function hasLanguage(): bool
     {
         return $this->hasString('language');
     }
 
-    /**
-     * @return bool
-     */
     public function getPriceOnRequest(): bool
     {
         return $this->isEventDate() ? $this->getTopic()->getPriceOnRequest() : $this->getAsBoolean('price_on_request');
     }
 
     /**
-     * Returns our regular price.
-     *
-     * @return float our regular price, will be 0.00 if this event has no regular
-     *               price, will be >= 0.00
+     * @return float our regular price, will be 0.00 if this event has no regular price, will be >= 0.00
      */
     public function getRegularPrice(): float
     {
@@ -828,13 +650,9 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Sets our regular price.
-     *
      * @param float $price our regular price, must be >= 0.00
-     *
-     * @return void
      */
-    public function setRegularPrice(float $price)
+    public function setRegularPrice(float $price): void
     {
         if ($price < 0.00) {
             throw new \InvalidArgumentException('The parameter $price must be >= 0.00.', 1333296391);
@@ -847,11 +665,6 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
         }
     }
 
-    /**
-     * Returns whether this event has a regular price.
-     *
-     * @return bool TRUE if this event has a regular price, FALSE otherwise
-     */
     public function hasRegularPrice(): bool
     {
         return $this->isEventDate()
@@ -860,8 +673,6 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Returns our regular early bird price.
-     *
      * @return float our regular early bird price, will be 0.00 if this event has
      *               no regular early bird price, will be >= 0.00
      */
@@ -873,13 +684,9 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Sets our regular early bird price.
-     *
      * @param float $price our regular early bird price, must be >= 0.00
-     *
-     * @return void
      */
-    public function setRegularEarlyBirdPrice(float $price)
+    public function setRegularEarlyBirdPrice(float $price): void
     {
         if ($price < 0.00) {
             throw new \InvalidArgumentException('The parameter $price must be >= 0.00.', 1333296479);
@@ -892,12 +699,6 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
         }
     }
 
-    /**
-     * Returns whether this event has a regular early bird price.
-     *
-     * @return bool TRUE if this event has a regular early bird price, FALSE
-     *                 otherwise
-     */
     public function hasRegularEarlyBirdPrice(): bool
     {
         return $this->isEventDate()
@@ -906,8 +707,6 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Returns our regular board price.
-     *
      * @return float our regular board price, will be 0.00 if this event has no
      *               regular board price, will be >= 0.00
      */
@@ -919,13 +718,9 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Sets our regular board price.
-     *
      * @param float $price our regular board price, must be >= 0.00
-     *
-     * @return void
      */
-    public function setRegularBoardPrice(float $price)
+    public function setRegularBoardPrice(float $price): void
     {
         if ($price < 0.00) {
             throw new \InvalidArgumentException('The parameter $price must be >= 0.00.', 1333296604);
@@ -938,11 +733,6 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
         }
     }
 
-    /**
-     * Returns whether this event has a regular board price.
-     *
-     * @return bool
-     */
     public function hasRegularBoardPrice(): bool
     {
         return $this->isEventDate()
@@ -951,8 +741,6 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Returns our special price.
-     *
      * @return float our special price, will be 0.00 if this event has no special price, will be >= 0.00
      */
     public function getSpecialPrice(): float
@@ -963,13 +751,9 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Sets our special price.
-     *
      * @param float $price our special price, must be >= 0.00
-     *
-     * @return void
      */
-    public function setSpecialPrice(float $price)
+    public function setSpecialPrice(float $price): void
     {
         if ($price < 0.00) {
             throw new \InvalidArgumentException('The parameter $price must be >= 0.00.', 1333296667);
@@ -982,11 +766,6 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
         }
     }
 
-    /**
-     * Returns whether this event has a special price.
-     *
-     * @return bool TRUE if this event has a special price, FALSE otherwise
-     */
     public function hasSpecialPrice(): bool
     {
         return $this->isEventDate()
@@ -995,8 +774,6 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Returns our special early bird price.
-     *
      * @return float our special early bird price, will be 0.00 if this event has
      *               no special early bird price, will be >= 0.00
      */
@@ -1008,13 +785,9 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Sets our special early bird price.
-     *
      * @param float $price our special early bird price, must be >= 0.00
-     *
-     * @return void
      */
-    public function setSpecialEarlyBirdPrice(float $price)
+    public function setSpecialEarlyBirdPrice(float $price): void
     {
         if ($price < 0.00) {
             throw new \InvalidArgumentException('The parameter $price must be >= 0.00.', 1333296677);
@@ -1027,12 +800,6 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
         }
     }
 
-    /**
-     * Return whether this event has a special early bird price.
-     *
-     * @return bool TRUE if this event has a special early bird price, FALSE
-     *                 otherwise
-     */
     public function hasSpecialEarlyBirdPrice(): bool
     {
         return $this->isEventDate()
@@ -1041,8 +808,6 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Returns our special board price.
-     *
      * @return float our special board price, will be 0.00 if this event has no
      *               special board price, will be >= 0.00
      */
@@ -1054,13 +819,9 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Sets our special board price.
-     *
      * @param float $price our special board price, must be >= 0.00
-     *
-     * @return void
      */
-    public function setSpecialBoardPrice(float $price)
+    public function setSpecialBoardPrice(float $price): void
     {
         if ($price < 0.00) {
             throw new \InvalidArgumentException('The parameter $price must be >= 0.00.', 1333296688);
@@ -1073,12 +834,6 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
         }
     }
 
-    /**
-     * Returns whether this event has a special board price.
-     *
-     * @return bool TRUE if this event has a special board price, FALSE
-     *                 otherwise
-     */
     public function hasSpecialBoardPrice(): bool
     {
         return $this->isEventDate()
@@ -1131,9 +886,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Returns whether an early bird price applies.
-     *
-     * @return bool TRUE if this event has an early bird dealine set and
+     * @return bool TRUE if this event has an early bird deadline set and
      *                 this deadline is not over yet, FALSE otherwise
      */
     public function earlyBirdApplies(): bool
@@ -1184,8 +937,6 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Returns our additional information.
-     *
      * @return string our additional information, will be empty if this event
      *                has no additional information
      */
@@ -1197,13 +948,9 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Sets our additional information.
-     *
      * @param string $additionalInformation our additional information, may be empty
-     *
-     * @return void
      */
-    public function setAdditionalInformation(string $additionalInformation)
+    public function setAdditionalInformation(string $additionalInformation): void
     {
         if ($this->isEventDate()) {
             $this->getTopic()->setAdditionalInformation($additionalInformation);
@@ -1212,12 +959,6 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
         }
     }
 
-    /**
-     * Returns whether this event has additional information.
-     *
-     * @return bool TRUE if this event has additional information, FALSE
-     *                 otherwise
-     */
     public function hasAdditionalInformation(): bool
     {
         return $this->isEventDate()
@@ -1226,30 +967,26 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Returns our payment methods.
-     *
-     * @return Collection our payment methods, will be empty if this event
-     *                       has no payment methods
+     * @return Collection<\Tx_Seminars_Model_PaymentMethod>
      */
     public function getPaymentMethods(): Collection
     {
-        return $this->isEventDate()
-            ? $this->getTopic()->getPaymentMethods()
-            : $this->getAsCollection('payment_methods');
+        if ($this->isEventDate()) {
+            return $this->getTopic()->getPaymentMethods();
+        }
+
+        /** @var Collection<\Tx_Seminars_Model_PaymentMethod> $paymentMethods */
+        $paymentMethods = $this->getAsCollection('payment_methods');
+
+        return $paymentMethods;
     }
 
     /**
-     * Sets our payment methods.
+     * Note: This function should only be called on topic or single event records, not on event dates.
      *
-     * Note: This function should only be called on topic or single event
-     * records, not on event dates.
-     *
-     * @param Collection $paymentMethods
-     *        our payment methods, can be empty
-     *
-     * @return void
+     * @param Collection<\Tx_Seminars_Model_PaymentMethod> $paymentMethods
      */
-    public function setPaymentMethods(Collection $paymentMethods)
+    public function setPaymentMethods(Collection $paymentMethods): void
     {
         if ($this->isEventDate()) {
             throw new \BadMethodCallException(
@@ -1262,14 +999,14 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Returns our organizers.
-     *
-     * @return Collection our organizers, will be empty if this event has no
-     *                       organizers
+     * @return Collection<\Tx_Seminars_Model_Organizer>
      */
     public function getOrganizers(): Collection
     {
-        return $this->getAsCollection('organizers');
+        /** @var Collection<\Tx_Seminars_Model_Organizer> $organizers */
+        $organizers = $this->getAsCollection('organizers');
+
+        return $organizers;
     }
 
     public function getFirstOrganizer(): ?\Tx_Seminars_Model_Organizer
@@ -1281,54 +1018,31 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Returns our organizing partners.
-     *
-     * @return Collection our organizing partners, will be empty if this event
-     *                       has no organizing partners
+     * @return Collection<\Tx_Seminars_Model_Organizer>
      */
     public function getOrganizingPartners(): Collection
     {
-        return $this->getAsCollection('organizing_partners');
+        /** @var Collection<\Tx_Seminars_Model_Organizer> $partners */
+        $partners = $this->getAsCollection('organizing_partners');
+
+        return $partners;
     }
 
-    /**
-     * Returns whether the "event takes place reminder" has been sent.
-     *
-     * @return bool TRUE if the "event takes place reminder" has been sent,
-     *                 FALSE otherwise
-     */
     public function eventTakesPlaceReminderHasBeenSent(): bool
     {
         return $this->getAsBoolean('event_takes_place_reminder_sent');
     }
 
-    /**
-     * Returns whether the "cancelation deadline reminder" has been sent.
-     *
-     * @return bool TRUE if the "cancelation deadline reminder" has been sent,
-     *                 FALSE otherwise
-     */
     public function cancelationDeadlineReminderHasBeenSent(): bool
     {
         return $this->getAsBoolean('cancelation_deadline_reminder_sent');
     }
 
-    /**
-     * Returns whether this event needs a registration.
-     *
-     * @return bool TRUE if this event needs a registration, FALSE otherwise
-     */
     public function needsRegistration(): bool
     {
         return $this->getAsBoolean('needs_registration');
     }
 
-    /**
-     * Returns whether this event allows multiple registration.
-     *
-     * @return bool TRUE if this event allows multiple registration, FALSE
-     *                 otherwise
-     */
     public function allowsMultipleRegistrations(): bool
     {
         return $this->isEventDate()
@@ -1337,8 +1051,6 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Returns our minimum attendees.
-     *
      * @return int our minimum attendees, will be 0 if this event has no
      *                 minimum attendees, will be >= 0
      */
@@ -1348,13 +1060,9 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Sets our minimum attendees.
-     *
      * @param int $minimumAttendees our minimum attendees, must be >= 0
-     *
-     * @return void
      */
-    public function setMinimumAttendees(int $minimumAttendees)
+    public function setMinimumAttendees(int $minimumAttendees): void
     {
         if ($minimumAttendees < 0) {
             throw new \InvalidArgumentException('The parameter $minimumAttendees must be >= 0.', 1333296697);
@@ -1363,19 +1071,12 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
         $this->setAsInteger('attendees_min', $minimumAttendees);
     }
 
-    /**
-     * Returns whether this event has minimum attendees.
-     *
-     * @return bool TRUE if this event has minimum attendees, FALSE otherwise
-     */
     public function hasMinimumAttendees(): bool
     {
         return $this->hasInteger('attendees_min');
     }
 
     /**
-     * Returns our maximum attendees.
-     *
      * @return int our maximum attendees, will be 0 if this event has no
      *                 maximum attendees and allows unlimited number of attendees,
      *                 will be >= 0
@@ -1386,13 +1087,9 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Sets our maximum attendees.
-     *
      * @param int $maximumAttendees our maximum attendees, must be >= 0, 0 means an unlimited number of attendees
-     *
-     * @return void
      */
-    public function setMaximumAttendees(int $maximumAttendees)
+    public function setMaximumAttendees(int $maximumAttendees): void
     {
         if ($maximumAttendees < 0) {
             throw new \InvalidArgumentException('The parameter $maximumAttendees must be >= 0.', 1333296708);
@@ -1401,57 +1098,38 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
         $this->setAsInteger('attendees_max', $maximumAttendees);
     }
 
-    /**
-     * Returns whether this event has maximum attendees.
-     *
-     * @return bool TRUE if this event has maximum attendees, FALSE otherwise
-     *                 (allowing an unlimited number of attendees)
-     */
     public function hasMaximumAttendees(): bool
     {
         return $this->hasInteger('attendees_max');
     }
 
-    /**
-     * Checks whether this event has unlimited vacancies.
-     *
-     * @return bool TRUE if this event has unlimited vacancies, FALSE
-     *                 otherwise
-     */
     public function hasUnlimitedVacancies(): bool
     {
         return !$this->hasMaximumAttendees();
     }
 
-    /**
-     * Returns whether this event has a registration queue.
-     *
-     * @return bool TRUE if this event has a registration queue, FALSE
-     *                 otherwise
-     */
     public function hasRegistrationQueue(): bool
     {
         return $this->getAsBoolean('queue_size');
     }
 
     /**
-     * Returns our target groups.
-     *
-     * @return Collection our target groups, will be empty if this event has
-     *                       no target groups
+     * @return Collection<\Tx_Seminars_Model_TargetGroup>
      */
     public function getTargetGroups(): Collection
     {
-        return $this->isEventDate()
-            ? $this->getTopic()->getTargetGroups()
-            : $this->getAsCollection('target_groups');
+        if ($this->isEventDate()) {
+            return $this->getTopic()->getTargetGroups();
+        }
+
+        /** @var Collection<\Tx_Seminars_Model_TargetGroup> $targetGroups */
+        $targetGroups = $this->getAsCollection('target_groups');
+
+        return $targetGroups;
     }
 
     /**
      * Returns whether the collision check should be skipped for this event.
-     *
-     * @return bool TRUE if the collision check should be skipped for this
-     *                 event, FALSE otherwise
      */
     public function shouldSkipCollisionCheck(): bool
     {
@@ -1459,10 +1137,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Returns our status.
-     *
-     * @return int our status, will be one of STATUS_PLANNED,
-     *                 STATUS_CANCELED or STATUS_CONFIRMED
+     * @return int our status, will be one of STATUS_PLANNED, STATUS_CANCELED or STATUS_CONFIRMED
      */
     public function getStatus(): int
     {
@@ -1470,15 +1145,11 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Sets our status.
-     *
      * @param int $status our status, must be one of STATUS_PLANNED, STATUS_CANCELED, STATUS_CONFIRMED
-     *
-     * @return void
      *
      * @throws \InvalidArgumentException
      */
-    public function setStatus(int $status)
+    public function setStatus(int $status): void
     {
         if (!in_array($status, [self::STATUS_PLANNED, self::STATUS_CANCELED, self::STATUS_CONFIRMED], true)) {
             throw new \InvalidArgumentException(
@@ -1500,21 +1171,11 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
         return $this->getStatus() === self::STATUS_PLANNED;
     }
 
-    /**
-     * Checks whether this event has been canceled.
-     *
-     * @return bool
-     */
     public function isCanceled(): bool
     {
         return $this->getStatus() === self::STATUS_CANCELED;
     }
 
-    /**
-     * Checks whether this event has been confirmed.
-     *
-     * @return bool
-     */
     public function isConfirmed(): bool
     {
         return $this->getStatus() === self::STATUS_CONFIRMED;
@@ -1524,10 +1185,8 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      * Marks this event as canceled.
      *
      * If this event already is canceled, this method is a no-op.
-     *
-     * @return void
      */
-    public function cancel()
+    public function cancel(): void
     {
         $this->setStatus(self::STATUS_CANCELED);
     }
@@ -1536,10 +1195,8 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      * Marks this event as confirmed.
      *
      * If this event already is confirmed, this method is a no-op.
-     *
-     * @return void
      */
-    public function confirm()
+    public function confirm(): void
     {
         $this->setStatus(self::STATUS_CONFIRMED);
     }
@@ -1553,34 +1210,33 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Returns our event managers.
-     *
-     * @return Collection our event managers, will be empty if this event has
-     *                       no event managers
+     * @return Collection<OelibFrontEndUser>
      */
     public function getEventManagers(): Collection
     {
-        return $this->getAsCollection('vips');
+        /** @var Collection<OelibFrontEndUser> $managers */
+        $managers = $this->getAsCollection('vips');
+
+        return $managers;
     }
 
     /**
-     * Returns our checkboxes.
-     *
-     * @return Collection our checkboxes, will be empty if this event has no
-     *                       checkboxes
+     * @return Collection<\Tx_Seminars_Model_Checkbox>
      */
     public function getCheckboxes(): Collection
     {
-        return $this->isEventDate()
-            ? $this->getTopic()->getCheckboxes()
-            : $this->getAsCollection('checkboxes');
+        if ($this->isEventDate()) {
+            return $this->getTopic()->getCheckboxes();
+        }
+
+        /** @var Collection<\Tx_Seminars_Model_Checkbox> $checkboxes */
+        $checkboxes = $this->getAsCollection('checkboxes');
+
+        return $checkboxes;
     }
 
     /**
      * Returns whether this event makes use of the second terms & conditions.
-     *
-     * @return bool TRUE if this event makes use of the second terms &
-     *                 conditions, FALSE otherwise
      */
     public function usesTerms2(): bool
     {
@@ -1590,8 +1246,6 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Returns our notes.
-     *
      * @return string our notes, will be empty if this event has no notes
      */
     public function getNotes(): string
@@ -1602,13 +1256,9 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Sets our notes.
-     *
      * @param string $notes our notes, may be empty
-     *
-     * @return void
      */
-    public function setNotes(string $notes)
+    public function setNotes(string $notes): void
     {
         if ($this->isEventDate()) {
             $this->getTopic()->setNotes($notes);
@@ -1617,11 +1267,6 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
         }
     }
 
-    /**
-     * Returns whether this event has notes.
-     *
-     * @return bool TRUE if this event has notes, FALSE otherwise
-     */
     public function hasNotes(): bool
     {
         return $this->isEventDate()
@@ -1630,13 +1275,10 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Returns our attached files.
+     * The returned array will be sorted like the files are sorted in the back-end form.
      *
-     * The returned array will be sorted like the files are sorted in the back-
-     * end form.
-     *
-     * @return string[] our attached file names relative to the seminars upload
-     *               directory, will be empty if this event has no attached files
+     * @return array<int, string> our attached file names relative to the seminars upload directory,
+     *         will be empty if this event has no attached files
      */
     public function getAttachedFiles(): array
     {
@@ -1644,33 +1286,22 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Sets our attached files.
-     *
-     * @param string[] $attachedFiles
-     *        our attached file names, file names must be relative to the seminars upload directory, may be empty
-     *
-     * @return void
+     * @param array<array-key, string> $attachedFiles our attached file names,
+     *        file names must be relative to the seminars upload directory, may be empty
      */
-    public function setAttachedFiles(array $attachedFiles)
+    public function setAttachedFiles(array $attachedFiles): void
     {
         $this->setAsArray('attached_files', $attachedFiles);
     }
 
-    /**
-     * Returns whether this event has attached files.
-     *
-     * @return bool TRUE if this event has attached files, FALSE otherwise
-     */
     public function hasAttachedFiles(): bool
     {
         return $this->hasString('attached_files');
     }
 
     /**
-     * Returns our image.
-     *
-     * @return string our image file name relative to the seminars upload
-     *                directory, will be empty if this event has no image
+     * @return string our image file name relative to the seminars upload directory,
+     *         will be empty if this event has no image
      */
     public function getImage(): string
     {
@@ -1680,13 +1311,9 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Sets our image.
-     *
      * @param string $image our image file name, must be relative to the seminars upload directory, may be empty
-     *
-     * @return void
      */
-    public function setImage(string $image)
+    public function setImage(string $image): void
     {
         if ($this->isEventDate()) {
             $this->getTopic()->setImage($image);
@@ -1695,11 +1322,6 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
         }
     }
 
-    /**
-     * Returns whether this event has an image.
-     *
-     * @return bool TRUE if this event has an image, FALSE otherwise
-     */
     public function hasImage(): bool
     {
         return $this->isEventDate()
@@ -1708,36 +1330,38 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Returns our requirements.
-     *
-     * @return Collection our requirements, will be empty if this event has
-     *                       no requirements
+     * @return Collection<\Tx_Seminars_Model_Event>
      */
     public function getRequirements(): Collection
     {
-        return $this->isEventDate()
-            ? $this->getTopic()->getRequirements()
-            : $this->getAsCollection('requirements');
+        if ($this->isEventDate()) {
+            return
+                $this->getTopic()->getRequirements();
+        }
+
+        /** @var Collection<\Tx_Seminars_Model_Event> $requirements */
+        $requirements = $this->getAsCollection('requirements');
+
+        return $requirements;
     }
 
     /**
-     * Returns our dependencies.
-     *
-     * @return Collection our dependencies, will be empty if this event has
-     *                       no dependencies
+     * @return Collection<\Tx_Seminars_Model_Event>
      */
     public function getDependencies(): Collection
     {
-        return $this->isEventDate()
-            ? $this->getTopic()->getDependencies()
-            : $this->getAsCollection('dependencies');
+        if ($this->isEventDate()) {
+            return $this->getTopic()->getDependencies();
+        }
+
+        /** @var Collection<\Tx_Seminars_Model_Event> $dependencies */
+        $dependencies = $this->getAsCollection('dependencies');
+
+        return $dependencies;
     }
 
     /**
      * Checks whether this event has a begin date for the registration.
-     *
-     * @return bool TRUE if this event has a begin date for the registration,
-     *                 FALSE otherwise
      */
     public function hasRegistrationBegin(): bool
     {
@@ -1745,9 +1369,6 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Returns the begin date for the registration of this event as UNIX
-     * time-stamp.
-     *
      * @return int the begin date for the registration of this event as UNIX
      *                 time-stamp, will be 0 if no begin date for the
      *                 registration is set
@@ -1758,8 +1379,6 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Returns the publication hash of this event.
-     *
      * @return string the publication hash of this event, will be empty if this
      *                event has no publication hash set
      */
@@ -1768,38 +1387,25 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
         return $this->getAsString('publication_hash');
     }
 
-    /**
-     * Checks whether this event has a publication hash.
-     *
-     * @return bool TRUE if this event has a publication hash, FALSE
-     *                 otherwise
-     */
     public function hasPublicationHash(): bool
     {
         return $this->hasString('publication_hash');
     }
 
     /**
-     * Sets this event's publication hash.
-     *
-     * @param string $hash
-     *        the publication hash, use a non-empty string to mark an event as
+     * @param string $hash the publication hash, use a non-empty string to mark an event as
      *        "not published yet" and an empty string to mark an event as
      *        published
-     *
-     * @return void
      */
-    public function setPublicationHash(string $hash)
+    public function setPublicationHash(string $hash): void
     {
         $this->setAsString('publication_hash', $hash);
     }
 
     /**
      * Purges the publication hash of this event.
-     *
-     * @return void
      */
-    public function purgePublicationHash()
+    public function purgePublicationHash(): void
     {
         $this->setPublicationHash('');
     }
@@ -1817,20 +1423,12 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
         return !$this->hasPublicationHash();
     }
 
-    /**
-     * Checks whether this event has any offline registrations.
-     *
-     * @return bool TRUE if this event has at least one offline registration,
-     *                 FALSE otherwise
-     */
     public function hasOfflineRegistrations(): bool
     {
         return $this->hasInteger('offline_attendees');
     }
 
     /**
-     * Returns the number of offline registrations for this event.
-     *
      * @return int the number of offline registrations for this event, will
      *                 be 0 if this event has no offline registrations
      */
@@ -1841,20 +1439,14 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
 
     /**
      * Sets the number of offline registrations.
-     *
-     * @param int $numberOfRegistrations
-     *
-     * @return void
      */
-    public function setOfflineRegistrations(int $numberOfRegistrations)
+    public function setOfflineRegistrations(int $numberOfRegistrations): void
     {
         $this->setAsInteger('offline_attendees', $numberOfRegistrations);
     }
 
     /**
      * Checks whether the organizers have already been informed that the event has enough registrations.
-     *
-     * @return bool
      */
     public function haveOrganizersBeenNotifiedAboutEnoughAttendees(): bool
     {
@@ -1863,18 +1455,14 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
 
     /**
      * Sets that the organizers have already been informed that the event has enough registrations.
-     *
-     * @return void
      */
-    public function setOrganizersBeenNotifiedAboutEnoughAttendees()
+    public function setOrganizersBeenNotifiedAboutEnoughAttendees(): void
     {
         $this->setAsBoolean('organizers_notified_about_minimum_reached', true);
     }
 
     /**
      * Checks whether notification e-mail to the organizers are muted.
-     *
-     * @return bool
      */
     public function shouldMuteNotificationEmails(): bool
     {
@@ -1883,18 +1471,14 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
 
     /**
      * Makes sure that notification e-mail to the organizers are muted.
-     *
-     * @return void
      */
-    public function muteNotificationEmails()
+    public function muteNotificationEmails(): void
     {
         $this->setAsBoolean('mute_notification_emails', true);
     }
 
     /**
      * Checks whether automatic confirmation/cancelation for this event is enabled.
-     *
-     * @return bool
      */
     public function shouldAutomaticallyConfirmOrCancel(): bool
     {
@@ -1902,56 +1486,44 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Gets the registrations for this event.
-     *
-     * @return Collection the registrations for this event (both regular and
+     * @return Collection<\Tx_Seminars_Model_Registration> the registrations for this event (both regular and
      *                       on the waiting list), will be empty if this event
      *                       has no registrations
      */
     public function getRegistrations(): Collection
     {
-        return $this->getAsCollection('registrations');
+        /** @var Collection<\Tx_Seminars_Model_Registration> $registrations */
+        $registrations = $this->getAsCollection('registrations');
+
+        return $registrations;
     }
 
     /**
-     * Sets the registrations for this event.
-     *
-     * @param Collection $registrations
-     *       the registrations for this event (both regular and on the waiting
-     *       list), may be empty
-     *
-     * @return void
+     * @param Collection<\Tx_Seminars_Model_Registration> $registrations the registrations for this event
+     *        (both regular and on the waiting list), may be empty
      */
-    public function setRegistrations(Collection $registrations)
+    public function setRegistrations(Collection $registrations): void
     {
         $this->set('registrations', $registrations);
     }
 
-    /**
-     * Attaches a registration to this event.
-     *
-     * @param \Tx_Seminars_Model_Registration $registration
-     *        the registration to attach
-     *
-     * @return void
-     */
-    public function attachRegistration(
-        \Tx_Seminars_Model_Registration $registration
-    ) {
+    public function attachRegistration(\Tx_Seminars_Model_Registration $registration): void
+    {
         $registration->setEvent($this);
         $this->getRegistrations()->add($registration);
     }
 
     /**
-     * Gets the regular registrations for this event, ie. the registrations
+     * Gets the regular registrations for this event, i.e., the registrations
      * that are not on the waiting list.
      *
-     * @return Collection the regular registrations for this event, will be
+     * @return Collection<\Tx_Seminars_Model_Registration> the regular registrations for this event, will be
      *                       will be empty if this event no regular
      *                       registrations
      */
     public function getRegularRegistrations(): Collection
     {
+        /** @var Collection<\Tx_Seminars_Model_Registration> $regularRegistrations */
         $regularRegistrations = new Collection();
 
         /** @var \Tx_Seminars_Model_Registration $registration */
@@ -1965,14 +1537,15 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * Gets the queue registrations for this event, ie. the registrations
+     * Gets the queue registrations for this event, i.e., the registrations
      * that are no regular registrations (yet).
      *
-     * @return Collection the queue registrations for this event, will be
+     * @return Collection<\Tx_Seminars_Model_Registration> the queue registrations for this event, will be
      *                       will be empty if this event no queue registrations
      */
     public function getQueueRegistrations(): Collection
     {
+        /** @var Collection<\Tx_Seminars_Model_Registration> $queueRegistrations */
         $queueRegistrations = new Collection();
 
         /** @var \Tx_Seminars_Model_Registration $registration */
@@ -1987,10 +1560,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
 
     /**
      * Checks whether this event has any registrations on its registration
-     * queue (ie. on the waiting list).
-     *
-     * @return bool TRUE if there is at least one registration on the queue,
-     *                 FALSE otherwise
+     * queue (i.e., on the waiting list).
      */
     public function hasQueueRegistrations(): bool
     {
@@ -1998,10 +1568,11 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * @return Collection Collection<\Tx_Seminars_Model_Registration>
+     * @return Collection<\Tx_Seminars_Model_Registration>
      */
     public function getRegistrationsAfterLastDigest(): Collection
     {
+        /** @var Collection<\Tx_Seminars_Model_Registration> $newerRegistrations */
         $newerRegistrations = new Collection();
         $dateOfLastDigest = $this->getDateOfLastRegistrationDigestEmailAsUnixTimeStamp();
 
@@ -2041,9 +1612,6 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      *
      * If this event has zero as the minimum number of registrations, this
      * function will always return TRUE.
-     *
-     * @return bool TRUE if this event has enough regular registrations to
-     *                 to take place, FALSE otherwise
      */
     public function hasEnoughRegistrations(): bool
     {
@@ -2071,9 +1639,6 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      *
      * If this event has an unlimited number of possible registrations, this
      * function will always return TRUE.
-     *
-     * @return bool TRUE if this event has at least one vacancy
-     *                 FALSE otherwise
      */
     public function hasVacancies(): bool
     {
@@ -2089,8 +1654,6 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      *
      * If this event has an unlimited number of possible registrations, this
      * function will always return FALSE.
-     *
-     * @return bool TRUE if this event is fully booked, FALSE otherwise
      */
     public function isFull(): bool
     {
@@ -2100,7 +1663,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     /**
      * Returns the names of all registered attendees (including additional attendees and queue registrations).
      *
-     * @return string[] attendee names: ['Jane Doe', 'John Doe']
+     * @return array<int, string> attendee names: ['Jane Doe', 'John Doe']
      */
     public function getAttendeeNames(): array
     {
@@ -2111,7 +1674,7 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
      * Returns the names of registered attendees (including additional attendees and queue registrations),
      * but only those that have registered after the last registration digest email.
      *
-     * @return string[] attendee names: ['Jane Doe', 'John Doe']
+     * @return array<int, string> attendee names: ['Jane Doe', 'John Doe']
      */
     public function getAttendeeNamesAfterLastDigest(): array
     {
@@ -2119,9 +1682,9 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     }
 
     /**
-     * @param Collection $registrations Collection<\Tx_Seminars_Model_Registration>
+     * @param Collection<\Tx_Seminars_Model_Registration> $registrations
      *
-     * @return string[] attendee names: ['Jane Doe', 'John Doe']
+     * @return array<int, string> attendee names: ['Jane Doe', 'John Doe']
      */
     private function extractNamesFromRegistrations(Collection $registrations): array
     {
@@ -2165,11 +1728,9 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     /**
      * @param int $date the date as UNIX time-stamp, must be >= 0
      *
-     * @return void
-     *
      * @throws \InvalidArgumentException
      */
-    public function setDateOfLastRegistrationDigestEmailAsUnixTimeStamp(int $date)
+    public function setDateOfLastRegistrationDigestEmailAsUnixTimeStamp(int $date): void
     {
         if ($date < 0) {
             throw new \InvalidArgumentException('$date must be >= 0, but was: ' . $date, 1508946114880);

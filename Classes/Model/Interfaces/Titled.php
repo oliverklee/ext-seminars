@@ -9,10 +9,5 @@ namespace OliverKlee\Seminars\Model\Interfaces;
  */
 interface Titled
 {
-    /**
-     * Returns our title.
-     *
-     * @return string our title, will not be empty
-     */
     public function getTitle(): string;
 }

@@ -30,8 +30,6 @@ class Tx_Seminars_Model_Speaker extends AbstractModel implements MailRole
     const GENDER_FEMALE = 2;
 
     /**
-     * Returns our name.
-     *
      * @return string our name, will not be empty
      */
     public function getName(): string
@@ -40,13 +38,9 @@ class Tx_Seminars_Model_Speaker extends AbstractModel implements MailRole
     }
 
     /**
-     * Sets our name.
-     *
      * @param string $name our name to set, must not be empty
-     *
-     * @return void
      */
-    public function setName(string $name)
+    public function setName(string $name): void
     {
         if ($name == '') {
             throw new \InvalidArgumentException('The parameter $name must not be empty.', 1333297036);
@@ -56,10 +50,7 @@ class Tx_Seminars_Model_Speaker extends AbstractModel implements MailRole
     }
 
     /**
-     * Returns our organization.
-     *
-     * @return string our organization, will be empty if there's no organization
-     *                set
+     * @return string our organization, will be empty if there's no organization set
      */
     public function getOrganization(): string
     {
@@ -67,30 +58,19 @@ class Tx_Seminars_Model_Speaker extends AbstractModel implements MailRole
     }
 
     /**
-     * Sets our organization.
-     *
      * @param string $organization our organization, may be empty
-     *
-     * @return void
      */
-    public function setOrganization(string $organization)
+    public function setOrganization(string $organization): void
     {
         $this->setAsString('organization', $organization);
     }
 
-    /**
-     * Returns whether this speaker has an organization.
-     *
-     * @return bool TRUE if this speaker has an organization, FALSE otherwise
-     */
     public function hasOrganization(): bool
     {
         return $this->hasString('organization');
     }
 
     /**
-     * Returns our homepage.
-     *
      * @return string our homepage, will be empty if there's no homepage set
      */
     public function getHomepage(): string
@@ -99,32 +79,20 @@ class Tx_Seminars_Model_Speaker extends AbstractModel implements MailRole
     }
 
     /**
-     * Sets our homepage.
-     *
      * @param string $homepage our homepage, may be empty
-     *
-     * @return void
      */
-    public function setHomepage(string $homepage)
+    public function setHomepage(string $homepage): void
     {
         $this->setAsString('homepage', $homepage);
     }
 
-    /**
-     * Returns whether this speaker has a homepage.
-     *
-     * @return bool TRUE if this speaker has a homepage, FALSE otherwise
-     */
     public function hasHomepage(): bool
     {
         return $this->hasString('homepage');
     }
 
     /**
-     * Returns our description.
-     *
-     * @return string our description, will be empty if there's no description
-     *                set
+     * @return string our description, will be empty if there's no description set
      */
     public function getDescription(): string
     {
@@ -132,52 +100,38 @@ class Tx_Seminars_Model_Speaker extends AbstractModel implements MailRole
     }
 
     /**
-     * Sets our description.
-     *
      * @param string $description our description to set, may be empty
-     *
-     * @return void
      */
-    public function setDescription(string $description)
+    public function setDescription(string $description): void
     {
         $this->setAsString('description', $description);
     }
 
-    /**
-     * Returns whether this speaker has a description.
-     *
-     * @return bool TRUE if this speaker has a description, FALSE otherwise
-     */
     public function hasDescription(): bool
     {
         return $this->hasString('description');
     }
 
     /**
-     * Returns our skills.
-     *
-     * @return Collection our skills, will be empty if there are no skills related to this speaker
+     * @return Collection<\Tx_Seminars_Model_Skill>
      */
     public function getSkills(): Collection
     {
-        return $this->getAsCollection('skills');
+        /** @var Collection<\Tx_Seminars_Model_Skill> $skills */
+        $skills = $this->getAsCollection('skills');
+
+        return $skills;
     }
 
     /**
-     * Sets this speaker's skills.
-     *
-     * @param Collection $skills this speaker's skills, may be empty
-     *
-     * @return void
+     * @param Collection<\Tx_Seminars_Model_Skill> $skills
      */
-    public function setSkills(Collection $skills)
+    public function setSkills(Collection $skills): void
     {
         $this->set('skills', $skills);
     }
 
     /**
-     * Returns our address.
-     *
      * @return string our address, will be empty if there's no address set
      */
     public function getAddress(): string
@@ -186,32 +140,20 @@ class Tx_Seminars_Model_Speaker extends AbstractModel implements MailRole
     }
 
     /**
-     * Sets our address.
-     *
      * @param string $address our address to set, may be empty
-     *
-     * @return void
      */
-    public function setAddress(string $address)
+    public function setAddress(string $address): void
     {
         $this->setAsString('address', $address);
     }
 
-    /**
-     * Returns whether this place has an address.
-     *
-     * @return bool TRUE if this address has an address, FALSE otherwise
-     */
     public function hasAddress(): bool
     {
         return $this->hasString('address');
     }
 
     /**
-     * Returns our work telephone number.
-     *
-     * @return string our work telephone number, will be empty if there's no
-     *                work telephone number set
+     * @return string our work telephone number, will be empty if there's no work telephone number set
      */
     public function getPhoneWork(): string
     {
@@ -219,33 +161,20 @@ class Tx_Seminars_Model_Speaker extends AbstractModel implements MailRole
     }
 
     /**
-     * Sets our work telephone number.
-     *
      * @param string $phoneWork our work telephone number to set, may be empty
-     *
-     * @return void
      */
-    public function setPhoneWork(string $phoneWork)
+    public function setPhoneWork(string $phoneWork): void
     {
         $this->setAsString('phone_work', $phoneWork);
     }
 
-    /**
-     * Returns whether this speaker has a work telephone number.
-     *
-     * @return bool TRUE if this speaker has a work telephone number, FALSE
-     *                 otherwise
-     */
     public function hasPhoneWork(): bool
     {
         return $this->hasString('phone_work');
     }
 
     /**
-     * Returns our home telephone number.
-     *
-     * @return string our home telephone number, will be empty if there's no
-     *                home telephone number set
+     * @return string our home telephone number, will be empty if there's no home telephone number set
      */
     public function getPhoneHome(): string
     {
@@ -253,33 +182,20 @@ class Tx_Seminars_Model_Speaker extends AbstractModel implements MailRole
     }
 
     /**
-     * Sets our home telephone number.
-     *
      * @param string $phoneHome our home telephone number to set, may be empty
-     *
-     * @return void
      */
-    public function setPhoneHome(string $phoneHome)
+    public function setPhoneHome(string $phoneHome): void
     {
         $this->setAsString('phone_home', $phoneHome);
     }
 
-    /**
-     * Returns whether this speaker has a home telephone number.
-     *
-     * @return bool TRUE if this speaker has a home telephone number, FALSE
-     *                 otherwise
-     */
     public function hasPhoneHome(): bool
     {
         return $this->hasString('phone_home');
     }
 
     /**
-     * Returns our mobile telephone number.
-     *
-     * @return string our mobile telephone number, will be empty if there's no
-     *                mobile telephone number set
+     * @return string our mobile telephone number, will be empty if there's no mobile telephone number set
      */
     public function getPhoneMobile(): string
     {
@@ -287,31 +203,19 @@ class Tx_Seminars_Model_Speaker extends AbstractModel implements MailRole
     }
 
     /**
-     * Sets our mobile telephone number.
-     *
      * @param string $phoneMobile our mobile telephone number to set, may be empty
-     *
-     * @return void
      */
-    public function setPhoneMobile(string $phoneMobile)
+    public function setPhoneMobile(string $phoneMobile): void
     {
         $this->setAsString('phone_mobile', $phoneMobile);
     }
 
-    /**
-     * Returns whether this speaker has a mobile telephone number.
-     *
-     * @return bool TRUE if this speaker has a mobile telephone number, FALSE
-     *                 otherwise
-     */
     public function hasPhoneMobile(): bool
     {
         return $this->hasString('phone_mobile');
     }
 
     /**
-     * Returns our fax number.
-     *
      * @return string our fax number, will be empty if there's no fax number set
      */
     public function getFax(): string
@@ -320,30 +224,19 @@ class Tx_Seminars_Model_Speaker extends AbstractModel implements MailRole
     }
 
     /**
-     * Sets our fax number.
-     *
      * @param string $fax our fax number to set, may be empty
-     *
-     * @return void
      */
-    public function setFax(string $fax)
+    public function setFax(string $fax): void
     {
         $this->setAsString('fax', $fax);
     }
 
-    /**
-     * Returns whether this speaker has a fax number.
-     *
-     * @return bool TRUE if this speaker has a fax number, FALSE otherwise
-     */
     public function hasFax(): bool
     {
         return $this->hasString('fax');
     }
 
     /**
-     * Returns our e-mail address.
-     *
      * @return string our e-mail address, will not be empty
      */
     public function getEmailAddress(): string
@@ -352,32 +245,20 @@ class Tx_Seminars_Model_Speaker extends AbstractModel implements MailRole
     }
 
     /**
-     * Sets out e-mail address.
-     *
      * @param string $eMailAddress our e-mail address, may be empty
-     *
-     * @return void
      */
-    public function setEmailAddress(string $eMailAddress)
+    public function setEmailAddress(string $eMailAddress): void
     {
         $this->setAsString('email', $eMailAddress);
     }
 
-    /**
-     * Returns whether this speaker has an e-mail address.
-     *
-     * @return bool whether this speaker has an e-mail address
-     */
     public function hasEmailAddress(): bool
     {
         return $this->hasString('email');
     }
 
     /**
-     * Returns our gender.
-     *
-     * @return int our gender, will be either GENDER_MALE, GENDER_FEMALE or
-     *                 GENDER_UNKNOWN if the speaker has no gender
+     * @return int our gender, will be either GENDER_MALE, GENDER_FEMALE or GENDER_UNKNOWN if the speaker has no gender
      */
     public function getGender(): int
     {
@@ -385,32 +266,19 @@ class Tx_Seminars_Model_Speaker extends AbstractModel implements MailRole
     }
 
     /**
-     * Sets our gender.
-     *
-     * @param int $gender
-     *        our gender to set, must be one of \Tx_Seminars_Model_Speaker::GENDER_FEMALE, \Tx_Seminars_Model_Speaker::GENDER_MALE
-     *        or \Tx_Seminars_Model_Speaker::GENDER_UNKNOWN
-     *
-     * @return void
+     * @param int $gender our gender to set, must be one of GENDER_MALE, GENDER_FEMALE or GENDER_UNKNOWN
      */
-    public function setGender(int $gender)
+    public function setGender(int $gender): void
     {
         $this->setAsInteger('gender', $gender);
     }
 
-    /**
-     * Returns whether this speaker has a gender.
-     *
-     * @return bool TRUE if this speaker has a gender, FALSE otherwise
-     */
     public function hasGender(): bool
     {
         return $this->hasInteger('gender');
     }
 
     /**
-     * Returns our cancelation period in days.
-     *
      * @return int our cancelation period in days, will be >= 0
      */
     public function getCancelationPeriod(): int
@@ -419,13 +287,9 @@ class Tx_Seminars_Model_Speaker extends AbstractModel implements MailRole
     }
 
     /**
-     * Sets our cancelation period in days.
-     *
      * @param int $cancelationPeriod our cancelation period in days to set, must be >= 0
-     *
-     * @return void
      */
-    public function setCancelationPeriod(int $cancelationPeriod)
+    public function setCancelationPeriod(int $cancelationPeriod): void
     {
         if ($cancelationPeriod < 0) {
             throw new \InvalidArgumentException('The parameter $cancelationPeriod must be >= 0.', 1333297044);
@@ -434,23 +298,12 @@ class Tx_Seminars_Model_Speaker extends AbstractModel implements MailRole
         $this->setAsInteger('cancelation_period', $cancelationPeriod);
     }
 
-    /**
-     * Returns whether this speaker has a cancelation period set.
-     *
-     * @return bool TRUE if this speaker has a cancelation period set, FALSE
-     *                 otherwise
-     */
     public function hasCancelationPeriod(): bool
     {
         return $this->hasInteger('cancelation_period');
     }
 
-    /**
-     * Returns our owner.
-     *
-     * @return \Tx_Seminars_Model_FrontEndUser|null
-     */
-    public function getOwner()
+    public function getOwner(): ?\Tx_Seminars_Model_FrontEndUser
     {
         /** @var \Tx_Seminars_Model_FrontEndUser|null $owner */
         $owner = $this->getAsModel('owner');
@@ -458,21 +311,12 @@ class Tx_Seminars_Model_Speaker extends AbstractModel implements MailRole
         return $owner;
     }
 
-    /**
-     * Sets our owner.
-     *
-     * @param \Tx_Seminars_Model_FrontEndUser $frontEndUser the owner of this model to set
-     *
-     * @return void
-     */
-    public function setOwner(\Tx_Seminars_Model_FrontEndUser $frontEndUser)
+    public function setOwner(\Tx_Seminars_Model_FrontEndUser $frontEndUser): void
     {
         $this->set('owner', $frontEndUser);
     }
 
     /**
-     * Returns our notes.
-     *
      * @return string our notes, may be empty
      */
     public function getNotes(): string
@@ -481,29 +325,19 @@ class Tx_Seminars_Model_Speaker extends AbstractModel implements MailRole
     }
 
     /**
-     * Sets our notes.
-     *
      * @param string $notes our notes to set, might be empty
-     *
-     * @return void
      */
-    public function setNotes(string $notes)
+    public function setNotes(string $notes): void
     {
         $this->setAsString('notes', $notes);
     }
 
-    /**
-     * @return bool
-     */
     public function hasImage(): bool
     {
         return $this->getAsInteger('image') > 0;
     }
 
-    /**
-     * @return FileReference|null
-     */
-    public function getImage()
+    public function getImage(): ?FileReference
     {
         if (!$this->hasImage()) {
             return null;
@@ -514,9 +348,6 @@ class Tx_Seminars_Model_Speaker extends AbstractModel implements MailRole
         return \array_shift($images);
     }
 
-    /**
-     * @return FileRepository
-     */
     private function getFileRepository(): FileRepository
     {
         /** @var FileRepository $fileRepository */

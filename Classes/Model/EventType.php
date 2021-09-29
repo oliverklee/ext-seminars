@@ -11,8 +11,6 @@ use OliverKlee\Seminars\Model\Interfaces\Titled;
 class Tx_Seminars_Model_EventType extends AbstractModel implements Titled
 {
     /**
-     * Returns our title.
-     *
      * @return string our title, will not be empty
      */
     public function getTitle(): string
@@ -21,13 +19,9 @@ class Tx_Seminars_Model_EventType extends AbstractModel implements Titled
     }
 
     /**
-     * Sets our title.
-     *
      * @param string $title our title to set, must not be empty
-     *
-     * @return void
      */
-    public function setTitle(string $title)
+    public function setTitle(string $title): void
     {
         if ($title == '') {
             throw new \InvalidArgumentException('The parameter $title must not be empty.', 1333296812);
@@ -46,13 +40,6 @@ class Tx_Seminars_Model_EventType extends AbstractModel implements Titled
         return $this->getAsInteger('single_view_page');
     }
 
-    /**
-     * Checks whether this event type has a single view page UID set.
-     *
-     * @return bool
-     *         TRUE if this event type has a single view page set, FALSE
-     *         otherwise
-     */
     public function hasSingleViewPageUid(): bool
     {
         return $this->hasInteger('single_view_page');

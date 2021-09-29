@@ -3260,9 +3260,11 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
      */
     protected function copyEvent(\Tx_Seminars_Model_Event $event): void
     {
+        /** @var Collection<\Tx_Seminars_Model_Registration> $registrations */
+        $registrations = new Collection();
         $copy = clone $event;
         $copy->markAsHidden();
-        $copy->setRegistrations(new Collection());
+        $copy->setRegistrations($registrations);
 
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
         $mapper->save($copy);

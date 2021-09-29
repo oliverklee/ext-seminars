@@ -8,10 +8,7 @@ declare(strict_types=1);
 class Tx_Seminars_Model_TimeSlot extends \Tx_Seminars_Model_AbstractTimeSpan
 {
     /**
-     * Returns our entry date as UNIX time-stamp.
-     *
-     * @return int our entry date as UNIX time-stamp, will be >= 0,
-     *                 0 means "no entry date"
+     * @return int our entry date as UNIX time-stamp, will be >= 0, 0 means "no entry date"
      */
     public function getEntryDateAsUnixTimeStamp(): int
     {
@@ -19,13 +16,9 @@ class Tx_Seminars_Model_TimeSlot extends \Tx_Seminars_Model_AbstractTimeSpan
     }
 
     /**
-     * Sets our entry date as UNIX time-stamp.
-     *
      * @param int $entryDate our entry date as UNIX time-stamp, will be >= 0, 0 means "no entry date"
-     *
-     * @return void
      */
-    public function setEntryDateAsUnixTimeStamp(int $entryDate)
+    public function setEntryDateAsUnixTimeStamp(int $entryDate): void
     {
         if ($entryDate < 0) {
             throw new \InvalidArgumentException('The parameter $entryDate must be >= 0.', 1333297074);
@@ -34,11 +27,6 @@ class Tx_Seminars_Model_TimeSlot extends \Tx_Seminars_Model_AbstractTimeSpan
         $this->setAsInteger('entry_date', $entryDate);
     }
 
-    /**
-     * Returns whether this time-slot has an entry date.
-     *
-     * @return bool TRUE if this time-slot has an entry date, FALSE otherwise
-     */
     public function hasEntryDate(): bool
     {
         return $this->hasInteger('entry_date');
@@ -65,12 +53,8 @@ class Tx_Seminars_Model_TimeSlot extends \Tx_Seminars_Model_AbstractTimeSpan
 
     /**
      * Sets the seminar/event this time-slot belongs to.
-     *
-     * @param \Tx_Seminars_Model_Event $seminar
-     *
-     * @return void
      */
-    public function setSeminar(\Tx_Seminars_Model_Event $seminar)
+    public function setSeminar(\Tx_Seminars_Model_Event $seminar): void
     {
         $this->set('seminar', $seminar);
     }

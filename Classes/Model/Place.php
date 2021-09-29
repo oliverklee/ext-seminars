@@ -15,8 +15,6 @@ use OliverKlee\Seminars\Model\Interfaces\Titled;
 class Tx_Seminars_Model_Place extends AbstractModel implements Titled
 {
     /**
-     * Returns our title.
-     *
      * @return string our title, will not be empty
      */
     public function getTitle(): string
@@ -25,13 +23,9 @@ class Tx_Seminars_Model_Place extends AbstractModel implements Titled
     }
 
     /**
-     * Sets our title.
-     *
      * @param string $title our title to set, must not be empty
-     *
-     * @return void
      */
-    public function setTitle(string $title)
+    public function setTitle(string $title): void
     {
         if ($title == '') {
             throw new \InvalidArgumentException('The parameter $title must not be empty.', 1333296894);
@@ -41,8 +35,6 @@ class Tx_Seminars_Model_Place extends AbstractModel implements Titled
     }
 
     /**
-     * Returns our address.
-     *
      * @return string our address, might be empty
      */
     public function getAddress(): string
@@ -51,30 +43,19 @@ class Tx_Seminars_Model_Place extends AbstractModel implements Titled
     }
 
     /**
-     * Sets our address.
-     *
      * @param string $address our address to set, may be empty
-     *
-     * @return void
      */
-    public function setAddress(string $address)
+    public function setAddress(string $address): void
     {
         $this->setAsString('address', $address);
     }
 
-    /**
-     * Returns whether this place has an address.
-     *
-     * @return bool TRUE if this address has an address, FALSE otherwise
-     */
     public function hasAddress(): bool
     {
         return $this->hasString('address');
     }
 
     /**
-     * Returns our ZIP code.
-     *
      * @return string the ZIP code, might be empty
      */
     public function getZip(): string
@@ -83,30 +64,19 @@ class Tx_Seminars_Model_Place extends AbstractModel implements Titled
     }
 
     /**
-     * Sets our ZIP code.
-     *
      * @param string $zip our ZIP code, may be empty
-     *
-     * @return void
      */
-    public function setZip(string $zip)
+    public function setZip(string $zip): void
     {
         $this->setAsString('zip', $zip);
     }
 
-    /**
-     * Returns whether this place has a ZIP code.
-     *
-     * @return bool TRUE if this place has a ZIP code, FALSE otherwise
-     */
     public function hasZip(): bool
     {
         return $this->hasString('zip');
     }
 
     /**
-     * Returns our city name.
-     *
      * @return string the city name, will not be empty
      */
     public function getCity(): string
@@ -115,13 +85,9 @@ class Tx_Seminars_Model_Place extends AbstractModel implements Titled
     }
 
     /**
-     * Sets our city name.
-     *
      * @param string $city our city name, must not be empty
-     *
-     * @return void
      */
-    public function setCity(string $city)
+    public function setCity(string $city): void
     {
         if ($city == '') {
             throw new \InvalidArgumentException('The parameter $city must not be empty.', 1333296904);
@@ -147,29 +113,19 @@ class Tx_Seminars_Model_Place extends AbstractModel implements Titled
         return $country;
     }
 
-    /**
-     * @return void
-     */
-    public function setCountry(Country $country = null)
+    public function setCountry(Country $country = null): void
     {
         $countryCode = ($country !== null) ? $country->getIsoAlpha2Code() : '';
 
         $this->setAsString('country', $countryCode);
     }
 
-    /**
-     * Returns whether this place has a country.
-     *
-     * @return bool TRUE if this place has a country, FALSE otherwise
-     */
     public function hasCountry(): bool
     {
         return $this->getCountry() !== null;
     }
 
     /**
-     * Returns our homepage.
-     *
      * @return string our homepage, may be empty
      */
     public function getHomepage(): string
@@ -178,30 +134,19 @@ class Tx_Seminars_Model_Place extends AbstractModel implements Titled
     }
 
     /**
-     * Sets our homepage.
-     *
      * @param string $homepage our homepage, may be empty
-     *
-     * @return void
      */
-    public function setHomepage(string $homepage)
+    public function setHomepage(string $homepage): void
     {
         $this->setAsString('homepage', $homepage);
     }
 
-    /**
-     * Returns whether this place has a homepage.
-     *
-     * @return bool TRUE if this place has a homepage, FALSE otherwise
-     */
     public function hasHomepage(): bool
     {
         return $this->hasString('homepage');
     }
 
     /**
-     * Returns our directions.
-     *
      * @return string our directions, might be empty
      */
     public function getDirections(): string
@@ -210,22 +155,13 @@ class Tx_Seminars_Model_Place extends AbstractModel implements Titled
     }
 
     /**
-     * Sets our directions.
-     *
      * @param string $directions our directions to set, may be empty
-     *
-     * @return void
      */
-    public function setDirections(string $directions)
+    public function setDirections(string $directions): void
     {
         $this->setAsString('directions', $directions);
     }
 
-    /**
-     * Returns whether this place has directions.
-     *
-     * @return bool TRUE if this place has directions, FALSE otherwise
-     */
     public function hasDirections(): bool
     {
         return $this->hasString('directions');
@@ -239,21 +175,12 @@ class Tx_Seminars_Model_Place extends AbstractModel implements Titled
         return $owner;
     }
 
-    /**
-     * Sets our owner.
-     *
-     * @param \Tx_Seminars_Model_FrontEndUser $frontEndUser the owner of this model to set
-     *
-     * @return void
-     */
-    public function setOwner(\Tx_Seminars_Model_FrontEndUser $frontEndUser)
+    public function setOwner(\Tx_Seminars_Model_FrontEndUser $frontEndUser): void
     {
         $this->set('owner', $frontEndUser);
     }
 
     /**
-     * Returns our notes.
-     *
      * @return string our notes, may be empty
      */
     public function getNotes(): string
@@ -262,13 +189,9 @@ class Tx_Seminars_Model_Place extends AbstractModel implements Titled
     }
 
     /**
-     * Sets our notes.
-     *
      * @param string $notes our notes to set, might be empty
-     *
-     * @return void
      */
-    public function setNotes(string $notes)
+    public function setNotes(string $notes): void
     {
         $this->setAsString('notes', $notes);
     }

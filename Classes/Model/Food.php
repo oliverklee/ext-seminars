@@ -11,8 +11,6 @@ use OliverKlee\Seminars\Model\Interfaces\Titled;
 class Tx_Seminars_Model_Food extends AbstractModel implements Titled
 {
     /**
-     * Returns our title.
-     *
      * @return string our title, will not be empty
      */
     public function getTitle(): string
@@ -21,13 +19,9 @@ class Tx_Seminars_Model_Food extends AbstractModel implements Titled
     }
 
     /**
-     * Sets our title.
-     *
      * @param string $title our title to set, must not be empty
-     *
-     * @return void
      */
-    public function setTitle(string $title)
+    public function setTitle(string $title): void
     {
         if ($title == '') {
             throw new \InvalidArgumentException('The parameter $title must not be empty.', 1333296826);

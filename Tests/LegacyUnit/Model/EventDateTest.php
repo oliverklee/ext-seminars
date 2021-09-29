@@ -1639,7 +1639,9 @@ final class EventDateTest extends TestCase
             ]
         );
 
-        $this->subject->setPaymentMethods(new Collection());
+        /** @var Collection<\Tx_Seminars_Model_PaymentMethod> $paymentMethods */
+        $paymentMethods = new Collection();
+        $this->subject->setPaymentMethods($paymentMethods);
     }
 
     // Tests concerning "price on request"

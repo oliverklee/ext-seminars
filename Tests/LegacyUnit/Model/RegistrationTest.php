@@ -1592,6 +1592,7 @@ final class RegistrationTest extends TestCase
      */
     public function setAdditionalPersonsSetsAdditionalPersons(): void
     {
+        /** @var Collection<\Tx_Seminars_Model_FrontEndUser> $additionalPersons */
         $additionalPersons = new Collection();
         $this->subject->setAdditionalPersons($additionalPersons);
 
