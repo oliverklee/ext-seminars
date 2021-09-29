@@ -19,7 +19,7 @@ final class AbstractModelTest extends FunctionalTestCase
     private const NOW = 1574714414;
 
     /**
-     * @var string[]
+     * @var array<int, string>
      */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
