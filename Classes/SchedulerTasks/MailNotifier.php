@@ -51,10 +51,8 @@ class MailNotifier extends AbstractTask
 
     /**
      * Sets up the dependencies (as we cannot use dependency injection on scheduler tasks).
-     *
-     * @return void
      */
-    protected function constituteDependencies()
+    protected function constituteDependencies(): void
     {
         // This is necessary so that the configuration is fetched from the provided page UID early.
         $this->getConfiguration();
@@ -88,10 +86,8 @@ class MailNotifier extends AbstractTask
 
     /**
      * Executes the single steps.
-     *
-     * @return void
      */
-    protected function executeAfterInitialization()
+    protected function executeAfterInitialization(): void
     {
         $this->sendEventTakesPlaceReminders();
         $this->sendCancellationDeadlineReminders();
@@ -101,19 +97,12 @@ class MailNotifier extends AbstractTask
 
     /**
      * Sets the UID of the page with the TS configuration for this task.
-     *
-     * @param int $pageUid
-     *
-     * @return void
      */
-    public function setConfigurationPageUid(int $pageUid)
+    public function setConfigurationPageUid(int $pageUid): void
     {
         $this->configurationPageUid = $pageUid;
     }
 
-    /**
-     * @return int
-     */
     public function getConfigurationPageUid(): int
     {
         return $this->configurationPageUid;
@@ -122,10 +111,8 @@ class MailNotifier extends AbstractTask
     /**
      * Sends event-takes-place reminders to the corresponding organizers and
      * commits the flag for this reminder being sent to the database.
-     *
-     * @return void
      */
-    public function sendEventTakesPlaceReminders()
+    public function sendEventTakesPlaceReminders(): void
     {
         foreach ($this->getEventsToSendEventTakesPlaceReminderFor() as $event) {
             $this->sendRemindersToOrganizers(
@@ -140,10 +127,8 @@ class MailNotifier extends AbstractTask
     /**
      * Sends cancellation deadline reminders to the corresponding organizers and
      * commits the flag for this reminder being sent to the database.
-     *
-     * @return void
      */
-    public function sendCancellationDeadlineReminders()
+    public function sendCancellationDeadlineReminders(): void
     {
         foreach ($this->getEventsToSendCancellationDeadlineReminderFor() as $event) {
             $this->sendRemindersToOrganizers(
@@ -159,11 +144,9 @@ class MailNotifier extends AbstractTask
      * Sends an e-mail to the organizers of the provided event.
      *
      * @param \Tx_Seminars_OldModel_Event $event event for which to send the reminder to its organizers
-     * @param string $messageKey locallang key for the message content and the subject for the e-mail to send, must not be empty
-     *
-     * @return void
+     * @param non-empty-string $messageKey locallang key for the message content and the subject for the e-mail to send
      */
-    private function sendRemindersToOrganizers(\Tx_Seminars_OldModel_Event $event, string $messageKey)
+    private function sendRemindersToOrganizers(\Tx_Seminars_OldModel_Event $event, string $messageKey): void
     {
         $attachment = null;
 
@@ -197,7 +180,7 @@ class MailNotifier extends AbstractTask
      * Returns events in confirmed status which are about to take place and for
      * which no reminder has been sent yet.
      *
-     * @return \Tx_Seminars_OldModel_Event[] events for which to send the event-takes-place reminder to
+     * @return array<int, \Tx_Seminars_OldModel_Event> events for which to send the event-takes-place reminder to
      *               their organizers, will be empty if there are none
      */
     private function getEventsToSendEventTakesPlaceReminderFor(): array
@@ -224,7 +207,7 @@ class MailNotifier extends AbstractTask
      * Returns events in planned status for which the cancellation deadline has
      * just passed and for which no reminder has been sent yet.
      *
-     * @return \Tx_Seminars_OldModel_Event[] events for which to send the cancellation reminder to their
+     * @return array<int, \Tx_Seminars_OldModel_Event> events for which to send the cancellation reminder to their
      *               organizers, will be empty if there are none
      */
     private function getEventsToSendCancellationDeadlineReminderFor(): array
@@ -256,7 +239,7 @@ class MailNotifier extends AbstractTask
      * 'sendEventTakesPlaceReminderDaysBeforeBeginDate'.
      *
      * @return int how many days before an event the event-takes-place
-     *                 reminder should be send, will be > 0 if this option is
+     *                 reminder should be sent, will be > 0 if this option is
      *                 enabled, zero disables sending the reminder
      */
     private function getDaysBeforeBeginDate(): int
@@ -268,7 +251,7 @@ class MailNotifier extends AbstractTask
      * Returns a seminar bag builder already limited to upcoming events with a
      * begin date and status $status.
      *
-     * @param int $status status to limit the builder to, must be either \Tx_Seminars_Model_Event::STATUS_PLANNED or ::CONFIRMED
+     * @param int $status status to limit the builder to, must be either ::STATUS_PLANNED or ::CONFIRMED
      *
      * @return \Tx_Seminars_BagBuilder_Event builder for the seminar bag
      */
@@ -307,12 +290,12 @@ class MailNotifier extends AbstractTask
      * Returns localized e-mail content customized for the provided event and
      * the provided organizer.
      *
-     * @param string $locallangKey
-     *        locallang key for the text in which to replace key words beginning with "%" by the event's data, must not be empty
+     * @param non-empty-string $locallangKey locallang key for the text in which to replace keywords beginning
+     *        with "%" by the event's data
      * @param \Tx_Seminars_OldModel_Event $event
      *        event for which to customize the text
-     * @param string $organizerName
-     *        name of the organizer, may be empty if no organizer name needs to be inserted in the text
+     * @param string $organizerName name of the organizer, may be empty if no organizer name needs to be inserted
+     *        in the text
      *
      * @return string the localized e-mail content, will not be empty
      */
@@ -352,8 +335,6 @@ class MailNotifier extends AbstractTask
      * Checks whether the CSV file should be added to the e-mail.
      *
      * @param \Tx_Seminars_OldModel_Event $event the event to send the e-mail for
-     *
-     * @return bool TRUE if the CSV file should be added, FALSE otherwise
      */
     private function shouldCsvFileBeAdded(\Tx_Seminars_OldModel_Event $event): bool
     {
@@ -364,11 +345,9 @@ class MailNotifier extends AbstractTask
     /**
      * Automatically changes the status for events for which this is enabled.
      *
-     * @return void
-     *
      * @throws \UnexpectedValueException
      */
-    public function automaticallyChangeEventStatuses()
+    public function automaticallyChangeEventStatuses(): void
     {
         $languageService = $this->getLanguageService();
 
@@ -403,10 +382,8 @@ class MailNotifier extends AbstractTask
 
     /**
      * Uses the language configured in the current BE user.
-     *
-     * @return void
      */
-    private function useUserConfiguredLanguage()
+    private function useUserConfiguredLanguage(): void
     {
         /** @var \Tx_Seminars_Model_BackEndUser $user */
         $user = BackEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
