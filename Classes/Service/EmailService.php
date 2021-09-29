@@ -6,10 +6,10 @@ namespace OliverKlee\Seminars\Service;
 
 use OliverKlee\Oelib\Email\Mail;
 use OliverKlee\Seminar\Email\Salutation;
+use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Lang\LanguageService;
 
 /**
  * This class takes care of sending emails.
