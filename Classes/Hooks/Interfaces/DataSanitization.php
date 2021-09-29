@@ -16,10 +16,9 @@ interface DataSanitization extends Hook
      * database. Check the values with additional constraints and provide the modified
      * values to use back in a returned array.
      *
-     * @param int $uid
-     * @param mixed[] $data the events data as stored in database
+     * @param array $data the events data as stored in database
      *
-     * @return mixed[] the data to change, [] for no changes
+     * @return array the data to change, [] for no changes
      */
     public function sanitizeEventData(int $uid, array $data): array;
 }

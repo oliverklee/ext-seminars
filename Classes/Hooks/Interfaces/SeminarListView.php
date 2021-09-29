@@ -14,8 +14,7 @@ interface SeminarListView extends Hook
     /**
      * Modifies the list view seminar bag builder (the item collection for a seminar list).
      *
-     * Add or alter limitations for the selection of seminars to be shown in the
-     * list.
+     * Add or alter limitations for the selection of seminars to be shown in the list.
      *
      * @see \OliverKlee\Seminars\BagBuilder\AbstractBagBuilder::getWhereClausePart()
      * @see \OliverKlee\Seminars\BagBuilder\AbstractBagBuilder::setWhereClausePart()
@@ -24,7 +23,6 @@ interface SeminarListView extends Hook
      * "my vip seminars", "my entered events", "events next day", "other dates".
      *
      * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
-     * @param \Tx_Seminars_BagBuilder_Event $builder the bag builder
      * @param string $whatToDisplay the flavor of list view: 'seminar_list', 'topic_list',
      *        'my_vip_events', 'my_entered_events', 'events_next_day' or 'other_dates'
      */
@@ -46,7 +44,6 @@ interface SeminarListView extends Hook
      * This function will be called for "my events" lists only.
      *
      * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
-     * @param \Tx_Seminars_BagBuilder_Registration $builder the bag builder
      * @param string $whatToDisplay the flavor of list view ('my_events' only?)
      */
     public function modifyRegistrationBagBuilder(

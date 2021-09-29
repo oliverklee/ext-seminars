@@ -20,7 +20,6 @@ interface SeminarRegistrationForm extends Hook
      * Modifies the seminar registration form.
      *
      * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
-     * @param \Tx_Seminars_FrontEnd_RegistrationForm $registrationEditor the registration form
      */
     public function modifyRegistrationForm(
         \Tx_Seminars_FrontEnd_DefaultController $controller,
