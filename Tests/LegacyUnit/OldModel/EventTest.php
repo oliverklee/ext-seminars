@@ -11,6 +11,7 @@ use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Model\FrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -65,7 +66,7 @@ final class EventTest extends TestCase
     private $now = 1524751343;
 
     /**
-     * @var \Tx_Seminars_FrontEnd_DefaultController|null
+     * @var DefaultController|null
      */
     private $pi1 = null;
 
@@ -120,7 +121,7 @@ final class EventTest extends TestCase
         $pageUid = $this->testingFramework->createFrontEndPage();
         $this->testingFramework->createFakeFrontEnd($pageUid);
 
-        $this->pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $this->pi1 = new DefaultController();
         $this->pi1->init(
             [
                 'isStaticTemplateLoaded' => 1,
@@ -435,7 +436,7 @@ final class EventTest extends TestCase
 
         $this->createPi1();
 
-        self::assertInstanceOf(\Tx_Seminars_FrontEnd_DefaultController::class, $this->pi1);
+        self::assertInstanceOf(DefaultController::class, $this->pi1);
     }
 
     /**

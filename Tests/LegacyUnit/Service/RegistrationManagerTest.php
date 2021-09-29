@@ -17,6 +17,7 @@ use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
 use OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures\TestingRegistrationManager;
@@ -77,7 +78,7 @@ final class RegistrationManagerTest extends TestCase
     private $registrationPageUid = 0;
 
     /**
-     * @var \Tx_Seminars_FrontEnd_DefaultController a front-end plugin
+     * @var DefaultController a front-end plugin
      */
     private $pi1 = null;
 
@@ -231,7 +232,7 @@ final class RegistrationManagerTest extends TestCase
         $this->registrationPageUid
             = $this->testingFramework->createFrontEndPage();
 
-        $this->pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $this->pi1 = new DefaultController();
 
         $this->pi1->init(
             [
@@ -409,7 +410,7 @@ final class RegistrationManagerTest extends TestCase
             $this->pi1
         );
         self::assertInstanceOf(
-            \Tx_Seminars_FrontEnd_DefaultController::class,
+            DefaultController::class,
             $this->pi1
         );
     }
@@ -2071,7 +2072,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeSendsMailToAttendeesMailAddress(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -2089,7 +2090,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForAttendeeWithoutMailAddressNotSendsEmail(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registrationUid = $this->testingFramework->createRecord(
@@ -2138,7 +2139,7 @@ final class RegistrationManagerTest extends TestCase
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][RegistrationEmail::class][] = $hookClass;
         $this->addMockedInstance($hookClass, $hook);
 
-        $controller = new \Tx_Seminars_FrontEnd_DefaultController();
+        $controller = new DefaultController();
         $controller->init();
 
         $this->subject->notifyAttendee($registrationOld, $controller);
@@ -2180,7 +2181,7 @@ final class RegistrationManagerTest extends TestCase
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][RegistrationEmail::class][] = $hookClass;
         $this->addMockedInstance($hookClass, $hook);
 
-        $controller = new \Tx_Seminars_FrontEnd_DefaultController();
+        $controller = new DefaultController();
         $controller->init();
 
         $this->subject->notifyAttendee($registrationOld, $controller);
@@ -2192,7 +2193,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeMailSubjectContainsConfirmationSubject(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -2210,7 +2211,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeMailBodyContainsEventTitle(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -2228,7 +2229,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeMailBodyNotContainsRawTemplateMarkers(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -2245,7 +2246,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeMailBodyNotContainsSpaceBeforeComma(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -2262,7 +2263,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeMailBodyContainsRegistrationFood(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -2280,7 +2281,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeMailBodyContainsRegistrationAccommodation(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -2298,7 +2299,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeMailBodyContainsRegistrationInterests(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -2316,7 +2317,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeMailSubjectContainsEventTitle(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -2334,7 +2335,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeSetsTypo3DefaultFromAddressAsSender(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -2358,7 +2359,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeSetsOrganizerAsReplyTo(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -2380,7 +2381,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeWithoutTypo3DefaultFromAddressSetsOrganizerAsSender(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -2404,7 +2405,7 @@ final class RegistrationManagerTest extends TestCase
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->extensionConfiguration
             ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -2422,7 +2423,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForTextMailSetDoesNotHaveHtmlBody(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -2440,7 +2441,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForTextMailSetHasNoUnreplacedMarkers(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -2460,7 +2461,7 @@ final class RegistrationManagerTest extends TestCase
         $this->configuration->setAsBoolean('sendConfirmation', true);
         $this->extensionConfiguration
             ->setAsInteger('eMailFormatForAttendees', TestingRegistrationManager::SEND_HTML_MAIL);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -2487,7 +2488,7 @@ final class RegistrationManagerTest extends TestCase
                 'email' => 'foo@bar.com',
             ]
         );
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $this->subject->notifyAttendee($registration, $pi1);
@@ -2513,7 +2514,7 @@ final class RegistrationManagerTest extends TestCase
                 'email' => 'foo@bar.com',
             ]
         );
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $this->subject->notifyAttendee($registration, $pi1);
@@ -2538,7 +2539,7 @@ final class RegistrationManagerTest extends TestCase
             $registration->getFrontEndUser()->getUid(),
             ['email' => 'foo@bar.com']
         );
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $this->subject->notifyAttendee($registration, $pi1);
@@ -2561,7 +2562,7 @@ final class RegistrationManagerTest extends TestCase
         $registration->getFrontEndUser()->setData(
             ['email' => 'foo@bar.com']
         );
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $this->subject->notifyAttendee($registration, $pi1);
@@ -2579,7 +2580,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeAppendsOrganizersFooterToMailBody(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -2602,7 +2603,7 @@ final class RegistrationManagerTest extends TestCase
             \Tx_Seminars_Model_Event::STATUS_CONFIRMED
         );
 
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $this->subject->notifyAttendee($registration, $pi1);
@@ -2624,7 +2625,7 @@ final class RegistrationManagerTest extends TestCase
             \Tx_Seminars_Model_Event::STATUS_CANCELED
         );
 
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $this->subject->notifyAttendee($registration, $pi1);
@@ -2646,7 +2647,7 @@ final class RegistrationManagerTest extends TestCase
             \Tx_Seminars_Model_Event::STATUS_PLANNED
         );
 
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $this->subject->notifyAttendee($registration, $pi1);
@@ -2672,7 +2673,7 @@ final class RegistrationManagerTest extends TestCase
             \Tx_Seminars_Model_Event::STATUS_PLANNED
         );
 
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $this->subject->notifyAttendee($registration, $pi1);
@@ -2696,7 +2697,7 @@ final class RegistrationManagerTest extends TestCase
             'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
         );
 
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -2714,7 +2715,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeMailBodyCanContainAttendeesNames(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -2733,7 +2734,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForPlainTextMailEnumeratesAttendeesNames(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -2759,7 +2760,7 @@ final class RegistrationManagerTest extends TestCase
             'EXT:seminars/Resources/Private/CSS/thankYouMail.css'
         );
 
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -2789,7 +2790,7 @@ final class RegistrationManagerTest extends TestCase
             'place'
         );
 
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -2818,7 +2819,7 @@ final class RegistrationManagerTest extends TestCase
             'place'
         );
 
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -2836,7 +2837,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForEventWithNoPlaceSendsWillBeAnnouncedMessage(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -2865,7 +2866,7 @@ final class RegistrationManagerTest extends TestCase
             'place'
         );
 
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -2901,7 +2902,7 @@ final class RegistrationManagerTest extends TestCase
             'place'
         );
 
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -2930,7 +2931,7 @@ final class RegistrationManagerTest extends TestCase
             'place'
         );
 
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -2959,7 +2960,7 @@ final class RegistrationManagerTest extends TestCase
             'place'
         );
 
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -2988,7 +2989,7 @@ final class RegistrationManagerTest extends TestCase
             'place'
         );
 
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -3017,7 +3018,7 @@ final class RegistrationManagerTest extends TestCase
             'place'
         );
 
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -3046,7 +3047,7 @@ final class RegistrationManagerTest extends TestCase
             'place'
         );
 
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -3075,7 +3076,7 @@ final class RegistrationManagerTest extends TestCase
             'place'
         );
 
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -3111,7 +3112,7 @@ final class RegistrationManagerTest extends TestCase
             'place'
         );
 
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -3147,7 +3148,7 @@ final class RegistrationManagerTest extends TestCase
             'place'
         );
 
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -3176,7 +3177,7 @@ final class RegistrationManagerTest extends TestCase
             'place'
         );
 
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -3205,7 +3206,7 @@ final class RegistrationManagerTest extends TestCase
             'place'
         );
 
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -3237,7 +3238,7 @@ final class RegistrationManagerTest extends TestCase
             'place'
         );
 
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -3266,7 +3267,7 @@ final class RegistrationManagerTest extends TestCase
             'place'
         );
 
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -3302,7 +3303,7 @@ final class RegistrationManagerTest extends TestCase
             'place'
         );
 
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -3338,7 +3339,7 @@ final class RegistrationManagerTest extends TestCase
             'place'
         );
 
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -3367,7 +3368,7 @@ final class RegistrationManagerTest extends TestCase
             'place'
         );
 
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -3399,7 +3400,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeHasUtf8CalendarAttachment(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -3419,7 +3420,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeHasCalendarAttachmentWithWindowsLineEndings(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -3439,7 +3440,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeHasCalendarAttachmentWithStartAndEndMarkers(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -3458,7 +3459,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeHasCalendarAttachmentWithPublishMethod(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -3477,7 +3478,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeHasCalendarAttachmentWithEvent(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -3516,7 +3517,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeHasCalendarAttachmentWithImportantFields(string $value): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -3536,7 +3537,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeHasCalendarAttachmentWithEventTitleAsSummary(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -3560,7 +3561,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->setConfigurationValue('defaultTimeZone', 'Europe/Berlin');
 
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -3584,7 +3585,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->setConfigurationValue('defaultTimeZone', $timeZone);
 
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -3611,7 +3612,7 @@ final class RegistrationManagerTest extends TestCase
         );
 
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -3635,7 +3636,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->setConfigurationValue('defaultTimeZone', 'Europe/Berlin');
 
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -3659,7 +3660,7 @@ final class RegistrationManagerTest extends TestCase
         $this->subject->setConfigurationValue('defaultTimeZone', $timeZone);
 
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -3680,7 +3681,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeHasCalendarAttachmentWithEventSubtitleAsDescription(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -3700,7 +3701,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeForEventWithoutPlaceHasCalendarAttachmentWithoutLocation(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -3731,7 +3732,7 @@ final class RegistrationManagerTest extends TestCase
         );
 
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -3762,7 +3763,7 @@ final class RegistrationManagerTest extends TestCase
         );
 
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -3782,7 +3783,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeHasCalendarAttachmentWithOrganizer(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -3802,7 +3803,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeHasCalendarAttachmentWithUid(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -3822,7 +3823,7 @@ final class RegistrationManagerTest extends TestCase
     public function notifyAttendeeHasCalendarAttachmentWithTimestamp(): void
     {
         $this->configuration->setAsBoolean('sendConfirmation', true);
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $registration = $this->createRegistration();
@@ -3852,7 +3853,7 @@ final class RegistrationManagerTest extends TestCase
             $registration->getFrontEndUser()->getUid(),
             ['email' => 'foo@bar.com']
         );
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $this->subject->notifyAttendee($registration, $pi1);
@@ -3880,7 +3881,7 @@ final class RegistrationManagerTest extends TestCase
             $registration->getFrontEndUser()->getUid(),
             ['email' => 'foo@bar.com']
         );
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $this->subject->notifyAttendee($registration, $pi1);
@@ -3908,7 +3909,7 @@ final class RegistrationManagerTest extends TestCase
             $registration->getFrontEndUser()->getUid(),
             ['email' => 'foo@bar.com', 'gender' => 0]
         );
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $this->subject->notifyAttendee($registration, $pi1);
@@ -3936,7 +3937,7 @@ final class RegistrationManagerTest extends TestCase
             $registration->getFrontEndUser()->getUid(),
             ['email' => 'foo@bar.com', 'gender' => 1]
         );
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $this->subject->notifyAttendee($registration, $pi1);
@@ -3960,7 +3961,7 @@ final class RegistrationManagerTest extends TestCase
             $registration->getFrontEndUser()->getUid(),
             ['email' => 'foo@bar.com']
         );
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $this->subject->notifyAttendee($registration, $pi1);
@@ -3987,7 +3988,7 @@ final class RegistrationManagerTest extends TestCase
             $registration->getFrontEndUser()->getUid(),
             ['email' => 'foo@bar.com']
         );
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $this->subject->notifyAttendee($registration, $pi1);
@@ -4014,7 +4015,7 @@ final class RegistrationManagerTest extends TestCase
             $registration->getFrontEndUser()->getUid(),
             ['email' => 'foo@bar.com']
         );
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $this->subject->notifyAttendee(
@@ -4047,7 +4048,7 @@ final class RegistrationManagerTest extends TestCase
             $registration->getFrontEndUser()->getUid(),
             ['email' => 'foo@bar.com']
         );
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $this->subject->notifyAttendee(
@@ -4080,7 +4081,7 @@ final class RegistrationManagerTest extends TestCase
             $registration->getFrontEndUser()->getUid(),
             ['email' => 'foo@bar.com']
         );
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $this->subject->notifyAttendee(
@@ -4113,7 +4114,7 @@ final class RegistrationManagerTest extends TestCase
             $registration->getFrontEndUser()->getUid(),
             ['email' => 'foo@bar.com']
         );
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $this->subject->notifyAttendee(
@@ -4146,7 +4147,7 @@ final class RegistrationManagerTest extends TestCase
             $registration->getFrontEndUser()->getUid(),
             ['email' => 'foo@bar.com']
         );
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $this->subject->notifyAttendee(
@@ -4179,7 +4180,7 @@ final class RegistrationManagerTest extends TestCase
             $registration->getFrontEndUser()->getUid(),
             ['email' => 'foo@bar.com']
         );
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $this->subject->notifyAttendee(
@@ -4212,7 +4213,7 @@ final class RegistrationManagerTest extends TestCase
             $registration->getFrontEndUser()->getUid(),
             ['email' => 'foo@bar.com']
         );
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $this->subject->notifyAttendee($registration, $pi1);
@@ -4239,7 +4240,7 @@ final class RegistrationManagerTest extends TestCase
             $registration->getFrontEndUser()->getUid(),
             ['email' => 'foo@bar.com']
         );
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $this->subject->notifyAttendee($registration, $pi1);
@@ -4266,7 +4267,7 @@ final class RegistrationManagerTest extends TestCase
             $registration->getFrontEndUser()->getUid(),
             ['email' => 'foo@bar.com', 'gender' => 0]
         );
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $this->subject->notifyAttendee($registration, $pi1);
@@ -4293,7 +4294,7 @@ final class RegistrationManagerTest extends TestCase
             $registration->getFrontEndUser()->getUid(),
             ['email' => 'foo@bar.com', 'gender' => 1]
         );
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $this->subject->notifyAttendee($registration, $pi1);
@@ -4316,7 +4317,7 @@ final class RegistrationManagerTest extends TestCase
             $registration->getFrontEndUser()->getUid(),
             ['email' => 'foo@bar.com']
         );
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $this->subject->notifyAttendee($registration, $pi1);
@@ -4339,7 +4340,7 @@ final class RegistrationManagerTest extends TestCase
             $registration->getFrontEndUser()->getUid(),
             ['email' => 'foo@bar.com']
         );
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $this->subject->notifyAttendee($registration, $pi1);
@@ -4362,7 +4363,7 @@ final class RegistrationManagerTest extends TestCase
             $registration->getFrontEndUser()->getUid(),
             ['email' => 'foo@bar.com']
         );
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $this->subject->notifyAttendee(
@@ -4389,7 +4390,7 @@ final class RegistrationManagerTest extends TestCase
             $registration->getFrontEndUser()->getUid(),
             ['email' => 'foo@bar.com']
         );
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $this->subject->notifyAttendee(
@@ -4416,7 +4417,7 @@ final class RegistrationManagerTest extends TestCase
             $registration->getFrontEndUser()->getUid(),
             ['email' => 'foo@bar.com']
         );
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $this->subject->notifyAttendee(
@@ -4443,7 +4444,7 @@ final class RegistrationManagerTest extends TestCase
             $registration->getFrontEndUser()->getUid(),
             ['email' => 'foo@bar.com']
         );
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $this->subject->notifyAttendee(
@@ -4470,7 +4471,7 @@ final class RegistrationManagerTest extends TestCase
             $registration->getFrontEndUser()->getUid(),
             ['email' => 'foo@bar.com']
         );
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $this->subject->notifyAttendee(
@@ -4497,7 +4498,7 @@ final class RegistrationManagerTest extends TestCase
             $registration->getFrontEndUser()->getUid(),
             ['email' => 'foo@bar.com']
         );
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $this->subject->notifyAttendee(
@@ -4532,7 +4533,7 @@ final class RegistrationManagerTest extends TestCase
                 'deadline_unregistration' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
             ]
         );
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $subject->notifyAttendee(
@@ -4564,7 +4565,7 @@ final class RegistrationManagerTest extends TestCase
             ]
         );
 
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $subject->notifyAttendee($registration, $pi1);
@@ -4597,7 +4598,7 @@ final class RegistrationManagerTest extends TestCase
             ]
         );
 
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $subject->notifyAttendee($registration, $pi1);
@@ -4631,7 +4632,7 @@ final class RegistrationManagerTest extends TestCase
             ['registration_queue' => 1]
         );
 
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $subject->notifyAttendee(
@@ -4668,7 +4669,7 @@ final class RegistrationManagerTest extends TestCase
             ['registration_queue' => 1]
         );
 
-        $pi1 = new \Tx_Seminars_FrontEnd_DefaultController();
+        $pi1 = new DefaultController();
         $pi1->init();
 
         $subject->notifyAttendee(
@@ -4699,7 +4700,7 @@ final class RegistrationManagerTest extends TestCase
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars'][RegistrationEmail::class][] = $hookClass;
         $this->addMockedInstance($hookClass, $hook);
 
-        $controller = new \Tx_Seminars_FrontEnd_DefaultController();
+        $controller = new DefaultController();
         $controller->init();
 
         $this->subject->notifyAttendee($registrationOld, $controller);
@@ -5800,7 +5801,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $this->createAndLogInFrontEndUser();
 
-        $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
+        $plugin = new DefaultController();
         $plugin->cObj = $this->getFrontEndController()->cObj;
         /** @var TestingRegistrationManager&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -5836,7 +5837,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $this->createAndLogInFrontEndUser();
 
-        $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
+        $plugin = new DefaultController();
         $plugin->cObj = $this->getFrontEndController()->cObj;
         /** @var TestingRegistrationManager&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -5869,7 +5870,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $this->createAndLogInFrontEndUser();
 
-        $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
+        $plugin = new DefaultController();
         $plugin->cObj = $this->getFrontEndController()->cObj;
         /** @var TestingRegistrationManager&MockObject $subject */
         $subject = $this->createPartialMock(
@@ -5911,7 +5912,7 @@ final class RegistrationManagerTest extends TestCase
 
         $this->createAndLogInFrontEndUser();
 
-        $plugin = new \Tx_Seminars_FrontEnd_DefaultController();
+        $plugin = new DefaultController();
         $plugin->cObj = $this->getFrontEndController()->cObj;
         /** @var TestingRegistrationManager&MockObject $subject */
         $subject = $this->createPartialMock(

@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\FrontEnd;
+
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\FallbackConfiguration;
@@ -38,7 +40,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 /**
  * Plugin "Seminar Manager".
  */
-class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
+class DefaultController extends TemplateHelper
 {
     use SharedPluginConfiguration;
 

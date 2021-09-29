@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\FrontEnd;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd\Fixtures\TestingDefaultController;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
@@ -13,7 +14,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
- * @covers \Tx_Seminars_FrontEnd_DefaultController
+ * @covers \OliverKlee\Seminars\FrontEnd\DefaultController
  */
 final class DefaultControllerTest extends FunctionalTestCase
 {
@@ -123,10 +124,10 @@ final class DefaultControllerTest extends FunctionalTestCase
         $className = $this->extractClassNameFromUserFunction($matches[1]);
         $methodName = $this->extractMethodNameFromUserFunction($matches[1]);
 
-        self::assertSame(\Tx_Seminars_FrontEnd_DefaultController::class, $className);
+        self::assertSame(DefaultController::class, $className);
 
         self::assertTrue(
-            \method_exists(new \Tx_Seminars_FrontEnd_DefaultController(), $methodName),
+            \method_exists(new DefaultController(), $methodName),
             'Method ' . $methodName . ' does not exist in class ' . $className
         );
     }
