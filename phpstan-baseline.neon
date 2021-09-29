@@ -116,11 +116,6 @@ parameters:
 			path: Classes/FrontEnd/EventEditor.php
 
 		-
-			message: "#^Call to an undefined method Tx_Seminars_Mapper_FrontEndUser\\:\\:findByUserName\\(\\)\\.$#"
-			count: 1
-			path: Classes/FrontEnd/RegistrationForm.php
-
-		-
 			message: "#^Constant CR not found\\.$#"
 			count: 1
 			path: Classes/FrontEnd/RegistrationForm.php
