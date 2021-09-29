@@ -28,7 +28,7 @@ final class DefaultControllerTest extends FunctionalTestCase
     private const FOLDER_UID = 1;
 
     /**
-     * @var string[]
+     * @var array<int, string>
      */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 

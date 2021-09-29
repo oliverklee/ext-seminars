@@ -26,7 +26,7 @@ final class EventHeadlineTest extends FunctionalTestCase
     private const CONFIGURATION = ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'];
 
     /**
-     * @var string[]
+     * @var array<int, string>
      */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 

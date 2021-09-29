@@ -12,7 +12,7 @@ final class SpeakerBagTest extends FunctionalTestCase
     use BagHelper;
 
     /**
-     * @var string[]
+     * @var array<int, string>
      */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 

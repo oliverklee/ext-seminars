@@ -10,7 +10,7 @@ use OliverKlee\Seminars\RealUrl\Configuration;
 final class ConfigurationTest extends FunctionalTestCase
 {
     /**
-     * @var string[]
+     * @var array<int, string>
      */
     protected $testExtensionsToLoad = ['typo3conf/ext/seminars'];
 

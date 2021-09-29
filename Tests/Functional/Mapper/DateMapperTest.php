@@ -13,7 +13,7 @@ final class DateMapperTest extends FunctionalTestCase
     use CollectionHelper;
 
     /**
-     * @var string[]
+     * @var array<int, string>
      */
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
