@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\ViewHelpers;
+
 use OliverKlee\Oelib\Interfaces\Time;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * This class represents a view helper for rendering a countdown.
  */
-class Tx_Seminars_ViewHelper_Countdown
+class CountdownViewHelper
 {
     /**
      * Returns a localized string representing an amount of seconds in words.

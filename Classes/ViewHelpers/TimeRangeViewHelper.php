@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\ViewHelpers;
+
 use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * This class represents a view helper for rendering time ranges.
  */
-class Tx_Seminars_ViewHelper_TimeRange
+class TimeRangeViewHelper
 {
     use SharedPluginConfiguration;
 

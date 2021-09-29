@@ -10,7 +10,11 @@ use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
+use OliverKlee\Seminars\ViewHelpers\TimeRangeViewHelper;
 
+/**
+ * @covers \OliverKlee\Seminars\ViewHelpers\TimeRangeViewHelper
+ */
 final class TimeRangeViewHelperTest extends TestCase
 {
     use LanguageHelper;
@@ -28,7 +32,7 @@ final class TimeRangeViewHelperTest extends TestCase
     private const TIME_FORMAT = '%H:%M';
 
     /**
-     * @var \Tx_Seminars_ViewHelper_TimeRange
+     * @var TimeRangeViewHelper
      */
     private $subject = null;
 
@@ -56,7 +60,7 @@ final class TimeRangeViewHelperTest extends TestCase
 
         $this->translatedHours = ' ' . $this->getLanguageService()->getLL('label_hours');
 
-        $this->subject = new \Tx_Seminars_ViewHelper_TimeRange();
+        $this->subject = new TimeRangeViewHelper();
     }
 
     protected function tearDown(): void

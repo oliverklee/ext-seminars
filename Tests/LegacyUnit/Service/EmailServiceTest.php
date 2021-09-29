@@ -12,6 +12,7 @@ use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Service\EmailService;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
+use OliverKlee\Seminars\ViewHelpers\DateRangeViewHelper;
 use TYPO3\CMS\Core\Core\Bootstrap;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Mail\MailMessage;
@@ -267,7 +268,7 @@ final class EmailServiceTest extends TestCase
     {
         $subjectPrefix = 'Event date goes here: ';
 
-        $formattedDate = (new \Tx_Seminars_ViewHelper_DateRange())->render($this->event, '-');
+        $formattedDate = (new DateRangeViewHelper())->render($this->event, '-');
 
         $this->email->expects(self::once())->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
@@ -420,7 +421,7 @@ final class EmailServiceTest extends TestCase
      */
     public function sendEmailToAttendeesInsertsEventDateIntoMailTextWithEventDateMarker(): void
     {
-        $formattedDate = (new \Tx_Seminars_ViewHelper_DateRange())->render($this->event, '-');
+        $formattedDate = (new DateRangeViewHelper())->render($this->event, '-');
 
         $this->email->expects(self::once())->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);

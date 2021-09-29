@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Service;
 
 use OliverKlee\Seminar\Email\Salutation;
+use OliverKlee\Seminars\ViewHelpers\DateRangeViewHelper;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\SingletonInterface;
@@ -28,14 +29,14 @@ class EmailService implements SingletonInterface
     protected $salutationBuilder = null;
 
     /**
-     * @var \Tx_Seminars_ViewHelper_DateRange
+     * @var DateRangeViewHelper
      */
     protected $dateRangeViewHelper = null;
 
     public function __construct()
     {
         $this->salutationBuilder = GeneralUtility::makeInstance(Salutation::class);
-        $this->dateRangeViewHelper = GeneralUtility::makeInstance(\Tx_Seminars_ViewHelper_DateRange::class);
+        $this->dateRangeViewHelper = GeneralUtility::makeInstance(DateRangeViewHelper::class);
     }
 
     /**
