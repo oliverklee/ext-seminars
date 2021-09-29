@@ -9,7 +9,9 @@ use OliverKlee\Oelib\Templating\TemplateHelper;
  */
 class Tx_Seminars_Service_ConfigurationService extends TemplateHelper
 {
-    /** Same as class name */
+    /**
+     * @var class-string same as class name
+     */
     public $prefixId = \Tx_Seminars_Service_ConfigurationService::class;
 
     /**
@@ -24,9 +26,6 @@ class Tx_Seminars_Service_ConfigurationService extends TemplateHelper
      */
     public $extKey = 'seminars';
 
-    /**
-     * The constructor.
-     */
     public function __construct()
     {
         $this->init();

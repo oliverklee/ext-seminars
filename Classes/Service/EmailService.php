@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Service;
 
-use OliverKlee\Oelib\Email\Mail;
 use OliverKlee\Seminar\Email\Salutation;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Mail\MailMessage;
@@ -33,9 +32,6 @@ class EmailService implements SingletonInterface
      */
     protected $dateRangeViewHelper = null;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->salutationBuilder = GeneralUtility::makeInstance(Salutation::class);
@@ -45,13 +41,9 @@ class EmailService implements SingletonInterface
     /**
      * Sends an email to of registered users of the given event.
      *
-     * @param \Tx_Seminars_Model_Event $event
-     * @param string $subject
      * @param string $body can contain %salutation which will expand to a full salutation with the user's name
-     *
-     * @return void
      */
-    public function sendEmailToAttendees(\Tx_Seminars_Model_Event $event, string $subject, string $body)
+    public function sendEmailToAttendees(\Tx_Seminars_Model_Event $event, string $subject, string $body): void
     {
         /** @var \Tx_Seminars_Model_Registration $registration */
         foreach ($event->getRegistrations() as $registration) {
@@ -76,12 +68,6 @@ class EmailService implements SingletonInterface
 
     /**
      * Builds the message body (including the email footer).
-     *
-     * @param string $rawBody
-     * @param \Tx_Seminars_Model_Event $event
-     * @param \Tx_Seminars_Model_FrontEndUser $user
-     *
-     * @return string
      */
     protected function buildMessageBody(
         string $rawBody,
@@ -106,12 +92,6 @@ class EmailService implements SingletonInterface
      * %userName
      * %eventTitle
      * %eventDate
-     *
-     * @param string $textWithMarkers
-     * @param \Tx_Seminars_Model_Event $event
-     * @param \Tx_Seminars_Model_FrontEndUser $user
-     *
-     * @return string
      */
     protected function replaceMarkers(
         string $textWithMarkers,
