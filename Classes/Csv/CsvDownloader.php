@@ -19,17 +19,17 @@ class CsvDownloader extends TemplateHelper
     /**
      * @var int
      */
-    const CSV_TYPE_NUMBER = 736;
+    public const CSV_TYPE_NUMBER = 736;
 
     /**
      * @var int HTTP status code for "page not found"
      */
-    const NOT_FOUND = 404;
+    private const NOT_FOUND = 404;
 
     /**
      * @var int HTTP status code for "access denied"
      */
-    const ACCESS_DENIED = 403;
+    private const ACCESS_DENIED = 403;
 
     /**
      * @var string prefix for request parameters

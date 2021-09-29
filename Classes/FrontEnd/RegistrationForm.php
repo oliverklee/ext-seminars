@@ -47,7 +47,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * @var string[]
      */
-    const BILLING_ADDRESS_FIELDS = [
+    private const BILLING_ADDRESS_FIELDS = [
         'gender',
         'name',
         'company',
@@ -77,7 +77,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
     /**
      * @var string[]
      */
-    const REGISTRATION_FIELDS_ON_CONFIRMATION_PAGE = [
+    private const REGISTRATION_FIELDS_ON_CONFIRMATION_PAGE = [
         'price',
         'seats',
         'total_price',

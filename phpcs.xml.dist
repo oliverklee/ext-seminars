@@ -11,8 +11,6 @@
     <rule ref="PSR12">
         <!-- We'll enable this rule once the line lengths are fixed. -->
         <exclude name="Generic.Files.LineLength"/>
-        <!-- This rule requires PHP >= 7.1. -->
-        <exclude name="PSR12.Properties.ConstantVisibility"/>
         <!-- This rule requires all classes to be namespaced. -->
         <exclude name="PSR1.Classes.ClassDeclaration"/>
         <!-- This rule requires all classes to be namespaced. -->

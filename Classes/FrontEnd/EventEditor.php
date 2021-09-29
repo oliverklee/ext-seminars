@@ -43,7 +43,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     /**
      * @var string the prefix used for every subpart in the FE editor
      */
-    const SUBPART_PREFIX = 'fe_editor';
+    private const SUBPART_PREFIX = 'fe_editor';
 
     /**
      * @var string[] the fields required to file a new event.

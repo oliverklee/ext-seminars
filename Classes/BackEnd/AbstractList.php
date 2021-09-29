@@ -25,7 +25,17 @@ abstract class AbstractList
     /**
      * @var string
      */
-    const MODULE_NAME = 'web_seminars';
+    protected const MODULE_NAME = 'web_seminars';
+
+    /**
+     * @var int the depth of the recursion for the back-end lists
+     */
+    protected const RECURSION_DEPTH = 250;
+
+    /**
+     * @var int the page type of a sys-folder
+     */
+    public const SYSFOLDER_TYPE = 254;
 
     /**
      * @var string the name of the table we're working on
@@ -51,16 +61,6 @@ abstract class AbstractList
      * @var bool[] the access rights to page UIDs
      */
     protected $accessRights = [];
-
-    /**
-     * @var int the depth of the recursion for the back-end lists
-     */
-    const RECURSION_DEPTH = 250;
-
-    /**
-     * @var int the page type of a sys-folder
-     */
-    const SYSFOLDER_TYPE = 254;
 
     /**
      * The constructor. Sets the table name and the back-end page object.

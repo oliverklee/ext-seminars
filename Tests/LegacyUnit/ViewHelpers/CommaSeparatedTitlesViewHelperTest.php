@@ -31,7 +31,7 @@ final class CommaSeparatedTitlesViewHelperTest extends TestCase
     /**
      * @var string
      */
-    const TIME_FORMAT = '%H:%M';
+    private const TIME_FORMAT = '%H:%M';
 
     protected function setUp(): void
     {

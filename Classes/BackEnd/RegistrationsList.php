@@ -16,6 +16,16 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class RegistrationsList extends AbstractList
 {
     /**
+     * @var int parameter for setRegistrationTableMarkers to show the list of registrations on the queue
+     */
+    public const REGISTRATIONS_ON_QUEUE = 1;
+
+    /**
+     * @var int parameter for setRegistrationTableMarkers to show the list of regular registrations
+     */
+    public const REGULAR_REGISTRATIONS = 2;
+
+    /**
      * @var string the name of the table we're working on
      */
     protected $tableName = 'tx_seminars_attendances';
@@ -29,18 +39,6 @@ class RegistrationsList extends AbstractList
      * @var string the path to the template file of this list
      */
     protected $templateFile = 'EXT:seminars/Resources/Private/Templates/BackEnd/RegistrationsList.html';
-
-    /**
-     * @var int parameter for setRegistrationTableMarkers to show the list
-     *              of registrations on the queue
-     */
-    const REGISTRATIONS_ON_QUEUE = 1;
-
-    /**
-     * @var int parameter for setRegistrationTableMarkers to show the list
-     *              of regular registrations
-     */
-    const REGULAR_REGISTRATIONS = 2;
 
     /**
      * @var int the UID of the event to show the registrations for

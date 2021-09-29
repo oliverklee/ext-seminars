@@ -20,17 +20,17 @@ final class RegistrationFormTest extends UnitTestCase
     /**
      * @var int
      */
-    const PAGE_AFTER_REGISTRATION = 2;
+    private const PAGE_AFTER_REGISTRATION = 2;
 
     /**
      * @var int
      */
-    const PAGE_AFTER_UNREGISTRATION = 3;
+    private const PAGE_AFTER_UNREGISTRATION = 3;
 
     /**
      * @var array
      */
-    const CONFIGURATION = [
+    private const CONFIGURATION = [
         'thankYouAfterRegistrationPID' => self::PAGE_AFTER_REGISTRATION,
         'pageToShowAfterUnregistrationPID' => self::PAGE_AFTER_UNREGISTRATION,
     ];

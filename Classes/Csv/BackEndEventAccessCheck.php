@@ -12,7 +12,7 @@ class BackEndEventAccessCheck extends AbstractBackEndAccessCheck
     /**
      * @var string
      */
-    const TABLE_NAME_EVENTS = 'tx_seminars_seminars';
+    private const TABLE_NAME_EVENTS = 'tx_seminars_seminars';
 
     /**
      * Checks whether the logged-in user (if any) in the current environment has access to a CSV export.

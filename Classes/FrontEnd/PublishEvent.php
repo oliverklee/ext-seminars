@@ -13,7 +13,7 @@ class Tx_Seminars_FrontEnd_PublishEvent extends TemplateHelper
     /**
      * @var int
      */
-    const PUBLICATION_TYPE_NUMBER = 737;
+    public const PUBLICATION_TYPE_NUMBER = 737;
 
     /**
      * @var string the prefix used for the piVars

@@ -15,7 +15,7 @@ abstract class Tx_Seminars_FrontEnd_AbstractView extends TemplateHelper
      *
      * @var string
      */
-    const UPLOAD_PATH = 'uploads/tx_seminars/';
+    public const UPLOAD_PATH = 'uploads/tx_seminars/';
 
     /**
      * @var string same as plugin name

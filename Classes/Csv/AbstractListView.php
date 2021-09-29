@@ -18,17 +18,17 @@ abstract class AbstractListView
     /**
      * @var string
      */
-    const COLUMN_SEPARATOR = ';';
+    protected const COLUMN_SEPARATOR = ';';
 
     /**
      * @var string
      */
-    const LINE_SEPARATOR = "\r\n";
+    protected const LINE_SEPARATOR = "\r\n";
 
     /**
      * @var int the depth of the recursion for the back-end pages
      */
-    const RECURSION_DEPTH = 250;
+    protected const RECURSION_DEPTH = 250;
 
     /**
      * @var int

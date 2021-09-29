@@ -20,12 +20,12 @@ final class TimeRangeViewHelperTest extends TestCase
      *
      * @var int
      */
-    const BEGIN_DATE = 978307200;
+    private const BEGIN_DATE = 978307200;
 
     /**
      * @var string
      */
-    const TIME_FORMAT = '%H:%M';
+    private const TIME_FORMAT = '%H:%M';
 
     /**
      * @var \Tx_Seminars_ViewHelper_TimeRange

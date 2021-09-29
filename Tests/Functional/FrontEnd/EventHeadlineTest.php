@@ -18,12 +18,12 @@ final class EventHeadlineTest extends FunctionalTestCase
     /**
      * @var string
      */
-    const DATE_FORMAT = '%d.%m.%Y';
+    private const DATE_FORMAT = '%d.%m.%Y';
 
     /**
      * @var string[]
      */
-    const CONFIGURATION = ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'];
+    private const CONFIGURATION = ['templateFile' => 'EXT:seminars/Resources/Private/Templates/FrontEnd/FrontEnd.html'];
 
     /**
      * @var string[]

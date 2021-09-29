@@ -32,32 +32,32 @@ final class DateRangeViewHelperTest extends TestCase
     /**
      * @var int some random date (2001-01-01 00:00:00 UTC)
      */
-    const BEGIN_DATE = 978307200;
+    private const BEGIN_DATE = 978307200;
 
     /**
      * @var string
      */
-    const DATE_FORMAT_YMD = '%d.%m.%Y';
+    private const DATE_FORMAT_YMD = '%d.%m.%Y';
 
     /**
      * @var string
      */
-    const DATE_FORMAT_Y = '%Y';
+    private const DATE_FORMAT_Y = '%Y';
 
     /**
      * @var string
      */
-    const DATE_FORMAT_M = '%m.';
+    private const DATE_FORMAT_M = '%m.';
 
     /**
      * @var string
      */
-    const DATE_FORMAT_MD = '%d.%m.';
+    private const DATE_FORMAT_MD = '%d.%m.';
 
     /**
      * @var string
      */
-    const DATE_FORMAT_D = '%d.';
+    private const DATE_FORMAT_D = '%d.';
 
     protected function setUp(): void
     {

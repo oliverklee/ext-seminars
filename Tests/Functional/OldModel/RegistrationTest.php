@@ -19,12 +19,12 @@ final class RegistrationTest extends FunctionalTestCase
     /**
      * @var string
      */
-    const DATE_FORMAT = '%d.%m.%Y';
+    private const DATE_FORMAT = '%d.%m.%Y';
 
     /**
      * @var string
      */
-    const TIME_FORMAT = '%H:%M';
+    private const TIME_FORMAT = '%H:%M';
 
     /**
      * @var string[]

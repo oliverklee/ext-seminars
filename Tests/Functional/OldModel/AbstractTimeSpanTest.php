@@ -22,32 +22,32 @@ final class AbstractTimeSpanTest extends FunctionalTestCase
     /**
      * @var string
      */
-    const TIME_FORMAT = '%H:%M';
+    private const TIME_FORMAT = '%H:%M';
 
     /**
      * @var string
      */
-    const DATE_FORMAT_YMD = '%d.%m.%Y';
+    private const DATE_FORMAT_YMD = '%d.%m.%Y';
 
     /**
      * @var string
      */
-    const DATE_FORMAT_MD = '%d.%m.';
+    private const DATE_FORMAT_MD = '%d.%m.';
 
     /**
      * @var string
      */
-    const DATE_FORMAT_D = '%d.';
+    private const DATE_FORMAT_D = '%d.';
 
     /**
      * @var string
      */
-    const DATE_FORMAT_M = '%m';
+    private const DATE_FORMAT_M = '%m';
 
     /**
      * @var string
      */
-    const DATE_FORMAT_Y = '%Y';
+    private const DATE_FORMAT_Y = '%Y';
 
     /**
      * @var array<string, string|bool>

@@ -31,6 +31,21 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
     use SharedPluginConfiguration;
 
     /**
+     * @var int use text format for e-mails to attendees
+     */
+    public const SEND_TEXT_MAIL = 0;
+
+    /**
+     * @var int use HTML format for e-mails to attendees
+     */
+    public const SEND_HTML_MAIL = 1;
+
+    /**
+     * @var int use user-specific format for e-mails to attendees
+     */
+    public const SEND_USER_MAIL = 2;
+
+    /**
      * faking $this->scriptRelPath so the locallang.xlf file is found
      *
      * @var string
@@ -61,21 +76,6 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      * @var HookProvider|null
      */
     protected $registrationEmailHookProvider = null;
-
-    /**
-     * @var int use text format for e-mails to attendees
-     */
-    const SEND_TEXT_MAIL = 0;
-
-    /**
-     * @var int use HTML format for e-mails to attendees
-     */
-    const SEND_HTML_MAIL = 1;
-
-    /**
-     * @var int use user-specific format for e-mails to attendees
-     */
-    const SEND_USER_MAIL = 2;
 
     /**
      * @var \Tx_Seminars_Service_SingleViewLinkBuilder

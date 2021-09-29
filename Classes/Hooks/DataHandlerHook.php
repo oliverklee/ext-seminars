@@ -27,27 +27,27 @@ class DataHandlerHook
     /**
      * @var string
      */
-    const TABLE_EVENTS = 'tx_seminars_seminars';
+    private const TABLE_EVENTS = 'tx_seminars_seminars';
 
     /**
      * @var string
      */
-    const TABLE_TIME_SLOTS = 'tx_seminars_timeslots';
+    private const TABLE_TIME_SLOTS = 'tx_seminars_timeslots';
 
     /**
      * @var string
      */
-    const TABLE_PLACES_ASSOCIATION = 'tx_seminars_seminars_place_mm';
+    private const TABLE_PLACES_ASSOCIATION = 'tx_seminars_seminars_place_mm';
 
     /**
      * @var string
      */
-    const DATE_RENDER_FORMAT = 'Y-m-d\\TH:i:s\\Z';
+    private const DATE_RENDER_FORMAT = 'Y-m-d\\TH:i:s\\Z';
 
     /**
      * @var string
      */
-    const DATE_PARSE_FORMAT = 'Y-m-d?H:i:s?';
+    private const DATE_PARSE_FORMAT = 'Y-m-d?H:i:s?';
 
     /**
      * @var DataHandler

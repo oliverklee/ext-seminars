@@ -21,24 +21,24 @@ final class EventEditorTest extends FunctionalTestCase
     /**
      * @var string[]
      */
-    const CONFIGURATION = [
+    private const CONFIGURATION = [
         'form.' => ['eventEditor.' => []],
     ];
 
     /**
      * @var int
      */
-    const CURRENT_PAGE_UID = 1;
+    private const CURRENT_PAGE_UID = 1;
 
     /**
      * @var int
      */
-    const EVENT_UID = 1;
+    private const EVENT_UID = 1;
 
     /**
      * @var int
      */
-    const NOW = 1577285056;
+    private const NOW = 1577285056;
 
     /**
      * @var string[]

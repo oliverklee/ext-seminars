@@ -16,7 +16,7 @@ abstract class AbstractModule extends BaseScriptClass
     /**
      * @var string
      */
-    const MODULE_NAME = 'web_seminars';
+    protected const MODULE_NAME = 'web_seminars';
 
     /**
      * data of the current BE page

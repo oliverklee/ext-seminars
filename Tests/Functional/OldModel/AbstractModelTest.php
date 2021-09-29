@@ -16,7 +16,7 @@ final class AbstractModelTest extends FunctionalTestCase
     /**
      * @var int
      */
-    const NOW = 1574714414;
+    private const NOW = 1574714414;
 
     /**
      * @var string[]
