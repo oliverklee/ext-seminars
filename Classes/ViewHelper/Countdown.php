@@ -114,9 +114,6 @@ class Tx_Seminars_ViewHelper_Countdown
     /**
      * Returns the formatted countdown message using $countdownValue and $countdownText.
      *
-     * @param int $countdownValue
-     * @param string $countdownText
-     *
      * @return string the formatted countdown message
      */
     protected function getFormattedMessage(int $countdownValue, string $countdownText): string
