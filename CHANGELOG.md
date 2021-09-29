@@ -30,6 +30,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Deprecated
 
 ### Removed
+- Drop the unused `TimeRangeViewHelper` (#1006)
 - Drop the fax number field from the speakers (#999)
 - Drop autogeneratable fields from the SQL file (#905)
 - Make the time slot wizard and CSS in emails Composer-only (#904)
