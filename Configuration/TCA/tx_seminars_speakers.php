@@ -21,7 +21,7 @@ $tca = [
     ],
     'interface' => [
         'showRecordFieldList' => 'hidden, title, organization, homepage, description, image, skills, notes, ' .
-            'address, phone_work, phone_home, phone_mobile, fax, email, cancelation_period, owner',
+            'address, phone_work, phone_home, phone_mobile, email, cancelation_period, owner',
     ],
     'columns' => [
         'hidden' => [
@@ -170,15 +170,6 @@ $tca = [
                 'eval' => 'trim',
             ],
         ],
-        'fax' => [
-            'exclude' => 1,
-            'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.fax',
-            'config' => [
-                'type' => 'input',
-                'size' => 30,
-                'eval' => 'trim',
-            ],
-        ],
         'email' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_speakers.email',
@@ -219,7 +210,7 @@ $tca = [
     'types' => [
         '0' => [
             'showitem' => 'hidden, title, gender, organization, homepage, description, image, skills, notes, ' .
-                'address, phone_work, phone_home, phone_mobile, fax, email, cancelation_period, owner',
+                'address, phone_work, phone_home, phone_mobile, email, cancelation_period, owner',
         ],
     ],
 ];

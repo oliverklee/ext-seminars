@@ -188,10 +188,6 @@
 				<source>Phone</source>
 				<target>Telefon</target>
 			</trans-unit>
-			<trans-unit id="label_fax" xml:space="preserve">
-				<source>Fax</source>
-				<target>Fax</target>
-			</trans-unit>
 			<trans-unit id="label_email" xml:space="preserve">
 				<source>E-mail address</source>
 				<target>Email</target>

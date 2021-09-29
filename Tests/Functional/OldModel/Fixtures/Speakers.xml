@@ -11,7 +11,6 @@
         <phone_work>123</phone_work>
         <phone_home>456</phone_home>
         <phone_mobile>789</phone_mobile>
-        <fax>000</fax>
         <email>max@example.com</email>
         <cancelation_period>4</cancelation_period>
     </tx_seminars_speakers>

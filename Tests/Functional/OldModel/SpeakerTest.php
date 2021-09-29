@@ -38,7 +38,6 @@ final class SpeakerTest extends FunctionalTestCase
         self::assertSame('123', $subject->getPhoneWork());
         self::assertSame('456', $subject->getPhoneHome());
         self::assertSame('789', $subject->getPhoneMobile());
-        self::assertSame('000', $subject->getFax());
         self::assertSame('max@example.com', $subject->getEmail());
         self::assertSame(4, $subject->getCancelationPeriodInDays());
     }

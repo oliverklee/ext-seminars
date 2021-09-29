@@ -196,16 +196,6 @@ class Tx_Seminars_OldModel_Speaker extends AbstractModel
     }
 
     /**
-     * Gets our fax number.
-     *
-     * @return string our fax number (or '' if there is an error)
-     */
-    public function getFax(): string
-    {
-        return $this->getRecordPropertyString('fax');
-    }
-
-    /**
      * Gets our e-mail address.
      *
      * @return string our e-mail address (or '' if there is an error)

@@ -41,7 +41,7 @@ as well:
 - write access to the following tables (may be split into several
   groups): front-end users, addresses
 
-- allowed excludefields: front-end user: name, address, phone, fax,
-  email, zip code, city, inactive; address: fax, mobile
+- allowed excludefields: front-end user: name, address, phone
+  email, zip code, city, inactive; address: mobile
 
 - the front-end users system folder in their DB mounts
