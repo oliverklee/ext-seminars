@@ -12,7 +12,7 @@ class EmailRegistrationListView extends \Tx_Seminars_Csv_AbstractRegistrationLis
     /**
      * Returns the keys of the front-end user fields to export.
      *
-     * @return string[]
+     * @return array<int, non-empty-string>
      */
     protected function getFrontEndUserFieldKeys(): array
     {
@@ -22,7 +22,7 @@ class EmailRegistrationListView extends \Tx_Seminars_Csv_AbstractRegistrationLis
     /**
      * Returns the keys of the registration fields to export.
      *
-     * @return string[]
+     * @return array<int, non-empty-string>
      */
     protected function getRegistrationFieldKeys(): array
     {

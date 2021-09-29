@@ -145,10 +145,8 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel
      * @param \Tx_Seminars_OldModel_Event $event the seminar object (that's the seminar we would like to register for)
      * @param int $userUid UID of the FE user who wants to sign up
      * @param array $registrationData associative array with the registration data the user has just entered, may be empty
-     *
-     * @return void
      */
-    public function setRegistrationData(\Tx_Seminars_OldModel_Event $event, int $userUid, array $registrationData)
+    public function setRegistrationData(\Tx_Seminars_OldModel_Event $event, int $userUid, array $registrationData): void
     {
         $this->seminar = $event;
 
@@ -267,10 +265,8 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel
      * This function is intended to be overwritten in subclasses.
      *
      * @param array $registrationData associative array with the registration data the user has just entered, may be empty
-     *
-     * @return void
      */
-    protected function processAdditionalRegistrationData(array $registrationData)
+    protected function processAdditionalRegistrationData(array $registrationData): void
     {
     }
 
@@ -297,11 +293,9 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel
      *
      * @param int $seats the number of seats, must be >= 0
      *
-     * @return void
-     *
      * @throws \InvalidArgumentException
      */
-    public function setSeats(int $seats)
+    public function setSeats(int $seats): void
     {
         if ($seats < 0) {
             throw new \InvalidArgumentException('The parameter $seats must be >= 0.', 1333291732);
@@ -325,10 +319,8 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel
      *
      * The title is constructed like this:
      *   Name of Attendee / Title of Seminar seminardate
-     *
-     * @return void
      */
-    private function createTitle()
+    private function createTitle(): void
     {
         $this->recordData['title'] = $this->getUserName() .
             ' / ' . $this->getSeminarObject()->getTitle() . ', ' . $this->getSeminarObject()->getDate('-');
@@ -341,11 +333,9 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel
      *
      * `$this->userData` will be null if retrieving the user data fails.
      *
-     * @return void
-     *
      * @throws NotFoundException
      */
-    private function retrieveUserData()
+    private function retrieveUserData(): void
     {
         $uid = $this->getUser();
         if ($uid === 0) {
@@ -367,12 +357,8 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel
 
     /**
      * Sets the data of the FE user of this registration.
-     *
-     * @param array $data
-     *
-     * @return void
      */
-    public function setUserData(array $data)
+    public function setUserData(array $data): void
     {
         $this->userData = $data;
         $this->userDataHasBeenRetrieved = true;
@@ -387,12 +373,13 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel
      * payment or the gender), this function will already return the clear text
      * version.
      *
-     * @param string $key the key of the data to retrieve, need not be trimmed
+     * @param non-empty-string $key the key of the data to retrieve, need not be trimmed
      *
      * @return string the trimmed value retrieved from $this->recordData with CR replaced by LF, may be empty empty
      */
     public function getRegistrationData(string $key): string
     {
+        /** @var non-empty-string $trimmedKey */
         $trimmedKey = trim($key);
 
         switch ($trimmedKey) {
@@ -599,10 +586,8 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel
 
     /**
      * @param Tx_Seminars_Model_FrontEndUser $user
-     *
-     * @return void
      */
-    public function setFrontEndUser(\Tx_Seminars_Model_FrontEndUser $user)
+    public function setFrontEndUser(\Tx_Seminars_Model_FrontEndUser $user): void
     {
         $this->user = $user;
     }
@@ -627,10 +612,8 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel
      * Sets the front-end user UID of the registration.
      *
      * @param int $uid the front-end user UID of the attendee, must be > 0
-     *
-     * @return void
      */
-    public function setFrontEndUserUid(int $uid)
+    public function setFrontEndUserUid(int $uid): void
     {
         $this->setRecordPropertyInteger('user', $uid);
     }
@@ -680,10 +663,8 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel
      *
      * @param int $paymentDate
      *        the date of the payment as UNIX timestamp, must be >= 0
-     *
-     * @return void
      */
-    public function setPaymentDateAsUnixTimestamp(int $paymentDate)
+    public function setPaymentDateAsUnixTimestamp(int $paymentDate): void
     {
         $this->setRecordPropertyInteger('datepaid', $paymentDate);
     }
@@ -767,10 +748,8 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel
      * Sets our price category name and its single price.
      *
      * @param string $price the price category name and its single price, may be empty
-     *
-     * @return void
      */
-    public function setPrice(string $price)
+    public function setPrice(string $price): void
     {
         $this->setRecordPropertyString('price', $price);
     }
@@ -807,10 +786,8 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel
      * Sets our total price.
      *
      * @param string $price the total price, may be empty
-     *
-     * @return void
      */
-    public function setTotalPrice(string $price)
+    public function setTotalPrice(string $price): void
     {
         $this->setRecordPropertyString('total_price', $price);
     }
@@ -891,6 +868,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel
     public function dumpAttendanceValues(string $keysList): string
     {
         $keys = GeneralUtility::trimExplode(',', $keysList, true);
+        /** @var array<non-empty-string, string> $labels */
         $labels = [];
 
         $maximumLabelLength = 0;
@@ -907,6 +885,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel
         }
 
         $result = '';
+        /** @var non-empty-string $key */
         foreach ($labels as $key => $currentLabel) {
             $value = $this->getRegistrationData($key);
             if ($value === '') {
@@ -994,8 +973,6 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel
 
     /**
      * Returns the food free-text content.
-     *
-     * @return string
      */
     public function getFood(): string
     {
@@ -1004,8 +981,6 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel
 
     /**
      * Checks whether this registration has non-empty data in the food field.
-     *
-     * @return bool
      */
     public function hasFood(): bool
     {
@@ -1014,8 +989,6 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel
 
     /**
      * Returns the accommodation free-text content.
-     *
-     * @return string
      */
     public function getAccommodation(): string
     {
@@ -1024,8 +997,6 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel
 
     /**
      * Checks whether this registration has non-empty data in the accommodation field.
-     *
-     * @return bool
      */
     public function hasAccommodation(): bool
     {
@@ -1135,10 +1106,8 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel
 
     /**
      * Fills the default fields that don't have any data.
-     *
-     * @return void
      */
-    protected function fillEmptyDefaultFields()
+    protected function fillEmptyDefaultFields(): void
     {
         $integerDefaultFieldKeys = [
             'kids',
@@ -1177,12 +1146,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel
         return $this->getRecordPropertyBoolean('registration_queue');
     }
 
-    /**
-     * @param bool $isOnRegistrationQueue
-     *
-     * @return void
-     */
-    public function setIsOnRegistrationQueue(bool $isOnRegistrationQueue)
+    public function setIsOnRegistrationQueue(bool $isOnRegistrationQueue): void
     {
         $this->setRecordPropertyInteger('registration_queue', (int)$isOnRegistrationQueue);
     }
@@ -1213,10 +1177,8 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel
      * Sets our attendees names.
      *
      * @param string $attendeesNames our attendees names, may be empty
-     *
-     * @return void
      */
-    public function setAttendeesNames(string $attendeesNames)
+    public function setAttendeesNames(string $attendeesNames): void
     {
         $this->setRecordPropertyString('attendees_names', $attendeesNames);
     }
@@ -1246,11 +1208,9 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel
      *
      * @param int $numberOfKids the number of kids, must be >= 0
      *
-     * @return void
-     *
      * @throws \InvalidArgumentException
      */
-    public function setNumberOfKids(int $numberOfKids)
+    public function setNumberOfKids(int $numberOfKids): void
     {
         if ($numberOfKids < 0) {
             throw new \InvalidArgumentException('The parameter $numberOfKids must be >= 0.', 1333291776);
@@ -1284,11 +1244,9 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel
      *
      * @param int $uid our method of payment UID, must be >= 0
      *
-     * @return void
-     *
      * @throws \InvalidArgumentException
      */
-    public function setMethodOfPaymentUid(int $uid)
+    public function setMethodOfPaymentUid(int $uid): void
     {
         if ($uid < 0) {
             throw new \InvalidArgumentException('The parameter $uid must be >= 0.', 1333291786);
@@ -1319,7 +1277,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel
      * @return string the names stored in attendees_name enumerated, will be
      *                empty if this registration has no attendees names
      */
-    public function getEnumeratedAttendeeNames($useHtml = false): string
+    public function getEnumeratedAttendeeNames(bool $useHtml = false): string
     {
         if (!$this->hasAttendeesNames() && !$this->hasRegisteredThemselves()) {
             return '';
@@ -1345,20 +1303,12 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel
         return $result;
     }
 
-    /**
-     * @return bool
-     */
     public function hasRegisteredThemselves(): bool
     {
         return $this->getRecordPropertyBoolean('registered_themselves');
     }
 
-    /**
-     * @param bool $registeredThemselves
-     *
-     * @return void
-     */
-    public function setRegisteredThemselves(bool $registeredThemselves)
+    public function setRegisteredThemselves(bool $registeredThemselves): void
     {
         $this->setRecordPropertyBoolean('registered_themselves', $registeredThemselves);
     }

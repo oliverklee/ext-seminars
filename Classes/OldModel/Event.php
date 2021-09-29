@@ -82,7 +82,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
     public function getTopic(): ?\Tx_Seminars_OldModel_Event
     {
-        if ($this->topic instanceof \Tx_Seminars_OldModel_Event) {
+        if ($this->topic instanceof self) {
             return $this->topic;
         }
         if (!$this->isEventDate()) {
@@ -91,19 +91,14 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         $topic = $this->loadTopic();
         // Avoid infinite loops due to date records that have been converted to a topic or single event.
-        if ($topic instanceof \Tx_Seminars_OldModel_Event && !$topic->isEventDate()) {
+        if ($topic instanceof self && !$topic->isEventDate()) {
             $this->setTopic($topic);
         }
 
         return $this->topic;
     }
 
-    /**
-     * @param Tx_Seminars_OldModel_Event $topic
-     *
-     * @return void
-     */
-    public function setTopic(\Tx_Seminars_OldModel_Event $topic)
+    public function setTopic(\Tx_Seminars_OldModel_Event $topic): void
     {
         $this->topic = $topic;
     }
@@ -147,8 +142,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     }
 
     /**
-     * Gets our subtitle.
-     *
      * @return string our seminar subtitle (or '' if there is an error)
      */
     public function getSubtitle(): string
@@ -156,19 +149,12 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         return $this->getTopicString('subtitle');
     }
 
-    /**
-     * Checks whether we have a subtitle.
-     *
-     * @return bool TRUE if we have a non-empty subtitle, FALSE otherwise.
-     */
     public function hasSubtitle(): bool
     {
         return $this->hasTopicString('subtitle');
     }
 
     /**
-     * Gets our description.
-     *
      * @return string our seminar description (or '' if there is an error)
      */
     public function getDescription(): string
@@ -177,32 +163,20 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     }
 
     /**
-     * Sets the description of the event.
-     *
      * @param string $description the description for this event, may be empty
-     *
-     * @return void
      */
-    public function setDescription(string $description)
+    public function setDescription(string $description): void
     {
         $this->setRecordPropertyString('description', $description);
     }
 
-    /**
-     * Checks whether we have a description.
-     *
-     * @return bool TRUE if we have a non-empty description, FALSE otherwise.
-     */
     public function hasDescription(): bool
     {
         return $this->hasTopicString('description');
     }
 
     /**
-     * Gets the additional information.
-     *
-     * @return string HTML code of the additional information (or '' if there is
-     *                an error)
+     * @return string HTML of the additional information (or '' if there is an error)
      */
     public function getAdditionalInformation(): string
     {
@@ -210,13 +184,9 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     }
 
     /**
-     * Sets our additional information.
-     *
      * @param string $additionalInformation our additional information, may be empty
-     *
-     * @return void
      */
-    public function setAdditionalInformation(string $additionalInformation)
+    public function setAdditionalInformation(string $additionalInformation): void
     {
         $this->setRecordPropertyString(
             'additional_information',
@@ -224,12 +194,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         );
     }
 
-    /**
-     * Checks whether we have additional information for this event.
-     *
-     * @return bool TRUE if we have additional information (field not empty),
-     *                 FALSE otherwise.
-     */
     public function hasAdditionalInformation(): bool
     {
         return $this->hasTopicString('additional_information');
@@ -247,7 +211,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * @return string the unique seminar title (or '' if there is an error)
      */
-    public function getTitleAndDate($dash = '–'): string
+    public function getTitleAndDate(string $dash = '–'): string
     {
         $date = $this->hasDate() ? ', ' . $this->getDate($dash) : '';
 
@@ -255,8 +219,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     }
 
     /**
-     * Gets the accreditation number (which actually is a string, not an
-     * integer).
+     * Gets the accreditation number (which actually is a string, not an integer).
      *
      * @return string the accreditation number (may be empty)
      */
@@ -265,11 +228,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         return $this->getRecordPropertyString('accreditation_number');
     }
 
-    /**
-     * Checks whether we have an accreditation number set.
-     *
-     * @return bool TRUE if we have a non-empty accreditation number, FALSE otherwise.
-     */
     public function hasAccreditationNumber(): bool
     {
         return $this->hasRecordPropertyString('accreditation_number');
@@ -279,20 +237,13 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * Gets the number of credit points for this seminar
      * (or an empty string if it is not set yet).
      *
-     * @return string the number of credit points or a an empty string if it is 0
+     * @return string the number of credit points or an empty string if it is 0
      */
     public function getCreditPoints(): string
     {
         return $this->hasCreditPoints() ? (string)$this->getTopicInteger('credit_points') : '';
     }
 
-    /**
-     * Checks whether this seminar has a non-zero number of credit
-     * points assigned.
-     *
-     * @return bool TRUE if the seminar has credit points assigned,
-     *                 FALSE otherwise.
-     */
     public function hasCreditPoints(): bool
     {
         return $this->hasTopicInteger('credit_points');
@@ -370,8 +321,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * valid at all. As this field is filled through the BE from a prefilled
      * list, this should never be an issue at all.
      *
-     * @return bool whether at least one place with country are set
-     *                 for the current event
+     * @return bool whether at least one place with country are set for the current event
      */
     public function hasCountry(): bool
     {
@@ -408,8 +358,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * If no places are set, or no countries are selected in the set places,
      * an empty string will be returned.
      *
-     * @return string comma-separated list of countries for this event,
-     *                may be empty
+     * @return string comma-separated list of countries for this event, may be empty
      */
     public function getCountry(): string
     {
@@ -438,8 +387,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * If no places are set, or no cities are selected in the set places, an
      * empty string will be returned.
      *
-     * @return string comma-separated list of cities for this event, may be
-     *                empty
+     * @return string comma-separated list of cities for this event, may be empty
      */
     public function getCities(): string
     {
@@ -461,8 +409,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * Returns a boolean TRUE if at least one of the set places has a
      * city set, returns FALSE otherwise.
      *
-     * @return bool whether at least one place with city are set for the
-     *                 current event
+     * @return bool whether at least one place with city are set for the current event
      */
     public function hasCities(): bool
     {
@@ -629,12 +576,10 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Creates and returns a speakerbag object.
      *
-     * @param string $speakerRelation
-     *        the relation in which the speakers stand to this event: "speakers" (default), "partners", "tutors" or "leaders"
-     *
-     * @return \Tx_Seminars_Bag_Speaker a speakerbag object
+     * @param string $speakerRelation the relation in which the speakers stand to this event:
+     *        "speakers" (default), "partners", "tutors" or "leaders"
      */
-    private function getSpeakerBag($speakerRelation = 'speakers'): \Tx_Seminars_Bag_Speaker
+    private function getSpeakerBag(string $speakerRelation = 'speakers'): \Tx_Seminars_Bag_Speaker
     {
         switch ($speakerRelation) {
             case 'partners':
@@ -654,8 +599,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         return GeneralUtility::makeInstance(
             \Tx_Seminars_Bag_Speaker::class,
-            $mmTable . '.uid_local = ' . $this->getUid(
-            ) . ' AND ' . 'tx_seminars_speakers.uid = ' . $mmTable . '.uid_foreign',
+            $mmTable . '.uid_local = ' . $this->getUid()
+            . ' AND tx_seminars_speakers.uid = ' . $mmTable . '.uid_foreign',
             $mmTable,
             '',
             'sorting'
@@ -663,21 +608,20 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     }
 
     /**
-     * Gets our speaker (or speakers), complete as RTE'ed HTML with details and
-     * links.
+     * Gets our speaker (or speakers), complete as RTE'ed HTML with details and links.
+     *
      * Returns an empty paragraph if this seminar doesn't have any speakers.
      *
      * As speakers can be related to this event as speakers, partners, tutors or
      * leaders, the type relation can be specified. The default is "speakers".
      *
      * @param TemplateHelper $plugin the live pibase object
-     * @param string $speakerRelation
-     *        the relation in which the speakers stand to this event:
+     * @param string $speakerRelation the relation in which the speakers stand to this event:
      *        "speakers" (default), "partners", "tutors" or "leaders"
      *
      * @return string our speakers (or '' if there is an error)
      */
-    public function getSpeakersWithDetails(TemplateHelper $plugin, $speakerRelation = 'speakers'): string
+    public function getSpeakersWithDetails(TemplateHelper $plugin, string $speakerRelation = 'speakers'): string
     {
         if (!$this->hasSpeakersOfType($speakerRelation)) {
             return '';
@@ -771,15 +715,12 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * As speakers can be related to this event as speakers, partners, tutors or
      * leaders, the type relation can be specified. The default is "speakers".
      *
-     * @param TemplateHelper $plugin
-     * @param string $speakerRelation
-     *        the relation in which the speakers stand to this event:
+     * @param string $speakerRelation the relation in which the speakers stand to this event:
      *        "speakers" (default), "partners", "tutors" or "leaders"
      *
-     * @return string our speakers list, will be empty if an error occurred
-     *                during processing
+     * @return string our speakers list, will be empty if an error occurred during processing
      */
-    public function getSpeakersShort(TemplateHelper $plugin, $speakerRelation = 'speakers'): string
+    public function getSpeakersShort(TemplateHelper $plugin, string $speakerRelation = 'speakers'): string
     {
         if (!$this->hasSpeakersOfType($speakerRelation)) {
             return '';
@@ -798,8 +739,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Gets the number of speakers associated with this event.
      *
-     * @return int the number of speakers associated with this event,
-     *                 will be >= 0
+     * @return int the number of speakers associated with this event, will be >= 0
      */
     public function getNumberOfSpeakers(): int
     {
@@ -809,8 +749,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Gets the number of partners associated with this event.
      *
-     * @return int the number of partners associated with this event,
-     *                 will be >= 0
+     * @return int the number of partners associated with this event, will be >= 0
      */
     public function getNumberOfPartners(): int
     {
@@ -820,8 +759,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Gets the number of tutors associated with this event.
      *
-     * @return int the number of tutors associated with this event,
-     *                 will be >= 0
+     * @return int the number of tutors associated with this event, will be >= 0
      */
     public function getNumberOfTutors(): int
     {
@@ -831,8 +769,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Gets the number of leaders associated with this event.
      *
-     * @return int the number of leaders associated with this event,
-     *                 will be >= 0
+     * @return int the number of leaders associated with this event, will be >= 0
      */
     public function getNumberOfLeaders(): int
     {
@@ -842,14 +779,10 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Checks whether we have speaker relations of the specified type set.
      *
-     * @param string $speakerRelation
-     *        the relation in which the speakers stand to this event:
+     * @param string $speakerRelation the relation in which the speakers stand to this event:
      *        "speakers" (default), "partners", "tutors" or "leaders"
-     *
-     * @return bool TRUE if we have any speakers of the specified type
-     *                 related to this event, FALSE otherwise.
      */
-    public function hasSpeakersOfType($speakerRelation = 'speakers'): bool
+    public function hasSpeakersOfType(string $speakerRelation = 'speakers'): bool
     {
         switch ($speakerRelation) {
             case 'partners':
@@ -870,45 +803,21 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         return $hasSpeakers;
     }
 
-    /**
-     * Checks whether we have any speakers set.
-     *
-     * @return bool TRUE if we have any speakers related to this event,
-     *                 FALSE otherwise
-     */
     public function hasSpeakers(): bool
     {
         return $this->hasRecordPropertyInteger('speakers');
     }
 
-    /**
-     * Checks whether we have any partners set.
-     *
-     * @return bool TRUE if we have any partners related to this event,
-     *                 FALSE otherwise
-     */
     public function hasPartners(): bool
     {
         return $this->hasRecordPropertyInteger('partners');
     }
 
-    /**
-     * Checks whether we have any tutors set.
-     *
-     * @return bool TRUE if we have any tutors related to this event,
-     *                 FALSE otherwise
-     */
     public function hasTutors(): bool
     {
         return $this->hasRecordPropertyInteger('tutors');
     }
 
-    /**
-     * Checks whether we have any leaders set.
-     *
-     * @return bool TRUE if we have any leaders related to this event,
-     *                 FALSE otherwise
-     */
     public function hasLeaders(): bool
     {
         return $this->hasRecordPropertyInteger('leaders');
@@ -976,12 +885,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         return $result;
     }
 
-    /**
-     * Checks whether we have a language set.
-     *
-     * @return bool TRUE if we have a language set for this event,
-     *                 FALSE otherwise
-     */
     public function hasLanguage(): bool
     {
         return $this->hasRecordPropertyString('language');
@@ -1009,8 +912,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * Returns the language ISO code for this event. In the case that no
      * language is selected, an empty string will be returned.
      *
-     * @return string the ISO code of the language of this event or an
-     *                empty string if no language is set
+     * @return string the ISO code of the language of this event or an empty string if no language is set
      */
     public function getLanguage(): string
     {
@@ -1020,12 +922,9 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Sets the language ISO code for this event.
      *
-     * @param string $language
-     *        the ISO code of the language for this event to set, may be empty
-     *
-     * @return void
+     * @param string $language the ISO code of the language for this event to set, may be empty
      */
-    public function setLanguage(string $language)
+    public function setLanguage(string $language): void
     {
         $this->setRecordPropertyString('language', $language);
     }
@@ -1034,8 +933,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * Gets our regular price as a string containing amount and currency. If
      * no regular price has been set, either "free" or "to be announced" will
      * be returned, depending on the TS variable showToBeAnnouncedForEmptyPrice.
-     *
-     * @return string the regular seminar price
      */
     public function getPriceRegular(): string
     {
@@ -1053,8 +950,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
     /**
      * Gets our regular price as a decimal.
-     *
-     * @return string
      */
     private function getPriceRegularAmount(): string
     {
@@ -1063,8 +958,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
     /**
      * Returns the price, formatted as configured in TS.
-     *
-     * @param string $value the price
      *
      * @return string the price, formatted as in configured in TS
      */
@@ -1162,9 +1055,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
     /**
      * Checks whether this seminar has a non-zero regular price set.
-     *
-     * @return bool TRUE if the seminar has a non-zero regular price,
-     *                 FALSE if it is free.
      */
     public function hasPriceRegular(): bool
     {
@@ -1173,9 +1063,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
     /**
      * Checks whether this seminar has a non-zero regular early bird price set.
-     *
-     * @return bool TRUE if the seminar has a non-zero regular early
-     *                 bird price, FALSE otherwise
      */
     protected function hasEarlyBirdPriceRegular(): bool
     {
@@ -1184,9 +1071,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
     /**
      * Checks whether this seminar has a non-zero special early bird price set.
-     *
-     * @return bool TRUE if the seminar has a non-zero special early
-     *                 bird price, FALSE otherwise
      */
     protected function hasEarlyBirdPriceSpecial(): bool
     {
@@ -1195,9 +1079,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
     /**
      * Checks whether this event has a deadline for the early bird prices set.
-     *
-     * @return bool TRUE if the event has an early bird deadline set,
-     *                 FALSE if not
      */
     private function hasEarlyBirdDeadline(): bool
     {
@@ -1206,9 +1087,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
     /**
      * Returns whether an early bird price applies.
-     *
-     * @return bool TRUE if this event has an early bird dealine set and
-     *                 this deadline is not over yet
      */
     protected function earlyBirdApplies(): bool
     {
@@ -1248,8 +1126,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Gets our special price as a string containing amount and currency.
      * Returns an empty string if there is no special price set.
-     *
-     * @return string the special event price
      */
     public function getPriceSpecial(): string
     {
@@ -1261,8 +1137,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * Gets our special price as a decimal.
      *
      * If there is no special price, this function returns "0.00".
-     *
-     * @return string the special event price
      */
     private function getPriceSpecialAmount(): string
     {
@@ -1271,9 +1145,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
     /**
      * Checks whether this seminar has a non-zero special price set.
-     *
-     * @return bool TRUE if the seminar has a non-zero special price,
-     *                 FALSE if it is free.
      */
     public function hasPriceSpecial(): bool
     {
@@ -1309,9 +1180,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Checks whether this event has a non-zero regular price (including full
      * board) set.
-     *
-     * @return bool TRUE if the event has a non-zero regular price
-     *                 (including full board), FALSE otherwise
      */
     public function hasPriceRegularBoard(): bool
     {
@@ -1322,8 +1190,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * Gets our special price (including full board) as a string containing
      * amount and currency. Returns an empty string if there is no special price
      * (including full board) set.
-     *
-     * @return string the special event price (including full board)
      */
     public function getPriceSpecialBoard(): string
     {
@@ -1336,8 +1202,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * If there is no special price (including full board), this function
      * returns "0.00".
-     *
-     * @return string the special event price (including full board)
      */
     private function getPriceSpecialBoardAmount(): string
     {
@@ -1347,29 +1211,18 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Checks whether this event has a non-zero special price (including full
      * board) set.
-     *
-     * @return bool TRUE if the event has a non-zero special price
-     *                 (including full board), FALSE otherwise
      */
     public function hasPriceSpecialBoard(): bool
     {
         return $this->hasTopicDecimal('price_special_board');
     }
 
-    /**
-     * @return bool
-     */
     public function getPriceOnRequest(): bool
     {
         return $this->getTopicBoolean('price_on_request');
     }
 
-    /**
-     * @param bool $priceOnRequest
-     *
-     * @return void
-     */
-    public function setPriceOnRequest(bool $priceOnRequest)
+    public function setPriceOnRequest(bool $priceOnRequest): void
     {
         $this->setRecordPropertyBoolean('price_on_request', $priceOnRequest);
     }
@@ -1477,22 +1330,11 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         return \is_array($data) ? (string)$data['title'] : '';
     }
 
-    /**
-     * Checks whether this seminar has any payment methods set.
-     *
-     * @return bool TRUE if the seminar has any payment methods, FALSE
-     *                 if it is free
-     */
     public function hasPaymentMethods(): bool
     {
         return $this->hasTopicInteger('payment_methods');
     }
 
-    /**
-     * Gets the number of available payment methods.
-     *
-     * @return int the number of available payment methods, might 0
-     */
     public function getNumberOfPaymentMethods(): int
     {
         return $this->getTopicInteger('payment_methods');
@@ -1521,20 +1363,12 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * 0 = single event (and default value of older records)
      * 1 = multiple event topic record
      * 2 = multiple event date record
-     *
-     * @return int the record type
      */
     public function getRecordType(): int
     {
         return $this->getRecordPropertyInteger('object_type');
     }
 
-    /**
-     * Checks whether this seminar has an event type set.
-     *
-     * @return bool TRUE if the seminar has an event type set, otherwise
-     *                 FALSE
-     */
     public function hasEventType(): bool
     {
         return $this->hasTopicInteger('event_type');
@@ -1576,10 +1410,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * Sets the event type for this event.
      *
      * @param int $eventType the UID of the event type to set, must be >= 0
-     *
-     * @return void
      */
-    public function setEventType(int $eventType)
+    public function setEventType(int $eventType): void
     {
         if ($eventType < 0) {
             throw new \InvalidArgumentException('$eventType must be >= 0.', 1333291840);
@@ -1746,10 +1578,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * Increases the number of associated registration records by one.
      *
      * This method does not save this model.
-     *
-     * @return void
      */
-    public function increaseNumberOfAssociatedRegistrationRecords()
+    public function increaseNumberOfAssociatedRegistrationRecords(): void
     {
         $this->setRecordPropertyInteger('registrations', $this->getNumberOfAssociatedRegistrationRecords() + 1);
     }
@@ -1962,10 +1792,9 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     }
 
     /**
-     * Creates an organizerbag object and returns it.
-     * Throws an exception if there are no organizers related to this event.
+     * Creates an organizer bag and returns it.
      *
-     * @return \Tx_Seminars_Bag_Organizer an organizerbag object
+     * Throws an exception if there are no organizers related to this event.
      *
      * @throws \BadMethodCallException
      */
@@ -2227,6 +2056,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      */
     public function dumpSeminarValues(string $keysList): string
     {
+        /** @var array<int, non-empty-string> $keys */
         $keys = GeneralUtility::trimExplode(',', $keysList, true);
         $keysWithLabels = [];
 
@@ -2703,7 +2533,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
     /**
      * Checks whether it is possible at all to register for this seminar,
-     * ie. it needs registration at all,
+     * i.e., it needs registration at all,
      *     has not been canceled,
      *     has either a date set (registration for events without a date is allowed),
      *     has not begun yet,
@@ -2741,11 +2571,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         return $message;
     }
 
-    /**
-     * Checks whether this event has been canceled.
-     *
-     * @return bool
-     */
     public function isCanceled(): bool
     {
         return $this->getStatus() === \Tx_Seminars_Model_Event::STATUS_CANCELED;
@@ -2755,8 +2580,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * Checks whether the latest possibility to register for this event is over.
      *
      * The latest moment is either the time the event starts, or a set registration deadline.
-     *
-     * @return bool
      */
     public function isRegistrationDeadlineOver(): bool
     {
@@ -2767,8 +2590,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * Checks whether the latest possibility to register with early bird rebate for this event is over.
      *
      * The latest moment is just before a set early bird deadline.
-     *
-     * @return bool TRUE if the deadline has passed, FALSE otherwise
      */
     public function isEarlyBirdDeadlineOver(): bool
     {
@@ -2777,8 +2598,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
     /**
      * Checks whether registration is necessary for this event.
-     *
-     * @return bool
      */
     public function needsRegistration(): bool
     {
@@ -2787,8 +2606,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
     /**
      * Checks whether this event has unlimited vacancies (needs_registration true and max_attendances 0).
-     *
-     * @return bool
      */
     public function hasUnlimitedVacancies(): bool
     {
@@ -2798,9 +2615,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Checks whether this event allows multiple registrations by the same
      * FE user.
-     *
-     * @return bool TRUE if multiple registrations are allowed,
-     *                 FALSE otherwise
      */
     public function allowsMultipleRegistrations(): bool
     {
@@ -2809,10 +2623,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
     /**
      * Calculates the attendee statistics. If these numbers already are available, this method is a no-op.
-     *
-     * @return void
      */
-    protected function calculateStatisticsIfNeeded()
+    protected function calculateStatisticsIfNeeded(): void
     {
         if (!$this->statisticsHaveBeenCalculated) {
             $this->calculateStatistics();
@@ -2821,10 +2633,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
     /**
      * (Re-)calculates the number of participants for this seminar.
-     *
-     * @return void
      */
-    public function calculateStatistics()
+    public function calculateStatistics(): void
     {
         $this->registrationsHaveBeenRetrieved = false;
 
@@ -2874,8 +2684,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
     /**
      * @param array[] $registrations
-     *
-     * @return int
      */
     private function sumSeatsOfRegistrations(array $registrations): int
     {
@@ -2887,10 +2695,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         return $total;
     }
 
-    /**
-     * @return void
-     */
-    private function retrieveRegistrations()
+    private function retrieveRegistrations(): void
     {
         if ($this->registrationsHaveBeenRetrieved) {
             return;
@@ -2916,8 +2721,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
     /**
      * Checks whether we are a date record.
-     *
-     * @return bool TRUE if we are a date record, FALSE otherwise.
      */
     public function isEventDate(): bool
     {
@@ -2926,8 +2729,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
     /**
      * Checks whether we are a topic record.
-     *
-     * @return bool TRUE if we are a topic record, FALSE otherwise.
      */
     public function isEventTopic(): bool
     {
@@ -2953,7 +2754,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * non-emptiness. If we are a date record, it'll be retrieved from the
      * corresponding topic record.
      *
-     * @param string $key key of the element to check
+     * @param non-empty-string $key
      *
      * @return bool TRUE if the corresponding integer exists and is non-empty
      */
@@ -2970,7 +2771,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * If we are a date record, it'll be retrieved from the corresponding
      * topic record.
      *
-     * @param string $key the name of the field to retrieve
+     * @param non-empty-string $key
      *
      * @return int the corresponding element from the record data array
      */
@@ -2986,7 +2787,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * non-emptiness. If we are a date record, it'll be retrieved from the
      * corresponding topic record.
      *
-     * @param string $key key of the element to check
+     * @param non-empty-string $key
      *
      * @return bool TRUE if the corresponding string exists and is non-empty
      */
@@ -3003,7 +2804,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * returned instead. If we are a date record, it'll be retrieved from the
      * corresponding topic record.
      *
-     * @param string $key the name of the field to retrieve
+     * @param non-empty-string $key
      *
      * @return string the corresponding element from the record data array
      */
@@ -3019,10 +2820,9 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * value != 0.00. If we are a date record, it'll be retrieved from the
      * corresponding topic record.
      *
-     * @param string $key key of the element to check
+     * @param non-empty-string $key
      *
-     * @return bool TRUE if the corresponding decimal value exists
-     *                 and is not 0.00
+     * @return bool TRUE if the corresponding decimal value exists and is not 0.00
      */
     private function hasTopicDecimal(string $key): bool
     {
@@ -3037,7 +2837,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * returned instead. If we are a date record, it'll be retrieved from the
      * corresponding topic record.
      *
-     * @param string $key the name of the field to retrieve
+     * @param non-empty-string $key
      *
      * @return string the corresponding element from the record data array
      */
@@ -3055,7 +2855,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * If we are a date record, it'll be retrieved from the corresponding topic
      * record.
      *
-     * @param string $key the name of the field to retrieve
+     * @param non-empty-string $key
      *
      * @return bool the corresponding element from the record data array
      */
@@ -3066,12 +2866,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         return $topic !== null ? $topic->getRecordPropertyBoolean($key) : $this->getRecordPropertyBoolean($key);
     }
 
-    /**
-     * Checks whether we have any lodging options.
-     *
-     * @return bool TRUE if we have at least one lodging option,
-     *                 FALSE otherwise
-     */
     public function hasLodgings(): bool
     {
         return $this->hasRecordPropertyInteger('lodgings');
@@ -3092,8 +2886,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
     /**
      * Gets the lodging options associated with this event.
-     *
-     * @return string
      */
     protected function getLodgingTitles(): string
     {
@@ -3104,8 +2896,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
     /**
      * Checks whether we have any food options.
-     *
-     * @return bool TRUE if we have at least one food option, FALSE otherwise
      */
     public function hasFoods(): bool
     {
@@ -3113,8 +2903,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     }
 
     /**
-     * Gets the food options associated with this event.
-     *
      * @return array[] food options, consisting each of a nested array
      *               with the keys "caption" (for the title) and "value" (for
      *               the UID), might be empty
@@ -3125,11 +2913,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             ? $this->getMmRecordsForSelection('tx_seminars_foods', 'tx_seminars_seminars_foods_mm') : [];
     }
 
-    /**
-     * Gets the food options associated with this event.
-     *
-     * @return string
-     */
     protected function getFoodTitles(): string
     {
         return $this->hasFoods()
@@ -3165,10 +2948,9 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * a date record and $useTopicRecord is TRUE, the referenced records of the
      * corresponding topic record will be retrieved.
      *
-     * @param string $foreignTable
-     *        the name of the foreign table (must not be empty), must have the fields uid and title
-     * @param string $mmTable
-     *        the name of the m:m table, having the fields uid_local, uid_foreign and sorting, must not be empty
+     * @param string $foreignTable the name of the foreign table (must not be empty), must have the fields uid and title
+     * @param string $mmTable the name of the m:m table, having the fields uid_local, uid_foreign and sorting,
+     *        must not be empty
      *
      * @return array[] referenced records, consisting each of a nested
      *               array with the keys "caption" (for the title) and "value"
@@ -3180,9 +2962,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     }
 
     /**
-     * @param string $foreignTable
-     * @param string $mmTable
-     *
      * @return array[] options, consisting each of a nested array with the keys "caption" (for the title) and "value"
      *                 (for the UID), might be empty
      */
@@ -3192,9 +2971,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     }
 
     /**
-     * @param string $foreignTable
-     * @param string $mmTable
-     *
      * @return array[] options, consisting each of a nested array with the keys "caption" (for the title) and "value"
      *                 (for the UID), might be empty
      */
@@ -3336,12 +3112,13 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * payment or the gender), this function will already return the clear text
      * version.
      *
-     * @param string $key the key of the data to retrieve (the key doesn't need to be trimmed)
+     * @param non-empty-string $key the key of the data to retrieve (the key doesn't need to be trimmed)
      *
      * @return string the data retrieved from $this->recordData, may be empty
      */
     public function getEventData(string $key): string
     {
+        /** @var non-empty-string $trimmedKey */
         $trimmedKey = trim($key);
 
         switch ($trimmedKey) {
@@ -3640,9 +3417,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         return !$blockingEvents->isEmpty();
     }
 
-    /**
-     * @return string
-     */
     private function getQueryForCollidingEvents(): string
     {
         if ($this->hasTimeslots()) {
@@ -3684,9 +3458,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      *
      * For open-ended events, only the begin date is checked.
      *
-     * @param int $beginDate
-     * @param int $endDate
-     *
      * @return string WHERE clause (without the "WHERE" keyword), will not be empty
      */
     private function getQueryForCollidingEventsForTimeSpan(int $beginDate, int $endDate): string
@@ -3699,12 +3470,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             ')';
     }
 
-    /**
-     * @param int $beginDate
-     * @param int $endDate
-     *
-     * @return string
-     */
     private function getQueryPartForCollidingEventWithoutTimeSlots(int $beginDate, int $endDate): string
     {
         return '(timeslots = 0 AND (' .
@@ -3725,12 +3490,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
             '))';
     }
 
-    /**
-     * @param int $beginDate
-     * @param int $endDate
-     *
-     * @return string
-     */
     private function getQueryPartForCollidingEventWithTimeSlots(int $beginDate, int $endDate): string
     {
         return '(timeslots != 0 AND EXISTS (' .
@@ -3850,20 +3609,12 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * Checks whether there's a (begin) date set or any time slots exist.
      * If there's an end date but no begin date, this function still will return
      * FALSE.
-     *
-     * @return bool
      */
     public function hasDate(): bool
     {
         return $this->hasBeginDate() || $this->hasTimeslots();
     }
 
-    /**
-     * Returns TRUE if the seminar has at least one time slot, otherwise FALSE.
-     *
-     * @return bool TRUE if the seminar has at least one time slot,
-     *                 otherwise FALSE
-     */
     public function hasTimeslots(): bool
     {
         return $this->hasRecordPropertyInteger('timeslots');
@@ -3902,9 +3653,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         return $result;
     }
 
-    /**
-     * @return \Tx_Seminars_Bag_TimeSlot
-     */
     public function getTimeSlots(): \Tx_Seminars_Bag_TimeSlot
     {
         /** @var \Tx_Seminars_Bag_TimeSlot $timeSlotBag */
@@ -4013,7 +3761,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
         }
 
         $topic = $this->getTopic();
-        $allFiles = $topic instanceof \Tx_Seminars_OldModel_Event ? $topic->getAttachedFiles($plugin) : [];
+        $allFiles = $topic instanceof self ? $topic->getAttachedFiles($plugin) : [];
 
         $uploadFolderPath = Environment::getPublicPath() . '/uploads/tx_seminars/';
         $uploadFolderUrl = GeneralUtility::getIndpEnv('TYPO3_SITE_URL') . 'uploads/tx_seminars/';
@@ -4036,14 +3784,10 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     }
 
     /**
-     * Sets our attached files.
-     *
-     * @param string $attachedFiles
-     *        a comma-separated list of the names of attached files which have to exist in "uploads/tx_seminars/"
-     *
-     * @return void
+     * @param string $attachedFiles a comma-separated list of the names of attached files which have to exist in
+     *        "uploads/tx_seminars/"
      */
-    public function setAttachedFiles(string $attachedFiles)
+    public function setAttachedFiles(string $attachedFiles): void
     {
         $this->setRecordPropertyString('attached_files', $attachedFiles);
     }
@@ -4163,10 +3907,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
      * Sets whether this event is planned, canceled or confirmed.
      *
      * @param int $status STATUS_PLANNED, STATUS_CONFIRMED or STATUS_CANCELED
-     *
-     * @return void
      */
-    public function setStatus(int $status)
+    public function setStatus(int $status): void
     {
         $this->setRecordPropertyInteger('cancelled', $status);
     }
@@ -4206,10 +3948,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
     /**
      * Sets the "cancelation_deadline_reminder_sent" flag.
-     *
-     * @return void
      */
-    public function setCancelationDeadlineReminderSentFlag()
+    public function setCancelationDeadlineReminderSentFlag(): void
     {
         $this->setRecordPropertyBoolean(
             'cancelation_deadline_reminder_sent',
@@ -4219,10 +3959,8 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
     /**
      * Sets the "event_takes_place_reminder_sent" flag.
-     *
-     * @return void
      */
-    public function setEventTakesPlaceReminderSentFlag()
+    public function setEventTakesPlaceReminderSentFlag(): void
     {
         $this->setRecordPropertyBoolean(
             'event_takes_place_reminder_sent',
@@ -4305,12 +4043,14 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Returns the places associated with this event.
      *
-     * @return Collection with the models for the places of this event, will be empty if this event has no places
+     * @return Collection<\Tx_Seminars_Model_Place>
      */
     public function getPlaces(): Collection
     {
         if (!$this->hasPlace()) {
-            return new Collection();
+            /** @var Collection<\Tx_Seminars_Model_Place> $emptyPlaces */
+            $emptyPlaces = new Collection();
+            return $emptyPlaces;
         }
 
         $places = $this->getPlacesAsArray();
@@ -4344,8 +4084,6 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
     /**
      * Checks whether the organizers have already been informed that the event has enough registrations.
-     *
-     * @return bool
      */
     public function haveOrganizersBeenNotifiedAboutEnoughAttendees(): bool
     {
@@ -4354,18 +4092,14 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
     /**
      * Sets that the organizers have already been informed that the event has enough registrations.
-     *
-     * @return void
      */
-    public function setOrganizersBeenNotifiedAboutEnoughAttendees()
+    public function setOrganizersBeenNotifiedAboutEnoughAttendees(): void
     {
         $this->setRecordPropertyBoolean('organizers_notified_about_minimum_reached', true);
     }
 
     /**
      * Checks whether notification e-mail to the organizers are muted.
-     *
-     * @return bool
      */
     public function shouldMuteNotificationEmails(): bool
     {
@@ -4374,18 +4108,14 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
     /**
      * Makes sure that notification e-mail to the organizers are muted.
-     *
-     * @return void
      */
-    public function muteNotificationEmails()
+    public function muteNotificationEmails(): void
     {
         $this->setRecordPropertyBoolean('mute_notification_emails', true);
     }
 
     /**
      * Checks whether automatic confirmation/cancelation for this event is enabled.
-     *
-     * @return bool
      */
     public function shouldAutomaticallyConfirmOrCancel(): bool
     {
@@ -4455,14 +4185,11 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     /**
      * Sets this event's publication hash.
      *
-     * @param string $hash
-     *        the publication hash, use a non-empty string to mark an event as
+     * @param string $hash the publication hash, use a non-empty string to mark an event as
      *        "not published yet" and an empty string to mark an event as
      *        published
-     *
-     * @return void
      */
-    public function setPublicationHash(string $hash)
+    public function setPublicationHash(string $hash): void
     {
         $this->setRecordPropertyString('publication_hash', $hash);
     }
@@ -4490,11 +4217,7 @@ class Tx_Seminars_OldModel_Event extends \Tx_Seminars_OldModel_AbstractTimeSpan
     }
 
     /**
-     * @param string $foreignTableName
-     * @param string $mmTableName
      * @param string[] $foreignFields
-     *
-     * @return array
      */
     private function getAssociationAsArray(string $foreignTableName, string $mmTableName, array $foreignFields): array
     {

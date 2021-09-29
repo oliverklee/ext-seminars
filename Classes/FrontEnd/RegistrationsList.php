@@ -255,35 +255,34 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_Abstr
      * Gets the keys of the front-end user fields that should be displayed in
      * the list.
      *
-     * @return string[] keys of the front-end user fields to display, might be empty
+     * @return array<int, non-empty-string> keys of the front-end user fields to display, might be empty
      */
     private function getFrontEndUserFields(): array
     {
-        return GeneralUtility::trimExplode(
+        /** @var array<int, non-empty-string> $keys */
+        $keys = GeneralUtility::trimExplode(
             ',',
-            $this->getConfValueString(
-                'showFeUserFieldsInRegistrationsList',
-                's_template_special'
-            ),
+            $this->getConfValueString('showFeUserFieldsInRegistrationsList', 's_template_special'),
             true
         );
+
+        return $keys;
     }
 
     /**
-     * Gets the keys of the registration fields that should be displayed in
-     * the list.
+     * Gets the keys of the registration fields that should be displayed in the list.
      *
-     * @return string[] keys of the registration fields to display, might be empty
+     * @return array<int, non-empty-string> keys of the registration fields to display, might be empty
      */
     private function getRegistrationFields(): array
     {
-        return GeneralUtility::trimExplode(
+        /** @var array<int, non-empty-string> $keys */
+        $keys = GeneralUtility::trimExplode(
             ',',
-            $this->getConfValueString(
-                'showRegistrationFieldsInRegistrationList',
-                's_template_special'
-            ),
+            $this->getConfValueString('showRegistrationFieldsInRegistrationList', 's_template_special'),
             true
         );
+
+        return $keys;
     }
 }

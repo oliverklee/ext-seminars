@@ -7504,7 +7504,7 @@ final class EventTest extends TestCase
     /**
      * @test
      *
-     * @param string $fieldName
+     * @param non-empty-string $fieldName
      *
      * @dataProvider dumpableEventFieldsDataProvider
      */
