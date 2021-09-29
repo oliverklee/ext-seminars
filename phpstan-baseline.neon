@@ -36,11 +36,6 @@ parameters:
 			path: Classes/FrontEnd/EventEditor.php
 
 		-
-			message: "#^PHPDoc tag @param for parameter \\$params with type mixed is not subtype of native type array\\.$#"
-			count: 1
-			path: Classes/FrontEnd/EventEditor.php
-
-		-
 			message: "#^Parameter \\#1 \\$field of method Tx_Seminars_FrontEnd_EventEditor\\:\\:isFieldRequired\\(\\) expects array\\<string\\>, array\\<array\\> given\\.$#"
 			count: 5
 			path: Classes/FrontEnd/EventEditor.php

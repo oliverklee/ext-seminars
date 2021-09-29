@@ -20,14 +20,12 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_Abstr
     /**
      * The constructor.
      *
-     * @param array $configuration
-     *        TypoScript configuration for the plugin, may be empty
-     * @param string $whatToDisplay
-     *        a string selecting the flavor of the list view, either "list_registrations" or "list_vip_registrations"
-     * @param int $seminarUid
-     *        UID of the seminar of which we want to list the registrations, invalid UIDs will be handled later
-     * @param ContentObjectRenderer $contentObjectRenderer
-     *        the parent cObj, needed for the flexforms
+     * @param array $configuration TypoScript configuration for the plugin, may be empty
+     * @param string $whatToDisplay a string selecting the flavor of the list view, either "list_registrations" or
+     *        "list_vip_registrations"
+     * @param int $seminarUid UID of the seminar of which we want to list the registrations, invalid UIDs will be
+     *        handled later
+     * @param ContentObjectRenderer $contentObjectRenderer the parent cObj, needed for the flexforms
      */
     public function __construct(
         array $configuration,
@@ -53,13 +51,11 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_Abstr
     }
 
     /**
-     * Creates a seminar in $this->seminar.
+     * Creates a seminar in `$this->seminar`.
      *
      * @param int $seminarUid an event UID, invalid UIDs will be handled later
-     *
-     * @return void
      */
-    private function createSeminar(int $seminarUid)
+    private function createSeminar(int $seminarUid): void
     {
         $this->seminar = GeneralUtility::makeInstance(\Tx_Seminars_OldModel_Event::class, $seminarUid);
     }
@@ -68,7 +64,7 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_Abstr
      * Creates a list of registered participants for an event.
      * If there are no registrations yet, a localized message is displayed instead.
      *
-     * @return string HTML code for the list, will not be empty
+     * @return string HTML for the list, will not be empty
      */
     public function render(): string
     {
@@ -127,10 +123,8 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_Abstr
      *
      * Before this function can be called, it must be ensured that $this->seminar
      * is a valid seminar object.
-     *
-     * @return void
      */
-    private function createRegistrationsList()
+    private function createRegistrationsList(): void
     {
         $builder = $this->createRegistrationBagBuilder();
         $builder->limitToRegular();
@@ -175,8 +169,6 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_Abstr
      * Creates a registration bag builder that will find all registrations
      * (regular and on the queue) for the event in $this->seminar, ordered by
      * creation date.
-     *
-     * @return \Tx_Seminars_BagBuilder_Registration the bag builder
      */
     private function createRegistrationBagBuilder(): \Tx_Seminars_BagBuilder_Registration
     {
@@ -190,8 +182,6 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_Abstr
     }
 
     /**
-     * Creates the table header.
-     *
      * @return string the table header HTML, will not be empty
      */
     private function createTableHeader(): string
@@ -223,15 +213,11 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_Abstr
     }
 
     /**
-     * Creates the table body for a list of registrations and sets the subpart
-     * in the template.
+     * Creates the table body for a list of registrations and sets the subpart in the template.
      *
-     * @param \Tx_Seminars_Bag_Registration $registrations
-     *        the registrations to list, must not be empty
-     *
-     * @return void
+     * @param \Tx_Seminars_Bag_Registration $registrations the registrations to list, must not be empty
      */
-    private function createTableBody(\Tx_Seminars_Bag_Registration $registrations)
+    private function createTableBody(\Tx_Seminars_Bag_Registration $registrations): void
     {
         $tableBody = '';
 

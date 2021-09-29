@@ -24,7 +24,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
- * This class is a controller which allows to create and edit events on the FE.
+ * This class is a controller which allows creating and editing events on the FE.
  */
 class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
 {
@@ -94,10 +94,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * Attached files are stored in a member variable and added to the form data
      * afterwards, as the FORMidable renderlet is not usable for this.
-     *
-     * @return void
      */
-    private function storeAttachedFiles()
+    private function storeAttachedFiles(): void
     {
         if ($this->isTestMode()) {
             $this->attachedFiles = [];
@@ -113,10 +111,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
 
     /**
      * Declares the additional data handler for m:n relations.
-     *
-     * @return void
      */
-    private function declareDataHandler()
+    private function declareDataHandler(): void
     {
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['ameos_formidable']
         ['declaredobjects']['datahandlers']['DBMM'] = [
@@ -220,9 +216,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Provides data items for the list of available categories.
      *
-     * @return array[] $items with additional items from the categories
-     *               table as an array with the keys "caption" (for the
-     *               title) and "value" (for the UID)
+     * @return array[] items with additional items from the categories table as an array with the keys "caption"
+     *         (for the title) and "value" (for the UID)
      */
     public function populateListCategories(): array
     {
@@ -250,9 +245,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Provides data items for the list of available lodgings.
      *
-     * @return array[] $items with additional items from the lodgings table
-     *               as an array with the keys "caption" (for the title)
-     *               and "value" (for the UID)
+     * @return array[] items with additional items from the lodgings table as an array with the keys "caption"
+     *         (for the title) and "value" (for the UID)
      */
     public function populateListLodgings(): array
     {
@@ -265,9 +259,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Provides data items for the list of available foods.
      *
-     * @return array[] $items with additional items from the foods table
-     *               as an array with the keys "caption" (for the title)
-     *               and "value" (for the UID)
+     * @return array[] items with additional items from the foods table as an array with the keys "caption"
+     *         (for the title) and "value" (for the UID)
      */
     public function populateListFoods(): array
     {
@@ -280,9 +273,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Provides data items for the list of available payment methods.
      *
-     * @return array[] $items with additional items from payment methods
-     *               table as an array with the keys "caption" (for the
-     *               title) and "value" (for the UID)
+     * @return array[] items with additional items from payment methods table as an array with the keys "caption"
+     *         (for the title) and "value" (for the UID)
      */
     public function populateListPaymentMethods(): array
     {
@@ -295,9 +287,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Provides data items for the list of available organizers.
      *
-     * @return array[] $items with additional items from the organizers
-     *               table as an array with the keys "caption" (for the
-     *               title) and "value" (for the UID)
+     * @return array[] items with additional items from the organizers table as an array with the keys "caption"
+     *         (for the title) and "value" (for the UID)
      */
     public function populateListOrganizers(): array
     {
@@ -326,9 +317,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @param array[] $items any pre-filled data (may be empty)
      *
-     * @return array[] $items with additional items from the places table
-     *               as an array with the keys "caption" (for the title)
-     *               and "value" (for the UID)
+     * @return array[] items with additional items from the places table as an array with the keys "caption"
+     *         (for the title) and "value" (for the UID)
      */
     public function populateListPlaces(array $items, ?array $unused = null, ?\tx_mkforms_forms_Base $form = null): array
     {
@@ -392,14 +382,11 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Provides data items for the list of available speakers.
      *
-     * @return array[] $items with additional items from the speakers table
-     *               as an array with the keys "caption" (for the title)
-     *               and "value" (for the UID)
+     * @return array[] items with additional items from the speakers table as an array with the keys "caption"
+     *         (for the title) and "value" (for the UID)
      */
-    public function populateListSpeakers(
-        array $parameters = [],
-        ?\tx_mkforms_forms_Base $form = null
-    ): array {
+    public function populateListSpeakers(array $parameters = [], ?\tx_mkforms_forms_Base $form = null): array
+    {
         $result = [];
 
         $speakerMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Speaker::class);
@@ -481,9 +468,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @param array[] $items any pre-filled data (may be empty)
      *
-     * @return array[] $items with additional items from the checkboxes
-     *               table as an array with the keys "caption" (for the
-     *               title) and "value" (for the UID)
+     * @return array[] items with additional items from the checkboxes table as an array with the keys "caption"
+     *         (for the title) and "value" (for the UID)
      */
     public function populateListCheckboxes(
         array $items,
@@ -552,9 +538,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @param array[] $items array any pre-filled data (may be empty)
      *
-     * @return array[] $items with additional items from the target groups
-     *               table as an array with the keys "caption" (for the
-     *               title) and "value" (for the UID)
+     * @return array[] items with additional items from the target groups table as an array with the keys "caption"
+     *         (for the title) and "value" (for the UID)
      */
     public function populateListTargetGroups(
         array $items,
@@ -622,6 +607,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Gets the URL of the page that should be displayed when an event has been
      * successfully created.
+     *
      * An URL of the FE editor's page is returned if "submit_and_stay" was
      * clicked.
      *
@@ -720,10 +706,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * fields to dots.
      *
      * @param array[] $formData all entered form data with the field names as keys, will be modified, must not be empty
-     *
-     * @return void
      */
-    private function unifyDecimalSeparators(array &$formData)
+    private function unifyDecimalSeparators(array &$formData): void
     {
         $priceFields = [
             'price_regular',
@@ -752,10 +736,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * list of attachments.
      *
      * @param array[] $formData form data, will be modified, must not be empty
-     *
-     * @return void
      */
-    private function processAttachments(array &$formData)
+    private function processAttachments(array &$formData): void
     {
         $filesToDelete = GeneralUtility::trimExplode(
             ',',
@@ -777,10 +759,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * Removes all form data elements that are no fields in the seminars table.
      *
      * @param array[] $formData form data, will be modified, must not be empty
-     *
-     * @return void
      */
-    private function purgeNonSeminarsFields(array &$formData)
+    private function purgeNonSeminarsFields(array &$formData): void
     {
         /** @var string[][] $fieldsToUnset */
         $fieldsToUnset = [
@@ -869,10 +849,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * For objects to update, just the 'tstamp' will be refreshed.
      *
      * @param array[] $formData form data, will be modified, must not be empty
-     *
-     * @return void
      */
-    private function addAdministrativeData(array &$formData)
+    private function addAdministrativeData(array &$formData): void
     {
         $formData['tstamp'] = $GLOBALS['SIM_EXEC_TIME'];
         // For existing records, updating the timestamp is sufficient.
@@ -897,13 +875,10 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Checks the publish settings of the user and hides the event record if necessary.
      *
-     * @param array[] $formData
-     *        form data, will be modified if the seminar must be hidden corresponding to the publish settings of the user,
-     *        must not be empty
-     *
-     * @return void
+     * @param array[] $formData form data, will be modified if the seminar must be hidden corresponding
+     *        to the publish settings of the user, must not be empty
      */
-    private function checkPublishSettings(array &$formData)
+    private function checkPublishSettings(array &$formData): void
     {
         $user = self::getLoggedInUser();
         $publishSetting = $user instanceof \Tx_Seminars_Model_FrontEndUser
@@ -939,8 +914,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return array modified form data, will not be empty
      *
-     * @see unifyDecimalSeparators(), processAttachments(),
-     *      purgeNonSeminarsFields(), addAdministrativeData()
+     * @see unifyDecimalSeparators(), processAttachments(), purgeNonSeminarsFields(), addAdministrativeData()
      */
     public function modifyDataToInsert(array $formData): array
     {
@@ -1005,10 +979,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * Checks whether an uploaded file is of a valid type.
      *
      * @param string $fileName file name, must match an uploaded file, must not be empty
-     *
-     * @return void
      */
-    private function checkFileType(string $fileName)
+    private function checkFileType(string $fileName): void
     {
         $allowedExtensions = $this->getConfValueString(
             'allowedExtensionsForUpload',
@@ -1025,10 +997,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * Checks whether an uploaded file is not too large.
      *
      * @param string $fileName file name, must match an uploaded file, must not be empty
-     *
-     * @return void
      */
-    private function checkFileSize(string $fileName)
+    private function checkFileSize(string $fileName): void
     {
         $maximumFileSize = $GLOBALS['TYPO3_CONF_VARS']['BE']['maxFileSize'];
 
@@ -1044,10 +1014,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * list of currently attached files.
      *
      * @param string $fileName file name, must match an uploaded file, must not be empty
-     *
-     * @return void
      */
-    private function purgeUploadedFile(string $fileName)
+    private function purgeUploadedFile(string $fileName): void
     {
         $fullPath = Environment::getPublicPath() . '/uploads/tx_seminars/' . $fileName;
         @unlink($fullPath);
@@ -1198,9 +1166,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * allowed.
      *
      * @param string[] $parameters the contents of the "params" child of the userobj node as key/value pairs
-     *
-     * @return bool TRUE if front-end editing of the given related record
-     *                 type is allowed, FALSE otherwise
      */
     public function isFrontEndEditingOfRelatedRecordsAllowed(array $parameters): bool
     {
@@ -1221,10 +1186,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Reads the list of required form fields from the configuration and stores
      * it in $this->requiredFormFields.
-     *
-     * @return void
      */
-    private function setRequiredFormFields()
+    private function setRequiredFormFields(): void
     {
         $this->requiredFormFields = GeneralUtility::trimExplode(
             ',',
@@ -1241,10 +1204,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * Adds a class 'required' to the label of a field if it is required.
      *
      * @param Template $template the template in which the required markers should be set
-     *
-     * @return void
      */
-    private function setRequiredFieldLabels(Template $template)
+    private function setRequiredFieldLabels(Template $template): void
     {
         foreach ($this->getFieldsToShow() as $formField) {
             $template->setMarker(
@@ -1259,8 +1220,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Checks whether a given field is required.
      *
-     * @param string[] $field
-     *        the field to check, the array must contain an element with the key
+     * @param string[] $field the field to check, the array must contain an element with the key
      *        'elementName' and a nonempty value for that key
      *
      * @return bool TRUE if the field is required, FALSE otherwise
@@ -1278,13 +1238,11 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * Checks whether a given field needs to be filled in, but hasn't been
      * filled in yet.
      *
-     * @param array[] $formData
-     *        associative array containing the current value, with the key
+     * @param array[] $formData associative array containing the current value, with the key
      *        'value' and the name, with the key 'elementName', of the form
      *        field to check, must not be empty
      *
-     * @return bool TRUE if this field is not empty or not required, FALSE
-     *                 otherwise
+     * @return bool TRUE if this field is not empty or not required, FALSE otherwise
      */
     public function validateString(array $formData): bool
     {
@@ -1299,13 +1257,11 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * Checks whether a given field needs to be filled in with a non-zero value,
      * but hasn't been filled in correctly yet.
      *
-     * @param array[] $formData
-     *        associative array containing the current value, with the key
+     * @param array[] $formData associative array containing the current value, with the key
      *        'value' and the name, with the key 'elementName', of the form
      *        field to check, must not be empty
      *
-     * @return bool TRUE if this field is not zero or not required, FALSE
-     *                 otherwise
+     * @return bool TRUE if this field is not zero or not required, FALSE otherwise
      */
     public function validateInteger(array $formData): bool
     {
@@ -1320,13 +1276,11 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * Checks whether a given field needs to be filled in with a non-empty array,
      * but hasn't been filled in correctly yet.
      *
-     * @param array[] $formData
-     *        associative array containing the current value, with the key
+     * @param array[] $formData associative array containing the current value, with the key
      *        'value' and the name, with the key 'elementName', of the form
      *        field to check, must not be empty
      *
-     * @return bool TRUE if this field is not zero or not required, FALSE
-     *                 otherwise
+     * @return bool TRUE if this field is not zero or not required, FALSE otherwise
      */
     public function validateCheckboxes(array $formData): bool
     {
@@ -1341,13 +1295,11 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * Checks whether a given field needs to be filled in with a valid date,
      * but hasn't been filled in correctly yet.
      *
-     * @param array[] $formData
-     *        associative array containing the current value, with the key
+     * @param array[] $formData associative array containing the current value, with the key
      *        'value' and the name, with the key 'elementName', of the form
      *        field to check, must not be empty
      *
-     * @return bool TRUE if this field contains a valid date or if this field
-     *                 is not required, FALSE otherwise
+     * @return bool TRUE if this field contains a valid date or if this field is not required, FALSE otherwise
      */
     public function validateDate(array $formData): bool
     {
@@ -1362,13 +1314,11 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * Checks whether a given field needs to be filled in with a valid price,
      * but hasn't been filled in correctly yet.
      *
-     * @param array[] $formData
-     *        associative array containing the current value, with the key
+     * @param array[] $formData associative array containing the current value, with the key
      *        'value' and the name, with the key 'elementName', of the form
      *        field to check, must not be empty
      *
-     * @return bool TRUE if this field contains a valid price or if this
-     *                 field is not required, FALSE otherwise
+     * @return bool TRUE if this field contains a valid price or if this field is not required, FALSE otherwise
      */
     public function validatePrice(array $formData): bool
     {
@@ -1381,10 +1331,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
 
     /**
      * Sends the publishing e-mail to the reviewer if necessary.
-     *
-     * @return void
      */
-    public function sendEmailToReviewer()
+    public function sendEmailToReviewer(): void
     {
         if ($this->publicationHash === '') {
             return;
@@ -1425,11 +1373,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Builds the content for the publishing e-mail to the reviewer.
      *
-     * @param \Tx_Seminars_Model_Event $event
-     *        the event to send the publication e-mail for
+     * @param \Tx_Seminars_Model_Event $event the event to send the publication e-mail for
      *
-     * @return string the e-mail body for the publishing e-mail, will not be
-     *                empty
+     * @return string the e-mail body for the publishing e-mail, will not be empty
      */
     private function createEmailContent(\Tx_Seminars_Model_Event $event): string
     {
@@ -1488,12 +1434,10 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     }
 
     /**
-     * Sends an additional notification email to the review if this is enabled in the configuration and if the event has been
-     * newly created.
-     *
-     * @return void
+     * Sends an additional notification email to the review if this is enabled in the configuration and if the event has
+     * been newly created.
      */
-    public function sendAdditionalNotificationEmailToReviewer()
+    public function sendAdditionalNotificationEmailToReviewer(): void
     {
         if (!self::getSeminarsConfiguration()->getAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor')) {
             return;
@@ -1549,8 +1493,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * Creates a new place record.
      *
      * This function is intended to be called via an AJAX FORMidable event.
-     *
-     * @param \tx_mkforms_forms_Base $form
      *
      * @return array[] calls to be executed on the client
      */
@@ -1620,8 +1562,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * This function is intended to be called via an AJAX FORMidable event.
      *
-     * @param \tx_mkforms_forms_Base $form
-     *
      * @return array[] calls to be executed on the client
      */
     public static function updatePlace(\tx_mkforms_forms_Base $form): array
@@ -1683,10 +1623,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Validates the entered data for a place.
      *
-     * @param \tx_mkforms_forms_Base $form
-     * @param array[] $formData
-     *        the entered form data, the key must be stripped of the
-     *        "newPlace_"/"editPlace_" prefix
+     * @param array[] $formData the entered form data, the key must be stripped of the "newPlace_"/"editPlace_" prefix
      *
      * @return string[] the error messages, will be empty if there are no validation errors
      */
@@ -1724,8 +1661,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @param string $key the key of the field to check, must not be empty
      *
-     * @return bool TRUE if the field with the key $key is required,
-     *                 FALSE otherwise
+     * @return bool TRUE if the field with the key $key is required, FALSE otherwise
      */
     private static function isPlaceFieldRequired(string $key): bool
     {
@@ -1746,14 +1682,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * @param \Tx_Seminars_Model_Place $place the place model to set the data
      * @param string $prefix the prefix of the form fields in $formData
      * @param array[] $formData the form data to use for setting the place data
-     *
-     * @return void
      */
-    private static function setPlaceData(
-        \Tx_Seminars_Model_Place $place,
-        string $prefix,
-        array $formData
-    ) {
+    private static function setPlaceData(\Tx_Seminars_Model_Place $place, string $prefix, array $formData): void
+    {
         $countryUid = (int)$formData[$prefix . 'country'];
         if ($countryUid > 0) {
             try {
@@ -1779,7 +1710,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Shows a modalbox containing a form for editing an existing place record.
      *
-     * @param \tx_mkforms_forms_Base $form
      * @param int $placeUid the UID of the place to edit, must be > 0
      *
      * @return array[] calls to be executed on the client
@@ -1869,9 +1799,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * This function is intended to be called via an AJAX FORMidable event.
      *
-     * @param mixed[] $formData
-     * @param \tx_mkforms_forms_Base $form
-     *
      * @return array[] calls to be executed on the client
      */
     public function createNewSpeaker(array $formData, \tx_mkforms_forms_Base $form): array
@@ -1915,9 +1842,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * Updates an existing speaker record.
      *
      * This function is intended to be called via an AJAX FORMidable event.
-     *
-     * @param mixed[] $formData
-     * @param \tx_mkforms_forms_Base $form
      *
      * @return array[] calls to be executed on the client
      */
@@ -1964,11 +1888,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         return $results;
     }
 
-    /**
-     * @param \tx_mkforms_forms_Base $form
-     *
-     * @return array
-     */
     protected function repaintSpeakers(\tx_mkforms_forms_Base $form): array
     {
         $speakerTypes = [
@@ -1992,17 +1911,13 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Validates the entered data for a speaker.
      *
-     * @param \tx_mkforms_forms_Base $form
-     * @param array[] $formData
-     *        the entered form data, the key must be stripped of the
+     * @param array[] $formData the entered form data, the key must be stripped of the
      *        "newSpeaker_"/"editSpeaker_" prefix
      *
      * @return string[] the error messages, will be empty if there are no validation errors
      */
-    private static function validateSpeaker(
-        \tx_mkforms_forms_Base $form,
-        array $formData
-    ): array {
+    private static function validateSpeaker(\tx_mkforms_forms_Base $form, array $formData): array
+    {
         $validationErrors = [];
         if (trim($formData['title']) == '') {
             $validationErrors[] = $form->getConfigXML()->getLLLabel(
@@ -2016,14 +1931,11 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Sets the data of a speaker model based on the data given in $formData.
      *
-     * @param \Tx_Seminars_Model_Speaker $speaker
-     *        the speaker model to set the data for
+     * @param \Tx_Seminars_Model_Speaker $speaker the speaker model to set the data for
      * @param string $prefix the prefix of the form fields in $formData
      * @param array[] $formData the form data to use for setting the speaker data
-     *
-     * @return void
      */
-    private static function setSpeakerData(\Tx_Seminars_Model_Speaker $speaker, string $prefix, array $formData)
+    private static function setSpeakerData(\Tx_Seminars_Model_Speaker $speaker, string $prefix, array $formData): void
     {
         $skillMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Skill::class);
         $skills = new Collection();
@@ -2058,15 +1970,10 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Shows a modalbox containing a form for editing an existing speaker record.
      *
-     * @param mixed $params
-     * @param \tx_mkforms_forms_Base $form
-     *
      * @return array[] calls to be executed on the client
      */
-    public static function openEditSpeakerModalBox(
-        array $params,
-        \tx_mkforms_forms_Base $form
-    ): array {
+    public static function openEditSpeakerModalBox(array $params, \tx_mkforms_forms_Base $form): array
+    {
         $speakerId = empty($params['uid']) ? 0 : (int)$params['uid'];
         return self::showEditSpeakerModalBox($form, $speakerId);
     }
@@ -2079,10 +1986,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @return array[] calls to be executed on the client
      */
-    public static function showEditSpeakerModalBox(
-        \tx_mkforms_forms_Base $form,
-        int $speakerUid
-    ): array {
+    public static function showEditSpeakerModalBox(\tx_mkforms_forms_Base $form, int $speakerUid): array
+    {
         if ($speakerUid <= 0) {
             return $form->majixExecJs('alert("$speakerUid must be >= 0.");');
         }
@@ -2215,8 +2120,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * This function is intended to be called via an AJAX FORMidable event.
      *
-     * @param \tx_mkforms_forms_Base $form
-     *
      * @return array[] calls to be executed on the client
      */
     public static function updateCheckbox(\tx_mkforms_forms_Base $form): array
@@ -2271,17 +2174,13 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Validates the entered data for a checkbox.
      *
-     * @param \tx_mkforms_forms_Base $form
-     * @param array[] $formData
-     *        the entered form data, the key must be stripped of the
+     * @param array[] $formData the entered form data, the key must be stripped of the
      *        "newCheckbox_"/"editCheckbox_" prefix
      *
      * @return string[] the error messages, will be empty if there are no validation errors
      */
-    private static function validateCheckbox(
-        \tx_mkforms_forms_Base $form,
-        array $formData
-    ): array {
+    private static function validateCheckbox(\tx_mkforms_forms_Base $form, array $formData): array
+    {
         $validationErrors = [];
         if (trim($formData['title']) == '') {
             $validationErrors[] = $form->getConfigXML()->getLLLabel(
@@ -2298,29 +2197,24 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * @param \Tx_Seminars_Model_Checkbox $checkbox the checkbox model to set the data
      * @param string $prefix the prefix of the form fields in $formData
      * @param array[] $formData the form data to use for setting the checkbox data
-     *
-     * @return void
      */
     private static function setCheckboxData(
         \Tx_Seminars_Model_Checkbox $checkbox,
         string $prefix,
         array $formData
-    ) {
+    ): void {
         $checkbox->setTitle($formData[$prefix . 'title']);
     }
 
     /**
      * Shows a modalbox containing a form for editing an existing checkbox record.
      *
-     * @param \tx_mkforms_forms_Base $form
      * @param int $checkboxUid the UID of the checkbox to edit, must be > 0
      *
      * @return array[] calls to be executed on the client
      */
-    public static function showEditCheckboxModalBox(
-        \tx_mkforms_forms_Base $form,
-        int $checkboxUid
-    ): array {
+    public static function showEditCheckboxModalBox(\tx_mkforms_forms_Base $form, int $checkboxUid): array
+    {
         if ($checkboxUid <= 0) {
             return $form->majixExecJs('alert("$checkboxUid must be >= 0.");');
         }
@@ -2366,8 +2260,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * Creates a new target group record.
      *
      * This function is intended to be called via an AJAX FORMidable event.
-     *
-     * @param \tx_mkforms_forms_Base $form
      *
      * @return array[] calls to be executed on the client
      */
@@ -2434,8 +2326,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * This function is intended to be called via an AJAX FORMidable event.
      *
-     * @param \tx_mkforms_forms_Base $form
-     *
      * @return array[] calls to be executed on the client
      */
     public static function updateTargetGroup(\tx_mkforms_forms_Base $form): array
@@ -2494,17 +2384,13 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Validates the entered data for a target group.
      *
-     * @param \tx_mkforms_forms_Base $form
-     * @param array[] $formData
-     *        the entered form data, the key must be stripped of the
+     * @param array[] $formData the entered form data, the key must be stripped of the
      *        "newTargetGroup_"/"editTargetGroup_" prefix
      *
      * @return string[] the error messages, will be empty if there are no validation errors
      */
-    private static function validateTargetGroup(
-        \tx_mkforms_forms_Base $form,
-        array $formData
-    ): array {
+    private static function validateTargetGroup(\tx_mkforms_forms_Base $form, array $formData): array
+    {
         $validationErrors = [];
         if (trim($formData['title']) == '') {
             $validationErrors[] = $form->getConfigXML()->getLLLabel(
@@ -2537,19 +2423,15 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * Sets the data of a target group model based on the data given in
      * $formData.
      *
-     * @param \Tx_Seminars_Model_TargetGroup $targetGroup
-     *        the target group model to set the data
+     * @param \Tx_Seminars_Model_TargetGroup $targetGroup the target group model to set the data
      * @param string $prefix the prefix of the form fields in $formData
-     * @param array[] $formData
-     *        the form data to use for setting the target group data
-     *
-     * @return void
+     * @param array[] $formData the form data to use for setting the target group data
      */
     private static function setTargetGroupData(
         \Tx_Seminars_Model_TargetGroup $targetGroup,
         string $prefix,
         array $formData
-    ) {
+    ): void {
         $targetGroup->setTitle($formData[$prefix . 'title']);
         $targetGroup->setMinimumAge((int)$formData[$prefix . 'minimum_age']);
         $targetGroup->setMaximumAge((int)$formData[$prefix . 'maximum_age']);
@@ -2559,16 +2441,12 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      * Shows a modalbox containing a form for editing an existing target group
      * record.
      *
-     * @param \tx_mkforms_forms_Base $form
-     * @param int $targetGroupUid
-     *        the UID of the target group to edit, must be > 0
+     * @param int $targetGroupUid the UID of the target group to edit, must be > 0
      *
      * @return array[] calls to be executed on the client
      */
-    public static function showEditTargetGroupModalBox(
-        \tx_mkforms_forms_Base $form,
-        int $targetGroupUid
-    ): array {
+    public static function showEditTargetGroupModalBox(\tx_mkforms_forms_Base $form, int $targetGroupUid): array
+    {
         if ($targetGroupUid <= 0) {
             return $form->majixExecJs('alert("$targetGroupUid must be >= 0.");');
         }
@@ -2655,8 +2533,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Returns an array of caption value pairs for formidable checkboxes.
      *
-     * @param Collection $models
-     *        List of models to show in the checkboxes, may be empty
+     * @param Collection $models models to show in the checkboxes, may be empty
      *
      * @return array[] items as an array with the keys "caption" (for the title)
      *         and "value" (for the UID), will be empty if an empty model list
@@ -2684,8 +2561,7 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Returns the UID of the preselected organizer.
      *
-     * @return int the UID of the preselected organizer; if more than one
-     *                 organizer is available, zero will be returned
+     * @return int the UID of the preselected organizer; if more than one organizer is available, zero will be returned
      */
     public function getPreselectedOrganizer(): int
     {
@@ -2715,19 +2591,13 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     }
 
     /**
-     * Adds the default categories of the currently logged-in user to the
-     * event.
+     * Adds the default categories of the currently logged-in user to the event.
      *
-     * Note: This affects only new records. Existing records (with a UID) will
-     * not be changed.
+     * Note: This affects only new records. Existing records (with a UID) will not be changed.
      *
-     * @param array[] $formData
-     *        all entered form data with the field names as keys, will be
-     *        modified, must not be empty
-     *
-     * @return void
+     * @param array[] $formData all entered form data with the field names as keys, will be modified, must not be empty
      */
-    private function addCategoriesOfUser(array &$formData)
+    private function addCategoriesOfUser(array &$formData): void
     {
         $eventUid = $this->getObjectUid();
         if ($eventUid > 0) {
@@ -2744,12 +2614,9 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Removes the category field if the user has default categories set.
      *
-     * @param string[] $formFields
-     *        the fields which should be checked for category, will be modified, may be empty
-     *
-     * @return void
+     * @param string[] $formFields the fields which should be checked for category, will be modified, may be empty
      */
-    private function removeCategoryIfNecessary(array &$formFields)
+    private function removeCategoryIfNecessary(array &$formFields): void
     {
         if (!in_array('categories', $formFields, true)) {
             return;
@@ -2777,10 +2644,8 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
      *
      * @param string $key column name of the 'tx_seminars_seminars' table as key, must not be empty
      * @param mixed $value faked value
-     *
-     * @return void
      */
-    public function setSavedFormValue(string $key, $value)
+    public function setSavedFormValue(string $key, $value): void
     {
         $this->savedFormData[$key] = $value;
     }

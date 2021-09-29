@@ -44,7 +44,6 @@ abstract class Tx_Seminars_FrontEnd_AbstractView extends TemplateHelper
      * the flex forms, gets the template HTML code, sets the localized labels
      * and set the CSS classes from TypoScript.
      *
-     * @param array $configuration TypoScript configuration for the plugin
      * @param ContentObjectRenderer $contentObjectRenderer the parent cObj content, needed for the flexforms
      */
     public function __construct(array $configuration, ContentObjectRenderer $contentObjectRenderer)

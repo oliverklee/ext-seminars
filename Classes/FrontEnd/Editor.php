@@ -32,26 +32,20 @@ class Tx_Seminars_FrontEnd_Editor extends \Tx_Seminars_FrontEnd_AbstractView
     private $isTestMode = false;
 
     /**
-     * @var array this is used to fake form values for testing
+     * @var array<string, string|int> this is used to fake form values for testing
      */
     private $fakedFormValues = [];
 
     /**
-     * Sets the current UID.
-     *
-     * @param int $uid
-     *        UID of the currently edited object. For creating a new database record, $uid must be zero. $uid must not be < 0.
-     *
-     * @return void
+     * @param int $uid UID of the currently edited object.
+     *        For creating a new database record, $uid must be zero. $uid must not be < 0.
      */
-    public function setObjectUid(int $uid)
+    public function setObjectUid(int $uid): void
     {
         $this->objectUid = $uid;
     }
 
     /**
-     * Gets the current object UID.
-     *
      * @return int UID of the currently edited object, zero if a new object is being created
      */
     public function getObjectUid(): int
@@ -63,10 +57,8 @@ class Tx_Seminars_FrontEnd_Editor extends \Tx_Seminars_FrontEnd_AbstractView
      * Sets the form configuration.
      *
      * @param array[] $formConfiguration the form configuration, must not be empty
-     *
-     * @return void
      */
-    public function setFormConfiguration(array $formConfiguration)
+    public function setFormConfiguration(array $formConfiguration): void
     {
         $this->formConfiguration = $formConfiguration;
     }
@@ -83,18 +75,14 @@ class Tx_Seminars_FrontEnd_Editor extends \Tx_Seminars_FrontEnd_AbstractView
     /**
      * Enables the test mode. If this mode is activated, the FORMidable object
      * will not be used at all, instead the faked form values will be taken.
-     *
-     * @return void
      */
-    public function setTestMode()
+    public function setTestMode(): void
     {
         $this->isTestMode = true;
     }
 
     /**
      * Checks whether the test mode is set.
-     *
-     * @return bool TRUE if the test mode is set, FALSE otherwise
      */
     public function isTestMode(): bool
     {
@@ -107,7 +95,8 @@ class Tx_Seminars_FrontEnd_Editor extends \Tx_Seminars_FrontEnd_AbstractView
      * Note that render() requires the FORMidable object to be initializable.
      * This means that the test mode must not be set when calling render().
      *
-     * @return string HTML for the FE editor or an error view if the requested object is not editable for the current user
+     * @return string HTML for the FE editor or an error view if the requested object
+     *         is not editable for the current user
      */
     public function render(): string
     {
@@ -184,11 +173,9 @@ class Tx_Seminars_FrontEnd_Editor extends \Tx_Seminars_FrontEnd_AbstractView
      * This function is for testing purposes.
      *
      * @param string $key column name of the 'tx_seminars_seminars' table as key, must not be empty
-     * @param mixed $value faked value
-     *
-     * @return void
+     * @param string|int $value faked value
      */
-    public function setFakedFormValue(string $key, $value)
+    public function setFakedFormValue(string $key, $value): void
     {
         $this->fakedFormValues[$key] = $value;
     }

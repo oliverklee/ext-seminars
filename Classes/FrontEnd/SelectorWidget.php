@@ -82,10 +82,8 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
 
     /**
      * Initializes some variables needed for further processing.
-     *
-     * @return void
      */
-    private function initialize()
+    private function initialize(): void
     {
         $this->displayedSearchFields = GeneralUtility::trimExplode(
             ',',
@@ -123,10 +121,8 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
      * first in the drop-down.
      *
      * @param string[] $options options, may be empty
-     *
-     * @return void
      */
-    private function addEmptyOptionIfNeeded(array &$options)
+    private function addEmptyOptionIfNeeded(array &$options): void
     {
         if (!$this->getConfValueBoolean('showEmptyEntryInOptionLists', 's_template_special')) {
             return;
@@ -201,10 +197,8 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
      *
      * Before this function is called, it must be assured that the seminar bag
      * is not empty.
-     *
-     * @return void
      */
-    private function collectPlaces()
+    private function collectPlaces(): void
     {
         if ($this->seminarBag->isEmpty()) {
             throw new \BadMethodCallException(
@@ -247,10 +241,8 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
 
     /**
      * Creates an instance of PiBaseApi if that has not happened yet.
-     *
-     * @return void
      */
-    protected function instantiateStaticInfo()
+    protected function instantiateStaticInfo(): void
     {
         if ($this->staticInfo !== null) {
             return;
@@ -276,11 +268,9 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
     /**
      * Creates a drop-down, including an empty option at the top.
      *
-     * @param string[] $options
-     *        the options for the drop-down, the keys will be used as values and the array values as labels for the options,
-     *        may be empty
-     * @param string $name
-     *        the HTML name of the drop-down, must be not empty and must be unique
+     * @param string[] $options the options for the drop-down, the keys will be used as values and the array values
+     *        as labels for the options, may be empty
+     * @param string $name the HTML name of the drop-down, must be not empty and must be unique
      *
      * @return string the generated HTML, will not be empty
      */
@@ -335,13 +325,10 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
     /**
      * Fills or hides the subpart for the given search field.
      *
-     * @param string $searchField
-     *        the key of the search field, must be one of the following:
+     * @param string $searchField the key of the search field, must be one of the following:
      *        "event_type", "language", "country", "city", "places", "organizer"
-     *
-     * @return void
      */
-    private function fillOrHideSearchSubpart(string $searchField)
+    private function fillOrHideSearchSubpart(string $searchField): void
     {
         if (!$this->hasSearchField($searchField)) {
             $this->hideSubparts(self::SUBPART_PREFIX . strtoupper($searchField));
@@ -387,10 +374,8 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
 
     /**
      * Fills or hides the full text search subpart.
-     *
-     * @return void
      */
-    private function fillOrHideFullTextSearch()
+    private function fillOrHideFullTextSearch(): void
     {
         if (!$this->hasSearchField('full_text_search')) {
             $this->hideSubparts(self::SUBPART_PREFIX . 'TEXT');
@@ -403,10 +388,8 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
 
     /**
      * Fills or hides the date search subpart.
-     *
-     * @return void
      */
-    private function fillOrHideDateSearch()
+    private function fillOrHideDateSearch(): void
     {
         if (!$this->hasSearchField('date')) {
             $this->hideSubparts(self::SUBPART_PREFIX . 'DATE');
@@ -429,10 +412,8 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
 
     /**
      * Fills or hides the age search subpart.
-     *
-     * @return void
      */
-    private function fillOrHideAgeSearch()
+    private function fillOrHideAgeSearch(): void
     {
         if (!$this->hasSearchField('age')) {
             $this->hideSubparts(self::SUBPART_PREFIX . 'AGE');
@@ -445,10 +426,8 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
 
     /**
      * Fills or hides the price search subpart.
-     *
-     * @return void
      */
-    private function fillOrHidePriceSearch()
+    private function fillOrHidePriceSearch(): void
     {
         if (!$this->hasSearchField('price')) {
             $this->hideSubparts(self::SUBPART_PREFIX . 'PRICE');

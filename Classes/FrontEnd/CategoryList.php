@@ -16,8 +16,7 @@ class Tx_Seminars_FrontEnd_CategoryList extends \Tx_Seminars_FrontEnd_AbstractVi
      * selected time-frame and in the selected sysfolders. Categories for which
      * all events are canceled will always be ignored.
      *
-     * @return string HTML code of the category list or a formatted message if
-     *                there are no categories to display
+     * @return string HTML code of the category list or a formatted message if there are no categories to display
      */
     public function render(): string
     {
@@ -105,15 +104,13 @@ class Tx_Seminars_FrontEnd_CategoryList extends \Tx_Seminars_FrontEnd_AbstractVi
      * either only the titles as comma-separated list, only the icons with the
      * title as title attribute or both.
      *
-     * @param array[] $categoriesToDisplay
-     *        the categories in an associative array, with the UID as key and "title", and "icon" as second level keys
+     * @param array[] $categoriesToDisplay the categories in an associative array, with the UID as key and "title",
+     *        and "icon" as second level keys
      *
-     * @return string the HTML output, will be empty if $categoriesToDisplay
-     *                is empty
+     * @return string the HTML output, will be empty if $categoriesToDisplay is empty
      */
-    public function createCategoryList(
-        array $categoriesToDisplay
-    ): string {
+    public function createCategoryList(array $categoriesToDisplay): string
+    {
         if (empty($categoriesToDisplay)) {
             return '';
         }
@@ -153,12 +150,10 @@ class Tx_Seminars_FrontEnd_CategoryList extends \Tx_Seminars_FrontEnd_AbstractVi
     /**
      * Creates the category icon with the icon title as alt text.
      *
-     * @param string[] $iconData
-     *        the filename and title of the icon in an associative array with "icon" as key for the filename and "title" as key
-     *        for the icon title, the values for "title" and "icon" may be empty
+     * @param string[] $iconData the filename and title of the icon in an associative array with "icon" as key for the
+     *        filename and "title" as key for the icon title, the values for "title" and "icon" may be empty
      *
-     * @return string the icon tag with the given icon, will be empty if no
-     *                icon was given
+     * @return string the icon tag with the given icon, will be empty if no icon was given
      */
     private function createCategoryIcon(array $iconData): string
     {

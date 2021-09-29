@@ -20,26 +20,12 @@ class Tx_Seminars_FrontEnd_Countdown extends \Tx_Seminars_FrontEnd_AbstractView
      */
     protected $viewHelper = null;
 
-    /**
-     * Injects an Event Mapper for this View.
-     *
-     * @param \Tx_Seminars_Mapper_Event $mapper
-     *
-     * @return void
-     */
-    public function injectEventMapper(\Tx_Seminars_Mapper_Event $mapper)
+    public function injectEventMapper(\Tx_Seminars_Mapper_Event $mapper): void
     {
         $this->mapper = $mapper;
     }
 
-    /**
-     * Injects an Countdown View Helper.
-     *
-     * @param \Tx_Seminars_ViewHelper_Countdown $viewHelper
-     *
-     * @return void
-     */
-    public function injectCountDownViewHelper(\Tx_Seminars_ViewHelper_Countdown $viewHelper)
+    public function injectCountDownViewHelper(\Tx_Seminars_ViewHelper_Countdown $viewHelper): void
     {
         $this->viewHelper = $viewHelper;
     }
