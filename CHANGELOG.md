@@ -37,6 +37,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop support for PHP 7.0 and 7.1 (#847)
 
 ### Fixed
+- Drop the typo3/cms-lang dependency (#980)
 - Provide a page to the fake frontend where needed (#969)
 - Add more type declarations (#967, #968, #970, #971, #972, #973, #977)
 - Stop treating a model PID as current BE page ID (#963)
