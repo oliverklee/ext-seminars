@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\ViewHelpers;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Model\Interfaces\Titled;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\Model\TitledTestingModel;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\Model\UntitledTestingModel;
 
@@ -23,7 +24,7 @@ final class CommaSeparatedTitlesViewHelperTest extends TestCase
     private $testingFramework;
 
     /**
-     * @var Collection
+     * @var Collection<Titled>
      */
     private $list;
 
@@ -35,7 +36,10 @@ final class CommaSeparatedTitlesViewHelperTest extends TestCase
     protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
-        $this->list = new Collection();
+
+        /** @var Collection<Titled> $items */
+        $items = new Collection();
+        $this->list = $items;
         $this->subject = new \Tx_Seminars_ViewHelper_CommaSeparatedTitles();
     }
 

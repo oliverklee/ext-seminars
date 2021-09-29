@@ -22,7 +22,7 @@ class Tx_Seminars_ViewHelper_TimeRange
      *
      * @return string the time
      */
-    public function render(\Tx_Seminars_Model_AbstractTimeSpan $timeSpan, $dash = '&#8211;'): string
+    public function render(\Tx_Seminars_Model_AbstractTimeSpan $timeSpan, string $dash = '&#8211;'): string
     {
         if (!$this->hasTime($timeSpan)) {
             return LocalizationUtility::translate('message_willBeAnnounced', 'seminars');
@@ -47,10 +47,6 @@ class Tx_Seminars_ViewHelper_TimeRange
     /**
      * Checks whether there's a time set (begin time !== 00:00).
      * If there's no date/time set, the result will be FALSE.
-     *
-     * @param \Tx_Seminars_Model_AbstractTimeSpan $timeSpan
-     *
-     * @return bool
      */
     protected function hasTime(\Tx_Seminars_Model_AbstractTimeSpan $timeSpan): bool
     {
@@ -64,10 +60,6 @@ class Tx_Seminars_ViewHelper_TimeRange
     /**
      * Checks whether there's an end time set (end time !== 00:00).
      * If there's no end date/time set, the result will be FALSE.
-     *
-     * @param \Tx_Seminars_Model_AbstractTimeSpan $timeSpan
-     *
-     * @return bool
      */
     protected function hasEndTime(\Tx_Seminars_Model_AbstractTimeSpan $timeSpan): bool
     {

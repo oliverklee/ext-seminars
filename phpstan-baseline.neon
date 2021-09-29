@@ -251,11 +251,6 @@ parameters:
 			path: Tests/LegacyUnit/Service/RegistrationManagerTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$list of method Tx_Seminars_ViewHelper_CommaSeparatedTitles\\:\\:render\\(\\) expects iterable\\<OliverKlee\\\\Seminars\\\\Model\\\\Interfaces\\\\Titled\\>&OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection, OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection given\\.$#"
-			count: 5
-			path: Tests/LegacyUnit/ViewHelpers/CommaSeparatedTitlesViewHelperTest.php
-
-		-
 			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertSame\\(\\) with array\\('max@example\\.com' \\=\\> 'Max'\\) and string will always evaluate to false\\.$#"
 			count: 1
 			path: Tests/Unit/Traits/EmailTraitTest.php
