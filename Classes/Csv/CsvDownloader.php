@@ -262,20 +262,16 @@ class CsvDownloader extends TemplateHelper
 
     /**
      * Sets the HTTP header: the content type and filename (content disposition) for registration lists.
-     *
-     * @return void
      */
-    private function setContentTypeForRegistrationLists()
+    private function setContentTypeForRegistrationLists(): void
     {
         $this->setPageTypeAndDisposition($this->configuration->getAsString('filenameForRegistrationsCsv'));
     }
 
     /**
      * Sets the HTTP header: the content type and filename (content disposition) for event lists.
-     *
-     * @return void
      */
-    private function setContentTypeForEventLists()
+    private function setContentTypeForEventLists(): void
     {
         $this->setPageTypeAndDisposition($this->configuration->getAsString('filenameForEventsCsv'));
     }
@@ -286,10 +282,8 @@ class CsvDownloader extends TemplateHelper
      * Adds the data directly to the page header.
      *
      * @param string $csvFileName the name for the page which is used as storage name, must not be empty
-     *
-     * @return void
      */
-    private function setPageTypeAndDisposition(string $csvFileName)
+    private function setPageTypeAndDisposition(string $csvFileName): void
     {
         $headerProxy = HeaderProxyFactory::getInstance()->getHeaderProxy();
         $headerProxy->addHeader(
@@ -376,10 +370,8 @@ class CsvDownloader extends TemplateHelper
      * This function is for testing purposes only!
      *
      * @param string $typo3Mode the TYPO3_MODE to set, must be "BE" or "FE"
-     *
-     * @return void
      */
-    public function setTypo3Mode(string $typo3Mode)
+    public function setTypo3Mode(string $typo3Mode): void
     {
         $this->typo3Mode = $typo3Mode;
     }
@@ -390,8 +382,8 @@ class CsvDownloader extends TemplateHelper
      *
      * Stores the type of the error in $this->errorType
      *
-     * @param int $eventUid
-     *        the event to check the access for, must be >= 0 but not necessarily point to an existing event
+     * @param int $eventUid the event to check the access for, must be >= 0 but not necessarily point
+     *        to an existing event
      *
      * @return bool true if the event record exists and the BE User has
      *                 access to the registrations belonging to the event,

@@ -22,10 +22,8 @@ class FrontEndRegistrationAccessCheck implements CsvAccessCheck
      * Sets the event for the access check.
      *
      * @param \Tx_Seminars_OldModel_Event $event
-     *
-     * @return void
      */
-    public function setEvent(\Tx_Seminars_OldModel_Event $event)
+    public function setEvent(\Tx_Seminars_OldModel_Event $event): void
     {
         $this->event = $event;
     }
