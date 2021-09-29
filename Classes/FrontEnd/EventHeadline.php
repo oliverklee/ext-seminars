@@ -14,14 +14,7 @@ class Tx_Seminars_FrontEnd_EventHeadline extends \Tx_Seminars_FrontEnd_AbstractV
      */
     protected $mapper = null;
 
-    /**
-     * Injects an Event Mapper for this View.
-     *
-     * @param \Tx_Seminars_Mapper_Event $mapper
-     *
-     * @return void
-     */
-    public function injectEventMapper(\Tx_Seminars_Mapper_Event $mapper)
+    public function injectEventMapper(\Tx_Seminars_Mapper_Event $mapper): void
     {
         $this->mapper = $mapper;
     }
@@ -29,7 +22,7 @@ class Tx_Seminars_FrontEnd_EventHeadline extends \Tx_Seminars_FrontEnd_AbstractV
     /**
      * Creates the event headline, consisting of the event title and date.
      *
-     * @return string HTML code of the event headline, will be empty if an invalid or no event ID was set in piVar 'showUid'
+     * @return string HTML of the event headline, will be empty if an invalid or no event ID was set in piVar 'showUid'
      */
     public function render(): string
     {

@@ -30,20 +30,16 @@ class Tx_Seminars_FrontEnd_RequirementsList extends \Tx_Seminars_FrontEnd_Abstra
      * Sets the event to which this view relates.
      *
      * @param \Tx_Seminars_OldModel_Event $event the event to build the requirements list for
-     *
-     * @return void
      */
-    public function setEvent(\Tx_Seminars_OldModel_Event $event)
+    public function setEvent(\Tx_Seminars_OldModel_Event $event): void
     {
         $this->event = $event;
     }
 
     /**
      * Limits the requirements list to the requirements the user still needs to register to.
-     *
-     * @return void
      */
-    public function limitToMissingRegistrations()
+    public function limitToMissingRegistrations(): void
     {
         if (!FrontEndLoginManager::getInstance()->isLoggedIn()) {
             throw new \BadMethodCallException(
@@ -106,8 +102,7 @@ class Tx_Seminars_FrontEnd_RequirementsList extends \Tx_Seminars_FrontEnd_Abstra
     /**
      * Returns the requirements which should be displayed.
      *
-     * @return \Tx_Seminars_Bag_Event the requirements still to be displayed,
-     *                               might be empty
+     * @return \Tx_Seminars_Bag_Event the requirements still to be displayed, might be empty
      */
     private function getRequirements(): \Tx_Seminars_Bag_Event
     {
@@ -121,17 +116,8 @@ class Tx_Seminars_FrontEnd_RequirementsList extends \Tx_Seminars_FrontEnd_Abstra
         return $result;
     }
 
-    /**
-     * Injects a link builder.
-     *
-     * @param \Tx_Seminars_Service_SingleViewLinkBuilder $linkBuilder
-     *        the link builder instance to use
-     *
-     * @return void
-     */
-    public function injectLinkBuilder(
-        \Tx_Seminars_Service_SingleViewLinkBuilder $linkBuilder
-    ) {
+    public function injectLinkBuilder(\Tx_Seminars_Service_SingleViewLinkBuilder $linkBuilder): void
+    {
         $this->linkBuilder = $linkBuilder;
     }
 }

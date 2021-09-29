@@ -134,13 +134,10 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
     }
 
     /**
-     * Sets the action.
-     *
-     * @param string $action action for which to create the form, must be either "register" or "unregister", must not be empty
-     *
-     * @return void
+     * @param string $action action for which to create the form, must be either "register" or "unregister",
+     *        must not be empty
      */
-    public function setAction(string $action)
+    public function setAction(string $action): void
     {
         $this->initializeAction($action);
     }
@@ -149,10 +146,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      * Sets the seminar for which to create the form.
      *
      * @param \Tx_Seminars_OldModel_Event $event the event for which to create the form
-     *
-     * @return void
      */
-    public function setSeminar(\Tx_Seminars_OldModel_Event $event)
+    public function setSeminar(\Tx_Seminars_OldModel_Event $event): void
     {
         $this->seminar = $event;
     }
@@ -193,10 +188,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      * Sets the registration for which to create the unregistration form.
      *
      * @param \Tx_Seminars_OldModel_Registration $registration the registration to use
-     *
-     * @return void
      */
-    public function setRegistration(\Tx_Seminars_OldModel_Registration $registration)
+    public function setRegistration(\Tx_Seminars_OldModel_Registration $registration): void
     {
         $this->registration = $registration;
     }
@@ -213,10 +206,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      * Sets the form configuration to use.
      *
      * @param string $action action to perform, may be either "register" or "unregister", must not be empty
-     *
-     * @return void
      */
-    protected function initializeAction($action = 'register')
+    protected function initializeAction(string $action = 'register'): void
     {
         switch ($action) {
             case 'unregister':
@@ -284,10 +275,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
 
     /**
      * Discards the rendered FORMIdable form from the page, including any header data.
-     *
-     * @return void
      */
-    private function discardRenderedForm()
+    private function discardRenderedForm(): void
     {
         $frontEndController = $this->getFrontEndController();
         // A mayday would be returned without unsetting the form ID.
@@ -312,10 +301,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      * This method is used only in the unit tests.
      *
      * @param array $parameters the entered form data with the field names as array keys (including the submit button)
-     *
-     * @return void
      */
-    public function setPage(array $parameters)
+    public function setPage(array $parameters): void
     {
         $this->currentPageNumber = $parameters['next_page'];
     }
@@ -336,10 +323,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      * In addition, the entered payment data is stored in the FE user session.
      *
      * @param array $parameters the entered form data with the field names as array keys (including the submit button ...)
-     *
-     * @return void
      */
-    public function processRegistration(array $parameters)
+    public function processRegistration(array $parameters): void
     {
         $this->saveDataToSession($parameters);
         $registrationManager = $this->getRegistrationManager();
@@ -357,12 +342,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
 
     /**
      * Creates additional attendees as FE users and adds them to $registration.
-     *
-     * @param \Tx_Seminars_Model_Registration $registration
-     *
-     * @return void
      */
-    protected function createAdditionalAttendees(\Tx_Seminars_Model_Registration $registration)
+    protected function createAdditionalAttendees(\Tx_Seminars_Model_Registration $registration): void
     {
         $allPersonsData = $this->getAdditionalRegisteredPersonsData();
         if (empty($allPersonsData)) {
@@ -431,7 +412,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Checks whether there are at least the number of seats provided in $formData['value'] available.
      *
-     * @param array $formData associative array with the element "value" in which the number of seats to check for is stored
+     * @param array $formData associative array with the element "value" in which the number of seats to check for
+     *        is stored
      *
      * @return bool TRUE if there are at least $formData['value'] seats available, FALSE otherwise
      */
@@ -443,8 +425,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Checks whether a checkbox is checked OR the "finish registration" button has not just been clicked.
      *
-     * @param array $formData
-     *        associative array with the element "value" in which the current value of the checkbox (0 or 1) is stored
+     * @param array $formData associative array with the element "value" in which the current value
+     *        of the checkbox (0 or 1) is stored
      *
      * @return bool TRUE if the checkbox is checked or we are not on the confirmation page, FALSE otherwise
      */
@@ -454,10 +436,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
     }
 
     /**
-     * Checks whether the "travelling terms" checkbox (ie. the second "terms" checkbox) is enabled in the event record *and* via
-     * TS setup.
-     *
-     * @return bool TRUE if the "travelling terms" checkbox is enabled in the event record *and* via TS setup, FALSE otherwise
+     * Checks whether the "travelling terms" checkbox (ie. the second "terms" checkbox) is enabled in the event record
+     * *and* via TS setup.
      */
     public function isTerms2Enabled(): bool
     {
@@ -470,11 +450,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      * function always returns TRUE. It also always returns TRUE if the
      * "finish registration" button hasn't just been clicked.
      *
-     * @param array $formData
-     *        associative array with the element "value" in which the current value of the checkbox (0 or 1) is stored
-     *
-     * @return bool TRUE if the checkbox is checked or disabled in the configuration or if the "finish registration" button
-     *                 has not just been clicked, FALSE if it is not checked AND enabled in the configuration
+     * @param array $formData associative array with the element "value" in which the current value of the checkbox
+     *        (0 or 1) is stored
      */
     public function isTerms2CheckedAndEnabled(array $formData): bool
     {
@@ -488,12 +465,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      * necessary nor possible to select any payment method) OR this event has
      * no price at all.
      *
-     * @param array $formData
-     *        associative array with the element "value" in which the currently selected value
+     * @param array $formData associative array with the element "value" in which the currently selected value
      *        (a positive integer or NULL if no radiobutton is selected) is stored
-     *
-     * @return bool TRUE if a method of payment is selected OR no method could have been selected at all OR this event has no
-     *                 price, FALSE if none is selected, but should have been selected
      */
     public function isMethodOfPaymentSelected(array $formData): bool
     {
@@ -518,11 +491,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      * This is specified via TS setup (or flexforms) using the
      * "showRegistrationFields" variable.
      *
-     * @param array $parameters
-     *        the contents of the "params" child of the userobj node as key/value pairs
+     * @param array $parameters the contents of the "params" child of the userobj node as key/value pairs
      *        (used for retrieving the current form field name)
-     *
-     * @return bool TRUE if the current form field should be displayed, FALSE otherwise
      */
     public function hasRegistrationFormField(array $parameters): bool
     {
@@ -664,13 +634,11 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      * and returns only TRUE if the event has a price (ie. is not completely for
      * free) and the current form field should be displayed.
      *
-     * @param array $parameters
-     *        the contents of the "params" child of the userobj node as key/value pairs
+     * @param array $parameters the contents of the "params" child of the userobj node as key/value pairs
      *        (used for retrieving the current form field name)
      *
-     * @return bool TRUE if the current form field should be displayed
-     *                 AND the current event is not completely for free,
-     *                 FALSE otherwise
+     * @return bool TRUE if the current form field should be displayed AND the current event is not completely for free,
+     *              FALSE otherwise
      */
     public function hasBankDataFormField(array $parameters): bool
     {
@@ -724,7 +692,6 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Creates a URL for redirection.
      *
-     * @param int $pageUid the page UID
      * @param bool $sendParameters whether GET parameters should be added to the URL
      *
      * @return string complete URL of the FE page with a message
@@ -802,7 +769,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      * Creates the data for the seats drop-down.
      *
      * @return int[][] array with sub arrays: [caption => i, value => i]
-     **/
+     */
     public function populateSeats(): array
     {
         $result = [];
@@ -825,7 +792,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
 
     /**
      * Checks whether the methods of payment should be displayed at all,
-     * ie. whether they are enable in the setup and the current event actually
+     * i.e., whether they are enable in the setup and the current event actually
      * has any payment methods assigned and has at least one price.
      *
      * @return bool TRUE if the payment methods should be displayed, FALSE otherwise
@@ -902,13 +869,13 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
 
     /**
      * Formats one data item from the form as HTML, including a heading.
-     * If the entered data is empty, an empty string will be returned (so the heading will only be included for non-empty data).
+     * If the entered data is empty, an empty string will be returned (so the heading will only be included for
+     * non-empty data).
      *
      * @param string $key the key of the field for which the data should be displayed
      *
-     * @return string
-     *         the data from the corresponding form field formatted in HTML with a heading (or an empty string if the form data
-     *         is empty)
+     * @return string the data from the corresponding form field formatted in HTML with a heading (or an empty string if
+     *         the form data is empty)
      */
     protected function getFormDataItemAndLabelForConfirmation(string $key): string
     {
@@ -927,10 +894,6 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
 
     /**
      * Creates the label text for an element on the confirmation page.
-     *
-     * @param string $key
-     *
-     * @return string
      */
     protected function createLabelForRegistrationElementOnConfirmationPage(string $key): string
     {
@@ -1032,10 +995,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      * Ensures that the parameter is an array. If it is no array yet, it will be changed to an empty array.
      *
      * @param mixed &$data variable that should be ensured to be an array
-     *
-     * @return void
      */
-    protected function ensureArray(&$data)
+    protected function ensureArray(&$data): void
     {
         if (!is_array($data)) {
             $data = [];
@@ -1080,7 +1041,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      * Takes the selected price and the selected number of seats and calculates
      * the total price. The total price will be returned with the currency unit appended.
      *
-     * @return string the total price calculated from the form data including the currency unit, eg. "240.00 EUR"
+     * @return string the total price calculated from the form data including the currency unit, e.g., "240.00 EUR"
      */
     private function getTotalPriceWithUnit(): string
     {
@@ -1134,12 +1095,11 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      * Takes the selected options for a list of options and displays it
      * nicely using their captions, separated by a carriage return (ASCII 13).
      *
-     * @param array[] $availableOptions
-     *        all available options for this form element as a nested array, the outer array having the UIDs of the options as
-     *        keys, the inner array having the keys "caption" (for the visible captions) and "value" (the UID again), may be empty,
-     *        must not be NULL
-     * @param int[] $selectedOptions
-     *        the selected options with the array values being the UIDs of the corresponding options, may be empty or even NULL
+     * @param array[] $availableOptions all available options for this form element as a nested array, the outer array
+     *        having the UIDs of the options as keys, the inner array having the keys "caption" (for the visible
+     *        captions) and "value" (the UID again), may be empty
+     * @param int[] $selectedOptions the selected options with the array values being the UIDs of the corresponding
+     *        options, may be empty
      *
      * @return string the captions of the selected options, separated by CR
      */
@@ -1236,8 +1196,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * The caller needs to take care of htmlspecialcharing the data.
      *
-     * @param array $params
-     *        contents of the "params" XML child of the userobj node (needs to contain an element with the key "key")
+     * @param array $params contents of the "params" XML child of the userobj node (needs to contain an element with
+     *        the key "key")
      *
      * @return string the contents of the element
      */
@@ -1380,7 +1340,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Provides data items for the list of food options for this event.
      *
-     * @return array[] items from the foods table as an array with the keys "caption" (for the title) and "value" (for the uid)
+     * @return array[] items from the foods table as an array with the keys "caption" (for the title) and "value"
+     *         (for the uid)
      */
     public function populateFoods(): array
     {
@@ -1409,7 +1370,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      * least one food option for this event and the food options should
      * be displayed).
      *
-     * @param array $formData associative array with the element "value" in which the value of the current field is provided
+     * @param array $formData associative array with the element "value" in which the value of the current field is
+     *        provided
      *
      * @return bool TRUE if at least one item is selected or no food options can be selected
      */
@@ -1418,9 +1380,6 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
         return !empty($formData['value']) || !$this->hasFoods();
     }
 
-    /**
-     * @return \Tx_Seminars_Model_FrontEndUser
-     */
     protected function getLoggedInUser(): \Tx_Seminars_Model_FrontEndUser
     {
         return FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
@@ -1444,9 +1403,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      * field is not visible in the registration form (in which case it is not
      * possible to select a price).
      *
-     * @param array $formData
-     *        associative array with the element "value" in which the currently selected value (a positive integer)
-     *        or NULL if no radiobutton is selected is provided
+     * @param array $formData associative array with the element "value" in which the currently selected value
+     *        (a positive integer) or NULL if no radiobutton is selected is provided
      *
      * @return bool true if a valid price is selected or the price field
      *                 is hidden, false if none is selected, but could have been selected
@@ -1505,10 +1463,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      * - email
      *
      * @param array $parameters the form data (may be empty)
-     *
-     * @return void
      */
-    private function saveDataToSession(array $parameters)
+    private function saveDataToSession(array $parameters): void
     {
         if (empty($parameters)) {
             return;
@@ -1554,8 +1510,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      * Retrieves the data for a given key from the FE user session. Returns an
      * empty string if no data for that key is stored.
      *
-     * @param array $parameters
-     *        the contents of the "params" child of the userobj node as key/value pairs
+     * @param array $parameters the contents of the "params" child of the userobj node as key/value pairs
      *        (used for retrieving the current form field name)
      *
      * @return string the data stored in the FE user session under the given key, might be empty
@@ -1584,10 +1539,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
 
     /**
      * Creates and initializes $this->staticInfo (if that hasn't been done yet).
-     *
-     * @return void
      */
-    private function initStaticInfo()
+    private function initStaticInfo(): void
     {
         if ($this->staticInfo === null) {
             $this->staticInfo = GeneralUtility::makeInstance(PiBaseApi::class);
@@ -1598,10 +1551,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
     /**
      * Hides form fields that are either disabled via TS setup or that have
      * nothing to select (e.g. if there are no payment methods) from the templating process.
-     *
-     * @return void
      */
-    private function hideUnusedFormFields()
+    private function hideUnusedFormFields(): void
     {
         static $availableFormFields = [
             'step_counter',
@@ -1704,10 +1655,8 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
 
     /**
      * Processes the registration that should be removed.
-     *
-     * @return void
      */
-    public function processUnregistration()
+    public function processUnregistration(): void
     {
         /** @var \formidable_mainrenderlet $cancelButtonRenderlet */
         $cancelButtonRenderlet = $this->getFormCreator()->aORenderlets['button_cancel'];
@@ -1839,9 +1788,6 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
         return $result;
     }
 
-    /**
-     * @return \Tx_Seminars_Service_RegistrationManager
-     */
     private function getRegistrationManager(): \Tx_Seminars_Service_RegistrationManager
     {
         return \Tx_Seminars_Service_RegistrationManager::getInstance();

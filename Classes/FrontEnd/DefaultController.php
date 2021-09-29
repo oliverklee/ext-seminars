@@ -229,7 +229,6 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     /**
      * Displays the seminar manager HTML.
      *
-     * @param string $unused (unused)
      * @param array $conf TypoScript configuration for the plugin
      *
      * @return string HTML for the plugin
@@ -386,11 +385,6 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
         return $this->isInitialized && is_object($this->configurationService);
     }
 
-    /**
-     * Gets the hook provider for the list view.
-     *
-     * @return HookProvider
-     */
     protected function getListViewHookProvider(): HookProvider
     {
         if (!$this->listViewHookProvider instanceof HookProvider) {
@@ -400,11 +394,6 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
         return $this->listViewHookProvider;
     }
 
-    /**
-     * Gets the hook provider for the single view.
-     *
-     * @return HookProvider
-     */
     protected function getSingleViewHookProvider(): HookProvider
     {
         if ($this->singleViewHookProvider === null) {
@@ -414,11 +403,6 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
         return $this->singleViewHookProvider;
     }
 
-    /**
-     * Gets the hook provider for the registration form.
-     *
-     * @return HookProvider
-     */
     protected function getRegistrationFormHookProvider(): HookProvider
     {
         if ($this->registrationFormHookProvider === null) {
@@ -436,12 +420,11 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
      * If the seminar cannot be created, $this->seminar will be NULL, and
      * this function will return FALSE.
      *
-     * @param int $seminarUid an event UID
      * @param bool $showHidden whether hidden records should be retrieved as well
      *
      * @return bool TRUE if the seminar UID is valid and the object has been created, FALSE otherwise
      */
-    public function createSeminar(int $seminarUid, $showHidden = false): bool
+    public function createSeminar(int $seminarUid, bool $showHidden = false): bool
     {
         if ($this->seminar !== null) {
             unset($this->seminar);
@@ -492,10 +475,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
 
     /**
      * Creates the config getter and the registration manager.
-     *
-     * @return void
      */
-    public function createHelperObjects()
+    public function createHelperObjects(): void
     {
         if ($this->configurationService === null) {
             $this->configurationService = GeneralUtility::makeInstance(
@@ -521,11 +502,6 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
         return $this->registration;
     }
 
-    /**
-     * Returns the Singleton registration manager instance.
-     *
-     * @return \Tx_Seminars_Service_RegistrationManager the Singleton instance
-     */
     public function getRegistrationManager(): \Tx_Seminars_Service_RegistrationManager
     {
         return \Tx_Seminars_Service_RegistrationManager::getInstance();
@@ -647,8 +623,6 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
      * Displays detailed data for an event.
      *
      * Fields listed in $this->subpartsToHide get hidden (i.e., not displayed).
-     *
-     * @return string
      */
     protected function createSingleView(): string
     {
@@ -785,9 +759,6 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
         return $result;
     }
 
-    /**
-     * @return string image tag
-     */
     private function createImageForSingleView(): string
     {
         $imageConfiguration = [
@@ -803,12 +774,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     }
 
     /**
-     * Fills in the matching marker for the event type or hides the subpart
-     * if there is no event type.
-     *
-     * @return void
+     * Fills in the matching marker for the event type or hides the subpart if there is no event type.
      */
-    private function setEventTypeMarker()
+    private function setEventTypeMarker(): void
     {
         if (!$this->seminar->hasEventType()) {
             $this->hideSubparts('event_type', 'field_wrapper');
@@ -819,12 +787,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     }
 
     /**
-     * Fills in the matching marker for the subtitle or hides the subpart
-     * if there is no subtitle.
-     *
-     * @return void
+     * Fills in the matching marker for the subtitle or hides the subpart if there is no subtitle.
      */
-    private function setSubtitleMarker()
+    private function setSubtitleMarker(): void
     {
         if (!$this->seminar->hasSubtitle()) {
             $this->hideSubparts('subtitle', 'field_wrapper');
@@ -835,12 +800,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     }
 
     /**
-     * Fills in the matching marker for the desription or hides the subpart
-     * if there is no description.
-     *
-     * @return void
+     * Fills in the matching marker for the description or hides the subpart if there is no description.
      */
-    private function setDescriptionMarker()
+    private function setDescriptionMarker(): void
     {
         if (!$this->seminar->hasDescription()) {
             $this->hideSubparts('description', 'field_wrapper');
@@ -854,12 +816,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     }
 
     /**
-     * Fills in the matching marker for the accreditation number or hides the
-     * subpart if there is no accreditation number.
-     *
-     * @return void
+     * Fills in the matching marker for the accreditation number or hides the subpart if there is no accreditation number.
      */
-    private function setAccreditationNumberMarker()
+    private function setAccreditationNumberMarker(): void
     {
         if (!$this->seminar->hasAccreditationNumber()) {
             $this->hideSubparts('accreditation_number', 'field_wrapper');
@@ -873,12 +832,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     }
 
     /**
-     * Fills in the matching marker for the credit points or hides the subpart
-     * if there are no credit points.
-     *
-     * @return void
+     * Fills in the matching marker for the credit points or hides the subpart if there are no credit points.
      */
-    private function setCreditPointsMarker()
+    private function setCreditPointsMarker(): void
     {
         if (!$this->seminar->hasCreditPoints()) {
             $this->hideSubparts('credit_points', 'field_wrapper');
@@ -889,12 +845,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     }
 
     /**
-     * Fills in the matching marker for the categories or hides the subpart
-     * if there are no categories.
-     *
-     * @return void
+     * Fills in the matching marker for the categories or hides the subpart if there are no categories.
      */
-    private function setCategoriesMarker()
+    private function setCategoriesMarker(): void
     {
         if (!$this->seminar->hasCategories()) {
             $this->hideSubparts('category', 'field_wrapper');
@@ -915,10 +868,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
 
     /**
      * Fills in the matching marker for the place.
-     *
-     * @return void
      */
-    private function setPlaceMarker()
+    private function setPlaceMarker(): void
     {
         $this->setMarker(
             'place',
@@ -929,12 +880,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     }
 
     /**
-     * Fills in the matching marker for the room or hides the subpart if there
-     * is no room.
-     *
-     * @return void
+     * Fills in the matching marker for the room or hides the subpart if there is no room.
      */
-    private function setRoomMarker()
+    private function setRoomMarker(): void
     {
         if (!$this->seminar->hasRoom()) {
             $this->hideSubparts('room', 'field_wrapper');
@@ -945,12 +893,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     }
 
     /**
-     * Fills in the matching markers for the time slots or hides the subpart
-     * if there are no time slots.
-     *
-     * @return void
+     * Fills in the matching markers for the time slots or hides the subpart if there are no time slots.
      */
-    protected function setTimeSlotsMarkers()
+    protected function setTimeSlotsMarkers(): void
     {
         if (!$this->seminar->hasTimeslots()) {
             $this->hideSubparts('timeslots', 'field_wrapper');
@@ -977,12 +922,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     }
 
     /**
-     * Fills in the matching marker for the expiry or hides the subpart if there
-     * is no expiry.
-     *
-     * @return void
+     * Fills in the matching marker for the expiry or hides the subpart if there is no expiry.
      */
-    private function setExpiryMarker()
+    private function setExpiryMarker(): void
     {
         if (!$this->seminar->hasExpiry()) {
             $this->hideSubparts('expiry', 'field_wrapper');
@@ -993,12 +935,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     }
 
     /**
-     * Fills in the matching markers for the speakers or hides the subpart if
-     * there are no speakers.
-     *
-     * @return void
+     * Fills in the matching markers for the speakers or hides the subpart if there are no speakers.
      */
-    private function setSpeakersMarker()
+    private function setSpeakersMarker(): void
     {
         if (!$this->seminar->hasSpeakers()) {
             $this->hideSubparts('speakers', 'field_wrapper');
@@ -1009,12 +948,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     }
 
     /**
-     * Fills in the matching markers for the partners or hides the subpart if
-     * there are no partners.
-     *
-     * @return void
+     * Fills in the matching markers for the partners or hides the subpart if there are no partners.
      */
-    private function setPartnersMarker()
+    private function setPartnersMarker(): void
     {
         if (!$this->seminar->hasPartners()) {
             $this->hideSubparts('partners', 'field_wrapper');
@@ -1025,12 +961,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     }
 
     /**
-     * Fills in the matching markers for the tutors or hides the subpart if
-     * there are no tutors.
-     *
-     * @return void
+     * Fills in the matching markers for the tutors or hides the subpart if there are no tutors.
      */
-    private function setTutorsMarker()
+    private function setTutorsMarker(): void
     {
         if (!$this->seminar->hasTutors()) {
             $this->hideSubparts('tutors', 'field_wrapper');
@@ -1041,12 +974,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     }
 
     /**
-     * Fills in the matching markers for the leaders or hides the subpart if
-     * there are no leaders.
-     *
-     * @return void
+     * Fills in the matching markers for the leaders or hides the subpart if there are no leaders.
      */
-    private function setLeadersMarker()
+    private function setLeadersMarker(): void
     {
         if (!$this->seminar->hasLeaders()) {
             $this->hideSubparts('leaders', 'field_wrapper');
@@ -1060,13 +990,10 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
      * Sets the speaker markers for the type given in $speakerType without
      * checking whether the current event has any speakers of the given type.
      *
-     * @param string $speakerType
-     *        the speaker type to set the markers for, must not be empty, must be one of the following:
-     *        "speakers", "partners", "tutors" or "leaders"
-     *
-     * @return void
+     * @param string $speakerType the speaker type to set the markers for, must not be empty, must be
+     *        one of the following: "speakers", "partners", "tutors" or "leaders"
      */
-    private function setSpeakersMarkerWithoutCheck(string $speakerType)
+    private function setSpeakersMarkerWithoutCheck(string $speakerType): void
     {
         if (!in_array($speakerType, self::VALID_SPEAKER_TYPES, true)) {
             throw new \InvalidArgumentException('The given speaker type is not valid.', 1333293083);
@@ -1079,12 +1006,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     }
 
     /**
-     * Fills in the matching marker for the language or hides the unused
-     * subpart.
-     *
-     * @return void
+     * Fills in the matching marker for the language or hides the unused subpart.
      */
-    private function setLanguageMarker()
+    private function setLanguageMarker(): void
     {
         if (!$this->seminar->hasLanguage()) {
             $this->hideSubparts('language', 'field_wrapper');
@@ -1096,10 +1020,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
 
     /**
      * Fills in the matching markers for the prices or hides the unused subparts.
-     *
-     * @return void
      */
-    private function setSingleViewPriceMarkers()
+    private function setSingleViewPriceMarkers(): void
     {
         if ($this->seminar->getPriceOnRequest()) {
             $this->setSingleViewPriceMarkersForOnRequest();
@@ -1115,10 +1037,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
      * Sets the price to "on request" and hides all other price markers
      *
      * This method may only be called if the current event is set to "price on request".
-     *
-     * @return void
      */
-    private function setSingleViewPriceMarkersForOnRequest()
+    private function setSingleViewPriceMarkersForOnRequest(): void
     {
         if (!$this->seminar->getPriceOnRequest()) {
             return;
@@ -1133,10 +1053,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
 
     /**
      * Set the regular price (with or without early bird rebate).
-     *
-     * @return void
      */
-    private function setSingleViewRegularPriceMarkers()
+    private function setSingleViewRegularPriceMarkers(): void
     {
         if ($this->seminar->hasEarlyBirdPrice() && !$this->seminar->isEarlyBirdDeadlineOver()) {
             $this->setMarker('price_earlybird_regular', $this->seminar->getEarlyBirdPriceRegular());
@@ -1156,10 +1074,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
 
     /**
      * Set the special price (with or without early bird rebate).
-     *
-     * @return void
      */
-    private function setSingleViewSpecialPriceMarkers()
+    private function setSingleViewSpecialPriceMarkers(): void
     {
         if ($this->seminar->hasPriceSpecial()) {
             if ($this->seminar->hasEarlyBirdPrice() && !$this->seminar->isEarlyBirdDeadlineOver()) {
@@ -1182,10 +1098,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     /**
      * Sets the prices with board (regular and special) or hides the corresponding subparts if those prices
      * are not available.
-     *
-     * @return void
      */
-    private function setSingleViewBoardPriceMarkers()
+    private function setSingleViewBoardPriceMarkers(): void
     {
         if ($this->seminar->hasPriceRegularBoard()) {
             $this->setMarker('price_board_regular', $this->seminar->getPriceRegularBoard());
@@ -1203,10 +1117,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     /**
      * Fills in the matching marker for the payment methods or hides the subpart
      * if there are no payment methods.
-     *
-     * @return void
      */
-    private function setPaymentMethodsMarker()
+    private function setPaymentMethodsMarker(): void
     {
         if (!$this->seminar->hasPaymentMethods()) {
             $this->hideSubparts('paymentmethods', 'field_wrapper');
@@ -1227,10 +1139,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     /**
      * Fills in the matching marker for the additional information or hides the
      * subpart if there is no additional information.
-     *
-     * @return void
      */
-    private function setAdditionalInformationMarker()
+    private function setAdditionalInformationMarker(): void
     {
         if (!$this->seminar->hasAdditionalInformation()) {
             $this->hideSubparts('additional_information', 'field_wrapper');
@@ -1244,12 +1154,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     }
 
     /**
-     * Fills in the matching markers for the attached files or hides the subpart
-     * if there are no attached files.
-     *
-     * @return void
+     * Fills in the matching markers for the attached files or hides the subpart if there are no attached files.
      */
-    private function setAttachedFilesMarkers()
+    private function setAttachedFilesMarkers(): void
     {
         if (!$this->seminar->hasAttachedFiles() || !$this->mayUserAccessAttachedFiles()) {
             $this->hideSubparts('attached_files', 'field_wrapper');
@@ -1276,12 +1183,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     }
 
     /**
-     * Fills in the matching marker for the target groups or hides the subpart
-     * if there are no target groups.
-     *
-     * @return void
+     * Fills in the matching marker for the target groups or hides the subpart if there are no target groups.
      */
-    private function setTargetGroupsMarkers()
+    private function setTargetGroupsMarkers(): void
     {
         if (!$this->seminar->hasTargetGroups()) {
             $this->hideSubparts('target_groups', 'field_wrapper');
@@ -1301,10 +1205,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     /**
      * Fills the matching marker for the requirements or hides the subpart
      * if there are no requirements for the current event.
-     *
-     * @return void
      */
-    private function setRequirementsMarker()
+    private function setRequirementsMarker(): void
     {
         if (!$this->seminar->hasRequirements()) {
             $this->hideSubparts('requirements', 'field_wrapper');
@@ -1323,10 +1225,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     /**
      * Fills the matching marker for the dependencies or hides the subpart
      * if there are no dependencies for the current event.
-     *
-     * @return void
      */
-    private function setDependenciesMarker()
+    private function setDependenciesMarker(): void
     {
         if (!$this->seminar->hasDependencies()) {
             $this->hideSubparts('dependencies', 'field_wrapper');
@@ -1353,10 +1253,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     /**
      * Fills in the matching marker for the organizing partners or hides the
      * subpart if there are no organizing partners.
-     *
-     * @return void
      */
-    private function setOrganizingPartnersMarker()
+    private function setOrganizingPartnersMarker(): void
     {
         if (!$this->seminar->hasOrganizingPartners()) {
             $this->hideSubparts('organizing_partners', 'field_wrapper');
@@ -1369,10 +1267,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     /**
      * Fills in the matching marker for the owner data or hides the subpart if
      * the event has no owner or the owner data should not be displayed.
-     *
-     * @return void
      */
-    private function setOwnerDataMarker()
+    private function setOwnerDataMarker(): void
     {
         if (!$this->getConfValueBoolean('showOwnerDataInSingleView', 's_singleView') || !$this->seminar->hasOwner()) {
             $this->hideSubparts('owner_data', 'field_wrapper');
@@ -1397,10 +1293,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
 
     /**
      * Fills in the matching marker for the vacancies or hides the subpart no registration is possible.
-     *
-     * @return void
      */
-    private function setVacanciesMarker()
+    private function setVacanciesMarker(): void
     {
         $vacancies = $this->seminar->getVacanciesString();
         if ($vacancies !== '') {
@@ -1413,10 +1307,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     /**
      * Fills in the matching marker for the registration deadline or hides the
      * subpart if there is no registration deadline.
-     *
-     * @return void
      */
-    private function setRegistrationDeadlineMarker()
+    private function setRegistrationDeadlineMarker(): void
     {
         if (!$this->seminar->hasRegistrationDeadline()) {
             $this->hideSubparts('deadline_registration', 'field_wrapper');
@@ -1428,8 +1320,6 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
 
     /**
      * Checks whether online registration is enabled at all by configuration.
-     *
-     * @return bool TRUE if online registration is enabled, FALSE otherwise
      */
     protected function isRegistrationEnabled(): bool
     {
@@ -1437,9 +1327,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     }
 
     /**
-     * Checkes whether a front-end user is logged in.
-     *
-     * @return bool TRUE if a user is logged in, FALSE otherwise
+     * Checks whether a front-end user is logged in.
      */
     public function isLoggedIn(): bool
     {
@@ -1448,8 +1336,6 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
 
     /**
      * Returns the UID of the logged-in front-end user (or 0 if no user is logged in).
-     *
-     * @return int
      */
     protected function getLoggedInFrontEndUserUid(): int
     {
@@ -1462,10 +1348,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     /**
      * Fills in the matching marker for the link to the registration form or
      * hides the subpart if the registration is disabled.
-     *
-     * @return void
      */
-    private function setRegistrationMarker()
+    private function setRegistrationMarker(): void
     {
         if (!$this->isRegistrationEnabled() || $this->seminar->getPriceOnRequest()) {
             $this->hideSubparts('registration', 'field_wrapper');
@@ -1484,10 +1368,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
      * Fills in the matching marker for the link to the list of registrations
      * or hides the subpart if the currently logged in FE user is not allowed
      * to view the list of registrations.
-     *
-     * @return void
      */
-    private function setListOfRegistrationMarker()
+    private function setListOfRegistrationMarker(): void
     {
         $canViewListOfRegistrations = $this->seminar->canViewRegistrationsList(
             $this->whatToDisplay,
@@ -1505,10 +1387,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
 
     /**
      * Hides unneeded subparts for topic records.
-     *
-     * @return void
      */
-    private function hideUnneededSubpartsForTopicRecords()
+    private function hideUnneededSubpartsForTopicRecords(): void
     {
         if ($this->seminar->getRecordType() != \Tx_Seminars_Model_Event::TYPE_TOPIC) {
             return;
@@ -1624,9 +1504,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
      * This function is used for the normal event list as well as the
      * "my events" and the "my VIP events" list.
      *
-     * @param string $whatToDisplay
-     *        a string selecting the flavor of list view: either an empty string (for the default list view),
-     *        the value from "what_to_display" or "other_dates"
+     * @param string $whatToDisplay a string selecting the flavor of list view: either an empty string
+     *        (for the default list view), the value from "what_to_display" or "other_dates"
      *
      * @return string HTML code with the event list
      */
@@ -1750,15 +1629,12 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
      * creates a seminar bag or a registration bag (for the "my events" view),
      * but does not create any actual HTML output.
      *
-     * @param string $whatToDisplay
-     *        the flavor of list view: either an empty string (for the default
-     *        list view), the value from "what_to_display", or "other_dates"
+     * @param string $whatToDisplay the flavor of list view: either an empty string (for the default list view),
+     *        the value from "what_to_display", or "other_dates"
      *
-     * @return AbstractBag a seminar bag or a registration bag
-     *                                  containing the seminars or registrations
-     *                                  for the list view
+     * @return \Tx_Seminars_Bag_Registration|\Tx_Seminars_Bag_Event a bag containing the items for the list view
      */
-    public function initListView($whatToDisplay = ''): AbstractBag
+    public function initListView(string $whatToDisplay = ''): AbstractBag
     {
         if (\strpos((string)$this->cObj->currentRecord, 'tt_content') !== false) {
             $this->conf['pidList'] = $this->getConfValueString('pages');
@@ -1879,18 +1755,14 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
      * This function should only be called when there are actually any list
      * items.
      *
-     * @param AbstractBag $seminarOrRegistrationBag
-     *        initialized seminar or registration bag
-     * @param string $whatToDisplay
-     *        a string selecting the flavor of list view: either an empty string (for the default list view),
-     *        the value from "what_to_display" or "other_dates"
+     * @param \Tx_Seminars_Bag_Registration|\Tx_Seminars_Bag_Event $seminarOrRegistrationBag initialized bag
+     * @param string $whatToDisplay a string selecting the flavor of list view: either an empty string
+     *        (for the default list view), the value from "what_to_display" or "other_dates"
      *
      * @return string HTML for the table (will not be empty)
      */
-    protected function createListTable(
-        AbstractBag $seminarOrRegistrationBag,
-        string $whatToDisplay
-    ): string {
+    protected function createListTable(AbstractBag $seminarOrRegistrationBag, string $whatToDisplay): string
+    {
         $result = $this->createListHeader();
         $rowCounter = 0;
 
@@ -1914,11 +1786,11 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     }
 
     /**
-     * Returns the list view header: Start of table, header row, start of table
-     * body.
-     * Columns listed in $this->subpartsToHide are hidden (ie. not displayed).
+     * Returns the list view header: Start of table, header row, start of table body.
      *
-     * @return string HTML output, the table header
+     * Columns listed in `$this->subpartsToHide` are hidden (i.e., not displayed).
+     *
+     * @return string HTML output: the table header
      */
     protected function createListHeader(): string
     {
@@ -1966,7 +1838,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     /**
      * Returns the list view footer: end of table body, end of table.
      *
-     * @return string HTML output, the table footer
+     * @return string HTML output: the table footer
      */
     protected function createListFooter(): string
     {
@@ -1981,18 +1853,13 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
      * Columns listed in $this->subpartsToHide are hidden (ie. not displayed).
      * If $this->seminar is invalid, an empty string is returned.
      *
-     * @param int $rowCounter
-     *        Row counter. Starts at 0 (zero). Used for alternating class
-     *        values in the output rows.
-     * @param string $whatToDisplay
-     *        a string selecting the flavor of list view: either an empty string
-     *        (for the default list view), the value from "what_to_display",
-     *        or "other_dates"
+     * @param int $rowCounter Row counter. Starts at 0 (zero). Used for alternating class values in the output rows.
+     * @param string $whatToDisplay a string selecting the flavor of list view: either an empty string
+     *        (for the default list view), the value from "what_to_display", or "other_dates"
      *
-     * @return string HTML output, a table row with a class attribute set
-     *                (alternative based on odd/even rows)
+     * @return string HTML output, a table row with a class attribute set (alternative based on odd/even rows)
      */
-    protected function createListRow($rowCounter = 0, $whatToDisplay = ''): string
+    protected function createListRow(int $rowCounter = 0, string $whatToDisplay = ''): string
     {
         $result = '';
 
@@ -2130,11 +1997,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     }
 
     /**
-     * Returns a seminarBagBuilder object with the source pages set for the list
-     * view.
-     *
-     * @return \Tx_Seminars_BagBuilder_Event the seminarBagBuilder object for
-     *                                       the list view
+     * Returns a seminarBagBuilder object with the source pages set for the list view.
      */
     private function createSeminarBagBuilder(): \Tx_Seminars_BagBuilder_Event
     {
@@ -2152,11 +2015,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
 
     /**
      * Returns a registrationBagBuilder object limited for registrations of the
-     * currently logged in front-end user as attendee for the "my events" list
-     * view.
+     * currently logged in front-end user as attendee for the "my events" list view.
      *
-     * @return \Tx_Seminars_BagBuilder_Registration the registrations for the
-     *                                             "my events" list
+     * @return \Tx_Seminars_BagBuilder_Registration the registrations for the "my events" list
      */
     private function createRegistrationBagBuilder(): \Tx_Seminars_BagBuilder_Registration
     {
@@ -2172,10 +2033,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     }
 
     /**
-     * Returns a pi1_frontEndRequirementsList object.
-     *
-     * @return \Tx_Seminars_FrontEnd_RequirementsList
-     *         the object to build the requirements list with
+     * @return \Tx_Seminars_FrontEnd_RequirementsList the object to build the requirements list with
      */
     private function createRequirementsList(): \Tx_Seminars_FrontEnd_RequirementsList
     {
@@ -2241,9 +2099,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     /**
      * Returns the selector widget for the "seminars_list" view.
      *
-     * @param string $whatToDisplay
-     *        a string selecting the flavor of list view: either an empty string (for the default list view),
-     *        the value from "what_to_display" or "other_dates"
+     * @param string $whatToDisplay a string selecting the flavor of list view:
+     *        either an empty string (for the default list view), the value from "what_to_display" or "other_dates"
      *
      * @return string the HTML code of the selector widget, may be empty
      */
@@ -2264,15 +2121,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     }
 
     /**
-     * Limits the given seminarbagbuilder for additional parameters needed to
-     * build the list view.
-     *
-     * @param \Tx_Seminars_BagBuilder_Event $builder
-     *        the seminarbagbuilder to limit for additional parameters
-     *
-     * @return void
+     * Limits the given bag builder for additional parameters needed to build the list view.
      */
-    protected function limitForAdditionalParameters(\Tx_Seminars_BagBuilder_Event $builder)
+    protected function limitForAdditionalParameters(\Tx_Seminars_BagBuilder_Event $builder): void
     {
         // Adds the query parameter that result from the user selection in the
         // selector widget (including the search form).
@@ -2425,8 +2276,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
 
     /**
      * Creates the "edit", "hide" and "unhide" links for the current event in
-     * the list view, depending on the logged-in FE user's permissions and the
-     * event's status.
+     * the list view, depending on the logged-in FE user's permissions and the event's status.
      *
      * @return string HTML with the links, will be empty if the FE user can not edit the current event
      */
@@ -2532,10 +2382,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     }
 
     /**
-     * Checks whether the currently logged-in FE user is allowed to edit the
-     * current event in the list view.
-     *
-     * @return bool TRUE if the current user is allowed to edit the current event, FALSE otherwise
+     * Checks whether the currently logged-in FE user is allowed to edit the current event in the list view.
      */
     protected function mayCurrentUserEditCurrentEvent(): bool
     {
@@ -2557,10 +2404,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
      * Hides the columns specified in the first parameter $columnsToHide.
      *
      * @param string[] $columnsToHide the columns to hide, may be empty
-     *
-     * @return void
      */
-    protected function hideColumns(array $columnsToHide)
+    protected function hideColumns(array $columnsToHide): void
     {
         $this->hideSubpartsArray($columnsToHide, 'LISTHEADER_WRAPPER');
         $this->hideSubpartsArray($columnsToHide, 'LISTITEM_WRAPPER');
@@ -2570,10 +2415,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
      * Un-hides the columns specified in the first parameter $columnsToHide.
      *
      * @param string[] $columnsToUnhide the columns to un-hide, may be empty
-     *
-     * @return void
      */
-    protected function unhideColumns(array $columnsToUnhide)
+    protected function unhideColumns(array $columnsToUnhide): void
     {
         $permanentlyHiddenColumns = GeneralUtility::trimExplode(
             ',',
@@ -2600,18 +2443,12 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
      * entered" list and is not the "my vip events" list and VIPs are not
      * allowed to edit their events.
      *
-     * @param string $whatToDisplay
-     *        a string selecting the flavor of list view: either an empty string (for the default list view),
-     *       the value from "what_to_display" or "other_dates"
-     *
-     * @return void
+     * @param string $whatToDisplay a string selecting the flavor of list view:
+     *        either an empty string (for the default list view), the value from "what_to_display" or "other_dates"
      */
-    private function hideEditColumnIfNecessary(string $whatToDisplay)
+    private function hideEditColumnIfNecessary(string $whatToDisplay): void
     {
-        $mayManagersEditTheirEvents = $this->getConfValueBoolean(
-            'mayManagersEditTheirEvents',
-            's_listView'
-        );
+        $mayManagersEditTheirEvents = $this->getConfValueBoolean('mayManagersEditTheirEvents', 's_listView');
 
         if (
             $whatToDisplay !== 'my_entered_events'
@@ -2628,13 +2465,10 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
      *
      * Also hides it for the "other_dates" and "events_next_day" lists.
      *
-     * @param string $whatToDisplay
-     *        the flavor of list view: either an empty string (for the default
-     *        list view), the value from "what_to_display", or "other_dates"
-     *
-     * @return void
+     * @param string $whatToDisplay the flavor of list view: either an empty string (for the default list view),
+     *        the value from "what_to_display", or "other_dates"
      */
-    public function hideListRegistrationsColumnIfNecessary(string $whatToDisplay)
+    public function hideListRegistrationsColumnIfNecessary(string $whatToDisplay): void
     {
         $alwaysHideInViews = ['topic_list', 'other_dates', 'events_next_day'];
         if (
@@ -2668,14 +2502,10 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     /**
      * Hides the registration column if online registration is disabled.
      *
-     * @param string $whatToDisplay
-     *        a string selecting the flavor of list view: either an empty string
-     *        (for the default list view), the value from "what_to_display" or
-     *        "other_dates"
-     *
-     * @return void
+     * @param string $whatToDisplay a string selecting the flavor of list view: either an empty string
+     *        (for the default list view), the value from "what_to_display" or "other_dates"
      */
-    private function hideRegisterColumnIfNecessary(string $whatToDisplay)
+    private function hideRegisterColumnIfNecessary(string $whatToDisplay): void
     {
         if (
             $whatToDisplay === 'my_vip_events'
@@ -2688,16 +2518,12 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
 
     /**
      * Hides the registrations column if we are not on the "my_vip_events" view
-     * or the CSV export of registrations is not allowed on the "my_vip_events"
-     * view.
+     * or the CSV export of registrations is not allowed on the "my_vip_events" view.
      *
-     * @param string $whatToDisplay
-     *        a string selecting the flavor of list view: either an empty string (for the default list view),
-     *        the value from "what_to_display" or "other_dates"
-     *
-     * @return void
+     * @param string $whatToDisplay a string selecting the flavor of list view: either an empty string
+     *        (for the default list view), the value from "what_to_display" or "other_dates"
      */
-    private function hideCsvExportOfRegistrationsColumnIfNecessary(string $whatToDisplay)
+    private function hideCsvExportOfRegistrationsColumnIfNecessary(string $whatToDisplay): void
     {
         $isCsvExportOfRegistrationsInMyVipEventsViewAllowed
             = $this->getConfValueBoolean('allowCsvExportOfRegistrationsInMyVipEventsView');
@@ -2709,10 +2535,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
 
     /**
      * Hides columns which are not needed for the "topic_list" view.
-     *
-     * @return void
      */
-    private function hideColumnsForTheTopicListView()
+    private function hideColumnsForTheTopicListView(): void
     {
         $this->hideColumns(
             [
@@ -2733,13 +2557,10 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
      * Hides the number of seats, the total price and the registration status
      * columns when we're not on the "my_events" list view.
      *
-     * @param string $whatToDisplay
-     *        a string selecting the flavor of list view: either an empty string (for the default list view),
-     *        the value from "what_to_display" or "other_dates"
-     *
-     * @return void
+     * @param string $whatToDisplay a string selecting the flavor of list view: either an empty string
+     *        (for the default list view), the value from "what_to_display" or "other_dates"
      */
-    private function hideColumnsForAllViewsExceptMyEvents(string $whatToDisplay)
+    private function hideColumnsForAllViewsExceptMyEvents(string $whatToDisplay): void
     {
         if ($whatToDisplay != 'my_events') {
             $this->hideColumns(
@@ -2749,12 +2570,9 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     }
 
     /**
-     * Hides the columns which are listed in the TypoScript setup variable
-     * "hideColumns".
-     *
-     * @return void
+     * Hides the columns which are listed in the TypoScript setup variable "hideColumns".
      */
-    private function hideColumnsForAllViewsFromTypoScriptSetup()
+    private function hideColumnsForAllViewsFromTypoScriptSetup(): void
     {
         $this->hideColumns(
             GeneralUtility::trimExplode(
@@ -2878,7 +2696,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
      *
      * @param string $errorMessage error message to be displayed (may be empty if there is no error)
      *
-     * @return string HTML code including the title and error message
+     * @return string HTML including the title and error message
      */
     protected function createRegistrationHeading(string $errorMessage): string
     {
@@ -2938,7 +2756,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     /**
      * Creates the registration page footer.
      *
-     * @return string HTML code including the title and error message
+     * @return string HTML including the title and error message
      */
     protected function createRegistrationFooter(): string
     {
@@ -2950,10 +2768,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     /**
      * Enables/disables the display of data from event records on the registration page depending on the config variable
      * "eventFieldsOnRegistrationPage".
-     *
-     * @return void
      */
-    protected function toggleEventFieldsOnRegistrationPage()
+    protected function toggleEventFieldsOnRegistrationPage(): void
     {
         $fieldsToShow = [];
         if ($this->hasConfValueString('eventFieldsOnRegistrationPage', 's_template_special')) {
@@ -2999,7 +2815,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
      * Checks whether logged-in FE user has access to the event editor and then
      * either creates the event editor HTML or a localized error message.
      *
-     * @return string HTML code for the event editor, or an error message if the
+     * @return string HTML for the event editor, or an error message if the
      *                FE user doesn't have access to the editor
      */
     protected function createEventEditorHtml(): string
@@ -3027,8 +2843,6 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
 
     /**
      * Creates an event editor instance and returns it.
-     *
-     * @return \Tx_Seminars_FrontEnd_EventEditor the initialized event editor
      */
     protected function createEventEditorInstance(): \Tx_Seminars_FrontEnd_EventEditor
     {
@@ -3042,12 +2856,10 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     /**
      * Creates the category icon IMG tag with the icon title as title attribute.
      *
-     * @param string[] $iconData
-     *        the filename and title of the icon in an associative array with "icon" as key for the filename and "title" as key
-     *        for the icon title, the values for "title" and "icon" may be empty
+     * @param string[] $iconData the filename and title of the icon in an associative array with "icon" as key
+     *        for the filename and "title" as key for the icon title, the values for "title" and "icon" may be empty
      *
-     * @return string the icon IMG tag with the given icon, will be empty if the
-     *                category has no icon
+     * @return string the icon IMG tag with the given icon, will be empty if the category has no icon
      */
     private function createCategoryIcon(array $iconData): string
     {
@@ -3063,15 +2875,12 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     }
 
     /**
-     * Sets a gender specific heading for speakers, tutors, leaders or partners,
-     * depending on the speakers, tutors, leaders or partners belonging to the
-     * current seminar.
+     * Sets a gender-specific heading for speakers, tutors, leaders or partners,
+     * depending on the speakers, tutors, leaders or partners belonging to the current seminar.
      *
      * @param string $speakerType type of gender specific heading, must be 'speaker', 'tutors', 'leaders' or 'partners'
-     *
-     * @return void
      */
-    private function setGenderSpecificHeading(string $speakerType)
+    private function setGenderSpecificHeading(string $speakerType): void
     {
         if (!\in_array($speakerType, ['speakers', 'partners', 'tutors', 'leaders'])) {
             throw new \InvalidArgumentException(
@@ -3139,10 +2948,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
      * Sets the marker for the registration link in the list view.
      *
      * @param string $whatToDisplay the list type which should be shown, must not be empty
-     *
-     * @return void
      */
-    private function setRegistrationLinkMarker(string $whatToDisplay)
+    private function setRegistrationLinkMarker(string $whatToDisplay): void
     {
         if ($whatToDisplay === 'my_events') {
             $this->setMarker(
@@ -3170,10 +2977,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
      * Filters the given seminar bag builder to the date set in piVars.
      *
      * @param \Tx_Seminars_BagBuilder_Event $builder the bag builder to limit by date
-     *
-     * @return void
      */
-    private function filterByDate(\Tx_Seminars_BagBuilder_Event $builder)
+    private function filterByDate(\Tx_Seminars_BagBuilder_Event $builder): void
     {
         $dateFrom = $this->getTimestampFromDatePiVars('from');
         if ($dateFrom > 0) {
@@ -3191,8 +2996,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
      *
      * @param string $fromOrTo must be "from" or "to", depending on the date part which should be retrieved.
      *
-     * @return int the timestamp for the date set in piVars, will be 0 if no
-     *                 date was set
+     * @return int the timestamp for the date set in piVars, will be 0 if no date was set
      */
     private function getTimestampFromDatePiVars(string $fromOrTo): int
     {
@@ -3265,10 +3069,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     /**
      * Hides the list view subparts for the attached files if the user is not
      * allowed to access the attached files.
-     *
-     * @return void
      */
-    private function hideFilesColumnIfUserCannotAccessFiles()
+    private function hideFilesColumnIfUserCannotAccessFiles(): void
     {
         $limitToAttendees = $this->getConfValueBoolean('limitFileDownloadToAttendees');
 
@@ -3309,11 +3111,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     }
 
     /**
-     * Checks if the current user has permission to access the attached files of
-     * an event.
-     *
-     * @return bool TRUE if the user is allowed to access the attached files,
-     *                 FALSE otherwise
+     * Checks if the current user has permission to access the attached files of an event.
      */
     private function mayUserAccessAttachedFiles(): bool
     {
@@ -3325,10 +3123,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
 
     /**
      * Checks if the current FE user has access to the event editor and thus may
-     * see the my entered events list.
-     *
-     * @return bool TRUE if the user is allowed to access the event editor,
-     *                 FALSE otherwise
+     * see the "my entered events" list.
      */
     private function hasEventEditorAccess(): bool
     {
@@ -3342,9 +3137,6 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
      *
      * When this function is called, $this->seminar must contain a seminar, and
      * a user must be logged in at the front end.
-     *
-     * @return bool TRUE if the logged-in user can view the current seminar,
-     *                 FALSE otherwise
      */
     private function canShowCurrentEvent(): bool
     {
@@ -3362,10 +3154,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
      * Hides the status column for all views where it is not applicable.
      *
      * @param string $whatToDisplay the current list view, may be empty
-     *
-     * @return void
      */
-    private function hideStatusColumnIfNotUsed(string $whatToDisplay)
+    private function hideStatusColumnIfNotUsed(string $whatToDisplay): void
     {
         if ($whatToDisplay === 'my_entered_events' || $whatToDisplay === 'my_vip_events') {
             return;
@@ -3374,12 +3164,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
         $this->hideColumns(['status']);
     }
 
-    /**
-     * Sets the visibility status marker.
-     *
-     * @return void
-     */
-    private function setVisibilityStatusMarker()
+    private function setVisibilityStatusMarker(): void
     {
         $visibilityMarker = $this->seminar->isHidden()
             ? 'pending'
@@ -3393,13 +3178,8 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
 
     /**
      * Limits the bag to events within the time frame set by setup.
-     *
-     * @param \Tx_Seminars_BagBuilder_Event $builder
-     *        the seminarbagbuilder to limit by time frame
-     *
-     * @return void
      */
-    private function limitToTimeFrameSetting(\Tx_Seminars_BagBuilder_Event $builder)
+    private function limitToTimeFrameSetting(\Tx_Seminars_BagBuilder_Event $builder): void
     {
         try {
             $builder->setTimeFrame(
@@ -3492,34 +3272,27 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
 
     /**
      * Redirects to the current URL.
-     *
-     * @return void
      */
-    protected function redirectToCurrentUrl()
+    protected function redirectToCurrentUrl(): void
     {
         $currentUrl = GeneralUtility::locationHeaderUrl(GeneralUtility::getIndpEnv('REQUEST_URI'));
         HeaderProxyFactory::getInstance()->getHeaderProxy()->addHeader('Location: ' . $currentUrl);
     }
 
     /**
-     * Creates a hyperlink to the single view page of the event $event.
+     * Creates a hyperlink to the single view page of the given event.
      *
-     * @param \Tx_Seminars_Model_Event $event
-     *        the event which to link to
      * @param string $linkText the link text, must not be empty
-     * @param bool $htmlspecialcharLinkText whether to htmlspecialchar the link text
      *
-     * @return string HTML code for the link to the event's single view page
+     * @return string HTML  for the link to the event's single view page
      */
     public function createSingleViewLink(
         \Tx_Seminars_Model_Event $event,
         string $linkText,
         bool $htmlspecialcharLinkText = true
     ): string {
-        $processedLinkText = $htmlspecialcharLinkText ? \htmlspecialchars(
-            $linkText,
-            ENT_QUOTES | ENT_HTML5
-        ) : $linkText;
+        $processedLinkText = $htmlspecialcharLinkText
+            ? \htmlspecialchars($linkText, ENT_QUOTES | ENT_HTML5) : $linkText;
         $linkConditionConfiguration = $this->getConfValueString('linkToSingleView', 's_listView');
         $createLink = ($linkConditionConfiguration === 'always')
             || (($linkConditionConfiguration === 'onlyForNonEmptyDescription') && $event->hasDescription());
@@ -3531,11 +3304,6 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
         return '<a href="' . \htmlspecialchars($url, ENT_QUOTES | ENT_HTML5) . '">' . $processedLinkText . '</a>';
     }
 
-    /**
-     * Returns a link builder instance.
-     *
-     * @return \Tx_Seminars_Service_SingleViewLinkBuilder the link builder instance
-     */
     protected function getLinkBuilder(): \Tx_Seminars_Service_SingleViewLinkBuilder
     {
         if ($this->linkBuilder === null) {
@@ -3548,12 +3316,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
         return $this->linkBuilder;
     }
 
-    /**
-     * @param \Tx_Seminars_Service_SingleViewLinkBuilder $linkBuilder the link builder instance to use
-     *
-     * @return void
-     */
-    public function injectLinkBuilder(\Tx_Seminars_Service_SingleViewLinkBuilder $linkBuilder)
+    public function injectLinkBuilder(\Tx_Seminars_Service_SingleViewLinkBuilder $linkBuilder): void
     {
         $this->linkBuilder = $linkBuilder;
     }
