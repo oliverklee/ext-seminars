@@ -8,6 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 ### Added
 
 ### Changed
+- !!! Namespace all classes (#1004, #1005, #1007)
 - Migrate to the new configuration check
   (#935, #937, #939, #940, #943, #944, #946, #948, #949, #950, #951, #953, #954, #955, #956, #957, #958, #959, #962)
 - Add sr_feuser_register as a dev dependency (#926)
@@ -58,7 +59,6 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Allow installations up to PHP 8.0 (#758)
 
 ### Changed
-- !!! Namespace all classes (#1004, #1005)
 - Document the required MySQL/MariaDB settings for the FE editor (#843)
 - Simplify the user and group mapper inheritance chains (#806)
 - Move more tests to the nimut testing framework (#804)

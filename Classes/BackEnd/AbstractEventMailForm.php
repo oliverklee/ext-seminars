@@ -9,6 +9,7 @@ use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminar\Email\Salutation;
+use OliverKlee\Seminars\Hooks\Interfaces\BackEndModule;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Localization\LanguageService;
@@ -66,7 +67,7 @@ abstract class AbstractEventMailForm
     /**
      * hook objects for the list view
      *
-     * @var array
+     * @var array<int, BackEndModule>
      */
     private $hooks = [];
 
@@ -626,12 +627,9 @@ abstract class AbstractEventMailForm
     /**
      * Gets the hooks.
      *
-     * @return \Tx_Seminars_Interfaces_Hook_BackEndModule[]
-     *         the hook objects, will be empty if no hooks have been set
+     * @return array<int, BackEndModule>
      *
-     * @throws \UnexpectedValueException
-     *          if there are registered hook classes that do not implement the
-     *          \Tx_Seminars_Interfaces_Hook_BackEndModule interface
+     * @throws \UnexpectedValueException if any hook classes that do not implement the `BackEndModule` interface
      */
     protected function getHooks(): array
     {
@@ -640,10 +638,10 @@ abstract class AbstractEventMailForm
             if (\is_array($hookClasses)) {
                 foreach ($hookClasses as $hookClass) {
                     $hookInstance = GeneralUtility::makeInstance($hookClass);
-                    if (!($hookInstance instanceof \Tx_Seminars_Interfaces_Hook_BackEndModule)) {
+                    if (!$hookInstance instanceof BackEndModule) {
                         throw new \UnexpectedValueException(
                             'The class ' . \get_class($hookInstance) . ' is used for the event list view hook, ' .
-                            'but does not implement the \\Tx_Seminars_Interfaces_Hook_BackEndModule interface.',
+                            'but does not implement the BackEndModule interface.',
                             1301928334
                         );
                     }

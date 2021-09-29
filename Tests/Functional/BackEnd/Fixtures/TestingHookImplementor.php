@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\Functional\BackEnd\Fixtures;
 
+use OliverKlee\Seminars\Hooks\Interfaces\BackEndModule;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\SingletonInterface;
 
 /**
  * Testing implementor for the BE hooks.
  */
-final class TestingHookImplementor implements \Tx_Seminars_Interfaces_Hook_BackEndModule, SingletonInterface
+final class TestingHookImplementor implements BackEndModule, SingletonInterface
 {
     /**
      * @var int

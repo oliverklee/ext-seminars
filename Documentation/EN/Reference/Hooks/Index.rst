@@ -619,7 +619,7 @@ It's used like this:
 
 .. code-block:: php
 
-   class tx_seminarspaypal_Hooks_BackEndModule implements Tx_Seminars_Interfaces_Hook_BackEndModule {
+   class BackEndModuleHook implements BackEndModule {
          /**
         * Modifies the general e-mail sent via the back-end module.
         *
