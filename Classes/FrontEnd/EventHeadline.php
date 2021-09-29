@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use OliverKlee\Seminars\ViewHelpers\DateRangeViewHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -63,8 +64,8 @@ class Tx_Seminars_FrontEnd_EventHeadline extends \Tx_Seminars_FrontEnd_AbstractV
             return $result;
         }
 
-        /** @var \Tx_Seminars_ViewHelper_DateRange $dateRangeViewHelper */
-        $dateRangeViewHelper = GeneralUtility::makeInstance(\Tx_Seminars_ViewHelper_DateRange::class);
+        /** @var DateRangeViewHelper $dateRangeViewHelper */
+        $dateRangeViewHelper = GeneralUtility::makeInstance(DateRangeViewHelper::class);
 
         return $result . ', ' . $dateRangeViewHelper->render($event);
     }

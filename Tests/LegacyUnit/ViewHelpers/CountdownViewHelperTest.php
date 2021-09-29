@@ -8,13 +8,17 @@ use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
+use OliverKlee\Seminars\ViewHelpers\CountdownViewHelper;
 
+/**
+ * @covers \OliverKlee\Seminars\ViewHelpers\CountdownViewHelper
+ */
 final class CountdownViewHelperTest extends TestCase
 {
     use LanguageHelper;
 
     /**
-     * @var \Tx_Seminars_ViewHelper_Countdown
+     * @var CountdownViewHelper
      */
     private $subject = null;
 
@@ -28,7 +32,7 @@ final class CountdownViewHelperTest extends TestCase
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd($this->testingFramework->createFrontEndPage());
 
-        $this->subject = new \Tx_Seminars_ViewHelper_Countdown();
+        $this->subject = new CountdownViewHelper();
     }
 
     protected function tearDown(): void

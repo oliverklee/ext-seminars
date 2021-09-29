@@ -9,13 +9,17 @@ use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
+use OliverKlee\Seminars\ViewHelpers\DateRangeViewHelper;
 
+/**
+ * @covers \OliverKlee\Seminars\ViewHelpers\DateRangeViewHelper
+ */
 final class DateRangeViewHelperTest extends TestCase
 {
     use LanguageHelper;
 
     /**
-     * @var \Tx_Seminars_ViewHelper_DateRange
+     * @var DateRangeViewHelper
      */
     private $subject;
 
@@ -76,7 +80,7 @@ final class DateRangeViewHelperTest extends TestCase
 
         ConfigurationRegistry::getInstance()->set('plugin.tx_seminars', $this->configuration);
 
-        $this->subject = new \Tx_Seminars_ViewHelper_DateRange();
+        $this->subject = new DateRangeViewHelper();
     }
 
     protected function tearDown(): void

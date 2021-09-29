@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\ViewHelpers;
+
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 
 /**
  * This class represents a view helper for rendering the elements of a list as comma-separated titles.
  */
-class Tx_Seminars_ViewHelper_CommaSeparatedTitles
+class CommaSeparatedTitlesViewHelper
 {
     /**
      * Gets the titles of the elements in $list as a comma-separated list.

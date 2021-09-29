@@ -9,6 +9,7 @@ use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\ViewHelpers\CountdownViewHelper;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
@@ -130,8 +131,8 @@ final class CountdownTest extends TestCase
             ->method('findNextUpcoming')
             ->willReturn($event);
 
-        /** @var \Tx_Seminars_ViewHelper_Countdown&MockObject $viewHelper */
-        $viewHelper = $this->createPartialMock(\Tx_Seminars_ViewHelper_Countdown::class, ['render']);
+        /** @var CountdownViewHelper&MockObject $viewHelper */
+        $viewHelper = $this->createPartialMock(CountdownViewHelper::class, ['render']);
         $viewHelper->expects(self::once())
             ->method('render')
             ->with(self::equalTo($event->getBeginDateAsUnixTimeStamp()));

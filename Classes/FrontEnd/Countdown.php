@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\Exception\NotFoundException;
+use OliverKlee\Seminars\ViewHelpers\CountdownViewHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -16,7 +17,7 @@ class Tx_Seminars_FrontEnd_Countdown extends \Tx_Seminars_FrontEnd_AbstractView
     protected $mapper = null;
 
     /**
-     * @var \Tx_Seminars_ViewHelper_Countdown
+     * @var CountdownViewHelper
      */
     protected $viewHelper = null;
 
@@ -25,7 +26,7 @@ class Tx_Seminars_FrontEnd_Countdown extends \Tx_Seminars_FrontEnd_AbstractView
         $this->mapper = $mapper;
     }
 
-    public function injectCountDownViewHelper(\Tx_Seminars_ViewHelper_Countdown $viewHelper): void
+    public function injectCountDownViewHelper(CountdownViewHelper $viewHelper): void
     {
         $this->viewHelper = $viewHelper;
     }
@@ -41,8 +42,8 @@ class Tx_Seminars_FrontEnd_Countdown extends \Tx_Seminars_FrontEnd_AbstractView
             throw new \BadMethodCallException('The method injectEventMapper() needs to be called first.', 1333617194);
         }
         if ($this->viewHelper === null) {
-            /** @var \Tx_Seminars_ViewHelper_Countdown $viewHelper */
-            $viewHelper = GeneralUtility::makeInstance(\Tx_Seminars_ViewHelper_Countdown::class);
+            /** @var CountdownViewHelper $viewHelper */
+            $viewHelper = GeneralUtility::makeInstance(CountdownViewHelper::class);
             $this->injectCountDownViewHelper($viewHelper);
         }
 

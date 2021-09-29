@@ -10,11 +10,15 @@ use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\Model\TitledTestingModel;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\Model\UntitledTestingModel;
+use OliverKlee\Seminars\ViewHelpers\CommaSeparatedTitlesViewHelper;
 
+/**
+ * @covers \OliverKlee\Seminars\ViewHelpers\CommaSeparatedTitlesViewHelper
+ */
 final class CommaSeparatedTitlesViewHelperTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_ViewHelper_CommaSeparatedTitles
+     * @var CommaSeparatedTitlesViewHelper
      */
     private $subject;
 
@@ -28,11 +32,6 @@ final class CommaSeparatedTitlesViewHelperTest extends TestCase
      */
     private $list;
 
-    /**
-     * @var string
-     */
-    private const TIME_FORMAT = '%H:%M';
-
     protected function setUp(): void
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
@@ -40,7 +39,7 @@ final class CommaSeparatedTitlesViewHelperTest extends TestCase
         /** @var Collection<Titled> $items */
         $items = new Collection();
         $this->list = $items;
-        $this->subject = new \Tx_Seminars_ViewHelper_CommaSeparatedTitles();
+        $this->subject = new CommaSeparatedTitlesViewHelper();
     }
 
     protected function tearDown(): void
