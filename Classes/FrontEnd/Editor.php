@@ -22,7 +22,7 @@ class Tx_Seminars_FrontEnd_Editor extends \Tx_Seminars_FrontEnd_AbstractView
     private $objectUid = 0;
 
     /**
-     * @var array[] the form configuration
+     * @var array<string, mixed>
      */
     private $formConfiguration = [];
 
@@ -56,7 +56,7 @@ class Tx_Seminars_FrontEnd_Editor extends \Tx_Seminars_FrontEnd_AbstractView
     /**
      * Sets the form configuration.
      *
-     * @param array[] $formConfiguration the form configuration, must not be empty
+     * @param array<string, mixed> $formConfiguration the form configuration, must not be empty
      */
     public function setFormConfiguration(array $formConfiguration): void
     {

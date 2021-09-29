@@ -322,7 +322,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      *
      * In addition, the entered payment data is stored in the FE user session.
      *
-     * @param array $parameters the entered form data with the field names as array keys (including the submit button ...)
+     * @param array $parameters the entered form data with the field names as array keys (including the submit button)
      */
     public function processRegistration(array $parameters): void
     {
@@ -341,7 +341,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
     }
 
     /**
-     * Creates additional attendees as FE users and adds them to $registration.
+     * Creates additional attendees as FE users and adds them to the provided registration.
      */
     protected function createAdditionalAttendees(\Tx_Seminars_Model_Registration $registration): void
     {
@@ -1684,7 +1684,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
      * 2 => job title
      * 3 => e-mail address
      *
-     * @return array[] the entered person's data, will be empty if no additional persons have been registered
+     * @return array<int, array{0: string, 1: string, 2: string, 3: string}> the entered person's data, might be empty
      */
     public function getAdditionalRegisteredPersonsData(): array
     {

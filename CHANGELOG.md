@@ -38,7 +38,7 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Drop support for PHP 7.0 and 7.1 (#847)
 
 ### Fixed
-- Copy `FrontEndUserMapper::findByUserName` from oelib (#1001)
+- Copy `FrontEndUserMapper::findByUserName` from oelib (#1001, #1002)
 - Drop the typo3/cms-lang dependency (#980)
 - Provide a page to the fake frontend where needed (#969)
 - Add more type declarations
