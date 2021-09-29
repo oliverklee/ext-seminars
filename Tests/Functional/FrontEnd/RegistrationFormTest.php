@@ -15,7 +15,12 @@ final class RegistrationFormTest extends FunctionalTestCase
     /**
      * @var array<int, string>
      */
-    protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
+    protected $testExtensionsToLoad = [
+        'typo3conf/ext/oelib',
+        'typo3conf/ext/rn_base',
+        'typo3conf/ext/mkforms',
+        'typo3conf/ext/seminars',
+    ];
 
     /**
      * @var \Tx_Seminars_FrontEnd_RegistrationForm
@@ -33,6 +38,30 @@ final class RegistrationFormTest extends FunctionalTestCase
 
         $this->contentObject = $this->prophesize(ContentObjectRenderer::class)->reveal();
         $this->subject = new \Tx_Seminars_FrontEnd_RegistrationForm([], $this->contentObject);
+        $this->subject->setTestMode();
+    }
+
+    /**
+     * @test
+     */
+    public function getSeminarWithoutEventThrowsException(): void
+    {
+        $this->expectException(\BadMethodCallException::class);
+        $this->expectExceptionMessage('Please set a proper seminar object via $this->setSeminar().');
+        $this->expectExceptionCode(1333293187);
+
+        $this->subject->getSeminar();
+    }
+
+    /**
+     * @test
+     */
+    public function setSeminarSetsSeminar(): void
+    {
+        $event = new \Tx_Seminars_OldModel_Event();
+        $this->subject->setSeminar($event);
+
+        self::assertSame($event, $this->subject->getSeminar());
     }
 
     /**
@@ -144,5 +173,63 @@ final class RegistrationFormTest extends FunctionalTestCase
         $subject->setSeminar($event);
 
         self::assertTrue($subject->hasCheckboxes());
+    }
+
+    /**
+     * @test
+     */
+    public function processRegistrationWithoutEventThrowsException(): void
+    {
+        $this->expectException(\BadMethodCallException::class);
+        $this->expectExceptionMessage('Please set a proper seminar object via $this->setSeminar().');
+        $this->expectExceptionCode(1333293187);
+
+        $this->subject->processRegistration([]);
+    }
+
+    /**
+     * @test
+     */
+    public function processRegistrationWithoutAdditionalAttendeesNotCreatesAdditionalUsers(): void
+    {
+        $configuration = ['createAdditionalAttendeesAsFrontEndUsers' => 1];
+        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm($configuration, $this->contentObject);
+        $subject->setTestMode();
+        $subject->setFormConfiguration(['form.' => []]);
+
+        $event = \Tx_Seminars_OldModel_Event::fromData(['needs_registration' => 1]);
+        $subject->setSeminar($event);
+
+        $subject->processRegistration([]);
+
+        self::assertSame(
+            0,
+            $this->getDatabaseConnection()->selectCount('*', 'fe_users')
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function processRegistrationWithAdditionalAttendeeCreatesAdditionalUser(): void
+    {
+        $email = 'max@example.com';
+        $configuration = ['createAdditionalAttendeesAsFrontEndUsers' => 1];
+        $subject = new \Tx_Seminars_FrontEnd_RegistrationForm($configuration, $this->contentObject);
+        $subject->setTestMode();
+        $subject->setFormConfiguration(['form.' => []]);
+
+        $event = \Tx_Seminars_OldModel_Event::fromData(['needs_registration' => 1]);
+        $subject->setSeminar($event);
+
+        $attendeeData = \json_encode([['Max', 'Maxowski', 'developer', $email]]);
+        $subject->setFakedFormValue('structured_attendees_names', $attendeeData);
+
+        $subject->processRegistration([]);
+
+        self::assertSame(
+            1,
+            $this->getDatabaseConnection()->selectCount('*', 'fe_users', 'username = "' . $email . '"')
+        );
     }
 }

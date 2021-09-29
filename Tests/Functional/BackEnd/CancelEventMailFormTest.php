@@ -42,8 +42,6 @@ final class CancelEventMailFormTest extends FunctionalTestCase
     {
         GeneralUtility::purgeInstances();
         unset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['seminars']['backEndModule']);
-
-        parent::tearDown();
     }
 
     /**
