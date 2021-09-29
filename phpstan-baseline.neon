@@ -116,11 +116,6 @@ parameters:
 			path: Classes/FrontEnd/EventEditor.php
 
 		-
-			message: "#^Constant CR not found\\.$#"
-			count: 1
-			path: Classes/FrontEnd/RegistrationForm.php
-
-		-
 			message: "#^Method Tx_Seminars_FrontEnd_RegistrationForm\\:\\:getLoggedInUser\\(\\) should return Tx_Seminars_Model_FrontEndUser but returns OliverKlee\\\\Oelib\\\\Model\\\\FrontEndUser\\|null\\.$#"
 			count: 1
 			path: Classes/FrontEnd/RegistrationForm.php

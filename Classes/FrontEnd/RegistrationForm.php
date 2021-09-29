@@ -1144,7 +1144,7 @@ class Tx_Seminars_FrontEnd_RegistrationForm extends \Tx_Seminars_FrontEnd_Editor
                     $currentFormData = $this->translate('label_gender.I.' . (int)$currentFormData);
                 }
                 $processedFormData = str_replace(
-                    CR,
+                    "\r",
                     '<br />',
                     \htmlspecialchars($currentFormData, ENT_QUOTES | ENT_HTML5)
                 );
