@@ -79,12 +79,10 @@ class Tx_Seminars_Mapper_Event extends AbstractDataMapper
      * These boundaries are inclusive, i.e., events with a begin date of
      * exactly $minimum or $maximum will also be retrieved.
      *
-     * @param int $minimum
-     *        minimum begin date as a UNIX timestamp, must be >= 0
-     * @param int $maximum
-     *        maximum begin date as a UNIX timestamp, must be >= $minimum
+     * @param int $minimum minimum begin date as a UNIX timestamp, must be >= 0
+     * @param int $maximum maximum begin date as a UNIX timestamp, must be >= $minimum
      *
-     * @return Collection the found \Tx_Seminars_Model_Event models, will be empty if there are no matches
+     * @return Collection<\Tx_Seminars_Model_Event> the found event models, will be empty if there are no matches
      */
     public function findAllByBeginDate(int $minimum, int $maximum): Collection
     {
@@ -168,7 +166,7 @@ class Tx_Seminars_Mapper_Event extends AbstractDataMapper
     /**
      * Finds events that have the status "planned" and that have the automatic status change enabled.
      *
-     * @return Collection the Collection<Tx_Seminars_Model_Event>
+     * @return Collection<\Tx_Seminars_Model_Event>
      */
     public function findForAutomaticStatusChange(): Collection
     {
@@ -202,7 +200,7 @@ class Tx_Seminars_Mapper_Event extends AbstractDataMapper
      *
      * This method will only find complete events and dates, but no topics.
      *
-     * @return Collection the Collection<Tx_Seminars_Model_Event>
+     * @return Collection<\Tx_Seminars_Model_Event>
      */
     public function findForRegistrationDigestEmail(): Collection
     {
