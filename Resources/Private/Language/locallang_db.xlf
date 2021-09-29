@@ -367,9 +367,6 @@
 			<trans-unit id="tx_seminars_speakers.phone_mobile" xml:space="preserve">
 				<source>Phone number (mobile)</source>
 			</trans-unit>
-			<trans-unit id="tx_seminars_speakers.fax" xml:space="preserve">
-				<source>Fax number</source>
-			</trans-unit>
 			<trans-unit id="tx_seminars_speakers.email" xml:space="preserve">
 				<source>E-mail address</source>
 			</trans-unit>

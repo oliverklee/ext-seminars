@@ -798,7 +798,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
                 'phone_work',
                 'phone_home',
                 'phone_mobile',
-                'fax',
                 'email',
                 'cancelation_period',
             ],
@@ -814,7 +813,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
                 'phone_work',
                 'phone_home',
                 'phone_mobile',
-                'fax',
                 'email',
                 'cancelation_period',
                 'uid',
@@ -1963,7 +1961,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         $speaker->setPhoneWork(trim(strip_tags($formData[$prefix . 'phone_work'])));
         $speaker->setPhoneHome(trim(strip_tags($formData[$prefix . 'phone_home'])));
         $speaker->setPhoneMobile(trim(strip_tags($formData[$prefix . 'phone_mobile'])));
-        $speaker->setFax(trim(strip_tags($formData[$prefix . 'fax'])));
         $speaker->setEmailAddress(trim(strip_tags($formData[$prefix . 'email'])));
         $speaker->setCancelationPeriod((int)$formData[$prefix . 'cancelation_period']);
     }
@@ -2022,7 +2019,6 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
             'phone_work' => $speaker->getPhoneWork(),
             'phone_home' => $speaker->getPhoneHome(),
             'phone_mobile' => $speaker->getPhoneMobile(),
-            'fax' => $speaker->getFax(),
             'email' => $speaker->getEmailAddress(),
             'cancelation_period' => $speaker->getCancelationPeriod(),
         ];

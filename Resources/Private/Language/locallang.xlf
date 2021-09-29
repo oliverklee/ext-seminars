@@ -142,9 +142,6 @@
 			<trans-unit id="label_telephone" xml:space="preserve">
 				<source>Phone</source>
 			</trans-unit>
-			<trans-unit id="label_fax" xml:space="preserve">
-				<source>Fax</source>
-			</trans-unit>
 			<trans-unit id="label_email" xml:space="preserve">
 				<source>E-mail address</source>
 			</trans-unit>

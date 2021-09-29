@@ -99,8 +99,6 @@ displayed on the front end:
 
 - mobile phone number
 
-- fax number
-
 - e-mail address
 
 Speakers can be listed in event record in four different roles: As

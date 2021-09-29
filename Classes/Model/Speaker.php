@@ -216,27 +216,6 @@ class Tx_Seminars_Model_Speaker extends AbstractModel implements MailRole
     }
 
     /**
-     * @return string our fax number, will be empty if there's no fax number set
-     */
-    public function getFax(): string
-    {
-        return $this->getAsString('fax');
-    }
-
-    /**
-     * @param string $fax our fax number to set, may be empty
-     */
-    public function setFax(string $fax): void
-    {
-        $this->setAsString('fax', $fax);
-    }
-
-    public function hasFax(): bool
-    {
-        return $this->hasString('fax');
-    }
-
-    /**
      * @return string our e-mail address, will not be empty
      */
     public function getEmailAddress(): string
