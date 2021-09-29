@@ -22,7 +22,7 @@ final class MailNotifierConfigurationTest extends FunctionalTestCase
     /**
      * @var string
      */
-    const LABEL_PREFIX = 'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:';
+    private const LABEL_PREFIX = 'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:';
 
     /**
      * @var string[]

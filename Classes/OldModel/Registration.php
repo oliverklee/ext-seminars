@@ -23,7 +23,7 @@ class Tx_Seminars_OldModel_Registration extends AbstractModel
     /**
      * @var string[][]
      */
-    const BILLING_ADDRESS_FIELDS = [
+    private const BILLING_ADDRESS_FIELDS = [
         'company' => ['separator' => "\n"],
         'gender' => ['separator' => ' '],
         'name' => ['separator' => "\n"],

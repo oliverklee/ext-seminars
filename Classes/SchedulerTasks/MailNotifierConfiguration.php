@@ -22,7 +22,7 @@ class MailNotifierConfiguration implements AdditionalFieldProviderInterface
     /**
      * @var string
      */
-    const LABEL_PREFIX = 'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:';
+    private const LABEL_PREFIX = 'LLL:EXT:seminars/Resources/Private/Language/locallang.xlf:';
 
     /**
      * Gets additional fields to render in the form to add/edit a task

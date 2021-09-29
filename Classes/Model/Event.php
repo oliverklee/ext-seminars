@@ -22,32 +22,32 @@ class Tx_Seminars_Model_Event extends \Tx_Seminars_Model_AbstractTimeSpan implem
     /**
      * @var int represents the type for a single event
      */
-    const TYPE_COMPLETE = 0;
+    public const TYPE_COMPLETE = 0;
 
     /**
      * @var int represents the type for an event topic
      */
-    const TYPE_TOPIC = 1;
+    public const TYPE_TOPIC = 1;
 
     /**
      * @var int represents the type for an event date
      */
-    const TYPE_DATE = 2;
+    public const TYPE_DATE = 2;
 
     /**
      * @var int the status "planned" for an event
      */
-    const STATUS_PLANNED = 0;
+    public const STATUS_PLANNED = 0;
 
     /**
      * @var int the status "canceled" for an event
      */
-    const STATUS_CANCELED = 1;
+    public const STATUS_CANCELED = 1;
 
     /**
      * @var int the status "confirmed" for an event
      */
-    const STATUS_CONFIRMED = 2;
+    public const STATUS_CONFIRMED = 2;
 
     protected function getConfiguration(): Configuration
     {

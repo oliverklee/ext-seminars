@@ -20,12 +20,12 @@ final class DefaultControllerTest extends FunctionalTestCase
     /**
      * @var int
      */
-    const CURRENT_PAGE_UID = 1;
+    private const CURRENT_PAGE_UID = 1;
 
     /**
      * @var int
      */
-    const FOLDER_UID = 1;
+    private const FOLDER_UID = 1;
 
     /**
      * @var string[]

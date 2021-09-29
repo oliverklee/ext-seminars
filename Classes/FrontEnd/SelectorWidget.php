@@ -30,7 +30,7 @@ class Tx_Seminars_FrontEnd_SelectorWidget extends \Tx_Seminars_FrontEnd_Abstract
     /**
      * @var string the prefix of every subpart of the search widget
      */
-    const SUBPART_PREFIX = 'SEARCH_PART_';
+    private const SUBPART_PREFIX = 'SEARCH_PART_';
 
     /**
      * @var \Tx_Seminars_Bag_Event all seminars to show in the list view

@@ -8,7 +8,6 @@ use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\Configuration\PageFinder;
 use OliverKlee\Oelib\Http\HeaderCollector;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
-use OliverKlee\Seminars\BackEnd\AbstractEventMailForm;
 use OliverKlee\Seminars\Tests\Functional\BackEnd\Fixtures\TestingEventMailForm;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
@@ -307,7 +306,7 @@ final class AbstractEventMailFormTest extends FunctionalTestCase
         );
         $subject->render();
 
-        $url = $this->getRouteUrl(AbstractEventMailForm::MODULE_NAME, ['id' => $pageUid]);
+        $url = $this->getRouteUrl('web_seminars', ['id' => $pageUid]);
         self::assertSame('Location: ' . $url, $this->headerProxy->getLastAddedHeader());
     }
 }

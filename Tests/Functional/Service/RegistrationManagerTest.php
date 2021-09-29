@@ -27,7 +27,7 @@ final class RegistrationManagerTest extends FunctionalTestCase
     /**
      * @var string
      */
-    const EMAIL_TEMPLATE_PATH = 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html';
+    private const EMAIL_TEMPLATE_PATH = 'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html';
 
     /**
      * @var string[]

@@ -15,18 +15,17 @@ class Tx_Seminars_Model_FrontEndUserGroup extends OelibFrontEndUserGroup impleme
     /**
      * @var int the publish setting to immediately publish all events edited
      */
-    const PUBLISH_IMMEDIATELY = 0;
+    public const PUBLISH_IMMEDIATELY = 0;
 
     /**
      * @var int the publish setting for hiding only new events created
      */
-    const PUBLISH_HIDE_NEW = 1;
+    public const PUBLISH_HIDE_NEW = 1;
 
     /**
-     * @var int the publish setting for hiding newly created and edited
-     *              events
+     * @var int the publish setting for hiding newly created and edited events
      */
-    const PUBLISH_HIDE_EDITED = 2;
+    public const PUBLISH_HIDE_EDITED = 2;
 
     /**
      * Returns the setting for event publishing.

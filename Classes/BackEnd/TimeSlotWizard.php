@@ -20,17 +20,17 @@ class TimeSlotWizard extends AbstractFormElement
     /**
      * @var string
      */
-    const LABEL_KEY_PREFIX = 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.time_slot_wizard.';
+    private const LABEL_KEY_PREFIX = 'LLL:EXT:seminars/Resources/Private/Language/locallang_db.xlf:tx_seminars_seminars.time_slot_wizard.';
 
     /**
      * @var array<int, string>
      */
-    const FREQUENCIES = ['daily', 'weekly', 'monthly', 'yearly'];
+    private const FREQUENCIES = ['daily', 'weekly', 'monthly', 'yearly'];
 
     /**
      * @var string
      */
-    const DEFAULT_FREQUENCY = 'weekly';
+    private const DEFAULT_FREQUENCY = 'weekly';
 
     public function render(): array
     {

@@ -15,7 +15,7 @@ final class DataHandlerHookTest extends FunctionalTestCase
     /**
      * @var string
      */
-    const TABLE_SEMINARS = 'tx_seminars_seminars';
+    private const TABLE_SEMINARS = 'tx_seminars_seminars';
 
     /**
      * @var string[]

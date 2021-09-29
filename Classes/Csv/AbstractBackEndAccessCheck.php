@@ -19,7 +19,7 @@ abstract class AbstractBackEndAccessCheck implements CsvAccessCheck
      *
      * @see BackendUtility::getRecord
      */
-    const SHOW_PAGE_PERMISSION_BITS = 1;
+    private const SHOW_PAGE_PERMISSION_BITS = 1;
 
     /**
      * @var int

@@ -50,12 +50,12 @@ class Tx_Seminars_BagBuilder_Event extends AbstractBagBuilder
     /**
      * @var string the character list to trim the search words for
      */
-    const TRIM_CHARACTER_LIST = " ,\t\n\r\0\x0b";
+    private const TRIM_CHARACTER_LIST = " ,\t\n\r\0\x0b";
 
     /**
      * @var int the minimum search word length
      */
-    const MINIMUM_SEARCH_WORD_LENGTH = 4;
+    private const MINIMUM_SEARCH_WORD_LENGTH = 4;
 
     /**
      * Configures the seminar bag to work like a BE list: It will use the

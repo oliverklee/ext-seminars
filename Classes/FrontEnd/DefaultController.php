@@ -45,7 +45,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
     /**
      * @var string[]
      */
-    const VALID_SPEAKER_TYPES = ['speakers', 'partners', 'tutors', 'leaders'];
+    private const VALID_SPEAKER_TYPES = ['speakers', 'partners', 'tutors', 'leaders'];
 
     /**
      * @var string prefix for request parameters

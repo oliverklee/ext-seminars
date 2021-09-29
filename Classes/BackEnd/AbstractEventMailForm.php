@@ -25,7 +25,7 @@ abstract class AbstractEventMailForm
     /**
      * @var string
      */
-    const MODULE_NAME = 'web_seminars';
+    private const MODULE_NAME = 'web_seminars';
 
     /**
      * @var \Tx_Seminars_OldModel_Event the event which this e-mail form refers to
