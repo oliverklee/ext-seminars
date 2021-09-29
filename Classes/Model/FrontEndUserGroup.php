@@ -33,8 +33,7 @@ class Tx_Seminars_Model_FrontEndUserGroup extends OelibFrontEndUserGroup impleme
      *
      * If no publish settings have been set, PUBLISH_IMMEDIATELY is returned.
      *
-     * @return int the class constants PUBLISH_IMMEDIATELY, PUBLISH_HIDE_NEW
-     *                 or PUBLISH_HIDE_EDITED
+     * @return int the class constants PUBLISH_IMMEDIATELY, PUBLISH_HIDE_NEW or PUBLISH_HIDE_EDITED
      */
     public function getPublishSetting(): int
     {
@@ -53,22 +52,11 @@ class Tx_Seminars_Model_FrontEndUserGroup extends OelibFrontEndUserGroup impleme
         return $this->getAsInteger('tx_seminars_auxiliary_records_pid');
     }
 
-    /**
-     * Returns whether this user group has a PID for auxiliary records set.
-     *
-     * @return bool TRUE if this user group has PID for auxiliary records set,
-     *                 FALSE otherwise
-     */
     public function hasAuxiliaryRecordsPid(): bool
     {
         return $this->hasInteger('tx_seminars_auxiliary_records_pid');
     }
 
-    /**
-     * Checks whether this user group has a reviewer set.
-     *
-     * @return bool TRUE if a reviewer is set, FALSE otherwise
-     */
     public function hasReviewer(): bool
     {
         return $this->getReviewer() !== null;
@@ -85,8 +73,7 @@ class Tx_Seminars_Model_FrontEndUserGroup extends OelibFrontEndUserGroup impleme
     /**
      * Checks whether this user group has a storage PID for event records set.
      *
-     * @return bool TRUE if this user group has a event storage PID, FALSE
-     *                  otherwise
+     * @return bool TRUE if this user group has a event storage PID, FALSE otherwise
      */
     public function hasEventRecordPid(): bool
     {
@@ -96,8 +83,7 @@ class Tx_Seminars_Model_FrontEndUserGroup extends OelibFrontEndUserGroup impleme
     /**
      * Gets this user group's storage PID for event records.
      *
-     * @return int the PID for the storage of event records, will be zero
-     *                 if no PID has been set
+     * @return int the PID for the storage of event records, will be zero if no PID has been set
      */
     public function getEventRecordPid(): int
     {
@@ -107,21 +93,18 @@ class Tx_Seminars_Model_FrontEndUserGroup extends OelibFrontEndUserGroup impleme
     /**
      * Gets this user group's assigned default categories.
      *
-     * @return Collection the list of default categories assigned to this
+     * @return Collection<\Tx_Seminars_Model_Category> the default categories assigned to this
      *                       group, will be empty if no default categories are
      *                       assigned to this group
      */
     public function getDefaultCategories(): Collection
     {
-        return $this->getAsCollection('tx_seminars_default_categories');
+        /** @var Collection<\Tx_Seminars_Model_Category> $categories */
+        $categories = $this->getAsCollection('tx_seminars_default_categories');
+
+        return $categories;
     }
 
-    /**
-     * Checks whether this user group has default categories assigned.
-     *
-     * @return bool TRUE if this group has at least one default category,
-     *                 FALSE otherwise
-     */
     public function hasDefaultCategories(): bool
     {
         return !$this->getDefaultCategories()->isEmpty();
@@ -140,8 +123,6 @@ class Tx_Seminars_Model_FrontEndUserGroup extends OelibFrontEndUserGroup impleme
 
     /**
      * Checks whether this user group has a default organizer set.
-     *
-     * @return bool
      */
     public function hasDefaultOrganizer(): bool
     {

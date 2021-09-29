@@ -2186,8 +2186,8 @@ final class EventTest extends TestCase
      */
     public function setRegistrationsSetsRegistrations(): void
     {
+        /** @var Collection<\Tx_Seminars_Model_Registration> $registrations */
         $registrations = new Collection();
-
         $this->subject->setRegistrations($registrations);
 
         self::assertSame(
@@ -2201,6 +2201,7 @@ final class EventTest extends TestCase
      */
     public function getRegularRegistrationsReturnsRegularRegistrations(): void
     {
+        /** @var Collection<\Tx_Seminars_Model_Registration> $registrations */
         $registrations = new Collection();
         $registration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)
             ->getLoadedTestingModel(['registration_queue' => 0]);
@@ -2218,6 +2219,7 @@ final class EventTest extends TestCase
      */
     public function getRegularRegistrationsNotReturnsQueueRegistrations(): void
     {
+        /** @var Collection<\Tx_Seminars_Model_Registration> $registrations */
         $registrations = new Collection();
         $registration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)
             ->getLoadedTestingModel(['registration_queue' => 1]);
@@ -2234,6 +2236,7 @@ final class EventTest extends TestCase
      */
     public function getQueueRegistrationsReturnsQueueRegistrations(): void
     {
+        /** @var Collection<\Tx_Seminars_Model_Registration> $registrations */
         $registrations = new Collection();
         $registration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)
             ->getLoadedTestingModel(['registration_queue' => 1]);
@@ -2251,6 +2254,7 @@ final class EventTest extends TestCase
      */
     public function getQueueRegistrationsNotReturnsRegularRegistrations(): void
     {
+        /** @var Collection<\Tx_Seminars_Model_Registration> $registrations */
         $registrations = new Collection();
         $registration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)
             ->getLoadedTestingModel(['registration_queue' => 0]);
@@ -2291,6 +2295,7 @@ final class EventTest extends TestCase
     {
         $this->subject->setDateOfLastRegistrationDigestEmailAsUnixTimeStamp(1);
 
+        /** @var Collection<\Tx_Seminars_Model_Registration> $registrations */
         $registrations = new Collection();
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setData(['crdate' => 2]);
@@ -2307,6 +2312,7 @@ final class EventTest extends TestCase
     {
         $this->subject->setDateOfLastRegistrationDigestEmailAsUnixTimeStamp(2);
 
+        /** @var Collection<\Tx_Seminars_Model_Registration> $registrations */
         $registrations = new Collection();
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setData(['crdate' => 1]);
@@ -2323,6 +2329,7 @@ final class EventTest extends TestCase
     {
         $this->subject->setDateOfLastRegistrationDigestEmailAsUnixTimeStamp(1);
 
+        /** @var Collection<\Tx_Seminars_Model_Registration> $registrations */
         $registrations = new Collection();
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setData(['crdate' => 1]);
@@ -2848,7 +2855,9 @@ final class EventTest extends TestCase
      */
     public function attachRegistrationAddsRegistration(): void
     {
-        $this->subject->setRegistrations(new Collection());
+        /** @var Collection<\Tx_Seminars_Model_Registration> $registrations */
+        $registrations = new Collection();
+        $this->subject->setRegistrations($registrations);
 
         $registration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel([]);
         $this->subject->attachRegistration($registration);
@@ -2863,6 +2872,7 @@ final class EventTest extends TestCase
      */
     public function attachRegistrationNotRemovesExistingRegistration(): void
     {
+        /** @var Collection<\Tx_Seminars_Model_Registration> $registrations */
         $registrations = new Collection();
         $oldRegistration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)->getNewGhost();
         $registrations->add($oldRegistration);
@@ -2881,7 +2891,9 @@ final class EventTest extends TestCase
      */
     public function attachRegistrationSetsEventForRegistration(): void
     {
-        $this->subject->setRegistrations(new Collection());
+        /** @var Collection<\Tx_Seminars_Model_Registration> $registrations */
+        $registrations = new Collection();
+        $this->subject->setRegistrations($registrations);
 
         $registration = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class)->getLoadedTestingModel([]);
         $this->subject->attachRegistration($registration);
@@ -2917,6 +2929,7 @@ final class EventTest extends TestCase
     {
         $this->subject->setData([]);
 
+        /** @var Collection<\Tx_Seminars_Model_PaymentMethod> $paymentMethods */
         $paymentMethods = new Collection();
         $this->subject->setPaymentMethods($paymentMethods);
 

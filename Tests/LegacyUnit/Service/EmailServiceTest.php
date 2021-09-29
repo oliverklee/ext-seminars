@@ -155,7 +155,9 @@ final class EmailServiceTest extends TestCase
      */
     public function sendEmailToAttendeesForEventWithoutRegistrationsNotSendsMail(): void
     {
-        $this->event->setRegistrations(new Collection());
+        /** @var Collection<\Tx_Seminars_Model_Registration> $registrations */
+        $registrations = new Collection();
+        $this->event->setRegistrations($registrations);
 
         $this->email->expects(self::exactly(0))->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);
@@ -341,6 +343,7 @@ final class EmailServiceTest extends TestCase
     {
         $registration = new \Tx_Seminars_Model_Registration();
         $registration->setData([]);
+        /** @var Collection<\Tx_Seminars_Model_Registration> $registrations */
         $registrations = new Collection();
         $registrations->add($registration);
         $this->event->setRegistrations($registrations);

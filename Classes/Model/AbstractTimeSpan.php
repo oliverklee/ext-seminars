@@ -11,10 +11,7 @@ use OliverKlee\Oelib\Model\AbstractModel;
 abstract class Tx_Seminars_Model_AbstractTimeSpan extends AbstractModel
 {
     /**
-     * Returns our begin date as UNIX time-stamp.
-     *
-     * @return int our begin date as UNIX time-stamp, will be >= 0,
-     *                 0 means "no begin date"
+     * @return int our begin date as UNIX time-stamp, will be >= 0, 0 means "no begin date"
      */
     public function getBeginDateAsUnixTimeStamp(): int
     {
@@ -22,13 +19,9 @@ abstract class Tx_Seminars_Model_AbstractTimeSpan extends AbstractModel
     }
 
     /**
-     * Sets our begin date as UNIX time-stamp.
-     *
      * @param int $beginDate our begin date as UNIX time-stamp, must be >= 0, 0 means "no begin date"
-     *
-     * @return void
      */
-    public function setBeginDateAsUnixTimeStamp(int $beginDate)
+    public function setBeginDateAsUnixTimeStamp(int $beginDate): void
     {
         if ($beginDate < 0) {
             throw new \InvalidArgumentException('The parameter $beginDate must be >= 0.', 1333293455);
@@ -38,8 +31,6 @@ abstract class Tx_Seminars_Model_AbstractTimeSpan extends AbstractModel
     }
 
     /**
-     * Returns whether this time-span has a begin date.
-     *
      * @return bool TRUE if this time-span has a begin date, FALSE otherwise
      */
     public function hasBeginDate(): bool
@@ -48,10 +39,7 @@ abstract class Tx_Seminars_Model_AbstractTimeSpan extends AbstractModel
     }
 
     /**
-     * Returns our end date as UNIX time-stamp.
-     *
-     * @return int our end date as UNIX time-stamp, will be >= 0,
-     *                 0 means "no end date"
+     * @return int our end date as UNIX time-stamp, will be >= 0, 0 means "no end date"
      */
     public function getEndDateAsUnixTimeStamp(): int
     {
@@ -59,13 +47,9 @@ abstract class Tx_Seminars_Model_AbstractTimeSpan extends AbstractModel
     }
 
     /**
-     * Sets our end date as UNIX time-stamp.
-     *
      * @param int $endDate our end date as UNIX time-stamp, must be >= 0, 0 means "no end date"
-     *
-     * @return void
      */
-    public function setEndDateAsUnixTimeStamp(int $endDate)
+    public function setEndDateAsUnixTimeStamp(int $endDate): void
     {
         if ($endDate < 0) {
             throw new \InvalidArgumentException('The parameter $endDate must be >= 0.', 1333293465);
@@ -74,29 +58,23 @@ abstract class Tx_Seminars_Model_AbstractTimeSpan extends AbstractModel
         $this->setAsInteger('end_date', $endDate);
     }
 
-    /**
-     * Returns whether this time-span has an end date.
-     *
-     * @return bool TRUE if this time-span has an end date, FALSE otherwise
-     */
     public function hasEndDate(): bool
     {
         return $this->hasInteger('end_date');
     }
 
     /**
-     * Returns our speakers.
-     *
-     * @return Collection our speakers, will be empty if this time-span has no speakers
+     * @return Collection<\Tx_Seminars_Model_Speaker>
      */
     public function getSpeakers(): Collection
     {
-        return $this->getAsCollection('speakers');
+        /** @var Collection<\Tx_Seminars_Model_Speaker> $speakers */
+        $speakers = $this->getAsCollection('speakers');
+
+        return $speakers;
     }
 
     /**
-     * Returns our room.
-     *
      * @return string our room, will be empty if this time-span has no place
      */
     public function getRoom(): string
@@ -105,22 +83,13 @@ abstract class Tx_Seminars_Model_AbstractTimeSpan extends AbstractModel
     }
 
     /**
-     * Sets our room.
-     *
      * @param string $room our room, may be empty
-     *
-     * @return void
      */
-    public function setRoom(string $room)
+    public function setRoom(string $room): void
     {
         $this->setAsString('room', $room);
     }
 
-    /**
-     * Returns whether this time-span has a room.
-     *
-     * @return bool
-     */
     public function hasRoom(): bool
     {
         return $this->hasString('room');

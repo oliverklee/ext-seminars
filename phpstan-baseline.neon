@@ -121,11 +121,6 @@ parameters:
 			path: Classes/FrontEnd/RegistrationForm.php
 
 		-
-			message: "#^Parameter \\#1 \\$list of method OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection\\:\\:append\\(\\) expects iterable\\<OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\>&OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection, OliverKlee\\\\Oelib\\\\DataStructures\\\\Collection given\\.$#"
-			count: 1
-			path: Classes/Model/FrontEndUser.php
-
-		-
 			message: "#^Parameter \\#1 \\$paymentMethod of method Tx_Seminars_Model_Registration\\:\\:setPaymentMethod\\(\\) expects Tx_Seminars_Model_PaymentMethod\\|null, OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\|null given\\.$#"
 			count: 1
 			path: Classes/Service/RegistrationManager.php

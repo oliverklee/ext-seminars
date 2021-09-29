@@ -53,12 +53,12 @@ class Tx_Seminars_Model_BackEndUser extends OelibBackEndUser
      *
      * This will be the first set PID found in the user's groups.
      *
-     * @param string $type
-     *        the type of the record, must be "event", "registration" or
-     *        "auxiliary"
+     * @param string $type the type of the record, must be "event", "registration" or "auxiliary"
      *
      * @return int the PID for newly created records, will be 0 if no group
      *                 has a PID set for new records of the given type
+     *
+     * @throws \InvalidArgumentException
      */
     private function getRecordFolderFromGroup(string $type): int
     {

@@ -11,8 +11,6 @@ use OliverKlee\Seminars\Model\Interfaces\Titled;
 class Tx_Seminars_Model_PaymentMethod extends AbstractModel implements Titled
 {
     /**
-     * Returns our title.
-     *
      * @return string our title, will not be empty
      */
     public function getTitle(): string
@@ -21,13 +19,9 @@ class Tx_Seminars_Model_PaymentMethod extends AbstractModel implements Titled
     }
 
     /**
-     * Sets our title.
-     *
      * @param string $title our title to set, must not be empty
-     *
-     * @return void
      */
-    public function setTitle(string $title)
+    public function setTitle(string $title): void
     {
         if ($title == '') {
             throw new \InvalidArgumentException('The parameter $title must not be empty.', 1333296882);
@@ -37,8 +31,6 @@ class Tx_Seminars_Model_PaymentMethod extends AbstractModel implements Titled
     }
 
     /**
-     * Returns our description.
-     *
      * @return string our description, might be empty
      */
     public function getDescription(): string
@@ -47,23 +39,13 @@ class Tx_Seminars_Model_PaymentMethod extends AbstractModel implements Titled
     }
 
     /**
-     * Sets our description.
-     *
      * @param string $description our description to set, may be empty
-     *
-     * @return void
      */
-    public function setDescription(string $description)
+    public function setDescription(string $description): void
     {
         $this->setAsString('description', $description);
     }
 
-    /**
-     * Returns whether this payment method has a description.
-     *
-     * @return bool TRUE if this payment method has a description, FALSE
-     *                 otherwise
-     */
     public function hasDescription(): bool
     {
         return $this->hasString('description');

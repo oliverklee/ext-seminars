@@ -8553,13 +8553,16 @@ final class DefaultControllerTest extends TestCase
         MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $mapper);
 
         $event = $mapper->getLoadedTestingModel(['title' => 'TDD for starters']);
+        /** @var Collection<\Tx_Seminars_Model_Registration> $registrations */
         $registrations = new Collection();
         $registrations->add(new \Tx_Seminars_Model_Registration());
         $event->setRegistrations($registrations);
 
+        /** @var Collection<\Tx_Seminars_Model_Registration> $cloneRegistrations */
+        $cloneRegistrations = new Collection();
         $hiddenClone = clone $event;
         $hiddenClone->markAsHidden();
-        $hiddenClone->setRegistrations(new Collection());
+        $hiddenClone->setRegistrations($cloneRegistrations);
         $mapper->expects(self::once())->method('save')->with($hiddenClone);
 
         $subject = new TestingDefaultController();

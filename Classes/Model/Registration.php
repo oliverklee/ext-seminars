@@ -13,8 +13,6 @@ use OliverKlee\Seminars\Model\Interfaces\Titled;
 class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
 {
     /**
-     * Returns the title of this registration.
-     *
      * @return string the title of this registration, will not be empty
      */
     public function getTitle(): string
@@ -23,15 +21,11 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
     }
 
     /**
-     * Sets the title of this registration.
-     *
      * @param string $title the title of this registration, must not be empty
-     *
-     * @return void
      *
      * @throws \InvalidArgumentException
      */
-    public function setTitle(string $title)
+    public function setTitle(string $title): void
     {
         if ($title === '') {
             throw new \InvalidArgumentException('The parameter $title must not be empty.', 1333296917);
@@ -53,11 +47,6 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
         $this->set('user', $user);
     }
 
-    /**
-     * Returns the event of this registration.
-     *
-     * @return \Tx_Seminars_Model_Event the event of this registration
-     */
     public function getEvent(): \Tx_Seminars_Model_Event
     {
         /** @var \Tx_Seminars_Model_Event $event */
@@ -78,14 +67,7 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
         return $this->getEvent();
     }
 
-    /**
-     * Sets the event of this registration.
-     *
-     * @param \Tx_Seminars_Model_Event $event the event to set for this registration
-     *
-     * @return void
-     */
-    public function setEvent(\Tx_Seminars_Model_Event $event)
+    public function setEvent(\Tx_Seminars_Model_Event $event): void
     {
         $this->set('seminar', $event);
     }
@@ -95,42 +77,24 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
      *
      * This is an alias for setEvent necessary for the relation to the event.
      *
-     * @param \Tx_Seminars_Model_Event $event the event to set for this registration
-     *
      * @see setEvent
-     *
-     * @return void
      */
-    public function setSeminar(\Tx_Seminars_Model_Event $event)
+    public function setSeminar(\Tx_Seminars_Model_Event $event): void
     {
         $this->setEvent($event);
     }
 
-    /**
-     * Returns whether this registration is on the registration queue.
-     *
-     * @return bool TRUE if this registration is on the registration queue, FALSE otherwise
-     */
     public function isOnRegistrationQueue(): bool
     {
         return $this->getAsBoolean('registration_queue');
     }
 
-    /**
-     * Sets whether this registration is on the registration queue.
-     *
-     * @param bool $isOnQueue whether this registration should be on the registration queue
-     *
-     * @return void
-     */
-    public function setOnRegistrationQueue(bool $isOnQueue)
+    public function setOnRegistrationQueue(bool $isOnQueue): void
     {
         $this->setAsBoolean('registration_queue', $isOnQueue);
     }
 
     /**
-     * Returns the name of the price of this registration.
-     *
      * @return string the name of the price of this registration, e.g. "Price regular", might be empty
      */
     public function getPrice(): string
@@ -139,13 +103,9 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
     }
 
     /**
-     * Sets the name of the price of this registration.
-     *
      * @param string $price the name of the price of this registration to set, e.g. "Price regular", may be empty
-     *
-     * @return void
      */
-    public function setPrice(string $price)
+    public function setPrice(string $price): void
     {
         $this->setAsString('price', $price);
     }
@@ -169,11 +129,9 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
      *
      * @param int $seats the number of registered seats of this registration, must be >= 0
      *
-     * @return void
-     *
      * @throws \InvalidArgumentException
      */
-    public function setSeats(int $seats)
+    public function setSeats(int $seats): void
     {
         if ($seats < 0) {
             throw new \InvalidArgumentException('The parameter $seats must be >= 0.', 1333296926);
@@ -184,8 +142,6 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
 
     /**
      * Returns whether the front-end user registered themselves.
-     *
-     * @return bool TRUE if the front-end user registered themselves, FALSE otherwise
      */
     public function hasRegisteredThemselves(): bool
     {
@@ -194,19 +150,13 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
 
     /**
      * Sets whether the front-end user registered themselves.
-     *
-     * @param bool $registeredThemselves whether the front-end user registered themselves
-     *
-     * @return void
      */
-    public function setRegisteredThemselves(bool $registeredThemselves)
+    public function setRegisteredThemselves(bool $registeredThemselves): void
     {
         $this->setAsBoolean('registered_themselves', $registeredThemselves);
     }
 
     /**
-     * Returns the total price of this registration.
-     *
      * @return float the total price of this registration, will be >= 0
      */
     public function getTotalPrice(): float
@@ -215,15 +165,11 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
     }
 
     /**
-     * Sets the total price of the registration.
-     *
      * @param float $price the total price of to set, must be >= 0
-     *
-     * @return void
      *
      * @throws \InvalidArgumentException
      */
-    public function setTotalPrice(float $price)
+    public function setTotalPrice(float $price): void
     {
         if ($price < 0) {
             throw new \InvalidArgumentException('The parameter $price must be >= 0.', 1333296931);
@@ -233,8 +179,6 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
     }
 
     /**
-     * Returns the names of the attendees of this registration.
-     *
      * @return string the names of the attendees of this registration separated by CRLF, might be empty
      */
     public function getAttendeesNames(): string
@@ -243,15 +187,10 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
     }
 
     /**
-     * Sets the names of the attendees of this registration.
-     *
-     * @param string $attendeesNames
-     *        the names of the attendees of this registration to set separated
+     * @param string $attendeesNames the names of the attendees of this registration to set separated
      *        by CRLF, may be empty
-     *
-     * @return void
      */
-    public function setAttendeesNames(string $attendeesNames)
+    public function setAttendeesNames(string $attendeesNames): void
     {
         $this->setAsString('attendees_names', $attendeesNames);
     }
@@ -259,55 +198,40 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
     /**
      * Gets the additional persons (FE users) attached to this registration.
      *
-     * @return Collection additional persons, will be empty if there are none
+     * @return Collection<\Tx_Seminars_Model_FrontEndUser>
      */
     public function getAdditionalPersons(): Collection
     {
-        return $this->getAsCollection('additional_persons');
+        /** @var Collection<\Tx_Seminars_Model_FrontEndUser> $additionalPersons */
+        $additionalPersons = $this->getAsCollection('additional_persons');
+
+        return $additionalPersons;
     }
 
     /**
      * Sets the additional persons attached to this registration.
      *
-     * @param Collection $persons the additional persons (FE users), may be empty
-     *
-     * @return void
+     * @param Collection<\Tx_Seminars_Model_FrontEndUser> $persons
      */
-    public function setAdditionalPersons(Collection $persons)
+    public function setAdditionalPersons(Collection $persons): void
     {
         $this->set('additional_persons', $persons);
     }
 
-    /**
-     * Returns whether this registration is paid.
-     *
-     * @return bool TRUE if this registration has a payment date, FALSE otherwise
-     */
     public function isPaid(): bool
     {
         return $this->getPaymentDateAsUnixTimestamp() > 0;
     }
 
-    /**
-     * Returns the payment date of this registration as a UNIX timestamp.
-     *
-     * @return int the payment date of this registration as a UNIX timestamp, will be >= 0
-     */
     public function getPaymentDateAsUnixTimestamp(): int
     {
         return $this->getAsInteger('datepaid');
     }
 
     /**
-     * Sets the payment date of this registration as a UNIX timestamp.
-     *
-     * @param int $timestamp the payment date of this registration as a UNIX timestamp, must be >= 0
-     *
-     * @return void
-     *
      * @throws \InvalidArgumentException
      */
-    public function setPaymentDateAsUnixTimestamp(int $timestamp)
+    public function setPaymentDateAsUnixTimestamp(int $timestamp): void
     {
         if ($timestamp < 0) {
             throw new \InvalidArgumentException('The parameter $timestamp must be >= 0.', 1333296945);
@@ -343,10 +267,8 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
      * Sets the account number of the bank account of this registration.
      *
      * @param string $accountNumber the account number of the bank account of this registration to , may be empty
-     *
-     * @return void
      */
-    public function setAccountNumber(string $accountNumber)
+    public function setAccountNumber(string $accountNumber): void
     {
         $this->setAsString('account_number', $accountNumber);
     }
@@ -364,11 +286,9 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
     /**
      * Sets the bank code of the bank account of this registration.
      *
-     * @param string $bankCode *        the bank code of the bank account of this registration, may be empty
-     *
-     * @return void
+     * @param string $bankCode the bank code of the bank account of this registration, may be empty
      */
-    public function setBankCode(string $bankCode)
+    public function setBankCode(string $bankCode): void
     {
         $this->setAsString('bank_code', $bankCode);
     }
@@ -387,10 +307,8 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
      * Sets the bank name of the bank account of this registration.
      *
      * @param string $bankName the bank name of the bank account of this registration to set, may be empty
-     *
-     * @return void
      */
-    public function setBankName(string $bankName)
+    public function setBankName(string $bankName): void
     {
         $this->setAsString('bank_name', $bankName);
     }
@@ -409,10 +327,8 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
      * Sets the name of the owner of the bank account of this registration.
      *
      * @param string $accountOwner the name of the owner of the bank account of this registration, may be empty
-     *
-     * @return void
      */
-    public function setAccountOwner(string $accountOwner)
+    public function setAccountOwner(string $accountOwner): void
     {
         $this->setAsString('account_owner', $accountOwner);
     }
@@ -431,10 +347,8 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
      * Sets the name of the company of the billing address of this registration.
      *
      * @param string $company the name of the company of this registration, may be empty
-     *
-     * @return void
      */
-    public function setCompany(string $company)
+    public function setCompany(string $company): void
     {
         $this->setAsString('company', $company);
     }
@@ -449,14 +363,7 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
         return $this->getAsString('name');
     }
 
-    /**
-     * Sets the name.
-     *
-     * @param string $name
-     *
-     * @return void
-     */
-    public function setName(string $name)
+    public function setName(string $name): void
     {
         $this->setAsString('name', $name);
     }
@@ -478,17 +385,14 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
     /**
      * Sets the gender of the billing address of this registration.
      *
-     * @param int $gender
-     *        the gender of this registration, must be one of the following:
+     * @param int $gender the gender of this registration, must be one of the following:
      *        - FrontEndUser::GENDER_MALE
      *        - FrontEndUser::GENDER_FEMALE
      *        - FrontEndUser::GENDER_UNKNOWN
      *
-     * @return void
-     *
      * @throws \InvalidArgumentException
      */
-    public function setGender(int $gender)
+    public function setGender(int $gender): void
     {
         $allowedGenders = [
             OelibFrontEndUser::GENDER_MALE,
@@ -510,7 +414,7 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
     /**
      * Returns the address (usually only the street) of the billing address of this registration.
      *
-     * @return string the address of this registration, will be empty
+     * @return string the address of this registration, might be empty
      */
     public function getAddress(): string
     {
@@ -521,10 +425,8 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
      * Sets the address (usually only the street) of the billing address of this registration.
      *
      * @param string $address the address of this registration to set, may be empty
-     *
-     * @return void
      */
-    public function setAddress(string $address)
+    public function setAddress(string $address): void
     {
         $this->setAsString('address', $address);
     }
@@ -532,7 +434,7 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
     /**
      * Returns the ZIP code of the billing address of this registration.
      *
-     * @return string the ZIP code of this registration, will be empty
+     * @return string the ZIP code of this registration, might be empty
      */
     public function getZip(): string
     {
@@ -543,10 +445,8 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
      * Sets the ZIP code of the billing address of this registration.
      *
      * @param string $zip the ZIP code of this registration to set, may be empty
-     *
-     * @return void
      */
-    public function setZip(string $zip)
+    public function setZip(string $zip): void
     {
         $this->setAsString('zip', $zip);
     }
@@ -554,7 +454,7 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
     /**
      * Returns the city of the billing address of this registration.
      *
-     * @return string the city of this registration, will be empty
+     * @return string the city of this registration, might be empty
      */
     public function getCity(): string
     {
@@ -565,10 +465,8 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
      * Sets the city of the billing address of this registration.
      *
      * @param string $city the city of this registration to set, may be empty
-     *
-     * @return void
      */
-    public function setCity(string $city)
+    public function setCity(string $city): void
     {
         $this->setAsString('city', $city);
     }
@@ -576,7 +474,7 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
     /**
      * Returns the country name of the billing address of this registration.
      *
-     * @return string the country name of this registration, will be empty
+     * @return string the country name of this registration, might be empty
      */
     public function getCountry(): string
     {
@@ -587,10 +485,8 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
      * Sets the country name of the billing address of this registration.
      *
      * @param string $country the country name of this registration to set
-     *
-     * @return void
      */
-    public function setCountry(string $country)
+    public function setCountry(string $country): void
     {
         $this->setAsString('country', $country);
     }
@@ -598,7 +494,7 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
     /**
      * Returns the phone number of the billing address of this registration.
      *
-     * @return string the phone number of this registration, will be empty
+     * @return string the phone number of this registration, might be empty
      */
     public function getPhone(): string
     {
@@ -609,10 +505,8 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
      * Sets the phone number of the billing address of this registration.
      *
      * @param string $phone the phone number of this registration, may be empty
-     *
-     * @return void
      */
-    public function setPhone(string $phone)
+    public function setPhone(string $phone): void
     {
         $this->setAsString('telephone', $phone);
     }
@@ -620,7 +514,7 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
     /**
      * Returns the e-mail address of the billing address of this registration.
      *
-     * @return string the e-mail address of this registration, will be empty
+     * @return string the e-mail address of this registration, might be empty
      */
     public function getEmailAddress(): string
     {
@@ -631,18 +525,14 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
      * Sets the e-mail address of the billing address of this registration.
      *
      * @param string $email the e-mail address of this registration, may be empty
-     *
-     * @return void
      */
-    public function setEnailAddress(string $email)
+    public function setEnailAddress(string $email): void
     {
         $this->setAsString('email', $email);
     }
 
     /**
      * Returns whether the attendees of this registration have attended the event.
-     *
-     * @return bool TRUE if the attendees of this registration have attended the event, FALSE otherwise
      */
     public function hasAttended(): bool
     {
@@ -650,9 +540,7 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
     }
 
     /**
-     * Returns the interests of this registration.
-     *
-     * @return string the interests of this registration, will be empty
+     * @return string the interests of this registration, might be empty
      */
     public function getInterests(): string
     {
@@ -660,21 +548,15 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
     }
 
     /**
-     * Sets the interests of this registration.
-     *
      * @param string $interests the interests of this registration to set, may be empty
-     *
-     * @return void
      */
-    public function setInterests(string $interests)
+    public function setInterests(string $interests): void
     {
         $this->setAsString('interests', $interests);
     }
 
     /**
-     * Returns the expectations of this registration.
-     *
-     * @return string the expectations of this registration, will be empty
+     * @return string the expectations of this registration, might be empty
      */
     public function getExpectations(): string
     {
@@ -682,21 +564,15 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
     }
 
     /**
-     * Sets the expectations of this registration.
-     *
      * @param string $expectations the expectations of this registration, may be empty
-     *
-     * @return void
      */
-    public function setExpectations(string $expectations)
+    public function setExpectations(string $expectations): void
     {
         $this->setAsString('expectations', $expectations);
     }
 
     /**
-     * Returns the background knowledge of this registration.
-     *
-     * @return string the background knowledge of this registration, will be empty
+     * @return string the background knowledge of this registration, might be empty
      */
     public function getBackgroundKnowledge(): string
     {
@@ -704,21 +580,15 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
     }
 
     /**
-     * Sets the background knowledge of this registration.
-     *
      * @param string $backgroundKnowledge the background knowledge of this registration to set, may be empty
-     *
-     * @return void
      */
-    public function setBackgroundKnowledge(string $backgroundKnowledge)
+    public function setBackgroundKnowledge(string $backgroundKnowledge): void
     {
         $this->setAsString('background_knowledge', $backgroundKnowledge);
     }
 
     /**
-     * Returns the accommodation of this registration.
-     *
-     * @return string the accommodation of this registration, will be empty
+     * @return string the accommodation of this registration, might be empty
      */
     public function getAccommodation(): string
     {
@@ -726,31 +596,26 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
     }
 
     /**
-     * Sets the accommodation of this registration.
-     *
      * @param string $accommodation the accommodation of this registration to set, may be empty
-     *
-     * @return void
      */
-    public function setAccommodation(string $accommodation)
+    public function setAccommodation(string $accommodation): void
     {
         $this->setAsString('accommodation', $accommodation);
     }
 
     /**
-     * Returns the lodgings of this registration.
-     *
-     * @return Collection the lodgings of this registration
+     * @return Collection<\Tx_Seminars_Model_Lodging>
      */
     public function getLodgings(): Collection
     {
-        return $this->getAsCollection('lodgings');
+        /** @var Collection<\Tx_Seminars_Model_Lodging> $lodgings */
+        $lodgings = $this->getAsCollection('lodgings');
+
+        return $lodgings;
     }
 
     /**
-     * Returns the food of this registration.
-     *
-     * @return string the food of this registration, will be empty
+     * @return string the food of this registration, might be empty
      */
     public function getFood(): string
     {
@@ -758,31 +623,26 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
     }
 
     /**
-     * Sets the food of this registration.
-     *
      * @param string $food the food of this registration to set, may be empty
-     *
-     * @return void
      */
-    public function setFood(string $food)
+    public function setFood(string $food): void
     {
         $this->setAsString('food', $food);
     }
 
     /**
-     * Returns the foods of this registration.
-     *
-     * @return Collection the foods of this registration
+     * @return Collection<\Tx_Seminars_Model_Food>
      */
     public function getFoods(): Collection
     {
-        return $this->getAsCollection('foods');
+        /** @var Collection<\Tx_Seminars_Model_Food> $foods */
+        $foods = $this->getAsCollection('foods');
+
+        return $foods;
     }
 
     /**
-     * Returns where the attendee has heard of the event of this registration.
-     *
-     * @return string where the attendee has heard of the event of this registration, will be empty
+     * @return string where the attendee has heard of the event of this registration, might be empty
      */
     public function getKnownFrom(): string
     {
@@ -790,22 +650,15 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
     }
 
     /**
-     * Sets where the attendee has heard of the event of this registration.
-     *
-     * @param string $knownFrom
-     *        where the attendee has heard of the event of this registration to set, may be empty
-     *
-     * @return void
+     * @param string $knownFrom where the attendee has heard of the event of this registration to set, may be empty
      */
-    public function setKnownFrom(string $knownFrom)
+    public function setKnownFrom(string $knownFrom): void
     {
         $this->setAsString('known_from', $knownFrom);
     }
 
     /**
-     * Returns the notes of this registration.
-     *
-     * @return string the notes of this registration, will be empty
+     * @return string the notes of this registration, might be empty
      */
     public function getNotes(): string
     {
@@ -813,20 +666,14 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
     }
 
     /**
-     * Sets the notes of this registration.
-     *
      * @param string $notes the notes of this registration, may be empty
-     *
-     * @return void
      */
-    public function setNotes(string $notes)
+    public function setNotes(string $notes): void
     {
         $this->setAsString('notes', $notes);
     }
 
     /**
-     * Returns the number of kids of this registration.
-     *
      * @return int the number of kids of this registration, will be >= 0
      */
     public function getKids(): int
@@ -835,15 +682,11 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
     }
 
     /**
-     * Sets the number of kids of this registration.
-     *
      * @param int $kids the number of kids of this registration to set, must be >= 0
-     *
-     * @return void
      *
      * @throws \InvalidArgumentException
      */
-    public function setKids(int $kids)
+    public function setKids(int $kids): void
     {
         if ($kids < 0) {
             throw new \InvalidArgumentException('The parameter $kids must be >= 0.', 1333296998);
@@ -853,12 +696,13 @@ class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
     }
 
     /**
-     * Returns the checkboxes of this registration.
-     *
-     * @return Collection the checkboxes of this registration
+     * @return Collection<\Tx_Seminars_Model_Checkbox>
      */
     public function getCheckboxes(): Collection
     {
-        return $this->getAsCollection('checkboxes');
+        /** @var Collection<\Tx_Seminars_Model_Checkbox> $checkboxes */
+        $checkboxes = $this->getAsCollection('checkboxes');
+
+        return $checkboxes;
     }
 }

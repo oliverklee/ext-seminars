@@ -1838,6 +1838,7 @@ final class EventTopicTest extends TestCase
     {
         $this->subject->setData([]);
 
+        /** @var Collection<\Tx_Seminars_Model_PaymentMethod> $paymentMethods */
         $paymentMethods = new Collection();
         $this->subject->setPaymentMethods($paymentMethods);
 
