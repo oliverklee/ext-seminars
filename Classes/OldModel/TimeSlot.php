@@ -15,9 +15,7 @@ class Tx_Seminars_OldModel_TimeSlot extends \Tx_Seminars_OldModel_AbstractTimeSp
     protected static $tableName = 'tx_seminars_timeslots';
 
     /**
-     * Creates and returns a speakerbag object.
-     *
-     * @return \Tx_Seminars_Bag_Speaker a speakerbag object
+     * Creates and returns a speaker bag.
      */
     private function getSpeakerBag(): \Tx_Seminars_Bag_Speaker
     {
@@ -87,8 +85,6 @@ class Tx_Seminars_OldModel_TimeSlot extends \Tx_Seminars_OldModel_AbstractTimeSp
 
     /**
      * Gets the place UID.
-     *
-     * @return int
      */
     public function getPlace(): int
     {
@@ -120,11 +116,6 @@ class Tx_Seminars_OldModel_TimeSlot extends \Tx_Seminars_OldModel_AbstractTimeSp
         return \strftime($dateFormat, $entryDate);
     }
 
-    /**
-     * Checks whether the time slot has a entry date set.
-     *
-     * @return bool
-     */
     public function hasEntryDate(): bool
     {
         return $this->hasRecordPropertyInteger('entry_date');

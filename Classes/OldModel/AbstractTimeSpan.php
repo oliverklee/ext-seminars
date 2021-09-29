@@ -29,21 +29,13 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel
             : $this->translate('message_willBeAnnounced');
     }
 
-    /**
-     * Checks whether there's a begin date set.
-     *
-     * @return bool true if we have a begin date, false otherwise
-     */
     public function hasBeginDate(): bool
     {
         return $this->getBeginDateAsTimestamp() > 0;
     }
 
     /**
-     * Gets the end date.
-     *
-     * @return string the end date (or the localized string "will be
-     *                announced" if no end date is set)
+     * @return string the end date (or the localized string "will be announced" if no end date is set)
      */
     public function getEndDate(): string
     {
@@ -52,19 +44,13 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel
             : $this->translate('message_willBeAnnounced');
     }
 
-    /**
-     * Checks whether there's an end date set.
-     *
-     * @return bool true if we have an end date, false otherwise
-     */
     public function hasEndDate(): bool
     {
         return $this->getEndDateAsTimestamp() > 0;
     }
 
     /**
-     * Checks whether there's a begin date set, and whether this has already
-     * passed.
+     * Checks whether there's a begin date set, and whether this has already passed.
      *
      * @return bool true if the time-span has a begin date set that lies in
      *                 the future (time-span has not started yet), false otherwise
@@ -76,14 +62,13 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel
 
     /**
      * Gets the date.
+     *
      * Returns a localized string "will be announced" if there's no date set.
      *
      * Returns just one day if the timespan takes place on only one day.
      * Returns a date range if the timespan takes several days.
      *
      * @param string $dash the character or HTML entity used to separate start date and end date
-     *
-     * @return string the seminar date
      */
     public function getDate(string $dash = '&#8211;'): string
     {
@@ -135,10 +120,8 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel
 
     /**
      * Checks whether there's a (begin) date set.
-     * If there's an end date but no begin date,
-     * this function still will return false.
      *
-     * @return bool
+     * If there's an end date but no begin date, this function still will return false.
      */
     public function hasDate(): bool
     {
@@ -147,15 +130,14 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel
 
     /**
      * Gets the time.
+     *
      * Returns a localized string "will be announced" if there's no time set
      * (i.e. both begin time and end time are 00:00).
      * Returns only the begin time if begin time and end time are the same.
      *
      * @param string $dash the character or HTML entity used to separate begin time and end time
-     *
-     * @return string the time
      */
-    public function getTime($dash = '&#8211;'): string
+    public function getTime(string $dash = '&#8211;'): string
     {
         if (!$this->hasTime()) {
             return $this->translate('message_willBeAnnounced');
@@ -186,9 +168,8 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel
 
     /**
      * Checks whether there's a time set (begin time != 00:00)
-     * If there's no date/time set, the result will be false.
      *
-     * @return bool true if we have a begin time, false otherwise
+     * If there's no date/time set, the result will be false.
      */
     public function hasTime(): bool
     {
@@ -198,10 +179,9 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel
     }
 
     /**
-     * Checks whether there's an end time set (end time != 00:00)
-     * If there's no end date/time set, the result will be false.
+     * Checks whether there's an end time set (end time != 00:00).
      *
-     * @return bool true if we have an end time, false otherwise
+     * If there's no end date/time set, the result will be false.
      */
     public function hasEndTime(): bool
     {
@@ -211,8 +191,6 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel
     }
 
     /**
-     * Returns our begin date and time as a UNIX timestamp.
-     *
      * @return int our begin date and time as a UNIX timestamp or 0 if we don't have a begin date
      */
     public function getBeginDateAsTimestamp(): int
@@ -221,10 +199,7 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel
     }
 
     /**
-     * Returns our end date and time as a UNIX timestamp.
-     *
-     * @return int our end date and time as a UNIX timestamp or 0 if
-     *                 we don't have an end date
+     * @return int our end date and time as a UNIX timestamp or 0 if we don't have an end date
      */
     public function getEndDateAsTimestamp(): int
     {
@@ -271,11 +246,6 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel
         return $this->getRecordPropertyString('room');
     }
 
-    /**
-     * Checks whether we have a room set.
-     *
-     * @return bool true if we have a non-empty room, false otherwise.
-     */
     public function hasRoom(): bool
     {
         return $this->hasRecordPropertyString('room');
@@ -284,31 +254,18 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel
     /**
      * Checks whether this time span is open-ended.
      *
-     * A time span is considered to be open-ended if it does not have an end
-     * date.
-     *
-     * @return bool true if this time span is open-ended, false otherwise
+     * A time span is considered to be open-ended if it does not have an end date.
      */
     public function isOpenEnded(): bool
     {
         return !$this->hasEndDate();
     }
 
-    /**
-     * Checks whether we have a place (or places) set.
-     *
-     * @return bool true if we have a non-empty places list, false otherwise
-     */
     public function hasPlace(): bool
     {
         return $this->hasRecordPropertyInteger('place');
     }
 
-    /**
-     * Gets the number of places associated with this record.
-     *
-     * @return int the number of places associated with this record, will be >= 0
-     */
     public function getNumberOfPlaces(): int
     {
         return $this->getRecordPropertyInteger('place');
@@ -316,25 +273,17 @@ abstract class Tx_Seminars_OldModel_AbstractTimeSpan extends AbstractModel
 
     /**
      * Gets our place(s) as plain text (just the places name).
-     * Returns a localized string "will be announced" if the time slot has no
-     * place set.
+     *
+     * Returns a localized string "will be announced" if the time slot has no place set.
      *
      * @return string our places or an empty string if the timespan has no places
      */
     abstract public function getPlaceShort(): string;
 
-    /**
-     * Gets the hook provider for the date and time span.
-     *
-     * @return HookProvider
-     */
     protected function getDateTimeSpanHookProvider(): HookProvider
     {
         if (!$this->dateTimeSpanHookProvider instanceof HookProvider) {
-            $this->dateTimeSpanHookProvider = GeneralUtility::makeInstance(
-                HookProvider::class,
-                DateTimeSpan::class
-            );
+            $this->dateTimeSpanHookProvider = GeneralUtility::makeInstance(HookProvider::class, DateTimeSpan::class);
         }
 
         return $this->dateTimeSpanHookProvider;

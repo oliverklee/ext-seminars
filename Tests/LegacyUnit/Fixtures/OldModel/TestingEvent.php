@@ -385,8 +385,8 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * As speakers can be related to this event as speakers, partners, tutors or
      * leaders, the type relation can be specified. The default is "speakers".
      *
-     * @param string $speakerRelation
-     *        the relation in which the speakers stand to this event: "speakers" (default), "partners", "tutors" or "leaders"
+     * @param string $speakerRelation the relation in which the speakers stand to this event:
+     *        "speakers" (default), "partners", "tutors" or "leaders"
      *
      * @return string our speakers (or '' if there is an error)
      */
@@ -400,8 +400,7 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * without the detailed description.
      * Returns an empty string if this seminar doesn't have any payment methods.
      *
-     * @return string our payment methods as plain text (or '' if there
-     *                is an error)
+     * @return string our payment methods as plain text (or '' if there is an error)
      */
     public function getPaymentMethodsPlainShort(): string
     {
@@ -487,7 +486,7 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * non-emptiness. If we are a date record, it'll be retrieved from the
      * corresponding topic record.
      *
-     * @param string $key key of the element to check
+     * @param non-empty-string $key
      *
      * @return bool TRUE if the corresponding integer exists and is non-empty
      */
@@ -502,7 +501,7 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
      * If we are a date record, it'll be retrieved from the corresponding
      * topic record.
      *
-     * @param string $key the name of the field to retrieve
+     * @param non-empty-string $key
      *
      * @return int the corresponding element from the record data array
      */
@@ -514,7 +513,7 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
     /**
      * Sets an int element of the record data array.
      *
-     * @param string $key key of the element to set (must be non-empty)
+     * @param non-empty-string $key
      * @param int $value the value that will be written into the element
      */
     public function setRecordPropertyInteger(string $key, int $value): void
@@ -525,7 +524,7 @@ final class TestingEvent extends \Tx_Seminars_OldModel_Event
     /**
      * Sets a string element of the record data array (and trims it).
      *
-     * @param string $key key of the element to set (must be non-empty)
+     * @param non-empty-string $key
      * @param string $value the value that will be written into the element
      */
     public function setRecordPropertyString(string $key, string $value): void

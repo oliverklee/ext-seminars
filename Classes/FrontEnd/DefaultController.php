@@ -575,7 +575,7 @@ class Tx_Seminars_FrontEnd_DefaultController extends TemplateHelper
      *
      * @return string the wrapped label
      */
-    public function getLoginLink(string $label, int $pageId, $eventId = 0): string
+    public function getLoginLink(string $label, int $pageId, int $eventId = 0): string
     {
         $linkConfiguration = ['parameter' => $pageId];
 

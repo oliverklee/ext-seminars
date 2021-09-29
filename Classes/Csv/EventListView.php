@@ -41,7 +41,7 @@ class EventListView extends AbstractListView
     /**
      * Returns the keys of the fields to export.
      *
-     * @return string[]
+     * @return array<int, non-empty-string>
      */
     protected function getFieldKeys(): array
     {

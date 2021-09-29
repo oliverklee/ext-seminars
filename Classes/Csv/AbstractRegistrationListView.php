@@ -140,14 +140,14 @@ abstract class Tx_Seminars_Csv_AbstractRegistrationListView extends AbstractList
     /**
      * Returns the keys of the front-end user fields to export.
      *
-     * @return string[]
+     * @return array<int, non-empty-string>
      */
     abstract protected function getFrontEndUserFieldKeys(): array;
 
     /**
      * Returns the keys of the registration fields to export.
      *
-     * @return string[]
+     * @return array<int, non-empty-string>
      */
     abstract protected function getRegistrationFieldKeys(): array;
 

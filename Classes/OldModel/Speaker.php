@@ -258,13 +258,9 @@ class Tx_Seminars_OldModel_Speaker extends AbstractModel
     /**
      * Sets the gender of this speaker.
      *
-     * @param int $gender
-     *        the gender of the speaker, must be one of \Tx_Seminars_OldModel_Speaker::GENDER_FEMALE, \Tx_Seminars_OldModel_Speaker::GENDER_MALE
-     *        or \Tx_Seminars_OldModel_Speaker::GENDER_UNKNOWN
-     *
-     * @return void
+     * @param int $gender the gender of the speaker, must be one of GENDER_FEMALE, GENDER_MALE, GENDER_UNKNOWN
      */
-    public function setGender(int $gender)
+    public function setGender(int $gender): void
     {
         $this->setRecordPropertyInteger('gender', $gender);
     }
@@ -294,17 +290,12 @@ class Tx_Seminars_OldModel_Speaker extends AbstractModel
      * Sets the gender cancelation period of this speaker
      *
      * @param int $cancelationPeriod the cancelation period of this speaker in days, must be > 0
-     *
-     * @return void
      */
-    public function setCancelationPeriod(int $cancelationPeriod)
+    public function setCancelationPeriod(int $cancelationPeriod): void
     {
         $this->setRecordPropertyInteger('cancelation_period', $cancelationPeriod);
     }
 
-    /**
-     * Returns our owner.
-     */
     public function getOwner(): ?\Tx_Seminars_Model_FrontEndUser
     {
         if (!$this->hasRecordPropertyInteger('owner')) {
@@ -317,14 +308,7 @@ class Tx_Seminars_OldModel_Speaker extends AbstractModel
         return $owner;
     }
 
-    /**
-     * Sets our owner.
-     *
-     * @param \Tx_Seminars_Model_FrontEndUser $frontEndUser the owner of this model to set
-     *
-     * @return void
-     */
-    public function setOwner(\Tx_Seminars_Model_FrontEndUser $frontEndUser)
+    public function setOwner(\Tx_Seminars_Model_FrontEndUser $frontEndUser): void
     {
         $this->setRecordPropertyInteger('owner', $frontEndUser->getUid());
     }
@@ -339,9 +323,6 @@ class Tx_Seminars_OldModel_Speaker extends AbstractModel
         return $this->getRecordPropertyBoolean('hidden');
     }
 
-    /**
-     * @return bool
-     */
     public function hasImage(): bool
     {
         return $this->getRecordPropertyInteger('image') > 0;
@@ -358,9 +339,6 @@ class Tx_Seminars_OldModel_Speaker extends AbstractModel
         return \array_shift($images);
     }
 
-    /**
-     * @return FileRepository
-     */
     private function getFileRepository(): FileRepository
     {
         /** @var FileRepository $fileRepository */

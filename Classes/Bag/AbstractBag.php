@@ -123,7 +123,7 @@ abstract class AbstractBag implements \Iterator
         string $additionalTableNames = '',
         string $groupBy = '',
         string $orderBy = 'uid',
-        $limit = '',
+        string $limit = '',
         int $showHiddenRecords = -1
     ) {
         $this->pageRepository = GeneralUtility::makeInstance(PageRepository::class);

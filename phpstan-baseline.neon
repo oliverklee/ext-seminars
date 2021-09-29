@@ -1,6 +1,31 @@
 parameters:
 	ignoreErrors:
 		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Csv\\\\DownloadRegistrationListView\\:\\:getFrontEndUserFieldKeys\\(\\) should return array\\<int, non\\-empty\\-string\\> but returns array\\<int, string\\>\\.$#"
+			count: 1
+			path: Classes/Csv/DownloadRegistrationListView.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Csv\\\\DownloadRegistrationListView\\:\\:getRegistrationFieldKeys\\(\\) should return array\\<int, non\\-empty\\-string\\> but returns array\\<int, string\\>\\.$#"
+			count: 1
+			path: Classes/Csv/DownloadRegistrationListView.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Csv\\\\EmailRegistrationListView\\:\\:getFrontEndUserFieldKeys\\(\\) should return array\\<int, non\\-empty\\-string\\> but returns array\\<int, string\\>\\.$#"
+			count: 1
+			path: Classes/Csv/EmailRegistrationListView.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Csv\\\\EmailRegistrationListView\\:\\:getRegistrationFieldKeys\\(\\) should return array\\<int, non\\-empty\\-string\\> but returns array\\<int, string\\>\\.$#"
+			count: 1
+			path: Classes/Csv/EmailRegistrationListView.php
+
+		-
+			message: "#^Method OliverKlee\\\\Seminars\\\\Csv\\\\EventListView\\:\\:getFieldKeys\\(\\) should return array\\<int, non\\-empty\\-string\\> but returns array\\<int, string\\>\\.$#"
+			count: 1
+			path: Classes/Csv/EventListView.php
+
+		-
 			message: "#^Parameter \\#2 \\$pageId of method Tx_Seminars_FrontEnd_DefaultController\\:\\:getLoginLink\\(\\) expects int, string given\\.$#"
 			count: 1
 			path: Classes/FrontEnd/DefaultController.php
