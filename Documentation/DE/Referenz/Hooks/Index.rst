@@ -74,7 +74,7 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          *
          * This function will be called for all types of seminars (single events, topics, and dates).
          */
-        public function modifySingleView(\Tx_Seminars_FrontEnd_DefaultController $controller): void
+        public function modifySingleView(DefaultController $controller): void
         {
             // Hier Ihr Code
         }
@@ -146,13 +146,13 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          * This function will be called for these types of seminar lists: "topics", "seminars",
          * "my vip seminars", "my entered events", "events next day", "other dates".
          *
-         * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
+         * @param DefaultController $controller the calling controller
          * @param \Tx_Seminars_BagBuilder_Event $builder the bag builder
          * @param string $whatToDisplay the flavor of list view: 'seminar_list', 'topic_list',
          *        'my_vip_events', 'my_entered_events', 'events_next_day' or 'other_dates'
          */
         public function modifyEventBagBuilder(
-            \Tx_Seminars_FrontEnd_DefaultController $controller,
+            DefaultController $controller,
             \Tx_Seminars_BagBuilder_Event $builder,
             string $whatToDisplay
         ): void {
@@ -170,12 +170,12 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          *
          * This function will be called for "my events" lists only.
          *
-         * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
+         * @param DefaultController $controller the calling controller
          * @param \Tx_Seminars_BagBuilder_Registration $builder the bag builder
          * @param string $whatToDisplay the flavor of list view ('my_events' only?)
          */
         public function modifyRegistrationBagBuilder(
-            \Tx_Seminars_FrontEnd_DefaultController $controller,
+            DefaultController $controller,
             \Tx_Seminars_BagBuilder_Registration $builder,
             string $whatToDisplay
         ): void {
@@ -189,9 +189,9 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          * "seminars", "my seminars", "my vip seminars", "my entered events",
          * "events next day", "other dates").
          *
-         * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
+         * @param DefaultController $controller the calling controller
          */
-        public function modifyListHeader(\Tx_Seminars_FrontEnd_DefaultController $controller): void
+        public function modifyListHeader(DefaultController $controller): void
         {
             // Hier Ihr Code
         }
@@ -203,9 +203,9 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          * "seminars", "my seminars", "my vip seminars", "my entered events",
          * "events next day", "other dates").
          *
-         * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
+         * @param DefaultController $controller the calling controller
          */
-        public function modifyListRow(\Tx_Seminars_FrontEnd_DefaultController $controller): void
+        public function modifyListRow(DefaultController $controller): void
         {
             // Hier Ihr Code
         }
@@ -216,9 +216,9 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          * This function will be called for "my seminars" , "my vip seminars",
          * "my entered events" lists only.
          *
-         * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
+         * @param DefaultController $controller the calling controller
          */
-        public function modifyMyEventsListRow(\Tx_Seminars_FrontEnd_DefaultController $controller): void
+        public function modifyMyEventsListRow(DefaultController $controller): void
         {
             // Hier Ihr Code
         }
@@ -230,9 +230,9 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          * "seminars", "my seminars", "my vip seminars", "my entered events",
          * "events next day", "other dates").
          *
-         * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
+         * @param DefaultController $controller the calling controller
          */
-        public function modifyListFooter(\Tx_Seminars_FrontEnd_DefaultController $controller): void
+        public function modifyListFooter(DefaultController $controller): void
         {
             // Hier Ihr Code
         }
@@ -321,9 +321,9 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
         /**
          * Modifies the header of the seminar registration form.
          *
-         * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
+         * @param DefaultController $controller the calling controller
          */
-        public function modifyRegistrationHeader(\Tx_Seminars_FrontEnd_DefaultController $controller): void
+        public function modifyRegistrationHeader(DefaultController $controller): void
         {
             // Hier Ihr Code
         }
@@ -331,11 +331,11 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
         /**
          * Modifies the seminar registration form.
          *
-         * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
+         * @param DefaultController $controller the calling controller
          * @param \Tx_Seminars_FrontEnd_RegistrationForm $registrationEditor the registration form
          */
         public function modifyRegistrationForm(
-            \Tx_Seminars_FrontEnd_DefaultController $controller,
+            DefaultController $controller,
             \Tx_Seminars_FrontEnd_RegistrationForm $registrationEditor
         ): void {
             // Hier Ihr Code
@@ -344,9 +344,9 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
         /**
          * Modifies the footer of the seminar registration form.
          *
-         * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
+         * @param DefaultController $controller the calling controller
          */
-        public function modifyRegistrationFooter(\Tx_Seminars_FrontEnd_DefaultController $controller): void
+        public function modifyRegistrationFooter(DefaultController $controller): void
         {
             // Hier Ihr Code
         }

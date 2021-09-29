@@ -27,7 +27,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
- * @covers \Tx_Seminars_FrontEnd_DefaultController
+ * @covers \OliverKlee\Seminars\FrontEnd\DefaultController
  */
 final class DefaultControllerTest extends TestCase
 {

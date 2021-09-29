@@ -12,6 +12,7 @@ use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Oelib\Templating\TemplateRegistry;
 use OliverKlee\Seminar\Email\Salutation;
 use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
+use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 use Pelago\Emogrifier\CssInliner;
@@ -192,17 +193,15 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
     /**
      * Creates an HTML link to the registration or login page.
      *
-     * @param \Tx_Seminars_FrontEnd_DefaultController $plugin the pi1 object with configuration data
+     * @param DefaultController $plugin the pi1 object with configuration data
      * @param \Tx_Seminars_OldModel_Event $event the seminar to create the registration link for
      *
      * @return string the HTML tag, will be empty if the event needs no registration, nobody can register to this event or the
      *                currently logged in user is already registered to this event and the event does not allow multiple
      *                registrations by one user
      */
-    public function getRegistrationLink(
-        \Tx_Seminars_FrontEnd_DefaultController $plugin,
-        \Tx_Seminars_OldModel_Event $event
-    ): string {
+    public function getRegistrationLink(DefaultController $plugin, \Tx_Seminars_OldModel_Event $event): string
+    {
         if (!$event->needsRegistration() || !$this->canRegisterIfLoggedIn($event)) {
             return '';
         }
@@ -216,13 +215,12 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      * Before you can call this function, you should make sure that the link makes sense (ie. the seminar still has vacancies, the
      * user has not registered for this seminar etc.).
      *
-     * @param \Tx_Seminars_FrontEnd_DefaultController $plugin
      * @param \Tx_Seminars_OldModel_Event $event a seminar for which we'll check if it is possible to register
      *
      * @return string HTML with the link
      */
     public function getLinkToRegistrationOrLoginPage(
-        \Tx_Seminars_FrontEnd_DefaultController $plugin,
+        DefaultController $plugin,
         \Tx_Seminars_OldModel_Event $event
     ): string {
         return $this->getLinkToStandardRegistrationOrLoginPage(
@@ -265,14 +263,13 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      * This function only creates the link to the standard registration or login
      * page; it should not be used if the seminar has a separate details page.
      *
-     * @param \Tx_Seminars_FrontEnd_DefaultController $plugin
      * @param \Tx_Seminars_OldModel_Event $event a seminar for which we'll check if it is possible to register
      * @param string $label label for the link, must not be empty
      *
      * @return string HTML with the link
      */
     private function getLinkToStandardRegistrationOrLoginPage(
-        \Tx_Seminars_FrontEnd_DefaultController $plugin,
+        DefaultController $plugin,
         \Tx_Seminars_OldModel_Event $event,
         string $label
     ): string {

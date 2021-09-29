@@ -38,7 +38,7 @@ $boot = static function () {
         'setup',
         '
         plugin.' . \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getCN('seminars')
-        . '_pi1.userFunc = ' . \Tx_Seminars_FrontEnd_DefaultController::class . '->main
+        . '_pi1.userFunc = ' . \OliverKlee\Seminars\FrontEnd\DefaultController::class . '->main
         ',
         43
     );

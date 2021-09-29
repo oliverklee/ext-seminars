@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Hooks\Interfaces;
 
+use OliverKlee\Seminars\FrontEnd\DefaultController;
+
 /**
  * Use this interface for hooks concerning the seminar single view.
  *
@@ -16,7 +18,7 @@ interface SeminarSingleView extends Hook
      *
      * This function will be called for all types of seminars (single events, topics, and dates).
      *
-     * @param \Tx_Seminars_FrontEnd_DefaultController $controller the calling controller
+     * @param DefaultController $controller the calling controller
      */
-    public function modifySingleView(\Tx_Seminars_FrontEnd_DefaultController $controller): void;
+    public function modifySingleView(DefaultController $controller): void;
 }
