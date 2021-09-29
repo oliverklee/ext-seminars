@@ -83,10 +83,8 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
     private $linkBuilder = null;
 
     /**
-     * The constructor.
-     *
-     * It still is public due to the templatehelper base class. Nevertheless,
-     * getInstance should be used so the Singleton property is retained.
+     * It still is public due to the TemplateHelper base class. Nevertheless,
+     * `getInstance` should be used so the Singleton property is retained.
      */
     public function __construct()
     {
@@ -94,8 +92,6 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
     }
 
     /**
-     * Returns the instance of this class.
-     *
      * @return static the current Singleton instance
      */
     public static function getInstance(): \Tx_Seminars_Service_RegistrationManager
@@ -111,10 +107,8 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
 
     /**
      * Purges the current instance so that getInstance will create a new instance.
-     *
-     * @return void
      */
-    public static function purgeInstance()
+    public static function purgeInstance(): void
     {
         self::$instance = null;
     }
@@ -129,10 +123,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      *
      * This function works even if no user is logged in.
      *
-     * @param \Tx_Seminars_OldModel_Event $event
-     *        am event for which we'll check if it is possible to register
-     *
-     * @return bool TRUE if it is okay to register, FALSE otherwise
+     * @param \Tx_Seminars_OldModel_Event $event an event for which we'll check if it is possible to register
      */
     public function canRegisterIfLoggedIn(\Tx_Seminars_OldModel_Event $event): bool
     {
@@ -228,7 +219,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      * @param \Tx_Seminars_FrontEnd_DefaultController $plugin
      * @param \Tx_Seminars_OldModel_Event $event a seminar for which we'll check if it is possible to register
      *
-     * @return string HTML code with the link
+     * @return string HTML with the link
      */
     public function getLinkToRegistrationOrLoginPage(
         \Tx_Seminars_FrontEnd_DefaultController $plugin,
@@ -276,9 +267,9 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      *
      * @param \Tx_Seminars_FrontEnd_DefaultController $plugin
      * @param \Tx_Seminars_OldModel_Event $event a seminar for which we'll check if it is possible to register
-     * @param string $label label for the link, will not be empty
+     * @param string $label label for the link, must not be empty
      *
-     * @return string HTML code with the link
+     * @return string HTML with the link
      */
     private function getLinkToStandardRegistrationOrLoginPage(
         \Tx_Seminars_FrontEnd_DefaultController $plugin,
@@ -303,7 +294,8 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
     /**
      * Creates an HTML link to the unregistration page (if a user is logged in).
      *
-     * @param \Tx_Seminars_OldModel_Registration $registration a registration from which we'll get the UID for our GET parameters
+     * @param \Tx_Seminars_OldModel_Registration $registration a registration from which we'll get the UID
+     *        for our GET parameters
      *
      * @return string HTML code with the link
      */
@@ -319,13 +311,9 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
     }
 
     /**
-     * Checks whether a seminar UID is valid, ie., a non-deleted and non-hidden seminar with the given number exists.
+     * Checks whether a seminar UID is valid, i.e., a non-deleted and non-hidden seminar with the given number exists.
      *
-     * This function can be called even if no seminar object exists.
-     *
-     * @param int $uid
-     *
-     * @return bool TRUE the UID is valid, FALSE otherwise
+     * This function can be called even even if no seminar object exists.
      */
     public function existsSeminar(int $uid): bool
     {
@@ -390,7 +378,8 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      *
      * For this, only events that forbid multiple registrations are checked.
      *
-     * @param \Tx_Seminars_OldModel_Event $event a seminar for which we'll check whether the user already is blocked by an other seminars
+     * @param \Tx_Seminars_OldModel_Event $event a seminar for which we'll check whether the user already is blocked
+     *        by an other event
      *
      * @return bool TRUE if user is blocked by another registration, FALSE otherwise
      */
@@ -401,7 +390,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
 
     /**
      * Checks whether the data the user has just entered is okay for creating
-     * a registration, e.g. mandatory fields are filled, number fields only
+     * a registration, e.g., mandatory fields are filled, number fields only
      * contain numbers, the number of seats to register is not too high etc.
      *
      * Please note that this function does not create a registration - it just checks.
@@ -422,8 +411,6 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      *
      * @param \Tx_Seminars_OldModel_Event $event the seminar object (that's the seminar we would like to register for)
      * @param int $numberOfSeats the number of seats to check
-     *
-     * @return bool
      */
     public function canRegisterSeats(\Tx_Seminars_OldModel_Event $event, int $numberOfSeats): bool
     {
@@ -470,10 +457,8 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
 
     /**
      * Sends the e-mails for a new registration.
-     *
-     * @return void
      */
-    public function sendEmailsForNewRegistration(TemplateHelper $plugin)
+    public function sendEmailsForNewRegistration(TemplateHelper $plugin): void
     {
         if ($this->registration->isOnRegistrationQueue()) {
             $this->notifyAttendee($this->registration, $plugin, 'confirmationOnRegistrationForQueue');
@@ -599,7 +584,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      *
      * @param string $rawString the string to unify, may be empty
      *
-     * @return string $rawString with all whitespace changed to regular spaces
+     * @return string the given string with all whitespace changed to regular spaces
      */
     private function unifyWhitespace(string $rawString): string
     {
@@ -611,10 +596,8 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      * currently logged-in FE user).
      *
      * @param int $uid the UID of the registration that should be removed
-     *
-     * @return void
      */
-    public function removeRegistration(int $uid, TemplateHelper $plugin)
+    public function removeRegistration(int $uid, TemplateHelper $plugin): void
     {
         $this->registration = \Tx_Seminars_OldModel_Registration::fromUid($uid);
         if (!($this->registration instanceof \Tx_Seminars_OldModel_Registration)) {
@@ -640,10 +623,8 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
 
     /**
      * Fills vacancies created through a unregistration with attendees from the registration queue.
-     *
-     * @return void
      */
-    private function fillVacancies(TemplateHelper $plugin)
+    private function fillVacancies(TemplateHelper $plugin): void
     {
         $seminar = $this->registration->getSeminarObject();
         if (!$seminar->hasVacancies()) {
@@ -732,14 +713,12 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      *        - confirmationOnQueueUpdate
      *        In the following the parameter is prefixed with "email_" and
      *        postfixed with "Hello" or "Subject".
-     *
-     * @return void
      */
     public function notifyAttendee(
         \Tx_Seminars_OldModel_Registration $oldRegistration,
         TemplateHelper $plugin,
         string $helloSubjectPrefix = 'confirmation'
-    ) {
+    ): void {
         if (!$this->getSharedConfiguration()->getAsBoolean('send' . ucfirst($helloSubjectPrefix))) {
             return;
         }
@@ -795,10 +774,8 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
 
     /**
      * Adds an iCalendar attachment with the event's most important data to $email.
-     *
-     * @return void
      */
-    private function addCalendarAttachment(MailMessage $email, \Tx_Seminars_Model_Registration $registration)
+    private function addCalendarAttachment(MailMessage $email, \Tx_Seminars_Model_Registration $registration): void
     {
         $event = $registration->getEvent();
         $timeZone = $event->getTimeZone() ?: $this->getConfValueString('defaultTimeZone');
@@ -836,12 +813,6 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         $email->addPart($content, 'text/calendar; charset="utf-8"; component="vevent"; method="publish"');
     }
 
-    /**
-     * @param int $dateAsUnixTimeStamp
-     * @param string $timeZone
-     *
-     * @return string
-     */
     private function formatDateForWithZone(int $dateAsUnixTimeStamp, string $timeZone): string
     {
         return ';TZID=/' . $timeZone . ':' . strftime('%Y%m%dT%H%M%S', $dateAsUnixTimeStamp);
@@ -859,13 +830,11 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      *        - notificationOnRegistrationForQueue
      *        - notificationOnQueueUpdate
      *        In the following, the parameter is prefixed with "email_" and postfixed with "Hello" or "Subject".
-     *
-     * @return void
      */
     public function notifyOrganizers(
         \Tx_Seminars_OldModel_Registration $registration,
         string $helloSubjectPrefix = 'notification'
-    ) {
+    ): void {
         $configuration = $this->getSharedConfiguration();
         if (!$configuration->getAsBoolean('send' . ucfirst($helloSubjectPrefix))) {
             return;
@@ -949,12 +918,10 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      * If both things happen at the same time (minimum and maximum count of
      * attendees are the same), only the "event is full" message will be sent.
      *
-     * @param \Tx_Seminars_OldModel_Registration $registration
-     *        the registration for which the notification should be send
-     *
-     * @return void
+     * @param \Tx_Seminars_OldModel_Registration $registration the registration
+     *        for which the notification should be sent
      */
-    public function sendAdditionalNotification(\Tx_Seminars_OldModel_Registration $registration)
+    public function sendAdditionalNotification(\Tx_Seminars_OldModel_Registration $registration): void
     {
         if ($registration->isOnRegistrationQueue()) {
             return;
@@ -1005,7 +972,8 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
     /**
      * Returns the topic for the additional notification e-mail.
      *
-     * @param \Tx_Seminars_OldModel_Registration $registration the registration for which the notification should be send
+     * @param \Tx_Seminars_OldModel_Registration $registration the registration for which the notification
+     *        should be sent
      *
      * @return string "EnoughRegistrations" if the event has enough attendances,
      *                "IsFull" if the event is fully booked, otherwise an empty string
@@ -1035,10 +1003,9 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      * Returns the message for an e-mail according to the reason
      * $reasonForNotification provided.
      *
-     * @param \Tx_Seminars_OldModel_Registration $registration
-     *        the registration for which the notification should be send
-     * @param string $reasonForNotification
-     *        reason for the notification, must be either "IsFull" or "EnoughRegistrations", must not be empty
+     * @param \Tx_Seminars_OldModel_Registration $registration the registration for which the notification should be sent
+     * @param string $reasonForNotification reason for the notification, must be either "IsFull" or
+     *        "EnoughRegistrations", must not be empty
      *
      * @return string the message, will not be empty
      */
@@ -1052,7 +1019,10 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         $template->setMarker('message', $this->translate($localLanguageKey));
         $showSeminarFields = $this->getConfValueString('showSeminarFieldsInNotificationMail');
         if ($showSeminarFields != '') {
-            $template->setMarker('seminardata', $registration->getSeminarObject()->dumpSeminarValues($showSeminarFields));
+            $template->setMarker(
+                'seminardata',
+                $registration->getSeminarObject()->dumpSeminarValues($showSeminarFields)
+            );
         } else {
             $template->hideSubparts('seminardata', 'field_wrapper');
         }
@@ -1104,7 +1074,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         \Tx_Seminars_OldModel_Registration $registration,
         TemplateHelper $plugin,
         string $helloSubjectPrefix,
-        $useHtml = false
+        bool $useHtml = false
     ): string {
         if ($this->linkBuilder === null) {
             /** @var \Tx_Seminars_Service_SingleViewLinkBuilder $linkBuilder */
@@ -1229,7 +1199,10 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
         $newEvent = $mapper->find($event->getUid());
         $singleViewUrl = $this->linkBuilder->createAbsoluteUrlForEvent($newEvent);
-        $template->setMarker('url', $useHtml ? \htmlspecialchars($singleViewUrl, ENT_QUOTES | ENT_HTML5) : $singleViewUrl);
+        $template->setMarker(
+            'url',
+            $useHtml ? \htmlspecialchars($singleViewUrl, ENT_QUOTES | ENT_HTML5) : $singleViewUrl
+        );
 
         if ($event->isPlanned()) {
             $template->unhideSubparts('planned_disclaimer', $wrapperPrefix);
@@ -1329,10 +1302,8 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      *
      * @param \Tx_Seminars_OldModel_Registration $registration the current registration
      * @param bool $useHtml whether to create HTML instead of plain text
-     *
-     * @return void
      */
-    private function fillOrHideAttendeeMarker(\Tx_Seminars_OldModel_Registration $registration, bool $useHtml)
+    private function fillOrHideAttendeeMarker(\Tx_Seminars_OldModel_Registration $registration, bool $useHtml): void
     {
         $template = $this->getInitializedEmailTemplate();
         if (!$registration->hasAttendeesNames()) {
@@ -1348,10 +1319,8 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      *
      * @param \Tx_Seminars_OldModel_Event $event event of this registration
      * @param bool $useHtml whether to create HTML instead of plain text
-     *
-     * @return void
      */
-    private function fillPlacesMarker(\Tx_Seminars_OldModel_Event $event, bool $useHtml)
+    private function fillPlacesMarker(\Tx_Seminars_OldModel_Event $event, bool $useHtml): void
     {
         $template = $this->getInitializedEmailTemplate();
         if (!$event->hasPlace()) {
@@ -1401,11 +1370,11 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      *          In the following the parameter is prefixed with
      *          "email_" and postfixed with "Hello".
      * @param \Tx_Seminars_OldModel_Registration $registration the registration the introduction should be created for
-     *
-     * @return void
      */
-    private function setEmailIntroduction(string $helloSubjectPrefix, \Tx_Seminars_OldModel_Registration $registration)
-    {
+    private function setEmailIntroduction(
+        string $helloSubjectPrefix,
+        \Tx_Seminars_OldModel_Registration $registration
+    ): void {
         $template = $this->getInitializedEmailTemplate();
         /** @var Salutation $salutation */
         $salutation = GeneralUtility::makeInstance(Salutation::class);
@@ -1441,14 +1410,12 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      *          - confirmationOnQueueUpdate
      * @param \Tx_Seminars_OldModel_Registration $registration the registration the introduction should be created for
      * @param bool $useHtml whether to send HTML instead of plain text e-mail
-     *
-     * @return void
      */
     private function fillOrHideUnregistrationNotice(
         string $helloSubjectPrefix,
         \Tx_Seminars_OldModel_Registration $registration,
         bool $useHtml
-    ) {
+    ): void {
         $event = $registration->getSeminarObject();
         $template = $this->getInitializedEmailTemplate();
         if (($helloSubjectPrefix === 'confirmationOnUnregistration') || !$event->isUnregistrationPossible()) {
@@ -1499,22 +1466,13 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         return $this->registrationEmailHookProvider;
     }
 
-    /**
-     * Injects a link builder.
-     *
-     * @param \Tx_Seminars_Service_SingleViewLinkBuilder $linkBuilder the link builder instance to use
-     *
-     * @return void
-     */
-    public function injectLinkBuilder(\Tx_Seminars_Service_SingleViewLinkBuilder $linkBuilder)
+    public function injectLinkBuilder(\Tx_Seminars_Service_SingleViewLinkBuilder $linkBuilder): void
     {
         $this->linkBuilder = $linkBuilder;
     }
 
     /**
      * Returns the UID of the logged-in front-end user (or 0 if no user is logged in).
-     *
-     * @return int
      */
     protected function getLoggedInFrontEndUserUid(): int
     {
@@ -1524,9 +1482,6 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         )->getUid() : 0;
     }
 
-    /**
-     * @return \Tx_Seminars_Mapper_Registration
-     */
     protected function getRegistrationMapper(): \Tx_Seminars_Mapper_Registration
     {
         return MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
@@ -1535,9 +1490,6 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
     /**
      * Returns the prices that are actually available for the given user, depending on whether automatic prices are
      * enabled using the plugin.tx_seminars.automaticSpecialPriceForSubsequentRegistrationsBySameUser setting.
-     *
-     * @param Tx_Seminars_OldModel_Event $event
-     * @param Tx_Seminars_Model_FrontEndUser $user
      *
      * @return string[][] the available prices as a reset array of arrays with the keys "caption" (for the title)
      *                    and "value (for the price code), might be empty

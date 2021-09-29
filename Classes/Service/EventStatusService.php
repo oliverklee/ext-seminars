@@ -17,9 +17,6 @@ class EventStatusService implements SingletonInterface
      */
     protected $eventMapper;
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->eventMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
@@ -31,9 +28,7 @@ class EventStatusService implements SingletonInterface
      * If the event is not in the PLANNED status anymore or the automatic status for this event is disabled,
      * this method is a no-op.
      *
-     * @param \Tx_Seminars_Model_Event $event
-     *
-     * @return bool true if the status of $event has been changed, false otherwise
+     * @return bool true if the status of the given has been changed, false otherwise
      */
     public function updateStatusAndSave(\Tx_Seminars_Model_Event $event): bool
     {
@@ -56,27 +51,13 @@ class EventStatusService implements SingletonInterface
         return $eventWasUpdated;
     }
 
-    /**
-     * Cancels and saves $event.
-     *
-     * @param \Tx_Seminars_Model_Event $event
-     *
-     * @return void
-     */
-    public function cancelAndSave(\Tx_Seminars_Model_Event $event)
+    public function cancelAndSave(\Tx_Seminars_Model_Event $event): void
     {
         $event->cancel();
         $this->eventMapper->save($event);
     }
 
-    /**
-     * Confirms and saves $event.
-     *
-     * @param \Tx_Seminars_Model_Event $event
-     *
-     * @return void
-     */
-    public function confirmAndSave(\Tx_Seminars_Model_Event $event)
+    public function confirmAndSave(\Tx_Seminars_Model_Event $event): void
     {
         $event->confirm();
         $this->eventMapper->save($event);

@@ -23,10 +23,8 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
 
     /**
      * Sets the plugin used accessing to the flexforms plugin settings.
-     *
-     * @return void
      */
-    public function setPlugin(TemplateHelper $plugin)
+    public function setPlugin(TemplateHelper $plugin): void
     {
         $this->plugin = $plugin;
     }
@@ -42,8 +40,6 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
     /**
      * Creates the absolute URL to the single view of the event $event.
      *
-     * @param \Tx_Seminars_Model_Event $event the event to create the link for
-     *
      * @return string the absolute URL for the event's single view, not htmlspecialchared
      */
     public function createAbsoluteUrlForEvent(\Tx_Seminars_Model_Event $event): string
@@ -54,10 +50,7 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
     /**
      * Creates the relative URL to the single view of the event $event.
      *
-     * @param \Tx_Seminars_Model_Event $event the event to create the link for
-     *
-     * @return string
-     *         the relative URL for the event's single view, not htmlspecialchared
+     * @return string the relative URL for the event's single view, not htmlspecialchared
      */
     public function createRelativeUrlForEvent(\Tx_Seminars_Model_Event $event): string
     {
@@ -77,8 +70,6 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
 
     /**
      * Retrieves a content object to be used for creating typolinks.
-     *
-     * @return ContentObjectRenderer a content object for creating typolinks
      */
     protected function getContentObject(): ContentObjectRenderer
     {
@@ -95,12 +86,9 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
     }
 
     /**
-     * Creates an artificial front end (which is necessary for creating
-     * typolinks).
-     *
-     * @return void
+     * Creates an artificial front end (which is necessary for creating typolinks).
      */
-    protected function createFakeFrontEnd()
+    protected function createFakeFrontEnd(): void
     {
         $this->suppressFrontEndCookies();
 
@@ -125,10 +113,8 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
 
     /**
      * Makes sure that no FE login cookies will be sent.
-     *
-     * @return void
      */
-    private function suppressFrontEndCookies()
+    private function suppressFrontEndCookies(): void
     {
         $_POST['FE_SESSION_KEY'] = '';
         $_GET['FE_SESSION_KEY'] = '';
@@ -139,10 +125,7 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
      * Gets the single view page UID/URL from $event (if any single view page is set for
      * the event) or from the configuration.
      *
-     * @param \Tx_Seminars_Model_Event $event the event for which to get the single view page
-     *
-     * @return string
-     *         the single view page UID/URL for $event, will be empty if neither
+     * @return string the single view page UID/URL for $event, will be empty if neither
      *         the event nor the configuration has any single view page set
      */
     protected function getSingleViewPageForEvent(\Tx_Seminars_Model_Event $event): string
@@ -160,8 +143,6 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
 
     /**
      * Checks whether there is a single view page set in the configuration.
-     *
-     * @return bool whether a single view page has been set in the configuration
      */
     protected function configurationHasSingleViewPage(): bool
     {
@@ -169,12 +150,9 @@ class Tx_Seminars_Service_SingleViewLinkBuilder
     }
 
     /**
-     * Retrieves the single view page UID from the flexforms/TS Setup
-     * configuration.
+     * Retrieves the single view page UID from the flexforms/TS Setup configuration.
      *
-     * @return int
-     *         the single view page UID from the configuration, will be 0 if no
-     *         page UID has been set
+     * @return int the single view page UID from the configuration, will be 0 if no page UID has been set
      */
     protected function getSingleViewPageFromConfiguration(): int
     {
