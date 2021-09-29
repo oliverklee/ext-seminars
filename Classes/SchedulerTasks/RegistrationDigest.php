@@ -39,12 +39,7 @@ class RegistrationDigest
      */
     private $eventMapper = null;
 
-    /**
-     * @param ObjectManagerInterface $objectManager
-     *
-     * @return void
-     */
-    public function injectObjectManager(ObjectManagerInterface $objectManager)
+    public function injectObjectManager(ObjectManagerInterface $objectManager): void
     {
         $this->objectManager = $objectManager;
     }
@@ -55,10 +50,8 @@ class RegistrationDigest
      * This method is idempotent, i.e., calling it multiple times will do no harm.
      *
      * @see isInitialized
-     *
-     * @return void
      */
-    public function initializeObject()
+    public function initializeObject(): void
     {
         if ($this->isInitialized()) {
             return;
@@ -70,9 +63,6 @@ class RegistrationDigest
         $this->initialized = true;
     }
 
-    /**
-     * @return bool
-     */
     public function isInitialized(): bool
     {
         return $this->initialized;
@@ -88,18 +78,14 @@ class RegistrationDigest
 
     /**
      * This method is intended to be used for automated tests only.
-     *
-     * @return void
      */
-    public function setConfiguration(Configuration $configuration)
+    public function setConfiguration(Configuration $configuration): void
     {
         $this->configuration = $configuration;
     }
 
     /**
      * This method is intended to be used for automated tests only.
-     *
-     * @return \Tx_Seminars_Mapper_Event the initialized event mapper
      */
     public function getEventMapper(): \Tx_Seminars_Mapper_Event
     {
@@ -108,12 +94,8 @@ class RegistrationDigest
 
     /**
      * This method is intended to be used for automated tests only.
-     *
-     * @param \Tx_Seminars_Mapper_Event $mapper
-     *
-     * @return void
      */
-    public function setEventMapper(\Tx_Seminars_Mapper_Event $mapper)
+    public function setEventMapper(\Tx_Seminars_Mapper_Event $mapper): void
     {
         $this->eventMapper = $mapper;
     }
@@ -122,7 +104,7 @@ class RegistrationDigest
      * Executes this service and sends out a digest email if this is enabled in the configuration and if there
      * is anything to send.
      */
-    public function execute()
+    public function execute(): void
     {
         if (!$this->configuration->getAsBoolean('enable')) {
             return;
@@ -139,9 +121,7 @@ class RegistrationDigest
     }
 
     /**
-     * @param Collection $events the Collection<\Tx_Seminars_Model_Event> that have new registrations
-     *
-     * @return MailMessage
+     * @param Collection<\Tx_Seminars_Model_Event> $events
      */
     private function buildEmail(Collection $events): MailMessage
     {
@@ -152,10 +132,12 @@ class RegistrationDigest
         $subject = LocalizationUtility::translate('registrationDigestEmail_Subject', 'seminars');
         $email->setSubject($subject);
 
+        /** @var non-empty-string $plaintextTemplatePath */
         $plaintextTemplatePath = $this->getConfiguration()->getAsString('plaintextTemplate');
         $plaintextBody = $this->createContent($plaintextTemplatePath, $events);
         $email->setBody($plaintextBody);
 
+        /** @var non-empty-string $htmlTemplatePath */
         $htmlTemplatePath = $this->getConfiguration()->getAsString('htmlTemplate');
         $htmlBody = $this->createContent($htmlTemplatePath, $events);
         $email->addPart($htmlBody, 'text/html');
@@ -164,8 +146,8 @@ class RegistrationDigest
     }
 
     /**
-     * @param string $templatePath in the EXT:... syntax
-     * @param Collection $events Collection<\Tx_Seminars_Model_Event>
+     * @param non-empty-string $templatePath in the EXT:... syntax
+     * @param Collection<\Tx_Seminars_Model_Event> $events
      *
      * @return string
      */
@@ -179,15 +161,12 @@ class RegistrationDigest
     }
 
     /**
-     * @param Collection $events the Collection<\Tx_Seminars_Model_Event> that have new registrations
-     *
-     * @return void
+     * @param Collection<\Tx_Seminars_Model_Event> $events
      */
-    private function updateDateOfLastDigest(Collection $events)
+    private function updateDateOfLastDigest(Collection $events): void
     {
         $now = $GLOBALS['SIM_EXEC_TIME'];
 
-        /** @var \Tx_Seminars_Model_Event $event */
         foreach ($events as $event) {
             $event->setDateOfLastRegistrationDigestEmailAsUnixTimeStamp($now);
             $this->eventMapper->save($event);

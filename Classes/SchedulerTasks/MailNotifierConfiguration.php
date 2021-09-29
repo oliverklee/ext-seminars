@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\SchedulerTasks;
 
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Localization\LanguageService;
+use TYPO3\CMS\Core\Messaging\AbstractMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -30,8 +31,7 @@ class MailNotifierConfiguration implements AdditionalFieldProviderInterface
      * @param AbstractTask|null $task The task object being edited. Null when adding a task!
      * @param SchedulerModuleController $schedulerModule Reference to the scheduler backend module
      *
-     * @return string[][] a two-dimensional array
-     *          array('Identifier' => array('fieldId' => array('code' => '', 'label' => ''))
+     * @return array{"task-page-uid": array{code: string, label: string}}
      */
     public function getAdditionalFields(array &$taskInfo, $task, SchedulerModuleController $schedulerModule): array
     {
@@ -53,7 +53,7 @@ class MailNotifierConfiguration implements AdditionalFieldProviderInterface
     /**
      * Validates the additional field values.
      *
-     * @param string[] $submittedData an array containing the data submitted by the add/edit task form
+     * @param array<string, string> $submittedData an array containing the data submitted by the add/edit task form
      * @param SchedulerModuleController $schedulerModule reference to the scheduler backend module
      *
      * @return bool true if validation was OK (or selected class is not relevant), false otherwise
@@ -72,7 +72,7 @@ class MailNotifierConfiguration implements AdditionalFieldProviderInterface
         }
 
         $message = $this->getLanguageService()->sL(self::LABEL_PREFIX . 'schedulerTasks.errors.page-uid');
-        $this->addMessage($message, FlashMessage::ERROR);
+        $this->addMessage($message, AbstractMessage::ERROR);
 
         return false;
     }
@@ -86,7 +86,7 @@ class MailNotifierConfiguration implements AdditionalFieldProviderInterface
      * @param string $message the flash message content
      * @param int $severity the flash message severity
      */
-    private function addMessage(string $message, int $severity = FlashMessage::OK)
+    private function addMessage(string $message, int $severity = AbstractMessage::OK): void
     {
         /** @var FlashMessage $flashMessage */
         $flashMessage = GeneralUtility::makeInstance(FlashMessage::class, $message, '', $severity);
@@ -96,9 +96,6 @@ class MailNotifierConfiguration implements AdditionalFieldProviderInterface
         $queue->enqueue($flashMessage);
     }
 
-    /**
-     * @return LanguageService
-     */
     protected function getLanguageService(): LanguageService
     {
         return $GLOBALS['LANG'];
@@ -107,12 +104,10 @@ class MailNotifierConfiguration implements AdditionalFieldProviderInterface
     /**
      * Takes care of saving the additional fields' values in the task.
      *
-     * @param string[] $submittedData an array containing the data submitted by the add/edit task form
+     * @param array<string, string> $submittedData an array containing the data submitted by the add/edit task form
      * @param AbstractTask $task the task that is being configured
-     *
-     * @return void
      */
-    public function saveAdditionalFields(array $submittedData, AbstractTask $task)
+    public function saveAdditionalFields(array $submittedData, AbstractTask $task): void
     {
         $pageUid = (int)($submittedData['seminars_configurationPageUid'] ?? 0);
 
