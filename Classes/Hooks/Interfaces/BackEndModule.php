@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Hooks\Interfaces;
+
 use TYPO3\CMS\Core\Mail\MailMessage;
 
 /**
  * This interface needs to be used for hooks concerning the back-end module.
  */
-interface Tx_Seminars_Interfaces_Hook_BackEndModule
+interface BackEndModule
 {
     /**
      * Modifies the general e-mail sent via the back-end module.
