@@ -12,6 +12,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\Model\Event;
+use OliverKlee\Seminars\Model\Registration;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
@@ -2191,7 +2192,7 @@ final class EventTest extends TestCase
      */
     public function setRegistrationsSetsRegistrations(): void
     {
-        /** @var Collection<\Tx_Seminars_Model_Registration> $registrations */
+        /** @var Collection<Registration> $registrations */
         $registrations = new Collection();
         $this->subject->setRegistrations($registrations);
 
@@ -2206,7 +2207,7 @@ final class EventTest extends TestCase
      */
     public function getRegularRegistrationsReturnsRegularRegistrations(): void
     {
-        /** @var Collection<\Tx_Seminars_Model_Registration> $registrations */
+        /** @var Collection<Registration> $registrations */
         $registrations = new Collection();
         $registration = MapperRegistry::get(RegistrationMapper::class)
             ->getLoadedTestingModel(['registration_queue' => 0]);
@@ -2224,7 +2225,7 @@ final class EventTest extends TestCase
      */
     public function getRegularRegistrationsNotReturnsQueueRegistrations(): void
     {
-        /** @var Collection<\Tx_Seminars_Model_Registration> $registrations */
+        /** @var Collection<Registration> $registrations */
         $registrations = new Collection();
         $registration = MapperRegistry::get(RegistrationMapper::class)
             ->getLoadedTestingModel(['registration_queue' => 1]);
@@ -2241,7 +2242,7 @@ final class EventTest extends TestCase
      */
     public function getQueueRegistrationsReturnsQueueRegistrations(): void
     {
-        /** @var Collection<\Tx_Seminars_Model_Registration> $registrations */
+        /** @var Collection<Registration> $registrations */
         $registrations = new Collection();
         $registration = MapperRegistry::get(RegistrationMapper::class)
             ->getLoadedTestingModel(['registration_queue' => 1]);
@@ -2259,7 +2260,7 @@ final class EventTest extends TestCase
      */
     public function getQueueRegistrationsNotReturnsRegularRegistrations(): void
     {
-        /** @var Collection<\Tx_Seminars_Model_Registration> $registrations */
+        /** @var Collection<Registration> $registrations */
         $registrations = new Collection();
         $registration = MapperRegistry::get(RegistrationMapper::class)
             ->getLoadedTestingModel(['registration_queue' => 0]);
@@ -2300,9 +2301,9 @@ final class EventTest extends TestCase
     {
         $this->subject->setDateOfLastRegistrationDigestEmailAsUnixTimeStamp(1);
 
-        /** @var Collection<\Tx_Seminars_Model_Registration> $registrations */
+        /** @var Collection<Registration> $registrations */
         $registrations = new Collection();
-        $registration = new \Tx_Seminars_Model_Registration();
+        $registration = new Registration();
         $registration->setData(['crdate' => 2]);
         $registrations->add($registration);
         $this->subject->setRegistrations($registrations);
@@ -2317,9 +2318,9 @@ final class EventTest extends TestCase
     {
         $this->subject->setDateOfLastRegistrationDigestEmailAsUnixTimeStamp(2);
 
-        /** @var Collection<\Tx_Seminars_Model_Registration> $registrations */
+        /** @var Collection<Registration> $registrations */
         $registrations = new Collection();
-        $registration = new \Tx_Seminars_Model_Registration();
+        $registration = new Registration();
         $registration->setData(['crdate' => 1]);
         $registrations->add($registration);
         $this->subject->setRegistrations($registrations);
@@ -2334,9 +2335,9 @@ final class EventTest extends TestCase
     {
         $this->subject->setDateOfLastRegistrationDigestEmailAsUnixTimeStamp(1);
 
-        /** @var Collection<\Tx_Seminars_Model_Registration> $registrations */
+        /** @var Collection<Registration> $registrations */
         $registrations = new Collection();
-        $registration = new \Tx_Seminars_Model_Registration();
+        $registration = new Registration();
         $registration->setData(['crdate' => 1]);
         $registrations->add($registration);
         $this->subject->setRegistrations($registrations);
@@ -2860,7 +2861,7 @@ final class EventTest extends TestCase
      */
     public function attachRegistrationAddsRegistration(): void
     {
-        /** @var Collection<\Tx_Seminars_Model_Registration> $registrations */
+        /** @var Collection<Registration> $registrations */
         $registrations = new Collection();
         $this->subject->setRegistrations($registrations);
 
@@ -2877,7 +2878,7 @@ final class EventTest extends TestCase
      */
     public function attachRegistrationNotRemovesExistingRegistration(): void
     {
-        /** @var Collection<\Tx_Seminars_Model_Registration> $registrations */
+        /** @var Collection<Registration> $registrations */
         $registrations = new Collection();
         $oldRegistration = MapperRegistry::get(RegistrationMapper::class)->getNewGhost();
         $registrations->add($oldRegistration);
@@ -2896,7 +2897,7 @@ final class EventTest extends TestCase
      */
     public function attachRegistrationSetsEventForRegistration(): void
     {
-        /** @var Collection<\Tx_Seminars_Model_Registration> $registrations */
+        /** @var Collection<Registration> $registrations */
         $registrations = new Collection();
         $this->subject->setRegistrations($registrations);
 
@@ -3134,7 +3135,7 @@ final class EventTest extends TestCase
         $user = new \Tx_Seminars_Model_FrontEndUser();
         $user->setData(['first_name' => $firstName, 'last_name' => $lastName]);
 
-        $registration = new \Tx_Seminars_Model_Registration();
+        $registration = new Registration();
         $registration->setData(
             [
                 'user' => $user,
@@ -3158,7 +3159,7 @@ final class EventTest extends TestCase
         $user = new \Tx_Seminars_Model_FrontEndUser();
         $user->setData([]);
 
-        $registration = new \Tx_Seminars_Model_Registration();
+        $registration = new Registration();
         $registration->setData(
             ['user' => $user, 'registered_themselves' => false, 'additional_persons' => new Collection()]
         );
@@ -3186,7 +3187,7 @@ final class EventTest extends TestCase
         $additionalPersons = new Collection();
         $additionalPersons->add($additionalPerson);
 
-        $registration = new \Tx_Seminars_Model_Registration();
+        $registration = new Registration();
         $registration->setData(
             ['user' => $user, 'registered_themselves' => false, 'additional_persons' => $additionalPersons]
         );
@@ -3214,7 +3215,7 @@ final class EventTest extends TestCase
         $additionalPersons = new Collection();
         $additionalPersons->add($additionalPerson);
 
-        $registration = new \Tx_Seminars_Model_Registration();
+        $registration = new Registration();
         $registration->setData(
             [
                 'user' => $user,
@@ -3239,7 +3240,7 @@ final class EventTest extends TestCase
         $user = new \Tx_Seminars_Model_FrontEndUser();
         $user->setData([]);
 
-        $registration = new \Tx_Seminars_Model_Registration();
+        $registration = new Registration();
         $registration->setData(
             [
                 'user' => $user,
@@ -3267,7 +3268,7 @@ final class EventTest extends TestCase
         $lastName1 = 'Klee';
         $user1 = new \Tx_Seminars_Model_FrontEndUser();
         $user1->setData(['first_name' => $firstName1, 'last_name' => $lastName1]);
-        $registration1 = new \Tx_Seminars_Model_Registration();
+        $registration1 = new Registration();
         $registration1->setData(
             [
                 'user' => $user1,
@@ -3281,7 +3282,7 @@ final class EventTest extends TestCase
         $lastName2 = 'Wolowitz';
         $user2 = new \Tx_Seminars_Model_FrontEndUser();
         $user2->setData(['first_name' => $firstName2, 'last_name' => $lastName2]);
-        $registration2 = new \Tx_Seminars_Model_Registration();
+        $registration2 = new Registration();
         $registration2->setData(
             ['user' => $user2, 'registered_themselves' => true, 'additional_persons' => new Collection()]
         );
@@ -3319,7 +3320,7 @@ final class EventTest extends TestCase
         $additionalPerson2->setData(['first_name' => $firstName2, 'last_name' => $lastName2]);
         $additionalPersons->add($additionalPerson2);
 
-        $registration = new \Tx_Seminars_Model_Registration();
+        $registration = new Registration();
         $registration->setData(
             ['user' => $user, 'registered_themselves' => false, 'additional_persons' => $additionalPersons]
         );
@@ -3345,7 +3346,7 @@ final class EventTest extends TestCase
         $user = new \Tx_Seminars_Model_FrontEndUser();
         $user->setData([]);
 
-        $registration = new \Tx_Seminars_Model_Registration();
+        $registration = new Registration();
         $registration->setData(
             [
                 'user' => $user,
@@ -3373,7 +3374,7 @@ final class EventTest extends TestCase
         $user = new \Tx_Seminars_Model_FrontEndUser();
         $user->setData(['first_name' => $firstName, 'last_name' => $lastName]);
 
-        $registration = new \Tx_Seminars_Model_Registration();
+        $registration = new Registration();
         $registration->setData(
             [
                 'user' => $user,
@@ -3404,7 +3405,7 @@ final class EventTest extends TestCase
         $user = new \Tx_Seminars_Model_FrontEndUser();
         $user->setData(['first_name' => $firstName, 'last_name' => $lastName]);
 
-        $registration = new \Tx_Seminars_Model_Registration();
+        $registration = new Registration();
         $registration->setData(
             [
                 'user' => $user,

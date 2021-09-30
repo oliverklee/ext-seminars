@@ -2,16 +2,17 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Model;
+
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Model\AbstractModel;
 use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
-use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 
 /**
  * This class represents a registration for an event.
  */
-class Tx_Seminars_Model_Registration extends AbstractModel implements Titled
+class Registration extends AbstractModel implements Titled
 {
     /**
      * @return string the title of this registration, will not be empty

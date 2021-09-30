@@ -11,6 +11,7 @@ use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\Model\Event;
+use OliverKlee\Seminars\Model\Registration;
 
 /**
  * @covers \OliverKlee\Seminars\Mapper\RegistrationMapper
@@ -46,7 +47,7 @@ final class RegistrationMapperTest extends TestCase
      */
     public function findWithUidReturnsRegistrationInstance(): void
     {
-        self::assertInstanceOf(\Tx_Seminars_Model_Registration::class, $this->subject->find(1));
+        self::assertInstanceOf(Registration::class, $this->subject->find(1));
     }
 
     /**

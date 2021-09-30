@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Hooks\Interfaces;
 
+use OliverKlee\Seminars\Model\Registration;
 use TYPO3\CMS\Core\Mail\MailMessage;
 
 /**
@@ -16,17 +17,17 @@ interface BackEndModule
      *
      * Note: This hook does not get called yet. It is just here so the interface is finalized.
      */
-    public function modifyGeneralEmail(\Tx_Seminars_Model_Registration $registration, MailMessage $eMail): void;
+    public function modifyGeneralEmail(Registration $registration, MailMessage $eMail): void;
 
     /**
      * Modifies the confirmation e-mail sent via the back-end module.
      */
-    public function modifyConfirmEmail(\Tx_Seminars_Model_Registration $registration, MailMessage $eMail): void;
+    public function modifyConfirmEmail(Registration $registration, MailMessage $eMail): void;
 
     /**
      * Modifies the cancelation e-mail sent via the back-end module.
      *
      * Note: This hook does not get called yet. It is just here so the interface is finalized.
      */
-    public function modifyCancelEmail(\Tx_Seminars_Model_Registration $registration, MailMessage $eMail): void;
+    public function modifyCancelEmail(Registration $registration, MailMessage $eMail): void;
 }

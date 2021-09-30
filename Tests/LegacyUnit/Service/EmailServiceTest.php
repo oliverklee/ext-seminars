@@ -10,6 +10,7 @@ use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Model\Event;
+use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\Service\EmailService;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
@@ -128,7 +129,7 @@ final class EmailServiceTest extends TestCase
 
         $this->user = new \Tx_Seminars_Model_FrontEndUser();
         $this->user->setData(['name' => 'John Doe', 'email' => 'john.doe@example.com']);
-        $registration = new \Tx_Seminars_Model_Registration();
+        $registration = new Registration();
         $registration->setData([]);
         $registration->setFrontEndUser($this->user);
         $this->event->attachRegistration($registration);
@@ -157,7 +158,7 @@ final class EmailServiceTest extends TestCase
      */
     public function sendEmailToAttendeesForEventWithoutRegistrationsNotSendsMail(): void
     {
-        /** @var Collection<\Tx_Seminars_Model_Registration> $registrations */
+        /** @var Collection<Registration> $registrations */
         $registrations = new Collection();
         $this->event->setRegistrations($registrations);
 
@@ -323,7 +324,7 @@ final class EmailServiceTest extends TestCase
     {
         $secondUser = new \Tx_Seminars_Model_FrontEndUser();
         $secondUser->setData(['email' => 'jane@example.com', 'name' => 'Jane Doe']);
-        $secondRegistration = new \Tx_Seminars_Model_Registration();
+        $secondRegistration = new Registration();
         $secondRegistration->setData([]);
         $secondRegistration->setFrontEndUser($secondUser);
         $this->event->attachRegistration($secondRegistration);
@@ -343,9 +344,9 @@ final class EmailServiceTest extends TestCase
      */
     public function sendEmailToAttendeesForRegistrationWithoutUserNotSendsMail(): void
     {
-        $registration = new \Tx_Seminars_Model_Registration();
+        $registration = new Registration();
         $registration->setData([]);
-        /** @var Collection<\Tx_Seminars_Model_Registration> $registrations */
+        /** @var Collection<Registration> $registrations */
         $registrations = new Collection();
         $registrations->add($registration);
         $this->event->setRegistrations($registrations);

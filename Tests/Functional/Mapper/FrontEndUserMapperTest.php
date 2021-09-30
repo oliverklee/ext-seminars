@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Tests\Functional\Mapper;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\Exception\NotFoundException;
+use OliverKlee\Seminars\Model\Registration;
 
 /**
  * @covers \Tx_Seminars_Mapper_FrontEndUser
@@ -73,7 +74,7 @@ final class FrontEndUserMapperTest extends FunctionalTestCase
         $this->subject->load($model);
 
         $registration = $model->getRegistration();
-        self::assertInstanceOf(\Tx_Seminars_Model_Registration::class, $registration);
+        self::assertInstanceOf(Registration::class, $registration);
         self::assertSame(1, $registration->getUid());
     }
 

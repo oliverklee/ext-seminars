@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Service;
 
 use OliverKlee\Seminar\Email\Salutation;
 use OliverKlee\Seminars\Model\Event;
+use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\ViewHelpers\DateRangeViewHelper;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Mail\MailMessage;
@@ -47,7 +48,7 @@ class EmailService implements SingletonInterface
      */
     public function sendEmailToAttendees(Event $event, string $subject, string $body): void
     {
-        /** @var \Tx_Seminars_Model_Registration $registration */
+        /** @var Registration $registration */
         foreach ($event->getRegistrations() as $registration) {
             $user = $registration->getFrontEndUser();
             if ($user === null || !$user->hasEmailAddress()) {

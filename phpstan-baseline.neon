@@ -136,7 +136,7 @@ parameters:
 			path: Classes/FrontEnd/RegistrationForm.php
 
 		-
-			message: "#^Parameter \\#1 \\$paymentMethod of method Tx_Seminars_Model_Registration\\:\\:setPaymentMethod\\(\\) expects Tx_Seminars_Model_PaymentMethod\\|null, OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\|null given\\.$#"
+			message: "#^Parameter \\#1 \\$paymentMethod of method OliverKlee\\\\Seminars\\\\Model\\\\Registration\\:\\:setPaymentMethod\\(\\) expects Tx_Seminars_Model_PaymentMethod\\|null, OliverKlee\\\\Oelib\\\\Model\\\\AbstractModel\\|null given\\.$#"
 			count: 1
 			path: Classes/Service/RegistrationManager.php
 

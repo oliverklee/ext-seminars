@@ -20,6 +20,7 @@ use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
+use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use Pelago\Emogrifier\CssInliner;
@@ -439,13 +440,10 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      * @param array $formData the raw registration data from the registration form
      * @param AbstractPlugin $plugin live plugin object
      *
-     * @return \Tx_Seminars_Model_Registration the created, saved registration
+     * @return Registration the created, saved registration
      */
-    public function createRegistration(
-        LegacyEvent $event,
-        array $formData,
-        AbstractPlugin $plugin
-    ): \Tx_Seminars_Model_Registration {
+    public function createRegistration(LegacyEvent $event, array $formData, AbstractPlugin $plugin): Registration
+    {
         $this->registration = GeneralUtility::makeInstance(LegacyRegistration::class);
         $this->registration->setContentObject($plugin->cObj);
         $this->registration->setRegistrationData($event, $this->getLoggedInFrontEndUserUid(), $formData);
@@ -488,10 +486,10 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      *
      * Note: This functions does not check whether registration is possible at all.
      *
-     * @param \Tx_Seminars_Model_Registration $registration the registration to fill, must already have an event assigned
+     * @param Registration $registration the registration to fill, must already have an event assigned
      * @param array $formData the raw data submitted via the form, may be empty
      */
-    protected function setRegistrationData(\Tx_Seminars_Model_Registration $registration, array $formData): void
+    protected function setRegistrationData(Registration $registration, array $formData): void
     {
         $event = $registration->getEvent();
 
@@ -779,7 +777,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
     /**
      * Adds an iCalendar attachment with the event's most important data to $email.
      */
-    private function addCalendarAttachment(MailMessage $email, \Tx_Seminars_Model_Registration $registration): void
+    private function addCalendarAttachment(MailMessage $email, Registration $registration): void
     {
         $event = $registration->getEvent();
         $timeZone = $event->getTimeZone() ?: $this->getConfValueString('defaultTimeZone');

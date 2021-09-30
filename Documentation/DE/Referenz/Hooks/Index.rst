@@ -403,7 +403,7 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          */
         public function modifyAttendeeEmail(
             MailMessage $email,
-            \Tx_Seminars_Model_Registration $registration,
+            Registration $registration,
             string $emailReason
         ): void {
             // Hier Ihr Code
@@ -417,7 +417,7 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          *
          * You may modify or set marker values in the template.
          *
-         * @param \Tx_Seminars_Model_Registration $registration
+         * @param Registration $registration
          * @param string $emailReason Possible values:
          *          - confirmation
          *          - confirmationOnUnregistration
@@ -426,7 +426,7 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          */
         public function modifyAttendeeEmailBodyPlainText(
             Template $emailTemplate,
-            \Tx_Seminars_Model_Registration $registration,
+            Registration $registration,
             string $emailReason
         ): void {
             // Hier Ihr Code
@@ -439,7 +439,7 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          *
          * You may modify or set marker values in the template.
          *
-         * @param \Tx_Seminars_Model_Registration $registration
+         * @param Registration $registration
          * @param string $emailReason Possible values:
          *          - confirmation
          *          - confirmationOnUnregistration
@@ -448,7 +448,7 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          */
         public function modifyAttendeeEmailBodyHtml(
             Template $emailTemplate,
-            \Tx_Seminars_Model_Registration $registration,
+            Registration $registration,
             string $emailReason
         ): void {
             // Hier Ihr Code
@@ -467,7 +467,7 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          */
         public function modifyOrganizerEmail(
             MailMessage $email,
-            \Tx_Seminars_Model_Registration $registration,
+            Registration $registration,
             string $emailReason
         ): void {
             // Hier Ihr Code
@@ -485,7 +485,7 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          */
         public function modifyAdditionalEmail(
             MailMessage $email,
-            \Tx_Seminars_Model_Registration $registration,
+            Registration $registration,
             string $emailReason
         ): void {
             // Hier Ihr Code
@@ -625,20 +625,20 @@ It's used like this:
          * Note: This hook does not get called yet. It is just here so the interface
          * is finalized.
          *
-         * @param \Tx_Seminars_Model_Registration $registration
+         * @param Registration $registration
          *        the registration to which the e-mail refers
          * @param Mail $eMail the e-mail that will be sent
         */
-        public function modifyGeneralEmail(\Tx_Seminars_Model_Registration $registration, Mail $eMail): void {…}
+        public function modifyGeneralEmail(Registration $registration, Mail $eMail): void {…}
 
          /**
          * Modifies the confirmation e-mail sent via the back-end module.
          *
-         * @param \Tx_Seminars_Model_Registration $registration
+         * @param Registration $registration
          *        the registration to which the e-mail refers
          * @param Mail $eMail the e-mail that will be sent
          */
-        public function modifyConfirmEmail(\Tx_Seminars_Model_Registration $registration, Mail $eMail): void {…}
+        public function modifyConfirmEmail(Registration $registration, Mail $eMail): void {…}
 
          /**
         * Modifies the cancelation e-mail sent via the back-end module.
@@ -646,11 +646,11 @@ It's used like this:
         * Note: This hook does not get called yet. It is just here so the interface
         * is finalized.
         *
-        * @param \Tx_Seminars_Model_Registration $registration
+        * @param Registration $registration
         *        the registration to which the e-mail refers
         * @param Mail $eMail the e-mail that will be sent
         */
-        public function modifyCancelEmail(\Tx_Seminars_Model_Registration $registration, Mail $eMail): void {…}
+        public function modifyCancelEmail(Registration $registration, Mail $eMail): void {…}
 
 .. _backendregistrationlistview_de:
 
@@ -697,14 +697,14 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          * `\OliverKlee\Seminars\BackEnd\RegistrationsList::REGISTRATIONS_ON_QUEUE`
          * and `\OliverKlee\Seminars\BackEnd\RegistrationsList::REGULAR_REGISTRATIONS`) to distinguish.
          *
-         * @param \Tx_Seminars_Model_Registration $registration
+         * @param Registration $registration
          *        the registration the row is made from
          * @param Template $template the template that will be used to create the registration list
          * @param int $registrationsToShow
          *        the type of registration shown in the list
          */
         public function modifyListRow(
-            \Tx_Seminars_Model_Registration $registration,
+            Registration $registration,
             Template $template,
             int $registrationsToShow
         ): void {
