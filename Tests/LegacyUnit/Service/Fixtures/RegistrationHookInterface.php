@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures;
 
 use OliverKlee\Seminars\OldModel\LegacyEvent;
+use OliverKlee\Seminars\OldModel\LegacyRegistration;
 
 /**
  * Interface for building mocks for registrations hook tests.
@@ -25,7 +26,7 @@ interface RegistrationHookInterface
      * @return void
      */
     public function seminarRegistrationCreated(
-        \Tx_Seminars_OldModel_Registration $registration,
+        LegacyRegistration $registration,
         \Tx_Seminars_Model_FrontEndUser $user
     ): void;
 
@@ -33,7 +34,7 @@ interface RegistrationHookInterface
      * @return void
      */
     public function seminarRegistrationRemoved(
-        \Tx_Seminars_OldModel_Registration $registration,
+        LegacyRegistration $registration,
         \Tx_Seminars_Model_FrontEndUser $user
     ): void;
 
@@ -41,7 +42,7 @@ interface RegistrationHookInterface
      * @return void
      */
     public function seminarRegistrationMovedFromQueue(
-        \Tx_Seminars_OldModel_Registration $registration,
+        LegacyRegistration $registration,
         \Tx_Seminars_Model_FrontEndUser $user
     ): void;
 }

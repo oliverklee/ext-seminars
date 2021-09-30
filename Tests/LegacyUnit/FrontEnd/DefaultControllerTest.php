@@ -18,6 +18,7 @@ use OliverKlee\Seminars\Hooks\Interfaces\SeminarListView;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
+use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
 use OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd\Fixtures\TestingDefaultController;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
@@ -679,7 +680,7 @@ final class DefaultControllerTest extends TestCase
         );
 
         self::assertInstanceOf(
-            \Tx_Seminars_OldModel_Registration::class,
+            LegacyRegistration::class,
             $this->subject->getRegistration()
         );
     }

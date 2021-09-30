@@ -21,6 +21,7 @@ use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
+use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
 use OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures\TestingRegistrationManager;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
@@ -146,7 +147,7 @@ final class RegistrationManagerTest extends TestCase
         $this->addMockedInstance(MailMessage::class, $this->email);
         $this->addMockedInstance(MailMessage::class, $this->secondEmail);
 
-        \Tx_Seminars_OldModel_Registration::purgeCachedSeminars();
+        LegacyRegistration::purgeCachedSeminars();
         $this->extensionConfiguration = new DummyConfiguration(
             ['eMailFormatForAttendees' => TestingRegistrationManager::SEND_TEXT_MAIL]
         );
@@ -280,9 +281,9 @@ final class RegistrationManagerTest extends TestCase
      *
      * A new front-end user will be created and the event in $this->seminar will be used.
      *
-     * @return \Tx_Seminars_OldModel_Registration the created registration
+     * @return LegacyRegistration the created registration
      */
-    private function createRegistration(): \Tx_Seminars_OldModel_Registration
+    private function createRegistration(): LegacyRegistration
     {
         $frontEndUserUid = $this->testingFramework->createFrontEndUser(
             '',
@@ -303,7 +304,7 @@ final class RegistrationManagerTest extends TestCase
             ]
         );
 
-        return new \Tx_Seminars_OldModel_Registration($registrationUid);
+        return new LegacyRegistration($registrationUid);
     }
 
     /**
@@ -2102,7 +2103,7 @@ final class RegistrationManagerTest extends TestCase
                 'user' => $this->testingFramework->createFrontEndUser(),
             ]
         );
-        $registration = new \Tx_Seminars_OldModel_Registration($registrationUid);
+        $registration = new LegacyRegistration($registrationUid);
 
         $this->email->expects(self::never())->method('send');
 
@@ -4899,7 +4900,7 @@ final class RegistrationManagerTest extends TestCase
             ]
         );
 
-        $registration = new \Tx_Seminars_OldModel_Registration($registrationUid);
+        $registration = new LegacyRegistration($registrationUid);
         $this->subject->notifyOrganizers($registration);
 
         self::assertStringContainsString(
@@ -4928,7 +4929,7 @@ final class RegistrationManagerTest extends TestCase
             ]
         );
 
-        $registration = new \Tx_Seminars_OldModel_Registration($registrationUid);
+        $registration = new LegacyRegistration($registrationUid);
         $this->subject->notifyOrganizers($registration);
 
         self::assertStringContainsString(
@@ -5819,7 +5820,7 @@ final class RegistrationManagerTest extends TestCase
         $subject->createRegistration($this->seminar, [], $plugin);
 
         self::assertInstanceOf(
-            \Tx_Seminars_OldModel_Registration::class,
+            LegacyRegistration::class,
             $subject->getRegistration()
         );
         $uid = $subject->getRegistration()->getUid();

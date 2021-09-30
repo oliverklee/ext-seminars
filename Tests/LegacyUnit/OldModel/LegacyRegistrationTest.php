@@ -9,19 +9,20 @@ use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
+use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * @covers \Tx_Seminars_OldModel_Registration
+ * @covers \OliverKlee\Seminars\OldModel\LegacyRegistration
  */
-final class RegistrationTest extends TestCase
+final class LegacyRegistrationTest extends TestCase
 {
     use LanguageHelper;
 
     /**
-     * @var \Tx_Seminars_OldModel_Registration
+     * @var LegacyRegistration
      */
     private $subject = null;
 
@@ -52,7 +53,7 @@ final class RegistrationTest extends TestCase
     {
         $GLOBALS['SIM_EXEC_TIME'] = 1524751343;
 
-        \Tx_Seminars_OldModel_Registration::purgeCachedSeminars();
+        LegacyRegistration::purgeCachedSeminars();
 
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
@@ -99,7 +100,7 @@ final class RegistrationTest extends TestCase
             ]
         );
 
-        $this->subject = new \Tx_Seminars_OldModel_Registration($registrationUid);
+        $this->subject = new LegacyRegistration($registrationUid);
         $this->subject->setConfigurationValue(
             'templateFile',
             'EXT:seminars/Resources/Private/Templates/Mail/e-mail.html'
@@ -535,7 +536,7 @@ final class RegistrationTest extends TestCase
      */
     public function dumpAttendanceValuesCreatesNoDoubleColonsAfterLabel(string $fieldName): void
     {
-        $subject = \Tx_Seminars_OldModel_Registration::fromData([$fieldName => '1234 some value']);
+        $subject = LegacyRegistration::fromData([$fieldName => '1234 some value']);
 
         $result = $subject->dumpAttendanceValues($fieldName);
 
@@ -550,7 +551,7 @@ final class RegistrationTest extends TestCase
     public function commitToDbCanCreateNewRecord(): void
     {
         $seminar = new LegacyEvent($this->seminarUid);
-        $registration = new \Tx_Seminars_OldModel_Registration();
+        $registration = new LegacyRegistration();
         $registration->setRegistrationData($seminar, 0, []);
         $registration->enableTestMode();
         $this->testingFramework->markTableAsDirty('tx_seminars_attendances');
@@ -576,7 +577,7 @@ final class RegistrationTest extends TestCase
             'tx_seminars_lodgings'
         );
 
-        $registration = new \Tx_Seminars_OldModel_Registration();
+        $registration = new LegacyRegistration();
         $registration->setRegistrationData(
             $seminar,
             0,
@@ -622,7 +623,7 @@ final class RegistrationTest extends TestCase
             'tx_seminars_foods'
         );
 
-        $registration = new \Tx_Seminars_OldModel_Registration();
+        $registration = new LegacyRegistration();
         $registration->setRegistrationData(
             $seminar,
             0,
@@ -666,7 +667,7 @@ final class RegistrationTest extends TestCase
             'tx_seminars_checkboxes'
         );
 
-        $registration = new \Tx_Seminars_OldModel_Registration();
+        $registration = new LegacyRegistration();
         $registration->setRegistrationData(
             $seminar,
             0,
@@ -722,8 +723,8 @@ final class RegistrationTest extends TestCase
             ['title' => 'test title 2']
         );
 
-        \Tx_Seminars_OldModel_Registration::purgeCachedSeminars();
-        $subject = new \Tx_Seminars_OldModel_Registration($registrationUid);
+        LegacyRegistration::purgeCachedSeminars();
+        $subject = new LegacyRegistration($registrationUid);
 
         self::assertSame(
             'test title 2',
@@ -742,7 +743,7 @@ final class RegistrationTest extends TestCase
     {
         $this->testingFramework->logoutFrontEndUser();
 
-        new \Tx_Seminars_OldModel_Registration(
+        new LegacyRegistration(
             $this->testingFramework->createRecord(
                 'tx_seminars_attendances',
                 ['seminar' => $this->seminarUid]

@@ -13,6 +13,7 @@ use OliverKlee\Seminars\BackEnd\AbstractList;
 use OliverKlee\Seminars\BackEnd\RegistrationsList;
 use OliverKlee\Seminars\Bag\RegistrationBag;
 use OliverKlee\Seminars\Hooks\Interfaces\BackendRegistrationListView;
+use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Tests\LegacyUnit\BackEnd\Fixtures\DummyModule;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
 use TYPO3\CMS\Backend\Template\DocumentTemplate;
@@ -67,7 +68,7 @@ final class RegistrationsListTest extends TestCase
         $this->purgeMockedInstances();
 
         $this->testingFramework->cleanUp();
-        \Tx_Seminars_OldModel_Registration::purgeCachedSeminars();
+        LegacyRegistration::purgeCachedSeminars();
         $this->restoreOriginalEnvironment();
     }
 

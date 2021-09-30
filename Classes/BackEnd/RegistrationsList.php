@@ -9,6 +9,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\BackendRegistrationListView;
+use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -161,7 +162,7 @@ class RegistrationsList extends AbstractList
 
         $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
 
-        /** @var \Tx_Seminars_OldModel_Registration $registration */
+        /** @var LegacyRegistration $registration */
         foreach ($registrationBag as $registration) {
             $registrationNew = $mapper->find($registration->getUid());
 

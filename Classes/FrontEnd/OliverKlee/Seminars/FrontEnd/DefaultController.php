@@ -37,6 +37,7 @@ use OliverKlee\Seminars\Hooks\Interfaces\SeminarListView;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
+use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
@@ -90,7 +91,7 @@ class DefaultController extends TemplateHelper
     private $seminar = null;
 
     /**
-     * @var \Tx_Seminars_OldModel_Registration|null the registration which we want to
+     * @var LegacyRegistration|null the registration which we want to
      *                               list/show in the "my events" view
      */
     private $registration = null;
@@ -470,8 +471,8 @@ class DefaultController extends TemplateHelper
      */
     public function createRegistration(int $uid): bool
     {
-        $this->registration = \Tx_Seminars_OldModel_Registration::fromUid($uid);
-        $exists = $this->registration instanceof \Tx_Seminars_OldModel_Registration;
+        $this->registration = LegacyRegistration::fromUid($uid);
+        $exists = $this->registration instanceof LegacyRegistration;
 
         if ($exists) {
             $this->registration->setContentObject($this->cObj);
@@ -504,7 +505,7 @@ class DefaultController extends TemplateHelper
     /**
      * Returns the current registration.
      */
-    public function getRegistration(): ?\Tx_Seminars_OldModel_Registration
+    public function getRegistration(): ?LegacyRegistration
     {
         return $this->registration;
     }
@@ -1775,7 +1776,7 @@ class DefaultController extends TemplateHelper
 
         foreach ($seminarOrRegistrationBag as $currentItem) {
             if ($whatToDisplay === 'my_events') {
-                /** @var \Tx_Seminars_OldModel_Registration $currentItem */
+                /** @var LegacyRegistration $currentItem */
                 $this->registration = $currentItem;
                 $this->setSeminar($this->registration->getSeminarObject());
             } else {

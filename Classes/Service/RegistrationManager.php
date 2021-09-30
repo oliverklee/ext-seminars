@@ -19,6 +19,7 @@ use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
+use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use Pelago\Emogrifier\CssInliner;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -68,7 +69,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
     private static $instance = null;
 
     /**
-     * @var \Tx_Seminars_OldModel_Registration|null
+     * @var LegacyRegistration|null
      */
     private $registration = null;
 
@@ -295,14 +296,14 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
     /**
      * Creates an HTML link to the unregistration page (if a user is logged in).
      *
-     * @param \Tx_Seminars_OldModel_Registration $registration a registration from which we'll get the UID
+     * @param LegacyRegistration $registration a registration from which we'll get the UID
      *        for our GET parameters
      *
      * @return string HTML code with the link
      */
     public function getLinkToUnregistrationPage(
         TemplateHelper $plugin,
-        \Tx_Seminars_OldModel_Registration $registration
+        LegacyRegistration $registration
     ): string {
         return $plugin->cObj->getTypoLink(
             $plugin->translate('label_onlineUnregistration'),
@@ -443,7 +444,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         array $formData,
         AbstractPlugin $plugin
     ): \Tx_Seminars_Model_Registration {
-        $this->registration = GeneralUtility::makeInstance(\Tx_Seminars_OldModel_Registration::class);
+        $this->registration = GeneralUtility::makeInstance(LegacyRegistration::class);
         $this->registration->setContentObject($plugin->cObj);
         $this->registration->setRegistrationData($event, $this->getLoggedInFrontEndUserUid(), $formData);
         $this->registration->commitToDatabase();
@@ -600,8 +601,8 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      */
     public function removeRegistration(int $uid, TemplateHelper $plugin): void
     {
-        $this->registration = \Tx_Seminars_OldModel_Registration::fromUid($uid);
-        if (!($this->registration instanceof \Tx_Seminars_OldModel_Registration)) {
+        $this->registration = LegacyRegistration::fromUid($uid);
+        if (!($this->registration instanceof LegacyRegistration)) {
             return;
         }
 
@@ -641,7 +642,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
         $registrationBagBuilder->limitToSeatsAtMost($vacancies);
 
         $configuration = $this->getSharedConfiguration();
-        /** @var \Tx_Seminars_OldModel_Registration $registration */
+        /** @var LegacyRegistration $registration */
         foreach ($registrationBagBuilder->build() as $registration) {
             if ($vacancies <= 0) {
                 break;
@@ -704,7 +705,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
     /**
      * Sends an e-mail to the attendee with a message concerning his/her registration or unregistration.
      *
-     * @param \Tx_Seminars_OldModel_Registration $oldRegistration the registration for which the notification should be sent
+     * @param LegacyRegistration $oldRegistration the registration for which the notification should be sent
      * @param string $helloSubjectPrefix
      *        prefix for the locallang key of the localized hello and subject
      *        string; allowed values are:
@@ -716,7 +717,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      *        postfixed with "Hello" or "Subject".
      */
     public function notifyAttendee(
-        \Tx_Seminars_OldModel_Registration $oldRegistration,
+        LegacyRegistration $oldRegistration,
         TemplateHelper $plugin,
         string $helloSubjectPrefix = 'confirmation'
     ): void {
@@ -822,7 +823,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
     /**
      * Sends an e-mail to all organizers with a message about a registration or unregistration.
      *
-     * @param \Tx_Seminars_OldModel_Registration $registration
+     * @param LegacyRegistration $registration
      *        the registration for which the notification should be send
      * @param string $helloSubjectPrefix
      *        prefix for the locallang key of the localized hello and subject string, Allowed values are:
@@ -833,7 +834,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      *        In the following, the parameter is prefixed with "email_" and postfixed with "Hello" or "Subject".
      */
     public function notifyOrganizers(
-        \Tx_Seminars_OldModel_Registration $registration,
+        LegacyRegistration $registration,
         string $helloSubjectPrefix = 'notification'
     ): void {
         $configuration = $this->getSharedConfiguration();
@@ -919,10 +920,10 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      * If both things happen at the same time (minimum and maximum count of
      * attendees are the same), only the "event is full" message will be sent.
      *
-     * @param \Tx_Seminars_OldModel_Registration $registration the registration
+     * @param LegacyRegistration $registration the registration
      *        for which the notification should be sent
      */
-    public function sendAdditionalNotification(\Tx_Seminars_OldModel_Registration $registration): void
+    public function sendAdditionalNotification(LegacyRegistration $registration): void
     {
         if ($registration->isOnRegistrationQueue()) {
             return;
@@ -973,13 +974,13 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
     /**
      * Returns the topic for the additional notification e-mail.
      *
-     * @param \Tx_Seminars_OldModel_Registration $registration the registration for which the notification
+     * @param LegacyRegistration $registration the registration for which the notification
      *        should be sent
      *
      * @return string "EnoughRegistrations" if the event has enough attendances,
      *                "IsFull" if the event is fully booked, otherwise an empty string
      */
-    private function getReasonForNotification(\Tx_Seminars_OldModel_Registration $registration): string
+    private function getReasonForNotification(LegacyRegistration $registration): string
     {
         $event = $registration->getSeminarObject();
         if ($event->isFull()) {
@@ -1004,14 +1005,14 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      * Returns the message for an e-mail according to the reason
      * $reasonForNotification provided.
      *
-     * @param \Tx_Seminars_OldModel_Registration $registration the registration for which the notification should be sent
+     * @param LegacyRegistration $registration the registration for which the notification should be sent
      * @param string $reasonForNotification reason for the notification, must be either "IsFull" or
      *        "EnoughRegistrations", must not be empty
      *
      * @return string the message, will not be empty
      */
     private function getMessageForNotification(
-        \Tx_Seminars_OldModel_Registration $registration,
+        LegacyRegistration $registration,
         string $reasonForNotification
     ): string {
         $localLanguageKey = 'email_additionalNotification' . $reasonForNotification;
@@ -1057,7 +1058,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
     /**
      * Builds the e-mail body for an e-mail to the attendee.
      *
-     * @param \Tx_Seminars_OldModel_Registration $registration
+     * @param LegacyRegistration $registration
      *        the registration for which the notification should be send
      * @param string $helloSubjectPrefix
      *        prefix for the locallang key of the localized hello and subject
@@ -1072,7 +1073,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      * @return string the e-mail body for the attendee e-mail, will not be empty
      */
     private function buildEmailContent(
-        \Tx_Seminars_OldModel_Registration $registration,
+        LegacyRegistration $registration,
         TemplateHelper $plugin,
         string $helloSubjectPrefix,
         bool $useHtml = false
@@ -1301,10 +1302,10 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
     /**
      * Fills the attendees_names marker or hides it if necessary.
      *
-     * @param \Tx_Seminars_OldModel_Registration $registration the current registration
+     * @param LegacyRegistration $registration the current registration
      * @param bool $useHtml whether to create HTML instead of plain text
      */
-    private function fillOrHideAttendeeMarker(\Tx_Seminars_OldModel_Registration $registration, bool $useHtml): void
+    private function fillOrHideAttendeeMarker(LegacyRegistration $registration, bool $useHtml): void
     {
         $template = $this->getInitializedEmailTemplate();
         if (!$registration->hasAttendeesNames()) {
@@ -1370,11 +1371,11 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      *          - confirmationOnQueueUpdate
      *          In the following the parameter is prefixed with
      *          "email_" and postfixed with "Hello".
-     * @param \Tx_Seminars_OldModel_Registration $registration the registration the introduction should be created for
+     * @param LegacyRegistration $registration the registration the introduction should be created for
      */
     private function setEmailIntroduction(
         string $helloSubjectPrefix,
-        \Tx_Seminars_OldModel_Registration $registration
+        LegacyRegistration $registration
     ): void {
         $template = $this->getInitializedEmailTemplate();
         /** @var Salutation $salutation */
@@ -1409,12 +1410,12 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      *          - confirmationOnUnregistration
      *          - confirmationOnRegistrationForQueue
      *          - confirmationOnQueueUpdate
-     * @param \Tx_Seminars_OldModel_Registration $registration the registration the introduction should be created for
+     * @param LegacyRegistration $registration the registration the introduction should be created for
      * @param bool $useHtml whether to send HTML instead of plain text e-mail
      */
     private function fillOrHideUnregistrationNotice(
         string $helloSubjectPrefix,
-        \Tx_Seminars_OldModel_Registration $registration,
+        LegacyRegistration $registration,
         bool $useHtml
     ): void {
         $event = $registration->getSeminarObject();
@@ -1447,7 +1448,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
     /**
      * Returns the (old) registration created via createRegistration.
      */
-    public function getRegistration(): ?\Tx_Seminars_OldModel_Registration
+    public function getRegistration(): ?LegacyRegistration
     {
         return $this->registration;
     }
