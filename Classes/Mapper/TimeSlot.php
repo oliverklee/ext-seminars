@@ -23,7 +23,7 @@ class Tx_Seminars_Mapper_TimeSlot extends AbstractDataMapper
     protected $modelClassName = \Tx_Seminars_Model_TimeSlot::class;
 
     /**
-     * @var array<string, class-string<AbstractDataMapper>>
+     * @var array<non-empty-string, class-string>
      *      the (possible) relations of the created models in the format DB column name => mapper name
      */
     protected $relations = [

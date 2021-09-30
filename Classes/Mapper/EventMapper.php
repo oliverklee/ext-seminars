@@ -29,7 +29,7 @@ class EventMapper extends AbstractDataMapper
     protected $modelClassName = Event::class;
 
     /**
-     * @var array<string, class-string<AbstractDataMapper>>
+     * @var array<non-empty-string, class-string>
      *      the (possible) relations of the created models in the format DB column name => mapper name
      */
     protected $relations = [

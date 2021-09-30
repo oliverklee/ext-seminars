@@ -26,7 +26,7 @@ class FrontEndUserGroupMapper extends AbstractDataMapper
     protected $modelClassName = FrontEndUserGroup::class;
 
     /**
-     * @var array<string, class-string<AbstractDataMapper>>
+     * @var array<non-empty-string, class-string>
      *      the (possible) relations of the created models in the format DB column name => mapper name
      */
     protected $relations = [
