@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
+use OliverKlee\Seminars\Bag\RegistrationBag;
+use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
@@ -130,7 +132,7 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_Abstr
         $builder = $this->createRegistrationBagBuilder();
         $builder->limitToRegular();
 
-        /** @var \Tx_Seminars_Bag_Registration $regularRegistrations */
+        /** @var RegistrationBag $regularRegistrations */
         $regularRegistrations = $builder->build();
         if ($regularRegistrations->isEmpty()) {
             $this->setMarker(
@@ -151,7 +153,7 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_Abstr
             $builder = $this->createRegistrationBagBuilder();
             $builder->limitToOnQueue();
 
-            /** @var \Tx_Seminars_Bag_Registration $waitingListRegistrations */
+            /** @var RegistrationBag $waitingListRegistrations */
             $waitingListRegistrations = $builder->build();
             if (!$waitingListRegistrations->isEmpty()) {
                 $this->createTableBody($waitingListRegistrations);
@@ -171,10 +173,10 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_Abstr
      * (regular and on the queue) for the event in $this->seminar, ordered by
      * creation date.
      */
-    private function createRegistrationBagBuilder(): \Tx_Seminars_BagBuilder_Registration
+    private function createRegistrationBagBuilder(): RegistrationBagBuilder
     {
-        /** @var \Tx_Seminars_BagBuilder_Registration $builder */
-        $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Registration::class);
+        /** @var RegistrationBagBuilder $builder */
+        $builder = GeneralUtility::makeInstance(RegistrationBagBuilder::class);
         $builder->limitToEvent($this->seminar->getUid());
         $builder->limitToExistingUsers();
         $builder->setOrderBy('crdate');
@@ -216,9 +218,9 @@ class Tx_Seminars_FrontEnd_RegistrationsList extends \Tx_Seminars_FrontEnd_Abstr
     /**
      * Creates the table body for a list of registrations and sets the subpart in the template.
      *
-     * @param \Tx_Seminars_Bag_Registration $registrations the registrations to list, must not be empty
+     * @param RegistrationBag $registrations the registrations to list, must not be empty
      */
-    private function createTableBody(\Tx_Seminars_Bag_Registration $registrations): void
+    private function createTableBody(RegistrationBag $registrations): void
     {
         $tableBody = '';
 

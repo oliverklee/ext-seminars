@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Csv;
 
+use OliverKlee\Seminars\Bag\RegistrationBag;
+use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationListCsv;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -173,12 +175,12 @@ abstract class AbstractRegistrationListView extends AbstractListView
     /**
      * Creates a registrationBagBuilder with some preset limitations.
      *
-     * @return \Tx_Seminars_BagBuilder_Registration the bag builder with some preset limitations
+     * @return RegistrationBagBuilder the bag builder with some preset limitations
      */
-    protected function createRegistrationBagBuilder(): \Tx_Seminars_BagBuilder_Registration
+    protected function createRegistrationBagBuilder(): RegistrationBagBuilder
     {
-        /** @var \Tx_Seminars_BagBuilder_Registration $registrationBagBuilder */
-        $registrationBagBuilder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Registration::class);
+        /** @var RegistrationBagBuilder $registrationBagBuilder */
+        $registrationBagBuilder = GeneralUtility::makeInstance(RegistrationBagBuilder::class);
 
         if (!$this->shouldAlsoContainRegistrationsOnQueue()) {
             $registrationBagBuilder->limitToRegular();
@@ -199,17 +201,17 @@ abstract class AbstractRegistrationListView extends AbstractListView
      *
      * The fields are separated by semicolons and the lines by CRLF.
      *
-     * @param \Tx_Seminars_BagBuilder_Registration $builder the bag builder already limited to the registrations
+     * @param RegistrationBagBuilder $builder the bag builder already limited to the registrations
      *        which should be returned
      *
      * @return string[] the list of registrations, will be empty if no registrations have been given
      *
      * @throws \RuntimeException
      */
-    protected function getRegistrationsCsvList(\Tx_Seminars_BagBuilder_Registration $builder): array
+    protected function getRegistrationsCsvList(RegistrationBagBuilder $builder): array
     {
         $csvLines = [];
-        /** @var \Tx_Seminars_Bag_Registration $bag */
+        /** @var RegistrationBag $bag */
         $bag = $builder->build();
 
         /** @var \Tx_Seminars_OldModel_Registration $registration */

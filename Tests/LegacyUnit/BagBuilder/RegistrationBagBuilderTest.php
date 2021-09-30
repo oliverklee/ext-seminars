@@ -8,11 +8,16 @@ use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Bag\RegistrationBag;
+use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
 
+/**
+ * @covers \OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder
+ */
 final class RegistrationBagBuilderTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_BagBuilder_Registration
+     * @var RegistrationBagBuilder
      */
     private $subject = null;
 
@@ -27,7 +32,7 @@ final class RegistrationBagBuilderTest extends TestCase
 
         $this->testingFramework = new TestingFramework('tx_seminars');
 
-        $this->subject = new \Tx_Seminars_BagBuilder_Registration();
+        $this->subject = new RegistrationBagBuilder();
         $this->subject->setTestMode();
     }
 
@@ -47,7 +52,7 @@ final class RegistrationBagBuilderTest extends TestCase
      */
     public function bagBuilderBuildsARegistrationBag(): void
     {
-        self::assertInstanceOf(\Tx_Seminars_Bag_Registration::class, $this->subject->build());
+        self::assertInstanceOf(RegistrationBag::class, $this->subject->build());
     }
 
     /**

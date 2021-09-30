@@ -15,7 +15,9 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Seminars\Bag\AbstractBag;
 use OliverKlee\Seminars\Bag\EventBag;
+use OliverKlee\Seminars\Bag\RegistrationBag;
 use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
+use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
 use OliverKlee\Seminars\Configuration\CategoryListConfigurationCheck;
 use OliverKlee\Seminars\Configuration\CountdownConfigurationCheck;
 use OliverKlee\Seminars\Configuration\CsvExportConfigurationCheck;
@@ -1637,7 +1639,7 @@ class DefaultController extends TemplateHelper
      * @param string $whatToDisplay the flavor of list view: either an empty string (for the default list view),
      *        the value from "what_to_display", or "other_dates"
      *
-     * @return \Tx_Seminars_Bag_Registration|EventBag a bag containing the items for the list view
+     * @return RegistrationBag|EventBag a bag containing the items for the list view
      */
     public function initListView(string $whatToDisplay = ''): AbstractBag
     {
@@ -1739,7 +1741,7 @@ class DefaultController extends TemplateHelper
 
         if ($builder instanceof EventBagBuilder) {
             $this->getListViewHookProvider()->executeHook('modifyEventBagBuilder', $this, $builder, $whatToDisplay);
-        } elseif ($builder instanceof \Tx_Seminars_BagBuilder_Registration) {
+        } elseif ($builder instanceof RegistrationBagBuilder) {
             $this->getListViewHookProvider()
                 ->executeHook('modifyRegistrationBagBuilder', $this, $builder, $whatToDisplay);
         }
@@ -1760,7 +1762,7 @@ class DefaultController extends TemplateHelper
      * This function should only be called when there are actually any list
      * items.
      *
-     * @param \Tx_Seminars_Bag_Registration|EventBag $seminarOrRegistrationBag initialized bag
+     * @param RegistrationBag|EventBag $seminarOrRegistrationBag initialized bag
      * @param string $whatToDisplay a string selecting the flavor of list view: either an empty string
      *        (for the default list view), the value from "what_to_display" or "other_dates"
      *
@@ -2022,12 +2024,12 @@ class DefaultController extends TemplateHelper
      * Returns a registrationBagBuilder object limited for registrations of the
      * currently logged in front-end user as attendee for the "my events" list view.
      *
-     * @return \Tx_Seminars_BagBuilder_Registration the registrations for the "my events" list
+     * @return RegistrationBagBuilder the registrations for the "my events" list
      */
-    private function createRegistrationBagBuilder(): \Tx_Seminars_BagBuilder_Registration
+    private function createRegistrationBagBuilder(): RegistrationBagBuilder
     {
-        /** @var \Tx_Seminars_BagBuilder_Registration $registrationBagBuilder */
-        $registrationBagBuilder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Registration::class);
+        /** @var RegistrationBagBuilder $registrationBagBuilder */
+        $registrationBagBuilder = GeneralUtility::makeInstance(RegistrationBagBuilder::class);
 
         /** @var \Tx_Seminars_Model_FrontEndUser $loggedInUser */
         $loggedInUser = FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);

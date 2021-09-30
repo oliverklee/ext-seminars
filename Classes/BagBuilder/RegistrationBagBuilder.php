@@ -2,19 +2,21 @@
 
 declare(strict_types=1);
 
-use OliverKlee\Seminars\BagBuilder\AbstractBagBuilder;
+namespace OliverKlee\Seminars\BagBuilder;
+
+use OliverKlee\Seminars\Bag\RegistrationBag;
 
 /**
  * This builder class creates customized registration bag objects.
  *
- * @extends AbstractBagBuilder<\Tx_Seminars_Bag_Registration>
+ * @extends AbstractBagBuilder<RegistrationBag>
  */
-class Tx_Seminars_BagBuilder_Registration extends AbstractBagBuilder
+class RegistrationBagBuilder extends AbstractBagBuilder
 {
     /**
-     * @var class-string<\Tx_Seminars_Bag_Registration> class name of the bag class that will be built
+     * @var class-string<RegistrationBag> class name of the bag class that will be built
      */
-    protected $bagClassName = \Tx_Seminars_Bag_Registration::class;
+    protected $bagClassName = RegistrationBag::class;
 
     /**
      * @var string the table name of the bag to build
