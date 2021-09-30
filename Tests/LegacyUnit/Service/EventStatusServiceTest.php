@@ -8,6 +8,7 @@ use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Service\EventStatusService;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\SingletonInterface;
@@ -28,7 +29,7 @@ final class EventStatusServiceTest extends TestCase
     private $testingFramework = null;
 
     /**
-     * @var \Tx_Seminars_Mapper_Event&MockObject
+     * @var EventMapper&MockObject
      */
     private $eventMapper = null;
 
@@ -53,10 +54,10 @@ final class EventStatusServiceTest extends TestCase
         MapperRegistry::denyDatabaseAccess();
         MapperRegistry::getInstance()->activateTestingMode($this->testingFramework);
 
-        /** @var \Tx_Seminars_Mapper_Event&MockObject $eventMapper */
-        $eventMapper = $this->createMock(\Tx_Seminars_Mapper_Event::class);
+        /** @var EventMapper&MockObject $eventMapper */
+        $eventMapper = $this->createMock(EventMapper::class);
         $this->eventMapper = $eventMapper;
-        MapperRegistry::set(\Tx_Seminars_Mapper_Event::class, $this->eventMapper);
+        MapperRegistry::set(EventMapper::class, $this->eventMapper);
 
         $this->subject = new EventStatusService();
     }

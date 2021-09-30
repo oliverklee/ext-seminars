@@ -8,6 +8,7 @@ use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Interfaces\Configuration;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
+use OliverKlee\Seminars\Mapper\EventMapper;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
@@ -35,7 +36,7 @@ class RegistrationDigest
     private $configuration = null;
 
     /**
-     * @var \Tx_Seminars_Mapper_Event
+     * @var EventMapper
      */
     private $eventMapper = null;
 
@@ -58,7 +59,7 @@ class RegistrationDigest
         }
 
         $this->configuration = ConfigurationRegistry::get('plugin.tx_seminars.registrationDigestEmail');
-        $this->eventMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        $this->eventMapper = MapperRegistry::get(EventMapper::class);
 
         $this->initialized = true;
     }
@@ -87,7 +88,7 @@ class RegistrationDigest
     /**
      * This method is intended to be used for automated tests only.
      */
-    public function getEventMapper(): \Tx_Seminars_Mapper_Event
+    public function getEventMapper(): EventMapper
     {
         return $this->eventMapper;
     }
@@ -95,7 +96,7 @@ class RegistrationDigest
     /**
      * This method is intended to be used for automated tests only.
      */
-    public function setEventMapper(\Tx_Seminars_Mapper_Event $mapper): void
+    public function setEventMapper(EventMapper $mapper): void
     {
         $this->eventMapper = $mapper;
     }

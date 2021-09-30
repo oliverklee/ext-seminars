@@ -9,6 +9,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\FrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Mapper\EventMapper;
 
 final class RegistrationTest extends TestCase
 {
@@ -104,7 +105,7 @@ final class RegistrationTest extends TestCase
      */
     public function getEventReturnsEvent(): void
     {
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $event = MapperRegistry::get(EventMapper::class)
             ->getNewGhost();
         $this->subject->setData(['seminar' => $event]);
 
@@ -119,7 +120,7 @@ final class RegistrationTest extends TestCase
      */
     public function getSeminarReturnsEvent(): void
     {
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $event = MapperRegistry::get(EventMapper::class)
             ->getNewGhost();
         $this->subject->setData(['seminar' => $event]);
 
@@ -135,7 +136,7 @@ final class RegistrationTest extends TestCase
     public function setEventSetsEvent(): void
     {
         /** @var \Tx_Seminars_Model_Event $event */
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getNewGhost();
+        $event = MapperRegistry::get(EventMapper::class)->getNewGhost();
         $this->subject->setEvent($event);
 
         self::assertSame(
@@ -150,7 +151,7 @@ final class RegistrationTest extends TestCase
     public function setSeminarSetsEvent(): void
     {
         /** @var \Tx_Seminars_Model_Event $event */
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getNewGhost();
+        $event = MapperRegistry::get(EventMapper::class)->getNewGhost();
         $this->subject->setSeminar($event);
 
         self::assertSame(

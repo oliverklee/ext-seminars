@@ -18,6 +18,7 @@ use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
+use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use Pelago\Emogrifier\CssInliner;
@@ -1198,7 +1199,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
             $template->hideSubparts('interests', $wrapperPrefix);
         }
 
-        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        $mapper = MapperRegistry::get(EventMapper::class);
         $newEvent = $mapper->find($event->getUid());
         $singleViewUrl = $this->linkBuilder->createAbsoluteUrlForEvent($newEvent);
         $template->setMarker(

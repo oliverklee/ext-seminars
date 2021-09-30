@@ -11,6 +11,7 @@ use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Session\Session;
+use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use SJBR\StaticInfoTables\PiBaseApi;
@@ -182,7 +183,7 @@ class RegistrationForm extends AbstractEditor
      */
     public function getEvent(): \Tx_Seminars_Model_Event
     {
-        $eventMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        $eventMapper = MapperRegistry::get(EventMapper::class);
         $event = $eventMapper->find($this->getSeminar()->getUid());
 
         return $event;

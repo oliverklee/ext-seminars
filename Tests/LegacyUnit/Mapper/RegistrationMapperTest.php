@@ -8,6 +8,7 @@ use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Mapper\EventMapper;
 
 final class RegistrationMapperTest extends TestCase
 {
@@ -67,7 +68,7 @@ final class RegistrationMapperTest extends TestCase
      */
     public function getEventWithEventReturnsEventInstance(): void
     {
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $event = MapperRegistry::get(EventMapper::class)
             ->getNewGhost();
         $testingModel = $this->subject->getLoadedTestingModel(['seminar' => $event->getUid()]);
 
@@ -79,7 +80,7 @@ final class RegistrationMapperTest extends TestCase
      */
     public function getSeminarWithEventReturnsEventInstance(): void
     {
-        $event = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $event = MapperRegistry::get(EventMapper::class)
             ->getNewGhost();
         $testingModel = $this->subject->getLoadedTestingModel(['seminar' => $event->getUid()]);
 

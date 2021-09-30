@@ -8,6 +8,7 @@ use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Mapper\EventMapper;
 
 final class TimeSlotMapperTest extends TestCase
 {
@@ -168,7 +169,7 @@ final class TimeSlotMapperTest extends TestCase
      */
     public function getSeminarWithSeminarReturnsEventInstance(): void
     {
-        $seminar = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getNewGhost();
+        $seminar = MapperRegistry::get(EventMapper::class)->getNewGhost();
         $timeSlotUid = $this->testingFramework->createRecord(
             'tx_seminars_timeslots',
             ['seminar' => $seminar->getUid()]

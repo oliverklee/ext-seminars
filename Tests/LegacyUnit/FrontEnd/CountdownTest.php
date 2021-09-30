@@ -10,6 +10,7 @@ use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\FrontEnd\Countdown;
+use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\ViewHelpers\CountdownViewHelper;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -30,7 +31,7 @@ final class CountdownTest extends TestCase
     private $testingFramework = null;
 
     /**
-     * @var \Tx_Seminars_Mapper_Event&MockObject
+     * @var EventMapper&MockObject
      */
     private $mapper = null;
 
@@ -44,8 +45,8 @@ final class CountdownTest extends TestCase
         $this->testingFramework = new TestingFramework('tx_seminars');
         $this->testingFramework->createFakeFrontEnd();
 
-        /** @var \Tx_Seminars_Mapper_Event&MockObject $mapper */
-        $mapper = $this->getMockBuilder(\Tx_Seminars_Mapper_Event::class)->setMethods(['findNextUpcoming'])->getMock();
+        /** @var EventMapper&MockObject $mapper */
+        $mapper = $this->getMockBuilder(EventMapper::class)->setMethods(['findNextUpcoming'])->getMock();
         $this->mapper = $mapper;
 
         $this->subject = new Countdown(

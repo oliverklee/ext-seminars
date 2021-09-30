@@ -8,9 +8,12 @@ use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Mapper\EventMapper;
 
 /**
  * This test case holds all tests specific to event dates.
+ *
+ * @covers \OliverKlee\Seminars\Mapper\EventMapper
  */
 final class EventDateMapperTest extends TestCase
 {
@@ -20,7 +23,7 @@ final class EventDateMapperTest extends TestCase
     private $testingFramework = null;
 
     /**
-     * @var \Tx_Seminars_Mapper_Event
+     * @var EventMapper
      */
     private $subject = null;
 
@@ -28,7 +31,7 @@ final class EventDateMapperTest extends TestCase
     {
         $this->testingFramework = new TestingFramework('tx_seminars');
 
-        $this->subject = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
+        $this->subject = MapperRegistry::get(EventMapper::class);
     }
 
     protected function tearDown(): void
@@ -154,7 +157,7 @@ final class EventDateMapperTest extends TestCase
      */
     public function getEventTypeForEventDateWithoutEventTypeReturnsNull(): void
     {
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)->getLoadedTestingModel([]);
+        $topic = MapperRegistry::get(EventMapper::class)->getLoadedTestingModel([]);
         $testingModel = $this->subject->getLoadedTestingModel(
             [
                 'object_type' => \Tx_Seminars_Model_Event::TYPE_DATE,
@@ -171,7 +174,7 @@ final class EventDateMapperTest extends TestCase
     public function getEventTypeForEventDateWithEventTypeReturnsEventTypeInstance(): void
     {
         $eventType = MapperRegistry::get(\Tx_Seminars_Mapper_EventType::class)->getLoadedTestingModel([]);
-        $topic = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class)
+        $topic = MapperRegistry::get(EventMapper::class)
             ->getLoadedTestingModel(['event_type' => $eventType->getUid()]);
         $testingModel = $this->subject->getLoadedTestingModel(
             [

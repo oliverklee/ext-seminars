@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
 use OliverKlee\Oelib\Mapper\CurrencyMapper;
+use OliverKlee\Seminars\Mapper\EventMapper;
 use TYPO3\CMS\Core\Database\Connection;
 
 /**
@@ -28,7 +29,7 @@ class Tx_Seminars_Mapper_Registration extends AbstractDataMapper
      *      the (possible) relations of the created models in the format DB column name => mapper name
      */
     protected $relations = [
-        'seminar' => \Tx_Seminars_Mapper_Event::class,
+        'seminar' => EventMapper::class,
         'user' => \Tx_Seminars_Mapper_FrontEndUser::class,
         'currency' => CurrencyMapper::class,
         'method_of_payment' => \Tx_Seminars_Mapper_PaymentMethod::class,

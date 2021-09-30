@@ -6,9 +6,13 @@ namespace OliverKlee\Seminars\Tests\Functional\Mapper;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\DataStructures\Collection;
+use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Tests\Functional\Traits\CollectionHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
+/**
+ * @covers \OliverKlee\Seminars\Mapper\EventMapper
+ */
 final class EventMapperTest extends FunctionalTestCase
 {
     use CollectionHelper;
@@ -19,7 +23,7 @@ final class EventMapperTest extends FunctionalTestCase
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**
-     * @var \Tx_Seminars_Mapper_Event
+     * @var EventMapper
      */
     private $subject = null;
 
@@ -27,7 +31,7 @@ final class EventMapperTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        $this->subject = new \Tx_Seminars_Mapper_Event();
+        $this->subject = new EventMapper();
     }
 
     /**

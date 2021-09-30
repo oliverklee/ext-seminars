@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\FrontEnd;
 
+use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\ViewHelpers\DateRangeViewHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -13,11 +14,11 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class EventHeadline extends AbstractView
 {
     /**
-     * @var \Tx_Seminars_Mapper_Event
+     * @var EventMapper
      */
     protected $mapper = null;
 
-    public function injectEventMapper(\Tx_Seminars_Mapper_Event $mapper): void
+    public function injectEventMapper(EventMapper $mapper): void
     {
         $this->mapper = $mapper;
     }
