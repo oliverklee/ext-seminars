@@ -10,6 +10,8 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\BackEnd\AbstractList;
 use OliverKlee\Seminars\BackEnd\EventsList;
+use OliverKlee\Seminars\Mapper\BackEndUserGroupMapper;
+use OliverKlee\Seminars\Mapper\BackEndUserMapper;
 use OliverKlee\Seminars\Model\BackEndUser;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Tests\LegacyUnit\BackEnd\Fixtures\DummyModule;
@@ -55,9 +57,9 @@ final class EventsListTest extends TestCase
 
         $this->subject = new EventsList($backEndModule);
 
-        $backEndGroup = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUserGroup::class)
+        $backEndGroup = MapperRegistry::get(BackEndUserGroupMapper::class)
             ->getLoadedTestingModel(['tx_seminars_events_folder' => $this->dummySysFolderPid + 1]);
-        $backEndUser = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUser::class)
+        $backEndUser = MapperRegistry::get(BackEndUserMapper::class)
             ->getLoadedTestingModel(['usergroup' => $backEndGroup->getUid()]);
         BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
     }
@@ -831,7 +833,7 @@ final class EventsListTest extends TestCase
      */
     public function newButtonForNoEventStorageSettingInUserGroupsSetsCurrentPageIdAsNewRecordPid(): void
     {
-        $backEndUser = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUser::class)->getLoadedTestingModel([]);
+        $backEndUser = MapperRegistry::get(BackEndUserMapper::class)->getLoadedTestingModel([]);
         BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
 
         self::assertStringContainsString((string)$this->dummySysFolderPid, $this->subject->show());
@@ -842,7 +844,7 @@ final class EventsListTest extends TestCase
      */
     public function newButtonForEventStoredOnCurrentPageHasCurrentFolderLabel(): void
     {
-        $backEndUser = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUser::class)->getLoadedTestingModel([]);
+        $backEndUser = MapperRegistry::get(BackEndUserMapper::class)->getLoadedTestingModel([]);
         BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
 
         self::assertStringContainsString(
@@ -862,7 +864,7 @@ final class EventsListTest extends TestCase
     {
         /** @var BackEndUser $loggedInUser */
         $loggedInUser = BackEndLoginManager::getInstance()
-            ->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
+            ->getLoggedInUser(BackEndUserMapper::class);
         $newEventFolder = $loggedInUser->getEventFolderFromGroup();
 
         self::assertStringContainsString((string)$newEventFolder, $this->subject->show());
@@ -875,7 +877,7 @@ final class EventsListTest extends TestCase
     {
         /** @var BackEndUser $loggedInUser */
         $loggedInUser = BackEndLoginManager::getInstance()
-            ->getLoggedInUser(\Tx_Seminars_Mapper_BackEndUser::class);
+            ->getLoggedInUser(BackEndUserMapper::class);
         $newEventFolder = $loggedInUser->getEventFolderFromGroup();
 
         self::assertStringContainsString(

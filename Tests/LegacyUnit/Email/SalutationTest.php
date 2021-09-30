@@ -12,6 +12,7 @@ use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminar\Email\Salutation;
+use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
 use OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures\EmailSalutationHookInterface;
@@ -108,7 +109,7 @@ final class SalutationTest extends TestCase
      */
     private function createFrontEndUser(int $gender = OelibFrontEndUser::GENDER_MALE): FrontEndUser
     {
-        return MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)
+        return MapperRegistry::get(FrontEndUserMapper::class)
             ->getLoadedTestingModel(['name' => 'Foo', 'gender' => $gender]);
     }
 

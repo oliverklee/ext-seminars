@@ -8,6 +8,7 @@ use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\FrontEnd\EventEditor;
+use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
@@ -105,9 +106,9 @@ final class EventEditorTest extends FunctionalTestCase
         FrontEndLoginManager::getInstance()->logInUser($user);
     }
 
-    private function getUserMapper(): \Tx_Seminars_Mapper_FrontEndUser
+    private function getUserMapper(): FrontEndUserMapper
     {
-        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
+        $mapper = MapperRegistry::get(FrontEndUserMapper::class);
 
         return $mapper;
     }

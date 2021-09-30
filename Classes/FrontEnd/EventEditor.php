@@ -20,6 +20,7 @@ use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Visibility\Tree;
 use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\FrontEndUserGroup;
@@ -316,7 +317,7 @@ class EventEditor extends AbstractEditor
 
     protected static function getLoggedInUser(): ?FrontEndUser
     {
-        return FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
+        return FrontEndLoginManager::getInstance()->getLoggedInUser(FrontEndUserMapper::class);
     }
 
     /**

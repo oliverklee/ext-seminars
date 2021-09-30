@@ -13,6 +13,8 @@ use OliverKlee\Seminars\BackEnd\AbstractList;
 use OliverKlee\Seminars\BackEnd\RegistrationsList;
 use OliverKlee\Seminars\Bag\RegistrationBag;
 use OliverKlee\Seminars\Hooks\Interfaces\BackendRegistrationListView;
+use OliverKlee\Seminars\Mapper\BackEndUserGroupMapper;
+use OliverKlee\Seminars\Mapper\BackEndUserMapper;
 use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Tests\LegacyUnit\BackEnd\Fixtures\DummyModule;
@@ -706,9 +708,9 @@ final class RegistrationsListTest extends TestCase
     public function newButtonForRegistrationStorageSettingSetInUsersGroupSetsThisPidAsNewRecordPid(): void
     {
         $newRegistrationFolder = $this->dummySysFolderPid + 1;
-        $backEndGroup = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUserGroup::class)
+        $backEndGroup = MapperRegistry::get(BackEndUserGroupMapper::class)
             ->getLoadedTestingModel(['tx_seminars_registrations_folder' => $newRegistrationFolder]);
-        $backEndUser = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUser::class)
+        $backEndUser = MapperRegistry::get(BackEndUserMapper::class)
             ->getLoadedTestingModel(['usergroup' => $backEndGroup->getUid()]);
         BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
 

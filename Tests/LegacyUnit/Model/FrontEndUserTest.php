@@ -9,6 +9,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\BackEndUser as OelibBackEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Mapper\FrontEndUserGroupMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\FrontEndUserGroup;
 use OliverKlee\Seminars\Model\Registration;
@@ -44,7 +45,7 @@ final class FrontEndUserTest extends TestCase
      */
     public function getPublishSettingsForUserWithOneGroupAndGroupPublishSettingZeroReturnsPublishAll(): void
     {
-        $userGroup = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class)
+        $userGroup = MapperRegistry::get(FrontEndUserGroupMapper::class)
             ->getLoadedTestingModel(
                 [
                     'tx_seminars_publish_events' => FrontEndUserGroup::PUBLISH_IMMEDIATELY,
@@ -66,7 +67,7 @@ final class FrontEndUserTest extends TestCase
      */
     public function getPublishSettingsForUserWithOneGroupAndGroupPublishSettingOneReturnsHideNew(): void
     {
-        $userGroup = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class)
+        $userGroup = MapperRegistry::get(FrontEndUserGroupMapper::class)
             ->getLoadedTestingModel(
                 [
                     'tx_seminars_publish_events' => FrontEndUserGroup::PUBLISH_HIDE_NEW,
@@ -88,7 +89,7 @@ final class FrontEndUserTest extends TestCase
      */
     public function getPublishSettingsForUserWithOneGroupAndGroupPublishSettingTwoReturnsHideEdited(): void
     {
-        $userGroup = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class)
+        $userGroup = MapperRegistry::get(FrontEndUserGroupMapper::class)
             ->getLoadedTestingModel(
                 [
                     'tx_seminars_publish_events' => FrontEndUserGroup::PUBLISH_HIDE_EDITED,
@@ -124,7 +125,7 @@ final class FrontEndUserTest extends TestCase
      */
     public function getPublishSettingsForUserWithTwoGroupsAndGroupPublishSettingZeroAndOneReturnsHideNew(): void
     {
-        $groupMapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class);
+        $groupMapper = MapperRegistry::get(FrontEndUserGroupMapper::class);
         $userGroup = $groupMapper->getLoadedTestingModel(
             [
                 'tx_seminars_publish_events' => FrontEndUserGroup::PUBLISH_IMMEDIATELY,
@@ -154,7 +155,7 @@ final class FrontEndUserTest extends TestCase
      */
     public function getPublishSettingsForUserWithTwoGroupsAndGroupPublishSettingOneAndTwoReturnsHideEdited(): void
     {
-        $groupMapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class);
+        $groupMapper = MapperRegistry::get(FrontEndUserGroupMapper::class);
         $userGroup = $groupMapper->getLoadedTestingModel(
             [
                 'tx_seminars_publish_events' => FrontEndUserGroup::PUBLISH_HIDE_NEW,
@@ -183,7 +184,7 @@ final class FrontEndUserTest extends TestCase
      */
     public function getPublishSettingsForUserWithTwoGroupsAndGroupPublishSettingTwoAndZeroReturnsHideEdited(): void
     {
-        $groupMapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class);
+        $groupMapper = MapperRegistry::get(FrontEndUserGroupMapper::class);
         $userGroup = $groupMapper->getLoadedTestingModel(
             [
                 'tx_seminars_publish_events' => FrontEndUserGroup::PUBLISH_HIDE_EDITED,
@@ -212,7 +213,7 @@ final class FrontEndUserTest extends TestCase
      */
     public function getPublishSettingsForUserWithTwoGroupsAndBothGroupPublishSettingsOneReturnsHideNew(): void
     {
-        $groupMapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class);
+        $groupMapper = MapperRegistry::get(FrontEndUserGroupMapper::class);
         $userGroup = $groupMapper->getLoadedTestingModel(
             [
                 'tx_seminars_publish_events' => FrontEndUserGroup::PUBLISH_HIDE_NEW,
@@ -257,7 +258,7 @@ final class FrontEndUserTest extends TestCase
      */
     public function getAuxiliaryRecordsPidWithUserGroupWithoutPidReturnsZero(): void
     {
-        $groupMapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class);
+        $groupMapper = MapperRegistry::get(FrontEndUserGroupMapper::class);
         $userGroup = $groupMapper->getLoadedTestingModel([]);
 
         $list = new Collection();
@@ -276,7 +277,7 @@ final class FrontEndUserTest extends TestCase
      */
     public function getAuxiliaryRecordsPidWithUserGroupWithPidReturnsPid(): void
     {
-        $groupMapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class);
+        $groupMapper = MapperRegistry::get(FrontEndUserGroupMapper::class);
         $userGroup = $groupMapper->getLoadedTestingModel(
             ['tx_seminars_auxiliary_records_pid' => 42]
         );
@@ -297,7 +298,7 @@ final class FrontEndUserTest extends TestCase
      */
     public function getAuxiliaryRecordsPidWithTwoUserGroupsAndSecondUserGroupHasPidReturnsPid(): void
     {
-        $groupMapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class);
+        $groupMapper = MapperRegistry::get(FrontEndUserGroupMapper::class);
         $userGroup = $groupMapper->getLoadedTestingModel([]);
 
         $userGroup2 = $groupMapper->getLoadedTestingModel(
@@ -321,7 +322,7 @@ final class FrontEndUserTest extends TestCase
      */
     public function getAuxiliaryRecordPidWithTwoUserGroupsAndBothUserGroupsHavePidReturnPidOfFirstUserGroup(): void
     {
-        $groupMapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class);
+        $groupMapper = MapperRegistry::get(FrontEndUserGroupMapper::class);
         $userGroup = $groupMapper->getLoadedTestingModel(
             ['tx_seminars_auxiliary_records_pid' => 24]
         );
@@ -468,7 +469,7 @@ final class FrontEndUserTest extends TestCase
      */
     public function getEventRecordsPidWithUserGroupWithoutPidReturnsZero(): void
     {
-        $groupMapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class);
+        $groupMapper = MapperRegistry::get(FrontEndUserGroupMapper::class);
         $userGroup = $groupMapper->getLoadedTestingModel([]);
 
         $list = new Collection();
@@ -487,7 +488,7 @@ final class FrontEndUserTest extends TestCase
      */
     public function getEventRecordsPidWithUserGroupWithPidReturnsPid(): void
     {
-        $groupMapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class);
+        $groupMapper = MapperRegistry::get(FrontEndUserGroupMapper::class);
         $userGroup = $groupMapper->getLoadedTestingModel(
             ['tx_seminars_events_pid' => 42]
         );
@@ -508,7 +509,7 @@ final class FrontEndUserTest extends TestCase
      */
     public function getEventRecordsPidWithTwoUserGroupsAndSecondUserGroupHasPidReturnsPid(): void
     {
-        $groupMapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class);
+        $groupMapper = MapperRegistry::get(FrontEndUserGroupMapper::class);
         $userGroup = $groupMapper->getLoadedTestingModel([]);
 
         $userGroup2 = $groupMapper->getLoadedTestingModel(
@@ -532,7 +533,7 @@ final class FrontEndUserTest extends TestCase
      */
     public function getAuxiliaryRecordPidWithTwoUserGroupsAndBothUserGroupsHavePidReturnsPidOfFirstUserGroup(): void
     {
-        $groupMapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class);
+        $groupMapper = MapperRegistry::get(FrontEndUserGroupMapper::class);
         $userGroup = $groupMapper->getLoadedTestingModel(
             ['tx_seminars_events_pid' => 24]
         );
@@ -560,7 +561,7 @@ final class FrontEndUserTest extends TestCase
      */
     public function getDefaultCategoriesFromGroupForUserWithGroupWithoutCategoriesReturnsEmptyList(): void
     {
-        $userGroup = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class)->getNewGhost();
+        $userGroup = MapperRegistry::get(FrontEndUserGroupMapper::class)->getNewGhost();
         $userGroup->setData(['tx_seminars_default_categories' => new Collection()]);
 
         $list = new Collection();
@@ -580,7 +581,7 @@ final class FrontEndUserTest extends TestCase
         $categories = new Collection();
         $categories->add(MapperRegistry::get(\Tx_Seminars_Mapper_Category::class)->getNewGhost());
 
-        $userGroup = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class)->getNewGhost();
+        $userGroup = MapperRegistry::get(FrontEndUserGroupMapper::class)->getNewGhost();
         $userGroup->setData(['tx_seminars_default_categories' => $categories]);
 
         $list = new Collection();
@@ -603,7 +604,7 @@ final class FrontEndUserTest extends TestCase
         $categories->add($categoryMapper->getNewGhost());
         $categories->add($categoryMapper->getNewGhost());
 
-        $userGroup = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class)->getNewGhost();
+        $userGroup = MapperRegistry::get(FrontEndUserGroupMapper::class)->getNewGhost();
         $userGroup->setData(['tx_seminars_default_categories' => $categories]);
 
         $list = new Collection();
@@ -621,7 +622,7 @@ final class FrontEndUserTest extends TestCase
      */
     public function getDefaultCategoriesFromGroupForUserWithTwoGroupsOneWithCategoryReturnsOneCategory(): void
     {
-        $frontEndGroupMapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class);
+        $frontEndGroupMapper = MapperRegistry::get(FrontEndUserGroupMapper::class);
         $userGroup1 = $frontEndGroupMapper->getNewGhost();
         $userGroup1->setData(['tx_seminars_default_categories' => new Collection()]);
 
@@ -651,7 +652,7 @@ final class FrontEndUserTest extends TestCase
         $categories = new Collection();
         $categories->add($categoryGhost);
 
-        $frontEndGroupMapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class);
+        $frontEndGroupMapper = MapperRegistry::get(FrontEndUserGroupMapper::class);
         $userGroup1 = $frontEndGroupMapper->getNewGhost();
         $userGroup1->setData(['tx_seminars_default_categories' => $categories]);
 
@@ -675,7 +676,7 @@ final class FrontEndUserTest extends TestCase
     public function getDefaultCategoriesFromGroupForUserWithTwoGroupsBothWithCategoriesReturnsTwoCategories(): void
     {
         $categoryMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Category::class);
-        $frontEndGroupMapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class);
+        $frontEndGroupMapper = MapperRegistry::get(FrontEndUserGroupMapper::class);
 
         $categoryGhost1 = $categoryMapper->getNewGhost();
         $categories1 = new Collection();
@@ -707,7 +708,7 @@ final class FrontEndUserTest extends TestCase
      */
     public function hasDefaultCategoriesForUserWithOneGroupWithoutCategoryReturnsFalse(): void
     {
-        $userGroup = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class)->getNewGhost();
+        $userGroup = MapperRegistry::get(FrontEndUserGroupMapper::class)->getNewGhost();
         $userGroup->setData(['tx_seminars_default_categories' => new Collection()]);
 
         $list = new Collection();
@@ -727,7 +728,7 @@ final class FrontEndUserTest extends TestCase
         $categories = new Collection();
         $categories->add(MapperRegistry::get(\Tx_Seminars_Mapper_Category::class)->getNewGhost());
 
-        $userGroup = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class)->getNewGhost();
+        $userGroup = MapperRegistry::get(FrontEndUserGroupMapper::class)->getNewGhost();
         $userGroup->setData(['tx_seminars_default_categories' => $categories]);
 
         $list = new Collection();
@@ -790,7 +791,7 @@ final class FrontEndUserTest extends TestCase
      */
     public function getDefaultOrganizersForGroupWithoutDefaultOrganizersReturnsEmptyList(): void
     {
-        $userGroup = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class)->getNewGhost();
+        $userGroup = MapperRegistry::get(FrontEndUserGroupMapper::class)->getNewGhost();
         $userGroup->setData(['tx_seminars_default_organizer' => null]);
         $groups = new Collection();
         $groups->add($userGroup);
@@ -807,7 +808,7 @@ final class FrontEndUserTest extends TestCase
     public function getDefaultOrganizerForGroupWithDefaultOrganizerReturnsThatOrganizer(): void
     {
         $organizer = MapperRegistry::get(\Tx_Seminars_Mapper_Organizer::class)->getNewGhost();
-        $userGroup = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class)->getNewGhost();
+        $userGroup = MapperRegistry::get(FrontEndUserGroupMapper::class)->getNewGhost();
         $userGroup->setData(['tx_seminars_default_organizer' => $organizer]);
         $groups = new Collection();
         $groups->add($userGroup);
@@ -825,11 +826,11 @@ final class FrontEndUserTest extends TestCase
     public function getDefaultOrganizersForTwoGroupsWithDefaultOrganizersReturnsBothOrganizers(): void
     {
         $organizer1 = MapperRegistry::get(\Tx_Seminars_Mapper_Organizer::class)->getNewGhost();
-        $userGroup1 = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class)->getNewGhost();
+        $userGroup1 = MapperRegistry::get(FrontEndUserGroupMapper::class)->getNewGhost();
         $userGroup1->setData(['tx_seminars_default_organizer' => $organizer1]);
 
         $organizer2 = MapperRegistry::get(\Tx_Seminars_Mapper_Organizer::class)->getNewGhost();
-        $userGroup2 = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUserGroup::class)->getNewGhost();
+        $userGroup2 = MapperRegistry::get(FrontEndUserGroupMapper::class)->getNewGhost();
         $userGroup2->setData(['tx_seminars_default_organizer' => $organizer2]);
 
         $groups = new Collection();

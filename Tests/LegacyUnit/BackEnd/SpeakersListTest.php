@@ -10,6 +10,8 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\BackEnd\AbstractList;
 use OliverKlee\Seminars\BackEnd\SpeakersList;
+use OliverKlee\Seminars\Mapper\BackEndUserGroupMapper;
+use OliverKlee\Seminars\Mapper\BackEndUserMapper;
 use OliverKlee\Seminars\Tests\LegacyUnit\BackEnd\Fixtures\DummyModule;
 use OliverKlee\Seminars\Tests\LegacyUnit\Support\Traits\BackEndTestsTrait;
 use TYPO3\CMS\Backend\Template\DocumentTemplate;
@@ -131,9 +133,9 @@ final class SpeakersListTest extends TestCase
     public function newButtonForSpeakerStorageSettingSetInUsersGroupSetsThisPidAsNewRecordPid(): void
     {
         $newSpeakerFolder = $this->dummySysFolderPid + 1;
-        $backEndGroup = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUserGroup::class)
+        $backEndGroup = MapperRegistry::get(BackEndUserGroupMapper::class)
             ->getLoadedTestingModel(['tx_seminars_auxiliaries_folder' => $newSpeakerFolder]);
-        $backEndUser = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUser::class)
+        $backEndUser = MapperRegistry::get(BackEndUserMapper::class)
             ->getLoadedTestingModel(['usergroup' => $backEndGroup->getUid()]);
         BackEndLoginManager::getInstance()->setLoggedInUser($backEndUser);
 

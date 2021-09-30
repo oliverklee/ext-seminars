@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
 
 final class PlaceMapperTest extends TestCase
@@ -77,7 +78,7 @@ final class PlaceMapperTest extends TestCase
      */
     public function getOwnerWithOwnerReturnsOwnerInstance(): void
     {
-        $frontEndUser = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)->getLoadedTestingModel([]);
+        $frontEndUser = MapperRegistry::get(FrontEndUserMapper::class)->getLoadedTestingModel([]);
         $testingModel = $this->subject->getLoadedTestingModel(
             ['owner' => $frontEndUser->getUid()]
         );

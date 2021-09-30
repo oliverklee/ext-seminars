@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Mapper\BackEndUserGroupMapper;
 use OliverKlee\Seminars\Model\BackEndUser;
 
 final class BackEndUserTest extends TestCase
@@ -43,7 +44,7 @@ final class BackEndUserTest extends TestCase
      */
     public function getEventFolderFromGroupForOneGroupWithoutEventPidReturnsZero(): void
     {
-        $group = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel([]);
+        $group = MapperRegistry::get(BackEndUserGroupMapper::class)->getLoadedTestingModel([]);
         $groups = new Collection();
         $groups->add($group);
         $this->subject->setData(['usergroup' => $groups]);
@@ -59,7 +60,7 @@ final class BackEndUserTest extends TestCase
      */
     public function getEventFolderFromGroupForOneGroupWithEventPidReturnsThisPid(): void
     {
-        $group = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
+        $group = MapperRegistry::get(BackEndUserGroupMapper::class)->getLoadedTestingModel(
             ['tx_seminars_events_folder' => 42]
         );
         $groups = new Collection();
@@ -77,9 +78,9 @@ final class BackEndUserTest extends TestCase
      */
     public function getEventFolderFromGroupForTwoGroupsBothWithDifferentEventPidsReturnsOnlyOneOfThePids(): void
     {
-        $group1 = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUserGroup::class)
+        $group1 = MapperRegistry::get(BackEndUserGroupMapper::class)
             ->getLoadedTestingModel(['tx_seminars_events_folder' => 23]);
-        $group2 = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUserGroup::class)
+        $group2 = MapperRegistry::get(BackEndUserGroupMapper::class)
             ->getLoadedTestingModel(['tx_seminars_events_folder' => 42]);
         $groups = new Collection();
         $groups->add($group1);
@@ -110,7 +111,7 @@ final class BackEndUserTest extends TestCase
      */
     public function getRegistrationFolderFromGroupForOneGroupWithoutRegistrationPidReturnsZero(): void
     {
-        $group = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel([]);
+        $group = MapperRegistry::get(BackEndUserGroupMapper::class)->getLoadedTestingModel([]);
         $groups = new Collection();
         $groups->add($group);
         $this->subject->setData(['usergroup' => $groups]);
@@ -126,7 +127,7 @@ final class BackEndUserTest extends TestCase
      */
     public function getRegistrationFolderFromGroupForOneGroupWithRegistrationPidReturnsThisPid(): void
     {
-        $group = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
+        $group = MapperRegistry::get(BackEndUserGroupMapper::class)->getLoadedTestingModel(
             ['tx_seminars_registrations_folder' => 42]
         );
         $groups = new Collection();
@@ -144,10 +145,10 @@ final class BackEndUserTest extends TestCase
      */
     public function getRegistrationFolderFromGroupForTwoGroupsBothWithDifferentRegistrationPidsReturnsOnlyOneOfThePids(): void
     {
-        $group1 = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
+        $group1 = MapperRegistry::get(BackEndUserGroupMapper::class)->getLoadedTestingModel(
             ['tx_seminars_registrations_folder' => 23]
         );
-        $group2 = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
+        $group2 = MapperRegistry::get(BackEndUserGroupMapper::class)->getLoadedTestingModel(
             ['tx_seminars_registrations_folder' => 42]
         );
         $groups = new Collection();
@@ -179,7 +180,7 @@ final class BackEndUserTest extends TestCase
      */
     public function getAuxiliaryRecordsFolderForOneGroupWithoutAuxiliaryRecordPidReturnsZero(): void
     {
-        $group = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel([]);
+        $group = MapperRegistry::get(BackEndUserGroupMapper::class)->getLoadedTestingModel([]);
         $groups = new Collection();
         $groups->add($group);
         $this->subject->setData(['usergroup' => $groups]);
@@ -195,7 +196,7 @@ final class BackEndUserTest extends TestCase
      */
     public function getAuxiliaryRecordsFolderForOneGroupWithAuxiliaryRecordsPidReturnsThisPid(): void
     {
-        $group = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
+        $group = MapperRegistry::get(BackEndUserGroupMapper::class)->getLoadedTestingModel(
             ['tx_seminars_auxiliaries_folder' => 42]
         );
         $groups = new Collection();
@@ -213,10 +214,10 @@ final class BackEndUserTest extends TestCase
      */
     public function getAuxiliaryRecordsFolderForTwoGroupsBothWithDifferentAuxiliaryRecordPidsReturnsOnlyOneOfThePids(): void
     {
-        $group1 = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
+        $group1 = MapperRegistry::get(BackEndUserGroupMapper::class)->getLoadedTestingModel(
             ['tx_seminars_auxiliaries_folder' => 23]
         );
-        $group2 = MapperRegistry::get(\Tx_Seminars_Mapper_BackEndUserGroup::class)->getLoadedTestingModel(
+        $group2 = MapperRegistry::get(BackEndUserGroupMapper::class)->getLoadedTestingModel(
             ['tx_seminars_auxiliaries_folder' => 42]
         );
         $groups = new Collection();

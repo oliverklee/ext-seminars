@@ -20,6 +20,7 @@ use OliverKlee\Seminars\Bag\TimeSlotBag;
 use OliverKlee\Seminars\BagBuilder\CategoryBagBuilder;
 use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\BagBuilder\OrganizerBagBuilder;
+use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\Traits\EventEmailSenderTrait;
 use OliverKlee\Seminars\Service\RegistrationManager;
@@ -2320,7 +2321,7 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         $loginManager = FrontEndLoginManager::getInstance();
         $currentUserUid = $loginManager->isLoggedIn()
-            ? $loginManager->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class)->getUid() : 0;
+            ? $loginManager->getLoggedInUser(FrontEndUserMapper::class)->getUid() : 0;
 
         switch ($whichPlugin) {
             case 'seminar_list':
@@ -2391,7 +2392,7 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
             return false;
         }
 
-        $currentUserUid = $loginManager->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class)->getUid();
+        $currentUserUid = $loginManager->getLoggedInUser(FrontEndUserMapper::class)->getUid();
         $hasListPid = ($registrationsListPID > 0);
         $hasVipListPid = ($registrationsVipListPID > 0);
 
@@ -2451,7 +2452,7 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
 
         $hasListPid = ($registrationsListPID > 0);
         $hasVipListPid = ($registrationsVipListPID > 0);
-        $currentUserUid = $isLoggedIn ? $loginManager->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class)->getUid(
+        $currentUserUid = $isLoggedIn ? $loginManager->getLoggedInUser(FrontEndUserMapper::class)->getUid(
         ) : 0;
 
         switch ($whichPlugin) {
@@ -3069,7 +3070,7 @@ class LegacyEvent extends \Tx_Seminars_OldModel_AbstractTimeSpan
         }
 
         return $this->getRecordPropertyInteger('owner_feuser')
-            === $loginManager->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class)->getUid();
+            === $loginManager->getLoggedInUser(FrontEndUserMapper::class)->getUid();
     }
 
     /**

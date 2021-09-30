@@ -9,12 +9,13 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Model\BackEndUser as OelibBackEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Mapper\FrontEndUserGroupMapper;
 use OliverKlee\Seminars\Model\FrontEndUserGroup;
 
 final class FrontEndUserGroupMapperTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_Mapper_FrontEndUserGroup the object to test
+     * @var FrontEndUserGroupMapper the object to test
      */
     private $subject = null;
 
@@ -25,7 +26,7 @@ final class FrontEndUserGroupMapperTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->subject = new \Tx_Seminars_Mapper_FrontEndUserGroup();
+        $this->subject = new FrontEndUserGroupMapper();
         $this->testingFramework = new TestingFramework('tx_seminars');
     }
 

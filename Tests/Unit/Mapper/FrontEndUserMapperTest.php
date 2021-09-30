@@ -6,21 +6,22 @@ namespace OliverKlee\Seminars\Tests\Unit\Mapper;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
+use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Model\FrontEndUser;
 
 /**
- * @covers \Tx_Seminars_Mapper_FrontEndUser
+ * @covers \OliverKlee\Seminars\Mapper\FrontEndUserMapper
  */
 final class FrontEndUserMapperTest extends UnitTestCase
 {
     /**
-     * @var \Tx_Seminars_Mapper_FrontEndUser
+     * @var FrontEndUserMapper
      */
     private $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Tx_Seminars_Mapper_FrontEndUser();
+        $this->subject = new FrontEndUserMapper();
     }
 
     /**

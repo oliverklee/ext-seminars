@@ -21,6 +21,7 @@ use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Mapper\FrontEndUserMapper;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\Model\Event;
 use OliverKlee\Seminars\Model\Registration;
@@ -113,7 +114,7 @@ final class RegistrationManagerTest extends TestCase
     private $headerCollector = null;
 
     /**
-     * @var \Tx_Seminars_Mapper_FrontEndUser
+     * @var FrontEndUserMapper
      */
     private $frontEndUserMapper = null;
 
@@ -206,7 +207,7 @@ final class RegistrationManagerTest extends TestCase
         $linkBuilder->method('createAbsoluteUrlForEvent')->willReturn('http://singleview.example.com/');
         $this->subject->injectLinkBuilder($linkBuilder);
 
-        $frontEndUserMapper = MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class);
+        $frontEndUserMapper = MapperRegistry::get(FrontEndUserMapper::class);
         $this->frontEndUserMapper = $frontEndUserMapper;
     }
 
