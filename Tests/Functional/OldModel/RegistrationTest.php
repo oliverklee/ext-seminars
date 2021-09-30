@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\Functional\OldModel;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
+use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 
 /**
@@ -112,7 +113,7 @@ final class RegistrationTest extends FunctionalTestCase
 
         $event = $subject->getSeminarObject();
 
-        self::assertInstanceOf(\Tx_Seminars_OldModel_Event::class, $event);
+        self::assertInstanceOf(LegacyEvent::class, $event);
         self::assertSame(1, $event->getUid());
     }
 

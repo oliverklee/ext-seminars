@@ -15,6 +15,7 @@ use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
+use OliverKlee\Seminars\OldModel\LegacyEvent;
 use Pelago\Emogrifier\CssInliner;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -124,9 +125,9 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      *
      * This function works even if no user is logged in.
      *
-     * @param \Tx_Seminars_OldModel_Event $event an event for which we'll check if it is possible to register
+     * @param LegacyEvent $event an event for which we'll check if it is possible to register
      */
-    public function canRegisterIfLoggedIn(\Tx_Seminars_OldModel_Event $event): bool
+    public function canRegisterIfLoggedIn(LegacyEvent $event): bool
     {
         if ($event->getPriceOnRequest() || !$event->canSomebodyRegister()) {
             return false;
@@ -150,11 +151,11 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      *
      * Note: This function does not check whether a logged-in front-end user fulfills all requirements for an event.
      *
-     * @param \Tx_Seminars_OldModel_Event $event a seminar for which we'll check if it is possible to register
+     * @param LegacyEvent $event a seminar for which we'll check if it is possible to register
      *
      * @return string error message or empty string
      */
-    public function canRegisterIfLoggedInMessage(\Tx_Seminars_OldModel_Event $event): string
+    public function canRegisterIfLoggedInMessage(LegacyEvent $event): string
     {
         $message = '';
 
@@ -178,11 +179,11 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      *
      * Note: This function does not check whether a logged-in front-end user fulfills all requirements for an event.
      *
-     * @param \Tx_Seminars_OldModel_Event $event a seminar for which we'll check if it is possible to register
+     * @param LegacyEvent $event a seminar for which we'll check if it is possible to register
      *
      * @return bool TRUE if the user could register for the given event, FALSE otherwise
      */
-    private function couldThisUserRegister(\Tx_Seminars_OldModel_Event $event): bool
+    private function couldThisUserRegister(LegacyEvent $event): bool
     {
         // A user can register either if the event allows multiple registrations
         // or the user isn't registered yet and isn't blocked either.
@@ -194,13 +195,13 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      * Creates an HTML link to the registration or login page.
      *
      * @param DefaultController $plugin the pi1 object with configuration data
-     * @param \Tx_Seminars_OldModel_Event $event the seminar to create the registration link for
+     * @param LegacyEvent $event the seminar to create the registration link for
      *
      * @return string the HTML tag, will be empty if the event needs no registration, nobody can register to this event or the
      *                currently logged in user is already registered to this event and the event does not allow multiple
      *                registrations by one user
      */
-    public function getRegistrationLink(DefaultController $plugin, \Tx_Seminars_OldModel_Event $event): string
+    public function getRegistrationLink(DefaultController $plugin, LegacyEvent $event): string
     {
         if (!$event->needsRegistration() || !$this->canRegisterIfLoggedIn($event)) {
             return '';
@@ -215,13 +216,13 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      * Before you can call this function, you should make sure that the link makes sense (ie. the seminar still has vacancies, the
      * user has not registered for this seminar etc.).
      *
-     * @param \Tx_Seminars_OldModel_Event $event a seminar for which we'll check if it is possible to register
+     * @param LegacyEvent $event a seminar for which we'll check if it is possible to register
      *
      * @return string HTML with the link
      */
     public function getLinkToRegistrationOrLoginPage(
         DefaultController $plugin,
-        \Tx_Seminars_OldModel_Event $event
+        LegacyEvent $event
     ): string {
         return $this->getLinkToStandardRegistrationOrLoginPage(
             $plugin,
@@ -233,11 +234,11 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
     /**
      * Creates the label for the registration link.
      *
-     * @param \Tx_Seminars_OldModel_Event $event a seminar to which the registration should relate
+     * @param LegacyEvent $event a seminar to which the registration should relate
      *
      * @return string label for the registration link, will not be empty
      */
-    private function getRegistrationLabel(TemplateHelper $plugin, \Tx_Seminars_OldModel_Event $event): string
+    private function getRegistrationLabel(TemplateHelper $plugin, LegacyEvent $event): string
     {
         if ($event->hasVacancies()) {
             if ($event->hasDate()) {
@@ -263,14 +264,14 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      * This function only creates the link to the standard registration or login
      * page; it should not be used if the seminar has a separate details page.
      *
-     * @param \Tx_Seminars_OldModel_Event $event a seminar for which we'll check if it is possible to register
+     * @param LegacyEvent $event a seminar for which we'll check if it is possible to register
      * @param string $label label for the link, must not be empty
      *
      * @return string HTML with the link
      */
     private function getLinkToStandardRegistrationOrLoginPage(
         DefaultController $plugin,
-        \Tx_Seminars_OldModel_Event $event,
+        LegacyEvent $event,
         string $label
     ): string {
         if (FrontEndLoginManager::getInstance()->isLoggedIn()) {
@@ -314,7 +315,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      */
     public function existsSeminar(int $uid): bool
     {
-        return \Tx_Seminars_OldModel_Event::fromUid($uid) instanceof \Tx_Seminars_OldModel_Event;
+        return LegacyEvent::fromUid($uid) instanceof LegacyEvent;
     }
 
     /**
@@ -347,11 +348,11 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      *
      * This method must not be called when no front-end user is logged in!
      *
-     * @param \Tx_Seminars_OldModel_Event $event a seminar for which we'll check if it is possible to register
+     * @param LegacyEvent $event a seminar for which we'll check if it is possible to register
      *
      * @return bool TRUE if user is already registered, FALSE otherwise.
      */
-    public function isUserRegistered(\Tx_Seminars_OldModel_Event $event): bool
+    public function isUserRegistered(LegacyEvent $event): bool
     {
         return $event->isUserRegistered($this->getLoggedInFrontEndUserUid());
     }
@@ -361,11 +362,11 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      *
      * This method must not be called when no front-end user is logged in!
      *
-     * @param \Tx_Seminars_OldModel_Event $event a seminar for which we'll check if it is possible to register
+     * @param LegacyEvent $event a seminar for which we'll check if it is possible to register
      *
      * @return string empty string if everything is OK, else a localized error message
      */
-    public function isUserRegisteredMessage(\Tx_Seminars_OldModel_Event $event): string
+    public function isUserRegisteredMessage(LegacyEvent $event): string
     {
         return $event->isUserRegisteredMessage($this->getLoggedInFrontEndUserUid());
     }
@@ -375,12 +376,12 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      *
      * For this, only events that forbid multiple registrations are checked.
      *
-     * @param \Tx_Seminars_OldModel_Event $event a seminar for which we'll check whether the user already is blocked
+     * @param LegacyEvent $event a seminar for which we'll check whether the user already is blocked
      *        by an other event
      *
      * @return bool TRUE if user is blocked by another registration, FALSE otherwise
      */
-    private function isUserBlocked(\Tx_Seminars_OldModel_Event $event): bool
+    private function isUserBlocked(LegacyEvent $event): bool
     {
         return $event->isUserBlocked($this->getLoggedInFrontEndUserUid());
     }
@@ -392,12 +393,12 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      *
      * Please note that this function does not create a registration - it just checks.
      *
-     * @param \Tx_Seminars_OldModel_Event $event the seminar object (that's the seminar we would like to register for)
+     * @param LegacyEvent $event the seminar object (that's the seminar we would like to register for)
      * @param array $registrationData associative array with the registration data the user has just entered
      *
      * @return bool TRUE if the data is okay, FALSE otherwise
      */
-    public function canCreateRegistration(\Tx_Seminars_OldModel_Event $event, array $registrationData): bool
+    public function canCreateRegistration(LegacyEvent $event, array $registrationData): bool
     {
         return $this->canRegisterSeats($event, (int)$registrationData['seats']);
     }
@@ -406,10 +407,10 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      * Checks whether a registration with a given number of seats could be
      * created, ie. an actual number is given and there are at least that many vacancies.
      *
-     * @param \Tx_Seminars_OldModel_Event $event the seminar object (that's the seminar we would like to register for)
+     * @param LegacyEvent $event the seminar object (that's the seminar we would like to register for)
      * @param int $numberOfSeats the number of seats to check
      */
-    public function canRegisterSeats(\Tx_Seminars_OldModel_Event $event, int $numberOfSeats): bool
+    public function canRegisterSeats(LegacyEvent $event, int $numberOfSeats): bool
     {
         // If no number of seats is given, ie. the user has not entered anything
         // or the field is not shown at all, assume 1.
@@ -428,14 +429,14 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      * The additional notifications will only be sent if this is enabled in the
      * TypoScript setup (which is the default).
      *
-     * @param \Tx_Seminars_OldModel_Event $event the seminar we would like to register for
+     * @param LegacyEvent $event the seminar we would like to register for
      * @param array $formData the raw registration data from the registration form
      * @param AbstractPlugin $plugin live plugin object
      *
      * @return \Tx_Seminars_Model_Registration the created, saved registration
      */
     public function createRegistration(
-        \Tx_Seminars_OldModel_Event $event,
+        LegacyEvent $event,
         array $formData,
         AbstractPlugin $plugin
     ): \Tx_Seminars_Model_Registration {
@@ -666,11 +667,11 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      *
      * A front-end user needs to be logged in when this function is called.
      *
-     * @param \Tx_Seminars_OldModel_Event $event the event to check
+     * @param LegacyEvent $event the event to check
      *
      * @return bool TRUE if the user fulfills all requirements, FALSE otherwise
      */
-    public function userFulfillsRequirements(\Tx_Seminars_OldModel_Event $event): bool
+    public function userFulfillsRequirements(LegacyEvent $event): bool
     {
         if (!$event->hasRequirements()) {
             return true;
@@ -681,11 +682,11 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
     /**
      * Returns the event topics the user still needs to register for in order to be able to register for $event.
      *
-     * @param \Tx_Seminars_OldModel_Event $event the event to check
+     * @param LegacyEvent $event the event to check
      *
      * @return \Tx_Seminars_Bag_Event the event topics which still need the user's registration, may be empty
      */
-    public function getMissingRequiredTopics(\Tx_Seminars_OldModel_Event $event): \Tx_Seminars_Bag_Event
+    public function getMissingRequiredTopics(LegacyEvent $event): \Tx_Seminars_Bag_Event
     {
         /** @var \Tx_Seminars_BagBuilder_Event $builder */
         $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Event::class);
@@ -720,7 +721,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
             return;
         }
 
-        /** @var \Tx_Seminars_OldModel_Event $event */
+        /** @var LegacyEvent $event */
         $event = $oldRegistration->getSeminarObject();
         if (!$event->hasOrganizers()) {
             return;
@@ -1251,11 +1252,11 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
     /**
      * Checks whether the given event allows registration, as far as its date is concerned.
      *
-     * @param \Tx_Seminars_OldModel_Event $event the event to check the registration for
+     * @param LegacyEvent $event the event to check the registration for
      *
      * @return bool TRUE if the event allows registration by date, FALSE otherwise
      */
-    public function allowsRegistrationByDate(\Tx_Seminars_OldModel_Event $event): bool
+    public function allowsRegistrationByDate(LegacyEvent $event): bool
     {
         if ($event->hasDate()) {
             $result = !$event->isRegistrationDeadlineOver();
@@ -1269,11 +1270,11 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
     /**
      * Checks whether the given event allows registration as far as the number of vacancies are concerned.
      *
-     * @param \Tx_Seminars_OldModel_Event $event the event to check the registration for
+     * @param LegacyEvent $event the event to check the registration for
      *
      * @return bool TRUE if the event has enough seats for registration, FALSE otherwise
      */
-    public function allowsRegistrationBySeats(\Tx_Seminars_OldModel_Event $event): bool
+    public function allowsRegistrationBySeats(LegacyEvent $event): bool
     {
         return $event->hasRegistrationQueue() || $event->hasUnlimitedVacancies() || $event->hasVacancies();
     }
@@ -1281,11 +1282,11 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
     /**
      * Checks whether the registration for this event has started.
      *
-     * @param \Tx_Seminars_OldModel_Event $event the event to check the registration for
+     * @param LegacyEvent $event the event to check the registration for
      *
      * @return bool TRUE if registration for this event already has started, FALSE otherwise
      */
-    public function registrationHasStarted(\Tx_Seminars_OldModel_Event $event): bool
+    public function registrationHasStarted(LegacyEvent $event): bool
     {
         if (!$event->hasRegistrationBegin()) {
             return true;
@@ -1314,10 +1315,10 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
     /**
      * Sets the places marker for the attendee notification.
      *
-     * @param \Tx_Seminars_OldModel_Event $event event of this registration
+     * @param LegacyEvent $event event of this registration
      * @param bool $useHtml whether to create HTML instead of plain text
      */
-    private function fillPlacesMarker(\Tx_Seminars_OldModel_Event $event, bool $useHtml): void
+    private function fillPlacesMarker(LegacyEvent $event, bool $useHtml): void
     {
         $template = $this->getInitializedEmailTemplate();
         if (!$event->hasPlace()) {
@@ -1426,11 +1427,11 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
     /**
      * Returns the unregistration notice for the notification mails.
      *
-     * @param \Tx_Seminars_OldModel_Event $event the event to get the unregistration deadline from
+     * @param LegacyEvent $event the event to get the unregistration deadline from
      *
      * @return string the unregistration notice with the event's unregistration deadline, will not be empty
      */
-    protected function getUnregistrationNotice(\Tx_Seminars_OldModel_Event $event): string
+    protected function getUnregistrationNotice(LegacyEvent $event): string
     {
         $unregistrationDeadline = $event->getUnregistrationDeadlineFromModelAndConfiguration();
 
@@ -1492,7 +1493,7 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      *                    and "value (for the price code), might be empty
      */
     public function getPricesAvailableForUser(
-        \Tx_Seminars_OldModel_Event $event,
+        LegacyEvent $event,
         \Tx_Seminars_Model_FrontEndUser $user
     ): array {
         $prices = $event->getAvailablePrices();

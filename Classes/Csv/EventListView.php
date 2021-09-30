@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Csv;
 
 use OliverKlee\Oelib\Interfaces\Configuration;
+use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -89,7 +90,7 @@ class EventListView extends AbstractListView
         $builder->setSourcePages((string)$this->getPageUid(), self::RECURSION_DEPTH);
 
         $csvLines = [];
-        /** @var \Tx_Seminars_OldModel_Event $event */
+        /** @var LegacyEvent $event */
         foreach ($builder->build() as $event) {
             $csvLines[] = implode(self::COLUMN_SEPARATOR, $this->createCsvColumnsForEvent($event));
         }
@@ -101,11 +102,11 @@ class EventListView extends AbstractListView
      * Retrieves data from an object and returns that data as an array of values. The individual values are already wrapped in
      * double quotes, with the contents having all quotes escaped.
      *
-     * @param \Tx_Seminars_OldModel_Event $event object that will deliver the data
+     * @param LegacyEvent $event object that will deliver the data
      *
      * @return string[] the data for the keys provided in $keys (may be empty)
      */
-    protected function createCsvColumnsForEvent(\Tx_Seminars_OldModel_Event $event): array
+    protected function createCsvColumnsForEvent(LegacyEvent $event): array
     {
         $csvLines = [];
 

@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Csv;
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Seminars\Csv\Interfaces\CsvAccessCheck;
+use OliverKlee\Seminars\OldModel\LegacyEvent;
 
 /**
  * This class provides the access check for the CSV export of registrations in the front end.
@@ -14,16 +15,16 @@ use OliverKlee\Seminars\Csv\Interfaces\CsvAccessCheck;
 class FrontEndRegistrationAccessCheck implements CsvAccessCheck
 {
     /**
-     * @var \Tx_Seminars_OldModel_Event
+     * @var LegacyEvent
      */
     protected $event = null;
 
     /**
      * Sets the event for the access check.
      *
-     * @param \Tx_Seminars_OldModel_Event $event
+     * @param LegacyEvent $event
      */
-    public function setEvent(\Tx_Seminars_OldModel_Event $event): void
+    public function setEvent(LegacyEvent $event): void
     {
         $this->event = $event;
     }
@@ -31,7 +32,7 @@ class FrontEndRegistrationAccessCheck implements CsvAccessCheck
     /**
      * Returns the event for the access check.
      */
-    protected function getEvent(): ?\Tx_Seminars_OldModel_Event
+    protected function getEvent(): ?LegacyEvent
     {
         return $this->event;
     }

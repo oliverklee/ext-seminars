@@ -32,6 +32,7 @@ use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarListView;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
+use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
@@ -79,7 +80,7 @@ class DefaultController extends TemplateHelper
     private $configurationService = null;
 
     /**
-     * @var \Tx_Seminars_OldModel_Event|null the seminar which we want to list/show or
+     * @var LegacyEvent|null the seminar which we want to list/show or
      *                          for which the user wants to register
      */
     private $seminar = null;
@@ -432,9 +433,9 @@ class DefaultController extends TemplateHelper
             unset($this->seminar);
         }
 
-        /** @var \Tx_Seminars_OldModel_Event|null $event */
-        $event = \Tx_Seminars_OldModel_Event::fromUid($seminarUid, $showHidden);
-        if ($event instanceof \Tx_Seminars_OldModel_Event) {
+        /** @var LegacyEvent|null $event */
+        $event = LegacyEvent::fromUid($seminarUid, $showHidden);
+        if ($event instanceof LegacyEvent) {
             $this->setSeminar($event);
             $result = $showHidden ? $this->canShowCurrentEvent() : true;
         } else {
@@ -448,7 +449,7 @@ class DefaultController extends TemplateHelper
     /**
      * Sets the current seminar for the list view.
      */
-    protected function setSeminar(?\Tx_Seminars_OldModel_Event $event = null): void
+    protected function setSeminar(?LegacyEvent $event = null): void
     {
         $this->seminar = $event;
     }
@@ -491,7 +492,7 @@ class DefaultController extends TemplateHelper
         }
     }
 
-    public function getSeminar(): ?\Tx_Seminars_OldModel_Event
+    public function getSeminar(): ?LegacyEvent
     {
         return $this->seminar;
     }
@@ -1239,7 +1240,7 @@ class DefaultController extends TemplateHelper
 
         $eventMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
 
-        /** @var \Tx_Seminars_OldModel_Event $dependency */
+        /** @var LegacyEvent $dependency */
         foreach ($this->seminar->getDependencies() as $dependency) {
             $event = $eventMapper->find($dependency->getUid());
             $this->setMarker(
@@ -1774,7 +1775,7 @@ class DefaultController extends TemplateHelper
                 $this->registration = $currentItem;
                 $this->setSeminar($this->registration->getSeminarObject());
             } else {
-                /** @var \Tx_Seminars_OldModel_Event $currentItem */
+                /** @var LegacyEvent $currentItem */
                 $this->setSeminar($currentItem);
             }
 
@@ -2227,11 +2228,11 @@ class DefaultController extends TemplateHelper
     /**
      * Gets the CSS classes (space-separated) for the Vacancies TD.
      *
-     * @param \Tx_Seminars_OldModel_Event $event the current seminar object
+     * @param LegacyEvent $event the current seminar object
      *
      * @return string class attribute value filled with a list a space-separated CSS classes
      */
-    public function getVacanciesClasses(\Tx_Seminars_OldModel_Event $event): string
+    public function getVacanciesClasses(LegacyEvent $event): string
     {
         if (
             !$event->needsRegistration()

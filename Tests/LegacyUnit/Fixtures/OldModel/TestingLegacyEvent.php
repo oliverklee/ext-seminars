@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel;
 
+use OliverKlee\Seminars\OldModel\LegacyEvent;
+
 /**
  * This is mere a class used for unit tests. Don't use it for any other purpose.
  */
-final class TestingEvent extends \Tx_Seminars_OldModel_Event
+final class TestingLegacyEvent extends LegacyEvent
 {
     /**
      * Sets the event data.

@@ -10,6 +10,7 @@ use OliverKlee\Oelib\Configuration\PageFinder;
 use OliverKlee\Oelib\Interfaces\Configuration;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Seminars\Csv\EmailRegistrationListView;
+use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
 use OliverKlee\Seminars\Service\EmailService;
 use OliverKlee\Seminars\Service\EventStatusService;
@@ -143,10 +144,10 @@ class MailNotifier extends AbstractTask
     /**
      * Sends an e-mail to the organizers of the provided event.
      *
-     * @param \Tx_Seminars_OldModel_Event $event event for which to send the reminder to its organizers
+     * @param LegacyEvent $event event for which to send the reminder to its organizers
      * @param non-empty-string $messageKey locallang key for the message content and the subject for the e-mail to send
      */
-    private function sendRemindersToOrganizers(\Tx_Seminars_OldModel_Event $event, string $messageKey): void
+    private function sendRemindersToOrganizers(LegacyEvent $event, string $messageKey): void
     {
         $attachment = null;
 
@@ -180,7 +181,7 @@ class MailNotifier extends AbstractTask
      * Returns events in confirmed status which are about to take place and for
      * which no reminder has been sent yet.
      *
-     * @return array<int, \Tx_Seminars_OldModel_Event> events for which to send the event-takes-place reminder to
+     * @return array<int, LegacyEvent> events for which to send the event-takes-place reminder to
      *               their organizers, will be empty if there are none
      */
     private function getEventsToSendEventTakesPlaceReminderFor(): array
@@ -195,7 +196,7 @@ class MailNotifier extends AbstractTask
         $builder = $this->getSeminarBagBuilder(\Tx_Seminars_Model_Event::STATUS_CONFIRMED);
         $builder->limitToEventTakesPlaceReminderNotSent();
         $builder->limitToDaysBeforeBeginDate($days);
-        /** @var \Tx_Seminars_OldModel_Event $event */
+        /** @var LegacyEvent $event */
         foreach ($builder->build() as $event) {
             $result[] = $event;
         }
@@ -207,7 +208,7 @@ class MailNotifier extends AbstractTask
      * Returns events in planned status for which the cancellation deadline has
      * just passed and for which no reminder has been sent yet.
      *
-     * @return array<int, \Tx_Seminars_OldModel_Event> events for which to send the cancellation reminder to their
+     * @return array<int, LegacyEvent> events for which to send the cancellation reminder to their
      *               organizers, will be empty if there are none
      */
     private function getEventsToSendCancellationDeadlineReminderFor(): array
@@ -224,7 +225,7 @@ class MailNotifier extends AbstractTask
         /** @var \Tx_Seminars_Bag_Event $bag */
         $bag = $builder->build();
 
-        /** @var \Tx_Seminars_OldModel_Event $event */
+        /** @var LegacyEvent $event */
         foreach ($bag as $event) {
             if ($event->getCancelationDeadline() < $GLOBALS['SIM_EXEC_TIME']) {
                 $result[] = $event;
@@ -292,14 +293,14 @@ class MailNotifier extends AbstractTask
      *
      * @param non-empty-string $locallangKey locallang key for the text in which to replace keywords beginning
      *        with "%" by the event's data
-     * @param \Tx_Seminars_OldModel_Event $event
+     * @param LegacyEvent $event
      *        event for which to customize the text
      * @param string $organizerName name of the organizer, may be empty if no organizer name needs to be inserted
      *        in the text
      *
      * @return string the localized e-mail content, will not be empty
      */
-    private function customizeMessage(string $locallangKey, \Tx_Seminars_OldModel_Event $event, string $organizerName = ''): string
+    private function customizeMessage(string $locallangKey, LegacyEvent $event, string $organizerName = ''): string
     {
         $result = $this->getLanguageService()->getLL($locallangKey);
 
@@ -334,9 +335,9 @@ class MailNotifier extends AbstractTask
     /**
      * Checks whether the CSV file should be added to the e-mail.
      *
-     * @param \Tx_Seminars_OldModel_Event $event the event to send the e-mail for
+     * @param LegacyEvent $event the event to send the e-mail for
      */
-    private function shouldCsvFileBeAdded(\Tx_Seminars_OldModel_Event $event): bool
+    private function shouldCsvFileBeAdded(LegacyEvent $event): bool
     {
         return $this->getConfiguration()->getAsBoolean('addRegistrationCsvToOrganizerReminderMail')
             && $event->hasAttendances();

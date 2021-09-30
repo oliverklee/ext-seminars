@@ -8,6 +8,7 @@ use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Bag\AbstractBag;
+use OliverKlee\Seminars\OldModel\LegacyEvent;
 
 final class EventBagBuilderTest extends TestCase
 {
@@ -3597,7 +3598,7 @@ final class EventBagBuilderTest extends TestCase
                 'end_date' => 60 * 60 + 2 * Time::SECONDS_PER_DAY,
             ]
         );
-        $event = new \Tx_Seminars_OldModel_Event($eventUid1);
+        $event = new LegacyEvent($eventUid1);
         $this->subject->limitToEventsNextDay($event);
         $bag = $this->subject->build();
 
@@ -3627,7 +3628,7 @@ final class EventBagBuilderTest extends TestCase
                 'end_date' => 60 * 60,
             ]
         );
-        $event = new \Tx_Seminars_OldModel_Event($eventUid);
+        $event = new LegacyEvent($eventUid);
         $this->subject->limitToEventsNextDay($event);
         $bag = $this->subject->build();
 
@@ -3652,7 +3653,7 @@ final class EventBagBuilderTest extends TestCase
                 'end_date' => 60 * 60 + 3 * Time::SECONDS_PER_DAY,
             ]
         );
-        $event = new \Tx_Seminars_OldModel_Event($eventUid);
+        $event = new LegacyEvent($eventUid);
         $this->subject->limitToEventsNextDay($event);
         $bag = $this->subject->build();
 
@@ -3678,7 +3679,7 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars'
         );
         $this->subject->limitToEventsNextDay(
-            new \Tx_Seminars_OldModel_Event($eventUid)
+            new LegacyEvent($eventUid)
         );
     }
 
@@ -3709,7 +3710,7 @@ final class EventBagBuilderTest extends TestCase
                 'topic' => $topicUid,
             ]
         );
-        $date = new \Tx_Seminars_OldModel_Event($dateUid1);
+        $date = new LegacyEvent($dateUid1);
         $this->subject->limitToOtherDatesForTopic($date);
         $bag = $this->subject->build();
 
@@ -3746,7 +3747,7 @@ final class EventBagBuilderTest extends TestCase
                 'topic' => $topicUid,
             ]
         );
-        $topic = new \Tx_Seminars_OldModel_Event($topicUid);
+        $topic = new LegacyEvent($topicUid);
         $this->subject->limitToOtherDatesForTopic($topic);
         $bag = $this->subject->build();
 
@@ -3772,7 +3773,7 @@ final class EventBagBuilderTest extends TestCase
             'tx_seminars_seminars',
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_COMPLETE]
         );
-        $event = new \Tx_Seminars_OldModel_Event($eventUid);
+        $event = new LegacyEvent($eventUid);
         $this->subject->limitToOtherDatesForTopic($event);
     }
 
@@ -3803,7 +3804,7 @@ final class EventBagBuilderTest extends TestCase
                 'topic' => $topicUid2,
             ]
         );
-        $date = new \Tx_Seminars_OldModel_Event($dateUid1);
+        $date = new LegacyEvent($dateUid1);
         $this->subject->limitToOtherDatesForTopic($date);
         $bag = $this->subject->build();
 
@@ -3835,7 +3836,7 @@ final class EventBagBuilderTest extends TestCase
                 'topic' => $topicUid,
             ]
         );
-        $date = new \Tx_Seminars_OldModel_Event($dateUid);
+        $date = new LegacyEvent($dateUid);
         $this->subject->limitToOtherDatesForTopic($date);
         $bag = $this->subject->build();
 
@@ -3871,7 +3872,7 @@ final class EventBagBuilderTest extends TestCase
                 'topic' => $topicUid2,
             ]
         );
-        $date = new \Tx_Seminars_OldModel_Event($dateUid1);
+        $date = new LegacyEvent($dateUid1);
         $this->subject->limitToOtherDatesForTopic($date);
         $this->subject->removeLimitToOtherDatesForTopic();
         $bag = $this->subject->build();
@@ -3905,7 +3906,7 @@ final class EventBagBuilderTest extends TestCase
                 'topic' => $topicUid,
             ]
         );
-        $date = new \Tx_Seminars_OldModel_Event($dateUid);
+        $date = new LegacyEvent($dateUid);
         $this->subject->limitToOtherDatesForTopic($date);
         $this->subject->removeLimitToOtherDatesForTopic();
         $bag = $this->subject->build();

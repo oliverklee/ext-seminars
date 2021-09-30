@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
+use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -12,7 +13,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class Tx_Seminars_FrontEnd_RequirementsList extends \Tx_Seminars_FrontEnd_AbstractView
 {
     /**
-     * @var \Tx_Seminars_OldModel_Event|null the event to build the requirements list for
+     * @var LegacyEvent|null the event to build the requirements list for
      */
     private $event = null;
 
@@ -29,9 +30,9 @@ class Tx_Seminars_FrontEnd_RequirementsList extends \Tx_Seminars_FrontEnd_Abstra
     /**
      * Sets the event to which this view relates.
      *
-     * @param \Tx_Seminars_OldModel_Event $event the event to build the requirements list for
+     * @param LegacyEvent $event the event to build the requirements list for
      */
-    public function setEvent(\Tx_Seminars_OldModel_Event $event): void
+    public function setEvent(LegacyEvent $event): void
     {
         $this->event = $event;
     }
@@ -61,7 +62,7 @@ class Tx_Seminars_FrontEnd_RequirementsList extends \Tx_Seminars_FrontEnd_Abstra
      */
     public function render(): string
     {
-        if (!$this->event instanceof Tx_Seminars_OldModel_Event) {
+        if (!$this->event instanceof LegacyEvent) {
             throw new \BadMethodCallException(
                 'No event was set, please set an event before calling render.',
                 1333293250
@@ -78,7 +79,7 @@ class Tx_Seminars_FrontEnd_RequirementsList extends \Tx_Seminars_FrontEnd_Abstra
         $output = '';
 
         $eventMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Event::class);
-        /** @var \Tx_Seminars_OldModel_Event $requirement */
+        /** @var LegacyEvent $requirement */
         foreach ($this->getRequirements() as $requirement) {
             $event = $eventMapper->find($requirement->getUid());
 

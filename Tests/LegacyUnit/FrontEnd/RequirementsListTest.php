@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd;
 
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
@@ -102,7 +103,7 @@ final class RequirementsListTest extends TestCase
             $requiredEvent,
             'requirements'
         );
-        $this->subject->setEvent(new \Tx_Seminars_OldModel_Event($this->seminarUid));
+        $this->subject->setEvent(new LegacyEvent($this->seminarUid));
 
         self::assertStringContainsString(
             'required &amp; foo',
@@ -137,7 +138,7 @@ final class RequirementsListTest extends TestCase
             $requiredEvent,
             'requirements'
         );
-        $this->subject->setEvent(new \Tx_Seminars_OldModel_Event($this->seminarUid));
+        $this->subject->setEvent(new LegacyEvent($this->seminarUid));
 
         self::assertRegExp(
             '/<a href=.*' . $requiredEvent . '.*>required_foo<\\/a>/',
@@ -181,7 +182,7 @@ final class RequirementsListTest extends TestCase
             $requiredEvent2,
             'requirements'
         );
-        $this->subject->setEvent(new \Tx_Seminars_OldModel_Event($this->seminarUid));
+        $this->subject->setEvent(new LegacyEvent($this->seminarUid));
 
         self::assertRegExp(
             '/required_foo.*required_bar/s',
@@ -261,7 +262,7 @@ final class RequirementsListTest extends TestCase
             'tx_seminars_attendances',
             ['seminar' => $requiredDate2, 'user' => $userUid]
         );
-        $this->subject->setEvent(new \Tx_Seminars_OldModel_Event($this->seminarUid));
+        $this->subject->setEvent(new LegacyEvent($this->seminarUid));
         $this->subject->limitToMissingRegistrations();
 
         self::assertStringNotContainsString(

@@ -10,6 +10,7 @@ use OliverKlee\Oelib\Session\FakeSession;
 use OliverKlee\Oelib\Session\Session;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
@@ -43,7 +44,7 @@ final class RegistrationFormTest extends TestCase
     private $seminarUid = 0;
 
     /**
-     * @var \Tx_Seminars_OldModel_Event
+     * @var LegacyEvent
      */
     private $seminar = null;
 
@@ -68,7 +69,7 @@ final class RegistrationFormTest extends TestCase
         $this->infoTablesConfiguration = new DummyConfiguration();
         $configurationRegistry->set('plugin.tx_staticinfotables_pi1', $this->infoTablesConfiguration);
 
-        $this->seminar = new \Tx_Seminars_OldModel_Event(
+        $this->seminar = new LegacyEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 ['payment_methods' => '1']
@@ -709,8 +710,8 @@ final class RegistrationFormTest extends TestCase
             $this->getFrontEndController()->cObj
         );
 
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $event */
-        $event = $this->createMock(\Tx_Seminars_OldModel_Event::class);
+        /** @var LegacyEvent&MockObject $event */
+        $event = $this->createMock(LegacyEvent::class);
         $subject->setSeminar($event);
 
         self::assertFalse(
@@ -736,8 +737,8 @@ final class RegistrationFormTest extends TestCase
             ['showRegistrationFields' => $key],
             $this->getFrontEndController()->cObj
         );
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $event */
-        $event = $this->createMock(\Tx_Seminars_OldModel_Event::class);
+        /** @var LegacyEvent&MockObject $event */
+        $event = $this->createMock(LegacyEvent::class);
         $subject->setSeminar($event);
 
         self::assertEquals(
@@ -1531,7 +1532,7 @@ final class RegistrationFormTest extends TestCase
             $this->seminarUid,
             ['price_regular' => 42]
         );
-        $event = new \Tx_Seminars_OldModel_Event($this->seminarUid);
+        $event = new LegacyEvent($this->seminarUid);
         $subject->setSeminar($event);
         $subject->setFakedFormValue('price', 'price_regular');
 
@@ -1555,7 +1556,7 @@ final class RegistrationFormTest extends TestCase
         );
         $subject->setTestMode();
 
-        $event = new \Tx_Seminars_OldModel_Event($this->seminarUid);
+        $event = new LegacyEvent($this->seminarUid);
         $subject->setSeminar($event);
         $subject->setFakedFormValue('interests', 'A, B & C');
 
@@ -1579,7 +1580,7 @@ final class RegistrationFormTest extends TestCase
         );
         $subject->setTestMode();
 
-        $event = new \Tx_Seminars_OldModel_Event($this->seminarUid);
+        $event = new LegacyEvent($this->seminarUid);
         $subject->setSeminar($event);
         $subject->setFakedFormValue('interests', "Love\rPeace");
 
@@ -1603,7 +1604,7 @@ final class RegistrationFormTest extends TestCase
         );
         $subject->setTestMode();
 
-        $event = new \Tx_Seminars_OldModel_Event($this->seminarUid);
+        $event = new LegacyEvent($this->seminarUid);
         $subject->setSeminar($event);
         $subject->setFakedFormValue('attendees_names', 'John Doe');
 
@@ -1632,7 +1633,7 @@ final class RegistrationFormTest extends TestCase
         );
         $subject->setTestMode();
 
-        $event = new \Tx_Seminars_OldModel_Event($this->seminarUid);
+        $event = new LegacyEvent($this->seminarUid);
         $subject->setSeminar($event);
         $subject->setFakedFormValue('attendees_names', 'John Doe');
         $subject->setFakedFormValue('registered_themselves', '1');
@@ -1662,7 +1663,7 @@ final class RegistrationFormTest extends TestCase
         );
         $subject->setTestMode();
 
-        $event = new \Tx_Seminars_OldModel_Event($this->seminarUid);
+        $event = new LegacyEvent($this->seminarUid);
         $subject->setSeminar($event);
         $subject->setFakedFormValue('attendees_names', 'John Doe');
         $subject->setFakedFormValue('registered_themselves', '');
@@ -1693,7 +1694,7 @@ final class RegistrationFormTest extends TestCase
         );
         $subject->setTestMode();
 
-        $event = new \Tx_Seminars_OldModel_Event($this->seminarUid);
+        $event = new LegacyEvent($this->seminarUid);
         $subject->setSeminar($event);
         $subject->setFakedFormValue('registered_themselves', '1');
 
@@ -1723,7 +1724,7 @@ final class RegistrationFormTest extends TestCase
         );
         $subject->setTestMode();
 
-        $event = new \Tx_Seminars_OldModel_Event($this->seminarUid);
+        $event = new LegacyEvent($this->seminarUid);
         $subject->setSeminar($event);
         $subject->setFakedFormValue('registered_themselves', '1');
 
@@ -1753,7 +1754,7 @@ final class RegistrationFormTest extends TestCase
         );
         $subject->setTestMode();
 
-        $event = new \Tx_Seminars_OldModel_Event($this->seminarUid);
+        $event = new LegacyEvent($this->seminarUid);
         $subject->setSeminar($event);
         $subject->setFakedFormValue('registered_themselves', '1');
 
@@ -1783,7 +1784,7 @@ final class RegistrationFormTest extends TestCase
         );
         $subject->setTestMode();
 
-        $event = new \Tx_Seminars_OldModel_Event($this->seminarUid);
+        $event = new LegacyEvent($this->seminarUid);
         $subject->setSeminar($event);
         $subject->setFakedFormValue('registered_themselves', '1');
 

@@ -12,16 +12,17 @@ use OliverKlee\Oelib\Model\FrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
-use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
+use OliverKlee\Seminars\OldModel\LegacyEvent;
+use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * @covers \Tx_Seminars_OldModel_Event
+ * @covers \OliverKlee\Seminars\OldModel\LegacyEvent
  */
-final class EventTest extends TestCase
+final class LegacyEventTest extends TestCase
 {
     use LanguageHelper;
 
@@ -41,7 +42,7 @@ final class EventTest extends TestCase
     private $configuration;
 
     /**
-     * @var TestingEvent
+     * @var TestingLegacyEvent
      */
     private $subject = null;
 
@@ -100,7 +101,7 @@ final class EventTest extends TestCase
                 'needs_registration' => 1,
             ]
         );
-        $this->subject = new TestingEvent($uid);
+        $this->subject = new TestingLegacyEvent($uid);
     }
 
     protected function tearDown(): void
@@ -1090,7 +1091,7 @@ final class EventTest extends TestCase
                 'title' => 'a test topic',
             ]
         );
-        $topic = new \Tx_Seminars_OldModel_Event($topicRecordUid);
+        $topic = new LegacyEvent($topicRecordUid);
 
         self::assertSame(
             'a test topic',
@@ -1118,7 +1119,7 @@ final class EventTest extends TestCase
                 'title' => 'a test date',
             ]
         );
-        $date = new \Tx_Seminars_OldModel_Event($dateRecordUid);
+        $date = new LegacyEvent($dateRecordUid);
 
         self::assertSame(
             'a test topic',
@@ -1724,7 +1725,7 @@ final class EventTest extends TestCase
             ]
         );
 
-        $seminar = new \Tx_Seminars_OldModel_Event($dateRecordUid);
+        $seminar = new LegacyEvent($dateRecordUid);
 
         self::assertSame(
             'Italiano',
@@ -1757,7 +1758,7 @@ final class EventTest extends TestCase
             ]
         );
 
-        $seminar = new \Tx_Seminars_OldModel_Event($singleRecordUid);
+        $seminar = new LegacyEvent($singleRecordUid);
 
         self::assertSame(
             'Italiano',
@@ -3150,7 +3151,7 @@ final class EventTest extends TestCase
                 'topic' => $topicRecordUid,
             ]
         );
-        $seminar = new \Tx_Seminars_OldModel_Event($dateRecordUid);
+        $seminar = new LegacyEvent($dateRecordUid);
 
         self::assertSame(
             'foo type',
@@ -3173,7 +3174,7 @@ final class EventTest extends TestCase
                 ),
             ]
         );
-        $seminar = new \Tx_Seminars_OldModel_Event($topicRecordUid);
+        $seminar = new LegacyEvent($topicRecordUid);
 
         self::assertSame(
             'foo type',
@@ -3202,7 +3203,7 @@ final class EventTest extends TestCase
                 'event_type' => 199999,
             ]
         );
-        $seminar = new \Tx_Seminars_OldModel_Event($dateRecordUid);
+        $seminar = new LegacyEvent($dateRecordUid);
 
         self::assertSame(
             99999,
@@ -5218,7 +5219,7 @@ final class EventTest extends TestCase
                 'details_page' => $detailsPageUid,
             ]
         );
-        $event = new TestingEvent($eventUid);
+        $event = new TestingLegacyEvent($eventUid);
 
         self::assertTrue(
             $event->hasSeparateDetailsPage()
@@ -5237,7 +5238,7 @@ final class EventTest extends TestCase
                 'details_page' => 'www.test.com',
             ]
         );
-        $event = new TestingEvent($eventUid);
+        $event = new TestingLegacyEvent($eventUid);
 
         self::assertTrue(
             $event->hasSeparateDetailsPage()
@@ -5270,7 +5271,7 @@ final class EventTest extends TestCase
                 'details_page' => $detailsPageUid,
             ]
         );
-        $event = new TestingEvent($eventUid);
+        $event = new TestingLegacyEvent($eventUid);
 
         self::assertSame(
             (string)$detailsPageUid,
@@ -5291,7 +5292,7 @@ final class EventTest extends TestCase
                 'details_page' => $externalUrl,
             ]
         );
-        $event = new TestingEvent($eventUid);
+        $event = new TestingLegacyEvent($eventUid);
 
         self::assertSame(
             $externalUrl,
@@ -6203,7 +6204,7 @@ final class EventTest extends TestCase
      */
     public function hasRequirementsForTopicWithoutRequirementsReturnsFalse(): void
     {
-        $topic = new TestingEvent(
+        $topic = new TestingLegacyEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -6230,7 +6231,7 @@ final class EventTest extends TestCase
                 'requirements' => 0,
             ]
         );
-        $date = new TestingEvent(
+        $date = new TestingLegacyEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -6264,7 +6265,7 @@ final class EventTest extends TestCase
             $requiredTopicUid,
             'requirements'
         );
-        $topic = new TestingEvent($topicUid);
+        $topic = new TestingLegacyEvent($topicUid);
 
         self::assertTrue(
             $topic->hasRequirements()
@@ -6290,7 +6291,7 @@ final class EventTest extends TestCase
             $requiredTopicUid,
             'requirements'
         );
-        $date = new TestingEvent(
+        $date = new TestingLegacyEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -6334,7 +6335,7 @@ final class EventTest extends TestCase
             $requiredTopicUid2,
             'requirements'
         );
-        $topic = new TestingEvent($topicUid);
+        $topic = new TestingLegacyEvent($topicUid);
 
         self::assertTrue(
             $topic->hasRequirements()
@@ -6348,7 +6349,7 @@ final class EventTest extends TestCase
      */
     public function hasDependenciesForTopicWithoutDependenciesReturnsFalse(): void
     {
-        $topic = new TestingEvent(
+        $topic = new TestingLegacyEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -6375,7 +6376,7 @@ final class EventTest extends TestCase
                 'dependencies' => 0,
             ]
         );
-        $date = new TestingEvent(
+        $date = new TestingLegacyEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -6414,7 +6415,7 @@ final class EventTest extends TestCase
             $dependentTopicUid,
             $topicUid
         );
-        $topic = new TestingEvent($topicUid);
+        $topic = new TestingLegacyEvent($topicUid);
 
         self::assertTrue(
             $topic->hasDependencies()
@@ -6445,7 +6446,7 @@ final class EventTest extends TestCase
             $dependentTopicUid,
             $topicUid
         );
-        $date = new TestingEvent(
+        $date = new TestingLegacyEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -6497,7 +6498,7 @@ final class EventTest extends TestCase
             $topicUid
         );
 
-        $result = (new TestingEvent($topicUid))->hasDependencies();
+        $result = (new TestingLegacyEvent($topicUid))->hasDependencies();
 
         self::assertTrue(
             $result
@@ -6544,7 +6545,7 @@ final class EventTest extends TestCase
             'requirements'
         );
 
-        $result = (new TestingEvent($topicUid))->getRequirements();
+        $result = (new TestingLegacyEvent($topicUid))->getRequirements();
 
         self::assertSame(
             1,
@@ -6575,7 +6576,7 @@ final class EventTest extends TestCase
             $requiredTopicUid,
             'requirements'
         );
-        $date = new TestingEvent(
+        $date = new TestingLegacyEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -6627,7 +6628,7 @@ final class EventTest extends TestCase
             'requirements'
         );
 
-        $requirements = (new TestingEvent($topicUid))->getRequirements();
+        $requirements = (new TestingLegacyEvent($topicUid))->getRequirements();
 
         self::assertSame(
             2,
@@ -6680,7 +6681,7 @@ final class EventTest extends TestCase
             $topicUid
         );
 
-        $result = (new TestingEvent($topicUid))->getDependencies();
+        $result = (new TestingLegacyEvent($topicUid))->getDependencies();
 
         self::assertSame(
             1,
@@ -6716,7 +6717,7 @@ final class EventTest extends TestCase
             $dependentTopicUid,
             $topicUid
         );
-        $date = new TestingEvent(
+        $date = new TestingLegacyEvent(
             $this->testingFramework->createRecord(
                 'tx_seminars_seminars',
                 [
@@ -6775,7 +6776,7 @@ final class EventTest extends TestCase
             $topicUid
         );
 
-        $dependencies = (new TestingEvent($topicUid))->getDependencies();
+        $dependencies = (new TestingLegacyEvent($topicUid))->getDependencies();
 
         self::assertSame(
             2,
@@ -7266,8 +7267,8 @@ final class EventTest extends TestCase
             'directions' => '',
         ];
 
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $subject */
-        $subject = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getPlacesAsArray', 'hasPlace']);
+        /** @var LegacyEvent&MockObject $subject */
+        $subject = $this->createPartialMock(LegacyEvent::class, ['getPlacesAsArray', 'hasPlace']);
         $subject->method('getPlacesAsArray')->willReturn([$place]);
         $subject->method('hasPlace')->willReturn(true);
 
@@ -7299,8 +7300,8 @@ final class EventTest extends TestCase
             'directions' => '',
         ];
 
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $subject */
-        $subject = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getPlacesAsArray', 'hasPlace']);
+        /** @var LegacyEvent&MockObject $subject */
+        $subject = $this->createPartialMock(LegacyEvent::class, ['getPlacesAsArray', 'hasPlace']);
         $subject->method('getPlacesAsArray')->willReturn([$place1, $place2]);
         $subject->method('hasPlace')->willReturn(true);
 
@@ -7322,8 +7323,8 @@ final class EventTest extends TestCase
             'city' => 'Bonn',
         ];
 
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $subject */
-        $subject = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getPlacesAsArray', 'hasPlace']);
+        /** @var LegacyEvent&MockObject $subject */
+        $subject = $this->createPartialMock(LegacyEvent::class, ['getPlacesAsArray', 'hasPlace']);
         $subject->method('getPlacesAsArray')->willReturn([$place]);
         $subject->method('hasPlace')->willReturn(true);
 
@@ -7345,8 +7346,8 @@ final class EventTest extends TestCase
             'city' => 'Bonn',
         ];
 
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $subject */
-        $subject = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getPlacesAsArray', 'hasPlace']);
+        /** @var LegacyEvent&MockObject $subject */
+        $subject = $this->createPartialMock(LegacyEvent::class, ['getPlacesAsArray', 'hasPlace']);
         $subject->method('getPlacesAsArray')->willReturn([$place]);
         $subject->method('hasPlace')->willReturn(true);
 
@@ -7709,7 +7710,7 @@ final class EventTest extends TestCase
                 'end_date' => 0,
             ]
         );
-        $subject = new TestingEvent($uid);
+        $subject = new TestingLegacyEvent($uid);
 
         self::assertSame(
             0,
@@ -7732,7 +7733,7 @@ final class EventTest extends TestCase
                 'end_date' => 0,
             ]
         );
-        $subject = new TestingEvent($uid);
+        $subject = new TestingLegacyEvent($uid);
 
         self::assertSame(
             $this->now,
@@ -7755,7 +7756,7 @@ final class EventTest extends TestCase
                 'end_date' => 0,
             ]
         );
-        $subject = new TestingEvent($uid);
+        $subject = new TestingLegacyEvent($uid);
 
         self::assertSame(
             $this->now,
@@ -7780,7 +7781,7 @@ final class EventTest extends TestCase
                 'end_date' => $this->now + 1000,
             ]
         );
-        $subject = new TestingEvent($uid);
+        $subject = new TestingLegacyEvent($uid);
 
         self::assertSame(
             $this->now + 1000,
@@ -7805,7 +7806,7 @@ final class EventTest extends TestCase
                 'end_date' => $this->now + 1000,
             ]
         );
-        $subject = new TestingEvent($uid);
+        $subject = new TestingLegacyEvent($uid);
 
         self::assertSame(
             $this->now - 1000,
@@ -7830,7 +7831,7 @@ final class EventTest extends TestCase
                 'end_date' => 0,
             ]
         );
-        $subject = new TestingEvent($uid);
+        $subject = new TestingLegacyEvent($uid);
 
         self::assertSame(
             $this->now,
@@ -7873,7 +7874,7 @@ final class EventTest extends TestCase
             ]
         );
 
-        $date = new TestingEvent($dateRecordUid);
+        $date = new TestingLegacyEvent($dateRecordUid);
 
         self::assertSame(
             42,
@@ -7939,7 +7940,7 @@ final class EventTest extends TestCase
             ]
         );
 
-        $date = new TestingEvent($dateRecordUid);
+        $date = new TestingLegacyEvent($dateRecordUid);
 
         self::assertFalse(
             $date->hasTopicInteger('credit_points')
@@ -7966,7 +7967,7 @@ final class EventTest extends TestCase
             ]
         );
 
-        $date = new TestingEvent($dateRecordUid);
+        $date = new TestingLegacyEvent($dateRecordUid);
 
         self::assertTrue(
             $date->hasTopicInteger('credit_points')
@@ -8200,9 +8201,9 @@ final class EventTest extends TestCase
         int $registrationsListPID,
         int $registrationsVipListPID
     ): void {
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $subject */
+        /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(
-            \Tx_Seminars_OldModel_Event::class,
+            LegacyEvent::class,
             ['needsRegistration', 'isUserRegistered', 'isUserVip']
         );
         $subject->method('needsRegistration')
@@ -8250,9 +8251,9 @@ final class EventTest extends TestCase
         int $registrationsListPID,
         int $registrationsVipListPID
     ): void {
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $subject */
+        /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(
-            \Tx_Seminars_OldModel_Event::class,
+            LegacyEvent::class,
             ['needsRegistration', 'isUserRegistered', 'isUserVip']
         );
         $subject->method('needsRegistration')
@@ -8330,8 +8331,8 @@ final class EventTest extends TestCase
         bool $isVip,
         bool $allowCsvExportForVips
     ): void {
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $subject */
-        $subject = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['needsRegistration', 'isUserVip']);
+        /** @var LegacyEvent&MockObject $subject */
+        $subject = $this->createPartialMock(LegacyEvent::class, ['needsRegistration', 'isUserVip']);
         $subject->method('needsRegistration')
             ->willReturn(true);
         $subject->method('isUserVip')
@@ -8531,9 +8532,9 @@ final class EventTest extends TestCase
         int $registrationsListPID,
         int $registrationsVipListPID
     ): void {
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $subject */
+        /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(
-            \Tx_Seminars_OldModel_Event::class,
+            LegacyEvent::class,
             ['needsRegistration', 'isUserRegistered', 'isUserVip']
         );
         $subject->method('needsRegistration')
@@ -8740,9 +8741,9 @@ final class EventTest extends TestCase
         int $registrationsListPID,
         int $registrationsVipListPID
     ): void {
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $subject */
+        /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(
-            \Tx_Seminars_OldModel_Event::class,
+            LegacyEvent::class,
             ['needsRegistration', 'isUserRegistered', 'isUserVip']
         );
         $subject->method('needsRegistration')
@@ -8777,8 +8778,8 @@ final class EventTest extends TestCase
      */
     public function canViewRegistrationsListMessageWithoutNeededRegistrationReturnsNoRegistrationMessage(): void
     {
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $subject */
-        $subject = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['needsRegistration']);
+        /** @var LegacyEvent&MockObject $subject */
+        $subject = $this->createPartialMock(LegacyEvent::class, ['needsRegistration']);
         $subject->method('needsRegistration')->willReturn(false);
         $subject->init();
 
@@ -8793,8 +8794,8 @@ final class EventTest extends TestCase
      */
     public function canViewRegistrationsListMessageForListAndNoLoginAndAttendeesAccessReturnsPleaseLoginMessage(): void
     {
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $subject */
-        $subject = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['needsRegistration']);
+        /** @var LegacyEvent&MockObject $subject */
+        $subject = $this->createPartialMock(LegacyEvent::class, ['needsRegistration']);
         $subject->method('needsRegistration')->willReturn(true);
         $subject->init();
 
@@ -8809,8 +8810,8 @@ final class EventTest extends TestCase
      */
     public function canViewRegistrationsListMessageForListAndNoLoginAndLoginAccessReturnsPleaseLoginMessage(): void
     {
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $subject */
-        $subject = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['needsRegistration']);
+        /** @var LegacyEvent&MockObject $subject */
+        $subject = $this->createPartialMock(LegacyEvent::class, ['needsRegistration']);
         $subject->method('needsRegistration')->willReturn(true);
         $subject->init();
 
@@ -8825,8 +8826,8 @@ final class EventTest extends TestCase
      */
     public function canViewRegistrationsListMessageForListAndNoLoginAndWorldAccessReturnsEmptyString(): void
     {
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $subject */
-        $subject = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['needsRegistration']);
+        /** @var LegacyEvent&MockObject $subject */
+        $subject = $this->createPartialMock(LegacyEvent::class, ['needsRegistration']);
         $subject->method('needsRegistration')->willReturn(true);
         $subject->init();
 
@@ -8859,8 +8860,8 @@ final class EventTest extends TestCase
      */
     public function canViewRegistrationsListMessageForVipListAndNoLoginReturnsPleaseLoginMessage(string $accessLevel): void
     {
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $subject */
-        $subject = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['needsRegistration']);
+        /** @var LegacyEvent&MockObject $subject */
+        $subject = $this->createPartialMock(LegacyEvent::class, ['needsRegistration']);
         $subject->method('needsRegistration')->willReturn(true);
         $subject->init();
 
@@ -8875,8 +8876,8 @@ final class EventTest extends TestCase
      */
     public function canViewRegistrationsListMessageForVipListAndWorldAccessAndNoLoginReturnsEmptyString(): void
     {
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $subject */
-        $subject = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['needsRegistration']);
+        /** @var LegacyEvent&MockObject $subject */
+        $subject = $this->createPartialMock(LegacyEvent::class, ['needsRegistration']);
         $subject->method('needsRegistration')->willReturn(true);
         $subject->init();
 
@@ -8916,9 +8917,9 @@ final class EventTest extends TestCase
      */
     public function canViewRegistrationsListMessageWithLoginRoutesParameters(string $whichPlugin, string $accessLevel): void
     {
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $subject */
+        /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(
-            \Tx_Seminars_OldModel_Event::class,
+            LegacyEvent::class,
             ['needsRegistration', 'canViewRegistrationsList']
         );
         $subject->method('needsRegistration')->willReturn(true);
@@ -8938,9 +8939,9 @@ final class EventTest extends TestCase
      */
     public function canViewRegistrationsListMessageWithLoginAndAccessGrantedReturnsEmptyString(): void
     {
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $subject */
+        /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(
-            \Tx_Seminars_OldModel_Event::class,
+            LegacyEvent::class,
             ['needsRegistration', 'canViewRegistrationsList']
         );
         $subject->method('needsRegistration')->willReturn(true);
@@ -8961,9 +8962,9 @@ final class EventTest extends TestCase
      */
     public function canViewRegistrationsListMessageWithLoginAndAccessDeniedReturnsAccessDeniedMessage(): void
     {
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $subject */
+        /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(
-            \Tx_Seminars_OldModel_Event::class,
+            LegacyEvent::class,
             ['needsRegistration', 'canViewRegistrationsList']
         );
         $subject->method('needsRegistration')->willReturn(true);
@@ -9118,9 +9119,9 @@ final class EventTest extends TestCase
         bool $hasPriceRegularBoard,
         bool $hasPriceSpecialBoard
     ): void {
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $subject */
+        /** @var LegacyEvent&MockObject $subject */
         $subject = $this->createPartialMock(
-            \Tx_Seminars_OldModel_Event::class,
+            LegacyEvent::class,
             [
                 'hasPriceRegular',
                 'hasPriceSpecial',
@@ -9174,7 +9175,7 @@ final class EventTest extends TestCase
             'tx_seminars_seminars',
             ['organizers_notified_about_minimum_reached' => 1]
         );
-        $subject = new TestingEvent($uid);
+        $subject = new TestingLegacyEvent($uid);
 
         self::assertTrue(
             $subject->haveOrganizersBeenNotifiedAboutEnoughAttendees()
@@ -9214,7 +9215,7 @@ final class EventTest extends TestCase
             'tx_seminars_seminars',
             ['mute_notification_emails' => 1]
         );
-        $subject = new TestingEvent($uid);
+        $subject = new TestingLegacyEvent($uid);
 
         self::assertTrue(
             $subject->shouldMuteNotificationEmails()
@@ -9254,7 +9255,7 @@ final class EventTest extends TestCase
             'tx_seminars_seminars',
             ['automatic_confirmation_cancelation' => 1]
         );
-        $subject = new TestingEvent($uid);
+        $subject = new TestingLegacyEvent($uid);
 
         self::assertTrue(
             $subject->shouldAutomaticallyConfirmOrCancel()
@@ -9281,7 +9282,7 @@ final class EventTest extends TestCase
             'tx_seminars_seminars',
             ['registrations' => $numberOfRegistrations]
         );
-        $subject = new TestingEvent($uid);
+        $subject = new TestingLegacyEvent($uid);
 
         self::assertSame($numberOfRegistrations, $subject->getNumberOfAssociatedRegistrationRecords());
     }
@@ -9305,7 +9306,7 @@ final class EventTest extends TestCase
             'tx_seminars_seminars',
             ['registrations' => 2]
         );
-        $subject = new TestingEvent($uid);
+        $subject = new TestingLegacyEvent($uid);
 
         $subject->increaseNumberOfAssociatedRegistrationRecords();
 
@@ -9355,7 +9356,7 @@ final class EventTest extends TestCase
             'tx_seminars_seminars',
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_DATE, 'topic' => $topicUid]
         );
-        $date = new \Tx_Seminars_OldModel_Event($dateUid);
+        $date = new LegacyEvent($dateUid);
 
         self::assertFalse($date->getPriceOnRequest());
     }
@@ -9373,7 +9374,7 @@ final class EventTest extends TestCase
             'tx_seminars_seminars',
             ['object_type' => \Tx_Seminars_Model_Event::TYPE_DATE, 'topic' => $topicUid]
         );
-        $date = new \Tx_Seminars_OldModel_Event($dateUid);
+        $date = new LegacyEvent($dateUid);
 
         self::assertTrue($date->getPriceOnRequest());
     }

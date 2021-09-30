@@ -17,7 +17,8 @@ use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarListView;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarRegistrationForm;
 use OliverKlee\Seminars\Hooks\Interfaces\SeminarSingleView;
-use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
+use OliverKlee\Seminars\OldModel\LegacyEvent;
+use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
 use OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd\Fixtures\TestingDefaultController;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -660,7 +661,7 @@ final class DefaultControllerTest extends TestCase
         $this->subject->createSeminar($this->seminarUid);
 
         self::assertInstanceOf(
-            \Tx_Seminars_OldModel_Event::class,
+            LegacyEvent::class,
             $this->subject->getSeminar()
         );
     }
@@ -7054,7 +7055,7 @@ final class DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForEventWithEnoughVacanciesReturnsAvailableClass(): void
     {
-        $event = new TestingEvent($this->seminarUid);
+        $event = new TestingLegacyEvent($this->seminarUid);
         $event->setAttendancesMax(10);
         $event->setNumberOfAttendances(0);
         $event->setNeedsRegistration(true);
@@ -7071,7 +7072,7 @@ final class DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForEventWithOneVacancyReturnsVacancyOneClass(): void
     {
-        $event = new TestingEvent($this->seminarUid);
+        $event = new TestingLegacyEvent($this->seminarUid);
         $event->setAttendancesMax(10);
         $event->setNumberOfAttendances(9);
         $event->setNeedsRegistration(true);
@@ -7088,7 +7089,7 @@ final class DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForEventWithTwoVacanciesReturnsVacancyTwoClass(): void
     {
-        $event = new TestingEvent($this->seminarUid);
+        $event = new TestingLegacyEvent($this->seminarUid);
         $event->setAttendancesMax(10);
         $event->setNumberOfAttendances(8);
         $event->setNeedsRegistration(true);
@@ -7105,7 +7106,7 @@ final class DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForEventWithNoVacanciesReturnsVacancyZeroClass(): void
     {
-        $event = new TestingEvent($this->seminarUid);
+        $event = new TestingLegacyEvent($this->seminarUid);
         $event->setAttendancesMax(10);
         $event->setNumberOfAttendances(10);
         $event->setNeedsRegistration(true);
@@ -7122,7 +7123,7 @@ final class DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForEventWithUnlimitedVacanciesReturnsVacanciesAvailableClass(): void
     {
-        $event = new TestingEvent($this->seminarUid);
+        $event = new TestingLegacyEvent($this->seminarUid);
         $event->setUnlimitedVacancies();
         $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
@@ -7137,7 +7138,7 @@ final class DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForEventWithUnlimitedVacanciesDoesNotReturnZeroVacancyClass(): void
     {
-        $event = new TestingEvent($this->seminarUid);
+        $event = new TestingLegacyEvent($this->seminarUid);
         $event->setUnlimitedVacancies();
         $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
@@ -7152,7 +7153,7 @@ final class DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForEventWithUnlimitedVacanciesReturnsVacanciesUnlimitedClass(): void
     {
-        $event = new TestingEvent($this->seminarUid);
+        $event = new TestingLegacyEvent($this->seminarUid);
         $event->setUnlimitedVacancies();
         $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 42);
 
@@ -7167,7 +7168,7 @@ final class DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForRegistrationDeadlineInPastReturnsDeadlineOverClass(): void
     {
-        $event = new TestingEvent($this->seminarUid);
+        $event = new TestingLegacyEvent($this->seminarUid);
         $event->setNeedsRegistration(true);
         $event->setRegistrationDeadline($GLOBALS['SIM_EXEC_TIME'] - 45);
         $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] + 45);
@@ -7183,7 +7184,7 @@ final class DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForBeginDateInPastReturnsBeginDateOverClass(): void
     {
-        $event = new TestingEvent($this->seminarUid);
+        $event = new TestingLegacyEvent($this->seminarUid);
         $event->setNeedsRegistration(true);
         $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 45);
 
@@ -7198,7 +7199,7 @@ final class DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForBeginDateInPastAndRegistrationForStartedEventsAllowedReturnsVacanciesAvailableClass(): void
     {
-        $event = new TestingEvent($this->seminarUid);
+        $event = new TestingLegacyEvent($this->seminarUid);
         $event->setNeedsRegistration(true);
         $event->setBeginDate($GLOBALS['SIM_EXEC_TIME'] - 45);
         $this->subject->getConfigurationService()->setConfigurationValue(
@@ -7217,7 +7218,7 @@ final class DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForEventWithNoVacanciesAndRegistrationQueueReturnsRegistrationQueueClass(): void
     {
-        $event = new TestingEvent($this->seminarUid);
+        $event = new TestingLegacyEvent($this->seminarUid);
         $event->setAttendancesMax(10);
         $event->setNumberOfAttendances(10);
         $event->setNeedsRegistration(true);
@@ -7235,7 +7236,7 @@ final class DefaultControllerTest extends TestCase
      */
     public function getVacanciesClassesForEventWithNoVacanciesAndNoRegistrationQueueDoesNotReturnRegistrationQueueClass(): void
     {
-        $event = new TestingEvent($this->seminarUid);
+        $event = new TestingLegacyEvent($this->seminarUid);
         $event->setAttendancesMax(10);
         $event->setNumberOfAttendances(10);
         $event->setNeedsRegistration(true);
@@ -7260,7 +7261,7 @@ final class DefaultControllerTest extends TestCase
     {
         $this->sharedConfiguration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
 
-        $event = new TestingEvent($this->seminarUid);
+        $event = new TestingLegacyEvent($this->seminarUid);
         $event->setAttendancesMax(10);
         $event->setNeedsRegistration(true);
         $event->setNumberOfAttendances(0);
@@ -7280,7 +7281,7 @@ final class DefaultControllerTest extends TestCase
     {
         $this->sharedConfiguration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
 
-        $event = new TestingEvent($this->seminarUid);
+        $event = new TestingLegacyEvent($this->seminarUid);
         $event->setAttendancesMax(10);
         $event->setNeedsRegistration(true);
         $event->setNumberOfAttendances(9);
@@ -7300,7 +7301,7 @@ final class DefaultControllerTest extends TestCase
     {
         $this->sharedConfiguration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
 
-        $event = new TestingEvent($this->seminarUid);
+        $event = new TestingLegacyEvent($this->seminarUid);
         $event->setAttendancesMax(10);
         $event->setNeedsRegistration(true);
         $event->setNumberOfAttendances(8);
@@ -7320,7 +7321,7 @@ final class DefaultControllerTest extends TestCase
     {
         $this->sharedConfiguration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
 
-        $event = new TestingEvent($this->seminarUid);
+        $event = new TestingLegacyEvent($this->seminarUid);
         $event->setAttendancesMax(10);
         $event->setNeedsRegistration(true);
         $event->setNumberOfAttendances(10);
@@ -7340,7 +7341,7 @@ final class DefaultControllerTest extends TestCase
     {
         $this->sharedConfiguration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
 
-        $event = new TestingEvent($this->seminarUid);
+        $event = new TestingLegacyEvent($this->seminarUid);
         $event->setUnlimitedVacancies();
         $event->setNumberOfAttendances(0);
 
@@ -7359,7 +7360,7 @@ final class DefaultControllerTest extends TestCase
     {
         $this->sharedConfiguration->setAsBoolean('allowRegistrationForEventsWithoutDate', true);
 
-        $event = new TestingEvent($this->seminarUid);
+        $event = new TestingLegacyEvent($this->seminarUid);
         $event->setUnlimitedVacancies();
         $event->setNumberOfAttendances(0);
 
@@ -7586,8 +7587,8 @@ final class DefaultControllerTest extends TestCase
         $subject = new TestingDefaultController();
         $subject->cObj = $this->createContentMock();
         $subject->conf = [];
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $event */
-        $event = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getUid', 'isUserVip', 'isOwnerFeUser']);
+        /** @var LegacyEvent&MockObject $event */
+        $event = $this->createPartialMock(LegacyEvent::class, ['getUid', 'isUserVip', 'isOwnerFeUser']);
         $event->method('isUserVip')
             ->willReturn(false);
         $event->method('isOwnerFeUser')
@@ -7608,8 +7609,8 @@ final class DefaultControllerTest extends TestCase
 
         $subject->cObj = $this->createContentMock();
         $subject->conf = ['mayManagersEditTheirEvents' => true];
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $event */
-        $event = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getUid', 'isUserVip', 'isOwnerFeUser']);
+        /** @var LegacyEvent&MockObject $event */
+        $event = $this->createPartialMock(LegacyEvent::class, ['getUid', 'isUserVip', 'isOwnerFeUser']);
         $event->method('isUserVip')
             ->willReturn(true);
         $event->method('isOwnerFeUser')
@@ -7630,8 +7631,8 @@ final class DefaultControllerTest extends TestCase
 
         $subject->cObj = $this->createContentMock();
         $subject->conf = ['mayManagersEditTheirEvents' => false];
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $event */
-        $event = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getUid', 'isUserVip', 'isOwnerFeUser']);
+        /** @var LegacyEvent&MockObject $event */
+        $event = $this->createPartialMock(LegacyEvent::class, ['getUid', 'isUserVip', 'isOwnerFeUser']);
         $event->method('isUserVip')
             ->willReturn(true);
         $event->method('isOwnerFeUser')
@@ -7655,8 +7656,8 @@ final class DefaultControllerTest extends TestCase
             'eventEditorPID' => 42,
             'mayManagersEditTheirEvents' => true,
         ];
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $event */
-        $event = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getUid', 'isUserVip', 'isOwnerFeUser']);
+        /** @var LegacyEvent&MockObject $event */
+        $event = $this->createPartialMock(LegacyEvent::class, ['getUid', 'isUserVip', 'isOwnerFeUser']);
         $event->method('getUid')
             ->willReturn(91);
         $event->method('isUserVip')
@@ -7684,8 +7685,8 @@ final class DefaultControllerTest extends TestCase
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->willReturn(false);
 
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $event */
-        $event = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getUid', 'isPublished', 'isHidden']);
+        /** @var LegacyEvent&MockObject $event */
+        $event = $this->createPartialMock(LegacyEvent::class, ['getUid', 'isPublished', 'isHidden']);
         $event->method('getUid')->willReturn(91);
         $subject->setSeminar($event);
 
@@ -7709,8 +7710,8 @@ final class DefaultControllerTest extends TestCase
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->willReturn(true);
 
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $event */
-        $event = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getUid', 'isPublished', 'isHidden']);
+        /** @var LegacyEvent&MockObject $event */
+        $event = $this->createPartialMock(LegacyEvent::class, ['getUid', 'isPublished', 'isHidden']);
         $event->method('getUid')->willReturn(91);
         $subject->setSeminar($event);
 
@@ -7733,8 +7734,8 @@ final class DefaultControllerTest extends TestCase
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->willReturn(true);
 
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $event */
-        $event = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getUid', 'isPublished', 'isHidden']);
+        /** @var LegacyEvent&MockObject $event */
+        $event = $this->createPartialMock(LegacyEvent::class, ['getUid', 'isPublished', 'isHidden']);
         $event->method('getUid')->willReturn(91);
         $event->method('isPublished')->willReturn(true);
         $event->method('isHidden')->willReturn(false);
@@ -7762,8 +7763,8 @@ final class DefaultControllerTest extends TestCase
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->willReturn(true);
 
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $event */
-        $event = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getUid', 'isPublished', 'isHidden']);
+        /** @var LegacyEvent&MockObject $event */
+        $event = $this->createPartialMock(LegacyEvent::class, ['getUid', 'isPublished', 'isHidden']);
         $event->method('getUid')->willReturn(91);
         $event->method('isPublished')->willReturn(true);
         $event->method('isHidden')->willReturn(true);
@@ -7791,8 +7792,8 @@ final class DefaultControllerTest extends TestCase
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->willReturn(true);
 
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $event */
-        $event = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getUid', 'isPublished', 'isHidden']);
+        /** @var LegacyEvent&MockObject $event */
+        $event = $this->createPartialMock(LegacyEvent::class, ['getUid', 'isPublished', 'isHidden']);
         $event->method('getUid')->willReturn(91);
         $event->method('isPublished')->willReturn(false);
         $event->method('isHidden')->willReturn(false);
@@ -7816,8 +7817,8 @@ final class DefaultControllerTest extends TestCase
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->willReturn(true);
 
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $event */
-        $event = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getUid', 'isPublished', 'isHidden']);
+        /** @var LegacyEvent&MockObject $event */
+        $event = $this->createPartialMock(LegacyEvent::class, ['getUid', 'isPublished', 'isHidden']);
         $event->method('getUid')->willReturn(91);
         $event->method('isPublished')->willReturn(false);
         $event->method('isHidden')->willReturn(true);
@@ -7841,8 +7842,8 @@ final class DefaultControllerTest extends TestCase
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->willReturn(true);
 
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $event */
-        $event = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getUid', 'isPublished', 'isHidden']);
+        /** @var LegacyEvent&MockObject $event */
+        $event = $this->createPartialMock(LegacyEvent::class, ['getUid', 'isPublished', 'isHidden']);
         $event->method('getUid')->willReturn(91);
         $event->method('isPublished')->willReturn(false);
         $event->method('isHidden')->willReturn(true);
@@ -7866,8 +7867,8 @@ final class DefaultControllerTest extends TestCase
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->willReturn(true);
 
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $event */
-        $event = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getUid', 'isPublished', 'isHidden']);
+        /** @var LegacyEvent&MockObject $event */
+        $event = $this->createPartialMock(LegacyEvent::class, ['getUid', 'isPublished', 'isHidden']);
         $event->method('getUid')->willReturn(91);
         $event->method('isPublished')->willReturn(false);
         $event->method('isHidden')->willReturn(false);
@@ -7891,8 +7892,8 @@ final class DefaultControllerTest extends TestCase
         $subject->expects(self::once())->method('mayCurrentUserEditCurrentEvent')
             ->willReturn(true);
 
-        /** @var \Tx_Seminars_OldModel_Event&MockObject $event */
-        $event = $this->createPartialMock(\Tx_Seminars_OldModel_Event::class, ['getUid', 'isPublished', 'isHidden']);
+        /** @var LegacyEvent&MockObject $event */
+        $event = $this->createPartialMock(LegacyEvent::class, ['getUid', 'isPublished', 'isHidden']);
         $event->method('getUid')->willReturn(91);
         $event->method('isPublished')->willReturn(true);
         $event->method('isHidden')->willReturn(true);

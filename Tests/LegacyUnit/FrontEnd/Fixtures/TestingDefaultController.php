@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\LegacyUnit\FrontEnd\Fixtures;
 
 use OliverKlee\Seminars\FrontEnd\DefaultController;
+use OliverKlee\Seminars\OldModel\LegacyEvent;
 
 /**
  * Proxy class to make some things public.
  */
 class TestingDefaultController extends DefaultController
 {
-    public function setSeminar(?\Tx_Seminars_OldModel_Event $event = null): void
+    public function setSeminar(?LegacyEvent $event = null): void
     {
         parent::setSeminar($event);
     }

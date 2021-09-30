@@ -18,6 +18,7 @@ use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Visibility\Tree;
 use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
+use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -655,15 +656,15 @@ class Tx_Seminars_FrontEnd_EventEditor extends \Tx_Seminars_FrontEnd_Editor
         }
 
         $uid = $this->getObjectUid();
-        /** @var \Tx_Seminars_OldModel_Event|null $event */
-        $event = \Tx_Seminars_OldModel_Event::fromUid($uid, true);
+        /** @var LegacyEvent|null $event */
+        $event = LegacyEvent::fromUid($uid, true);
 
-        if ($uid > 0 && !($event instanceof \Tx_Seminars_OldModel_Event)) {
+        if ($uid > 0 && !($event instanceof LegacyEvent)) {
             return 'message_wrongSeminarNumber';
         }
 
         $user = self::getLoggedInUser();
-        if ($uid > 0 && $event instanceof \Tx_Seminars_OldModel_Event) {
+        if ($uid > 0 && $event instanceof LegacyEvent) {
             $isUserVip = $event->isUserVip($user->getUid(), $this->getConfValueInteger('defaultEventVipsFeGroupID'));
             $isUserOwner = $event->isOwnerFeUser();
             $mayManagersEditTheirEvents = $this->getConfValueBoolean('mayManagersEditTheirEvents', 's_listView');

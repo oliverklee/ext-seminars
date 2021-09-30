@@ -12,7 +12,7 @@ use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminar\Email\Salutation;
-use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingEvent;
+use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
 use OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures\EmailSalutationHookInterface;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use TYPO3\CMS\Core\Core\Bootstrap;
@@ -431,7 +431,7 @@ final class SalutationTest extends TestCase
 
         $eventUid = $this->testingFramework->createRecord('tx_seminars_seminars');
 
-        $event = new TestingEvent($eventUid);
+        $event = new TestingLegacyEvent($eventUid);
 
         $this->subject->createIntroduction('', $event);
     }
@@ -446,7 +446,7 @@ final class SalutationTest extends TestCase
             ['begin_date' => $GLOBALS['SIM_EXEC_TIME']]
         );
 
-        $event = new TestingEvent($eventUid);
+        $event = new TestingLegacyEvent($eventUid);
 
         self::assertContains(
             strftime(self::DATE_FORMAT, $GLOBALS['SIM_EXEC_TIME']),
@@ -467,7 +467,7 @@ final class SalutationTest extends TestCase
                 'end_date' => $GLOBALS['SIM_EXEC_TIME'] + Time::SECONDS_PER_DAY,
             ]
         );
-        $event = new TestingEvent($eventUid);
+        $event = new TestingLegacyEvent($eventUid);
 
         self::assertStringContainsString(
             \strftime(self::DATE_FORMAT_DAY, $GLOBALS['SIM_EXEC_TIME']) . '-' .
@@ -488,7 +488,7 @@ final class SalutationTest extends TestCase
             ]
         );
 
-        $event = new TestingEvent($eventUid);
+        $event = new TestingLegacyEvent($eventUid);
 
         self::assertContains(
             \strftime(self::TIME_FORMAT, $GLOBALS['SIM_EXEC_TIME']),
@@ -510,7 +510,7 @@ final class SalutationTest extends TestCase
             ]
         );
 
-        $event = new TestingEvent($eventUid);
+        $event = new TestingLegacyEvent($eventUid);
         $timeInsert = \strftime(self::TIME_FORMAT, $GLOBALS['SIM_EXEC_TIME']) . ' ' .
             $this->getLanguageService()->getLL('email_timeTo') . ' ' .
             \strftime(self::TIME_FORMAT, $endDate);
@@ -535,7 +535,7 @@ final class SalutationTest extends TestCase
             ]
         );
 
-        $event = new TestingEvent($eventUid);
+        $event = new TestingLegacyEvent($eventUid);
         $formattedDate = \strftime(self::DATE_FORMAT, $GLOBALS['SIM_EXEC_TIME']);
 
         self::assertContains(
@@ -557,7 +557,7 @@ final class SalutationTest extends TestCase
             ['begin_date' => $GLOBALS['SIM_EXEC_TIME']]
         );
 
-        $event = new TestingEvent($eventUid);
+        $event = new TestingLegacyEvent($eventUid);
 
         $introduction = $this->subject->createIntroduction('%s', $event);
 
@@ -577,7 +577,7 @@ final class SalutationTest extends TestCase
             ['begin_date' => $GLOBALS['SIM_EXEC_TIME']]
         );
 
-        $event = new TestingEvent($eventUid);
+        $event = new TestingLegacyEvent($eventUid);
 
         $introduction = $this->subject->createIntroduction('%s', $event);
 
@@ -597,7 +597,7 @@ final class SalutationTest extends TestCase
             ['begin_date' => $GLOBALS['SIM_EXEC_TIME']]
         );
 
-        $event = new TestingEvent($eventUid);
+        $event = new TestingLegacyEvent($eventUid);
 
         $introduction = $this->subject->createIntroduction('%s', $event);
 

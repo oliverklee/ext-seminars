@@ -8,6 +8,7 @@ use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Interfaces\Configuration;
 use OliverKlee\Oelib\Templating\TemplateHelper;
+use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Core\Charset\CharsetConverter;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -154,7 +155,7 @@ class CsvDownloader extends TemplateHelper
      */
     public function createListOfRegistrations(int $eventUid): string
     {
-        if (\Tx_Seminars_OldModel_Event::fromUid($eventUid, true) === null) {
+        if (LegacyEvent::fromUid($eventUid, true) === null) {
             return '';
         }
 
@@ -231,8 +232,8 @@ class CsvDownloader extends TemplateHelper
                 /** @var FrontEndRegistrationAccessCheck $accessCheck */
                 $accessCheck = GeneralUtility::makeInstance(FrontEndRegistrationAccessCheck::class);
 
-                /** @var \Tx_Seminars_OldModel_Event $event */
-                $event = GeneralUtility::makeInstance(\Tx_Seminars_OldModel_Event::class, $eventUid, false, true);
+                /** @var LegacyEvent $event */
+                $event = GeneralUtility::makeInstance(LegacyEvent::class, $eventUid, false, true);
                 $accessCheck->setEvent($event);
 
                 $result = $accessCheck->hasAccess();
@@ -393,7 +394,7 @@ class CsvDownloader extends TemplateHelper
     {
         $result = false;
 
-        if (\Tx_Seminars_OldModel_Event::fromUid($eventUid, true) === null) {
+        if (LegacyEvent::fromUid($eventUid, true) === null) {
             $this->errorType = self::NOT_FOUND;
         } elseif ($this->canAccessListOfRegistrations($eventUid)) {
             $result = true;
