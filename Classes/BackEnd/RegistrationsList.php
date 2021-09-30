@@ -10,6 +10,7 @@ use OliverKlee\Seminars\BagBuilder\RegistrationBagBuilder;
 use OliverKlee\Seminars\Hooks\HookProvider;
 use OliverKlee\Seminars\Hooks\Interfaces\BackendRegistrationListView;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -161,7 +162,7 @@ class RegistrationsList extends AbstractList
         $tableRows = '';
         $languageService = $this->getLanguageService();
 
-        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        $mapper = MapperRegistry::get(RegistrationMapper::class);
 
         /** @var LegacyRegistration $registration */
         foreach ($registrationBag as $registration) {

@@ -21,6 +21,7 @@ use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
@@ -2121,7 +2122,7 @@ final class RegistrationManagerTest extends TestCase
         $this->configuration->setAsBoolean('sendConfirmation', true);
 
         $registrationOld = $this->createRegistration();
-        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        $mapper = MapperRegistry::get(RegistrationMapper::class);
         $registration = $mapper->find($registrationOld->getUid());
 
         $hook = $this->createMock(RegistrationEmail::class);
@@ -2159,7 +2160,7 @@ final class RegistrationManagerTest extends TestCase
         $this->configuration->setAsBoolean('sendConfirmation', true);
 
         $registrationOld = $this->createRegistration();
-        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        $mapper = MapperRegistry::get(RegistrationMapper::class);
         $registration = $mapper->find($registrationOld->getUid());
 
         $hook = $this->createMock(RegistrationEmail::class);
@@ -4690,7 +4691,7 @@ final class RegistrationManagerTest extends TestCase
     {
         $this->configuration->setAsBoolean('sendConfirmation', false);
         $registrationOld = $this->createRegistration();
-        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        $mapper = MapperRegistry::get(RegistrationMapper::class);
         $registration = $mapper->find($registrationOld->getUid());
 
         $hook = $this->createMock(RegistrationEmail::class);
@@ -4947,7 +4948,7 @@ final class RegistrationManagerTest extends TestCase
         $this->configuration->setAsBoolean('sendNotification', true);
 
         $registrationOld = $this->createRegistration();
-        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        $mapper = MapperRegistry::get(RegistrationMapper::class);
         $registration = $mapper->find($registrationOld->getUid());
 
         $hook = $this->createMock(RegistrationEmail::class);
@@ -4976,7 +4977,7 @@ final class RegistrationManagerTest extends TestCase
         $this->configuration->setAsBoolean('sendNotification', false);
 
         $registrationOld = $this->createRegistration();
-        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        $mapper = MapperRegistry::get(RegistrationMapper::class);
         $registration = $mapper->find($registrationOld->getUid());
 
         $hook = $this->createMock(RegistrationEmail::class);
@@ -5566,7 +5567,7 @@ final class RegistrationManagerTest extends TestCase
         );
 
         $registrationOld = $this->createRegistration();
-        $mapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        $mapper = MapperRegistry::get(RegistrationMapper::class);
         $registration = $mapper->find($registrationOld->getUid());
 
         $hook = $this->createMock(RegistrationEmail::class);

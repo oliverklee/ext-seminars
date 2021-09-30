@@ -5,7 +5,11 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\Tests\Functional\Mapper;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use OliverKlee\Seminars\Mapper\RegistrationMapper;
 
+/**
+ * @covers \OliverKlee\Seminars\Mapper\RegistrationMapper
+ */
 final class RegistrationMapperTest extends FunctionalTestCase
 {
     /**
@@ -14,7 +18,7 @@ final class RegistrationMapperTest extends FunctionalTestCase
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**
-     * @var \Tx_Seminars_Mapper_Registration
+     * @var RegistrationMapper
      */
     private $subject = null;
 
@@ -28,7 +32,7 @@ final class RegistrationMapperTest extends FunctionalTestCase
         parent::setUp();
 
         $this->userMapper = new \Tx_Seminars_Mapper_FrontEndUser();
-        $this->subject = new \Tx_Seminars_Mapper_Registration();
+        $this->subject = new RegistrationMapper();
     }
 
     /**

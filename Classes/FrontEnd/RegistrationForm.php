@@ -12,6 +12,7 @@ use OliverKlee\Oelib\Http\HeaderProxyFactory;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Session\Session;
 use OliverKlee\Seminars\Mapper\EventMapper;
+use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use SJBR\StaticInfoTables\PiBaseApi;
@@ -410,7 +411,7 @@ class RegistrationForm extends AbstractEditor
             $additionalPersons->add($user);
         }
 
-        $registrationMapper = MapperRegistry::get(\Tx_Seminars_Mapper_Registration::class);
+        $registrationMapper = MapperRegistry::get(RegistrationMapper::class);
         $registrationMapper->save($registration);
     }
 

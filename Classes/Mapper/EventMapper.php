@@ -52,7 +52,7 @@ class EventMapper extends AbstractDataMapper
         'checkboxes' => \Tx_Seminars_Mapper_Checkbox::class,
         'requirements' => EventMapper::class,
         'dependencies' => EventMapper::class,
-        'registrations' => \Tx_Seminars_Mapper_Registration::class,
+        'registrations' => RegistrationMapper::class,
     ];
 
     /**

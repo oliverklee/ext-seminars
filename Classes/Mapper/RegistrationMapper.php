@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Mapper;
+
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
 use OliverKlee\Oelib\Mapper\CurrencyMapper;
-use OliverKlee\Seminars\Mapper\EventMapper;
+use Tx_Seminars_Model_FrontEndUser;
 use TYPO3\CMS\Core\Database\Connection;
 
 /**
@@ -12,7 +14,7 @@ use TYPO3\CMS\Core\Database\Connection;
  *
  * @extends AbstractDataMapper<\Tx_Seminars_Model_Registration>
  */
-class Tx_Seminars_Mapper_Registration extends AbstractDataMapper
+class RegistrationMapper extends AbstractDataMapper
 {
     /**
      * @var string the name of the database table for this mapper
