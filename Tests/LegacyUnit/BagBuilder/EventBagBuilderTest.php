@@ -8,12 +8,17 @@ use OliverKlee\Oelib\Interfaces\Time;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Bag\AbstractBag;
+use OliverKlee\Seminars\Bag\EventBag;
+use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 
+/**
+ * @covers \OliverKlee\Seminars\BagBuilder\EventBagBuilder
+ */
 final class EventBagBuilderTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_BagBuilder_Event
+     * @var EventBagBuilder
      */
     private $subject = null;
 
@@ -40,7 +45,7 @@ final class EventBagBuilderTest extends TestCase
 
         $this->testingFramework = new TestingFramework('tx_seminars');
 
-        $this->subject = new \Tx_Seminars_BagBuilder_Event();
+        $this->subject = new EventBagBuilder();
         $this->subject->setTestMode();
     }
 
@@ -2603,7 +2608,7 @@ final class EventBagBuilderTest extends TestCase
         $this->subject->limitToEventTypes([$typeUid]);
         $this->subject->limitToTopicRecords();
 
-        /** @var \Tx_Seminars_Bag_Event $bag */
+        /** @var EventBag $bag */
         $bag = $this->subject->build();
 
         self::assertSame(1, $bag->count());

@@ -103,7 +103,7 @@ verfügbaren Eigenschaften und Methoden siehe :file:`Classes/Frontend/DefaultCon
 Der Hook in die Erstellung der Seminar- oder Registrierungen-Bag erlaubt es, die für die Liste
 ausgewählten Seminare bzw. Reqistrierungen zu beeinflussen. Sie können neue Filter hinzufügen oder
 bestehende Filter entfernen. Details dazu finden Sie in :file:`Classes/BagBuilder/AbstractBagBuilder.php`,
-:file:`Classes/BagBuilder/Event.php` und :file:`Classes/BagBuilder/Registration.php`.
+:file:`Classes/BagBuilder/EventBagBuilder.php` und :file:`Classes/BagBuilder/Registration.php`.
 
 Sie müssen 7 Listenarten bei Ihrer Implementation beachten:
 
@@ -147,13 +147,13 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          * "my vip seminars", "my entered events", "events next day", "other dates".
          *
          * @param DefaultController $controller the calling controller
-         * @param \Tx_Seminars_BagBuilder_Event $builder the bag builder
+         * @param EventBagBuilder $builder the bag builder
          * @param string $whatToDisplay the flavor of list view: 'seminar_list', 'topic_list',
          *        'my_vip_events', 'my_entered_events', 'events_next_day' or 'other_dates'
          */
         public function modifyEventBagBuilder(
             DefaultController $controller,
-            \Tx_Seminars_BagBuilder_Event $builder,
+            EventBagBuilder $builder,
             string $whatToDisplay
         ): void {
             // Hier Ihr Code
@@ -271,11 +271,11 @@ Implementieren Sie die benötigten Methoden gemäß dem Interface:
          * This function will be called for all types of seminar lists, if `displaySearchFormFields` is configured for it.
          *
          * @param \Tx_Seminars_FrontEnd_SelectorWidget $selectorWidget
-         * @param \Tx_Seminars_Bag_Event $seminarBag the seminars used to create the selector widget
+         * @param EventBag $seminarBag the seminars used to create the selector widget
          */
         public function modifySelectorWidget(
             \Tx_Seminars_FrontEnd_SelectorWidget $selectorWidget,
-            \Tx_Seminars_Bag_Event $seminarBag
+            EventBag $seminarBag
         ): void {
             // Hier Ihr Code
         }

@@ -9,6 +9,8 @@ use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\PageFinder;
 use OliverKlee\Oelib\Interfaces\Configuration;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
+use OliverKlee\Seminars\Bag\EventBag;
+use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\Csv\EmailRegistrationListView;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\SchedulerTask\RegistrationDigest;
@@ -219,10 +221,10 @@ class MailNotifier extends AbstractTask
 
         $result = [];
 
-        /** @var \Tx_Seminars_BagBuilder_Event $builder */
+        /** @var EventBagBuilder $builder */
         $builder = $this->getSeminarBagBuilder(\Tx_Seminars_Model_Event::STATUS_PLANNED);
         $builder->limitToCancelationDeadlineReminderNotSent();
-        /** @var \Tx_Seminars_Bag_Event $bag */
+        /** @var EventBag $bag */
         $bag = $builder->build();
 
         /** @var LegacyEvent $event */
@@ -254,12 +256,12 @@ class MailNotifier extends AbstractTask
      *
      * @param int $status status to limit the builder to, must be either ::STATUS_PLANNED or ::CONFIRMED
      *
-     * @return \Tx_Seminars_BagBuilder_Event builder for the seminar bag
+     * @return EventBagBuilder builder for the seminar bag
      */
-    private function getSeminarBagBuilder(int $status): \Tx_Seminars_BagBuilder_Event
+    private function getSeminarBagBuilder(int $status): EventBagBuilder
     {
-        /** @var \Tx_Seminars_BagBuilder_Event $builder */
-        $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Event::class);
+        /** @var EventBagBuilder $builder */
+        $builder = GeneralUtility::makeInstance(EventBagBuilder::class);
         $builder->setTimeFrame('upcomingWithBeginDate');
         $builder->limitToStatus($status);
 

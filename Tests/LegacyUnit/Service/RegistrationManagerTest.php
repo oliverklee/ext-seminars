@@ -17,6 +17,7 @@ use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Hooks\Interfaces\RegistrationEmail;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
@@ -1492,7 +1493,7 @@ final class RegistrationManagerTest extends TestCase
     public function getMissingRequiredTopicsReturnsSeminarBag(): void
     {
         self::assertInstanceOf(
-            \Tx_Seminars_Bag_Event::class,
+            EventBag::class,
             $this->subject->getMissingRequiredTopics($this->seminar)
         );
     }

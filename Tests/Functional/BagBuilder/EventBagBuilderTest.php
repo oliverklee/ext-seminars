@@ -6,8 +6,12 @@ namespace OliverKlee\Seminars\Tests\Functional\BagBuilder;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Seminars\Bag\AbstractBag;
+use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
+/**
+ * @covers \OliverKlee\Seminars\BagBuilder\EventBagBuilder
+ */
 final class EventBagBuilderTest extends FunctionalTestCase
 {
     /**
@@ -16,7 +20,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     protected $testExtensionsToLoad = ['typo3conf/ext/oelib', 'typo3conf/ext/seminars'];
 
     /**
-     * @var \Tx_Seminars_BagBuilder_Event
+     * @var EventBagBuilder
      */
     private $subject = null;
 
@@ -24,7 +28,7 @@ final class EventBagBuilderTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        $this->subject = new \Tx_Seminars_BagBuilder_Event();
+        $this->subject = new EventBagBuilder();
     }
 
     /**

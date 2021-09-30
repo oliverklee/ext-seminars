@@ -11,6 +11,8 @@ use OliverKlee\Oelib\Templating\Template;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Oelib\Templating\TemplateRegistry;
 use OliverKlee\Seminar\Email\Salutation;
+use OliverKlee\Seminars\Bag\EventBag;
+use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
 use OliverKlee\Seminars\FrontEnd\DefaultController;
 use OliverKlee\Seminars\Hooks\HookProvider;
@@ -684,15 +686,15 @@ class Tx_Seminars_Service_RegistrationManager extends TemplateHelper
      *
      * @param LegacyEvent $event the event to check
      *
-     * @return \Tx_Seminars_Bag_Event the event topics which still need the user's registration, may be empty
+     * @return EventBag the event topics which still need the user's registration, may be empty
      */
-    public function getMissingRequiredTopics(LegacyEvent $event): \Tx_Seminars_Bag_Event
+    public function getMissingRequiredTopics(LegacyEvent $event): EventBag
     {
-        /** @var \Tx_Seminars_BagBuilder_Event $builder */
-        $builder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Event::class);
+        /** @var EventBagBuilder $builder */
+        $builder = GeneralUtility::makeInstance(EventBagBuilder::class);
         $builder->limitToRequiredEventTopics($event->getTopicOrSelfUid());
         $builder->limitToTopicsWithoutRegistrationByUser($this->getLoggedInFrontEndUserUid());
-        /** @var \Tx_Seminars_Bag_Event $bag */
+        /** @var EventBag $bag */
         $bag = $builder->build();
 
         return $bag;

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use OliverKlee\Oelib\Authentication\FrontEndLoginManager;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
+use OliverKlee\Seminars\Bag\EventBag;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -103,9 +104,9 @@ class Tx_Seminars_FrontEnd_RequirementsList extends \Tx_Seminars_FrontEnd_Abstra
     /**
      * Returns the requirements which should be displayed.
      *
-     * @return \Tx_Seminars_Bag_Event the requirements still to be displayed, might be empty
+     * @return EventBag the requirements still to be displayed, might be empty
      */
-    private function getRequirements(): \Tx_Seminars_Bag_Event
+    private function getRequirements(): EventBag
     {
         if ($this->limitRequirementsToMissing) {
             $result = \Tx_Seminars_Service_RegistrationManager::getInstance()

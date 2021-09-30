@@ -2,7 +2,8 @@
 
 declare(strict_types=1);
 
-use OliverKlee\Seminars\Bag\AbstractBag;
+namespace OliverKlee\Seminars\Bag;
+
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 
 /**
@@ -10,7 +11,7 @@ use OliverKlee\Seminars\OldModel\LegacyEvent;
  *
  * @extends AbstractBag<LegacyEvent>
  */
-class Tx_Seminars_Bag_Event extends AbstractBag
+class EventBag extends AbstractBag
 {
     /**
      * @var class-string<LegacyEvent>

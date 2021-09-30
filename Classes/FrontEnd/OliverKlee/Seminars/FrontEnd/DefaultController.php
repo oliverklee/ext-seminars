@@ -14,6 +14,8 @@ use OliverKlee\Oelib\Interfaces\Configuration;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Templating\TemplateHelper;
 use OliverKlee\Seminars\Bag\AbstractBag;
+use OliverKlee\Seminars\Bag\EventBag;
+use OliverKlee\Seminars\BagBuilder\EventBagBuilder;
 use OliverKlee\Seminars\Configuration\CategoryListConfigurationCheck;
 use OliverKlee\Seminars\Configuration\CountdownConfigurationCheck;
 use OliverKlee\Seminars\Configuration\CsvExportConfigurationCheck;
@@ -1635,7 +1637,7 @@ class DefaultController extends TemplateHelper
      * @param string $whatToDisplay the flavor of list view: either an empty string (for the default list view),
      *        the value from "what_to_display", or "other_dates"
      *
-     * @return \Tx_Seminars_Bag_Registration|\Tx_Seminars_Bag_Event a bag containing the items for the list view
+     * @return \Tx_Seminars_Bag_Registration|EventBag a bag containing the items for the list view
      */
     public function initListView(string $whatToDisplay = ''): AbstractBag
     {
@@ -1735,7 +1737,7 @@ class DefaultController extends TemplateHelper
         $resultsAtATime = MathUtility::forceIntegerInRange($this->internal['results_at_a_time'], 1, 1000);
         $builder->setLimit(($pointer * $resultsAtATime) . ',' . $resultsAtATime);
 
-        if ($builder instanceof \Tx_Seminars_BagBuilder_Event) {
+        if ($builder instanceof EventBagBuilder) {
             $this->getListViewHookProvider()->executeHook('modifyEventBagBuilder', $this, $builder, $whatToDisplay);
         } elseif ($builder instanceof \Tx_Seminars_BagBuilder_Registration) {
             $this->getListViewHookProvider()
@@ -1758,7 +1760,7 @@ class DefaultController extends TemplateHelper
      * This function should only be called when there are actually any list
      * items.
      *
-     * @param \Tx_Seminars_Bag_Registration|\Tx_Seminars_Bag_Event $seminarOrRegistrationBag initialized bag
+     * @param \Tx_Seminars_Bag_Registration|EventBag $seminarOrRegistrationBag initialized bag
      * @param string $whatToDisplay a string selecting the flavor of list view: either an empty string
      *        (for the default list view), the value from "what_to_display" or "other_dates"
      *
@@ -2002,10 +2004,10 @@ class DefaultController extends TemplateHelper
     /**
      * Returns a seminarBagBuilder object with the source pages set for the list view.
      */
-    private function createSeminarBagBuilder(): \Tx_Seminars_BagBuilder_Event
+    private function createSeminarBagBuilder(): EventBagBuilder
     {
-        /** @var \Tx_Seminars_BagBuilder_Event $seminarBagBuilder */
-        $seminarBagBuilder = GeneralUtility::makeInstance(\Tx_Seminars_BagBuilder_Event::class);
+        /** @var EventBagBuilder $seminarBagBuilder */
+        $seminarBagBuilder = GeneralUtility::makeInstance(EventBagBuilder::class);
 
         $seminarBagBuilder->setSourcePages(
             $this->getConfValueString('pidList'),
@@ -2126,7 +2128,7 @@ class DefaultController extends TemplateHelper
     /**
      * Limits the given bag builder for additional parameters needed to build the list view.
      */
-    protected function limitForAdditionalParameters(\Tx_Seminars_BagBuilder_Event $builder): void
+    protected function limitForAdditionalParameters(EventBagBuilder $builder): void
     {
         // Adds the query parameter that result from the user selection in the
         // selector widget (including the search form).
@@ -2979,9 +2981,9 @@ class DefaultController extends TemplateHelper
     /**
      * Filters the given seminar bag builder to the date set in piVars.
      *
-     * @param \Tx_Seminars_BagBuilder_Event $builder the bag builder to limit by date
+     * @param EventBagBuilder $builder the bag builder to limit by date
      */
-    private function filterByDate(\Tx_Seminars_BagBuilder_Event $builder): void
+    private function filterByDate(EventBagBuilder $builder): void
     {
         $dateFrom = $this->getTimestampFromDatePiVars('from');
         if ($dateFrom > 0) {
@@ -3182,7 +3184,7 @@ class DefaultController extends TemplateHelper
     /**
      * Limits the bag to events within the time frame set by setup.
      */
-    private function limitToTimeFrameSetting(\Tx_Seminars_BagBuilder_Event $builder): void
+    private function limitToTimeFrameSetting(EventBagBuilder $builder): void
     {
         try {
             $builder->setTimeFrame(
