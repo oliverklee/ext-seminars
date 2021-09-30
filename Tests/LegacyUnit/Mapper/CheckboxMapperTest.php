@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Mapper;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Model\FrontEndUser;
 
 final class CheckboxMapperTest extends TestCase
 {
@@ -80,6 +81,6 @@ final class CheckboxMapperTest extends TestCase
             ->getLoadedTestingModel([]);
         $model = $this->subject->getLoadedTestingModel(['owner' => $frontEndUser->getUid()]);
 
-        self::assertInstanceOf(\Tx_Seminars_Model_FrontEndUser::class, $model->getOwner());
+        self::assertInstanceOf(FrontEndUser::class, $model->getOwner());
     }
 }

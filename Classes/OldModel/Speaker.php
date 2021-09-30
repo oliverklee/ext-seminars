@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Templating\TemplateHelper;
+use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\OldModel\AbstractModel;
 use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Resource\FileRepository;
@@ -286,7 +287,7 @@ class Tx_Seminars_OldModel_Speaker extends AbstractModel
         $this->setRecordPropertyInteger('cancelation_period', $cancelationPeriod);
     }
 
-    public function getOwner(): ?\Tx_Seminars_Model_FrontEndUser
+    public function getOwner(): ?FrontEndUser
     {
         if (!$this->hasRecordPropertyInteger('owner')) {
             return null;
@@ -298,7 +299,7 @@ class Tx_Seminars_OldModel_Speaker extends AbstractModel
         return $owner;
     }
 
-    public function setOwner(\Tx_Seminars_Model_FrontEndUser $frontEndUser): void
+    public function setOwner(FrontEndUser $frontEndUser): void
     {
         $this->setRecordPropertyInteger('owner', $frontEndUser->getUid());
     }

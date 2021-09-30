@@ -2,15 +2,16 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Model;
+
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Model\BackEndUser as OelibBackEndUser;
 use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
-use OliverKlee\Seminars\Model\Registration;
 
 /**
  * This class represents a front-end user.
  */
-class Tx_Seminars_Model_FrontEndUser extends OelibFrontEndUser
+class FrontEndUser extends OelibFrontEndUser
 {
     /**
      * Returns the publish setting for the user groups the user is assigned to.
@@ -22,20 +23,20 @@ class Tx_Seminars_Model_FrontEndUser extends OelibFrontEndUser
      * will be returned.
      *
      * @return int one of the class constants
-     *                 \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY,
-     *                 \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW or
-     *                 \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
+     *                 FrontEndUserGroup::PUBLISH_IMMEDIATELY,
+     *                 FrontEndUserGroup::PUBLISH_HIDE_NEW or
+     *                 FrontEndUserGroup::PUBLISH_HIDE_EDITED
      */
     public function getPublishSetting(): int
     {
         $userGroups = $this->getUserGroups();
         if ($userGroups->isEmpty()) {
-            return \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY;
+            return FrontEndUserGroup::PUBLISH_IMMEDIATELY;
         }
 
-        $result = \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY;
+        $result = FrontEndUserGroup::PUBLISH_IMMEDIATELY;
 
-        /** @var \Tx_Seminars_Model_FrontEndUserGroup $userGroup */
+        /** @var FrontEndUserGroup $userGroup */
         foreach ($userGroups as $userGroup) {
             $groupPermissions = $userGroup->getPublishSetting();
 
@@ -62,7 +63,7 @@ class Tx_Seminars_Model_FrontEndUser extends OelibFrontEndUser
 
         $auxiliaryRecordsPid = 0;
 
-        /** @var \Tx_Seminars_Model_FrontEndUserGroup $userGroup */
+        /** @var FrontEndUserGroup $userGroup */
         foreach ($this->getUserGroups() as $userGroup) {
             if ($userGroup->hasAuxiliaryRecordsPid()) {
                 $auxiliaryRecordsPid = $userGroup->getAuxiliaryRecordsPid();
@@ -82,7 +83,7 @@ class Tx_Seminars_Model_FrontEndUser extends OelibFrontEndUser
     {
         $result = null;
 
-        /** @var \Tx_Seminars_Model_FrontEndUserGroup $userGroup */
+        /** @var FrontEndUserGroup $userGroup */
         foreach ($this->getUserGroups() as $userGroup) {
             if ($userGroup->hasReviewer()) {
                 $result = $userGroup->getReviewer();
@@ -110,7 +111,7 @@ class Tx_Seminars_Model_FrontEndUser extends OelibFrontEndUser
 
         $eventRecordPid = 0;
 
-        /** @var \Tx_Seminars_Model_FrontEndUserGroup $userGroup */
+        /** @var FrontEndUserGroup $userGroup */
         foreach ($this->getUserGroups() as $userGroup) {
             if ($userGroup->hasEventRecordPid()) {
                 $eventRecordPid = $userGroup->getEventRecordPid();
@@ -133,7 +134,7 @@ class Tx_Seminars_Model_FrontEndUser extends OelibFrontEndUser
         /** @var Collection<\Tx_Seminars_Model_Category> $categories */
         $categories = new Collection();
 
-        /** @var \Tx_Seminars_Model_FrontEndUserGroup $group */
+        /** @var FrontEndUserGroup $group */
         foreach ($this->getUserGroups() as $group) {
             if ($group->hasDefaultCategories()) {
                 $categories->append($group->getDefaultCategories());
@@ -163,7 +164,7 @@ class Tx_Seminars_Model_FrontEndUser extends OelibFrontEndUser
         /** @var Collection<\Tx_Seminars_Model_Organizer> $organizers */
         $organizers = new Collection();
 
-        /** @var \Tx_Seminars_Model_FrontEndUserGroup $group */
+        /** @var FrontEndUserGroup $group */
         foreach ($this->getUserGroups() as $group) {
             if ($group->hasDefaultOrganizer()) {
                 $organizers->add($group->getDefaultOrganizer());

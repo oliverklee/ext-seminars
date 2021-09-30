@@ -36,15 +36,15 @@ class Registration extends AbstractModel implements Titled
         $this->setAsString('title', $title);
     }
 
-    public function getFrontEndUser(): ?\Tx_Seminars_Model_FrontEndUser
+    public function getFrontEndUser(): ?FrontEndUser
     {
-        /** @var \Tx_Seminars_Model_FrontEndUser|null $user */
+        /** @var FrontEndUser|null $user */
         $user = $this->getAsModel('user');
 
         return $user;
     }
 
-    public function setFrontEndUser(\Tx_Seminars_Model_FrontEndUser $user): void
+    public function setFrontEndUser(FrontEndUser $user): void
     {
         $this->set('user', $user);
     }
@@ -200,11 +200,11 @@ class Registration extends AbstractModel implements Titled
     /**
      * Gets the additional persons (FE users) attached to this registration.
      *
-     * @return Collection<\Tx_Seminars_Model_FrontEndUser>
+     * @return Collection<FrontEndUser>
      */
     public function getAdditionalPersons(): Collection
     {
-        /** @var Collection<\Tx_Seminars_Model_FrontEndUser> $additionalPersons */
+        /** @var Collection<FrontEndUser> $additionalPersons */
         $additionalPersons = $this->getAsCollection('additional_persons');
 
         return $additionalPersons;
@@ -213,7 +213,7 @@ class Registration extends AbstractModel implements Titled
     /**
      * Sets the additional persons attached to this registration.
      *
-     * @param Collection<\Tx_Seminars_Model_FrontEndUser> $persons
+     * @param Collection<FrontEndUser> $persons
      */
     public function setAdditionalPersons(Collection $persons): void
     {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures;
 
+use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 
@@ -12,37 +13,13 @@ use OliverKlee\Seminars\OldModel\LegacyRegistration;
  */
 interface RegistrationHookInterface
 {
-    /**
-     * @return bool
-     */
-    public function canRegisterForSeminar(LegacyEvent $event, \Tx_Seminars_Model_FrontEndUser $user): bool;
+    public function canRegisterForSeminar(LegacyEvent $event, FrontEndUser $user): bool;
 
-    /**
-     * @return string
-     */
-    public function canRegisterForSeminarMessage(LegacyEvent $event, \Tx_Seminars_Model_FrontEndUser $user): string;
+    public function canRegisterForSeminarMessage(LegacyEvent $event, FrontEndUser $user): string;
 
-    /**
-     * @return void
-     */
-    public function seminarRegistrationCreated(
-        LegacyRegistration $registration,
-        \Tx_Seminars_Model_FrontEndUser $user
-    ): void;
+    public function seminarRegistrationCreated(LegacyRegistration $registration, FrontEndUser $user): void;
 
-    /**
-     * @return void
-     */
-    public function seminarRegistrationRemoved(
-        LegacyRegistration $registration,
-        \Tx_Seminars_Model_FrontEndUser $user
-    ): void;
+    public function seminarRegistrationRemoved(LegacyRegistration $registration, FrontEndUser $user): void;
 
-    /**
-     * @return void
-     */
-    public function seminarRegistrationMovedFromQueue(
-        LegacyRegistration $registration,
-        \Tx_Seminars_Model_FrontEndUser $user
-    ): void;
+    public function seminarRegistrationMovedFromQueue(LegacyRegistration $registration, FrontEndUser $user): void;
 }

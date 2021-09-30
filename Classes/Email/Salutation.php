@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminar\Email;
 
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
+use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
@@ -20,12 +21,12 @@ class Salutation
      * The salutation is localized and gender-specific and contains the name of
      * the user.
      *
-     * @param \Tx_Seminars_Model_FrontEndUser $user
+     * @param FrontEndUser $user
      *        the user to create the salutation for
      *
      * @return string the localized, gender-specific salutation with a trailing comma, will not be empty
      */
-    public function getSalutation(\Tx_Seminars_Model_FrontEndUser $user): string
+    public function getSalutation(FrontEndUser $user): string
     {
         $salutationParts = [];
 

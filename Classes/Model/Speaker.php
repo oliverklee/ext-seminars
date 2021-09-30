@@ -5,6 +5,7 @@ declare(strict_types=1);
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Interfaces\MailRole;
 use OliverKlee\Oelib\Model\AbstractModel;
+use OliverKlee\Seminars\Model\FrontEndUser;
 use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Resource\FileRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -282,15 +283,15 @@ class Tx_Seminars_Model_Speaker extends AbstractModel implements MailRole
         return $this->hasInteger('cancelation_period');
     }
 
-    public function getOwner(): ?\Tx_Seminars_Model_FrontEndUser
+    public function getOwner(): ?FrontEndUser
     {
-        /** @var \Tx_Seminars_Model_FrontEndUser|null $owner */
+        /** @var FrontEndUser|null $owner */
         $owner = $this->getAsModel('owner');
 
         return $owner;
     }
 
-    public function setOwner(\Tx_Seminars_Model_FrontEndUser $frontEndUser): void
+    public function setOwner(FrontEndUser $frontEndUser): void
     {
         $this->set('owner', $frontEndUser);
     }

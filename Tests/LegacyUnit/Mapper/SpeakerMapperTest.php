@@ -8,6 +8,7 @@ use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Model\FrontEndUser;
 
 final class SpeakerMapperTest extends TestCase
 {
@@ -156,6 +157,6 @@ final class SpeakerMapperTest extends TestCase
             ['owner' => $frontEndUser->getUid()]
         );
 
-        self::assertInstanceOf(\Tx_Seminars_Model_FrontEndUser::class, $testingModel->getOwner());
+        self::assertInstanceOf(FrontEndUser::class, $testingModel->getOwner());
     }
 }

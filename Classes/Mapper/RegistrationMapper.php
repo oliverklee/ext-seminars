@@ -6,8 +6,8 @@ namespace OliverKlee\Seminars\Mapper;
 
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
 use OliverKlee\Oelib\Mapper\CurrencyMapper;
+use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Registration;
-use Tx_Seminars_Model_FrontEndUser;
 use TYPO3\CMS\Core\Database\Connection;
 
 /**
@@ -43,11 +43,11 @@ class RegistrationMapper extends AbstractDataMapper
     ];
 
     /**
-     * @param Tx_Seminars_Model_FrontEndUser $user
+     * @param FrontEndUser $user
      *
      * @return int
      */
-    public function countByFrontEndUser(\Tx_Seminars_Model_FrontEndUser $user): int
+    public function countByFrontEndUser(FrontEndUser $user): int
     {
         /** @var Connection $connection */
         $connection = $this->getConnectionForTable($this->getTableName());

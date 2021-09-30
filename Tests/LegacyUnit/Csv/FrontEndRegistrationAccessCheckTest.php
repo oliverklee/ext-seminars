@@ -10,6 +10,7 @@ use OliverKlee\Oelib\Configuration\DummyConfiguration;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Csv\FrontEndRegistrationAccessCheck;
 use OliverKlee\Seminars\Csv\Interfaces\CsvAccessCheck;
+use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use PHPUnit\Framework\MockObject\MockObject;
 
@@ -82,8 +83,8 @@ final class FrontEndRegistrationAccessCheckTest extends TestCase
     {
         $this->seminarsPluginConfiguration->setAsBoolean('allowCsvExportOfRegistrationsInMyVipEventsView', false);
 
-        /** @var \Tx_Seminars_Model_FrontEndUser&MockObject $user */
-        $user = $this->createMock(\Tx_Seminars_Model_FrontEndUser::class);
+        /** @var FrontEndUser&MockObject $user */
+        $user = $this->createMock(FrontEndUser::class);
         $userUid = 42;
         $user->method('getUid')->willReturn($userUid);
         FrontEndLoginManager::getInstance()->logInUser($user);
@@ -108,8 +109,8 @@ final class FrontEndRegistrationAccessCheckTest extends TestCase
     {
         $this->seminarsPluginConfiguration->setAsBoolean('allowCsvExportOfRegistrationsInMyVipEventsView', false);
 
-        /** @var \Tx_Seminars_Model_FrontEndUser&MockObject $user */
-        $user = $this->createMock(\Tx_Seminars_Model_FrontEndUser::class);
+        /** @var FrontEndUser&MockObject $user */
+        $user = $this->createMock(FrontEndUser::class);
         $userUid = 42;
         $user->method('getUid')->willReturn($userUid);
         FrontEndLoginManager::getInstance()->logInUser($user);
@@ -134,8 +135,8 @@ final class FrontEndRegistrationAccessCheckTest extends TestCase
     {
         $this->seminarsPluginConfiguration->setAsBoolean('allowCsvExportOfRegistrationsInMyVipEventsView', true);
 
-        /** @var \Tx_Seminars_Model_FrontEndUser&MockObject $user */
-        $user = $this->createMock(\Tx_Seminars_Model_FrontEndUser::class);
+        /** @var FrontEndUser&MockObject $user */
+        $user = $this->createMock(FrontEndUser::class);
         $userUid = 42;
         $user->method('getUid')->willReturn($userUid);
         FrontEndLoginManager::getInstance()->logInUser($user);
@@ -160,8 +161,8 @@ final class FrontEndRegistrationAccessCheckTest extends TestCase
     {
         $this->seminarsPluginConfiguration->setAsBoolean('allowCsvExportOfRegistrationsInMyVipEventsView', true);
 
-        /** @var \Tx_Seminars_Model_FrontEndUser&MockObject $user */
-        $user = $this->createMock(\Tx_Seminars_Model_FrontEndUser::class);
+        /** @var FrontEndUser&MockObject $user */
+        $user = $this->createMock(FrontEndUser::class);
         $userUid = 42;
         $user->method('getUid')->willReturn($userUid);
         FrontEndLoginManager::getInstance()->logInUser($user);

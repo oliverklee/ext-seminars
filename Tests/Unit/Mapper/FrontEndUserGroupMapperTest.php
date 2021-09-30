@@ -6,6 +6,7 @@ namespace OliverKlee\Seminars\Tests\Unit\Mapper;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
+use OliverKlee\Seminars\Model\FrontEndUserGroup;
 
 /**
  * @covers \Tx_Seminars_Mapper_FrontEndUserGroup
@@ -37,6 +38,6 @@ final class FrontEndUserGroupMapperTest extends UnitTestCase
     {
         $model = $this->subject->getNewGhost();
 
-        self::assertInstanceOf(\Tx_Seminars_Model_FrontEndUserGroup::class, $model);
+        self::assertInstanceOf(FrontEndUserGroup::class, $model);
     }
 }

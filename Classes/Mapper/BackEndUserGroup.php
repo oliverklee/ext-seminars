@@ -3,11 +3,12 @@
 declare(strict_types=1);
 
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
+use OliverKlee\Seminars\Model\BackEndUserGroup;
 
 /**
  * This class represents a mapper for back-end user groups.
  *
- * @extends AbstractDataMapper<\Tx_Seminars_Model_BackEndUserGroup>
+ * @extends AbstractDataMapper<BackEndUserGroup>
  */
 class Tx_Seminars_Mapper_BackEndUserGroup extends AbstractDataMapper
 {
@@ -19,7 +20,7 @@ class Tx_Seminars_Mapper_BackEndUserGroup extends AbstractDataMapper
     /**
      * @var string the model class name for this mapper, must not be empty
      */
-    protected $modelClassName = \Tx_Seminars_Model_BackEndUserGroup::class;
+    protected $modelClassName = BackEndUserGroup::class;
 
     /**
      * @var array<string, class-string<AbstractDataMapper>>

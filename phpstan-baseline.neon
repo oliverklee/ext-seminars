@@ -36,7 +36,7 @@ parameters:
 			path: Classes/FrontEnd/EventEditor.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:getLoggedInUser\\(\\) should return Tx_Seminars_Model_FrontEndUser\\|null but returns OliverKlee\\\\Oelib\\\\Model\\\\FrontEndUser\\|null\\.$#"
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\EventEditor\\:\\:getLoggedInUser\\(\\) should return OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser\\|null but returns OliverKlee\\\\Oelib\\\\Model\\\\FrontEndUser\\|null\\.$#"
 			count: 1
 			path: Classes/FrontEnd/EventEditor.php
 
@@ -116,7 +116,7 @@ parameters:
 			path: Classes/FrontEnd/EventEditor.php
 
 		-
-			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:getLoggedInUser\\(\\) should return Tx_Seminars_Model_FrontEndUser but returns OliverKlee\\\\Oelib\\\\Model\\\\FrontEndUser\\|null\\.$#"
+			message: "#^Method OliverKlee\\\\Seminars\\\\FrontEnd\\\\RegistrationForm\\:\\:getLoggedInUser\\(\\) should return OliverKlee\\\\Seminars\\\\Model\\\\FrontEndUser but returns OliverKlee\\\\Oelib\\\\Model\\\\FrontEndUser\\|null\\.$#"
 			count: 1
 			path: Classes/FrontEnd/RegistrationForm.php
 

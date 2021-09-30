@@ -12,6 +12,7 @@ use OliverKlee\Oelib\Model\FrontEndUser as OelibFrontEndUser;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminar\Email\Salutation;
+use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Tests\LegacyUnit\Fixtures\OldModel\TestingLegacyEvent;
 use OliverKlee\Seminars\Tests\LegacyUnit\Service\Fixtures\EmailSalutationHookInterface;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
@@ -103,9 +104,9 @@ final class SalutationTest extends TestCase
      *        FrontEndUser::GENDER_FEMALE or
      *        FrontEndUser::GENDER_UNKNOWN, may be empty
      *
-     * @return \Tx_Seminars_Model_FrontEndUser the loaded testing model of a FE user
+     * @return FrontEndUser the loaded testing model of a FE user
      */
-    private function createFrontEndUser(int $gender = OelibFrontEndUser::GENDER_MALE): \Tx_Seminars_Model_FrontEndUser
+    private function createFrontEndUser(int $gender = OelibFrontEndUser::GENDER_MALE): FrontEndUser
     {
         return MapperRegistry::get(\Tx_Seminars_Mapper_FrontEndUser::class)
             ->getLoadedTestingModel(['name' => 'Foo', 'gender' => $gender]);
@@ -132,7 +133,7 @@ final class SalutationTest extends TestCase
      */
     public function createFrontEndUserReturnsFeUserModel(): void
     {
-        self::assertInstanceOf(\Tx_Seminars_Model_FrontEndUser::class, $this->createFrontEndUser());
+        self::assertInstanceOf(FrontEndUser::class, $this->createFrontEndUser());
     }
 
     /**

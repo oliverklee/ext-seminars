@@ -11,6 +11,7 @@ use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Model\Event;
+use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Registration;
 
 /**
@@ -95,7 +96,7 @@ final class RegistrationTest extends TestCase
      */
     public function setFrontEndUserSetsFrontEndUser(): void
     {
-        $frontEndUser = new \Tx_Seminars_Model_FrontEndUser();
+        $frontEndUser = new FrontEndUser();
         $this->subject->setFrontEndUser($frontEndUser);
 
         self::assertSame($frontEndUser, $this->subject->getFrontEndUser());
@@ -1598,7 +1599,7 @@ final class RegistrationTest extends TestCase
      */
     public function setAdditionalPersonsSetsAdditionalPersons(): void
     {
-        /** @var Collection<\Tx_Seminars_Model_FrontEndUser> $additionalPersons */
+        /** @var Collection<FrontEndUser> $additionalPersons */
         $additionalPersons = new Collection();
         $this->subject->setAdditionalPersons($additionalPersons);
 

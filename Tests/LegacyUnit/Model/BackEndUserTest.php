@@ -7,17 +7,18 @@ namespace OliverKlee\Seminars\Tests\LegacyUnit\Model;
 use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\PhpUnit\TestCase;
+use OliverKlee\Seminars\Model\BackEndUser;
 
 final class BackEndUserTest extends TestCase
 {
     /**
-     * @var \Tx_Seminars_Model_BackEndUser
+     * @var BackEndUser
      */
     private $subject;
 
     protected function setUp(): void
     {
-        $this->subject = new \Tx_Seminars_Model_BackEndUser();
+        $this->subject = new BackEndUser();
     }
 
     /////////////////////////////////////////////

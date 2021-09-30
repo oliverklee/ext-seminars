@@ -12,6 +12,7 @@ use OliverKlee\Oelib\Mapper\MapperRegistry;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\FrontEnd\EventEditor;
+use OliverKlee\Seminars\Model\FrontEndUserGroup;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
 use OliverKlee\Seminars\Tests\Unit\Traits\MakeInstanceTrait;
@@ -160,8 +161,8 @@ final class EventEditorTest extends TestCase
      *
      * @param int $publishSetting
      *        the publish settings for the user, must be one of the following:
-     *        \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY, \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_NEW, or
-     *        \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED
+     *        FrontEndUserGroup::PUBLISH_IMMEDIATELY, FrontEndUserGroup::PUBLISH_HIDE_NEW, or
+     *        FrontEndUserGroup::PUBLISH_HIDE_EDITED
      *
      * @return int user UID
      */
@@ -175,7 +176,7 @@ final class EventEditorTest extends TestCase
 
     /**
      * Creates a front-end user which has a group with the publish setting
-     * \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED and a reviewer.
+     * FrontEndUserGroup::PUBLISH_HIDE_EDITED and a reviewer.
      *
      * @return int user UID
      */
@@ -186,7 +187,7 @@ final class EventEditorTest extends TestCase
         );
         $userGroupUid = $this->testingFramework->createFrontEndUserGroup(
             [
-                'tx_seminars_publish_events' => \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED,
+                'tx_seminars_publish_events' => FrontEndUserGroup::PUBLISH_HIDE_EDITED,
                 'tx_seminars_reviewer' => $backendUserUid,
             ]
         );
@@ -2116,7 +2117,7 @@ final class EventEditorTest extends TestCase
     public function sendAdditionalNotificationEmailToReviewerWithoutReviewerAndFeatureEnabledNotSendsEmail(): void
     {
         $this->pluginConfiguration->setAsBoolean('sendAdditionalNotificationEmailInFrontEndEditor', true);
-        $this->createAndLoginUserWithPublishSetting(\Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY);
+        $this->createAndLoginUserWithPublishSetting(FrontEndUserGroup::PUBLISH_IMMEDIATELY);
 
         $this->email->expects(self::exactly(0))->method('send');
         $this->addMockedInstance(MailMessage::class, $this->email);

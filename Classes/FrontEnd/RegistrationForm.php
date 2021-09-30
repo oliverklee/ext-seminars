@@ -14,6 +14,7 @@ use OliverKlee\Oelib\Session\Session;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\Model\Event;
+use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
@@ -379,8 +380,8 @@ class RegistrationForm extends AbstractEditor
         $additionalPersons = $registration->getAdditionalPersons();
         /** @var array $personData */
         foreach ($allPersonsData as $personData) {
-            /** @var \Tx_Seminars_Model_FrontEndUser $user */
-            $user = GeneralUtility::makeInstance(\Tx_Seminars_Model_FrontEndUser::class);
+            /** @var FrontEndUser $user */
+            $user = GeneralUtility::makeInstance(FrontEndUser::class);
             $user->setPageUid($pageUid);
             $user->setPassword($random->generateRandomHexString(8));
             $eMailAddress = $personData[3];
@@ -976,7 +977,7 @@ class RegistrationForm extends AbstractEditor
                     $this->isFormFieldEnabled('registered_themselves')
                     && $this->getFormValue('registered_themselves') == '1'
                 ) {
-                    /** @var \Tx_Seminars_Model_FrontEndUser $user */
+                    /** @var FrontEndUser $user */
                     $user = FrontEndLoginManager::getInstance()
                         ->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
                     $userData = [$user->getName()];
@@ -1387,7 +1388,7 @@ class RegistrationForm extends AbstractEditor
         return !empty($formData['value']) || !$this->hasFoods();
     }
 
-    protected function getLoggedInUser(): \Tx_Seminars_Model_FrontEndUser
+    protected function getLoggedInUser(): FrontEndUser
     {
         return FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
     }

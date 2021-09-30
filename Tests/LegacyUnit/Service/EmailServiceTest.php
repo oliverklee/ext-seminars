@@ -10,6 +10,7 @@ use OliverKlee\Oelib\DataStructures\Collection;
 use OliverKlee\Oelib\Testing\TestingFramework;
 use OliverKlee\PhpUnit\TestCase;
 use OliverKlee\Seminars\Model\Event;
+use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\Service\EmailService;
 use OliverKlee\Seminars\Tests\Unit\Traits\EmailTrait;
@@ -70,7 +71,7 @@ final class EmailServiceTest extends TestCase
     private $event = null;
 
     /**
-     * @var \Tx_Seminars_Model_FrontEndUser
+     * @var FrontEndUser
      */
     private $user = null;
 
@@ -127,7 +128,7 @@ final class EmailServiceTest extends TestCase
             ]
         );
 
-        $this->user = new \Tx_Seminars_Model_FrontEndUser();
+        $this->user = new FrontEndUser();
         $this->user->setData(['name' => 'John Doe', 'email' => 'john.doe@example.com']);
         $registration = new Registration();
         $registration->setData([]);
@@ -322,7 +323,7 @@ final class EmailServiceTest extends TestCase
      */
     public function sendEmailToAttendeesForTwoRegistrationsSendsTwoEmails(): void
     {
-        $secondUser = new \Tx_Seminars_Model_FrontEndUser();
+        $secondUser = new FrontEndUser();
         $secondUser->setData(['email' => 'jane@example.com', 'name' => 'Jane Doe']);
         $secondRegistration = new Registration();
         $secondRegistration->setData([]);

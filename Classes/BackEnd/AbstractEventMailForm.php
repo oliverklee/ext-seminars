@@ -14,6 +14,7 @@ use OliverKlee\Seminars\Hooks\Interfaces\BackEndModule;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
 use OliverKlee\Seminars\Model\Event;
+use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\Model\Registration;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
@@ -569,7 +570,7 @@ abstract class AbstractEventMailForm
     /**
      * Creates the message body for the e-mail.
      *
-     * @param \Tx_Seminars_Model_FrontEndUser $user the recipient of the e-mail
+     * @param FrontEndUser $user the recipient of the e-mail
      * @param \Tx_Seminars_Model_Organizer $organizer
      *        the organizer which is selected as sender
      *
@@ -578,7 +579,7 @@ abstract class AbstractEventMailForm
      *                data
      */
     private function createMessageBody(
-        \Tx_Seminars_Model_FrontEndUser $user,
+        FrontEndUser $user,
         \Tx_Seminars_Model_Organizer $organizer
     ): string {
         /** @var Salutation $salutation */

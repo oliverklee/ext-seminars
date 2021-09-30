@@ -21,6 +21,8 @@ use OliverKlee\Oelib\Visibility\Tree;
 use OliverKlee\Seminars\Configuration\Traits\SharedPluginConfiguration;
 use OliverKlee\Seminars\Mapper\EventMapper;
 use OliverKlee\Seminars\Model\Event;
+use OliverKlee\Seminars\Model\FrontEndUser;
+use OliverKlee\Seminars\Model\FrontEndUserGroup;
 use OliverKlee\Seminars\Model\Interfaces\Titled;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use TYPO3\CMS\Core\Core\Environment;
@@ -298,7 +300,7 @@ class EventEditor extends AbstractEditor
     public function populateListOrganizers(): array
     {
         $frontEndUser = self::getLoggedInUser();
-        if (!$frontEndUser instanceof \Tx_Seminars_Model_FrontEndUser) {
+        if (!$frontEndUser instanceof FrontEndUser) {
             return [];
         }
 
@@ -312,7 +314,7 @@ class EventEditor extends AbstractEditor
         return self::makeListToFormidableList($organizers);
     }
 
-    protected static function getLoggedInUser(): ?\Tx_Seminars_Model_FrontEndUser
+    protected static function getLoggedInUser(): ?FrontEndUser
     {
         return FrontEndLoginManager::getInstance()->getLoggedInUser(\Tx_Seminars_Mapper_FrontEndUser::class);
     }
@@ -864,7 +866,7 @@ class EventEditor extends AbstractEditor
         $user = self::getLoggedInUser();
 
         $formData['crdate'] = $GLOBALS['SIM_EXEC_TIME'];
-        if ($user instanceof \Tx_Seminars_Model_FrontEndUser) {
+        if ($user instanceof FrontEndUser) {
             $formData['owner_feuser'] = $user->getUid();
             $eventPid = $user->getEventRecordsPid();
         } else {
@@ -884,13 +886,13 @@ class EventEditor extends AbstractEditor
     private function checkPublishSettings(array &$formData): void
     {
         $user = self::getLoggedInUser();
-        $publishSetting = $user instanceof \Tx_Seminars_Model_FrontEndUser
-            ? $user->getPublishSetting() : \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY;
+        $publishSetting = $user instanceof FrontEndUser
+            ? $user->getPublishSetting() : FrontEndUserGroup::PUBLISH_IMMEDIATELY;
         $eventUid = $this->getObjectUid();
         $isNew = $eventUid === 0;
 
-        $hideEditedObject = !$isNew && $publishSetting === \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_HIDE_EDITED;
-        $hideNewObject = $isNew && $publishSetting > \Tx_Seminars_Model_FrontEndUserGroup::PUBLISH_IMMEDIATELY;
+        $hideEditedObject = !$isNew && $publishSetting === FrontEndUserGroup::PUBLISH_HIDE_EDITED;
+        $hideNewObject = $isNew && $publishSetting > FrontEndUserGroup::PUBLISH_IMMEDIATELY;
 
         if ($isNew) {
             $eventIsHidden = false;
@@ -2606,7 +2608,7 @@ class EventEditor extends AbstractEditor
             return;
         }
         $frontEndUser = self::getLoggedInUser();
-        if (!$frontEndUser instanceof \Tx_Seminars_Model_FrontEndUser || !$frontEndUser->hasDefaultCategories()) {
+        if (!$frontEndUser instanceof FrontEndUser || !$frontEndUser->hasDefaultCategories()) {
             return;
         }
 
@@ -2625,7 +2627,7 @@ class EventEditor extends AbstractEditor
         }
 
         $frontEndUser = self::getLoggedInUser();
-        if ($frontEndUser instanceof \Tx_Seminars_Model_FrontEndUser && $frontEndUser->hasDefaultCategories()) {
+        if ($frontEndUser instanceof FrontEndUser && $frontEndUser->hasDefaultCategories()) {
             $categoryKey = (string)\array_search('categories', $formFields, true);
             unset($formFields[$categoryKey]);
         }

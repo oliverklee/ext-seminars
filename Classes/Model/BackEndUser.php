@@ -2,12 +2,14 @@
 
 declare(strict_types=1);
 
+namespace OliverKlee\Seminars\Model;
+
 use OliverKlee\Oelib\Model\BackEndUser as OelibBackEndUser;
 
 /**
  * This class represents a back-end user.
  */
-class Tx_Seminars_Model_BackEndUser extends OelibBackEndUser
+class BackEndUser extends OelibBackEndUser
 {
     /**
      * Returns the PID for newly created event records.
@@ -69,7 +71,7 @@ class Tx_Seminars_Model_BackEndUser extends OelibBackEndUser
 
         $result = 0;
 
-        /** @var \Tx_Seminars_Model_BackEndUserGroup $group */
+        /** @var BackEndUserGroup $group */
         foreach ($groups as $group) {
             switch ($type) {
                 case 'event':

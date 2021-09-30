@@ -7,6 +7,7 @@ namespace OliverKlee\Seminars\Tests\Functional\OldModel;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use OliverKlee\Oelib\Configuration\ConfigurationRegistry;
 use OliverKlee\Oelib\Configuration\DummyConfiguration;
+use OliverKlee\Seminars\Model\FrontEndUser;
 use OliverKlee\Seminars\OldModel\LegacyEvent;
 use OliverKlee\Seminars\OldModel\LegacyRegistration;
 use OliverKlee\Seminars\Tests\Unit\Traits\LanguageHelper;
@@ -99,7 +100,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
 
         $user = $subject->getFrontEndUser();
 
-        self::assertInstanceOf(\Tx_Seminars_Model_FrontEndUser::class, $user);
+        self::assertInstanceOf(FrontEndUser::class, $user);
         self::assertSame(1, $user->getUid());
     }
 
@@ -181,7 +182,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
         $userData = ['name' => $name];
         $this->subject->setUserData($userData);
 
-        $user = new \Tx_Seminars_Model_FrontEndUser();
+        $user = new FrontEndUser();
         $user->setData($userData);
         $this->subject->setFrontEndUser($user);
 
@@ -200,7 +201,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
         $userData = ['name' => $name, 'email' => $email];
         $this->subject->setUserData($userData);
 
-        $user = new \Tx_Seminars_Model_FrontEndUser();
+        $user = new FrontEndUser();
         $user->setData($userData);
         $this->subject->setFrontEndUser($user);
 
@@ -234,7 +235,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
         $userData = ['name' => $name, 'email' => $email];
         $this->subject->setUserData($userData);
 
-        $user = new \Tx_Seminars_Model_FrontEndUser();
+        $user = new FrontEndUser();
         $user->setData($userData);
         $this->subject->setFrontEndUser($user);
 
@@ -388,7 +389,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
         $userData = [$fieldName => '1234 some value'];
         $this->subject->setUserData($userData);
 
-        $user = new \Tx_Seminars_Model_FrontEndUser();
+        $user = new FrontEndUser();
         $user->setData($userData);
         $this->subject->setFrontEndUser($user);
 
@@ -438,7 +439,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
         $userData = [$fieldName => $value];
         $this->subject->setUserData($userData);
 
-        $user = new \Tx_Seminars_Model_FrontEndUser();
+        $user = new FrontEndUser();
         $user->setData($userData);
         $this->subject->setFrontEndUser($user);
 
@@ -473,7 +474,7 @@ final class LegacyRegistrationTest extends FunctionalTestCase
         $userData = [$fieldName => $value];
         $this->subject->setUserData($userData);
 
-        $user = new \Tx_Seminars_Model_FrontEndUser();
+        $user = new FrontEndUser();
         $user->setData($userData);
         $this->subject->setFrontEndUser($user);
 

@@ -5,11 +5,12 @@ declare(strict_types=1);
 use OliverKlee\Oelib\Exception\NotFoundException;
 use OliverKlee\Oelib\Mapper\AbstractDataMapper;
 use OliverKlee\Seminars\Mapper\RegistrationMapper;
+use OliverKlee\Seminars\Model\FrontEndUser;
 
 /**
  * This class represents a mapper for front-end users.
  *
- * @extends AbstractDataMapper<\Tx_Seminars_Model_FrontEndUser>
+ * @extends AbstractDataMapper<FrontEndUser>
  */
 class Tx_Seminars_Mapper_FrontEndUser extends AbstractDataMapper
 {
@@ -21,7 +22,7 @@ class Tx_Seminars_Mapper_FrontEndUser extends AbstractDataMapper
     /**
      * @var string the model class name for this mapper, must not be empty
      */
-    protected $modelClassName = \Tx_Seminars_Model_FrontEndUser::class;
+    protected $modelClassName = FrontEndUser::class;
 
     /**
      * @var array<string, class-string<AbstractDataMapper>>
@@ -44,9 +45,9 @@ class Tx_Seminars_Mapper_FrontEndUser extends AbstractDataMapper
      *
      * @throws NotFoundException if there is no front-end user with the provided user name in the database
      */
-    public function findByUserName(string $userName): \Tx_Seminars_Model_FrontEndUser
+    public function findByUserName(string $userName): FrontEndUser
     {
-        /** @var \Tx_Seminars_Model_FrontEndUser $result */
+        /** @var FrontEndUser $result */
         $result = $this->findOneByKey('username', $userName);
 
         return $result;

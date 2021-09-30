@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OliverKlee\Seminars\BagBuilder;
 
 use OliverKlee\Seminars\Bag\RegistrationBag;
+use OliverKlee\Seminars\Model\FrontEndUser;
 
 /**
  * This builder class creates customized registration bag objects.
@@ -120,10 +121,10 @@ class RegistrationBagBuilder extends AbstractBagBuilder
      * himself, or for which they have been entered as "additional registered
      * persons".
      *
-     * @param \Tx_Seminars_Model_FrontEndUser|null $user the front-end user to limit the bag for,
+     * @param FrontEndUser|null $user the front-end user to limit the bag for,
      *        set to null to remove the limitation
      */
-    public function limitToAttendee(?\Tx_Seminars_Model_FrontEndUser $user = null): void
+    public function limitToAttendee(?FrontEndUser $user = null): void
     {
         if ($user === null) {
             unset($this->whereClauseParts['attendee']);
